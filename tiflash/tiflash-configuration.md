@@ -361,7 +361,7 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 
 - The memory usage limit for the generated intermediate data in all queries.
 - When the value is an integer, the unit is byte. For example, `34359738368` means 32 GiB of memory limit, and `0` means no limit.
-- Since v6.6.0, you can set the value to a floating-point number in the range of `[0.0, 1.0)`. This number represents the ratio of allowed memory usage to the total node memory. For example, `0.8` means 80% of the total memory, and `0.0` means no limit.
+- Starting from v6.6.0, you can set the value to a floating-point number in the range of `[0.0, 1.0)`. This number represents the ratio of the allowed memory usage to the total node memory. For example, `0.8` means 80% of the total memory, and `0.0` means no limit.
 - When the queries attempt to consume memory that exceeds this limit, the queries are terminated and an error is reported.
 - Default value: `0.8`, which means 80% of the total memory.
 
@@ -575,14 +575,14 @@ The parameters in `tiflash-learner.toml` are basically the same as those in TiKV
 
 ##### `labels`
 
-- Specifies server attributes, such as `{ zone = "us-west-1", disk = "ssd" }`. You can checkout [Set available zones](/tiflash/create-tiflash-replicas.md#set-available-zones) to learn how to schedule replicas using labels.
+- Specifies server attributes, such as `{ zone = "us-west-1", disk = "ssd" }`. For more information about how to schedule replicas using labels, see [Set available zones](/tiflash/create-tiflash-replicas.md#set-available-zones).
 - Default value: `{}`
 
 ### Multi-disk deployment
 
 TiFlash supports multi-disk deployment. If there are multiple disks in your TiFlash node, you can make full use of those disks by configuring the parameters described in the following sections. For TiFlash's configuration template to be used for TiUP, see [The complex template for the TiFlash topology](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml).
 
-For TiDB clusters with v4.0.9 or later versions, TiFlash supports storing the main data and the latest data of the storage engine on multiple disks. If you want to deploy a TiFlash node on multiple disks, it is recommended to specify your storage directories in the `[storage]` section to make full use of your node.
+For TiDB clusters with v4.0.9 or later versions, TiFlash supports storing the main data and the latest data of the storage engine on multiple disks. If you want to deploy a TiFlash node on multiple disks, it is recommended to specify your storage directories in the `[storage]` section to make full use of the I/O performance of your node.
 
 If there are multiple disks with similar I/O metrics on your TiFlash node, it is recommended to specify corresponding directories in the `storage.main.dir` list and leave `storage.latest.dir` empty. TiFlash will distribute I/O pressure and data among all directories.
 

@@ -34,11 +34,11 @@ The issue might occur due to different reasons. It is recommended that you troub
 
 4. Check whether the CPU supports SIMD instructions
 
-    Starting with v6.3, deploying TiFlash on Linux AMD64 architecture requires a CPU that supports the AVX2 instruction set. Verify this by ensuring `grep avx2 /proc/cpuinfo` produces output. For Linux ARM64 architecture, the CPU must support the ARMv8 instruction set architecture. Verify this by ensuring `grep 'crc32' /proc/cpuinfo | grep 'asimd'` produces output.
+    Starting from v6.3, deploying TiFlash on Linux AMD64 architecture requires a CPU that supports the AVX2 instruction set. Verify this by ensuring that `grep avx2 /proc/cpuinfo` produces output. For Linux ARM64 architecture, the CPU must support the ARMv8 instruction set architecture. Verify this by ensuring that `grep 'crc32' /proc/cpuinfo | grep 'asimd'` produces output.
 
-    If deploying on a virtual machine, change the virtual machine's CPU architecture to "Haswell".  
+    If you encounter this issue when deploying on a virtual machine, try changing the VM's CPU architecture to "Haswell" and then redeploy TiFlash.
 
-If the above methods cannot resolve your issue, collect the TiFlash log files and [get support](/support.md) from PingCAP or the community.
+If the preceding methods cannot resolve your issue, collect the TiFlash log files and [get support](/support.md) from PingCAP or the community.
 
 ## Some queries return the `Region Unavailable` error
 
@@ -163,18 +163,18 @@ If TiFlash replicas consistently fail to be created since the TiDB cluster is de
 
     The TiFlash's `store.labels` includes information such as `{"key": "engine", "value": "tiflash"}`. You can check this information to confirm a TiFlash instance.
 
-4. Check whether the `count` of Placement Rule with id `default` is correct:
+4. Check whether the `count` of Placement Rule with the `default` ID is correct:
 
     ```shell
     tiup ctl:nightly pd -u http://${pd-ip}:${pd-port} config placement-rules show | grep -C 10 default
     ```
 
     - If the value of `count` does not exceed the number of TiKV nodes in the cluster, go to the next step.
-    - If the value of `count` is greater than the number of TiKV nodes in the cluster. For example, if there are only 1 TiKV nodes in a testing cluster while the count is 3, then PD will not add any Region peer to the TiFlash node. To address this issue, change `count` to an integer fewer than or equal to the number of TiKV nodes in the cluster.
+    - If the value of `count` is greater than the number of TiKV nodes in the cluster. For example, if there is only one TiKV node in the testing cluster while the count is `3`, then PD will not add any Region peer to the TiFlash node. To address this issue, change `count` to an integer smaller than or equal to the number of TiKV nodes in the cluster.
 
     > **Note:**
     >
-    > `count` is defaulted to 3. In production environments, the value is usually fewer than the number of TiKV nodes. In test environments, when you allow there is only 1 Region replica, the value can be 1.
+    > The default value of `count` is `3`. In production environments, the value is usually smaller than the number of TiKV nodes. In test environments, if it is acceptable to have only one Region replica, you can set the value `1`.
 
     {{< copyable "shell-regular" >}}
 
@@ -192,72 +192,72 @@ If TiFlash replicas consistently fail to be created since the TiDB cluster is de
         }' <http://172.16.x.xxx:2379/pd/api/v1/config/rule>
     ```
 
-5. Check the remaining disk space percentage on the TiFlash nodes. The default value of [`low-space-ratio`](/pd-configuration-file.md#low-space-ratio) is 0.8, meaning when a node's used space exceeds 80% of its capacity, PD will avoid migrating Regions to that node to prevent disk space exhaustion. If all TiFlash nodes have insufficient remaining space, PD will stop scheduling new Region peers to TiFlash, causing replicas to remain in an unavailable state (progress < 1).
+5. Check the remaining disk space percentage on the TiFlash nodes. The default value of [`low-space-ratio`](/pd-configuration-file.md#low-space-ratio) is `0.8`, meaning that when a node's used space exceeds 80% of its capacity, PD will avoid migrating Regions to that node to prevent disk space exhaustion. If all TiFlash nodes have insufficient remaining space, PD will stop scheduling new Region peers to TiFlash, causing replicas to remain in an unavailable state (that is, progress < 1).
 
-    - If the disk usage reaches or exceeds `low-space-ratio`, it indicates insufficient disk space. In this case, one or more of the following actions can be taken:
+    - If the disk usage reaches or exceeds `low-space-ratio`, it indicates insufficient disk space. In this case, take one or more of the following actions:
 
-        - Modify the value of `low-space-ratio` to allow the PD to resume scheduling Regions to the TiFlash node until it reach the new threshold. 
+        - Modify the value of `low-space-ratio` to allow the PD to resume scheduling Regions to the TiFlash node until it reaches the new threshold. 
 
             ```
             tiup ctl:nightly pd -u http://${pd-ip}:${pd-port} config set low-space-ratio 0.9
             ```
 
-        - Scale-out new TiFlash nodes, PD will automatically balance Regions across TiFlash nodes and resumes scheduling Regions to TiFlash nodes with enough disk space.
+        - Scale out new TiFlash nodes. PD will automatically balance Regions across TiFlash nodes and resume scheduling Regions to TiFlash nodes with enough disk space.
 
-        - Remove unnecessary files from the TiFlash node disk, such as the logging files, the `space_placeholder_file` file in the `${data}/flash/` directory. If necessary, set `storage.reserve-space` in tiflash-learner.toml to `0MB` at the same time to temporarily bring TiFlash back into service.
+        - Remove unnecessary files from the TiFlash node disk, such as the logging files, and the `space_placeholder_file` file in the `${data}/flash/` directory. If necessary, set `storage.reserve-space` in `tiflash-learner.toml` to `0MB` at the same time to temporarily resume TiFlash service.
 
-    - If the disk usage is below `low-space-ratio`, it indicates normal disk space availability. Proceed to the next step.
+    - If the disk usage is less that the value of `low-space-ratio`, it indicates normal disk space availability. Proceed to the next step.
 
-6. Check whether there is any `down peer`. Any `down peer` might cause the replication to get stuck.
+6. Check whether there is any `down peer`. Remaining down peers might cause the replication to get stuck.
 
     Run the `pd-ctl region check-down-peer` command to check whether there is any `down peer`. If any, run the `pd-ctl operator add remove-peer <region-id> <tiflash-store-id>` command to remove it.
 
-If none of the above configurations or TiFlash status show abnormalities, please follow the "Data is not replicated to TiFlash" guide below to identify which component or data syncing process is experiencing issues.
+If all the preceding configurations or TiFlash status are normal, follow the instructions in [Data is not replicated to TiFlash](#data-is-not-replicated-to-tiflash) to identify which component or data replication process is experiencing issues.
 
 ## Data is not replicated to TiFlash
 
-After deploying a TiFlash node and starting replication by executing `ALTER TABLE ... SET TIFLASH REPLICA ...`, no data is replicated to it. In this case, you can identify and address the problem by following the steps below:
+After deploying a TiFlash node and starting replication by executing `ALTER TABLE ... SET TIFLASH REPLICA ...`, no data is replicated to it. In this case, you can identify and address the problem by performing the following steps:
 
 1. Check whether the replication is successful by running the `ALTER table <tbl_name> set tiflash replica <num>` command and check the output.
 
-    - If the query is blocked, run the `SELECT * FROM information_schema.tiflash_replica` command to check whether TiFlash replicas have been created.
+    - If the query is blocked, run the `SELECT * FROM information_schema.tiflash_replica` statement to check whether TiFlash replicas have been created.
         - Check whether the DDL statement is executed as expected through [ADMIN SHOW DDL](/sql-statements/sql-statement-admin-show-ddl.md). Or there are any other DDL statement that block altering TiFlash replica statement being executed.
         - Check whether any DML statement is executed on the same table through [SHOW PROCESSLIST](/sql-statements/sql-statement-show-processlist.md) that blocks altering TiFlash replica statement being executed.
     - You can wait until those queries or DDL finish or cancel them. If nothing is blocking the `ALTER TABLE ... SET TIFLASH REPLICA ...` being executed, go to the next step.
 
 2. Check whether TiFlash Region replication runs correctly.
 
-   Check whether there is any change in `progress` of `information_schema.tiflash_replica`. Or you can check the `progress` field with keyword `Tiflash replica is not available` in TiDB logging:
+   Check whether there is any change in `progress` of `information_schema.tiflash_replica`. Alternatively, you can check the `progress` field with the keyword `Tiflash replica is not available` in TiDB logging:
 
-   - If changes are detected, it indicates TiFlash replication is functioning normally (though potentially at a slower pace). Please refer to the "Data replication is slow" section for optimization configurations.
-   - If no, TiFlash replication is abnormal, go to the next step.
+   - If changes are detected, it indicates TiFlash replication is functioning normally (though potentially at a slower pace). Refer to [Data replication is slow](#data-replication-is-slow) for optimization configurations.
+   - If no, TiFlash replication is abnormal. Go to the next step.
 
 3. Check whether TiDB has created any placement rule for the table.
 
     Search the logs of TiDB DDL Owner and check whether TiDB has notified PD to add placement rules. For non-partitioned tables, search `ConfigureTiFlashPDForTable`. For partitioned tables, search `ConfigureTiFlashPDForPartitions`.
 
     - If the keyword is found, go to the next step.
-    - If not, collect logs of the corresponding component for troubleshooting.
+    - If not found, collect logs of the corresponding component for troubleshooting.
 
 4. Check whether PD has configured any placement rule for tables.
 
     Run the `curl http://<pd-ip>:<pd-port>/pd/api/v1/config/rules/group/tiflash` command to view all TiFlash placement rules on the current PD.
 
-    - If a rule with the ID being `table-<table_id>-r` is found, the PD has configured a placement rule successfully, go to the next step.
-    - If not, collect logs of the corresponding component for troubleshooting.
+    - If a rule with the ID being `table-<table_id>-r` is found, the PD has configured a placement rule successfully. Go to the next step.
+    - If not found, collect logs of the corresponding component for troubleshooting.
 
 5. Check whether the PD schedules properly.
 
-    Search the `pd.log` file for the `table-<table_id>-r` keyword and scheduling behaviors like `add operator`. Or check whether there are `add-rule-peer` operator on the "Operator/Schedule operator create" of PD Dashboard on Grafana. You can also check the value "Scheduler/Patrol Region time" of PD Dashboard on Grafana. "Patrol Region time" reflects the duration for PD to scan all Regions and generate scheduling operations. A high value may cause delays in scheduling.
+    Search the `pd.log` file for the `table-<table_id>-r` keyword and scheduling behaviors like `add operator`. Alternatively, check whether there are `add-rule-peer` operator on the "Operator/Schedule operator create" of PD Dashboard on Grafana. You can also check the value "Scheduler/Patrol Region time" on the PD Dashboard on Grafana. "Patrol Region time" reflects the duration for PD to scan all Regions and generate scheduling operations. A high value might cause delays in scheduling.
 
     - If the keyword is found, the PD schedules properly.
-    - If no scheduling operations is generated, or the "Patrol Region time" is more than 30 minutes, the PD does not schedule properly or is scheduling slowly.
+    - If no scheduling operations are running, or the **Patrol Region time** is more than 30 minutes, the PD does not schedule properly or is scheduling slowly.
 
-If the above methods cannot resolve your issue, collect the TiDB, PD, TiFlash log files and [get support](/support.md) from PingCAP or the community.
+If the preceding methods cannot resolve your issue, collect the TiDB, PD, TiFlash log files and [get support](/support.md) from PingCAP or the community.
 
 ## Data replication is slow
 
-The causes may vary. You can address the problem by performing the following steps.
+The causes vary. You can address the problem by performing the following steps.
 
 1. Follow the [Speed up TiFlash replication](/tiflash/create-tiflash-replicas.md#speed-up-tiflash-replication) to accelerate replication.
 
