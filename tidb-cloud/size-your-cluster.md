@@ -207,7 +207,7 @@ The Standard storage type is applied automatically to new clusters hosted on AWS
 
 #### Performance and Plus storage
 
-The Performance and Plus storage offer greater performance and stability, with corresponding price differentiation to match value delivered. Currently, these 2 types are only available upon request for AWS clusters. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for TiKV storage type" in the **Description** field and click **Submit**.
+The Performance and Plus storage provide higher performance and stability, with pricing that reflects their value. Currently, these two storage types are only available upon request for clusters deployed on AWS. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for TiKV storage type" in the **Description** field and click **Submit**.
 
 ## Size TiFlash
 
@@ -265,4 +265,4 @@ The Basic storage is ideal for most workloads, providing a balance between perfo
 
 #### Plus storage
 
-Plus storage offers greater performance and stability, with corresponding price differentiation to match value delivered. Currently, this type is only available upon request for AWS clusters. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for TiFlash storage type" in the **Description** field and click **Submit**.
+The Plus storage provides higher performance and stability, with pricing that reflects the value it delivers. Currently, this storage type is only available upon request for clusters deployed on AWS. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for TiFlash storage type" in the **Description** field and click **Submit**.
