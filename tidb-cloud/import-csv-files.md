@@ -1,7 +1,7 @@
 ---
 title: Import CSV Files from Cloud Storage into TiDB Cloud Dedicated
 summary: Learn how to import CSV files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Dedicated.
-aliases: ['/tidbcloud/migrate-from-amazon-s3-or-gcs','/tidbcloud/migrate-from-aurora-bulk-import', '/tidb-cloud/import-csv-files']
+aliases: ['/tidbcloud/migrate-from-amazon-s3-or-gcs','/tidbcloud/migrate-from-aurora-bulk-import']
 ---
 
 # Import CSV Files from Cloud Storage into TiDB Cloud Dedicated
