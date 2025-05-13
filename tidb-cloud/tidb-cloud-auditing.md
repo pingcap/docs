@@ -188,7 +188,7 @@ For more information, see [Create an Azure storage account](https://learn.micros
 
 1. In the [Azure portal](https://portal.azure.com/), create a container used for storing database audit logs.
 
-    1. In the left navigation pane of the Azure portal, click **Storage Accounts**, and then select the storage account for storing database audit logs.
+    1. In the left navigation pane of the Azure portal, click **Storage Accounts**, and then click the storage account for storing database audit logs.
 
         > **Tip:**
         >
