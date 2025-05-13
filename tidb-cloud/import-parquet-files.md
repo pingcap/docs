@@ -44,7 +44,7 @@ Because Parquet files do not contain schema information, before importing data f
 
 - Method 1: In TiDB Cloud, create the target databases and tables for your source data.
 
-- Method 2: In the Amazon S3 or GCS directory where the Parquet files are located, create the target table schema files for your source data as follows:
+- Method 2: In the Amazon S3, GCS, or Azure Blob Storage directory where the Parquet files are located, create the target table schema files for your source data as follows:
 
     1. Create database schema files for your source data.
 
@@ -62,7 +62,7 @@ Because Parquet files do not contain schema information, before importing data f
 
     2. Create table schema files for your source data.
 
-        If you do not include the table schema files in the Amazon S3 or GCS directory where the Parquet files are located, TiDB Cloud will not create the corresponding tables for you when you import the data.
+        If you do not include the table schema files in the Amazon S3, GCS, or Azure Blob Storage directory where the Parquet files are located, TiDB Cloud will not create the corresponding tables for you when you import the data.
 
         Each table schema file must be in the `${db_name}.${table_name}-schema.sql` format and contain a `CREATE TABLE` DDL statement. With this file, TiDB Cloud will create the `${db_table}` table in the `${db_name}` database when you import the data.
 
@@ -83,13 +83,14 @@ Because Parquet files do not contain schema information, before importing data f
 
 ## Step 3. Configure cross-account access
 
-To allow TiDB Cloud to access the Parquet files in the Amazon S3 or GCS bucket, do one of the following:
+To allow TiDB Cloud to access the Parquet files in the Amazon S3 bucket, GCS bucket, or Azure Blob Storage container, do one of the following:
 
 - If your Parquet files are located in Amazon S3, [configure Amazon S3 access](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access).
 
     You can use either an AWS access key or a Role ARN to access your bucket. Once finished, make a note of the access key (including the access key ID and secret access key) or the Role ARN value as you will need it in [Step 4](#step-4-import-parquet-files-to-tidb-cloud).
 
 - If your Parquet files are located in GCS, [configure GCS access](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access).
+
 - If your Parquet files are located in Azure Blob Storage, [configure Azure Blob Storage access](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access).
 
 ## Step 4. Import Parquet files to TiDB Cloud
