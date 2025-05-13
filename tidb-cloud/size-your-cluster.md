@@ -256,7 +256,7 @@ The supported node storage of different TiFlash vCPUs is as follows:
 
 TiDB Cloud provides the following TiFlash storage types for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on AWS:
 
-- [Basic storage](#basic-storage)
+- [Basic storage](#basic-storage-1)
 - [Plus storage](#plus-storage)
 
 #### Basic storage
