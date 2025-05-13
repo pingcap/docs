@@ -123,7 +123,7 @@ def insert_anchor_and_clean_heading(text):
         hashes = match.group(1)
         title = match.group(2)
         custom_id = match.group(3)
-        anchor = f'<a id="{custom_id}" name="{custom_id}"></a>'
+        anchor = f'<a id="{custom_id}" name="{custom_id}"></a>\n\n'
         return f"{anchor}\n{hashes} {title}"
     return custom_id_heading_pattern.sub(replace, text)
 
