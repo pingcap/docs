@@ -21,6 +21,7 @@ The `IMPORT INTO` statement lets you import data to TiDB via the [Physical Impor
 ## Restrictions
 
 - `IMPORT INTO` only supports importing data into existing empty tables in the database.
+- `IMPORT INTO` does not support importing data into an empty partition if other partitions of the same table already contain data. The target table must be completely empty for import operations.
 - `IMPORT INTO` does not support importing data into a [temporary table](/temporary-tables.md) or a [cached table](/cached-tables.md).
 - `IMPORT INTO` does not support transactions or rollback. Executing `IMPORT INTO` within an explicit transaction (`BEGIN`/`END`) will return an error.
 - `IMPORT INTO` does not support working simultaneously with features such as [Backup & Restore](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview), [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md), [acceleration of adding indexes](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630), data import using TiDB Lightning, data replication using TiCDC, or [Point-in-Time Recovery (PITR)](https://docs.pingcap.com/tidb/stable/br-log-architecture). For more compatibility information, see [Compatibility of TiDB Lightning and `IMPORT INTO` with TiCDC and Log Backup](https://docs.pingcap.com/tidb/stable/tidb-lightning-compatibility-and-scenarios).
@@ -160,11 +161,7 @@ The supported options are described as follows:
 
 ## `IMPORT INTO ... FROM FILE` usage
 
-> **Note:**
->
-> `IMPORT INTO ... FROM FILE` is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
-
-For TiDB Self-Managed, `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3, GCS, and the TiDB local storage. For [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3 and GCS.
+For TiDB Self-Managed, `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3, GCS, and the TiDB local storage. For [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3 and GCS. For [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3 and Alibaba Cloud OSS.
 
 - For data files stored in Amazon S3 or GCS, `IMPORT INTO ... FROM FILE` supports running in the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md).
 
@@ -189,6 +186,10 @@ For TiDB Self-Managed, `IMPORT INTO ... FROM FILE` supports importing data from 
 > - Because TiDB Lightning cannot concurrently decompress a single large compressed file, the size of the compressed file affects the import speed. It is recommended that a source file is no greater than 256 MiB after decompression.
 
 ### Global Sort
+
+> **Note:**
+>
+> Global Sort is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 `IMPORT INTO ... FROM FILE` splits the data import job of a source data file into multiple sub-jobs, each sub-job independently encoding and sorting data before importing. If the encoded KV ranges of these sub-jobs have significant overlap (to learn how TiDB encodes data to KV, see [TiDB computing](/tidb-computing.md)), TiKV needs to keep compaction during import, leading to a decrease in import performance and stability.
 

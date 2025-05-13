@@ -9,7 +9,7 @@ This document introduces how to tune each subsystem of CentOS 7.
 
 > **Note:**
 >
-> + The default configuration of the CentOS 7 operating system is suitable for most services running under moderate workloads. Adjusting the performance of a particular subsystem might negatively affects other subsystems. Therefore, before tuning the system, back up all the user data and configuration information.
+> + The default configuration of the CentOS 7 operating system is suitable for most services running under moderate workloads. Adjusting the performance of a particular subsystem might negatively affect other subsystems. Therefore, before tuning the system, back up all the user data and configuration information.
 > + Fully test all the changes in the test environment before applying them to the production environment.
 
 ## Performance analysis methods

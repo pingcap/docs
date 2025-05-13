@@ -140,7 +140,7 @@ This trigger will execute your workflow every morning at 8 AM.
 
 1. Click **+** to the right of the RSS Read node.
 2. Search `TiDB Cloud` and add it to the workspace.
-3. Select the credentials that you entered in the previous TiDB Cloud node.
+3. Select the credentials that you entered the previous TiDB Cloud node.
 4. In the **Project** list, select your project.
 5. In the **Operation** list, select `Insert`.
 6. In **Cluster**, **User**, **Database** and **Password** boxes, enter the corresponding values.
