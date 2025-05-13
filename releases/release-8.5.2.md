@@ -113,6 +113,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - Fix the issue that TiFlash might fail to use vector indexes to accelerate vector search queries in the disaggregated storage and compute architecture [#9847](https://github.com/pingcap/tiflash/issues/9847) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - Fix the issue that TiFlash might print a large number of `tag=EnumParseOverflowContainer` logs in the disaggregated storage and compute architecture [#9955](https://github.com/pingcap/tiflash/issues/9955) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - Fix the issue that TiFlash does not skip Learner Read as expected when executing `SELECT ... AS OF TIMESTAMP` queries [#10046](https://github.com/pingcap/tiflash/issues/10046) @[CalvinNeo](https://github.com/CalvinNeo)
+    - Fix the issue that TiFlash might panic when handling snapshots with irregular Region key-ranges [#10147](https://github.com/pingcap/tiflash/issues/10147) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
 + Tools
 
