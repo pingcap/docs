@@ -26,7 +26,7 @@ This section describes the prerequisites for using TiDB backup and restore, incl
 - PITR does not support restoring the data of user tables or privilege tables from system tables.
 - BR does not support running multiple backup tasks on a cluster **at the same time**.
 - It is not recommended to back up tables that are being restored, because the backed-up data might be problematic.
-- When a PITR is running, you cannot run a log backup task or use TiCDC to replicate data to a downstream cluster.
+- When restoring a cluster using PITR, you cannot run a log backup task or use TiCDC to replicate data to a downstream cluster.
 
 ### Some tips
 
