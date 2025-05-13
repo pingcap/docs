@@ -165,30 +165,39 @@ TiDB implicitly allocates values to `AUTO_RANDOM` columns similarly to `AUTO_INC
 
 ## Clear the auto-increment ID cache
 
-Explicitly inserting data into an `AUTO_RANDOM` column behaves the same as with an `AUTO_INCREMENT` column, so you also need to clear the auto-increment ID cache. For more details, see [Clear the auto-increment ID cache](/auto-increment.md#clear-the-auto-increment-id-cache).
+When you insert data with explicit values into an `AUTO_RANDOM` column in a deployment with multiple TiDB server instances, potential ID collisions can occur, similar to an `AUTO_INCREMENT` column. If explicit inserts happen to use ID values that conflict with the internal counter TiDB uses for automatic generation, this can lead to errors. 
 
-You can run the `ALTER TABLE` statement to set `AUTO_RANDOM_BASE=0` to clear the auto-increment ID cache on all TiDB nodes in the cluster. For example:
+Here's how the collision can happen: each `AUTO_RANDOM` ID consists of random bits and an auto-incrementing part. TiDB uses an internal counter for this auto-incrementing part. If you explicitly insert an ID where the auto-incrementing part matches the counter's next value, a duplicate key error might occur when TiDB later attempts to generate the same ID automatically. For more details, see [AUTO_INCREMENT Uniqueness](/auto-increment.md#uniqueness).
+
+With a single TiDB instance, this issue doesn't occur because the node automatically adjusts its internal counter when processing explicit insertions, preventing any future collisions. In contrast, with multiple TiDB nodes, each node maintains its own cache of IDs, which needs to be cleared to prevent collisions after explicit insertions. To clear these unallocated cached IDs and avoid potential collisions, you have two options: 
+
+### Option 1: Automatically rebase (Recommended)
 
 ```sql
 ALTER TABLE t AUTO_RANDOM_BASE=0;
 ```
 
-```
-Query OK, 0 rows affected, 1 warning (0.52 sec)
-```
+This statement automatically determines an appropriate base value. Although it produces a warning message similar to `Can't reset AUTO_INCREMENT to 0 without FORCE option, using XXX instead`, the base value **will** change and you can safely ignore this warning.
+
+> **Note:**
+>
+> You cannot set `AUTO_RANDOM_BASE` to `0` with the `FORCE` keyword. Attempting this results in an error.
+
+### Option 2: Manually set a specific base value
+
+If you need to set a specific base value (for example, `1000`), use the `FORCE` keyword:
 
 ```sql
-SHOW WARNINGS;
+ALTER TABLE t FORCE AUTO_RANDOM_BASE = 1000;
 ```
 
-```
-+---------+------+-------------------------------------------------------------------------+
-| Level   | Code | Message                                                                 |
-+---------+------+-------------------------------------------------------------------------+
-| Warning | 1105 | Can't reset AUTO_INCREMENT to 0 without FORCE option, using 101 instead |
-+---------+------+-------------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+This approach is less convenient because it requires you to determine an appropriate base value yourself.
+
+> **Note:**
+>
+> When using `FORCE`, you must specify a non-zero positive integer.
+
+Both commands modify the starting point for the auto-increment bits used in subsequent `AUTO_RANDOM` value generations across all TiDB nodes. They do not affect already allocated IDs.
 
 ## Restrictions
 
