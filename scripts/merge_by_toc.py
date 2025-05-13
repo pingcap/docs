@@ -123,8 +123,8 @@ def insert_anchor_and_clean_heading(text):
         hashes = match.group(1)
         title = match.group(2)
         custom_id = match.group(3)
-        anchor = f'<a id="{custom_id}" name="{custom_id}"></a>\n\n'
-        return f"{anchor}\n{hashes} {title}"
+        anchor = f'<a id="{custom_id}" name="{custom_id}"></a>'
+        return f"{anchor}\n\n{hashes} {title}\n"
     return custom_id_heading_pattern.sub(replace, text)
 
 def replace_link_wrap(chapter, name):
