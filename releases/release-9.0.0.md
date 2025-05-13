@@ -63,7 +63,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
 * PD supports the microservice mode (GA) [#5766](https://github.com/tikv/pd/issues/5766) @[binshi-bing](https://github.com/binshi-bing) tw@hfxsd <!--2052-->
 
-    In v8.0.0, the PD microservice mode is released as an experimental feature. Starting from v9.0.0, the PD microservice mode is now Generally Available. This mode splits the timestamp allocation and cluster scheduling functions of PD into separate microservices that can be deployed independently, thereby enhancing performance scalability for PD and addressing performance bottlenecks of PD in large-scale clusters.
+    In v8.0.0, the PD microservice mode is released as an experimental feature. Starting from v9.0.0, the PD microservice mode is generally available (GA). This mode splits the timestamp allocation and cluster scheduling functions of PD into separate microservices that can be deployed independently, thereby enhancing performance scalability for PD and addressing performance bottlenecks of PD in large-scale clusters.
 
     - `tso` microservice: provides monotonically increasing timestamp allocation for the entire cluster.
     - `scheduling` microservice: provides scheduling functions for the entire cluster, including but not limited to load balancing, hot spot handling, replica repair, and replica placement.
