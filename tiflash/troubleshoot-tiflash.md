@@ -140,7 +140,7 @@ In this example, the warning message shows that TiDB does not select the MPP mod
 
 ## TiFlash replica is always unavailable
 
-If TiFlash replicas consistently fail to be created since the TiDB cluster is deployed, or if the TiFlash replicas were initially created normally but then all or some tables fails to be created after a period of time, you can diagnose and resolve the issue by performing the following steps:
+After the TiDB cluster is deployed, if the TiFlash replicas consistently fail to be created, or if the TiFlash replicas are initially created normally but all or some tables fail to be created after a period of time, you can do the following to troubleshoot the issue:
 
 1. Check whether PD enables the `Placement Rules` feature. This feature is enabled by default since v5.0:
 

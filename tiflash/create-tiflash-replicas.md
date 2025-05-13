@@ -160,7 +160,7 @@ When TiFlash replicas for a table are added, or the Regions' TiFlash replicas be
     > tiup ctl:v8.5.0 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
     > ```
 
-    If a significant number of Regions already exist in the old TiFlash nodes and need rebalancing to the new nodes, adjust the `remove-peer` restriction accordingly.
+    If the cluster contains many Regions on the old TiFlash nodes, PD need to rebalance them to the new TiFlash nodes. You need to adjust the `remove-peer` limit accordingly.
 
     ```shell
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 remove-peer
