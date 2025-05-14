@@ -1,15 +1,15 @@
 ---
-title: Connect to a TiDB Cloud Dedicated Cluster via Azure Private Endpoint
-summary: Learn how to connect to your TiDB Cloud cluster via Azure Private Endpoint.
+title: Connect to a TiDB Cloud Dedicated Cluster via Azure Private Link
+summary: Learn how to connect to TiDB Cloud Dedicated Cluster via Azure Private Link.
 ---
 
-# Connect to a TiDB Cloud Dedicated Cluster via Azure Private Endpoint
+# Connect to a TiDB Cloud Dedicated Cluster via Azure Private Link
 
-This document describes how to connect to your TiDB Cloud Dedicated cluster via Azure Private Endpoint.
+This document describes how to connect to your TiDB Cloud Dedicated cluster via [Azure Private Link](https://learn.microsoft.com/en-us/azure/private-link/private-link-overview).
 
 > **Tip:**
 >
-> - To learn how to connect to a TiDB Cloud Dedicated cluster via private endpoint with AWS, see [Connect to a TiDB Cloud Dedicated Cluster via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md).
+> - To learn how to connect to a TiDB Cloud Dedicated cluster via private endpoint with AWS, see [Connect to a TiDB Cloud Dedicated Cluster via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections.md).
 > - To learn how to connect to a TiDB Cloud Dedicated cluster via private endpoint with Google Cloud, see [Connect to a TiDB Cloud Dedicated Cluster via Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
 > - To learn how to connect to a TiDB Cloud Serverless cluster via private endpoint, see [Connect to TiDB Cloud Serverless via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
 
