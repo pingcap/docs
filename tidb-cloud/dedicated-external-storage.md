@@ -228,7 +228,7 @@ To allow TiDB Cloud Dedicated to access your Azure Blob container, you need to c
 
     ![sas-position](/media/tidb-cloud/dedicated-external-storage/azure-sas-position.png)
 
-3. On the **Shared access signature** page, create a [service SAS token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) with the necessary permissions as follows:
+3. On the **Shared access signature** page, create an [account SAS token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) with the necessary permissions as follows:
 
     1. Under **Allowed services**, select **Blob**.
     2. Under **Allowed resource types**, select **Container** and **Object**.
