@@ -25,32 +25,46 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 </thead>
 <tbody>
   <tr>
-    <td>Scalability and Performance</td>
+    <td rowspan="3">Scalability and Performance</td>
+    <td>PD 支持的微服务模式成为正式功能（从 v8.0.0 开始引入）</td>
+    <td>PD 微服务模式通过将 PD 的不同功能模块解耦为独立服务，提升了系统的可扩展性、稳定性和部署灵活性，为大规模集群部署提供了更好的架构基础。</td>
+  </tr>
+    <tr>
     <td>Disaggregation of PD to improve scalability (General Availability)</td>
     <td>The Placement Driver (PD) provides multiple critical modules to ensure the normal operation of TiDB clusters. Now Generally Available in v9.0.0, PD's Microservices mode supports deploying the TSO and scheduling modules as independent microservices. This can significantly reduce resource conflicts for these services as the cluster scales. With this architecture, much larger clusters with much larger workloads are now possible.</td>
   </tr>
-  <tr>
-    <td>Scalability and Performance</td>
+    <tr>
     <td>Point-In-Time-Recovery (PITR) Now Supports Recovery from Compacted Log Backups for Faster Restores</td>
     <td>Starting from v9.0.0, the log backup feature provides offline compaction capabilities, converting unstructured log backup data into structured SST files. These SST files can now recovered into the cluster much more quickly than reapplying the original logs, delivering improved recovery performance.</td>
   </tr>
   <tr>
-    <td>Data Migration</td>
-    <td>TiCDC performance, scalability, and stability improvements with new architecture (Preview)</td>
-    <td>TiCDC introduces a new architecture design that improves replication performance, scalability, and stability while reducing resource costs. This new architecture redesigns TiCDC core components and optimizes its data processing workflows.</td>
+    <td rowspan="1">Reliability and availability</td>
+    <td>TiProxy 流量捕捉与回放成为正式功能（从 v8.4.0 开始引入）</td>
+    <td>在进行集群升级、迁移或部署变更等重要操作之前，使用 TiProxy 捕获 TiDB 生产集群的真实负载，并在测试的目标集群中重现该工作负载，从而验证性能，确保变更成功。</td>
   </tr>
   <tr>
-    <td>Data Migration</td>
+    <td rowspan="3">DB Operations and Observability</td>
+    <td> TiDB Workload Repository </td>
+    <td>将数据库运行时的历史状态持久化，能够显著提升历史故障和性能问题的诊断效率，帮助用户快速定位并优化问题，同时为健康检查和自动调优提供关键的数据基础。</td>
+  </tr>
+  <tr>
+    <td> TiDB 索引推荐 </td>
+    <td>数据库自动索引推荐通过分析实际查询负载，智能识别缺失或冗余的索引，帮助用户在无需深入理解业务的情况下完成索引优化。它不仅显著降低了人工分析和调优成本，还提升了系统整体的查询性能与稳定性。</td>
+  </tr>
+  <tr>
+    <td> SQL 跨可用区流量观测 </td>
+    <td> 跨可用区流量观测帮助用户识别 TiDB 集群内部 SQL 查询过程中产生的跨区网络传输，从而分析流量来源、优化部署架构、控制云上跨区通信成本，是提升成本可见性和资源使用效率的重要手段。 </td>
+  </tr>
+  <tr>
+    <td rowspan="3">Data Migration</td>
     <td>Support query argument redaction in DM logs</td>
     <td>Introduces an optional <code>redact-info-log</code> parameter to mask query arguments in DM logs, preventing sensitive data from appearing in logs.</td>
   </tr>
   <tr>
-    <td>Data Migration</td>
     <td>Ensure Lightning compatibility with TiDB <code>sql_require_primary_key=ON</code></td>
     <td>Ensures the internal error-logging tables have primary keys if <code>sql_require_primary_key=ON</code> is enabled in TiDB, avoiding creation failures during data imports.</td>
   </tr>
   <tr>
-    <td>Data Migration</td>
     <td>Migrated sync-diff-inspector from <code>tidb-tools</code> to <code>tiflow</code> repository</td>
     <td>Consolidates sync-diff-inspector with other data migration and replication tools (DM and TiCDC) in the <code>tiflow</code> repository. Now available via TiUP and a dedicated Docker image.</td>
   </tr>
