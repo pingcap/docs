@@ -59,6 +59,7 @@ You can increase or decrease vCPU and RAM of TiDB, TiKV, or TiFlash nodes.
 >     - Hosted on AWS and created after 2022/12/31.
 >     - Hosted on Google Cloud and created after 2023/04/26.
 > - AWS has a cooldown period of vCPU and RAM changes. If your TiDB cluster is hosted on AWS, after changing the storage or vCPU and RAM of TiKV or TiFlash, you must wait at least six hours before you can change it again.
+> - After you increase TiKV/TiFlash to bigger node storage, as the max node storage is binding to vCPU, so you can not decrease vCPU of the TiKV/TiFlash unless recreate the cluster.
 
 To change the vCPU and RAM of TiDB, TiKV, or TiFlash nodes, take the following steps:
 
