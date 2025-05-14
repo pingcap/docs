@@ -35,7 +35,7 @@ const isFileExist = (path = "") => {
   return fs.existsSync(path);
 };
 
-const variablePattern = /{{\s*\.(.+?)\s*}}/g;
+const variablePattern = /{{{\s*\.(.+?)\s*}}}/g;
 
 function getValueByPath(obj, path) {
   return path.split(".").reduce((acc, key) => (acc ? acc[key] : ""), obj) ?? "";

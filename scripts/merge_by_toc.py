@@ -101,7 +101,7 @@ def load_variables():
             return json.load(f)
     except Exception as e:
         return {}
-variable_pattern = re.compile(r"{{\s*\.(.+?)\s*}}")
+variable_pattern = re.compile(r"{{{\s*\.(.+?)\s*}}}")
 
 def get_value_by_path(obj, path):
     keys = path.split(".")
