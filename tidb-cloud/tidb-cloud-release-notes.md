@@ -8,6 +8,42 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## May 13, 2025
+
+**General changes**
+
+- Full-text search (beta) now available in [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) for AI applications.
+
+    TiDB Cloud Serverless now supports full-text search (beta), enabling AI and Retrieval-Augmented Generation (RAG) applications to retrieve content by exact keywords. This complements vector search, which retrieves content by semantic similarity. Combining both methods significantly improves retrieval accuracy and answer quality in RAG workflows. Key features include:
+
+    - Direct text search: query string columns directly without the need for embeddings.
+    - Multilingual support: automatically detects and analyzes text in multiple languages, even within the same table, without requiring language specification.
+    - Relevance-based ranking: results are ranked using the industry-standard BM25 algorithm for optimal relevance.
+    - Native SQL compatibility: seamlessly use SQL features such as filtering, grouping, and joining with full-text search.
+
+  To get started, see [Full Text Search with SQL](/tidb-cloud/vector-search-full-text-search-sql.md) or [Full Text Search with Python](/tidb-cloud/vector-search-full-text-search-python.md).
+
+- Increase the maximum TiFlash node storage for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster:
+
+    - For 8 vCPU TiFlash, from 2048 GiB to 4096 GiB
+    - For 32 vCPU TiFlash, from 4096 GiB to 8192 GiB
+
+  This enhancement increases the analytics data storage capacity of your TiDB Cloud Dedicated cluster, improves workload scaling efficiency, and accommodates growing data requirements.
+
+    For more information, see [TiFlash node storage](/tidb-cloud/size-your-cluster.md#tiflash-node-storage).
+
+- Enhance the maintenance window configuration experience by providing intuitive options to configure and reschedule maintenance tasks.
+
+    For more information, see [Configure maintenance window](/tidb-cloud/configure-maintenance-window.md).
+
+- Extend the discount period for TiKV [Standard](/tidb-cloud/size-your-cluster.md#standard-storage) and [Performance](/tidb-cloud/size-your-cluster.md#performance-and-plus-storage) storage types. The promotion now ends on June 5, 2025. After this date, pricing will return to the standard rate.
+
+**Console changes**
+
+- Refine the **Backup Settings** page layout to improve the backup configuration experience in [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+
+    For more information, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md).
+
 ## April 22, 2025
 
 **General changes**
