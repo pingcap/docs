@@ -26,8 +26,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 <tbody>
   <tr>
     <td rowspan="3">Scalability and Performance</td>
-    <td>PD 支持的微服务模式成为正式功能（从 v8.0.0 开始引入）</td>
-    <td>PD 微服务模式通过将 PD 的不同功能模块解耦为独立服务，提升了系统的可扩展性、稳定性和部署灵活性，为大规模集群部署提供了更好的架构基础。</td>
+    <td>[The microservice mode](/pd-microservices.md) supported by PD is generally available (GA) (introduced in v8.0.0)</td>
+    <td>The PD microservice mode decouples different functional modules of PD into independent services, improving system scalability, stability, and deployment flexibility. It provides a more robust architectural foundation for large-scale cluster deployments.</td>
   </tr>
     <tr>
     <td>Disaggregation of PD to improve scalability (General Availability)</td>
@@ -39,8 +39,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
   </tr>
   <tr>
     <td rowspan="1">Reliability and availability</td>
-    <td>TiProxy 流量捕捉与回放成为正式功能（从 v8.4.0 开始引入）</td>
-    <td>在进行集群升级、迁移或部署变更等重要操作之前，使用 TiProxy 捕获 TiDB 生产集群的真实负载，并在测试的目标集群中重现该工作负载，从而验证性能，确保变更成功。</td>
+    <td>TiProxy traffic replay feature is generally available (GA) (introduced in v8.4.0)</td>
+    <td>Before performing critical operations such as cluster upgrades, migrations, or deployment changes, use TiProxy to capture the real workload from the production TiDB cluster and replay it on the target test cluster. It helps validate performance and ensure the success of the changes.</td>
   </tr>
   <tr>
     <td rowspan="3">DB Operations and Observability</td>
