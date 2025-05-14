@@ -44,6 +44,9 @@ function getValueByPath(obj, path) {
 const replaceVariables = (content, variables) => {
   return content.replace(variablePattern, (match, path) => {
     const value = getValueByPath(variables, path.trim());
+    if (value === "") {
+      return match;
+    }
     return String(value);
   });
 };

@@ -113,7 +113,11 @@ def get_value_by_path(obj, path):
     return str(obj)
 
 def replace_variables(text, variables):
-    return variable_pattern.sub(lambda m: get_value_by_path(variables, m.group(1).strip()), text)
+    def replacer(match):
+        path = match.group(1).strip()
+        value = get_value_by_path(variables, path)
+        return str(value) if value != "" else match.group(0)
+    return variable_pattern.sub(replacer, text)
 
 def slugify(title):
     slug = title.strip().lower()
