@@ -229,7 +229,7 @@ For more information, see [Create an Azure storage account](https://learn.micros
 
 2. Click the name of your target cluster to go to its overview page, and then click **DB Audit Logging** in the left navigation pane.
 3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
-4. In the **Enable Database Audit Logging** dialog, provide the blob URL and SAS token that you obtained from [Step 2. Configure Azure Blob access](#step-2-configure-azure-blob-access):
+4. In the **Enable Database Audit Logging** dialog, provide the blob URL and SAS token that you obtained from [Step 2. Configure Azure Blob access](#step-2-configure-azure-blob-storage-access):
 
     - In the **Blob URL** field, enter the URL of the container where audit logs will be stored.
     - In the **SAS Token** field, enter the SAS token for accessing the container.
