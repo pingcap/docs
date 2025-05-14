@@ -143,6 +143,13 @@ If your MySQL service is in a Google Cloud VPC, take the following steps:
 
 </details>
 
+<details>
+<summary> Set up Azure Private Link </summary>
+
+If you want to connect to TiDB Cloud via private endpoint in Azure, refer to [Set up Azure Private Link](/tidb-cloud/private-link-to-azure.md) for detailed instructions.
+
+</details>
+
 ### Enable binary logs
 
 To perform incremental data migration, make sure the following requirements are met:
