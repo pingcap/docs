@@ -63,19 +63,19 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 
 2. Log in to the [Azure portal](https://portal.azure.com/), and then create a private endpoint for your cluster using the copied TiDB Cloud resource ID as follows:
 
-    1. In the Azure portal, search for **Private endpoint**, and then select **Private endpoint** in the result.
+    1. In the Azure portal, search for **Private endpoints**, and then select **Private endpoints** in the result.
     2. On the **Private endpoint** page, click **+ Create**.
     3. In the **Basics** tab, fill in the project and instance information, and then click **Next: Resource**.
     4. In the **Resource** tab, choose **Connect to an Azure resource by resource ID or alias** as the **connection method**, paste the TiDB Cloud resource ID to the **Resource ID or alias** field, and then click **Next: Virtual Network**.
     5. Complete the rest of the configurations of this private endpoint, and then click **Create**. For more information, see [Create a private endpoint](https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip#create-a-private-endpoint) in Azure documentation.
 
-3. After the private endpoint is created, click **Go to resource**, and then do the following:
+3. After the private endpoint is created and deployed, click **Go to resource**, and then do the following:
 
-     - Click **Properties** in the left navigation pane, and copy its **Resource ID** for later use.
+     - Click **Settings** > **Properties** in the left navigation pane, and copy its **Resource ID** for later use.
 
          ![Azure private endpoint resource ID](/media/tidb-cloud/azure-private-endpoint-resource-id.png)
 
-     - Click **DNS configuration** in the left navigation pane, and then copy its **IP address** for later use.
+     - Click **Settings** > **DNS configuration** in the left navigation pane, and then copy its **IP address** for later use.
 
          ![Azure private endpoint DNS IP](/media/tidb-cloud/azure-private-endpoint-dns-ip.png)
 
