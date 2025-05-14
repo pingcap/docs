@@ -7,11 +7,15 @@ summary: TiDB Cloud Serverless クラスターからデータをエクスポー�
 
 TiDB Cloud Serverless Export（ベータ版）は、 TiDB Cloud Serverless クラスターからローカルファイルまたは外部storageサービスにデータをエクスポートできるサービスです。エクスポートしたデータは、バックアップ、移行、データ分析などの用途に使用できます。
 
-[mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html)や TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview)などのツールを使用してデータをエクスポートすることもできますが、 TiDB Cloud Serverless Export を使用すると、 TiDB Cloud Serverless クラスターからより便利かつ効率的にデータをエクスポートできます。これには、次のような利点があります。
+[mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html)や TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview)などのツールを使用してデータをエクスポートすることもできますが、 TiDB Cloud Serverless Export を使用すると、 TiDB Cloud Serverless クラスターからより便利かつ効率的にデータをエクスポートできます。これには以下の利点があります。
 
 -   利便性: エクスポート サービスは、 TiDB Cloud Serverless クラスターからデータをエクスポートするためのシンプルで使いやすい方法を提供するため、追加のツールやリソースは必要ありません。
 -   分離: エクスポート サービスは個別のコンピューティング リソースを使用するため、オンライン サービスで使用されるリソースからの分離が確保されます。
 -   一貫性: エクスポート サービスは、ロックを発生させることなくエクスポートされたデータの一貫性を確保するため、オンライン サービスには影響しません。
+
+> **注記：**
+>
+> 現在、最大エクスポートサイズは1TiBです。より多くのデータをエクスポートする場合、またはより高速なエクスポートをご希望の場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 
 ## エクスポート場所 {#export-locations}
 
@@ -412,6 +416,15 @@ ticloud serverless export cancel -c <cluster-id> -e <export-id>
 
 </div>
 </SimpleTab>
+
+## 輸出速度 {#export-speed}
+
+エクスポート速度は[クラスタープラン](/tidb-cloud/select-cluster-tier.md#cluster-plans)によって異なります。詳細については、次の表をご覧ください。
+
+| プラン             | エクスポート速度    |
+| :-------------- | :---------- |
+| 無料クラスタープラン      | 最大25 MiB/秒  |
+| スケーラブルなクラスタープラン | 最大100 MiB/秒 |
 
 ## 価格 {#pricing}
 

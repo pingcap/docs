@@ -151,7 +151,7 @@ LOAD DATA LOCAL INFILE '/mnt/evo970/data-sets/bikeshare-data/2017Q4-capitalbikes
 次の例は、 `LOAD DATA INFILE`ステートメントを使用して Amazon S3 からTiDB Cloud Dedicated クラスターにデータをインポートする方法を示しています。
 
 ```sql
-LOAD DATA INFILE 's3://<your-bucket-name>/your-file.csv?role_arn=arn:aws:iam::<your-account-id>:role/<your-role-name>&external_id=<your-external-id>'
+LOAD DATA INFILE 's3://<your-bucket-name>/your-file.csv?role_arn=<The ARN of the IAM role you created for TiDB Cloud import>&external_id=<TiDB Cloud external ID (optional)>'
 INTO TABLE <your-db-name>.<your-table-name>
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'

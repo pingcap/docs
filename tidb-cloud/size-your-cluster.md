@@ -188,6 +188,7 @@ TiDB Cloud は、 AWS でホストされる[TiDB Cloud専用](/tidb-cloud/select
 
 -   [基本的なstorage](#basic-storage)
 -   [標準storage](#standard-storage)
+-   [パフォーマンスとプラスstorage](#performance-and-plus-storage)
 
 #### 基本的なstorage {#basic-storage}
 
@@ -203,6 +204,10 @@ TiDB Cloud は、 AWS でホストされる[TiDB Cloud専用](/tidb-cloud/select
 スタンダードstorageは、パフォーマンスとコスト効率のバランスが取れており、ほとんどのワークロードに最適です。ベーシックstorageと比較して、 Raftログ用に十分なディスクリソースを確保することで、より優れたパフォーマンスを提供します。これにより、 Raft I/OがデータディスクI/Oに与える影響が軽減され、TiKVの読み取りおよび書き込みパフォーマンスが向上します。
 
 標準storageタイプは、AWS でホストされ、TiDB バージョン v7.5.5、v8.1.2、v8.5.0 以降で作成された新しいクラスターに自動的に適用されます。
+
+#### パフォーマンスとプラスstorage {#performance-and-plus-storage}
+
+パフォーマンスストレージとプラスstorageは、より高いパフォーマンスと安定性を提供し、これらの拡張機能を反映した価格設定となっています。現在、これらの2つのstorageタイプは、AWSにデプロイされたクラスターに対してのみリクエストに応じて利用可能です。パフォーマンスストレージまたはプラスstorageをリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポート**をリクエスト」をクリックします。次に、 **「説明」**フィールドに「TiKVstorageタイプを申請」と入力し、 **「送信」を**クリックします。
 
 ## サイズTiFlash {#size-tiflash}
 
@@ -239,10 +244,25 @@ TiFlashノードの最小数: `min((800 GiB * 2 + 100 GiB * 1) / 1024 GiB, max(2
 
 | TiFlash vCPU | 最小ノードstorage | 最大ノードstorage | デフォルトのノードstorage |
 | :----------: | :----------: | :----------: | :--------------: |
-|    8 仮想CPU   |   200ギガバイト   |   2048ギガバイト  |     500ギガバイト     |
+|    8 仮想CPU   |   200ギガバイト   |   4096ギガバイト  |     500ギガバイト     |
 |   16 仮想CPU   |   200ギガバイト   |   4096ギガバイト  |     500ギガバイト     |
-|   32 仮想CPU   |   200ギガバイト   |   4096ギガバイト  |     500ギガバイト     |
+|   32 仮想CPU   |   200ギガバイト   |  8192 ギガバイト  |     500ギガバイト     |
 
 > **注記：**
 >
 > クラスターの作成後にTiFlashノードのstorageを減らすことはできません。
+
+### TiFlashノードのstorageタイプ {#tiflash-node-storage-types}
+
+TiDB Cloud は、 AWS でホストされる[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して次のTiFlashstorageタイプを提供します。
+
+-   [基本的なstorage](#basic-storage-1)
+-   [プラスstorage](#plus-storage)
+
+#### 基本的なstorage {#basic-storage}
+
+ベーシックstorageは、パフォーマンスとコスト効率のバランスが取れており、ほとんどのワークロードに最適です。
+
+#### プラスstorage {#plus-storage}
+
+Plusstorageは、より高いパフォーマンスと安定性を提供し、これらの拡張機能を反映した価格設定となっています。現在、このstorageタイプはAWSにデプロイされたクラスターに対してのみ、リクエストに応じて利用可能です。リクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートをリクエスト」**をクリックしてください。次に、「**説明」**欄に「 TiFlashstorageタイプを申請」と入力し、 **「送信」を**クリックしてください。
