@@ -70,7 +70,7 @@ To configure the backup schedule, perform the following steps:
 
 4. Configure the backup schedule as follows:
 
-    - In **Backup Cycle**, select either the **Daily Backup** or **Weekly Backup** tab. If you select **Weekly Backup**, you need to specify the days of the week for the backup.
+    - In **Backup Cycle**, click either the **Daily Backup** or **Weekly Backup** tab. For **Weekly Backup**, you need to specify the days of the week for the backup.
 
         > **Warning**
         >
@@ -157,11 +157,11 @@ Manual backups are user-initiated backups that enable you to back up your data t
 
 To apply a manual backup to your TiDB Cloud Dedicated cluster, perform the following steps:
 
-1. Navigate to the **Backup** tab of a cluster.
+1. Navigate to the **Backup** page of a cluster.
 
-2. Click **...** > **Manual Backup**. The setting window displays.
+2. In the upper-right corner, click **...** > **Manual Backup**. 
 
-3. Enter a **Name**.
+3. In the displayed dialog, enter a **Name**.
 
 4. Click **Confirm**. Then your cluster data is backed up.
 
@@ -171,7 +171,7 @@ To apply a manual backup to your TiDB Cloud Dedicated cluster, perform the follo
 
 To delete an existing backup file, perform the following steps:
 
-1. Navigate to the **Backup** tab of a cluster.
+1. Navigate to the **Backup** page of a cluster.
 
 2. Locate the corresponding backup file you want to delete, and click **...** > **Delete** in the **Action** column.
 
@@ -179,7 +179,7 @@ To delete an existing backup file, perform the following steps:
 
 To delete a running backup job, it is similar as [**Delete backup files**](#delete-backup-files).
 
-1. Navigate to the **Backup** tab of a cluster.
+1. Navigate to the **Backup** page of a cluster.
 
 2. Locate the running backup job that is in the **Pending** or **Running** state, and click **...** > **Delete** in the **Action** column.
 
