@@ -82,6 +82,13 @@ Project members are users who are invited to join one or more projects of the or
 
 ## R
 
+<<<<<<< HEAD
+=======
+### Recycle Bin
+
+The place where the data of deleted clusters with valid backups is stored. Once a backed-up TiDB Cloud Dedicated cluster is deleted, the existing backup files of the cluster are moved to the recycle bin. For backup files from automatic backups, the recycle bin will retain them for a specified period. You can configure the backup retention in **Backup Setting**, and the default is 7 days. For backup files from manual backups, there is no expiration date. To avoid data loss, remember to restore the data to a new cluster in time. Note that if a cluster **has no backup**, the deleted cluster will not be displayed here.
+
+>>>>>>> eeea4b8d79 (cloud: update Backup Setting page (#20950))
 ### region
 
 - TiDB Cloud region
