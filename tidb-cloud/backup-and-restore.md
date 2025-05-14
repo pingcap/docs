@@ -44,7 +44,7 @@ To turn on this feature, perform the following steps:
 
 1. Navigate to the **Backup** page of a TiDB Cloud Dedicated cluster.
 
-2. Click **Backup Settings**.
+2. Click **Backup Setting**.
 
 3. Toggle the **Auto Backup** switch to **On**.
 
@@ -54,9 +54,7 @@ To turn on this feature, perform the following steps:
     >
     > Point-in-Time Restore only takes effect after the next backup task is completed. To make it take effect earlier, you can [manually perform a backup](#perform-a-manual-backup) after enabling it.
 
-5. Click **Confirm** to preview the configuration changes.
-
-6. Click **Confirm** again to save changes.
+5. Click **Save** to save changes.
 
 #### Configure backup schedule
 
@@ -66,18 +64,18 @@ To configure the backup schedule, perform the following steps:
 
 1. Navigate to the **Backup** page of a TiDB Cloud Dedicated cluster.
 
-2. Click **Backup Settings**.
+2. Click **Backup Setting**.
 
 3. Toggle the **Auto Backup** switch to **On**.
 
 4. Configure the backup schedule as follows:
 
-    - In **Backup Scheduler**, select either the **Daily** or **Weekly** checkbox. If you select **Weekly**, you need to specify the days of the week for the backup.
+    - In **Backup Cycle**, select either the **Daily Backup** or **Weekly Backup** tab. If you select **Weekly Backup**, you need to specify the days of the week for the backup.
 
         > **Warning**
         >
         > - When weekly backup is enabled, the Point-in-time Restore feature is enabled by default and cannot be disabled.
-        > - If you change the backup scheduler from weekly to daily, the Point-in-time Restore feature remains its original setting. You can manually disable it if needed.
+        > - If you change the backup cycle from weekly to daily, the Point-in-time Restore feature remains its original setting. You can manually disable it if needed.
 
     - In **Backup Time**, schedule a start time for the daily or weekly cluster backup.
 
@@ -108,15 +106,13 @@ To turn on dual region backup, perform the following steps:
 
 1. Navigate to the **Backup** page of a TiDB Cloud Dedicated cluster.
 
-2. Click **Backup Settings**.
+2. Click **Backup Setting**.
 
 3. Toggle the **Dual Region Backup** switch to **On**.
 
-4. From the **Dual Region** drop-down list, select a region to store the backup files.
+4. From the **Secondary Region** drop-down list, select a region to store the backup files.
 
-5. Click **Confirm** to preview the configuration changes.
-
-6. Click **Confirm** again to save changes.
+5. Click **Save** to save changes.
 
 ### Turn off auto backup
 
@@ -128,13 +124,11 @@ To turn off auto backup, perform the following steps:
 
 1. Navigate to the **Backup** page of a TiDB Cloud Dedicated cluster.
 
-2. Click **Backup Settings**.
+2. Click **Backup Setting**.
 
 3. Toggle the **Auto Backup** switch to **Off**.
 
-4. Click **Confirm** to preview the configuration changes.
-
-5. Click **Confirm** again to save changes.
+4. Click **Save** to save changes.
 
 ### Turn off dual region backup
 
@@ -146,13 +140,11 @@ To turn off dual region backup, perform the following steps:
 
 1. Navigate to the **Backup** page of a TiDB Cloud Dedicated cluster.
 
-2. Click **Backup Settings**.
+2. Click **Backup Setting**.
 
 3. Toggle the **Dual Region Backup** switch to **Off**.
 
-4. Click **Confirm** to preview the configuration changes.
-
-5. Click **Confirm** again to save changes.
+4. Click **Save** to save changes.
 
 ### Perform a manual backup
 
@@ -167,7 +159,7 @@ To apply a manual backup to your TiDB Cloud Dedicated cluster, perform the follo
 
 1. Navigate to the **Backup** tab of a cluster.
 
-2. Click **Manual Backup**. The setting window displays.
+2. Click **...** > **Manual Backup**. The setting window displays.
 
 3. Enter a **Name**.
 
@@ -181,7 +173,7 @@ To delete an existing backup file, perform the following steps:
 
 1. Navigate to the **Backup** tab of a cluster.
 
-2. Click **Delete** for the backup file that you want to delete.
+2. Locate the corresponding backup file you want to delete, and click **...** > **Delete** in the **Action** column.
 
 #### Delete a running backup job
 
@@ -189,7 +181,7 @@ To delete a running backup job, it is similar as [**Delete backup files**](#dele
 
 1. Navigate to the **Backup** tab of a cluster.
 
-2. Click **Delete** for the backup file that is in the **Pending** or **Running** state.
+2. Locate the running backup job that is in the **Pending** or **Running** state, and click **...** > **Delete** in the **Action** column.
 
 ## Restore
 
@@ -216,7 +208,7 @@ To restore your TiDB Cloud Dedicated cluster data from a backup to a new cluster
     <SimpleTab>
     <div label="Select Time Point">
 
-    To restore data of any point in time within the backup retention to a new cluster, make sure that **Point-in-time Restore** in **Backup Settings** is on and then take the following steps:
+    To restore data of any point in time within the backup retention to a new cluster, make sure that **Point-in-time Restore** in **Backup Setting** is on and then take the following steps:
 
     - Click **Select Time Point**.
     - Select **Date** and **Time** you want to restore to.
@@ -233,7 +225,7 @@ To restore your TiDB Cloud Dedicated cluster data from a backup to a new cluster
     </div>
     </SimpleTab>
 
-5. In **Restore to Region**, select the same region as the **Backup Storage Region** configured in the **Backup Settings**.
+5. In **Restore to Region**, select the same region as the **Primary Region** configured in the **Backup Setting**.
 
 6. In the **Restore** window, you can also make the following changes if necessary:
 
