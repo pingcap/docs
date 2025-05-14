@@ -244,5 +244,4 @@ To allow TiDB Cloud Dedicated to access your Azure Blob container, you need to c
 
 > **Note:**
 >
-> - Before starting data import, test the connection and permissions to ensure TiDB Cloud Dedicated can access the specified Azure Blob container and files.
-> - TiDB Cloud does not store your SAS token. After the import, it is recommended to revoke or delete the token to ensure the security of your Azure Blob Storage.
+> Before starting data import, test the connection and permissions to ensure TiDB Cloud Dedicated can access the specified Azure Blob container and files.
