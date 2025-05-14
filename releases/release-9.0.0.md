@@ -175,7 +175,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
     For more information, see [documentation](/index-advisor.md).
 
-* Improve log backup compatibility during snapshot restores [#58685](https://github.com/pingcap/tidb/issues/58685) @[BornChanger](https://github.com/BornChanger) **tw@lilin90** <!--2000-->
+* Improve the compatibility between ongoing log backup and snapshot restore [#58685](https://github.com/pingcap/tidb/issues/58685) @[BornChanger](https://github.com/BornChanger) **tw@lilin90** <!--2000-->
 
     Starting from v9.0.0, when a log backup task is running, if the conditions are met, you can still perform snapshot restore and allow the restored data to be properly recorded by the ongoing log backup. This enables ongoing log backups to proceed without having to stop them during the restore procedure.
 
