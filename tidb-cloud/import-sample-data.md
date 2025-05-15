@@ -59,7 +59,7 @@ This document describes how to import the sample data into TiDB Cloud Dedicated 
     - **Included Schema Files**: for the sample data, select **Yes**.
     - **Data Format**: select **SQL**.
     - **Folder URI** or **File URI**: enter the sample data URI `gs://tidbcloud-samples-us-west1/`.
-    - **Bucket Access**: you can use a GCS IAM Role to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access).
+    - **Bucket Access**: you can use a GCS IAM Role to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access).
 
     If the region of the bucket is different from your cluster, confirm the compliance of cross region.
 
