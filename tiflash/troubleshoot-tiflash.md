@@ -10,21 +10,17 @@ This section describes some commonly encountered issues when using TiFlash, the 
 
 ## TiFlash fails to start
 
-The issue might occur due to different reasons. It is recommended that you troubleshoot it following the steps below:
+The issue might occur due to different reasons. It is recommended that you troubleshoot it as follows:
 
 1. Check whether your system is RedHat Enterprise Linux 8.
 
     RedHat Enterprise Linux 8 does not have the `libnsl.so` system library. You can manually install it via the following command:
-
-    {{< copyable "shell-regular" >}}
 
     ```shell
     dnf install libnsl
     ```
 
 2. Check your system's `ulimit` parameter setting.
-
-    {{< copyable "shell-regular" >}}
 
     ```shell
     ulimit -n 1000000
@@ -42,13 +38,13 @@ If the preceding methods cannot resolve your issue, collect the TiFlash log file
 
 ## Some queries return the `Region Unavailable` error
 
-If the load pressure on TiFlash is too heavy and it causes that TiFlash data replication falls behind, some queries might return the `Region Unavailable` error.
+If the workload on TiFlash is too heavy and it causes that TiFlash data replication falls behind, some queries might return the `Region Unavailable` error.
 
-In this case, you can balance the load pressure by adding more TiFlash nodes.
+In this case, you can balance the workload by [adding more TiFlash nodes](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
 
 ## Data file corruption
 
-Take the following steps to handle the data file corruption:
+To handle data file corruption, follow these steps:
 
 1. Refer to [Take a TiFlash node down](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster) to take the corresponding TiFlash node down.
 2. Delete the related data of the TiFlash node.
@@ -56,7 +52,7 @@ Take the following steps to handle the data file corruption:
 
 ## Removing TiFlash nodes is slow
 
-Take the following steps to handle this issue:
+To address this issue, follow these steps:
 
 1. Check whether any table has more TiFlash replicas than the number of TiFlash nodes available after the cluster scale-in:
 
@@ -117,8 +113,6 @@ Take the following steps to handle this issue:
 
 If a statement contains operators or functions not supported in the MPP mode, TiDB does not select the MPP mode. Therefore, the analysis of the statement is slow. In this case, you can execute the `EXPLAIN` statement to check for operators or functions not supported in the MPP mode.
 
-{{< copyable "sql" >}}
-
 ```sql
 create table t(a datetime);
 alter table t set tiflash replica 1;
@@ -143,8 +137,6 @@ In this example, the warning message shows that TiDB does not select the MPP mod
 After the TiDB cluster is deployed, if the TiFlash replicas consistently fail to be created, or if the TiFlash replicas are initially created normally but all or some tables fail to be created after a period of time, you can do the following to troubleshoot the issue:
 
 1. Check whether PD enables the `Placement Rules` feature. This feature is enabled by default since v5.0:
-
-    {{< copyable "shell-regular" >}}
 
     ```shell
     echo 'config show replication' | /path/to/pd-ctl -u http://${pd-ip}:${pd-port}
@@ -175,8 +167,6 @@ After the TiDB cluster is deployed, if the TiFlash replicas consistently fail to
     > **Note:**
     >
     > The default value of `count` is `3`. In production environments, the value is usually smaller than the number of TiKV nodes. In test environments, if it is acceptable to have only one Region replica, you can set the value `1`.
-
-    {{< copyable "shell-regular" >}}
 
     ```shell
         curl -X POST -d '{
