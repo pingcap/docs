@@ -31,7 +31,7 @@ This section describes the format definition of the DML event output in the Debe
 
 TiCDC encodes a DML event into a Kafka message, with both the key and value encoded in the Debezium format.
 
-### Key format
+#### Key format
 
 ```json
 {
