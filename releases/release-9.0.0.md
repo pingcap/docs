@@ -25,13 +25,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 </thead>
 <tbody>
   <tr>
-    <td rowspan="3">Scalability and Performance</td>
+    <td rowspan="2">Scalability and Performance</td>
     <td>[The microservice mode](/pd-microservices.md) supported by PD is generally available (GA) (introduced in v8.0.0)</td>
     <td>The PD microservice mode decouples different functional modules of PD into independent services, improving system scalability, stability, and deployment flexibility. It provides a more robust architectural foundation for large-scale cluster deployments.</td>
-  </tr>
-    <tr>
-    <td>Disaggregation of PD to improve scalability (General Availability)</td>
-    <td>The Placement Driver (PD) provides multiple critical modules to ensure the normal operation of TiDB clusters. Now Generally Available in v9.0.0, PD's Microservices mode supports deploying the TSO and scheduling modules as independent microservices. This can significantly reduce resource conflicts for these services as the cluster scales. With this architecture, much larger clusters with much larger workloads are now possible.</td>
   </tr>
     <tr>
     <td>Point-In-Time-Recovery (PITR) Now Supports Recovery from Compacted Log Backups for Faster Restores</td>
