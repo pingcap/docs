@@ -44,25 +44,25 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
     <td>将数据库运行时的历史状态持久化，能够显著提升历史故障和性能问题的诊断效率，帮助用户快速定位并优化问题，同时为健康检查和自动调优提供关键的数据基础。</td>
   </tr>
   <tr>
-    <td> TiDB 索引推荐 </td>
-    <td>数据库自动索引推荐通过分析实际查询负载，智能识别缺失或冗余的索引，帮助用户在无需深入理解业务的情况下完成索引优化。它不仅显著降低了人工分析和调优成本，还提升了系统整体的查询性能与稳定性。</td>
+    <td>TiDB Index Advisor tw@Oreoxmt</td>
+    <td>TiDB Index Advisor analyzes actual query workloads to intelligently identify missing or redundant indexes. It helps you optimize indexes without requiring deep knowledge of your application. This feature reduces the cost of manual analysis and tuning, and improves query performance and system stability.</td>
   </tr>
   <tr>
-    <td> SQL 跨可用区流量观测 </td>
-    <td> 跨可用区流量观测帮助用户识别 TiDB 集群内部 SQL 查询过程中产生的跨区网络传输，从而分析流量来源、优化部署架构、控制云上跨区通信成本，是提升成本可见性和资源使用效率的重要手段。 </td>
+    <td>SQL cross-AZ traffic monitoring tw@Oreoxmt</td>
+    <td>This feature helps you identify cross-availability zone (AZ) network traffic caused by SQL queries in a TiDB cluster. It enables you to analyze traffic sources, optimize deployment architecture, and control cross-AZ data transfer costs in cloud environments. It also improves resource efficiency and cost visibility.</td>
   </tr>
   <tr>
     <td rowspan="3">Data Migration</td>
-    <td>Support query argument redaction in DM logs</td>
-    <td>Introduces an optional <code>redact-info-log</code> parameter to mask query arguments in DM logs, preventing sensitive data from appearing in logs.</td>
+    <td>Support query argument redaction in Data Migration (DM) logs tw@Oreoxmt</td>
+    <td>Introduce the <code>redact-info-log</code> configuration item to support redacting query parameters in DM logs, preventing sensitive data from appearing in logs.</td>
   </tr>
   <tr>
-    <td>Ensure Lightning compatibility with TiDB <code>sql_require_primary_key=ON</code></td>
-    <td>Ensures the internal error-logging tables have primary keys if <code>sql_require_primary_key=ON</code> is enabled in TiDB, avoiding creation failures during data imports.</td>
+    <td>TiDB Lightning supports compatibility with <code>sql_require_primary_key=ON</code> in TiDB tw@Oreoxmt</td>
+    <td>When the <code>sql_require_primary_key=ON</code> system variable is enabled in TiDB, the internal error log table now includes a primary key to prevent table creation failures during import.</td>
   </tr>
   <tr>
-    <td>Migrated sync-diff-inspector from <code>tidb-tools</code> to <code>tiflow</code> repository</td>
-    <td>Consolidates sync-diff-inspector with other data migration and replication tools (DM and TiCDC) in the <code>tiflow</code> repository. Now available via TiUP and a dedicated Docker image.</td>
+    <td>Migrate sync-diff-inspector from <code>pingcap/tidb-tools</code> to <code>pingcap/tiflow</code> repository tw@Oreoxmt</td>
+    <td>sync-diff-inspector is now maintained with other migration and replication tools such as DM and TiCDC in the <code>pingcap/tiflow</code> repository. You can now install sync-diff-inspector using TiUP or a dedicated Docker image.</td>
   </tr>
 </tbody>
 </table>
