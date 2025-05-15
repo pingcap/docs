@@ -45,16 +45,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
   </tr>
   <tr>
     <td>TiDB Index Advisor tw@Oreoxmt</td>
-    <td>TiDB Index Advisor analyzes actual query workloads to intelligently identify missing or redundant indexes. It helps you optimize indexes without requiring deep knowledge of your application. This feature reduces the cost of manual analysis and tuning, and improves query performance and system stability.</td>
+    <td>TiDB Index Advisor analyzes actual query workloads to automatically identify missing or redundant indexes. It helps you optimize indexes without requiring deep knowledge of your application. This feature reduces the cost of manual analysis and tuning, and improves query performance and system stability.</td>
   </tr>
   <tr>
     <td>SQL cross-AZ traffic monitoring tw@Oreoxmt</td>
-    <td>This feature helps you identify cross-availability zone (AZ) network traffic caused by SQL queries in a TiDB cluster. It enables you to analyze traffic sources, optimize deployment architecture, and control cross-AZ data transfer costs in cloud environments. It also improves resource efficiency and cost visibility.</td>
+    <td>This feature helps you identify cross-availability zone (AZ) network traffic caused by SQL queries in a TiDB cluster. It enables you to analyze traffic sources, optimize deployment architecture, and control cross-AZ data transfer costs in cloud environments, thus improving resource efficiency and cost visibility.</td>
   </tr>
   <tr>
     <td rowspan="3">Data Migration</td>
-    <td>Support query argument redaction in Data Migration (DM) logs tw@Oreoxmt</td>
-    <td>Introduce the <code>redact-info-log</code> configuration item to support redacting query parameters in DM logs, preventing sensitive data from appearing in logs.</td>
+    <td>Query argument redaction in Data Migration (DM) logs tw@Oreoxmt</td>
+    <td>Data Migration (DM) introduces the <code>redact-info-log</code> configuration item to redact query arguments in DM logs, preventing sensitive data from appearing in logs.</td>
   </tr>
   <tr>
     <td>TiDB Lightning supports compatibility with <code>sql_require_primary_key=ON</code> in TiDB tw@Oreoxmt</td>
