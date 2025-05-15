@@ -26,7 +26,7 @@ TiDB Lightning can read data from the following sources:
 
 ## TiDB Lightning architecture
 
-![Architecture of TiDB Lightning tool set](/media/tidb-lightning-architecture.png)
+![Architecture of TiDB Lightning tool set](./media/tidb-lightning-architecture.png)
 
 TiDB Lightning supports two import modes, configured by `backend`. The import mode determines the way data is imported into TiDB.
 

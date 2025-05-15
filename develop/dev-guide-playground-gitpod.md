@@ -31,7 +31,7 @@ Take the [Spring Boot Web](/develop/dev-guide-sample-application-java-spring-boo
 
 After that, you will see a page similar to the following:
 
-![playground gitpod workspace init](/media/develop/playground-gitpod-workspace-init.png)
+![playground gitpod workspace init](./media/develop/playground-gitpod-workspace-init.png)
 
 This scenario in the page uses [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview) to build a TiDB Playground. You can check the progress on the left side of the terminal area.
 
@@ -39,7 +39,7 @@ Once the TiDB Playground is ready, another `Spring JPA Hibernate` task will run.
 
 After all these tasks are finished, you will see a page similar to the following. On this page, check the `REMOTE EXPLORER` area in the left navigation pane (Gitpod supports URL-based port forwarding) and find the URL of your port `8080`.
 
-![playground gitpod workspace ready](/media/develop/playground-gitpod-workspace-ready.png)
+![playground gitpod workspace ready](./media/develop/playground-gitpod-workspace-ready.png)
 
 ## Using custom Gitpod configuration and Docker image
 
@@ -165,7 +165,7 @@ Visit `https://gitpod.io/workspaces` for all established workspaces.
 
 Gitpod provides a complete, automated, and pre-configured cloud-native development environment. You can develop, run, and test code directly in the browser without any local configurations.
 
-![playground gitpod summary](/media/develop/playground-gitpod-summary.png)
+![playground gitpod summary](./media/develop/playground-gitpod-summary.png)
 
 ## Need help?
 

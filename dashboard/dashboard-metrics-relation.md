@@ -11,7 +11,7 @@ TiDB Dashboard metrics relation graph is a feature introduced in v4.0.7. This fe
 
 After logging in to TiDB Dashboard, click **Cluster Diagnostics** in the left navigation menu, and you can see the page of generating the metrics relation graph.
 
-![Metrics relation graph homepage](/media/dashboard/dashboard-metrics-relation-home-v650.png)
+![Metrics relation graph homepage](./media/dashboard/dashboard-metrics-relation-home-v650.png)
 
 After setting **Range Start Time** and **Range Duration**, click **Generate Metrics Relation** and you will enter the page of metrics relation graph.
 
@@ -19,7 +19,7 @@ After setting **Range Start Time** and **Range Duration**, click **Generate Metr
 
 The following image is an example of the metrics relation graph. This graph illustrates the proportion of each monitoring metric's duration to the total query duration in a TiDB cluster within 5 minutes after 2020-07-29 16:36:00. The graph also illustrates the relations of each monitoring metric.
 
-![Metrics relation graph example](/media/dashboard/dashboard-metrics-relation-example.png)
+![Metrics relation graph example](./media/dashboard/dashboard-metrics-relation-example.png)
 
 For example, the node meaning of the `tidb_execute` monitoring metric is as follows:
 
@@ -27,7 +27,7 @@ For example, the node meaning of the `tidb_execute` monitoring metric is as foll
 + The duration of the `tidb_execute` node itself is 9070.18 seconds, which accounts for 42% of the total query duration.
 + Hover your mouse over the box area, and you can see the detailed information of the metric, including the total duration, the average duration, and the average P99 (99th percentile) duration.
 
-![tidb_execute node example](/media/dashboard/dashboard-metrics-relation-node-example.png)
+![tidb_execute node example](./media/dashboard/dashboard-metrics-relation-node-example.png)
 
 ### Node information
 
@@ -39,7 +39,7 @@ Each box area represents a monitoring metric and provides the following informat
 
 *The total duration of the metric node* = *the duration of the metric node itself* + *the duration of its child nodes*. Therefore, the metric graph of some nodes displays the proportion of the node itself's duration to the total duration, such as the graph of `tidb_execute`.
 
-![tidb_execute node example1](/media/dashboard/dashboard-metrics-relation-node-example1.png)
+![tidb_execute node example1](./media/dashboard/dashboard-metrics-relation-node-example1.png)
 
 * `tidb_execute` is the name of the monitoring metric, which represents the execution duration of a SQL query in the TiDB execution engine.
 * `19306.46s` represents that total duration of the `tidb_execute` metric is 19306.46 seconds. `89.40%` represents that 19306.46 seconds account for 89.40% of the total time consumed for all SQL queries (including user SQL queries and TiDB's internal SQL queries). The total query duration is the total duration of `tidb_query`.
@@ -47,7 +47,7 @@ Each box area represents a monitoring metric and provides the following informat
 
 Hover your mouse over the box area and you can see more details of the `tidb_execute` metric node:
 
-![tidb_execute node example2](/media/dashboard/dashboard-metrics-relation-node-example2.png)
+![tidb_execute node example2](./media/dashboard/dashboard-metrics-relation-node-example2.png)
 
 The text information displayed in the image above is the description of the metric node, including the total duration, the total times, the average duration, and the average duration P99, P90, and P80.
 
@@ -55,7 +55,7 @@ The text information displayed in the image above is the description of the metr
 
 Taking the `tidb_execute` metric node as an example, this section introduces a metric's child nodes.
 
-![tidb_execute node relation example1](/media/dashboard/dashboard-metrics-relation-relation-example1.png)
+![tidb_execute node relation example1](./media/dashboard/dashboard-metrics-relation-relation-example1.png)
 
 From the graph above, you can see the two child nodes of `tidb_execute`:
 
@@ -72,7 +72,7 @@ In addition, `tidb_execute` also has a dotted arrow pointing to the `tidb_cop` b
 
 ### `tidb_kv_request` and its parent nodes
 
-![tidb_execute node relation example2](/media/dashboard/dashboard-metrics-relation-relation-example2.png)
+![tidb_execute node relation example2](./media/dashboard/dashboard-metrics-relation-relation-example2.png)
 
 `tidb_cop` and `tidb_txn_cmd.get`, the parent nodes of `tidb_kv_request`, both have dotted arrows pointing to `tidb_kv_request`, which indicates as follows:
 

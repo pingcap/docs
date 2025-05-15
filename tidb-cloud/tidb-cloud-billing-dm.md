@@ -41,15 +41,15 @@ Note that if you are using AWS PrivateLink or VPC peering connections, and if th
 
 - If the source database and the TiDB node are not in the same region, cross-region traffic charges are incurred when the Data Migration job collects data from the source database.
 
-    ![Cross-region traffic charges](/media/tidb-cloud/dm-billing-cross-region-fees.png)
+    ![Cross-region traffic charges](./media/tidb-cloud/dm-billing-cross-region-fees.png)
 
 - If the source database and the TiDB node are in the same region but in different AZs, cross-AZ traffic charges are incurred when the Data Migration job collects data from the source database.
 
-    ![Cross-AZ traffic charges](/media/tidb-cloud/dm-billing-cross-az-fees.png)
+    ![Cross-AZ traffic charges](./media/tidb-cloud/dm-billing-cross-az-fees.png)
 
 - If the Data Migration job and the TiDB node are not in the same AZ, cross-AZ traffic charges are incurred when the Data Migration job writes data to the target TiDB node. In addition, if the Data Migration job and the TiDB node are not in the same AZ (or region) with the source database, cross-AZ (or cross-region) traffic charges are incurred when the Data Migration job collects data from the source database.
 
-    ![Cross-region and cross-AZ traffic charges](/media/tidb-cloud/dm-billing-cross-region-and-az-fees.png)
+    ![Cross-region and cross-AZ traffic charges](./media/tidb-cloud/dm-billing-cross-region-and-az-fees.png)
 
 The cross-region and cross-AZ traffic prices are the same as those for TiDB Cloud. For more information, see [TiDB Cloud Pricing Details](https://www.pingcap.com/tidb-dedicated-pricing-details/).
 

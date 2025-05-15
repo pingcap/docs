@@ -11,7 +11,7 @@ TiKV is a distributed and transactional key-value database, which provides trans
 
 TiKV implements the multi-raft-group replica mechanism based on the design of Google Spanner. A Region is a basic unit of the key-value data movement and refers to a data range in a Store. Each Region is replicated to multiple nodes. These multiple replicas form a Raft group. A replica of a Region is called a Peer. Typically there are 3 peers in a Region. One of them is the leader, which provides the read and write services. The PD component balances all the Regions automatically to guarantee that the read and write throughput is balanced among all the nodes in the TiKV cluster. With PD and carefully designed Raft groups, TiKV excels in horizontal scalability and can easily scale to store more than 100 TBs of data.
 
-![TiKV Architecture](/media/tikv-arch.png)
+![TiKV Architecture](./media/tikv-arch.png)
 
 ### Region and RocksDB
 

@@ -30,7 +30,7 @@ When PD instances are running for the first time, they automatically negotiate w
 
 When you access a PD instance that does not serve TiDB Dashboard, the browser will be redirected automatically to guide you to access the PD instance that serves the TiDB Dashboard, so that you can access the service normally. This process is illustrated in the image below.
 
-![Process Schematic](/media/dashboard/dashboard-ops-multiple-pd.png)
+![Process Schematic](./media/dashboard/dashboard-ops-multiple-pd.png)
 
 > **Note:**
 >

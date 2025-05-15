@@ -11,13 +11,13 @@ This document introduces the architecture and process of TiDB log backup and poi
 
 The log backup and PITR architecture is as follows:
 
-![BR log backup and PITR architecture](/media/br/br-log-arch.png)
+![BR log backup and PITR architecture](./media/br/br-log-arch.png)
 
 ## Process of log backup
 
 The process of a cluster log backup is as follows:
 
-![BR log backup process design](/media/br/br-log-backup-ts.png)
+![BR log backup process design](./media/br/br-log-backup-ts.png)
 
 System components and key concepts involved in the log backup process:
 
@@ -57,7 +57,7 @@ The complete backup process is as follows:
 
 The process of PITR is as follows:
 
-![Point-in-time recovery process design](/media/br/pitr-ts.png)
+![Point-in-time recovery process design](./media/br/pitr-ts.png)
 
 The complete PITR process is as follows:
 

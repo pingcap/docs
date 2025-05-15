@@ -78,7 +78,7 @@ If you encounter any issues during import, you can cancel this import task as fo
     - **Password**: enter the `PASSWORD` parameter from the TiDB Cloud Serverless connection dialog.
     - **Enable SSL**: select this option, and then click the upload icon to the right of **MySQL SSL Client Configuration Files** to upload the CA file downloaded from [Step 2](#step-2-get-the-connection-information-for-your-cluster).
 
-    ![Looker Studio: configure connection settings for TiDB Cloud Serverless](/media/tidb-cloud/looker-studio-configure-connection.png)
+    ![Looker Studio: configure connection settings for TiDB Cloud Serverless](./media/tidb-cloud/looker-studio-configure-connection.png)
 
 4. Click **AUTHENTICATE**.
 
@@ -90,7 +90,7 @@ Now, you can use the TiDB cluster as a data source and create a simple chart wit
 
 1. In the right pane, click **CUSTOM QUERY**.
 
-    ![Looker Studio: custom query](/media/tidb-cloud/looker-studio-custom-query.png)
+    ![Looker Studio: custom query](./media/tidb-cloud/looker-studio-custom-query.png)
 
 2. Copy the following code to the **Enter Custom Query** area, and then click **Add** in the lower-right corner.
 
@@ -124,7 +124,7 @@ Now, you can use the TiDB cluster as a data source and create a simple chart wit
 
 Then, you can see a combo chart similar as follows:
 
-![Looker Studio: A simple Combo chart](/media/tidb-cloud/looker-studio-simple-chart.png)
+![Looker Studio: A simple Combo chart](./media/tidb-cloud/looker-studio-simple-chart.png)
 
 ## Next steps
 

@@ -9,7 +9,7 @@ summary: Learn the architecture and working principles of TiCDC.
 
 Consisting of multiple TiCDC nodes, a TiCDC cluster uses a distributed and stateless architecture. The design of TiCDC and its components is as follows:
 
-![TiCDC architecture](/media/ticdc/ticdc-architecture-1.jpg)
+![TiCDC architecture](./media/ticdc/ticdc-architecture-1.jpg)
 
 ## TiCDC components
 
@@ -19,7 +19,7 @@ Each Capture process contains one or multiple Processor threads for replicating 
 
 Each pipeline contains the following components: Puller, Sorter, Mounter, and Sink.
 
-![TiCDC architecture](/media/ticdc/ticdc-architecture-2.jpg)
+![TiCDC architecture](./media/ticdc/ticdc-architecture-2.jpg)
 
 These components work in serial with each other to complete the replication process, including pulling data, sorting data, loading data, and replicating data from the upstream to the downstream. The components are described as follows:
 
@@ -30,7 +30,7 @@ These components work in serial with each other to complete the replication proc
 
 To realize high availability, each TiCDC cluster runs multiple TiCDC nodes. These nodes regularly report their status to the etcd cluster in PD, and elect one of the nodes as the owner of the TiCDC cluster. The owner node schedules data based on the status stored in etcd and writes the scheduling results to etcd. The Processor completes tasks according to the status in etcd. If the node running the Processor fails, the cluster schedules tables to other nodes. If the owner node fails, the Capture processes in other nodes will elect a new owner. See the following figure:
 
-![TiCDC architecture](/media/ticdc/ticdc-architecture-3.PNG)
+![TiCDC architecture](./media/ticdc/ticdc-architecture-3.PNG)
 
 ## Changefeeds and tasks
 
@@ -63,13 +63,13 @@ The preceding `cdc cli changefeed create` command creates a changefeed task that
 
 The following is the TiCDC architecture diagram with Changefeed and Task included:
 
-![TiCDC architecture](/media/ticdc/ticdc-architecture-6.jpg)
+![TiCDC architecture](./media/ticdc/ticdc-architecture-6.jpg)
 
 In the preceding diagram, a changefeed is created to replicate four tables to downstream. This changefeed is split into three Tasks, which are sent to the three Capture processes respectively in the TiCDC cluster. After TiCDC processes the data, the data is replicated to the downstream system.
 
 TiCDC supports replicating data to MySQL, TiDB, and Kafka databases. The preceding diagram only illustrates the process of data transfer at the changefeed level. The following sections describe in detail how TiCDC processes data, using Task1 that replicates table `table1` as an example.
 
-![TiCDC architecture](/media/ticdc/ticdc-architecture-5.jpg)
+![TiCDC architecture](./media/ticdc/ticdc-architecture-5.jpg)
 
 1. Push data: When a data change occurs, TiKV pushes data to the Puller module.
 2. Scan incremental data: The Puller module pulls data from TiKV when it finds the data changes received not continuous.

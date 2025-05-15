@@ -42,11 +42,11 @@ useServerPrepStmts=false
 
 From the Top SQL page in the TiDB Dashboard below, you can see that the non-business SQL type `SELECT @@session.tx_isolation` consumes the most resources. Although TiDB processes these types of SQL statements quickly, these types of SQL statements have the highest number of executions that result in the highest overall CPU time consumption.
 
-![dashboard-for-query-interface](/media/performance/case1.png)
+![dashboard-for-query-interface](./media/performance/case1.png)
 
 From the following flame chart of TiDB, you can see that the CPU consumption of functions such as `Compile` and `Optimize` is significant during the SQL execution. Because the application uses the Query interface, TiDB cannot use the execution plan cache. TiDB needs to compile and generate an execution plan for each SQL statement.
 
-![flame-graph-for-query-interface](/media/performance/7.1.png)
+![flame-graph-for-query-interface](./media/performance/7.1.png)
 
 - ExecuteStmt cpu = 38% cpu time = 23.84s
 - Compile cpu = 27%  cpu time = 17.17s
@@ -56,7 +56,7 @@ From the following flame chart of TiDB, you can see that the CPU consumption of 
 
 Check the database time overview and QPS in the following Performance Overview dashboard.
 
-![performance-overview-1-for-query-interface](/media/performance/j-1.png)
+![performance-overview-1-for-query-interface](./media/performance/j-1.png)
 
 - Database Time by SQL Type: the `Select` statement type takes most of the time.
 - Database Time by SQL Phase: the `execute` and `compile` phases take most of the time.
@@ -68,7 +68,7 @@ Check the database time overview and QPS in the following Performance Overview d
 
 Check the resource consumption of the cluster: the average utilization of TiDB CPU is 925%, the average utilization of TiKV CPU is 201%, and the average throughput of TiKV IO is 18.7 MB/s. The resource consumption of TiDB is significantly higher.
 
-![performance-overview-2-for-query-interface](/media/performance/5.png)
+![performance-overview-2-for-query-interface](./media/performance/5.png)
 
 ### Analysis conclusion
 
@@ -90,11 +90,11 @@ useServerPrepStmts=false&useConfigs=maxPerformance
 
 From the Top SQL page in the TiDB Dashboard below, you can see that `SELECT @@session.tx_isolation`, which consumed the most resources, has disappeared.
 
-![dashboard-for-maxPerformance](/media/performance/case2.png)
+![dashboard-for-maxPerformance](./media/performance/case2.png)
 
 From the following flame chart of TiDB, you can see that the CPU consumption of functions such as `Compile` and `Optimize` is still significant during the SQL execution.
 
-![flame-graph-for-maxPerformance](/media/performance/20220507-145257.jpg)
+![flame-graph-for-maxPerformance](./media/performance/20220507-145257.jpg)
 
 - ExecuteStmt cpu = 43% cpu time =35.84s
 - Compile cpu = 31% cpu time =25.61s
@@ -104,7 +104,7 @@ From the following flame chart of TiDB, you can see that the CPU consumption of 
 
 The data of the database time overview and QPS is as follows:
 
-![performance-overview-1-for-maxPerformance](/media/performance/j-2.png)
+![performance-overview-1-for-maxPerformance](./media/performance/j-2.png)
 
 - Database Time by SQL Type: the `Select` statement type takes most of the time.
 - Database Time by SQL Phase: the `execute` and `compile` phases take most of the time.
@@ -116,11 +116,11 @@ The data of the database time overview and QPS is as follows:
 
 From Scenario 1 to Scenario 2, the average TiDB CPU utilization drops from 925% to 874%, and the average TiKV CPU utilization increases from 201% to about 250%.
 
-![performance-overview-2-for-maxPerformance](/media/performance/9.1.1.png)
+![performance-overview-2-for-maxPerformance](./media/performance/9.1.1.png)
 
 The changes in key latency metrics are as follows:
 
-![performance-overview-3-for-maxPerformance](/media/performance/9.2.2.png)
+![performance-overview-3-for-maxPerformance](./media/performance/9.2.2.png)
 
 - avg query duration = 1.12ms (from 479μs to 1.12ms)
 - avg parse duration = 84.7μs (from 37.2μs to 84.7μs)
@@ -149,7 +149,7 @@ useServerPrepStmts=true&useConfigs=maxPerformance"
 
 From the following flame chart of TiDB, you can see that the CPU consumption of `CompileExecutePreparedStmt` and `Optimize` is still significant after the Prepared Statement interface is enabled.
 
-![flame-graph-for-PrepStmts](/media/performance/3.1.1.png)
+![flame-graph-for-PrepStmts](./media/performance/3.1.1.png)
 
 - ExecutePreparedStmt cpu = 31%  cpu time = 23.10s
 - preparedStmtExec cpu = 30% cpu time = 22.92s
@@ -160,7 +160,7 @@ From the following flame chart of TiDB, you can see that the CPU consumption of 
 
 After the Prepared Statement interface is used, the data of database time overview and QPS is as follows:
 
-![performance-overview-1-for-PrepStmts](/media/performance/j-3.png)
+![performance-overview-1-for-PrepStmts](./media/performance/j-3.png)
 
 The QPS drops from 24.4k to 19.7k. From the Database Time Overview, you can see that the application uses three types of Prepared commands, and the `general` statement type (which includes the execution time of commands such as `StmtPrepare` and `StmtClose`) takes the second place in Database Time by SQL Type. This indicates that even when the Prepared Statement interface is used, the execution plan cache is not hit. The reason is that, when the `StmtClose` command is executed, TiDB clears the execution plan cache of SQL statements in the internal processing.
 
@@ -173,11 +173,11 @@ The QPS drops from 24.4k to 19.7k. From the Database Time Overview, you can see 
 
 The TiDB average CPU utilization increases from 874% to 936%.
 
-![performance-overview-1-for-PrepStmts](/media/performance/3-2.png)
+![performance-overview-1-for-PrepStmts](./media/performance/3-2.png)
 
 The key latency metrics are as follows:
 
-![performance-overview-2-for-PrepStmts](/media/performance/3.4.png)
+![performance-overview-2-for-PrepStmts](./media/performance/3.4.png)
 
 - avg query duration = 528μs (from 1.12ms to 528μs)
 - avg parse duration = 14.9μs (from 84.7μs to 14.9μs)
@@ -210,13 +210,13 @@ From the flame chart of the TiDB CPU usage, you can see that `CompileExecutePrep
 
 PreparseStmt cpu = 25% cpu time = 12.75s
 
-![flame-graph-for-3-commands](/media/performance/4.2.png)
+![flame-graph-for-3-commands](./media/performance/4.2.png)
 
 #### Performance Overview dashboard
 
 In the Performance Overview dashboard, the most significant change is the average time of the `compile` phase, which is reduced from 8.95 seconds per second in Scenario 3 to 1.18 seconds per second. The number of queries using the execution plan cache is roughly equal to the value of `StmtExecute`. With the increase in QPS, the database time consumed by `Select` statements per second decreases, and the database time consumed by `general` statements per second type increases.
 
-![performance-overview-1-for-3-commands](/media/performance/j-4.png)
+![performance-overview-1-for-3-commands](./media/performance/j-4.png)
 
 - Database Time by SQL Type: the `Select` statement type takes the most time.
 - Database Time by SQL Phase: the `execute` phase takes most of the time.
@@ -228,11 +228,11 @@ In the Performance Overview dashboard, the most significant change is the averag
 
 The average TiDB CPU utilization drops from 936% to 827%.
 
-![performance-overview-2-for-3-commands](/media/performance/4.4.png)
+![performance-overview-2-for-3-commands](./media/performance/4.4.png)
 
 The average `compile` time drops significantly, from 374 us to 53.3 us. Because the QPS increases, the average `execute` time increases too.
 
-![performance-overview-3-for-3-commands](/media/performance/4.5.png)
+![performance-overview-3-for-3-commands](./media/performance/4.5.png)
 
 - avg query duration = 426μs (from 528μs to 426μs)
 - avg parse duration = 12.3μs (from 14.8μs to 12.3μs)
@@ -269,13 +269,13 @@ From the following flame chart of TiDB, you can see that the high CPU consumptio
 
 - ExecutePreparedStmt cpu = 22% cpu time = 8.4s
 
-![flame-graph-for-1-command](/media/performance/5.1.1.png)
+![flame-graph-for-1-command](./media/performance/5.1.1.png)
 
 #### Performance Overview dashboard
 
 In the Performance Overview dashboard, the most notable changes are that the three Stmt command types in the **CPS By Type** pane drop to one type, the `general` statement type in the **Database Time by SQL Type** pane is disappeared, and the QPS in the **QPS** pane increases to 30.9k.
 
-![performance-overview-for-1-command](/media/performance/j-5.png)
+![performance-overview-for-1-command](./media/performance/j-5.png)
 
 - Database Time by SQL Type: the `Select` statement type takes most of the time and the `general` statement type disappears.
 - Database Time by SQL Phase: the `execute` phase takes most of the time.
@@ -286,11 +286,11 @@ In the Performance Overview dashboard, the most notable changes are that the thr
 
 The average TiDB CPU utilization drops from 827% to 577%. As the QPS increases, the average TiKV CPU utilization increases to 313%.
 
-![performance-overview-for-2-command](/media/performance/j-5-cpu.png)
+![performance-overview-for-2-command](./media/performance/j-5-cpu.png)
 
 The key latency metrics are as follows:
 
-![performance-overview-for-3-command](/media/performance/j-5-duration.png)
+![performance-overview-for-3-command](./media/performance/j-5-duration.png)
 
 - avg query duration = 690μs (from 426μs to 690μs)
 - avg parse duration = 13.5μs (from 12.3μs to 13.5μs )
@@ -322,13 +322,13 @@ The flame chart of the TiDB CPU does not have any significant changes.
 
 - ExecutePreparedStmt cpu = 22% cpu time = 8.4s
 
-![flame-graph-for-rc-read](/media/performance/6.2.2.png)
+![flame-graph-for-rc-read](./media/performance/6.2.2.png)
 
 #### Performance Overview dashboard
 
 After using RC read, QPS increases from 30.9k to 34.9k, and the `tso wait` time consumed per second decreases from 5.46 s to 456 ms.
 
-![performance-overview-1-for-rc-read](/media/performance/j-6.png)
+![performance-overview-1-for-rc-read](./media/performance/j-6.png)
 
 - Database Time by SQL Type: the `Select` statement type takes most of the time.
 - Database Time by SQL Phase: the `execute` phase takes most of the time.
@@ -339,15 +339,15 @@ After using RC read, QPS increases from 30.9k to 34.9k, and the `tso wait` time 
 
 The `tso cmd` per second drops from 28.3k to 2.7k.
 
-![performance-overview-2-for-rc-read](/media/performance/j-6-cmd.png)
+![performance-overview-2-for-rc-read](./media/performance/j-6-cmd.png)
 
 The average TiDB CPU increases to 603% (from 577% to 603%).
 
-![performance-overview-3-for-rc-read](/media/performance/j-6-cpu.png)
+![performance-overview-3-for-rc-read](./media/performance/j-6-cpu.png)
 
 The key latency metrics are as follows:
 
-![performance-overview-4-for-rc-read](/media/performance/j-6-duration.png)
+![performance-overview-4-for-rc-read](./media/performance/j-6-duration.png)
 
 - avg query duration = 533μs (from 690μs to 533μs)
 - avg parse duration = 13.4μs (from 13.5μs to 13.4μs )
@@ -373,13 +373,13 @@ Compared with Scenario 6, the application configuration remains the same. The on
 
 The flame chart of the TiDB CPU does not have any significant changes.
 
-![flame-graph-for-table-cache](/media/performance/7.2.png)
+![flame-graph-for-table-cache](./media/performance/7.2.png)
 
 #### Performance Overview dashboard
 
 The QPS increases from 34.9k to 40.9k, and the KV request types take the most time in the `execute` phase change to `Prewrite` and `Commit`. The database time consumed by `Get` per second decreases from 5.33 seconds to 1.75 seconds, and the database time consumed by `Cop` per second decreases from 3.87 seconds to 1.09 seconds.
 
-![performance-overview-1-for-table-cache](/media/performance/j-7.png)
+![performance-overview-1-for-table-cache](./media/performance/j-7.png)
 
 - Database Time by SQL Type: the `Select` statement type takes most of the time.
 - Database Time by SQL Phase: the `execute` and `compile` phases take most of the time.
@@ -390,11 +390,11 @@ The QPS increases from 34.9k to 40.9k, and the KV request types take the most ti
 
 The average TiDB CPU utilization drops from 603% to 478% and the average TiKV CPU utilization drops from 346% to 256%.
 
-![performance-overview-2-for-table-cache](/media/performance/j-7-cpu.png)
+![performance-overview-2-for-table-cache](./media/performance/j-7-cpu.png)
 
 The average query latency drops from 533 us to 313 us. The average `execute` latency drops from 466 us to 250 us.
 
-![performance-overview-3-for-table-cache](/media/performance/j-7-duration.png)
+![performance-overview-3-for-table-cache](./media/performance/j-7-duration.png)
 
 - avg query duration = 313μs (from 533μs to 313μs)
 - avg parse duration = 11.9μs (from 13.4μs to 11.9μs)
