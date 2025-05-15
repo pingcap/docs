@@ -66,8 +66,8 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
     1. In the Azure portal, search for **Private endpoints**, and then select **Private endpoints** in the result.
     2. On the **Private endpoint** page, click **+ Create**.
     3. In the **Basics** tab, fill in the project and instance information, and then click **Next: Resource**.
-    4. In the **Resource** tab, choose **Connect to an Azure resource by resource ID or alias** as the **connection method**, paste the TiDB Cloud resource ID to the **Resource ID or alias** field, and then click **Next: Virtual Network**.
-    5. Complete the rest of the configurations of this private endpoint, and then click **Create**. For more information, see [Create a private endpoint](https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip#create-a-private-endpoint) in Azure documentation.
+    4. In the **Resource** tab, choose **Connect to an Azure resource by resource ID or alias** as the **connection method**, and paste the TiDB Cloud resource ID to the **Resource ID or alias** field.
+    5. Continue clicking **Next** to go through the remaining configuration tabs and complete the required settings. Then, click **Create** to create and deploy the private endpoint. It might take a few seconds for Azure to complete the deployment. For more information, see [Create a private endpoint](https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip#create-a-private-endpoint) in Azure documentation.
 
 3. After the private endpoint is created and deployed, click **Go to resource**, and then do the following:
 
