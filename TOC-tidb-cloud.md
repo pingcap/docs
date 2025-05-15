@@ -8,7 +8,6 @@
 - Why TiDB Cloud
   - [TiDB Cloud Introduction](/tidb-cloud/tidb-cloud-intro.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
-  - [Roadmap](/tidb-cloud/tidb-cloud-roadmap.md)
 - Get Started with TiDB Cloud
   - [Try Out TiDB Cloud Serverless](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Try Out TiDB + AI](/tidb-cloud/vector-search-get-started-using-python.md)
@@ -298,6 +297,10 @@
       - [SQLAlchemy](/tidb-cloud/vector-search-integrate-with-sqlalchemy.md)
       - [peewee](/tidb-cloud/vector-search-integrate-with-peewee.md)
       - [Django ORM](/tidb-cloud/vector-search-integrate-with-django-orm.md)
+  - Text Search
+    - [Full-Text Search with SQL](/tidb-cloud/vector-search-full-text-search-sql.md)
+    - [Full-Text Search with Python](/tidb-cloud/vector-search-full-text-search-python.md)
+    - [Hybrid Search](/tidb-cloud/vector-search-hybrid-search.md)
   - Reference
     - [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
     - [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md)
@@ -368,7 +371,7 @@
   - [Billing Profile](/tidb-cloud/tidb-cloud-billing.md#billing-profile)
   - [Credits](/tidb-cloud/tidb-cloud-billing.md#credits)
   - [Payment Method Setting](/tidb-cloud/tidb-cloud-billing.md#payment-method)
-  - [Billing from AWS or GCP Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace)
+  - [Billing from AWS, Azure, or Google Cloud Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-azure-marketplace-or-google-cloud-marketplace)
   - [Billing for Changefeed](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
   - [Billing for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md)
   - [Billing for Recovery Groups](/tidb-cloud/tidb-cloud-billing-recovery-group.md)
@@ -733,6 +736,11 @@
       - [delete](/tidb-cloud/ticloud-serverless-sql-user-delete.md)
       - [list](/tidb-cloud/ticloud-serverless-sql-user-list.md)
       - [update](/tidb-cloud/ticloud-serverless-sql-user-update.md)
+    - authorized-network
+      - [create](/tidb-cloud/ticloud-serverless-authorized-network-create.md)
+      - [delete](/tidb-cloud/ticloud-serverless-authorized-network-delete.md)
+      - [list](/tidb-cloud/ticloud-serverless-authorized-network-list.md)
+      - [update](/tidb-cloud/ticloud-serverless-authorized-network-update.md)
   - [ai](/tidb-cloud/ticloud-ai.md)
   - [completion](/tidb-cloud/ticloud-completion.md)
   - config

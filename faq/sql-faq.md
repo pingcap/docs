@@ -337,6 +337,73 @@ Whether your cluster is a new cluster or an upgraded cluster from an earlier ver
 - If the owner does not exist, try manually triggering owner election with: `curl -X POST http://{TiDBIP}:10080/ddl/owner/resign`.
 - If the owner exists, export the Goroutine stack and check for the possible stuck location.
 
+## Collation used in JDBC connections
+
+This section lists questions related to collations used in JDBC connections. For information about character sets and collations supported by TiDB, see [Character Set and Collation](/character-set-and-collation.md).
+
+### What collation is used in a JDBC connection when `connectionCollation` is not configured in the JDBC URL?
+
+When `connectionCollation` is not configured in the JDBC URL, there are two scenarios:
+
+**Scenario 1**: Neither `connectionCollation` nor `characterEncoding` is configured in the JDBC URL
+
+- For Connector/J 8.0.25 and earlier versions, the JDBC driver attempts to use the server's default character set. Because the default character set of TiDB is `utf8mb4`, the driver uses `utf8mb4_bin` as the connection collation.
+- For Connector/J 8.0.26 and later versions, the JDBC driver uses the `utf8mb4` character set and automatically selects the collation based on the return value of `SELECT VERSION()`.
+
+    - When the return value is less than `8.0.1`, the driver uses `utf8mb4_general_ci` as the connection collation. TiDB follows the driver and uses `utf8mb4_general_ci` as the collation.
+    - When the return value is greater than or equal to `8.0.1`, the driver uses `utf8mb4_0900_ai_ci` as the connection collation. TiDB v7.4.0 and later versions follow the driver and use `utf8mb4_0900_ai_ci` as the collation, while TiDB versions earlier than v7.4.0 fall back to using the default collation `utf8mb4_bin` because the `utf8mb4_0900_ai_ci` collation is not supported in these versions.
+
+**Scenario 2**: `characterEncoding=utf8` is configured in the JDBC URL but `connectionCollation` is not configured. The JDBC driver uses the `utf8mb4` character set according to the mapping rules. The collation is determined according to the rules described in scenario 1.
+
+### How to handle collation changes after upgrading TiDB?
+
+In TiDB v7.4 and earlier versions, if `connectionCollation` is not configured, and `characterEncoding` is either not configured or set to `UTF-8` in the JDBC URL, the TiDB [`collation_connection`](/system-variables.md#collation_connection) variable defaults to the `utf8mb4_bin` collation.
+
+Starting from TiDB v7.4, if `connectionCollation` is not configured, and `characterEncoding` is either not configured or set to `UTF-8` in the JDBC URL, the value of the [`collation_connection`](/system-variables.md#collation_connection) variable depends on the JDBC driver version. For example, for Connector/J 8.0.26 and later versions, the JDBC driver defaults to the `utf8mb4` character set and uses `utf8mb4_general_ci` as the connection collation. TiDB follows the driver, and the [`collation_connection`](/system-variables.md#collation_connection) variable uses the `utf8mb4_0900_ai_ci` collation. For more information, see [Collation used in JDBC connections](#what-collation-is-used-in-a-jdbc-connection-when-connectioncollation-is-not-configured-in-the-jdbc-url).
+
+When upgrading from an earlier version to v7.4 or later (for example, from v6.5 to v7.5), if you need to maintain the `collation_connection` as `utf8mb4_bin` for JDBC connections, it is recommended to configure the `connectionCollation` parameter in the JDBC URL.
+
+The following is a common JDBC URL configuration in TiDB v6.5:
+
+```
+spring.datasource.url=JDBC:mysql://{TiDBIP}:{TiDBPort}/{DBName}?characterEncoding=UTF-8&useSSL=false&useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSqlLimit=10000&prepStmtCacheSize=1000&useConfigs=maxPerformance&rewriteBatchedStatements=true&defaultFetchSize=-2147483648&allowMultiQueries=true
+```
+
+After upgrading to TiDB v7.5 or a later version, it is recommended to configure the `connectionCollation` parameter in the JDBC URL:
+
+```
+spring.datasource.url=JDBC:mysql://{TiDBIP}:{TiDBPort}/{DBName}?characterEncoding=UTF-8&connectionCollation=utf8mb4_bin&useSSL=false&useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSqlLimit=10000&prepStmtCacheSize=1000&useConfigs=maxPerformance&rewriteBatchedStatements=true&defaultFetchSize=-2147483648&allowMultiQueries=true
+```
+
+### What are the differences between the `utf8mb4_bin` and `utf8mb4_0900_ai_ci` collations?
+
+| Collation             | Case-sensitive | Ignore trailing spaces | Accent-sensitive | Comparison method               |
+|----------------------|----------------|------------------|--------------|------------------------|
+| `utf8mb4_bin`        | Yes           | Yes             | Yes          | Compare binary values     |
+| `utf8mb4_0900_ai_ci` | No            | No              | No           | Use Unicode sorting algorithm |
+
+For example:
+
+```sql
+-- utf8mb4_bin is case-sensitive
+SELECT 'apple' = 'Apple' COLLATE utf8mb4_bin;  -- Returns 0 (FALSE)
+
+-- utf8mb4_0900_ai_ci is case-insensitive
+SELECT 'apple' = 'Apple' COLLATE utf8mb4_0900_ai_ci;  -- Returns 1 (TRUE)
+
+-- utf8mb4_bin ignores trailing spaces
+SELECT 'Apple ' = 'Apple' COLLATE utf8mb4_bin; -- Returns 1 (TRUE)
+
+-- utf8mb4_0900_ai_ci does not ignore trailing spaces
+SELECT 'Apple ' = 'Apple' COLLATE utf8mb4_0900_ai_ci; -- Returns 0 (FALSE)
+
+-- utf8mb4_bin is accent-sensitive
+SELECT 'café' = 'cafe' COLLATE utf8mb4_bin;  -- Returns 0 (FALSE)
+
+-- utf8mb4_0900_ai_ci is accent-insensitive
+SELECT 'café' = 'cafe' COLLATE utf8mb4_0900_ai_ci;  -- Returns 1 (TRUE)
+```
+
 ## SQL optimization
 
 ### TiDB execution plan description

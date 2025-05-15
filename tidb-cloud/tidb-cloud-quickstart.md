@@ -38,7 +38,7 @@ You can use the built-in AI-assisted SQL Editor in the TiDB Cloud console to max
 
 1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click on a cluster name to go to its overview page, and then click **SQL Editor** in the left navigation pane.
 
-2. To try the AI capacity of TiDB Cloud, follow the on-screen instructions to allow PingCAP and OpenAI to use your code snippets for research and service improvement, and then click **Save and Get Started**.
+2. To try the AI capacity of TiDB Cloud, follow the on-screen instructions to allow PingCAP and AWS Bedrock to use your code snippets for research and service improvement, and then click **Save and Get Started**.
 
 3. In SQL Editor, press <kbd>⌘</kbd> + <kbd>I</kbd> on macOS (or <kbd>Control</kbd> + <kbd>I</kbd> on Windows or Linux) to instruct [Chat2Query (beta)](/tidb-cloud/tidb-cloud-glossary.md#chat2query) to generate SQL queries automatically.
 

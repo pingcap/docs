@@ -5,7 +5,7 @@ summary: An overview of the usage of COMMIT for the TiDB database.
 
 # COMMIT
 
-This statement commits a transaction inside of the TIDB server.
+This statement commits a transaction inside of the TiDB server.
 
 In the absence of a `BEGIN` or `START TRANSACTION` statement, the default behavior of TiDB is that every statement will be its own transaction and autocommit. This behavior ensures MySQL compatibility.
 

@@ -270,7 +270,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
     - `append log duration` is high, which causes slow processing of messages. You can refer to [4.5](#45-tikv-write-is-slow) to analyze why `append log duration` is high.
     - raftstore receives a large batch of messages in an instant (check in the TiKV Raft messages dashboard), and fails to process them. Usually the short-term `channel full` status does not affect the service.
 
-- 4.3.4 TiKV coprocessor is in a queue. The number of piled up tasks exceeds `coprocessor threads * readpool.coprocessor.max-tasks-per-worker-[normal|low|high]`. Too many large queries leads to the tasks piling up in coprocessor. You need to check whether a execution plan change causes a large number of table scan operations. Refer to [3.3](#33-wrong-execution-plan).
+- 4.3.4 TiKV coprocessor is in a queue. The number of piled up tasks exceeds `coprocessor threads * readpool.coprocessor.max-tasks-per-worker-[normal|low|high]`. Too many large queries leads to the tasks piling up in coprocessor. You need to check whether an execution plan change causes a large number of table scan operations. Refer to [3.3](#33-wrong-execution-plan).
 
 ### 4.4 Some TiKV nodes drop Leader frequently
 

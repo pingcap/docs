@@ -7,7 +7,7 @@ summary: TiDB Cloud Dedicated supports high availability with Multi-AZ deploymen
 
 TiDB uses the Raft consensus algorithm to ensure that data is highly available and safely replicated throughout storage in Raft Groups. Data is redundantly copied between storage nodes and placed in different availability zones to protect against machine or data center failures. With automatic failover, TiDB ensures that your service is always on.
 
-TiDB Cloud Dedicated clusters consist of three major components: TiDB node, TiKV node, and TiFlash node. The highly availability implementation of each component for TiDB Cloud Dedicated is as follows:
+TiDB Cloud Dedicated clusters consist of three major components: TiDB node, TiKV node, and TiFlash node. The high availability implementation of each component for TiDB Cloud Dedicated is as follows:
 
 * **TiDB node**
 

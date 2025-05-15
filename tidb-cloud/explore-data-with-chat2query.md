@@ -45,7 +45,7 @@ The recommended use cases of SQL Editor are as follows:
 
 PingCAP takes the privacy and security of users' data as a top priority. The AI capacity of Chat2Query in SQL Editor only needs to access database schemas to generate SQL queries, not your data itself. For more information, see [Chat2Query Privacy FAQ](https://www.pingcap.com/privacy-policy/privacy-chat2query).
 
-When you access Chat2Query for the first time, you will be prompted with a dialog about whether to allow PingCAP and OpenAI to use your code snippets to research and improve the services.
+When you access Chat2Query for the first time, you will be prompted with a dialog about whether to allow PingCAP and Amazon Bedrock to use your code snippets to research and improve the services.
 
 - To enable the AI to generate SQL queries, select the checkbox and click **Save and Get Started**.
 - To disable the AI to generate SQL queries, close this dialog directly.

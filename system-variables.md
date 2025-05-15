@@ -3246,6 +3246,18 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This variable is used to set whether to ignore the commands for closing prepared statement cache.
 - When this variable is set to `ON`, the `COM_STMT_CLOSE` command of the Binary protocol and the [`DEALLOCATE PREPARE`](/sql-statements/sql-statement-deallocate.md) statement of the text protocol are ignored. For details, see [Ignore the `COM_STMT_CLOSE` command and the `DEALLOCATE PREPARE` statement](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement).
 
+### tidb_ignore_inlist_plan_digest <span class="version-mark">New in v7.6.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether TiDB ignores the element differences in the `IN` list across different queries when generating Plan Digests.
+
+    - When it is the default value `OFF`, TiDB does not ignore the element differences (including the difference in the number of elements) in the `IN` list when generating Plan Digests. The element differences in the `IN` list result in different Plan Digests.
+    - When it is set to `ON`, TiDB ignores the element differences (including the difference in the number of elements) in the `IN` list and uses `...` to replace elements in the `IN` list in Plan Digests. In this case, TiDB generates the same Plan Digests for `IN` queries of the same type.
+
 ### tidb_index_join_batch_size
 
 - Scope: SESSION | GLOBAL
@@ -6027,7 +6039,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Default value: `8192`
 - Range: `[1, 18446744073709551615]`
 - When Fine Grained Shuffle is enabled, the window function pushed down to TiFlash can be executed in parallel. This variable controls the batch size of the data sent by the sender.
-- Impact on performance: set a reasonable size according to your business requirements. Improper setting affects the performance. If the value is set too small, for example `1`, it causes one network transfer per Block. If the value is set too large, for example, the total number of rows of the table, it causes the receiving end to spend most of the time waiting for data, and the piplelined computation cannot work. To set a proper value, you can observe the distribution of the number of rows received by the TiFlash receiver. If most threads receive only a few rows, for example a few hundred, you can increase this value to reduce the network overhead.
+- Impact on performance: set a reasonable size according to your business requirements. Improper setting affects the performance. If the value is set too small, for example `1`, it causes one network transfer per Block. If the value is set too large, for example, the total number of rows of the table, it causes the receiving end to spend most of the time waiting for data, and the pipelined computation cannot work. To set a proper value, you can observe the distribution of the number of rows received by the TiFlash receiver. If most threads receive only a few rows, for example a few hundred, you can increase this value to reduce the network overhead.
 
 ### tiflash_fine_grained_shuffle_stream_count <span class="version-mark">New in v6.2.0</span>
 

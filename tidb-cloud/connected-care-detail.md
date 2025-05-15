@@ -72,32 +72,32 @@ This document provides detailed information about the [Connected Care](/tidb-clo
   <tr>
     <td>-</td>
     <td>-</td>
-    <td>Connected: Clinic service for advanced monitoring</td>
-    <td>Connected: Clinic service for advanced monitoring</td>
+    <td><a href="/tidbcloud/tidb-cloud-clinic">Connected: Clinic service for advanced monitoring</a></td>
+    <td><a href="/tidbcloud/tidb-cloud-clinic">Connected: Clinic service for advanced monitoring</a></td>
   </tr>
   <tr>
     <td>-</td>
     <td>-</td>
-    <td>Connected: AI chat in IM</td>
-    <td>Connected: AI chat in IM</td>
+    <td><a href="/tidbcloud/connected-ai-chat-in-im">Connected: AI chat in IM</a></td>
+    <td><a href="/tidbcloud/connected-ai-chat-in-im">Connected: AI chat in IM</a></td>
   </tr>
   <tr>
     <td>-</td>
     <td>-</td>
-    <td>Connected: IM subscription for TiDB Cloud alerts</td>
-    <td>Connected: IM subscription for TiDB Cloud alerts</td>
+    <td>Connected: IM subscription for TiDB Cloud alerts (via <a href="/tidbcloud/monitor-alert-slack">Slack</a> or <a href="/tidbcloud/monitor-alert-zoom">Zoom</a>)</td>
+    <td>Connected: IM subscription for TiDB Cloud alerts (via <a href="/tidbcloud/monitor-alert-slack">Slack</a> or <a href="/tidbcloud/monitor-alert-zoom">Zoom</a>)</td>
   </tr>
   <tr>
     <td>-</td>
     <td>-</td>
-    <td>Connected: IM ticket creation and update subscription</td>
-    <td>Connected: IM ticket creation and update subscription</td>
+    <td>Connected: IM ticket creation and update subscription (via <a href="/tidbcloud/connected-slack-ticket-creation">Slack</a> or <a href="/tidbcloud/connected-lark-ticket-creation">Lark</a>)</td>
+    <td>Connected: IM ticket creation and update subscription (via <a href="/tidbcloud/connected-slack-ticket-creation">Slack</a> or <a href="/tidbcloud/connected-lark-ticket-creation">Lark</a>)</td>
   </tr>
   <tr>
     <td>-</td>
     <td>-</td>
     <td>-</td>
-    <td>Connected: IM interaction for support tickets</td>
+    <td>Connected: IM interaction for support tickets (via <a href="/tidbcloud/connected-slack-ticket-interaction">Slack</a> or <a href="/tidbcloud/connected-lark-ticket-interaction">Lark</a>)</td>
   </tr>
   <tr>
     <td>-</td>
@@ -141,4 +141,4 @@ This document provides detailed information about the [Connected Care](/tidb-clo
 
 - Business hours: 9 AM - 6 PM local time, Monday to Friday
 - IM: Instant Message. Currently, [Slack](https://slack.com/) and [Lark](https://www.larksuite.com/) are supported. We are planning to support [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software) in the future.
-- Clinic: a modern monitoring service that provides advanced monitoring and diagnostic capabilities for your TiDB Cloud clusters.
+- [Clinic](https://clinic.pingcap.com/): a modern monitoring service that provides advanced monitoring and diagnostic capabilities for your TiDB Cloud clusters.
