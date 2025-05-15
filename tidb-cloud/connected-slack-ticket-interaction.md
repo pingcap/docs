@@ -11,31 +11,23 @@ For customers subscribed to the **Premium** [support plan](/tidb-cloud/connected
 >
 > The ticket support feature for Slack is available upon request. If you are interested in trying this feature, contact TiDB Cloud support at <a href="mailto:support@pingcap.com">support@pingcap.com</a> or reach out to your Technical Account Manager (TAM).
 
+[slack-ticket-interaction-creation](/media/tidb-cloud/connected-slack-ticket-interaction-creation.gif)
+
+[slack-ticket-interaction-reply](/media/tidb-cloud/connected-slack-ticket-interaction-reply.gif)
+
 ## Interact with support tickets
 
-If an **Assist** app is added to the channel, you can use **Assist** to submit the ticket. There are two ways to submit the request.
+In the Slack support channel, you only need to mention **PingCAP Support Bot** and describe the problem in a message. Then, the Bot will send you a message with a **Raise request** button.
 
-- **Method 1: Add a 🎫 emoji to the message for ticket creation**
+![slack-ticket-interaction-1](/media/tidb-cloud/connected-slack-ticket-interaction-1.png)
 
-    Click the emoji icon next to the message that you need to create a ticket. Type `ticket` in the search box to quickly find the 🎫 emoji, and then click 🎫.
+Click **Raise request** to open a form, fill it out according to the problem, and then click **Create** to submit the ticket.
 
-    ![slack-ticket-interaction-1](/media/tidb-cloud/connected-slack-ticket-interaction-1.png)
+![slack-ticket-interaction-2](/media/tidb-cloud/connected-slack-ticket-interaction-2.png)
 
-    ![slack-ticket-interaction-2](/media/tidb-cloud/connected-slack-ticket-interaction-2.png)
+After submission, the Bot will send a confirmation message in the thread, which includes the ticket link.
 
-    The **Assist** app will send you a message with a **Raise a request** button. Then, you can click the button, fill out the form, and submit your request.
-
-    ![slack-ticket-interaction-3](/media/tidb-cloud/connected-slack-ticket-interaction-3.png)
-
-    ![slack-ticket-interaction-4](/media/tidb-cloud/connected-slack-ticket-interaction-4.png)
-
-- **Method 2: Type `/assist` or `/assist` along with the problem description for ticket creation**
-
-    Another faster way is to type `/assist` or `/assist [problem description]` in the message box and press **Enter**. A request submission form will appear for you to complete and submit.
-
-    ![slack-ticket-interaction-5](/media/tidb-cloud/connected-slack-ticket-interaction-5.png)
-
-After submission, the Assist app will send a confirmation message in the thread, which includes the ticket link and ticket status.
+![slack-ticket-interaction-3](/media/tidb-cloud/connected-slack-ticket-interaction-3.png)
 
 For customers subscribed to the **Premium** [support plan](/tidb-cloud/connected-care-detail.md), two-way information synchronization is supported between Slack and the ticket system.
 
@@ -43,7 +35,7 @@ The support engineer's comments on the ticket will be synchronized to the Slack 
 
 In this way, customers subscribed to the **Premium** support plan can quickly create, respond, and manage tickets without leaving Slack.
 
-![slack-ticket-interaction-6](/media/tidb-cloud/connected-slack-ticket-interaction-6.png)
+![slack-ticket-interaction-4](/media/tidb-cloud/connected-slack-ticket-interaction-4.png)
 
 ## FAQs
 
