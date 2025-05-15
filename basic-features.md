@@ -148,7 +148,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Repeatable-read isolation (snapshot isolation)](/transaction-isolation-levels.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Read-committed isolation](/transaction-isolation-levels.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Automatically terminating long-running idle transactions](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760) | Y | Y | Y | N | N | N | N | N | N | N | N |
-| [Bulk DML execution mode (`tidb_dml_type = "bulk"`)](/system-variables.md#tidb_dml_type-new-in-v800) | E |  E | E |  N | N | N | N | N | N | N | N |
+| [Bulk DML execution mode (`tidb_dml_type = "bulk"`)](/system-variables.md#tidb_dml_type-new-in-v800) | E |  E | E |  E | N | N | N | N | N | N | N | N |
 
 ## Partitioning
 
@@ -256,7 +256,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Runaway Queries management](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries) | Y | Y | Y | E | N | N | N | N | N | N | N |
 | [Background tasks management](/tidb-resource-control.md#manage-background-tasks) | E | E | E | E | N | N | N | N | N | N | N |
 | [TiFlash Disaggregated Storage and Compute Architecture and S3 Support](/tiflash/tiflash-disaggregated-and-s3.md) | Y | Y | Y | Y | E | N | N | N | N | N | N |
-| [Selecting TiDB nodes for the Distributed eXecution Framework (DXF) tasks](/system-variables.md#tidb_service_scope-new-in-v740) | Y | Y | Y | N | N | N | N | N | N | N |
+| [Selecting TiDB nodes for the Distributed eXecution Framework (DXF) tasks](/system-variables.md#tidb_service_scope-new-in-v740) | Y | Y | Y | Y | N | N | N | N | N | N | N |
 | PD Follower Proxy (controlled by [`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530)) | Y | Y | Y | Y | Y | Y | Y | Y | Y | N | N |
 | [Active PD Follower](/tune-region-performance.md#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service) (controlled by [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)) | E | E | E | N | N | N | N | N | N | N | N |
 | [PD microservices](/pd-microservices.md) | E | E | E | N | N | N | N | N | N | N | N |
