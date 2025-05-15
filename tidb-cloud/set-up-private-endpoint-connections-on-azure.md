@@ -17,7 +17,7 @@ TiDB Cloud supports highly secure and one-way access to the TiDB Cloud service h
 
 Powered by Azure Private Link, the endpoint connection is secure and private, and does not expose your data to the public internet. In addition, the endpoint connection supports CIDR overlap and is easier for network management.
 
-The architecture of Azure Private Link is as follows, based on the [Azure documentation](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview):
+The architecture of Azure Private Link is as follows: [^1]
 
 ![Azure Private Link architecture](/media/tidb-cloud/azure-private-endpoint-arch.png)
 
@@ -119,3 +119,5 @@ The endpoint service is created automatically after you open the **Create Azure 
 ### If I cancel the action during setup, what should I do before accepting the private endpoint?
 
 The Azure private endpoint connection feature can automatically detect your private endpoints. This means that after [creating an Azure private endpoint](#step-2-create-an-azure-private-endpoint) in the Azure portal, if you click **Cancel** in the **Create Azure Private Endpoint Connection** dialog in the TiDB Cloud console, you can still view the created endpoint on the **Networking** page. If the cancellation is unintentional, you can continue to configure the endpoint to complete the setup. If the cancellation is intentional, you can delete the endpoint directly in the TiDB Cloud console.
+
+[^1]: The diagram of the Azure Private Link architecture is from the [What is Azure Private Link service](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview) document ([source file on GitHub](https://github.com/MicrosoftDocs/azure-docs/blob/main/articles/private-link/private-link-service-overview.md)) in Azure documentation, licensed under the Creative Commons Attribution 4.0 International.
