@@ -289,3 +289,172 @@ The destroy operation stops the services and clears the data directory and deplo
 ```bash
 tiup cluster destroy ${cluster-name}
 ```
+
+## Switch from Prometheus to VictoriaMetrics
+
+In large clusters, Prometheus may face efficiency challenges, especially when there are many instances. Since TiUP v1.16.3, TiUP supports switching the metrics server from Prometheus to VictoriaMetrics (VM) to provide better scalability, higher performance, and lower resource consumption.
+
+### Set up VictoriaMetrics for a new deployment
+
+By default, TiUP uses Prometheus as the metrics server. To use VictoriaMetrics instead of Prometheus in a new deployment, configure the topology file as follows:
+
+```yaml
+# Monitoring server configuration
+monitoring_servers:
+  # IP address of the monitoring server
+  - host: ip_address
+    ...
+    prom_remote_write_to_vm: true
+    enable_prom_agent_mode: true
+
+# Grafana server configuration
+grafana_servers:
+  # IP address of the Grafana server
+  - host: ip_address
+    ...
+    use_vm_as_datasource: true
+```
+
+### Migrate an existing deployment to VictoriaMetrics
+
+The migration process can be performed without affecting running instances. Existing metrics will remain in Prometheus, while new metrics will be written to VictoriaMetrics.
+
+#### Enable VictoriaMetrics remote write
+
+1. Edit the cluster configuration:
+
+    {{< copyable "shell-regular" >}}
+    
+    ```bash
+    tiup cluster edit-config ${cluster-name}
+    ```
+
+2. Under `monitoring_servers`, set `prom_remote_write_to_vm` to `true`:
+
+    ```yaml
+    monitoring_servers:
+      - host: ip_address
+        ...
+        prom_remote_write_to_vm: true
+    ```
+
+3. Reload the updated configuration:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    tiup cluster reload ${cluster-name} -R prometheus
+    ```
+
+#### Switch the default data source to VictoriaMetrics
+
+1. Edit the cluster configuration:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    tiup cluster edit-config ${cluster-name}
+    ```
+
+2. Under `grafana_servers`, set `use_vm_as_datasource` to `true`:
+
+    ```yaml
+    grafana_servers:
+      - host: ip_address
+        ...
+        use_vm_as_datasource: true
+    ```
+
+3. Reload the updated configuration:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    tiup cluster reload ${cluster-name} -R grafana
+    ```
+
+#### (Optional) View historical metrics generated before the switch
+
+If you need to view historical metrics generated before the switch, you can switch the Grafana data source as follows:
+
+1. Edit the cluster configuration:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    tiup cluster edit-config ${cluster-name}
+    ```
+
+2. Comment out `use_vm_as_datasource` under `grafana_servers`:
+
+    ```yaml
+    grafana_servers:
+      - host: ip_address
+        ...
+        # use_vm_as_datasource: true
+    ```
+
+3. Reload the updated configuration:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    tiup cluster reload ${cluster-name} -R grafana
+    ```
+
+4. To switch back to VictoriaMetrics, repeat the steps in "Switch the default data source to VictoriaMetrics".
+
+### Clean up old metrics and services
+
+After confirming that old metrics have expired, you can remove redundant services and files as follows. This will not affect the running cluster.
+
+#### Set Prometheus to agent mode
+
+1. Edit the cluster configuration:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    tiup cluster edit-config ${cluster-name}
+    ```
+
+2. Under `monitoring_servers`, set `enable_prom_agent_mode` to `true`, and ensure `prom_remote_write_to_vm` and `use_vm_as_datasource` are also set correctly:
+
+    ```yaml
+    monitoring_servers:
+      - host: ip_address
+        ...
+        prom_remote_write_to_vm: true
+        enable_prom_agent_mode: true
+    grafana_servers:
+      - host: ip_address
+        ...
+        use_vm_as_datasource: true
+    ```
+
+3. Reload the updated configuration:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    tiup cluster reload ${cluster-name} -R prometheus
+    ```
+
+#### Remove expired data directories
+
+1. Find the `data_dir` of the monitoring server in the configuration file:
+
+    ```yaml
+    monitoring_servers:
+      - host: ip_address
+        ...
+        data_dir: "/tidb-data/prometheus-8249"
+    ```
+
+2. Remove the data directory:
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    rm -rf /tidb-data/prometheus-8249
+    ```
