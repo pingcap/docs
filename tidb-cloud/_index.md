@@ -72,7 +72,7 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [From Amazon Aurora MySQL](https://docs.pingcap.com/tidbcloud/migrate-from-aurora-bulk-import)
 
-[From Amazon S3 or GCS](https://docs.pingcap.com/tidbcloud/migrate-from-amazon-s3-or-gcs)
+[From Amazon RDS for Oracle](https://docs.pingcap.com/tidbcloud/migrate-from-oracle-using-aws-dms)
 
 [From TiDB Self-Managed](https://docs.pingcap.com/tidbcloud/migrate-from-op-tidb)
 
