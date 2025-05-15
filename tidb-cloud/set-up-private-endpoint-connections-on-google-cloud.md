@@ -16,7 +16,7 @@ TiDB Cloud supports highly secure and one-way access to the TiDB Cloud service h
 
 Powered by Google Cloud Private Service Connect, the endpoint connection is secure and private, and does not expose your data to the public internet. In addition, the endpoint connection supports CIDR overlap and is easier for network management.
 
-The architecture of the private endpoint is as follows: [^1]
+The architecture of Google Cloud Private Service Connect is as follows: [^1]
 
 ![Private Service Connect architecture](/media/tidb-cloud/google-cloud-psc-endpoint-overview.png)
 
