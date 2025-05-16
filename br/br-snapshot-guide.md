@@ -258,6 +258,7 @@ When enabled, BR will automatically set `--concurrency` to 1 to reduce the numbe
 > Enabling `--ratelimit` will further reduce backup throughput. In most cases, if you are already performing backups during off-peak hours and have reduced `backup.num-threads` to 1 but still observe backup impact on foreground workloads, it typically indicates that the cluster is approaching its resource limits.
 >
 > In such situations, consider the following alternatives:
+>
 > - [Scale out a cluster](/tiup/tiup-component-cluster-scale-out.md) to increase available resources.
 > - Enable [`Log Backup`](/br/br-log-architecture.md) to offload backup pressure and minimize disruption to online workloads.
 
