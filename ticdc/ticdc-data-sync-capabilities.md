@@ -5,7 +5,7 @@ summary: Learn the TiCDC's data synchronization capabilities.
 
 # TiCDC's Data Synchronization Capability
 
-## Backgroud
+## Background
 
 TiCDC (TiDB Change Data Capture) is a core component for real-time data synchronization in the TiDB ecosystem.
 
