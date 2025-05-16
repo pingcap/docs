@@ -24,7 +24,7 @@ TiCDC (TiDB Change Data Capture) is a core component for real-time data synchron
 
 2. TiCDC does not support synchronizing DQL (Data Query Language) statements, nor does it support synchronizing DCL (Data Control Language) statements.
 
-3. TiCDC supports synchronizing the settings of the index in the upstream table through DDL (`add index`, `create index`), and in order to reduce the impact on the synchronization delay of Changefeed, if the downstream is TiDB, TiCDC will [asynchronously execute the DDL operations of creating and adding indexes](/ticdc/ticdc-ddl.md#asynchronous-execution-of-add-index-and-create-index-ddls).
+3. TiCDC supports synchronizing the settings of the index in the upstream table through DDL (`add index`, `create index`), and to reduce the impact on the synchronization delay of Changefeed, if the downstream is TiDB, TiCDC will [asynchronously execute the DDL operations of creating and adding indexes](/ticdc/ticdc-ddl.md#asynchronous-execution-of-add-index-and-create-index-ddls).
 
 4. For the foreign key constraints set in the table, TiCDC will synchronize the corresponding DDL (`add foreign key`) statements, but TiCDC is not responsible for synchronizing the settings of upstream system variables, such as [foreign_key_checks](/system-variables.md#foreign_key_checks). Therefore, you need to set appropriate system variables in the downstream to determine whether the downstream foreign key constraint check is enabled.
 
