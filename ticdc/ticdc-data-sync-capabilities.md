@@ -14,7 +14,7 @@ TiCDC (TiDB Change Data Capture) is a core component for real-time data synchron
 
 2. TiCDC generates logical operations (such as INSERT/UPDATE/DELETE) that are equivalent to SQL semantics, rather than restoring the original SQL executed upstream one by one. Refer to [TiCDC's Implementation Principles for Processing Data Changes](/ticdc/ticdc-overview.md#implementation-of-processing-data-changes).
 
-3. TiCDC provides the guarantee of eventual consistency of transactions. [redo log](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios) provides the final consistency guarantee in disaster recovery scenarios. [Syncpoint](/ticdc/ticdc-upstream-downstream-check.md#enable-syncpoint) provides consistent snapshot reads and data consistency checks.
+3. TiCDC guarantees eventual consistency of transactions. [redo log](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios) provides the final consistency guarantee in disaster recovery scenarios. [Syncpoint](/ticdc/ticdc-upstream-downstream-check.md#enable-syncpoint) provides consistent snapshot reads and data consistency checks.
 
 4. TiCDC supports synchronizing data to multiple downstreams, including [TiDB and MySQL-compatible databases](/ticdc/ticdc-sink-to-mysql.md), [Kafka](/ticdc/ticdc-sink-to-kafka.md), [Pulsar](/ticdc/ticdc-sink-to-pulsar), [storage services (Amazon S3, GCS, Azure Blob Storage, and NFS)](/ticdc/ticdc-sink-to-cloud-storage.md).
 
