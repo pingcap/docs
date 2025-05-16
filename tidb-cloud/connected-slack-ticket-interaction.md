@@ -5,13 +5,17 @@ summary: Introduces detailed information about the Slack interaction for support
 
 # Interact with Support Tickets via Slack
 
-For customers subscribed to the **Premium** [support plan](/tidb-cloud/connected-care-detail.md), TiDB Cloud provides a ticket bot called **Assist** in [Slack](https://slack.com/), to support more comprehensive interaction and management of support tickets.
+For customers subscribed to the **Premium** [support plan](/tidb-cloud/connected-care-detail.md), TiDB Cloud provides a ticket bot called **PingCAP Support Bot** in [Slack](https://slack.com/), to support more comprehensive interaction and management of support tickets.
 
 > **Note:**
 >
 > The ticket support feature for Slack is available upon request. If you are interested in trying this feature, contact TiDB Cloud support at <a href="mailto:support@pingcap.com">support@pingcap.com</a> or reach out to your Technical Account Manager (TAM).
 
+Use **PingCAP Support Bot** to raise a support ticket in Slack.
+
 [slack-ticket-interaction-creation](/media/tidb-cloud/connected-slack-ticket-interaction-creation.gif)
+
+Reply to support tickets directly in Slack.
 
 [slack-ticket-interaction-reply](/media/tidb-cloud/connected-slack-ticket-interaction-reply.gif)
 
