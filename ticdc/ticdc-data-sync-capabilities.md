@@ -28,4 +28,4 @@ TiCDC (TiDB Change Data Capture) is a core component for real-time data synchron
 
 4. For the foreign key constraints set in the table, TiCDC will synchronize the corresponding DDL (`add foreign key`) statements, but TiCDC is not responsible for synchronizing the settings of upstream system variables, such as [foreign_key_checks](/system-variables.md#foreign_key_checks). Therefore, you need to set appropriate system variables in the downstream to determine whether the downstream foreign key constraint check is enabled.
 
-5. TiCDC only checks the integrity of the upstream changes received internally, and does not participate in checking whether the data changes meet the various downstream constraints. If a data change that does not meet the downstream constraints is encountered, TiCDC will report an error when writing downstream.
+5. TiCDC only checks the integrity of the upstream changes received internally, and does not participate in checking whether the data changes meet the various downstream constraints. If a data change that does not meet the downstream constraints is encountered, TiCDC will report an error when writing to the downstream.
