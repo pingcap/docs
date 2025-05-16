@@ -30,7 +30,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
     <td>The PD microservice mode decouples different functional modules of PD into independent services, improving system scalability, stability, and deployment flexibility. It provides a more robust architectural foundation for large-scale cluster deployments.</td>
   </tr>
     <tr>
-    <td>Point-in-time recovery (PITR) supports recovery from [compacted log backups](/br/br-compact-log-backup.md) for faster restores</td>
+    <td>Point-in-time recovery (PITR) supports recovery from <a href="https://docs.pingcap.com/tidb/dev/br-compact-log-backup/">compacted log backups</a> for faster restores tw@lilin90</td>
     <td>Starting from v9.0.0, the log backup feature provides offline compaction capabilities, converting unstructured log backup data into structured SST files. These SST files can now be restored into the cluster much more quickly than reapplying the original logs, resulting in improved recovery performance.</td>
   </tr>
   <tr>
@@ -40,7 +40,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
   </tr>
   <tr>
     <td rowspan="3">DB Operations and Observability</td>
-    <td>Add the TiDB [Workload Repository](/workload-repository.md) feature to support persisting historical workload data into TiKV</td>
+    <td>Add the <a href="https://docs.pingcap.com/tidb/dev/workload-repository/">TiDB Workload Repository</a> feature to support persisting historical workload data into TiKV tw@lilin90</td>
     <td>TiDB Workload Repository can persist the historical runtime status of the database, significantly improving the efficiency of diagnosing past failures and performance issues. It helps you quickly identify and resolve problems, while also providing critical data for health checks and automatic tuning.</td>
   </tr>
   <tr>
