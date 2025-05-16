@@ -202,7 +202,7 @@ Alternative: If you have already set `backup.num-threads` to a low value (e.g., 
 
 When enabled, BR will automatically set `--concurrency` to 1 to reduce the number of concurrent requests.
 
-> **Note** 
+> **Note:** 
 >
 > Enabling `--ratelimit` will further reduce backup throughput. In most cases, if you are already performing backups during off-peak hours and have reduced `backup.num-threads` to 1 but still observe backup impact on foreground workloads, it typically indicates that the cluster is approaching its resource limits.
 >
