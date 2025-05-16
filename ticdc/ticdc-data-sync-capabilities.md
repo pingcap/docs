@@ -1,6 +1,6 @@
 ---
 title: TiCDC's Data Synchronization Capability
-summary: Learn the TiCDC's data synchronization capabilities.
+summary: Learn TiCDC's data synchronization capabilities.
 ---
 
 # TiCDC's Data Synchronization Capability
