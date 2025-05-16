@@ -30,8 +30,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
     <td>The PD microservice mode decouples different functional modules of PD into independent services, improving system scalability, stability, and deployment flexibility. It provides a more robust architectural foundation for large-scale cluster deployments.</td>
   </tr>
     <tr>
-    <td>Point-In-Time-Recovery (PITR) Now Supports Recovery from Compacted Log Backups for Faster Restores</td>
-    <td>Starting from v9.0.0, the log backup feature provides offline compaction capabilities, converting unstructured log backup data into structured SST files. These SST files can now recovered into the cluster much more quickly than reapplying the original logs, delivering improved recovery performance.</td>
+    <td>Point-in-time recovery (PITR) supports recovery from [compacted log backups](/br/br-compact-log-backup.md) for faster restores</td>
+    <td>Starting from v9.0.0, the log backup feature provides offline compaction capabilities, converting unstructured log backup data into structured SST files. These SST files can now be restored into the cluster much more quickly than reapplying the original logs, resulting in improved recovery performance.</td>
   </tr>
   <tr>
     <td rowspan="1">Reliability and availability</td>
@@ -40,8 +40,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
   </tr>
   <tr>
     <td rowspan="3">DB Operations and Observability</td>
-    <td> TiDB Workload Repository </td>
-    <td>将数据库运行时的历史状态持久化，能够显著提升历史故障和性能问题的诊断效率，帮助用户快速定位并优化问题，同时为健康检查和自动调优提供关键的数据基础。</td>
+    <td>Add the TiDB [Workload Repository](/workload-repository.md) feature to support persisting historical workload data into TiKV</td>
+    <td>TiDB Workload Repository can persist the historical runtime status of the database, significantly improving the efficiency of diagnosing past failures and performance issues. It helps you quickly identify and resolve problems, while also providing critical data for health checks and automatic tuning.</td>
   </tr>
   <tr>
     <td>TiDB Index Advisor tw@Oreoxmt</td>
