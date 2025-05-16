@@ -51,17 +51,99 @@ You can create up to 200 migration jobs for each organization. To create more mi
 
 ## Prerequisites
 
-Before migrating, check supported data sources, set up network connections, and prepare privileges for the MySQL source and target TiDB Cloud cluster databases.
+Before migrating, check supported data sources, enable binary logging in your MySQL source, ensure network connectivity, and prepare appropriate privileges for both the MySQL source and target TiDB Cloud cluster databases.
 
 ### Make sure your data source and version are supported
 
 Data Migration supports the following data sources and versions:
 
-- Self-managed MySQL instances MySQL 8.0, 5.7, and 5.6 local instances or on a public cloud provider. 
-- Amazon Aurora MySQL (8.0, 5.7, and 5.6)
-- Amazon RDS MySQL (8.0, and 5.7)
-- Azure Database for MySQL flexible servers (8.0, and 5.7)
-- Google Cloud SQL for MySQL (8.0, 5.7, and 5.6)
+| Data Source | Supported Versions |
+|:------------|:-------------------|
+| Self-managed MySQL (on-prem or public cloud) | 8.0, 5.7, 5.6 |
+| Amazon Aurora MySQL | 8.0, 5.7, 5.6 |
+| Amazon RDS MySQL | 8.0, 5.7 |
+| Azure Database for MySQL Flexible Servers | 8.0, 5.7 |
+| Google Cloud SQL for MySQL | 8.0, 5.7, 5.6 |
+
+### Enable binary logs in the source MySQL database for replication
+
+To enable replication from the source MySQL database to the TiDB Cloud target cluster using DM for continuously capturing incremental changes, you need these MySQL configurations:
+
+| Configuration | Required value | Why |
+|:--------------|:---------------|:----|
+| `log_bin` | `ON` | Enables binary logging that DM reads to replay changes in TiDB |
+| `binlog_format` | `ROW` | Captures all data changes accurately (other formats miss edge cases) |
+| `binlog_row_image` | `FULL` | Includes all column values in events for safe conflict resolution |
+| `binlog_expire_logs_seconds` | ≥ `86400` (1 day), `604800` (7 days, recommended) | Ensures DM can access consecutive logs during migration |
+
+#### Check current values and configure the source MySQL instance
+
+To confirm the current configurations, connect to the source MySQL instance and run:
+
+```sql
+SHOW VARIABLES WHERE Variable_name IN 
+('log_bin','server_id','binlog_format','binlog_row_image',
+'binlog_expire_logs_seconds','expire_logs_days');
+```
+
+If necessary, change the source MySQL instance configurations to match the requirements.
+
+<details>
+<summary> Configure a self‑managed MySQL instance </summary>
+
+1. Open `/etc/my.cnf` and add:
+
+    ```toml
+    [mysqld]
+    log_bin = mysql-bin
+    binlog_format = ROW
+    binlog_row_image = FULL
+    binlog_expire_logs_seconds = 604800   # 7 days retention
+    ```
+
+2. Restart: `sudo systemctl restart mysqld`
+
+3. Run the `SHOW VARIABLES` query again to verify that the settings took effect.
+
+For detailed instructions, see [MySQL Server System Variables documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html) and [The Binary Log](https://dev.mysql.com/doc/refman/8.0/en/binary-log.html) in the MySQL Reference Manual.
+
+</details>
+
+<details>
+<summary> Configure AWS RDS or Aurora MySQL </summary>
+
+1. In the AWS console, open RDS, Parameter groups, and create (or edit) a custom parameter group.
+2. Set the four parameters above to the required values.
+3. Attach the parameter group to your instance/cluster and reboot to apply changes.
+4. After the reboot, connect and run the `SHOW VARIABLES` query to confirm.
+
+For detailed instructions, see [Working with DB Parameter Groups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html) and [Configuring MySQL Binary Logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html) in the AWS documentation.
+
+</details>
+
+<details>
+<summary> Configure Azure Database for MySQL ‑ Flexible Server </summary>
+
+1. In the Azure portal, open MySQL Flexible Server, Server parameters.
+2. Search for each setting and update the values.
+Most changes apply without a restart; the portal indicates if a reboot is needed.
+3. Verify with the `SHOW VARIABLES` query.
+
+For detailed instructions, see [Server Parameters in Azure Database for MySQL - Flexible Server](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/concepts-server-parameters) in the Microsoft Azure documentation.
+
+</details>
+
+<details>
+<summary> Configure Google Cloud SQL for MySQL </summary>
+
+1. In the Google Cloud console, go to Cloud SQL, `<your_instance>`, Flags.
+2. Add or edit the necessary flags (`log_bin`, `binlog_format`, `binlog_row_image`, `binlog_expire_logs_seconds`).
+3. Click Save. Cloud SQL prompts a restart if required.
+4. After Cloud SQL restarts, run the `SHOW VARIABLES` query to confirm.
+
+For detailed instructions, see [Configure database flags](https://cloud.google.com/sql/docs/mysql/flags) and [Use point-in-time recovery](https://cloud.google.com/sql/docs/mysql/backup-recovery/pitr) in the Google Cloud documentation.
+
+</details>
 
 ### Ensure network connectivity
 
@@ -92,14 +174,14 @@ In any case, TLS/SSL is highly recommended for end-to-end encryption. Private 
 
 #### Public Endpoints / IPs
 
-- If you use a Public Endpoint for your source MySQL database, get its IP address or Hostname (FQDN) and make sure that it can be connected through the public network. You may also need to configure firewall rules or security groups accordingly to your cloud provider guides.
+If you use a Public Endpoint for your source MySQL database, ensure you can connect to it via the public internet. You may also need to configure firewall rules or security groups accordingly to your cloud provider guides.
 
-- Identify and record the source MySQL instance endpoint hostname (FQDN) or public IP.  
-- Add the TiDB Cloud DM egress IP range to the database's firewall/security‑group rules. See your provider’s docs for:
+1. Identify and record the source MySQL instance endpoint hostname (FQDN) or public IP.
+2. If necessary, add the TiDB Cloud DM egress IP range to the database's firewall/security‑group rules. See your provider’s docs for:
     - [AWS RDS / Aurora VPC security groups](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Overview.RDSSecurityGroups.html).
     - [Azure Database for MySQL Flexible Server Public Network Access](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/concepts-networking-public)
     - [Cloud SQL Authorized Networks](https://cloud.google.com/sql/docs/mysql/configure-ip#authorized-networks).
-- Verify connectivity from your machine with public internet access using the certificates:
+3. Verify connectivity from your machine with public internet access using the certificate for in-transit encryption:
 
     ```shell
     mysql -h <public‑host> -P <port> -u <user> -p --ssl-ca=<path-to-provider-ca.pem> -e "SELECT version();"
@@ -148,7 +230,9 @@ For detailed instructions, see [Azure guide to create a private endpoint via Pri
 
 </details>
 
-- If you use AWS VPC Peering or Google Cloud VPC Network Peering, see the following instructions to configure the network.
+#### VPC Peering
+
+If you use AWS VPC Peering or Google Cloud VPC Network Peering, see the following instructions to configure the network.
 
 <details>
 <summary> Set up AWS VPC Peering</summary>
@@ -183,117 +267,51 @@ If your MySQL service is in a Google Cloud VPC, take the following steps:
 
 </details>
 
-### Grant required privileges in the source MySQL database
+### Grant required privileges for migration
 
-The username you use for migration in the source database must have all the following privileges:
+Before starting migration, you need to set up appropriate database users with the correct privileges on both source and target databases. These privileges enable TiDB Cloud DM to read data from MySQL, replicate changes, and write to your TiDB Cloud cluster securely. Since migration involves both full data dumps and binlog replication for incremental changes, your migration user requires specific permissions beyond basic read access.
 
-| Privilege | Scope |
-|:----|:----|
-| `SELECT` | Tables |
-| `LOCK` | Tables |
-| `REPLICATION SLAVE` | Global |
-| `REPLICATION CLIENT` | Global |
+#### Grant required privileges to the migration user in the source MySQL database
 
-For example, you can use the following `GRANT` statement to grant corresponding privileges:
+For testing purposes, you can use an administrative user (e.g., `root`) in your source MySQL database.
+
+For production workloads, it is recommended to have a dedicated user for data dump and replication in the source MySQL database, and grant only the necessary privileges:
+
+| Privilege | Scope | Purpose |
+|:----------|:------|:--------|
+| `SELECT` | Tables | Allows reading data from all tables |
+| `LOCK TABLES` | Tables | Ensures consistent snapshots during full dump |
+| `REPLICATION SLAVE` | Global | Enables binlog streaming for incremental replication |
+| `REPLICATION CLIENT` | Global | Provides access to binlog position and server status |
+
+For example, you can use the following `GRANT` statement in your source MySQL instance to grant corresponding privileges:
 
 ```sql
-GRANT SELECT, LOCK TABLES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'your_user'@'your_IP_address_of_host'
+GRANT SELECT, LOCK TABLES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'dm_source_user'@'%';
 ```
 
-### Grant required privileges in the target TiDB Cloud cluster
+#### Grant required privileges in the target TiDB Cloud cluster
 
-The username you use for the migration in the target TiDB Cloud cluster must have the following privileges:
+For testing purposes, you can use the `root` account of the TiDB Cloud cluster.
 
-| Privilege | Scope |
-|:----|:----|
-| `CREATE` | Databases, Tables |
-| `SELECT` | Tables |
-| `INSERT` | Tables |
-| `UPDATE` | Tables |
-| `DELETE` | Tables |
-| `ALTER`  | Tables |
-| `DROP`   | Databases, Tables |
-| `INDEX`  | Tables |
+For production workloads, it is recommended to have a dedicated user for replication in the target TiDB Cloud cluster and grant only the necessary privileges:
+
+| Privilege | Scope | Purpose |
+|:----------|:------|:--------|
+| `CREATE` | Databases, Tables | Creates schema objects in the target | 
+| `SELECT` | Tables | Verifies data during migration |
+| `INSERT` | Tables | Writes migrated data |
+| `UPDATE` | Tables | Modifies existing rows during incremental replication |
+| `DELETE` | Tables | Removes rows during replication or updates |
+| `ALTER`  | Tables | Modifies table definitions when schema changes |
+| `DROP`   | Databases, Tables | Removes objects during schema sync |
+| `INDEX`  | Tables | Creates and modifies indexes |
 
 For example, you can execute the following `GRANT` statement to grant corresponding privileges:
 
 ```sql
-GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX ON *.* TO 'your_user'@'your_IP_address_of_host'
+GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX ON *.* TO 'dm_target_user'@'%';
 ```
-
-To quickly test a migration job, you can use the `root` account of the TiDB Cloud cluster. The MySQL user hostname part also needs to allow connections from the TiDB Cloud DM service, and you can use `%` for simplification.
-
-### Enable binary logs for replication
-
-To enable replication from the source MySQL database to the TiDB Cloud target cluster using DM for continuously capturing incremental changes, you need these MySQL configurations:
-
-| Configuration | Required value | Why |
-|:--------------|:---------------|:----|
-| `log_bin` | `ON` | Enables binary logging that DM reads to replay changes in TiDB |
-| `binlog_format` | `ROW` | Captures all data changes accurately (other formats miss edge cases) |
-| `binlog_row_image` | `FULL` | Includes all column values in events for safe conflict resolution |
-| `binlog_expire_logs_seconds` | ≥ 86400 (1 day), 604800 (7 days) recommended | Ensures DM can access consecutive logs during migration |
-
-#### Check current values and configure the source MySQL instance
-
-To confirm the current configurations, connect to the source MySQL instance and run:
-
-```sql
-SHOW VARIABLES WHERE Variable_name IN 
-('log_bin','server_id','binlog_format','binlog_row_image',
-'binlog_expire_logs_seconds','expire_logs_days');
-```
-
-If necessary, change the source MySQL instance configurations to match the requirements.
-
-<details>
-<summary> Configure a self‑managed MySQL instance </summary>
-
-1. Open `/etc/my.cnf` and add:
-
-    ```toml
-    [mysqld]
-    log_bin = mysql-bin
-    binlog_format = ROW
-    binlog_row_image = FULL
-    binlog_expire_logs_seconds = 604800   # 7 days retention
-    ```
-
-2. Restart: `sudo systemctl restart mysqld`
-
-3. Run the `SHOW VARIABLES` query again to verify that the settings took effect.
-
-</details>
-
-<details>
-<summary> Configure AWS RDS or Aurora MySQL </summary>
-
-1. In the AWS console, open RDS, Parameter groups, and create (or edit) a custom parameter group.
-2. Set the four parameters above to the required values.
-3. Attach the parameter group to your instance/cluster and reboot to apply changes.
-4. After the reboot, connect and run the `SHOW VARIABLES` query to confirm.
-
-</details>
-
-<details>
-<summary> Configure Azure Database for MySQL ‑ Flexible Server </summary>
-
-1. In the Azure portal, open MySQL Flexible Server, Server parameters.
-2. Search for each setting and update the values.
-Most changes apply without restart; the portal indicates if a reboot is needed.
-3. Verify with the `SHOW VARIABLES` query.
-
-</details>
-
-<details>
-<summary> Configure Google Cloud SQL for MySQL </summary>
-
-1. In the Google Cloud console, go to Cloud SQL, `<your_instance>`, Flags.
-2. Add or edit the necessary flags (`log_bin`, `binlog_format`, `binlog_row_image`, `binlog_expire_logs_seconds`).
-3. Click Save. Cloud SQL prompts a restart if required.
-4. After Cloud SQL restarts, run the `SHOW VARIABLES` query to confirm.
-
-</details>
 
 ## Step 1: Go to the **Data Migration** page
 
@@ -307,9 +325,9 @@ Most changes apply without restart; the portal indicates if a reboot is needed.
 
 3. On the **Data Migration** page, click **Create Migration Job** in the upper-right corner. The **Create Migration Job** page is displayed.
 
-## Step 2: Configure the source and target connection
+## Step 2: Configure the source and target connections
 
-On the **Create Migration Job** page, configure the source and target connection.
+On the **Create Migration Job** page, configure the source and target connections.
 
 1. Enter a job name, which must start with a letter and must be less than 60 characters. Letters (A-Z, a-z), numbers (0-9), underscores (_), and hyphens (-) are acceptable.
 
@@ -394,12 +412,12 @@ For detailed instructions about incremental data migration, see [Migrate Only In
 
         <img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/migration-job-select-db.png" width="60%" />
 
-    - If you click **Customize** and select some tables under a dataset name, the migration job only will migrate the existing data and migrate ongoing changes of the selected tables. Tables created afterwards in the same database will not be migrated.
+    - If you click **Customize** and select some tables under a dataset name, the migration job will only migrate the existing data and migrate ongoing changes of the selected tables. Tables created afterwards in the same database will not be migrated.
 
         <img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/migration-job-select-tables.png" width="60%" />
 
     <!--
-    - If you click **Customize** and select some databases, and then select some tables in the **Selected Objects** area to move them back to the **Source Database** area, (for example the `username` table in the following screenshots), then the tables will be treated as in a blocklist. The migration job will migrate the existing data but filter out the excluded tables (such as the `username` table in the screenshots), and will migrate ongoing changes of the selected databases to TiDB Cloud except the filtered-out tables.
+    - If you click **Customize** and select some databases, and then select some tables in the **Selected Objects** area to move them back to the **Source Database** area, (for example the `username` table in the following screenshots), then the tables will be treated as in a blocklist. The migration job will migrate the existing data but filter out the excluded tables (such as the `username` table in the screenshots), and will migrate ongoing changes of the selected databases to TiDB Cloud, except the filtered-out tables.
         ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist1.png)
         ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist2.png)
     -->
@@ -440,7 +458,7 @@ If you encounter any problems during the migration, see [Migration errors and so
 
 TiDB Cloud supports scaling up or down a migration job specification to meet your performance and cost requirements in different scenarios.
 
-Different migration specifications have different performances. Your performance requirements might vary at different stages as well. For example, during the existing data migration, you want the performance to be as fast as possible, so you choose a migration job with a large specification, such as 8 RCU. Once the existing data migration is completed, the incremental migration does not require such a high performance, so you can scale down the job specification, for example, from 8 RCU to 2 RUC, to save cost.
+Different migration specifications have different performances. Your performance requirements might vary at different stages as well. For example, during the existing data migration, you want the performance to be as fast as possible, so you choose a migration job with a large specification, such as 8 RCU. Once the existing data migration is completed, the incremental migration does not require such a high performance, so you can scale down the job specification, for example, from 8 RCU to 2 RCU, to save cost.
 
 When scaling a migration job specification, note the following:
 
