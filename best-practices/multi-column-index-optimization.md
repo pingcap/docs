@@ -48,7 +48,7 @@ To optimize this query, you can create a multi-column index on `city`, `bedrooms
 CREATE INDEX idx_city_bedrooms_price ON listings (city, bedrooms, price);
 ```
 
-Multi-column indexes in SQL are lexicographically ordered, meaning they are sorted first by `city`, then by `bedrooms` within each city, and finally by `price` within each city-bedroom combination. This ordering allows TiDB to efficiently access rows based on each condition:
+Multi-column indexes in SQL are lexicographically ordered, meaning they are sorted first by the values of `city`, then by the values of `bedrooms` within each city, and finally by the values of `price` within each city-bedroom combination. This ordering allows TiDB to efficiently access rows based on each condition:
 
 1. Filtering by `city` as the primary filter.
 2. Optionally filtering by `bedrooms` within that city.
