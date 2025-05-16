@@ -1,9 +1,9 @@
 ---
-title: Advanced Multi-Column Index Optimization
+title: Use Multi-Column Index to Optimize Queries
 summary: Learn how to use multi-column indexes effectively in TiDB and understand advanced optimization techniques.
 ---
 
-# Advanced Multi-Column Index Optimization
+# Use Multi-Column Index to Optimize Queries
 
 In today's data-driven world, efficiently handling complex queries on large datasets is critical to keeping applications responsive and performant. For TiDB, a distributed SQL database designed to manage high-scale, high-demand environments, optimizing data access paths is essential to delivering smooth, efficient queries. Indexes are a powerful tool for improving query performance by avoiding the need to scan all rows in a table. TiDB's query optimizer leverages multi-column indexes to intelligently filter data, handling complex query conditions that traditional databases such as MySQL cannot process as effectively. 
 
@@ -111,7 +111,7 @@ By using a multi-column index, TiDB avoids unnecessary row scanning and signific
 
 ## Index range derivation
 
-The TiDB optimizer includes a powerful range derivation component. It is designed to take a query's conditions and relevant index columns and generate efficient index ranges for table access. This derived range then feeds into TiDB’s table access component, which determines the most resource-efficient way to access the table.
+The TiDB optimizer includes a powerful range derivation component. It is designed to take a query's conditions and relevant index columns and generate efficient index ranges for table access. This derived range then feeds into TiDB's table access component, which determines the most resource-efficient way to access the table.
 
 For each table in a query, the table access component evaluates all applicable indexes to identify the optimal access method—whether through a full table scan or an index scan. It calculates the range for each relevant index, assesses the access cost, and selects the path with the lowest cost. This process combines range derivation with a cost assessment subsystem to find the most efficient way to retrieve data, balancing performance and resource usage.
 
