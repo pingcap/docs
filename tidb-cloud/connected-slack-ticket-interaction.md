@@ -11,17 +11,17 @@ For customers subscribed to the **Premium** [support plan](/tidb-cloud/connected
 >
 > The ticket support feature for Slack is available upon request. If you are interested in trying this feature, contact TiDB Cloud support at <a href="mailto:support@pingcap.com">support@pingcap.com</a> or reach out to your Technical Account Manager (TAM).
 
-Use **PingCAP Support Bot** to raise a support ticket in Slack.
+You can use **PingCAP Support Bot** to create a support ticket in Slack:
 
-[slack-ticket-interaction-creation](/media/tidb-cloud/connected-slack-ticket-interaction-creation.gif)
+![Create a support ticket in Slack](/media/tidb-cloud/connected-slack-ticket-interaction-creation.gif)
 
-Reply to support tickets directly in Slack.
+You can also reply to the support ticket directly in Slack:
 
-[slack-ticket-interaction-reply](/media/tidb-cloud/connected-slack-ticket-interaction-reply.gif)
+![Reply to a support ticket in Slack](/media/tidb-cloud/connected-slack-ticket-interaction-reply.gif)
 
 ## Interact with support tickets
 
-In the Slack support channel, you only need to mention **PingCAP Support Bot** and describe the problem in a message. Then, the Bot will send you a message with a **Raise request** button.
+In the Slack support channel, you only need to mention **PingCAP Support Bot** and describe the problem in a message. Then, the bot will send you a message with a **Raise request** button.
 
 ![slack-ticket-interaction-1](/media/tidb-cloud/connected-slack-ticket-interaction-1.png)
 
@@ -29,7 +29,7 @@ Click **Raise request** to open a form, fill it out according to the problem, an
 
 ![slack-ticket-interaction-2](/media/tidb-cloud/connected-slack-ticket-interaction-2.png)
 
-After submission, the Bot will send a confirmation message in the thread, which includes the ticket link.
+After submission, the bot will send a confirmation message in the thread, which includes the ticket link.
 
 ![slack-ticket-interaction-3](/media/tidb-cloud/connected-slack-ticket-interaction-3.png)
 
