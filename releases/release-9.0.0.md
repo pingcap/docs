@@ -12,7 +12,7 @@ Release date: xx xx, 2025
 TiDB version: 9.0.0
 
 <!--
-2052Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v9.0/production-deployment-using-tiup)
+Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v9.0/production-deployment-using-tiup)
 -->
 
 9.0.0 introduces the following key features and improvements:
