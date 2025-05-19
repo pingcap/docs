@@ -194,7 +194,7 @@ The steps vary depending on the connectivity method you select.
 9. Enable the **TLS Encryption** option if your Kafka has enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
 10. Click **Next** to test the network connection. If the test succeeds, you will be directed to the next page.
 11. TiDB Cloud creates the endpoint for **Private Link**, which might take several minutes.
-12. Once the endpoint is created, log in to your cloud provider console and accept the connection request.
+12. Once the endpoint is created, log in to the [Azure portal](https://portal.azure.com/) and accept the connection request.
 13. Return to the [TiDB Cloud console](https://tidbcloud.com) to confirm that you have accepted the connection request. TiDB Cloud will test the connection and proceed to the next page if the test succeeds.
 
 </div>
