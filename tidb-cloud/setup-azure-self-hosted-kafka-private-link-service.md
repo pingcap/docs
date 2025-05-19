@@ -309,7 +309,7 @@ After the deployment of your virtual machine is completed, take the following st
     consume_messages
     ```
 
-4. Execute `produce.sh` and `consume.sh` to verify that the Kafka cluster is running. These scripts will also be reused later to test network connectivity. The `produce.sh` script will create a topic with `--partitions 3 --replication-factor 3`. Ensure that all these three brokers contain data. Ensure that the script will connect to all three brokers to guarantee that network connection will be tested.
+4. Run the `produce.sh` and `consume.sh` scripts. These scripts automatically test connectivity and message flow to verify that the Kafka cluster is functioning correctly. The `produce.sh` script creates a topic with `--partitions 3 --replication-factor 3`, sends test messages, and connects to all three brokers using the `--broker-list` parameter. The `consume.sh` script reads messages from the topic to confirm successful message delivery.
 
     ```shell
     # Test write message.
