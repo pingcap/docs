@@ -314,8 +314,10 @@ TiDB version: 9.0.0
 | TiKV | [`storage.max-ts.cache-sync-interval`](/tikv-configuration-file.md#cache-sync-interval-new-in-v900) | Newly added | Controls the interval at which TiKV updates its local PD TSO cache. The default value is `"15s"`. |
 | TiKV | [`storage.max-ts.max-drift`](/tikv-configuration-file.md#max-drift-new-in-v900) | Newly added | Specifies the maximum time by which the timestamp of a read or write request can exceed the PD TSO cached in TiKV. The default value is `"60s"`. |
 | TiFlash| [`format_version`](/tiflash/tiflash-configuration.md#format_version) | Modified | Changes the default value from `7` to `8`, which means the default DTFile file format for v9.0.0 or a later version is `8`. This new format supports a new string serialization scheme that improves string read and write performance. |
+<!--
 | TiCDC | [`newarch`](/ticdc/ticdc-server-config.md#newarch) | Newly added | Controls whether to enable the [TiCDC new architecture](/ticdc/ticdc-new-arch.md). By default, `newarch` is not specified, indicating that the old architecture is used. `newarch` applies only to the new architecture. If `newarch` is added to the configuration file of the TiCDC old architecture, it might cause parsing failures. |
-<!--| BR | [`--checkpoint-storage`](/br/br-checkpoint-restore.md#implementation-details-store-checkpoint-data-in-the-external-storage) | Newly added | Specifies the external storage for BR to store checkpoint data. | -->
+| BR | [`--checkpoint-storage`](/br/br-checkpoint-restore.md#implementation-details-store-checkpoint-data-in-the-external-storage) | Newly added | Specifies the external storage for BR to store checkpoint data. | 
+-->
 | DM | [`redact-info-log`](/dm/dm-worker-configuration-file.md#redact-info-log-new-in-v900) | Newly added | Controls whether to enable DM log redaction. |
 | TiProxy | [`enable-traffic-replay`](/tiproxy/tiproxy-configuration.md#enable-traffic-replay)  | Newly added | Specifies whether to enable [traffic replay](/tiproxy/tiproxy-traffic-replay.md). If it is set to `false`, traffic capture and replay operations will result in errors. |
 | TiProxy | [`encryption-key-path`](/tiproxy/tiproxy-configuration.md#encryption-key-path)  | Newly added | Specifies the file path of the key used to encrypt the traffic files during traffic capture. |
