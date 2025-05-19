@@ -462,7 +462,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
     2. Rule 2
 
-        - **Name**: `rule1`
+        - **Name**: `rule2`
         - **IP version**: `IPv4`
         - **Frontend IP address**: `kafka-lb-ip`
         - **Backend pool**: `pool1`
@@ -476,7 +476,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
     3. Rule 3
 
-        - **Name**: `rule1`
+        - **Name**: `rule3`
         - **IP version**: `IPv4`
         - **Frontend IP address**: `kafka-lb-ip`
         - **Backend pool**: `pool1`
