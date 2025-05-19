@@ -28,7 +28,7 @@ TiDB version: 9.0.0
 <tbody>
   <tr>
     <td rowspan="2">Scalability and Performance</td>
-    <td>[The microservice mode](/pd-microservices.md) supported by PD is generally available (GA) (introduced in v8.0.0)</td>
+    <td>a href="https://docs.pingcap.com/tidb/dev/pd-microservices/">The microservice mode</a> supported by PD is generally available (GA) (introduced in v8.0.0)</td>
     <td>The PD microservice mode decouples different functional modules of PD into independent services, improving system scalability, stability, and deployment flexibility. It provides a more robust architectural foundation for large-scale cluster deployments.</td>
   </tr>
     <tr>
@@ -37,7 +37,7 @@ TiDB version: 9.0.0
   </tr>
   <tr>
     <td rowspan="1">Reliability and availability</td>
-    <td>TiProxy traffic replay feature is generally available (GA) (introduced in v8.4.0)</td>
+    <td><a href="https://docs.pingcap.com/tidb/dev/tiproxy-traffic-replay/">The TiProxy traffic replay feature</a> is generally available (GA) (introduced in v8.4.0)</td>
     <td>Before performing critical operations such as cluster upgrades, migrations, or deployment changes, use TiProxy to capture the real workload from the production TiDB cluster and replay it on the target test cluster. It helps validate performance and ensure the success of the changes.</td>
   </tr>
   <tr>
