@@ -1,6 +1,7 @@
 ---
 title: Set Up Self-Hosted Kafka Private Link Service in AWS
 summary: This document explains how to set up Private Link service for self-hosted Kafka in AWS and how to make it work with TiDB Cloud.
+aliases: ['/tidbcloud/setup-self-hosted-kafka-private-link-service']
 ---
 
 # Set Up Self-Hosted Kafka Private Link Service in AWS
