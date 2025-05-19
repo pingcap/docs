@@ -60,7 +60,7 @@ TiDB version: 9.0.0
   </tr>
   <tr>
     <td>TiDB Lightning supports compatibility with <code>sql_require_primary_key=ON</code> in TiDB tw@Oreoxmt</td>
-    <td>When the <code>sql_require_primary_key=ON</code> system variable is enabled in TiDB, the internal error log table now includes a primary key to prevent table creation failures during import.</td>
+    <td>When the <code>sql_require_primary_key</code> system variable is enabled in TiDB, TiDB Lightning automatically adds a default primary key to its internal error-logging and conflict-detection tables during data import to prevent table creation failures.</td>
   </tr>
   <tr>
     <td>Migrate sync-diff-inspector from <code>pingcap/tidb-tools</code> to <code>pingcap/tiflow</code> repository tw@Oreoxmt</td>
