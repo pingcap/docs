@@ -52,7 +52,7 @@ Currently, the TiDB Node Group feature is free of charge. The following are limi
 - By default, you can create up to five TiDB node groups for a TiDB Cloud Dedicated cluster. If you need more groups, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). 
 - Each TiDB node group must contain at least one TiDB node. While there is no limit to the number of nodes in a group, the total number of TiDB nodes in a TiDB Cloud Dedicated cluster must not exceed 150.
 - Backend-triggered auto statistics collection tasks cannot be isolated within individual TiDB Node Groups. These operations are always executed on the TiDB owner node, irrespective of Node Group boundaries.
-- For TiDB clusters running versions below 8.1.2, ADD INDEX tasks cannot be isolated within individual TiDB Node Groups. These operations will affect the entire cluster during execution.
+- For TiDB clusters running versions below 8.1.2, ADD INDEX tasks cannot be isolated within individual TiDB Node Groups. These operations are always executed on the TiDB owner node, irrespective of Node Group boundaries.
 
 ## SLA impact
 
