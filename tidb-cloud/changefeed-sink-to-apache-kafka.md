@@ -115,7 +115,7 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
-3. Click **Create Changefeed**, and select **Kafka** as **Target Type**.
+3. Click **Create Changefeed**, and select **Kafka** as **Destination**.
 
 ## Step 2. Configure the changefeed target
 
