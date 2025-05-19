@@ -34,12 +34,12 @@ The document provides an example of connecting to a Kafka Private Link service i
 
 3. Get the Kafka deployment information from your [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster.
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Changefeed** in the left navigation pane.
-    2. On the overview page, find the region of the TiDB cluster. Ensure that your Kafka cluster will be deployed to the same region.
-    3. Click **Create Changefeed**.
-        1. In **Target Type**, select **Kafka**.
+    1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+    2. In the left navigation pane, click **Changefeed**.
+    3. On the **Changefeed** page, click **Create Changefeed** in the upper-right corner.
+        1. In **Destination**, select **Kafka**.
         2. In **Connectivity Method**, select **Private Link**.
-    4. Note down the information of the TiDB Cloud Azure account in **Reminders before proceeding**. You will use it to authorize TiDB Cloud to access the Kafka Private Link service.
+    4. Note down the region information and the subscription of the TiDB Cloud Azure account in **Reminders before proceeding**. You will use it to authorize TiDB Cloud to access the Kafka Private Link service.
     5. Enter a unique **Kafka Advertised Listener Pattern** for your Kafka Private Link service.
         1. Input a unique random string. It can only include numbers or lowercase letters. You will use it to generate **Kafka Advertised Listener Pattern** later.
         2. Click **Check usage and generate** to check if the random string is unique and generate **Kafka Advertised Listener Pattern** that will be used to assemble the EXTERNAL advertised listener for Kafka brokers. 
@@ -50,9 +50,9 @@ The following table shows an example of the deployment information.
 
 | Information     | Value    | Note    | 
 |--------|-----------------|---------------------------|
-| Region    | Virginia (`eastus`)    |  N/A |
-| Subscription of TiDB Cloud Azure Account | `99549169-6cee-4263-8491-924a3011ee31`     |    N/A  |
-| Kafka Advertised Listener Pattern  | The unique random string: `abc` <br/> Generated pattern: &lt;broker_id&gt;.abc.eastus.azure.3199745.tidbcloud.com:&lt;port&gt; |
+| Region | Virginia (`eastus`) | N/A |
+| Subscription of TiDB Cloud Azure account | `99549169-6cee-4263-8491-924a3011ee31` | N/A |
+| Kafka Advertised Listener Pattern | The unique random string: `abc` | Generated pattern: `<broker_id>.abc.eastus.azure.3199745.tidbcloud.com:<port>`; |
 
 ## Step 1. Set up a Kafka cluster
 
@@ -64,32 +64,32 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
 
 #### 1. Set up the Kafka virtual network
 
-1. Go to [Azure Portal > Home > Virtual networks](https://portal.azure.com/#browse/Microsoft.Network%2FvirtualNetworks), click **Create**.
-2. In **Basics** tab
-    1. Select your "Subscription", "Resource group" and "Region".
-    2. Enter "Virtual network name", for example `kafka-pls-vnet`.
-3. In **Security** tab, enable Azure Bastion
-4. In **IP addresses** tab, do the following:
-    1. Set address space, for example, `10.0.0.0/16`.
-    2. Create a subnet for brokers:
-        - **Name**: brokers-subnet
-        - **IP address range**: 10.0.0.0 - 10.0.0.255
-        - **Size**: /24
-    3. An AzureBastionSubnet will be created by default.
-5. Click **Review + create**. Verify the information.
+1. Log in to the [Azure portal](https://portal.azure.com/), go to the [Virtual networks](https://portal.azure.com/#browse/Microsoft.Network%2FvirtualNetworks) page, and then click **+ Create** to create a virtual network.
+2. In the **Basic** tab, select your **Subscription**, **Resource group**, and **Region**, enter a name (for example, `kafka-pls-vnet`) in the **Virtual network name** field, and then click **Next**.
+3. In the **Security** tab, enable Azure Bastion, and then click **Next**.
+4. In the **IP addresses** tab, do the following:
+
+    1. Set the address space of your virtual network, for example, `10.0.0.0/16`.
+    2. Click **Add a subnet** to create a subnet for brokers, fill in the following information, and then click **Add**.
+        - **Name**: `brokers-subnet`
+        - **IP address range**: `10.0.0.0 - 10.0.0.255`
+        - **Size**: `/24 (256 addresses)`
+
+        An `AzureBastionSubnet` will be created by default.
+
+5. Click **Review + create** to verify the information.
 6. Click **Create**.
 
 #### 2. Set up Kafka brokers
 
 **2.1. Create broker nodes**
 
-1. Go to [Azure Portal > Home > Virtual machines](https://portal.azure.com/#browse/Microsoft.Compute%2FVirtualMachines), click **Create**, and select **Azure virtual machine**.
-2. In the **Basics** tab, fill parameters as following:
-    - Select your "Subscription", "Resource group" and "Region".
+1. Log in to the [Azure portal](https://portal.azure.com/), go to the [Virtual machines](https://portal.azure.com/#view/Microsoft_Azure_ComputeHub/ComputeHubMenuBlade/~/virtualMachinesBrowse) page, click **+ Create**, and then select **Azure virtual machine**.
+2. In the **Basic** tab, select your **Subscription**, **Resource group**, and **Region**, fill in the following information, and then click **Next : Disks**.
     - **Virtual machine name**: `broker-node`
     - **Availability options**: `Availability zone`
     - **Zone options**: `Self-selected zone`
-    - **Availability zone**: `Zone 1, Zone 2, Zone 3`
+    - **Availability zone**: `Zone 1`, `Zone 2`, `Zone 3`
     - **Image**: `Ubuntu Server 24.04 LTS - x64 Gen2`
     - **VM architecture:** `x64`
     - **Size**: `Standard_D2s_v3` 
@@ -99,31 +99,34 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
     - **Key pair name**: `kafka_broker_key`
     - **Public inbound ports**: `Allow selected ports`
     - **Select inbound ports**: `SSH (22)`
-3. In the **Networking** tab, fill in the parameters as following:
+3. Click **Next : Networking**, and then fill in the following information in the **Networking** tab:
     - **Virtual network**: `kafka-pls-vnet`
     - **Subnet**: `brokers-subnet`
     - **Public IP**: `None`
     - **NIC network security group**: `Basic`
-    - **Public inbound ports**: `SSH (22)`
+    - **Public inbound ports**: `Allow selected ports`
+    - Select inbound ports: `SSH (22)`
     - **Load balancing options**: `None`
-4. Click **Review + create**. Verify the information.
-5. Click **Create**. A popup for "Generate new key pair" appears.
-6. Click **Download private key and create resource** to download the private key to your local machine. You can see the progress of virtual machines creation.
+4. Click **Review + create** to verify the information.
+5. Click **Create**. A **Generate new key pair** message is displayed.
+6. Click **Download private key and create resource** to download the private key to your local machine. You can see the progress of virtual machine creation.
 
 **2.2. Prepare Kafka runtime binaries**
 
-1. Navigate to the page of every broker node "Home > {resource group} > broker-node-{1,2,3}".
+After the deployment of your virtual machine is completed, take the following steps:
 
-2. Click **Connect > Connect via Bastion**, fill in the parameters as following:
+1. In the [Azure portal](https://portal.azure.com/), go to the [**Resource groups**](https://portal.azure.com/#view/HubsExtension/BrowseResourceGroups.ReactView) page, click your resource group name, and then navigate to the page of each broker node (`broker-node-1`, `broker-node-2`, and `broker-node-3`).
+
+2. On each page of the broker node, click **Connect > Bastion** in the left navigation pane, and then fill in the following information:
 
     - **Authentication Type**: `SSH Private Key from Local File`
-    - **Username**: azureuser
-    - **Local File**: select the private key downloaded by browser before
-    - Click "Open in new browser tab".
+    - **Username**: `azureuser`
+    - **Local File**: select the private key file that you downloaded before
+    - Select the **Open in new browser tab** option
     
-3. Click **Connect**. A new browser tab with a Linux terminal is displayed. You need to open three Linux terminals for the three broker nodes.
+3. On each page of the broker node, click **Connect** to open a new browser tab with a Linux terminal. For the three broker nodes, you need to open three browser tabs with Linux terminals.
 
-4. Download binaries in each broker node.
+4. In each Linux terminal, run the following commands to download binaries in each broker node.
 
     ```shell
     # Download Kafka and OpenJDK, and then extract the files. You can choose the binary version based on your preference.
@@ -135,16 +138,16 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
 
 **2.3. Set up Kafka nodes on each broker node**
 
-1. Set up a KRaft Kafka cluster with three nodes. Each node acts as a broker and controller roles. For every broker:
+1. Set up a KRaft Kafka cluster with three nodes. Each node serves both as a broker and a controller. For each broker node:
 
-    1. For `listeners`, all three brokers are the same and act as brokers and controller roles:
-        1. Configure the same CONTROLLER listener for all **controller** role nodes. If you only want to add the **broker** role nodes, you do not need the CONTROLLER listener in `server.properties`.
-        2. Configure two **broker** listeners. INTERNAL for internal access, and EXTERNAL for external access from TiDB Cloud.
+    1. Configure `listeners`. All three brokers are the same and act as brokers and controller roles.
+        1. Configure the same CONTROLLER listener for all **controller** role nodes. If you only want to add the broker role nodes, you can omit the CONTROLLER listener in `server.properties`.
+        2. Configure two broker listeners: **INTERNAL** for internal Kafka client access and **EXTERNAL** for access from TiDB Cloud.
     
     2. For `advertised.listeners`, do the following:
         1. Configure an INTERNAL advertised listener for each broker using the internal IP address of the broker node, which allows internal Kafka clients to connect to the broker via the advertised address.
-        2. Configure an EXTERNAL advertised listener based on **Kafka Advertised Listener Pattern** you get from TiDB Cloud for every broker node to help TiDB Cloud differentiate between different brokers. Different EXTERNAL advertised listeners help Kafka clients from TiDB Cloud side route requests to the right broker.
-            - `<port>` differentiates brokers from Kafka Private Link service access points. Plan a port range for EXTERNAL advertised listeners of all brokers. These ports do not have to be actual ports listened to by brokers. They are ports listened to by the load balancer for Private Link service that will forward requests to different brokers.
+        2. Configure an EXTERNAL advertised listener based on **Kafka Advertised Listener Pattern** you get from TiDB Cloud for each broker node to help TiDB Cloud distinguish between different brokers. Different EXTERNAL advertised listeners help Kafka clients from the TiDB Cloud side route requests to the right broker.
+            - Use different `<port>` values to differentiate brokers in Kafka Private Link service access. Plan a port range for the EXTERNAL advertised listeners of all brokers. These ports do not have to be actual ports listened to by brokers. They are ports listened to by the load balancer in the Private Link service that will forward requests to different brokers.
             - It is recommended to configure different broker IDs for different brokers to make it easy for troubleshooting.
     
     3. The planning values:
@@ -153,7 +156,7 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
         - EXTERNAL port: `39092`
         - Range of the EXTERNAL advertised listener ports: `9093~9095`
 
-2. Use SSH to log in to every broker node. Create a configuration file `~/config/server.properties` with the following content for each broker node respectively.
+2. Use SSH to log in to each broker node. Create a configuration file `~/config/server.properties` with the following content for each broker node respectively.
 
     ```properties
     # broker-node-1 ~/config/server.properties
@@ -209,7 +212,6 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
 3. Create a script, and then execute it to start the Kafka broker in each broker node.
 
     ```shell
-
     SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     export JAVA_HOME="$SCRIPT_DIR/jdk-22.0.2"
     KAFKA_DIR="$SCRIPT_DIR/kafka_2.13-3.7.1/bin"
@@ -258,7 +260,7 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
     ./kafka_2.13-3.7.1/bin/kafka-broker-api-versions.sh --bootstrap-server {one_of_broker_ip}:39092
     # Expected output for the last 3 lines (the actual order might be different)
     # The difference in the output from "bootstrap from INTERNAL listener" is that exceptions or errors might occur because advertised listeners cannot be resolved in kafka-pls-vnet.
-    # TiDB Cloud will make them resolvable and make it route to the right broker when you create a changefeed connect to this Kafka cluster by Private Link Service. 
+    # TiDB Cloud will make these addresses resolvable and route requests to the correct broker when you create a changefeed connected to this Kafka cluster via Private Link Service.
     b1.abc.eastus.azure.3199745.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     b2.abc.eastus.azure.3199745.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     b3.abc.eastus.azure.3199745.tidbcloud.com.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
@@ -307,7 +309,7 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
     consume_messages
     ```
 
-4. Execute `produce.sh` and `consume.sh` to verify that the Kafka cluster is running. These scripts will also be reused for later network connection testing. The script will create a topic with `--partitions 3 --replication-factor 3`. Ensure that all these three brokers contain data. Ensure that the script will connect to all three brokers to guarantee that network connection will be tested.
+4. Execute `produce.sh` and `consume.sh` to verify that the Kafka cluster is running. These scripts will also be reused later to test network connectivity. The `produce.sh` script will create a topic with `--partitions 3 --replication-factor 3`. Ensure that all these three brokers contain data. Ensure that the script will connect to all three brokers to guarantee that network connection will be tested.
 
     ```shell
     # Test write message. 
@@ -409,7 +411,7 @@ export JAVA_HOME=~/jdk-22.0.2
 
 # Expected output for the last 3 lines (the actual order might be different)
 # There will be some exceptions or errors because advertised listeners cannot be resolved in your Kafka network. 
-# TiDB Cloud will make them resolvable and make it route to the right broker when you create a changefeed connect to this Kafka cluster by Private Link service. 
+# TiDB Cloud will make these addresses resolvable and route requests to the correct broker when you create a changefeed connected to this Kafka cluster via Private Link Service.
 b1.abc.eastus.azure.3199745.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 b2.abc.eastus.azure.3199745.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
