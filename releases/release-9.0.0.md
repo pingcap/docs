@@ -11,7 +11,9 @@ Release date: xx xx, 2025
 
 TiDB version: 9.0.0
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v9.0/production-deployment-using-tiup)
+<!--
+2052Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v9.0/production-deployment-using-tiup)
+-->
 
 9.0.0 introduces the following key features and improvements:
 
@@ -302,9 +304,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 | [`tidb_workload_repository_dest`](/system-variables.md#tidb_workload_repository_dest-new-in-v900)| Newly added | Controls the destination of the [Workload Repository](/workload-repository.md. The default value is `''`, which means to disable the workload repository. The value `'table'` enables the workload repository to write data into TiKV.| 
 | [`tidb_workload_repository_retention_days`](/system-variables.md#tidb_workload_repository_retention_days-new-in-v900) | Newly added | Controls the number of days that [Workload Repository](/workload-repository.md) data is retained. |
 | [`tidb_workload_repository_snapshot_interval`](/system-variables.md#tidb_workload_repository_snapshot_interval-new-in-v900) | Newly added | Controls the sampling interval for the [Workload Repository](/workload-repository.md)'s Snapshot Sampling Process. |
-|  |  |  |
-|  |  |  |
-|  |  |  |
 
 ### Configuration parameters
 
@@ -320,7 +319,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 | DM | [`redact-info-log`](/dm/dm-worker-configuration-file.md#redact-info-log-new-in-v900) | Newly added | Controls whether to enable DM log redaction. |
 | TiProxy | [`enable-traffic-replay`](/tiproxy/tiproxy-configuration.md#enable-traffic-replay)  | Newly added | Specifies whether to enable [traffic replay](/tiproxy/tiproxy-traffic-replay.md). If it is set to `false`, traffic capture and replay operations will result in errors. |
 | TiProxy | [`encryption-key-path`](/tiproxy/tiproxy-configuration.md#encryption-key-path)  | Newly added | Specifies the file path of the key used to encrypt the traffic files during traffic capture. |
-|  |  |  | |
 
 ### Offline package changes
 
@@ -340,7 +338,6 @@ Before upgrading TiDB, ensure that your operating system version meets the [OS a
 
 * The following feature has been removed:
 
-
 * The following features are planned for removal in future versions:
 
     * Starting from v8.0.0, TiDB Lightning deprecates the [old version of conflict detection](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#the-old-version-of-conflict-detection-deprecated-in-v800) strategy for the physical import mode, and enables you to control the conflict detection strategy for both logical and physical import modes via the [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) parameter. The [`duplicate-resolution`](/tidb-lightning/tidb-lightning-configuration.md) parameter for the old version of conflict detection will be removed in a future release.
@@ -359,65 +356,43 @@ The following features are planned for deprecation in future versions:
 
 ## Improvements
 
-+ TiDB
-
-  
++ TiDB  
 
 + TiKV
 
-
-
 + PD
 
-
-
 + TiFlash
-
-
 
 + Tools
 
     + Backup & Restore (BR)
-
         
     + TiDB Data Migration (DM)
-
        
 ## Bug fixes
 
-+ TiDB
++ TiDB    
 
-    
++ TiKV    
 
-+ TiKV
++ PD   
 
-    
-
-+ PD
-
-   
-
-+ TiFlash
-
-   
++ TiFlash   
 
 + Tools
 
-    + Backup & Restore (BR)
+    + Backup & Restore (BR)        
 
-        
+    + TiCDC        
 
-    + TiCDC
-
-        
-
-    + TiDB Lightning
-
-        
+    + TiDB Lightning        
 
 ## Performance test
 
+<!--
 To learn about the performance of TiDB v9.0.0, you can refer to the [performance test reports](https://docs.pingcap.com/tidbcloud/v9.0-performance-highlights) of the TiDB Cloud Dedicated cluster.
+-->
 
 ## Contributors
 
