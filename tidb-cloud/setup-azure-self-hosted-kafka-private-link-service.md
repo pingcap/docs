@@ -72,7 +72,7 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
     1. Set the address space of your virtual network, for example, `10.0.0.0/16`.
     2. Click **Add a subnet** to create a subnet for brokers, fill in the following information, and then click **Add**.
         - **Name**: `brokers-subnet`
-        - **IP address range**: `10.0.0.0 - 10.0.0.255`
+        - **IP address range**: `10.0.0.0/24`
         - **Size**: `/24 (256 addresses)`
 
         An `AzureBastionSubnet` will be created by default.
