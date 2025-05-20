@@ -247,8 +247,6 @@ You can use the following methods to manually control the impact of backup tasks
 
 - Recommended method: Adjust the TiKV configuration parameter [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1), which controls the number of worker threads used by backup tasks. Because backup is a CPU-intensive operation, tuning this parameter allows for more precise control over TiKV’s CPU usage, enabling better resource isolation and predictability. In most scenarios, simply adjusting `num-threads` is sufficient to limit the impact of backup on the cluster. Internal testing shows that when the number of threads is set to `8` or fewer, and overall cluster CPU usage remains below 60%, the impact of backup on foreground workloads is negligible.
 
-In most scenarios, simply adjusting `num-threads` is sufficient to limit the impact of backup on the cluster. Internal testing shows that when the number of threads is set to 8 or fewer, and overall cluster CPU usage remains below 60%, the impact of backup on foreground workloads is negligible.
-
 - Alternative method: If you have already set `backup.num-threads` to a small value (for example, `1`), but still want to further reduce the impact of backup on the cluster, consider using the `--ratelimit` parameter. This option limits the bandwidth used to write backup files to external storage, specified in MiB/s. Note that the actual rate limiting effect depends on the size of the compressed data. You can refer to the `backup data size (after compressed)` field in the logs for more insight. When `--ratelimit` is enabled, BR automatically sets `--concurrency` to `1` to reduce the number of concurrent requests.
 
 > **Note:** 
