@@ -115,7 +115,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 3. On the **Import Data from Amazon S3** page, provide the following information for the source Parquet files:
 
     - **Included Schema Files**: this field is only visible when importing multiple files. If the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
-    - **Data Format**: select **Parquet**. 
+    - **Data Format**: select **Parquet**.
     - **File URI** or **Folder URI**:
         - When importing one file, enter the source file URI and name in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `s3://sampledata/ingest/TableName.01.parquet`.
         - When importing multiple files, enter the source file URI and name in the following format `s3://[bucket_name]/[data_source_folder]/`. For example, `s3://sampledata/ingest/`.
