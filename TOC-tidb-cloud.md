@@ -8,7 +8,6 @@
 - Why TiDB Cloud
   - [TiDB Cloud Introduction](/tidb-cloud/tidb-cloud-intro.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
-  - [Roadmap](/tidb-cloud/tidb-cloud-roadmap.md)
 - Get Started with TiDB Cloud
   - [Try Out TiDB Cloud Serverless](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Try Out TiDB + AI](/tidb-cloud/vector-search-get-started-using-python.md)
@@ -266,8 +265,8 @@
   - Import Data into TiDB Cloud Serverless
     - [Import Sample Data](/tidb-cloud/import-sample-data-serverless.md)
     - [Import Local Files](/tidb-cloud/tidb-cloud-import-local-files.md)
-    - [Import CSV Files from Amazon S3, GCS, or Azure Blob Storage](/tidb-cloud/import-csv-files-serverless.md)
-    - [Import Parquet Files from Amazon S3, GCS, or Azure Blob Storage](/tidb-cloud/import-parquet-files-serverless.md)
+    - [Import CSV Files from Cloud Storage](/tidb-cloud/import-csv-files-serverless.md)
+    - [Import Parquet Files from Cloud Storage](/tidb-cloud/import-parquet-files-serverless.md)
     - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli-serverless.md)
   - Reference
     - [Configure External Storage Access for TiDB Cloud Dedicated](/tidb-cloud/config-s3-and-gcs-access.md)
@@ -290,12 +289,18 @@
     - AI Frameworks
       - [LlamaIndex](/tidb-cloud/vector-search-integrate-with-llamaindex.md)
       - [Langchain](/tidb-cloud/vector-search-integrate-with-langchain.md)
+    - AI Services
+      - [Amazon Bedrock](/tidb-cloud/vector-search-integrate-with-amazon-bedrock.md)
     - Embedding Models/Services
       - [Jina AI](/tidb-cloud/vector-search-integrate-with-jinaai-embedding.md)
     - ORM Libraries
       - [SQLAlchemy](/tidb-cloud/vector-search-integrate-with-sqlalchemy.md)
       - [peewee](/tidb-cloud/vector-search-integrate-with-peewee.md)
       - [Django ORM](/tidb-cloud/vector-search-integrate-with-django-orm.md)
+  - Text Search
+    - [Full-Text Search with SQL](/tidb-cloud/vector-search-full-text-search-sql.md)
+    - [Full-Text Search with Python](/tidb-cloud/vector-search-full-text-search-python.md)
+    - [Hybrid Search](/tidb-cloud/vector-search-hybrid-search.md)
   - Reference
     - [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
     - [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md)
@@ -731,6 +736,11 @@
       - [delete](/tidb-cloud/ticloud-serverless-sql-user-delete.md)
       - [list](/tidb-cloud/ticloud-serverless-sql-user-list.md)
       - [update](/tidb-cloud/ticloud-serverless-sql-user-update.md)
+    - authorized-network
+      - [create](/tidb-cloud/ticloud-serverless-authorized-network-create.md)
+      - [delete](/tidb-cloud/ticloud-serverless-authorized-network-delete.md)
+      - [list](/tidb-cloud/ticloud-serverless-authorized-network-list.md)
+      - [update](/tidb-cloud/ticloud-serverless-authorized-network-update.md)
   - [ai](/tidb-cloud/ticloud-ai.md)
   - [completion](/tidb-cloud/ticloud-completion.md)
   - config

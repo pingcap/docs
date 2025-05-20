@@ -41,7 +41,7 @@ To set the backup time for a scalable cluster, perform the following steps:
 
 1. Navigate to the **Backup** page of a TiDB Cloud Serverless cluster.
 
-2. Click **Backup Settings**. This will open the **Backup Settings** window, where you can configure the automatic backup settings according to your requirements.
+2. Click **Backup Setting**. This will open the **Backup Setting** window, where you can configure the automatic backup settings according to your requirements.
 
 3. In **Backup Time**, schedule a start time for the daily cluster backup.
 
@@ -79,6 +79,15 @@ Restore to the current cluster will overwrite existing data. Note the following:
 Create and restore to the new cluster. Note the following:
 
 - User credentials and permissions from the source cluster will not be restored to the new cluster.
+
+### Restore timeout
+
+The restore process typically completes within a few minutes. If the restore takes longer than three hours, it is automatically canceled. The outcome of a canceled restore depends on the destination:
+
+- **In-place restore**: the cluster status changes from **Restoring** to **Available**, and the cluster becomes accessible.
+- **Restore to a new cluster**: the new cluster is deleted and the source cluster remains unchanged.
+
+If the data is corrupted after a canceled restore and cannot be recovered, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance.
 
 ### Perform the restore
 

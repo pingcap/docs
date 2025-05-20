@@ -424,6 +424,11 @@ Configuration items related to security.
 - The path of the SSL private key file used to connect TiKV or PD with TLS.
 - Default value: ""
 
+### `cluster-verify-cn`
+
+- A list of acceptable X.509 Common Names in certificates presented by clients. Requests are permitted only when the presented Common Name is an exact match with one of the entries in the list.
+- Default value: [], which means that the client certificate CN check is disabled.
+
 ### `spilled-file-encryption-method`
 
 + Determines the encryption method used for saving the spilled files to disk.
@@ -843,7 +848,7 @@ Configuration related to the status of TiDB service.
 ### `record-db-label`
 
 - Determines whether to transmit the database-related QPS metrics to Prometheus.
-- Supports more metircs types than `record-db-qps`, for example, duration and statements.
+- Supports more metrics types than `record-db-qps`, for example, duration and statements.
 - Default value: `false`
 
 ## pessimistic-txn

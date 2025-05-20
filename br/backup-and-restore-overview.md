@@ -16,7 +16,7 @@ BR satisfies the following requirements:
 
 ## Before you use
 
-This section describes the prerequisites for using TiDB backup and restore, including restrictions, usage tips and compatibility issues.
+This section describes the prerequisites for using TiDB backup and restore, including restrictions, usage tips and compatibility issues. For more information about the compatibility of the BR tool with other features or versions, see [Compatibility](#compatibility).
 
 ### Restrictions
 
@@ -25,7 +25,7 @@ This section describes the prerequisites for using TiDB backup and restore, incl
 - PITR does not support restoring the data of user tables or privilege tables from system tables.
 - BR does not support running multiple backup tasks on a cluster **at the same time**.
 - BR does not support running snapshot backup tasks and data restore tasks on a cluster **at the same time**.
-- When a PITR is running, you cannot run a log backup task or use TiCDC to replicate data to a downstream cluster.
+- When restoring a cluster using PITR, you cannot run a log backup task or use TiCDC to replicate data to a downstream cluster.
 
 ### Some tips
 

@@ -1,11 +1,11 @@
 ---
-title: Import CSV Files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Serverless 
-summary: Learn how to import CSV files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Serverless.
+title: Import CSV Files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud OSS into TiDB Cloud Serverless
+summary: Learn how to import CSV files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into TiDB Cloud Serverless.
 ---
 
-# Import CSV Files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Serverless
+# Import CSV Files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud OSS into TiDB Cloud Serverless
 
-This document describes how to import CSV files from Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS), or Azure Blob Storage into TiDB Cloud Serverless.
+This document describes how to import CSV files from Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS), Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into TiDB Cloud Serverless.
 
 ## Limitations
 
@@ -35,7 +35,7 @@ Because CSV files do not contain schema information, before importing data from 
 
 - Method 1: In TiDB Cloud Serverless, create the target databases and tables for your source data.
 
-- Method 2: In the Amazon S3, GCS, or Azure Blob Storage directory where the CSV files are located, create the target table schema files for your source data as follows:
+- Method 2: In the Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service directory where the CSV files are located, create the target table schema files for your source data as follows:
 
     1. Create database schema files for your source data.
 
@@ -51,7 +51,7 @@ Because CSV files do not contain schema information, before importing data from 
 
     2. Create table schema files for your source data.
 
-        If you do not include the table schema files in the Amazon S3, GCS, or Azure Blob Storage directory where the CSV files are located, TiDB Cloud Serverless will not create the corresponding tables for you when you import the data.
+        If you do not include the table schema files in the Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service directory where the CSV files are located, TiDB Cloud Serverless will not create the corresponding tables for you when you import the data.
 
         Each table schema file must be in the `${db_name}.${table_name}-schema.sql` format and contain a `CREATE TABLE` DDL statement. With this file, TiDB Cloud Serverless will create the `${db_table}` table in the `${db_name}` database when you import the data.
 
@@ -70,7 +70,7 @@ Because CSV files do not contain schema information, before importing data from 
 
 ## Step 3. Configure cross-account access
 
-To allow TiDB Cloud Serverless to access the CSV files in the Amazon S3, GCS, or Azure Blob Storage bucket, do one of the following:
+To allow TiDB Cloud Serverless to access the CSV files in the Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service bucket, do one of the following:
 
 - If your CSV files are located in Amazon S3, [configure external storage access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
 
@@ -79,6 +79,8 @@ To allow TiDB Cloud Serverless to access the CSV files in the Amazon S3, GCS, or
 - If your CSV files are located in GCS, [configure external storage access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
 
 - If your CSV files are located in Azure Blob Storage, [configure external storage access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+
+- If your CSV files are located in Alibaba Cloud Object Storage Service (OSS), [configure external storage access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access).
 
 ## Step 4. Import CSV files to TiDB Cloud Serverless
 
@@ -224,6 +226,56 @@ To import the CSV files to TiDB Cloud Serverless, take the following steps:
     - `[azure|https]://[bucket_name]/[data_source_folder]/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in that folder will be imported into the same target table.
 
     - `[azure|https]://[bucket_name]/[data_source_folder]/my-data*.csv`: all CSV files in the folder starting with `my-data` will be imported into the same target table.
+
+    Note that only `?` and `*` are supported.
+
+    > **Note:**
+    >
+    > The URI must contain the data source folder.
+
+6. Click **Start Import**.
+
+7. When the import progress shows **Completed**, check the imported tables.
+
+</div>
+
+<div label="Alibaba Cloud Object Storage Service (OSS)">
+
+1. Open the **Import** page for your target cluster.
+
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+
+        > **Tip:**
+        >
+        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+
+    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+
+2. Select **Import data from Cloud Storage**, and then click **Alibaba Cloud OSS**.
+
+3. On the **Import Data from Alibaba Cloud OSS** page, provide the following information for the source CSV files:
+
+    - **Import File Count**: select **One file** or **Multiple files** as needed.
+    - **Included Schema Files**: this field is only visible when importing multiple files. If the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
+    - **Data Format**: select **CSV**.
+    - **File URI** or **Folder URI**:
+        - When importing one file, enter the source file URI and name in the following format `oss://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `oss://sampledata/ingest/TableName.01.csv`.
+        - When importing multiple files, enter the source file URI and name in the following format `oss://[bucket_name]/[data_source_folder]/`. For example, `oss://sampledata/ingest/`.
+    - **Bucket Access**: you can use an AccessKey pair to access your bucket. For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access).
+
+4. Click **Connect**.
+
+5. In the **Destination** section, select the target database and table.
+
+    When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding CSV file. After that, the data source files will be re-scanned using the provided custom mapping rule.
+
+    When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `oss://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `oss://sampledata/ingest/TableName.01.csv`.
+
+    You can also use wildcards to match the source files. For example:
+
+    - `oss://[bucket_name]/[data_source_folder]/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in that folder will be imported into the same target table.
+
+    - `oss://[bucket_name]/[data_source_folder]/my-data*.csv`: all CSV files in the folder starting with `my-data` will be imported into the same target table.
 
     Note that only `?` and `*` are supported.
 

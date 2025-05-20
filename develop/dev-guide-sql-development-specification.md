@@ -48,7 +48,7 @@ This document introduces some general development specifications for using SQL.
 - Replace `OR` with `IN` or `UNION`. The number of `IN` must be less than `300`.
 - Avoid using the `%` prefix for fuzzy prefix queries.
 - If the application uses **Multi Statements** to execute SQL, that is, multiple SQLs are joined with semicolons and sent to the client for execution at once, TiDB only returns the result of the first SQL execution.
-- When you use expressions, check if the expressions support computing push-down to the storage layer (TiKV or TiFlash). If not, you should expect more memory consumption and even OOM at the TiDB layer. Computing that can be pushe down the storage layer is as follows:
+- When you use expressions, check if the expressions support computing push-down to the storage layer (TiKV or TiFlash). If not, you should expect more memory consumption and even OOM at the TiDB layer. Computing that can be pushed down to the storage layer is as follows:
     - [TiFlash supported push-down calculations](/tiflash/tiflash-supported-pushdown-calculations.md).
     - [TiKV - List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md).
     - [Predicate push down](/predicate-push-down.md).

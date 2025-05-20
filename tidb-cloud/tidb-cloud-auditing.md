@@ -28,6 +28,10 @@ The audit logging feature is disabled by default. To audit a cluster, you need t
 
 TiDB Cloud supports recording the audit logs of a TiDB Cloud Dedicated cluster to your cloud storage service. Before enabling database audit logging, configure your cloud storage service on the cloud provider where the cluster is located.
 
+> **Note:**
+>
+> For TiDB clusters deployed on AWS, you can choose to store audit log files in TiDB Cloud when enabling database audit logging. Currently, this feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply to store audit log files in TiDB Cloud" in the **Description** field and click **Submit**.
+
 ### Enable audit logging for AWS
 
 To enable audit logging for AWS, take the following steps:
@@ -172,12 +176,15 @@ In the TiDB Cloud console, go back to the **Enable Database Audit Logging** dial
 
 ## Specify auditing filter rules
 
-After enabling audit logging, you must specify auditing filter rules to control which user access events to capture and write to audit logs versus which events to ignore. If no filter rules are specified, TiDB Cloud does not log anything.
+After enabling audit logging, you must specify auditing filter rules to control which user access events to capture and write to audit logs. If no filter rules are specified, TiDB Cloud does not log anything.
 
 To specify auditing filter rules for a cluster, take the following steps:
 
-1. In the **Audit Logging** dialog box where you enable audit logging, scroll down and locate the **Filter Rules** section.
-2. Add one or more filter rules, one rule per row, with each rule specifying a user expression, database expression, table expression, and access type.
+1. On the **DB Audit Logging** page, click **Add Filter Rule** in the **Log Filter Rules** section to add an audit filter rule.
+
+    You can add one audit rule at a time. Each rule specifies a user expression, database expression, table expression, and access type. You can add multiple audit rules to meet your auditing requirements.
+
+2.In the **Log Filter Rules** section, click **>** to expand and view the list of audit rules you have added.
 
 > **Note:**
 >
@@ -185,6 +192,12 @@ To specify auditing filter rules for a cluster, take the following steps:
 > - Because audit logging consumes cluster resources, be prudent when specifying filter rules. To minimize the consumption, it is recommended that you specify filter rules to limit the scope of audit logging to specific database objects, users, and actions, where possible.
 
 ## View audit logs
+
+By default, TiDB Cloud stores database audit log files in your storage service, so you need to read the audit log information from your storage service.
+
+> **Note:**
+>
+> If you have requested and chosen to store audit log files in TiDB Cloud, you can download them from the **Audit Log Access** section on the **Database Audit Logging** page.
 
 TiDB Cloud audit logs are readable text files with the cluster ID, Pod ID, and log creation date incorporated into the fully qualified filenames.
 

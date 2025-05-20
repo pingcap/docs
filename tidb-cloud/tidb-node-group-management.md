@@ -11,14 +11,6 @@ This document describes how to manage TiDB node groups and their endpoints to is
 >
 > The TiDB Node Group feature is **NOT** available for TiDB Cloud Serverless clusters.
 
-Currently, the TiDB Node Group feature is only available upon request. To request this feature, perform the following steps:
-
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Click **?** in the lower-right corner.
-3. Click **Request Support**. 
-4. In the **Subject** field, fill in **Apply for TiDB Node Group feature**.
-5. Click **Submit**.
-
 ## Terms
 
 - TiDB Node Group: A TiDB node group manages the grouping of TiDB nodes and maintains the mapping between endpoints and TiDB nodes.
@@ -30,8 +22,12 @@ Currently, the TiDB Node Group feature is only available upon request. To reques
 
 ## Prerequisites
 
-- You have a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster deployed on AWS.
+- You have a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster deployed on AWS or Google Cloud.
 - You are in the **Organization Owner** or **Project Owner** role of your organization. For more information, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
+
+> **Note**:
+>
+> The TiDB node groups cannot be created during cluster creation. You need to add the groups after the cluster is created and in the **Available** state. 
 
 ## Create a TiDB node group
 
@@ -90,7 +86,7 @@ For more information, see [Connect to TiDB Cloud Dedicated via Public Connection
 2. In the upper-right corner, click **Connect**. A connection dialog is displayed.
 3. Select your TiDB node group from the **TiDB Node Group** list and **Private Endpoint** from the **Connection Type** list.
 4. In the left navigation pane, click **Networking**, and then select your TiDB node group from the **TiDB Node Group** list in the upper-right corner.
-5. Click **Create Private Endpoint Connection** to create a new connection for this node group. For more information, see [Connect to a TiDB Cloud Dedicated Cluster via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md).
+5. Click **Create Private Endpoint Connection** to create a new connection for this node group. For clusters deployed on AWS, refer to [Connect to a TiDB Cloud Dedicated Cluster via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md). For clusters deployed on Google Cloud, refer to [Connect to a TiDB Cloud Dedicated Cluster via Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md).
 
     > **Note**:
     >

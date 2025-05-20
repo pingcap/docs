@@ -7,6 +7,10 @@ summary: Learn how to monitor your TiDB cluster by getting alert notifications v
 
 TiDB Cloud provides you with an easy way to subscribe to alert notifications via [Zoom](https://www.zoom.com/), [Slack](/tidb-cloud/monitor-alert-slack.md), and [email](/tidb-cloud/monitor-alert-email.md). This document describes how to subscribe to alert notifications via Zoom.
 
+> **Note:**
+>
+> Currently, alert subscription is only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+
 ## Prerequisites
 
 - The subscribing via Zoom feature is only available for organizations that subscribe to the **Enterprise** or **Premium** support plan.
