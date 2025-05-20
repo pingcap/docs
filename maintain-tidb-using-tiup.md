@@ -418,7 +418,7 @@ After confirming that old metrics have expired, you can remove redundant service
     tiup cluster edit-config ${cluster-name}
     ```
 
-2. Under `monitoring_servers`, set `enable_prom_agent_mode` to `true`, and ensure `prom_remote_write_to_vm` and `use_vm_as_datasource` are also set correctly:
+2. Under `monitoring_servers`, set `enable_prom_agent_mode` to `true`, and ensure you also set `prom_remote_write_to_vm` and `use_vm_as_datasource` correctly:
 
     ```yaml
     monitoring_servers:
