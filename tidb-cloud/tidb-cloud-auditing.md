@@ -212,7 +212,7 @@ For more information, see [Create an Azure storage account](https://learn.micros
 
         > **Note:**
         >
-        > - Audit logging is a long-term feature that requires a SAS token with a sufficiently long validity period. However, longer validity increases the risk of token leakage. For security, it is recommended to replace your SAS token every six to twelve months.
+        > - The audit feature needs to continuously write audit logs to the storage account, so the SAS token must have a sufficiently long validity period. However, longer validity increases the risk of token leakage. For security, it is recommended to replace your SAS token every six to twelve months.
         > - The generated SAS token cannot be revoked, so you need to set its validity period carefully.
         > - Make sure to re-generate and update the SAS token before it expires to ensure continuous availability of audit logs.
 
