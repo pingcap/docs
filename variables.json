@@ -1,0 +1,7 @@
+{
+  "tidb": "TiDB",
+  "tidb-version": "v8.5.0",
+  "self-managed": "TiDB Self-Managed",
+  "serverless": "TiDB Cloud Serverless",
+  "dedicated": "TiDB Cloud Dedicated"
+}

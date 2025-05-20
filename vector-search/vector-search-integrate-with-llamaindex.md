@@ -108,7 +108,7 @@ For a TiDB Cloud Serverless cluster, take the following steps to obtain the clus
 
 5. Configure environment variables.
 
-    This document uses [OpenAI](https://platform.openai.com/docs/introduction) as the embedding model provider. In this step, you need to provide the connection string obtained from from the previous step and your [OpenAI API key](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key).
+    This document uses [OpenAI](https://platform.openai.com/docs/introduction) as the embedding model provider. In this step, you need to provide the connection string obtained from the previous step and your [OpenAI API key](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key).
 
     To configure the environment variables, run the following code. You will be prompted to enter your connection string and OpenAI API key:
 

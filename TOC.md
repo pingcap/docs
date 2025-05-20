@@ -228,6 +228,7 @@
     - [Use TiUP](/upgrade-tidb-using-tiup.md)
     - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)
     - [TiDB Smooth Upgrade](/smooth-upgrade-tidb.md)
+    - [Migrate and Upgrade a TiDB Cluster](/tidb-upgrade-migration-guide.md)
     - [TiFlash Upgrade Guide](/tiflash-upgrade-guide.md)
   - Scale
     - [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
@@ -279,6 +280,37 @@
   - [Monitoring API](/tidb-monitoring-api.md)
   - [Deploy Monitoring Services](/deploy-monitoring-services.md)
   - [Upgrade Monitoring Services](/upgrade-monitoring-services.md)
+  - TiDB Dashboard
+    - [Overview](/dashboard/dashboard-intro.md)
+    - Maintain
+      - [Deploy](/dashboard/dashboard-ops-deploy.md)
+      - [Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md)
+      - [User Management](/dashboard/dashboard-user.md)
+      - [Secure](/dashboard/dashboard-ops-security.md)
+    - [Access](/dashboard/dashboard-access.md)
+    - [Overview Page](/dashboard/dashboard-overview.md)
+    - [Cluster Info Page](/dashboard/dashboard-cluster-info.md)
+    - [Top SQL Page](/dashboard/top-sql.md)
+    - [Key Visualizer Page](/dashboard/dashboard-key-visualizer.md)
+    - [Metrics Relation Graph](/dashboard/dashboard-metrics-relation.md)
+    - SQL Statements Analysis
+      - [SQL Statements Page](/dashboard/dashboard-statement-list.md)
+      - [SQL Details Page](/dashboard/dashboard-statement-details.md)
+    - [Slow Queries Page](/dashboard/dashboard-slow-query.md)
+    - Cluster Diagnostics
+      - [Access Cluster Diagnostics Page](/dashboard/dashboard-diagnostics-access.md)
+      - [View Diagnostics Report](/dashboard/dashboard-diagnostics-report.md)
+      - [Use Diagnostics](/dashboard/dashboard-diagnostics-usage.md)
+    - [Monitoring Page](/dashboard/dashboard-monitoring.md)
+    - [Search Logs Page](/dashboard/dashboard-log-search.md)
+    - [Resource Manager Page](/dashboard/dashboard-resource-manager.md)
+    - Instance Profiling
+      - [Manual Profiling](/dashboard/dashboard-profiling.md)
+      - [Continuous Profiling](/dashboard/continuous-profiling.md)
+    - Session Management and Configuration
+      - [Share Session](/dashboard/dashboard-session-share.md)
+      - [Configure SSO](/dashboard/dashboard-session-sso.md)
+    - [FAQ](/dashboard/dashboard-faq.md)
   - [Export Grafana Snapshots](/exporting-grafana-snapshots.md)
   - [TiDB Cluster Alert Rules](/alert-rules.md)
   - [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
@@ -400,6 +432,7 @@
     - [Local Read Under Three Data Centers Deployment](/best-practices/three-dc-local-read.md)
     - [Use UUIDs](/best-practices/uuid.md)
     - [Read-Only Storage Nodes](/best-practices/readonly-nodes.md)
+    - [SaaS Multi-Tenant Scenarios](/best-practices/saas-best-practices.md)
   - [Use Placement Rules](/configure-placement-rules.md)
   - [Use Load Base Split](/configure-load-base-split.md)
   - [Use Store Limit](/configure-store-limit.md)
@@ -776,6 +809,7 @@
       - [`BEGIN`](/sql-statements/sql-statement-begin.md)
       - [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md)
       - [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
+      - [`CANCEL TRAFFIC JOBS`](/sql-statements/sql-statement-cancel-traffic-jobs.md)
       - [`COMMIT`](/sql-statements/sql-statement-commit.md)
       - [`CREATE BINDING`](/sql-statements/sql-statement-create-binding.md)
       - [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)
@@ -882,6 +916,7 @@
       - [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)
       - [`SHOW TABLE STATUS`](/sql-statements/sql-statement-show-table-status.md)
       - [`SHOW TABLES`](/sql-statements/sql-statement-show-tables.md)
+      - [`SHOW TRAFFIC JOBS`](/sql-statements/sql-statement-show-traffic-jobs.md)
       - [`SHOW VARIABLES`](/sql-statements/sql-statement-show-variables.md)
       - [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md)
       - [`SHUTDOWN`](/sql-statements/sql-statement-shutdown.md)
@@ -889,6 +924,8 @@
       - [`START TRANSACTION`](/sql-statements/sql-statement-start-transaction.md)
       - [`TABLE`](/sql-statements/sql-statement-table.md)
       - [`TRACE`](/sql-statements/sql-statement-trace.md)
+      - [`TRAFFIC CAPTURE`](/sql-statements/sql-statement-traffic-capture.md)
+      - [`TRAFFIC REPLAY`](/sql-statements/sql-statement-traffic-replay.md)
       - [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)
       - [`UNLOCK STATS`](/sql-statements/sql-statement-unlock-stats.md)
       - [`UPDATE`](/sql-statements/sql-statement-update.md)
@@ -960,6 +997,7 @@
     - System Tables
       - `mysql` Schema
         - [Overview](/mysql-schema/mysql-schema.md)
+        - [`tidb_mdl_view`](/mysql-schema/mysql-schema-tidb-mdl-view.md)
         - [`user`](/mysql-schema/mysql-schema-user.md)
       - INFORMATION_SCHEMA
         - [Overview](/information-schema/information-schema.md)
@@ -1032,43 +1070,12 @@
     - [Metadata Lock](/metadata-lock.md)
     - [TiDB Accelerated Table Creation](/accelerated-table-creation.md)
     - [Schema Cache](/schema-cache.md)
-  - UI
-    - TiDB Dashboard
-      - [Overview](/dashboard/dashboard-intro.md)
-      - Maintain
-        - [Deploy](/dashboard/dashboard-ops-deploy.md)
-        - [Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md)
-        - [User Management](/dashboard/dashboard-user.md)
-        - [Secure](/dashboard/dashboard-ops-security.md)
-      - [Access](/dashboard/dashboard-access.md)
-      - [Overview Page](/dashboard/dashboard-overview.md)
-      - [Cluster Info Page](/dashboard/dashboard-cluster-info.md)
-      - [Top SQL Page](/dashboard/top-sql.md)
-      - [Key Visualizer Page](/dashboard/dashboard-key-visualizer.md)
-      - [Metrics Relation Graph](/dashboard/dashboard-metrics-relation.md)
-      - SQL Statements Analysis
-        - [SQL Statements Page](/dashboard/dashboard-statement-list.md)
-        - [SQL Details Page](/dashboard/dashboard-statement-details.md)
-      - [Slow Queries Page](/dashboard/dashboard-slow-query.md)
-      - Cluster Diagnostics
-        - [Access Cluster Diagnostics Page](/dashboard/dashboard-diagnostics-access.md)
-        - [View Diagnostics Report](/dashboard/dashboard-diagnostics-report.md)
-        - [Use Diagnostics](/dashboard/dashboard-diagnostics-usage.md)
-      - [Monitoring Page](/dashboard/dashboard-monitoring.md)
-      - [Search Logs Page](/dashboard/dashboard-log-search.md)
-      - [Resource Manager Page](/dashboard/dashboard-resource-manager.md)
-      - Instance Profiling
-        - [Manual Profiling](/dashboard/dashboard-profiling.md)
-        - [Continuous Profiling](/dashboard/continuous-profiling.md)
-      - Session Management and Configuration
-        - [Share Session](/dashboard/dashboard-session-share.md)
-        - [Configure SSO](/dashboard/dashboard-session-sso.md)
-      - [FAQ](/dashboard/dashboard-faq.md)
   - [Telemetry](/telemetry.md)
   - [Error Codes](/error-codes.md)
   - [Table Filter](/table-filter.md)
   - [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
+  - [TiDB Workload Repository](/workload-repository.md)
 - FAQs
   - [FAQ Summary](/faq/faq-overview.md)
   - [TiDB FAQs](/faq/tidb-faq.md)
@@ -1085,6 +1092,7 @@
   - [All Releases](/releases/release-notes.md)
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
+  - [Release Support Policy](https://www.pingcap.com/tidb-release-support-policy/)
   - [TiDB Installation Packages](/binary-package.md)
   - v8.5
     - [8.5.1](/releases/release-8.5.1.md)
