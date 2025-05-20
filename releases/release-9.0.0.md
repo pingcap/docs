@@ -238,7 +238,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
     With this new architecture, TiCDC can now scale its replication capability nearly linearly and replicate millions of tables with lower resource costs. Changefeed latency is reduced and performance is more stable in scenarios with high traffic, frequent DDL operations, and during cluster scaling events.
 
-    <!--For more information, see [documentation](/ticdc/ticdc-new-arch.md).-->
+<!--
+    For more information, see [documentation](/ticdc/ticdc-new-arch.md).
+-->
 
 * TiCDC supports DDL events and WATERMARK events for the Debezium protocol [#11566](https://github.com/pingcap/tiflow/issues/11566) @[wk989898](https://github.com/wk989898) **tw@lilin90** <!--2009-->
 
@@ -256,7 +258,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
     Starting from v9.0.0, you can use the `redact-info-log` configuration item to enable the DM log redaction feature. When enabled, query arguments that contain sensitive data in DM logs are replaced with the `?` placeholder. To enable this feature, set `redact-info-log` to `true` in the DM-worker configuration file or pass `--redact-info-log=true` when starting DM. This feature only redacts query arguments, not the entire SQL statement, and requires a DM-worker restart to take effect.
 
-    <!--For more information, see [documentation](/dm/dm-worker-configuration-file.md#redact-info-log-new-in-v900).-->
+<!--
+    For more information, see [documentation](/dm/dm-worker-configuration-file.md#redact-info-log-new-in-v900).
+-->
 
 * TiDB Lightning supports compatibility with `sql_require_primary_key=ON` in TiDB [#57479](https://github.com/pingcap/tidb/issues/57479) @[lance6716](https://github.com/lance6716) **tw@Oreoxmt** <!--2026-->
 
