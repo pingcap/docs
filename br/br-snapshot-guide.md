@@ -194,13 +194,11 @@ To illustrate the impact of backup, this document lists the test conclusions of 
 
 You can use the following methods to manually control the impact of backup tasks on cluster performance. However, these two methods also reduce the speed of backup tasks while reducing the impact of backup tasks on the cluster.
 
-Recommendation: Adjust the TiKV configuration parameter [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1), which controls the number of worker threads used by backup tasks. Since backup is a CPU-intensive operation, tuning this parameter allows for more precise control over TiKV’s CPU usage, enabling better resource isolation and predictability.
+- Recommended method: Adjust the TiKV configuration parameter [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1), which controls the number of worker threads used by backup tasks. Because backup is a CPU-intensive operation, tuning this parameter allows for more precise control over TiKV’s CPU usage, enabling better resource isolation and predictability. In most scenarios, simply adjusting `num-threads` is sufficient to limit the impact of backup on the cluster. Internal testing shows that when the number of threads is set to `8` or fewer, and overall cluster CPU usage remains below 60%, the impact of backup on foreground workloads is negligible.
 
 In most scenarios, simply adjusting `num-threads` is sufficient to limit the impact of backup on the cluster. Internal testing shows that when the number of threads is set to 8 or fewer, and overall cluster CPU usage remains below 60%, the impact of backup on foreground workloads is negligible.
 
-Alternative: If you have already set `backup.num-threads` to a low value (e.g., 1) but still want to further reduce the impact of backup on the cluster, consider using the `--ratelimit` parameter. This option limits the bandwidth used to write backup files to external storage, specified in MiB/s. Note that the actual rate limiting effect depends on the size of the compressed data. You can refer to the `backup data size (after compressed)` field in the logs for more insight.
-
-When enabled, BR will automatically set `--concurrency` to 1 to reduce the number of concurrent requests.
+- Alternative method: If you have already set `backup.num-threads` to a small value (for example, `1`), but still want to further reduce the impact of backup on the cluster, consider using the `--ratelimit` parameter. This option limits the bandwidth used to write backup files to external storage, specified in MiB/s. Note that the actual rate limiting effect depends on the size of the compressed data. You can refer to the `backup data size (after compressed)` field in the logs for more insight. When `--ratelimit` is enabled, BR automatically sets `--concurrency` to `1` to reduce the number of concurrent requests.
 
 > **Note:** 
 >
@@ -208,7 +206,7 @@ When enabled, BR will automatically set `--concurrency` to 1 to reduce the numbe
 >
 > In such situations, consider the following alternatives:
 >
-> - [Scale out a cluster](/tiup/tiup-component-cluster-scale-out.md) to increase available resources.
+> - [Scale out a cluster](/tiup/tiup-cluster.md#scale-out-a-cluster) to increase available resources.
 > - Enable [`Log Backup`](/br/br-log-architecture.md) to offload backup pressure and minimize disruption to online workloads.
 
 The impact of backup on cluster performance can be reduced by limiting the backup threads number, but this affects the backup performance. The preceding tests show that the backup speed is proportional to the number of backup threads. When the number of threads is small, the backup speed is about 20 MiB/thread. For example, 5 backup threads on a single TiKV node can reach a backup speed of 100 MiB/s.
