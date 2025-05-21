@@ -26,6 +26,7 @@ This document describes how to import the sample data into TiDB Cloud via the UI
 
 3. On the **Import Data from Amazon S3** page, configure the following source data information:
 
+    - **Import File Count**: for the sample data, select **Multiple files**.
     - **Included Schema Files**: for the sample data, select **Yes**.
         - To import schema and data from the source, select **Yes**. This option imports SQL scripts for creating a table and import corresponding table data stored in S3 into TiDB.
         - To import into pre-created tables, select **No**. This enables you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. You can click **SQL Editor** in the left navigation pane to create tables. For more information about how to use SQL Editor, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
@@ -58,6 +59,7 @@ This document describes how to import the sample data into TiDB Cloud via the UI
 
 3. On the **Import Data from GCS** page, configure the following source data information:
 
+    - **Import File Count**: for the sample data, select **Multiple files**.
     - **Included Schema Files**: for the sample data, select **Yes**.
         - To import schema and data from the source, select **Yes**. This option imports SQL scripts for creating a table and import corresponding table data stored in S3 into TiDB.
         - To import into pre-created tables, select **No**. This enables you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. You can click **SQL Editor** in the left navigation pane to create tables. For more information about how to use SQL Editor, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
