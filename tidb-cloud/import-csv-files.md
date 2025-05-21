@@ -109,7 +109,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 3. On the **Import Data from Amazon S3** page, provide the following information for the source CSV files:
 
-    - **Included Schema Files**: this field is only visible when importing multiple files. If the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
+    - **Included Schema Files**: if the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
     - **Data Format**: select **CSV**.
     - **Folder URI**: enter the source folder URI in the `s3://[bucket_name]/[data_source_folder]/` format. For example, `s3://sampledata/ingest/`.
     - **Bucket Access**: you can use either an AWS Role ARN or an AWS access key to access your bucket. For more information, see [Configure Amazon S3 access](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access).
@@ -158,7 +158,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 3. On the **Import Data from GCS** page, provide the following information for the source CSV files:
 
-    - **Included Schema Files**: this field is only visible when importing multiple files. If the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
+    - **Included Schema Files**: if the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
     - **Data Format**: select **CSV**.
     - **Folder URI**: enter the source folder URI in the `gs://[bucket_name]/[data_source_folder]/` format. For example, `gs://sampledata/ingest/`.
     - **Bucket Access**: you can use a GCS IAM Role to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access).
@@ -205,7 +205,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 3. On the **Import Data from Azure Blob Storage** page, provide the following information for the source CSV files:
 
-    - **Included Schema Files**: this field is only visible when importing multiple files. If the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
+    - **Included Schema Files**: if the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
     - **Data Format**: select **CSV**.
     - **Folder URI**: enter the source folder URI in the `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/` format. For example, `https://myaccount.blob.core.windows.net/mycontainer/data-ingestion/`.
     - **SAS Token**: enter a SAS token to access your container. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access).
