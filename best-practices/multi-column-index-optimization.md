@@ -1,9 +1,9 @@
 ---
-title: Use Multi-Column Index to Optimize Queries
+title: Multi-Column Index Optimization
 summary: Learn how to use multi-column indexes effectively in TiDB and understand advanced optimization techniques.
 ---
 
-# Use Multi-Column Index to Optimize Queries
+# Multi-Column Index Optimization
 
 In today's data-driven world, efficiently handling complex queries on large datasets is critical to keeping applications responsive and performant. For TiDB, a distributed SQL database designed to manage high-scale, high-demand environments, optimizing data access paths is essential to delivering smooth, efficient queries. Indexes are a powerful tool for improving query performance by avoiding the need to scan all rows in a table. TiDB's query optimizer leverages multi-column indexes to intelligently filter data, handling complex query conditions that traditional databases such as MySQL cannot process as effectively. 
 
