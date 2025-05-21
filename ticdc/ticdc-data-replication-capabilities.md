@@ -1,9 +1,9 @@
 ---
-title: Analysis of TiCDC's Data Replication Capabilities
-summary: Learn TiCDC's data Replication capabilities.
+title: TiCDC Data Replication Capabilities
+summary: Learn the data replication capabilities of TiCDC.
 ---
 
-# Analysis of TiCDC's Data Replication Capabilities
+# TiCDC Data Replication Capabilities
 
 TiCDC (TiDB Change Data Capture) is a core component for real-time data synchronization in the TiDB ecosystem. This doc provides a detailed explanation of TiCDC's data replication capabilities.
 
