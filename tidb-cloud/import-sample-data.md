@@ -26,7 +26,6 @@ This document describes how to import the sample data into TiDB Cloud Dedicated 
 
 3. On the **Import Data from Amazon S3** page, configure the following source data information:
 
-    - **Import File Count**: for the sample data, select **Multiple files**.
     - **Included Schema Files**: for the sample data, select **Yes**.
     - **Data Format**: select **SQL**. 
     - **Folder URI** or **File URI**: enter the sample data URI `s3://tidbcloud-sample-data/data-ingestion/`.
@@ -55,7 +54,6 @@ This document describes how to import the sample data into TiDB Cloud Dedicated 
 
 3. On the **Import Data from GCS** page, configure the following source data information:
 
-    - **Import File Count**: for the sample data, select **Multiple files**.
     - **Included Schema Files**: for the sample data, select **Yes**.
     - **Data Format**: select **SQL**.
     - **Folder URI** or **File URI**: enter the sample data URI `gs://tidbcloud-samples-us-west1/`.
