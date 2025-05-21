@@ -1,56 +1,52 @@
 ---
 title: Interact with Support Tickets via Slack
-summary: サポート チケットの Slack のやり取りに関する詳細情報を紹介します。
+summary: サポート チケットの Slack でのやり取りに関する詳細情報を紹介します。
 ---
 
 # Slack経由でサポートチケットとやり取りする {#interact-with-support-tickets-via-slack}
 
-**Premium** [サポートプラン](/tidb-cloud/connected-care-detail.md)に加入している顧客向けに、 TiDB Cloud は[スラック](https://slack.com/)で**Assist**と呼ばれるチケット ボットを提供し、サポート チケットのより包括的なやり取りと管理をサポートします。
+**Premium** [サポートプラン](/tidb-cloud/connected-care-detail.md)に加入している顧客向けに、 TiDB Cloud は、サポート チケットのより包括的なやり取りと管理をサポートするために、 [スラック](https://slack.com/)で**PingCAP Support Bot**と呼ばれるチケット ボットを提供します。
 
 > **注記：**
 >
-> Slack のチケット サポート機能は、リクエストに応じてご利用いただけます。この機能を試してみたい場合は、 TiDB Cloudサポート ( <a href="mailto:support@pingcap.com">[サポート](mailto:support@pingcap.com)</a>にお問い合わせいただくか、テクニカル アカウント マネージャー (TAM) にご連絡ください。
+> Slackのチケットサポート機能はリクエストに応じてご利用いただけます。この機能をご利用になりたい場合は、 TiDB Cloudサポート<a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>までご連絡いただくか、担当のテクニカルアカウントマネージャー（TAM）までお問い合わせください。
 
-## サポートチケットとのやり取り {#interact-with-support-tickets}
+**PingCAP サポート ボット**を使用して Slack でサポート チケットを作成できます。
 
-チャネルに**Assist**アプリが追加されている場合は、 **Assist**を使用してチケットを送信できます。リクエストを送信するには 2 つの方法があります。
+![Create a support ticket in Slack](/media/tidb-cloud/connected-slack-ticket-interaction-creation.gif)
 
--   **方法1: チケット作成のメッセージに🎫絵文字を追加する**
+Slack でサポート チケットに直接返信することもできます。
 
-    チケットを作成する必要があるメッセージの横にある絵文字アイコンをクリックします。検索ボックスに`ticket`と入力して🎫絵文字をすばやく見つけ、🎫をクリックします。
+![Reply to a support ticket in Slack](/media/tidb-cloud/connected-slack-ticket-interaction-reply.gif)
 
-    ![slack-ticket-interaction-1](/media/tidb-cloud/connected-slack-ticket-interaction-1.png)
+## サポートチケットでやり取りする {#interact-with-support-tickets}
 
-    ![slack-ticket-interaction-2](/media/tidb-cloud/connected-slack-ticket-interaction-2.png)
+Slackのサポートチャンネルで、 **PingCAP Support Bot**をメンションし、メッセージで問題を説明してください。すると、ボットから**「リクエストを送信」**ボタン付きのメッセージが送信されます。
 
-    **Assist**アプリから**、「リクエストを送信」**ボタンを含むメッセージが送信されます。その後、ボタンをクリックしてフォームに入力し、リクエストを送信します。
+![slack-ticket-interaction-1](/media/tidb-cloud/connected-slack-ticket-interaction-1.png)
 
-    ![slack-ticket-interaction-3](/media/tidb-cloud/connected-slack-ticket-interaction-3.png)
+**「リクエストを送信」**をクリックしてフォームを開き、問題に応じて入力し、 **「作成」**をクリックしてチケットを送信します。
 
-    ![slack-ticket-interaction-4](/media/tidb-cloud/connected-slack-ticket-interaction-4.png)
+![slack-ticket-interaction-2](/media/tidb-cloud/connected-slack-ticket-interaction-2.png)
 
--   **方法 2: チケット作成のために、問題の説明とともに`/assist`または`/assist`入力します。**
+送信後、ボットはチケットリンクを含む確認メッセージをスレッドに送信します。
 
-    もう 1 つのより速い方法は、メッセージ ボックスに`/assist`または`/assist [problem description]`と入力して**Enter キー**を押すことです。入力して送信するためのリクエスト送信フォームが表示されます。
+![slack-ticket-interaction-3](/media/tidb-cloud/connected-slack-ticket-interaction-3.png)
 
-    ![slack-ticket-interaction-5](/media/tidb-cloud/connected-slack-ticket-interaction-5.png)
+**Premium** [サポートプラン](/tidb-cloud/connected-care-detail.md)にご加入のお客様は、Slack とチケットシステム間の双方向の情報同期がサポートされます。
 
-送信後、Assist アプリはスレッド内に確認メッセージを送信します。このメッセージには、チケット リンクとチケットのステータスが含まれます。
+サポートエンジニアのチケットへのコメントはSlackのメッセージスレッドに同期されるため、ユーザーはサポートポータルに移動してコメントを確認する必要はありません。ユーザーはこのメッセージスレッドに直接返信することができ、返信はチケットシステムに同期されます。
 
-**Premium** [サポートプラン](/tidb-cloud/connected-care-detail.md)にご加入のお客様の場合、Slack とチケットシステム間の双方向の情報同期がサポートされます。
+これにより、**プレミアム**サポート プランに加入している顧客は、Slack を離れることなく、チケットをすばやく作成、対応、管理できるようになります。
 
-チケットに対するサポート エンジニアのコメントは Slack メッセージ スレッドに同期されるため、ユーザーはサポート ポータルに移動してコメントを表示する必要はありません。ユーザーはこのメッセージ スレッドで直接返信することができ、これらの返信はチケット システムに同期されます。
-
-これにより、**プレミアム**サポート プランに加入している顧客は、Slack を離れることなく、チケットをすばやく作成、応答、管理できるようになります。
-
-![slack-ticket-interaction-6](/media/tidb-cloud/connected-slack-ticket-interaction-6.png)
+![slack-ticket-interaction-4](/media/tidb-cloud/connected-slack-ticket-interaction-4.png)
 
 ## よくある質問 {#faqs}
 
 -   チケットのステータスを確認するにはどうすればいいですか?
 
-    チケットの作成に使用したメール アドレスで[PingCAP ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/user/requests)にログインします。現在のアカウントのすべての過去のチケットとそのステータスを表示できます。
+    チケット作成時に使用したメールアドレスで[PingCAPヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/user/requests)にログインしてください。現在のアカウントのすべての過去のチケットとそのステータスを確認できます。
 
-## サポートに問い合わせる {#contact-support}
+## サポートにお問い合わせください {#contact-support}
 
-ご質問やご不明な点がございましたら、サポート チーム<a href="mailto:support@pingcap.com">[サポート](mailto:support@pingcap.com)</a>までお問い合わせください。
+ヘルプや質問がある場合は、 <a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>のサポート チームにお問い合わせください。

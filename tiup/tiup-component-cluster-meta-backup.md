@@ -1,11 +1,11 @@
 ---
 title: tiup cluster meta backup
-summary: TiUPメタファイルは、クラスターの運用と保守に不可欠です。tiup cluster meta backup` を使用して、ファイルを定期的にバックアップします。`tiup dm list` を使用してクラスター名を確認します。`--file` オプションでターゲット ディレクトリを指定します。ヘルプ情報を表示するには、`-h, --help` を使用します。出力には、 tiup-clusterの実行ログが含まれます。
+summary: TiUPメタファイルは、クラスタの運用と保守に不可欠です。定期的にファイルをバックアップするには、tiup cluster meta backup`コマンドを使用してください。クラスタ名を確認するには、`tiup dm listコマンドを使用してください。`--file`オプションでターゲットディレクトリを指定してください。ヘルプ情報を表示するには、`-h, --helpコマンドを使用してください。出力には、tiup-clusterの実行ログが含まれます。
 ---
 
-# tiup クラスタ メタ バックアップ {#tiup-cluster-meta-backup}
+# tiup クラスタメタバックアップ {#tiup-cluster-meta-backup}
 
-TiUPメタ ファイルは、クラスターの運用と保守 (OM) に使用されます。このファイルが失われると、 TiUP を使用してクラスターを管理できなくなります。この状況を回避するには、 `tiup cluster meta backup`コマンドを使用して、 TiUPメタ ファイルを定期的にバックアップします。
+TiUPメタファイルはクラスタの運用保守（OM）に使用されます。このファイルが失われると、 TiUPを使用してクラスタを管理できなくなります。このような状況を回避するには、 `tiup cluster meta backup`コマンドを使用してTiUPメタファイルを定期的にバックアップしてください。
 
 ## 構文 {#syntax}
 
@@ -13,7 +13,7 @@ TiUPメタ ファイルは、クラスターの運用と保守 (OM) に使用さ
 tiup cluster meta backup <cluster-name> [flags]
 ```
 
-`<cluster-name>`は操作対象となるクラスターの名前です。クラスター名を忘れた場合は、 [`tiup dm list`](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
+`<cluster-name>`は操作対象となるクラスターの名前です。クラスター名を忘れた場合は、 [`tiup cluster list`](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
 
 ## オプション {#options}
 
@@ -25,7 +25,7 @@ TiUPメタ バックアップ ファイルを保存するターゲット ディ�
 
 -   ヘルプ情報を出力します。
 -   データ型: `Boolean`
--   このオプションはデフォルトでは無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないようにします。
+-   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
 ## 出力 {#output}
 
