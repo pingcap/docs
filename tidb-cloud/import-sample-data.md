@@ -46,9 +46,7 @@ This document describes how to import the sample data into TiDB Cloud Dedicated 
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-2. Click **Import Data** in the upper-right corner.
-
-    If this is your first time importing data into this cluster, select **Import From GCS**.
+2. Select **Import data from Cloud Storage**, and then click **Google Cloud Storage**.
 
 3. On the **Import Data from GCS** page, configure the following source data information:
 
