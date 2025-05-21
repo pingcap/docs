@@ -1,6 +1,7 @@
 ---
 title: Set Up Self-Hosted Kafka Private Link Service in AWS
 summary: This document explains how to set up Private Link service for self-hosted Kafka in AWS and how to make it work with TiDB Cloud.
+aliases: ['/tidbcloud/setup-self-hosted-kafka-private-link-service']
 ---
 
 # Set Up Self-Hosted Kafka Private Link Service in AWS
@@ -39,7 +40,7 @@ The document provides an example of connecting to a Kafka Private Link service d
     1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Changefeed** in the left navigation pane.
     2. On the overview page, find the region of the TiDB cluster. Ensure that your Kafka cluster will be deployed to the same region.
     3. Click **Create Changefeed**.
-        1. In **Target Type**, select **Kafka**.
+        1. In **Destination**, select **Kafka**.
         2. In **Connectivity Method**, select **Private Link**.
     4. Note down the information of the TiDB Cloud AWS account in **Reminders before proceeding**. You will use it to authorize TiDB Cloud to create an endpoint for the Kafka Private Link service.
     5. Select **Number of AZs**. In this example, select **3 AZs**. Note down the IDs of the AZs in which you want to deploy your Kafka cluster. If you want to know the relationship between your AZ names and AZ IDs, see [Availability Zone IDs for your AWS resources](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html) to find it.
@@ -132,8 +133,7 @@ Take the following steps to create the Kafka VPC.
    - **Subnet name**: `bastion`
    - **IPv4 subnet CIDR block**: `10.0.192.0/18`
 
-4. Click **Create subnet**. The **Subnets Listing** page is displayed.
-5. Configure the bastion subnet to the Public subnet.
+4. Configure the bastion subnet to the Public subnet.
 
     1. Go to [VPC dashboard > Internet gateways](https://console.aws.amazon.com/vpcconsole/home#igws:). Create an Internet Gateway with the name `kafka-vpc-igw`.
     2. On the **Internet gateways Detail** page, in **Actions**, click **Attach to VPC** to attach the Internet Gateway to the Kafka VPC.
@@ -434,18 +434,18 @@ LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properti
 
     # Create a topic if it does not exist
     create_topic() {
-    echo "Creating topic if it does not exist..."
-    $KAFKA_DIR/kafka-topics.sh --create --topic $TOPIC --bootstrap-server $BROKER_LIST --if-not-exists --partitions 3 --replication-factor 3
+        echo "Creating topic if it does not exist..."
+        $KAFKA_DIR/kafka-topics.sh --create --topic $TOPIC --bootstrap-server $BROKER_LIST --if-not-exists --partitions 3 --replication-factor 3
     }
 
     # Produce messages to the topic
     produce_messages() {
-    echo "Producing messages to the topic..."
-    for ((chrono=1; chrono <= 10; chrono++)); do
-        message="Test message "$chrono
-        echo "Create "$message
-        echo $message | $KAFKA_DIR/kafka-console-producer.sh --broker-list $BROKER_LIST --topic $TOPIC
-    done
+        echo "Producing messages to the topic..."
+        for ((chrono=1; chrono <= 10; chrono++)); do
+            message="Test message "$chrono
+            echo "Create "$message
+            echo $message | $KAFKA_DIR/kafka-console-producer.sh --broker-list $BROKER_LIST --topic $TOPIC
+        done
     }
     create_topic
     produce_messages 
@@ -468,8 +468,8 @@ LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properti
     CONSUMER_GROUP="test-group"
     # Consume messages from the topic
     consume_messages() {
-    echo "Consuming messages from the topic..."
-    $KAFKA_DIR/kafka-console-consumer.sh --bootstrap-server $BROKER_LIST --topic $TOPIC --from-beginning --timeout-ms 5000 --consumer-property group.id=$CONSUMER_GROUP
+        echo "Consuming messages from the topic..."
+        $KAFKA_DIR/kafka-console-consumer.sh --bootstrap-server $BROKER_LIST --topic $TOPIC --from-beginning --timeout-ms 5000 --consumer-property group.id=$CONSUMER_GROUP
     }
     consume_messages
     ```
@@ -688,7 +688,7 @@ Do the following to set up the load balancer:
         - `usw2-az2` with `broker-usw2-az2 subnet`
         - `usw2-az3` with `broker-usw2-az3 subnet`
     - **Security groups**: create a new security group with the following rules.
-        - Inbound rule allows all TCP from Kafka VPC: Type - `All TCP`; Source - `Anywhere-IPv4`
+        - Inbound rule allows all TCP from Kafka VPC: Type - `{ports of target groups}`, for example, `9092-9095`; Source - `{CIDR of TiDB Cloud}`. To get the CIDR of TiDB Cloud in the region, click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Project Settings** > **Network Access** > **Project CIDR** > **AWS**.
         - Outbound rule allows all TCP to Kafka VPC: Type - `All TCP`; Destination - `Anywhere-IPv4`
     - Listeners and routing:
         - Protocol: `TCP`; Port: `9092`; Forward to: `bootstrap-target-group`
