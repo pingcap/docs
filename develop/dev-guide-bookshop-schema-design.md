@@ -105,7 +105,7 @@ You can delete the original table structure through the `--drop-tables` paramete
 
 3. On the **Import Data from Amazon S3** page, configure the following source data information:
 
-    - **Import File Count**: select **Multiple files**.
+    - **Import File Count**: for TiDB Cloud Serverless, select **Multiple files**. This field is not available in TiDB Cloud Dedicated.
     - **Included Schema Files**: select **Yes**.
     - **Data Format**: select **SQL**.
     - **Folder URI**: enter `s3://developer.pingcap.com/bookshop/`.

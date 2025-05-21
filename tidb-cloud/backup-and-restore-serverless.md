@@ -41,7 +41,7 @@ To set the backup time for a scalable cluster, perform the following steps:
 
 1. Navigate to the **Backup** page of a TiDB Cloud Serverless cluster.
 
-2. Click **Backup Settings**. This will open the **Backup Settings** window, where you can configure the automatic backup settings according to your requirements.
+2. Click **Backup Setting**. This will open the **Backup Setting** window, where you can configure the automatic backup settings according to your requirements.
 
 3. In **Backup Time**, schedule a start time for the daily cluster backup.
 
