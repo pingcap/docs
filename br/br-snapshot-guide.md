@@ -26,15 +26,13 @@ You can back up a TiDB cluster snapshot by running the `tiup br backup full` com
 ```shell
 tiup br backup full --pd "${PD_IP}:2379" \
     --backupts '2022-09-08 13:30:00 +08:00' \
-    --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}" \
-    --ratelimit 128 \
+    --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}" 
 ```
 
 In the preceding command:
 
 - `--backupts`: The time point of the snapshot. The format can be [TSO](/tso.md) or timestamp, such as `400036290571534337` or `2018-05-11 01:42:23 +08:00`. If the data of this snapshot is garbage collected, the `tiup br backup` command returns an error and `br` exits. When backing up using a timestamp, it is recommended to specify the time zone as well. Otherwise, `br` uses the local time zone to construct the timestamp by default, which might lead to an incorrect backup time point. If you leave this parameter unspecified, `br` picks the snapshot corresponding to the backup start time.
 - `--storage`: The storage address of the backup data. Snapshot backup supports Amazon S3, Google Cloud Storage, and Azure Blob Storage as backup storage. The preceding command uses Amazon S3 as an example. For more details, see [URI Formats of External Storage Services](/external-storage-uri.md).
-- `--ratelimit`: The maximum speed **per TiKV** performing backup tasks. The unit is in MiB/s.
 
 During backup, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the backup task is completed and statistics such as total backup time, average backup speed, and backup data size are displayed.
 
@@ -196,8 +194,18 @@ To illustrate the impact of backup, this document lists the test conclusions of 
 
 You can use the following methods to manually control the impact of backup tasks on cluster performance. However, these two methods also reduce the speed of backup tasks while reducing the impact of backup tasks on the cluster.
 
-- Use the `--ratelimit` parameter to limit the speed of backup tasks. Note that this parameter limits the speed of **saving backup files to external storage**. When calculating the total size of backup files, use the `backup data size(after compressed)` as a benchmark. When `--ratelimit` is set, to avoid too many tasks causing the speed limit to fail, the `concurrency` parameter of br is automatically adjusted to `1`.
-- Adjust the TiKV configuration item [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) to limit the number of threads used by backup tasks. According to internal tests, when BR uses no more than `8` threads for backup tasks, and the total CPU utilization of the cluster does not exceed 60%, the backup tasks have little impact on the cluster, regardless of the read and write workload.
+- Recommended method: Adjust the TiKV configuration parameter [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1), which controls the number of worker threads used by backup tasks. Because backup is a CPU-intensive operation, tuning this parameter allows you to control TiKV's CPU usage more precisely, enabling better resource isolation and predictability. In most scenarios, simply adjusting `num-threads` is sufficient to limit the impact of backup on the cluster. Internal testing shows that when the number of threads is set to `8` or fewer, and overall cluster CPU usage remains below 60%, the impact of backup on foreground workloads is negligible.
+
+- Alternative method: If you have already set `backup.num-threads` to a small value (for example, `1`), but still want to further reduce the impact of backup on the cluster, consider using the `--ratelimit` parameter. This option limits the bandwidth used to write backup files to external storage, specified in MiB/s. Note that the actual rate limiting effect depends on the size of the compressed data. You can refer to the `backup data size (after compressed)` field in the logs for more insight. When `--ratelimit` is enabled, BR automatically sets `--concurrency` to `1` to reduce the number of concurrent requests.
+
+> **Note:** 
+>
+> Enabling `--ratelimit` will further reduce backup throughput. In most cases, if you are already performing backups during off-peak hours and have reduced `backup.num-threads` to 1 but still observe backup impact on foreground workloads, it typically indicates that the cluster is approaching its resource limits.
+>
+> In such situations, you can consider the following alternatives:
+>
+> - [Scale out a cluster](/tiup/tiup-cluster.md#scale-out-a-cluster) to increase available resources.
+> - Enable [`Log Backup`](/br/br-log-architecture.md) to offload backup pressure and minimize disruption to online workloads.
 
 The impact of backup on cluster performance can be reduced by limiting the backup threads number, but this affects the backup performance. The preceding tests show that the backup speed is proportional to the number of backup threads. When the number of threads is small, the backup speed is about 20 MiB/thread. For example, 5 backup threads on a single TiKV node can reach a backup speed of 100 MiB/s.
 
