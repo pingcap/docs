@@ -46,6 +46,20 @@ To view the metrics dashboard, take the following steps:
 
 The retention policy for advanced metrics is 90 days.
 
+The dashboards and their content are subject to change. Currently, the folling dashboards are available:
+
+- Backup & Import
+- DM-Professional
+- DM-Standard
+- Lightning
+- Performance-Overview
+- TiCDC-Summary
+- TiDB
+- TiDB-Resource-Control
+- TiFlash-Summary
+- TiKV-Details
+- User-Node-Info
+
 ## Analyze top slow queries
 
 By default, SQL queries that take longer than 300 milliseconds are considered slow queries.
