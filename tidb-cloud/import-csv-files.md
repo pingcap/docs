@@ -113,6 +113,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 3. On the **Import Data from Amazon S3** page, provide the following information for the source CSV files:
 
+    - **Import File Count**: select **One file** or **Multiple files** as needed.
     - **Included Schema Files**: this field is only visible when importing multiple files. If the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
     - **Data Format**: select **CSV**.
     - **File URI** or **Folder URI**:
@@ -166,6 +167,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 3. On the **Import Data from GCS** page, provide the following information for the source CSV files:
 
+    - **Import File Count**: select **One file** or **Multiple files** as needed.
     - **Included Schema Files**: this field is only visible when importing multiple files. If the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
     - **Data Format**: select **CSV**.
     - **File URI** or **Folder URI**:
