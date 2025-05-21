@@ -2150,7 +2150,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Warning:**
 >
-> The feature controlled by this variable is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> The feature controlled by this variable is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 <CustomContent platform="tidb">
 
@@ -2886,7 +2886,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Warning:**
 >
-> The feature controlled by this variable is experimental. It is not recommended that you use it in the production environment. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> The feature controlled by this variable is an experimental feature. It is not recommended that you use it in the production environment. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -3287,7 +3287,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Warning:**
 >
-> The feature controlled by this variable is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> The feature controlled by this variable is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -4259,7 +4259,7 @@ mysql> desc select count(distinct a) from test.t;
 
 > **Warning:**
 >
-> The feature controlled by this variable is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> The feature controlled by this variable is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
