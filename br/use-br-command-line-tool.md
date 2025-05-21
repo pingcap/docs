@@ -57,7 +57,7 @@ A `tiup br` command consists of multiple layers of sub-commands. Currently, br c
 * `--cert`: specifies the path to the SSL certificate in the PEM format.
 * `--key`: specifies the path to the SSL certificate key in the PEM format.
 * `--status-addr`: specifies the listening address through which `br` provides statistics to Prometheus.
-* `--concurrency`: the number of concurrent tasks during the backup.
+* `--concurrency`: controls how backup tasks are split into multiple requests and sent concurrently to the same TiKV node. This parameter primarily affects the granularity of request splitting from BR to TiKV, and no longer directly determines overall backup throughput. In most cases, it is not necessary to change this value. To improve backup performance, it is recommended to tune [`tikv.backup.num-threads`](/tikv-configuration-file.md#num-threads-1) instead.
 * `--pitr-concurrency`: the number of concurrent tasks during log restore.
 * `--tikv-max-restore-concurrency`: the maximum number of concurrent tasks per TiKV node during snapshot restore.
 * `--compression`: determines the compression algorithm used for generating backup files. It supports `lz4`, `snappy`, and `zstd`, with the default being `zstd` (usually no need to modify). For guidance on choosing different compression algorithms, refer to [this document](https://github.com/EighteenZi/rocksdb_wiki/blob/master/Compression.md).
