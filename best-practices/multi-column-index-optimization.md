@@ -117,11 +117,11 @@ The TiDB optimizer includes a powerful range derivation component. It is designe
 
 For each table in a query, the table access component evaluates all applicable indexes to identify the optimal access method—whether through a full table scan or an index scan. It calculates the range for each relevant index, assesses the access cost, and selects the path with the lowest cost. This process combines range derivation with a cost assessment subsystem to find the most efficient way to retrieve data, balancing performance and resource usage.
 
-The diagram below illustrates how the range derivation and cost assessment work together within TiDB`s table access logic to achieve optimal data retrieval.
+The diagram below illustrates how the range derivation and cost assessment work together within TiDB's table access logic to achieve optimal data retrieval.
 
 ![Table Access Path Selection](/media/best-practices/multi-column-index-table-access-path-selection.png)
 
-Multi-column filters are often more complex than the basic examples discussed earlier. They might include **AND** conditions, **OR** conditions, or a combination of both. TiDB`s range derivation subsystem is designed to handle these cases efficiently, generating the most selective (and therefore, most effective) index ranges.
+Multi-column filters are often more complex than the basic examples discussed earlier. They might include **AND** conditions, **OR** conditions, or a combination of both. TiDB's range derivation subsystem is designed to handle these cases efficiently, generating the most selective (and therefore, most effective) index ranges.
 
 In general, the subsystem applies a **UNION** operation for ranges generated from **OR** conditions and an **INTERSECT** operation for ranges derived from **AND** conditions. This approach ensures that TiDB can filter data as precisely as possible, even with complex filtering logic.
 
