@@ -9,7 +9,7 @@ Release date: June 29, 2023
 
 TiDB version: 7.2.0
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-tidb)
+Quick access: [Quick start](https://docs-archive.pingcap.com/tidb/v7.2/quick-start-with-tidb)
 
 7.2.0 introduces the following key features and improvements:
 
@@ -24,22 +24,22 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
 <tbody>
   <tr>
     <td rowspan="2">Scalability and Performance</td>
-    <td>Resource groups support <a href="https://docs.pingcap.com/tidb/v7.2/tidb-resource-control#manage-queries-that-consume-more-resources-than-expected-runaway-queries"> managing runaway queries</a> (experimental)</td>
+    <td>Resource groups support <a href="https://docs-archive.pingcap.com/tidb/v7.2/tidb-resource-control#manage-queries-that-consume-more-resources-than-expected-runaway-queries"> managing runaway queries</a> (experimental)</td>
     <td>You can now manage query timeout with more granularity, allowing for different behaviors based on query classifications. Queries meeting your specified threshold can be deprioritized or terminated.
     </td>
   </tr>
   <tr>
-    <td>TiFlash supports the <a href="https://docs.pingcap.com/tidb/v7.2/tiflash-pipeline-model">pipeline execution model</a> (experimental)</td>
+    <td>TiFlash supports the <a href="https://docs-archive.pingcap.com/tidb/v7.2/tiflash-pipeline-model">pipeline execution model</a> (experimental)</td>
     <td>TiFlash supports a pipeline execution model to optimize thread resource control.</td>
   </tr>
   <tr>
     <td rowspan="1">SQL</td>
-    <td>Support a new SQL statement, <a href="https://docs.pingcap.com/tidb/v7.2/sql-statement-import-into">IMPORT INTO</a>, for data import (experimental)</td>
+    <td>Support a new SQL statement, <a href="https://docs-archive.pingcap.com/tidb/v7.2/sql-statement-import-into">IMPORT INTO</a>, for data import (experimental)</td>
    <td>To simplify the deployment and maintenance of TiDB Lightning, TiDB introduces a new SQL statement <code>IMPORT INTO</code>, which integrates physical import mode of TiDB Lightning, including remote import from Amazon S3 or Google Cloud Storage (GCS) directly into TiDB.</td>
   </tr>
   <tr>
     <td rowspan="2">DB Operations and Observability</td>
-    <td>DDL supports <a href="https://docs.pingcap.com/tidb/v7.2/ddl-introduction#ddl-related-commands">pause and resume operations</a> (experimental)</td>
+    <td>DDL supports <a href="https://docs-archive.pingcap.com/tidb/v7.2/ddl-introduction#ddl-related-commands">pause and resume operations</a> (experimental)</td>
     <td>This new capability lets you temporarily suspend resource-intensive DDL operations, such as index creation, to conserve resources and minimize the impact on online traffic. You can seamlessly resume these operations when ready, without the need to cancel and restart. This feature enhances resource utilization, improves user experience, and streamlines schema changes.</td>
   </tr>
 </tbody>
@@ -173,6 +173,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
 ### Behavior changes
 
 - When processing update event, TiCDC splits an event into delete and insert events if the primary key or non-null unique index value is modified in the event. For more information, see [documentation](/ticdc/ticdc-split-update-behavior.md#transactions-containing-a-single-update-change).
+- Changes the default value of [`tidb_remove_orderby_in_subquery`](/system-variables.md#tidb_remove_orderby_in_subquery-new-in-v610) from `OFF` to `ON`, meaning that the optimizer removes `ORDER BY` clauses from subqueries to avoid unnecessary sorting operations. This change might result in a different order of rows in query results. The ISO/IEC SQL standard does not require query results to follow the `ORDER BY` sorting specified in subqueries. If you need to ensure a specific order in the final result, add an `ORDER BY` clause to the outer query. If your applications rely on subquery sorting, you can set this variable to `OFF`. Clusters upgraded from earlier versions retain the previous behavior by default.
 
 ### System variables
 
@@ -184,7 +185,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
 | [`tidb_analyze_skip_column_types`](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720) | Newly added | Controls which types of columns are skipped for statistics collection when executing the `ANALYZE` command to collect statistics. The variable is only applicable for [`tidb_analyze_version = 2`](/system-variables.md#tidb_analyze_version-new-in-v510). When using the syntax of `ANALYZE TABLE t COLUMNS c1, ..., cn`, if the type of a specified column is included in `tidb_analyze_skip_column_types`, the statistics of this column will not be collected. |
 | [`tidb_enable_check_constraint`](/system-variables.md#tidb_enable_check_constraint-new-in-v720) | Newly added | Controls whether to enable `CHECK` constraints. The default value is `OFF`, which means this feature is disabled. |
 | [`tidb_enable_fast_table_check`](/system-variables.md#tidb_enable_fast_table_check-new-in-v720) | Newly added | Controls whether to use a checksum-based approach to quickly check the consistency of data and indexes in a table. The default value is `ON`, which means this feature is enabled. |
-| [`tidb_enable_tiflash_pipeline_model`](https://docs.pingcap.com/tidb/v7.2/system-variables#tidb_enable_tiflash_pipeline_model-new-in-v720) | Newly added | Controls whether to enable the new execution model of TiFlash, the [pipeline model](/tiflash/tiflash-pipeline-model.md). The default value is `OFF`, which means the pipeline model is disabled. |
+| [`tidb_enable_tiflash_pipeline_model`](https://docs-archive.pingcap.com/tidb/v7.2/system-variables#tidb_enable_tiflash_pipeline_model-new-in-v720) | Newly added | Controls whether to enable the new execution model of TiFlash, the [pipeline model](/tiflash/tiflash-pipeline-model.md). The default value is `OFF`, which means the pipeline model is disabled. |
 | [`tidb_expensive_txn_time_threshold`](/system-variables.md#tidb_expensive_txn_time_threshold-new-in-v720) | Newly added | Controls the threshold for logging expensive transactions, which is 600 seconds by default. When the duration of a transaction exceeds the threshold, and the transaction is neither committed nor rolled back, it is considered an expensive transaction and will be logged. |
 
 ### Configuration file parameters
