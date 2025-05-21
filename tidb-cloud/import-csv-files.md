@@ -208,10 +208,8 @@ To import the CSV files to TiDB Cloud, take the following steps:
     - **Import File Count**: select **One file** or **Multiple files** as needed.
     - **Included Schema Files**: this field is only visible when importing multiple files. If the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
     - **Data Format**: select **CSV**.
-    - **File URI** or **Folder URI**:
-        - When importing one file, enter the source file URI and name in the following format `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/[file_name].csv`. For example, `https://myaccount.blob.core.windows.net/mycontainer/data-ingestion/TableName.01.csv`.
-        - When importing multiple files, enter the source folder URI in the following format `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/`. For example, `https://myaccount.blob.core.windows.net/mycontainer/data-ingestion/`.
-    - **Container Access**: you can use either a SAS token or a Managed Identity to access your container. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access).
+    - **Folder URI**: enter the source folder URI in the `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/` format. For example, `https://myaccount.blob.core.windows.net/mycontainer/data-ingestion/`.
+    - **SAS Token**: enter a SAS token to access your container. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access).
 
 4. Click **Connect**.
 
