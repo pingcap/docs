@@ -7,7 +7,7 @@ summary: Learn the data replication capabilities of TiCDC.
 
 [TiCDC](/ticdc/ticdc-overview.md) (TiDB Change Data Capture) is a core component in the TiDB ecosystem for real-time data replication. This document provides a detailed explanation of TiCDC data replication capabilities.
 
-## Implementation principles
+## How TiCDC works
 
 - TiCDC listens to TiKV change logs (Raft logs) and converts row-level data changes (`INSERT`, `UPDATE`, and `DELETE` operations) into downstream-compatible SQL statements. TiCDC does not rely on the original SQL statements executed on the upstream database. For details, see [how TiCDC processes data changes](/ticdc/ticdc-overview.md#implementation-of-processing-data-changes).
 
@@ -26,16 +26,18 @@ TiCDC supports replicating data to various downstream systems, including the fol
 - [Snowflake, ksqlDB, SQL Server via Confluent Cloud integration](/ticdc/integrate-confluent-using-ticdc.md)
 - [Apache Flink for consuming Kafka-replicated data](/ticdc/replicate-data-to-kafka-and-flink.md)
 
-# Scope of data replication
+## Scope of data replication
 
 TiCDC supports the following types of upstream data changes:
 
 + **Supported:**
+
     - DDL and DML statements(excluding system tables).
     - Index operations (`ADD INDEX`, `CREATE INDEX`): to reduce the impact on changefeed replication latency, if the downstream is TiDB, TiCDC [asynchronously executes the `ADD INDEX` and `CREATE INDEX` DDL operations](/ticdc/ticdc-ddl.md#asynchronous-execution-of-add-index-and-create-index-ddls).
     - Foreign key constraint DDL statements (`ADD FOREIGN KEY`): TiCDC does **not** replicate upstream system variable settings. You need to manually configure [`foreign_key_checks`](/system-variables.md#foreign_key_checks) in the downstream to determine whether the downstream foreign key constraint check is enabled.
 
-- **Not supported**:
++ **Not supported**:
+
     - DDL and DML statements executed in upstream system tables (including `mysql.*` and `information_schema.*`).
     - DDL and DML statements executed in upstream temporary tables.
     - DQL (Data Query Language) and DCL (Data Control Language) statements.
