@@ -11,7 +11,7 @@ This document walks you through how multi-column indexes function, why they are 
 
 Without these optimizations, query performance in large TiDB databases can degrade quickly. Full table scans and inadequate filtering can turn milliseconds into minutes. Additionally, excessive memory use can lead to out-of-memory (OOM) errors, especially in constrained environments. TiDB's targeted approach ensures only relevant data is accessed. This keeps latency low and memory usage efficient, even for the most complex queries. 
 
-You can use the multi-column index feature on TiDB v8.3 and later versions. 
+You can use the multi-column index feature on TiDB v8.3 and later versions. Before using this feature, you need to change the value of the [optimizer fix control **54337**](/optimizer-fix-controls.md#54337-new-in-v830) to `ON`.
 
 ## Background: multi-column indexes
 
