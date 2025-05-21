@@ -16,7 +16,7 @@ SELECT * FROM uptime;
 SELECT * FROM information_schema.metrics_tables WHERE table_name='uptime'\G
 ```
 
-```sql
+```SQL
 +----------------------------+-----------------+------------+--------------------+
 | time                       | instance        | job        | value              |
 +----------------------------+-----------------+------------+--------------------+
