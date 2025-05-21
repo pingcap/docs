@@ -31,9 +31,7 @@ Configure the bucket access for TiDB Cloud and get the Role ARN as follows:
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-    3. On the **Import** page, select **Import data from S3**.
-
-        If this is your first time importing data into this cluster, select **Import From Amazon S3**.
+    3. Select **Import data from Cloud Storage**, and then click **Amazon S3**.
 
     4. On the **Import Data from Amazon S3** page, click the link under **Role ARN**. The **Add New Role ARN** dialog is displayed.
 
@@ -164,9 +162,7 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-    3. Click **Import Data** in the upper-right corner.
-
-        If this is your first time importing data into this cluster, select **Import From GCS**.
+    3. Select **Import data from Cloud Storage**, and then click **Google Cloud Storage**.
 
     4. Click **Show Google Cloud Server Account ID**, and then copy the Service Account ID for later use.
 
