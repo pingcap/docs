@@ -94,8 +94,8 @@ EXPLAIN FORMAT=BRIEF
 +-----------------------------+---------+-----------+-----------------------------------
 | IndexLookUp             | root                         | 
 | ├─IndexRangeScan(Build) | table:listings,              | range:
-                          | index:idx_city_bedrooms_price| ["San Francisco" 2 -inf,
-                          | (city, bedrooms, price)      | "San Francisco" 2 2000.00)
+|                         | index:idx_city_bedrooms_price| ["San Francisco" 2 -inf,
+|                         | (city, bedrooms, price)      | "San Francisco" 2 2000.00)
 | └─TableRowIDScan(Probe) | table:listings               | 
 +-----------------------------+---------+-----------+-----------------------------------
 ```
@@ -147,8 +147,8 @@ EXPLAIN FORMAT=BRIEF
 +-----------------------------+---------+-----------+-----------------------------------
 | IndexLookUp             | root                         | 
 | ├─IndexRangeScan(Build) | table:listings,              | range:
-                          | index:idx_city_bedrooms_price| ["New York" 2 1000.00,
-                          | (city, bedrooms, price)      |  "New York" 2 2500.00)
+|                         | index:idx_city_bedrooms_price| ["New York" 2 1000.00,
+|                         | (city, bedrooms, price)      |  "New York" 2 2500.00)
 | └─TableRowIDScan(Probe) | table:listings               | 
 +-----------------------------+---------+-----------+-----------------------------------
 ```
@@ -175,10 +175,10 @@ EXPLAIN FORMAT=BRIEF
 +-----------------------------+---------+-----------+-----------------------------------
 | IndexLookUp             | root                         | 
 | ├─IndexRangeScan(Build) | table:listings,              | range:
-                          | index:idx_city_bedrooms_price| ["San Francisco" 1 1500.00,
-                          | (city, bedrooms, price)      |  "San Francisco" 1 2500.00) 
-                          |                              | ["San Diego" 1 1000.00,
-                          |                              |   "San Diego" 1 1500.00)
+|                         | index:idx_city_bedrooms_price| ["San Francisco" 1 1500.00,
+|                         | (city, bedrooms, price)      |  "San Francisco" 1 2500.00) 
+|                         |                              | ["San Diego" 1 1000.00,
+|                         |                              |   "San Diego" 1 1500.00)
 | └─TableRowIDScan(Probe) | table:listings               | 
 +-----------------------------+---------+-----------+-----------------------------------
 ```
@@ -242,13 +242,13 @@ EXPLAIN FORMAT=BRIEF
     SELECT * FROM t1 
     WHERE (a1, b1) > (1, 10) AND (a1, b1) < (10, 20);
  -----+------------------------------------------------------+--------------------------
-| id  task                | access object                | operator info   
+| id  task                | access object               | operator info   
 +-----------------------------+---------+-----------+-----------------------------------
-| IndexLookUp             | root                       | 
-| ├─IndexRangeScan(Build) | table:t1,index:iab(a1, b1) | range:(1 10,1 +inf],
-                          |                            |       (1,10)
-                          |                            |       [10 -inf,10 20)
-| └─TableRowIDScan(Probe) | table:t1                   | 
+| IndexLookUp             | root                        | 
+| ├─IndexRangeScan(Build) | table:t1,index:iab(a1, b1)  | range:(1 10,1 +inf],
+|                         |                             |       (1,10)
+|                         |                             |       [10 -inf,10 20)
+| └─TableRowIDScan(Probe) | table:t1                    | 
 +-----------------------------+---------+-----------+-----------------------------------
 ```
 
