@@ -132,7 +132,6 @@ The console audit logs record various user activities on the TiDB Cloud console 
 | RestoreFromBackup              | Restore to a TiDB cluster based on the backup files                              |
 | RestoreFromTrash               | Restore to a TiDB cluster based on the backup files in the trash                 |
 | ImportDataFromAWS              | Import data from AWS                                                             |
-| ImportDataFromAzure            | Import data from Azure Blob Storage                                                             |
 | ImportDataFromGCP              | Import data from Google Cloud                                                             |
 | ImportDataFromLocal            | Import data from local disks                                                     |
 | CreateMigrationJob             | Create a migration job                                                           |
