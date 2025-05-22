@@ -99,15 +99,28 @@ On the cluster detail page of TiDB Cloud, click **Import Data** in the **Import*
     s3://developer.pingcap.com/bookshop/
     ```
 
+<<<<<<< HEAD
    **Role ARN**:
 
     ```
     arn:aws:iam::494090988690:role/s3-tidb-cloud-developer-access
     ```
+=======
+2. Select **Import data from Cloud Storage**, and then click **Amazon S3**.
+>>>>>>> 1229d1adb7 (Update TiDB Cloud documentation: Remove 'Import File Count' reference… (#20540) (#20989))
 
 3. Click **Next** to go to the **File and filter** step to confirm the information of the files to be imported.
 
+<<<<<<< HEAD
 4. Click **Next** again to go to the **Preview** step to confirm the preview of the data to be imported.
+=======
+    - **Import File Count**: for TiDB Cloud Serverless, select **Multiple files**. This field is not available in TiDB Cloud Dedicated.
+    - **Included Schema Files**: select **Yes**.
+    - **Data Format**: select **SQL**.
+    - **Folder URI**: enter `s3://developer.pingcap.com/bookshop/`.
+    - **Bucket Access**: select **AWS Role ARN**.
+    - **Role ARN**: enter `arn:aws:iam::494090988690:role/s3-tidb-cloud-developer-access`.
+>>>>>>> 1229d1adb7 (Update TiDB Cloud documentation: Remove 'Import File Count' reference… (#20540) (#20989))
 
     In this example, the following data is generated in advance:
 
