@@ -135,8 +135,8 @@ TiKV Coprocessor Task fields:
 * `Cop_wait_p90`: The P90 waiting time of cop-tasks.
 * `Cop_wait_max`: The maximum waiting time of cop-tasks.
 * `Cop_wait_addr`: The address of the cop-task whose waiting time is the longest.
-* `Rocksdb_delete_skipped_count`: The number of scans on deleted keys during RocksDB reads.
-* `Rocksdb_key_skipped_count`: The number of deleted (tombstone) keys that RocksDB encounters when scanning data.
+* `Rocksdb_delete_skipped_count`: The number of deleted (tombstone) keys that RocksDB encounters when scanning data.
+* `Rocksdb_key_skipped_count`: The number of all keys that RocksDB encounters when scanning data.
 * `Rocksdb_block_cache_hit_count`: The number of times RocksDB reads data from the block cache.
 * `Rocksdb_block_read_count`: The number of times RocksDB reads data from the file system.
 * `Rocksdb_block_read_byte`: The amount of data RocksDB reads from the file system.
