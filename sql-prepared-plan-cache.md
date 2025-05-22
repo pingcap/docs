@@ -194,7 +194,6 @@ tidb_decode_binary_plan(binary_plan):
 | TableReader_7       | 3323.33  | 372904.43  | root      |               | data:Selection_6                |
 | └─Selection_6       | 3323.33  | 5383000.00 | cop[tikv] |               | lt(test.t.a, 1)                 |
 |   └─TableFullScan_5 | 10000.00 | 4884000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo  |
-
 ```
 
 ## Diagnostics of Prepared Plan Cache
