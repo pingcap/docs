@@ -21,7 +21,7 @@ TiDB also supports execution plan caching for some non-`PREPARE` statements, sim
 
 TiDB supports both session-level plan cache and instance-level plan cache. Session-level plan cache maintains a separate cache for each session, while instance-level plan cache maintains a single shared cache across all sessions in an instance.
 
-You can use [`tidb_enable_instance_plan_cache`](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840) to enable or disable instance-level plan cache. When it's `ON`, instance-level plan cache will be used, otherwise session-level plan cache will be used.
+You can use [`tidb_enable_instance_plan_cache`](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840) to enable or disable instance-level plan cache. When this variable is set to `ON`, instance-level plan cache is used; otherwise, session-level plan cache is used.
 
 Plans can be shared across different sessions when [`tidb_enable_instance_plan_cache`](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840) is `ON`:
 
