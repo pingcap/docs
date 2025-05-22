@@ -46,7 +46,7 @@ To view the metrics dashboard, take the following steps:
 
 The retention policy for advanced metrics is 90 days.
 
-The dashboards and their content are subject to change. Currently, the folling dashboards are available:
+The dashboards and their content are subject to change. Currently, the following dashboards are available:
 
 - Backup & Import
 - DM-Professional
