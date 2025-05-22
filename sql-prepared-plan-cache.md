@@ -165,8 +165,8 @@ mysql> SELECT @@last_plan_from_cache;
 +------------------------+
 ```
 
+In v8.5.0, TiDB introduces two system tables to help you view entries in Instance Plan Cache:
 
-In v8.5.0 and higher, two system tables were introduced to observe the entries in Instance Plan Cache: 
 * `information_schema.tidb_plan_cache`: shows entries of instance plan cache in the current TiDB instance.
 * `information_schema.cluster_tidb_plan_cache`: shows entries of instance plan cache from all available TiDB instances.
 
