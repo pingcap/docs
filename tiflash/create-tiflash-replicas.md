@@ -136,8 +136,8 @@ SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>
 
 The TiDB cluster triggers the TiFlash replica replication process when the following operations are performed:
 
-    * TiFlash replicas for a table are added.
-    * When a new TiFlash instance is added, PD moves the TiFlash replicas to the new TiFlash instance.
+* TiFlash replicas for a table are added.
+* When a new TiFlash instance is added, PD moves the TiFlash replicas to the new TiFlash instance.
 
 The TiKV instance performs a table scan and sends the scanned data to TiFlash as a snapshot to create replicas. By default, TiFlash replicas are added slowly with fewer resources usage to minimize the impact on the online service. If there are spare CPU and disk IO resources in your TiKV and TiFlash nodes, you can accelerate TiFlash replication by performing the following steps.
 
