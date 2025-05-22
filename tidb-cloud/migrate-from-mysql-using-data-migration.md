@@ -28,7 +28,7 @@ You can create up to 200 migration jobs for each organization. To create more mi
 
 ### Filtered out and deleted databases
 
-- The system databases will be filtered out and not migrated to TiDB Cloud even if you select all of the databases to migrate. That is, `mysql`, `information_schema`, `information_schema`, and `sys` will not be migrated using this feature.
+- The system databases will be filtered out and not migrated to TiDB Cloud even if you select all of the databases to migrate. That is, `mysql`, `information_schema`, `performance_schema`, and `sys` will not be migrated using this feature.
 
 - When you delete a cluster in TiDB Cloud, all migration jobs in that cluster are automatically deleted and not recoverable.
 
