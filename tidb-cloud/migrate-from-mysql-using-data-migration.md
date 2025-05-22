@@ -402,8 +402,6 @@ On the **Create Migration Job** page, configure the source and target connection
 5. Take action according to the message you see:
 
     - If you use Public IP or VPC Peering, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
-    - If you use AWS Private Link, you are prompted to accept the endpoint request. Go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), and click **Endpoint services** to accept the endpoint request.
-
     - If you use Private Link, you are prompted to accept the endpoint request:
         - **For AWS**: Go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), click **Endpoint services**, and accept the endpoint request from TiDB Cloud
         - **For Azure**: Go to the [Azure portal](https://portal.azure.com), search for your MySQL Flexible Server by name, then navigate to **Networking** > **Private Endpoints** to approve the pending connection request from TiDB Cloud
