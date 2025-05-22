@@ -45,4 +45,4 @@ TiCDC supports the following types of upstream data changes:
 ## Limitations​
 
 - TiCDC does not support certain scenarios. For details, see [unsupported scenarios](/ticdc/ticdc-overview.md#unsupported-scenarios).
-- TiCDC only verifies the integrity of upstream data changes. It does not validate whether the changes conform to downstream constraints. If the data violates downstream constraints, TiCDC will return an error when writing to the downstream.
+- TiCDC only verifies the integrity of upstream data changes. It does not validate whether the changes conform to upstream or downstream constraints. If the data violates downstream constraints, TiCDC will return an error when writing to the downstream. For instance, TiCDC does **not** do foreign key validation at all.
