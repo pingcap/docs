@@ -276,6 +276,20 @@ The following is an example of the **Plan Cache Memory Usage** and **Plan Cache 
 
 ![grafana_panels](/media/planCache-memoryUsage-planNum-panels.png)
 
+<CustomContent platform="tidb">
+
+Due to memory limit, plan cache might be missed sometimes. You can check the status by viewing the [`Plan Cache Miss OPS` metric](/grafana-tidb-dashboard.md) in the Grafana dashboard.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Due to memory limit, plan cache might be missed sometimes.
+
+</CustomContent>
+
+### Session Level Plan Cache Memory Management
+
 Starting from v7.1.0, you can control the maximum number of plans that can be cached in each session by configuring the system variable [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710). For different environments, the recommended value is as follows and you can adjust it according to the monitoring panels:
 
 </CustomContent>
@@ -299,19 +313,17 @@ When the unused memory of the TiDB server is less than a certain threshold, the 
 
 You can control the threshold by configuring the system variable `tidb_prepared_plan_cache_memory_guard_ratio`. The threshold is 0.1 by default, which means when the unused memory of the TiDB server is less than 10% of the total memory (90% of the memory is used), the memory protection mechanism is triggered.
 
-<CustomContent platform="tidb">
+### Instance Level Plan Cache Memory Management
 
-Due to memory limit, plan cache might be missed sometimes. You can check the status by viewing the [`Plan Cache Miss OPS` metric](/grafana-tidb-dashboard.md) in the Grafana dashboard.
+Use `tidb_instance_plan_cache_max_size` to set the total memory limitation of Instance Plan Cache. For example, `set global tidb_instance_plan_cache_max_size=200MiB` .
 
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Due to memory limit, plan cache might be missed sometimes.
-
-</CustomContent>
+TiDB purges the Instance Plan Cache periodically, and you can set `tidb_instance_plan_cache_reserved_percentage` to control the amount of memory to purge each time. For example, the default percentage is `0.1`, and if the max size is `200MiB`, then TiDB purges `200*0.1=20MiB` memory each time.
 
 ## Clear execution plan cache
+
+> **Note:**
+>
+> The statement only support clean session-level plan cache, we'll support instance-level plan cache soon.
 
 You can clear execution plan cache by executing the `ADMIN FLUSH [SESSION | INSTANCE] PLAN_CACHE` statement.
 
