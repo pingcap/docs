@@ -1,16 +1,16 @@
 ---
 title: Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration
-summary: Learn how to seamlessly migrate your MySQL databases from Amazon Aurora MySQL, Amazon RDS, Azure Database for MySQL flexible servers, Google Cloud SQL for MySQL, or self-managed MySQL instances to TiDB Cloud with minimal downtime using the Data Migration feature.
+summary: Learn how to seamlessly migrate your MySQL databases from Amazon Aurora MySQL, Amazon RDS, Azure Database for MySQL - Flexible Server, Google Cloud SQL for MySQL, or self-managed MySQL instances to TiDB Cloud with minimal downtime using the Data Migration feature.
 aliases: ['/tidbcloud/migrate-data-into-tidb','/tidbcloud/migrate-incremental-data-from-mysql']
 ---
 
 # Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration
 
-This document guides you through migrating your MySQL databases from Amazon Aurora MySQL, Amazon RDS, Azure Database for MySQL flexible servers, Google Cloud SQL for MySQL, or self-managed MySQL instances to TiDB Cloud using the Data Migration feature in the console.
+This document guides you through migrating your MySQL databases from Amazon Aurora MySQL, Amazon RDS, Azure Database for MySQL - Flexible Server, Google Cloud SQL for MySQL, or self-managed MySQL instances to TiDB Cloud using the Data Migration feature in the [TiDB Cloud console](https://tidbcloud.com/).
 
-This feature enables you to migrate both your existing MySQL data and replicate ongoing changes (binlog) from your MySQL source databases directly to TiDB Cloud, maintaining consistency whether in the same region or across different regions. The streamlined process eliminates the need for separate dump and load operations, reducing downtime and simplifying your migration from MySQL to a more scalable platform.
+This feature enables you to migrate your existing MySQL data and continuously replicate ongoing changes (binlog) from your MySQL-compatible source databases directly to TiDB Cloud, maintaining data consistency whether in the same region or across different regions. The streamlined process eliminates the need for separate dump and load operations, reducing downtime and simplifying your migration from MySQL to a more scalable platform.
 
-If you only want to replicate ongoing binlog changes from your MySQL database to TiDB Cloud, see [Migrate Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md).
+If you only want to replicate ongoing binlog changes from your MySQL-compatible database to TiDB Cloud, see [Migrate Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md).
 
 ## Limitations
 
@@ -57,28 +57,28 @@ Before migrating, check supported data sources, enable binary logging in your My
 
 Data Migration supports the following data sources and versions:
 
-| Data Source | Supported Versions |
+| Data source | Supported versions |
 |:------------|:-------------------|
-| Self-managed MySQL (on-prem or public cloud) | 8.0, 5.7, 5.6 |
+| Self-managed MySQL (on-premises or public cloud) | 8.0, 5.7, 5.6 |
 | Amazon Aurora MySQL | 8.0, 5.7, 5.6 |
 | Amazon RDS MySQL | 8.0, 5.7 |
-| Azure Database for MySQL Flexible Servers | 8.0, 5.7 |
+| Azure Database for MySQL - Flexible Server | 8.0, 5.7 |
 | Google Cloud SQL for MySQL | 8.0, 5.7, 5.6 |
 
-### Enable binary logs in the source MySQL database for replication
+### Enable binary logs in the source MySQL-compatible database for replication
 
-To enable replication from the source MySQL database to the TiDB Cloud target cluster using DM for continuously capturing incremental changes, you need these MySQL configurations:
+To continuously replicate incremental changes from the source MySQL-compatible database to the TiDB Cloud target cluster using DM, you need the following configurations to enable binary logs in the source database:
 
 | Configuration | Required value | Why |
 |:--------------|:---------------|:----|
-| `log_bin` | `ON` | Enables binary logging that DM reads to replay changes in TiDB |
+| `log_bin` | `ON` | Enables binary logging, which DM uses to replicate changes to TiDB |
 | `binlog_format` | `ROW` | Captures all data changes accurately (other formats miss edge cases) |
 | `binlog_row_image` | `FULL` | Includes all column values in events for safe conflict resolution |
 | `binlog_expire_logs_seconds` | ≥ `86400` (1 day), `604800` (7 days, recommended) | Ensures DM can access consecutive logs during migration |
 
 #### Check current values and configure the source MySQL instance
 
-To confirm the current configurations, connect to the source MySQL instance and run:
+To check the current configurations, connect to the source MySQL instance and execute the following statement:
 
 ```sql
 SHOW VARIABLES WHERE Variable_name IN 
@@ -86,12 +86,12 @@ SHOW VARIABLES WHERE Variable_name IN
 'binlog_expire_logs_seconds','expire_logs_days');
 ```
 
-If necessary, change the source MySQL instance configurations to match the requirements.
+If necessary, change the source MySQL instance configurations to match the required values.
 
 <details>
 <summary> Configure a self‑managed MySQL instance </summary>
 
-1. Open `/etc/my.cnf` and add:
+1. Open `/etc/my.cnf` and add the following:
 
     ```
     [mysqld]
@@ -101,74 +101,81 @@ If necessary, change the source MySQL instance configurations to match the requi
     binlog_expire_logs_seconds = 604800   # 7 days retention
     ```
 
-2. Restart: `sudo systemctl restart mysqld`
+2. Restart the MySQL service to apply the changes: 
 
-3. Run the `SHOW VARIABLES` query again to verify that the settings took effect.
+    ```
+    sudo systemctl restart mysqld`
+    ```
 
-For detailed instructions, see [MySQL Server System Variables documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html) and [The Binary Log](https://dev.mysql.com/doc/refman/8.0/en/binary-log.html) in the MySQL Reference Manual.
+
+3. Run the `SHOW VARIABLES` statement again to verify that the settings take effect.
+
+For detailed instructions, see [MySQL Server System Variables](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html) and [The Binary Log](https://dev.mysql.com/doc/refman/8.0/en/binary-log.html) in MySQL documentation.
 
 </details>
 
 <details>
 <summary> Configure AWS RDS or Aurora MySQL </summary>
 
-1. In the AWS console, open RDS, Parameter groups, and create (or edit) a custom parameter group.
+1. In the AWS Management Console, open the [Amazon RDS console](https://console.aws.amazon.com/rds/), click **Parameter groups** in the left navigation pane, and then create or edit a custom parameter group.
 2. Set the four parameters above to the required values.
-3. Attach the parameter group to your instance/cluster and reboot to apply changes.
-4. After the reboot, connect and run the `SHOW VARIABLES` query to confirm.
+3. Attach the parameter group to your instance or cluster, and then reboot to apply the changes.
+4. After the reboot, connect to the instance and run the `SHOW VARIABLES` statement to verify the configuration.
 
-For detailed instructions, see [Working with DB Parameter Groups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html) and [Configuring MySQL Binary Logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html) in the AWS documentation.
+For detailed instructions, see [Working with DB Parameter Groups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html) and [Configuring MySQL Binary Logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html) in AWS documentation.
 
 </details>
 
 <details>
-<summary> Configure Azure Database for MySQL ‑ Flexible Server </summary>
+<summary> Configure Azure Database for MySQL - Flexible Server </summary>
 
-1. In the Azure portal, open MySQL Flexible Server, Server parameters.
-2. Search for each setting and update the values.
-Most changes apply without a restart; the portal indicates if a reboot is needed.
-3. Verify with the `SHOW VARIABLES` query.
+1. In the [Azure portal](https://portal.azure.com/), search for and select **Azure Database for MySQL servers**, click your instance name, and then click **Setting** > **Server parameters** in the left navigation pane.
+2. Search for each parameter and update its value.
 
-For detailed instructions, see [Server Parameters in Azure Database for MySQL - Flexible Server](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/concepts-server-parameters) in the Microsoft Azure documentation.
+    Most changes take effect without a restart. If a restart is required, you will get a prompt from the portal.
+
+3. Run the `SHOW VARIABLES` statement to verify the configuration.
+
+For detailed instructions, see [Configure server parameters in Azure Database for MySQL - Flexible Server using the Azure portal](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-configure-server-parameters-portal) in the Microsoft Azure documentation.
 
 </details>
 
 <details>
 <summary> Configure Google Cloud SQL for MySQL </summary>
 
-1. In the Google Cloud console, go to Cloud SQL, `<your_instance>`, Flags.
-2. Add or edit the necessary flags (`log_bin`, `binlog_format`, `binlog_row_image`, `binlog_expire_logs_seconds`).
-3. Click Save. Cloud SQL prompts a restart if required.
-4. After Cloud SQL restarts, run the `SHOW VARIABLES` query to confirm.
+1. In the [Google Cloud console](https://console.cloud.google.com/project/_/sql/instances), select the project that contains your instance, click your instance name, and then click **Edit**.
+2. Add or modify the required flags (`log_bin`, `binlog_format`, `binlog_row_image`, `binlog_expire_logs_seconds`).
+3. Click **Save**. If a restart is required, you will get a prompt from the console.
+4. After the restart, run the `SHOW VARIABLES` statement to confirm the changes.
 
-For detailed instructions, see [Configure database flags](https://cloud.google.com/sql/docs/mysql/flags) and [Use point-in-time recovery](https://cloud.google.com/sql/docs/mysql/backup-recovery/pitr) in the Google Cloud documentation.
+For detailed instructions, see [Configure database flags](https://cloud.google.com/sql/docs/mysql/flags) and [Use point-in-time recovery](https://cloud.google.com/sql/docs/mysql/backup-recovery/pitr) in Google Cloud documentation.
 
 </details>
 
 ### Ensure network connectivity
 
-Before creating a migration job, you need to plan and set up proper network connectivity between your source MySQL instance, TiDB Cloud DM (Data Migration) service, and your target TiDB Cloud cluster.
+Before creating a migration job, you need to plan and set up proper network connectivity between your source MySQL instance, the TiDB Cloud Data Migration (DM) service, and your target TiDB Cloud cluster.
 
-Your options are:
+The available connection methods are as follows:
 
-| Connectivity Pattern | Availability | Recommended for |
+| Connection method | Availability | Recommended for |
 |:---------------------|:-------------|:----------------|
-| Public Endpoints / IPs | All cloud providers | Quick proof-of-concept migrations, testing, or when private connectivity isn't available |
-| Private Links / Endpoints | AWS and Azure only | Production workloads without exposing data to the public internet |
-| VPC Peering | AWS and GCP only | Production workloads that need low-latency, intra-region connections and whose VPC/VNet CIDRs do not overlap |
+| Public endpoints or IP addresses | All cloud providers supported by TiDB Cloud | Quick proof-of-concept migrations, testing, or when private connectivity is unavailable |
+| Private links or private endpoints | AWS and Azure only | Production workloads without exposing data to the public internet |
+| VPC peering | AWS and Google Cloud only | Production workloads that need low-latency, intra-region connections and have non-overlapping VPC/VNet CIDRs |
 
-Choose the connection method that best fits your security requirements, network topology, and cloud provider. Proceed with the setup for the chosen connectivity pattern.
+Choose a connection method that best fits your cloud provider, network topology, and security requirements, and then follow the setup instructions for that method.
 
-#### End-to-end Encryption over TLS/SSL
+#### End-to-end encryption over TLS/SSL
 
-In any case, TLS/SSL is highly recommended for end-to-end encryption. Private Link and VPC Peering protect the network path, but end‑to‑end encryption protects the data and satisfies compliance checks.
+Regardless of the connection method, it is strongly recommended to use TLS/SSL for end-to-end encryption. While private endpoints and VPC peering secure the network path, TLS/SSL secures the data itself and helps meet compliance requirements.
 
 <details>
-<summary> Download and store the provider's certificates for TLS/SSL encrypted connections </summary>
+<summary> Download and store the cloud provider's certificates for TLS/SSL encrypted connections </summary>
 
-- [AWS RDS / Aurora using SSL/TLS to encrypt a connection to a DB instance or cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
-- [Azure Database for MySQL Flexible Server - connect with encrypted connections](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-connect-tls-ssl)
-- [GCP Cloud SQL - manage SSL/TLS certificates](https://cloud.google.com/sql/docs/mysql/manage-ssl-instance)
+- Amazon Aurora MySQL or Amazon RDS MySQL: [using SSL/TLS to encrypt a connection to a DB instance or cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+- Azure Database for MySQL - Flexible Server: [connect with encrypted connections](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-connect-tls-ssl)
+- Google Cloud SQL for MySQL: [manage SSL/TLS certificates](https://cloud.google.com/sql/docs/mysql/manage-ssl-instance)
 
 </details>
 
