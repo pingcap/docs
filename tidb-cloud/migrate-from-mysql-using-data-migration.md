@@ -93,7 +93,7 @@ If necessary, change the source MySQL instance configurations to match the requi
 
 1. Open `/etc/my.cnf` and add:
 
-    ```toml
+    ```
     [mysqld]
     log_bin = mysql-bin
     binlog_format = ROW
