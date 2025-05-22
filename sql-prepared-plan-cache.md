@@ -323,7 +323,7 @@ TiDB purges the Instance Plan Cache periodically, and you can set `tidb_instance
 
 > **Note:**
 >
-> The statement only support clean session-level plan cache, we'll support instance-level plan cache soon.
+> The statement only supports cleaning session-level plan cache, we'll support instance-level plan cache soon.
 
 You can clear execution plan cache by executing the `ADMIN FLUSH [SESSION | INSTANCE] PLAN_CACHE` statement.
 
