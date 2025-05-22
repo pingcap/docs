@@ -174,18 +174,20 @@ In any case, TLS/SSL is highly recommended for end-to-end encryption. Private 
 
 #### Public Endpoints / IPs
 
-If you use a Public Endpoint for your source MySQL database, ensure you can connect to it via the public internet. You may also need to configure firewall rules or security groups accordingly to your cloud provider guides.
+When using public endpoints, you can check connectivity and permissions now, and later, during DM job creation when TiDB Cloud provides specific instructions and egress IP addresses.
 
 1. Identify and record the source MySQL instance endpoint hostname (FQDN) or public IP.
-2. If necessary, add the TiDB Cloud DM egress IP range to the database's firewall/security‑group rules. See your provider’s docs for:
+2. Ensure you have permissions to modify your database's firewall/security‑group rules. Consult your provider’s documentation for specific instructions:
     - [AWS RDS / Aurora VPC security groups](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Overview.RDSSecurityGroups.html).
     - [Azure Database for MySQL Flexible Server Public Network Access](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/concepts-networking-public)
-    - [Cloud SQL Authorized Networks](https://cloud.google.com/sql/docs/mysql/configure-ip#authorized-networks).
-3. Verify connectivity from your machine with public internet access using the certificate for in-transit encryption:
+    - [Cloud SQL Authorized Networks](https://cloud.google.com/sql/docs/mysql/configure-ip#authorized-networks).
+3. Optionally, you can verify connectivity to your source database from a machine with public internet access using the appropriate certificate for in-transit encryption:
 
     ```shell
-    mysql -h <public‑host> -P <port> -u <user> -p --ssl-ca=<path-to-provider-ca.pem> -e "SELECT version();"
+    mysql -h <public-host> -P <port> -u <user> -p --ssl-ca=<path-to-provider-ca.pem> -e "SELECT version();"
     ```
+
+4. Later, during the Data Migration job setup, the TiDB Cloud DM service will provide the necessary egress IP range. At that time, you will add this IP range to your database's firewall/security‑group rules following the same procedure above.
 
 #### Private Link / Private Endpoint
 
@@ -334,21 +336,48 @@ On the **Create Migration Job** page, configure the source and target connection
 2. Fill in the source connection profile.
 
    - **Data source**: the data source type.
-   - **Region**: the region of the data source, which is required for cloud databases only.
    - **Connectivity method**: the connection method for the data source. Currently, you can choose public IP, VPC Peering, or Private Link according to your connection method.
+   - **Connectivity method**: choose the connection method for your data source based on your security requirements and cloud provider:
+      - **Public IP**: Available for all cloud providers (recommended for testing and proof-of-concept migrations)
+      - **Private Link**: Available for AWS and Azure only (recommended for production workloads requiring private connectivity)
+      - **VPC Peering**: Available for AWS and GCP only (recommended for production workloads needing low-latency, intra-region connections with non-overlapping VPC/VNet CIDRs)
    - **Hostname or IP address** (for public IP and VPC Peering): the hostname or IP address of the data source.
-   - **Service Name** (for Private Link): the endpoint service name.
+   - **Service Name** (for Private Link): 
+      - **For AWS**: Enter the VPC Endpoint Service Name (format: `com.amazonaws.vpce-svc-xxxxxxxxxxxxxxxxx`) that you created for your RDS/Aurora instance
+      - **For Azure**: Enter the resource ID of your MySQL Flexible Server instance (format: `/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>`)
    - **Port**: the port of the data source.
-   - **Username**: the username of the data source.
+   - **User Name**: the username of the data source.
    - **Password**: the password of the username.
-   - **SSL/TLS**: if you enable SSL/TLS, you need to upload the certificates of the data source, including any of the following:
-        - only the CA certificate
-        - the client certificate and client key
-        - the CA certificate, client certificate and client key
+   - **SSL/TLS**: enable SSL/TLS for end-to-end data encryption (highly recommended for all migrations). Upload the appropriate certificates based on your MySQL server's SSL configuration.
+        <details>
+        <summary> SSL/TLS configuration options </summary>
+
+        - **Option 1: Server Authentication Only**
+            - Upload only the **CA Certificate** 
+            - MySQL server presents its certificate to prove identity
+            - TiDB Cloud verifies the server certificate against the CA
+            - Protects against man-in-the-middle attacks and is required whenever the MySQL server is started with `require_secure_transport = ON`
+        - **Option 2: Client Certificate Authentication**
+            - Upload: **Client Certificate + Client Private Key** 
+            - TiDB Cloud presents its certificate to the MySQL server for authentication, but TiDB Cloud does not verify the MySQL server's certificate
+            - This is typically used when the MySQL server is configured with options like `REQUIRE SUBJECT '...'` or `REQUIRE ISSUER '...'` without `REQUIRE X509`, allowing it to check specific attributes of the client certificate without full CA validation of that client cert
+            - Use when MySQL server accepts client certificates in self-signed or custom PKI environments. This configuration is vulnerable to man-in-the-middle attacks and is not recommended for production environments unless other network-level controls guarantee server authenticity
+        - **Option 3: Mutual TLS (mTLS) - Highest Security**
+            - Upload **CA Certificate + Client Certificate + Client Private Key**
+            - MySQL server verifies TiDB Cloud's identity using the client certificate
+            - TiDB Cloud verifies MySQL server's identity using the CA certificate
+            - Required when MySQL server has `REQUIRE X509` or `REQUIRE SSL` configured for the migration user
+            - Use this if your MySQL server requires client certificates for authentication
+            - **Certificate Sources:**
+            - Download from your cloud provider (see [TLS certificate links](#end-to-end-encryption-over-tlsssl))
+            - Use your organization's internal CA certificates
+            - Self-signed certificates (development/testing only)
+
+        </details>
 
 3. Fill in the target connection profile.
 
-   - **Username**: enter the username of the target cluster in TiDB Cloud.
+   - **User Name**: enter the username of the target cluster in TiDB Cloud.
    - **Password**: enter the password of the TiDB Cloud username.
 
 4. Click **Validate Connection and Next** to validate the information you have entered.
@@ -357,6 +386,10 @@ On the **Create Migration Job** page, configure the source and target connection
 
     - If you use Public IP or VPC Peering, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
     - If you use AWS Private Link, you are prompted to accept the endpoint request. Go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), and click **Endpoint services** to accept the endpoint request.
+
+    - If you use Private Link, you are prompted to accept the endpoint request:
+        - **For AWS**: Go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), click **Endpoint services**, and accept the endpoint request from TiDB Cloud
+        - **For Azure**: Go to the [Azure portal](https://portal.azure.com), search for your MySQL Flexible Server by name, then navigate to **Networking** > **Private Endpoints** to approve the pending connection request from TiDB Cloud
 
 ## Step 3: Choose migration job type
 
@@ -405,22 +438,8 @@ For detailed instructions about incremental data migration, see [Migrate Only In
 1. On the **Choose Objects to Migrate** page, select the objects to be migrated. You can click **All** to select all objects, or click **Customize** and then click the checkbox next to the object name to select the object.
 
     - If you click **All**, the migration job will migrate the existing data from the whole source database instance to TiDB Cloud and migrate ongoing changes after the full migration. Note that it happens only if you have selected the **Existing data migration** and **Incremental data migration** checkboxes in the previous step.
-
-        <img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/migration-job-select-all.png" width="60%" />
-
     - If you click **Customize** and select some databases, the migration job will migrate the existing data and migrate ongoing changes of the selected databases to TiDB Cloud. Note that it happens only if you have selected the **Existing data migration** and **Incremental data migration** checkboxes in the previous step.
-
-        <img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/migration-job-select-db.png" width="60%" />
-
     - If you click **Customize** and select some tables under a dataset name, the migration job will only migrate the existing data and migrate ongoing changes of the selected tables. Tables created afterwards in the same database will not be migrated.
-
-        <img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/migration-job-select-tables.png" width="60%" />
-
-    <!--
-    - If you click **Customize** and select some databases, and then select some tables in the **Selected Objects** area to move them back to the **Source Database** area, (for example the `username` table in the following screenshots), then the tables will be treated as in a blocklist. The migration job will migrate the existing data but filter out the excluded tables (such as the `username` table in the screenshots), and will migrate ongoing changes of the selected databases to TiDB Cloud, except the filtered-out tables.
-        ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist1.png)
-        ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist2.png)
-    -->
 
 2. Click **Next**.
 
@@ -432,7 +451,7 @@ If there are only warnings on some check items, you can evaluate the risk and co
 
 For more information about errors and solutions, see [Precheck errors and solutions](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#precheck-errors-and-solutions).
 
-For more information about precheck items, see [Migration Task Precheck](https://docs.pingcap.com/tidb/stable/dm-precheck).
+For more information about precheck items, see [Migration Task Precheck](/dm/dm-precheck.md).
 
 If all check items show **Pass**, click **Next**.
 
