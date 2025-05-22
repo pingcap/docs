@@ -14,8 +14,8 @@ If you need to configure these external storages for TiDB Cloud Serverless clust
 
 To allow TiDB Cloud to access the source data in your Amazon S3 bucket, you need to configure the bucket access for TiDB Cloud. You can use either of the following methods to configure the bucket access:
 
+- Use a Role ARN (recommended): use a Role ARN to access your Amazon S3 bucket.
 - Use an AWS access key: use the access key of an IAM user to access your Amazon S3 bucket.
-- Use a Role ARN: use a Role ARN to access your Amazon S3 bucket.
 
 <SimpleTab>
 <div label="Role ARN">
@@ -50,7 +50,7 @@ Configure the bucket access for TiDB Cloud and get the Role ARN as follows:
         ![Create a policy](/media/tidb-cloud/aws-create-policy.png)
 
     4. On the **Create policy** page, click the **JSON** tab.
-    5. Copy the following access policy template and paste it to the policy text field.
+    5. Copy the following access policy template and paste it into the policy text field.
 
         ```json
         {
@@ -90,7 +90,7 @@ Configure the bucket access for TiDB Cloud and get the Role ARN as follows:
 
         - If you have enabled AWS Key Management Service key (SSE-KMS) with customer-managed key encryption, make sure the following configuration is included in the policy. `"arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"` is a sample KMS key of the bucket.
 
-            ```
+            ```json
             {
                 "Sid": "AllowKMSkey",
                 "Effect": "Allow",
@@ -211,7 +211,7 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
 
     ![Get bucket URI](/media/tidb-cloud/gcp-bucket-uri01.png)
 
-    If you want to use a folder's gsutil URI, open the folder, and then click the copy button following the folder name to copy the folder name. After that, you need to add `gs://` to the beginning and `/` to the end of the name to get a correct URI of the folder.
+    If you want to use a folder's gsutil URI, open the folder, and then click the copy button following the folder name to copy the folder name. After that, you need to add `gs://` to the beginning and `/` to the end of the name to get the correct URI for the folder.
 
     For example, if the folder name is `tidb-cloud-source-data`, you need to use `gs://tidb-cloud-source-data/` as the URI.
 
