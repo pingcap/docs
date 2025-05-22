@@ -100,6 +100,8 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         tiup playground v8.5.1 --db 2 --pd 3 --kv 3
         ```
 
+        It is recommended to run this command on a machine with at least 10 GiB of memory and 4 CPU cores. Insufficient resources might cause the system to crash.  
+
         To view all available versions, run `tiup list tidb`.
 
 4. Start a new session to access the TiDB cluster endpoints:
