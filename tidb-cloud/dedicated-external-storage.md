@@ -221,15 +221,15 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
 
 ## Configure Azure Blob Storage access
 
-To allow TiDB Cloud Dedicated to access your Azure Blob container, you need to configure the Azure Blob access for the container. You can use a service SAS token to configure the container access:
+To allow TiDB Cloud Dedicated to access your Azure Blob container, you need to configure the Azure Blob access for the container. You can use an account SAS token to configure the container access:
 
 1. On the [Azure Storage account](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts) page, click your storage account to which the container belongs.
 
-2. On your **Storage account** page, click **Security+network** in the left navigation pane, and then click **Shared access signature**.
+2. On your **Storage account** page, click **Security + networking** in the left navigation pane, and then click **Shared access signature**.
 
    ![sas-position](/media/tidb-cloud/dedicated-external-storage/azure-sas-position.png)
 
-3. On the **Shared access signature** page, create a service SAS token with the necessary permissions as follows. For more information, see [Create a service SAS token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview).
+3. On the **Shared access signature** page, create an account SAS token with the necessary permissions as follows. For more information, see [Create an account SAS token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview).
 
     1. In the **Allowed services** section, choose the **Blob** service.
     2. In the **Allowed Resource types** section, choose **Container** and **Object**.
