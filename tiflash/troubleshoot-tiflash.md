@@ -211,8 +211,8 @@ After deploying a TiFlash node and starting replication by executing `ALTER TABL
 1. Check whether the replication is successful by running the `ALTER table <tbl_name> set tiflash replica <num>` command and check the output.
 
     - If the query is blocked, run the `SELECT * FROM information_schema.tiflash_replica` statement to check whether TiFlash replicas have been created.
-        - Check whether the DDL statement is executed as expected through [ADMIN SHOW DDL](/sql-statements/sql-statement-admin-show-ddl.md). Or there are any other DDL statement that block altering TiFlash replica statement being executed.
-        - Check whether any DML statement is executed on the same table through [SHOW PROCESSLIST](/sql-statements/sql-statement-show-processlist.md) that blocks altering TiFlash replica statement being executed.
+        - Check whether the DDL statement is executed as expected through [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md). Or there are any other DDL statement that block altering TiFlash replica statement being executed.
+        - Check whether any DML statement is executed on the same table through [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md) that blocks altering TiFlash replica statement being executed.
     - You can wait until those queries or DDL finish or cancel them. If nothing is blocking the `ALTER TABLE ... SET TIFLASH REPLICA ...` being executed, go to the next step.
 
 2. Check whether TiFlash Region replication runs correctly.
