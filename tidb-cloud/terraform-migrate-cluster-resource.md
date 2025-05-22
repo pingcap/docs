@@ -10,7 +10,7 @@ You can refer to the [official Terraform import documentation](https://developer
 
 ## Prerequisites
 
-- [Update TiDB Cloud Terraform Provider at least 0.4.0]()
+- [Update TiDB Cloud Terraform Provider at least 0.4.0](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest)
 
 ## Step 1. Select the `tidbcloud_cluster` resource to migrate
 
