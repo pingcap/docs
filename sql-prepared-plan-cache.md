@@ -140,24 +140,24 @@ TiDB supports both session-level plan cache and instance-level plan cache. Sessi
 To enable Instance Plan Cache, setting [`tidb_enable_instance_plan_cache`](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840) to `ON`. This allows plans to be shared across different sessions:
 
 ```sql
--- execute below SQLs in session-1
-mysql> set global tidb_enable_instance_plan_cache=1;
+-- Execute the following SQL statements in session 1.
+mysql> SET GLOBAL tidb_enable_instance_plan_cache=1;
 Query OK, 0 rows affected (0.01 sec)
 
-mysql> prepare st from "select a from t";
+mysql> PREPARE st FROM "SELECT a FROM t";
 Query OK, 0 rows affected (0.01 sec)
 
-mysql> execute st;
+mysql> EXECUTE st;
 Empty set (0.00 sec)
 
--- execute below SQLs in session-2
-mysql> prepare st from "select a from t";
+-- Execute the following SQL statements in session 2.
+mysql> PREPARE st FROM "SELECT a FROM t";
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> execute st;
+mysql> EXECUTE st;
 Empty set (0.00 sec)
 
-mysql> select @@last_plan_from_cache;
+mysql> SELECT @@last_plan_from_cache;
 +------------------------+
 | @@last_plan_from_cache |
 +------------------------+
