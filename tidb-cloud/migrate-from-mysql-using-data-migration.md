@@ -18,7 +18,7 @@ If you only want to replicate ongoing binlog changes from your MySQL database to
 
 - The Data Migration feature is available only for **TiDB Cloud Dedicated** clusters.
 
-- The Data Migration feature is only available to clusters that are created in [certain regions](https://www.pingcap.com/tidb-cloud-pricing-details/#dm-cost) after November 9, 2022. If your **project** was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
+- The Data Migration feature is only available to clusters that are created in [certain regions](https://www.pingcap.com/tidb-cloud-pricing-details/#dm-cost) after November 9, 2022. If your **project** was created before the date or if your cluster is in another region, this feature is not available to your cluster, and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
 
 - Amazon Aurora MySQL writer instances support both existing data and incremental data migration. Amazon Aurora MySQL reader instances only support existing data migration and do not support incremental data migration.
 
@@ -34,24 +34,24 @@ You can create up to 200 migration jobs for each organization. To create more mi
 
 ### Limitations of existing data migration
 
-- During existing data migration, if the table to be migrated already exists in the target database with duplicated keys, the duplicate keys will be replaced.
+- During existing data migration, if the target database already contains the table to be migrated and there are duplicate keys, the rows with duplicate keys will be replaced.
 
 - If your dataset size is smaller than 1 TiB, it is recommended that you use logical mode (the default mode). If your dataset size is larger than 1 TiB, or you want to migrate existing data faster, you can use physical mode. For more information, see [Migrate existing data and incremental data](#migrate-existing-data-and-incremental-data).
 
 ### Limitations of incremental data migration
 
-- During incremental data migration, if the table to be migrated already exists in the target database with duplicated keys, an error is reported and the migration is interrupted. In this situation, you need to make sure whether the MySQL source data is accurate. If yes, click the "Restart" button of the migration job and the migration job will replace the target TiDB Cloud cluster conflicting records with the MySQL source records.
+- During incremental data migration, if the table to be migrated already exists in the target database with duplicated keys, an error is reported and the migration is interrupted. In this situation, you need to make sure whether the MySQL source data is accurate. If yes, click the "Restart" button of the migration job, and the migration job will replace the target TiDB Cloud cluster's conflicting records with the MySQL source records.
 
-- During incremental replication (migrating ongoing changes to your cluster), if the migration job recovers from an abrupt error, it might open the safe mode for 60 seconds. During the safe mode, `INSERT` statements are migrated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are migrated to the target TiDB Cloud cluster to make sure that all the data during the abrupt error has been migrated smoothly to the target TiDB Cloud cluster. In this scenario, for MySQL source tables without primary keys or not-null unique indexes, some data might be duplicated in the target TiDB Cloud cluster because the data might be inserted repeatedly to the target TiDB Cloud cluster.
+- During incremental replication (migrating ongoing changes to your cluster), if the migration job recovers from an abrupt error, it might open the safe mode for 60 seconds. During the safe mode, `INSERT` statements are migrated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are migrated to the target TiDB Cloud cluster to make sure that all the data during the abrupt error has been migrated smoothly to the target TiDB Cloud cluster. In this scenario, for MySQL source tables without primary keys or not-null unique indexes, some data might be duplicated in the target TiDB Cloud cluster because the data might be inserted repeatedly into the target TiDB Cloud cluster.
 
 - In the following scenarios, if the migration job takes longer than 24 hours, do not purge binary logs in the source database to ensure that Data Migration can get consecutive binary logs for incremental replication:
 
-    - During existing data migration.
+    - During the existing data migration.
     - After the existing data migration is completed and when incremental data migration is started for the first time, the latency is not 0ms.
 
 ## Prerequisites
 
-Before migrating, check supported data sources, enable binary logging in your MySQL source, ensure network connectivity, and prepare appropriate privileges for both the MySQL source and target TiDB Cloud cluster databases.
+Before migrating, check supported data sources, enable binary logging in your MySQL source, ensure network connectivity, and prepare appropriate privileges for both the MySQL source and the target TiDB Cloud cluster databases.
 
 ### Make sure your data source and version are supported
 
@@ -174,7 +174,7 @@ In any case, TLS/SSL is highly recommended for end-to-end encryption. Private 
 
 #### Public Endpoints / IPs
 
-When using public endpoints, you can check connectivity and permissions now, and later, during DM job creation when TiDB Cloud provides specific instructions and egress IP addresses.
+When utilizing public endpoints, you can verify connectivity and permissions now and later during the DM job creation process when TiDB Cloud provides specific instructions and egress IP addresses.
 
 1. Identify and record the source MySQL instance endpoint hostname (FQDN) or public IP.
 2. Ensure you have permissions to modify your database's firewall/security‑group rules. Consult your provider’s documentation for specific instructions:
@@ -401,7 +401,7 @@ To migrate data to TiDB Cloud once and for all, choose both **Existing data migr
 
 You can use **physical mode** or **logical mode** to migrate **existing data** and **incremental data**.
 
-- The default mode is **logical mode**. This mode exports data from MySQL source databases as SQL statements, and then executes them on TiDB. In this mode, the target tables before migration can be either empty or non-empty. But the performance is slower than physical mode.
+- The default mode is **logical mode**. This mode exports data from MySQL source databases as SQL statements and then executes them on TiDB. In this mode, the target tables before migration can be either empty or non-empty. But the performance is slower than physical mode.
 
 - For large datasets, it is recommended to use **physical mode**. This mode exports data from MySQL source databases and encodes it as KV pairs, writing directly to TiKV to achieve faster performance. This mode requires the target tables to be empty before migration. For the specification of 16 RCUs (Replication Capacity Units), the performance is about 2.5 times faster than logical mode. The performance of other specifications can increase by 20% to 50% compared with logical mode. Note that the performance data is for reference only and might vary in different scenarios.
 
