@@ -6,6 +6,7 @@ summary: Learn how to migrate cluster resource to serverless/dedicated cluster r
 # Migrate Cluster Resource to Serverless/Dedicated Cluster Resource
 
 You will learn how to migrate cluster resource to serverless/dedicated cluster resource in this document.
+You can refer to the [official Terraform import documentation](https://developer.hashicorp.com/terraform/language/import/generating-configuration) as a reference.
 
 ## Prerequisites
 
@@ -33,28 +34,39 @@ Run the `terraform state rm ${your_target_cluster_resource}` command to delete t
 
 Find the configuration of your target cluster resource in the tf file and delete the related code.
 
-## Step 4. Create the configuration of your new serverless/dedicated cluster resource
+## Step 4. Add the import block for your new serverless/dedicated cluster resource
 
-Create the configuration for your new serverless or dedicated cluster resource in the tf file as shown below:
+Add the import block for your new serverless or dedicated cluster resource in the tf file as shown below, replacing ${id} with the previously recorded cluster ID:
 ```
-resource "tidbcloud_serverless_cluster" "new_cluster" {}  # Serverless
-resource "tidbcloud_dedicated_cluster" "new_cluster" {}  # Dedicated
+# Serverless
+import {
+  to = tidbcloud_serverless_cluster.example
+  id = "${id}"
+}  
+# Dedicated
+import {
+  to = tidbcloud_dedicated_cluster.example
+  id = "${id}"
+}  
 ```
 
-## Step 5. Import the target cluster
+## Step 5. Plan and generate configuration for the target cluster
 
-Run the following command to import the target cluster, replacing ${id} with the previously recorded cluster ID:
+Run the following command to generate the configuration for the target cluster. Do not supply a path to an existing file, or Terraform throws an error.
 ```shell
-terraform import tidbcloud_serverless_cluster.new_cluster ${id}  # Serverless
-terraform import tidbcloud_dedicated_cluster.new_cluster ${id}   # Dedicated
+terraform plan -generate-config-out=generated.tf
 ```
 
-If the import succeeds, you'll see a confirmation message like this:
-```
-Import successful!
+## Step 6. Review generated configuration and apply
 
-The resources that were imported are shown above. These resources are now in
-your Terraform state and will henceforth be managed by Terraform.
+Review the generated configuration file to ensure it meets your requirements. You may also move the contents of this file to your desired location.
+
+Run `terraform apply` to import your infrastructure. After applying, the console will show the message like:
+```shell
+tidbcloud_serverless_cluster.example: Importing... 
+tidbcloud_serverless_cluster.example: Import complete 
+
+Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
 ```
 
 ## Next step
