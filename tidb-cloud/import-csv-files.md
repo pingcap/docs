@@ -12,19 +12,19 @@ This document describes how to import CSV files from Amazon Simple Storage Servi
 
 - To ensure data consistency, TiDB Cloud allows to import CSV files into empty tables only. To import data into an existing table that already contains data, you can use TiDB Cloud to import the data into a temporary empty table by following this document, and then use the `INSERT SELECT` statement to copy the data to the target existing table.
 
-- If a TiDB Cloud Dedicated cluster has a [changefeed](/tidb-cloud/changefeed-overview.md) or has [Point-in-time Restore](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore) enabled, you cannot import data to the cluster (the **Import Data** button will be disabled), because the current import data feature uses the [physical import mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode). In this mode, the imported data does not generate change logs, so the changefeed and Point-in-time Restore cannot detect the imported data.
+- If a TiDB Cloud Dedicated cluster has a [changefeed](/tidb-cloud/changefeed-overview.md) or has [Point-in-time Restore](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore) enabled, you cannot import data to the cluster (the **Import Data** button will be disabled) because the current import data feature uses the [physical import mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode). In this mode, the imported data does not generate change logs, so the changefeed and Point-in-time Restore cannot detect the imported data.
 
 ## Step 1. Prepare the CSV files
 
-1. If a CSV file is larger than 256 MB, consider splitting it into smaller files, each with a size around 256 MB.
+1. If a CSV file is larger than 256 MB, consider splitting it into smaller files, each with a size of around 256 MB.
 
     TiDB Cloud supports importing very large CSV files but performs best with multiple input files around 256 MB in size. This is because TiDB Cloud can process multiple files in parallel, which can greatly improve the import speed.
 
 2. Name the CSV files as follows:
 
     - If a CSV file contains all data of an entire table, name the file in the `${db_name}.${table_name}.csv` format, which maps to the `${db_name}.${table_name}` table when you import the data.
-    - If the data of one table is separated into multiple CSV files, append a numeric suffix to these CSV files. For example, `${db_name}.${table_name}.000001.csv` and `${db_name}.${table_name}.000002.csv`. The numeric suffixes can be inconsecutive but must be in ascending order. You also need to add extra zeros before the number to ensure all the suffixes are in the same length.
-    - TiDB Cloud supports importing compressed files in the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`. If you want to import compressed CSV files, name the files in the `${db_name}.${table_name}.${suffix}.csv.${compress}` format, in which `${suffix}` is optional and can be any integer such as '000001'. For example, if you want to import the `trips.000001.csv.gz` file to the `bikeshare.trips` table, you need to rename the file as `bikeshare.trips.000001.csv.gz`.
+    - If the data of one table is separated into multiple CSV files, append a numeric suffix to these CSV files. For example, `${db_name}.${table_name}.000001.csv` and `${db_name}.${table_name}.000002.csv`. The numeric suffixes can be inconsecutive but must be in ascending order. You also need to add extra zeros before the number to ensure all the suffixes are of the same length.
+    - TiDB Cloud supports importing compressed files in the following formats: `.gzip`, `.gz`, `.zstd`, `.zst`, and `.snappy`. If you want to import compressed CSV files, name the files in the `${db_name}.${table_name}.${suffix}.csv.${compress}` format, in which `${suffix}` is optional and can be any integer such as '000001'. For example, if you want to import the `trips.000001.csv.gz` file to the `bikeshare.trips` table, you need to rename the file as `bikeshare.trips.000001.csv.gz`.
 
     > **Note:**
     >
@@ -105,13 +105,14 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-2. Select **Import data from Cloud Storage**, and then click **Amazon S3**.
+2. Select **Import data from Cloud Storage**.
 
-3. On the **Import Data from Amazon S3** page, provide the following information for the source CSV files:
+3. On the **Import Data from Amazon S3** page, provide the following information:
 
-    - **Included Schema Files**: if the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
+    - **Included Schema Files**: if the source folder contains the target table schema files `(e.g., ${db_name}-schema-create.sql)`, select **Yes**. Otherwise, select **No**.
     - **Data Format**: select **CSV**.
-    - **Folder URI**: enter the source folder URI in the `s3://[bucket_name]/[data_source_folder]/` format. For example, `s3://sampledata/ingest/`.
+    - **Edit CSV Configuration**: if necessary, configure the options according to your CSV files. You can set the separator and delimiter characters, specify whether to use backslashes for escaped characters and indicate if your files contain a header row.
+    - **Folder URI**: enter the source folder URI in the `s3://[bucket_name]/[data_source_folder]/` format. The path must end with a `/`. For example, `s3://mybucket/myfolder/`.
     - **Bucket Access**: you can use either an AWS Role ARN or an AWS access key to access your bucket. For more information, see [Configure Amazon S3 access](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access).
         - **AWS Role ARN**: enter the AWS Role ARN value.
         - **AWS Access Key**: enter the AWS access key ID and AWS secret access key.
@@ -120,21 +121,13 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 5. In the **Destination** section, select the target database and table.
 
-    When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding CSV file. After that, the data source files will be re-scanned using the provided custom mapping rule.
-
-    When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `s3://sampledata/ingest/TableName.01.csv`.
-
-    You can also use wildcards to match the source files. For example:
-
-    - `s3://[bucket_name]/[data_source_folder]/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in that folder will be imported into the same target table.
-
-    - `s3://[bucket_name]/[data_source_folder]/my-data*.csv`: all CSV files in the folder starting with `my-data` will be imported into the same target table.
-
-    Note that only `?` and `*` are supported.
-
-    > **Note:**
-    >
-    > The URI must contain the data source folder.
+    When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to customize the mapping of individual target tables to their corresponding CSV files. For each target database and table:
+        - **Target Database**: select the corresponding database name from the list.
+        - **Target Table**: select the corresponding table name from the list.
+        - **Source File URIs and Names**: enter the source complete URI, including the folder and file name, making sure it is in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].csv`. You can also use wildcards (`?` and `*`) to match the source files. For example:
+            - `s3://mybucket/myfolder/my-data1.csv`: one CSV file named `my-data1.csv` in the folder `myfolder` will be imported into the target table.
+            - `s3://mybucket/myfolder/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in `myfolder` will be imported into the same target table.
+            - `s3://mybucket/myfolder/my-data*.csv`: all CSV files in the folder starting with `my-data` (such as `mydata10.csv` and `my-data100.csv`) will be imported into the same target table.
 
 6. Click **Start Import**.
 
@@ -154,34 +147,27 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-2. Select **Import data from Cloud Storage**, and then click **Google Cloud Storage**.
+2. Select **Import data from Cloud Storage**.
 
-3. On the **Import Data from GCS** page, provide the following information for the source CSV files:
+3. On the **Import Data from Google Cloud Storage** page, provide the following information for the source CSV files:
 
-    - **Included Schema Files**: if the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
+    - **Included Schema Files**: if the source folder contains the target table schema files `(e.g., ${db_name}-schema-create.sql)`, select **Yes**. Otherwise, select **No**.
     - **Data Format**: select **CSV**.
-    - **Folder URI**: enter the source folder URI in the `gs://[bucket_name]/[data_source_folder]/` format. For example, `gs://sampledata/ingest/`.
-    - **Bucket Access**: you can use a GCS IAM Role to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access).
+    - **Edit CSV Configuration**: if necessary, configure the options according to your CSV files. You can set the separator and delimiter characters, specify whether to use backslashes for escaped characters and indicate if your files contain a header row.
+    - **Folder URI**: enter the source folder URI in the `gs://[bucket_name]/[data_source_folder]/` format. The path must end with a `/`.  For example, `gs://sampledata/ingest/`.
+    - **Google Cloud Service Account ID**: TiDB Cloud provides a unique Service Account ID on this page (e.g., `example-service-account@your-project.iam.gserviceaccount.com`). You must grant this Service Account ID the necessary IAM permissions (such as "Storage Object Viewer") on your GCS bucket within your Google Cloud project. For detailed instructions, see [Configure GCS access](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access).
 
 4. Click **Connect**.
 
 5. In the **Destination** section, select the target database and table.
 
-    When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding CSV file. After that, the data source files will be re-scanned using the provided custom mapping rule.
-
-    When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `gs://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `gs://sampledata/ingest/TableName.01.csv`.
-
-    You can also use wildcards to match the source files. For example:
-
-    - `gs://[bucket_name]/[data_source_folder]/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in that folder will be imported into the same target table.
-
-    - `gs://[bucket_name]/[data_source_folder]/my-data*.csv`: all CSV files in the folder starting with `my-data` will be imported into the same target table.
-
-    Note that only `?` and `*` are supported.
-
-    > **Note:**
-    >
-    > The URI must contain the data source folder.
+    When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to customize the mapping of individual target tables to their corresponding CSV files. For each target database and table:
+        - **Target Database**: select the corresponding database name from the list.
+        - **Target Table**: select the corresponding table name from the list.
+        - **Source File URIs and Names**: enter the source complete URI, including the folder and file name, making sure it is in the following format `gs://[bucket_name]/[data_source_folder]/[file_name].csv`. You can also use wildcards (`?` and `*`) to match the source files. For example:
+            - `gs://mybucket/myfolder/my-data1.csv`: one CSV file named `my-data1.csv` in the folder `myfolder` will be imported into the target table.
+            - `gs://mybucket/myfolder/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in `myfolder` will be imported into the same target table.
+            - `gs://mybucket/myfolder/my-data*.csv`: all CSV files in the folder starting with `my-data` (such as `mydata10.csv` and `my-data100.csv`) will be imported into the same target table.
 
 6. Click **Start Import**.
 
@@ -201,44 +187,37 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-2. Select **Import data from Cloud Storage**, and then click **Azure Blob Storage**.
+2. Select **Import data from Cloud Storage**.
 
-3. On the **Import Data from Azure Blob Storage** page, provide the following information for the source CSV files:
+3. On the **Import Data from Azure Blob Storage** page, provide the following information:
 
-    - **Included Schema Files**: if the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
+    - **Included Schema Files**: if the source folder contains the target table schema files (e.g., `${db_name}-schema-create.sql`), select **Yes**. Otherwise, select **No**.
     - **Data Format**: select **CSV**.
-    - **Folder URI**: enter the source folder URI in the `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/` format. For example, `https://myaccount.blob.core.windows.net/mycontainer/data-ingestion/`.
-    - **SAS Token**: enter a SAS token to access your container. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access).
+    - **Edit CSV Configuration**: if necessary, configure the options according to your CSV files. You can set the separator and delimiter characters, specify whether to use backslashes for escaped characters and indicate if your files contain a header row.
+    - **Folder URI**: enter the Azure Blob Storage URI where your source files are located using the format `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/`. The path must end with a `/`. For example, `https://myaccount.blob.core.windows.net/mycontainer/myfolder/`.
+    - **SAS Token**: enter an Account SAS token to allow TiDB Cloud to access the source files in your Azure Blob Storage container. If you don't have one yet, you can create it using the provided Azure ARM template by clicking on "Click here to create a new one with Azure ARM template" and following the instructions on the screen. Alternatively, you can manually create an Account SAS token. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access).
 
 4. Click **Connect**.
 
 5. In the **Destination** section, select the target database and table.
 
-    When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding CSV file. After that, the data source files will be re-scanned using the provided custom mapping rule.
+    When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to customize the mapping of individual target tables to their corresponding CSV files. For each target database and table:
+        - **Target Database**: select the corresponding database name from the list.
+        - **Target Table**: select the corresponding table name from the list.
+        - **Source File URIs and Names**: enter the source complete URI, including the folder and file name, making sure it is in the following format `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/[file_name].csv`. You can also use wildcards (`?` and `*`) to match the source files. For example:
+            - `https://myaccount.blob.core.windows.net/mycontainer/myfolder/my-data1.csv`: one CSV file named `my-data1.csv` in the folder `myfolder` will be imported into the target table.
+            - `https://myaccount.blob.core.windows.net/mycontainer/myfolder/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in `myfolder` will be imported into the same target table.
+            - `https://myaccount.blob.core.windows.net/mycontainer/myfolder/my-data*.csv`: all CSV files in the folder starting with `my-data` (such as `mydata10.csv` and `my-data100.csv`) will be imported into the same target table.
 
-    When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/[file_name].csv`. For example, `https://myaccount.blob.core.windows.net/mycontainer/data-ingestion/TableName.01.csv`.
+6. Click **Start Import**. The import task will start and you can see its details and progress.
 
-    You can also use wildcards to match the source files. For example:
-
-    - `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in that folder will be imported into the same target table.
-
-    - `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/my-data*.csv`: all CSV files in the folder starting with `my-data` will be imported into the same target table.
-
-    Note that only `?` and `*` are supported.
-
-    > **Note:**
-    >
-    > The URI must contain the data source folder.
-
-6. Click **Start Import**.
-
-7. When the import progress shows **Completed**, check the imported tables.
+7. When the import progress shows **Completed**, check the imported tables in the field **Tables Processed**.
 
 </div>
 
 </SimpleTab>
 
-When you run an import task, if any unsupported or invalid conversions are detected, TiDB Cloud terminates the import job automatically and reports an importing error.
+When you run an import task, if any unsupported or invalid conversions are detected, TiDB Cloud terminates the import job automatically and reports an importing error. You can visualize details in the **Status** field.
 
 If you get an importing error, do the following:
 
