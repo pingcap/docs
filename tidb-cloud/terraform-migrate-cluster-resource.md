@@ -5,7 +5,7 @@ summary: Learn how to migrate cluster resource to serverless/dedicated cluster r
 
 # Migrate Cluster Resource to Serverless/Dedicated Cluster Resource
 
-You will learn how to migrate cluster resource to serverless/dedicated cluster resource in this document.
+From TiDB Cloud Terraform Provider 0.4.0, we add `tidbcloud_serverless_cluster` and `tidbcloud_dedicated_cluster` resources to replace `tidbcloud_cluster` resource. You will learn how to migrate `tidbcloud_cluster` resource to `tidbcloud_serverless_cluster`/`tidbcloud_dedicated_cluster` resource in this document.
 You can refer to the [official Terraform import documentation](https://developer.hashicorp.com/terraform/language/import/generating-configuration) as a reference.
 
 ## Prerequisites
