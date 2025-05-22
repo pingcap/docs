@@ -51,7 +51,7 @@ You can create up to 200 migration jobs for each organization. To create more mi
 
 ## Prerequisites
 
-Before migrating, check supported data sources, enable binary logging in your MySQL source, ensure network connectivity, and prepare appropriate privileges for both the MySQL source and the target TiDB Cloud cluster databases.
+Before migrating, check whether your data source is supported, enable binary logging in your MySQL-compatible database, ensure network connectivity, and grant required privileges for both the source database and the target TiDB Cloud cluster database.
 
 ### Make sure your data source and version are supported
 
@@ -101,12 +101,11 @@ If necessary, change the source MySQL instance configurations to match the requi
     binlog_expire_logs_seconds = 604800   # 7 days retention
     ```
 
-2. Restart the MySQL service to apply the changes: 
+2. Restart the MySQL service to apply the changes:
 
     ```
     sudo systemctl restart mysqld`
     ```
-
 
 3. Run the `SHOW VARIABLES` statement again to verify that the settings take effect.
 
@@ -173,78 +172,90 @@ Regardless of the connection method, it is strongly recommended to use TLS/SSL f
 <details>
 <summary> Download and store the cloud provider's certificates for TLS/SSL encrypted connections </summary>
 
-- Amazon Aurora MySQL or Amazon RDS MySQL: [using SSL/TLS to encrypt a connection to a DB instance or cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
-- Azure Database for MySQL - Flexible Server: [connect with encrypted connections](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-connect-tls-ssl)
-- Google Cloud SQL for MySQL: [manage SSL/TLS certificates](https://cloud.google.com/sql/docs/mysql/manage-ssl-instance)
+- Amazon Aurora MySQL or Amazon RDS MySQL: [Using SSL/TLS to encrypt a connection to a DB instance or cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+- Azure Database for MySQL - Flexible Server: [Connect with encrypted connections](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-connect-tls-ssl)
+- Google Cloud SQL for MySQL: [Manage SSL/TLS certificates](https://cloud.google.com/sql/docs/mysql/manage-ssl-instance)
 
 </details>
 
-#### Public Endpoints / IPs
+#### Public endpoints or IP addresses
 
-When utilizing public endpoints, you can verify connectivity and permissions now and later during the DM job creation process when TiDB Cloud provides specific instructions and egress IP addresses.
+When using public endpoints, you can verify network connectivity and access both now and later during the DM job creation process. TiDB Cloud will provide specific egress IP addresses and prompt instructions at that time.
 
-1. Identify and record the source MySQL instance endpoint hostname (FQDN) or public IP.
-2. Ensure you have permissions to modify your database's firewall/security‑group rules. Consult your provider’s documentation for specific instructions:
-    - [AWS RDS / Aurora VPC security groups](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Overview.RDSSecurityGroups.html).
-    - [Azure Database for MySQL Flexible Server Public Network Access](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/concepts-networking-public)
-    - [Cloud SQL Authorized Networks](https://cloud.google.com/sql/docs/mysql/configure-ip#authorized-networks).
-3. Optionally, you can verify connectivity to your source database from a machine with public internet access using the appropriate certificate for in-transit encryption:
+1. Identify and record the source MySQL instance's endpoint hostname (FQDN) or public IP address.
+2. Ensure you have the required permissions to modify the firewall or security group rules for your database. Refer to your cloud provider’s documentation for guidance as follows:
+
+    - Amazon Aurora MySQL or Amazon RDS MySQL: [Controlling access with security groups](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Overview.RDSSecurityGroups.html).
+    - Azure Database for MySQL - Flexible Server: [Public Network Access](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/concepts-networking-public)
+    - Google Cloud SQL for MySQL: [Authorized Networks](https://cloud.google.com/sql/docs/mysql/configure-ip#authorized-networks).
+
+3. Optional: Verify connectivity to your source database from a machine with public internet access using the appropriate certificate for in-transit encryption:
 
     ```shell
     mysql -h <public-host> -P <port> -u <user> -p --ssl-ca=<path-to-provider-ca.pem> -e "SELECT version();"
     ```
 
-4. Later, during the Data Migration job setup, the TiDB Cloud DM service will provide the necessary egress IP range. At that time, you will add this IP range to your database's firewall/security‑group rules following the same procedure above.
+4. Later, during the Data Migration job setup, TiDB Cloud will provide an egress IP range. At that time, you need to add this IP range to your database's firewall or security‑group rules following the same procedure above.
 
-#### Private Link / Private Endpoint
+#### Private link or private endpoint
 
-If you use a provider-native Private Link, create a Private Endpoint for the source MySQL instance (RDS, Aurora, or Azure Database for MySQL). 
+If you use a provider-native private link or private endpoint, create a private endpoint for your source MySQL instance (RDS, Aurora, or Azure Database for MySQL).
 
 <details>
-<summary> Set up AWS Private Link and Private Endpoint for the MySQL source database </summary>
+<summary> Set up AWS PrivateLink and Private Endpoint for the MySQL source database </summary>
 
-Create a Network Load Balancer (NLB) and publish that NLB as an Endpoint Service associated with the source MySQL instance you want to migrate to TiDB Cloud. AWS doesn't expose RDS/Aurora directly through PrivateLink.
+AWS does not support direct PrivateLink access to RDS or Aurora. Therefore, you need to create a Network Load Balancer (NLB) and publish it as an endpoint service associated with your source MySQL instance.
 
-1. In the AWS web console, create an NLB in the same subnet(s) as your RDS/Aurora writer. Add a TCP listener on port `3306` that targets the DB instance endpoint.
-2. Under VPC, Endpoint Services, create a service backed by the NLB and enable Require acceptance. Note the Service Name (format `com.amazonaws.vpce-svc-xxxxxxxxxxxxxxxxx`).
-3. Optionally, test connectivity from a bastion or client inside the same VPC/VNet before starting the migration: 
+1. In the [Amazon EC2 console](https://console.aws.amazon.com/ec2/), create an NLB in the same subnet(s) as your RDS or Aurora writer. Configure the NLB with a TCP listener on port `3306` that forwards traffic to the database endpoint.
+
+    For detailed instructions, see [Create a Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html) in AWS documentation.
+
+2. In the [Amazon VPC console](https://console.aws.amazon.com/vpc/), click **Endpoint Services** in the left navigation pane, and then create an endpoint service. During the setup, select the NLB created in the previous step as the backing load balancer, and enable the **Require acceptance for endpoint** option. After the endpoint service is created, copy the service name (in the `com.amazonaws.vpce-svc-xxxxxxxxxxxxxxxxx` format) for later use.
+
+    For detailed instructions, see [Create an endpoint service](https://docs.aws.amazon.com/vpc/latest/privatelink/create-endpoint-service.html) in AWS documentation.
+
+3. Optional: Test connectivity from a bastion or client inside the same VPC or VNet before starting the migration:
 
     ```shell
     mysql -h <private‑host> -P 3306 -u <user> -p --ssl-ca=<path-to-provider-ca.pem> -e "SELECT version();"
     ```
 
-4. Later, when configuring TiDB Cloud DM to connect via PrivateLink, you will return to the AWS console to approve a Pending connection request from TiDB Cloud DM to this Private Endpoint. 
-
-For detailed instructions, see [AWS guide to access VPC resources through PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/privatelink-access-resources.html).
+4. Later, when configuring TiDB Cloud DM to connect via PrivateLink, you will need to return to the AWS console and approve the pending connection request from TiDB Cloud to this private endpoint.
 
 </details>
 
 <details>
-<summary> Set up Azure Private Link and Private Endpoint for the MySQL source database </summary>
+<summary> Set up Azure PrivateLink and private endpoint for the MySQL source database </summary>
 
-Azure supports Private Endpoints natively on each MySQL Flexible Server instance. You can either create Private access (VNet Integration) during the MySQL instance creation or add a Private Endpoint later. To add a new Private Endpoint: 
+Azure Database for MySQL - Flexible Server supports native private endpoints. You can either enable private access (VNet Integration) during MySQL instance creation or add a private endpoint later.
 
-1. In the Azure portal, open MySQL Flexible Server, Networking, Private Endpoints, and click on the "+ Create private endpoint" button.
-2. Follow the wizard by selecting the VNet/subnet where TiDB Cloud can reach, keep Private DNS integration enabled, and finish the wizard. The hostname to be used to connect with the instance can be found under the Connect menu (typical format `<your-instance-name>.mysql.database.azure.com`).
-3. Optionally, test connectivity from a bastion or client inside the same VPC/VNet before starting the migration:
+To add a new private endpoint, take the following steps:
+
+1. In the [Azure portal](https://portal.azure.com/), search for and select **Azure Database for MySQL servers**, click your instance name, and then click **Setting** > **Networking** in the left navigation pane.
+2. On the **Networking** page, scroll down to the **Private endpoints** section, click **+ Create private endpoint**, and then follow the on-screen instructions to set up the private endpoint.
+
+    During the setup, select the virtual network and subnet that TiDB Cloud can access in the **Virtual Network** tab, and keep **Private DNS integration** enabled in the **DNS** tab. After the private endpoint is created and deployed, click **Go to resource**, click **Settings** > **DNS configuration** in the left navigation pane, and find the hostname to be used to connect with the instance in the **Customer Visible FQDNs** section. Typically, the hostname is in the `<your-instance-name>.mysql.database.azure.com` format.
+
+    For detailed instructions, see [Create a private endpoint via Private Link Center](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-networking-private-link-portal#create-a-private-endpoint-via-private-link-center) in Azure documentation.
+
+3. Optional: Test connectivity from a bastion or client inside the same VPC or VNet before starting the migration:
 
     ```shell
     mysql -h <private‑host> -P 3306 -u <user> -p --ssl-ca=<path-to-provider-ca.pem> -e "SELECT version();"
     ```
 
-4. Go back to the MySQL Flexible Server instance (not the private‑endpoint object), and note its resource ID. You can retrieve it in the MySQL Flexible Server instance JSON view (format `/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>`). You will use this resource ID (not the private endpoint) to configure TiDB Cloud DM.
-5. Later, when configuring TiDB Cloud DM to connect via Private Link, you will return to the Azure portal to approve a Pending connection request from TiDB Cloud DM to this Private Endpoint. 
+4. In the [Azure portal](https://portal.azure.com/), return to the overview page of your MySQL Flexible Server instance (not the private endpoint object), click **JSON View** for the **Essentials** section, and then copy the resource ID for later use. The resource ID is in the `/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>` format. You will use this resource ID (not the private endpoint ID) to configure TiDB Cloud DM.
 
-For detailed instructions, see [Azure guide to create a private endpoint via Private Link Center](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-networking-private-link-portal#create-a-private-endpoint-via-private-link-center)
+5. Later, when configuring TiDB Cloud DM to connect via PrivateLink, you will need to return to the Azure portal and approve the pending connection request from TiDB Cloud to this private endpoint.
 
 </details>
 
-#### VPC Peering
+#### VPC peering
 
-If you use AWS VPC Peering or Google Cloud VPC Network Peering, see the following instructions to configure the network.
+If you use AWS VPC peering or Google Cloud VPC network peering, see the following instructions to configure the network.
 
 <details>
-<summary> Set up AWS VPC Peering</summary>
+<summary> Set up AWS VPC peering</summary>
 
 If your MySQL service is in an AWS VPC, take the following steps:
 
@@ -262,7 +273,7 @@ If your MySQL service is in an AWS VPC, take the following steps:
 </details>
 
 <details>
-<summary> Set up Google Cloud VPC Network Peering </summary>
+<summary> Set up Google Cloud VPC network peering </summary>
 
 If your MySQL service is in a Google Cloud VPC, take the following steps:
 
@@ -278,7 +289,7 @@ If your MySQL service is in a Google Cloud VPC, take the following steps:
 
 ### Grant required privileges for migration
 
-Before starting migration, you need to set up appropriate database users with the correct privileges on both source and target databases. These privileges enable TiDB Cloud DM to read data from MySQL, replicate changes, and write to your TiDB Cloud cluster securely. Since migration involves both full data dumps and binlog replication for incremental changes, your migration user requires specific permissions beyond basic read access.
+Before starting migration, you need to set up appropriate database users with the required privileges on both the source and target databases. These privileges enable TiDB Cloud DM to read data from MySQL, replicate changes, and write to your TiDB Cloud cluster securely. Because migration involves both full data dumps for existing data and binlog replication for incremental changes, your migration user requires specific permissions beyond basic read access.
 
 #### Grant required privileges to the migration user in the source MySQL database
 
@@ -301,13 +312,13 @@ GRANT SELECT, LOCK TABLES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'dm_s
 
 #### Grant required privileges in the target TiDB Cloud cluster
 
-For testing purposes, you can use the `root` account of the TiDB Cloud cluster.
+For testing purposes, you can use the `root` account of your TiDB Cloud cluster.
 
 For production workloads, it is recommended to have a dedicated user for replication in the target TiDB Cloud cluster and grant only the necessary privileges:
 
 | Privilege | Scope | Purpose |
 |:----------|:------|:--------|
-| `CREATE` | Databases, Tables | Creates schema objects in the target | 
+| `CREATE` | Databases, Tables | Creates schema objects in the target |
 | `SELECT` | Tables | Verifies data during migration |
 | `INSERT` | Tables | Writes migrated data |
 | `UPDATE` | Tables | Modifies existing rows during incremental replication |
@@ -343,12 +354,11 @@ On the **Create Migration Job** page, configure the source and target connection
 2. Fill in the source connection profile.
 
    - **Data source**: the data source type.
-   - **Connectivity method**: the connection method for the data source. Currently, you can choose public IP, VPC Peering, or Private Link according to your connection method.
    - **Connectivity method**: choose the connection method for your data source based on your security requirements and cloud provider:
       - **Public IP**: Available for all cloud providers (recommended for testing and proof-of-concept migrations)
       - **Private Link**: Available for AWS and Azure only (recommended for production workloads requiring private connectivity)
       - **VPC Peering**: Available for AWS and GCP only (recommended for production workloads needing low-latency, intra-region connections with non-overlapping VPC/VNet CIDRs)
-   - **Hostname or IP address** (for public IP and VPC Peering): the hostname or IP address of the data source.
+   - **Hostname or IP address** (for public IP and VPC peering): the hostname or IP address of the data source.
    - **Service Name** (for Private Link): 
       - **For AWS**: Enter the VPC Endpoint Service Name (format: `com.amazonaws.vpce-svc-xxxxxxxxxxxxxxxxx`) that you created for your RDS/Aurora instance
       - **For Azure**: Enter the resource ID of your MySQL Flexible Server instance (format: `/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>`)
