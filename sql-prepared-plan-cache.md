@@ -278,7 +278,7 @@ The following is an example of the **Plan Cache Memory Usage** and **Plan Cache 
 
 <CustomContent platform="tidb">
 
-Due to memory limit, plan cache might be missed sometimes. You can check the status by viewing the [`Plan Cache Miss OPS` metric](/grafana-tidb-dashboard.md) in the Grafana dashboard.
+Due to memory limits, plan cache entries might be missed. You can check this status by viewing the [`Plan Cache Miss OPS` metric](/grafana-tidb-dashboard.md) in the Grafana dashboard.
 
 </CustomContent>
 
