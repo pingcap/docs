@@ -315,7 +315,7 @@ You can control the threshold by configuring the system variable `tidb_prepared_
 
 ### Instance Level Plan Cache Memory Management
 
-Use `tidb_instance_plan_cache_max_size` to set the total memory limitation of Instance Plan Cache. For example, `set global tidb_instance_plan_cache_max_size=200MiB` .
+You can use the `tidb_instance_plan_cache_max_size` system variable to set the total memory limit for the Instance Plan Cache. For example, `set global tidb_instance_plan_cache_max_size=200MiB`.
 
 TiDB purges the Instance Plan Cache periodically, and you can set `tidb_instance_plan_cache_reserved_percentage` to control the amount of memory to purge each time. For example, the default percentage is `0.1`, and if the max size is `200MiB`, then TiDB purges `200*0.1=20MiB` memory each time.
 
