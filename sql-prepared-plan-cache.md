@@ -284,7 +284,7 @@ Due to memory limits, plan cache entries might be missed. You can check this sta
 
 <CustomContent platform="tidb-cloud">
 
-Due to memory limit, plan cache might be missed sometimes.
+Due to memory limits, plan cache entries might be missed.
 
 </CustomContent>
 
