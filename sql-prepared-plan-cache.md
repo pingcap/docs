@@ -62,7 +62,7 @@ Starting from v8.5.0, TiDB provides two system tables that allow you to view ent
 The following example shows how to view entries in `information_schema.tidb_plan_cache`:
 
 ```sql
-mysql> select *, tidb_decode_binary_plan(binary_plan) from information_schema.tidb_plan_cache\G
+mysql> SELECT *, tidb_decode_binary_plan(binary_plan) FROM information_schema.tidb_plan_cache\G
 *************************** 1. row ***************************
                           SQL_DIGEST: 3689d7f367e2fdaf53c962c378efdf47799143b9af12f47e13ec247332269eac
                             SQL_TEXT: SELECT a FROM t WHERE a<?
