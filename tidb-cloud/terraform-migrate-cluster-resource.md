@@ -43,7 +43,7 @@ In your `.tf` file, find the configuration of your target cluster resource and d
 
 ## Step 4. Add an import block for the new serverless or dedicated cluster resource
 
-- If your target cluster is TiDB Cloud Severless, add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the cluster ID you get from [Step 1](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate):
+- If your target cluster is TiDB Cloud Serverless, add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the cluster ID you get from [Step 1](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate):
 
     ```
     # Serverless
