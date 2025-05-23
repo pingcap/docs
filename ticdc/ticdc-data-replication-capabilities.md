@@ -21,7 +21,6 @@ TiCDC supports replicating data to various downstream systems, including the fol
 
 - [TiDB database or other MySQL-compatible databases](/ticdc/ticdc-sink-to-mysql.md)
 - [Apache Kafka](/ticdc/ticdc-sink-to-kafka.md)
-- Message Queue (MQ)-type sinks, such as [Pulsar](/ticdc/ticdc-sink-to-pulsar.md)
 - [Storage services (Amazon S3, GCS, Azure Blob Storage, and NFS)](/ticdc/ticdc-sink-to-cloud-storage.md)
 - [Snowflake, ksqlDB, SQL Server via Confluent Cloud integration](/ticdc/integrate-confluent-using-ticdc.md)
 - [Apache Flink for consuming Kafka-replicated data](/replicate-data-to-kafka.md)
