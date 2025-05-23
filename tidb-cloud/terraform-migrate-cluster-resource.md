@@ -7,7 +7,9 @@ summary: Learn how to migrate a cluster resource to a serverless or dedicated cl
 
 Starting from TiDB Cloud Terraform Provider v0.4.0, the `tidbcloud_cluster` resource is replaced by two new resources: `tidbcloud_serverless_cluster` and `tidbcloud_dedicated_cluster`. If you are using TiDB Cloud Terraform Provider v0.4.0 or a later version, you can follow this document to migrate your `tidbcloud_cluster` resource to the `tidbcloud_serverless_cluster` or `tidbcloud_dedicated_cluster` resource. 
 
-For more information, see [Generating configuration](https://developer.hashicorp.com/terraform/language/import/generating-configuration) in Terraform documentation.
+> **Tip:**
+>
+> The steps in this document use the configuration generation feature of Terraform to simplify the migration process by automatically recreating the `.tf` configuration for your cluster resource. To learn more about it, see [Generating configuration](https://developer.hashicorp.com/terraform/language/import/generating-configuration) in Terraform documentation.
 
 ## Prerequisites
 
@@ -76,6 +78,7 @@ Do not specify an existing `.tf` file name in the preceding command. Otherwise, 
 Review the generated configuration file to ensure it meets your needs. Optionally, you can move the contents of this file to your preferred location.
 
 Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
+
 ```shell
 tidbcloud_serverless_cluster.example: Importing... 
 tidbcloud_serverless_cluster.example: Import complete 
