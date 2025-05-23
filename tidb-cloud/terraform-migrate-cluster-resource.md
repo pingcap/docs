@@ -82,7 +82,3 @@ tidbcloud_serverless_cluster.example: Import complete
 
 Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
 ```
-
-## Next step
-
-Next, you can start managing a cluster with the [serverless cluster resource](/tidb-cloud/terraform-use-serverless-cluster-resource.md) or [dedicated cluster resource](/tidb-cloud/terraform-use-dedicated-cluster-resource.md).
