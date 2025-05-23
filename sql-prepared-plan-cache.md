@@ -87,7 +87,7 @@ tidb_decode_binary_plan(binary_plan):
 |   └─TableFullScan_5 | 10000.00 | 4070000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo  |
 ```
 
-## Prepared Plan Cache Restrictions
+## Prepared Plan Cache restrictions
 
 In the current version of TiDB, if a `Prepare` statement meets any of the following conditions, the query or the plan is not cached:
 
