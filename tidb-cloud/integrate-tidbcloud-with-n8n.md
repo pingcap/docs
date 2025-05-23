@@ -74,7 +74,7 @@ This example usage workflow would use the following nodes:
 
 The final workflow should look like the following image.
 
-![img](/media/tidb-cloud/integration-n8n-workflow-rss.jpg)
+![img](./media/tidb-cloud/integration-n8n-workflow-rss.jpg)
 
 ### (Optional) Create a TiDB Cloud Serverless cluster
 

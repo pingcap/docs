@@ -71,19 +71,19 @@ Performance problems are not necessarily caused by hotspots and might be caused 
 
 The **Key Visualizer** feature in [TiDB Dashboard](/dashboard/dashboard-intro.md) helps users narrow down hotspot troubleshooting scope to the table level. The following is an example of the thermal diagram shown by **Key Visualizer**. The horizontal axis of the graph is time, and the vertical axis are various tables and indexes. The brighter the color, the greater the load. You can switch the read or write flow in the toolbar.
 
-![Dashboard Example 1](/media/troubleshoot-hot-spot-issues-1.png)
+![Dashboard Example 1](./media/troubleshoot-hot-spot-issues-1.png)
 
 The following bright diagonal lines (oblique upward or downward) can appear in the write flow graph. Because the write only appears at the end, as the number of table Regions becomes larger, it appears as a ladder. This indicates that a write hotspot shows in this table:
 
-![Dashboard Example 2](/media/troubleshoot-hot-spot-issues-2.png)
+![Dashboard Example 2](./media/troubleshoot-hot-spot-issues-2.png)
 
 For read hotspots, a bright horizontal line is generally shown in the thermal diagram. Usually these are caused by small tables with a large number of accesses, shown as follows:
 
-![Dashboard Example 3](/media/troubleshoot-hot-spot-issues-3.png)
+![Dashboard Example 3](./media/troubleshoot-hot-spot-issues-3.png)
 
 Hover over the bright block, you can see what table or index has a heavy load. For example:
 
-![Dashboard Example 4](/media/troubleshoot-hot-spot-issues-4.png)
+![Dashboard Example 4](./media/troubleshoot-hot-spot-issues-4.png)
 
 ## Use `SHARD_ROW_ID_BITS` to process hotspots
 
@@ -112,9 +112,9 @@ For the table with a primary key of the `CLUSTERED` type, TiDB uses the primary 
 
 The following two load diagrams shows the case where two tables without primary keys use `SHARD_ROW_ID_BITS` to scatter hotspots. The first diagram shows the situation before scattering hotspots, while the second one shows the situation after scattering hotspots.
 
-![Dashboard Example 5](/media/troubleshoot-hot-spot-issues-5.png)
+![Dashboard Example 5](./media/troubleshoot-hot-spot-issues-5.png)
 
-![Dashboard Example 6](/media/troubleshoot-hot-spot-issues-6.png)
+![Dashboard Example 6](./media/troubleshoot-hot-spot-issues-6.png)
 
 As shown in the load diagrams above, before setting `SHARD_ROW_ID_BITS`, load hotspots are concentrated on a single Region. After setting `SHARD_ROW_ID_BITS`, load hotspots become scattered.
 
@@ -162,9 +162,9 @@ SELECT LAST_INSERT_ID();
 
 The following two load diagrams shows the situations both before and after modifying `AUTO_INCREMENT` to `AUTO_RANDOM` to scatter hotspots. The first one uses `AUTO_INCREMENT`, while the second one uses `AUTO_RANDOM`.
 
-![Dashboard Example 7](/media/troubleshoot-hot-spot-issues-7.png)
+![Dashboard Example 7](./media/troubleshoot-hot-spot-issues-7.png)
 
-![Dashboard Example 8](/media/troubleshoot-hot-spot-issues-8.png)
+![Dashboard Example 8](./media/troubleshoot-hot-spot-issues-8.png)
 
 As shown in the load diagrams above, using `AUTO_RANDOM` to replace `AUTO_INCREMENT` can well scatter hotspots.
 

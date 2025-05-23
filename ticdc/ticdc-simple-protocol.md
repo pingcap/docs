@@ -514,13 +514,13 @@ The consumption methods are introduced in the following two scenarios.
 
 In this scenario, the consumer starts consuming from the creation of a table, so the consumer can receive all DDL and BOOTSTRAP messages of the table. In this case, the consumer can obtain the schema information of the table through the `table` name and `schemaVersion` field of the DML message. The detailed process is as follows:
 
-![TiCDC Simple Protocol consumer scene 1](/media/ticdc/ticdc-simple-consumer-1.png)
+![TiCDC Simple Protocol consumer scene 1](./media/ticdc/ticdc-simple-consumer-1.png)
 
 ### Scenario 2: The consumer starts consuming from the middle
 
 When a new consumer joins the consumer group, it might start consuming from the middle, so it might miss earlier DDL and BOOTSTRAP messages of the table. In this case, the consumer might receive some DML messages before obtaining the schema information of the table. Therefore, the consumer needs to wait for a period of time until it receives the DDL or BOOTSTRAP message to obtain the schema information of the table. Because TiCDC sends BOOTSTRAP messages periodically, the consumer can always obtain the schema information of the table within a period of time. The detailed process is as follows:
 
-![TiCDC Simple Protocol consumer scene 2](/media/ticdc/ticdc-simple-consumer-2.png)
+![TiCDC Simple Protocol consumer scene 2](./media/ticdc/ticdc-simple-consumer-2.png)
 
 ## Reference
 

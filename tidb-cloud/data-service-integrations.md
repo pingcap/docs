@@ -19,7 +19,7 @@ To integrate your Data App with GPTs, perform the following steps:
 2. In the left pane, locate your target Data App, click the name of your target Data App, and then click the **Integrations** tab.
 3. In the **Integrate with GPTs** area, click **Get Configuration**.
 
-    ![Get Configuration](/media/tidb-cloud/data-service/GPTs1.png)
+    ![Get Configuration](./media/tidb-cloud/data-service/GPTs1.png)
 
 4. In the displayed dialog box, you can see the following fields:
 
@@ -29,7 +29,7 @@ To integrate your Data App with GPTs, perform the following steps:
 
     c. **API Key Encoded**: copy the base64 encoded string equivalent to the API key you have provided.
 
-    ![GPTs Dialog Box](/media/tidb-cloud/data-service/GPTs2.png)
+    ![GPTs Dialog Box](./media/tidb-cloud/data-service/GPTs2.png)
 
 5. Use the copied API Specification URL and the encoded API key in your GPT configuration.
 

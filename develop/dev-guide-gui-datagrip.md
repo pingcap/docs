@@ -68,21 +68,21 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 5. Launch DataGrip and create a project to manage your connections.
 
-    ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
+    ![Create a project in DataGrip](./media/develop/datagrip-create-project.jpg)
 
 6. In the newly created project, click **+** in the upper-left corner of the **Database Explorer** panel, and select **Data Source** > **Other** > **TiDB**.
 
-    ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
+    ![Select a data source in DataGrip](./media/develop/datagrip-data-source-select.jpg)
 
 7. Copy the connection string from the TiDB Cloud connection dialog. Then, paste it into the **URL** field, and the remaining parameters will be auto-populated. An example result is as follows:
 
-    ![Configure the URL field for TiDB Cloud Serverless](/media/develop/datagrip-url-paste.jpg)
+    ![Configure the URL field for TiDB Cloud Serverless](./media/develop/datagrip-url-paste.jpg)
 
     If a **Download missing driver files** warning displays, click **Download** to acquire the driver files.
 
 8. Click **Test Connection** to validate the connection to the TiDB Cloud Serverless cluster.
 
-    ![Test the connection to a TiDB Cloud Serverless cluster](/media/develop/datagrip-test-connection.jpg)
+    ![Test the connection to a TiDB Cloud Serverless cluster](./media/develop/datagrip-test-connection.jpg)
 
 9. Click **OK** to save the connection configuration.
 
@@ -101,11 +101,11 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 4. Launch DataGrip and create a project to manage your connections.
 
-    ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
+    ![Create a project in DataGrip](./media/develop/datagrip-create-project.jpg)
 
 5. In the newly created project, click **+** in the upper-left corner of the **Database Explorer** panel, and select **Data Source** > **Other** > **TiDB**.
 
-    ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
+    ![Select a data source in DataGrip](./media/develop/datagrip-data-source-select.jpg)
 
 6. Copy and paste the appropriate connection string into the **Data Source and Drivers** window in DataGrip. The mappings between DataGrip fields and TiDB Cloud Dedicated connection string are as follows:
 
@@ -118,21 +118,21 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     An example is as follows:
 
-    ![Configure the connection parameters for TiDB Cloud Dedicated](/media/develop/datagrip-dedicated-connect.jpg)
+    ![Configure the connection parameters for TiDB Cloud Dedicated](./media/develop/datagrip-dedicated-connect.jpg)
 
 7. Click the **SSH/SSL** tab, select the **Use SSL** checkbox, and input the CA certificate path into the **CA file** field.
 
-    ![Configure the CA for TiDB Cloud Dedicated](/media/develop/datagrip-dedicated-ssl.jpg)
+    ![Configure the CA for TiDB Cloud Dedicated](./media/develop/datagrip-dedicated-ssl.jpg)
 
     If a **Download missing driver files** warning displays, click **Download** to acquire the driver files.
 
 8. Click the **Advanced** tab, scroll to find the **enabledTLSProtocols** parameter, and set its value to `TLSv1.2,TLSv1.3`.
 
-    ![Configure the TLS for TiDB Cloud Dedicated](/media/develop/datagrip-dedicated-advanced.jpg)
+    ![Configure the TLS for TiDB Cloud Dedicated](./media/develop/datagrip-dedicated-advanced.jpg)
 
 9. Click **Test Connection** to validate the connection to the TiDB Cloud Dedicated cluster.
 
-    ![Test the connection to a TiDB Cloud Dedicated cluster](/media/develop/datagrip-dedicated-test-connection.jpg)
+    ![Test the connection to a TiDB Cloud Dedicated cluster](./media/develop/datagrip-dedicated-test-connection.jpg)
 
 10. Click **OK** to save the connection configuration.
 
@@ -141,11 +141,11 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 1. Launch DataGrip and create a project to manage your connections.
 
-    ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
+    ![Create a project in DataGrip](./media/develop/datagrip-create-project.jpg)
 
 2. In the newly created project, click **+** in the upper-left corner of the **Database Explorer** panel, and select **Data Source** > **Other** > **TiDB**.
 
-    ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
+    ![Select a data source in DataGrip](./media/develop/datagrip-data-source-select.jpg)
 
 3. Configure the following connection parameters:
 
@@ -156,13 +156,13 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     An example is as follows:
 
-    ![Configure the connection parameters for TiDB Self-Managed](/media/develop/datagrip-self-hosted-connect.jpg)
+    ![Configure the connection parameters for TiDB Self-Managed](./media/develop/datagrip-self-hosted-connect.jpg)
 
     If a **Download missing driver files** warning displays, click **Download** to acquire the driver files.
 
 4. Click **Test Connection** to validate the connection to the TiDB Self-Managed cluster.
 
-    ![Test the connection to a TiDB Self-Managed cluster](/media/develop/datagrip-self-hosted-test-connection.jpg)
+    ![Test the connection to a TiDB Self-Managed cluster](./media/develop/datagrip-self-hosted-test-connection.jpg)
 
 5. Click **OK** to save the connection configuration.
 

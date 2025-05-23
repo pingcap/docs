@@ -28,29 +28,29 @@ All the data shown on the SQL statement summary page are from the TiDB statement
 
 On the top of the SQL statement summary page, you can modify the time range of SQL executions to be displayed. You can also filter the list by database in which SQL statements are executed, or by SQL types. The following image shows all SQL executions over the recent data collection cycle (recent 30 minutes by default).
 
-![Modify filters](/media/dashboard/dashboard-statement-filter-options.png)
+![Modify filters](./media/dashboard/dashboard-statement-filter-options.png)
 
 ### Display More Columns
 
 Click **Columns** on the page and you can choose to see more columns. You can move your mouse to the **(i)** icon at the right side of a column name to view the description of this column:
 
-![Choose columns](/media/dashboard/dashboard-statement-columns-selector.png)
+![Choose columns](./media/dashboard/dashboard-statement-columns-selector.png)
 
 ### Sort by Column
 
 By default, the list is sorted by **Total Latency** from high to low. Click on different column headings to modify the sorting basis or switch the sorting order:
 
-![Modify list sorting](/media/dashboard/dashboard-statement-change-order.png)
+![Modify list sorting](./media/dashboard/dashboard-statement-change-order.png)
 
 ### Change Settings
 
 On the list page, click the **Settings** button on the top right to change the settings of the SQL statements feature:
 
-![Settings entry](/media/dashboard/dashboard-statement-setting-entry.png)
+![Settings entry](./media/dashboard/dashboard-statement-setting-entry.png)
 
 After clicking the **Settings** button, you can see the following setting dialog box:
 
-![Settings](/media/dashboard/dashboard-statement-settings.png)
+![Settings](./media/dashboard/dashboard-statement-settings.png)
 
 On the setting page, you can disable or enable the SQL statements feature. When the SQL statements feature is enabled, you can modify the following settings:
 
@@ -69,7 +69,7 @@ See [Configurations of Statement Summary Tables](/statement-summary-tables.md#pa
 
 [`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40) limits the number of SQL statements that can be stored in statement summary tables. If the limit is exceeded, TiDB clears the SQL statements that recently remain unused. These cleared SQL statements are represented as rows with `DIGEST` set to `NULL`. On the SQL statement page of TiDB Dashboard, the information of these rows is displayed as `Others`.
 
-![Others](/media/dashboard/dashboard-statement-other-row.png)
+![Others](./media/dashboard/dashboard-statement-other-row.png)
 
 ## Next step
 

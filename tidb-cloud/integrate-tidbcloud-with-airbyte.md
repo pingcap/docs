@@ -66,7 +66,7 @@ Conveniently, the steps are the same for setting TiDB as the source and the dest
 
 4. Click **Set up source** or **destination** to complete creating the connector. The following screenshot shows the configuration of TiDB as the source.
 
-![TiDB source configuration](/media/tidb-cloud/integration-airbyte-parameters.jpg)
+![TiDB source configuration](./media/tidb-cloud/integration-airbyte-parameters.jpg)
 
 You can use any combination of sources and destinations, such as TiDB to Snowflake, and CSV files to TiDB.
 
@@ -92,13 +92,13 @@ The following steps use TiDB as both a source and a destination. Other connector
     > - In Incremental mode, Airbyte only reads records added to the source since the last sync job. The first sync using Incremental mode is equivalent to Full Refresh mode.
     > - In Full Refresh mode, Airbyte reads all records in the source and replicates to the destination in every sync task. You can set the sync mode for every table named **Namespace** in Airbyte individually.
 
-    ![Set up connection](/media/tidb-cloud/integration-airbyte-connection.jpg)
+    ![Set up connection](./media/tidb-cloud/integration-airbyte-connection.jpg)
 
 7. Set **Normalization & Transformation** to **Normalized tabular data** to use the default normalization mode, or you can set the dbt file for your job. For more information about normalization, refer to [Transformations and Normalization](https://docs.airbyte.com/operator-guides/transformation-and-normalization/transformations-with-dbt).
 8. Click **Set up connection**.
 9. Once the connection is established, click **ENABLED** to activate the synchronization task. You can also click **Sync now** to sync immediately.
 
-![Sync data](/media/tidb-cloud/integration-airbyte-sync.jpg)
+![Sync data](./media/tidb-cloud/integration-airbyte-sync.jpg)
 
 ## Limitations
 

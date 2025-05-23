@@ -29,7 +29,7 @@ ProxySQL is designed from the ground up to be fast, efficient, and easy to use. 
 
 The most obvious way to deploy ProxySQL with TiDB is to add ProxySQL as a standalone intermediary between the application layer and TiDB. However, the scalability and failure tolerance are not guaranteed, and it also adds additional latency due to network hop. To avoid these problems, an alternate deployment architecture is to deploy ProxySQL as a sidecar as below:
 
-![proxysql-client-side-tidb-cloud](/media/develop/proxysql-client-side-tidb-cloud.png)
+![proxysql-client-side-tidb-cloud](./media/develop/proxysql-client-side-tidb-cloud.png)
 
 > **Note:**
 >
@@ -85,7 +85,7 @@ systemctl start docker
     1. Download the **64-bit Git for Windows Setup** package from the [Git Windows Download](https://git-scm.com/download/win) page.
     2. Install the Git package by following the setup wizard. You can click **Next** for a few times to use the default installation settings.
 
-        ![proxysql-windows-git-install](/media/develop/proxysql-windows-git-install.png)
+        ![proxysql-windows-git-install](./media/develop/proxysql-windows-git-install.png)
 
 - Download and install MySQL Shell.
 
@@ -109,7 +109,7 @@ systemctl start docker
     1. Download Docker Desktop installer from the [Docker Download](https://www.docker.com/products/docker-desktop/) page.
     2. Double-click the installer to run it. After the installation is completed, you will be prompted for a restart.
 
-        ![proxysql-windows-docker-install](/media/develop/proxysql-windows-docker-install.png)
+        ![proxysql-windows-docker-install](./media/develop/proxysql-windows-docker-install.png)
 
 - Download the latest Python 3 installer from the [Python Download](https://www.python.org/downloads/) page and run it.
 
@@ -798,7 +798,7 @@ This section takes query routing as an example to show some of the benefits that
 
 Databases can be overloaded by high traffic, faulty code, or malicious spam. With query rules of ProxySQL, you can respond to these issues quickly and effectively by rerouting, rewriting, or rejecting queries.
 
-![proxysql-client-side-rules](/media/develop/proxysql-client-side-rules.png)
+![proxysql-client-side-rules](./media/develop/proxysql-client-side-rules.png)
 
 > **Note:**
 >

@@ -34,7 +34,7 @@ You can access the Top SQL page using either of the following methods:
 
 * After logging in to TiDB Dashboard, click **Top SQL** in the left navigation menu.
 
-  ![Top SQL](/media/dashboard/top-sql-access.png)
+  ![Top SQL](./media/dashboard/top-sql-access.png)
 
 * Visit <http://127.0.0.1:2379/dashboard/#/topsql> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
 
@@ -68,39 +68,39 @@ The following are the common steps to use Top SQL.
 
 2. Select a particular TiDB or TiKV instance that you want to observe the load.
 
-    ![Select Instance](/media/dashboard/top-sql-usage-select-instance.png)
+    ![Select Instance](./media/dashboard/top-sql-usage-select-instance.png)
 
     If you are unsure of which TiDB or TiKV instance to observe, you can select an arbitrary instance. Also, when the cluster CPU load is extremely unbalanced, you can first use Grafana charts to determine the specific instance you want to observe.
 
 3. Observe the charts and tables presented by Top SQL.
 
-    ![Chart and Table](/media/dashboard/top-sql-usage-chart.png)
+    ![Chart and Table](./media/dashboard/top-sql-usage-chart.png)
 
     The size of the bars in the bar chart represents the size of CPU resources consumed by the SQL statement at that moment. Different colors distinguish different types of SQL statements. In most cases, you only need to focus on the SQL statements that have a higher CPU resource overhead in the corresponding time range in the chart.
 
 4. Click a SQL statement in the table to show more information. You can see detailed execution metrics of different plans of that statement, such as Call/sec (average queries per second) and Scan Indexes/sec (average number of index rows scanned per second).
 
-    ![Details](/media/dashboard/top-sql-details.png)
+    ![Details](./media/dashboard/top-sql-details.png)
 
 5. Based on these initial clues, you can further explore the [SQL Statement](/dashboard/dashboard-statement-list.md) or [Slow Queries](/dashboard/dashboard-slow-query.md) page to find the root cause of high CPU consumption or large data scans of the SQL statement.
 
     You can adjust the time range in the time picker or select a time range in the chart to get a more precise and detailed look at the problem. A smaller time range can provide more detailed data, with precision of up to 1 second.
 
-    ![Change time range](/media/dashboard/top-sql-usage-change-timerange.png)
+    ![Change time range](./media/dashboard/top-sql-usage-change-timerange.png)
 
     If the chart is out of date, you can click the **Refresh** button or select Auto Refresh options from the **Refresh** drop-down list.
 
-    ![Refresh](/media/dashboard/top-sql-usage-refresh.png)
+    ![Refresh](./media/dashboard/top-sql-usage-refresh.png)
 
 6. View the CPU resource usage by table or database level to quickly identify resource usage at a higher level. Currently, only TiKV instances are supported.
 
     Select a TiKV instance, and then select **By TABLE** or **By DB**:
 
-    ![Select aggregation dimension](/media/dashboard/top-sql-usage-select-agg-by.png)
+    ![Select aggregation dimension](./media/dashboard/top-sql-usage-select-agg-by.png)
 
     View the aggregated results at a higher level:
 
-    ![Aggregated results at DB level](/media/dashboard/top-sql-usage-agg-by-db-detail.png)
+    ![Aggregated results at DB level](./media/dashboard/top-sql-usage-agg-by-db-detail.png)
 
 ## Disable Top SQL
 

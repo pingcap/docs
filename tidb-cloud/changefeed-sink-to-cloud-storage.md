@@ -27,7 +27,7 @@ Navigate to the cluster overview page of the target TiDB cluster. Click **Change
 
 For **Amazon S3**, fill the **S3 Endpoint** area: `S3 URI`, `Access Key ID`, and `Secret Access Key`. Make the S3 bucket in the same region with your TiDB cluster.
 
-![s3_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-s3-endpoint.jpg)
+![s3_endpoint](./media/tidb-cloud/changefeed/sink-to-cloud-storage-s3-endpoint.jpg)
 
 </div>
 <div label="GCS">
@@ -36,14 +36,14 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
 
 1. In the TiDB Cloud console, record the **Service Account ID**, which will be used to grant TiDB Cloud access to your GCS bucket.
 
-    ![gcs_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-endpoint.png)
+    ![gcs_endpoint](./media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-endpoint.png)
 
 2. In the Google Cloud console, create an IAM role for your GCS bucket.
 
     1. Sign in to the [Google Cloud console](https://console.cloud.google.com/).
     2. Go to the [Roles](https://console.cloud.google.com/iam-admin/roles) page, and then click **Create role**.
 
-        ![Create a role](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-create-role.png)
+        ![Create a role](./media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-create-role.png)
 
     3. Enter a name, description, ID, and role launch stage for the role. The role name cannot be changed after the role is created.
     4. Click **Add permissions**. Add the following permissions to the role, and then click **Add**.
@@ -55,13 +55,13 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
         - storage.objects.list
         - storage.objects.update
 
-    ![Add permissions](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-assign-permission.png)
+    ![Add permissions](./media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-assign-permission.png)
 
 3. Go to the [Bucket](https://console.cloud.google.com/storage/browser) page, and choose a GCS bucket you want TiDB Cloud to access. Note that the GCS bucket must be in the same region as your TiDB cluster.
 
 4. On the **Bucket details** page, click the **Permissions** tab, and then click **Grant access**.
 
-    ![Grant Access to the bucket ](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-grant-access-1.png)
+    ![Grant Access to the bucket ](./media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-grant-access-1.png)
 
 5. Fill in the following information to grant access to your bucket, and then click **Save**.
 
@@ -76,11 +76,11 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
 
     - To get a bucket's gsutil URI, click the copy button and add `gs://` as a prefix. For example, if the bucket name is `test-sink-gcs`, the URI would be `gs://test-sink-gcs/`.
 
-        ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri01.png)
+        ![Get bucket URI](./media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri01.png)
 
     - To get a folder's gsutil URI, open the folder, click the copy button, and add `gs://` as a prefix. For example, if the bucket name is `test-sink-gcs` and the folder name is `changefeed-xxx`, the URI would be `gs://test-sink-gcs/changefeed-xxx/`.
 
-        ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri02.png)
+        ![Get bucket URI](./media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri02.png)
 
 7. In the TiDB Cloud console, go to the Changefeed's **Configure Destination** page, and fill in the **bucket gsutil URI** field.
 
@@ -96,7 +96,7 @@ Click **Next** to establish the connection from the TiDB Cloud Dedicated cluster
 
 1. Customize **Table Filter** to filter the tables that you want to replicate. For the rule syntax, refer to [table filter rules](https://docs.pingcap.com/tidb/stable/ticdc-filter#changefeed-log-filters).
 
-    ![the table filter of changefeed](/media/tidb-cloud/changefeed/sink-to-s3-02-table-filter.jpg)
+    ![the table filter of changefeed](./media/tidb-cloud/changefeed/sink-to-s3-02-table-filter.jpg)
 
     - **Filter Rules**: you can set filter rules in this column. By default, there is a rule `*.*`, which stands for replicating all tables. When you add a new rule, TiDB Cloud queries all the tables in TiDB and displays only the tables that match the rules in the box on the right. You can add up to 100 filter rules.
     - **Tables with valid keys**: this column displays the tables that have valid keys, including primary keys or unique indexes.
@@ -143,7 +143,7 @@ Click **Next** to establish the connection from the TiDB Cloud Dedicated cluster
     - **Flush Interval**: set to 60 seconds by default, adjustable within a range of 2 seconds to 10 minutes;
     - **File Size**: set to 64 MB by default, adjustable within a range of 1 MB to 512 MB.
 
-    ![Flush Parameters](/media/tidb-cloud/changefeed/sink-to-cloud-storage-flush-parameters.jpg)
+    ![Flush Parameters](./media/tidb-cloud/changefeed/sink-to-cloud-storage-flush-parameters.jpg)
 
     > **Note:**
     >
