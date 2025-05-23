@@ -1,38 +1,43 @@
 ---
-title: Migrate Cluster Resource to Serverless/Dedicated Cluster Resource
-summary: Learn how to migrate cluster resource to serverless/dedicated cluster resource.
+title: Migrate Cluster Resource to Serverless or Dedicated Cluster Resource
+summary: Learn how to migrate a cluster resource to a serverless or dedicated cluster resource.
 ---
 
-# Migrate Cluster Resource to Serverless/Dedicated Cluster Resource
+# Migrate Cluster Resource to Serverless or Dedicated Cluster Resource
 
-From TiDB Cloud Terraform Provider 0.4.0, we add `tidbcloud_serverless_cluster` and `tidbcloud_dedicated_cluster` resources to replace `tidbcloud_cluster` resource. You will learn how to migrate `tidbcloud_cluster` resource to `tidbcloud_serverless_cluster`/`tidbcloud_dedicated_cluster` resource in this document.
-You can refer to the [official Terraform import documentation](https://developer.hashicorp.com/terraform/language/import/generating-configuration) as a reference.
+Starting from TiDB Cloud Terraform Provider v0.4.0, the `tidbcloud_cluster` resource is replaced by two new resources: `tidbcloud_serverless_cluster` and `tidbcloud_dedicated_cluster`. If you are using TiDB Cloud Terraform Provider v0.4.0 or a later version, you can follow this document to migrate your `tidbcloud_cluster` resource to the `tidbcloud_serverless_cluster` or `tidbcloud_dedicated_cluster` resource. 
+
+For more information, see [Generating configuration](https://developer.hashicorp.com/terraform/language/import/generating-configuration) in Terraform documentation.
 
 ## Prerequisites
 
-- [Update TiDB Cloud Terraform Provider at least 0.4.0](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest)
+- [[Upgrade to TiDB Cloud Terraform Provider v0.4.0 or later]](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest)
 
-## Step 1. Select the `tidbcloud_cluster` resource to migrate
+## Step 1. Identify the `tidbcloud_cluster` resource to migrate
 
-Use the command below to list all the `tidbcloud_cluster` resources.
+1. List all `tidbcloud_cluster` resources:
+
+    ```shell
+    terraform state list | grep "tidbcloud_cluster"
+    ```
+
+2. Choose a target cluster resource to migrate and get its cluster `id` for later use:
+
+    ```shell
+    terraform state show ${your_target_cluster_resource} | grep ' id '
+    ```
+
+## Step 2. Remove the existing resource from the Terraform state
+
+Remove your target cluster resource from the Terraform state:
 
 ```shell
-terraform state list | grep "tidbcloud_cluster"
+terraform state rm ${your_target_cluster_resource}
 ```
 
-Select the cluster resource to migrate and execute the command below to get the cluster `id` for later use.
+## Step 3. Delete the configuration of your target cluster resource
 
-```shell
-terraform state show ${your_target_cluster_resource} | grep ' id '
-```
-
-## Step 2. Delete the existed resource from state
-
-Run the `terraform state rm ${your_target_cluster_resource}` command to delete the target cluster resource from the state.
-
-## Step 3. Delete the configuration of your target resource
-
-Find the configuration of your target cluster resource in the tf file and delete the related code.
+In your `.tf` file, find the configuration of your target cluster resource and delete the corresponding code.
 
 ## Step 4. Add the import block for your new serverless/dedicated cluster resource
 
@@ -50,18 +55,21 @@ import {
 }  
 ```
 
-## Step 5. Plan and generate configuration for the target cluster
+## Step 5. Generate the new configuration file for the target cluster resource
 
-Run the following command to generate the configuration for the target cluster. Do not supply a path to an existing file, or Terraform throws an error.
+Generate the new configuration file for the target cluster resource according to the import block:
+
 ```shell
 terraform plan -generate-config-out=generated.tf
 ```
 
-## Step 6. Review generated configuration and apply
+Do not specify an existing `.tf` file name in the preceding command. Otherwise, Terraform will return an error.
 
-Review the generated configuration file to ensure it meets your requirements. You may also move the contents of this file to your desired location.
+## Step 6. Review and apply the generated configuration
 
-Run `terraform apply` to import your infrastructure. After applying, the console will show the message like:
+Review the generated configuration file to ensure it meets your needs. Optionally, you can move the contents of this file to your preferred location.
+
+Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
 ```shell
 tidbcloud_serverless_cluster.example: Importing... 
 tidbcloud_serverless_cluster.example: Import complete 
