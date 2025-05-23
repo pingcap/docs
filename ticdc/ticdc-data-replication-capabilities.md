@@ -21,7 +21,7 @@ TiCDC supports replicating data to various downstream systems, including the fol
 
 - [TiDB database or other MySQL-compatible databases](/ticdc/ticdc-sink-to-mysql.md)
 - [Apache Kafka](/ticdc/ticdc-sink-to-kafka.md)
-- [Message Queue (MQ)-type sinks](/ticdc/ticdc-changefeed-config.md#sink), such as [Pulsar](/ticdc/ticdc-sink-to-pulsar.md)
+- Message Queue (MQ)-type sinks, such as [Pulsar](/ticdc/ticdc-sink-to-pulsar.md)
 - [Storage services (Amazon S3, GCS, Azure Blob Storage, and NFS)](/ticdc/ticdc-sink-to-cloud-storage.md)
 - [Snowflake, ksqlDB, SQL Server via Confluent Cloud integration](/ticdc/integrate-confluent-using-ticdc.md)
 - [Apache Flink for consuming Kafka-replicated data](/replicate-data-to-kafka.md)
@@ -32,7 +32,7 @@ TiCDC supports the following types of upstream data changes:
 
 + **Supported:**
 
-    - DDL and DML statements(excluding system tables).
+    - DDL and DML statements (excluding system tables).
     - Index operations (`ADD INDEX`, `CREATE INDEX`): to reduce the impact on changefeed replication latency, if the downstream is TiDB, TiCDC [asynchronously executes the `ADD INDEX` and `CREATE INDEX` DDL operations](/ticdc/ticdc-ddl.md#asynchronous-execution-of-add-index-and-create-index-ddls).
     - Foreign key constraint DDL statements (`ADD FOREIGN KEY`): TiCDC does **not** replicate upstream system variable settings. You need to manually configure [`foreign_key_checks`](/system-variables.md#foreign_key_checks) in the downstream to determine whether the downstream foreign key constraint check is enabled. TiCDC does **not** validate whether the data complies with foreign key constraints.
 
@@ -42,7 +42,7 @@ TiCDC supports the following types of upstream data changes:
     - DDL and DML statements executed in upstream temporary tables.
     - DQL (Data Query Language) and DCL (Data Control Language) statements.
 
-## Limitations​
+## Limitations
 
 - TiCDC does not support certain scenarios. For details, see [unsupported scenarios](/ticdc/ticdc-overview.md#unsupported-scenarios).
 - TiCDC only verifies the integrity of upstream data changes. It does not validate whether the changes conform to upstream or downstream constraints. If the data violates downstream constraints, TiCDC will return an error when writing to the downstream. For example, TiCDC does **not** perform any foreign key validation.
