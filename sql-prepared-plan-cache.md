@@ -323,7 +323,7 @@ You can use the [`tidb_instance_plan_cache_max_size`](/system-variables.md#tidb_
 SET GLOBAL tidb_instance_plan_cache_max_size = 200MiB
 ```
 
-TiDB purges the Instance Plan Cache periodically. You can use the `tidb_instance_plan_cache_reserved_percentage` system variable to control the amount of memory purged each time. For example, if the default percentage is `0.1` and the maximum cache size is `200MiB`, TiDB purges `200 * 0.1 = 20MiB` of memory each time.
+TiDB purges the instance-level plan cache periodically. You can control the amount of memory purged each time by using the [`tidb_instance_plan_cache_reserved_percentage`](/system-variables.md#tidb_instance_plan_cache_reserved_percentage-new-in-v840) system variable. For example, if the default percentage is `0.1` and the maximum cache size is `200MiB`, TiDB purges `200 * 0.1 = 20MiB` of memory each time.
 
 ## Clear execution plan cache
 
