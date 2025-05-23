@@ -34,7 +34,7 @@ To view the **Cluster** page, take the following steps:
 
 ## Monitor advanced metrics
 
-TiDB Cloud Clinic uses Grafana to provide a comprehensive set of metrics for TiDB clusters. These metrics include dashboards for TiDB, TiKV, TiFlash, BR, Lightning, TiCDC, TiDB resource control, and TiDB performance.
+TiDB Cloud Clinic uses Grafana to provide a comprehensive set of metrics for TiDB clusters. The retention policy for advanced metrics is 90 days.
 
 To view the metrics dashboard, take the following steps:
 
@@ -44,7 +44,19 @@ To view the metrics dashboard, take the following steps:
 
 3. Click the name of the dashboard you want to view. The dashboard is displayed.
 
-The retention policy for advanced metrics is 90 days.
+The dashboards and their content are subject to change. Currently, the following dashboards are available:
+
+- Backup & Import
+- DM-Professional
+- DM-Standard
+- Lightning
+- Performance-Overview
+- TiCDC-Summary
+- TiDB
+- TiDB-Resource-Control
+- TiFlash-Summary
+- TiKV-Details
+- User-Node-Info
 
 ## Analyze top slow queries
 
