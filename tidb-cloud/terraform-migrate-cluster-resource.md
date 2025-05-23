@@ -63,9 +63,9 @@ In your `.tf` file, find the configuration of your target cluster resource and d
     }
     ```
 
-## Step 5. Generate the new configuration file for the target cluster resource
+## Step 5. Generate the new configuration file
 
-Generate the new configuration file for the target cluster resource according to the import block:
+Generate the new configuration file for the new serverless or dedicated cluster resource according to the import block:
 
 ```shell
 terraform plan -generate-config-out=generated.tf
