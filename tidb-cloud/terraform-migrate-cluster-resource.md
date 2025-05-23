@@ -39,21 +39,27 @@ terraform state rm ${your_target_cluster_resource}
 
 In your `.tf` file, find the configuration of your target cluster resource and delete the corresponding code.
 
-## Step 4. Add the import block for your new serverless/dedicated cluster resource
+## Step 4. Add an import block for the new serverless or dedicated cluster resource
 
-Add the import block for your new serverless or dedicated cluster resource in the tf file as shown below, replacing ${id} with the previously recorded cluster ID:
-```
-# Serverless
-import {
-  to = tidbcloud_serverless_cluster.example
-  id = "${id}"
-}  
-# Dedicated
-import {
-  to = tidbcloud_dedicated_cluster.example
-  id = "${id}"
-}  
-```
+- If your target cluster is TiDB Cloud Severless, add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the cluster ID you get from [Step 1](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate):
+
+    ```
+    # Serverless
+    import {
+      to = tidbcloud_serverless_cluster.example
+      id = "${id}"
+    }
+    ```
+
+- If your target cluster is TiDB Cloud Dedicated, add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the cluster ID you get from [Step 1](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate):
+
+    ```
+    # Dedicated
+    import {
+      to = tidbcloud_dedicated_cluster.example
+      id = "${id}"
+    }
+    ```
 
 ## Step 5. Generate the new configuration file for the target cluster resource
 
