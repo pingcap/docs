@@ -153,6 +153,34 @@
   - Integration Scenarios
     - [Integrate with Confluent and Snowflake](/ticdc/integrate-confluent-using-ticdc.md)
     - [Integrate with Apache Kafka and Apache Flink](/replicate-data-to-kafka.md)
+<<<<<<< HEAD
+=======
+  - Reference
+    - [TiCDC Architecture](/ticdc/ticdc-architecture.md)
+    - [TiCDC Data Replication Capabilities](/ticdc/ticdc-data-replication-capabilities.md)
+    - [TiCDC Server Configurations](/ticdc/ticdc-server-config.md)
+    - [TiCDC Changefeed Configurations](/ticdc/ticdc-changefeed-config.md)
+    - [TiCDC Client Authentication](/ticdc/ticdc-client-authentication.md)
+    - [Data Integrity Validation for Single-Row Data](/ticdc/ticdc-integrity-check.md)
+    - [Data Consistency Validation for Upstream and Downstream TiDB Clusters](/ticdc/ticdc-upstream-downstream-check.md)
+    - [TiCDC Behavior in Splitting UPDATE Events](/ticdc/ticdc-split-update-behavior.md)
+    - Output Protocols
+      - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
+      - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
+      - [TiCDC CSV Protocol](/ticdc/ticdc-csv.md)
+      - [TiCDC Debezium Protocol](/ticdc/ticdc-debezium.md)
+      - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
+      - [TiCDC Simple Protocol](/ticdc/ticdc-simple-protocol.md)
+    - [TiCDC Open API v2](/ticdc/ticdc-open-api-v2.md)
+    - [TiCDC Open API v1](/ticdc/ticdc-open-api.md)
+    - TiCDC Data Consumption
+      - [TiCDC Row Data Checksum Verification Based on Avro](/ticdc/ticdc-avro-checksum-verification.md)
+      - [Guide for Developing a Storage Sink Consumer](/ticdc/ticdc-storage-consumer-dev-guide.md)
+    - [TiCDC Compatibility](/ticdc/ticdc-compatibility.md)
+  - [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
+  - [FAQs](/ticdc/ticdc-faq.md)
+  - [Glossary](/ticdc/ticdc-glossary.md)
+>>>>>>> 2ebdc6db76 (ticdc: add new doc for TiCDC data replication capabilities (#20967))
 - Maintain
   - Security
     - [Best Practices for TiDB Security Configuration](/best-practices-for-security-configuration.md)
