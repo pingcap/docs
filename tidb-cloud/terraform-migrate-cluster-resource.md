@@ -13,7 +13,7 @@ Starting from TiDB Cloud Terraform Provider v0.4.0, the `tidbcloud_cluster` reso
 
 ## Prerequisites
 
-- [[Upgrade to TiDB Cloud Terraform Provider v0.4.0 or later]](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest)
+- [Upgrade to TiDB Cloud Terraform Provider v0.4.0 or later](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest)
 
 ## Step 1. Identify the `tidbcloud_cluster` resource to migrate
 
