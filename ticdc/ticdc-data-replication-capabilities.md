@@ -42,7 +42,7 @@ TiCDC supports the following types of upstream data changes:
     - DDL and DML statements executed in upstream temporary tables.
     - DQL (Data Query Language) and DCL (Data Control Language) statements.
 
-## Limitations​
+## Limitations
 
 - TiCDC does not support certain scenarios. For details, see [unsupported scenarios](/ticdc/ticdc-overview.md#unsupported-scenarios).
 - TiCDC only verifies the integrity of upstream data changes. It does not validate whether the changes conform to upstream or downstream constraints. If the data violates downstream constraints, TiCDC will return an error when writing to the downstream. For example, TiCDC does **not** perform any foreign key validation.
