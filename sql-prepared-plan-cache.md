@@ -290,7 +290,7 @@ Due to memory limits, plan cache entries might be missed.
 
 </CustomContent>
 
-### Session Level Plan Cache Memory Management
+### Memory management of session-level plan cache
 
 Starting from v7.1.0, you can control the maximum number of plans that can be cached in each session by configuring the system variable [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710). For different environments, the recommended value is as follows and you can adjust it according to the monitoring panels:
 
