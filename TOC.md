@@ -193,6 +193,7 @@
     - [Integrate with Apache Kafka and Apache Flink](/replicate-data-to-kafka.md)
   - Reference
     - [TiCDC Architecture](/ticdc/ticdc-architecture.md)
+    - [TiCDC Data Replication Capabilities](/ticdc/ticdc-data-replication-capabilities.md)
     - [TiCDC Server Configurations](/ticdc/ticdc-server-config.md)
     - [TiCDC Changefeed Configurations](/ticdc/ticdc-changefeed-config.md)
     - [TiCDC Client Authentication](/ticdc/ticdc-client-authentication.md)
