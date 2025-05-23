@@ -329,7 +329,7 @@ TiDB purges the instance-level plan cache periodically. You can control the amou
 
 > **Note:**
 >
-> The statement currently only supports clearing session-level plan cache. Support for clearing instance-level plan cache will be added in a future release.
+> Currently, you can only use the `ADMIN FLUSH [SESSION | INSTANCE] PLAN_CACHE` statement to clear session-level plan cache. Support for clearing instance-level plan cache will be available in a future release.
 
 You can clear execution plan cache by executing the `ADMIN FLUSH [SESSION | INSTANCE] PLAN_CACHE` statement.
 
