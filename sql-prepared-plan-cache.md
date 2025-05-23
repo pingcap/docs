@@ -17,7 +17,7 @@ When the execution plan cache is enabled, in the first execution every `Prepare`
 
 TiDB also supports execution plan caching for some non-`PREPARE` statements, similar to the `Prepare`/`Execute` statements. For more details, refer to [Non-prepared plan cache](/sql-non-prepared-plan-cache.md).
 
-## Session and Instance Level Prepared Plan Cache
+## Session-level and instance-level Prepared Plan Cache
 
 TiDB supports both session-level plan cache and instance-level plan cache. Session-level plan cache maintains a separate cache for each session, while instance-level plan cache maintains a single shared cache across all sessions in an instance.
 
