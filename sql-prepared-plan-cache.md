@@ -315,7 +315,7 @@ When the unused memory of the TiDB server is less than a certain threshold, the 
 
 You can control the threshold by configuring the system variable `tidb_prepared_plan_cache_memory_guard_ratio`. The threshold is 0.1 by default, which means when the unused memory of the TiDB server is less than 10% of the total memory (90% of the memory is used), the memory protection mechanism is triggered.
 
-### Instance Level Plan Cache Memory Management
+### Memory management of instance-level plan cache
 
 You can use the `tidb_instance_plan_cache_max_size` system variable to set the total memory limit for the Instance Plan Cache. For example, `set global tidb_instance_plan_cache_max_size=200MiB`.
 
