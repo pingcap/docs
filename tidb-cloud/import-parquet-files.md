@@ -1,11 +1,11 @@
 ---
-title: Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud Dedicated
-summary: Learn how to import Apache Parquet files from Amazon S3 or GCS into TiDB Cloud Dedicated.
+title: Import Apache Parquet Files from Cloud Storage into TiDB Cloud Dedicated
+summary: Learn how to import Apache Parquet files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Dedicated.
 ---
 
-# Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud Dedicated
+# Import Apache Parquet Files from Cloud Storage into TiDB Cloud Dedicated
 
-You can import both uncompressed and Snappy compressed [Apache Parquet](https://parquet.apache.org/) format data files to TiDB Cloud Dedicated. This document describes how to import Parquet files from Amazon Simple Storage Service (Amazon S3) or Google Cloud Storage (GCS) into TiDB Cloud Dedicated.
+You can import both uncompressed and Snappy compressed [Apache Parquet](https://parquet.apache.org/) format data files to TiDB Cloud Dedicated. This document describes how to import Parquet files from Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS), or Azure Blob Storage into TiDB Cloud Dedicated.
 
 > **Note:**
 >
@@ -44,7 +44,7 @@ Because Parquet files do not contain schema information, before importing data f
 
 - Method 1: In TiDB Cloud, create the target databases and tables for your source data.
 
-- Method 2: In the Amazon S3 or GCS directory where the Parquet files are located, create the target table schema files for your source data as follows:
+- Method 2: In the Amazon S3, GCS, or Azure Blob Storage directory where the Parquet files are located, create the target table schema files for your source data as follows:
 
     1. Create database schema files for your source data.
 
@@ -62,7 +62,7 @@ Because Parquet files do not contain schema information, before importing data f
 
     2. Create table schema files for your source data.
 
-        If you do not include the table schema files in the Amazon S3 or GCS directory where the Parquet files are located, TiDB Cloud will not create the corresponding tables for you when you import the data.
+        If you do not include the table schema files in the Amazon S3, GCS, or Azure Blob Storage directory where the Parquet files are located, TiDB Cloud will not create the corresponding tables for you when you import the data.
 
         Each table schema file must be in the `${db_name}.${table_name}-schema.sql` format and contain a `CREATE TABLE` DDL statement. With this file, TiDB Cloud will create the `${db_table}` table in the `${db_name}` database when you import the data.
 
@@ -83,13 +83,15 @@ Because Parquet files do not contain schema information, before importing data f
 
 ## Step 3. Configure cross-account access
 
-To allow TiDB Cloud to access the Parquet files in the Amazon S3 or GCS bucket, do one of the following:
+To allow TiDB Cloud to access the Parquet files in the Amazon S3 bucket, GCS bucket, or Azure Blob Storage container, do one of the following:
 
 - If your Parquet files are located in Amazon S3, [configure Amazon S3 access](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access).
 
     You can use either an AWS access key or a Role ARN to access your bucket. Once finished, make a note of the access key (including the access key ID and secret access key) or the Role ARN value as you will need it in [Step 4](#step-4-import-parquet-files-to-tidb-cloud).
 
 - If your Parquet files are located in GCS, [configure GCS access](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access).
+
+- If your Parquet files are located in Azure Blob Storage, [configure Azure Blob Storage access](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access).
 
 ## Step 4. Import Parquet files to TiDB Cloud
 
@@ -108,17 +110,13 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-2. Select **Import data from S3**.
-
-    If this is your first time importing data into this cluster, select **Import From Amazon S3**.
+2. Select **Import data from Cloud Storage**, and then click **Amazon S3**.
 
 3. On the **Import Data from Amazon S3** page, provide the following information for the source Parquet files:
 
-    - **Included Schema Files**: this field is only visible when importing multiple files. If the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
+    - **Included Schema Files**: if the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
     - **Data Format**: select **Parquet**.
-    - **File URI** or **Folder URI**:
-        - When importing one file, enter the source file URI and name in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `s3://sampledata/ingest/TableName.01.parquet`.
-        - When importing multiple files, enter the source file URI and name in the following format `s3://[bucket_name]/[data_source_folder]/`. For example, `s3://sampledata/ingest/`.
+    - **Folder URI**: enter the source folder URI in the `s3://[bucket_name]/[data_source_folder]/` format. For example, `s3://sampledata/ingest/`.
     - **Bucket Access**: you can use either an AWS Role ARN or an AWS access key to access your bucket. For more information, see [Configure Amazon S3 access](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access).
         - **AWS Role ARN**: enter the AWS Role ARN value.
         - **AWS Access Key**: enter the AWS access key ID and AWS secret access key.
@@ -161,17 +159,13 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-2. Click **Import Data** in the upper-right corner.
-
-    If this is your first time importing data into this cluster, select **Import From GCS**.
+2. Select **Import data from Cloud Storage**, and then click **Google Cloud Storage**.
 
 3. On the **Import Data from GCS** page, provide the following information for the source Parquet files:
 
-    - **Included Schema Files**: this field is only visible when importing multiple files. If the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
+    - **Included Schema Files**: if the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
     - **Data Format**: select **Parquet**.
-    - **File URI** or **Folder URI**:
-        - When importing one file, enter the source file URI and name in the following format `gs://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `gs://sampledata/ingest/TableName.01.parquet`.
-        - When importing multiple files, enter the source file URI and name in the following format `gs://[bucket_name]/[data_source_folder]/`. For example, `gs://sampledata/ingest/`.
+    - **Folder URI**: enter the source folder URI in the `gs://[bucket_name]/[data_source_folder]/` format. For example, `gs://sampledata/ingest/`.
     - **Bucket Access**: you can use a GCS IAM Role to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access).
 
 4. Click **Connect**.
@@ -187,6 +181,53 @@ To import the Parquet files to TiDB Cloud, take the following steps:
     - `gs://[bucket_name]/[data_source_folder]/my-data?.parquet`: all Parquet files starting with `my-data` followed by one character (such as `my-data1.parquet` and `my-data2.parquet`) in that folder will be imported into the same target table.
 
     - `gs://[bucket_name]/[data_source_folder]/my-data*.parquet`: all Parquet files in the folder starting with `my-data` will be imported into the same target table.
+
+    Note that only `?` and `*` are supported.
+
+    > **Note:**
+    >
+    > The URI must contain the data source folder.
+
+6. Click **Start Import**.
+
+7. When the import progress shows **Completed**, check the imported tables.
+
+</div>
+
+<div label="Azure Blob Storage">
+
+1. Open the **Import** page for your target cluster.
+
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+
+        > **Tip:**
+        >
+        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+
+    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+
+2. Select **Import data from Cloud Storage**, and then click **Azure Blob Storage**.
+
+3. On the **Import Data from Azure Blob Storage** page, provide the following information for the source Parquet files:
+
+    - **Included Schema Files**: if the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
+    - **Data Format**: select **Parquet**.
+    - **Folder URI**: enter the source folder URI in the `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/` format. For example, `https://myaccount.blob.core.windows.net/mycontainer/data-ingestion/`.
+    - **SAS Token**: enter a SAS token to access your container. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access).
+
+4. Click **Connect**.
+
+5. In the **Destination** section, select the target database and table.
+
+    When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding Parquet file. After that, the data source files will be re-scanned using the provided custom mapping rule.
+
+    When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/[file_name].parquet`. For example, `https://myaccount.blob.core.windows.net/mycontainer/data-ingestion/TableName.01.parquet`.
+
+    You can also use wildcards to match the source files. For example:
+
+    - `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/my-data?.parquet`: all Parquet files starting with `my-data` followed by one character (such as `my-data1.parquet` and `my-data2.parquet`) in that folder will be imported into the same target table.
+
+    - `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/my-data*.parquet`: all Parquet files in the folder starting with `my-data` will be imported into the same target table.
 
     Note that only `?` and `*` are supported.
 
