@@ -362,37 +362,11 @@ The following features are planned for deprecation in future versions:
 
 ## Improvements
 
-+ TiDB  
 
-+ TiKV
-
-+ PD
-
-+ TiFlash
-
-+ Tools
-
-    + Backup & Restore (BR)
-        
-    + TiDB Data Migration (DM)
        
 ## Bug fixes
 
-+ TiDB    
 
-+ TiKV    
-
-+ PD   
-
-+ TiFlash   
-
-+ Tools
-
-    + Backup & Restore (BR)        
-
-    + TiCDC        
-
-    + TiDB Lightning        
 
 ## Performance test
 
