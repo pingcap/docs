@@ -179,8 +179,8 @@ The following TiKV configuration items can be modified dynamically:
 | `quota.foreground-write-bandwidth` | The soft limit on the bandwidth with which foreground transactions write data |
 | `quota.foreground-read-bandwidth` | The soft limit on the bandwidth with which foreground transactions and the Coprocessor read data |
 | `quota.background-cpu-time` | The soft limit on the CPU resources used by TiKV background to process read and write requests |
-| `quota.background-write-bandwidth` | The soft limit on the bandwidth with which background transactions write data (not effective yet) |
-| `quota.background-read-bandwidth` | The soft limit on the bandwidth with which background transactions and the Coprocessor read data (not effective yet) |
+| `quota.background-write-bandwidth` | The soft limit on the bandwidth with which background transactions write data |
+| `quota.background-read-bandwidth` | The soft limit on the bandwidth with which background transactions and the Coprocessor read data |
 | `quota.enable-auto-tune` | Whether to enable the auto-tuning of quota. If this configuration item is enabled, TiKV dynamically adjusts the quota for the background requests based on the load of TiKV instances.  |
 | `quota.max-delay-duration` | The maximum time that a single read or write request is forced to wait before it is processed in the foreground |
 | `gc.ratio-threshold` | The threshold at which Region GC is skipped (the number of GC versions/the number of keys) |
