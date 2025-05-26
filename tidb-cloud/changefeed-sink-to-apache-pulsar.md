@@ -26,13 +26,13 @@ Before creating a changefeed to stream data to Apache Pulsar, you need to comple
 
 - Set up your network connection
 - Add permissions for Pulsar ACL authorization
-- Create topics
+- Create topics in Apache Pulsar
 
 ### Network
 
 Ensure that your TiDB cluster can connect to the Apache Pulsar service. You can choose one of the following connection methods:
 
-- VPC Peering: requires planning to avoid potential VPC CIDR conflicts and consideration of security concerns.
+- VPC Peering: requires network planning to avoid potential VPC CIDR conflicts and consideration of security concerns.
 - Public IP: suitable for setup when Pulsar advertises a public IP. This method is not recommended for production environments and requires careful consideration of security concerns.
 
 <SimpleTab>
@@ -45,7 +45,7 @@ If your Apache Pulsar service is in an AWS VPC that has no internet access, take
 
     You must add the CIDR of the region where your TiDB Cloud cluster is located to the inbound rules. The CIDR can be found on the **VPC Peering** page. Doing so allows the traffic to flow from your TiDB cluster to the Pulsar brokers.
 
-3. If the Apache Pulsar URL contains hostnames, you need to allow TiDB Cloud to be able to resolve the DNS hostnames of the Apache Pulsar brokers.
+3. If the Apache Pulsar URL contains hostnames, you need to allow TiDB Cloud to resolve the DNS hostnames of the Apache Pulsar brokers.
 
     1. Follow the steps in [Enable DNS resolution for a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-dns.html).
     2. Enable the **Accepter DNS resolution** option.
@@ -70,7 +70,7 @@ It is **NOT** recommended to use Public IP in a production environment.
 ## Step 1. Open the changefeed page for Apache Pulsar
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Navigate to the cluster overview page of the TiDB cluster that will be the source of the Changefeed events, and then click **Changefeed** in the left navigation pane.
+2. Navigate to the cluster overview page of the TiDB cluster that will be the source of the changefeed events, and then click **Changefeed** in the left navigation pane.
 3. Click **Create Changefeed**.
 
 ## Step 2. Configure the changefeed destination
@@ -83,10 +83,10 @@ It is **NOT** recommended to use Public IP in a production environment.
     - **Pulsar Broker**: enter the endpoint of your Pulsar broker. Use a colon to separate the port from the domain or IP address, such as `example.org:6650`.
 
 3. In the **Authentication** section, select the **Auth Type** option according to your Pulsar authentication configuration. Enter the requested credential information based on your selection.
-4. (Optional) In the **Advanced Settings** section, configure additional settings:
+4. Optional: In the **Advanced Settings** section, configure additional settings:
 
     - **Compression**: select an optional compression algorithm for the data in this changefeed.
-    - **Max Messages per Batch** and **Max Publish Delay**: manage the batching of event messages sent to Pulsar. **Max Messages per Batch** sets the maximum number of messages in a single batch, while **Max Publish Delay** sets the maximum interval at which messages might be delayed by batching.
+    - **Max Messages per Batch** and **Max Publish Delay**: specify the batching of event messages sent to Pulsar. **Max Messages per Batch** sets the maximum number of messages per batch, while **Max Publish Delay** sets the maximum wait time before sending a batch.
     - **Connection Timeout**: adjust the timeout for establishing a TCP connection to Pulsar.
     - **Operation Timeout**: adjust the timeout for initiating operations using the TiCDC Pulsar client.
     - **Send Timeout**: adjust the timeout for the TiCDC Pulsar producer to send a message.
@@ -108,9 +108,9 @@ It is **NOT** recommended to use Public IP in a production environment.
 
 3. In the **Start Replication Position** area, select the starting point for the changefeed to replicate data to Pulsar:
 
-    - **Start replication from now on**: the changefeed will begin replicating data from the current point onwards
-    - **Start replication from a specific TSO**: the changefeed will begin replicating data from the specified [TSO](/tso.md) onwards. The specified TSO should be within the [garbage collection safe point](/read-historical-data.md#how-tidb-manages-the-data-versions).
-    - **Start replication from a specific time**: the changefeed will begin replicating data from the specified timestamp onwards. The specified timestamp should be within the garbage collection safe point.
+    - **Start replication from now on**: the changefeed will begin replicating data from the current point onwards.
+    - **Start replication from a specific TSO**: the changefeed will begin replicating data from the specified [TSO](/tso.md) onwards. The specified TSO must be within the [garbage collection safe point](/read-historical-data.md#how-tidb-manages-the-data-versions).
+    - **Start replication from a specific time**: the changefeed will begin replicating data from the specified timestamp onwards. The specified timestamp must be within the garbage collection safe point.
 
 4. In the **Data Format** area, select your desired format of Pulsar messages.
 
@@ -124,11 +124,11 @@ It is **NOT** recommended to use Public IP in a production environment.
 
     > **Note:**
     >
-    > When you select Pulsar as a downstream, the changefeed does not automatically create topics. You must create the required topics in advance.
+    > When you select Pulsar as the downstream, the changefeed does not automatically create topics. You must create the required topics in advance.
 
     - **Send all changelogs to one specified Pulsar Topic**
 
-        If you want the changefeed to send all messages to one Pulsar topic, choose this mode. You can specify a topic name in the **Topic Name** field.
+        If you want the changefeed to send all messages to a single Pulsar topic, choose this mode. You can specify a topic name in the **Topic Name** field.
 
     - **Distribute changelogs by table to Pulsar Topics**
 
@@ -142,7 +142,7 @@ It is **NOT** recommended to use Public IP in a production environment.
 
         For changelogs of non-row events, such as Resolved Ts Event, you can specify a topic name in the **Default Topic Name** field. The changefeed sends the non-row events to this topic to collect such changelogs.
 
-    As Pulsar is a multi-tenant solution, you might also set the **Pulsar Tenant** and **Pulsar Namespace** if they are different from the defaults.
+    Because Pulsar supports multi-tenancy, you might also set the **Pulsar Tenant** and **Pulsar Namespace** if they are different from the defaults.
 
 6. In the **Partition Distribution** area, you can decide which partition a Pulsar message is sent to. You can define **a single partition dispatcher for all tables** or **different partition dispatchers for different tables**. TiDB Cloud provides four rule options to distribute change events to Pulsar partitions:
 
