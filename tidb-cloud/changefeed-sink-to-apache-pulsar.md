@@ -78,18 +78,18 @@ It is **NOT** recommended to use Public IP in a production environment.
 1. In **Destinaton**, select **Pulsar**.
 2. In **Connection**, enter the connection information:
 
-   - **Destination Protocol**: select **Pulsar**, or **Pulsar+SSL**
-   - **Connectivity Method**: select **VPC Peering** or **Public IP**, depending on how you intende to connect to your Pulsar endpoint
-   - **Pulsar Broker**: fill in your Pulsar brokers endpoint, use a colon to separate the port from the domain/IP, e.g. `example.org:6650`.
+    - **Destination Protocol**: select **Pulsar**, or **Pulsar+SSL**
+    - **Connectivity Method**: select **VPC Peering** or **Public IP**, depending on how you intend to connect to your Pulsar endpoint
+    - **Pulsar Broker**: fill in your Pulsar brokers endpoint, use a colon to separate the port from the domain/IP, e.g. `example.org:6650`.
 
 3. In **Authentication**, select the **Auth Type** option according to your Pulsar authentication configuration. Depending on your selection, enter the requested credential information.
 4. The **Advanced Settings** section contains additional settings that may be optionally adjusted:
 
-   - **Compression**: select an optional compression algorithm for the data in this changefeed.
-   - **Max Messages per Batch** & **Max Publish Delay**: these are used to manage the batching of event messages sent to Pulsar. **Max Messages per Batch** sets the maximum number of messages in a single batch, while **Max Publish Delay** sets the maximum interval at which messages may be delayed by batching.
-   - **Connection Timeout**: adjust the timeout for establishing a TCP connection to Pulsar.
-   - **Operation Timeout**: adjust the timeout for the TiCDC Pulsar clients to initiate an operation.
-   - **Send Timeout**: adjust the timeout for the TiCDC Pulsar producer to send a message.
+    - **Compression**: select an optional compression algorithm for the data in this changefeed.
+    - **Max Messages per Batch** & **Max Publish Delay**: these are used to manage the batching of event messages sent to Pulsar. **Max Messages per Batch** sets the maximum number of messages in a single batch, while **Max Publish Delay** sets the maximum interval at which messages may be delayed by batching.
+    - **Connection Timeout**: adjust the timeout for establishing a TCP connection to Pulsar.
+    - **Operation Timeout**: adjust the timeout for the TiCDC Pulsar clients to initiate an operation.
+    - **Send Timeout**: adjust the timeout for the TiCDC Pulsar producer to send a message.
 
 5.  Click **Next** to test the network connection. If the test succeeds, you will be directed to the next page.
 
@@ -108,9 +108,9 @@ It is **NOT** recommended to use Public IP in a production environment.
 
 3. In the **Start Replication Position** area, select the desired starting point at which the changefeed should replicate your data to Pulsar:
 
-   - **Start replication from now on**: the changefeed will begin replicating data from the current point onwards
-   - **Start replication from a specific TSO**: the changefeed will begin replicating data from the specified [TSO](/tso.md) onwards. The specified TSO should be within the [garbage collection safe point](/read-historical-data.md#how-tidb-manages-the-data-versions).
-   - **Start replication from a specific time**: the changefeed will begin replicating data from the specified timestamp onwards. The specified timestamp should be within the garbage collection safe point.
+    - **Start replication from now on**: the changefeed will begin replicating data from the current point onwards
+    - **Start replication from a specific TSO**: the changefeed will begin replicating data from the specified [TSO](/tso.md) onwards. The specified TSO should be within the [garbage collection safe point](/read-historical-data.md#how-tidb-manages-the-data-versions).
+    - **Start replication from a specific time**: the changefeed will begin replicating data from the specified timestamp onwards. The specified timestamp should be within the garbage collection safe point.
 
 4. In the **Data Format** area, select your desired format of Pulsar messages.
 
@@ -169,9 +169,9 @@ It is **NOT** recommended to use Public IP in a production environment.
 ## Step 4. Specification and Review
 
 1. In the **Specification and Name** area
-   
-   - Specify the number of [Replication Capacity Units (RCUs)](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md) to be used by the changefeed.
-   - Specify a name for the changefeed.
+
+    - Specify the number of [Replication Capacity Units (RCUs)](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md) to be used by the changefeed.
+    - Specify a name for the changefeed.
 
 2. Review all the changefeed configurations for any issues.
 
