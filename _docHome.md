@@ -1,5 +1,5 @@
 ---
-title: PingCAP Documentation
+title: Home
 hide_sidebar: true
 hide_commit: true
 hide_leftNav: true
