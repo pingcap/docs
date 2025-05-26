@@ -2194,18 +2194,10 @@ Suppose that your machine on which TiKV is deployed has limited resources, for e
 
 #### `background-write-bandwidth` <span class="version-mark">New in v6.2.0</span>
 
-> **Note:**
->
-> This configuration item is returned in the result of `SHOW CONFIG`, but currently setting it does not take any effect.
-
 + The soft limit on the bandwidth with which background transactions write data.
 + Default value: `0KB` (which means no limit)
 
 #### `background-read-bandwidth` <span class="version-mark">New in v6.2.0</span>
-
-> **Note:**
->
-> This configuration item is returned in the result of `SHOW CONFIG`, but currently setting it does not take any effect.
 
 + The soft limit on the bandwidth with which background transactions and the Coprocessor read data.
 + Default value: `0KB` (which means no limit)
