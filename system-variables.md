@@ -5528,7 +5528,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Unit: Byte
-- Default value: `0`, which means that the memory quota is automatically set to the 20% of the TiDB instance's total memory capacity. Before v8.5.1, it is set to the half of the TiDB instance's total memory capacity.
+- Default value: `0`, which means that the memory quota is set to 20% of the TiDB instance's total memory capacity by default. Before v8.5.1, it is set to 50% of the TiDB instance's total memory capacity.
 - Range: `[0, 1099511627776]`
 - This variable sets the memory quota for the TiDB statistics cache.
 
