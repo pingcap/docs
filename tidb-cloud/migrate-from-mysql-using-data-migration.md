@@ -289,11 +289,11 @@ If your MySQL service is in a Google Cloud VPC, take the following steps:
 
 ### Grant required privileges for migration
 
-Before starting migration, you need to set up appropriate database users with the required privileges on both the source and target databases. These privileges enable TiDB Cloud DM to read data from MySQL, replicate changes, and write to your TiDB Cloud cluster securely. Because migration involves both full data dumps for existing data and binlog replication for incremental changes, your migration user requires specific permissions beyond basic read access.
+Before starting migration, you need to set up appropriate database users with the required privileges on both the source and target databases. These privileges enable TiDB Cloud DM to read data from MySQL, replicate changes, and write to your TiDB Cloud cluster securely. Because the migration involves both full data dumps for existing data and binlog replication for incremental changes, your migration user requires specific permissions beyond basic read access.
 
 #### Grant required privileges to the migration user in the source MySQL database
 
-For testing purposes, you can use an administrative user (e.g., `root`) in your source MySQL database.
+For testing purposes, you can use an administrative user (such as `root`) in your source MySQL database.
 
 For production workloads, it is recommended to have a dedicated user for data dump and replication in the source MySQL database, and grant only the necessary privileges:
 
@@ -327,7 +327,7 @@ For production workloads, it is recommended to have a dedicated user for replica
 | `DROP`   | Databases, Tables | Removes objects during schema sync |
 | `INDEX`  | Tables | Creates and modifies indexes |
 
-For example, you can execute the following `GRANT` statement to grant corresponding privileges:
+For example, you can execute the following `GRANT` statement in your target TiDB Cloud cluster to grant corresponding privileges:
 
 ```sql
 GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX ON *.* TO 'dm_target_user'@'%';
@@ -354,42 +354,40 @@ On the **Create Migration Job** page, configure the source and target connection
 2. Fill in the source connection profile.
 
    - **Data source**: the data source type.
-   - **Connectivity method**: choose the connection method for your data source based on your security requirements and cloud provider:
-      - **Public IP**: Available for all cloud providers (recommended for testing and proof-of-concept migrations)
-      - **Private Link**: Available for AWS and Azure only (recommended for production workloads requiring private connectivity)
-      - **VPC Peering**: Available for AWS and GCP only (recommended for production workloads needing low-latency, intra-region connections with non-overlapping VPC/VNet CIDRs)
-   - **Hostname or IP address** (for public IP and VPC peering): the hostname or IP address of the data source.
-   - **Service Name** (for Private Link): 
-      - **For AWS**: Enter the VPC Endpoint Service Name (format: `com.amazonaws.vpce-svc-xxxxxxxxxxxxxxxxx`) that you created for your RDS/Aurora instance
-      - **For Azure**: Enter the resource ID of your MySQL Flexible Server instance (format: `/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>`)
+   - **Connectivity method**: select a connection method for your data source based on your security requirements and cloud provider:
+      - **Public IP**: available for all cloud providers (recommended for testing and proof-of-concept migrations).
+      - **Private Link**: available for AWS and Azure only (recommended for production workloads requiring private connectivity).
+      - **VPC Peering**: available for AWS and Google Cloud only (recommended for production workloads needing low-latency, intra-region connections with non-overlapping VPC/VNet CIDRs).
+   - Based on the selected **Connectivity method**, do the following:
+      - If **Public IP** or **VPC Peering** is selected, fill in the **Hostname or IP address** field with the hostname or IP address of the data source.
+      - If **Private Link** is selected, fill in the following information:
+         - **Endpoint Service Name** (available if **Data source** is from AWS): enter the VPC endpoint service name (format: `com.amazonaws.vpce-svc-xxxxxxxxxxxxxxxxx`) that you created for your RDS or Aurora instance.
+         - **Private Endpoint Resource ID** (available if **Data source** is from Azure): enter the resource ID of your MySQL Flexible Server instance (format: `/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>`).
    - **Port**: the port of the data source.
    - **User Name**: the username of the data source.
    - **Password**: the password of the username.
-   - **SSL/TLS**: enable SSL/TLS for end-to-end data encryption (highly recommended for all migrations). Upload the appropriate certificates based on your MySQL server's SSL configuration.
+   - **SSL/TLS**: enable SSL/TLS for end-to-end data encryption (highly recommended for all migration jobs). Upload the appropriate certificates based on your MySQL server's SSL configuration.
         <details>
         <summary> SSL/TLS configuration options </summary>
 
-        - **Option 1: Server Authentication Only**
-            - Upload only the **CA Certificate** 
-            - MySQL server presents its certificate to prove identity
-            - TiDB Cloud verifies the server certificate against the CA
-            - Protects against man-in-the-middle attacks and is required whenever the MySQL server is started with `require_secure_transport = ON`
-        - **Option 2: Client Certificate Authentication**
-            - Upload: **Client Certificate + Client Private Key** 
-            - TiDB Cloud presents its certificate to the MySQL server for authentication, but TiDB Cloud does not verify the MySQL server's certificate
-            - This is typically used when the MySQL server is configured with options like `REQUIRE SUBJECT '...'` or `REQUIRE ISSUER '...'` without `REQUIRE X509`, allowing it to check specific attributes of the client certificate without full CA validation of that client cert
-            - Use when MySQL server accepts client certificates in self-signed or custom PKI environments. This configuration is vulnerable to man-in-the-middle attacks and is not recommended for production environments unless other network-level controls guarantee server authenticity
-        - **Option 3: Mutual TLS (mTLS) - Highest Security**
-            - Upload **CA Certificate + Client Certificate + Client Private Key**
-            - MySQL server verifies TiDB Cloud's identity using the client certificate
-            - TiDB Cloud verifies MySQL server's identity using the CA certificate
-            - Required when MySQL server has `REQUIRE X509` or `REQUIRE SSL` configured for the migration user
-            - Use this if your MySQL server requires client certificates for authentication
-            - **Certificate Sources:**
-            - Download from your cloud provider (see [TLS certificate links](#end-to-end-encryption-over-tlsssl))
-            - Use your organization's internal CA certificates
-            - Self-signed certificates (development/testing only)
-
+        - **Option 1: Server authentication only**
+            - if your MySQL server is configured for server authentication only, upload only the **CA Certificate**.
+            - In this option, the MySQL server presents its certificate to prove its identity, and TiDB Cloud verifies the server certificate against the CA.
+            - The CA certificate protects against man-in-the-middle attacks and is required if the MySQL server is started with `require_secure_transport = ON`.
+        - **Option 2: Client certificate authentication**
+            - if your MySQL server is configured for client certificate authentication, upload **Client Certificate** and  **Client private key**.
+            - In this option, TiDB Cloud presents its certificate to the MySQL server for authentication, but TiDB Cloud does not verify the MySQL server's certificate.
+            - This option is typically used when the MySQL server is configured with options such as `REQUIRE SUBJECT '...'` or `REQUIRE ISSUER '...'` without `REQUIRE X509`, allowing it to check specific attributes of the client certificate without full CA validation of that client cert.
+            - This option is often used when the MySQL server accepts client certificates in self-signed or custom PKI environments. Note that this configuration is vulnerable to man-in-the-middle attacks and is not recommended for production environments unless other network-level controls guarantee server authenticity.
+        - **Option 3: Mutual TLS (mTLS) - highest security**
+            - if your MySQL server is configured for mutual TLS (mTLS) authentication, upload **CA Certificate**, **Client Certificate**, and **Client private key**.
+            - In this option, the MySQL server verifies TiDB Cloud's identity using the client certificate, and TiDB Cloud verifies MySQL server's identity using the CA certificate.
+            - This option is required when the MySQL server has `REQUIRE X509` or `REQUIRE SSL` configured for the migration user.
+            - This option is used when the MySQL server requires client certificates for authentication.
+            - You can get the certificates from the following sources:
+                - Download from your cloud provider (see [TLS certificate links](#end-to-end-encryption-over-tlsssl)).
+                - Use your organization's internal CA certificates.
+                - Self-signed certificates (for development/testing only).
         </details>
 
 3. Fill in the target connection profile.
@@ -401,10 +399,10 @@ On the **Create Migration Job** page, configure the source and target connection
 
 5. Take action according to the message you see:
 
-    - If you use Public IP or VPC Peering, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
-    - If you use Private Link, you are prompted to accept the endpoint request:
-        - **For AWS**: Go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), click **Endpoint services**, and accept the endpoint request from TiDB Cloud
-        - **For Azure**: Go to the [Azure portal](https://portal.azure.com), search for your MySQL Flexible Server by name, then navigate to **Networking** > **Private Endpoints** to approve the pending connection request from TiDB Cloud
+    - If you use **Public IP** or **VPC Peering** as the connectivity method, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
+    - If you use **Private Link** as the connectivity method, you are prompted to accept the endpoint request:
+        - For AWS: go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), click **Endpoint services**, and accept the endpoint request from TiDB Cloud.
+        - For Azure: go to the [Azure portal](https://portal.azure.com), search for your MySQL Flexible Server by name, click **Setting** > **Networking** in the left navigation pane, locate the **Private endpoint** section on the right side, and then approve the pending connection request from TiDB Cloud.
 
 ## Step 3: Choose migration job type
 
