@@ -1,7 +1,6 @@
 ---
 title: Set Up Self-Hosted Kafka Private Service Connect in Google Cloud
 summary: This document explains how to set up Private Service Connect for self-hosted Kafka in Google Cloud and how to make it work with TiDB Cloud.
-aliases: ['/tidbcloud/setup-self-hosted-kafka-private-service-connect']
 ---
 
 # Set Up Self-Hosted Kafka Private Service Connect in Google Cloud

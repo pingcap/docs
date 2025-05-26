@@ -50,7 +50,7 @@ Ensure that your TiDB cluster can connect to the Apache Kafka service. You can c
 
 Private Connect leverages **Private Link** or **Private Service Connect** technologies from cloud providers to enable resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly within your VPC.
 
-TiDB Cloud currently supports Private Connect only for self-hosted Kafka. It does not support direct integration with MSK, Confluent Kafka, or other Kafka SaaS services. To connect to these Kafka SaaS services via Private Connect, you can deploy a [kafka-proxy](https://github.com/grepplabs/kafka-proxy) as an intermediary, effectively exposing the Kafka service as self-hosted Kafka. For a detailed example, see [Set Up Self-Hosted Kafka Private Service Connect by Kafka-proxy in Google Cloud](/tidb-cloud/setup-gcp-self-hosted-kafka-private-service-connect.md#set-up-self-hosted-kafka-private-service-connect-by-kafka-proxy). This setup is similar across all Kafka SaaS services.
+TiDB Cloud currently supports Private Connect only for self-hosted Kafka. It does not support direct integration with MSK, Confluent Kafka, or other Kafka SaaS services. To connect to these Kafka SaaS services via Private Connect, you can deploy a [kafka-proxy](https://github.com/grepplabs/kafka-proxy) as an intermediary, effectively exposing the Kafka service as self-hosted Kafka. For a detailed example, see [Set Up Self-Hosted Kafka Private Service Connect by Kafka-proxy in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md#set-up-self-hosted-kafka-private-service-connect-by-kafka-proxy). This setup is similar across all Kafka SaaS services.
 
 - If your Apache Kafka service is hosted in AWS, follow [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md) to ensure that the network connection is properly configured. After setup, provide the following information in the TiDB Cloud console to create the changefeed:
 
@@ -58,7 +58,7 @@ TiDB Cloud currently supports Private Connect only for self-hosted Kafka. It doe
     - The Endpoint Service Name
     - The Bootstrap Ports
 
-- If your Apache Kafka service is hosted in Google Cloud, follow [Set Up Self-Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-gcp-self-hosted-kafka-private-service-connect.md) to ensure that the network connection is properly configured. After setup, provide the following information in the TiDB Cloud console to create the changefeed:
+- If your Apache Kafka service is hosted in Google Cloud, follow [Set Up Self-Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md) to ensure that the network connection is properly configured. After setup, provide the following information in the TiDB Cloud console to create the changefeed:
 
     - The ID in Kafka Advertised Listener Pattern
     - The Service Attachment
@@ -160,8 +160,8 @@ The steps vary depending on the connectivity method you select.
 <div label="Private Service Connect">
 
 1. In **Connectivity Method**, select **Private Service Connect**.    
-2. Ensure that you fill in the same unique ID in **Kafka Advertised Listener Pattern** when you [Set Up Self-Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-gcp-self-hosted-kafka-private-service-connect.md) in the **Network** section.
-3. Fill in the **Service Attachment** that you have configured in [Setup Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-gcp-self-hosted-kafka-private-service-connect.md)
+2. Ensure that you fill in the same unique ID in **Kafka Advertised Listener Pattern** when you [Set Up Self-Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md) in the **Network** section.
+3. Fill in the **Service Attachment** that you have configured in [Setup Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)
 4. Fill in the **Bootstrap Ports**. It is recommended that you provide more than one port. You can use commas `,` to separate multiple ports. 
 5. Select an **Authentication** option according to your Kafka authentication configuration.
 
