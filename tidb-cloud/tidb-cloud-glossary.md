@@ -59,6 +59,14 @@ An endpoint in Data Service is a web API that you can customize to execute SQL s
 
 For more information, see [Manage an endpoint](/tidb-cloud/data-service-manage-endpoint.md).
 
+## F
+
+### Full-Text Search
+
+Unlike [Vector Search](/tidb-cloud/vector-search-overview.md), which focuses on semantic similarity, full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
+
+For more information, see [Full-Text Search with SQL](/tidb-cloud/vector-search-full-text-search-sql.md) and [Full-Text Search with Python](/tidb-cloud/vector-search-full-text-search-python.md).
+
 ## M
 
 ### member
