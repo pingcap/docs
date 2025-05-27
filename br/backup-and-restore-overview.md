@@ -165,7 +165,7 @@ The following table lists the compatibility matrix for log backups. Note that al
 | v8.1.0 | v8.1.0 and later | - |
 > **Note:**
 >
-> - When only user data is backed up (full backup or log backup), all versions are compatible with each other.
+> - When only data of non-system tables is backed up (full backup or log backup), all versions are compatible with each other.
 > - In scenarios where restoring the `mysql` system table is incompatible, you can resolve the problem by setting `--with-sys-table=false` to skip restoring all system tables, or use a more fine-grained filter to just skip incompatible system tables, for example: `--filter '*.*' --filter "__TiDB_BR_Temporary_*.*" --filter '!mysql.*' --filter 'mysql.bind_info' --filter 'mysql.user' --filter 'mysql.global_priv' --filter 'mysql.global_grants' --filter 'mysql.default_roles' --filter 'mysql.role_edges' --filter '!sys.*' --filter '!INFORMATION_SCHEMA.*' --filter '!PERFORMANCE_SCHEMA.*' --filter '!METRICS_SCHEMA.*' --filter '!INSPECTION_SCHEMA.*'`.
 > - `-` means that there are no compatibility restrictions for the corresponding scenario.
 
