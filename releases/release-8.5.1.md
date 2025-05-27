@@ -21,6 +21,13 @@ Starting from v8.5.1, TiDB resumes testing of CentOS Linux 7 and is compatible w
 
 As CentOS Linux 7 has reached EOL, testing of this distribution will be stopped in a future TiDB release.
 
+## Compatibility change
+
+- To reduce memory usage by the TiDB statistics cache, the meaning of the default value `0` for the [`tidb_stats_cache_mem_quota`](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610) system variable is changed:
+
+    - Before v8.5.1, `0` means the memory quota for the statistics cache is 50% of the TiDB instance's total memory.
+    - Starting from v8.5.1, `0` means the memory quota for the statistics cache is 20% of the TiDB instance's total memory.
+
 ## Improvements
 
 + TiDB
