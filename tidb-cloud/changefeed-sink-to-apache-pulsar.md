@@ -60,7 +60,7 @@ If your Apache Pulsar service is in a Google Cloud VPC that has no internet acce
 </div>
 <div label="Public IP">
 
-If you want to provide Public IP access to your Apache Pulsar service, assign Public IP addresses to all your Pulsar brokers. 
+If you want to provide Public IP access to your Apache Pulsar service, assign public IP addresses to all your Pulsar brokers. 
 
 It is **NOT** recommended to use Public IP in a production environment. 
 
