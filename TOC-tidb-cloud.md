@@ -692,6 +692,7 @@
   - [Metadata Lock](/metadata-lock.md)
   - [Use UUIDs](/best-practices/uuid.md)
   - [TiDB Accelerated Table Creation](/accelerated-table-creation.md)
+  - [URI Formats of External Storage Services](/external-storage-uri.md)
 - API Reference ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)   
   - [Overview](/tidb-cloud/api-overview.md) 
   - v1beta1
