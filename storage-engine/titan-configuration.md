@@ -171,7 +171,7 @@ To disable Titan for all existing and future data, you can follow these steps. N
 
     > **Warning:**
     >
-    > For versions earlier than v8.5.0, it is recommended to skip this step, because it might cause TiKV to crash. In these earlier versions, you can disable Titan directly by following Step 1. There is no performance difference between the configuration changes in Step 1 and the following changes in this step after the data migration is complete.
+    > For versions earlier than v8.5.0, it is recommended to skip this step, because it might cause TiKV to crash. In these earlier versions, following Step 1 is sufficient to disable Titan. There is no performance difference between the configuration changes in Step 1 and the following changes in this step after the data migration is complete.
 
     ```toml
     [rocksdb.titan]
