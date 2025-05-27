@@ -32,6 +32,25 @@ TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. 
 
 A direct customer is an end customer who purchases TiDB Cloud and pays invoices directly from PingCAP. This is distinguished from an [MSP customer](#msp-customer).
 
+<<<<<<< HEAD
+=======
+## E
+
+### Endpoint
+
+An endpoint in Data Service is a web API that you can customize to execute SQL statements. You can specify parameters for your SQL statements, such as the value used in the `WHERE` clause. When a client calls an endpoint and provides values for the parameters in a request URL, the endpoint executes the corresponding SQL statement with the provided parameters and returns the results as part of the HTTP response.
+
+For more information, see [Manage an endpoint](/tidb-cloud/data-service-manage-endpoint.md).
+
+## F
+
+### Full-text search
+
+Unlike [Vector Search](/tidb-cloud/vector-search-overview.md), which focuses on semantic similarity, full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
+
+For more information, see [Full-Text Search with SQL](/tidb-cloud/vector-search-full-text-search-sql.md) and [Full-Text Search with Python](/tidb-cloud/vector-search-full-text-search-python.md).
+
+>>>>>>> b781cd98c3 (cloud: add Full-Text Search in tidb-cloud-glossary (#21034))
 ## M
 
 ### member
@@ -133,6 +152,10 @@ The storage node that stores the online transactional processing (OLTP) data. It
 A list of IP addresses and Classless Inter-Domain Routing (CIDR) addresses that are allowed to access the TiDB Cloud cluster via a SQL client. The traffic filter is empty by default.
 
 ## V
+
+### Vector search
+
+[Vector search](/tidb-cloud/vector-search-overview.md) is a search method that prioritizes the meaning of your data to deliver relevant results. Unlike traditional full-text search, which relies on exact keyword matching and word frequency, vector search converts various data types (such as text, images, or audio) into high-dimensional vectors and queries based on the similarity between these vectors. This search method captures the semantic meaning and contextual information of the data, leading to a more precise understanding of user intent. Even when the search terms do not exactly match the content in the database, vector search can still provide results that align with the user's intent by analyzing the semantics of the data.
 
 ### Virtual Private Cloud
 
