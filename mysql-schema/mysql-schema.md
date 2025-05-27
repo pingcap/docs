@@ -112,6 +112,10 @@ Currently, the `help_topic` is NULL.
 
 * `request_unit_by_group`: the history records of consumed resource units (RUs) of all resource groups
 
+## System tables related to backup and restore
+
+* `tidb_pitr_id_map`: the ID mapping information for point-in-time recovery (PITR) operations
+
 ## Miscellaneous system tables
 
 <CustomContent platform="tidb">
