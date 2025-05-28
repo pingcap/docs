@@ -467,7 +467,7 @@
         -   TiUPコンポーネント
             -   [tiup-playground](/tiup/tiup-playground.md)
             -   [tiup-cluster](/tiup/tiup-cluster.md)
-            -   [非sudoモード](/tiup/tiup-cluster-no-sudo-mode.md)
+            -   [sudo なしモード](/tiup/tiup-cluster-no-sudo-mode.md)
             -   [tiup-mirror](/tiup/tiup-mirror.md)
             -   [tiup-bench](/tiup/tiup-bench.md)
     -   [TiDB Operator](/tidb-operator-overview.md)
@@ -624,11 +624,12 @@
             -   [アラートルール](/ticdc/ticdc-alert-rules.md)
         -   参照
             -   [アーキテクチャ](/ticdc/ticdc-architecture.md)
+            -   [TiCDC データレプリケーション機能](/ticdc/ticdc-data-replication-capabilities.md)
             -   [TiCDC サーバー構成](/ticdc/ticdc-server-config.md)
             -   [TiCDC Changefeedフィード構成](/ticdc/ticdc-changefeed-config.md)
             -   出力プロトコル
                 -   [TiCDC Avroプロトコル](/ticdc/ticdc-avro-protocol.md)
-                -   [TiCDC Canal-JSON プロトコル](/ticdc/ticdc-canal-json.md)
+                -   [TiCDC Canal- JSON プロトコル](/ticdc/ticdc-canal-json.md)
                 -   [TiCDC CSV プロトコル](/ticdc/ticdc-csv.md)
                 -   [TiCDC デベジウムプロトコル](/ticdc/ticdc-debezium.md)
                 -   [TiCDCオープンプロトコル](/ticdc/ticdc-open-protocol.md)
@@ -964,7 +965,7 @@
             -   [分離レベル](/transaction-isolation-levels.md)
             -   [楽観的トランザクション](/optimistic-transaction.md)
             -   [悲観的な取引](/pessimistic-transaction.md)
-            -   [非トランザクションDML文](/non-transactional-dml.md)
+            -   [非トランザクションDMLステートメント](/non-transactional-dml.md)
         -   [ビュー](/views.md)
         -   [パーティショニング](/partitioned-table.md)
         -   [一時テーブル](/temporary-tables.md)

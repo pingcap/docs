@@ -164,7 +164,7 @@ TiDB v6.6.0 より前のBRの互換性情報は次のとおりです。
 
 > **注記：**
 >
-> -   ユーザー データのみをバックアップする場合 (フル バックアップまたはログ バックアップ)、すべてのバージョンは相互に互換性があります。
+> -   システム テーブル以外のデータのみをバックアップする場合 (完全バックアップまたはログ バックアップ)、すべてのバージョンは相互に互換性があります。
 > -   `mysql`システム テーブルの復元に互換性がないシナリオでは、 `--with-sys-table=false`設定してすべてのシステム テーブルの復元をスキップするか、よりきめ細かいフィルターを使用して互換性のないシステム テーブルのみをスキップすることで、問題を解決できます (例: `--filter '*.*' --filter "__TiDB_BR_Temporary_*.*" --filter '!mysql.*' --filter 'mysql.bind_info' --filter 'mysql.user' --filter 'mysql.global_priv' --filter 'mysql.global_grants' --filter 'mysql.default_roles' --filter 'mysql.role_edges' --filter '!sys.*' --filter '!INFORMATION_SCHEMA.*' --filter '!PERFORMANCE_SCHEMA.*' --filter '!METRICS_SCHEMA.*' --filter '!INSPECTION_SCHEMA.*'` )。
 > -   `-` 、対応するシナリオに互換性の制限がないことを意味します。
 

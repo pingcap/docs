@@ -5,9 +5,9 @@ summary: TiDB データベースの ALTER TABLE の使用法の概要。
 
 # テーブルの変更 {#alter-table}
 
-このステートメントは、既存のテーブルを新しいテーブル構造に適合するように変更します。ステートメント`ALTER TABLE`は次の目的で使用できます。
+この文は、既存のテーブルを新しいテーブル構造に適合するように変更します。文`ALTER TABLE`次の目的で使用できます。
 
--   [`ADD`](/sql-statements/sql-statement-add-index.md) 、 [`DROP`](/sql-statements/sql-statement-drop-index.md) 、または[`RENAME`](/sql-statements/sql-statement-rename-index.md)インデックス
+-   [`ADD`](/sql-statements/sql-statement-add-index.md) 、または[`RENAME`](/sql-statements/sql-statement-rename-index.md) [`DROP`](/sql-statements/sql-statement-drop-index.md)
 -   [`ADD`](/sql-statements/sql-statement-add-column.md) [`DROP`](/sql-statements/sql-statement-drop-column.md)または[`MODIFY`](/sql-statements/sql-statement-modify-column.md) [`CHANGE`](/sql-statements/sql-statement-change-column.md)
 -   [`COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)テーブルデータ
 
@@ -113,7 +113,7 @@ Query OK, 0 rows affected (0.30 sec)
 2 rows in set (0.00 sec)
 ```
 
-TiDB は、DDL 変更が特定の`ALTER`アルゴリズムを使用することをアサートする機能をサポートしています。これは単なるアサーションであり、テーブルの変更に使用される実際のアルゴリズムは変更しません。これは、クラスターのピーク時間帯にのみ即時の DDL 変更を許可したい場合に便利です。
+TiDBは、DDL変更が`ALTER`のアルゴリズムを使用していることをアサートする機能をサポートしています。これは単なるアサーションであり、テーブルの変更に使用される実際のアルゴリズムを変更するものではないことに注意してください。
 
 ```sql
 ALTER TABLE t1 DROP INDEX c1, ALGORITHM=INSTANT;
@@ -133,7 +133,7 @@ ALTER TABLE t1 ADD INDEX (c1), ALGORITHM=INSTANT;
 ERROR 1846 (0A000): ALGORITHM=INSTANT is not supported. Reason: Cannot alter table by INSTANT. Try ALGORITHM=INPLACE.
 ```
 
-ただし、 `INPLACE`操作に`ALGORITHM=COPY`アサーションを使用すると、エラーではなく警告が生成されます。これは、TiDB がアサーションを*this algorithm or better*として解釈するためです。TiDB が使用するアルゴリズムは MySQL と異なる可能性があるため、この動作の違いは MySQL との互換性に役立ちます。
+ただし、 `ALGORITHM=COPY`のアサーションを`INPLACE`演算に使用すると、エラーではなく警告が生成されます。これは、TiDBがこのアサーションを*「このアルゴリズム以上」*と解釈するためです。TiDBが使用するアルゴリズムはMySQLと異なる可能性があるため、この動作の違いはMySQLとの互換性を保つために役立ちます。
 
 ```sql
 ALTER TABLE t1 ADD INDEX (c1), ALGORITHM=COPY;
@@ -151,15 +151,15 @@ Query OK, 0 rows affected, 1 warning (0.25 sec)
 1 row in set (0.00 sec)
 ```
 
-## MySQL 互換性 {#mysql-compatibility}
+## MySQLの互換性 {#mysql-compatibility}
 
 TiDB の`ALTER TABLE`には次の主な制限が適用されます。
 
 -   `ALTER TABLE`つのステートメントで複数のスキーマ オブジェクトを変更する場合:
 
-    -   複数の変更で同じオブジェクトを変更することはサポートされていません。
-    -   TiDB は、**実行前に**テーブル スキーマに従ってステートメントを検証します。たとえば、列`c1`テーブルに存在しないため、 `ALTER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT AFTER c1;`実行するとエラーが返されます。
-    -   `ALTER TABLE`ステートメントの場合、TiDB での実行順序は左から右への変更が 1 つずつ順番に実行されるため、場合によっては MySQL と互換性がありません。
+    -   同じオブジェクトを複数回変更することはサポートされていません。
+    -   TiDBは**実行前に**テーブルスキーマに従ってステートメントを検証します。例えば、 `ALTER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT AFTER c1;`実行すると、列`c1`テーブルに存在しないためエラーが返されます。
+    -   `ALTER TABLE`文の場合、TiDB での実行順序は左から右への変更が次々に実行されるため、場合によっては MySQL と互換性がありません。
 
 -   主キー列の[再編成データ](/sql-statements/sql-statement-modify-column.md#reorg-data-change)種類の変更はサポートされていません。
 
@@ -167,21 +167,21 @@ TiDB の`ALTER TABLE`には次の主な制限が適用されます。
 
 -   生成された列の列タイプの変更はサポートされていません。
 
--   一部のデータ型 (たとえば、一部の TIME、Bit、Set、Enum、JSON 型) の変更は、TiDB と MySQL 間の`CAST`の関数の動作の互換性の問題によりサポートされていません。
+-   一部のデータ型 (たとえば、一部の TIME、Bit、Set、Enum、JSON 型) の変更は、TiDB と MySQL 間の`CAST`関数の動作の互換性の問題によりサポートされていません。
 
 -   空間データ型はサポートされていません。
 
--   `ALTER TABLE t CACHE | NOCACHE` 、MySQL 構文に対する TiDB 拡張です。詳細については、 [キャッシュされたテーブル](/cached-tables.md)参照してください。
+-   `ALTER TABLE t CACHE | NOCACHE`はMySQL構文に対するTiDB拡張です。詳細については[キャッシュされたテーブル](/cached-tables.md)参照してください。
 
-詳細な制限については[MySQL 互換性](/mysql-compatibility.md#ddl-operations)参照してください。
+詳細な制限については[MySQLの互換性](/mysql-compatibility.md#ddl-operations)参照してください。
 
 ## 参照 {#see-also}
 
--   [MySQL 互換性](/mysql-compatibility.md#ddl-operations)
+-   [MySQLの互換性](/mysql-compatibility.md#ddl-operations)
 -   [列を追加](/sql-statements/sql-statement-add-column.md)
--   [ドロップコラム](/sql-statements/sql-statement-drop-column.md)
+-   [ドロップカラム](/sql-statements/sql-statement-drop-column.md)
 -   [インデックスを追加](/sql-statements/sql-statement-add-index.md)
--   [インデックスを削除](/sql-statements/sql-statement-drop-index.md)
+-   [インデックスの削除](/sql-statements/sql-statement-drop-index.md)
 -   [インデックス名の変更](/sql-statements/sql-statement-rename-index.md)
 -   [インデックスの変更](/sql-statements/sql-statement-alter-index.md)
 -   [テーブルの作成](/sql-statements/sql-statement-create-table.md)

@@ -969,7 +969,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>merge-max-log-gap</code> {#code-merge-max-log-gap-code}
 
--   `merge`実行した場合に許容されるログの最大欠落数
+-   `merge`実行した場合に許容される欠落ログの最大数
 -   デフォルト値: `10`
 -   最小値: `raft-log-gc-count-limit`より大きい
 
@@ -1172,7 +1172,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>enable-region-bucket</code> <span class="version-mark">v6.1.0 の新機能</span> {#code-enable-region-bucket-code-span-class-version-mark-new-in-v6-1-0-span}
 
--   リージョンをバケットと呼ばれる小さな範囲に分割するかどうかを決定します。バケットは、スキャンの同時実行性を向上させるための同時実行クエリの単位として使用されます。バケットの設計の詳細については、 [動的サイズリージョン](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md)を参照してください。
+-   リージョンをバケットと呼ばれるより小さな範囲に分割するかどうかを決定します。バケットは、スキャンの同時実行性を向上させるための同時実行クエリの単位として使用されます。バケットの設計の詳細については、 [動的サイズリージョン](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md)を参照してください。
 -   デフォルト値: false
 
 > **警告：**
@@ -1765,7 +1765,7 @@ Titan に関連するコンフィグレーション項目。
 -   BLOBファイルのキャッシュサイズ
 -   デフォルト値: `"0GiB"`
 -   最小値: `0`
--   推奨値: `0` 。TiKV v8.0.0以降、設定項目`shared-blob-cache`が導入され、デフォルトで有効になっているため、 `blob-cache-size`別途設定する必要はありません。7 `blob-cache-size`設定は、 `shared-blob-cache` `false`に設定されている場合にのみ有効になります。
+-   推奨値: `0` 。TiKV v8.0.0以降、設定項目`shared-blob-cache`導入され、デフォルトで有効になっているため、 `blob-cache-size`別途設定する必要はありません。7 `blob-cache-size`設定は、 `shared-blob-cache` `false`に設定されている場合にのみ有効になります。
 -   単位: KiB|MiB|GiB
 
 ### <code>shared-blob-cache</code> (v8.0.0 の新機能) {#code-shared-blob-cache-code-new-in-v8-0-0}
@@ -1782,7 +1782,7 @@ Titan に関連するコンフィグレーション項目。
 
 ### <code>max-gc-batch-size</code> {#code-max-gc-batch-size-code}
 
--   一度にGCを実行できるBlobファイルの最大合計サイズ
+-   GC を 1 回実行できる BLOB ファイルの最大合計サイズ
 -   デフォルト値: `"64MiB"`
 -   最小値: `0`
 -   単位: KiB|MiB|GiB
@@ -2090,7 +2090,7 @@ Raft Engineに関連するコンフィグレーション項目。
 >
 > この構成項目は、 [`enable-log-recycle`](#enable-log-recycle-new-in-v630) `true`に設定されている場合にのみ有効になります。
 
--   Raft Engineのログリサイクル用に空のログファイルを生成するかどうかを決定します。有効にすると、 Raft Engineは初期化中にログリサイクル用の空のログファイルを自動的にバッチ処理し、初期化直後にログリサイクルを有効にします。
+-   Raft Engineのログリサイクル用に空のログファイルを生成するかどうかを決定します。有効にすると、 Raft Engineは初期化中にログリサイクル用の空のログファイルを自動的にバッチ処理し、初期化直後にログリサイクルが有効になります。
 -   デフォルト値: `false`
 
 ### <code>compression-level</code> <span class="version-mark">v7.4.0 の新機能</span> {#code-compression-level-code-span-class-version-mark-new-in-v7-4-0-span}
@@ -2242,7 +2242,7 @@ BRバックアップに関連するコンフィグレーション項目。
 
 > **注記：**
 >
-> この設定は、S3 のレート制限によるバックアップ失敗に対処するために導入されました。この問題は[バックアップデータのstorage構造の改善](/br/br-snapshot-architecture.md#structure-of-backup-files)で修正されました。そのため、この設定はバージョン 6.1.1 以降は非推奨となり、推奨されなくなりました。
+> この設定は、S3 のレート制限によるバックアップ失敗に対処するために導入されました。この問題は[バックアップデータのstorage構造の改善](/br/br-snapshot-architecture.md#structure-of-backup-files)で修正されました。そのため、この設定はバージョン 6.1.1 以降では非推奨となり、推奨されなくなりました。
 
 -   バックアップ中にS3へのマルチパートアップロードを実行する際に使用するパートサイズ。この設定値を調整することで、S3に送信されるリクエストの数を制御できます。
 -   S3にデータをバックアップし、バックアップファイルがこの設定項目の値より大きい場合、 [マルチパートアップロード](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)自動的に有効になります。圧縮率に基づくと、96MiBのリージョンで生成されるバックアップファイルは約10MiB～30MiBになります。
@@ -2447,18 +2447,10 @@ TiKV がデプロイされているマシンのリソースが限られている
 
 #### <code>background-write-bandwidth</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-background-write-bandwidth-code-span-class-version-mark-new-in-v6-2-0-span}
 
-> **注記：**
->
-> この設定項目は`SHOW CONFIG`結果として返されますが、現在設定しても効果はありません。
-
 -   バックグラウンド トランザクションがデータを書き込む帯域幅のソフト制限。
 -   デフォルト値: `0KiB` (制限なしを意味します)
 
 #### <code>background-read-bandwidth</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-background-read-bandwidth-code-span-class-version-mark-new-in-v6-2-0-span}
-
-> **注記：**
->
-> この設定項目は`SHOW CONFIG`結果として返されますが、現在設定しても効果はありません。
 
 -   バックグラウンド トランザクションとコプロセッサーがデータを読み取る帯域幅のソフト制限。
 -   デフォルト値: `0KiB` (制限なしを意味します)
@@ -2480,7 +2472,7 @@ TiKV API V2が有効な場合にタイムスタンプの取得に関連するコ
 -   TiKV がこの設定項目で指定された期間に基づいて TSO キャッシュを事前割り当てすることを示します。TiKV は前回の期間に基づいて TSO の使用量を推定し、 `alloc-ahead-buffer`満たす TSO をローカルに要求してキャッシュします。
 -   この設定項目は、TiKV API V2が有効になっている場合にPD障害に対する許容度を高めるためによく使用されます（ `storage.api-version = 2` ）。
 -   この設定項目の値を大きくすると、TSO消費量とTiKVのメモリオーバーヘッドが増加する可能性があります。十分なTSOを確保するには、PDの[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)設定項目を減らすことをお勧めします。
--   テストによると、 `alloc-ahead-buffer`がデフォルト値のときに PD リーダーが失敗して別のノードに切り替わると、書き込み要求のレイテンシーが短期的に増加し、QPS が減少 (約 15%) します。
+-   テストによると、デフォルト値が`alloc-ahead-buffer`場合、PD リーダーが失敗して別のノードに切り替わると、書き込み要求のレイテンシーが短期的に増加し、QPS が減少 (約 15%) します。
 -   業務への影響を回避するには、PD で`tso-update-physical-interval = "1ms"`設定し、TiKV で次の設定項目を設定します。
     -   `causal-ts.alloc-ahead-buffer = "6s"`
     -   `causal-ts.renew-batch-max-size = 65536`
@@ -2496,7 +2488,7 @@ TiKV API V2が有効な場合にタイムスタンプの取得に関連するコ
 ### <code>renew-batch-min-size</code> {#code-renew-batch-min-size-code}
 
 -   タイムスタンプ要求内の TSO の最小数。
--   TiKVは、前期間のタイムスタンプ消費量に応じて、キャッシュされるタイムスタンプの数を調整します。必要なTSOが少数の場合、TiKVは要求されるTSOの数を`renew-batch-min-size`達するまで減らします。アプリケーションで大規模なバースト書き込みトラフィックが頻繁に発生する場合は、必要に応じてこのパラメータを大きく設定できます。このパラメータは、単一のtikvサーバーのキャッシュサイズであることに注意してください。パラメータを大きすぎる値に設定し、クラスターに多数のtikvサーバーが含まれている場合、TSOの消費が急激に増加します。
+-   TiKVは、前期間のタイムスタンプ消費量に応じて、キャッシュされるタイムスタンプの数を調整します。必要なTSOが少数の場合、TiKVは要求されるTSOの数を`renew-batch-min-size`達するまで減らします。アプリケーションで大規模なバースト書き込みトラフィックが頻繁に発生する場合は、このパラメータを必要に応じて大きな値に設定できます。このパラメータは、単一のtikvサーバーのキャッシュサイズであることに注意してください。パラメータを大きすぎる値に設定し、クラスターに多数のtikvサーバーが含まれている場合、TSOの消費が急激に増加します。
 -   Grafanaの**TiKV-RAW** &gt; **Causal timestamp**パネルでは、 **TSOバッチサイズは**、アプリケーションのワークロードに応じて動的に調整された、ローカルにキャッシュされたタイムスタンプの数です。このメトリックを参照して`renew-batch-min-size`調整できます。
 -   デフォルト値: `100`
 

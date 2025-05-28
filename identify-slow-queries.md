@@ -73,7 +73,7 @@ insert into t select * from t;
 -   `Succ` : ステートメントが正常に実行されたかどうか。
 -   `Backoff_time` : ステートメントで再試行を必要とするエラーが発生した場合の、再試行までの待機時間。一般的なエラーには、 `lock occurs` 、 `Region split` 、 `tikv server is busy`があります。
 -   `Plan` : ステートメントの実行プラン。特定の実行プランを解析するには、 `SELECT tidb_decode_plan('xxx...')`ステートメントを実行します。
--   `Binary_plan` : バイナリエンコードされた文の実行計画。特定の実行計画を解析するには、 [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan)の文を実行してください。4 `Plan`と`Binary_plan`フィールドには同じ情報が格納されます。ただし、2つのフィールドから解析される実行計画の形式は異なります。
+-   `Binary_plan` : バイナリエンコードされた文の実行計画。特定の実行計画を解析するには、 [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan)の文を実行します。4 `Plan`と`Binary_plan`フィールドには同じ情報が格納されます。ただし、2つのフィールドから解析される実行計画の形式は異なります。
 -   `Prepared` : このステートメントが`Prepare`要求か`Execute`要求かを示します。
 -   `Plan_from_cache` : このステートメントが実行プラン キャッシュにヒットするかどうか。
 -   `Plan_from_binding` : このステートメントがバインドされた実行プランを使用するかどうか。
@@ -134,8 +134,8 @@ TiKVコプロセッサータスク フィールド:
 -   `Cop_wait_p90` : copタスクのP90待機時間。
 -   `Cop_wait_max` : cop タスクの最大待機時間。
 -   `Cop_wait_addr` : 待機時間が最も長い cop-task のアドレス。
--   `Rocksdb_delete_skipped_count` : RocksDB 読み取り中に削除されたキーをスキャンする回数。
--   `Rocksdb_key_skipped_count` : RocksDB がデータをスキャンするときに検出する削除された (tombstone) キーの数。
+-   `Rocksdb_delete_skipped_count` : RocksDB がデータをスキャンするときに検出する削除された (tombstone) キーの数。
+-   `Rocksdb_key_skipped_count` : RocksDB がデータをスキャンするときに検出するすべてのキーの数。
 -   `Rocksdb_block_cache_hit_count` : RocksDB がブロックキャッシュからデータを読み取る回数。
 -   `Rocksdb_block_read_count` : RocksDB がファイル システムからデータを読み取る回数。
 -   `Rocksdb_block_read_byte` : RocksDB がファイル システムから読み取るデータの量。
@@ -243,7 +243,7 @@ TiDB 4.0では、 `SLOW_QUERY`ローテーションされたスローログフ�
 >
 > 指定された時間範囲のスロー ログ ファイルが削除された場合、またはスロー クエリがない場合、クエリは NULL を返します。
 
-TiDB 4.0では、すべてのTiDBノードのスロークエリ情報を照会するためのシステムテーブル[`CLUSTER_SLOW_QUERY`](/information-schema/information-schema-slow-query.md#cluster_slow_query-table)が追加されました。テーブル`CLUSTER_SLOW_QUERY`のスキーマは、テーブル`SLOW_QUERY`とは異なり、列`CLUSTER_SLOW_QUERY`に列`INSTANCE`が追加されています。列`INSTANCE`は、スロークエリの行情報のTiDBノードアドレスを表します。列`CLUSTER_SLOW_QUERY` 、 [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)と同じように使用できます。
+TiDB 4.0では、すべてのTiDBノードのスロークエリ情報を照会するためのシステムテーブル[`CLUSTER_SLOW_QUERY`](/information-schema/information-schema-slow-query.md#cluster_slow_query-table)が追加されました。テーブル`CLUSTER_SLOW_QUERY`のスキーマは、テーブル`SLOW_QUERY`とは異なり、テーブル`CLUSTER_SLOW_QUERY`に列`INSTANCE`が追加されています。列`INSTANCE`は、スロークエリの行情報のTiDBノードアドレスを表します。列`CLUSTER_SLOW_QUERY` 、 [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)と同じように使用できます。
 
 `CLUSTER_SLOW_QUERY`テーブルをクエリする場合、TiDB は、他のノードからすべての低速クエリ情報を取得して 1 つの TiDB ノードで操作を実行するのではなく、計算と判断を他のノードにプッシュします。
 

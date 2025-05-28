@@ -330,6 +330,7 @@
     -   [チェンジフィードの概要](/tidb-cloud/changefeed-overview.md)
     -   [MySQLシンクへ](/tidb-cloud/changefeed-sink-to-mysql.md)
     -   [カフカシンクへ](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
+    -   [パルサーシンクへ](/tidb-cloud/changefeed-sink-to-apache-pulsar.md)
     -   [TiDB Cloudシンクへ](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
     -   [クラウドストレージへ](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
     -   参照
@@ -397,6 +398,7 @@
         -   [バックアップリソースを使用する](/tidb-cloud/terraform-use-backup-resource.md)
         -   [復元リソースを使用する](/tidb-cloud/terraform-use-restore-resource.md)
         -   [インポートリソースの使用](/tidb-cloud/terraform-use-import-resource.md)
+        -   [クラスタリソースの移行](/tidb-cloud/terraform-migrate-cluster-resource.md)
     -   [ヴェルセル](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
     -   [ザピエール](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
 
@@ -612,7 +614,7 @@
         -   [分離レベル](/transaction-isolation-levels.md)
         -   [楽観的トランザクション](/optimistic-transaction.md)
         -   [悲観的な取引](/pessimistic-transaction.md)
-        -   [非トランザクションDML文](/non-transactional-dml.md)
+        -   [非トランザクションDMLステートメント](/non-transactional-dml.md)
     -   [ビュー](/views.md)
     -   [パーティショニング](/partitioned-table.md)
     -   [一時テーブル](/temporary-tables.md)
@@ -796,7 +798,7 @@
             -   [TPC-Cパフォーマンステストレポート](/tidb-cloud/v7.1-performance-benchmarking-with-tpcc.md)
             -   [Sysbenchパフォーマンステストレポート](/tidb-cloud/v7.1-performance-benchmarking-with-sysbench.md)
         -   TiDB v6.5
-            -   [TPC-C パフォーマンステストレポート](/tidb-cloud/v6.5-performance-benchmarking-with-tpcc.md)
+            -   [TPC-Cパフォーマンステストレポート](/tidb-cloud/v6.5-performance-benchmarking-with-tpcc.md)
             -   [Sysbenchパフォーマンステストレポート](/tidb-cloud/v6.5-performance-benchmarking-with-sysbench.md)
     -   [システム変数](/system-variables.md)
     -   [サーバーステータス変数](/status-variables.md)
