@@ -6,14 +6,7 @@ aliases: ['/docs/dev/maintain-tidb-using-tiup/','/docs/dev/how-to/maintain/tiup-
 
 # TiUP Common Operations
 
-This document describes the following common operations when you operate and maintain a TiDB cluster using TiUP.
-
-- View the cluster list
-- Start the cluster
-- View the cluster status
-- Modify the configuration
-- Stop the cluster
-- Destroy the cluster
+This document describes the common operations when you operate and maintain a TiDB cluster using TiUP.
 
 ## View the cluster list
 
