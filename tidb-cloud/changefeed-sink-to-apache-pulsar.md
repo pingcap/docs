@@ -132,7 +132,7 @@ It is **NOT** recommended to use Public IP in a production environment.
 
     - **Distribute changelogs by table to Pulsar Topics**
 
-        If you want the changefeed to create a dedicated Pulsar topic for each table, choose this mode. Then, all Pulsar messages of a table are sent to a dedicated Pulsar topic. You can customize topic names for tables by setting the **Topic Prefix**, a **Separator** between a database name and table name, and a **Topic Suffix**. For example, if you set the separator as `_`, the topic names are in the format of `<Topic Prefix><DatabaseName>_<TableName><Topic Suffix>`. You need to create this topic in advance on Pulsar.
+        If you want the changefeed to send all Pulsar messages of each table to a dedicated Pulsar topic. You can specify topic names for tables by setting the **Topic Prefix**, a **Separator** between a database name and table name, and a **Topic Suffix**. For example, if you set the separator as `_`, the Pulsar messages will be sent to topics whose names are in the format of `<Topic Prefix><DatabaseName>_<TableName><Topic Suffix>`. You need to create these topics in advance on Pulsar.
 
         For changelogs of non-row events, such as Create Schema Event, you can specify a topic name in the **Default Topic Name** field. The changefeed sends the non-row events to this topic to collect such changelogs.
 
