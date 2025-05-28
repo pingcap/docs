@@ -66,6 +66,7 @@ It is **NOT** recommended to use Public IP in a production environment.
 
 </div>
 </SimpleTab>
+
 ### Create topics in Apache Pulsar
 
 Currently, TiCDC does not automatically create Pulsar topics. You need to create the required topics in Pulsar before creating the changefeed. The number and naming of topics depend on your preferred distribution mode:
