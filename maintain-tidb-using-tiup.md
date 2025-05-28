@@ -359,7 +359,7 @@ You can perform the migration process without affecting running instances. Exist
     tiup cluster reload ${cluster-name} -R grafana
     ```
 
-#### (Optional) View historical metrics generated before the switch
+#### View historical metrics generated before the switch (optional)
 
 If you need to view historical metrics generated before the switch, you can switch the Grafana data source as follows:
 
