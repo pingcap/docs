@@ -60,7 +60,7 @@ tiup cdc:v7.5.0 cli changefeed create \
 
     - `access-key`: Specifies the access key.
     - `secret-access-key`: Specifies the secret access key.
-    - `session-token`: Specifies the temporary session token. TiDB supports this parameter starting from v7.6.0.
+    - `session-token`: Specifies the temporary session token. For backup and restore, this parameter is supported starting from v7.6.0.
     - `use-accelerate-endpoint`: Specifies whether to use the accelerate endpoint on Amazon S3 (defaults to `false`).
     - `endpoint`: Specifies the URL of custom endpoint for S3-compatible services (for example, `<https://s3.example.com/>`).
     - `force-path-style`: Use path style access rather than virtual hosted style access (defaults to `true`).
@@ -68,14 +68,15 @@ tiup cdc:v7.5.0 cli changefeed create \
     - `sse`: Specifies the server-side encryption algorithm used to encrypt the uploaded objects (value options: empty, `AES256`, or `aws:kms`).
     - `sse-kms-key-id`: Specifies the KMS ID if `sse` is set to `aws:kms`.
     - `acl`: Specifies the canned ACL of the uploaded objects (for example, `private` or `authenticated-read`).
-    - `role-arn`: To access Amazon S3 data from a third party using a specified [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html), you can specify the corresponding [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the IAM role with the `role-arn` URL query parameter, such as `arn:aws:iam::888888888888:role/my-role`. For more information about using an IAM role to access Amazon S3 data from TiDB Cloud, see [Configure Amazon S3 access using a Role ARN](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access-using-a-role-arn). For backup and restore, this parameter is supported starting from v7.6.0.
-    - `external-id`: To access Amazon S3 data from TiDB Cloud, you must specify the TiDB Cloud External ID with the `external-id` parameter to assume [the IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html). To get the TiDB Cloud External ID, see [Configure Amazon S3 access using a Role ARN](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access-using-a-role-arn).
+    - `role-arn`: To allow TiDB Cloud to access Amazon S3 data using a specified [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html), specify the corresponding [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the IAM role using the `role-arn` URL query parameter, such as `arn:aws:iam::888888888888:role/my-role`. For backup and restore, this parameter is supported starting from v7.6.0.
 
-> **Note:**
->
-> When configuring the IAM role, make sure to explicitly specify the trusted AWS account ID in the Principal field, and always include a unique external-id condition to prevent unauthorized access via [confused deputy attacks](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html).
-> You can find the TiDB Cloud AWS account ID in TiDB Cloud, and use AWS CloudFormation to create the IAM role securely in one click by following the linked documentation, see [Configure External Storage Access for TiDB Cloud Dedicated](/config-s3-and-gcs-access.md).
-> Optionally, you may also set a max-session-duration to limit the lifetime of temporary credentials for enhanced security.
+        > **Note:**
+        >
+        > - To automatically create an IAM role, navigate to the **Import Data from Amazon S3** page of your cluster in the [TiDB Cloud console](https://tidbcloud.com/), fill in the **Folder URI** field, click **Click here to create new one with AWS CloudFormation** under the **Role ARN** field, and then follow the on-screen instructions in the **Add New Role ARN** dialog.
+        > - If you have any trouble creating the IAM role using AWS CloudFormation, click **click Having trouble? Create Role ARN manually** in the **Add New Role ARN** dialog to get the TiDB Cloud Account ID and TiDB Cloud External ID, and then follow the steps in [Configure Amazon S3 access using a Role ARN](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access-using-a-role-arn) to create the role manually. When configuring the IAM role, make sure to enter the TiDB Cloud account ID in the **Account ID** field and select **Require external ID** to protect against [confused deputy attacks](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html).
+        > - To enhance security, you can reduce the valid duration of the IAM role by configuring a shorter **Max session duration**. For more information, see [Update the maximum session duration for a role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_update-role-settings.html#id_roles_update-session-duration) in AWS documentation.
+
+    - `external-id`: To allow TiDB Cloud to access Amazon S3 data, you must specify the TiDB Cloud External ID using the `external-id` parameter. You can get the TiDB Cloud External ID from the **Add New Role ARN** dialog in the [TiDB Cloud console](https://tidbcloud.com/). For more information, see [Configure Amazon S3 access using a Role ARN](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access-using-a-role-arn).
 
 The following is an example of an Amazon S3 URI for [`BACKUP`](/sql-statements/sql-statement-backup.md) and [`RESTORE`](/sql-statements/sql-statement-restore.md). In this example, you need to specify a specific file path `testfolder`.
 
