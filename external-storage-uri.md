@@ -74,6 +74,22 @@ s3://external/testfolder?access-key=${access-key}&secret-access-key=${secret-acc
 
 </CustomContent>
 
+## GCS URI format
+
+- `scheme`: `gcs` or `gs`
+- `host`: `bucket name`
+- `parameters`:
+
+    - `credentials-file`: Specifies the path to the credentials JSON file on the migration tool node.
+    - `storage-class`: Specifies the storage class of the uploaded objects (for example, `STANDARD` or `COLDLINE`)
+    - `predefined-acl`: Specifies the predefined ACL of the uploaded objects (for example, `private` or `project-private`)
+
+The following is an example of a GCS URI for TiDB Lightning and BR. In this example, you need to specify a specific file path `testfolder`.
+
+```shell
+gcs://external/testfolder?credentials-file=${credentials-file-path}
+```
+
 The following is an example of a GCS URI for [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md). In this example, you need to specify a specific filename `test.csv`.
 
 ```shell
