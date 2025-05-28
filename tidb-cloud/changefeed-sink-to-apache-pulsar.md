@@ -26,7 +26,7 @@ Before creating a changefeed to stream data to Apache Pulsar, you need to comple
 
 - Set up your network connection
 - Add permissions for Pulsar ACL authorization
-- Create topics in Apache Pulsar (or enable [allowAutoTopicCreation](https://pulsar.apache.org/reference/#/4.0.x/config/reference-configuration-broker?id=allowautotopiccreation) on Pulsar broker configuration)
+- Create topics in Apache Pulsar manually, or enable [`allowAutoTopicCreation`](https://pulsar.apache.org/reference/#/4.0.x/config/reference-configuration-broker?id=allowautotopiccreation) in the Apache Pulsar broker configuration
 
 ### Network
 
@@ -142,13 +142,13 @@ For more information, see [How to create a topic](https://pulsar.apache.org/docs
 
     - **Distribute changelogs by table to Pulsar Topics**
 
-        If you want the changefeed to send all Pulsar messages of each table to a dedicated Pulsar topic. You can specify topic names for tables by setting the **Topic Prefix**, a **Separator** between a database name and table name, and a **Topic Suffix**. For example, if you set the separator as `_`, the Pulsar messages will be sent to topics whose names are in the format of `<Topic Prefix><DatabaseName>_<TableName><Topic Suffix>`. You need to create these topics in advance on Pulsar.
+        If you want the changefeed to send all Pulsar messages of each table to a dedicated Pulsar topic, choose this mode. You can specify topic names for tables by setting the **Topic Prefix**, a **Separator** between a database name and table name, and a **Topic Suffix**. For example, if you set the separator as `_`, the Pulsar messages will be sent to topics whose names are in the format of `<Topic Prefix><DatabaseName>_<TableName><Topic Suffix>`. You need to create these topics in advance on Pulsar.
 
         For changelogs of non-row events, such as Create Schema Event, you can specify a topic name in the **Default Topic Name** field. The changefeed sends the non-row events to this topic to collect such changelogs.
 
     - **Distribute changelogs by database to Pulsar Topics**
 
-        If you want the changefeed to send all Pulsar messages of each database to a dedicated Pulsar topic. You can specify topic names for databases by setting the **Topic Prefix** and **Topic Suffix**.
+        If you want the changefeed to send all Pulsar messages of each database to a dedicated Pulsar topic, choose this mode. You can specify topic names for databases by setting the **Topic Prefix** and **Topic Suffix**.
 
         For changelogs of non-row events, such as Resolved Ts Event, you can specify a topic name in the **Default Topic Name** field. The changefeed sends the non-row events to this topic to collect such changelogs.
 
