@@ -5,14 +5,7 @@ summary: Learn the common operations to operate and maintain a TiDB cluster usin
 
 # TiUP Common Operations
 
-This document describes the following common operations when you operate and maintain a TiDB cluster using TiUP.
-
-- View the cluster list
-- Start the cluster
-- View the cluster status
-- Modify the configuration
-- Stop the cluster
-- Destroy the cluster
+This document describes the common operations when you operate and maintain a TiDB cluster using TiUP.
 
 ## View the cluster list
 
