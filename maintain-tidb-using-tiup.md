@@ -323,8 +323,6 @@ You can perform the migration process without affecting running instances. Exist
 
 1. Edit the cluster configuration:
 
-    {{< copyable "shell-regular" >}}
-    
     ```bash
     tiup cluster edit-config ${cluster-name}
     ```
@@ -340,8 +338,6 @@ You can perform the migration process without affecting running instances. Exist
 
 3. Reload the updated configuration:
 
-    {{< copyable "shell-regular" >}}
-
     ```bash
     tiup cluster reload ${cluster-name} -R prometheus
     ```
@@ -349,8 +345,6 @@ You can perform the migration process without affecting running instances. Exist
 #### Switch the default data source to VictoriaMetrics
 
 1. Edit the cluster configuration:
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     tiup cluster edit-config ${cluster-name}
@@ -367,8 +361,6 @@ You can perform the migration process without affecting running instances. Exist
 
 3. Reload the updated configuration:
 
-    {{< copyable "shell-regular" >}}
-
     ```bash
     tiup cluster reload ${cluster-name} -R grafana
     ```
@@ -378,8 +370,6 @@ You can perform the migration process without affecting running instances. Exist
 If you need to view historical metrics generated before the switch, you can switch the Grafana data source as follows:
 
 1. Edit the cluster configuration:
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     tiup cluster edit-config ${cluster-name}
@@ -396,8 +386,6 @@ If you need to view historical metrics generated before the switch, you can swit
 
 3. Reload the updated configuration:
 
-    {{< copyable "shell-regular" >}}
-
     ```bash
     tiup cluster reload ${cluster-name} -R grafana
     ```
@@ -411,8 +399,6 @@ After confirming that old metrics have expired, you can remove redundant service
 #### Set Prometheus to agent mode
 
 1. Edit the cluster configuration:
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     tiup cluster edit-config ${cluster-name}
@@ -434,8 +420,6 @@ After confirming that old metrics have expired, you can remove redundant service
 
 3. Reload the updated configuration:
 
-    {{< copyable "shell-regular" >}}
-
     ```bash
     tiup cluster reload ${cluster-name} -R prometheus
     ```
@@ -452,8 +436,6 @@ After confirming that old metrics have expired, you can remove redundant service
     ```
 
 2. Remove the data directory:
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     rm -rf /tidb-data/prometheus-8249
