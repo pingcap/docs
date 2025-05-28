@@ -78,6 +78,7 @@ Currently, TiCDC does not automatically create Pulsar topics. You need to create
 You might also need a default topic for non-row events (such as schema changes) depending on your configuration.
 
 For more information, see [How to create a topic](https://pulsar.apache.org/docs/4.0.x/tutorials-topic/) in Apache Pulsar documentation.
+
 ## Step 1. Open the changefeed page for Apache Pulsar
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
