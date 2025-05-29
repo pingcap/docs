@@ -462,7 +462,7 @@ If there are only warnings on some check items, you can evaluate the risk and co
 
 For more information about errors and solutions, see [Precheck errors and solutions](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#precheck-errors-and-solutions).
 
-For more information about precheck items, see [Migration Task Precheck](/dm/dm-precheck.md).
+For more information about precheck items, see [Migration Task Precheck](https://docs.pingcap.com/tidb/stable/dm-precheck).
 
 If all check items show **Pass**, click **Next**.
 
