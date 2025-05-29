@@ -97,9 +97,19 @@ The fields `SUMMARY_BEGIN_TIME` and `SUMMARY_END_TIME` represent the start time 
 
 ## `statements_summary_evicted`
 
-The `tidb_stmt_summary_max_stmt_count` variable controls the maximum number of statements that the `statement_summary` table stores in memory. The `statement_summary` table uses the LRU algorithm. Once the number of SQL statements exceeds the `tidb_stmt_summary_max_stmt_count` value, the longest unused record is evicted from the table. The number of evicted SQL statements during each period is recorded in the `statements_summary_evicted` table.
+The [`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40) system variable limits the number of unique SQL digests that the `statements_summary` and `statements_summary_history` tables can store in total. Once this limit is exceeded, TiDB evicts the least recently used SQL digests (along with all the related summary data) from both `statements_summary` and `statements_summary_history` tables.
 
-The `statements_summary_evicted` table is updated only when a SQL record is evicted from the `statement_summary` table. The `statements_summary_evicted` only records the period during which the eviction occurs and the number of evicted SQL statements.
+The `statements_summary_evicted` table records the period during which the eviction occurs and the number of unique SQL digests evicted during that period. This table helps you evaluate whether `tidb_stmt_summary_max_stmt_count` is properly configured for your workload. If this table contains records, it indicates that the number of unique SQL digests exceeded `tidb_stmt_summary_max_stmt_count` at some time point.
+
+<CustomContent platform="tidb">
+
+On the [SQL statements page of TiDB Dashboard](/dashboard/dashboard-statement-list.md#others), information about evicted statements is displayed in the `Others` row.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+On the [SQL statements tab of the Diagnosis page](/tidb-cloud/tune-performance.md#statement-analysis), information about evicted statements is displayed in the `Others` row.
 
 ## The `cluster` tables for statement summary
 
@@ -114,25 +124,14 @@ The following system variables are used to control the statement summary:
 - `tidb_enable_stmt_summary`: Determines whether to enable the statement summary feature. `1` represents `enable`, and `0` means `disable`. The feature is enabled by default. The statistics in the system table are cleared if this feature is disabled. The statistics are re-calculated next time this feature is enabled. Tests have shown that enabling this feature has little impact on performance.
 - `tidb_stmt_summary_refresh_interval`: The interval at which the `statements_summary` table is refreshed. The time unit is second (s). The default value is `1800`.
 - `tidb_stmt_summary_history_size`: The size of each SQL statement category stored in the `statements_summary_history` table, which is also the maximum number of records in the `statements_summary_evicted` table. The default value is `24`.
+- `tidb_stmt_summary_max_stmt_count`: Limits the number of unique SQL digests that the `statements_summary` and `statements_summary_history` tables can store in total. The default value is `3000`.
 
-<CustomContent platform="tidb">
+    Once this limit is exceeded, TiDB evicts the least recently used SQL digests from both `statements_summary` and `statements_summary_history` tables. These evicted digests are then counted in the [`statements_summary_evicted`](#statements_summary_evicted) table.
 
-- `tidb_stmt_summary_max_stmt_count`: Limits the number of SQL statements that can be stored in statement summary tables. The default value is `3000`. If the limit is exceeded, TiDB clears the SQL statements that recently remain unused. These cleared SQL statements are represented as rows with `DIGEST` set to `NULL` and recorded in the `statements_summary_evicted` table. On the [SQL statements page of TiDB Dashboard](/dashboard/dashboard-statement-list.md#others), the information of these rows is displayed as `Others`.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- `tidb_stmt_summary_max_stmt_count`: Limits the number of SQL statements that can be stored in statement summary tables. The default value is `3000`. If the limit is exceeded, TiDB clears the SQL statements that recently remain unused. These cleared SQL statements are represented as rows with `DIGEST` set to `NULL` and recorded in the `statements_summary_evicted` table. On the [SQL statements page of TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-statement-list#others), the information of these rows is displayed as `Others`.
-
-</CustomContent>
+    When a SQL digest is evicted, its related summary data of all time ranges is removed from both the `statements_summary` and `statements_summary_history` tables. As a result, even if the number of unique SQL digests within a specific time range does not exceed the limit, the number of unique SQL digests in the `statements_summary_history` table might be less than the actual number of unique SQL digests. If this situation occurs and affects performance, you are recommended to increase the value of `tidb_stmt_summary_max_stmt_count`.
 
 - `tidb_stmt_summary_max_sql_length`: Specifies the longest display length of `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT`. The default value is `4096`.
 - `tidb_stmt_summary_internal_query`: Determines whether to count the TiDB SQL statements. `1` means to count, and `0` means not to count. The default value is `0`.
-
-> **Note:**
->
-> When a category of SQL statement needs to be removed because the `tidb_stmt_summary_max_stmt_count` limit is exceeded, TiDB removes the data of that SQL statement category of all time ranges from the `statement_summary_history` table. Therefore, even if the number of SQL statement categories in a certain time range does not reach the limit, the number of SQL statements stored in the `statement_summary_history` table is less than the actual number of SQL statements. If this situation occurs and affects performance, you are recommended to increase the value of `tidb_stmt_summary_max_stmt_count`.
 
 An example of the statement summary configuration is shown as follows:
 
