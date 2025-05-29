@@ -34,7 +34,7 @@ TiCDC supports the following types of upstream data changes:
 
     - DDL and DML statements (excluding system tables).
     - Index operations (`ADD INDEX`, `CREATE INDEX`): to reduce the impact on changefeed replication latency, if the downstream is TiDB, TiCDC [asynchronously executes the `ADD INDEX` and `CREATE INDEX` DDL operations](/ticdc/ticdc-ddl.md#asynchronous-execution-of-add-index-and-create-index-ddls).
-    - Foreign key constraint DDL statements (`ADD FOREIGN KEY`): TiCDC does **not** replicate upstream system variable settings. You need to manually configure [`foreign_key_checks`](/system-variables.md#foreign_key_checks) in the downstream to determine whether the downstream foreign key constraint check is enabled. Additionally, when TiCDC writes data downstream, it automatically enables the session-level setting `SET SESSION foreign_key_checks = OFF;`. Therefore, even if global foreign key checks are enabled downstream, the data written by TiCDC will not trigger foreign key constraint validation.
+    - Foreign key constraint DDL statements (`ADD FOREIGN KEY`): TiCDC does **not** replicate upstream system variable settings. You need to manually configure [`foreign_key_checks`](/system-variables.md#foreign_key_checks) in the downstream to determine whether the downstream foreign key constraint check is enabled. Additionally, when writing data to the downstream, TiCDC automatically enables the session-level setting `SET SESSION foreign_key_checks = OFF;`. Therefore, even if global foreign key checks are enabled in the downstream, the data written by TiCDC will not trigger foreign key constraint validation.
 
 + **Not supported**:
 
