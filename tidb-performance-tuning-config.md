@@ -29,6 +29,7 @@ The following settings are commonly used to optimize TiDB performance:
 - Enhance execution plan cache, such as [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md), [Non-prepared plan cache](/sql-non-prepared-plan-cache.md), and [Instance-level execution plan cache](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840).
 - Optimize the behavior of the TiDB optimizer by using [Optimizer Fix Controls](/optimizer-fix-controls.md).
 - Use the [Titan](/storage-engine/titan-overview.md) storage engine more aggressively.
+- Fine-tune TiKV's compaction and flow control configurations, to ensure optimal and stable performance under write-intensive workloads.
 
 These settings can significantly improve performance for many workloads. However, as with any optimization, thoroughly test them in your environment before deploying to production.
 
@@ -92,22 +93,55 @@ snap-io-max-bytes-per-sec = "400MiB"
 in-memory-peer-size-limit = "32MiB"
 in-memory-instance-size-limit = "512MiB"
 
+[rocksdb]
+rate-bytes-per-sec = "600MiB"
+max-manifest-file-size = "256MiB"
 [rocksdb.titan]
 enabled = true
 [rocksdb.defaultcf.titan]
 min-blob-size = "1KB"
 blob-file-compression = "zstd"
 
+[storage]
+scheduler-pending-write-threshold = "512MiB"
 [storage.flow-control]
 l0-files-threshold = 60
+soft-pending-compaction-bytes-limit = "1TiB"
+hard-pending-compaction-bytes-limit = "2TiB"
 ```
 
 | Configuration item | Description | Note |
 | ---------| ---- | ----|
 | [`concurrent-send-snap-limit`](/tikv-configuration-file.md#concurrent-send-snap-limit), [`concurrent-recv-snap-limit`](/tikv-configuration-file.md#concurrent-recv-snap-limit), and [`snap-io-max-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec) | Set limits for concurrent snapshot transfer and I/O bandwidth during TiKV scaling operations. Higher limits reduce scaling time by allowing faster data migration. | Adjusting these limits affects the trade-off between scaling speed and online transaction performance. |
 | [`in-memory-peer-size-limit`](/tikv-configuration-file.md#in-memory-peer-size-limit-new-in-v840) and [`in-memory-instance-size-limit`](/tikv-configuration-file.md#in-memory-instance-size-limit-new-in-v840) | Control the memory allocation for pessimistic lock caching at the Region and TiKV instance levels. Storing locks in memory reduces disk I/O and improves transaction performance. | Monitor memory usage carefully. Higher limits improve performance but increase memory consumption. |
+|[`rocksdb.rate-bytes-per-sec`](/tikv-configuration-file.md#rate-bytes-per-sec) | Limits the I/O rate of background compaction and flush operations to prevent them from saturating disk bandwidth, ensuring stable performance. | It's recommended to set this to around 60% of the disk's maximum throughput. Overly high settings can lead to disk saturation, impacting foreground operations. Conversely, setting it too low may slow down compaction, causing write stalls and flow control activations. |
+|[`rocksdb.max-manifest-file-size`](/tikv-configuration-file.md#max-manifest-file-size) | Sets the maximum size of the RocksDB MANIFEST file, which logs metadata about SST files and database state changes. Increasing this size reduces the frequency of MANIFEST file rewrites, thereby minimizing their impact on foreground write performance. | The default value is 128 MiB. In environments with a large number of SST files (e.g., hundreds of thousands), frequent MANIFEST rewrites can degrade write performance. Adjusting this parameter to a higher value, such as 256 MiB or more, can help maintain optimal performance. |
 | [`rocksdb.titan`](/tikv-configuration-file.md#rocksdbtitan), [`rocksdb.defaultcf.titan`](/tikv-configuration-file.md#rocksdbdefaultcftitan), [`min-blob-size`](/tikv-configuration-file.md#min-blob-size), and [`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression) | Enable the Titan storage engine to reduce write amplification and alleviate disk I/O bottlenecks. Particularly useful when RocksDB compaction cannot keep up with write workloads, resulting in accumulated pending compaction bytes. | Enable it when write amplification is the primary bottleneck. Trade-offs include: 1. Potential performance impact on primary key range scans. 2. Increased space amplification (up to 2x in the worst case). 3. Additional memory usage for blob cache. |
+| [`storage.scheduler-pending-write-threshold`](/tikv-configuration-file.md#scheduler-pending-write-threshold) | Sets the maximum size of the write queue in TiKV's scheduler. When the total size of pending write tasks exceeds this threshold, TiKV returns a `Server Is Busy` error for new write requests. | The default value is 100 MiB. In scenarios with high write concurrency or temporary write spikes, increasing this threshold (e.g., to 512 MiB) can help accommodate the load. However, if the write queue continues to accumulate and exceeds this threshold persistently, it may indicate underlying performance issues that require further investigation. |
 | [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold) | Control when write flow control is triggered based on the number of kvDB L0 files. Increasing the threshold reduces write stalls during high write workloads. | Higher thresholds might lead to more aggressive compactions when many L0 files exist. |
+| [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) and [`storage.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit) | Define thresholds for pending compaction bytes to manage write flow control. The soft limit triggers partial write rejections, while the hard limit results in full write rejections when exceeded.	 | The default soft limit is 192 GiB, and the hard limit is 256 GiB. In write-intensive scenarios, if compaction processes cannot keep up, pending compaction bytes accumulate, potentially triggering flow control. Adjusting these limits can provide more buffer space, but persistent accumulation indicates underlying issues that require further investigation. |
+
+Be noted that the compaction and flow control configuration adjustments outlined above are tailored for TiKV deployments on instances with the following specifications:
+
+  - CPU: 32 cores
+  - Memory: 128 GiB
+  - Storage: 5 TiB EBS
+  - Disk Throughput: 1 GiB/s
+
+#### Recommended Configuration Adjustments for Write-Intensive Workloads
+
+To optimize TiKV's performance and stability under write-intensive workloads, it's advisable to adjust certain compaction and flow control parameters based on the instance's hardware specifications. For example:
+
+  - `rocksdb.rate-bytes-per-sec`: Set to approximately 60% of the disk's maximum throughput (e.g., ~600 MiB/s for a 1 GiB/s disk) to balance compaction I/O and prevent disk saturation.
+  - `storage.flow-control.soft-pending-compaction-bytes-limit` and `storage.flow-control.hard-pending-compaction-bytes-limit`: Increase these limits proportionally to the available disk space (e.g., 1 TiB and 2 TiB, respectively) to provide more buffer for compaction processes.
+
+These settings help ensure efficient resource utilization and minimize potential bottlenecks during peak write loads.
+
+
+> **Note:**
+>
+> TiKV employs a flow control mechanism at the scheduler layer to maintain system stability. When certain thresholds are exceeded—such as pending compaction bytes or write queue sizes—TiKV may start rejecting some or all write requests, returning a `ServerIsBusy` error. This indicates that the system is under pressure and cannot process writes at the current rate. To avoid such scenarios, it's crucial to perform thorough capacity planning and configure compaction and storage settings appropriately. Monitoring key metrics and adjusting configurations proactively can help maintain optimal performance and prevent flow controlss.
+
 
 ### TiFlash configurations
 
