@@ -111,10 +111,10 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
     - **Included Schema Files**: if the source folder contains the target table schema files (such as `${db_name}-schema-create.sql`), select **Yes**. Otherwise, select **No**.
     - **Data Format**: select **CSV**.
-    - **Edit CSV Configuration**: if necessary, configure the options according to your CSV files. You can set the separator and delimiter characters, specify whether to use backslashes for escaped characters and indicate if your files contain a header row.
+    - **Edit CSV Configuration**: if necessary, configure the options according to your CSV files. You can set the separator and delimiter characters, specify whether to use backslashes for escaped characters, and specify whether your files contain a header row.
     - **Folder URI**: enter the source folder URI in the `s3://[bucket_name]/[data_source_folder]/` format. The path must end with a `/`. For example, `s3://mybucket/myfolder/`.
-    - **Bucket Access**: you can use either an AWS IAM Role or an AWS access key to access your bucket. 
-        - **AWS Role ARN** (recommended): enter the AWS IAM Role ARN value. If you don't have an IAM Role for the bucket yet, you can create it using the provided AWS CloudFormation template by clicking on "Click here to create new one with AWS CloudFormation" and following the instructions on the screen. Alternatively, you can manually create an Account SAS token.
+    - **Bucket Access**: you can use either an AWS IAM role ARN or an AWS access key to access your bucket. 
+        - **AWS Role ARN** (recommended): enter the AWS IAM role ARN value. If you don't have an IAM role for the bucket yet, you can create it using the provided AWS CloudFormation template by clicking **Click here to create new one with AWS CloudFormation** and following the instructions on the screen. Alternatively, you can manually create an IAM role ARN for the bucket.
         - **AWS Access Key**: enter the AWS access key ID and AWS secret access key.
         - For detailed instructions on both methods, see [Configure Amazon S3 access](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access).
 
