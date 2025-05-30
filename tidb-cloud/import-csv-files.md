@@ -152,7 +152,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 3. On the **Import Data from Google Cloud Storage** page, provide the following information for the source CSV files:
 
-    - **Included Schema Files**: if the source folder contains the target table schema files `(e.g., ${db_name}-schema-create.sql)`, select **Yes**. Otherwise, select **No**.
+    - **Included Schema Files**: if the source folder contains the target table schema files (such as `${db_name}-schema-create.sql`), select **Yes**. Otherwise, select **No**.
     - **Data Format**: select **CSV**.
     - **Edit CSV Configuration**: if necessary, configure the options according to your CSV files. You can set the separator and delimiter characters, specify whether to use backslashes for escaped characters and indicate if your files contain a header row.
     - **Folder URI**: enter the source folder URI in the `gs://[bucket_name]/[data_source_folder]/` format. The path must end with a `/`.  For example, `gs://sampledata/ingest/`.
