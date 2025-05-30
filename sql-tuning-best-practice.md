@@ -618,7 +618,7 @@ Follow these recommended column order guidelines for a composite index:
 
 The `IN` condition requires careful handling:
     - Single Value: An `IN` clause with a single value functions similarly to an equality condition and can be placed as the prefix in the index.
-    - Multiple Values: An `IN` clause with multiple values generates multiple ranges. Placing such a column before sorting columns will disrupt the preservation of sorted order. To maintain efficient sorting, it's required to position columns used for sorting before those involved in `IN` clauses with multiple values within the composite index.
+    - Multiple Values: An `IN` clause with multiple values generates multiple ranges. Placing such a column before sorting columns will disrupt the preservation of sorted order. To maintain efficient sorting, you should position columns used for sorting before those involved in `IN` clauses with multiple values within the composite index.
 
 #### The cost of indexing
 
