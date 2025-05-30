@@ -581,7 +581,7 @@ Follow these recommended column order guidelines for a composite index:
 1. Start with index prefix columns for direct access:
     - Columns with equivalent conditions
     - Columns with `IS NULL` conditions
-    - Columns with `IN` conditions with a single value
+    - Columns with `IN` conditions that contain a single value, such as `IN (1)`
 
 2. Add columns for sorting next:
     - Let the index handle sorting operations
@@ -595,11 +595,11 @@ Follow these recommended column order guidelines for a composite index:
 
 4. Add columns from the `SELECT` list or used in aggregation to fully utilize a covering index.
 
-##### Special Consideration: IN Conditions
+**Special consideration: IN conditions**
 
-The `IN` condition requires careful handling:
-    - Single Value: An `IN` clause with a single value functions similarly to an equality condition and can be placed as the prefix in the index.
-    - Multiple Values: An `IN` clause with multiple values generates multiple ranges. Placing such a column before sorting columns will disrupt the preservation of sorted order. To maintain efficient sorting, you should position columns used for sorting before those involved in `IN` clauses with multiple values within the composite index.
+When designing composite indexes, you need to handle `IN` conditions carefully.
+    - Single value: an `IN` clause with a single value (such as `IN (1)`) works similarly to an equality condition and can be placed at the beginning of the index.
+    - Multiple values: an `IN` clause with multiple values generates multiple ranges. If you place such a column before columns used for sorting, it can break the sorting order. To maintain the sorting order, make sure to place columns used for sorting before columns with multi-value `IN` conditions in the composite index.
 
 #### The cost of indexing
 
