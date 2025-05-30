@@ -79,13 +79,13 @@ SHOW VARIABLES LIKE 'gtid_mode';
 
 If the result is `ON` or `ON_PERMISSIVE`, the GTID mode is successfully enabled.
 
-Additionally, ensure that the `binlog_row_image` server parameter is set to `FULL`. You can check this by executing:
+In addition, ensure that the `binlog_row_image` server parameter is set to `FULL`. You can check this by executing the following SQL statement:
 
 ```sql
 SHOW VARIABLES LIKE 'binlog_row_image';
 ```
 
-If the result is not `FULL`, you will need to configure this parameter in the Azure portal or using Azure CLI for your Azure Database for MySQL instance.
+If the result is not `FULL`, you need to configure this parameter for your Azure Database for MySQL instance using the [Azure portal](https://portal.azure.com/) or [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/).
 
 ### For a self-hosted MySQL instance
 
