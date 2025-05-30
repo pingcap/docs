@@ -591,7 +591,7 @@ Follow these recommended column order guidelines for a composite index:
 3. Include additional filtering columns to reduce row lookups:
     - `IN` conditions with multiple values
     - Time range conditions on datetime columns
-    - Other non-equivalent conditions, such as `!=`, `<>`, `NOT IN` and `IS NOT NULL`
+    - Other non-equivalent conditions, such as `!=`, `<>`, `NOT IN`, and `IS NOT NULL`
 
 4. Add columns from the `SELECT` list or used in aggregation to fully utilize a covering index.
 
