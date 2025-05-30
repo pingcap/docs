@@ -125,10 +125,10 @@ To import the CSV files to TiDB Cloud, take the following steps:
     When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to customize the mapping of individual target tables to their corresponding CSV files. For each target database and table:
         - **Target Database**: select the corresponding database name from the list.
         - **Target Table**: select the corresponding table name from the list.
-        - **Source File URIs and Names**: enter the source complete URI, including the folder and file name, making sure it is in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].csv`. You can also use wildcards (`?` and `*`) to match the source files. For example:
-            - `s3://mybucket/myfolder/my-data1.csv`: one CSV file named `my-data1.csv` in the folder `myfolder` will be imported into the target table.
-            - `s3://mybucket/myfolder/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in `myfolder` will be imported into the same target table.
-            - `s3://mybucket/myfolder/my-data*.csv`: all CSV files in the folder starting with `my-data` (such as `mydata10.csv` and `my-data100.csv`) will be imported into the same target table.
+        - **Source File URIs and Names**: enter the full URI of the source file, including the folder and file name, making sure it is in the `s3://[bucket_name]/[data_source_folder]/[file_name].csv` format. You can also use wildcards (`?` and `*`) to match multiple files. For example:
+            - `s3://mybucket/myfolder/my-data1.csv`: a single file named `my-data1.csv` in `myfolder` will be imported into the target table.
+            - `s3://mybucket/myfolder/my-data?.csv`: all files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in `myfolder` will be imported into the same target table.
+            - `s3://mybucket/myfolder/my-data*.csv`: all files starting with `my-data` (such as `my-data10.csv` and `my-data100.csv`) in `myfolder` will be imported into the same target table.
 
 6. Click **Start Import**.
 
