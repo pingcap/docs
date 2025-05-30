@@ -98,7 +98,6 @@ Prometheus tracks the following metric data for your TiDB clusters.
 | tidbcloud_resource_manager_resource_unit_read_request_unit | gauge | cluster_name: `<cluster-name>`<br>`resource_group`: `<group-name>` | Read request units consumed by Resource Manager |
 | tidbcloud_resource_manager_resource_unit_write_request_unit | gauge | cluster_name: `<cluster-name>`<br>`resource_group`: `<group-name>` | Write request units consumed by Resource Manager |
 
-
 ## FAQ
 
 - Why does the same metric have different values on Grafana and the TiDB Cloud console at the same time?
