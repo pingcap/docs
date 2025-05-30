@@ -140,7 +140,7 @@ These settings help ensure efficient resource utilization and minimize potential
 
 > **Note:**
 >
-> TiKV employs a flow control mechanism at the scheduler layer to maintain system stability. When certain thresholds are exceeded—such as pending compaction bytes or write queue sizes—TiKV may start rejecting some or all write requests, returning a `ServerIsBusy` error. This indicates that the system is under pressure and cannot process writes at the current rate. To avoid such scenarios, it's crucial to perform thorough capacity planning and configure compaction and storage settings appropriately. Monitoring key metrics and adjusting configurations proactively can help maintain optimal performance and prevent flow controlss.
+Monitoring key metrics and adjusting configurations proactively can help maintain optimal performance and prevent flow controls.
 
 
 ### TiFlash configurations
