@@ -598,6 +598,7 @@ Follow these recommended column order guidelines for a composite index:
 **Special consideration: IN conditions**
 
 When designing composite indexes, you need to handle `IN` conditions carefully.
+
     - Single value: an `IN` clause with a single value (such as `IN (1)`) works similarly to an equality condition and can be placed at the beginning of the index.
     - Multiple values: an `IN` clause with multiple values generates multiple ranges. If you place such a column before columns used for sorting, it can break the sorting order. To maintain the sorting order, make sure to place columns used for sorting before columns with multi-value `IN` conditions in the composite index.
 
