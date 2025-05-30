@@ -27,9 +27,9 @@ This document describes how to import the sample data into TiDB Cloud Dedicated 
     - **Included Schema Files**: for the sample data, select **Yes**.
     - **Data Format**: select **SQL**. 
     - **Folder URI** or **File URI**: enter the sample data URI `s3://tidbcloud-sample-data/data-ingestion/`.
-    - **Bucket Access**: 
-        - For the sample data, you can only use the following **AWS Role ARN**: `arn:aws:iam::801626783489:role/import-sample-access`. Skip the **AWS Access Key** for the sample data.
-        - For your own data, you can use either an AWS access key or a Role ARN to access your bucket.
+    - **Bucket Access**: for the sample data, you can only use a Role ARN to access its bucket. For your own data, you can use either an AWS access key or a Role ARN to access your bucket.
+        - **AWS Role ARN**: enter `arn:aws:iam::801626783489:role/import-sample-access`.
+        - **AWS Access Key**: skip this option for the sample data.
 
 4. Click **Connect** > **Start Import**.
 
@@ -79,10 +79,8 @@ This document describes how to import the sample data into TiDB Cloud Dedicated 
 
     - **Included Schema Files**: for the sample data, select **Yes**.
     - **Data Format**: select **SQL**.
-    - **Folder URI** or **File URI**: enter the sample data URI `https://tcidmsampledata.blob.core.windows.net/sql/`.
-    - **Bucket Access**: 
-        - For the sample data, use the following **SAS Token**: `sv=2015-04-05&ss=b&srt=co&sp=rl&se=2099-03-01T00%3A00%3A01.0000000Z&sig=cQHvaofmVsUJEbgyf4JFkAwTJGsFOmbQHx03GvVMrNc%3D`
-        - For your own data, you can use a Connection String or SAS Token to access your Azure Blob Storage. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access).
+    - **Folder URI** or **File URI**: (Information for sample data on Azure Blob Storage is not yet available. For your own data, enter your Azure Blob Storage URI here, such as `https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`)
+    - **Bucket Access**: For your own data, you can use a Connection String or SAS Token to access your Azure Blob Storage. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access).
 
     If the region of the storage account is different from your cluster, confirm the compliance of cross region.
 
