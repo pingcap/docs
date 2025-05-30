@@ -5811,13 +5811,13 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Integer
 - Default value: `3000`
 - Range: `[1, 32767]`
-- This variable is used to limit the number of unique SQL digests that the [`statements_summary`](/statement-summary-tables.md#statements_summary) and [`statements_summary_history`](/statement-summary-tables.md#statements_summary_history) tables can store in memory totally.
+- This variable is used to limit the number of SQL digests that the [`statements_summary`](/statement-summary-tables.md#statements_summary) and [`statements_summary_history`](/statement-summary-tables.md#statements_summary_history) tables can store in memory totally.
 
 <CustomContent platform="tidb">
 
 > **Note:**
 >
-> When [`tidb_stmt_summary_enable_persistent`](/statement-summary-tables.md#persist-statements-summary) is enabled, `tidb_stmt_summary_max_stmt_count` only limits the number of unique SQL digests that the [`statements_summary`](/statement-summary-tables.md#statements_summary) table can store in memory.
+> When [`tidb_stmt_summary_enable_persistent`](/statement-summary-tables.md#persist-statements-summary) is enabled, `tidb_stmt_summary_max_stmt_count` only limits the number of SQL digests that the [`statements_summary`](/statement-summary-tables.md#statements_summary) table can store in memory.
 
 </CustomContent>
 

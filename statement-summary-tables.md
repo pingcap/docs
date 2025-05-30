@@ -97,17 +97,17 @@ The fields `SUMMARY_BEGIN_TIME` and `SUMMARY_END_TIME` represent the start time 
 
 ## `statements_summary_evicted`
 
-The [`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40) system variable limits the number of unique SQL digests that the `statements_summary` and `statements_summary_history` tables can store in memory totally. Once this limit is exceeded, TiDB evicts the least recently used SQL digests (along with all the related summary data) from both `statements_summary` and `statements_summary_history` tables.
+The [`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40) system variable limits the number of SQL digests that the `statements_summary` and `statements_summary_history` tables can store in memory totally. Once this limit is exceeded, TiDB evicts the least recently used SQL digests (along with all the related summary data) from both `statements_summary` and `statements_summary_history` tables.
 
 <CustomContent platform="tidb">
 
 > **Note:**
 >
-> When [`tidb_stmt_summary_enable_persistent`](#persist-statements-summary) is enabled, data in the `statements_summary_history` table is persisted to the disk. In this case, `tidb_stmt_summary_max_stmt_count` only limits the number of unique SQL digests that the `statements_summary` table can store in memory, and TiDB evicts the least recently used SQL digests only from the `statements_summary` table when `tidb_stmt_summary_max_stmt_count` is exceeded.
+> When [`tidb_stmt_summary_enable_persistent`](#persist-statements-summary) is enabled, data in the `statements_summary_history` table is persisted to the disk. In this case, `tidb_stmt_summary_max_stmt_count` only limits the number of SQL digests that the `statements_summary` table can store in memory, and TiDB evicts the least recently used SQL digests only from the `statements_summary` table when `tidb_stmt_summary_max_stmt_count` is exceeded.
 
 </CustomContent>
 
-The `statements_summary_evicted` table records the period during which the eviction occurs and the number of unique SQL digests evicted during that period. This table helps you evaluate whether `tidb_stmt_summary_max_stmt_count` is properly configured for your workload. If this table contains records, it indicates that the number of unique SQL digests exceeded `tidb_stmt_summary_max_stmt_count` at some time point.
+The `statements_summary_evicted` table records the period during which the eviction occurs and the number of SQL digests evicted during that period. This table helps you evaluate whether `tidb_stmt_summary_max_stmt_count` is properly configured for your workload. If this table contains records, it indicates that the number of SQL digests exceeded `tidb_stmt_summary_max_stmt_count` at some time point.
 
 <CustomContent platform="tidb">
 
@@ -134,14 +134,14 @@ The following system variables are used to control the statement summary:
 - `tidb_enable_stmt_summary`: Determines whether to enable the statement summary feature. `1` represents `enable`, and `0` means `disable`. The feature is enabled by default. The statistics in the system table are cleared if this feature is disabled. The statistics are re-calculated next time this feature is enabled. Tests have shown that enabling this feature has little impact on performance.
 - `tidb_stmt_summary_refresh_interval`: The interval at which the `statements_summary` table is refreshed. The time unit is second (s). The default value is `1800`.
 - `tidb_stmt_summary_history_size`: The size of each SQL statement category stored in the `statements_summary_history` table, which is also the maximum number of records in the `statements_summary_evicted` table. The default value is `24`.
-- `tidb_stmt_summary_max_stmt_count`: Limits the number of unique SQL digests that the `statements_summary` and `statements_summary_history` tables can store in memory totally. The default value is `3000`.
+- `tidb_stmt_summary_max_stmt_count`: Limits the number of SQL digests that the `statements_summary` and `statements_summary_history` tables can store in memory totally. The default value is `3000`.
 
     Once this limit is exceeded, TiDB evicts the least recently used SQL digests from both `statements_summary` and `statements_summary_history` tables. These evicted digests are then counted in the [`statements_summary_evicted`](#statements_summary_evicted) table.
 
     > **Note:**
     >
-    > - When a SQL digest is evicted, its related summary data of all time ranges is removed from both the `statements_summary` and `statements_summary_history` tables. As a result, even if the number of unique SQL digests within a specific time range does not exceed the limit, the number of unique SQL digests in the `statements_summary_history` table might be less than the actual number of unique SQL digests. If this situation occurs and affects performance, you are recommended to increase the value of `tidb_stmt_summary_max_stmt_count`.
-    > - For TiDB Self-Managed, when [`tidb_stmt_summary_enable_persistent`](#persist-statements-summary) is enabled, data in the `statements_summary_history` table is persisted to the disk. In this case, `tidb_stmt_summary_max_stmt_count` only limits the number of unique SQL digests that the `statements_summary` table can store in memory, and TiDB evicts the least recently used SQL digests only from the `statements_summary` table when `tidb_stmt_summary_max_stmt_count` is exceeded.
+    > - When a SQL digest is evicted, its related summary data of all time ranges is removed from both the `statements_summary` and `statements_summary_history` tables. As a result, even if the number of SQL digests within a specific time range does not exceed the limit, the number of SQL digests in the `statements_summary_history` table might be less than the actual number of SQL digests. If this situation occurs and affects performance, you are recommended to increase the value of `tidb_stmt_summary_max_stmt_count`.
+    > - For TiDB Self-Managed, when [`tidb_stmt_summary_enable_persistent`](#persist-statements-summary) is enabled, data in the `statements_summary_history` table is persisted to the disk. In this case, `tidb_stmt_summary_max_stmt_count` only limits the number of SQL digests that the `statements_summary` table can store in memory, and TiDB evicts the least recently used SQL digests only from the `statements_summary` table when `tidb_stmt_summary_max_stmt_count` is exceeded.
 
 - `tidb_stmt_summary_max_sql_length`: Specifies the longest display length of `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT`. The default value is `4096`.
 - `tidb_stmt_summary_internal_query`: Determines whether to count the TiDB SQL statements. `1` means to count, and `0` means not to count. The default value is `0`.
