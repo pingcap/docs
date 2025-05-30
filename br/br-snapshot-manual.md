@@ -127,7 +127,20 @@ tiup br restore full \
 --storage local:///br_data/ --pd "${PD_IP}:2379" --log-file restore.log
 ```
 
+> **Note:**
+>
+> Starting from v9.0.0, when the parameter `--load-stats` is set to false, br will not update the relevant information of the restored tables in the table `mysql.stats_meta`. And then you can manually execute `analyze table` SQL after the recovery is complete to update statistics.
+
 When the backup and restore feature backs up data, it stores statistics in JSON format within the `backupmeta` file. When restoring data, it loads statistics in JSON format into the cluster. For more information, see [LOAD STATS](/sql-statements/sql-statement-load-stats.md).
+
+Starting from 9.0.0, BR introduces the parameter `--fast-load-sys-tables`, which is enabled by default. When the br restore data in a new cluster and the IDs of tables and partitions can be reused (otherwise, it will automatically fall back to logically load statistic data), by setting `--fast-load-sys-tables`, br will use the `RENAME TABLE` DDL to atomically swap the system tables in the database `__TiDB_BR_Temporary_mysql` with the system tables in the database `mysql`.
+
+The following is an example:
+
+```shell
+tiup br restore full \
+--storage local:///br_data/ --pd "${PD_IP}:2379" --log-file restore.log --load-stats --fast-load-sys-tables
+```
 
 ## Encrypt the backup data
 
@@ -180,6 +193,22 @@ Split&Scatter Region <----------------------------------------------------------
 Download&Ingest SST <---------------------------------------------------------------------> 100.00%
 Restore Pipeline <-------------------------/...............................................> 17.12%
 ```
+
+Starting from TiDB v9.0.0, BR lets you specify `--fast-load-sys-tables` to restore statistic data physically in a new cluster:
+
+```shell
+tiup br restore full \
+    --pd "${PD_IP}:2379" \
+    --with-sys-table \
+    --fast-load-sys-tables \
+    --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
+    --ratelimit 128 \
+    --log-file restorefull.log
+```
+
+> **Note:**
+>
+> Different from restoring system tables logically by `REPLACE INTO` SQL, restoring system tables physically will completely overwrite the original data in the system tables.
 
 ## Restore a database or a table
 
