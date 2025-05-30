@@ -129,24 +129,43 @@ Use `EXPLAIN ANALYZE` whenever possible, as it provides both the execution plan 
 
 This guide provides practical advice for beginners on optimizing SQL queries in TiDB. By following these best practices, you can improve query performance and streamline SQL tuning. This guide covers the following topics:
 
-- [Understand query processing](#understand-query-processing)
-    - [Query processing workflow](#query-processing-workflow)
-    - [Optimizer fundamentals](#optimizer-fundamentals)
-    - [Statistics management](#statistics-management)
-- [Understand execution plans](#understand-execution-plans)
-    - [How TiDB builds an execution plan](#how-tidb-builds-an-execution-plan)
-    - [Generate and display execution plans](#generate-and-display-execution-plans)
-    - [Read execution plans: first child first](#read-execution-plans-first-child-first)
-    - [Identify bottlenecks in execution plans](#identify-bottlenecks-in-execution-plans)
-- [Index strategy in TiDB](#index-strategy-in-tidb)
-    - [Composite index strategy guidelines](#composite-index-strategy-guidelines)
-    - [The cost of indexing](#the-cost-of-indexing)
-    - [SQL tuning with a covering index](#sql-tuning-with-a-covering-index)
-    - [SQL tuning with a composite index involving sorting](#sql-tuning-with-a-composite-index-involving-sorting)
-    - [SQL tuning with composite indexes for efficient filtering and sorting]#sql-tuning-with-composite-indexes-for-efficient-filtering-and-sorting
-- [When to use TiFlash](#when-to-use-tiflash)
-    - [Analytical query](#analytical-query)
-    - [SaaS arbitrary filtering workloads](#saas-arbitrary-filtering-workloads)
+- [A Practical Guide for SQL Tuning](#a-practical-guide-for-sql-tuning)
+  - [Introduction to SQL tuning](#introduction-to-sql-tuning)
+  - [Goals of SQL tuning](#goals-of-sql-tuning)
+    - [Optimize query execution](#optimize-query-execution)
+    - [Balance workload distribution](#balance-workload-distribution)
+  - [Identify high-load SQL](#identify-high-load-sql)
+    - [Monitor SQL statements using TiDB Dashboard](#monitor-sql-statements-using-tidb-dashboard)
+      - [SQL Statements page](#sql-statements-page)
+      - [Slow Queries page](#slow-queries-page)
+    - [Use other tools to identify Top SQL](#use-other-tools-to-identify-top-sql)
+    - [Gather data on identified SQL statements](#gather-data-on-identified-sql-statements)
+  - [SQL tuning guide](#sql-tuning-guide)
+    - [Understand query processing](#understand-query-processing)
+      - [Query processing workflow](#query-processing-workflow)
+      - [Optimizer fundamentals](#optimizer-fundamentals)
+      - [Statistics management](#statistics-management)
+    - [Understand execution plans](#understand-execution-plans)
+      - [How TiDB builds an execution plan](#how-tidb-builds-an-execution-plan)
+        - [1. Pre-processing](#1-pre-processing)
+        - [2. Logical transformation](#2-logical-transformation)
+        - [3. Cost-based optimization](#3-cost-based-optimization)
+      - [Generate and display execution plans](#generate-and-display-execution-plans)
+      - [Read execution plans: first child first](#read-execution-plans-first-child-first)
+      - [Identify bottlenecks in execution plans](#identify-bottlenecks-in-execution-plans)
+    - [Index strategy in TiDB](#index-strategy-in-tidb)
+      - [Composite index strategy guidelines](#composite-index-strategy-guidelines)
+        - [Special Consideration: IN Conditions](#special-consideration-in-conditions)
+      - [The cost of indexing](#the-cost-of-indexing)
+      - [SQL tuning with a covering index](#sql-tuning-with-a-covering-index)
+      - [SQL tuning with a composite index involving sorting](#sql-tuning-with-a-composite-index-involving-sorting)
+      - [SQL tuning with composite indexes for efficient filtering and sorting](#sql-tuning-with-composite-indexes-for-efficient-filtering-and-sorting)
+    - [When to use TiFlash](#when-to-use-tiflash)
+      - [Analytical query](#analytical-query)
+      - [SaaS arbitrary filtering workloads](#saas-arbitrary-filtering-workloads)
+        - [Case study: multi-tenant data access](#case-study-multi-tenant-data-access)
+        - [Performance comparison](#performance-comparison)
+        - [Query routing between TiKV and TiFlash](#query-routing-between-tikv-and-tiflash)
 
 ### Understand query processing
 
@@ -581,6 +600,7 @@ Follow these recommended column order guidelines for a composite index:
 1. Start with index prefix columns for direct access:
     - Columns with equivalent conditions
     - Columns with `IS NULL` conditions
+    - Columns with `IN` conditions with a single value
 
 2. Add columns for sorting next:
     - Let the index handle sorting operations
@@ -588,10 +608,17 @@ Follow these recommended column order guidelines for a composite index:
     - Preserve the sorted order
 
 3. Include additional filtering columns to reduce row lookups:
+    - `IN` conditions with multiple values
     - Time range conditions on datetime columns
-    - Other non-equivalent conditions, such as `!=`, `<>`, and `IS NOT NULL`
+    - Other non-equivalent conditions, such as `!=`, `<>`, `NOT IN` and `IS NOT NULL`
 
 4. Add columns from the `SELECT` list or used in aggregation to fully utilize a covering index.
+
+##### Special Consideration: IN Conditions
+
+The `IN` condition requires careful handling:
+    - Single Value: An `IN` clause with a single value functions similarly to an equality condition and can be placed as the prefix in the index.
+    - Multiple Values: An `IN` clause with multiple values generates multiple ranges. Placing such a column before sorting columns will disrupt the preservation of sorted order. To maintain efficient sorting, it's required to position columns used for sorting before those involved in `IN` clauses with multiple values within the composite index.
 
 #### The cost of indexing
 
