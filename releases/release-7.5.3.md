@@ -14,6 +14,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 ## Compatibility changes
 
 - Add a new system table [`INFORMATION_SCHEMA.KEYWORDS`](/information-schema/information-schema-keywords.md) to display the information of all keywords supported by TiDB [#48801](https://github.com/pingcap/tidb/issues/48801) @[dveeden](https://github.com/dveeden)
+- Change the scope of the TiKV configuration item [`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type):
+
+    - In v7.5.x versions earlier than v7.5.3, this configuration item only affects the compression algorithm of gRPC messages between TiKV nodes.
+    - Starting from v7.5.3, this configuration item also affects the compression algorithm of gRPC response messages sent from TiKV to TiDB. Enabling compression might consume more CPU resources. [#17176](https://github.com/tikv/tikv/issues/17176) @[ekexium](https://github.com/ekexium)
 
 ## Improvements
 
