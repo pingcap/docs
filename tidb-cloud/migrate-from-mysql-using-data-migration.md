@@ -81,7 +81,7 @@ To continuously replicate incremental changes from the source MySQL-compatible d
 To check the current configurations, connect to the source MySQL instance and execute the following statement:
 
 ```sql
-SHOW VARIABLES WHERE Variable_name IN 
+SHOW VARIABLES WHERE Variable_name IN
 ('log_bin','server_id','binlog_format','binlog_row_image',
 'binlog_expire_logs_seconds','expire_logs_days');
 ```
@@ -129,6 +129,7 @@ For detailed instructions, see [Working with DB Parameter Groups](https://docs.a
 <summary> Configure Azure Database for MySQL - Flexible Server </summary>
 
 1. In the [Azure portal](https://portal.azure.com/), search for and select **Azure Database for MySQL servers**, click your instance name, and then click **Setting** > **Server parameters** in the left navigation pane.
+
 2. Search for each parameter and update its value.
 
     Most changes take effect without a restart. If a restart is required, you will get a prompt from the portal.
@@ -353,20 +354,20 @@ On the **Create Migration Job** page, configure the source and target connection
 
 2. Fill in the source connection profile.
 
-   - **Data source**: the data source type.
-   - **Connectivity method**: select a connection method for your data source based on your security requirements and cloud provider:
-      - **Public IP**: available for all cloud providers (recommended for testing and proof-of-concept migrations).
-      - **Private Link**: available for AWS and Azure only (recommended for production workloads requiring private connectivity).
-      - **VPC Peering**: available for AWS and Google Cloud only (recommended for production workloads needing low-latency, intra-region connections with non-overlapping VPC/VNet CIDRs).
-   - Based on the selected **Connectivity method**, do the following:
-      - If **Public IP** or **VPC Peering** is selected, fill in the **Hostname or IP address** field with the hostname or IP address of the data source.
-      - If **Private Link** is selected, fill in the following information:
-         - **Endpoint Service Name** (available if **Data source** is from AWS): enter the VPC endpoint service name (format: `com.amazonaws.vpce-svc-xxxxxxxxxxxxxxxxx`) that you created for your RDS or Aurora instance.
-         - **Private Endpoint Resource ID** (available if **Data source** is from Azure): enter the resource ID of your MySQL Flexible Server instance (format: `/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>`).
-   - **Port**: the port of the data source.
-   - **User Name**: the username of the data source.
-   - **Password**: the password of the username.
-   - **SSL/TLS**: enable SSL/TLS for end-to-end data encryption (highly recommended for all migration jobs). Upload the appropriate certificates based on your MySQL server's SSL configuration.
+    - **Data source**: the data source type.
+    - **Connectivity method**: select a connection method for your data source based on your security requirements and cloud provider:
+        - **Public IP**: available for all cloud providers (recommended for testing and proof-of-concept migrations).
+        - **Private Link**: available for AWS and Azure only (recommended for production workloads requiring private connectivity).
+        - **VPC Peering**: available for AWS and Google Cloud only (recommended for production workloads needing low-latency, intra-region connections with non-overlapping VPC/VNet CIDRs).
+    - Based on the selected **Connectivity method**, do the following:
+        - If **Public IP** or **VPC Peering** is selected, fill in the **Hostname or IP address** field with the hostname or IP address of the data source.
+        - If **Private Link** is selected, fill in the following information:
+            - **Endpoint Service Name** (available if **Data source** is from AWS): enter the VPC endpoint service name (format: `com.amazonaws.vpce-svc-xxxxxxxxxxxxxxxxx`) that you created for your RDS or Aurora instance.
+            - **Private Endpoint Resource ID** (available if **Data source** is from Azure): enter the resource ID of your MySQL Flexible Server instance (format: `/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>`).
+    - **Port**: the port of the data source.
+    - **User Name**: the username of the data source.
+    - **Password**: the password of the username.
+    - **SSL/TLS**: enable SSL/TLS for end-to-end data encryption (highly recommended for all migration jobs). Upload the appropriate certificates based on your MySQL server's SSL configuration.
         <details>
         <summary> SSL/TLS configuration options </summary>
 
@@ -392,8 +393,8 @@ On the **Create Migration Job** page, configure the source and target connection
 
 3. Fill in the target connection profile.
 
-   - **User Name**: enter the username of the target cluster in TiDB Cloud.
-   - **Password**: enter the password of the TiDB Cloud username.
+    - **User Name**: enter the username of the target cluster in TiDB Cloud.
+    - **Password**: enter the password of the TiDB Cloud username.
 
 4. Click **Validate Connection and Next** to validate the information you have entered.
 
