@@ -173,7 +173,7 @@ This section provides the solutions of common lock conflict issues in the optimi
 
 As the TiDB server receives a read request from a client, it gets a globally unique and increasing timestamp at the physical time as the start_ts of the current transaction. The transaction needs to read the latest data before start_ts, that is, the target key of the latest commit_ts that is smaller than start_ts. When the transaction finds that the target key is locked by another transaction, and it cannot know which phase the other transaction is in, a read-write conflict happens. The diagram is as follows:
 
-![read-write conflict](/media/troubleshooting-lock-pic-04.png)
+![read-write conflict](./media/troubleshooting-lock-pic-04.png)
 
 Txn0 completes the Prewrite phase and enters the Commit phase. At this time, Txn1 requests to read the same target key. Txn1 needs to read the target key of the latest commit_ts that is smaller than its start_ts. Because Txn1's start_ts is larger than Txn0's lock_ts, Txn1 must wait for the target key's lock to be cleared, but it hasn't been done. As a result, Txn1 cannot confirm whether Txn0 has been committed or not. Thus, a read-write conflict between Txn1 and Txn0 happens.
 
@@ -185,8 +185,8 @@ You can detect the read-write conflict in your TiDB cluster by the following way
 
         In the `KV Errors` panel in the TiDB dashboard, `not_expired`/`resolve` in `Lock Resolve OPS` and `tikvLockFast` in `KV Backoff OPS` are monitoring metrics that can be used to check read-write conflicts in transactions. If the values of all the metrics increase, there might be many read-write conflicts. The `not_expired` item means that the transaction's lock has not timed out. The `resolve` item means that the other transaction tries to clean up the locks. The `tikvLockFast` item means that read-write conflicts occur.
 
-        ![KV-backoff-txnLockFast-optimistic](/media/troubleshooting-lock-pic-09.png)
-        ![KV-Errors-resolve-optimistic](/media/troubleshooting-lock-pic-08.png)
+        ![KV-backoff-txnLockFast-optimistic](./media/troubleshooting-lock-pic-09.png)
+        ![KV-Errors-resolve-optimistic](./media/troubleshooting-lock-pic-08.png)
 
     * Logs of the TiDB server
 
@@ -238,8 +238,8 @@ You can check whether there's any "KeyIsLocked" error in the TiDB monitoring on 
 
 The `KV Errors` panel in the TiDB dashboard has two monitoring metrics `Lock Resolve OPS` and `KV Backoff OPS` which can be used to check write-write conflicts caused by a transaction. If the `resolve` item under `Lock Resolve OPS` and the `txnLock` item under `KV Backoff OPS` have a clear upward trend, a "KeyIsLocked" error occurs. `resolve` refers to the operation that attempts to clear the lock, and `txnLock` represents a write conflict.
 
-![KV-backoff-txnLockFast-optimistic-01](/media/troubleshooting-lock-pic-07.png)
-![KV-Errors-resolve-optimistic-01](/media/troubleshooting-lock-pic-08.png)
+![KV-backoff-txnLockFast-optimistic-01](./media/troubleshooting-lock-pic-07.png)
+![KV-Errors-resolve-optimistic-01](./media/troubleshooting-lock-pic-08.png)
 
 Solutions:
 

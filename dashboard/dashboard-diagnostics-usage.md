@@ -14,7 +14,7 @@ This section demonstrates how to use the comparison diagnostic feature to diagno
 
 ### Example 1
 
-![QPS example](/media/dashboard/dashboard-diagnostics-usage1.png)
+![QPS example](./media/dashboard/dashboard-diagnostics-usage1.png)
 
 The result of a `go-ycsb` pressure test is shown in the image above. You can see that at `2020-03-10 13:24:30`, QPS suddenly began to decrease. After 3 minutes, QPS began to return to normal. You can use diagnostic report of TiDB Dashboard to find out the cause.
 
@@ -28,7 +28,7 @@ Because the impact range of jitter is 3 minutes, the two time ranges above are b
 
 After the report is generated, you can view this report on the **Compare Diagnose** page.
 
-![Comparison diagnostics](/media/dashboard/dashboard-diagnostics-usage2.png)
+![Comparison diagnostics](./media/dashboard/dashboard-diagnostics-usage2.png)
 
 The diagnostic results above show that big queries might exist during the diagnostic time. Each **DETAIL** in the report above is described as follows:
 
@@ -64,7 +64,7 @@ From the result above, you can see that from `13:24:30`, there is a large write 
 
 If a large query has not been executed, the query is not recorded in the slow log. In this situation, this large query can still be diagnosed. See the following example:
 
-![QPS results](/media/dashboard/dashboard-diagnostics-usage3.png)
+![QPS results](./media/dashboard/dashboard-diagnostics-usage3.png)
 
 The result of another `go-ycsb` pressure test is shown in the image above. You can see that at `2020-03-08 01:46:30`, QPS suddenly began to drop and did not recover.
 
@@ -76,7 +76,7 @@ T2: `2020-03-08 01:46:30` to `2020-03-08 01:51:30`. In this range, QPS began to 
 
 After the report is generated, you can view this report on the **Compare Diagnose** page.
 
-![Comparison diagnostics](/media/dashboard/dashboard-diagnostics-usage4.png)
+![Comparison diagnostics](./media/dashboard/dashboard-diagnostics-usage4.png)
 
 The diagnostic result is similar to that of example 1. The last row of the image above indicates that there might be slow queries and indicate that you can use SQL statements to query the expensive queries in the TiDB log. The execution result of the SQL statements are as follows.
 
@@ -95,7 +95,7 @@ The query result above shows that on this `172.16.5.40:4009` TiDB instance, at `
 
 Because the diagnostics might be wrong, using a comparison report might help DBAs locate problems more quickly. See the following example.
 
-![QPS results](/media/dashboard/dashboard-diagnostics-usage5.png)
+![QPS results](./media/dashboard/dashboard-diagnostics-usage5.png)
 
 The result of a `go-ycsb` pressure test is shown in the image above. You can see that at `2020-05-22 22:14:00`, QPS suddenly began to decrease. After 3 minutes, QPS began to return to normal. You can use the comparison diagnostic report of TiDB Dashboard to find out the cause.
 
@@ -107,7 +107,7 @@ T2: `2020-05-22 22:14:00` `2020-05-22 22:17:00`. In this range, QPS began to dec
 
 After generating the comparison report, check the **Max diff item** report. This report compares the monitoring items of the two time ranges above and sorts them according to the difference of the monitoring items. The result of this table is as follows:
 
-![Comparison results](/media/dashboard/dashboard-diagnostics-usage6.png)
+![Comparison results](./media/dashboard/dashboard-diagnostics-usage6.png)
 
 From the result above, you can see that the Coprocessor requests in T2 are much more than those in T1. It might be that some large queries appear in T2 that bring more load.
 

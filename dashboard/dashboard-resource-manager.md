@@ -19,7 +19,7 @@ You can use one of the following two methods to access the Resource Manager page
 
 The following figure shows the Resource Manager details page:
 
-![TiDB Dashboard: Resource Manager](/media/dashboard/dashboard-resource-manager-info.png)
+![TiDB Dashboard: Resource Manager](./media/dashboard/dashboard-resource-manager-info.png)
 
 The Resource Manager page contains the following three sections:
 
@@ -45,13 +45,13 @@ Before resource planning, you need to know the overall capacity of the cluster. 
     - `oltp_read_write`: applies to workloads with even data read and write. It is estimated based on a workload model similar to `sysbench oltp_read_write`.
     - `oltp_read_only`: applies to workloads with heavy data read. It is estimated based on a workload model similar to `sysbench oltp_read_only`.
 
-  ![Calibrate by Hardware](/media/dashboard/dashboard-resource-manager-calibrate-by-hardware.png)
+  ![Calibrate by Hardware](./media/dashboard/dashboard-resource-manager-calibrate-by-hardware.png)
 
     The **Total RU of user resource groups** represents the total amount of RU for all user resource groups, excluding the `default` resource group. If this value is more than the estimated capacity, the system triggers an alert. By default, the system allocates unlimited usage to the predefined `default` resource group. When all users belong to the `default` resource group, resources are allocated in the same way as when resource control is disabled.
 
 - [Estimate capacity based on actual workload](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
 
-    ![Calibrate by Workload](/media/dashboard/dashboard-resource-manager-calibrate-by-workload.png)
+    ![Calibrate by Workload](./media/dashboard/dashboard-resource-manager-calibrate-by-workload.png)
 
     You can select a time range for estimation within the range of 10 minutes to 24 hours. The time zone used is the same as that of the front-end user.
 

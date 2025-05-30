@@ -59,7 +59,7 @@ After converting raw data into vector embeddings and storing them in TiDB, your 
 
 TiDB vector search identifies the top-k nearest neighbor (KNN) vectors by using a [distance function](/vector-search/vector-search-functions-and-operators.md) to calculate the distance between the given vector and vectors stored in the database. The vectors closest to the given vector in the query represent the most similar data in meaning.
 
-![The Schematic TiDB Vector Search](/media/vector-search/embedding-search.png)
+![The Schematic TiDB Vector Search](./media/vector-search/embedding-search.png)
 
 As a relational database with integrated vector search capabilities, TiDB enables you to store data and their corresponding vector representations (that is, vector embeddings) together in one database. You can choose any of the following ways for storage:
 

@@ -22,7 +22,7 @@ To get a total user response time within a specified time range (`ΔT`), you can
 
 Total user response time in `ΔT` = Average TPS (Transactions Per Second) x Average user response time x `ΔT`.
 
-![user_response_time](/media/performance/user_response_time_en.png)
+![user_response_time](./media/performance/user_response_time_en.png)
 
 ## Relationship between user response time and system throughput
 
@@ -84,19 +84,19 @@ For more information about SQL performance tuning, see [SQL Tuning Overview](/ti
 
 You can view hotspot issues on the [Key Visualizer tab](/tidb-cloud/tune-performance.md#key-visualizer). The following screenshot shows a sample heat map. The horizontal coordinate of the map is the time, and the vertical coordinate is the table and index. Brighter color indicates higher traffic. You can toggle the display of read or write traffic in the toolbar.
 
-![Hotspot issues](/media/tidb-cloud/tidb-cloud-troubleshoot-hotspot.png)
+![Hotspot issues](./media/tidb-cloud/tidb-cloud-troubleshoot-hotspot.png)
 
 The following screenshot shows an example of a write hotspot. A bright diagonal line (diagonal up or diagonal down) appears in the write flow graph, and the write traffic appears only at the end of the line. It becomes a stepped pattern as the number of table Regions grows. It indicates that there is a write hotspot in the table. When a write hotspot occurs, you need to check whether you are using a self-incrementing primary key, or no primary key, or using a time-dependent insert statement or index.
 
-![Write hotspot](/media/tidb-cloud/tidb-cloud-troubleshoot-write-hotspot.png)
+![Write hotspot](./media/tidb-cloud/tidb-cloud-troubleshoot-write-hotspot.png)
 
 A read hotspot is generally represented in the heat map as a bright horizontal line, usually a small table with a large number of queries, as shown in the following screenshot.
 
-![Read hotspot](/media/tidb-cloud/tidb-cloud-troubleshoot-read-hotspot-new.png)
+![Read hotspot](./media/tidb-cloud/tidb-cloud-troubleshoot-read-hotspot-new.png)
 
 Hover over the highlighted block to see which table or index has high traffic, as shown in the following screenshot.
 
-![Hotspot index](/media/tidb-cloud/tidb-cloud-troubleshoot-hotspot-index.png)
+![Hotspot index](./media/tidb-cloud/tidb-cloud-troubleshoot-hotspot-index.png)
 
 #### Scale out
 

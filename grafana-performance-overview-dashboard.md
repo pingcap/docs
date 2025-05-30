@@ -163,7 +163,7 @@ All these three metrics include the average duration and P99 duration in all TiK
 
 ### Interface of the Performance Overview panels
 
-![performance overview](/media/performance/grafana_performance_overview.png)
+![performance overview](./media/performance/grafana_performance_overview.png)
 
 ## TiFlash
 

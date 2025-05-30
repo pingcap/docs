@@ -31,7 +31,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Region: The number of Regions per TiKV instance
 - Uptime: The runtime of TiKV since last restart
 
-![TiKV Dashboard - Cluster metrics](/media/tikv-dashboard-cluster.png)
+![TiKV Dashboard - Cluster metrics](./media/tikv-dashboard-cluster.png)
 
 ### Errors
 
@@ -46,7 +46,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Leader missing: The count of missing leaders per TiKV instance
 - Log Replication Reject: The number of logappend messages rejected due to insufficient memory on each TiKV instance
 
-![TiKV Dashboard - Errors metrics](/media/tikv-dashboard-errors-v610.png)
+![TiKV Dashboard - Errors metrics](./media/tikv-dashboard-errors-v610.png)
 
 ### Server
 
@@ -59,7 +59,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Region average written keys: The average number of written keys to Regions per TiKV instance
 - Region average written bytes: The average written bytes to Regions per TiKV instance
 
-![TiKV Dashboard - Server metrics](/media/tikv-dashboard-server.png)
+![TiKV Dashboard - Server metrics](./media/tikv-dashboard-server.png)
 
 ### gRPC
 
@@ -109,7 +109,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Commit log duration: The time consumed by Raft to commit logs
 - Commit log duration per server: The time consumed by Raft to commit logs per TiKV instance
 
-![TiKV Dashboard - Raft IO metrics](/media/tikv-dashboard-raftio.png)
+![TiKV Dashboard - Raft IO metrics](./media/tikv-dashboard-raftio.png)
 
 ### Raft process
 
@@ -128,7 +128,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Replica read lock checking duration: The time consumed for checking locks when processing Replica Read.
 - Peer msg length distribution: The number of messages processed by each Region in each TiKV instance at a time. The more messages, the busier the peer is.
 
-![TiKV Dashboard - Raft process metrics](/media/tikv-dashboard-raft-process.png)
+![TiKV Dashboard - Raft process metrics](./media/tikv-dashboard-raft-process.png)
 
 ### Raft message
 
@@ -139,7 +139,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Vote: The number of Vote messages sent in Raft per second
 - Raft dropped messages: The number of dropped Raft messages per type per second
 
-![TiKV Dashboard - Raft message metrics](/media/tikv-dashboard-raft-message.png)
+![TiKV Dashboard - Raft message metrics](./media/tikv-dashboard-raft-message.png)
 
 ### Raft propose
 
@@ -153,7 +153,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Apply wait duration per server: The histogram of apply time of each proposal per TiKV instance
 - Raft log speed: The average rate at which peers propose logs
 
-![TiKV Dashboard - Raft propose metrics](/media/tikv-dashboard-raft-propose.png)
+![TiKV Dashboard - Raft propose metrics](./media/tikv-dashboard-raft-propose.png)
 
 ### Raft admin
 
@@ -162,13 +162,13 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Check split: The number of Raftstore split check commands per second
 - 99.99% Check split duration: The time consumed when running split check commands (P99.99)
 
-![TiKV Dashboard - Raft admin metrics](/media/tikv-dashboard-raft-admin.png)
+![TiKV Dashboard - Raft admin metrics](./media/tikv-dashboard-raft-admin.png)
 
 ### Local reader
 
 - Local reader requests: The number of total requests and the number of rejections from the local read thread
 
-![TiKV Dashboard - Local reader metrics](/media/tikv-dashboard-local-reader.png)
+![TiKV Dashboard - Local reader metrics](./media/tikv-dashboard-local-reader.png)
 
 ### Unified Read Pool
 
@@ -183,7 +183,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Storage async snapshot duration: The time consumed by processing asynchronous snapshot requests. It should be less than `1s` in `.99`.
 - Storage async write duration: The time consumed by processing asynchronous write requests. It should be less than `1s` in `.99`.
 
-![TiKV Dashboard - Storage metrics](/media/tikv-dashboard-storage.png)
+![TiKV Dashboard - Storage metrics](./media/tikv-dashboard-storage.png)
 
 ### Flow Control
 
@@ -198,7 +198,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Txn command throttled duration: The blocked duration for commands related to transactions due to throttling. Under normal circumstances, this metric is 0.
 - Non-txn command throttled duration: The blocked duration for other commands due to throttling. Under normal circumstances, this metric is 0.
 
-![TiKV Dashboard - Flow Control metrics](/media/tikv-dashboard-flow-control.png)
+![TiKV Dashboard - Flow Control metrics](./media/tikv-dashboard-flow-control.png)
 
 ### Scheduler
 
@@ -207,7 +207,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Scheduler priority commands: The count of different priority commands per second
 - Scheduler pending commands: The count of pending commands per TiKV instance per second
 
-![TiKV Dashboard - Scheduler metrics](/media/tikv-dashboard-scheduler.png)
+![TiKV Dashboard - Scheduler metrics](./media/tikv-dashboard-scheduler.png)
 
 ### Scheduler - commit
 
@@ -221,7 +221,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Scheduler scan details [write]: The keys scan details of write CF when executing the commit command
 - Scheduler scan details [default]: The keys scan details of default CF when executing the commit command
 
-![TiKV Dashboard - Scheduler commit metrics](/media/tikv-dashboard-scheduler-commit.png)
+![TiKV Dashboard - Scheduler commit metrics](./media/tikv-dashboard-scheduler-commit.png)
 
 ### Scheduler - pessimistic_rollback
 

@@ -16,7 +16,7 @@ Generally speaking, BR is the last resort for data safety. It improves the safet
 
 ## Perform backup and restore
 
-![BR log backup and PITR architecture](/media/dr/dr-backup-and-restore.png)
+![BR log backup and PITR architecture](./media/dr/dr-backup-and-restore.png)
 
 As shown in the preceding architecture, you can back up data to a DR storage device located in other regions, and recover data from the backup data as needed. This means that the cluster can tolerate the failure of a single region with a Recovery Point Objective (RPO) of up to 5 minutes and a Recovery Time Objective (RTO) between tens of minutes and a few hours. However, if the database size is large, the RTO might be longer.
 
