@@ -1,11 +1,11 @@
 ---
 title: Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration
-summary: Learn how to migrate incremental data from MySQL-compatible databases hosted in Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, or a local MySQL instance to TiDB Cloud using Data Migration.
+summary: Learn how to migrate incremental data from MySQL-compatible databases hosted in Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, Azure Database for MySQL, or a local MySQL instance to TiDB Cloud using Data Migration.
 ---
 
 # Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration
 
-This document describes how to migrate incremental data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), or Google Cloud SQL for MySQL) or self-hosted source database to TiDB Cloud using the Data Migration feature of the TiDB Cloud console.
+This document describes how to migrate incremental data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, or Azure Database for MySQL) or self-hosted source database to TiDB Cloud using the Data Migration feature of the TiDB Cloud console.
 
 For instructions about how to migrate existing data or both existing data and incremental data, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
 
@@ -68,6 +68,24 @@ SHOW VARIABLES LIKE 'gtid_mode';
 ```
 
 If the result is `ON` or `ON_PERMISSIVE`, the GTID mode is successfully enabled.
+
+### For Azure Database for MySQL
+
+The GTID mode is enabled by default for Azure Database for MySQL (versions 5.7 and later). You can check if the GTID mode has been successfully enabled by executing the following SQL statement:
+
+```sql
+SHOW VARIABLES LIKE 'gtid_mode';
+```
+
+If the result is `ON` or `ON_PERMISSIVE`, the GTID mode is successfully enabled.
+
+In addition, ensure that the `binlog_row_image` server parameter is set to `FULL`. You can check this by executing the following SQL statement:
+
+```sql
+SHOW VARIABLES LIKE 'binlog_row_image';
+```
+
+If the result is not `FULL`, you need to configure this parameter for your Azure Database for MySQL instance using the [Azure portal](https://portal.azure.com/) or [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/).
 
 ### For a self-hosted MySQL instance
 
