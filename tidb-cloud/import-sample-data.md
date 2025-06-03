@@ -82,7 +82,7 @@ This document describes how to import the sample data into TiDB Cloud Dedicated 
     - **Folder URI**: enter the sample data URI `https://tcidmsampledata.blob.core.windows.net/sql/`.
     - **SAS Token**: 
         - For the sample data, use the following **SAS Token**: `sv=2015-04-05&ss=b&srt=co&sp=rl&se=2099-03-01T00%3A00%3A01.0000000Z&sig=cQHvaofmVsUJEbgyf4JFkAwTJGsFOmbQHx03GvVMrNc%3D`.
-        - For your own data, you can use a Connection String or SAS Token to access your Azure Blob Storage. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access).
+        - For your own data, you can use a SAS token to access your Azure Blob Storage. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access).
 
     If the region of the storage account is different from your cluster, confirm the compliance of cross region.
 
