@@ -40,7 +40,7 @@ The document provides an example of connecting to a Kafka Private Link service i
         1. In **Destination**, select **Kafka**.
         2. In **Connectivity Method**, select **Private Link**.
     4. Note down the region information and the subscription of the TiDB Cloud Azure account in **Reminders before proceeding**. You will use it to authorize TiDB Cloud to access the Kafka Private Link service.
-    5. Enter a unique **Kafka Advertised Listener Pattern** for your Kafka Private Link service.
+    5. Generate the **Kafka Advertised Listener Pattern** for your Kafka Private Link service by providing a unique random string.
         1. Input a unique random string. It can only include numbers or lowercase letters. You will use it to generate **Kafka Advertised Listener Pattern** later.
         2. Click **Check usage and generate** to check if the random string is unique and generate **Kafka Advertised Listener Pattern** that will be used to assemble the EXTERNAL advertised listener for Kafka brokers.
 
@@ -197,7 +197,7 @@ After the deployment of your virtual machine is completed, take the following st
     # 1. Replace {broker-node-1-ip}, {broker-node-2-ip}, {broker-node-3-ip} with the actual IP addresses.
     # 2. Configure EXTERNAL in "advertised.listeners" based on the "Kafka Advertised Listener Pattern" in the "Prerequisites" section.
     # 2.1 The pattern is "<broker_id>.abc.eastus.azure.3199745.tidbcloud.com:<port>".
-    # 2.2 So the EXTERNAL can be "abc.eastus.azure.3199745.tidbcloud.com:9095". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port (9095) in the port range of the EXTERNAL advertised listener.
+    # 2.2 So the EXTERNAL can be "b3.abc.eastus.azure.3199745.tidbcloud.com:9095". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port (9095) in the port range of the EXTERNAL advertised listener.
     process.roles=broker,controller
     node.id=3
     controller.quorum.voters=1@{broker-node-1-ip}:29092,2@{broker-node-2-ip}:29092,3@{broker-node-3-ip}:29092
@@ -263,7 +263,7 @@ After the deployment of your virtual machine is completed, take the following st
     # TiDB Cloud will make these addresses resolvable and route requests to the correct broker when you create a changefeed connected to this Kafka cluster via Private Link Service.
     b1.abc.eastus.azure.3199745.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     b2.abc.eastus.azure.3199745.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
-    b3.abc.eastus.azure.3199745.tidbcloud.com.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
+    b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     ```
 
 2. Create a producer script `produce.sh` in the bastion node.
@@ -465,7 +465,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
         - **Name**: `rule2`
         - **IP version**: `IPv4`
         - **Frontend IP address**: `kafka-lb-ip`
-        - **Backend pool**: `pool1`
+        - **Backend pool**: `pool2`
         - **Protocol**: `TCP`
         - **Port**: `9094`
         - **Backend port**: `39092`
@@ -479,7 +479,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
         - **Name**: `rule3`
         - **IP version**: `IPv4`
         - **Frontend IP address**: `kafka-lb-ip`
-        - **Backend pool**: `pool1`
+        - **Backend pool**: `pool3`
         - **Protocol**: `TCP`
         - **Port**: `9095`
         - **Backend port**: `39092`
