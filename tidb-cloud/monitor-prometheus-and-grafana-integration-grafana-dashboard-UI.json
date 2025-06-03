@@ -2299,7 +2299,7 @@
                             "useBackend": false
                         }
                     ],
-                    "title": "TiKV Abailable Storage",
+                    "title": "TiKV Available Storage",
                     "type": "timeseries"
                 }
             ],
