@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.5.11 Release Notes
-summary: Learn about the improvements and bug fixes in TiDB 6.5.11.
+summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 6.5.11.
 ---
 
 # TiDB 6.5.11 Release Notes
@@ -10,6 +10,13 @@ Release date: September 20, 2024
 TiDB version: 6.5.11
 
 Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.5/production-deployment-using-tiup)
+
+## Compatibility changes
+
+- Change the scope of the TiKV configuration item [`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type):
+
+    - In v6.5.x versions earlier than v6.5.11, this configuration item only affects the compression algorithm of gRPC messages between TiKV nodes.
+    - Starting from v6.5.11, this configuration item also affects the compression algorithm of gRPC response messages sent from TiKV to TiDB. Enabling compression might consume more CPU resources. [#17176](https://github.com/tikv/tikv/issues/17176) @[ekexium](https://github.com/ekexium)
 
 ## Improvements
 
