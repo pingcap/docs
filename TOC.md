@@ -193,6 +193,7 @@
     - [Integrate with Apache Kafka and Apache Flink](/replicate-data-to-kafka.md)
   - Reference
     - [TiCDC Architecture](/ticdc/ticdc-architecture.md)
+    - [TiCDC Data Replication Capabilities](/ticdc/ticdc-data-replication-capabilities.md)
     - [TiCDC Server Configurations](/ticdc/ticdc-server-config.md)
     - [TiCDC Changefeed Configurations](/ticdc/ticdc-changefeed-config.md)
     - [TiCDC Client Authentication](/ticdc/ticdc-client-authentication.md)
@@ -432,7 +433,7 @@
     - [Local Read Under Three Data Centers Deployment](/best-practices/three-dc-local-read.md)
     - [Use UUIDs](/best-practices/uuid.md)
     - [Read-Only Storage Nodes](/best-practices/readonly-nodes.md)
-    - [SaaS Multi-Tenant Scenarios](/best-practices/saas-best-practices.md)
+    - [Handle Millions of Tables in SaaS Multi-Tenant Scenarios](/best-practices/saas-best-practices.md)
   - [Use Placement Rules](/configure-placement-rules.md)
   - [Use Load Base Split](/configure-load-base-split.md)
   - [Use Store Limit](/configure-store-limit.md)

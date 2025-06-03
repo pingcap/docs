@@ -1,15 +1,17 @@
 ---
-title: Best Practices for SaaS Multi-Tenant Scenarios
+title: Best Practices for Handling Millions of Tables in SaaS Multi-Tenant Scenarios
 summary: Learn best practices for TiDB in SaaS (Software as a Service) multi-tenant scenarios, especially for environments where the number of tables in a single cluster exceeds one million.
 ---
 
-# Best Practices for SaaS Multi-Tenant Scenarios
+# Best Practices for Handling Millions of Tables in SaaS Multi-Tenant Scenarios
 
 This document introduces best practices for TiDB in SaaS (Software as a Service) multi-tenant environments, especially in scenarios where the **number of tables in a single cluster exceeds one million**. By making reasonable configurations and choices, you can enable TiDB to run efficiently and stably in SaaS scenarios while reducing resource consumption and costs.
 
 > **Note:**
 >
 > It is recommended to use TiDB v8.5.0 or later versions.
+
+For a practical case study of these best practices, see the blog post: [Scaling 3 Million Tables: How TiDB Powers Atlassian Forge's SaaS Platform](https://www.pingcap.com/blog/scaling-3-million-tables-how-tidb-powers-atlassian-forge-saas-platform/).
 
 ## TiDB hardware recommendations
 

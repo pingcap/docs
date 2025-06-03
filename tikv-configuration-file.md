@@ -139,7 +139,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `grpc-compression-type`
 
-+ The compression algorithm for gRPC messages, which affects gRPC messages between TiKV nodes and gRPC response messages sent from TiKV to TiDB
++ The compression algorithm for gRPC messages. It affects gRPC messages between TiKV nodes. Starting from v6.5.11, v7.1.6, v7.5.3, v8.1.1, and v8.2.0, it also affects gRPC response messages sent from TiKV to TiDB.
 + Optional values: `"none"`, `"deflate"`, `"gzip"`
 
     > **Warning:**
@@ -2503,18 +2503,10 @@ Suppose that your machine on which TiKV is deployed has limited resources, for e
 
 #### `background-write-bandwidth` <span class="version-mark">New in v6.2.0</span>
 
-> **Note:**
->
-> This configuration item is returned in the result of `SHOW CONFIG`, but currently setting it does not take any effect.
-
 + The soft limit on the bandwidth with which background transactions write data.
 + Default value: `0KiB` (which means no limit)
 
 #### `background-read-bandwidth` <span class="version-mark">New in v6.2.0</span>
-
-> **Note:**
->
-> This configuration item is returned in the result of `SHOW CONFIG`, but currently setting it does not take any effect.
 
 + The soft limit on the bandwidth with which background transactions and the Coprocessor read data.
 + Default value: `0KiB` (which means no limit)
