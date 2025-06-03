@@ -65,7 +65,7 @@ For more information, see [Creating a bucket](https://docs.aws.amazon.com/Amazon
     - If yes, record the matched storage bucket policy for later use.
     - If not, go to **IAM** > **Access Management** > **Policies** > **Create Policy**, and define a bucket policy according to the following policy template.
 
-        ```
+        ```json
         {
             "Version": "2012-10-17",
             "Statement": [
