@@ -500,7 +500,6 @@ tiup br restore point --pd="${PD_IP}:2379"
 
 Starting from TiDB v9.0.0, you can use filters during PITR to selectively restore specific databases or tables. This allows for more granular control over what data gets restored during point-in-time recovery operations.
 
-
 The filter patterns follow the same syntax as [table filters](/table-filter.md) used in other BR operations:
 
 - `'*.*'` - matches all databases and tables
@@ -573,7 +572,6 @@ tiup br restore point --pd="${PD_IP}:2379" \
 >
 > - Each concurrent restore operation must target different databases or non-overlapping table sets. Attempting to restore overlapping datasets concurrently will result in an error.
 
-
 ### Compatibility between ongoing log backup and snapshot restore
 
 Starting from v9.0.0, when a log backup task is running, if all of the following conditions are met, you can still perform snapshot restore (`br restore [full|database|table]`) and allow the restored data to be properly recorded by the ongoing log backup (hereinafter referred to as "log backup"):
@@ -607,3 +605,4 @@ If such inconsistency occurs during the time range `[t1, t2)`, you cannot restor
 
 - Restore data up to `t1` (before the inconsistent period), or
 - Take a new snapshot backup after `t2` and use that for future PITR operations
+- 
