@@ -218,7 +218,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 </SimpleTab>
 
-When you run an import task, if any unsupported or invalid conversions are detected, TiDB Cloud terminates the import job automatically and reports an importing error. You can visualize details in the **Status** field.
+When you run an import task, if any unsupported or invalid conversions are detected, TiDB Cloud terminates the import job automatically and reports an importing error. You can view details in the **Status** field.
 
 If you get an importing error, do the following:
 
