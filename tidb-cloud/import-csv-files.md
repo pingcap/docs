@@ -126,9 +126,9 @@ To import the CSV files to TiDB Cloud, take the following steps:
         - **Target Database**: select the corresponding database name from the list.
         - **Target Table**: select the corresponding table name from the list.
         - **Source File URIs and Names**: enter the full URI of the source file, including the folder and file name, making sure it is in the `s3://[bucket_name]/[data_source_folder]/[file_name].csv` format. You can also use wildcards (`?` and `*`) to match multiple files. For example:
-            - `s3://mybucket/myfolder/my-data1.csv`: a single file named `my-data1.csv` in `myfolder` will be imported into the target table.
-            - `s3://mybucket/myfolder/my-data?.csv`: all files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in `myfolder` will be imported into the same target table.
-            - `s3://mybucket/myfolder/my-data*.csv`: all files starting with `my-data` (such as `my-data10.csv` and `my-data100.csv`) in `myfolder` will be imported into the same target table.
+            - `s3://mybucket/myfolder/my-data1.csv`: a single CSV file named `my-data1.csv` in `myfolder` will be imported into the target table.
+            - `s3://mybucket/myfolder/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in `myfolder` will be imported into the same target table.
+            - `s3://mybucket/myfolder/my-data*.csv`: all CSV files starting with `my-data` (such as `my-data10.csv` and `my-data100.csv`) in `myfolder` will be imported into the same target table.
 
 6. Click **Start Import**.
 
