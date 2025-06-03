@@ -1166,7 +1166,7 @@
                     "type": "timeseries"
                 }
             ],
-            "title": "Query Perfromance",
+            "title": "Query Performance",
             "type": "row"
         },
         {
