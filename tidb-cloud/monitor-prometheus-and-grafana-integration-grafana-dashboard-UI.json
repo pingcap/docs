@@ -2746,19 +2746,6 @@
                             "legendFormat": "{{exported_instance}}",
                             "range": true,
                             "refId": "A"
-                        },
-                        {
-                            "datasource": {
-                                "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
-                            },
-                            "editorMode": "builder",
-                            "expr": "tidbcloud_node_storage_capacity_bytes{cluster_name=\"$Cluster_name\", component=\"tiflash\"}",
-                            "hide": false,
-                            "interval": "",
-                            "legendFormat": "{{exported_instance}}",
-                            "range": true,
-                            "refId": "B"
                         }
                     ],
                     "title": "TiFlash Available Storage",
