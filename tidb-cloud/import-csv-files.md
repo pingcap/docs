@@ -113,7 +113,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
     - **Data Format**: select **CSV**.
     - **Edit CSV Configuration**: if necessary, configure the options according to your CSV files. You can set the separator and delimiter characters, specify whether to use backslashes for escaped characters, and specify whether your files contain a header row.
     - **Folder URI**: enter the source folder URI in the `s3://[bucket_name]/[data_source_folder]/` format. The path must end with a `/`. For example, `s3://mybucket/myfolder/`.
-    - **Bucket Access**: you can use either an AWS IAM role ARN or an AWS access key to access your bucket. 
+    - **Bucket Access**: you can use either an AWS IAM role ARN or an AWS access key to access your bucket.
         - **AWS Role ARN** (recommended): enter the AWS IAM role ARN value. If you don't have an IAM role for the bucket yet, you can create it using the provided AWS CloudFormation template by clicking **Click here to create new one with AWS CloudFormation** and following the instructions on the screen. Alternatively, you can manually create an IAM role ARN for the bucket.
         - **AWS Access Key**: enter the AWS access key ID and AWS secret access key.
         - For detailed instructions on both methods, see [Configure Amazon S3 access](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access).
@@ -123,12 +123,13 @@ To import the CSV files to TiDB Cloud, take the following steps:
 5. In the **Destination** section, select the target database and table.
 
     When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to customize the mapping of individual target tables to their corresponding CSV files. For each target database and table:
-        - **Target Database**: select the corresponding database name from the list.
-        - **Target Table**: select the corresponding table name from the list.
-        - **Source File URIs and Names**: enter the full URI of the source file, including the folder and file name, making sure it is in the `s3://[bucket_name]/[data_source_folder]/[file_name].csv` format. You can also use wildcards (`?` and `*`) to match multiple files. For example:
-            - `s3://mybucket/myfolder/my-data1.csv`: a single CSV file named `my-data1.csv` in `myfolder` will be imported into the target table.
-            - `s3://mybucket/myfolder/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in `myfolder` will be imported into the same target table.
-            - `s3://mybucket/myfolder/my-data*.csv`: all CSV files starting with `my-data` (such as `my-data10.csv` and `my-data100.csv`) in `myfolder` will be imported into the same target table.
+
+    - **Target Database**: select the corresponding database name from the list.
+    - **Target Table**: select the corresponding table name from the list.
+    - **Source File URIs and Names**: enter the full URI of the source file, including the folder and file name, making sure it is in the `s3://[bucket_name]/[data_source_folder]/[file_name].csv` format. You can also use wildcards (`?` and `*`) to match multiple files. For example:
+        - `s3://mybucket/myfolder/my-data1.csv`: a single CSV file named `my-data1.csv` in `myfolder` will be imported into the target table.
+        - `s3://mybucket/myfolder/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in `myfolder` will be imported into the same target table.
+        - `s3://mybucket/myfolder/my-data*.csv`: all CSV files starting with `my-data` (such as `my-data10.csv` and `my-data100.csv`) in `myfolder` will be imported into the same target table.
 
 6. Click **Start Import**.
 
@@ -163,12 +164,13 @@ To import the CSV files to TiDB Cloud, take the following steps:
 5. In the **Destination** section, select the target database and table.
 
     When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to customize the mapping of individual target tables to their corresponding CSV files. For each target database and table:
-        - **Target Database**: select the corresponding database name from the list.
-        - **Target Table**: select the corresponding table name from the list.
-        - **Source File URIs and Names**: enter the full URI of the source file, including the folder and file name, making sure it is in the `gs://[bucket_name]/[data_source_folder]/[file_name].csv` format. You can also use wildcards (`?` and `*`) to match multiple files. For example:
-            - `gs://mybucket/myfolder/my-data1.csv`: a single CSV file named `my-data1.csv` in `myfolder` will be imported into the target table.
-            - `gs://mybucket/myfolder/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in `myfolder` will be imported into the same target table.
-            - `gs://mybucket/myfolder/my-data*.csv`: all CSV files starting with `my-data` (such as `my-data10.csv` and `my-data100.csv`) in `myfolder` will be imported into the same target table.
+
+    - **Target Database**: select the corresponding database name from the list.
+    - **Target Table**: select the corresponding table name from the list.
+    - **Source File URIs and Names**: enter the full URI of the source file, including the folder and file name, making sure it is in the `gs://[bucket_name]/[data_source_folder]/[file_name].csv` format. You can also use wildcards (`?` and `*`) to match multiple files. For example:
+        - `gs://mybucket/myfolder/my-data1.csv`: a single CSV file named `my-data1.csv` in `myfolder` will be imported into the target table.
+        - `gs://mybucket/myfolder/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in `myfolder` will be imported into the same target table.
+        - `gs://mybucket/myfolder/my-data*.csv`: all CSV files starting with `my-data` (such as `my-data10.csv` and `my-data100.csv`) in `myfolder` will be imported into the same target table.
 
 6. Click **Start Import**.
 
@@ -203,14 +205,15 @@ To import the CSV files to TiDB Cloud, take the following steps:
 5. In the **Destination** section, select the target database and table.
 
     When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to customize the mapping of individual target tables to their corresponding CSV files. For each target database and table:
-        - **Target Database**: select the corresponding database name from the list.
-        - **Target Table**: select the corresponding table name from the list.
-        - **Source File URIs and Names**: enter the full URI of the source file, including the folder and file name, making sure it is in the `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/[file_name].csv` format. You can also use wildcards (`?` and `*`) to match multiple files. For example:
-            - `https://myaccount.blob.core.windows.net/mycontainer/myfolder/my-data1.csv`: a single CSV file named `my-data1.csv` in `myfolder` will be imported into the target table.
-            - `https://myaccount.blob.core.windows.net/mycontainer/myfolder/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in `myfolder` will be imported into the same target table.
-            - `https://myaccount.blob.core.windows.net/mycontainer/myfolder/my-data*.csv`: all CSV files starting with `my-data` (such as `my-data10.csv` and `my-data100.csv`) in `myfolder` will be imported into the same target table.
 
-6. Click **Start Import**. 
+    - **Target Database**: select the corresponding database name from the list.
+    - **Target Table**: select the corresponding table name from the list.
+    - **Source File URIs and Names**: enter the full URI of the source file, including the folder and file name, making sure it is in the `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/[file_name].csv` format. You can also use wildcards (`?` and `*`) to match multiple files. For example:
+        - `https://myaccount.blob.core.windows.net/mycontainer/myfolder/my-data1.csv`: a single CSV file named `my-data1.csv` in `myfolder` will be imported into the target table.
+        - `https://myaccount.blob.core.windows.net/mycontainer/myfolder/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in `myfolder` will be imported into the same target table.
+        - `https://myaccount.blob.core.windows.net/mycontainer/myfolder/my-data*.csv`: all CSV files starting with `my-data` (such as `my-data10.csv` and `my-data100.csv`) in `myfolder` will be imported into the same target table.
+
+6. Click **Start Import**.
 
 7. When the import progress shows **Completed**, check the imported tables.
 

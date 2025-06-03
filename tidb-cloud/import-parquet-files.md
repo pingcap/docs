@@ -128,12 +128,13 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 5. In the **Destination** section, select the target database and table.
 
     When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to customize the mapping of individual target tables to their corresponding Parquet files. For each target database and table:
-        - **Target Database**: select the corresponding database name from the list.
-        - **Target Table**: select the corresponding table name from the list.
-        - **Source File URIs and Names**: enter the full URI of the source file, including the folder and file name, making sure it is in the `s3://[bucket_name]/[data_source_folder]/[file_name].parquet` format. For example, `s3://sampledata/ingest/TableName.01.parquet`. You can also use wildcards (`?` and `*`) to match multiple files. For example:
-            - `s3://[bucket_name]/[data_source_folder]/my-data1.parquet`: a single Parquet file named `my-data1.parquet` in `[data_source_folder]` will be imported into the target table.
-            - `s3://[bucket_name]/[data_source_folder]/my-data?.parquet`: all Parquet files starting with `my-data` followed by one character (such as `my-data1.parquet` and `my-data2.parquet`) in `[data_source_folder]` will be imported into the same target table.
-            - `s3://[bucket_name]/[data_source_folder]/my-data*.parquet`: all Parquet files starting with `my-data` (such as `my-data10.parquet` and `my-data100.parquet`) in `[data_source_folder]` will be imported into the same target table.
+
+    - **Target Database**: select the corresponding database name from the list.
+    - **Target Table**: select the corresponding table name from the list.
+    - **Source File URIs and Names**: enter the full URI of the source file, including the folder and file name, making sure it is in the `s3://[bucket_name]/[data_source_folder]/[file_name].parquet` format. For example, `s3://sampledata/ingest/TableName.01.parquet`. You can also use wildcards (`?` and `*`) to match multiple files. For example:
+        - `s3://[bucket_name]/[data_source_folder]/my-data1.parquet`: a single Parquet file named `my-data1.parquet` in `[data_source_folder]` will be imported into the target table.
+        - `s3://[bucket_name]/[data_source_folder]/my-data?.parquet`: all Parquet files starting with `my-data` followed by one character (such as `my-data1.parquet` and `my-data2.parquet`) in `[data_source_folder]` will be imported into the same target table.
+        - `s3://[bucket_name]/[data_source_folder]/my-data*.parquet`: all Parquet files starting with `my-data` (such as `my-data10.parquet` and `my-data100.parquet`) in `[data_source_folder]` will be imported into the same target table.
 
 6. Click **Start Import**.
 
@@ -167,12 +168,13 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 5. In the **Destination** section, select the target database and table.
 
     When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to customize the mapping of individual target tables to their corresponding Parquet files. For each target database and table:
-        - **Target Database**: select the corresponding database name from the list.
-        - **Target Table**: select the corresponding table name from the list.
-        - **Source File URIs and Names**: enter the full URI of the source file, including the folder and file name, making sure it is in the `gs://[bucket_name]/[data_source_folder]/[file_name].parquet` format. For example, `gs://sampledata/ingest/TableName.01.parquet`. You can also use wildcards (`?` and `*`) to match multiple files. For example:
-            - `gs://[bucket_name]/[data_source_folder]/my-data1.parquet`: a single Parquet file named `my-data1.parquet` in `[data_source_folder]` will be imported into the target table.
-            - `gs://[bucket_name]/[data_source_folder]/my-data?.parquet`: all Parquet files starting with `my-data` followed by one character (such as `my-data1.parquet` and `my-data2.parquet`) in `[data_source_folder]` will be imported into the same target table.
-            - `gs://[bucket_name]/[data_source_folder]/my-data*.parquet`: all Parquet files starting with `my-data` (such as `my-data10.parquet` and `my-data100.parquet`) in `[data_source_folder]` will be imported into the same target table.
+
+    - **Target Database**: select the corresponding database name from the list.
+    - **Target Table**: select the corresponding table name from the list.
+    - **Source File URIs and Names**: enter the full URI of the source file, including the folder and file name, making sure it is in the `gs://[bucket_name]/[data_source_folder]/[file_name].parquet` format. For example, `gs://sampledata/ingest/TableName.01.parquet`. You can also use wildcards (`?` and `*`) to match multiple files. For example:
+        - `gs://[bucket_name]/[data_source_folder]/my-data1.parquet`: a single Parquet file named `my-data1.parquet` in `[data_source_folder]` will be imported into the target table.
+        - `gs://[bucket_name]/[data_source_folder]/my-data?.parquet`: all Parquet files starting with `my-data` followed by one character (such as `my-data1.parquet` and `my-data2.parquet`) in `[data_source_folder]` will be imported into the same target table.
+        - `gs://[bucket_name]/[data_source_folder]/my-data*.parquet`: all Parquet files starting with `my-data` (such as `my-data10.parquet` and `my-data100.parquet`) in `[data_source_folder]` will be imported into the same target table.
 
 6. Click **Start Import**.
 
@@ -206,12 +208,13 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 5. In the **Destination** section, select the target database and table.
 
     When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to customize the mapping of individual target tables to their corresponding Parquet files. For each target database and table:
-        - **Target Database**: select the corresponding database name from the list.
-        - **Target Table**: select the corresponding table name from the list.
-        - **Source File URIs and Names**: enter the full URI of the source file, including the folder and file name, making sure it is in the `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/[file_name].parquet` format. For example, `https://myaccount.blob.core.windows.net/mycontainer/data-ingestion/TableName.01.parquet`. You can also use wildcards (`?` and `*`) to match multiple files. For example:
-            - `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/my-data1.parquet`: a single Parquet file named `my-data1.parquet` in `[data_source_folder]` will be imported into the target table.
-            - `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/my-data?.parquet`: all Parquet files starting with `my-data` followed by one character (such as `my-data1.parquet` and `my-data2.parquet`) in `[data_source_folder]` will be imported into the same target table.
-            - `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/my-data*.parquet`: all Parquet files starting with `my-data` (such as `my-data10.parquet` and `my-data100.parquet`) in `[data_source_folder]` will be imported into the same target table.
+
+    - **Target Database**: select the corresponding database name from the list.
+    - **Target Table**: select the corresponding table name from the list.
+    - **Source File URIs and Names**: enter the full URI of the source file, including the folder and file name, making sure it is in the `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/[file_name].parquet` format. For example, `https://myaccount.blob.core.windows.net/mycontainer/data-ingestion/TableName.01.parquet`. You can also use wildcards (`?` and `*`) to match multiple files. For example:
+        - `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/my-data1.parquet`: a single Parquet file named `my-data1.parquet` in `[data_source_folder]` will be imported into the target table.
+        - `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/my-data?.parquet`: all Parquet files starting with `my-data` followed by one character (such as `my-data1.parquet` and `my-data2.parquet`) in `[data_source_folder]` will be imported into the same target table.
+        - `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/my-data*.parquet`: all Parquet files starting with `my-data` (such as `my-data10.parquet` and `my-data100.parquet`) in `[data_source_folder]` will be imported into the same target table.
 
 6. Click **Start Import**.
 
