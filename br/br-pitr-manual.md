@@ -541,7 +541,7 @@ tiup br restore point --pd="${PD_IP}:2379" \
 > - When using filters, ensure that the filtered data maintains referential integrity.
 > - Filter options apply to both snapshot and log backup restoration phases.
 > - Multiple `--filter` options can be specified to include or exclude different patterns.
-> - PITR filtering does not support restoring system tables. System tables are restored according to the full backup data and cannot be selectively filtered during PITR operations. If you need to restore specific system tables, use `br restore full` with filters instead, which will restore only the snapshot backup data (not log backup data).
+> - PITR filtering does not support system tables yet. If you need to restore specific system tables, use `br restore full` with filters instead, which will restore only the snapshot backup data (not log backup data).
 > - The target databases and tables specified in the filter must not exist in the cluster, or the restore will fail with an error.
 
 ### Concurrent restore operations
