@@ -5,7 +5,7 @@ summary: Learn how to import Apache Parquet files from Amazon S3, GCS, or Azure 
 
 # Import Apache Parquet Files from Cloud Storage into TiDB Cloud Dedicated
 
-This document describes how to import Apache Parquet files from Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS), or Azure Blob Storage into TiDB Cloud Dedicated. You can import Parquet files that are either uncompressed or compressed with [Google Snappy](https://github.com/google/snappy) (other Parquet compression codecs are not supported).
+This document describes how to import Apache Parquet files from Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS), or Azure Blob Storage into TiDB Cloud Dedicated. You can import Parquet files that are either uncompressed or compressed with [Google Snappy](https://github.com/google/snappy). Other Parquet compression codecs are not supported.
 
 ## Limitations
 
