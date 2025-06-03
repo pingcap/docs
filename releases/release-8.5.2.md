@@ -5,7 +5,7 @@ summary: Learn about the improvements and bug fixes in TiDB 8.5.2.
 
 # TiDB 8.5.2 Release Notes
 
-Release date: xx xx, 2025
+Release date: June 4, 2025
 
 TiDB version: 8.5.2
 
