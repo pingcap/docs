@@ -585,6 +585,16 @@ Starting from v9.0.0, when a log backup task is running, if all of the following
 - The data to be restored uses the same type of external storage as the target storage for the log backup.
 - Neither the data to be restored nor the log backup has enabled local encryption. For details, see [log backup encryption](#encrypt-the-log-backup-data) and [snapshot backup encryption](/br/br-snapshot-manual.md#encrypt-the-backup-data).
 
+If any of the above conditions are not met, you can complete the recovery by following these steps:
+1. [Stop the log backup task](#stop-a-log-backup-task).
+2. Perform the data restore.
+3. After the restore is complete, perform a new snapshot backup.
+4. [Restart the log backup task](#restart-a-log-backup-task).
+
+> **Note:**
+>
+> When restoring a log backup that contains records of snapshot (full) restore data, you must use BR v9.0.0 or later. Otherwise, restoring the recorded full restore data might fail.
+
 ### Compatibility between ongoing log backup and PITR operations
 
 Starting from TiDB v9.0.0, you can perform PITR operations while a log backup task is running by default. The system automatically handles compatibility between these operations.
