@@ -143,7 +143,7 @@ This guide provides practical advice for beginners on optimizing SQL queries in 
     - [The cost of indexing](#the-cost-of-indexing)
     - [SQL tuning with a covering index](#sql-tuning-with-a-covering-index)
     - [SQL tuning with a composite index involving sorting](#sql-tuning-with-a-composite-index-involving-sorting)
-    - [SQL tuning with composite indexes for efficient filtering and sorting]#sql-tuning-with-composite-indexes-for-efficient-filtering-and-sorting
+    - [SQL tuning with composite indexes for efficient filtering and sorting](#sql-tuning-with-composite-indexes-for-efficient-filtering-and-sorting)
 - [When to use TiFlash](#when-to-use-tiflash)
     - [Analytical query](#analytical-query)
     - [SaaS arbitrary filtering workloads](#saas-arbitrary-filtering-workloads)
@@ -581,6 +581,7 @@ Follow these recommended column order guidelines for a composite index:
 1. Start with index prefix columns for direct access:
     - Columns with equivalent conditions
     - Columns with `IS NULL` conditions
+    - Columns with `IN` conditions that contain a single value, such as `IN (1)`
 
 2. Add columns for sorting next:
     - Let the index handle sorting operations
@@ -588,10 +589,18 @@ Follow these recommended column order guidelines for a composite index:
     - Preserve the sorted order
 
 3. Include additional filtering columns to reduce row lookups:
+    - `IN` conditions with multiple values
     - Time range conditions on datetime columns
-    - Other non-equivalent conditions, such as `!=`, `<>`, and `IS NOT NULL`
+    - Other non-equivalent conditions, such as `!=`, `<>`, `NOT IN`, and `IS NOT NULL`
 
 4. Add columns from the `SELECT` list or used in aggregation to fully utilize a covering index.
+
+**Special consideration: IN conditions**
+
+When designing composite indexes, you need to handle `IN` conditions carefully.
+
+- Single value: an `IN` clause with a single value (such as `IN (1)`) works similarly to an equality condition and can be placed at the beginning of the index.
+- Multiple values: an `IN` clause with multiple values generates multiple ranges. If you place such a column before columns used for sorting, it can break the sorting order. To maintain the sorting order, make sure to place columns used for sorting before columns with multi-value `IN` conditions in the composite index.
 
 #### The cost of indexing
 
