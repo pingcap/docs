@@ -2756,7 +2756,7 @@
                             "expr": "tidbcloud_node_storage_capacity_bytes{cluster_name=\"$Cluster_name\", component=\"tiflash\"}",
                             "hide": false,
                             "interval": "",
-                            "legendFormat": "limit-{{exported_instance}}",
+                            "legendFormat": "{{exported_instance}}",
                             "range": true,
                             "refId": "B"
                         }
