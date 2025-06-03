@@ -141,9 +141,9 @@ This document only describes the parameters that are not included in command-lin
 + The compression algorithm for gRPC messages
 + Optional values: `"none"`, `"deflate"`, `"gzip"`
 
-    > **Warning:**
+    > **Note:**
     >
-    > TiDB supports `"none"` and `"gzip"` only
+    > TiDB does not support `"deflate"`. Therefore, if you want to compress gRPC response messages sent from TiKV to TiDB, set this configuration item to `"gzip"`.
 
 + Default value: `"none"`
 
