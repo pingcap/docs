@@ -305,7 +305,7 @@
                             "refId": "B"
                         }
                     ],
-                    "title": "Databaset Time",
+                    "title": "Database Time",
                     "type": "timeseries"
                 },
                 {
