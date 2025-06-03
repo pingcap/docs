@@ -1,6 +1,6 @@
 ---
 title: TiDB 8.5.1 Release Notes
-summary: Learn about the operating system and platform requirement changes, improvements, and bug fixes in TiDB 8.5.1.
+summary: Learn about the operating system and platform requirement changes, compatibility changes, improvements, and bug fixes in TiDB 8.5.1.
 ---
 
 # TiDB 8.5.1 Release Notes
@@ -21,7 +21,7 @@ Starting from v8.5.1, TiDB resumes testing of CentOS Linux 7 and is compatible w
 
 As CentOS Linux 7 has reached EOL, testing of this distribution will be stopped in a future TiDB release.
 
-## Compatibility change
+## Compatibility changes
 
 - To reduce memory usage by the TiDB statistics cache, the meaning of the default value `0` for the [`tidb_stats_cache_mem_quota`](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610) system variable is changed:
 
