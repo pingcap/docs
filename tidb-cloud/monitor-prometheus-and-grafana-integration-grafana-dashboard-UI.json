@@ -2773,7 +2773,7 @@
                 "type": "prometheus",
                 "uid": "${DS_PROMETHEUS}"
             },
-            "description": "The metrics about request unit cost for all resource groups.",
+            "description": "The metrics about the request unit cost for all resource groups.",
             "fieldConfig": {
                 "defaults": {
                     "color": {
