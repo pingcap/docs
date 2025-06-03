@@ -60,7 +60,7 @@ tiup cdc:v7.5.0 cli changefeed create \
 
     - `access-key`: Specifies the access key.
     - `secret-access-key`: Specifies the secret access key.
-    - `session-token`: Specifies the temporary session token. For backup and restore, this parameter is supported starting from v7.6.0.
+    - `session-token`: Specifies the temporary session token.
     - `use-accelerate-endpoint`: Specifies whether to use the accelerate endpoint on Amazon S3 (defaults to `false`).
     - `endpoint`: Specifies the URL of custom endpoint for S3-compatible services (for example, `<https://s3.example.com/>`).
     - `force-path-style`: Use path style access rather than virtual hosted style access (defaults to `true`).
