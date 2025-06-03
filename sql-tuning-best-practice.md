@@ -595,7 +595,11 @@ Follow these recommended column order guidelines for a composite index:
 
 4. Add columns from the `SELECT` list or used in aggregation to fully utilize a covering index.
 
+<<<<<<< HEAD
 **Special consideration: IN conditions**
+=======
+**Special consideration: `IN` conditions**
+>>>>>>> c4e4424c6c (add in condition in the index strategy (#21077) (#21091))
 
 When designing composite indexes, you need to handle `IN` conditions carefully.
 
