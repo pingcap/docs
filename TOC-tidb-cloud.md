@@ -156,7 +156,8 @@
       - [Connection Method Overview](/tidb-cloud/connect-to-tidb-cluster.md)
       - [Connect via Public Connection](/tidb-cloud/connect-via-standard-connection.md)
       - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md)
-      - [Connect via Private Endpoint (Private Service Connect) with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
+      - [Connect via Private Endpoint with Azure](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
+      - [Connect via Private Endpoint with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
       - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
       - [Connect via SQL Shell](/tidb-cloud/connect-via-sql-shell.md)
     - [Scale a TiDB Cloud Dedicated Cluster](/tidb-cloud/scale-tidb-cluster.md)
@@ -259,8 +260,8 @@
     - [Migrate from Amazon RDS for Oracle Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
   - Import Data into TiDB Cloud Dedicated
     - [Import Sample Data](/tidb-cloud/import-sample-data.md)
-    - [Import CSV Files from Amazon S3 or GCS](/tidb-cloud/import-csv-files.md)
-    - [Import Parquet Files from Amazon S3 or GCS](/tidb-cloud/import-parquet-files.md)
+    - [Import CSV Files from Cloud Storage](/tidb-cloud/import-csv-files.md)
+    - [Import Parquet Files from Cloud Storage](/tidb-cloud/import-parquet-files.md)
     - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli.md)
   - Import Data into TiDB Cloud Serverless
     - [Import Sample Data](/tidb-cloud/import-sample-data-serverless.md)
@@ -269,7 +270,7 @@
     - [Import Parquet Files from Cloud Storage](/tidb-cloud/import-parquet-files-serverless.md)
     - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli-serverless.md)
   - Reference
-    - [Configure External Storage Access for TiDB Cloud Dedicated](/tidb-cloud/config-s3-and-gcs-access.md)
+    - [Configure External Storage Access for TiDB Cloud Dedicated](/tidb-cloud/dedicated-external-storage.md)
     - [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md)
     - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
     - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
@@ -333,7 +334,8 @@
   - [To TiDB Cloud Sink](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
   - [To Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
   - Reference
-    - [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-private-link-service.md)
+    - [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
+    - [Set Up Self-Hosted Kafka Private Link Service in Azure](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)
     - [Set Up Self-Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)
 - Disaster Recovery
   - [Recovery Group Overview](/tidb-cloud/recovery-group-overview.md)
@@ -355,7 +357,8 @@
     - TiDB Cloud Dedicated
       - [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md)
       - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md)
-      - [Connect via Private Endpoint (Private Service Connect) with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
+      - [Connect via Private Endpoint with Azure](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
+      - [Connect via Private Endpoint with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
       - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
       - [TLS Connections to TiDB Cloud Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
   - Data Access Control
@@ -372,7 +375,7 @@
   - [Billing Profile](/tidb-cloud/tidb-cloud-billing.md#billing-profile)
   - [Credits](/tidb-cloud/tidb-cloud-billing.md#credits)
   - [Payment Method Setting](/tidb-cloud/tidb-cloud-billing.md#payment-method)
-  - [Billing from AWS or GCP Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace)
+  - [Billing from AWS, Azure, or Google Cloud Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-azure-marketplace-or-google-cloud-marketplace)
   - [Billing for Changefeed](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
   - [Billing for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md)
   - [Billing for Recovery Groups](/tidb-cloud/tidb-cloud-billing-recovery-group.md)
