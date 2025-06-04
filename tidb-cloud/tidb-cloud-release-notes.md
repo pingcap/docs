@@ -14,13 +14,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) on Microsoft Azure is now available in public preview. 
   
-  With this launch, TiDB Cloud now supports all three major public cloud platforms — AWS, Google Cloud, and Azure, which enables you to deploy TiDB Cloud Dedicated clusters wherever best fits your business needs and cloud strategy.
+    With this launch, TiDB Cloud now supports all three major public cloud platforms — AWS, Google Cloud, and Azure, which enables you to deploy TiDB Cloud Dedicated clusters wherever best fits your business needs and cloud strategy.
   
     - All core features available on AWS and Google Cloud are fully supported on Azure.
     - Azure support is currently available in three regions: East US 2, Japan East, and Southeast Asia, with more regions coming soon.
     - TiDB Cloud Dedicated clusters on Azure require TiDB version v7.5.3 or later.
   
-  To quickly get started with TiDB Cloud Dedicated on Azure, see the following documentation:
+    To quickly get started with TiDB Cloud Dedicated on Azure, see the following documentation:
   
     - [Create a TiDB Cloud Dedicated Cluster on Azure](/tidb-cloud/create-tidb-cluster.md)
     - [Connect a TiDB Cloud Dedicated Cluster via Azure Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md) 
@@ -40,7 +40,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Enhance the interactive experience when configuring the size of TiFlash nodes of [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters
 
-    You can now use a toggle switch to control the TiFlash configuration when creating a TiDB Cloud Dedicated cluster, which makes the configuration experience more intuitive and seamless.  
+    You can now use a toggle switch to control the TiFlash configuration when creating a TiDB Cloud Dedicated cluster, which makes the configuration experience more intuitive and seamless.
 
 ## May 27, 2025
 
