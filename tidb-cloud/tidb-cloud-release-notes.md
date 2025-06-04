@@ -34,7 +34,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - TiKV [Standard](/tidb-cloud/size-your-cluster.md#standard-storage) and [Performance](/tidb-cloud/size-your-cluster.md#performance-and-plus-storage) storage pricing is officially released.
 
-    The discount period ends at **00:00 UTC on June 5, 2025**. After that, pricing returns to the standard rate.
+    The discount period ends from **00:00 UTC on June 5, 2025**. After that, pricing returns to the standard rate.
 
 **Console changes**
 
