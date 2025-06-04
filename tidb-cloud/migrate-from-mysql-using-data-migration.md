@@ -369,20 +369,21 @@ On the **Create Migration Job** page, configure the source and target connection
     - **User Name**: the username of the data source.
     - **Password**: the password of the username.
     - **SSL/TLS**: enable SSL/TLS for end-to-end data encryption (highly recommended for all migration jobs). Upload the appropriate certificates based on your MySQL server's SSL configuration.
+
         <details>
         <summary> SSL/TLS configuration options </summary>
 
         - **Option 1: Server authentication only**
-            - if your MySQL server is configured for server authentication only, upload only the **CA Certificate**.
+            - If your MySQL server is configured for server authentication only, upload only the **CA Certificate**.
             - In this option, the MySQL server presents its certificate to prove its identity, and TiDB Cloud verifies the server certificate against the CA.
             - The CA certificate protects against man-in-the-middle attacks and is required if the MySQL server is started with `require_secure_transport = ON`.
         - **Option 2: Client certificate authentication**
-            - if your MySQL server is configured for client certificate authentication, upload **Client Certificate** and  **Client private key**.
+            - If your MySQL server is configured for client certificate authentication, upload **Client Certificate** and  **Client private key**.
             - In this option, TiDB Cloud presents its certificate to the MySQL server for authentication, but TiDB Cloud does not verify the MySQL server's certificate.
-            - This option is typically used when the MySQL server is configured with options such as `REQUIRE SUBJECT '...'` or `REQUIRE ISSUER '...'` without `REQUIRE X509`, allowing it to check specific attributes of the client certificate without full CA validation of that client cert.
+            - This option is typically used when the MySQL server is configured with options such as `REQUIRE SUBJECT '...'` or `REQUIRE ISSUER '...'` without `REQUIRE X509`, allowing it to check specific attributes of the client certificate without full CA validation of that client certificate.
             - This option is often used when the MySQL server accepts client certificates in self-signed or custom PKI environments. Note that this configuration is vulnerable to man-in-the-middle attacks and is not recommended for production environments unless other network-level controls guarantee server authenticity.
         - **Option 3: Mutual TLS (mTLS) - highest security**
-            - if your MySQL server is configured for mutual TLS (mTLS) authentication, upload **CA Certificate**, **Client Certificate**, and **Client private key**.
+            - If your MySQL server is configured for mutual TLS (mTLS) authentication, upload **CA Certificate**, **Client Certificate**, and **Client private key**.
             - In this option, the MySQL server verifies TiDB Cloud's identity using the client certificate, and TiDB Cloud verifies MySQL server's identity using the CA certificate.
             - This option is required when the MySQL server has `REQUIRE X509` or `REQUIRE SSL` configured for the migration user.
             - This option is used when the MySQL server requires client certificates for authentication.
@@ -390,6 +391,7 @@ On the **Create Migration Job** page, configure the source and target connection
                 - Download from your cloud provider (see [TLS certificate links](#end-to-end-encryption-over-tlsssl)).
                 - Use your organization's internal CA certificates.
                 - Self-signed certificates (for development/testing only).
+
         </details>
 
 3. Fill in the target connection profile.
