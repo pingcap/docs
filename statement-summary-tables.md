@@ -110,13 +110,13 @@ The `statements_summary_evicted` table records the period during which the evict
 
 <CustomContent platform="tidb">
 
-On the [SQL statements page of TiDB Dashboard](/dashboard/dashboard-statement-list.md#others), information about evicted statements is displayed in the `Others` row.
+On the [SQL statements page of TiDB Dashboard](/dashboard/dashboard-statement-list.md#others), the information about evicted statements is displayed in the `Others` row.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-On the [SQL statements tab of the Diagnosis page](/tidb-cloud/tune-performance.md#statement-analysis), information about evicted statements is displayed in the `Others` row.
+On the [SQL statements tab of the Diagnosis page](/tidb-cloud/tune-performance.md#statement-analysis), the information about evicted statements is displayed in the `Others` row.
 
 </CustomContent>
 
