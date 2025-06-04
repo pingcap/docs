@@ -341,6 +341,8 @@ Fields related to execution time:
 - `FIRST_SEEN`: The time when SQL statements of this category are seen for the first time.
 - `LAST_SEEN`: The time when SQL statements of this category are seen for the last time.
 
+<CustomContent platform="tidb">
+
 Fields related to TiDB server:
 
 - `EXEC_COUNT`: Total execution times of SQL statements of this category.
@@ -359,6 +361,31 @@ Fields related to TiDB server:
 - `AVG_DISK`: The average disk space (byte) used.
 - `MAX_DISK`: The maximum disk space (byte) used.
 - `AVG_TIDB_CPU_TIME`: The average TiDB server CPU time that SQL statements of this category consume. It shows meaningful values only when the [Top SQL](/dashboard/top-sql.md) feature is enabled. Otherwise the value is always `0`.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Fields related to TiDB server:
+
+- `EXEC_COUNT`: Total execution times of SQL statements of this category.
+- `SUM_ERRORS`: The sum of errors occurred during execution.
+- `SUM_WARNINGS`: The sum of warnings occurred during execution.
+- `SUM_LATENCY`: The total execution latency of SQL statements of this category.
+- `MAX_LATENCY`: The maximum execution latency of SQL statements of this category.
+- `MIN_LATENCY`: The minimum execution latency of SQL statements of this category.
+- `AVG_LATENCY`: The average execution latency of SQL statements of this category.
+- `AVG_PARSE_LATENCY`: The average latency of the parser.
+- `MAX_PARSE_LATENCY`: The maximum latency of the parser.
+- `AVG_COMPILE_LATENCY`: The average latency of the compiler.
+- `MAX_COMPILE_LATENCY`: The maximum latency of the compiler.
+- `AVG_MEM`: The average memory (byte) used.
+- `MAX_MEM`: The maximum memory (byte) used.
+- `AVG_DISK`: The average disk space (byte) used.
+- `MAX_DISK`: The maximum disk space (byte) used.
+- `AVG_TIDB_CPU_TIME`: The average TiDB server CPU time that SQL statements of this category consume. It shows meaningful values only when the Top SQL feature is enabled. Otherwise the value is always `0`.
+
+</CustomContent>
 
 Fields related to TiKV Coprocessor task:
 
