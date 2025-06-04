@@ -393,11 +393,7 @@ On the **Create Migration Job** page, configure the source and target connection
         - This option is required when the MySQL server has `REQUIRE X509` or `REQUIRE SSL` configured for the migration user.
         - This option is used when the MySQL server requires client certificates for authentication.
 
-        You can get the certificates from the following sources:
-
-        - Download from your cloud provider (see [TLS certificate links](#end-to-end-encryption-over-tlsssl)).
-        - Use your organization's internal CA certificates.
-        - Self-signed certificates (for development/testing only).
+        You can get the certificates from the following sources: download from your cloud provider (see [TLS certificate links](#end-to-end-encryption-over-tlsssl)), use your organization's internal CA certificates, or self-signed certificates (for development/testing only).
 
         </details>
 
