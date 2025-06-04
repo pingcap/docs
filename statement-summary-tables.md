@@ -358,6 +358,7 @@ Fields related to TiDB server:
 - `MAX_MEM`: The maximum memory (byte) used.
 - `AVG_DISK`: The average disk space (byte) used.
 - `MAX_DISK`: The maximum disk space (byte) used.
+- `AVG_TIDB_CPU_TIME`: The average TiDB server CPU time that SQL statements of this category consume. It shows meaningful value only when the [Top SQL](/dashboard/top-sql.md) feature is enabled. Otherwise the value will be `0`.
 
 Fields related to TiKV Coprocessor task:
 
@@ -376,6 +377,7 @@ Fields related to TiKV Coprocessor task:
 - `MAX_TOTAL_KEYS`: The maximum number of keys that Coprocessor has scanned.
 - `AVG_PROCESSED_KEYS`: The average number of keys that Coprocessor has processed. Compared with `avg_total_keys`, `avg_processed_keys` does not include the old versions of MVCC. A great difference between `avg_total_keys` and `avg_processed_keys` indicates that many old versions exist.
 - `MAX_PROCESSED_KEYS`: The maximum number of keys that Coprocessor has processed.
+- `AVG_TIKV_CPU_TIME`: The average TiKV server CPU time that SQL statements of this category consume.
 
 Transaction-related fields:
 
