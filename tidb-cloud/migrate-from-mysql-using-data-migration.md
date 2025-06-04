@@ -104,7 +104,7 @@ If necessary, change the source MySQL instance configurations to match the requi
 2. Restart the MySQL service to apply the changes:
 
     ```
-    sudo systemctl restart mysqld`
+    sudo systemctl restart mysqld
     ```
 
 3. Run the `SHOW VARIABLES` statement again to verify that the settings take effect.
@@ -184,7 +184,7 @@ Regardless of the connection method, it is strongly recommended to use TLS/SSL f
 When using public endpoints, you can verify network connectivity and access both now and later during the DM job creation process. TiDB Cloud will provide specific egress IP addresses and prompt instructions at that time.
 
 1. Identify and record the source MySQL instance's endpoint hostname (FQDN) or public IP address.
-2. Ensure you have the required permissions to modify the firewall or security group rules for your database. Refer to your cloud provider’s documentation for guidance as follows:
+2. Ensure you have the required permissions to modify the firewall or security group rules for your database. Refer to your cloud provider's documentation for guidance as follows:
 
     - Amazon Aurora MySQL or Amazon RDS MySQL: [Controlling access with security groups](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Overview.RDSSecurityGroups.html).
     - Azure Database for MySQL - Flexible Server: [Public Network Access](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/concepts-networking-public)
