@@ -196,7 +196,7 @@ TiDB 設定ファイルは、コマンドラインパラメータよりも多く
 
 -   単一の`ENUM`要素と単一の`SET`要素の最大長を制限するかどうかを決定します。
 -   デフォルト値: `true`
--   この設定値が`true`の場合、単一の`ENUM`要素と単一の`SET`要素の最大長は255文字となり、これは[MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/string-type-syntax.html)と互換性があります。この設定値が`false`の場合、単一の要素の長さに制限はなく、これはTiDB（v5.0より前）と互換性があります。
+-   この設定値が`true`の場合、単一の`ENUM`要素と単一の`SET`要素の最大長は255文字となり、これは[MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/string-type-syntax.html)と互換性があります。この設定値が`false`場合、単一の要素の長さに制限はなく、これはTiDB（v5.0より前）と互換性があります。
 
 ### <code>graceful-wait-before-shutdown</code> <span class="version-mark">v5.0 の新機能</span> {#code-graceful-wait-before-shutdown-code-span-class-version-mark-new-in-v5-0-span}
 
@@ -339,7 +339,7 @@ TiDB 設定ファイルは、コマンドラインパラメータよりも多く
 
 ### <code>timeout</code> <span class="version-mark">v7.1.0 の新機能</span> {#code-timeout-code-span-class-version-mark-new-in-v7-1-0-span}
 
--   TiDB におけるログ書き込み操作のタイムアウトを設定します。ディスク障害によりログの書き込みができない場合、この設定項目により TiDB プロセスがハングアップする代わりにpanicになる可能性があります。
+-   TiDBにおけるログ書き込み操作のタイムアウトを設定します。ディスク障害によりログの書き込みができない場合、この設定項目によりTiDBプロセスがハングアップする代わりにpanicになる可能性があります。
 -   デフォルト値: `0` 、タイムアウトが設定されていないことを示します。
 -   単位：秒
 -   一部のユーザーシナリオでは、TiDB ログがホットプラグ対応ディスクまたはネットワーク接続ディスクに保存され、恒久的に利用できなくなる可能性があります。このような場合、TiDB はそのような障害から自動的に回復できず、ログ書き込み操作は恒久的にブロックされます。TiDB プロセスは実行されているように見えますが、要求に応答しません。この設定項目は、このような状況に対処するために設計されています。
@@ -725,9 +725,13 @@ opentracing.reporter に関連するコンフィグレーション項目。
 
 ### <code>grpc-compression-type</code> {#code-grpc-compression-type-code}
 
--   TiDBノードとTiKVノード間のデータ転送に使用する圧縮タイプを指定します。デフォルト値は`"none"`で、圧縮なしを意味します。gzip圧縮を有効にするには、この値を`"gzip"`に設定してください。
+-   TiDBノードからTiKVノードへのデータ転送に使用する圧縮タイプを指定します。デフォルト値は`"none"`で、圧縮なしを意味します。gzip圧縮を有効にするには、この値を`"gzip"`に設定してください。
 -   デフォルト値: `"none"`
 -   値`"gzip"`オプション: `"none"`
+
+> **注記：**
+>
+> TiKV ノードから TiDB ノードに返される応答メッセージの圧縮アルゴリズムは、TiKV 構成項目[`grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)によって制御されます。
 
 ### <code>commit-timeout</code> {#code-commit-timeout-code}
 
@@ -742,7 +746,7 @@ opentracing.reporter に関連するコンフィグレーション項目。
 
 ### <code>max-batch-wait-time</code> {#code-max-batch-wait-time-code}
 
--   データパケットを大きなパケットに一括カプセル化し、TiKVノードに送信するまで、 `max-batch-wait-time`を待機します。これは、 `tikv-client.max-batch-size`の値が`0`より大きい場合にのみ有効です。この値を変更しないことを推奨します。
+-   `max-batch-wait-time`を待機すると、データパケットが大きなパケットに一括カプセル化され、TiKVノードに送信されます。これは、 `tikv-client.max-batch-size`の値が`0`より大きい場合にのみ有効です。この値を変更しないことを推奨します。
 -   デフォルト値: `0`
 -   単位: ナノ秒
 
@@ -984,7 +988,7 @@ TiDB サービスのステータスに関連するコンフィグレーション
 
 -   ステートメント サマリーの永続性を有効にするかどうかを制御します。
 -   デフォルト値: `false`
--   詳細は[永続ステートメントの概要](/statement-summary-tables.md#persist-statements-summary)参照。
+-   詳細については[永続ステートメントの概要](/statement-summary-tables.md#persist-statements-summary)参照してください。
 
 ### <code>tidb_stmt_summary_filename</code> <span class="version-mark">v6.6.0 の新機能</span> {#code-tidb-stmt-summary-filename-code-span-class-version-mark-new-in-v6-6-0-span}
 
@@ -1003,7 +1007,7 @@ TiDB サービスのステータスに関連するコンフィグレーション
 
 -   ステートメント サマリーの永続性が有効な場合、この構成では永続データ ファイルを保持する最大日数を指定します。
 -   デフォルト値: `3`
--   単位: 日
+-   単位：日
 -   データ保持要件とディスク領域の使用量に基づいて値を調整できます。
 
 ### <code>tidb_stmt_summary_file_max_size</code> <span class="version-mark">v6.6.0 の新機能</span> {#code-tidb-stmt-summary-file-max-size-code-span-class-version-mark-new-in-v6-6-0-span}
