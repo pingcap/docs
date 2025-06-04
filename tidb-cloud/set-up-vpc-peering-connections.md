@@ -7,7 +7,7 @@ summary: Learn how to connect to TiDB Cloud Dedicated via VPC peering.
 
 > **Note:**
 >
-> VPC peering connection is only available for TiDB Cloud Dedicated clusters. You cannot connect to [TiDB Cloud Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) using VPC peering.
+> VPC peering connection is only available for TiDB Cloud Dedicated clusters hosted on AWS and Google Cloud. You cannot use VPC peering to connect to [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on Azure and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
 To connect your application to TiDB Cloud via VPC peering, you need to set up [VPC peering](/tidb-cloud/tidb-cloud-glossary.md#vpc-peering) with TiDB Cloud. This document walks you through setting up VPC peering connections [on AWS](#set-up-vpc-peering-on-aws) and [on Google Cloud](#set-up-vpc-peering-on-google-cloud) and connecting to TiDB Cloud via a VPC peering.
 

@@ -20,9 +20,7 @@ This document describes how to import the sample data into TiDB Cloud Dedicated 
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-2. Select **Import data from S3**.
-
-    If this is your first time importing data into this cluster, select **Import From Amazon S3**.
+2. Select **Import data from Cloud Storage**.
 
 3. On the **Import Data from Amazon S3** page, configure the following source data information:
 
@@ -48,18 +46,45 @@ This document describes how to import the sample data into TiDB Cloud Dedicated 
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-2. Click **Import Data** in the upper-right corner.
-
-    If this is your first time importing data into this cluster, select **Import From GCS**.
+2. Select **Import data from Cloud Storage**.
 
 3. On the **Import Data from GCS** page, configure the following source data information:
 
     - **Included Schema Files**: for the sample data, select **Yes**.
     - **Data Format**: select **SQL**.
     - **Folder URI** or **File URI**: enter the sample data URI `gs://tidbcloud-samples-us-west1/`.
-    - **Bucket Access**: you can use a GCS IAM Role to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access).
+    - **Bucket Access**: you can use a GCS IAM Role to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access).
 
     If the region of the bucket is different from your cluster, confirm the compliance of cross region.
+
+4. Click **Connect** > **Start Import**.
+
+</div>
+
+<div label="Azure Blob Storage">
+
+1. Open the **Import** page for your target cluster.
+
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+
+        > **Tip:**
+        >
+        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+
+    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+
+2. Select **Import data from Cloud Storage**.
+
+3. On the **Import Data from Azure Blob Storage** page, configure the following source data information:
+
+    - **Included Schema Files**: for the sample data, select **Yes**.
+    - **Data Format**: select **SQL**.
+    - **Folder URI**: enter the sample data URI `https://tcidmsampledata.blob.core.windows.net/sql/`.
+    - **SAS Token**: 
+        - For the sample data, use the following **SAS Token**: `sv=2015-04-05&ss=b&srt=co&sp=rl&se=2099-03-01T00%3A00%3A01.0000000Z&sig=cQHvaofmVsUJEbgyf4JFkAwTJGsFOmbQHx03GvVMrNc%3D`.
+        - For your own data, you can use a SAS token to access your Azure Blob Storage. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access).
+
+    If the region of the storage account is different from your cluster, confirm the compliance of cross region.
 
 4. Click **Connect** > **Start Import**.
 
