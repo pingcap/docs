@@ -358,7 +358,7 @@ Fields related to TiDB server:
 - `MAX_MEM`: The maximum memory (byte) used.
 - `AVG_DISK`: The average disk space (byte) used.
 - `MAX_DISK`: The maximum disk space (byte) used.
-- `AVG_TIDB_CPU_TIME`: The average TiDB server CPU time that SQL statements of this category consume. It shows meaningful value only when the [Top SQL](/dashboard/top-sql.md) feature is enabled. Otherwise the value will be `0`.
+- `AVG_TIDB_CPU_TIME`: The average TiDB server CPU time that SQL statements of this category consume. It shows meaningful values only when the [Top SQL](/dashboard/top-sql.md) feature is enabled. Otherwise the value is always `0`.
 
 Fields related to TiKV Coprocessor task:
 
