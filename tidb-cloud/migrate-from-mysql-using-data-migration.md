@@ -370,8 +370,7 @@ On the **Create Migration Job** page, configure the source and target connection
     - **Password**: the password of the username.
     - **SSL/TLS**: enable SSL/TLS for end-to-end data encryption (highly recommended for all migration jobs). Upload the appropriate certificates based on your MySQL server's SSL configuration.
 
-        <details>
-        <summary> SSL/TLS configuration options </summary>
+        SSL/TLS configuration options:
 
         **Option 1: Server authentication only**
 
@@ -392,10 +391,11 @@ On the **Create Migration Job** page, configure the source and target connection
         - In this option, the MySQL server verifies TiDB Cloud's identity using the client certificate, and TiDB Cloud verifies MySQL server's identity using the CA certificate.
         - This option is required when the MySQL server has `REQUIRE X509` or `REQUIRE SSL` configured for the migration user.
         - This option is used when the MySQL server requires client certificates for authentication.
+        - You can get the certificates from the following sources:
 
-        You can get the certificates from the following sources: download from your cloud provider (see [TLS certificate links](#end-to-end-encryption-over-tlsssl)), use your organization's internal CA certificates, or self-signed certificates (for development/testing only).
-
-        </details>
+            - Download from your cloud provider (see [TLS certificate links](#end-to-end-encryption-over-tlsssl)).
+            - Use your organization's internal CA certificates.
+            - Self-signed certificates (for development/testing only).
 
 3. Fill in the target connection profile.
 
