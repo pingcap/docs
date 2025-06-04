@@ -137,10 +137,10 @@ To optimize TiKV's performance and stability under write-intensive workloads, it
 
 These settings help ensure efficient resource utilization and minimize potential bottlenecks during peak write loads.
 
-
 > **Note:**
 >
-Monitoring key metrics and adjusting configurations proactively can help maintain optimal performance and prevent flow controls.
+> TiKV implements flow control at the scheduler layer to ensure system stability. When critical thresholds are breached—including pending compaction bytes or write queue sizes—TiKV begins rejecting write requests and returns a ServerIsBusy error. This error signals that background compaction processes cannot keep pace with the current rate of foreground write operations.
+> Flow control activation typically results in latency spikes and reduced query throughput (QPS drops). To prevent these performance degradations, comprehensive capacity planning is essential, along with proper configuration of compaction parameters and storage settings.
 
 
 ### TiFlash configurations
