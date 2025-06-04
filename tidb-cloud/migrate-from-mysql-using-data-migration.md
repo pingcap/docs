@@ -18,7 +18,7 @@ If you only want to replicate ongoing binlog changes from your MySQL-compatible 
 
 - The Data Migration feature is available only for **TiDB Cloud Dedicated** clusters.
 
-- The Data Migration feature is only available to clusters that are created in [certain regions](https://www.pingcap.com/tidb-cloud-pricing-details/#dm-cost) after November 9, 2022. If your **project** was created before the date or if your cluster is in another region, this feature is not available to your cluster, and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
+- If you don't see the Data Migration option for your cluster in the TiDB Cloud console, the feature might not be available in your region. Please contact our [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) team for assistance.
 
 - Amazon Aurora MySQL writer instances support both existing data and incremental data migration. Amazon Aurora MySQL reader instances only support existing data migration and do not support incremental data migration.
 
