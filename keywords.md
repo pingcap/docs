@@ -7,7 +7,11 @@ summary: Keywords and Reserved Words
 
 This article introduces the keywords in TiDB, the differences between reserved words and non-reserved words and summarizes all keywords for the query.
 
+<<<<<<< HEAD
 Keywords are words that have special meanings in SQL statements, such as `SELECT`, `UPDATE`, and `DELETE`. Some of them can be used as identifiers directly, which are called **non-reserved keywords**. Some of them require special treatment before being used as identifiers, which are called **reserved keywords**. However, there are special non-reserved keywords that might still require special treatment. It is recommended that you treat them as reserved keywords.
+=======
+Keywords are words that have special meanings in SQL statements, such as [`SELECT`](/sql-statements/sql-statement-select.md), [`UPDATE`](/sql-statements/sql-statement-update.md), and [`DELETE`](/sql-statements/sql-statement-delete.md). Some of them can be used as identifiers directly, which are called **non-reserved keywords**. Some of them require special treatment before being used as identifiers, which are called **reserved keywords**. 
+>>>>>>> 3dc620c9c9 (delete description about special non-reserved keywords that might still require special treatment (#21116))
 
 To use the reserved keywords as identifiers, you must enclose them in backticks `` ` ``:
 
@@ -59,7 +63,7 @@ Starting from v7.5.3, TiDB provides a full list of keywords in the [`INFORMATION
 
 ## Keyword list
 
-The following list shows the keywords in TiDB. Reserved keywords are marked with `(R)`. Reserved keywords for [Window Functions](/functions-and-operators/window-functions.md) are marked with `(R-Window)`. Special non-reserved keywords that need to be escaped with backticks `` ` `` are marked with `(S)`.
+The following list shows the keywords in TiDB. Reserved keywords are marked with `(R)`. Reserved keywords for [Window Functions](/functions-and-operators/window-functions.md) are marked with `(R-Window)`.
 
 <TabsPanel letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ" />
 
