@@ -97,7 +97,7 @@ The fields `SUMMARY_BEGIN_TIME` and `SUMMARY_END_TIME` represent the start time 
 
 ## `statements_summary_evicted`
 
-The [`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40) system variable limits the number of SQL digests that the `statements_summary` and `statements_summary_history` tables can store in memory totally. Once this limit is exceeded, TiDB evicts the least recently used SQL digests (along with all the related summary data) from both `statements_summary` and `statements_summary_history` tables.
+The [`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40) system variable limits the number of SQL digests that the `statements_summary` and `statements_summary_history` tables can store in memory totally. Once this limit is exceeded, TiDB evicts the least recently used SQL digests from both `statements_summary` and `statements_summary_history` tables.
 
 <CustomContent platform="tidb">
 
