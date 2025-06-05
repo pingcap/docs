@@ -44,11 +44,12 @@ For example, for a database system running OLTP loads, after its CPU utilization
 
 There are several pages in the TiDB Cloud console that help you troubleshoot user response time.
 
-- **Overview**: on this tab, you can view TiDB metrics such as total QPS, latency, connections, request QPS, request duration, storage size, CPU, IO Read, and IO Write.
-- **SQL Diagnosis**:
+- [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page):
 
     - **SQL Statement** enables you to directly observe SQL execution on the page, and easily locate performance problems without querying the system tables. You can click a SQL statement to further view the execution plan of the query for troubleshooting and analysis. For more information about SQL performance tuning, see [SQL Tuning Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md).
     - **Key Visualizer** helps you observe TiDB's data access patterns and data hotspots.
+
+- [**Metrics**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page): on this page, you can view metrics such as request units, used storage size, query per second, and average query duration.
 
 If you require additional metrics, you can contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md).
 
