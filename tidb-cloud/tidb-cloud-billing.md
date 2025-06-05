@@ -55,7 +55,7 @@ See the detailed pricing for each available Alibaba Cloud region below.
 
 #### Free quota
 
-We are offering a free quota up to the first 5 clusters created in each Organization. If you need to create more clusters, you will be required to provide a credit card and set a Monthly pending Limit. But if you delete some of your previous clusters before creating the 6th, the new cluster will still have a free quota. In other words, you can enjoy the free quota for up to 5 clusters.
+We are offering a free quota up to the first 5 clusters created in each Organization. If you need to create more clusters, you will be required to provide a credit card and set a Monthly Spending Limit. But if you delete some of your previous clusters before creating the 6th, the new cluster will still have a free quota. In other words, you can enjoy the free quota for up to 5 clusters.
 
 Free Quota will be issued monthly to serverless clusters that meet these qualifications. With the free quota, customers can store 5 GiB of row-based data, 5 GiB of columnar data, and consume 50 million RUs for one month.
 
