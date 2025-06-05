@@ -7,6 +7,16 @@ summary: Learn how to back up and restore your TiDB Cloud cluster.
 
 This document describes how to back up and restore your TiDB Cloud cluster data on TiDB Cloud.
 
+## View the Backup page
+
+1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target cluster to go to its overview page.
+
+    > **Tip:**
+    >
+    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+
+2. In the left navigation pane, click **Data** > **Backup**.
+
 ## Automatic backups
 
 TiDB Cloud automatically backs up your cluster data, allowing you to restore data from a backup snapshot to minimize data loss in the event of a disaster.
