@@ -74,8 +74,8 @@ Dumpling has the following advantages:
 
 - PROCESS: Required to query the cluster information to obtain the PD address and then control GC via the PD.
 - SELECT: Required when exporting tables.
-- RELOAD: Required when using `consistency flush`. Note that only TiDB supports this privilege. When the upstream is an RDS database or a managed service, you can ignore this privilege.
-- LOCK TABLES: Required when using `consistency lock`. This privilege must be granted for all the databases and tables to be exported.
+- RELOAD: Required when the level of `consistency` is `flush`. When the upstream is an RDS database or a managed service, you can ignore this privilege.
+- LOCK TABLES: Required when the level of `consistency` is `lock`. This privilege must be granted for all the databases and tables to be exported.
 - REPLICATION CLIENT: Required when exporting metadata to record data snapshot. This privilege is optional and you can ignore it if you do not need to export metadata.
 
 ### Export to SQL files
@@ -295,7 +295,7 @@ With the above options specified, Dumpling can have a quicker speed of data expo
 
 Dumpling uses the `--consistency <consistency level>` option to control the way in which data is exported for "consistency assurance". When using snapshot for consistency, you can use the `--snapshot` option to specify the timestamp to be backed up. You can also use the following levels of consistency:
 
-- `flush`: Use [`FLUSH TABLES WITH READ LOCK`](https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-tables-with-read-lock) to temporarily interrupt the DML and DDL operations of the replica database, to ensure the global consistency of the backup connection, and to record the binlog position (POS) information. The lock is released after all backup connections start transactions. It is recommended to perform full backups during off-peak hours or on the MySQL replica database.
+- `flush`: Use [`FLUSH TABLES WITH READ LOCK`](https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-tables-with-read-lock) to temporarily interrupt the DML and DDL operations of the replica database, to ensure the global consistency of the backup connection, and to record the binlog position (POS) information. The lock is released after all backup connections start transactions. It is recommended to perform full backups during off-peak hours or on the MySQL replica database. Note that TiDB does not support this value.
 - `snapshot`: Get a consistent snapshot of the specified timestamp and export it.
 - `lock`: Add read locks on all tables to be exported.
 - `none`: No guarantee for consistency.
