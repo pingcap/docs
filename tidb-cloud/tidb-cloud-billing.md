@@ -7,9 +7,91 @@ summary: Learn about TiDB Cloud billing.
 
 > **Note:**
 >
-> [TiDB Cloud Starter clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter) are free until April 30, 2025, with a 100% discount off. After that, usage beyond the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota) will be charged.
+> [TiDB Cloud Starter clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter) are free until June 9, 2025, with a 100% discount off. After that, usage beyond the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota) will be charged.
 
-TiDB Cloud charges according to the resources that you consume. You can visit the [TiDB Cloud Starter Pricing Details](https://www.pingcap.com/tidb-serverless-pricing-details/) pages to get more information about the pricing.
+TiDB Cloud charges according to the resources that you consume.
+
+## Pricing
+
+TiDB Cloud offers the following two pricing options to suit different needs:
+
+* TiDB Cloud Starter: you are charged based on the number of Request Units (RUs) consumed by your application.
+* TiDB Cloud Essential: you are charged based on the number of Request Capacity Units (RCUs) have provisioned, **not** on the actual usage by your application.
+
+### Request Unit (RU) and Request Capacity Unit (RCU)
+
+A **Request Unit (RU)** is a unit of measure used to represent the amount of resources consumed by a single request to the database. The amount of RUs consumed by a request depends on various factors, such as the operation type or the amount of data being retrieved or modified.
+
+A **Request Capacity Unit (RCU)** is a unit of measure used to represent the provisioned compute capacity for your TiDB Cloud Essential cluster. One RCU provides a fixed amount of compute resources that can process a certain number of RUs per second. The number of RCUs you provision determines your cluster's baseline performance and throughput capacity.
+
+Currently, the RU will include statistics for the following resources:
+
+| Resource        | RU Consumption                                 |
+|-----------------|-------------------------------------------------|
+| Read            | 2 storage read batches consume 1 RU             |
+|                 | 8 storage read requests consume 1 RU            |
+|                 | 64 KiB read request payload consumes 1 RU       |
+| Write*          | 2 storage write batch consumes 1 RU             |
+|                 | 2 storage write request consumes 1 RU           |
+|                 | 2 KiB write request payload consumes 1 RU       |
+|                 | 16 KiB write request payload consumes 1 RU (for transactions** >= 16MiB) |
+| SQL CPU         | 3 ms consumes 1 RU                              |
+| Network Egress  | 1 KiB read consumes 1 RU for Public Endpoint    |
+|                 | 4 KiB read consumes 1 RU for Private Endpoint   |
+
+> *Write: Each write operation is duplicated to multiple storage processes (3 for row-based storage without index), and each duplicate is considered a distinct write operation.
+
+> **Transaction: This applies only to optimistic transaction or autocommit.
+
+### Pricing for TiDB Cloud Starter
+
+See the detailed pricing for each available Alibaba Cloud region below.
+
+| Resource | Singapore |
+|----------|-----------|
+| Compute (per 1M RUs) | $0.1 |
+| Row-based storage (per GiB / month) | $0.36 |
+| Columnar-based storage (per GiB / month) | $0.09 |
+
+#### Free quota
+
+We are offering a free quota up to the first 5 clusters created in each Organization. If you need to create more clusters, you will be required to provide a credit card and set a Monthly Spending Limit. But if you delete some of your previous clusters before creating the 6th, the new cluster will still have a free quota. In other words, you can enjoy the free quota for up to 5 clusters.
+
+Free Quota will be issued monthly to serverless clusters that meet these qualifications. With the free quota, customers can store 5 GiB of row-based data, 5 GiB of columnar data, and consume 50 million RUs for one month.
+
+In total, each Organization can get 25 GiB of row storage, 25 GiB of column storage, and 250M Request Units (RUs) for free per month. Customers can take advantage of this offer and optimize your operations without worrying about initial costs.
+
+#### Monthly Spending Limit
+
+The "Monthly Spending Limit" refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that enables you to set a budget for your TiDB Starter clusters. The Monthly Spending Limit must be set to a minimum of $0.01.
+
+Note: It is impossible to set a spending limit value lower than the amount already spent for the current month.
+
+#### Throttling
+
+A cluster will not be throttled unless the spending limit is reached. Once the spending limit is reached, the cluster immediately denies any new connection attempts until the quota is increased or the usage is reset at the start of a new month. Existing connections established before reaching the quota will remain active but will experience throttling.
+
+If the free quota of a cluster is exhausted within the month, the cluster will automatically be throttled. This limit will remain in place until the customer upgrade it to Scalable cluster or until the next month.
+
+In this way, customers can ensure basic business continuity without paying additional fees. At the same time, customers can adjust the spending limit according to their needs to control their usage and costs.
+
+### Pricing for TiDB Cloud Essential
+
+See the detailed pricing for each available Alibaba Cloud region below.
+
+| Resource | Singapore |
+|----------|-----------|
+| Compute (per RCU / month) | $0.24 |
+| Row-based storage (per GiB / month) | $0.36 |
+| Columnar-based storage (per GiB / month) | $0.09 |
+
+#### Throttling
+
+For TiDB Cloud Essential clusters, the throttling policy is based on the provisioned Request Capacity Units (RCUs). When the workload exceeds the maximum RCU capacity, the cluster will automatically throttle incoming requests to maintain stability. Existing connections will experience throttling, but new connection attempts will be accepted as long as they don't exceed the maximum RCU limit. This ensures predictable performance while protecting the cluster from overload.
+
+### Billing cycle
+
+Each TiDB Cloud bill, corresponding to the previous month's usage, is finalized at the start of every new month. This finalized bill is then charged to your default payment method, typically occurring between the 3rd and 9th day of the respective month. If your usage within the current month reaches or exceeds $500, an automatic charge will be initiated. Please note that the billing cycle operates strictly in accordance with the UTC (+00:00) time zone.
 
 ## Invoices
 
