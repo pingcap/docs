@@ -56,7 +56,7 @@ For more information, see [Creating a bucket](https://docs.aws.amazon.com/Amazon
         >
         > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **DB Audit Logging** in the left navigation pane.
+    2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
     3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
     4. In the **Enable Database Audit Logging** dialog, locate the **AWS IAM Policy Settings** section, and record **TiDB Cloud Account ID** and **TiDB Cloud External ID** for later use.
 
@@ -130,7 +130,7 @@ For more information, see [Creating storage buckets](https://cloud.google.com/st
         >
         > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **DB Audit Logging** in the left navigation pane.
+    2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
     3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
     4. In the **Enable Database Audit Logging** dialog, locate the **Google Cloud Server Account ID** section, and record **Service Account ID** for later use.
 
@@ -227,7 +227,7 @@ For more information, see [Create an Azure storage account](https://learn.micros
     >
     > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
-2. Click the name of your target cluster to go to its overview page, and then click **DB Audit Logging** in the left navigation pane.
+2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
 4. In the **Enable Database Audit Logging** dialog, provide the blob URL and SAS token that you obtained from [Step 2. Configure Azure Blob access](#step-2-configure-azure-blob-storage-access):
 
