@@ -9,7 +9,7 @@ Monitoring in TiDB Cloud provides tools and integrations that enable you to over
 
 ## Built-in metrics
 
-Built-in metrics refer to a full set of standard metrics of your cluster that TiDB Cloud collects and presents on the Metrics page. With these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
+Built-in metrics refer to a full set of standard metrics of your cluster that TiDB Cloud collects and presents on the **Metrics** page. With these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
 
 For more information, see [TiDB Cloud Built-in Metrics](/tidb-cloud/built-in-monitoring.md).
 

@@ -51,7 +51,7 @@ There are several pages in the TiDB Cloud console that help you troubleshoot use
 
 - [**Metrics**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page): on this page, you can view metrics such as request units, used storage size, query per second, and average query duration.
 
-If you require additional metrics, you can contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md).
+To request additional metrics, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 If you experience latency and performance issues, refer to the steps in the following sections for analysis and troubleshooting.
 
