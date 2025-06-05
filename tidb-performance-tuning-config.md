@@ -89,6 +89,9 @@ concurrent-send-snap-limit = 64
 concurrent-recv-snap-limit = 64
 snap-io-max-bytes-per-sec = "400MiB"
 
+[quota]
+background-read-bandwidth = "400Mib"
+
 [pessimistic-txn]
 in-memory-peer-size-limit = "32MiB"
 in-memory-instance-size-limit = "512MiB"
@@ -113,6 +116,7 @@ hard-pending-compaction-bytes-limit = "2TiB"
 | Configuration item | Description | Note |
 | ---------| ---- | ----|
 | [`concurrent-send-snap-limit`](/tikv-configuration-file.md#concurrent-send-snap-limit), [`concurrent-recv-snap-limit`](/tikv-configuration-file.md#concurrent-recv-snap-limit), and [`snap-io-max-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec) | Set limits for concurrent snapshot transfer and I/O bandwidth during TiKV scaling operations. Higher limits reduce scaling time by allowing faster data migration. | Adjusting these limits affects the trade-off between scaling speed and online transaction performance. |
+| [`quota.background-read-bandwidth`](/tikv-configuration-file.md#background-read-bandwidth-new-in-v620) | Sets a soft limit on read bandwidth for background transactions and Coprocessor operations. Recommended to configure at 40% of disk bandwidth to prevent interference with foreground traffic. | Default: unlimited. Without this limit, analyze jobs on large tables may significantly degrade application performance. |
 | [`in-memory-peer-size-limit`](/tikv-configuration-file.md#in-memory-peer-size-limit-new-in-v840) and [`in-memory-instance-size-limit`](/tikv-configuration-file.md#in-memory-instance-size-limit-new-in-v840) | Control the memory allocation for pessimistic lock caching at the Region and TiKV instance levels. Storing locks in memory reduces disk I/O and improves transaction performance. | Monitor memory usage carefully. Higher limits improve performance but increase memory consumption. |
 |[`rocksdb.rate-bytes-per-sec`](/tikv-configuration-file.md#rate-bytes-per-sec) | Limits the I/O rate of background compaction and flush operations to prevent them from saturating disk bandwidth, ensuring stable performance. | It's recommended to set this to around 60% of the disk's maximum throughput. Overly high settings can lead to disk saturation, impacting foreground operations. Conversely, setting it too low may slow down compaction, causing write stalls and flow control activations. |
 |[`rocksdb.max-manifest-file-size`](/tikv-configuration-file.md#max-manifest-file-size) | Sets the maximum size of the RocksDB MANIFEST file, which logs metadata about SST files and database state changes. Increasing this size reduces the frequency of MANIFEST file rewrites, thereby minimizing their impact on foreground write performance. | The default value is 128 MiB. In environments with a large number of SST files (e.g., hundreds of thousands), frequent MANIFEST rewrites can degrade write performance. Adjusting this parameter to a higher value, such as 256 MiB or more, can help maintain optimal performance. |
