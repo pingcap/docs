@@ -15,7 +15,7 @@ TiDB Cloud charges according to the resources that you consume.
 
 Two pricing options are available for TiDB Cloud:
 
-* TiDB Cloud Starter: you are billed per Request Unit (RU) consumed by your application.
+* TiDB Cloud Starter: you are charged based on the number of Request Units (RUs) consumed by your application.
 * TiDB Cloud Essential: you will be charged based on the hourly Request Capacity Unit (RCU) you have provisioned, and not how much your application has consumed.
 
 ### Request Unit (RU) and Request Capacity Unit (RCU)
