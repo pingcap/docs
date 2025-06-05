@@ -295,4 +295,4 @@ The following statements for creating, modifying, and dropping resource groups h
 
 ## Differences from MySQL InnoDB
 
-For more information about differences from MySQL InnoDB, see [Differences from MySQL InnoDB](/pessimistic-transaction.md#difference-with-mysql-innodb).
+For differences on pessimistic transaction (lock) with MySQL InnoDB, see [Differences from MySQL InnoDB](/pessimistic-transaction.md#difference-with-mysql-innodb).
