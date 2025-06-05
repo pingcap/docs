@@ -49,7 +49,7 @@ Automatic backup settings vary between free clusters and scalable clusters, as s
 
 To set the backup time for a scalable cluster, perform the following steps:
 
-1. Navigate to the **Backup** page of a TiDB Cloud Serverless cluster.
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
 2. Click **Backup Setting**. This will open the **Backup Setting** window, where you can configure the automatic backup settings according to your requirements.
 
@@ -103,7 +103,7 @@ If the data is corrupted after a canceled restore and cannot be recovered, conta
 
 To restore your TiDB Cloud Serverless cluster, follow these steps:
 
-1. Navigate to the **Backup** page of a cluster.
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
 2. Click **Restore**. The setting window displays.
 
