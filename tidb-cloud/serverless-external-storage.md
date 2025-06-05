@@ -26,7 +26,7 @@ It is recommended that you use [AWS CloudFormation](https://docs.aws.amazon.com/
 
     1. Log in to the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Open the **Add New ARN** dialog.
 
@@ -216,7 +216,7 @@ To create a SAS token using an Azure ARM template, take the following steps:
 
     1. Log in to the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Open the **Generate New SAS Token via ARM Template Deployment** dialog.
         

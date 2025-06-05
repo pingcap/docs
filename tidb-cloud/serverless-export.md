@@ -177,7 +177,7 @@ When exporting data to the Parquet format, the data conversion between TiDB Clou
    >
    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 3. On the **Import** page, click **Export Data to** in the upper-right corner, then choose **Local File** from the drop-down list. Fill in the following parameters:
 
@@ -228,7 +228,7 @@ When exporting data to the Parquet format, the data conversion between TiDB Clou
    >
    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 3. On the **Import** page, click **Export Data to** in the upper-right corner, then choose **Amazon S3** from the drop-down list. Fill in the following parameters:
 
@@ -272,7 +272,7 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
    >
    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 3. On the **Import** page, click **Export Data to** in the upper-right corner, and then choose **Google Cloud Storage** from the drop-down list. Fill in the following parameters:
 
@@ -310,7 +310,7 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
    >
    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 3. On the **Import** page, click **Export Data to** in the upper-right corner, and then choose **Azure Blob Storage** from the drop-down list. Fill in the following parameters:
 
@@ -348,7 +348,7 @@ ticloud serverless export create -c <cluster-id> --target-type AZURE_BLOB --azbl
    >
    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 3. On the **Import** page, click **Export Data to** in the upper-right corner, and then choose **Alibaba Cloud OSS** from the drop-down list. 
 
@@ -391,7 +391,7 @@ To cancel an ongoing export task, take the following steps:
    >
    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 3. On the **Import** page, click **Export** to view the export task list.
 

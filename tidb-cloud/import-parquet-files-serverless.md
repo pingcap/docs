@@ -105,7 +105,7 @@ To import the Parquet files to TiDB Cloud Starter, take the following steps:
         >
         > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Select **Import data from Cloud Storage**, and then click **Amazon S3**.
 
@@ -157,7 +157,7 @@ To import the Parquet files to TiDB Cloud Starter, take the following steps:
         >
         > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Select **Import data from Cloud Storage**, and then click **Google Cloud Storage**.
 
@@ -207,7 +207,7 @@ To import the Parquet files to TiDB Cloud Starter, take the following steps:
         >
         > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Select **Import data from Cloud Storage**, and then click **Azure Blob Storage**.
 
@@ -257,7 +257,7 @@ To import the Parquet files to TiDB Cloud Starter, take the following steps:
         >
         > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Select **Import data from Cloud Storage**, and then click **Alibaba Cloud OSS**.
 
