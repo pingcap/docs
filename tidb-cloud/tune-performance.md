@@ -11,9 +11,15 @@ TiDB Cloud provides [Slow Query](#slow-query) and [Statement Analysis](#statemen
 
 - Statement Analysis enables you to directly observe the SQL execution on the page, and easily locate performance problems without querying the system tables.
 
-- Key Visualizer helps you observe TiDB's data access patterns and data hotspots.
+## View the Diagnosis page
 
-- Index Insight provides you with meaningful and actionable index recommendations.
+1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target cluster to go to its overview page.
+
+    > **Tip:**
+    >
+    > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
+
+2. In the left navigation pane, click **Monitoring** > **Diagnosis**.
 
 ## Slow Query
 

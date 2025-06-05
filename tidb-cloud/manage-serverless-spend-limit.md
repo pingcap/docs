@@ -37,7 +37,7 @@ To update the spending limit for a TiDB Cloud Starter cluster, perform the follo
 
     > **Tip:**
     >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
 
 2. In the **Usage This Month** area, click **Upgrade to Scalable Cluster**.
 

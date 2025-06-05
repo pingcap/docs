@@ -219,7 +219,7 @@ To check which project you belong to, take the following steps:
 
 > **Tip:**
 >
-> If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+> You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
 
 ### Create a project
 
