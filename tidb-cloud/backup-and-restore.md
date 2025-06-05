@@ -22,6 +22,16 @@ This document describes how to back up and restore your TiDB Cloud Dedicated clu
 
 ## Backup
 
+### View the Backup page
+
+1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target cluster to go to its overview page.
+
+    > **Tip:**
+    >
+    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+
+2. In the left navigation pane, click **Data** > **Backup**.
+
 ### Turn on auto backup
 
 TiDB Cloud Dedicated supports both [snapshot backup](https://docs.pingcap.com/tidb/stable/br-snapshot-guide) and [log backup](https://docs.pingcap.com/tidb/stable/br-pitr-guide). Snapshot backup enables you to restore data to the backup point. By default, snapshot backups are taken automatically and stored according to your backup retention policy. You can disable auto backup at any time.
