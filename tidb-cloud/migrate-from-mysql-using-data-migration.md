@@ -335,7 +335,7 @@ For example, you can execute the following `GRANT` statement in your target TiDB
 GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX ON *.* TO 'dm_target_user'@'%';
 ```
 
-## Step 1: Go to the **Data Migration** page
+## Step 1: Go to the Data Migration page
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
@@ -343,7 +343,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX ON *.* TO 'dm_t
     >
     > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data Migration** in the left navigation pane.
+2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Migration** in the left navigation pane.
 
 3. On the **Data Migration** page, click **Create Migration Job** in the upper-right corner. The **Create Migration Job** page is displayed.
 
@@ -512,7 +512,7 @@ When scaling a migration job specification, note the following:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data Migration** in the left navigation pane.
+2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Migration** in the left navigation pane.
 
 3. On the **Data Migration** page, locate the migration job you want to scale. In the **Action** column, click **...** > **Scale Up/Down**.
 

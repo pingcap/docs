@@ -120,7 +120,7 @@ To enable the GTID mode for a self-hosted MySQL instance, follow these steps:
 
     If the result is `ON` or `ON_PERMISSIVE`, the GTID mode is successfully enabled.
 
-## Step 1: Go to the **Data Migration** page
+## Step 1: Go to the Data Migration page
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
@@ -128,7 +128,7 @@ To enable the GTID mode for a self-hosted MySQL instance, follow these steps:
     >
     > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data Migration** in the left navigation pane.
+2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Migration** in the left navigation pane.
 
 3. On the **Data Migration** page, click **Create Migration Job** in the upper-right corner. The **Create Migration Job** page is displayed.
 
