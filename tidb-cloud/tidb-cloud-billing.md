@@ -89,7 +89,7 @@ See the detailed pricing for each available Alibaba Cloud region below.
 
 For TiDB Cloud Essential clusters, the throttling policy is based on the provisioned Request Capacity Units (RCUs). When the workload exceeds the maximum RCU capacity, the cluster will automatically throttle incoming requests to maintain stability. Existing connections will experience throttling, but new connection attempts will be accepted as long as they don't exceed the maximum RCU limit. This ensures predictable performance while protecting the cluster from overload.
 
-### Billing Cycle
+### Billing cycle
 
 Each TiDB Cloud bill, corresponding to the previous month's usage, is finalized at the start of every new month. This finalized bill is then charged to your default payment method, typically occurring between the 3rd and 9th day of the respective month. If your usage within the current month reaches or exceeds $500, an automatic charge will be initiated. Please note that the billing cycle operates strictly in accordance with the UTC (+00:00) time zone.
 
