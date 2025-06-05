@@ -37,9 +37,9 @@ The document provides an example of connecting to a Kafka Private Service Connec
 
 3. Get the Kafka deployment information from your TiDB Cloud Dedicated cluster.
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Changefeed** in the left navigation pane.
+    1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
     2. On the overview page, find the region of the TiDB cluster. Ensure that your Kafka cluster will be deployed to the same region.
-    3. Click **Create Changefeed**.
+    3. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed** in the upper-right corner, and then provide the following information:
         1. In **Destination**, select **Kafka**.
         2. In **Connectivity Method**, select **Private Service Connect**.
     4. Note down the Google Cloud project in **Reminders before proceeding**. You will use it to authorize the auto-accept endpoint creation request from TiDB Cloud.

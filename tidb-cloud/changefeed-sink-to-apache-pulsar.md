@@ -79,10 +79,10 @@ You might also need a default topic for non-row events (such as schema changes) 
 
 For more information, see [How to create a topic](https://pulsar.apache.org/docs/4.0.x/tutorials-topic/) in Apache Pulsar documentation.
 
-## Step 1. Open the changefeed page for Apache Pulsar
+## Step 1. Open the Changefeed page for Apache Pulsar
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Navigate to the cluster overview page of the TiDB cluster that will be the source of the changefeed events, and then click **Changefeed** in the left navigation pane.
+2. Navigate to the cluster overview page of the TiDB cluster that will be the source of the changefeed events, and then click **Data** > **Changefeed** in the left navigation pane.
 3. Click **Create Changefeed**.
 
 ## Step 2. Configure the changefeed destination

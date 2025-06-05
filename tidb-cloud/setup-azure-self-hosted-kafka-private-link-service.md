@@ -35,8 +35,8 @@ The document provides an example of connecting to a Kafka Private Link service i
 3. Get the Kafka deployment information from your [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster.
 
     1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
-    2. In the left navigation pane, click **Changefeed**.
-    3. On the **Changefeed** page, click **Create Changefeed** in the upper-right corner.
+    2. In the left navigation pane, click **Data** > **Changefeed**.
+    3. On the **Changefeed** page, click **Create Changefeed** in the upper-right corner, and then provide the following information:
         1. In **Destination**, select **Kafka**.
         2. In **Connectivity Method**, select **Private Link**.
     4. Note down the region information and the subscription of the TiDB Cloud Azure account in **Reminders before proceeding**. You will use it to authorize TiDB Cloud to access the Kafka Private Link service.
