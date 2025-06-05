@@ -32,6 +32,7 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 | Log | `tidb.log` | `--include=log` |
 | Error log | `tidb_stderr.log` | `--include=log` |
 | Slow log | `tidb_slow_query.log` | `--include=log` |
+| Audit Logs | `tidb-audit.log.json` | `--include=log` |
 | Configuration file | `tidb.toml` | `--include=config` |
 | Real-time configuration | `config.json` | `--include=config` |
 
