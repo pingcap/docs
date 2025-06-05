@@ -125,7 +125,7 @@ hard-pending-compaction-bytes-limit = "2TiB"
 | [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold) | Control when write flow control is triggered based on the number of kvDB L0 files. Increasing the threshold reduces write stalls during high write workloads. | Higher thresholds might lead to more aggressive compactions when many L0 files exist. |
 | [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) and [`storage.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit) | Define thresholds for pending compaction bytes to manage write flow control. The soft limit triggers partial write rejections, while the hard limit results in full write rejections when exceeded.	 | The default soft limit is 192 GiB, and the hard limit is 256 GiB. In write-intensive scenarios, if compaction processes cannot keep up, pending compaction bytes accumulate, potentially triggering flow control. Adjusting these limits can provide more buffer space, but persistent accumulation indicates underlying issues that require further investigation. |
 
-Be noted that the compaction and flow control configuration adjustments outlined above are tailored for TiKV deployments on instances with the following specifications:
+Note that the compaction and flow control configuration adjustments outlined above are tailored for TiKV deployments on instances with the following specifications:
 
   - CPU: 32 cores
   - Memory: 128 GiB
@@ -134,7 +134,7 @@ Be noted that the compaction and flow control configuration adjustments outlined
 
 #### Recommended Configuration Adjustments for Write-Intensive Workloads
 
-To optimize TiKV's performance and stability under write-intensive workloads, it's advisable to adjust certain compaction and flow control parameters based on the instance's hardware specifications. For example:
+To optimize TiKV's performance and stability under write-intensive workloads, it is recommended that you adjust certain compaction and flow control parameters based on the instance's hardware specifications. For example:
 
   - `rocksdb.rate-bytes-per-sec`: Set to approximately 60% of the disk's maximum throughput (e.g., ~600 MiB/s for a 1 GiB/s disk) to balance compaction I/O and prevent disk saturation.
   - `storage.flow-control.soft-pending-compaction-bytes-limit` and `storage.flow-control.hard-pending-compaction-bytes-limit`: Increase these limits proportionally to the available disk space (e.g., 1 TiB and 2 TiB, respectively) to provide more buffer for compaction processes.
@@ -143,7 +143,7 @@ These settings help ensure efficient resource utilization and minimize potential
 
 > **Note:**
 >
-> TiKV implements flow control at the scheduler layer to ensure system stability. When critical thresholds are breached—including pending compaction bytes or write queue sizes—TiKV begins rejecting write requests and returns a ServerIsBusy error. This error signals that background compaction processes cannot keep pace with the current rate of foreground write operations. Flow control activation typically results in latency spikes and reduced query throughput (QPS drops). To prevent these performance degradations, comprehensive capacity planning is essential, along with proper configuration of compaction parameters and storage settings.
+> TiKV implements flow control at the scheduler layer to ensure system stability. When critical thresholds are breached, including those for pending compaction bytes or write queue sizes, TiKV begins rejecting write requests and returns a ServerIsBusy error. This error signals that background compaction processes cannot keep pace with the current rate of foreground write operations. Flow control activation typically results in latency spikes and reduced query throughput (QPS drops). To prevent these performance degradations, comprehensive capacity planning is essential, along with proper configuration of compaction parameters and storage settings.
 
 
 ### TiFlash configurations
