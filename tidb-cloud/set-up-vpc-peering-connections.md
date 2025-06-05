@@ -98,7 +98,7 @@ You can add VPC peering requests on either the project-level **Network Access** 
 
     2. Click the name of your target cluster to go to its overview page.
 
-2. In the left navigation pane, click **Networking**, and then click **Create VPC Peering**.
+2. In the left navigation pane, click **Settings** > **Networking**, and then click **Create VPC Peering**.
 
 3. Fill in the required information of your existing AWS VPC:
 
@@ -287,7 +287,7 @@ You can add VPC peering requests on either the project-level **Network Access** 
 
     2. Click the name of your target cluster to go to its overview page.
 
-2. In the left navigation pane, click **Networking**, and then click **Create VPC Peering**.
+2. In the left navigation pane, click **Settings** > **Networking**, and then click **Create VPC Peering**.
 
 3. Fill in the required information of your existing Google Cloud VPC:
 

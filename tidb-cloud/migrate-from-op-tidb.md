@@ -279,9 +279,19 @@ To replicate incremental data, do the following:
 
     ![Start Time in Metadata](/media/tidb-cloud/start_ts_in_metadata.png)
 
-2. Grant TiCDC to connect to TiDB Cloud. In the [TiDB Cloud console](https://tidbcloud.com/console/clusters), locate the cluster, and then go to the **Networking** page. Click **Add IP Address** > **Use IP addresses**. Fill in the public IP address of the TiCDC component in the **IP Address** field, and click **Confirm** to save it. Now TiCDC can access TiDB Cloud. For more information, see [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md).
+2. Grant TiCDC to connect to TiDB Cloud.
 
-3. Get the connection information of the downstream TiDB Cloud cluster. In the [TiDB Cloud console](https://tidbcloud.com/console/clusters), go to **Overview** > **Connect**. In the connection dialog, select **Public** from the **Connection Type** drop-down list and select **General** from the **Connect With** drop-down list. From the connection information, you can get the host IP address and port of the cluster. For more information, see [Connect via public connection](/tidb-cloud/connect-via-standard-connection.md).
+    1. In the [TiDB Cloud console](https://tidbcloud.com/console/clusters), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+    2. In the left navigation pane, click **Settings** > **Networking**.
+    3. On the **Networking** page, click **Add IP Address**.
+    4. In the displayed dialog, select **Use IP addresses**, click **+**, fill in the public IP address of the TiCDC component in the **IP Address** field, and then click **Confirm**. Now TiCDC can access TiDB Cloud. For more information, see [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md).
+
+3. Get the connection information of the downstream TiDB Cloud cluster.
+
+    1. In the [TiDB Cloud console](https://tidbcloud.com/console/clusters), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+    2. Click **Connect** in the upper-right corner.
+    3. In the connection dialog, select **Public** from the **Connection Type** drop-down list and select **General** from the **Connect With** drop-down list.
+    4. From the connection information, you can get the host IP address and port of the cluster. For more information, see [Connect via public connection](/tidb-cloud/connect-via-standard-connection.md).
 
 4. Create and run the incremental replication task. In the upstream cluster, run the following:
 

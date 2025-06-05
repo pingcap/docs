@@ -86,7 +86,7 @@ Before you begin to create an endpoint:
 
     > **Note:**
     >
-    > If you have already created a private endpoint connection, the active endpoint will appear in the connection dialog. To create additional private endpoint connections, navigate to the **Networking** page in the left navigation pane.
+    > If you have already created a private endpoint connection, the active endpoint will appear in the connection dialog. To create additional private endpoint connections, navigate to the **Networking** page by clicking **Settings** > **Networking** in the left navigation pane.
 
 ### Step 2. Create a Google Cloud private endpoint
 

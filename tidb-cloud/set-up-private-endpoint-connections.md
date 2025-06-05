@@ -61,7 +61,7 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 
 > **Note:**
 >
-> If you have already created a private endpoint connection, the active endpoint will appear in the connection dialog. To create additional private endpoint connections, navigate to the **Networking** page in the left navigation pane.
+> If you have already created a private endpoint connection, the active endpoint will appear in the connection dialog. To create additional private endpoint connections, navigate to the **Networking** page by clicking **Settings** > **Networking** in the left navigation pane.
 
 ### Step 2. Create an AWS interface endpoint
 
@@ -137,7 +137,7 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
 >
 > You can view and manage private endpoint connections on two pages:
 >
-> - Cluster-level **Networking** page: click **Networking** in the left navigation pane of the cluster overview page.
+> - Cluster-level **Networking** page: click **Settings** > **Networking** in the left navigation pane of the cluster overview page.
 > - Project-level **Network Access** page: click **Network Access** in the left navigation pane of the **Project Settings** page.
 
 ### Step 4. Enable private DNS
@@ -186,7 +186,7 @@ After you have accepted the private endpoint connection, you are redirected back
 
 When you use private endpoint connections, the statuses of private endpoints or private endpoint services are displayed on the following pages:
 
-- Cluster-level **Networking** page: click **Networking** in the left navigation pane of the cluster overview page.
+- Cluster-level **Networking** page: click **Settings** > **Networking** in the left navigation pane of the cluster overview page.
 - Project-level **Network Access** page: click **Network Access** in the left navigation pane of the **Project Settings** page.
 
 The possible statuses of a private endpoint are explained as follows:
