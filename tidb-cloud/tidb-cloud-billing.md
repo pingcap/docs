@@ -53,7 +53,7 @@ See the detailed pricing for each available Alibaba Cloud region below.
 | Row-based storage (per GiB / month) | $0.36 |
 | Columnar-based storage (per GiB / month) | $0.09 |
 
-#### Free Quota
+#### Free quota
 
 We are offering a free quota up to the first 5 clusters created in each Organization. If you need to create more clusters, you will be required to provide a credit card and set a Monthly pending Limit. But if you delete some of your previous clusters before creating the 6th, the new cluster will still have a free quota. In other words, you can enjoy the free quota for up to 5 clusters.
 
