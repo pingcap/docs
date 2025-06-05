@@ -33,20 +33,25 @@ Currently, the RU will include statistics for the following resources:
 |                 | 64 KiB read request payload consumes 1 RU       |
 | Write*          | 2 storage write batch consumes 1 RU             |
 |                 | 2 storage write request consumes 1 RU           |
-|                 | 1 KiB write request payload consumes 1 RU       |
-|                 | 8 KiB write request payload consumes 1 RU (for transactions** >= 16MiB) |
+|                 | 2 KiB write request payload consumes 1 RU       |
+|                 | 16 KiB write request payload consumes 1 RU (for transactions** >= 16MiB) |
 | SQL CPU         | 3 ms consumes 1 RU                              |
-| Network Egress  | 1 KiB read consumes 1 RU                        |
+| Network Egress  | 1 KiB read consumes 1 RU for Public Endpoint    |
+|                 | 4 KiB read consumes 1 RU for Private Endpoint   |
+
+> *Write: Each write operation is duplicated to multiple storage processes (3 for row-based storage without index), and each duplicate is considered a distinct write operation.
+
+> **Transaction: This applies only to optimistic transaction or autocommit.
 
 ### Pricing for TiDB Cloud Starter
 
 See the detailed pricing for each available Alibaba Cloud region below.
 
-| Resource | Singapore | Japan (Tokyo) | Mexico (Querétaro) |
-|----------|-----------|-------|--------|
-| Compute (per 1M RUs) | $0.24 | $0.28 | $0.22 |
-| Row-based storage (per GiB / month) | $0.36 | $0.36 | $0.36 |
-| Columnar-based storage (per GiB / month) | $0.09 | $0.09 | $0.09 |
+| Resource | Singapore |
+|----------|-----------|
+| Compute (per 1M RUs) | $0.24 |
+| Row-based storage (per GiB / month) | $0.36 |
+| Columnar-based storage (per GiB / month) | $0.09 |
 
 #### Free Quota
 
@@ -74,11 +79,11 @@ In this way, customers can ensure basic business continuity without paying addit
 
 See the detailed pricing for each available Alibaba Cloud region below.
 
-| Resource | Singapore | Japan (Tokyo) | Mexico (Querétaro) |
-|----------|-----------|-------|--------|
-| Compute (per RCU / month) | $0.24 | $0.28 | $0.22 |
-| Row-based storage (per GiB / month) | $0.36 | $0.36 | $0.36 |
-| Columnar-based storage (per GiB / month) | $0.09 | $0.09 | $0.09 |
+| Resource | Singapore |
+|----------|-----------|
+| Compute (per RCU / month) | $0.24 |
+| Row-based storage (per GiB / month) | $0.36 |
+| Columnar-based storage (per GiB / month) | $0.09 |
 
 #### Throttling
 
@@ -86,7 +91,7 @@ For TiDB Cloud Essential clusters, the throttling policy is based on the provisi
 
 ### Billing Cycle
 
-Each TiDB Cloud bill, corresponding to the previous month's usage, is finalized at the start of every new month. This finalized bill is then charged to your default payment method, typically occurring between the 3rd and 9th day of the respective month. If your usage within the current month reaches or exceeds $250, an automatic charge will be initiated. Please note that the billing cycle operates strictly in accordance with the UTC (+00:00) time zone.
+Each TiDB Cloud bill, corresponding to the previous month's usage, is finalized at the start of every new month. This finalized bill is then charged to your default payment method, typically occurring between the 3rd and 9th day of the respective month. If your usage within the current month reaches or exceeds $500, an automatic charge will be initiated. Please note that the billing cycle operates strictly in accordance with the UTC (+00:00) time zone.
 
 ## Invoices
 
