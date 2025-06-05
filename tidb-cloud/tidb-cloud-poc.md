@@ -160,9 +160,9 @@ The following are tips for performance tuning:
 
 - Improve query performance
 
-    - Check the SQL execution plan on the **Diagnostic > Statements** page.
-    - Check hotspot issues on the **Dashboard > Key Visualizer** page.
-    - Monitor if the TiDB cluster is running out of capacity on the **Overview > Capacity Metrics** page.
+    - Check the SQL execution plan on the [**SQL Statements**](/tidb-cloud/tune-performance.md#statement-analysis) tab of the [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) page.
+    - Check hotspot issues on the [**Key Visualizer**](/tidb-cloud/tune-performance.md#key-visualizer) tab of the [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) page.
+    - Monitor if the TiDB cluster is running out of capacity on the [**Metrics**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) page.
     - Use the TiFlash feature to optimize analytical processing. See [Use an HTAP Cluster](/tiflash/tiflash-overview.md).
 
 ## Step 7. Explore more features
