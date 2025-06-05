@@ -39,9 +39,11 @@ If you do not need to use a public endpoint of a TiDB Cloud cluster, you can dis
 
 1. Navigate to the [**Clusters**](https://console.tidb.io/clusters) page, and then click the name of your target cluster to go to its overview page.
 
-2. Click **Networking** in the left navigation pane and click **Disable** in the right pane. A confirmation dialog is displayed.
+2. In the left navigation pane, click **Settings** > **Networking**.
 
-3. Click **Disable** in the confirmation dialog.
+3. On the **Networking** page, click **Disable**. A confirmation dialog is displayed.
+
+4. Click **Disable** in the confirmation dialog.
 
 After disabling the public endpoint, the `Public` entry in the **Connection Type** drop-down list of the connect dialog is disabled. If users are still trying to access the cluster from the public endpoint, they will get an error.
 
@@ -53,7 +55,9 @@ You can re-enable the public endpoint after disabling it:
 
 1. Navigate to the [**Clusters**](https://console.tidb.io/clusters) page, and then click the name of your target cluster to go to its overview page.
 
-2. Click **Networking** in the left navigation pane and click **Enable** in the right pane.
+2. In the left navigation pane, click **Settings** > **Networking**.
+
+3. On the **Networking** page, click **Enable**.
 
 ## What's next
 
