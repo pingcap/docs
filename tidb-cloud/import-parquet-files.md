@@ -107,7 +107,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
         > **Tip:**
         >
-        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+        > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
 
     2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
@@ -150,7 +150,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
         > **Tip:**
         >
-        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+        > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
 
     2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
@@ -190,7 +190,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
         > **Tip:**
         >
-        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+        > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
 
     2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 

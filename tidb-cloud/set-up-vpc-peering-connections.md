@@ -27,9 +27,9 @@ Before adding VPC Peering requests to a region, you must set a CIDR for that reg
 
 You can set the CIDR when creating the first TiDB Cloud Dedicated cluster. If you want to set the CIDR before creating the cluster, perform the following operations:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
-3. On the **Project Settings** page of your project, click **Network Access** in the left navigation pane, click the **Project CIDR** tab, and then select **AWS** or **Google Cloud** according to your cloud provider.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the drop-down box in the upper-left corner.
+2. In the left navigation pane, click **Project Settings** > **Network Access**.
+3. On the **Network Access** page, click the **Project CIDR** tab, and then select **AWS** or **Google Cloud** according to your cloud provider.
 4. In the upper-right corner, click **Create CIDR**. Specify the region and CIDR value in the **Create AWS CIDR** or **Create Google Cloud CIDR** dialog, and then click **Confirm**.
 
     ![Project-CIDR4](/media/tidb-cloud/Project-CIDR4.png)
@@ -64,9 +64,9 @@ You can add VPC peering requests on either the project-level **Network Access** 
 <SimpleTab>
 <div label="VPC peering setting on the project-level Network Access page">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
-3. On the **Project Settings** page of your project, click **Network Access** in the left navigation pane, and click the **VPC Peering** > **AWS** tab.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the drop-down box in the upper-left corner.
+2. In the left navigation pane, click **Project Settings** > **Network Access**.
+3. On the **Network Access** page, click the **VPC Peering** > **AWS** tab.
 
     The **VPC Peering** configuration is displayed by default.
 
@@ -94,7 +94,7 @@ You can add VPC peering requests on either the project-level **Network Access** 
 
         > **Tip:**
         >
-        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+        > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
 
     2. Click the name of your target cluster to go to its overview page.
 
@@ -254,9 +254,9 @@ You can add VPC peering requests on either the project-level **Network Access** 
 <SimpleTab>
 <div label="VPC peering setting on the project-level Network Access page">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
-3. On the **Project Settings** page of your project, click **Network Access** in the left navigation pane, and click the **VPC Peering** > **Google Cloud** tab.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the drop-down box in the upper-left corner.
+2. In the left navigation pane, click **Project Settings** > **Network Access**.
+3. On the **Network Access** page, click the **VPC Peering** > **Google Cloud** tab.
 
     The **VPC Peering** configuration is displayed by default.
 
@@ -283,7 +283,7 @@ You can add VPC peering requests on either the project-level **Network Access** 
 
         > **Tip:**
         >
-        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+        > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
 
     2. Click the name of your target cluster to go to its overview page.
 

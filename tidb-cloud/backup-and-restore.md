@@ -28,7 +28,7 @@ This document describes how to back up and restore your TiDB Cloud Dedicated clu
 
     > **Tip:**
     >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
 
 2. In the left navigation pane, click **Data** > **Backup**.
 
@@ -258,9 +258,10 @@ To restore your TiDB Cloud Dedicated cluster data from a backup to a new cluster
 
 To restore a deleted cluster from recycle bin, take the following steps:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
-3. On the **Project Settings** page of your project, click **Recycle Bin** in the left navigation pane, locate the cluster you want to restore, and then click **Backups** in the **Action** column.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the drop-down box in the upper-left corner.
+2. In the left navigation pane, click **Project Settings** > **Recycle Bin**.
+3. On the **Recycle Bin** page, locate the cluster you want to restore, and then click **Backups** in the **Action** column.
 4. Locate your desired backup time, and then click **Restore** in the **Action** column.
 5. In the **Restore** window, make the following changes if necessary:
 

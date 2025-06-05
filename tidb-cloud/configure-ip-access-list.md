@@ -17,7 +17,7 @@ To configure an IP access list for your TiDB Cloud Dedicated cluster, take the f
 
     > **Tip:**
     >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
 
 2. In the left navigation pane, click **Settings** > **Networking**.
 3. On the **Networking** page, click **Add IP Address**.

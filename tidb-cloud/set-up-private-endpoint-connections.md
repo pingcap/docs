@@ -137,8 +137,8 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
 >
 > You can view and manage private endpoint connections on two pages:
 >
-> - Cluster-level **Networking** page: click **Settings** > **Networking** in the left navigation pane of the cluster overview page.
-> - Project-level **Network Access** page: click **Network Access** in the left navigation pane of the **Project Settings** page.
+> - Cluster-level **Networking** page: switch to your target cluster using the drop-down box in the upper-left corner, and then click **Settings** > **Networking** in the left navigation pane.
+> - Project-level **Network Access** page: switch to your target project using the drop-down box in the upper-left corner, and then click **Project Settings** > **Network Access** in the left navigation pane.
 
 ### Step 4. Enable private DNS
 
@@ -186,8 +186,8 @@ After you have accepted the private endpoint connection, you are redirected back
 
 When you use private endpoint connections, the statuses of private endpoints or private endpoint services are displayed on the following pages:
 
-- Cluster-level **Networking** page: click **Settings** > **Networking** in the left navigation pane of the cluster overview page.
-- Project-level **Network Access** page: click **Network Access** in the left navigation pane of the **Project Settings** page.
+- Cluster-level **Networking** page: switch to your target cluster using the drop-down box in the upper-left corner, and then click **Settings** > **Networking** in the left navigation pane.
+- Project-level **Network Access** page: switch to your target project using the drop-down box in the upper-left corner, and then click **Project Settings** > **Network Access** in the left navigation pane.
 
 The possible statuses of a private endpoint are explained as follows:
 

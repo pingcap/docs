@@ -126,7 +126,7 @@ To enable the GTID mode for a self-hosted MySQL instance, follow these steps:
 
     > **Tip:**
     >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
 
 2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Migration** in the left navigation pane.
 
