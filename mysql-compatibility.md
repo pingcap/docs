@@ -32,15 +32,7 @@ It's important to note that TiDB does not support the MySQL replication protocol
 
 > **Note:**
 >
-> This page describes general differences between MySQL and TiDB. For more information on compatibility with MySQL in the areas of security and pessimistic transaction mode, refer to the dedicated pages on [Security](/security-compatibility-with-mysql.md) and [Pessimistic Transaction Mode](/pessimistic-transaction.md#differences-from-mysql-innodb).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-> **Note:**
->
-> For information about transaction differences between MySQL and TiDB, see [Pessimistic Transaction Mode](/pessimistic-transaction.md#differences-from-mysql-innodb).
+> This page describes general differences between MySQL and TiDB. For more information on compatibility with MySQL in the areas of security, see [Security Compatibility with MySQL](/security-compatibility-with-mysql.md).
 
 </CustomContent>
 
