@@ -296,4 +296,4 @@ The following statements for creating, modifying, and dropping resource groups h
 
 ## Differences on pessimistic transaction (lock) with MySQL InnoDB
 
-For differences on pessimistic transaction (lock)  between TiDB and MySQL InnoDB, see [Differences from MySQL InnoDB](/pessimistic-transaction.md#differences-from-mysql-innodb).
+For differences on pessimistic transaction (lock) between TiDB and MySQL InnoDB, see [Differences from MySQL InnoDB](/pessimistic-transaction.md#differences-from-mysql-innodb).
