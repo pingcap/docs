@@ -470,7 +470,7 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 ##### `task_scheduler_active_set_soft_limit` <span class="version-mark">New in v6.4.0</span>
 
 - This item is used for the MinTSO scheduler. It specifies the maximum number of queries that can run simultaneously in a TiFlash instance. For more information, see [TiFlash MinTSO Scheduler](/tiflash/tiflash-mintso-scheduler.md).
-- Default value: `0`, which means twice the number of logical CPU cores
+- Default value: Before v7.4.0, the default value is `vcpu * 0.25`, which means a quarter of the number of vCPUs. Starting from v7.4.0, the default value is `vcpu * 2`, which means twice the number of vCPUs.
 
 ##### `hashagg_use_magic_hash` <span class="version-mark">New in v9.0.0</span>
 
