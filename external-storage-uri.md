@@ -106,15 +106,11 @@ gcs://external/testfolder?credentials-file=${credentials-file-path}
 
 </CustomContent>
 
-<CustomContent platform="tidb-cloud">
-
 The following is an example of a GCS URI for [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md). In this example, you need to specify a specific filename `test.csv`.
 
 ```shell
 gcs://external/test.csv?credentials-file=${credentials-file-path}
 ```
-
-</CustomContent>
 
 ## Azure Blob Storage URI format
 
