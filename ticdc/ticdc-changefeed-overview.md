@@ -11,7 +11,7 @@ A changefeed is a replication task in TiCDC, which replicates the data change lo
 
 The state of a replication task represents the running status of the replication task. During the running of TiCDC, replication tasks might fail with errors, be manually paused, resumed, or reach the specified `TargetTs`. These behaviors can lead to the change of the replication task state. This section describes the states of TiCDC replication tasks and the transfer relationships between states.
 
-![TiCDC state transfer](/media/ticdc/ticdc-changefeed-state-transfer.png)
+![TiCDC state transfer](./media/ticdc/ticdc-changefeed-state-transfer.png)
 
 The states in the preceding state transfer diagram are described as follows:
 

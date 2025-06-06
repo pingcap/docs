@@ -61,9 +61,9 @@ TRACE FORMAT='json' SELECT * FROM mysql.user;
 
 The JSON formatted trace can be pasted into the trace viewer, which is accessed via the TiDB status port:
 
-![TiDB Trace Viewer-1](/media/trace-paste.png)
+![TiDB Trace Viewer-1](./media/trace-paste.png)
 
-![TiDB Trace Viewer-2](/media/trace-view.png)
+![TiDB Trace Viewer-2](./media/trace-view.png)
 
 ### Log
 

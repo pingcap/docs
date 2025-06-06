@@ -10,7 +10,7 @@ sync-diff-inspector supports data check in the sharding scenario. Assume that yo
 
 For scenarios where the number of upstream sharded tables is small and the naming rules of sharded tables do not have a pattern as shown below, you can use `Datasource config` to configure `table-0`, set corresponding `rules` and configure the tables that have the mapping relationship between the upstream and downstream databases. This configuration method requires setting all sharded tables.
 
-![shard-table-replica-1](/media/shard-table-replica-1.png)
+![shard-table-replica-1](./media/shard-table-replica-1.png)
 
 Below is a complete example of the sync-diff-inspector configuration.
 
@@ -78,7 +78,7 @@ target-table = "table-0"     # The name of the target table
 
 You can use `table-rules` for configuration when there are a large number of upstream sharded tables and the naming rules of all sharded tables have a pattern, as shown below:
 
-![shard-table-replica-2](/media/shard-table-replica-2.png)
+![shard-table-replica-2](./media/shard-table-replica-2.png)
 
 Below is a complete example of the sync-diff-inspector configuration.
 

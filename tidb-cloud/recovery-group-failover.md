@@ -15,7 +15,7 @@ When the regional outage is resolved, the ability to reverse the replication fro
 
 Before performing a failover, a recovery group should have been created and be successfully replicating to the secondary cluster. For more information, see [Get Started with Recovery Groups](/tidb-cloud/recovery-group-get-started.md).
 
-![Protected Recovery Group](/media/tidb-cloud/recovery-group/recovery-group-protected.png)
+![Protected Recovery Group](./media/tidb-cloud/recovery-group/recovery-group-protected.png)
 
 ## Failover databases using a recovery group
 
@@ -37,7 +37,7 @@ In the event of a disaster, you can use the recovery group to failover databases
 
 6. Confirm that you understand the potentially disruptive nature of a failover by typing **Failover** into the confirmation entry and clicking **I understand, failover group** to begin the failover.
 
-    ![Fail Over Recovery Group](/media/tidb-cloud/recovery-group/recovery-group-failover.png)
+    ![Fail Over Recovery Group](./media/tidb-cloud/recovery-group/recovery-group-failover.png)
 
 ## Reprotect databases using a recovery group
 
@@ -45,7 +45,7 @@ After a failover completes, the replica databases on the secondary cluster are n
 
 If the original primary cluster that was affected by the disaster can be brought online again, you can re-establish replication from the recovery region back to the original region using the **Reprotect** action.
 
-![Unprotected Recovery Group](/media/tidb-cloud/recovery-group/recovery-group-unprotected.png)
+![Unprotected Recovery Group](./media/tidb-cloud/recovery-group/recovery-group-unprotected.png)
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
 
@@ -66,4 +66,4 @@ If the original primary cluster that was affected by the disaster can be brought
 
 5. Confirm the reprotect operation by clicking **Reprotect** to begin the reprotect operation.
 
-    ![Reprotect Recovery Group](/media/tidb-cloud/recovery-group/recovery-group-reprotected.png)
+    ![Reprotect Recovery Group](./media/tidb-cloud/recovery-group/recovery-group-reprotected.png)

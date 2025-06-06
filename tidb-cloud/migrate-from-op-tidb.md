@@ -145,9 +145,9 @@ Create an access key in the AWS console. See [Create an access key](https://docs
 
 3. To create an access key, click **Create access key**. Then choose **Download .csv file** to save the access key ID and secret access key to a CSV file on your computer. Store the file in a secure location. You will not have access to the secret access key again after this dialog box closes. After you download the CSV file, choose **Close**. When you create an access key, the key pair is active by default, and you can use the pair right away.
 
-    ![Create access key](/media/tidb-cloud/op-to-cloud-create-access-key01.png)
+    ![Create access key](./media/tidb-cloud/op-to-cloud-create-access-key01.png)
 
-    ![Download CSV file](/media/tidb-cloud/op-to-cloud-create-access-key02.png)
+    ![Download CSV file](./media/tidb-cloud/op-to-cloud-create-access-key02.png)
 
 #### Step 3. Export data from the upstream TiDB cluster to Amazon S3 using Dumpling
 
@@ -164,11 +164,11 @@ Do the following to export data from the upstream TiDB cluster to Amazon S3 usin
 
     The following screenshot shows how to get the S3 bucket URI information:
 
-    ![Get the S3 URI](/media/tidb-cloud/op-to-cloud-copy-s3-uri.png)
+    ![Get the S3 URI](./media/tidb-cloud/op-to-cloud-copy-s3-uri.png)
 
     The following screenshot shows how to get the region information:
 
-    ![Get the region information](/media/tidb-cloud/op-to-cloud-copy-region-info.png)
+    ![Get the region information](./media/tidb-cloud/op-to-cloud-copy-region-info.png)
 
 3. Run Dumpling to export data to the Amazon S3 bucket.
 
@@ -205,7 +205,7 @@ After you export data from the TiDB Self-Managed cluster to Amazon S3, you need 
 
     The following screenshot shows how to get the Account ID and External ID:
 
-    ![Get the Account ID and External ID](/media/tidb-cloud/op-to-cloud-get-role-arn.png)
+    ![Get the Account ID and External ID](./media/tidb-cloud/op-to-cloud-get-role-arn.png)
 
 2. Configure access permissions for Amazon S3. Usually you need the following read-only permissions:
 
@@ -277,7 +277,7 @@ To replicate incremental data, do the following:
 
 1. Get the start time of the incremental data migration. For example, you can get it from the metadata file of the full data migration.
 
-    ![Start Time in Metadata](/media/tidb-cloud/start_ts_in_metadata.png)
+    ![Start Time in Metadata](./media/tidb-cloud/start_ts_in_metadata.png)
 
 2. Grant TiCDC to connect to TiDB Cloud. In the [TiDB Cloud console](https://tidbcloud.com/console/clusters), locate the cluster, and then go to the **Networking** page. Click **Add IP Address** > **Use IP addresses**. Fill in the public IP address of the TiCDC component in the **IP Address** field, and click **Confirm** to save it. Now TiCDC can access TiDB Cloud. For more information, see [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md).
 
@@ -334,7 +334,7 @@ To replicate incremental data, do the following:
          tiup cdc cli changefeed list --pd=http://172.16.6.122:2379
         ```
 
-        ![Update Filter](/media/tidb-cloud/normal_status_in_replication_task.png)
+        ![Update Filter](./media/tidb-cloud/normal_status_in_replication_task.png)
 
     - Verify the replication. Write a new record to the upstream cluster, and then check whether the record is replicated to the downstream TiDB Cloud cluster.
 

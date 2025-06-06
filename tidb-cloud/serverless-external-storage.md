@@ -53,7 +53,7 @@ It is recommended that you use [AWS CloudFormation](https://docs.aws.amazon.com/
 
     5. After the CloudFormation stack is executed, you can click the **Outputs** tab and find the Role ARN value in the **Value** column.
    
-        ![img.png](/media/tidb-cloud/serverless-external-storage/serverless-role-arn.png)
+        ![img.png](./media/tidb-cloud/serverless-external-storage/serverless-role-arn.png)
 
 If you have any trouble creating a role ARN with AWS CloudFormation, you can take the following steps to create one manually:
 
@@ -68,11 +68,11 @@ If you have any trouble creating a role ARN with AWS CloudFormation, you can tak
    
     2. In the **Buckets** list, choose the name of your bucket with the source data, and then click **Copy ARN** to get your S3 bucket ARN (for example, `arn:aws:s3:::tidb-cloud-source-data`). Take a note of the bucket ARN for later use.
 
-        ![Copy bucket ARN](/media/tidb-cloud/copy-bucket-arn.png)
+        ![Copy bucket ARN](./media/tidb-cloud/copy-bucket-arn.png)
 
     3. Open the [IAM console](https://console.aws.amazon.com/iam/), click **Policies** in the left navigation pane, and then click **Create Policy**.
 
-        ![Create a policy](/media/tidb-cloud/aws-create-policy.png)
+        ![Create a policy](./media/tidb-cloud/aws-create-policy.png)
 
     4. On the **Create policy** page, click the **JSON** tab.
    
@@ -138,7 +138,7 @@ If you have any trouble creating a role ARN with AWS CloudFormation, you can tak
 
     1. In the [IAM console](https://console.aws.amazon.com/iam/), click **Roles** in the left navigation pane, and then click **Create role**.
 
-        ![Create a role](/media/tidb-cloud/aws-create-role.png)
+        ![Create a role](./media/tidb-cloud/aws-create-role.png)
 
     2. To create a role, fill in the following information:
 
@@ -152,7 +152,7 @@ If you have any trouble creating a role ARN with AWS CloudFormation, you can tak
    
     5. In the list of roles, click the name of the role that you just created to go to its summary page, and then you can get the role ARN.
 
-        ![Copy AWS role ARN](/media/tidb-cloud/aws-role-arn.png)
+        ![Copy AWS role ARN](./media/tidb-cloud/aws-role-arn.png)
 
 </details>
 

@@ -34,23 +34,23 @@ Take the preceding three tables (t1, t2, and t3) as an example.
 
 First, TiDB obtains all the nodes that participates in the join operation, and sorts the nodes in the ascending order of row numbers.
 
-![join-reorder-1](/media/join-reorder-1.png)
+![join-reorder-1](./media/join-reorder-1.png)
 
 After that, the table with the least rows is selected and joined with other two tables respectively. By comparing the sizes of the output result sets, TiDB selects the pair with a smaller result set.
 
-![join-reorder-2](/media/join-reorder-2.png)
+![join-reorder-2](./media/join-reorder-2.png)
 
 Then TiDB enters the next round of selection. If you try to join four tables, TiDB continues to compare the sizes of the output result sets and selects the pair with a smaller result set.
 
 In this case only three tables are joined, so TiDB gets the final join result.
 
-![join-reorder-3](/media/join-reorder-3.png)
+![join-reorder-3](./media/join-reorder-3.png)
 
 ## Example: the dynamic programming algorithm of Join Reorder
 
 Taking the preceding three tables (t1, t2, and t3) as an example again, the dynamic programming algorithm can enumerate all possibilities. Therefore, comparing with the greedy algorithm, which must start with the `t1` table (the table with the least rows), the dynamic programming algorithm can enumerate a join order as follows:
 
-![join-reorder-4](/media/join-reorder-4.png)
+![join-reorder-4](./media/join-reorder-4.png)
 
 When this choice is better than the greedy algorithm, the dynamic programming algorithm can choose a better join order.
 
