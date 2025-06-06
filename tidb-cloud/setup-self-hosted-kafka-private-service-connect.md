@@ -40,7 +40,7 @@ The document provides an example of connecting to a Kafka Private Service Connec
     1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Changefeed** in the left navigation pane.
     2. On the overview page, find the region of the TiDB cluster. Ensure that your Kafka cluster will be deployed to the same region.
     3. Click **Create Changefeed**.
-        1. In **Target Type**, select **Kafka**.
+        1. In **Destination**, select **Kafka**.
         2. In **Connectivity Method**, select **Private Service Connect**.
     4. Note down the Google Cloud project in **Reminders before proceeding**. You will use it to authorize the auto-accept endpoint creation request from TiDB Cloud.
     5. Note down the **Zones of TiDB Cluster**. You will deploy your TiDB cluster in these zones. It is recommended that you deploy Kafka in these zones to reduce cross-zone traffic.
@@ -318,18 +318,18 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
 
     # Create a topic if it does not exist
     create_topic() {
-    echo "Creating topic if it does not exist..."
-    $KAFKA_DIR/kafka-topics.sh --create --topic $TOPIC --bootstrap-server $BROKER_LIST --if-not-exists --partitions 3 --replication-factor 3
+        echo "Creating topic if it does not exist..."
+        $KAFKA_DIR/kafka-topics.sh --create --topic $TOPIC --bootstrap-server $BROKER_LIST --if-not-exists --partitions 3 --replication-factor 3
     }
 
     # Produce messages to the topic
     produce_messages() {
-    echo "Producing messages to the topic..."
-    for ((chrono=1; chrono <= 10; chrono++)); do
-        message="Test message "$chrono
-        echo "Create "$message
-        echo $message | $KAFKA_DIR/kafka-console-producer.sh --broker-list $BROKER_LIST --topic $TOPIC
-    done
+        echo "Producing messages to the topic..."
+        for ((chrono=1; chrono <= 10; chrono++)); do
+            message="Test message "$chrono
+            echo "Create "$message
+            echo $message | $KAFKA_DIR/kafka-console-producer.sh --broker-list $BROKER_LIST --topic $TOPIC
+        done
     }
     create_topic
     produce_messages 
@@ -352,8 +352,8 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
     CONSUMER_GROUP="test-group"
     # Consume messages from the topic
     consume_messages() {
-    echo "Consuming messages from the topic..."
-    $KAFKA_DIR/kafka-console-consumer.sh --bootstrap-server $BROKER_LIST --topic $TOPIC --from-beginning --timeout-ms 5000 --consumer-property group.id=$CONSUMER_GROUP
+        echo "Consuming messages from the topic..."
+        $KAFKA_DIR/kafka-console-consumer.sh --bootstrap-server $BROKER_LIST --topic $TOPIC --from-beginning --timeout-ms 5000 --consumer-property group.id=$CONSUMER_GROUP
     }
     consume_messages
     ```
