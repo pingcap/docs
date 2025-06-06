@@ -293,6 +293,6 @@ The following statements for creating, modifying, and dropping resource groups h
 - [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md)
 - [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md)
 
-## Differences from MySQL InnoDB
+## Differences on pessimistic transaction (lock) with MySQL InnoDB
 
 For differences on pessimistic transaction (lock) with MySQL InnoDB, see [Differences from MySQL InnoDB](/pessimistic-transaction.md#difference-with-mysql-innodb).
