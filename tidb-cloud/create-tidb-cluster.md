@@ -45,7 +45,7 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
     > **Tip:**
     >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
 
 2. Click **Create Cluster**.
 

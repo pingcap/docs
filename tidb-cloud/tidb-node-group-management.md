@@ -72,9 +72,10 @@ To enable public connection, do the following:
 
     If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) to configure it before your first connection.
 
-4. On the **Networking** page, select your TiDB node group from the **TiDB Node Group** list in the upper-right corner.
-5. Click **Enable** in the **Public Endpoint** section, then click **Add IP Address** in the **IP Access List** section.
-6. In the upper-right corner of the **Networking** page, click **Connect** to get the connection string.
+4. In the left navigation pane, click **Settings** > **Networking**.
+5. On the **Networking** page, select your TiDB node group from the **TiDB Node Group** list in the upper-right corner.
+6. Click **Enable** in the **Public Endpoint** section, then click **Add IP Address** in the **IP Access List** section.
+7. In the upper-right corner of the **Networking** page, click **Connect** to get the connection string.
 
 ![Connect to the new TiDB node group via Public Endpoint](/media/tidb-cloud/tidb-node-group-connect-public-endpoint.png)
 
@@ -85,22 +86,23 @@ For more information, see [Connect to TiDB Cloud Dedicated via Public Connection
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 2. In the upper-right corner, click **Connect**. A connection dialog is displayed.
 3. Select your TiDB node group from the **TiDB Node Group** list and **Private Endpoint** from the **Connection Type** list.
-4. In the left navigation pane, click **Networking**, and then select your TiDB node group from the **TiDB Node Group** list in the upper-right corner.
-5. Click **Create Private Endpoint Connection** to create a new connection for this node group. For clusters deployed on AWS, refer to [Connect to a TiDB Cloud Dedicated Cluster via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections.md). For clusters deployed on Google Cloud, refer to [Connect to a TiDB Cloud Dedicated Cluster via Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md).
+4. In the left navigation pane, click **Settings** > **Networking**.
+5. On the **Networking** page, select your TiDB node group from the **TiDB Node Group** list in the upper-right corner.
+6. Click **Create Private Endpoint Connection** to create a new connection for this node group. For clusters deployed on AWS, refer to [Connect to a TiDB Cloud Dedicated Cluster via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections.md). For clusters deployed on Google Cloud, refer to [Connect to a TiDB Cloud Dedicated Cluster via Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md).
 
     > **Note**:
     >
     > If you use Private Link to connect different node groups, you need to create separated private endpoint connection for each node group. 
 
-6. After creating the private endpoint connection, click **Connect** in the upper-right corner of the page to get the connection string.
+7. After creating the private endpoint connection, click **Connect** in the upper-right corner of the page to get the connection string.
 
 ### Connect via VPC peering
 
 Because all TiDB node groups share the same VPC as the cluster, you only need to create one VPC peering connection to enable access for all groups.
 
-1. Follow the instructions in [Connect to TiDB Cloud Dedicated via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to create a VPC peering for this cluster. 
+1. Follow the instructions in [Connect to TiDB Cloud Dedicated via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to create a VPC peering for this cluster.
 2. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
-3. In the left navigation pane, click **Networking**. 
+3. In the left navigation pane, click **Settings** > **Networking**.
 4. In the upper-right corner of the **Networking** page, click **Connect** to get the connection string.
 
 ## View TiDB node groups

@@ -42,7 +42,7 @@ You can import the S&P 500 dataset provided in the interactive tutorial of TiDB 
 If you encounter any issues during import, you can cancel this import task as follows:
 
 1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your TiDB Cloud Serverless cluster to go to its overview page.
-2. In the left navigation pane, click **Import**. 
+2. In the left navigation pane, click **Data** > **Import**.
 3. Find the import task named **sp500-insight**, click **...** in the **Action** column, and then click **Cancel**.
 
 ## Step 2. Get the connection information for your cluster
