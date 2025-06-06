@@ -60,7 +60,7 @@ tiup cdc:v7.5.0 cli changefeed create \
 
     - `access-key`: Specifies the access key.
     - `secret-access-key`: Specifies the secret access key.
-    - `session-token`: Specifies the temporary session token. For backup and restore, this parameter is supported starting from v7.6.0.
+    - `session-token`: Specifies the temporary session token.
     - `use-accelerate-endpoint`: Specifies whether to use the accelerate endpoint on Amazon S3 (defaults to `false`).
     - `endpoint`: Specifies the URL of custom endpoint for S3-compatible services (for example, `<https://s3.example.com/>`).
     - `force-path-style`: Use path style access rather than virtual hosted style access (defaults to `true`).
@@ -68,7 +68,7 @@ tiup cdc:v7.5.0 cli changefeed create \
     - `sse`: Specifies the server-side encryption algorithm used to encrypt the uploaded objects (value options: empty, `AES256`, or `aws:kms`).
     - `sse-kms-key-id`: Specifies the KMS ID if `sse` is set to `aws:kms`.
     - `acl`: Specifies the canned ACL of the uploaded objects (for example, `private` or `authenticated-read`).
-    - `role-arn`: To allow TiDB Cloud to access Amazon S3 data using a specified [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html), specify the corresponding [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the IAM role using the `role-arn` URL query parameter, such as `arn:aws:iam::888888888888:role/my-role`. For backup and restore, this parameter is supported starting from v7.6.0.
+    - `role-arn`: To allow TiDB Cloud to access Amazon S3 data using a specified [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html), specify the corresponding [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the IAM role using the `role-arn` URL query parameter, such as `arn:aws:iam::888888888888:role/my-role`. 
 
         > **Note:**
         >
@@ -106,15 +106,11 @@ gcs://external/testfolder?credentials-file=${credentials-file-path}
 
 </CustomContent>
 
-<CustomContent platform="tidb-cloud">
-
 The following is an example of a GCS URI for [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md). In this example, you need to specify a specific filename `test.csv`.
 
 ```shell
 gcs://external/test.csv?credentials-file=${credentials-file-path}
 ```
-
-</CustomContent>
 
 ## Azure Blob Storage URI format
 
