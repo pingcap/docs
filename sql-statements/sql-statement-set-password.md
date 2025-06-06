@@ -8,11 +8,19 @@ aliases: ['/docs/dev/sql-statements/sql-statement-set-password/','/docs/dev/refe
 
 This statement changes the user password for a user account in the TiDB system database.
 
+> **Note:**
+>
+> It is recommended to change the password by using the [`ALTER USER`](/sql-statements/sql-statement-alter-user.md) statement as follows:
+>
+> ```sql
+> ALTER USER myuser IDENTIFIED BY 'mypassword';
+> ```
+
 ## Synopsis
 
 ```ebnf+diagram
 SetPasswordStmt ::=
-    "SET" "PASSWORD" ( "FOR" Username )? "=" ( stringLit | "PASSWORD" "(" stringLit ")" )
+    "SET" "PASSWORD" ( "FOR" Username )? "=" stringLit
 ```
 
 ## Examples
@@ -34,17 +42,6 @@ mysql> SHOW CREATE USER 'newuser';
 
 mysql> SET PASSWORD FOR newuser = 'test';
 Query OK, 0 rows affected (0.01 sec)
-
-mysql> SHOW CREATE USER 'newuser';
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| CREATE USER for newuser@%                                                                                                                                            |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| CREATE USER 'newuser'@'%' IDENTIFIED WITH 'mysql_native_password' AS '*94BDCEBE19083CE2A1F959FD02F964C7AF4CFC29' REQUIRE NONE PASSWORD EXPIRE DEFAULT ACCOUNT UNLOCK |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-1 row in set (0.00 sec)
-
-mysql> SET PASSWORD FOR newuser = PASSWORD('test'); -- deprecated syntax from earlier MySQL releases
-Query OK, 0 rows affected (0.00 sec)
 
 mysql> SHOW CREATE USER 'newuser';
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
