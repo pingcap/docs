@@ -13,7 +13,7 @@ TiDB is highly compatible with the MySQL protocol and the common features and sy
 
 <CustomContent platform="tidb-cloud">
 
-TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 5.7 and MySQL 8.0. The ecosystem tools for MySQL (PHPMyAdmin, Navicat, MySQL Workbench, DBeaver and [more](https://docs.pingcap.com/tidb/v7.2/dev-guide-third-party-support#gui)) and the MySQL client can be used for TiDB.
+TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 5.7 and MySQL 8.0. The ecosystem tools for MySQL (PHPMyAdmin, Navicat, MySQL Workbench, DBeaver and [more](https://docs.pingcap.com/tidb/stable/dev-guide-third-party-support#gui)) and the MySQL client can be used for TiDB.
 
 </CustomContent>
 
@@ -32,15 +32,7 @@ It's important to note that TiDB does not support the MySQL replication protocol
 
 > **Note:**
 >
-> This page describes general differences between MySQL and TiDB. For more information on compatibility with MySQL in the areas of security and pessimistic transaction mode, refer to the dedicated pages on [Security](/security-compatibility-with-mysql.md) and [Pessimistic Transaction Mode](/pessimistic-transaction.md#difference-with-mysql-innodb).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-> **Note:**
->
-> For information about transaction differences between MySQL and TiDB, see [Pessimistic Transaction Mode](/pessimistic-transaction.md#difference-with-mysql-innodb).
+> This page describes general differences between MySQL and TiDB. For more information on compatibility with MySQL in the areas of security, see [Security Compatibility with MySQL](/security-compatibility-with-mysql.md).
 
 </CustomContent>
 
@@ -292,3 +284,7 @@ The following statements for creating, modifying, and dropping resource groups h
 - [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md)
 - [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md)
 - [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md)
+
+## Differences on pessimistic transaction (lock) with MySQL InnoDB
+
+For differences on pessimistic transaction (lock) between TiDB and MySQL InnoDB, see [Differences from MySQL InnoDB](/pessimistic-transaction.md#differences-from-mysql-innodb).
