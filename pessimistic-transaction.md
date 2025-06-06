@@ -39,7 +39,7 @@ The `BEGIN PESSIMISTIC;` and `BEGIN OPTIMISTIC;` statements take precedence over
 
 ## Behaviors
 
-Pessimistic transactions in TiDB behave similarly to those in MySQL. See the minor differences in [Difference with MySQL InnoDB](#difference-with-mysql-innodb).
+Pessimistic transactions in TiDB behave similarly to those in MySQL. See the minor differences in [Differences from MySQL InnoDB](#differences-from-mysql-innodb).
 
 - For pessimistic transactions, TiDB introduces snapshot read and current read.
 
