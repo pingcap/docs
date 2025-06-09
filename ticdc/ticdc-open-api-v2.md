@@ -92,7 +92,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/status
 
 ```json
 {
-  "version": "v8.4.0",
+  "version": "{{{ .tidb-version }}}",
   "git_hash": "10413bded1bdb2850aa6d7b94eb375102e9c44dc",
   "id": "d2912e63-3349-447c-90ba-72a4e04b5e9e",
   "pid": 1447,
@@ -773,7 +773,7 @@ This API is a synchronous interface. If the request is successful, it returns th
 
 ### Request URI
 
-`GET /api/v2/changefeed/{changefeed_id}/synced`
+`GET /api/v2/changefeeds/{changefeed_id}/synced`
 
 ### Parameter description
 
@@ -788,7 +788,7 @@ This API is a synchronous interface. If the request is successful, it returns th
 The following request queries the synchronization status of the replication task with the ID `test1`.
 
 ```shell
-curl -X GET http://127.0.0.1:8300/api/v2/changefeed/test1/synced
+curl -X GET http://127.0.0.1:8300/api/v2/changefeeds/test1/synced
 ```
 
 **Example 1: The synchronization is completed**

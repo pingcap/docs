@@ -46,7 +46,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `ADMIN PLUGINS ENABLE` | Supported | Not supported [^8] |
 | `ADMIN PLUGINS DISABLE` | Supported | Not supported [^8] |
 | `ALTER INSTANCE RELOAD TLS` | Supported | TiDB Cloud Serverless automatically refreshes the TLS certificate. |
-| `LOAD DATA INFILE` | Only supports `LOAD DATA LOCAL INFILE` | Only supports `LOAD DATA LOCAL INFILE` |
+| `LOAD DATA INFILE` | Supports `LOAD DATA LOCAL INFILE`, and `LOAD DATA INFILE` from Amazon S3 or Google Cloud Storage | Only supports `LOAD DATA LOCAL INFILE` |
 | `CHANGE DRAINER` | Not supported [^7] | Not supported [^7] |
 | `CHANGE PUMP` | Not supported [^7] | Not supported [^7] |
 | `FLASHBACK CLUSTER` | Supported | Not supported [^3] |
@@ -157,7 +157,6 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `tidb_force_priority` | Not supported [^4] | Not supported [^4] |
 | `tidb_gc_concurrency` | No limitation | Read-only [^10] |
 | `tidb_gc_enable` | No limitation | Read-only [^10] |
-| `tidb_gc_life_time` | No limitation | Read-only [^10] |
 | `tidb_gc_max_wait_time` | No limitation | Read-only [^10] |
 | `tidb_gc_run_interval` | No limitation | Read-only [^10] |
 | `tidb_gc_scan_lock_mode` | No limitation | Read-only [^10] |
@@ -206,7 +205,6 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `tidb_txn_mode` | No limitation | Read-only [^10] |
 | `tidb_wait_split_region_finish` | No limitation | Read-only [^10] |
 | `tidb_wait_split_region_timeout` | No limitation | Read-only [^10] |
-| `txn_scope` | No limitation | Read-only [^10] |
 | `validate_password.enable` | No limitation | Always enabled [^9] |
 | `validate_password.length` | No limitation | At least `8` [^9] |
 | `validate_password.mixed_case_count` | No limitation | At least `1` [^9] |

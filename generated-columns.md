@@ -156,3 +156,8 @@ The current limitations of JSON and generated columns are as follows:
 - Not all [JSON functions](/functions-and-operators/json-functions.md) are supported.
 - The [`NULLIF()` function](/functions-and-operators/control-flow-functions.md#nullif) is not supported. You can use the [`CASE` function](/functions-and-operators/control-flow-functions.md#case) instead.
 - Currently, the generated column index replacement rule is valid only when the generated column is a virtual generated column. It is not valid on the stored generated column, but the index can still be used by directly using the generated column itself.
+- The following functions and expressions are not allowed in generated column definitions, and TiDB returns errors if they are used:
+
+    - Non-deterministic functions and expressions, such as `RAND`, `UUID`, and `CURRENT_TIMESTAMP`.
+    - Functions that depend on session-specific or global state, such as `CONNECTION_ID` and `CURRENT_USER`.
+    - Functions that affect the system state or perform system interactions, such as `GET_LOCK`, `RELEASE_LOCK`, and `SLEEP`.

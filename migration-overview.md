@@ -44,6 +44,12 @@ If the data size of the sharded tables is large (for example, larger than 1 TiB)
 
 - [Migrate and Merge MySQL Shards of Large Datasets to TiDB](/migrate-large-mysql-shards-to-tidb.md)
 
+## Migrate data from Vitess to TiDB
+
+To migrate data from Vitess to TiDB, the following guide is available:
+
+- [Migrate Data from Vitess to TiDB](/migrate-from-vitess.md)
+
 ## Migrate data from files to TiDB
 
 - [Migrate data from CSV files to TiDB](/migrate-from-csv-files-to-tidb.md)

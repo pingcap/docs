@@ -53,6 +53,11 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 
 * In v5.1 and later versions, setting the replicas for the system tables is no longer supported. Before upgrading the cluster, you need to clear the replicas of the relevant system tables. Otherwise, you cannot modify the replica settings of the system tables after you upgrade the cluster to a later version.
 
+* Currently, when you use TiCDC to replicate tables to a downstream TiDB cluster, creating TiFlash replicas for the tables is not supported, which means that TiCDC does not support replicating TiFlash-related DDL statements, such as:
+
+    * `ALTER TABLE table_name SET TIFLASH REPLICA count;`
+    * `ALTER DATABASE db_name SET TIFLASH REPLICA count;`
+
 ### Check replication progress
 
 You can check the status of the TiFlash replicas of a specific table using the following statement. The table is specified using the `WHERE` clause. If you remove the `WHERE` clause, you will check the replica status of all tables.
@@ -103,6 +108,8 @@ Examples:
 >
 > - This statement skips system tables, views, temporary tables, and tables with character sets not supported by TiFlash.
 
+> - You can control the number of tables allowed to remain unavailable during execution by setting the [`tidb_batch_pending_tiflash_count`](/system-variables.md#tidb_batch_pending_tiflash_count-new-in-v60) system variable. Lowering this value helps reduce the pressure on the cluster during replication. Note that this limit is not real-time, so it is still possible for the number of unavailable tables to exceed the limit after the setting is applied.
+
 ### Check replication progress
 
 Similar to creating TiFlash replicas for tables, successful execution of the DDL statement does not mean the completion of replication. You can execute the following SQL statement to check the progress of replication on target tables:
@@ -147,10 +154,10 @@ Before TiFlash replicas are added, each TiKV instance performs a full table scan
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 add-peer
     ```
 
-    > In the preceding command, you need to replace `v<CLUSTER_VERSION>` with the actual cluster version, such as `v8.4.0` and `<PD_ADDRESS>:2379` with the address of any PD node. For example:
+    > In the preceding command, you need to replace `v<CLUSTER_VERSION>` with the actual cluster version, such as `v8.5.0` and `<PD_ADDRESS>:2379` with the address of any PD node. For example:
     >
     > ```shell
-    > tiup ctl:v8.4.0 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
+    > tiup ctl:v8.5.0 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
     > ```
 
     Within a few minutes, you will observe a significant increase in CPU and disk IO resource usage of the TiFlash nodes, and TiFlash should create replicas faster. At the same time, the TiKV nodes' CPU and disk IO resource usage increases as well.

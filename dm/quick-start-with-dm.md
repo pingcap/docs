@@ -1,178 +1,476 @@
 ---
-title: TiDB Data Migration Quick Start
-summary: Learn how to quickly deploy a DM cluster using binary packages.
+title: Quick Start with TiDB Data Migration
+summary: Learn how to quickly set up a data migration environment using TiUP Playground.
 aliases: ['/docs/tidb-data-migration/dev/get-started/']
 ---
 
-# Quick Start Guide for TiDB Data Migration
+# Quick Start with TiDB Data Migration
 
-This document describes how to migrate data from MySQL to TiDB using [TiDB Data Migration (DM)](/dm/dm-overview.md). This guide is a quick demo of DM features and is not recommended for any production environment.
+[TiDB Data Migration (DM)](/dm/dm-overview.md) is a powerful tool that replicates data from MySQL-compatible databases to TiDB. This guide shows you how to quickly set up a local TiDB DM environment for development or testing using [TiUP Playground](/tiup/tiup-playground.md), and walks you through a simple task of migrating data from a source MySQL database to a target TiDB database.
 
-## Step 1: Deploy a DM cluster
+> **Note:**
+>
+> For production deployments, see [Deploy a DM Cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md).
 
-1. Install TiUP, and install [`dmctl`](/dm/dmctl-introduction.md) using TiUP:
+## Step 1: Set up the test environment
 
-    {{< copyable "shell-regular" >}}
+[TiUP](/tiup/tiup-overview.md) is a cluster operation and maintenance tool. Its Playground feature lets you quickly launch a temporary local environment with a TiDB database and TiDB DM for development and testing.
+
+1. Install TiUP:
 
     ```shell
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
-    tiup install dm dmctl
     ```
 
-2. Generate the minimal deployment topology file of a DM cluster:
+    > **Note:**
+    >
+    > If you have an existing installation of TiUP, ensure it is updated to v1.16.1 or later to use the `--dm-master` and `--dm-worker` flags. To check your current version, run the following command:
+    >
+    > ```shell
+    > tiup --version
+    > ```
+    >
+    > To upgrade TiUP to the latest version, run the following command:
+    >
+    > ```shell
+    > tiup update --self
+    > ```
 
-    {{< copyable "shell-regular" >}}
-
-    ```
-    tiup dm template
-    ```
-
-3. Copy the configuration information in the output, and save it as the `topology.yaml` file with the modified IP address. Deploy the DM cluster with the `topology.yaml` file using TiUP:
-
-    {{< copyable "shell-regular" >}}
+2. Start TiUP Playground with a target TiDB database and DM components:
 
     ```shell
-    tiup dm deploy dm-test 6.0.0 topology.yaml -p
+    tiup playground --dm-master 1 --dm-worker 1 --tiflash 0 --without-monitor
     ```
 
-## Step 2: Prepare the data source
+3. Verify the environment by checking in the output whether TiDB and DM are running:
 
-You can use one or multiple MySQL instances as an upstream data source.
+    ```text
+    TiDB Playground Cluster is started, enjoy!
 
-1. Create a configuration file for each data source as follows:
+    Connect TiDB:    mysql --host 127.0.0.1 --port 4000 -u root
+    Connect DM:      tiup dmctl --master-addr 127.0.0.1:8261
+    TiDB Dashboard:  http://127.0.0.1:2379/dashboard
+    ```
 
-    {{< copyable "shell-regular" >}}
+4. Keep `tiup playground` running in the current terminal and open a new terminal for the following steps.
+
+    This playground environment provides the running processes for the target TiDB database and the replication engine (DM-master and DM-worker). It will handle the data flow: MySQL (source) → DM (replication engine) → TiDB (target).
+
+## Step 2: Prepare a source database (optional)
+
+You can use one or more MySQL instances as a source database. If you already have a MySQL-compatible instance, skip to [Step 3](#step-3-configure-a-tidb-dm-source). Otherwise, take the following steps to create one for testing.
+
+<SimpleTab groupId="os">
+
+<div label="Docker" value="docker">
+
+You can use Docker to quickly deploy a test MySQL 8.0 instance.
+
+1. Run a MySQL 8.0 Docker container:
+
+    ```shell
+    docker run --name mysql80 \
+        -e MYSQL_ROOT_PASSWORD=MyPassw0rd! \
+        -p 3306:3306 \
+        -d mysql:8.0
+    ```
+
+2. Connect to MySQL:
+
+    ```shell
+    docker exec -it mysql80 mysql -uroot -pMyPassw0rd!
+    ```
+
+3. Create a dedicated user with required privileges for DM testing:
+
+    ```sql
+    CREATE USER 'tidb-dm'@'%'
+        IDENTIFIED WITH mysql_native_password
+        BY 'MyPassw0rd!';
+
+    GRANT PROCESS, BACKUP_ADMIN, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT, SELECT ON *.* TO 'tidb-dm'@'%';
+    ```
+
+4. Create sample data:
+
+    ```sql
+    CREATE DATABASE hello;
+    USE hello;
+
+    CREATE TABLE hello_tidb (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(50)
+    );
+
+    INSERT INTO hello_tidb (name) VALUES ('Hello World');
+
+    SELECT * FROM hello_tidb;
+    ```
+
+</div>
+
+<div label="macOS" value="macos">
+
+On macOS, you can quickly install and start MySQL 8.0 locally using [Homebrew](https://brew.sh).
+
+1. Update Homebrew and install MySQL 8.0:
+
+    ```shell
+    brew update
+    brew install mysql@8.0
+    ```
+
+2. Make MySQL commands accessible in the system path:
+
+    ```shell
+    brew link mysql@8.0 --force
+    ```
+
+3. Start the MySQL service:
+
+    ```shell
+    brew services start mysql@8.0
+    ```
+
+4. Connect to MySQL as the `root` user:
+
+    ```shell
+    mysql -uroot
+    ```
+
+5. Create a dedicated user with required privileges for DM testing:
+
+    ```sql
+    CREATE USER 'tidb-dm'@'%'
+        IDENTIFIED WITH mysql_native_password
+        BY 'MyPassw0rd!';
+
+    GRANT PROCESS, BACKUP_ADMIN, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT, SELECT ON *.* TO 'tidb-dm'@'%';
+    ```
+
+6. Create sample data:
+
+    ```sql
+    CREATE DATABASE hello;
+    USE hello;
+
+    CREATE TABLE hello_tidb (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(50)
+    );
+
+    INSERT INTO hello_tidb (name) VALUES ('Hello World');
+
+    SELECT * FROM hello_tidb;
+    ```
+
+</div>
+
+<div label="CentOS" value="centos">
+
+On Enterprise Linux distributions like CentOS, you can install MySQL 8.0 from the MySQL Yum repository.
+
+1. Download and install the MySQL Yum repository package from [MySQL Yum repository download page](https://dev.mysql.com/downloads/repo/yum). For Linux versions other than 9, you must replace the `el9` (Enterprise Linux version 9) in the following URL while keeping `mysql80` for MySQL version 8.0:
+
+    ```shell
+    sudo yum install -y https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
+    ```
+
+2. Install MySQL:
+
+    ```shell
+    sudo yum install -y mysql-community-server --nogpgcheck
+    ```
+
+3. Start MySQL:
+
+    ```shell
+    sudo systemctl start mysqld
+    ```
+
+4. Find the temporary root password in the MySQL log:
+
+    ```shell
+    sudo grep 'temporary password' /var/log/mysqld.log
+    ```
+
+5. Connect to MySQL as the `root` user with the temporary password:
+
+    ```shell
+    mysql -uroot -p
+    ```
+
+6. Reset the `root` password:
+
+    ```sql
+    ALTER USER 'root'@'localhost'
+        IDENTIFIED BY 'MyPassw0rd!';
+    ```
+
+7. Create a dedicated user with required privileges for DM testing:
+
+    ```sql
+    CREATE USER 'tidb-dm'@'%'
+        IDENTIFIED WITH mysql_native_password
+        BY 'MyPassw0rd!';
+
+    GRANT PROCESS, BACKUP_ADMIN, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT, SELECT ON *.* TO 'tidb-dm'@'%';
+    ```
+
+8. Create sample data:
+
+    ```sql
+    CREATE DATABASE hello;
+    USE hello;
+
+    CREATE TABLE hello_tidb (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(50)
+    );
+
+    INSERT INTO hello_tidb (name) VALUES ('Hello World');
+
+    SELECT * FROM hello_tidb;
+    ```
+
+</div>
+
+<div label="Ubuntu" value="ubuntu">
+
+On Ubuntu, you can install MySQL from the official Ubuntu repository.
+
+1. Update your package list:
+
+    ```shell
+    sudo apt-get update
+    ```
+
+2. Install MySQL:
+
+    ```shell
+    sudo apt-get install -y mysql-server
+    ```
+
+3. Check whether the `mysql` service is running, and start the service if necessary:
+
+    ```shell
+    sudo systemctl status mysql
+    sudo systemctl start mysql
+    ```
+
+4. Connect to MySQL as the `root` user using socket authentication:
+
+    ```shell
+    sudo mysql
+    ```
+
+5. Create a dedicated user with required privileges for DM testing:
+
+    ```sql
+    CREATE USER 'tidb-dm'@'%'
+        IDENTIFIED WITH mysql_native_password
+        BY 'MyPassw0rd!';
+
+    GRANT PROCESS, BACKUP_ADMIN, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT, SELECT ON *.* TO 'tidb-dm'@'%';
+    ```
+
+6. Create sample data:
+
+    ```sql
+    CREATE DATABASE hello;
+    USE hello;
+
+    CREATE TABLE hello_tidb (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(50)
+    );
+
+    INSERT INTO hello_tidb (name) VALUES ('Hello World');
+
+    SELECT * FROM hello_tidb;
+    ```
+
+</div>
+
+</SimpleTab>
+
+## Step 3: Configure a TiDB DM source
+
+After preparing the source MySQL database, configure TiDB DM to connect to it. To do this, create a source configuration file with the connection details and apply the configuration using the `dmctl` tool.
+
+1. Create a source configuration file `mysql-01.yaml`:
+
+    > **Note:**
+    >
+    > This step assumes you have already created the `tidb-dm` user with replication privileges in the source database, as described in [Step 2](#step-2-prepare-a-source-database-optional).
 
     ```yaml
     source-id: "mysql-01"
     from:
       host: "127.0.0.1"
-      user: "root"
-      password: "fCxfQ9XKCezSzuCD0Wf5dUD+LsKegSg="
+      user: "tidb-dm"
+      password: "MyPassw0rd!"    # In production environments, it is recommended to use a password encrypted with dmctl.
       port: 3306
     ```
 
-2. Add the source to the DM cluster by running the following command. `mysql-01.yaml` is the configuration file created in the previous step.
-
-    {{< copyable "shell-regular" >}}
-
-    ```bash
-    tiup dmctl --master-addr=127.0.0.1:8261 operate-source create mysql-01.yaml # use one of master_servers as the argument of --master-addr
-    ```
-
-If you do not have a MySQL instance for testing, you can create a MySQL instance in Docker by taking the following steps:
-
-1. Create a MySQL configuration file:
-
-    {{< copyable "shell-regular" >}}
+2. Create a DM data source:
 
     ```shell
-    mkdir -p /tmp/mysqltest && cd /tmp/mysqltest
-
-    cat > my.cnf <<EOF
-    [mysqld]
-    bind-address     = 0.0.0.0
-    character-set-server=utf8
-    collation-server=utf8_bin
-    default-storage-engine=INNODB
-    transaction-isolation=READ-COMMITTED
-    server-id        = 100
-    binlog_format    = row
-    log_bin          = /var/lib/mysql/mysql-bin.log
-    show_compatibility_56 = ON
-    EOF
+    tiup dmctl --master-addr 127.0.0.1:8261 operate-source create mysql-01.yaml
     ```
 
-2. Start the MySQL instance using Docker:
+## Step 4: Create a TiDB DM task
 
-    {{< copyable "shell-regular" >}}
+After configuring the source database, you can create a migration task in TiDB DM. This task references the source MySQL instance and defines the connection details for the target TiDB database.
 
-    ```shell
-    docker run --name mysql-01 -v /tmp/mysqltest:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=my-secret-pw -d -p 3306:3306 mysql:5.7
-    ```
-
-3. After the MySQL instance is started, access the instance:
-
-    > **Note:**
-    >
-    > This command is only suitable for trying out data migration, and cannot be used in production environments or stress tests.
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    mysql -uroot -p -h 127.0.0.1 -P 3306
-    ```
-
-## Step 3: Prepare a downstream database
-
-You can choose an existing TiDB cluster as a target for data migration.
-
-If you do not have a TiDB cluster for testing, you can quickly build a demonstration environment by running the following command:
-
-{{< copyable "shell-regular" >}}
-
-```shell
-tiup playground
-```
-
-## Step 4: Prepare test data
-
-Create a test table and data in one or multiple data sources. If you use an existing MySQL database, and the database contains available data, you can skip this step.
-
-{{< copyable "sql" >}}
-
-```sql
-drop database if exists `testdm`;
-create database `testdm`;
-use `testdm`;
-create table t1 (id bigint, uid int, name varchar(80), info varchar(100), primary key (`id`), unique key(`uid`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-create table t2 (id bigint, uid int, name varchar(80), info varchar(100), primary key (`id`), unique key(`uid`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-insert into t1 (id, uid, name) values (1, 10001, 'Gabriel García Márquez'), (2, 10002, 'Cien años de soledad');
-insert into t2 (id, uid, name) values (3, 20001, 'José Arcadio Buendía'), (4, 20002, 'Úrsula Iguarán'), (5, 20003, 'José Arcadio');
-```
-
-## Step 5: Create a data migration task
-
-1. Create a task configuration file `testdm-task.yaml`:
-
-    {{< copyable "" >}}
+1. Create a DM task configuration file `tiup-playground-task.yaml`:
 
     ```yaml
-    name: testdm
-    task-mode: all
+    # Task
+    name: tiup-playground-task
+    task-mode: "all"              # Execute all phases - full data migration and incremental sync.
 
+    # Source (MySQL)
+    mysql-instances:
+      - source-id: "mysql-01"
+
+    ## Target (TiDB)
     target-database:
       host: "127.0.0.1"
       port: 4000
       user: "root"
-      password: "" # If the password is not empty, it is recommended to use a password encrypted with dmctl.
-
-    # Configure the information of one or multiple data sources
-    mysql-instances:
-      - source-id: "mysql-01"
-        block-allow-list:  "ba-rule1"
-
-    block-allow-list:
-      ba-rule1:
-        do-dbs: ["testdm"]
+      password: ""                # If the password is not empty, it is recommended to use a password encrypted with dmctl.
     ```
 
-2. Create the task using dmctl:
+2. Start the task using the configuration file:
 
-    {{< copyable "shell-regular" >}}
-
-    ```bash
-    tiup dmctl --master-addr 127.0.0.1:8261 start-task testdm-task.yaml
+    ```shell
+    tiup dmctl --master-addr 127.0.0.1:8261 start-task tiup-playground-task.yaml
     ```
 
-You have successfully created a task that migrates data from a `mysql-01` database to TiDB.
+## Step 5: Verify the data replication
 
-## Step 6: Check the status of the task
+After starting the migration task, verify whether data replication is working as expected. Use the `dmctl` tool to check the task status, and connect to the target TiDB database to confirm that the data has been successfully replicated from the source MySQL database.
 
-After the task is created, you can use the `dmctl query-status` command to check the status of the task:
+1. Check the status of the TiDB DM task:
 
-{{< copyable "shell-regular" >}}
+    ```shell
+    tiup dmctl --master-addr 127.0.0.1:8261 query-status
+    ```
 
-```bash
-tiup dmctl --master-addr 127.0.0.1:8261 query-status testdm
-```
+2. Connect to the target TiDB database:
+
+    ```shell
+    mysql --host 127.0.0.1 --port 4000 -u root --prompt 'tidb> '
+    ```
+
+3. Verify the replicated data. If you have created the sample data in [Step 2](#step-2-prepare-a-source-database-optional), you will see the `hello_tidb` table replicated from the MySQL source database to the target TiDB database:
+
+    ```sql
+    SELECT * FROM hello.hello_tidb;
+    ```
+
+    The output is as follows:
+
+    ```sql
+    +----+-------------+
+    | id | name        |
+    +----+-------------+
+    |  1 | Hello World |
+    +----+-------------+
+    1 row in set (0.00 sec)
+    ```
+
+## Step 6: Clean up (optional)
+
+After completing your testing, you can clean up the environment by stopping the TiUP Playground, removing the source MySQL instance (if created for testing), and deleting unnecessary files.
+
+1. Stop the TiUP Playground:
+
+    In the terminal where the TiUP Playground is running, press <kbd>Control</kbd>+<kbd>C</kbd> to terminate the process. This stops all TiDB and DM components and deletes the target environment.
+
+2. Stop and remove the source MySQL instance:
+
+    If you have created a source MySQL instance for testing in [Step 2](#step-2-prepare-a-source-database-optional), stop and remove it by taking the following steps:
+
+    <SimpleTab groupId="os">
+
+    <div label="Docker" value="docker">
+
+    To stop and remove the Docker container:
+
+    ```shell
+    docker stop mysql80
+    docker rm mysql80
+    ```
+
+    </div>
+
+    <div label="macOS" value="macos">
+
+    If you installed MySQL 8.0 using Homebrew solely for testing, stop the service and uninstall it:
+
+    ```shell
+    brew services stop mysql@8.0
+    brew uninstall mysql@8.0
+    ```
+
+    > **Note:**
+    >
+    > If you want to remove all MySQL data files, delete the MySQL data directory (commonly located at `/opt/homebrew/var/mysql`).
+
+    </div>
+
+    <div label="CentOS" value="centos">
+
+    If you installed MySQL 8.0 from the MySQL Yum repository solely for testing, stop the service and uninstall it:
+
+    ```shell
+    sudo systemctl stop mysqld
+    sudo yum remove -y mysql-community-server
+    ```
+
+    > **Note:**
+    >
+    > If you want to remove all MySQL data files, delete the MySQL data directory (commonly located at `/var/lib/mysql`).
+
+    </div>
+
+    <div label="Ubuntu" value="ubuntu">
+
+    If you installed MySQL from the official Ubuntu repository solely for testing, stop the service and uninstall it:
+
+    ```shell
+    sudo systemctl stop mysql
+    sudo apt-get remove --purge -y mysql-server
+    sudo apt-get autoremove -y
+    ```
+
+    > **Note:**
+    >
+    > If you want to remove all MySQL data files, delete the MySQL data directory (commonly located at `/var/lib/mysql`).
+
+    </div>
+
+    </SimpleTab>
+
+3. Remove the TiDB DM configuration files if they are no longer needed:
+
+    ```shell
+    rm mysql-01.yaml tiup-playground-task.yaml
+    ```
+
+4. If you no longer need TiUP, you can uninstall it:
+
+    ```shell
+    rm -rf ~/.tiup
+    ```
+
+## What's next
+
+Now that you successfully created a task that migrates data from a source MySQL database to a target TiDB database in a testing environment, you can:
+
+- Explore [TiDB DM Features](/dm/dm-overview.md)
+- Learn about [TiDB DM Architecture](/dm/dm-arch.md)
+- Set up [TiDB DM for a Proof of Concept or Production](/dm/deploy-a-dm-cluster-using-tiup.md)
+- Configure advanced [DM Tasks](/dm/dm-task-configuration-guide.md)

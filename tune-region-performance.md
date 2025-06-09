@@ -43,10 +43,6 @@ After Regions are set to a larger size, if you want to further improve the query
 
 ## Use the Active PD Follower feature to enhance the scalability of PD's Region information query service
 
-> **Warning:**
->
-> The Active PD Follower feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 In a TiDB cluster with a large number of Regions, the PD leader might experience high CPU load due to the increased overhead of handling heartbeats and scheduling tasks. If the cluster has many TiDB instances, and there is a high concurrency of requests for Region information, the CPU pressure on the PD leader increases further and might cause PD services to become unavailable.
 
 To ensure high availability, the PD leader synchronizes Region information with its followers in real time. PD followers maintain and store Region information in memory, enabling them to process Region information requests. You can enable the Active PD Follower feature by setting the system variable [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760) to `ON`. After this feature is enabled, TiDB evenly distributes Region information requests to all PD servers, and PD followers can also directly handle Region requests, thereby reducing the CPU pressure on the PD leader.

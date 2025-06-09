@@ -56,14 +56,14 @@ Log in to the database by running the following command:
 mysql -u root -h ${tidb_server_host_IP_address} -P 4000
 ```
 
-`${tidb_server_host_IP_address}` is one of the IP addresses set for `tidb_servers` when you [initialize the cluster topology file](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file), such as `10.0.1.7`.
+`${tidb_server_host_IP_address}` is one of the IP addresses set for `tidb_servers` when you [initialize the cluster topology file](/production-deployment-using-tiup.md#step-3-initialize-the-cluster-topology-file), such as `10.0.1.7`.
 
 The following information indicates successful login:
 
 ```sql
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 3
-Server version: 8.0.11-TiDB-v8.4.0 TiDB Server (Apache License 2.0) Community Edition, MySQL 8.0 compatible
+Server version: 8.0.11-TiDB-v8.5.0 TiDB Server (Apache License 2.0) Community Edition, MySQL 8.0 compatible
 Copyright (c) 2000, 2023, Oracle and/or its affiliates. All rights reserved.
 Oracle is a registered trademark of Oracle Corporation and/or its
 affiliates. Other names may be trademarks of their respective
@@ -132,9 +132,9 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
     ```sql
     CREATE TABLE `tab_tidb` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `id` int NOT NULL AUTO_INCREMENT,
     `name` varchar(20) NOT NULL DEFAULT '',
-    `age` int(11) NOT NULL DEFAULT 0,
+    `age` int NOT NULL DEFAULT 0,
     `version` varchar(20) NOT NULL DEFAULT '',
     PRIMARY KEY (`id`),
     KEY `idx_age` (`age`));

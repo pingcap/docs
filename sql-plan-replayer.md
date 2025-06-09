@@ -16,10 +16,8 @@ The features of `PLAN REPLAYER` are as follows:
 
 You can use `PLAN REPLAYER` to save the on-site information of a TiDB cluster. The export interface is as follows:
 
-{{< copyable "sql" >}}
-
 ```sql
-PLAN REPLAYER DUMP EXPLAIN [ANALYZE] [WITH STATS AS OF TIMESTAMP expression] sql-statement;
+PLAN REPLAYER DUMP [WITH STATS AS OF TIMESTAMP expression] EXPLAIN [ANALYZE] sql-statement;
 ```
 
 Based on `sql-statement`, TiDB sorts out and exports the following on-site information:
@@ -167,12 +165,12 @@ After the cluster information is imported, the TiDB cluster is loaded with the r
 
 ```sql
 mysql> desc t;
-+-------+---------+------+------+---------+-------+
-| Field | Type    | Null | Key  | Default | Extra |
-+-------+---------+------+------+---------+-------+
-| a     | int(11) | YES  |      | NULL    |       |
-| b     | int(11) | YES  |      | NULL    |       |
-+-------+---------+------+------+---------+-------+
++-------+------+------+------+---------+-------+
+| Field | Type | Null | Key  | Default | Extra |
++-------+------+------+------+---------+-------+
+| a     | int  | YES  |      | NULL    |       |
+| b     | int  | YES  |      | NULL    |       |
++-------+------+------+------+---------+-------+
 2 rows in set (0.01 sec)
 
 mysql> explain select * from t where a = 1 or b =1;

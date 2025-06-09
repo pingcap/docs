@@ -9,12 +9,7 @@ This document describes how to deploy and maintain a TiCDC cluster, including th
 
 ## Software and hardware recommendations
 
-In production environments, the recommendations of software and hardware for TiCDC are as follows:
-
-| Linux OS       | Version         |
-| :----------------------- | :----------: |
-| Red Hat Enterprise Linux | 7.3 or later versions   |
-| CentOS                   | 7.3 or later versions   |
+In production environments, the recommendations of hardware for TiCDC are as follows:
 
 | CPU | Memory | Disk | Network | Number of TiCDC cluster instances (minimum requirements for production environment) |
 | :--- | :--- | :--- | :--- | :--- |
@@ -38,7 +33,7 @@ cdc_servers:
 
 More references:
 
-- For detailed operations, see [Edit the initialization configuration file](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file).
+- For detailed operations, see [Edit the initialization configuration file](/production-deployment-using-tiup.md#step-3-initialize-the-cluster-topology-file).
 - For detailed configurable fields, see [Configure `cdc_servers` using TiUP](/tiup/tiup-cluster-topology-reference.md#cdc_servers).
 - For detailed steps to deploy a TiDB cluster, see [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
 
@@ -46,7 +41,7 @@ More references:
 >
 > Before installing TiCDC, ensure that you have [manually configured the SSH mutual trust and sudo without password](/check-before-deployment.md#manually-configure-the-ssh-mutual-trust-and-sudo-without-password) between the TiUP control machine and the TiCDC host.
 
-## Add or scale out TiCDC to an existing TiDB cluster using TiUP
+## Add or scale out TiCDC to an existing {{{ .tidb }}} cluster using TiUP {#add-or-scale-out-ticdc}
 
 The method of scaling out a TiCDC cluster is similar to that of deploying one. It is recommended to use TiUP to perform the scale-out.
 
@@ -95,7 +90,7 @@ tiup cluster upgrade <cluster-name> <version> --transfer-timeout 600
 
 > **Note:**
 >
-> In the preceding command, you need to replace `<cluster-name>` and `<version>` with the actual cluster name and cluster version. For example, the version can be v8.4.0.
+> In the preceding command, you need to replace `<cluster-name>` and `<version>` with the actual cluster name and cluster version. For example, the version can be v8.5.0.
 
 ### Upgrade cautions
 
@@ -150,7 +145,7 @@ See [Enable TLS Between TiDB Components](/enable-tls-between-components.md).
 
 ## View TiCDC status using the command-line tool
 
-Run the following command to view the TiCDC cluster status. Note that you need to replace `v<CLUSTER_VERSION>` with the TiCDC cluster version, such as `v8.4.0`:
+Run the following command to view the TiCDC cluster status. Note that you need to replace `v<CLUSTER_VERSION>` with the TiCDC cluster version, such as `v8.5.0`:
 
 ```shell
 tiup cdc:v<CLUSTER_VERSION> cli capture list --server=http://10.0.10.25:8300

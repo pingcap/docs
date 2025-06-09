@@ -13,11 +13,9 @@ TiDB uses an online and asynchronous approach to execute DDL statements. This me
 
 ### Types of DDL statements
 
-Based on whether DDL statements block the user application during execution, DDL statements can be divided into the following types:
+TiDB supports online DDL, which means that when a DDL statement is executed in the database, a specific method is used to ensure that the statement does not block the user application. You can submit data modifications during the execution of DDL, and the database guarantees data consistency and correctness.
 
-- **Offline DDL statements**: When the database receives a DDL statement from the user, it first locks the database object to be modified and then changes the metadata. During the DDL execution, the database blocks the user application from modifying data.
-
-- **Online DDL statements**: When a DDL statement is executed in the database, a specific method is used to ensure that the statement does not block the user application. This allows the user to submit modifications during the DDL execution. The method also ensures the correctness and consistency of the corresponding database object during the execution process.
+By contrast, offline DDL locks database objects and blocks user modifications until the DDL operation is completed. TiDB does not support offline DDL.
 
 Based on whether to operate the data included in the target DDL object, DDL statements can be divided into the following types:
 
@@ -88,7 +86,7 @@ To improve the user experience of DDL execution, starting from v6.2.0, TiDB enab
 + DDL statements to be performed on the same table are mutually blocked.
 + `DROP DATABASE` and DDL statements that affect all objects in the database are mutually blocked.
 + Adding indexes and column type changes on different tables can be executed concurrently.
-+ A logical DDL statement must wait for the previous logical DDL statement to be executed before it can be executed.
++ Starting from v8.2.0, [logical DDL statements](/ddl-introduction.md#types-of-ddl-statements) for different tables can be executed in parallel.
 + In other cases, DDL can be executed based on the level of availability for concurrent DDL execution.
 
 Specifically, TiDB 6.2.0 has enhanced the DDL execution framework in the following aspects:
@@ -185,6 +183,11 @@ When TiDB is adding an index, the phase of backfilling data will cause read and 
 - `ADMIN RESUME DDL JOBS job_id [, job_id]`: Used to resume the DDL tasks that have been paused. After the command is executed, the SQL statement that executes the DDL task is displayed as being executed, and the background task is resumed. For details, refer to [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md).
 
     You can only resume a paused DDL task. Otherwise, the `Job 3 can't be resumed` error is shown in the `RESULT` column.
+
+## DDL-related tables
+
+- [`information_schema.DDL_JOBS`](/information-schema/information-schema-ddl-jobs.md): Information about currently running and finished DDL jobs.
+- [`mysql.tidb_mdl_view`](/mysql-schema/mysql-schema-tidb-mdl-view.md): Information about [metadata lock](/metadata-lock.md) views. It can help identify what query is blocking the DDL from making progress.
 
 ## Common questions
 

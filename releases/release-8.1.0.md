@@ -15,7 +15,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.1/quick-start-with-
 
 TiDB 8.1.0 is a Long-Term Support Release (LTS).
 
-Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements, and bug fixes released in [7.6.0-DMR](/releases/release-7.6.0.md) and [8.0.0-DMR](/releases/release-8.0.0.md). When you upgrade from 7.5.x to 8.1.0, you can download the [TiDB Release Notes PDF](https://download.pingcap.org/tidb-v7.6-to-v8.1-en-release-notes.pdf) to view all release notes between the two LTS versions. The following table lists some highlights from 7.6.0 to 8.1.0:
+Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements, and bug fixes released in [7.6.0-DMR](/releases/release-7.6.0.md) and [8.0.0-DMR](/releases/release-8.0.0.md). When you upgrade from 7.5.x to 8.1.0, you can download the [TiDB Release Notes PDF](https://docs-download.pingcap.com/pdf/tidb-v7.6-to-v8.1-en-release-notes.pdf) to view all release notes between the two LTS versions. The following table lists some highlights from 7.6.0 to 8.1.0:
 
 <table>
 <thead>
@@ -103,7 +103,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 
     The automatic management capability of queries that consume more resources than expected provides users with an effective means to quickly mitigate the impact of query problems on overall performance before the root cause is identified, thereby improving the stability of the database.
 
-    For more information, see [documentation](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries).
+    For more information, see [documentation](/tidb-resource-control-runaway-queries.md).
 
 ### SQL
 
@@ -187,6 +187,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 | PD | [`enable-telemetry`](/pd-configuration-file.md#enable-telemetry) | Deprecated | Starting from v8.1.0, the telemetry feature in TiDB Dashboard is removed, and this configuration item is no longer functional. It is retained solely for compatibility with earlier versions. |
 | TiDB Lightning | [`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-configuration) | Modified | Starting from v8.1.0, there is no need to configure `conflict.max-record-rows` manually, because TiDB Lightning automatically assigns the value of `conflict.max-record-rows` with the value of `conflict.threshold`, regardless of the user input. `conflict.max-record-rows` will be deprecated in a future release. |
 | TiDB Lightning | [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) | Modified | Changes the default value from `9223372036854775807` to `10000` to quickly interrupt abnormal tasks so that you can make corresponding adjustments as soon as possible. This saves time and computational resources by avoiding the scenario where a large amount of conflicting data is discovered after the import, caused by abnormal data sources or incorrect table schema definitions. |
+| TiKV | [`memory.enable-thread-exclusive-arena`](/tikv-configuration-file.md#enable-thread-exclusive-arena-new-in-v810) | Newly added | Controls whether to display the memory allocation status at the TiKV thread level to track the memory usage of each TiKV thread. The default value is `true`. |
 | TiCDC | [`security.client-allowed-user`](/ticdc/ticdc-server-config.md#cdc-server-configuration-file-parameters) | Newly added | Lists the usernames that are allowed for client authentication. Authentication requests with usernames not in this list will be rejected. The default value is null. |
 | TiCDC | [`security.client-user-required`](/ticdc/ticdc-server-config.md#cdc-server-configuration-file-parameters) | Newly added | Controls whether to use username and password for client authentication. The default value is `false`. |
 | TiCDC | [`security.mtls`](/ticdc/ticdc-server-config.md#cdc-server-configuration-file-parameters) | Newly added | Controls whether to enable the TLS client authentication. The default value is `false`. |

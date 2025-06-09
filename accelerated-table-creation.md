@@ -12,13 +12,9 @@ When accelerated table creation is enabled via [`tidb_enable_fast_create_table`]
 
 The merged batch table creation statements are executed within the same transaction, so if one statement of them fails, all of them will fail.
 
-> **Warning:**
->
-> This feature is currently an experimental feature and it is not recommended to use in a production environment. This feature might change or be removed without prior notice. If you find a bug, please give feedback by raising an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 ## Compatibility with TiDB tools
 
-- [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) does not support replicating the tables that are created by `tidb_enable_fast_create_table`.
+- Before TiDB v8.3.0, [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) does not support replicating the tables that are created by `tidb_enable_fast_create_table`. Starting from v8.3.0, TiCDC can properly replicate these tables.
 
 ## Limitation
 
@@ -27,6 +23,8 @@ You can now use performance optimization for table creation only in the [`CREATE
 ## Use `tidb_enable_fast_create_table` to accelerate table creation
 
 You can enable or disable performance optimization for creating tables by specifying the value of the system variable [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800).
+
+Starting from TiDB v8.5.0, the accelerated table creation feature is enabled by default for newly created clusters, with `tidb_enable_fast_create_table` set to `ON`. For clusters upgraded from v8.4.0 or earlier versions, the default value of `tidb_enable_fast_create_table` remains unchanged.
 
 To enable performance optimization for creating tables, set the value of this variable to `ON`:
 

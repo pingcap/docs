@@ -109,7 +109,7 @@ TableOption ::=
     PartDefOption
 |   DefaultKwdOpt ( CharsetKw EqOpt CharsetName | 'COLLATE' EqOpt CollationName )
 |   ( 'AUTO_INCREMENT' | 'AUTO_ID_CACHE' | 'AUTO_RANDOM_BASE' | 'AVG_ROW_LENGTH' | 'CHECKSUM' | 'TABLE_CHECKSUM' | 'KEY_BLOCK_SIZE' | 'DELAY_KEY_WRITE' | 'SHARD_ROW_ID_BITS' | 'PRE_SPLIT_REGIONS' ) EqOpt LengthNum
-|   ( 'CONNECTION' | 'PASSWORD' | 'COMPRESSION' ) EqOpt stringLit
+|   ( 'CONNECTION' | 'ENGINE_ATTRIBUTE' | 'PASSWORD' | 'COMPRESSION' ) EqOpt stringLit
 |   RowFormat
 |   ( 'STATS_PERSISTENT' | 'PACK_KEYS' ) EqOpt StatsPersistentVal
 |   ( 'STATS_AUTO_RECALC' | 'STATS_SAMPLE_PAGES' ) EqOpt ( LengthNum | 'DEFAULT' )
@@ -126,9 +126,40 @@ OnCommitOpt ::=
 PlacementPolicyOption ::=
     "PLACEMENT" "POLICY" EqOpt PolicyName
 |   "PLACEMENT" "POLICY" (EqOpt | "SET") "DEFAULT"
+
+DefaultValueExpr ::=
+    NowSymOptionFractionParentheses
+|   SignedLiteral
+|   NextValueForSequenceParentheses
+|   BuiltinFunction
+
+BuiltinFunction ::=
+    '(' BuiltinFunction ')'
+|   identifier '(' ')'
+|   identifier '(' ExpressionList ')'
+|   "REPLACE" '(' ExpressionList ')'
+
+NowSymOptionFractionParentheses ::=
+    '(' NowSymOptionFractionParentheses ')'
+|   NowSymOptionFraction
+
+NowSymOptionFraction ::=
+    NowSym
+|   NowSymFunc '(' ')'
+|   NowSymFunc '(' NUM ')'
+|   CurdateSym '(' ')'
+|   "CURRENT_DATE"
+
+NextValueForSequenceParentheses ::=
+    '(' NextValueForSequenceParentheses ')'
+|   NextValueForSequence
+
+NextValueForSequence ::=
+    "NEXT" "VALUE" forKwd TableName
+|   "NEXTVAL" '(' TableName ')'
 ```
 
-The following *table_options* are supported. Other options such as `AVG_ROW_LENGTH`, `CHECKSUM`, `COMPRESSION`, `CONNECTION`, `DELAY_KEY_WRITE`, `ENGINE`, `KEY_BLOCK_SIZE`, `MAX_ROWS`, `MIN_ROWS`, `ROW_FORMAT` and `STATS_PERSISTENT` are parsed but ignored.
+The following *table_options* are supported. Other options such as `AVG_ROW_LENGTH`, `CHECKSUM`, `COMPRESSION`, `CONNECTION`, `DELAY_KEY_WRITE`, `ENGINE`, `KEY_BLOCK_SIZE`, `MAX_ROWS`, `MIN_ROWS`, `ROW_FORMAT` and `STATS_PERSISTENT` are parsed but ignored. `ENGINE_ATTRIBUTE` is parsed but always returns the `ERROR 3981 (HY000): Storage engine does not support ENGINE_ATTRIBUTE` error. This option is reserved for future use.
 
 | Options | Description | Example |
 | ---------- | ---------- | ------- |
@@ -178,18 +209,18 @@ mysql> CREATE TABLE t1 (a int);
 Query OK, 0 rows affected (0.09 sec)
 
 mysql> DESC t1;
-+-------+---------+------+------+---------+-------+
-| Field | Type    | Null | Key  | Default | Extra |
-+-------+---------+------+------+---------+-------+
-| a     | int(11) | YES  |      | NULL    |       |
-+-------+---------+------+------+---------+-------+
++-------+------+------+------+---------+-------+
+| Field | Type | Null | Key  | Default | Extra |
++-------+------+------+------+---------+-------+
+| a     | int  | YES  |      | NULL    |       |
++-------+------+------+------+---------+-------+
 1 row in set (0.00 sec)
 
 mysql> SHOW CREATE TABLE t1\G
 *************************** 1. row ***************************
        Table: t1
 Create Table: CREATE TABLE `t1` (
-  `a` int(11) DEFAULT NULL
+  `a` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 1 row in set (0.00 sec)
 
@@ -232,7 +263,7 @@ mysql> DESC t1;
 +-------+--------------+------+------+---------+----------------+
 | Field | Type         | Null | Key  | Default | Extra          |
 +-------+--------------+------+------+---------+----------------+
-| id    | bigint(20)   | NO   | PRI  | NULL    | auto_increment |
+| id    | bigint       | NO   | PRI  | NULL    | auto_increment |
 | b     | varchar(200) | NO   |      | NULL    |                |
 +-------+--------------+------+------+---------+----------------+
 2 rows in set (0.00 sec)

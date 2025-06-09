@@ -97,4 +97,4 @@ MySQL also supports [SET RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en
 * [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
 * [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
 * [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
-* [Resource Control](/tidb-resource-control.md)
+* [Resource Control](/tidb-resource-control-ru-groups.md)

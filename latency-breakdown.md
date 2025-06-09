@@ -104,7 +104,7 @@ tidb_session_execute_duration_seconds{type="general"} =
     read value duration
 ```
 
-`pd_client_cmd_handle_cmds_duration_seconds{type="wait"}` records the duration of fetching [TSO (Timestamp Oracle)](/glossary.md#tso) from PD. When reading in an auto-commit transaction mode with a clustered primary index or from a snapshot, the value will be zero.
+`pd_client_cmd_handle_cmds_duration_seconds{type="wait"}` records the duration of fetching [TSO (Timestamp Oracle)](/tso.md) from PD. When reading in an auto-commit transaction mode with a clustered primary index or from a snapshot, the value will be zero.
 
 The `read handle duration` and `read value duration` are calculated as:
 

@@ -97,6 +97,22 @@ This document only describes parameters that are not included in command-line pa
 + The time interval for automatic compaction of the meta-information database when `auto-compaction-retention` is `periodic`. When the compaction mode is set to `revision`, this parameter indicates the version number for the automatic compaction.
 + Default value: 1h
 
+### `tick-interval`
+
++ Equivalent to the `heartbeat-interval` configuration item of etcd. It controls the Raft heartbeat interval between embedded etcd instances in different PD nodes. A smaller value accelerates failure detection but increases network load.
++ Default value: `500ms`
+
+### `election-interval`
+
++ Equivalent to the `election-timeout` configuration item of etcd. It controls the election timeout for embedded etcd instances in PD nodes. If an etcd instance does not receive a valid heartbeat from other etcd instances within this period, it initiates a Raft election.
++ Default value: `3000ms`
++ This value must be at least five times the [`tick-interval`](#tick-interval). For example, if `tick-interval` is `500ms`, `election-interval` must be greater than or equal to `2500ms`.
+
+### `enable-prevote`
+
++ Equivalent to the `pre-vote` configuration item of etcd. It controls whether the embedded etcd in the PD node enables Raft pre-vote. When enabled, etcd performs an additional election phase to check whether enough votes can be obtained to win the election, minimizing service disruption.
++ Default value: `true`
+
 ### `force-new-cluster`
 
 + Determines whether to force PD to start as a new cluster and modify the number of Raft members to `1`
@@ -279,8 +295,17 @@ Configuration items related to scheduling
 
 ### `patrol-region-interval`
 
-+ Controls the running frequency at which `replicaChecker` checks the health state of a Region. The smaller this value is, the faster `replicaChecker` runs. Normally, you do not need to adjust this parameter.
++ Controls the running frequency at which the checker inspects the health state of a Region. The smaller this value is, the faster the checker runs. Normally, you do not need to adjust this configuration.
 + Default value: `10ms`
+
+### `patrol-region-worker-count` <span class="version-mark">New in v8.5.0</span>
+
+> **Warning:**
+>
+> Setting this configuration item to a value greater than 1 enables concurrent checks. This is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/tikv/pd/issues) on GitHub.
+
++ Controls the number of concurrent [operators](/glossary.md#operator) created by the checker when inspecting the health state of a Region. Normally, you do not need to adjust this configuration.
++ Default value: `1`
 
 ### `split-merge-interval`
 
@@ -379,15 +404,11 @@ Configuration items related to scheduling
 
 ### `store-limit-version` <span class="version-mark">New in v7.1.0</span>
 
-> **Warning:**
->
-> Setting this configuration item to `"v2"` is an experimental feature. It is not recommended to use it in production environments.
-
 + Controls the version of the store limit formula
 + Default value: `v1`
 + Value options:
     + `v1`: In v1 mode, you can manually modify the `store limit` to limit the scheduling speed of a single TiKV.
-    + `v2`: (experimental feature) In v2 mode, you do not need to manually set the `store limit` value, as PD dynamically adjusts it based on the capability of TiKV snapshots. For more details, refer to [Principles of store limit v2](/configure-store-limit.md#principles-of-store-limit-v2).
+    + `v2`: In v2 mode, you do not need to manually set the `store limit` value, as PD dynamically adjusts it based on the capability of TiKV snapshots. For more details, refer to [Principles of store limit v2](/configure-store-limit.md#principles-of-store-limit-v2).
 
 ### `enable-joint-consensus` <span class="version-mark">New in v5.0</span>
 
@@ -407,6 +428,16 @@ Configuration items related to scheduling
 
 + Specifies how many days the hot Region information is retained.
 + Default value: `7`
+
+### `enable-heartbeat-breakdown-metrics` <span class="version-mark">New in v8.0.0</span>
+
++ Controls whether to enable breakdown metrics for Region heartbeats. These metrics measure the time consumed in each stage of Region heartbeat processing, facilitating analysis through monitoring.
++ Default value: `true`
+
+### `enable-heartbeat-concurrent-runner` <span class="version-mark">New in v8.0.0</span>
+
++ Controls whether to enable asynchronous concurrent processing for Region heartbeats. When enabled, an independent executor handles Region heartbeat requests asynchronously and concurrently, which can improve heartbeat processing throughput and reduce latency.
++ Default value: `true`
 
 ## `replication`
 
@@ -462,6 +493,12 @@ Configuration items related to labels, which only support the `reject-leader` ty
 
 Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.md) built in PD.
 
+### `disable-custom-prom-addr`
+
++ Whether to disable configuring a custom Prometheus data source address in [TiDB Dashboard](/dashboard/dashboard-intro.md).
++ Default value: `false`
++ When it is set to `true`, if you configure a custom Prometheus data source address in TiDB Dashboard, TiDB Dashboard reports an error.
+
 ### `tidb-cacert-path`
 
 + The path of the root CA certificate file. You can configure this path when you connect to TiDB's SQL services using TLS.
@@ -496,9 +533,9 @@ Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.m
 
 Configuration items related to the replication mode of all Regions. See [Enable the DR Auto-Sync mode](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode) for details.
 
-## Controller
+## controller
 
-This section describes the configuration items that are built into PD for [Resource Control](/tidb-resource-control.md).
+This section describes the configuration items that are built into PD for [Resource Control](/tidb-resource-control-ru-groups.md).
 
 ### `degraded-mode-wait-duration`
 
@@ -508,12 +545,12 @@ This section describes the configuration items that are built into PD for [Resou
 
 ### `request-unit`
 
-The following are the configuration items about the [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru).
+The following are the configuration items about the [Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru).
 
 #### `read-base-cost`
 
 + Basis factor for conversion from a read request to RU
-+ Default value: 0.25
++ Default value: 0.125
 
 #### `write-base-cost`
 

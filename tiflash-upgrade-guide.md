@@ -65,7 +65,7 @@ When you upgrade TiFlash from v5.x or v6.0 to v6.1, pay attention to the functio
 
 TiFlash Proxy is upgraded in v6.1.0 (aligned with TiKV v6.0.0). The new version has upgraded the RocksDB version. After you upgrade TiFlash to v6.1, the data format is converted to the new version automatically.
 
-In regular upgrades, the data conversion does not involve any risks. However, if you need to downgrade TiFlash from v6.1 to any earlier version in special scenarios (for example, testing or verification scenarios), the earlier version might fail to parse the new RocksDB configuration. As as result, TiFlash will fail to restart. It is recommended that you fully test and verify the upgrade process and prepare an emergency plan.
+In regular upgrades, the data conversion does not involve any risks. However, if you need to downgrade TiFlash from v6.1 to any earlier version in special scenarios (for example, testing or verification scenarios), the earlier version might fail to parse the new RocksDB configuration. As result, TiFlash will fail to restart. It is recommended that you fully test and verify the upgrade process and prepare an emergency plan.
 
 **Workaround for downgrading TiFlash in testing or other special scenarios**
 
@@ -79,7 +79,7 @@ If you do not enable [dynamic pruning mode](/partitioned-table.md#dynamic-prunin
 
 - TiDB v6.0 and earlier: Dynamic pruning is disabled by default. The setting of dynamic pruning after an upgrade inherits that of the previous version. That is, dynamic pruning will not be enabled (or disabled) automatically after an upgrade.
 
-    After an upgrade, to enable dynamic pruning, set `tidb_partition_prune_mode` to `dynamic` and manually update GlobalStats of partitioned tables. For details, see [Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode).
+    After an upgrade, to enable dynamic pruning, set `tidb_partition_prune_mode` to `dynamic` and manually update global statistics of partitioned tables. For details, see [Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode).
 
 ## From v5.x or v6.0 to v6.2
 
@@ -126,7 +126,11 @@ Starting from v7.4, to reduce the read and write amplification generated during 
 
 ## From v7.x to v8.4 or a later version
 
-Starting from v8.4, the underlying storage format of TiFlash is updated to support [vector search](/vector-search-overview.md). Therefore, after TiFlash is upgraded to v8.4 or a later version, in-place downgrading to the original version is not supported.
+Starting from v8.4, the underlying storage format of TiFlash is updated to support [vector search](/vector-search/vector-search-overview.md). Therefore, after TiFlash is upgraded to v8.4 or a later version, in-place downgrading to the original version is not supported.
+
+## From v8.x to v9.0 or a later version
+
+Starting from v9.0.0, TiFlash optimizes the storage format of string data to improve the string read and write performance. Therefore, after TiFlash is upgraded to v9.0.0 or a later version, in-place downgrading to the original version is not supported.
 
 **Workaround for downgrading TiFlash in testing or other special scenarios**
 

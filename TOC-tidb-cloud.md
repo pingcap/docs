@@ -7,10 +7,9 @@
   - [Architecture](/tidb-cloud/tidb-cloud-intro.md#architecture)
   - [High Availability](/tidb-cloud/high-availability-with-multi-az.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
-  - [Roadmap](/tidb-cloud/tidb-cloud-roadmap.md)
 - Get Started
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
-  - [Try Out TiDB + AI](/vector-search-get-started-using-python.md)
+  - [Try Out TiDB + AI](/vector-search/vector-search-get-started-using-python.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
   - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
@@ -241,27 +240,27 @@
 - Explore Data
   - [Chat2Query (Beta) in SQL Editor](/tidb-cloud/explore-data-with-chat2query.md)
 - Vector Search (Beta)
-  - [Overview](/vector-search-overview.md)
+  - [Overview](/vector-search/vector-search-overview.md)
   - Get Started
-    - [Get Started with SQL](/vector-search-get-started-using-sql.md)
-    - [Get Started with Python](/vector-search-get-started-using-python.md)
+    - [Get Started with SQL](/vector-search/vector-search-get-started-using-sql.md)
+    - [Get Started with Python](/vector-search/vector-search-get-started-using-python.md)
   - Integrations
-    - [Overview](/vector-search-integration-overview.md)
+    - [Overview](/vector-search/vector-search-integration-overview.md)
     - AI Frameworks
-      - [LlamaIndex](/vector-search-integrate-with-llamaindex.md)
-      - [Langchain](/vector-search-integrate-with-langchain.md)
+      - [LlamaIndex](/vector-search/vector-search-integrate-with-llamaindex.md)
+      - [Langchain](/vector-search/vector-search-integrate-with-langchain.md)
     - Embedding Models/Services
-      - [Jina AI](/vector-search-integrate-with-jinaai-embedding.md)
+      - [Jina AI](/vector-search/vector-search-integrate-with-jinaai-embedding.md)
     - ORM Libraries
-      - [SQLAlchemy](/vector-search-integrate-with-sqlalchemy.md)
-      - [peewee](/vector-search-integrate-with-peewee.md)
-      - [Django ORM](/vector-search-integrate-with-django-orm.md)
+      - [SQLAlchemy](/vector-search/vector-search-integrate-with-sqlalchemy.md)
+      - [peewee](/vector-search/vector-search-integrate-with-peewee.md)
+      - [Django ORM](/vector-search/vector-search-integrate-with-django-orm.md)
   - Reference
-    - [Vector Data Types](/vector-search-data-types.md)
-    - [Vector Functions and Operators](/vector-search-functions-and-operators.md)
-    - [Vector Index](/vector-search-index.md)
-  - [Improve Performance](/vector-search-improve-performance.md)
-  - [Limitations](/vector-search-limitations.md)
+    - [Vector Data Types](/vector-search/vector-search-data-types.md)
+    - [Vector Functions and Operators](/vector-search/vector-search-functions-and-operators.md)
+    - [Vector Index](/vector-search/vector-search-index.md)
+  - [Improve Performance](/vector-search/vector-search-improve-performance.md)
+  - [Limitations](/vector-search/vector-search-limitations.md)
   - [Changelogs](/tidb-cloud/vector-search-changelogs.md)
 - Data Service (Beta)
   - [Overview](/tidb-cloud/data-service-overview.md)
@@ -359,6 +358,7 @@
     - [Use Backup Resource](/tidb-cloud/terraform-use-backup-resource.md)
     - [Use Restore Resource](/tidb-cloud/terraform-use-restore-resource.md)
     - [Use Import Resource](/tidb-cloud/terraform-use-import-resource.md)
+    - [Migrate Cluster Resource](/tidb-cloud/terraform-migrate-cluster-resource.md)
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
   - [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
 - Reference
@@ -404,6 +404,7 @@
     - SQL Statements
       - [Overview](/sql-statements/sql-statement-overview.md)
       - [`ADMIN`](/sql-statements/sql-statement-admin.md)
+      - [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)
       - [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
       - [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
       - [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)
@@ -601,6 +602,7 @@
       - [Optimistic Transactions](/optimistic-transaction.md)
       - [Pessimistic Transactions](/pessimistic-transaction.md)
       - [Non-Transactional DML Statements](/non-transactional-dml.md)
+      - [Pipelined DML](/pipelined-dml.md)
     - [Views](/views.md)
     - [Partitioning](/partitioned-table.md)
     - [Temporary Tables](/temporary-tables.md)
@@ -620,6 +622,7 @@
     - System Tables
       - `mysql` Schema
         - [Overview](/mysql-schema/mysql-schema.md)
+        - [`tidb_mdl_view`](/mysql-schema/mysql-schema-tidb-mdl-view.md)
         - [`user`](/mysql-schema/mysql-schema-user.md)
       - INFORMATION_SCHEMA
         - [Overview](/information-schema/information-schema.md)
@@ -735,9 +738,13 @@
     - [update](/tidb-cloud/ticloud-update.md)
     - [help](/tidb-cloud/ticloud-help.md)
   - [Table Filter](/table-filter.md)
-  - [Resource Control](/tidb-resource-control.md)
+  - Resource Manager
+    - [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md)
+    - [Manage Runaway Queries](/tidb-resource-control-runaway-queries.md)
+    - [Manage Background Tasks](/tidb-resource-control-background-tasks.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
   - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
+  - [Batch Processing](/batch-processing.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
   - [Support](/tidb-cloud/tidb-cloud-support.md)
   - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)

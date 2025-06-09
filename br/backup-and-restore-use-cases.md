@@ -17,7 +17,7 @@ With PITR, you can satisfy the preceding requirements.
 
 ## Deploy the TiDB cluster and BR
 
-To use PITR, you need to deploy a TiDB cluster >= v6.2.0 and update BR to the same version as the TiDB cluster. This document uses v8.4.0 as an example.
+To use PITR, you need to deploy a TiDB cluster >= v6.2.0 and update BR to the same version as the TiDB cluster. This document uses v8.5.0 as an example.
 
 The following table shows the recommended hardware resources for using PITR in a TiDB cluster.
 
@@ -44,13 +44,13 @@ Install or upgrade BR using TiUP:
 - Install:
 
     ```shell
-    tiup install br:v8.4.0
+    tiup install br:v8.5.0
     ```
 
 - Upgrade:
 
     ```shell
-    tiup update br:v8.4.0
+    tiup update br:v8.5.0
     ```
 
 ## Configure backup storage (Amazon S3)
@@ -145,7 +145,9 @@ tiup br restore point --pd="${PD_IP}:2379" \
 --full-backup-storage='s3://tidb-pitr-bucket/backup-data/snapshot-20220514000000' \
 --restored-ts '2022-05-15 18:00:00+0800'
 
-Full Restore <--------------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
+Split&Scatter Region <--------------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
+Download&Ingest SST <--------------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
+Restore Pipeline <--------------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
 [2022/05/29 18:15:39.132 +08:00] [INFO] [collector.go:69] ["Full Restore success summary"] [total-ranges=12] [ranges-succeed=xxx] [ranges-failed=0] [split-region=xxx.xxxµs] [restore-ranges=xxx] [total-take=xxx.xxxs] [restore-data-size(after-compressed)=xxx.xxx] [Size=xxxx] [BackupTS={TS}] [total-kv=xxx] [total-kv-size=xxx] [average-speed=xxx]
 Restore Meta Files <--------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
 Restore KV Files <----------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%

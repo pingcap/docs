@@ -9,7 +9,7 @@ This document introduces subquery statements and categories in TiDB.
 
 ## Overview
 
-An subquery is a query within another SQL query. With subquery, the query result can be used in another query.
+A subquery is a query within another SQL query. With subquery, the query result can be used in another query.
 
 The following takes the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application as an example to introduce subquery.
 
@@ -133,12 +133,12 @@ As a best practice, in actual development, it is recommended to avoid querying t
 
 <CustomContent platform="tidb">
 
-Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
 
 </CustomContent>

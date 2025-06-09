@@ -14,7 +14,7 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 ```
 
 - `<cluster-name>`: the name of the new cluster, which cannot be the same as the existing cluster names.
-- `<version>`: the version number of the TiDB cluster to deploy, such as `v8.4.0`.
+- `<version>`: the version number of the TiDB cluster to deploy, such as `v8.5.0`.
 - `<topology.yaml>`: the prepared [topology file](/tiup/tiup-cluster-topology-reference.md).
 
 ## Options
@@ -67,4 +67,6 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 
 The deployment log.
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+## See also
+
+- [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md)

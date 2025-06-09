@@ -11,15 +11,18 @@ The following functions are TiDB extensions, and are not present in MySQL:
 
 | Function name | Function description |
 | :-------------- | :------------------------------------- |
-| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | Returns the name of the resource group that the current session is bound to. See [using resource control to achieve resource isolation](/tidb-resource-control.md). |
+| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | Returns the name of the resource group that the current session is bound to. See [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md). |
 | [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | Instructs TiDB to read the most recent data within a specified time range. See [reading historical data using the `AS OF TIMESTAMP` clause](/as-of-timestamp.md). |
 | [`TIDB_CURRENT_TSO()`](#tidb_current_tso) | Returns the current [TimeStamp Oracle (TSO) in TiDB](/tso.md). |
 | [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | Decodes binary plans. |
 | [`TIDB_DECODE_KEY()`](#tidb_decode_key) | Decodes a TiDB-encoded key entry into a JSON structure containing `_tidb_rowid` and `table_id`. These encoded keys can be found in some system tables and logging outputs. |
 | [`TIDB_DECODE_PLAN()`](#tidb_decode_plan) | Decodes a TiDB execution plan. |
 | [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | Queries the normalized SQL statements (a form without formats and arguments) corresponding to a set of SQL digests in the cluster. |
+| [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key) | Encodes an index key. |
+| [`TIDB_ENCODE_RECORD_KEY()`](#tidb_encode_record_key) | Encodes a record key. |
 | [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest) | Gets a digest for a query string. |
 | [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner) | Checks whether or not the TiDB instance you are connected to is the DDL Owner. The DDL Owner is the TiDB instance that is tasked with executing DDL statements on behalf of all other nodes in the cluster. |
+| [`TIDB_MVCC_INFO()`](#tidb_mvcc_info) | Returns the [MVCC (Multi-Version Concurrency Control)](https://docs.pingcap.com/tidb/stable/glossary#multi-version-concurrency-control-mvcc) information about a key. |
 | [`TIDB_PARSE_TSO()`](#tidb_parse_tso) | Extracts the physical timestamp from a TiDB TSO timestamp. See also: [`tidb_current_ts`](/system-variables.md#tidb_current_ts). |
 | [`TIDB_PARSE_TSO_LOGICAL()`](#tidb_parse_tso_logical) | Extracts the logical timestamp from a TiDB TSO timestamp. |
 | [`TIDB_ROW_CHECKSUM()`](#tidb_row_checksum) | Queries the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`. See also: [Data integrity validation for single-row data](/ticdc/ticdc-integrity-check.md). |
@@ -33,16 +36,19 @@ The following functions are TiDB extensions, and are not present in MySQL:
 
 | Function name | Function description |
 | :-------------- | :------------------------------------- |
-| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | Returns the resource group name that the current session is bound to. See [using resource control to achieve resource isolation](/tidb-resource-control.md). |
+| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | Returns the resource group name that the current session is bound to. See [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md). |
 | [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | Instructs TiDB to read most recent data within a specified time range. See [reading historical data using the `AS OF TIMESTAMP` clause](/as-of-timestamp.md). |
 | [`TIDB_CURRENT_TSO()`](#tidb_current_tso) | Returns the current [TimeStamp Oracle (TSO) in TiDB](/tso.md). |
 | [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | Decodes binary plans. |
 | [`TIDB_DECODE_KEY()`](#tidb_decode_key) | Decodes a TiDB-encoded key entry into a JSON structure containing `_tidb_rowid` and `table_id`. These encoded keys can be found in some system tables and logging outputs. |
 | [`TIDB_DECODE_PLAN()`](#tidb_decode_plan) | Decodes a TiDB execution plan. |
 | [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | Queries the normalized SQL statements (a form without formats and arguments) corresponding to a set of SQL digests in the cluster. |
+| [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key) | Encodes an index key. |
+| [`TIDB_ENCODE_RECORD_KEY()`](#tidb_encode_record_key) | Encodes a record key. |
 | [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest) | Gets a digest for a query string. |
 | [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner) | Checks whether or not the TiDB instance you are connected to is the DDL Owner. The DDL Owner is the TiDB instance that is tasked with executing DDL statements on behalf of all other nodes in the cluster. |
 | [`TIDB_PARSE_TSO()`](#tidb_parse_tso) | Extracts the physical timestamp from a TiDB TSO timestamp. See also: [`tidb_current_ts`](/system-variables.md#tidb_current_ts). |
+| [`TIDB_MVCC_INFO()`](#tidb_mvcc_info) | Returns the [MVCC (Multi-Version Concurrency Control)](https://docs.pingcap.com/tidb/stable/glossary#multi-version-concurrency-control-mvcc) information about a key. |
 | [`TIDB_PARSE_TSO_LOGICAL()`](#tidb_parse_tso_logical) | Extracts the logical timestamp from a TiDB TSO timestamp. |
 | [`TIDB_ROW_CHECKSUM()`](#tidb_row_checksum) | Queries the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`. See also: [Data integrity validation for single-row data](https://docs.pingcap.com/tidb/stable/ticdc-integrity-check). |
 | [`TIDB_SHARD()`](#tidb_shard) | Creates a shard index to scatter the index hotspot. A shard index is an expression index with a `TIDB_SHARD` function as the prefix.|
@@ -53,7 +59,7 @@ The following functions are TiDB extensions, and are not present in MySQL:
 
 ## CURRENT_RESOURCE_GROUP
 
-The `CURRENT_RESOURCE_GROUP()` function is used to show the resource group name that the current session is bound to. When the [Resource control](/tidb-resource-control.md) feature is enabled, the available resources that can be used by SQL statements are restricted by the resource quota of the bound resource group.
+The `CURRENT_RESOURCE_GROUP()` function is used to show the resource group name that the current session is bound to. When the [Resource control](/tidb-resource-control-ru-groups.md) feature is enabled, the available resources that can be used by SQL statements are restricted by the resource quota of the bound resource group.
 
 When a session is established, TiDB binds the session to the resource group that the login user is bound to by default. If the user is not bound to any resource groups, the session is bound to the `default` resource group. Once the session is established, the bound resource group will not change by default, even if the bound resource group of the user is changed via [modifying the resource group bound to the user](/sql-statements/sql-statement-alter-user.md#modify-basic-user-information). To change the bound resource group of the current session, you can use [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md).
 
@@ -192,7 +198,7 @@ SHOW CREATE TABLE t2\G
        Table: t2
 Create Table: CREATE TABLE `t2` (
   `id` binary(36) NOT NULL,
-  `a` tinyint(3) unsigned NOT NULL,
+  `a` tinyint unsigned NOT NULL,
   `v` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`a`,`id`) /*T![clustered_index] CLUSTERED */
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
@@ -544,11 +550,11 @@ SELECT TIDB_VERSION()\G
 
 ```sql
 *************************** 1. row ***************************
-TIDB_VERSION(): Release Version: v8.4.0
+TIDB_VERSION(): Release Version: v8.5.0
 Edition: Community
 Git Commit Hash: 821e491a20fbab36604b36b647b5bae26a2c1418
 Git Branch: HEAD
-UTC Build Time: 2024-07-11 19:16:25
+UTC Build Time: 2024-12-05 19:16:25
 GoVersion: go1.21.10
 Race Enabled: false
 Check Table Before Drop: false
@@ -572,5 +578,119 @@ SELECT VITESS_HASH(123);
 +---------------------+
 | 1155070131015363447 |
 +---------------------+
+1 row in set (0.00 sec)
+```
+
+## TIDB_ENCODE_INDEX_KEY
+
+Encodes an index key.
+
+```sql
+CREATE TABLE t(id int PRIMARY KEY, a int, KEY `idx` (a));
+```
+
+```
+Query OK, 0 rows affected (0.00 sec)
+```
+
+```sql
+INSERT INTO t VALUES(1,1);
+```
+
+```
+Query OK, 1 row affected (0.00 sec)
+```
+
+```sql
+SELECT TIDB_ENCODE_INDEX_KEY('test', 't', 'idx', 1, 1);
+```
+
+```
++----------------------------------------------------------------------------+
+| TIDB_ENCODE_INDEX_KEY('test', 't', 'idx', 1, 1)                            |
++----------------------------------------------------------------------------+
+| 74800000000000007f5f698000000000000001038000000000000001038000000000000001 |
++----------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+## TIDB_ENCODE_RECORD_KEY
+
+Encodes a record key.
+
+```sql
+CREATE TABLE t(id int PRIMARY KEY, a int, KEY `idx` (a));
+```
+
+```
+Query OK, 0 rows affected (0.00 sec)
+```
+
+```sql
+INSERT INTO t VALUES(1,1);
+```
+
+```
+Query OK, 1 row affected (0.00 sec)
+```
+
+```sql
+SELECT TIDB_ENCODE_RECORD_KEY('test', 't', 1);
+```
+
+```
++----------------------------------------+
+| TIDB_ENCODE_RECORD_KEY('test', 't', 1) |
++----------------------------------------+
+| 7480000000000000845f728000000000000001 |
++----------------------------------------+
+1 row in set (0.00 sec)
+```
+
+```sql
+SELECT TIDB_DECODE_KEY('7480000000000000845f728000000000000001');
+```
+
+```
++-----------------------------------------------------------+
+| TIDB_DECODE_KEY('7480000000000000845f728000000000000001') |
++-----------------------------------------------------------+
+| {"id":1,"table_id":"132"}                                 |
++-----------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+## TIDB_MVCC_INFO
+
+Returns the [MVCC (Multi-Version Concurrency Control)](https://docs.pingcap.com/tidb/stable/glossary#multi-version-concurrency-control-mvcc) information for a key. You can use the [`TIDB_ENCODE_INDEX_KEY`](#tidb_encode_index_key) function to obtain a key.
+
+```sql
+SELECT JSON_PRETTY(TIDB_MVCC_INFO('74800000000000007f5f698000000000000001038000000000000001038000000000000001')) AS info\G
+```
+
+```
+*************************** 1. row ***************************
+info: [
+  {
+    "key": "74800000000000007f5f698000000000000001038000000000000001038000000000000001",
+    "mvcc": {
+      "info": {
+        "values": [
+          {
+            "start_ts": 454654803134119936,
+            "value": "MA=="
+          }
+        ],
+        "writes": [
+          {
+            "commit_ts": 454654803134119937,
+            "short_value": "MA==",
+            "start_ts": 454654803134119936
+          }
+        ]
+      }
+    }
+  }
+]
 1 row in set (0.00 sec)
 ```

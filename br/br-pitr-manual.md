@@ -91,10 +91,6 @@ tiup br log start \
 
 ### Encrypt the log backup data
 
-> **Warning:**
->
-> Currently, this feature is experimental. It is not recommended that you use it in production environments. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 BR enables you to encrypt log backup data before uploading it to your backup storage.
 
 Starting from TiDB v8.4.0, you can encrypt log backup data by passing the following parameters in the log backup command, which is similar to [snapshot backup encryption](/br/br-snapshot-manual.md#encrypt-the-backup-data):
@@ -360,7 +356,7 @@ Usage example:
 
 ```shell
 tiup br log truncate --until='2022-07-26 21:20:00+0800' \
-–-storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+--storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
 ```
 
 Expected output:
@@ -400,7 +396,7 @@ The `--storage` parameter is used to specify the backup storage address. Current
 Usage example:
 
 ```shell
-tiup br log metadata –-storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+tiup br log metadata --storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
 ```
 
 Expected output:
@@ -454,10 +450,12 @@ Usage example:
 
 ```shell
 tiup br restore point --pd="${PD_IP}:2379"
---storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
---full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+--storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
+--full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${access-key}&secret-access-key=${secret-access-key}'
 
-Full Restore <--------------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
+Split&Scatter Region <--------------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
+Download&Ingest SST <--------------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
+Restore Pipeline <--------------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
 *** ***["Full Restore success summary"] ****** [total-take=3.112928252s] [restore-data-size(after-compressed)=5.056kB] [Size=5056] [BackupTS=434693927394607136] [total-kv=4] [total-kv-size=290B] [average-speed=93.16B/s]
 Restore Meta Files <--------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
 Restore KV Files <----------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
@@ -472,18 +470,14 @@ Restore KV Files <--------------------------------------------------------------
 
 ### Restore encrypted log backup data
 
-> **Warning:**
->
-> Currently, this feature is experimental. It is not recommended that you use it in production environments. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 To restore encrypted log backup data, you need to pass the corresponding decryption parameters in the restore command. Make sure that the decryption parameters are the same as those used for encryption. If the decryption algorithm or key is incorrect, the data cannot be restored.
 
 The following is an example:
 
 ```shell
 tiup br restore point --pd="${PD_IP}:2379"
---storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}"'
---full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}"'
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}'
+--full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}'
 --crypter.method aes128-ctr
 --crypter.key 0123456789abcdef0123456789abcdef
 --log.crypter.method aes128-ctr
@@ -494,10 +488,32 @@ If a log backup is encrypted using a master key, you can decrypt and restore the
 
 ```shell
 tiup br restore point --pd="${PD_IP}:2379"
---storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}"'
---full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}"'
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}'
+--full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}'
 --crypter.method aes128-ctr
 --crypter.key 0123456789abcdef0123456789abcdef
 --master-key-crypter-method aes128-ctr
 --master-key "local:///path/to/master.key"
 ```
+
+### Compatibility between ongoing log backup and snapshot restore
+
+Starting from v9.0.0, when a log backup task is running, if all of the following conditions are met, you can still perform snapshot restore (`br restore [full|database|table]`) and allow the restored data to be properly recorded by the ongoing log backup (hereinafter referred to as "log backup"):
+
+- The node performing backup and restore operations has the following necessary permissions: 
+    - Read access to the external storage containing the backup source, for snapshot restore
+    - Write access to the target external storage used by the log backup
+- The target external storage for the log backup is Amazon S3 (`s3://`), Google Cloud Storage (`gcs://`), or Azure Blob Storage (`azblob://`).
+- The data to be restored uses the same type of external storage as the target storage for the log backup.
+- Neither the data to be restored nor the log backup has enabled local encryption. For details, see [log backup encryption](#encrypt-the-log-backup-data) and [snapshot backup encryption](/br/br-snapshot-manual.md#encrypt-the-backup-data).
+
+If any of the above conditions are not met, or if you need to perform a point-in-time recovery, while a log backup task is running, BR refuses to proceed with the data recovery. In this case, you can complete the recovery by following these steps:
+
+1. [Stop the log backup task](#stop-a-log-backup-task).
+2. Perform the data restore.
+3. After the restore is complete, perform a new snapshot backup.
+4. [Restart the log backup task](#restart-a-log-backup-task).
+
+> **Note:**
+>
+> When restoring a log backup that contains records of snapshot (full) restore data, you must use BR v9.0.0 or later. Otherwise, restoring the recorded full restore data might fail.

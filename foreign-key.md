@@ -5,12 +5,11 @@ summary: An overview of the usage of FOREIGN KEY constraints for the TiDB databa
 
 # FOREIGN KEY Constraints
 
-Starting from v6.6.0, TiDB supports the foreign key feature, which allows cross-table referencing of related data, and foreign key constraints to maintain data consistency.
+Foreign keys allow cross-table references of related data, while foreign key constraints ensure the consistency of related data. Starting from v6.6.0, TiDB supports foreign keys and foreign key constraints. Starting from v8.5.0, this feature becomes generally available.
 
 > **Warning:**
 >
-> - Currently, the foreign key feature is experimental. It is not recommended that you use it in production environments. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> - The foreign key feature is typically employed to enforce [referential integrity](https://en.wikipedia.org/wiki/Referential_integrity) constraint checks. It might cause performance degradation, so it is recommended to conduct thorough testing before using it in performance-sensitive scenarios.
+> The foreign key feature is typically employed to enforce [referential integrity](https://en.wikipedia.org/wiki/Referential_integrity) constraint checks. It might cause performance degradation, so it is recommended to conduct thorough testing before using it in performance-sensitive scenarios.
 
 The foreign key is defined in the child table. The syntax is as follows:
 
@@ -152,8 +151,8 @@ mysql> SHOW CREATE TABLE child\G
 *************************** 1. row ***************************
        Table: child
 Create Table: CREATE TABLE `child` (
-  `id` int(11) DEFAULT NULL,
-  `pid` int(11) DEFAULT NULL,
+  `id` int DEFAULT NULL,
+  `pid` int DEFAULT NULL,
   KEY `idx_pid` (`pid`),
   CONSTRAINT `fk_1` FOREIGN KEY (`pid`) REFERENCES `test`.`parent` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
@@ -191,8 +190,8 @@ mysql> SHOW CREATE TABLE child\G
 *************************** 1. row ***************************
        Table: child
 Create Table: CREATE TABLE `child` (
-  `id` int(11) DEFAULT NULL,
-  `pid` int(11) DEFAULT NULL,
+  `id` int DEFAULT NULL,
+  `pid` int DEFAULT NULL,
   KEY `idx_pid` (`pid`),
   CONSTRAINT `fk_1` FOREIGN KEY (`pid`) REFERENCES `test`.`parent` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
@@ -293,8 +292,8 @@ mysql> SHOW CREATE TABLE child\G
 ***************************[ 1. row ]***************************
 Table        | child
 Create Table | CREATE TABLE `child` (
-  `id` int(11) DEFAULT NULL,
-  `pid` int(11) DEFAULT NULL,
+  `id` int DEFAULT NULL,
+  `pid` int DEFAULT NULL,
   KEY `idx_pid` (`pid`),
   CONSTRAINT `fk_1` FOREIGN KEY (`pid`) REFERENCES `test`.`parent` (`id`) ON DELETE CASCADE /* FOREIGN KEY INVALID */
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
@@ -345,8 +344,8 @@ The output shows that the `child` table does not contain any foreign keys:
 | Table | Create Table                                                |
 +-------+-------------------------------------------------------------+
 | child | CREATE TABLE `child` (                                      |
-|       |   `id` int(11) DEFAULT NULL,                                |
-|       |   `pid` int(11) DEFAULT NULL                                |
+|       |   `id` int DEFAULT NULL,                                |
+|       |   `pid` int DEFAULT NULL                                |
 |       | ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin |
 +-------+-------------------------------------------------------------+
 ```

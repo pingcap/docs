@@ -13,7 +13,7 @@ summary: The usage of SHOW PLACEMENT FOR in TiDB.
 
 The statement returns a result set in which the `Scheduling_State` field indicates the current progress that the Placement Driver (PD) has made in scheduling the placement:
 
-* `PENDING`: The PD has not yet started scheduling the placement. This might indicate that that the placement rules are semantically correct, but cannot currently be satisfied by the cluster. For example, if `FOLLOWERS=4` but there are only 3 TiKV stores that are candidates for followers.
+* `PENDING`: The PD has not yet started scheduling the placement. This might indicate that the placement rules are semantically correct, but cannot currently be satisfied by the cluster. For example, if `FOLLOWERS=4` but there are only 3 TiKV stores that are candidates for followers.
 * `INPROGRESS`: The PD is currently scheduling the placement.
 * `SCHEDULED`: The PD has successfully scheduled the placement.
 
@@ -66,7 +66,7 @@ Query OK, 0 rows affected (0.01 sec)
 ***************************[ 1. row ]***************************
 Table        | t1
 Create Table | CREATE TABLE `t1` (
-  `a` int(11) DEFAULT NULL
+  `a` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin /*T![placement] PLACEMENT POLICY=`p1` */
 1 row in set (0.00 sec)
 

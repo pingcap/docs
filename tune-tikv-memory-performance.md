@@ -30,7 +30,7 @@ Each CF also has a separate `write buffer`. You can configure the size by settin
 
 ## Parameter specification
 
-```
+```toml
 # Log level: trace, debug, warn, error, info, off.
 log-level = "info"
 

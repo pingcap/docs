@@ -22,7 +22,8 @@ A table lock protects against reads or writes by other sessions. A session that 
 > The table locks feature is disabled by default.
 >
 > - For TiDB Self-Managed, to enable the table locks feature, you need to set [`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400) to `true` in the configuration files of all TiDB instances.
-> - For TiDB Cloud, to enable the table locks feature, you need to contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) to set [`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400) to `true`.
+> - For TiDB Cloud Dedicated, to enable the table locks feature, you need to contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) to set [`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400) to `true`.
+> - For TiDB Cloud Serverless, setting [`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400) to `true` is not supported.
 
 ## Synopsis
 

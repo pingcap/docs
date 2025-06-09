@@ -389,12 +389,12 @@ tiup dmctl --master-addr master1:8261 operate-source create /tmp/source1.yml
 
 All operations above performed on the cluster machine use the SSH client embedded in TiUP to connect to the cluster and execute commands. However, in some scenarios, you might also need to use the SSH client native to the control machine system to perform such cluster operations. For example:
 
-- To use a SSH plug-in for authentication
+- To use an SSH plug-in for authentication
 - To use a customized SSH client
 
 Then you can use the `--native-ssh` command-line flag to enable the system-native command-line tool:
 
-- Deploy a cluster: `tiup dm deploy <cluster-name> <version> <topo> --native-ssh`. Fill in the name of your cluster for `<cluster-name>`,  the DM version to be deployed (such as `v8.4.0`) for `<version>` , and the topology file name for `<topo>`.
+- Deploy a cluster: `tiup dm deploy <cluster-name> <version> <topo> --native-ssh`. Fill in the name of your cluster for `<cluster-name>`,  the DM version to be deployed (such as `v8.5.0`) for `<version>` , and the topology file name for `<topo>`.
 - Start a cluster: `tiup dm start <cluster-name> --native-ssh`.
 - Upgrade a cluster: `tiup dm upgrade ... --native-ssh`
 

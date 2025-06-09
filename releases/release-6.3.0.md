@@ -145,9 +145,9 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     You can [disable Titan](/storage-engine/titan-configuration.md#disable-titan) for online TiKV nodes.
 
-* Use `static` partition pruning when GlobalStats are not ready [#37535](https://github.com/pingcap/tidb/issues/37535) @[Yisaer](https://github.com/Yisaer)
+* Use `static` partition pruning when global statistics are not ready [#37535](https://github.com/pingcap/tidb/issues/37535) @[Yisaer](https://github.com/Yisaer)
 
-    When [`dynamic pruning`](/partitioned-table.md#dynamic-pruning-mode) is enabled, the optimizer selects execution plans based on [GlobalStats](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode). Before GlobalStats are fully collected, using pseudo statistics might cause performance regression. In v6.3.0, this issue is addressed by maintaining the `static` mode if you enable dynamic pruning before GlobalStats are collected. TiDB remains in the `static` mode until GlobalStats are collected. This ensures performance stability when you change the partition pruning settings.
+    When [`dynamic pruning`](/partitioned-table.md#dynamic-pruning-mode) is enabled, the optimizer selects execution plans based on [global statistics](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode). Before global statistics are fully collected, using pseudo statistics might cause performance regression. In v6.3.0, if you enable the `dynamic` pruning mode before global statistics collection is completed, TiDB remains in the `static` mode until global statistics are fully collected. This ensures performance stability when you change the partition pruning settings.
 
 ### Ease of use
 

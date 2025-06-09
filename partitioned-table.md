@@ -274,7 +274,7 @@ It creates this table:
 
 ```
 CREATE TABLE `monthly_report_status` (
-  `report_id` int(11) NOT NULL,
+  `report_id` int NOT NULL,
   `report_status` varchar(20) NOT NULL,
   `report_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
@@ -1133,7 +1133,7 @@ SHOW CREATE TABLE\G
 *************************** 1. row ***************************
        Table: example
 Create Table: CREATE TABLE `example` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `data` varchar(1024) DEFAULT NULL,
   PRIMARY KEY (`id`) /*T![clustered_index] CLUSTERED */
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
@@ -1176,7 +1176,7 @@ ALTER TABLE members REMOVE PARTITIONING
 To partition an existing non-partitioned table or modify the partition type of an existing partitioned table, you can use the following statement, which copies all rows and recreates the indexes online according to the new partition definitions:
 
 ```sql
-ALTER TABLE <table_name> PARTITION BY <new partition type and definitions>
+ALTER TABLE <table_name> PARTITION BY <new partition type and definitions> [UPDATE INDEXES (<index name> {GLOBAL|LOCAL}[ , <index name> {GLOBAL|LOCAL}...])]
 ```
 
 Examples:
@@ -1195,6 +1195,21 @@ ALTER TABLE member_level PARTITION BY RANGE(level)
  PARTITION pMid VALUES LESS THAN (3),
  PARTITION pHigh VALUES LESS THAN (7)
  PARTITION pMax VALUES LESS THAN (MAXVALUE));
+```
+
+When partitioning a non-partitioned table or repartitioning an already partitioned table, you can update the indexes to be global or local as needed:
+
+```sql
+CREATE TABLE t1 (
+    col1 INT NOT NULL,
+    col2 DATE NOT NULL,
+    col3 INT NOT NULL,
+    col4 INT NOT NULL,
+    UNIQUE KEY uidx12(col1, col2),
+    UNIQUE KEY uidx3(col3)
+);
+
+ALTER TABLE t1 PARTITION BY HASH (col1) PARTITIONS 3 UPDATE INDEXES (uidx12 LOCAL, uidx3 GLOBAL);
 ```
 
 ## Partition pruning
@@ -1472,10 +1487,10 @@ This section introduces some restrictions and limitations on partitioned tables 
 
 ### Partitioning keys, primary keys and unique keys
 
-This section discusses the relationship of partitioning keys with primary keys and unique keys. The rule governing this relationship can be expressed as follows: **Every unique key on the table must use every column in the table's partitioning expression**. This also includes the table's primary key, because it is by definition a unique key. 
+This section discusses the relationship of partitioning keys with primary keys and unique keys. The rule governing this relationship is as follows: every unique key on the partitioned table, including the primary key, must use every column in the table's partitioning expression, because the primary key is also a unique key by definition.
 
 > **Note:**
-> 
+>
 > You can ignore this rule when using [global indexes](#global-indexes).
 
 For example, the following table creation statements are invalid:
@@ -1685,13 +1700,13 @@ CREATE TABLE t (a varchar(20), b blob,
 ERROR 8264 (HY000): Global Index is needed for index 'a', since the unique index is not including all partitioning columns, and GLOBAL is not given as IndexOption
 ```
 
-#### Global indexes
+### Global indexes
 
 Before the introduction of global indexes, TiDB created a local index for each partition, leading to [a limitation](#partitioning-keys-primary-keys-and-unique-keys) that primary keys and unique keys had to include the partition key to ensure data uniqueness. Additionally, when querying data across multiple partitions, TiDB needed to scan the data of each partition to return results.
 
-To address these issues, TiDB introduces the global indexes feature in v8.3.0. A global index covers the data of the entire table with a single index, allowing primary keys and unique keys to maintain global uniqueness without including all partition keys. Moreover, global indexes can access data across multiple partitions in a single operation, significantly improving query performance for non-partitioned keys.
+To address these issues, TiDB introduces the global indexes feature in v8.3.0. A global index covers the data of the entire table with a single index, allowing primary keys and unique keys to maintain global uniqueness without including all partition keys. Moreover, global indexes can access index data across multiple partitions in a single operation instead of looking up the local index for each partition, significantly improving query performance for non-partitioned keys. Starting from v9.0.0, non-unique indexes can also be created as global indexes.
 
-To create a global index for a primary key or unique key that **does not include all the columns used in the partition expressions**, you can enable the [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) system variable and add the `GLOBAL` keyword in the index definition. 
+To create a global index, you can add the `GLOBAL` keyword in the index definition.
 
 > **Note:**
 >
@@ -1704,13 +1719,14 @@ CREATE TABLE t1 (
     col3 INT NOT NULL,
     col4 INT NOT NULL,
     UNIQUE KEY uidx12(col1, col2) GLOBAL,
-    UNIQUE KEY uidx3(col3)
+    UNIQUE KEY uidx3(col3),
+    KEY idx1(col1) GLOBAL
 )
 PARTITION BY HASH(col3)
 PARTITIONS 4;
 ```
 
-In the preceding example, the unique index `uidx12` is a global index, while `uidx3` is a regular unique index.
+In the preceding example, the unique index `uidx12` and non-unique index `idx1` are global indexes, while `uidx3` is a regular unique index.
 
 Note that a **clustered index** cannot be a global index, as shown in the following example:
 
@@ -1737,12 +1753,13 @@ SHOW CREATE TABLE t1\G
 ```
        Table: t1
 Create Table: CREATE TABLE `t1` (
-  `col1` int(11) NOT NULL,
+  `col1` int NOT NULL,
   `col2` date NOT NULL,
-  `col3` int(11) NOT NULL,
-  `col4` int(11) NOT NULL,
+  `col3` int NOT NULL,
+  `col4` int NOT NULL,
   UNIQUE KEY `uidx12` (`col1`,`col2`) /*T![global_index] GLOBAL */,
-  UNIQUE KEY `uidx3` (`col3`)
+  UNIQUE KEY `uidx3` (`col3`),
+  KEY `idx1` (`col1`) /*T![global_index] GLOBAL */
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 PARTITION BY HASH (`col3`) PARTITIONS 4
 1 row in set (0.00 sec)
@@ -1761,21 +1778,25 @@ SELECT * FROM INFORMATION_SCHEMA.TIDB_INDEXES WHERE table_name='t1';
 | test         | t1         |          0 | uidx12   |            1 | col1        |     NULL |               | NULL       |        1 | YES        | NO        |         1 |
 | test         | t1         |          0 | uidx12   |            2 | col2        |     NULL |               | NULL       |        1 | YES        | NO        |         1 |
 | test         | t1         |          0 | uidx3    |            1 | col3        |     NULL |               | NULL       |        2 | YES        | NO        |         0 |
+| test         | t1         |          1 | idx1     |            1 | col1        |     NULL |               | NULL       |        3 | YES        | NO        |         1 |
 +--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
 3 rows in set (0.00 sec)
 ```
 
-When partitioning a non-partitioned table or repartitioning an already partitioned table, you can update the indexes to be global indexes or revert them to local indexes as needed:
+When partitioning a non-partitioned table or repartitioning an already partitioned table, you can update the indexes to be global indexes or local indexes as needed.
+
+For example, the following SQL statement repartitions table `t1` based on the `col1` column, updates the global indexes `uidx12` and `idx1` to local indexes, and updates the local index `uidx3` to a global index. Because `uidx3` is a unique index on the `col3` column, it must be a global index to ensure the uniqueness of `col3` across all partitions. `uidx12` and `idx1` are indexes on the `col1` column, which means they can be either global or local indexes. 
 
 ```sql
-ALTER TABLE t1 PARTITION BY HASH (col1) PARTITIONS 3 UPDATE INDEXES (uidx12 LOCAL, uidx3 GLOBAL);
+ALTER TABLE t1 PARTITION BY HASH (col1) PARTITIONS 3 UPDATE INDEXES (uidx12 LOCAL, uidx3 GLOBAL, idx1 LOCAL);
 ```
 
-##### Limitations of global indexes
+#### Limitations of global indexes
 
 - If the `GLOBAL` keyword is not explicitly specified in the index definition, TiDB creates a local index by default.
 - The `GLOBAL` and `LOCAL` keywords only apply to partitioned tables and do not affect non-partitioned tables. In other words, there is no difference between a global index and a local index in non-partitioned tables.
-- DDL operations such as `ADD PARTITION`, `DROP PARTITION`, `TRUNCATE PARTITION`, `REORGANIZE PARTITION`, `SPLIT PARTITION`, and `EXCHANGE PARTITION` also trigger updates to global indexes. The results of these DDL operations will only be returned after the global indexes of the corresponding tables are fully updated. This can delay operations that usually require quick DDL completion, such as data archiving operations (`EXCHANGE PARTITION`, `TRUNCATE PARTITION`, and `DROP PARTITION`). In contrast, when global indexes are not involved, these DDL operations can be completed immediately.
+- DDL operations such as `DROP PARTITION`, `TRUNCATE PARTITION`, and `REORGANIZE PARTITION` also trigger updates to global indexes. These DDL operations need to wait for the global index updates to complete before returning results, which increases the execution time accordingly. This is particularly evident in data archiving scenarios, such as `DROP PARTITION` and `TRUNCATE PARTITION`. Without global indexes, these operations can typically complete immediately. However, with global indexes, the execution time increases as the number of indexes that need to be updated grows.
+- Tables with global indexes do not support the `EXCHANGE PARTITION` operation.
 - By default, the primary key of a partitioned table is a clustered index and must include the partition key. If you require the primary key to exclude the partition key, you can explicitly specify the primary key as a non-clustered global index when creating the table, for example, `PRIMARY KEY(col1, col2) NONCLUSTERED GLOBAL`.
 - If a global index is added to an expression column, or a global index is also a prefix index (for example `UNIQUE KEY idx_id_prefix (id(10)) GLOBAL`), you need to collect statistics manually for this global index.
 
@@ -1812,8 +1833,6 @@ YEARWEEK()
 ### Compatibility with MySQL
 
 Currently, TiDB supports Range partitioning, Range COLUMNS partitioning, List partitioning, List COLUMNS partitioning, Hash partitioning, and Key partitioning. Other partitioning types that are available in MySQL are not supported yet in TiDB.
-
-With regard to partition management, any operation that requires moving data in the bottom implementation is not supported currently, including but not limited to: adjust the number of partitions in a Hash partitioned table, modify the Range of a Range partitioned table, and merge partitions.
 
 For the unsupported partitioning types, when you create a table in TiDB, the partitioning information is ignored and the table is created in the regular form with a warning reported.
 
@@ -1909,9 +1928,9 @@ select * from t;
 5 rows in set (0.00 sec)
 ```
 
-### Dynamic pruning mode
+## Dynamic pruning mode
 
-TiDB accesses partitioned tables in either `dynamic` or `static` mode. `dynamic` mode is used by default since v6.3.0. However, dynamic partitioning is effective only after the full table-level statistics, or GlobalStats, are collected. Before GlobalStats are collected, TiDB will use the `static` mode instead. For detailed information about GlobalStats, see [Collect statistics of partitioned tables in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
+TiDB accesses partitioned tables in either `dynamic` or `static` mode. `dynamic` mode is used by default since v6.3.0. However, dynamic partitioning is effective only after the full table-level statistics, or global statistics, are collected. If you enable the `dynamic` pruning mode before global statistics collection is completed, TiDB remains in the `static` mode until global statistics are fully collected. For detailed information about global statistics, see [Collect statistics of partitioned tables in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
 
 {{< copyable "sql" >}}
 
@@ -1921,9 +1940,9 @@ set @@session.tidb_partition_prune_mode = 'dynamic'
 
 Manual ANALYZE and normal queries use the session-level `tidb_partition_prune_mode` setting. The `auto-analyze` operation in the background uses the global `tidb_partition_prune_mode` setting.
 
-In `static` mode, partitioned tables use partition-level statistics. In `dynamic` mode, partitioned tables use table-level GlobalStats.
+In `static` mode, partitioned tables use partition-level statistics. In `dynamic` mode, partitioned tables use table-level global statistics.
 
-When switching from `static` mode to `dynamic` mode, you need to check and collect statistics manually. This is because after the switch to `dynamic` mode, partitioned tables have only partition-level statistics but no table-level statistics. GlobalStats are collected only upon the next `auto-analyze` operation.
+When switching from `static` mode to `dynamic` mode, you need to check and collect statistics manually. This is because after the switch to `dynamic` mode, partitioned tables have only partition-level statistics but no table-level statistics. Global statistics are collected only upon the next `auto-analyze` operation.
 
 {{< copyable "sql" >}}
 
@@ -1943,7 +1962,7 @@ show stats_meta where table_name like "t";
 3 rows in set (0.01 sec)
 ```
 
-To make sure that the statistics used by SQL statements are correct after you enable global `dynamic` pruning mode, you need to manually trigger `analyze` on the tables or on a partition of the table to obtain GlobalStats.
+To make sure that the statistics used by SQL statements are correct after you enable global `dynamic` pruning mode, you need to manually trigger `analyze` on the tables or on a partition of the table to obtain global statistics.
 
 {{< copyable "sql" >}}
 
@@ -2049,7 +2068,7 @@ mysql> create table t2 (id int, code int);
 Query OK, 0 rows affected (0.01 sec)
 
 mysql> set @@tidb_partition_prune_mode = 'static';
-Query OK, 0 rows affected (0.00 sec)
+Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 0 and t2.id = t1.id;
 +--------------------------------+----------+-----------+------------------------+------------------------------------------------+
@@ -2114,7 +2133,7 @@ From example 2, you can see that in `dynamic` mode, the execution plan with Inde
 
 Currently, `static` pruning mode does not support plan cache for both prepared and non-prepared statements.
 
-#### Update statistics of partitioned tables in dynamic pruning mode
+### Update statistics of partitioned tables in dynamic pruning mode
 
 1. Locate all partitioned tables:
 

@@ -24,8 +24,6 @@ Take the `/dev/nvme0n1` data disk as an example:
 
 1. View the data disk.
 
-    {{< copyable "shell-root" >}}
-
     ```bash
     fdisk -l
     ```
@@ -36,10 +34,15 @@ Take the `/dev/nvme0n1` data disk as an example:
 
 2. Create the partition.
 
-    {{< copyable "shell-root" >}}
-
     ```bash
     parted -s -a optimal /dev/nvme0n1 mklabel gpt -- mkpart primary ext4 1 -1
+    ```
+
+    For large NVMe devices, you can create multiple partitions:
+
+    ```bash
+    parted -s -a optimal /dev/nvme0n1 mklabel gpt -- mkpart primary ext4 1 2000GB
+    parted -s -a optimal /dev/nvme0n1 -- mkpart primary ext4 2000GB -1
     ```
 
     > **Note:**
@@ -48,8 +51,6 @@ Take the `/dev/nvme0n1` data disk as an example:
 
 3. Format the data disk to the ext4 filesystem.
 
-    {{< copyable "shell-root" >}}
-
     ```bash
     mkfs.ext4 /dev/nvme0n1p1
     ```
@@ -57,8 +58,6 @@ Take the `/dev/nvme0n1` data disk as an example:
 4. View the partition UUID of the data disk.
 
     In this example, the UUID of nvme0n1p1 is `c51eb23b-195c-4061-92a9-3fad812cc12f`.
-
-    {{< copyable "shell-root" >}}
 
     ```bash
     lsblk -f
@@ -77,8 +76,6 @@ Take the `/dev/nvme0n1` data disk as an example:
 
 5. Edit the `/etc/fstab` file and add the `nodelalloc` mount options.
 
-    {{< copyable "shell-root" >}}
-
     ```bash
     vi /etc/fstab
     ```
@@ -89,16 +86,13 @@ Take the `/dev/nvme0n1` data disk as an example:
 
 6. Mount the data disk.
 
-    {{< copyable "shell-root" >}}
-
     ```bash
     mkdir /data1 && \
+    systemctl daemon-reload && \
     mount -a
     ```
 
 7. Check using the following command.
-
-    {{< copyable "shell-root" >}}
 
     ```bash
     mount -t ext4
@@ -112,21 +106,25 @@ Take the `/dev/nvme0n1` data disk as an example:
 
 ## Check and disable system swap
 
-TiDB needs sufficient memory space for operation. When memory is insufficient, using swap as a buffer might degrade performance. Therefore, it is recommended to disable the system swap permanently by executing the following commands:
+TiDB needs a sufficient amount of memory for operation. If the memory that TiDB uses gets swapped out and later gets swapped back in, this can cause latency spikes. If you want to maintain stable performance, it is recommended that you permanently disable the system swap, but it might trigger OOM issues when there is insufficient memory. If you want to avoid such OOM issues, you can just decrease the swap priority, instead of permanently disabling it.
 
-{{< copyable "shell-regular" >}}
+- Enabling and using swap might introduce performance jitter issues. It is recommended that you permanently disable the operating system tier swap for low-latency and stability-critical database services. To permanently disable swap, you can use the following method:
 
-```bash
-echo "vm.swappiness = 0">> /etc/sysctl.conf
-swapoff -a && swapon -a
-sysctl -p
-```
+    - During the initialization phase of the operating system, do not partition the swap partition disk separately.
+    - If you have already partitioned a separate swap partition disk during the initialization phase of the operating system and enabled swap, run the following command to disable it:
 
-> **Note:**
->
-> - Executing `swapoff -a` and then `swapon -a` is to refresh swap by dumping data to memory and cleaning up swap. If you drop the swappiness change and execute only `swapoff -a`, swap will be enabled again after you restart the system.
->
-> - `sysctl -p` is to make the configuration effective without restarting the system.
+        ```bash
+        echo "vm.swappiness = 0">> /etc/sysctl.conf
+        sysctl -p
+        swapoff -a && swapon -a
+        ```
+
+- If the host memory is insufficient, disabling the system swap might be more likely to trigger OOM issues. You can run the following command to decrease the swap priority instead of disabling it permanently:
+
+    ```bash
+    echo "vm.swappiness = 0">> /etc/sysctl.conf
+    sysctl -p
+    ```
 
 ## Set temporary spaces for TiDB instances (Recommended)
 
@@ -138,64 +136,145 @@ Some operations in TiDB require writing temporary files to the server, so it is 
 
 - `Fast Online DDL` work area
 
-    When the variable [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is set to `ON` (the default value in v6.5.0 and later versions), `Fast Online DDL` is enabled, and some DDL operations need to read and write temporary files in filesystems. The location is defined by the configuration item [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630). You need to ensure that the user that runs TiDB has read and write permissions for that directory of the operating system. Taking the default directory `/tmp/tidb` as an example:
+    When the variable [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is set to `ON` (the default value in v6.5.0 and later versions), `Fast Online DDL` is enabled, and some DDL operations need to read and write temporary files in filesystems. The location is defined by the configuration item [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630). You need to ensure that the user that runs TiDB has read and write permissions for that directory of the operating system. The default directory `/tmp/tidb` uses tmpfs (temporary file system). It is recommended to explicitly specify a disk directory. The following uses `/data/tidb-deploy/tempdir` as an example:
 
     > **Note:**
-    > 
+    >
     > If DDL operations on large objects exist in your application, it is highly recommended to configure an independent large file system for [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630).
 
     ```shell
-    sudo mkdir /tmp/tidb
+    sudo mkdir -p /data/tidb-deploy/tempdir
     ```
 
-    If the `/tmp/tidb` directory already exists, make sure the write permission is granted.
+    If the `/data/tidb-deploy/tempdir` directory already exists, make sure the write permission is granted.
 
     ```shell
-    sudo chmod -R 777 /tmp/tidb
+    sudo chmod -R 777 /data/tidb-deploy/tempdir
     ```
 
     > **Note:**
     >
-    > If the directory does not exist, TiDB will automatically create it upon startup. If the directory creation fails or TiDB does not have the read and write permissions for that directory, [`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) might experience unpredictable issues during runtime.
+    > If the directory does not exist, TiDB will automatically create it upon startup. If the directory creation fails or TiDB does not have the read and write permissions for that directory, [`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) will be disabled during runtime.
 
-## Check and stop the firewall service of target machines
+## Check the firewall service of target machines
 
 In TiDB clusters, the access ports between nodes must be open to ensure the transmission of information such as read and write requests and data heartbeats. In common online scenarios, the data interaction between the database and the application service and between the database nodes are all made within a secure network. Therefore, if there are no special security requirements, it is recommended to stop the firewall of the target machine. Otherwise, refer to [the port usage](/hardware-and-software-requirements.md#network-requirements) and add the needed port information to the allowlist of the firewall service.
 
-The rest of this section describes how to stop the firewall service of a target machine.
+### Stop and disable firewalld
 
-1. Check the firewall status. Take CentOS Linux release 7.7.1908 (Core) as an example.
+This section describes how to stop and disable the firewall service of a target machine.
 
-    {{< copyable "shell-regular" >}}
+1. Check the firewall status. The following example uses CentOS Linux release 7.7.1908 (Core):
 
     ```shell
     sudo firewall-cmd --state
     sudo systemctl status firewalld.service
     ```
 
-2. Stop the firewall service.
-
-    {{< copyable "shell-regular" >}}
+2. Stop the firewall service:
 
     ```bash
     sudo systemctl stop firewalld.service
     ```
 
-3. Disable automatic start of the firewall service.
-
-    {{< copyable "shell-regular" >}}
+3. Disable automatic startup of the firewall service:
 
     ```bash
     sudo systemctl disable firewalld.service
     ```
 
-4. Check the firewall status.
-
-    {{< copyable "shell-regular" >}}
+4. Check the firewall status:
 
     ```bash
     sudo systemctl status firewalld.service
     ```
+
+### Change the firewall zone
+
+Instead of disabling the firewall completely, you can use a less restrictive zone. The default `public` zone allows only specific services and ports, while the `trusted` zone allows all traffic by default.
+
+To set the default zone to `trusted`:
+
+```bash
+firewall-cmd --set-default-zone trusted
+```
+
+To verify the default zone:
+
+```bash
+firewall-cmd --get-default-zone
+# trusted
+```
+
+To list the policy for a zone:
+
+```bash
+firewall-cmd --zone=trusted --list-all
+# trusted
+#   target: ACCEPT
+#   icmp-block-inversion: no
+#   interfaces:
+#   sources:
+#   services:
+#   ports:
+#   protocols:
+#   forward: yes
+#   masquerade: no
+#   forward-ports:
+#   source-ports:
+#   icmp-blocks:
+#   rich rules:
+```
+
+### Configure the firewall
+
+To configure the firewall for TiDB cluster components, use the following commands. These examples are for reference only. Adjust the zone names, ports, and services based on your specific environment.
+
+Configure the firewall for the TiDB component:
+
+```bash
+firewall-cmd --permanent --new-service tidb
+firewall-cmd --permanent --service tidb --set-description="TiDB Server"
+firewall-cmd --permanent --service tidb --set-short="TiDB"
+firewall-cmd --permanent --service tidb --add-port=4000/tcp
+firewall-cmd --permanent --service tidb --add-port=10080/tcp
+firewall-cmd --permanent --zone=public --add-service=tidb
+```
+
+Configure the firewall for the TiKV component:
+
+```bash
+firewall-cmd --permanent --new-service tikv
+firewall-cmd --permanent --service tikv --set-description="TiKV Server"
+firewall-cmd --permanent --service tikv --set-short="TiKV"
+firewall-cmd --permanent --service tikv --add-port=20160/tcp
+firewall-cmd --permanent --service tikv --add-port=20180/tcp
+firewall-cmd --permanent --zone=public --add-service=tikv
+```
+
+Configure the firewall for the PD component:
+
+```bash
+firewall-cmd --permanent --new-service pd
+firewall-cmd --permanent --service pd --set-description="PD Server"
+firewall-cmd --permanent --service pd --set-short="PD"
+firewall-cmd --permanent --service pd --add-port=2379/tcp
+firewall-cmd --permanent --service pd --add-port=2380/tcp
+firewall-cmd --permanent --zone=public --add-service=pd
+```
+
+Configure the firewall for Prometheus:
+
+```bash
+firewall-cmd --permanent --zone=public --add-service=prometheus
+firewall-cmd --permanent --service=prometheus --add-port=12020/tcp
+```
+
+Configure the firewall for Grafana:
+
+```bash
+firewall-cmd --permanent --zone=public --add-service=grafana
+```
 
 ## Check and install the NTP service
 
@@ -206,8 +285,6 @@ At present, the common solution to clock synchronization is to use the Network T
 To check whether the NTP service is installed and whether it synchronizes with the NTP server normally, take the following steps:
 
 1. Run the following command. If it returns `running`, then the NTP service is running.
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     sudo systemctl status ntpd.service
@@ -220,8 +297,6 @@ To check whether the NTP service is installed and whether it synchronizes with t
     ```
 
     - If it returns `Unit ntpd.service could not be found.`, then try the following command to see whether your system is configured to use `chronyd` instead of `ntpd` to perform clock synchronization with NTP:
-
-        {{< copyable "shell-regular" >}}
 
         ```bash
         sudo systemctl status chronyd.service
@@ -242,8 +317,6 @@ To check whether the NTP service is installed and whether it synchronizes with t
     > **Note:**
     >
     > For the Ubuntu system, you need to install the `ntpstat` package.
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     ntpstat
@@ -274,8 +347,6 @@ To check whether the NTP service is installed and whether it synchronizes with t
     > **Note:**
     >
     > This only applies to systems that use Chrony instead of NTPd.
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     chronyc tracking
@@ -311,9 +382,9 @@ To check whether the NTP service is installed and whether it synchronizes with t
         506 Cannot talk to daemon
         ```
 
-To make the NTP service start synchronizing as soon as possible, run the following command. Replace `pool.ntp.org` with your NTP server.
+    - If the offset appears to be too high, you can run the `chronyc makestep` command to immediately correct the time offset. Otherwise, `chronyd` will gradually correct the time offset.
 
-{{< copyable "shell-regular" >}}
+To make the NTP service start synchronizing as soon as possible, run the following command. Replace `pool.ntp.org` with your NTP server.
 
 ```bash
 sudo systemctl stop ntpd.service && \
@@ -322,8 +393,6 @@ sudo systemctl start ntpd.service
 ```
 
 To install the NTP service manually on the CentOS 7 system, run the following command:
-
-{{< copyable "shell-regular" >}}
 
 ```bash
 sudo yum install ntp ntpdate && \
@@ -336,14 +405,16 @@ sudo systemctl enable ntpd.service
 For TiDB in the production environment, it is recommended to optimize the operating system configuration in the following ways:
 
 1. Disable THP (Transparent Huge Pages). The memory access pattern of databases tends to be sparse rather than consecutive. If the high-level memory fragmentation is serious, higher latency will occur when THP pages are allocated.
-2. Set the I/O Scheduler of the storage media to `noop`. For the high-speed SSD storage media, the kernel's I/O scheduling operations can cause performance loss. After the Scheduler is set to `noop`, the performance is better because the kernel directly sends I/O requests to the hardware without other operations. Also, the noop Scheduler is better applicable.
+2. Set the I/O Scheduler of the storage media.
+
+    - For the high-speed SSD storage, the kernel's default I/O scheduling operations might cause performance loss. It is recommended to set the I/O Scheduler to first-in-first-out (FIFO), such as `noop` or `none`. This configuration allows the kernel to pass I/O requests directly to hardware without scheduling, thus improving performance.
+    - For NVMe storage, the default I/O Scheduler is `none`, so no adjustment is needed.
+
 3. Choose the `performance` mode for the cpufrequ module which controls the CPU frequency. The performance is maximized when the CPU frequency is fixed at its highest supported operating frequency without dynamic adjustment.
 
 Take the following steps to check the current operating system configuration and configure optimal parameters:
 
 1. Execute the following command to see whether THP is enabled or disabled:
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     cat /sys/kernel/mm/transparent_hugepage/enabled
@@ -357,9 +428,9 @@ Take the following steps to check the current operating system configuration and
     >
     > If `[always] madvise never` is output, THP is enabled. You need to disable it.
 
-2. Execute the following command to see the I/O Scheduler of the disk where the data directory is located. Assume that you create data directories on both sdb and sdc disks:
+2. Execute the following command to see the I/O Scheduler of the disk where the data directory is located.
 
-    {{< copyable "shell-regular" >}}
+    If your data directory uses an SD or VD device, run the following command to check the I/O Scheduler:
 
     ```bash
     cat /sys/block/sd[bc]/queue/scheduler
@@ -374,9 +445,22 @@ Take the following steps to check the current operating system configuration and
     >
     > If `noop [deadline] cfq` is output, the I/O Scheduler for the disk is in the `deadline` mode. You need to change it to `noop`.
 
-3. Execute the following command to see the `ID_SERIAL` of the disk:
+    If your data directory uses an NVMe device, run the following command to check the I/O Scheduler:
 
-    {{< copyable "shell-regular" >}}
+    ```bash
+    cat /sys/block/nvme[01]*/queue/scheduler
+    ```
+
+    ```
+    [none] mq-deadline kyber bfq
+    [none] mq-deadline kyber bfq
+    ```
+
+    > **Note:**
+    >
+    > `[none] mq-deadline kyber bfq` indicates that the NVMe device uses the `none` I/O Scheduler, and no changes are needed.
+
+3. Execute the following command to see the `ID_SERIAL` of the disk:
 
     ```bash
     udevadm info --name=/dev/sdb | grep ID_SERIAL
@@ -389,11 +473,10 @@ Take the following steps to check the current operating system configuration and
 
     > **Note:**
     >
-    > If multiple disks are allocated with data directories, you need to execute the above command several times to record the `ID_SERIAL` of each disk.
+    > - If multiple disks are allocated with data directories, you need to execute the above command for each disk to record the `ID_SERIAL` of each disk.
+    > - If your device uses the `noop` or `none` Scheduler, you do not need to record the `ID_SERIAL` or configure udev rules or the tuned profile.
 
 4. Execute the following command to see the power policy of the cpufreq module:
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     cpupower frequency-info --policy
@@ -414,8 +497,6 @@ Take the following steps to check the current operating system configuration and
     + Method one: Use tuned (Recommended)
 
         1. Execute the `tuned-adm list` command to see the tuned profile of the current operating system:
-
-            {{< copyable "shell-regular" >}}
 
             ```bash
             tuned-adm list
@@ -439,8 +520,6 @@ Take the following steps to check the current operating system configuration and
             The output `Current active profile: balanced` means that the tuned profile of the current operating system is `balanced`. It is recommended to optimize the configuration of the operating system based on the current profile.
 
         2. Create a new tuned profile:
-
-            {{< copyable "shell-regular" >}}
 
             ```bash
             mkdir /etc/tuned/balanced-tidb-optimal/
@@ -466,7 +545,9 @@ Take the following steps to check the current operating system configuration and
 
         3. Apply the new tuned profile:
 
-            {{< copyable "shell-regular" >}}
+            > **Note:**
+            >
+            > If your device uses the `noop` or `none` I/O Scheduler, skip this step. No Scheduler configuration is needed in the tuned profile.
 
             ```bash
             tuned-adm profile balanced-tidb-optimal
@@ -480,8 +561,6 @@ Take the following steps to check the current operating system configuration and
             >
             > Install the `grubby` package first before you execute `grubby`.
 
-            {{< copyable "shell-regular" >}}
-
             ```bash
             grubby --default-kernel
             ```
@@ -492,19 +571,15 @@ Take the following steps to check the current operating system configuration and
 
         2. Execute `grubby --update-kernel` to modify the kernel configuration:
 
-            {{< copyable "shell-regular" >}}
-
             ```bash
-            grubby --args="transparent_hugepage=never" --update-kernel /boot/vmlinuz-3.10.0-957.el7.x86_64
+            grubby --args="transparent_hugepage=never" --update-kernel `grubby --default-kernel`
             ```
 
             > **Note:**
             >
-            > `--update-kernel` is followed by the actual default kernel version.
+            > You can also specify the actual version number after `--update-kernel`, for example, `--update-kernel /boot/vmlinuz-3.10.0-957.el7.x86_64` or `ALL`.
 
         3. Execute `grubby --info` to see the modified default kernel configuration:
-
-            {{< copyable "shell-regular" >}}
 
             ```bash
             grubby --info /boot/vmlinuz-3.10.0-957.el7.x86_64
@@ -525,16 +600,12 @@ Take the following steps to check the current operating system configuration and
 
         4. Modify the current kernel configuration to immediately disable THP:
 
-            {{< copyable "shell-regular" >}}
-
             ```bash
             echo never > /sys/kernel/mm/transparent_hugepage/enabled
             echo never > /sys/kernel/mm/transparent_hugepage/defrag
             ```
 
         5. Configure the I/O Scheduler in the udev script:
-
-            {{< copyable "shell-regular" >}}
 
             ```bash
             vi /etc/udev/rules.d/60-tidb-schedulers.rules
@@ -548,7 +619,9 @@ Take the following steps to check the current operating system configuration and
 
         6. Apply the udev script:
 
-            {{< copyable "shell-regular" >}}
+            > **Note:**
+            >
+            > If your device uses the `noop` or `none` I/O Scheduler, skip this step. No udev rules configuration is needed.
 
             ```bash
             udevadm control --reload-rules
@@ -556,8 +629,6 @@ Take the following steps to check the current operating system configuration and
             ```
 
         7. Create a service to configure the CPU power policy:
-
-            {{< copyable "shell-regular" >}}
 
             ```bash
             cat  >> /etc/systemd/system/cpupower.service << EOF
@@ -573,8 +644,6 @@ Take the following steps to check the current operating system configuration and
 
         8. Apply the CPU power policy configuration service:
 
-            {{< copyable "shell-regular" >}}
-
             ```bash
             systemctl daemon-reload
             systemctl enable cpupower.service
@@ -582,8 +651,6 @@ Take the following steps to check the current operating system configuration and
             ```
 
 6. Execute the following command to verify the THP status:
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     cat /sys/kernel/mm/transparent_hugepage/enabled
@@ -595,8 +662,6 @@ Take the following steps to check the current operating system configuration and
 
 7. Execute the following command to verify the I/O Scheduler of the disk where the data directory is located:
 
-    {{< copyable "shell-regular" >}}
-
     ```bash
     cat /sys/block/sd[bc]/queue/scheduler
     ```
@@ -607,8 +672,6 @@ Take the following steps to check the current operating system configuration and
     ```
 
 8. Execute the following command to see the power policy of the cpufreq module:
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     cpupower frequency-info --policy
@@ -622,35 +685,36 @@ Take the following steps to check the current operating system configuration and
 
 9. Execute the following commands to modify the `sysctl` parameters:
 
-    {{< copyable "shell-regular" >}}
-
     ```bash
     echo "fs.file-max = 1000000">> /etc/sysctl.conf
     echo "net.core.somaxconn = 32768">> /etc/sysctl.conf
-    echo "net.ipv4.tcp_tw_recycle = 0">> /etc/sysctl.conf
     echo "net.ipv4.tcp_syncookies = 0">> /etc/sysctl.conf
     echo "vm.overcommit_memory = 1">> /etc/sysctl.conf
     echo "vm.min_free_kbytes = 1048576">> /etc/sysctl.conf
     sysctl -p
     ```
 
+    > **Warning:**
+    >
+    > It is not recommended to increase the value of `vm.min_free_kbytes` on systems with less than 16 GiB of memory, because it might cause instability and boot failures.
+
     > **Note:**
     >
     > - `vm.min_free_kbytes` is a Linux kernel parameter that controls the minimum amount of free memory reserved by the system, measured in KiB.
     > - The setting of `vm.min_free_kbytes` affects the memory reclaim mechanism. Setting it too large reduces the available memory, while setting it too small might cause memory request speeds to exceed background reclaim speeds, leading to memory reclamation and consequent delays in memory allocation.
     > - It is recommended to set `vm.min_free_kbytes` to `1048576` KiB (1 GiB) at least. If [NUMA is installed](/check-before-deployment.md#install-the-numactl-tool), it is recommended to set it to `number of NUMA nodes * 1048576` KiB.
-    > - For servers with memory sizes less than 16 GiB, it is recommended to keep the default value of `vm.min_free_kbytes` unchanged.
+    > - For systems running Linux kernel 4.11 or earlier, it is recommended to set `net.ipv4.tcp_tw_recycle = 0`.
 
 10. Execute the following command to configure the user's `limits.conf` file:
 
-    {{< copyable "shell-regular" >}}
-
     ```bash
     cat << EOF >>/etc/security/limits.conf
-    tidb           soft    nofile          1000000
-    tidb           hard    nofile          1000000
+    tidb           soft    nofile         1000000
+    tidb           hard    nofile         1000000
     tidb           soft    stack          32768
     tidb           hard    stack          32768
+    tidb           soft    core           unlimited
+    tidb           hard    core           unlimited
     EOF
     ```
 
@@ -660,16 +724,12 @@ This section describes how to manually configure the SSH mutual trust and sudo w
 
 1. Log in to the target machine respectively using the `root` user account, create the `tidb` user and set the login password.
 
-    {{< copyable "shell-root" >}}
-
     ```bash
     useradd tidb && \
     passwd tidb
     ```
 
 2. To configure sudo without password, run the following command, and add `tidb ALL=(ALL) NOPASSWD: ALL` to the end of the file:
-
-    {{< copyable "shell-root" >}}
 
     ```bash
     visudo
@@ -681,16 +741,12 @@ This section describes how to manually configure the SSH mutual trust and sudo w
 
 3. Use the `tidb` user to log in to the control machine, and run the following command. Replace `10.0.1.1` with the IP of your target machine, and enter the `tidb` user password of the target machine as prompted. After the command is executed, SSH mutual trust is already created. This applies to other machines as well. Newly created `tidb` users do not have the `.ssh` directory. To create such a directory, execute the command that generates the RSA key. To deploy TiDB components on the control machine, configure mutual trust for the control machine and the control machine itself.
 
-    {{< copyable "shell-regular" >}}
-
     ```bash
     ssh-keygen -t rsa
     ssh-copy-id -i ~/.ssh/id_rsa.pub 10.0.1.1
     ```
 
 4. Log in to the control machine using the `tidb` user account, and log in to the IP of the target machine using `ssh`. If you do not need to enter the password and can successfully log in, then the SSH mutual trust is successfully configured.
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     ssh 10.0.1.1
@@ -701,8 +757,6 @@ This section describes how to manually configure the SSH mutual trust and sudo w
     ```
 
 5. After you log in to the target machine using the `tidb` user, run the following command. If you do not need to enter the password and can switch to the `root` user, then sudo without password of the `tidb` user is successfully configured.
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     sudo -su root
@@ -744,3 +798,11 @@ sudo yum -y install numactl
     ```
 
     To get help information of the `tiup cluster exec` command, run the `tiup cluster exec --help` command.
+
+## Disable SELinux
+
+SELinux must be disabled or set to permissive mode. To check the current status, use the [getenforce(8)](https://linux.die.net/man/8/getenforce) utility.
+
+If SELinux is not disabled, open the `/etc/selinux/config` file, locate the line starting with `SELINUX=`, and change it to `SELINUX=disabled`. After making this change, you need to reboot the system because switching from `enforcing` or `permissive` to `disabled` does not take effect without a reboot.
+
+On some systems (such as Ubuntu), the `/etc/selinux/config` file might not exist, and the getenforce utility might not be installed. In that case, you can skip this step.

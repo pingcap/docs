@@ -28,6 +28,13 @@ In the physical import mode, TiDB Lightning imports data by inserting SST files 
     1. Use the offline import tool provided by your downstream system to import TiDB Lightning's input files.
     2. Create a changefeed to replicate subsequent incremental data written through SQL. For more information, see [Create a replication task](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task).
 
+## Compatibility with TiFlash
+
+Currently, when you use TiCDC to replicate tables to a downstream TiDB cluster, creating TiFlash replicas for the tables is not supported, which means that TiCDC does not support replicating TiFlash-related DDL statements, such as:
+
+* `ALTER TABLE table_name SET TIFLASH REPLICA count;`
+* `ALTER DATABASE db_name SET TIFLASH REPLICA count;`
+
 ## CLI and configuration file compatibility
 
 * In TiCDC v4.0.0, `ignore-txn-commit-ts` is removed and `ignore-txn-start-ts` is added, which uses start_ts to filter transactions.
@@ -78,7 +85,7 @@ If the upstream cluster contains a global temporary table, the downstream TiDB c
 
 ### Compatibility with vector data types
 
-Starting from v8.4.0, TiCDC supports replicating tables with [vector data types](/vector-search-data-types.md) to downstream (experimental).
+Starting from v8.4.0, TiCDC supports replicating tables with [vector data types](/vector-search/vector-search-data-types.md) to downstream (experimental).
 
 When the downstream is Kafka or a storage service (such as Amazon S3, GCS, Azure Blob Storage, or NFS), TiCDC converts vector data types into string types before writing to the downstream.
 

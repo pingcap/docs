@@ -53,22 +53,16 @@ This is because TiFlash is in an abnormal state caused by configuration errors o
 
 3. Check whether the TiFlash proxy status is normal through `pd-ctl`.
 
-    {{< copyable "shell-regular" >}}
-
     ```shell
-    echo "store" | /path/to/pd-ctl -u http://${pd-ip}:${pd-port}
+    tiup ctl:nightly pd -u http://${pd-ip}:${pd-port} store
     ```
 
     The TiFlash proxy's `store.labels` includes information such as `{"key": "engine", "value": "tiflash"}`. You can check this information to confirm a TiFlash proxy.
 
-4. Check whether `pd buddy` can correctly print the logs (the log path is the value of `log` in the [flash.flash_cluster] configuration item; the default log path is under the `tmp` directory configured in the TiFlash configuration file).
-
-5. Check whether the number of configured replicas is less than or equal to the number of TiKV nodes in the cluster. If not, PD cannot replicate data to TiFlash:
-
-    {{< copyable "shell-regular" >}}
+4. Check whether the number of configured replicas is less than or equal to the number of TiKV nodes in the cluster. If not, PD cannot replicate data to TiFlash.
 
     ```shell
-    echo 'config placement-rules show' | /path/to/pd-ctl -u http://${pd-ip}:${pd-port}
+    tiup ctl:nightly pd -u http://${pd-ip}:${pd-port} config placement-rules show | grep -C 10 default
     ```
 
     Reconfirm the value of `default: count`.
@@ -78,7 +72,7 @@ This is because TiFlash is in an abnormal state caused by configuration errors o
     > - When [Placement Rules](/configure-placement-rules.md) are enabled and multiple rules exist, the previously configured [`max-replicas`](/pd-configuration-file.md#max-replicas), [`location-labels`](/pd-configuration-file.md#location-labels), and [`isolation-level`](/pd-configuration-file.md#isolation-level) no longer take effect. To adjust the replica policy, use the interface related to Placement Rules.
     > - When [Placement Rules](/configure-placement-rules.md) are enabled and only one default rule exists, TiDB will automatically update this default rule when `max-replicas`, `location-labels`, or `isolation-level` configurations are changed.
 
-6. Check whether the remaining disk space of the machine (where `store` of the TiFlash node is) is sufficient. By default, when the remaining disk space is less than 20% of the `store` capacity (which is controlled by the `low-space-ratio` parameter), PD cannot schedule data to this TiFlash node.
+5. Check whether the remaining disk space of the machine (where `store` of the TiFlash node is) is sufficient. By default, when the remaining disk space is less than 20% of the `store` capacity (which is controlled by the [`low-space-ratio`](/pd-configuration-file.md#low-space-ratio) parameter), PD cannot schedule data to this TiFlash node.
 
 ## Some queries return the `Region Unavailable` error
 
@@ -93,6 +87,65 @@ Take the following steps to handle the data file corruption:
 1. Refer to [Take a TiFlash node down](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster) to take the corresponding TiFlash node down.
 2. Delete the related data of the TiFlash node.
 3. Redeploy the TiFlash node in the cluster.
+
+## Removing TiFlash nodes is slow
+
+Take the following steps to handle this issue:
+
+1. Check whether any table has more TiFlash replicas than the number of TiFlash nodes available after the cluster scale-in:
+
+    ```sql
+    SELECT * FROM information_schema.tiflash_replica WHERE REPLICA_COUNT > 'tobe_left_nodes';
+    ```
+
+    `tobe_left_nodes` is the number of TiFlash nodes after the scale-in.
+
+    If the query result is not empty, you need to modify the number of TiFlash replicas for the corresponding tables. This is because, when the number of TiFlash replicas exceeds the number of TiFlash nodes after the scale-in, PD will not move Region peers away from the TiFlash nodes to be removed, causing the removal of these TiFlash nodes to fail.
+
+2. In scenarios where all TiFlash nodes need to be removed from a cluster, if the `INFORMATION_SCHEMA.TIFLASH_REPLICA` table shows that there are no TiFlash replicas in the cluster but removing TiFlash nodes still fails, check whether you have recently executed `DROP TABLE <db-name>.<table-name>` or `DROP DATABASE <db-name>` operations.
+
+    For tables or databases with TiFlash replicas, after executing `DROP TABLE <db-name>.<table-name>` or `DROP DATABASE <db-name>`, TiDB does not immediately delete the TiFlash replication rules for the corresponding tables in PD. Instead, it waits until the corresponding tables meet the garbage collection (GC) conditions before deleting these replication rules. After GC is complete, the corresponding TiFlash nodes can be successfully removed.
+
+    To remove data replication rules of TiFlash manually before the GC conditions are met, you can do the following:
+
+    > **Note:**
+    >
+    > After manually removing TiFlash replication rules for a table, if you perform `RECOVER TABLE`, `FLASHBACK TABLE`, or `FLASHBACK DATABASE` operations on this table, the TiFlash replicas of this table will not be restored.
+
+    1. View all data replication rules related to TiFlash in the current PD instance:
+
+        ```shell
+        curl http://<pd_ip>:<pd_port>/pd/api/v1/config/rules/group/tiflash
+        ```
+
+        ```
+        [
+          {
+            "group_id": "tiflash",
+            "id": "table-45-r",
+            "override": true,
+            "start_key": "7480000000000000FF2D5F720000000000FA",
+            "end_key": "7480000000000000FF2E00000000000000F8",
+            "role": "learner",
+            "count": 1,
+            "label_constraints": [
+              {
+                "key": "engine",
+                "op": "in",
+                "values": [
+                  "tiflash"
+                ]
+              }
+            ]
+          }
+        ]
+        ```
+
+    2. Remove all data replication rules related to TiFlash. Take the rule whose `id` is `table-45-r` as an example. Delete it by the following command:
+
+        ```shell
+        curl -v -X DELETE http://<pd_ip>:<pd_port>/pd/api/v1/config/rule/tiflash/table-45-r
+        ```
 
 ## TiFlash analysis is slow
 

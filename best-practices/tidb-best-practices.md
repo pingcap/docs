@@ -34,7 +34,7 @@ To store three replicas, compared with the replication of Source-Replica, Raft i
 
 ### Distributed transactions
 
-TiDB provides complete distributed transactions and the model has some optimizations on the basis of [Google Percolator](https://research.google.com/pubs/pub36726.html). This document introduces the following features:
+TiDB provides complete distributed transactions and the model has some optimizations on the basis of [Google Percolator](https://research.google/pubs/large-scale-incremental-processing-using-distributed-transactions-and-notifications/). This document introduces the following features:
 
 * Optimistic transaction model
 
@@ -142,7 +142,7 @@ In the last section, we discussed some basic implementation mechanisms of TiDB a
 
 ### Deployment
 
-Before deployment, read [Software and Hardware Requirements](/hardware-and-software-requirements.md).
+Before deployment, read [TiDB Software and Hardware Requirements](/hardware-and-software-requirements.md).
 
 It is recommended to deploy the TiDB cluster using [TiUP](/production-deployment-using-tiup.md). This tool can deploy, stop, destroy, and upgrade the whole cluster, which is quite convenient. It is not recommended to manually deploy the TiDB cluster, which might be troublesome to maintain and upgrade later.
 

@@ -83,10 +83,10 @@ public class EffectWriteSkew {
 
     public static void createDoctorTable(Connection connection) throws SQLException {
         connection.createStatement().executeUpdate("CREATE TABLE `doctors` (" +
-                "    `id` int(11) NOT NULL," +
+                "    `id` int NOT NULL," +
                 "    `name` varchar(255) DEFAULT NULL," +
-                "    `on_call` tinyint(1) DEFAULT NULL," +
-                "    `shift_id` int(11) DEFAULT NULL," +
+                "    `on_call` tinyint DEFAULT NULL," +
+                "    `shift_id` int DEFAULT NULL," +
                 "    PRIMARY KEY (`id`)," +
                 "    KEY `idx_shift_id` (`shift_id`)" +
                 "  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin");
@@ -307,10 +307,10 @@ func prepareData(db *sql.DB) error {
 
 func createDoctorTable(db *sql.DB) error {
     _, err := db.Exec("CREATE TABLE IF NOT EXISTS `doctors` (" +
-        "    `id` int(11) NOT NULL," +
+        "    `id` int NOT NULL," +
         "    `name` varchar(255) DEFAULT NULL," +
-        "    `on_call` tinyint(1) DEFAULT NULL," +
-        "    `shift_id` int(11) DEFAULT NULL," +
+        "    `on_call` tinyint DEFAULT NULL," +
+        "    `shift_id` int DEFAULT NULL," +
         "    PRIMARY KEY (`id`)," +
         "    KEY `idx_shift_id` (`shift_id`)" +
         "  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin")
@@ -410,10 +410,10 @@ public class EffectWriteSkew {
 
     public static void createDoctorTable(Connection connection) throws SQLException {
         connection.createStatement().executeUpdate("CREATE TABLE `doctors` (" +
-                "    `id` int(11) NOT NULL," +
+                "    `id` int NOT NULL," +
                 "    `name` varchar(255) DEFAULT NULL," +
-                "    `on_call` tinyint(1) DEFAULT NULL," +
-                "    `shift_id` int(11) DEFAULT NULL," +
+                "    `on_call` tinyint DEFAULT NULL," +
+                "    `shift_id` int DEFAULT NULL," +
                 "    PRIMARY KEY (`id`)," +
                 "    KEY `idx_shift_id` (`shift_id`)" +
                 "  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin");
@@ -632,10 +632,10 @@ func prepareData(db *sql.DB) error {
 
 func createDoctorTable(db *sql.DB) error {
     _, err := db.Exec("CREATE TABLE IF NOT EXISTS `doctors` (" +
-        "    `id` int(11) NOT NULL," +
+        "    `id` int NOT NULL," +
         "    `name` varchar(255) DEFAULT NULL," +
-        "    `on_call` tinyint(1) DEFAULT NULL," +
-        "    `shift_id` int(11) DEFAULT NULL," +
+        "    `on_call` tinyint DEFAULT NULL," +
+        "    `shift_id` int DEFAULT NULL," +
         "    PRIMARY KEY (`id`)," +
         "    KEY `idx_shift_id` (`shift_id`)" +
         "  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin")
@@ -733,12 +733,12 @@ This is a known incompatibility issue with MySQL. You can solve this issue by us
 
 <CustomContent platform="tidb">
 
-Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
 
 </CustomContent>

@@ -7,6 +7,12 @@ summary: Learn the deployment topology of TiProxy based on the minimal TiDB topo
 
 This document describes the deployment topology of [TiProxy](/tiproxy/tiproxy-overview.md) based on the minimal TiDB topology.
 
+For other deployment methods, refer to the following documents:
+
+- To deploy TiProxy using TiDB Operator, see the [TiDB Operator](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-tiproxy) documentation.
+- To quickly deploy TiProxy locally using TiUP, see [Deploy TiProxy](/tiup/tiup-playground.md#deploy-tiproxy).
+- To deploy TiProxy using TiUP, see [Installation and usage](/tiproxy/tiproxy-overview.md#installation-and-usage).
+
 TiProxy is a L7 proxy server for TiDB, which can balance connections and migrate sessions when possible.
 
 ## Topology information
@@ -18,6 +24,10 @@ TiProxy is a L7 proxy server for TiDB, which can balance connections and migrate
 | TiKV | 3 | 16 VCore 32GB 2TB (nvme ssd) * 3 | 10.0.1.7 <br/> 10.0.1.8 <br/> 10.0.1.9 | Default port <br/> Global directory configuration |
 | TiProxy | 2 | 4 VCore 8 GB * 1  | 10.0.1.11 <br/> 10.0.1.12 | Default port <br/> Global directory configuration |
 | Monitoring & Grafana | 1 | 4 VCore 8GB * 1 500GB (ssd) | 10.0.1.13 | Default port <br/> Global directory configuration |
+
+> **Note:**
+>
+> The IP addresses of the instances are given as examples only. In your actual deployment, replace the IP addresses with your actual IP addresses.
 
 ### Topology templates
 

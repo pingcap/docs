@@ -7,7 +7,7 @@ summary: Learn the MPP mode of TiFlash and how to use it.
 
 <CustomContent platform="tidb">
 
-This document introduces the [Massively Parallel Processing (MPP)](/glossary.md#mpp) mode of TiFlash and how to use it.
+This document introduces the [Massively Parallel Processing (MPP)](/glossary.md#massively-parallel-processing-mpp) mode of TiFlash and how to use it.
 
 </CustomContent>
 
@@ -130,7 +130,7 @@ mysql> DROP TABLE if exists test.employees;
 Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 mysql> CREATE TABLE test.employees
-(id int(11) NOT NULL,
+(id int NOT NULL,
  fname varchar(30) DEFAULT NULL,
  lname varchar(30) DEFAULT NULL,
  hired date NOT NULL DEFAULT '1970-01-01',
@@ -148,7 +148,7 @@ mysql> ALTER table test.employees SET tiflash replica 1;
 Query OK, 0 rows affected (0.09 sec)
 
 mysql> SET tidb_partition_prune_mode=static;
-Query OK, 0 rows affected (0.00 sec)
+Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 mysql> explain SELECT count(*) FROM test.employees;
 +----------------------------------+----------+-------------------+-------------------------------+-----------------------------------+
