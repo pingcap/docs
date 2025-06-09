@@ -59,7 +59,7 @@ We are offering a free quota up to the first 5 clusters created in each Organiza
 
 Free Quota will be issued monthly to serverless clusters that meet these qualifications. With the free quota, customers can store 5 GiB of row-based data, 5 GiB of columnar data, and consume 50 million RUs for one month.
 
-In total, each Organization can get 25 GiB of row storage, 25 GiB of column storage, and 250M Request Units (RUs) for free per month. Customers can take advantage of this offer and optimize your operations without worrying about initial costs.
+In total, each organization can get 25 GiB of row-based storage, 25 GiB of columnar storage, and 250 million Request Units (RUs) for free per month. Customers can take advantage of this offer and optimize their operations without worrying about initial costs.
 
 #### Monthly Spending Limit
 
