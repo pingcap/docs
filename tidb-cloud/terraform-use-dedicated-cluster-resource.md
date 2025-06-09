@@ -17,7 +17,7 @@ The features of the `tidbcloud_dedicated_cluster` resource include the following
 
 ## Prerequisites
 
-- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
+- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) at least v0.4.0.
 
 ## Get project IDs using the `tidbcloud_projects` data source
 
