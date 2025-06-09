@@ -39,7 +39,7 @@ Currently, the RU will include statistics for the following resources:
 | Network Egress  | 1 KiB read consumes 1 RU for Public Endpoint    |
 |                 | 4 KiB read consumes 1 RU for Private Endpoint   |
 
-> *Write: Each write operation is duplicated to multiple storage processes (3 for row-based storage without index), and each duplicate is considered a distinct write operation.
+> Write*: Each write operation is duplicated to multiple storage processes (3 for row-based storage without index), and each duplicate is considered a distinct write operation.
 
 > **Transaction: This applies only to optimistic transaction or autocommit.
 
