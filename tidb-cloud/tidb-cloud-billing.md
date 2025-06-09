@@ -69,9 +69,10 @@ Currently, the RU includes statistics for the following resources:
 </tbody>
 </table>
 
-> Write*: Each write operation is duplicated to multiple storage processes (3 for row-based storage without index), and each duplicate is considered a distinct write operation.
-
-> Transaction**: This applies only to optimistic transactions or autocommit.
+> **Note:**
+>
+> - Write*: Each write operation is duplicated to multiple storage processes (3 for row-based storage without index), and each duplicate is considered a distinct write operation.
+> - Transaction**: This applies only to optimistic transactions or autocommit.
 
 ### Pricing for TiDB Cloud Starter
 
