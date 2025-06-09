@@ -26,16 +26,16 @@ Once you log in to the [TiDB Cloud console](https://tidbcloud.com/), you have a 
 
 If you are an organization owner, you can rename the default project or create a new project for the cluster according to your need as follows:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), and then click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), click the drop-down box in the upper-left corner. Your default organization and project are displayed.
 
-2. Click **Organization Settings**, and click the **Projects** tab in the left navigation pane. The **Projects** tab is displayed.
+2. Click the name of your organization, and then click **Projects** in the left navigation pane.
 
-3. Do one of the following:
+3. On the **Projects** page, do one of the following:
 
     - To rename the default project, click **Rename** in the **Actions** column.
     - To create a project, click **Create New Project**, enter a name for your project, and then click **Confirm**.
 
-4. To return to the cluster page, click the TiDB Cloud logo in the upper-left corner of the window.
+4. To go to the cluster list page of your project, click the project name on the **Projects** page.
 
 ## Step 2. Create a TiDB Cloud Dedicated cluster
 
