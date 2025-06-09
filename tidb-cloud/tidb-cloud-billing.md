@@ -91,7 +91,7 @@ For TiDB Cloud Essential clusters, the throttling policy is based on the provisi
 
 ### Billing cycle
 
-Each TiDB Cloud bill, corresponding to the previous month's usage, is finalized at the start of every new month. This finalized bill is then charged to your default payment method, typically occurring between the 3rd and 9th day of the respective month. If your usage within the current month reaches or exceeds $500, an automatic charge will be initiated. Please note that the billing cycle operates strictly in accordance with the UTC (+00:00) time zone.
+Each TiDB Cloud bill, corresponding to the previous month's usage, is finalized at the start of every new month. This finalized bill is charged to your default payment method, typically occurring between the 3rd and 9th day of the respective month. If your usage within the current month reaches or exceeds $500, an automatic charge will be initiated. Note that the billing cycle operates strictly in accordance with the UTC (+00:00) time zone.
 
 ## Invoices
 
