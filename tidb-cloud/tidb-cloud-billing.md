@@ -31,8 +31,8 @@ Currently, the RU includes statistics for the following resources:
 | Read            | 2 storage read batches consume 1 RU             |
 |                 | 8 storage read requests consume 1 RU            |
 |                 | 64 KiB read request payload consumes 1 RU       |
-| Write*          | 2 storage write batch consumes 1 RU             |
-|                 | 2 storage write request consumes 1 RU           |
+| Write*          | 2 storage write batches consume 1 RU             |
+|                 | 2 storage write requests consume 1 RU           |
 |                 | 2 KiB write request payload consumes 1 RU       |
 |                 | 16 KiB write request payload consumes 1 RU (for transactions** >= 16MiB) |
 | SQL CPU         | 3 ms consumes 1 RU                              |
