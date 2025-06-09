@@ -55,7 +55,7 @@ See the detailed pricing for each available Alibaba Cloud region below.
 
 #### Free quota
 
-We are offering a free quota up to the first 5 clusters created in each Organization. If you need to create more clusters, you will be required to provide a credit card and set a Monthly Spending Limit. But if you delete some of your previous clusters before creating the 6th, the new cluster will still have a free quota. In other words, you can enjoy the free quota for up to 5 clusters.
+TiDB Cloud offers a free quota up to the first 5 clusters created in each [organization](/tidb-cloud/manage-user-access.md#organizations). To create more clusters, you will be required to provide a credit card and set a [Monthly Spending Limit](#monthly-spending-limit). But if you delete some of your previous clusters before creating the 6th, the new cluster will still have a free quota. In other words, you can enjoy the free quota for up to 5 clusters.
 
 Free quota is issued monthly to TiDB Cloud Starter clusters that meet these qualifications. With the free quota, each TiDB Cloud Starter cluster can store 5 GiB of row-based data, 5 GiB of columnar data, and consume up to 50 million RUs per month.
 
