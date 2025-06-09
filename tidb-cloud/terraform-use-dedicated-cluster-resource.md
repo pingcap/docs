@@ -390,6 +390,7 @@ For a TiDB Cloud Dedicated cluster, you can use Terraform to manage dedicated cl
 - Pause or resume the cluster.
 - Add a TiDB node group to the cluster.
 - Update a TiDB node group of the cluster.
+- Delete a TiDB node group of the cluster.
 
 ### Add a TiFlash component
 
@@ -975,6 +976,70 @@ You can update a TiDB node group of the cluster when its status is `ACTIVE`.
     Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
     ```
 
+### Delete a TiDB node group of the cluster
+
+To delete a TiDB node group of the cluster, you can delete the configuration of the `dedicated_node_group` resource, then use the `terraform apply` command to destroy the resource:
+  ```shell
+    $ terraform apply
+    tidbcloud_dedicated_node_group.example_group: Refreshing state...
+
+    Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+      - destroy
+
+    Terraform will perform the following actions:
+
+      # tidbcloud_dedicated_node_group.example_group will be destroyed
+      # (because tidbcloud_dedicated_node_group.example_group is not in configuration)
+      - resource "tidbcloud_dedicated_node_group" "example_group" {
+          - cluster_id              = "10526169210000000000" -> null
+          - display_name            = "test-node-group" -> null
+          - endpoints               = [
+              - {
+                  - connection_type = "PUBLIC"
+                  - port            = 0
+                    # (1 unchanged attribute hidden)
+                },
+              - {
+                  - connection_type = "VPC_PEERING"
+                  - host            = "private-tidb.pvqmzrxxxxxx.clusters.dev.tidb-cloud.com"
+                  - port            = 4000
+                },
+              - {
+                  - connection_type = "PRIVATE_ENDPOINT"
+                  - host            = "privatelink-19320383.pvqmzrxxxxxx.clusters.dev.tidb-cloud.com"
+                  - port            = 4000
+                },
+            ] -> null
+          - is_default_group        = false -> null
+          - node_count              = 1 -> null
+          - node_group_id           = "1932038361900000000" -> null
+          - node_spec_display_name  = "8 vCPU, 16 GiB" -> null
+          - node_spec_key           = "8C16G" -> null
+          - public_endpoint_setting = {
+              - enabled        = false -> null
+              - ip_access_list = [] -> null
+            } -> null
+          - state                   = "PAUSED" -> null
+        }
+
+    Plan: 0 to add, 0 to change, 1 to destroy.
+
+    Do you want to perform these actions?
+      Terraform will perform the actions described above.
+      Only 'yes' will be accepted to approve.
+
+      Enter a value: yes
+
+    tidbcloud_dedicated_node_group.example_group: Destroying...
+    tidbcloud_dedicated_node_group.example_group: Destruction complete after 3s
+
+    Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
+  ```
+Now, if you run the `terraform show` command, you will get nothing because the resource has been cleared:
+
+```
+$ terraform show
+```
 
 Now, you have created and managed a TiDB Cloud Dedicated cluster with Terraform.
 
@@ -985,141 +1050,141 @@ For a TiDB cluster that is not managed by Terraform, you can use Terraform to ma
 
 For example, you can import a cluster that is not created by Terraform.
 
-1. Create a `import_cluster.tf` file as follows:
+1. Add an import block for the new dedicated cluster resource
+
+- Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the cluster ID:
 
     ```
-    terraform {
-     required_providers {
-       tidbcloud = {
-         source = "tidbcloud/tidbcloud"
-       }
-     }
-   }
-    resource "tidbcloud_cluster" "import_cluster" {}
-    ```
-
-2. Import the cluster by `terraform import tidbcloud_cluster.import_cluster projectId,clusterId`:
-
-   For example:
-
-    ```
-    $ terraform import tidbcloud_cluster.import_cluster 1372813089189561287,1379661944630264072
-
-    tidbcloud_cluster.import_cluster: Importing from ID "1372813089189561287,1379661944630264072"...
-    tidbcloud_cluster.import_cluster: Import prepared!
-      Prepared tidbcloud_cluster for import
-    tidbcloud_cluster.import_cluster: Refreshing state... [id=1379661944630264072]
-
-    Import successful!
-
-    The resources that were imported are shown above. These resources are now in
-    your Terraform state and will henceforth be managed by Terraform.
-    ```
-
-3. Run the `terraform state show tidbcloud_cluster.import_cluster` command to check the status of the cluster:
-
-    ```
-    $ terraform state show tidbcloud_cluster.import_cluster
-
-    # tidbcloud_cluster.import_cluster:
-    resource "tidbcloud_cluster" "import_cluster" {
-        cloud_provider = "AWS"
-        cluster_type   = "DEDICATED"
-        config         = {
-            components = {
-                tidb    = {
-                    node_quantity = 2
-                    node_size     = "8C16G"
-                }
-                tiflash = {
-                    node_quantity    = 2
-                    node_size        = "8C64G"
-                    storage_size_gib = 500
-                }
-                tikv    = {
-                    node_quantity    = 6
-                    node_size        = "8C32G"
-                    storage_size_gib = 500
-                }
-            }
-            port       = 4000
-        }
-        id             = "1379661944630264072"
-        name           = "restoreCluster"
-        project_id     = "1372813089189561287"
-        region         = "eu-central-1"
-        status         = "AVAILABLE"
+    import {
+      to = tidbcloud_dedicated_cluster.example_cluster
+      id = "${id}"
     }
     ```
+2. Generate the new configuration file
 
-4. To manage the cluster using Terraform, you can copy the output of the previous step to your configuration file. Note that you need to delete the lines of `id` and `status`, because they will be controlled by Terraform instead:
+Generate the new configuration file for the new dedicated cluster resource according to the import block:
 
-    ```
-    resource "tidbcloud_cluster" "import_cluster" {
-          cloud_provider = "AWS"
-          cluster_type   = "DEDICATED"
-          config         = {
-              components = {
-                  tidb    = {
-                      node_quantity = 2
-                      node_size     = "8C16G"
-                  }
-                  tiflash = {
-                      node_quantity    = 2
-                      node_size        = "8C64G"
-                      storage_size_gib = 500
-                  }
-                  tikv    = {
-                      node_quantity    = 6
-                      node_size        = "8C32G"
-                      storage_size_gib = 500
-                  }
-              }
-              port       = 4000
-          }
-          name           = "restoreCluster"
-          project_id     = "1372813089189561287"
-          region         = "eu-central-1"
-    }
-    ```
+  ```shell
+  terraform plan -generate-config-out=generated.tf
+  ```
 
-5. You can use `terraform fmt` to format your configuration file:
+Do not specify an existing `.tf` file name in the preceding command. Otherwise, Terraform will return an error.
 
-    ```
-    $ terraform fmt
-    ```
+1. Review and apply the generated configuration
 
-6. To ensure the consistency of the configuration and state, you can execute `terraform plan` or `terraform apply`. If you see `No changes`, the import is successful.
+Review the generated configuration file to ensure it meets your needs. Optionally, you can move the contents of this file to your preferred location.
 
-    ```
+Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
+
+  ```shell
+  tidbcloud_dedicated_cluster.example: Importing... 
+  tidbcloud_dedicated_cluster.example: Import complete 
+
+  Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
+  ```
+
+Now you can manage the imported cluster with Terraform.
+
+## Delete a Dedicated cluster
+
+To delete a Dedicated cluster, you can delete the configuration of the `dedicated_cluster` resource, then use the `terraform apply` command to destroy the resource:
+  ```shell
     $ terraform apply
+    tidbcloud_dedicated_cluster.example_cluster: Refreshing state...
 
-    tidbcloud_cluster.import_cluster: Refreshing state... [id=1379661944630264072]
+    Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+      - destroy
 
-    No changes. Your infrastructure matches the configuration.
+    Terraform will perform the following actions:
 
-    Terraform has compared your real infrastructure against your configuration and found no differences, so no changes are needed.
+      # tidbcloud_dedicated_cluster.example_cluster will be destroyed
+      # (because tidbcloud_dedicated_cluster.example_cluster is not in configuration)
+      - resource "tidbcloud_dedicated_cluster" "example_cluster" {
+          - annotations          = {
+              - "tidb.cloud/available-features" = "DELEGATE_USER,DISABLE_PUBLIC_LB,PRIVATELINK"
+              - "tidb.cloud/has-set-password"   = "false"
+            } -> null
+          - cloud_provider       = "aws" -> null
+          - cluster_id           = "10526169210000000000" -> null
+          - create_time          = "2025-06-06 09:12:55.396 +0000 UTC" -> null
+          - created_by           = "apikey-K1R3JIC0" -> null
+          - display_name         = "test-tf" -> null
+          - labels               = {
+              - "tidb.cloud/organization" = "60000"
+              - "tidb.cloud/project"      = "3100000"
+            } -> null
+          - paused               = false -> null
+          - port                 = 4000 -> null
+          - project_id           = "3100000" -> null
+          - region_display_name  = "Oregon (us-west-2)" -> null
+          - region_id            = "aws-us-west-2" -> null
+          - state                = "ACTIVE" -> null
+          - tidb_node_setting    = {
+              - endpoints               = [
+                  - {
+                      - connection_type = "PUBLIC"
+                      - host            = "tidb.nwdkyhxxxxxx.clusters.dev.tidb-cloud.com"
+                      - port            = 4000
+                    },
+                  - {
+                      - connection_type = "VPC_PEERING"
+                      - host            = "private-tidb.nwdkyhxxxxxx.clusters.dev.tidb-cloud.com"
+                      - port            = 4000
+                    },
+                  - {
+                      - connection_type = "PRIVATE_ENDPOINT"
+                      - host            = "privatelink-19320000.nwdkyhxxxxxx.clusters.dev.tidb-cloud.com"
+                      - port            = 4000
+                    },
+                ] -> null
+              - is_default_group        = true -> null
+              - node_count              = 2 -> null
+              - node_group_display_name = "DefaultGroup" -> null
+              - node_group_id           = "1932002964533000000" -> null
+              - node_spec_display_name  = "8 vCPU, 16 GiB" -> null
+              - node_spec_key           = "8C16G" -> null
+              - public_endpoint_setting = {
+                  - enabled        = true -> null
+                  - ip_access_list = [
+                      - {
+                          - cidr_notation = "0.0.0.0/32"
+                            # (1 unchanged attribute hidden)
+                        },
+                    ] -> null
+                } -> null
+              - state                   = "ACTIVE" -> null
+            } -> null
+          - tiflash_node_setting = {
+              - node_count             = 4 -> null
+              - node_spec_display_name = "8 vCPU, 64 GiB" -> null
+              - node_spec_key          = "8C64G" -> null
+              - storage_size_gi        = 200 -> null
+              - storage_type           = "Basic" -> null
+            } -> null
+          - tikv_node_setting    = {
+              - node_count             = 6 -> null
+              - node_spec_display_name = "8 vCPU, 32 GiB" -> null
+              - node_spec_key          = "8C32G" -> null
+              - storage_size_gi        = 200 -> null
+              - storage_type           = "Standard" -> null
+            } -> null
+          - update_time          = "2025-06-06 14:15:29.609 +0000 UTC" -> null
+          - version              = "v7.5.6" -> null
+        }
 
-    Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
-    ```
+    Plan: 0 to add, 0 to change, 1 to destroy.
 
-Now you can use Terraform to manage the cluster.
+    Do you want to perform these actions?
+      Terraform will perform the actions described above.
+      Only 'yes' will be accepted to approve.
 
-## Delete a cluster
+      Enter a value: yes
 
-To delete a cluster, go to the cluster directory where the corresponding `cluster.tf` file is located, and then run the `terraform destroy` command to destroy the cluster resource:
+    tidbcloud_dedicated_cluster.example_cluster: Destroying...
+    tidbcloud_dedicated_cluster.example_cluster: Destruction complete after 3s
 
-```
-$ terraform destroy
-
-Plan: 0 to add, 0 to change, 1 to destroy.
-
-Do you really want to destroy all resources?
-Terraform will destroy all your managed infrastructure, as shown above.
-There is no undo. Only 'yes' will be accepted to confirm.
-
-Enter a value: yes
-```
+    Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
+  ```
 
 Now, if you run the `terraform show` command, you will get nothing because the resource has been cleared:
 
