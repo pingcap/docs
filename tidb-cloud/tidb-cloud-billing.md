@@ -26,18 +26,48 @@ A **Request Capacity Unit (RCU)** is a unit of measure used to represent the pro
 
 Currently, the RU includes statistics for the following resources:
 
-| Resource        | RU Consumption                                 |
-|-----------------|-------------------------------------------------|
-| Read            | 2 storage read batches consume 1 RU             |
-|                 | 8 storage read requests consume 1 RU            |
-|                 | 64 KiB read request payload consumes 1 RU       |
-| Write*          | 2 storage write batches consume 1 RU             |
-|                 | 2 storage write requests consume 1 RU           |
-|                 | 2 KiB write request payload consumes 1 RU       |
-|                 | 16 KiB write request payload consumes 1 RU (for transactions** >= 16MiB) |
-| SQL CPU         | 3 ms consumes 1 RU                              |
-| Network Egress  | 1 KiB read consumes 1 RU for public endpoint    |
-|                 | 4 KiB read consumes 1 RU for private endpoint   |
+<table><thead>
+  <tr>
+    <th>Resource</th>
+    <th>RU Consumption</th>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td rowspan="3">Read</td>
+    <td>2 storage read batches consume 1 RU</td>
+  </tr>
+  <tr>
+    <td>8 storage read requests consume 1 RU</td>
+  </tr>
+  <tr>
+    <td>64 KiB read request payload consumes 1 RU</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Write*</td>
+    <td>2 storage write batches consume 1 RU</td>
+  </tr>
+  <tr>
+    <td>2 storage write requests consume 1 RU</td>
+  </tr>
+  <tr>
+    <td>2 KiB write request payload consumes 1 RU</td>
+  </tr>
+  <tr>
+    <td>16 KiB write request payload consumes 1 RU (for transactions** &gt;= 16MiB)</td>
+  </tr>
+  <tr>
+    <td>SQL CPU</td>
+    <td>3 ms consumes 1 RU</td>
+  </tr>
+  <tr>
+    <td rowspan="2">Network Egress</td>
+    <td>1 KiB read consumes 1 RU for public endpoint</td>
+  </tr>
+  <tr>
+    <td>4 KiB read consumes 1 RU for private endpoint</td>
+  </tr>
+</tbody>
+</table>
 
 > Write*: Each write operation is duplicated to multiple storage processes (3 for row-based storage without index), and each duplicate is considered a distinct write operation.
 
