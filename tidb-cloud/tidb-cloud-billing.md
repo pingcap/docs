@@ -36,8 +36,8 @@ Currently, the RU includes statistics for the following resources:
 |                 | 2 KiB write request payload consumes 1 RU       |
 |                 | 16 KiB write request payload consumes 1 RU (for transactions** >= 16MiB) |
 | SQL CPU         | 3 ms consumes 1 RU                              |
-| Network Egress  | 1 KiB read consumes 1 RU for Public Endpoint    |
-|                 | 4 KiB read consumes 1 RU for Private Endpoint   |
+| Network Egress  | 1 KiB read consumes 1 RU for public endpoint    |
+|                 | 4 KiB read consumes 1 RU for private endpoint   |
 
 > Write*: Each write operation is duplicated to multiple storage processes (3 for row-based storage without index), and each duplicate is considered a distinct write operation.
 
