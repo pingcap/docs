@@ -24,7 +24,7 @@ A **Request Unit (RU)** is a unit of measure used to represent the amount of res
 
 A **Request Capacity Unit (RCU)** is a unit of measure used to represent the provisioned compute capacity for your TiDB Cloud Essential cluster. One RCU provides a fixed amount of compute resources that can process a certain number of RUs per second. The number of RCUs you provision determines your cluster's baseline performance and throughput capacity.
 
-Currently, the RU will include statistics for the following resources:
+Currently, the RU includes statistics for the following resources:
 
 | Resource        | RU Consumption                                 |
 |-----------------|-------------------------------------------------|
