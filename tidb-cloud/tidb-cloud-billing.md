@@ -81,9 +81,9 @@ See the detailed pricing for each available Alibaba Cloud region below.
 
 | Resource | Singapore |
 |----------|-----------|
-| Compute (per RCU / month) | $0.24 |
-| Row-based storage (per GiB / month) | $0.36 |
-| Columnar-based storage (per GiB / month) | $0.09 |
+| Compute (per RCU/month) | $0.24 |
+| Row-based storage (per GiB/month) | $0.36 |
+| Columnar storage (per GiB/month) | $0.09 |
 
 #### Throttling
 
