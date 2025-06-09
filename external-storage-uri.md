@@ -68,7 +68,7 @@ tiup cdc:v7.5.0 cli changefeed create \
     - `sse`: Specifies the server-side encryption algorithm used to encrypt the uploaded objects (value options: empty, `AES256`, or `aws:kms`).
     - `sse-kms-key-id`: Specifies the KMS ID if `sse` is set to `aws:kms`.
     - `acl`: Specifies the canned ACL of the uploaded objects (for example, `private` or `authenticated-read`).
-    - `role-arn`: To allow TiDB Cloud to access Amazon S3 data using a specified [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html), specify the corresponding [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the IAM role using the `role-arn` URL query parameter, such as `arn:aws:iam::888888888888:role/my-role`. 
+    - `role-arn`: To allow TiDB Cloud to access Amazon S3 data using a specified [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html), specify the corresponding [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the IAM role using the `role-arn` URL query parameter, such as `arn:aws:iam::888888888888:role/my-role`.
 
         > **Note:**
         >
