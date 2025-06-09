@@ -71,7 +71,7 @@ Note: It is impossible to set a spending limit value lower than the amount alrea
 
 A cluster will not be throttled unless the spending limit is reached. Once the spending limit is reached, the cluster immediately denies any new connection attempts until the quota is increased or the usage is reset at the start of a new month. Existing connections established before reaching the quota will remain active but will experience throttling.
 
-If the free quota of a cluster is exhausted within the month, the cluster will automatically be throttled. This limit will remain in place until the customer upgrade it to Scalable cluster or until the next month.
+If the free quota of a cluster is exhausted within the month, the cluster is automatically throttled. This limit will remain in place until you [upgrade it to a scalable cluster](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) or until the next month.
 
 In this way, customers can ensure basic business continuity without paying additional fees. At the same time, customers can adjust the spending limit according to their needs to control their usage and costs.
 
