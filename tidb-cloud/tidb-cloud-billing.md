@@ -63,7 +63,7 @@ In total, each Organization can get 25 GiB of row storage, 25 GiB of column stor
 
 #### Monthly Spending Limit
 
-The "Monthly Spending Limit" refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that enables you to set a budget for your TiDB Starter clusters. The Monthly Spending Limit must be set to a minimum of $0.01.
+The Monthly Spending Limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that enables you to set a budget for your TiDB Cloud Starter clusters. The Monthly Spending Limit must be set to at least $0.01.
 
 > **Note:**
 >
