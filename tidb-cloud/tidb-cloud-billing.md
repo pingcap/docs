@@ -57,7 +57,7 @@ See the detailed pricing for each available Alibaba Cloud region below.
 
 We are offering a free quota up to the first 5 clusters created in each Organization. If you need to create more clusters, you will be required to provide a credit card and set a Monthly Spending Limit. But if you delete some of your previous clusters before creating the 6th, the new cluster will still have a free quota. In other words, you can enjoy the free quota for up to 5 clusters.
 
-Free Quota will be issued monthly to serverless clusters that meet these qualifications. With the free quota, customers can store 5 GiB of row-based data, 5 GiB of columnar data, and consume 50 million RUs for one month.
+Free quota is issued monthly to TiDB Cloud Starter clusters that meet these qualifications. With the free quota, each TiDB Cloud Starter cluster can store 5 GiB of row-based data, 5 GiB of columnar data, and consume up to 50 million RUs per month.
 
 In total, each organization can get 25 GiB of row-based storage, 25 GiB of columnar storage, and 250 million Request Units (RUs) for free per month. Customers can take advantage of this offer and optimize their operations without worrying about initial costs.
 
