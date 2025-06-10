@@ -53,7 +53,7 @@ When you access Chat2Query for the first time, you will be prompted with a dialo
 After the first-time access, you can still change the AI setting as follows:
 
 - To enable AI, click **Enable AI power for data exploration** in the upper-right corner of Chat2Query.
-- To disable AI, click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com/), click **Account Settings**, click the **Privacy** tab, and then disable the **AI-powered Data Exploration** option.
+- To disable AI, click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com/), click **Account Settings**, click the **AI & Privacy** tab, and then disable the **AI-powered Data Exploration** option.
 
 ## Write and run SQL queries
 
