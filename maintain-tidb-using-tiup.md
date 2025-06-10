@@ -388,7 +388,7 @@ If you need to view historical metrics generated before the switch, switch the d
 
 ### Clean up old metrics and services
 
-After confirming that old metrics have expired, you can remove redundant services and files as follows. This will not affect the running cluster.
+After confirming that the old metrics have expired, you can perform the following steps to remove redundant services and files. This does not affect the running cluster.
 
 #### Set Prometheus to agent mode
 
