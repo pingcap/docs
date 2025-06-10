@@ -329,7 +329,7 @@ You can perform the migration without affecting running instances. Existing metr
         prom_remote_write_to_vm: true
     ```
 
-3. Reload the updated configuration:
+3. Reload the configuration to apply the changes:
 
     ```bash
     tiup cluster reload ${cluster-name} -R prometheus
