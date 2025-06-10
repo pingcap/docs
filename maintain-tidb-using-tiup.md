@@ -361,7 +361,7 @@ You can perform the migration without affecting running instances. Existing metr
 
 #### View historical metrics generated before the switch (optional)
 
-If you need to view historical metrics generated before the switch, you can switch the Grafana data source as follows:
+If you need to view historical metrics generated before the switch, switch the data source to Grafana as follows:
 
 1. Edit the cluster configuration:
 
