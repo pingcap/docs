@@ -492,7 +492,7 @@ For a TiDB Cloud Dedicated cluster, you can use Terraform to manage dedicated cl
     Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
     ```
 
-4. Use `terraform state show tidbcloud_dedicated_cluster.${resource-name}` to see the status:
+4. Use `terraform state show tidbcloud_dedicated_cluster.${resource-name}` to see the state:
 
     ```
     $ terraform state show tidbcloud_dedicated_cluster.example_cluster
@@ -562,11 +562,11 @@ For a TiDB Cloud Dedicated cluster, you can use Terraform to manage dedicated cl
     }
     ```
 
-The `MODIFYING` status indicates that the cluster is being modified. The status will change to `ACTIVE` once the modification is complete.
+The `MODIFYING` state indicates that the cluster is being modified. The state will change to `ACTIVE` once the modification is complete.
 
 ### Scale a TiDB cluster
 
-You can scale a TiDB cluster when its status is `ACTIVE`.
+You can scale a TiDB cluster when its state is `ACTIVE`.
 
 1. In the `cluster.tf` file that is used when you [create the cluster](#create-a-cluster-using-the-cluster-resource), edit the configurations of `tidb_node_setting`, `tikv_node_setting` and `tiflash_node_setting`.
 
@@ -665,11 +665,11 @@ You can scale a TiDB cluster when its status is `ACTIVE`.
     Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
    ```
 
-Wait for the process to finish. The status will change to `ACTIVE` once the scaling is complete.
+Wait for the process to finish. The state will change to `ACTIVE` once the scaling is complete.
 
 ### Pause or resume a cluster
 
-You can pause a cluster when its status is `ACTIVE` or resume a cluster when its status is `PAUSED`.
+You can pause a cluster when its state is `ACTIVE` or resume a cluster when its state is `PAUSED`.
 
 - Set `paused = true` to pause a cluster.
 - Set `paused = false` to resume a cluster.
@@ -756,7 +756,7 @@ You can pause a cluster when its status is `ACTIVE` or resume a cluster when its
    Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
    ```
 
-3. Use the `terraform state show tidbcloud_dedicate_cluster.${resource-name}` command to check the status:
+3. Use the `terraform state show tidbcloud_dedicate_cluster.${resource-name}` command to check the state:
 
    ```
    $ terraform state show tidbcloud_dedicate_cluster.example_cluster
@@ -825,10 +825,10 @@ You can pause a cluster when its status is `ACTIVE` or resume a cluster when its
     paused = false
    ```
 
-5. Run the `terraform apply` command and type `yes` for confirmation. Wait for a moment, the status will be changed to `ACTIVE` finally.
+5. Run the `terraform apply` command and type `yes` for confirmation. Wait for a moment, the state will be changed to `ACTIVE` finally.
 
 ### Add a TiDB node group to the cluster
-You can add a TiDB node group to the cluster when its status is `ACTIVE`.
+You can add a TiDB node group to the cluster when its state is `ACTIVE`.
 1. In the `cluster.tf` file that is used when you [create the cluster](#create-a-cluster-using-the-cluster-resource), add the `tidbcloud_dedicated_node_group` configuration.
 
     For example, to add a TiDB node group with 3 nodes, you can edit the configurations as follows:
@@ -877,7 +877,7 @@ You can add a TiDB node group to the cluster when its status is `ACTIVE`.
    Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-3. Use the `terraform state show tidbcloud_dedicated_node_group.${resource-name}` command to check the status:
+3. Use the `terraform state show tidbcloud_dedicated_node_group.${resource-name}` command to check the state:
 
     ```shell
     $ terraform state show tidbcloud_dedicated_node_group.example_group
@@ -912,7 +912,7 @@ You can add a TiDB node group to the cluster when its status is `ACTIVE`.
     ```
 
 ### Update a TiDB node group of the cluster
-You can update a TiDB node group of the cluster when its status is `ACTIVE`.
+You can update a TiDB node group of the cluster when its state is `ACTIVE`.
 1. In the `cluster.tf` file that is used when you [create the cluster](#create-a-cluster-using-the-cluster-resource), edit the configurations of `tidbcloud_dedicated_node_group`.
 
     For example, to change the node count to 1, you can edit the configurations as follows:
