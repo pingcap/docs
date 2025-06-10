@@ -13,6 +13,7 @@ The features of the `tidbcloud_dedicated_cluster` resource include the following
 
 - Create TiDB Cloud Dedicated clusters.
 - Modify TiDB Cloud Dedicated clusters.
+- Import TiDB Cloud Dedicated clusters.
 - Delete TiDB Cloud Dedicated clusters.
 
 ## Prerequisites
