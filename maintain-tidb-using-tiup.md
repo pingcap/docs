@@ -286,7 +286,7 @@ tiup cluster destroy ${cluster-name}
 
 ## Switch from Prometheus to VictoriaMetrics
 
-In large clusters, Prometheus may face efficiency challenges, especially when there are many instances. Since TiUP v1.16.3, TiUP supports switching the metrics server from Prometheus to VictoriaMetrics (VM) to provide better scalability, higher performance, and lower resource consumption.
+In large-scale clusters, Prometheus might encounter performance bottlenecks when handling a large number of instances. Starting from TiUP v1.16.3, TiUP supports switching the monitoring component from Prometheus to VictoriaMetrics (VM) to provide better scalability, higher performance, and lower resource consumption.
 
 ### Set up VictoriaMetrics for a new deployment
 
