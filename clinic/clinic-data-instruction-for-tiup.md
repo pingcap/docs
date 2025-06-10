@@ -141,3 +141,14 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 | Contents in the `/etc/security/limits.conf` system | `limits.conf` | `--include=system` |
 | List of kernel parameters | `sysctl.conf` | `--include=system` |
 | Socket system information, which is the output of the `ss` command | `ss.txt` | `--include=system` |
+
+### Log file classification
+
+With `--include=log.<type>` and `--include=log.<type>` you can configure what logs to collect.
+
+Log types
+
+- `std`: Logfiles that contain `stderr` in the name.
+- `rocksdb`: Logfiles that have a `rocksdb` prefix.
+- `slow`: Slow query log files.
+- `unknown`: Logs not matching any of the other types.
