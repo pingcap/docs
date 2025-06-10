@@ -22,7 +22,7 @@ To create a recovery group, perform the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), switch to your target project using the drop-down box in the upper-left corner.
 
-2. In the left navigation pane, click **Project Settings** > **Recovery Group**.
+2. In the left navigation pane, click **Recovery Group**.
 
 3. On the **Recovery Group** page, click **Create Recovery Group**.
 
