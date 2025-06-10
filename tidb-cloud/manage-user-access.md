@@ -126,11 +126,10 @@ To view and switch between organizations, take the following steps:
 
     > **Tip:**
     >
-    > If you are currently on the page of a specific cluster, after clicking the drop-down box in the upper-left corner, you also need to click ← in the drop-down box to return to the organization and project list.
+    > - If you are currently on the page of a specific cluster, after clicking the drop-down box in the upper-left corner, you also need to click ← in the drop-down box to return to the organization and project list.
+    > - If you are a member of multiple organizations, you can click the target organization name in the drop-down box to switch your account between organizations.
 
 2. To view the detailed information of your organization such as the organization ID and time zone, click the organization name, and then click **Organization Settings** > **General** in the left navigation pane.
-
-3. If you are a member of multiple organizations, you can click the target organization name to switch your account between organizations.
 
 ### Set the time zone for your organization
 
@@ -223,11 +222,10 @@ To view and switch between projects, take the following steps:
 
     > **Tip:**
     >
-    > If you are currently on the page of a specific cluster, after clicking the drop-down box in the upper-left corner, you also need to click ← in the drop-down box to return to the organization and project list.
+    > - If you are currently on the page of a specific cluster, after clicking the drop-down box in the upper-left corner, you also need to click ← in the drop-down box to return to the organization and project list.
+    > - If you are a member of multiple projects, you can click the target project name in the drop-down box to switch between projects.
 
 2. To view the detailed information of your project, click the project name, and then click **Project Settings** in the left navigation pane.
-
-3. If you are a member of multiple projects, you can click the target project name to switch between projects.
 
 ### Create a project
 
