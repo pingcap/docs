@@ -368,7 +368,7 @@ If you need to view historical metrics generated before the switch, switch the d
     tiup cluster edit-config ${cluster-name}
     ```
 
-2. Comment out `use_vm_as_datasource` under `grafana_servers`:
+2. Under `grafana_servers`, comment out `use_vm_as_datasource`:
 
     ```yaml
     grafana_servers:
