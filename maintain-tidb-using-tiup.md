@@ -420,7 +420,7 @@ After confirming that the old metrics have expired, you can perform the followin
 
 #### Remove expired data directories
 
-1. Find the `data_dir` of the monitoring server in the configuration file:
+1. In the configuration file, locate the `data_dir` path of the monitoring server:
 
     ```yaml
     monitoring_servers:
