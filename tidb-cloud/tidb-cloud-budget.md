@@ -67,7 +67,7 @@ To edit a custom budget, take the following steps:
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the drop-down box in the upper-left corner.
 2. In the left navigation pane, click **Billing**.
 3. On the **Billing** page, click the **Budgets** tab.
-4. Locate the row of your budget, click **...** in that row, and then click **Edit**.
+4. Locate the row of your target budget, click **...** in that row, and then click **Edit**.
 5. Edit the budget name, budget scope, budget amount, and alert thresholds as needed.
 
     > **Note:**
@@ -88,5 +88,5 @@ To delete a custom budget, take the following steps:
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the drop-down box in the upper-left corner.
 2. In the left navigation pane, click **Billing**.
 3. On the **Billing** page, click the **Budgets** tab.
-4. Locate the row of your budget, click **...** in that row, and then click **Delete**.
+4. Locate the row of your target budget, click **...** in that row, and then click **Delete**.
 5. Confirm the deletion.
