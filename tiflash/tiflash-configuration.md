@@ -39,7 +39,6 @@ This section introduces the configuration parameters of TiFlash.
 
 ### Configure the `tiflash.toml` file
 
-<<<<<<< HEAD
 ```toml
 ## The listening host for supporting services such as TPC/HTTP. It is recommended to configure it as "0.0.0.0", which means to listen on all IP addresses of this machine.
 listen_host = "0.0.0.0"
@@ -297,7 +296,6 @@ delta_index_cache_size = 0
     ## Path of the file that contains X509 key in PEM format.
     # key_path = "/path/to/tiflash-server-key.pem"
 ```
-=======
 #### `listen_host`
 
 - The listening host for supporting services such as TPC/HTTP.
@@ -363,7 +361,6 @@ Configure storage path related settings.
     - `format_version = 5`: introduced in v7.3.0, the default format for versions from v7.4.0 to v8.3.0, which reduces the number of physical files by merging smaller files.
     - `format_version = 6`: introduced in v8.4.0, which partially supports the building and storage of vector indexes.
     - `format_version = 7`, introduced in v8.4.0, the default format for v8.4.0 and v8.5.x, which supports the build and storage of vector indexes.
-    - `format_version = 8`, introduced in v9.0.0, the default format for v9.0.0 and later versions, which supports a new string serialization scheme that improves string read and write performance.
 
 #### storage.main
 
@@ -730,13 +727,6 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 - This item is used for the MinTSO scheduler. It specifies the maximum number of queries that can run simultaneously in a TiFlash instance. For more information, see [TiFlash MinTSO Scheduler](/tiflash/tiflash-mintso-scheduler.md).
 - Default value: Before v7.4.0, the default value is `vcpu * 0.25`, which means a quarter of the number of vCPUs. Starting from v7.4.0, the default value is `vcpu * 2`, which means twice the number of vCPUs.
 
-##### `hashagg_use_magic_hash` <span class="version-mark">New in v9.0.0</span>
-
-- Controls the hash function TiFlash uses for aggregation. When set to `true`, TiFlash HashAgg uses the magic hash instead of the default CRC32.
-- The magic hash function generates more evenly distributed hash values, reducing hash collisions effectively. However, it is slower than CRC32. It is recommended to enable this configuration when the NDV (number of distinct values) of the `GROUP BY` key is high to optimize aggregation performance.
-- Default value: `false`
-- Value options: `true`, `false`
-
 #### security <span class="version-mark">New in v4.0.5</span>
 
 Configure security related settings.
@@ -768,7 +758,6 @@ Configure security related settings.
 - Path of the file that contains X509 key in PEM format.
 
 <!-- Example: `"/path/to/tiflash-server-key.pem"` -->
->>>>>>> 8dfa166d71 (tiflash: correct the default value of task_scheduler_active_set_soft_limit (#21137))
 
 ### Configure the `tiflash-learner.toml` file
 
