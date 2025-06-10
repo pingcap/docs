@@ -311,7 +311,7 @@ grafana_servers:
 
 ### Migrate an existing deployment to VictoriaMetrics
 
-You can perform the migration process without affecting running instances. Existing metrics will remain in Prometheus, and TiUP will write new metrics to VictoriaMetrics.
+You can perform the migration without affecting running instances. Existing metrics will remain in Prometheus, while TiUP will write new metrics to VictoriaMetrics.
 
 #### Enable VictoriaMetrics remote write
 
