@@ -21,7 +21,7 @@ In TiDB Cloud, you can view both active and closed alerts on the **Alerts** page
 
     > **Tip:**
     >
-    > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
 2. Click the name of the target cluster. The cluster overview page is displayed.
 3. Click **Alerts** in the left navigation pane.

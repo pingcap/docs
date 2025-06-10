@@ -75,7 +75,7 @@ Before enabling Cloud Organization SSO, make sure to inform your members about t
 
 To enable Cloud Organization SSO, take the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the drop-down box in the upper-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Organization Settings** > **Authentication**.
 3. On the **Authentication** page, click **Enable**.
 4. In the dialog, enter the custom URL for your organization, which must be unique in TiDB Cloud.
@@ -231,7 +231,7 @@ In TiDB Cloud, the SAML authentication method is disabled by default. After enab
 
 3. In TiDB Cloud, view groups pushed from your identity provider.
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the drop-down box in the upper-left corner.
+    1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
     2. In the left navigation pane, click **Organization Settings** > **Authentication**.
     3. Click the **Groups** tab. The groups synchronized from your identity provider are displayed.
     4. To view users in a group, click **View**.

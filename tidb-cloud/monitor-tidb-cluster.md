@@ -69,7 +69,7 @@ To view metrics on the cluster overview page, take the following steps:
 
     > **Tip:**
     >
-    > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
 2. Check the **Core Metrics** section.
 
@@ -83,7 +83,7 @@ To view metrics on the **Metrics** page, take the following steps:
 
     > **Tip:**
     >
-    > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
 2. In the left navigation pane, click **Monitoring** > **Metrics**.
 

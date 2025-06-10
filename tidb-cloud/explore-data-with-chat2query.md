@@ -29,7 +29,7 @@ The recommended use cases of SQL Editor are as follows:
 
     > **Tip:**
     >
-    > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
 2. Click your cluster name, and then click **SQL Editor** in the left navigation pane.
 

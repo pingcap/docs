@@ -26,7 +26,7 @@ Once you log in to the [TiDB Cloud console](https://tidbcloud.com/), you have a 
 
 If you are an organization owner, you can rename the default project or create a new project for the cluster according to your need as follows:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), click the drop-down box in the upper-left corner. Your default organization and project are displayed.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), click the combo box in the upper-left corner. Your default organization and project are displayed.
 
 2. Click the name of your organization, and then click **Projects** in the left navigation pane.
 
@@ -45,7 +45,7 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
     > **Tip:**
     >
-    > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
 2. Click **Create Cluster**.
 

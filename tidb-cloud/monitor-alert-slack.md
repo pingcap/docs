@@ -39,7 +39,7 @@ You can see a new entry under the **Webhook URLs for Your Workspace** section in
 >
 > The alert subscription is for all alerts in the current project. If you have multiple clusters in the project, you just need to subscribe once.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the drop-down box in the upper-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
 3. On the **Alert Subscription** page, click **Add Subscriber**.
 4. Select **Slack** from the **Subscriber Type** drop-down list.
@@ -59,7 +59,7 @@ If an alert condition remains unchanged, the alert sends notifications every thr
 
 If you no longer want to receive alert notifications of clusters in your project, take the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the drop-down box in the upper-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
 3. On the **Alert Subscription** page, locate the row of your target subscriber to be deleted, and then click **...** > **Unsubscribe**.
 4. Click **Unsubscribe** to confirm the unsubscription.

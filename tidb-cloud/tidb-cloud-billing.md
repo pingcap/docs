@@ -40,7 +40,7 @@ For each monthly invoice:
 
 To view the list of invoices, perform the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the drop-down box in the upper-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 
 2. In the left navigation pane, click **Billing**.
 
@@ -58,7 +58,7 @@ After setting the payment method, TiDB Cloud will generate the invoice and billi
 
 To view the billing details, perform the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the drop-down box in the upper-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 
 2. In the left navigation pane, click **Billing**.
 
@@ -79,7 +79,7 @@ If you are in the `Organization Owner` or `Organization Billing Manager` role of
 
 To analyze and customize your cost reports of your organization, perform the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the drop-down box in the upper-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Billing**.
 3. On the **Billing** page, click the **Cost Explorer** tab.
 4. On the **Cost Explorer** tab, expand the **Filter** section in the upper-right corner to customize your report. You can set the time range, select a grouping option (such as by service, project, cluster, region, product type, and charge type), and apply filters by selecting specific services, projects, clusters, or regions. The cost explorer will display you with the following information:
@@ -93,7 +93,7 @@ Paid organizations can create a billing profile. Information in this profile wil
 
 To view or update the billing profile of your organization, perform the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the drop-down box in the upper-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Billing**.
 3. On the **Billing** page, click the **Billing Profile** tab.
 
@@ -127,7 +127,7 @@ The detailed information of your credits is available on the **Credits** tab, in
 
 To view the credit information, perform the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the drop-down box in the upper-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Billing**.
 3. On the **Billing** page, click the **Credits** tab.
 
@@ -151,7 +151,7 @@ The discount information includes all discounts that you have received, the stat
 
 To view discount information, perform the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the drop-down box in the upper-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Billing**.
 3. On the **Billing** page, click the **Discounts** tab.
 
@@ -173,7 +173,7 @@ The fee is deducted from a bound credit card according to your cluster usage. To
 
 - Anytime in the billing console:
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the drop-down box in the upper-left corner.
+    1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
     2. In the left navigation pane, click **Billing**.
     3. On the **Billing** page, click the **Payment Method** tab, and then click **Add a New Card**.
     4. Fill in the credit card information and credit card address, and then click **Save Card**.
@@ -188,7 +188,7 @@ You can bind multiple credit cards, and set one of them as the default credit ca
 
 To set the default credit card, perform the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the drop-down box in the upper-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Billing**.
 3. On the **Billing** page, click the **Payment Method** tab.
 4. Select a credit card in the credit card list, and then click **Yes** when are prompted whether to set it as the default credit card.
@@ -199,7 +199,7 @@ If you are in the `Organization Owner` or `Organization Billing Manager` role of
 
 If you have agreed with our sales on a contract and received an email to review and accept the contract online, you can do the following:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the drop-down box in the upper-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Billing**.
 3. On the **Billing** page, click the **Contract** tab.
 4. On the **Contract** tab, locate the contract you want to review, and then click **...** in the row of the contract.

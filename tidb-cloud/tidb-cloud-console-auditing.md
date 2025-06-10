@@ -17,7 +17,7 @@ TiDB Cloud provides the console audit logging feature to help you track various 
 
 The console audit logging feature is disabled by default. To enable it, take the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the drop-down box in the upper-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Console Audit Logging**.
 3. Click **Settings** in the upper-right corner, and then enable console audit logging.
 
@@ -25,7 +25,7 @@ The console audit logging feature is disabled by default. To enable it, take the
 
 To disable console audit logging, take the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the drop-down box in the upper-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Console Audit Logging**.
 3. Click **Settings** in the upper-right corner, and then disable console audit logging.
 
@@ -38,7 +38,7 @@ You can only view the console audit logs of your organization.
 > - If it is the first time your organization enables console audit logging, the console audit logs are empty. After any audited events are performed, you will see the corresponding logs.
 > - If it has been more than 90 days since console audit logging was disabled, you cannot see any logs.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the drop-down box in the upper-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Console Audit Logging**.
 3. To get a specific part of audit logs, you can filter the event type, operation status, and time range.
 4. (Optional) To filter more fields, click **Advanced filter**, add more filters, and then click **Apply**.
@@ -48,7 +48,7 @@ You can only view the console audit logs of your organization.
 
 To export the console audit logs of your organization, take the following step:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the drop-down box in the upper-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Console Audit Logging**.
 3. (Optional) If you need to export a specific part of console audit logs, you can filter through various conditions. Otherwise, skip this step.
 4. Click **Download logs** and select the desired export format in JSON or CSV.

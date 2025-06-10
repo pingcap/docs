@@ -37,7 +37,7 @@ To update the spending limit for a TiDB Cloud Serverless cluster, perform the fo
 
     > **Tip:**
     >
-    > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
 2. In the **Usage This Month** area, click **Upgrade to Scalable Cluster**.
 

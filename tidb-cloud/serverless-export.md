@@ -179,7 +179,7 @@ When exporting data to the Parquet format, the data conversion between TiDB Clou
 
    > **Tip:**
    >
-   > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
+   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
 2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
@@ -230,7 +230,7 @@ When exporting data to the Parquet format, the data conversion between TiDB Clou
 
    > **Tip:**
    >
-   > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
+   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
 2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
@@ -274,7 +274,7 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
 
    > **Tip:**
    >
-   > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
+   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
 2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
@@ -312,7 +312,7 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
 
    > **Tip:**
    >
-   > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
+   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
 2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
@@ -350,7 +350,7 @@ ticloud serverless export create -c <cluster-id> --target-type AZURE_BLOB --azbl
 
    > **Tip:**
    >
-   > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
+   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
 2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
@@ -393,7 +393,7 @@ To cancel an ongoing export task, take the following steps:
 
    > **Tip:**
    >
-   > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
+   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
 2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
