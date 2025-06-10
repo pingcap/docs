@@ -123,9 +123,9 @@ TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. 
 >
 > To apply for a PoC, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
 
-The detailed information of your credits is available on the **Credits** page, including your total credits, available credits, current usage, and the status.
+The detailed information of your credits is available on the **Credits** tab, including your total credits, available credits, current usage, and the status.
 
-To view this page, perform the following steps:
+To view the credit information, perform the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the drop-down box in the upper-left corner.
 2. In the left navigation pane, click **Billing**.
@@ -145,11 +145,11 @@ To view this page, perform the following steps:
 
 ## Discounts
 
-If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can view the discount information of TiDB Cloud on the **Discounts** page. Otherwise, skip this section.
+If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can view the discount information of TiDB Cloud on the **Discounts** tab. Otherwise, skip this section.
 
 The discount information includes all discounts that you have received, the status, the discount percentage, and the discount start and end date.
 
-To view this page, perform the following steps:
+To view discount information, perform the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the drop-down box in the upper-left corner.
 2. In the left navigation pane, click **Billing**.
@@ -202,7 +202,7 @@ If you have agreed with our sales on a contract and received an email to review 
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the drop-down box in the upper-left corner.
 2. In the left navigation pane, click **Billing**.
 3. On the **Billing** page, click the **Contract** tab.
-4. On the **Contract** tab, locate the contract you want to review, and then click **...** in the **Actions** column.
+4. On the **Contract** tab, locate the contract you want to review, and then click **...** in the row of the contract.
 
 To learn more about contracts, feel free to [contact our sales](https://www.pingcap.com/contact-us/).
 
