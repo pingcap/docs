@@ -20,16 +20,9 @@ jobs:
       (
         github.event_name == 'issue_comment' &&
         contains(github.event.comment.body, '/bot-review') &&
-        contains('hfxsd,likidu,lilin90,Oreoxmt,qiancai', github.event.comment.user.login)
+        (github.event.comment.user.login == 'hfxsd' || github.event.comment.user.login == 'likidu' || github.event.comment.user.login == 'lilin90' || github.event.comment.user.login == 'Oreoxmt' || github.event.comment.user.login == 'qiancai')
       )
     steps:
-      - name: Debug Info
-        run: |
-          echo "Event name: ${{ github.event_name }}"
-          echo "Event type: ${{ github.event.action }}"
-          echo "Comment body: ${{ github.event.comment.body || 'No comment body' }}"
-          echo "Comment author: ${{ github.event.comment.user.login || 'No user' }}"
-
       - name: Checkout Repo
         uses: actions/checkout@v3
         with:
@@ -40,7 +33,6 @@ jobs:
         if: github.event_name == 'issue_comment'
         run: |
           COMMENT="${{ github.event.comment.body }}"
-          echo "Raw comment: $COMMENT"
 
           # Match commit range
           if [[ "$COMMENT" =~ \/bot-review:[[:space:]]*([a-f0-9]{7,40})[[:space:]]*\.\.[[:space:]]*([a-f0-9]{7,40}) ]]; then
