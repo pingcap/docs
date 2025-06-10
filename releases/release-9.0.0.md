@@ -434,7 +434,7 @@ The following features are planned for deprecation in future versions:
 
     + TiCDC <!--tw@qiancai: 2 notes-->
 
-        - Add `table_id` and `table_partition_id` fields to the TiDB extended fields for the Canal-JSON protocol [#11874](https://github.com/pingcap/tiflow/issues/11874) @[3AceShowHand](https://github.com/3AceShowHand)
+        <!-- - Add `tableId` and `partitionId` fields to the TiDB extended fields for the Canal-JSON protocol [#11874](https://github.com/pingcap/tiflow/issues/11874) @[3AceShowHand](https://github.com/3AceShowHand)--> <!-- for-beta.2 -->
 
     + TiDB Data Migration (DM) <!--tw@lilin90: 1 note-->
 
