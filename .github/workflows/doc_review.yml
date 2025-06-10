@@ -32,6 +32,8 @@ jobs:
         id: extract
         if: github.event_name == 'issue_comment'
         run: |
+          COMMENT="${{ github.event.comment.body }}"
+
           # Match commit range
           if [[ "$COMMENT" =~ \/bot-review:[[:space:]]*([a-f0-9]{7,40})[[:space:]]*\.\.[[:space:]]*([a-f0-9]{7,40}) ]]; then
             echo "BASE_SHA=${BASH_REMATCH[1]}" >> $GITHUB_OUTPUT
