@@ -411,7 +411,7 @@ After confirming that the old metrics have expired, you can perform the followin
         use_vm_as_datasource: true
     ```
 
-3. Reload the updated configuration:
+3. Reload the configuration to apply the changes:
 
     ```bash
     tiup cluster reload ${cluster-name} -R prometheus
