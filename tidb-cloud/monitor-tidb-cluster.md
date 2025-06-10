@@ -45,7 +45,7 @@ To view metrics on the cluster overview page, take the following steps:
     >
     > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. Check the **Core Metrics** area.
+2. Check the **Core Metrics** section.
 
 ### Metrics page
 

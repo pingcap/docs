@@ -42,6 +42,6 @@ You can view the records for authorized OAuth applications in the TiDB Cloud con
 
 1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner.
 2. Click **Account Settings**.
-3. In the left navigation pane, click **Authorized OAuth Apps**. You can view authorized OAuth applications.
+3. Click the **Authorized OAuth Apps** tab. You can view authorized OAuth applications.
 
 You can click **Revoke** to revoke your authorization at any time.
