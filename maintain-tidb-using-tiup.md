@@ -383,7 +383,7 @@ If you need to view historical metrics generated before the switch, switch the d
     tiup cluster reload ${cluster-name} -R grafana
     ```
 
-4. To switch back to VictoriaMetrics, repeat the steps in "Switch the default data source to VictoriaMetrics".
+4. To switch back to VictoriaMetrics, repeat the steps in [Switch the default data source to VictoriaMetrics](#switch-the-default-data-source-to-victoriametrics).
 
 ### Clean up old metrics and services
 
