@@ -26,7 +26,7 @@ Each TiDB cluster belongs to a project. Before creating a TiDB cluster, you need
 
 To retrieve information about all available projects, use the `tidbcloud_projects` data source as follows:
 
-1. In the `main.tf` file created when you [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md), add the `data` and `output` blocks:
+1. In the `main.tf` file created when you [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md), add the `data` and `output` blocks as follows:
 
    ```
    terraform {
@@ -56,14 +56,14 @@ To retrieve information about all available projects, use the `tidbcloud_project
    - Use the `data` block to define the data source of TiDB Cloud, including the data source type and the data source name.
 
       - To use the projects data source, set the data source type as `tidbcloud_projects`.
-      - For the data source name, you can define it according to your need. For example, "example_project".
+      - For the data source name, you can define it as needed. For example, "example_project".
       - For the `tidbcloud_projects` data source, you can use the `page` and `page_size` attributes to limit the maximum number of projects you want to check.
 
    - Use the `output` block to define the data source information to be displayed in the output, and expose the information for other Terraform configurations to use.
 
       The `output` block works similarly to returned values in programming languages. See [Terraform documentation](https://www.terraform.io/language/values/outputs) for more details.
 
-   To get all the available configurations for the resources and data sources, see this [configuration documentation](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs).
+   To get all the available configurations for the resources and data sources, see the [Terraform provider configuration documentation](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs).
 
 2. Run the `terraform apply` command to apply the configurations. You need to type `yes` at the confirmation prompt to proceed.
 
@@ -245,7 +245,7 @@ The following example shows how to create a TiDB Cloud Dedicated cluster.
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 
     ```
-    The progress of creating a dedicated cluster usually takes 10 minutes at least.
+    The creation of a dedicated cluster usually takes at least 10 minutes.
 
 5. Use the `terraform show` or `terraform state show tidbcloud_dedicated_cluster.${resource-name}` command to inspect the state of your resource. The former will show the states of all resources and data sources.
 
@@ -562,7 +562,7 @@ For a TiDB Cloud Dedicated cluster, you can use Terraform to manage dedicated cl
     }
     ```
 
-The `MODIFYING` status indicates that the cluster is changing now. Wait for a moment. The status will be changed to `ACTIVE`.
+The `MODIFYING` status indicates that the cluster is being modified. The status will change to `ACTIVE` once the modification is complete.
 
 ### Scale a TiDB cluster
 
@@ -570,7 +570,7 @@ You can scale a TiDB cluster when its status is `ACTIVE`.
 
 1. In the `cluster.tf` file that is used when you [create the cluster](#create-a-cluster-using-the-cluster-resource), edit the configurations of `tidb_node_setting`, `tikv_node_setting` and `tiflash_node_setting`.
 
-    For example, to add one more node for TiDB, 3 more nodes for TiKV (The number of TiKV nodes needs to be a multiple of 3 for its step is 3), and one more node for TiFlash, you can edit the configurations as follows:
+    For example, to add one more node for TiDB, 3 more nodes for TiKV (the number of TiKV nodes needs to be a multiple of 3, as its scaling step is 3), and one more node for TiFlash, you can edit the configurations as follows:
 
    ```
     tidb_node_setting = {
@@ -665,7 +665,7 @@ You can scale a TiDB cluster when its status is `ACTIVE`.
     Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
    ```
 
-Wait for the process to finish. The status will be changed to `ACTIVE` finally.
+Wait for the process to finish. The status will change to `ACTIVE` once the scaling is complete.
 
 ### Pause or resume a cluster
 
@@ -680,7 +680,7 @@ You can pause a cluster when its status is `ACTIVE` or resume a cluster when its
    paused = true
    ```
 
-2. Run the `terraform apply` command and type `yes` after check:
+2. Run the `terraform apply` command and type `yes` after checking the plan:
 
    ```shell
    $ terraform apply
@@ -1186,7 +1186,7 @@ To delete a Dedicated cluster, you can delete the configuration of the `tidbclou
     Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
   ```
 
-Now, if you run the `terraform show` command, you will get nothing because the resource has been cleared:
+Now, if you run the `terraform show` command, it will show no managed resources because the resource has been cleared:
 
 ```
 $ terraform show
