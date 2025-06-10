@@ -290,7 +290,7 @@ In large-scale clusters, Prometheus might encounter performance bottlenecks when
 
 ### Set up VictoriaMetrics for a new deployment
 
-By default, TiUP uses Prometheus as the metrics server. To use VictoriaMetrics instead of Prometheus in a new deployment, configure the topology file as follows:
+By default, TiUP uses Prometheus as the metrics monitoring component. To use VictoriaMetrics instead of Prometheus in a new deployment, configure the topology file as follows:
 
 ```yaml
 # Monitoring server configuration
