@@ -411,8 +411,6 @@ The following features are planned for deprecation in future versions:
 + Tools
     + Backup & Restore (BR) <!--tw@qiancai: 9 notes-->
 
-        - Enable `--checksum` by default in test cases [#57472](https://github.com/pingcap/tidb/issues/57472) @[Tristan1900](https://github.com/Tristan1900)
-        - Add chaos test cases for the advance owner of log backup [#50458](https://github.com/pingcap/tidb/issues/50458) @[Tristan1900](https://github.com/Tristan1900)
         - Include error information returned by TiKV nodes in full backup logs to facilitate troubleshooting [#58666](https://github.com/pingcap/tidb/issues/58666) @[Leavrth](https://github.com/Leavrth)
         - Optimize the structure and content of backup and restore summary logs [#56493](https://github.com/pingcap/tidb/issues/56493) @[Leavrth](https://github.com/Leavrth)
         - Update the list of unrecoverable system tables [#52530](https://github.com/pingcap/tidb/issues/52530) @[Leavrth](https://github.com/Leavrth)
