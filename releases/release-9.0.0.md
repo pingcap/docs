@@ -429,7 +429,10 @@ The following features are planned for deprecation in future versions:
     + TiDB Lightning
 
         - (dup): release-6.5.12.md > 改进提升> Tools> TiDB Lightning - 在解析 CSV 文件时，新增行宽检查以防止 OOM 问题 [#58590](https://github.com/pingcap/tidb/issues/58590) @[D3Hunter](https://github.com/D3Hunter)
-       
+    + Backup & Restore (BR)
+
+        - Remove the check on AWS region names to avoid backup errors caused by newly supported AWS regions failing the validation [#18159](https://github.com/tikv/tikv/issues/18159) @[3pointer](https://github.com/3pointer)
+
 ## Bug fixes
 
 + TiDB <!--tw@Oreoxmt: 28 notes-->
@@ -503,9 +506,9 @@ The following features are planned for deprecation in future versions:
     - (dup): release-7.5.6.md > 错误修复> TiKV - 修复 Region 合并时可能因 Raft index 匹配异常而导致 TiKV 异常退出的问题 [#18129](https://github.com/tikv/tikv/issues/18129) @[glorv](https://github.com/glorv)
     - (dup): release-6.5.12.md > 错误修复> TiKV - 修复 GC Worker 负载过高时可能出现的死锁问题 [#18214](https://github.com/tikv/tikv/issues/18214) @[zyguan](https://github.com/zyguan)
     - (dup): release-7.5.6.md > 错误修复> TiKV - 修复 CDC 连接在遇到异常时可能发生资源泄漏的问题 [#18245](https://github.com/tikv/tikv/issues/18245) @[wlwilliamx](https://github.com/wlwilliamx)
-    - 修复错误的线程内存监控指标 [#18125](https://github.com/tikv/tikv/issues/18125) @[Connor1996](https://github.com/Connor1996)
-    - 修复 TiKV 重启后非预期的 server is busy 状态 [#18233](https://github.com/tikv/tikv/issues/18233) @[LykxSassinator](https://github.com/LykxSassinator)
-    - 修复 Unsafe recovery 因 Tiflash learner 而卡住的问题 [#18197](https://github.com/tikv/tikv/issues/18197) @[v01dstar](https://github.com/v01dstar)
+    - Fix incorrect thread memory metrics [#18125](https://github.com/tikv/tikv/issues/18125) @[Connor1996](https://github.com/Connor1996)
+    - Fix the issue that the unexpected `Server is busy` error occurs after TiKV restarts [#18233](https://github.com/tikv/tikv/issues/18233) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Fix the issue that Online Unsafe Recovery gets stuck because of the TiFlash learner [#18197](https://github.com/tikv/tikv/issues/18197) @[v01dstar](https://github.com/v01dstar)
 
 + PD <!--tw@lilin90: 7 notes-->
 
@@ -518,13 +521,13 @@ The following features are planned for deprecation in future versions:
     - (dup): release-6.5.12.md > 错误修复> PD - 修复长期运行的集群中可能出现的内存泄漏问题 [#9047](https://github.com/tikv/pd/issues/9047) @[bufferflies](https://github.com/bufferflies)
     - (dup): release-6.5.12.md > 错误修复> PD - 修复当某个 PD 节点不是 Leader 时，仍可能生成 TSO 的问题 [#9051](https://github.com/tikv/pd/issues/9051) @[rleungx](https://github.com/rleungx)
     - (dup): release-6.5.12.md > 错误修复> PD - 修复 PD Leader 切换过程中，Region syncer 未能及时退出的问题 [#9017](https://github.com/tikv/pd/issues/9017) @[rleungx](https://github.com/rleungx)
-    - 修复 `minResolvedTS` 没有初始化导致的 panic 问题 [#8964](https://github.com/tikv/pd/issues/8964) @[rleungx](https://github.com/rleungx)
-    - 修复 pd client 重试策略没有正确初始化的问题 [#9013](https://github.com/tikv/pd/issues/9013) @[rleungx](https://github.com/rleungx)
-    - 修复通过 API 查询不存在的 Region 时的报错信息 [#8868](https://github.com/tikv/pd/issues/8868) @[lhy1024](https://github.com/lhy1024)
-    - 修复 ping API 被错误转发的问题 [#9031](https://github.com/tikv/pd/issues/9031) @[rleungx](https://github.com/rleungx)
-    - 修复 TTL cache goroutine 泄露的问题 [#9047](https://github.com/tikv/pd/issues/9047) @[bufferflies](https://github.com/bufferflies)
-    - 修复微服务模式下转发 TSO 可能导致 panic 的问题 [#9091](https://github.com/tikv/pd/issues/9091) @[lhy1024](https://github.com/lhy1024)
-    - 修复因为 PD 网络问题可能导致 TSO client 没有初始化的问题 [#58239](https://github.com/pingcap/tidb/issues/58239) @[okJiang](https://github.com/okJiang)
+    - Fix the issue that uninitialized `minResolvedTS` causes TiDB to panic [#8964](https://github.com/tikv/pd/issues/8964) @[rleungx](https://github.com/rleungx)
+    - Fix the issue that the PD client retry policy is not properly initialized [#9013](https://github.com/tikv/pd/issues/9013) @[rleungx](https://github.com/rleungx)
+    - Fix the issue that an incorrect error message is returned when querying a non-existent Region via API [#8868](https://github.com/tikv/pd/issues/8868) @[lhy1024](https://github.com/lhy1024)
+    - Fix the issue that the ping API is incorrectly forwarded [#9031](https://github.com/tikv/pd/issues/9031) @[rleungx](https://github.com/rleungx)
+    - Fix the issue that TTL cache goroutines might leak [#9047](https://github.com/tikv/pd/issues/9047) @[bufferflies](https://github.com/bufferflies)
+    - Fix the issue that forwarding TSO requests in microservice mode might cause TiDB to panic [#9091](https://github.com/tikv/pd/issues/9091) @[lhy1024](https://github.com/lhy1024)
+    - Fix the issue that network problems in PD might prevent the TSO client from initializing [#58239](https://github.com/pingcap/tidb/issues/58239) @[okJiang](https://github.com/okJiang)
 
 + TiFlash <!--tw@qiancai: 7 notes-->
 
@@ -576,9 +579,9 @@ The following features are planned for deprecation in future versions:
 
     + TiDB Data Migration (DM) <!--tw@lilin90: 3 notes-->
 
-        - 将系统表加入默认过滤列表 [#11984](https://github.com/pingcap/tiflow/issues/11984) @[River2000i](https://github.com/River2000i)
-        - 修复 dm 仅检查 `LightningTableEmptyChecking` 会导致任务失败的问题 [#11945](https://github.com/pingcap/tiflow/issues/11945) @[River2000i](https://github.com/River2000i)
-        - 修复 dm 不能备份至 azure 的问题 [#11912](https://github.com/pingcap/tiflow/issues/11912) @[River2000i](https://github.com/River2000i)
+        - Fix the issue that dump tasks fail because system tables are not included in the default filter list [#11984](https://github.com/pingcap/tiflow/issues/11984) @[River2000i](https://github.com/River2000i)
+        - Fix the issue that DM tasks fail because only `LightningTableEmptyChecking` is checked [#11945](https://github.com/pingcap/tiflow/issues/11945) @[River2000i](https://github.com/River2000i)
+        - Fix the issue that DM fails to back up data to Azure [#11912](https://github.com/pingcap/tiflow/issues/11912) @[River2000i](https://github.com/River2000i)
 
     + TiDB Lightning
 
