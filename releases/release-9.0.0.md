@@ -491,7 +491,7 @@ The following features are planned for deprecation in future versions:
     - Fix the issue that statistics estimation is incorrect when the value of `column.hist.NDV` is greater than that of `column.topN.num()` [#59563](https://github.com/pingcap/tidb/issues/59563) @[AilinKid](https://github.com/AilinKid)
     - Fix the issue that merging global statistics fails [#59274](https://github.com/pingcap/tidb/issues/59274)@[winoros](https://github.com/winoros)
     - Fix the issue that a TiDB session might crash when Fix Control #44855 is enabled [#59762](https://github.com/pingcap/tidb/issues/59762) @[winoros](https://github.com/winoros)
-    - Fix the issue that Merge Join is chosen only when the hint or join keys match exactly [#20710](https://github.com/pingcap/tidb/issues/20710)@[winoros](https://github.com/winoros)
+    - Fix the issue that TiDB chooses Merge Join when there is no hint and the join keys do not exactly match [#20710](https://github.com/pingcap/tidb/issues/20710)@[winoros](https://github.com/winoros)
 
 + TiKV <!--tw@lilin90: 3 notes-->
 
