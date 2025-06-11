@@ -90,7 +90,7 @@ See the detailed pricing for each available Alibaba Cloud region below.
 
 > **Tip:**
 >
-> Currently, TiDB Cloud Starter is available in the Alibaba Cloud Singapore region. If you want to run TiDB Cloud on other regions on Alibaba Cloud, please contact us via the Help center in the console.
+> TiDB Cloud Starter is currently available in the Alibaba Cloud Singapore region. For other regions on Alibaba Cloud, contact the Help center in the console.
 
 #### Free quota
 
