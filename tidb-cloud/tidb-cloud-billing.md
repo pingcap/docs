@@ -18,6 +18,10 @@ TiDB Cloud offers the following two pricing options to suit different needs:
 * TiDB Cloud Starter: you are charged based on the number of Request Units (RUs) consumed by your application.
 * TiDB Cloud Essential: you are charged based on the number of provisioned Request Capacity Units (RCUs), **not** on the actual usage by your application.
 
+> **Note:**
+>
+> Some features such as Restore are currently in beta and are free of charge. We will update the pricing for these features in the future.
+
 ### Request Unit (RU) and Request Capacity Unit (RCU)
 
 A **Request Unit (RU)** is a unit of measure used to represent the amount of resources consumed by a single request to the database. The amount of RUs consumed by a request depends on various factors, such as the operation type or the amount of data being retrieved or modified.
@@ -84,6 +88,10 @@ See the detailed pricing for each available Alibaba Cloud region below.
 | Row-based storage (per GiB/month) | $0.36 |
 | Columnar storage (per GiB/month) | $0.09 |
 
+> **Tip:**
+>
+> TiDB Cloud Starter is currently available in the Alibaba Cloud Singapore region. For other regions on Alibaba Cloud, contact the Help center in the console.
+
 #### Free quota
 
 TiDB Cloud offers a free quota up to the first 5 clusters created in each [organization](/tidb-cloud/manage-user-access.md#organizations). To create more clusters, you will be required to provide a credit card and set a [Monthly Spending Limit](#monthly-spending-limit). But if you delete some of your previous clusters before creating the 6th, the new cluster will still have a free quota. In other words, you can enjoy the free quota for up to 5 clusters.
@@ -117,6 +125,10 @@ See the detailed pricing for each available Alibaba Cloud region below.
 | Compute (per RCU/month) | $0.24 |
 | Row-based storage (per GiB/month) | $0.36 |
 | Columnar storage (per GiB/month) | $0.09 |
+
+> **Tip:**
+>
+> TiDB Cloud Essential is currently available in the Alibaba Cloud Singapore region. For other regions on Alibaba Cloud, contact the Help center in the console.
 
 #### Throttling
 
