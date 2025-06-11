@@ -1,6 +1,6 @@
 ---
 title: Set Up Self-Hosted Kafka Private Service Connect in Google Cloud
-summary: このドキュメントでは、Google Cloud でセルフホスト型 Kafka 用に Private Service Connect を設定する方法と、それをTiDB Cloudで動作させる方法について説明します。
+summary: このドキュメントでは、Google Cloud でセルフホスト型 Kafka 用に Private Service Connect を設定し、それをTiDB Cloudで動作させる方法について説明します。
 ---
 
 # Google Cloud でセルフホスト型 Kafka プライベート サービス接続を設定する {#set-up-self-hosted-kafka-private-service-connect-in-google-cloud}
@@ -9,80 +9,80 @@ summary: このドキュメントでは、Google Cloud でセルフホスト型 
 
 このメカニズムは次のように機能します。
 
-1.  TiDB Cloud VPC はプライベート エンドポイントを介して Kafka VPC に接続します。
+1.  TiDB Cloud VPC は、プライベート エンドポイントを介して Kafka VPC に接続します。
 2.  Kafka クライアントはすべての Kafka ブローカーと直接通信する必要があります。
 3.  各 Kafka ブローカーは、 TiDB Cloud VPC 内の一意のポートにマッピングされます。
 4.  マッピングを実現するには、Kafka ブートストラップ メカニズムと Google Cloud リソースを活用します。
 
 Google Cloud でセルフホスト型 Kafka に Private Service Connect を設定するには、次の 2 つの方法があります。
 
--   Private Service Connect (PSC) ポート マッピング メカニズムを使用します。この方法では、静的ポート ブローカー マッピング構成が必要です。EXTERNAL リスナーとアドバタイズされたリスナーのグループを追加するには、既存の Kafka クラスターを再構成する必要があります[PSC ポート マッピングによるセルフホスト型 Kafka Private Service Connect サービスの設定](#set-up-self-hosted-kafka-private-service-connect-service-by-psc-port-mapping)参照してください。
+-   Private Service Connect（PSC）ポートマッピングメカニズムを使用します。この方法では、静的なポートブローカーマッピング設定が必要です。EXTERNALリスナーとアドバタイズリスナーのグループを追加するには、既存のKafkaクラスターを再構成する必要があります。1 [PSC ポート マッピングによるセルフホスト型 Kafka Private Service Connect サービスの設定](#set-up-self-hosted-kafka-private-service-connect-service-by-psc-port-mapping)参照してください。
 
--   [Kafka プロキシ](https://github.com/grepplabs/kafka-proxy)使用します。この方法では、Kafka クライアントと Kafka ブローカー間のプロキシとして追加の実行プロセスが導入されます。プロキシはポートとブローカーのマッピングを動的に構成し、リクエストを転送します。既存の Kafka クラスターを再構成する必要はありません[Kafka-proxy によるセルフホスト型 Kafka プライベート サービス接続の設定](#set-up-self-hosted-kafka-private-service-connect-by-kafka-proxy)参照してください。
+-   [Kafkaプロキシ](https://github.com/grepplabs/kafka-proxy)使用してください。この方法では、Kafka クライアントと Kafka ブローカー間のプロキシとして、追加の実行プロセスが導入されます。プロキシはポートとブローカーのマッピングを動的に設定し、リクエストを転送します。既存の Kafka クラスターを再設定する必要はありません。3 [Kafka-proxy によるセルフホスト型 Kafka プライベート サービス接続のセットアップ](#set-up-self-hosted-kafka-private-service-connect-by-kafka-proxy)参照してください。
 
-このドキュメントでは、Google Cloud の 3 つのアベイラビリティ ゾーン (AZ) にデプロイされた Kafka Private Service Connect サービスに接続する例を示します。同様のポート マッピング原則に基づいて他の構成も可能ですが、このドキュメントでは Kafka Private Service Connect サービスの基本的なセットアップ プロセスについて説明します。本番環境では、運用の保守性と監視性が強化された、より回復力の高い Kafka Private Service Connect サービスが推奨されます。
+このドキュメントでは、Google Cloud の 3 つのアベイラビリティゾーン（AZ）にデプロイされた Kafka Private Service Connect サービスへの接続例を示します。同様のポートマッピング原則に基づいて他の構成も可能ですが、このドキュメントでは Kafka Private Service Connect サービスの基本的な設定プロセスについて説明します。本番環境では、運用の保守性と可観測性を強化した、より回復力の高い Kafka Private Service Connect サービスの使用を推奨します。
 
 ## 前提条件 {#prerequisites}
 
-1.  自分の Google Cloud アカウントで Kafka Private Service Connect を設定するには、次の権限があることを確認してください。
+1.  独自の Google Cloud アカウントで Kafka Private Service Connect を設定するには、次の権限があることを確認してください。
 
     -   VMノードを管理する
-    -   VPC の管理
+    -   VPCを管理する
     -   サブネットを管理する
     -   ロードバランサーを管理する
     -   プライベートサービス接続の管理
     -   VMノードに接続してKafkaノードを構成する
 
-2.  持っていない場合は[TiDB Cloud専用クラスターを作成する](/tidb-cloud/create-tidb-cluster.md) 。
+2.  持っていない場合は[TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md) 。
 
 3.  TiDB Cloud Dedicated クラスターから Kafka デプロイメント情報を取得します。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed]**をクリックします。
-    2.  概要ページで、TiDB クラスターのリージョンを見つけます。Kafka クラスターが同じリージョンにデプロイされることを確認します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed] を**クリックします。
+    2.  概要ページで、TiDB クラスターのリージョンを確認します。Kafka クラスターが同じリージョンにデプロイされることを確認してください。
     3.  **「Changefeed の作成」を**クリックします。
-        1.  **ターゲットタイプ**で、 **Kafka を**選択します。
-        2.  **接続方法**で、**プライベート サービス接続**を選択します。
-    4.  **続行する前に、リマインダー**に Google Cloud プロジェクトを書き留めておきます。これを使用して、 TiDB Cloudからのエンドポイント作成リクエストの自動承認を承認します。
-    5.  **TiDBクラスタのゾーン**を書き留めます。これらのゾーンに TiDB クラスターをデプロイします。ゾーン間のトラフィックを減らすために、これらのゾーンに Kafka をデプロイすることをお勧めします。
-    6.  Kafka プライベート サービス接続サービスに固有の**Kafka アドバタイズ リスナー パターンを**選択します。
-        1.  一意のランダム文字列を入力します。数字または小文字のみを含めることができます。これは後で**Kafka アドバタイズ リスナー パターンを**生成するために使用します。
-        2.  **「使用状況を確認して生成」をクリックすると、**ランダム文字列が一意であるかどうかが確認され、Kafka ブローカーの外部アドバタイズ リスナーを組み立てるために使用される**Kafka アドバタイズ リスナー パターンが**生成されるか、Kafka プロキシが構成されます。
+        1.  **宛先**で、 **Kafka**を選択します。
+        2.  **[接続方法]**で、 **[プライベート サービス接続]**を選択します。
+    4.  **先に進む前に、Google Cloud プロジェクトをリマインダー**に書き留めておいてください。このプロジェクトは、 TiDB Cloudからのエンドポイント作成リクエストの自動承認を承認するために使用します。
+    5.  **TiDBクラスタのゾーン**をメモしておいてください。これらのゾーンに TiDB クラスターをデプロイします。ゾーン間のトラフィックを削減するため、これらのゾーンに Kafka をデプロイすることをお勧めします。
+    6.  Kafka プライベート サービス接続サービスに固有の**Kafka アドバタイズ リスナー パターン**を選択します。
+        1.  一意のランダム文字列を入力してください。数字または小文字のみ使用できます。この文字列は、後ほど**Kafkaアドバタイズリスナーパターンを**生成する際に使用します。
+        2.  **「使用状況を確認して生成」を**クリックすると、ランダム文字列が一意であるかどうかが確認され、Kafka ブローカーの外部アドバタイズ リスナーを組み立てるために使用される**Kafka アドバタイズ リスナー パターンが**生成されるか、Kafka プロキシが構成されます。
 
-すべてのデプロイメント情報を書き留めます。後で Kafka Private Service Connect サービスを構成するときにこれを使用する必要があります。
+すべてのデプロイメント情報をメモしてください。後でKafka Private Service Connectサービスを設定する際に必要になります。
 
-次の表は、デプロイメント情報の例を示しています。
+次の表は、展開情報の例を示しています。
 
 | 情報                              | 価値                                                                                                     |
 | ------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| リージョン                           | オレゴン ( `us-west1` )                                                                                    |
+| リージョン                           | オレゴン州 ( `us-west1` )                                                                                   |
 | TiDB Cloudの Google Cloud プロジェクト | `tidbcloud-prod-000`                                                                                   |
 | ゾーン                             | <li>`us-west1-a`</li><li> `us-west1-b`</li><li> `us-west1-c`</li>                                      |
 | Kafka アドバタイズド リスナー パターン         | 一意のランダム文字列: `abc`<br/>生成されたパターン: &lt;broker_id&gt;.abc.us-west1.gcp.3199745.tidbcloud.com:&lt;port&gt; |
 
 ## PSC ポート マッピングによるセルフホスト型 Kafka Private Service Connect サービスの設定 {#set-up-self-hosted-kafka-private-service-connect-service-by-psc-port-mapping}
 
-PSC ポート マッピング メカニズムを使用して、各 Kafka ブローカーを一意のポートでTiDB Cloud VPC に公開します。次の図は、その仕組みを示しています。
+PSCポートマッピングメカニズムを使用して、各KafkaブローカーをTiDB Cloud VPCに固有のポートで公開します。次の図は、その仕組みを示しています。
 
 ![Connect to Google Cloud self-hosted Kafka Private Service Connect by port mapping](/media/tidb-cloud/changefeed/connect-to-google-cloud-self-hosted-kafka-private-service-connect-by-portmapping.jpeg)
 
 ### ステップ1. Kafkaクラスターをセットアップする {#step-1-set-up-the-kafka-cluster}
 
-新しいクラスターをデプロイする必要がある場合は、 [新しい Kafka クラスターをデプロイ](#deploy-a-new-kafka-cluster)の手順に従ってください。
+新しいクラスターをデプロイする必要がある場合は、 [新しいKafkaクラスターをデプロイ](#deploy-a-new-kafka-cluster)の手順に従ってください。
 
 既存のクラスターを公開する必要がある場合は、 [実行中の Kafka クラスターを再構成する](#reconfigure-a-running-kafka-cluster)の手順に従ってください。
 
-#### 新しい Kafka クラスターをデプロイ {#deploy-a-new-kafka-cluster}
+#### 新しいKafkaクラスターをデプロイ {#deploy-a-new-kafka-cluster}
 
-**1. Kafka VPCをセットアップする**
+**1. Kafka VPC を設定する**
 
-Kafka クラスターを簡単に構成できるように、Kafka VPC 用に 2 つのサブネットを作成する必要があります。1 つは Kafka ブローカー用、もう 1 つは要塞ノード用です。
+Kafka クラスターを簡単に構成できるように、Kafka VPC 用に 2 つのサブネット (1 つは Kafka ブローカー用、もう 1 つは要塞ノード用) を作成する必要があります。
 
-[Google Cloud コンソール](https://cloud.google.com/cloud-console)に移動し、 [VPC ネットワーク](https://console.cloud.google.com/networking/networks/list)ページに移動して、次の属性を持つ Kafka VPC を作成します。
+[Google Cloud コンソール](https://cloud.google.com/cloud-console)に進み、 [VPCネットワーク](https://console.cloud.google.com/networking/networks/list)ページに移動して、次の属性を持つ Kafka VPC を作成します。
 
 -   **名前**: `kafka-vpc`
 -   サブネット
-    -   **名前**: `bastion-subnet` ;**リージョン**: `us-west1` ; **IPv4 範囲**: `10.0.0.0/18`
-    -   **名前**: `brokers-subnet` ;**リージョン**: `us-west1` ; **IPv4 範囲**: `10.64.0.0/18`
+    -   **名前**: `bastion-subnet` ;**リージョン**: `us-west1` ; **IPv4範囲**: `10.0.0.0/18`
+    -   **名前**: `brokers-subnet` ;**リージョン**: `us-west1` ; **IPv4範囲**: `10.64.0.0/18`
 -   ファイアウォールルール
     -   `kafka-vpc-allow-custom`
     -   `kafka-vpc-allow-ssh`
@@ -96,19 +96,19 @@ VM をプロビジョニングするには、 [VMインスタンス](https://con
     -   **名前**: `bastion-node`
     -   **リージョン**: `us-west1`
     -   **ゾーン**: `Any`
-    -   **マシンタイプ**: `e2-medium`
-    -   **画像**: `Debian GNU/Linux 12`
+    -   **マシンタイプ**： `e2-medium`
+    -   **画像**： `Debian GNU/Linux 12`
     -   **ネットワーク**: `kafka-vpc`
     -   **サブネットワーク**: `bastion-subnet`
     -   **外部 IPv4 アドレス**: `Ephemeral`
 
-2.  ブローカーノード 1
+2.  ブローカーノード1
 
     -   **名前**: `broker-node1`
     -   **リージョン**: `us-west1`
     -   **ゾーン**: `us-west1-a`
-    -   **マシンタイプ**: `e2-medium`
-    -   **画像**: `Debian GNU/Linux 12`
+    -   **マシンタイプ**： `e2-medium`
+    -   **画像**： `Debian GNU/Linux 12`
     -   **ネットワーク**: `kafka-vpc`
     -   **サブネットワーク**: `brokers-subnet`
     -   **外部 IPv4 アドレス**: `None`
@@ -118,8 +118,8 @@ VM をプロビジョニングするには、 [VMインスタンス](https://con
     -   **名前**: `broker-node2`
     -   **リージョン**: `us-west1`
     -   **ゾーン**: `us-west1-b`
-    -   **マシンタイプ**: `e2-medium`
-    -   **画像**: `Debian GNU/Linux 12`
+    -   **マシンタイプ**： `e2-medium`
+    -   **画像**： `Debian GNU/Linux 12`
     -   **ネットワーク**: `kafka-vpc`
     -   **サブネットワーク**: `brokers-subnet`
     -   **外部 IPv4 アドレス**: `None`
@@ -129,8 +129,8 @@ VM をプロビジョニングするには、 [VMインスタンス](https://con
     -   **名前**: `broker-node3`
     -   **リージョン**: `us-west1`
     -   **ゾーン**: `us-west1-c`
-    -   **マシンタイプ**: `e2-medium`
-    -   **画像**: `Debian GNU/Linux 12`
+    -   **マシンタイプ**： `e2-medium`
+    -   **画像**： `Debian GNU/Linux 12`
     -   **ネットワーク**: `kafka-vpc`
     -   **サブネットワーク**: `brokers-subnet`
     -   **外部 IPv4 アドレス**: `None`
@@ -165,23 +165,23 @@ VM をプロビジョニングするには、 [VMインスタンス](https://con
 
 **4. Kafkaブローカーを構成する**
 
-1.  3 つのノードを持つ KRaft Kafka クラスターをセットアップします。各ノードはブローカーとコントローラーの役割として機能します。各ブローカーについて:
+1.  3つのノードでKRaft Kafkaクラスターをセットアップします。各ノードはブローカーとコントローラーの役割を持ちます。各ブローカーに対して、以下の手順を実行します。
 
-    1.  `listeners`場合、3 つのブローカーはすべて同じであり、ブローカーとコントローラーのロールとして機能します。
-        1.  すべての**コントローラー**ロール ノードに対して同じ CONTROLLER リスナーを構成します。**ブローカー**ロール ノードのみを追加する場合は、 `server.properties`の CONTROLLER リスナーは必要ありません。
+    1.  `listeners`の場合、3 つのブローカーはすべて同じであり、ブローカーとコントローラーのロールとして機能します。
+        1.  すべての**コントローラー**ロールノードに同じ CONTROLLER リスナーを設定します。**ブローカー**ロールノードのみを追加する場合は、 `server.properties`の CONTROLLER リスナーは必要ありません。
         2.  2 つの**ブローカー**リスナーを構成します。内部アクセスの場合は INTERNAL、 TiDB Cloudからの外部アクセスの場合は EXTERNAL です。
     2.  `advertised.listeners`については、次の操作を行います。
         1.  ブローカー ノードの内部 IP アドレスを使用して、各ブローカーの内部アドバタイズ リスナーを構成します。これにより、内部 Kafka クライアントはアドバタイズ アドレスを介してブローカーに接続できるようになります。
-        2.  TiDB Cloud がさまざまなブローカーを区別できるように、すべてのブローカー ノードに対してTiDB Cloudから取得した**Kafka アドバタイズ リスナー パターン**に基づいて EXTERNAL アドバタイズ リスナーを構成します。さまざまな EXTERNAL アドバタイズ リスナーにより、 TiDB Cloud側の Kafka クライアントは適切なブローカーにリクエストをルーティングできます。
-            -   `<port>` 、ブローカーを Kafka Private Service Connect アクセス ポイントと区別します。すべてのブローカーの EXTERNAL アドバタイズ リスナーのポート範囲を計画します。これらのポートは、ブローカーが実際にリッスンするポートである必要はありません。これらは、リクエストを別のブローカーに転送する Private Service Connect のロード バランサーがリッスンするポートです。
+        2.  TiDB Cloudから取得した**Kafkaアドバタイズリスナーパターン**に基づいて、各ブローカーノードにEXTERNALアドバタイズリスナーを設定することで、TiDB TiDB Cloudが複数のブローカーを区別できるようになります。異なるEXTERNALアドバタイズリスナーを設定することで、 TiDB Cloud側のKafkaクライアントはリクエストを適切なブローカーにルーティングできるようになります。
+            -   `<port>`ブローカーと Kafka Private Service Connect アクセスポイントを区別します。すべてのブローカーの EXTERNAL アドバタイズリスナーのポート範囲を計画してください。これらのポートは、ブローカーが実際にリッスンするポートである必要はありません。これらは、リクエストを別のブローカーに転送する Private Service Connect のロードバランサーがリッスンするポートです。
             -   トラブルシューティングを容易にするために、ブローカーごとに異なるブローカー ID を構成することをお勧めします。
     3.  計画値:
         -   コントローラーポート: `29092`
         -   内部ポート: `9092`
         -   外部: `39092`
-        -   外部アドバタイズされたリスナーポート範囲: `9093~9095`
+        -   外部アドバタイズされたリスナーポートの範囲: `9093~9095`
 
-2.  SSH を使用してすべてのブローカー ノードにログインします。各ブローカー ノードごとに次の内容を含む構成ファイル`~/config/server.properties`を作成します。
+2.  SSHを使用して各ブローカーノードにログインします。各ブローカーノードごとに、以下の内容を含む設定ファイル`~/config/server.properties`作成します。
 
     ```properties
     # broker-node1 ~/config/server.properties
@@ -276,7 +276,7 @@ VM をプロビジョニングするには、 [VMインスタンス](https://con
     LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properties" &
     ```
 
-**5. 要塞ノードで Kafka クラスターをテストする**
+**5. 要塞ノードでKafkaクラスターをテストする**
 
 1.  Kafka ブートストラップをテストします。
 
@@ -316,18 +316,18 @@ VM をプロビジョニングするには、 [VMインスタンス](https://con
 
     # Create a topic if it does not exist
     create_topic() {
-    echo "Creating topic if it does not exist..."
-    $KAFKA_DIR/kafka-topics.sh --create --topic $TOPIC --bootstrap-server $BROKER_LIST --if-not-exists --partitions 3 --replication-factor 3
+        echo "Creating topic if it does not exist..."
+        $KAFKA_DIR/kafka-topics.sh --create --topic $TOPIC --bootstrap-server $BROKER_LIST --if-not-exists --partitions 3 --replication-factor 3
     }
 
     # Produce messages to the topic
     produce_messages() {
-    echo "Producing messages to the topic..."
-    for ((chrono=1; chrono <= 10; chrono++)); do
-        message="Test message "$chrono
-        echo "Create "$message
-        echo $message | $KAFKA_DIR/kafka-console-producer.sh --broker-list $BROKER_LIST --topic $TOPIC
-    done
+        echo "Producing messages to the topic..."
+        for ((chrono=1; chrono <= 10; chrono++)); do
+            message="Test message "$chrono
+            echo "Create "$message
+            echo $message | $KAFKA_DIR/kafka-console-producer.sh --broker-list $BROKER_LIST --topic $TOPIC
+        done
     }
     create_topic
     produce_messages 
@@ -350,13 +350,13 @@ VM をプロビジョニングするには、 [VMインスタンス](https://con
     CONSUMER_GROUP="test-group"
     # Consume messages from the topic
     consume_messages() {
-    echo "Consuming messages from the topic..."
-    $KAFKA_DIR/kafka-console-consumer.sh --bootstrap-server $BROKER_LIST --topic $TOPIC --from-beginning --timeout-ms 5000 --consumer-property group.id=$CONSUMER_GROUP
+        echo "Consuming messages from the topic..."
+        $KAFKA_DIR/kafka-console-consumer.sh --bootstrap-server $BROKER_LIST --topic $TOPIC --from-beginning --timeout-ms 5000 --consumer-property group.id=$CONSUMER_GROUP
     }
     consume_messages
     ```
 
-4.  `produce.sh`と`consume.sh`を実行して、Kafka クラスターが実行中であることを確認します。これらのスクリプトは、後のネットワーク接続テストでも再利用されます。スクリプトは`--partitions 3 --replication-factor 3`でトピックを作成します。3 つのブローカーすべてにデータが含まれていることを確認します。スクリプトが 3 つのブローカーすべてに接続して、ネットワーク接続がテストされることを保証します。
+4.  `produce.sh`と`consume.sh`実行して、Kafkaクラスターが実行中であることを確認してください。これらのスクリプトは、後ほどネットワーク接続テストにも再利用されます。スクリプトは`--partitions 3 --replication-factor 3`のトピックを作成します。3つのブローカーすべてにデータが含まれていることを確認してください。ネットワーク接続がテストされるよう、スクリプトが3つのブローカーすべてに接続されることを確認してください。
 
     ```shell
     # Test write message. 
@@ -405,20 +405,20 @@ VM をプロビジョニングするには、 [VMインスタンス](https://con
 
 #### 実行中の Kafka クラスターを再構成する {#reconfigure-a-running-kafka-cluster}
 
-Kafka クラスターが TiDB クラスターと同じリージョンにデプロイされていることを確認します。ゾーン間のトラフィックを削減するために、ゾーンも同じリージョンに配置することをお勧めします。
+Kafka クラスターが TiDB クラスターと同じリージョンにデプロイされていることを確認してください。ゾーン間のトラフィックを削減するため、ゾーンも同じリージョンに配置することをお勧めします。
 
 **1. ブローカーの外部リスナーを構成する**
 
-次の構成は、Kafka KRaft クラスターに適用されます。ZK モードの構成も同様です。
+以下の設定はKafka KRaftクラスターに適用されます。ZKモードの設定も同様です。
 
 1.  構成の変更を計画します。
 
-    1.  TiDB Cloudからの外部アクセス用に、ブローカーごとに EXTERNAL**リスナー**を構成します。 EXTERNAL ポートとして一意のポート (例: `39092` ) を選択します。
-    2.  TiDB Cloud がさまざまなブローカーを区別できるように、すべてのブローカー ノードに対してTiDB Cloudから取得した**Kafka アドバタイズ リスナー パターン**に基づいて EXTERNAL**アドバタイズ リスナー**を構成します。さまざまな EXTERNAL アドバタイズ リスナーにより、 TiDB Cloud側の Kafka クライアントは適切なブローカーにリクエストをルーティングできます。
-        -   `<port>` 、ブローカーを Kafka Private Service Connect アクセス ポイントと区別します。すべてのブローカーの EXTERNAL アドバタイズ リスナーのポート範囲を計画します (例: `range from 9093` )。これらのポートは、ブローカーがリッスンする実際のポートである必要はありません。これらは、リクエストを別のブローカーに転送する Private Service Connect のロード バランサーがリッスンするポートです。
+    1.  TiDB Cloudからの外部アクセス用に、各ブローカーに EXTERNAL**リスナー**を設定します。EXTERNAL ポートとして一意のポート（例： `39092` ）を選択します。
+    2.  TiDB Cloudから取得した**Kafkaアドバタイズリスナーパターン**に基づいて、各ブローカーノードにEXTERNAL**アドバタイズリスナー**を設定することで、TiDB TiDB Cloudが複数のブローカーを区別できるようになります。異なるEXTERNALアドバタイズリスナーを設定することで、 TiDB Cloud側のKafkaクライアントはリクエストを適切なブローカーにルーティングできるようになります。
+        -   `<port>`ブローカーと Kafka Private Service Connect アクセスポイントを区別します。すべてのブローカーの EXTERNAL アドバタイズリスナーのポート範囲を計画します（例： `range from 9093` ）。これらのポートは、ブローカーが実際にリッスンするポートである必要はありません。これらは、リクエストを別のブローカーに転送する Private Service Connect のロードバランサーがリッスンするポートです。
         -   トラブルシューティングを容易にするために、ブローカーごとに異なるブローカー ID を構成することをお勧めします。
 
-2.  SSH を使用して各ブローカー ノードにログインします。各ブローカーの構成ファイルを次の内容に変更します。
+2.  SSHを使用して各ブローカーノードにログインします。各ブローカーの設定ファイルを以下の内容に変更します。
 
     ```properties
     # Add EXTERNAL listener
@@ -436,7 +436,7 @@ Kafka クラスターが TiDB クラスターと同じリージョンにデプ�
 
 3.  すべてのブローカーを再構成したら、Kafka ブローカーを 1 つずつ再起動します。
 
-**2. 内部ネットワークで外部リスナー設定をテストする**
+**2. 内部ネットワークで外部リスナーの設定をテストする**
 
 Kafka と OpenJDK を Kafka クライアント ノードにダウンロードできます。
 
@@ -464,9 +464,9 @@ b2.abc.us-west1.gcp.3199745.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.
 b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 ```
 
-### ステップ2. Kafkaクラスターをプライベートサービス接続として公開する {#step-2-expose-the-kafka-cluster-as-private-service-connect}
+### ステップ2. KafkaクラスターをPrivate Service Connectとして公開する {#step-2-expose-the-kafka-cluster-as-private-service-connect}
 
-1.  [ネットワークエンドポイントグループ](https://console.cloud.google.com/compute/networkendpointgroups/list)ページに移動します。次のようにネットワーク エンドポイント グループを作成します。
+1.  [ネットワークエンドポイントグループ](https://console.cloud.google.com/compute/networkendpointgroups/list)ページ目に進みます。以下の手順でネットワークエンドポイントグループを作成します。
 
     -   **名前**: `kafka-neg`
     -   **ネットワークエンドポイントグループタイプ**: `Port Mapping NEG(Regional)`
@@ -478,29 +478,29 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
     1.  ネットワークエンドポイント1
         -   **インスタンス**: `broker-node1`
-        -   **VM ポート**: `39092`
+        -   **VMポート**: `39092`
         -   **クライアントポート**: `9093`
     2.  ネットワークエンドポイント2
         -   **インスタンス**: `broker-node2`
-        -   **VM ポート**: `39092`
+        -   **VMポート**: `39092`
         -   **クライアントポート**: `9094`
     3.  ネットワークエンドポイント3
         -   **インスタンス**: `broker-node3`
-        -   **VM ポート**: `39092`
+        -   **VMポート**: `39092`
         -   **クライアントポート**: `9095`
 
-3.  [負荷分散](https://console.cloud.google.com/net-services/loadbalancing/list/loadBalancers)ページに移動します。次のようにロード バランサーを作成します。
+3.  [負荷分散](https://console.cloud.google.com/net-services/loadbalancing/list/loadBalancers)ページ目に進みます。以下の手順でロードバランサーを作成します。
 
     -   **ロードバランサーの種類**: `Network Load Balancer`
     -   **プロキシまたはパススルー**: `Passthrough`
-    -   **対外的または内部的**: `Internal`
+    -   **対外向けまたは社内向け**： `Internal`
     -   **ロードバランサー名**: `kafka-lb`
     -   **リージョン**: `us-west1`
     -   **ネットワーク**: `kafka-vpc`
     -   バックエンド構成
         -   **バックエンドタイプ**: `Port mapping network endpoint group`
-        -   **プロトコル**: `TCP`
-        -   **ポート マッピング ネットワーク エンドポイント グループ**: `kafka-neg`
+        -   **プロトコル**： `TCP`
+        -   **ポートマッピングネットワークエンドポイントグループ**: `kafka-neg`
     -   フロントエンド構成
         -   **サブネットワーク**: `brokers-subnet`
         -   **ポート**: `All`
@@ -508,8 +508,8 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 4.  [**プライベートサービス接続**&gt;**公開サービス**](https://console.cloud.google.com/net-services/psc/list/producers)に進みます。
 
     -   **ロードバランサータイプ**: `Internal passthrough Network Load Balancer`
-    -   **内部ロードバランサ**: `kafka-lb`
-    -   **サービス名**: `kafka-psc`
+    -   **内部ロードバランサ**： `kafka-lb`
+    -   **サービス名**： `kafka-psc`
     -   **サブネット**: `RESERVE NEW SUBNET`
         -   **名前**: `psc-subnet`
         -   **VPC ネットワーク**: `kafka-vpc`
@@ -517,57 +517,57 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
         -   **IPv4範囲**: `10.128.0.0/18`
     -   **承認されたプロジェクト**: [前提条件](#prerequisites)で取得したTiDB Cloudの Google Cloud プロジェクト (例: `tidbcloud-prod-000` )。
 
-5.  `kafka-psc`の詳細ページに移動します。**サービス アタッチメント**(例: `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-psc` ) を書き留めます。TiDB TiDB Cloudでこれを使用して、この PSC に接続します。
+5.  `kafka-psc`の詳細ページに移動します。**サービスアタッチメント**（例： `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-psc` ）を書き留めます。TiDB TiDB Cloudでこの PSC に接続する際に使用します。
 
 6.  VPC ネットワーク`kafka-vpc`の詳細ページに移動し、すべてのブローカーへの PSC トラフィックを許可するファイアウォール ルールを追加します。
 
     -   **名前**: `allow-psc-traffic`
-    -   **交通方向**: `Ingress`
-    -   **試合のアクション**: `Allow`
-    -   **ターゲット**: `All instances in the network`
+    -   **交通方向**： `Ingress`
+    -   **試合のアクション**： `Allow`
+    -   **ターゲット**： `All instances in the network`
     -   **ソースフィルター**: `IPv4 ranges`
-    -   **ソース IPv4 範囲**: `10.128.0.0/18` -subnet の範囲。
+    -   **ソースIPv4範囲**: `10.128.0.0/18` -subnetの範囲。
     -   **プロトコルとポート**: すべて許可
 
 ### ステップ3. TiDB Cloudから接続する {#step-3-connect-from-tidb-cloud}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)に戻り、クラスターの変更フィードを作成し、 **Private Service Connect**で Kafka クラスターに接続します。詳細については、 [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)参照してください。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)に戻り、クラスターが**Private Service Connect**経由で Kafka クラスターに接続するための changefeed を作成します。詳細については、 [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)参照してください。
 
-2.  **「ChangeFeed ターゲットの構成」&gt;「接続方法」&gt;「プライベート サービス接続」**に進むときは、次のフィールドに対応する値を入力し、必要に応じて他のフィールドに入力します。
+2.  **「ChangeFeed ターゲットの構成」&gt;「接続方法」&gt;「プライベート サービス接続」**に進むときは、次のフィールドに対応する値を入力し、必要に応じてその他のフィールドを入力します。
 
-    -   **Kafka アドバタイズ リスナー パターン**: `abc` 。これは、 [前提条件](#prerequisites)で**Kafka アドバタイズ リスナー パターンを**生成するために使用する一意のランダム文字列と同じです。
-    -   **サービス アタッチメント**: PSC の Kafka サービス アタッチメント (例: `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-psc` 。
+    -   **Kafka アドバタイズ リスナー パターン**: `abc` 。これは、 [前提条件](#prerequisites)で**Kafka アドバタイズ リスナー パターン**を生成するために使用する一意のランダム文字列と同じです。
+    -   **サービス アタッチメント**: PSC の Kafka サービス アタッチメント (例: `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-psc` )。
     -   **ブートストラップポート**: `9092,9093,9094`
 
 3.  [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)の手順に進みます。
 
-## Kafka-proxy によるセルフホスト型 Kafka プライベート サービス接続の設定 {#set-up-self-hosted-kafka-private-service-connect-by-kafka-proxy}
+## Kafka-proxy によるセルフホスト型 Kafka プライベート サービス接続のセットアップ {#set-up-self-hosted-kafka-private-service-connect-by-kafka-proxy}
 
-Kafka プロキシの動的ポート マッピング メカニズムを使用して、各 Kafka ブローカーを一意のポートでTiDB Cloud VPC に公開します。次の図は、その仕組みを示しています。
+Kafkaプロキシの動的ポートマッピングメカニズムを使用して、各KafkaブローカーをTiDB Cloud VPCに固有のポートで公開します。次の図は、その仕組みを示しています。
 
 ![Connect to Google Cloud self-hosted Kafka Private Service Connect by Kafka proxy](/media/tidb-cloud/changefeed/connect-to-google-cloud-self-hosted-kafka-private-service-connect-by-kafka-proxy.jpeg)
 
 ### ステップ1. Kafka-proxyを設定する {#step-1-set-up-kafka-proxy}
 
-TiDB クラスターと同じリージョンで Kafka クラスターがすでに実行されていると仮定します。VPC ネットワークから Kafka クラスターに接続できます。Kafka クラスターは、セルフホストすることも、Confluent などのサードパーティ プロバイダーによって提供されることもできます。
+TiDB クラスターと同じリージョンで既に Kafka クラスターが稼働していると仮定します。VPC ネットワークから Kafka クラスターに接続できます。Kafka クラスターは、セルフホスト型でも、Confluent などのサードパーティプロバイダーが提供するものでも構いません。
 
-1.  [インスタンス グループ](https://console.cloud.google.com/compute/instanceGroups/list)ページに移動し、Kafka-proxy のインスタンス グループを作成します。
+1.  [インスタンスグループ](https://console.cloud.google.com/compute/instanceGroups/list)ページに移動し、Kafka-proxy のインスタンス グループを作成します。
 
     -   **名前**: `kafka-proxy-ig`
-    -   インスタンス テンプレート:
+    -   インスタンステンプレート:
         -   **名前**: `kafka-proxy-tpl`
-        -   **場所**: `Regional`
+        -   **場所**： `Regional`
         -   **リージョン**: `us-west1`
         -   **マシンタイプ**: `e2-medium`ワークロードに応じて独自のマシンタイプを選択できます。
         -   **ネットワーク**: Kafka クラスターに接続できる VPC ネットワーク。
         -   **サブネットワーク**: Kafka クラスターに接続できるサブネット。
-        -   **外部 IPv4 アドレス**: `Ephemeral`インターネット アクセスを有効にすると、Kafka-proxy を簡単に構成できるようになります。本番環境では**[なし]**を選択し、任意の方法でノードにログインできます。
-    -   **場所**: `Single zone`
+        -   **外部IPv4アドレス**： `Ephemeral` -proxyの設定を容易にするため、インターネットアクセスを有効にしてください。本番環境では**「なし」**を選択し、任意の方法でノードにログインできます。
+    -   **場所**： `Single zone`
     -   **リージョン**: `us-west1`
     -   **ゾーン**: ブローカーのゾーンの 1 つを選択します。
     -   **自動スケーリングモード**: `Off`
     -   **インスタンスの最小数**: `1`
-    -   **インスタンスの最大数**: `1`プロキシはクラスター モードをサポートしていないため、デプロイできるインスタンスは 1 つだけです。各 Kafka プロキシは、ローカル ポートをブローカーのポートにランダムにマッピングするため、プロキシ間でマッピングが異なります。ロード バランサーの背後に複数の Kafka プロキシをデプロイすると、問題が発生する可能性があります。Kafka クライアントが 1 つのプロキシに接続し、別のプロキシを介してブローカーにアクセスすると、リクエストが間違ったブローカーにルーティングされる可能性があります。
+    -   **インスタンスの最大数**: `1` 。Kafkaプロキシはクラスターモードをサポートしていないため、デプロイできるインスタンスは1つだけです。各Kafkaプロキシはローカルポートをブローカーのポートにランダムにマッピングするため、プロキシごとにマッピングが異なります。ロードバランサーの背後に複数のKafkaプロキシをデプロイすると、問題が発生する可能性があります。Kafkaクライアントが1つのプロキシに接続し、別のプロキシを経由してブローカーにアクセスすると、リクエストが誤ったブローカーにルーティングされる可能性があります。
 
 2.  kafka-proxy-ig のノードの詳細ページに移動します。SSH**を**クリックしてノードにログインします。バイナリをダウンロードします。
 
@@ -622,48 +622,48 @@ TiDB クラスターと同じリージョンで Kafka クラスターがすで�
     ...
     ```
 
-### ステップ 2. Kafka-proxy をプライベート サービス接続サービスとして公開する {#step-2-expose-kafka-proxy-as-private-service-connect-service}
+### ステップ2. Kafka-proxyをプライベートサービス接続サービスとして公開する {#step-2-expose-kafka-proxy-as-private-service-connect-service}
 
-1.  [負荷分散](https://console.cloud.google.com/net-services/loadbalancing/list/loadBalancers)ページに移動し、ロードバランサーを作成します。
+1.  [負荷分散](https://console.cloud.google.com/net-services/loadbalancing/list/loadBalancers)ページに移動して、ロードバランサーを作成します。
 
     -   **ロードバランサーの種類**: `Network Load Balancer`
     -   **プロキシまたはパススルー**: `Passthrough`
-    -   **対外的または内部的**: `Internal`
+    -   **対外向けまたは社内向け**： `Internal`
     -   **ロードバランサー名**: `kafka-proxy-lb`
     -   **リージョン**: `us-west1`
     -   **ネットワーク**: あなたのネットワーク
     -   バックエンド構成
-        -   **バックエンドタイプ**: `Instance group`
-        -   **プロトコル**: `TCP`
+        -   **バックエンドタイプ**： `Instance group`
+        -   **プロトコル**： `TCP`
         -   **インスタンスグループ**: `kafka-proxy-ig`
     -   フロントエンド構成
         -   **サブネットワーク**: サブネット
         -   **ポート**: `All`
         -   健康チェック:
             -   **名前**: `kafka-proxy-hc`
-            -   **範囲**: `Regional`
-            -   **プロトコル**: `TCP`
+            -   **範囲**： `Regional`
+            -   **プロトコル**： `TCP`
             -   **ポート**: `9092` -proxy でブートストラップ ポートの 1 つを選択できます。
 
 2.  [**プライベートサービス接続**&gt;**公開サービス**](https://console.cloud.google.com/net-services/psc/list/producers)に進みます。
 
     -   **ロードバランサータイプ**: `Internal passthrough Network Load Balancer`
-    -   **内部ロードバランサ**: `kafka-proxy-lb`
-    -   **サービス名**: `kafka-proxy-psc`
+    -   **内部ロードバランサ**： `kafka-proxy-lb`
+    -   **サービス名**： `kafka-proxy-psc`
     -   **サブネット**: `RESERVE NEW SUBNET`
         -   **名前**: `proxy-psc-subnet`
-        -   **VPC ネットワーク**: ネットワーク
+        -   **VPCネットワーク**: あなたのネットワーク
         -   **リージョン**: `us-west1`
-        -   **IPv4範囲**: ネットワーク計画に基づいてCIDRを設定します
+        -   **IPv4 範囲**: ネットワーク計画に基づいて CIDR を設定します
     -   **承認されたプロジェクト**: [前提条件](#prerequisites)で取得したTiDB Cloudの Google Cloud プロジェクト (例: `tidbcloud-prod-000` )。
 
-3.  **kafka-proxy-psc**の詳細ページに移動します。TiDB TiDB Cloudでこの PSC に接続するために使用する`Service attachment` (例: `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-proxy-psc` ) を書き留めます。
+3.  **kafka-proxy-psc**の詳細ページに移動します。3 （例： `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-proxy-psc` ） `Service attachment`メモします。これは、 TiDB Cloudがこの PSC に接続する際に使用されます。
 
-4.  VPC ネットワークの詳細ページに移動します。すべてのブローカーの PSC トラフィックを許可するファイアウォール ルールを追加します。
+4.  VPC ネットワークの詳細ページに移動し、すべてのブローカーの PSC トラフィックを許可するファイアウォール ルールを追加します。
 
     -   **名前**: `allow-proxy-psc-traffic`
-    -   **交通方向**: `Ingress`
-    -   **試合のアクション**: `Allow`
+    -   **交通方向**： `Ingress`
+    -   **試合のアクション**： `Allow`
     -   **対象**: ネットワーク内のすべてのインスタンス
     -   **ソースフィルター**: `IPv4 ranges`
     -   **ソース IPv4 範囲**: proxy-psc-subnet の CIDR
@@ -671,27 +671,27 @@ TiDB クラスターと同じリージョンで Kafka クラスターがすで�
 
 ### ステップ3. TiDB Cloudから接続する {#step-3-connect-from-tidb-cloud}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)に戻り、クラスターが**Private Service Connect**によって Kafka クラスターに接続するための changefeed を作成します。詳細については、 [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)参照してください。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)に戻り、クラスターが**Private Service Connect**経由で Kafka クラスターに接続するための changefeed を作成します。詳細については、 [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)参照してください。
 
-2.  **「ChangeFeed ターゲットの構成」** &gt; **「接続方法」** &gt; **「プライベート サービス接続」**に進んだ後、次のフィールドに対応する値を入力し、必要に応じて他のフィールドを入力します。
+2.  **「ChangeFeed ターゲットの構成」** &gt; **「接続方法」** &gt; **「プライベート サービス接続」**に進んだ後、次のフィールドに対応する値を入力し、必要に応じてその他のフィールドを入力します。
 
-    -   **Kafka アドバタイズ リスナー パターン**: `abc` . [前提条件](#prerequisites)で**Kafka アドバタイズ リスナー パターンを**生成するために使用する一意のランダム文字列と同じです。
-    -   **サービス アタッチメント**: PSC の kafka-proxy サービス アタッチメント (例: `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-proxy-psc` 。
+    -   **Kafka アドバタイズ リスナー パターン**: `abc` . [前提条件](#prerequisites)で**Kafka アドバタイズ リスナー パターン**を生成するために使用する一意のランダム文字列と同じです。
+    -   **サービス アタッチメント**: PSC の kafka-proxy サービス アタッチメント (例: `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-proxy-psc` )。
     -   **ブートストラップポート**: `9092,9093,9094`
 
-3.  [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)のガイドラインに従ってください。
+3.  引き続き[Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)ガイドラインに従ってください。
 
 ## FAQ {#faq}
 
 ### 2 つの異なるTiDB Cloudプロジェクトから同じ Kafka Private Service Connect サービスに接続するにはどうすればよいですか? {#how-to-connect-to-the-same-kafka-private-service-connect-service-from-two-different-tidb-cloud-projects}
 
-すでにこのドキュメントの手順に従って最初のプロジェクトからの接続を正常に設定しており、2 番目のプロジェクトから 2 番目の接続を設定する場合は、次のようにして 2 つの異なるTiDB Cloudプロジェクトから同じ Kafka Private Service Connect サービスに接続できます。
+すでにこのドキュメントの手順に従って最初のプロジェクトからの接続を正常に設定していて、2 番目のプロジェクトから 2 番目の接続を設定する場合は、次のようにして 2 つの異なるTiDB Cloudプロジェクトから同じ Kafka Private Service Connect サービスに接続できます。
 
 -   PSC ポート マッピングによって Kafka PSC を設定する場合は、次の手順を実行します。
 
-    1.  このドキュメントの冒頭の指示に従ってください。 [ステップ1. Kafkaクラスタをセットアップする](#step-1-set-up-the-kafka-cluster)に進んだら、 [実行中の Kafka クラスターを再構成する](#reconfigure-a-running-kafka-cluster)セクションに従って、別の EXTERNAL リスナーとアドバタイズされたリスナーのグループを作成します。 `EXTERNAL2`という名前を付けることができます。 `EXTERNAL2`のポート範囲は EXTERNAL と重複できないことに注意してください。
+    1.  このドキュメントの冒頭の指示に従ってください[ステップ1. Kafkaクラスタのセットアップ](#step-1-set-up-the-kafka-cluster)に進んだら、 [実行中の Kafka クラスターを再構成する](#reconfigure-a-running-kafka-cluster)セクションに従って、EXTERNAL リスナーとアドバタイズリスナーの別のグループを作成してください。このグループの名前は`EXTERNAL2`とします。ポート範囲`EXTERNAL2`は EXTERNAL と重複できないことに注意してください。
 
-    2.  ブローカーを再構成した後、ネットワーク エンドポイント グループに別のネットワーク エンドポイント グループを追加し、ポート範囲を`EXTERNAL2`のリスナーにマップします。
+    2.  ブローカーを再構成した後、ネットワーク エンドポイントの別のグループをネットワーク エンドポイント グループに追加し、ポート範囲を`EXTERNAL2`リスナーにマップします。
 
     3.  新しい変更フィードを作成するには、次の入力でTiDB Cloud接続を構成します。
 
@@ -699,4 +699,4 @@ TiDB クラスターと同じリージョンで Kafka クラスターがすで�
         -   新しい Kafka アドバタイズ リスナー パターン
         -   同じサービスアタッチメント
 
--   [Kafka-proxy によるセルフホスト型 Kafka プライベート サービス接続をセットアップする](#set-up-self-hosted-kafka-private-service-connect-by-kafka-proxy)の場合は、新しい Kafka アドバタイズ リスナー パターンを使用して、最初から新しい Kafka プロキシ PSC を作成します。
+-   [Kafka-proxy によるセルフホスト型 Kafka プライベート サービス コネクトのセットアップ](#set-up-self-hosted-kafka-private-service-connect-by-kafka-proxy)場合は、新しい Kafka アドバタイズ リスナー パターンを使用して、最初から新しい Kafka プロキシ PSC を作成します。

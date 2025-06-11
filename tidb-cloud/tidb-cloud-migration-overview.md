@@ -6,15 +6,15 @@ aliases: ['/tidbcloud/export-data-from-tidb-cloud']
 
 # 移行とインポートの概要 {#migration-and-import-overview}
 
-さまざまなデータ ソースからTiDB Cloudにデータを移行できます。このドキュメントでは、データ移行シナリオの概要を説明します。
+様々なデータソースからTiDB Cloudにデータを移行できます。このドキュメントでは、データ移行シナリオの概要を説明します。
 
 ## MySQL互換データベースからデータを移行する {#migrate-data-from-mysql-compatible-databases}
 
-MySQL 互換データベースからデータを移行する場合、完全なデータ移行と増分データ移行を実行できます。移行のシナリオと方法は次のとおりです。
+MySQL互換データベースからデータを移行する場合、完全データ移行と増分データ移行を実行できます。移行シナリオと移行方法は次のとおりです。
 
 -   データ移行を使用してMySQL互換データベースを移行する
 
-    TiDB は MySQL と高い互換性があります。TiDB TiDB Cloudコンソールのデータ移行を使用して、MySQL 互換データベースからTiDB Cloudにデータをスムーズに移行できます。詳細については、 [データ移行を使用してMySQL互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)参照してください。
+    TiDBはMySQLとの互換性が非常に高く、 TiDB Cloudコンソールのデータ移行機能を使用することで、MySQL互換データベースからTiDB Cloudへのデータの移行をスムーズに行うことができます。詳細については、 [データ移行を使用してMySQL互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)ご覧ください。
 
 -   AWS DMS を使用して移行する
 
@@ -25,42 +25,42 @@ MySQL 互換データベースからデータを移行する場合、完全な�
 
 -   MySQLシャードの移行とマージ
 
-    アプリケーションがデータstorageに MySQL シャードを使用している場合は、これらのシャードを 1 つのテーブルとしてTiDB Cloudに移行できます。詳細については、 [大規模データセットの MySQL シャードをTiDB Cloudに移行して統合する](/tidb-cloud/migrate-sql-shards.md)参照してください。
+    アプリケーションでデータstorageにMySQLシャードを使用している場合は、これらのシャードを1つのテーブルとしてTiDB Cloudに移行できます。詳細については、 [大規模データセットのMySQLシャードをTiDB Cloudに移行および統合する](/tidb-cloud/migrate-sql-shards.md)ご覧ください。
 
 -   TiDBセルフマネージドからの移行
 
-    Dumplingと TiCDC を介して、TiDB セルフマネージド クラスターからTiDB Cloud (AWS) にデータを移行できます。詳細については、 [TiDBセルフマネージドからTiDB Cloudへの移行](/tidb-cloud/migrate-from-op-tidb.md)参照してください。
+    DumplingとTiCDCを介して、TiDBセルフマネージドクラスターからTiDB Cloud （AWS）にデータを移行できます。詳細については、 [TiDBセルフマネージドからTiDB Cloudへの移行](/tidb-cloud/migrate-from-op-tidb.md)ご覧ください。
 
 ## ファイルからTiDB Cloudにデータをインポートする {#import-data-from-files-to-tidb-cloud}
 
-SQL、CSV、Parquet、またはAurora Snapshot 形式のデータ ファイルがある場合は、これらのファイルを一度にTiDB Cloudにインポートできます。インポートのシナリオと方法は次のとおりです。
+SQL、CSV、Parquet、またはAurora Snapshot形式のデータファイルをお持ちの場合は、これらのファイルをTiDB Cloudに一括でインポートできます。インポートのシナリオと方法は次のとおりです。
 
 -   ローカルCSVファイルをTiDB Cloudにインポートする
 
-    ローカル CSV ファイルをTiDB Cloudにインポートできます。詳細については、 [ローカルファイルをTiDB Cloudにインポートする](/tidb-cloud/tidb-cloud-import-local-files.md)参照してください。
+    ローカルCSVファイルをTiDB Cloudにインポートできます。詳細については、 [ローカルファイルをTiDB Cloudにインポートする](/tidb-cloud/tidb-cloud-import-local-files.md)ご覧ください。
 
 -   サンプルデータ（SQLファイル）をTiDB Cloudにインポートする
 
-    サンプル データ (SQL ファイル) をTiDB Cloudにインポートすると、 TiDB Cloud のインターフェイスとインポート プロセスにすぐに慣れることができます。詳細については、 [サンプルデータをTiDB Cloudにインポートする](/tidb-cloud/import-sample-data.md)参照してください。
+    TiDB Cloudにサンプルデータ（SQL ファイル）をインポートすることで、 TiDB Cloud のインターフェースとインポートプロセスをすぐに理解することができます。詳細については、 [サンプルデータをTiDB Cloud Serverlessにインポートする](/tidb-cloud/import-sample-data-serverless.md)と[サンプルデータをTiDB Cloud Dedicatedにインポート](/tidb-cloud/import-sample-data.md)ご覧ください。
 
--   Amazon S3 または GCS から CSV ファイルをTiDB Cloudにインポートする
+-   Amazon S3、Google Cloud Storage (GCS)、または Azure Blob Storage から CSV ファイルをTiDB Cloudにインポートします。
 
-    Amazon S3 または GCS からTiDB Cloudに CSV ファイルをインポートできます。詳細については、 [Amazon S3 または GCS から CSV ファイルをTiDB Cloudにインポートする](/tidb-cloud/import-csv-files.md)参照してください。
+    Amazon S3、Google Cloud Storage（GCS）、またはAzure Blob StorageからTiDB CloudにCSVファイルをインポートできます。詳細については、 [クラウド ストレージからTiDB Cloud Serverless に CSV ファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)と[クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)ご覧ください。
 
--   Amazon S3 または GCS から Apache Parquet ファイルをTiDB Cloudにインポートする
+-   Amazon S3、Google Cloud Storage (GCS)、または Azure Blob Storage から Apache Parquet ファイルをTiDB Cloudにインポートします。
 
-    Parquet ファイルを Amazon S3 または GCS からTiDB Cloudにインポートできます。詳細については、 [Amazon S3 または GCS から Apache Parquet ファイルをTiDB Cloudにインポートする](/tidb-cloud/import-parquet-files.md)参照してください。
+    Amazon S3、Google Cloud Storage（GCS）、またはAzure Blob StorageからParquetファイルをTiDB Cloudにインポートできます。詳細については、 [Cloud Storage からTiDB Cloud Serverless に Apache Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files-serverless.md)と[クラウドストレージからTiDB Cloud DedicatedにApache Parquetファイルをインポートする](/tidb-cloud/import-parquet-files.md)ご覧ください。
 
 ## 参照 {#reference}
 
-### Amazon S3 アクセスと GCS アクセスを構成する {#configure-amazon-s3-access-and-gcs-access}
+### クラウドstorageアクセスを構成する {#configure-cloud-storage-access}
 
-ソースデータが Amazon S3 または Google Cloud Storage (GCS) バケットに保存されている場合は、データをTiDB Cloudにインポートまたは移行する前に、バケットへのアクセスを構成する必要があります。詳細については、 [Amazon S3 アクセスと GCS アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md)参照してください。
+ソースデータがAmazon S3、Google Cloud Storage（GCS）バケット、またはAzure Blob Storageコンテナに保存されている場合、 TiDB Cloudにデータをインポートまたは移行する前に、storageへのアクセスを設定する必要があります。詳細については、 [TiDB Cloud Serverless の外部ストレージアクセスを構成する](/tidb-cloud/serverless-external-storage.md)と[TiDB Cloud Dedicatedの外部ストレージアクセスを構成する](/tidb-cloud/dedicated-external-storage.md)参照してください。
 
 ### データインポートの命名規則 {#naming-conventions-for-data-import}
 
-データが正常にインポートされるようにするには、命名規則に準拠したスキーマ ファイルとデータ ファイルを準備する必要があります。詳細については、 [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)参照してください。
+データを確実にインポートするには、命名規則に準拠したスキーマファイルとデータファイルを準備する必要があります。詳細については、 [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)参照してください。
 
 ### Amazon S3 からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング {#troubleshoot-access-denied-errors-during-data-import-from-amazon-s3}
 
-Amazon S3 からTiDB Cloudにデータをインポートするときに発生する可能性のあるアクセス拒否エラーをトラブルシューティングできます。詳細については、 [Amazon S3 からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)参照してください。
+Amazon S3からTiDB Cloudにデータをインポートする際に発生する可能性のあるアクセス拒否エラーをトラブルシューティングできます。詳細については、 [Amazon S3 からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)参照してください。

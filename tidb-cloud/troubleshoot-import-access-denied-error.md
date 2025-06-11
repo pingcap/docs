@@ -41,14 +41,14 @@ TiDB Cloudコンソールの「**データインポート」**ページで**「�
         ]
     }
 
-サンプルの信頼エンティティでは次のようになります。
+サンプル信頼エンティティの場合:
 
 -   `380838443567`はTiDB CloudアカウントIDです。信頼エンティティのこのフィールドがTiDB CloudアカウントIDと一致していることを確認してください。
 -   `696e6672612d617069a79c22fa5740944bf8bb32e4a0c4e3fe`はTiDB Cloud外部IDです。信頼できるエンティティのこのフィールドがTiDB Cloud外部IDと一致していることを確認してください。
 
 ### IAMロールが存在するかどうかを確認する {#check-whether-the-iam-role-exists}
 
-IAMロールが存在しない場合は、 [Amazon S3 アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)手順に従ってロールを作成します。
+IAMロールが存在しない場合は、 [Amazon S3 アクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)手順に従ってロールを作成します。
 
 ### 外部IDが正しく設定されているか確認してください {#check-whether-the-external-id-is-set-correctly}
 

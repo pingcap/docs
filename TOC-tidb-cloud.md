@@ -157,7 +157,8 @@
             -   [接続方法の概要](/tidb-cloud/connect-to-tidb-cluster.md)
             -   [パブリック接続経由で接続](/tidb-cloud/connect-via-standard-connection.md)
             -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections.md)
-            -   [プライベートエンドポイント（プライベートサービス接続）経由で Google Cloud に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
+            -   [Azure のプライベート エンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
+            -   [プライベートエンドポイント経由で Google Cloud に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
             -   [VPCピアリング経由で接続](/tidb-cloud/set-up-vpc-peering-connections.md)
             -   [SQL シェル経由で接続する](/tidb-cloud/connect-via-sql-shell.md)
         -   [TiDB Cloud専用クラスタのスケール](/tidb-cloud/scale-tidb-cluster.md)
@@ -260,8 +261,8 @@
         -   [AWS DMS を使用して Amazon RDS for Oracle から移行する](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
     -   TiDB Cloud Dedicatedへのデータのインポート
         -   [サンプルデータのインポート](/tidb-cloud/import-sample-data.md)
-        -   [Amazon S3 または GCS から CSV ファイルをインポートする](/tidb-cloud/import-csv-files.md)
-        -   [Amazon S3 または GCS から Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files.md)
+        -   [クラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)
+        -   [クラウドストレージからParquetファイルをインポートする](/tidb-cloud/import-parquet-files.md)
         -   [MySQL CLI によるインポート](/tidb-cloud/import-with-mysql-cli.md)
     -   TiDB Cloud Serverless へのデータのインポート
         -   [サンプルデータのインポート](/tidb-cloud/import-sample-data-serverless.md)
@@ -270,7 +271,7 @@
         -   [クラウドストレージからParquetファイルをインポートする](/tidb-cloud/import-parquet-files-serverless.md)
         -   [MySQL CLI によるインポート](/tidb-cloud/import-with-mysql-cli-serverless.md)
     -   参照
-        -   [TiDB Cloud Dedicatedの外部ストレージアクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md)
+        -   [TiDB Cloud Dedicatedの外部ストレージアクセスを構成する](/tidb-cloud/dedicated-external-storage.md)
         -   [TiDB Cloud Serverless の外部ストレージアクセスを構成する](/tidb-cloud/serverless-external-storage.md)
         -   [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)
         -   [データのインポートのためのCSV構成](/tidb-cloud/csv-config-for-import-data.md)
@@ -334,7 +335,8 @@
     -   [TiDB Cloudシンクへ](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
     -   [クラウドストレージへ](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
     -   参照
-        -   [AWS でセルフホスト型 Kafka プライベートリンク サービスをセットアップする](/tidb-cloud/setup-self-hosted-kafka-private-link-service.md)
+        -   [AWS でセルフホスト型 Kafka プライベートリンク サービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
+        -   [Azure でセルフホスト型 Kafka プライベートリンク サービスをセットアップする](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)
         -   [Google Cloud でセルフホスト型 Kafka プライベート サービス接続を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)
 -   災害復旧
     -   [回復グループの概要](/tidb-cloud/recovery-group-overview.md)
@@ -356,7 +358,8 @@
         -   TiDB Cloud専用
             -   [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)
             -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections.md)
-            -   [プライベートエンドポイント（プライベートサービス接続）経由で Google Cloud に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
+            -   [Azure のプライベート エンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
+            -   [プライベートエンドポイント経由で Google Cloud に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
             -   [VPC ピアリング経由で接続](/tidb-cloud/set-up-vpc-peering-connections.md)
             -   [TiDB Cloud専用へのTLS接続](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
     -   データアクセス制御
@@ -373,7 +376,7 @@
     -   [請求プロファイル](/tidb-cloud/tidb-cloud-billing.md#billing-profile)
     -   [クレジット](/tidb-cloud/tidb-cloud-billing.md#credits)
     -   [支払い方法の設定](/tidb-cloud/tidb-cloud-billing.md#payment-method)
-    -   [AWS または GCP Marketplace からの請求](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace)
+    -   [AWS、Azure、または Google Cloud Marketplace からの請求](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-azure-marketplace-or-google-cloud-marketplace)
     -   [Changefeedの請求](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
     -   [データ移行の請求](/tidb-cloud/tidb-cloud-billing-dm.md)
     -   [リカバリグループの請求](/tidb-cloud/tidb-cloud-billing-recovery-group.md)
@@ -792,13 +795,13 @@
             -   [TPC-C パフォーマンステストレポート](/tidb-cloud/v8.1-performance-benchmarking-with-tpcc.md)
             -   [Sysbenchパフォーマンステストレポート](/tidb-cloud/v8.1-performance-benchmarking-with-sysbench.md)
         -   TiDB v7.5
-            -   [TPC-Cパフォーマンステストレポート](/tidb-cloud/v7.5-performance-benchmarking-with-tpcc.md)
+            -   [TPC-C パフォーマンステストレポート](/tidb-cloud/v7.5-performance-benchmarking-with-tpcc.md)
             -   [Sysbenchパフォーマンステストレポート](/tidb-cloud/v7.5-performance-benchmarking-with-sysbench.md)
         -   TiDB v7.1
-            -   [TPC-Cパフォーマンステストレポート](/tidb-cloud/v7.1-performance-benchmarking-with-tpcc.md)
+            -   [TPC-C パフォーマンステストレポート](/tidb-cloud/v7.1-performance-benchmarking-with-tpcc.md)
             -   [Sysbenchパフォーマンステストレポート](/tidb-cloud/v7.1-performance-benchmarking-with-sysbench.md)
         -   TiDB v6.5
-            -   [TPC-Cパフォーマンステストレポート](/tidb-cloud/v6.5-performance-benchmarking-with-tpcc.md)
+            -   [TPC-C パフォーマンステストレポート](/tidb-cloud/v6.5-performance-benchmarking-with-tpcc.md)
             -   [Sysbenchパフォーマンステストレポート](/tidb-cloud/v6.5-performance-benchmarking-with-sysbench.md)
     -   [システム変数](/system-variables.md)
     -   [サーバーステータス変数](/status-variables.md)
@@ -826,7 +829,7 @@
         -   接続: IMチケットの作成とサブスクリプションの更新
             -   [Slack 経由でチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
             -   [Larkでチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-lark-ticket-creation.md)
-        -   接続: サポートチケットの IM 対話
+        -   接続: サポートチケットのIMインタラクション
             -   [Slack経由でサポートチケットとやり取りする](/tidb-cloud/connected-slack-ticket-interaction.md)
             -   [Lark経由でサポートチケットとやり取りする](/tidb-cloud/connected-lark-ticket-interaction.md)
     -   [サポートを受ける](/tidb-cloud/tidb-cloud-support.md)

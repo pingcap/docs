@@ -9,18 +9,18 @@ summary: TiDB データベースの BACKUP の使用法の概要。
 
 > **警告：**
 >
-> -   この機能は実験的です。本番環境での使用は推奨されません。この機能は予告なしに変更または削除される可能性があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
-> -   この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> -   この機能は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
+> -   この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
 
-`BACKUP`ステートメントは[BRツール](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)と同じエンジンを使用しますが、バックアップ プロセスは別のBRツールではなく TiDB 自体によって実行されます。BRのすべての利点と警告は、このステートメントにも適用されます。
+`BACKUP`ステートメントは[BRツール](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)と同じエンジンを使用しますが、バックアッププロセスは別のBRツールではなく TiDB 自体によって実行されますBRの利点と警告はすべてこのステートメントにも適用されます。
 
-`BACKUP`実行するには、 `BACKUP_ADMIN`または`SUPER`権限が必要です。さらに、バックアップを実行する TiDB ノードとクラスター内のすべての TiKV ノードの両方に、宛先への読み取りまたは書き込み権限が必要です。9 [Security強化モード](/system-variables.md#tidb_enable_enhanced_security)有効になっている場合、ローカルstorage( `local://`で始まるstorageパス) は許可されません。
+`BACKUP`実行するには、 `BACKUP_ADMIN`または`SUPER`権限が必要です。さらに、バックアップを実行する TiDB ノードとクラスター内のすべての TiKV ノードの両方に、バックアップ先への読み取りまたは書き込み権限が必要です。9 [Security強化モード](/system-variables.md#tidb_enable_enhanced_security)有効になっている場合、ローカルstorage（ `local://`で始まるstorageパス）は許可されません。
 
-`BACKUP`ステートメントは、バックアップ タスク全体が完了するか、失敗するか、キャンセルされるまでブロックされます。 `BACKUP`実行するには、長時間持続する接続を準備する必要があります。 タスクは、 [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを使用してキャンセルできます。
+`BACKUP`文は、バックアップタスク全体が完了、失敗、またはキャンセルされるまでブロックされます。3 `BACKUP`実行するには、長時間持続する接続を準備する必要があります。タスクは[`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)文を使用してキャンセルできます。
 
-一度に実行できるのは`BACKUP`と[`RESTORE`](/sql-statements/sql-statement-restore.md)タスク 1 つだけです。同じ TiDBサーバーで`BACKUP`または`RESTORE`ステートメントがすでに実行されている場合、新しい`BACKUP`実行は、以前のすべてのタスクが完了するまで待機します。
+一度に実行できるタスク`BACKUP`と[`RESTORE`](/sql-statements/sql-statement-restore.md) 1 つだけです。同じ TiDBサーバー上で既に`BACKUP`または`RESTORE`ステートメントが実行中の場合、新しい`BACKUP`実行は、前のすべてのタスクが完了するまで待機します。
 
-`BACKUP` 「tikv」storageエンジンでのみ使用できます。「unistore」エンジンで`BACKUP`使用すると失敗します。
+`BACKUP` 「tikv」storageエンジンでのみ使用できます。2 `BACKUP` 「unistore」エンジンで使用すると失敗します。
 
 ## 概要 {#synopsis}
 
@@ -49,7 +49,7 @@ BackupTSO ::=
 
 ## 例 {#examples}
 
-### データベースをバックアップする {#back-up-databases}
+### データベースのバックアップ {#back-up-databases}
 
 ```sql
 BACKUP DATABASE `test` TO 'local:///mnt/backup/2020/04/';
@@ -64,17 +64,17 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/2020/04/';
 1 row in set (58.453 sec)
 ```
 
-上記の例では、 `test`データベースがローカル ファイル システムにバックアップされます。データは、すべての TiDB ノードと TiKV ノードに分散された`/mnt/backup/2020/04/`ディレクトリに SST ファイルとして保存されます。
+上記の例では、 `test`データベースがローカルファイルシステムにバックアップされています。データは、すべてのTiDBノードとTiKVノードに分散された`/mnt/backup/2020/04/`ディレクトリにSSTファイルとして保存されます。
 
-上記の結果の最初の行は次のように説明されます。
+上記の結果の最初の行は次のように記述されます。
 
-| カラム              | 説明                                                             |
-| :--------------- | :------------------------------------------------------------- |
-| `Destination`    | リンク先URL                                                        |
-| `Size`           | バックアップアーカイブの合計サイズ（バイト単位）                                       |
-| `BackupTS`       | バックアップ作成時のスナップショットのTSO（ [増分バックアップ](#incremental-backup)の場合に便利） |
-| `Queue Time`     | `BACKUP`番目のタスクがキューに入れられたときのタイムスタンプ (現在のタイムゾーン)。                |
-| `Execution Time` | `BACKUP`のタスクの実行が開始されたときのタイムスタンプ (現在のタイム ゾーン)。                  |
+| カラム              | 説明                                                            |
+| :--------------- | :------------------------------------------------------------ |
+| `Destination`    | リンク先URL                                                       |
+| `Size`           | バックアップアーカイブの合計サイズ（バイト単位）                                      |
+| `BackupTS`       | バックアップ作成時のスナップショットのTSO（ [増分バックアップ](#incremental-backup)場合に便利） |
+| `Queue Time`     | `BACKUP`のタスクがキューに入れられたときのタイムスタンプ (現在のタイムゾーン)。                 |
+| `Execution Time` | `BACKUP`タスクの実行が開始されたときのタイムスタンプ (現在のタイムゾーン)。                   |
 
 ### テーブルのバックアップ {#back-up-tables}
 
@@ -92,7 +92,7 @@ BACKUP TABLE sbtest02, sbtest03, sbtest04 TO 'local:///mnt/backup/sbtest/';
 BACKUP DATABASE * TO 'local:///mnt/backup/full/';
 ```
 
-システム テーブル ( `mysql.*` 、…) `INFORMATION_SCHEMA.*`バックアップに含まれ`PERFORMANCE_SCHEMA.*`ことに注意してください。
+システム テーブル ( `mysql.*` `PERFORMANCE_SCHEMA.*` …) `INFORMATION_SCHEMA.*`バックアップに含まれないことに注意してください。
 
 ### 外部ストレージ {#external-storages}
 
@@ -102,19 +102,9 @@ BR はS3 または GCS へのデータのバックアップをサポートして
 BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/?access-key={YOUR_ACCESS_KEY}&secret-access-key={YOUR_SECRET_KEY}';
 ```
 
-<CustomContent platform="tidb">
+URL 構文については[外部ストレージサービスのURI形式](/external-storage-uri.md)でさらに詳しく説明します。
 
-URL 構文については[外部ストレージサービスの URI 形式](/external-storage-uri.md)でさらに詳しく説明します。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-URL 構文については[外部storageURI](https://docs.pingcap.com/tidb/stable/external-storage-uri)でさらに詳しく説明します。
-
-</CustomContent>
-
-資格情報を配布しないクラウド環境で実行する場合は、 `SEND_CREDENTIALS_TO_TIKV`オプションを`FALSE`に設定します。
+資格情報を配布すべきでないクラウド環境で実行する場合は、 `SEND_CREDENTIALS_TO_TIKV`オプションを`FALSE`に設定します。
 
 ```sql
 BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/'
@@ -125,11 +115,11 @@ BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/'
 
 `RATE_LIMIT`使用すると、TiKV ノードあたりの平均アップロード速度が制限され、ネットワーク帯域幅が削減されます。
 
-バックアップが完了する前に、 `BACKUP`クラスター上のデータに対してチェックサムを実行し、正確性を検証します。この検証が不要であると確信している場合は、 `CHECKSUM`パラメータを`FALSE`に設定してチェックを無効にすることができます。
+バックアップが完了する前に、 `BACKUP`クラスタ上のデータに対してチェックサムを実行し、正確性を検証します。この検証が不要であると確信できる場合は、 `CHECKSUM`パラメータを`FALSE`に設定することでチェックを無効にすることができます。
 
-テーブルとインデックスのバックアップのためにBRが実行できる同時タスクの数を指定するには、 `CONCURRENCY`パラメータを使用します。このパラメータはBR内のスレッド プール サイズを制御し、バックアップ操作のパフォーマンスと効率を最適化します。
+BR がテーブルとインデックスのバックアップに同時に実行できるタスク数を指定するには、パラメータ`CONCURRENCY`使用します。このパラメータはBR内のスレッドプールサイズを制御し、バックアップ操作のパフォーマンスと効率を最適化します。
 
-1 つのタスクは、バックアップ スキーマに従って、1 つのテーブル範囲または 1 つのインデックス範囲を表します。1 つのインデックスを持つ 1 つのテーブルの場合、このテーブルをバックアップするために 2 つのタスクが使用されます。デフォルト値`CONCURRENCY`は`4`です。多数のテーブルまたはインデックスをバックアップする必要がある場合は、値を増やします。
+1つのタスクは、バックアップスキーマに応じて、1つのテーブル範囲または1つのインデックス範囲を表します。1つのテーブルと1つのインデックスの場合、このテーブルのバックアップには2つのタスクが使用されます。デフォルト値は`CONCURRENCY`で、 `4`です。多数のテーブルまたはインデックスをバックアップする必要がある場合は、この値を増やしてください。
 
 ```sql
 BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-06/'
@@ -165,7 +155,7 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/hist03'
 -   日
 -   週
 
-SQL 標準に従うと、単位は常に単数になることに注意してください。
+SQL 標準に従うと、単位は常に単数形になることに注意してください。
 
 ### 増分バックアップ {#incremental-backup}
 
@@ -181,7 +171,7 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/hist03'
     LAST_BACKUP = 415685305958400;
 ```
 
-## MySQL 互換性 {#mysql-compatibility}
+## MySQLの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL 構文に対する TiDB 拡張です。
 

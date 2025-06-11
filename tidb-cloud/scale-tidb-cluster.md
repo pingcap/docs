@@ -61,7 +61,8 @@ TiDB、TiKV、またはTiFlashノードの vCPU と RAM を増減できます。
 > -   vCPU と RAM の変更は、次のクラスターでのみ可能です。
 >     -   AWS でホストされ、2022/12/31 以降に作成されました。
 >     -   Google Cloud でホストされ、2023/04/26 以降に作成されました。
-> -   AWS では、vCPU と RAM の変更にクールダウン期間があります。TiDB クラスターが AWS でホストされている場合、TiKV またはTiFlashのstorageまたは vCPU と RAM を変更した後、再度変更するには少なくとも 6 時間待つ必要があります。
+>     -   Azure でホストされます。
+> -   AWS では、vCPU と RAM の変更にクールダウン期間があります。TiDB クラスターが AWS でホストされている場合、TiKV またはTiFlashの vCPU と RAM を変更した後、再度変更するには少なくとも 6 時間待つ必要があります。
 > -   vCPUを減らす前に、TiKVまたはTiFlashの現在のノードstorageが、対象のvCPUの最大ノードstorageを超えていないことを確認してください。詳細は[TiKVノードstorage](/tidb-cloud/size-your-cluster.md#tikv-node-storage-size)と[TiFlashノードstorage](/tidb-cloud/size-your-cluster.md#tiflash-node-storage)参照してください。いずれかのコンポーネントの現在のstorageが上限を超えている場合は、vCPUを減らすことはできません。
 
 TiDB、TiKV、またはTiFlashノードの vCPU と RAM を変更するには、次の手順を実行します。
@@ -88,8 +89,8 @@ TiKV またはTiFlashのstorageを増やすことができます。
 
 > **警告：**
 >
-> -   実行中のクラスターの場合、AWS と Google Cloud では、インプレースstorage容量のダウングレードは許可されません。
-> -   AWS では、storage変更のクールダウン期間があります。TiDB クラスターが AWS でホストされている場合、TiKV またはTiFlashのstorage、vCPU、RAM を変更した後、再度変更するには少なくとも 6 時間待つ必要があります。
+> -   実行中のクラスターの場合、AWS、Azure、Google Cloud では、インプレースstorage容量のダウングレードは許可されません。
+> -   AWS と Azure では、storage変更にクールダウン期間があります。TiDB クラスターが AWS または Azure でホストされている場合、TiKV またはTiFlashのstorage、vCPU、RAM を変更した後、再度変更するには少なくとも 6 時間待つ必要があります。
 
 TiKV またはTiFlashのstorageを変更するには、次の手順を実行します。
 

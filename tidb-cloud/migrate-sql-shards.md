@@ -11,7 +11,7 @@ summary: 大規模なデータセットの MySQL シャードをTiDB Cloudに移
 
 ## 例の環境情報 {#environment-information-in-the-example}
 
-このセクションでは、例で使用されるアップストリーム クラスター、DM、およびダウンストリーム クラスターの基本情報について説明します。
+このセクションでは、例で使用されるアップストリーム クラスタ、DM、およびダウンストリーム クラスタの基本情報について説明します。
 
 ### 上流クラスター {#upstream-cluster}
 
@@ -138,7 +138,7 @@ Query OK, 0 rows affected (0.17 sec)
 
 ### ステップ4. Amazon S3アクセスを構成する {#step-4-configure-amazon-s3-access}
 
-[Amazon S3 アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)の手順に従って、ソース データにアクセスするためのロール ARN を取得します。
+[Amazon S3 アクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)の手順に従って、ソース データにアクセスするためのロール ARN を取得します。
 
 以下の例では、主要なポリシー設定のみをリストしています。Amazon S3 パスを実際の値に置き換えてください。
 
@@ -185,9 +185,7 @@ Amazon S3 アクセスを構成したら、次のようにしてTiDB Cloudコン
 
     2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
-2.  **S3 からデータをインポート**を選択します。
-
-    このクラスターに初めてデータをインポートする場合は、 **「Amazon S3 からのインポート」**を選択します。
+2.  **「Cloud Storage からデータをインポート」**を選択し、 **「Amazon S3」**をクリックします。
 
 3.  **「Amazon S3 からのデータのインポート」**ページで、次の情報を入力します。
 

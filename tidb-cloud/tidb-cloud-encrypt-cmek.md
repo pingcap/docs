@@ -5,20 +5,20 @@ summary: TiDB Cloudで顧客管理暗号化キー (CMEK) を使用する方法�
 
 # 顧客管理の暗号化キーを使用した保存時の暗号化 {#encryption-at-rest-using-customer-managed-encryption-keys}
 
-顧客管理の暗号化キー (CMEK) を使用すると、完全に制御できる対称暗号化キーを使用して、 TiDB Cloud Dedicated クラスター内の静的データを保護できます。このキーは CMEK キーと呼ばれます。
+顧客管理暗号鍵（CMEK）を使用すると、完全に管理可能な対称暗号鍵を利用して、 TiDB Cloud Dedicated クラスタ内の静的データを保護できます。この鍵はCMEK鍵と呼ばれます。
 
-プロジェクトで CMEK を有効にすると、そのプロジェクト内で作成されたすべてのクラスターは、CMEK キーを使用して静的データを暗号化します。さらに、これらのクラスターによって生成されたバックアップ データも同じキーを使用して暗号化されます。CMEK が有効になっていない場合、 TiDB Cloud はエスクロー キーを使用して、保存されているクラスター内のすべてのデータを暗号化します。
+プロジェクトでCMEKを有効にすると、そのプロジェクト内で作成されるすべてのクラスタは、CMEK鍵を使用して静的データを暗号化します。さらに、これらのクラスタによって生成されるバックアップデータも同じ鍵を使用して暗号化されます。CMEKが有効になっていない場合、 TiDB Cloudはエスクロー鍵を使用して、クラスタ内のすべての保存データを暗号化します。
 
 > **注記：**
 >
-> 現在、この機能はリクエストに応じてのみ利用可能です。この機能を試す必要がある場合は、 [サポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+> 現在、この機能はリクエストに応じてのみご利用いただけます。この機能をお試しになりたい場合は、 [サポート](/tidb-cloud/tidb-cloud-support.md)ご連絡ください。
 
 ## 制限 {#restrictions}
 
 -   現在、 TiDB Cloud はCMEK を提供するために AWS KMS の使用のみをサポートしています。
--   CMEK を使用するには、プロジェクトの作成時に CMEK を有効にし、クラスタを作成する前に CMEK 関連の構成を完了する必要があります。既存のプロジェクトに対して CMEK を有効にすることはできません。
--   現在、CMEK 対応プロジェクトでは、AWS でホストされる[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタのみを作成できます。Google Cloud でホストされるTiDB Cloud Dedicated クラスタと[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスタはサポートされていません。
--   現在、特定のプロジェクトでは、1 つの AWS リージョンに対してのみ CMEK を有効にできます。一度設定すると、同じプロジェクト内の他のリージョンにクラスターを作成することはできません。
+-   CMEK を使用するには、プロジェクトの作成時に CMEK を有効にし、クラスタを作成する前に CMEK 関連の設定を完了する必要があります。既存のプロジェクトでは CMEK を有効にできません。
+-   現在、CMEK 対応プロジェクトでは、AWS でホストされるクラスタを[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)だけ作成できます。他のクラウドプロバイダーでホストされるTiDB Cloud Dedicated クラスタと[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスタはサポートされていません。
+-   現在、特定のプロジェクトでは、1 つの AWS リージョンでのみ CMEK を有効にできます。一度設定すると、同じプロジェクト内の他のリージョンにクラスターを作成することはできません。
 
 ## CMEKを有効にする {#enable-cmek}
 
@@ -26,15 +26,15 @@ summary: TiDB Cloudで顧客管理暗号化キー (CMEK) を使用する方法�
 
 ### ステップ 1. CMEK 対応プロジェクトを作成する {#step-1-create-a-cmek-enabled-project}
 
-組織で`Organization Owner`のロールを担っている場合は、 TiDB Cloudコンソールまたは API を使用して CMEK 対応プロジェクトを作成できます。
+組織で`Organization Owner`ロールを担っている場合は、 TiDB Cloudコンソールまたは API を使用して CMEK 対応プロジェクトを作成できます。
 
 <SimpleTab groupId="method">
 <div label="Use Console" value="console">
 
-CMEK 対応プロジェクトを作成するには、次の手順を実行します。
+CMEK 対応プロジェクトを作成するには、次の手順に従います。
 
 1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
-2.  **[組織設定] を**クリックし、左側のナビゲーション ペインで**[プロジェクト]**タブをクリックします。 **[プロジェクト]**タブが表示されます。
+2.  **「組織設定」**をクリックし、左側のナビゲーションペインで「**プロジェクト」**タブをクリックします。 **「プロジェクト」**タブが表示されます。
 3.  **「新しいプロジェクトの作成」**をクリックして、プロジェクト作成ダイアログを開きます。
 4.  プロジェクト名を入力してください。
 5.  プロジェクトの CMEK 機能を有効にすることを選択します。
@@ -43,9 +43,9 @@ CMEK 対応プロジェクトを作成するには、次の手順を実行しま
 </div>
 <div label="Use API" value="api">
 
-この手順は、 [CMEK対応プロジェクトを作成する](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Project/operation/CreateProject)エンドポイントを介してTiDB Cloud API を使用して完了できます。 `aws_cmek_enabled`フィールドが`true`に設定されていることを確認してください。
+この手順は、TiDB Cloud API の[CMEK 対応プロジェクトを作成する](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Project/operation/CreateProject)エンドポイントを使用して完了できます。3 フィールド`aws_cmek_enabled` `true`に設定されていることを確認してください。
 
-現在、 TiDB Cloud API はまだベータ版です。詳細については、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)参照してください。
+現在、 TiDB Cloud APIはまだベータ版です。詳細については、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)ご覧ください。
 
 </div>
 </SimpleTab>
@@ -56,21 +56,21 @@ TiDB Cloudコンソールまたは API を使用して、プロジェクトの C
 
 > **注記：**
 >
-> キーのポリシーが要件を満たしており、権限不足やアカウントの問題などのエラーがないことを確認してください。これらのエラーにより、このキーを使用してクラスターが誤って作成される可能性があります。
+> キーのポリシーが要件を満たしており、権限不足やアカウントの問題などのエラーがないことを確認してください。これらのエラーがあると、このキーを使用してクラスターが誤って作成される可能性があります。
 
 <SimpleTab groupId="method">
 <div label="Use Console" value="console">
 
 プロジェクトの CMEK 構成を完了するには、次の手順を実行します。
 
-1.  クリック<mdsvgicon name="icon-left-projects">左下隅で、複数のプロジェクトがある場合は対象プロジェクトに切り替えて、 **[プロジェクト設定]**をクリックします。</mdsvgicon>
+1.  クリック<mdsvgicon name="icon-left-projects">左下隅で、複数のプロジェクトがある場合は対象のプロジェクトに切り替えて、 **[プロジェクト設定] を**クリックします。</mdsvgicon>
 2.  **「暗号化アクセス」**をクリックして、プロジェクトの暗号化管理ページに入ります。
 3.  **「暗号化キーの作成」**をクリックして、キー作成ページに入ります。
-4.  キープロバイダーは AWS KMS のみをサポートします。暗号化キーを使用できるリージョンを選択できます。
-5.  JSON ファイルをコピーして`ROLE-TRUST-POLICY.JSON`として保存します。このファイルは信頼関係を記述します。
-6.  この信頼関係を AWS KMS のキーポリシーに追加します。詳細については、 [AWS KMS のキーポリシー](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)を参照してください。
+4.  キープロバイダーはAWS KMSのみをサポートしています。暗号化キーを使用できるリージョンを選択できます。
+5.  JSONファイルをコピーして`ROLE-TRUST-POLICY.JSON`として保存します。このファイルは信頼関係を記述します。
+6.  この信頼関係をAWS KMSのキーポリシーに追加します。詳細については、 [AWS KMS のキーポリシー](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)を参照してください。
 7.  TiDB Cloudコンソールで、キー作成ページの一番下までスクロールし、AWS KMS から取得した**KMS キー ARN**を入力します。
-8.  キーを作成するには、 **[作成]**をクリックします。
+8.  **「作成」**をクリックしてキーを作成します。
 
 </div>
 <div label="Use API" value="api">
@@ -123,25 +123,25 @@ TiDB Cloudコンソールまたは API を使用して、プロジェクトの C
     }
     ```
 
-    -   `<pingcap-account>`クラスターが実行されるアカウントです。アカウントがわからない場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
-    -   `<region>`はクラスターを作成するリージョンです (例: `us-west-2` )。リージョンを指定しない場合は、 `<region>`ワイルドカード`*`に置き換えて、 `StringLike`ブロックに配置します。
-    -   前のブロックのEBS関連のポリシーについては、 [AWS ドキュメント](https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-caller-account)を参照してください。
-    -   前のブロックの S3 関連のポリシーについては、 [AWS ブログ](https://repost.aws/knowledge-center/s3-bucket-access-default-encryption)を参照してください。
+    -   `<pingcap-account>`はクラスターが実行されるアカウントです。アカウントがわからない場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)問い合わせてください。
+    -   `<region>`はクラスターを作成するリージョンです（例： `us-west-2` ）。リージョンを指定したくない場合は、 `<region>`ワイルドカード`*`に置き換え、 `StringLike`ブロックに入力します。
+    -   前のブロックの EBS 関連のポリシーについては、 [AWSドキュメント](https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-caller-account)を参照してください。
+    -   前のブロックの S3 関連のポリシーについては、 [AWSブログ](https://repost.aws/knowledge-center/s3-bucket-access-default-encryption)を参照してください。
 
 2.  TiDB Cloud API の[AWS CMEK を構成する](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/CreateAwsCmek)のエンドポイントを呼び出します。
 
-    現在、 TiDB Cloud API はまだベータ版です。詳細については、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)参照してください。
+    現在、 TiDB Cloud APIはまだベータ版です。詳細については、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)ご覧ください。
 
 </div>
 </SimpleTab>
 
 > **注記：**
 >
-> この機能は今後さらに強化され、今後の機能には追加の権限が必要になる可能性があります。そのため、このポリシー要件は変更される可能性があります。
+> この機能は今後さらに強化される予定であり、今後追加される機能には追加の権限が必要になる可能性があります。そのため、このポリシー要件は変更される可能性があります。
 
 ### ステップ3. クラスターを作成する {#step-3-create-a-cluster}
 
-[ステップ1](#step-1-create-a-cmek-enabled-project)で作成したプロジェクトの下に、AWS でホストされるTiDB Cloud Dedicated クラスターを作成します。詳細な手順については、 [この文書](/tidb-cloud/create-tidb-cluster.md)を参照してください。クラスターが配置されているリージョンが[ステップ2](/tidb-cloud/tidb-cloud-encrypt-cmek.md#step-2-complete-the-cmek-configuration-of-the-project)と同じであることを確認します。
+[ステップ1](#step-1-create-a-cmek-enabled-project)で作成したプロジェクトの下に、AWS でホストされるTiDB Cloud Dedicated クラスターを作成します。詳細な手順については[この文書](/tidb-cloud/create-tidb-cluster.md)を参照してください。クラスターが配置されているリージョンが[ステップ2](/tidb-cloud/tidb-cloud-encrypt-cmek.md#step-2-complete-the-cmek-configuration-of-the-project)と同じであることを確認してください。
 
 > **注記：**
 >
@@ -149,9 +149,9 @@ TiDB Cloudコンソールまたは API を使用して、プロジェクトの C
 
 ## CMEKを回転させる {#rotate-cmek}
 
-AWS KMS で[自動CMEKローテーション](http://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html)設定できます。このローテーションを有効にすると、CMEK ID を含むTiDB Cloudのプロジェクト設定で**暗号化アクセス**を更新する必要はありません。
+AWS KMS で[自動CMEKローテーション](http://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html)設定できます。このローテーションを有効にすると、 TiDB Cloudのプロジェクト設定で CMEK ID を含む**暗号化アクセス**を更新する必要はありません。
 
-## CMEK の取り消しと復元 {#revoke-and-restore-cmek}
+## CMEK を取り消して復元する {#revoke-and-restore-cmek}
 
 TiDB Cloud の CMEK へのアクセスを一時的に取り消す必要がある場合は、次の手順に従います。
 
@@ -160,7 +160,7 @@ TiDB Cloud の CMEK へのアクセスを一時的に取り消す必要がある
 
 > **注記：**
 >
-> AWS KMS で CMEK を取り消しても、実行中のクラスターは影響を受けません。ただし、クラスターを一時停止してから復元すると、クラスターは CMEK にアクセスできないため、正常に復元できなくなります。
+> AWS KMS で CMEK を取り消しても、実行中のクラスターには影響しません。ただし、クラスターを一時停止してから復元すると、クラスターは CMEK にアクセスできないため、正常に復元できなくなります。
 
 TiDB Cloud の CMEK へのアクセスを取り消した後、アクセスを復元する必要がある場合は、次の手順に従います。
 

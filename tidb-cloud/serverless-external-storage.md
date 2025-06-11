@@ -7,7 +7,7 @@ summary: Amazon Simple Storage Service (Amazon S3) アクセスを構成する�
 
 TiDB Cloud Serverless クラスター内の外部storageからデータをインポートまたはエクスポートする場合は、クロスアカウントアクセスを設定する必要があります。このドキュメントでは、 TiDB Cloud Serverless クラスターの外部storageへのアクセスを設定する方法について説明します。
 
-TiDB Cloud Dedicated クラスター用にこれらの外部ストレージを構成する必要がある場合は、 [TiDB Cloud Dedicatedの外部ストレージアクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md)参照してください。
+TiDB Cloud Dedicated クラスター用にこれらの外部ストレージを構成する必要がある場合は、 [TiDB Cloud Dedicatedの外部ストレージアクセスを構成する](/tidb-cloud/dedicated-external-storage.md)参照してください。
 
 ## Amazon S3 アクセスを構成する {#configure-amazon-s3-access}
 
@@ -54,7 +54,7 @@ TiDB Cloud Serverless クラスターが Amazon S3 バケット内のソース�
 
     4.  新しいロールを作成することを確認し、 **「スタックの作成」**をクリックしてロール ARN を作成します。
 
-    5.  CloudFormation スタックが実行された後、 **[出力]**タブをクリックし、[**値]**列でロール ARN 値を見つけることができます。
+    5.  CloudFormation スタックが実行された後、 **[出力]**タブをクリックし、 **[値]**列でロール ARN 値を見つけることができます。
 
         ![img.png](/media/tidb-cloud/serverless-external-storage/serverless-role-arn.png)
 

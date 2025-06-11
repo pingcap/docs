@@ -3,7 +3,7 @@ title: Import Sample Data into TiDB Cloud Dedicated
 summary: UI 経由でサンプル データをTiDB Cloud Dedicated にインポートする方法を学習します。
 ---
 
-# サンプルデータをTiDB Cloud Dedicatedにインポートする {#import-sample-data-into-tidb-cloud-dedicated}
+# サンプルデータをTiDB Cloud Dedicatedにインポート {#import-sample-data-into-tidb-cloud-dedicated}
 
 このドキュメントでは、UIを介してTiDB Cloud Dedicatedにサンプルデータをインポートする方法について説明します。使用するサンプルデータは、Capital Bikeshareのデータライセンス契約に基づいてリリースされたCapital Bikeshareのシステムデータです。サンプルデータをインポートする前に、TiDBクラスタを1つ用意する必要があります。
 
@@ -20,9 +20,7 @@ summary: UI 経由でサンプル データをTiDB Cloud Dedicated にインポ�
 
     2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
-2.  **S3 からデータをインポート**を選択します。
-
-    このクラスターに初めてデータをインポートする場合は、 **「Amazon S3 からのインポート」**を選択します。
+2.  **Cloud Storage からデータをインポート**を選択します。
 
 3.  **「Amazon S3 からのデータのインポート」**ページで、次のソースデータ情報を設定します。
 
@@ -48,18 +46,45 @@ summary: UI 経由でサンプル データをTiDB Cloud Dedicated にインポ�
 
     2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
-2.  右上隅の**「データのインポート」**をクリックします。
-
-    このクラスタにデータを初めてインポートする場合は、 **[GCS からのインポート]**を選択します。
+2.  **Cloud Storage からデータをインポート**を選択します。
 
 3.  **GCS からのデータのインポート**ページで、次のソース データ情報を設定します。
 
     -   **含まれるスキーマ ファイル**: サンプル データの場合は、 **[はい]**を選択します。
     -   **データ形式**: **SQL**を選択します。
     -   **フォルダー URI**または**ファイル URI** : サンプル データ URI `gs://tidbcloud-samples-us-west1/`を入力します。
-    -   **バケットアクセス**：GCS IAMロールを使用してバケットにアクセスできます。詳細については、 [GCS アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access)ご覧ください。
+    -   **バケットアクセス**：GCS IAMロールを使用してバケットにアクセスできます。詳細については、 [GCS アクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access)ご覧ください。
 
     バケットのリージョンがクラスターのリージョンと異なる場合は、クロスリージョンのコンプライアンスを確認してください。
+
+4.  **[接続]** &gt; **[インポートの開始] を**クリックします。
+
+</div>
+
+<div label="Azure Blob Storage">
+
+1.  ターゲット クラスターの**インポート**ページを開きます。
+
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
+
+        > **ヒント：**
+        >
+        > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
+
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
+
+2.  **Cloud Storage からデータをインポート**を選択します。
+
+3.  **[Azure Blob Storage からのデータのインポート]**ページで、次のソース データ情報を構成します。
+
+    -   **含まれるスキーマ ファイル**: サンプル データの場合は、 **[はい]**を選択します。
+    -   **データ形式**: **SQL**を選択します。
+    -   **フォルダー URI** : サンプル データ URI `https://tcidmsampledata.blob.core.windows.net/sql/`を入力します。
+    -   **SASトークン**:
+        -   サンプル データでは、次の**SAS トークン**`sv=2015-04-05&ss=b&srt=co&sp=rl&se=2099-03-01T00%3A00%3A01.0000000Z&sig=cQHvaofmVsUJEbgyf4JFkAwTJGsFOmbQHx03GvVMrNc%3D`使用します。
+        -   独自のデータについては、SASトークンを使用してAzure Blob Storageにアクセスできます。詳細については、 [Azure Blob Storage アクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access)ご覧ください。
+
+    storageアカウントのリージョンがクラスターのリージョンと異なる場合は、クロスリージョンのコンプライアンスを確認してください。
 
 4.  **[接続]** &gt; **[インポートの開始] を**クリックします。
 

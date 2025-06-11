@@ -16,7 +16,7 @@ aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 
 -   v6.2.0 以降のバージョンのクラスターの場合、 TiDB Cloud Dedicated は、デフォルトでバックアップからのユーザー アカウントと SQL バインディングの復元をサポートします。
 -   TiDB Cloud Dedicated は、 `mysql`スキーマに保存されているシステム変数の復元をサポートしていません。
--   最初にデータをインポートし、次に**手動で**スナップショットバックアップを実行し、最後にポイントインタイムリストアを有効にすることを推奨します。TiDB TiDB Cloudコンソールからインポートされたデータは変更ログを生成**しない**ため、自動的に検出およびバックアップすることはできません。詳細については、 [Amazon S3 または GCS からTiDB Cloudに CSV ファイルをインポートする](/tidb-cloud/import-csv-files.md)参照してください。
+-   最初にデータをインポートし、次に**手動で**スナップショットバックアップを実行し、最後にポイントインタイムリストアを有効にすることを推奨します。TiDB TiDB Cloudコンソールからインポートされたデータは変更ログを生成**しない**ため、自動的に検出およびバックアップすることはできません。詳細については、 [クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)参照してください。
 -   ポイントインタイムリストアを複数回オン/オフにした場合、最後にポイントインタイムリストアが有効になった後の復元可能範囲内の時点のみを選択できます。それ以前の復元可能範囲にはアクセスできません。
 -   **ポイントインタイム リストア**と**デュアルリージョンバックアップ**のスイッチを同時に変更しないでください。
 
@@ -96,7 +96,8 @@ TiDB Cloud Dedicatedは、毎日と毎週のバックアップスケジュール
 
 > **注記：**
 >
-> Google Cloud でホストされるTiDB Cloud Dedicated クラスタは、Google Cloud Storage とシームレスに連携します。Google Cloud Storage と同様に、 **TiDB Cloud Dedicated は Google デュアルリージョンstorageと同じマルチリージョン コード内でのみデュアルリージョン ペアリングをサポートします**。例えばアジアでは現在、デュアルリージョンstorageするには東京と大阪をペアリングする必要があります。詳細については、 [デュアルリージョン](https://cloud.google.com/storage/docs/locations#location-dr)をご覧ください。
+> -   現在、デュアルリージョンバックアップ機能は、AWS と Google Cloud でホストされているクラスターでのみ使用できます。
+> -   Google Cloud でホストされるTiDB Cloud Dedicated クラスタは、Google Cloud Storage とシームレスに連携します。Google Cloud Storage と同様に、 **TiDB Cloud Dedicated は Google デュアルリージョンstorageと同じマルチリージョン コード内でのみデュアルリージョン ペアリングをサポートします**。例えばアジアでは現在、デュアルリージョンstorageするには東京と大阪をペアリングする必要があります。詳細については、 [デュアルリージョン](https://cloud.google.com/storage/docs/locations#location-dr)をご覧ください。
 
 TiDB Cloud Dedicatedは、クラスタリージョンから別のリージョンにバックアップを複製することで、デュアルリージョンバックアップをサポートします。この機能を有効にすると、すべてのバックアップが指定されたリージョンに自動的に複製されます。これにより、リージョンをまたいだデータ保護とディザスタリカバリ機能が実現します。1時間以内に約99%のデータがセカンダリリージョンに複製されると推定されます。
 

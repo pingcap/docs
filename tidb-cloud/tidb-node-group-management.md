@@ -18,16 +18,16 @@ summary: ビジネス ワークロードを分離するために TiDB ノード 
     -   各 TiDB ノード グループには一意のエンドポイントがあります。
     -   TiDB ノード グループを削除すると、関連するネットワーク設定 (プライベート リンクや IP アクセス リストなど) も削除されます。
 
--   デフォルト グループ: クラスターが作成されると、デフォルトの TiDB ノード グループが作成されます。したがって、各クラスターにはデフォルト グループがあります。デフォルト グループは削除できません。
+-   デフォルトグループ: クラスタを作成すると、デフォルトのTiDBノードグループが作成されます。そのため、各クラスタにはデフォルトグループが存在します。デフォルトグループは削除できません。
 
 ## 前提条件 {#prerequisites}
 
 -   AWS または Google Cloud に[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターがデプロイされています。
--   あなたは、組織の**組織所有者**または**プロジェクト所有者**の役割を担っています。詳細については、 [ユーザーロール](/tidb-cloud/manage-user-access.md#user-roles)参照してください。
+-   あなたは組織の**組織オーナー**または**プロジェクトオーナー**の役割を担っています。詳細については、 [ユーザーロール](/tidb-cloud/manage-user-access.md#user-roles)ご覧ください。
 
 > **注記**：
 >
-> TiDB ノード グループは、クラスターの作成中には作成できません。クラスターが作成され、**使用可能な**状態になった後にグループを追加する必要があります。
+> TiDBノードグループはクラスタ作成中に作成できません。クラスタが作成され、 **「使用可能」**状態になった後にグループを追加する必要があります。
 
 ## TiDBノードグループを作成する {#create-a-tidb-node-group}
 
@@ -39,13 +39,13 @@ TiDB ノード グループを作成するには、次の手順を実行しま�
 
 3.  右上隅の**「変更」**をクリックします。「**クラスタの変更」**ページが表示されます。
 
-4.  **「クラスタの変更」**ページで、 **+**をクリックして、次のように新しい TiDB ノード グループを追加します。デフォルトのグループを直接使用することもできます。
+4.  **「クラスタの変更」**ページで**「+」**をクリックし、以下のように新しいTiDBノードグループを追加します。デフォルトのグループを直接使用することもできます。
 
-    -   ティビ
-        -   **vCPU + RAM** : 必要な[TiDB サイズ](/tidb-cloud/size-your-cluster.md#size-tidb)を選択します。8 vCPU および 16 GiB 以上のメモリ仕様の TiDB ノードのみがサポートされます。
-        -   **ノード グループ**: **+**をクリックして新しい TiDB ノード グループを作成します。デフォルト グループを使用して、 **DefaultGroup**フィールドに TiDB ノードの数を入力することもできます。
-    -   ティクヴ
-        -   **vCPU + RAM** : 必要な[TiKV サイズ](/tidb-cloud/size-your-cluster.md#size-tikv)を選択します。
+    -   TiDB
+        -   **vCPU + RAM** ：必要な[TiDBサイズ](/tidb-cloud/size-your-cluster.md#size-tidb)を選択してください。8 vCPUおよび16 GiB以上のメモリを搭載したTiDBノードのみがサポートされます。
+        -   **ノードグループ**: **+**をクリックして新しい TiDB ノードグループを作成します。デフォルトのグループを使用し、 **DefaultGroup**フィールドに TiDB ノードの数を入力することもできます。
+    -   TiKV
+        -   **vCPU + RAM** : 必要な[TiKVサイズ](/tidb-cloud/size-your-cluster.md#size-tikv)を選択します。
         -   **ストレージ x ノード**:storageサイズと TiKV ノードの数を選択します。
     -   TiFlash （オプション）
         -   **vCPU + RAM** : 必要な[TiFlashサイズ](/tidb-cloud/size-your-cluster.md#size-tiflash)を選択します。
@@ -53,17 +53,17 @@ TiDB ノード グループを作成するには、次の手順を実行しま�
 
     ![Create TiDB Node Group](/media/tidb-cloud/tidb-node-group-create.png)
 
-5.  新しい TiDB ノードは、新しい TiDB ノード グループとともに追加され、クラスターの課金に影響します。右側のペインでクラスターのサイズを確認し、 **[確認]**をクリックします。
+5.  新しい TiDB ノードは、新しい TiDB ノードグループとともに追加され、クラスターの課金に影響します。右側のペインでクラスターのサイズを確認し、 **「確認」**をクリックしてください。
 
-デフォルトでは、 TiDB Cloud Dedicated クラスターに最大 5 つの TiDB ノード グループを作成できます。さらにグループが必要な場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
+デフォルトでは、 TiDB Cloud Dedicated クラスターに最大 5 つの TiDB ノードグループを作成できます。さらにグループが必要な場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 
-TiDB ノード グループを作成しても、デフォルト グループのエンドポイントを使用してクラスターに接続すると、TiDB ノード グループ内の TiDB ノードはワークロードを引き受けないため、リソースが無駄になります。新しい TiDB ノード グループ内の TiDB ノードへの新しい接続を作成する必要があります。1 [TiDBノードグループに接続する](#connect-to-a-tidb-node-group)参照してください。
+TiDBノードグループを作成しても、デフォルトグループのエンドポイントを使用してクラスターに接続すると、TiDBノードグループ内のTiDBノードはワークロードを引き受けることができず、リソースが無駄になります。新しいTiDBノードグループ内のTiDBノードへの新しい接続を作成する必要があります。1 [TiDBノードグループに接続する](#connect-to-a-tidb-node-group)参照してください。
 
 ## TiDBノードグループに接続する {#connect-to-a-tidb-node-group}
 
-### パブリック接続経由で接続 {#connect-via-public-connection}
+### パブリック接続経由で接続する {#connect-via-public-connection}
 
-新しい TiDB ノード グループのパブリック接続は、デフォルトでは無効になっています。最初に有効にする必要があります。
+新しいTiDBノードグループのパブリック接続はデフォルトで無効になっています。まず有効にする必要があります。
 
 パブリック接続を有効にするには、次の手順を実行します。
 
@@ -73,7 +73,7 @@ TiDB ノード グループを作成しても、デフォルト グループの�
 
 3.  「TiDB ノード グループ**」**リストから TiDB ノード グループを選択し、 **「接続タイプ」**リストから**「パブリック」を選択**します。
 
-    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
+    IP アクセス リストをまだ設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
 
 4.  **[ネットワーク]**ページで、右上隅の**[TiDB ノード グループ]**リストから TiDB ノード グループを選択します。
 
@@ -83,7 +83,7 @@ TiDB ノード グループを作成しても、デフォルト グループの�
 
 ![Connect to the new TiDB node group via Public Endpoint](/media/tidb-cloud/tidb-node-group-connect-public-endpoint.png)
 
-詳細については[パブリック接続経由​​でTiDB Cloud Dedicatedに接続する](/tidb-cloud/connect-via-standard-connection.md)参照してください。
+詳細については[パブリック接続経由​​でTiDB Cloud Dedicated に接続](/tidb-cloud/connect-via-standard-connection.md)参照してください。
 
 ### プライベートエンドポイント経由で接続 {#connect-via-private-endpoint}
 
@@ -95,7 +95,7 @@ TiDB ノード グループを作成しても、デフォルト グループの�
 
 4.  左側のナビゲーション ペインで**[Networking]**をクリックし、右上隅の**[TiDB ノード グループ]**リストから TiDB ノード グループを選択します。
 
-5.  このノード グループに新しい接続を作成するには、 **[プライベート エンドポイント接続の作成]**をクリックします。AWS にデプロイされたクラスターの場合は[AWS のプライベートエンドポイント経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。Google Cloud にデプロイされたクラスターの場合は[Google Cloud Private Service Connect 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
+5.  **「プライベートエンドポイント接続を作成」**をクリックして、このノードグループに新しい接続を作成します。AWS にデプロイされたクラスタの場合は[AWS PrivateLink 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。Google Cloud にデプロイされたクラスタの場合は[Google Cloud Private Service Connect 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
 
     > **注記**：
     >
@@ -103,9 +103,9 @@ TiDB ノード グループを作成しても、デフォルト グループの�
 
 6.  プライベート エンドポイント接続を作成したら、ページの右上隅にある**[接続]**をクリックして接続文字列を取得します。
 
-### VPCピアリング経由で接続 {#connect-via-vpc-peering}
+### VPCピアリング経由で接続する {#connect-via-vpc-peering}
 
-すべての TiDB ノード グループはクラスターと同じ VPC を共有するため、すべてのグループへのアクセスを有効にするには、1 つの VPC ピアリング接続を作成するだけで済みます。
+すべての TiDB ノード グループはクラスターと同じ VPC を共有するため、すべてのグループのアクセスを有効にするには、1 つの VPC ピアリング接続を作成するだけで済みます。
 
 1.  [VPC ピアリング経由でTiDB Cloud Dedicated に接続する](/tidb-cloud/set-up-vpc-peering-connections.md)の手順に従って、このクラスターの VPC ピアリングを作成します。
 2.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
@@ -139,7 +139,7 @@ TiDB ノード グループの詳細を表示するには、次の手順を実�
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 2.  左側のナビゲーション ペインで、 **[ノード]**をクリックします。
-3.  **[ノード マップ]**ページで、右上隅の**[変更]**をクリックします。 **[クラスタの変更]**ページが表示されます。
+3.  **「ノードマップ」**ページで、右上隅の**「変更」を**クリックします。「**クラスタの変更」**ページが表示されます。
 4.  **「クラスタの変更」**ページでは、次の操作を実行できます。
 
     -   TiDB ノードの数を変更します。
@@ -158,7 +158,7 @@ TiDB ノード グループを削除するには、次の手順を実行しま�
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 2.  左側のナビゲーション ペインで、 **[ノード]**をクリックします。
-3.  **[ノード マップ]**ページで、右上隅の**[変更]**をクリックします。 **[クラスタの変更]**ページが表示されます。
+3.  **「ノードマップ」**ページで、右上隅の**「変更」を**クリックします。「**クラスタの変更」**ページが表示されます。
 4.  **クラスタの変更**ページで、 <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 6V5.2C16 4.0799 16 3.51984 15.782 3.09202C15.5903 2.71569 15.2843 2.40973 14.908 2.21799C14.4802 2 13.9201 2 12.8 2H11.2C10.0799 2 9.51984 2 9.09202 2.21799C8.71569 2.40973 8.40973 2.71569 8.21799 3.09202C8 3.51984 8 4.0799 8 5.2V6M10 11.5V16.5M14 11.5V16.5M3 6H21M19 6V17.2C19 18.8802 19 19.7202 18.673 20.362C18.3854 20.9265 17.9265 21.3854 17.362 21.673C16.7202 22 15.8802 22 14.2 22H9.8C8.11984 22 7.27976 22 6.63803 21.673C6.07354 21.3854 5.6146 20.9265 5.32698 20.362C5 19.7202 5 18.8802 5 17.2V6" stroke="currentColor" stroke-width="inherit" stroke-linecap="round" stroke-linejoin="round"></path></svg> TiDB ノード グループを削除します。
 
 ![Delete the TiDB node group](/media/tidb-cloud/tidb-node-group-delete.png)

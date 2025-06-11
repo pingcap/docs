@@ -3,7 +3,7 @@ title: TiDB Cloud Documentation
 aliases: ['/tidbcloud/privacy-policy', '/tidbcloud/terms-of-service', '/tidbcloud/service-level-agreement']
 hide_sidebar: true
 hide_commit: true
-summary: TiDB Cloud は、 TiDB の優れた機能すべてをクラウドに提供する、完全に管理された Database-as-a-Service (DBaaS) です。学習、試用、開発、保守、移行、監視、チューニング、セキュリティ保護、課金、統合、参照のためのガイド、サンプル、リファレンスを提供します。
+summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供する、フルマネージドのデータベース・アズ・ア・サービス（DBaaS）です。学習、試用、開発、保守、移行、監視、チューニング、セキュリティ保護、課金、統合、参照のためのガイド、サンプル、リファレンスを提供しています。
 ---
 
 <LearningPathContainer platform="tidb-cloud" title="TiDBクラウド" subTitle="TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud. Find the guide, samples, and references you need to use TiDB Cloud.">
@@ -22,11 +22,11 @@ summary: TiDB Cloud は、 TiDB の優れた機能すべてをクラウドに提
 
 [TiDB Cloud Serverless を試してみる](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart)
 
-[TiDB + AI を試してみる](https://docs.pingcap.com/tidbcloud/vector-search-get-started-using-python)
+[TiDB + AIを試す](https://docs.pingcap.com/tidbcloud/vector-search-get-started-using-python)
 
 [HTAPを試してみる](https://docs.pingcap.com/tidbcloud/tidb-cloud-htap-quickstart)
 
-[TiDB Cloud CLI を試してみる](https://docs.pingcap.com/tidbcloud/get-started-with-cli)
+[TiDB Cloud CLI を試す](https://docs.pingcap.com/tidbcloud/get-started-with-cli)
 
 [概念実証](https://docs.pingcap.com/tidbcloud/tidb-cloud-poc)
 
@@ -72,13 +72,13 @@ summary: TiDB Cloud は、 TiDB の優れた機能すべてをクラウドに提
 
 [Amazon Aurora MySQLから](https://docs.pingcap.com/tidbcloud/migrate-from-aurora-bulk-import)
 
-[Amazon S3またはGCSから](https://docs.pingcap.com/tidbcloud/migrate-from-amazon-s3-or-gcs)
+[Amazon RDS for Oracleから](https://docs.pingcap.com/tidbcloud/migrate-from-oracle-using-aws-dms)
 
 [TiDBセルフマネージドから](https://docs.pingcap.com/tidbcloud/migrate-from-op-tidb)
 
 [CSVファイルから](https://docs.pingcap.com/tidbcloud/import-csv-files)
 
-[Apache Parquet ファイルから](https://docs.pingcap.com/tidbcloud/import-csv-files)
+[Apache Parquetファイルから](https://docs.pingcap.com/tidbcloud/import-csv-files)
 
 [MySQL CLIを使用する場合](https://docs.pingcap.com/tidbcloud/import-with-mysql-cli)
 
@@ -86,7 +86,7 @@ summary: TiDB Cloud は、 TiDB の優れた機能すべてをクラウドに提
 
 <LearningPath label="Monitor" icon="cloud6">
 
-[ステータスと指標](https://docs.pingcap.com/tidbcloud/monitor-tidb-cluster)
+[ステータスとメトリクス](https://docs.pingcap.com/tidbcloud/monitor-tidb-cluster)
 
 [組み込み監視](https://docs.pingcap.com/tidbcloud/built-in-monitoring)
 
@@ -144,13 +144,13 @@ summary: TiDB Cloud は、 TiDB の優れた機能すべてをクラウドに提
 
 [テラフォーム](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview)
 
-[Amazon アプリフロー](https://docs.pingcap.com/tidbcloud/dev-guide-aws-appflow-integration)
+[Amazon AppFlow](https://docs.pingcap.com/tidbcloud/dev-guide-aws-appflow-integration)
 
 </LearningPath>
 
 <LearningPath label="Reference" icon="cloud-dev">
 
-[SQL リファレンス](https://docs.pingcap.com/tidbcloud/basic-sql-operations)
+[SQLリファレンス](https://docs.pingcap.com/tidbcloud/basic-sql-operations)
 
 [システム変数](https://docs.pingcap.com/tidbcloud/system-variables)
 

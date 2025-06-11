@@ -15,8 +15,8 @@ summary: インポート リソースを使用してインポート タスクを
 
 ## 前提条件 {#prerequisites}
 
--   [TiDB Cloud Terraform プロバイダーを入手](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
--   [TiDB Cloud Serverless クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)または[TiDB Cloud専用クラスターを作成する](/tidb-cloud/create-tidb-cluster.md) 。
+-   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
+-   [TiDB Cloud Serverless クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)または[TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md) 。
 
 ## インポートタスクを作成して実行する {#create-and-run-an-import-task}
 
@@ -28,13 +28,13 @@ summary: インポート リソースを使用してインポート タスクを
 >
 > ローカル ファイルのインポートは、 TiDB Cloud Serverless クラスターでのみサポートされ、 TiDB Cloud Dedicated クラスターではサポートされません。
 
-1.  インポート用の CSV ファイルを作成します。例:
+1.  インポート用のCSVファイルを作成します。例:
 
         id;name;age
         1;Alice;20
         2;Bob;30
 
-2.  `import`ディレクトリを作成し、その中に`main.tf`を作成します。例:
+2.  ディレクトリ`import`を作成し、その中にディレクトリ`main.tf`を作成します。例:
 
         terraform {
          required_providers {
@@ -64,9 +64,9 @@ summary: インポート リソースを使用してインポート タスクを
           file_name = "your_csv_path"
         }
 
-    ファイル内のリソース値 (プロジェクト ID、クラスター ID、CSV パスなど) を独自のものに置き換えます。 `csv_format`の詳細は[設定ページ](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format)に記載されています。
+    ファイル内のリソース値（プロジェクトID、クラスタID、CSVパスなど）をご自身のものに置き換えてください。1 の詳細は`csv_format` [設定ページ](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format)記載されています。
 
-3.  `terraform apply`コマンドを実行してインポート タスクを作成し、 `yes`と入力して作成を確認し、インポートを開始します。
+3.  `terraform apply`コマンドを実行してインポート タスクを作成し、 `yes`入力して作成を確認し、インポートを開始します。
 
         $ terraform apply
         ...
@@ -177,9 +177,9 @@ summary: インポート リソースを使用してインポート タスクを
 
 > **注記：**
 >
-> TiDB Cloud がAmazon S3 バケット内のファイルにアクセスできるようにするには、まず[Amazon S3 アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)実行する必要があります。
+> TiDB Cloud がAmazon S3 バケット内のファイルにアクセスできるようにするには、まず[Amazon S3 アクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)実行する必要があります。
 
-1.  `import`ディレクトリを作成し、その中に`main.tf`を作成します。例:
+1.  ディレクトリ`import`を作成し、その中にディレクトリ`main.tf`を作成します。例:
 
         terraform {
           required_providers {
@@ -212,7 +212,7 @@ summary: インポート リソースを使用してインポート タスクを
           source_url   = "your_url"
         }
 
-2.  `terraform apply`コマンドを実行してインポート タスクを作成し、 `yes`と入力して作成を確認し、インポートを開始します。
+2.  `terraform apply`コマンドを実行してインポート タスクを作成し、 `yes`入力して作成を確認し、インポートを開始します。
 
         $ terraform apply
         ...
@@ -239,7 +239,7 @@ summary: インポート リソースを使用してインポート タスクを
 
 Terraform の場合、インポート タスクを削除すると、対応するインポート リソースがキャンセルされます。
 
-`COMPLETED`インポート タスクをキャンセルすることはできません。キャンセルすると、次の例のように`Delete Error`取得されます。
+`COMPLETED`インポートタスクをキャンセルすることはできません。キャンセルした場合は、次の例のように`Delete Error`返されます。
 
     $ terraform destroy
     ...
@@ -259,7 +259,7 @@ Terraform の場合、インポート タスクを削除すると、対応する
     │ import}
     ╵
 
-ステータスが`IMPORTING`インポート タスクをキャンセルできます。例:
+ステータスが`IMPORTING`インポートタスクをキャンセルできます。例:
 
     $ terraform destroy
     ...

@@ -8,6 +8,40 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2025 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2025年6月4日 {#june-4-2025}
+
+**一般的な変更**
+
+-   Microsoft Azure の[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)パブリック プレビューで利用できるようになりました。
+
+    今回のリリースにより、 TiDB Cloud はAWS、Google Cloud、Azure の 3 つの主要なパブリック クラウド プラットフォームすべてをサポートするようになり、ビジネス ニーズとクラウド戦略に最適な場所にTiDB Cloud Dedicated クラスターを展開できるようになりました。
+
+    -   AWS および Google Cloud で利用可能なすべてのコア機能は、Azure で完全にサポートされています。
+    -   Azure サポートは現在、米国東部 2、東日本、東南アジアの 3 つのリージョンで利用可能で、近日中にさらに多くのリージョンで利用可能になる予定です。
+    -   Azure 上のTiDB Cloud Dedicated クラスターには、TiDB バージョン v7.5.3 以降が必要です。
+
+    Azure でTiDB Cloud Dedicated をすぐに使い始めるには、次のドキュメントを参照してください。
+
+    -   [Azure 上にTiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
+    -   [Azure プライベート エンドポイント経由でTiDB Cloud専用クラスタを接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
+    -   [Azure 上のTiDB Cloud専用クラスタにデータをインポートする](/tidb-cloud/import-csv-files.md)
+
+-   Prometheus 統合により、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの監視機能を強化するためのメトリックがさらに提供されます。
+
+    これで、 `tidbcloud_disk_read_latency`や`tidbcloud_kv_request_duration`などの追加のメトリックを Prometheus に統合して、 TiDB Cloud Dedicated のパフォーマンスのより多くの側面を追跡できるようになりました。
+
+    利用可能なメトリックと、既存ユーザーと新規ユーザーの両方に対してメトリックを有効にする方法の詳細については、 [TiDB Cloud をPrometheus および Grafana と統合する (ベータ版)](/tidb-cloud/monitor-prometheus-and-grafana-integration.md#metrics-available-to-prometheus)参照してください。
+
+-   TiKV [標準](/tidb-cloud/size-your-cluster.md#standard-storage)および[パフォーマンス](/tidb-cloud/size-your-cluster.md#performance-and-plus-storage)storageの価格が正式に発表されました。
+
+    割引期間は**2025年6月5日 UTC 00:00**に終了します。その後、価格は通常価格に戻ります。TiDB TiDB Cloud Dedicated の価格については、 [TiDB Cloud専用料金の詳細](https://www.pingcap.com/tidb-dedicated-pricing-details/#node-cost)ご覧ください。
+
+**コンソールの変更**
+
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのTiFlashノードのサイズを構成する際のインタラクティブ エクスペリエンスを強化します。
+
+    TiDB Cloud Dedicated クラスターを作成するときに、トグル スイッチを使用してTiFlash構成を制御できるようになりました。これにより、構成エクスペリエンスがより直感的でシームレスになります。
+
 ## 2025年5月27日 {#may-27-2025}
 
 **一般的な変更**
@@ -196,7 +230,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     Private Connect は、クラウドプロバイダーの Private Link または Private Service Connect テクノロジーを活用し、 TiDB Cloud VPC 内の変更フィードがプライベート IP アドレスを使用してお客様の VPC 内の Kafka に接続できるようにします。これにより、Kafka がTiDB Cloud VPC 内で直接ホストされているかのように扱われます。この機能は、VPC CIDR の競合を防ぎ、セキュリティコンプライアンス要件を満たすのに役立ちます。
 
-    -   AWS の Apache Kafka の場合は、 [AWS でセルフホスト型 Kafka プライベートリンク サービスをセットアップする](/tidb-cloud/setup-self-hosted-kafka-private-link-service.md)手順に従ってネットワーク接続を構成します。
+    -   AWS の Apache Kafka の場合は、 [AWS でセルフホスト型 Kafka プライベートリンク サービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)手順に従ってネットワーク接続を構成します。
 
     -   Google Cloud の Apache Kafka の場合は、 [Google Cloud でセルフホスト型 Kafka プライベート サービス接続を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)手順に従ってネットワーク接続を構成します。
 

@@ -13,7 +13,7 @@ summary: TiDB Cloudに関するよくある質問 (FAQ) について説明しま
 
 ### TiDB Cloudとは何ですか? {#what-is-tidb-cloud}
 
-TiDB Cloudは、直感的なコンソールから操作できるフルマネージドクラウドインスタンスを提供することで、TiDBクラスタの導入、管理、保守をさらに簡素化します。Amazon Web ServicesまたはGoogle Cloudに簡単にデプロイできるため、ミッションクリティカルなアプリケーションを迅速に構築できます。
+TiDB Cloudは、直感的なコンソールから操作できるフルマネージドクラウドインスタンスを提供することで、TiDBクラスタの導入、管理、保守をさらに簡素化します。Amazon Web Services（AWS）、Google Cloud、Microsoft Azureに簡単に導入でき、ミッションクリティカルなアプリケーションを迅速に構築できます。
 
 TiDB Cloud は、トレーニングをほとんど受けていない、あるいは全く受けていない開発者やデータベース管理者でも、かつては複雑だったインフラストラクチャ管理やクラスタの導入といったタスクを容易に処理できるようにし、データベースの複雑さに煩わされることなく、アプリケーションに集中できるようにします。また、ボタンをクリックするだけで TiDB クラスタをスケールイン/スケールアウトできるため、必要な量と期間だけデータベースをプロビジョニングできるため、高価なリソースを無駄にすることがなくなります。
 
@@ -33,7 +33,7 @@ MySQL クライアントまたはドライバーでサポートされている�
 
 ### TiDB Cloud はどこで実行できますか? {#where-can-i-run-tidb-cloud}
 
-TiDB Cloudは現在、Amazon Web Services と Google Cloud で利用できます。
+TiDB Cloudは現在、Amazon Web Services (AWS)、Google Cloud、Microsoft Azure で利用できます。
 
 ### TiDB Cloud は、異なるクラウド サービス プロバイダー間の VPC ピアリングをサポートしていますか? {#does-tidb-cloud-support-vpc-peering-between-different-cloud-service-providers}
 

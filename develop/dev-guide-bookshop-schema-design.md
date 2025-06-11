@@ -99,9 +99,7 @@ tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --rati
 
     2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
-2.  **S3 からデータをインポート**を選択します。
-
-    TiDB Cloud Import を初めて使用する場合は、 **「Amazon S3 からのインポート」**を選択します。
+2.  **「Cloud Storage からデータをインポート」**を選択し、 **「Amazon S3」**をクリックします。
 
 3.  **「Amazon S3 からのデータのインポート」**ページで、次のソースデータ情報を設定します。
 
@@ -140,7 +138,7 @@ FROM
 WHERE table_schema LIKE 'bookshop';
 ```
 
-結果は次のとおりです。
+結果は次のようになります。
 
     +-----------------------+----------------+-----------+------------+---------+
     | Table Name            | Number of Rows | Data Size | Index Size | Total   |
