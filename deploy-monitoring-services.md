@@ -6,9 +6,7 @@ aliases: ['/docs/dev/deploy-monitoring-services/','/docs/dev/how-to/monitor/moni
 
 # Deploy Monitoring Services for the TiDB Cluster
 
-This document is intended for users who want to manually deploy TiDB monitoring and alert services.
-
-If you deploy the TiDB cluster using TiUP, the monitoring and alert services are automatically deployed, and no manual deployment is needed.
+This document is intended for users who want to manually deploy TiDB monitoring and alert services. If you deploy the TiDB cluster using TiUP, the monitoring and alert services are automatically deployed, and no manual deployment is needed. [TiDB Dashboard](/dashboard/dashboard-intro.md) is built into the PD component and does not require an independent deployment.
 
 ## Deploy Prometheus and Grafana
 

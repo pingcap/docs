@@ -41,7 +41,7 @@ More references:
 >
 > Before installing TiCDC, ensure that you have [manually configured the SSH mutual trust and sudo without password](/check-before-deployment.md#manually-configure-the-ssh-mutual-trust-and-sudo-without-password) between the TiUP control machine and the TiCDC host.
 
-## Add or scale out TiCDC to an existing TiDB cluster using TiUP
+## Add or scale out TiCDC to an existing {{{ .tidb }}} cluster using TiUP {#add-or-scale-out-ticdc}
 
 The method of scaling out a TiCDC cluster is similar to that of deploying one. It is recommended to use TiUP to perform the scale-out.
 

@@ -4035,6 +4035,26 @@ Referenced in:
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md#tidb_window_concurrency-new-in-v40)
 
+### tidb_workload_repository_dest
+
+- [TiDB Workload Repository](/workload-repository.md#enable-the-workload-repository)
+- [System Variables](/system-variables.md#tidb_workload_repository_dest-new-in-v900)
+
+### tidb_workload_repository_active_sampling_interval
+
+- [TiDB Workload Repository](/workload-repository.md#time-based-sampling-process-every-5-seconds-by-default)
+- [System Variables](/system-variables.md#tidb_workload_repository_active_sampling_interval-new-in-v900)
+
+### tidb_workload_repository_retention_days
+
+- [TiDB Workload Repository](/workload-repository.md#data-retention)
+- [System Variables](/system-variables.md#tidb_workload_repository_retention_days-new-in-v900)
+
+### tidb_workload_repository_snapshot_interval
+
+- [TiDB Workload Repository](/workload-repository.md#snapshot-sampling-process-hourly-by-default)
+- [System Variables](/system-variables.md#tidb_workload_repository_snapshot_interval-new-in-v900)
+
 ### tiflash_fastscan
 
 Referenced in:
@@ -4144,15 +4164,6 @@ Referenced in:
 Referenced in:
 
 - [System Variables](/system-variables.md#tx_read_ts)
-
-### txn_scope
-
-Referenced in:
-
-- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [System Variables](/system-variables.md#txn_scope)
-- [TiDB Configuration File](/tidb-configuration-file.md)
-- [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md)
 
 ### validate_password.check_user_name
 

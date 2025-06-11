@@ -82,7 +82,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 8. Click **Test Connection** to validate the connection to the TiDB Cloud Serverless cluster.
 
-    ![Test the connection to a TiDB Cloud Serverless clustser](/media/develop/datagrip-test-connection.jpg)
+    ![Test the connection to a TiDB Cloud Serverless cluster](/media/develop/datagrip-test-connection.jpg)
 
 9. Click **OK** to save the connection configuration.
 

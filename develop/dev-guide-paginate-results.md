@@ -306,14 +306,30 @@ The result is as follows:
 To delete all rating records on page 1, replace the `start_key` and `end_key` with values of page 1 in the above result:
 
 ```sql
-SELECT * FROM ratings
-WHERE
-    (book_id > 268996 AND book_id < 140982742)
-    OR (
-        book_id = 268996 AND user_id >= 92104804
+SELECT *
+FROM ratings
+WHERE (
+        268996 = 140982742
+        AND book_id = 268996
+        AND user_id >= 92104804
+        AND user_id <= 374645100
     )
     OR (
-        book_id = 140982742 AND user_id <= 374645100
+        268996 != 140982742
+        AND (
+            (
+                book_id > 268996
+                AND book_id < 140982742
+            )
+            OR (
+                book_id = 268996
+                AND user_id >= 92104804
+            )
+            OR (
+                book_id = 140982742
+                AND user_id <= 374645100
+            )
+        )
     )
 ORDER BY book_id, user_id;
 ```
