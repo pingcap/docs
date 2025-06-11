@@ -128,7 +128,7 @@ See the detailed pricing for each available Alibaba Cloud region below.
 
 > **Tip:**
 >
-> Currently, TiDB Cloud Essential is available in the Alibaba Cloud Singapore region. If you want to run TiDB Cloud on other regions on Alibaba Cloud, please contact us via the Help center in the console.
+> TiDB Cloud Essential is currently available in the Alibaba Cloud Singapore region. For other regions on Alibaba Cloud, contact the Help center in the console.
 
 #### Throttling
 
