@@ -66,7 +66,7 @@ You can add VPC peering requests on either the project-level **Network Access** 
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Project Settings** > **Network Access**.
-3. On the **Network Access** page, click the **VPC Peering** > **AWS** tab.
+3. On the **Network Access** page, click the **VPC Peering**tab, and then click the **AWS** sub-tab.
 
     The **VPC Peering** configuration is displayed by default.
 
@@ -98,9 +98,9 @@ You can add VPC peering requests on either the project-level **Network Access** 
 
     2. Click the name of your target cluster to go to its overview page.
 
-2. In the left navigation pane, click **Settings** > **Networking**, and then click **Create VPC Peering**.
+2. In the left navigation pane, click **Settings** > **Networking**.
 
-3. Fill in the required information of your existing AWS VPC:
+3. On the **Networking** page, click **Create VPC Peering**, and then fill in the required information of your existing AWS VPC:
 
     - Your VPC Region
     - AWS Account ID
@@ -256,7 +256,7 @@ You can add VPC peering requests on either the project-level **Network Access** 
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Project Settings** > **Network Access**.
-3. On the **Network Access** page, click the **VPC Peering** > **Google Cloud** tab.
+3. On the **Network Access** page, click the **VPC Peering** tab, and then click the **Google Cloud** sub-tab.
 
     The **VPC Peering** configuration is displayed by default.
 
@@ -287,9 +287,9 @@ You can add VPC peering requests on either the project-level **Network Access** 
 
     2. Click the name of your target cluster to go to its overview page.
 
-2. In the left navigation pane, click **Settings** > **Networking**, and then click **Create VPC Peering**.
+2. In the left navigation pane, click **Settings** > **Networking**.
 
-3. Fill in the required information of your existing Google Cloud VPC:
+3. On the **Networking** page, click **Create VPC Peering**, and then fill in the required information of your existing Google Cloud VPC:
 
     > **Tip:**
     >
