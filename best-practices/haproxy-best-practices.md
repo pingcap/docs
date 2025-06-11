@@ -69,8 +69,6 @@ You can use the following operating systems and make sure the required dependenc
 
 To install the dependencies above, run the following command:
 
-{{< copyable "shell-regular" >}}
-
 ```bash
 yum -y install epel-release gcc systemd-devel
 ```
@@ -81,36 +79,28 @@ You can easily use HAProxy to configure and set up a load-balanced database envi
 
 ### Install HAProxy
 
-1. Download the package of the HAProxy 2.6.2 source code:
-
-    {{< copyable "shell-regular" >}}
+1. Download the package of the HAProxy 2.6.21 source code:
 
     ```bash
-    wget https://www.haproxy.org/download/2.6/src/haproxy-2.6.2.tar.gz
+    wget https://www.haproxy.org/download/2.6/src/haproxy-2.6.21.tar.gz
     ```
 
 2. Extract the package:
 
-    {{< copyable "shell-regular" >}}
-
     ```bash
-    tar zxf haproxy-2.6.2.tar.gz
+    tar zxf haproxy-2.6.21.tar.gz
     ```
 
 3. Compile the application from the source code:
 
-    {{< copyable "shell-regular" >}}
-
     ```bash
-    cd haproxy-2.6.2
+    cd haproxy-2.6.21
     make clean
     make -j 8 TARGET=linux-glibc USE_THREAD=1
     make PREFIX=${/app/haproxy} SBINDIR=${/app/haproxy/bin} install  # Replace `${/app/haproxy}` and `${/app/haproxy/bin}` with your custom directories.
     ```
 
 4. Reconfigure the profile:
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     echo 'export PATH=/app/haproxy/bin:$PATH' >> /etc/profile
@@ -119,8 +109,6 @@ You can easily use HAProxy to configure and set up a load-balanced database envi
 
 5. Check whether the installation is successful:
 
-    {{< copyable "shell-regular" >}}
-
     ```bash
     which haproxy
     ```
@@ -128,8 +116,6 @@ You can easily use HAProxy to configure and set up a load-balanced database envi
 #### HAProxy commands
 
 Execute the following command to print a list of keywords and their basic usage:
-
-{{< copyable "shell-regular" >}}
 
 ```bash
 haproxy --help
@@ -226,8 +212,6 @@ To check the source IP address using `SHOW PROCESSLIST`, you need to configure t
 
 To start HAProxy, run `haproxy`. `/etc/haproxy/haproxy.cfg` is read by default (recommended).
 
-{{< copyable "shell-regular" >}}
-
 ```bash
 haproxy -f /etc/haproxy/haproxy.cfg
 ```
@@ -238,15 +222,11 @@ To stop HAProxy, use the `kill -9` command.
 
 1. Run the following command:
 
-    {{< copyable "shell-regular" >}}
-
     ```bash
     ps -ef | grep haproxy
     ```
 
 2. Terminate the process of HAProxy:
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     kill -9 ${haproxy.pid}

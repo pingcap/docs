@@ -3525,7 +3525,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Warning:**
 >
-> Currently, Instance Plan Cache is an experimental feature. is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> Currently, Instance Plan Cache is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -5586,7 +5586,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Unit: Byte
-- Default value: `0`, which means that the memory quota is automatically set to half of the total memory size of the TiDB instance.
+- Default value: `0`, which means the memory quota for the TiDB statistics cache is 20% of the TiDB instance's total memory. Before v8.5.1, `0` means the memory quota is 50% of the TiDB instance's total memory.
 - Range: `[0, 1099511627776]`
 - This variable sets the memory quota for the TiDB statistics cache.
 
@@ -5811,7 +5811,15 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Integer
 - Default value: `3000`
 - Range: `[1, 32767]`
-- This variable is used to set the maximum number of statements that [statement summary tables](/statement-summary-tables.md) store in memory.
+- This variable is used to limit the number of SQL digests that the [`statements_summary`](/statement-summary-tables.md#statements_summary) and [`statements_summary_history`](/statement-summary-tables.md#statements_summary_history) tables can store in memory totally.
+
+<CustomContent platform="tidb">
+
+> **Note:**
+>
+> When [`tidb_stmt_summary_enable_persistent`](/statement-summary-tables.md#persist-statements-summary) is enabled, `tidb_stmt_summary_max_stmt_count` only limits the number of SQL digests that the [`statements_summary`](/statement-summary-tables.md#statements_summary) table can store in memory.
+
+</CustomContent>
 
 ### tidb_stmt_summary_refresh_interval <span class="version-mark">New in v4.0</span>
 
