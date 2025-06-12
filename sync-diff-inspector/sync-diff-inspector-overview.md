@@ -39,14 +39,11 @@ This guide introduces the key features of sync-diff-inspector and describes how 
 
 sync-diff-inspector needs to obtain the information of table schema and to query data. The required database privileges are as follows:
 
-* Upstream database
+* Upstream/Downstream database
     - `SELECT` (checks data for comparison)
-    - `SHOW_DATABASES` (views database name)
     - `RELOAD` (views table schema)
-* Downstream database
-    - `SELECT` (checks data for comparison)
-    - `SHOW_DATABASES` (views database name)
-    - `RELOAD` (views table schema)
+
+**Note**: Please avoid granting the [`SHOW DATABASES`](https://dev.mysql.com/doc/refman/8.4/en/privileges-provided.html#priv_show-databases) privilege for all data source and ensure the [`skip_show_database`](https://dev.mysql.com/doc/refman/8.4/en/server-system-variables.html#sysvar_skip_show_database) system variable is set to `false` for MySQL source, otherwise the check may fail.
 
 ## Configuration file description
 
