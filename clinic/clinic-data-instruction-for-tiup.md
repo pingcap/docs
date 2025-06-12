@@ -149,6 +149,6 @@ With `--include=log.<type>` and `--include=log.<type>` you can configure what lo
 Log types
 
 - `std`: Logfiles that contain `stderr` in the name.
-- `rocksdb`: Logfiles that have a `rocksdb` prefix.
+- `rocksdb`: Logfiles that have a `rocksdb` prefix and a `.info` suffix.
 - `slow`: Slow query log files.
 - `unknown`: Logs not matching any of the other types.
