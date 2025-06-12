@@ -25,7 +25,7 @@ To get alert notifications of clusters in your project, take the following steps
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
-3. On the **Alert Subscription** page, click **Add Subscriber**.
+3. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
 4. Select **Email** from the **Subscriber Type** drop-down list.
 5. Enter your email address.
 6. Click **Test Connection**.

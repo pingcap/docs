@@ -35,7 +35,7 @@ To create a CMEK-enabled project, take the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Projects**.
-3. On the **Projects** page, click **Create New Project**.
+3. On the **Projects** page, click **Create New Project** in the upper-right corner.
 4. Fill in a project name.
 5. Choose to enable the CMEK capability of the project.
 6. Click **Confirm** to complete the project creation.

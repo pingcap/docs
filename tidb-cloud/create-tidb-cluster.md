@@ -32,7 +32,7 @@ If you are an organization owner, you can rename the default project or create a
 
 3. On the **Projects** page, do one of the following:
 
-    - To rename the default project, click **Rename** in the **Actions** column.
+    - To rename the default project, click **...** > **Rename** in the **Actions** column.
     - To create a project, click **Create New Project**, enter a name for your project, and then click **Confirm**.
 
 4. To go to the cluster list page of your project, click the project name on the **Projects** page.
