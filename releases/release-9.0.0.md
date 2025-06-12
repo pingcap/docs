@@ -370,14 +370,8 @@ The following features are planned for deprecation in future versions:
     - (dup): release-8.5.1.md > 改进提升> TiDB - 将统计信息内存缓存的默认阈值调整为总内存的 20% [#58014](https://github.com/pingcap/tidb/issues/58014) @[hawkingrei](https://github.com/hawkingrei)
     - Optimize the CPU usage of internal SQL statements for the Distributed eXecution Framework (DXF) [#59344](https://github.com/pingcap/tidb/issues/59344) @[D3Hunter](https://github.com/D3Hunter)
     - Add more spill-related details to the result of `EXPLAIN ANALYZE` [#59076](https://github.com/pingcap/tidb/issues/59076) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    - Support pushing down the `FROM_UNIXTIME()` expression to TiKV [#58940](https://github.com/pingcap/tidb/issues/58940) @[wshwsh12](https://github.com/wshwsh12)
-    - Support pushing down the `TIMESTAMPDIFF()` expression to TiKV [#59365](https://github.com/pingcap/tidb/issues/59365) @[gengliqi](https://github.com/gengliqi)
-    - Support pushing down the `UNIX_TIMESTAMP()` expression to TiKV [#59497](https://github.com/pingcap/tidb/issues/59497) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    - Support pushing down the `TRUNCATE()` expression to TiFlash [#59317](https://github.com/pingcap/tidb/issues/59317) @[guo-shaoge](https://github.com/guo-shaoge)
-    - Support pushing down the Aggregation window function to TiFlash [#59509](https://github.com/pingcap/tidb/issues/59509) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - Support Left Outer Anti Semi Join in Hash Join v2 [#58479](https://github.com/pingcap/tidb/pull/58479) @[wshwsh12](https://github.com/wshwsh12)
     - Skip the lock cleanup phase for optimistic statements that are automatically committed to improve performance [#58675](https://github.com/pingcap/tidb/issues/58675) @[ekexium](https://github.com/ekexium)
-    - Support creating global indexes using non-unique indexes [#58650](https://github.com/pingcap/tidb/issues/58650) @[Defined2014](https://github.com/Defined2014)
     - Disable `tidb_enable_paging` in TTL to reduce the number of scanned rows and improve performance [#58342](https://github.com/pingcap/tidb/issues/58342) @[lcwangchao](https://github.com/lcwangchao)
     - Support choosing the left side as the build side when building Semi Join and Anti Semi Join [#58325](https://github.com/pingcap/tidb/issues/58325) @[hawkingrei](https://github.com/hawkingrei)    
     - Support generating IndexMerge plans using `(a, b), (a, c), (a, d)` for query conditions similar to `a = 1 AND (b = 2 OR c = 3 OR d = 4)`, without manually expanding the expression [#58361](https://github.com/pingcap/tidb/issues/58361) @[time-and-fate](https://github.com/time-and-fate)
@@ -395,12 +389,11 @@ The following features are planned for deprecation in future versions:
 
 + PD <!--tw@lilin90: 5 notes-->
 
-    - 设置 max-replicas 小于当前副本数时打印警告信息 [#8959](https://github.com/tikv/pd/issues/8959) @[lhy1024](https://github.com/lhy1024)
-    - 增加了 `gRPC Received commands rate` 监控面板 [#8920](https://github.com/tikv/pd/issues/8920) @[okJiang](https://github.com/okJiang)
-    - Slow store 调度器支持设置 `batch` 大小 [#7156](https://github.com/tikv/pd/issues/7156) @[rleungx]
+    - Support printing a warning when `max-replicas` is set lower than the current number of replicas [#8959](https://github.com/tikv/pd/issues/8959) @[lhy1024](https://github.com/lhy1024)
+    - Add a new `gRPC Received commands rate` monitoring panel [#8920](https://github.com/tikv/pd/issues/8920) @[okJiang](https://github.com/okJiang)
+    - Support configuring the `batch` size for `evict-slow-store-scheduler` [#7156](https://github.com/tikv/pd/issues/7156) @[rleungx]
 (https://github.com/rleungx)
-    - 为更新 TSO 增加了重试机制 [#9020](https://github.com/tikv/pd/issues/9020) @[lhy1024](https://github.com/lhy1024)
-    - 资源管控支持更多 BURSTABLE 模式 [#9057](https://github.com/tikv/pd/issues/9057) @[lhy1024](https://github.com/lhy1024)
+    - Add a retry mechanism for `UpdateTSO` [#9020](https://github.com/tikv/pd/issues/9020) @[lhy1024](https://github.com/lhy1024)
 
 + TiFlash <!--tw@qiancai: 4 notes-->
 
@@ -424,7 +417,7 @@ The following features are planned for deprecation in future versions:
     + TiDB Data Migration (DM) <!--tw@lilin90: 1 note-->
 
         - (dup): release-6.6.0.md > 改进提升> Tools> TiDB Data Migration (DM) - 新增 async/batch relay writer 以优化 relay 性能 [#4287](https://github.com/pingcap/tiflow/issues/4287) @[GMHDBJD](https://github.com/GMHDBJD)
-        - 为 dm 添加多安全配置的支持 [#11831](https://github.com/pingcap/tiflow/issues/11831) @[River2000i](https://github.com/River2000i)
+        - DM supports multiple security configurations [#11831](https://github.com/pingcap/tiflow/issues/11831) @[River2000i](https://github.com/River2000i)
 
     + TiDB Lightning
 
