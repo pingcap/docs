@@ -70,7 +70,7 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
 ## Step 4. Create a TiDB Cloud Starter cluster
 
-1. Log in to the [TiDB Cloud console](https://console.tidb.io/project/clusters).
+1. Log in to the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud).
 
 2. [Create a TiDB Cloud Starter cluster](/tidb-cloud/tidb-cloud-quickstart.md).
 
