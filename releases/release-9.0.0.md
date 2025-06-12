@@ -481,13 +481,13 @@ The following features are planned for deprecation in future versions:
     - Fix the issue that loading InfoSchema is slow when restarting TiDB in scenarios with a large number of tables [#58821](https://github.com/pingcap/tidb/issues/58821) @[GMHDBJD](https://github.com/GMHDBJD)
     - Fix the potential OOM issue when querying `information_schema.tables` by improving memory usage monitoring when quering system tables [#58985](https://github.com/pingcap/tidb/issues/58985) @[tangenta](https://github.com/tangenta)
     - Fix the issue that the duration is not collected when statistics collection fails [#58797](https://github.com/pingcap/tidb/issues/58797) @[hawkingrei](https://github.com/hawkingrei)    
-    - Fix the issue that asynchronously loaded statistics might contain more information than the current synchronously loaded statistics [#59107](https://github.com/pingcap/tidb/issues/59107)@[winoros](https://github.com/winoros)   
+    - Fix the issue that asynchronously loaded statistics might contain more information than the current synchronously loaded statistics [#59107](https://github.com/pingcap/tidb/issues/59107) @[winoros](https://github.com/winoros)   
     - Fix the issue that `UNION ALL` statements do not return an error when `sql_mode=only_full_group_by` is set [#59211](https://github.com/pingcap/tidb/issues/59211) @[AilinKid](https://github.com/AilinKid) 
     - Fix the issue that internal sessions used for statistics might not be released properly when errors occur, which might lead to memory leaks [#59524](https://github.com/pingcap/tidb/issues/59524) @[Rustin170506](https://github.com/Rustin170506)
     - Fix the issue that statistics estimation is incorrect when the value of `column.hist.NDV` is greater than that of `column.topN.num()` [#59563](https://github.com/pingcap/tidb/issues/59563) @[AilinKid](https://github.com/AilinKid)
-    - Fix the issue that merging global statistics fails [#59274](https://github.com/pingcap/tidb/issues/59274)@[winoros](https://github.com/winoros)
+    - Fix the issue that merging global statistics fails [#59274](https://github.com/pingcap/tidb/issues/59274) @[winoros](https://github.com/winoros)
     - Fix the issue that a TiDB session might crash when Fix Control #44855 is enabled [#59762](https://github.com/pingcap/tidb/issues/59762) @[winoros](https://github.com/winoros)
-    - Fix the issue that TiDB chooses Merge Join when there is no hint and the join keys do not exactly match [#20710](https://github.com/pingcap/tidb/issues/20710)@[winoros](https://github.com/winoros)
+    - Fix the issue that TiDB chooses Merge Join when there is no hint and the join keys do not exactly match [#20710](https://github.com/pingcap/tidb/issues/20710) @[winoros](https://github.com/winoros)
 
 + TiKV <!--tw@lilin90: 3 notes-->
 
