@@ -65,7 +65,7 @@ sync-diff-inspector needs to obtain the information of table schema and to query
     - `SELECT` (checks data for comparison)
     - `RELOAD` (views table schema)
 
-**Note**: Please avoid granting the [`SHOW DATABASES`](https://dev.mysql.com/doc/refman/8.4/en/privileges-provided.html#priv_show-databases) privilege for all data source and ensure the [`skip_show_database`](https://dev.mysql.com/doc/refman/8.4/en/server-system-variables.html#sysvar_skip_show_database) system variable is set to `false` for MySQL source, otherwise the check may fail.
+**Note**: Please avoid granting the [`SHOW DATABASES`](https://dev.mysql.com/doc/refman/8.4/en/privileges-provided.html#priv_show-databases) privilege for all data sources. For MySQL data sources, ensure the [`skip_show_database`](https://dev.mysql.com/doc/refman/8.4/en/server-system-variables.html#sysvar_skip_show_database) system variable is set to `false` too. Otherwise, the check may fail.
 
 ## Configuration file description
 
