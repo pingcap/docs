@@ -387,7 +387,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Introduce the **Cost Explorer** tab on the [**Billing**](https://tidbcloud.com/console/org-settings/billing/payments) page, which provides an intuitive interface for analyzing and customizing cost reports for your organization over time.
+- Introduce the **Cost Explorer** tab on the [**Billing**](https://tidbcloud.com/org-settings/billing/payments) page, which provides an intuitive interface for analyzing and customizing cost reports for your organization over time.
 
     To use this feature, navigate to the **Billing** page of your organization and click the **Cost Explorer** tab.
 
@@ -456,7 +456,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Support [Organization SSO](https://tidbcloud.com/console/preferences/authentication) to streamline enterprise authentication processes.
+- Support [Organization SSO](https://tidbcloud.com/org-settings/authentication) to streamline enterprise authentication processes.
 
     With this feature, you can seamlessly integrate TiDB Cloud with any identity provider (IdP) using [Security Assertion Markup Language (SAML)](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) or [OpenID Connect (OIDC)](https://openid.net/developers/how-connect-works/).
 
