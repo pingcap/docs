@@ -20,7 +20,7 @@ This tutorial guides you through an easy way to get started with TiDB Cloud. You
 
 2. [Log in](https://console.tidb.io/signup?provider_source=alicloud) to your TiDB Cloud account.
 
-    The [**Clusters**](https://console.tidb.io/clusters) page is displayed by default.
+    The [**Clusters**](https://console.tidb.io/project/clusters) page is displayed by default.
 
 3. For new sign-up users, TiDB Cloud automatically creates a default TiDB Cloud Starter cluster named `Cluster0` for you.
     - To create a new TiDB Cloud Starter cluster on your own, follow these steps:

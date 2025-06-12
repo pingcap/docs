@@ -32,7 +32,7 @@ Before migrating to Cloud Organization SSO, check and confirm the items in this 
 
 ### Decide a custom URL for the TiDB Cloud login page of your organization
 
-When Cloud Organization SSO is enabled, your members must use your custom URL instead of the public login URL (`https://tidbcloud.com`) to log in to TiDB Cloud.
+When Cloud Organization SSO is enabled, your members must use your custom URL instead of the public login URL (`https://console.tidb.io`) to log in to TiDB Cloud.
 
 The custom URL cannot be changed after the enablement, so you need to decide which URL to be used in advance.
 
@@ -67,7 +67,7 @@ For security considerations, if you choose to enable auto-provision, it is recom
 Before enabling Cloud Organization SSO, make sure to inform your members about the following:
 
 - The custom login URL of TiDB Cloud
-- The time when to start using the custom login URL instead of `https://tidbcloud.com` for login
+- The time when to start using the custom login URL instead of `https://console.tidb.io` for login
 - The available authentication methods
 - Whether members need invitations to log in to the custom URL
 
@@ -75,10 +75,10 @@ Before enabling Cloud Organization SSO, make sure to inform your members about t
 
 To enable Cloud Organization SSO, take the following steps:
 
-1. Log in to [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud) as a user with the `Organization Owner` role.
-2. In the lower-left corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-organization" />, and then click **Organization Settings**.
-3. In the left navigation pane, click the **Authentication** tab, and then click **Enable**.
-4. In the dialog, fill in the custom URL for your organization, which must be unique in TiDB Cloud.
+1. Log in to the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud) as a user with the `Organization Owner` role, and then switch to your target organization using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Organization Settings** > **Authentication**.
+3. On the **Authentication** page, click **Enable**.
+4. In the dialog, enter the custom URL for your organization, which must be unique in TiDB Cloud.
 
     > **Note:**
     >
@@ -231,8 +231,8 @@ In TiDB Cloud, the SAML authentication method is disabled by default. After enab
 
 3. In TiDB Cloud, view groups pushed from your identity provider.
 
-    1. In the lower-left corner of the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), click <MDSvgIcon name="icon-top-organization" />, and then click **Organization Settings**.
-    2. In the left navigation pane, click the **Authentication** tab.
+    1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
+    2. In the left navigation pane, click **Organization Settings** > **Authentication**.
     3. Click the **Groups** tab. The groups synchronized from your identity provider are displayed.
     4. To view users in a group, click **View**.
 

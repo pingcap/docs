@@ -195,7 +195,7 @@ After you push changes to the Git repository, Vercel will trigger a preview depl
 
 1. Get the connection information of your TiDB cluster.
 
-    You can get the connection information from the connection dialog of your cluster. To open the dialog, go to the [**Clusters**](https://console.tidb.io/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner.
+    You can get the connection information from the connection dialog of your cluster. To open the dialog, go to the [**Clusters**](https://console.tidb.io/project/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner.
 
 2. Go to your Vercel dashboard > Vercel project > **Settings** > **Environment Variables**, and then [declare each environment variable value](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable) according to the connection information of your TiDB cluster.
 

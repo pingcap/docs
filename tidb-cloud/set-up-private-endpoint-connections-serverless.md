@@ -22,7 +22,7 @@ To connect to your TiDB Cloud Starter cluster via a private endpoint, follow the
 
 ### Step 1. Choose a TiDB cluster
 
-1. On the [**Clusters**](https://console.tidb.io/clusters) page, click the name of your target TiDB Cloud cluster to go to its overview page.
+1. On the [**Clusters**](https://console.tidb.io/project/clusters) page, click the name of your target TiDB Cloud cluster to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 3. In the **Connection Type** drop-down list, select **Private Endpoint**.
 4. Take a note of **Service Name**, **Availability Zone ID**, and **Region ID**.
@@ -50,7 +50,7 @@ To use the Alibaba Cloud Management Console to create a VPC interface endpoint, 
 
 After you have created the interface endpoint, go back to the TiDB Cloud console and take the following steps:
 
-1. On the [**Clusters**](https://console.tidb.io/clusters) page, click the name of your target cluster to go to its overview page.
+1. On the [**Clusters**](https://console.tidb.io/project/clusters) page, click the name of your target cluster to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 3. In the **Connection Type** drop-down list, select **Private Endpoint**.
 4. In the **Connect With** drop-down list, select your preferred connection method. The corresponding connection string is displayed at the bottom of the dialog.

@@ -19,13 +19,13 @@ Currently, this method supports importing one CSV file for one task into either 
 
 1. Open the **Import** page for your target cluster.
 
-    1. Log in to the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud) and navigate to the [**Clusters**](https://console.tidb.io/project/clusters) page of your project.
 
         > **Tip:**
         >
-        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. On the **Import** page, you can directly drag and drop your local file to the upload area, or click **Upload a local file** to select and upload the target local file. Note that you can upload only one CSV file of less than 250 MiB for one task. If your local file is larger than 250 MiB, see [How to import a local file larger than 250 MiB?](#how-to-import-a-local-file-larger-than-250-mib).
 

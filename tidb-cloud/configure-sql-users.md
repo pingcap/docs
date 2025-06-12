@@ -36,23 +36,29 @@ After a SQL user is granted both a built-in role and multiple custom roles, the 
 - To manage database users and roles using the **SQL Users** page, you must be in the `Organization Owner` role of your organization or the `Project Owner` role of your project.
 - If you are in the `Project Data Access Read-Write` or `Project Data Access Read-Only` role of a project, you can only view database users on the **SQL Users** page of that project.
 
-## Create a SQL user
+## View SQL users
 
-To create a SQL user, take the following steps:
+To view SQL users of a cluster, take the following steps:
 
-1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), go to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
+1. On the [**Clusters**](https://console.tidb.io/project/clusters) page, click the name of your target cluster to go to its overview page.
 
     > **Tip:**
     >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. Click your cluster name, and then click **SQL Users** in the left navigation pane.
+2. In the left navigation pane, click **Settings** > **SQL Users**.
 
-3. Click **Create SQL User** in the upper-right corner.
+## Create a SQL user
+
+To create a SQL user for a cluster, take the following steps:
+
+1. Navigate to the [**SQL Users**](#view-sql-users) page of your cluster.
+
+2. Click **Create SQL User** in the upper-right corner.
 
     A dialog for the SQL user configuration is displayed.
 
-4. In the dialog, provide the information of the SQL user as follows:
+3. In the dialog, provide the information of the SQL user as follows:
 
     1. Enter the name of the SQL user.
     2. Either create a password for the SQL user or let TiDB Cloud automatically generate a password for the user.
@@ -64,37 +70,19 @@ To create a SQL user, take the following steps:
 
       For each SQL user, you can grant a built-in role and multiple custom roles (if any).
 
-5. Click **Create**.
-
-## View SQL users
-
-To view SQL users of a cluster, take the following steps:
-
-1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), go to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
-
-    > **Tip:**
-    >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
-
-2. Click your cluster name, and then click **SQL Users** in the left navigation pane.
+4. Click **Create**.
 
 ## Edit a SQL user
 
 To edit the password or roles of a SQL user, take the following steps:
 
-1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), go to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
+1. Navigate to the [**SQL Users**](/tidb-cloud/configure-sql-users.md#view-sql-users) page of your cluster.
 
-    > **Tip:**
-    >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
-
-2. Click your cluster name, and then click **SQL Users** in the left navigation pane.
-
-3. In the row of the SQL user to be edited, click **...** in the **Action** column, and then click **Edit**.
+2. In the row of the SQL user to be edited, click **...** in the **Action** column, and then click **Edit**.
 
     A dialog for the SQL user configuration is displayed.
 
-4. In the dialog, you can edit the user password and roles as needed, and then click **Update**.
+3. In the dialog, you can edit the user password and roles as needed, and then click **Update**.
 
     > **Note:**
     >
@@ -104,18 +92,11 @@ To edit the password or roles of a SQL user, take the following steps:
 
 To delete a SQL user, take the following steps:
 
-1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), go to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
-
-    > **Tip:**
-    >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
-
-2. Click your cluster name, and then click **SQL Users** in the left navigation pane.
-
-3. In the row of the SQL user to be edited, click **...** in the **Action** column, and then click **Delete**.
+1. Navigate to the [**SQL Users**](/tidb-cloud/configure-sql-users.md#view-sql-users) page of your cluster.
+2. In the row of the SQL user to be deleted, click **...** in the **Action** column, and then click **Delete**.
 
     > **Note:**
     >
     > The default `<prefix>.root` user does not support deletion.
 
-4. Confirm the deletion.
+3. Confirm the deletion.
