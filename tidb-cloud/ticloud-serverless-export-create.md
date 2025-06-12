@@ -43,7 +43,7 @@ Export data from a TiDB Cloud cluster to Azure Blob Storage in non-interactive m
 ticloud serverless export create -c <cluster-id> --azblob.uri <uri> --azblob.sas-token <sas-token> --filter <database.table>
 ```
 
-Export data from a TiDB Cloud Serverless cluster to Alibaba Cloud OSS in non-interactive mode:
+Export data from a TiDB Cloud cluster to Alibaba Cloud OSS in non-interactive mode:
 
 ```shell
 ticloud serverless export create -c <cluster-id> --oss.uri <uri> --oss.access-key-id <access-key-id> --oss.access-key-secret <access-key-secret> --filter <database.table>
