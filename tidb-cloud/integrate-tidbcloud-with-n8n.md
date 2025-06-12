@@ -11,7 +11,7 @@ This document introduces how to build an auto-workflow: create a TiDB Cloud Star
 
 ## Prerequisites: Get TiDB Cloud API key
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the drop-down box in the upper-left corner.
+1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the drop-down box in the upper-left corner.
 2. In the left navigation pane, click **Organization Settings** > **API Keys**.
 3. On the **API Keys** page, click **Create API Key**.
 4. Enter a description for the API key, and then click **Next**.
