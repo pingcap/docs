@@ -37,7 +37,7 @@ This section describes how to manage firewall rules for a TiDB Cloud cluster. Wi
 
 To add firewall rules to a TiDB Cloud cluster, take the following steps:
 
-1. Navigate to the [**Clusters**](https://console.tidb.io/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**Clusters**](https://console.tidb.io/project/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. In the left navigation pane, click **Settings** > **Networking**.
 

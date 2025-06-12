@@ -74,7 +74,7 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
 2. [Create a TiDB Cloud Starter cluster](/tidb-cloud/tidb-cloud-quickstart.md).
 
-3. In the [**Clusters**](https://console.tidb.io/clusters) page, click the target cluster name to go to its overview page.
+3. In the [**Clusters**](https://console.tidb.io/project/clusters) page, click the target cluster name to go to its overview page.
 
 4. In the upper-right corner, click **Connect**.
 

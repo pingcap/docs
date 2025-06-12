@@ -33,7 +33,7 @@ For a TiDB Cloud Starter free cluster, you can increase the usage quota by upgra
 
 To update the spending limit for a TiDB Cloud Starter cluster, perform the following steps:
 
-1. On the [**Clusters**](https://console.tidb.io/clusters) page of your project, click the name of your target cluster to go to its overview page.
+1. On the [**Clusters**](https://console.tidb.io/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
 
     > **Tip:**
     >

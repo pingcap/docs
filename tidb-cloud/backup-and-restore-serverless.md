@@ -9,7 +9,7 @@ This document describes how to back up and restore your TiDB Cloud cluster data 
 
 ## View the Backup page
 
-1. On the [**Clusters**](https://console.tidb.io/clusters) page, click the name of your target cluster to go to its overview page.
+1. On the [**Clusters**](https://console.tidb.io/project/clusters) page, click the name of your target cluster to go to its overview page.
 
     > **Tip:**
     >

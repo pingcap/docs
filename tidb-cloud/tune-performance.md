@@ -13,7 +13,7 @@ TiDB Cloud provides [Slow Query](#slow-query) and [Statement Analysis](#statemen
 
 ## View the Diagnosis page
 
-1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target cluster to go to its overview page.
+1. On the [**Clusters**](https://console.tidb.io/project/clusters) page, click the name of your target cluster to go to its overview page.
 
     > **Tip:**
     >

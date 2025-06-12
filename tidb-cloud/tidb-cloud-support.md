@@ -15,7 +15,7 @@ You can access the PingCAP Help Center via <https://tidb.support.pingcap.com/ser
 
 - Click **?** in the lower-right corner of the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), and then click **Request Support**.
 - Click **Support** in the lower-left corner of [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), and then click **Create Ticket**.
-- On the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click **...** in the row of your cluster, and then select **Get Support**.
+- On the [**Clusters**](https://console.tidb.io/project/clusters) page of your project, click **...** in the row of your cluster, and then select **Get Support**.
 - On your cluster overview page, click **...** in the upper-right corner, and then select **Get Support**.
 
 ## Create an account or billing support ticket
