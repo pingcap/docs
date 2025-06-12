@@ -39,7 +39,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     TiDB Cloud Serverless now provides detailed insights into each SQL statement's [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit). You can view both the **Total RU** and **Mean RU** costs per SQL statement. This feature helps you identify and analyze RU costs, offering opportunities for potential cost savings in your operations.
 
-    To check your SQL statement RU details, navigate to the **Diagnosis** page of [your TiDB Cloud Serverless cluster](https://tidbcloud.com/console/clusters) and then click the **SQL Statement** tab.
+    To check your SQL statement RU details, navigate to the **Diagnosis** page of [your TiDB Cloud Serverless cluster](https://tidbcloud.com/project/clusters) and then click the **SQL Statement** tab.
 
 ## November 21, 2023
 
@@ -632,7 +632,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Revamp the UI to make [cluster creation](https://tidbcloud.com/console/clusters/create-cluster) experience more user-friendly, enabling you to create and configure clusters with just a few clicks.
+- Revamp the UI to make [cluster creation](https://tidbcloud.com/project/clusters/create-cluster) experience more user-friendly, enabling you to create and configure clusters with just a few clicks.
 
     The new design focuses on simplicity, reducing visual clutter, and providing clear instructions. After clicking **Create** on the cluster creation page, you will be directed to the cluster overview page without having to wait for the cluster creation to be completed.
 
@@ -960,7 +960,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     You can request support for a cluster in either of the following ways:
 
-    - On the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click **...** in the row of your cluster and select **Get Support**.
+    - On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click **...** in the row of your cluster and select **Get Support**.
     - On your cluster overview page, click **...** in the upper-right corner and select **Get Support**.
 
 ## January 5, 2023
@@ -971,7 +971,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
   In Chat2Query, you can either let AI generate SQL queries automatically or write SQL queries manually, and run SQL queries against databases without a terminal.
 
-  To access Chat2Query, go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click your cluster name, and then click **Chat2Query** in the left navigation pane.
+  To access Chat2Query, go to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click your cluster name, and then click **Chat2Query** in the left navigation pane.
 
 ## January 4, 2023
 
@@ -997,7 +997,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Simplify the display of the [**Clusters**](https://tidbcloud.com/console/clusters) page and the cluster overview page.
+- Simplify the display of the [**Clusters**](https://tidbcloud.com/project/clusters) page and the cluster overview page.
 
-    - You can click the cluster name on the [**Clusters**](https://tidbcloud.com/console/clusters) page to enter the cluster overview page and start operating the cluster.
+    - You can click the cluster name on the [**Clusters**](https://tidbcloud.com/project/clusters) page to enter the cluster overview page and start operating the cluster.
     - Remove the **Connection** and **Import** panes from the cluster overview page. You can click **Connect** in the upper-right corner to get the connection information and click **Import** in the left navigation pane to import data.

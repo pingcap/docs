@@ -15,7 +15,7 @@ This document describes how to connect to your TiDB Cloud Serverless cluster via
 
 To connect to a TiDB Cloud Serverless cluster via public endpoint, take the following steps:
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
@@ -41,7 +41,7 @@ To connect to a TiDB Cloud Serverless cluster via public endpoint, take the foll
 
 If you do not need to use a public endpoint of a TiDB Cloud Serverless cluster, you can disable it to prevent connections from the internet:
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. In the left navigation pane, click **Settings** > **Networking**.
 
@@ -57,7 +57,7 @@ After disabling the public endpoint, the `Public` entry in the **Connection Type
 
 You can re-enable the public endpoint after disabling it:
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. In the left navigation pane, click **Settings** > **Networking**.
 

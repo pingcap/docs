@@ -50,7 +50,7 @@ For more information, see [Creating a bucket](https://docs.aws.amazon.com/Amazon
 
 1. Get the TiDB Cloud Account ID and the External ID of the TiDB cluster that you want to enable audit logging.
 
-    1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+    1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
         > **Tip:**
         >
@@ -124,7 +124,7 @@ For more information, see [Creating storage buckets](https://cloud.google.com/st
 
 1. Get the Google Cloud Service Account ID of the TiDB cluster that you want to enable audit logging.
 
-    1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+    1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
         > **Tip:**
         >
@@ -221,7 +221,7 @@ For more information, see [Create an Azure storage account](https://learn.micros
 
 #### Step 3. Enable audit logging
 
-1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
     > **Tip:**
     >

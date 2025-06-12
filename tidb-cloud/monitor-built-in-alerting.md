@@ -17,7 +17,7 @@ This document describes how to do these operations and provides the TiDB Cloud b
 
 In TiDB Cloud, you can view both active and closed alerts on the **Alerts** page.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
     > **Tip:**
     >

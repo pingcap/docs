@@ -25,7 +25,7 @@ The recommended use cases of SQL Editor are as follows:
 
 ## Access SQL Editor
 
-1. Go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1. Go to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
     > **Tip:**
     >

@@ -23,7 +23,7 @@ Configure the bucket access for TiDB Cloud and get the Role ARN as follows:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), get the corresponding TiDB Cloud account ID and external ID of the target TiDB cluster.
 
-    1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+    1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
         > **Tip:**
         >
@@ -154,7 +154,7 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
 
 1. In the TiDB Cloud console, get the Google Cloud Service Account ID of the target TiDB cluster.
 
-    1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+    1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
         > **Tip:**
         >

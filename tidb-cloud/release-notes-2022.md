@@ -306,7 +306,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-* Optimize the UI of the [Clusters](https://tidbcloud.com/console/clusters) page and the cluster overview page for better user experience.
+* Optimize the UI of the [Clusters](https://tidbcloud.com/project/clusters) page and the cluster overview page for better user experience.
 
     In the new design, the entrances of upgrade to Dedicated Tier, cluster connection, and data import are highlighted.
 
@@ -384,7 +384,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     Currently, TiDB Cloud API is still in beta and only available upon request. You can apply for API access by submitting a request:
 
-    * Click **Help** in the lower-right corner of [TiDB Cloud console](https://tidbcloud.com/console/clusters).
+    * Click **Help** in the lower-right corner of [TiDB Cloud console](https://tidbcloud.com/project/clusters).
     * In the dialog, fill in "Apply for TiDB Cloud API" in the **Description** field and click **Send**.
 
 ## August 16, 2022
@@ -430,7 +430,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 * Add TiDB Cloud Support Plans (Basic, Standard, Enterprise, and Premium) to meet different support needs of customers' organizations. For more information, see [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
-* Optimize the UI of the [Clusters](https://tidbcloud.com/console/clusters) page and the cluster details page:
+* Optimize the UI of the [Clusters](https://tidbcloud.com/project/clusters) page and the cluster details page:
 
     * Add **Connect** and **Import data** buttons to the **Clusters** page.
     * Move **Connect** and **Import data** buttons to the upper-right corner on the cluster details page.
