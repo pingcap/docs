@@ -110,7 +110,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
     For more information, see [documentation](/tiflash/tiflash-supported-pushdown-calculations.md).
 
-* Support pushing down the following date functions to TiKV [#59365](https://github.com/pingcap/tidb/issues/59365) [#18184](https://github.com/tikv/tikv/issues/18184) @[gengliqi](https://github.com/gengliqi) **tw@Oreoxmt** <!--1837-->
+* Support pushing down the following date functions to TiKV [#59365](https://github.com/pingcap/tidb/issues/59365) [#18184](https://github.com/tikv/tikv/issues/18184) [#58940](https://github.com/pingcap/tidb/issues/58940) [#59497](https://github.com/pingcap/tidb/issues/59497) @[wshwsh12](https://github.com/wshwsh12) @[xzhangxian1008] @[gengliqi](https://github.com/gengliqi) **tw@Oreoxmt** <!--1837-->
 
     * `FROM_UNIXTIME()`
     * `TIMESTAMPDIFF()`
