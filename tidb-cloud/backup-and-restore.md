@@ -188,7 +188,7 @@ To delete an existing backup file for your TiDB Cloud Dedicated cluster, perform
 
 #### Delete a running backup job
 
-To delete a running backup job for your TiDB Cloud Dedicated cluster, it is similar as [**Delete backup files**](#delete-backup-files).
+To delete a running backup job for your TiDB Cloud Dedicated cluster, follow a process similar to [**Delete backup files**](#delete-backup-files).
 
 1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
