@@ -632,7 +632,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Revamp the UI to make [cluster creation](https://tidbcloud.com/project/clusters/create-cluster) experience more user-friendly, enabling you to create and configure clusters with just a few clicks.
+- Revamp the UI to make [cluster creation](https://tidbcloud.com/clusters/create-cluster) experience more user-friendly, enabling you to create and configure clusters with just a few clicks.
 
     The new design focuses on simplicity, reducing visual clutter, and providing clear instructions. After clicking **Create** on the cluster creation page, you will be directed to the cluster overview page without having to wait for the cluster creation to be completed.
 

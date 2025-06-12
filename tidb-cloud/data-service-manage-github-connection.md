@@ -90,7 +90,7 @@ When updating the configuration files, pay attention to the following:
 
 | File directory  | Notes |
 | ---------|---------|
-| `data_source/cluster.json`     | When updating this file, make sure that you have access to the linked clusters. You can get the cluster ID from the cluster URL. For example, if the cluster URL is `https://tidbcloud.com/project/clusters/1234567891234567890/overview`, the cluster ID is `1234567891234567890`. |
+| `data_source/cluster.json`     | When updating this file, make sure that you have access to the linked clusters. You can get the cluster ID from the cluster URL. For example, if the cluster URL is `https://tidbcloud.com/clusters/1234567891234567890/overview`, the cluster ID is `1234567891234567890`. |
 | `http_endpoints/config.json`     | When modifying the endpoints, make sure that you follow the rules described in [HTTP endpoint configuration](/tidb-cloud/data-service-app-config-files.md#http-endpoint-configuration).   |
 | `http_endpoints/sql/method-<endpoint-path>.sql`| To add or remove SQL files in the `http_endpoints/sql` directory, you need to update the corresponding endpoint configurations as well. |
 | `datapp_config.json` | Do not change the `app_id` field in this file unless your `dataapp_config.json` file is copied from another Data App and you want to update it to the ID of your current Data App. Otherwise, the deployment triggered by this modification will fail. |
