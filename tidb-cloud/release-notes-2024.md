@@ -196,7 +196,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- [Data Service (beta)](https://tidbcloud.com/console/data-service) supports automatically generating vector search endpoints.
+- [Data Service (beta)](https://tidbcloud.com/project/data-service) supports automatically generating vector search endpoints.
 
     If your table contains [vector data types](/tidb-cloud/vector-search-data-types.md), you can automatically generate a vector search endpoint that calculates vector distances based on your selected distance function.
 
@@ -226,7 +226,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- [Data Service (beta)](https://tidbcloud.com/console/data-service) provides an endpoint library with predefined system endpoints that you can directly add to your Data App, reducing the effort in your endpoint development.
+- [Data Service (beta)](https://tidbcloud.com/project/data-service) provides an endpoint library with predefined system endpoints that you can directly add to your Data App, reducing the effort in your endpoint development.
 
     Currently, the library only includes the `/system/query` endpoint, which enables you to execute any SQL statement by simply passing the statement in the predefined `sql` parameter. This endpoint facilitates the immediate execution of SQL queries, enhancing flexibility and efficiency.
 
@@ -340,7 +340,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Support [creating a VPC peering](/tidb-cloud/set-up-vpc-peering-connections.md) when your VPC is in a different region from the VPC of TiDB Cloud.
 
-- [Data Service (beta)](https://tidbcloud.com/console/data-service) supports path parameters alongside query parameters.
+- [Data Service (beta)](https://tidbcloud.com/project/data-service) supports path parameters alongside query parameters.
 
     This feature enhances resource identification with structured URLs and improves user experience, search engine optimization (SEO), and client integration, offering developers more flexibility and better alignment with industry standards.
 
@@ -446,7 +446,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see [Disable a Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md#disable-a-public-endpoint).
 
-- [Data Service (beta)](https://tidbcloud.com/console/data-service) supports configuring a custom domain to access endpoints in a Data App.
+- [Data Service (beta)](https://tidbcloud.com/project/data-service) supports configuring a custom domain to access endpoints in a Data App.
 
     By default, TiDB Cloud Data Service provides a domain `<region>.data.tidbcloud.com` to access each Data App's endpoints. For enhanced personalization and flexibility, you can now configure a custom domain for your Data App instead of using the default domain. This feature enables you to use branded URLs for your database services and enhances security.
 
