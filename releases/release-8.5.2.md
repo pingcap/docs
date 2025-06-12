@@ -5,7 +5,7 @@ summary: Learn about the improvements and bug fixes in TiDB 8.5.2.
 
 # TiDB 8.5.2 Release Notes
 
-Release date: June 4, 2025
+Release date: June 12, 2025
 
 TiDB version: 8.5.2
 
@@ -58,14 +58,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - Fix the issue that the performance and stability of `information_schema` are affected in certain scenarios [#58142](https://github.com/pingcap/tidb/issues/58142) [#58363](https://github.com/pingcap/tidb/issues/58363) [#58712](https://github.com/pingcap/tidb/issues/58712) @[tiancaiamao](https://github.com/tiancaiamao)
     - Fix the issue that `tidb_txn_entry_size_limit` cannot be dynamically adjusted in internal TiDB sessions when the Distributed eXecution Framework (DXF) is enabled [#59506](https://github.com/pingcap/tidb/issues/59506) @[D3Hunter](https://github.com/D3Hunter)
     - Fix the issue that the `IMPORT INTO` feature fails to properly handle unique key conflicts when Global Sort is enabled [#59650](https://github.com/pingcap/tidb/issues/59650) @[lance6716](https://github.com/lance6716)
-    - Fix the issue that injecting network latency errors in the global sorting data path causes the `IMPORT INTO` operation to fail [#50451](https://github.com/pingcap/tidb/issues/50451) @[D3Hunter](https://github.com/D3Hunter) 
+    - Fix the issue that injecting network latency errors in the global sorting data path causes the `IMPORT INTO` operation to fail [#50451](https://github.com/pingcap/tidb/issues/50451) @[D3Hunter](https://github.com/D3Hunter)
     - Fix the issue that executing `ADD UNIQUE INDEX` might cause data inconsistency [#60339](https://github.com/pingcap/tidb/issues/60339) @[tangenta](https://github.com/tangenta)
     - Fix the issue that the value of the `LABELS` column is incorrectly displayed in the `BINLOG_STATUS` column when querying `INFORMATION_SCHEMA.TIDB_SERVERS_INFO` [#59245](https://github.com/pingcap/tidb/issues/59245) @[lance6716](https://github.com/lance6716)
     - Fix the issue that injecting a kill PD Leader fault during index creation might cause data inconsistency [#59701](https://github.com/pingcap/tidb/issues/59701) @[tangenta](https://github.com/tangenta)
     - Fix the issue that TiDB runs out of memory (OOM) after creating approximately 6.5 million tables [#58368](https://github.com/pingcap/tidb/issues/58368) @[lance6716](https://github.com/lance6716)
     - Fix the issue that adding a unique key might fail when importing a large amount of data with the Global Sort feature enabled [#59725](https://github.com/pingcap/tidb/issues/59725) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - Fix the issue that TiDB returns unreadable error messages after failing to access S3 external storage [#59326](https://github.com/pingcap/tidb/issues/59326) @[lance6716](https://github.com/lance6716)
-    - Fix the issue that querying `infoschema.tables` returns mismatched `table_schema` and `table_name` values [#60593](https://github.com/pingcap/tidb/issues/60593) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that querying `information_schema.tables` returns mismatched `table_schema` and `table_name` values [#60593](https://github.com/pingcap/tidb/issues/60593) @[tangenta](https://github.com/tangenta)
     - Fix the issue that the DDL notifier might deliver incorrect notifications when internal SQL commits fail [#59055](https://github.com/pingcap/tidb/issues/59055) @[lance6716](https://github.com/lance6716)
     - Fix the issue that `ADD INDEX` DDL operations still split SST files by 96 MiB when the Global Sort feature is enabled, despite the Region size is 256 MiB [#59962](https://github.com/pingcap/tidb/issues/59962) @[D3Hunter](https://github.com/D3Hunter)
     - Fix the issue that TiDB servers run out of memory (OOM) when memory usage exceeds 80% during data import with the Global Sort feature enabled [#59508](https://github.com/pingcap/tidb/issues/59508) @[D3Hunter](https://github.com/D3Hunter)
@@ -106,7 +106,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - Fix the issue that TiFlash startup might be blocked when `profiles.default.init_thread_count_scale` is set to `0` [#9906](https://github.com/pingcap/tiflash/issues/9906) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - Fix the issue that queries on a partitioned table might return errors after executing `ALTER TABLE ... RENAME COLUMN` on that partitioned table [#9787](https://github.com/pingcap/tiflash/issues/9787) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - Fix the issue that a `Not found column` error might occur when a query involves virtual columns and triggers remote reads [#9561](https://github.com/pingcap/tiflash/issues/9561) @[guo-shaoge](https://github.com/guo-shaoge)
-    - Fix the issue that TiFlash might consume memory greatly when tables in a cluster contain a large number of `ENUM` type columns [#9947](https://github.com/pingcap/tiflash/issues/9947) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix the issue that TiFlash might consume a large amount of memory when tables in a cluster contain a large number of `ENUM` type columns [#9947](https://github.com/pingcap/tiflash/issues/9947) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - Fix the issue that TiFlash might fail to restart after inserting a single row of data larger than 16 MiB [#10052](https://github.com/pingcap/tiflash/issues/10052) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - Fix the issue that TiFlash might not clean some disk data correctly after new data is inserted to tables with vector indexes, causing abnormal disk space consumption [#9946](https://github.com/pingcap/tiflash/issues/9946) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - Fix the issue that TiFlash might delete previously created vector indexes unexpectedly after multiple vector indexes are created on the same table, causing performance degradation [#9971](https://github.com/pingcap/tiflash/issues/9971) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
