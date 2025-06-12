@@ -311,7 +311,7 @@ To set the default credit card, perform the following steps:
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the drop-down box in the upper-left corner.
 2. In the left navigation pane, click **Billing**.
 3. On the **Billing** page, click the **Payment Method** tab.
-4. Select a credit card in the credit card list, and then click **Yes** when are prompted whether to set it as the default credit card.
+4. Select a credit card in the credit card list, and then click **Yes** when you are prompted to set it as the default credit card.
 
 ## Contract
 
