@@ -285,7 +285,7 @@ If you are in the `Organization Owner` or `Organization Billing Manager` role of
 
 The fee is deducted from a bound credit card according to your cluster usage. To add a valid credit card, you can use either of the following methods:
 
-- When you are creating a TiDB Cloud Dedicated cluster:
+- When you are creating a TiDB Cloud Essential cluster:
 
     1. On the **Create Cluster** page, click **Add Credit Card**.
     2. In the **Add a Card** dialog, fill in the card information and billing address.
