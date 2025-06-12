@@ -52,7 +52,7 @@ To view SQL users of a cluster, take the following steps:
 
 To create a SQL user for a cluster, take the following steps:
 
-Navigate to the [**SQL Users**](#view-sql-users) page of your cluster.
+1. Navigate to the [**SQL Users**](#view-sql-users) page of your cluster.
 
 2. Click **Create SQL User** in the upper-right corner.
 
