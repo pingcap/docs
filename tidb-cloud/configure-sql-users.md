@@ -52,7 +52,7 @@ To view SQL users of a cluster, take the following steps:
 
 To create a SQL user for a cluster, take the following steps:
 
-1. Navigate to the [**SQL Users**](/tidb-cloud/configure-sql-users.md#view-sql-users) page of your cluster.
+Navigate to the [**SQL Users**](#view-sql-users) page of your cluster.
 
 2. Click **Create SQL User** in the upper-right corner.
 
