@@ -23,7 +23,7 @@ To view, create, edit, or delete budgets of your organization or projects, you m
 
 To view the budget page of your organization, take the following steps:
 
-1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the drop-down box in the upper-left corner.
+1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Billing**.
 3. On the **Billing** page, click the **Budgets** tab.
 
@@ -33,7 +33,7 @@ For each budget, you can view its name, type, status, amount used, budget amount
 
 To create a custom budget to monitor the spending of your organization or specific projects, take the following steps:
 
-1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the drop-down box in the upper-left corner.
+1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Billing**.
 3. On the **Billing** page, click the **Budgets** tab, and then click **Create Custom Budget**. You can create up to five custom budgets.
 4. Provide the budget basic settings.
@@ -64,7 +64,7 @@ To create a custom budget to monitor the spending of your organization or specif
 
 To edit a custom budget, take the following steps:
 
-1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the drop-down box in the upper-left corner.
+1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Billing**.
 3. On the **Billing** page, click the **Budgets** tab.
 4. Locate the row of your target budget, click **...** in that row, and then click **Edit**.
@@ -85,7 +85,7 @@ To edit a custom budget, take the following steps:
 
 To delete a custom budget, take the following steps:
 
-1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the drop-down box in the upper-left corner.
+1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Billing**.
 3. On the **Billing** page, click the **Budgets** tab.
 4. Locate the row of your target budget, click **...** in that row, and then click **Delete**.

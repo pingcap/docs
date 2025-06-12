@@ -17,7 +17,7 @@ TiDB Cloud provides [Slow Query](#slow-query) and [Statement Analysis](#statemen
 
     > **Tip:**
     >
-    > You can use the drop-down box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
 2. In the left navigation pane, click **Monitoring** > **Diagnosis**.
 
