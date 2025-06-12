@@ -73,7 +73,7 @@ Before you begin to create an endpoint:
 
 ### Step 1. Select a TiDB cluster
 
-1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target TiDB cluster to go to its overview page. You can select a cluster with any of the following statuses:
+1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click the name of your target TiDB cluster to go to its overview page. You can select a cluster with any of the following statuses:
 
     - **Available**
     - **Restoring**

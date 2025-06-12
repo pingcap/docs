@@ -322,7 +322,7 @@ Now you have successfully set up the VPC peering connection. Next, [connect to t
 
 ## Connect to the TiDB cluster
 
-1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target cluster to go to its overview page.
+1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner, and select **VPC Peering** from the **Connection Type** drop-down list.
 

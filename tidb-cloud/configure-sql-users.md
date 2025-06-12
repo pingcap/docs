@@ -40,7 +40,7 @@ After a SQL user is granted both a built-in role and multiple custom roles, the 
 
 To view SQL users of a cluster, take the following steps:
 
-1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target cluster to go to its overview page.
+1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click the name of your target cluster to go to its overview page.
 
     > **Tip:**
     >
