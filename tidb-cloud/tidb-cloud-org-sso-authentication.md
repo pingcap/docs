@@ -32,7 +32,7 @@ Before migrating to Cloud Organization SSO, check and confirm the items in this 
 
 ### Decide a custom URL for the TiDB Cloud login page of your organization
 
-When Cloud Organization SSO is enabled, your members must use your custom URL instead of the public login URL (`https://tidbcloud.com`) to log in to TiDB Cloud.
+When Cloud Organization SSO is enabled, your members must use your custom URL instead of the public login URL (`https://console.tidb.io`) to log in to TiDB Cloud.
 
 The custom URL cannot be changed after the enablement, so you need to decide which URL to be used in advance.
 
@@ -67,7 +67,7 @@ For security considerations, if you choose to enable auto-provision, it is recom
 Before enabling Cloud Organization SSO, make sure to inform your members about the following:
 
 - The custom login URL of TiDB Cloud
-- The time when to start using the custom login URL instead of `https://tidbcloud.com` for login
+- The time when to start using the custom login URL instead of `https://console.tidb.io` for login
 - The available authentication methods
 - Whether members need invitations to log in to the custom URL
 
