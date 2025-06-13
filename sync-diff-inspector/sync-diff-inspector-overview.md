@@ -59,13 +59,16 @@ For TiDB versions before v9.0.0:
 
 ## Database privileges for sync-diff-inspector
 
-sync-diff-inspector needs to obtain the information of table schema and to query data. The required database privileges are as follows:
+To access table schemas and query data, sync-diff-inspector requires specific database privileges. Grant the following privileges on both the upstream and downstream databases:
 
-* Upstream/Downstream database
-    - `SELECT` (checks data for comparison)
+- `SELECT`: required for data comparison.
+- `RELOAD`: required to view table schemas.
     - `RELOAD` (views table schema)
 
-**Note**: Please avoid granting the [`SHOW DATABASES`](https://dev.mysql.com/doc/refman/8.4/en/privileges-provided.html#priv_show-databases) privilege on all databases (`*.*`), otherwise sync-diff-inspector will try to visit the inaccessible databases. For MySQL data sources, ensure the [`skip_show_database`](https://dev.mysql.com/doc/refman/8.4/en/server-system-variables.html#sysvar_skip_show_database) system variable is set to `OFF` too. Otherwise, the check may fail.
+> **Note**:
+> 
+> - **DO NOT** grant the [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md) privilege on all databases (`*.*`). Otherwise, sync-diff-inspector will attempt to access inaccessible databases, which causes errors.
+> - For MySQL data sources, ensure that the [`skip_show_database`](https://dev.mysql.com/doc/refman/8.4/en/server-system-variables.html#sysvar_skip_show_database) system variable is set to `OFF`. If this variable is set to `ON`, the check might fail.
 
 ## Configuration file description
 
