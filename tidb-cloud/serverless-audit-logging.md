@@ -41,7 +41,6 @@ The filter rule contains the following fields:
 
 - `users`: A list of user names to filter audit events. You can use the wildcard `%` to match any user name.
 - `filters`: A list of filter objects. Each filter object can contain the following fields:
-
   - `classes`: A list of event classes to filter audit events. For example, `["QUERY", "EXECUTE"]`.
   - `tables`: A list of table filters. See [Table filters](https://docs.pingcap.com/tidb/stable/table-filter/) for more details.
   - `statusCodes`: A list of status codes to filter audit events. 1 means success, 0 means failure.

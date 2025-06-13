@@ -742,7 +742,7 @@
       - [delete](/tidb-cloud/ticloud-serverless-sql-user-delete.md)
       - [list](/tidb-cloud/ticloud-serverless-sql-user-list.md)
       - [update](/tidb-cloud/ticloud-serverless-sql-user-update.md)
-    - auditlog
+    - audit-log
       - [config](/tidb-cloud/ticloud-auditlog-config.md)
       - [describe](/tidb-cloud/ticloud-auditlog-describe.md)
       - [download](/tidb-cloud/ticloud-auditlog-download.md)
