@@ -17,13 +17,13 @@ The audit logging feature is disabled by default. To audit a cluster, you need t
 
 ## Enable audit logging
 
-To enable audit logging for a TiDB Cloud Serverless cluster, using the [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-config.md)
+To enable audit logging for a TiDB Cloud Serverless cluster, use the [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-config.md).
 
 ```shell
 ticloud serverless audit-log config -c <cluster-id> --enabled
 ```
 
-To disable audit logging for a TiDB Cloud Serverless cluster, using the [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-config.md)
+To disable audit logging for a TiDB Cloud Serverless cluster, use the [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-config.md).
 
 ```shell
 ticloud serverless audit-log config -c <cluster-id> --enabled=false
@@ -39,12 +39,12 @@ To filter the audit logging, you need to create a filter rule to specify which e
 
 The filter rule contains the following fields:
 
-- `users`: A list of user names to filter the audit record. You can use the wildcard `%` to match any user name.
+- `users`: A list of user names to filter audit events. You can use the wildcard `%` to match any user name.
 - `filters`: A list of filter objects. Each filter object can contain the following fields:
 
-  - `classes`: A list of event classes to filter the audit record. For example, `["QUERY", "EXECUTE"]`.
+  - `classes`: A list of event classes to filter audit events. For example, `["QUERY", "EXECUTE"]`.
   - `tables`: A list of table filters. See [Table filters](https://docs.pingcap.com/tidb/stable/table-filter/) for more details.
-  - `statusCodes`: A list of status code to filter the audit record. 1 means success. 0 means failure.
+  - `statusCodes`: A list of status codes to filter audit events. 1 means success, 0 means failure.
 
 The classes of events that can be filtered include:
 
@@ -97,7 +97,7 @@ To update a filter rule, you can run the following command:
 ticloud serverless audit-log filter update --cluster-id <cluster-id> --name <rule-name> --rule '{"users":["%@%"],"filters":[{"classes":["QUERY"],"tables":["test.t"]}]}'
 ```
 
-Pay attention that you need to pass the complete `--rule` field 
+Note that you need to pass the complete `--rule` field when updating.
 
 ### Delete a filter rule
 
@@ -109,7 +109,7 @@ ticloud serverless audit-log filter delete --cluster-id <cluster-id> --name <rul
 
 ## Configure audit logging
 
-### Redacted
+### Data redaction
 
 TiDB Cloud Serverless redacts sensitive data in the audit logs by default. For example, the following SQL statement:
 
@@ -123,7 +123,7 @@ is redacted as follows:
 INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
 ```
 
-If you want to disable the redaction, using the [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-config.md)
+If you want to disable redaction, use the [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-config.md).
 
 ```shell
 ticloud serverless audit-log config --cluster-id <cluster-id> --unredacted
@@ -131,14 +131,14 @@ ticloud serverless audit-log config --cluster-id <cluster-id> --unredacted
 
 ### Rotation
 
-TiDB Cloud Serverless will start to generate a new audit log file when one of the following conditions is met:
+TiDB Cloud Serverless generates a new audit log file when one of the following conditions is met:
 
 - The audit log file reaches 100 MB.
-- The time interval reaches 1 hour. Note that the audit log files may not be generated exactly at the time interval of 1 hour, it may be delayed for a few minutes depending on the underlying schedule.
+- The time interval reaches 1 hour. Note that audit log file generation may be delayed for a few minutes depending on the underlying schedule.
 
 > **Note:**
 >
-> The rotation can not be configured at present. TiDB Cloud Serverless will automatically rotate the audit log files based on the above conditions.
+> The rotation cannot be configured at present. TiDB Cloud Serverless automatically rotates the audit log files based on the above conditions.
 
 ## Access audit logging
 
@@ -158,6 +158,6 @@ ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <o
 
 ## Audit logging limitations
 
-- The audit logging is only available for TiDB Cloud CLI, the support of TiDB Cloud Console will be available soon.
-- The audit logging can only be generated in the TiDB Cloud, the support of external storage will be available soon.
+- Audit logging is only available via TiDB Cloud CLI; support for TiDB Cloud Console will be available soon.
+- Audit logs can only be stored in TiDB Cloud at present; support for external storage will be available soon.
 - TiDB Cloud Serverless does not guarantee the sequential order of the audit logs, which means you might have to review all log files to see the latest events. To order the logs, you can use the `TIME` field in the event records.
