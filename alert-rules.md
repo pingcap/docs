@@ -605,8 +605,8 @@ This section gives the alert rules for the TiKV component.
 
 * Solution:
 
-    1. View the scheduler command duration in the Scheduler-All monitor and see which command is most time-consuming;
-    2. View the scheduler scan details in the Scheduler-All monitor and see whether `total` and `process` match. If they differ a lot, there are many invalid scans. You can also see whether there is `over seek bound`. If there is too much, it indicates GC does not work in time;
+    1. Identify the most time-consuming command by viewing the scheduler command duration in the `Scheduler` and `Scheduler-${cmd}` (`${cmd}` is the write command to query) monitors;
+    2. Check the `total` and `process` values in the scheduler scan details of the `Scheduler` and `Scheduler-${cmd}` monitors and see whether `total` and `process` match.
     3. View the storage async snapshot/write duration in the Storage monitor and see whether the Raft operation is performed in time.
 
 #### `TiKV_thread_apply_worker_cpu_seconds`
