@@ -95,7 +95,7 @@ The detailed steps are as follows:
     7. Choose whether to enable **Branching** to create new branches for preview environments.
     8. Click **Add Integration and Return to Vercel**.
 
-![Vercel Integration Page](/media/tidb-cloud/vercel/integration-link-cluster-page.png)
+![Vercel Integration Page](./media/tidb-cloud/vercel/integration-link-cluster-page.png)
 
 6. Get back to your Vercel dashboard, go to your Vercel project, click **Settings** > **Environment Variables**, and check whether the environment variables for your target TiDB cluster have been automatically added.
 
@@ -139,7 +139,7 @@ The detailed steps are as follows:
     4. Select your target TiDB Data App.
     6. Click **Add Integration and Return to Vercel**.
 
-![Vercel Integration Page](/media/tidb-cloud/vercel/integration-link-data-app-page.png)
+![Vercel Integration Page](./media/tidb-cloud/vercel/integration-link-data-app-page.png)
 
 6. Get back to your Vercel dashboard, go to your Vercel project, click **Settings** > **Environment Variables**, and check whether the environment variables for your target Data App have been automatically added.
 
@@ -163,7 +163,7 @@ If you have installed [TiDB Cloud Vercel integration](https://vercel.com/integra
 3. Click **Configure**.
 4. Click **Add Link** or **Remove** to add or remove connections.
 
-    ![Vercel Integration Configuration Page](/media/tidb-cloud/vercel/integration-vercel-configuration-page.png)
+    ![Vercel Integration Configuration Page](./media/tidb-cloud/vercel/integration-vercel-configuration-page.png)
 
     When you remove a connection, the environment variables set by the integration workflow are removed from the Vercel project, too. However, this action does not affect the data of the TiDB Cloud Serverless cluster.
 
@@ -192,15 +192,15 @@ After you push changes to the Git repository, Vercel will trigger a preview depl
 2. Add some changes and push the changes to the remote repository.
 3. Vercel will trigger a preview deployment for the new branch.
 
-    ![Vercel Preview_Deployment](/media/tidb-cloud/vercel/vercel-preview-deployment.png)
+    ![Vercel Preview_Deployment](./media/tidb-cloud/vercel/vercel-preview-deployment.png)
 
     1. During the deployment, TiDB Cloud integration will automatically create a TiDB Cloud Serverless branch with the same name as the Git branch. If the TiDB Cloud Serverless branch already exists, TiDB Cloud integration will skip this step.
 
-        ![TiDB_Cloud_Branch_Check](/media/tidb-cloud/vercel/tidbcloud-branch-check.png)
+        ![TiDB_Cloud_Branch_Check](./media/tidb-cloud/vercel/tidbcloud-branch-check.png)
 
     2. After the TiDB Cloud Serverless branch is ready, TiDB Cloud integration will set environment variables in the preview deployment for the Vercel project.
 
-        ![Preview_Envs](/media/tidb-cloud/vercel/preview-envs.png)
+        ![Preview_Envs](./media/tidb-cloud/vercel/preview-envs.png)
 
     3. TiDB Cloud integration will also register a blocking check to wait for the TiDB Cloud Serverless branch to be ready. You can rerun the check manually.
 4. After the check is passed, you can visit the preview deployment to see the changes.
@@ -224,7 +224,7 @@ After you push changes to the Git repository, Vercel will trigger a preview depl
 
 2. Go to your Vercel dashboard > Vercel project > **Settings** > **Environment Variables**, and then [declare each environment variable value](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable) according to the connection information of your TiDB cluster.
 
-    ![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
+    ![Vercel Environment Variables](./media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
 
 Here we use a Prisma application as an example. The following is a datasource setting in the Prisma schema file for a TiDB Cloud Serverless cluster:
 
@@ -249,7 +249,7 @@ You can get the information of `<User>`, `<Password>`, `<Endpoint>`, `<Port>`, a
 
 2. Go to your Vercel dashboard > Vercel project > **Settings** > **Environment Variables**, and then [declare each environment variable value](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable) according to the connection information of your Data App.
 
-    ![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
+    ![Vercel Environment Variables](./media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
 
     In Vercel, you can declare the environment variables as follows.
 

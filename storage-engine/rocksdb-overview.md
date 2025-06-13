@@ -16,7 +16,7 @@ RocksDB allows users to create multiple Column Families (CFs). CFs have their ow
 
 The architecture of TiKV is illustrated as follows:
 
-![TiKV RocksDB](/media/tikv-rocksdb.png)
+![TiKV RocksDB](./media/tikv-rocksdb.png)
 
 As the storage engine of TiKV, RocksDB is used to store Raft logs and user data. All data in a TiKV node shares two RocksDB instances. One is for Raft log (often called raftdb), and the other is for user data and MVCC metadata (often called kvdb). There are four CFs in kvdb: raft, lock, default, and write:
 

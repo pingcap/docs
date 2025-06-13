@@ -28,7 +28,7 @@ TiDB is constantly measuring and collecting SQL processing paths and database ti
 
 The following figure shows a typical SQL process. You can see that most SQL processing paths are covered in TiDB performance metrics. The database time is broken down into different dimensions, which are colored accordingly. You can quickly understand the workload characteristics and catch the bottlenecks inside the database if any.
 
-![database time decomposition chart](/media/performance/dashboard-diagnostics-time-relation.png)
+![database time decomposition chart](./media/performance/dashboard-diagnostics-time-relation.png)
 
 Database time is the sum of all SQL processing time. A breakdown of the database time into the following three dimensions helps you quickly identify bottlenecks in TiDB:
 
@@ -82,7 +82,7 @@ The diagrams of database time breakdown and execution time overview present both
 
 **Example 1: TPC-C workload**
 
-![TPC-C](/media/performance/tpcc_db_time.png)
+![TPC-C](./media/performance/tpcc_db_time.png)
 
 - Database Time by SQL Type: Most time-consuming statements are `commit`, `update`, `select`, and `insert` statements.
 - Database Time by SQL Phase: The most time-consuming phase is SQL execution in green.
@@ -99,7 +99,7 @@ The diagrams of database time breakdown and execution time overview present both
 
 **Example 2: OLTP read-heavy workload**
 
-![OLTP](/media/performance/oltp_normal_db_time.png)
+![OLTP](./media/performance/oltp_normal_db_time.png)
 
 - Database Time by SQL Type: Major time-consuming statements are `SELECT`, `COMMIT`, `UPDATE`, and `INSERT`, among which `SELECT` consumes most database time.
 - Database Time by SQL Phase: Most time is consumed in the `execute` phase in green.
@@ -107,7 +107,7 @@ The diagrams of database time breakdown and execution time overview present both
 
 **Example 3: Read-only OLTP workload**
 
-![OLTP](/media/performance/oltp_long_compile_db_time.png)
+![OLTP](./media/performance/oltp_long_compile_db_time.png)
 
 - Database Time by SQL Type: Mainly are `SELECT` statements.
 - Database Time by SQL Phase: Major time-consuming phases are `compile` in orange and `execute` in green. Latency in the `compile` phase is the highest, indicating that TiDB is taking too long to generate execution plans and the root cause needs to be further determined based on the subsequent performance data.
@@ -119,7 +119,7 @@ The diagrams of database time breakdown and execution time overview present both
 
 **Example 4: Lock contention workload**
 
-![OLTP](/media/performance/oltp_lock_contention_db_time.png)
+![OLTP](./media/performance/oltp_lock_contention_db_time.png)
 
 - Database Time by SQL Type: Mainly are `UPDATE` statements.
 - Database Time by SQL Phase: Most time is consumed in the execute phase in green.
@@ -127,7 +127,7 @@ The diagrams of database time breakdown and execution time overview present both
 
 **Example 5: HTAP CH-Benchmark workload**
 
-![HTAP](/media/performance/htap_tiflash_mpp.png)
+![HTAP](./media/performance/htap_tiflash_mpp.png)
 
 - Database Time by SQL Type: Mainly are `SELECT` statements.
 - Database Time by SQL Phase: Most time is consumed in the execute phase in green.
@@ -156,13 +156,13 @@ By checking the following three panels in Performance Overview, you can learn th
 
 The TPC-C workload are mainly `UPDATE`, `SELECT`, and `INSERT` statements. The total QPS is equal to the number of `StmtExecute` commands per second and the latter is almost equal to `avg-hit` on the Queries Using Plan Cache OPS panel. Ideally, the client caches the object of the prepared statement. In this way, the cached statement is called directly when a SQL statement is executed. All SQL executions hit the prepared plan cache, and there is no need to recompile to generate execution plans.
 
-![TPC-C](/media/performance/tpcc_qps.png)
+![TPC-C](./media/performance/tpcc_qps.png)
 
 **Example 2: Prepared plan cache unavailable for query commands in read-only OLTP workload**
 
 In this workload, `Commit QPS` = `Rollback QPS` = `Select QPS`. The application has enabled auto-commit concurrency, and rollback is performed every time a connection is fetched from the connection pool. As a result, these three statements are executed the same number of times.
 
-![OLTP-Query](/media/performance/oltp_long_compile_qps.png)
+![OLTP-Query](./media/performance/oltp_long_compile_qps.png)
 
 - The red bold line in the QPS panel stands for failed queries, and the Y-axis on the right shows the number of failed queries. A value other than 0 means the presence of failed queries.
 - The total QPS is equal to the number of queries in the CPS By Type panel, the query command has been used by the application.
@@ -179,13 +179,13 @@ In this workload, `Commit QPS` = `Rollback QPS` = `Select QPS`. The application 
 >
 > Starting from TiDB v6.0.0, you can prevent the `StmtClose` command from clearing cached execution plans via the global variable (`set global tidb_ignore_prepared_cache_close_stmt=on;`). In this way, subsequent executions can hit the prepared plan cache.
 
-![OLTP-Prepared](/media/performance/oltp_prepared_statement_no_plan_cache.png)
+![OLTP-Prepared](./media/performance/oltp_prepared_statement_no_plan_cache.png)
 
 **Example 4: Prepared statements have a resource leak**
 
 The number of `StmtPrepare` commands per second is much greater than that of `StmtClose` per second, which indicates that the application has an object leak for prepared statements.
 
-![OLTP-Query](/media/performance/prepared_statement_leaking.png)
+![OLTP-Query](./media/performance/prepared_statement_leaking.png)
 
 - In the QPS panel, the red bold line indicates the number of failed queries, and the Y axis on the right indicates the coordinate value of the number. In this example, the number of failed queries per second is 74.6.
 - In the CPS By Type panel, the number of `StmtPrepare` commands per second is much greater than that of `StmtClose` per second, which indicates that an object leak occurs in the application for prepared statements.
@@ -200,7 +200,7 @@ The number of `StmtPrepare` commands per second is much greater than that of `St
 
 **Example 1: Busy workload**
 
-![TPC-C](/media/performance/tpcc_source_sql.png)
+![TPC-C](./media/performance/tpcc_source_sql.png)
 
 In this TPC-C workload:
 
@@ -209,7 +209,7 @@ In this TPC-C workload:
 
 **Example 2: Analyze workload**
 
-![OLTP](/media/performance/internal_stats.png)
+![OLTP](./media/performance/internal_stats.png)
 
 In this workload, only `ANALYZE` statements are running in the cluster:
 
@@ -227,7 +227,7 @@ In the CPU/Memory panels of TiDB, TiKV, and PD, you can monitor their respective
 
 In the following TPC-C workload, each TiDB and TiKV is configured with 16 CPUs. PD is configured with 4 CPUs.
 
-![TPC-C](/media/performance/tpcc_cpu_memory.png)
+![TPC-C](./media/performance/tpcc_cpu_memory.png)
 
 - The average, maximum, and delta CPU usage of TiDB are 761%, 934%, and 322%, respectively. The maximum memory usage is 6.86 GiB.
 - The average, maximum, and delta CPU usage of TiKV are 1343%, 1505%, and 283%, respectively. The maximum memory usage is 27.1 GiB.
@@ -277,7 +277,7 @@ The following is an example of read and write traffic in the TPC-C workload.
     - `TiKV -> Rocksdb`: 109 MB/s
     - `RocksDB Compaction`: 567 MB/s
 
-![TPC-C](/media/performance/tpcc_read_write_traffic.png)
+![TPC-C](./media/performance/tpcc_read_write_traffic.png)
 
 **Example 2: Write traffic before and after Titan is enabled**
 
@@ -291,7 +291,7 @@ The following is an example of read and write traffic in the TPC-C workload.
     - `TiKV -> Rocksdb`: 753 MB/s
     - `RocksDB Compaction`: 10.6 GB/s
 
-    ![Titan Disable](/media/performance/titan_disable.png)
+    ![Titan Disable](./media/performance/titan_disable.png)
 
 - Write traffic after Titan is enabled
 
@@ -301,7 +301,7 @@ The following is an example of read and write traffic in the TPC-C workload.
     - `TiKV -> Rocksdb`: 1.21 GB/s
     - `RocksDB Compaction`: 4.68 MB/s
 
-    ![Titan Enable](/media/performance/titan_enable.png)
+    ![Titan Enable](./media/performance/titan_enable.png)
 
 ### Query latency breakdown and key latency metrics
 
@@ -331,7 +331,7 @@ In the Connection Count panel, you can check the total number of connections and
 
 **Example 1: The number of disconnection/s is too high**
 
-![high disconnection/s](/media/performance/high_disconnections.png)
+![high disconnection/s](./media/performance/high_disconnections.png)
 
 In this workload:
 
@@ -341,7 +341,7 @@ In this workload:
 
 **Example 2: TiDB is the bottleneck of user response time**
 
-![TiDB is the Bottleneck](/media/performance/tpcc_duration_idle.png)
+![TiDB is the Bottleneck](./media/performance/tpcc_duration_idle.png)
 
 In this TPC-C workload:
 
@@ -352,7 +352,7 @@ The average query latency is significantly greater than `avg-in-txn`, which mean
 
 **Example 3: TiDB is not the bottleneck of user response time**
 
-![TiDB is not Bottleneck](/media/performance/cloud_query_long_idle.png)
+![TiDB is not Bottleneck](./media/performance/cloud_query_long_idle.png)
 
 In this workload, the average query latency is 1.69 ms and `avg-in-txn` is 18 ms, indicating that TiDB spends 1.69 ms on average to process a SQL statement in transactions, and then needs to wait for 18 ms to receive the next statement.
 
@@ -382,13 +382,13 @@ Usually, the `execute` phase accounts for the most of the `query` latency. Howev
 
 **Example 1: Database bottleneck in the `compile` phase**
 
-![Compile](/media/performance/long_compile.png)
+![Compile](./media/performance/long_compile.png)
 
 In the preceding figure, the average time of the `parse`, `compile`, and `execute` phases are 17.1 us, 729 us, and 681 us, respectively. The `compile` latency is high because the application uses the `query` command interface and cannot use prepared plan cache.
 
 **Example 2: Database bottleneck in the `execute` phase**
 
-![Execute](/media/performance/long_execute.png)
+![Execute](./media/performance/long_execute.png)
 
 In this TPC-C workload, the average time of `parse`, `compile` and `execute` phases are 7.39 us, 38.1 us, and 12.8 ms, respectively. The `execute` phase is the bottleneck of the `query` latency.
 
@@ -404,7 +404,7 @@ The TSO wait time is recorded as `TSO WAIT` and the network time of the TSO requ
 - Common KV read requests: `Get`, `BatchGet`, and `Cop`
 - Common KV write requests: `PessimisticLock`, `Prewrite` and `Commit` for two-phase commits
 
-![Execute](/media/performance/execute_phase.png)
+![Execute](./media/performance/execute_phase.png)
 
 The indicators in this section correspond to the following three panels.
 
@@ -425,19 +425,19 @@ The difference between `Avg TiDB KV Request Duration` and `Avg TiKV GRPC Duratio
 
 **Example 1: Low workload of clusters deployed on the same data center**
 
-![Same Data Center](/media/performance/oltp_kv_tso.png)
+![Same Data Center](./media/performance/oltp_kv_tso.png)
 
 In this workload, the average `Prewrite` latency on TiDB is 925 us, and the average `kv_prewrite` processing latency inside TiKV is 720 us. The difference is about 200 us, which is normal in the same data center. The average TSO wait latency is 206 us, and the RPC time is 144 us.
 
 **Example 2: Normal workload on public cloud clusters**
 
-![Cloud Env ](/media/performance/cloud_kv_tso.png)
+![Cloud Env ](./media/performance/cloud_kv_tso.png)
 
 In this example, TiDB clusters are deployed in different data centers in the same region. The average `commit` latency on TiDB is 12.7 ms, and the average `kv_commit` processing latency inside TiKV is 10.2 ms, a difference of about 2.5 ms. The average TSO wait latency is 3.12 ms, and the RPC time is 693 us.
 
 **Example 3: Resource overloaded on public cloud clusters**
 
-![Cloud Env, TiDB Overloaded](/media/performance/cloud_kv_tso_overloaded.png)
+![Cloud Env, TiDB Overloaded](./media/performance/cloud_kv_tso_overloaded.png)
 
 In this example, the TiDB clusters are deployed in different data centers in the same region, and TiDB network and CPU resources are severely overloaded. The average `BatchGet` latency on TiDB is 38.6 ms, and the average `kv_batch_get` processing latency inside TiKV is 6.15 ms. The difference is more than 32 ms, which is much higher than the normal value. The average TSO wait latency is 9.45 ms and the RPC time is 14.3 ms.
 
@@ -453,7 +453,7 @@ TiKV processes a write request in the following procedure:
     - The `Store` thread processes Raft messages and new `proposals`. When a new `proposals` is received, the `Store` thread of the leader node writes to the local Raft DB and copies the message to multiple follower nodes. When this `proposals` is successfully persisted in most instances, the `proposals` is successfully committed.
     - The `Apply` thread writes the committed `proposals` to the KV DB. When the data is successfully written to the KV DB, the `Apply` thread notifies externally that the write request has completed.
 
-![TiKV Write](/media/performance/store_apply.png)
+![TiKV Write](./media/performance/store_apply.png)
 
 The `Storage Async Write Duration` metric records the latency after a write request enters raftstore. The data is collected on a basis of per request.
 
@@ -478,17 +478,17 @@ In v5.4.0, the gPRC module has been optimized to accelerate Raft log replication
 
 v5.3.0:
 
-![v5.3.0](/media/performance/v5.3.0_store_apply.png)
+![v5.3.0](./media/performance/v5.3.0_store_apply.png)
 
 v5.4.0:
 
-![v5.4.0](/media/performance/v5.4.0_store_apply.png)
+![v5.4.0](./media/performance/v5.4.0_store_apply.png)
 
 **Example 2: Store Duration is a bottleneck**
 
 Apply the preceding formula: 10.1 ms ~= 9.81 ms + 0.304 ms. The result indicates that the latency bottleneck for write requests is in `Store Duration`.
 
-![Store](/media/performance/cloud_store_apply.png)
+![Store](./media/performance/cloud_store_apply.png)
 
 #### Commit Log Duration, Append Log Duration, and Apply Log Duration
 
@@ -525,15 +525,15 @@ In v5.4.0, the gPRC module has been optimized to accelerate Raft log replication
 
 v5.3.0:
 
-![v5.3.0](/media/performance/v5.3.0_commit_append_apply.png)
+![v5.3.0](./media/performance/v5.3.0_commit_append_apply.png)
 
 v5.4.0:
 
-![v5.4.0](/media/performance/v5.4.0_commit_append_apply.png)
+![v5.4.0](./media/performance/v5.4.0_commit_append_apply.png)
 
 **Example 2: Commit Log Duration is a bottleneck**
 
-![Store](/media/performance/cloud_append_commit_apply.png)
+![Store](./media/performance/cloud_append_commit_apply.png)
 
 - Average `Append Log Duration` = 4.38 ms
 - Average `Commit Log Duration` = 7.92 ms
@@ -549,4 +549,4 @@ For the `Store` thread, `Commit Log Duration` is obviously higher than `Apply Lo
 
 Starting from v6.1.0, Grafana has a built-in Performance Overview dashboard by default. This dashboard is compatible with TiDB v4.x and v5.x versions. If your TiDB is earlier than v6.1.0, you need to manually import [`performance_overview.json`](https://github.com/pingcap/tidb/blob/master/pkg/metrics/grafana/performance_overview.json), as shown in the following figure:
 
-![Store](/media/performance/import_dashboard.png)
+![Store](./media/performance/import_dashboard.png)

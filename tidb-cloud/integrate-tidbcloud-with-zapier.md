@@ -65,7 +65,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
     2. On the login page, fill in your public key and private key. To get the TiDB Cloud API key, follow the instructions in [TiDB Cloud API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
     3. Click **Continue**.
 
-    ![Account](/media/tidb-cloud/zapier/zapier-tidbcloud-account.png)
+    ![Account](./media/tidb-cloud/zapier/zapier-tidbcloud-account.png)
 
 3. Set up action
 
@@ -73,19 +73,19 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
     1. From the drop-down list, choose the project name and cluster name. The connection information of your cluster will be displayed automatically.
 
-        ![Set up project name and cluster name](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-project-and-cluster.png)
+        ![Set up project name and cluster name](./media/tidb-cloud/zapier/zapier-set-up-tidbcloud-project-and-cluster.png)
 
     2. Enter your password.
 
     3. From the drop-down list, choose the database.
 
-        ![Set up database name](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-databse.png)
+        ![Set up database name](./media/tidb-cloud/zapier/zapier-set-up-tidbcloud-databse.png)
 
         Zapier queries the databases from TiDB Cloud using the password you entered. If no database is found in your cluster, re-enter your password and refresh the page.
 
     4. In **The table you want to search** box, fill in `github_global_event`. If the table does not exist, the template uses the following DDL to create the table. Click **Continue**.
 
-        ![The create table DDL](/media/tidb-cloud/zapier/zapier-tidbcloud-create-table-ddl.png)
+        ![The create table DDL](./media/tidb-cloud/zapier/zapier-tidbcloud-create-table-ddl.png)
 
 4. Test action
 
@@ -101,7 +101,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
     Select the account you have chosen when you set up the `Find Table in TiDB Cloud` action. Click **Continue**.
 
-    ![Choose account](/media/tidb-cloud/zapier/zapier-tidbcloud-choose-account.png)
+    ![Choose account](./media/tidb-cloud/zapier/zapier-tidbcloud-choose-account.png)
 
 3. Set up action
 
@@ -109,11 +109,11 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
     2. In the **Table Name**, choose the **github_global_event** table from the drop-down list. The columns of the table are displayed.
 
-        ![Table columns](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-columns.png)
+        ![Table columns](./media/tidb-cloud/zapier/zapier-set-up-tidbcloud-columns.png)
 
     3. In the **Columns** box, choose the corresponding data from the trigger. Fill in all the columns, and click **Continue**.
 
-        ![Fill in Columns](/media/tidb-cloud/zapier/zapier-fill-in-tidbcloud-triggers-data.png)
+        ![Fill in Columns](./media/tidb-cloud/zapier/zapier-fill-in-tidbcloud-triggers-data.png)
 
 4. Test action
 
@@ -133,7 +133,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
 Click **Publish** to publish your zap. You can see the zap is running in the [home page](https://zapier.com/app/zaps).
 
-![Publish the zap](/media/tidb-cloud/zapier/zapier-tidbcloud-publish.png)
+![Publish the zap](./media/tidb-cloud/zapier/zapier-tidbcloud-publish.png)
 
 Now, this zap will automatically record all the global events from your GitHub account into TiDB Cloud.
 
@@ -231,6 +231,6 @@ Make sure that your custom query executes in less than 30 seconds. Otherwise, yo
 
 2. In the`set up action` step, tick the `Create TiDB Cloud Table if it doesn’t exist yet?` box to enable `find and create`.
 
-   ![Find and create](/media/tidb-cloud/zapier/zapier-tidbcloud-find-and-create.png)
+   ![Find and create](./media/tidb-cloud/zapier/zapier-tidbcloud-find-and-create.png)
 
 This workflow creates a table if it does not exist yet. Note that the table will be created directly if you test your action.

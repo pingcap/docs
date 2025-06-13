@@ -93,7 +93,7 @@ In [TiDB Dashboard](/dashboard/dashboard-overview.md), navigate to the [**SQL St
 
 TiDB normalizes SQL statements into templates by replacing literals and bind variables with `?`. This normalization and sorting process helps you quickly identify the most resource-intensive queries that might require optimization.
 
-![sql-statements-default](/media/sql-tuning/sql-statements-default.png)
+![sql-statements-default](./media/sql-tuning/sql-statements-default.png)
 
 #### Slow Queries page
 
@@ -105,7 +105,7 @@ In [TiDB Dashboard](/dashboard/dashboard-overview.md), navigate to the [**Slow Q
 
 The **Slow Queries** page does not display SQL execution frequency. A query appears on this page if its execution time exceeds the [`tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold) configuration item for a single instance.
 
-![slow-query-default](/media/sql-tuning/slow-query-default.png)
+![slow-query-default](./media/sql-tuning/slow-query-default.png)
 
 ### Use other tools to identify Top SQL
 
@@ -156,7 +156,7 @@ This section introduces the query processing workflow, optimizer fundamentals, a
 
 When a client sends a SQL statement to TiDB, the statement passes through the protocol layer of the TiDB server. This layer manages the connection between the TiDB server and the client, receives SQL statements, and returns data to the client.
 
-![workflow](/media/sql-tuning/workflow-tiflash.png)
+![workflow](./media/sql-tuning/workflow-tiflash.png)
 
 In the preceding figure, to the right of the protocol layer is the optimizer of the TiDB server, which processes SQL statements as follows:
 
@@ -317,7 +317,7 @@ Additionally, the physical optimization phase includes pushing down expressions 
 
 This distribution enables cross-component collaboration for efficient query processing.
 
-![cost-based-optimization](/media/sql-tuning/cost-based-optimization.png)
+![cost-based-optimization](./media/sql-tuning/cost-based-optimization.png)
 
 For more information, see [SQL Physical Optimization](/sql-physical-optimization.md).
 
@@ -467,7 +467,7 @@ LIMIT 3;
 
 The following figure illustrates the plan tree for the second execution plan:
 
-![execution-plan-traverse](/media/sql-tuning/execution-plan-traverse.png)
+![execution-plan-traverse](./media/sql-tuning/execution-plan-traverse.png)
 
 The execution plan follows a top-to-bottom, first-child-first traversal, corresponding to a postorder traversal (Left, Right, Root) of the plan tree.
 

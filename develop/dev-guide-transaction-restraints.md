@@ -11,7 +11,7 @@ This document briefly introduces the transaction restraints in TiDB.
 
 The isolation levels supported by TiDB are **RC (Read Committed)** and **SI (Snapshot Isolation)**, where **SI** is basically equivalent to the **RR (Repeatable Read)** isolation level.
 
-![isolation level](/media/develop/transaction_isolation_level.png)
+![isolation level](./media/develop/transaction_isolation_level.png)
 
 ## Snapshot Isolation can avoid phantom reads
 
@@ -356,7 +356,7 @@ mysql> SELECT * FROM doctors;
 
 In both transactions, the application first checks if two or more doctors are on call; if so, it assumes that one doctor can safely take leave. Since the database uses the snapshot isolation, both checks return `2`, so both transactions move on to the next stage. `Alice` updates her record to be off duty, and so does `Bob`. Both transactions are successfully committed. Now there are no doctors on duty which violates the requirement that at least one doctor should be on call. The following diagram (quoted from **_Designing Data-Intensive Applications_**) illustrates what actually happens.
 
-![Write Skew](/media/develop/write-skew.png)
+![Write Skew](./media/develop/write-skew.png)
 
 Now let's change the sample program to use `SELECT FOR UPDATE` to avoid the write skew problem:
 
@@ -725,7 +725,7 @@ Note that for both the size restrictions and row restrictions, you should also c
 
 Currently locks are not added to auto-committed `SELECT FOR UPDATE` statements. The effect is shown in the following figure:
 
-![The situation in TiDB](/media/develop/autocommit_selectforupdate_nowaitlock.png)
+![The situation in TiDB](./media/develop/autocommit_selectforupdate_nowaitlock.png)
 
 This is a known incompatibility issue with MySQL. You can solve this issue by using the explicit `BEGIN;COMMIT;` statements.
 

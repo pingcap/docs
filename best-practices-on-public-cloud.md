@@ -168,8 +168,8 @@ In a TiDB cluster, a single active Placement Driver (PD) server is used to handl
 
 The following diagrams show the symptoms of a large-scale TiDB cluster consisting of three PD servers, each equipped with 56 CPUs. From these diagrams, it is observed that when the query per second (QPS) exceeds 1 million and the TSO (Timestamp Oracle) requests per second exceed 162,000, the CPU utilization reaches approximately 4,600%. This high CPU utilization indicates that the PD leader is experiencing a significant load and is running out of available CPU resources.
 
-![pd-server-cpu](/media/performance/public-cloud-best-practice/baseline_cpu.png)
-![pd-server-metrics](/media/performance/public-cloud-best-practice/baseline_metrics.png)
+![pd-server-cpu](./media/performance/public-cloud-best-practice/baseline_cpu.png)
+![pd-server-metrics](./media/performance/public-cloud-best-practice/baseline_metrics.png)
 
 ### Tune PD performance
 
@@ -210,5 +210,5 @@ After the tuning, the following effects can be observed:
 
 These improvements indicate that the tuning adjustments have successfully reduced the CPU utilization of the PD server while maintaining stable TSO handling performance.
 
-![pd-server-cpu](/media/performance/public-cloud-best-practice/after_tuning_cpu.png)
-![pd-server-metrics](/media/performance/public-cloud-best-practice/after_tuning_metrics.png)
+![pd-server-cpu](./media/performance/public-cloud-best-practice/after_tuning_cpu.png)
+![pd-server-metrics](./media/performance/public-cloud-best-practice/after_tuning_metrics.png)
