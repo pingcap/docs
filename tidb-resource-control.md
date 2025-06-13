@@ -287,7 +287,7 @@ To avoid too many concurrent runaway queries that exhaust system resources, the 
 There are three methods for `WATCH` to match for quick identification:
 
 - `EXACT` indicates that only SQL statements with exactly the same SQL text are quickly identified.
-- `SIMILAR` indicates all SQL statements with the same pattern are matched by Plan Digest, and the literal values are ignored.
+- `SIMILAR` indicates all SQL statements with the same pattern are matched by SQL Digest, and the literal values are ignored.
 - `PLAN` indicates all SQL statements with the same pattern are matched by Plan Digest.
 
 The `DURATION` option in `WATCH` indicates the duration of the identification item, which is infinite by default.
