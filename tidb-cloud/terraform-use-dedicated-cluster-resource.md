@@ -7,7 +7,7 @@ summary: Learn how to use the dedicated cluster resource to create and modify a 
 
 This document introduces how to manage a TiDB Cloud Dedicated cluster with the `tidbcloud_dedicated_cluster` resource in this document.
 
-In addition, you will also learn how to get the necessary information with the `tidbcloud_projects` data source and use `tidbcloud_dedicated_node_group` resource to manage TiDB node groups of your dedicated cluster.
+In addition, you will also learn how to get the necessary information with the `tidbcloud_projects` data source and use `tidbcloud_dedicated_node_group` resource to manage TiDB node groups of your TiDB Cloud Dedicated cluster.
 
 The features of the `tidbcloud_dedicated_cluster` resource include the following:
 
