@@ -39,7 +39,7 @@ This guide introduces the key features of sync-diff-inspector and describes how 
 
 To access table schemas and query data, sync-diff-inspector requires specific database privileges. Grant the following privileges on both the upstream and downstream databases:
 
-- `SELECT`: required for data comparison.
+- `SELECT`: required to compare data.
 - `RELOAD`: required to view table schemas.
 
 > **Note**:
