@@ -733,6 +733,17 @@
       - [delete](/tidb-cloud/ticloud-serverless-sql-user-delete.md)
       - [list](/tidb-cloud/ticloud-serverless-sql-user-list.md)
       - [update](/tidb-cloud/ticloud-serverless-sql-user-update.md)
+    - auditlog
+      - [config](/tidb-cloud/ticloud-auditlog-config.md)
+      - [describe](/tidb-cloud/ticloud-auditlog-describe.md)
+      - [download](/tidb-cloud/ticloud-auditlog-download.md)
+      - filter-rule
+        - [create](/tidb-cloud/ticloud-auditlog-filter-create.md)
+        - [delete](/tidb-cloud/ticloud-auditlog-filter-delete.md)
+        - [describe](/tidb-cloud/ticloud-auditlog-filter-describe.md)
+        - [list](/tidb-cloud/ticloud-auditlog-filter-list.md)
+        - [template](/tidb-cloud/ticloud-auditlog-filter-template.md)
+        - [update](/tidb-cloud/ticloud-auditlog-filter-update.md)
   - [ai](/tidb-cloud/ticloud-ai.md)
   - [completion](/tidb-cloud/ticloud-completion.md)
   - config
