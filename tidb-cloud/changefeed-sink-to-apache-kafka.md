@@ -41,18 +41,18 @@ Before creating a changefeed to stream data to Apache Kafka, you need to complet
 
 Ensure that your TiDB cluster can connect to the Apache Kafka service. You can choose one of the following connection methods:
 
-- Private Connect (Beta): ideal for avoiding VPC CIDR conflicts and meeting security compliance, but incurs additional [Private Data Link Cost](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost).
+- Private Connect: ideal for avoiding VPC CIDR conflicts and meeting security compliance, but incurs additional [Private Data Link Cost](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost).
 - VPC Peering: suitable as a cost-effective option, but requires managing potential VPC CIDR conflicts and security considerations.
 - Public IP: suitable for a quick setup.
 
 <SimpleTab>
-<div label="Private Connect (Beta)">
+<div label="Private Connect">
 
 Private Connect leverages **Private Link** or **Private Service Connect** technologies from cloud providers to enable resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly within your VPC.
 
-TiDB Cloud currently supports Private Connect only for self-hosted Kafka. It does not support direct integration with MSK, Confluent Kafka, or other Kafka SaaS services. To connect to these Kafka SaaS services via Private Connect, you can deploy a [kafka-proxy](https://github.com/grepplabs/kafka-proxy) as an intermediary, effectively exposing the Kafka service as self-hosted Kafka. For a detailed example, see [Set up self-hosted Kafka Private Service Connect by Kafka-proxy in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md#set-up-self-hosted-kafka-private-service-connect-by-kafka-proxy). This setup is similar across all Kafka SaaS services.
+TiDB Cloud currently supports Private Connect only for self-hosted Kafka. It does not support direct integration with MSK, Confluent Kafka, or other Kafka SaaS services. To connect to these Kafka SaaS services via Private Connect, you can deploy a [kafka-proxy](https://github.com/grepplabs/kafka-proxy) as an intermediary, effectively exposing the Kafka service as self-hosted Kafka. For a detailed example, see [Set Up Self-Hosted Kafka Private Service Connect by Kafka-proxy in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md#set-up-self-hosted-kafka-private-service-connect-by-kafka-proxy). This setup is similar across all Kafka SaaS services.
 
-- If your Apache Kafka service is hosted in AWS, follow [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-private-link-service.md) to ensure that the network connection is properly configured. After setup, provide the following information in the TiDB Cloud console to create the changefeed:
+- If your Apache Kafka service is hosted in AWS, follow [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md) to ensure that the network connection is properly configured. After setup, provide the following information in the TiDB Cloud console to create the changefeed:
 
     - The ID in Kafka Advertised Listener Pattern
     - The Endpoint Service Name
@@ -62,6 +62,12 @@ TiDB Cloud currently supports Private Connect only for self-hosted Kafka. It doe
 
     - The ID in Kafka Advertised Listener Pattern
     - The Service Attachment
+    - The Bootstrap Ports
+
+- If your Apache Kafka service is hosted in Azure, follow [Set Up Self-Hosted Kafka Private Link Service in Azure](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md) to ensure that the network connection is properly configured. After setup, provide the following information in the TiDB Cloud console to create the changefeed:
+
+    - The ID in Kafka Advertised Listener Pattern
+    - The Alias of Private Link Service
     - The Bootstrap Ports
 
 </div>
@@ -109,7 +115,7 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
-3. Click **Create Changefeed**, and select **Kafka** as **Target Type**.
+3. Click **Create Changefeed**, and select **Kafka** as **Destination**.
 
 ## Step 2. Configure the changefeed target
 
@@ -130,12 +136,12 @@ The steps vary depending on the connectivity method you select.
 6. Click **Next** to test the network connection. If the test succeeds, you will be directed to the next page.
 
 </div>
-<div label="Private Link">
+<div label="Private Link (AWS)">
 
 1. In **Connectivity Method**, select **Private Link**.
 2. Authorize the [AWS Principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts) of TiDB Cloud to create an endpoint for your endpoint service. The AWS Principal is provided in the tip on the web page.
-3. Make sure you select the same **Number of AZs** and **AZ IDs of Kafka Deployment**, and fill the same unique ID in **Kafka Advertised Listener Pattern** when you [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-private-link-service.md) in the **Network** section.
-4. Fill in the **Endpoint Service Name** which is configured in [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-private-link-service.md).
+3. Make sure you select the same **Number of AZs** and **AZ IDs of Kafka Deployment**, and fill the same unique ID in **Kafka Advertised Listener Pattern** when you [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md) in the **Network** section.
+4. Fill in the **Endpoint Service Name** which is configured in [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md).
 5. Fill in the **Bootstrap Ports**. It is recommended that you set at least one port for one AZ. You can use commas `,` to separate multiple ports.
 6. Select an **Authentication** option according to your Kafka authentication configuration.
 
@@ -171,6 +177,27 @@ The steps vary depending on the connectivity method you select.
 12. Return to the [TiDB Cloud console](https://tidbcloud.com) to confirm that you have accepted the connection request. TiDB Cloud will test the connection and proceed to the next page if the test succeeds.
 
 </div>
+<div label="Private Link (Azure)">
+
+1. In **Connectivity Method**, select **Private Link**.
+2. Authorize the Azure subscription of TiDB Cloud or allow anyone with your alias to access your Private Link service before creating the changefeed. The Azure subscription is provided in the **Reminders before proceeding** tip on the web page. For more information about the visibility of Private Link service, see [Control service exposure](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview#control-service-exposure) in Azure documentation.
+3. Make sure you fill in the same unique ID in **Kafka Advertised Listener Pattern** when you [Set Up Self-Hosted Kafka Private Link Service in Azure](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md) in the **Network** section.
+4. Fill in the **Alias of Private Link Service** which is configured in [Set Up Self-Hosted Kafka Private Link Service in Azure](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md).
+5. Fill in the **Bootstrap Ports**. It is recommended that you set at least one port for one AZ. You can use commas `,` to separate multiple ports.
+6. Select an **Authentication** option according to your Kafka authentication configuration.
+
+    - If your Kafka does not require authentication, keep the default option **Disable**.
+    - If your Kafka requires authentication, select the corresponding authentication type, and then fill in the **user name** and **password** of your Kafka account for authentication.
+
+7. Select your **Kafka Version**. If you do not know which one to use, use **Kafka v2**.
+8. Select a **Compression** type for the data in this changefeed.
+9. Enable the **TLS Encryption** option if your Kafka has enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
+10. Click **Next** to test the network connection. If the test succeeds, you will be directed to the next page.
+11. TiDB Cloud creates the endpoint for **Private Link**, which might take several minutes.
+12. Once the endpoint is created, log in to the [Azure portal](https://portal.azure.com/) and accept the connection request.
+13. Return to the [TiDB Cloud console](https://tidbcloud.com) to confirm that you have accepted the connection request. TiDB Cloud will test the connection and proceed to the next page if the test succeeds.
+
+</div>
 </SimpleTab>
 
 ## Step 3. Set the changefeed
@@ -186,23 +213,30 @@ The steps vary depending on the connectivity method you select.
     - **Tables matching**: you can set which tables the event filter will be applied to in this column. The rule syntax is the same as that used for the preceding **Table Filter** area. You can add up to 10 event filter rules per changefeed.
     - **Ignored events**: you can set which types of events the event filter will exclude from the changefeed.
 
-3. In the **Data Format** area, select your desired format of Kafka messages.
+3. Customize **Column Selector** to select columns from events and send only the data changes related to those columns to the downstream.
+
+    - **Tables matching**: specify which tables the column selector applies to. For tables that do not match any rule, all columns are sent.
+    - **Column Selector**: specify which columns of the matched tables will be sent to the downstream.
+
+    For more information about the matching rules, see [Column selectors](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-kafka/#column-selectors).
+
+4. In the **Data Format** area, select your desired format of Kafka messages.
 
     - Avro is a compact, fast, and binary data format with rich data structures, which is widely used in various flow systems. For more information, see [Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol).
     - Canal-JSON is a plain JSON text format, which is easy to parse. For more information, see [Canal-JSON data format](https://docs.pingcap.com/tidb/stable/ticdc-canal-json).
     - Open Protocol is a row-level data change notification protocol that provides data sources for monitoring, caching, full-text indexing, analysis engines, and primary-secondary replication between different databases. For more information, see [Open Protocol data format](https://docs.pingcap.com/tidb/stable/ticdc-open-protocol). 
     - Debezium is a tool for capturing database changes. It converts each captured database change into a message called an "event" and sends these events to Kafka. For more information, see [Debezium data format](https://docs.pingcap.com/tidb/stable/ticdc-debezium).
 
-4. Enable the **TiDB Extension** option if you want to add TiDB-extension fields to the Kafka message body.
+5. Enable the **TiDB Extension** option if you want to add TiDB-extension fields to the Kafka message body.
 
     For more information about TiDB-extension fields, see [TiDB extension fields in Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol#tidb-extension-fields) and [TiDB extension fields in Canal-JSON data format](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field).
 
-5. If you select **Avro** as your data format, you will see some Avro-specific configurations on the page. You can fill in these configurations as follows:
+6. If you select **Avro** as your data format, you will see some Avro-specific configurations on the page. You can fill in these configurations as follows:
 
     - In the **Decimal** and **Unsigned BigInt** configurations, specify how TiDB Cloud handles the decimal and unsigned bigint data types in Kafka messages.
     - In the **Schema Registry** area, fill in your schema registry endpoint. If you enable **HTTP Authentication**, the fields for user name and password are displayed and automatically filled in with your TiDB cluster endpoint and password.
 
-6. In the **Topic Distribution** area, select a distribution mode, and then fill in the topic name configurations according to the mode.
+7. In the **Topic Distribution** area, select a distribution mode, and then fill in the topic name configurations according to the mode.
 
     If you select **Avro** as your data format, you can only choose the **Distribute changelogs by table to Kafka Topics** mode in the **Distribution Mode** drop-down list.
 
@@ -224,7 +258,7 @@ The steps vary depending on the connectivity method you select.
 
         If you want the changefeed to create one Kafka topic for all changelogs, choose this mode. Then, all Kafka messages in the changefeed will be sent to one Kafka topic. You can define the topic name in the **Topic Name** field.
 
-7. In the **Partition Distribution** area, you can decide which partition a Kafka message will be sent to. You can define **a single partition dispatcher for all tables**, or **different partition dispatchers for different tables**. TiDB Cloud provides four types of dispatchers:
+8. In the **Partition Distribution** area, you can decide which partition a Kafka message will be sent to. You can define **a single partition dispatcher for all tables**, or **different partition dispatchers for different tables**. TiDB Cloud provides four types of dispatchers:
 
     - **Distribute changelogs by primary key or index value to Kafka partition**
 
@@ -242,12 +276,12 @@ The steps vary depending on the connectivity method you select.
 
         If you want the changefeed to send Kafka messages of a table to different partitions, choose this distribution method. The specified column values of a row changelog will determine which partition the changelog is sent to. This distribution method ensures orderliness in each partition and guarantees that the changelog with the same column values is send to the same partition.
 
-8. In the **Topic Configuration** area, configure the following numbers. The changefeed will automatically create the Kafka topics according to the numbers.
+9. In the **Topic Configuration** area, configure the following numbers. The changefeed will automatically create the Kafka topics according to the numbers.
 
     - **Replication Factor**: controls how many Kafka servers each Kafka message is replicated to. The valid value ranges from [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) to the number of Kafka brokers.
     - **Partition Number**: controls how many partitions exist in a topic. The valid value range is `[1, 10 * the number of Kafka brokers]`.
 
-9. Click **Next**.
+10. Click **Next**.
 
 ## Step 4. Configure your changefeed specification
 

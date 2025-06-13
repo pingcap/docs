@@ -17,6 +17,7 @@ If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/sign
 
 - You can either sign up with email and password so that you can manage your password using TiDB Cloud, or sign up with your Google, GitHub, or Microsoft account.
 - For AWS Marketplace users, you can also sign up through AWS Marketplace. To do that, search for `TiDB Cloud` in [AWS Marketplace](https://aws.amazon.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+- For Azure Marketplace users, you can also sign up through Azure Marketplace. To do that, search for `TiDB Cloud` in [Azure Marketplace](https://azuremarketplace.microsoft.com), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
 - For Google Cloud Marketplace users, you can also sign up through Google Cloud Marketplace. To do that, search for `TiDB Cloud` in [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
 
 ## (Optional) Step 1. Use your default project or create a new project
@@ -54,7 +55,9 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
         > **Note:**
         >
+        > - Currently, the support of TiDB Cloud Dedicated on Azure is in public preview.
         > - If you signed up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), the cloud provider is AWS, and you cannot change it in TiDB Cloud.
+        > - If you signed up for TiDB Cloud through [Azure Marketplace](https://azuremarketplace.microsoft.com), the cloud provider is Azure Cloud, and you cannot change it in TiDB Cloud.
         > - If you signed up for TiDB Cloud through [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), the cloud provider is Google Cloud, and you cannot change it in TiDB Cloud.
 
     2. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash (optional) respectively.
@@ -72,7 +75,7 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
     > **Note:**
     >
-    > If you signed up TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), you can pay through your AWS account or Google Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud console.
+    > If you signed up TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), [Azure Marketplace](https://azuremarketplace.microsoft.com), or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), you can pay through your AWS account, Azure account, or Google Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud console.
 
 6. Click **Create**.
 

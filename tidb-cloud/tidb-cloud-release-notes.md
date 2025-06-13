@@ -8,6 +8,86 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## June 4, 2025
+
+**General changes**
+
+- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) on Microsoft Azure is now available in public preview. 
+  
+    With this launch, TiDB Cloud now supports all three major public cloud platforms — AWS, Google Cloud, and Azure, which enables you to deploy TiDB Cloud Dedicated clusters wherever best fits your business needs and cloud strategy.
+  
+    - All core features available on AWS and Google Cloud are fully supported on Azure.
+    - Azure support is currently available in three regions: East US 2, Japan East, and Southeast Asia, with more regions coming soon.
+    - TiDB Cloud Dedicated clusters on Azure require TiDB version v7.5.3 or later.
+  
+  To quickly get started with TiDB Cloud Dedicated on Azure, see the following documentation:
+  
+    - [Create a TiDB Cloud Dedicated Cluster on Azure](/tidb-cloud/create-tidb-cluster.md)
+    - [Connect a TiDB Cloud Dedicated Cluster via Azure Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md) 
+    - [Import Data into TiDB Cloud Dedicated Cluster on Azure](/tidb-cloud/import-csv-files.md)
+
+- The Prometheus integration provides more metrics to enhance monitoring capabilities of [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+  
+    Now you can integrate additional metrics, such as `tidbcloud_disk_read_latency` and `tidbcloud_kv_request_duration`, into Prometheus to track more aspects of your TiDB Cloud Dedicated performance.
+  
+    For more information on available metrics and how to enable them for both existing and new users, see [Integrate TiDB Cloud with Prometheus and Grafana (Beta)](/tidb-cloud/monitor-prometheus-and-grafana-integration.md#metrics-available-to-prometheus).
+
+- TiKV [Standard](/tidb-cloud/size-your-cluster.md#standard-storage) and [Performance](/tidb-cloud/size-your-cluster.md#performance-and-plus-storage) storage pricing is officially released.
+
+    The discount period ends from **00:00 UTC on June 5, 2025**. After that, the price returns to the standard price. For more information about TiDB Cloud Dedicated prices, see [TiDB Cloud Dedicated Pricing Details](https://www.pingcap.com/tidb-dedicated-pricing-details/#node-cost).
+
+**Console changes**
+
+- Enhance the interactive experience when configuring the size of TiFlash nodes of [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+
+    You can now use a toggle switch to control the TiFlash configuration when creating a TiDB Cloud Dedicated cluster, which makes the configuration experience more intuitive and seamless.
+
+## May 27, 2025
+
+**General changes**
+
+- Support streaming data to [Apache Pulsar](https://pulsar.apache.org) with changefeeds for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+
+    This feature enables you to integrate your TiDB Cloud Dedicated cluster with a wider range of downstream systems, and accommodates additional data integration requirements. To use this feature, make sure that your TiDB Cloud Dedicated cluster version is v7.5.1 or later.
+
+    For more information, see [Sink to Apache Pulsar](/tidb-cloud/changefeed-sink-to-apache-pulsar.md).
+
+## May 13, 2025
+
+**General changes**
+
+- Full-text search (beta) now available in [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) for AI applications.
+
+    TiDB Cloud Serverless now supports full-text search (beta), enabling AI and Retrieval-Augmented Generation (RAG) applications to retrieve content by exact keywords. This complements vector search, which retrieves content by semantic similarity. Combining both methods significantly improves retrieval accuracy and answer quality in RAG workflows. Key features include:
+
+    - Direct text search: query string columns directly without the need for embeddings.
+    - Multilingual support: automatically detects and analyzes text in multiple languages, even within the same table, without requiring language specification.
+    - Relevance-based ranking: results are ranked using the industry-standard BM25 algorithm for optimal relevance.
+    - Native SQL compatibility: seamlessly use SQL features such as filtering, grouping, and joining with full-text search.
+
+  To get started, see [Full Text Search with SQL](/tidb-cloud/vector-search-full-text-search-sql.md) or [Full Text Search with Python](/tidb-cloud/vector-search-full-text-search-python.md).
+
+- Increase the maximum TiFlash node storage for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster:
+
+    - For 8 vCPU TiFlash, from 2048 GiB to 4096 GiB
+    - For 32 vCPU TiFlash, from 4096 GiB to 8192 GiB
+
+  This enhancement increases the analytics data storage capacity of your TiDB Cloud Dedicated cluster, improves workload scaling efficiency, and accommodates growing data requirements.
+
+    For more information, see [TiFlash node storage](/tidb-cloud/size-your-cluster.md#tiflash-node-storage).
+
+- Enhance the maintenance window configuration experience by providing intuitive options to configure and reschedule maintenance tasks.
+
+    For more information, see [Configure maintenance window](/tidb-cloud/configure-maintenance-window.md).
+
+- Extend the discount period for TiKV [Standard](/tidb-cloud/size-your-cluster.md#standard-storage) and [Performance](/tidb-cloud/size-your-cluster.md#performance-and-plus-storage) storage types. The promotion now ends on June 5, 2025. After this date, pricing will return to the standard rate.
+
+**Console changes**
+
+- Refine the **Backup Setting** page layout to improve the backup configuration experience in [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+
+    For more information, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md).
+
 ## April 22, 2025
 
 **General changes**
@@ -150,7 +230,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     Private Connect leverages Private Link or Private Service Connect technologies from cloud providers to enable changefeeds in the TiDB Cloud VPC to connect to Kafka in customers' VPCs using private IP addresses, as if those Kafkas were hosted directly within the TiDB Cloud VPC. This feature helps prevent VPC CIDR conflicts and meets security compliance requirements.
 
-    - For Apache Kafka in AWS, follow the instructions in [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-private-link-service.md) to configure the network connection.
+    - For Apache Kafka in AWS, follow the instructions in [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md) to configure the network connection.
 
     - For Apache Kafka in Google Cloud, follow the instructions in [Set Up Self-Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md) to configure the network connection.
   

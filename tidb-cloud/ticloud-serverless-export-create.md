@@ -43,6 +43,12 @@ Export data from a TiDB Cloud Serverless cluster to Azure Blob Storage in non-in
 ticloud serverless export create -c <cluster-id> --azblob.uri <uri> --azblob.sas-token <sas-token> --filter <database.table>
 ```
 
+Export data from a TiDB Cloud Serverless cluster to Alibaba Cloud OSS in non-interactive mode:
+
+```shell
+ticloud serverless export create -c <cluster-id> --oss.uri <uri> --oss.access-key-id <access-key-id> --oss.access-key-secret <access-key-secret> --filter <database.table>
+```
+
 Export data to a Parquet file and compress it with `SNAPPY` in non-interactive mode:
 
 ```shell
@@ -63,7 +69,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 |----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------|
 | -c, --cluster-id string          | Specifies the ID of the cluster, from which you want to export data.                                                                                                          | Yes      | Only works in non-interactive mode.                  |
 | --file-type string               | Specifies the export file type. One of ["SQL" "CSV" "PARQUET"]. (default "CSV")                                                                                                         | No       | Only works in non-interactive mode.                  |
-| --target-type string             | Specifies the export target. One of [`"LOCAL"` `"S3"` `"GCS"` `"AZURE_BLOB"`]. The default value is `"LOCAL"`.                                                                                                | No       | Only works in non-interactive mode.                  |
+| --target-type string             | Specifies the export target. One of [`"LOCAL"` `"S3"` `"GCS"` `"AZURE_BLOB"` `"OSS"`]. The default value is `"LOCAL"`.                                                                                                | No       | Only works in non-interactive mode.                  |
 | --s3.uri string                  | Specifies the S3 URI in `s3://<bucket>/<file-path>` format. Required when the target type is S3.                                                                                            | No       | Only works in non-interactive mode.                  |
 | --s3.access-key-id string        | Specifies the access key ID of Amazon S3. You only need to set one of the s3.role-arn and [s3.access-key-id, s3.secret-access-key].                                                        | NO       | Only works in non-interactive mode.                  |
 | --s3.secret-access-key string    | Specifies the secret access key of Amazon S3. You only need to set one of the s3.role-arn and [s3.access-key-id, s3.secret-access-key].                                                   | No       | Only works in non-interactive mode.                  |
@@ -72,6 +78,9 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | --gcs.service-account-key string | Specifies the base64 encoded service account key of GCS.                                                                                                                                | No       | Only works in non-interactive mode.                  |
 | --azblob.uri string              | Specifies the Azure Blob URI in `azure://<account>.blob.core.windows.net/<container>/<file-path>` format. Required when the target type is AZURE_BLOB.                                      | No       | Only works in non-interactive mode.                  |
 | --azblob.sas-token string        | Specifies the SAS token of Azure Blob.                                                                                                                                                  | No       | Only works in non-interactive mode.                  |
+| --oss.uri string        | Specifies the Alibaba Cloud OSS URI in `oss://<bucket>/<file-path>` format. Required when the export `target-type` is `"OSS"`.                                                                                                                                            | No       | Only works in non-interactive mode.                  |
+| --oss.access-key-id string        | Specifies the AccessKey ID to access Alibaba Cloud OSS.                                                                                                                                     | No       | Only works in non-interactive mode.                  |
+| --oss.access-key-secret string        | Specifies the AccessKey secret to access Alibaba Cloud OSS.                                                                                                                                     | No       | Only works in non-interactive mode.                   |
 | --csv.delimiter string           | Specifies the delimiter of string type variables in CSV files. (default "\"")                                                                                                         | No       | Only works in non-interactive mode.                  |
 | --csv.null-value string          | Specifies the representation of null values in CSV files. (default "\\N")                                                                                                                   | No       | Only works in non-interactive mode.                  |
 | --csv.separator string           | Specifies the separator of each value in CSV files. (default ",")                                                                                                                           | No       | Only works in non-interactive mode.                  |

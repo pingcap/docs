@@ -118,6 +118,7 @@ Assume that the configuration file of your changefeed is as follows:
 [filter]
 rules = ['test.t*']
 
+[[filter.event-filters]]
 matcher = ["test.t1"] # This filter rule applies only to the t1 table in the test database.
 ignore-event = ["create table", "drop table", "truncate table", "rename table"]
 ```
