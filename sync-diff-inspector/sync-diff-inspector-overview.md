@@ -63,7 +63,6 @@ To access table schemas and query data, sync-diff-inspector requires specific da
 
 - `SELECT`: required for data comparison.
 - `RELOAD`: required to view table schemas.
-    - `RELOAD` (views table schema)
 
 > **Note**:
 > 
