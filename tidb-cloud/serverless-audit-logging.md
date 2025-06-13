@@ -41,9 +41,10 @@ The filter rule contains the following fields:
 
 - `users`: A list of user names to filter audit events. You can use the wildcard `%` to match any user name.
 - `filters`: A list of filter objects. Each filter object can contain the following fields:
-  - `classes`: A list of event classes to filter audit events. For example, `["QUERY", "EXECUTE"]`.
-  - `tables`: A list of table filters. See [Table filters](https://docs.pingcap.com/tidb/stable/table-filter/) for more details.
-  - `statusCodes`: A list of status codes to filter audit events. 1 means success, 0 means failure.
+
+    - `classes`: A list of event classes to filter audit events. For example, `["QUERY", "EXECUTE"]`.
+    - `tables`: A list of table filters. See [Table filters](https://docs.pingcap.com/tidb/stable/table-filter/) for more details.
+    - `statusCodes`: A list of status codes to filter audit events. 1 means success, 0 means failure.
 
 The classes of events that can be filtered include:
 
@@ -157,6 +158,6 @@ ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <o
 
 ## Audit logging limitations
 
-- Audit logging is only available via TiDB Cloud CLI; support for TiDB Cloud Console will be available soon.
+- Audit logging is only available via TiDB Cloud CLI; support for TiDB Cloud console will be available soon.
 - Audit logs can only be stored in TiDB Cloud at present; support for external storage will be available soon.
 - TiDB Cloud Serverless does not guarantee the sequential order of the audit logs, which means you might have to review all log files to see the latest events. To order the logs, you can use the `TIME` field in the event records.
