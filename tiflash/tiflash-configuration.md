@@ -381,9 +381,9 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 
 - The memory usage limit for the generated intermediate data in all queries.
 - When the value is an integer, the unit is byte. For example, `34359738368` means 32 GiB of memory limit, and `0` means no limit.
-- When the value is a floating-point number in the range of `[0.0, 1.0)`, it means the ratio of the allowed memory usage to the total memory of the node. For example, `0.8` means 80% of the total memory, and `0.0` means no limit.
+- Starting from v6.6.0, you can set the value to a floating-point number in the range of `[0.0, 1.0)`. This number represents the ratio of the allowed memory usage to the total node memory. For example, `0.8` means 80% of the total memory, and `0.0` means no limit.
 - When the queries attempt to consume memory that exceeds this limit, the queries are terminated and an error is reported.
-- Default value: `0.8`, which means 80% of the total memory.
+- Default value: `0.8`, which means 80% of the total memory. Before v6.6.0, the default value is `0`, which means no limit.
 
 ##### `cop_pool_size` <span class="version-mark">New in v5.0</span>
 
