@@ -36,7 +36,7 @@ You can increase or decrease the number of TiDB, TiKV, or TiFlash nodes.
 
 To change the number of TiDB, TiKV, or TiFlash nodes, take the following steps:
 
-1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 2. In the row of the cluster that you want to scale, click **...**.
 
     > **Tip:**
@@ -64,7 +64,7 @@ You can increase or decrease vCPU and RAM of TiDB, TiKV, or TiFlash nodes.
 
 To change the vCPU and RAM of TiDB, TiKV, or TiFlash nodes, take the following steps:
 
-1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 2. In the row of the cluster that you want to scale, click **...**.
 
     > **Tip:**
@@ -88,7 +88,7 @@ You can increase the storage of TiKV or TiFlash.
 
 To change the storage of TiKV or TiFlash, take the following steps:
 
-1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 2. In the row of the cluster that you want to scale, click **...**.
 
     > **Tip:**

@@ -49,9 +49,9 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 >
 > The alert subscription is for all alerts in the current project. If you have multiple clusters in the project, you just need to subscribe once.
 
-1. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
-2. On the **Project Settings** page of your project, click **Alert Subscription** in the left navigation pane.
-3. Click **Add Subscriber**
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
+3. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
 4. Select **Zoom** from the **Subscriber Type** drop-down list.
 5. Enter a name in the **Name** field, your Zoom webhook URL in the **URL** field, and the verification token in the **Token** field.
 6. Click **Test Connection**.
@@ -69,8 +69,7 @@ If an alert condition remains unchanged, the alert sends notifications every thr
 
 If you no longer want to receive alert notifications of clusters in your project, take the following steps:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
-3. On the **Project Settings** page of your project, click **Alert Subscription** in the left navigation pane.
-4. In the row of your target subscriber to be deleted, click **...**.
-5. Click **Unsubscribe** to confirm the unsubscription in the pop-up window.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
+3. On the **Alert Subscription** page, locate the row of your target subscriber to be deleted, and then click **...** > **Unsubscribe**.
+4. Click **Unsubscribe** to confirm the unsubscription.

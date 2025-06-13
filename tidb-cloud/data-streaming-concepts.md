@@ -13,7 +13,7 @@ Currently, TiDB Cloud supports streaming data to Apache Kafka, MySQL, TiDB Cloud
 
 TiDB Cloud changefeed is a continuous data stream that helps you replicate data changes from TiDB Cloud to other data services.
 
-On the changefeed page in the TiDB Cloud console, you can create a changefeed, view a list of existing changefeeds, and operate the existing changefeeds (such as scaling, pausing, resuming, editing, and deleting a changefeed).
+On the **Changefeed** page in the TiDB Cloud console, you can create a changefeed, view a list of existing changefeeds, and operate the existing changefeeds (such as scaling, pausing, resuming, editing, and deleting a changefeed).
 
 Replication includes only incremental data changes by default. If existing data must be replicated, it must be exported and loaded into the target system manually before starting the changefeed.
 

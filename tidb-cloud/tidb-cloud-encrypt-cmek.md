@@ -33,9 +33,9 @@ If you are in the `Organization Owner` role of your organization, you can create
 
 To create a CMEK-enabled project, take the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
-2. Click **Organization Settings**, and then click the **Projects** tab in the left navigation pane. The **Projects** tab is displayed.
-3. Click **Create New Project** to open the project creation dialog.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Projects**.
+3. On the **Projects** page, click **Create New Project** in the upper-right corner.
 4. Fill in a project name.
 5. Choose to enable the CMEK capability of the project.
 6. Click **Confirm** to complete the project creation.
@@ -63,9 +63,9 @@ You can complete the CMEK configuration of the project using either the TiDB Clo
 
 To complete the CMEK configuration of the project, take the following steps:
 
-1. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
-2. Click **Encryption Access** to enter the encryption management page of the project.
-3. Click **Create Encryption Key** to enter the key creation page.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Project Settings** > **Encryption Access**.
+3. On the **Encryption Access** page, click **Create Encryption Key** to enter the key creation page.
 4. The key provider only supports AWS KMS. You can choose the region where the encryption key can be used.
 5. Copy and save the JSON file as `ROLE-TRUST-POLICY.JSON`. This file describes the trust relationship.
 6. Add this trust relationship to the key policy of AWS KMS. For more information, refer to [Key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html).

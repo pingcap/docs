@@ -58,9 +58,9 @@ Regular maintenance ensures that essential updates are performed to safeguard Ti
 
 You can modify the start time to your preferred time or reschedule maintenance tasks until the deadline as follows:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
-3. On the **Project Settings** page of your project, click **Maintenance** in the left navigation pane.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Project Settings** > **Maintenance**.
+3. On the **Maintenance** page, check the maintenance information.
 
      - If any maintenance tasks are displayed, check the descriptions, scheduled start time, and deadline. The maintenance tasks will start at the designated time.
 

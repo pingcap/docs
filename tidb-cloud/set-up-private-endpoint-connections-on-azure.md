@@ -45,13 +45,13 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 
 ### Step 1. Select a TiDB cluster
 
-1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target TiDB cluster to go to its overview page.
+1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target TiDB cluster to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 3. In the **Connection Type** drop-down list, select **Private Endpoint**, and then click **Create Private Endpoint Connection** to open the **Create Azure Private Endpoint Connection** dialog.
 
 > **Note:**
 >
-> If you have already created a private endpoint connection, the active endpoint will appear in the connection dialog. To create additional private endpoint connections, navigate to the **Networking** page in the left navigation pane.
+> If you have already created a private endpoint connection, the active endpoint will appear in the connection dialog. To create additional private endpoint connections, navigate to the **Networking** page by clicking **Settings** > **Networking** in the left navigation pane.
 
 ### Step 2. Create an Azure private endpoint
 
@@ -89,13 +89,13 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 
 After you have accepted the endpoint connection, you are redirected back to the connection dialog.
 
-1. Wait for the private endpoint connection status to become **Active** (approximately 5 minutes). You can go to the **Networking** page of the cluster to check its status.
+1. Wait for the private endpoint connection status to become **Active** (approximately 5 minutes). To check the status, navigate to the **Networking** page by clicking **Settings** > **Networking** in the left navigation pane.
 2. In the **Connect With** drop-down list, select your preferred connection method. The corresponding connection string is displayed at the bottom of the dialog.
 3. Connect to your cluster with the connection string.
 
 ### Private endpoint status reference
 
-You can view the statuses of private endpoints or private endpoint services on the **Networking** page of your cluster.
+To view the statuses of private endpoints or private endpoint services, navigate to the **Networking** page by clicking **Settings** > **Networking** in the left navigation pane.
 
 The possible statuses of a private endpoint are explained as follows:
 

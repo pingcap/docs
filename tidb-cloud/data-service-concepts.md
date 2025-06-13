@@ -5,7 +5,7 @@ summary: Learn about Data Service concepts for TiDB Cloud.
 
 # Data Service (Beta)
 
-TiDB Cloud [Data Service (beta)](https://tidbcloud.com/console/data-service) is a fully managed low-code backend-as-a-service solution that simplifies backend application development, empowering developers to rapidly build highly scalable, secure, data-driven applications.
+TiDB Cloud [Data Service (beta)](https://tidbcloud.com/project/data-service) is a fully managed low-code backend-as-a-service solution that simplifies backend application development, empowering developers to rapidly build highly scalable, secure, data-driven applications.
 
 Data Service enables you to access TiDB Cloud data via an HTTPS request using a custom API endpoint. This feature uses a serverless architecture to handle computing resources and elastic scaling, so you can focus on the query logic in endpoints without worrying about infrastructure or maintenance costs.
 
@@ -13,13 +13,13 @@ For more information, see [TiDB Cloud Data Service (Beta) Overview](/tidb-cloud/
 
 ## Data App
 
-A Data App in [Data Service (beta)](https://tidbcloud.com/console/data-service) is a collection of endpoints that you can use to access data for a specific application. By creating a Data App, you can group your endpoints and configure authorization settings using API keys to restrict access to endpoints. In this way, you can ensure that only authorized users can access and manipulate your data, making your application more secure.
+A Data App in [Data Service (beta)](https://tidbcloud.com/project/data-service) is a collection of endpoints that you can use to access data for a specific application. By creating a Data App, you can group your endpoints and configure authorization settings using API keys to restrict access to endpoints. In this way, you can ensure that only authorized users can access and manipulate your data, making your application more secure.
 
 For more information, see [Manage a Data App](/tidb-cloud/data-service-manage-data-app.md).
 
 ## Data App endpoints
 
-An endpoint in [Data Service (beta)](https://tidbcloud.com/console/data-service) is a web API that you can customize to execute SQL statements. You can specify parameters for your SQL statements, such as the value used in the `WHERE` clause. When a client calls an endpoint and provides values for the parameters in a request URL, the endpoint executes the corresponding SQL statement with the provided parameters and returns the results as part of the HTTP response.
+An endpoint in [Data Service (beta)](https://tidbcloud.com/project/data-service) is a web API that you can customize to execute SQL statements. You can specify parameters for your SQL statements, such as the value used in the `WHERE` clause. When a client calls an endpoint and provides values for the parameters in a request URL, the endpoint executes the corresponding SQL statement with the provided parameters and returns the results as part of the HTTP response.
 
 For more information, see [Manage an Endpoint](/tidb-cloud/data-service-manage-endpoint.md).
 

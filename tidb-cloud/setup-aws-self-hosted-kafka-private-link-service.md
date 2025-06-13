@@ -37,7 +37,7 @@ The document provides an example of connecting to a Kafka Private Link service d
 
 3. Get the Kafka deployment information from your TiDB Cloud Dedicated cluster.
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Changefeed** in the left navigation pane.
+    1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Data** > **Changefeed** in the left navigation pane.
     2. On the overview page, find the region of the TiDB cluster. Ensure that your Kafka cluster will be deployed to the same region.
     3. Click **Create Changefeed**.
         1. In **Destination**, select **Kafka**.
@@ -688,7 +688,7 @@ Do the following to set up the load balancer:
         - `usw2-az2` with `broker-usw2-az2 subnet`
         - `usw2-az3` with `broker-usw2-az3 subnet`
     - **Security groups**: create a new security group with the following rules.
-        - Inbound rule allows all TCP from Kafka VPC: Type - `{ports of target groups}`, for example, `9092-9095`; Source - `{CIDR of TiDB Cloud}`. To get the CIDR of TiDB Cloud in the region, click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Project Settings** > **Network Access** > **Project CIDR** > **AWS**.
+        - Inbound rule allows all TCP from Kafka VPC: Type - `{ports of target groups}`, for example, `9092-9095`; Source - `{CIDR of TiDB Cloud}`. To get the CIDR of TiDB Cloud in the region, switch to your target project using the combo box in the upper-left corner of the [TiDB Cloud console](https://tidbcloud.com), click **Project Settings** > **Network Access** in the left navigation pane, and then click **Project CIDR** > **AWS**.
         - Outbound rule allows all TCP to Kafka VPC: Type - `All TCP`; Destination - `Anywhere-IPv4`
     - Listeners and routing:
         - Protocol: `TCP`; Port: `9092`; Forward to: `bootstrap-target-group`

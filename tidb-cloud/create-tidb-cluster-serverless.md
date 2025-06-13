@@ -24,7 +24,7 @@ If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/sign
 
 If you are in the `Organization Owner` or the `Project Owner` role, you can create a TiDB Cloud Serverless cluster as follows:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), and then navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), and then navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page.
 
 2. Click **Create Cluster**.
 

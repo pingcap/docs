@@ -20,11 +20,11 @@ This document describes how to create a recovery group to protect your databases
 
 To create a recovery group, perform the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), switch to your target project using the combo box in the upper-left corner.
 
-2. In the **Project Settings** navigation pane, click **Recovery Group**.
+2. In the left navigation pane, click **Recovery Group**.
 
-3. On the **Recovery Group** page, click **Create Recovery Group**. 
+3. On the **Recovery Group** page, click **Create Recovery Group**.
 
 4. On the **Create Recovery Group** page, enter a name for the recovery group.
 
@@ -57,9 +57,9 @@ To create a recovery group, perform the following steps:
 
 After creating a recovery group, you can view its status information on the **Recovery Group Detail** page:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), switch to your target project using the combo box in the upper-left corner.
 
-2. In the **Project Settings** navigation pane, click **Recovery Group**.
+2. In the left navigation pane, click **Recovery Group**.
 
 3. On the **Recovery Group** page, click the name of the recovery group that you wish to view.
 

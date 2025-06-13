@@ -23,13 +23,9 @@ To view, create, edit, or delete budgets of your organization or projects, you m
 
 To view the budget page of your organization, take the following steps:
 
-1. In the lower-left corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-organization" />, and then click **Billing**.
-
-    > **Note:**
-    >
-    > If you are in multiple organizations, switch to your target organization by clicking its name.
-
-2. On the **Billing** page, click the **Budgets** tab.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Billing**.
+3. On the **Billing** page, click the **Budgets** tab.
 
 For each budget, you can view its name, type, status, amount used, budget amount, period, and scope.
 
@@ -37,16 +33,9 @@ For each budget, you can view its name, type, status, amount used, budget amount
 
 To create a custom budget to monitor the spending of your organization or specific projects, take the following steps:
 
-1. In the lower-left corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-organization" />, and then click **Billing**.
-
-    > **Note:**
-    >
-    > If you are in multiple organizations, switch to your target organization by clicking its name.
-
-2. On the **Billing** page, click the **Budgets** tab.
-
-3. On the **Budgets** page, click **Create Custom Budget**. You can create up to five custom budgets.
-
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Billing**.
+3. On the **Billing** page, click the **Budgets** tab, and then click **Create Custom Budget**. You can create up to five custom budgets.
 4. Provide the budget basic settings.
 
     - **Name**: enter a name for the budget.
@@ -75,23 +64,17 @@ To create a custom budget to monitor the spending of your organization or specif
 
 To edit a custom budget, take the following steps:
 
-1. In the lower-left corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-organization" />, and then click **Billing**.
-
-    > **Note:**
-    >
-    > If you are in multiple organizations, switch to your target organization by clicking its name.
-
-2. On the **Billing** page, click the **Budgets** tab.
-
-3. On the **Budgets** page, locate the row of your budget, click **...** in that row, and then click **Edit**.
-
-4. Edit the budget name, budget scope, budget amount, and alert thresholds as needed.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Billing**.
+3. On the **Billing** page, click the **Budgets** tab.
+4. Locate the row of your target budget, click **...** in that row, and then click **Edit**.
+5. Edit the budget name, budget scope, budget amount, and alert thresholds as needed.
 
     > **Note:**
     >
     > Editing the budget period and whether to apply credits and discounts is not supported.
 
-5. Click **Update**.
+6. Click **Update**.
 
 ## Delete a custom budget
 
@@ -102,12 +85,8 @@ To edit a custom budget, take the following steps:
 
 To delete a custom budget, take the following steps:
 
-1. In the lower-left corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-organization" />, and then click **Billing**.
-
-    > **Note:**
-    >
-    > If you are in multiple organizations, switch to your target organization by clicking its name.
-
-2. On the **Billing** page, click the **Budgets** tab.
-
-3. On the **Budgets** page, locate the row of your budget, click **...** in that row, and then click **Delete**.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Billing**.
+3. On the **Billing** page, click the **Budgets** tab.
+4. Locate the row of your target budget, click **...** in that row, and then click **Delete**.
+5. Confirm the deletion.
