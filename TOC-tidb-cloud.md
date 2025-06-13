@@ -358,6 +358,7 @@
     - [Use Backup Resource](/tidb-cloud/terraform-use-backup-resource.md)
     - [Use Restore Resource](/tidb-cloud/terraform-use-restore-resource.md)
     - [Use Import Resource](/tidb-cloud/terraform-use-import-resource.md)
+    - [Use Dedicated Cluster Resource](/tidb-cloud/terraform-use-dedicated-cluster-resource.md)
     - [Migrate Cluster Resource](/tidb-cloud/terraform-migrate-cluster-resource.md)
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
   - [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
