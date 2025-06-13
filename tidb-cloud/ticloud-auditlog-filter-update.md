@@ -52,7 +52,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | -c, --cluster-id string | The ID of the cluster.                                                                                      | Yes      | Only works in non-interactive mode.                  |
 | --name string           | The name of the filter rule to update.                                                                      | Yes      | Only works in non-interactive mode.                  |
 | --enabled               | Enable or disable the filter rule.                                                                          | No       | Only works in non-interactive mode.                  |
-| --rule string           | Complete filter rule expressions. Use `ticloud serverless audit-log filter template` to see filter templates. | No       | Only works in non-interactive mode.                  |
+| --rule string           | The new, complete filter rule expression. Use `ticloud serverless audit-log filter template` to see filter templates. | No       | Only works in non-interactive mode.                  |
 | -h, --help              | Shows help information for this command.                                                                    | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags

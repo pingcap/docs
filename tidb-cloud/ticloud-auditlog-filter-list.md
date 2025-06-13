@@ -43,8 +43,8 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 
 | Flag                    | Description                                                                                       | Required | Note                                                 |
 |-------------------------|---------------------------------------------------------------------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | The cluster ID of the audit log filter rules to be listed.                                        | No       | Only works in non-interactive mode.                  |
-| -o, --output string     | Output format, one of ["human" "json"]. For the complete result, please use json format. (default "human") | No       | Works in both non-interactive and interactive modes. |
+| -c, --cluster-id string | The ID of the cluster whose audit log filter rules you want to list.                                        | No       | Only works in non-interactive mode.                  |
+| -o, --output string     | Output format, one of `human` or `json`. For the complete result, use the `json` format. (default `human`) | No       | Works in both non-interactive and interactive modes. |
 | -h, --help              | Shows help information for this command.                                                          | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags

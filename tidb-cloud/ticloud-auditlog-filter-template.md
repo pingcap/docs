@@ -37,7 +37,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 
 | Flag                    | Description                  | Required | Note                                                 |
 |-------------------------|------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | The ID of the cluster.       | No       | Only works in non-interactive mode.                  |
+| -c, --cluster-id string | The ID of the cluster (optional, for context if templates might become cluster-specific).       | No       | Only works in non-interactive mode.                  |
 | -h, --help              | Shows help information for this command. | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags

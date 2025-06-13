@@ -14,7 +14,7 @@ ticloud serverless audit-log filter-rule create [flags]
 Or use the following alias command:
 
 ```shell
-ticloud serverless audit-log filter delete [flags]
+ticloud serverless audit-log filter create [flags]
 ```
 
 ## Examples
