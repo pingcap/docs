@@ -38,8 +38,10 @@ ticloud serverless audit-log config -c <cluster-id> --enabled=false
 To filter the audit logging, you need to create a filter rule to specify which events to log. You can use the [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-filter-create.md) to manage the filter rules.
 
 The filter rule contains the following fields:
+
 - `users`: A list of user names to filter the audit record. You can use the wildcard `%` to match any user name.
 - `filters`: A list of filter objects. Each filter object can contain the following fields:
+
   - `classes`: A list of event classes to filter the audit record. For example, `["QUERY", "EXECUTE"]`.
   - `tables`: A list of table filters. See [Table filters](https://docs.pingcap.com/tidb/stable/table-filter/) for more details.
   - `statusCodes`: A list of status code to filter the audit record. 1 means success. 0 means failure.
