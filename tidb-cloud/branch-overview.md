@@ -39,7 +39,7 @@ Currently, TiDB Cloud Serverless branches are in beta and free of charge.
 
 - For each branch of a free cluster, 10 GiB storage is allowed. For each branch of a scalable cluster, 100 GiB storage is allowed. Once the storage is reached, the read and write operations on this branch will be throttled until you reduce the storage.
 
-- If a TiFlash replica is enabled, it will be unavailable for a period after creating, because data needs to be rebuilt in TiFlash.
+If you enable a TiFlash replica, it will be temporarily unavailable for a period after you create a new branch, because data needs to be rebuilt in TiFlash.
 
 - When [creating a branch](/tidb-cloud/branch-manage.md#create-a-branch) from a specific point in time:
 
