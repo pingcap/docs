@@ -16,7 +16,6 @@ TiDB supports most of the [encryption and compression functions](https://dev.mys
 | [`AES_ENCRYPT()`](#aes_encrypt)                               | Encrypt using AES                                 |
 | [`COMPRESS()`](#compress)                                     | Compress and return result as a binary string     |
 | [`MD5()`](#md5)                                               | Calculate MD5 checksum                            |
-| [`PASSWORD()`](#password)                                     | Calculate and return a password string            |
 | [`RANDOM_BYTES()`](#random_bytes)                             | Return a random byte vector                       |
 | [`SHA()`](#sha)                                               | Calculate an SHA-1 160-bit checksum               |
 | [`SHA1()`](#sha1)                                             | Calculate an SHA-1 160-bit checksum               |
@@ -137,29 +136,6 @@ SELECT MD5('abc');
 | 900150983cd24fb0d6963f7d28e17f72 |
 +----------------------------------+
 1 row in set (0.00 sec)
-```
-
-### [`PASSWORD()`](https://dev.mysql.com/doc/refman/5.7/en/encryption-functions.html#function_password)
-
-> **Warning:**
->
-> This function is deprecated in MySQL 5.7 and removed in MySQL 8.0. It is deprecated in TiDB. It is not recommended to use this function.
-
-The `PASSWORD(str)` function calculates a password hash that can be used with the `mysql_native_password` authentication method.
-
-```sql
-SELECT PASSWORD('secret');
-```
-
-```
-+-------------------------------------------+
-| PASSWORD('secret')                        |
-+-------------------------------------------+
-| *14E65567ABDB5135D0CFD9A70B3032C179A49EE7 |
-+-------------------------------------------+
-1 row in set, 1 warning (0.00 sec)
-
-Warning (Code 1681): PASSWORD is deprecated and will be removed in a future release.
 ```
 
 ### [`RANDOM_BYTES()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_random-bytes)
