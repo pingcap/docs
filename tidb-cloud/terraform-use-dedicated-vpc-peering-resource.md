@@ -1,27 +1,29 @@
 ---
-title: Use Dedicated VPC peering Resource
-summary: Learn how to use the dedicated VPC peering cluster resource to create and modify a TiDB Cloud dedicated VPC peering.
+title: Use Dedicated VPC Peering Resource
+summary: Learn how to use the dedicated VPC peering resource to create and modify a TiDB Cloud dedicated VPC peering.
 ---
 
-# Use Dedicated VPC peering Resource
+# Use Dedicated VPC Peering Resource
 
-You can learn how to manage a TiDB Cloud dedicated VPC peering with the `tidbcloud_vpc_peering` resource in this document.
+You can learn how to manage a TiDB Cloud dedicated VPC peering with the `tidbcloud_dedicated_vpc_peering` resource in this document.
 
-The features of the `tidbcloud_vpc_peering` resource include the following:
+The features of the `tidbcloud_dedicated_vpc_peering` resource include the following:
 
 - Create TiDB Cloud Dedicated VPC peering.
-- Modify TiDB Cloud Dedicated VPC peering.
 - Import TiDB Cloud Dedicated VPC peering.
 - Delete TiDB Cloud Dedicated VPC peering.
+
+> **Note:**
+>
+> TiDB Cloud Dedicated VPC peering resource can not be modified. If you want to change the configuration of a dedicated VPC peering, you need to delete the existing one and create a new one.
 
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) at least v0.4.0.
-- Create a TiDB Cloud Dedicated or Serverless cluster. For more information, see [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/terraform-use-dedicated-cluster-resource.md) or [Create a TiDB Cloud Serverless Cluster](/tidb-cloud/terraform-use-serverless-cluster-resource.md).
 
 ## Create a dedicated VPC peering using the dedicated VPC peering resource
 
-You can create a dedicated VPC peering using the `tidbcloud_vpc_peering` resource.
+You can create a dedicated VPC peering using the `tidbcloud_dedicated_vpc_peering` resource.
 
 The following example shows how to create a TiDB Cloud dedicated VPC peering.
 
@@ -115,7 +117,7 @@ The following example shows how to create a TiDB Cloud dedicated VPC peering.
 
     The status of the resource will keep being `Creating` until the you approve the VPC peering connection in your cloud provider console. After you approve the VPC peering connection, you can take [Approve and Configure the VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md#step-2-approve-and-configure-the-vpc-peering) as a reference, the status will change to `Active`.
 
-5. Use the `terraform show` or `terraform state show tidbcloud_sql_user.${resource-name}` command to inspect the state of your resource. The former will show the states of all resources and data sources.
+5. Use the `terraform show` or `terraform state show tidbcloud_dedicated_vpc_peering.${resource-name}` command to inspect the state of your resource. The former will show the states of all resources and data sources.
 
     ```shell
     $ terraform state show tidbcloud_dedicated_vpc_peering.example
@@ -152,13 +154,13 @@ For example, you can import a VPC peering that is not created by Terraform.
 
     ```
     import {
-      to = tidbcloud_sql_user.example
-      id = "10423692645683931174,your_vpc_peering_id"
+      to = tidbcloud_dedicated_vpc_peering.example
+      id = "10423692645683000000,your_vpc_peering_id"
     }
     ```
 2. Generate the new configuration file
 
-Generate the new configuration file for the new dedicated cluster resource according to the import block:
+Generate the new configuration file for the new dedicated vpc peering resource according to the import block:
 
   ```shell
   terraform plan -generate-config-out=generated.tf
@@ -175,8 +177,8 @@ Review the generated configuration file to ensure it meets your needs. Optionall
 Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
 
   ```shell
-  tidbcloud_vpc_peering.example: Importing... [id=aws-1934187953894000000,example]
-  tidbcloud_vpc_peering.example: Import complete [id=aws-19341879538940000000,example]
+  tidbcloud_dedicated_vpc_peering.example: Importing... [id=aws-1934187953894000000,example]
+  tidbcloud_dedicated_vpc_peering.example: Import complete [id=aws-19341879538940000000,example]
 
   Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
   ```
@@ -185,7 +187,7 @@ Now you can manage the imported dedicated VPC peering with Terraform.
 
 ## Delete a Dedicated VPC peering
 
-To delete a dedicated VPC peering, you can delete the configuration of the `tidbcloud_vpc_peering` resource, then use the `terraform apply` command to destroy the resource:
+To delete a dedicated VPC peering, you can delete the configuration of the `tidbcloud_dedicated_vpc_peering` resource, then use the `terraform apply` command to destroy the resource:
   ```shell
     $ terraform apply
     tidbcloud_dedicated_vpc_peering.example: Refreshing state...

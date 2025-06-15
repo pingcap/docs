@@ -211,12 +211,12 @@ For example, you can import a SQL user that is not created by Terraform.
     ```
     import {
       to = tidbcloud_sql_user.example
-      id = "10423692645683931174,example_user"
+      id = "10423692645683000000,example_user"
     }
     ```
 2. Generate the new configuration file
 
-Generate the new configuration file for the new dedicated cluster resource according to the import block:
+Generate the new configuration file for the new SQL user resource according to the import block:
 
   ```shell
   terraform plan -generate-config-out=generated.tf
