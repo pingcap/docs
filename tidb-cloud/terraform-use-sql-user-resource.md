@@ -1,6 +1,6 @@
 ---
 title: Use SQL User Resource
-summary: Learn how to use the SQL user cluster resource to create and modify a TiDB Cloud SQL user.
+summary: Learn how to use the SQL user resource to create and modify a TiDB Cloud SQL user.
 ---
 
 # Use SQL User Resource
@@ -202,9 +202,9 @@ The `builtin_role` is changed to `role_readonly`, the `password` is not shown be
 
 For a TiDB Cloud SQL user that is not managed by Terraform, you can use Terraform to manage it just by importing it.
 
-For example, you can import a cluster that is not created by Terraform.
+For example, you can import a SQL user that is not created by Terraform.
 
-1. Add an import block for the new dedicated cluster resource
+1. Add an import block for the new dedicated SQL user resource
 
 - Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,user_name`:
 
