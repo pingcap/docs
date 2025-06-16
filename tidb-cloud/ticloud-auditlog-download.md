@@ -35,7 +35,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | --start-date string     | The start date of the audit log you want to download in the format of 'YYYY-MM-DD', for example '2025-01-01'.              | Yes      | Only works in non-interactive mode.                  |
 | --end-date string       | The end date of the audit log you want to download in the format of 'YYYY-MM-DD',for example '2025-01-01'.                | Yes      | Only works in non-interactive mode.                  |
 | --output-path string    | The path where you want to download the audit logs. If not specified, logs are downloaded to the current directory. | No       | Only works in non-interactive mode.                  |
-| --concurrency int       | Download concurrency. (default 3)                                                                                   | No       | Works in both non-interactive and interactive modes. |
+| --concurrency int       | Download concurrency. (`3` by default)                                                                                   | No       | Works in both non-interactive and interactive modes. |
 | --force                 | Download without confirmation.                                                                                      | No       | Works in both non-interactive and interactive modes. |
 | -h, --help              | Shows help information for this command.                                                                            | No       | Works in both non-interactive and interactive modes. |
 
