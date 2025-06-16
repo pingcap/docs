@@ -6,9 +6,9 @@ aliases: ['/docs/dev/functions-and-operators/utility-functions/','/docs/dev/refe
 
 # Utility Functions
 
-## Supported functions
+This document introduces utility functions supported in TiDB
 
-### `FORMAT_BYTES()`
+## `FORMAT_BYTES()`
 
 The `FORMAT_BYTES()` function formats a number of bytes into a human-readable format for you.
 
@@ -25,7 +25,7 @@ SELECT FORMAT_BYTES(10*1024*1024);
 1 row in set (0.001 sec)
 ```
 
-### `FORMAT_NANO_TIME()`
+## `FORMAT_NANO_TIME()`
 
 The `FORMAT_NANO_TIME()` function formats a number of nanoseconds as a human-readable number.
 
