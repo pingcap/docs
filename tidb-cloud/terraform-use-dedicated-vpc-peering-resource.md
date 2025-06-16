@@ -5,7 +5,7 @@ summary: Learn how to use the dedicated VPC peering resource to create and modif
 
 # Use Dedicated VPC Peering Resource
 
-You can learn how to manage a TiDB Cloud dedicated VPC peering with the `tidbcloud_dedicated_vpc_peering` resource in this document.
+This document introduces how to manage a TiDB Cloud dedicated VPC peering with the `tidbcloud_dedicated_vpc_peering` resource in this document.
 
 The features of the `tidbcloud_dedicated_vpc_peering` resource include the following:
 
@@ -58,6 +58,7 @@ The following example shows how to create a TiDB Cloud dedicated VPC peering.
     - To use the dedicated VPC peering resource, set the resource type as `tidbcloud_dedicated_vpc_peering`.
     - For the resource name, you can define it according to your need. For example, `example`.
     - If you don't know how to get the values of the required arguments, see [Connect to TiDB Cloud Dedicated via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md).
+    - To get the dedicated VPC peering specification information, see [tidbcloud_dedicated_vpc_peering (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_vpc_peering).
 
 3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
 
@@ -96,7 +97,7 @@ The following example shows how to create a TiDB Cloud dedicated VPC peering.
         Enter a value:
     ```
 
-   As in the above result, Terraform generates an execution plan for you, which describes the actions Terraform will take:
+   In the preceding result, Terraform generates an execution plan for you, which describes the actions Terraform will take:
 
    - You can check the difference between the configurations and the states.
    - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
@@ -117,7 +118,7 @@ The following example shows how to create a TiDB Cloud dedicated VPC peering.
 
     The status of the resource will keep being `Creating` until the you approve the VPC peering connection in your cloud provider console. After you approve the VPC peering connection, you can take [Approve and Configure the VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md#step-2-approve-and-configure-the-vpc-peering) as a reference, the status will change to `Active`.
 
-5. Use the `terraform show` or `terraform state show tidbcloud_dedicated_vpc_peering.${resource-name}` command to inspect the state of your resource. The former will show the states of all resources and data sources.
+5. Use the `terraform show` or `terraform state show tidbcloud_dedicated_vpc_peering.${resource-name}` command to inspect the state of your resource. The former command shows the states of all resources and data sources.
 
     ```shell
     $ terraform state show tidbcloud_dedicated_vpc_peering.example
@@ -148,7 +149,7 @@ For a TiDB Cloud dedicated VPC peering that is not managed by Terraform, you can
 
 For example, you can import a VPC peering that is not created by Terraform.
 
-1. Add an import block for the new dedicated VPC peering resource
+1. Add an import block for the new dedicated VPC peering resource.
 
     Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,vpc_peering_id`:
 
@@ -159,7 +160,7 @@ For example, you can import a VPC peering that is not created by Terraform.
     }
     ```
 
-2. Generate the new configuration file
+2. Generate the new configuration file.
 
 Generate the new configuration file for the new dedicated vpc peering resource according to the import block:
 
@@ -171,7 +172,7 @@ Do not specify an existing `.tf` file name in the preceding command. Otherwise, 
 
 Then the `generated.tf` file is created in the current directory, which contains the configuration of the imported resource.
 
-3. Review and apply the generated configuration
+3. Review and apply the generated configuration.
 
 Review the generated configuration file to ensure it meets your needs. Optionally, you can move the contents of this file to your preferred location.
 

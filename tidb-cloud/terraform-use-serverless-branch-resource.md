@@ -57,7 +57,8 @@ The following example shows how to create a TiDB Cloud Serverless branch.
 
     - To use the serverless branch resource, set the resource type as `tidbcloud_serverless_branch`.
     - For the resource name, you can define it according to your need. For example, `example`.
-    - For the resource details, you can configure them according to the branch specification information.
+    - For the resource details, you can configure them according to the serverless branch specification information.
+    - To get the serverless branch specification information, see [tidbcloud_serverless_branch (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_branch).
 
 3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
 

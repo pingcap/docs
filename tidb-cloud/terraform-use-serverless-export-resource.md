@@ -55,7 +55,8 @@ The following example shows how to create a TiDB Cloud Serverless export.
 
     - To use the serverless export resource, set the resource type as `tidbcloud_serverless_export`.
     - For the resource name, you can define it according to your need. For example, `example`.
-    - For the resource details, you can configure them according to the export specification information.
+    - For the resource details, you can configure them according to the serverless export specification information.
+    - To get the serverless export specification information, see [tidbcloud_serverless_export (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_export).
 
 3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
 

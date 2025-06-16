@@ -5,7 +5,7 @@ summary: Learn how to use the SQL user resource to create and modify a TiDB Clou
 
 # Use SQL User Resource
 
-You can learn how to manage a TiDB Cloud SQL user with the `tidbcloud_sql_user` resource in this document.
+This document introduces how to manage a TiDB Cloud SQL user with the `tidbcloud_sql_user` resource in this document.
 
 The features of the `tidbcloud_sql_user` resource include the following:
 
@@ -55,6 +55,7 @@ The following example shows how to create a TiDB Cloud SQL user.
     - To use the SQL user resource, set the resource type as `tidbcloud_sql_user`.
     - For the resource name, you can define it according to your need. For example, `example`.
     - For serverless cluster SQL users, the `user_name` and builtin role `role_readonly` and `role_readwrite` should start with user prefix, you can get the user prefix by running the `tidbcloud_serverless_cluster` data source.
+    - To get the SQL user specification information, see [tidbcloud_sql_user (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/sql_user).
 
 3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
 
@@ -84,7 +85,7 @@ The following example shows how to create a TiDB Cloud SQL user.
       Enter a value:
     ```
 
-   As in the above result, Terraform generates an execution plan for you, which describes the actions Terraform will take:
+   In the preceding result, Terraform generates an execution plan for you, which describes the actions Terraform will take:
 
    - You can check the difference between the configurations and the states.
    - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
@@ -105,7 +106,7 @@ The following example shows how to create a TiDB Cloud SQL user.
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-5. Use the `terraform show` or `terraform state show tidbcloud_sql_user.${resource-name}` command to inspect the state of your resource. The former will show the states of all resources and data sources.
+5. Use the `terraform show` or `terraform state show tidbcloud_sql_user.${resource-name}` command to inspect the state of your resource. The former command shows the states of all resources and data sources.
 
     ```shell
     $ terraform state show tidbcloud_sql_user.example                 
@@ -170,7 +171,7 @@ For a TiDB Cloud SQL user, you can use Terraform to manage SQL user resources as
 
     ```
 
-    As in the above execution plan, password and builtin role will be changed.
+    In the preceding execution plan, password and builtin role will be changed.
 
 3. If everything in your plan looks fine, type `yes` to continue:
 
@@ -183,7 +184,7 @@ For a TiDB Cloud SQL user, you can use Terraform to manage SQL user resources as
     Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
     ```
 
-4. Use `terraform state show tidbcloud_sql_user.${resource-name}` to see the state:
+4. Use `terraform state show tidbcloud_sql_user.${resource-name}` to check the state:
 
     ```
     $ terraform state show tidbcloud_sql_user.example
