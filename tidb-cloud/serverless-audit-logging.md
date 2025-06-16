@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Serverless Database Audit Logging
-summary: Learn about how to audit a serverless cluster in TiDB Cloud.
+summary: Learn about how to audit a TiDB Cloud Serverless cluster in TiDB Cloud.
 ---
 
 # TiDB Cloud Serverless Database Audit Logging (Beta)
@@ -44,7 +44,7 @@ The filter rule contains the following fields:
 
     - `classes`: A list of event classes to filter audit events. For example, `["QUERY", "EXECUTE"]`.
     - `tables`: A list of table filters. See [Table filters](https://docs.pingcap.com/tidb/stable/table-filter/) for more details.
-    - `statusCodes`: A list of status codes to filter audit events. 1 means success, 0 means failure.
+    - `statusCodes`: A list of status codes to filter audit events. `1` means success, `0` means failure.
 
 Here is the summary of all event classes in database audit logging:
 
@@ -55,28 +55,28 @@ Here is the summary of all event classes in database audit logging:
 | DISCONNECT    | Record all operations of the disconnections                                                      | CONNECTION    |
 | CHANGE_USER   | Record all operations of changing users                                                          | CONNECTION    |
 | QUERY         | Record all operations of SQL statements, including all errors about querying and modifying data  | -             |
-| TRANSACTION   | Record all operations related to transactions, such as BEGIN, COMMIT, and ROLLBACK               | QUERY         |
-| EXECUTE       | Record all operations of the EXECUTE statements                                                  | QUERY         |
-| QUERY_DML     | Record all operations of the DML statements, including INSERT, REPLACE, UPDATE, DELETE, and LOAD DATA | QUERY     |
-| INSERT        | Record all operations of the INSERT statements                                                   | QUERY_DML     |
-| REPLACE       | Record all operations of the REPLACE statements                                                  | QUERY_DML     |
-| UPDATE        | Record all operations of the UPDATE statements                                                   | QUERY_DML     |
-| DELETE        | Record all operations of the DELETE statements                                                   | QUERY_DML     |
-| LOAD DATA     | Record all operations of the LOAD DATA statements                                                | QUERY_DML     |
-| SELECT        | Record all operations of the SELECT statements                                                   | QUERY         |
+| TRANSACTION   | Record all operations related to transactions, such as `BEGIN`, `COMMIT`, and `ROLLBACK`               | QUERY         |
+| EXECUTE       | Record all operations of the `EXECUTE` statements                                                  | QUERY         |
+| QUERY_DML     | Record all operations of the DML statements, including `INSERT`, `REPLACE`, `UPDATE`, `DELETE`, and `LOAD DATA` | QUERY     |
+| INSERT        | Record all operations of the `INSERT` statements                                                   | QUERY_DML     |
+| REPLACE       | Record all operations of the `REPLACE` statements                                                  | QUERY_DML     |
+| UPDATE        | Record all operations of the `UPDATE` statements                                                   | QUERY_DML     |
+| DELETE        | Record all operations of the `DELETE` statements                                                   | QUERY_DML     |
+| LOAD DATA     | Record all operations of the `LOAD DATA` statements                                                | QUERY_DML     |
+| SELECT        | Record all operations of the `SELECT` statements                                                   | QUERY         |
 | QUERY_DDL          | Record all operations of the DDL statements                                                      | QUERY               |
 | AUDIT              | Record all operations related to setting TiDB database auditing, including setting system variables and calling system functions | -                   |
 | AUDIT_FUNC_CALL    | Record all operations of calling system functions related to TiDB database auditing               | AUDIT               |
 
 ### Create a filter rule
 
-To create a filter rule that filters all audit logs, you can run the following command:
+To create a filter rule that filters all audit logs, run the following command:
 
 ```shell
 ticloud serverless audit-log filter create --cluster-id <cluster-id> --name <rule-name> --rule '{"users":["%@%"],"filters":[{}]}'
 ```
 
-To create a filter rule that filters ALL EXECUTE events, you can run the following command:
+To create a filter rule that filters ALL EXECUTE events, run the following command:
 
 ```shell
 ticloud serverless audit-log filter create --cluster-id <cluster-id> --name <rule-name> --rule '{"users":["%@%"],"filters":[{"classes":["EXECUTE"]]}'
@@ -84,13 +84,13 @@ ticloud serverless audit-log filter create --cluster-id <cluster-id> --name <rul
 
 ### Update a filter rule
 
-To disable a filter rule, you can run the following command:
+To disable a filter rule, run the following command:
 
 ```shell
 ticloud serverless audit-log filter update --cluster-id <cluster-id> --name <rule-name> --enabled=false
 ```
 
-To update a filter rule, you can run the following command:
+To update a filter rule, run the following command:
 
 ```shell
 ticloud serverless audit-log filter update --cluster-id <cluster-id> --name <rule-name> --rule '{"users":["%@%"],"filters":[{"classes":["QUERY"],"tables":["test.t"]}]}'
@@ -100,7 +100,7 @@ Note that you need to pass the complete `--rule` field when updating.
 
 ### Delete a filter rule
 
-To delete a filter rule, you can run the following command:
+To delete a filter rule, run the following command:
 
 ```shell
 ticloud serverless audit-log filter delete --cluster-id <cluster-id> --name <rule-name>
@@ -116,7 +116,7 @@ TiDB Cloud Serverless redacts sensitive data in the audit logs by default. For e
 INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES (1, 'Alice', '123456');
 ```
 
-is redacted as follows:
+It is redacted as follows:
 
 ```sql
 INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
@@ -133,11 +133,11 @@ ticloud serverless audit-log config --cluster-id <cluster-id> --unredacted
 TiDB Cloud Serverless generates a new audit log file when one of the following conditions is met:
 
 - The audit log file reaches 100 MB.
-- The time interval reaches 1 hour. Note that audit log file generation may be delayed for a few minutes depending on the underlying schedule.
+- The time interval reaches 1 hour. Note that audit log file generation might be delayed for a few minutes depending on the underlying schedule.
 
 > **Note:**
 >
-> The rotation cannot be configured at present. TiDB Cloud Serverless automatically rotates the audit log files based on the above conditions.
+> The rotation cannot be configured at present. TiDB Cloud Serverless automatically rotates the audit log files based on the preceding conditions.
 
 ## Access audit logging
 
@@ -181,27 +181,27 @@ All classes of audit logs contain the following information:
 | ROLES         | The roles of the user at the time of the operation                                            |
 | CONNECTION_ID | The identifier of the user's connection                                                       |
 | TABLES        | The accessed tables related to this audit record                                              |
-| STATUS_CODE   | The status code of the audit record. 1 means success, 0 means failure                        |
+| STATUS_CODE   | The status code of the audit record. `1` means success, `0` means failure                        |
 | KEYSPACE_NAME | The keyspace name of the audit record. |
 | SERVERLESS_TENANT_ID           | The ID of the serverless tenant that the cluster belongs to. |
 | SERVERLESS_TSERVERLESS_PROJECT_ID         | The name of the serverless project that the cluster belongs to. |
 | SERVERLESS_CLUSTER_ID          | The ID of the serverless cluster that the audit record belongs to. |
-| REASON        | The error message of the audit record. Only recorded when an error occurs during the operation|
+| REASON        | The error message of the audit record. Only recorded when an error occurs during the operation. |
 
 ### SQL statement information
 
-When the event class is QUERY or a subclass of QUERY, the audit logs contain the following information:
+When the event class is `QUERY` or a subclass of `QUERY`, the audit logs contain the following information:
 
 | Field          | Description                                                                                                   |
 |----------------|---------------------------------------------------------------------------------------------------------------|
-| CURRENT_DB     | The name of the current database                                                                              |
+| CURRENT_DB     | The name of the current database.                                                                              |
 | SQL_TEXT       | The executed SQL statements. If audit log redaction is enabled, the redacted SQL statements are recorded.     |
-| EXECUTE_PARAMS | The parameters for the EXECUTE statements. Recorded only when the event classes include EXECUTE and redaction is disabled. |
-| AFFECTED_ROWS  | The number of affected rows of the SQL statements. Recorded only when the event classes include QUERY_DML.    |
+| EXECUTE_PARAMS | The parameters for the `EXECUTE` statements. Recorded only when the event classes include `EXECUTE` and redaction is disabled. |
+| AFFECTED_ROWS  | The number of affected rows of the SQL statements. Recorded only when the event classes include `QUERY_DML`.    |
 
 ### Connection information
 
-When the event class is CONNECTION or a subclass of CONNECTION, the audit logs contain the following information:
+When the event class is `CONNECTION` or a subclass of `CONNECTION`, the audit logs contain the following information:
 
 | Field           | Description                                                                                   |
 |-----------------|-----------------------------------------------------------------------------------------------|
@@ -217,7 +217,7 @@ When the event class is CONNECTION or a subclass of CONNECTION, the audit logs c
 
 ### Audit operation information
 
-When the event class is AUDIT or a subclass of AUDIT, the audit logs contain the following information:
+When the event class is` AUDIT` or a subclass of `AUDIT`, the audit logs contain the following information:
 
 | Field          | Description                                                                                                   |
 |----------------|---------------------------------------------------------------------------------------------------------------|
