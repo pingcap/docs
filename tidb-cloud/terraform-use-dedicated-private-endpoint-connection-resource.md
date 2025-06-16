@@ -19,8 +19,8 @@ The features of the `tidbcloud_dedicated_private_endpoint_connection` resource i
 
 ## Prerequisites
 
-- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) at least v0.4.0.
-- Create a TiDB Cloud Dedicated. For more information, see [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/terraform-use-dedicated-cluster-resource.md).
+- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
+- Create a TiDB Cloud Dedicated cluster. For more information, see [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/terraform-use-dedicated-cluster-resource.md).
 
 ## Create a dedicated private endpoint connection using the dedicated private endpoint connection resource
 
@@ -150,14 +150,15 @@ For example, you can import a private endpoint connection that is not created by
 
 1. Add an import block for the new dedicated private endpoint connection resource
 
-- Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,dedicated_private_endpoint_connection_id`:
+    Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,dedicated_private_endpoint_connection_id`:
 
     ```
     import {
       to = tidbcloud_sql_user.example
-      id = "10423692645683000000,your_dedicated_private_endpoint_connection_id"
+      id = "${id}"
     }
     ```
+
 2. Generate the new configuration file
 
 Generate the new configuration file for the new dedicated private endpoint connection resource according to the import block:

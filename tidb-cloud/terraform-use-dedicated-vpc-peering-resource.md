@@ -19,7 +19,7 @@ The features of the `tidbcloud_dedicated_vpc_peering` resource include the follo
 
 ## Prerequisites
 
-- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) at least v0.4.0.
+- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
 
 ## Create a dedicated VPC peering using the dedicated VPC peering resource
 
@@ -150,14 +150,15 @@ For example, you can import a VPC peering that is not created by Terraform.
 
 1. Add an import block for the new dedicated VPC peering resource
 
-- Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,vpc_peering_id`:
+    Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,vpc_peering_id`:
 
     ```
     import {
       to = tidbcloud_dedicated_vpc_peering.example
-      id = "10423692645683000000,your_vpc_peering_id"
+      id = "${id}"
     }
     ```
+
 2. Generate the new configuration file
 
 Generate the new configuration file for the new dedicated vpc peering resource according to the import block:

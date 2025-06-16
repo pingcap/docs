@@ -19,7 +19,7 @@ The features of the `tidbcloud_dedicated_network_container` resource include the
 
 ## Prerequisites
 
-- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) at least v0.4.0.
+- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
 
 
 ## Create a dedicated network container using the dedicated network container resource
@@ -139,14 +139,15 @@ For example, you can import a network container that is not created by Terraform
 
 1. Add an import block for the new dedicated network container resource
 
-- Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,network_container_id`:
+    Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,network_container_id`:
 
     ```
     import {
       to = tidbcloud_dedicated_network_container.example
-      id = "10423692645683000000,your_network_container_id"
+      id = "${id}"
     }
     ```
+
 2. Generate the new configuration file
 
 Generate the new configuration file for the new dedicated vpc peering resource according to the import block:
