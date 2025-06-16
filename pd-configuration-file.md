@@ -78,7 +78,7 @@ This document only describes parameters that are not included in command-line pa
 ### `lease`
 
 + The timeout of the PD Leader Key lease. After the timeout, the system re-elects a Leader.
-+ Default value: `3`
++ Default value: Starting from v8.5.2, the default value is `5`. Before v8.5.2, the default value is `3`. 
 + Unit: second
 
 ### `quota-backend-bytes`
