@@ -10,7 +10,7 @@ aliases: ['/docs/dev/functions-and-operators/utility-functions/','/docs/dev/refe
 
 ### `FORMAT_BYTES()`
 
-The `FORMAT_BYTES()` function formats a number of bytes as human readable number.
+The `FORMAT_BYTES()` function formats a number of bytes into a human-readable format for you.
 
 ```sql
 SELECT FORMAT_BYTES(10*1024*1024);
