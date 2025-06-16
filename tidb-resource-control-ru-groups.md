@@ -203,7 +203,7 @@ The following is an example of how to create a resource group.
     CREATE RESOURCE GROUP IF NOT EXISTS rg3 RU_PER_SEC = 100 PRIORITY = HIGH;
     ```
 
-4. Create a resource group `rg1`. The resource limit is 500 RUs per second and allows applications in this resource group to overrun resources with `UNLIMITED` mode.
+4. Create a resource group `rg4`. The resource limit is 500 RUs per second and allows applications in this resource group to overrun resources with `UNLIMITED` mode.
 
     ```sql 
     CREATE RESOURCE GROUP IF NOT EXISTS rg4 RU_PER_SEC = 500 BURSTABLE=UNLIMITED; 
