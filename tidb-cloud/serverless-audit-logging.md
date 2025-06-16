@@ -158,7 +158,6 @@ ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <o
 - start-date: The start date of the audit log you want to download in the format of `YYYY-MM-DD`, for example `2025-01-01`.
 - end-date: The end date of the audit log you want to download in the format of `YYYY-MM-DD`, for example `2025-01-01`.
 
-
 > **Note:**
 >
 > TiDB Cloud Serverless does not guarantee sequential ordering of audit logs. The log file named `YYYY-MM-DD-<index>.log` may contains the audit logs in previous days.
@@ -217,7 +216,7 @@ When the event class is `CONNECTION` or a subclass of `CONNECTION`, the audit lo
 
 ### Audit operation information
 
-When the event class is` AUDIT` or a subclass of `AUDIT`, the audit logs contain the following information:
+When the event class is `AUDIT` or a subclass of `AUDIT`, the audit logs contain the following information:
 
 | Field          | Description                                                                                                   |
 |----------------|---------------------------------------------------------------------------------------------------------------|
