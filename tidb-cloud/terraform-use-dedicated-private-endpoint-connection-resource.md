@@ -54,7 +54,7 @@ The following example shows how to create a TiDB Cloud dedicated private endpoin
 
     Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
 
-    - To use the dedicated private endpoint connection resource, set the resource type as `tidbcloud_dedicated_dedicated_private_endpoint_connection`.
+    - To use the dedicated private endpoint connection resource, set the resource type as `tidbcloud_dedicated_private_endpoint_connection`.
     - For the resource name, you can define it according to your need. For example, `example`.
     - If you don't know how to get the values of the required arguments, see [Connect to a TiDB Cloud Dedicated Cluster via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md).
     - To get the dedicated private endpoint connection specification information, see [tidbcloud_private_endpoint_connection (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_private_endpoint_connection).
