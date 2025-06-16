@@ -125,7 +125,7 @@ Now, you can get all the available projects from the output. Copy one of the pro
 > **Note:**
 >
 > - Before you begin, make sure that you have set a CIDR in the TiDB Cloud console. For more information, see [Set a CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region). 
-> - You can also [create a `dedicated_network_container` resource](/tidb-cloud/terraform-use-dedicated_network-container.md) to manage your CIDR.
+> - You can also [create a `dedicated_network_container` resource](/tidb-cloud/terraform-use-dedicated-network-container-resource.md) to manage your CIDR.
 
 You can create a dedicated cluster using the `tidbcloud_dedicated_cluster` resource.
 
