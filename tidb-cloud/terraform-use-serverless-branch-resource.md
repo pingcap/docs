@@ -174,7 +174,7 @@ Import a Serverless branch that is not created by Terraform as follows:
     }
     ```
 
-1. Generate the new configuration file.
+2. Generate the new configuration file.
 
     Generate the new configuration file for the new serverless branch resource according to the import block:
 
@@ -184,7 +184,7 @@ Import a Serverless branch that is not created by Terraform as follows:
 
     Do not specify an existing `.tf` file name in the preceding command. Otherwise, Terraform will return an error.
 
-2. Review and apply the generated configuration.
+3. Review and apply the generated configuration.
 
     Review the generated configuration file to ensure that it meets your needs. Optionally, you can move the contents of this file to your preferred location.
 
