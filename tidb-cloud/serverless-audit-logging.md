@@ -141,9 +141,13 @@ TiDB Cloud Serverless generates a new audit log file when one of the following c
 
 ## Access audit logging
 
-TiDB Cloud Serverless audit logs are stored as readable text files named `YYYY-MM-DD-<uuid>.log`.
+TiDB Cloud Serverless audit logs are stored as readable text files named `YYYY-MM-DD-<index>.log`.
 
-Currently, audit logs are stored within TiDB Cloud for 365 days. After this period, logs are automatically deleted.
+Currently, audit logs are stored within TiDB Cloudfor 365 days. After this period, logs are automatically deleted.
+
+> **Note:**
+>
+> Support for external storage options (such as AWS S3, Azure Blob Storage, and Google Cloud Storage) will be available in the future.
 
 To view and download audit logs, use the [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-download.md):
 
@@ -151,9 +155,14 @@ To view and download audit logs, use the [TiDB Cloud CLI](/tidb-cloud/ticloud-au
 ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <output-path> --start-date <start-date> --end-date <end-date>
 ```
 
+- start-date: The start date of the audit log you want to download in the format of `YYYY-MM-DD`, for example `2025-01-01`.
+- end-date: The end date of the audit log you want to download in the format of `YYYY-MM-DD`, for example `2025-01-01`.
+
+
 > **Note:**
 >
-> Support for external storage options (such as AWS S3, Azure Blob Storage, and Google Cloud Storage) will be available in the future.
+> TiDB Cloud Serverless does not guarantee sequential ordering of audit logs. The log file named `YYYY-MM-DD-<index>.log` may contains the audit logs in previous days.
+> If you want to retrieve all logs from a specific date (for example, January 1, 2025), specify `--start-date 2025-01-01` and `--end-date 2025-01-02` usually works. But under extreme conditions, you may need to download all log files and order by the `TIME` filed.
 
 ## Audit logging fields
 
@@ -219,4 +228,4 @@ When the event class is AUDIT or a subclass of AUDIT, the audit logs contain the
 
 - Audit logging is only available via TiDB Cloud CLI; support for TiDB Cloud console will be available soon.
 - Audit logs can only be stored in TiDB Cloud at present; support for external storage will be available soon.
-- TiDB Cloud Serverless does not guarantee the sequential order of the audit logs, which means you might have to review all log files to see the latest events. To order the logs, you can use the `TIME` field in the event records.
+- TiDB Cloud Serverless does not guarantee the sequential order of the audit logs, which means you might have to review all log files to see the latest events. To order the logs, you can use the `TIME` field in the audit logs.
