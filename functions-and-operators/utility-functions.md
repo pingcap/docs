@@ -5,11 +5,11 @@ summary: This document introduces utility functions supported in TiDB.
 
 # Utility Functions
 
-This document introduces utility functions supported in TiDB
+This document introduces utility functions supported in TiDB.
 
 ## `FORMAT_BYTES()`
 
-The `FORMAT_BYTES()` function formats a number of bytes into a human-readable format.
+The `FORMAT_BYTES()` function converts a number of bytes into a human-readable format.
 
 ```sql
 SELECT FORMAT_BYTES(10*1024*1024);
@@ -26,7 +26,7 @@ SELECT FORMAT_BYTES(10*1024*1024);
 
 ## `FORMAT_NANO_TIME()`
 
-The `FORMAT_NANO_TIME()` function formats a number of nanoseconds as a human-readable number.
+The `FORMAT_NANO_TIME()` function converts a number of nanoseconds into a human-readable time format.
 
 ```sql
 SELECT FORMAT_NANO_TIME(1000000);
