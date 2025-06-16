@@ -11,10 +11,11 @@ The features of the `tidbcloud_dedicated_network_container` resource include the
 
 - Create TiDB Cloud Dedicated network container.
 - Import TiDB Cloud Dedicated network container.
+- Delete TiDB Cloud Dedicated network container.
 
 > **Note:**
 >
-> TiDB Cloud Dedicated network container can not be modified or deleted. Make sure the configuration of the `tidbcloud_network_container` resource is correct before you apply it.
+> TiDB Cloud Dedicated network container can not be modified and it can not be deleted once its status is `ACTIVE`. Make sure the configuration of the `tidbcloud_network_container` resource is correct before you apply it.
 
 ## Prerequisites
 
@@ -172,3 +173,52 @@ Then, run `terraform apply` to import your infrastructure. After applying, the e
   ```
 
 Now you can manage the imported dedicated network container with Terraform.
+
+## Delete a Dedicated network container
+To delete a Dedicated cluster, you can delete the configuration of the `tidbcloud_dedicated_cluster` resource, then use the `terraform apply` command to destroy the resource. However, you must ensure that the status of the dedicated network container is not `ACTIVE`. If it is `ACTIVE`, you cannot delete it.
+If the status is `INACTIVE`, you can delete it by running the following command:
+```shell
+  $ terraform apply
+  tidbcloud_dedicated_network_container.example: Refreshing state...
+
+  Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+    - destroy
+
+  Terraform will perform the following actions:
+
+    # tidbcloud_dedicated_network_container.example will be destroyed
+    # (because tidbcloud_dedicated_network_container.example is not in configuration)
+    - resource "tidbcloud_dedicated_network_container" "example" {
+        - cidr_notion          = "172.16.16.0/21" -> null
+        - cloud_provider       = "aws" -> null
+        - labels               = {
+            - "tidb.cloud/project" = "1372813089454000000"
+          } -> null
+        - network_container_id = "1934235512696000000" -> null
+        - project_id           = "1372813089454000000" -> null
+        - region_display_name  = "Seoul (ap-northeast-2)" -> null
+        - region_id            = "aws-ap-northeast-2" -> null
+        - state                = "INACTIVE" -> null
+          # (1 unchanged attribute hidden)
+      }
+
+  Plan: 0 to add, 0 to change, 1 to destroy.
+
+  Do you want to perform these actions?
+    Terraform will perform the actions described above.
+    Only 'yes' will be accepted to approve.
+
+    Enter a value: yes
+
+  tidbcloud_dedicated_network_container.example: Destroying...
+  tidbcloud_dedicated_network_container.example: Destruction complete after 2s
+
+  Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
+```
+
+Now, if you run the `terraform show` command, it will show no managed resources because the resource has been cleared:
+
+```
+$ terraform show
+```
+

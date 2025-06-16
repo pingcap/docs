@@ -77,17 +77,17 @@ To retrieve the information about all available projects, use the `tidbcloud_pro
           + {
               + cluster_count    = 0
               + create_timestamp = "1649154426"
-              + id               = "1372813089191121286"
+              + id               = "1372813089191000000"
               + name             = "test1"
-              + org_id           = "1372813089189921287"
+              + org_id           = "1372813089189000000"
               + user_count       = 1
             },
           + {
               + cluster_count    = 1
               + create_timestamp = "1640602740"
-              + id               = "1372813089189561287"
+              + id               = "1372813089189000000"
               + name             = "default project"
-              + org_id           = "1372813089189921287"
+              + org_id           = "1372813089189000000"
               + user_count       = 1
             },
         ]
