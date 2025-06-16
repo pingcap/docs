@@ -38,17 +38,17 @@ One Vercel project can only connect to one TiDB Cloud cluster. To change the int
 
 You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to the following to create one:
 
-- [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
 
     > **Note:**
     >
-    > The TiDB Cloud Vercel integration supports creating TiDB Serverless clusters. You can also create one later during the integration process.
+    > The TiDB Cloud Vercel integration supports creating TiDB Cloud Serverless clusters. You can also create one later during the integration process.
 
-- [Create a TiDB Dedicated cluster](/tidb-cloud/create-tidb-cluster.md)
+- [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md)
 
     > **Note:**
     >
-    > For TiDB Dedicated clusters, make sure that the traffic filter of the cluster allows all IP addresses (set to `0.0.0.0/0`) for connection, because Vercel deployments use [dynamic IP addresses](https://vercel.com/guides/how-to-allowlist-deployment-ip-address).
+    > For TiDB Cloud Dedicated clusters, make sure that the traffic filter of the cluster allows all IP addresses (set to `0.0.0.0/0`) for connection, because Vercel deployments use [dynamic IP addresses](https://vercel.com/guides/how-to-allowlist-deployment-ip-address).
 
 To [integrate with Vercel via the TiDB Cloud Vercel Integration](#connect-via-the-tidb-cloud-vercel-integration), you are expected to be in the `Organization Owner` role of your organization or the `Project Owner` role of the target project in TiDB Cloud. For more information, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
 
@@ -71,7 +71,7 @@ To connect via the TiDB Cloud Vercel integration, go to the [TiDB Cloud integrat
 
 > **Note:**
 >
-> This method is only available for TiDB Serverless clusters. If you want to connect to a TiDB Dedicated cluster, use the [manual method](#connect-via-manually-setting-environment-variables).
+> This method is only available for TiDB Cloud Serverless clusters. If you want to connect to a TiDB Cloud Dedicated cluster, use the [manual method](#connect-via-manually-setting-environment-variables).
 
 ### Integration workflow
 
@@ -89,7 +89,7 @@ The detailed steps are as follows:
     1. Select your target Vercel projects and click **Next**.
     2. Select your target TiDB Cloud organization and project.
     3. Select **Cluster** as your connection type.
-    4. Select your target TiDB Cloud cluster. If the **Cluster** drop-down list is empty or you want to select a new TiDB Serverless cluster, click **+ Create Cluster** in the list to create one.
+    4. Select your target TiDB Cloud cluster. If the **Cluster** drop-down list is empty or you want to select a new TiDB Cloud Serverless cluster, click **+ Create Cluster** in the list to create one.
     5. Select the database that you want to connect to. If the **Database** drop-down list is empty or you want to select a new Database, click **+ Create Database** in the list to create one.
     6. Select the framework that your Vercel projects are using. If the target framework is not listed, select **General**. Different frameworks determine different environment variables.
     7. Choose whether to enable **Branching** to create new branches for preview environments.
@@ -165,22 +165,22 @@ If you have installed [TiDB Cloud Vercel integration](https://vercel.com/integra
 
     ![Vercel Integration Configuration Page](/media/tidb-cloud/vercel/integration-vercel-configuration-page.png)
 
-    When you remove a connection, the environment variables set by the integration workflow are removed from the Vercel project, too. However, this action does not affect the data of the TiDB Serverless cluster.
+    When you remove a connection, the environment variables set by the integration workflow are removed from the Vercel project, too. However, this action does not affect the data of the TiDB Cloud Serverless cluster.
 
-### Connect with TiDB Serverless branching
+### Connect with TiDB Cloud Serverless branching
 
-Vercel's [Preview Deployments](https://vercel.com/docs/deployments/preview-deployments) feature allows you to preview changes to your app in a live deployment without merging those changes to your Git project's production branch. With [TiDB Serverless Branching](/tidb-cloud/branch-overview.md), you can create a new instance for each branch of your Vercel project. This allows you to preview app changes in a live deployment without affecting your production data.
+Vercel's [Preview Deployments](https://vercel.com/docs/deployments/preview-deployments) feature allows you to preview changes to your app in a live deployment without merging those changes to your Git project's production branch. With [TiDB Cloud Serverless Branching](/tidb-cloud/branch-overview.md), you can create a new instance for each branch of your Vercel project. This allows you to preview app changes in a live deployment without affecting your production data.
 
 > **Note:**
 >
-> Currently, TiDB Serverless branching only supports [Vercel projects associated with GitHub repositories](https://vercel.com/docs/deployments/git/vercel-for-github).
+> Currently, TiDB Cloud Serverless branching only supports [Vercel projects associated with GitHub repositories](https://vercel.com/docs/deployments/git/vercel-for-github).
 
-To enable TiDB Serverless Branching, you need to ensure the following in the [TiDB Cloud Vercel integration workflow](#integration-workflow):
+To enable TiDB Cloud Serverless Branching, you need to ensure the following in the [TiDB Cloud Vercel integration workflow](#integration-workflow):
 
 1. Select **Cluster** as your connection type. 
 2. Enable **Branching** to create new branches for preview environments.
 
-After you push changes to the Git repository, Vercel will trigger a preview deployment. TiDB Cloud integration will automatically create a TiDB Serverless branch for the Git branch and set environment variables. The detailed steps are as follows:
+After you push changes to the Git repository, Vercel will trigger a preview deployment. TiDB Cloud integration will automatically create a TiDB Cloud Serverless branch for the Git branch and set environment variables. The detailed steps are as follows:
 
 1. Create a new branch in your Git repository.
 
@@ -194,15 +194,15 @@ After you push changes to the Git repository, Vercel will trigger a preview depl
 
     ![Vercel Preview_Deployment](/media/tidb-cloud/vercel/vercel-preview-deployment.png)
 
-    1. During the deployment, TiDB Cloud integration will automatically create a TiDB Serverless branch with the same name as the Git branch. If the TiDB Serverless branch already exists, TiDB Cloud integration will skip this step.
+    1. During the deployment, TiDB Cloud integration will automatically create a TiDB Cloud Serverless branch with the same name as the Git branch. If the TiDB Cloud Serverless branch already exists, TiDB Cloud integration will skip this step.
 
         ![TiDB_Cloud_Branch_Check](/media/tidb-cloud/vercel/tidbcloud-branch-check.png)
 
-    2. After the TiDB Serverless branch is ready, TiDB Cloud integration will set environment variables in the preview deployment for the Vercel project.
+    2. After the TiDB Cloud Serverless branch is ready, TiDB Cloud integration will set environment variables in the preview deployment for the Vercel project.
 
         ![Preview_Envs](/media/tidb-cloud/vercel/preview-envs.png)
 
-    3. TiDB Cloud integration will also register a blocking check to wait for the TiDB Serverless branch to be ready. You can rerun the check manually.
+    3. TiDB Cloud integration will also register a blocking check to wait for the TiDB Cloud Serverless branch to be ready. You can rerun the check manually.
 4. After the check is passed, you can visit the preview deployment to see the changes.
 
 > **Note:**
@@ -211,7 +211,7 @@ After you push changes to the Git repository, Vercel will trigger a preview depl
 
 > **Note:**
 >
-> For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless branches by default. To avoid exceeding the limit, you can delete the TiDB Serverless branches that are no longer needed. For more information, see [Manage TiDB Serverless branches](/tidb-cloud/branch-manage.md).
+> For each organization in TiDB Cloud, you can create a maximum of five TiDB Cloud Serverless branches by default. To avoid exceeding the limit, you can delete the TiDB Cloud Serverless branches that are no longer needed. For more information, see [Manage TiDB Cloud Serverless branches](/tidb-cloud/branch-manage.md).
 
 ## Connect via manually setting environment variables
 
@@ -226,7 +226,7 @@ After you push changes to the Git repository, Vercel will trigger a preview depl
 
     ![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
 
-Here we use a Prisma application as an example. The following is a datasource setting in the Prisma schema file for a TiDB Serverless cluster:
+Here we use a Prisma application as an example. The following is a datasource setting in the Prisma schema file for a TiDB Cloud Serverless cluster:
 
 ```
 datasource db {

@@ -99,13 +99,11 @@ You can delete the original table structure through the `--drop-tables` paramete
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-2. Select **Import data from S3**.
-
-    If this is your first time using TiDB Cloud Import, select **Import From Amazon S3**.
+2. Select **Import data from Cloud Storage**, and then click **Amazon S3**.
 
 3. On the **Import Data from Amazon S3** page, configure the following source data information:
 
-    - **Import File Count**: select **Multiple files**.
+    - **Import File Count**: for TiDB Cloud Serverless, select **Multiple files**. This field is not available in TiDB Cloud Dedicated.
     - **Included Schema Files**: select **Yes**.
     - **Data Format**: select **SQL**.
     - **Folder URI**: enter `s3://developer.pingcap.com/bookshop/`.
@@ -295,4 +293,14 @@ CREATE TABLE `bookshop`.`orders` (
 
 ## Need help?
 
-Ask questions on [TiDB Community](https://ask.pingcap.com/).
+<CustomContent platform="tidb">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+
+</CustomContent>

@@ -27,13 +27,21 @@ The TiDB Cloud console provides a **[SQL Statement](/tidb-cloud/tune-performance
 
 Note that on this sub-tab, SQL queries with the same structure (even if the query parameters do not match) are grouped into the same SQL statement. For example, `SELECT * FROM employee WHERE id IN (1, 2, 3)` and `select * from EMPLOYEE where ID in (4, 5)` are both part of the same SQL statement `select * from employee where id in (...)`.
 
-You can view some key information in **Statement**.
+You can view some key information in **SQL Statement**.
 
-- SQL statement overview: including SQL digest, SQL template ID, the time range currently viewed, the number of execution plans, and the database where the execution takes place.
+- **SQL Template**: including SQL digest, SQL template ID, the time range currently viewed, the number of execution plans, and the database where the execution takes place.
+
+    ![Details0](/media/dashboard/dashboard-statement-detail0.png)
+
 - Execution plan list: if a SQL statement has more than one execution plan, the list is displayed. You can select different execution plans and the details of the selected execution plan are displayed at the bottom of the list. If there is only one execution plan, the list will not be displayed.
-- Execution plan details: shows the details of the selected execution plan. It collects the execution plans of such SQL type and the corresponding execution time from several perspectives to help you get more information. See [Execution plan in details](https://docs.pingcap.com/tidb/stable/dashboard-statement-details#statement-execution-details-of-tidb-dashboard) (area 3 in the image below).
 
-![Details](/media/dashboard/dashboard-statement-detail.png)
+    ![Details1](/media/dashboard/dashboard-statement-detail1.png)
+
+- Execution plan details: shows the details of the selected execution plan. It collects the execution plans of each SQL type and the corresponding execution time from several perspectives to help you get more information. See [Execution plans](https://docs.pingcap.com/tidb/stable/dashboard-statement-details#execution-plans).
+
+    ![Details2](/media/dashboard/dashboard-statement-detail2.png)
+
+- Related slow query
 
 In addition to the information in the **Statement** dashboard, there are also some SQL best practices for TiDB Cloud as described in the following sections.
 

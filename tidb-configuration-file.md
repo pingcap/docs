@@ -264,7 +264,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 > - In TiDB, the `zone` label is specially used to specify the zone where a server is located. If `zone` is set to a non-null value, the corresponding value is automatically used by features such as [`txn-score`](/system-variables.md#txn_scope) and [`Follower read`](/follower-read.md).
 > - The `group` label has a special use in TiDB Operator. For clusters deployed using [TiDB Operator](/tidb-operator-overview.md), it is **NOT** recommended that you specify the `group` label manually.
 
-## Log
+## log
 
 Configuration items related to log.
 
@@ -379,7 +379,7 @@ Configuration items related to log files.
 + Value options: `""`, `"gzip"`
 + The default value is `""`, which means no compression. To enable the gzip compression, set this value to `"gzip"`. After compression is enabled, all log files are affected, such as [`slow-query-file`](#slow-query-file) and [`general-log-file`](#general-log-file-new-in-v800).
 
-## Security
+## security
 
 Configuration items related to security.
 
@@ -423,6 +423,11 @@ Configuration items related to security.
 
 - The path of the SSL private key file used to connect TiKV or PD with TLS.
 - Default value: ""
+
+### `cluster-verify-cn`
+
+- A list of acceptable X.509 Common Names in certificates presented by clients. Requests are permitted only when the presented Common Name is an exact match with one of the entries in the list.
+- Default value: [], which means that the client certificate CN check is disabled.
 
 ### `spilled-file-encryption-method`
 
@@ -474,7 +479,7 @@ Configuration items related to security.
 + Default value: ""
 + Refer to the descriptions of [`session-token-signing-cert`](#session-token-signing-cert-new-in-v640).
 
-## Performance
+## performance
 
 Configuration items related to performance.
 
@@ -719,9 +724,13 @@ Configuration items related to opentracing.reporter.
 
 ### `grpc-compression-type`
 
-- Specifies the compression type used for data transfer between TiDB and TiKV nodes. The default value is `"none"`, which means no compression. To enable the gzip compression, set this value to `"gzip"`.
+- Specifies the compression type used for data transfer from TiDB nodes to TiKV nodes. The default value is `"none"`, which means no compression. To enable the gzip compression, set this value to `"gzip"`.
 - Default value: `"none"`
 - Value options: `"none"`, `"gzip"`
+
+> **Note:**
+>
+> The compression algorithm for response messages returned from TiKV nodes to TiDB nodes is controlled by the TiKV configuration item [`grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type).
 
 ### `commit-timeout`
 
@@ -772,7 +781,7 @@ Configuration items related to opentracing.reporter.
 
 ## tikv-client.copr-cache <span class="version-mark">New in v4.0.0</span>
 
-This section introduces configuration items related to the Coprocessor Cache feature.
+This section introduces configuration items related to the [Coprocessor Cache](/coprocessor-cache.md) feature.
 
 ### `capacity-mb`
 
@@ -843,7 +852,7 @@ Configuration related to the status of TiDB service.
 ### `record-db-label`
 
 - Determines whether to transmit the database-related QPS metrics to Prometheus.
-- Supports more metircs types than `record-db-qps`, for example, duration and statements.
+- Supports more metrics types than `record-db-qps`, for example, duration and statements.
 - Default value: `false`
 
 ## pessimistic-txn

@@ -13,13 +13,13 @@ This document shows how to connect to Cloudflare Workers with TiDB Cloud serverl
 
 > **Note:**
 >
-> TiDB Cloud serverless driver can only be used in TiDB Serverless.
+> TiDB Cloud serverless driver can only be used in TiDB Cloud Serverless.
 
 ## Before you begin
 
 Before you try the steps in this article, you need to prepare the following things:
 
-- A TiDB Cloud account and a TiDB Serverless cluster on TiDB Cloud. For more details, see [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster).
+- A TiDB Cloud account and a TiDB Cloud Serverless cluster on TiDB Cloud. For more details, see [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster).
 - A [Cloudflare Workers account](https://dash.cloudflare.com/login).
 - [npm](https://docs.npmjs.com/about-npm) is installed.
 

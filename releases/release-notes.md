@@ -9,6 +9,7 @@ summary: TiDB has released multiple versions, including 8.1.0, 8.0.0-DMR, 7.6.0-
 
 ## 8.1
 
+- [8.1.2](/releases/release-8.1.2.md): 2024-12-26
 - [8.1.1](/releases/release-8.1.1.md): 2024-08-27
 - [8.1.0](/releases/release-8.1.0.md): 2024-05-24
 
@@ -22,6 +23,8 @@ summary: TiDB has released multiple versions, including 8.1.0, 8.0.0-DMR, 7.6.0-
 
 ## 7.5
 
+- [7.5.6](/releases/release-7.5.6.md): 2025-03-14
+- [7.5.5](/releases/release-7.5.5.md): 2024-12-31
 - [7.5.4](/releases/release-7.5.4.md): 2024-10-15
 - [7.5.3](/releases/release-7.5.3.md): 2024-08-05
 - [7.5.2](/releases/release-7.5.2.md): 2024-06-13
@@ -42,6 +45,7 @@ summary: TiDB has released multiple versions, including 8.1.0, 8.0.0-DMR, 7.6.0-
 
 ## 7.1
 
+- [7.1.6](/releases/release-7.1.6.md): 2024-11-21
 - [7.1.5](/releases/release-7.1.5.md): 2024-04-26
 - [7.1.4](/releases/release-7.1.4.md): 2024-03-11
 - [7.1.3](/releases/release-7.1.3.md): 2023-12-21
@@ -59,6 +63,7 @@ summary: TiDB has released multiple versions, including 8.1.0, 8.0.0-DMR, 7.6.0-
 
 ## 6.5
 
+- [6.5.12](/releases/release-6.5.12.md): 2025-02-27
 - [6.5.11](/releases/release-6.5.11.md): 2024-09-20
 - [6.5.10](/releases/release-6.5.10.md): 2024-06-20
 - [6.5.9](/releases/release-6.5.9.md): 2024-04-12

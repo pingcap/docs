@@ -40,7 +40,7 @@ A `tiup br` command consists of multiple layers of sub-commands. Currently, br c
 * `db`: used to back up or restore a specified database of the cluster.
 * `table`: used to back up or restore a single table in the specified database of the cluster.
 
-`tiup br debug` incudes the following sub-commands:
+`tiup br debug` includes the following sub-commands:
 
 * `checksum`: (hidden parameter) used to offline check the integrity of backup data to ensure that all backup files match the CRC64 checksum results calculated by [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md).
 * `backupmeta`: used to check whether an intersection exists among backup data files. In normal cases, backup data files do not intersect.

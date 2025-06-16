@@ -71,6 +71,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 + Descending Index [#2519](https://github.com/pingcap/tidb/issues/2519)
 + `SKIP LOCKED` syntax [#18207](https://github.com/pingcap/tidb/issues/18207)
 + Lateral derived tables [#40328](https://github.com/pingcap/tidb/issues/40328)
++ JOIN ON subquery [#11414](https://github.com/pingcap/tidb/issues/11414)
 
 ## Differences from MySQL
 
@@ -136,13 +137,13 @@ As shown, because of the shared allocator, the `id` increments by 2 each time. T
 
 <CustomContent platform="tidb">
 
-TiDB utilizes a combination of [Prometheus and Grafana](/tidb-monitoring-api.md) for storing and querying performance monitoring metrics. In TiDB, performance schema tables do not return any results.
+TiDB utilizes a combination of [Prometheus and Grafana](/tidb-monitoring-api.md) for storing and querying performance monitoring metrics. In TiDB, most [performance schema tables](/performance-schema/performance-schema.md) do not return any results.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-To check performance metrics in TiDB Cloud, you can either check the cluster overview page on the TiDB Cloud console or use [third-party monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md). Performance schema tables return empty results in TiDB.
+To check performance metrics in TiDB Cloud, you can either check the cluster overview page in the TiDB Cloud console or use [third-party monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md). Most [performance schema tables](/performance-schema/performance-schema.md) return empty results in TiDB.
 
 </CustomContent>
 

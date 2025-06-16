@@ -11,7 +11,7 @@ TiProxy is an optional component. You can also use a third-party proxy component
 
 The following figure shows the architecture of TiProxy:
 
-<img src="https://download.pingcap.com/images/docs/tiproxy/tiproxy-architecture.png" alt="TiProxy architecture" width="500" />
+<img src="https://docs-download.pingcap.com/media/images/docs/tiproxy/tiproxy-architecture.png" alt="TiProxy architecture" width="500" />
 
 ## Main features
 
@@ -23,7 +23,7 @@ TiProxy can migrate connections from one TiDB server to another without breaking
 
 As shown in the following figure, the client originally connects to TiDB 1 through TiProxy. After the connection migration, the client actually connects to TiDB 2. When TiDB 1 is about to be offline or the ratio of connections on TiDB 1 to connections on TiDB 2 exceeds the set threshold, the connection migration is triggered. The client is unaware of the connection migration.
 
-<img src="https://download.pingcap.com/images/docs/tiproxy/tiproxy-session-migration.png" alt="TiProxy connection migration" width="400" />
+<img src="https://docs-download.pingcap.com/media/images/docs/tiproxy/tiproxy-session-migration.png" alt="TiProxy connection migration" width="400" />
 
 Connection migration usually occurs in the following scenarios:
 
@@ -47,7 +47,7 @@ TiProxy is suitable for the following scenarios:
 
 TiProxy is not suitable for the following scenarios:
 
-- Sensitive to performance: The performance of TiProxy is lower than that of HAProxy and other load balancers, so using TiProxy will reduce the QPS. For details, refer to [TiProxy Performance Test Report](/tiproxy/tiproxy-performance-test.md).
+- Sensitive to performance: The performance of TiProxy is lower than that of HAProxy and other load balancers, so using TiProxy requires reserving more CPU resources to maintain similar performance levels. For details, refer to [TiProxy Performance Test Report](/tiproxy/tiproxy-performance-test.md).
 - Sensitive to cost: If the TiDB cluster uses hardware load balancers, virtual IP, or the load balancer provided by Kubernetes, adding TiProxy will increase the cost. In addition, if you deploy the TiDB cluster across availability zones on the cloud, adding TiProxy will also increase the traffic cost across availability zones.
 - TiDB server failover: TiProxy can keep the client connection only when the TiDB server is offline or restarted as planned. If the TiDB server is offline unexpectedly, the connection is still broken.
 

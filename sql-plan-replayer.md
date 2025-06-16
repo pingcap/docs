@@ -16,10 +16,8 @@ The features of `PLAN REPLAYER` are as follows:
 
 You can use `PLAN REPLAYER` to save the on-site information of a TiDB cluster. The export interface is as follows:
 
-{{< copyable "sql" >}}
-
 ```sql
-PLAN REPLAYER DUMP EXPLAIN [ANALYZE] [WITH STATS AS OF TIMESTAMP expression] sql-statement;
+PLAN REPLAYER DUMP [WITH STATS AS OF TIMESTAMP expression] EXPLAIN [ANALYZE] sql-statement;
 ```
 
 Based on `sql-statement`, TiDB sorts out and exports the following on-site information:

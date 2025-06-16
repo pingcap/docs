@@ -33,6 +33,7 @@ TiDB Cloud logs the following types of cluster events:
 | ResumeCluster |   Resume a cluster | 
 | ModifyClusterSize |   Modify cluster size | 
 | BackupCluster |   Back up a cluster |  
+| ExportBackup |   Export a backup |
 | RestoreFromCluster |   Restore a cluster |  
 | CreateChangefeed |   Create a changefeed |  
 | PauseChangefeed |   Pause a changefeed | 
@@ -42,8 +43,8 @@ TiDB Cloud logs the following types of cluster events:
 | ScaleChangefeed |   Scale the specification of a changefeed |  
 | FailedChangefeed |   Changefeed failures |  
 | ImportData |   Import data to a cluster |  
-| UpdateSpendingLimit |   Update spending limit of a TiDB Serverless cluster |  
-| ResourceLimitation |   Update resource limitation of a TiDB Serverless cluster |  
+| UpdateSpendingLimit |   Update spending limit of a TiDB Cloud Serverless scalable cluster |  
+| ResourceLimitation |   Update resource limitation of a TiDB Cloud Serverless cluster |  
 
 For each event, the following information is logged:
 

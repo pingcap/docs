@@ -182,8 +182,8 @@ The following TiKV configuration items can be modified dynamically:
 | `quota.foreground-write-bandwidth` | The soft limit on the bandwidth with which foreground transactions write data |
 | `quota.foreground-read-bandwidth` | The soft limit on the bandwidth with which foreground transactions and the Coprocessor read data |
 | `quota.background-cpu-time` | The soft limit on the CPU resources used by TiKV background to process read and write requests |
-| `quota.background-write-bandwidth` | The soft limit on the bandwidth with which background transactions write data (not effective yet) |
-| `quota.background-read-bandwidth` | The soft limit on the bandwidth with which background transactions and the Coprocessor read data (not effective yet) |
+| `quota.background-write-bandwidth` | The soft limit on the bandwidth with which background transactions write data |
+| `quota.background-read-bandwidth` | The soft limit on the bandwidth with which background transactions and the Coprocessor read data |
 | `quota.enable-auto-tune` | Whether to enable the auto-tuning of quota. If this configuration item is enabled, TiKV dynamically adjusts the quota for the background requests based on the load of TiKV instances.  |
 | `quota.max-delay-duration` | The maximum time that a single read or write request is forced to wait before it is processed in the foreground |
 | `gc.ratio-threshold` | The threshold at which Region GC is skipped (the number of GC versions/the number of keys) |
@@ -225,6 +225,7 @@ The following TiKV configuration items can be modified dynamically:
 | `server.simplify-metrics`        | Controls whether to simplify the sampling monitoring metrics                   |
 | `storage.block-cache.capacity` | The size of shared block cache (supported since v4.0.3) |
 | `storage.scheduler-worker-pool-size` | The number of threads in the Scheduler thread pool |
+| `import.num-threads` | The number of threads to process restore or import RPC requests (dynamic modification is supported starting from v8.1.2) |
 | `backup.num-threads` | The number of backup threads (supported since v4.0.3) |
 | `split.qps-threshold` | The threshold to execute `load-base-split` on a Region. If the QPS of read requests for a Region exceeds `qps-threshold` for 10 consecutive seconds, this Region should be split.|
 | `split.byte-threshold` | The threshold to execute `load-base-split` on a Region. If the traffic of read requests for a Region exceeds the `byte-threshold` for 10 consecutive seconds, this Region should be split. |

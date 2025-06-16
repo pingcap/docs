@@ -7,12 +7,71 @@ summary: Learn how to use TiDB Cloud serverless driver with Prisma ORM.
 
 [Prisma](https://www.prisma.io/docs) is an open source next-generation ORM (Object-Relational Mapping) that helps developers interact with their database in an intuitive, efficient, and safe way. TiDB Cloud offers [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter), enabling you to use [Prisma Client](https://www.prisma.io/docs/concepts/components/prisma-client) over HTTPS with [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md). Compared with the traditional TCP way, [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter) brings the following benefits:
 
-- Better performance in serverless environments
-- Possibility of using Prisma client in the edge environments (see [#21394](https://github.com/prisma/prisma/issues/21394) for more information)
+- Better performance of Prisma Client in serverless environments
+- Ability to use Prisma Client in edge environments
 
-This tutorial describes how to use TiDB Cloud serverless driver with the Prisma adapter.
+This tutorial describes how to use [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter) in serverless environments and edge environments.
+
+## Install
+
+You need to install both [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter) and [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md). You can install them using [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
+
+Taking npm as an example, you can run the following commands for installation:
+
+```shell
+npm install @tidbcloud/prisma-adapter
+npm install @tidbcloud/serverless
+```
+
+## Enable `driverAdapters`
+
+To use the Prisma adapter, you need to enable the `driverAdapters` feature in the `schema.prisma` file. For example:
+
+```prisma
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+}
+```
+
+## Initialize Prisma Client
+
+Before using Prisma Client, you need to initialize it with `@tidbcloud/prisma-adapter`. 
+
+For `@tidbcloud/prisma-adapter` earlier than v6.6.0: 
+
+```js
+import { connect } from '@tidbcloud/serverless';
+import { PrismaTiDBCloud } from '@tidbcloud/prisma-adapter';
+import { PrismaClient } from '@prisma/client';
+
+// Initialize Prisma Client
+const connection = connect({ url: ${DATABASE_URL} });
+const adapter = new PrismaTiDBCloud(connection);
+const prisma = new PrismaClient({ adapter });
+```
+
+For `@tidbcloud/prisma-adapter` v6.6.0 or a later version: 
+
+```js
+import { PrismaTiDBCloud } from '@tidbcloud/prisma-adapter';
+import { PrismaClient } from '@prisma/client';
+
+// Initialize Prisma Client
+const adapter = new PrismaTiDBCloud({ url: ${DATABASE_URL} });
+const prisma = new PrismaClient({ adapter });
+```
+
+Then, queries from Prisma Client can be sent to the TiDB Cloud serverless driver for processing.
 
 ## Use the Prisma adapter in Node.js environments
+
+This section provides an example of how to use `@tidbcloud/prisma-adapter` in Node.js environments.
 
 ### Before you begin
 
@@ -20,7 +79,7 @@ To complete this tutorial, you need the following:
 
 - [Node.js](https://nodejs.org/en) >= 18.0.0.
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
-- A TiDB Serverless cluster. If you don't have any, you can [create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- A TiDB Cloud Serverless cluster. If you don't have any, you can [create a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 
 ### Step 1. Create a project
 
@@ -40,26 +99,26 @@ To complete this tutorial, you need the following:
     npm install @tidbcloud/serverless
     npm install prisma --save-dev
     ```
- 
+
 3. In the `package.json` file, specify the ES module by adding `type: "module"`:
 
    ```json
    {
      "type": "module",
      "dependencies": {
-       "@prisma/client": "^5.5.2",
-       "@tidbcloud/prisma-adapter": "^5.5.2",
-       "@tidbcloud/serverless": "^0.0.7"
+       "@prisma/client": "^6.6.0",
+       "@tidbcloud/prisma-adapter": "^6.6.0",
+       "@tidbcloud/serverless": "^0.1.0"
      },
      "devDependencies": {
-       "prisma": "^5.5.2"
+       "prisma": "^6.6.0"
      }
    }
    ```
 
 ### Step 2. Set the environment
 
-1. On the overview page of your TiDB Serverless cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
+1. On the overview page of your TiDB Cloud Serverless cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
 
     ```
     mysql://[username]:[password]@[host]:4000/[database]?sslaccept=strict
@@ -120,13 +179,13 @@ To complete this tutorial, you need the following:
    }
    ```
 
-3. Synchronize your database with the Prisma schema. You can either manually create the database tables in your TiDB Serverless cluster or use the Prisma CLI to create them automatically as follows:
+3. Synchronize your database with the Prisma schema. You can either manually create the database tables in your TiDB Cloud Serverless cluster or use the Prisma CLI to create them automatically as follows:
 
     ```
     npx prisma db push
     ```
-   
-    This command will create the `user` table in your TiDB Serverless cluster through the traditional TCP connection, rather than through the HTTPS connection using `@tidbcloud/prisma-adapter`. This is because it uses the same engine as Prisma Migrate. For more information about this command, see [Prototype your schema](https://www.prisma.io/docs/concepts/components/prisma-migrate/db-push).
+
+   This command will create the `user` table in your TiDB Cloud Serverless cluster through the traditional TCP connection, rather than through the HTTPS connection using `@tidbcloud/prisma-adapter`. This is because it uses the same engine as Prisma Migrate. For more information about this command, see [Prototype your schema](https://www.prisma.io/docs/concepts/components/prisma-migrate/db-push).
 
 4. Generate Prisma Client:
 
@@ -134,14 +193,13 @@ To complete this tutorial, you need the following:
     npx prisma generate
     ```
 
-    This command will generate Prisma Client based on the Prisma schema.
+   This command will generate Prisma Client based on the Prisma schema.
 
 ### Step 4. Execute CRUD operations
 
 1. Create a file named `hello-word.js` and add the following code to initialize Prisma Client:
 
    ```js
-   import { connect } from '@tidbcloud/serverless';
    import { PrismaTiDBCloud } from '@tidbcloud/prisma-adapter';
    import { PrismaClient } from '@prisma/client';
    import dotenv from 'dotenv';
@@ -151,8 +209,7 @@ To complete this tutorial, you need the following:
    const connectionString = `${process.env.DATABASE_URL}`;
    
    // Initialize Prisma Client
-   const connection = connect({ url: connectionString });
-   const adapter = new PrismaTiDBCloud(connection);
+   const adapter = new PrismaTiDBCloud({ url: connectionString });
    const prisma = new PrismaClient({ adapter });
    ```
 
@@ -178,7 +235,7 @@ To complete this tutorial, you need the following:
       },
    })
    ```
-   
+
 3. Execute some transaction operations with Prisma Client. For example:
 
    ```js
@@ -213,7 +270,10 @@ To complete this tutorial, you need the following:
      console.log(e)
    }
    ```
-   
+
 ## Use the Prisma adapter in edge environments
 
-Currently, `@tidbcloud/prisma-adapter` is not compatible with edge environments such as Vercel Edge Function and Cloudflare Workers. However, there are plans to support these environments. For more information, see [#21394](https://github.com/prisma/prisma/issues/21394).
+You can use `@tidbcloud/prisma-adapter` v5.11.0 or a later version in edge environments such as Vercel Edge Functions and Cloudflare Workers.
+
+- [Vercel Edge Function example](https://github.com/tidbcloud/serverless-driver-example/tree/main/prisma/prisma-vercel-example)
+- [Cloudflare Workers example](https://github.com/tidbcloud/serverless-driver-example/tree/main/prisma/prisma-cloudflare-worker-example)

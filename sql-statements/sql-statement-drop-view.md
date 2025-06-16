@@ -5,7 +5,7 @@ summary: An overview of the usage of DROP VIEW for the TiDB database.
 
 # DROP VIEW
 
-This statement drops an view object from the currently selected database. It does not effect any base tables that a view references.
+This statement drops a view object from the currently selected database. It does not affect any base tables that a view references.
 
 ## Synopsis
 

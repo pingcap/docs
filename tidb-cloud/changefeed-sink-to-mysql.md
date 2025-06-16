@@ -1,6 +1,6 @@
 ---
 title: Sink to MySQL
-Summary: Learn how to create a changefeed to stream data from TiDB Cloud to MySQL.
+summary: This document explains how to stream data from TiDB Cloud to MySQL using the Sink to MySQL changefeed. It includes restrictions, prerequisites, and steps to create a MySQL sink for data replication. The process involves setting up network connections, loading existing data to MySQL, and creating target tables in MySQL. After completing the prerequisites, users can create a MySQL sink to replicate data to MySQL.
 ---
 
 # Sink to MySQL
@@ -9,8 +9,8 @@ This document describes how to stream data from TiDB Cloud to MySQL using the **
 
 > **Note:**
 >
-> - To use the changefeed feature, make sure that your TiDB Dedicated cluster version is v6.1.3 or later.
-> - For [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless), the changefeed feature is unavailable.
+> - To use the changefeed feature, make sure that your TiDB Cloud Dedicated cluster version is v6.1.3 or later.
+> - For [TiDB Cloud Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless), the changefeed feature is unavailable.
 
 ## Restrictions
 
@@ -35,7 +35,7 @@ If your MySQL service is in an AWS VPC that has no public internet access, take 
 1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster.
 2. Modify the inbound rules of the security group that the MySQL service is associated with.
 
-    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the inbound rules. Doing so allows the traffic to flow from your TiDB Cluster to the MySQL instance.
+    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) to the inbound rules. Doing so allows the traffic to flow from your TiDB Cluster to the MySQL instance.
 
 3. If the MySQL URL contains a hostname, you need to allow TiDB Cloud to be able to resolve the DNS hostname of the MySQL service.
 
@@ -48,7 +48,7 @@ If your MySQL service is in a Google Cloud VPC that has no public internet acces
 2. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster.
 3. Modify the ingress firewall rules of the VPC where MySQL is located.
 
-    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the ingress firewall rules. Doing so allows the traffic to flow from your TiDB Cluster to the MySQL endpoint.
+    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) to the ingress firewall rules. Doing so allows the traffic to flow from your TiDB Cluster to the MySQL endpoint.
 
 ### Load existing data (optional)
 
@@ -93,7 +93,7 @@ After completing the prerequisites, you can sink your data to MySQL.
 
 1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
 
-2. Click **Create Changefeed**, and select **MySQL** as **Target Type**.
+2. Click **Create Changefeed**, and select **MySQL** as **Destination**.
 
 3. Fill in the MySQL endpoints, user name, and password in **MySQL Connection**.
 

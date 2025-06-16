@@ -11,7 +11,7 @@ AWS DMS is a cloud service that makes it easy to migrate relational databases, d
 
 This document uses Amazon RDS as an example to show how to migrate data to TiDB Cloud using AWS DMS. The procedure also applies to migrating data from self-hosted MySQL databases or Amazon Aurora to TiDB Cloud.
 
-In this example, the data source is Amazon RDS, and the data destination is a TiDB Dedicated cluster in TiDB Cloud. Both upstream and downstream databases are in the same region.
+In this example, the data source is Amazon RDS, and the data destination is a TiDB Cloud Dedicated cluster in TiDB Cloud. Both upstream and downstream databases are in the same region.
 
 ## Prerequisites
 
@@ -181,8 +181,8 @@ If you encounter any issues or failures during the migration, you can check the 
 
 ## See also
 
-- If you want to learn more about how to connect AWS DMS to TiDB Serverless or TiDB Dedicated, see [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md).
+- If you want to learn more about how to connect AWS DMS to TiDB Cloud Serverless or TiDB Cloud Dedicated, see [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md).
 
 - If you want to migrate from MySQL-compatible databases, such as Aurora MySQL and Amazon Relational Database Service (RDS), to TiDB Cloud, it is recommended to use [Data Migration on TiDB Cloud](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
 
-- If you want to migrate from Amazon RDS for Oracle to TiDB Serverless Using AWS DMS, see [Migrate from Amazon RDS for Oracle to TiDB Serverless Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md).
+- If you want to migrate from Amazon RDS for Oracle to TiDB Cloud Serverless Using AWS DMS, see [Migrate from Amazon RDS for Oracle to TiDB Cloud Serverless Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md).

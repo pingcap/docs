@@ -130,7 +130,8 @@ This section exemplifies how to add a TiDB node to the `10.0.1.5` host.
 
     > **Note:**
     >
-    > This operation is only required after you add PD nodes. If you only add TiDB or TiKV nodes, this operation is unnecessary.
+    > - Refreshing cluster configuration is only required after you add PD nodes. If you only add TiDB or TiKV nodes, skip this step.
+    > - If you are using TiUP v1.15.0 or a later version, skip this step because TiUP does it. If you are using a TiUP version earlier than v1.15.0, perform the following sub-steps.
 
     1. Refresh the cluster configuration:
 
@@ -139,10 +140,6 @@ This section exemplifies how to add a TiDB node to the `10.0.1.5` host.
         ```
 
     2. Refresh the Prometheus configuration and restart Prometheus:
-
-        > **Note:**
-        >
-        > If you are using TiUP v1.15.0 or a later version, skip this step. If you are using a TiUP version earlier than v1.15.0, execute the following command to update the Prometheus configuration and restart Prometheus.
 
         ```shell
         tiup cluster reload <cluster-name> -R prometheus
@@ -297,7 +294,7 @@ This section exemplifies how to remove a TiKV node from the `10.0.1.5` host.
     ```
     Starting /root/.tiup/components/cluster/v1.12.3/cluster display <cluster-name>
     TiDB Cluster: <cluster-name>
-    TiDB Version: v8.1.1
+    TiDB Version: v8.1.2
     ID              Role         Host        Ports                            Status  Data Dir                Deploy Dir
     --              ----         ----        -----                            ------  --------                ----------
     10.0.1.3:8300   cdc          10.0.1.3    8300                             Up      data/cdc-8300           deploy/cdc-8300
@@ -332,7 +329,8 @@ This section exemplifies how to remove a TiKV node from the `10.0.1.5` host.
 
     > **Note:**
     >
-    > This operation is only required after you remove PD nodes. If you only remove TiDB or TiKV nodes, this operation is unnecessary.
+    > - Refreshing cluster configuration is only required after you remove PD nodes. If you only remove TiDB or TiKV nodes, skip this step.
+    > - If you are using TiUP v1.15.0 or a later version, skip this step because TiUP does it. If you are using a TiUP version earlier than v1.15.0, perform the following sub-steps.
 
     1. Refresh the cluster configuration:
 
@@ -341,10 +339,6 @@ This section exemplifies how to remove a TiKV node from the `10.0.1.5` host.
         ```
 
     2. Refresh the Prometheus configuration and restart Prometheus:
-
-        > **Note:**
-        >
-        > If you are using TiUP v1.15.0 or a later version, skip this step. If you are using a TiUP version earlier than v1.15.0, execute the following command to update the Prometheus configuration and restart Prometheus.
 
         ```shell
         tiup cluster reload <cluster-name> -R prometheus
@@ -392,6 +386,8 @@ This section exemplifies how to remove a TiFlash node from the `10.0.1.4` host.
     ALTER TABLE <db-name>.<table-name> SET tiflash replica 'new_replica_num';
     ```
 
+    After executing this statement, TiDB modifies or deletes PD [placement rules](/configure-placement-rules.md) accordingly. Then, PD schedules data based on the updated placement rules.
+
 3. Perform step 1 again and make sure that there is no table with TiFlash replicas more than the number of TiFlash nodes after scale-in.
 
 ### 2. Perform the scale-in operation
@@ -402,18 +398,26 @@ Perform the scale-in operation with one of the following solutions.
 
 1. Confirm the name of the node to be taken down:
 
-    {{< copyable "shell-regular" >}}
-
     ```shell
     tiup cluster display <cluster-name>
     ```
 
 2. Remove the TiFlash node (assume that the node name is `10.0.1.4:9000` from Step 1):
 
-    {{< copyable "shell-regular" >}}
-
     ```shell
     tiup cluster scale-in <cluster-name> --node 10.0.1.4:9000
+    ```
+
+3. View the status of the removed TiFlash node:
+
+    ```shell
+    tiup cluster display <cluster-name>
+    ```
+
+4. After the status of the removed TiFlash node becomes `Tombstone`, delete the information of the removed node from the TiUP topology (TiUP will automatically clean up the related data files of the `Tombstone` node):
+
+    ```shell
+    tiup cluster prune <cluster-name>
     ```
 
 #### Solution 2. Manually remove a TiFlash node
@@ -425,8 +429,6 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
     * Enter the store command in [pd-ctl](/pd-control.md) (the binary file is under `resources/bin` in the tidb-ansible directory).
 
     * If you use TiUP deployment, replace `pd-ctl` with `tiup ctl:v<CLUSTER_VERSION> pd`:
-
-    {{< copyable "shell-regular" >}}
 
     ```shell
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd_ip>:<pd_port> store
@@ -442,8 +444,6 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
 
     * If you use TiUP deployment, replace `pd-ctl` with `tiup ctl:v<CLUSTER_VERSION> pd`:
 
-        {{< copyable "shell-regular" >}}
-
         ```shell
         tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd_ip>:<pd_port> store delete <store_id>
         ```
@@ -454,72 +454,21 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
 
 3. Wait for the store of the TiFlash node to disappear or for the `state_name` to become `Tombstone` before you stop the TiFlash process.
 
-4. Manually delete TiFlash data files (the location can be found in the `data_dir` directory under the TiFlash configuration of the cluster topology file).
-
-5. Delete information about the TiFlash node that goes down from the cluster topology using the following command:
-
-    {{< copyable "shell-regular" >}}
+4. Delete the information of the removed node from the TiUP topology (TiUP will automatically clean up the related data files of the `Tombstone` node):
 
     ```shell
-    tiup cluster scale-in <cluster-name> --node <pd_ip>:<pd_port> --force
+    tiup cluster prune <cluster-name>
     ```
 
-> **Note:**
->
-> Before all TiFlash nodes in the cluster stop running, if not all tables replicated to TiFlash are canceled, you need to manually clean up the replication rules in PD, or the TiFlash node cannot be taken down successfully.
+### 3. View the cluster status
 
-The steps to manually clean up the replication rules in PD are below:
+```shell
+tiup cluster display <cluster-name>
+```
 
-1. View all data replication rules related to TiFlash in the current PD instance:
+Access the monitoring platform at <http://10.0.1.5:3000> using your browser, and view the status of the cluster and the new nodes.
 
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    curl http://<pd_ip>:<pd_port>/pd/api/v1/config/rules/group/tiflash
-    ```
-
-    ```
-    [
-      {
-        "group_id": "tiflash",
-        "id": "table-45-r",
-        "override": true,
-        "start_key": "7480000000000000FF2D5F720000000000FA",
-        "end_key": "7480000000000000FF2E00000000000000F8",
-        "role": "learner",
-        "count": 1,
-        "label_constraints": [
-          {
-            "key": "engine",
-            "op": "in",
-            "values": [
-              "tiflash"
-            ]
-          }
-        ]
-      }
-    ]
-    ```
-
-2. Remove all data replication rules related to TiFlash. Take the rule whose `id` is `table-45-r` as an example. Delete it by the following command:
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    curl -v -X DELETE http://<pd_ip>:<pd_port>/pd/api/v1/config/rule/tiflash/table-45-r
-    ```
-
-3. View the cluster status:
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    tiup cluster display <cluster-name>
-    ```
-
-    Access the monitoring platform at <http://10.0.1.5:3000> using your browser, and view the status of the cluster and the new nodes.
-
-After the scale-out, the cluster topology is as follows:
+After the scaling, the cluster topology is as follows:
 
 | Host IP   | Service   |
 |:----|:----|

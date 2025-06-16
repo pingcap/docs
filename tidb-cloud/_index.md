@@ -1,7 +1,9 @@
 ---
 title: TiDB Cloud Documentation
+aliases: ['/tidbcloud/privacy-policy', '/tidbcloud/terms-of-service', '/tidbcloud/service-level-agreement']
 hide_sidebar: true
 hide_commit: true
+summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud. It offers guides, samples, and references for learning, trying, developing, maintaining, migrating, monitoring, tuning, securing, billing, integrating, and referencing.
 ---
 
 <LearningPathContainer platform="tidb-cloud" title="TiDB Cloud" subTitle="TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud. Find the guide, samples, and references you need to use TiDB Cloud.">
@@ -10,7 +12,7 @@ hide_commit: true
 
 [Why TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro)
 
-[Architecture](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro#architecture)
+[Key Concepts](https://docs.pingcap.com/tidbcloud/key-concepts)
 
 [FAQ](https://docs.pingcap.com/tidbcloud/tidb-cloud-faq)
 
@@ -18,9 +20,13 @@ hide_commit: true
 
 <LearningPath label="Try" icon="cloud5">
 
-[Try Out TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart)
+[Try Out TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart)
+
+[Try Out TiDB + AI](https://docs.pingcap.com/tidbcloud/vector-search-get-started-using-python)
 
 [Try Out HTAP](https://docs.pingcap.com/tidbcloud/tidb-cloud-htap-quickstart)
+
+[Try Out TiDB Cloud CLI](https://docs.pingcap.com/tidbcloud/get-started-with-cli)
 
 [Proof of Concept](https://docs.pingcap.com/tidbcloud/tidb-cloud-poc)
 
@@ -66,7 +72,9 @@ hide_commit: true
 
 [From Amazon Aurora MySQL](https://docs.pingcap.com/tidbcloud/migrate-from-aurora-bulk-import)
 
-[From Amazon S3 or GCS](https://docs.pingcap.com/tidbcloud/migrate-from-amazon-s3-or-gcs)
+[From Amazon RDS for Oracle](https://docs.pingcap.com/tidbcloud/migrate-from-oracle-using-aws-dms)
+
+[From TiDB Self-Managed](https://docs.pingcap.com/tidbcloud/migrate-from-op-tidb)
 
 [From CSV Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
 
@@ -110,7 +118,7 @@ hide_commit: true
 
 [Manage project access](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-project-access)
 
-[Configure Security Settings](https://docs.pingcap.com/tidbcloud/configure-security-settings)
+[Configure Password Settings](https://docs.pingcap.com/tidbcloud/configure-security-settings)
 
 </LearningPath>
 
@@ -142,11 +150,11 @@ hide_commit: true
 
 <LearningPath label="Reference" icon="cloud-dev">
 
+[SQL Reference](https://docs.pingcap.com/tidbcloud/basic-sql-operations)
+
 [System Variables](https://docs.pingcap.com/tidbcloud/system-variables)
 
 [Release Notes](https://docs.pingcap.com/tidbcloud/tidb-cloud-release-notes)
-
-[SQL Reference](https://docs.pingcap.com/tidbcloud/basic-sql-operations)
 
 </LearningPath>
 

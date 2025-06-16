@@ -9,7 +9,7 @@ TiDB Cloud provides the console audit logging feature to help you track various 
 
 ## Prerequisites
 
-- You must be in the `Organization Owner` or `Organization Console Audit Admin` role of your organization in TiDB Cloud. Otherwise, you cannot see the console audit logging-related options in the TiDB Cloud console.
+- You must be in the `Organization Owner` or `Organization Console Audit Manager` role of your organization in TiDB Cloud. Otherwise, you cannot see the console audit logging-related options in the TiDB Cloud console.
 - You can only enable and disable the console audit logging for your organization. You can only track the actions of users in your organization.
 - After the console audit logging is enabled, all event types of the TiDB Cloud console will be audited, and you cannot specify only auditing some of them.
 
@@ -147,12 +147,12 @@ The console audit logs record various user activities on the TiDB Cloud console 
 | BindSupportPlan                | Bind a support plan                                                              |
 | CancelSupportPlan              | Cancel a support plan                                                            |
 | UpdateOrganizationName         | Update the organization name                                                     |
-| SetSpendLimit                  | Edit the spending limit of a TiDB Serverless cluster                             |
+| SetSpendLimit                  | Edit the spending limit of a TiDB Cloud Serverless scalable cluster                    |
 | UpdateMaintenanceWindow        | Modify maintenance window start time                                             |
 | DeferMaintenanceTask           | Defer a maintenance task                                                         |
-| CreateBranch                   | Create a TiDB Serverless branch                                                  |
-| DeleteBranch                   | Delete a TiDB Serverless branch                                                  |
-| SetBranchRootPassword          | Set root password for a TiDB Serverless branch                                   |
+| CreateBranch                   | Create a TiDB Cloud Serverless branch                                                  |
+| DeleteBranch                   | Delete a TiDB Cloud Serverless branch                                                  |
+| SetBranchRootPassword          | Set root password for a TiDB Cloud Serverless branch                                   |
 | ConnectBranchGitHub            | Connect the cluster with a GitHub repository to enable branching integration     |
 | DisconnectBranchGitHub         | Disconnect the cluster from a GitHub repository to disable branching integration |
 

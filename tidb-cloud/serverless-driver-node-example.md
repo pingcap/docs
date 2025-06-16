@@ -9,7 +9,7 @@ This tutorial describes how to use TiDB Cloud serverless driver in a local Node.
 
 > **Note:**
 >
-> - This tutorial is applicable to TiDB Serverless clusters only. 
+> - This tutorial is applicable to TiDB Cloud Serverless clusters only. 
 > - To learn how to use TiDB Cloud serverless driver with Cloudflare Workers, Vercel Edge Functions, and Netlify Edge Functions, check out our [Insights into Automotive Sales](https://car-sales-insight.vercel.app/) and the [sample repository](https://github.com/tidbcloud/car-sales-insight).
 
 ## Before you begin
@@ -18,7 +18,7 @@ To complete this step-by-step tutorial, you need the following:
 
 - [Node.js](https://nodejs.org/en) >= 18.0.0.
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
-- A TiDB Serverless cluster. If you don't have any, you can [create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- A TiDB Cloud Serverless cluster. If you don't have any, you can [create a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 
 ## Step 1. Create a local Node.js project
 
@@ -65,7 +65,7 @@ The serverless driver supports both CommonJS and ES modules. The following steps
     ```js
     import { connect } from '@tidbcloud/serverless'
     
-    const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]'}) // replace with your TiDB Serverless cluster information
+    const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]'}) // replace with your TiDB Cloud Serverless cluster information
     console.log(await conn.execute("show tables"))
     ```
 

@@ -34,7 +34,7 @@ In v8.1 LTS, TiDB ensures multi-level quality standards for various combinations
         <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
       </tr>
       <tr>
-        <td><ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version</li><li>CentOS 7.3 or a later 7.x version (TiDB will end support for it in 8.5 LTS)</li></ul></td>
+        <td><ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version (TiDB ends support for it starting from 8.4 DMR)</li><li>CentOS 7.3 or a later 7.x version (TiDB ends support for it starting from 8.4 DMR)</li></ul></td>
         <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
       </tr>
       <tr>
@@ -50,7 +50,7 @@ In v8.1 LTS, TiDB ensures multi-level quality standards for various combinations
         <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
       </tr>
       <tr>
-        <td>Kylin Euler V10 SP1/SP2</td>
+        <td>Kylin V10 SP1/SP2/SP3 (SP3 is supported starting from v7.5.5)</td>
         <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
       </tr>
       <tr>
@@ -66,8 +66,8 @@ In v8.1 LTS, TiDB ensures multi-level quality standards for various combinations
 
     > **Note:**
     >
-    > - According to [CentOS Linux EOL](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/), the upstream support for CentOS Linux 7 ends on June 30, 2024. TiDB will end the support for CentOS 7 in the 8.5 LTS version. It is recommended to use Rocky Linux 9.1 or a later version.
-    > - According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS Linux 8 ended on December 31, 2021. The upstream [support for CentOS Stream 8](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/) ended on May 31, 2024. CentOS Stream 9 continues to be supported by the CentOS organization.
+    > - According to [CentOS Linux EOL](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/), the upstream support for CentOS Linux 7 ends on June 30, 2024. TiDB ends the support for CentOS 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version.
+    > - According to [Red Hat Enterprise Linux Life Cycle](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates), the maintenance support for Red Hat Enterprise Linux 7 ends on June 30, 2024. TiDB ends the support for Red Hat Enterprise Linux 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version.
 
 + For the following combinations of operating systems and CPU architectures, you can compile, build, and deploy TiDB. In addition, you can also use the basic features of OLTP, OLAP, and the data tools. However, TiDB **does not guarantee enterprise-level production quality**:
 
@@ -92,7 +92,7 @@ In v8.1 LTS, TiDB ensures multi-level quality standards for various combinations
         <td>x86_64</td>
       </tr>
       <tr>
-        <td>CentOS 8 Stream</td>
+        <td>CentOS Stream 8</td>
         <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
       </tr>
       <tr>
@@ -118,6 +118,7 @@ In v8.1 LTS, TiDB ensures multi-level quality standards for various combinations
     >
     > - For Oracle Enterprise Linux, TiDB supports the Red Hat Compatible Kernel (RHCK) and does not support the Unbreakable Enterprise Kernel provided by Oracle Enterprise Linux.
     > - Support for Ubuntu 16.04 will be removed in future versions of TiDB. Upgrading to Ubuntu 18.04 or later is strongly recommended.
+    > - CentOS Stream 8 reaches [End of Builds](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/) on May 31, 2024.
 
 + If you are using the 32-bit version of an operating system listed in the preceding two tables, TiDB **is not guaranteed** to be compilable, buildable or deployable on the 32-bit operating system and the corresponding CPU architecture, or TiDB does not actively adapt to the 32-bit operating system.
 
@@ -200,6 +201,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 > - In the production environment, the TiDB and PD instances can be deployed on the same server. If you have a higher requirement for performance and reliability, try to deploy them separately.
 > - It is strongly recommended to configure TiDB, TiKV, and TiFlash with at least 8 CPU cores each in the production environment. To get better performance, a higher configuration is recommended.
 > - It is recommended to keep the size of TiKV hard disk within 4 TB if you are using PCIe SSDs or within 1.5 TB if you are using regular SSDs.
+> - If you deploy TiKV on a cloud provider, such as AWS, Google Cloud, or Azure, it is recommended to use cloud disks for TiKV nodes. Data on local disks might be lost if the TiKV instance crashes in the cloud environment.
 
 Before you deploy TiFlash, note the following items:
 

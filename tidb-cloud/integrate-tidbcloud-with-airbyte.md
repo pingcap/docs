@@ -62,7 +62,7 @@ Conveniently, the steps are the same for setting TiDB as the source and the dest
     >
     > - TiDB Cloud supports TLS connection. You can choose your TLS protocols in **TLSv1.2** and **TLSv1.3**, for example, `enabledTLSProtocols=TLSv1.2`.
     > - If you want to disable TLS connection to TiDB Cloud via JDBC, you need to set useSSL to `false` in JDBC URL Params specifically and close SSL connection, for example, `useSSL=false`.
-    > - TiDB Serverless only supports TLS connections.
+    > - TiDB Cloud Serverless only supports TLS connections.
 
 4. Click **Set up source** or **destination** to complete creating the connector. The following screenshot shows the configuration of TiDB as the source.
 
@@ -87,7 +87,7 @@ The following steps use TiDB as both a source and a destination. Other connector
 
     > **Tip:**
     >
-    > The TiDB connector supports both Incremental and Full Refresh syncs.
+    > The TiDB connector supports both [Incremental and Full Refresh syncs](https://airbyte.com/blog/understanding-data-replication-modes).
     >
     > - In Incremental mode, Airbyte only reads records added to the source since the last sync job. The first sync using Incremental mode is equivalent to Full Refresh mode.
     > - In Full Refresh mode, Airbyte reads all records in the source and replicates to the destination in every sync task. You can set the sync mode for every table named **Namespace** in Airbyte individually.
@@ -102,7 +102,7 @@ The following steps use TiDB as both a source and a destination. Other connector
 
 ## Limitations
 
-- The TiDB connector does not support the Change Data Capture (CDC) feature.
+- The TiDB connector cannot use the Change Data Capture (CDC) feature provided by TiCDC. The incremental sync is performed based on a cursor mechanism.
 - TiDB destination converts the `timestamp` type to the `varchar` type in default normalization mode. It happens because Airbyte converts the timestamp type to string during transmission, and TiDB does not support `cast ('2020-07-28 14:50:15+1:00' as timestamp)`.
 - For some large ELT missions, you need to increase the parameters of [transaction restrictions](/develop/dev-guide-transaction-restraints.md#large-transaction-restrictions) in TiDB.
 

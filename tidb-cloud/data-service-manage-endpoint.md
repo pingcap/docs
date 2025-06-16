@@ -20,11 +20,11 @@ This document describes how to manage your endpoints in a Data App in the TiDB C
 
 ## Create an endpoint
 
-In Data Service, you can either generate an endpoint automatically or create an endpoint manually.
+In Data Service, you can automatically generate endpoints, manually create endpoints, or add predefined system endpoints.
 
 > **Tip:**
 >
-> You can also create an endpoint from a SQL file in Chat2Query (beta). For more information, see [Generate an endpoint from a SQL file](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file).
+> You can also create an endpoint from a SQL file in SQL Editor. For more information, see [Generate an endpoint from a SQL file](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file).
 
 ### Generate an endpoint automatically
 
@@ -42,8 +42,15 @@ In TiDB Cloud Data Service, you can generate one or multiple endpoints automatic
 
     2. Select at least one HTTP operation (such as `GET (Retrieve)`, `POST (Create)`, and `PUT (Update)`) for the endpoint to be generated.
 
-        For each operation you selected, TiDB Cloud Data Service will generate a corresponding endpoint. If you have selected a batch operation (such as `POST (Batch Create)`), the generated endpoint lets you operate on multiple rows in a single request.
+        For each operation you select, TiDB Cloud Data Service will generate a corresponding endpoint. If you select a batch operation (such as `POST (Batch Create)`), the generated endpoint lets you operate on multiple rows in a single request.
 
+        If the table you selected contains [vector data types](/tidb-cloud/vector-search-data-types.md), you can enable the **Vector Search Operations** option and select a vector distance function to generate a vector search endpoint that automatically calculates vector distances based on your selected distance function. The supported [vector distance functions](/tidb-cloud/vector-search-functions-and-operators.md) include the following:
+
+        - `VEC_L2_DISTANCE` (default): calculates the L2 distance (Euclidean distance) between two vectors.
+        - `VEC_COSINE_DISTANCE`: calculates the cosine distance between two vectors.
+        - `VEC_NEGATIVE_INNER_PRODUCT`: calculates the distance by using the negative of the inner product between two vectors.
+        - `VEC_L1_DISTANCE`: calculates the L1 distance (Manhattan distance) between two vectors.
+       
     3. (Optional) Configure a timeout and tag for the operations. All the generated endpoints will automatically inherit the configured properties, which can be modified later as needed.
     4. (Optional) The **Auto-Deploy Endpoint** option (disabled by default) controls whether to enable the direct deployment of the generated endpoints. When it is enabled, the draft review process is skipped, and the generated endpoints are deployed immediately without further manual review or approval.
 
@@ -56,6 +63,7 @@ In TiDB Cloud Data Service, you can generate one or multiple endpoints automatic
     - Endpoint name: the generated endpoint name is in the `/<name of the selected table>` format, and the request method (such as `GET`, `POST`, and `PUT`) is displayed before the endpoint name. For example, if the selected table name is `sample_table` and the selected operation is `POST (Create)`, the generated endpoint is displayed as `POST /sample_table`.
 
         - If a batch operation is selected, TiDB Cloud Data Service appends `/bulk` to the name of the generated endpoint. For example, if the selected table name is `/sample_table` and the selected operation is `POST (Batch Create)`, the generated endpoint is displayed as `POST /sample_table/bulk`.
+        - If `POST (Vector Similarity Search)` is selected, TiDB Cloud Data Service appends `/vector_search` to the name of the generated endpoint. For example, if the selected table name is `/sample_table` and the selected operation is `POST (Vector Similarity Search)`, the generated endpoint is displayed as `POST /sample_table/vector_search`.
         - If there has been already an endpoint with the same request method and endpoint name, TiDB Cloud Data Service appends `_dump_<random letters>` to the name of the generated endpoint. For example, `/sample_table_dump_EUKRfl`.
 
     - SQL statements: TiDB Cloud Data Service automatically writes SQL statements for the generated endpoints according to the table column specifications and the selected endpoint operations. You can click the endpoint name to view its SQL statements in the middle section of the page.
@@ -73,6 +81,44 @@ To create an endpoint manually, perform the following steps:
 3. Update the default name if necessary. The newly created endpoint is added to the top of the endpoint list.
 4. Configure the new endpoint according to the instructions in [Develop an endpoint](#develop-an-endpoint).
 
+### Add a predefined system endpoint
+
+Data Service provides an endpoint library with predefined system endpoints that you can directly add to your Data App, reducing the effort in your endpoint development. Currently, the library only includes the `/system/query` endpoint, which enables you to execute any SQL statement by simply passing the statement in the predefined `sql` parameter.
+
+To add a predefined system endpoint to your Data App, perform the following steps:
+
+1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+
+2. In the left pane, locate your target Data App, click **+** to the right of the App name, and then click **Manage Endpoint Library**.
+
+    A dialog for endpoint library management is displayed. Currently, only **Execute Query** (that is, the `/system/query` endpoint) is provided in the dialog.
+
+3. To add the `/system/query` endpoint to your Data App, toggle the **Execute Query** switch to **Added**.
+
+    > **Tip:**
+    >
+    > To remove an added predefined endpoint from your Data App, toggle the **Execute Query** switch to **Removed**.
+
+4. Click **Save**.
+
+    > **Note:**
+    >
+    > - After you click **Save**, the added or removed endpoint is deployed to production immediately, which makes the added endpoint accessible and the removed endpoint inaccessible immediately.
+    > - If a non-predefined endpoint with the same path and method already exists in the current App, the creation of the system endpoint will fail.
+
+    The added system-provided endpoint is displayed at the top of the endpoint list.
+
+5. Check the endpoint name, SQL statements, properties, and parameters of the new endpoint.
+
+    > **Note:**
+    >
+    > The `/system/query` endpoint is powerful and versatile but can be potentially destructive. Use it with discretion and ensure the queries are secure and well-considered to prevent unintended consequences.
+
+    - Endpoint name: the endpoint name and path is `/system/query`, and the request method `POST`.
+    - SQL statements: the `/system/query` endpoint does not come with any SQL statement. You can find the SQL editor in the middle section of the page and write your desired SQL statements in the SQL editor. Note that the SQL statements written in the SQL editor for the `/system/query` endpoint will be saved in the SQL editor so you can further develop and test them next time but they will not be saved in the endpoint configuration.
+    - Endpoint properties: in the right pane of the page, you can find the endpoint properties on the **Properties** tab. Unlike other custom endpoints, only the `timeout` and `max rows` properties can be customized for system endpoints.
+    - Endpoint parameters: in the right pane of the page, you can find the endpoint parameters on the **Params** tab. The parameters of the `/system/query` endpoint are configured automatically and cannot be modified.
+
 ## Develop an endpoint
 
 For each endpoint, you can write SQL statements to execute on a TiDB cluster, define parameters for the SQL statements, or manage the name and version.
@@ -89,11 +135,38 @@ On the right pane of the endpoint details page, you can click the **Properties**
 
 - **Path**: the path that users use to access the endpoint.
 
-    - The combination of the request method and the path must be unique within a Data App.
-    - Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in a path. A path must start with a slash (`/`) and end with a letter, number, or underscore (`_`). For example, `/my_endpoint/get_id`.
     - The length of the path must be less than 64 characters.
+    - The combination of the request method and the path must be unique within a Data App.
+    - Only letters, numbers, underscores (`_`), slashes (`/`), and parameters enclosed in curly braces (such as `{var}`) are allowed in a path. Each path must start with a slash (`/`) and end with a letter, number, or underscore (`_`). For example, `/my_endpoint/get_id`.
+    - For parameters enclosed in `{ }`, only letters, numbers, and underscores (`_`) are allowed. Each parameter enclosed in `{ }` must start with a letter or underscore (`_`).
 
-- **Endpoint URL**: (read-only) the URL is automatically generated based on the region where the corresponding cluster is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
+    > **Note:**
+    >
+    > - In a path, each parameter must be at a separate level and does not support prefixes or suffixes.
+    >
+    >    Valid path: ```/var/{var}``` and  ```/{var}```
+    >
+    >    Invalid path: ```/var{var}``` and ```/{var}var```
+    >
+    > - Paths with the same method and prefix might conflict, as in the following example:
+    >
+    >    ```GET /var/{var1}```
+    >
+    >    ```GET /var/{var2}```
+    >
+    >   These two paths will conflict with each other because `GET /var/123` matches both.
+    >
+    > - Paths with parameters have lower priority than paths without parameters. For example:
+    >
+    >    ```GET /var/{var1}```
+    >
+    >    ```GET /var/123```
+    >
+    >   These two paths will not conflict because `GET /var/123` takes precedence.
+    >
+    > - Path parameters can be used directly in SQL. For more information, see [Configure parameters](#configure-parameters).
+
+- **Endpoint URL**: (read-only) the default URL is automatically generated based on the region where the corresponding cluster is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`. To configure a custom domain for the Data App, see [Custom Domain in Data Service](/tidb-cloud/data-service-custom-domain.md).
 
 - **Request Method**: the HTTP method of the endpoint. The following methods are supported:
 
@@ -136,9 +209,12 @@ On the SQL editor of the endpoint details page, you can write and run the SQL st
 
     On the upper part of the SQL editor, select a cluster on which you want to execute SQL statements from the drop-down list. Then, you can view all databases of this cluster in the **Schema** tab on the right pane.
 
-2. Write SQL statements.
+2. Depending on your endpoint type, do one of the following to select a database:
 
-    Before querying or modifying data, you need to first specify the database in the SQL statements. For example, `USE database_name;`.
+    - Predefined system endpoints: on the upper part of the SQL editor, select the target database from the drop-down list.
+    - Other endpoints: write a SQL statement to specify the target database in the SQL editor. For example, `USE database_name;`.
+
+3. Write SQL statements.
 
     In the SQL editor, you can write statements such as table join queries, complex queries, and aggregate functions. You can also simply type `--` followed by your instructions to let AI generate SQL statements automatically.
 
@@ -151,7 +227,7 @@ On the SQL editor of the endpoint details page, you can write and run the SQL st
     > - The parameter name is case-sensitive.
     > - The parameter cannot be used as a table name or column name.
 
-3. Run SQL statements.
+4. Run SQL statements.
 
     If you have inserted parameters in the SQL statements, make sure that you have set test values or default values for the parameters in the **Params** tab on the right pane. Otherwise, an error is returned.
 
@@ -183,6 +259,10 @@ On the SQL editor of the endpoint details page, you can write and run the SQL st
 
     After running the statements, you can see the query results immediately in the **Result** tab at the bottom of the page.
 
+    > **Note:**
+    >
+    > The returned result has a size limit of 8 MiB.
+
 ### Configure parameters
 
 On the right pane of the endpoint details page, you can click the **Params** tab to view and manage the parameters used in the endpoint.
@@ -190,8 +270,11 @@ On the right pane of the endpoint details page, you can click the **Params** tab
 In the **Definition** section, you can view and manage the following properties for a parameter:
 
 - The parameter name: the name can only include letters, digits, and underscores (`_`) and must start with a letter or an underscore (`_`). **DO NOT** use `page` and `page_size` as parameter names, which are reserved for pagination of request results.
-- **Required**: specifies whether the parameter is required in the request. The default configuration is set to not required.
-- **Type**: specifies the data type of the parameter. Supported values are `STRING`, `NUMBER`, `INTEGER`, `BOOLEAN`, and `ARRAY`. When using a `STRING` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `STRING` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.
+- **Required**: specifies whether the parameter is required in the request. For path parameters, the configuration is required and cannot be modified. For other parameters, the default configuration is not required.
+- **Type**: specifies the data type of the parameter. For path parameters, only `STRING` and `INTEGER` are supported. For other parameters, `STRING`, `NUMBER`, `INTEGER`, `BOOLEAN`, and `ARRAY` are supported.
+
+    When using a `STRING` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `STRING` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.
+
 - **Enum Value**: (optional) specifies the valid values for the parameter and is available only when the parameter type is `STRING`, `INTEGER`, or `NUMBER`.
 
     - If you leave this field empty, the parameter can be any value of the specified type.
@@ -203,14 +286,11 @@ In the **Definition** section, you can view and manage the following properties 
     - For `ARRAY` type, you need to separate multiple values with a comma (`,`).
     - Make sure that the value can be converted to the type of parameter. Otherwise, the endpoint returns an error.
     - If you do not set a test value for a parameter, the default value is used when testing the endpoint.
+- **Location**: indicates the location of the parameter. This property cannot be modified.
+    - For path parameters, this property is `Path`.
+    - For other parameters, if the request method is `GET` or `DELETE`, this property is `Query`. If the request method is `POST` or `PUT`, this property is `Body`.
 
 In the **Test Values** section, you can view and set test parameters. These values are used as the parameter values when you test the endpoint. Make sure that the value can be converted to the type of parameter. Otherwise, the endpoint returns an error.
-
-### Manage versions
-
-On the right pane of the endpoint details page, you can click the **Deployments** tab to view and manage the deployed versions of the endpoint.
-
-In the **Deployments** tab, you can deploy a draft version and undeploy the online version.
 
 ### Rename
 
@@ -219,6 +299,10 @@ To rename an endpoint, perform the following steps:
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its endpoints.
 3. Locate the endpoint you want to rename, click **...** > **Rename**., and enter a new name for the endpoint.
+
+> **Note:**
+>
+> Predefined system endpoints do not support renaming.
 
 ## Test an endpoint
 

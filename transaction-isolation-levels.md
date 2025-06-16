@@ -94,3 +94,25 @@ In transactions with many point-write statements but a few point-write conflicts
 ## Difference between TiDB and MySQL Read Committed
 
 The MySQL Read Committed isolation level is in line with the Consistent Read features in most cases. There are also exceptions, such as [semi-consistent read](https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-isolation-levels.html). This special behavior is not supported in TiDB.
+
+## View and modify transaction isolation levels
+
+You can view and modify the transaction isolation level as follows.
+
+View the transaction isolation level of the current session:
+
+```sql
+SHOW VARIABLES LIKE 'transaction_isolation';
+```
+
+Modify the transaction isolation level of the current session:
+
+```sql
+SET SESSION transaction_isolation = 'READ-COMMITTED';
+```
+
+For more information on configuring and using transaction isolation levels, see the following documents:
+
+- [The system variable `transaction_isolation`](/system-variables.md#transaction_isolation)
+- [Isolation level](/pessimistic-transaction.md#isolation-level)
+- [`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md)

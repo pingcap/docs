@@ -13,13 +13,13 @@ This document lists the most frequently asked questions about TiDB Cloud.
 
 ### What is TiDB Cloud?
 
-TiDB Cloud makes deploying, managing, and maintaining your TiDB clusters even simpler with a fully managed cloud instance that you control through an intuitive console. You are able to easily deploy on Amazon Web Services or Google Cloud to quickly build mission-critical applications.
+TiDB Cloud makes deploying, managing, and maintaining your TiDB clusters even simpler with a fully managed cloud instance that you control through an intuitive console. You are able to easily deploy on Amazon Web Services (AWS), Google Cloud, or Microsoft Azure to quickly build mission-critical applications.
 
 TiDB Cloud allows developers and DBAs with little or no training to handle once-complex tasks such as infrastructure management and cluster deployment with ease, to focus on your applications, not the complexities of your database. And by scaling TiDB clusters in or out with a simple click of a button, you no longer waste costly resources because you are able to provision your databases for exactly how much and how long you need them.
 
 ### What is the relationship between TiDB and TiDB Cloud?
 
-TiDB is an open-source database and is the best option for organizations who want to run TiDB Self-Hosted in their own data centers, in a self-managed cloud environment, or in a hybrid of the two.
+TiDB is an open-source database and is the best option for organizations who want to run TiDB Self-Managed in their own data centers, in a self-managed cloud environment, or in a hybrid of the two.
 
 TiDB Cloud is a fully managed cloud Database as a Service of TiDB. It has an easy-to-use web-based management console to let you manage TiDB clusters for mission-critical production environments.
 
@@ -33,7 +33,7 @@ You can use any language supported by the MySQL client or driver.
 
 ### Where can I run TiDB Cloud?
 
-TiDB Cloud is currently available on Amazon Web Services and Google Cloud.
+TiDB Cloud is currently available on Amazon Web Services (AWS), Google Cloud, and Microsoft Azure.
 
 ### Does TiDB Cloud support VPC peering between different cloud service providers?
 
@@ -41,8 +41,8 @@ No.
 
 ### What versions of TiDB are supported on TiDB Cloud?
 
-- Starting from October 31, 2023, the default TiDB version for new TiDB Dedicated clusters is v7.1.2.
-- Starting from March 7, 2023, the default TiDB version for new TiDB Serverless clusters is v6.6.0.
+- Starting from January 2, 2025, the default TiDB version for new TiDB Cloud Dedicated clusters is [v8.1.2](https://docs.pingcap.com/tidb/v8.1/release-8.1.2).
+- Starting from February 21, 2024, the TiDB version for TiDB Cloud Serverless clusters is [v7.1.3](https://docs.pingcap.com/tidb/v7.1/release-7.1.3).
 
 For more information, see [TiDB Cloud Release Notes](/tidb-cloud/tidb-cloud-release-notes.md).
 
@@ -54,13 +54,17 @@ TiDB is trusted by over 1500 global enterprises across a variety of industries, 
 
 TiDB Cloud provides 99.99% SLA. For details, see [Service Level Agreement for TiDB Cloud Services](https://www.pingcap.com/legal/service-level-agreement-for-tidb-cloud-services/).
 
+### What does BETA mean in TiDB Cloud?
+
+BETA is the public preview stage of a TiDB Cloud feature or offering before it becomes generally available (GA).
+
 ### How can I learn more about TiDB Cloud?
 
 The best way to learn about TiDB Cloud is to follow our step-by-step tutorial. Check out the following topics to get started:
 
 - [TiDB Cloud Introduction](/tidb-cloud/tidb-cloud-intro.md)
 - [Get Started](/tidb-cloud/tidb-cloud-quickstart.md)
-- [Create a TiDB Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [Create a TiDB Cloud Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
 
 ### What does `XXX's Org/default project/Cluster0` refer to when deleting a cluster?
 
@@ -104,7 +108,7 @@ TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compat
 
 ### Does TiDB Cloud support incremental backups?
 
-No. If you need to restore data to any point in time within the cluster's backup retention, you can use PITR (Point-in-time Recovery). For more information, see [Use PITR in a TiDB Dedicated cluster](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) or [Use PITR in a TiDB Serverless cluster](/tidb-cloud/backup-and-restore-serverless.md#restore).
+No. If you need to restore data to any point in time within the cluster's backup retention, you can use PITR (Point-in-time Recovery). For more information, see [Use PITR in a TiDB Cloud Dedicated cluster](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) or [Use PITR in a TiDB Cloud Serverless cluster](/tidb-cloud/backup-and-restore-serverless.md#restore).
 
 ## HTAP FAQs
 
@@ -149,16 +153,16 @@ No. TiDB Cloud is Database-as-a-Service (DBaaS) and runs only in the TiDB Cloud 
 
 ### Is my TiDB cluster secure?
 
-In TiDB Cloud, you can use either a TiDB Dedicated cluster or a TiDB Serverless cluster according to your needs.
+In TiDB Cloud, you can use either a TiDB Cloud Dedicated cluster or a TiDB Cloud Serverless cluster according to your needs.
 
-For TiDB Dedicated clusters, TiDB Cloud ensures cluster security with the following measures:
+For TiDB Cloud Dedicated clusters, TiDB Cloud ensures cluster security with the following measures:
 
 - Creates independent sub-accounts and VPCs for each cluster.
 - Sets up firewall rules to isolate external connections.
 - Creates server-side TLS certificates and component-level TLS certificates for each cluster to encrypt cluster data in transit.
 - Provide IP access rules for each cluster to ensure that only allowed source IP addresses can access your cluster.
 
-For TiDB Serverless clusters, TiDB Cloud ensures cluster security with the following measures:
+For TiDB Cloud Serverless clusters, TiDB Cloud ensures cluster security with the following measures:
 
 - Creates independent sub-accounts for each cluster.
 - Sets up firewall rules to isolate external connections.
@@ -167,27 +171,27 @@ For TiDB Serverless clusters, TiDB Cloud ensures cluster security with the follo
 ### How do I connect to my database in a TiDB cluster?
 
 <SimpleTab>
-<div label="TiDB Dedicated">
+<div label="TiDB Cloud Dedicated">
 
-For a TiDB Dedicated cluster, the steps to connect to your cluster are simplified as follows:
+For a TiDB Cloud Dedicated cluster, the steps to connect to your cluster are simplified as follows:
 
 1. Authorize your network.
 2. Set up your database users and login credentials.
 3. Download and configure TLS for your cluster server.
 4. Choose a SQL client, get an auto-generated connection string displayed on the TiDB Cloud UI, and then connect to your cluster through the SQL client using the string.
 
-For more information, see [Connect to Your TiDB Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+For more information, see [Connect to Your TiDB Cloud Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 
 </div>
 
-<div label="TiDB Serverless">
+<div label="TiDB Cloud Serverless">
 
-For a TiDB Serverless cluster, the steps to connect to your cluster are simplified as follows:
+For a TiDB Cloud Serverless cluster, the steps to connect to your cluster are simplified as follows:
 
 1. Set a database user and login credential.
 2. Choose a SQL client, get an auto-generated connection string displayed on the TiDB Cloud UI, and then connect to your cluster through the SQL client using the string.
 
-For more information, see [Connect to Your TiDB Serverless Cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
+For more information, see [Connect to Your TiDB Cloud Serverless Cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
 
 </div>
 </SimpleTab>
@@ -197,3 +201,7 @@ For more information, see [Connect to Your TiDB Serverless Cluster](/tidb-cloud/
 ### What support is available for customers?
 
 TiDB Cloud is supported by the same team behind TiDB, which has run mission-critical use cases for over 1500 global enterprises across industries including financial services, e-commerce, enterprise applications, and gaming. TiDB Cloud offers a free basic support plan for each user and you can upgrade to a paid plan for extended services. For more information, see [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+### How do I check if TiDB Cloud is down?
+
+You can check the current uptime status of TiDB Cloud on the [System Status](https://status.tidbcloud.com/) page.
