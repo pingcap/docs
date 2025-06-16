@@ -9,7 +9,7 @@ This document introduces utility functions supported in TiDB
 
 ## `FORMAT_BYTES()`
 
-The `FORMAT_BYTES()` function formats a number of bytes into a human-readable format for you.
+The `FORMAT_BYTES()` function formats a number of bytes into a human-readable format.
 
 ```sql
 SELECT FORMAT_BYTES(10*1024*1024);
