@@ -368,15 +368,15 @@ The following features are planned for deprecation in future versions:
     - (dup): release-8.5.1.md > 改进提升> TiDB - 将统计信息内存缓存的默认阈值调整为总内存的 20% [#58014](https://github.com/pingcap/tidb/issues/58014) @[hawkingrei](https://github.com/hawkingrei)
     - (dup): release-7.5.6.md > 改进提升> TiDB - 将 TTL 表的 GC 及相关统计信息收集任务限定在 owner 节点执行，从而降低开销 [#59357](https://github.com/pingcap/tidb/issues/59357) @[lcwangchao](https://github.com/lcwangchao)
     - (dup): release-8.5.1.md > 改进提升> TiDB - 将统计信息内存缓存的默认阈值调整为总内存的 20% [#58014](https://github.com/pingcap/tidb/issues/58014) @[hawkingrei](https://github.com/hawkingrei)
-    - Optimize the CPU usage of internal SQL statements for the Distributed eXecution Framework (DXF) [#59344](https://github.com/pingcap/tidb/issues/59344) @[D3Hunter](https://github.com/D3Hunter)
-    - Add more spill-related details to the result of `EXPLAIN ANALYZE` [#59076](https://github.com/pingcap/tidb/issues/59076) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    - Optimize the CPU usage of internal SQL statements in the Distributed eXecution Framework (DXF) [#59344](https://github.com/pingcap/tidb/issues/59344) @[D3Hunter](https://github.com/D3Hunter)
+    - Add more detailed spill information to the execution result of `EXPLAIN ANALYZE` [#59076](https://github.com/pingcap/tidb/issues/59076) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - Support Left Outer Anti Semi Join in Hash Join v2 [#58479](https://github.com/pingcap/tidb/pull/58479) @[wshwsh12](https://github.com/wshwsh12)
-    - Skip the lock cleanup phase for optimistic statements that are automatically committed to improve performance [#58675](https://github.com/pingcap/tidb/issues/58675) @[ekexium](https://github.com/ekexium)
+    - Skip the lock cleanup phase for autocommitted statements in optimistic transactions to improve performance [#58675](https://github.com/pingcap/tidb/issues/58675) @[ekexium](https://github.com/ekexium)
     - Disable `tidb_enable_paging` in TTL to reduce the number of scanned rows and improve performance [#58342](https://github.com/pingcap/tidb/issues/58342) @[lcwangchao](https://github.com/lcwangchao)
     - Support choosing the left side as the build side when building Semi Join and Anti Semi Join [#58325](https://github.com/pingcap/tidb/issues/58325) @[hawkingrei](https://github.com/hawkingrei)    
-    - Support generating IndexMerge plans using `(a, b), (a, c), (a, d)` for query conditions similar to `a = 1 AND (b = 2 OR c = 3 OR d = 4)`, without manually expanding the expression [#58361](https://github.com/pingcap/tidb/issues/58361) @[time-and-fate](https://github.com/time-and-fate)
+    - Support generating `IndexMerge` plans using `(a, b), (a, c), (a, d)` for query conditions similar to `a = 1 AND (b = 2 OR c = 3 OR d = 4)`, without manually expanding the expression [#58361](https://github.com/pingcap/tidb/issues/58361) @[time-and-fate](https://github.com/time-and-fate)
     - Support applying the `semi_join_rewrite` hint to Semi Joins in `IN` subqueries [#58829](https://github.com/pingcap/tidb/issues/58829) @[qw4990](https://github.com/qw4990)
-    - Remove redundant expressions automatically from filter conditions that are connected by `OR` [#58998](https://github.com/pingcap/tidb/issues/58998) @[time-and-fate](https://github.com/time-and-fate)
+    - Automatically remove redundant expressions from filter conditions connected by `OR` [#58998](https://github.com/pingcap/tidb/issues/58998) @[time-and-fate](https://github.com/time-and-fate)
 
 + TiKV <!--tw@qiancai: 4 notes-->
 
@@ -487,7 +487,7 @@ The following features are planned for deprecation in future versions:
     - Fix the issue that statistics estimation is incorrect when the value of `column.hist.NDV` is greater than that of `column.topN.num()` [#59563](https://github.com/pingcap/tidb/issues/59563) @[AilinKid](https://github.com/AilinKid)
     - Fix the issue that merging global statistics fails [#59274](https://github.com/pingcap/tidb/issues/59274) @[winoros](https://github.com/winoros)
     - Fix the issue that a TiDB session might crash when Fix Control #44855 is enabled [#59762](https://github.com/pingcap/tidb/issues/59762) @[winoros](https://github.com/winoros)
-    - Fix the issue that TiDB chooses Merge Join when there is no hint and the join keys do not exactly match [#20710](https://github.com/pingcap/tidb/issues/20710) @[winoros](https://github.com/winoros)
+    - Fix the issue that TiDB chooses Merge Join when no hint is provided and the join keys do not fully match [#20710](https://github.com/pingcap/tidb/issues/20710) @[winoros](https://github.com/winoros)
 
 + TiKV <!--tw@lilin90: 3 notes-->
 
