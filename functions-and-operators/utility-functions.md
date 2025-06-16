@@ -1,7 +1,6 @@
 ---
 title: Utility Functions
 summary: This document introduces utility functions supported in TiDB.
-aliases: ['/docs/dev/functions-and-operators/utility-functions/','/docs/dev/reference/sql/functions-and-operators/utility-functions/']
 ---
 
 # Utility Functions
