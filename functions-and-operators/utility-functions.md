@@ -27,7 +27,7 @@ SELECT FORMAT_BYTES(10*1024*1024);
 
 ### `FORMAT_NANO_TIME()`
 
-The `FORMAT_NANO_TIME()` function formats a number of nanoseconds as a human readable number.
+The `FORMAT_NANO_TIME()` function formats a number of nanoseconds as a human-readable number.
 
 ```sql
 SELECT FORMAT_NANO_TIME(1000000);
