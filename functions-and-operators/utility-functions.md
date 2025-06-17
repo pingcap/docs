@@ -5,7 +5,7 @@ summary: This document introduces utility functions supported in TiDB.
 
 # Utility Functions
 
-This document introduces utility functions supported in TiDB.
+This document introduces utility functions supported in TiDB, designed to simplify common data conversions for better readability.
 
 ## `FORMAT_BYTES()`
 
