@@ -71,7 +71,7 @@ The following example shows how to create a TiDB Cloud dedicated network contain
 
         # tidbcloud_dedicated_network_container.example will be created
         + resource "tidbcloud_dedicated_network_container" "example" {
-            + cidr_notation          = "172.16.16.0/21"
+            + cidr_notation        = "172.16.16.0/21"
             + cloud_provider       = (known after apply)
             + labels               = (known after apply)
             + network_container_id = (known after apply)
@@ -118,7 +118,7 @@ The following example shows how to create a TiDB Cloud dedicated network contain
     $ terraform state show tidbcloud_dedicated_network_container.example          
     # tidbcloud_dedicated_network_container.example:
     resource "tidbcloud_dedicated_network_container" "example" {
-        cidr_notation          = "172.16.16.0/21"
+        cidr_notation        = "172.16.16.0/21"
         cloud_provider       = "aws"
         labels               = {
             "tidb.cloud/project" = "1372813089454000000"
@@ -191,7 +191,7 @@ If the status is `INACTIVE`, you can delete it by running the following command:
     # tidbcloud_dedicated_network_container.example will be destroyed
     # (because tidbcloud_dedicated_network_container.example is not in configuration)
     - resource "tidbcloud_dedicated_network_container" "example" {
-        - cidr_notation          = "172.16.16.0/21" -> null
+        - cidr_notation        = "172.16.16.0/21" -> null
         - cloud_provider       = "aws" -> null
         - labels               = {
             - "tidb.cloud/project" = "1372813089454000000"
