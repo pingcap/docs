@@ -9,16 +9,15 @@ TiDB Cloud collects and displays a full set of standard metrics of your cluster 
 
 ## View the Metrics page
 
-To view the metrics on the Metrics page, take the following steps:
+To view the metrics on the **Metrics** page, take the following steps:
 
-1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
+1. On the [**Clusters**](https://console.tidb.io/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
 
     > **Tip:**
     >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. Click the name of the target cluster. The cluster overview page is displayed.
-3. Click **Metrics** in the left navigation pane.
+2. In the left navigation pane, click **Monitoring** > **Metrics**.
 
 ## Metrics retention policy
 
@@ -26,10 +25,10 @@ For TiDB Cloud Starter clusters, the metrics data is kept for 7 days.
 
 ## Metrics for TiDB Cloud Starter clusters
 
-The Metrics page provides two tabs for metrics of TiDB Cloud Starter clusters:
+The **Metrics** page provides two tabs for metrics of TiDB Cloud Starter clusters:
 
-- Cluster Status: displays the cluster-level main metrics.
-- Database Status: displays the database-level main metrics.
+- **Cluster Status**: displays the cluster-level main metrics.
+- **Database Status**: displays the database-level main metrics.
 
 ### Cluster Status
 

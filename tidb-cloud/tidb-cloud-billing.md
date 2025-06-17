@@ -164,15 +164,11 @@ For each monthly invoice:
 
 To view the list of invoices, perform the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
+1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
 
-    > **Note:**
-    >
-    > If you are in multiple organizations, switch to your target organization by clicking its name.
+2. In the left navigation pane, click **Billing**.
 
-2. In the left navigation pane, click the **Billing** tab.
-
-3. Click the **Invoices** tab. The invoices page is displayed.
+3. On the **Billing** page, click the **Invoices** tab.
 
 ## Billing details
 
@@ -186,16 +182,13 @@ After setting the payment method, TiDB Cloud will generate the invoice and billi
 
 To view the billing details, perform the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
+1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
 
-    > **Note:**
-    >
-    > If you are in multiple organizations, switch to your target organization by clicking its name.
+2. In the left navigation pane, click **Billing**.
 
-2. Click **Billing**.
-3. Click **Bills**. The billing details page is displayed.
+On the **Billing** page, the **Bills** tab is displayed by default.
 
-The billing details page shows the billing summary by project and by service. You can also see the usage details and download the data in CSV format.
+The **Bills** tab shows the billing summary by project and by service. You can also see the usage details and download the data in CSV format.
 
 > **Note:**
 >
@@ -210,14 +203,10 @@ If you are in the `Organization Owner` or `Organization Billing Manager` role of
 
 To analyze and customize your cost reports of your organization, perform the following steps:
 
-1. In the lower-left corner of the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), click <MDSvgIcon name="icon-top-organization" />, and then click **Billing**.
-
-    > **Note:**
-    >
-    > If you are in multiple organizations, switch to your target organization by clicking its name.
-
-2. On the **Billing** page, click the **Cost Explorer** tab.
-3. On the **Cost Explorer** page, expand the **Filter** section in the upper-right corner to customize your report. You can set the time range, select a grouping option (such as by service, project, cluster, region, product type, and charge type), and apply filters by selecting specific services, projects, clusters, or regions. The cost explorer will display you with the following information:
+1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Billing**.
+3. On the **Billing** page, click the **Cost Explorer** tab.
+4. On the **Cost Explorer** tab, expand the **Filter** section in the upper-right corner to customize your report. You can set the time range, select a grouping option (such as by service, project, cluster, region, product type, and charge type), and apply filters by selecting specific services, projects, clusters, or regions. The cost explorer will display you with the following information:
 
     - **Cost Graph**: visualizes the cost trends over the selected time range. You can switch between **Monthly**, **Daily**, and **Total** views.
     - **Cost Breakdown**: displays a detailed breakdown of your costs according to the selected grouping option. For further analysis, you can download the data in CSV format.
@@ -226,7 +215,11 @@ To analyze and customize your cost reports of your organization, perform the fol
 
 Paid organizations can create a billing profile. Information in this profile will be used to determine the tax calculation.
 
-To view or update the billing profile of your organization, click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner and then click **Billing** > **Billing Profile**.
+To view or update the billing profile of your organization, perform the following steps:
+
+1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Billing**.
+3. On the **Billing** page, click the **Billing Profile** tab.
 
 There are four fields in the billing profile.
 
@@ -250,18 +243,13 @@ If your business is registered for VAT/GST, fill in a valid VAT/GST ID. By provi
 
 TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. One credit is equivalent to one U.S. dollar. You can use credits to pay TiDB cluster fees before the credits become expired.
 
-The detailed information of your credits is available on the **Credits** page, including your total credits, available credits, current usage, and the status.
+The detailed information of your credits is available on the **Credits** tab, including your total credits, available credits, current usage, and the status.
 
-To view this page, perform the following steps:
+To view the credit information, perform the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
-
-    > **Note:**
-    >
-    > If you are in multiple organizations, switch to your target organization by clicking its name.
-
-2. Click **Billing**.
-3. Click **Credits**. The credit details page is displayed.
+1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Billing**.
+3. On the **Billing** page, click the **Credits** tab.
 
 > **Note:**
 >
@@ -277,20 +265,15 @@ To view this page, perform the following steps:
 
 ## Discounts
 
-If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can view the discount information of TiDB Cloud on the **Discounts** page. Otherwise, skip this section.
+If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can view the discount information of TiDB Cloud on the **Discounts** tab. Otherwise, skip this section.
 
 The discount information includes all discounts that you have received, the status, the discount percentage, and the discount start and end date.
 
-To view this page, perform the following steps:
+To view the discount information, perform the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
-
-    > **Note:**
-    >
-    > If you are in multiple organizations, switch to your target organization by clicking its name.
-
-2. Click **Billing**.
-3. Click **Discounts**. The discount details page is displayed.
+1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Billing**.
+3. On the **Billing** page, click the **Discounts** tab.
 
 ## Payment method
 
@@ -302,22 +285,17 @@ If you are in the `Organization Owner` or `Organization Billing Manager` role of
 
 The fee is deducted from a bound credit card according to your cluster usage. To add a valid credit card, you can use either of the following methods:
 
-- When you are creating a cluster:
+- When you are creating a TiDB Cloud Essential cluster:
 
-    1. Before you click **Create Cluster** on the **Create a Cluster** page, click **Add Credit Card** at the bottom of the **Billing Calculator** pane.
-    2. In the **Add a Card** dialog box, fill in the card information and billing address.
+    1. On the **Create Cluster** page, click **Add Credit Card**.
+    2. In the **Add a Card** dialog, fill in the card information and billing address.
     3. Click **Save Card**.
 
 - Anytime in the billing console:
 
-    1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
-
-        > **Note:**
-        >
-        > If you are in multiple organizations, switch to your target organization by clicking its name.
-
-    2. Click **Billing**.
-    3. Under the **Payment Method** tab, click **Add a New Card**.
+    1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
+    2. In the left navigation pane, click **Billing**.
+    3. On the **Billing** page, click the **Payment Method** tab, and then click **Add a New Card**.
     4. Fill in the credit card information and credit card address, and then click **Save Card**.
 
         If you do not specify a primary business address in [**Billing profile**](#billing-profile), the credit card address will be used as your primary business address for tax calculation. You can update your primary business address in **Billing profile** anytime.
@@ -330,15 +308,10 @@ You can bind multiple credit cards, and set one of them as the default credit ca
 
 To set the default credit card, perform the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
-
-    > **Note:**
-    >
-    > If you are in multiple organizations, switch to your target organization by clicking its name.
-
-2. Click **Billing**.
-3. Click the **Payment Method** tab.
-4. Select a credit card in the credit card list, and click **Set as default**.
+1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Billing**.
+3. On the **Billing** page, click the **Payment Method** tab.
+4. Select a credit card in the credit card list, and then click **Yes** when you are prompted to set it as the default credit card.
 
 ## Contract
 
@@ -346,14 +319,9 @@ If you are in the `Organization Owner` or `Organization Billing Manager` role of
 
 If you have agreed with our sales on a contract and received an email to review and accept the contract online, you can do the following:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
-
-    > **Note:**
-    >
-    > If you are in multiple organizations, switch to your target organization by clicking its name.
-
-2. Click **Billing**.
-3. Click **Contract**. The contract list is displayed.
-4. Click **Download**, **Accept**, or **Reject** according to your need.
+1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Billing**.
+3. On the **Billing** page, click the **Contract** tab.
+4. On the **Contract** tab, locate the contract you want to review, and then click **...** in the row of the contract.
 
 To learn more about contracts, feel free to [contact our sales](https://www.pingcap.com/contact-us/).

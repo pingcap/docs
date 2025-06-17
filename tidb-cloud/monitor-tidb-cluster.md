@@ -30,26 +30,35 @@ You can see the current status of each running cluster on the cluster page.
 
 In TiDB Cloud, you can view the commonly used metrics of a cluster from the following pages:
 
-- Cluster overview page
-- Cluster metrics page
+- **Overview** page
+- **Metrics** page
 
-### Metrics on the cluster overview page
+### Overview page
 
-The cluster overview page provides general metrics of a cluster, including Request Units, Used Storage Size, Query Per Second, and Average Query Duration.
+The **Overview** page provides general metrics of a cluster.
 
 To view metrics on the cluster overview page, take the following steps:
 
-1. Navigate to the [**Clusters**](https://console.tidb.io/clusters) page.
+1. On the [**Clusters**](https://console.tidb.io/project/clusters) page, click the name of your target cluster to go to its overview page.
 
-2. Choose the target project and click the name of a cluster to go to its cluster overview page.
+    > **Tip:**
+    >
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-### Metrics on the cluster metrics page
+2. Check the **Core Metrics** section.
 
-The cluster metrics page provides a full set of standard metrics of a cluster. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
+### Metrics page
 
-To view metrics on the cluster monitoring page, take the following steps:
+The **Metrics** page provides a full set of metrics of a cluster. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
 
-1. On the [**Clusters**](https://console.tidb.io/clusters) page of the target project, click the name of the target cluster. The cluster overview page is displayed.
-2. Click **Metrics** in the left navigation pane.
+To view metrics on the **Metrics** page, take the following steps:
 
-For more information, see [Built-in Monitoring](/tidb-cloud/built-in-monitoring.md).
+1. On the [**Clusters**](https://console.tidb.io/project/clusters) page, click the name of your target cluster to go to its overview page.
+
+    > **Tip:**
+    >
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+
+2. In the left navigation pane, click **Monitoring** > **Metrics**.
+
+For more information, see [TiDB Cloud Built-in Metrics](/tidb-cloud/built-in-monitoring.md).

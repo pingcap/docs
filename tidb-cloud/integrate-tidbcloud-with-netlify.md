@@ -92,7 +92,7 @@ For a TiDB Cloud Starter cluster, you can get the connection string either from 
 </div>
 <div label="TiDB Cloud console">
 
-1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), go to the [**Clusters**](https://console.tidb.io/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner. In the displayed dialog, you can get the following connection parameters from the connection string.
+1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), go to the [**Clusters**](https://console.tidb.io/project/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner. In the displayed dialog, you can get the following connection parameters from the connection string.
 
     - `${host}`
     - `${port}`
