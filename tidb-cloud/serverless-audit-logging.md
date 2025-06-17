@@ -225,6 +225,6 @@ When the event class is `AUDIT` or a subclass of `AUDIT`, the audit logs contain
 
 ## Audit logging limitations
 
-- Audit logging is only available via TiDB Cloud CLI; support for TiDB Cloud console will be available soon.
-- Audit logs can only be stored in TiDB Cloud at present; support for external storage will be available soon.
+- Audit logging is only available via TiDB Cloud CLI. Support for TiDB Cloud console will be available soon.
+- Audit logs can only be stored in TiDB Cloud at present. Support for external storage will be available soon.
 - TiDB Cloud Serverless does not guarantee the sequential order of the audit logs, which means you might have to review all log files to see the latest events. To order the logs, you can use the `TIME` field in the audit logs.
