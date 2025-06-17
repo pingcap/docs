@@ -5,7 +5,7 @@ summary: Learn how to use the dedicated private endpoint connection resource to 
 
 # Use Dedicated Private Endpoint Connection Resource
 
-This document introduces how to manage a TiDB Cloud dedicated private endpoint connection with the `tidbcloud_dedicated_private_endpoint_connection` resource in this document.
+This document introduces how to manage a TiDB Cloud dedicated private endpoint connection using the `tidbcloud_dedicated_private_endpoint_connection` resource.
 
 The features of the `tidbcloud_dedicated_private_endpoint_connection` resource include the following:
 
@@ -15,7 +15,7 @@ The features of the `tidbcloud_dedicated_private_endpoint_connection` resource i
 
 > **Note:**
 >
-> TiDB Cloud Dedicated Private Endpoint Connection resource can not be modified. If you want to modify a dedicated private endpoint connection, you need to delete the existing one and create a new one.
+> TiDB Cloud Dedicated Private Endpoint Connection resource cannot be modified. If you want to modify a dedicated private endpoint connection, you need to delete the existing one. Then, create a new one.
 
 ## Prerequisites
 
@@ -147,7 +147,7 @@ The following example shows how to create a TiDB Cloud dedicated private endpoin
 
 For a TiDB Cloud dedicated private endpoint connection that is not managed by Terraform, you can use Terraform to manage it just by importing it.
 
-For example, you can import a private endpoint connection that is not created by Terraform.
+For a TiDB Cloud Dedicated private endpoint connection that is not managed by Terraform, you can start managing it with Terraform by importing it.
 
 1. Add an import block for the new dedicated private endpoint connection resource.
 
@@ -189,7 +189,8 @@ Now you can manage the imported dedicated private endpoint connection with Terra
 
 ## Delete a Dedicated private endpoint connection
 
-To delete a dedicated private endpoint connection, you can delete the configuration of the `tidbcloud_dedicated_private_endpoint_connection` resource, then use the `terraform apply` command to destroy the resource:
+To delete a dedicated private endpoint connection, you can delete the configuration of the `tidbcloud_dedicated_private_endpoint_connection` resource, and then use the `terraform apply` command to destroy the resource:
+
   ```shell
     $ terraform apply
     tidbcloud_dedicated_private_endpoint_connection.example: Refreshing state...
@@ -233,6 +234,7 @@ To delete a dedicated private endpoint connection, you can delete the configurat
 
     Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
   ```
+
 Now, if you run the `terraform show` command, you will get nothing because the resource has been cleared:
 
 ```

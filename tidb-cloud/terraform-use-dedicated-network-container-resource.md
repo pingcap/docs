@@ -5,7 +5,7 @@ summary: Learn how to use the dedicated network container resource to create and
 
 # Use Dedicated Network Container Resource
 
-This document introduces how to manage a TiDB Cloud dedicated network container with the `tidbcloud_dedicated_network_container` resource in this document.
+This document introduces how to manage a TiDB Cloud dedicated network container using the `tidbcloud_dedicated_network_container` resource.
 
 The features of the `tidbcloud_dedicated_network_container` resource include the following:
 
@@ -15,7 +15,7 @@ The features of the `tidbcloud_dedicated_network_container` resource include the
 
 > **Note:**
 >
-> TiDB Cloud Dedicated network container can not be modified and it can not be deleted once its status is `ACTIVE`. Make sure the configuration of the `tidbcloud_network_container` resource is correct before you apply it.
+> TiDB Cloud Dedicated network containers cannot be modified or deleted if the status is `ACTIVE`. Make sure that the configuration of the `tidbcloud_network_container` resource is correct before you apply it.
 
 ## Prerequisites
 
@@ -110,7 +110,7 @@ The following example shows how to create a TiDB Cloud dedicated network contain
     tidbcloud_dedicated_network_container.example: Creation complete after 4s
     ```
 
-    The status of the resource will keep being `INACTIVE` until the you create a dedicated cluster in the region of the dedicated network container. Then the status will change to `ACTIVE`.
+    The status of the resource will remain `INACTIVE` until you create a TiDB Cloud Dedicated cluster in the region of the dedicated network container. Then, the status will change to `ACTIVE`.
 
 5. Use the `terraform show` or `terraform state show tidbcloud_dedicated_network_container.${resource-name}` command to inspect the state of your resource. The former command shows the states of all resources and data sources.
 
@@ -178,7 +178,9 @@ Now you can manage the imported dedicated network container with Terraform.
 
 ## Delete a Dedicated network container
 To delete a Dedicated cluster, you can delete the configuration of the `tidbcloud_dedicated_cluster` resource, then use the `terraform apply` command to destroy the resource. However, you must ensure that the status of the dedicated network container is not `ACTIVE`. If it is `ACTIVE`, you cannot delete it.
+
 If the status is `INACTIVE`, you can delete it by running the following command:
+
 ```shell
   $ terraform apply
   tidbcloud_dedicated_network_container.example: Refreshing state...

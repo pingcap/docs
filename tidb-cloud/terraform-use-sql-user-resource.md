@@ -5,7 +5,7 @@ summary: Learn how to use the SQL user resource to create and modify a TiDB Clou
 
 # Use SQL User Resource
 
-This document introduces how to manage a TiDB Cloud SQL user with the `tidbcloud_sql_user` resource in this document.
+This document introduces how to manage a TiDB Cloud SQL user using the `tidbcloud_sql_user` resource.
 
 The features of the `tidbcloud_sql_user` resource include the following:
 
@@ -128,7 +128,7 @@ For a TiDB Cloud SQL user, you can use Terraform to manage SQL user resources as
 
 ### Change the password or user roles of a SQL user
 
-1. In the `sql_user.tf` file that is used when you [create the SQL user](#create-a-sql-user-using-the-sql-user-resource), change the `password`, 'builtin-role`, and `custom_roles`.
+1. In the `sql_user.tf` file that is used when you [create the SQL user](#create-a-sql-user-using-the-sql-user-resource), change the `password`, `builtin_role`, and `custom_roles`.
 
     For example:
 
@@ -197,7 +197,7 @@ For a TiDB Cloud SQL user, you can use Terraform to manage SQL user resources as
     }
     ```
 
-The `builtin_role` is changed to `role_readonly`, the `password` is not shown because it is a sensitive value.
+The `builtin_role` is changed to `role_readonly`. The `password` is not shown because it is a sensitive value.
 
 ## Import a SQL User
 
