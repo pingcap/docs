@@ -175,8 +175,8 @@ The supported node storage sizes of different TiKV vCPUs are as follows:
 |:---------:|:----------------:|:----------------:|:--------------------:|
 | 4 vCPU    | 200 GiB          |     2048 GiB     | 500 GiB              |
 | 8 vCPU    | 200 GiB          |     4096 GiB     | 500 GiB              |
-| 16 vCPU   | 200 GiB          |     6144 GiB     | 500 GiB              |
-| 32 vCPU   | 200 GiB          |     6144 GiB     | 500 GiB              |
+| 16 vCPU   | 200 GiB          |     4096 GiB     | 500 GiB              |
+| 32 vCPU   | 200 GiB          |     4096 GiB     | 500 GiB              |
 
 > **Note:**
 >
