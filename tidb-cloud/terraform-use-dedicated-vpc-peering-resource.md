@@ -189,7 +189,8 @@ Now you can manage the imported dedicated VPC peering with Terraform.
 
 ## Delete a Dedicated VPC peering
 
-To delete a dedicated VPC peering, you can delete the configuration of the `tidbcloud_dedicated_vpc_peering` resource, then use the `terraform apply` command to destroy the resource:
+To delete a dedicated VPC peering, you can delete the configuration of the `tidbcloud_dedicated_vpc_peering` resource, and then use the `terraform apply` command to destroy the resource:
+
   ```shell
     $ terraform apply
     tidbcloud_dedicated_vpc_peering.example: Refreshing state...
@@ -233,6 +234,7 @@ To delete a dedicated VPC peering, you can delete the configuration of the `tidb
 
     Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
   ```
+
 Now, if you run the `terraform show` command, you will get nothing because the resource has been cleared:
 
 ```

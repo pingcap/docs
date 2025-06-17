@@ -1,36 +1,36 @@
 ---
-title: Use Dedicated network container Resource
-summary: Learn how to use the dedicated network container resource to create and modify a TiDB Cloud dedicated network container.
+title: Use TiDB Cloud Dedicated Network Container Resource
+summary: Learn how to use the TiDB Cloud Dedicated network container resource to create and modify a TiDB Cloud Dedicated network container.
 ---
 
-# Use Dedicated Network Container Resource
+# Use TiDB Cloud Dedicated Network Container Resource
 
-This document introduces how to manage a TiDB Cloud dedicated network container with the `tidbcloud_dedicated_network_container` resource in this document.
+This document introduces how to manage a TiDB Cloud Dedicated network container using the `tidbcloud_dedicated_network_container` resource.
 
 The features of the `tidbcloud_dedicated_network_container` resource include the following:
 
-- Create TiDB Cloud Dedicated network container.
-- Import TiDB Cloud Dedicated network container.
-- Delete TiDB Cloud Dedicated network container.
+- Create TiDB Cloud Dedicated network containers.
+- Import TiDB Cloud Dedicated network containers.
+- Delete TiDB Cloud Dedicated network containers.
 
 > **Note:**
 >
-> TiDB Cloud Dedicated network container can not be modified and it can not be deleted once its status is `ACTIVE`. Make sure the configuration of the `tidbcloud_network_container` resource is correct before you apply it.
+> TiDB Cloud Dedicated network containers cannot be modified or deleted if the status is `ACTIVE`. Make sure that the configuration of the `tidbcloud_network_container` resource is correct before you apply it.
 
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
 
-
-## Create a dedicated network container using the dedicated network container resource
+## Create a TiDB Cloud Dedicated network container using the dedicated network container resource
 
 You can create a dedicated network container using the `tidbcloud_dedicated_network_container` resource.
 
-The following example shows how to create a TiDB Cloud dedicated network container.
+The following example shows how to create a TiDB Cloud Dedicated network container.
 
-1. Create a directory for the dedicated network container and enter it.
+1. Create a directory for the TiDB Cloud Dedicated network container and enter it.
 
 2. Create a `network_container.tf` file:
+
     ```
     terraform {
       required_providers {
@@ -54,10 +54,10 @@ The following example shows how to create a TiDB Cloud dedicated network contain
 
     Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
 
-    - To use the dedicated network container resource, set the resource type as `tidbcloud_dedicated_network_container`.
-    - For the resource name, you can define it according to your need. For example, `example`.
-    - If you don't know how to get the values of the required arguments, see [Set a CIDR for a Region](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region).
-    - To get the dedicated network container specification information, see [tidbcloud_dedicated_network_container (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_network_container).
+    - To use the TiDB Cloud Dedicated network container resource, set the resource type as `tidbcloud_dedicated_network_container`.
+    - For the resource name, you can define it as needed, for example, `example`.
+    - If you do not know how to get the values of the required arguments, see [Set a CIDR for a Region](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region).
+    - For more information about the TiDB Cloud Dedicated network container specification, see [tidbcloud_dedicated_network_container (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_network_container).
 
 3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
 
@@ -110,7 +110,8 @@ The following example shows how to create a TiDB Cloud dedicated network contain
     tidbcloud_dedicated_network_container.example: Creation complete after 4s
     ```
 
-    The status of the resource will keep being `INACTIVE` until the you create a dedicated cluster in the region of the dedicated network container. Then the status will change to `ACTIVE`.
+    The status of the resource will remain `INACTIVE` until you create a TiDB Cloud Dedicated cluster in the region of the dedicated network container. Then, the status will change to `ACTIVE`.
+    ```
 
 5. Use the `terraform show` or `terraform state show tidbcloud_dedicated_network_container.${resource-name}` command to inspect the state of your resource. The former command shows the states of all resources and data sources.
 
@@ -132,13 +133,13 @@ The following example shows how to create a TiDB Cloud dedicated network contain
     }
     ```
 
-## Import a Dedicated network container
+## Import a TiDB Cloud Dedicated network container
 
-For a TiDB Cloud dedicated network container that is not managed by Terraform, you can use Terraform to manage it just by importing it.
+For a TiDB Cloud Dedicated network container that is not managed by Terraform, you can use Terraform to manage it just by importing it.
 
 For example, you can import a network container that is not created by Terraform.
 
-1. Add an import block for the new dedicated network container resource.
+1. Add an import block for the new TiDB Cloud Dedicated network container resource.
 
     Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,network_container_id`:
 
@@ -151,34 +152,37 @@ For example, you can import a network container that is not created by Terraform
 
 2. Generate the new configuration file.
 
-Generate the new configuration file for the new dedicated vpc peering resource according to the import block:
+    Generate the new configuration file for the new dedicated vpc peering resource according to the import block:
 
-  ```shell
-  terraform plan -generate-config-out=generated.tf
-  ```
+    ```shell
+    terraform plan -generate-config-out=generated.tf
+    ```
 
-Do not specify an existing `.tf` file name in the preceding command. Otherwise, Terraform will return an error.
+    Do not specify an existing `.tf` file name in the preceding command. Otherwise, Terraform will return an error.
 
-Then the `generated.tf` file is created in the current directory, which contains the configuration of the imported resource.
+    Then the `generated.tf` file is created in the current directory, which contains the configuration of the imported resource.
 
 3. Review and apply the generated configuration.
 
-Review the generated configuration file to ensure it meets your needs. Optionally, you can move the contents of this file to your preferred location.
+    Review the generated configuration file to ensure it meets your needs. Optionally, you can move the contents of this file to your preferred location.
 
-Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
+    Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
 
-  ```shell
-  tidbcloud_dedicated_network_container.example: Importing... [id=10423692645683000000,example]
-  tidbcloud_dedicated_network_container.example: Import complete [id=10423692645683000000,example]
+    ```shell
+    tidbcloud_dedicated_network_container.example: Importing... [id=10423692645683000000,example]
+    tidbcloud_dedicated_network_container.example: Import complete [id=10423692645683000000,example]
 
-  Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
-  ```
+    Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
+    ```
 
 Now you can manage the imported dedicated network container with Terraform.
 
 ## Delete a Dedicated network container
-To delete a Dedicated cluster, you can delete the configuration of the `tidbcloud_dedicated_cluster` resource, then use the `terraform apply` command to destroy the resource. However, you must ensure that the status of the dedicated network container is not `ACTIVE`. If it is `ACTIVE`, you cannot delete it.
+
+To delete a TiDB Cloud Dedicated cluster, you can delete the configuration of the `tidbcloud_dedicated_cluster` resource, then use the `terraform apply` command to destroy the resource. However, you must ensure that the status of the TiDB Cloud Dedicated network container is not `ACTIVE`. If it is `ACTIVE`, you cannot delete it.
+
 If the status is `INACTIVE`, you can delete it by running the following command:
+
 ```shell
   $ terraform apply
   tidbcloud_dedicated_network_container.example: Refreshing state...
@@ -223,4 +227,3 @@ Now, if you run the `terraform show` command, it will show no managed resources 
 ```
 $ terraform show
 ```
-

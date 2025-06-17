@@ -5,7 +5,7 @@ summary: Learn how to use the serverless branch resource to create and modify a 
 
 # Use Serverless Branch Resource
 
-This document introduces how to manage a TiDB Cloud Serverless branch with the `tidbcloud_serverless_branch` resource in this document.
+This document introduces how to manage a TiDB Cloud Serverless branch using the `tidbcloud_serverless_branch` resource.
 
 The features of the `tidbcloud_serverless_branch` resource include the following:
 
