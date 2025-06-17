@@ -13,9 +13,19 @@ TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data servic
 > - Currently, TiDB Cloud only allows up to 100 table filter rules per changefeed.
 > - For [TiDB Cloud Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless), the changefeed feature is unavailable.
 
-To access the changefeed feature, navigate to the cluster overview page of your TiDB cluster, and then click **Changefeed** in the left navigation pane. The changefeed page is displayed.
+## View the Changefeed page
 
-On the changefeed page, you can create a changefeed, view a list of existing changefeeds, and operate the existing changefeeds (such as scaling, pausing, resuming, editing, and deleting a changefeed).
+To access the changefeed feature, take the following steps:
+
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+
+    > **Tip:**
+    >
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+
+2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Changefeed** in the left navigation pane. The changefeed page is displayed.
+
+On the **Changefeed** page, you can create a changefeed, view a list of existing changefeeds, and operate the existing changefeeds (such as scaling, pausing, resuming, editing, and deleting a changefeed).
 
 ## Create a changefeed
 
@@ -28,7 +38,7 @@ To create a changefeed, refer to the tutorials:
 
 ## Query Changefeed RCUs
 
-1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
 2. Locate the corresponding changefeed you want to query, and click **...** > **View** in the **Action** column.
 3. You can see the current TiCDC Replication Capacity Units (RCUs) in the **Specification** area of the page.
 
@@ -41,7 +51,7 @@ You can change the TiCDC Replication Capacity Units (RCUs) of a changefeed by sc
 > - To scale a changefeed for a cluster, make sure that all changefeeds for this cluster are created after March 28, 2023.
 > - If a cluster has changefeeds created before March 28, 2023, neither the existing changefeeds nor newly created changefeeds for this cluster support scaling up or down.
 
-1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
 2. Locate the corresponding changefeed you want to scale, and click **...** > **Scale Up/Down** in the **Action** column.
 3. Select a new specification.
 4. Click **Submit**.
@@ -50,7 +60,7 @@ It takes about 10 minutes to complete the scaling process (during which the chan
 
 ## Pause or resume a changefeed
 
-1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
 2. Locate the corresponding changefeed you want to pause or resume, and click **...** > **Pause/Resume** in the **Action** column.
 
 ## Edit a changefeed
@@ -59,7 +69,7 @@ It takes about 10 minutes to complete the scaling process (during which the chan
 >
 > TiDB Cloud currently only allows editing changefeeds in the paused status.
 
-1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
 2. Locate the changefeed you want to pause, and click **...** > **Pause** in the **Action** column.
 3. When the changefeed status changes to `Paused`, click **...** > **Edit** to edit the corresponding changefeed.
 
@@ -74,7 +84,7 @@ It takes about 10 minutes to complete the scaling process (during which the chan
 
 ## Delete a changefeed
 
-1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
 2. Locate the corresponding changefeed you want to delete, and click **...** > **Delete** in the **Action** column.
 
 ## Changefeed billing

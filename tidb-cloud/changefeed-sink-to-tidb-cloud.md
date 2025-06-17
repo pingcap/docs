@@ -61,7 +61,7 @@ Before creating a changefeed, you need to export existing data from the source T
 
 After completing the prerequisites, you can sink your data to the destination TiDB Cloud Serverless cluster.
 
-1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
+1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Data** > **Changefeed** in the left navigation pane.
 
 2. Click **Create Changefeed**, and select **TiDB Cloud** as the destination.
 

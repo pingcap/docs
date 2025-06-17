@@ -8,7 +8,7 @@ category: quick start
 
 *Estimated completion time: 20 minutes*
 
-This tutorial guides you through an easy way to get started with TiDB Cloud. You can also follow the step-by-step tutorials on the [**Getting Started**](https://tidbcloud.com/console/getting-started) page in the TiDB Cloud console.
+This tutorial guides you through an easy way to get started with TiDB Cloud. You can also follow the step-by-step tutorials on the [**Getting Started**](https://tidbcloud.com/getting-started) page in the TiDB Cloud console.
 
 Additionally, you can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start).
 
@@ -22,7 +22,7 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
 
 2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
 
-    The [**Clusters**](https://tidbcloud.com/console/clusters) page is displayed by default.
+    The [**Clusters**](https://tidbcloud.com/project/clusters) page is displayed by default.
 
 3. For new sign-up users, TiDB Cloud automatically creates a default TiDB Cloud Serverless cluster named `Cluster0` for you.
 
@@ -36,7 +36,7 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
 
 You can use the built-in AI-assisted SQL Editor in the TiDB Cloud console to maximize your data value. This enables you to run SQL queries against databases without a local SQL client. You can intuitively view the query results in tables or charts and easily check the query logs.
 
-1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click on a cluster name to go to its overview page, and then click **SQL Editor** in the left navigation pane.
+1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page, click on a cluster name to go to its overview page, and then click **SQL Editor** in the left navigation pane.
 
 2. To try the AI capacity of TiDB Cloud, follow the on-screen instructions to allow PingCAP and AWS Bedrock to use your code snippets for research and service improvement, and then click **Save and Get Started**.
 

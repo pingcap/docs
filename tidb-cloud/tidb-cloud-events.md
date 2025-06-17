@@ -11,16 +11,15 @@ This document describes how to view the events for TiDB Cloud clusters using the
 
 ## View the Events page
 
-To view the events on the Events page, take the following steps:
+To view the events on the **Events** page, take the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
 
     > **Tip:**
     >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. Click the name of the target cluster. The cluster overview page is displayed.
-3. Click **Events** in the left navigation pane.
+2. In the left navigation pane, click **Monitoring** > **Events**.
 
 ## Logged events
 

@@ -35,21 +35,23 @@ You can enable access from **all AWS IP addresses** by referring to the official
 
 TiDB Cloud regularly updates this list and uses the reserved IP address **169.254.65.87** to represent all AWS IP addresses.
 
-## Create and manage a firewall rule 
+## Create and manage a firewall rule
 
 This section describes how to manage firewall rules for a TiDB Cloud Serverless cluster. With a public endpoint, the connections to the TiDB Cloud Serverless cluster are restricted to the IP addresses specified in the firewall rules.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), select the TiDB Cloud Serverless cluster on which you want to add firewall rules.
+To add firewall rules to a TiDB Cloud Serverless cluster, take the following steps:
 
-2. In the left navigation pane, click **Networking** to open the Networking page for the TiDB Cloud Serverless cluster.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
 
-3. **Enable** Public Endpoint if it is disabled. In **Firewall Rules**, click **+ Add Current IP**. This automatically creates a firewall rule with the public IP address of your computer, as perceived by TiDB Cloud.
+2. In the left navigation pane, click **Settings** > **Networking**.
+
+3. On the **Networking** page, enable **Public Endpoint** if it is disabled. In **Authorized Networks**, click **+ Add Current IP**. This automatically creates a firewall rule with the public IP address of your computer, as perceived by TiDB Cloud.
 
     > **Note:**
     >
     > In some situations, the IP address observed by the TiDB Cloud console differs from the IP address used when accessing the internet. Therefore, you might need to change the start and end IP addresses to make the rule function as expected. You can use a search engine or other online tool to check your own IP address. For example, search for "what is my IP."
 
-4. Click **Add rule** to add more address ranges. In the **Add Firewall Rule** window, you can specify a single IP address or a range of IP addresses. If you want to limit the rule to a single IP address, type the same IP address in the **Start IP Address** and **End IP Address** fields. Opening the firewall enables administrators, users, and applications to access any database on your TiDB Cloud Serverless cluster to which they have valid credentials. Click **Submit** to add the firewall rule.
+4. Click **Add rule** to add more address ranges. In the displayed window, you can specify a single IP address or a range of IP addresses. If you want to limit the rule to a single IP address, type the same IP address in the **Start IP Address** and **End IP Address** fields. Opening the firewall enables administrators, users, and applications to access any database on your TiDB Cloud Serverless cluster to which they have valid credentials. Click **Submit** to add the firewall rule.
 
 ## What's next
 

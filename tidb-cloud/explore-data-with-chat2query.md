@@ -25,11 +25,11 @@ The recommended use cases of SQL Editor are as follows:
 
 ## Access SQL Editor
 
-1. Go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1. Go to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
     > **Tip:**
     >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
 2. Click your cluster name, and then click **SQL Editor** in the left navigation pane.
 
@@ -53,7 +53,7 @@ When you access Chat2Query for the first time, you will be prompted with a dialo
 After the first-time access, you can still change the AI setting as follows:
 
 - To enable AI, click **Enable AI power for data exploration** in the upper-right corner of Chat2Query.
-- To disable AI, click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com/), click **Account Settings**, click the **Privacy** tab, and then disable the **AI-powered Data Exploration** option.
+- To disable AI, click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com/), click **Account Settings**, click the **AI & Privacy** tab, and then disable the **AI-powered Data Exploration** option.
 
 ## Write and run SQL queries
 
