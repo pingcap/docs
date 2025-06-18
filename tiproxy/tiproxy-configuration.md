@@ -160,7 +160,7 @@ When you need to isolate computing layer resources, you can configure multiple v
 >
 > - Virtual IP is only supported on Linux operating systems.
 > - The Linux user running TiProxy must have permission to bind IP addresses.
-> - The real and virtual IP of one TiProxy instance must be within the same CIDR range.
+> - The real and virtual IP addresses of one TiProxy instance must be within the same CIDR range.
 
 #### `interface`
 
