@@ -154,5 +154,6 @@ Once the restore process begins, the cluster status changes to **Restoring**. Th
 
 ## Limitations
 
-- If a TiFlash replica is enabled, it will be unavailable for a period after the restore, because data needs to be rebuilt in TiFlash.
+- If a TiFlash replica is enabled, it will be unavailable for a period after the restore, because the data needs to be rebuilt in TiFlash.
 - Manual backups are not supported for TiDB Cloud Serverless clusters.
+- Clusters with more than 1 TiB of data do not support restoring to new clusters by default. Contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance with larger datasets.
