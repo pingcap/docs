@@ -112,7 +112,7 @@ In the left side of the `SET` expression, you can only reference a column name t
 
 It specifies where your data files are and which files to import. You can point to a single file or use wildcards to match many files.
 
-- Amazon S3 or GCS URI path: for URI configuration details, see [URI Formats of External Storage Services](/external-storage-uri.md).
+- Cloud storage (Amazon S3 or GCS): Provide the full object-storage URI, formatted as described in [URI Formats of External Storage Services](/external-storage-uri.md).
 
 - TiDB local file path: The path must be absolute. Ensure the specified path and files exist on the TiDB node where your session is connected, and confirm you have the required `FILE` privilege.
 
