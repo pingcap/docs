@@ -40,7 +40,6 @@ To retrieve the information about all available projects, use the `tidbcloud_pro
     provider "tidbcloud" {
       public_key = "your_public_key"
       private_key = "your_private_key"
-      sync = true
     }
 
     data "tidbcloud_projects" "example_project" {
@@ -346,8 +345,8 @@ The following example shows how to create a TiDB Cloud Dedicated cluster.
             endpoints               = [
                 {
                     connection_type = "PUBLIC"
-                    host            = null
-                    port            = 0
+                    host            = "tidb.taiqixxxxxxx.clusters.tidb-cloud.com"
+                    port            = 4000
                 },
                 {
                     connection_type = "VPC_PEERING"

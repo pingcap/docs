@@ -119,7 +119,6 @@ By setting `sync` to `true`, you can create, update, or delete resources synchro
 provider "tidbcloud" {
   public_key = "your_public_key"
   private_key = "your_private_key"
-  sync = true
 }
 ```
 

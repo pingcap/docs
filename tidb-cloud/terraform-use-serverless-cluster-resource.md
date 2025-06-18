@@ -40,7 +40,6 @@ To retrieve the information about all available projects, use the `tidbcloud_pro
     provider "tidbcloud" {
       public_key = "your_public_key"
       private_key = "your_private_key"
-      sync = true
     }
 
     data "tidbcloud_projects" "example_project" {
