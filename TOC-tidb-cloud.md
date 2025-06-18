@@ -396,7 +396,7 @@
   - Terraform
     - [Terraform Integration Overview](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
     - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
-    - [Use Dedicated Cluster Resource](/tidb-cloud/terraform-use-dedicated-cluster-resource.md)
+    - [Use Dedicated Cluster Resource (Deprecated)](/tidb-cloud/terraform-use-dedicated-cluster-resource.md)
     - [Use Dedicated Private Endpoint Connection Resource](/tidb-cloud/terraform-use-dedicated-private-endpoint-connection-resource.md)
     - [Use Dedicated VPC Peering Resource](/tidb-cloud/terraform-use-dedicated-vpc-peering-resource.md)
     - [Use Dedicated Network Container Resource](/tidb-cloud/terraform-use-dedicated-network-container-resource.md)
