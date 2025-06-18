@@ -147,7 +147,7 @@ Currently, audit logs are stored within TiDB Cloud for 365 days. After this peri
 
 > **Note:**
 >
-> Support for external storage options (such as AWS S3, Azure Blob Storage, and Google Cloud Storage) will be available in the future.
+> Contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) if you need to save audit logs in external storage (such as AWS S3, Azure Blob Storage, and Google Cloud Storage).
 
 To view and download audit logs, use the [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-download.md):
 
@@ -225,6 +225,6 @@ When the event class is `AUDIT` or a subclass of `AUDIT`, the audit logs contain
 
 ## Audit logging limitations
 
-- Audit logging is only available via TiDB Cloud CLI. Support for TiDB Cloud console will be available soon.
-- Audit logs can only be stored in TiDB Cloud at present. Support for external storage will be available soon.
+- Audit logging is only available via TiDB Cloud CLI.
+- Audit logs can only be stored in TiDB Cloud at present.
 - TiDB Cloud Serverless does not guarantee the sequential order of audit logs, which means you might have to review all log files to view the latest events. To sort the logs chronologically, you can use the `TIME` field in the audit logs.
