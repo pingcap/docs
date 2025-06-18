@@ -279,9 +279,19 @@ TiDB セルフマネージド クラスターから Amazon S3 にデータをエ
 
     ![Start Time in Metadata](/media/tidb-cloud/start_ts_in_metadata.png)
 
-2.  TiCDC にTiDB Cloudへの接続を許可します[TiDB Cloudコンソール](https://tidbcloud.com/console/clusters)でクラスターを見つけ、 **「ネットワーク」**ページに移動します。 **「IPアドレスの追加」** &gt; **「IPアドレスの使用」**をクリックします。 **「IPアドレス」**フィールドに TiCDCコンポーネントのパブリックIPアドレスを入力し、 **「確認」**をクリックして保存します。これで TiCDC はTiDB Cloudにアクセスできるようになります。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)参照してください。
+2.  TiCDC にTiDB Cloudへの接続を許可します。
 
-3.  下流のTiDB Cloudクラスタの接続情報を取得します[TiDB Cloudコンソール](https://tidbcloud.com/console/clusters)で、 **「概要」** &gt; **「接続」**に進みます。接続ダイアログで、 **「接続タイプ」**ドロップダウンリストから**「パブリック」**を選択し、 **「接続先」**ドロップダウンリストから**「一般」**を選択します。接続情報から、クラスタのホストIPアドレスとポートを取得できます。詳細については、 [パブリック接続経由で接続する](/tidb-cloud/connect-via-standard-connection.md)参照してください。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/project/clusters)で[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+    2.  左側のナビゲーション ペインで、 **[設定]** &gt; **[ネットワーク] を**クリックします。
+    3.  **[ネットワーク]**ページで、 **[IP アドレスの追加] を**クリックします。
+    4.  表示されたダイアログで**「IPアドレスを使用する」**を選択し、「 **+」**をクリックして、 **「IPアドレス」**フィールドにTiCDCコンポーネントのパブリックIPアドレスを入力し、 **「確認」**をクリックします。これでTiCDCはTiDB Cloudにアクセスできるようになります。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)参照してください。
+
+3.  ダウンストリームTiDB Cloudクラスターの接続情報を取得します。
+
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/project/clusters)で[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+    2.  右上隅の**「接続」**をクリックします。
+    3.  接続ダイアログで、 **「接続タイプ」**ドロップダウンリストから**「パブリック」**を選択し、 **「接続先」**ドロップダウンリストから**「一般」**を選択します。
+    4.  接続情報から、クラスターのホストIPアドレスとポートを取得できます。詳細については、 [パブリック接続経由で接続する](/tidb-cloud/connect-via-standard-connection.md)参照してください。
 
 4.  増分レプリケーションタスクを作成して実行します。アップストリームクラスターで、以下のコマンドを実行します。
 

@@ -1,31 +1,31 @@
 ---
 title: Connect to TiDB Cloud Serverless with WordPress
-summary: TiDB Cloud Serverless を使用して WordPress を実行する方法を学びます。このチュートリアルでは、数分で WordPress + TiDB Cloud Serverless を実行するための手順を説明します。
+summary: TiDB Cloud Serverlessを使ってWordPressを実行する方法を学びましょう。このチュートリアルでは、WordPress + TiDB Cloud Serverlessを数分で実行するための手順をステップバイステップで説明します。
 ---
 
-# WordPress でTiDB Cloud Serverless に接続する {#connect-to-tidb-cloud-serverless-with-wordpress}
+# WordPressでTiDB Cloud Serverlessに接続する {#connect-to-tidb-cloud-serverless-with-wordpress}
 
-TiDB は MySQL 互換のデータベース、 TiDB Cloud Serverless は完全に管理された TiDB サービス、 [ワードプレス](https://github.com/WordPress)ユーザーが Web サイトを作成および管理できる無料のオープンソース コンテンツ管理システム (CMS) です。WordPress は PHP で記述されており、MySQL データベースを使用します。
+TiDBはMySQL互換データベース、 TiDB Cloud ServerlessはフルマネージドのTiDBサービス、そして[ワードプレス](https://github.com/WordPress)ユーザーがウェブサイトを作成・管理できる無料のオープンソースコンテンツ管理システム（CMS）です。WordPressはPHPで記述されており、MySQLデータベースを使用します。
 
 このチュートリアルでは、 TiDB Cloud Serverless を使用して WordPress を無料で実行する方法を学ぶことができます。
 
 > **注記：**
 >
-> このチュートリアルは、 TiDB Cloud Serverless に加えて、 TiDB Cloud Dedicated および TiDB Self-Managed クラスターでも機能します。ただし、コスト効率の観点から、WordPress はTiDB Cloud Serverless で実行することを強くお勧めします。
+> このチュートリアルは、 TiDB Cloud Serverless に加えて、 TiDB Cloud Dedicated および TiDB Self-Managed クラスターでも動作します。ただし、コスト効率の観点から、WordPress はTiDB Cloud Serverless で実行することを強くお勧めします。
 
 ## 前提条件 {#prerequisites}
 
 このチュートリアルを完了するには、次のものが必要です。
 
--   TiDB Cloud Serverless クラスター。TiDB Cloud クラスターがない場合は、 [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って独自のTiDB Cloudクラスターを作成してください。
+-   TiDB Cloud Serverless クラスター。TiDB Cloud クラスターがまだない場合は、 [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って独自のTiDB Cloudクラスターを作成してください。
 
-## TiDB Cloud Serverless で WordPress を実行する {#run-wordpress-with-tidb-cloud-serverless}
+## TiDB Cloud ServerlessでWordPressを実行する {#run-wordpress-with-tidb-cloud-serverless}
 
 このセクションでは、 TiDB Cloud Serverless を使用して WordPress を実行する方法を説明します。
 
 ### ステップ1: WordPressサンプルリポジトリをクローンする {#step-1-clone-the-wordpress-sample-repository}
 
-サンプル コード リポジトリを複製するには、ターミナル ウィンドウで次のコマンドを実行します。
+サンプル コード リポジトリのクローンを作成するには、ターミナル ウィンドウで次のコマンドを実行します。
 
 ```shell
 git clone https://github.com/Icemap/wordpress-tidb-docker.git
@@ -34,13 +34,13 @@ cd wordpress-tidb-docker
 
 ### ステップ2: 依存関係をインストールする {#step-2-install-dependencies}
 
-1.  サンプル リポジトリでは、WordPress を起動するために[ドッカー](https://www.docker.com/)と[Docker の作成](https://docs.docker.com/compose/)必要です。これらがインストールされている場合は、この手順をスキップできます。WordPress は Linux 環境 (Ubuntu など) で実行することを強くお勧めします。次のコマンドを実行して、Docker と Docker Compose をインストールします。
+1.  サンプルリポジトリでは、WordPressを起動するために[ドッカー](https://www.docker.com/)と[Dockerコンポーズ](https://docs.docker.com/compose/)必要です。すでにインストールされている場合は、この手順をスキップできます。WordPressはLinux環境（Ubuntuなど）で実行することを強くお勧めします。以下のコマンドを実行して、DockerとDocker Composeをインストールしてください。
 
     ```shell
     sudo sh install.sh
     ```
 
-2.  サンプル リポジトリにはサブモジュールとして[TiDB 互換性プラグイン](https://github.com/pingcap/wordpress-tidb-plugin)含まれています。サブモジュールを更新するには、次のコマンドを実行します。
+2.  サンプルリポジトリにはサブモジュールとして[TiDB 互換性プラグイン](https://github.com/pingcap/wordpress-tidb-plugin)含まれています。サブモジュールを更新するには、以下のコマンドを実行してください。
 
     ```shell
     git submodule update --init --recursive
@@ -50,22 +50,22 @@ cd wordpress-tidb-docker
 
 TiDB Cloud Serverless への WordPress データベース接続を構成します。
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **接続タイプは**`Public`に設定されています。
-    -   **Connect With は**`WordPress`に設定されています。
-    -   **オペレーティング システムは**`Debian/Ubuntu/Arch`に設定されています。
+    -   **接続タイプ**は`Public`に設定されています。
+    -   **Connect With が**`WordPress`に設定されています。
+    -   **オペレーティング システム**は`Debian/Ubuntu/Arch`に設定されています。
     -   **データベースは**、使用するデータベース（例： `test` ）に設定されます。
 
-4.  ランダムなパスワードを作成するには、 **「パスワードの生成」**をクリックします。
+4.  ランダムなパスワードを作成するには、 **「パスワードの生成」を**クリックします。
 
     > **ヒント：**
     >
-    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成することができます。
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」を**クリックして新しいパスワードを生成することができます。
 
 5.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -73,7 +73,7 @@ TiDB Cloud Serverless への WordPress データベース接続を構成しま�
     cp .env.example .env
     ```
 
-6.  対応する接続文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
+6.  対応する接続文字列をコピーして、 `.env`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```dotenv
     TIDB_HOST='{HOST}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
@@ -83,7 +83,7 @@ TiDB Cloud Serverless への WordPress データベース接続を構成しま�
     TIDB_DB_NAME='test'
     ```
 
-    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに必ず置き換えてください。デフォルトでは、 TiDB Cloud Serverless には`test`データベースが付属しています。TiDB TiDB Cloud Serverless クラスターに別のデータベースを既に作成している場合は、 `test`データベース名に置き換えることができます。
+    プレースホルダー`{}`は、接続ダイアログで取得した接続パラメータに置き換えてください。デフォルトでは、 TiDB Cloud Serverlessには`test`データベースが付属しています。TiDB TiDB Cloud Serverlessクラスター内に既に別のデータベースを作成している場合は、 `test`データベース名に置き換えてください。
 
 7.  `.env`ファイルを保存します。
 
@@ -105,4 +105,4 @@ TiDB Cloud Serverless への WordPress データベース接続を構成しま�
 
 ## ヘルプが必要ですか? {#need-help}
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。

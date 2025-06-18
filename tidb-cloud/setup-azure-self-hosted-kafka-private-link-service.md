@@ -34,9 +34,9 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
 
 3.  [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターから Kafka デプロイメント情報を取得します。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com)で[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
-    2.  左側のナビゲーション ペインで、 **Changefeed を**クリックします。
-    3.  **Changefeed**ページで、右上隅の**[Changefeed の作成] を**クリックします。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com)で[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+    2.  左側のナビゲーション ペインで、 **[データ]** &gt; **[Changefeed] を**クリックします。
+    3.  **Changefeed**ページで、右上隅の**Changefeed の作成を**クリックし、次の情報を入力します。
         1.  **宛先**で、 **Kafka**を選択します。
         2.  **[接続方法]**で**[プライベート リンク]**を選択します。
     4.  続行する前に、 TiDB Cloud Azureアカウントのリージョン情報とサブスクリプションを**リマインダー**に書き留めておいてください。この情報は、TiDB CloudがKafka Private Linkサービスにアクセスできるように承認する際に使用します。

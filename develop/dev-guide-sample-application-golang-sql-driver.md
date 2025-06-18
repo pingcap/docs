@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with Go-MySQL-Driver
-summary: Go-MySQL-Driver を使用して TiDB に接続する方法を学びます。このチュートリアルでは、Go-MySQL-Driver を使用して TiDB で動作するGolangサンプル コード スニペットを紹介します。
+summary: Go-MySQL-Driverを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、Go-MySQL-Driverを使ってTiDBを操作するGolang言語のサンプルコードスニペットを紹介します。
 ---
 
 # Go-MySQL-Driver で TiDB に接続する {#connect-to-tidb-with-go-mysql-driver}
@@ -11,7 +11,7 @@ TiDB は MySQL 互換データベースであり、 [Go-MySQL-ドライバー](h
 
 -   環境を設定します。
 -   Go-MySQL-Driver を使用して TiDB クラスターに接続します。
--   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作用の[サンプルコードスニペット](#sample-code-snippets)見つけることができます。
+-   アプリケーションをビルドして実行します。オプションで、基本的なCRUD操作用の[サンプルコードスニペット](#sample-code-snippets)見つけることもできます。
 
 > **注記：**
 >
@@ -44,11 +44,11 @@ TiDB は MySQL 互換データベースであり、 [Go-MySQL-ドライバー](h
 
 ## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
-このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を示します。
+このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を説明します。
 
 ### ステップ1: サンプルアプリのリポジトリをクローンする {#step-1-clone-the-sample-app-repository}
 
-サンプル コード リポジトリを複製するには、ターミナル ウィンドウで次のコマンドを実行します。
+サンプル コード リポジトリのクローンを作成するには、ターミナル ウィンドウで次のコマンドを実行します。
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-golang-sql-driver-quickstart.git
@@ -62,7 +62,7 @@ cd tidb-golang-sql-driver-quickstart
 <SimpleTab>
 <div label="TiDB Cloud Serverless">
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
@@ -72,7 +72,7 @@ cd tidb-golang-sql-driver-quickstart
 
     -   **ブランチ**は`main`に設定されています
 
-    -   **接続先は**`General`に設定されています
+    -   **接続先が**`General`に設定されています
 
     -   **オペレーティング システムは**環境に適合します。
 
@@ -92,7 +92,7 @@ cd tidb-golang-sql-driver-quickstart
     cp .env.example .env
     ```
 
-6.  対応する接続文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
+6.  対応する接続文字列をコピーして、 `.env`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```dotenv
     TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
@@ -103,24 +103,24 @@ cd tidb-golang-sql-driver-quickstart
     USE_SSL='true'
     ```
 
-    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに必ず置き換えてください。
+    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに置き換えてください。
 
-    TiDB Cloud Serverless では安全な接続が必要です。そのため、 `USE_SSL`の値を`true`に設定する必要があります。
+    TiDB Cloud Serverless は安全な接続を必要とします。そのため、 `USE_SSL`値を`true`に設定する必要があります。
 
 7.  `.env`ファイルを保存します。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
+    IP アクセス リストをまだ設定していない場合は、 **[IP アクセス リストの設定] を**クリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
 
-    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
+    TiDB Cloud Dedicatedは、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPCピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)ご覧ください。
 
 4.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -128,7 +128,7 @@ cd tidb-golang-sql-driver-quickstart
     cp .env.example .env
     ```
 
-5.  対応する接続文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
+5.  対応する接続文字列をコピーして、 `.env`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```dotenv
     TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
@@ -139,7 +139,7 @@ cd tidb-golang-sql-driver-quickstart
     USE_SSL='false'
     ```
 
-    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに必ず置き換えてください。
+    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに置き換えてください。
 
 6.  `.env`ファイルを保存します。
 
@@ -152,7 +152,7 @@ cd tidb-golang-sql-driver-quickstart
     cp .env.example .env
     ```
 
-2.  対応する接続文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
+2.  対応する接続文字列をコピーして、 `.env`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```dotenv
     TIDB_HOST='{host}'
@@ -163,7 +163,7 @@ cd tidb-golang-sql-driver-quickstart
     USE_SSL='false'
     ```
 
-    プレースホルダー`{}`接続パラメータに置き換え、 `USE_SSL`を`false`に設定してください。TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
+    プレースホルダー`{}`接続パラメータに置き換え、 `USE_SSL`を`false`に設定してください。TiDBをローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空です。
 
 3.  `.env`ファイルを保存します。
 
@@ -178,13 +178,13 @@ cd tidb-golang-sql-driver-quickstart
     make
     ```
 
-2.  [予想される出力.txt](https://github.com/tidb-samples/tidb-golang-sql-driver-quickstart/blob/main/Expected-Output.txt)チェックして、出力が一致するかどうかを確認します。
+2.  [期待出力.txt](https://github.com/tidb-samples/tidb-golang-sql-driver-quickstart/blob/main/Expected-Output.txt)チェックして、出力が一致するかどうかを確認します。
 
 ## サンプルコードスニペット {#sample-code-snippets}
 
 次のサンプル コード スニペットを参照して、独自のアプリケーション開発を完了することができます。
 
-完全なサンプル コードとその実行方法については、 [tidb サンプル/tidb-golang-sql-driver クイックスタート](https://github.com/tidb-samples/tidb-golang-sql-driver-quickstart)リポジトリを参照してください。
+完全なサンプル コードとその実行方法については、 [tidb-samples/tidb-golang-sql-driver-クイックスタート](https://github.com/tidb-samples/tidb-golang-sql-driver-quickstart)リポジトリを参照してください。
 
 ### TiDBに接続する {#connect-to-tidb}
 
@@ -202,9 +202,9 @@ func openDB(driverName string, runnable func(db *sql.DB)) {
 }
 ```
 
-この関数を使用する場合、 `${tidb_host}` 、 `${tidb_port}` 、 `${tidb_user}` 、 `${tidb_password}` 、 `${tidb_db_name}` TiDB クラスターの実際の値に置き換える必要があります。TiDB TiDB Cloud Serverless では安全な接続が必要です。したがって、 `${use_ssl}`の値を`true`に設定する必要があります。
+この関数を使用する場合、 `${tidb_host}` 、 `${tidb_port}` 、 `${tidb_user}` 、 `${tidb_password}` 、 `${tidb_db_name}` TiDBクラスタの実際の値に置き換える必要があります。TiDB TiDB Cloud Serverlessは安全な接続を必要とするため、 `${use_ssl}`を`true`に設定する必要があります。
 
-### データを挿入 {#insert-data}
+### データを挿入する {#insert-data}
 
 ```golang
 openDB("mysql", func(db *sql.DB) {
@@ -217,7 +217,7 @@ openDB("mysql", func(db *sql.DB) {
 })
 ```
 
-詳細については[データを挿入](/develop/dev-guide-insert-data.md)を参照してください。
+詳細については[データを挿入する](/develop/dev-guide-insert-data.md)を参照してください。
 
 ### クエリデータ {#query-data}
 
@@ -244,7 +244,7 @@ openDB("mysql", func(db *sql.DB) {
 
 詳細については[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)を参照してください。
 
-### データの更新 {#update-data}
+### データを更新する {#update-data}
 
 ```golang
 openDB("mysql", func(db *sql.DB) {
@@ -257,7 +257,7 @@ openDB("mysql", func(db *sql.DB) {
 })
 ```
 
-詳細については[データの更新](/develop/dev-guide-update-data.md)を参照してください。
+詳細については[データを更新する](/develop/dev-guide-update-data.md)を参照してください。
 
 ### データを削除する {#delete-data}
 
@@ -274,7 +274,7 @@ openDB("mysql", func(db *sql.DB) {
 
 詳細については[データを削除する](/develop/dev-guide-delete-data.md)を参照してください。
 
-## 役に立つメモ {#useful-notes}
+## 役立つメモ {#useful-notes}
 
 ### ドライバーまたは ORM フレームワークを使用していますか? {#using-driver-or-orm-framework}
 
@@ -284,27 +284,27 @@ Golangドライバーはデータベースへの低レベルのアクセスを�
 -   データベース トランザクションを手動で管理します。
 -   データ行をデータ オブジェクトに手動でマップします。
 
-複雑な SQL 文を書く必要がない限り、開発には[ゴーム](/develop/dev-guide-sample-application-golang-gorm.md)などの[ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping)フレームワークを使用することをお勧めします。これは次の点で役立ちます。
+複雑なSQL文を書く必要がない限り、開発には[ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping) [ゴーム](/develop/dev-guide-sample-application-golang-gorm.md)ようなフレームワークを使用することをお勧めします。これにより、次のようなメリットがあります。
 
 -   接続とトランザクションを管理するために[定型コード](https://en.wikipedia.org/wiki/Boilerplate_code)減らします。
 -   多数の SQL ステートメントの代わりにデータ オブジェクトを使用してデータを操作します。
 
 ## 次のステップ {#next-steps}
 
--   Go-MySQL-Driver の詳しい使い方については、 [Go-MySQL-Driver のドキュメント](https://github.com/go-sql-driver/mysql/blob/master/README.md)をご覧ください。
--   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入](/develop/dev-guide-insert-data.md) 、 [データの更新](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブル読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
--   プロフェッショナル[TiDB 開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
+-   Go-MySQL-Driver の詳しい使用方法については、 [Go-MySQL-Driverのドキュメント](https://github.com/go-sql-driver/mysql/blob/master/README.md)から学んでください。
+-   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
+-   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

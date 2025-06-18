@@ -39,7 +39,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     TiDB Cloud Serverless は、各 SQL ステートメントの詳細な分析情報を提供するようになりました[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit)ステートメントごとの**合計 RU**コストと**平均 RU**コストの両方を表示できます。この機能は RU コストの特定と分析に役立ち、運用における潜在的なコスト削減の機会を提供します。
 
-    SQL ステートメントの RU の詳細を確認するには、 [TiDB Cloudサーバーレスクラスター](https://tidbcloud.com/console/clusters)の**診断**ページに移動し、 **SQL ステートメント**タブをクリックします。
+    SQL ステートメントの RU の詳細を確認するには、 [TiDB Cloudサーバーレスクラスター](https://tidbcloud.com/project/clusters)の**診断**ページに移動し、 **SQL ステートメント**タブをクリックします。
 
 ## 2023年11月21日 {#november-21-2023}
 
@@ -156,7 +156,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **一般的な変更**
 
--   [データサービス（ベータ版）](https://tidbcloud.com/console/data-service) 、さまざまな状況での特定のレート制限要件を満たすために、各 API キーのレート制限をカスタマイズすることがサポートされています。
+-   [データサービス（ベータ版）](https://tidbcloud.com/project/data-service) 、さまざまな状況での特定のレート制限要件を満たすために、各 API キーのレート制限をカスタマイズすることがサポートされています。
 
     キーを[作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)または[編集](/tidb-cloud/data-service-api-key.md#edit-an-api-key)すると、API キーのレート制限を調整できます。
 
@@ -184,7 +184,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
     -   クラスターのプライベート エンドポイント サービス情報を取得する
     -   クラスターのプライベートエンドポイントを作成する
     -   クラスターのすべてのプライベートエンドポイントを一覧表示する
-    -   プロジェクト内のすべてのプライベートエンドポイントを一覧表示する
+    -   プロジェクト内のすべてのプライベート エンドポイントを一覧表示する
     -   クラスターのプライベートエンドポイントを削除する
 
     詳細については、 [APIドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster)を参照してください。
@@ -215,7 +215,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **一般的な変更**
 
--   [データサービス（ベータ版）](https://tidbcloud.com/console/data-service)開発エクスペリエンスを向上させるために`GET`リクエストのページ分割をサポートします。
+-   [データサービス（ベータ版）](https://tidbcloud.com/project/data-service)開発エクスペリエンスを向上させるために`GET`リクエストのページ分割をサポートします。
 
     `GET`リクエストの場合、**アドバンスプロパティ**で**ページネーションを**有効にし、エンドポイントを呼び出す際にクエリパラメータとして`page`と`page_size`指定することで、結果をページ分けできます。例えば、1 ページあたり 10 項目の 2 ページ目を取得するには、次のコマンドを使用します。
 
@@ -228,7 +228,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     詳細については[エンドポイントを呼び出す](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint)参照してください。
 
--   [データサービス（ベータ版）](https://tidbcloud.com/console/data-service) 、指定された有効期間 (TTL) にわたって`GET`要求のエンドポイント応答のキャッシュをサポートします。
+-   [データサービス（ベータ版）](https://tidbcloud.com/project/data-service) 、指定された有効期間 (TTL) にわたって`GET`要求のエンドポイント応答のキャッシュをサポートします。
 
     この機能により、データベースの負荷が軽減され、エンドポイントのレイテンシーが最適化されます。
 
@@ -247,7 +247,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **一般的な変更**
 
--   [データサービス（ベータ版）](https://tidbcloud.com/console/data-service)では基本認証がサポートされるようになりました。
+-   [データサービス（ベータ版）](https://tidbcloud.com/project/data-service)では基本認証がサポートされるようになりました。
 
     [「基本」HTTP認証](https://datatracker.ietf.org/doc/html/rfc7617)使用して、リクエストで公開鍵をユーザー名として、秘密鍵をパスワードとして提供できます。ダイジェスト認証と比較して、基本認証はよりシンプルで、データ サービス エンドポイントを呼び出すときに簡単に使用できます。
 
@@ -257,7 +257,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **一般的な変更**
 
--   TiDB Cloud [データサービス](https://tidbcloud.com/console/data-service)でデータ アプリの OpenAPI 仕様をサポートします。
+-   TiDB Cloud [データサービス](https://tidbcloud.com/project/data-service)でデータ アプリの OpenAPI 仕様をサポートします。
 
     TiDB Cloud Data Service は、各データアプリ向けに自動生成された OpenAPI ドキュメントを提供します。ドキュメントでは、エンドポイント、パラメータ、レスポンスを確認し、エンドポイントを試すことができます。
 
@@ -283,20 +283,20 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **一般的な変更**
 
--   TiDB Cloud [データサービス](https://tidbcloud.com/console/data-service)の強力な機能、自動エンドポイント生成を紹介します。
+-   TiDB Cloud [データサービス](https://tidbcloud.com/project/data-service)の強力な機能、自動エンドポイント生成を紹介します。
 
     開発者は、最小限のクリックと設定でHTTPエンドポイントを簡単に作成できるようになりました。繰り返しの定型コードを排除し、エンドポイントの作成を簡素化・高速化し、潜在的なエラーを削減します。
 
     この機能の使用方法の詳細については、 [エンドポイントを自動的に生成する](/tidb-cloud/data-service-manage-endpoint.md#generate-an-endpoint-automatically)参照してください。
 
--   TiDB Cloud [データサービス](https://tidbcloud.com/console/data-service)のエンドポイントの`PUT`および`DELETE`リクエスト メソッドをサポートします。
+-   TiDB Cloud [データサービス](https://tidbcloud.com/project/data-service)のエンドポイントの`PUT`および`DELETE`リクエスト メソッドをサポートします。
 
     -   `UPDATE`ステートメントと同様に、 `PUT`メソッドを使用してデータを更新または変更します。
     -   `DELETE`ステートメントと同様に、 `DELETE`メソッドを使用してデータを削除します。
 
     詳細については[プロパティを構成する](/tidb-cloud/data-service-manage-endpoint.md#configure-properties)参照してください。
 
--   TiDB Cloud [データサービス](https://tidbcloud.com/console/data-service)で`POST` `PUT` `DELETE`メソッドの**バッチ操作**をサポートします。
+-   TiDB Cloud [データサービス](https://tidbcloud.com/project/data-service)で`POST` `PUT` `DELETE`メソッドの**バッチ操作**をサポートします。
 
     エンドポイントで**バッチ操作**を有効にすると、単一のリクエストで複数の行に対する操作を実行できるようになります。例えば、単一のリクエスト`POST`で複数行のデータを挿入できます。
 
@@ -410,7 +410,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   changefeed を使用してデータを Amazon S3 にストリーミングすることをサポートします。
 
-    これにより、 TiDB CloudとAmazon S3のシームレスな統合が可能になります。1 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタからAmazon S3へのリアルタイムのデータキャプチャとレプリケーションが可能になり、下流のアプリケーションと分析が最新のデータにアクセスできるようになります。
+    これにより、 TiDB CloudとAmazon S3のシームレスな統合が可能になります。1 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタからAmazon S3へのリアルタイムのデータキャプチャとレプリケーションが可能になり、下流のアプリケーションと分析機能が最新のデータにアクセスできるようになります。
 
     詳細については[クラウドストレージにstorage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)参照してください。
 
@@ -632,7 +632,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **コンソールの変更**
 
--   UI を改良して[クラスターの作成](https://tidbcloud.com/console/clusters/create-cluster)をさらにユーザーフレンドリーにし、数回クリックするだけでクラスターを作成および構成できるようになりました。
+-   UI を改良して[クラスターの作成](https://tidbcloud.com/clusters/create-cluster)をさらにユーザーフレンドリーにし、数回クリックするだけでクラスターを作成および構成できるようになりました。
 
     新しいデザインは、シンプルさを重視し、視覚的な煩雑さを軽減し、明確な指示を提供します。クラスター作成ページで**「作成」を**クリックすると、クラスターの作成が完了するのを待たずに、クラスターの概要ページに移動します。
 
@@ -701,7 +701,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     これで、 [TiDB Cloudコンソール](https://tidbcloud.com/)右下隅にある**[?]**をクリックして、 [TiDB Cloudヘルプ情報](/tidb-cloud/tidb-cloud-support.md)すべて取得し、サポートに問い合わせることができます。
 
--   TiDB Cloudについて理解を深めるのに役立つ[はじめる](https://tidbcloud.com/console/getting-started)ページを紹介します。
+-   TiDB Cloudについて理解を深めるのに役立つ[はじめる](https://tidbcloud.com/getting-started)ページを紹介します。
 
     **「はじめに」**ページでは、インタラクティブなチュートリアル、必須ガイド、役立つリンクを提供しています。インタラクティブなチュートリアルに従うことで、業界固有のデータセット（SteamゲームデータセットとS&amp;P 500データセット）を活用し、 TiDB Cloudの機能とHTAP機能を簡単に体験できます。
 
@@ -751,7 +751,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **一般的な変更**
 
--   [データサービス（ベータ版）](https://tidbcloud.com/console/data-service) for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターを導入すると、カスタム API エンドポイントを使用して HTTPS リクエスト経由でデータにアクセスできるようになります。
+-   [データサービス（ベータ版）](https://tidbcloud.com/project/data-service) for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターを導入すると、カスタム API エンドポイントを使用して HTTPS リクエスト経由でデータにアクセスできるようになります。
 
     Data Service を使用すると、 TiDB Cloud をHTTPS 対応のあらゆるアプリケーションやサービスとシームレスに統合できます。一般的なシナリオを以下に示します。
 
@@ -762,7 +762,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     さらに、 TiDB Cloud は、AI を使用して SQL ステートメントを生成および実行できる RESTful インターフェースである[Chat2Query API](/tidb-cloud/use-chat2query-api.md)提供します。
 
-    データサービスにアクセスするには、左側のナビゲーションペインの[**データサービス**](https://tidbcloud.com/console/data-service)ページ目に移動します。詳細については、以下のドキュメントをご覧ください。
+    データサービスにアクセスするには、左側のナビゲーションペインの[**データサービス**](https://tidbcloud.com/project/data-service)ページ目に移動します。詳細については、以下のドキュメントをご覧ください。
 
     -   [データサービスの概要](/tidb-cloud/data-service-overview.md)
     -   [データサービスを始める](/tidb-cloud/data-service-get-started.md)
@@ -960,7 +960,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     クラスターのサポートは、次のいずれかの方法でリクエストできます。
 
-    -   プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページで、クラスターの行にある**[...]**をクリックし、 **[サポートを受ける]**を選択します。
+    -   プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページで、クラスターの行にある**[...]**をクリックし、 **[サポートを受ける]**を選択します。
     -   クラスターの概要ページで、右上隅の**[...]**をクリックし、 **[サポートを受ける]**を選択します。
 
 ## 2023年1月5日 {#january-5-2023}
@@ -971,7 +971,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     Chat2Query では、AI に SQL クエリを自動的に生成させたり、SQL クエリを手動で記述したり、ターミナルなしでデータベースに対して SQL クエリを実行したりできます。
 
-    Chat2Query にアクセスするには、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、クラスター名をクリックして、左側のナビゲーション ペインで**Chat2Query を**クリックします。
+    Chat2Query にアクセスするには、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、クラスター名をクリックして、左側のナビゲーション ペインで**Chat2Query を**クリックします。
 
 ## 2023年1月4日 {#january-4-2023}
 
@@ -997,7 +997,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **コンソールの変更**
 
--   [**クラスター**](https://tidbcloud.com/console/clusters)ページ目とクラスター概要ページの表示を簡素化します。
+-   [**クラスター**](https://tidbcloud.com/project/clusters)ページ目とクラスター概要ページの表示を簡素化します。
 
-    -   [**クラスター**](https://tidbcloud.com/console/clusters)ページのクラスター名をクリックすると、クラスターの概要ページに入り、クラスターの操作を開始できます。
+    -   [**クラスター**](https://tidbcloud.com/project/clusters)ページのクラスター名をクリックすると、クラスターの概要ページに入り、クラスターの操作を開始できます。
     -   クラスター概要ページから**「接続」ペイン**と**「インポート」**ペインを削除します。右上隅の**「接続」**をクリックすると接続情報が表示され、左側のナビゲーションペインの**「インポート」を**クリックするとデータをインポートできます。

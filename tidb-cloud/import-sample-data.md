@@ -3,7 +3,7 @@ title: Import Sample Data into TiDB Cloud Dedicated
 summary: UI 経由でサンプル データをTiDB Cloud Dedicated にインポートする方法を学習します。
 ---
 
-# サンプルデータをTiDB Cloud Dedicatedにインポート {#import-sample-data-into-tidb-cloud-dedicated}
+# サンプルデータをTiDB Cloud Dedicatedにインポートする {#import-sample-data-into-tidb-cloud-dedicated}
 
 このドキュメントでは、UIを介してTiDB Cloud Dedicatedにサンプルデータをインポートする方法について説明します。使用するサンプルデータは、Capital Bikeshareのデータライセンス契約に基づいてリリースされたCapital Bikeshareのシステムデータです。サンプルデータをインポートする前に、TiDBクラスタを1つ用意する必要があります。
 
@@ -12,13 +12,13 @@ summary: UI 経由でサンプル データをTiDB Cloud Dedicated にインポ�
 
 1.  ターゲット クラスターの**インポート**ページを開きます。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
         > **ヒント：**
         >
-        > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
+        > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
 
 2.  **Cloud Storage からデータをインポート**を選択します。
 
@@ -38,13 +38,13 @@ summary: UI 経由でサンプル データをTiDB Cloud Dedicated にインポ�
 
 1.  ターゲット クラスターの**インポート**ページを開きます。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
         > **ヒント：**
         >
-        > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
+        > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
 
 2.  **Cloud Storage からデータをインポート**を選択します。
 
@@ -65,13 +65,13 @@ summary: UI 経由でサンプル データをTiDB Cloud Dedicated にインポ�
 
 1.  ターゲット クラスターの**インポート**ページを開きます。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
         > **ヒント：**
         >
-        > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
+        > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
 
 2.  **Cloud Storage からデータをインポート**を選択します。
 

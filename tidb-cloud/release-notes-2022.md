@@ -262,7 +262,7 @@ summary: 2022 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   招待による複数の組織への参加をサポートします。
 
-    TiDB Cloudコンソールでは、参加しているすべての組織を表示し、組織間を切り替えることができます。詳細については、 [組織間の切り替え](/tidb-cloud/manage-user-access.md#switch-between-organizations)ご覧ください。
+    TiDB Cloudコンソールでは、参加しているすべての組織を表示し、組織間を切り替えることができます。詳細については、 [組織間の切り替え](/tidb-cloud/manage-user-access.md#view-and-switch-between-organizations)ご覧ください。
 
 -   SQL診断用の[遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)ページを追加します。
 
@@ -306,7 +306,7 @@ summary: 2022 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **コンソールの変更**
 
--   ユーザー エクスペリエンスを向上させるために、 [クラスター](https://tidbcloud.com/console/clusters)ページ目とクラスター概要ページの UI を最適化します。
+-   ユーザー エクスペリエンスを向上させるために、 [クラスター](https://tidbcloud.com/project/clusters)ページ目とクラスター概要ページの UI を最適化します。
 
     新しいデザインでは、Dedicated Tierへのアップグレード、クラスター接続、およびデータ インポートの入り口が強調表示されます。
 
@@ -384,7 +384,7 @@ summary: 2022 年のTiDB Cloudのリリース ノートについて説明しま�
 
     現在、 TiDB Cloud APIはベータ版であり、リクエストに応じてのみご利用いただけます。APIアクセスを申請するには、リクエストを送信してください。
 
-    -   [TiDB Cloudコンソール](https://tidbcloud.com/console/clusters)の右下にある**[ヘルプ]**をクリックします。
+    -   [TiDB Cloudコンソール](https://tidbcloud.com/project/clusters)の右下にある**[ヘルプ]**をクリックします。
     -   ダイアログの**説明**フィールドに「 TiDB Cloud API に申請」と入力し、 **[送信]**をクリックします。
 
 ## 2022年8月16日 {#august-16-2022}
@@ -430,7 +430,7 @@ summary: 2022 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   お客様の組織のさまざまなサポートニーズに対応するために、 TiDB Cloudサポートプラン（ベーシック、スタンダード、エンタープライズ、プレミアム）を追加してください。詳細については、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)ご覧ください。
 
--   [クラスター](https://tidbcloud.com/console/clusters)ページ目とクラスターの詳細ページの UI を最適化します。
+-   [クラスター](https://tidbcloud.com/project/clusters)ページ目とクラスターの詳細ページの UI を最適化します。
 
     -   **クラスター**ページに**[接続] ボタン**と**[データのインポート]**ボタンを追加します。
     -   **[接続] ボタン**と**[データのインポート]**ボタンをクラスターの詳細ページの右上隅に移動します。

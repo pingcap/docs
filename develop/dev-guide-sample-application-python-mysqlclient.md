@@ -1,17 +1,17 @@
 ---
 title: Connect to TiDB with mysqlclient
-summary: mysqlclient を使用して TiDB に接続する方法を学びます。このチュートリアルでは、mysqlclient を使用して TiDB を操作する Python サンプル コード スニペットを示します。
+summary: mysqlclient を使用して TiDB に接続する方法を学びます。このチュートリアルでは、mysqlclient を使用して TiDB を操作する Python サンプルコードスニペットを紹介します。
 ---
 
 # mysqlclientでTiDBに接続する {#connect-to-tidb-with-mysqlclient}
 
-TiDB は MySQL 互換のデータベースであり、 [mysqlクライアント](https://github.com/PyMySQL/mysqlclient) Python 用の人気のあるオープンソース ドライバーです。
+TiDB は MySQL 互換のデータベースであり、 [mysqlクライアント](https://github.com/PyMySQL/mysqlclient) Python 用の人気のオープンソース ドライバーです。
 
 このチュートリアルでは、TiDB と mysqlclient を使用して次のタスクを実行する方法を学習します。
 
 -   環境を設定します。
 -   mysqlclient を使用して TiDB クラスターに接続します。
--   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作のサンプル コード スニペットを見つけることができます。
+-   アプリケーションをビルドして実行します。オプションで、基本的なCRUD操作のサンプルコードスニペットもご利用いただけます。
 
 > **注記：**
 >
@@ -44,11 +44,11 @@ TiDB は MySQL 互換のデータベースであり、 [mysqlクライアント]
 
 ## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
-このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を示します。
+このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を説明します。
 
 ### ステップ1: サンプルアプリのリポジトリをクローンする {#step-1-clone-the-sample-app-repository}
 
-サンプル コード リポジトリを複製するには、ターミナル ウィンドウで次のコマンドを実行します。
+サンプル コード リポジトリのクローンを作成するには、ターミナル ウィンドウで次のコマンドを実行します。
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart.git
@@ -72,7 +72,7 @@ pip install -r requirements.txt
 <SimpleTab>
 <div label="TiDB Cloud Serverless">
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
@@ -82,7 +82,7 @@ pip install -r requirements.txt
 
     -   **ブランチ**は`main`に設定されています
 
-    -   **接続先は**`General`に設定されています
+    -   **接続先が**`General`に設定されています
 
     -   **オペレーティング システムは**環境に適合します。
 
@@ -102,7 +102,7 @@ pip install -r requirements.txt
     cp .env.example .env
     ```
 
-6.  対応する接続文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
+6.  対応する接続文字列をコピーして、 `.env`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```dotenv
     TIDB_HOST='{gateway-region}.aws.tidbcloud.com'
@@ -113,24 +113,24 @@ pip install -r requirements.txt
     CA_PATH=''
     ```
 
-    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに必ず置き換えてください。
+    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに置き換えてください。
 
-    TiDB Cloud Serverless には安全な接続が必要です。 mysqlclient の`ssl_mode`デフォルトで`PREFERRED`になっているため、 `CA_PATH`手動で指定する必要はありません。空のままにしておきます。ただし、特別な理由により`CA_PATH`手動で指定する必要がある場合は、 [TiDB Cloud ServerlessへのTLS接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters)を参照して、さまざまなオペレーティング システムの証明書パスを取得できます。
+    TiDB Cloud Serverless は安全な接続を必要とします。mysqlclient の`ssl_mode`デフォルトで`PREFERRED`に設定されているため、 `CA_PATH`手動で指定する必要はありません。空のままにしておいてください。ただし、特別な理由により`CA_PATH`手動で指定する必要がある場合は、 [TiDB Cloud ServerlessへのTLS接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters)を参照して、さまざまなオペレーティングシステムの証明書パスを取得できます。
 
 7.  `.env`ファイルを保存します。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
+    IP アクセス リストをまだ設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
 
-    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
+    TiDB Cloud Dedicatedは、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPCピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)ご覧ください。
 
 4.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -138,7 +138,7 @@ pip install -r requirements.txt
     cp .env.example .env
     ```
 
-5.  対応する接続文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
+5.  対応する接続文字列をコピーして、 `.env`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```dotenv
     TIDB_HOST='{host}.clusters.tidb-cloud.com'
@@ -162,7 +162,7 @@ pip install -r requirements.txt
     cp .env.example .env
     ```
 
-2.  対応する接続文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
+2.  対応する接続文字列をコピーして、 `.env`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```dotenv
     TIDB_HOST='{tidb_server_host}'
@@ -172,7 +172,7 @@ pip install -r requirements.txt
     TIDB_DB_NAME='test'
     ```
 
-    プレースホルダー`{}`接続パラメータに置き換え、 `CA_PATH`行を削除してください。TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
+    プレースホルダー`{}`接続パラメータに置き換え、 `CA_PATH`行を削除してください。TiDB をローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空です。
 
 3.  `.env`ファイルを保存します。
 
@@ -187,7 +187,7 @@ pip install -r requirements.txt
     python mysqlclient_example.py
     ```
 
-2.  [予想される出力.txt](https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart/blob/main/Expected-Output.txt)チェックして、出力が一致するかどうかを確認します。
+2.  [期待出力.txt](https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart/blob/main/Expected-Output.txt)チェックして、出力が一致するかどうかを確認します。
 
 ## サンプルコードスニペット {#sample-code-snippets}
 
@@ -217,7 +217,7 @@ def get_mysqlclient_connection(autocommit:bool=True) -> MySQLdb.Connection:
 
 この関数を使用する場合は、 `${tidb_host}` 、 `${tidb_port}` 、 `${tidb_user}` 、 `${tidb_password}` 、 `${tidb_db_name}` 、 `${ca_path}` TiDB クラスターの実際の値に置き換える必要があります。
 
-### データを挿入 {#insert-data}
+### データを挿入する {#insert-data}
 
 ```python
 with get_mysqlclient_connection(autocommit=True) as conn:
@@ -226,7 +226,7 @@ with get_mysqlclient_connection(autocommit=True) as conn:
         cursor.execute("INSERT INTO players (id, coins, goods) VALUES (%s, %s, %s)", player)
 ```
 
-詳細については[データを挿入](/develop/dev-guide-insert-data.md)を参照してください。
+詳細については[データを挿入する](/develop/dev-guide-insert-data.md)を参照してください。
 
 ### クエリデータ {#query-data}
 
@@ -239,7 +239,7 @@ with get_mysqlclient_connection(autocommit=True) as conn:
 
 詳細については[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)を参照してください。
 
-### データの更新 {#update-data}
+### データを更新する {#update-data}
 
 ```python
 with get_mysqlclient_connection(autocommit=True) as conn:
@@ -251,7 +251,7 @@ with get_mysqlclient_connection(autocommit=True) as conn:
         )
 ```
 
-詳細については[データの更新](/develop/dev-guide-update-data.md)を参照してください。
+詳細については[データを更新する](/develop/dev-guide-update-data.md)を参照してください。
 
 ### データを削除する {#delete-data}
 
@@ -264,17 +264,17 @@ with get_mysqlclient_connection(autocommit=True) as conn:
 
 詳細については[データを削除する](/develop/dev-guide-delete-data.md)を参照してください。
 
-## 役に立つメモ {#useful-notes}
+## 役立つメモ {#useful-notes}
 
 ### ドライバーまたは ORM フレームワークを使用していますか? {#using-driver-or-orm-framework}
 
-Python ドライバーはデータベースへの低レベル アクセスを提供しますが、開発者は次の作業を行う必要があります。
+Python ドライバーはデータベースへの低レベルのアクセスを提供しますが、開発者は次の作業を行う必要があります。
 
 -   データベース接続を手動で確立および解放します。
 -   データベース トランザクションを手動で管理します。
 -   データ行 ( `mysqlclient`ではタプルとして表される) をデータ オブジェクトに手動でマップします。
 
-複雑な SQL 文を書く必要がない限り、開発には[SQLアルケミー](/develop/dev-guide-sample-application-python-sqlalchemy.md) 、 [ピーウィー](/develop/dev-guide-sample-application-python-peewee.md) 、 Django ORM などの[ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping)フレームワークを使用することをお勧めします。次のことに役立ちます。
+複雑なSQL文を書く必要がない限り、開発には[SQLアルケミー](/develop/dev-guide-sample-application-python-sqlalchemy.md) 、Django ORMなどのフレームワークを[ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping) [ピーウィー](/develop/dev-guide-sample-application-python-peewee.md)することをお勧めします。これにより、以下のことが可能になります。
 
 -   接続とトランザクションを管理するために[定型コード](https://en.wikipedia.org/wiki/Boilerplate_code)減らします。
 -   多数の SQL ステートメントの代わりにデータ オブジェクトを使用してデータを操作します。
@@ -282,19 +282,19 @@ Python ドライバーはデータベースへの低レベル アクセスを提
 ## 次のステップ {#next-steps}
 
 -   [mysqlclientのドキュメント](https://mysqlclient.readthedocs.io/)から`mysqlclient`の使用法について詳しく学びます。
--   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入](/develop/dev-guide-insert-data.md) 、 [データの更新](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブル読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
--   プロフェッショナル[TiDB 開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
+-   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
+-   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

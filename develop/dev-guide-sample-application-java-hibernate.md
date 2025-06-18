@@ -1,17 +1,17 @@
 ---
 title: Connect to TiDB with Hibernate
-summary: Hibernate を使用して TiDB に接続する方法を学習します。このチュートリアルでは、Hibernate を使用して TiDB で動作するJavaサンプル コード スニペットを示します。
+summary: Hibernateを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、Hibernateを使ってTiDBを操作するJavaサンプルコードスニペットを紹介します。
 ---
 
 # Hibernate で TiDB に接続する {#connect-to-tidb-with-hibernate}
 
-TiDB は MySQL 互換のデータベースであり、 [休止状態](https://hibernate.org/orm/)人気のオープンソースJava ORM です。バージョン`6.0.0.Beta2`以降、Hibernate は TiDB の機能に適した TiDB 方言をサポートしています。
+TiDBはMySQL互換のデータベースであり、 [休止状態](https://hibernate.org/orm/)人気のオープンソースJava ORMです。Hibernateはバージョン`6.0.0.Beta2`以降、TiDBの機能に適したTiDB方言をサポートしています。
 
 このチュートリアルでは、TiDB と Hibernate を使用して次のタスクを実行する方法を学習します。
 
 -   環境を設定します。
 -   Hibernate を使用して TiDB クラスターに接続します。
--   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作用の[サンプルコードスニペット](#sample-code-snippets)見つけることができます。
+-   アプリケーションをビルドして実行します。オプションで、基本的なCRUD操作用の[サンプルコードスニペット](#sample-code-snippets)見つけることもできます。
 
 > **注記：**
 >
@@ -21,7 +21,7 @@ TiDB は MySQL 互換のデータベースであり、 [休止状態](https://hi
 
 このチュートリアルを完了するには、次のものが必要です。
 
--   **Java Development Kit (JDK) 17**以上。ビジネスおよび個人の要件に応じて[オープンJDK](https://openjdk.org/)または[オラクル](https://www.oracle.com/hk/java/technologies/downloads/)選択できます。
+-   **Java Development Kit (JDK) 17**以上。ビジネスおよび個人の要件に応じて、 [オープンJDK](https://openjdk.org/)または[オラクル JDK](https://www.oracle.com/hk/java/technologies/downloads/)選択できます。
 -   [メイヴン](https://maven.apache.org/install.html) **3.8**以上。
 -   [ギット](https://git-scm.com/downloads) 。
 -   TiDB クラスター。
@@ -45,11 +45,11 @@ TiDB は MySQL 互換のデータベースであり、 [休止状態](https://hi
 
 ## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
-このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を示します。
+このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を説明します。
 
 ### ステップ1: サンプルアプリのリポジトリをクローンする {#step-1-clone-the-sample-app-repository}
 
-サンプル コード リポジトリを複製するには、ターミナル ウィンドウで次のコマンドを実行します。
+サンプル コード リポジトリのクローンを作成するには、ターミナル ウィンドウで次のコマンドを実行します。
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-java-hibernate-quickstart.git
@@ -63,7 +63,7 @@ cd tidb-java-hibernate-quickstart
 <SimpleTab>
 <div label="TiDB Cloud Serverless">
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
@@ -73,7 +73,7 @@ cd tidb-java-hibernate-quickstart
 
     -   **ブランチ**は`main`に設定されています
 
-    -   **接続先は**`General`に設定されています
+    -   **接続先が**`General`に設定されています
 
     -   **オペレーティング システムは**環境に適合します。
 
@@ -93,7 +93,7 @@ cd tidb-java-hibernate-quickstart
     cp env.sh.example env.sh
     ```
 
-6.  対応する接続文字列をコピーして`env.sh`ファイルに貼り付けます。例の結果は次のようになります。
+6.  対応する接続文字列をコピーして、 `env.sh`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
@@ -104,24 +104,24 @@ cd tidb-java-hibernate-quickstart
     export USE_SSL='true'
     ```
 
-    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに必ず置き換えてください。
+    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに置き換えてください。
 
-    TiDB Cloud Serverless では安全な接続が必要です。そのため、 `USE_SSL`の値を`true`に設定する必要があります。
+    TiDB Cloud Serverless は安全な接続を必要とします。そのため、 `USE_SSL`値を`true`に設定する必要があります。
 
 7.  `env.sh`ファイルを保存します。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
+    IP アクセス リストをまだ設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
 
-    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
+    TiDB Cloud Dedicatedは、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPCピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)ご覧ください。
 
 4.  次のコマンドを実行して`env.sh.example`コピーし、名前を`env.sh`に変更します。
 
@@ -129,7 +129,7 @@ cd tidb-java-hibernate-quickstart
     cp env.sh.example env.sh
     ```
 
-5.  対応する接続文字列をコピーして`env.sh`ファイルに貼り付けます。例の結果は次のようになります。
+5.  対応する接続文字列をコピーして、 `env.sh`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
@@ -140,7 +140,7 @@ cd tidb-java-hibernate-quickstart
     export USE_SSL='false'
     ```
 
-    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに必ず置き換えてください。
+    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに置き換えてください。
 
 6.  `env.sh`ファイルを保存します。
 
@@ -153,7 +153,7 @@ cd tidb-java-hibernate-quickstart
     cp env.sh.example env.sh
     ```
 
-2.  対応する接続文字列をコピーして`env.sh`ファイルに貼り付けます。例の結果は次のようになります。
+2.  対応する接続文字列をコピーして、 `env.sh`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'
@@ -164,7 +164,7 @@ cd tidb-java-hibernate-quickstart
     export USE_SSL='false'
     ```
 
-    プレースホルダー`{}`接続パラメータに置き換え、 `USE_SSL`を`false`に設定してください。TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
+    プレースホルダー`{}`接続パラメータに置き換え、 `USE_SSL`を`false`に設定してください。TiDBをローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空です。
 
 3.  `env.sh`ファイルを保存します。
 
@@ -179,13 +179,13 @@ cd tidb-java-hibernate-quickstart
     make
     ```
 
-2.  [予想される出力.txt](https://github.com/tidb-samples/tidb-java-hibernate-quickstart/blob/main/Expected-Output.txt)チェックして、出力が一致するかどうかを確認します。
+2.  [期待出力.txt](https://github.com/tidb-samples/tidb-java-hibernate-quickstart/blob/main/Expected-Output.txt)チェックして、出力が一致するかどうかを確認します。
 
 ## サンプルコードスニペット {#sample-code-snippets}
 
 次のサンプル コード スニペットを参照して、独自のアプリケーション開発を完了することができます。
 
-完全なサンプル コードとその実行方法については、 [tidb サンプル/tidb-java-hibernate-クイックスタート](https://github.com/tidb-samples/tidb-java-hibernate-quickstart)リポジトリを参照してください。
+完全なサンプル コードとその実行方法については、 [tidb-samples/tidb-java-hibernate-クイックスタート](https://github.com/tidb-samples/tidb-java-hibernate-quickstart)リポジトリを参照してください。
 
 ### TiDBに接続する {#connect-to-tidb}
 
@@ -217,7 +217,7 @@ Hibernate 構成ファイル`hibernate.cfg.xml`を編集します。
 </hibernate-configuration>
 ```
 
-`${tidb_jdbc_url}` `${tidb_user}` TiDB クラスターの実際の値に置き換えてください。次に、次`${tidb_password}`関数を定義します。
+`${tidb_jdbc_url}` `${tidb_user}` TiDBクラスタの実際の値に置き換えてください。次に、次`${tidb_password}`関数を定義します。
 
 ```java
 public SessionFactory getSessionFactory() {
@@ -228,7 +228,7 @@ public SessionFactory getSessionFactory() {
 }
 ```
 
-この関数を使用する場合は、 `${your_entity_class}`独自のデータ エンティティ クラスに置き換える必要があります。エンティティ クラスが複数ある場合は、それぞれに`.addAnnotatedClass(${your_entity_class})`ステートメントを追加する必要があります。上記の関数は、Hibernate を構成する 1 つの方法にすぎません。構成で問題が発生した場合、または Hibernate について詳しく知りたい場合は、 [Hibernate 公式ドキュメント](https://hibernate.org/orm/documentation)を参照してください。
+この関数を使用する場合、 `${your_entity_class}`独自のデータエンティティクラスに置き換える必要があります。複数のエンティティクラスがある場合は、それぞれに`.addAnnotatedClass(${your_entity_class})`ステートメントを追加する必要があります。上記の関数は、Hibernate を設定する方法の1つにすぎません。設定で問題が発生した場合、または Hibernate について詳しく知りたい場合は、 [Hibernateの公式ドキュメント](https://hibernate.org/orm/documentation)を参照してください。
 
 ### データの挿入または更新 {#insert-or-update-data}
 
@@ -238,7 +238,7 @@ try (Session session = sessionFactory.openSession()) {
 }
 ```
 
-詳細については、 [データを挿入](/develop/dev-guide-insert-data.md)および[データの更新](/develop/dev-guide-update-data.md)を参照してください。
+詳細については、 [データを挿入する](/develop/dev-guide-insert-data.md)および[データを更新する](/develop/dev-guide-update-data.md)を参照してください。
 
 ### クエリデータ {#query-data}
 
@@ -263,21 +263,21 @@ try (Session session = sessionFactory.openSession()) {
 
 ## 次のステップ {#next-steps}
 
--   [Hibernateのドキュメント](https://hibernate.org/orm/documentation)から Hibernate の詳しい使い方を学びます。
--   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入](/develop/dev-guide-insert-data.md) 、 [データの更新](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブル読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
--   プロフェッショナル[TiDB 開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
--   Java開発者向けコースを通じて学習します: [Javaから TiDB を操作する](https://eng.edu.pingcap.com/catalog/info/id:212) .
+-   [Hibernateのドキュメント](https://hibernate.org/orm/documentation)から Hibernate の使い方を詳しく学びます。
+-   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
+-   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
+-   Java開発者向けコースを通じて学習します: [JavaからTiDBを操作する](https://eng.edu.pingcap.com/catalog/info/id:212) .
 
 ## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

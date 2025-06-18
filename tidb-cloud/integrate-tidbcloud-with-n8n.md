@@ -11,11 +11,11 @@ summary: n8n でのTiDB Cloudノードの使用方法を学習します。
 
 ## 前提条件: TiDB Cloud APIキーを取得する {#prerequisites-get-tidb-cloud-api-key}
 
-1.  TiDB Cloudダッシュボードにアクセスします。
-2.  クリック<mdsvgicon name="icon-top-organization">をクリックし、左下隅にある**[組織の設定] を**クリックします。</mdsvgicon>
-3.  **「API キー」**タブをクリックします。
-4.  **「API キーの作成」**ボタンをクリックして、新しい API キーを作成します。
-5.  作成した API キーを n8n で後で使用するために保存します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用して対象の組織に切り替えます。
+2.  左側のナビゲーション ペインで、 **[組織設定]** &gt; **[API キー]**をクリックします。
+3.  **「API キー」**ページで、 **「API キーの作成」を**クリックします。
+4.  API キーの説明を入力し、 **「次へ」**をクリックします。
+5.  作成した API キーを n8n で後で使用するためにコピーし、 **[完了]**をクリックします。
 
 詳細については[TiDB CloudAPI の概要](/tidb-cloud/api-overview.md)参照してください。
 

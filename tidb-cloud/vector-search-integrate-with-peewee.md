@@ -3,27 +3,27 @@ title: Integrate TiDB Vector Search with peewee
 summary: TiDB Vector Search を peewee と統合して埋め込みを保存し、セマンティック検索を実行する方法を学習します。
 ---
 
-# TiDB Vector Search を peewee と統合する {#integrate-tidb-vector-search-with-peewee}
+# TiDBベクトル検索をpeeweeと統合する {#integrate-tidb-vector-search-with-peewee}
 
-このチュートリアルでは、 [ピーウィー](https://docs.peewee-orm.com/)使用して[TiDB ベクトル検索](/tidb-cloud/vector-search-overview.md)と対話し、埋め込みを保存し、ベクトル検索クエリを実行する方法について説明します。
+このチュートリアルでは、 [ピーウィー](https://docs.peewee-orm.com/)使用して[TiDBベクトル検索](/tidb-cloud/vector-search-overview.md)と対話し、埋め込みを保存し、ベクトル検索クエリを実行する方法について説明します。
 
 > **注記**
 >
-> TiDB Vector Search は、TiDB Self-Managed (TiDB &gt;= v8.4) および[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)でのみ使用できます。 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では使用できません。
+> TiDB Vector Searchは、TiDB Self-Managed (TiDB &gt;= v8.4)および[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)のみ利用できます。 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では利用できません。
 
 ## 前提条件 {#prerequisites}
 
 このチュートリアルを完了するには、次のものが必要です。
 
--   [Python 3.8以上](https://www.python.org/downloads/)インストールされました。
--   [ギット](https://git-scm.com/downloads)インストールされました。
--   TiDB Cloud Serverless クラスター。TiDB Cloud クラスターがない場合は、 [TiDB Cloud Serverless クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って独自のTiDB Cloudクラスターを作成してください。
+-   [Python 3.8以上](https://www.python.org/downloads/)個インストールされました。
+-   [ギット](https://git-scm.com/downloads)個インストールされました。
+-   TiDB Cloud Serverless クラスター。TiDB Cloud クラスターがまだない場合は、 [TiDB Cloud Serverless クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って独自のTiDB Cloudクラスターを作成してください。
 
 ## サンプルアプリを実行する {#run-the-sample-app}
 
-以下の手順に従って、TiDB Vector Search を peewee と統合する方法を簡単に学習できます。
+以下の手順に従って、TiDB Vector Search を peewee と統合する方法を簡単に学ぶことができます。
 
-### ステップ1. リポジトリをクローンする {#step-1-clone-the-repository}
+### ステップ1. リポジトリのクローンを作成する {#step-1-clone-the-repository}
 
 [`tidb-vector-python`](https://github.com/pingcap/tidb-vector-python)リポジトリをローカル マシンにクローンします。
 
@@ -55,19 +55,19 @@ pip install -r requirements.txt
 pip install peewee pymysql python-dotenv tidb-vector
 ```
 
-### ステップ4. 環境変数を設定する {#step-4-configure-the-environment-variables}
+### ステップ4.環境変数を設定する {#step-4-configure-the-environment-variables}
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **接続タイプは**`Public`に設定されています。
+    -   **接続タイプ**は`Public`に設定されています。
 
-    -   **ブランチは**`main`に設定されています。
+    -   **ブランチ**は`main`に設定されています。
 
-    -   **Connect With は**`General`に設定されています。
+    -   **Connect With が**`General`に設定されています。
 
     -   **オペレーティング システムは**環境に適合します。
 
@@ -79,7 +79,7 @@ pip install peewee pymysql python-dotenv tidb-vector
 
     > **ヒント：**
     >
-    > まだパスワードを設定していない場合は、「**パスワードの生成」**をクリックしてランダムなパスワードを生成します。
+    > まだパスワードを設定していない場合は、 **「パスワードの生成」**をクリックしてランダムなパスワードを生成します。
 
 5.  Python プロジェクトのルート ディレクトリに`.env`ファイルを作成し、接続パラメータを対応する環境変数に貼り付けます。
 
@@ -126,7 +126,7 @@ Get documents within a certain distance:
 
 ## サンプルコードスニペット {#sample-code-snippets}
 
-アプリケーションを開発するには、次のサンプル コード スニペットを参照してください。
+アプリケーションを開発するには、次のサンプル コード スニペットを参照できます。
 
 ### ベクターテーブルを作成する {#create-vector-tables}
 
@@ -169,7 +169,7 @@ db = MySQLDatabase(
 
 #### ベクトル列を定義する {#define-a-vector-column}
 
-3 次元ベクトルを格納する`peewee_demo_documents`という名前の列を持つテーブルを作成します。
+3 次元ベクトルを格納する`peewee_demo_documents`名前の列を持つテーブルを作成します。
 
 ```python
 class Document(Model):
@@ -191,7 +191,7 @@ Document.create(content='tree', embedding=[1, 0, 0])
 
 ### 最も近い文書を検索する {#search-the-nearest-neighbor-documents}
 
-コサイン距離関数に基づいて、クエリ ベクトル`[1, 2, 3]`に意味的に最も近い上位 3 つのドキュメントを検索します。
+コサイン距離関数に基づいて、クエリベクトル`[1, 2, 3]`に意味的に最も近い上位 3 つのドキュメントを検索します。
 
 ```python
 distance = Document.embedding.cosine_distance([1, 2, 3]).alias('distance')
@@ -200,7 +200,7 @@ results = Document.select(Document, distance).order_by(distance).limit(3)
 
 ### 特定の距離内の文書を検索する {#search-documents-within-a-certain-distance}
 
-クエリベクトル`[1, 2, 3]`からのコサイン距離が 0.2 未満のドキュメントを検索します。
+クエリベクトル`[1, 2, 3]`からのコサイン距離が 0.2 未満であるドキュメントを検索します。
 
 ```python
 distance_expression = Document.embedding.cosine_distance([1, 2, 3])

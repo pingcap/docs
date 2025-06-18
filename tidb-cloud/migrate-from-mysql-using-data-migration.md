@@ -290,14 +290,14 @@ MySQL サービスが Google Cloud VPC 内にある場合は、次の手順を�
 | 特権                   | 範囲    | 目的                                |
 | :------------------- | :---- | :-------------------------------- |
 | `SELECT`             | テーブル  | すべてのテーブルからデータを読み取ることができます         |
-| `LOCK TABLES`        | テーブル  | フルダンプ中に一貫したスナップショットを確保            |
+| `RELOAD`             | グローバル | フルダンプ中に一貫したスナップショットを確保            |
 | `REPLICATION SLAVE`  | グローバル | 増分レプリケーションのためのbinlogストリーミングを有効にする |
 | `REPLICATION CLIENT` | グローバル | binlogの位置とサーバーのステータスへのアクセスを提供します  |
 
 たとえば、ソース MySQL インスタンスで次の`GRANT`ステートメントを使用して、対応する権限を付与できます。
 
 ```sql
-GRANT SELECT, LOCK TABLES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'dm_source_user'@'%';
+GRANT SELECT, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'dm_source_user'@'%';
 ```
 
 #### ターゲットTiDB Cloudクラスタに必要な権限を付与する {#grant-required-privileges-in-the-target-tidb-cloud-cluster}
@@ -324,15 +324,15 @@ GRANT SELECT, LOCK TABLES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'dm_s
 GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX ON *.* TO 'dm_target_user'@'%';
 ```
 
-## ステップ1:<strong>データ移行</strong>ページに移動します {#step-1-go-to-the-strong-data-migration-strong-page}
+## ステップ1: データ移行ページに移動します {#step-1-go-to-the-data-migration-page}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
     > **ヒント：**
     >
-    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
+    > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ移行]**をクリックします。
+2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[移行]**をクリックします。
 
 3.  **「データ移行」**ページで、右上隅の**「移行ジョブの作成」を**クリックします。 **「移行ジョブの作成」**ページが表示されます。
 
@@ -475,7 +475,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX ON *.* TO 'dm_t
 
 移行ジョブが失敗した場合は、問題を解決してから再開できます。
 
-移行ジョブはどのステータスでも削除できます。
+どのステータスでも移行ジョブを削除できます。
 
 移行中に問題が発生した場合は、 [移行エラーと解決策](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)参照してください。
 
@@ -483,7 +483,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX ON *.* TO 'dm_t
 
 TiDB Cloud は、さまざまなシナリオでのパフォーマンスとコストの要件を満たすために、移行ジョブ仕様のスケールアップまたはスケールダウンをサポートしています。
 
-移行仕様によってパフォーマンスは異なります。また、移行段階によってパフォーマンス要件も変化する可能性があります。例えば、既存データの移行中は、可能な限り高速なパフォーマンスを求めるため、8 RCUなど、より大きな仕様の移行ジョブを選択します。既存データの移行が完了すると、増分移行ではそれほど高いパフォーマンスは必要ないため、ジョブ仕様をスケールダウン（例えば、8 RCUから2 RCUへ）してコストを削減できます。
+移行仕様によってパフォーマンスは異なります。また、移行段階によってパフォーマンス要件も変化する可能性があります。例えば、既存データの移行中は、可能な限り高速なパフォーマンスを求めるため、8 RCUなど、より大きな仕様の移行ジョブを選択します。既存データの移行が完了すると、増分移行ではそれほど高いパフォーマンスは必要なくなります。そのため、ジョブ仕様をスケールダウンし、例えば8 RCUから2 RCUにすることでコストを削減できます。
 
 移行ジョブの仕様をスケーリングする場合は、次の点に注意してください。
 
@@ -499,9 +499,9 @@ TiDB Cloud は、さまざまなシナリオでのパフォーマンスとコス
 
 ### スケーリング手順 {#scaling-procedure}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ移行]**をクリックします。
+2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[移行]**をクリックします。
 
 3.  **「データ移行」**ページで、スケールする移行ジョブを見つけます。 **「アクション**」列で、 **「...」** &gt; **「スケールアップ/ダウン」を**クリックします。
 

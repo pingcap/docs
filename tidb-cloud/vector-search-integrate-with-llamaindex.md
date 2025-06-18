@@ -59,7 +59,7 @@ from llama_index.vector_stores.tidbvector import TiDBVectorStore
 
 クラスター接続文字列を取得し、環境変数を構成するには、次の手順を実行します。
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 

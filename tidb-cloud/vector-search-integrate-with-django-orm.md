@@ -5,25 +5,25 @@ summary: TiDB Vector Search を Django ORM と統合して埋め込みを保存�
 
 # TiDB ベクトル検索を Django ORM と統合する {#integrate-tidb-vector-search-with-django-orm}
 
-このチュートリアルでは、 [ジャンゴ](https://www.djangoproject.com/) ORM を使用して[TiDB ベクトル検索](/tidb-cloud/vector-search-overview.md)と対話し、埋め込みを保存し、ベクトル検索クエリを実行する方法について説明します。
+このチュートリアルでは、 [ジャンゴ](https://www.djangoproject.com/) ORM を使用して[TiDBベクトル検索](/tidb-cloud/vector-search-overview.md)と対話し、埋め込みを保存し、ベクトル検索クエリを実行する方法について説明します。
 
 > **注記**
 >
-> TiDB Vector Search は、TiDB Self-Managed (TiDB &gt;= v8.4) および[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)でのみ使用できます。 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では使用できません。
+> TiDB Vector Searchは、TiDB Self-Managed (TiDB &gt;= v8.4)および[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)のみ利用できます。 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では利用できません。
 
 ## 前提条件 {#prerequisites}
 
 このチュートリアルを完了するには、次のものが必要です。
 
--   [Python 3.8以上](https://www.python.org/downloads/)インストールされました。
--   [ギット](https://git-scm.com/downloads)インストールされました。
--   TiDB Cloud Serverless クラスター。TiDB Cloud クラスターがない場合は、 [TiDB Cloud Serverless クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って独自のTiDB Cloudクラスターを作成してください。
+-   [Python 3.8以上](https://www.python.org/downloads/)個インストールされました。
+-   [ギット](https://git-scm.com/downloads)個インストールされました。
+-   TiDB Cloud Serverless クラスター。TiDB Cloud クラスターがまだない場合は、 [TiDB Cloud Serverless クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って独自のTiDB Cloudクラスターを作成してください。
 
 ## サンプルアプリを実行する {#run-the-sample-app}
 
 以下の手順に従って、TiDB Vector Search を Django ORM と統合する方法を簡単に学習できます。
 
-### ステップ1. リポジトリをクローンする {#step-1-clone-the-repository}
+### ステップ1. リポジトリのクローンを作成する {#step-1-clone-the-repository}
 
 `tidb-vector-python`リポジトリをローカル マシンにクローンします。
 
@@ -59,15 +59,15 @@ mysqlclient のインストールで問題が発生した場合は、mysqlclient
 
 #### <code>django-tidb</code>とは何か {#what-is-code-django-tidb-code}
 
-`django-tidb`は Django 用の TiDB 方言であり、Django ORM を拡張して TiDB 固有の機能 (TiDB Vector Search など) をサポートし、TiDB と Django 間の互換性の問題を解決します。
+`django-tidb` Django 用の TiDB 方言であり、Django ORM を拡張して TiDB 固有の機能 (TiDB Vector Search など) をサポートし、TiDB と Django 間の互換性の問題を解決します。
 
-`django-tidb`インストールするには、Django のバージョンと一致するバージョンを選択します。たとえば、 `django==4.2.*`使用している場合は`django-tidb==4.2.*`インストールします。マイナー バージョンは同じである必要はありません。最新のマイナー バージョンを使用することをお勧めします。
+`django-tidb`インストールするには、お使いのDjangoのバージョンに合ったバージョンを選択してください。例えば、 `django==4.2.*`使用している場合は`django-tidb==4.2.*`インストールしてください。マイナーバージョンは同じである必要はありません。最新のマイナーバージョンを使用することをお勧めします。
 
-詳細については[django-tidb リポジトリ](https://github.com/pingcap/django-tidb)を参照してください。
+詳細については[django-tidbリポジトリ](https://github.com/pingcap/django-tidb)を参照してください。
 
-### ステップ4. 環境変数を設定する {#step-4-configure-the-environment-variables}
+### ステップ4.環境変数を設定する {#step-4-configure-the-environment-variables}
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
@@ -75,9 +75,9 @@ mysqlclient のインストールで問題が発生した場合は、mysqlclient
 
     -   **接続タイプ**は`Public`に設定されています
 
-    -   **ブランチは**`main`に設定されています
+    -   **ブランチ**は`main`に設定されています
 
-    -   **接続先は**`General`に設定されています
+    -   **接続先が**`General`に設定されています
 
     -   **オペレーティング システムは**環境に適合します。
 
@@ -89,7 +89,7 @@ mysqlclient のインストールで問題が発生した場合は、mysqlclient
 
     > **ヒント：**
     >
-    > まだパスワードを設定していない場合は、「**パスワードの生成」**をクリックしてランダムなパスワードを生成します。
+    > まだパスワードを設定していない場合は、 **「パスワードの生成」**をクリックしてランダムなパスワードを生成します。
 
 5.  Python プロジェクトのルート ディレクトリに`.env`ファイルを作成し、接続パラメータを対応する環境変数に貼り付けます。
 
@@ -119,27 +119,27 @@ mysqlclient のインストールで問題が発生した場合は、mysqlclient
 python manage.py migrate
 ```
 
-Django 開発サーバーを実行します:
+Django 開発サーバーを実行します。
 
 ```bash
 python manage.py runserver
 ```
 
-ブラウザを開いて`http://127.0.0.1:8000`にアクセスし、デモ アプリケーションを試してください。使用可能な API パスは次のとおりです。
+ブラウザを開いて`http://127.0.0.1:8000`アクセスし、デモアプリケーションをお試しください。利用可能なAPIパスは以下のとおりです。
 
 | APIパス                                   | 説明                      |
 | --------------------------------------- | ----------------------- |
 | `POST: /insert_documents`               | 埋め込みのあるドキュメントを挿入します。    |
 | `GET: /get_nearest_neighbors_documents` | 3 つの最も近い近傍ドキュメントを取得します。 |
-| `GET: /get_documents_within_distance`   | 一定の距離内の文書を取得します。        |
+| `GET: /get_documents_within_distance`   | 一定の距離内にある書類を取得します。      |
 
 ## サンプルコードスニペット {#sample-code-snippets}
 
 次のサンプル コード スニペットを参照して、独自のアプリケーション開発を完了することができます。
 
-### TiDBクラスターに接続する {#connect-to-the-tidb-cluster}
+### TiDBクラスタに接続する {#connect-to-the-tidb-cluster}
 
-ファイル`sample_project/settings.py`に次の設定を追加します。
+ファイル`sample_project/settings.py`に次の構成を追加します。
 
 ```python
 dotenv.load_dotenv()
@@ -167,15 +167,15 @@ if TIDB_CA_PATH:
     }
 ```
 
-プロジェクト`TIDB_CA_PATH`ルート ディレクトリに`.env`ファイル`TIDB_USERNAME` `TIDB_HOST`および`TIDB_DATABASE` `TIDB_PORT` TiDB クラスターの実際`TIDB_PASSWORD`値で設定できます。
+プロジェクトのルート ディレクトリに`.env`ファイルを作成し、 `TIDB_DATABASE` `TIDB_USERNAME` `TIDB_HOST` `TIDB_PASSWORD`および`TIDB_CA_PATH` `TIDB_PORT`クラスターの実際の値で設定できます。
 
 ### ベクターテーブルを作成する {#create-vector-tables}
 
 #### ベクトル列を定義する {#define-a-vector-column}
 
-`tidb-django`ベクトル埋め込みをテーブルに格納するための`VectorField`提供します。
+`tidb-django` 、ベクトル埋め込みをテーブルに格納するための`VectorField`提供します。
 
-3 次元ベクトルを格納する`embedding`という名前の列を持つテーブルを作成します。
+3 次元ベクトルを格納する`embedding`名前の列を持つテーブルを作成します。
 
 ```python
 class Document(models.Model):
@@ -193,14 +193,14 @@ Document.objects.create(content="tree", embedding=[1, 0, 0])
 
 ### 最も近い文書を検索する {#search-the-nearest-neighbor-documents}
 
-TiDB Vector は次の距離関数をサポートしています:
+TiDB Vector は次の距離関数をサポートしています。
 
 -   `L1Distance`
 -   `L2Distance`
 -   `CosineDistance`
 -   `NegativeInnerProduct`
 
-コサイン距離関数に基づいて、クエリ ベクトル`[1, 2, 3]`に意味的に最も近い上位 3 つのドキュメントを検索します。
+コサイン距離関数に基づいて、クエリベクトル`[1, 2, 3]`に意味的に最も近い上位 3 つのドキュメントを検索します。
 
 ```python
 results = Document.objects.annotate(
@@ -210,7 +210,7 @@ results = Document.objects.annotate(
 
 ### 特定の距離内の文書を検索する {#search-documents-within-a-certain-distance}
 
-クエリベクトル`[1, 2, 3]`からのコサイン距離が 0.2 未満のドキュメントを検索します。
+クエリベクトル`[1, 2, 3]`からのコサイン距離が 0.2 未満であるドキュメントを検索します。
 
 ```python
 results = Document.objects.annotate(

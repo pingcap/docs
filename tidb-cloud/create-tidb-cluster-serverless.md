@@ -24,7 +24,7 @@ TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidb
 
 ロール`Organization Owner`または`Project Owner`の場合は、次のようにしてTiDB Cloud Serverless クラスターを作成できます。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、 [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、 [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
 2.  **[クラスタの作成]を**クリックします。
 

@@ -5,13 +5,13 @@ summary: TiDB Cloudでの dbt の使用例を学びます。
 
 # TiDB Cloud をdbt と統合する {#integrate-tidb-cloud-with-dbt}
 
-[データ構築ツール (dbt)](https://www.getdbt.com/)は、分析エンジニアが SQL ステートメントを使用してウェアハウス内のデータを変換するのに役立つ、人気の高いオープンソースのデータ変換ツールです。2 [dbt-tidb](https://github.com/pingcap/dbt-tidb)インを使用すると、 TiDB Cloudで作業する分析エンジニアは、テーブルやビューの作成プロセスを考えることなく、SQL を介してフォームを直接作成し、データを照合できます。
+[データ構築ツール（dbt）](https://www.getdbt.com/) 、アナリティクスエンジニアがSQL文を使ってウェアハウス内のデータを変換するのに役立つ、人気のオープンソースデータ変換ツールです。2 [dbt-tidb](https://github.com/pingcap/dbt-tidb)インを使用すると、 TiDB Cloudを使用するアナリティクスエンジニアは、テーブルやビューの作成プロセスを意識することなく、SQLを使ってフォームを直接作成し、データをマッチングできます。
 
 このドキュメントでは、dbt プロジェクトを例に、 TiDB Cloudで dbt を使用する方法を紹介します。
 
 ## ステップ1: dbtとdbt-tidbをインストールする {#step-1-install-dbt-and-dbt-tidb}
 
-dbt と dbt-tidb は 1 つのコマンドだけでインストールできます。次のコマンドでは、dbt-tidb をインストールするときに dbt が依存関係としてインストールされます。
+dbtとdbt-tidbは1つのコマンドだけでインストールできます。次のコマンドでは、dbt-tidbのインストール時にdbtが依存関係としてインストールされます。
 
 ```shell
 pip install dbt-tidb
@@ -21,7 +21,7 @@ dbt を別途インストールすることもできます。dbt ドキュメン
 
 ## ステップ2: デモプロジェクトを作成する {#step-2-create-a-demo-project}
 
-dbt 関数を試すには、dbt-lab が提供するデモ プロジェクト[ジャッフルショップ](https://github.com/dbt-labs/jaffle_shop)使用できます。プロジェクトは GitHub から直接クローンできます。
+dbt 関数を試すには、dbt-lab が提供するデモプロジェクト[ジャッフルショップ](https://github.com/dbt-labs/jaffle_shop)を使用できます。このプロジェクトは GitHub から直接クローンできます。
 
 ```shell
 git clone https://github.com/dbt-labs/jaffle_shop && \
@@ -59,9 +59,9 @@ cd jaffle_shop
 
 -   `dbt_project.yml`は dbt プロジェクト構成ファイルであり、プロジェクト名とデータベース構成ファイル情報を保持します。
 
--   `models`ディレクトリには、プロジェクトの SQL モデルとテーブル スキーマが含まれています。このセクションはデータ アナリストが記述することに注意してください。モデルの詳細については、 [SQL モデル](https://docs.getdbt.com/docs/build/sql-models)参照してください。
+-   `models`ディレクトリには、プロジェクトのSQLモデルとテーブルスキーマが含まれています。このセクションはデータアナリストが記述します。モデルの詳細については、 [SQLモデル](https://docs.getdbt.com/docs/build/sql-models)参照してください。
 
--   `seeds`ディレクトリには、データベース エクスポート ツールによってダンプされた CSV ファイルが格納されます。たとえば、 Dumplingを使用して[TiDB Cloudデータをエクスポートする](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud) CSV ファイルにすることができます。5 `jaffle_shop`では、これらの CSV ファイルが処理される生データとして使用されます。
+-   `seeds`ディレクトリに`jaffle_shop` 、データベースエクスポートツールによってダンプされたCSVファイルが保存されます。例えば、 Dumplingを使って[TiDB Cloudデータをエクスポートする](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud) CSVファイルにエクスポートできます。5 プロジェクトでは、これらのCSVファイルが処理対象の生データとして使用されます。
 
 ## ステップ3: プロジェクトを構成する {#step-3-configure-the-project}
 
@@ -90,11 +90,11 @@ cd jaffle_shop
            password: "your_password"                                   # The password to use for authenticating to the TiDB Cloud clusters
     ```
 
-    `server` `username`値は`port`クラスターの接続ダイアログから取得できます。このダイアログを開くには、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動し、右上隅の**[接続]**をクリックします。
+    `server` 、 `port` 、 `username`の値は、クラスターの接続ダイアログから取得できます。このダイアログを開くには、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲットクラスターの名前をクリックして概要ページに移動し、右上隅の**「接続」**をクリックします。
 
 2.  プロジェクトの構成を完了します。
 
-    jaffle_shop プロジェクト ディレクトリで、プロジェクト構成ファイル`dbt_project.yml`を編集し、 `profile`フィールドを`jaffle_shop_tidb`に変更します。この構成により、プロジェクトは`~/.dbt/profiles.yml`ファイルで指定されたとおりにデータベースからクエリを実行できるようになります。
+    jaffle_shopプロジェクトディレクトリにあるプロジェクト設定ファイル`dbt_project.yml`を編集し、 `profile`フィールドを`jaffle_shop_tidb`に変更します。この設定により、プロジェクトは`~/.dbt/profiles.yml`ファイルで指定されたデータベースからクエリを実行できるようになります。
 
     ```shell
     vi dbt_project.yml
@@ -143,9 +143,9 @@ cd jaffle_shop
 
 > **注記：**
 >
-> この手順はオプションです。処理対象のデータがすでにターゲット データベースにある場合は、この手順をスキップできます。
+> この手順はオプションです。処理対象のデータが既にターゲットデータベースに存在する場合は、この手順をスキップできます。
 
-プロジェクトの作成と構成が正常に完了したので、CSV データをロードし、CSV をターゲット データベースのテーブルとして実現します。
+プロジェクトの作成と構成が正常に完了したので、CSV データをロードし、CSV をターゲット データベース内のテーブルとして実現します。
 
 1.  CSV データをロードし、CSV をターゲット データベース内のテーブルとして実現します。
 
@@ -256,7 +256,7 @@ cd jaffle_shop
     Done. PASS=5 WARN=0 ERROR=0 SKIP=0 TOTAL=5
     ```
 
-    結果は、2 つのテーブル ( `analytics.customers`と`analytics.orders` ) と 3 つのビュー ( `analytics.stg_customers` 、 `analytics.stg_orders` 、および`analytics.stg_payments` ) が正常に作成されたことを示しています。
+    結果は、 2 つのテーブル ( `analytics.customers`と`analytics.orders` ) と 3 つのビュー ( `analytics.stg_customers` 、 `analytics.stg_orders` 、および`analytics.stg_payments` ) が正常に作成されたことを示しています。
 
 2.  TiDB Cloudにアクセスして、変換が成功したことを確認します。
 
@@ -295,7 +295,7 @@ cd jaffle_shop
     10 rows in set (0.00 sec)
     ```
 
-    出力には、さらに 5 つのテーブルまたはビューが追加され、テーブルまたはビュー内のデータが変換されたことが示されています。この例では、顧客テーブルのデータの一部のみが表示されています。
+    出力には、さらに5つのテーブルまたはビューが追加され、それらのテーブルまたはビューのデータが変換されたことが示されています。この例では、顧客テーブルのデータの一部のみが表示されています。
 
 ## ステップ6: ドキュメントを生成する {#step-6-generate-the-document}
 
@@ -331,14 +331,14 @@ dbt を使用すると、プロジェクトの全体的な構造を表示し、�
 
 ## サポートされている関数 {#supported-functions}
 
-dbt-tidb では以下の関数を直接使用できます。使用方法については[dbt-util](https://github.com/dbt-labs/dbt-utils)参照してください。
+以下の関数はdbt-tidbで直接使用できます。使用方法については[dbt-util](https://github.com/dbt-labs/dbt-utils)参照してください。
 
 以下の関数がサポートされています:
 
 -   `bool_or`
 -   `cast_bool_to_text`
 -   `dateadd`
--   `datediff`は dbt-util とは少し`datediff`ことに注意してください。切り上げではなく切り捨てになります。
+-   `datediff` 。2 `datediff` dbt-util とは少し異なることに注意してください。切り上げではなく切り捨てになります。
 -   `date_trunc`
 -   `hash`
 -   `safe_cast`

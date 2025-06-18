@@ -1,17 +1,17 @@
 ---
 title: Connect to TiDB with peewee
-summary: peewee を使用して TiDB に接続する方法を学びます。このチュートリアルでは、peewee を使用して TiDB で動作する Python サンプル コード スニペットを紹介します。
+summary: peeweeを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、peeweeを使ってTiDBを操作するPythonのサンプルコードスニペットを紹介します。
 ---
 
 # peeweeでTiDBに接続する {#connect-to-tidb-with-peewee}
 
-TiDB は MySQL 互換のデータベースであり、 [ピーウィー](https://docs.peewee-orm.com/) Python 用の一般的なオブジェクト リレーショナル マッパー (ORM) です。
+TiDB は MySQL 互換のデータベースであり、 [ピーウィー](https://docs.peewee-orm.com/) Python 用の人気のオブジェクト リレーショナル マッパー (ORM) です。
 
 このチュートリアルでは、TiDB と peewee を使用して次のタスクを実行する方法を学習します。
 
 -   環境を設定します。
 -   peewee を使用して TiDB クラスターに接続します。
--   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作のサンプル コード スニペットを見つけることができます。
+-   アプリケーションをビルドして実行します。オプションで、基本的なCRUD操作のサンプルコードスニペットもご利用いただけます。
 
 > **注記：**
 >
@@ -44,11 +44,11 @@ TiDB は MySQL 互換のデータベースであり、 [ピーウィー](https:/
 
 ## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
-このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を示します。
+このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を説明します。
 
 ### ステップ1: サンプルアプリのリポジトリをクローンする {#step-1-clone-the-sample-app-repository}
 
-サンプル コード リポジトリを複製するには、ターミナル ウィンドウで次のコマンドを実行します。
+サンプル コード リポジトリのクローンを作成するには、ターミナル ウィンドウで次のコマンドを実行します。
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-python-peewee-quickstart.git
@@ -65,7 +65,7 @@ pip install -r requirements.txt
 
 #### PyMySQL を使用する理由は何ですか? {#why-use-pymysql}
 
-peewee は、複数のデータベースで動作する ORM ライブラリです。データベースの高レベルの抽象化を提供し、開発者がよりオブジェクト指向的な方法で SQL 文を記述するのに役立ちます。ただし、peewee にはデータベース ドライバーが含まれていません。データベースに接続するには、データベース ドライバーをインストールする必要があります。このサンプル アプリケーションでは、データベース ドライバーとして PyMySQL を使用します。これは、TiDB と互換性があり、すべてのプラットフォームにインストールできる純粋な Python MySQL クライアント ライブラリです。詳細については、 [ピーウィー公式ドキュメント](https://docs.peewee-orm.com/en/latest/peewee/database.html?highlight=mysql#using-mysql)を参照してください。
+peeweeは複数のデータベースに対応するORMライブラリです。データベースの高レベルな抽象化を提供し、開発者がよりオブジェクト指向的な方法でSQL文を記述するのに役立ちます。ただし、peeweeにはデータベースドライバが含まれていません。データベースに接続するには、データベースドライバをインストールする必要があります。このサンプルアプリケーションでは、データベースドライバとしてPyMySQLを使用しています。PyMySQLは、TiDBと互換性があり、すべてのプラットフォームにインストール可能なPure Python MySQLクライアントライブラリです。詳細については、 [ピーウィー公式ドキュメント](https://docs.peewee-orm.com/en/latest/peewee/database.html?highlight=mysql#using-mysql)を参照してください。
 
 ### ステップ3: 接続情報を構成する {#step-3-configure-connection-information}
 
@@ -74,7 +74,7 @@ peewee は、複数のデータベースで動作する ORM ライブラリで�
 <SimpleTab>
 <div label="TiDB Cloud Serverless">
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
@@ -84,7 +84,7 @@ peewee は、複数のデータベースで動作する ORM ライブラリで�
 
     -   **ブランチ**は`main`に設定されています
 
-    -   **接続先は**`General`に設定されています
+    -   **接続先が**`General`に設定されています
 
     -   **オペレーティング システムは**環境に適合します。
 
@@ -104,7 +104,7 @@ peewee は、複数のデータベースで動作する ORM ライブラリで�
     cp .env.example .env
     ```
 
-6.  対応する接続文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
+6.  対応する接続文字列をコピーして、 `.env`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```dotenv
     TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
@@ -115,22 +115,22 @@ peewee は、複数のデータベースで動作する ORM ライブラリで�
     CA_PATH='{ssl_ca}'  # e.g. /etc/ssl/certs/ca-certificates.crt (Debian / Ubuntu / Arch)
     ```
 
-    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに必ず置き換えてください。
+    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに置き換えてください。
 
 7.  `.env`ファイルを保存します。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
+    IP アクセス リストをまだ設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
 
-    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
+    TiDB Cloud Dedicatedは、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPCピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)ご覧ください。
 
 4.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -138,7 +138,7 @@ peewee は、複数のデータベースで動作する ORM ライブラリで�
     cp .env.example .env
     ```
 
-5.  対応する接続文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
+5.  対応する接続文字列をコピーして、 `.env`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```dotenv
     TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
@@ -162,7 +162,7 @@ peewee は、複数のデータベースで動作する ORM ライブラリで�
     cp .env.example .env
     ```
 
-2.  対応する接続文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
+2.  対応する接続文字列をコピーして、 `.env`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```dotenv
     TIDB_HOST='{tidb_server_host}'
@@ -172,7 +172,7 @@ peewee は、複数のデータベースで動作する ORM ライブラリで�
     TIDB_DB_NAME='test'
     ```
 
-    プレースホルダー`{}`接続パラメータに置き換え、 `CA_PATH`行を削除してください。TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
+    プレースホルダー`{}`接続パラメータに置き換え、 `CA_PATH`行を削除してください。TiDB をローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空です。
 
 3.  `.env`ファイルを保存します。
 
@@ -187,7 +187,7 @@ peewee は、複数のデータベースで動作する ORM ライブラリで�
     python peewee_example.py
     ```
 
-2.  [予想される出力.txt](https://github.com/tidb-samples/tidb-python-peewee-quickstart/blob/main/Expected-Output.txt)チェックして、出力が一致するかどうかを確認します。
+2.  [期待出力.txt](https://github.com/tidb-samples/tidb-python-peewee-quickstart/blob/main/Expected-Output.txt)チェックして、出力が一致するかどうかを確認します。
 
 ## サンプルコードスニペット {#sample-code-snippets}
 
@@ -243,7 +243,7 @@ class Player(BaseModel):
 
 詳細については[peewee ドキュメント: モデルとフィールド](https://docs.peewee-orm.com/en/latest/peewee/models.html)を参照してください。
 
-### データを挿入 {#insert-data}
+### データを挿入する {#insert-data}
 
 ```python
 # Insert a single record
@@ -258,7 +258,7 @@ Player.insert_many(
 ).execute()
 ```
 
-詳細については[データを挿入](/develop/dev-guide-insert-data.md)を参照してください。
+詳細については[データを挿入する](/develop/dev-guide-insert-data.md)を参照してください。
 
 ### クエリデータ {#query-data}
 
@@ -275,7 +275,7 @@ players = Player.select().where(Player.coins == 100)
 
 詳細については[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)を参照してください。
 
-### データの更新 {#update-data}
+### データを更新する {#update-data}
 
 ```python
 # Update a single record
@@ -287,7 +287,7 @@ player.save()
 Player.update(coins=200).where(Player.coins == 100).execute()
 ```
 
-詳細については[データの更新](/develop/dev-guide-update-data.md)を参照してください。
+詳細については[データを更新する](/develop/dev-guide-update-data.md)を参照してください。
 
 ### データを削除する {#delete-data}
 
@@ -304,20 +304,20 @@ Player.delete().where(Player.coins == 100).execute()
 
 ## 次のステップ {#next-steps}
 
--   peewee の使い方を[ピーウィーの記録](https://docs.peewee-orm.com/)から詳しく学びます。
--   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入](/develop/dev-guide-insert-data.md) 、 [データの更新](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブル読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
--   プロフェッショナル[TiDB 開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
+-   peewee の使い方を[ピーウィーの記録](https://docs.peewee-orm.com/)から詳しく学びましょう。
+-   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
+-   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

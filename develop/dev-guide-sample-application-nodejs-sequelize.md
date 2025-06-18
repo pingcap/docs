@@ -1,17 +1,17 @@
 ---
 title: Connect to TiDB with Sequelize
-summary: Sequelize を使用して TiDB に接続する方法を学びます。このチュートリアルでは、Sequelize を使用して TiDB で動作する Node.js サンプル コード スニペットを紹介します。
+summary: Sequelizeを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、Sequelizeを使ってTiDBを操作するNode.jsのサンプルコードスニペットを紹介します。
 ---
 
 # Sequelize で TiDB に接続する {#connect-to-tidb-with-sequelize}
 
-TiDB は MySQL 互換のデータベースであり、 [続編](https://sequelize.org/) Node.js 用の人気のある ORM フレームワークです。
+TiDB は MySQL 互換のデータベースであり、Node.js 用の人気のある ORM フレームワークです[続編](https://sequelize.org/)
 
 このチュートリアルでは、TiDB と Sequelize を使用して次のタスクを実行する方法を学習します。
 
 -   環境を設定します。
 -   Sequelize を使用して TiDB クラスターに接続します。
--   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作用の[サンプルコードスニペット](#sample-code-snippets)見つけることができます。
+-   アプリケーションをビルドして実行します。オプションで、基本的なCRUD操作用の[サンプルコードスニペット](#sample-code-snippets)見つけることもできます。
 
 > **注記**
 >
@@ -44,7 +44,7 @@ TiDB は MySQL 互換のデータベースであり、 [続編](https://sequeliz
 
 ## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
-このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を示します。
+このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を説明します。
 
 > **注記**
 >
@@ -52,7 +52,7 @@ TiDB は MySQL 互換のデータベースであり、 [続編](https://sequeliz
 
 ### ステップ1: サンプルアプリのリポジトリをクローンする {#step-1-clone-the-sample-app-repository}
 
-サンプル コード リポジトリを複製するには、ターミナル ウィンドウで次のコマンドを実行します。
+サンプル コード リポジトリのクローンを作成するには、ターミナル ウィンドウで次のコマンドを実行します。
 
 ```bash
 git clone git@github.com:tidb-samples/tidb-nodejs-sequelize-quickstart.git
@@ -75,7 +75,7 @@ npm install
 
 <div label="TiDB Cloud Serverless">
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
@@ -85,13 +85,13 @@ npm install
 
     -   **ブランチ**は`main`に設定されています
 
-    -   **接続先は**`General`に設定されています
+    -   **接続先が**`General`に設定されています
 
     -   **オペレーティング システムは**環境に適合します。
 
     > **注記**
     >
-    > Node.js アプリケーションでは、TLS (SSL) 接続を確立するときに Node.js がデフォルトで組み込みの[Mozilla CA 証明書](https://wiki.mozilla.org/CA/Included_Certificates)使用するため、SSL CA 証明書を提供する必要はありません。
+    > Node.js アプリケーションでは、TLS (SSL) 接続を確立するときに Node.js がデフォルトで組み込みの[Mozilla CA証明書](https://wiki.mozilla.org/CA/Included_Certificates)使用するため、SSL CA 証明書を提供する必要はありません。
 
 4.  ランダムなパスワードを作成するには、 **「パスワードの生成」を**クリックします。
 
@@ -122,15 +122,15 @@ npm install
 
 <div label="TiDB Cloud Dedicated">
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
+    IP アクセス リストをまだ設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
 
-    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
+    TiDB Cloud Dedicatedは、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPCピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)ご覧ください。
 
 4.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -172,7 +172,7 @@ npm install
     TIDB_DB_NAME='test'
     ```
 
-    TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
+    TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空になります。
 
 3.  `.env`ファイルを保存します。
 
@@ -188,7 +188,7 @@ npm install
 npm start
 ```
 
-<details><summary>**予想される出力(一部):**</summary>
+<details><summary>**予想される出力（一部）:**</summary>
 
 ```shell
 INFO (app/10117): Getting sequelize instance...
@@ -256,9 +256,9 @@ export async function getSequelize() {
 }
 ```
 
-### データを挿入 {#insert-data}
+### データを挿入する {#insert-data}
 
-次のクエリは、単一の`Players`レコードを作成し、 `Players`オブジェクトを返します。
+次のクエリは、 `Players`つのレコードを作成し、 `Players`オブジェクトを返します。
 
 ```typescript
 logger.info('Creating a new player...');
@@ -271,11 +271,11 @@ logger.info('Created a new player.');
 logger.info(newPlayer.toJSON());
 ```
 
-詳細については[データを挿入](/develop/dev-guide-insert-data.md)を参照してください。
+詳細については[データを挿入する](/develop/dev-guide-insert-data.md)を参照してください。
 
 ### クエリデータ {#query-data}
 
-次のクエリは、コインが`300`より大きい単一の`Players`レコードを返します。
+次のクエリは、コインが`300`より大きい`Players`というレコードを 1 つ返します。
 
 ```typescript
 logger.info('Reading all players with coins > 300...');
@@ -292,9 +292,9 @@ logger.info(allPlayersWithCoinsGreaterThan300.map((p) => p.toJSON()));
 
 詳細については[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)を参照してください。
 
-### データの更新 {#update-data}
+### データを更新する {#update-data}
 
-次のクエリは、セクション[データを挿入](#insert-data)で作成された ID `6`の`Players`にコイン`700`と商品`700`を設定します。
+次のクエリは、セクション[データを挿入する](#insert-data)で作成された ID `6`の`Players`にコイン`700`と商品`700`を設定します。
 
 ```typescript
 logger.info('Updating the new player...');
@@ -303,11 +303,11 @@ logger.info('Updated the new player.');
 logger.info(newPlayer.toJSON());
 ```
 
-詳細については[データの更新](/develop/dev-guide-update-data.md)を参照してください。
+詳細については[データを更新する](/develop/dev-guide-update-data.md)を参照してください。
 
 ### データを削除する {#delete-data}
 
-次のクエリは、セクション[データを挿入](#insert-data)で作成された ID `6`の`Player`レコードを削除します。
+次のクエリは、セクション[データを挿入する](#insert-data)で作成された ID `6`の`Player`レコードを削除します。
 
 ```typescript
 logger.info('Deleting the new player...');
@@ -322,19 +322,19 @@ logger.info(deletedNewPlayer?.toJSON());
 ## 次のステップ {#next-steps}
 
 -   ORM フレームワーク Sequelize ドライバーの使用方法を[Sequelizeのドキュメント](https://sequelize.org/)から詳しく学びます。
--   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入](/develop/dev-guide-insert-data.md) 、 [データの更新](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブル読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
--   プロフェッショナル[TiDB 開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
+-   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
+-   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

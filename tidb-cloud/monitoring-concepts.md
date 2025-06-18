@@ -1,6 +1,6 @@
 ---
 title: Monitoring
-summary: TiDB Cloudの監視の概念について学習します。
+summary: TiDB Cloudの監視概念について学習します。
 ---
 
 # 監視 {#monitoring}
@@ -9,13 +9,13 @@ TiDB Cloudのモニタリングでは、クラスターのパフォーマンス�
 
 ## 組み込みメトリック {#built-in-metrics}
 
-組み込みメトリックとは、 TiDB Cloud が収集してメトリック ページに表示する、クラスターの標準メトリックの完全なセットを指します。これらのメトリックを使用すると、パフォーマンスの問題を簡単に特定し、現在のデータベース展開が要件を満たしているかどうかを判断できます。
+組み込みメトリクスとは、 TiDB Cloudが収集し、**メトリクス**ページに表示される、クラスタの標準メトリクスの完全なセットを指します。これらのメトリクスを使用することで、パフォーマンスの問題を簡単に特定し、現在のデータベース環境が要件を満たしているかどうかを判断できます。
 
-詳細については[TiDB Cloud組み込みメトリック](/tidb-cloud/built-in-monitoring.md)参照してください。
+詳細については[TiDB Cloud組み込みメトリクス](/tidb-cloud/built-in-monitoring.md)参照してください。
 
 ## 組み込みアラート {#built-in-alerting}
 
-組み込みアラートとは、クラスターの監視を支援するためにTiDB Cloud が提供するクラスター アラート メカニズムを指します。現在、 TiDB Cloud は次の 3 種類のアラートを提供しています。
+組み込みアラートとは、 TiDB Cloud がクラスタの監視を支援するために提供するクラスタアラートメカニズムを指します。現在、 TiDB Cloud は以下の3種類のアラートを提供しています。
 
 -   リソース使用状況アラート
 
@@ -29,20 +29,20 @@ TiDB Cloudコンソールの [アラート] ページでは、クラスターの
 
 ## クラスタイベント {#cluster-events}
 
-TiDB Cloudでは、イベントはTiDB Cloudクラスターの変更を示します。TiDB TiDB Cloud はクラスター レベルで履歴イベントを記録し、クラスターのアクティビティを追跡できるようにします。イベント タイプ、ステータス、メッセージ、トリガー時間、トリガー ユーザーなど、ログに記録されたイベントは、 **[イベント]**ページで確認できます。
+TiDB Cloudでは、イベントはTiDB Cloudクラスターの変化を示します。TiDB TiDB Cloud はクラスターレベルで過去のイベントを記録し、クラスターのアクティビティを追跡できるようにします。記録されたイベントは、 **「イベント」**ページで確認でき、イベントの種類、ステータス、メッセージ、トリガー時刻、トリガーユーザーなどが含まれます。
 
 詳細については[TiDB Cloudクラスタイベント](/tidb-cloud/tidb-cloud-events.md)参照してください。
 
-## サードパーティの指標の統合（ベータ版） {#third-party-metrics-integrations-beta}
+## サードパーティの指標統合（ベータ版） {#third-party-metrics-integrations-beta}
 
 TiDB Cloud を使用すると、次のサードパーティ メトリック サービスを統合して、 TiDB Cloudアラートを受信し、TiDB クラスターのパフォーマンス メトリックを表示できます。
 
--   Datadog 統合
+-   Datadog統合
 
 -   PrometheusとGrafanaの統合
 
--   New Relic 統合
+-   New Relicとの統合
 
 現在、これらのサードパーティ メトリックの統合はベータ版です。
 
-詳細については[サードパーティのメトリクス統合（ベータ版）](/tidb-cloud/third-party-monitoring-integrations.md)参照してください。
+詳細については[サードパーティメトリクス統合（ベータ版）](/tidb-cloud/third-party-monitoring-integrations.md)参照してください。

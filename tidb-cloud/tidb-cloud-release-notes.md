@@ -8,6 +8,28 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2025 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2025年6月17日 {#june-17-2025}
+
+**一般的な変更**
+
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの場合、16 vCPU および 32 vCPU を持つ TiKV ノードの最大storageサイズが**6144 GiB**から**4096 GiB**に変更されます。
+
+    詳細については[TiKVノードのstorageサイズ](/tidb-cloud/size-your-cluster.md#tikv-node-storage-size)参照してください。
+
+**コンソールの変更**
+
+-   左側のナビゲーション ペインを改良して、全体的なナビゲーション エクスペリエンスを向上させます。
+
+    -   新しい<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="" style="width: calc(1.25rem * var(--mantine-scale)); height: calc(1.25rem * var(--mantine-scale));"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M9 3v18M7.8 3h8.4c1.68 0 2.52 0 3.162.327a3 3 0 0 1 1.311 1.311C21 5.28 21 6.12 21 7.8v8.4c0 1.68 0 2.52-.327 3.162a3 3 0 0 1-1.311 1.311C18.72 21 17.88 21 16.2 21H7.8c-1.68 0-2.52 0-3.162-.327a3 3 0 0 1-1.311-1.311C3 18.72 3 17.88 3 16.2V7.8c0-1.68 0-2.52.327-3.162a3 3 0 0 1 1.311-1.311C5.28 3 6.12 3 7.8 3" stroke-width="inherit"></path></svg>アイコンが左上隅に表示されるようになりました。これにより、必要に応じて左側のナビゲーション ペインを簡単に非表示にしたり表示したりできるようになります。
+
+    -   左上隅にコンボ ボックスが追加され、組織、プロジェクト、クラスターを 1 つの中央の場所からすばやく切り替えることができるようになりました。
+
+        <img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/tidb-cloud-combo-box.png" width="200" />
+
+    -   左側のナビゲーション ペインに表示されるエントリは、コンボ ボックスの現在の選択内容に応じて動的に調整されるようになり、最も関連性の高い機能に集中できるようになります。
+
+    -   すぐにアクセスできるように、**サポート**、**通知**、アカウント エントリが、すべてのコンソール ページの左側のナビゲーション ペインの下部に常に表示されるようになりました。
+
 ## 2025年6月4日 {#june-4-2025}
 
 **一般的な変更**
@@ -147,7 +169,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     標準storageタイプは、2025年4月1日以降に作成され、AWSでホストされ、サポート対象バージョン（バージョン7.5.5、8.1.2、または8.5.0以上）の新規クラスター[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)に自動的に適用されます。既存のクラスターは引き続き以前の[基本的なstorage](/tidb-cloud/size-your-cluster.md#basic-storage)タイプを使用しているため、移行は不要です。
 
-    スタンダードstorageの料金はベーシックstorageの料金と異なります。詳しくは[価格](https://www.pingcap.com/tidb-dedicated-pricing-details/)ご覧ください。
+    スタンダードstorageの料金はベーシックstorageの料金とは異なります。詳しくは[価格](https://www.pingcap.com/tidb-dedicated-pricing-details/)ご覧ください。
 
 ## 2025年3月25日 {#march-25-2025}
 
@@ -214,7 +236,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して新しい AWS リージョンをサポートします: `Jakarta (ap-southeast-3)` 。
 
--   [通知](https://tidbcloud.com/console/notifications)機能を導入すると、 [TiDB Cloudコンソール](https://tidbcloud.com/)を通じてTiDB Cloud の更新とアラートに関する最新情報を即座に入手できます。
+-   通知機能を導入すると、 [TiDB Cloudコンソール](https://tidbcloud.com/)を通じてTiDB Cloud の更新とアラートに関する最新情報を即座に入手できます。
 
     詳細については[通知](/tidb-cloud/notifications.md)参照してください。
 

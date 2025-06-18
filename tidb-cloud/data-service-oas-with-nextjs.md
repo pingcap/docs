@@ -11,18 +11,18 @@ summary: データ アプリの OpenAPI 仕様を使用してクライアント 
 
 Next.js で OpenAPI 仕様を使用する前に、次のものを用意してください。
 
--   TiDB クラスター。詳細については、 [TiDB Cloud Serverless クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)または[TiDB Cloud専用クラスターを作成する](/tidb-cloud/create-tidb-cluster.md)参照してください。
+-   TiDBクラスタ。詳細については、 [TiDB Cloud Serverless クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)または[TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)参照してください。
 -   [Node.js](https://nodejs.org/en/download)
--   [ネプ](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+-   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 -   [糸](https://yarnpkg.com/getting-started/install)
 
 このドキュメントでは、 TiDB Cloud Serverless クラスターを例として使用します。
 
-## ステップ1. データを準備する {#step-1-prepare-data}
+## ステップ1. データの準備 {#step-1-prepare-data}
 
-まず、TiDB クラスターにテーブル`test.repository`を作成し、そこにサンプル データを挿入します。次の例では、デモ用のデータとして、PingCAP によって開発されたオープン ソース プロジェクトをいくつか挿入します。
+まず、TiDBクラスターにテーブル`test.repository`を作成し、サンプルデータを挿入します。以下の例では、デモ用にPingCAPが開発したオープンソースプロジェクトをいくつかデータとして挿入しています。
 
-SQL ステートメントを実行するには、 [TiDB Cloudコンソール](https://tidbcloud.com)の[SQL エディター](/tidb-cloud/explore-data-with-chat2query.md)使用できます。
+SQL ステートメントを実行するには、 [TiDB Cloudコンソール](https://tidbcloud.com)の[SQLエディター](/tidb-cloud/explore-data-with-chat2query.md)使用できます。
 
 ```sql
 -- Select the database
@@ -45,7 +45,7 @@ VALUES ('tidb', 'https://github.com/pingcap/tidb'),
 
 ## ステップ2. データアプリを作成する {#step-2-create-a-data-app}
 
-データが挿入されたら、 [TiDB Cloudコンソール](https://tidbcloud.com)の[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。TiDB クラスターにリンクするデータ アプリを作成し、データ アプリの API キーを作成してから、データ アプリに`GET /repositories`エンドポイントを作成します。このエンドポイントに対応する SQL ステートメントは次のようになります。これは、 `test.repository`テーブルからすべての行を取得します。
+データが挿入されたら、 [TiDB Cloudコンソール](https://tidbcloud.com)の[**データサービス**](https://tidbcloud.com/project/data-service)ページに移動します。TiDB クラスタにリンクするデータアプリを作成し、そのデータアプリの API キーを作成してから、データアプリに`GET /repositories`エンドポイントを作成します。このエンドポイントに対応する SQL 文は次のとおりです。これは`test.repository`テーブルからすべての行を取得します。
 
 ```sql
 SELECT * FROM test.repository;
@@ -59,13 +59,13 @@ SELECT * FROM test.repository;
 
 1.  `hello-repos`という名前の Next.js プロジェクトを作成します。
 
-    公式テンプレートを使用して Next.js プロジェクトを作成するには、次のコマンドを使用し、プロンプトが表示されたらすべてのデフォルト オプションをそのままにします。
+    公式テンプレートを使用して Next.js プロジェクトを作成するには、次のコマンドを使用し、プロンプトが表示されたらすべてのデフォルト オプションを維持します。
 
     ```shell
     yarn create next-app hello-repos
     ```
 
-    次のコマンドを使用して、新しく作成したプロジェクトにディレクトリを変更します。
+    次のコマンドを使用して、新しく作成されたプロジェクトのディレクトリに変更します。
 
     ```shell
     cd hello-repos
@@ -73,7 +73,7 @@ SELECT * FROM test.repository;
 
 2.  依存関係をインストールします。
 
-    このドキュメントでは、 [OpenAPI ジェネレーター](https://github.com/OpenAPITools/openapi-generator)使用して、OpenAPI 仕様から API クライアント ライブラリを自動的に生成します。
+    このドキュメントでは、 [OpenAPIジェネレーター](https://github.com/OpenAPITools/openapi-generator)使用して、OpenAPI 仕様から API クライアント ライブラリを自動的に生成します。
 
     OpenAPI Generator を開発依存関係としてインストールするには、次のコマンドを実行します。
 
@@ -83,8 +83,8 @@ SELECT * FROM test.repository;
 
 3.  OpenAPI 仕様をダウンロードし、 `oas/doc.json`として保存します。
 
-    1.  TiDB Cloud [**データサービス**](https://tidbcloud.com/console/data-service)ページで、左側のペインにあるデータ アプリ名をクリックして、アプリ設定を表示します。
-    2.  **API 仕様**領域で、 **「ダウンロード」**をクリックし、JSON 形式を選択して、プロンプトが表示されたら**「承認」**をクリックします。
+    1.  TiDB Cloud [**データサービス**](https://tidbcloud.com/project/data-service)ページで、左側のペインにあるデータ アプリ名をクリックして、アプリの設定を表示します。
+    2.  **API 仕様**領域で**[ダウンロード]**をクリックし、JSON 形式を選択して、プロンプトが表示されたら**[承認]**をクリックします。
     3.  ダウンロードしたファイルを`hello-repos`プロジェクトディレクトリに`oas/doc.json`として保存します。
 
     詳細については[OpenAPI仕様をダウンロードする](/tidb-cloud/data-service-manage-data-app.md#download-the-openapi-specification)参照してください。
@@ -145,7 +145,7 @@ SELECT * FROM test.repository;
 
 生成されたクライアント コードを使用して、Next.js アプリケーションを開発できます。
 
-1.  `hello-repos`プロジェクト ディレクトリで、次の変数を含む`.env.local`ファイルを作成し、変数の値をデータ アプリの公開キーと秘密キーに設定します。
+1.  `hello-repos`プロジェクト ディレクトリに、次の変数を含む`.env.local`ファイルを作成し、変数の値をデータ アプリの公開キーと秘密キーに設定します。
 
         TIDBCLOUD_DATA_SERVICE_PUBLIC_KEY=YOUR_PUBLIC_KEY
         TIDBCLOUD_DATA_SERVICE_PRIVATE_KEY=YOUR_PRIVATE_KEY
@@ -180,7 +180,7 @@ SELECT * FROM test.repository;
 
     > **注記：**
     >
-    > データ アプリのリンクされたクラスタが異なるリージョンでホストされている場合、ダウンロードした OpenAPI 仕様ファイルの`servers`セクションに複数の項目が表示されます。この場合、 `config`オブジェクトでエンドポイント パスを次のように構成する必要もあります。
+    > データアプリのリンクされたクラスタが異なるリージョンでホストされている場合、ダウンロードしたOpenAPI仕様ファイルの`servers`セクションに複数の項目が表示されます。この場合、 `config`オブジェクトでエンドポイントパスを以下のように設定する必要があります。
     >
     > ```js
     > const config = new Configuration({
@@ -190,7 +190,7 @@ SELECT * FROM test.repository;
     >   });
     > ```
     >
-    > `basePath`データ アプリの実際のエンドポイント パスに置き換えてください。 `${YOUR_REGION}`と`{YOUR_DATA_APP_ID}`取得するには、エンドポイントの**プロパティ**パネルで**エンドポイント URL**を確認します。
+    > `basePath`データアプリの実際のエンドポイントパスに置き換えてください。3 と`${YOUR_REGION}` `{YOUR_DATA_APP_ID}`取得するには、エンドポイントの**プロパティ**パネルで**エンドポイントURLを**確認してください。
 
 ## ステップ5. Next.jsアプリケーションをプレビューする {#step-5-preview-your-next-js-application}
 
@@ -204,4 +204,4 @@ SELECT * FROM test.repository;
 yarn dev
 ```
 
-その後、ブラウザで[http://ローカルホスト:3000](http://localhost:3000)を開き、ページに表示される`test.repository`データベースのデータを確認できます。
+次に、ブラウザで[http://localhost:3000](http://localhost:3000)を開き、ページに表示される`test.repository`データベースのデータを確認できます。

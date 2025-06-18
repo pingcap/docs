@@ -47,7 +47,7 @@ PoC の目標を特定するには、次の質問を参考にしてください�
 
 ## ステップ2. ワークロードの特性を特定する {#step-2-identify-characteristics-of-your-workload}
 
-TiDB Cloudは、高可用性と大容量データの強力な一貫性が求められる様々なユースケースに適しています。1 [TiDBの紹介](https://docs.pingcap.com/tidb/stable/overview)主要な機能とシナリオをリストアップしました。ご自身のビジネスシナリオに当てはまるかどうか、以下からご確認ください。
+TiDB Cloudは、高可用性と大容量データの強力な一貫性が求められる様々なユースケースに適しています。1 [TiDBの紹介](https://docs.pingcap.com/tidb/stable/overview)主要な機能とシナリオをリストアップしました。ご自身のビジネスシナリオに当てはまるかどうかご確認ください。
 
 -   水平方向のスケールアウトまたはスケールイン
 -   金融グレードの高可用性
@@ -135,8 +135,8 @@ TiDB Cloudにはさまざまな形式のデータをインポートできます�
 ワークロードを開始した後、次の方法を使用してシステムを観察できます。
 
 -   クラスターのよく使用されるメトリクスは、クラスター概要ページで確認できます。これには、合計QPS、レイテンシ、接続数、 TiFlashリクエストQPS、 TiFlashリクエスト期間、 TiFlashストレージサイズ、TiKVストレージサイズ、TiDB CPU、TiKV CPU、TiKV IO読み取り、TiKV IO書き込みが含まれます[TiDBクラスタを監視する](/tidb-cloud/monitor-tidb-cluster.md)参照してください。
--   **「診断」 &gt; 「ステートメント」**を選択すると、SQL実行を観察し、システムテーブルをクエリすることなくパフォーマンスの問題を簡単に特定できます。3 [ステートメント分析](/tidb-cloud/tune-performance.md)参照してください。
--   **「診断」 &gt; 「キービジュアライザー」**に移動すると、TiDBのデータアクセスパターンとデータホットスポットを確認できます。3 [キービジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)参照してください。
+-   クラスターの[**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページに移動し、 **「SQLステートメント」**タブを確認してください。ここでは、システムテーブルをクエリすることなく、SQL実行を監視し、パフォーマンスの問題を簡単に特定できます[ステートメント分析](/tidb-cloud/tune-performance.md#statement-analysis)参照してください。
+-   クラスターの[**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページに移動し、 **「Key Visualizer」**タブを確認します。ここで、TiDBのデータアクセスパターンとデータホットスポットを確認できます。5 [キービジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)参照してください。
 -   これらのメトリクスを、お客様独自のDatadogおよびPrometheusに統合することも可能です。1 [サードパーティの監視統合](/tidb-cloud/third-party-monitoring-integrations.md)ご覧ください。
 
 次はテスト結果を評価する時です。
@@ -160,9 +160,9 @@ TiDB Cloudにはさまざまな形式のデータをインポートできます�
 
 -   クエリパフォーマンスの向上
 
-    -   **「診断 &gt; ステートメント」**ページで SQL 実行プランを確認します。
-    -   **ダッシュボード &gt; キー ビジュアライザー**ページでホットスポットの問題を確認します。
-    -   **「概要 &gt; 容量メトリック」**ページで、TiDB クラスターの容量が不足していないかどうかを監視します。
+    -   [**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページの[**SQL文**](/tidb-cloud/tune-performance.md#statement-analysis)タブで SQL 実行プランを確認します。
+    -   [**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページの[**キービジュアライザー**](/tidb-cloud/tune-performance.md#key-visualizer)タブでホットスポットの問題を確認します。
+    -   [**メトリクス**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページで TiDB クラスターの容量が不足していないかどうかを監視します。
     -   TiFlash機能を使用して分析処理を最適化します。1 [HTAPクラスタを使用する](/tiflash/tiflash-overview.md)参照してください。
 
 ## ステップ7. その他の機能を調べる {#step-7-explore-more-features}
@@ -212,11 +212,11 @@ TiDB Cloud は、自動バックアップと手動バックアップの 2 種類
 
 PoCの申請が承認されると、アカウントにクレジットが付与されます。通常、このクレジットは14日間のPoCに十分な量です。クレジットは、ノードの種類と数に応じて、時間単位で課金されます。詳細については、 [TiDB Cloud課金](/tidb-cloud/tidb-cloud-billing.md#credits)ご覧ください。
 
-PoC に残っているクレジットを確認するには、次のスクリーンショットに示すように、対象プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
+PoC に残っているクレジットを確認するには、次のスクリーンショットに示すように、対象プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
 ![TiDB Cloud PoC Credits](/media/tidb-cloud/poc-points.png)
 
-または、<mdsvgicon name="icon-top-organization"> TiDB Cloudコンソールの左下隅で**[請求]**をクリックし、 **[クレジット]**をクリックしてクレジットの詳細ページを表示します。</mdsvgicon>
+または、 TiDB Cloudコンソールの左上隅にあるコンボ ボックスを使用してターゲット組織に切り替え、左側のナビゲーション ペインで**[請求]**をクリックし、 **[クレジット]**タブをクリックしてクレジット情報を表示することもできます。
 
 クレジットを節約するには、使用していないクラスターを削除してください。現在、クラスターを停止することはできません。クラスターを削除する前に、バックアップが最新であることを確認してください。そうすれば、後でPoCを再開する際にクラスターを復元できます。
 

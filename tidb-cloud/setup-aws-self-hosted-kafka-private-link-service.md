@@ -37,7 +37,7 @@ aliases: ['/tidbcloud/setup-self-hosted-kafka-private-link-service']
 
 3.  TiDB Cloud Dedicated クラスターから Kafka デプロイメント情報を取得します。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed] を**クリックします。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[Changefeed] を**クリックします。
     2.  概要ページで、TiDB クラスターのリージョンを確認します。Kafka クラスターが同じリージョンにデプロイされることを確認してください。
     3.  **「Changefeed の作成」を**クリックします。
         1.  **宛先**で、 **Kafka**を選択します。
@@ -695,7 +695,7 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
         -   `usw2-az2`と`broker-usw2-az2 subnet`
         -   `usw2-az3`と`broker-usw2-az3 subnet`
     -   **Securityグループ**: 次のルールで新しいセキュリティ グループを作成します。
-        -   受信ルールはKafka VPCからのすべてのTCPを許可します：タイプ - `{ports of target groups}` （例： `9092-9095` ）、ソース - `{CIDR of TiDB Cloud}`リージョン内のTiDB CloudのCIDRを取得するには、<mdsvgicon name="icon-left-projects"> [TiDB Cloudコンソール](https://tidbcloud.com)の左下隅にある をクリックし、**プロジェクト設定**&gt;**ネットワーク アクセス**&gt;**プロジェクト CIDR** &gt; **AWS を**クリックします。</mdsvgicon>
+        -   インバウンドルールは、Kafka VPCからのすべてのTCPを許可します：タイプ - `{ports of target groups}` （例： `9092-9095` ）、ソース - `{CIDR of TiDB Cloud}` 。リージョン内のTiDB CloudのCIDRを取得するには、 [TiDB Cloudコンソール](https://tidbcloud.com)の左上隅にあるコンボボックスを使用してターゲットプロジェクトに切り替え、左側のナビゲーションペインで**[プロジェクト設定]** &gt; **[ネットワークアクセス**]をクリックし、 **[プロジェクトCIDR]** &gt; **[AWS]**をクリックします。
         -   アウトバウンドルールは、Kafka VPC へのすべての TCP を許可します: タイプ - `All TCP` 、宛先 - `Anywhere-IPv4`
     -   リスナーとルーティング:
         -   プロトコル: `TCP` ; ポート: `9092` ; 転送先: `bootstrap-target-group`

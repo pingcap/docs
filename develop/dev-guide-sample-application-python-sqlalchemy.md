@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with SQLAlchemy
-summary: SQLAlchemy を使用して TiDB に接続する方法を学びます。このチュートリアルでは、SQLAlchemy を使用して TiDB を操作する Python サンプル コード スニペットを紹介します。
+summary: SQLAlchemyを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、SQLAlchemyを使ってTiDBを操作するPythonのサンプルコードスニペットを紹介します。
 ---
 
 # SQLAlchemy で TiDB に接続する {#connect-to-tidb-with-sqlalchemy}
@@ -11,7 +11,7 @@ TiDB は MySQL 互換のデータベースであり、 [SQLアルケミー](http
 
 -   環境を設定します。
 -   SQLAlchemy を使用して TiDB クラスターに接続します。
--   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作のサンプル コード スニペットを見つけることができます。
+-   アプリケーションをビルドして実行します。オプションで、基本的なCRUD操作のサンプルコードスニペットもご利用いただけます。
 
 > **注記：**
 >
@@ -44,11 +44,11 @@ TiDB は MySQL 互換のデータベースであり、 [SQLアルケミー](http
 
 ## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
-このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を示します。
+このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を説明します。
 
 ### ステップ1: サンプルアプリのリポジトリをクローンする {#step-1-clone-the-sample-app-repository}
 
-サンプル コード リポジトリを複製するには、ターミナル ウィンドウで次のコマンドを実行します。
+サンプル コード リポジトリのクローンを作成するには、ターミナル ウィンドウで次のコマンドを実行します。
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-python-sqlalchemy-quickstart.git
@@ -65,9 +65,9 @@ pip install -r requirements.txt
 
 #### PyMySQL を使用する理由は何ですか? {#why-use-pymysql}
 
-SQLAlchemy は、複数のデータベースで動作する ORM ライブラリです。データベースの高レベルの抽象化を提供し、開発者がよりオブジェクト指向的な方法で SQL ステートメントを記述するのに役立ちます。ただし、SQLAlchemy にはデータベース ドライバーが含まれていません。データベースに接続するには、データベース ドライバーをインストールする必要があります。このサンプル アプリケーションでは、データベース ドライバーとして PyMySQL を使用します。これは、TiDB と互換性があり、すべてのプラットフォームにインストールできる純粋な Python MySQL クライアント ライブラリです。
+SQLAlchemyは、複数のデータベースに対応するORMライブラリです。データベースを高レベルで抽象化することで、開発者はよりオブジェクト指向的な方法でSQL文を記述できるようになります。ただし、SQLAlchemyにはデータベースドライバが含まれていません。データベースに接続するには、データベースドライバをインストールする必要があります。このサンプルアプリケーションでは、データベースドライバとしてPyMySQLを使用しています。PyMySQLは、TiDBと互換性があり、すべてのプラットフォームにインストール可能な、純粋なPython MySQLクライアントライブラリです。
 
-[mysqlクライアント](https://github.com/PyMySQL/mysqlclient)や[mysql-コネクタ-python](https://dev.mysql.com/doc/connector-python/en/)などの他のデータベース ドライバーを使用することもできます。ただし、これらは純粋な Python ライブラリではないため、コンパイルするには対応する C/C++ コンパイラと MySQL クライアントが必要です。詳細については、 [SQLAlchemy 公式ドキュメント](https://docs.sqlalchemy.org/en/20/core/engines.html#mysql)を参照してください。
+[mysqlクライアント](https://github.com/PyMySQL/mysqlclient)や[mysql-コネクタ-python](https://dev.mysql.com/doc/connector-python/en/)などの他のデータベースドライバも使用できます。ただし、これらは純粋なPythonライブラリではないため、コンパイルには対応するC/C++コンパイラとMySQLクライアントが必要です。詳細については、 [SQLAlchemy公式ドキュメント](https://docs.sqlalchemy.org/en/20/core/engines.html#mysql)を参照してください。
 
 ### ステップ3: 接続情報を構成する {#step-3-configure-connection-information}
 
@@ -78,9 +78,9 @@ SQLAlchemy は、複数のデータベースで動作する ORM ライブラリ�
 
 > **注記：**
 >
-> 現在、 TiDB Cloud Serverless クラスターには制限があります。5 分間アクティブな接続がない場合、クラスターはシャットダウンし、すべての接続が閉じられます。そのため、 TiDB Cloud Serverless クラスターで SQLAlchemy を使用すると、プールされた接続で`Lost connection to MySQL server during query`や`MySQL Connection not available`などの`OperationalError`発生する可能性があります。このエラーを回避するには、 `pool_recycle`パラメータを`300`に設定できます。詳細については、SQLAlchemy ドキュメントの[切断への対処](https://docs.sqlalchemy.org/en/20/core/pooling.html#dealing-with-disconnects)参照してください。
+> 現在、 TiDB Cloud Serverless クラスターには制限があります。アクティブな接続が5分間ない場合、クラスターはシャットダウンし、すべての接続が閉じられます。そのため、 TiDB Cloud Serverless クラスターでSQLAlchemyを使用する場合、プールされた接続で`OperationalError` （ `Lost connection to MySQL server during query`や`MySQL Connection not available`など）が発生する可能性があります。このエラーを回避するには、 `pool_recycle`パラメータを`300`に設定してください。詳細については、SQLAlchemy ドキュメントの[切断への対処](https://docs.sqlalchemy.org/en/20/core/pooling.html#dealing-with-disconnects)参照してください。
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
@@ -90,7 +90,7 @@ SQLAlchemy は、複数のデータベースで動作する ORM ライブラリ�
 
     -   **ブランチ**は`main`に設定されています
 
-    -   **接続先は**`General`に設定されています
+    -   **接続先が**`General`に設定されています
 
     -   **オペレーティング システムは**環境に適合します。
 
@@ -110,7 +110,7 @@ SQLAlchemy は、複数のデータベースで動作する ORM ライブラリ�
     cp .env.example .env
     ```
 
-6.  対応する接続文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
+6.  対応する接続文字列をコピーして、 `.env`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```dotenv
     TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
@@ -121,22 +121,22 @@ SQLAlchemy は、複数のデータベースで動作する ORM ライブラリ�
     CA_PATH='{ssl_ca}'  # e.g. /etc/ssl/certs/ca-certificates.crt (Debian / Ubuntu / Arch)
     ```
 
-    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに必ず置き換えてください。
+    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに置き換えてください。
 
 7.  `.env`ファイルを保存します。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
+    IP アクセス リストをまだ設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
 
-    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
+    TiDB Cloud Dedicatedは、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPCピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)ご覧ください。
 
 4.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -144,7 +144,7 @@ SQLAlchemy は、複数のデータベースで動作する ORM ライブラリ�
     cp .env.example .env
     ```
 
-5.  対応する接続文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
+5.  対応する接続文字列をコピーして、 `.env`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```dotenv
     TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
@@ -168,7 +168,7 @@ SQLAlchemy は、複数のデータベースで動作する ORM ライブラリ�
     cp .env.example .env
     ```
 
-2.  対応する接続文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
+2.  対応する接続文字列をコピーして、 `.env`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```dotenv
     TIDB_HOST='{tidb_server_host}'
@@ -178,7 +178,7 @@ SQLAlchemy は、複数のデータベースで動作する ORM ライブラリ�
     TIDB_DB_NAME='test'
     ```
 
-    プレースホルダー`{}`接続パラメータに置き換え、 `CA_PATH`行を削除してください。TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
+    プレースホルダー`{}`接続パラメータに置き換え、 `CA_PATH`行を削除してください。TiDB をローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空です。
 
 3.  `.env`ファイルを保存します。
 
@@ -193,13 +193,13 @@ SQLAlchemy は、複数のデータベースで動作する ORM ライブラリ�
     python sqlalchemy_example.py
     ```
 
-2.  [予想される出力.txt](https://github.com/tidb-samples/tidb-python-sqlalchemy-quickstart/blob/main/Expected-Output.txt)チェックして、出力が一致するかどうかを確認します。
+2.  [期待出力.txt](https://github.com/tidb-samples/tidb-python-sqlalchemy-quickstart/blob/main/Expected-Output.txt)チェックして、出力が一致するかどうかを確認します。
 
 ## サンプルコードスニペット {#sample-code-snippets}
 
 次のサンプル コード スニペットを参照して、独自のアプリケーション開発を完了することができます。
 
-完全なサンプル コードとその実行方法については、 [tidb サンプル/tidb-python-sqlalchemy-クイックスタート](https://github.com/tidb-samples/tidb-python-sqlalchemy-quickstart)リポジトリを参照してください。
+完全なサンプル コードとその実行方法については、 [tidb-samples/tidb-python-sqlalchemy-クイックスタート](https://github.com/tidb-samples/tidb-python-sqlalchemy-quickstart)リポジトリを参照してください。
 
 ### TiDBに接続する {#connect-to-tidb}
 
@@ -252,7 +252,7 @@ class Player(Base):
 
 詳細については[SQLAlchemyドキュメント: 宣言型によるクラスのマッピング](https://docs.sqlalchemy.org/en/20/orm/declarative_mapping.html)を参照してください。
 
-### データを挿入 {#insert-data}
+### データを挿入する {#insert-data}
 
 ```python
 with Session() as session:
@@ -261,7 +261,7 @@ with Session() as session:
     session.commit()
 ```
 
-詳細については[データを挿入](/develop/dev-guide-insert-data.md)を参照してください。
+詳細については[データを挿入する](/develop/dev-guide-insert-data.md)を参照してください。
 
 ### クエリデータ {#query-data}
 
@@ -273,7 +273,7 @@ with Session() as session:
 
 詳細については[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)を参照してください。
 
-### データの更新 {#update-data}
+### データを更新する {#update-data}
 
 ```python
 with Session() as session:
@@ -282,7 +282,7 @@ with Session() as session:
     session.commit()
 ```
 
-詳細については[データの更新](/develop/dev-guide-update-data.md)を参照してください。
+詳細については[データを更新する](/develop/dev-guide-update-data.md)を参照してください。
 
 ### データを削除する {#delete-data}
 
@@ -297,20 +297,20 @@ with Session() as session:
 
 ## 次のステップ {#next-steps}
 
--   [SQLAlchemyのドキュメント](https://www.sqlalchemy.org/)から SQLAlchemy の使用方法をさらに学びます。
--   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入](/develop/dev-guide-insert-data.md) 、 [データの更新](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブル読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
--   プロフェッショナル[TiDB 開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
+-   [SQLAlchemyのドキュメント](https://www.sqlalchemy.org/)から SQLAlchemy の使用法について詳しく学びます。
+-   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
+-   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

@@ -8,7 +8,7 @@ category: quick start
 
 *推定所要時間: 20 分*
 
-このチュートリアルでは、TiDB Cloudを使い始めるための簡単な方法をご案内します。また、 TiDB Cloudコンソールの[**はじめる**](https://tidbcloud.com/console/getting-started)ページにあるステップバイステップのチュートリアルもご利用いただけます。
+このチュートリアルでは、TiDB Cloudを使い始めるための簡単な方法をご案内します。また、 TiDB Cloudコンソールの[**はじめる**](https://tidbcloud.com/getting-started)ページにあるステップバイステップのチュートリアルもご利用いただけます。
 
 さらに、 [TiDB プレイグラウンド](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=tidb_cloud_quick_start)で TiDB 機能を試すこともできます。
 
@@ -22,7 +22,7 @@ category: quick start
 
 2.  [ログイン](https://tidbcloud.com/) TiDB Cloudアカウントに追加します。
 
-    デフォルトでは[**クラスター**](https://tidbcloud.com/console/clusters)ページ目が表示されます。
+    デフォルトでは[**クラスター**](https://tidbcloud.com/project/clusters)ページ目が表示されます。
 
 3.  新規サインアップ ユーザーの場合、 TiDB Cloud は`Cluster0`名前のデフォルトのTiDB Cloud Serverless クラスターを自動的に作成します。
 
@@ -36,7 +36,7 @@ category: quick start
 
 TiDB Cloudコンソールに搭載されたAI支援SQLエディタを使用することで、データの価値を最大限に引き出すことができます。これにより、ローカルSQLクライアントを必要とせずに、データベースに対してSQLクエリを実行できます。クエリ結果は表やグラフで直感的に表示され、クエリログも簡単に確認できます。
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページで、クラスター名をクリックして概要ページに移動し、左側のナビゲーション ペインで**[SQL エディター] を**クリックします。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページで、クラスター名をクリックして概要ページに移動し、左側のナビゲーション ペインで**[SQL エディター] を**クリックします。
 
 2.  TiDB Cloudの AI 機能を試すには、画面上の指示に従って、PingCAP と AWS Bedrock がコードスニペットを研究とサービスの改善のために使用することを許可し、 **[保存して開始] を**クリックします。
 

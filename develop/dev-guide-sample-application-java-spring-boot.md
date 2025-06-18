@@ -1,17 +1,17 @@
 ---
 title: Connect to TiDB with Spring Boot
-summary: Spring Boot を使用して TiDB に接続する方法を学習します。このチュートリアルでは、Spring Boot を使用して TiDB で動作するJavaサンプル コード スニペットを紹介します。
+summary: Spring Bootを使用してTiDBに接続する方法を学びます。このチュートリアルでは、Spring Bootを使用してTiDBを操作するJavaサンプルコードスニペットを紹介します。
 ---
 
-# Spring Boot で TiDB に接続する {#connect-to-tidb-with-spring-boot}
+# Spring BootでTiDBに接続する {#connect-to-tidb-with-spring-boot}
 
-TiDB は MySQL 互換のデータベースであり、 [春](https://spring.io/) Java用の人気のオープンソース コンテナ フレームワークです。このドキュメントでは、Spring の使用方法として[スプリングブート](https://spring.io/projects/spring-boot)使用します。
+TiDBはMySQL互換のデータベースであり、 [春](https://spring.io/) Java用の人気のオープンソースコンテナフレームワークです。このドキュメントでは、Springの利用方法として[スプリングブート](https://spring.io/projects/spring-boot)使用します。
 
 このチュートリアルでは、TiDB を JPA プロバイダーとして[スプリングデータ JPA](https://spring.io/projects/spring-data-jpa)および[休止状態](https://hibernate.org/orm/)とともに使用して、次のタスクを実行する方法を学習します。
 
 -   環境を設定します。
 -   Hibernate と Spring Data JPA を使用して TiDB クラスターに接続します。
--   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作用の[サンプルコードスニペット](#sample-code-snippets)見つけることができます。
+-   アプリケーションをビルドして実行します。オプションで、基本的なCRUD操作用の[サンプルコードスニペット](#sample-code-snippets)見つけることもできます。
 
 > **注記：**
 >
@@ -21,7 +21,7 @@ TiDB は MySQL 互換のデータベースであり、 [春](https://spring.io/)
 
 このチュートリアルを完了するには、次のものが必要です。
 
--   **Java Development Kit (JDK) 17**以上。ビジネスおよび個人の要件に応じて[オープンJDK](https://openjdk.org/)または[オラクル](https://www.oracle.com/hk/java/technologies/downloads/)選択できます。
+-   **Java Development Kit (JDK) 17**以上。ビジネスおよび個人の要件に応じて、 [オープンJDK](https://openjdk.org/)または[オラクル JDK](https://www.oracle.com/hk/java/technologies/downloads/)選択できます。
 -   [メイヴン](https://maven.apache.org/install.html) **3.8**以上。
 -   [ギット](https://git-scm.com/downloads) 。
 -   TiDB クラスター。
@@ -45,11 +45,11 @@ TiDB は MySQL 互換のデータベースであり、 [春](https://spring.io/)
 
 ## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
-このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を示します。
+このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を説明します。
 
 ### ステップ1: サンプルアプリのリポジトリをクローンする {#step-1-clone-the-sample-app-repository}
 
-サンプル コード リポジトリを複製するには、ターミナル ウィンドウで次のコマンドを実行します。
+サンプル コード リポジトリのクローンを作成するには、ターミナル ウィンドウで次のコマンドを実行します。
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-java-springboot-jpa-quickstart.git
@@ -63,7 +63,7 @@ cd tidb-java-springboot-jpa-quickstart
 <SimpleTab>
 <div label="TiDB Cloud Serverless">
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
@@ -73,7 +73,7 @@ cd tidb-java-springboot-jpa-quickstart
 
     -   **ブランチ**は`main`に設定されています
 
-    -   **接続先は**`General`に設定されています
+    -   **接続先が**`General`に設定されています
 
     -   **オペレーティング システムは**環境に適合します。
 
@@ -93,7 +93,7 @@ cd tidb-java-springboot-jpa-quickstart
     cp env.sh.example env.sh
     ```
 
-6.  対応する接続文字列をコピーして`env.sh`ファイルに貼り付けます。例の結果は次のようになります。
+6.  対応する接続文字列をコピーして、 `env.sh`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
@@ -104,24 +104,24 @@ cd tidb-java-springboot-jpa-quickstart
     export USE_SSL='true'
     ```
 
-    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに必ず置き換えてください。
+    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに置き換えてください。
 
-    TiDB Cloud Serverless では安全な接続が必要です。そのため、 `USE_SSL`の値を`true`に設定する必要があります。
+    TiDB Cloud Serverless は安全な接続を必要とします。そのため、 `USE_SSL`値を`true`に設定する必要があります。
 
 7.  `env.sh`ファイルを保存します。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
+    IP アクセス リストをまだ設定していない場合は、 **[IP アクセス リストの設定] を**クリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
 
-    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
+    TiDB Cloud Dedicatedは、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPCピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)ご覧ください。
 
 4.  次のコマンドを実行して`env.sh.example`コピーし、名前を`env.sh`に変更します。
 
@@ -129,7 +129,7 @@ cd tidb-java-springboot-jpa-quickstart
     cp env.sh.example env.sh
     ```
 
-5.  対応する接続文字列をコピーして`env.sh`ファイルに貼り付けます。例の結果は次のようになります。
+5.  対応する接続文字列をコピーして、 `env.sh`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
@@ -140,7 +140,7 @@ cd tidb-java-springboot-jpa-quickstart
     export USE_SSL='false'
     ```
 
-    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに必ず置き換えてください。
+    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに置き換えてください。
 
 6.  `env.sh`ファイルを保存します。
 
@@ -153,7 +153,7 @@ cd tidb-java-springboot-jpa-quickstart
     cp env.sh.example env.sh
     ```
 
-2.  対応する接続文字列をコピーして`env.sh`ファイルに貼り付けます。例の結果は次のようになります。
+2.  対応する接続文字列をコピーして、 `env.sh`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'
@@ -164,7 +164,7 @@ cd tidb-java-springboot-jpa-quickstart
     export USE_SSL='false'
     ```
 
-    プレースホルダー`{}`接続パラメータに置き換え、 `USE_SSL`を`false`に設定してください。TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
+    プレースホルダー`{}`接続パラメータに置き換え、 `USE_SSL`を`false`に設定してください。TiDBをローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空です。
 
 3.  `env.sh`ファイルを保存します。
 
@@ -185,7 +185,7 @@ cd tidb-java-springboot-jpa-quickstart
     make request
     ```
 
-3.  [予想される出力.txt](https://github.com/tidb-samples/tidb-java-springboot-jpa-quickstart/blob/main/Expected-Output.txt)チェックして、出力が一致するかどうかを確認します。
+3.  [期待出力.txt](https://github.com/tidb-samples/tidb-java-springboot-jpa-quickstart/blob/main/Expected-Output.txt)チェックして、出力が一致するかどうかを確認します。
 
 ## サンプルコードスニペット {#sample-code-snippets}
 
@@ -195,7 +195,7 @@ cd tidb-java-springboot-jpa-quickstart
 
 ### TiDBに接続する {#connect-to-tidb}
 
-設定ファイル`application.yml`を編集します:
+設定ファイル`application.yml`を編集します。
 
 ```yaml
 spring:
@@ -211,7 +211,7 @@ spring:
       ddl-auto: create-drop
 ```
 
-設定後、環境変数`TIDB_JDBC_URL` `TIDB_USER` TiDB クラスターの実際の値に設定します。設定ファイルには`TIDB_PASSWORD`これらの環境変数のデフォルト設定が用意されています。環境変数を設定しない場合、デフォルト値は次のようになります。
+設定後、環境変数`TIDB_JDBC_URL` 、 `TIDB_USER` 、 `TIDB_PASSWORD` TiDBクラスタの実際の値に設定してください。設定ファイルには、これらの環境変数のデフォルト設定が含まれています。環境変数を設定しない場合は、デフォルト値は以下のとおりです。
 
 -   `TIDB_JDBC_URL` : `"jdbc:mysql://localhost:4000/test"`
 -   `TIDB_USER` : `"root"`
@@ -219,7 +219,7 @@ spring:
 
 ### データ管理: <code>@Repository</code> {#data-management-code-repository-code}
 
-Spring Data JPA は`@Repository`インターフェースを通じてデータを管理します。 `JpaRepository`が提供する CRUD 操作を使用するには、 `JpaRepository`インターフェースを拡張する必要があります。
+Spring Data JPAは`@Repository`インターフェースを通じてデータを管理します。3 `JpaRepository`提供するCRUD操作を使用するには、 `JpaRepository`インターフェースを拡張する必要があります。
 
 ```java
 @Repository
@@ -227,7 +227,7 @@ public interface PlayerRepository extends JpaRepository<PlayerBean, Long> {
 }
 ```
 
-次に、 `PlayerRepository`必要とするクラスで`@Autowired`使用して自動依存性注入を行うことができます。これにより、 CRUD関数を直接使用できるようになります。次に例を示します。
+次に、 `PlayerRepository`必要とするクラスで`@Autowired`使用することで、自動依存性注入が可能になります。これにより、 CRUD関数を直接使用できるようになります。以下は例です。
 
 ```java
 @Autowired
@@ -240,7 +240,7 @@ private PlayerRepository playerRepository;
 playerRepository.save(player);
 ```
 
-詳細については、 [データを挿入](/develop/dev-guide-insert-data.md)および[データの更新](/develop/dev-guide-update-data.md)を参照してください。
+詳細については、 [データを挿入する](/develop/dev-guide-insert-data.md)および[データを更新する](/develop/dev-guide-update-data.md)を参照してください。
 
 ### クエリデータ {#query-data}
 
@@ -267,22 +267,22 @@ playerRepository.deleteById(id);
     -   [Spring Data JPAのドキュメント](https://spring.io/projects/spring-data-jpa)
     -   [Hibernateのドキュメント](https://hibernate.org/orm/documentation)
 
--   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入](/develop/dev-guide-insert-data.md) 、 [データの更新](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブル読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
+-   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
 
--   プロフェッショナル[TiDB 開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
+-   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
 
--   Java開発者向けコースを通じて学習します: [Javaから TiDB を操作する](https://eng.edu.pingcap.com/catalog/info/id:212) .
+-   Java開発者向けコースを通じて学習します: [JavaからTiDBを操作する](https://eng.edu.pingcap.com/catalog/info/id:212) .
 
 ## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

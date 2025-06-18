@@ -25,11 +25,11 @@ SQL エディターの推奨使用例は次のとおりです。
 
 ## Access SQL エディター {#access-sql-editor}
 
-1.  プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
     > **ヒント：**
     >
-    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
+    > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
 2.  クラスター名をクリックし、左側のナビゲーション ペインで**[SQL エディター] を**クリックします。
 
@@ -53,7 +53,7 @@ Chat2Query に初めてアクセスすると、PingCAP と Amazon Bedrock がコ
 初回アクセス後も、次のように AI 設定を変更できます。
 
 -   AI を有効にするには、Chat2Query の右上隅にある**「データ探索のための AI パワーを有効にする」**をクリックします。
--   AIを無効にするには、<mdsvgicon name="icon-top-account-settings"> [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある**[アカウント設定]**をクリックし、 **[プライバシー]**タブをクリックして、 **[AI を活用したデータ探索]**オプションを無効にします。</mdsvgicon>
+-   AIを無効にするには、<mdsvgicon name="icon-top-account-settings"> [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある**[アカウント設定]**をクリックし、 **[AI とプライバシー]**タブをクリックして、 **[AI を活用したデータ探索]**オプションを無効にします。</mdsvgicon>
 
 ## SQLクエリを記述して実行する {#write-and-run-sql-queries}
 
@@ -187,4 +187,4 @@ SQL エディターでは、次の設定を変更できます。
 
 1.  **SQL エディター**の右上隅で、 **...**をクリックし、**設定**を選択します。
 2.  必要に応じて設定を変更してください。
-3.  **［保存］を**クリックします。
+3.  **[保存]を**クリックします。

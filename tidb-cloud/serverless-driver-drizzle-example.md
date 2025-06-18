@@ -5,11 +5,11 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
 
 # TiDB CloudサーバーレスDriverDrizzle チュートリアル {#tidb-cloud-serverless-driver-drizzle-tutorial}
 
-[霧雨ORM](https://orm.drizzle.team/) 、開発者エクスペリエンスを考慮した軽量でパフォーマンスの高い TypeScript ORM です。 `drizzle-orm@0.31.2`から始まり、 [drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless)サポートし、 [TiDB Cloudサーバーレス ドライバー](/tidb-cloud/serverless-driver.md)で Drizzle を HTTPS 経由で使用できるようになります。
+[霧雨ORM](https://orm.drizzle.team/) 、開発者エクスペリエンスを重視した軽量で高性能な TypeScript ORM です。2 `drizzle-orm@0.31.2`では[drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless)サポートし、 [TiDB Cloudサーバーレス ドライバー](/tidb-cloud/serverless-driver.md)では HTTPS 経由で Drizzle を利用できるようになります。
 
 このチュートリアルでは、Node.js 環境とエッジ環境で Drizzle とTiDB Cloudサーバーレス ドライバーを使用する方法について説明します。
 
-## Node.js 環境で Drizzle とTiDB Cloudサーバーレス ドライバーを使用する {#use-drizzle-and-tidb-cloud-serverless-driver-in-node-js-environments}
+## Node.js環境でDrizzleとTiDB Cloudサーバーレスドライバーを使用する {#use-drizzle-and-tidb-cloud-serverless-driver-in-node-js-environments}
 
 このセクションでは、Node.js 環境で Drizzle とTiDB Cloudサーバーレス ドライバーを使用する方法について説明します。
 
@@ -18,8 +18,8 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
 このチュートリアルを完了するには、次のものが必要です。
 
 -   [Node.js](https://nodejs.org/en) &gt;= 18.0.0。
--   [ネプ](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)またはお好みのパッケージ マネージャーを使用します。
--   TiDB Cloud Serverless クラスター。ない場合は、 [TiDB Cloud Serverless クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)使用できます。
+-   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)またはお好みのパッケージ マネージャーを使用します。
+-   TiDB Cloud Serverless クラスター。お持ちでない場合は、 [TiDB Cloud Serverless クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)ご利用ください。
 
 ### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
@@ -48,7 +48,7 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
     }
     ```
 
-4.  プロジェクトのルート ディレクトリに、TypeScript コンパイラ オプションを定義する`tsconfig.json`ファイルを追加します。次にサンプル ファイルを示します。
+4.  プロジェクトのルートディレクトリに、TypeScriptコンパイラオプションを定義するファイル`tsconfig.json`追加します。以下にサンプルファイルを示します。
 
     ```json
     {
@@ -69,19 +69,19 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲットのTiDB Cloud Serverless クラスターの名前をクリックして、その概要ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲットのTiDB Cloud Serverless クラスターの名前をクリックして、その概要ページに移動します。
 
-2.  概要ページで、右上隅の**[接続]**をクリックし、[**接続先]**ドロップダウン ボックスで`Serverless Driver`を選択して、 **[パスワードの生成]**をクリックし、ランダムなパスワードを作成します。
+2.  概要ページで、右上隅の**[接続]**をクリックし、 **[接続**先] ドロップダウン リストで`Serverless Driver`を選択して、[**パスワードの生成]**をクリックし、ランダム パスワードを作成します。
 
     > **ヒント：**
     >
-    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成することができます。
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」を**クリックして新しいパスワードを生成することができます。
 
     接続文字列は次のようになります。
 
         mysql://[username]:[password]@[host]/[database]
 
-3.  ローカル環境で環境変数`DATABASE_URL`設定します。たとえば、Linux または macOS では、次のコマンドを実行できます。
+3.  ローカル環境で環境変数`DATABASE_URL`設定します。例えば、LinuxまたはmacOSでは、次のコマンドを実行できます。
 
     ```shell
     export DATABASE_URL='mysql://[username]:[password]@[host]/[database]'
@@ -91,7 +91,7 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
 
 1.  TiDB Cloud Serverless クラスターにテーブルを作成します。
 
-    [TiDB Cloudコンソールの SQL エディター](/tidb-cloud/explore-data-with-chat2query.md)使用して SQL ステートメントを実行できます。次に例を示します。
+    [TiDB Cloudコンソールの SQL エディター](/tidb-cloud/explore-data-with-chat2query.md)使用するとSQL文を実行できます。以下に例を示します。
 
     ```sql
     CREATE TABLE `test`.`users` (
@@ -101,7 +101,7 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
     );
     ```
 
-2.  プロジェクトのルート ディレクトリに`hello-world.ts`という名前のファイルを作成し、次のコードを追加します。
+2.  プロジェクトのルート ディレクトリに`hello-world.ts`名前のファイルを作成し、次のコードを追加します。
 
     ```ts
     import { connect } from '@tidbcloud/serverless';
@@ -152,8 +152,8 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
 このチュートリアルを完了するには、次のものが必要です。
 
 -   エッジ環境を提供する[ヴェルセル](https://vercel.com/docs)アカウント。
--   [ネプ](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)またはお好みのパッケージ マネージャーを使用します。
--   TiDB Cloud Serverless クラスター。ない場合は、 [TiDB Cloud Serverless クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)使用できます。
+-   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)またはお好みのパッケージ マネージャーを使用します。
+-   TiDB Cloud Serverless クラスター。お持ちでない場合は、 [TiDB Cloud Serverless クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)ご利用ください。
 
 ### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
@@ -163,13 +163,13 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
     npm i -g vercel@latest
     ```
 
-2.  次のターミナル コマンドを使用して、 `drizzle-example`という[次](https://nextjs.org/)プロジェクトを作成します。
+2.  次のターミナル コマンドを使用して、 `drizzle-example`という[ネクスト.js](https://nextjs.org/)プロジェクトを作成します。
 
     ```shell
     npx create-next-app@latest drizzle-example --ts --no-eslint --tailwind --no-src-dir --app --import-alias "@/*"
     ```
 
-3.  `drizzle-example`ディレクトリに移動します:
+3.  `drizzle-example`ディレクトリに移動します。
 
     ```shell
     cd drizzle-example
@@ -183,13 +183,13 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲットのTiDB Cloud Serverless クラスターの名前をクリックして、その概要ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲットのTiDB Cloud Serverless クラスターの名前をクリックして、その概要ページに移動します。
 
-2.  概要ページで、右上隅の**[接続]**をクリックし、[**接続先]**ドロップダウン ボックスで`Serverless Driver`を選択して、 **[パスワードの生成]**をクリックし、ランダムなパスワードを作成します。
+2.  概要ページで、右上隅の**[接続]**をクリックし、 **[接続**先] ドロップダウン リストで`Serverless Driver`を選択して、[**パスワードの生成]**をクリックし、ランダム パスワードを作成します。
 
     > **ヒント：**
     >
-    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成することができます。
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」を**クリックして新しいパスワードを生成することができます。
 
     接続文字列は次のようになります。
 
@@ -199,7 +199,7 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
 
 1.  TiDB Cloud Serverless クラスターにテーブルを作成します。
 
-    [TiDB Cloudコンソールの SQL エディター](/tidb-cloud/explore-data-with-chat2query.md)使用して SQL ステートメントを実行できます。次に例を示します。
+    [TiDB Cloudコンソールの SQL エディター](/tidb-cloud/explore-data-with-chat2query.md)使用するとSQL文を実行できます。以下に例を示します。
 
     ```sql
     CREATE TABLE `test`.`users` (
@@ -262,7 +262,7 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
 
 2.  ルートからの応答を取得するには、 `${Your-URL}/api/edge-function-example`ページに移動します。
 
-## 次は何か {#what-s-next}
+## 次は何？ {#what-s-next}
 
--   [霧雨](https://orm.drizzle.team/docs/overview)と[drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless)について詳しく学びます。
--   [TiDB CloudとVercelを統合する](/tidb-cloud/integrate-tidbcloud-with-vercel.md)方法を学びます。
+-   [霧雨](https://orm.drizzle.team/docs/overview)と[drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless)について詳しく説明します。
+-   [TiDB CloudとVercelを統合する](/tidb-cloud/integrate-tidbcloud-with-vercel.md)方法を学習します。

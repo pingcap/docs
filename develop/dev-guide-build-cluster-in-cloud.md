@@ -27,7 +27,7 @@ summary: TiDB CloudでTiDB Cloud Serverless クラスターを構築し、それ
 
 2.  [ログイン](https://tidbcloud.com/) TiDB Cloudアカウントに追加します。
 
-3.  [**クラスター**](https://tidbcloud.com/console/clusters)ページで、 **[クラスタの作成] を**クリックします。
+3.  [**クラスター**](https://tidbcloud.com/project/clusters)ページで、 **[クラスタの作成] を**クリックします。
 
 4.  **「クラスタの作成」**ページでは、デフォルトで**「Serverless」**が選択されています。必要に応じてデフォルトのクラスター名を更新し、クラスターを作成するリージョンを選択してください。
 

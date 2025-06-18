@@ -3,31 +3,31 @@ title: Get Started with TiDB + AI via Python
 summary: Python と TiDB Vector Search を使用してセマンティック検索を実行する AI アプリケーションを迅速に開発する方法を学びます。
 ---
 
-# Python で TiDB + AI を使い始める {#get-started-with-tidb-ai-via-python}
+# PythonでTiDB + AIを使い始める {#get-started-with-tidb-ai-via-python}
 
-このチュートリアルでは、**セマンティック検索**機能を提供するシンプルな AI アプリケーションの開発方法を説明します。従来のキーワード検索とは異なり、セマンティック検索はクエリの背後にある意味をインテリジェントに理解し、最も関連性の高い結果を返します。たとえば、「犬」、「魚」、「木」というタイトルのドキュメントがあり、「泳ぐ動物」を検索すると、アプリケーションは「魚」を最も関連性の高い結果として識別します。
+このチュートリアルでは、**セマンティック検索**機能を備えたシンプルなAIアプリケーションの開発方法を説明します。従来のキーワード検索とは異なり、セマンティック検索はクエリの背後にある意味をインテリジェントに理解し、最も関連性の高い結果を返します。例えば、「犬」、「魚」、「木」というタイトルのドキュメントがあり、「泳ぐ動物」を検索すると、アプリケーションは「魚」を最も関連性の高い結果として特定します。
 
-このチュートリアルでは、 [TiDB ベクトル検索](/tidb-cloud/vector-search-overview.md) 、Python、 [Python 用 TiDB ベクター SDK](https://github.com/pingcap/tidb-vector-python) 、AI モデルを使用してこの AI アプリケーションを開発します。
+このチュートリアルでは、 [TiDBベクトル検索](/tidb-cloud/vector-search-overview.md) 、Python、 [Python 用 TiDB ベクター SDK](https://github.com/pingcap/tidb-vector-python) 、および AI モデルを使用してこの AI アプリケーションを開発します。
 
 > **注記**
 >
-> TiDB Vector Search は、TiDB Self-Managed (TiDB &gt;= v8.4) および[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)でのみ使用できます。 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では使用できません。
+> TiDB Vector Searchは、TiDB Self-Managed (TiDB &gt;= v8.4)および[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)のみ利用できます。 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では利用できません。
 
 ## 前提条件 {#prerequisites}
 
 このチュートリアルを完了するには、次のものが必要です。
 
--   [Python 3.8以上](https://www.python.org/downloads/)インストールされました。
--   [ギット](https://git-scm.com/downloads)インストールされました。
--   TiDB Cloud Serverless クラスター。TiDB Cloud クラスターがない場合は、 [TiDB Cloud Serverless クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って独自のTiDB Cloudクラスターを作成してください。
+-   [Python 3.8以上](https://www.python.org/downloads/)個インストールされました。
+-   [ギット](https://git-scm.com/downloads)個インストールされました。
+-   TiDB Cloud Serverless クラスター。TiDB Cloud クラスターがまだない場合は、 [TiDB Cloud Serverless クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って独自のTiDB Cloudクラスターを作成してください。
 
-## 始める {#get-started}
+## 始めましょう {#get-started}
 
-次の手順では、アプリケーションをゼロから開発する方法を示します。デモを直接実行するには、 [pingcap/tidb-vector-python](https://github.com/pingcap/tidb-vector-python/blob/main/examples/python-client-quickstart)リポジトリのサンプル コードをチェックアウトできます。
+以下の手順は、アプリケーションをゼロから開発する方法を示しています。デモを直接実行するには、 [pingcap/tidb-vector-python](https://github.com/pingcap/tidb-vector-python/blob/main/examples/python-client-quickstart)リポジトリのサンプルコードをチェックアウトしてください。
 
 ### ステップ1. 新しいPythonプロジェクトを作成する {#step-1-create-a-new-python-project}
 
-任意のディレクトリに、新しい Python プロジェクトと`example.py`という名前のファイルを作成します。
+任意のディレクトリに、新しい Python プロジェクトと`example.py`名前のファイルを作成します。
 
 ```shell
 mkdir python-client-quickstart
@@ -48,17 +48,17 @@ pip install sqlalchemy pymysql sentence-transformers tidb-vector python-dotenv
 
 ### ステップ3. TiDBクラスターへの接続文字列を構成する {#step-3-configure-the-connection-string-to-the-tidb-cluster}
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **接続タイプは**`Public`に設定されています。
+    -   **接続タイプ**は`Public`に設定されています。
 
-    -   **ブランチは**`main`に設定されています。
+    -   **ブランチ**は`main`に設定されています。
 
-    -   **Connect With は**`SQLAlchemy`に設定されています。
+    -   **Connect With が**`SQLAlchemy`に設定されています。
 
     -   **オペレーティング システムは**環境に適合します。
 
@@ -70,9 +70,9 @@ pip install sqlalchemy pymysql sentence-transformers tidb-vector python-dotenv
 
     > **ヒント：**
     >
-    > まだパスワードを設定していない場合は、「**パスワードの生成」**をクリックしてランダムなパスワードを生成します。
+    > まだパスワードを設定していない場合は、 **「パスワードの生成」**をクリックしてランダムなパスワードを生成します。
 
-5.  Python プロジェクトのルート ディレクトリに`.env`ファイルを作成し、その中に接続文字列を貼り付けます。
+5.  Python プロジェクトのルート ディレクトリに`.env`ファイルを作成し、そこに接続文字列を貼り付けます。
 
     以下は macOS の例です。
 
@@ -80,11 +80,11 @@ pip install sqlalchemy pymysql sentence-transformers tidb-vector python-dotenv
     TIDB_DATABASE_URL="mysql+pymysql://<prefix>.root:<password>@gateway01.<region>.prod.aws.tidbcloud.com:4000/test?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
     ```
 
-### ステップ4. 埋め込みモデルを初期化する {#step-4-initialize-the-embedding-model}
+### ステップ4. 埋め込みモデルの初期化 {#step-4-initialize-the-embedding-model}
 
-[埋め込みモデル](/tidb-cloud/vector-search-overview.md#embedding-model)データを[ベクトル埋め込み](/tidb-cloud/vector-search-overview.md#vector-embedding)に変換します。この例では、テキスト埋め込みに事前トレーニング済みのモデル[**msmarco-MiniLM-L12-cos-v5**](https://huggingface.co/sentence-transformers/msmarco-MiniLM-L12-cos-v5)を使用します。7 `sentence-transformers`によって提供されるこの軽量モデルは、テキスト データを 384 次元のベクトル埋め込みに変換します。
+[埋め込みモデル](/tidb-cloud/vector-search-overview.md#embedding-model)データを[ベクトル埋め込み](/tidb-cloud/vector-search-overview.md#vector-embedding)に変換します。この例では、テキスト埋め込みに事前学習済みのモデル[**msmarco-MiniLM-L12-cos-v5**](https://huggingface.co/sentence-transformers/msmarco-MiniLM-L12-cos-v5)使用します。7 `sentence-transformers`が提供するこの軽量モデルは、テキストデータを 384 次元のベクトル埋め込みに変換します。
 
-モデルを設定するには、次のコードを`example.py`ファイルにコピーします。このコードは`SentenceTransformer`インスタンスを初期化し、後で使用するために`text_to_embedding()`関数を定義します。
+モデルをセットアップするには、次のコードを`example.py`ファイルにコピーします。このコードは`SentenceTransformer`インスタンスを初期化し、後で使用する`text_to_embedding()`関数を定義します。
 
 ```python
 from sentence_transformers import SentenceTransformer
@@ -105,7 +105,7 @@ def text_to_embedding(text):
 
 > **注記**
 >
-> テーブル内のベクトル列の次元が、埋め込みモデルによって生成されたベクトルの次元と一致していることを確認します。たとえば、 **msmarco-MiniLM-L12-cos-v5**モデルは 384 次元のベクトルを生成するため、 `embedded_documents`のベクトル列の次元も 384 である必要があります。
+> 表内のベクトル列の次元が、埋め込みモデルによって生成されるベクトルの次元と一致していることを確認してください。例えば、 **msmarco-MiniLM-L12-cos-v5**モデルは384次元のベクトルを生成するため、 `embedded_documents`のベクトル列の次元も384である必要があります。
 
 ```python
 import os
@@ -129,7 +129,7 @@ vector_store = TiDBVectorClient(
 
 ### ステップ6. テキストデータを埋め込み、ベクトルを保存する {#step-6-embed-text-data-and-store-the-vectors}
 
-このステップでは、「dog」、「fish」、「tree」などの単語を 1 つ含むサンプル ドキュメントを準備します。次のコードは、 `text_to_embedding()`関数を使用してこれらのテキスト ドキュメントをベクトル埋め込みに変換し、ベクトル ストアに挿入します。
+このステップでは、「dog」、「fish」、「tree」といった単語を含むサンプルドキュメントを準備します。以下のコードは、 `text_to_embedding()`関数を使用してこれらのテキストドキュメントをベクトル埋め込みに変換し、ベクトルストアに挿入します。
 
 ```python
 documents = [
@@ -163,9 +163,9 @@ vector_store.insert(
 
 ### ステップ7. セマンティック検索を実行する {#step-7-perform-semantic-search}
 
-このステップでは、既存のドキュメント内のどの単語とも直接一致しない「泳ぐ動物」を検索します。
+このステップでは、既存のドキュメント内のどの単語にも直接一致しない「a swimming animal」を検索します。
 
-次のコードでは、 `text_to_embedding()`関数を再度使用してクエリ テキストをベクトル埋め込みに変換し、その埋め込みを使用してクエリを実行して、最も近い 3 つの一致を検索します。
+次のコードでは、 `text_to_embedding()`関数を再度使用してクエリ テキストをベクター埋め込みに変換し、その埋め込みを使用してクエリを実行して、最も近い上位 3 つの一致を検索します。
 
 ```python
 def print_result(query, result):
@@ -188,9 +188,9 @@ Search result ("a swimming animal"):
 - text: "tree", distance: 0.798545178640937
 ```
 
-検索結果の 3 つの用語は、クエリされたベクトルからのそれぞれの距離によって並べ替えられます。距離が小さいほど、対応する`document`の関連性が高くなります。
+検索結果の 3 つの用語は、クエリされたベクトルからのそれぞれの距離によって並べ替えられます。距離が小さいほど、対応する`document`関連性が高くなります。
 
-したがって、出力によると、泳いでいる動物は魚、または泳ぐ才能のある犬である可能性が最も高いです。
+したがって、出力によれば、泳いでいる動物は魚、または泳ぐ才能のある犬である可能性が最も高いです。
 
 ## 参照 {#see-also}
 

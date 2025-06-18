@@ -112,10 +112,10 @@ TiDB Cloud変更フィードが Apache Kafka にデータをストリーミン�
 
 たとえば、Kafka クラスターが Confluent Cloud にある場合、詳細については Confluent ドキュメントの[リソース](https://docs.confluent.io/platform/current/kafka/authorization.html#resources)と[ACLの追加](https://docs.confluent.io/platform/current/kafka/authorization.html#adding-acls)参照してください。
 
-## ステップ1. Apache Kafkaのchangefeedページを開く {#step-1-open-the-changefeed-page-for-apache-kafka}
+## ステップ1. Apache KafkaのChangefeedページを開く {#step-1-open-the-changefeed-page-for-apache-kafka}
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
-2.  ターゲット TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed] を**クリックします。
+2.  ターゲット TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[Changefeed] を**クリックします。
 3.  **「Changefeed の作成」**をクリックし、**宛先**として**Kafka**を選択します。
 
 ## ステップ2. changefeedターゲットを構成する {#step-2-configure-the-changefeed-target}

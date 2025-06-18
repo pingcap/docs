@@ -3,27 +3,27 @@ title: Integrate TiDB Vector Search with Jina AI Embeddings API
 summary: TiDB Vector Search を Jina AI Embeddings API と統合して埋め込みを保存し、セマンティック検索を実行する方法を学習します。
 ---
 
-# TiDB ベクトル検索を Jina AI 埋め込み API と統合する {#integrate-tidb-vector-search-with-jina-ai-embeddings-api}
+# TiDBベクトル検索をJina AI Embeddings APIと統合する {#integrate-tidb-vector-search-with-jina-ai-embeddings-api}
 
 このチュートリアルでは、 [ジナ・アイ](https://jina.ai/)使用してテキスト データの埋め込みを生成し、その埋め込みを TiDB ベクトルstorageに保存して、埋め込みに基づいて類似のテキストを検索する方法について説明します。
 
 > **注記**
 >
-> TiDB Vector Search は、TiDB Self-Managed (TiDB &gt;= v8.4) および[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)でのみ使用できます。 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では使用できません。
+> TiDB Vector Searchは、TiDB Self-Managed (TiDB &gt;= v8.4)および[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)のみ利用できます。 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では利用できません。
 
 ## 前提条件 {#prerequisites}
 
 このチュートリアルを完了するには、次のものが必要です。
 
--   [Python 3.8以上](https://www.python.org/downloads/)インストールされました。
--   [ギット](https://git-scm.com/downloads)インストールされました。
--   TiDB Cloud Serverless クラスター。TiDB Cloud クラスターがない場合は、 [TiDB Cloud Serverless クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って独自のTiDB Cloudクラスターを作成してください。
+-   [Python 3.8以上](https://www.python.org/downloads/)個インストールされました。
+-   [ギット](https://git-scm.com/downloads)個インストールされました。
+-   TiDB Cloud Serverless クラスター。TiDB Cloud クラスターがまだない場合は、 [TiDB Cloud Serverless クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って独自のTiDB Cloudクラスターを作成してください。
 
 ## サンプルアプリを実行する {#run-the-sample-app}
 
 以下の手順に従って、TiDB Vector Search を JinaAI Embedding と統合する方法を簡単に学習できます。
 
-### ステップ1. リポジトリをクローンする {#step-1-clone-the-repository}
+### ステップ1. リポジトリのクローンを作成する {#step-1-clone-the-repository}
 
 `tidb-vector-python`リポジトリをローカル マシンにクローンします。
 
@@ -49,11 +49,11 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### ステップ4. 環境変数を設定する {#step-4-configure-the-environment-variables}
+### ステップ4.環境変数を設定する {#step-4-configure-the-environment-variables}
 
-[Jina AI 埋め込み API](https://jina.ai/embeddings/)ページから Jina AI API キーを取得します。次に、クラスター接続文字列を取得し、次のように環境変数を設定します。
+[Jina AI 埋め込み API](https://jina.ai/embeddings/)ページ目からJina AI APIキーを取得します。次に、クラスター接続文字列を取得し、環境変数を以下のように設定します。
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
@@ -61,9 +61,9 @@ pip install -r requirements.txt
 
     -   **接続タイプ**は`Public`に設定されています
 
-    -   **ブランチは**`main`に設定されています
+    -   **ブランチ**は`main`に設定されています
 
-    -   **接続先は**`SQLAlchemy`に設定されています
+    -   **接続先が**`SQLAlchemy`に設定されています
 
     -   **オペレーティング システムは**環境に適合します。
 
@@ -141,7 +141,7 @@ def generate_embeddings(text: str):
     return response.json()['data'][0]['embedding']
 ```
 
-### TiDBクラスターに接続する {#connect-to-the-tidb-cluster}
+### TiDBクラスタに接続する {#connect-to-the-tidb-cluster}
 
 SQLAlchemy を介して TiDB クラスターに接続します。
 
@@ -161,7 +161,7 @@ engine = create_engine(url=TIDB_DATABASE_URL, pool_recycle=300)
 
 ### ベクターテーブルスキーマを定義する {#define-the-vector-table-schema}
 
-テキストを格納するための`content`列と埋め込みを格納するための`content_vec`という名前のベクトル列を持つ`jinaai_tidb_demo_documents`という名前のテーブルを作成します。
+テキストを格納するための`content`列と、埋め込みを格納するための`content_vec`名前のベクトル列を持つ`jinaai_tidb_demo_documents`という名前のテーブルを作成します。
 
 ```python
 from sqlalchemy import Column, Integer, String, create_engine
@@ -188,7 +188,7 @@ class Document(Base):
 
 ### Jina AIで埋め込みを作成し、TiDBに保存する {#create-embeddings-with-jina-ai-and-store-in-tidb}
 
-Jina AI Embeddings API を使用して、各テキストの埋め込みを生成し、その埋め込みを TiDB に保存します。
+Jina AI Embeddings API を使用して、各テキストの埋め込みを生成し、TiDB に保存します。
 
 ```python
 TEXTS = [

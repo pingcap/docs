@@ -54,7 +54,7 @@ db = TiDBClient.connect(
 
 これらの接続パラメータは[TiDB Cloudコンソール](https://tidbcloud.com)から取得できます:
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続パラメータがリストされた接続ダイアログが表示されます。
 

@@ -91,11 +91,11 @@ tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --rati
 
 1.  ターゲット クラスターの**インポート**ページを開きます。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
         > **ヒント：**
         >
-        > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
+        > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
     2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
@@ -221,7 +221,7 @@ WHERE table_schema LIKE 'bookshop';
 | 書籍ID   | ビッグイント(20) | 書籍の一意のID（ [本](#books-table)にリンク）           |
 | ユーザーID | ビッグイント(20) | ユーザー固有識別子（ [ユーザー](#users-table)に関連付けられている） |
 | 量      | タイニーイント(4) | 購入数量                                       |
-| 注文時    | 日時         | 購入時間                                       |
+| 注文した日時 | 日時         | 購入時間                                       |
 
 ## データベース初期化スクリプト<code>dbinit.sql</code> {#database-initialization-script-code-dbinit-sql-code}
 

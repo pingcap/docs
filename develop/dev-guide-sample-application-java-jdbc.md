@@ -27,7 +27,7 @@ TiDB は MySQL 互換のデータベースであり、JDBC (Java Database Connec
 > **注記：**
 >
 > -   このチュートリアルは、 TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed で機能します。
-> -   TiDB v7.4以降、JDBC URLで`connectionCollation`設定されておらず、 `characterEncoding`設定されていないか`UTF-8`に設定されている場合、JDBC接続で使用される照合順序はJDBCドライバーのバージョンによって異なります。詳細については、 [JDBC接続で使用される照合順序](https://docs.pingcap.com/tidb/stable/sql-faq#collation-used-in-jdbc-connections)参照してください。
+> -   TiDB v7.4以降、JDBC URLで`connectionCollation`が設定されておらず、 `characterEncoding`設定されていないか`UTF-8`に設定されている場合、JDBC接続で使用される照合順序はJDBCドライバーのバージョンによって異なります。詳細については、 [JDBC接続で使用される照合順序](https://docs.pingcap.com/tidb/stable/sql-faq#collation-used-in-jdbc-connections)参照してください。
 
 </CustomContent>
 
@@ -81,7 +81,7 @@ cd tidb-java-jdbc-quickstart
 <SimpleTab>
 <div label="TiDB Cloud Serverless">
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
@@ -131,7 +131,7 @@ cd tidb-java-jdbc-quickstart
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 

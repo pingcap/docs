@@ -80,10 +80,10 @@ Apache Pulsar サービスにパブリック IP アクセスを提供する場�
 
 詳細については、Apache Pulsar ドキュメントの[トピックの作成方法](https://pulsar.apache.org/docs/4.0.x/tutorials-topic/)参照してください。
 
-## ステップ1. Apache Pulsarのchangefeedページを開く {#step-1-open-the-changefeed-page-for-apache-pulsar}
+## ステップ1. Apache PulsarのChangefeedページを開く {#step-1-open-the-changefeed-page-for-apache-pulsar}
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
-2.  Changefeed イベントのソースとなる TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed] を**クリックします。
+2.  変更フィード イベントのソースとなる TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[変更フィード]**をクリックします。
 3.  **「Changefeed の作成」を**クリックします。
 
 ## ステップ2. チェンジフィードの送信先を設定する {#step-2-configure-the-changefeed-destination}
@@ -129,7 +129,7 @@ Apache Pulsar サービスにパブリック IP アクセスを提供する場�
 
 4.  **「データ形式」**領域で、希望する Pulsar メッセージの形式を選択します。
 
-    -   Canal-JSONは、解析が容易なプレーンなJSONテキスト形式です。詳細については、 [TiCDC Canal- JSON プロトコル](https://docs.pingcap.com/tidb/stable/ticdc-canal-json/)ご覧ください。
+    -   Canal-JSONは、解析が容易なプレーンなJSONテキスト形式です。詳細については、 [TiCDC Canal-JSON プロトコル](https://docs.pingcap.com/tidb/stable/ticdc-canal-json/)ご覧ください。
 
     -   Pulsarメッセージ本文にTiDB拡張フィールドを追加するには、 **「TiDB拡張」**オプションを有効にしてください。詳細については、 [TiCDC Canal-JSON プロトコルの TiDB 拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-canal-json/#tidb-extension-field)参照してください。
 

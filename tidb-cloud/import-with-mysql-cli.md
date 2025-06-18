@@ -5,34 +5,34 @@ summary: MySQL CLI 経由でTiDB Cloud Dedicated にデータをインポート�
 
 # MySQL CLI 経由でTiDB Cloud Dedicated にデータをインポートする {#import-data-into-tidb-cloud-dedicated-via-mysql-cli}
 
-このドキュメントでは、 [MySQL コマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)を介してTiDB Cloud Dedicated にデータをインポートする方法について説明します。SQL ファイルまたは CSV ファイルからデータをインポートできます。次のセクションでは、各ファイル タイプからデータをインポートするための手順を順を追って説明します。
+このドキュメントでは、 [MySQL コマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)を介してTiDB Cloud Dedicatedにデータをインポートする方法について説明します。SQLファイルまたはCSVファイルからデータをインポートできます。以下のセクションでは、各ファイルタイプからデータをインポートする手順を段階的に説明します。
 
 ## 前提条件 {#prerequisites}
 
-MySQL CLI 経由でTiDB Cloud Dedicated にデータをインポートするには、次の前提条件を満たす必要があります。
+MySQL CLI 経由でTiDB Cloud Dedicated にデータをインポートする前に、次の前提条件を満たす必要があります。
 
--   TiDB Cloud Dedicated クラスターにアクセスできます。アクセスできない場合は、 [TiDB Cloud専用クラスターを作成する](/tidb-cloud/create-tidb-cluster.md)手順に従って作成してください。
--   ローカル コンピュータに MySQL CLI をインストールします。
+-   TiDB Cloud Dedicated クラスターへのアクセス権をお持ちです。お持ちでない場合は、 [TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)手順に従ってクラスターを作成してください。
+-   ローカルコンピュータに MySQL CLI をインストールします。
 
 ## ステップ1. TiDB Cloud Dedicatedクラスタに接続する {#step-1-connect-to-your-tidb-cloud-dedicated-cluster}
 
 TiDB クラスターに接続します。
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2.  左側のナビゲーション ペインで、 **[ネットワーク]**をクリックします。
+2.  左側のナビゲーション ペインで、 **[設定]** &gt; **[ネットワーク] を**クリックします。
 
 3.  **[ネットワーク]**ページで、 **[IP アクセス リスト]**領域の**[IP アドレスの追加] を**クリックします。
 
 4.  ダイアログで、 **[どこからでもアクセスを許可する]**を選択し、 **[確認]**をクリックします。
 
-5.  右上隅の**「接続」**をクリックすると、接続情報のダイアログが開きます。
+5.  右上隅の**[接続]**をクリックすると、接続情報のダイアログが開きます。
 
-    接続文字列を取得する方法の詳細については、 [パブリック接続経由​​でTiDB Cloud Dedicatedに接続する](/tidb-cloud/connect-via-standard-connection.md)参照してください。
+    接続文字列を取得する方法の詳細については、 [パブリック接続経由​​でTiDB Cloud Dedicated に接続](/tidb-cloud/connect-via-standard-connection.md)参照してください。
 
 ## ステップ2. テーブルを定義し、サンプルデータを挿入する {#step-2-define-the-table-and-insert-sample-data}
 
-データをインポートする前に、テーブル構造を準備し、実際のサンプルデータを挿入する必要があります。以下は、テーブルを作成してサンプルデータを挿入するために使用できるサンプルSQLファイル（ `product_data.sql` ）です。
+データをインポートする前に、テーブル構造を準備し、実際のサンプルデータを挿入する必要があります。以下は、テーブルを作成してサンプルデータを挿入するために使用できるSQLファイルの例（ `product_data.sql` ）です。
 
 ```sql
 -- Create a table in your TiDB database
@@ -51,14 +51,14 @@ INSERT INTO products (product_id, product_name, price) VALUES
 
 ## ステップ3. SQLまたはCSVファイルからデータをインポートする {#step-3-import-data-from-a-sql-or-csv-file}
 
-SQL ファイルまたは CSV ファイルからデータをインポートできます。次のセクションでは、各タイプからデータをインポートする手順を順を追って説明します。
+SQLファイルまたはCSVファイルからデータをインポートできます。以下のセクションでは、各ファイル形式からデータをインポートする手順を段階的に説明します。
 
 <SimpleTab>
 <div label="From an SQL file">
 
 SQL ファイルからデータをインポートするには、次の手順を実行します。
 
-1.  インポートするデータを含む実際の SQL ファイル (たとえば、 `product_data.sql` ) を指定します。この SQL ファイルには、実際のデータを含む`INSERT`ステートメントが含まれている必要があります。
+1.  インポートするデータを含む実際のSQLファイル（例： `product_data.sql` ）を用意してください。このSQLファイルには、実際のデータを含む`INSERT`ステートメントが含まれている必要があります。
 
 2.  SQL ファイルからデータをインポートするには、次のコマンドを使用します。
 
@@ -68,7 +68,7 @@ SQL ファイルからデータをインポートするには、次の手順を�
 
 > **注記：**
 >
-> ここで使用されるデフォルトのデータベース名は`test`ですが、独自のデータベースを手動で作成するか、SQL ファイルで`CREATE DATABASE`コマンドを使用することができます。
+> ここで使用されるデフォルトのデータベース名は`test`ですが、独自のデータベースを手動で作成するか、SQL ファイルで`CREATE DATABASE`コマンドを使用することもできます。
 
 </div>
 <div label="From a CSV file">
@@ -77,7 +77,7 @@ CSV ファイルからデータをインポートするには、次の手順を�
 
 1.  データのインポートのニーズに合わせて、TiDB でデータベースとスキーマを作成します。
 
-2.  インポートするデータを含むサンプル CSV ファイル (例: `product_data.csv` ) を提供します。次に、CSV ファイルの例を示します。
+2.  インポートしたいデータを含むサンプルCSVファイル（例： `product_data.csv` ）をご提供ください。以下はCSVファイルの例です。
 
     **製品データ.csv:**
 
@@ -101,7 +101,7 @@ CSV ファイルからデータをインポートするには、次の手順を�
 
 > **注記：**
 >
-> `LOAD DATA LOCAL INFILE`構文の詳細については、 [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)参照してください。
+> `LOAD DATA LOCAL INFILE`詳細な構文については、 [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)参照してください。
 
 </div>
 </SimpleTab>

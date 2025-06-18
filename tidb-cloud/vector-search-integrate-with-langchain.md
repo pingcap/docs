@@ -3,34 +3,34 @@ title: Integrate Vector Search with LangChain
 summary: TiDB Cloudの Vector Search を LangChain と統合する方法を学びます。
 ---
 
-# ベクトル検索をLangChainと統合する {#integrate-vector-search-with-langchain}
+# LangChainとベクトル検索を統合する {#integrate-vector-search-with-langchain}
 
 このチュートリアルでは、 TiDB Cloudの[ベクトル検索](/tidb-cloud/vector-search-overview.md)機能を[ランチェーン](https://python.langchain.com/)と統合する方法を説明します。
 
 > **注記**
 >
-> TiDB Vector Search は、TiDB Self-Managed (TiDB &gt;= v8.4) および[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)でのみ使用できます。 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では使用できません。
+> TiDB Vector Searchは、TiDB Self-Managed (TiDB &gt;= v8.4)および[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)のみ利用できます。 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では利用できません。
 
 > **ヒント**
 >
-> 完全な[サンプルコード](https://github.com/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) Jupyter Notebook で表示したり、サンプル コードを[コラボ](https://colab.research.google.com/github/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb)オンライン環境で直接実行したりできます。
+> 完全な[サンプルコード](https://github.com/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) Jupyter Notebook で表示することも、サンプル コードを[コラボ](https://colab.research.google.com/github/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb)オンライン環境で直接実行することもできます。
 
 ## 前提条件 {#prerequisites}
 
 このチュートリアルを完了するには、次のものが必要です。
 
--   [Python 3.8以上](https://www.python.org/downloads/)インストールされました。
--   [ジュピターノートブック](https://jupyter.org/install)インストールされました。
--   [ギット](https://git-scm.com/downloads)インストールされました。
--   TiDB Cloud Serverless クラスター。TiDB Cloud クラスターがない場合は、 [TiDB Cloud Serverless クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って独自のTiDB Cloudクラスターを作成してください。
+-   [Python 3.8以上](https://www.python.org/downloads/)個インストールされました。
+-   [Jupyterノートブック](https://jupyter.org/install)個インストールされました。
+-   [ギット](https://git-scm.com/downloads)個インストールされました。
+-   TiDB Cloud Serverless クラスター。TiDB Cloud クラスターがまだない場合は、 [TiDB Cloud Serverless クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って独自のTiDB Cloudクラスターを作成してください。
 
-## 始める {#get-started}
+## 始めましょう {#get-started}
 
-このセクションでは、TiDB Vector Search を LangChain と統合してセマンティック検索を実行するための手順を段階的に説明します。
+このセクションでは、TiDB Vector Search を LangChain と統合してセマンティック検索を実行する手順を段階的に説明します。
 
 ### ステップ1. 新しいJupyter Notebookファイルを作成する {#step-1-create-a-new-jupyter-notebook-file}
 
-任意のディレクトリに、 `integrate_with_langchain.ipynb`という名前の新しい Jupyter Notebook ファイルを作成します。
+任意のディレクトリに、 `integrate_with_langchain.ipynb`名前の新しい Jupyter Notebook ファイルを作成します。
 
 ```shell
 touch integrate_with_langchain.ipynb
@@ -60,28 +60,28 @@ from langchain_text_splitters import CharacterTextSplitter
 
 クラスター接続文字列を取得し、環境変数を構成するには、次の手順を実行します。
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **接続タイプは**`Public`に設定されています。
-    -   **ブランチは**`main`に設定されています。
-    -   **Connect With は**`SQLAlchemy`に設定されています。
+    -   **接続タイプ**は`Public`に設定されています。
+    -   **ブランチ**は`main`に設定されています。
+    -   **Connect With が**`SQLAlchemy`に設定されています。
     -   **オペレーティング システムは**環境に適合します。
 
 4.  **PyMySQL**タブをクリックし、接続文字列をコピーします。
 
     > **ヒント：**
     >
-    > まだパスワードを設定していない場合は、「**パスワードの生成」**をクリックしてランダムなパスワードを生成します。
+    > まだパスワードを設定していない場合は、 **「パスワードの生成」**をクリックしてランダムなパスワードを生成します。
 
 5.  環境変数を設定します。
 
-    このドキュメントでは、埋め込みモデル プロバイダーとして[オープンAI](https://platform.openai.com/docs/introduction)使用します。この手順では、前の手順で取得した接続文字列と[OpenAI APIキー](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key)指定する必要があります。
+    このドキュメントでは、埋め込みモデルプロバイダーとして[オープンAI](https://platform.openai.com/docs/introduction)使用します。この手順では、前の手順で取得した接続文字列と[OpenAI APIキー](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key)指定する必要があります。
 
-    環境変数を設定するには、次のコードを実行します。接続文字列と OpenAI API キーを入力するよう求められます。
+    環境変数を設定するには、以下のコードを実行します。接続文字列とOpenAI APIキーの入力を求められます。
 
     ```python
     # Use getpass to securely prompt for environment variables in your terminal.
@@ -107,7 +107,7 @@ from langchain_text_splitters import CharacterTextSplitter
 
 #### ステップ4.2 ドキュメントを読み込み、分割する {#step-4-2-load-and-split-the-document}
 
-サンプル ドキュメントを`data/how_to/state_of_the_union.txt`から読み込み、 `CharacterTextSplitter`使用して約 1,000 文字のチャンクに分割します。
+サンプル ドキュメントを`data/how_to/state_of_the_union.txt`から読み込み、 `CharacterTextSplitter`を使用して約 1,000 文字のチャンクに分割します。
 
 ```python
 loader = TextLoader("data/how_to/state_of_the_union.txt")
@@ -116,11 +116,11 @@ text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
 docs = text_splitter.split_documents(documents)
 ```
 
-### ステップ5. ドキュメントベクターを埋め込んで保存する {#step-5-embed-and-store-document-vectors}
+### ステップ5. ドキュメントベクトルを埋め込んで保存する {#step-5-embed-and-store-document-vectors}
 
-TiDBベクトルストアは、ベクトル間の類似性を測定するためにコサイン距離（ `consine` ）とユークリッド距離（ `l2` ）の両方をサポートしています。デフォルトの戦略はコサイン距離です。
+TiDBベクトルストアは、ベクトル間の類似性を測定するために、コサイン距離( `consine` )とユークリッド距離( `l2` )の両方をサポートしています。デフォルトの戦略はコサイン距離です。
 
-次のコードは、ベクトル検索に最適化された`embedded_documents`という名前のテーブルを TiDB に作成します。
+次のコードは、ベクトル検索に最適化された`embedded_documents`名前のテーブルを TiDB に作成します。
 
 ```python
 embeddings = OpenAIEmbeddings()
@@ -137,15 +137,15 @@ vector_store = TiDBVectorStore.from_documents(
 
 ### ステップ6. ベクトル検索を実行する {#step-6-perform-a-vector-search}
 
-このステップでは、ドキュメント`state_of_the_union.txt`から「大統領は Ketanji Brown Jackson について何と言ったか」を照会する方法を示します。
+この手順では、ドキュメント`state_of_the_union.txt`から「大統領はケタンジ ブラウン ジャクソンについて何と言ったか」を照会する方法を示します。
 
 ```python
 query = "What did the president say about Ketanji Brown Jackson"
 ```
 
-#### オプション 1: <code>similarity_search_with_score()</code>を使用する {#option-1-use-code-similarity-search-with-score-code}
+#### オプション1: <code>similarity_search_with_score()</code>を使用する {#option-1-use-code-similarity-search-with-score-code}
 
-`similarity_search_with_score()`メソッドは、ドキュメントとクエリ間のベクトル空間距離を計算します。この距離は、選択された`distance_strategy`によって決定される類似度スコアとして機能します。このメソッドは、スコアが最も低い上位`k`のドキュメントを返します。スコアが低いほど、ドキュメントとクエリ間の類似性が高いことを示します。
+`similarity_search_with_score()`方法は、文書とクエリ間のベクトル空間距離を計算します。この距離は、選択された`distance_strategy`によって決定される類似度スコアとして機能します。この方法は、スコアが最も低い上位`k`文書を返します。スコアが低いほど、文書とクエリの類似度が高いことを示します。
 
 ```python
 docs_with_score = vector_store.similarity_search_with_score(query, k=3)
@@ -201,7 +201,7 @@ First, beat the opioid epidemic.
 
 </details>
 
-#### オプション 2: <code>similarity_search_with_relevance_scores()</code>を使用する {#option-2-use-code-similarity-search-with-relevance-scores-code}
+#### オプション2: <code>similarity_search_with_relevance_scores()</code>を使用する {#option-2-use-code-similarity-search-with-relevance-scores-code}
 
 `similarity_search_with_relevance_scores()`メソッドは、関連性スコアが最も高い上位`k`ドキュメントを返します。スコアが高いほど、ドキュメントとクエリの類似度が高いことを示します。
 
@@ -247,7 +247,7 @@ We’re securing commitments and supporting partners in South and Central Americ
 
 ### レトリーバーとして使用する {#use-as-a-retriever}
 
-Langchain では、 [レトリーバー](https://python.langchain.com/v0.2/docs/concepts/#retrievers)は非構造化クエリに応答してドキュメントを取得するインターフェースであり、ベクター ストアよりも多くの機能を提供します。次のコードは、TiDB ベクター ストアを取得子として使用する方法を示しています。
+Langchainにおいて、 [レトリーバー](https://python.langchain.com/v0.2/docs/concepts/#retrievers)は非構造化クエリへの応答としてドキュメントを取得するインターフェースであり、ベクターストアよりも多くの機能を提供します。以下のコードは、TiDBベクターストアを取得子として使用する方法を示しています。
 
 ```python
 retriever = vector_store.as_retriever(
@@ -287,7 +287,7 @@ vector_store.drop_vectorstore()
 
 ### サポートされているメタデータタイプ {#supported-metadata-types}
 
-TiDB ベクトル ストア内の各ドキュメントは、JSON オブジェクト内のキーと値のペアとして構造化されたメタデータとペアにすることができます。キーは常に文字列ですが、値は次のいずれかの型になります。
+TiDBベクターストア内の各ドキュメントは、JSONオブジェクト内のキーと値のペアとして構造化されたメタデータとペアにすることができます。キーは常に文字列で、値は以下のいずれかの型になります。
 
 -   弦
 -   数値: 整数または浮動小数点数
@@ -302,7 +302,7 @@ TiDB ベクトル ストア内の各ドキュメントは、JSON オブジェク
 }
 ```
 
-### メタデータフィルター構文 {#metadata-filter-syntax}
+### メタデータフィルターの構文 {#metadata-filter-syntax}
 
 利用可能なフィルターは次のとおりです。
 
@@ -385,7 +385,7 @@ vector_store.add_texts(
  UUID('08dcd2ba-9f16-4f29-a9b7-18141f8edae3')]
 ```
 
-メタデータ フィルターを使用して類似性検索を実行します。
+メタデータ フィルターを使用して類似検索を実行します。
 
 ```python
 docs_with_score = vector_store.similarity_search_with_score(
@@ -409,11 +409,11 @@ TiDB Vector offers advanced, high-speed vector processing capabilities, enhancin
 
 ## 高度な使用例: 旅行代理店 {#advanced-usage-example-travel-agent}
 
-このセクションでは、旅行代理店向けにベクトル検索と Langchain を統合するユースケースを紹介します。目標は、顧客向けにパーソナライズされた旅行レポートを作成し、清潔なラウンジやベジタリアン向けのオプションなど、特定のアメニティを備えた空港を見つけやすくすることです。
+このセクションでは、旅行代理店向けにLangchainとベクター検索を統合したユースケースを紹介します。目標は、顧客向けにパーソナライズされた旅行レポートを作成し、清潔なラウンジやベジタリアン向けのオプションなど、特定のアメニティを備えた空港を見つけやすくすることです。
 
 このプロセスには主に 2 つのステップが含まれます。
 
-1.  空港レビュー全体でセマンティック検索を実行し、希望する設備に一致する空港コードを特定します。
+1.  空港のレビュー全体でセマンティック検索を実行し、希望する設備に一致する空港コードを特定します。
 2.  SQL クエリを実行してこれらのコードをルート情報と結合し、ユーザーの好みに一致する航空会社と目的地を強調表示します。
 
 ### データを準備する {#prepare-data}
@@ -508,9 +508,9 @@ Comfortable seating in lounge areas and diverse food selections, including veget
 --------------------------------------------------------------------------------
 ```
 
-### 詳細な空港情報を取得する {#retrieve-detailed-airport-information}
+### 空港の詳細情報を取得する {#retrieve-detailed-airport-information}
 
-検索結果から空港コードを抽出し、詳細なルート情報をデータベースに照会します。
+検索結果から空港コードを抽出し、データベースに問い合わせて詳細なルート情報を取得します。
 
 ```python
 # Extracting airport codes from the metadata
@@ -564,7 +564,7 @@ airport_details.get("result")
 
 ### データをクリーンアップする {#clean-up-data}
 
-最後に、作成したテーブルを削除してリソースをクリーンアップします。
+最後に、作成されたテーブルを削除してリソースをクリーンアップします。
 
 ```python
 vector_store.tidb_vector_client.execute("DROP TABLE airplan_routes")

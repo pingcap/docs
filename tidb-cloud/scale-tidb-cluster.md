@@ -36,7 +36,7 @@ TiDB、TiKV、またはTiFlashノードの数を増減できます。
 
 TiDB、TiKV、またはTiFlashノードの数を変更するには、次の手順を実行します。
 
-1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
 2.  スケーリングするクラスターの行で、 **...**をクリックします。
 
@@ -67,7 +67,7 @@ TiDB、TiKV、またはTiFlashノードの vCPU と RAM を増減できます。
 
 TiDB、TiKV、またはTiFlashノードの vCPU と RAM を変更するには、次の手順を実行します。
 
-1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
 2.  スケーリングするクラスターの行で、 **...**をクリックします。
 
@@ -94,7 +94,7 @@ TiKV またはTiFlashのstorageを増やすことができます。
 
 TiKV またはTiFlashのstorageを変更するには、次の手順を実行します。
 
-1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
 2.  スケーリングするクラスターの行で、 **...**をクリックします。
 

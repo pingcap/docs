@@ -601,12 +601,13 @@
         -   [集計（GROUP BY）関数](/functions-and-operators/aggregate-group-by-functions.md)
         -   [GROUP BY 修飾子](/functions-and-operators/group-by-modifier.md)
         -   [ウィンドウ関数](/functions-and-operators/window-functions.md)
+        -   [シーケンス関数](/functions-and-operators/sequence-functions.md)
+        -   [ユーティリティ関数](/functions-and-operators/utility-functions.md)
         -   [その他の機能](/functions-and-operators/miscellaneous-functions.md)
+        -   [TiDB固有の機能](/functions-and-operators/tidb-functions.md)
         -   [精密計算](/functions-and-operators/precision-math.md)
         -   [集合演算](/functions-and-operators/set-operators.md)
-        -   [シーケンス関数](/functions-and-operators/sequence-functions.md)
         -   [プッシュダウンの式のリスト](/functions-and-operators/expressions-pushed-down.md)
-        -   [TiDB固有の機能](/functions-and-operators/tidb-functions.md)
     -   [クラスター化インデックス](/clustered-indexes.md)
     -   [制約](/constraints.md)
     -   [生成された列](/generated-columns.md)
@@ -617,7 +618,7 @@
         -   [分離レベル](/transaction-isolation-levels.md)
         -   [楽観的トランザクション](/optimistic-transaction.md)
         -   [悲観的な取引](/pessimistic-transaction.md)
-        -   [非トランザクションDMLステートメント](/non-transactional-dml.md)
+        -   [非トランザクションDML文](/non-transactional-dml.md)
     -   [ビュー](/views.md)
     -   [パーティショニング](/partitioned-table.md)
     -   [一時テーブル](/temporary-tables.md)
@@ -829,7 +830,7 @@
         -   接続: IMチケットの作成とサブスクリプションの更新
             -   [Slack 経由でチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
             -   [Larkでチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-lark-ticket-creation.md)
-        -   接続: サポートチケットのIMインタラクション
+        -   接続: サポートチケットの IM 対話
             -   [Slack経由でサポートチケットとやり取りする](/tidb-cloud/connected-slack-ticket-interaction.md)
             -   [Lark経由でサポートチケットとやり取りする](/tidb-cloud/connected-lark-ticket-interaction.md)
     -   [サポートを受ける](/tidb-cloud/tidb-cloud-support.md)

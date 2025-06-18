@@ -1,17 +1,17 @@
 ---
 title: Connect to TiDB with mysql2
-summary: Ruby mysql2 を使用して TiDB に接続する方法を学びます。このチュートリアルでは、mysql2 gem を使用して TiDB で動作する Ruby サンプル コード スニペットを紹介します。
+summary: Ruby mysql2を使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、mysql2 gemを使ってTiDBで動作するRubyのサンプルコードスニペットを紹介します。
 ---
 
 # mysql2でTiDBに接続する {#connect-to-tidb-with-mysql2}
 
-TiDB は MySQL 互換のデータベースであり、Ruby 用の最も人気のある MySQL ドライバーの[マイSQL2](https://github.com/brianmario/mysql2)です。
+TiDB は MySQL 互換のデータベースであり、Ruby 用の最も人気のある MySQL ドライバーの[MySQL2](https://github.com/brianmario/mysql2)です。
 
 このチュートリアルでは、TiDB と mysql2 を使用して次のタスクを実行する方法を学習します。
 
 -   環境を設定します。
 -   mysql2 を使用して TiDB クラスターに接続します。
--   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作用の[サンプルコードスニペット](#sample-code-snippets)見つけることができます。
+-   アプリケーションをビルドして実行します。オプションで、基本的なCRUD操作用の[サンプルコードスニペット](#sample-code-snippets)見つけることもできます。
 
 > **注記：**
 >
@@ -43,11 +43,11 @@ TiDB は MySQL 互換のデータベースであり、Ruby 用の最も人気の
 
 ## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
-このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を示します。
+このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を説明します。
 
 ### ステップ1: サンプルアプリのリポジトリをクローンする {#step-1-clone-the-sample-app-repository}
 
-サンプル コード リポジトリを複製するには、ターミナル ウィンドウで次のコマンドを実行します。
+サンプル コード リポジトリのクローンを作成するには、ターミナル ウィンドウで次のコマンドを実行します。
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-ruby-mysql2-quickstart.git
@@ -79,7 +79,7 @@ bundle add mysql2 dotenv
 <SimpleTab>
 <div label="TiDB Cloud Serverless">
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
@@ -87,7 +87,7 @@ bundle add mysql2 dotenv
 
     -   **接続タイプ**は`Public`に設定されています。
     -   **ブランチ**は`main`に設定されています。
-    -   **Connect With は**`General`に設定されています。
+    -   **Connect With が**`General`に設定されています。
     -   **オペレーティング システムは、**アプリケーションを実行するオペレーティング システムと一致します。
 
 4.  まだパスワードを設定していない場合は、 **「パスワードの生成」**をクリックしてランダムなパスワードを生成します。
@@ -111,22 +111,22 @@ bundle add mysql2 dotenv
 
     > **注記**
     >
-    > TiDB Cloud Serverless の場合、パブリック エンドポイントを使用する場合は、 `DATABASE_ENABLE_SSL`経由で TLS 接続を有効にする**必要があります**。
+    > TiDB Cloud Serverless の場合、パブリック エンドポイントを使用するときは、 `DATABASE_ENABLE_SSL`経由で TLS 接続を有効にする**必要があります**。
 
 7.  `.env`ファイルを保存します。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
+    IP アクセス リストをまだ設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
 
-    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
+    TiDB Cloud Dedicatedは、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPCピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)ご覧ください。
 
 4.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -173,7 +173,7 @@ bundle add mysql2 dotenv
     DATABASE_NAME=test
     ```
 
-    TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
+    TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空になります。
 
 3.  `.env`ファイルを保存します。
 
@@ -205,7 +205,7 @@ ruby app.rb
 
 完全なサンプル コードとその実行方法については、 [tidb-samples/tidb-ruby-mysql2-クイックスタート](https://github.com/tidb-samples/tidb-ruby-mysql2-quickstart)リポジトリを参照してください。
 
-### 接続オプションを使用してTiDBに接続する {#connect-to-tidb-with-connection-options}
+### 接続オプションを使用して TiDB に接続する {#connect-to-tidb-with-connection-options}
 
 次のコードは、環境変数で定義されたオプションを使用して TiDB への接続を確立します。
 
@@ -230,7 +230,7 @@ client = Mysql2::Client.new(options)
 >
 > TiDB Cloud Serverless の場合、パブリック エンドポイントを使用するときは`DATABASE_ENABLE_SSL`で TLS 接続を有効にする**必要があります**が、mysql2 gem はファイルが見つかるまで特定の順序で既存の CA 証明書を検索するため、 `DATABASE_SSL_CA`で SSL CA 証明書を指定する必要は**ありません**。
 
-### データを挿入 {#insert-data}
+### データを挿入する {#insert-data}
 
 次のクエリは、 2 つのフィールドを持つ単一のプレーヤーを作成し、 `last_insert_id`返します。
 
@@ -243,7 +243,7 @@ def create_player(client, coins, goods)
 end
 ```
 
-詳細については[データを挿入](/develop/dev-guide-insert-data.md)を参照してください。
+詳細については[データを挿入する](/develop/dev-guide-insert-data.md)を参照してください。
 
 ### クエリデータ {#query-data}
 
@@ -260,7 +260,7 @@ end
 
 詳細については[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)を参照してください。
 
-### データの更新 {#update-data}
+### データを更新する {#update-data}
 
 次のクエリは、ID によって特定のプレーヤーのレコードを更新しました。
 
@@ -273,7 +273,7 @@ def update_player(client, player_id, inc_coins, inc_goods)
 end
 ```
 
-詳細については[データの更新](/develop/dev-guide-update-data.md)を参照してください。
+詳細については[データを更新する](/develop/dev-guide-update-data.md)を参照してください。
 
 ### データを削除する {#delete-data}
 
@@ -299,24 +299,24 @@ end
 3.  OpenSUSEの場合は`/etc/ssl/ca-bundle.pem`
 4.  macOS または Alpine (docker コンテナ) の場合は`/etc/ssl/cert.pem`
 
-CA 証明書のパスを手動で指定することも可能ですが、異なるマシンや環境では CA 証明書が異なる場所に保存される可能性があるため、複数の環境を展開するシナリオでは大きな不便が生じる可能性があります。したがって、異なる環境間での展開の柔軟性と容易さのために、 `sslca`から`nil`設定することをお勧めします。
+CA証明書のパスを手動で指定することも可能ですが、複数の環境に展開する場合、異なるマシンや環境でCA証明書が異なる場所に保存される可能性があるため、大きな不便が生じる可能性があります。そのため、異なる環境への展開における柔軟性と容易さを確保するため、 `sslca` ～ `nil`設定をお勧めします。
 
 ## 次のステップ {#next-steps}
 
 -   [mysql2のドキュメント](https://github.com/brianmario/mysql2#readme)からの mysql2 ドライバーの使用法について詳しく学びます。
--   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入](/develop/dev-guide-insert-data.md) 、 [データの更新](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
--   プロフェッショナル[TiDB 開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
+-   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
+-   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>
