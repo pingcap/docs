@@ -43,7 +43,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 
 | Flag                    | Description                                                                 | Required | Note                                                 |
 |-------------------------|-----------------------------------------------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | The ID of the cluster to be updated.                                       | Yes      | Only works in non-interactive mode.                  |
+| -c, --cluster-id string | The ID of the cluster.                                       | Yes      | Only works in non-interactive mode.                  |
 | --enabled               | Enable or disable the database audit logging.                              | No       | Only works in non-interactive mode.                  |
 | --unredacted            | Enable or disable data redaction in audit logs.                             | No       | Only works in non-interactive mode.                  |
 | -h, --help              | Shows help information for this command.                                   | No       | Works in both non-interactive and interactive modes. |

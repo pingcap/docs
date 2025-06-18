@@ -25,13 +25,14 @@ Create a filter rule in interactive mode:
 ticloud serverless audit-log filter create
 ```
 
-Create a filter rule which filters all audit logs in non-interactive mode:
+Create a filter rule that captures all audit logs in non-interactive mode:
 
 ```shell
 ticloud serverless audit-log filter create --cluster-id <cluster-id> --name <rule-name> --rule '{"users":["%@%"],"filters":[{}]}'
 ```
 
-Create a filter rule which filters `QUERY` and `EXECUTE` for `test.t` and filters `QUERY` for all tables in non-interactive mode:
+Create a filter rule that filters `QUERY` and `EXECUTE` events for the `test.t` table and filters `QUERY` events for all tables in non-interactive mode:
+
 
 ```shell
 ticloud serverless audit-log filter create --cluster-id <cluster-id> --name <rule-name> --rule '{"users":["%@%"],"filters":[{"classes":["QUERY","EXECUTE"],"tables":["test.t"]},{"classes":["QUERY"]}]}'

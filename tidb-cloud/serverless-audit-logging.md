@@ -13,7 +13,7 @@ TiDB Cloud Serverless provides you with a database audit logging feature to reco
 
 To assess the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to conduct a periodic analysis of the database audit logs.
 
-The audit logging feature is disabled by default. To audit a cluster, you need to enable the audit logging.
+The audit logging feature is disabled by default. To audit a cluster, you need to enable audit logging for it.
 
 ## Enable audit logging
 
@@ -31,7 +31,7 @@ ticloud serverless audit-log config -c <cluster-id> --enabled=false
 
 > **Note:**
 >
-> Only enabling audit logging will not generate audit logs. You need to configure filters to specify what events to log. See [Manage audit logging filter rules](#manage-audit-logging-filter-rules) for more details.
+> Only enabling audit logging will not generate audit logs. You need to configure filters to specify what events to log. For more information, see [Manage audit logging filter rules](#manage-audit-logging-filter-rules).
 
 ## Manage audit logging filter rules
 
@@ -70,7 +70,7 @@ Here is the summary of all event classes in database audit logging:
 
 ### Create a filter rule
 
-To create a filter rule that filters all audit logs, run the following command:
+To create a filter rule that captures all audit logs, run the following command:
 
 ```shell
 ticloud serverless audit-log filter create --cluster-id <cluster-id> --name <rule-name> --rule '{"users":["%@%"],"filters":[{}]}'
@@ -110,7 +110,7 @@ ticloud serverless audit-log filter delete --cluster-id <cluster-id> --name <rul
 
 ### Data redaction
 
-TiDB Cloud Serverless redacts sensitive data in the audit logs by default. For example, the following SQL statement:
+TiDB Cloud Serverless redacts sensitive data in the audit logs by default. Take the following SQL statement as an example:
 
 ```sql 
 INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES (1, 'Alice', '123456');
@@ -128,22 +128,22 @@ If you want to disable redaction, use the [TiDB Cloud CLI](/tidb-cloud/ticloud-a
 ticloud serverless audit-log config --cluster-id <cluster-id> --unredacted
 ```
 
-### Rotation
+### Log file rotation
 
-TiDB Cloud Serverless generates a new audit log file when one of the following conditions is met:
+TiDB Cloud Serverless generates a new audit log file when either of the following conditions is met:
 
-- The audit log file reaches 100 MB.
-- The time interval reaches 1 hour. Note that audit log file generation might be delayed for a few minutes depending on the underlying schedule.
+- The size of the current log file reaches 100 MiB.
+- One hour has passed since the previous log generation. Depending on the internal scheduling mechanism, log generation might be delayed by a few minutes.
 
 > **Note:**
 >
-> The rotation cannot be configured at present. TiDB Cloud Serverless automatically rotates the audit log files based on the preceding conditions.
+> Currently, Log file rotation settings are not configurable. TiDB Cloud Serverless automatically rotates the audit log files based on the preceding conditions.
 
 ## Access audit logging
 
 TiDB Cloud Serverless audit logs are stored as readable text files named `YYYY-MM-DD-<index>.log`.
 
-Currently, audit logs are stored within TiDB Cloudfor 365 days. After this period, logs are automatically deleted.
+Currently, audit logs are stored within TiDB Cloud for 365 days. After this period, logs are automatically deleted.
 
 > **Note:**
 >
@@ -155,13 +155,13 @@ To view and download audit logs, use the [TiDB Cloud CLI](/tidb-cloud/ticloud-au
 ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <output-path> --start-date <start-date> --end-date <end-date>
 ```
 
-- start-date: The start date of the audit log you want to download in the format of `YYYY-MM-DD`, for example `2025-01-01`.
-- end-date: The end date of the audit log you want to download in the format of `YYYY-MM-DD`, for example `2025-01-01`.
+- `start-date`: The start date of the audit log you want to download in the format of `YYYY-MM-DD`, for example `2025-01-01`.
+- `end-date`: The end date of the audit log you want to download in the format of `YYYY-MM-DD`, for example `2025-01-01`.
 
 > **Note:**
 >
-> TiDB Cloud Serverless does not guarantee sequential ordering of audit logs. The log file named `YYYY-MM-DD-<index>.log` may contains the audit logs in previous days.
-> If you want to retrieve all logs from a specific date (for example, January 1, 2025), specify `--start-date 2025-01-01` and `--end-date 2025-01-02` usually works. But under extreme conditions, you may need to download all log files and order by the `TIME` filed.
+> TiDB Cloud Serverless does not guarantee sequential ordering of audit logs. The log file named `YYYY-MM-DD-<index>.log` might contain the audit logs in previous days.
+> If you want to retrieve all logs from a specific date (for example, January 1, 2025), specifying `--start-date 2025-01-01` and `--end-date 2025-01-02` usually works. But under extreme conditions, you might need to download all log files and order them by the `TIME` field.
 
 ## Audit logging fields
 
@@ -175,15 +175,15 @@ All classes of audit logs contain the following information:
 |---------------|-----------------------------------------------------------------------------------------------|
 | ID            | The unique identifier that identifies the audit record of an operation                        |
 | TIME          | The timestamp of the audit record                        |
-| EVENT         | The event classes of the audit record. Multiple event types are separated by commas (,)        |
+| EVENT         | The event classes of the audit record. Multiple event types are separated by commas (`,`)        |
 | USER          | The username of the audit record                                                              |
 | ROLES         | The roles of the user at the time of the operation                                            |
 | CONNECTION_ID | The identifier of the user's connection                                                       |
 | TABLES        | The accessed tables related to this audit record                                              |
-| STATUS_CODE   | The status code of the audit record. `1` means success, `0` means failure                        |
+| STATUS_CODE   | The status code of the audit record. `1` means success, and `0` means failure.                       |
 | KEYSPACE_NAME | The keyspace name of the audit record. |
 | SERVERLESS_TENANT_ID           | The ID of the serverless tenant that the cluster belongs to. |
-| SERVERLESS_TSERVERLESS_PROJECT_ID         | The name of the serverless project that the cluster belongs to. |
+| SERVERLESS_TSERVERLESS_PROJECT_ID         | The ID of the serverless project that the cluster belongs to. |
 | SERVERLESS_CLUSTER_ID          | The ID of the serverless cluster that the audit record belongs to. |
 | REASON        | The error message of the audit record. Only recorded when an error occurs during the operation. |
 
@@ -204,15 +204,15 @@ When the event class is `CONNECTION` or a subclass of `CONNECTION`, the audit lo
 
 | Field           | Description                                                                                   |
 |-----------------|-----------------------------------------------------------------------------------------------|
-| CURRENT_DB      | Name of the current database. When the event classes include DISCONNECT, this information is not recorded. |
-| CONNECTION_TYPE | Type of connection, including Socket, UnixSocket, and SSL/TLS                                 |
-| PID             | Process ID of the current connection                                                          |
-| SERVER_VERSION  | Current version of the connected TiDB server                                                  |
-| SSL_VERSION     | Current version of SSL in use                                                                 |
-| HOST_IP         | Current IP address of the connected TiDB server                                               |
-| HOST_PORT       | Current port of the connected TiDB server                                                     |
-| CLIENT_IP       | Current IP address of the client                                                              |
-| CLIENT_PORT     | Current port of the client                                                                    |
+| CURRENT_DB      | The name of the current database. When the event classes include DISCONNECT, this information is not recorded. |
+| CONNECTION_TYPE | The type of connection, including Socket, UnixSocket, and SSL/TLS.                                 |
+| PID             | The process ID of the current connection.                                                          |
+| SERVER_VERSION  | The current version of the connected TiDB server.                                                  |
+| SSL_VERSION     | The current version of SSL in use.                                                                 |
+| HOST_IP         | The current IP address of the connected TiDB server.                                              |
+| HOST_PORT       | The current port of the connected TiDB server.                                                     |
+| CLIENT_IP       | The current IP address of the client.                                                             |
+| CLIENT_PORT     | The current port of the client.                                                                    |
 
 ### Audit operation information
 
@@ -227,4 +227,4 @@ When the event class is `AUDIT` or a subclass of `AUDIT`, the audit logs contain
 
 - Audit logging is only available via TiDB Cloud CLI. Support for TiDB Cloud console will be available soon.
 - Audit logs can only be stored in TiDB Cloud at present. Support for external storage will be available soon.
-- TiDB Cloud Serverless does not guarantee the sequential order of the audit logs, which means you might have to review all log files to see the latest events. To order the logs, you can use the `TIME` field in the audit logs.
+- TiDB Cloud Serverless does not guarantee the sequential order of audit logs, which means you might have to review all log files to view the latest events. To sort the logs chronologically, you can use the `TIME` field in the audit logs.

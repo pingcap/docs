@@ -39,7 +39,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 |-------------------------|-----------------------------------------------------|----------|------------------------------------------------------|
 | -c, --cluster-id string | The ID of the cluster.                              | Yes      | Only works in non-interactive mode.                  |
 | --name string           | The name of the filter rule.                        | Yes      | Only works in non-interactive mode.                  |
-| --force                 | Delete the filter rule without confirmation.              | No       | Works in both non-interactive and interactive modes. |
+| --force                 | Deletes the filter rule without confirmation.              | No       | Works in both non-interactive and interactive modes. |
 | -h, --help              | Shows help information for this command.            | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
