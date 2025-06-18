@@ -110,17 +110,17 @@ In the left side of the `SET` expression, you can only reference a column name t
 
 ### fileLocation
 
-It specifies where your data files are and which files to import. You may point to a single file or use wildcards to match many files.
+It specifies where your data files are and which files to import. You can point to a single file or use wildcards to match many files.
 
 - Amazon S3 or GCS URI path: for URI configuration details, see [URI Formats of External Storage Services](/external-storage-uri.md).
 
-- TiDB local file path: it must be an absolute path. It is recommended to use a recognized extension (`.csv`, `.sql`, `.parquet`). If the file has no extension, TiDB treats it as CSV. Ensure the specified files exist on the TiDB node where your session is connected, and confirm you have the required `FILE` privilege.
+- TiDB local file path: The path must be absolute. Ensure the specified path and files exist on the TiDB node where your session is connected, and confirm you have the required `FILE` privilege.
 
 > **Note:**
 >
 > If [SEM](/system-variables.md#tidb_enable_enhanced_security) is enabled in the target cluster, the `fileLocation` cannot be specified as a local file path.
 
-In the `fileLocation` parameter, you can specify a single file or use wildcards (`*` and `[` `]`) to match multiple files. Wildcards can be used to match sub-path segments (e.g., a directory level) and filenames. For example, if your files are stored on Amazon S3, you can configure the parameter like this:
+In the `fileLocation` parameter, you can specify a single file or use wildcards (`*` and `[]`) to match multiple files. Wildcards can be used to match sub-path segments (e.g., a directory level) and filenames. For example, if your files are stored on Amazon S3, you can configure the parameter like this:
 
 - Import a single file: `s3://<bucket-name>/path/to/data/foo.csv`
 - Import all files in a specified path: `s3://<bucket-name>/path/to/data/*`
@@ -136,7 +136,7 @@ In the `fileLocation` parameter, you can specify a single file or use wildcards 
 
 ### Format
 
-The `IMPORT INTO` statement supports three data file formats: `CSV`, `SQL`, and `PARQUET`. If the `FORMAT` clause is omitted, TiDB automatically determines the format based on the file’s extension (`.csv`, `.sql`, `.parquet`). Compressed files are supported, and the compression suffix (`.gz`, `.gzip`, `.zstd`, `.zst`, `.snappy`) is ignored when detecting the file format. If the file does not have an extension, TiDB assumes that the file format is `CSV`.
+The `IMPORT INTO` statement supports three data file formats: `CSV`, `SQL`, and `PARQUET`. If the `FORMAT` clause is omitted, TiDB automatically determines the format based on the file's extension (`.csv`, `.sql`, `.parquet`). Compressed files are supported, and the compression suffix (`.gz`, `.gzip`, `.zstd`, `.zst`, `.snappy`) is ignored when detecting the file format. If the file does not have an extension, TiDB assumes that the file format is `CSV`.
 
 ### WithOptions
 
@@ -188,7 +188,7 @@ For TiDB Self-Managed, `IMPORT INTO ... FROM FILE` supports importing data from 
 >
 > - The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
 > - Because TiDB Lightning cannot concurrently decompress a single large compressed file, the size of the compressed file affects the import speed. It is recommended that a source file is no greater than 256 MiB after decompression.
-> - When `FORMAT` is omitted, TiDB first removes one compression suffix from the file name, then inspects the remaining extension to choose `CSV`, or `SQL`.
+> - When `FORMAT` is omitted, TiDB first removes one compression suffix from the file name, then inspects the remaining extension to choose `CSV` or `SQL`.
 
 ### Global Sort
 
