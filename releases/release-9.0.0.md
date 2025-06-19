@@ -429,11 +429,11 @@ The following features are planned for deprecation in future versions:
 
 + TiDB <!--tw@Oreoxmt: 28 notes-->
 
-    - Fix the issue that the `MODIFY COLUMN` statement might fail during TiDB upgrades [#58843](https://github.com/pingcap/tidb/issues/58843) @[D3Hunter](https://github.com/D3Hunter)
-    - Fix the issue that the `DROP COLUMN` statement might fail during TiDB upgrades [#58863](https://github.com/pingcap/tidb/issues/58863) @[D3Hunter](https://github.com/D3Hunter)
+    - Fix the issue that executing the `MODIFY COLUMN` statement might fail during TiDB upgrades [#58843](https://github.com/pingcap/tidb/issues/58843) @[D3Hunter](https://github.com/D3Hunter)
+    - Fix the issue that executing the `DROP COLUMN` statement might fail during TiDB upgrades [#58863](https://github.com/pingcap/tidb/issues/58863) @[D3Hunter](https://github.com/D3Hunter)
     - Fix the issue that data race might occur when dynamically adjusting the number of workers during index creation [#59016](https://github.com/pingcap/tidb/issues/59016) @[D3Hunter](https://github.com/D3Hunter)
-    - Fix the issue that decreasing the number of workers during index creation causes the task to hang [#59267](https://github.com/pingcap/tidb/issues/59267) @[D3Hunter](https://github.com/D3Hunter)
-    - Fix the issue that killing the PD leader during index creation leads to inconsistent index data [#59701](https://github.com/pingcap/tidb/issues/59701) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that decreasing the number of workers during index creation might cause the task to hang [#59267](https://github.com/pingcap/tidb/issues/59267) @[D3Hunter](https://github.com/D3Hunter)
+    - Fix the issue that killing the PD Leader during index creation might lead to inconsistent index data [#59701](https://github.com/pingcap/tidb/issues/59701) @[tangenta](https://github.com/tangenta)
     - Fix the issue that adding a unique index with global sorting might fail [#59725](https://github.com/pingcap/tidb/issues/59725) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - Fix the issue that the `ADMIN SHOW DDL JOBS` statement does not display the row count correctly [#59897](https://github.com/pingcap/tidb/issues/59897) @[tangenta](https://github.com/tangenta)
     - Fix the issue that an error might occur when using `IMPORT INTO ... FROM SELECT` to import data into TiFlash [#58443](https://github.com/pingcap/tidb/issues/58443) @[D3Hunter](https://github.com/D3Hunter)
@@ -449,7 +449,7 @@ The following features are planned for deprecation in future versions:
     - Fix the issue that the Hash Join operator returns incorrect results without reporting an error when execution fails [#59377](https://github.com/pingcap/tidb/issues/59377) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - Fix the issue that the `json_keys` expression returns incorrect results when it has two parameters and the first is of type `JSONTypeCodeArray` [#56788](https://github.com/pingcap/tidb/issues/56788) @[zimulala](https://github.com/zimulala)
     - Fix the potential memory leak issue in the MPP coordinator [#59703](https://github.com/pingcap/tidb/issues/59703) @[yibin87](https://github.com/yibin87)
-    - Fix the issue that TiDB might hang during parallel sorting [#59655](https://github.com/pingcap/tidb/issues/59655) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    - Fix the issue that parallel sorting might hang [#59655](https://github.com/pingcap/tidb/issues/59655) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - (dup): release-7.5.6.md > 错误修复> TiDB - 修复在修改 `tidb_ttl_delete_rate_limit` 时，部分 TTL 任务可能挂起的问题 [#58484](https://github.com/pingcap/tidb/issues/58484) @[lcwangchao](https://github.com/lcwangchao)
     - (dup): release-8.5.1.md > 错误修复> TiDB - 修复查询慢日志时，更改时区导致返回结果错误的问题 [#58452](https://github.com/pingcap/tidb/issues/58452) @[lcwangchao](https://github.com/lcwangchao)
     - (dup): release-6.5.12.md > 错误修复> TiDB - 修复在构造 `IndexMerge` 时可能丢失部分谓词的问题 [#58476](https://github.com/pingcap/tidb/issues/58476) @[hawkingrei](https://github.com/hawkingrei)
@@ -470,7 +470,7 @@ The following features are planned for deprecation in future versions:
     - Fix the issue that TiDB does not exit properly in specific scenarios [#58418](https://github.com/pingcap/tidb/issues/58418) @[tiancaiamao](https://github.com/tiancaiamao)
     - Fix the issue that TiDB might panic when updating Infoschema v2 [#58712](https://github.com/pingcap/tidb/issues/58712) @[tiancaiamao](https://github.com/tiancaiamao)
     - Fix the issue that some gRPC clients cannot connect to the TiDB server status API [#59093](https://github.com/pingcap/tidb/issues/59093) @[iosmanthus](https://github.com/iosmanthus)
-    - Fix the issue that TiDB panics and file leaks occur when using cursors [#59976](https://github.com/pingcap/tidb/issues/59976) [#59963](https://github.com/pingcap/tidb/issues/59963) @[YangKeao](https://github.com/YangKeao)
+    - Fix the potential issue that TiDB panics and file leaks occur when using cursors [#59976](https://github.com/pingcap/tidb/issues/59976) [#59963](https://github.com/pingcap/tidb/issues/59963) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that the `json_search` function does not return `NULL` when the search path is `NULL` during vectorized execution [#59463](https://github.com/pingcap/tidb/issues/59463) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that slow logs cannot be parsed correctly when database or table names contain colons (`:`) [#39940](https://github.com/pingcap/tidb/issues/39940) @[Defined2014](https://github.com/Defined2014)
     - Fix the issue that the `MOD()` function does not support expressions as parameters [#59000](https://github.com/pingcap/tidb/issues/59000) @[Defined2014](https://github.com/Defined2014)
