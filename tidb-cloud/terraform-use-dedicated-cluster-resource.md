@@ -1,11 +1,11 @@
 ---
-title: Use Dedicated Cluster Resource
-summary: Learn how to use the dedicated cluster resource to create and modify a TiDB Cloud Dedicated cluster.
+title: Use TiDB Cloud Dedicated Cluster Resource
+summary: Learn how to use the TiDB Cloud Dedicated cluster resource to create and modify a TiDB Cloud Dedicated cluster.
 ---
 
-# Use Dedicated Cluster Resource
+# Use TiDB Cloud Dedicated Cluster Resource
 
-This document introduces how to manage a TiDB Cloud Dedicated cluster with the `tidbcloud_dedicated_cluster` resource in this document.
+This document introduces how to manage a TiDB Cloud Dedicated cluster with the `tidbcloud_dedicated_cluster` resource.
 
 In addition, you will also learn how to get the necessary information with the `tidbcloud_projects` data source and use `tidbcloud_dedicated_node_group` resource to manage TiDB node groups of your TiDB Cloud Dedicated cluster.
 
@@ -22,7 +22,7 @@ The features of the `tidbcloud_dedicated_cluster` resource include the following
 
 ## Get project IDs using the `tidbcloud_projects` data source
 
-Each TiDB cluster belongs to a project. Before creating a TiDB cluster, you need to obtain the ID of the project where you want to create the cluster. If no `project_id` is specified, the default project will be used.
+Each TiDB Cloud Dedicated cluster belongs to a project. Before creating a TiDB Cloud Dedicated cluster, you need to obtain the ID of the project where you want to create the cluster. If no `project_id` is specified, the default project will be used.
 
 To retrieve the information about all available projects, use the `tidbcloud_projects` data source as follows:
 
@@ -119,16 +119,14 @@ To retrieve the information about all available projects, use the `tidbcloud_pro
 
 Now, you can get all the available projects from the output. Copy one of the project IDs that you need.
 
-## Create a dedicated cluster using the dedicated cluster resource
+## Create a TiDB Cloud Dedicated cluster using the TiDB Cloud Dedicated cluster resource
 
 > **Note:**
 >
 > - Before you begin, make sure that you have set a CIDR in the TiDB Cloud console. For more information, see [Set a CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region). 
 > - You can also [create a `dedicated_network_container` resource](/tidb-cloud/terraform-use-dedicated-network-container-resource.md) to manage your CIDR.
 
-You can create a dedicated cluster using the `tidbcloud_dedicated_cluster` resource.
-
-The following example shows how to create a TiDB Cloud Dedicated cluster.
+You can create a TiDB Cloud Dedicated cluster using the `tidbcloud_dedicated_cluster` resource as follows:
 
 1. Create a directory for the cluster and enter it.
 
@@ -168,10 +166,10 @@ The following example shows how to create a TiDB Cloud Dedicated cluster.
 
     Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
 
-    - To use the dedicated cluster resource, set the resource type as `tidbcloud_dedicated_cluster`.
+    - To use the TiDB Cloud Dedicated cluster resource, set the resource type as `tidbcloud_dedicated_cluster`.
     - For the resource name, you can define it according to your need. For example, `example_cluster`.
     - For the resource details, you can configure them according to the Project ID and the dedicated cluster specification information. 
-    - To get the dedicated cluster specification information, see [tidbcloud_dedicated_cluster (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_cluster).
+    - To get the TiDB Cloud Dedicated cluster specification information, see [tidbcloud_dedicated_cluster (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_cluster).
 
 3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
 
@@ -247,7 +245,7 @@ The following example shows how to create a TiDB Cloud Dedicated cluster.
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-    The creation of a dedicated cluster usually takes at least 10 minutes.
+    It usually takes at least 10 minutes to create a TiDB Cloud Dedicated cluster.
 
 5. Use the `terraform show` or `terraform state show tidbcloud_dedicated_cluster.${resource-name}` command to inspect the state of your resource. The former command shows the states of all resources and data sources.
 
@@ -565,13 +563,13 @@ For a TiDB Cloud Dedicated cluster, you can use Terraform to manage resources as
 
 The `MODIFYING` state indicates that the cluster is being modified. The state will change to `ACTIVE` once the modification is complete.
 
-### Scale a TiDB cluster
+### Scale a TiDB Cloud Dedicated cluster
 
-You can scale a TiDB cluster when its state is `ACTIVE`.
+You can scale a TiDB Cloud Dedicated cluster when its state is `ACTIVE`.
 
 1. In the `cluster.tf` file that is used when you [create the cluster](#create-a-cluster-using-the-cluster-resource), edit the configurations of `tidb_node_setting`, `tikv_node_setting` and `tiflash_node_setting`.
 
-    For example, to add one more TiDB node for TiDB, three more TiKV nodes (the number of TiKV nodes needs to be a multiple of 3, because its scaling step is 3), and one more TiFlash node, you can edit the configurations as follows:
+    For example, to add one more TiDB nodes, three more TiKV nodes (the number of TiKV nodes needs to be a multiple of 3, because its scaling step is 3), and one more TiFlash node, you can edit the configurations as follows:
 
     ```
      tidb_node_setting = {
@@ -1093,9 +1091,9 @@ Import a cluster that is not created by Terraform as follows:
 
 Now you can manage the imported cluster with Terraform.
 
-## Delete a Dedicated cluster
+## Delete a TiDB Cloud Dedicated cluster
 
-To delete a Dedicated cluster, you can delete the configuration of the `tidbcloud_dedicated_cluster` resource, then use the `terraform apply` command to destroy the resource:
+To delete a TiDB Cloud Dedicated cluster, you can delete the configuration of the `tidbcloud_dedicated_cluster` resource, then use the `terraform apply` command to destroy the resource:
 
 ```shell
   $ terraform apply

@@ -1,11 +1,11 @@
 ---
-title: Use Dedicated VPC Peering Resource
-summary: Learn how to use the dedicated VPC peering resource to create and modify a TiDB Cloud dedicated VPC peering.
+title: Use TiDB Cloud Dedicated VPC Peering Resource
+summary: Learn how to use the TiDB Cloud Dedicated VPC peering resource to create and modify a TiDB Cloud dedicated VPC peering.
 ---
 
-# Use Dedicated VPC Peering Resource
+# Use TiDB Cloud Dedicated VPC Peering Resource
 
-This document introduces how to manage a TiDB Cloud dedicated VPC peering with the `tidbcloud_dedicated_vpc_peering` resource in this document.
+This document introduces how to manage a TiDB Cloud dedicated VPC peering with the `tidbcloud_dedicated_vpc_peering` resource.
 
 The features of the `tidbcloud_dedicated_vpc_peering` resource include the following:
 
@@ -15,21 +15,22 @@ The features of the `tidbcloud_dedicated_vpc_peering` resource include the follo
 
 > **Note:**
 >
-> TiDB Cloud Dedicated VPC peering resource can not be modified. If you want to change the configuration of a dedicated VPC peering, you need to delete the existing one and create a new one.
+> TiDB Cloud Dedicated VPC peering resource can not be modified. If you want to change the configuration of a TiDB Cloud Dedicated VPC peering, you need to delete the existing one and then create a new one.
 
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
 
-## Create a dedicated VPC peering using the dedicated VPC peering resource
+## Create a TiDB Cloud Dedicated VPC peering using the TiDB Cloud Dedicated VPC peering resource
 
-You can create a dedicated VPC peering using the `tidbcloud_dedicated_vpc_peering` resource.
+You can create a TiDB Cloud Dedicated VPC peering using the `tidbcloud_dedicated_vpc_peering` resource.
 
-The following example shows how to create a TiDB Cloud dedicated VPC peering.
+The following example shows how to create a TiDB Cloud Dedicated VPC peering.
 
-1. Create a directory for the dedicated VPC peering and enter it.
+1. Create a directory for the TiDB Cloud Dedicated VPC peering and enter it.
 
 2. Create a `vpc_peering.tf` file:
+
     ```
     terraform {
       required_providers {
@@ -55,10 +56,10 @@ The following example shows how to create a TiDB Cloud dedicated VPC peering.
 
     Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
 
-    - To use the dedicated VPC peering resource, set the resource type as `tidbcloud_dedicated_vpc_peering`.
+    - To use the TiDB Cloud Dedicated VPC peering resource, set the resource type as `tidbcloud_dedicated_vpc_peering`.
     - For the resource name, you can define it according to your need. For example, `example`.
     - If you don't know how to get the values of the required arguments, see [Connect to TiDB Cloud Dedicated via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md).
-    - To get the dedicated VPC peering specification information, see [tidbcloud_dedicated_vpc_peering (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_vpc_peering).
+    - To get the TiDB Cloud Dedicated VPC peering specification information, see [tidbcloud_dedicated_vpc_peering (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_vpc_peering).
 
 3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
 
@@ -143,13 +144,13 @@ The following example shows how to create a TiDB Cloud dedicated VPC peering.
     }
     ```
 
-## Import a Dedicated VPC peering
+## Import a TiDB Cloud Dedicated VPC peering
 
-For a TiDB Cloud dedicated VPC peering that is not managed by Terraform, you can use Terraform to manage it just by importing it.
+For a TiDB Cloud Dedicated VPC peering that is not managed by Terraform, you can use Terraform to manage it just by importing it.
 
 For example, you can import a VPC peering that is not created by Terraform.
 
-1. Add an import block for the new dedicated VPC peering resource.
+1. Add an import block for the new TiDB Cloud Dedicated VPC peering resource.
 
     Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,vpc_peering_id`:
 
@@ -162,78 +163,78 @@ For example, you can import a VPC peering that is not created by Terraform.
 
 2. Generate the new configuration file.
 
-Generate the new configuration file for the new dedicated vpc peering resource according to the import block:
+    Generate the new configuration file for the new TiDB Cloud Dedicated vpc peering resource according to the import block:
 
-  ```shell
-  terraform plan -generate-config-out=generated.tf
-  ```
+    ```shell
+    terraform plan -generate-config-out=generated.tf
+    ```
 
-Do not specify an existing `.tf` file name in the preceding command. Otherwise, Terraform will return an error.
+    Do not specify an existing `.tf` file name in the preceding command. Otherwise, Terraform will return an error.
 
-Then the `generated.tf` file is created in the current directory, which contains the configuration of the imported resource.
+    Then the `generated.tf` file is created in the current directory, which contains the configuration of the imported resource.
 
 3. Review and apply the generated configuration.
 
-Review the generated configuration file to ensure it meets your needs. Optionally, you can move the contents of this file to your preferred location.
+    Review the generated configuration file to ensure it meets your needs. Optionally, you can move the contents of this file to your preferred location.
 
-Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
+    Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
 
-  ```shell
-  tidbcloud_dedicated_vpc_peering.example: Importing... [id=aws-1934187953894000000,example]
-  tidbcloud_dedicated_vpc_peering.example: Import complete [id=aws-19341879538940000000,example]
+    ```shell
+    tidbcloud_dedicated_vpc_peering.example: Importing... [id=aws-1934187953894000000,example]
+    tidbcloud_dedicated_vpc_peering.example: Import complete [id=aws-19341879538940000000,example]
 
-  Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
-  ```
+    Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
+    ```
 
-Now you can manage the imported dedicated VPC peering with Terraform.
+Now you can manage the imported TiDB Cloud Dedicated VPC peering with Terraform.
 
-## Delete a Dedicated VPC peering
+## Delete a TiDB Cloud Dedicated VPC peering
 
-To delete a dedicated VPC peering, you can delete the configuration of the `tidbcloud_dedicated_vpc_peering` resource, and then use the `terraform apply` command to destroy the resource:
+To delete a TiDB Cloud Dedicated VPC peering, you can delete the configuration of the `tidbcloud_dedicated_vpc_peering` resource, and then use the `terraform apply` command to destroy the resource:
 
-  ```shell
-    $ terraform apply
-    tidbcloud_dedicated_vpc_peering.example: Refreshing state...
+```shell
+  $ terraform apply
+  tidbcloud_dedicated_vpc_peering.example: Refreshing state...
 
-    Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
-    - destroy
+  Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  - destroy
 
-    Terraform will perform the following actions:
+  Terraform will perform the following actions:
 
-    # tidbcloud_dedicated_vpc_peering.example will be destroyed
-    # (because tidbcloud_dedicated_vpc_peering.example is not in configuration)
-    - resource "tidbcloud_dedicated_vpc_peering" "example" {
-        - aws_vpc_peering_connection_id = "pcx-0b2e5211d48000000" -> null
-        - customer_account_id           = "986330900000" -> null
-        - customer_region_id            = "aws-us-west-2" -> null
-        - customer_vpc_cidr             = "172.16.32.0/21" -> null
-        - customer_vpc_id               = "vpc-0c0c7d59702000000" -> null
-        - labels                        = {
-            - "tidb.cloud/project" = "1372813089187000000"
-            } -> null
-        - project_id                    = "1372813089187000000" -> null
-        - state                         = "ACTIVE" -> null
-        - tidb_cloud_account_id         = "380838000000" -> null
-        - tidb_cloud_cloud_provider     = "aws" -> null
-        - tidb_cloud_region_id          = "aws-us-west-2" -> null
-        - tidb_cloud_vpc_cidr           = "10.250.0.0/16" -> null
-        - tidb_cloud_vpc_id             = "vpc-0b9fa4b78ef000000" -> null
-        - vpc_peering_id                = "aws-1934187953894000000" -> null
-        }
+  # tidbcloud_dedicated_vpc_peering.example will be destroyed
+  # (because tidbcloud_dedicated_vpc_peering.example is not in configuration)
+  - resource "tidbcloud_dedicated_vpc_peering" "example" {
+      - aws_vpc_peering_connection_id = "pcx-0b2e5211d48000000" -> null
+      - customer_account_id           = "986330900000" -> null
+      - customer_region_id            = "aws-us-west-2" -> null
+      - customer_vpc_cidr             = "172.16.32.0/21" -> null
+      - customer_vpc_id               = "vpc-0c0c7d59702000000" -> null
+      - labels                        = {
+          - "tidb.cloud/project" = "1372813089187000000"
+          } -> null
+      - project_id                    = "1372813089187000000" -> null
+      - state                         = "ACTIVE" -> null
+      - tidb_cloud_account_id         = "380838000000" -> null
+      - tidb_cloud_cloud_provider     = "aws" -> null
+      - tidb_cloud_region_id          = "aws-us-west-2" -> null
+      - tidb_cloud_vpc_cidr           = "10.250.0.0/16" -> null
+      - tidb_cloud_vpc_id             = "vpc-0b9fa4b78ef000000" -> null
+      - vpc_peering_id                = "aws-1934187953894000000" -> null
+      }
 
-    Plan: 0 to add, 0 to change, 1 to destroy.
+  Plan: 0 to add, 0 to change, 1 to destroy.
 
-    Do you want to perform these actions?
-    Terraform will perform the actions described above.
-    Only 'yes' will be accepted to approve.
+  Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
 
-    Enter a value: yes
+  Enter a value: yes
 
-    tidbcloud_dedicated_vpc_peering.example: Destroying...
-    tidbcloud_dedicated_vpc_peering.example: Destruction complete after 1s
+  tidbcloud_dedicated_vpc_peering.example: Destroying...
+  tidbcloud_dedicated_vpc_peering.example: Destruction complete after 1s
 
-    Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
-  ```
+  Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
+```
 
 Now, if you run the `terraform show` command, you will get nothing because the resource has been cleared:
 

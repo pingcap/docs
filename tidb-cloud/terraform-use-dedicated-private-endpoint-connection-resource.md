@@ -1,11 +1,11 @@
 ---
-title: Use Dedicated private endpoint connection Resource
-summary: Learn how to use the dedicated private endpoint connection resource to create and modify a TiDB Cloud dedicated private endpoint connection.
+title: Use TiDB Cloud Dedicated Private Endpoint Connection Resource
+summary: Learn how to use the TiDB Cloud Dedicated private endpoint connection resource to create and modify a TiDB Cloud Dedicated private endpoint connection.
 ---
 
-# Use Dedicated Private Endpoint Connection Resource
+# Use TiDB Cloud Dedicated Private Endpoint Connection Resource
 
-This document introduces how to manage a TiDB Cloud dedicated private endpoint connection using the `tidbcloud_dedicated_private_endpoint_connection` resource.
+This document introduces how to manage a TiDB Cloud Dedicated private endpoint connection using the `tidbcloud_dedicated_private_endpoint_connection` resource.
 
 The features of the `tidbcloud_dedicated_private_endpoint_connection` resource include the following:
 
@@ -15,22 +15,23 @@ The features of the `tidbcloud_dedicated_private_endpoint_connection` resource i
 
 > **Note:**
 >
-> TiDB Cloud Dedicated Private Endpoint Connection resource cannot be modified. If you want to modify a dedicated private endpoint connection, you need to delete the existing one. Then, create a new one.
+> TiDB Cloud Dedicated private endpoint connection resource can not be modified. If you want to modify a TiDB Cloud Dedicated private endpoint connection, you need to delete the existing one, and then create a new one.
 
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
-- Create a TiDB Cloud Dedicated cluster. For more information, see [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/terraform-use-dedicated-cluster-resource.md).
+- [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md).
 
-## Create a dedicated private endpoint connection using the dedicated private endpoint connection resource
+## Create a TiDB Cloud Dedicated private endpoint connection using the TiDB Cloud Dedicated private endpoint connection resource
 
-You can create a dedicated private endpoint connection using the `tidbcloud_dedicated_private_endpoint_connection` resource.
+You can create a TiDB Cloud Dedicated private endpoint connection using the `tidbcloud_dedicated_private_endpoint_connection` resource.
 
-The following example shows how to create a TiDB Cloud dedicated private endpoint connection.
+The following example shows how to create a TiDB Cloud Dedicated private endpoint connection.
 
-1. Create a directory for the dedicated private endpoint connection and enter it.
+1. Create a directory for the TiDB Cloud Dedicated private endpoint connection and enter it.
 
 2. Create a `private_endpoint_connection.tf` file:
+
     ```
     terraform {
       required_providers {
@@ -54,10 +55,10 @@ The following example shows how to create a TiDB Cloud dedicated private endpoin
 
     Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
 
-    - To use the dedicated private endpoint connection resource, set the resource type as `tidbcloud_dedicated_private_endpoint_connection`.
-    - For the resource name, you can define it according to your need. For example, `example`.
-    - If you don't know how to get the values of the required arguments, see [Connect to a TiDB Cloud Dedicated Cluster via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md).
-    - To get the dedicated private endpoint connection specification information, see [tidbcloud_private_endpoint_connection (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_private_endpoint_connection).
+    - To use the TiDB Cloud Dedicated private endpoint connection resource, set the resource type as `tidbcloud_dedicated_private_endpoint_connection`.
+    - For the resource name, you can define it as needed. For example, `example`.
+    - If you do not know how to get the values of the required arguments, see [Connect to a TiDB Cloud Dedicated Cluster via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md).
+    - To get the TiDB Cloud Dedicated private endpoint connection specification information, see [tidbcloud_private_endpoint_connection (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_private_endpoint_connection).
 
 3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
 
@@ -143,13 +144,13 @@ The following example shows how to create a TiDB Cloud dedicated private endpoin
     }
     ```
 
-## Import a Dedicated private endpoint connection
+## Import a TiDB Cloud Dedicated private endpoint connection
 
-For a TiDB Cloud dedicated private endpoint connection that is not managed by Terraform, you can use Terraform to manage it just by importing it.
+For a TiDB Cloud Dedicated private endpoint connection that is not managed by Terraform, you can use Terraform to manage it just by importing it.
 
 For a TiDB Cloud Dedicated private endpoint connection that is not managed by Terraform, you can start managing it with Terraform by importing it.
 
-1. Add an import block for the new dedicated private endpoint connection resource.
+1. Add an import block for the new TiDB Cloud Dedicated private endpoint connection resource.
 
     Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,dedicated_private_endpoint_connection_id`:
 
@@ -162,11 +163,11 @@ For a TiDB Cloud Dedicated private endpoint connection that is not managed by Te
 
 2. Generate the new configuration file.
 
-Generate the new configuration file for the new dedicated private endpoint connection resource according to the import block:
+Generate the new configuration file for the new TiDB Cloud Dedicated private endpoint connection resource according to the import block:
 
-  ```shell
-  terraform plan -generate-config-out=generated.tf
-  ```
+    ```shell
+    terraform plan -generate-config-out=generated.tf
+    ```
 
 Do not specify an existing `.tf` file name in the preceding command. Otherwise, Terraform will return an error.
 
@@ -178,62 +179,62 @@ Review the generated configuration file to ensure it meets your needs. Optionall
 
 Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
 
-  ```shell
-  tidbcloud_dedicated_private_endpoint_connection.example: Importing... [id=aws-1934187953894000000,example]
-  tidbcloud_dedicated_private_endpoint_connection.example: Import complete [id=aws-19341879538940000000,example]
+    ```shell
+    tidbcloud_dedicated_private_endpoint_connection.example: Importing... [id=aws-1934187953894000000,example]
+    tidbcloud_dedicated_private_endpoint_connection.example: Import complete [id=aws-19341879538940000000,example]
 
-  Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
-  ```
+    Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
+    ```
 
-Now you can manage the imported dedicated private endpoint connection with Terraform.
+Now you can manage the imported TiDB Cloud Dedicated private endpoint connection with Terraform.
 
-## Delete a Dedicated private endpoint connection
+## Delete a TiDB Cloud Dedicated private endpoint connection
 
-To delete a dedicated private endpoint connection, you can delete the configuration of the `tidbcloud_dedicated_private_endpoint_connection` resource, and then use the `terraform apply` command to destroy the resource:
+To delete a TiDB Cloud Dedicated private endpoint connection, you can delete the configuration of the `tidbcloud_dedicated_private_endpoint_connection` resource, and then use the `terraform apply` command to destroy the resource:
 
-  ```shell
-    $ terraform apply
-    tidbcloud_dedicated_private_endpoint_connection.example: Refreshing state...
+```shell
+  $ terraform apply
+  tidbcloud_dedicated_private_endpoint_connection.example: Refreshing state...
 
-    Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
-    - destroy
+  Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  - destroy
 
-    Terraform will perform the following actions:
+  Terraform will perform the following actions:
 
-    # tidbcloud_dedicated_private_endpoint_connection.example will be destroyed
-    # (because tidbcloud_dedicated_private_endpoint_connection.example is not in configuration)
-    - resource "tidbcloud_dedicated_private_endpoint_connection" "example" {
-        - cloud_provider                 = "aws" -> null
-        - cluster_display_name           = "test-tf" -> null
-        - cluster_id                     = "10757937805044000000" -> null
-        - endpoint_id                    = "vpce-03367e96180000000" -> null
-        - endpoint_state                 = "ACTIVE" -> null
-        - host                           = "privatelink-19341000.ubkypd1sx000.clusters.tidb-cloud.com" -> null
-        - labels                         = {
-            - "tidb.cloud/project" = "1372813089454000000"
-            } -> null
-        - message                        = "The VPC Endpoint Id '{vpce-03367e961805e35b6 []}' does not exist" -> null
-        - node_group_id                  = "1934178998036000000" -> null
-        - port                           = 4000 -> null
-        - private_endpoint_connection_id = "1934214559409000000" -> null
-        - private_link_service_name      = "com.amazonaws.vpce.us-west-2.vpce-svc-07468b31cc9000000" -> null
-        - region_display_name            = "Oregon (us-west-2)" -> null
-        - region_id                      = "aws-us-west-2" -> null
-        }
+  # tidbcloud_dedicated_private_endpoint_connection.example will be destroyed
+  # (because tidbcloud_dedicated_private_endpoint_connection.example is not in configuration)
+  - resource "tidbcloud_dedicated_private_endpoint_connection" "example" {
+      - cloud_provider                 = "aws" -> null
+      - cluster_display_name           = "test-tf" -> null
+      - cluster_id                     = "10757937805044000000" -> null
+      - endpoint_id                    = "vpce-03367e96180000000" -> null
+      - endpoint_state                 = "ACTIVE" -> null
+      - host                           = "privatelink-19341000.ubkypd1sx000.clusters.tidb-cloud.com" -> null
+      - labels                         = {
+          - "tidb.cloud/project" = "1372813089454000000"
+          } -> null
+      - message                        = "The VPC Endpoint Id '{vpce-03367e961805e35b6 []}' does not exist" -> null
+      - node_group_id                  = "1934178998036000000" -> null
+      - port                           = 4000 -> null
+      - private_endpoint_connection_id = "1934214559409000000" -> null
+      - private_link_service_name      = "com.amazonaws.vpce.us-west-2.vpce-svc-07468b31cc9000000" -> null
+      - region_display_name            = "Oregon (us-west-2)" -> null
+      - region_id                      = "aws-us-west-2" -> null
+      }
 
-    Plan: 0 to add, 0 to change, 1 to destroy.
+  Plan: 0 to add, 0 to change, 1 to destroy.
 
-    Do you want to perform these actions?
-    Terraform will perform the actions described above.
-    Only 'yes' will be accepted to approve.
+  Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
 
-    Enter a value: yes
+  Enter a value: yes
 
-    tidbcloud_dedicated_private_endpoint_connection.example: Destroying...
-    tidbcloud_dedicated_private_endpoint_connection.example: Destruction complete after 1s
+  tidbcloud_dedicated_private_endpoint_connection.example: Destroying...
+  tidbcloud_dedicated_private_endpoint_connection.example: Destruction complete after 1s
 
-    Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
-  ```
+  Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
+```
 
 Now, if you run the `terraform show` command, you will get nothing because the resource has been cleared:
 

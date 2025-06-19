@@ -17,7 +17,7 @@ The features of the `tidbcloud_sql_user` resource include the following:
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
-- Create a TiDB Cloud Dedicated or Serverless cluster. For more information, see [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/terraform-use-dedicated-cluster-resource.md) or [Create a TiDB Cloud Serverless Cluster](/tidb-cloud/terraform-use-serverless-cluster-resource.md).
+- [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md) or [a TiDB Cloud Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
 
 ## Create a SQL user using the SQL user resource
 
@@ -28,6 +28,7 @@ The following example shows how to create a TiDB Cloud SQL user.
 1. Create a directory for the SQL user and enter it.
 
 2. Create a `sql_user.tf` file:
+
     ```
     terraform {
       required_providers {
@@ -53,9 +54,9 @@ The following example shows how to create a TiDB Cloud SQL user.
     Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
 
     - To use the SQL user resource, set the resource type as `tidbcloud_sql_user`.
-    - For the resource name, you can define it according to your need. For example, `example`.
-    - For serverless cluster SQL users, the `user_name` and builtin role `role_readonly` and `role_readwrite` should start with user prefix, you can get the user prefix by running the `tidbcloud_serverless_cluster` data source.
-    - To get the SQL user specification information, see [tidbcloud_sql_user (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/sql_user).
+    - For the resource name, you can define it as needed. For example, `example`.
+    - For TiDB Cloud Serverless cluster SQL users, the `user_name` and builtin role `role_readonly` and `role_readwrite` must start with the user prefix, you can get the user prefix by running the `tidbcloud_serverless_cluster` data source.
+    - To get the SQL user specification information, see [`tidbcloud_sql_user` (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/sql_user).
 
 3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
 
@@ -119,7 +120,7 @@ The following example shows how to create a TiDB Cloud SQL user.
       }
     ```
 
-## Modify a TiDB Cloud SQL User
+## Modify a TiDB Cloud SQL user
 
 For a TiDB Cloud SQL user, you can use Terraform to manage SQL user resources as follows:
 
@@ -201,11 +202,11 @@ The `builtin_role` is changed to `role_readonly`. The `password` is not shown be
 
 ## Import a SQL User
 
-For a TiDB Cloud SQL user that is not managed by Terraform, you can use Terraform to manage it just by importing it.
+For a TiDB Cloud SQL user that is not managed by Terraform, you can use Terraform to manage it by importing it.
 
-For example, you can import a SQL user that is not created by Terraform.
+For example, you can import a SQL user that is not created by Terraform as follows:
 
-1. Add an import block for the new dedicated SQL user resource
+1. Add an import block for the new SQL user resource
 
 - Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,user_name`:
 
@@ -217,65 +218,67 @@ For example, you can import a SQL user that is not created by Terraform.
     ```
 2. Generate the new configuration file
 
-Generate the new configuration file for the new SQL user resource according to the import block:
+    Generate the new configuration file for the new SQL user resource according to the import block:
 
-  ```shell
-  terraform plan -generate-config-out=generated.tf
-  ```
+    ```shell
+    terraform plan -generate-config-out=generated.tf
+    ```
 
-Do not specify an existing `.tf` file name in the preceding command. Otherwise, Terraform will return an error.
+    Do not specify an existing `.tf` file name in the preceding command. Otherwise, Terraform will return an error.
 
-Then the `generated.tf` file is created in the current directory, which contains the configuration of the imported resource. But the provider will throw an error because the required argument `password` is not set. You can replace the value of `password` argument to the `tidbcloud_sql_user` resource in the generated configuration file.
+    Then the `generated.tf` file is created in the current directory, which contains the configuration of the imported resource. But the provider will throw an error because the required argument `password` is not set. You can replace the value of `password` argument to the `tidbcloud_sql_user` resource in the generated configuration file.
 
 3. Review and apply the generated configuration
 
-Review the generated configuration file to ensure it meets your needs. Optionally, you can move the contents of this file to your preferred location.
+    Review the generated configuration file to ensure it meets your needs. Optionally, you can move the contents of this file to your preferred location.
 
-Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
+    Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
 
-  ```shell
-  tidbcloud_sql_user.example: Importing... [id=10423692645600000000,example_user]
-  tidbcloud_sql_user.example: Import complete [id=10423692645600000000,example_user]
+    ```shell
+    tidbcloud_sql_user.example: Importing... [id=10423692645600000000,example_user]
+    tidbcloud_sql_user.example: Import complete [id=10423692645600000000,example_user]
 
-  Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
-  ```
+    Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
+    ```
 
 Now you can manage the imported SQL user with Terraform.
 
 ## Delete a SQL User
 
 To delete a SQL user, you can delete the configuration of the `tidbcloud_sql_user` resource, then use the `terraform apply` command to destroy the resource:
-  ```shell
-    $ terraform apply
-    tidbcloud_sql_user.example: Refreshing state...
 
-    Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
-      - destroy
+```shell
+  $ terraform apply
+  tidbcloud_sql_user.example: Refreshing state...
 
-    Terraform will perform the following actions:
+  Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+    - destroy
 
-      # tidbcloud_sql_user.example will be destroyed
-      # (because tidbcloud_sql_user.example is not in configuration)
-      - resource "tidbcloud_sql_user" "example" {
-          - builtin_role = "role_readonly" -> null
-          - cluster_id   = "10423692645600000000" -> null
-          - password     = (sensitive value) -> null
-          - user_name    = "example_user" -> null
-        }
+  Terraform will perform the following actions:
 
-    Plan: 0 to add, 0 to change, 1 to destroy.
+    # tidbcloud_sql_user.example will be destroyed
+    # (because tidbcloud_sql_user.example is not in configuration)
+    - resource "tidbcloud_sql_user" "example" {
+        - builtin_role = "role_readonly" -> null
+        - cluster_id   = "10423692645600000000" -> null
+        - password     = (sensitive value) -> null
+        - user_name    = "example_user" -> null
+      }
 
-    Do you want to perform these actions?
-      Terraform will perform the actions described above.
-      Only 'yes' will be accepted to approve.
+  Plan: 0 to add, 0 to change, 1 to destroy.
 
-      Enter a value: yes
+  Do you want to perform these actions?
+    Terraform will perform the actions described above.
+    Only 'yes' will be accepted to approve.
 
-    tidbcloud_sql_user.example: Destroying...
-    tidbcloud_sql_user.example: Destruction complete after 3s
+    Enter a value: yes
 
-    Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
-  ```
+  tidbcloud_sql_user.example: Destroying...
+  tidbcloud_sql_user.example: Destruction complete after 3s
+
+  Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
+```
+
 Now, if you run the `terraform show` command, you will get nothing because the resource has been cleared:
 
 ```

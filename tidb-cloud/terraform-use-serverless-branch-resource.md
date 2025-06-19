@@ -1,9 +1,9 @@
 ---
-title: Use Serverless Branch Resource
+title: Use TiDB Cloud Serverless Branch Resource
 summary: Learn how to use the serverless branch resource to create and modify a TiDB Cloud Serverless branch.
 ---
 
-# Use Serverless Branch Resource
+# Use TiDB Cloud Serverless Branch Resource
 
 This document introduces how to manage a TiDB Cloud Serverless branch using the `tidbcloud_serverless_branch` resource.
 
@@ -20,11 +20,11 @@ The features of the `tidbcloud_serverless_branch` resource include the following
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
-- Create a TiDB Cloud Serverless cluster. For more information, see [Create a TiDB Cloud Serverless Cluster](/tidb-cloud/terraform-use-serverless-cluster-resource.md).
+- [Create a TiDB Cloud Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
 
-## Create a serverless branch using the serverless branch resource
+## Create a TiDB Cloud Serverless branch using the TiDB Cloud Serverless branch resource
 
-You can create a serverless branch using the `tidbcloud_serverless_branch` resource.
+You can create a TiDB Cloud Serverless branch using the `tidbcloud_serverless_branch` resource.
 
 The following example shows how to create a TiDB Cloud Serverless branch.
 
@@ -158,11 +158,11 @@ The following example shows how to create a TiDB Cloud Serverless branch.
     }
     ```
 
-## Import a Serverless branch
+## Import a TiDB Cloud Serverless branch
 
 For a TiDB Serverless branch that is not managed by Terraform, you can use Terraform to manage it just by importing it.
 
-Import a Serverless branch that is not created by Terraform as follows:
+Import a TiDB Cloud Serverless branch that is not created by Terraform as follows:
 
 1. Add an import block for the new TiDB Cloud Serverless branch resource.
 
@@ -177,7 +177,7 @@ Import a Serverless branch that is not created by Terraform as follows:
 
 2. Generate the new configuration file.
 
-    Generate the new configuration file for the new serverless branch resource according to the import block:
+    Generate the new configuration file for the new TiDB Cloud Serverless branch resource according to the import block:
 
       ```shell
       terraform plan -generate-config-out=generated.tf
@@ -200,9 +200,9 @@ Import a Serverless branch that is not created by Terraform as follows:
 
 Now you can manage the imported branch with Terraform.
 
-## Delete a Serverless branch
+## Delete a TiDB Cloud Serverless branch
 
-To delete a Serverless branch, you can delete the configuration of the `tidbcloud_serverless_branch` resource, then use the `terraform apply` command to destroy the resource:
+To delete a TiDB Cloud Serverless branch, you can delete the configuration of the `tidbcloud_serverless_branch` resource, then use the `terraform apply` command to destroy the resource:
 
 ```shell
 $ terraform apply

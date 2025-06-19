@@ -21,9 +21,9 @@ The features of the `tidbcloud_dedicated_network_container` resource include the
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
 
-## Create a TiDB Cloud Dedicated network container using the dedicated network container resource
+## Create a TiDB Cloud Dedicated network container using the TiDB Cloud Dedicated network container resource
 
-You can create a dedicated network container using the `tidbcloud_dedicated_network_container` resource.
+You can create a TiDB Cloud Dedicated network container using the `tidbcloud_dedicated_network_container` resource.
 
 The following example shows how to create a TiDB Cloud Dedicated network container.
 
@@ -152,7 +152,7 @@ For example, you can import a network container that is not created by Terraform
 
 2. Generate the new configuration file.
 
-    Generate the new configuration file for the new dedicated vpc peering resource according to the import block:
+    Generate the new configuration file for the new TiDB Cloud Dedicated vpc peering resource according to the import block:
 
     ```shell
     terraform plan -generate-config-out=generated.tf
@@ -175,9 +175,9 @@ For example, you can import a network container that is not created by Terraform
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```
 
-Now you can manage the imported dedicated network container with Terraform.
+Now you can manage the imported TiDB Cloud Dedicated network container with Terraform.
 
-## Delete a Dedicated network container
+## Delete a TiDB Cloud Dedicated network container
 
 To delete a TiDB Cloud Dedicated cluster, you can delete the configuration of the `tidbcloud_dedicated_cluster` resource, then use the `terraform apply` command to destroy the resource. However, you must ensure that the status of the TiDB Cloud Dedicated network container is not `ACTIVE`. If it is `ACTIVE`, you cannot delete it.
 
