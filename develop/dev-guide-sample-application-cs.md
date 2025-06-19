@@ -1,0 +1,124 @@
+---
+title: Connect to TiDB with C#
+summary: Learn how to connect to TiDB using C#. This tutorial gives C# sample code snippets that work with TiDB.
+aliases: ['/tidb/dev/sample-application-cs','/tidb/dev/dev-guide-sample-application-cs']
+---
+
+# Connect to TiDB with C#
+
+C# (a.k.a. C-Sharp) is one of the languages from the .NET family as created by Microsoft. Other languages for .NET are VB.NET and F#. In this tutorial we will use C# and the MySQL Connector/NET to connect from a C# application to TiDB over the MySQL protocol. This is possible because TiDB is highly [compatible with MySQL](/mysql-compatibility.md).
+
+While .NET is often used on Windows, it is also available for macOS and Linux. For all platforms the commands and the
+code are similar. There may be small differences in the prompt and file paths.
+
+## Prerequisites
+
+The .NET 9.0 SDK, which can be downloaded from https://dotnet.microsoft.com/en-us/download
+
+This tutorial will use the commandline `dotnet` command. It is also possible to use the VS Code IDE to work with C# code.
+
+And you will need a TiDB cluster. This can be a serverless or dedicated instance on TiDB Cloud or a self managed instance, for example with `tiup playground`.
+
+## Step 1. Setup a console project
+
+Create a new project with the `console` template. This will create a new directory called `tidb_cs`. Either switch to where you want this directory to be created or specify a full path.
+
+```
+$ dotnet new console -o tidb_cs
+The template "Console App" was created successfully.
+
+Processing post-creation actions...
+Restoring /home/dvaneeden/tidb_cs/tidb_cs.csproj:
+Restore succeeded.
+```
+
+## Step 2. Add the MySql.Data package
+
+The package manager for .NET is called nuget. The nuget package name for MySQL Connector/NET is [MySql.Data](https://www.nuget.org/packages/MySql.Data). This brings support for the MySQL protocol to .NET. As we don't specify a version we get the latest version, which is 9.3.0 at the moment.
+
+```
+$ cd tidb_cs
+$ dotnet add package MySql.Data
+
+Build succeeded in 1.0s
+info : X.509 certificate chain validation will use the system certificate bundle at '/etc/pki/ca-trust/extracted/pem/objsign-ca-bundle.pem'.
+info : X.509 certificate chain validation will use the fallback certificate bundle at '/usr/lib64/dotnet/sdk/9.0.106/trustedroots/timestampctl.pem'.
+info : Adding PackageReference for package 'MySql.Data' into project '/home/dvaneeden/tidb_cs/tidb_cs.csproj'.
+info :   GET https://api.nuget.org/v3/registration5-gz-semver2/mysql.data/index.json
+info :   OK https://api.nuget.org/v3/registration5-gz-semver2/mysql.data/index.json 133ms
+info : Restoring packages for /home/dvaneeden/tidb_cs/tidb_cs.csproj...
+info :   GET https://api.nuget.org/v3/vulnerabilities/index.json
+info :   OK https://api.nuget.org/v3/vulnerabilities/index.json 98ms
+info :   GET https://api.nuget.org/v3-vulnerabilities/2025.06.18.05.40.02/vulnerability.base.json
+info :   GET https://api.nuget.org/v3-vulnerabilities/2025.06.18.05.40.02/2025.06.19.11.40.05/vulnerability.update.json
+info :   OK https://api.nuget.org/v3-vulnerabilities/2025.06.18.05.40.02/vulnerability.base.json 32ms
+info :   OK https://api.nuget.org/v3-vulnerabilities/2025.06.18.05.40.02/2025.06.19.11.40.05/vulnerability.update.json 64ms
+info : Package 'MySql.Data' is compatible with all the specified frameworks in project '/home/dvaneeden/tidb_cs/tidb_cs.csproj'.
+info : PackageReference for package 'MySql.Data' version '9.3.0' added to file '/home/dvaneeden/tidb_cs/tidb_cs.csproj'.
+info : Generating MSBuild file /home/dvaneeden/tidb_cs/obj/tidb_cs.csproj.nuget.g.targets.
+info : Writing assets file to disk. Path: /home/dvaneeden/tidb_cs/obj/project.assets.json
+log  : Restored /home/dvaneeden/tidb_cs/tidb_cs.csproj (in 551 ms).
+```
+
+## Step 3. Update the code
+
+Replace the "Hello World" example in `Program.cs` with the following code.
+
+```cs
+using MySql.Data.MySqlClient;
+public class Tutorial1
+{
+    public static void Main()
+    {
+        string connStr = "server=127.0.0.1;user=root;database=test;port=4000";
+        MySqlConnection conn = new MySqlConnection(connStr);
+        try
+        {
+            Console.WriteLine("Connecting to TiDB...\n");
+            conn.Open();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+        }
+
+        Console.WriteLine("Connected to: " + conn.ServerVersion);
+
+        MySqlCommand cmd = new MySqlCommand("SELECT TIDB_VERSION()", conn);
+
+        MySqlDataReader rdr = cmd.ExecuteReader();
+
+        rdr.Read();
+        Console.WriteLine("\nVersion details:\n" + rdr[0]);
+        rdr.Close();
+
+        conn.Close();
+        Console.WriteLine("Done.");
+    }
+}
+```
+
+This connects to a TiDB instance on the specified IP and port. If you use TiDB Cloud you should replace this with the hostname and user that is in the TiDB Cloud Console.
+
+What the code does is to connect to the database and print the version of the database. Then it runs a SQL query to get more version details by using [`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version) and then it prints the result.
+
+## Step 4. Run the program
+
+```
+$ dotnet run
+Connecting to TiDB...
+
+Connected to: 8.0.11-TiDB-v8.5.2
+
+Version details:
+Release Version: v8.5.2
+Edition: Community
+Git Commit Hash: f43a13324440f92209e2a9f04c0bbe9cf763978d
+Git Branch: HEAD
+UTC Build Time: 2025-05-29 03:30:55
+GoVersion: go1.23.8
+Race Enabled: false
+Check Table Before Drop: false
+Store: tikv
+Done.
+```
