@@ -525,8 +525,8 @@ The following features are planned for deprecation in future versions:
 
     - Fix the issue that TiFlash returns incorrect results when processing `IN(Timestamp)` or `IN(Time)` expressions with time zones [#9778](https://github.com/pingcap/tiflash/issues/9778) @[solotzg](https://github.com/solotzg)
     - Fix the issue that TiFlash behaves differently from TiDB when handling overflow errors, causing the execution failures of `IMPORT INTO` statements [#9752](https://github.com/pingcap/tiflash/issues/9752) @[guo-shaoge](https://github.com/guo-shaoge)
-    - Fix the memory leak issue that occurs when TiFlash executes `Aggregation Window Function` [#9930](https://github.com/pingcap/tiflash/issues/9930) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    - Fix the null pointer issue that might occur when TiFlash executes `Aggregation Window Function` [#9964](https://github.com/pingcap/tiflash/issues/9964) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    - Fix the memory leak issue that occurs when TiFlash executes aggregate functions used as window functions [#9930](https://github.com/pingcap/tiflash/issues/9930) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    - Fix the null pointer issue that might occur when TiFlash executes aggregate functions used as window functions [#9964](https://github.com/pingcap/tiflash/issues/9964) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - (dup): release-7.5.6.md > 错误修复> TiFlash - 修复 TiFlash 在内存占用较低的情况下，可能意外拒绝处理 Raft 消息的问题 [#9745](https://github.com/pingcap/tiflash/issues/9745) @[CalvinNeo](https://github.com/CalvinNeo)
     - (dup): release-7.5.6.md > 错误修复> TiFlash - 修复在分区表上执行 `ALTER TABLE ... RENAME COLUMN` 后，查询该表可能报错的问题 [#9787](https://github.com/pingcap/tiflash/issues/9787) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - (dup): release-6.5.12.md > 错误修复> TiFlash - 修复在导入大量数据后，TiFlash 可能持续占用较高内存的问题 [#9812](https://github.com/pingcap/tiflash/issues/9812) @[CalvinNeo](https://github.com/CalvinNeo)
