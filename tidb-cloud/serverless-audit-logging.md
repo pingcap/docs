@@ -43,7 +43,7 @@ The filter rule contains the following fields:
 - `filters`: A list of filter objects. Each filter object can contain the following fields:
 
     - `classes`: A list of event classes to filter audit events. For example, `["QUERY", "EXECUTE"]`.
-    - `tables`: A list of table filters. See [Table filters](https://docs.pingcap.com/tidb/stable/table-filter/) for more details.
+    - `tables`: A list of table filters. For more information, see [Table filters].
     - `statusCodes`: A list of status codes to filter audit events. `1` means success, `0` means failure.
 
 Here is the summary of all event classes in database audit logging:
