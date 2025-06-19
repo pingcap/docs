@@ -409,6 +409,7 @@ The following features are planned for deprecation in future versions:
         - Update the list of unrecoverable system tables [#52530](https://github.com/pingcap/tidb/issues/52530) @[Leavrth](https://github.com/Leavrth)
         - Improve the index restore speed during PITR by repairing indexes concurrently [#59158](https://github.com/pingcap/tidb/issues/59158) @[Leavrth](https://github.com/Leavrth)
         - Support ignoring specific locks during backup scanning to improve backup efficiency [#53224](https://github.com/pingcap/tidb/issues/53224) @[3pointer](https://github.com/3pointer)
+        - Remove the check on AWS region names to avoid backup errors caused by newly supported AWS regions failing the validation [#18159](https://github.com/tikv/tikv/issues/18159) @[3pointer](https://github.com/3pointer)
 
     + TiCDC <!--tw@qiancai: 2 notes-->
 
@@ -422,9 +423,7 @@ The following features are planned for deprecation in future versions:
     + TiDB Lightning
 
         - (dup): release-6.5.12.md > 改进提升> Tools> TiDB Lightning - 在解析 CSV 文件时，新增行宽检查以防止 OOM 问题 [#58590](https://github.com/pingcap/tidb/issues/58590) @[D3Hunter](https://github.com/D3Hunter)
-    + Backup & Restore (BR)
 
-        - Remove the check on AWS region names to avoid backup errors caused by newly supported AWS regions failing the validation [#18159](https://github.com/tikv/tikv/issues/18159) @[3pointer](https://github.com/3pointer)
 
 ## Bug fixes
 
