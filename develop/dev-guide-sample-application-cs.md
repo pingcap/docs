@@ -6,7 +6,7 @@ aliases: ['/tidb/dev/sample-application-cs','/tidb/dev/dev-guide-sample-applicat
 
 # Connect to TiDB with C\#
 
-C# (a.k.a. C-Sharp) is one of the languages from the .NET family as created by Microsoft. Other languages for .NET are VB.NET and F#. In this tutorial we will use C# and the MySQL Connector/NET to connect from a C# application to TiDB over the MySQL protocol. This is possible because TiDB is highly [compatible with MySQL](/mysql-compatibility.md).
+C# (a.k.a. C-Sharp) is one of the languages from the .NET family created by Microsoft. Other languages for .NET are VB.NET and F#. In this tutorial, you will use C# and the MySQL Connector/NET to connect from a C# application to TiDB over the MySQL protocol. This is possible because TiDB is highly [compatible with MySQL](/mysql-compatibility.md).
 
 While .NET is often used on Windows, it is also available for macOS and Linux. For all platforms the commands and the code are similar. There may be small differences in the prompt and file paths.
 
@@ -14,11 +14,11 @@ While .NET is often used on Windows, it is also available for macOS and Linux. F
 
 The .NET 9.0 SDK, which can be downloaded from <https://dotnet.microsoft.com/en-us/download>.
 
-This tutorial will use the commandline `dotnet` command. It is also possible to use the VS Code IDE to work with C# code.
+This tutorial will use the command-line `dotnet` command. It is also possible to use the VS Code IDE to work with C# code.
 
-And you will need a TiDB cluster. This can be a serverless or dedicated instance on TiDB Cloud or a self managed instance, for example with `tiup playground`.
+And you will need a TiDB cluster. This can be a serverless or dedicated instance on TiDB Cloud or a self-managed instance, for example with `tiup playground`.
 
-## Step 1. Setup a console project
+## Step 1. Set up a console project
 
 Create a new project with the `console` template. This will create a new directory called `tidb_cs`. Either switch to where you want this directory to be created or specify a full path.
 
@@ -33,7 +33,7 @@ Restore succeeded.
 
 ## Step 2. Add the MySql.Data package
 
-The package manager for .NET is called nuget. The nuget package name for MySQL Connector/NET is [MySql.Data](https://www.nuget.org/packages/MySql.Data). This brings support for the MySQL protocol to .NET. As we don't specify a version we get the latest version, which is 9.3.0 at the moment.
+The package manager for .NET is called NuGet. The NuGet package name for MySQL Connector/NET is [MySql.Data](https://www.nuget.org/packages/MySql.Data). This brings support for the MySQL protocol to .NET. If you do not specify a version, you get the latest stable version (which is 9.3.0 at the time of writing).
 
 ```
 $ cd tidb_cs
@@ -97,9 +97,9 @@ public class Tutorial1
 }
 ```
 
-This connects to a TiDB instance on the specified IP and port. If you use TiDB Cloud you should replace this with the hostname and user that is in the TiDB Cloud Console.
+This connects to a TiDB instance on the specified IP and port. If you use TiDB Cloud, replace connection string parameters (such as hostname, port, user, and password) with the details provided in the TiDB Cloud console.
 
-What the code does is to connect to the database and print the version of the database. Then it runs a SQL query to get more version details by using [`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version) and then it prints the result.
+The code connects to the database, prints its version, then executes a SQL query using [`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version) to retrieve more detailed version information, and finally prints this result.
 
 ## Step 4. Run the program
 
