@@ -312,7 +312,7 @@ Configuration items related to scheduling
 + Controls the time interval between the `split` and `merge` operations on the same Region. That means a newly split Region will not be merged for a while.
 + Default value: `1h`
 
-### `max-movable-hot-peer-size` <span class="version-mark">New in v7.5.0</span>
+### `max-movable-hot-peer-size` <span class="version-mark">New in v6.1.0</span>
 
 + Controls the maximum Region size that can be scheduled for hot Region scheduling.
 + Default value: `512`
