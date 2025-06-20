@@ -44,6 +44,7 @@ SET GLOBAL tidb_enable_non_prepared_plan_cache=on;
 SET GLOBAL tidb_ignore_prepared_cache_close_stmt=on;
 SET GLOBAL tidb_analyze_column_options='ALL';
 SET GLOBAL tidb_stats_load_sync_wait=2000;
+SET GLOBAL tidb_opt_limit_push_down_threshold=10000;
 SET GLOBAL tidb_opt_derive_topn=on;
 SET GLOBAL tidb_runtime_filter_mode=LOCAL;
 SET GLOBAL tidb_opt_enable_mpp_shared_cte_execution=on;
@@ -62,6 +63,7 @@ The following table outlines the impact of specific system variable configuratio
 | [`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600)| Cache plans for applications that use prepared statements but close the plan after each execution. | N/A |
 | [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)| Collect statistics for all columns to avoid suboptimal execution plans due to missing column statistics. By default, TiDB only collects statistics for [predicate columns](/statistics.md#collect-statistics-on-some-columns). | Setting this variable to `'ALL'` can cause more resource usage for the `ANALYZE TABLE` operation compared with the default value `'PREDICATE'`. |
 | [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)| Increase the timeout for synchronously loading statistics from the default 100 milliseconds to 2 seconds. This ensures TiDB loads the necessary statistics before query compilation. | Increasing this value leads to a longer synchronization wait time before query compilation. |
+| [`tidb_opt_limit_push_down_threshold`](/system-variables.md#tidb_opt_limit_push_down_threshold)| Increase the threshold that determines whether to push the `Limit` or `TopN` operator down to TiKV. | When multiple index options exist, increasing this variable will make the optimizer favor indexes, which can optimize the `ORDER BY` and `Limit`. |
 | [`tidb_opt_derive_topn`](/system-variables.md#tidb_opt_derive_topn-new-in-v700)| Enable the optimization rule of [Deriving TopN or Limit from window functions](/derive-topn-from-window.md). | This is limited to the `ROW_NUMBER()` window function. | 
 | [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720)| Enable [Runtime Filter](/runtime-filter.md#runtime-filter-mode) in the local mode to improve hash join efficiency. | The variable is introduced in v7.2.0 and is disabled by default for safety. | 
 | [`tidb_opt_enable_mpp_shared_cte_execution`](/system-variables.md#tidb_opt_enable_mpp_shared_cte_execution-new-in-v720)| Enable non-recursive [Common Table Expressions (CTE)](/sql-statements/sql-statement-with.md) pushdown to TiFlash. | This is an experimental feature. | 
@@ -104,9 +106,8 @@ blob-file-compression = "zstd"
 [storage]
 scheduler-pending-write-threshold = "512MiB"
 [storage.flow-control]
-l0-files-threshold = 60
-soft-pending-compaction-bytes-limit = "1TiB"
-hard-pending-compaction-bytes-limit = "2TiB"
+l0-files-threshold = 50
+soft-pending-compaction-bytes-limit = "512GiB"
 ```
 
 | Configuration item | Description | Note |
@@ -117,7 +118,7 @@ hard-pending-compaction-bytes-limit = "2TiB"
 | [`rocksdb.titan`](/tikv-configuration-file.md#rocksdbtitan), [`rocksdb.defaultcf.titan`](/tikv-configuration-file.md#rocksdbdefaultcftitan), [`min-blob-size`](/tikv-configuration-file.md#min-blob-size), and [`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression) | Enable the Titan storage engine to reduce write amplification and alleviate disk I/O bottlenecks. Particularly useful when RocksDB compaction cannot keep up with write workloads, resulting in accumulated pending compaction bytes. | Enable it when write amplification is the primary bottleneck. Trade-offs include: 1. Potential performance impact on primary key range scans. 2. Increased space amplification (up to 2x in the worst case). 3. Additional memory usage for blob cache. |
 | [`storage.scheduler-pending-write-threshold`](/tikv-configuration-file.md#scheduler-pending-write-threshold) | Set the maximum size of the write queue in TiKV's scheduler. When the total size of pending write tasks exceeds this threshold, TiKV returns a `Server Is Busy` error for new write requests. | The default value is `100MiB`. In scenarios with high write concurrency or temporary write spikes, increasing this threshold (for example, to `512MiB`) can help accommodate the load. However, if the write queue continues to accumulate and exceeds this threshold persistently, it might indicate underlying performance issues that require further investigation. |
 | [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold) | Control when write flow control is triggered based on the number of kvDB L0 files. Increasing the threshold reduces write stalls during high write workloads. | Higher thresholds might lead to more aggressive compactions when many L0 files exist. |
-| [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) and [`storage.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit) | Define thresholds for pending compaction bytes to manage write flow control. The soft limit triggers partial write rejections, while the hard limit results in full write rejections when exceeded. | The default soft limit is `192GiB`, and the hard limit is `256GiB`. In write-intensive scenarios, if compaction processes cannot keep up, pending compaction bytes accumulate, potentially triggering flow control. Adjusting these limits can provide more buffer space, but persistent accumulation indicates underlying issues that require further investigation. |
+| [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) | Define thresholds for pending compaction bytes to manage write flow control. The soft limit triggers partial write rejections. | The default soft limit is `192GiB`. In write-intensive scenarios, if compaction processes cannot keep up, pending compaction bytes accumulate, potentially triggering flow control. Adjusting the limit can provide more buffer space, but persistent accumulation indicates underlying issues that require further investigation. |
 
 Note that the compaction and flow control configuration adjustments outlined in the preceding table are tailored for TiKV deployments on instances with the following specifications:
 
