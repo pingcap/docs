@@ -144,11 +144,11 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 
 ### Log file classification
 
-With `--include=log.<type>` and `--include=log.<type>` you can configure what logs to collect.
+You can use the `--include=log.<type>` parameter to specify which types of logs to collect.
 
-Log types
+Log types:
 
-- `std`: Logfiles that contain `stderr` in the name.
-- `rocksdb`: Logfiles that have a `rocksdb` prefix and a `.info` suffix.
+- `std`: Log files that contain `stderr` in the filename.
+- `rocksdb`: Log files with a `rocksdb` prefix and a `.info` suffix.
 - `slow`: Slow query log files.
-- `unknown`: Logs not matching any of the other types.
+- `unknown`: Log files that do not match any of the preceding types.
