@@ -4,19 +4,18 @@ summary: Learn how to enable or disable user-controlled log redaction for TiDB C
 ---
 
 # User-Controlled Log Redaction
-User-controlled Log Redaction allows you to manage the visibility of sensitive data in your TiDB Cloud Dedicated cluster's logs by toggling a redaction feature that protects your information. This feature is designed to balance operational needs with security, giving you control over what is visible in your cluster logs.
-The Log Redaction is enabled by default, ensuring that sensitive information in running logs and execution plans is concealed to protect your data. If you need more detailed log information for cluster maintenance or SQL tuning, you can disable this feature at any time. 
+User-controlled Log Redaction allows you to manage the visibility of sensitive data in your TiDB Cloud Dedicated cluster's logs. By toggling this redaction feature, you can protect your information, balancing operational needs with security and controlling what appears in your cluster logs.
+Log redaction is enabled by default, ensuring that sensitive information in running logs and execution plans is concealed. If you need more detailed log information for cluster maintenance or SQL tuning, you can disable this feature at any time.
 
 > **Note:**
 >
-> Disabling log redaction may expose sensitive information and increase the risk of data leakage. Please remember to enable as soon as your diagnostic or maintenance task is complete.
->
+> Disabling log redaction may expose sensitive information and increase the risk of data leakage. Remember to re-enable it as soon as your diagnostic or maintenance task is complete.
 
 # Prerequisites
 * You must be in the **Organization Owner** or **Project Owner** role of your organization in TiDB Cloud.
-* You can only enable or disable log redaction for **dedicated clusters** in your cluster.
+* You can only enable or disable log redaction for **dedicated clusters**.
 * Log redaction cannot be enabled or disabled when the cluster is in a paused state.
-* After disabling log redaction, sensitive information may appear in TiDB logs, and there is a risk of data leakage. Make sure to inform and acknowledge this risk before proceeding.
+* After disabling log redaction, sensitive information may appear in TiDB logs, increasing the risk of data leakage. Ensure you understand and acknowledge this risk before proceeding.
 
 # Disable Log Redaction
 1. Navigate to your **dedicated cluster** in the TiDB Cloud Console.
@@ -28,13 +27,12 @@ The Log Redaction is enabled by default, ensuring that sensitive information in 
     * You must confirm your action twice.
 5. After disabling:
     * The change will apply to new database connections only.
-    * Existing connections are unaffected; reconnect to apply changes.
+    * Existing connections are unaffected. You need to reconnect them for the changes to apply.
     * Logs for new sessions will no longer be redacted.
 
 > **Note:**
 >
-> Disabling log redaction may expose sensitive information and increase the risk of data leakage. Please remember to enable as soon as your diagnostic or maintenance task is complete.
->
+> Disabling log redaction may expose sensitive information and increase the risk of data leakage. Remember to re-enable it as soon as your diagnostic or maintenance task is complete.
 
 # Confirm Log Redaction is Disabled
 1. Generate a **slow query**
@@ -46,6 +44,3 @@ To maintain security, **enable log redaction** as soon as your diagnostic or mai
 1. Go to: **Settings** > **Security**
 2. Click the **Enable** button.
 3. **Reconnect to the database** for the change to take effect on new sessions.
-
-
-
