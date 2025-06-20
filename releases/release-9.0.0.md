@@ -32,7 +32,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
     <td>The PD microservice mode decouples different functional modules of PD into independent services, improving system scalability, stability, and deployment flexibility. It provides a more robust architectural foundation for large-scale cluster deployments.</td>
   </tr>
     <tr>
-    <td>Point-in-time recovery (PITR) supports recovery from <a href="https://docs.pingcap.com/tidb/dev/br-compact-log-backup/">compacted log backups</a> for faster restores tw@lilin90</td>
+    <td>Point-in-time recovery (PITR) supports recovery from <a href="https://docs.pingcap.com/tidb/dev/br-compact-log-backup/">compacted log backups</a> for faster restores</td>
     <td>Starting from v9.0.0, the log backup feature provides offline compaction capabilities, converting unstructured log backup data into structured SST files. These SST files can now be restored into the cluster much more quickly than reapplying the original logs, resulting in improved recovery performance.</td>
   </tr>
   <tr>
@@ -42,28 +42,28 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
   </tr>
   <tr>
     <td rowspan="3">DB Operations and Observability</td>
-    <td>Add the <a href="https://docs.pingcap.com/tidb/dev/workload-repository/">TiDB Workload Repository</a> feature to support persisting historical workload data into TiKV tw@lilin90</td>
+    <td>Add the <a href="https://docs.pingcap.com/tidb/dev/workload-repository/">TiDB Workload Repository</a> feature to support persisting historical workload data into TiKV</td>
     <td>TiDB Workload Repository can persist the historical runtime status of the database, significantly improving the efficiency of diagnosing past failures and performance issues. It helps you quickly identify and resolve problems, while also providing critical data for health checks and automatic tuning.</td>
   </tr>
   <tr>
-    <td>TiDB Index Advisor tw@Oreoxmt</td>
+    <td>TiDB Index Advisor</td>
     <td>TiDB Index Advisor analyzes actual query workloads to automatically identify missing or redundant indexes. It helps you optimize indexes without requiring deep knowledge of your application. This feature reduces the cost of manual analysis and tuning, and improves query performance and system stability.</td>
   </tr>
   <tr>
-    <td>SQL cross-AZ traffic monitoring tw@Oreoxmt</td>
+    <td>SQL cross-AZ traffic monitoring</td>
     <td>This feature helps you identify cross-availability zone (AZ) network traffic caused by SQL queries in a TiDB cluster. It enables you to analyze traffic sources, optimize deployment architecture, and control cross-AZ data transfer costs in cloud environments, thus improving resource efficiency and cost visibility.</td>
   </tr>
   <tr>
     <td rowspan="3">Data Migration</td>
-    <td>Query argument redaction in Data Migration (DM) logs tw@Oreoxmt</td>
+    <td>Query argument redaction in Data Migration (DM) logs</td>
     <td>Data Migration (DM) introduces the <code>redact-info-log</code> configuration item to redact query arguments in DM logs, preventing sensitive data from appearing in logs.</td>
   </tr>
   <tr>
-    <td>TiDB Lightning supports compatibility with <code>sql_require_primary_key=ON</code> in TiDB tw@Oreoxmt</td>
+    <td>TiDB Lightning supports compatibility with <code>sql_require_primary_key=ON</code> in TiDB</td>
     <td>When the <code>sql_require_primary_key</code> system variable is enabled in TiDB, TiDB Lightning automatically adds a default primary key to its internal error-logging and conflict-detection tables during data import to prevent table creation failures.</td>
   </tr>
   <tr>
-    <td>Migrate sync-diff-inspector from <code>pingcap/tidb-tools</code> to <code>pingcap/tiflow</code> repository tw@Oreoxmt</td>
+    <td>Migrate sync-diff-inspector from <code>pingcap/tidb-tools</code> to <code>pingcap/tiflow</code> repository</td>
     <td>sync-diff-inspector is now maintained with other migration and replication tools such as DM and TiCDC in the <code>pingcap/tiflow</code> repository. You can now install sync-diff-inspector using TiUP or a dedicated Docker image.</td>
   </tr>
 </tbody>
