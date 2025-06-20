@@ -29,7 +29,7 @@ At a high level, follow the following steps:
 
 The following diagram illustrates the high-level architecture.
 
-![Architecture](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-0.png)
+![Architecture](./media/tidb-cloud/aws-dms-from-oracle-to-tidb-0.png)
 
 ## Prerequisites
 
@@ -48,7 +48,7 @@ Log in to the [AWS console](https://console.aws.amazon.com/vpc/home#vpcs:) and c
 
 For instructions about how to create a VPC, see [Creating a VPC](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-vpcs.html#Create-VPC).
 
-![Create VPC](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-1.png)
+![Create VPC](./media/tidb-cloud/aws-dms-from-oracle-to-tidb-1.png)
 
 ## Step 2. Create an Oracle DB instance
 
@@ -56,7 +56,7 @@ Create an Oracle DB instance in the VPC you just created, and remember the passw
 
 For instructions about how to create an Oracle DB instance, see [Creating an Oracle DB instance and connecting to a database on an Oracle DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.Oracle.html).
 
-![Create Oracle RDS](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-2.png)
+![Create Oracle RDS](./media/tidb-cloud/aws-dms-from-oracle-to-tidb-2.png)
 
 ## Step 3. Prepare the table data in Oracle
 
@@ -67,7 +67,7 @@ Using the following scripts to create and populate 10000 rows of data in the git
 
 After you finish executing the SQL script, check the data in Oracle. The following example uses [DBeaver](https://dbeaver.io/) to query the data:
 
-![Oracle RDS Data](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-3.png)
+![Oracle RDS Data](./media/tidb-cloud/aws-dms-from-oracle-to-tidb-3.png)
 
 ## Step 4. Create a TiDB Cloud Serverless cluster
 
@@ -87,7 +87,7 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
 2. Create an AWS DMS replication instance with `dms.t3.large` in the VPC.
 
-    ![Create AWS DMS Instance](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-8.png)
+    ![Create AWS DMS Instance](./media/tidb-cloud/aws-dms-from-oracle-to-tidb-8.png)
 
 > **Note:**
 >
@@ -101,11 +101,11 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
     The following screenshot shows the configurations of the source endpoint.
 
-    ![Create AWS DMS Source endpoint](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-9.png)
+    ![Create AWS DMS Source endpoint](./media/tidb-cloud/aws-dms-from-oracle-to-tidb-9.png)
 
     The following screenshot shows the configurations of the target endpoint.
 
-    ![Create AWS DMS Target endpoint](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-10.png)
+    ![Create AWS DMS Target endpoint](./media/tidb-cloud/aws-dms-from-oracle-to-tidb-10.png)
 
 > **Note:**
 >
@@ -123,25 +123,25 @@ For more information, see [Migrating your source schema to your target database 
 
 1. In the AWS DMS console, go to the [Data migration tasks](https://console.aws.amazon.com/dms/v2/home#tasks) page. Switch to your region. Then click **Create task** in the upper right corner of the window.
 
-    ![Create task](/media/tidb-cloud/aws-dms-to-tidb-cloud-create-task.png)
+    ![Create task](./media/tidb-cloud/aws-dms-to-tidb-cloud-create-task.png)
 
 2. Create a database migration task and specify the **Selection rules**:
 
-    ![Create AWS DMS migration task](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-11.png)
+    ![Create AWS DMS migration task](./media/tidb-cloud/aws-dms-from-oracle-to-tidb-11.png)
 
-    ![AWS DMS migration task selection rules](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-12.png)
+    ![AWS DMS migration task selection rules](./media/tidb-cloud/aws-dms-from-oracle-to-tidb-12.png)
 
 3. Create the task, start it, and then wait for the task to finish.
 
 4. Click the **Table statistics** to check the table. The schema name is `ADMIN`.
 
-    ![Check AWS DMS migration task](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-13.png)
+    ![Check AWS DMS migration task](./media/tidb-cloud/aws-dms-from-oracle-to-tidb-13.png)
 
 ## Step 9. Check data in the downstream TiDB cluster
 
 Connect to the [TiDB Cloud Serverless cluster](https://tidbcloud.com/console/clusters/create-cluster) and check the `admin.github_event` table data. As shown in the following screenshot, DMS successfully migrated table `github_events` and 10000 rows of data.
 
-![Check Data In TiDB](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-14.png)
+![Check Data In TiDB](./media/tidb-cloud/aws-dms-from-oracle-to-tidb-14.png)
 
 ## Summary
 
@@ -149,7 +149,7 @@ With AWS DMS, you can successfully migrate data from any upstream AWS RDS databa
 
 If you encounter any issues or failures during the migration, you can check the log information in [CloudWatch](https://console.aws.amazon.com/cloudwatch/home) to troubleshoot the issues.
 
-![Troubleshooting](/media/tidb-cloud/aws-dms-to-tidb-cloud-troubleshooting.png)
+![Troubleshooting](./media/tidb-cloud/aws-dms-to-tidb-cloud-troubleshooting.png)
 
 ## See also
 

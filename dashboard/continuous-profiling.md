@@ -40,7 +40,7 @@ You can access the Continuous Profiling page using either of the following metho
 
 * After logging in to TiDB Dashboard, click **Advanced Debugging** > **Profiling Instances** > **Continuous Profiling** in the left navigation menu.
 
-  ![Access page](/media/dashboard/dashboard-conprof-access.png)
+  ![Access page](./media/dashboard/dashboard-conprof-access.png)
 
 * Visit <http://127.0.0.1:2379/dashboard/#/continuous_profiling> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
 
@@ -58,7 +58,7 @@ To enable this feature:
 2. Click **Open Settings**. In the **Settings** area on the right, switch **Enable Feature** on, and modify the default value of **Retention Duration** if necessary.
 3. Click **Save**.
 
-![Enable feature](/media/dashboard/dashboard-conprof-start.png)
+![Enable feature](./media/dashboard/dashboard-conprof-start.png)
 
 ## View current performance data
 
@@ -68,17 +68,17 @@ Manual Profiling cannot be initiated on clusters that have Continuous Profiling 
 
 On the list page, you can see all performance data collected since the enabling of this feature.
 
-![History results](/media/dashboard/dashboard-conprof-history.png)
+![History results](./media/dashboard/dashboard-conprof-history.png)
 
 ## Download performance data
 
 On the profiling result page, you can click **Download Profiling Result** in the upper-right corner to download all profiling results.
 
-![Download profiling result](/media/dashboard/dashboard-conprof-download.png)
+![Download profiling result](./media/dashboard/dashboard-conprof-download.png)
 
 You can also click an individual instance in the table to view its profiling result. Alternatively, you can hover on ... to download raw data.
 
-![View profiling result](/media/dashboard/dashboard-conprof-single.png)
+![View profiling result](./media/dashboard/dashboard-conprof-single.png)
 
 ## Disable Continuous Profiling
 
@@ -87,7 +87,7 @@ You can also click an individual instance in the table to view its profiling res
 3. Click **Save**.
 4. In the popped-up dialog box, click **Disable**.
 
-![Disable feature](/media/dashboard/dashboard-conprof-stop.png)
+![Disable feature](./media/dashboard/dashboard-conprof-stop.png)
 
 ## Frequently asked questions
 

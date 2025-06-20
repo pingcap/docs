@@ -39,7 +39,7 @@ If you want to improve the performance of Titan, see the blog post [Titan: A Roc
 
 The following figure shows the architecture of Titan:
 
-![Titan Architecture](/media/titan/titan-1.png)
+![Titan Architecture](./media/titan/titan-1.png)
 
 During flush and compaction operations, Titan separates values from the LSM-tree. The advantage of this approach is that the write process is consistent with RocksDB, which reduces the chance of invasive changes to RocksDB.
 
@@ -47,7 +47,7 @@ During flush and compaction operations, Titan separates values from the LSM-tree
 
 When Titan separates the value file from the LSM-tree, it stores the value file in the BlobFile. The following figure shows the BlobFile format:
 
-![BlobFile Format](/media/titan/titan-2.png)
+![BlobFile Format](./media/titan/titan-2.png)
 
 A blob file mainly consists of blob records, meta blocks, a meta index block, and a footer. Each block record stores a Key-Value pair. The meta blocks are used for scalability, and store properties related to the blob file. The meta index block is used for meta block searching.
 
@@ -60,7 +60,7 @@ A blob file mainly consists of blob records, meta blocks, a meta index block, an
 
 ### TitanTableBuilder
 
-![TitanTableBuilder](/media/titan/titan-3.png)
+![TitanTableBuilder](./media/titan/titan-3.png)
 
 TitanTableBuilder is the key to achieving Key-Value separation. TitanTableBuilder determines the Key-Pair value size, and based on that, decides whether to separate the value from the Key-Value pair and store it in the blob file.
 
@@ -84,7 +84,7 @@ Titan uses the TablePropertiesCollector and EventListener components of RocksDB 
 
 RocksDB supports using BlobFileSizeCollector, a custom table property collector, to collect properties from the SST which are written into corresponding SST files. The collected properties are named BlobFileSizeProperties. The following figure shows the BlobFileSizeCollector workflow and data formats:
 
-![BlobFileSizeProperties](/media/titan/titan-4.png)
+![BlobFileSizeProperties](./media/titan/titan-4.png)
 
 On the left is the SST index format. The first column is the blob file ID; the second column is the offset for the blob record in the blob file; the third column is the blob record size.
 
@@ -94,7 +94,7 @@ On the right is the BlobFileSizeProperties format. Each line represents a blob f
 
 RocksDB uses compaction to discard old data and reclaim space. After each compaction, some blob files in Titan might contain partly or entirely outdated data. Therefore, you can trigger GC by listening to compaction events. During compaction, you can collect and compare the input/output blob file size properties of SST to determine which blob files require GC. The following figure shows the general process:
 
-![EventListener](/media/titan/titan-5.png)
+![EventListener](./media/titan/titan-5.png)
 
 + *inputs* stands for the blob file size properties for all SSTs that participate in the compaction.
 + *outputs* stands for the blob file size properties for all SSTs generated in the compaction.
@@ -108,7 +108,7 @@ For the selected blob file, Titan checks whether the blob index of the key corre
 
 Level Merge is a newly introduced algorithm in Titan. According to the implementation principle of Level Merge, Titan merges and rewrites blob file that corresponds to the SST file, and generates new blob file while compactions are performed in LSM-tree. The following figure shows the general process:
 
-![LevelMerge General Process](/media/titan/titan-6.png)
+![LevelMerge General Process](./media/titan/titan-6.png)
 
 When compactions are performed on the SSTs of level z-1 and level z, Titan reads and writes Key-Value pairs in order. Then it writes the values of the selected blob files into new blob files in order, and updates the blob indexes of keys when new SSTs are generated. For the keys deleted in compactions, the corresponding values will not be written to the new blob file, which works similar to GC.
 
@@ -123,7 +123,7 @@ Range Merge is an optimized approach of GC based on Level Merge. However, the bo
 - When `level_compaction_dynamic_level_bytes` is enabled, data volume at each level of LSM-tree dynamically increases, and the sorted runs at the bottom level keep increasing.
 - A specific range of data is frequently compacted, and this causes a lot of sorted runs in that range.
 
-![RangeMerge](/media/titan/titan-7.png)
+![RangeMerge](./media/titan/titan-7.png)
 
 Therefore, the Range Merge operation is needed to keep the number of sorted runs within a certain level. At the time of OnCompactionComplete, Titan counts the number of sorted runs in a range. If the number is large, Titan marks the corresponding blob file as ToMerge and rewrites it in the next compaction.
 

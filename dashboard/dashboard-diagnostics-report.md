@@ -21,7 +21,7 @@ The diagnostic report consists of the following parts:
 
 An example of the diagnostic report is as follows:
 
-![Sample report](/media/dashboard/dashboard-diagnostics-example-table.png)
+![Sample report](./media/dashboard/dashboard-diagnostics-example-table.png)
 
 In the image above, **Total Time Consume** in the top blue box is the report name. The information in the red box below explains the content of this report and the meaning of each field in the report.
 
@@ -43,13 +43,13 @@ Each part of this report is introduced as follows.
 
 The time range for generating the diagnostics report includes the start time and end time.
 
-![Report time range](/media/dashboard/dashboard-diagnostics-report-time-range.png)
+![Report time range](./media/dashboard/dashboard-diagnostics-report-time-range.png)
 
 #### Cluster Hardware Info
 
 Cluster Hardware Info includes information such as CPU, memory, and disk of each server in the cluster.
 
-![Cluster hardware report](/media/dashboard/dashboard-diagnostics-cluster-hardware.png)
+![Cluster hardware report](./media/dashboard/dashboard-diagnostics-cluster-hardware.png)
 
 The fields in the table above are described as follows:
 
@@ -64,7 +64,7 @@ The fields in the table above are described as follows:
 
 The `Cluster Info` table shows the cluster topology information. The information in this table are from TiDB [information_schema.cluster_info](/information-schema/information-schema-cluster-info.md) system table.
 
-![Cluster info](/media/dashboard/dashboard-diagnostics-cluster-info.png)
+![Cluster info](./media/dashboard/dashboard-diagnostics-cluster-info.png)
 
 The fields in the table above are described as follows:
 
@@ -98,25 +98,25 @@ The `Node Load Info` table shows the load information of the server node, includ
 * The number of TCP connections in use by the node
 * The number of all TCP connections of the node
 
-![Server Load Info report](/media/dashboard/dashboard-diagnostics-node-load-info.png)
+![Server Load Info report](./media/dashboard/dashboard-diagnostics-node-load-info.png)
 
 #### Instance CPU Usage
 
 The `Instance CPU Usage` table shows the average value (AVG), maximum value (MAX), and minimum value (MIN) of the CPU usage of each TiDB/PD/TiKV process. The maximum CPU usage of the process is `100% * the number of CPU logical cores`.
 
-![Instance CPU Usage report](/media/dashboard/dashboard-diagnostics-process-cpu-usage.png)
+![Instance CPU Usage report](./media/dashboard/dashboard-diagnostics-process-cpu-usage.png)
 
 #### Instance Memory Usage
 
 The `Instance Memory Usage` table shows the average value (AVG), maximum value (MAX), and minimum value (MIN) of memory bytes occupied by each TiDB/PD/TiKV process.
 
-![Instance memory usage report](/media/dashboard/dashboard-diagnostics-process-memory-usage.png)
+![Instance memory usage report](./media/dashboard/dashboard-diagnostics-process-memory-usage.png)
 
 #### TiKV Thread CPU Usage
 
 The `TiKV Thread CPU Usage` table shows the average value (AVG), maximum value (MAX) and minimum value (MIN) of CPU usage of each module thread in TiKV. The maximum CPU usage of the process is `100% * the thread count of the corresponding configuration`.
 
-![TiKV Thread CPU Usage report](/media/dashboard/dashboard-diagnostics-thread-cpu-usage.png)
+![TiKV Thread CPU Usage report](./media/dashboard/dashboard-diagnostics-thread-cpu-usage.png)
 
 In the table above,
 
@@ -131,7 +131,7 @@ In the table above,
 
 The `TiDB/PD Goroutines Count` table shows the average value (AVG), maximum value (MAX), and minimum value (MIN) of the number of TiDB or PD goroutines. If the number of goroutines exceeds 2,000, the concurrency of the process is too high, which affects the overall request latency.
 
-![TiDB/PD goroutines count report](/media/dashboard/dashboard-diagnostics-goroutines-count.png)
+![TiDB/PD goroutines count report](./media/dashboard/dashboard-diagnostics-goroutines-count.png)
 
 ### Overview information
 
@@ -139,7 +139,7 @@ The `TiDB/PD Goroutines Count` table shows the average value (AVG), maximum valu
 
 The `Time Consumed by Each Component` table shows the monitored consumed time and the time ratio of TiDB, PD, TiKV modules in the cluster. The default time unit is seconds. You can use this table to quickly locate which modules consume more time.
 
-![Time Consume report](/media/dashboard/dashboard-diagnostics-total-time-consume.png)
+![Time Consume report](./media/dashboard/dashboard-diagnostics-total-time-consume.png)
 
 The fields in columns of the table above are described as follows:
 
@@ -155,7 +155,7 @@ The fields in columns of the table above are described as follows:
 
 The following image shows the relationship of time consumption of the related modules in the monitoring metrics above.
 
-![Time-consumption relationship of each module](/media/dashboard/dashboard-diagnostics-time-relation.png)
+![Time-consumption relationship of each module](./media/dashboard/dashboard-diagnostics-time-relation.png)
 
 In the image above, yellow boxes are the TiDB-related monitoring metrics.Blue boxes are TiKV-related monitoring metrics, and gray boxes temporarily do not correspond to specific monitoring metrics.
 
@@ -211,7 +211,7 @@ You can use `TOTAL_TIME`, the P999 time, and the P99 time to determine which mod
 
 The `Errors Occurred in Each Component` table shows the total number of errors in TiDB and TiKV, such as the failure to write binlog, `tikv server is busy`, `TiKV channel full`, `tikv write stall`. You can see the row comments for the specific meaning of each error.
 
-![Errors Occurred in Each Component report](/media/dashboard/dashboard-diagnostics-error.png)
+![Errors Occurred in Each Component report](./media/dashboard/dashboard-diagnostics-error.png)
 
 #### Specific TiDB/PD/TiKV monitoring information
 
@@ -231,7 +231,7 @@ This table shows the number of client connections for each TiDB instance.
 
 This table shows transaction-related monitoring metrics.
 
-![Transaction report](/media/dashboard/dashboard-diagnostics-tidb-txn.png)
+![Transaction report](./media/dashboard/dashboard-diagnostics-tidb-txn.png)
 
 * `TOTAL_VALUE`: The sum of all values ​​(SUM) during the report time range.
 * `TOTAL_COUNT`: The total number of occurrences of this monitoring metric.
@@ -246,7 +246,7 @@ In the table above, within the report time range, `tidb_txn_kv_write_size`: a to
 
 ##### DDL Owner
 
-![TiDB DDL Owner Report](/media/dashboard/dashboard-diagnostics-tidb-ddl.png)
+![TiDB DDL Owner Report](./media/dashboard/dashboard-diagnostics-tidb-ddl.png)
 
 The table above shows that from `2020-05-21 14:40:00`, the cluster's `DDL OWNER` is at the `10.0.1.13:10080` node. If the owner changes, multiple rows of data exist in the table above, where the `Min_Time` column indicates the minimum time of the corresponding known owner.
 
@@ -305,7 +305,7 @@ Within the report time range, if some configurations have been modified, the fol
 
 Example:
 
-![Scheduler Config Change History report](/media/dashboard/dashboard-diagnostics-config-change.png)
+![Scheduler Config Change History report](./media/dashboard/dashboard-diagnostics-config-change.png)
 
 The table above shows that the `leader-schedule-limit` configuration parameter has been modified within the report time range:
 
@@ -324,7 +324,7 @@ You can generate a comparison report for two time ranges. The report content is 
 
 First, the `Compare Report Time Range` report in the basic information shows the two time ranges for comparison:
 
-![Compare Report Time Range report](/media/dashboard/dashboard-diagnostics-compare-time.png)
+![Compare Report Time Range report](./media/dashboard/dashboard-diagnostics-compare-time.png)
 
 In the table above, `t1` is the normal time range, or the reference time range. `t2` is the abnormal time range.
 
@@ -338,7 +338,7 @@ Tables related to slow queries are shown as follows:
 
 This section introduces `DIFF_RATIO` using the `Instance CPU Usage` table as an example.
 
-![Compare Instance CPU Usage report](/media/dashboard/dashboard-diagnostics-compare-instance-cpu-usage.png)
+![Compare Instance CPU Usage report](./media/dashboard/dashboard-diagnostics-compare-instance-cpu-usage.png)
 
 * `t1.AVG`, `t1.MAX`, `t1.Min` are the average value, maximum value, and minimum value of CPU usage in the `t1`.
 * `t2.AVG`, `t2.MAX`, and `t2.Min` are the average value, maximum value, and minimum value ​​of CPU usage during `t2`.
@@ -359,7 +359,7 @@ For example, in the table above, the average CPU usage of the `tidb` node in `t2
 
 The `Maximum Different Item` table compares the monitoring metrics of two time ranges, and sorts them according to the difference of the monitoring metrics. Using this table, you can quickly find out which monitoring metric has the biggest difference in the two time ranges. See the following example:
 
-![Maximum Different Item table](/media/dashboard/dashboard-diagnostics-maximum-different-item.png)
+![Maximum Different Item table](./media/dashboard/dashboard-diagnostics-maximum-different-item.png)
 
 * `Table`: Indicates this monitoring metric comes from which table in the comparison report. For example, `TiKV, coprocessor_info` indicates the `coprocessor_info` table in the TiKV component.
 * `METRIC_NAME`: The monitoring metric name. Click `expand` to view the comparison of different labels of metrics.

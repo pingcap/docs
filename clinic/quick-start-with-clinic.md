@@ -55,7 +55,7 @@ Before using PingCAP Clinic, you need to install Diag and prepare an environment
 
     To get a token, click the icon in the lower-right corner of the Cluster page, select **Get Access Token For Diag Tool**, and click **+** in the pop-up window. Make sure that you have copied and saved the token that is displayed.
 
-    ![An example of a token](/media/clinic-get-token.png)
+    ![An example of a token](./media/clinic-get-token.png)
 
     > **Note:**
     >

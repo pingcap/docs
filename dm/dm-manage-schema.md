@@ -21,7 +21,7 @@ The internal table schema comes from the following sources:
 
 For incremental replication, schema maintenance is complicated. During the whole data replication, the following four table schemas are involved. These schemas might be the consistent or inconsistent with one another:
 
-![schema](/media/dm/operate-schema.png)
+![schema](./media/dm/operate-schema.png)
 
 * The upstream table schema at the current time, identified as `schema-U`.
 * The table schema of the binlog event currently being consumed by DM, identified as `schema-B`. This schema corresponds to the upstream table schema at a historical time.

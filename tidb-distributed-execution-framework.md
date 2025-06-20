@@ -108,7 +108,7 @@ Starting from v8.1.0, if new nodes are added during task execution, the DXF dete
 
 The architecture of the DXF is as follows:
 
-![Architecture of the DXF](/media/dist-task/dist-task-architect.jpg)
+![Architecture of the DXF](./media/dist-task/dist-task-architect.jpg)
 
 As shown in the preceding diagram, the execution of tasks in the DXF is mainly handled by the following modules:
 
