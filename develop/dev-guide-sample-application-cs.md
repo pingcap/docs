@@ -4,7 +4,7 @@ summary: Learn how to connect to TiDB using C#. This tutorial gives C# sample co
 aliases: ['/tidb/dev/sample-application-cs','/tidb/dev/dev-guide-sample-application-cs']
 ---
 
-# Connect to TiDB with C#
+# Connect to TiDB with C\#
 
 C# (a.k.a. C-Sharp) is one of the languages from the .NET family as created by Microsoft. Other languages for .NET are VB.NET and F#. In this tutorial we will use C# and the MySQL Connector/NET to connect from a C# application to TiDB over the MySQL protocol. This is possible because TiDB is highly [compatible with MySQL](/mysql-compatibility.md).
 
@@ -13,7 +13,7 @@ code are similar. There may be small differences in the prompt and file paths.
 
 ## Prerequisites
 
-The .NET 9.0 SDK, which can be downloaded from https://dotnet.microsoft.com/en-us/download
+The .NET 9.0 SDK, which can be downloaded from <https://dotnet.microsoft.com/en-us/download>.
 
 This tutorial will use the commandline `dotnet` command. It is also possible to use the VS Code IDE to work with C# code.
 
