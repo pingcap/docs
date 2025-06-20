@@ -34,7 +34,7 @@ To disable log redaction, do the following:
     > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
 3. In the left navigation pane, click **Settings** > **Security**.
-4. In the **Execution Log Redaction** section, you can see the redaction feature is enabled by default.
+4. In the **Execution Log Redaction** section, you can see the redaction feature is **Enabled** by default.
 5. Click **Disable** to disable it.
 6. A warning will appear, explaining the risks of disabling log redaction. You must confirm your action twice.
 
@@ -48,7 +48,12 @@ Note that after disabling log redaction:
 
 To confirm that log redaction is disabled, do the following:
 
-1. Create a [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md).
+1. Simulate a performance issue caused by a slow-running query. For example, execute the following SQL statement:
+
+    ```sql
+    SELECT *, SLEEP(2) FROM users where email like "%useremail%";
+    ```
+
 2. Wait a few minutes for the slow query log to update.
 3. Review the log to confirm that the sensitive data is not redacted.
 
@@ -64,6 +69,6 @@ To maintain security, **enable log redaction** as soon as your diagnostic or mai
     > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
 3. In the left navigation pane, click **Settings** > **Security**.
-4. In the **Execution Log Redaction** section, you can see the redaction feature is enabled by default.
+4. In the **Execution Log Redaction** section, you can see the redaction feature is **Disabled**.
 5. Click **Enable** to enable it.
 6. **Reconnect to the database** for the change to take effect on new sessions.
