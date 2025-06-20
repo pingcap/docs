@@ -55,6 +55,8 @@
     - Ruby
       - [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
       - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
+    - C#
+      - [C#](/develop/dev-guide-sample-application-cs.md)
     - [WordPress](/tidb-cloud/dev-guide-wordpress.md)
     - Serverless Driver (Beta)
       - [TiDB Cloud Serverless Driver](/tidb-cloud/serverless-driver.md)
