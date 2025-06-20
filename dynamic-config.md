@@ -325,11 +325,18 @@ The following PD configuration items can be modified dynamically:
 | `pd-server.key-type` | Sets the cluster key type |
 | `pd-server.metric-storage` | Sets the storage address of the cluster metrics |
 | `pd-server.dashboard-address` | Sets the dashboard address |
+| `pd-server.flow-round-by-digit` | Specifies the number of lowest digits to round for the Region flow information |
+| `pd-server.min-resolved-ts-persistence-interval` | Determines the interval at which the minimum resolved timestamp is persistent to the PD |
+| `pd-server.server-memory-limit` | The memory limit ratio for a PD instance |
+| `pd-server.server-memory-limit-gc-trigger` | The threshold ratio at which PD tries to trigger GC |
+| `pd-server.enable-gogc-tuner` | Controls whether to enable the GOGC Tuner |
+| `pd-server.gc-tuner-threshold` | The maximum memory threshold ratio for tuning GOGC |
 | `replication-mode.replication-mode` | Sets the backup mode |
 | `replication-mode.dr-auto-sync.label-key` | Distinguishes different AZs and needs to match Placement Rules |
 | `replication-mode.dr-auto-sync.primary` | The primary AZ |
 | `replication-mode.dr-auto-sync.dr` | The disaster recovery (DR) AZ |
 | `replication-mode.dr-auto-sync.primary-replicas` | The number of Voter replicas in the primary AZ |
+| `replication-mode.dr-auto-sync.dr-replicas` | The number of Voter replicas in the disaster recovery (DR) AZ |
 | `replication-mode.dr-auto-sync.wait-store-timeout` | The waiting time for switching to asynchronous replication mode when network isolation or failure occurs |
 | `replication-mode.dr-auto-sync.wait-recover-timeout` | The waiting time for switching back to the `sync-recover` status after the network recovers |
 | `replication-mode.dr-auto-sync.pause-region-split` | Controls whether to pause Region split operations in the `async_wait` and `async` statuses |
