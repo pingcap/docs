@@ -1,6 +1,6 @@
 ---
 title: User-Controlled Log Redaction
-summary: Learn how to enable or disable user-controlled log redaction for TiDB Cloud dedicated clusters to manage sensitive data visibility in execution logs.
+summary: Learn how to enable or disable user-controlled log redaction for TiDB Cloud Dedicated clusters to manage sensitive data visibility in execution logs.
 ---
 
 # User-Controlled Log Redaction
