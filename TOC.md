@@ -183,6 +183,7 @@
     - [Log Filter](/ticdc/ticdc-filter.md)
     - [DDL Replication](/ticdc/ticdc-ddl.md)
     - [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
+  - [TiCDC New Architecture](/ticdc/ticdc-new-arch.md)
   - Monitor and Alert
     - [Monitoring Metrics Summary](/ticdc/ticdc-summary-monitor.md)
     - [Monitoring Metrics Details](/ticdc/monitor-ticdc.md)
