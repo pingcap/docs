@@ -44,7 +44,7 @@ Consider an application that handles both transaction and BI workloads. To preve
 5. Optional: For storage layer isolation, configure [Placement Rules](/configure-placement-rules.md) or [Resource Control](/tidb-resource-control-ru-groups.md).
 6. Direct transaction and BI clients to connect to their respective virtual IP addresses.
 
-<img src="https://docs-download.pingcap.com/media/images/docs/tiproxy/tiproxy-balance-label.png" alt="Label-based Load Balancing" width="600" />
+<img src="https://docs-download.pingcap.com/media/images/docs/tiproxy/tiproxy-balance-label-v2.png" alt="Label-based Load Balancing" width="600" />
 
 Example configuration for this topology:
 
