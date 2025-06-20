@@ -73,7 +73,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
 ### Scalability
 
-* PD supports the microservice mode (GA) [#5766](https://github.com/tikv/pd/issues/5766) @[binshi-bing](https://github.com/binshi-bing) tw@hfxsd <!--2052-->
+* PD supports the microservice mode (GA) [#5766](https://github.com/tikv/pd/issues/5766) @[binshi-bing](https://github.com/binshi-bing)
 
     In v8.0.0, the PD microservice mode is released as an experimental feature. Starting from v9.0.0, the PD microservice mode is generally available (GA). This mode splits the timestamp allocation and cluster scheduling functions of PD into separate microservices that can be deployed independently, thereby enhancing performance scalability for PD and addressing performance bottlenecks of PD in large-scale clusters.
 
@@ -86,7 +86,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
 ### Performance
 
-* In scenarios with hundreds of thousands to millions of users, the performance of creating and modifying users has improved by 77 times [#55563](https://github.com/pingcap/tidb/issues/55563) @[tiancaiamao](https://github.com/tiancaiamao) tw@hfxsd <!--1941-->
+* In scenarios with hundreds of thousands to millions of users, the performance of creating and modifying users has improved by 77 times [#55563](https://github.com/pingcap/tidb/issues/55563) @[tiancaiamao](https://github.com/tiancaiamao)
 
     In previous versions, when the number of users in a cluster exceeded 200,000, the QPS for creating and modifying users drops to 1. In certain SaaS environments, if there is a need to create millions of users and periodically update user passwords in bulk, it can take up to 2 days or more, which is unacceptable for some SaaS businesses.
 
@@ -94,13 +94,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
     For more information, see [documentation](/system-variables.md#tidb_accelerate_user_creation_update-new-in-v900).
 
-* Support pushing down the following function to TiFlash [#59317](https://github.com/pingcap/tidb/issues/59317) @[guo-shaoge](https://github.com/guo-shaoge) **tw@Oreoxmt** <!--1918-->
+* Support pushing down the following function to TiFlash [#59317](https://github.com/pingcap/tidb/issues/59317) @[guo-shaoge](https://github.com/guo-shaoge)
 
     * `TRUNCATE()`
 
   For more information, see [documentation](/tiflash/tiflash-supported-pushdown-calculations.md).
 
-* Support pushing down window functions that contain the following aggregation functions to TiFlash [#7376](https://github.com/pingcap/tiflash/issues/7376) [#59509](https://github.com/pingcap/tidb/issues/59509) @[xzhangxian1008](https://github.com/xzhangxian1008) **tw@qiancai**<!--1382-->
+* Support pushing down window functions that contain the following aggregation functions to TiFlash [#7376](https://github.com/pingcap/tiflash/issues/7376) [#59509](https://github.com/pingcap/tidb/issues/59509) @[xzhangxian1008](https://github.com/xzhangxian1008)
 
     * `MAX()`
     * `MIN()`
@@ -110,7 +110,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
     For more information, see [documentation](/tiflash/tiflash-supported-pushdown-calculations.md).
 
-* Support pushing down the following date functions to TiKV [#59365](https://github.com/pingcap/tidb/issues/59365) [#18184](https://github.com/tikv/tikv/issues/18184) [#58940](https://github.com/pingcap/tidb/issues/58940) [#59497](https://github.com/pingcap/tidb/issues/59497) @[wshwsh12](https://github.com/wshwsh12) @[xzhangxian1008] @[gengliqi](https://github.com/gengliqi) **tw@Oreoxmt** <!--1837-->
+* Support pushing down the following date functions to TiKV [#59365](https://github.com/pingcap/tidb/issues/59365) [#18184](https://github.com/tikv/tikv/issues/18184) [#58940](https://github.com/pingcap/tidb/issues/58940) [#59497](https://github.com/pingcap/tidb/issues/59497) @[wshwsh12](https://github.com/wshwsh12) @[xzhangxian1008] @[gengliqi](https://github.com/gengliqi)
 
     * `FROM_UNIXTIME()`
     * `TIMESTAMPDIFF()`
@@ -118,7 +118,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
   For more information, see [documentation](/functions-and-operators/expressions-pushed-down.md).
 
-* TiFlash supports a new storage format to improve the scanning efficiency of string data [#9673](https://github.com/pingcap/tiflash/issues/9673) @[JinheLin](https://github.com/JinheLin) **tw@qiancai**<!--2066-->
+* TiFlash supports a new storage format to improve the scanning efficiency of string data [#9673](https://github.com/pingcap/tiflash/issues/9673) @[JinheLin](https://github.com/JinheLin)
 
     Before v9.0.0, TiFlash stores string data in a format that requires to read each row individually when scanning the data, which is inefficient for short strings. In v9.0.0, TiFlash introduces a new storage format that optimizes the storage of strings, improving the scanning efficiency of strings shorter than 64 bytes without affecting the storage and scanning performance of other data.
 
@@ -129,7 +129,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
   For more information, see [user documentation](/tiflash/tiflash-configuration.md#format_version).
 
-* Point-in-time recovery (PITR) supports recovery from compacted log backups for faster restores [#56522](https://github.com/pingcap/tidb/issues/56522) @[YuJuncen](https://github.com/YuJuncen) **tw@lilin90** <!--2001-->
+* Point-in-time recovery (PITR) supports recovery from compacted log backups for faster restores [#56522](https://github.com/pingcap/tidb/issues/56522) @[YuJuncen](https://github.com/YuJuncen)
 
     Starting from v9.0.0, the compact log backup feature provides offline compaction capabilities, converting unstructured log backup data into structured SST files. This results in the following improvements:
 
@@ -141,7 +141,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
 ### Availability
 
-* TiProxy officially supports the traffic replay feature (GA) [#642](https://github.com/pingcap/tiproxy/issues/642) @[djshow832](https://github.com/djshow832) tw@hfxsd<!--2062-->
+* TiProxy officially supports the traffic replay feature (GA) [#642](https://github.com/pingcap/tiproxy/issues/642) @[djshow832](https://github.com/djshow832)
 
     In TiProxy v1.3.0, the traffic replay feature is released as an experimental feature. In TiProxy v1.4.0, the traffic replay feature becomes generally available (GA). TiProxy provides specialized SQL commands for traffic capture and replay. This feature lets you easily capture access traffic from TiDB production clusters and replay it at a specified rate in test clusters, facilitating business validation.
     
@@ -149,7 +149,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
 ### Reliability
 
-* Introduce a new system variable `max_user_connections` to limit the number of connections that different users can establish [#59203](https://github.com/pingcap/tidb/issues/59203) @[joccau](https://github.com/joccau) tw@hfxsd<!--2017-->
+* Introduce a new system variable `max_user_connections` to limit the number of connections that different users can establish [#59203](https://github.com/pingcap/tidb/issues/59203) @[joccau](https://github.com/joccau)
 
     Starting from v9.0.0, you can use the `max_user_connections` system variable to limit the number of connections that a single user can establish to a single TiDB node. This helps prevent issues where excessive [token](/tidb-configuration-file.md#token-limit) consumption by one user causes delays in responding to requests from other users.
     
@@ -157,7 +157,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
 ### SQL
 
-* Support creating global indexes on non-unique columns of partitioned tables [#58650](https://github.com/pingcap/tidb/issues/58650) @[Defined2014](https://github.com/Defined2014) @[mjonss](https://github.com/mjonss) **tw@qiancai**<!--2057-->
+* Support creating global indexes on non-unique columns of partitioned tables [#58650](https://github.com/pingcap/tidb/issues/58650) @[Defined2014](https://github.com/Defined2014) @[mjonss](https://github.com/mjonss)
 
     Starting from v8.3.0, you can create global indexes on unique columns of partitioned tables in TiDB to improve query performance. However, creating global indexes on non-unique columns was not supported. Starting from v9.0.0, TiDB removes this restriction, enabling you to create global indexes on non-unique columns of partitioned tables, enhancing the usability of global indexes.
 
@@ -165,7 +165,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
 ### DB operations
 
-* TiDB Index Advisor [#12303](https://github.com/pingcap/tidb/issues/12303) @[qw4990](https://github.com/qw4990) **tw@Oreoxmt** <!--2081-->
+* TiDB Index Advisor [#12303](https://github.com/pingcap/tidb/issues/12303) @[qw4990](https://github.com/qw4990)
 
     Index design is essential for database performance optimization. Starting from v8.5.0, TiDB introduces the Index Advisor feature and continues to improve and enhance it. This feature analyzes high-frequency query patterns, recommends optimal indexing strategies, helps you tune performance more efficiently, and lowers the barrier to index design.
 
@@ -173,7 +173,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
     For more information, see [documentation](/index-advisor.md).
 
-* Improve the compatibility between ongoing log backup and snapshot restore [#58685](https://github.com/pingcap/tidb/issues/58685) @[BornChanger](https://github.com/BornChanger) **tw@lilin90** <!--2000-->
+* Improve the compatibility between ongoing log backup and snapshot restore [#58685](https://github.com/pingcap/tidb/issues/58685) @[BornChanger](https://github.com/BornChanger)
 
     Starting from v9.0.0, when a log backup task is running, if the conditions are met, you can still perform snapshot restore and allow the restored data to be properly recorded by the ongoing log backup. This enables ongoing log backups to proceed without having to stop them during the restore procedure.
 
@@ -181,7 +181,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
 ### Observability
 
-* Add the TiDB Workload Repository feature to support persisting historical workload data into TiKV [#58247](https://github.com/pingcap/tidb/issues/58247) @[xhebox](https://github.com/xhebox) @[henrybw](https://github.com/henrybw) @[wddevries](https://github.com/wddevries) **tw@lilin90**<!--1953-->
+* Add the TiDB Workload Repository feature to support persisting historical workload data into TiKV [#58247](https://github.com/pingcap/tidb/issues/58247) @[xhebox](https://github.com/xhebox) @[henrybw](https://github.com/henrybw) @[wddevries](https://github.com/wddevries)
 
     Many frequently updated workload metrics and status information are maintained in the memory of the instance. Such historical workload data can be persisted as part of the database for the following purposes:
 
@@ -210,7 +210,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
       For more information, see [documentation](/workload-repository.md).
 
- * SQL cross-AZ traffic monitoring [#57543](https://github.com/pingcap/tidb/issues/57543) @[nolouch](https://github.com/nolouch) @[yibin87](https://github.com/yibin87) **tw@Oreoxmt** <!--2021-->
+ * SQL cross-AZ traffic monitoring [#57543](https://github.com/pingcap/tidb/issues/57543) @[nolouch](https://github.com/nolouch) @[yibin87](https://github.com/yibin87)
 
     Deploying TiDB clusters across Availability Zones (AZs) enhances the disaster recovery capability. However, in cloud environments, cross-AZ deployments incur additional network traffic costs. For example, AWS charges for both cross-region and cross-AZ traffic. Therefore, for TiDB clusters running on cloud services, accurately monitoring and analyzing network traffic is essential for cost control.
 
@@ -220,7 +220,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
     For more information, see [documentation](/statement-summary-tables.md#statements_summary-fields-description).
 
-* Optimize the `execution info` in the output of `EXPLAIN ANALYZE` [#56232](https://github.com/pingcap/tidb/issues/56232) @[yibin87](https://github.com/yibin87) tw@hfxsd<!--1697-->
+* Optimize the `execution info` in the output of `EXPLAIN ANALYZE` [#56232](https://github.com/pingcap/tidb/issues/56232) @[yibin87](https://github.com/yibin87)
 
     [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) executes SQL statements and records execution details in the `execution info` column. The same information is captured in the [slow query log](/identify-slow-queries.md). These details are crucial for analyzing and understanding the time spent on SQL execution.
 
@@ -232,7 +232,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
 ### Data migration
 
-* TiCDC introduces a new architecture for improved performance, scalability, and stability (experimental) [#442](https://github.com/pingcap/ticdc/issues/442) @[CharlesCheung96](https://github.com/CharlesCheung96) **tw@qiancai** <!--2027-->
+* TiCDC introduces a new architecture for improved performance, scalability, and stability (experimental) [#442](https://github.com/pingcap/ticdc/issues/442) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
     In v9.0.0, TiCDC introduces a new architecture (experimental) that improves real-time data replication performance, scalability, and stability while reducing resource costs. This new architecture redesigns TiCDC core components and optimizes its data processing workflows.
 
@@ -240,29 +240,29 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
     For more information, see [documentation](/ticdc/ticdc-new-arch.md).
 
-* TiCDC supports DDL events and WATERMARK events for the Debezium protocol [#11566](https://github.com/pingcap/tiflow/issues/11566) @[wk989898](https://github.com/wk989898) **tw@lilin90** <!--2009-->
+* TiCDC supports DDL events and WATERMARK events for the Debezium protocol [#11566](https://github.com/pingcap/tiflow/issues/11566) @[wk989898](https://github.com/wk989898)
 
     TiCDC now supports DDL and WATERMARK event types in Debezium style output. After an upstream DDL operation is successfully executed, TiCDC encodes the DDL event into a Kafka message with the key and message in a Debezium style format. The WATERMARK event, a TiCDC extension (available when [`enable-tidb-extension`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka) is enabled in the Kafka sink), represents a special point in time and indicates that the events received before this point are complete.
 
     For more information, see [documentation](/ticdc/ticdc-debezium.md).
 
-* TiCDC adds safeguards to avoid replicating back to the same TiDB cluster [#11767](https://github.com/pingcap/tiflow/issues/11767) [#12062](https://github.com/pingcap/tiflow/issues/12062) @[wlwilliamx](https://github.com/wlwilliamx) **tw@qiancai** <!--2063-->
+* TiCDC adds safeguards to avoid replicating back to the same TiDB cluster [#11767](https://github.com/pingcap/tiflow/issues/11767) [#12062](https://github.com/pingcap/tiflow/issues/12062) @[wlwilliamx](https://github.com/wlwilliamx)
 
     TiCDC supports replicating data from an upstream TiDB cluster to multiple downstream systems, including other TiDB clusters. In versions before v9.0.0, if TiCDC is misconfigured to use the same TiDB cluster as both the source and the target, it could create a replication loop and cause data consistency issues. Starting from v9.0.0, TiCDC automatically checks whether the source and target TiDB clusters are the same, preventing this misconfiguration issue.
 
     For more information, see [documentation](/ticdc/ticdc-manage-changefeed.md#security-mechanism).
 
-* Support query argument redaction in Data Migration (DM) logs [#11489](https://github.com/pingcap/tiflow/issues/11489) @[db-will](https://github.com/db-will) **tw@Oreoxmt** <!--2030-->
+* Support query argument redaction in Data Migration (DM) logs [#11489](https://github.com/pingcap/tiflow/issues/11489) @[db-will](https://github.com/db-will)
 
     Starting from v9.0.0, you can use the `redact-info-log` configuration item to enable the DM log redaction feature. When enabled, query arguments that contain sensitive data in DM logs are replaced with the `?` placeholder. To enable this feature, set `redact-info-log` to `true` in the DM-worker configuration file or pass `--redact-info-log=true` when starting DM. This feature only redacts query arguments, not the entire SQL statement, and requires a DM-worker restart to take effect.
 
     For more information, see [documentation](/dm/dm-worker-configuration-file.md#redact-info-log-new-in-v900).
 
-* TiDB Lightning supports compatibility with `sql_require_primary_key=ON` in TiDB [#57479](https://github.com/pingcap/tidb/issues/57479) @[lance6716](https://github.com/lance6716) **tw@Oreoxmt** <!--2026-->
+* TiDB Lightning supports compatibility with `sql_require_primary_key=ON` in TiDB [#57479](https://github.com/pingcap/tidb/issues/57479) @[lance6716](https://github.com/lance6716)
 
     When the system variable [`sql_require_primary_key`](/system-variables.md#sql_require_primary_key-new-in-v630) is enabled in TiDB, tables are required to have a primary key. To avoid table creation failures, TiDB Lightning adds a default primary key to its internal error-logging and conflict-detection tables (`conflict_error_v4`, `type_error_v2`, and `conflict_records_v2`). If you have automation scripts that depend on these internal tables, update them to accommodate the new schema, which now includes a primary key.
 
-* Migrate sync-diff-inspector from `pingcap/tidb-tools` to `pingcap/tiflow` repository [#11672](https://github.com/pingcap/tiflow/issues/11672) @[joechenrh](https://github.com/joechenrh) **tw@Oreoxmt** <!--2070-->
+* Migrate sync-diff-inspector from `pingcap/tidb-tools` to `pingcap/tiflow` repository [#11672](https://github.com/pingcap/tiflow/issues/11672) @[joechenrh](https://github.com/joechenrh)
 
     Starting from v9.0.0, the sync-diff-inspector tool is moved from the [`pingcap/tidb-tools`](https://github.com/pingcap/tidb-tools) repository to [`pingcap/tiflow`](https://github.com/pingcap/tiflow). With this change, sync-diff-inspector is now maintained in the same repository as [DM](/dm/dm-overview.md) and [TiCDC](/ticdc/ticdc-overview.md), which unifies the management of these replication and migration tools.
 
@@ -354,7 +354,7 @@ The following features are planned for deprecation in future versions:
 
 ## Improvements
 
-+ TiDB <!--tw@hfxsd: 28 notes-->
++ TiDB
 
     - (dup): release-8.5.1.md > Improvements> TiDB - Support folding read-only user-defined variables into constants [#52742](https://github.com/pingcap/tidb/issues/52742) @[winoros](https://github.com/winoros)
     - (dup): release-8.5.1.md > Improvements> TiDB - Adjust the default threshold of statistics memory cache to 20% of the total memory [#58014](https://github.com/pingcap/tidb/issues/58014) @[hawkingrei](https://github.com/hawkingrei)
@@ -370,7 +370,7 @@ The following features are planned for deprecation in future versions:
     - Support applying the `semi_join_rewrite` hint to Semi Joins in `IN` subqueries [#58829](https://github.com/pingcap/tidb/issues/58829) @[qw4990](https://github.com/qw4990)
     - Automatically remove redundant expressions from filter conditions connected by `OR` [#58998](https://github.com/pingcap/tidb/issues/58998) @[time-and-fate](https://github.com/time-and-fate)
 
-+ TiKV <!--tw@qiancai: 4 notes-->
++ TiKV
 
     - (dup): release-6.5.12.md > Improvements> TiKV - Add the detection mechanism for invalid `max_ts` updates [#17916](https://github.com/tikv/tikv/issues/17916) @[ekexium](https://github.com/ekexium)
     - (dup): release-8.2.0.md > Improvements> TiKV - Enable the [early apply](/tikv-configuration-file.md#max-apply-unpersisted-log-limit-new-in-v810) feature by default. With this feature enabled, the Raft leader can apply logs after quorum peers have persisted the logs, without waiting for the leader itself to persist the log, reducing the impact of jitter in a few TiKV nodes on write request latency [#16717](https://github.com/tikv/tikv/issues/16717) @[glorv](https://github.com/glorv)
@@ -379,7 +379,7 @@ The following features are planned for deprecation in future versions:
     - Optimize the automatic eviction mechanism for TiKV MVCC in-memory engine (IME) to reduce the impact on Coprocessor request latency [#18130](https://github.com/tikv/tikv/issues/18130) @[overvenus](https://github.com/overvenus)
     - Throttle BR log restore requests when TiKV memory usage is high to prevent TiKV OOM [#18124](https://github.com/tikv/tikv/issues/18124) @[3pointer](https://github.com/3pointer)
 
-+ PD <!--tw@lilin90: 5 notes-->
++ PD
 
     - Support printing a warning when `max-replicas` is set lower than the current number of replicas [#8959](https://github.com/tikv/pd/issues/8959) @[lhy1024](https://github.com/lhy1024)
     - Add a new `gRPC Received commands rate` monitoring panel [#8920](https://github.com/tikv/pd/issues/8920) @[okJiang](https://github.com/okJiang)
@@ -387,14 +387,14 @@ The following features are planned for deprecation in future versions:
 (https://github.com/rleungx)
     - Add a retry mechanism for `UpdateTSO` [#9020](https://github.com/tikv/pd/issues/9020) @[lhy1024](https://github.com/lhy1024)
 
-+ TiFlash <!--tw@qiancai: 4 notes-->
++ TiFlash
 
     - Improve the performance of the `TableScan` operator in TiFlash by skipping unnecessary data reads [#9875](https://github.com/pingcap/tiflash/issues/9875) @[gengliqi](https://github.com/gengliqi)
     - Improve the aggregation performance in certain scenarios through memory prefetch [#9680](https://github.com/pingcap/tiflash/issues/9680) @[guo-shaoge](https://github.com/guo-shaoge)
     - Introduce [HashJoinV2](/sql-statements/sql-statement-explain-analyze.md#hashjoinv2) to improve the performance of some inner join scenarios [#9060](https://github.com/pingcap/tiflash/issues/9060) @[gengliqi](https://github.com/gengliqi)
 
 + Tools
-    + Backup & Restore (BR) <!--tw@qiancai: 9 notes-->
+    + Backup & Restore (BR)
 
         - Include error information returned by TiKV nodes in full backup logs to facilitate troubleshooting [#58666](https://github.com/pingcap/tidb/issues/58666) @[Leavrth](https://github.com/Leavrth)
         - Optimize the structure and content of backup and restore summary logs [#56493](https://github.com/pingcap/tidb/issues/56493) @[Leavrth](https://github.com/Leavrth)
@@ -402,12 +402,11 @@ The following features are planned for deprecation in future versions:
         - Improve the index restore speed during PITR by repairing indexes concurrently [#59158](https://github.com/pingcap/tidb/issues/59158) @[Leavrth](https://github.com/Leavrth)
         - Support ignoring specific locks during backup scanning to improve backup efficiency [#53224](https://github.com/pingcap/tidb/issues/53224) @[3pointer](https://github.com/3pointer)
         - Remove the check on AWS region names to avoid backup errors caused by newly supported AWS regions failing the validation [#18159](https://github.com/tikv/tikv/issues/18159) @[3pointer](https://github.com/3pointer)
+    <!--+ TiCDC
 
-    + TiCDC <!--tw@qiancai: 2 notes-->
+         - Add `tableId` and `partitionId` fields to the TiDB extended fields for the Canal-JSON protocol [#11874](https://github.com/pingcap/tiflow/issues/11874) @[3AceShowHand](https://github.com/3AceShowHand)--> <!-- for-beta.2 -->
 
-        <!-- - Add `tableId` and `partitionId` fields to the TiDB extended fields for the Canal-JSON protocol [#11874](https://github.com/pingcap/tiflow/issues/11874) @[3AceShowHand](https://github.com/3AceShowHand)--> <!-- for-beta.2 -->
-
-    + TiDB Data Migration (DM) <!--tw@lilin90: 1 note-->
+    + TiDB Data Migration (DM)
 
         - (dup): release-6.6.0.md > Improvements> Tools> TiDB Data Migration (DM) - Optimize relay performance by adding the async/batch relay writer [#4287](https://github.com/pingcap/tiflow/issues/4287) @[GMHDBJD](https://github.com/GMHDBJD)
         - DM supports multiple security configurations [#11831](https://github.com/pingcap/tiflow/issues/11831) @[River2000i](https://github.com/River2000i)
@@ -419,7 +418,7 @@ The following features are planned for deprecation in future versions:
 
 ## Bug fixes
 
-+ TiDB <!--tw@Oreoxmt: 28 notes-->
++ TiDB
 
     - Fix the issue that executing the `MODIFY COLUMN` statement might fail during TiDB upgrades [#58843](https://github.com/pingcap/tidb/issues/58843) @[D3Hunter](https://github.com/D3Hunter)
     - Fix the issue that executing the `DROP COLUMN` statement might fail during TiDB upgrades [#58863](https://github.com/pingcap/tidb/issues/58863) @[D3Hunter](https://github.com/D3Hunter)
@@ -466,7 +465,6 @@ The following features are planned for deprecation in future versions:
     - Fix the issue that the `json_search` function does not return `NULL` when the search path is `NULL` during vectorized execution [#59463](https://github.com/pingcap/tidb/issues/59463) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that slow logs cannot be parsed correctly when database or table names contain colons (`:`) [#39940](https://github.com/pingcap/tidb/issues/39940) @[Defined2014](https://github.com/Defined2014)
     - Fix the issue that the `MOD()` function does not support expressions as parameters [#59000](https://github.com/pingcap/tidb/issues/59000) @[Defined2014](https://github.com/Defined2014)
-<!--tw@hfxsd: the following 12 notes-->
     - Fix the issue that enabling `tidb_enable_dist_task` causes TiDB upgrade to fail [#54061](https://github.com/pingcap/tidb/issues/54061) @[tangenta](https://github.com/tangenta)
     - Fix the issue of write hotspots after creating indexes by supporting splitting Regions before creating indexes [#57551](https://github.com/pingcap/tidb/issues/57551) @[tangenta](https://github.com/tangenta)
     - Fix the issue that loading InfoSchema is slow when restarting TiDB in scenarios with a large number of tables [#58821](https://github.com/pingcap/tidb/issues/58821) @[GMHDBJD](https://github.com/GMHDBJD)
@@ -480,7 +478,7 @@ The following features are planned for deprecation in future versions:
     - Fix the issue that a TiDB session might crash when Fix Control #44855 is enabled [#59762](https://github.com/pingcap/tidb/issues/59762) @[winoros](https://github.com/winoros)
     - Fix the issue that TiDB chooses Merge Join when no hint is provided and the join keys do not fully match [#20710](https://github.com/pingcap/tidb/issues/20710) @[winoros](https://github.com/winoros)
 
-+ TiKV <!--tw@lilin90: 3 notes-->
++ TiKV
 
     - (dup): release-8.5.1.md > Bug fixes> TiKV - Fix the issue that TiKV panics due to uninitialized replicas when the TiKV MVCC In-Memory Engine (IME) preloads them [#18046](https://github.com/tikv/tikv/issues/18046) @[overvenus](https://github.com/overvenus)
     - (dup): release-6.5.12.md > Bug fixes> TiKV - Fix the issue that encoding might fail when processing GBK/GB18030 encoded data [#17618](https://github.com/tikv/tikv/issues/17618) @[CbcWestwolf](https://github.com/CbcWestwolf)
@@ -494,7 +492,7 @@ The following features are planned for deprecation in future versions:
     - Fix the issue that the unexpected `Server is busy` error occurs after TiKV restarts [#18233](https://github.com/tikv/tikv/issues/18233) @[LykxSassinator](https://github.com/LykxSassinator)
     - Fix the issue that Online Unsafe Recovery gets stuck because of the TiFlash learner [#18197](https://github.com/tikv/tikv/issues/18197) @[v01dstar](https://github.com/v01dstar)
 
-+ PD <!--tw@lilin90: 7 notes-->
++ PD
 
     - (dup): release-6.5.12.md > Bug fixes> PD - Fix the issue that the `tidb_enable_tso_follower_proxy` system variable might not take effect [#8947](https://github.com/tikv/pd/issues/8947) @[JmPotato](https://github.com/JmPotato)
     - (dup): release-7.5.6.md > Bug fixes> PD - Fix the issue that PD might panic when the `tidb_enable_tso_follower_proxy` system variable is enabled [#8950](https://github.com/tikv/pd/issues/8950) @[okJiang](https://github.com/okJiang)
@@ -513,7 +511,7 @@ The following features are planned for deprecation in future versions:
     - Fix the issue that forwarding TSO requests in microservice mode might cause TiDB to panic [#9091](https://github.com/tikv/pd/issues/9091) @[lhy1024](https://github.com/lhy1024)
     - Fix the issue that network problems in PD might prevent the TSO client from initializing [#58239](https://github.com/pingcap/tidb/issues/58239) @[okJiang](https://github.com/okJiang)
 
-+ TiFlash <!--tw@qiancai: 7 notes-->
++ TiFlash 
 
     - Fix the issue that TiFlash returns incorrect results when processing `IN(Timestamp)` or `IN(Time)` expressions with time zones [#9778](https://github.com/pingcap/tiflash/issues/9778) @[solotzg](https://github.com/solotzg)
     - Fix the issue that TiFlash behaves differently from TiDB when handling overflow errors, causing the execution failures of `IMPORT INTO` statements [#9752](https://github.com/pingcap/tiflash/issues/9752) @[guo-shaoge](https://github.com/guo-shaoge)
@@ -532,7 +530,7 @@ The following features are planned for deprecation in future versions:
 
 + Tools
 
-    + Backup & Restore (BR) <!--tw@lilin90: 8 notes-->
+    + Backup & Restore (BR)
 
         - (dup): release-6.5.12.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that the `status` field is missing in the result when querying log backup tasks using `br log status --json` [#57959](https://github.com/pingcap/tidb/issues/57959) @[Leavrth](https://github.com/Leavrth)
         - (dup): release-7.5.6.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that PITR fails to restore indexes larger than 3072 bytes [#58430](https://github.com/pingcap/tidb/issues/58430) @[YuJuncen](https://github.com/YuJuncen)
@@ -544,7 +542,7 @@ The following features are planned for deprecation in future versions:
         - Fix the issue that parsing the external storage URL causes incorrect backends [#59548](https://github.com/pingcap/tidb/issues/59548) @[Leavrth](https://github.com/Leavrth)
         - Fix the issue that table ID pre-allocation is incorrect during the restore process [#59718](https://github.com/pingcap/tidb/issues/59718) @[Leavrth](https://github.com/Leavrth)
 
-    + TiCDC <!--tw@qiancai: 2 notes-->
+    + TiCDC
 
         - Fix the issue that the replication latency of changefeeds increases significantly after PD Leader migration [#11997](https://github.com/pingcap/tiflow/issues/11997) @[lidezhu](https://github.com/lidezhu)
         - Fix the issue that some configuration items of a changefeed do not take effect when the downstream connection protocol for the changefeed is `pulsar + http` or `pulsar + https` [#12068](https://github.com/pingcap/tiflow/issues/12068) @[SandeepPadhi](https://github.com/SandeepPadhi)
@@ -558,7 +556,7 @@ The following features are planned for deprecation in future versions:
         - (dup): release-6.5.12.md > Bug fixes> Tools> TiCDC - Fix the issue that TiCDC fails to properly connect to PD after PD scale-in [#12004](https://github.com/pingcap/tiflow/issues/12004) @[lidezhu](https://github.com/lidezhu)
         - (dup): release-6.5.12.md > Bug fixes> Tools> TiCDC - Fix the issue that after the default value of a newly added column in the upstream is changed from `NOT NULL` to `NULL`, the default values of that column in the downstream are incorrect [#12037](https://github.com/pingcap/tiflow/issues/12037) @[wk989898](https://github.com/wk989898)
 
-    + TiDB Data Migration (DM) <!--tw@lilin90: 3 notes-->
+    + TiDB Data Migration (DM) 
 
         - Fix the issue that dump tasks fail because system tables are not included in the default filter list [#11984](https://github.com/pingcap/tiflow/issues/11984) @[River2000i](https://github.com/River2000i)
         - Fix the issue that DM tasks fail because only `LightningTableEmptyChecking` is checked [#11945](https://github.com/pingcap/tiflow/issues/11945) @[River2000i](https://github.com/River2000i)
