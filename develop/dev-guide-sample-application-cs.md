@@ -8,8 +8,7 @@ aliases: ['/tidb/dev/sample-application-cs','/tidb/dev/dev-guide-sample-applicat
 
 C# (a.k.a. C-Sharp) is one of the languages from the .NET family as created by Microsoft. Other languages for .NET are VB.NET and F#. In this tutorial we will use C# and the MySQL Connector/NET to connect from a C# application to TiDB over the MySQL protocol. This is possible because TiDB is highly [compatible with MySQL](/mysql-compatibility.md).
 
-While .NET is often used on Windows, it is also available for macOS and Linux. For all platforms the commands and the
-code are similar. There may be small differences in the prompt and file paths.
+While .NET is often used on Windows, it is also available for macOS and Linux. For all platforms the commands and the code are similar. There may be small differences in the prompt and file paths.
 
 ## Prerequisites
 
