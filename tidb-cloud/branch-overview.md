@@ -35,13 +35,7 @@ You can create branches easily and quickly to get isolated data environments. Br
 
 Currently, TiDB Cloud Starter branches are in beta and free of charge.
 
-<<<<<<< HEAD
-- You can only create branches for TiDB Cloud Starter clusters that are created after July 5, 2023.
-
 - For each organization in TiDB Cloud, you can create a maximum of five TiDB Cloud Starter branches by default across all the clusters. The branches of a cluster will be created in the same region as the cluster, and you cannot create branches for a throttled cluster or a cluster larger than 100 GiB.
-=======
-- For each organization in TiDB Cloud, you can create a maximum of five TiDB Cloud Serverless branches by default across all the clusters. The branches of a cluster will be created in the same region as the cluster, and you cannot create branches for a throttled cluster or a cluster larger than 100 GiB.
->>>>>>> d4a3a44f4e (update branch limitation (#21182))
 
 - For each branch of a free cluster, 10 GiB storage is allowed. For each branch of a scalable cluster, 100 GiB storage is allowed. Once the storage is reached, the read and write operations on this branch will be throttled until you reduce the storage.
 
