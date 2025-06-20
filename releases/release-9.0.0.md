@@ -383,8 +383,7 @@ The following features are planned for deprecation in future versions:
 
     - Support printing a warning when `max-replicas` is set lower than the current number of replicas [#8959](https://github.com/tikv/pd/issues/8959) @[lhy1024](https://github.com/lhy1024)
     - Add a new `gRPC Received commands rate` monitoring panel [#8920](https://github.com/tikv/pd/issues/8920) @[okJiang](https://github.com/okJiang)
-    - Support configuring the `batch` size for `evict-slow-store-scheduler` [#7156](https://github.com/tikv/pd/issues/7156) @[rleungx]
-(https://github.com/rleungx)
+    - Support configuring the `batch` size for `evict-slow-store-scheduler` [#7156](https://github.com/tikv/pd/issues/7156) @[rleungx](https://github.com/rleungx)
     - Add a retry mechanism for `UpdateTSO` [#9020](https://github.com/tikv/pd/issues/9020) @[lhy1024](https://github.com/lhy1024)
 
 + TiFlash
@@ -394,6 +393,7 @@ The following features are planned for deprecation in future versions:
     - Introduce [HashJoinV2](/sql-statements/sql-statement-explain-analyze.md#hashjoinv2) to improve the performance of some inner join scenarios [#9060](https://github.com/pingcap/tiflash/issues/9060) @[gengliqi](https://github.com/gengliqi)
 
 + Tools
+
     + Backup & Restore (BR)
 
         - Include error information returned by TiKV nodes in full backup logs to facilitate troubleshooting [#58666](https://github.com/pingcap/tidb/issues/58666) @[Leavrth](https://github.com/Leavrth)
