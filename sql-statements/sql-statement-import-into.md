@@ -120,7 +120,7 @@ It specifies where your data files are and which files to import. You can point 
 >
 > If [SEM](/system-variables.md#tidb_enable_enhanced_security) is enabled in the target cluster, the `fileLocation` cannot be specified as a local file path.
 
-In the `fileLocation` parameter, you can specify a single file or use wildcards (`*` and `[]`) to match multiple files. Wildcards can be used to match sub-path segments (e.g., a directory level) and filenames. For example, if your files are stored on Amazon S3, you can configure the parameter like this:
+In the `fileLocation` parameter, you can specify a single file, or use the `*` and `[]` wildcards to match multiple files for import. Note that the wildcard can only be used in the file name, because it does not match directories or recursively match files in subdirectories. Taking files stored on Amazon S3 as examples, you can configure the parameter as follows:
 
 - Import a single file: `s3://<bucket-name>/path/to/data/foo.csv`
 - Import all files in a specified path: `s3://<bucket-name>/path/to/data/*`
