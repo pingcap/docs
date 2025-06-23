@@ -251,6 +251,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
     For more information, see [documentation](/br/br-pitr-manual.md#compatibility-between-ongoing-log-backup-and-snapshot-restore).
 
+* Support redistribute data of a specific table (experimental) [#8986](https://github.com/tikv/pd/issues/8986) @[bufferflies](https://github.com/bufferflies) **tw@qiancai** <!--1724 beta.2-->
+
+    PD automatically schedules data to distribute it as evenly as possible across all TiKV nodes in a cluster. However, this automatic scheduling is based on the overall cluster. In some cases, even if the cluster-wide data distribution is balanced, the data of a specific table might still be unevenly distributed across TiKV nodes.
+
+    Starting from v9.0.0, you can use the [`SHOW TABLE DISTRIBUTION`](/sql-statements/sql-statement-show-distribution-jobs.md) statement to check how the data of a specific table is distributed across all TiKV nodes. If the data distribution is unbalanced, you can use the [`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md) statement to redistribute the table's data (experimental) to improve load balancing.
+
+    Note that redistributing the data of a specific table is a one-time task with a timeout limit. If the distribution task is not completed before the timeout, it will automatically exit.
+
+    For more information, see [documentation](/sql-statements/sql-statement-distribute-table.md).
+
 ### Observability
 
 * Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234 beta.2-->
