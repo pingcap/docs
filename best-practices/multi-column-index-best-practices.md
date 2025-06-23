@@ -88,33 +88,34 @@ Using the multi-column index, TiDB can efficiently narrow the scan range to find
 
 ```sql
 -- Query 2: Find two-bedroom listings in San Francisco under $2,000
-EXPLAIN FORMAT=BRIEF 
+EXPLAIN FORMAT = "brief" 
     SELECT * FROM listings 
     WHERE city = 'San Francisco' AND bedrooms = 2 AND price < 2000;
 ```
 
 ```sql
 -- Plan for Query 2
-EXPLAIN FORMAT=BRIEF 
+EXPLAIN FORMAT= "brief"
     SELECT * FROM listings 
     WHERE city = 'San Francisco' and bedrooms = 2 and price < 2000;
------+------------------------------------------------------+--------------------------
-| id  task                | access object                | operator info   
-+-----------------------------+---------+-----------+-----------------------------------
-| IndexLookUp             | root                         | 
-| ├─IndexRangeScan(Build) | table:listings,              | range:
-|                         | index:idx_city_bedrooms_price| ["San Francisco" 2 -inf,
-|                         | (city, bedrooms, price)      | "San Francisco" 2 2000.00)
-| └─TableRowIDScan(Probe) | table:listings               | 
-+-----------------------------+---------+-----------+-----------------------------------
+```
+
+```
++-------------------------+------+--------------------------------------------------------------------------------------------+---------------------------------+
+| id                      | task | access object                                                                              | operator info                   |
++-------------------------+------+--------------------------------------------------------------------------------------------+---------------------------------+
+| IndexLookUp             | root |                                                                                                                              | 
+| ├─IndexRangeScan(Build) | root |table:listings,index:idx_city_bedrooms_price ["San Francisco" 2 -inf, (city, bedrooms, price)|range:"San Francisco" 2 2000.00)|
+| └─TableRowIDScan(Probe) | root |table:listings                                                                                                                | 
++-------------------------+------+---------------------------------------------------------------------------------------------+--------------------------------+
 ```
 
 This query returns the following filtered results from the sample data:
 
-| City | Bedrooms | Price |
-|--------------|----------|-------|
-| San Francisco | 2 | 1000 |
-| San Francisco | 2 | 1500 |
+| City          | Bedrooms | Price |
+|---------------|----------|-------|
+| San Francisco |    2     | 1000  |
+| San Francisco |    2     | 1500  |
 
 By using a multi-column index, TiDB avoids unnecessary row scanning and significantly boosts query performance.
 
@@ -147,21 +148,21 @@ In this case, the two ranges overlap, so the optimizer combines them into a sing
 
 ```sql
 -- Query 3: Overlapping price ranges
-EXPLAIN FORMAT=BRIEF 
+EXPLAIN FORMAT = "brief" 
     SELECT * FROM listings 
     WHERE (city = 'New York' AND bedrooms = 2 AND price >= 1000 AND price < 2000) 
        OR (city = 'New York' AND bedrooms = 2 AND price >= 1500 AND price < 2500);
- -----+------------------------------------------------------+--------------------------
-| id  task                | access object                | operator info   
-+-----------------------------+---------+-----------+-----------------------------------
-| IndexLookUp             | root                         | 
-| ├─IndexRangeScan(Build) | table:listings,              | range:
-|                         | index:idx_city_bedrooms_price| ["New York" 2 1000.00,
-|                         | (city, bedrooms, price)      |  "New York" 2 2500.00)
-| └─TableRowIDScan(Probe) | table:listings               | 
-+-----------------------------+---------+-----------+-----------------------------------
 ```
 
+```
++-------------------------+------+----------------------------------------------------------------------+--------------------------------------------------+
+| id                      | task | access object                                                        | operator info                                    |
++-------------------------+------+----------------------------------------------------------------------+--------------------------------------------------+
+| IndexLookUp             | root |                                                                      |                                                  |
+| ├─IndexRangeScan(Build) | root | table:listings,index:idx_city_bedrooms_price(city, bedrooms, price)  | range:["New York" 2 1000.00,"New York" 2 2500.00)|
+| └─TableRowIDScan(Probe) | root | table:listings                                                       |                                                  |
++-------------------------+------+----------------------------------------------------------------------+--------------------------------------------------+
+```
 ### Example 2: non-overlapping ranges
 
 In a different scenario, imagine a query that looks for affordable single-bedroom listings in either San Francisco or San Diego. Here, the `OR` condition specifies two distinct ranges for different cities:
@@ -174,22 +175,21 @@ Because there is no overlap between these ranges, they remain separate in the ex
 ```sql
 -- Query 4: Non-overlapping ranges for different cities
 
-EXPLAIN FORMAT=BRIEF 
+EXPLAIN FORMAT = "brief" 
     SELECT * FROM listings 
     WHERE
         (city = 'San Francisco' AND bedrooms = 1 AND price >= 1500 AND price < 2500) 
      OR (city = 'San Diego' AND bedrooms = 1 AND price >= 1000 AND price < 1500);
- -----+------------------------------------------------------+--------------------------
-| id  task                | access object                | operator info   
-+-----------------------------+---------+-----------+-----------------------------------
-| IndexLookUp             | root                         | 
-| ├─IndexRangeScan(Build) | table:listings,              | range:
-|                         | index:idx_city_bedrooms_price| ["San Francisco" 1 1500.00,
-|                         | (city, bedrooms, price)      |  "San Francisco" 1 2500.00) 
-|                         |                              | ["San Diego" 1 1000.00,
-|                         |                              |   "San Diego" 1 1500.00)
-| └─TableRowIDScan(Probe) | table:listings               | 
-+-----------------------------+---------+-----------+-----------------------------------
+```
+
+```
++-------------------------+------+--------------------------------------------------------------------+------------------------------------------------------------+
+| id                      | task | access object                                                      | operator info                                              |
++-------------------------+------+--------------------------------------------------------------------+------------------------------------------------------------+
+| IndexLookUp             | root |                                                                    |                                                            |
+| ├─IndexRangeScan(Build) | root | table:listings,index:idx_city_bedrooms_price(city, bedrooms, price)| range:["San Francisco" 1 1500.00,"San Francisco" 1 2500.00)|
+| └─TableRowIDScan(Probe) | root | table:listings                                                     |       ["San Diego" 1 1000.00,"San Diego" 1 1500.00)        |
++-------------------------+------+--------------------------------------------------------------------+------------------------------------------------------------+
 ```
 
 By creating either merged or distinct ranges based on overlap, the optimizer can efficiently use indexes for `OR` conditions, avoiding unnecessary scans and improving query performance.
@@ -247,18 +247,19 @@ The following query plan shows the derived ranges:
 
 ```sql
 -- Query 5: Conjunctive conditions on (a1, b1)
-EXPLAIN FORMAT=BRIEF 
+EXPLAIN FORMAT = "brief" 
     SELECT * FROM t1 
     WHERE (a1, b1) > (1, 10) AND (a1, b1) < (10, 20);
- -----+------------------------------------------------------+--------------------------
-| id  task                | access object               | operator info   
-+-----------------------------+---------+-----------+-----------------------------------
-| IndexLookUp             | root                        | 
-| ├─IndexRangeScan(Build) | table:t1,index:iab(a1, b1)  | range:(1 10,1 +inf],
-|                         |                             |       (1,10)
-|                         |                             |       [10 -inf,10 20)
-| └─TableRowIDScan(Probe) | table:t1                    | 
-+-----------------------------+---------+-----------+-----------------------------------
+```
+
+```
++-------------------------+------+----------------------------+-------------------------------------------+
+| id                      | task | access object              | operator info                             |
++-------------------------+------+----------------------------+-------------------------------------------+
+| IndexLookUp             | root |                                                                        |                                                  
+| ├─IndexRangeScan(Build) | root | table:t1,index:iab(a1, b1) | range:(1 10,1 +inf],(1,10)[10 -inf,10 20) |
+| └─TableRowIDScan(Probe) | root | table:t1                   |                                           |
++-------------------------+------+----------------------------+-------------------------------------------+
 ```
 
 In this example, the table has about 500 million rows. However, this optimization allows TiDB to narrow down the access to only around 4,000 rows, just 0.0008% of the total data. This refinement drastically reduces query latency to a few milliseconds, as opposed to over two minutes without optimization.
