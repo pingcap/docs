@@ -44,7 +44,7 @@ After disabling log redaction, note the following:
 * Existing connections are unaffected. You need to reconnect them for the changes to take effect.
 * Logs for new sessions will no longer be redacted.
 
-## Confirm that log redaction is disabled
+## Check the updated logs
 
 To confirm that log redaction is disabled, do the following:
 
