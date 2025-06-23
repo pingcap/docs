@@ -1,19 +1,19 @@
 ---
-title: SHOW [FULL] COLUMNS FROM | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW [FULL] COLUMNS FROM for the TiDB database.
+title: SHOW [FULL] COLUMNS FROM | TiDB SQL 语句参考
+summary: TiDB 数据库中 SHOW [FULL] COLUMNS FROM 的使用概述。
 ---
 
 # SHOW [FULL] COLUMNS FROM
 
-The statement `SHOW [FULL] COLUMNS FROM <table_name>` describes the columns of a table or view in a useful tabular format. The optional keyword `FULL` displays the privileges the current user has to that column, and the `comment` from the table definition.
+`SHOW [FULL] COLUMNS FROM <table_name>` 语句以有用的表格格式描述表或视图的列。可选关键字 `FULL` 显示当前用户对该列的权限，以及来自表定义的 `comment`。
 
-The statements `SHOW [FULL] FIELDS FROM <table_name>`, `DESC <table_name>`, `DESCRIBE <table_name>`, and `EXPLAIN <table_name>` are aliases of this statement.
+语句 `SHOW [FULL] FIELDS FROM <table_name>`、`DESC <table_name>`、`DESCRIBE <table_name>` 和 `EXPLAIN <table_name>` 都是此语句的别名。
 
-> **Note:**
+> **注意：**
 >
-> `DESC TABLE <table_name>`, `DESCRIBE TABLE <table_name>`, and `EXPLAIN TABLE <table_name>` are not equivalent to the above statements. They are aliases of [`DESC SELECT * FROM <table_name>`](/sql-statements/sql-statement-explain.md).
+> `DESC TABLE <table_name>`、`DESCRIBE TABLE <table_name>` 和 `EXPLAIN TABLE <table_name>` 与上述语句不等价。它们是 [`DESC SELECT * FROM <table_name>`](/sql-statements/sql-statement-explain.md) 的别名。
 
-## Synopsis
+## 语法概要
 
 ```ebnf+diagram
 ShowColumnsFromStmt ::=
@@ -27,7 +27,7 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> CREATE VIEW v1 AS SELECT 1;
@@ -127,10 +127,10 @@ mysql> SHOW FULL COLUMNS FROM mysql.user;
 38 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `SHOW [FULL] COLUMNS FROM` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中的 `SHOW [FULL] COLUMNS FROM` 语句与 MySQL 完全兼容。如果发现任何兼容性差异，请[报告 bug](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 另请参阅
 
 * [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)

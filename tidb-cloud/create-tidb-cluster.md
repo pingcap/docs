@@ -1,96 +1,96 @@
 ---
-title: Create a TiDB Cloud Dedicated Cluster
-summary: Learn how to create your TiDB Cloud Dedicated cluster.
+title: 创建 TiDB Cloud Dedicated 集群
+summary: 了解如何创建 TiDB Cloud Dedicated 集群。
 ---
 
-# Create a TiDB Cloud Dedicated Cluster
+# 创建 TiDB Cloud Dedicated 集群
 
-This tutorial guides you through signing up and creating a TiDB Cloud Dedicated cluster.
+本教程将指导你注册并创建 TiDB Cloud Dedicated 集群。
 
-> **Tip:**
+> **提示：**
 >
-> To learn how to create a TiDB Cloud Serverless cluster, see [Create a TiDB Cloud Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
+> 如需了解如何创建 TiDB Cloud Serverless 集群，请参阅[创建 TiDB Cloud Serverless 集群](/tidb-cloud/create-tidb-cluster-serverless.md)。
 
-## Before you begin
+## 开始之前
 
-If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/signup) to sign up for an account.
+如果你还没有 TiDB Cloud 账号，请点击[此处](https://tidbcloud.com/signup)注册账号。
 
-- You can either sign up with email and password so that you can manage your password using TiDB Cloud, or sign up with your Google, GitHub, or Microsoft account.
-- For AWS Marketplace users, you can also sign up through AWS Marketplace. To do that, search for `TiDB Cloud` in [AWS Marketplace](https://aws.amazon.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
-- For Azure Marketplace users, you can also sign up through Azure Marketplace. To do that, search for `TiDB Cloud` in [Azure Marketplace](https://azuremarketplace.microsoft.com), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
-- For Google Cloud Marketplace users, you can also sign up through Google Cloud Marketplace. To do that, search for `TiDB Cloud` in [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+- 你可以使用电子邮件和密码注册，这样可以通过 TiDB Cloud 管理密码，也可以使用 Google、GitHub 或 Microsoft 账号注册。
+- 对于 AWS Marketplace 用户，你也可以通过 AWS Marketplace 注册。只需在 [AWS Marketplace](https://aws.amazon.com/marketplace) 中搜索 `TiDB Cloud`，订阅 TiDB Cloud，然后按照屏幕上的说明设置你的 TiDB Cloud 账号。
+- 对于 Azure Marketplace 用户，你也可以通过 Azure Marketplace 注册。只需在 [Azure Marketplace](https://azuremarketplace.microsoft.com) 中搜索 `TiDB Cloud`，订阅 TiDB Cloud，然后按照屏幕上的说明设置你的 TiDB Cloud 账号。
+- 对于 Google Cloud Marketplace 用户，你也可以通过 Google Cloud Marketplace 注册。只需在 [Google Cloud Marketplace](https://console.cloud.google.com/marketplace) 中搜索 `TiDB Cloud`，订阅 TiDB Cloud，然后按照屏幕上的说明设置你的 TiDB Cloud 账号。
 
-## (Optional) Step 1. Use your default project or create a new project
+## （可选）步骤 1. 使用默认项目或创建新项目
 
-Once you log in to the [TiDB Cloud console](https://tidbcloud.com/), you have a default [project](/tidb-cloud/tidb-cloud-glossary.md#project). When there is only one project in your organization, your cluster will be created in that project. For more information about projects, see [Organizations and projects](/tidb-cloud/manage-user-access.md#organizations-and-projects).
+登录 [TiDB Cloud 控制台](https://tidbcloud.com/)后，你会有一个默认的[项目](/tidb-cloud/tidb-cloud-glossary.md#project)。当你的组织中只有一个项目时，你的集群将在该项目中创建。有关项目的更多信息，请参阅[组织和项目](/tidb-cloud/manage-user-access.md#organizations-and-projects)。
 
-If you are an organization owner, you can rename the default project or create a new project for the cluster according to your need as follows:
+如果你是组织所有者，可以根据需要按照以下步骤重命名默认项目或为集群创建新项目：
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), click the combo box in the upper-left corner. Your default organization and project are displayed.
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，点击左上角的组合框。将显示你的默认组织和项目。
 
-2. Click the name of your organization, and then click **Projects** in the left navigation pane.
+2. 点击你组织的名称，然后点击左侧导航栏中的**项目**。
 
-3. On the **Projects** page, do one of the following:
+3. 在**项目**页面上，执行以下操作之一：
 
-    - To rename the default project, click **...** > **Rename** in the **Actions** column.
-    - To create a project, click **Create New Project**, enter a name for your project, and then click **Confirm**.
+    - 要重命名默认项目，请在**操作**列中点击 **...** > **重命名**。
+    - 要创建项目，请点击**创建新项目**，输入项目名称，然后点击**确认**。
 
-4. To go to the cluster list page of your project, click the project name on the **Projects** page.
+4. 要转到项目的集群列表页面，请在**项目**页面上点击项目名称。
 
-## Step 2. Create a TiDB Cloud Dedicated cluster
+## 步骤 2. 创建 TiDB Cloud Dedicated 集群
 
-If you are in the `Organization Owner` or the `Project Owner` role, you can create a TiDB Cloud Dedicated cluster as follows:
+如果你是`组织所有者`或`项目所有者`角色，可以按照以下步骤创建 TiDB Cloud Dedicated 集群：
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. 导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面。
 
-    > **Tip:**
+    > **提示：**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > 你可以使用左上角的组合框在组织、项目和集群之间切换。
 
-2. Click **Create Cluster**.
+2. 点击**创建集群**。
 
-3. On the **Create Cluster** page, select **Dedicated**, and then configure the cluster information as follows:
+3. 在**创建集群**页面上，选择 **Dedicated**，然后按如下配置集群信息：
 
-    1. Choose a cloud provider and a region.
+    1. 选择云服务提供商和区域。
 
-        > **Note:**
+        > **注意：**
         >
-        > - Currently, the support of TiDB Cloud Dedicated on Azure is in public preview.
-        > - If you signed up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), the cloud provider is AWS, and you cannot change it in TiDB Cloud.
-        > - If you signed up for TiDB Cloud through [Azure Marketplace](https://azuremarketplace.microsoft.com), the cloud provider is Azure Cloud, and you cannot change it in TiDB Cloud.
-        > - If you signed up for TiDB Cloud through [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), the cloud provider is Google Cloud, and you cannot change it in TiDB Cloud.
+        > - 目前，Azure 上的 TiDB Cloud Dedicated 支持处于公开预览阶段。
+        > - 如果你通过 [AWS Marketplace](https://aws.amazon.com/marketplace) 注册了 TiDB Cloud，云服务提供商为 AWS，且无法在 TiDB Cloud 中更改。
+        > - 如果你通过 [Azure Marketplace](https://azuremarketplace.microsoft.com) 注册了 TiDB Cloud，云服务提供商为 Azure Cloud，且无法在 TiDB Cloud 中更改。
+        > - 如果你通过 [Google Cloud Marketplace](https://console.cloud.google.com/marketplace) 注册了 TiDB Cloud，云服务提供商为 Google Cloud，且无法在 TiDB Cloud 中更改。
 
-    2. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash (optional) respectively.
-    3. Update the default cluster name and port number if necessary.
-    4. If CIDR has not been configured for this region, you need to set the CIDR. If you do not see the **Project CIDR** field, it means that CIDR has already been configured for this region.
+    2. 分别为 TiDB、TiKV 和 TiFlash（可选）配置[集群大小](/tidb-cloud/size-your-cluster.md)。
+    3. 如有必要，更新默认的集群名称和端口号。
+    4. 如果尚未为该区域配置 CIDR，则需要设置 CIDR。如果你没有看到**项目 CIDR**字段，则表示该区域已配置 CIDR。
 
-        > **Note:**
+        > **注意：**
         >
-        > - TiDB Cloud will create a VPC with this CIDR when the first cluster in this region is created. All the subsequent clusters of the same project in this region will use this VPC.
-        > - When setting the CIDR, avoid any conflicts with the CIDR of the VPC where your application is located. You cannot modify your CIDR once the VPC is created.
+        > - 当在此区域创建第一个集群时，TiDB Cloud 将使用此 CIDR 创建一个 VPC。同一项目在此区域的所有后续集群都将使用此 VPC。
+        > - 设置 CIDR 时，避免与应用程序所在 VPC 的 CIDR 发生冲突。VPC 创建后无法修改 CIDR。
 
-4. Confirm the cluster and billing information on the right side.
+4. 确认右侧的集群和计费信息。
 
-5. If you have not added a payment method, click **Add Credit Card** in the lower-right corner.
+5. 如果你尚未添加付款方式，请点击右下角的**添加信用卡**。
 
-    > **Note:**
+    > **注意：**
     >
-    > If you signed up TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), [Azure Marketplace](https://azuremarketplace.microsoft.com), or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), you can pay through your AWS account, Azure account, or Google Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud console.
+    > 如果你通过 [AWS Marketplace](https://aws.amazon.com/marketplace)、[Azure Marketplace](https://azuremarketplace.microsoft.com) 或 [Google Cloud Marketplace](https://console.cloud.google.com/marketplace) 注册了 TiDB Cloud，你可以直接通过 AWS 账号、Azure 账号或 Google Cloud 账号付款，但无法在 TiDB Cloud 控制台中添加付款方式或下载发票。
 
-6. Click **Create**.
+6. 点击**创建**。
 
-    Your TiDB Cloud cluster will be created in approximately 20 to 30 minutes.
+    你的 TiDB Cloud 集群将在大约 20 到 30 分钟内创建完成。
 
-## Step 3. Set the root password
+## 步骤 3. 设置 root 密码
 
-After your cluster is created, take the following steps to set the root password:
+集群创建完成后，按照以下步骤设置 root 密码：
 
-1. In the upper-right corner of your cluster overview page, click **...** and select **Password Settings**.
+1. 在集群概览页面的右上角，点击 **...** 并选择**密码设置**。
 
-2. Set the root password to connect to your cluster, and then click **Save**.
+2. 设置连接集群的 root 密码，然后点击**保存**。
 
-    You can click **Auto-generate Password** to generate a random password. The generated password will not show again, so save your password in a secure location.
+    你可以点击**自动生成密码**生成随机密码。生成的密码不会再次显示，请将密码保存在安全的位置。
 
-## What's next
+## 下一步
 
-After your cluster is created on TiDB Cloud, you can connect to it via the methods provided in [Connect to Your TiDB Cloud Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+在 TiDB Cloud 上创建集群后，你可以通过[连接到 TiDB Cloud Dedicated 集群](/tidb-cloud/connect-to-tidb-cluster.md)中提供的方法连接到集群。

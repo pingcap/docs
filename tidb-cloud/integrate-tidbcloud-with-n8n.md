@@ -1,33 +1,33 @@
 ---
-title: Integrate TiDB Cloud with n8n
-summary: Learn the use of TiDB Cloud node in n8n.
+title: 将 TiDB Cloud 与 n8n 集成
+summary: 了解如何在 n8n 中使用 TiDB Cloud 节点。
 ---
 
-# Integrate TiDB Cloud with n8n
+# 将 TiDB Cloud 与 n8n 集成
 
-[n8n](https://n8n.io/) is an extendable workflow automation tool. With a [fair-code](https://faircode.io/) distribution model, n8n will always have visible source code, be available to self-host, and allow you to add your custom functions, logic, and apps.
+[n8n](https://n8n.io/) 是一个可扩展的工作流自动化工具。通过 [fair-code](https://faircode.io/) 分发模式，n8n 将始终保持源代码可见，支持自托管，并允许你添加自定义函数、逻辑和应用程序。
 
-This document introduces how to build an auto-workflow: create a TiDB Cloud Serverless cluster, gather Hacker News RSS, store it to TiDB and send a briefing email.
+本文介绍如何构建一个自动工作流：创建 TiDB Cloud Serverless 集群，收集 Hacker News RSS，将其存储到 TiDB 并发送简报邮件。
 
-## Prerequisites: Get TiDB Cloud API key
+## 前提条件：获取 TiDB Cloud API 密钥
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Organization Settings** > **API Keys**.
-3. On the **API Keys** page, click **Create API Key**.
-4. Enter a description for the API key, and then click **Next**.
-5. Copy the created API key for later use in n8n, and then click **Done**.
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，使用左上角的组合框切换到目标组织。
+2. 在左侧导航栏中，点击**组织设置** > **API 密钥**。
+3. 在 **API 密钥**页面，点击**创建 API 密钥**。
+4. 输入 API 密钥的描述，然后点击**下一步**。
+5. 复制创建的 API 密钥以供后续在 n8n 中使用，然后点击**完成**。
 
-For more information, see [TiDB Cloud API Overview](/tidb-cloud/api-overview.md).
+更多信息，请参阅 [TiDB Cloud API 概览](/tidb-cloud/api-overview.md)。
 
-## Step 1: Install n8n
+## 步骤 1：安装 n8n
 
-There are two ways to install your self-hosting n8n. Choose whichever works for you.
+有两种方式可以安装自托管的 n8n。选择适合你的方式即可。
 
 <SimpleTab>
 <div label="npm">
 
-1. Install [node.js](https://nodejs.org/en/download/) on your workspace.
-2. Download and start n8n by `npx`.
+1. 在你的工作空间安装 [node.js](https://nodejs.org/en/download/)。
+2. 通过 `npx` 下载并启动 n8n。
 
     ```shell
     npx n8n
@@ -36,8 +36,8 @@ There are two ways to install your self-hosting n8n. Choose whichever works for 
 </div>
 <div label="Docker">
 
-1. Install [Docker](https://www.docker.com/products/docker-desktop) on your workspace.
-2. Download and start n8n by `docker`.
+1. 在你的工作空间安装 [Docker](https://www.docker.com/products/docker-desktop)。
+2. 通过 `docker` 下载并启动 n8n。
 
     ```shell
     docker run -it --rm --name n8n -p 5678:5678 -v ~/.n8n:/home/node/.n8n n8nio/n8n
@@ -46,25 +46,25 @@ There are two ways to install your self-hosting n8n. Choose whichever works for 
 </div>
 </SimpleTab>
 
-After starting n8n, you can visit [localhost:5678](http://localhost:5678) to try out n8n.
+启动 n8n 后，你可以访问 [localhost:5678](http://localhost:5678) 来试用 n8n。
 
-## Step 2: Install TiDB Cloud node in n8n
+## 步骤 2：在 n8n 中安装 TiDB Cloud 节点
 
-TiDB Cloud node is named `n8n-nodes-tidb-cloud` in the npm repository. You need to install this node manually to control TiDB Cloud with n8n.
+TiDB Cloud 节点在 npm 仓库中的名称为 `n8n-nodes-tidb-cloud`。你需要手动安装此节点才能使用 n8n 控制 TiDB Cloud。
 
-1. In the [localhost:5678](http://localhost:5678) page, create an owner account for self-hosting n8n.
-2. Go to **Settings** > **Community nodes**.
-3. Click **Install a community node**.
-4. In the **npm Package Name** field, enter `n8n-nodes-tidb-cloud`.
-5. Click **Install**.
+1. 在 [localhost:5678](http://localhost:5678) 页面，为自托管的 n8n 创建一个所有者账户。
+2. 转到**设置** > **社区节点**。
+3. 点击**安装社区节点**。
+4. 在 **npm 包名称**字段中，输入 `n8n-nodes-tidb-cloud`。
+5. 点击**安装**。
 
-Then you can search the **TiDB Cloud** node in **Workflow** > search bar and use the TiDB Cloud node by dragging it to a workspace.
+然后，你可以在**工作流** > 搜索栏中搜索 **TiDB Cloud** 节点，并通过将其拖动到工作区来使用 TiDB Cloud 节点。
 
-## Step 3: Build your workflow
+## 步骤 3：构建工作流
 
-In this step, you will create a new workflow to insert some data to TiDB when you click **Execute** button.
+在此步骤中，你将创建一个新的工作流，当你点击**执行**按钮时，它会向 TiDB 插入一些数据。
 
-This example usage workflow would use the following nodes:
+此示例工作流将使用以下节点：
 
 - [Schedule Trigger](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.scheduletrigger/)
 - [RSS Read](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.rssfeedread/)
@@ -72,87 +72,87 @@ This example usage workflow would use the following nodes:
 - [Gmail](https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.gmail/)
 - [TiDB Cloud node](https://www.npmjs.com/package/n8n-nodes-tidb-cloud)
 
-The final workflow should look like the following image.
+最终的工作流应如下图所示。
 
 ![img](/media/tidb-cloud/integration-n8n-workflow-rss.jpg)
 
-### (Optional) Create a TiDB Cloud Serverless cluster
+### （可选）创建 TiDB Cloud Serverless 集群
 
-If you don't have a TiDB Cloud Serverless cluster, you can use this node to create one. Otherwise, feel free to skip this operation.
+如果你还没有 TiDB Cloud Serverless 集群，可以使用此节点创建一个。否则，可以跳过此操作。
 
-1. Navigate to **Workflows** panel, and click **Add workflow**.
-2. In new workflow workspace, click **+** in the top right corner and choose **All** field.
-3. Search `TiDB Cloud` and drag it to the workspace.
-4. Enter credentials, which is the TiDB Cloud API key, for the TiDB Cloud node.
-5. In the **Project** list, select your project.
-6. In the **Operation** list, select `Create Serverless Cluster`.
-7. In the **Cluster Name** box, enter a cluster name.
-8. In the **Region** list, select a region.
-9. In the **Password** box, enter a password used to log in to your TiDB clusters.
-10. Click **Execute Node** to run the node.
+1. 导航到**工作流**面板，点击**添加工作流**。
+2. 在新的工作流工作区中，点击右上角的 **+** 并选择**全部**字段。
+3. 搜索 `TiDB Cloud` 并将其拖动到工作区。
+4. 为 TiDB Cloud 节点输入凭据，即 TiDB Cloud API 密钥。
+5. 在**项目**列表中，选择你的项目。
+6. 在**操作**列表中，选择 `Create Serverless Cluster`。
+7. 在**集群名称**框中，输入集群名称。
+8. 在**区域**列表中，选择一个区域。
+9. 在**密码**框中，输入用于登录 TiDB 集群的密码。
+10. 点击**执行节点**以运行节点。
 
-> **Note:**
+> **注意：**
 >
-> It takes several seconds to create a new TiDB Cloud Serverless cluster.
+> 创建新的 TiDB Cloud Serverless 集群需要几秒钟时间。
 
-### Create a workflow
+### 创建工作流
 
-#### Use a manual trigger as the workflow's starter
+#### 使用手动触发器作为工作流的起点
 
-1. If you don't have a workflow yet, navigate to the **Workflows** panel, and click **Start from scratch**. Otherwise, skip this step.
-2. Click **+** in the top right corner and search `schedule trigger`.
-3. Drag the manual trigger node to your workspace, and double-click the node. The **Parameters** dialog is displayed.
-4. Configure the rule as follows:
+1. 如果你还没有工作流，请导航到**工作流**面板，然后点击**从头开始**。否则，请跳过此步骤。
+2. 点击右上角的 **+** 并搜索 `schedule trigger`。
+3. 将手动触发器节点拖动到工作区，然后双击该节点。此时会显示**参数**对话框。
+4. 按如下方式配置规则：
 
-    - **Trigger Interval**: `Days`
-    - **Days Between Triggers**: `1`
-    - **Trigger at Hour**: `8am`
-    - **Trigger at Minute**: `0`
+    - **触发间隔**：`天`
+    - **触发间隔天数**：`1`
+    - **触发小时**：`8am`
+    - **触发分钟**：`0`
 
-This trigger will execute your workflow every morning at 8 AM.
+此触发器将在每天早上 8 点执行你的工作流。
 
-#### Create a table used to insert data
+#### 创建用于插入数据的表
 
-1. Click **+** to the right of the manual trigger node.
-2. Search `TiDB Cloud` and add it to the workspace.
-3. In the **Parameters** dialog, enter the credential for the TiDB Cloud node. The credential is your TiDB Cloud API key.
-4. In the **Project** list, select your project.
-5. In the **Operation** list, select `Execute SQL`.
-6. Select the cluster. If you have not seen your new cluster in the list, you need to wait a few minutes until the cluster creation is completed.
-7. In the **User** list, select a user. TiDB Cloud always creates a default user, so you don't have to manually create one.
-8. In the **Database** box, enter `test`.
-9. Enter your database password.
-10. In the **SQL** box, enter the following SQL:
+1. 点击手动触发器节点右侧的 **+**。
+2. 搜索 `TiDB Cloud` 并将其添加到工作区。
+3. 在**参数**对话框中，输入 TiDB Cloud 节点的凭据。凭据是你的 TiDB Cloud API 密钥。
+4. 在**项目**列表中，选择你的项目。
+5. 在**操作**列表中，选择 `Execute SQL`。
+6. 选择集群。如果你在列表中看不到新集群，需要等待几分钟，直到集群创建完成。
+7. 在**用户**列表中，选择一个用户。TiDB Cloud 始终创建一个默认用户，因此你不必手动创建。
+8. 在**数据库**框中，输入 `test`。
+9. 输入你的数据库密码。
+10. 在 **SQL** 框中，输入以下 SQL：
 
     ```sql
     CREATE TABLE IF NOT EXISTS hacker_news_briefing (creator VARCHAR (200), title TEXT,  link VARCHAR(200), pubdate VARCHAR(200), comments VARCHAR(200), content TEXT, guid VARCHAR (200), isodate VARCHAR(200));
     ```
 
-11. Click **Execute node** to create the table.
+11. 点击**执行节点**以创建表。
 
-#### Get the Hacker News RSS
+#### 获取 Hacker News RSS
 
-1. Click **+** to the right of the TiDB Cloud node.
-2. Search `RSS Read` and add it to the workspace.
-3. In the **URL** box, enter `https://hnrss.org/frontpage`.
+1. 点击 TiDB Cloud 节点右侧的 **+**。
+2. 搜索 `RSS Read` 并将其添加到工作区。
+3. 在 **URL** 框中，输入 `https://hnrss.org/frontpage`。
 
-#### Insert data to TiDB
+#### 将数据插入 TiDB
 
-1. Click **+** to the right of the RSS Read node.
-2. Search `TiDB Cloud` and add it to the workspace.
-3. Select the credentials that you entered the previous TiDB Cloud node.
-4. In the **Project** list, select your project.
-5. In the **Operation** list, select `Insert`.
-6. In **Cluster**, **User**, **Database** and **Password** boxes, enter the corresponding values.
-7. In the **Table** box, enter the `hacker_news_briefing` table.
-8. In the **Columns** box, enter `creator, title, link, pubdate, comments, content, guid, isodate`.
+1. 点击 RSS Read 节点右侧的 **+**。
+2. 搜索 `TiDB Cloud` 并将其添加到工作区。
+3. 选择你在前面的 TiDB Cloud 节点中输入的凭据。
+4. 在**项目**列表中，选择你的项目。
+5. 在**操作**列表中，选择 `Insert`。
+6. 在**集群**、**用户**、**数据库**和**密码**框中，输入相应的值。
+7. 在**表**框中，输入 `hacker_news_briefing` 表。
+8. 在**列**框中，输入 `creator, title, link, pubdate, comments, content, guid, isodate`。
 
-#### Build message
+#### 构建消息
 
-1. Click **+** to the right of the RSS Feed Read node.
-2. Search `code` and add it to the workspace.
-3. Select the `Run Once for All Items` mode.
-4. In the **JavaScript** box, copy and paste the following code.
+1. 点击 RSS Feed Read 节点右侧的 **+**。
+2. 搜索 `code` 并将其添加到工作区。
+3. 选择 `Run Once for All Items` 模式。
+4. 在 **JavaScript** 框中，复制并粘贴以下代码。
 
     ```javascript
     let message = "";
@@ -183,113 +183,113 @@ This trigger will execute your workflow every morning at 8 AM.
     return [{json: {response}}];
     ```
 
-#### Send message by Gmail
+#### 通过 Gmail 发送消息
 
-1. Click **+** to the right of the code node.
-2. Search `gmail` and add it to the workspace.
-3. Enter the credential for the Gmail node. For detailed instructions, refer to [n8n documentation](https://docs.n8n.io/integrations/builtin/credentials/google/oauth-single-service/).
-4. In the **Resource** list, select `Message`.
-5. In the **Operation** list, select `Send`.
-6. In the **To** box, enter your email.
-7. In the **Subject** box, enter `Hacker News Briefing`.
-8. In the **Email Type** box, select `HTML`.
-9. In the **Message** box, click `Expression` and enter `{{ $json["response"] }}`.
+1. 点击代码节点右侧的 **+**。
+2. 搜索 `gmail` 并将其添加到工作区。
+3. 为 Gmail 节点输入凭据。有关详细说明，请参阅 [n8n 文档](https://docs.n8n.io/integrations/builtin/credentials/google/oauth-single-service/)。
+4. 在**资源**列表中，选择 `Message`。
+5. 在**操作**列表中，选择 `Send`。
+6. 在**收件人**框中，输入你的电子邮件。
+7. 在**主题**框中，输入 `Hacker News Briefing`。
+8. 在**邮件类型**框中，选择 `HTML`。
+9. 在**消息**框中，点击 `Expression` 并输入 `{{ $json["response"] }}`。
 
-    > **Note:**
+    > **注意：**
     >
-    > You must hover over the **Message** box and select the **Expression** pattern.
+    > 你必须将鼠标悬停在**消息**框上并选择 **Expression** 模式。
 
-## Step 4: Run your workflow
+## 步骤 4：运行工作流
 
-After building up the workflow, you can click **Execute Workflow** to test run it.
+构建完工作流后，你可以点击**执行工作流**进行测试运行。
 
-If the workflow runs as expected, you'll get Hacker News briefing emails. These news contents will be logged to your TiDB Cloud Serverless cluster, so you don't have to worry about losing them.
+如果工作流按预期运行，你将收到 Hacker News 简报邮件。这些新闻内容将记录到你的 TiDB Cloud Serverless 集群中，因此你不必担心丢失它们。
 
-Now you can activate this workflow in the **Workflows** panel. This workflow will help you get the front-page articles on Hacker News every day.
+现在你可以在**工作流**面板中激活此工作流。这个工作流将帮助你每天获取 Hacker News 的头版文章。
 
-## TiDB Cloud node core
+## TiDB Cloud 节点核心
 
-### Supported operations
+### 支持的操作
 
-TiDB Cloud node acts as a [regular node](https://docs.n8n.io/workflows/nodes/#regular-nodes) and only supports the following five operations:
+TiDB Cloud 节点作为[常规节点](https://docs.n8n.io/workflows/nodes/#regular-nodes)运行，仅支持以下五种操作：
 
-- **Create Serverless Cluster**: creates a TiDB Cloud Serverless cluster.
-- **Execute SQL**: executes an SQL statement in TiDB.
-- **Delete**: deletes rows in TiDB.
-- **Insert**: inserts rows in TiDB.
-- **Update**: updates rows in TiDB.
+- **Create Serverless Cluster**：创建 TiDB Cloud Serverless 集群。
+- **Execute SQL**：在 TiDB 中执行 SQL 语句。
+- **Delete**：在 TiDB 中删除行。
+- **Insert**：在 TiDB 中插入行。
+- **Update**：在 TiDB 中更新行。
 
-### Fields
+### 字段
 
-To use different operations, you need to fill in the different required fields. The following shows the respective field descriptions for the corresponding operation.
+要使用不同的操作，你需要填写不同的必填字段。以下显示了相应操作的字段说明。
 
 <SimpleTab>
 <div label="Create Serverless Cluster">
 
-- **Credential for TiDB Cloud API**: only supports TiDB Cloud API key. For how to create an API key, refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
-- **Project**: the TiDB Cloud project name.
-- **Operation**: the operation of this node. For all supported operations, refer to [Supported operations](#supported-operations).
-- **Cluster**: the TiDB Cloud cluster name. Enter the name for your new cluster.
-- **Region**: the region name. Choose a region where your cluster will be deployed. Usually, choose the region closest to your application deployment.
-- **Password**: the root password. Set a password for your new cluster.
+- **Credential for TiDB Cloud API**：仅支持 TiDB Cloud API 密钥。有关如何创建 API 密钥，请参阅[获取 TiDB Cloud API 密钥](#前提条件获取-tidb-cloud-api-密钥)。
+- **Project**：TiDB Cloud 项目名称。
+- **Operation**：此节点的操作。有关所有支持的操作，请参阅[支持的操作](#支持的操作)。
+- **Cluster**：TiDB Cloud 集群名称。为你的新集群输入名称。
+- **Region**：区域名称。选择将部署集群的区域。通常选择离应用程序部署最近的区域。
+- **Password**：root 密码。为你的新集群设置密码。
 
 </div>
 <div label="Execute SQL">
 
-- **Credential for TiDB Cloud API**: only supports TiDB Cloud API key. For how to create an API key, refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
-- **Project**: the TiDB Cloud project name.
-- **Operation**: the operation of this node. For all supported operations, refer to [Supported operations](#supported-operations).
-- **Cluster**: the TiDB Cloud cluster name. You should choose one existing cluster.
-- **Password**: the password of the TiDB Cloud cluster.
-- **User**: the username of the TiDB Cloud cluster.
-- **Database**: the database name.
-- **SQL**: the SQL statement to be executed.
+- **Credential for TiDB Cloud API**：仅支持 TiDB Cloud API 密钥。有关如何创建 API 密钥，请参阅[获取 TiDB Cloud API 密钥](#前提条件获取-tidb-cloud-api-密钥)。
+- **Project**：TiDB Cloud 项目名称。
+- **Operation**：此节点的操作。有关所有支持的操作，请参阅[支持的操作](#支持的操作)。
+- **Cluster**：TiDB Cloud 集群名称。你应该选择一个现有集群。
+- **Password**：TiDB Cloud 集群的密码。
+- **User**：TiDB Cloud 集群的用户名。
+- **Database**：数据库名称。
+- **SQL**：要执行的 SQL 语句。
 
 </div>
 <div label="Delete">
 
-- **Credential for TiDB Cloud API**: only supports TiDB Cloud API key. For how to create an API key, refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
-- **Project**: the TiDB Cloud project name.
-- **Operation**: the operation of this node. For all supported operations, refer to [Support Operation](#supported-operations).
-- **Cluster**: the TiDB Cloud cluster name. You should choose one existing cluster.
-- **Password**: the password of the TiDB Cloud cluster.
-- **User**: the username of the TiDB Cloud cluster.
-- **Database**: the database name.
-- **Table**: the table name. You can use the `From list` mode to choose one or use the `Name` mode to type the table name manually.
-- **Delete Key**: the name of the item's property that decides which rows in the database are deleted. An item is the data sent from one node to another. A node performs its action on each item of the incoming data. For more information about items in n8n, see [n8n documentation](https://docs.n8n.io/workflows/items/).
+- **Credential for TiDB Cloud API**：仅支持 TiDB Cloud API 密钥。有关如何创建 API 密钥，请参阅[获取 TiDB Cloud API 密钥](#前提条件获取-tidb-cloud-api-密钥)。
+- **Project**：TiDB Cloud 项目名称。
+- **Operation**：此节点的操作。有关所有支持的操作，请参阅[支持的操作](#支持的操作)。
+- **Cluster**：TiDB Cloud 集群名称。你应该选择一个现有集群。
+- **Password**：TiDB Cloud 集群的密码。
+- **User**：TiDB Cloud 集群的用户名。
+- **Database**：数据库名称。
+- **Table**：表名。你可以使用 `From list` 模式选择一个，或使用 `Name` 模式手动输入表名。
+- **Delete Key**：决定数据库中哪些行被删除的项目属性名称。项目是从一个节点发送到另一个节点的数据。节点对传入数据的每个项目执行其操作。有关 n8n 中项目的更多信息，请参阅 [n8n 文档](https://docs.n8n.io/workflows/items/)。
 
 </div>
 <div label="Insert">
 
-- **Credential for TiDB Cloud API**: only supports TiDB Cloud API key. For how to create an API key, refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
-- **Project**: the TiDB Cloud project name.
-- **Operation**: the operation of this node. For all supported operations, refer to [Support Operation](#supported-operations).
-- **Cluster**: the TiDB Cloud cluster name. You should choose one existing cluster.
-- **Password**: the password of the TiDB Cloud cluster.
-- **User**: the username of the TiDB Cloud cluster.
-- **Database**: the database name.
-- **Table**: the table name. You can use the `From list` mode to choose one or use the `Name` mode to type the table name manually.
-- **Columns**: The comma-separated list of the input item's properties, which are used as columns for the new rows. An item is the data sent from one node to another. A node performs its action on each item of the incoming data. For more information about items in n8n, see [n8n documentation](https://docs.n8n.io/workflows/items/).
+- **Credential for TiDB Cloud API**：仅支持 TiDB Cloud API 密钥。有关如何创建 API 密钥，请参阅[获取 TiDB Cloud API 密钥](#前提条件获取-tidb-cloud-api-密钥)。
+- **Project**：TiDB Cloud 项目名称。
+- **Operation**：此节点的操作。有关所有支持的操作，请参阅[支持的操作](#支持的操作)。
+- **Cluster**：TiDB Cloud 集群名称。你应该选择一个现有集群。
+- **Password**：TiDB Cloud 集群的密码。
+- **User**：TiDB Cloud 集群的用户名。
+- **Database**：数据库名称。
+- **Table**：表名。你可以使用 `From list` 模式选择一个，或使用 `Name` 模式手动输入表名。
+- **Columns**：用作新行列的输入项目属性的逗号分隔列表。项目是从一个节点发送到另一个节点的数据。节点对传入数据的每个项目执行其操作。有关 n8n 中项目的更多信息，请参阅 [n8n 文档](https://docs.n8n.io/workflows/items/)。
 
 </div>
 <div label="Update">
 
-- **Credential for TiDB Cloud API**: only supports TiDB Cloud API key. For how to create an API key, refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
-- **Project**: the TiDB Cloud project name.
-- **Operation**: the operation of this node. For all supported operations, refer to [Support Operation](#supported-operations).
-- **Cluster**: the TiDB Cloud cluster name. You should choose one existing cluster.
-- **Password**: the password of the TiDB Cloud cluster.
-- **User**: the username of the TiDB Cloud cluster.
-- **Database**: the database name.
-- **Table**: the table name. You can use the `From list` mode to choose one or use the `Name` mode to type the table name manually.
-- **Update Key**: the name of the item's property that decides which rows in the database are updated. An item is the data sent from one node to another. A node performs its action on each item of the incoming data. For more information about items in n8n, see [n8n documentation](https://docs.n8n.io/workflows/items/).
-- **Columns**: The comma-separated list of the input item's properties, which are used as columns for the rows to be updated.
+- **Credential for TiDB Cloud API**：仅支持 TiDB Cloud API 密钥。有关如何创建 API 密钥，请参阅[获取 TiDB Cloud API 密钥](#前提条件获取-tidb-cloud-api-密钥)。
+- **Project**：TiDB Cloud 项目名称。
+- **Operation**：此节点的操作。有关所有支持的操作，请参阅[支持的操作](#支持的操作)。
+- **Cluster**：TiDB Cloud 集群名称。你应该选择一个现有集群。
+- **Password**：TiDB Cloud 集群的密码。
+- **User**：TiDB Cloud 集群的用户名。
+- **Database**：数据库名称。
+- **Table**：表名。你可以使用 `From list` 模式选择一个，或使用 `Name` 模式手动输入表名。
+- **Update Key**：决定数据库中哪些行被更新的项目属性名称。项目是从一个节点发送到另一个节点的数据。节点对传入数据的每个项目执行其操作。有关 n8n 中项目的更多信息，请参阅 [n8n 文档](https://docs.n8n.io/workflows/items/)。
+- **Columns**：用作要更新行的列的输入项目属性的逗号分隔列表。
 
 </div>
 </SimpleTab>
 
-### Limitations
+### 限制
 
-- Normally only one SQL statement is allowed in the **Execute SQL** operation. If you want to execute more than one statement in a single operation, you need to manually enable [`tidb_multi_statement_mode`](https://docs.pingcap.com/tidbcloud/system-variables#tidb_multi_statement_mode-new-in-v4011).
-- For the **Delete** and **Update** operations, you need to specify one field as a key. For example, the `Delete Key` is set to `id`, which is equivalent to executing `DELETE FROM table WHERE id = ${item.id}`. Currently, the **Delete** and **Update** operations only support specifying one key.
-- For the **Insert** and **Update** operations, you need to specify the comma-separated list in the **Columns** field, and the field name must be the same as the input item's property.
+- 通常在 **Execute SQL** 操作中只允许执行一条 SQL 语句。如果你想在单个操作中执行多条语句，需要手动启用 [`tidb_multi_statement_mode`](https://docs.pingcap.com/tidbcloud/system-variables#tidb_multi_statement_mode-new-in-v4011)。
+- 对于 **Delete** 和 **Update** 操作，你需要指定一个字段作为键。例如，`Delete Key` 设置为 `id`，相当于执行 `DELETE FROM table WHERE id = ${item.id}`。目前，**Delete** 和 **Update** 操作仅支持指定一个键。
+- 对于 **Insert** 和 **Update** 操作，你需要在 **Columns** 字段中指定逗号分隔的列表，并且字段名称必须与输入项目的属性相同。

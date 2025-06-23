@@ -1,11 +1,11 @@
 ---
 title: TABLES
-summary: Learn the `TABLES` information_schema table.
+summary: 了解 `TABLES` information_schema 表。
 ---
 
 # TABLES
 
-The `TABLES` table provides information about tables in databases:
+`TABLES` 表提供了数据库中表的相关信息：
 
 {{< copyable "sql" >}}
 
@@ -79,7 +79,7 @@ TIDB_ROW_ID_SHARDING_INFO: NULL
 1 row in set (0.00 sec)
 ```
 
-The following statements are equivalent:
+以下语句是等价的：
 
 ```sql
 SELECT table_name FROM INFORMATION_SCHEMA.TABLES
@@ -91,36 +91,36 @@ SHOW TABLES
   [LIKE 'wild']
 ```
 
-The description of columns in the `TABLES` table is as follows:
+`TABLES` 表中各列的描述如下：
 
-* `TABLE_CATALOG`: The name of the catalog which the table belongs to. The value is always `def`.
-* `TABLE_SCHEMA`: The name of the schema which the table belongs to.
-* `TABLE_NAME`: The name of the table.
-* `TABLE_TYPE`: The type of the table.
-* `ENGINE`: The type of the storage engine. The value is currently `InnoDB`.
-* `VERSION`: Version. The value is `10` by default.
-* `ROW_FORMAT`: The row format. The value is currently `Compact`.
-* `TABLE_ROWS`: The number of rows in the table in statistics.
-* `AVG_ROW_LENGTH`: The average row length of the table. `AVG_ROW_LENGTH` = `DATA_LENGTH` / `TABLE_ROWS`.
-* `DATA_LENGTH`: Data length. `DATA_LENGTH` = `TABLE_ROWS` \* the sum of storage lengths of the columns in the tuple. The replicas of TiKV are not taken into account.
-* `MAX_DATA_LENGTH`: The maximum data length. The value is currently `0`, which means the data length has no upper limit.
-* `INDEX_LENGTH`: The index length. `INDEX_LENGTH` = `TABLE_ROWS` \* the sum of lengths of the columns in the index tuple. The replicas of TiKV are not taken into account.
-* `DATA_FREE`: Data fragment. The value is currently `0`.
-* `AUTO_INCREMENT`: The current step of the auto-increment primary key.
-* `CREATE_TIME`: The time at which the table is created.
-* `UPDATE_TIME`: The time at which the table is updated.
-* `CHECK_TIME`: The time at which the table is checked.
-* `TABLE_COLLATION`: The collation of strings in the table.
-* `CHECKSUM`: Checksum.
-* `CREATE_OPTIONS`: Creates options.
-* `TABLE_COMMENT`: The comments and notes of the table.
+* `TABLE_CATALOG`：表所属的目录名称。该值始终为 `def`。
+* `TABLE_SCHEMA`：表所属的数据库名称。
+* `TABLE_NAME`：表的名称。
+* `TABLE_TYPE`：表的类型。
+* `ENGINE`：存储引擎的类型。当前值为 `InnoDB`。
+* `VERSION`：版本号。默认值为 `10`。
+* `ROW_FORMAT`：行格式。当前值为 `Compact`。
+* `TABLE_ROWS`：统计信息中的表行数。
+* `AVG_ROW_LENGTH`：表的平均行长度。`AVG_ROW_LENGTH` = `DATA_LENGTH` / `TABLE_ROWS`。
+* `DATA_LENGTH`：数据长度。`DATA_LENGTH` = `TABLE_ROWS` \* 元组中列的存储长度之和。不考虑 TiKV 的副本。
+* `MAX_DATA_LENGTH`：最大数据长度。当前值为 `0`，表示数据长度没有上限。
+* `INDEX_LENGTH`：索引长度。`INDEX_LENGTH` = `TABLE_ROWS` \* 索引元组中列的长度之和。不考虑 TiKV 的副本。
+* `DATA_FREE`：数据碎片。当前值为 `0`。
+* `AUTO_INCREMENT`：自增主键的当前步长。
+* `CREATE_TIME`：表的创建时间。
+* `UPDATE_TIME`：表的更新时间。
+* `CHECK_TIME`：表的检查时间。
+* `TABLE_COLLATION`：表中字符串的排序规则。
+* `CHECKSUM`：校验和。
+* `CREATE_OPTIONS`：创建选项。
+* `TABLE_COMMENT`：表的注释和备注。
 
-Most of the information in the table is the same as MySQL. Only two columns are newly defined by TiDB:
+表中的大部分信息与 MySQL 相同。只有两列是 TiDB 新定义的：
 
-* `TIDB_TABLE_ID`: to indicate the internal ID of a table. This ID is unique in a TiDB cluster.
-* `TIDB_ROW_ID_SHARDING_INFO`: to indicate the sharding type of a table. The possible values are as follows:
-    - `"NOT_SHARDED"`: the table is not sharded.
-    - `"NOT_SHARDED(PK_IS_HANDLE)"`: the table that defines an integer Primary Key as its row id is not sharded.
-    - `"PK_AUTO_RANDOM_BITS={bit_number}"`: the table that defines an integer Primary Key as its row id is sharded because the Primary Key is assigned with `AUTO_RANDOM` attribute.
-    - `"SHARD_BITS={bit_number}"`: the table is sharded using `SHARD_ROW_ID_BITS={bit_number}`.
-    - NULL: the table is a system table or view, and thus cannot be sharded.
+* `TIDB_TABLE_ID`：表示表的内部 ID。此 ID 在 TiDB 集群中是唯一的。
+* `TIDB_ROW_ID_SHARDING_INFO`：表示表的分片类型。可能的值如下：
+    - `"NOT_SHARDED"`：表未分片。
+    - `"NOT_SHARDED(PK_IS_HANDLE)"`：将整数主键定义为其行 ID 的表未分片。
+    - `"PK_AUTO_RANDOM_BITS={bit_number}"`：将整数主键定义为其行 ID 的表已分片，因为主键被赋予了 `AUTO_RANDOM` 属性。
+    - `"SHARD_BITS={bit_number}"`：使用 `SHARD_ROW_ID_BITS={bit_number}` 对表进行分片。
+    - NULL：表是系统表或视图，因此无法分片。

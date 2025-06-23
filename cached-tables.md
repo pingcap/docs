@@ -1,37 +1,37 @@
 ---
-title: Cached Tables
-summary: Learn the cached table feature in TiDB, which is used for rarely-updated small hotspot tables to improve read performance.
+title: 缓存表
+summary: 了解 TiDB 中的缓存表功能，该功能用于提高很少更新的小型热点表的读取性能。
 ---
 
-# Cached Tables
+# 缓存表
 
-In v6.0.0, TiDB introduces the cached table feature for frequently accessed but rarely updated small hotspot tables. When this feature is used, the data of an entire table is loaded into the memory of the TiDB server, and TiDB directly gets the table data from the memory without accessing TiKV, which improves the read performance.
+在 v6.0.0 中，TiDB 为经常访问但很少更新的小型热点表引入了缓存表功能。使用此功能时，整个表的数据会加载到 TiDB 服务器的内存中，TiDB 直接从内存获取表数据而无需访问 TiKV，从而提高读取性能。
 
-This document describes the usage scenarios of cached tables, the examples, and the compatibility restrictions with other TiDB features.
+本文档描述缓存表的使用场景、示例以及与其他 TiDB 功能的兼容性限制。
 
-## Usage scenarios
+## 使用场景
 
-The cached table feature is suitable for tables with the following characteristics:
+缓存表功能适用于具有以下特征的表：
 
-- The data volume of the table is small, for example, less than 4 MiB.
-- The table is read-only or rarely updated, for example, with a write QPS (queries per second) of less than 10 times per minute.
-- The table is frequently accessed, and you expect a better read performance, for example, when encountering hotspots on small tables during direct reads from TiKV.
+- 表的数据量小，例如小于 4 MiB。
+- 表是只读的或很少更新，例如每分钟写入 QPS（每秒查询数）少于 10 次。
+- 表经常被访问，并且你期望更好的读取性能，例如当从 TiKV 直接读取小表时遇到热点。
 
-When the data volume of the table is small but the data is frequently accessed, the data is concentrated on a Region in TiKV and makes it a hotspot Region, which affects the performance. Therefore, the typical usage scenarios of cached tables are as follows:
+当表的数据量小但数据经常被访问时，数据会集中在 TiKV 的一个 Region 上并形成热点 Region，这会影响性能。因此，缓存表的典型使用场景如下：
 
-- Configuration tables, from which applications read the configuration information.
-- The tables of exchange rates in the financial sector. These tables are updated only once a day but not in real-time.
-- Bank branch or network information tables, which are rarely updated.
+- 配置表，应用程序从中读取配置信息。
+- 金融领域的汇率表。这些表每天只更新一次，而不是实时更新。
+- 银行分支机构或网络信息表，很少更新。
 
-Take configuration tables as an example. When the application restarts, the configuration information is loaded in all connections, which causes a high read latency. In this case, you can solve this problem by using the cached tables feature.
+以配置表为例。当应用程序重启时，所有连接都会加载配置信息，这会导致较高的读取延迟。在这种情况下，你可以使用缓存表功能来解决这个问题。
 
-## Examples
+## 示例
 
-This section describes the usage of cached tables by examples.
+本节通过示例描述缓存表的使用方法。
 
-### Set a normal table to a cached table
+### 将普通表设置为缓存表
 
-Suppose that there is a table `users`:
+假设有一个表 `users`：
 
 ```sql
 CREATE TABLE users (
@@ -41,7 +41,7 @@ CREATE TABLE users (
 );
 ```
 
-To set this table to a cached table, use the `ALTER TABLE` statement:
+要将此表设置为缓存表，使用 `ALTER TABLE` 语句：
 
 ```sql
 ALTER TABLE users CACHE;
@@ -51,9 +51,9 @@ ALTER TABLE users CACHE;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-### Verify a cached table
+### 验证缓存表
 
-To verify a cached table, use the `SHOW CREATE TABLE` statement. If the table is cached, the returned result contains the `CACHED ON` attribute:
+要验证缓存表，使用 `SHOW CREATE TABLE` 语句。如果表已缓存，返回结果会包含 `CACHED ON` 属性：
 
 ```sql
 SHOW CREATE TABLE users;
@@ -72,7 +72,7 @@ SHOW CREATE TABLE users;
 1 row in set (0.00 sec)
 ```
 
-After reading data from a cached table, TiDB loads the data in memory. You can use the [`TRACE`](/sql-statements/sql-statement-trace.md) statement to check whether the data is loaded into memory. When the cache is not loaded, the returned result contains the `regionRequest.SendReqCtx` attribute, which indicates that TiDB reads data from TiKV.
+从缓存表读取数据后，TiDB 会将数据加载到内存中。你可以使用 [`TRACE`](/sql-statements/sql-statement-trace.md) 语句检查数据是否已加载到内存中。当缓存未加载时，返回结果包含 `regionRequest.SendReqCtx` 属性，这表示 TiDB 从 TiKV 读取数据。
 
 ```sql
 TRACE SELECT * FROM users;
@@ -98,7 +98,7 @@ TRACE SELECT * FROM users;
 12 rows in set (0.01 sec)
 ```
 
-After executing [`TRACE`](/sql-statements/sql-statement-trace.md) again, the returned result no longer contains the `regionRequest.SendReqCtx` attribute, which indicates that TiDB no longer reads data from TiKV but reads data from the memory instead.
+再次执行 [`TRACE`](/sql-statements/sql-statement-trace.md) 后，返回结果不再包含 `regionRequest.SendReqCtx` 属性，这表示 TiDB 不再从 TiKV 读取数据，而是从内存中读取数据。
 
 ```sql
 +----------------------------------------+-----------------+------------+
@@ -115,7 +115,7 @@ After executing [`TRACE`](/sql-statements/sql-statement-trace.md) again, the ret
 7 rows in set (0.00 sec)
 ```
 
-Note that the `UnionScan` operator is used to read the cached tables, so you can see `UnionScan` in the execution plan of the cached tables through `explain`:
+注意，`UnionScan` 运算符用于读取缓存表，所以你可以通过 `explain` 在缓存表的执行计划中看到 `UnionScan`：
 
 ```sql
 +-------------------------+---------+-----------+---------------+--------------------------------+
@@ -128,9 +128,9 @@ Note that the `UnionScan` operator is used to read the cached tables, so you can
 3 rows in set (0.00 sec)
 ```
 
-### Write data to a cached table
+### 向缓存表写入数据
 
-Cached tables support data writes. For example, you can insert a record into the `users` table:
+缓存表支持数据写入。例如，你可以向 `users` 表插入一条记录：
 
 ```sql
 INSERT INTO users(id, name) VALUES(1001, 'Davis');
@@ -153,17 +153,17 @@ SELECT * FROM users;
 1 row in set (0.00 sec)
 ```
 
-> **Note:**
+> **注意：**
 >
-> When you insert data to a cached table, second-level write latency might occur. The latency is controlled by the global environment variable [`tidb_table_cache_lease`](/system-variables.md#tidb_table_cache_lease-new-in-v600). You can decide whether to use the cached table feature by checking whether the latency is acceptable based on your application. For example, in a read-only scenario, you can increase the value of `tidb_table_cache_lease`:
+> 向缓存表插入数据时，可能会出现秒级写入延迟。延迟由全局环境变量 [`tidb_table_cache_lease`](/system-variables.md#tidb_table_cache_lease-new-in-v600) 控制。你可以根据应用程序检查延迟是否可接受来决定是否使用缓存表功能。例如，在只读场景中，你可以增加 `tidb_table_cache_lease` 的值：
 >
 > ```sql
 > set @@global.tidb_table_cache_lease = 10;
 > ```
 >
-> The write latency of cached tables is high, because the cached table feature is implemented with a complex mechanism that requires a lease to be set for each cache. When there are multiple TiDB instances, one instance does not know whether the other instances have cached data. If an instance modifies the table data directly, the other instances read the old cache data. To ensure correctness, the cached table implementation uses a lease mechanism to ensure that the data is not modified before the lease expires. That is why the write latency is high.
+> 缓存表的写入延迟较高，因为缓存表功能的实现使用了复杂的机制，需要为每个缓存设置租约。当有多个 TiDB 实例时，一个实例不知道其他实例是否已缓存数据。如果一个实例直接修改表数据，其他实例会读取旧的缓存数据。为确保正确性，缓存表实现使用租约机制确保在租约到期前数据不会被修改。这就是写入延迟较高的原因。
 
-The metadata of cached tables is stored in the `mysql.table_cache_meta` table. This table records the IDs of all cached tables, the current lock status (`lock_type`), and the lock lease information (`lease`). This table is only internally used in TiDB and you are not recommended to modify it. Otherwise, unexpected errors might occur.
+缓存表的元数据存储在 `mysql.table_cache_meta` 表中。此表记录了所有缓存表的 ID、当前锁定状态（`lock_type`）和锁定租约信息（`lease`）。此表仅供 TiDB 内部使用，不建议修改它。否则，可能会发生意外错误。
 
 ```sql
 SHOW CREATE TABLE mysql.table_cache_meta\G
@@ -179,11 +179,11 @@ Create Table: CREATE TABLE `table_cache_meta` (
 1 row in set (0.00 sec)
 ```
 
-### Revert a cached table to a normal table
+### 将缓存表恢复为普通表
 
-> **Note:**
+> **注意：**
 >
-> Executing DDL statements on a cached table will fail. Before executing DDL statements on a cached table, you need to remove the cache attribute first and set the cached table back to a normal table.
+> 在缓存表上执行 DDL 语句将会失败。在对缓存表执行 DDL 语句之前，你需要先移除缓存属性，将缓存表恢复为普通表。
 
 ```sql
 TRUNCATE TABLE users;
@@ -201,7 +201,7 @@ mysql> ALTER TABLE users ADD INDEX k_id(id);
 ERROR 8242 (HY000): 'Alter Table' is unsupported on cache tables.
 ```
 
-To revert a cached table to a normal table, use `ALTER TABLE t NOCACHE`:
+要将缓存表恢复为普通表，使用 `ALTER TABLE t NOCACHE`：
 
 ```sql
 ALTER TABLE users NOCACHE;
@@ -211,34 +211,34 @@ ALTER TABLE users NOCACHE;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-## Size limit of cached tables
+## 缓存表的大小限制
 
-Cached tables are only suitable for scenarios with small tables, because TiDB loads the data of an entire table into memory, and the cached data becomes invalid after modification and needs to be reloaded.
+缓存表仅适用于小表场景，因为 TiDB 会将整个表的数据加载到内存中，并且缓存的数据在修改后会失效并需要重新加载。
 
-Currently, the size limit of a cached table is 64 MB in TiDB. If the table data exceeds 64 MB, executing `ALTER TABLE t CACHE` will fail.
+目前，TiDB 中缓存表的大小限制为 64 MB。如果表数据超过 64 MB，执行 `ALTER TABLE t CACHE` 将会失败。
 
-## Compatibility restrictions with other TiDB features
+## 与其他 TiDB 功能的兼容性限制
 
-Cached tables **DO NOT** support the following features:
+缓存表**不支持**以下功能：
 
-- Performing the `ALTER TABLE t ADD PARTITION` operation on partitioned tables is not supported.
-- Performing the `ALTER TABLE t CACHE` operation on temporary tables is not supported.
-- Performing the `ALTER TABLE t CACHE` operation on views is not supported.
-- Stale Read is not supported.
-- Direct DDL operations on a cached table are not supported. You need to set the cached table back to a normal table first by using `ALTER TABLE t NOCACHE` before performing DDL operations.
+- 不支持对分区表执行 `ALTER TABLE t ADD PARTITION` 操作。
+- 不支持对临时表执行 `ALTER TABLE t CACHE` 操作。
+- 不支持对视图执行 `ALTER TABLE t CACHE` 操作。
+- 不支持 Stale Read。
+- 不支持直接对缓存表执行 DDL 操作。在执行 DDL 操作之前，你需要先使用 `ALTER TABLE t NOCACHE` 将缓存表恢复为普通表。
 
-Cached tables **CANNOT** be used in the following scenarios:
+缓存表**不能**在以下场景中使用：
 
-- Setting the system variable `tidb_snapshot` to read historical data.
-- During modification, the cached data becomes invalid until the data is reloaded.
+- 设置系统变量 `tidb_snapshot` 来读取历史数据。
+- 在修改期间，缓存的数据会失效，直到数据重新加载。
 
-## Compatibility with TiDB migration tools
+## 与 TiDB 迁移工具的兼容性
 
-The cached table is a TiDB extension to MySQL syntax. Only TiDB can recognize the `ALTER TABLE ... CACHE` statement. TiDB migration tools **DO NOT** support cached tables, including Backup & Restore (BR), TiCDC, and Dumpling. These tools treat cached tables as normal tables.
+缓存表是 TiDB 对 MySQL 语法的扩展。只有 TiDB 能识别 `ALTER TABLE ... CACHE` 语句。TiDB 迁移工具**不支持**缓存表，包括 Backup & Restore (BR)、TiCDC 和 Dumpling。这些工具将缓存表视为普通表。
 
-That is to say, when a cached table is backed up and restored, it becomes a normal table. If the downstream cluster is a different TiDB cluster and you want to continue using the cached table feature, you can manually enable cached tables on the downstream cluster by executing `ALTER TABLE ... CACHE` on the downstream table.
+也就是说，当缓存表被备份和恢复时，它会变成普通表。如果下游集群是不同的 TiDB 集群，并且你想继续使用缓存表功能，你可以在下游集群上通过对下游表执行 `ALTER TABLE ... CACHE` 手动启用缓存表。
 
-## See also
+## 另请参阅
 
 * [ALTER TABLE](/sql-statements/sql-statement-alter-table.md)
-* [System Variables](/system-variables.md)
+* [系统变量](/system-variables.md)

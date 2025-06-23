@@ -1,143 +1,143 @@
 ---
-title: Operators
-summary: Learn about the operators precedence, comparison functions and operators, logical operators, and assignment operators.
+title: 运算符
+summary: 了解运算符优先级、比较函数和运算符、逻辑运算符以及赋值运算符。
 ---
 
-# Operators
+# 运算符
 
-This document describes the operators precedence, comparison functions and operators, logical operators, and assignment operators.
+本文档描述运算符优先级、比较函数和运算符、逻辑运算符以及赋值运算符。
 
-- [Operator precedence](#operator-precedence)
-- [Comparison functions and operators](#comparison-functions-and-operators)
-- [Logical operators](#logical-operators)
-- [Assignment operators](#assignment-operators)
+- [运算符优先级](#运算符优先级)
+- [比较函数和运算符](#比较函数和运算符)
+- [逻辑运算符](#逻辑运算符)
+- [赋值运算符](#赋值运算符)
 
-| Name | Description |
+| 名称 | 描述 |
 | ---------------------------------------- | ---------------------------------------- |
-| [AND, &&](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_and) | Logical AND |
-| [=](https://dev.mysql.com/doc/refman/8.0/en/assignment-operators.html#operator_assign-equal) | Assign a value (as part of a [`SET`](https://dev.mysql.com/doc/refman/8.0/en/set-variable.html) statement, or as part of the `SET` clause in an [`UPDATE`](https://dev.mysql.com/doc/refman/8.0/en/update.html) statement) |
-| [:=](https://dev.mysql.com/doc/refman/8.0/en/assignment-operators.html#operator_assign-value) | Assign a value |
-| [BETWEEN ... AND ...](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_between) | Check whether a value is within a range of values |
-| [BINARY](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#operator_binary) | Cast a string to a binary string |
-| [&](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-and) | Bitwise AND |
-| [~](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-invert) | Bitwise inversion |
-| [\|](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-or) | Bitwise OR |
-| [^](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-xor) | Bitwise XOR |
-| [CASE](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#operator_case) | Case operator |
-| [DIV](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_div) | Integer division |
-| [/](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_divide) | Division operator |
-| [=](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_equal) | Equal operator |
-| [`<=>`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_equal-to) | NULL-safe equal to operator |
-| [>](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_greater-than) | Greater than operator |
-| [>=](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_greater-than-or-equal) | Greater than or equal operator |
-| [IS](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_is) | Test a value against a boolean |
-| [IS NOT](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_is-not) | Test a value against a boolean |
-| [IS NOT NULL](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_is-not-null) | NOT NULL value test |
-| [IS NULL](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_is-null) | NULL value test |
-| [->](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#operator_json-column-path) | Return value from JSON column after evaluating path; equivalent to `JSON_EXTRACT()` |
-| [->>](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#operator_json-inline-path) | Return value from JSON column after evaluating path and unquoting the result; equivalent to `JSON_UNQUOTE(JSON_EXTRACT())` |
-| [<<](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_left-shift) | Left shift |
-| [<](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_less-than) | Less than operator |
-| [<=](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_less-than-or-equal) | Less than or equal operator |
-| [LIKE](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_like) | Simple pattern matching |
-| [ILIKE](https://www.postgresql.org/docs/current/functions-matching.html) | Simple pattern matching with case insensitive (Supported in TiDB, but not supported in MySQL) |
-| [-](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_minus) | Minus operator |
-| [%, MOD](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_mod) | Modulo operator |
-| [NOT, !](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_not) | Negates value |
-| [NOT BETWEEN ... AND ...](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-between) | Check whether a value is not within a range of values |
-| [!=, `<>`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-equal) | Not equal operator |
-| [NOT LIKE](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_not-like) | Negation of simple pattern matching |
-| [NOT REGEXP](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_not-regexp) | Negation of REGEXP |
-| [\|\|, OR](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_or) | Logical OR |
-| [+](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_plus) | Addition operator |
-| [REGEXP](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp) | Pattern matching using regular expressions |
-| [>>](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_right-shift) | Right shift |
-| [RLIKE](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp) | Synonym for REGEXP |
-| [*](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_times) | Multiplication operator |
-| [-](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_unary-minus) | Change the sign of the argument |
-| [XOR](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_xor) | Logical XOR |
+| [AND, &&](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_and) | 逻辑与 |
+| [=](https://dev.mysql.com/doc/refman/8.0/en/assignment-operators.html#operator_assign-equal) | 赋值（作为 [`SET`](https://dev.mysql.com/doc/refman/8.0/en/set-variable.html) 语句的一部分，或作为 [`UPDATE`](https://dev.mysql.com/doc/refman/8.0/en/update.html) 语句中 `SET` 子句的一部分） |
+| [:=](https://dev.mysql.com/doc/refman/8.0/en/assignment-operators.html#operator_assign-value) | 赋值 |
+| [BETWEEN ... AND ...](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_between) | 检查值是否在某个范围内 |
+| [BINARY](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#operator_binary) | 将字符串转换为二进制字符串 |
+| [&](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-and) | 按位与 |
+| [~](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-invert) | 按位取反 |
+| [\|](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-or) | 按位或 |
+| [^](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-xor) | 按位异或 |
+| [CASE](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#operator_case) | Case 运算符 |
+| [DIV](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_div) | 整数除法 |
+| [/](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_divide) | 除法运算符 |
+| [=](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_equal) | 等于运算符 |
+| [`<=>`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_equal-to) | NULL 安全的等于运算符 |
+| [>](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_greater-than) | 大于运算符 |
+| [>=](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_greater-than-or-equal) | 大于等于运算符 |
+| [IS](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_is) | 测试值是否为布尔值 |
+| [IS NOT](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_is-not) | 测试值是否为布尔值 |
+| [IS NOT NULL](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_is-not-null) | 非 NULL 值测试 |
+| [IS NULL](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_is-null) | NULL 值测试 |
+| [->](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#operator_json-column-path) | 在评估路径后从 JSON 列返回值；等同于 `JSON_EXTRACT()` |
+| [->>](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#operator_json-inline-path) | 在评估路径后从 JSON 列返回值并对结果去引号；等同于 `JSON_UNQUOTE(JSON_EXTRACT())` |
+| [<<](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_left-shift) | 左移 |
+| [<](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_less-than) | 小于运算符 |
+| [<=](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_less-than-or-equal) | 小于等于运算符 |
+| [LIKE](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_like) | 简单模式匹配 |
+| [ILIKE](https://www.postgresql.org/docs/current/functions-matching.html) | 不区分大小写的简单模式匹配（TiDB 支持，但 MySQL 不支持） |
+| [-](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_minus) | 减法运算符 |
+| [%, MOD](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_mod) | 取模运算符 |
+| [NOT, !](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_not) | 取反值 |
+| [NOT BETWEEN ... AND ...](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-between) | 检查值是否不在某个范围内 |
+| [!=, `<>`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-equal) | 不等于运算符 |
+| [NOT LIKE](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_not-like) | 简单模式匹配的否定 |
+| [NOT REGEXP](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_not-regexp) | REGEXP 的否定 |
+| [\|\|, OR](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_or) | 逻辑或 |
+| [+](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_plus) | 加法运算符 |
+| [REGEXP](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp) | 使用正则表达式的模式匹配 |
+| [>>](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_right-shift) | 右移 |
+| [RLIKE](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp) | REGEXP 的同义词 |
+| [*](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_times) | 乘法运算符 |
+| [-](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_unary-minus) | 改变参数的符号 |
+| [XOR](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_xor) | 逻辑异或 |
 
-## Unsupported operators
+## 不支持的运算符
 
 * [`SOUNDS LIKE`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#operator_sounds-like)
 
-## Operator precedence
+## 运算符优先级
 
-Operator precedences are shown in the following list, from highest precedence to the lowest. Operators that are shown together on a line have the same precedence.
+以下列表显示了运算符的优先级，从最高优先级到最低优先级。同一行显示的运算符具有相同的优先级。
 
 ```sql
 INTERVAL
 BINARY, COLLATE
 !
-- (unary minus), ~ (unary bit inversion)
+- (一元减号), ~ (一元按位取反)
 ^
 *, /, DIV, %, MOD
 -, +
 <<, >>
 &
 |
-= (comparison), <=>, >=, >, <=, <, <>, !=, IS, LIKE, REGEXP, IN
+= (比较), <=>, >=, >, <=, <, <>, !=, IS, LIKE, REGEXP, IN
 BETWEEN, CASE, WHEN, THEN, ELSE
 NOT
 AND, &&
 XOR
 OR, ||
-= (assignment), :=
+= (赋值), :=
 ```
 
-For details, see [Operator Precedence](https://dev.mysql.com/doc/refman/8.0/en/operator-precedence.html).
+详情请参见 [运算符优先级](https://dev.mysql.com/doc/refman/8.0/en/operator-precedence.html)。
 
-## Comparison functions and operators
+## 比较函数和运算符
 
-| Name | Description |
+| 名称 | 描述 |
 | ---------------------------------------- | ---------------------------------------- |
-| [BETWEEN ... AND ...](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_between) | Check whether a value is within a range of values |
-| [COALESCE()](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_coalesce) | Return the first non-NULL argument |
-| [=](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_equal) | Equal operator |
-| [`<=>`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_equal-to) | NULL-safe equal to operator |
-| [>](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_greater-than) | Greater than operator |
-| [>=](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_greater-than-or-equal) | Greater than or equal operator |
-| [GREATEST()](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_greatest) | Return the largest argument |
-| [IN()](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_in) | Check whether a value is within a set of values |
-| [INTERVAL()](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_interval) | Return the index of the argument that is less than the first argument |
-| [IS](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_is) | Test a value against a boolean |
-| [IS NOT](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_is-not) | Test a value against a boolean |
-| [IS NOT NULL](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_is-not-null) | NOT NULL value test |
-| [IS NULL](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_is-null) | NULL value test |
-| [ISNULL()](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_isnull) | Test whether the argument is NULL |
-| [LEAST()](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_least) | Return the smallest argument |
-| [<](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_less-than) | Less than operator |
-| [<=](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_less-than-or-equal) | Less than or equal operator |
-| [LIKE](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_like) | Simple pattern matching |
-| [ILIKE](https://www.postgresql.org/docs/current/functions-matching.html) | Simple pattern matching with case insensitive (Supported in TiDB, but not supported in MySQL) |
-| [NOT BETWEEN ... AND ...](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-between) | Check whether a value is not within a range of values |
-| [!=, `<>`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-equal) | Not equal operator |
-| [NOT IN()](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-in) | Check whether a value is not within a set of values |
-| [NOT LIKE](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_not-like) | Negation of simple pattern matching |
-| [STRCMP()](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#function_strcmp) | Compare two strings |
+| [BETWEEN ... AND ...](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_between) | 检查值是否在某个范围内 |
+| [COALESCE()](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_coalesce) | 返回第一个非 NULL 参数 |
+| [=](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_equal) | 等于运算符 |
+| [`<=>`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_equal-to) | NULL 安全的等于运算符 |
+| [>](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_greater-than) | 大于运算符 |
+| [>=](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_greater-than-or-equal) | 大于等于运算符 |
+| [GREATEST()](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_greatest) | 返回最大的参数 |
+| [IN()](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_in) | 检查值是否在一组值中 |
+| [INTERVAL()](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_interval) | 返回小于第一个参数的参数的索引 |
+| [IS](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_is) | 测试值是否为布尔值 |
+| [IS NOT](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_is-not) | 测试值是否为布尔值 |
+| [IS NOT NULL](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_is-not-null) | 非 NULL 值测试 |
+| [IS NULL](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_is-null) | NULL 值测试 |
+| [ISNULL()](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_isnull) | 测试参数是否为 NULL |
+| [LEAST()](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_least) | 返回最小的参数 |
+| [<](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_less-than) | 小于运算符 |
+| [<=](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_less-than-or-equal) | 小于等于运算符 |
+| [LIKE](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_like) | 简单模式匹配 |
+| [ILIKE](https://www.postgresql.org/docs/current/functions-matching.html) | 不区分大小写的简单模式匹配（TiDB 支持，但 MySQL 不支持） |
+| [NOT BETWEEN ... AND ...](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-between) | 检查值是否不在某个范围内 |
+| [!=, `<>`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-equal) | 不等于运算符 |
+| [NOT IN()](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-in) | 检查值是否不在一组值中 |
+| [NOT LIKE](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_not-like) | 简单模式匹配的否定 |
+| [STRCMP()](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#function_strcmp) | 比较两个字符串 |
 
-For details, see [Comparison Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html).
+详情请参见 [比较函数和运算符](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html)。
 
-## Logical operators
+## 逻辑运算符
 
-| Name | Description |
+| 名称 | 描述 |
 | ---------------------------------------- | ------------- |
-| [AND, &&](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_and) | Logical AND |
-| [NOT, !](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_not) | Negates value |
-| [\|\|, OR](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_or) | Logical OR |
-| [XOR](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_xor) | Logical XOR |
+| [AND, &&](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_and) | 逻辑与 |
+| [NOT, !](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_not) | 取反值 |
+| [\|\|, OR](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_or) | 逻辑或 |
+| [XOR](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_xor) | 逻辑异或 |
 
-For details, see [MySQL Handling of GROUP BY](https://dev.mysql.com/doc/refman/8.0/en/group-by-handling.html).
+详情请参见 [MySQL 对 GROUP BY 的处理](https://dev.mysql.com/doc/refman/8.0/en/group-by-handling.html)。
 
-## Assignment operators
+## 赋值运算符
 
-| Name | Description |
+| 名称 | 描述 |
 | ---------------------------------------- | ---------------------------------------- |
-| [=](https://dev.mysql.com/doc/refman/8.0/en/assignment-operators.html#operator_assign-equal) | Assign a value (as part of a [`SET`](https://dev.mysql.com/doc/refman/8.0/en/set-variable.html) statement, or as part of the `SET` clause in an [`UPDATE`](https://dev.mysql.com/doc/refman/8.0/en/update.html) statement) |
-| [:=](https://dev.mysql.com/doc/refman/8.0/en/assignment-operators.html#operator_assign-value) | Assign a value |
+| [=](https://dev.mysql.com/doc/refman/8.0/en/assignment-operators.html#operator_assign-equal) | 赋值（作为 [`SET`](https://dev.mysql.com/doc/refman/8.0/en/set-variable.html) 语句的一部分，或作为 [`UPDATE`](https://dev.mysql.com/doc/refman/8.0/en/update.html) 语句中 `SET` 子句的一部分） |
+| [:=](https://dev.mysql.com/doc/refman/8.0/en/assignment-operators.html#operator_assign-value) | 赋值 |
 
-For details, see [Detection of Functional Dependence](https://dev.mysql.com/doc/refman/8.0/en/group-by-functional-dependence.html).
+详情请参见 [函数依赖性检测](https://dev.mysql.com/doc/refman/8.0/en/group-by-functional-dependence.html)。
 
-## MySQL compatibility
+## MySQL 兼容性
 
-* MySQL does not support the `ILIKE` operator.
+* MySQL 不支持 `ILIKE` 运算符。

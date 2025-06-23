@@ -1,17 +1,17 @@
 ---
 title: CREATE [GLOBAL|SESSION] BINDING
-summary: Use of CREATE BINDING in TiDB database.
+summary: TiDB 数据库中 CREATE BINDING 的使用。
 ---
 
 # CREATE [GLOBAL|SESSION] BINDING
 
-This statement creates a new execution plan binding in TiDB. Binding can be used to inject a hint into a statement without requiring changes to the underlying query.
+此语句在 TiDB 中创建一个新的执行计划绑定。绑定可用于在不需要更改底层查询的情况下注入提示（hint）。
 
-A `BINDING` can be on either a `GLOBAL` or `SESSION` basis. The default is `SESSION`.
+`BINDING` 可以是 `GLOBAL` 或 `SESSION` 级别。默认为 `SESSION`。
 
-The bound SQL statement is parameterized and stored in the system table. When a SQL query is processed, as long as the parameterized SQL statement and a bound one in the system table are consistent and the system variable `tidb_use_plan_baselines` is set to `ON` (default), the corresponding optimizer hint is available. If multiple execution plans are available, the optimizer chooses to bind the plan with the least cost. For more information, see [Create a binding](/sql-plan-management.md#create-a-binding).
+绑定的 SQL 语句会被参数化并存储在系统表中。当处理 SQL 查询时，只要参数化的 SQL 语句与系统表中的绑定语句一致，且系统变量 `tidb_use_plan_baselines` 设置为 `ON`（默认值），相应的优化器提示就可用。如果有多个可用的执行计划，优化器会选择成本最低的计划进行绑定。更多信息，请参见[创建绑定](/sql-plan-management.md#create-a-binding)。
 
-## Synopsis
+## 语法
 
 ```ebnf+diagram
 CreateBindingStmt ::=
@@ -27,11 +27,11 @@ BindableStmt ::=
 
 ****
 
-## Examples
+## 示例
 
-You can create a binding according to a SQL statement or a historical execution plan.
+你可以根据 SQL 语句或历史执行计划创建绑定。
 
-The following example shows how to create a binding according to a SQL statement.
+以下示例展示如何根据 SQL 语句创建绑定。
 
 {{< copyable "sql" >}}
 
@@ -135,7 +135,7 @@ mysql> EXPLAIN ANALYZE SELECT * FROM t1 WHERE b = 123;
 3 rows in set (0.01 sec)
 ```
 
-The following example shows how to create a binding according to a historical execution plan.
+以下示例展示如何根据历史执行计划创建绑定。
 
 ```sql
 mysql> CREATE TABLE t(id INT PRIMARY KEY , a INT, KEY(a));
@@ -165,17 +165,16 @@ mysql> SELECT @@LAST_PLAN_FROM_BINDING;
 |                        1 |
 +--------------------------+
 1 row in set (0.01 sec)
-
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension to MySQL syntax.
+该语句是 TiDB 对 MySQL 语法的扩展。
 
-## See also
+## 另请参阅
 
 * [DROP [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-drop-binding.md)
 * [SHOW [GLOBAL|SESSION] BINDINGS](/sql-statements/sql-statement-show-bindings.md)
 * [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
-* [Optimizer Hints](/optimizer-hints.md)
-* [SQL Plan Management](/sql-plan-management.md)
+* [优化器提示](/optimizer-hints.md)
+* [SQL 计划管理](/sql-plan-management.md)

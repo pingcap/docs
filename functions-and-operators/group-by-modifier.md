@@ -1,52 +1,52 @@
 ---
-title: GROUP BY Modifiers
-summary: Learn how to use TiDB GROUP BY modifiers.
+title: GROUP BY 修饰符
+summary: 了解如何使用 TiDB GROUP BY 修饰符。
 ---
 
-# GROUP BY Modifiers
+# GROUP BY 修饰符
 
-Starting from v7.4.0, the `GROUP BY` clause of TiDB supports the `WITH ROLLUP` modifier.
+从 v7.4.0 版本开始，TiDB 的 `GROUP BY` 子句支持 `WITH ROLLUP` 修饰符。
 
-In the `GROUP BY` clause, you can specify one or more columns as a group list and append the `WITH ROLLUP` modifier after the list. Then, TiDB will conduct multidimensional descending grouping based on the columns in the group list and provide you with summary results for each group in the output.
+在 `GROUP BY` 子句中，你可以指定一个或多个列作为分组列表，并在列表后添加 `WITH ROLLUP` 修饰符。然后，TiDB 将基于分组列表中的列进行多维度降序分组，并在输出中为每个分组提供汇总结果。
 
-- Grouping method:
+- 分组方法：
 
-    - The first grouping dimension includes all columns in the group list.
-    - Subsequent grouping dimensions start from the right end of the grouping list and exclude one more column at a time to form new groups.
+    - 第一个分组维度包含分组列表中的所有列。
+    - 后续分组维度从分组列表的右端开始，每次多排除一列来形成新的分组。
 
-- Aggregation summaries: for each dimension, the query performs aggregation operations, and then aggregates the results of this dimension with the results of all previous dimensions. This means that you can get aggregated data at different dimensions, from detailed to overall.
+- 聚合汇总：对于每个维度，查询执行聚合操作，然后将该维度的结果与所有前序维度的结果进行聚合。这意味着你可以获得不同维度的聚合数据，从详细到整体。
 
-With this grouping method, if there are `N` columns in the group list, TiDB aggregates the query results on `N+1` groups.
+通过这种分组方法，如果分组列表中有 `N` 个列，TiDB 会在 `N+1` 个分组上聚合查询结果。
 
-For example:
+例如：
 
 ```sql
 SELECT count(1) FROM t GROUP BY a,b,c WITH ROLLUP;
 ```
 
-In this example, TiDB will aggregate the calculation results of `count(1)` on 4 groups (that is, `{a, b, c}`, `{a, b}`, `{a}`, and `{}`) and output the summary results for each group.
+在这个例子中，TiDB 将在 4 个分组（即 `{a, b, c}`、`{a, b}`、`{a}` 和 `{}`）上聚合 `count(1)` 的计算结果，并输出每个分组的汇总结果。
 
-> **Note:**
+> **注意：**
 >
-> Currently, TiDB does not support the Cube syntax.
+> 目前，TiDB 不支持 Cube 语法。
 
-## Use cases
+## 使用场景
 
-Aggregating and summarizing data from multiple columns is commonly used in OLAP (Online Analytical Processing) scenarios. By using the `WITH ROLLUP` modifier, you can get additional rows that display super summary information from other high-level dimensions in your aggregated results. Then, you can use the super summary information for advanced data analysis and report generation.
+从多个列聚合和汇总数据在 OLAP（在线分析处理）场景中很常见。通过使用 `WITH ROLLUP` 修饰符，你可以在聚合结果中获得额外的行，这些行显示来自其他高级维度的超级汇总信息。然后，你可以使用这些超级汇总信息进行高级数据分析和报表生成。
 
-## Prerequisites
+## 前提条件
 
-Currently, TiDB supports generating valid execution plans for the `WITH ROLLUP` syntax only in TiFlash MPP mode. Therefore, make sure that your TiDB cluster has been deployed with TiFlash nodes and that target fact tables are configured with TiFlash replicas properly.
+目前，TiDB 仅在 TiFlash MPP 模式下支持为 `WITH ROLLUP` 语法生成有效的执行计划。因此，请确保你的 TiDB 集群已部署 TiFlash 节点，并且目标事实表已正确配置 TiFlash 副本。
 
 <CustomContent platform="tidb">
 
-For more information, see [Scale out a TiFlash cluster](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
+更多信息，请参见[扩容 TiFlash 节点](/scale-tidb-using-tiup.md#扩容-tiflash-节点)。
 
 </CustomContent>
 
-## Examples
+## 示例
 
-Suppose you have a profit table named `bank` with the `year`, `month`, `day`, and `profit` columns.
+假设你有一个名为 `bank` 的利润表，包含 `year`、`month`、`day` 和 `profit` 列。
 
 ```sql
 CREATE TABLE bank
@@ -57,12 +57,12 @@ CREATE TABLE bank
     profit  DECIMAL(13, 7)
 );
 
-ALTER TABLE bank SET TIFLASH REPLICA 1; -- Add a TiFlash replica for the table
+ALTER TABLE bank SET TIFLASH REPLICA 1; -- 为表添加 TiFlash 副本
 
 INSERT INTO bank VALUES(2000, "Jan", 1, 10.3),(2001, "Feb", 2, 22.4),(2000,"Mar", 3, 31.6)
 ```
 
-To get the profit for the bank per year, you can use a simple `GROUP BY` clause as follows:
+要获取银行每年的利润，你可以使用简单的 `GROUP BY` 子句，如下所示：
 
 ```sql
 SELECT year, SUM(profit) AS profit FROM bank GROUP BY year;
@@ -75,7 +75,7 @@ SELECT year, SUM(profit) AS profit FROM bank GROUP BY year;
 2 rows in set (0.15 sec)
 ```
 
-In addition to yearly profits, bank reports usually also need to include the overall profit for all years or monthly divided profits for detailed profit analysis. Before v7.4.0, you have to use different `GROUP BY` clauses in multiple queries and join the results using UNION to obtain aggregated summaries. Starting from v7.4.0, you can simply achieve the desired results in a single query by appending the `WITH ROLLUP` modifier to the `GROUP BY` clause.
+除了年度利润外，银行报表通常还需要包括所有年份的总体利润或按月划分的利润，以便进行详细的利润分析。在 v7.4.0 之前，你必须在多个查询中使用不同的 `GROUP BY` 子句，并使用 UNION 连接结果以获得聚合汇总。从 v7.4.0 开始，你只需在 `GROUP BY` 子句后添加 `WITH ROLLUP` 修饰符，就可以在单个查询中实现所需的结果。
 
 ```sql
 SELECT year, month, SUM(profit) AS profit from bank GROUP BY year, month WITH ROLLUP ORDER BY year desc, month desc;
@@ -92,17 +92,17 @@ SELECT year, month, SUM(profit) AS profit from bank GROUP BY year, month WITH RO
 6 rows in set (0.025 sec)
 ```
 
-The preceding results include aggregated data at different dimensions: by both year and month, by year, and overall. In the results, a row without `NULL` values indicates that the `profit` in that row is calculated by grouping both year and month. A row with a `NULL` value in the `month` column indicates that `profit` in that row is calculated by aggregating all months in a year, while a row with a `NULL` value in the `year` column indicates that `profit` in that row is calculated by aggregating all years.
+上述结果包括不同维度的聚合数据：按年和月、按年以及总体。在结果中，没有 `NULL` 值的行表示该行的 `profit` 是通过同时按年和月分组计算得出的。`month` 列中有 `NULL` 值的行表示该行的 `profit` 是通过聚合一年中所有月份计算得出的，而 `year` 列中有 `NULL` 值的行表示该行的 `profit` 是通过聚合所有年份计算得出的。
 
-Specifically:
+具体来说：
 
-- The `profit` value in the first row comes from the 2-dimensional group `{year, month}`, representing the aggregation result for the fine-grained `{2000, "Jan"}` group.
-- The `profit` value in the second row comes from the 1-dimensional group `{year}`, representing the aggregation result for the mid-level `{2001}` group.
-- The `profit` value in the last row comes from the 0-dimensional grouping `{}`, representing the overall aggregation result.
+- 第一行的 `profit` 值来自二维分组 `{year, month}`，表示细粒度 `{2000, "Jan"}` 分组的聚合结果。
+- 第二行的 `profit` 值来自一维分组 `{year}`，表示中级 `{2001}` 分组的聚合结果。
+- 最后一行的 `profit` 值来自零维分组 `{}`，表示总体聚合结果。
 
-`NULL` values in the `WITH ROLLUP` results are generated just before the Aggregate operator is applied. Therefore, you can use `NULL` values in `SELECT`, `HAVING`, and `ORDER BY` clauses to further filter the aggregated results.
+`WITH ROLLUP` 结果中的 `NULL` 值是在应用聚合运算符之前生成的。因此，你可以在 `SELECT`、`HAVING` 和 `ORDER BY` 子句中使用 `NULL` 值来进一步过滤聚合结果。
 
-For example, you can use `NULL` in the `HAVING` clause to filter and view the aggregated results of 2-dimensional groups only:
+例如，你可以在 `HAVING` 子句中使用 `NULL` 来仅查看二维分组的聚合结果：
 
 ```sql
 SELECT year, month, SUM(profit) AS profit FROM bank GROUP BY year, month WITH ROLLUP HAVING year IS NOT null AND month IS NOT null;
@@ -116,9 +116,9 @@ SELECT year, month, SUM(profit) AS profit FROM bank GROUP BY year, month WITH RO
 3 rows in set (0.02 sec)
 ```
 
-Note that if a column in the `GROUP BY` list contains native `NULL` values, the aggregation results of `WITH ROLLUP` might mislead the query results. To address this issue, you can use the `GROUPING()` function to distinguish native `NULL` values from `NULL` values generated by `WITH ROLLUP`. This function takes a grouping expression as a parameter and returns `0` or `1` to indicate whether the grouping expression is aggregated in the current result. `1` represents aggregated, and `0` represents not aggregated.
+请注意，如果 `GROUP BY` 列表中的列包含原生 `NULL` 值，`WITH ROLLUP` 的聚合结果可能会误导查询结果。为解决此问题，你可以使用 `GROUPING()` 函数来区分原生 `NULL` 值和由 `WITH ROLLUP` 生成的 `NULL` 值。此函数接受一个分组表达式作为参数，并返回 `0` 或 `1` 来指示当前结果中是否聚合了分组表达式。`1` 表示已聚合，`0` 表示未聚合。
 
-The following example shows how to use the `GROUPING()` function:
+以下示例展示如何使用 `GROUPING()` 函数：
 
 ```sql
 SELECT year, month, SUM(profit) AS profit, grouping(year) as grp_year, grouping(month) as grp_month FROM bank GROUP BY year, month WITH ROLLUP ORDER BY year DESC, month DESC;
@@ -135,9 +135,9 @@ SELECT year, month, SUM(profit) AS profit, grouping(year) as grp_year, grouping(
 6 rows in set (0.028 sec)
 ```
 
-From this output, you can get an understanding of the aggregation dimension of a row directly from the results of `grp_year` and `grp_month`, which prevents interference from native `NULL` values in the `year` and `month` grouping expressions.
+从这个输出中，你可以直接从 `grp_year` 和 `grp_month` 的结果了解一行的聚合维度，这可以防止 `year` 和 `month` 分组表达式中的原生 `NULL` 值的干扰。
 
-The `GROUPING()` function can accept up to 64 grouping expressions as parameters. In the output of multiple parameters, each parameter generates a result of `0` or `1`, and these parameters collectively form a 64-bit `UNSIGNED LONGLONG` with each bit as `0` or `1`. You can use the following formula to get the bit position of each parameter as follows:
+`GROUPING()` 函数最多可以接受 64 个分组表达式作为参数。在多个参数的输出中，每个参数生成一个 `0` 或 `1` 的结果，这些参数共同形成一个 64 位的 `UNSIGNED LONGLONG`，每个位为 `0` 或 `1`。你可以使用以下公式获取每个参数的位置：
 
 ```go
 GROUPING(day, month, year):
@@ -146,7 +146,7 @@ GROUPING(day, month, year):
 + result for GROUPING(day) << 2
 ```
 
-By using multiple parameters in the `GROUPING()` function, you can efficiently filter aggregate results at any high dimension. For example, you can quickly filter the aggregate results for each year and all years by using `GROUPING(year, month)`.
+通过在 `GROUPING()` 函数中使用多个参数，你可以高效地过滤任何高维度的聚合结果。例如，你可以使用 `GROUPING(year, month)` 快速过滤每年和所有年份的聚合结果。
 
 ```sql
 SELECT year, month, SUM(profit) AS profit, grouping(year) as grp_year, grouping(month) as grp_month FROM bank GROUP BY year, month WITH ROLLUP HAVING GROUPING(year, month) <> 0 ORDER BY year DESC, month DESC;
@@ -160,13 +160,13 @@ SELECT year, month, SUM(profit) AS profit, grouping(year) as grp_year, grouping(
 3 rows in set (0.023 sec)
 ```
 
-## How to interpret the ROLLUP execution plan
+## 如何解读 ROLLUP 执行计划
 
-To meet the requirements of multidimensional grouping, multidimensional data aggregation uses the `Expand` operator to replicate data. Each replica corresponds to a group at a specific dimension. With the data shuffling capability of MPP, the `Expand` operator can rapidly reorganize and calculate a large volume of data between multiple TiFlash nodes, fully utilizing the computational power of each node.
+为了满足多维度分组的要求，多维数据聚合使用 `Expand` 算子来复制数据。每个副本对应特定维度的一个分组。通过 MPP 的数据分发能力，`Expand` 算子可以在多个 TiFlash 节点之间快速重组和计算大量数据，充分利用每个节点的计算能力。
 
-The implementation of the `Expand` operator is similar to that of the `Projection` operator. The difference is that `Expand` is a multi-level `Projection`, which contains multiple levels of projection operation expressions. For each row of the raw data, the `Projection` operator generates only one row in results, whereas the `Expand` operator generates multiple rows in results (the number of rows is equal to the number of levels in projection operation expressions).
+`Expand` 算子的实现类似于 `Projection` 算子。不同之处在于 `Expand` 是一个多级 `Projection`，包含多个级别的投影操作表达式。对于原始数据的每一行，`Projection` 算子在结果中只生成一行，而 `Expand` 算子在结果中生成多行（行数等于投影操作表达式的级别数）。
 
-The following is an example of an execution plan:
+以下是一个执行计划示例：
 
 ```sql
 explain SELECT year, month, grouping(year), grouping(month), SUM(profit) AS profit FROM bank GROUP BY year, month WITH ROLLUP;
@@ -187,13 +187,13 @@ explain SELECT year, month, grouping(year), grouping(month), SUM(profit) AS prof
 10 rows in set (0.05 sec)
 ```
 
-In this example execution plan, you can view the multiple-level expression of the `Expand` operator in the `operator info` column of the `Expand_20` row. It consists of 2-dimensional expressions, and you can view the schema information of the `Expand` operator at the end of the row, which is `schema: [test.bank.profit, Column#6, Column#7, gid]`.
+在这个执行计划示例中，你可以在 `Expand_20` 行的 `operator info` 列中查看 `Expand` 算子的多级表达式。它由二维表达式组成，你可以在该行末尾查看 `Expand` 算子的 schema 信息，即 `schema: [test.bank.profit, Column#6, Column#7, gid]`。
 
-In the schema information of the `Expand` operator, `GID` is generated as an additional column. Its value is calculated by the `Expand` operator based on the grouping logic of different dimensions, and the value reflects the relationship between the current data replica and the `grouping set`. In most cases, the `Expand` operator uses a Bit-And operation, which can represent 63 combinations of grouping items for ROLLUP, corresponding to 64 dimensions of grouping. In this mode, TiDB generates the `GID` value depending on whether the `grouping set` of the required dimension contains grouping expressions when the current data replica is replicated, and it fills a 64-bit UINT64 value in the order of columns to be grouped.
+在 `Expand` 算子的 schema 信息中，`GID` 作为额外列生成。其值由 `Expand` 算子根据不同维度的分组逻辑计算得出，该值反映了当前数据副本与 `grouping set` 的关系。在大多数情况下，`Expand` 算子使用位与运算，可以表示 ROLLUP 的 63 种分组项组合，对应 64 个分组维度。在这种模式下，TiDB 根据当前数据副本复制时所需维度的 `grouping set` 是否包含分组表达式来生成 `GID` 值，并按待分组列的顺序填充一个 64 位的 UINT64 值。
 
-In the preceding example, the order of columns in the grouping list is `[year, month]`, and the dimension groups generated by the ROLLUP syntax are `{year, month}`, `{year}`, and `{}`. For the dimension group `{year, month}`, both `year` and `month` are required columns, so TiDB fills the bit positions for them with 1 and 1 correspondingly. This forms a UINT64 of `11...0`, which is 3 in decimal. Therefore, the projection expression is `[test.bank.profit, Column#6, Column#7, 3->gid]` (where `column#6` corresponds to `year`, and `column#7` corresponds to `month`).
+在上述示例中，分组列表中列的顺序是 `[year, month]`，ROLLUP 语法生成的维度分组是 `{year, month}`、`{year}` 和 `{}`。对于维度分组 `{year, month}`，`year` 和 `month` 都是必需列，所以 TiDB 分别用 1 和 1 填充它们的位置。这形成了一个 UINT64 的 `11...0`，十进制为 3。因此，投影表达式为 `[test.bank.profit, Column#6, Column#7, 3->gid]`（其中 `column#6` 对应 `year`，`column#7` 对应 `month`）。
 
-The following is an example row of the raw data:
+以下是原始数据的一个示例行：
 
 ```sql
 +------+-------+------+------------+
@@ -203,7 +203,7 @@ The following is an example row of the raw data:
 +------+-------+------+------------+
 ```
 
-After the `Expand` operator is applied, you can get the following three rows of results:
+应用 `Expand` 算子后，你可以得到以下三行结果：
 
 ```sql
 +------------+------+-------+-----+
@@ -217,4 +217,4 @@ After the `Expand` operator is applied, you can get the following three rows of 
 +------------+------+-------+-----+
 ```
 
-Note that the `SELECT` clause in the query uses the `GROUPING` function. When the `GROUPING` function is used in the `SELECT`, `HAVING`, or `ORDER BY` clauses, TiDB rewrites it during the logical optimization phase, transforms the relationship between the `GROUPING` function and the `GROUP BY` items into a `GID` related to the logic of dimension group (also known as `grouping set`), and fills this `GID` as metadata into the new `GROUPING` function.
+注意，查询中的 `SELECT` 子句使用了 `GROUPING` 函数。当在 `SELECT`、`HAVING` 或 `ORDER BY` 子句中使用 `GROUPING` 函数时，TiDB 在逻辑优化阶段会重写它，将 `GROUPING` 函数与 `GROUP BY` 项之间的关系转换为与维度分组（也称为 `grouping set`）逻辑相关的 `GID`，并将此 `GID` 作为元数据填充到新的 `GROUPING` 函数中。

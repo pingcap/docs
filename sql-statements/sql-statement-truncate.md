@@ -1,15 +1,15 @@
 ---
-title: TRUNCATE | TiDB SQL Statement Reference
-summary: An overview of the usage of TRUNCATE for the TiDB database.
+title: TRUNCATE | TiDB SQL 语句参考
+summary: TiDB 数据库中 TRUNCATE 的使用概览。
 ---
 
 # TRUNCATE
 
-The `TRUNCATE` statement removes all data from the table in a non-transactional way. `TRUNCATE` can be thought of as semantically the same as `DROP TABLE` + `CREATE TABLE` with the previous definition.
+`TRUNCATE` 语句以非事务方式删除表中的所有数据。`TRUNCATE` 在语义上可以被理解为等同于 `DROP TABLE` + 使用之前的定义 `CREATE TABLE`。
 
-Both `TRUNCATE TABLE tableName` and `TRUNCATE tableName` are valid syntax.
+`TRUNCATE TABLE tableName` 和 `TRUNCATE tableName` 都是有效的语法。
 
-## Synopsis
+## 语法
 
 ```ebnf+diagram
 TruncateTableStmt ::=
@@ -19,7 +19,7 @@ TableName ::=
     (Identifier ".")? Identifier
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> CREATE TABLE t1 (a INT NOT NULL PRIMARY KEY);
@@ -55,11 +55,11 @@ mysql> TRUNCATE TABLE t1;
 Query OK, 0 rows affected (0.11 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `TRUNCATE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中的 `TRUNCATE` 语句与 MySQL 完全兼容。如果发现任何兼容性差异，请[报告问题](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 另请参阅
 
 * [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
 * [DELETE](/sql-statements/sql-statement-delete.md)

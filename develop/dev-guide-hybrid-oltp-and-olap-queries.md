@@ -1,35 +1,35 @@
 ---
-title: HTAP Queries
-summary: Introduce the HTAP queries in TiDB.
+title: HTAP 查询
+summary: 介绍 TiDB 中的 HTAP 查询。
 ---
 
-# HTAP Queries
+# HTAP 查询
 
-HTAP stands for Hybrid Transactional and Analytical Processing. Traditionally, databases are often designed for transactional or analytical scenarios, so the data platform often needs to be split into Transactional Processing and Analytical Processing, and the data needs to be replicated from the transactional database to the analytical database for quick response to analytical queries. TiDB databases can perform both transactional and analytical tasks, which greatly simplifies the construction of data platforms and allows users to use fresher data for analysis.
+HTAP 代表混合事务和分析处理（Hybrid Transactional and Analytical Processing）。传统上，数据库通常针对事务或分析场景进行设计，因此数据平台经常需要拆分为事务处理和分析处理，并且需要将数据从事务数据库复制到分析数据库以快速响应分析查询。TiDB 数据库可以同时执行事务和分析任务，这大大简化了数据平台的构建，并允许用户使用更新鲜的数据进行分析。
 
-TiDB uses TiKV, a row-based storage engine, for Online Transactional Processing (OLTP), and TiFlash, a columnar storage engine, for Online Analytical Processing (OLAP). The row-based storage engine and the columnar storage engine co-exist for HTAP. Both storage engines can replicate data automatically and keep strong consistency. The row-based storage engine optimizes OLTP performance, and the columnar storage engine optimizes OLAP performance.
+TiDB 使用行式存储引擎 TiKV 进行在线事务处理（OLTP），使用列式存储引擎 TiFlash 进行在线分析处理（OLAP）。行式存储引擎和列式存储引擎共存以实现 HTAP。两种存储引擎都可以自动复制数据并保持强一致性。行式存储引擎优化 OLTP 性能，列式存储引擎优化 OLAP 性能。
 
-The [Create a table](/develop/dev-guide-create-table.md#use-htap-capabilities) section introduces how to enable the HTAP capability of TiDB. The following describes how to use HTAP to analyze data faster.
+[创建表](/develop/dev-guide-create-table.md#use-htap-capabilities)部分介绍了如何启用 TiDB 的 HTAP 功能。以下介绍如何使用 HTAP 更快地分析数据。
 
-## Data preparation
+## 数据准备
 
-Before starting, you can import more sample data [via the `tiup demo` command](/develop/dev-guide-bookshop-schema-design.md#method-1-via-tiup-demo). For example:
+在开始之前，你可以[通过 `tiup demo` 命令](/develop/dev-guide-bookshop-schema-design.md#method-1-via-tiup-demo)导入更多示例数据。例如：
 
 ```shell
 tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --ratings=1000000 --orders=1000000 --host 127.0.0.1 --port 4000 --drop-tables
 ```
 
-Or you can [use the Import function of TiDB Cloud](/develop/dev-guide-bookshop-schema-design.md#method-2-via-tidb-cloud-import) to import the pre-prepared sample data.
+或者你可以[使用 TiDB Cloud 的导入功能](/develop/dev-guide-bookshop-schema-design.md#method-2-via-tidb-cloud-import)导入预先准备好的示例数据。
 
-## Window functions
+## 窗口函数
 
-When using a database, in addition to storing your data and providing application features (such as ordering and rating books), you might also need to analyze the data in the database to make further operations and decisions.
+在使用数据库时，除了存储数据和提供应用功能（如订购和评价图书）外，你可能还需要分析数据库中的数据以进行进一步的操作和决策。
 
-The [Query data from a single table](/develop/dev-guide-get-data-from-single-table.md) document introduces how to use aggregate queries to analyze data as a whole. In more complex scenarios, you might want to aggregate the results of multiple aggregation queries into a single query. If you want to know the historical trend of the order amount of a particular book, you can aggregate `sum` for all order data of each month, and then aggregate the `sum` results together to get the historical trend.
+[从单表查询数据](/develop/dev-guide-get-data-from-single-table.md)文档介绍了如何使用聚合查询来整体分析数据。在更复杂的场景中，你可能想要将多个聚合查询的结果聚合到一个查询中。如果你想知道特定图书订单金额的历史趋势，你可以对每个月的所有订单数据进行 `sum` 聚合，然后将 `sum` 结果聚合在一起以获得历史趋势。
 
-To facilitate such analysis, since TiDB v3.0, TiDB supports window functions. For each row of data, this function provides the ability to access data across multiple rows. Different from a regular aggregation query, the window function aggregates rows without merging results set into a single row.
+为了便于此类分析，从 TiDB v3.0 开始，TiDB 支持窗口函数。对于每一行数据，此函数提供了跨多行访问数据的能力。与常规聚合查询不同，窗口函数在聚合行时不会将结果集合并为单行。
 
-Similar to aggregate functions, you also need to follow a fixed set of syntax when using the window function:
+与聚合函数类似，在使用窗口函数时也需要遵循固定的语法集：
 
 ```sql
 SELECT
@@ -38,9 +38,9 @@ FROM
     table_name
 ```
 
-### `ORDER BY` clause
+### `ORDER BY` 子句
 
-With the aggregate window function `sum()`, you can analyze the historical trend of the order amount of a particular book. For example:
+使用聚合窗口函数 `sum()`，你可以分析特定图书订单金额的历史趋势。例如：
 
 ```sql
 WITH orders_group_by_month AS (
@@ -56,7 +56,7 @@ FROM orders_group_by_month
 ORDER BY month ASC;
 ```
 
-The `sum()` function accumulates the data in the order specified by the `ORDER BY` statement in the `OVER` clause. The result is as follows:
+`sum()` 函数按照 `OVER` 子句中 `ORDER BY` 语句指定的顺序累积数据。结果如下：
 
 ```
 +---------+-------+
@@ -79,13 +79,13 @@ The `sum()` function accumulates the data in the order specified by the `ORDER B
 13 rows in set (0.01 sec)
 ```
 
-Visualize the above data through a line chart with time as the horizontal axis and cumulative order amount as the vertical axis. You can easily know the historical ordering trend of the book through the change of the slope.
+通过以时间为横轴、累计订单金额为纵轴的折线图可视化上述数据。你可以通过斜率的变化轻松了解该书的历史订购趋势。
 
-### `PARTITION BY` clause
+### `PARTITION BY` 子句
 
-Suppose that you want to analyze the historical ordering trend of different types of books, and visualize it in the same line chart with multiple series.
+假设你想分析不同类型图书的历史订购趋势，并在同一个折线图中以多个系列进行可视化。
 
-You can use the `PARTITION BY` clause to group books by types and count history orders for each type separately.
+你可以使用 `PARTITION BY` 子句按类型对图书进行分组，并分别统计每种类型的历史订单。
 
 ```sql
 WITH orders_group_by_month AS (
@@ -108,7 +108,7 @@ WITH orders_group_by_month AS (
 SELECT * FROM acc;
 ```
 
-The result is as follows:
+结果如下：
 
 ```
 +------------------------------+---------+------+
@@ -134,33 +134,33 @@ The result is as follows:
 1500 rows in set (1.70 sec)
 ```
 
-### Non-aggregate window functions
+### 非聚合窗口函数
 
-TiDB also provides some non-aggregated [window functions](/functions-and-operators/window-functions.md) for more analysis statements.
+TiDB 还提供了一些非聚合的[窗口函数](/functions-and-operators/window-functions.md)用于更多分析语句。
 
-For example, the [Pagination Query](/develop/dev-guide-paginate-results.md) document introduces how to use the `row_number()` function to achieve efficient pagination batch processing.
+例如，[分页查询](/develop/dev-guide-paginate-results.md)文档介绍了如何使用 `row_number()` 函数实现高效的分页批处理。
 
-## Hybrid workload
+## 混合负载
 
-When using TiDB for real-time online analytical processing in hybrid load scenarios, you only need to provide an entry point of TiDB to your data. TiDB automatically selects different processing engines based on the specific business.
+在混合负载场景中使用 TiDB 进行实时在线分析处理时，你只需要为你的数据提供一个 TiDB 入口点。TiDB 会根据具体业务自动选择不同的处理引擎。
 
-### Create TiFlash replicas
+### 创建 TiFlash 副本
 
-TiDB uses the row-based storage engine, TiKV, by default. To use the columnar storage engine, TiFlash, see [Enable HTAP capability](/develop/dev-guide-create-table.md#use-htap-capabilities). Before querying data through TiFlash, you need to create TiFlash replicas for `books` and `orders` tables using the following statement:
+TiDB 默认使用行式存储引擎 TiKV。要使用列式存储引擎 TiFlash，请参阅[启用 HTAP 功能](/develop/dev-guide-create-table.md#use-htap-capabilities)。在通过 TiFlash 查询数据之前，你需要使用以下语句为 `books` 和 `orders` 表创建 TiFlash 副本：
 
 ```sql
 ALTER TABLE books SET TIFLASH REPLICA 1;
 ALTER TABLE orders SET TIFLASH REPLICA 1;
 ```
 
-You can check the progress of the TiFlash replicas using the following statement:
+你可以使用以下语句检查 TiFlash 副本的进度：
 
 ```sql
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'bookshop' and TABLE_NAME = 'books';
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'bookshop' and TABLE_NAME = 'orders';
 ```
 
-A `PROGRESS` column of 1 indicates that the progress is 100% complete, and a `AVAILABLE` column of 1 indicates that the replica is currently available.
+`PROGRESS` 列为 1 表示进度为 100% 完成，`AVAILABLE` 列为 1 表示副本当前可用。
 
 ```
 +--------------+------------+----------+---------------+-----------------+-----------+----------+
@@ -177,9 +177,9 @@ A `PROGRESS` column of 1 indicates that the progress is 100% complete, and a `AV
 1 row in set (0.07 sec)
 ```
 
-After replicas are added, you can use the `EXPLAIN` statement to check the execution plan of the above window function [`PARTITION BY` clause](#partition-by-clause). If `cop[tiflash]` appears in the execution plan, it means that the TiFlash engine has started to work.
+添加副本后，你可以使用 `EXPLAIN` 语句检查上述窗口函数 [`PARTITION BY` 子句](#partition-by-子句)的执行计划。如果执行计划中出现 `cop[tiflash]`，表示 TiFlash 引擎已开始工作。
 
-Then, execute the sample SQL statement in [`PARTITION BY` clause](#partition-by-clause) again. The result is as follows:
+然后，再次执行 [`PARTITION BY` 子句](#partition-by-子句)中的示例 SQL 语句。结果如下：
 
 ```
 +------------------------------+---------+------+
@@ -205,18 +205,18 @@ Then, execute the sample SQL statement in [`PARTITION BY` clause](#partition-by-
 1500 rows in set (0.79 sec)
 ```
 
-By comparing the two execution results, you can find that the query speed is significantly improved with TiFlash (the improvement is more significant with a large volume of data). This is because a window function usually relies on a full table scan for some columns, and columnar TiFlash is more suitable to handle this type of analytical task than row-based TiKV. For TiKV, if you use primary keys or indexes to reduce the number of rows to be queried, the queries can be fast too and consume fewer resources compared with TiFlash.
+通过比较两次执行结果，你可以发现使用 TiFlash 后查询速度显著提高（在数据量大的情况下提升更明显）。这是因为窗口函数通常依赖于对某些列的全表扫描，而列式的 TiFlash 比行式的 TiKV 更适合处理这类分析任务。对于 TiKV，如果你使用主键或索引来减少需要查询的行数，查询也可以很快，并且与 TiFlash 相比消耗更少的资源。
 
-### Specify a query engine
+### 指定查询引擎
 
-TiDB uses the Cost Based Optimizer (CBO) to automatically choose whether to use TiFlash replicas based on cost estimates. However, if you are sure whether your query is transactional or analytical, you can specify the query engine to be used with [Optimizer Hints](/optimizer-hints.md).
+TiDB 使用基于成本的优化器（CBO）根据成本估算自动选择是否使用 TiFlash 副本。但是，如果你确定你的查询是事务性的还是分析性的，你可以使用[优化器提示](/optimizer-hints.md)指定要使用的查询引擎。
 
-To specify which engine to be used in a query, you can use the `/*+ read_from_storage(engine_name[table_name]) */` hint as in the following statement.
+要在查询中指定使用哪个引擎，你可以使用 `/*+ read_from_storage(engine_name[table_name]) */` 提示，如以下语句所示。
 
-> **Note:**
+> **注意：**
 >
-> - If a table has an alias, use the alias instead of the table name in the hint, otherwise, the hint does not work.
-> - The `read_from_storage` hint does not work for [common table expression](/develop/dev-guide-use-common-table-expression.md).
+> - 如果表有别名，在提示中使用别名而不是表名，否则提示不会生效。
+> - `read_from_storage` 提示对[公共表表达式](/develop/dev-guide-use-common-table-expression.md)不起作用。
 
 ```sql
 WITH orders_group_by_month AS (
@@ -240,38 +240,38 @@ WITH orders_group_by_month AS (
 SELECT * FROM acc;
 ```
 
-You can use the `EXPLAIN` statement to check the execution plan of the above SQL statement. If `cop[tiflash]` and `cop[tikv]` appear in the task column at the same time, it means that TiFlash and TiKV are both scheduled to complete this query. Note that TiFlash and TiKV storage engines usually use different TiDB nodes, so the two query types are not affected by each other.
+你可以使用 `EXPLAIN` 语句检查上述 SQL 语句的执行计划。如果任务列中同时出现 `cop[tiflash]` 和 `cop[tikv]`，表示 TiFlash 和 TiKV 都被调度来完成此查询。注意，TiFlash 和 TiKV 存储引擎通常使用不同的 TiDB 节点，因此两种查询类型不会相互影响。
 
-For more information about how TiDB chooses to use TiFlash, see [Use TiDB to read TiFlash replicas](/tiflash/use-tidb-to-read-tiflash.md)
+有关 TiDB 如何选择使用 TiFlash 的更多信息，请参阅[使用 TiDB 读取 TiFlash 副本](/tiflash/use-tidb-to-read-tiflash.md)。
 
-## Read more
+## 阅读更多
 
 <CustomContent platform="tidb">
 
-- [Quick Start with HTAP](/quick-start-with-htap.md)
-- [Explore HTAP](/explore-htap.md)
+- [HTAP 快速上手](/quick-start-with-htap.md)
+- [探索 HTAP](/explore-htap.md)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- [TiDB Cloud HTAP Quick Start](/tidb-cloud/tidb-cloud-htap-quickstart.md)
+- [TiDB Cloud HTAP 快速上手](/tidb-cloud/tidb-cloud-htap-quickstart.md)
 
 </CustomContent>
 
-- [Window Functions](/functions-and-operators/window-functions.md)
-- [Use TiFlash](/tiflash/tiflash-overview.md#use-tiflash)
+- [窗口函数](/functions-and-operators/window-functions.md)
+- [使用 TiFlash](/tiflash/tiflash-overview.md#use-tiflash)
 
-## Need help?
+## 需要帮助？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

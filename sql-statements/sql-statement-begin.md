@@ -1,15 +1,15 @@
 ---
-title: BEGIN | TiDB SQL Statement Reference
-summary: An overview of the usage of BEGIN for the TiDB database.
+title: BEGIN | TiDB SQL 语句参考
+summary: TiDB 数据库中 BEGIN 的使用概览。
 ---
 
 # BEGIN
 
-This statement starts a new transaction inside of TiDB. It is similar to the statements `START TRANSACTION` and `SET autocommit=0`.
+此语句在 TiDB 中开启一个新的事务。它类似于 `START TRANSACTION` 和 `SET autocommit=0` 语句。
 
-In the absence of a `BEGIN` statement, every statement will by default autocommit in its own transaction. This behavior ensures MySQL compatibility.
+在没有 `BEGIN` 语句的情况下，每个语句默认会在自己的事务中自动提交。这种行为确保了与 MySQL 的兼容性。
 
-## Synopsis
+## 语法
 
 ```ebnf+diagram
 BeginTransactionStmt ::=
@@ -17,7 +17,7 @@ BeginTransactionStmt ::=
 |   'START' 'TRANSACTION' ( 'READ' ( 'WRITE' | 'ONLY' ( 'WITH' 'TIMESTAMP' 'BOUND' TimestampBound )? ) | 'WITH' 'CONSISTENT' 'SNAPSHOT' )?
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> CREATE TABLE t1 (a int NOT NULL PRIMARY KEY);
@@ -33,14 +33,14 @@ mysql> COMMIT;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-TiDB supports the syntax extension of `BEGIN PESSIMISTIC` or `BEGIN OPTIMISTIC`. This enables you to override the default transactional model for your transaction.
+TiDB 支持 `BEGIN PESSIMISTIC` 或 `BEGIN OPTIMISTIC` 的语法扩展。这使你可以为你的事务覆盖默认的事务模型。
 
-## See also
+## 另请参阅
 
 * [COMMIT](/sql-statements/sql-statement-commit.md)
 * [ROLLBACK](/sql-statements/sql-statement-rollback.md)
 * [START TRANSACTION](/sql-statements/sql-statement-start-transaction.md)
-* [TiDB optimistic transaction model](/optimistic-transaction.md)
-* [TiDB pessimistic transaction mode](/pessimistic-transaction.md)
+* [TiDB 乐观事务模型](/optimistic-transaction.md)
+* [TiDB 悲观事务模式](/pessimistic-transaction.md)

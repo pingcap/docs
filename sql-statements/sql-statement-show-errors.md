@@ -1,15 +1,15 @@
 ---
-title: SHOW ERRORS | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW ERRORS for the TiDB database.
+title: SHOW ERRORS | TiDB SQL 语句参考
+summary: TiDB 数据库中 SHOW ERRORS 的使用概述。
 ---
 
 # SHOW ERRORS
 
-This statement shows errors from previously executed statements. The error buffer is cleared as soon as a statement executes successfully. In which case, `SHOW ERRORS` will return an empty set.
+此语句显示之前执行的语句中的错误。当语句成功执行时，错误缓冲区会被清除。在这种情况下，`SHOW ERRORS` 将返回一个空集。
 
-The behavior of which statements generate errors vs. warnings is highly influenced by the current `sql_mode`.
+哪些语句生成错误而不是警告的行为很大程度上受当前 `sql_mode` 的影响。
 
-## Synopsis
+## 语法概要
 
 ```ebnf+diagram
 ShowErrorsStmt ::=
@@ -20,7 +20,7 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> select invalid;
@@ -50,10 +50,10 @@ mysql> SHOW ERRORS;
 Empty set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `SHOW ERRORS` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中的 `SHOW ERRORS` 语句与 MySQL 完全兼容。如果发现任何兼容性差异，请[报告 bug](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 另请参阅
 
 * [SHOW WARNINGS](/sql-statements/sql-statement-show-warnings.md)

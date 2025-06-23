@@ -1,53 +1,53 @@
 ---
-title: Create a TiDB Cloud Serverless Cluster
-summary: Learn how to create your TiDB Cloud Serverless cluster.
+title: 创建 TiDB Cloud Serverless 集群
+summary: 了解如何创建 TiDB Cloud Serverless 集群。
 ---
 
-# Create a TiDB Cloud Serverless Cluster
+# 创建 TiDB Cloud Serverless 集群
 
-This document describes how to create a TiDB Cloud Serverless cluster in the [TiDB Cloud console](https://tidbcloud.com/).
+本文档介绍如何在 [TiDB Cloud 控制台](https://tidbcloud.com/)中创建 TiDB Cloud Serverless 集群。
 
-> **Tip:**
+> **提示：**
 >
-> To learn how to create a TiDB Cloud Dedicated cluster, see [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md).
+> 要了解如何创建 TiDB Cloud Dedicated 集群，请参见[创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)。
 
-## Before you begin
+## 开始之前
 
-If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/signup) to sign up for an account.
+如果你还没有 TiDB Cloud 账户，请点击[此处](https://tidbcloud.com/signup)注册账户。
 
-- You can either sign up with email and password so that you can manage your password using TiDB Cloud, or sign up with your Google, GitHub, or Microsoft account.
-- For AWS Marketplace users, you can also sign up through AWS Marketplace. To do that, search for `TiDB Cloud` in [AWS Marketplace](https://aws.amazon.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
-- For Azure Marketplace users, you can also sign up through Azure Marketplace. To do that, search for `TiDB Cloud` in [Azure Marketplace](https://azuremarketplace.microsoft.com), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
-- For Google Cloud Marketplace users, you can also sign up through Google Cloud Marketplace. To do that, search for `TiDB Cloud` in [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+- 你可以使用电子邮件和密码注册，这样你就可以使用 TiDB Cloud 管理你的密码，也可以使用你的 Google、GitHub 或 Microsoft 账户注册。
+- 对于 AWS Marketplace 用户，你也可以通过 AWS Marketplace 注册。为此，在 [AWS Marketplace](https://aws.amazon.com/marketplace) 中搜索 `TiDB Cloud`，订阅 TiDB Cloud，然后按照屏幕上的说明设置你的 TiDB Cloud 账户。
+- 对于 Azure Marketplace 用户，你也可以通过 Azure Marketplace 注册。为此，在 [Azure Marketplace](https://azuremarketplace.microsoft.com) 中搜索 `TiDB Cloud`，订阅 TiDB Cloud，然后按照屏幕上的说明设置你的 TiDB Cloud 账户。
+- 对于 Google Cloud Marketplace 用户，你也可以通过 Google Cloud Marketplace 注册。为此，在 [Google Cloud Marketplace](https://console.cloud.google.com/marketplace) 中搜索 `TiDB Cloud`，订阅 TiDB Cloud，然后按照屏幕上的说明设置你的 TiDB Cloud 账户。
 
-## Steps
+## 步骤
 
-If you are in the `Organization Owner` or the `Project Owner` role, you can create a TiDB Cloud Serverless cluster as follows:
+如果你是 `Organization Owner` 或 `Project Owner` 角色，你可以按照以下步骤创建 TiDB Cloud Serverless 集群：
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), and then navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page.
+1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，然后导航到[**集群**](https://tidbcloud.com/project/clusters)页面。
 
-2. Click **Create Cluster**.
+2. 点击**创建集群**。
 
-3. On the **Create Cluster** page, **Serverless** is selected by default.
+3. 在**创建集群**页面上，默认选择 **Serverless**。
 
-4. The cloud provider of TiDB Cloud Serverless is AWS. You can select an AWS region where you want to host your cluster.
+4. TiDB Cloud Serverless 的云服务提供商是 AWS。你可以选择要托管集群的 AWS 区域。
 
-5. Update the default cluster name if necessary.
+5. 如有必要，更新默认的集群名称。
 
-6. Select a cluster plan. TiDB Cloud Serverless provides two [cluster plans](/tidb-cloud/select-cluster-tier.md#cluster-plans): **Free Cluster** and **Scalable Cluster**. You can start with a free cluster and later upgrade to a scalable cluster as your needs grow. To create a scalable cluster, you need to specify a **Monthly Spending Limit** and add a credit card.
+6. 选择集群方案。TiDB Cloud Serverless 提供两种[集群方案](/tidb-cloud/select-cluster-tier.md#cluster-plans)：**免费集群**和**可扩展集群**。你可以从免费集群开始，随着需求增长再升级到可扩展集群。要创建可扩展集群，你需要指定**每月支出限额**并添加信用卡。
 
-    > **Note:**
+    > **注意：**
     >
-    > For each organization in TiDB Cloud, you can create a maximum of five [free clusters](/tidb-cloud/select-cluster-tier.md#free-cluster-plan) by default. To create more TiDB Cloud Serverless clusters, you need to add a credit card and create [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan) for the usage.
+    > 对于 TiDB Cloud 中的每个组织，默认情况下你最多可以创建五个[免费集群](/tidb-cloud/select-cluster-tier.md#free-cluster-plan)。要创建更多 TiDB Cloud Serverless 集群，你需要添加信用卡并创建[可扩展集群](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan)。
 
-7. Click **Create**.
+7. 点击**创建**。
 
-    The cluster creation process starts and your TiDB Cloud cluster will be created in approximately 30 seconds.
+    集群创建过程开始，你的 TiDB Cloud 集群将在大约 30 秒内创建完成。
 
-## What's next
+## 下一步
 
-After your cluster is created, follow the instructions in [Connect to TiDB Cloud Serverless via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) to create a password for your cluster.
+集群创建完成后，按照[通过公共端点连接到 TiDB Cloud Serverless](/tidb-cloud/connect-via-standard-connection-serverless.md)中的说明为你的集群创建密码。
 
-> **Note:**
+> **注意：**
 >
-> If you do not set a password, you cannot connect to the cluster.
+> 如果你不设置密码，将无法连接到集群。

@@ -1,20 +1,20 @@
 ---
-title: SHOW CREATE TABLE | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW CREATE TABLE for the TiDB database.
+title: SHOW CREATE TABLE | TiDB SQL 语句参考
+summary: TiDB 数据库中 SHOW CREATE TABLE 的使用概述。
 ---
 
 # SHOW CREATE TABLE
 
-This statement shows the exact statement to recreate an existing table using SQL.
+此语句显示使用 SQL 重新创建现有表的确切语句。
 
-## Synopsis
+## 语法图
 
 ```ebnf+diagram
 ShowCreateTableStmt ::=
     "SHOW" "CREATE" "TABLE" (SchemaName ".")? TableName
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> CREATE TABLE t1 (a INT);
@@ -29,11 +29,11 @@ Create Table: CREATE TABLE `t1` (
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `SHOW CREATE TABLE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中的 `SHOW CREATE TABLE` 语句与 MySQL 完全兼容。如果发现任何兼容性差异，请[报告问题](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 另请参阅
 
 * [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 * [DROP TABLE](/sql-statements/sql-statement-drop-table.md)

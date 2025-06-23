@@ -1,39 +1,39 @@
 ---
-title: Integrate TiDB Vector Search with peewee
-summary: Learn how to integrate TiDB Vector Search with peewee to store embeddings and perform semantic searches.
+title: 将 TiDB Vector Search 与 peewee 集成
+summary: 了解如何将 TiDB Vector Search 与 peewee 集成以存储嵌入向量并执行语义搜索。
 ---
 
-# Integrate TiDB Vector Search with peewee
+# 将 TiDB Vector Search 与 peewee 集成
 
-This tutorial walks you through how to use [peewee](https://docs.peewee-orm.com/) to interact with the [TiDB Vector Search](/tidb-cloud/vector-search-overview.md), store embeddings, and perform vector search queries.
+本教程将指导你如何使用 [peewee](https://docs.peewee-orm.com/) 与 [TiDB Vector Search](/tidb-cloud/vector-search-overview.md) 交互，存储嵌入向量并执行向量搜索查询。
 
-> **Note**
+> **注意**
 >
-> TiDB Vector Search is only available for TiDB Self-Managed (TiDB >= v8.4) and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless). It is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
+> TiDB Vector Search 仅适用于 TiDB Self-Managed（TiDB >= v8.4）和 [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)。它不适用于 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)。
 
-## Prerequisites
+## 前提条件
 
-To complete this tutorial, you need:
+完成本教程需要：
 
-- [Python 3.8 or higher](https://www.python.org/downloads/) installed.
-- [Git](https://git-scm.com/downloads) installed.
-- A TiDB Cloud Serverless cluster. Follow [creating a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
+- 安装 [Python 3.8 或更高版本](https://www.python.org/downloads/)。
+- 安装 [Git](https://git-scm.com/downloads)。
+- 一个 TiDB Cloud Serverless 集群。如果你还没有，请参考[创建 TiDB Cloud Serverless 集群](/tidb-cloud/create-tidb-cluster-serverless.md)来创建你自己的 TiDB Cloud 集群。
 
-## Run the sample app
+## 运行示例应用
 
-You can quickly learn about how to integrate TiDB Vector Search with peewee by following the steps below.
+你可以按照以下步骤快速了解如何将 TiDB Vector Search 与 peewee 集成。
 
-### Step 1. Clone the repository
+### 步骤 1. 克隆代码仓库
 
-Clone the [`tidb-vector-python`](https://github.com/pingcap/tidb-vector-python) repository to your local machine:
+将 [`tidb-vector-python`](https://github.com/pingcap/tidb-vector-python) 代码仓库克隆到本地：
 
 ```shell
 git clone https://github.com/pingcap/tidb-vector-python.git
 ```
 
-### Step 2. Create a virtual environment
+### 步骤 2. 创建虚拟环境
 
-Create a virtual environment for your project:
+为你的项目创建一个虚拟环境：
 
 ```bash
 cd tidb-vector-python/examples/orm-peewee-quickstart
@@ -41,53 +41,53 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-### Step 3. Install required dependencies
+### 步骤 3. 安装所需依赖
 
-Install the required dependencies for the demo project:
+安装示例项目所需的依赖：
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Alternatively, you can install the following packages for your project:
+或者，你可以为你的项目安装以下包：
 
 ```bash
 pip install peewee pymysql python-dotenv tidb-vector
 ```
 
-### Step 4. Configure the environment variables
+### 步骤 4. 配置环境变量
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. 导航到 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，然后点击目标集群的名称进入其概览页面。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2. 点击右上角的 **Connect**。将显示连接对话框。
 
-3. Ensure the configurations in the connection dialog match your operating environment.
+3. 确保连接对话框中的配置与你的操作环境匹配。
 
-   - **Connection Type** is set to `Public`.
-   - **Branch** is set to `main`.
-   - **Connect With** is set to `General`.
-   - **Operating System** matches your environment.
+   - **Connection Type** 设置为 `Public`。
+   - **Branch** 设置为 `main`。
+   - **Connect With** 设置为 `General`。
+   - **Operating System** 与你的环境匹配。
 
-   > **Tip:**
+   > **提示：**
    >
-   > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
+   > 如果你的程序在 Windows Subsystem for Linux (WSL) 中运行，请切换到相应的 Linux 发行版。
 
-4. Copy the connection parameters from the connection dialog.
+4. 从连接对话框中复制连接参数。
 
-   > **Tip:**
+   > **提示：**
    >
-   > If you have not set a password yet, click **Generate Password** to generate a random password.
+   > 如果你还没有设置密码，请点击 **Generate Password** 生成一个随机密码。
 
-5. In the root directory of your Python project, create a `.env` file and paste the connection parameters to the corresponding environment variables.
+5. 在 Python 项目的根目录下创建一个 `.env` 文件，并将连接参数粘贴到相应的环境变量中。
 
-   - `TIDB_HOST`: The host of the TiDB cluster.
-   - `TIDB_PORT`: The port of the TiDB cluster.
-   - `TIDB_USERNAME`: The username to connect to the TiDB cluster.
-   - `TIDB_PASSWORD`: The password to connect to the TiDB cluster.
-   - `TIDB_DATABASE`: The database name to connect to.
-   - `TIDB_CA_PATH`: The path to the root certificate file.
+   - `TIDB_HOST`：TiDB 集群的主机地址。
+   - `TIDB_PORT`：TiDB 集群的端口。
+   - `TIDB_USERNAME`：连接 TiDB 集群的用户名。
+   - `TIDB_PASSWORD`：连接 TiDB 集群的密码。
+   - `TIDB_DATABASE`：要连接的数据库名称。
+   - `TIDB_CA_PATH`：根证书文件的路径。
 
-   The following is an example for macOS:
+   以下是 macOS 的示例：
 
    ```dotenv
    TIDB_HOST=gateway01.****.prod.aws.tidbcloud.com
@@ -98,13 +98,13 @@ pip install peewee pymysql python-dotenv tidb-vector
    TIDB_CA_PATH=/etc/ssl/cert.pem
    ```
 
-### Step 5. Run the demo
+### 步骤 5. 运行示例
 
 ```bash
 python peewee-quickstart.py
 ```
 
-Example output:
+示例输出：
 
 ```text
 Get 3-nearest neighbor documents:
@@ -121,13 +121,13 @@ Get documents within a certain distance:
     document: dog
 ```
 
-## Sample code snippets
+## 示例代码片段
 
-You can refer to the following sample code snippets to develop your application.
+你可以参考以下示例代码片段来开发你的应用。
 
-### Create vector tables
+### 创建向量表
 
-#### Connect to TiDB cluster
+#### 连接到 TiDB 集群
 
 ```python
 import os
@@ -138,17 +138,17 @@ from tidb_vector.peewee import VectorField
 
 dotenv.load_dotenv()
 
-# Using `pymysql` as the driver.
+# 使用 `pymysql` 作为驱动
 connect_kwargs = {
     'ssl_verify_cert': True,
     'ssl_verify_identity': True,
 }
 
-# Using `mysqlclient` as the driver.
+# 使用 `mysqlclient` 作为驱动
 # connect_kwargs = {
 #     'ssl_mode': 'VERIFY_IDENTITY',
 #     'ssl': {
-#         # Root certificate default path
+#         # 根证书默认路径
 #         # https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters/#root-certificate-default-path
 #         'ca': os.environ.get('TIDB_CA_PATH', '/path/to/ca.pem'),
 #     },
@@ -164,9 +164,9 @@ db = MySQLDatabase(
 )
 ```
 
-#### Define a vector column
+#### 定义向量列
 
-Create a table with a column named `peewee_demo_documents` that stores a 3-dimensional vector.
+创建一个名为 `peewee_demo_documents` 的表，其中包含一个存储 3 维向量的列。
 
 ```python
 class Document(Model):
@@ -178,7 +178,7 @@ class Document(Model):
     embedding = VectorField(3)
 ```
 
-### Store documents with embeddings
+### 存储带有嵌入向量的文档
 
 ```python
 Document.create(content='dog', embedding=[1, 2, 1])
@@ -186,18 +186,18 @@ Document.create(content='fish', embedding=[1, 2, 4])
 Document.create(content='tree', embedding=[1, 0, 0])
 ```
 
-### Search the nearest neighbor documents
+### 搜索最近邻文档
 
-Search for the top-3 documents that are semantically closest to the query vector `[1, 2, 3]` based on the cosine distance function.
+基于余弦距离函数，搜索与查询向量 `[1, 2, 3]` 语义最接近的前 3 个文档。
 
 ```python
 distance = Document.embedding.cosine_distance([1, 2, 3]).alias('distance')
 results = Document.select(Document, distance).order_by(distance).limit(3)
 ```
 
-### Search documents within a certain distance
+### 搜索特定距离内的文档
 
-Search for the documents whose cosine distance from the query vector `[1, 2, 3]` is less than 0.2.
+搜索与查询向量 `[1, 2, 3]` 的余弦距离小于 0.2 的文档。
 
 ```python
 distance_expression = Document.embedding.cosine_distance([1, 2, 3])
@@ -205,7 +205,7 @@ distance = distance_expression.alias('distance')
 results = Document.select(Document, distance).where(distance_expression < 0.2).order_by(distance).limit(3)
 ```
 
-## See also
+## 另请参阅
 
-- [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
-- [Vector Search Index](/tidb-cloud/vector-search-index.md)
+- [向量数据类型](/tidb-cloud/vector-search-data-types.md)
+- [向量搜索索引](/tidb-cloud/vector-search-index.md)

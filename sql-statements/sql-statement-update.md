@@ -1,13 +1,13 @@
 ---
-title: UPDATE | TiDB SQL Statement Reference
-summary: An overview of the usage of UPDATE for the TiDB database.
+title: UPDATE | TiDB SQL 语句参考
+summary: TiDB 数据库中 UPDATE 的使用概述。
 ---
 
 # UPDATE
 
-The `UPDATE` statement is used to modify data in a specified table.
+`UPDATE` 语句用于修改指定表中的数据。
 
-## Synopsis
+## 语法图
 
 ```ebnf+diagram
 UpdateStmt ::=
@@ -26,11 +26,11 @@ TableRefs ::=
     EscapedTableRef ("," EscapedTableRef)*
 ```
 
-> **Note:**
+> **注意：**
 >
-> Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority (`LOW_PRIORITY` and `HIGH_PRIORITY`) will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control.md) to manage resource usage for different SQL statements.
+> 从 v6.6.0 开始，TiDB 支持[资源控制](/tidb-resource-control.md)。你可以使用此功能在不同的资源组中以不同的优先级执行 SQL 语句。通过为这些资源组配置适当的配额和优先级，你可以更好地控制不同优先级 SQL 语句的调度。当启用资源控制时，语句优先级（`LOW_PRIORITY` 和 `HIGH_PRIORITY`）将不再生效。建议你使用[资源控制](/tidb-resource-control.md)来管理不同 SQL 语句的资源使用。
 
-## Examples
+## 示例
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -65,9 +65,9 @@ mysql> SELECT * FROM t1;
 3 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-TiDB always uses the original value of a column when evaluating expressions. For example:
+TiDB 在计算表达式时始终使用列的原始值。例如：
 
 ```sql
 CREATE TABLE t (a int, b int);
@@ -75,11 +75,11 @@ INSERT INTO t VALUES (1,2);
 UPDATE t SET a = a+1,b=a;
 ```
 
-In MySQL, the column `b` is updated to 2 because it is set to the value of `a`, and the value of `a` (which is 1) is updated to `a+1` (which is 2) in the same statement. 
+在 MySQL 中，列 `b` 被更新为 2，因为它被设置为 `a` 的值，而 `a` 的值（1）在同一语句中被更新为 `a+1`（即 2）。
 
-TiDB follows the more standard SQL behavior, and updates `b` to 1.
+TiDB 遵循更标准的 SQL 行为，将 `b` 更新为 1。
 
-## See also
+## 另请参阅
 
 * [INSERT](/sql-statements/sql-statement-insert.md)
 * [SELECT](/sql-statements/sql-statement-select.md)

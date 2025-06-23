@@ -1,48 +1,48 @@
 ---
-title: Data Service (Beta)
-summary: Learn about Data Service concepts for TiDB Cloud.
+title: 数据服务（Beta）
+summary: 了解 TiDB Cloud 的数据服务概念。
 ---
 
-# Data Service (Beta)
+# 数据服务（Beta）
 
-TiDB Cloud [Data Service (beta)](https://tidbcloud.com/project/data-service) is a fully managed low-code backend-as-a-service solution that simplifies backend application development, empowering developers to rapidly build highly scalable, secure, data-driven applications.
+TiDB Cloud [数据服务（beta）](https://tidbcloud.com/project/data-service)是一个完全托管的低代码后端即服务解决方案，它简化了后端应用程序开发，使开发人员能够快速构建高度可扩展、安全的数据驱动应用程序。
 
-Data Service enables you to access TiDB Cloud data via an HTTPS request using a custom API endpoint. This feature uses a serverless architecture to handle computing resources and elastic scaling, so you can focus on the query logic in endpoints without worrying about infrastructure or maintenance costs.
+数据服务使你能够通过自定义 API 端点使用 HTTPS 请求访问 TiDB Cloud 数据。此功能使用无服务器架构来处理计算资源和弹性扩展，因此你可以专注于端点中的查询逻辑，而无需担心基础设施或维护成本。
 
-For more information, see [TiDB Cloud Data Service (Beta) Overview](/tidb-cloud/data-service-overview.md).
+更多信息，请参阅 [TiDB Cloud 数据服务（Beta）概述](/tidb-cloud/data-service-overview.md)。
 
-## Data App
+## 数据应用
 
-A Data App in [Data Service (beta)](https://tidbcloud.com/project/data-service) is a collection of endpoints that you can use to access data for a specific application. By creating a Data App, you can group your endpoints and configure authorization settings using API keys to restrict access to endpoints. In this way, you can ensure that only authorized users can access and manipulate your data, making your application more secure.
+[数据服务（beta）](https://tidbcloud.com/project/data-service)中的数据应用是一组可用于访问特定应用程序数据的端点的集合。通过创建数据应用，你可以对端点进行分组，并使用 API 密钥配置授权设置来限制对端点的访问。这样，你可以确保只有授权用户才能访问和操作你的数据，使你的应用程序更加安全。
 
-For more information, see [Manage a Data App](/tidb-cloud/data-service-manage-data-app.md).
+更多信息，请参阅[管理数据应用](/tidb-cloud/data-service-manage-data-app.md)。
 
-## Data App endpoints
+## 数据应用端点
 
-An endpoint in [Data Service (beta)](https://tidbcloud.com/project/data-service) is a web API that you can customize to execute SQL statements. You can specify parameters for your SQL statements, such as the value used in the `WHERE` clause. When a client calls an endpoint and provides values for the parameters in a request URL, the endpoint executes the corresponding SQL statement with the provided parameters and returns the results as part of the HTTP response.
+[数据服务（beta）](https://tidbcloud.com/project/data-service)中的端点是一个可以自定义来执行 SQL 语句的 Web API。你可以为 SQL 语句指定参数，例如在 `WHERE` 子句中使用的值。当客户端调用端点并在请求 URL 中为参数提供值时，端点会使用提供的参数执行相应的 SQL 语句，并将结果作为 HTTP 响应的一部分返回。
 
-For more information, see [Manage an Endpoint](/tidb-cloud/data-service-manage-endpoint.md).
+更多信息，请参阅[管理端点](/tidb-cloud/data-service-manage-endpoint.md)。
 
 ## Chat2Query API
 
-In TiDB Cloud, Chat2Query API is a RESTful interface that enables you to generate and execute SQL statements using AI by providing instructions. Then, the API returns the query results for you.
+在 TiDB Cloud 中，Chat2Query API 是一个 RESTful 接口，通过提供指令，使你能够使用 AI 生成和执行 SQL 语句。然后，API 会为你返回查询结果。
 
-For more information, see [Get Started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
+更多信息，请参阅[开始使用 Chat2Query API](/tidb-cloud/use-chat2query-api.md)。
 
-## AI integrations
+## AI 集成
 
-Integrating third-party tools with your Data App enhances your applications with advanced natural language processing and artificial intelligence (AI) capabilities provided by third-party tools. This integration enables your applications to perform more complex tasks and deliver intelligent solutions.
+将第三方工具与你的数据应用集成可以通过第三方工具提供的高级自然语言处理和人工智能（AI）功能来增强你的应用程序。这种集成使你的应用程序能够执行更复杂的任务并提供智能解决方案。
 
-Currently, you can integrate third-party tools, such as GPTs and Dify, in the TiDB Cloud console.
+目前，你可以在 TiDB Cloud 控制台中集成第三方工具，如 GPTs 和 Dify。
 
-For more information, see [Integrate a Data App with Third-Party Tools](/tidb-cloud/data-service-integrations.md).
+更多信息，请参阅[将数据应用与第三方工具集成](/tidb-cloud/data-service-integrations.md)。
 
-## Configuration as Code
+## 配置即代码
 
-TiDB Cloud provides a Configuration as Code (CaC) approach to represent your entire Data App configurations as code using the JSON syntax.
+TiDB Cloud 提供了配置即代码（Configuration as Code，CaC）方法，使用 JSON 语法将你的整个数据应用配置表示为代码。
 
-By connecting your Data App to GitHub, TiDB Cloud can use the CaC approach and push your Data App configurations as [configuration files](/tidb-cloud/data-service-app-config-files.md) to your preferred GitHub repository and branch.
+通过将你的数据应用连接到 GitHub，TiDB Cloud 可以使用 CaC 方法，将你的数据应用配置作为[配置文件](/tidb-cloud/data-service-app-config-files.md)推送到你首选的 GitHub 仓库和分支。
 
-If Auto Sync & Deployment is enabled for your GitHub connection, you can also modify your Data App by updating its configuration files on GitHub. After you push the configuration file changes to GitHub, the new configurations will be deployed in TiDB Cloud automatically.
+如果为你的 GitHub 连接启用了自动同步和部署，你还可以通过在 GitHub 上更新配置文件来修改你的数据应用。将配置文件更改推送到 GitHub 后，新的配置将自动部署到 TiDB Cloud。
 
-For more information, see [Deploy Data App Automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
+更多信息，请参阅[使用 GitHub 自动部署数据应用](/tidb-cloud/data-service-manage-github-connection.md)。

@@ -1,23 +1,23 @@
 ---
-title: User-Defined Variables
-summary: Learn how to use user-defined variables.
+title: 用户定义变量
+summary: 了解如何使用用户定义变量。
 ---
 
-# User-Defined Variables
+# 用户定义变量
 
-This document describes the concept of user-defined variables in TiDB and the methods to set and read the user-defined variables.
+本文档描述了 TiDB 中用户定义变量的概念以及设置和读取用户定义变量的方法。
 
-> **Warning:**
+> **警告：**
 >
-> User-defined variables are still an experimental feature. It is **NOT** recommended that you use them in the production environment.
+> 用户定义变量仍然是一个实验性功能。**不建议**在生产环境中使用它们。
 
-The format of the user-defined variables is `@var_name`. The characters that compose `var_name` can be any characters that can compose an identifier, including the numbers `0-9`, the letters `a-zA-Z`, the underscore `_`, the dollar sign `$`, and the UTF-8 characters. In addition, it also includes the English period `.`. The user-defined variables are case-insensitive.
+用户定义变量的格式是 `@var_name`。组成 `var_name` 的字符可以是任何可以组成标识符的字符，包括数字 `0-9`、字母 `a-zA-Z`、下划线 `_`、美元符号 `$` 和 UTF-8 字符。此外，还包括英文句点 `.`。用户定义变量不区分大小写。
 
-The user-defined variables are session-specific, which means a user variable defined by one client connection cannot be seen or used by other client connections.
+用户定义变量是会话特定的，这意味着一个客户端连接定义的用户变量不能被其他客户端连接看到或使用。
 
-## Set the user-defined variables
+## 设置用户定义变量
 
-You can use the [`SET` statement](/sql-statements/sql-statement-set-variable.md) to set a user-defined variable, and the syntax is `SET @var_name = expr [, @var_name = expr] ...;`. For example:
+你可以使用 [`SET` 语句](/sql-statements/sql-statement-set-variable.md)来设置用户定义变量，语法是 `SET @var_name = expr [, @var_name = expr] ...;`。例如：
 
 ```sql
 SET @favorite_db = 'TiDB';
@@ -27,13 +27,13 @@ SET @favorite_db = 'TiDB';
 SET @a = 'a', @b = 'b', @c = 'c';
 ```
 
-For the assignment operator, you can also use `:=`. For example:
+对于赋值运算符，你也可以使用 `:=`。例如：
 
 ```sql
 SET @favorite_db := 'TiDB';
 ```
 
-The content to the right of the assignment operator can be any valid expression. For example:
+赋值运算符右侧的内容可以是任何有效的表达式。例如：
 
 ```sql
 SET @c = @a + @b;
@@ -43,9 +43,9 @@ SET @c = @a + @b;
 SET @c = b'1000001' + b'1000001';
 ```
 
-## Read the user-defined variables
+## 读取用户定义变量
 
-To read a user-defined variable, you can use the `SELECT` statement to query:
+要读取用户定义变量，你可以使用 `SELECT` 语句进行查询：
 
 ```sql
 SELECT @a1, @a2, @a3
@@ -59,7 +59,7 @@ SELECT @a1, @a2, @a3
 +------+------+------+
 ```
 
-You can also assign values in the `SELECT` statement:
+你也可以在 `SELECT` 语句中赋值：
 
 ```sql
 SELECT @a1, @a2, @a3, @a4 := @a1+@a2+@a3;
@@ -73,9 +73,9 @@ SELECT @a1, @a2, @a3, @a4 := @a1+@a2+@a3;
 +------+------+------+--------------------+
 ```
 
-Before the variable `@a4` is modified or the connection is closed, its value is always `7`.
+在变量 `@a4` 被修改或连接关闭之前，其值始终为 `7`。
 
-If a hexadecimal literal or binary literal is used when setting the user-defined variable, TiDB will treat it as a binary string. If you want to set it to a number, you can manually add the `CAST` conversion, or use the numeric operator in the expression:
+如果在设置用户定义变量时使用了十六进制字面量或二进制字面量，TiDB 会将其视为二进制字符串。如果你想将其设置为数字，可以手动添加 `CAST` 转换，或在表达式中使用数值运算符：
 
 ```sql
 SET @v1 = b'1000001';
@@ -95,7 +95,7 @@ SELECT @v1, @v2, @v3;
 +------+------+------+
 ```
 
-If you refer to a user-defined variable that has not been initialized, it has a value of NULL and a type of string.
+如果你引用一个尚未初始化的用户定义变量，它的值为 NULL，类型为字符串。
 
 ```sql
 SELECT @not_exist;
@@ -109,7 +109,7 @@ SELECT @not_exist;
 +------------+
 ```
 
-In addition to using the `SELECT` statement to read the user-defined variables, another common usage is the `PREPARE` statement. For example:
+除了使用 `SELECT` 语句读取用户定义变量外，另一个常见用法是 `PREPARE` 语句。例如：
 
 ```sql
 SET @s = 'SELECT SQRT(POW(?,2) + POW(?,2)) AS hypotenuse';
@@ -127,7 +127,7 @@ EXECUTE stmt USING @a, @b;
 +------------+
 ```
 
-The contents of the user-defined variables are not recognized as identifiers in the SQL statements. For example:
+用户定义变量的内容在 SQL 语句中不会被识别为标识符。例如：
 
 ```sql
 SELECT * from t;
@@ -154,8 +154,8 @@ SELECT @col FROM t;
 +------+
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-Except for `SELECT ... INTO <variable>`, the syntax supported in MySQL and TiDB is identical.
+除了 `SELECT ... INTO <variable>` 外，MySQL 和 TiDB 支持的语法是相同的。
 
-For more information, see [User-Defined Variables in MySQL](https://dev.mysql.com/doc/refman/8.0/en/user-variables.html).
+更多信息，请参阅 [MySQL 中的用户定义变量](https://dev.mysql.com/doc/refman/8.0/en/user-variables.html)。

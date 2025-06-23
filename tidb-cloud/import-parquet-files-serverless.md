@@ -1,22 +1,22 @@
 ---
-title: Import Apache Parquet Files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud OSS into TiDB Cloud Serverless
-summary: Learn how to import Apache Parquet files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into TiDB Cloud Serverless.
+title: 从 Amazon S3、GCS、Azure Blob Storage 或阿里云 OSS 导入 Apache Parquet 文件到 TiDB Cloud Serverless
+summary: 了解如何从 Amazon S3、GCS、Azure Blob Storage 或阿里云对象存储服务（OSS）导入 Apache Parquet 文件到 TiDB Cloud Serverless。
 ---
 
-# Import Apache Parquet Files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud OSS into TiDB Cloud Serverless
+# 从 Amazon S3、GCS、Azure Blob Storage 或阿里云 OSS 导入 Apache Parquet 文件到 TiDB Cloud Serverless
 
-You can import both uncompressed and Snappy compressed [Apache Parquet](https://parquet.apache.org/) format data files to TiDB Cloud Serverless. This document describes how to import Parquet files from Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS), Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into TiDB Cloud Serverless.
+你可以将未压缩和 Snappy 压缩的 [Apache Parquet](https://parquet.apache.org/) 格式数据文件导入到 TiDB Cloud Serverless。本文档描述了如何从 Amazon Simple Storage Service (Amazon S3)、Google Cloud Storage (GCS)、Azure Blob Storage 或阿里云对象存储服务（OSS）将 Parquet 文件导入到 TiDB Cloud Serverless。
 
-> **Note:**
+> **注意：**
 >
-> - TiDB Cloud Serverless only supports importing Parquet files into empty tables. To import data into an existing table that already contains data, you can use TiDB Cloud Serverless to import the data into a temporary empty table by following this document, and then use the `INSERT SELECT` statement to copy the data to the target existing table.
-> - The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
+> - TiDB Cloud Serverless 仅支持将 Parquet 文件导入到空表中。要将数据导入到已包含数据的现有表中，你可以按照本文档将数据导入到临时空表中，然后使用 `INSERT SELECT` 语句将数据复制到目标现有表中。
+> - Snappy 压缩文件必须采用[官方 Snappy 格式](https://github.com/google/snappy)。不支持其他变体的 Snappy 压缩。
 
-## Step 1. Prepare the Parquet files
+## 步骤 1. 准备 Parquet 文件
 
-> **Note:**
+> **注意：**
 >
-> Currently, TiDB Cloud Serverless does not support importing Parquet files that contain any of the following data types. If Parquet files to be imported contain such data types, you need to first regenerate the Parquet files using the [supported data types](#supported-data-types) (for example, `STRING`). Alternatively, you could use a service such as AWS Glue to transform data types easily.
+> 目前，TiDB Cloud Serverless 不支持导入包含以下任何数据类型的 Parquet 文件。如果要导入的 Parquet 文件包含此类数据类型，你需要首先使用[支持的数据类型](#支持的数据类型)（例如 `STRING`）重新生成 Parquet 文件。或者，你可以使用 AWS Glue 等服务轻松转换数据类型。
 >
 > - `LIST`
 > - `NEST STRUCT`
@@ -24,46 +24,46 @@ You can import both uncompressed and Snappy compressed [Apache Parquet](https://
 > - `ARRAY`
 > - `MAP`
 
-1. If a Parquet file is larger than 256 MB, consider splitting it into smaller files, each with a size around 256 MB.
+1. 如果 Parquet 文件大于 256 MB，建议将其拆分为较小的文件，每个文件大小约为 256 MB。
 
-    TiDB Cloud Serverless supports importing very large Parquet files but performs best with multiple input files around 256 MB in size. This is because TiDB Cloud Serverless can process multiple files in parallel, which can greatly improve the import speed.
+    TiDB Cloud Serverless 支持导入非常大的 Parquet 文件，但对于大小约为 256 MB 的多个输入文件性能最佳。这是因为 TiDB Cloud Serverless 可以并行处理多个文件，从而大大提高导入速度。
 
-2. Name the Parquet files as follows:
+2. 按照以下方式命名 Parquet 文件：
 
-    - If a Parquet file contains all data of an entire table, name the file in the `${db_name}.${table_name}.parquet` format, which maps to the `${db_name}.${table_name}` table when you import the data.
-    - If the data of one table is separated into multiple Parquet files, append a numeric suffix to these Parquet files. For example, `${db_name}.${table_name}.000001.parquet` and `${db_name}.${table_name}.000002.parquet`. The numeric suffixes can be inconsecutive but must be in ascending order. You also need to add extra zeros before the number to ensure all the suffixes are in the same length.
+    - 如果 Parquet 文件包含整个表的所有数据，请按 `${db_name}.${table_name}.parquet` 格式命名文件，导入数据时将映射到 `${db_name}.${table_name}` 表。
+    - 如果一个表的数据分散在多个 Parquet 文件中，请在这些 Parquet 文件后面添加数字后缀。例如，`${db_name}.${table_name}.000001.parquet` 和 `${db_name}.${table_name}.000002.parquet`。数字后缀可以不连续，但必须按升序排列。你还需要在数字前添加额外的零，以确保所有后缀长度相同。
 
-    > **Note:**
+    > **注意：**
     >
-    > If you cannot update the Parquet filenames according to the preceding rules in some cases (for example, the Parquet file links are also used by your other programs), you can keep the filenames unchanged and use the **Mapping Settings** in [Step 4](#step-4-import-parquet-files-to-tidb-cloud-serverless) to import your source data to a single target table.
+    > 如果在某些情况下无法按照上述规则更新 Parquet 文件名（例如，Parquet 文件链接也被其他程序使用），你可以保持文件名不变，并在[步骤 4](#步骤-4-将-parquet-文件导入到-tidb-cloud-serverless) 中使用**映射设置**将源数据导入到单个目标表。
 
-## Step 2. Create the target table schemas
+## 步骤 2. 创建目标表架构
 
-Because Parquet files do not contain schema information, before importing data from Parquet files into TiDB Cloud Serverless, you need to create the table schemas using either of the following methods:
+由于 Parquet 文件不包含架构信息，在将数据从 Parquet 文件导入到 TiDB Cloud Serverless 之前，你需要使用以下任一方法创建表架构：
 
-- Method 1: In TiDB Cloud Serverless, create the target databases and tables for your source data.
+- 方法 1：在 TiDB Cloud Serverless 中，为源数据创建目标数据库和表。
 
-- Method 2: In the Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service directory where the Parquet files are located, create the target table schema files for your source data as follows:
+- 方法 2：在存放 Parquet 文件的 Amazon S3、GCS、Azure Blob Storage 或阿里云对象存储服务目录中，按以下方式为源数据创建目标表架构文件：
 
-    1. Create database schema files for your source data.
+    1. 为源数据创建数据库架构文件。
 
-        If your Parquet files follow the naming rules in [Step 1](#step-1-prepare-the-parquet-files), the database schema files are optional for the data import. Otherwise, the database schema files are mandatory.
+        如果你的 Parquet 文件遵循[步骤 1](#步骤-1-准备-parquet-文件) 中的命名规则，则数据库架构文件对于数据导入是可选的。否则，数据库架构文件是必需的。
 
-        Each database schema file must be in the `${db_name}-schema-create.sql` format and contain a `CREATE DATABASE` DDL statement. With this file, TiDB Cloud Serverless will create the `${db_name}` database to store your data when you import the data.
+        每个数据库架构文件必须采用 `${db_name}-schema-create.sql` 格式，并包含一个 `CREATE DATABASE` DDL 语句。使用此文件，TiDB Cloud Serverless 将在导入数据时创建 `${db_name}` 数据库来存储你的数据。
 
-        For example, if you create a `mydb-scehma-create.sql` file that contains the following statement, TiDB Cloud Serverless will create the `mydb` database when you import the data.
+        例如，如果你创建一个包含以下语句的 `mydb-scehma-create.sql` 文件，TiDB Cloud Serverless 将在导入数据时创建 `mydb` 数据库。
 
         ```sql
         CREATE DATABASE mydb;
         ```
 
-    2. Create table schema files for your source data.
+    2. 为源数据创建表架构文件。
 
-        If you do not include the table schema files in the Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service directory where the Parquet files are located, TiDB Cloud Serverless will not create the corresponding tables for you when you import the data.
+        如果你没有在存放 Parquet 文件的 Amazon S3、GCS、Azure Blob Storage 或阿里云对象存储服务目录中包含表架构文件，TiDB Cloud Serverless 在导入数据时将不会为你创建相应的表。
 
-        Each table schema file must be in the `${db_name}.${table_name}-schema.sql` format and contain a `CREATE TABLE` DDL statement. With this file, TiDB Cloud Serverless will create the `${db_table}` table in the `${db_name}` database when you import the data.
+        每个表架构文件必须采用 `${db_name}.${table_name}-schema.sql` 格式，并包含一个 `CREATE TABLE` DDL 语句。使用此文件，TiDB Cloud Serverless 将在导入数据时在 `${db_name}` 数据库中创建 `${db_table}` 表。
 
-        For example, if you create a `mydb.mytable-schema.sql` file that contains the following statement, TiDB Cloud Serverless will create the `mytable` table in the `mydb` database when you import the data.
+        例如，如果你创建一个包含以下语句的 `mydb.mytable-schema.sql` 文件，TiDB Cloud Serverless 将在导入数据时在 `mydb` 数据库中创建 `mytable` 表。
 
         ```sql
         CREATE TABLE mytable (
@@ -72,250 +72,250 @@ Because Parquet files do not contain schema information, before importing data f
         COUNT INT );
         ```
 
-        > **Note:**
+        > **注意：**
         >
-        > Each `${db_name}.${table_name}-schema.sql` file should only contain a single DDL statement. If the file contains multiple DDL statements, only the first one takes effect.
+        > 每个 `${db_name}.${table_name}-schema.sql` 文件应该只包含一个 DDL 语句。如果文件包含多个 DDL 语句，只有第一个语句生效。
 
-## Step 3. Configure cross-account access
+## 步骤 3. 配置跨账户访问
 
-To allow TiDB Cloud Serverless to access the Parquet files in the Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service bucket, do one of the following:
+要允许 TiDB Cloud Serverless 访问 Amazon S3、GCS、Azure Blob Storage 或阿里云对象存储服务存储桶中的 Parquet 文件，请执行以下操作之一：
 
-- If your Parquet files are located in Amazon S3, [configure external storage access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+- 如果你的 Parquet 文件位于 Amazon S3 中，[为 TiDB Cloud Serverless 配置外部存储访问](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access)。
 
-    You can use either an AWS access key or a Role ARN to access your bucket. Once finished, make a note of the access key (including the access key ID and secret access key) or the Role ARN value as you will need it in [Step 4](#step-4-import-parquet-files-to-tidb-cloud-serverless).
+    你可以使用 AWS 访问密钥或 Role ARN 访问存储桶。完成后，请记下访问密钥（包括访问密钥 ID 和密钥）或 Role ARN 值，因为你将在[步骤 4](#步骤-4-将-parquet-文件导入到-tidb-cloud-serverless) 中需要它。
 
-- If your Parquet files are located in GCS, [configure external storage access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
+- 如果你的 Parquet 文件位于 GCS 中，[为 TiDB Cloud Serverless 配置外部存储访问](/tidb-cloud/serverless-external-storage.md#configure-gcs-access)。
 
-- If your Parquet files are located in Azure Blob Storage, [configure external storage access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+- 如果你的 Parquet 文件位于 Azure Blob Storage 中，[为 TiDB Cloud Serverless 配置外部存储访问](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access)。
 
-- If your Parquet files are located in Alibaba Cloud Object Storage Service (OSS), [configure external storage access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access).
+- 如果你的 Parquet 文件位于阿里云对象存储服务（OSS）中，[为 TiDB Cloud Serverless 配置外部存储访问](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access)。
 
-## Step 4. Import Parquet files to TiDB Cloud Serverless
+## 步骤 4. 将 Parquet 文件导入到 TiDB Cloud Serverless
 
-To import the Parquet files to TiDB Cloud Serverless, take the following steps:
+要将 Parquet 文件导入到 TiDB Cloud Serverless，请执行以下步骤：
 
 <SimpleTab>
 <div label="Amazon S3">
 
-1. Open the **Import** page for your target cluster.
+1. 打开目标集群的**导入**页面。
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面。
 
-        > **Tip:**
+        > **提示：**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > 你可以使用左上角的组合框在组织、项目和集群之间切换。
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. 点击目标集群的名称进入其概览页面，然后在左侧导航栏中点击**数据** > **导入**。
 
-2. Select **Import data from Cloud Storage**, and then click **Amazon S3**.
+2. 选择**从云存储导入数据**，然后点击 **Amazon S3**。
 
-3. On the **Import Data from Amazon S3** page, provide the following information for the source Parquet files:
+3. 在**从 Amazon S3 导入数据**页面，为源 Parquet 文件提供以下信息：
 
-    - **Import File Count**: select **One file** or **Multiple files** as needed.
-    - **Included Schema Files**: this field is only visible when importing multiple files. If the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
-    - **Data Format**: select **Parquet**.
-    - **File URI** or **Folder URI**:
-        - When importing one file, enter the source file URI and name in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `s3://sampledata/ingest/TableName.01.parquet`.
-        - When importing multiple files, enter the source file URI and name in the following format `s3://[bucket_name]/[data_source_folder]/`. For example, `s3://sampledata/ingest/`.
-    - **Bucket Access**: you can use either an AWS Role ARN or an AWS access key to access your bucket. For more information, see [Configure Amazon S3 access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
-        - **AWS Role ARN**: enter the AWS Role ARN value.
-        - **AWS Access Key**: enter the AWS access key ID and AWS secret access key.
+    - **导入文件数量**：根据需要选择**单个文件**或**多个文件**。
+    - **包含架构文件**：此字段仅在导入多个文件时可见。如果源文件夹包含目标表架构，选择**是**。否则，选择**否**。
+    - **数据格式**：选择 **Parquet**。
+    - **文件 URI** 或**文件夹 URI**：
+        - 导入单个文件时，按以下格式输入源文件 URI 和名称 `s3://[bucket_name]/[data_source_folder]/[file_name].parquet`。例如，`s3://sampledata/ingest/TableName.01.parquet`。
+        - 导入多个文件时，按以下格式输入源文件 URI 和名称 `s3://[bucket_name]/[data_source_folder]/`。例如，`s3://sampledata/ingest/`。
+    - **存储桶访问**：你可以使用 AWS Role ARN 或 AWS 访问密钥访问存储桶。更多信息，请参阅[配置 Amazon S3 访问](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access)。
+        - **AWS Role ARN**：输入 AWS Role ARN 值。
+        - **AWS 访问密钥**：输入 AWS 访问密钥 ID 和 AWS 密钥。
 
-4. Click **Connect**.
+4. 点击**连接**。
 
-5. In the **Destination** section, select the target database and table.
+5. 在**目标**部分，选择目标数据库和表。
 
-    When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding Parquet file. After that, the data source files will be re-scanned using the provided custom mapping rule.
+    导入多个文件时，你可以使用**高级设置** > **映射设置**为每个目标表及其对应的 Parquet 文件定义自定义映射规则。之后，将使用提供的自定义映射规则重新扫描数据源文件。
 
-    When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `s3://sampledata/ingest/TableName.01.parquet`.
+    在**源文件 URI 和名称**中输入源文件 URI 和名称时，确保使用以下格式 `s3://[bucket_name]/[data_source_folder]/[file_name].parquet`。例如，`s3://sampledata/ingest/TableName.01.parquet`。
 
-    You can also use wildcards to match the source files. For example:
+    你还可以使用通配符匹配源文件。例如：
 
-    - `s3://[bucket_name]/[data_source_folder]/my-data?.parquet`: all Parquet files starting with `my-data` followed by one character (such as `my-data1.parquet` and `my-data2.parquet`) in that folder will be imported into the same target table.
+    - `s3://[bucket_name]/[data_source_folder]/my-data?.parquet`：该文件夹中以 `my-data` 开头后跟一个字符的所有 Parquet 文件（如 `my-data1.parquet` 和 `my-data2.parquet`）将导入到同一个目标表中。
 
-    - `s3://[bucket_name]/[data_source_folder]/my-data*.parquet`: all Parquet files in the folder starting with `my-data` will be imported into the same target table.
+    - `s3://[bucket_name]/[data_source_folder]/my-data*.parquet`：该文件夹中以 `my-data` 开头的所有 Parquet 文件将导入到同一个目标表中。
 
-    Note that only `?` and `*` are supported.
+    注意，仅支持 `?` 和 `*`。
 
-    > **Note:**
+    > **注意：**
     >
-    > The URI must contain the data source folder.
+    > URI 必须包含数据源文件夹。
 
-6. Click **Start Import**.
+6. 点击**开始导入**。
 
-7. When the import progress shows **Completed**, check the imported tables.
+7. 当导入进度显示**已完成**时，检查导入的表。
 
 </div>
 
 <div label="Google Cloud">
 
-1. Open the **Import** page for your target cluster.
+1. 打开目标集群的**导入**页面。
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面。
 
-        > **Tip:**
+        > **提示：**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > 你可以使用左上角的组合框在组织、项目和集群之间切换。
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. 点击目标集群的名称进入其概览页面，然后在左侧导航栏中点击**数据** > **导入**。
 
-2. Select **Import data from Cloud Storage**, and then click **Google Cloud Storage**.
+2. 选择**从云存储导入数据**，然后点击 **Google Cloud Storage**。
 
-3. On the **Import Data from Google Cloud Storage** page, provide the following information for the source Parquet files:
+3. 在**从 Google Cloud Storage 导入数据**页面，为源 Parquet 文件提供以下信息：
 
-    - **Import File Count**: select **One file** or **Multiple files** as needed.
-    - **Included Schema Files**: this field is only visible when importing multiple files. If the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
-    - **Data Format**: select **Parquet**.
-    - **File URI** or **Folder URI**:
-        - When importing one file, enter the source file URI and name in the following format `[gcs|gs]://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `[gcs|gs]://sampledata/ingest/TableName.01.parquet`.
-        - When importing multiple files, enter the source file URI and name in the following format `[gcs|gs]://[bucket_name]/[data_source_folder]/`. For example, `[gcs|gs]://sampledata/ingest/`.
-    - **Bucket Access**: you can use a GCS IAM Role to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
+    - **导入文件数量**：根据需要选择**单个文件**或**多个文件**。
+    - **包含架构文件**：此字段仅在导入多个文件时可见。如果源文件夹包含目标表架构，选择**是**。否则，选择**否**。
+    - **数据格式**：选择 **Parquet**。
+    - **文件 URI** 或**文件夹 URI**：
+        - 导入单个文件时，按以下格式输入源文件 URI 和名称 `[gcs|gs]://[bucket_name]/[data_source_folder]/[file_name].parquet`。例如，`[gcs|gs]://sampledata/ingest/TableName.01.parquet`。
+        - 导入多个文件时，按以下格式输入源文件 URI 和名称 `[gcs|gs]://[bucket_name]/[data_source_folder]/`。例如，`[gcs|gs]://sampledata/ingest/`。
+    - **存储桶访问**：你可以使用 GCS IAM 角色访问存储桶。更多信息，请参阅[配置 GCS 访问](/tidb-cloud/serverless-external-storage.md#configure-gcs-access)。
 
-4. Click **Connect**.
+4. 点击**连接**。
 
-5. In the **Destination** section, select the target database and table.
+5. 在**目标**部分，选择目标数据库和表。
 
-    When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding Parquet file. After that, the data source files will be re-scanned using the provided custom mapping rule.
+    导入多个文件时，你可以使用**高级设置** > **映射设置**为每个目标表及其对应的 Parquet 文件定义自定义映射规则。之后，将使用提供的自定义映射规则重新扫描数据源文件。
 
-    When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `[gcs|gs]://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `[gcs|gs]://sampledata/ingest/TableName.01.parquet`.
+    在**源文件 URI 和名称**中输入源文件 URI 和名称时，确保使用以下格式 `[gcs|gs]://[bucket_name]/[data_source_folder]/[file_name].parquet`。例如，`[gcs|gs]://sampledata/ingest/TableName.01.parquet`。
 
-    You can also use wildcards to match the source files. For example:
+    你还可以使用通配符匹配源文件。例如：
 
-    - `[gcs|gs]://[bucket_name]/[data_source_folder]/my-data?.parquet`: all Parquet files starting with `my-data` followed by one character (such as `my-data1.parquet` and `my-data2.parquet`) in that folder will be imported into the same target table.
+    - `[gcs|gs]://[bucket_name]/[data_source_folder]/my-data?.parquet`：该文件夹中以 `my-data` 开头后跟一个字符的所有 Parquet 文件（如 `my-data1.parquet` 和 `my-data2.parquet`）将导入到同一个目标表中。
 
-    - `[gcs|gs]://[bucket_name]/[data_source_folder]/my-data*.parquet`: all Parquet files in the folder starting with `my-data` will be imported into the same target table.
+    - `[gcs|gs]://[bucket_name]/[data_source_folder]/my-data*.parquet`：该文件夹中以 `my-data` 开头的所有 Parquet 文件将导入到同一个目标表中。
 
-    Note that only `?` and `*` are supported.
+    注意，仅支持 `?` 和 `*`。
 
-    > **Note:**
+    > **注意：**
     >
-    > The URI must contain the data source folder.
+    > URI 必须包含数据源文件夹。
 
-6. Click **Start Import**.
+6. 点击**开始导入**。
 
-7. When the import progress shows **Completed**, check the imported tables.
+7. 当导入进度显示**已完成**时，检查导入的表。
 
 </div>
 
 <div label="Azure Blob Storage">
 
-1. Open the **Import** page for your target cluster.
+1. 打开目标集群的**导入**页面。
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面。
 
-        > **Tip:**
+        > **提示：**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > 你可以使用左上角的组合框在组织、项目和集群之间切换。
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. 点击目标集群的名称进入其概览页面，然后在左侧导航栏中点击**数据** > **导入**。
 
-2. Select **Import data from Cloud Storage**, and then click **Azure Blob Storage**.
+2. 选择**从云存储导入数据**，然后点击 **Azure Blob Storage**。
 
-3. On the **Import Data from Azure Blob Storage** page, provide the following information for the source Parquet files:
+3. 在**从 Azure Blob Storage 导入数据**页面，为源 Parquet 文件提供以下信息：
 
-    - **Import File Count**: select **One file** or **Multiple files** as needed.
-    - **Included Schema Files**: this field is only visible when importing multiple files. If the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
-    - **Data Format**: select **Parquet**.
-    - **File URI** or **Folder URI**:
-        - When importing one file, enter the source file URI and name in the following format `[azure|https]://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `[azure|https]://sampledata/ingest/TableName.01.parquet`.
-        - When importing multiple files, enter the source file URI and name in the following format `[azure|https]://[bucket_name]/[data_source_folder]/`. For example, `[azure|https]://sampledata/ingest/`.
-    - **Bucket Access**: you can use a shared access signature (SAS) token to access your bucket. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+    - **导入文件数量**：根据需要选择**单个文件**或**多个文件**。
+    - **包含架构文件**：此字段仅在导入多个文件时可见。如果源文件夹包含目标表架构，选择**是**。否则，选择**否**。
+    - **数据格式**：选择 **Parquet**。
+    - **文件 URI** 或**文件夹 URI**：
+        - 导入单个文件时，按以下格式输入源文件 URI 和名称 `[azure|https]://[bucket_name]/[data_source_folder]/[file_name].parquet`。例如，`[azure|https]://sampledata/ingest/TableName.01.parquet`。
+        - 导入多个文件时，按以下格式输入源文件 URI 和名称 `[azure|https]://[bucket_name]/[data_source_folder]/`。例如，`[azure|https]://sampledata/ingest/`。
+    - **存储桶访问**：你可以使用共享访问签名（SAS）令牌访问存储桶。更多信息，请参阅[配置 Azure Blob Storage 访问](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access)。
 
-4. Click **Connect**.
+4. 点击**连接**。
 
-5. In the **Destination** section, select the target database and table.
+5. 在**目标**部分，选择目标数据库和表。
 
-    When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding Parquet file. After that, the data source files will be re-scanned using the provided custom mapping rule.
+    导入多个文件时，你可以使用**高级设置** > **映射设置**为每个目标表及其对应的 Parquet 文件定义自定义映射规则。之后，将使用提供的自定义映射规则重新扫描数据源文件。
 
-    When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `[azure|https]://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `[azure|https]://sampledata/ingest/TableName.01.parquet`.
+    在**源文件 URI 和名称**中输入源文件 URI 和名称时，确保使用以下格式 `[azure|https]://[bucket_name]/[data_source_folder]/[file_name].parquet`。例如，`[azure|https]://sampledata/ingest/TableName.01.parquet`。
 
-    You can also use wildcards to match the source files. For example:
+    你还可以使用通配符匹配源文件。例如：
 
-    - `[azure|https]://[bucket_name]/[data_source_folder]/my-data?.parquet`: all Parquet files starting with `my-data` followed by one character (such as `my-data1.parquet` and `my-data2.parquet`) in that folder will be imported into the same target table.
+    - `[azure|https]://[bucket_name]/[data_source_folder]/my-data?.parquet`：该文件夹中以 `my-data` 开头后跟一个字符的所有 Parquet 文件（如 `my-data1.parquet` 和 `my-data2.parquet`）将导入到同一个目标表中。
 
-    - `[azure|https]://[bucket_name]/[data_source_folder]/my-data*.parquet`: all Parquet files in the folder starting with `my-data` will be imported into the same target table.
+    - `[azure|https]://[bucket_name]/[data_source_folder]/my-data*.parquet`：该文件夹中以 `my-data` 开头的所有 Parquet 文件将导入到同一个目标表中。
 
-    Note that only `?` and `*` are supported.
+    注意，仅支持 `?` 和 `*`。
 
-    > **Note:**
+    > **注意：**
     >
-    > The URI must contain the data source folder.
+    > URI 必须包含数据源文件夹。
 
-6. Click **Start Import**.
+6. 点击**开始导入**。
 
-7. When the import progress shows **Completed**, check the imported tables.
+7. 当导入进度显示**已完成**时，检查导入的表。
 
 </div>
 
-<div label="Alibaba Cloud Object Storage Service (OSS)">
+<div label="阿里云对象存储服务（OSS）">
 
-1. Open the **Import** page for your target cluster.
+1. 打开目标集群的**导入**页面。
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面。
 
-        > **Tip:**
+        > **提示：**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > 你可以使用左上角的组合框在组织、项目和集群之间切换。
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. 点击目标集群的名称进入其概览页面，然后在左侧导航栏中点击**数据** > **导入**。
 
-2. Select **Import data from Cloud Storage**, and then click **Alibaba Cloud OSS**.
+2. 选择**从云存储导入数据**，然后点击**阿里云 OSS**。
 
-3. On the **Import Data from Alibaba Cloud OSS** page, provide the following information for the source Parquet files:
+3. 在**从阿里云 OSS 导入数据**页面，为源 Parquet 文件提供以下信息：
 
-    - **Import File Count**: select **One file** or **Multiple files** as needed.
-    - **Included Schema Files**: this field is only visible when importing multiple files. If the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
-    - **Data Format**: select **Parquet**.
-    - **File URI** or **Folder URI**:
-        - When importing one file, enter the source file URI and name in the following format `oss://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `oss://sampledata/ingest/TableName.01.parquet`.
-        - When importing multiple files, enter the source file URI and name in the following format `oss://[bucket_name]/[data_source_folder]/`. For example, `oss://sampledata/ingest/`.
-    - **Bucket Access**: you can use an AccessKey pair to access your bucket. For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access).
+    - **导入文件数量**：根据需要选择**单个文件**或**多个文件**。
+    - **包含架构文件**：此字段仅在导入多个文件时可见。如果源文件夹包含目标表架构，选择**是**。否则，选择**否**。
+    - **数据格式**：选择 **Parquet**。
+    - **文件 URI** 或**文件夹 URI**：
+        - 导入单个文件时，按以下格式输入源文件 URI 和名称 `oss://[bucket_name]/[data_source_folder]/[file_name].parquet`。例如，`oss://sampledata/ingest/TableName.01.parquet`。
+        - 导入多个文件时，按以下格式输入源文件 URI 和名称 `oss://[bucket_name]/[data_source_folder]/`。例如，`oss://sampledata/ingest/`。
+    - **存储桶访问**：你可以使用 AccessKey 对访问存储桶。更多信息，请参阅[配置阿里云对象存储服务（OSS）访问](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access)。
 
-4. Click **Connect**.
+4. 点击**连接**。
 
-5. In the **Destination** section, select the target database and table.
+5. 在**目标**部分，选择目标数据库和表。
 
-    When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding Parquet file. After that, the data source files will be re-scanned using the provided custom mapping rule.
+    导入多个文件时，你可以使用**高级设置** > **映射设置**为每个目标表及其对应的 Parquet 文件定义自定义映射规则。之后，将使用提供的自定义映射规则重新扫描数据源文件。
 
-    When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `oss://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `oss://sampledata/ingest/TableName.01.parquet`.
+    在**源文件 URI 和名称**中输入源文件 URI 和名称时，确保使用以下格式 `oss://[bucket_name]/[data_source_folder]/[file_name].parquet`。例如，`oss://sampledata/ingest/TableName.01.parquet`。
 
-    You can also use wildcards to match the source files. For example:
+    你还可以使用通配符匹配源文件。例如：
 
-    - `oss://[bucket_name]/[data_source_folder]/my-data?.parquet`: all Parquet files starting with `my-data` followed by one character (such as `my-data1.parquet` and `my-data2.parquet`) in that folder will be imported into the same target table.
+    - `oss://[bucket_name]/[data_source_folder]/my-data?.parquet`：该文件夹中以 `my-data` 开头后跟一个字符的所有 Parquet 文件（如 `my-data1.parquet` 和 `my-data2.parquet`）将导入到同一个目标表中。
 
-    - `oss://[bucket_name]/[data_source_folder]/my-data*.parquet`: all Parquet files in the folder starting with `my-data` will be imported into the same target table.
+    - `oss://[bucket_name]/[data_source_folder]/my-data*.parquet`：该文件夹中以 `my-data` 开头的所有 Parquet 文件将导入到同一个目标表中。
 
-    Note that only `?` and `*` are supported.
+    注意，仅支持 `?` 和 `*`。
 
-    > **Note:**
+    > **注意：**
     >
-    > The URI must contain the data source folder.
+    > URI 必须包含数据源文件夹。
 
-6. Click **Start Import**.
+6. 点击**开始导入**。
 
-7. When the import progress shows **Completed**, check the imported tables.
+7. 当导入进度显示**已完成**时，检查导入的表。
 
 </div>
 
 </SimpleTab>
 
-When you run an import task, if any unsupported or invalid conversions are detected, TiDB Cloud Serverless terminates the import job automatically and reports an importing error.
+运行导入任务时，如果检测到任何不支持或无效的转换，TiDB Cloud Serverless 会自动终止导入作业并报告导入错误。
 
-If you get an importing error, do the following:
+如果遇到导入错误，请执行以下操作：
 
-1. Drop the partially imported table.
-2. Check the table schema file. If there are any errors, correct the table schema file.
-3. Check the data types in the Parquet files.
+1. 删除部分导入的表。
+2. 检查表架构文件。如果有任何错误，请更正表架构文件。
+3. 检查 Parquet 文件中的数据类型。
 
-    If the Parquet files contain any unsupported data types (for example, `NEST STRUCT`, `ARRAY`, or `MAP`), you need to regenerate the Parquet files using [supported data types](#supported-data-types) (for example, `STRING`).
+    如果 Parquet 文件包含任何不支持的数据类型（例如 `NEST STRUCT`、`ARRAY` 或 `MAP`），你需要使用[支持的数据类型](#支持的数据类型)（例如 `STRING`）重新生成 Parquet 文件。
 
-4. Try the import task again.
+4. 重试导入任务。
 
-## Supported data types
+## 支持的数据类型
 
-The following table lists the supported Parquet data types that can be imported to TiDB Cloud Serverless.
+下表列出了可以导入到 TiDB Cloud Serverless 的支持的 Parquet 数据类型。
 
-| Parquet Primitive Type | Parquet Logical Type | Types in TiDB or MySQL |
+| Parquet 基本类型 | Parquet 逻辑类型 | TiDB 或 MySQL 中的类型 |
 |---|---|---|
 | DOUBLE | DOUBLE | DOUBLE<br />FLOAT |
 | FIXED_LEN_BYTE_ARRAY(9) | DECIMAL(20,0) | BIGINT UNSIGNED |
@@ -332,14 +332,14 @@ The following table lists the supported Parquet data types that can be imported 
 | TINYINT | N/A | INT32 |
 | TINYINT UNSIGNED | N/A | INT32 |
 
-## Troubleshooting
+## 故障排除
 
-### Resolve warnings during data import
+### 解决数据导入过程中的警告
 
-After clicking **Start Import**, if you see a warning message such as `can't find the corresponding source files`, resolve this by providing the correct source file, renaming the existing one according to [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md), or using **Advanced Settings** to make changes.
+点击**开始导入**后，如果看到类似 `can't find the corresponding source files` 的警告消息，请通过提供正确的源文件、根据[数据导入命名约定](/tidb-cloud/naming-conventions-for-data-import.md)重命名现有文件或使用**高级设置**进行更改来解决此问题。
 
-After resolving these issues, you need to import the data again.
+解决这些问题后，你需要重新导入数据。
 
-### Zero rows in the imported tables
+### 导入的表中行数为零
 
-After the import progress shows **Completed**, check the imported tables. If the number of rows is zero, it means no data files matched the Bucket URI that you entered. In this case, resolve this issue by providing the correct source file, renaming the existing one according to [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md), or using **Advanced Settings** to make changes. After that, import those tables again.
+导入进度显示**已完成**后，检查导入的表。如果行数为零，则表示没有数据文件与你输入的存储桶 URI 匹配。在这种情况下，请通过提供正确的源文件、根据[数据导入命名约定](/tidb-cloud/naming-conventions-for-data-import.md)重命名现有文件或使用**高级设置**进行更改来解决此问题。之后，重新导入这些表。

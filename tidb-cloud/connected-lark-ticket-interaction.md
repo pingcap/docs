@@ -1,32 +1,32 @@
 ---
-title: Interact with Support Tickets via Lark
-summary: Introduces detailed information about the Lark interaction for support tickets
+title: 通过飞书与支持工单互动
+summary: 介绍支持工单的飞书互动详细信息
 ---
 
-# Interact with Support Tickets via Lark
+# 通过飞书与支持工单互动
 
-For customers subscribed to the **Premium** [support plan](/tidb-cloud/connected-care-detail.md), TiDB Cloud provides a ticket bot called **PingCAP Support Bot** in [Lark](https://www.larksuite.com/), to support more comprehensive interaction and management of support tickets.
+对于订阅了**高级**[支持计划](/tidb-cloud/connected-care-detail.md)的客户，TiDB Cloud 在[飞书](https://www.larksuite.com/)中提供了一个名为 **PingCAP Support Bot** 的工单机器人，以支持更全面的支持工单互动和管理。
 
-> **Note:**
+> **注意：**
 >
-> The ticket support feature for Lark is available upon request. If you are interested in trying this feature, contact TiDB Cloud support at <a href="mailto:support@pingcap.com">support@pingcap.com</a> or reach out to your Technical Account Manager (TAM).
+> 飞书的工单支持功能需要申请才能使用。如果你对尝试此功能感兴趣，请通过 <a href="mailto:support@pingcap.com">support@pingcap.com</a> 联系 TiDB Cloud 支持团队，或联系你的技术客户经理（TAM）。
 
-## Interact with support tickets
+## 与支持工单互动
 
-If Interaction for Support Tickets is enabled, **PingCAP Support Bot** will convert the **Support Ticket Created** message card to a thread to manage ticket interactions.
+如果启用了支持工单互动功能，**PingCAP Support Bot** 会将**支持工单已创建**消息卡片转换为一个线程来管理工单互动。
 
 ![lark-ticket-interaction-1](/media/tidb-cloud/connected-lark-ticket-interaction-1.png)
 
-When a PingCAP support engineer comments on the ticket, the comment will be automatically synchronized to the thread.
+当 PingCAP 支持工程师在工单上发表评论时，评论会自动同步到线程中。
 
-When anyone comments in the thread, the comment will be synchronized back to the corresponding support ticket.
+当任何人在线程中发表评论时，评论会同步回相应的支持工单。
 
-## FAQs
+## 常见问题
 
-- How can I check the status of my ticket?
+- 如何查看我的工单状态？
 
-    Log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/user/requests) with the email address used to create the ticket. You can view all historical tickets and their status for the current account.
+    使用创建工单时使用的电子邮件地址登录 [PingCAP 帮助中心](https://tidb.support.pingcap.com/servicedesk/customer/user/requests)。你可以查看当前账户的所有历史工单及其状态。
 
-## Contact support
+## 联系支持
 
-For help or questions, please contact our support team at <a href="mailto:support@pingcap.com">support@pingcap.com</a>.
+如需帮助或有任何问题，请通过 <a href="mailto:support@pingcap.com">support@pingcap.com</a> 联系我们的支持团队。

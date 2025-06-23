@@ -1,18 +1,18 @@
 ---
-title: FOREIGN KEY Constraints
-summary: An overview of the usage of FOREIGN KEY constraints for the TiDB database.
+title: 外键约束
+summary: TiDB 数据库中外键约束的使用概述。
 ---
 
-# FOREIGN KEY Constraints
+# 外键约束
 
-Starting from v6.6.0, TiDB supports the foreign key feature, which allows cross-table referencing of related data, and foreign key constraints to maintain data consistency.
+从 v6.6.0 开始，TiDB 支持外键功能，允许跨表引用相关数据，并通过外键约束维护数据一致性。
 
-> **Warning:**
+> **警告：**
 >
-> - Currently, the foreign key feature is experimental. It is not recommended that you use it in production environments. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> - The foreign key feature is typically employed to enforce [referential integrity](https://en.wikipedia.org/wiki/Referential_integrity) constraint checks. It might cause performance degradation, so it is recommended to conduct thorough testing before using it in performance-sensitive scenarios.
+> - 目前，外键功能处于实验阶段。不建议在生产环境中使用。此功能可能会在没有预先通知的情况下发生变更或移除。如果发现 bug，你可以在 GitHub 上提交[问题](https://github.com/pingcap/tidb/issues)。
+> - 外键功能通常用于强制执行[引用完整性](https://en.wikipedia.org/wiki/Referential_integrity)约束检查。它可能会导致性能下降，因此建议在性能敏感的场景中使用之前进行充分测试。
 
-The foreign key is defined in the child table. The syntax is as follows:
+外键在子表中定义。语法如下：
 
 ```ebnf+diagram
 ForeignKeyDef
@@ -30,51 +30,51 @@ ReferenceOption
            | 'NO' 'ACTION'
 ```
 
-## Naming
+## 命名
 
-The naming of a foreign key follows the following rules:
+外键的命名遵循以下规则：
 
-- If a name is specified in `CONSTRAINT identifier`, the specified name is used.
-- If no name is specified in `CONSTRAINT identifier`, but a name is specified in `FOREIGN KEY identifier`, the name specified in the `FOREIGN KEY identifier` is used.
-- If neither `CONSTRAINT identifier` nor `FOREIGN KEY identifier` specifies a name, a name is automatically generated, such as `fk_1`, `fk_2`, and `fk_3`.
-- The foreign key name must be unique in the current table. Otherwise, an error `ERROR 1826: Duplicate foreign key constraint name 'fk'` is reported when the foreign key is created.
+- 如果在 `CONSTRAINT identifier` 中指定了名称，则使用指定的名称。
+- 如果在 `CONSTRAINT identifier` 中未指定名称，但在 `FOREIGN KEY identifier` 中指定了名称，则使用 `FOREIGN KEY identifier` 中指定的名称。
+- 如果 `CONSTRAINT identifier` 和 `FOREIGN KEY identifier` 都未指定名称，则自动生成名称，如 `fk_1`、`fk_2` 和 `fk_3`。
+- 外键名称在当前表中必须唯一。否则，在创建外键时会报错 `ERROR 1826: Duplicate foreign key constraint name 'fk'`。
 
-## Restrictions
+## 限制
 
-When creating a foreign key, the following conditions must be met:
+创建外键时必须满足以下条件：
 
-- Neither the parent table nor the child table is a temporary table.
-- The user has the `REFERENCES` privilege on the parent table.
-- The columns referenced by the foreign key in the parent table and the child table are of the same data type and have the same size, precision, length, character set, and collation.
-- The columns in the foreign key cannot reference themselves.
-- The columns in the foreign key and the columns in the referenced parent table have the same index, and the order of the columns in the index matches that in the foreign key. This is to use the index to avoid full table scans when performing foreign key constraint checks.
+- 父表和子表都不能是临时表。
+- 用户必须对父表具有 `REFERENCES` 权限。
+- 父表和子表中外键引用的列必须具有相同的数据类型和相同的大小、精度、长度、字符集和排序规则。
+- 外键中的列不能引用自身。
+- 外键中的列和父表中被引用的列必须具有相同的索引，并且索引中列的顺序与外键中的顺序匹配。这是为了在执行外键约束检查时使用索引来避免全表扫描。
 
-    - If there is no corresponding foreign key index in the parent table, an error `ERROR 1822: Failed to add the foreign key constraint. Missing index for constraint 'fk' in the referenced table 't'` is reported.
-    - If there is no corresponding foreign key index in the child table, an index is automatically created with the same name as the foreign key.
+    - 如果父表中没有相应的外键索引，会报错 `ERROR 1822: Failed to add the foreign key constraint. Missing index for constraint 'fk' in the referenced table 't'`。
+    - 如果子表中没有相应的外键索引，会自动创建一个与外键同名的索引。
 
-- It is not supported to create a foreign key on a column of the `BLOB` or `TEXT` type.
-- It is not supported to create a foreign key on a partitioned table.
-- It is not supported to create a foreign key on a virtual generated column.
+- 不支持在 `BLOB` 或 `TEXT` 类型的列上创建外键。
+- 不支持在分区表上创建外键。
+- 不支持在虚拟生成列上创建外键。
 
-## Reference operations
+## 引用操作
 
-If an `UPDATE` or `DELETE` operation affects a foreign key value in the parent table, the corresponding foreign key value in the child table is determined by the reference operation defined by the `ON UPDATE` or `ON DELETE` clause in the foreign key definition. The reference operations include the following:
+如果 `UPDATE` 或 `DELETE` 操作影响父表中的外键值，子表中相应的外键值由外键定义中的 `ON UPDATE` 或 `ON DELETE` 子句定义的引用操作决定。引用操作包括以下几种：
 
-- `CASCADE`: automatically updates or deletes the matching rows in the child table when the `UPDATE` or `DELETE` operation affects the parent table. The cascade operation is performed in a depth-first manner.
-- `SET NULL`: automatically sets the matching foreign key columns in the child table to `NULL` when the `UPDATE` or `DELETE` operation affects the parent table.
-- `RESTRICT`: denies the `UPDATE` or `DELETE` operation if the child table contains matching rows.
-- `NO ACTION`: the same as `RESTRICT`.
-- `SET DEFAULT`: the same as `RESTRICT`.
+- `CASCADE`：当 `UPDATE` 或 `DELETE` 操作影响父表时，自动更新或删除子表中的匹配行。级联操作以深度优先的方式执行。
+- `SET NULL`：当 `UPDATE` 或 `DELETE` 操作影响父表时，自动将子表中匹配的外键列设置为 `NULL`。
+- `RESTRICT`：如果子表中存在匹配的行，则拒绝 `UPDATE` 或 `DELETE` 操作。
+- `NO ACTION`：与 `RESTRICT` 相同。
+- `SET DEFAULT`：与 `RESTRICT` 相同。
 
-If there is no matching foreign key value in the parent table, the `INSERT` or `UPDATE` operation on the child table is denied.
+如果父表中没有匹配的外键值，则拒绝对子表的 `INSERT` 或 `UPDATE` 操作。
 
-If the foreign key definition does not specify `ON DELETE` or `ON UPDATE`, the default behavior is `NO ACTION`.
+如果外键定义中未指定 `ON DELETE` 或 `ON UPDATE`，则默认行为是 `NO ACTION`。
 
-If the foreign key is defined on a `STORED GENERATED COLUMN`, the `CASCADE`, `SET NULL`, and `SET DEFAULT` references are not supported.
+如果外键定义在 `STORED GENERATED COLUMN` 上，则不支持 `CASCADE`、`SET NULL` 和 `SET DEFAULT` 引用。
 
-## Usage examples of foreign keys
+## 外键使用示例
 
-The following example uses a single-column foreign key to associate the parent table and the child table:
+以下示例使用单列外键关联父表和子表：
 
 ```sql
 CREATE TABLE parent (
@@ -89,7 +89,7 @@ CREATE TABLE child (
 );
 ```
 
-The following is a more complex example where the `product_order` table has two foreign keys that reference the other two tables. One foreign key references two indexes on the `product` table, and the other references a single index on the `customer` table:
+以下是一个更复杂的示例，其中 `product_order` 表有两个外键引用其他两个表。一个外键引用 `product` 表上的两个索引，另一个引用 `customer` 表上的单个索引：
 
 ```sql
 CREATE TABLE product (
@@ -122,9 +122,9 @@ CREATE TABLE product_order (
 );
 ```
 
-## Create a foreign key constraint
+## 创建外键约束
 
-To create a foreign key constraint, you can use the following `ALTER TABLE` statement:
+要创建外键约束，你可以使用以下 `ALTER TABLE` 语句：
 
 ```sql
 ALTER TABLE table_name
@@ -135,17 +135,17 @@ ALTER TABLE table_name
     [ON UPDATE reference_option]
 ```
 
-The foreign key can be self-referencing, that is, referencing the same table. When you add a foreign key constraint to a table using `ALTER TABLE`, you need to first create an index on the parent table column that the foreign key references.
+外键可以是自引用的，即引用同一个表。当你使用 `ALTER TABLE` 向表添加外键约束时，需要先在父表的被引用列上创建索引。
 
-## Delete a foreign key constraint
+## 删除外键约束
 
-To delete a foreign key constraint, you can use the following `ALTER TABLE` statement:
+要删除外键约束，你可以使用以下 `ALTER TABLE` 语句：
 
 ```sql
 ALTER TABLE table_name DROP FOREIGN KEY fk_identifier;
 ```
 
-If the foreign key constraint is named when it is created, you can reference the name to delete the foreign key constraint. Otherwise, you have to use the constraint name automatically generated to delete the constraint. You can use `SHOW CREATE TABLE` to view the foreign key name:
+如果在创建外键约束时指定了名称，你可以引用该名称来删除外键约束。否则，你必须使用自动生成的约束名称来删除约束。你可以使用 `SHOW CREATE TABLE` 查看外键名称：
 
 ```sql
 mysql> SHOW CREATE TABLE child\G
@@ -159,32 +159,32 @@ Create Table: CREATE TABLE `child` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 ```
 
-## Foreign key constraint check
+## 外键约束检查
 
-TiDB supports foreign key constraint check, which is controlled by the system variable [`foreign_key_checks`](/system-variables.md#foreign_key_checks). By default, this variable is set to `ON`, meaning that the foreign key constraint check is enabled. This variable has two scopes: `GLOBAL` and `SESSION`. Keeping this variable enabled can ensure the integrity of foreign key reference relationships.
+TiDB 支持外键约束检查，这由系统变量 [`foreign_key_checks`](/system-variables.md#foreign_key_checks) 控制。默认情况下，该变量设置为 `ON`，表示启用外键约束检查。该变量有两个作用域：`GLOBAL` 和 `SESSION`。保持此变量启用可以确保外键引用关系的完整性。
 
-The effect of disabling foreign key constraint check is as follows:
+禁用外键约束检查的效果如下：
 
-- When you delete a parent table referenced by a foreign key, the deletion can succeed only when the foreign key constraint check is disabled.
-- When you import data to a database, the order of creating tables might be different from the foreign key dependency order, which might cause the creation of tables to fail. Only when the foreign key constraint check is disabled can the tables be created successfully. In addition, disabling the foreign key constraint check can speed up data import.
-- When you import data to a database, if the data of the child table is imported first, an error will be reported. Only when the foreign key constraint check is disabled can the data of the child table be imported successfully.
-- If an `ALTER TABLE` operation to be executed involves a change of the foreign key, this operation succeeds only when the foreign key constraint check is disabled.
+- 当你删除被外键引用的父表时，只有在禁用外键约束检查的情况下才能成功删除。
+- 当你导入数据到数据库时，创建表的顺序可能与外键依赖顺序不同，这可能导致表创建失败。只有在禁用外键约束检查的情况下才能成功创建表。此外，禁用外键约束检查可以加快数据导入速度。
+- 当你导入数据到数据库时，如果先导入子表的数据，会报错。只有在禁用外键约束检查的情况下才能成功导入子表的数据。
+- 如果要执行的 `ALTER TABLE` 操作涉及外键的更改，只有在禁用外键约束检查的情况下才能成功执行。
 
-When the foreign key constraint check is disabled, the foreign key constraint check and reference operation are not executed, except for the following scenarios:
+当外键约束检查被禁用时，不会执行外键约束检查和引用操作，但以下情况除外：
 
-- If the execution of `ALTER TABLE` might result in wrong definition of the foreign key, an error is still reported during the execution.
-- When deleting the index required by the foreign key, you should delete the foreign key first. Otherwise, an error is reported.
-- When you create a foreign key but it does not meet related conditions or restrictions, an error is reported.
+- 如果 `ALTER TABLE` 的执行可能导致外键定义错误，在执行过程中仍会报错。
+- 删除外键所需的索引时，应该先删除外键。否则会报错。
+- 当你创建外键但不满足相关条件或限制时，会报错。
 
-## Locking
+## 锁定
 
-When `INSERT` or `UPDATE` a child table, the foreign key constraint checks whether the corresponding foreign key value exists in the parent table, and locks the row in the parent table to avoid the foreign key value being deleted by other operations violating the foreign key constraint. The locking behavior is equivalent to performing a `SELECT FOR UPDATE` operation on the row where the foreign key value is located in the parent table.
+当对子表执行 `INSERT` 或 `UPDATE` 时，外键约束会检查父表中是否存在相应的外键值，并锁定父表中的行以避免其他操作删除外键值而违反外键约束。锁定行为相当于对父表中外键值所在的行执行 `SELECT FOR UPDATE` 操作。
 
-Because TiDB currently does not support `LOCK IN SHARE MODE`, if a child table accepts a large number of concurrent writes and most of the referenced foreign key values are the same, there might be serious locking conflicts. It is recommended to disable [`foreign_key_checks`](/system-variables.md#foreign_key_checks) when writing a large number of child table data.
+由于 TiDB 目前不支持 `LOCK IN SHARE MODE`，如果子表接受大量并发写入，且大多数被引用的外键值相同，可能会出现严重的锁定冲突。建议在写入大量子表数据时禁用 [`foreign_key_checks`](/system-variables.md#foreign_key_checks)。
 
-## Definition and metadata of foreign keys
+## 外键的定义和元数据
 
-To view the definition of a foreign key constraint, execute the [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md) statement:
+要查看外键约束的定义，执行 [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md) 语句：
 
 ```sql
 mysql> SHOW CREATE TABLE child\G
@@ -198,15 +198,15 @@ Create Table: CREATE TABLE `child` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 ```
 
-You can also get information about foreign keys using either of the following system tables:
+你也可以使用以下任一系统表获取外键信息：
 
 - [`INFORMATION_SCHEMA.KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md)
 - [`INFORMATION_SCHEMA.TABLE_CONSTRAINTS`](/information-schema/information-schema-table-constraints.md)
 - [`INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS`](/information-schema/information-schema-referential-constraints.md)
 
-The following provides examples:
+以下提供示例：
 
-Get information about foreign keys from the `INFORMATION_SCHEMA.KEY_COLUMN_USAGE` system table:
+从 `INFORMATION_SCHEMA.KEY_COLUMN_USAGE` 系统表获取外键信息：
 
 ```sql
 mysql> SELECT TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME, CONSTRAINT_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE REFERENCED_TABLE_SCHEMA IS NOT NULL;
@@ -220,7 +220,7 @@ mysql> SELECT TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME, CONSTRAINT_NAME FROM INFORM
 +--------------+---------------+------------------+-----------------+
 ```
 
-Get information about foreign keys from the `INFORMATION_SCHEMA.TABLE_CONSTRAINTS` system table:
+从 `INFORMATION_SCHEMA.TABLE_CONSTRAINTS` 系统表获取外键信息：
 
 ```sql
 mysql> SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE CONSTRAINT_TYPE='FOREIGN KEY'\G
@@ -233,7 +233,7 @@ TABLE_NAME         | child
 CONSTRAINT_TYPE    | FOREIGN KEY
 ```
 
-Get information about foreign keys from the `INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS` system table:
+从 `INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS` 系统表获取外键信息：
 
 ```sql
 mysql> SELECT * FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS\G
@@ -251,9 +251,9 @@ TABLE_NAME                | child
 REFERENCED_TABLE_NAME     | parent
 ```
 
-## View execution plans with foreign keys
+## 查看带有外键的执行计划
 
-You can use the `EXPLAIN` statement to view execution plans. The `Foreign_Key_Check` operator performs the foreign key constraint check on DML statements that are executed.
+你可以使用 `EXPLAIN` 语句查看执行计划。`Foreign_Key_Check` 算子对执行的 DML 语句执行外键约束检查。
 
 ```sql
 mysql> explain insert into child values (1,1);
@@ -265,7 +265,7 @@ mysql> explain insert into child values (1,1);
 +-----------------------+---------+------+---------------+-------------------------------+
 ```
 
-You can use the `EXPLAIN ANALYZE` statement to view the execution of the foreign key reference behavior. The `Foreign_Key_Cascade` operator performs foreign key referencing for DML statements that are executed.
+你可以使用 `EXPLAIN ANALYZE` 语句查看外键引用行为的执行情况。`Foreign_Key_Cascade` 算子对执行的 DML 语句执行外键引用。
 
 ```sql
 mysql> explain analyze delete from parent where id = 1;
@@ -282,11 +282,11 @@ mysql> explain analyze delete from parent where id = 1;
 +----------------------------------+---------+---------+-----------+---------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+-----------+------+
 ```
 
-## Compatibility
+## 兼容性
 
-### Compatibility between TiDB versions
+### TiDB 版本之间的兼容性
 
-Before v6.6.0, TiDB supports the syntax of creating foreign keys, but the created foreign keys are ineffective. If you upgrade a TiDB cluster created before v6.6.0 to v6.6.0 or later, the foreign keys created before the upgrade are still ineffective. Only the foreign keys created in v6.6.0 or later versions are effective. You can delete the invalid foreign key and create a new one to make the foreign key constraints effective. You can use the `SHOW CREATE TABLE` statement to check whether the foreign keys are effective. The invalid foreign key has a `/* FOREIGN KEY INVALID */` comment.
+在 v6.6.0 之前，TiDB 支持创建外键的语法，但创建的外键是无效的。如果将 v6.6.0 之前创建的 TiDB 集群升级到 v6.6.0 或更高版本，升级前创建的外键仍然是无效的。只有在 v6.6.0 或更高版本中创建的外键才是有效的。你可以删除无效的外键并创建新的外键来使外键约束生效。你可以使用 `SHOW CREATE TABLE` 语句检查外键是否有效。无效的外键有 `/* FOREIGN KEY INVALID */` 注释。
 
 ```sql
 mysql> SHOW CREATE TABLE child\G
@@ -300,31 +300,31 @@ Create Table | CREATE TABLE `child` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 ```
 
-### Compatibility with TiDB tools
+### 与 TiDB 工具的兼容性
 
 <CustomContent platform="tidb">
 
-- [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) does not support foreign keys.
-- [DM](/dm/dm-overview.md) does not support foreign keys. DM disables the [`foreign_key_checks`](/system-variables.md#foreign_key_checks) of the downstream TiDB when replicating data to TiDB. Therefore, the cascading operations caused by foreign keys are not replicated from the upstream to the downstream, which might cause data inconsistency.
-- [TiCDC](/ticdc/ticdc-overview.md) v6.6.0 is compatible with foreign keys. The previous versions of TiCDC might report an error when replicating tables with foreign keys. It is recommended to disable the `foreign_key_checks` of the downstream TiDB cluster when using a TiCDC version earlier than v6.6.0.
-- [BR](/br/backup-and-restore-overview.md) v6.6.0 is compatible with foreign keys. The previous versions of BR might report an error when restoring tables with foreign keys to a v6.6.0 or later cluster. It is recommended to disable the `foreign_key_checks` of the downstream TiDB cluster before restoring the cluster when using a BR earlier than v6.6.0.
-- When you use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md), if the target table uses a foreign key, it is recommended to disable the `foreign_key_checks` of the downstream TiDB cluster before importing data. For versions earlier than v6.6.0, disabling this system variable does not take effect, and you need to grant the `REFERENCES` privilege for the downstream database user, or manually create the target table in the downstream database in advance to ensure smooth data import.
+- [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) 不支持外键。
+- [DM](/dm/dm-overview.md) 不支持外键。DM 在将数据复制到 TiDB 时会禁用下游 TiDB 的 [`foreign_key_checks`](/system-variables.md#foreign_key_checks)。因此，由外键引起的级联操作不会从上游复制到下游，这可能导致数据不一致。
+- [TiCDC](/ticdc/ticdc-overview.md) v6.6.0 兼容外键。早期版本的 TiCDC 在复制带有外键的表时可能会报错。建议在使用早于 v6.6.0 的 TiCDC 版本时禁用下游 TiDB 集群的 `foreign_key_checks`。
+- [BR](/br/backup-and-restore-overview.md) v6.6.0 兼容外键。早期版本的 BR 在将带有外键的表恢复到 v6.6.0 或更高版本的集群时可能会报错。建议在使用早于 v6.6.0 的 BR 版本恢复集群时禁用下游 TiDB 集群的 `foreign_key_checks`。
+- 当你使用 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) 时，如果目标表使用外键，建议在导入数据前禁用下游 TiDB 集群的 `foreign_key_checks`。对于早于 v6.6.0 的版本，禁用此系统变量不会生效，你需要为下游数据库用户授予 `REFERENCES` 权限，或者提前在下游数据库中手动创建目标表，以确保数据导入顺利进行。
 
 </CustomContent>
 
-- [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) is compatible with foreign keys.
+- [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) 兼容外键。
 
 <CustomContent platform="tidb">
 
-- When you use [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) to compare data between the upstream and downstream databases, if the database versions are different and there is [an invalid foreign key in the downstream TiDB](#compatibility-between-tidb-versions), sync-diff-inspector might report a table schema inconsistent error. This is because TiDB v6.6.0 adds a `/* FOREIGN KEY INVALID */` comment for the invalid foreign key.
+- 当你使用 [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) 比较上下游数据库之间的数据时，如果数据库版本不同，且下游 TiDB 中存在[无效的外键](#tidb-版本之间的兼容性)，sync-diff-inspector 可能会报告表结构不一致错误。这是因为 TiDB v6.6.0 为无效的外键添加了 `/* FOREIGN KEY INVALID */` 注释。
 
 </CustomContent>
 
-### Compatibility with MySQL
+### 与 MySQL 的兼容性
 
-When you create a foreign key without specifying a name, the name generated by TiDB is different from that generated by MySQL. For example, the foreign key name generated by TiDB is `fk_1`, `fk_2`, and `fk_3`, while the foreign key name generated by MySQL is `table_name_ibfk_1`, `table_name_ibfk_2`, and `table_name_ibfk_3`.
+当你创建外键而不指定名称时，TiDB 生成的名称与 MySQL 生成的名称不同。例如，TiDB 生成的外键名称是 `fk_1`、`fk_2` 和 `fk_3`，而 MySQL 生成的外键名称是 `table_name_ibfk_1`、`table_name_ibfk_2` 和 `table_name_ibfk_3`。
 
-Both MySQL and TiDB parse but ignore "inline `REFERENCES` specifications". Only `REFERENCES` specifications that are part of `FOREIGN KEY` definitions are checked and enforced. The following example creates a foreign key constraint using a `REFERENCES` clause:
+MySQL 和 TiDB 都会解析但忽略"内联 `REFERENCES` 规范"。只有作为 `FOREIGN KEY` 定义一部分的 `REFERENCES` 规范才会被检查和强制执行。以下示例使用 `REFERENCES` 子句创建外键约束：
 
 ```sql
 CREATE TABLE parent (
@@ -339,7 +339,7 @@ CREATE TABLE child (
 SHOW CREATE TABLE child;
 ```
 
-The output shows that the `child` table does not contain any foreign keys:
+输出显示 `child` 表不包含任何外键：
 
 ```sql
 +-------+-------------------------------------------------------------+

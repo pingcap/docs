@@ -1,13 +1,13 @@
 ---
-title: TimeStamp Oracle (TSO) in TiDB
-summary: Learn about TimeStamp Oracle (TSO) in TiDB.
+title: TiDB 中的时间戳预分配器 (TSO)
+summary: 了解 TiDB 中的时间戳预分配器 (TSO)。
 ---
 
-# TimeStamp Oracle (TSO) in TiDB
+# TiDB 中的时间戳预分配器 (TSO)
 
-In TiDB, the Placement Driver (PD) plays a pivotal role in allocating timestamps to various components within a cluster. These timestamps are instrumental in the assignment of temporal markers to transactions and data, a mechanism crucial for enabling the [Percolator](https://research.google/pubs/large-scale-incremental-processing-using-distributed-transactions-and-notifications/) model within TiDB. The Percolator model is used to support [Multi-Version Concurrency Control (MVCC)](https://docs.pingcap.com/tidb/stable/glossary#multi-version-concurrency-control-mvcc) and [transaction management](/transaction-overview.md).
+在 TiDB 中，Placement Driver (PD) 在为集群内各个组件分配时间戳方面发挥着关键作用。这些时间戳对于为事务和数据分配时间标记至关重要，这种机制对于在 TiDB 中实现 [Percolator](https://research.google/pubs/large-scale-incremental-processing-using-distributed-transactions-and-notifications/) 模型非常重要。Percolator 模型用于支持[多版本并发控制 (MVCC)](https://docs.pingcap.com/tidb/stable/glossary#multi-version-concurrency-control-mvcc) 和[事务管理](/transaction-overview.md)。
 
-The following example shows how to get the current TSO in TiDB:
+以下示例展示了如何在 TiDB 中获取当前的 TSO：
 
 ```sql
 BEGIN; SET @ts := @@tidb_current_ts; ROLLBACK;
@@ -24,9 +24,9 @@ SELECT @ts;
 1 row in set (0.00 sec)
 ```
 
-Note that this is done in a transaction with `BEGIN; ...; ROLLBACK` because TSO timestamps are assigned per transaction.
+注意，这是在事务中使用 `BEGIN; ...; ROLLBACK` 完成的，因为 TSO 时间戳是按事务分配的。
 
-The TSO timestamp you get from the preceding example is a decimal number. You can use the following SQL functions to parse the timestamp:
+从上述示例中获得的 TSO 时间戳是一个十进制数。你可以使用以下 SQL 函数来解析时间戳：
 
 - [`TIDB_PARSE_TSO()`](/functions-and-operators/tidb-functions.md#tidb_parse_tso)
 - [`TIDB_PARSE_TSO_LOGICAL()`](/functions-and-operators/tidb-functions.md)
@@ -51,20 +51,20 @@ SELECT TIDB_PARSE_TSO_LOGICAL(443852055297916932);
 1 row in set (0.00 sec)
 ```
 
-The following example shows what a TSO timestamp looks like in binary:
+以下示例展示了 TSO 时间戳在二进制中的样子：
 
 ```shell
-0000011000101000111000010001011110111000110111000000000000000100  ← This is 443852055297916932 in binary
-0000011000101000111000010001011110111000110111                    ← The first 46 bits are the physical timestamp
-                                              000000000000000100  ← The last 18 bits are the logical timestamp
+0000011000101000111000010001011110111000110111000000000000000100  ← 这是 443852055297916932 的二进制表示
+0000011000101000111000010001011110111000110111                    ← 前 46 位是物理时间戳
+                                              000000000000000100  ← 后 18 位是逻辑时间戳
 ```
 
-There are two parts in a TSO timestamp:
+TSO 时间戳包含两个部分：
 
-- The physical timestamp: a UNIX timestamp in milliseconds since 1 January 1970.
-- The logical timestamp: an incrementing counter, used in scenarios requiring multiple timestamps within the same millisecond, or in cases where certain events might trigger a reversal of the clock's progression. In such cases, the physical timestamp remains unchanged while the logical timestamp steadily advances. This mechanism ensures the integrity of the TSO timestamp, which always moves forward and never regresses.
+- 物理时间戳：自 1970 年 1 月 1 日以来的 UNIX 时间戳（以毫秒为单位）。
+- 逻辑时间戳：一个递增计数器，用于在同一毫秒内需要多个时间戳的场景，或在某些事件可能导致时钟回退的情况下。在这些情况下，物理时间戳保持不变，而逻辑时间戳稳步前进。这种机制确保了 TSO 时间戳始终向前移动，永不回退。
 
-With this knowledge, you can inspect the TSO timestamp a bit more in SQL:
+有了这些知识，你可以在 SQL 中更深入地检查 TSO 时间戳：
 
 ```sql
 SELECT @ts, UNIX_TIMESTAMP(NOW(6)), (@ts >> 18)/1000, FROM_UNIXTIME((@ts >> 18)/1000), NOW(6), @ts & 0x3FFFF\G
@@ -78,11 +78,11 @@ FROM_UNIXTIME((@ts >> 18)/1000): 2023-08-27 20:33:41.6870
 1 row in set (0.00 sec)
 ```
 
-The `>> 18` operation signifies a bitwise [right shift](/functions-and-operators/bit-functions-and-operators.md#-right-shift) by 18 bits, which is used to extract the physical timestamp. Because the physical timestamp is expressed in milliseconds, deviating from the more common UNIX timestamp format measured in seconds, you need to divide it by 1000 to convert it into a format compatible with [`FROM_UNIXTIME()`](/functions-and-operators/date-and-time-functions.md). This process aligns with the functionality of `TIDB_PARSE_TSO()`.
+`>> 18` 操作表示[右移](/functions-and-operators/bit-functions-and-operators.md#-right-shift) 18 位，用于提取物理时间戳。由于物理时间戳以毫秒为单位表示，与更常见的以秒为单位的 UNIX 时间戳格式不同，你需要将其除以 1000 以转换为与 [`FROM_UNIXTIME()`](/functions-and-operators/date-and-time-functions.md) 兼容的格式。这个过程与 `TIDB_PARSE_TSO()` 的功能一致。
 
-You can also extract the logical timestamp `000000000000000100` in binary, which is equivalent to `4` in decimal.
+你还可以提取逻辑时间戳 `000000000000000100`（二进制），它等于十进制的 `4`。
 
-You can also parse the timestamp via the CLI tool as follows:
+你也可以通过 CLI 工具解析时间戳，如下所示：
 
 ```shell
 $ tiup ctl:v7.1.0 pd tso 443852055297916932
@@ -93,4 +93,4 @@ system:  2023-08-27 20:33:41.687 +0200 CEST
 logic:   4
 ```
 
-Here you can see the physical timestamp in the line that starts with `system:` and the logical timestamp in the line that starts with `logic:`.
+在这里，你可以看到以 `system:` 开头的行中的物理时间戳，以及以 `logic:` 开头的行中的逻辑时间戳。

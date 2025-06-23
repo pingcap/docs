@@ -1,72 +1,72 @@
 ---
-title: Vector Search (Beta) Overview
-summary: Learn about Vector Search in TiDB. This feature provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video.
+title: 向量搜索（Beta）概述
+summary: 了解 TiDB 中的向量搜索。此功能提供了一个高级搜索解决方案，可以对文档、图像、音频和视频等各种数据类型执行语义相似度搜索。
 ---
 
-# Vector Search (Beta) Overview
+# 向量搜索（Beta）概述
 
-TiDB Vector Search (beta) provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video. This feature enables developers to easily build scalable applications with generative artificial intelligence (AI) capabilities using familiar MySQL skills.
+TiDB 向量搜索（beta）提供了一个高级搜索解决方案，可以对文档、图像、音频和视频等各种数据类型执行语义相似度搜索。此功能使开发人员能够使用熟悉的 MySQL 技能轻松构建具有生成式人工智能（AI）功能的可扩展应用程序。
 
-> **Note**
+> **注意**
 >
-> TiDB Vector Search is only available for TiDB Self-Managed (TiDB >= v8.4) and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless). It is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
+> TiDB 向量搜索仅适用于 TiDB 自管理版本（TiDB >= v8.4）和 [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)。它不适用于 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)。
 
-## Concepts
+## 概念
 
-Vector search is a search method that prioritizes the meaning of your data to deliver relevant results.
+向量搜索是一种优先考虑数据含义以提供相关结果的搜索方法。
 
-Unlike traditional full-text search, which relies on exact keyword matching and word frequency, vector search converts various data types (such as text, images, or audio) into high-dimensional vectors and queries based on the similarity between these vectors. This search method captures the semantic meaning and contextual information of the data, leading to a more precise understanding of user intent.
+与依赖精确关键词匹配和词频的传统全文搜索不同，向量搜索将各种数据类型（如文本、图像或音频）转换为高维向量，并基于这些向量之间的相似度进行查询。这种搜索方法捕获了数据的语义含义和上下文信息，从而更准确地理解用户意图。
 
-Even when the search terms do not exactly match the content in the database, vector search can still provide results that align with the user's intent by analyzing the semantics of the data.
+即使搜索词与数据库中的内容不完全匹配，向量搜索仍然可以通过分析数据的语义来提供符合用户意图的结果。
 
-For example, a full-text search for "a swimming animal" only returns results containing these exact keywords. In contrast, vector search can return results for other swimming animals, such as fish or ducks, even if these results do not contain the exact keywords.
+例如，对"会游泳的动物"进行全文搜索只会返回包含这些确切关键词的结果。相比之下，向量搜索可以返回其他会游泳的动物的结果，如鱼或鸭子，即使这些结果不包含确切的关键词。
 
-### Vector embedding
+### 向量嵌入
 
-A vector embedding, also known as an embedding, is a sequence of numbers that represents real-world objects in a high-dimensional space. It captures the meaning and context of unstructured data, such as documents, images, audio, and videos.
+向量嵌入（也称为嵌入）是一个数字序列，用于在高维空间中表示现实世界的对象。它捕获了非结构化数据（如文档、图像、音频和视频）的含义和上下文。
 
-Vector embeddings are essential in machine learning and serve as the foundation for semantic similarity searches.
+向量嵌入在机器学习中至关重要，是语义相似度搜索的基础。
 
-TiDB introduces [Vector data types](/tidb-cloud/vector-search-data-types.md) and [Vector search index](/tidb-cloud/vector-search-index.md) designed to optimize the storage and retrieval of vector embeddings, enhancing their use in AI applications. You can store vector embeddings in TiDB and perform vector search queries to find the most relevant data using these data types.
+TiDB 引入了[向量数据类型](/tidb-cloud/vector-search-data-types.md)和[向量搜索索引](/tidb-cloud/vector-search-index.md)，专门用于优化向量嵌入的存储和检索，增强其在 AI 应用中的使用。你可以在 TiDB 中存储向量嵌入，并使用这些数据类型执行向量搜索查询以找到最相关的数据。
 
-### Embedding model
+### 嵌入模型
 
-Embedding models are algorithms that transform data into [vector embeddings](#vector-embedding).
+嵌入模型是将数据转换为[向量嵌入](#向量嵌入)的算法。
 
-Choosing an appropriate embedding model is crucial for ensuring the accuracy and relevance of semantic search results. For unstructured text data, you can find top-performing text embedding models on the [Massive Text Embedding Benchmark (MTEB) Leaderboard](https://huggingface.co/spaces/mteb/leaderboard).
+选择合适的嵌入模型对于确保语义搜索结果的准确性和相关性至关重要。对于非结构化文本数据，你可以在 [Massive Text Embedding Benchmark (MTEB) Leaderboard](https://huggingface.co/spaces/mteb/leaderboard) 上找到性能最佳的文本嵌入模型。
 
-To learn how to generate vector embeddings for your specific data types, refer to integration tutorials or examples of embedding models.
+要了解如何为特定数据类型生成向量嵌入，请参考嵌入模型的集成教程或示例。
 
-## How vector search works
+## 向量搜索的工作原理
 
-After converting raw data into vector embeddings and storing them in TiDB, your application can execute vector search queries to find the data most semantically or contextually relevant to a user's query.
+将原始数据转换为向量嵌入并存储在 TiDB 中后，你的应用程序可以执行向量搜索查询，以找到与用户查询在语义或上下文上最相关的数据。
 
-TiDB Vector Search identifies the top-k nearest neighbor (KNN) vectors by using a [distance function](/tidb-cloud/vector-search-functions-and-operators.md) to calculate the distance between the given vector and vectors stored in the database. The vectors closest to the given vector in the query represent the most similar data in meaning.
+TiDB 向量搜索通过使用[距离函数](/tidb-cloud/vector-search-functions-and-operators.md)计算给定向量与数据库中存储的向量之间的距离来识别 top-k 最近邻（KNN）向量。在查询中与给定向量最接近的向量代表含义上最相似的数据。
 
-![The Schematic TiDB Vector Search](/media/vector-search/embedding-search.png)
+![TiDB 向量搜索示意图](/media/vector-search/embedding-search.png)
 
-As a relational database with integrated vector search capabilities, TiDB enables you to store data and their corresponding vector representations (that is, vector embeddings) together in one database. You can choose any of the following ways for storage:
+作为具有集成向量搜索功能的关系数据库，TiDB 使你能够在一个数据库中同时存储数据及其对应的向量表示（即向量嵌入）。你可以选择以下任一方式进行存储：
 
-- Store data and their corresponding vector representations in different columns of the same table.
-- Store data and their corresponding vector representation in different tables. In this way, you need to use `JOIN` queries to combine the tables when retrieving data.
+- 在同一个表的不同列中存储数据及其对应的向量表示。
+- 在不同的表中存储数据及其对应的向量表示。这种方式下，在检索数据时需要使用 `JOIN` 查询来组合表。
 
-## Use cases
+## 使用场景
 
-### Retrieval-Augmented Generation (RAG)
+### 检索增强生成（RAG）
 
-Retrieval-Augmented Generation (RAG) is an architecture designed to optimize the output of Large Language Models (LLMs). By using vector search, RAG applications can store vector embeddings in the database and retrieve relevant documents as additional context when the LLM generates responses, thereby improving the quality and relevance of the answers.
+检索增强生成（Retrieval-Augmented Generation，RAG）是一种旨在优化大型语言模型（LLM）输出的架构。通过使用向量搜索，RAG 应用程序可以在数据库中存储向量嵌入，并在 LLM 生成响应时检索相关文档作为额外上下文，从而提高答案的质量和相关性。
 
-### Semantic search
+### 语义搜索
 
-Semantic search is a search technology that returns results based on the meaning of a query, rather than simply matching keywords. It interprets the meaning across different languages and various types of data (such as text, images, and audio) using embeddings. Vector search algorithms then use these embeddings to find the most relevant data that satisfies the user's query.
+语义搜索是一种基于查询含义而不是简单匹配关键词来返回结果的搜索技术。它使用嵌入来解释跨不同语言和各种类型数据（如文本、图像和音频）的含义。然后，向量搜索算法使用这些嵌入来找到最符合用户查询的相关数据。
 
-### Recommendation engine
+### 推荐引擎
 
-A recommendation engine is a system that proactively suggests content, products, or services that are relevant and personalized to users. It accomplishes this by creating embeddings that represent user behavior and preferences. These embeddings help the system identify similar items that other users have interacted with or shown interest in. This increases the likelihood that the recommendations will be both relevant and appealing to the user.
+推荐引擎是一个主动向用户推荐相关和个性化内容、产品或服务的系统。它通过创建表示用户行为和偏好的嵌入来实现这一目标。这些嵌入帮助系统识别其他用户已经交互或表现出兴趣的相似项目。这增加了推荐内容对用户既相关又有吸引力的可能性。
 
-## See also
+## 另请参阅
 
-To get started with TiDB Vector Search, see the following documents:
+要开始使用 TiDB 向量搜索，请参阅以下文档：
 
-- [Get started with vector search using Python](/tidb-cloud/vector-search-get-started-using-python.md)
-- [Get started with vector search using SQL](/tidb-cloud/vector-search-get-started-using-sql.md)
+- [使用 Python 开始向量搜索](/tidb-cloud/vector-search-get-started-using-python.md)
+- [使用 SQL 开始向量搜索](/tidb-cloud/vector-search-get-started-using-sql.md)

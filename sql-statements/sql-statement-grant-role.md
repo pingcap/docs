@@ -1,13 +1,13 @@
 ---
-title: GRANT <role> | TiDB SQL Statement Reference
-summary: An overview of the usage of GRANT <role> for the TiDB database.
+title: GRANT <role> | TiDB SQL 语句参考
+summary: TiDB 数据库中 GRANT <role> 的使用概览。
 ---
 
 # `GRANT <role>`
 
-Assigns a previously created role to an existing user. The user can use then use the statement `SET ROLE <rolename>` to assume the privileges of the role, or `SET ROLE ALL` to assume all roles that have been assigned.
+将先前创建的角色分配给现有用户。用户随后可以使用语句 `SET ROLE <rolename>` 来获取该角色的权限，或使用 `SET ROLE ALL` 来获取已分配的所有角色的权限。
 
-## Synopsis
+## 语法图
 
 ```ebnf+diagram
 GrantRoleStmt ::=
@@ -20,15 +20,15 @@ UsernameList ::=
     Username ( ',' Username )*
 ```
 
-## Examples
+## 示例
 
-Connect to TiDB as the `root` user:
+以 `root` 用户身份连接到 TiDB：
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u root
 ```
 
-Create a new role `analyticsteam` and a new user `jennifer`:
+创建新角色 `analyticsteam` 和新用户 `jennifer`：
 
 ```sql
 CREATE ROLE analyticsteam;
@@ -44,13 +44,13 @@ GRANT analyticsteam TO jennifer;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-Connect to TiDB as the `jennifer` user:
+以 `jennifer` 用户身份连接到 TiDB：
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u jennifer
 ```
 
-Note that by default `jennifer` needs to execute `SET ROLE analyticsteam` in order to be able to use the privileges associated with the `analyticsteam` role:
+注意，默认情况下，`jennifer` 需要执行 `SET ROLE analyticsteam` 才能使用与 `analyticsteam` 角色相关的权限：
 
 ```sql
 SHOW GRANTS;
@@ -86,26 +86,26 @@ SHOW TABLES IN test;
 1 row in set (0.00 sec)
 ```
 
-Connect to TiDB as the `root` user:
+以 `root` 用户身份连接到 TiDB：
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u root
 ```
 
-The statement `SET DEFAULT ROLE` can be used to associate the role `analyticsteam` to `jennifer`:
+可以使用 `SET DEFAULT ROLE` 语句将角色 `analyticsteam` 关联到 `jennifer`：
 
 ```sql
 SET DEFAULT ROLE analyticsteam TO jennifer;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-Connect to TiDB as the `jennifer` user:
+以 `jennifer` 用户身份连接到 TiDB：
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u jennifer
 ```
 
-After this, the user `jennifer` has the privileges associated with the role `analyticsteam` and `jennifer` does not have to execute the statement `SET ROLE`:
+此后，用户 `jennifer` 拥有与角色 `analyticsteam` 相关的权限，且 `jennifer` 不需要执行 `SET ROLE` 语句：
 
 ```sql
 SHOW GRANTS;
@@ -127,11 +127,11 @@ SHOW TABLES IN test;
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `GRANT <role>` statement in TiDB is fully compatible with the roles feature in MySQL 8.0. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中的 `GRANT <role>` 语句与 MySQL 8.0 的角色功能完全兼容。如果发现任何兼容性差异，请[报告问题](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 另请参阅
 
 * [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
 * [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)
@@ -142,6 +142,6 @@ The `GRANT <role>` statement in TiDB is fully compatible with the roles feature 
 
 <CustomContent platform="tidb">
 
-* [Role-Based Access Control](/role-based-access-control.md)
+* [基于角色的访问控制](/role-based-access-control.md)
 
 </CustomContent>

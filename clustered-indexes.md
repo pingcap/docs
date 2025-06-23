@@ -1,45 +1,45 @@
 ---
-title: Clustered Indexes
-summary: Learn the concept, user scenarios, usages, limitations, and compatibility of clustered indexes.
+title: 聚簇索引
+summary: 了解聚簇索引的概念、使用场景、用法、限制和兼容性。
 ---
 
-# Clustered Indexes
+# 聚簇索引
 
-TiDB supports the clustered index feature since v5.0. This feature controls how data is stored in tables containing primary keys. It provides TiDB the ability to organize tables in a way that can improve the performance of certain queries.
+TiDB 从 v5.0 开始支持聚簇索引功能。此功能控制包含主键的表中数据的存储方式。它使 TiDB 能够以一种可以提高某些查询性能的方式组织表。
 
-The term _clustered_ in this context refers to the _organization of how data is stored_ and not _a group of database servers working together_. Some database management systems refer to clustered index tables as _index-organized tables_ (IOT).
+这里的 _聚簇_ 指的是 _数据存储的组织方式_，而不是 _一组协同工作的数据库服务器_。某些数据库管理系统将聚簇索引表称为 _索引组织表_ (IOT)。
 
-Currently, tables containing primary keys in TiDB are divided into the following two categories:
+目前，TiDB 中包含主键的表分为以下两类：
 
-- `NONCLUSTERED`: The primary key of the table is non-clustered index. In tables with non-clustered indexes, the keys for row data consist of internal `_tidb_rowid` implicitly assigned by TiDB. Because primary keys are essentially unique indexes, tables with non-clustered indexes need at least two key-value pairs to store a row, which are:
-    - `_tidb_rowid` (key) - row data (value)
-    - Primary key data (key) - `_tidb_rowid` (value)
-- `CLUSTERED`: The primary key of the table is clustered index. In tables with clustered indexes, the keys for row data consist of primary key data given by the user. Therefore, tables with clustered indexes need only one key-value pair to store a row, which is:
-    - Primary key data (key) - row data (value)
+- `NONCLUSTERED`：表的主键是非聚簇索引。在具有非聚簇索引的表中，行数据的键由 TiDB 隐式分配的内部 `_tidb_rowid` 组成。由于主键本质上是唯一索引，具有非聚簇索引的表需要至少两个键值对来存储一行数据，即：
+    - `_tidb_rowid`（键）- 行数据（值）
+    - 主键数据（键）- `_tidb_rowid`（值）
+- `CLUSTERED`：表的主键是聚簇索引。在具有聚簇索引的表中，行数据的键由用户提供的主键数据组成。因此，具有聚簇索引的表只需要一个键值对来存储一行数据，即：
+    - 主键数据（键）- 行数据（值）
 
-> **Note:**
+> **注意：**
 >
-> TiDB supports clustering only by a table's `PRIMARY KEY`. With clustered indexes enabled, the terms _the_ `PRIMARY KEY` and _the clustered index_ might be used interchangeably. `PRIMARY KEY` refers to the constraint (a logical property), and clustered index describes the physical implementation of how the data is stored.
+> TiDB 仅支持通过表的 `PRIMARY KEY` 进行聚簇。启用聚簇索引后，_`PRIMARY KEY`_ 和 _聚簇索引_ 这两个术语可能会互换使用。`PRIMARY KEY` 指的是约束（逻辑属性），而聚簇索引描述了数据存储的物理实现方式。
 
-## User scenarios
+## 使用场景
 
-Compared to tables with non-clustered indexes, tables with clustered indexes offer greater performance and throughput advantages in the following scenarios:
+与具有非聚簇索引的表相比，具有聚簇索引的表在以下场景中具有更大的性能和吞吐量优势：
 
-+ When data is inserted, the clustered index reduces one write of the index data from the network.
-+ When a query with an equivalent condition only involves the primary key, the clustered index reduces one read of index data from the network.
-+ When a query with a range condition only involves the primary key, the clustered index reduces multiple reads of index data from the network.
-+ When a query with an equivalent or range condition only involves the primary key prefix, the clustered index reduces multiple reads of index data from the network.
++ 当插入数据时，聚簇索引减少了一次网络写入索引数据的操作。
++ 当查询只涉及主键的等值条件时，聚簇索引减少了一次网络读取索引数据的操作。
++ 当查询只涉及主键的范围条件时，聚簇索引减少了多次网络读取索引数据的操作。
++ 当查询只涉及主键前缀的等值或范围条件时，聚簇索引减少了多次网络读取索引数据的操作。
 
-On the other hand, tables with clustered indexes have certain disadvantages. See the following:
+另一方面，具有聚簇索引的表也有一些缺点。请参见以下内容：
 
-- There might be write hotspot issues when inserting a large number of primary keys with close values.
-- The table data takes up more storage space if the data type of the primary key is larger than 64 bits, especially when there are multiple secondary indexes.
+- 当插入大量值相近的主键时，可能会出现写入热点问题。
+- 如果主键的数据类型大于 64 位，表数据会占用更多存储空间，特别是当存在多个二级索引时。
 
-## Usages
+## 用法
 
-### Create a table with clustered indexes
+### 创建具有聚簇索引的表
 
-Since TiDB v5.0, you can add non-reserved keywords `CLUSTERED` or `NONCLUSTERED` after `PRIMARY KEY` in a `CREATE TABLE` statement to specify whether the table's primary key is a clustered index. For example:
+从 TiDB v5.0 开始，你可以在 `CREATE TABLE` 语句中的 `PRIMARY KEY` 后添加非保留关键字 `CLUSTERED` 或 `NONCLUSTERED` 来指定表的主键是否为聚簇索引。例如：
 
 ```sql
 CREATE TABLE t (a BIGINT PRIMARY KEY CLUSTERED, b VARCHAR(255));
@@ -50,9 +50,9 @@ CREATE TABLE t (a BIGINT, b VARCHAR(255), PRIMARY KEY(a, b) CLUSTERED);
 CREATE TABLE t (a BIGINT, b VARCHAR(255), PRIMARY KEY(a, b) NONCLUSTERED);
 ```
 
-Note that keywords `KEY` and `PRIMARY KEY` have the same meaning in the column definition.
+注意，在列定义中，关键字 `KEY` 和 `PRIMARY KEY` 具有相同的含义。
 
-You can also use the [comment syntax](/comment-syntax.md) in TiDB to specify the type of the primary key. For example:
+你也可以使用 TiDB 中的[注释语法](/comment-syntax.md)来指定主键的类型。例如：
 
 ```sql
 CREATE TABLE t (a BIGINT PRIMARY KEY /*T![clustered_index] CLUSTERED */, b VARCHAR(255));
@@ -61,44 +61,44 @@ CREATE TABLE t (a BIGINT, b VARCHAR(255), PRIMARY KEY(a, b) /*T![clustered_index
 CREATE TABLE t (a BIGINT, b VARCHAR(255), PRIMARY KEY(a, b) /*T![clustered_index] NONCLUSTERED */);
 ```
 
-For statements that do not explicitly specify the keyword `CLUSTERED`/`NONCLUSTERED`, the default behavior is controlled by the system variable [`@@global.tidb_enable_clustered_index`](/system-variables.md#tidb_enable_clustered_index-new-in-v50). Supported values for this variable are as follows:
+对于未明确指定关键字 `CLUSTERED`/`NONCLUSTERED` 的语句，默认行为由系统变量 [`@@global.tidb_enable_clustered_index`](/system-variables.md#tidb_enable_clustered_index-new-in-v50) 控制。该变量支持的值如下：
 
-- `OFF` indicates that primary keys are created as non-clustered indexes by default.
-- `ON` indicates that primary keys are created as clustered indexes by default.
-- `INT_ONLY` indicates that the behavior is controlled by the configuration item `alter-primary-key`. If `alter-primary-key` is set to `true`, primary keys are created as non-clustered indexes by default. If it is set to `false`, only the primary keys which consist of an integer column are created as clustered indexes.
+- `OFF` 表示默认将主键创建为非聚簇索引。
+- `ON` 表示默认将主键创建为聚簇索引。
+- `INT_ONLY` 表示行为由配置项 `alter-primary-key` 控制。如果 `alter-primary-key` 设置为 `true`，则默认将主键创建为非聚簇索引。如果设置为 `false`，则仅将由整数列组成的主键创建为聚簇索引。
 
-The default value of `@@global.tidb_enable_clustered_index` is `ON`.
+`@@global.tidb_enable_clustered_index` 的默认值为 `ON`。
 
-### Add or drop clustered indexes
+### 添加或删除聚簇索引
 
-TiDB does not support adding or dropping clustered indexes after tables are created. Nor does it support the mutual conversion between clustered indexes and non-clustered indexes. For example:
+TiDB 不支持在表创建后添加或删除聚簇索引。也不支持聚簇索引和非聚簇索引之间的相互转换。例如：
 
 ```sql
-ALTER TABLE t ADD PRIMARY KEY(b, a) CLUSTERED; -- Currently not supported.
-ALTER TABLE t DROP PRIMARY KEY;     -- If the primary key is a clustered index, then not supported.
-ALTER TABLE t DROP INDEX `PRIMARY`; -- If the primary key is a clustered index, then not supported.
+ALTER TABLE t ADD PRIMARY KEY(b, a) CLUSTERED; -- 当前不支持。
+ALTER TABLE t DROP PRIMARY KEY;     -- 如果主键是聚簇索引，则不支持。
+ALTER TABLE t DROP INDEX `PRIMARY`; -- 如果主键是聚簇索引，则不支持。
 ```
 
-### Add or drop non-clustered indexes
+### 添加或删除非聚簇索引
 
-TiDB supports adding or dropping non-clustered indexes after tables are created. You can explicitly specify the keyword `NONCLUSTERED` or omit it. For example:
+TiDB 支持在表创建后添加或删除非聚簇索引。你可以显式指定关键字 `NONCLUSTERED` 或省略它。例如：
 
 ```sql
 ALTER TABLE t ADD PRIMARY KEY(b, a) NONCLUSTERED;
-ALTER TABLE t ADD PRIMARY KEY(b, a); -- If you omit the keyword, the primary key is a non-clustered index by default.
+ALTER TABLE t ADD PRIMARY KEY(b, a); -- 如果省略关键字，主键默认为非聚簇索引。
 ALTER TABLE t DROP PRIMARY KEY;
 ALTER TABLE t DROP INDEX `PRIMARY`;
 ```
 
-### Check whether the primary key is a clustered index
+### 检查主键是否为聚簇索引
 
-You can check whether the primary key of a table is a clustered index using one of the following methods:
+你可以使用以下方法之一来检查表的主键是否为聚簇索引：
 
-- Execute the command `SHOW CREATE TABLE`.
-- Execute the command `SHOW INDEX FROM`.
-- Query the `TIDB_PK_TYPE` column in the system table `information_schema.tables`.
+- 执行 `SHOW CREATE TABLE` 命令。
+- 执行 `SHOW INDEX FROM` 命令。
+- 查询系统表 `information_schema.tables` 中的 `TIDB_PK_TYPE` 列。
 
-By running the command `SHOW CREATE TABLE`, you can see whether the attribute of `PRIMARY KEY` is `CLUSTERED` or `NONCLUSTERED`. For example:
+通过运行 `SHOW CREATE TABLE` 命令，你可以看到 `PRIMARY KEY` 的属性是 `CLUSTERED` 还是 `NONCLUSTERED`。例如：
 
 ```sql
 mysql> SHOW CREATE TABLE t;
@@ -114,7 +114,7 @@ mysql> SHOW CREATE TABLE t;
 1 row in set (0.01 sec)
 ```
 
-By running the command `SHOW INDEX FROM`, you can check whether the result in the column `Clustered` shows `YES` or `NO`. For example:
+通过运行 `SHOW INDEX FROM` 命令，你可以检查结果中 `Clustered` 列是否显示 `YES` 或 `NO`。例如：
 
 ```sql
 mysql> SHOW INDEX FROM t;
@@ -126,7 +126,7 @@ mysql> SHOW INDEX FROM t;
 1 row in set (0.01 sec)
 ```
 
-You can also query the column `TIDB_PK_TYPE` in the system table `information_schema.tables` to see whether the result is `CLUSTERED` or `NONCLUSTERED`. For example:
+你也可以查询系统表 `information_schema.tables` 中的 `TIDB_PK_TYPE` 列，看结果是 `CLUSTERED` 还是 `NONCLUSTERED`。例如：
 
 ```sql
 mysql> SELECT TIDB_PK_TYPE FROM information_schema.tables WHERE table_schema = 'test' AND table_name = 't';
@@ -138,62 +138,62 @@ mysql> SELECT TIDB_PK_TYPE FROM information_schema.tables WHERE table_schema = '
 1 row in set (0.03 sec)
 ```
 
-## Limitations
+## 限制
 
-Currently, there are several different types of limitations for the clustered index feature. See the following:
+目前，聚簇索引功能有几种不同类型的限制。请参见以下内容：
 
-- Situations that are not supported and not in the support plan:
-    - Using clustered indexes together with the attribute [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) is not supported. Also, the attribute [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) does not take effect on tables with clustered indexes that are not [`AUTO_RANDOM`](/auto-random.md).
-    - Downgrading tables with clustered indexes is not supported. If you need to downgrade such tables, use logical backup tools to migrate data instead.
-- Situations that are not supported yet but in the support plan:
-    - Adding, dropping, and altering clustered indexes using `ALTER TABLE` statements are not supported.
-- Limitations for specific versions:    
-    - In v5.0, using the clustered index feature together with TiDB Binlog is not supported. After TiDB Binlog is enabled, TiDB only allows creating a single integer column as the clustered index of a primary key. TiDB Binlog does not replicate data changes (such as insertion, deletion, and update) on existing tables with clustered indexes to the downstream. If you need to replicate tables with clustered indexes to the downstream, upgrade your cluster to v5.1 or use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) for replication instead.
+- 不支持且不在支持计划中的情况：
+    - 不支持将聚簇索引与属性 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) 一起使用。此外，属性 [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) 对非 [`AUTO_RANDOM`](/auto-random.md) 的聚簇索引表不生效。
+    - 不支持降级具有聚簇索引的表。如果需要降级此类表，请使用逻辑备份工具迁移数据。
+- 目前不支持但在支持计划中的情况：
+    - 不支持使用 `ALTER TABLE` 语句添加、删除和修改聚簇索引。
+- 特定版本的限制：    
+    - 在 v5.0 中，不支持将聚簇索引功能与 TiDB Binlog 一起使用。启用 TiDB Binlog 后，TiDB 仅允许创建单个整数列作为主键的聚簇索引。TiDB Binlog 不会将现有聚簇索引表上的数据变更（如插入、删除和更新）复制到下游。如果需要将具有聚簇索引的表复制到下游，请将集群升级到 v5.1 或使用 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) 进行复制。
 
-After TiDB Binlog is enabled, if the clustered index you create is not a single integer primary key, TiDB returns the following error:
+启用 TiDB Binlog 后，如果创建的聚簇索引不是单个整数主键，TiDB 会返回以下错误：
 
 ```sql
 mysql> CREATE TABLE t (a VARCHAR(255) PRIMARY KEY CLUSTERED);
 ERROR 8200 (HY000): Cannot create clustered index table when the binlog is ON
 ```
 
-If you use clustered indexes together with the attribute `SHARD_ROW_ID_BITS`, TiDB reports the following error:
+如果将聚簇索引与属性 `SHARD_ROW_ID_BITS` 一起使用，TiDB 会报告以下错误：
 
 ```sql
 mysql> CREATE TABLE t (a VARCHAR(255) PRIMARY KEY CLUSTERED) SHARD_ROW_ID_BITS = 3;
 ERROR 8200 (HY000): Unsupported shard_row_id_bits for table with primary key as row id
 ```
 
-## Compatibility
+## 兼容性
 
-### Compatibility with earlier and later TiDB versions
+### 与早期和后期 TiDB 版本的兼容性
 
-TiDB supports upgrading tables with clustered indexes but not downgrading such tables, which means that data in tables with clustered indexes on a later TiDB version is not available on an earlier one.
+TiDB 支持升级具有聚簇索引的表，但不支持降级此类表，这意味着后期 TiDB 版本中具有聚簇索引的表中的数据在早期版本中不可用。
 
-The clustered index feature is partially supported in TiDB v3.0 and v4.0. It is enabled by default when the following requirements are fully met:
+TiDB v3.0 和 v4.0 部分支持聚簇索引功能。当完全满足以下要求时，该功能默认启用：
 
-- The table contains a `PRIMARY KEY`.
-- The `PRIMARY KEY` consists of only one column.
-- The `PRIMARY KEY` is an `INTEGER`.
+- 表包含 `PRIMARY KEY`。
+- `PRIMARY KEY` 仅由一个列组成。
+- `PRIMARY KEY` 是 `INTEGER` 类型。
 
-Since TiDB v5.0, the clustered index feature is fully supported for all types of primary keys, but the default behavior is consistent with TiDB v3.0 and v4.0. To change the default behavior, you can configure the system variable `@@tidb_enable_clustered_index` to `ON` or `OFF`. For more details, see [Create a table with clustered indexes](#create-a-table-with-clustered-indexes).
+从 TiDB v5.0 开始，聚簇索引功能完全支持所有类型的主键，但默认行为与 TiDB v3.0 和 v4.0 一致。要更改默认行为，你可以将系统变量 `@@tidb_enable_clustered_index` 配置为 `ON` 或 `OFF`。更多详情，请参见[创建具有聚簇索引的表](#创建具有聚簇索引的表)。
 
-### Compatibility with MySQL
+### 与 MySQL 的兼容性
 
-TiDB specific comment syntax supports wrapping the keywords `CLUSTERED` and `NONCLUSTERED` in a comment. The result of `SHOW CREATE TABLE` also contains TiDB specific SQL comments. MySQL databases and TiDB databases of an earlier version will ignore these comments.
+TiDB 特定的注释语法支持将关键字 `CLUSTERED` 和 `NONCLUSTERED` 包装在注释中。`SHOW CREATE TABLE` 的结果也包含 TiDB 特定的 SQL 注释。MySQL 数据库和早期版本的 TiDB 数据库会忽略这些注释。
 
-### Compatibility with TiDB migration tools
+### 与 TiDB 迁移工具的兼容性
 
-The clustered index feature is only compatible with the following migration tools in v5.0 and later versions:
+聚簇索引功能仅与 v5.0 及更高版本的以下迁移工具兼容：
 
-- Backup and restore tools: BR, Dumpling, and TiDB Lightning.
-- Data migration and replication tools: DM and TiCDC.
+- 备份和恢复工具：BR、Dumpling 和 TiDB Lightning。
+- 数据迁移和复制工具：DM 和 TiCDC。
 
-However, you cannot convert a table with non-clustered indexes to a table with clustered indexes by backing up and restoring the table using the v5.0 BR tool, and vice versa.
+但是，你不能通过使用 v5.0 BR 工具备份和恢复表来将具有非聚簇索引的表转换为具有聚簇索引的表，反之亦然。
 
-### Compatibility with other TiDB features
+### 与其他 TiDB 功能的兼容性
 
-For a table with a combined primary key or a single non-integer primary key, if you change the primary key from a non-clustered index to a clustered index, the keys of its row data change as well. Therefore, `SPLIT TABLE BY/BETWEEN` statements that are executable in TiDB versions earlier than v5.0 are no longer workable in v5.0 and later versions of TiDB. If you want to split a table with clustered indexes using `SPLIT TABLE BY/BETWEEN`, you need to provide the value of the primary key column, instead of specifying an integer value. See the following example:
+对于具有组合主键或单个非整数主键的表，如果将主键从非聚簇索引更改为聚簇索引，其行数据的键也会改变。因此，在 TiDB v5.0 之前版本中可执行的 `SPLIT TABLE BY/BETWEEN` 语句在 v5.0 及更高版本的 TiDB 中不再适用。如果要使用 `SPLIT TABLE BY/BETWEEN` 拆分具有聚簇索引的表，需要提供主键列的值，而不是指定整数值。请参见以下示例：
 
 ```sql
 mysql> create table t (a int, b varchar(255), primary key(a, b) clustered);
@@ -218,7 +218,7 @@ mysql> split table t by (0, ''), (50000, ''), (100000, '');
 1 row in set (0.01 sec)
 ```
 
-The attribute [`AUTO_RANDOM`](/auto-random.md) can only be used on clustered indexes. Otherwise, TiDB returns the following error:
+属性 [`AUTO_RANDOM`](/auto-random.md) 只能用于聚簇索引。否则，TiDB 会返回以下错误：
 
 ```sql
 mysql> create table t (a bigint primary key nonclustered auto_random);

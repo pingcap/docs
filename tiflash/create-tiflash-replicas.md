@@ -1,201 +1,201 @@
 ---
-title: Create TiFlash Replicas
-summary: Learn how to create TiFlash replicas.
+title: 创建 TiFlash 副本
+summary: 了解如何创建 TiFlash 副本。
 ---
 
-# Create TiFlash Replicas
+# 创建 TiFlash 副本
 
-This document introduces how to create TiFlash replicas for tables and for databases, and set available zones for replica scheduling.
+本文介绍如何为表和数据库创建 TiFlash 副本，以及如何为副本调度设置可用区。
 
-## Create TiFlash replicas for tables
+## 为表创建 TiFlash 副本
 
-After TiFlash is connected to the TiKV cluster, data replication by default does not begin. You can send a DDL statement to TiDB through a MySQL client to create a TiFlash replica for a specific table:
+TiFlash 连接到 TiKV 集群后，默认不会开始数据复制。你可以通过 MySQL 客户端向 TiDB 发送 DDL 语句，为特定表创建 TiFlash 副本：
 
 ```sql
 ALTER TABLE table_name SET TIFLASH REPLICA count;
 ```
 
-The parameter of the above command is described as follows:
+上述命令的参数说明如下：
 
-- `count` indicates the number of replicas. When the value is `0`, the replica is deleted.
+- `count` 表示副本数量。当值为 `0` 时，副本会被删除。
 
-> **Note:**
+> **注意：**
 >
-> For a [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) cluster, the `count` of TiFlash replicas can only be `2`. If you set it to `1`, it will be automatically adjusted to `2` for execution. If you set it to a number larger than 2, you will get an error about the replica count.
+> 对于 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群，TiFlash 副本的 `count` 只能是 `2`。如果你设置为 `1`，它将自动调整为 `2` 执行。如果你设置为大于 2 的数字，你将收到关于副本数量的错误。
 
-If you execute multiple DDL statements on the same table, only the last statement is ensured to take effect. In the following example, two DDL statements are executed on the table `tpch50`, but only the second statement (to delete the replica) takes effect.
+如果你对同一个表执行多个 DDL 语句，只有最后一个语句保证生效。在以下示例中，对表 `tpch50` 执行了两个 DDL 语句，但只有第二个语句（删除副本）生效。
 
-Create two replicas for the table:
+为表创建两个副本：
 
 ```sql
 ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 2;
 ```
 
-Delete the replica:
+删除副本：
 
 ```sql
 ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 ```
 
-**Notes:**
+**注意事项：**
 
-* If the table `t` is replicated to TiFlash through the above DDL statements, the table created using the following statement will also be automatically replicated to TiFlash:
+* 如果表 `t` 通过上述 DDL 语句复制到 TiFlash，使用以下语句创建的表也会自动复制到 TiFlash：
 
     ```sql
     CREATE TABLE table_name like t;
     ```
 
-* For versions earlier than v4.0.6, if you create the TiFlash replica before using TiDB Lightning to import the data, the data import will fail. You must import data to the table before creating the TiFlash replica for the table.
+* 对于早于 v4.0.6 的版本，如果在使用 TiDB Lightning 导入数据之前创建 TiFlash 副本，数据导入将失败。你必须在为表创建 TiFlash 副本之前将数据导入到表中。
 
-* If TiDB and TiDB Lightning are both v4.0.6 or later, no matter a table has TiFlash replica(s) or not, you can import data to that table using TiDB Lightning. Note that this might slow the TiDB Lightning procedure, which depends on the NIC bandwidth on the lightning host, the CPU and disk load of the TiFlash node, and the number of TiFlash replicas.
+* 如果 TiDB 和 TiDB Lightning 都是 v4.0.6 或更高版本，无论表是否有 TiFlash 副本，你都可以使用 TiDB Lightning 向该表导入数据。请注意，这可能会降低 TiDB Lightning 的速度，具体取决于 lightning 主机上的网卡带宽、TiFlash 节点的 CPU 和磁盘负载以及 TiFlash 副本的数量。
 
-* It is recommended that you do not replicate more than 1,000 tables because this lowers the PD scheduling performance. This limit will be removed in later versions.
+* 建议不要复制超过 1,000 个表，因为这会降低 PD 调度性能。此限制将在后续版本中移除。
 
-* In v5.1 and later versions, setting the replicas for the system tables is no longer supported. Before upgrading the cluster, you need to clear the replicas of the relevant system tables. Otherwise, you cannot modify the replica settings of the system tables after you upgrade the cluster to a later version.
+* 在 v5.1 及更高版本中，不再支持为系统表设置副本。在升级集群之前，你需要清除相关系统表的副本。否则，在将集群升级到更高版本后，你将无法修改系统表的副本设置。
 
-* Currently, when you use TiCDC to replicate tables to a downstream TiDB cluster, creating TiFlash replicas for the tables is not supported, which means that TiCDC does not support replicating TiFlash-related DDL statements, such as:
+* 目前，当你使用 TiCDC 将表复制到下游 TiDB 集群时，不支持为表创建 TiFlash 副本，这意味着 TiCDC 不支持复制与 TiFlash 相关的 DDL 语句，例如：
 
     * `ALTER TABLE table_name SET TIFLASH REPLICA count;`
     * `ALTER DATABASE db_name SET TIFLASH REPLICA count;`
 
-### Check replication progress
+### 检查复制进度
 
-You can check the status of the TiFlash replicas of a specific table using the following statement. The table is specified using the `WHERE` clause. If you remove the `WHERE` clause, you will check the replica status of all tables.
+你可以使用以下语句检查特定表的 TiFlash 副本状态。表通过 `WHERE` 子句指定。如果你删除 `WHERE` 子句，将检查所有表的副本状态。
 
 ```sql
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>' and TABLE_NAME = '<table_name>';
 ```
 
-In the result of above statement:
+在上述语句的结果中：
 
-* `AVAILABLE` indicates whether the TiFlash replicas of this table are available or not. `1` means available and `0` means unavailable. Once the replicas become available, this status does not change. If you use DDL statements to modify the number of replicas, the replication status will be recalculated.
-* `PROGRESS` means the progress of the replication. The value is between `0.0` and `1.0`. `1` means at least one replica is replicated.
+* `AVAILABLE` 表示该表的 TiFlash 副本是否可用。`1` 表示可用，`0` 表示不可用。一旦副本变为可用，此状态就不会改变。如果你使用 DDL 语句修改副本数量，复制状态将重新计算。
+* `PROGRESS` 表示复制进度。值在 `0.0` 和 `1.0` 之间。`1` 表示至少复制了一个副本。
 
-## Create TiFlash replicas for databases
+## 为数据库创建 TiFlash 副本
 
-Similar to creating TiFlash replicas for tables, you can send a DDL statement to TiDB through a MySQL client to create a TiFlash replica for all tables in a specific database:
+与为表创建 TiFlash 副本类似，你可以通过 MySQL 客户端向 TiDB 发送 DDL 语句，为特定数据库中的所有表创建 TiFlash 副本：
 
 ```sql
 ALTER DATABASE db_name SET TIFLASH REPLICA count;
 ```
 
-In this statement, `count` indicates the number of replicas. When you set it to `0`, replicas are deleted.
+在此语句中，`count` 表示副本数量。当设置为 `0` 时，副本会被删除。
 
-Examples:
+示例：
 
-- Create two replicas for all tables in the database `tpch50`:
+- 为数据库 `tpch50` 中的所有表创建两个副本：
 
     ```sql
     ALTER DATABASE `tpch50` SET TIFLASH REPLICA 2;
     ```
 
-- Delete TiFlash replicas created for the database `tpch50`:
+- 删除为数据库 `tpch50` 创建的 TiFlash 副本：
 
     ```sql
     ALTER DATABASE `tpch50` SET TIFLASH REPLICA 0;
     ```
 
-> **Note:**
+> **注意：**
 >
-> - This statement actually performs a series of DDL operations, which are resource-intensive. If the statement is interrupted during the execution, executed operations are not rolled back and unexecuted operations do not continue.
+> - 此语句实际上执行一系列 DDL 操作，这些操作会消耗大量资源。如果语句在执行过程中被中断，已执行的操作不会回滚，未执行的操作也不会继续。
 >
-> - After executing the statement, do not set the number of TiFlash replicas or perform DDL operations on this database until **all tables in this database are replicated**. Otherwise, unexpected results might occur, which include:
->     - If you set the number of TiFlash replicas to 2 and then change the number to 1 before all tables in the database are replicated, the final number of TiFlash replicas of all the tables is not necessarily 1 or 2.
->     - After executing the statement, if you create tables in this database before the completion of the statement execution, TiFlash replicas **might or might not** be created for these new tables.
->     - After executing the statement, if you add indexes for tables in the database before the completion of the statement execution, the statement might hang and resume only after the indexes are added.
+> - 执行语句后，在**该数据库中的所有表都复制完成之前**，不要设置 TiFlash 副本数量或对该数据库执行 DDL 操作。否则，可能会出现意外结果，包括：
+>     - 如果你将 TiFlash 副本数量设置为 2，然后在数据库中的所有表复制完成之前将数量更改为 1，所有表的最终 TiFlash 副本数量不一定是 1 或 2。
+>     - 执行语句后，如果你在语句执行完成之前在此数据库中创建表，这些新表**可能会或可能不会**创建 TiFlash 副本。
+>     - 执行语句后，如果你在语句执行完成之前为数据库中的表添加索引，语句可能会挂起，并且只有在添加索引后才会恢复。
 >
-> - If you create tables in this database **after** the completion of the statement execution, TiFlash replicas are not created automatically for these new tables.
+> - 如果你在语句执行完成**之后**在此数据库中创建表，不会自动为这些新表创建 TiFlash 副本。
 >
-> - This statement skips system tables, views, temporary tables, and tables with character sets not supported by TiFlash.
+> - 此语句会跳过系统表、视图、临时表和具有 TiFlash 不支持的字符集的表。
 
-> - You can control the number of tables allowed to remain unavailable during execution by setting the [`tidb_batch_pending_tiflash_count`](/system-variables.md#tidb_batch_pending_tiflash_count-new-in-v60) system variable. Lowering this value helps reduce the pressure on the cluster during replication. Note that this limit is not real-time, so it is still possible for the number of unavailable tables to exceed the limit after the setting is applied.
+> - 你可以通过设置 [`tidb_batch_pending_tiflash_count`](/system-variables.md#tidb_batch_pending_tiflash_count-new-in-v60) 系统变量来控制执行期间允许保持不可用的表的数量。降低此值有助于减少复制期间对集群的压力。请注意，此限制不是实时的，因此在应用设置后，不可用表的数量仍可能超过限制。
 
-### Check replication progress
+### 检查复制进度
 
-Similar to creating TiFlash replicas for tables, successful execution of the DDL statement does not mean the completion of replication. You can execute the following SQL statement to check the progress of replication on target tables:
+与为表创建 TiFlash 副本类似，成功执行 DDL 语句并不意味着复制完成。你可以执行以下 SQL 语句来检查目标表的复制进度：
 
 ```sql
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>';
 ```
 
-To check tables without TiFlash replicas in the database, you can execute the following SQL statement:
+要检查数据库中没有 TiFlash 副本的表，你可以执行以下 SQL 语句：
 
 ```sql
 SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>" and TABLE_NAME not in (SELECT TABLE_NAME FROM information_schema.tiflash_replica where TABLE_SCHEMA = "<db_name>");
 ```
 
-## Speed up TiFlash replication
+## 加速 TiFlash 复制
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注意：**
 >
-> This section is not applicable to TiDB Cloud.
+> 本节不适用于 TiDB Cloud。
 
 </CustomContent>
 
-Before TiFlash replicas are added, each TiKV instance performs a full table scan and sends the scanned data to TiFlash as a "snapshot" to create replicas. By default, TiFlash replicas are added slowly with fewer resources usage in order to minimize the impact on the online service. If there are spare CPU and disk IO resources in your TiKV and TiFlash nodes, you can accelerate TiFlash replication by performing the following steps.
+在添加 TiFlash 副本之前，每个 TiKV 实例都会执行全表扫描，并将扫描的数据作为"快照"发送给 TiFlash 以创建副本。默认情况下，TiFlash 副本添加速度较慢，使用较少的资源，以最小化对在线服务的影响。如果你的 TiKV 和 TiFlash 节点有空闲的 CPU 和磁盘 IO 资源，你可以通过执行以下步骤来加速 TiFlash 复制。
 
-1. Temporarily increase the snapshot write speed limit for each TiKV and TiFlash instance by using the [Dynamic Config SQL statement](https://docs.pingcap.com/tidb/stable/dynamic-config):
+1. 使用[动态配置 SQL 语句](https://docs.pingcap.com/tidb/stable/dynamic-config)临时增加每个 TiKV 和 TiFlash 实例的快照写入速度限制：
 
     ```sql
-    -- The default value for both configurations are 100MiB, i.e. the maximum disk bandwidth used for writing snapshots is no more than 100MiB/s.
+    -- 这两个配置的默认值都是 100MiB，即用于写入快照的最大磁盘带宽不超过 100MiB/s。
     SET CONFIG tikv `server.snap-io-max-bytes-per-sec` = '300MiB';
     SET CONFIG tiflash `raftstore-proxy.server.snap-io-max-bytes-per-sec` = '300MiB';
     ```
 
-    After executing these SQL statements, the configuration changes take effect immediately without restarting the cluster. However, since the replication speed is still restricted by the PD limit globally, you cannot observe the acceleration for now.
+    执行这些 SQL 语句后，配置更改立即生效，无需重启集群。但是，由于复制速度仍然受到 PD 全局限制，你现在还无法观察到加速效果。
 
-2. Use [PD Control](https://docs.pingcap.com/tidb/stable/pd-control) to progressively ease the new replica speed limit.
+2. 使用 [PD Control](https://docs.pingcap.com/tidb/stable/pd-control) 逐步放宽新副本速度限制。
 
-    The default new replica speed limit is 30, which means, approximately 30 Regions add TiFlash replicas every minute. Executing the following command will adjust the limit to 60 for all TiFlash instances, which doubles the original speed:
+    默认的新副本速度限制是 30，这意味着每分钟大约有 30 个 Region 添加 TiFlash 副本。执行以下命令将所有 TiFlash 实例的限制调整为 60，这将使原始速度翻倍：
 
     ```shell
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 add-peer
     ```
 
-    > In the preceding command, you need to replace `v<CLUSTER_VERSION>` with the actual cluster version, such as `v8.1.2` and `<PD_ADDRESS>:2379` with the address of any PD node. For example:
+    > 在上述命令中，你需要将 `v<CLUSTER_VERSION>` 替换为实际的集群版本，例如 `v8.1.2`，并将 `<PD_ADDRESS>:2379` 替换为任何 PD 节点的地址。例如：
     >
     > ```shell
     > tiup ctl:v8.1.2 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
     > ```
 
-    Within a few minutes, you will observe a significant increase in CPU and disk IO resource usage of the TiFlash nodes, and TiFlash should create replicas faster. At the same time, the TiKV nodes' CPU and disk IO resource usage increases as well.
+    几分钟内，你将观察到 TiFlash 节点的 CPU 和磁盘 IO 资源使用率显著增加，TiFlash 应该会更快地创建副本。同时，TiKV 节点的 CPU 和磁盘 IO 资源使用率也会增加。
 
-    If the TiKV and TiFlash nodes still have spare resources at this point and the latency of your online service does not increase significantly, you can further ease the limit, for example, triple the original speed:
+    如果此时 TiKV 和 TiFlash 节点仍有空闲资源，并且你的在线服务延迟没有显著增加，你可以进一步放宽限制，例如，将原始速度提高三倍：
 
     ```shell
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 90 add-peer
     ```
 
-3. After the TiFlash replication is complete, revert to the default configuration to reduce the impact on online services.
+3. TiFlash 复制完成后，恢复默认配置以减少对在线服务的影响。
 
-    Execute the following PD Control command to restore the default new replica speed limit:
+    执行以下 PD Control 命令恢复默认的新副本速度限制：
 
     ```shell
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 30 add-peer
     ```
 
-    Execute the following SQL statements to restore the default snapshot write speed limit:
+    执行以下 SQL 语句恢复默认的快照写入速度限制：
 
     ```sql
     SET CONFIG tikv `server.snap-io-max-bytes-per-sec` = '100MiB';
     SET CONFIG tiflash `raftstore-proxy.server.snap-io-max-bytes-per-sec` = '100MiB';
     ```
 
-## Set available zones
+## 设置可用区
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注意：**
 >
-> This section is not applicable to TiDB Cloud.
+> 本节不适用于 TiDB Cloud。
 
 </CustomContent>
 
-When configuring replicas, if you need to distribute TiFlash replicas to multiple data centers for disaster recovery, you can configure available zones by following the steps below:
+在配置副本时，如果你需要将 TiFlash 副本分布到多个数据中心以实现灾难恢复，可以按照以下步骤配置可用区：
 
-1. Specify labels for TiFlash nodes in the cluster configuration file.
+1. 在集群配置文件中为 TiFlash 节点指定标签。
 
     ```
     tiflash_servers:
@@ -218,21 +218,21 @@ When configuring replicas, if you need to distribute TiFlash replicas to multipl
             zone: "z2"
     ```
 
-    Note that the `flash.proxy.labels` configuration in earlier versions cannot handle special characters in the available zone name correctly. It is recommended to use the `server.labels` in `learner_config` to configure the name of an available zone.
+    请注意，早期版本中的 `flash.proxy.labels` 配置无法正确处理可用区名称中的特殊字符。建议使用 `learner_config` 中的 `server.labels` 来配置可用区名称。
 
-2. After starting a cluster, specify the labels when creating replicas.
+2. 启动集群后，在创建副本时指定标签。
 
     ```sql
     ALTER TABLE table_name SET TIFLASH REPLICA count LOCATION LABELS location_labels;
     ```
 
-    For example:
+    例如：
 
     ```sql
     ALTER TABLE t SET TIFLASH REPLICA 2 LOCATION LABELS "zone";
     ```
 
-3. PD schedules the replicas based on the labels. In this example, PD respectively schedules two replicas of the table `t` to two available zones. You can use pd-ctl to view the scheduling.
+3. PD 根据标签调度副本。在本例中，PD 分别将表 `t` 的两个副本调度到两个可用区。你可以使用 pd-ctl 查看调度情况。
 
     ```shell
     > tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store
@@ -265,8 +265,8 @@ When configuring replicas, if you need to distribute TiFlash replicas to multipl
 
 <CustomContent platform="tidb">
 
-For more information about scheduling replicas by using labels, see [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md), [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md), and [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md).
+有关使用标签调度副本的更多信息，请参见[通过拓扑 Label 进行副本调度](/schedule-replicas-by-topology-labels.md)、[同城多数据中心部署](/multi-data-centers-in-one-city-deployment.md)和[两地三中心部署](/three-data-centers-in-two-cities-deployment.md)。
 
-TiFlash supports configuring the replica selection strategy for different zones. For more information, see [`tiflash_replica_read`](/system-variables.md#tiflash_replica_read-new-in-v730).
+TiFlash 支持为不同区域配置副本选择策略。更多信息，请参见 [`tiflash_replica_read`](/system-variables.md#tiflash_replica_read-new-in-v730)。
 
 </CustomContent>

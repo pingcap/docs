@@ -1,16 +1,16 @@
 ---
-title: SQL Physical Optimization
-summary: Physical optimization is a cost-based process that creates a physical execution plan for the logical execution plan. The optimizer selects the best physical implementation for each operator based on data statistics, time complexity, and resource consumption. This includes index selection, statistics collection, using the right index, distinct keyword optimization, and cost model for optimal execution plan selection.
+title: SQL 物理优化
+summary: 物理优化是一个基于成本的过程，用于为逻辑执行计划创建物理执行计划。优化器根据数据统计信息、时间复杂度和资源消耗为每个算子选择最佳的物理实现。这包括索引选择、统计信息收集、使用正确的索引、distinct 关键字优化，以及用于选择最优执行计划的成本模型。
 ---
 
-# SQL Physical Optimization
+# SQL 物理优化
 
-Physical optimization is cost-based optimization, which makes a physical execution plan for the logical execution plan generated in the previous stage. In this stage, the optimizer selects a specific physical implementation for each operator in the logical execution plan. Different physical implementations of logical operators have different time complexity, resource consumption and physical properties. In this process, the optimizer determines the cost of different physical implementations based on the statistics of the data, and selects the physical execution plan with the smallest overall cost.
+物理优化是基于成本的优化，它为上一阶段生成的逻辑执行计划制定物理执行计划。在这个阶段，优化器为逻辑执行计划中的每个算子选择特定的物理实现。逻辑算子的不同物理实现具有不同的时间复杂度、资源消耗和物理属性。在这个过程中，优化器根据数据的统计信息确定不同物理实现的成本，并选择总体成本最小的物理执行计划。
 
-[Understand the Query Execution Plan](/explain-overview.md) has introduced some physical operators. This chapter focuses on the following aspects:
+[理解查询执行计划](/explain-overview.md)已经介绍了一些物理算子。本章重点关注以下几个方面：
 
-- In [Index Selection](/choose-index.md), you will learn how to select the optimal index to access tables when TiDB has multiple indexes on a table.
-- In [Introduction to Statistics](/statistics.md), you will learn what statistics TiDB collects to obtain the data distribution of a table.
-- [Wrong Index Solution](/wrong-index-solution.md) introduces how to use the right index when you find the index is selected wrongly.
-- [Distinct Optimization](/agg-distinct-optimization.md) introduces an optimization related to the `DISTINCT` keyword during physical optimization. In this section, you will learn its advantages and disadvantages and how to use it.
-- [Cost Model](/cost-model.md) introduces how to choose a optimal execution plan based on the cost model during physical optimization.
+- 在[索引选择](/choose-index.md)中，你将了解当 TiDB 在表上有多个索引时，如何选择最优索引来访问表。
+- 在[统计信息简介](/statistics.md)中，你将了解 TiDB 收集哪些统计信息来获取表的数据分布。
+- [错误索引解决方案](/wrong-index-solution.md)介绍了当发现索引选择错误时如何使用正确的索引。
+- [Distinct 优化](/agg-distinct-optimization.md)介绍了物理优化过程中与 `DISTINCT` 关键字相关的优化。在这一节中，你将了解它的优缺点以及如何使用它。
+- [成本模型](/cost-model.md)介绍了在物理优化过程中如何基于成本模型选择最优执行计划。

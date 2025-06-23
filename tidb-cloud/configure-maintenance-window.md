@@ -1,95 +1,95 @@
 ---
-title: Configure Maintenance Window
-summary: Learn how to configure maintenance window for your cluster.
+title: 配置维护时间窗口
+summary: 了解如何为你的集群配置维护时间窗口。
 ---
 
-# Configure Maintenance Window
+# 配置维护时间窗口
 
-A maintenance window is a designated timeframe during which planned maintenance tasks, such as operating system updates, security patches, and infrastructure upgrades, are performed automatically to ensure the reliability, security, and performance of the TiDB Cloud service.
+维护时间窗口是一个指定的时间段，在此期间自动执行计划内维护任务，如操作系统更新、安全补丁和基础设施升级，以确保 TiDB Cloud 服务的可靠性、安全性和性能。
 
-During a maintenance window, the maintenance is executed on TiDB Cloud Dedicated clusters one by one so the overall impact is minimal. Although there might be temporary connection disruptions or QPS fluctuations, the clusters remain available, and the existing data import, backup, restore, migration, and replication tasks can still run normally.
+在维护时间窗口期间，维护工作会逐个在 TiDB Cloud Dedicated 集群上执行，因此整体影响最小。虽然可能会出现临时的连接中断或 QPS 波动，但集群仍然可用，现有的数据导入、备份、恢复、迁移和复制任务仍可正常运行。
 
-By configuring the maintenance window, you can easily schedule and manage maintenance tasks to minimize the maintenance impact. For example, you can set the start time of the maintenance window to avoid peak hours of your application workloads.
+通过配置维护时间窗口，你可以轻松安排和管理维护任务，以最大限度地减少维护影响。例如，你可以将维护时间窗口的开始时间设置为避开应用程序工作负载的高峰时段。
 
-> **Note:**
+> **注意：**
 >
-> The maintenance window feature is only available for [TiDB Cloud Dedicated clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
+> 维护时间窗口功能仅适用于 [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)。
 
-## Allowed and disallowed operations during a maintenance window
+## 维护时间窗口期间允许和不允许的操作
 
-During a maintenance window, some operations are allowed, while some are not.
+在维护时间窗口期间，某些操作是允许的，而某些操作是不允许的。
 
-- Allowed operations:
+- 允许的操作：
 
-    - SQL operations
-    - Create clusters
-    - Delete clusters
-    - Create backup tasks
-    - Restore clusters
-    - Access cluster pages
+    - SQL 操作
+    - 创建集群
+    - 删除集群
+    - 创建备份任务
+    - 恢复集群
+    - 访问集群页面
 
-- Disallowed operations:
+- 不允许的操作：
 
-    - Modify, pause, or resume clusters
-    - Change security settings in the TiDB Cloud console
-    - Create private links or configure VPC peering
-    - Create import tasks, migration jobs, or changefeeds
-    - Scale specifications of migration jobs or changefeeds
+    - 修改、暂停或恢复集群
+    - 在 TiDB Cloud 控制台中更改安全设置
+    - 创建私有链接或配置 VPC 对等连接
+    - 创建导入任务、迁移任务或变更数据捕获任务
+    - 调整迁移任务或变更数据捕获任务的规格
 
-## Get notifications for maintenance windows
+## 获取维护时间窗口通知
 
-To avoid potential disruptions, it is important to be aware of the maintenance schedules and plan your operations accordingly.
+为了避免潜在的中断，了解维护计划并相应地规划你的操作很重要。
 
-For every maintenance window, TiDB Cloud sends four email notifications to all project members at the following time points:
+对于每个维护时间窗口，TiDB Cloud 会在以下时间点向所有项目成员发送四封电子邮件通知：
 
-- Two weeks before a maintenance window starts (excluding urgent maintenance tasks)
-- 72 hours before a maintenance window starts
-- The time when a maintenance window is started
-- The time when a maintenance window is completed
+- 维护时间窗口开始前两周（不包括紧急维护任务）
+- 维护时间窗口开始前 72 小时
+- 维护时间窗口开始时
+- 维护时间窗口完成时
 
-## View and configure maintenance windows
+## 查看和配置维护时间窗口
 
-Regular maintenance ensures that essential updates are performed to safeguard TiDB Cloud from security threats, performance issues, and unreliability. Therefore, the maintenance window is enabled by default and cannot be disabled.
+定期维护确保执行必要的更新，以保护 TiDB Cloud 免受安全威胁、性能问题和不可靠性的影响。因此，维护时间窗口默认启用且无法禁用。
 
-> **Note:**
+> **注意：**
 >
-> - For the default project automatically created when you first sign up for TiDB Cloud, the maintenance window starts at 03:00 AM every Wednesday (based on the time zone of your TiDB Cloud organization).
-> - For new projects that you create, you can set a custom start time for the maintenance window during project setup.
+> - 对于你首次注册 TiDB Cloud 时自动创建的默认项目，维护时间窗口在每周三 03:00 AM 开始（基于你的 TiDB Cloud 组织的时区）。
+> - 对于你创建的新项目，你可以在项目设置期间为维护时间窗口设置自定义开始时间。
 
-You can modify the start time to your preferred time or reschedule maintenance tasks until the deadline as follows:
+你可以按照以下步骤将开始时间修改为你的首选时间或在截止日期前重新安排维护任务：
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Project Settings** > **Maintenance**.
-3. On the **Maintenance** page, check the maintenance information.
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，使用左上角的组合框切换到你的目标项目。
+2. 在左侧导航栏中，点击**项目设置** > **维护**。
+3. 在**维护**页面上，查看维护信息。
 
-     - If any maintenance tasks are displayed, check the descriptions, scheduled start time, and deadline. The maintenance tasks will start at the designated time.
+     - 如果显示任何维护任务，请查看描述、计划开始时间和截止日期。维护任务将在指定时间开始。
 
-     - If there is no maintenance data, it means no maintenance task is scheduled recently.
+     - 如果没有维护数据，则表示最近没有计划维护任务。
 
-4. (Optional) Click **Maintenance Window Setting** to modify the start time of the maintenance window. Note that the maintenance will be performed at the specified start time only if there is a maintenance window planned for that week.
+4. （可选）点击**维护时间窗口设置**以修改维护时间窗口的开始时间。请注意，只有在该周计划有维护时间窗口时，才会在指定的开始时间执行维护。
 
-5. To reschedule a specific maintenance task, click **...** > **Reschedule** in the **Action** column, and choose a new time before the deadline.
+5. 要重新安排特定维护任务，请在**操作**列中点击 **...** > **重新安排**，并在截止日期前选择新时间。
 
-    If you need to reschedule the maintenance task beyond the deadline, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md#tidb-cloud-support) for assistance.
+    如果你需要将维护任务重新安排到截止日期之后，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md#tidb-cloud-support)寻求帮助。
 
-## FAQs
+## 常见问题
 
-- What are maintenance tasks?
+- 什么是维护任务？
 
-    Maintenance tasks typically include operating system updates, security patches, and infrastructure upgrades.
+    维护任务通常包括操作系统更新、安全补丁和基础设施升级。
 
-- Can I disable a maintenance window?
+- 我可以禁用维护时间窗口吗？
 
-    No. The maintenance window is enabled by default and cannot be disabled. You can modify the start time of the maintenance window or reschedule a maintenance task until the deadline. For more information, see [View and configure maintenance windows](#view-and-configure-maintenance-windows).
+    不可以。维护时间窗口默认启用且无法禁用。你可以修改维护时间窗口的开始时间或在截止日期前重新安排维护任务。更多信息，请参见[查看和配置维护时间窗口](#查看和配置维护时间窗口)。
 
-- How long does a maintenance window last?
+- 维护时间窗口持续多长时间？
 
-    It depends. For each project, maintenance is executed on eligible TiDB clusters one by one. The duration of maintenance varies depending on the number of clusters, cluster data size, and the maintenance tasks to be performed.
+    这取决于具体情况。对于每个项目，维护会逐个在符合条件的 TiDB 集群上执行。维护持续时间因集群数量、集群数据大小和要执行的维护任务而异。
 
-- Will maintenance tasks be performed on clusters in any status?
+- 维护任务会在任何状态的集群上执行吗？
 
-    No. TiDB Cloud checks the cluster status before performing a maintenance task on a cluster.
+    不会。TiDB Cloud 在对集群执行维护任务之前会检查集群状态。
 
-    - If the cluster is in the **Creating** or **Paused** status, maintenance tasks are not required.
-    - If the cluster is running an automatic or manual backup, the maintenance will be delayed and triggered until the current backup is successfully completed. Note that for clusters with large data volumes, the backup process might take a long time, such as 12 hours. To minimize the impact on the clusters, it is recommended to carefully set the start time for backups and the maintenance window.
-    - If the cluster is in any other status, the maintenance tasks will start as scheduled.
+    - 如果集群处于**创建中**或**已暂停**状态，则不需要维护任务。
+    - 如果集群正在运行自动或手动备份，维护将延迟并等待当前备份成功完成后触发。请注意，对于数据量大的集群，备份过程可能需要很长时间，例如 12 小时。为了最大限度地减少对集群的影响，建议仔细设置备份和维护时间窗口的开始时间。
+    - 如果集群处于任何其他状态，维护任务将按计划开始。

@@ -1,13 +1,13 @@
 ---
-title: SHOW [GLOBAL|SESSION] VARIABLES | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW [GLOBAL|SESSION] VARIABLES for the TiDB database.
+title: SHOW [GLOBAL|SESSION] VARIABLES | TiDB SQL 语句参考
+summary: TiDB 数据库中 SHOW [GLOBAL|SESSION] VARIABLES 的使用概述。
 ---
 
 # SHOW [GLOBAL|SESSION] VARIABLES
 
-This statement shows a list of variables for the scope of either `GLOBAL` or `SESSION`. If no scope is specified, the default scope of `SESSION` will apply.
+此语句显示 `GLOBAL` 或 `SESSION` 作用域的变量列表。如果未指定作用域，则默认使用 `SESSION` 作用域。
 
-## Synopsis
+## 语法图
 
 ```ebnf+diagram
 ShowVariablesStmt ::=
@@ -18,9 +18,9 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## Examples
+## 示例
 
-List all TiDB specific variables. For detailed description, refer to [System Variables](/system-variables.md).
+列出所有 TiDB 特定的变量。有关详细说明，请参考[系统变量](/system-variables.md)。
 
 ```sql
 mysql> SHOW GLOBAL VARIABLES LIKE 'tidb%';
@@ -166,10 +166,10 @@ mysql> SHOW VARIABLES WHERE Value=300;
 7 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `SHOW [GLOBAL|SESSION] VARIABLES` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中的 `SHOW [GLOBAL|SESSION] VARIABLES` 语句与 MySQL 完全兼容。如果发现任何兼容性差异，请[报告问题](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 另请参阅
 
 * [`SET [GLOBAL|SESSION]`](/sql-statements/sql-statement-set-variable.md)

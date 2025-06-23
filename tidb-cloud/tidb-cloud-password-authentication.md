@@ -1,123 +1,123 @@
 ---
-title: Password Authentication
-summary: Learn how to manage passwords and enable multi-factor authentication (MFA) in the TiDB Cloud console.
+title: 密码认证
+summary: 了解如何在 TiDB Cloud 控制台中管理密码和启用多因素认证（MFA）。
 ---
 
-# Password Authentication
+# 密码认证
 
-This document describes how to manage passwords and enable multi-factor authentication (MFA) in the TiDB Cloud console. The document is only applicable to users who [sign up](https://tidbcloud.com/free-trial) for TiDB Cloud with emails and passwords.
+本文档介绍如何在 TiDB Cloud 控制台中管理密码和启用多因素认证（MFA）。本文档仅适用于使用邮箱和密码[注册](https://tidbcloud.com/free-trial) TiDB Cloud 的用户。
 
-## Sign up
+## 注册
 
-You can either [sign up](https://tidbcloud.com/free-trial) for TiDB Cloud with email and password, or choose your Google, GitHub, or Microsoft account for single sign-on (SSO) to TiDB Cloud.
+你可以使用邮箱和密码[注册](https://tidbcloud.com/free-trial) TiDB Cloud，或选择使用 Google、GitHub 或 Microsoft 账号进行单点登录（SSO）。
 
-- If you sign up for TiDB Cloud with email and password, you can manage your password according to this document.
-- If you choose Google, GitHub, or Microsoft SSO to TiDB Cloud, your password is managed by your chosen platform and you cannot change it using the TiDB Cloud console.
+- 如果你使用邮箱和密码注册 TiDB Cloud，可以按照本文档管理密码。
+- 如果你选择使用 Google、GitHub 或 Microsoft SSO 登录 TiDB Cloud，你的密码由所选平台管理，无法使用 TiDB Cloud 控制台更改。
 
-To sign up for a TiDB Cloud account with email and password, take the following steps:
+要使用邮箱和密码注册 TiDB Cloud 账号，请执行以下步骤：
 
-1. Go to the TiDB Cloud [sign up](https://tidbcloud.com/free-trial) page and fill in the registration information.
+1. 访问 TiDB Cloud [注册](https://tidbcloud.com/free-trial)页面并填写注册信息。
 
-2. Read Privacy Policy and Services Agreement, and then select **I agree to the Privacy Policy and Services Agreement**.
+2. 阅读隐私政策和服务协议，然后选择**我同意隐私政策和服务协议**。
 
-3. Click **Sign up**.
+3. 点击**注册**。
 
-You will receive a verification email for TiDB Cloud. To complete the whole registration process, check your email box and confirm the registration.
+你将收到 TiDB Cloud 的验证邮件。要完成整个注册过程，请检查你的邮箱并确认注册。
 
-## Sign in or sign out
+## 登录或登出
 
-### Sign in
+### 登录
 
-To log into TiDB Cloud using email and password, take the following steps:
+要使用邮箱和密码登录 TiDB Cloud，请执行以下步骤：
 
-1. Go to the TiDB Cloud [login](https://tidbcloud.com/) page.
+1. 访问 TiDB Cloud [登录](https://tidbcloud.com/)页面。
 
-2. Fill in your email and password.
+2. 填写你的邮箱和密码。
 
-3. Click **Sign In**.
+3. 点击**登录**。
 
-If the login is successful, you will be directed to the TiDB Cloud console.
+如果登录成功，你将被引导至 TiDB Cloud 控制台。
 
-### Sign out
+### 登出
 
-In the lower-left corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-account-settings" /> and select **Logout**.
+在 TiDB Cloud 控制台左下角，点击 <MDSvgIcon name="icon-top-account-settings" /> 并选择**退出登录**。
 
-## Password policy
+## 密码策略
 
-TiDB Cloud sets a default password policy for registered users. If your password does not meet the policy, you will get a prompt when you set the password.
+TiDB Cloud 为注册用户设置了默认密码策略。如果你的密码不符合策略要求，在设置密码时会收到提示。
 
-The default password policy is as follows:
+默认密码策略如下：
 
-- At least 8 characters in length.
-- At least 1 uppercase letter (A-Z).
-- At least 1 lowercase letter (a-z).
-- At least 1 number (0-9).
-- A new password must not be the same as any of the previous four passwords.
+- 至少 8 个字符长度。
+- 至少包含 1 个大写字母（A-Z）。
+- 至少包含 1 个小写字母（a-z）。
+- 至少包含 1 个数字（0-9）。
+- 新密码不能与前四个密码相同。
 
-## Reset a password
+## 重置密码
 
-> **Note:**
+> **注意：**
 >
-> This section is only applicable to TiDB Cloud registration with email and password. If you sign up for TiDB Cloud with Google SSO or GitHub SSO, your password is managed by Google or GitHub and you cannot change it using the TiDB Cloud console.
+> 本节仅适用于使用邮箱和密码注册的 TiDB Cloud 用户。如果你使用 Google SSO 或 GitHub SSO 注册 TiDB Cloud，你的密码由 Google 或 GitHub 管理，无法使用 TiDB Cloud 控制台更改。
 
-If you forget your password, you can reset it by email as follows:
+如果你忘记了密码，可以通过邮箱重置密码，步骤如下：
 
-1. Go to the TiDB Cloud [login](https://tidbcloud.com/) page.
+1. 访问 TiDB Cloud [登录](https://tidbcloud.com/)页面。
 
-2. Click **Forgot password**, and then check your email for the link to reset the password.
+2. 点击**忘记密码**，然后检查你的邮箱获取重置密码的链接。
 
-## Change a password
+## 更改密码
 
-> **Note:**
+> **注意：**
 >
-> If you sign up for TiDB Cloud with email and password, it is recommended that you reset your password every 90 days. Otherwise, you will get a password expiration reminder to change your password when you log in to TiDB Cloud.
+> 如果你使用邮箱和密码注册 TiDB Cloud，建议每 90 天重置一次密码。否则，当你登录 TiDB Cloud 时，会收到密码过期提醒，提示你更改密码。
 
-1. Click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner of the TiDB Cloud console.
+1. 点击 TiDB Cloud 控制台左下角的 <MDSvgIcon name="icon-top-account-settings" />。
 
-2. Click **Account Settings**.
+2. 点击**账号设置**。
 
-3. In the **Password** section, click **Change Password**, and then check your email for TiDB Cloud to reset the password.
+3. 在**密码**部分，点击**更改密码**，然后检查你的邮箱获取 TiDB Cloud 重置密码的链接。
 
-## Manage multi-factor authentication (optional)
+## 管理多因素认证（可选）
 
-> **Note:**
+> **注意：**
 >
-> - This section applies only when you [sign up](https://tidbcloud.com/free-trial) for TiDB Cloud with emails and passwords. If you sign up for TiDB Cloud with Google, GitHub, or Microsoft SSO, you can enable MFA on your chosen identity management platform.
-> - If you have enabled TiDB Cloud MFA in an SSO login scenario, migrate your MFA management to your SSO identity management platform before **September 30, 2025**, to ensure account security.
+> - 本节仅适用于使用邮箱和密码[注册](https://tidbcloud.com/free-trial) TiDB Cloud 的用户。如果你使用 Google、GitHub 或 Microsoft SSO 注册 TiDB Cloud，你可以在所选身份管理平台上启用 MFA。
+> - 如果你在 SSO 登录场景下启用了 TiDB Cloud MFA，请在 **2025 年 9 月 30 日**之前将 MFA 管理迁移到你的 SSO 身份管理平台，以确保账号安全。
 
-Multi-factor authentication (MFA) adds additional security by requiring an Authenticator app to generate a one-time verification code for login. When you log in, TiDB Cloud verifies both your password and the MFA verification code. You can use any Authenticator app from the iOS or Android App Store to generate this password, such as Google Authenticator and Authy.
+多因素认证（MFA）通过要求使用认证器应用程序生成一次性验证码来增加额外的安全性。登录时，TiDB Cloud 会同时验证你的密码和 MFA 验证码。你可以使用 iOS 或 Android 应用商店中的任何认证器应用程序生成此密码，例如 Google Authenticator 和 Authy。
 
-### Enable MFA
+### 启用 MFA
 
-1. Click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner of the TiDB Cloud console.
+1. 点击 TiDB Cloud 控制台左下角的 <MDSvgIcon name="icon-top-account-settings" />。
 
-2. Click **Account Settings**.
+2. 点击**账号设置**。
 
-3. In the **Multi-Factor Authentication** section, click **Enable**.
+3. 在**多因素认证**部分，点击**启用**。
 
-4. Enter your account password to confirm your identity.
+4. 输入你的账号密码以确认身份。
 
-5. In the **Set Up Authenticator App** section, use your authenticator app to scan the QR code and associate your MFA device.
+5. 在**设置认证器应用程序**部分，使用认证器应用程序扫描二维码并关联你的 MFA 设备。
 
-6. Enter the authentication code generated by your app to complete the MFA device association.
+6. 输入应用程序生成的认证码以完成 MFA 设备关联。
 
-7. Save the one-time recovery code, which helps you authenticate if your MFA device is unavailable.
+7. 保存一次性恢复码，当你的 MFA 设备不可用时，可以使用该恢复码进行认证。
 
-> **Note:**
+> **注意：**
 >
-> - You need to store the recovery code securely to maintain account security.
-> - If you use the recovery code for MFA verification during login, the system automatically generates a new recovery code after successful verification.
+> - 你需要安全地存储恢复码以维护账号安全。
+> - 如果你在登录时使用恢复码进行 MFA 验证，系统会在验证成功后自动生成新的恢复码。
 
-### Disable MFA
+### 禁用 MFA
 
-1. Click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner of the TiDB Cloud console.
+1. 点击 TiDB Cloud 控制台左下角的 <MDSvgIcon name="icon-top-account-settings" />。
 
-2. Click **Account Settings**.
+2. 点击**账号设置**。
 
-3. In the **Multi-Factor Authentication** section, click **Disable**.
+3. 在**多因素认证**部分，点击**禁用**。
 
-4. Enter your account password and MFA authentication code to confirm the operation.
+4. 输入你的账号密码和 MFA 认证码以确认操作。
 
-> **Note:**
+> **注意：**
 >
-> Disabling MFA reduces the security of your account. Proceed with caution.
+> 禁用 MFA 会降低你的账号安全性。请谨慎操作。

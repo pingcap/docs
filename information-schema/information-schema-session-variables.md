@@ -1,18 +1,18 @@
 ---
 title: SESSION_VARIABLES
-summary: Learn the `SESSION_VARIABLES` INFORMATION_SCHEMA table.
+summary: 了解 `SESSION_VARIABLES` INFORMATION_SCHEMA 表。
 ---
 
 # SESSION_VARIABLES
 
-The `SESSION_VARIABLES` table provides information about session variables. The table data is similar to the result of the [`SHOW SESSION VARIABLES`](/sql-statements/sql-statement-show-variables.md) statement.
+`SESSION_VARIABLES` 表提供了会话变量的相关信息。该表的数据类似于 [`SHOW SESSION VARIABLES`](/sql-statements/sql-statement-show-variables.md) 语句的结果。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC SESSION_VARIABLES;
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 +----------------+---------------+------+------+---------+-------+
@@ -24,13 +24,13 @@ The output is as follows:
 2 rows in set (0.00 sec)
 ```
 
-Query the first 10 rows of the `SESSION_VARIABLES` table:
+查询 `SESSION_VARIABLES` 表的前 10 行：
 
 ```sql
 SELECT * FROM SESSION_VARIABLES ORDER BY variable_name LIMIT 10;
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 +-----------------------------------+------------------+
@@ -50,7 +50,7 @@ The output is as follows:
 10 rows in set (0.00 sec)
 ```
 
-The description of columns in the `SESSION_VARIABLES` table is as follows:
+`SESSION_VARIABLES` 表中各列的描述如下：
 
-* `VARIABLE_NAME`: The name of the session-level variable in the database.
-* `VARIABLE_VALUE`: The value of the session-level variable in the database.
+* `VARIABLE_NAME`：数据库中会话级变量的名称。
+* `VARIABLE_VALUE`：数据库中会话级变量的值。

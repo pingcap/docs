@@ -1,136 +1,136 @@
 ---
-title: mysql Schema
-summary: Learn about the TiDB system tables.
+title: mysql 系统库
+summary: 了解 TiDB 系统表。
 ---
 
-# `mysql` Schema
+# `mysql` 系统库
 
-The `mysql` schema contains TiDB system tables. The design is similar to the `mysql` schema in MySQL, where tables such as `mysql.user` can be edited directly. It also contains a number of tables which are extensions to MySQL.
+`mysql` 系统库包含 TiDB 的系统表。其设计类似于 MySQL 中的 `mysql` 系统库，可以直接编辑如 `mysql.user` 等表。它还包含了一些 MySQL 的扩展表。
 
-> **Note:**
+> **注意：**
 >
-> In most scenarios, it is not recommended to change the content of system tables directly using `INSERT`, `UPDATE`, or `DELETE`. Instead, use statements such as [`CREATE USER`](/sql-statements/sql-statement-create-user.md), [`ALTER USER`](/sql-statements/sql-statement-alter-user.md), [`DROP USER`](/sql-statements/sql-statement-drop-user.md), [`GRANT`](/sql-statements/sql-statement-grant-privileges.md), [`REVOKE`](/sql-statements/sql-statement-revoke-privileges.md), and [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md) to manage users and privileges. If direct modification of system tables is unavoidable, use [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md) to make the changes take effect.
+> 在大多数情况下，不建议使用 `INSERT`、`UPDATE` 或 `DELETE` 直接修改系统表的内容。相反，应使用 [`CREATE USER`](/sql-statements/sql-statement-create-user.md)、[`ALTER USER`](/sql-statements/sql-statement-alter-user.md)、[`DROP USER`](/sql-statements/sql-statement-drop-user.md)、[`GRANT`](/sql-statements/sql-statement-grant-privileges.md)、[`REVOKE`](/sql-statements/sql-statement-revoke-privileges.md) 和 [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md) 等语句来管理用户和权限。如果必须直接修改系统表，请使用 [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md) 使更改生效。
 
-## Grant system tables
+## 授权系统表
 
-These system tables contain grant information about user accounts and their privileges:
+这些系统表包含用户账户及其权限的授权信息：
 
-- [`user`](/mysql-schema/mysql-schema-user.md): user accounts, global privileges, and other non-privilege columns
-- `db`: database-level privileges
-- `tables_priv`: table-level privileges
-- `columns_priv`: column-level privileges
-- `password_history`: password change history
-- `default_roles`: the default roles for a user
-- `global_grants`: dynamic privileges
-- `global_priv`: the authentication information based on certificates
-- `role_edges`: the relationship between roles
+- [`user`](/mysql-schema/mysql-schema-user.md)：用户账户、全局权限和其他非权限列
+- `db`：数据库级别权限
+- `tables_priv`：表级别权限
+- `columns_priv`：列级别权限
+- `password_history`：密码修改历史
+- `default_roles`：用户的默认角色
+- `global_grants`：动态权限
+- `global_priv`：基于证书的认证信息
+- `role_edges`：角色之间的关系
 
-## Cluster status system tables
+## 集群状态系统表
 
-* The `tidb` table contains some global information about TiDB:
+* `tidb` 表包含一些 TiDB 的全局信息：
 
-    * `bootstrapped`: whether the TiDB cluster has been initialized. Note that this value is read-only and cannot be modified.
-    * `tidb_server_version`: the version information of TiDB when it is initialized. Note that this value is read-only and cannot be modified.
-    * `system_tz`: the system time zone of TiDB.
-    * `new_collation_enabled`: whether TiDB has enabled the [new framework for collations](/character-set-and-collation.md#new-framework-for-collations). Note that this value is read-only and cannot be modified.
+    * `bootstrapped`：TiDB 集群是否已初始化。注意该值为只读，不可修改。
+    * `tidb_server_version`：TiDB 初始化时的版本信息。注意该值为只读，不可修改。
+    * `system_tz`：TiDB 的系统时区。
+    * `new_collation_enabled`：TiDB 是否启用了[新的排序规则框架](/character-set-and-collation.md#new-framework-for-collations)。注意该值为只读，不可修改。
 
-## Server-side help system tables
+## 服务器端帮助系统表
 
-Currently, the `help_topic` is NULL.
+目前，`help_topic` 为空。
 
-## Statistics system tables
+## 统计信息系统表
 
-- `stats_buckets`: the buckets of statistics
-- `stats_histograms`: the histograms of statistics
-- `stats_top_n`: the TopN of statistics
-- `stats_meta`: the meta information of tables, such as the total number of rows and updated rows
-- `stats_extended`: extended statistics, such as the order correlation between columns
-- `stats_feedback`: the query feedback of statistics
-- `stats_fm_sketch`: the FMSketch distribution of the histogram of the statistics column
-- `stats_table_locked`: information about the locked statistics
-- `stats_meta_history`: the meta information in the historical statistics
-- `stats_history`: the other information in the historical statistics
-- `analyze_options`: the default `analyze` options for each table
-- `column_stats_usage`: the usage of column statistics
-- `analyze_jobs`: the ongoing statistics collection tasks and the history task records within the last 7 days
+- `stats_buckets`：统计信息的桶
+- `stats_histograms`：统计信息的直方图
+- `stats_top_n`：统计信息的 TopN
+- `stats_meta`：表的元信息，如总行数和更新行数
+- `stats_extended`：扩展统计信息，如列之间的顺序相关性
+- `stats_feedback`：统计信息的查询反馈
+- `stats_fm_sketch`：统计信息列直方图的 FMSketch 分布
+- `stats_table_locked`：锁定统计信息的相关信息
+- `stats_meta_history`：历史统计信息中的元信息
+- `stats_history`：历史统计信息中的其他信息
+- `analyze_options`：每个表的默认 `analyze` 选项
+- `column_stats_usage`：列统计信息的使用情况
+- `analyze_jobs`：正在进行的统计信息收集任务和最近 7 天的历史任务记录
 
-## Execution plan-related system tables
+## 执行计划相关系统表
 
-- `bind_info`: the binding information of execution plans
-- `capture_plan_baselines_blacklist`: the blocklist for the automatic binding of the execution plan
+- `bind_info`：执行计划的绑定信息
+- `capture_plan_baselines_blacklist`：执行计划自动绑定的黑名单
 
-## System tables related to PLAN REPLAYER
+## PLAN REPLAYER 相关系统表
 
-- `plan_replayer_status`: the [`PLAN REPLAYER CAPTURE`](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#use-plan-replayer-capture) tasks registered by the user
-- `plan_replayer_task`: the results of [`PLAN REPLAYER CAPTURE`](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#use-plan-replayer-capture) tasks
+- `plan_replayer_status`：用户注册的 [`PLAN REPLAYER CAPTURE`](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#use-plan-replayer-capture) 任务
+- `plan_replayer_task`：[`PLAN REPLAYER CAPTURE`](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#use-plan-replayer-capture) 任务的结果
 
-## GC worker system tables
+## GC worker 系统表
 
-> **Note:**
+> **注意：**
 >
-> The GC worker system tables are only applicable to TiDB Self-Managed and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> GC worker 系统表仅适用于 TiDB 自托管版本，在 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/) 上不可用。
 
-- `gc_delete_range`: the KV range to be deleted
-- `gc_delete_range_done`: the deleted KV range
+- `gc_delete_range`：待删除的 KV 范围
+- `gc_delete_range_done`：已删除的 KV 范围
 
-## System tables related to cached tables
+## 缓存表相关系统表
 
-- `table_cache_meta` stores the metadata of cached tables.
+- `table_cache_meta` 存储缓存表的元数据。
 
-## TTL related system tables
+## TTL 相关系统表
 
-* `tidb_ttl_table_status`: the previously executed TTL job and ongoing TTL job for all TTL tables
-* `tidb_ttl_task`: the current ongoing TTL subtasks
-* `tidb_ttl_job_history`: the execution history of TTL tasks in the last 90 days
+* `tidb_ttl_table_status`：所有 TTL 表的已执行 TTL 任务和正在进行的 TTL 任务
+* `tidb_ttl_task`：当前正在进行的 TTL 子任务
+* `tidb_ttl_job_history`：最近 90 天的 TTL 任务执行历史
 
-## System tables related to runaway queries
+## 失控查询相关系统表
 
-* `tidb_runaway_queries`: the history records of all identified runaway queries in the past 7 days
-* `tidb_runaway_watch`: the watch list of runaway queries
-* `tidb_runaway_watch_done`: a watch list of deleted or expired runaway queries
+* `tidb_runaway_queries`：过去 7 天内所有已识别的失控查询的历史记录
+* `tidb_runaway_watch`：失控查询的监视列表
+* `tidb_runaway_watch_done`：已删除或过期的失控查询监视列表
 
-## System tables related to metadata locks
+## 元数据锁相关系统表
 
-* `tidb_mdl_view`: a view of metadata locks. You can use it to view information about the currently blocked DDL statements
-* `tidb_mdl_info`: used internally by TiDB to synchronize metadata locks across nodes
+* `tidb_mdl_view`：元数据锁的视图。可用于查看当前被阻塞的 DDL 语句信息
+* `tidb_mdl_info`：TiDB 内部用于跨节点同步元数据锁
 
-## System tables related to DDL statements
+## DDL 语句相关系统表
 
-* `tidb_ddl_history`: the history records of DDL statements
-* `tidb_ddl_job`: the metadata of DDL statements that are currently being executed by TiDB
-* `tidb_ddl_reorg`: the metadata of physical DDL statements (such as adding indexes) that are currently being executed by TiDB
+* `tidb_ddl_history`：DDL 语句的历史记录
+* `tidb_ddl_job`：TiDB 当前正在执行的 DDL 语句的元数据
+* `tidb_ddl_reorg`：TiDB 当前正在执行的物理 DDL 语句（如添加索引）的元数据
 
-## System tables related to TiDB Distributed eXecution Framework (DXF)
+## TiDB 分布式执行框架 (DXF) 相关系统表
 
-* `dist_framework_meta`: the metadata of the Distributed eXecution Framework (DXF) task scheduler
-* `tidb_global_task`: the metadata of the current DXF task
-* `tidb_global_task_history`: the metadata of the historical DXF tasks, including both succeeded and failed tasks
-* `tidb_background_subtask`: the metadata of the current DXF subtask
-* `tidb_background_subtask_history`: the metadata of the historical DXF subtasks
+* `dist_framework_meta`：分布式执行框架 (DXF) 任务调度器的元数据
+* `tidb_global_task`：当前 DXF 任务的元数据
+* `tidb_global_task_history`：历史 DXF 任务的元数据，包括成功和失败的任务
+* `tidb_background_subtask`：当前 DXF 子任务的元数据
+* `tidb_background_subtask_history`：历史 DXF 子任务的元数据
 
-## System tables related to Resource Control
+## 资源控制相关系统表
 
-* `request_unit_by_group`: the history records of consumed resource units (RUs) of all resource groups
+* `request_unit_by_group`：所有资源组消耗的资源单位 (RUs) 的历史记录
 
-## Miscellaneous system tables
+## 其他系统表
 
 <CustomContent platform="tidb">
 
-> **Note:**
+> **注意：**
 >
-> The `tidb`, `expr_pushdown_blacklist`, `opt_rule_blacklist`, `table_cache_meta`, `tidb_import_jobs`, and `tidb_timers` system tables are only applicable to TiDB Self-Managed and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> `tidb`、`expr_pushdown_blacklist`、`opt_rule_blacklist`、`table_cache_meta`、`tidb_import_jobs` 和 `tidb_timers` 系统表仅适用于 TiDB 自托管版本，在 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/) 上不可用。
 
-- `GLOBAL_VARIABLES`: global system variable table
-- `expr_pushdown_blacklist`: the blocklist for expression pushdown
-- `opt_rule_blacklist`: the blocklist for logical optimization rules
-- `tidb_import_jobs`: the job information of [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)
-- `tidb_timers`: the metadata of internal timers
-- `advisory_locks`: information related to [Locking functions](/functions-and-operators/locking-functions.md)
+- `GLOBAL_VARIABLES`：全局系统变量表
+- `expr_pushdown_blacklist`：表达式下推的黑名单
+- `opt_rule_blacklist`：逻辑优化规则的黑名单
+- `tidb_import_jobs`：[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) 的作业信息
+- `tidb_timers`：内部定时器的元数据
+- `advisory_locks`：与[锁定函数](/functions-and-operators/locking-functions.md)相关的信息
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- `GLOBAL_VARIABLES`: global system variable table
+- `GLOBAL_VARIABLES`：全局系统变量表
 
 </CustomContent>

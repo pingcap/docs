@@ -1,29 +1,29 @@
 ---
-title: ADD INDEX | TiDB SQL Statement Reference
-summary: An overview of the usage of ADD INDEX for the TiDB database.
+title: ADD INDEX | TiDB SQL 语句参考
+summary: TiDB 数据库中 ADD INDEX 的使用概述。
 ---
 
 # ADD INDEX
 
-The `ALTER TABLE.. ADD INDEX` statement adds an index to an existing table. This operation is online in TiDB, which means that neither reads or writes to the table are blocked by adding an index.
+`ALTER TABLE.. ADD INDEX` 语句用于向现有表添加索引。在 TiDB 中，这是一个在线操作，这意味着添加索引时不会阻塞对表的读取或写入操作。
 
-> **Tip:**
+> **提示：**
 >
-> The [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md) can be used to speed up the operation of this statement.
+> 可以使用 [TiDB 分布式执行框架 (DXF)](/tidb-distributed-execution-framework.md) 来加速此语句的执行。
 
 <CustomContent platform="tidb">
 
-> **Warning:**
+> **警告：**
 >
-> - **DO NOT** upgrade a TiDB cluster when a DDL statement is being executed in the cluster (usually for the time-consuming DDL statements such as `ADD INDEX` and the column type changes).
-> - Before the upgrade, it is recommended to use the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) command to check whether the TiDB cluster has an ongoing DDL job. If the cluster has a DDL job, to upgrade the cluster, wait until the DDL execution is finished or use the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) command to cancel the DDL job before you upgrade the cluster.
-> - In addition, during the cluster upgrade, **DO NOT** execute any DDL statement. Otherwise, the issue of undefined behavior might occur.
+> - 在集群中执行 DDL 语句时（通常是耗时的 DDL 语句，如 `ADD INDEX` 和列类型更改），**不要**升级 TiDB 集群。
+> - 在升级之前，建议使用 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) 命令检查 TiDB 集群是否有正在进行的 DDL 任务。如果集群有 DDL 任务，要升级集群，请等待 DDL 执行完成，或使用 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) 命令取消 DDL 任务后再升级集群。
+> - 此外，在集群升级期间，**不要**执行任何 DDL 语句。否则，可能会出现未定义行为的问题。
 >
-> When you upgrade TiDB from v7.1.0 to a later version, you can ignore the preceding limitations. For details, see [the limitations of TiDB smooth upgrade](/smooth-upgrade-tidb.md).
+> 当你将 TiDB 从 v7.1.0 升级到更高版本时，可以忽略上述限制。详情请参见 [TiDB 平滑升级的限制](/smooth-upgrade-tidb.md)。
 
 </CustomContent>
 
-## Synopsis
+## 语法
 
 ```ebnf+diagram
 AlterTableStmt
@@ -49,7 +49,7 @@ IndexType
            | 'RTREE'
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -82,18 +82,18 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 2 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-* TiDB accepts index types such as `HASH`, `BTREE` and `RTREE` in syntax for compatibility with MySQL, but ignores them.
-* `SPATIAL` indexes are not supported.
-* TiDB supports parsing the `FULLTEXT` syntax but does not support using the `FULLTEXT` indexes.
-* Descending indexes are not supported (similar to MySQL 5.7).
-* Adding the primary key of the `CLUSTERED` type to a table is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
+* TiDB 在语法上接受 `HASH`、`BTREE` 和 `RTREE` 等索引类型以与 MySQL 兼容，但会忽略这些类型。
+* 不支持 `SPATIAL` 索引。
+* TiDB 支持解析 `FULLTEXT` 语法但不支持使用 `FULLTEXT` 索引。
+* 不支持降序索引（类似于 MySQL 5.7）。
+* 不支持向表添加 `CLUSTERED` 类型的主键。关于 `CLUSTERED` 类型的主键的更多详情，请参考[聚簇索引](/clustered-indexes.md)。
 
-## See also
+## 另请参阅
 
-* [Index Selection](/choose-index.md)
-* [Wrong Index Solution](/wrong-index-solution.md)
+* [索引选择](/choose-index.md)
+* [错误索引解决方案](/wrong-index-solution.md)
 * [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
 * [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
 * [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
@@ -101,4 +101,4 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 * [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
 * [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 * [EXPLAIN](/sql-statements/sql-statement-explain.md)
-* [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md)
+* [TiDB 分布式执行框架 (DXF)](/tidb-distributed-execution-framework.md)

@@ -1,122 +1,122 @@
 ---
-title: Server Status Variables
-summary: Use status variables to see the system and session status
+title: 服务器状态变量
+summary: 使用状态变量查看系统和会话状态
 ---
 
-# Server Status Variables
+# 服务器状态变量
 
-Server status variables provide information about the global status of the server and the status of the current session in TiDB. Most of these variables are designed to be compatible with MySQL.
+服务器状态变量提供了 TiDB 中服务器全局状态和当前会话状态的信息。这些变量中的大多数都是为了与 MySQL 兼容而设计的。
 
-You can retrieve the global status using the [SHOW GLOBAL STATUS](/sql-statements/sql-statement-show-status.md) command, and the status of the current session using the [SHOW SESSION STATUS](/sql-statements/sql-statement-show-status.md) command. 
+你可以使用 [SHOW GLOBAL STATUS](/sql-statements/sql-statement-show-status.md) 命令查看全局状态，使用 [SHOW SESSION STATUS](/sql-statements/sql-statement-show-status.md) 命令查看当前会话的状态。
 
-Additionally, the [FLUSH STATUS](/sql-statements/sql-statement-flush-status.md) command is supported for MySQL compatibility.
+此外，为了与 MySQL 兼容，还支持 [FLUSH STATUS](/sql-statements/sql-statement-flush-status.md) 命令。
 
-## Variable reference
+## 变量参考
 
 ### Compression
 
-- Scope: SESSION
-- Type: Boolean
-- Indicates if the MySQL Protocol uses compression or not.
+- 作用域：SESSION
+- 类型：Boolean
+- 表示 MySQL 协议是否使用压缩。
 
 ### Compression_algorithm
 
-- Scope: SESSION
-- Type: String
-- Indicates the compression algorithm that is used for the MySQL Protocol.
+- 作用域：SESSION
+- 类型：String
+- 表示 MySQL 协议使用的压缩算法。
 
 ### Compression_level
 
-- Scope: SESSION
-- Type: Integer
-- The compression level that is used for the MySQL Protocol.
+- 作用域：SESSION
+- 类型：Integer
+- MySQL 协议使用的压缩级别。
 
 ### Ssl_cipher
 
-- Scope: SESSION | GLOBAL
-- Type: String
-- TLS Cipher that is in use.
+- 作用域：SESSION | GLOBAL
+- 类型：String
+- 当前使用的 TLS 加密算法。
 
 ### Ssl_cipher_list
 
-- Scope: SESSION | GLOBAL
-- Type: String
-- The list of TLS Ciphers that the server supports.
+- 作用域：SESSION | GLOBAL
+- 类型：String
+- 服务器支持的 TLS 加密算法列表。
 
 ### Ssl_server_not_after
 
-- Scope: SESSION | GLOBAL
-- Type: Date
-- The expiration date of the X.509 certificate of the server that is used for TLS connections.
+- 作用域：SESSION | GLOBAL
+- 类型：Date
+- 用于 TLS 连接的服务器 X.509 证书的过期日期。
 
 ### Ssl_server_not_before
 
-- Scope: SESSION | GLOBAL
-- Type: String
-- The start date of the X.509 certificate of the server that is used for TLS connections.
+- 作用域：SESSION | GLOBAL
+- 类型：String
+- 用于 TLS 连接的服务器 X.509 证书的生效日期。
 
 ### Ssl_verify_mode
 
-- Scope: SESSION | GLOBAL
-- Type: Integer
-- The TLS verification mode bitmask.
+- 作用域：SESSION | GLOBAL
+- 类型：Integer
+- TLS 验证模式位掩码。
 
 ### Ssl_version
 
-- Scope: SESSION | GLOBAL
-- Type: String
-- The version of the TLS protocol that is used
+- 作用域：SESSION | GLOBAL
+- 类型：String
+- 使用的 TLS 协议版本。
 
 ### Uptime
 
-- Scope: SESSION | GLOBAL
-- Type: Integer
-- Uptime of the server in seconds.
+- 作用域：SESSION | GLOBAL
+- 类型：Integer
+- 服务器运行时间，以秒为单位。
 
 ### ddl_schema_version
 
-- Scope: SESSION | GLOBAL
-- Type: Integer
-- The version of the DDL schema that is used.
+- 作用域：SESSION | GLOBAL
+- 类型：Integer
+- 使用的 DDL schema 版本。
 
 ### last_plan_binding_update_time <span class="version-mark">New in v5.2.0</span>
 
-- Scope: SESSION
-- Type: Timestamp
-- The time and date of the last plan binding update.
+- 作用域：SESSION
+- 类型：Timestamp
+- 最后一次执行计划绑定更新的时间和日期。
 
 ### server_id
 
-- Scope: SESSION | GLOBAL
-- Type: String
-- The UUID of the server.
+- 作用域：SESSION | GLOBAL
+- 类型：String
+- 服务器的 UUID。
 
 ### tidb_gc_last_run_time
 
-- Scope: SESSION | GLOBAL
-- Type: String
-- The timestamp of the last run of [GC](/garbage-collection-overview.md).
+- 作用域：SESSION | GLOBAL
+- 类型：String
+- 最后一次运行 [GC](/garbage-collection-overview.md) 的时间戳。
 
 ### tidb_gc_leader_desc
 
-- Scope: SESSION | GLOBAL
-- Type: String
-- Information about [GC](/garbage-collection-overview.md) leader, including the hostname and process id (pid).
+- 作用域：SESSION | GLOBAL
+- 类型：String
+- [GC](/garbage-collection-overview.md) leader 的信息，包括主机名和进程 ID (pid)。
 
 ### tidb_gc_leader_lease
 
-- Scope: SESSION | GLOBAL
-- Type: String
-- The timestamp of the [GC](/garbage-collection-overview.md) lease.
+- 作用域：SESSION | GLOBAL
+- 类型：String
+- [GC](/garbage-collection-overview.md) lease 的时间戳。
 
 ### tidb_gc_leader_uuid
 
-- Scope: SESSION | GLOBAL
-- Type: String
-- The UUID of the [GC](/garbage-collection-overview.md) leader.
+- 作用域：SESSION | GLOBAL
+- 类型：String
+- [GC](/garbage-collection-overview.md) leader 的 UUID。
 
 ### tidb_gc_safe_point
 
-- Scope: SESSION | GLOBAL
-- Type: String
-- The timestamp of the [GC](/garbage-collection-overview.md) safe point.
+- 作用域：SESSION | GLOBAL
+- 类型：String
+- [GC](/garbage-collection-overview.md) safe point 的时间戳。

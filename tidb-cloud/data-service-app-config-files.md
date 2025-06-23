@@ -1,16 +1,16 @@
 ---
-title: Data App Configuration Files
-summary: This document describes the configuration files of Data App in TiDB Cloud.
+title: Data App 配置文件
+summary: 本文档描述了 TiDB Cloud 中 Data App 的配置文件。
 ---
 
-# Data App Configuration Files
+# Data App 配置文件
 
-This document describes the configuration files of a [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) in TiDB Cloud.
+本文档描述了 TiDB Cloud 中 [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) 的配置文件。
 
-If you have [connected your Data App to GitHub](/tidb-cloud/data-service-manage-github-connection.md), you can find the configuration files of your Data App in your specified directory on GitHub as follows:
+如果你已经[将你的 Data App 连接到 GitHub](/tidb-cloud/data-service-manage-github-connection.md)，你可以在 GitHub 上的指定目录中找到你的 Data App 的配置文件，如下所示：
 
 ```
-├── <Your Data App directory>
+├── <你的 Data App 目录>
 │   ├── data_sources
 │   │   └── cluster.json
 │   ├── dataapp_config.json
@@ -22,74 +22,74 @@ If you have [connected your Data App to GitHub](/tidb-cloud/data-service-manage-
 │   │       └── <method>-<endpoint-path3>.sql
 ```
 
-## Data source configuration
+## 数据源配置
 
-The data source of a Data App comes from its linked TiDB clusters. You can find the data source configuration in `data_sources/cluster.json`.
+Data App 的数据源来自其链接的 TiDB 集群。你可以在 `data_sources/cluster.json` 中找到数据源配置。
 
 ```
-├── <Your Data App directory>
+├── <你的 Data App 目录>
 │   ├── data_sources
 │   │   └── cluster.json
 ```
 
-For each Data App, you can link to one or multiple TiDB clusters.
+对于每个 Data App，你可以链接一个或多个 TiDB 集群。
 
-The following is an example configuration of `cluster.json`. In this example, there are two linked clusters for this Data App.
+以下是 `cluster.json` 的示例配置。在此示例中，此 Data App 有两个链接的集群。
 
 ```json
 [
   {
-    "cluster_id": <Cluster ID1>
+    "cluster_id": <集群 ID1>
   },
   {
-    "cluster_id": <Cluster ID2>
+    "cluster_id": <集群 ID2>
   }
 ]
 ```
 
-The field description is as follows:
+字段说明如下：
 
-| Field   | Type    | Description  |
+| 字段   | 类型    | 说明  |
 |---------|---------|--------------|
-| `cluster_id` | Integer | The ID of your TiDB cluster. You can get it from the URL of your cluster. For example, if your cluster URL is `https://tidbcloud.com/clusters/1234567891234567890/overview`, your cluster ID is `1234567891234567890`. |
+| `cluster_id` | Integer | 你的 TiDB 集群的 ID。你可以从集群的 URL 获取它。例如，如果你的集群 URL 是 `https://tidbcloud.com/clusters/1234567891234567890/overview`，你的集群 ID 是 `1234567891234567890`。 |
 
-## Data App configuration
+## Data App 配置
 
-The properties of a Data App contain the App ID, name, and type. You can find the properties in the `dataapp_config.json` file.
+Data App 的属性包含 App ID、名称和类型。你可以在 `dataapp_config.json` 文件中找到这些属性。
 
 ```
-├── <Your Data App directory>
+├── <你的 Data App 目录>
 │   ├── dataapp_config.json
 ```
 
-The following is an example configuration of `dataapp_config.json`.
+以下是 `dataapp_config.json` 的示例配置。
 
 ```json
 {
   "app_id": "<Data App ID>",
-  "app_name": "<Data App name>",
+  "app_name": "<Data App 名称>",
   "app_type": "dataapi",
-  "app_version": "<Data App version>",
-  "description": "<Data App description>"
+  "app_version": "<Data App 版本>",
+  "description": "<Data App 描述>"
 }
 ```
 
-The description of each field is as follows:
+每个字段的说明如下：
 
-| Field      | Type   | Description        |
+| 字段      | 类型   | 说明        |
 |------------|--------|--------------------|
-| `app_id`   | String | The Data App ID. Do not change this field unless your `dataapp_config.json` file is copied from another Data App and you want to update it to the ID of your current Data App. Otherwise, the deployment triggered by this modification will fail. |
-| `app_name` | String | The Data App name. |
-| `app_type` | String | The Data App type, which can only be `"dataapi"`. |
-| `app_version` | String | The Data App version, which is in the `"<major>.<minor>.<patch>"` format. For example, `"1.0.0"`. |
-| `description` | String | The Data App description. |
+| `app_id`   | String | Data App ID。除非你的 `dataapp_config.json` 文件是从另一个 Data App 复制的，并且你想将其更新为当前 Data App 的 ID，否则不要更改此字段。否则，由此修改触发的部署将失败。 |
+| `app_name` | String | Data App 名称。 |
+| `app_type` | String | Data App 类型，只能是 `"dataapi"`。 |
+| `app_version` | String | Data App 版本，格式为 `"<major>.<minor>.<patch>"`。例如，`"1.0.0"`。 |
+| `description` | String | Data App 描述。 |
 
-## HTTP endpoint configuration
+## HTTP 端点配置
 
-In your Data App directory, you can find endpoint configurations in `http_endpoints/config.json` and the SQL files in `http_endpoints/sql/<method>-<endpoint-name>.sql`.
+在你的 Data App 目录中，你可以在 `http_endpoints/config.json` 中找到端点配置，在 `http_endpoints/sql/<method>-<endpoint-name>.sql` 中找到 SQL 文件。
 
 ```
-├── <Your Data App directory>
+├── <你的 Data App 目录>
 │   ├── http_endpoints
 │   │   ├── config.json
 │   │   └── sql
@@ -98,111 +98,111 @@ In your Data App directory, you can find endpoint configurations in `http_endpoi
 │   │       └── <method>-<endpoint-path3>.sql
 ```
 
-### Endpoint configuration
+### 端点配置
 
-For each Data App, there can be one or multiple endpoints. You can find the configurations of all endpoints for a Data App in `http_endpoints/config.json`.
+对于每个 Data App，可以有一个或多个端点。你可以在 `http_endpoints/config.json` 中找到 Data App 的所有端点的配置。
 
-The following is an example configuration of `config.json`. In this example, there are two endpoints for this Data App.
+以下是 `config.json` 的示例配置。在此示例中，此 Data App 有两个端点。
 
 ```json
 [
   {
-    "name": "<Endpoint name1>",
-    "description": "<Endpoint description1>",
-    "method": "<HTTP method1>",
-    "endpoint": "<Endpoint path1>",
+    "name": "<端点名称1>",
+    "description": "<端点描述1>",
+    "method": "<HTTP 方法1>",
+    "endpoint": "<端点路径1>",
     "data_source": {
-      "cluster_id": <Cluster ID1>
+      "cluster_id": <集群 ID1>
     },
     "params": [],
     "settings": {
-      "timeout": <Endpoint timeout>,
-      "row_limit": <Maximum rows>,
+      "timeout": <端点超时时间>,
+      "row_limit": <最大行数>,
       "enable_pagination": <0 | 1>,
       "cache_enabled": <0 | 1>,
-      "cache_ttl": <time-to-live period>
+      "cache_ttl": <生存时间周期>
     },
     "tag": "Default",
     "batch_operation": <0 | 1>,
-    "sql_file": "<SQL file directory1>",
+    "sql_file": "<SQL 文件目录1>",
     "type": "sql_endpoint",
     "return_type": "json"
   },
   {
-    "name": "<Endpoint name2>",
-    "description": "<Endpoint description2>",
-    "method": "<HTTP method2>",
-    "endpoint": "<Endpoint path2>",
+    "name": "<端点名称2>",
+    "description": "<端点描述2>",
+    "method": "<HTTP 方法2>",
+    "endpoint": "<端点路径2>",
     "data_source": {
-      "cluster_id": <Cluster ID2>
+      "cluster_id": <集群 ID2>
     },
     "params": [
       {
-        "name": "<Parameter name>",
-        "type": "<Parameter type>",
+        "name": "<参数名称>",
+        "type": "<参数类型>",
         "required": <0 | 1>,
-        "default": "<Parameter default value>",
-        "description": "<Parameter description>",
+        "default": "<参数默认值>",
+        "description": "<参数描述>",
         "is_path_parameter": <true | false>
       }
     ],
     "settings": {
-      "timeout": <Endpoint timeout>,
-      "row_limit": <Maximum rows>,
+      "timeout": <端点超时时间>,
+      "row_limit": <最大行数>,
       "enable_pagination": <0 | 1>,
       "cache_enabled": <0 | 1>,
-      "cache_ttl": <time-to-live period>
+      "cache_ttl": <生存时间周期>
     },
     "tag": "Default",
     "batch_operation": <0 | 1>,
-    "sql_file": "<SQL file directory2>",
+    "sql_file": "<SQL 文件目录2>",
     "type": "sql_endpoint",
     "return_type": "json"
   }
 ]
 ```
 
-The description of each field is as follows:
+每个字段的说明如下：
 
-| Field         | Type   | Description |
+| 字段         | 类型   | 说明 |
 |---------------|--------|-------------|
-| `name`        | String | The endpoint name.            |
-| `description` | String | (Optional) The endpoint description.          |
-| `method`      | String | The HTTP method of the endpoint. You can use `GET` to retrieve data, use `POST` to create or insert data, use `PUT` to update or modify data, and use `DELETE` to delete data. |
-| `endpoint`    | String | The unique path of the endpoint in the Data App. Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in the path, which must start with a slash (`/`) and end with a letter, number, or underscore (`_`). For example, `/my_endpoint/get_id`. The length of the path must be less than 64 characters.|
-| `cluster_id`  | String | The ID of the TiDB cluster for your endpoint. You can get it from the URL of your TiDB cluster. For example, if your cluster URL is `https://tidbcloud.com/clusters/1234567891234567890/overview`, the cluster ID is `1234567891234567890`. |
-| `params` | Array | The parameters used in the endpoint. By defining parameters, you can dynamically replace the parameter value in your queries through the endpoint. In `params`, you can define one or multiple parameters. For each parameter, you need to define its `name`, `type`, `required`, and `default` fields. If your endpoint does not need any parameters. You can leave `params` empty such as `"params": []`. |
-| `params.name` | String | The name of the parameter. The name can only include letters, digits, and underscores (`_`) and must start with a letter or an underscore (`_`). **DO NOT** use `page` and `page_size` as parameter names, which are reserved for pagination of request results. |
-| `params.type` | String | The data type of the parameter. Supported values are `string`, `number`, `integer`, `boolean`, and `array`. When using a `string` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `string` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`. |
-| `params.required` | Integer | Specifies whether the parameter is required in the request. Supported values are `0` (not required) and `1` (required). The default value is `0`.  |
-| `params.enum` | String | (Optional) Specifies the value options of the parameter. This field is only valid when `params.type` is set to `string`, `number`, or `integer`. To specify multiple values, you can separate them with a comma (`,`). |
-| `params.default` | String | The default value of the parameter. Make sure that the value matches the type of parameter you specified. Otherwise, the endpoint returns an error. The default value of an `ARRAY` type parameter is a string and you can use a comma (`,`) to separate multiple values. |
-| `params.description` | String | The description of the parameter. |
-| `params.is_path_parameter` | Boolean | Specifies whether the parameter is a path parameter. If it is set to `true`, ensure that the `endpoint` field contains the corresponding parameter placeholders; otherwise, it will cause deployment failures. Conversely, if the `endpoint` field contains the corresponding parameter placeholders but this field is set to `false`, it will also cause deployment failures. |
-| `settings.timeout`     | Integer | The timeout for the endpoint in milliseconds, which is `30000` by default. You can set it to an integer from `1` to `60000`.  |
-| `settings.row_limit`   | Integer  | The maximum number of rows that the endpoint can operate or return, which is `1000` by default. When `batch_operation` is set to `0`, you can set it to an integer from `1` to `2000`. When `batch_operation` is set to `1`, you can set it to an integer from `1` to `100`.  |
-| `settings.enable_pagination`   | Integer  | Controls whether to enable the pagination for the results returned by the request. Supported values are `0` (disabled) and `1` (enabled). The default value is `0`. |
-| `settings.cache_enabled`   | Integer  | Controls whether to cache the response returned by your `GET` requests within a specified time-to-live (TTL) period. Supported values are `0` (disabled) and `1` (enabled). The default value is `0`. |
-| `settings.cache_ttl`   | Integer  | The time-to-live (TTL) period in seconds for cached response when `settings.cache_enabled` is set to `1`. You can set it to an integer from 30 to 600. During the TTL period, if you make the same `GET` requests again, Data Service returns the cached response directly instead of fetching data from the target database again, which improves your query performance. |
-| `tag`    | String | The tag for the endpoint. The default value is `"Default"`. |
-| `batch_operation`    | Integer | Controls whether to enable the endpoint to operate in batch mode. Supported values are `0` (disabled) and `1` (enabled). When it is set to `1`, you can operate on multiple rows in a single request. To enable this option, make sure that the request method is `POST` or `PUT`. |
-| `sql_file`    | String | The SQL file directory for the endpoint. For example, `"sql/GET-v1.sql"`. |
-| `type`        | String | The type of the endpoint. The value is `"system-data"` for predefined system endpoints and `"sql_endpoint"` for other endpoints. |
-| `return_type` | String | The response format of the endpoint, which can only be `"json"`.             |
+| `name`        | String | 端点名称。            |
+| `description` | String | （可选）端点描述。          |
+| `method`      | String | 端点的 HTTP 方法。你可以使用 `GET` 检索数据，使用 `POST` 创建或插入数据，使用 `PUT` 更新或修改数据，使用 `DELETE` 删除数据。 |
+| `endpoint`    | String | Data App 中端点的唯一路径。路径中只允许使用字母、数字、下划线（`_`）和斜杠（`/`），必须以斜杠（`/`）开头，以字母、数字或下划线（`_`）结尾。例如，`/my_endpoint/get_id`。路径长度必须小于 64 个字符。|
+| `cluster_id`  | String | 端点使用的 TiDB 集群的 ID。你可以从 TiDB 集群的 URL 获取它。例如，如果你的集群 URL 是 `https://tidbcloud.com/clusters/1234567891234567890/overview`，集群 ID 是 `1234567891234567890`。 |
+| `params` | Array | 端点使用的参数。通过定义参数，你可以通过端点动态替换查询中的参数值。在 `params` 中，你可以定义一个或多个参数。对于每个参数，你需要定义其 `name`、`type`、`required` 和 `default` 字段。如果你的端点不需要任何参数，你可以将 `params` 留空，如 `"params": []`。 |
+| `params.name` | String | 参数的名称。名称只能包含字母、数字和下划线（`_`），且必须以字母或下划线（`_`）开头。**不要**使用 `page` 和 `page_size` 作为参数名称，这些是为请求结果分页保留的。 |
+| `params.type` | String | 参数的数据类型。支持的值有 `string`、`number`、`integer`、`boolean` 和 `array`。使用 `string` 类型参数时，不需要添加引号（`'` 或 `"`）。例如，`foo` 对于 `string` 类型是有效的，会被处理为 `"foo"`，而 `"foo"` 会被处理为 `"\"foo\""` 。 |
+| `params.required` | Integer | 指定请求中是否必须包含该参数。支持的值为 `0`（不必须）和 `1`（必须）。默认值为 `0`。  |
+| `params.enum` | String | （可选）指定参数的值选项。此字段仅在 `params.type` 设置为 `string`、`number` 或 `integer` 时有效。要指定多个值，可以用逗号（`,`）分隔。 |
+| `params.default` | String | 参数的默认值。确保值与你指定的参数类型匹配。否则，端点将返回错误。`ARRAY` 类型参数的默认值是一个字符串，你可以使用逗号（`,`）分隔多个值。 |
+| `params.description` | String | 参数的描述。 |
+| `params.is_path_parameter` | Boolean | 指定参数是否为路径参数。如果设置为 `true`，请确保 `endpoint` 字段包含相应的参数占位符；否则，将导致部署失败。相反，如果 `endpoint` 字段包含相应的参数占位符但此字段设置为 `false`，也会导致部署失败。 |
+| `settings.timeout`     | Integer | 端点的超时时间（以毫秒为单位），默认为 `30000`。你可以将其设置为 `1` 到 `60000` 之间的整数。  |
+| `settings.row_limit`   | Integer  | 端点可以操作或返回的最大行数，默认为 `1000`。当 `batch_operation` 设置为 `0` 时，你可以将其设置为 `1` 到 `2000` 之间的整数。当 `batch_operation` 设置为 `1` 时，你可以将其设置为 `1` 到 `100` 之间的整数。  |
+| `settings.enable_pagination`   | Integer  | 控制是否为请求返回的结果启用分页。支持的值为 `0`（禁用）和 `1`（启用）。默认值为 `0`。 |
+| `settings.cache_enabled`   | Integer  | 控制是否在指定的生存时间（TTL）期间内缓存你的 `GET` 请求返回的响应。支持的值为 `0`（禁用）和 `1`（启用）。默认值为 `0`。 |
+| `settings.cache_ttl`   | Integer  | 当 `settings.cache_enabled` 设置为 `1` 时，缓存响应的生存时间（TTL）期限（以秒为单位）。你可以将其设置为 30 到 600 之间的整数。在 TTL 期间内，如果你再次发出相同的 `GET` 请求，Data Service 将直接返回缓存的响应，而不是再次从目标数据库获取数据，这样可以提高你的查询性能。 |
+| `tag`    | String | 端点的标签。默认值为 `"Default"`。 |
+| `batch_operation`    | Integer | 控制是否启用端点以批处理模式运行。支持的值为 `0`（禁用）和 `1`（启用）。当设置为 `1` 时，你可以在单个请求中操作多行。要启用此选项，请确保请求方法为 `POST` 或 `PUT`。 |
+| `sql_file`    | String | 端点的 SQL 文件目录。例如，`"sql/GET-v1.sql"`。 |
+| `type`        | String | 端点的类型。预定义的系统端点值为 `"system-data"`，其他端点值为 `"sql_endpoint"`。 |
+| `return_type` | String | 端点的响应格式，只能是 `"json"`。             |
 
-### SQL file configuration
+### SQL 文件配置
 
-The SQL file of an endpoint specifies the SQL statements to query data through the endpoint. You can find the endpoint SQL files of a Data App in the `http_endpoints/sql/` directory. For each endpoint, there should be a corresponding SQL file.
+端点的 SQL 文件指定了通过端点查询数据的 SQL 语句。你可以在 `http_endpoints/sql/` 目录中找到 Data App 的端点 SQL 文件。每个端点都应该有一个对应的 SQL 文件。
 
-The name of a SQL file is in the `<method>-<endpoint-path>.sql` format, where `<method>` and `<endpoint-path>` must match the `method` and `endpoint` configuration in [`http_endpoints/config.json`](#endpoint-configuration).
+SQL 文件的名称格式为 `<method>-<endpoint-path>.sql`，其中 `<method>` 和 `<endpoint-path>` 必须与 [`http_endpoints/config.json`](#端点配置) 中的 `method` 和 `endpoint` 配置匹配。
 
-In the SQL file, you can write statements such as table join queries, complex queries, and aggregate functions. The following is an example SQL file.
+在 SQL 文件中，你可以编写表连接查询、复杂查询和聚合函数等语句。以下是一个示例 SQL 文件。
 
 ```sql
-/* Getting Started:
-Enter "USE {database};" before entering your SQL statements.
-Type "--your question" + Enter to try out AI-generated SQL queries in the TiDB Cloud console.
-Declare a parameter like "Where id = ${arg}".
+/* 入门：
+在输入 SQL 语句之前，输入 "USE {database};"。
+输入 "--你的问题" + Enter 可以在 TiDB Cloud 控制台中尝试 AI 生成的 SQL 查询。
+声明参数的格式为 "Where id = ${arg}"。
 */
 USE sample_data;
 SELECT
@@ -214,16 +214,16 @@ WHERE
   country = ${country};
 ```
 
-When writing a SQL file, pay attention to the following:
+编写 SQL 文件时，请注意以下事项：
 
-- At the beginning of the SQL file, you need to specify the database in the SQL statements. For example, `USE database_name;`.
+- 在 SQL 文件的开头，你需要在 SQL 语句中指定数据库。例如，`USE database_name;`。
 
-- To define a parameter of the endpoint, you can insert it as a variable placeholder like `${variable-name}` to the SQL statement.
+- 要定义端点的参数，你可以将其作为变量占位符（如 `${variable-name}`）插入到 SQL 语句中。
 
-    In the preceding example, `${country}` is used as a parameter of the endpoint. With this parameter, you can specify a desired country to query in your endpoint curl command.
+    在上述示例中，`${country}` 用作端点的参数。使用此参数，你可以在端点 curl 命令中指定所需的国家/地区进行查询。
 
-    > **Note:**
+    > **注意：**
     >
-    > - The parameter name is case-sensitive.
-    > - The parameter cannot be a table name or column name.
-    > - The parameter name in the SQL file match the parameter name configured in [`http_endpoints/config.json`](#endpoint-configuration).
+    > - 参数名称区分大小写。
+    > - 参数不能是表名或列名。
+    > - SQL 文件中的参数名称必须与 [`http_endpoints/config.json`](#端点配置) 中配置的参数名称匹配。

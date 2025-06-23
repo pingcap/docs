@@ -1,73 +1,73 @@
 ---
-title: Delete Data
-summary: Learn about the SQL syntax, best practices, and examples for deleting data.
+title: 删除数据
+summary: 了解删除数据的 SQL 语法、最佳实践和示例。
 ---
 
-# Delete Data
+# 删除数据
 
-This document describes how to use the [DELETE](/sql-statements/sql-statement-delete.md) SQL statement to delete the data in TiDB. If you need to periodically delete expired data, use the [time to live](/time-to-live.md) feature.
+本文档介绍如何使用 [DELETE](/sql-statements/sql-statement-delete.md) SQL 语句在 TiDB 中删除数据。如果你需要定期删除过期数据，请使用[数据生命周期管理](/time-to-live.md)功能。
 
-## Before you start
+## 开始之前
 
-Before reading this document, you need to prepare the following:
+在阅读本文档之前，你需要准备以下内容：
 
-- [Build a TiDB Cloud Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
-- Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md), [Create a Database](/develop/dev-guide-create-database.md), [Create a Table](/develop/dev-guide-create-table.md), and [Create Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md)
-- [Insert Data](/develop/dev-guide-insert-data.md)
+- [创建 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md)
+- 阅读[架构设计概述](/develop/dev-guide-schema-design-overview.md)、[创建数据库](/develop/dev-guide-create-database.md)、[创建表](/develop/dev-guide-create-table.md)和[创建二级索引](/develop/dev-guide-create-secondary-indexes.md)
+- [插入数据](/develop/dev-guide-insert-data.md)
 
-## SQL syntax
+## SQL 语法
 
-The `DELETE` statement is generally in the following form:
+`DELETE` 语句通常采用以下形式：
 
 ```sql
 DELETE FROM {table} WHERE {filter}
 ```
 
-| Parameter Name | Description |
+| 参数名称 | 描述 |
 | :--------: | :------------: |
-| `{table}`  |      Table name      |
-| `{filter}` | Matching conditions of the filter|
+| `{table}`  | 表名 |
+| `{filter}` | 过滤条件的匹配条件 |
 
-This example only shows a simple use case of `DELETE`. For detailed information, see [DELETE syntax](/sql-statements/sql-statement-delete.md).
+此示例仅展示了 `DELETE` 的简单用法。有关详细信息，请参阅 [DELETE 语法](/sql-statements/sql-statement-delete.md)。
 
-## Best practices
+## 最佳实践
 
-The following are some best practices to follow when you delete data:
+删除数据时，请遵循以下最佳实践：
 
-- Always specify the `WHERE` clause in the `DELETE` statement. If the `WHERE` clause is not specified, TiDB will delete **_ALL ROWS_** in the table.
+- 在 `DELETE` 语句中始终指定 `WHERE` 子句。如果未指定 `WHERE` 子句，TiDB 将删除表中的**_所有行_**。
 
 <CustomContent platform="tidb">
 
-- Use [bulk-delete](#bulk-delete) when you delete a large number of rows (for example, more than ten thousand), because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default).
+- 当删除大量行（例如，超过一万行）时，请使用[批量删除](#批量删除)，因为 TiDB 限制单个事务的大小（[txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit)，默认为 100 MB）。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- Use [bulk-delete](#bulk-delete) when you delete a large number of rows (for example, more than ten thousand), because TiDB limits the size of a single transaction to 100 MB by default.
+- 当删除大量行（例如，超过一万行）时，请使用[批量删除](#批量删除)，因为 TiDB 限制单个事务的大小默认为 100 MB。
 
 </CustomContent>
 
-- If you delete all the data in a table, do not use the `DELETE` statement. Instead, use the [`TRUNCATE`](/sql-statements/sql-statement-truncate.md) statement.
-- For performance considerations, see [Performance Considerations](#performance-considerations).
-- In scenarios where large batches of data need to be deleted, [Non-Transactional bulk-delete](#non-transactional-bulk-delete) can significantly improve performance. However, this will lose the transactional of the deletion and therefore **CANNOT** be rolled back. Make sure that you select the correct operation.
+- 如果要删除表中的所有数据，请不要使用 `DELETE` 语句。相反，请使用 [`TRUNCATE`](/sql-statements/sql-statement-truncate.md) 语句。
+- 关于性能考虑，请参阅[性能考虑事项](#性能考虑事项)。
+- 在需要删除大批量数据的场景中，[非事务性批量删除](#非事务性批量删除)可以显著提高性能。但是，这将失去删除操作的事务性，因此**无法**回滚。请确保你选择了正确的操作。
 
-## Example
+## 示例
 
-Suppose you find an application error within a specific time period and you need to delete all the data for the [ratings](/develop/dev-guide-bookshop-schema-design.md#ratings-table) within this period, for example, from `2022-04-15 00:00:00` to `2022-04-15 00:15:00`. In this case, you can use the `SELECT` statement to check the number of records to be deleted.
+假设你发现在特定时间段内出现了应用程序错误，需要删除这段时间内的所有 [ratings](/develop/dev-guide-bookshop-schema-design.md#ratings-table) 数据，例如从 `2022-04-15 00:00:00` 到 `2022-04-15 00:15:00`。在这种情况下，你可以使用 `SELECT` 语句检查要删除的记录数。
 
 ```sql
 SELECT COUNT(*) FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND `rated_at` <= "2022-04-15 00:15:00";
 ```
 
-If more than 10,000 records are returned, use [Bulk-Delete](#bulk-delete) to delete them.
+如果返回的记录超过 10,000 条，请使用[批量删除](#批量删除)来删除它们。
 
-If fewer than 10,000 records are returned, use the following example to delete them.
+如果返回的记录少于 10,000 条，请使用以下示例删除它们。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-In SQL, the example is as follows:
+在 SQL 中，示例如下：
 
 ```sql
 DELETE FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND `rated_at` <= "2022-04-15 00:15:00";
@@ -77,10 +77,10 @@ DELETE FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND `rated_at` <
 
 <div label="Java" value="java">
 
-In Java, the example is as follows:
+在 Java 中，示例如下：
 
 ```java
-// ds is an entity of com.mysql.cj.jdbc.MysqlDataSource
+// ds 是 com.mysql.cj.jdbc.MysqlDataSource 的实例
 
 try (Connection connection = ds.getConnection()) {
     String sql = "DELETE FROM `bookshop`.`ratings` WHERE `rated_at` >= ? AND `rated_at` <= ?";
@@ -104,7 +104,7 @@ try (Connection connection = ds.getConnection()) {
 
 <div label="Golang" value="golang">
 
-In Golang, the example is as follows:
+在 Golang 中，示例如下：
 
 ```go
 package main
@@ -143,7 +143,7 @@ func main() {
 
 <div label="Python" value="python">
 
-In Python, the example is as follows:
+在 Python 中，示例如下：
 
 ```python
 import MySQLdb
@@ -172,64 +172,64 @@ with connection:
 
 <CustomContent platform="tidb">
 
-The `rated_at` field is of the `DATETIME` type in [Date and Time Types](/data-type-date-and-time.md). You can assume that it is stored as a literal quantity in TiDB, independent of the time zone. On the other hand, the `TIMESTAMP` type stores a timestamp and thus displays a different time string in a different [time zone](/configure-time-zone.md).
+`rated_at` 字段是 [日期和时间类型](/data-type-date-and-time.md) 中的 `DATETIME` 类型。你可以假设它在 TiDB 中存储为一个字面量，与时区无关。另一方面，`TIMESTAMP` 类型存储时间戳，因此在不同的[时区](/configure-time-zone.md)中显示不同的时间字符串。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-The `rated_at` field is of the `DATETIME` type in [Date and Time Types](/data-type-date-and-time.md). You can assume that it is stored as a literal quantity in TiDB, independent of the time zone. On the other hand, the `TIMESTAMP` type stores a timestamp and thus displays a different time string in a different time zone.
+`rated_at` 字段是 [日期和时间类型](/data-type-date-and-time.md) 中的 `DATETIME` 类型。你可以假设它在 TiDB 中存储为一个字面量，与时区无关。另一方面，`TIMESTAMP` 类型存储时间戳，因此在不同的时区中显示不同的时间字符串。
 
 </CustomContent>
 
-> **Note:**
+> **注意：**
 >
-> Like MySQL, the `TIMESTAMP` data type is affected by the [year 2038 problem](https://en.wikipedia.org/wiki/Year_2038_problem). It is recommended to use the `DATETIME` type if you store values larger than 2038.
+> 与 MySQL 一样，`TIMESTAMP` 数据类型受到 [2038 年问题](https://en.wikipedia.org/wiki/Year_2038_problem)的影响。如果你存储大于 2038 年的值，建议使用 `DATETIME` 类型。
 
-## Performance considerations
+## 性能考虑事项
 
-### TiDB GC mechanism
+### TiDB GC 机制
 
-TiDB does not delete the data immediately after you run the `DELETE` statement. Instead, it marks the data as ready for deletion. Then it waits for TiDB GC (Garbage Collection) to clean up the outdated data. Therefore, the `DELETE` statement **_DOES NOT_** immediately reduce disk usage.
+TiDB 在执行 `DELETE` 语句后不会立即删除数据。相反，它会将数据标记为准备删除。然后等待 TiDB GC（垃圾回收）清理过期数据。因此，`DELETE` 语句**_不会_**立即减少磁盘使用量。
 
-GC is triggered once every 10 minutes by default. Each GC calculates a time point called **safe_point**. Any data earlier than this time point will not be used again, so TiDB can safely clean it up.
+默认情况下，GC 每 10 分钟触发一次。每次 GC 都会计算一个称为 **safe_point** 的时间点。任何早于此时间点的数据都不会再被使用，因此 TiDB 可以安全地清理它。
 
-For more information, see [GC mechanism](/garbage-collection-overview.md).
+有关更多信息，请参阅 [GC 机制](/garbage-collection-overview.md)。
 
-### Update statistical information
+### 更新统计信息
 
-TiDB uses [statistical information](/statistics.md) to determine index selection. There is a high risk that the index is not correctly selected after a large volume of data is deleted. You can use [manual collection](/statistics.md#manual-collection) to update the statistics. It provides the TiDB optimizer with more accurate statistical information for SQL performance optimization.
+TiDB 使用[统计信息](/statistics.md)来确定索引选择。在删除大量数据后，索引未被正确选择的风险很高。你可以使用[手动收集](/statistics.md#手动收集)来更新统计信息。它为 TiDB 优化器提供更准确的统计信息，以优化 SQL 性能。
 
-## Bulk-delete
+## 批量删除
 
-When you need to delete multiple rows of data from a table, you can choose the [`DELETE` example](#example) and use the `WHERE` clause to filter the data that needs to be deleted.
+当你需要从表中删除多行数据时，可以选择 [`DELETE` 示例](#示例)并使用 `WHERE` 子句过滤需要删除的数据。
 
 <CustomContent platform="tidb">
 
-However, if you need to delete a large number of rows (more than ten thousand), it is recommended that you delete the data in an iterative way, that is, deleting a portion of the data at each iteration until the deletion is completed. This is because TiDB limits the size of a single transaction ([`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default). You can use loops in your programs or scripts to perform such operations.
+但是，如果你需要删除大量行（超过一万行），建议你以迭代方式删除数据，即每次迭代删除一部分数据，直到删除完成。这是因为 TiDB 限制单个事务的大小（[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)，默认为 100 MB）。你可以在程序或脚本中使用循环来执行此类操作。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-However, if you need to delete a large number of rows (more than ten thousand), it is recommended that you delete the data in an iterative way, that is, deleting a portion of the data at each iteration until the deletion is completed. This is because TiDB limits the size of a single transaction to 100 MB by default. You can use loops in your programs or scripts to perform such operations.
+但是，如果你需要删除大量行（超过一万行），建议你以迭代方式删除数据，即每次迭代删除一部分数据，直到删除完成。这是因为 TiDB 限制单个事务的大小默认为 100 MB。你可以在程序或脚本中使用循环来执行此类操作。
 
 </CustomContent>
 
-This section provides an example of writing a script to handle an iterative delete operation that demonstrates how you should do a combination of `SELECT` and `DELETE` to complete a bulk-delete.
+本节提供了一个编写脚本处理迭代删除操作的示例，演示了如何组合使用 `SELECT` 和 `DELETE` 来完成批量删除。
 
-### Write a bulk-delete loop
+### 编写批量删除循环
 
-You can write a `DELETE` statement in the loop of your application or script, use the `WHERE` clause to filter data, and use `LIMIT` to constrain the number of rows to be deleted in a single statement.
+你可以在应用程序或脚本的循环中编写 `DELETE` 语句，使用 `WHERE` 子句过滤数据，并使用 `LIMIT` 限制单个语句要删除的行数。
 
-### Bulk-delete example
+### 批量删除示例
 
-Suppose you find an application error within a specific time period. You need to delete all the data for the [rating](/develop/dev-guide-bookshop-schema-design.md#ratings-table) within this period, for example, from `2022-04-15 00:00:00` to `2022-04-15 00:15:00`, and more than 10,000 records are written in 15 minutes. You can perform as follows.
+假设你发现在特定时间段内出现了应用程序错误。你需要删除这段时间内的所有 [rating](/develop/dev-guide-bookshop-schema-design.md#ratings-table) 数据，例如从 `2022-04-15 00:00:00` 到 `2022-04-15 00:15:00`，并且在 15 分钟内写入了超过 10,000 条记录。你可以执行以下操作。
 
 <SimpleTab groupId="language">
 <div label="Java" value="java">
 
-In Java, the bulk-delete example is as follows:
+在 Java 中，批量删除示例如下：
 
 ```java
 package com.pingcap.bulkDelete;
@@ -243,12 +243,12 @@ import java.util.concurrent.TimeUnit;
 public class BatchDeleteExample
 {
     public static void main(String[] args) throws InterruptedException {
-        // Configure the example database connection.
+        // 配置示例数据库连接。
 
-        // Create a mysql data source instance.
+        // 创建 mysql 数据源实例。
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
 
-        // Set server name, port, database name, username and password.
+        // 设置服务器名称、端口、数据库名称、用户名和密码。
         mysqlDataSource.setServerName("localhost");
         mysqlDataSource.setPortNumber(4000);
         mysqlDataSource.setDatabaseName("bookshop");
@@ -283,13 +283,13 @@ public class BatchDeleteExample
 }
 ```
 
-In each iteration, `DELETE` deletes up to 1000 rows from `2022-04-15 00:00:00` to `2022-04-15 00:15:00`.
+在每次迭代中，`DELETE` 从 `2022-04-15 00:00:00` 到 `2022-04-15 00:15:00` 删除最多 1000 行。
 
 </div>
 
 <div label="Golang" value="golang">
 
-In Golang, the bulk-delete example is as follows:
+在 Golang 中，批量删除示例如下：
 
 ```go
 package main
@@ -321,7 +321,7 @@ func main() {
     }
 }
 
-// deleteBatch delete at most 1000 lines per batch
+// deleteBatch 每批最多删除 1000 行
 func deleteBatch(db *sql.DB, startTime, endTime time.Time) (int64, error) {
     bulkUpdateSql := fmt.Sprintf("DELETE FROM `bookshop`.`ratings` WHERE `rated_at` >= ? AND `rated_at` <= ? LIMIT 1000")
     result, err := db.Exec(bulkUpdateSql, startTime, endTime)
@@ -338,13 +338,13 @@ func deleteBatch(db *sql.DB, startTime, endTime time.Time) (int64, error) {
 }
 ```
 
-In each iteration, `DELETE` deletes up to 1000 rows from `2022-04-15 00:00:00` to `2022-04-15 00:15:00`.
+在每次迭代中，`DELETE` 从 `2022-04-15 00:00:00` 到 `2022-04-15 00:15:00` 删除最多 1000 行。
 
 </div>
 
 <div label="Python" value="python">
 
-In Python, the bulk-delete example is as follows:
+在 Python 中，批量删除示例如下：
 
 ```python
 import MySQLdb
@@ -370,58 +370,58 @@ with connection:
             time.sleep(1)
 ```
 
-In each iteration, `DELETE` deletes up to 1000 rows from `2022-04-15 00:00:00` to `2022-04-15 00:15:00`.
+在每次迭代中，`DELETE` 从 `2022-04-15 00:00:00` 到 `2022-04-15 00:15:00` 删除最多 1000 行。
 
 </div>
 
 </SimpleTab>
 
-## Non-transactional bulk-delete
+## 非事务性批量删除
 
-> **Note:**
+> **注意：**
 >
-> Since v6.1.0, TiDB supports the [non-transactional DML statements](/non-transactional-dml.md). This feature is not available for versions earlier than TiDB v6.1.0.
+> 从 v6.1.0 开始，TiDB 支持[非事务性 DML 语句](/non-transactional-dml.md)。此功能在早于 TiDB v6.1.0 的版本中不可用。
 
-### Prerequisites of non-transactional bulk-delete
+### 非事务性批量删除的前提条件
 
-Before using the non-transactional bulk-delete, make sure you have read the [Non-Transactional DML statements documentation](/non-transactional-dml.md) first. The non-transactional bulk-delete improves the performance and ease of use in batch data processing scenarios but compromises transactional atomicity and isolation.
+在使用非事务性批量删除之前，请确保你已经阅读了[非事务性 DML 语句文档](/non-transactional-dml.md)。非事务性批量删除提高了批量数据处理场景下的性能和易用性，但牺牲了事务的原子性和隔离性。
 
-Therefore, you should use it carefully to avoid serious consequences (such as data loss) due to mishandling.
+因此，你应该谨慎使用它，以避免由于操作不当而导致严重后果（如数据丢失）。
 
-### SQL syntax for non-transactional bulk-delete
+### 非事务性批量删除的 SQL 语法
 
-The SQL syntax for non-transactional bulk-delete statement is as follows:
+非事务性批量删除语句的 SQL 语法如下：
 
 ```sql
 BATCH ON {shard_column} LIMIT {batch_size} {delete_statement};
 ```
 
-| Parameter Name | Description |
+| 参数名称 | 描述 |
 | :--------: | :------------: |
-| `{shard_column}` | The column used to divide batches.      |
-| `{batch_size}`   | Control the size of each batch. |
-| `{delete_statement}` | The `DELETE` statement. |
+| `{shard_column}` | 用于划分批次的列。 |
+| `{batch_size}`   | 控制每个批次的大小。 |
+| `{delete_statement}` | `DELETE` 语句。 |
 
-The preceding example only shows a simple use case of a non-transactional bulk-delete statement. For detailed information, see [Non-transactional DML Statements](/non-transactional-dml.md).
+上述示例仅展示了非事务性批量删除语句的简单用法。有关详细信息，请参阅[非事务性 DML 语句](/non-transactional-dml.md)。
 
-### Example of non-transactional bulk-delete
+### 非事务性批量删除示例
 
-In the same scenario as the [Bulk-delete example](#bulk-delete-example), the following SQL statement shows how to perform a non-transactional bulk-delete:
+在与[批量删除示例](#批量删除示例)相同的场景中，以下 SQL 语句展示了如何执行非事务性批量删除：
 
 ```sql
 BATCH ON `rated_at` LIMIT 1000 DELETE FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `rated_at` <= "2022-04-15 00:15:00";
 ```
 
-## Need help?
+## 需要帮助？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

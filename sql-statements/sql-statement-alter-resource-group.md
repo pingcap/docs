@@ -1,17 +1,17 @@
 ---
 title: ALTER RESOURCE GROUP
-summary: Learn the usage of ALTER RESOURCE GROUP in TiDB.
+summary: 了解 TiDB 中 ALTER RESOURCE GROUP 的用法。
 ---
 
 # ALTER RESOURCE GROUP
 
-The `ALTER RESOURCE GROUP` statement is used to modify a resource group in a database.
+`ALTER RESOURCE GROUP` 语句用于修改数据库中的资源组。
 
-> **Note:**
+> **注意：**
 >
-> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> 此功能在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
 
-## Synopsis
+## 语法
 
 ```ebnf+diagram
 AlterResourceGroupStmt ::=
@@ -74,25 +74,25 @@ DirectBackgroundOption ::=
     "TASK_TYPES" EqOpt stringLit
 ```
 
-TiDB supports the following `DirectResourceGroupOption`, where [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) is a unified abstraction unit in TiDB for CPU, IO, and other system resources.
+TiDB 支持以下 `DirectResourceGroupOption`，其中[请求单元 (RU)](/tidb-resource-control.md#what-is-request-unit-ru) 是 TiDB 中 CPU、IO 和其他系统资源的统一抽象单位。
 
-| Option     | Description                         | Example                |
+| 选项     | 描述                         | 示例                |
 |---------------|-------------------------------------|------------------------|
-| `RU_PER_SEC` | Rate of RU backfilling per second | `RU_PER_SEC = 500` indicates that this resource group is backfilled with 500 RUs per second |
-| `PRIORITY`    | The absolute priority of tasks to be processed on TiKV  | `PRIORITY = HIGH` indicates that the priority is high. If not specified, the default value is `MEDIUM`. |
-| `BURSTABLE`   | If the `BURSTABLE` attribute is set, TiDB allows the corresponding resource group to use the available system resources when the quota is exceeded. |
-| `QUERY_LIMIT` | When the query execution meets this condition, the query is identified as a runaway query and the corresponding action is executed. | `QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=EXACT DURATION='10m')` indicates that the query is identified as a runaway query when the execution time exceeds 60 seconds. The query is terminated. All SQL statements with the same SQL text will be terminated immediately in the coming 10 minutes. `QUERY_LIMIT=()` or `QUERY_LIMIT=NULL` means that runaway control is not enabled. See [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries). |
-| `BACKGROUND`  | Configure the background tasks. For more details, see [Manage background tasks](/tidb-resource-control.md#manage-background-tasks). | `BACKGROUND=(TASK_TYPES="br,stats")` indicates that the backup and restore and statistics collection related tasks are scheduled as background tasks. |
+| `RU_PER_SEC` | 每秒 RU 补充率 | `RU_PER_SEC = 500` 表示此资源组每秒补充 500 个 RU |
+| `PRIORITY`    | 在 TiKV 上处理任务的绝对优先级  | `PRIORITY = HIGH` 表示优先级高。如果未指定，默认值为 `MEDIUM`。 |
+| `BURSTABLE`   | 如果设置了 `BURSTABLE` 属性，TiDB 允许相应的资源组在超出配额时使用可用的系统资源。 |
+| `QUERY_LIMIT` | 当查询执行满足此条件时，该查询被识别为失控查询并执行相应的操作。 | `QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=EXACT DURATION='10m')` 表示当执行时间超过 60 秒时，该查询被识别为失控查询。查询被终止。在接下来的 10 分钟内，所有具有相同 SQL 文本的 SQL 语句都将立即被终止。`QUERY_LIMIT=()` 或 `QUERY_LIMIT=NULL` 表示未启用失控控制。参见[失控查询](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries)。 |
+| `BACKGROUND`  | 配置后台任务。更多详情，请参见[管理后台任务](/tidb-resource-control.md#manage-background-tasks)。 | `BACKGROUND=(TASK_TYPES="br,stats")` 表示备份恢复和统计信息收集相关的任务被安排为后台任务。 |
 
-> **Note:**
+> **注意：**
 >
-> - The `ALTER RESOURCE GROUP` statement can only be executed when the global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) is set to `ON`.
-> - The `ALTER RESOURCE GROUP` statement supports incremental changes, leaving unspecified parameters unchanged. However, both `QUERY_LIMIT` and `BACKGROUND` are used as a whole and cannot be partially modified.
-> - Currently, only the `default` resource group supports modifying the `BACKGROUND` configuration.
+> - `ALTER RESOURCE GROUP` 语句只能在全局变量 [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) 设置为 `ON` 时执行。
+> - `ALTER RESOURCE GROUP` 语句支持增量更改，未指定的参数保持不变。但是，`QUERY_LIMIT` 和 `BACKGROUND` 都是作为一个整体使用，不能部分修改。
+> - 目前，只有 `default` 资源组支持修改 `BACKGROUND` 配置。
 
-## Examples
+## 示例
 
-Create a resource group named `rg1` and modify its properties.
+创建名为 `rg1` 的资源组并修改其属性。
 
 ```sql
 DROP RESOURCE GROUP IF EXISTS rg1;
@@ -149,7 +149,7 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
 1 rows in set (1.30 sec)
 ```
 
-Modify the `BACKGROUND` option for the `default` resource group.
+修改 `default` 资源组的 `BACKGROUND` 选项。
 
 ```sql
 ALTER RESOURCE GROUP default BACKGROUND = (TASK_TYPES = "br,ddl");
@@ -172,12 +172,12 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='default';
 1 rows in set (1.30 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-MySQL also supports [ALTER RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/alter-resource-group.html). However, the acceptable parameters are different from that of TiDB so that they are not compatible.
+MySQL 也支持 [ALTER RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/alter-resource-group.html)。但是，可接受的参数与 TiDB 的不同，因此它们不兼容。
 
-## See also
+## 另请参阅
 
 * [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
 * [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
-* [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru)
+* [请求单元 (RU)](/tidb-resource-control.md#what-is-request-unit-ru)

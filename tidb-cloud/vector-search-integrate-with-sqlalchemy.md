@@ -1,39 +1,39 @@
 ---
-title: Integrate TiDB Vector Search with SQLAlchemy
-summary: Learn how to integrate TiDB Vector Search with SQLAlchemy to store embeddings and perform semantic searches.
+title: 将 TiDB Vector Search 与 SQLAlchemy 集成
+summary: 了解如何将 TiDB Vector Search 与 SQLAlchemy 集成以存储嵌入向量并执行语义搜索。
 ---
 
-# Integrate TiDB Vector Search with SQLAlchemy
+# 将 TiDB Vector Search 与 SQLAlchemy 集成
 
-This tutorial walks you through how to use [SQLAlchemy](https://www.sqlalchemy.org/) to interact with [TiDB Vector Search](/tidb-cloud/vector-search-overview.md), store embeddings, and perform vector search queries.
+本教程将指导你如何使用 [SQLAlchemy](https://www.sqlalchemy.org/) 与 [TiDB Vector Search](/tidb-cloud/vector-search-overview.md) 交互，存储嵌入向量并执行向量搜索查询。
 
-> **Note**
+> **注意**
 >
-> TiDB Vector Search is only available for TiDB Self-Managed (TiDB >= v8.4) and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless). It is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
+> TiDB Vector Search 仅适用于 TiDB Self-Managed（TiDB >= v8.4）和 [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)。它不适用于 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)。
 
-## Prerequisites
+## 前提条件
 
-To complete this tutorial, you need:
+完成本教程需要：
 
-- [Python 3.8 or higher](https://www.python.org/downloads/) installed.
-- [Git](https://git-scm.com/downloads) installed.
-- A TiDB Cloud Serverless cluster. Follow [creating a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
+- 安装 [Python 3.8 或更高版本](https://www.python.org/downloads/)。
+- 安装 [Git](https://git-scm.com/downloads)。
+- 一个 TiDB Cloud Serverless 集群。如果你还没有，请按照[创建 TiDB Cloud Serverless 集群](/tidb-cloud/create-tidb-cluster-serverless.md)的说明创建自己的 TiDB Cloud 集群。
 
-## Run the sample app
+## 运行示例应用
 
-You can quickly learn about how to integrate TiDB Vector Search with SQLAlchemy by following the steps below.
+你可以按照以下步骤快速了解如何将 TiDB Vector Search 与 SQLAlchemy 集成。
 
-### Step 1. Clone the repository
+### 步骤 1. 克隆代码仓库
 
-Clone the `tidb-vector-python` repository to your local machine:
+将 `tidb-vector-python` 代码仓库克隆到本地：
 
 ```shell
 git clone https://github.com/pingcap/tidb-vector-python.git
 ```
 
-### Step 2. Create a virtual environment
+### 步骤 2. 创建虚拟环境
 
-Create a virtual environment for your project:
+为你的项目创建一个虚拟环境：
 
 ```bash
 cd tidb-vector-python/examples/orm-sqlalchemy-quickstart
@@ -41,58 +41,58 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-### Step 3. Install the required dependencies
+### 步骤 3. 安装所需依赖
 
-Install the required dependencies for the demo project:
+安装示例项目所需的依赖：
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Alternatively, you can install the following packages for your project:
+或者，你可以为你的项目安装以下包：
 
 ```bash
 pip install pymysql python-dotenv sqlalchemy tidb-vector
 ```
 
-### Step 4. Configure the environment variables
+### 步骤 4. 配置环境变量
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. 导航到 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，然后点击目标集群的名称进入其概览页面。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2. 点击右上角的 **Connect**。将显示连接对话框。
 
-3. Ensure the configurations in the connection dialog match your environment.
+3. 确保连接对话框中的配置与你的环境匹配。
 
-   - **Connection Type** is set to `Public`.
-   - **Branch** is set to `main`.
-   - **Connect With** is set to `SQLAlchemy`.
-   - **Operating System** matches your environment.
+   - **Connection Type** 设置为 `Public`。
+   - **Branch** 设置为 `main`。
+   - **Connect With** 设置为 `SQLAlchemy`。
+   - **Operating System** 与你的环境匹配。
 
-   > **Tip:**
+   > **提示：**
    >
-   > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
+   > 如果你的程序在 Windows Subsystem for Linux (WSL) 中运行，请切换到相应的 Linux 发行版。
 
-4. Click the **PyMySQL** tab and copy the connection string.
+4. 点击 **PyMySQL** 标签并复制连接字符串。
 
-   > **Tip:**
+   > **提示：**
    >
-   > If you have not set a password yet, click **Generate Password** to generate a random password.
+   > 如果你还没有设置密码，请点击 **Generate Password** 生成一个随机密码。
 
-5. In the root directory of your Python project, create a `.env` file and paste the connection string into it.
+5. 在 Python 项目的根目录下创建一个 `.env` 文件，并将连接字符串粘贴到其中。
 
-   The following is an example for macOS:
+   以下是 macOS 的示例：
 
    ```dotenv
    TIDB_DATABASE_URL="mysql+pymysql://<prefix>.root:<password>@gateway01.<region>.prod.aws.tidbcloud.com:4000/test?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
    ```
 
-### Step 5. Run the demo
+### 步骤 5. 运行示例
 
 ```bash
 python sqlalchemy-quickstart.py
 ```
 
-Example output:
+示例输出：
 
 ```text
 Get 3-nearest neighbor documents:
@@ -109,13 +109,13 @@ Get documents within a certain distance:
     document: dog
 ```
 
-## Sample code snippets
+## 示例代码片段
 
-You can refer to the following sample code snippets to develop your application.
+你可以参考以下示例代码片段来开发你的应用。
 
-### Create vector tables
+### 创建向量表
 
-#### Connect to TiDB cluster
+#### 连接到 TiDB 集群
 
 ```python
 import os
@@ -131,9 +131,9 @@ tidb_connection_string = os.environ['TIDB_DATABASE_URL']
 engine = create_engine(tidb_connection_string)
 ```
 
-#### Define a vector column
+#### 定义向量列
 
-Create a table with a column named `embedding` that stores a 3-dimensional vector.
+创建一个包含名为 `embedding` 的列的表，该列存储 3 维向量。
 
 ```python
 Base = declarative_base()
@@ -145,7 +145,7 @@ class Document(Base):
     embedding = Column(VectorType(3))
 ```
 
-### Store documents with embeddings
+### 存储带有嵌入向量的文档
 
 ```python
 with Session(engine) as session:
@@ -155,9 +155,9 @@ with Session(engine) as session:
    session.commit()
 ```
 
-### Search the nearest neighbor documents
+### 搜索最近邻文档
 
-Search for the top-3 documents that are semantically closest to the query vector `[1, 2, 3]` based on the cosine distance function.
+搜索与查询向量 `[1, 2, 3]` 在语义上最接近的前 3 个文档，基于余弦距离函数。
 
 ```python
 with Session(engine) as session:
@@ -167,9 +167,9 @@ with Session(engine) as session:
    ).order_by(distance).limit(3).all()
 ```
 
-### Search documents within a certain distance
+### 搜索特定距离内的文档
 
-Search for documents whose cosine distance from the query vector `[1, 2, 3]` is less than 0.2.
+搜索与查询向量 `[1, 2, 3]` 的余弦距离小于 0.2 的文档。
 
 ```python
 with Session(engine) as session:
@@ -179,7 +179,7 @@ with Session(engine) as session:
     ).filter(distance < 0.2).order_by(distance).limit(3).all()
 ```
 
-## See also
+## 另请参阅
 
-- [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
-- [Vector Search Index](/tidb-cloud/vector-search-index.md)
+- [向量数据类型](/tidb-cloud/vector-search-data-types.md)
+- [向量搜索索引](/tidb-cloud/vector-search-index.md)

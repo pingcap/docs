@@ -1,37 +1,37 @@
 ---
-title: Naming Conventions for Data Import
-summary: Learn about the naming conventions for CSV, Parquet, Aurora Snapshot, and SQL files during data import.
+title: 数据导入的命名规范
+summary: 了解 CSV、Parquet、Aurora Snapshot 和 SQL 文件在数据导入过程中的命名规范。
 ---
 
-# Naming Conventions for Data Import
+# 数据导入的命名规范
 
-You can import data into TiDB Cloud in the following file formats: CSV, Parquet, Aurora Snapshot, and SQL. To make sure that your data is imported successfully, you need to prepare the following two types of files:
+你可以将以下格式的文件导入到 TiDB Cloud：CSV、Parquet、Aurora Snapshot 和 SQL。为确保数据成功导入，你需要准备以下两类文件：
 
-- **Schema file**. Prepare the database schema file (optional) and the table schema file, both in SQL format (`.sql`). If the table schema file is not provided, you need to create the corresponding table manually in the target database in advance.
-- **Data file**. Prepare a data file that conforms to the naming conventions for importing data. If the data file name can not meet the requirements, it is recommended to use [**File Pattern**](#file-pattern) to perform the import task. Otherwise, the import task cannot scan the data files you want to import.
+- **模式文件**。准备数据库模式文件（可选）和表模式文件，两者都是 SQL 格式（`.sql`）。如果未提供表模式文件，你需要提前在目标数据库中手动创建相应的表。
+- **数据文件**。准备符合导入数据命名规范的数据文件。如果数据文件名称无法满足要求，建议使用[**文件模式**](#文件模式)执行导入任务。否则，导入任务将无法扫描到你想要导入的数据文件。
 
-## Naming conventions for schema files
+## 模式文件的命名规范
 
-This section describes the naming conventions for database and table schema files. The naming conventions for schema files are the same for all the following types of source files: CSV, Parquet, Aurora Snapshot, and SQL.
+本节描述数据库和表模式文件的命名规范。对于以下所有类型的源文件（CSV、Parquet、Aurora Snapshot 和 SQL），模式文件的命名规范都是相同的。
 
-The naming conventions for schema files are as follows:
+模式文件的命名规范如下：
 
-- Database schema file (optional): `${db_name}-schema-create.sql`
-- Table schema file: `${db_name}.${table_name}-schema.sql`
+- 数据库模式文件（可选）：`${db_name}-schema-create.sql`
+- 表模式文件：`${db_name}.${table_name}-schema.sql`
 
-The following is an example of a database schema file:
+以下是数据库模式文件的示例：
 
-- Name: `import_db-schema-create.sql`
-- File content:
+- 名称：`import_db-schema-create.sql`
+- 文件内容：
 
     ```sql
     CREATE DATABASE import_db;
     ```
 
-The following is an example of a table schema file:
+以下是表模式文件的示例：
 
-- Name: `import_db.test_table-schema.sql`
-- File content:
+- 名称：`import_db.test_table-schema.sql`
+- 文件内容：
 
     ```sql
     CREATE TABLE test_table (
@@ -40,25 +40,25 @@ The following is an example of a table schema file:
     );
     ```
 
-## Naming conventions for data files
+## 数据文件的命名规范
 
-This section describes the naming conventions for data files. Depending on the type of source files, the naming conventions for data files are different.
+本节描述数据文件的命名规范。根据源文件的类型，数据文件的命名规范有所不同。
 
 ### CSV
 
-When you import CSV files, name the data files as follows:
+导入 CSV 文件时，数据文件的命名规范如下：
 
 `${db_name}.${table_name}${suffix}.csv.${compress}`
 
-`${suffix}` is optional and can be one of the following formats, where *`xxx`* can be any number:
+`${suffix}` 是可选的，可以是以下格式之一，其中 *`xxx`* 可以是任何数字：
 
-- *`.xxx`*, such as `.01`
-- *`._xxx_xxx_xxx`*, such as `._0_0_01`
-- *`_xxx_xxx_xxx`*, such as `_0_0_01`
+- *`.xxx`*，例如 `.01`
+- *`._xxx_xxx_xxx`*，例如 `._0_0_01`
+- *`_xxx_xxx_xxx`*，例如 `_0_0_01`
 
-`${compress}` is the compression format and it is optional. TiDB Cloud supports the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`.
+`${compress}` 是压缩格式，是可选的。TiDB Cloud 支持以下格式：`.gzip`、`.gz`、`.zstd`、`.zst` 和 `.snappy`。
 
-For example, the target database and table of all the following files are `import_db` and `test_table`:
+例如，以下所有文件的目标数据库和表都是 `import_db` 和 `test_table`：
 
 - `import_db.test_table.csv`
 - `import_db.test_table.01.csv`
@@ -66,26 +66,26 @@ For example, the target database and table of all the following files are `impor
 - `import_db.test_table_0_0_01.csv`
 - `import_db.test_table_0_0_01.csv.gz`
 
-> **Note:**
+> **注意：**
 >
-> The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
+> Snappy 压缩文件必须是[官方 Snappy 格式](https://github.com/google/snappy)。不支持其他变体的 Snappy 压缩。
 
 ### Parquet
 
-When you import Parquet files, name the data files as follows:
+导入 Parquet 文件时，数据文件的命名规范如下：
 
-`${db_name}.${table_name}${suffix}.parquet` (`${suffix}` is optional)
+`${db_name}.${table_name}${suffix}.parquet`（`${suffix}` 是可选的）
 
-For example:
+例如：
 
 - `import_db.test_table.parquet`
 - `import_db.test_table.01.parquet`
 
 ### Aurora Snapshot
 
-For Aurora Snapshot files, all files with the `.parquet` suffix in the `${db_name}.${table_name}/` folder conform to the naming convention. A data file name can contain any prefix consisting of "a-z, 0-9, - , _ , ." and suffix ".parquet".
+对于 Aurora Snapshot 文件，`${db_name}.${table_name}/` 文件夹中所有带有 `.parquet` 后缀的文件都符合命名规范。数据文件名可以包含由"a-z、0-9、-、_、."组成的任何前缀和后缀 ".parquet"。
 
-For example:
+例如：
 
 - `import_db.test_table/mydata.parquet`
 - `import_db.test_table/part001/mydata.parquet`
@@ -93,33 +93,33 @@ For example:
 
 ### SQL
 
-When you import SQL files, name the data files as follows:
+导入 SQL 文件时，数据文件的命名规范如下：
 
 `${db_name}.${table_name}${suffix}.sql.${compress}`
 
-`${suffix}` is optional and can be one of the following formats, where *`xxx`* can be any number:
+`${suffix}` 是可选的，可以是以下格式之一，其中 *`xxx`* 可以是任何数字：
 
-- *`.xxx`*, such as `.01`
-- *`._xxx_xxx_xxx`*, such as `._0_0_01`
-- *`_xxx_xxx_xxx`*, such as `_0_0_01`
+- *`.xxx`*，例如 `.01`
+- *`._xxx_xxx_xxx`*，例如 `._0_0_01`
+- *`_xxx_xxx_xxx`*，例如 `_0_0_01`
 
-`${compress}` is the compression format and it is optional. TiDB Cloud supports the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`.
+`${compress}` 是压缩格式，是可选的。TiDB Cloud 支持以下格式：`.gzip`、`.gz`、`.zstd`、`.zst` 和 `.snappy`。
 
-For example:
+例如：
 
 - `import_db.test_table.sql`
 - `import_db.test_table.01.sql`
 - `import_db.test_table.01.sql.gz`
 
-If the SQL file is exported through TiDB Dumpling with the default configuration, it conforms to the naming convention by default.
+如果 SQL 文件是通过默认配置的 TiDB Dumpling 导出的，则默认符合命名规范。
 
-> **Note:**
+> **注意：**
 >
-> The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
+> Snappy 压缩文件必须是[官方 Snappy 格式](https://github.com/google/snappy)。不支持其他变体的 Snappy 压缩。
 
-## File pattern
+## 文件模式
 
-If the source data file of CSV or Parquet does not conform to the naming convention, you can use the file pattern feature to establish the name mapping relationship between the source data file and the target table. This feature does not support Aurora Snapshot and SQL data files.
+如果 CSV 或 Parquet 的源数据文件不符合命名规范，你可以使用文件模式功能建立源数据文件与目标表之间的名称映射关系。此功能不支持 Aurora Snapshot 和 SQL 数据文件。
 
-- For CSV files, see **Advanced Settings** > **Mapping Settings** in [Step 4. Import CSV files to TiDB Cloud](/tidb-cloud/import-csv-files.md#step-4-import-csv-files-to-tidb-cloud)
-- For Parquet files, see **Advanced Settings** > **Mapping Settings** in [Step 4. Import Parquet files to TiDB Cloud](/tidb-cloud/import-parquet-files.md#step-4-import-parquet-files-to-tidb-cloud) 
+- 对于 CSV 文件，请参阅[步骤 4. 将 CSV 文件导入到 TiDB Cloud](/tidb-cloud/import-csv-files.md#步骤-4-将-csv-文件导入到-tidb-cloud) 中的**高级设置** > **映射设置**
+- 对于 Parquet 文件，请参阅[步骤 4. 将 Parquet 文件导入到 TiDB Cloud](/tidb-cloud/import-parquet-files.md#步骤-4-将-parquet-文件导入到-tidb-cloud) 中的**高级设置** > **映射设置**

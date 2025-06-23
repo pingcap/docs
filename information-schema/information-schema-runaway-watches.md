@@ -1,15 +1,15 @@
 ---
 title: RUNAWAY_WATCHES
-summary: Learn the `RUNAWAY_WATCHES` INFORMATION_SCHEMA table.
+summary: 了解 `RUNAWAY_WATCHES` INFORMATION_SCHEMA 表。
 ---
 
 # RUNAWAY_WATCHES
 
-The `RUNAWAY_WATCHES` table shows the watch list of runaway queries that consume more resources than expected. For more information, see [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries).
+`RUNAWAY_WATCHES` 表显示了消耗资源超出预期的失控查询的监视列表。更多信息，请参见[失控查询](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries)。
 
-> **Note:**
+> **注意：**
 >
-> This table is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> 此表在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -32,15 +32,15 @@ DESC RUNAWAY_WATCHES;
 8 rows in set (0.00 sec)
 ```
 
-## Examples
+## 示例
 
-Query the watch list of runaway queries:
+查询失控查询的监视列表：
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES\G
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 *************************** 1. row ***************************
@@ -64,19 +64,19 @@ RESOURCE_GROUP_NAME: rg2
 2 rows in set (0.00 sec)
 ```
 
-Add a watch item into list to the resource group `rg1`:
+向资源组 `rg1` 的列表中添加一个监视项：
 
 ```sql
 QUERY WATCH ADD RESOURCE GROUP rg1 SQL TEXT EXACT TO 'select * from sbtest.sbtest1';
 ```
 
-Query the watch list of runaway queries again:
+再次查询失控查询的监视列表：
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES\G
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 *************************** 1. row ***************************
@@ -109,15 +109,15 @@ RESOURCE_GROUP_NAME: rg1
 3 row in set (0.00 sec)
 ```
 
-The meaning of each column field in the `RUNAWAY_WATCHES` table is as follows:
+`RUNAWAY_WATCHES` 表中各列字段的含义如下：
 
-- `ID`: the ID of the watch item.
-- `RESOURCE_GROUP_NAME`: the name of the resource group.
-- `START_TIME`: the start time.
-- `END_TIME`: the end time. `UNLIMITED` means that the watch item has an unlimited validity period.
-- `WATCH`: the match type of the quick identification. The values are as follows:
-    - `Plan` indicates that the Plan Digest is matched. In this case, the `WATCH_TEXT` column shows the Plan Digest.
-    - `Similar` indicates that the SQL Digest is matched. In this case, the `WATCH_TEXT` column shows the SQL Digest.
-    - `Exact` indicates that the SQL text is matched. In this case, the `WATCH_TEXT` column shows the SQL text.
-- `SOURCE`: the source of the watch item. If it is identified by the `QUERY_LIMIT` rule, the identified TiDB IP address is displayed. If it is manually added, `manual` is displayed.
-- `ACTION`: the corresponding operation after the identification.
+- `ID`：监视项的 ID。
+- `RESOURCE_GROUP_NAME`：资源组的名称。
+- `START_TIME`：开始时间。
+- `END_TIME`：结束时间。`UNLIMITED` 表示该监视项具有无限期的有效期。
+- `WATCH`：快速识别的匹配类型。取值如下：
+    - `Plan` 表示匹配 Plan Digest，此时 `WATCH_TEXT` 列显示 Plan Digest。
+    - `Similar` 表示匹配 SQL Digest，此时 `WATCH_TEXT` 列显示 SQL Digest。
+    - `Exact` 表示匹配 SQL 文本，此时 `WATCH_TEXT` 列显示 SQL 文本。
+- `SOURCE`：监视项的来源。如果是由 `QUERY_LIMIT` 规则识别的，则显示识别的 TiDB IP 地址；如果是手动添加的，则显示 `manual`。
+- `ACTION`：识别后的对应操作。

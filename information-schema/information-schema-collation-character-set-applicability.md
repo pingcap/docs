@@ -1,18 +1,18 @@
 ---
 title: COLLATION_CHARACTER_SET_APPLICABILITY
-summary: Learn the `COLLATION_CHARACTER_SET_APPLICABILITY` INFORMATION_SCHEMA table.
+summary: 了解 `COLLATION_CHARACTER_SET_APPLICABILITY` INFORMATION_SCHEMA 表。
 ---
 
 # COLLATION_CHARACTER_SET_APPLICABILITY
 
-The `COLLATION_CHARACTER_SET_APPLICABILITY` table maps collations to the applicable character set name. Similar to the `COLLATIONS` table, it is included only for compatibility with MySQL.
+`COLLATION_CHARACTER_SET_APPLICABILITY` 表将排序规则映射到适用的字符集名称。与 `COLLATIONS` 表类似，它仅为了与 MySQL 兼容而包含。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC COLLATION_CHARACTER_SET_APPLICABILITY;
 ```
 
-The output is as follows:
+输出如下：
 
 ```sql
 +--------------------+-------------+------+------+---------+-------+
@@ -24,13 +24,13 @@ The output is as follows:
 2 rows in set (0.00 sec)
 ```
 
-View the collation mapping for the `utf8mb4` character set in the `COLLATION_CHARACTER_SET_APPLICABILITY` table:
+在 `COLLATION_CHARACTER_SET_APPLICABILITY` 表中查看 `utf8mb4` 字符集的排序规则映射：
 
 ```sql
 SELECT * FROM COLLATION_CHARACTER_SET_APPLICABILITY WHERE character_set_name='utf8mb4';
 ```
 
-The output is as follows:
+输出如下：
 
 ```sql
 +--------------------+--------------------+
@@ -43,12 +43,12 @@ The output is as follows:
 3 rows in set (0.00 sec)
 ```
 
-The description of columns in the `COLLATION_CHARACTER_SET_APPLICABILITY` table is as follows:
+`COLLATION_CHARACTER_SET_APPLICABILITY` 表中各列的说明如下：
 
-* `COLLATION_NAME`: The name of the collation.
-* `CHARACTER_SET_NAME`: The name of the character set which the collation belongs to.
+* `COLLATION_NAME`：排序规则的名称。
+* `CHARACTER_SET_NAME`：排序规则所属的字符集名称。
 
-## See also
+## 另请参阅
 
 - [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
 - [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)

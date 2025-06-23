@@ -1,134 +1,134 @@
 ---
-title: Export Data from TiDB Cloud Serverless
-summary: Learn how to export data from TiDB Cloud Serverless clusters.
+title: 从 TiDB Cloud Serverless 导出数据
+summary: 了解如何从 TiDB Cloud Serverless 集群导出数据。
 ---
 
-# Export Data from TiDB Cloud Serverless
+# 从 TiDB Cloud Serverless 导出数据
 
-TiDB Cloud Serverless Export (Beta) is a service that enables you to export data from a TiDB Cloud Serverless cluster to a local file or an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
+TiDB Cloud Serverless 导出功能（Beta）是一项服务，可让你将数据从 TiDB Cloud Serverless 集群导出到本地文件或外部存储服务。你可以将导出的数据用于备份、迁移、数据分析或其他用途。
 
-While you can also export data using tools such as [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) and TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview), TiDB Cloud Serverless Export offers a more convenient and efficient way to export data from a TiDB Cloud Serverless cluster. It brings the following benefits:
+虽然你也可以使用 [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) 和 TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview) 等工具导出数据，但 TiDB Cloud Serverless 导出功能提供了一种更便捷、高效的方式来从 TiDB Cloud Serverless 集群导出数据。它具有以下优势：
 
-- Convenience: the export service provides a simple and easy-to-use way to export data from a TiDB Cloud Serverless cluster, eliminating the need for additional tools or resources.
-- Isolation: the export service uses separate computing resources, ensuring isolation from the resources used by your online services.
-- Consistency: the export service ensures the consistency of the exported data without causing locks, which does not affect your online services.
+- 便捷性：导出服务提供了一种简单易用的方式来从 TiDB Cloud Serverless 集群导出数据，无需额外的工具或资源。
+- 隔离性：导出服务使用独立的计算资源，确保与你的在线服务资源隔离。
+- 一致性：导出服务确保导出数据的一致性，且不会造成锁定，不影响你的在线服务。
 
-> **Note:**
+> **注意：**
 >
-> The maximum export size is currently 1 TiB. To export more data or request a higher export speed, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> 目前最大导出大小为 1 TiB。如需导出更多数据或请求更高的导出速度，请联系 [TiDB Cloud 支持团队](/tidb-cloud/tidb-cloud-support.md)。
 
-## Export locations
+## 导出位置
 
-You can export data to the following locations:
+你可以将数据导出到以下位置：
 
-- A local file
-- An external storage, including:
+- 本地文件
+- 外部存储，包括：
 
     - [Amazon S3](https://aws.amazon.com/s3/)
     - [Google Cloud Storage](https://cloud.google.com/storage)
     - [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
-    - [Alibaba Cloud Object Storage Service (OSS)](https://www.alibabacloud.com/product/oss)
+    - [阿里云对象存储服务（OSS）](https://www.alibabacloud.com/product/oss)
 
-> **Note:**
+> **注意：**
 >
-> If the size of the data to be exported is large (more than 100 GiB), it is recommended that you export it to an external storage.
+> 如果要导出的数据量较大（超过 100 GiB），建议导出到外部存储。
 
-### A local file
+### 本地文件
 
-To export data from a TiDB Cloud Serverless cluster to a local file, you need to export data [using the TiDB Cloud console](#export-data-to-a-local-file) or [using the TiDB Cloud CLI](/tidb-cloud/ticloud-serverless-export-create.md), and then download the exported data using the TiDB Cloud CLI.
+要将数据从 TiDB Cloud Serverless 集群导出到本地文件，你需要[使用 TiDB Cloud 控制台](#导出数据到本地文件)或[使用 TiDB Cloud CLI](/tidb-cloud/ticloud-serverless-export-create.md) 导出数据，然后使用 TiDB Cloud CLI 下载导出的数据。
 
-Exporting data to a local file has the following limitations:
+导出数据到本地文件有以下限制：
 
-- Downloading exported data using the TiDB Cloud console is not supported.
-- Exported data is saved in the stashing area of TiDB Cloud and will expire after two days. You need to download the exported data in time.
-- If the storage space of stashing area is full, you will not be able to export data to the local file.
+- 不支持使用 TiDB Cloud 控制台下载导出的数据。
+- 导出的数据保存在 TiDB Cloud 的暂存区域，两天后过期。你需要及时下载导出的数据。
+- 如果暂存区域的存储空间已满，你将无法导出数据到本地文件。
 
 ### Amazon S3
 
-To export data to Amazon S3, you need to provide the following information:
+要导出数据到 Amazon S3，你需要提供以下信息：
 
-- URI: `s3://<bucket-name>/<folder-path>/`
-- One of the following access credentials:
-    - [An access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): make sure the access key has the `s3:PutObject` and `s3:ListBucket` permissions.
-    - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role ARN (Amazon Resource Name) has the `s3:PutObject` and `s3:ListBucket` permissions. Note that only clusters hosted on AWS support the role ARN.
+- URI：`s3://<bucket-name>/<folder-path>/`
+- 以下访问凭证之一：
+    - [访问密钥](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)：确保访问密钥具有 `s3:PutObject` 和 `s3:ListBucket` 权限。
+    - [角色 ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html)：确保角色 ARN（Amazon Resource Name）具有 `s3:PutObject` 和 `s3:ListBucket` 权限。注意，只有托管在 AWS 上的集群支持角色 ARN。
 
-For more information, see [Configure Amazon S3 access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+更多信息，请参见[配置 Amazon S3 访问](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access)。
 
 ### Google Cloud Storage
 
-To export data to Google Cloud Storage, you need to provide the following information:
+要导出数据到 Google Cloud Storage，你需要提供以下信息：
 
-- URI: `gs://<bucket-name>/<folder-path>/`
-- Access credential: a **base64 encoded** [service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for your bucket. Make sure the service account key has the `storage.objects.create` permission.
+- URI：`gs://<bucket-name>/<folder-path>/`
+- 访问凭证：存储桶的 **base64 编码**[服务账号密钥](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)。确保服务账号密钥具有 `storage.objects.create` 权限。
 
-For more information, see [Configure GCS access](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
+更多信息，请参见[配置 GCS 访问](/tidb-cloud/serverless-external-storage.md#configure-gcs-access)。
 
 ### Azure Blob Storage
 
-To export data to Azure Blob Storage, you need to provide the following information:
+要导出数据到 Azure Blob Storage，你需要提供以下信息：
 
-- URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` or `https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`
-- Access credential: a [shared access signature (SAS) token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) for your Azure Blob Storage container. Make sure the SAS token has the `Read` and `Write` permissions on the `Container` and `Object` resources.
+- URI：`azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` 或 `https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`
+- 访问凭证：Azure Blob Storage 容器的[共享访问签名（SAS）令牌](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)。确保 SAS 令牌对 `Container` 和 `Object` 资源具有 `Read` 和 `Write` 权限。
 
-For more information, see [Configure Azure Blob Storage access](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+更多信息，请参见[配置 Azure Blob Storage 访问](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access)。
 
-### Alibaba Cloud OSS
+### 阿里云 OSS
 
-To export data to Alibaba Cloud OSS, you need to provide the following information:
+要导出数据到阿里云 OSS，你需要提供以下信息：
 
-- URI: `oss://<bucket-name>/<folder-path>/`
-- Access credential: An [AccessKey pair](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair) for your Alibaba Cloud account. Make sure the AccessKey pair has the `oss:PutObject`, `oss:ListBuckets` and `oss:GetBucketInfo` permissions to allow data export to the OSS bucket.
+- URI：`oss://<bucket-name>/<folder-path>/`
+- 访问凭证：阿里云账号的 [AccessKey 对](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)。确保 AccessKey 对具有 `oss:PutObject`、`oss:ListBuckets` 和 `oss:GetBucketInfo` 权限，以允许将数据导出到 OSS 存储桶。
 
-For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access).
+更多信息，请参见[配置阿里云对象存储服务（OSS）访问](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access)。
 
-## Export options
+## 导出选项
 
-### Data filtering
+### 数据过滤
 
-- TiDB Cloud console supports exporting data with the selected databases and tables.
-- TiDB Cloud CLI supports exporting data with SQL statements and [table filters](/table-filter.md).
+- TiDB Cloud 控制台支持导出选定的数据库和表。
+- TiDB Cloud CLI 支持使用 SQL 语句和[表过滤器](/table-filter.md)导出数据。
 
-### Data formats
+### 数据格式
 
-You can export data in the following formats:
+你可以将数据导出为以下格式：
 
-- `SQL`: export data in SQL format.
-- `CSV`: export data in CSV format. You can specify the following options:
-    - `delimiter`: specify the delimiter used in the exported data. The default delimiter is `"`.
-    - `separator`: specify the character used to separate fields in the exported data. The default separator is `,`.
-    - `header`: specify whether to include a header row in the exported data. The default value is `true`.
-    - `null-value`: specify the string that represents a NULL value in the exported data. The default value is `\N`.
-- `Parquet`: export data in Parquet format.
+- `SQL`：以 SQL 格式导出数据。
+- `CSV`：以 CSV 格式导出数据。你可以指定以下选项：
+    - `delimiter`：指定导出数据中使用的分隔符。默认分隔符为 `"`。
+    - `separator`：指定导出数据中用于分隔字段的字符。默认分隔符为 `,`。
+    - `header`：指定是否在导出数据中包含标题行。默认值为 `true`。
+    - `null-value`：指定导出数据中表示 NULL 值的字符串。默认值为 `\N`。
+- `Parquet`：以 Parquet 格式导出数据。
 
-The schema and data are exported according to the following naming conventions:
+模式和数据的导出遵循以下命名约定：
 
-| Item            | Not compressed                                        | Compressed                                                                                                          |
+| 项目            | 未压缩                                                | 已压缩                                                                                                          |
 |-----------------|-------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
-| Database schema | {database}-schema-create.sql                          | {database}-schema-create.sql.{compression-type}                                                                     |
-| Table schema    | {database}.{table}-schema.sql                         | {database}.{table}-schema.sql.{compression-type}                                                                    |
-| Data            | {database}.{table}.{0001}.{csv&#124;parquet&#124;sql} | {database}.{table}.{0001}.{csv&#124;sql}.{compression-type}<br/>{database}.{table}.{0001}.{compression-type}.parquet |
+| 数据库模式 | {database}-schema-create.sql                          | {database}-schema-create.sql.{compression-type}                                                                     |
+| 表模式    | {database}.{table}-schema.sql                         | {database}.{table}-schema.sql.{compression-type}                                                                    |
+| 数据            | {database}.{table}.{0001}.{csv&#124;parquet&#124;sql} | {database}.{table}.{0001}.{csv&#124;sql}.{compression-type}<br/>{database}.{table}.{0001}.{compression-type}.parquet |
 
-### Data compression
+### 数据压缩
 
-You can compress the exported CSV and SQL data using the following algorithms:
+你可以使用以下算法压缩导出的 CSV 和 SQL 数据：
 
-- `gzip` (default): compress the exported data with `gzip`.
-- `snappy`: compress the exported data with `snappy`.
-- `zstd`: compress the exported data with `zstd`.
-- `none`: do not compress the exported `data`.
+- `gzip`（默认）：使用 `gzip` 压缩导出的数据。
+- `snappy`：使用 `snappy` 压缩导出的数据。
+- `zstd`：使用 `zstd` 压缩导出的数据。
+- `none`：不压缩导出的数据。
 
-You can compress the exported Parquet data using the following algorithms:
+你可以使用以下算法压缩导出的 Parquet 数据：
 
-- `zstd` (default): compress the Parquet file with `zstd`.
-- `gzip`: compress the Parquet file with `gzip`.
-- `snappy`: compress the Parquet file with `snappy`.
-- `none`: do not compress the Parquet file.
+- `zstd`（默认）：使用 `zstd` 压缩 Parquet 文件。
+- `gzip`：使用 `gzip` 压缩 Parquet 文件。
+- `snappy`：使用 `snappy` 压缩 Parquet 文件。
+- `none`：不压缩 Parquet 文件。
 
-### Data conversion
+### 数据转换
 
-When exporting data to the Parquet format, the data conversion between TiDB Cloud Serverless and Parquet is as follows:
+在导出数据到 Parquet 格式时，TiDB Cloud Serverless 和 Parquet 之间的数据转换如下：
 
-| TiDB Cloud Serverless Type | Parquest primitive type | Parquet logical type                         |
+| TiDB Cloud Serverless 类型 | Parquet 基本类型 | Parquet 逻辑类型                         |
 |----------------------------|-------------------------|----------------------------------------------|
 | VARCHAR                    | BYTE_ARRAY              | String(UTF8)                                 |
 | TIME                       | BYTE_ARRAY              | String(UTF8)                                 |
@@ -168,84 +168,84 @@ When exporting data to the Parquet format, the data conversion between TiDB Clou
 | VARBINARY                  | BYTE_ARRAY              | /                                            |
 | BIT                        | BYTE_ARRAY              | /                                            |
 
-## Examples
+## 示例
 
-### Export data to a local file
+### 导出数据到本地文件
 
 <SimpleTab>
-<div label="Console">
+<div label="控制台">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面。
 
-   > **Tip:**
+   > **提示：**
    >
-   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+   > 你可以使用左上角的组合框在组织、项目和集群之间切换。
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+2. 点击目标集群的名称进入其概览页面，然后在左侧导航栏中点击**数据** > **导入**。
 
-3. On the **Import** page, click **Export Data to** in the upper-right corner, then choose **Local File** from the drop-down list. Fill in the following parameters:
+3. 在**导入**页面，点击右上角的**导出数据到**，然后从下拉列表中选择**本地文件**。填写以下参数：
 
-    - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
-    - **Exported Data**: choose the databases and tables you want to export.
-    - **Data Format**: choose **SQL**, **CSV**, or **Parquet**.
-    - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
+    - **任务名称**：输入导出任务的名称。默认值为 `SNAPSHOT_{snapshot_time}`。
+    - **导出数据**：选择要导出的数据库和表。
+    - **数据格式**：选择 **SQL**、**CSV** 或 **Parquet**。
+    - **压缩**：选择 **Gzip**、**Snappy**、**Zstd** 或 **None**。
 
-   > **Tip:**
+   > **提示：**
    >
-   > If your cluster has neither imported nor exported any data before, you need to click **Click here to export data to...** at the bottom of the page to export data.
+   > 如果你的集群之前没有导入或导出任何数据，你需要点击页面底部的**点击此处导出数据到...**来导出数据。
 
-4. Click **Export**.
+4. 点击**导出**。
 
-5. After the export task is successful, you can copy the download command displayed in the export task detail, and then download the exported data by running the command in the [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
+5. 导出任务成功后，你可以复制导出任务详情中显示的下载命令，然后在 [TiDB Cloud CLI](/tidb-cloud/cli-reference.md) 中运行该命令下载导出的数据。
 
 </div>
 
 <div label="CLI">
 
-1. Create an export task:
+1. 创建导出任务：
 
     ```shell
     ticloud serverless export create -c <cluster-id>
     ```
 
-    You will get an export ID from the output.
+    你将从输出中获得导出 ID。
 
-2. After the export task is successful, download the exported data to your local file:
+2. 导出任务成功后，将导出的数据下载到本地文件：
 
     ```shell
     ticloud serverless export download -c <cluster-id> -e <export-id>
     ```
 
-    For more information about the download command, see [ticloud serverless export download](/tidb-cloud/ticloud-serverless-export-download.md).
- 
+    有关下载命令的更多信息，请参见 [ticloud serverless export download](/tidb-cloud/ticloud-serverless-export-download.md)。
+
 </div>
 </SimpleTab>
 
-### Export data to Amazon S3
+### 导出数据到 Amazon S3
 
 <SimpleTab>
-<div label="Console">
+<div label="控制台">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面。
 
-   > **Tip:**
+   > **提示：**
    >
-   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+   > 你可以使用左上角的组合框在组织、项目和集群之间切换。
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+2. 点击目标集群的名称进入其概览页面，然后在左侧导航栏中点击**数据** > **导入**。
 
-3. On the **Import** page, click **Export Data to** in the upper-right corner, then choose **Amazon S3** from the drop-down list. Fill in the following parameters:
+3. 在**导入**页面，点击右上角的**导出数据到**，然后从下拉列表中选择 **Amazon S3**。填写以下参数：
 
-    - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
-    - **Exported Data**: choose the databases and tables you want to export.
-    - **Data Format**: choose **SQL**, **CSV**, or **Parquet**.
-    - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
-    - **Folder URI**: enter the URI of the Amazon S3 with the `s3://<bucket-name>/<folder-path>/` format.
-    - **Bucket Access**: choose one of the following access credentials and then fill in the credential information:
-        - **AWS Role ARN**: enter the role ARN that has the permission to access the bucket. It is recommended to create the role ARN with AWS CloudFormation. For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
-        - **AWS Access Key**: enter the access key ID and access key secret that have the permission to access the bucket.
+    - **任务名称**：输入导出任务的名称。默认值为 `SNAPSHOT_{snapshot_time}`。
+    - **导出数据**：选择要导出的数据库和表。
+    - **数据格式**：选择 **SQL**、**CSV** 或 **Parquet**。
+    - **压缩**：选择 **Gzip**、**Snappy**、**Zstd** 或 **None**。
+    - **文件夹 URI**：输入 Amazon S3 的 URI，格式为 `s3://<bucket-name>/<folder-path>/`。
+    - **存储桶访问**：选择以下访问凭证之一，然后填写凭证信息：
+        - **AWS 角色 ARN**：输入具有访问存储桶权限的角色 ARN。建议使用 AWS CloudFormation 创建角色 ARN。更多信息，请参见[配置 TiDB Cloud Serverless 的外部存储访问](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access)。
+        - **AWS 访问密钥**：输入具有访问存储桶权限的访问密钥 ID 和访问密钥密钥。
 
-4. Click **Export**.
+4. 点击**导出**。
 
 </div>
 
@@ -257,37 +257,37 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
 ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri> --s3.role-arn <role-arn> --filter "database.table"
 ```
 
-- `s3.uri`: the Amazon S3 URI with the `s3://<bucket-name>/<folder-path>/` format.
-- `s3.access-key-id`: the access key ID of the user who has the permission to access the bucket.
-- `s3.secret-access-key`: the access key secret of the user who has the permission to access the bucket.
-- `s3.role-arn`: the role ARN that has the permission to access the bucket.
+- `s3.uri`：Amazon S3 URI，格式为 `s3://<bucket-name>/<folder-path>/`。
+- `s3.access-key-id`：具有访问存储桶权限的用户的访问密钥 ID。
+- `s3.secret-access-key`：具有访问存储桶权限的用户的访问密钥密钥。
+- `s3.role-arn`：具有访问存储桶权限的角色 ARN。
 
 </div>
 </SimpleTab>
 
-### Export data to Google Cloud Storage
+### 导出数据到 Google Cloud Storage
 
 <SimpleTab>
-<div label="Console">
+<div label="控制台">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面。
 
-   > **Tip:**
+   > **提示：**
    >
-   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+   > 你可以使用左上角的组合框在组织、项目和集群之间切换。
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+2. 点击目标集群的名称进入其概览页面，然后在左侧导航栏中点击**数据** > **导入**。
 
-3. On the **Import** page, click **Export Data to** in the upper-right corner, and then choose **Google Cloud Storage** from the drop-down list. Fill in the following parameters:
+3. 在**导入**页面，点击右上角的**导出数据到**，然后从下拉列表中选择 **Google Cloud Storage**。填写以下参数：
 
-    - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
-    - **Exported Data**: choose the databases and tables you want to export.
-    - **Data Format**: choose **SQL**, **CSV**, or **Parquet**.
-    - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
-    - **Folder URI**: enter the URI of the Google Cloud Storage with the `gs://<bucket-name>/<folder-path>/` format.
-    - **Bucket Access**: upload the Google Cloud credentials file that has permission to access the bucket.
+    - **任务名称**：输入导出任务的名称。默认值为 `SNAPSHOT_{snapshot_time}`。
+    - **导出数据**：选择要导出的数据库和表。
+    - **数据格式**：选择 **SQL**、**CSV** 或 **Parquet**。
+    - **压缩**：选择 **Gzip**、**Snappy**、**Zstd** 或 **None**。
+    - **文件夹 URI**：输入 Google Cloud Storage 的 URI，格式为 `gs://<bucket-name>/<folder-path>/`。
+    - **存储桶访问**：上传具有访问存储桶权限的 Google Cloud 凭证文件。
 
-4. Click **Export**.
+4. 点击**导出**。
 
 </div>
 
@@ -297,35 +297,35 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
 ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <uri> --gcs.service-account-key <service-account-key> --filter "database.table"
 ```
 
-- `gcs.uri`: the URI of the Google Cloud Storage bucket in the `gs://<bucket-name>/<folder-path>/` format.
-- `gcs.service-account-key`: the base64 encoded service account key.
+- `gcs.uri`：Google Cloud Storage 存储桶的 URI，格式为 `gs://<bucket-name>/<folder-path>/`。
+- `gcs.service-account-key`：base64 编码的服务账号密钥。
 
 </div>
 </SimpleTab>
 
-### Export data to Azure Blob Storage
+### 导出数据到 Azure Blob Storage
 
 <SimpleTab>
-<div label="Console">
+<div label="控制台">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面。
 
-   > **Tip:**
+   > **提示：**
    >
-   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+   > 你可以使用左上角的组合框在组织、项目和集群之间切换。
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+2. 点击目标集群的名称进入其概览页面，然后在左侧导航栏中点击**数据** > **导入**。
 
-3. On the **Import** page, click **Export Data to** in the upper-right corner, and then choose **Azure Blob Storage** from the drop-down list. Fill in the following parameters:
+3. 在**导入**页面，点击右上角的**导出数据到**，然后从下拉列表中选择 **Azure Blob Storage**。填写以下参数：
 
-    - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
-    - **Exported Data**: choose the databases and tables you want to export.
-    - **Data Format**: choose **SQL**, **CSV**, or **Parquet**.
-    - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
-    - **Folder URI**: enter the URI of Azure Blob Storage with the `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` format.
-    - **SAS Token**: enter the SAS token that has the permission to access the container. It is recommended to create a SAS token with the [Azure ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/). For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+    - **任务名称**：输入导出任务的名称。默认值为 `SNAPSHOT_{snapshot_time}`。
+    - **导出数据**：选择要导出的数据库和表。
+    - **数据格式**：选择 **SQL**、**CSV** 或 **Parquet**。
+    - **压缩**：选择 **Gzip**、**Snappy**、**Zstd** 或 **None**。
+    - **文件夹 URI**：输入 Azure Blob Storage 的 URI，格式为 `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`。
+    - **SAS 令牌**：输入具有访问容器权限的 SAS 令牌。建议使用 [Azure ARM 模板](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)创建 SAS 令牌。更多信息，请参见[配置 TiDB Cloud Serverless 的外部存储访问](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access)。
 
-4. Click **Export**.
+4. 点击**导出**。
 
 </div>
 
@@ -335,37 +335,37 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
 ticloud serverless export create -c <cluster-id> --target-type AZURE_BLOB --azblob.uri <uri> --azblob.sas-token <sas-token> --filter "database.table"
 ```
 
-- `azblob.uri`: the URI of the Azure Blob Storage in the `(azure|https)://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` format.
-- `azblob.sas-token`: the account SAS token of the Azure Blob Storage.
+- `azblob.uri`：Azure Blob Storage 的 URI，格式为 `(azure|https)://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`。
+- `azblob.sas-token`：Azure Blob Storage 的账号 SAS 令牌。
 
 </div>
 </SimpleTab>
 
-### Export data to Alibaba Cloud OSS
+### 导出数据到阿里云 OSS
 
 <SimpleTab>
-<div label="Console">
+<div label="控制台">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面。
 
-   > **Tip:**
+   > **提示：**
    >
-   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+   > 你可以使用左上角的组合框在组织、项目和集群之间切换。
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+2. 点击目标集群的名称进入其概览页面，然后在左侧导航栏中点击**数据** > **导入**。
 
-3. On the **Import** page, click **Export Data to** in the upper-right corner, and then choose **Alibaba Cloud OSS** from the drop-down list. 
+3. 在**导入**页面，点击右上角的**导出数据到**，然后从下拉列表中选择**阿里云 OSS**。
 
-4. Fill in the following parameters:
+4. 填写以下参数：
 
-    - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
-    - **Exported Data**: choose the databases and tables you want to export.
-    - **Data Format**: choose **SQL**, **CSV**, or **Parquet**.
-    - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
-    - **Folder URI**: enter the Alibaba Cloud OSS URI where you want to export the data, in the `oss://<bucket-name>/<folder-path>/` format.
-    - **AccessKey ID** and **AccessKey Secret**: enter the AccessKey ID and AccessKey Secret that have the permission to access the bucket.
+    - **任务名称**：输入导出任务的名称。默认值为 `SNAPSHOT_{snapshot_time}`。
+    - **导出数据**：选择要导出的数据库和表。
+    - **数据格式**：选择 **SQL**、**CSV** 或 **Parquet**。
+    - **压缩**：选择 **Gzip**、**Snappy**、**Zstd** 或 **None**。
+    - **文件夹 URI**：输入要导出数据的阿里云 OSS URI，格式为 `oss://<bucket-name>/<folder-path>/`。
+    - **AccessKey ID** 和 **AccessKey Secret**：输入具有访问存储桶权限的 AccessKey ID 和 AccessKey Secret。
 
-5. Click **Export**.
+5. 点击**导出**。
 
 </div>
 
@@ -375,33 +375,33 @@ ticloud serverless export create -c <cluster-id> --target-type AZURE_BLOB --azbl
 ticloud serverless export create -c <cluster-id> --target-type OSS --oss.uri <uri> --oss.access-key-id <access-key-id> --oss.access-key-secret <access-key-secret> --filter "database.table"
 ```
 
-- `oss.uri`: the Alibaba Cloud OSS URI where you want to export the data, in the `oss://<bucket-name>/<folder-path>/` format.
-- `oss.access-key-id`: the AccessKey ID of the user who has the permission to access the bucket.
-- `oss.access-key-secret`: the AccessKey secret of the user who has the permission to access the bucket.
+- `oss.uri`：要导出数据的阿里云 OSS URI，格式为 `oss://<bucket-name>/<folder-path>/`。
+- `oss.access-key-id`：具有访问存储桶权限的用户的 AccessKey ID。
+- `oss.access-key-secret`：具有访问存储桶权限的用户的 AccessKey Secret。
 
 </div>
 </SimpleTab>
 
-### Cancel an export task
+### 取消导出任务
 
-To cancel an ongoing export task, take the following steps:
+要取消正在进行的导出任务，请执行以下步骤：
 
 <SimpleTab>
-<div label="Console">
+<div label="控制台">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面。
 
-   > **Tip:**
+   > **提示：**
    >
-   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+   > 你可以使用左上角的组合框在组织、项目和集群之间切换。
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+2. 点击目标集群的名称进入其概览页面，然后在左侧导航栏中点击**数据** > **导入**。
 
-3. On the **Import** page, click **Export** to view the export task list.
+3. 在**导入**页面，点击**导出**查看导出任务列表。
 
-4. Choose the export task you want to cancel, and then click **Action**.
+4. 选择要取消的导出任务，然后点击**操作**。
 
-5. Choose **Cancel** in the drop-down list. Note that you can only cancel the export task that is in the **Running** status.
+5. 从下拉列表中选择**取消**。注意，你只能取消处于**运行中**状态的导出任务。
 
 </div>
 
@@ -414,15 +414,15 @@ ticloud serverless export cancel -c <cluster-id> -e <export-id>
 </div>
 </SimpleTab>
 
-## Export speed
+## 导出速度
 
-The export speed depends on your [cluster plan](/tidb-cloud/select-cluster-tier.md#cluster-plans). For details, see the following table:
+导出速度取决于你的[集群套餐](/tidb-cloud/select-cluster-tier.md#cluster-plans)。详情请参见下表：
 
-| Plan               | Export speed       |
+| 套餐               | 导出速度       |
 |:-------------------|:-------------------|
-| Free cluster plan      | Up to 25 MiB/s      |
-| Scalable cluster plan  | Up to 100 MiB/s     |
+| 免费集群套餐      | 最高 25 MiB/s      |
+| 可扩展集群套餐  | 最高 100 MiB/s     |
 
-## Pricing
+## 定价
 
-The export service is free during the beta period. You only need to pay for the [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) generated during the export process of successful or canceled tasks. For failed export tasks, you will not be charged.
+导出服务在 beta 期间免费。你只需为成功或已取消的导出任务过程中产生的[请求单元（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit)付费。对于失败的导出任务，你将不会被收费。

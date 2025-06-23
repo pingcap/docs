@@ -1,13 +1,13 @@
 ---
-title: CREATE INDEX | TiDB SQL Statement Reference
-summary: An overview of the usage of CREATE INDEX for the TiDB database.
+title: CREATE INDEX | TiDB SQL 语句参考
+summary: TiDB 数据库中 CREATE INDEX 的使用概览。
 ---
 
 # CREATE INDEX
 
-This statement adds a new index to an existing table. It is an alternative syntax to [`ALTER TABLE .. ADD INDEX`](/sql-statements/sql-statement-alter-table.md), and included for MySQL compatibility.
+该语句用于为现有表添加新索引。它是 [`ALTER TABLE .. ADD INDEX`](/sql-statements/sql-statement-alter-table.md) 的替代语法，包含此语法是为了与 MySQL 兼容。
 
-## Synopsis
+## 语法图
 
 ```ebnf+diagram
 CreateIndexStmt ::=
@@ -62,7 +62,7 @@ KeyOrIndex ::=
     'Key' | 'Index'
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -101,23 +101,23 @@ mysql> CREATE UNIQUE INDEX c1 ON t1 (c1);
 Query OK, 0 rows affected (0.31 sec)
 ```
 
-## Expression index
+## 表达式索引
 
-In some scenarios, the filtering condition of a query is based on a certain expression. In these scenarios, the query performance is relatively poor because ordinary indexes cannot take effect, the query can only be executed by scanning the entire table. The expression index is a type of special index that can be created on an expression. Once an expression index is created, TiDB can use the index for the expression-based query, which significantly improves the query performance.
+在某些场景中，查询的过滤条件是基于某个表达式的。在这些场景中，由于普通索引无法生效，查询只能通过全表扫描执行，查询性能较差。表达式索引是一种可以在表达式上创建的特殊索引。创建表达式索引后，TiDB 可以在基于表达式的查询中使用该索引，从而显著提高查询性能。
 
-For example, if you want to create an index based on `LOWER(col1)`, execute the following SQL statement:
+例如，如果你想基于 `LOWER(col1)` 创建索引，执行以下 SQL 语句：
 
 ```sql
 CREATE INDEX idx1 ON t1 ((LOWER(col1)));
 ```
 
-Or you can execute the following equivalent statement:
+或者你可以执行以下等效语句：
 
 ```sql
 ALTER TABLE t1 ADD INDEX idx1((LOWER(col1)));
 ```
 
-You can also specify the expression index when you create the table:
+你也可以在创建表时指定表达式索引：
 
 ```sql
 CREATE TABLE t1 (
@@ -127,17 +127,17 @@ CREATE TABLE t1 (
 );
 ```
 
-> **Note:**
+> **注意：**
 >
-> The expression in an expression index must be surrounded by `(` and `)`. Otherwise, a syntax error is reported.
+> 表达式索引中的表达式必须用 `(` 和 `)` 括起来。否则，会报语法错误。
 
-You can drop an expression index in the same way as dropping an ordinary index:
+你可以像删除普通索引一样删除表达式索引：
 
 ```sql
 DROP INDEX idx1 ON t1;
 ```
 
-Expression index involves various kinds of expressions. To ensure correctness, only some fully tested functions are allowed for creating an expression index. This means that only these functions are allowed in expressions in a production environment. You can get these functions by querying the [`tidb_allow_function_for_expression_index`](/system-variables.md#tidb_allow_function_for_expression_index-new-in-v520) variable. Currently, the allowed functions are as follows:
+表达式索引涉及各种类型的表达式。为确保正确性，只有一些经过充分测试的函数才允许用于创建表达式索引。这意味着在生产环境中只允许使用这些函数。你可以通过查询 [`tidb_allow_function_for_expression_index`](/system-variables.md#tidb_allow_function_for_expression_index-new-in-v520) 变量获取这些函数。目前，允许的函数如下：
 
 - [`JSON_ARRAY()`](/functions-and-operators/json-functions.md)
 - [`JSON_ARRAY_APPEND()`](/functions-and-operators/json-functions.md)
@@ -169,11 +169,11 @@ Expression index involves various kinds of expressions. To ensure correctness, o
 - [`UPPER()`](/functions-and-operators/string-functions.md#upper)
 - [`VITESS_HASH()`](/functions-and-operators/tidb-functions.md)
 
-For the functions that are not included in the above list, those functions are not fully tested and not recommended for a production environment, which can be seen as experimental. Other expressions such as operators, `CAST`, and `CASE WHEN` are also seen as experimental and not recommended for production.
+对于不在上述列表中的函数，这些函数未经过充分测试，不建议在生产环境中使用，可以视为实验性功能。其他表达式（如运算符、`CAST` 和 `CASE WHEN`）也被视为实验性功能，不建议在生产环境中使用。
 
 <CustomContent platform="tidb">
 
-If you still want to use those expressions, you can make the following configuration in the [TiDB configuration file](/tidb-configuration-file.md#allow-expression-index-new-in-v400):
+如果你仍然想使用这些表达式，可以在 [TiDB 配置文件](/tidb-configuration-file.md#allow-expression-index-new-in-v400)中进行以下配置：
 
 ```sql
 allow-expression-index = true
@@ -181,37 +181,37 @@ allow-expression-index = true
 
 </CustomContent>
 
-> **Note:**
+> **注意：**
 >
-> An expression index cannot be created on a primary key.
+> 不能在主键上创建表达式索引。
 >
-> The expression in an expression index cannot contain the following content:
+> 表达式索引中的表达式不能包含以下内容：
 >
-> - Volatile functions, such as `RAND()` and `NOW()`.
-> - [System variables](/system-variables.md) and [user variables](/user-defined-variables.md).
-> - Subqueries.
-> - [`AUTO_INCREMENT`](/auto-increment.md) columns. You can remove this restriction by setting the value of [`tidb_enable_auto_increment_in_generated`](/system-variables.md#tidb_enable_auto_increment_in_generated) (system variable) to `true`.
-> - [Window functions](/functions-and-operators/window-functions.md).
-> - ROW functions, such as `CREATE TABLE t (j JSON, INDEX k (((j,j))));`.
-> - [Aggregate functions](/functions-and-operators/aggregate-group-by-functions.md).
+> - 易变函数，如 `RAND()` 和 `NOW()`。
+> - [系统变量](/system-variables.md)和[用户变量](/user-defined-variables.md)。
+> - 子查询。
+> - [`AUTO_INCREMENT`](/auto-increment.md) 列。你可以通过将 [`tidb_enable_auto_increment_in_generated`](/system-variables.md#tidb_enable_auto_increment_in_generated)（系统变量）的值设置为 `true` 来移除此限制。
+> - [窗口函数](/functions-and-operators/window-functions.md)。
+> - ROW 函数，如 `CREATE TABLE t (j JSON, INDEX k (((j,j))));`。
+> - [聚合函数](/functions-and-operators/aggregate-group-by-functions.md)。
 >
-> An expression index implicitly takes up a name (for example, `_V$_{index_name}_{index_offset}`). If you try to create a new expression index with the name that a column has already had, an error occurs. In addition, if you add a new column with the same name, an error also occurs.
+> 表达式索引隐式占用一个名称（例如，`_V$_{index_name}_{index_offset}`）。如果你尝试使用列已经使用的名称创建新的表达式索引，会发生错误。此外，如果你添加一个同名的新列，也会发生错误。
 >
-> Make sure that the number of function parameters in the expression of an expression index is correct.
+> 确保表达式索引中函数参数的数量正确。
 >
-> When the expression of an index contains a string-related function, affected by the returned type and the length, creating the expression index might fail. In this situation, you can use the `CAST()` function to explicitly specify the returned type and the length. For example, to create an expression index based on the `REPEAT(a, 3)` expression, you need to modify this expression to `CAST(REPEAT(a, 3) AS CHAR(20))`.
+> 当索引的表达式包含字符串相关函数时，受返回类型和长度的影响，可能会创建表达式索引失败。在这种情况下，你可以使用 `CAST()` 函数显式指定返回类型和长度。例如，要基于 `REPEAT(a, 3)` 表达式创建表达式索引，你需要将此表达式修改为 `CAST(REPEAT(a, 3) AS CHAR(20))`。
 
-When the expression in a query statement matches the expression in an expression index, the optimizer can choose the expression index for the query. In some cases, the optimizer might not choose an expression index depending on statistics. In this situation, you can force the optimizer to select an expression index by using optimizer hints.
+当查询语句中的表达式与表达式索引中的表达式匹配时，优化器可以选择使用表达式索引进行查询。在某些情况下，优化器可能会根据统计信息选择不使用表达式索引。在这种情况下，你可以通过使用优化器提示强制优化器选择表达式索引。
 
-In the following examples, suppose that you create the expression index `idx` on the expression `LOWER(col1)`:
+在以下示例中，假设你在表达式 `LOWER(col1)` 上创建了表达式索引 `idx`：
 
-If the results of the query statement are the same expressions, the expression index applies. Take the following statement as an example:
+如果查询语句的结果是相同的表达式，则表达式索引适用。以下语句为例：
 
 ```sql
 SELECT LOWER(col1) FROM t;
 ```
 
-If the same expression is included in the filtering conditions, the expression index applies. Take the following statements as an example:
+如果过滤条件中包含相同的表达式，则表达式索引适用。以下语句为例：
 
 ```sql
 SELECT * FROM t WHERE LOWER(col1) = "a";
@@ -222,30 +222,30 @@ SELECT * FROM t WHERE LOWER(col1) > "a" AND LOWER(col1) < "b";
 SELECT * FROM t WHERE LOWER(col1) > "b" OR LOWER(col1) < "a";
 ```
 
-When the queries are sorted by the same expression, the expression index applies. Take the following statement as an example:
+当查询按相同表达式排序时，表达式索引适用。以下语句为例：
 
 ```sql
 SELECT * FROM t ORDER BY LOWER(col1);
 ```
 
-If the same expression is included in the aggregate (`GROUP BY`) functions, the expression index applies. Take the following statements as an example:
+如果聚合（`GROUP BY`）函数中包含相同的表达式，则表达式索引适用。以下语句为例：
 
 ```sql
 SELECT MAX(LOWER(col1)) FROM t;
 SELECT MIN(col1) FROM t GROUP BY LOWER(col1);
 ```
 
-To see the expression corresponding to the expression index, execute [`SHOW INDEX`](/sql-statements/sql-statement-show-indexes.md), or check the system tables [`information_schema.tidb_indexes`](/information-schema/information-schema-tidb-indexes.md) and the table [`information_schema.STATISTICS`](/information-schema/information-schema-statistics.md). The `Expression` column in the output indicates the corresponded expression. For the non-expression indexes, the column shows `NULL`.
+要查看表达式索引对应的表达式，执行 [`SHOW INDEX`](/sql-statements/sql-statement-show-indexes.md)，或查看系统表 [`information_schema.tidb_indexes`](/information-schema/information-schema-tidb-indexes.md) 和表 [`information_schema.STATISTICS`](/information-schema/information-schema-statistics.md)。输出中的 `Expression` 列表示对应的表达式。对于非表达式索引，该列显示 `NULL`。
 
-The cost of maintaining an expression index is higher than that of maintaining other indexes, because the value of the expression needs to be calculated whenever a row is inserted or updated. The value of the expression is already stored in the index, so this value does not require recalculation when the optimizer selects the expression index.
+维护表达式索引的成本高于维护其他索引，因为在插入或更新行时需要计算表达式的值。表达式的值已存储在索引中，因此当优化器选择表达式索引时，不需要重新计算该值。
 
-Therefore, when the query performance outweighs the insert and update performance, you can consider indexing the expressions.
+因此，当查询性能超过插入和更新性能时，可以考虑对表达式建立索引。
 
-Expression indexes have the same syntax and limitations as in MySQL. They are implemented by creating indexes on generated virtual columns that are invisible, so the supported expressions inherit all [limitations of virtual generated columns](/generated-columns.md#limitations).
+表达式索引具有与 MySQL 相同的语法和限制。它们是通过在不可见的虚拟生成列上创建索引来实现的，因此支持的表达式继承了[虚拟生成列的所有限制](/generated-columns.md#限制)。
 
-## Multi-valued indexes
+## 多值索引
 
-Multi-valued indexes are a kind of secondary index defined on an array column. In a normal index, one index record corresponds to one data record (1:1). In a multi-valued index, multiple index records correspond to one data record (N:1). Multi-valued indexes are used to index JSON arrays. For example, a multi-valued index defined on the `zipcode` field will generate one index record for each element in the `zipcode` array.
+多值索引是一种定义在数组列上的二级索引。在普通索引中，一个索引记录对应一个数据记录（1:1）。在多值索引中，多个索引记录对应一个数据记录（N:1）。多值索引用于索引 JSON 数组。例如，在 `zipcode` 字段上定义的多值索引将为 `zipcode` 数组中的每个元素生成一个索引记录。
 
 ```json
 {
@@ -255,9 +255,9 @@ Multi-valued indexes are a kind of secondary index defined on an array column. I
 }
 ```
 
-### Create multi-valued indexes
+### 创建多值索引
 
-You can create multi-valued indexes by using the [`CAST(... AS ... ARRAY)`](/functions-and-operators/cast-functions-and-operators.md#cast) function in the index definition, as creating an expression index.
+你可以通过在索引定义中使用 [`CAST(... AS ... ARRAY)`](/functions-and-operators/cast-functions-and-operators.md#cast) 函数来创建多值索引，就像创建表达式索引一样。
 
 ```sql
 mysql> CREATE TABLE customers (
@@ -268,7 +268,7 @@ mysql> CREATE TABLE customers (
 );
 ```
 
-You can define a multi-valued index as a unique index.
+你可以将多值索引定义为唯一索引。
 
 ```sql
 mysql> CREATE TABLE customers (
@@ -279,7 +279,7 @@ mysql> CREATE TABLE customers (
 );
 ```
 
-When a multi-valued index is defined as a unique index, an error is reported if you try to insert duplicate data.
+当多值索引被定义为唯一索引时，如果尝试插入重复数据，会报错。
 
 ```sql
 mysql> INSERT INTO customers VALUES (1, 'pingcap', '{"zipcode": [1,2]}');
@@ -289,19 +289,19 @@ mysql> INSERT INTO customers VALUES (1, 'pingcap', '{"zipcode": [2,3]}');
 ERROR 1062 (23000): Duplicate entry '2' for key 'customers.zips'
 ```
 
-The same record can have duplicate values, but when different records have duplicate values, an error is reported.
+同一条记录可以有重复值，但当不同记录有重复值时，会报错。
 
 ```sql
--- Insert succeeded
+-- 插入成功
 mysql> INSERT INTO t1 VALUES('[1,1,2]');
 mysql> INSERT INTO t1 VALUES('[3,3,3,4,4,4]');
 
--- Insert failed
+-- 插入失败
 mysql> INSERT INTO t1 VALUES('[1,2]');
 mysql> INSERT INTO t1 VALUES('[2,3]');
 ```
 
-You can also define a multi-valued index as a composite index:
+你也可以将多值索引定义为复合索引：
 
 ```sql
 mysql> CREATE TABLE customers (
@@ -312,7 +312,7 @@ mysql> CREATE TABLE customers (
 );
 ```
 
-When a multi-valued index is defined as a composite index, the multi-valued part can appear in any position, but only once.
+当多值索引被定义为复合索引时，多值部分可以出现在任何位置，但只能出现一次。
 
 ```sql
 mysql> CREATE TABLE customers (
@@ -324,68 +324,68 @@ mysql> CREATE TABLE customers (
 ERROR 1235 (42000): This version of TiDB doesn't yet support 'more than one multi-valued key part per index'.
 ```
 
-The written data must exactly match the type defined by the multi-valued index; otherwise, the data write fails:
+写入的数据必须与多值索引定义的类型完全匹配，否则数据写入失败：
 
 ```sql
--- All elements in the zipcode field must be the UNSIGNED type.
+-- zipcode 字段中的所有元素必须是 UNSIGNED 类型。
 mysql> INSERT INTO customers VALUES (1, 'pingcap', '{"zipcode": [-1]}');
 ERROR 3752 (HY000): Value is out of range for expression index 'zips' at row 1
 
-mysql> INSERT INTO customers VALUES (1, 'pingcap', '{"zipcode": ["1"]}'); -- Incompatible with MySQL
+mysql> INSERT INTO customers VALUES (1, 'pingcap', '{"zipcode": ["1"]}'); -- 与 MySQL 不兼容
 ERROR 3903 (HY000): Invalid JSON value for CAST for expression index 'zips'
 
 mysql> INSERT INTO customers VALUES (1, 'pingcap', '{"zipcode": [1]}');
 Query OK, 1 row affected (0.00 sec)
 ```
 
-### Use multi-valued indexes
+### 使用多值索引
 
-See [Index Selection - Use multi-valued indexes](/choose-index.md#use-multi-valued-indexes) for more details.
+有关更多详细信息，请参见[索引选择 - 使用多值索引](/choose-index.md#使用多值索引)。
 
-### Limitations
+### 限制
 
-- For an empty JSON array, no corresponding index record is generated.
-- The target type in `CAST(... AS ... ARRAY)` cannot be any of `BINARY`, `JSON`, `YEAR`, `FLOAT`, and `DECIMAL`. The source type must be JSON.
-- You cannot use multi-valued indexes for sorting.
-- You can only create multi-valued indexes on a JSON array.
-- A multi-valued index cannot be a primary key or a foreign key.
-- The extra storage space used by a multi-valued index = the average number of array elements per row * the space used by a normal secondary index.
-- Compared with normal indexes, DML operations will modify more index records for multi-valued indexes, so multi-valued indexes will have a greater performance impact than normal indexes.
-- Because multi-valued indexes are a special type of expression index, multi-valued indexes have the same limitations as expression indexes.
-- If a table uses multi-valued indexes, you cannot back up, replicate, or import the table using BR, TiCDC, or TiDB Lightning to a TiDB cluster earlier than v6.6.0.
-- For a query with complex conditions, TiDB might not be able to select multi-valued indexes. For information on the condition patterns supported by multi-valued indexes, refer to [Use multi-valued indexes](/choose-index.md#use-multi-valued-indexes).
+- 对于空 JSON 数组，不会生成相应的索引记录。
+- `CAST(... AS ... ARRAY)` 中的目标类型不能是 `BINARY`、`JSON`、`YEAR`、`FLOAT` 和 `DECIMAL`。源类型必须是 JSON。
+- 不能使用多值索引进行排序。
+- 只能在 JSON 数组上创建多值索引。
+- 多值索引不能是主键或外键。
+- 多值索引使用的额外存储空间 = 每行数组元素的平均数量 * 普通二级索引使用的空间。
+- 与普通索引相比，DML 操作会修改多值索引的更多索引记录，因此多值索引对性能的影响比普通索引更大。
+- 因为多值索引是一种特殊的表达式索引，所以多值索引具有与表达式索引相同的限制。
+- 如果表使用多值索引，则不能使用 BR、TiCDC 或 TiDB Lightning 将表备份、复制或导入到早于 v6.6.0 的 TiDB 集群。
+- 对于具有复杂条件的查询，TiDB 可能无法选择多值索引。有关多值索引支持的条件模式的信息，请参考[使用多值索引](/choose-index.md#使用多值索引)。
 
-## Invisible index
+## 不可见索引
 
-By default, invisible indexes are indexes that are ignored by the query optimizer:
+默认情况下，不可见索引是被查询优化器忽略的索引：
 
 ```sql
 CREATE TABLE t1 (c1 INT, c2 INT, UNIQUE(c2));
 CREATE UNIQUE INDEX c1 ON t1 (c1) INVISIBLE;
 ```
 
-Starting from TiDB v8.0.0, you can make the optimizer select invisible indexes by modifying the system variable [`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800).
+从 TiDB v8.0.0 开始，你可以通过修改系统变量 [`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800) 来让优化器选择不可见索引。
 
-For details, see [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md).
+详情请参见 [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)。
 
-## Associated system variables
+## 相关系统变量
 
-The system variables associated with the `CREATE INDEX` statement are `tidb_ddl_enable_fast_reorg`, `tidb_ddl_reorg_worker_cnt`, `tidb_ddl_reorg_batch_size`, `tidb_enable_auto_increment_in_generated`, and `tidb_ddl_reorg_priority`. Refer to [system variables](/system-variables.md#tidb_ddl_reorg_worker_cnt) for details.
+与 `CREATE INDEX` 语句相关的系统变量有 `tidb_ddl_enable_fast_reorg`、`tidb_ddl_reorg_worker_cnt`、`tidb_ddl_reorg_batch_size`、`tidb_enable_auto_increment_in_generated` 和 `tidb_ddl_reorg_priority`。详情请参见[系统变量](/system-variables.md#tidb_ddl_reorg_worker_cnt)。
 
-## MySQL compatibility
+## MySQL 兼容性
 
-* TiDB supports parsing the `FULLTEXT` syntax but does not support using the `FULLTEXT`, `HASH`, and `SPATIAL` indexes.
-* TiDB accepts index types such as `HASH`, `BTREE` and `RTREE` in syntax for compatibility with MySQL, but ignores them.
-* Descending indexes are not supported (similar to MySQL 5.7).
-* Adding the primary key of the `CLUSTERED` type to a table is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
-* Expression indexes are incompatible with views. When a query is executed using a view, the expression index cannot be used at the same time.
-* Expression indexes have compatibility issues with bindings. When the expression of an expression index has a constant, the binding created for the corresponding query expands its scope. For example, suppose that the expression in the expression index is `a+1`, and the corresponding query condition is `a+1 > 2`. In this case, the created binding is `a+? > ?`, which means that the query with the condition such as `a+2 > 2` is also forced to use the expression index and results in a poor execution plan. In addition, this also affects the baseline capturing and baseline evolution in SQL Plan Management (SPM).
-* The data written with multi-valued indexes must exactly match the defined data type. Otherwise, data writes fail. For details, see [create multi-valued indexes](/sql-statements/sql-statement-create-index.md#create-multi-valued-indexes).
+* TiDB 支持解析 `FULLTEXT` 语法，但不支持使用 `FULLTEXT`、`HASH` 和 `SPATIAL` 索引。
+* TiDB 接受 `HASH`、`BTREE` 和 `RTREE` 等索引类型的语法以与 MySQL 兼容，但会忽略它们。
+* 不支持降序索引（类似于 MySQL 5.7）。
+* 不支持向表添加 `CLUSTERED` 类型的主键。有关 `CLUSTERED` 类型主键的更多详细信息，请参考[聚簇索引](/clustered-indexes.md)。
+* 表达式索引与视图不兼容。当使用视图执行查询时，不能同时使用表达式索引。
+* 表达式索引与绑定有兼容性问题。当表达式索引的表达式有常量时，为相应查询创建的绑定会扩大其范围。例如，假设表达式索引中的表达式是 `a+1`，相应的查询条件是 `a+1 > 2`。在这种情况下，创建的绑定是 `a+? > ?`，这意味着具有条件如 `a+2 > 2` 的查询也被强制使用表达式索引，导致执行计划不佳。此外，这也会影响 SQL Plan Management (SPM) 中的基线捕获和基线演进。
+* 使用多值索引写入的数据必须与定义的数据类型完全匹配。否则，数据写入失败。详情请参见[创建多值索引](/sql-statements/sql-statement-create-index.md#创建多值索引)。
 
-## See also
+## 另请参阅
 
-* [Index Selection](/choose-index.md)
-* [Wrong Index Solution](/wrong-index-solution.md)
+* [索引选择](/choose-index.md)
+* [错误索引解决方案](/wrong-index-solution.md)
 * [ADD INDEX](/sql-statements/sql-statement-add-index.md)
 * [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
 * [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)

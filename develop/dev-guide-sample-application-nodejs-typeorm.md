@@ -1,77 +1,77 @@
 ---
-title: Connect to TiDB with TypeORM
-summary: Learn how to connect to TiDB using TypeORM. This tutorial gives Node.js sample code snippets that work with TiDB using TypeORM.
+title: 使用 TypeORM 连接 TiDB
+summary: 学习如何使用 TypeORM 连接 TiDB。本教程提供使用 TypeORM 操作 TiDB 的 Node.js 示例代码片段。
 ---
 
-# Connect to TiDB with TypeORM
+# 使用 TypeORM 连接 TiDB
 
-TiDB is a MySQL-compatible database, and [TypeORM](https://github.com/TypeORM/TypeORM) is a popular open-source ORM framework for Node.js.
+TiDB 是一个兼容 MySQL 的数据库，而 [TypeORM](https://github.com/TypeORM/TypeORM) 是一个流行的 Node.js 开源 ORM 框架。
 
-In this tutorial, you can learn how to use TiDB and TypeORM to accomplish the following tasks:
+在本教程中，你可以学习如何使用 TiDB 和 TypeORM 完成以下任务：
 
-- Set up your environment.
-- Connect to your TiDB cluster using TypeORM.
-- Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
+- 设置你的环境。
+- 使用 TypeORM 连接到你的 TiDB 集群。
+- 构建并运行你的应用程序。你也可以找到基本 CRUD 操作的[示例代码片段](#示例代码片段)。
 
-> **Note**
+> **注意**
 >
-> This tutorial works with TiDB Cloud Serverless, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> 本教程适用于 TiDB Cloud Serverless、TiDB Cloud Dedicated 和 TiDB Self-Managed。
 
-## Prerequisites
+## 前提条件
 
-To complete this tutorial, you need:
+要完成本教程，你需要：
 
-- [Node.js](https://nodejs.org/en) >= 16.x installed on your machine.
-- [Git](https://git-scm.com/downloads) installed on your machine.
-- A TiDB cluster running.
+- 在你的机器上安装 [Node.js](https://nodejs.org/en) >= 16.x。
+- 在你的机器上安装 [Git](https://git-scm.com/downloads)。
+- 一个正在运行的 TiDB 集群。
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**如果你还没有 TiDB 集群，可以按照以下方式创建：**
 
 <CustomContent platform="tidb">
 
-- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+- （推荐）按照[创建 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md)创建你自己的 TiDB Cloud 集群。
+- 按照[部署本地测试 TiDB 集群](/quick-start-with-tidb.md#deploy-a-local-test-cluster)或[部署生产 TiDB 集群](/production-deployment-using-tiup.md)来创建本地集群。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
+- （推荐）按照[创建 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md)创建你自己的 TiDB Cloud 集群。
+- 按照[部署本地测试 TiDB 集群](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)或[部署生产 TiDB 集群](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)来创建本地集群。
 
 </CustomContent>
 
-## Run the sample app to connect to TiDB
+## 运行示例程序连接 TiDB
 
-This section demonstrates how to run the sample application code and connect to TiDB.
+本节演示如何运行示例应用程序代码并连接到 TiDB。
 
-### Step 1: Clone the sample app repository
+### 第 1 步：克隆示例程序仓库
 
-Run the following commands in your terminal window to clone the sample code repository:
+在终端窗口中运行以下命令来克隆示例代码仓库：
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-nodejs-typeorm-quickstart.git
 cd tidb-nodejs-typeorm-quickstart
 ```
 
-### Step 2: Install dependencies
+### 第 2 步：安装依赖
 
-Run the following command to install the required packages (including `typeorm` and `mysql2`) for the sample app:
+运行以下命令来安装示例程序所需的包（包括 `typeorm` 和 `mysql2`）：
 
 ```shell
 npm install
 ```
 
 <details>
-<summary><b>Install dependencies to an existing project</b></summary>
+<summary><b>为现有项目安装依赖</b></summary>
 
-For your existing project, run the following command to install the packages:
+对于你的现有项目，运行以下命令来安装这些包：
 
-- `typeorm`: the ORM framework for Node.js.
-- `mysql2`: the MySQL driver for Node.js. You can also use the `mysql` driver.
-- `dotenv`: loads environment variables from the `.env` file.
-- `typescript`: compiles TypeScript code to JavaScript.
-- `ts-node`: runs TypeScript code directly without compiling.
-- `@types/node`: provides TypeScript type definitions for Node.js.
+- `typeorm`：Node.js 的 ORM 框架。
+- `mysql2`：Node.js 的 MySQL 驱动程序。你也可以使用 `mysql` 驱动程序。
+- `dotenv`：从 `.env` 文件加载环境变量。
+- `typescript`：将 TypeScript 代码编译为 JavaScript。
+- `ts-node`：直接运行 TypeScript 代码而无需编译。
+- `@types/node`：为 Node.js 提供 TypeScript 类型定义。
 
 ```shell
 npm install typeorm mysql2 dotenv --save
@@ -80,33 +80,33 @@ npm install @types/node ts-node typescript --save-dev
 
 </details>
 
-### Step 3: Configure connection information
+### 第 3 步：配置连接信息
 
-Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
+根据你选择的 TiDB 部署选项连接到你的 TiDB 集群。
 
 <SimpleTab>
 <div label="TiDB Cloud Serverless">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. 导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称进入其概览页面。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2. 点击右上角的**连接**。此时会显示一个连接对话框。
 
-3. Ensure the configurations in the connection dialog match your operating environment.
+3. 确保连接对话框中的配置与你的操作环境匹配。
 
-    - **Connection Type** is set to `Public`.
-    - **Branch** is set to `main`.
-    - **Connect With** is set to `General`.
-    - **Operating System** matches the operating system where you run the application.
+    - **连接类型**设置为 `Public`。
+    - **分支**设置为 `main`。
+    - **连接方式**设置为 `General`。
+    - **操作系统**与运行应用程序的操作系统匹配。
 
-4. If you have not set a password yet, click **Generate Password** to generate a random password.
+4. 如果你还没有设置密码，点击**生成密码**来生成随机密码。
 
-5. Run the following command to copy `.env.example` and rename it to `.env`:
+5. 运行以下命令复制 `.env.example` 并将其重命名为 `.env`：
 
     ```shell
     cp .env.example .env
     ```
 
-6. Edit the `.env` file, set up the environment variables as follows, replace the corresponding placeholders `{}` with connection parameters on the connection dialog:
+6. 编辑 `.env` 文件，按如下方式设置环境变量，将相应的占位符 `{}` 替换为连接对话框中的连接参数：
 
     ```dotenv
     TIDB_HOST={host}
@@ -117,32 +117,32 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     TIDB_ENABLE_SSL=true
     ```
 
-    > **Note**
+    > **注意**
     >
-    > For TiDB Cloud Serverless, you **MUST** enable TLS connection via `TIDB_ENABLE_SSL` when using public endpoint.
+    > 对于 TiDB Cloud Serverless，在使用公共端点时，你**必须**通过 `TIDB_ENABLE_SSL` 启用 TLS 连接。
 
-7. Save the `.env` file.
+7. 保存 `.env` 文件。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. 导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称进入其概览页面。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2. 点击右上角的**连接**。此时会显示一个连接对话框。
 
-3. In the connection dialog, select **Public** from the **Connection Type** drop-down list, and then click **CA cert** to download the CA certificate.
+3. 在连接对话框中，从**连接类型**下拉列表中选择 **Public**，然后点击 **CA cert** 下载 CA 证书。
 
-    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) to configure it before your first connection.
+    如果你还没有配置 IP 访问列表，请点击**配置 IP 访问列表**或按照[配置 IP 访问列表](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)中的步骤在首次连接之前进行配置。
 
-    In addition to the **Public** connection type, TiDB Cloud Dedicated supports **Private Endpoint** and **VPC Peering** connection types. For more information, see [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
+    除了 **Public** 连接类型外，TiDB Cloud Dedicated 还支持 **Private Endpoint** 和 **VPC Peering** 连接类型。更多信息，请参阅[连接到你的 TiDB Cloud Dedicated 集群](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)。
 
-4. Run the following command to copy `.env.example` and rename it to `.env`:
+4. 运行以下命令复制 `.env.example` 并将其重命名为 `.env`：
 
     ```shell
     cp .env.example .env
     ```
 
-5. Edit the `.env` file, set up the environment variables as follows, replace the corresponding placeholders `{}` with connection parameters on the connection dialog:
+5. 编辑 `.env` 文件，按如下方式设置环境变量，将相应的占位符 `{}` 替换为连接对话框中的连接参数：
 
     ```dotenv
     TIDB_HOST={host}
@@ -154,22 +154,22 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     TIDB_CA_PATH={downloaded_ssl_ca_path}
     ```
 
-    > **Note**
+    > **注意**
     >
-    > For TiDB Cloud Dedicated, it is **RECOMMENDED** to enable TLS connection via `TIDB_ENABLE_SSL` when using public endpoint. When you set up `TIDB_ENABLE_SSL=true`, you **MUST** specify the path of the CA certificate downloaded from connection dialog via `TIDB_CA_PATH=/path/to/ca.pem`.
+    > 对于 TiDB Cloud Dedicated，在使用公共端点时**建议**通过 `TIDB_ENABLE_SSL` 启用 TLS 连接。当你设置 `TIDB_ENABLE_SSL=true` 时，你**必须**通过 `TIDB_CA_PATH=/path/to/ca.pem` 指定从连接对话框下载的 CA 证书路径。
 
-6. Save the `.env` file.
+6. 保存 `.env` 文件。
 
 </div>
 <div label="TiDB Self-Managed">
 
-1. Run the following command to copy `.env.example` and rename it to `.env`:
+1. 运行以下命令复制 `.env.example` 并将其重命名为 `.env`：
 
     ```shell
     cp .env.example .env
     ```
 
-2. Edit the `.env` file, set up the environment variables as follows, replace the corresponding placeholders `{}` with connection parameters of your TiDB cluster:
+2. 编辑 `.env` 文件，按如下方式设置环境变量，将相应的占位符 `{}` 替换为你的 TiDB 集群的连接参数：
 
     ```dotenv
     TIDB_HOST={host}
@@ -179,25 +179,25 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     TIDB_DATABASE=test
     ```
 
-    If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
+    如果你在本地运行 TiDB，默认主机地址是 `127.0.0.1`，密码为空。
 
-3. Save the `.env` file.
+3. 保存 `.env` 文件。
 
 </div>
 </SimpleTab>
 
-### Step 4: Initialize the database schema
+### 第 4 步：初始化数据库架构
 
-Run the following command to invoke TypeORM CLI to initialize the database with the SQL statements written in the migration files in the `src/migrations` folder:
+运行以下命令调用 TypeORM CLI 来使用 `src/migrations` 文件夹中迁移文件中编写的 SQL 语句初始化数据库：
 
 ```shell
 npm run migration:run
 ```
 
 <details>
-<summary><b>Expected execution output</b></summary>
+<summary><b>预期执行输出</b></summary>
 
-The following SQL statements create a `players` table and a `profiles` table, and the two tables are associated through foreign keys.
+以下 SQL 语句创建一个 `players` 表和一个 `profiles` 表，这两个表通过外键关联。
 
 ```sql
 query: SELECT VERSION() AS `version`
@@ -218,19 +218,19 @@ query: COMMIT
 
 </details>
 
-Migration files are generated from the entities defined in the `src/entities` folder. To learn how to define entities in TypeORM, refer to [TypeORM: Entities](https://typeorm.io/entities).
+迁移文件是从 `src/entities` 文件夹中定义的实体生成的。要了解如何在 TypeORM 中定义实体，请参考 [TypeORM：实体](https://typeorm.io/entities)。
 
-### Step 5: Run the code and check the result
+### 第 5 步：运行代码并检查结果
 
-Run the following command to execute the sample code:
+运行以下命令执行示例代码：
 
 ```shell
 npm start
 ```
 
-**Expected execution output:**
+**预期执行输出：**
 
-If the connection is successful, the terminal will output the version of the TiDB cluster as follows:
+如果连接成功，终端将输出 TiDB 集群的版本，如下所示：
 
 ```
 🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.1.2)
@@ -240,15 +240,15 @@ If the connection is successful, the terminal will output the version of the TiD
 🚮 Deleted 1 player data.
 ```
 
-## Sample code snippets
+## 示例代码片段
 
-You can refer to the following sample code snippets to complete your own application development.
+你可以参考以下示例代码片段来完成自己的应用程序开发。
 
-For complete sample code and how to run it, check out the [tidb-samples/tidb-nodejs-typeorm-quickstart](https://github.com/tidb-samples/tidb-nodejs-typeorm-quickstart) repository.
+要查看完整的示例代码及其运行方法，请查看 [tidb-samples/tidb-nodejs-typeorm-quickstart](https://github.com/tidb-samples/tidb-nodejs-typeorm-quickstart) 仓库。
 
-### Connect with connection options
+### 使用连接选项连接
 
-The following code establishes a connection to TiDB with options defined in the environment variables:
+以下代码使用环境变量中定义的选项建立与 TiDB 的连接：
 
 ```typescript
 // src/dataSource.ts
@@ -274,26 +274,26 @@ export const AppDataSource = new DataSource({
 });
 ```
 
-> **Note**
+> **注意**
 >
-> For TiDB Cloud Serverless, you MUST enable TLS connection when using public endpoint. In this sample code, please set up the environment variable `TIDB_ENABLE_SSL` in the `.env` file to `true`.
+> 对于 TiDB Cloud Serverless，在使用公共端点时，你必须启用 TLS 连接。在此示例代码中，请在 `.env` 文件中将环境变量 `TIDB_ENABLE_SSL` 设置为 `true`。
 >
-> However, you **don't** have to specify an SSL CA certificate via `TIDB_CA_PATH`, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default, which is trusted by TiDB Cloud Serverless.
+> 但是，你**不需要**通过 `TIDB_CA_PATH` 指定 SSL CA 证书，因为 Node.js 默认使用内置的 [Mozilla CA 证书](https://wiki.mozilla.org/CA/Included_Certificates)，该证书受 TiDB Cloud Serverless 信任。
 
-### Insert data
+### 插入数据
 
-The following query creates a single `Player` record, and returns the created `Player` object, which contains the `id` field generated by TiDB:
+以下查询创建一条 `Player` 记录，并返回创建的 `Player` 对象，其中包含由 TiDB 生成的 `id` 字段：
 
 ```typescript
 const player = new Player('Alice', 100, 100);
 await this.dataSource.manager.save(player);
 ```
 
-For more information, refer to [Insert data](/develop/dev-guide-insert-data.md).
+更多信息，请参考[插入数据](/develop/dev-guide-insert-data.md)。
 
-### Query data
+### 查询数据
 
-The following query returns a single `Player` object with ID 101 or `null` if no record is found:
+以下查询返回 ID 为 101 的单个 `Player` 对象，如果未找到记录则返回 `null`：
 
 ```typescript
 const player: Player | null = await this.dataSource.manager.findOneBy(Player, {
@@ -301,11 +301,11 @@ const player: Player | null = await this.dataSource.manager.findOneBy(Player, {
 });
 ```
 
-For more information, refer to [Query data](/develop/dev-guide-get-data-from-single-table.md).
+更多信息，请参考[查询数据](/develop/dev-guide-get-data-from-single-table.md)。
 
-### Update data
+### 更新数据
 
-The following query adds `50` goods to the `Player` with ID `101`:
+以下查询为 ID 为 `101` 的 `Player` 添加 `50` 个物品：
 
 ```typescript
 const player = await this.dataSource.manager.findOneBy(Player, {
@@ -315,11 +315,11 @@ player.goods += 50;
 await this.dataSource.manager.save(player);
 ```
 
-For more information, refer to [Update data](/develop/dev-guide-update-data.md).
+更多信息，请参考[更新数据](/develop/dev-guide-update-data.md)。
 
-### Delete data
+### 删除数据
 
-The following query deletes the `Player` with ID `101`:
+以下查询删除 ID 为 `101` 的 `Player`：
 
 ```typescript
 await this.dataSource.manager.delete(Player, {
@@ -327,26 +327,26 @@ await this.dataSource.manager.delete(Player, {
 });
 ```
 
-For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
+更多信息，请参考[删除数据](/develop/dev-guide-delete-data.md)。
 
-### Execute raw SQL queries
+### 执行原始 SQL 查询
 
-The following query executes a raw SQL statement (`SELECT VERSION() AS tidb_version;`) and returns the version of the TiDB cluster:
+以下查询执行原始 SQL 语句（`SELECT VERSION() AS tidb_version;`）并返回 TiDB 集群的版本：
 
 ```typescript
 const rows = await dataSource.query('SELECT VERSION() AS tidb_version;');
 console.log(rows[0]['tidb_version']);
 ```
 
-For more information, refer to [TypeORM: DataSource API](https://typeorm.io/data-source-api).
+更多信息，请参考 [TypeORM：DataSource API](https://typeorm.io/data-source-api)。
 
-## Useful notes
+## 实用说明
 
-### Foreign key constraints
+### 外键约束
 
-Using [foreign key constraints](https://docs.pingcap.com/tidb/stable/foreign-key) (experimental) ensures the [referential integrity](https://en.wikipedia.org/wiki/Referential_integrity) of data by adding checks on the database side. However, this might lead to serious performance issues in scenarios with large data volumes.
+使用[外键约束](https://docs.pingcap.com/tidb/stable/foreign-key)（实验性功能）通过在数据库端添加检查来确保数据的[参照完整性](https://en.wikipedia.org/wiki/Referential_integrity)。但是，这可能会在大数据量场景下导致严重的性能问题。
 
-You can control whether foreign key constraints are created when constructing relationships between entities by using the `createForeignKeyConstraints` option (default value is `true`).
+你可以使用 `createForeignKeyConstraints` 选项（默认值为 `true`）来控制在构建实体之间的关系时是否创建外键约束。
 
 ```typescript
 @Entity()
@@ -361,24 +361,24 @@ export class ActionLog {
 }
 ```
 
-For more information, refer to the [TypeORM FAQ](https://typeorm.io/relations-faq#avoid-foreign-key-constraint-creation) and [Foreign key constraints](https://docs.pingcap.com/tidbcloud/foreign-key#foreign-key-constraints).
+更多信息，请参考 [TypeORM FAQ](https://typeorm.io/relations-faq#avoid-foreign-key-constraint-creation) 和[外键约束](https://docs.pingcap.com/tidbcloud/foreign-key#foreign-key-constraints)。
 
-## Next steps
+## 下一步
 
-- Learn more usage of TypeORM from the [documentation of TypeORM](https://typeorm.io/).
-- Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as: [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Query data](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
-- Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
+- 从 [TypeORM 的文档](https://typeorm.io/)了解更多 TypeORM 的用法。
+- 通过[开发者指南](/develop/dev-guide-overview.md)中的章节学习 TiDB 应用程序开发的最佳实践，例如：[插入数据](/develop/dev-guide-insert-data.md)、[更新数据](/develop/dev-guide-update-data.md)、[删除数据](/develop/dev-guide-delete-data.md)、[查询数据](/develop/dev-guide-get-data-from-single-table.md)、[事务](/develop/dev-guide-transaction-overview.md)、[SQL 性能优化](/develop/dev-guide-optimize-sql-overview.md)。
+- 通过专业的 [TiDB 开发者课程](https://www.pingcap.com/education/)学习，并在通过考试后获得 [TiDB 认证](https://www.pingcap.com/education/certification/)。
 
-## Need help?
+## 需要帮助？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

@@ -1,93 +1,93 @@
 ---
-title: Import Local Files to TiDB Cloud Serverless
-summary: Learn how to import local files to TiDB Cloud Serverless.
+title: 将本地文件导入到 TiDB Cloud Serverless
+summary: 了解如何将本地文件导入到 TiDB Cloud Serverless。
 ---
 
-# Import Local Files to TiDB Cloud Serverless
+# 将本地文件导入到 TiDB Cloud Serverless
 
-You can import local files to TiDB Cloud Serverless directly. It only takes a few clicks to complete the task configuration, and then your local CSV data will be quickly imported to your TiDB cluster. Using this method, you do not need to provide the cloud storage and credentials. The whole importing process is quick and smooth.
+你可以直接将本地文件导入到 TiDB Cloud Serverless。只需点击几下即可完成任务配置，然后你的本地 CSV 数据将快速导入到你的 TiDB 集群。使用此方法，你无需提供云存储和凭证。整个导入过程快速流畅。
 
-Currently, this method supports importing one CSV file for one task into either an existing empty table or a new table.
+目前，此方法支持在一个任务中将一个 CSV 文件导入到一个空的现有表或新表中。
 
-## Limitations
+## 限制
 
-- Currently, TiDB Cloud only supports importing a local file in CSV format within 250 MiB for one task.
-- Importing local files is supported only for TiDB Cloud Serverless clusters, not for TiDB Cloud Dedicated clusters.
-- You cannot run more than one import task at the same time.
+- 目前，TiDB Cloud 仅支持在一个任务中导入大小在 250 MiB 以内的 CSV 格式本地文件。
+- 导入本地文件仅支持 TiDB Cloud Serverless 集群，不支持 TiDB Cloud Dedicated 集群。
+- 你不能同时运行多个导入任务。
 
-## Import local files
+## 导入本地文件
 
-1. Open the **Import** page for your target cluster.
+1. 打开目标集群的**导入**页面。
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面。
 
-        > **Tip:**
+        > **提示：**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > 你可以使用左上角的组合框在组织、项目和集群之间切换。
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. 点击目标集群的名称进入其概览页面，然后在左侧导航栏中点击**数据** > **导入**。
 
-2. On the **Import** page, you can directly drag and drop your local file to the upload area, or click **Upload a local file** to select and upload the target local file. Note that you can upload only one CSV file of less than 250 MiB for one task. If your local file is larger than 250 MiB, see [How to import a local file larger than 250 MiB?](#how-to-import-a-local-file-larger-than-250-mib).
+2. 在**导入**页面，你可以直接将本地文件拖放到上传区域，或点击**上传本地文件**选择并上传目标本地文件。注意，一个任务只能上传一个小于 250 MiB 的 CSV 文件。如果你的本地文件大于 250 MiB，请参见[如何导入大于 250 MiB 的本地文件？](#如何导入大于-250-mib-的本地文件)。
 
-3. In the **Destination** section, select the target database and the target table, or enter a name directly to create a new database or a new table. The name must only contain characters in Unicode BMP (Basic Multilingual Plane), excluding the null character `\u0000` and whitespace characters, and can be up to 64 characters in length. Click **Define Table**, the **Table Definition** section is displayed.
+3. 在**目标**部分，选择目标数据库和目标表，或直接输入名称创建新的数据库或新表。名称只能包含 Unicode BMP（基本多语言平面）中的字符，不包括空字符 `\u0000` 和空白字符，长度最多为 64 个字符。点击**定义表**，将显示**表定义**部分。
 
-4. Check the table.
+4. 检查表。
 
-    You can see a list of configurable table columns. Each line shows the table column name inferred by TiDB Cloud, the table column type inferred, and the previewed data from the CSV file.
+    你可以看到可配置的表列列表。每行显示 TiDB Cloud 推断的表列名、推断的表列类型以及 CSV 文件中的预览数据。
 
-    - If you import data into an existing table in TiDB Cloud, the column list is extracted from the table definition, and the previewed data is mapped to the corresponding columns by column names.
+    - 如果你将数据导入到 TiDB Cloud 中的现有表，列列表是从表定义中提取的，预览数据通过列名映射到相应的列。
 
-    - If you want to create a new table, the column list is extracted from the CSV file, and the column type is inferred by TiDB Cloud. For example, if the previewed data is all integers, the inferred column type will be integer.
+    - 如果你要创建新表，列列表是从 CSV 文件中提取的，列类型由 TiDB Cloud 推断。例如，如果预览数据都是整数，推断的列类型将是整数。
 
-5. Configure the column names and data types.
+5. 配置列名和数据类型。
 
-    If the first row in the CSV file records the column names, make sure that **Use first row as column name** is selected, which is selected by default.
+    如果 CSV 文件中的第一行记录了列名，请确保选中**使用第一行作为列名**，该选项默认是选中的。
 
-    If the CSV file does not have a row for the column names, do not select **Use first row as column name**. In this case:
+    如果 CSV 文件没有列名行，请不要选中**使用第一行作为列名**。在这种情况下：
 
-    - If the target table already exists, the columns in the CSV file will be imported into the target table in order. Extra columns will be truncated and missing columns will be filled with default values.
+    - 如果目标表已存在，CSV 文件中的列将按顺序导入到目标表中。多余的列将被截断，缺少的列将填充默认值。
 
-    - If you need TiDB Cloud to create the target table, input the name for each column. The column name must meet the following requirements:
+    - 如果你需要 TiDB Cloud 创建目标表，请为每列输入名称。列名必须满足以下要求：
 
-        * The name must be composed of characters in Unicode BMP, excluding the null character `\u0000` and whitespace characters.
-        * The length of the name must be less than 65 characters.
+        * 名称必须由 Unicode BMP 中的字符组成，不包括空字符 `\u0000` 和空白字符。
+        * 名称长度必须小于 65 个字符。
 
-        You can also change the data type if needed.
+        如果需要，你也可以更改数据类型。
 
-    > **Note:**
+    > **注意：**
     >
-    > When you import a CSV file into an existing table in TiDB Cloud and the target table has more columns than the source file, the extra columns are handled differently depending on the situation:
-    > - If the extra columns are not the primary keys or the unique keys, no error will be reported. Instead, these extra columns will be populated with their [default values](/data-type-default-values.md).
-    > - If the extra columns are the primary keys or the unique keys and do not have the `auto_increment` or `auto_random` attribute, an error will be reported. In that case, it is recommended that you choose one of the following strategies:
-    >   - Provide a source file that includes these primary key or unique key columns.
-    >   - Modify the target table's primary key and unique key columns to match the existing columns in the source file.
-    >   - Set the attributes of the primary key or the unique key columns to `auto_increment` or `auto_random`.
+    > 当你将 CSV 文件导入到 TiDB Cloud 中的现有表，且目标表的列数多于源文件时，多余的列的处理方式取决于具体情况：
+    > - 如果多余的列不是主键或唯一键，不会报错。相反，这些多余的列将填充其[默认值](/data-type-default-values.md)。
+    > - 如果多余的列是主键或唯一键，且没有 `auto_increment` 或 `auto_random` 属性，将会报错。在这种情况下，建议你选择以下策略之一：
+    >   - 提供包含这些主键或唯一键列的源文件。
+    >   - 修改目标表的主键和唯一键列以匹配源文件中的现有列。
+    >   - 将主键或唯一键列的属性设置为 `auto_increment` 或 `auto_random`。
 
-6. For a new target table, you can set the primary key. You can select a column as the primary key, or select multiple columns to create a composite primary key. The composite primary key will be formed in the order in which you select the column names.
+6. 对于新的目标表，你可以设置主键。你可以选择一列作为主键，或选择多列创建复合主键。复合主键将按照你选择列名的顺序形成。
 
-    > **Note:**
+    > **注意：**
     >
-    > The primary key of the table is a clustered index and cannot be dropped after creation.
+    > 表的主键是聚簇索引，创建后不能删除。
 
-7. Edit the CSV configuration if needed.
+7. 如果需要，编辑 CSV 配置。
 
-   You can also click **Edit CSV configuration** to configure Backslash Escape, Separator, and Delimiter for more fine-grained control. For more information about the CSV configuration, see [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md).
+   你还可以点击**编辑 CSV 配置**来配置反斜杠转义、分隔符和定界符，以实现更精细的控制。有关 CSV 配置的更多信息，请参见 [CSV 导入数据配置](/tidb-cloud/csv-config-for-import-data.md)。
 
-8. Click **Start Import**.
+8. 点击**开始导入**。
 
-    You can view the import progress on the **Import Task Detail** page. If there are warnings or failed tasks, you can check to view the details and solve them.
+    你可以在**导入任务详情**页面查看导入进度。如果有警告或失败的任务，你可以查看详情并解决它们。
 
-9. After the import task is completed, you can click **Explore your data by SQL Editor** to query your imported data. For more information about how to use SQL Editor, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
+9. 导入任务完成后，你可以点击**使用 SQL 编辑器探索数据**来查询导入的数据。有关如何使用 SQL 编辑器的更多信息，请参见[使用 AI 辅助的 SQL 编辑器探索数据](/tidb-cloud/explore-data-with-chat2query.md)。
 
-10. On the **Import** page, you can click **...** > **View** in the **Action** column to check the import task detail.
+10. 在**导入**页面，你可以在**操作**列中点击 **...** > **查看**来检查导入任务详情。
 
-## FAQ
+## 常见问题
 
-### Can I only import some specified columns by the Import feature in TiDB Cloud?
+### 我可以只使用 TiDB Cloud 的导入功能导入指定的列吗？
 
-No. Currently, you can only import all columns of a CSV file into an existing table when using the Import feature.
+不可以。目前，使用导入功能时，你只能将 CSV 文件的所有列导入到现有表中。
 
-To import only some specified columns, you can use the MySQL client to connect your TiDB cluster, and then use [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data) to specify the columns to be imported. For example:
+要只导入指定的列，你可以使用 MySQL 客户端连接你的 TiDB 集群，然后使用 [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data) 指定要导入的列。例如：
 
 ```sql
 CREATE TABLE `import_test` (
@@ -99,19 +99,19 @@ CREATE TABLE `import_test` (
 LOAD DATA LOCAL INFILE 'load.txt' INTO TABLE import_test FIELDS TERMINATED BY ',' (name, address);
 ```
 
-If you use `mysql` and encounter `ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.`, you can add `--local-infile=true` in the connection string.
+如果你使用 `mysql` 并遇到 `ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.`，你可以在连接字符串中添加 `--local-infile=true`。
 
-### Why can't I query a column with a reserved keyword after importing data into TiDB Cloud?
+### 为什么导入数据到 TiDB Cloud 后无法查询带有保留关键字的列？
 
-If a column name is a reserved [keyword](/keywords.md) in TiDB, when you query the column, you need to add backticks `` ` `` to enclose the column name. For example, if the column name is `order`, you need to query the column with `` `order` ``.
+如果列名是 TiDB 中的保留[关键字](/keywords.md)，当你查询该列时，需要添加反引号 `` ` `` 来包围列名。例如，如果列名是 `order`，你需要使用 `` `order` `` 来查询该列。
 
-### How to import a local file larger than 250 MiB?
+### 如何导入大于 250 MiB 的本地文件？
 
-If the file is larger than 250 MiB, you can use [TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md) to import the file. For more information, see [`ticloud serverless import start`](/tidb-cloud/ticloud-import-start.md).
+如果文件大于 250 MiB，你可以使用 [TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md) 来导入文件。更多信息，请参见 [`ticloud serverless import start`](/tidb-cloud/ticloud-import-start.md)。
 
-Alternatively, you can use the `split [-l ${line_count}]` utility to split it into multiple smaller files (for Linux or macOS only). For example, run `split -l 100000 tidb-01.csv small_files` to split a file named `tidb-01.csv` by line length `100000`, and the split files are named `small_files${suffix}`. Then, you can import these smaller files to TiDB Cloud one by one.
+或者，你可以使用 `split [-l ${line_count}]` 工具将其分割成多个较小的文件（仅适用于 Linux 或 macOS）。例如，运行 `split -l 100000 tidb-01.csv small_files` 将名为 `tidb-01.csv` 的文件按行长度 `100000` 分割，分割后的文件命名为 `small_files${suffix}`。然后，你可以将这些较小的文件逐个导入到 TiDB Cloud。
 
-Refer to the following script:
+参考以下脚本：
 
 ```bash
 #!/bin/bash
@@ -128,7 +128,7 @@ do
 done
 ```
 
-You can input `n` and a file name, and then run the script. The script will divide the file into `n` equal parts while keeping the original file extension. For example:
+你可以输入 `n` 和文件名，然后运行脚本。脚本将文件平均分成 `n` 份，同时保持原始文件扩展名。例如：
 
 ```bash
 > sh ./split.sh 3 mytest.customer.csv

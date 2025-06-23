@@ -1,27 +1,27 @@
 ---
-title: SQL Performance Tuning
-summary: Introduces TiDB's SQL performance tuning scheme and analysis approach.
+title: SQL 性能调优
+summary: 介绍 TiDB 的 SQL 性能调优方案和分析方法。
 ---
 
-# SQL Performance Tuning
+# SQL 性能调优
 
-This document introduces some common reasons for slow SQL statements and techniques for tuning SQL performance.
+本文介绍一些常见的 SQL 语句慢的原因以及 SQL 性能调优的技巧。
 
-## Before you begin
+## 开始之前
 
-You can use [`tiup demo` import](/develop/dev-guide-bookshop-schema-design.md#method-1-via-tiup-demo) to prepare data:
+你可以使用 [`tiup demo` 导入](/develop/dev-guide-bookshop-schema-design.md#method-1-via-tiup-demo)准备数据：
 
 ```shell
 tiup demo bookshop prepare --host 127.0.0.1 --port 4000 --books 1000000
 ```
 
-Or [using the Import feature of TiDB Cloud](/develop/dev-guide-bookshop-schema-design.md#method-2-via-tidb-cloud-import) to import the pre-prepared sample data.
+或者[使用 TiDB Cloud 的导入功能](/develop/dev-guide-bookshop-schema-design.md#method-2-via-tidb-cloud-import)导入预先准备的示例数据。
 
-## Issue: Full table scan
+## 问题：全表扫描
 
-The most common reason for slow SQL queries is that the `SELECT` statements perform full table scan or use incorrect indexes.
+SQL 查询慢最常见的原因是 `SELECT` 语句执行全表扫描或使用了错误的索引。
 
-When TiDB retrieves a small number of rows from a large table based on a column that is not the primary key or in the secondary index, the performance is usually poor:
+当 TiDB 从一个大表中基于非主键列或不在二级索引中的列检索少量行时，性能通常较差：
 
 ```sql
 SELECT * FROM books WHERE title = 'Marian Yost';
@@ -41,7 +41,7 @@ SELECT * FROM books WHERE title = 'Marian Yost';
 Time: 0.582s
 ```
 
-To understand why this query is slow, you can use `EXPLAIN` to see the execution plan:
+要了解为什么这个查询很慢，你可以使用 `EXPLAIN` 查看执行计划：
 
 ```sql
 EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
@@ -57,19 +57,19 @@ EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
 +---------------------+------------+-----------+---------------+-----------------------------------------+
 ```
 
-As can be seen from `TableFullScan_5` in the execution plan, TiDB performs a full table scan on the `books` table and checks whether `title` satisfies the condition for each row. The `estRows` value of `TableFullScan_5` is `1000000.00`, which means the optimizer estimates that this full table scan takes `1000000.00` rows of data.
+从执行计划中的 `TableFullScan_5` 可以看出，TiDB 对 `books` 表执行全表扫描，并检查每一行的 `title` 是否满足条件。`TableFullScan_5` 的 `estRows` 值为 `1000000.00`，这意味着优化器估计这次全表扫描需要扫描 `1000000.00` 行数据。
 
-For more information about the usage of `EXPLAIN`, see [`EXPLAIN` Walkthrough](/explain-walkthrough.md).
+关于 `EXPLAIN` 的使用方法，请参见 [`EXPLAIN` 详解](/explain-walkthrough.md)。
 
-### Solution: Use secondary index
+### 解决方案：使用二级索引
 
-To speed up this query above, add a secondary index on the `books.title` column:
+要加快上述查询，可以在 `books.title` 列上添加二级索引：
 
 ```sql
 CREATE INDEX title_idx ON books (title);
 ```
 
-The query execution is much faster:
+查询执行速度快了很多：
 
 ```sql
 SELECT * FROM books WHERE title = 'Marian Yost';
@@ -89,7 +89,7 @@ SELECT * FROM books WHERE title = 'Marian Yost';
 Time: 0.007s
 ```
 
-To understand why the performance is improved, use `EXPLAIN` to see the new execution plan:
+要了解为什么性能得到改善，使用 `EXPLAIN` 查看新的执行计划：
 
 ```sql
 EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
@@ -105,17 +105,17 @@ EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
 +---------------------------+---------+-----------+-------------------------------------+-------------------------------------------------------+
 ```
 
-As can be seen from `IndexLookup_10` in the execution plan, TiDB queries the data by the `title_idx` index. Its `estRows` value is `1.27`, which means that the optimizer estimates that only `1.27` rows are scanned. The estimated rows scanned are much fewer than the `1000000.00` rows of data in the full table scan.
+从执行计划中的 `IndexLookup_10` 可以看出，TiDB 通过 `title_idx` 索引查询数据。其 `estRows` 值为 `1.27`，这意味着优化器估计只需要扫描 `1.27` 行。估计扫描的行数远少于全表扫描的 `1000000.00` 行数据。
 
-The `IndexLookup_10` execution plan is to first use the `IndexRangeScan_8` operator to read the index data that meets the condition through the `title_idx` index, and then use the `TableLookup_9` operator to query the corresponding rows according to the Row ID stored in the index data.
+`IndexLookup_10` 执行计划是先使用 `IndexRangeScan_8` 算子通过 `title_idx` 索引读取满足条件的索引数据，然后使用 `TableLookup_9` 算子根据索引数据中存储的 Row ID 查询对应的行。
 
-For more information on the TiDB execution plan, see [TiDB Query Execution Plan Overview](/explain-overview.md).
+关于 TiDB 执行计划的更多信息，请参见 [TiDB 执行计划概览](/explain-overview.md)。
 
-### Solution: Use covering index
+### 解决方案：使用覆盖索引
 
-If the index is a covering index, which contains all the columns queried by the SQL statements, scanning the index data is sufficient for the query.
+如果索引是覆盖索引，包含了 SQL 语句查询的所有列，那么扫描索引数据就足够完成查询。
 
-For example, in the following query, you only need to query the corresponding `price` based on `title`:
+例如，在以下查询中，你只需要根据 `title` 查询对应的 `price`：
 
 ```sql
 SELECT title, price FROM books WHERE title = 'Marian Yost';
@@ -135,7 +135,7 @@ SELECT title, price FROM books WHERE title = 'Marian Yost';
 Time: 0.007s
 ```
 
-Because the `title_idx` index only contains data in the `title` column, TiDB still needs to first scan the index data and then query the `price` column from the table.
+因为 `title_idx` 索引只包含 `title` 列的数据，TiDB 仍然需要先扫描索引数据，然后从表中查询 `price` 列。
 
 ```sql
 EXPLAIN SELECT title, price FROM books WHERE title = 'Marian Yost';
@@ -151,7 +151,7 @@ EXPLAIN SELECT title, price FROM books WHERE title = 'Marian Yost';
 +---------------------------+---------+-----------+-------------------------------------+-------------------------------------------------------+
 ```
 
-To optimize the performance, drop the `title_idx` index and create a new covering index `title_price_idx`:
+要优化性能，删除 `title_idx` 索引并创建新的覆盖索引 `title_price_idx`：
 
 ```sql
 ALTER TABLE books DROP INDEX title_idx;
@@ -161,7 +161,7 @@ ALTER TABLE books DROP INDEX title_idx;
 CREATE INDEX title_price_idx ON books (title, price);
 ```
 
-Because the `price` data is stored in the `title_price_idx` index, the following query only needs to scan the index data:
+因为 `price` 数据存储在 `title_price_idx` 索引中，以下查询只需要扫描索引数据：
 
 ```sql
 EXPLAIN SELECT title, price FROM books WHERE title = 'Marian Yost';
@@ -176,7 +176,7 @@ EXPLAIN SELECT title, price FROM books WHERE title = 'Marian Yost';
 +--------------------+---------+-----------+--------------------------------------------------+-------------------------------------------------------+
 ```
 
-Now this query runs faster:
+现在这个查询运行得更快：
 
 ```sql
 SELECT title, price FROM books WHERE title = 'Marian Yost';
@@ -196,15 +196,15 @@ SELECT title, price FROM books WHERE title = 'Marian Yost';
 Time: 0.004s
 ```
 
-Since the `books` table will be used in later examples, drop the `title_price_idx` index:
+由于 `books` 表将在后面的示例中使用，删除 `title_price_idx` 索引：
 
 ```sql
 ALTER TABLE books DROP INDEX title_price_idx;
 ```
 
-### Solution: Use primary index
+### 解决方案：使用主键索引
 
-If a query uses the primary key to filter data, the query runs fast. For example, the primary key of the `books` table is the `id` column, so you can use the `id` column to query data:
+如果查询使用主键过滤数据，查询运行速度很快。例如，`books` 表的主键是 `id` 列，所以你可以使用 `id` 列查询数据：
 
 ```sql
 SELECT * FROM books WHERE id = 896;
@@ -220,7 +220,7 @@ SELECT * FROM books WHERE id = 896;
 Time: 0.004s
 ```
 
-Use `EXPLAIN` to see the execution plan:
+使用 `EXPLAIN` 查看执行计划：
 
 ```sql
 EXPLAIN SELECT * FROM books WHERE id = 896;
@@ -234,27 +234,27 @@ EXPLAIN SELECT * FROM books WHERE id = 896;
 +-------------+---------+------+---------------+---------------+
 ```
 
-`Point_Get` is a very fast execute plan.
+`Point_Get` 是一个非常快的执行计划。
 
-## Use the right join type
+## 使用正确的连接类型
 
-See [JOIN Execution Plan](/explain-joins.md).
+请参见[连接的执行计划](/explain-joins.md)。
 
-### See also
+### 另请参阅
 
-* [EXPLAIN Walkthrough](/explain-walkthrough.md)
-* [Explain Statements That Use Indexes](/explain-indexes.md)
+* [EXPLAIN 详解](/explain-walkthrough.md)
+* [使用索引的执行计划](/explain-indexes.md)
 
-## Need help?
+## 需要帮助？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

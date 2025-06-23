@@ -1,17 +1,17 @@
 ---
 title: CREATE PLACEMENT POLICY
-summary: The usage of CREATE PLACEMENT POLICY in TiDB.
+summary: TiDB 中 CREATE PLACEMENT POLICY 的使用方法。
 ---
 
 # CREATE PLACEMENT POLICY
 
-`CREATE PLACEMENT POLICY` is used to create a named placement policy that can later be assigned to tables, partitions, or database schemas.
+`CREATE PLACEMENT POLICY` 用于创建命名放置策略，该策略可以稍后分配给表、分区或数据库架构。
 
-> **Note:**
+> **注意：**
 >
-> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> 此功能在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
 
-## Synopsis
+## 语法
 
 ```ebnf+diagram
 CreatePolicyStmt ::=
@@ -47,13 +47,13 @@ AdvancedPlacementOption ::=
 |   "SURVIVAL_PREFERENCES" EqOpt stringLit
 ```
 
-## Examples
+## 示例
 
-> **Note:**
+> **注意：**
 >
-> To know which regions are available in your cluster, see [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md).
+> 要了解集群中有哪些可用区域，请参见 [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)。
 >
-> If you do not see any available regions, your TiKV installation might not have labels set correctly.
+> 如果你没有看到任何可用区域，你的 TiKV 安装可能没有正确设置标签。
 
 {{< copyable "sql" >}}
 
@@ -76,13 +76,13 @@ Query OK, 0 rows affected (0.10 sec)
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension to MySQL syntax.
+该语句是 TiDB 对 MySQL 语法的扩展。
 
-## See also
+## 另请参阅
 
-* [Placement Rules in SQL](/placement-rules-in-sql.md)
+* [SQL 中的放置规则](/placement-rules-in-sql.md)
 * [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)
 * [ALTER PLACEMENT POLICY](/sql-statements/sql-statement-alter-placement-policy.md)
 * [DROP PLACEMENT POLICY](/sql-statements/sql-statement-drop-placement-policy.md)

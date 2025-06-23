@@ -1,13 +1,13 @@
 ---
 title: ALTER SEQUENCE
-summary: An overview of the usage of ALTER SEQUENCE for the TiDB database.
+summary: TiDB 数据库中 ALTER SEQUENCE 的使用概述。
 ---
 
 # ALTER SEQUENCE
 
-The `ALTER SEQUENCE` statement alters sequence objects in TiDB. The sequence is a database object that is on a par with the `Table` and the `View` object. The sequence is used to generate serialized IDs in a customized way.
+`ALTER SEQUENCE` 语句用于修改 TiDB 中的序列对象。序列是与 `Table` 和 `View` 对象同级的数据库对象。序列用于以自定义方式生成序列化的 ID。
 
-## Synopsis
+## 语法概要
 
 ```ebnf+diagram
 CreateSequenceStmt ::=
@@ -34,7 +34,7 @@ SequenceOption ::=
 |   'RESTART' ( ( '='? | 'WITH' ) SignedNum )?
 ```
 
-## Syntax
+## 语法
 
 ```sql
 ALTER SEQUENCE sequence_name
@@ -47,44 +47,44 @@ ALTER SEQUENCE sequence_name
     [table_options]
 ```
 
-## Parameters
+## 参数
 
-|Parameters | Default value | Description |
+|参数 | 默认值 | 描述 |
 | :-- | :-- | :--|
-| `INCREMENT` | `1` | Specifies the increment of a sequence. Its positive or negative values can control the growth direction of the sequence. |
-| `MINVALUE` | `1` or `-9223372036854775807` | Specifies the minimum value of a sequence. When `INCREMENT` > `0`, the default value is `1`. When `INCREMENT` < `0`, the default value is `-9223372036854775807`. |
-| `MAXVALUE` | `9223372036854775806` or `-1` | Specifies the maximum value of a sequence. When `INCREMENT` > `0`, the default value is `9223372036854775806`. When `INCREMENT` < `0`, the default value is `-1`. |
-| `START` | `MINVALUE` or `MAXVALUE`| Specifies the initial value of a sequence. When `INCREMENT` > `0`, the default value is `MINVALUE`. When `INCREMENT` < `0`, the default value is `MAXVALUE`. |
-| `CACHE` | `1000` | Specifies the local cache size of a sequence in TiDB. |
-| `CYCLE` | `NO CYCLE` | Specifies whether a sequence restarts from the minimum value (or maximum for the descending sequence). When `INCREMENT` > `0`, the default value is `MINVALUE`. When `INCREMENT` < `0`, the default value is `MAXVALUE`. |
+| `INCREMENT` | `1` | 指定序列的增量。其正值或负值可以控制序列的增长方向。 |
+| `MINVALUE` | `1` 或 `-9223372036854775807` | 指定序列的最小值。当 `INCREMENT` > `0` 时，默认值为 `1`。当 `INCREMENT` < `0` 时，默认值为 `-9223372036854775807`。 |
+| `MAXVALUE` | `9223372036854775806` 或 `-1` | 指定序列的最大值。当 `INCREMENT` > `0` 时，默认值为 `9223372036854775806`。当 `INCREMENT` < `0` 时，默认值为 `-1`。 |
+| `START` | `MINVALUE` 或 `MAXVALUE` | 指定序列的初始值。当 `INCREMENT` > `0` 时，默认值为 `MINVALUE`。当 `INCREMENT` < `0` 时，默认值为 `MAXVALUE`。 |
+| `CACHE` | `1000` | 指定 TiDB 中序列的本地缓存大小。 |
+| `CYCLE` | `NO CYCLE` | 指定序列是否从最小值重新开始（或降序序列的最大值）。当 `INCREMENT` > `0` 时，默认值为 `MINVALUE`。当 `INCREMENT` < `0` 时，默认值为 `MAXVALUE`。 |
 
-> **Note:**
+> **注意：**
 >
-> Changing the `START` value does not affect the generated values until you execute `ALTER SEQUENCE ... RESTART`.
+> 更改 `START` 值不会影响生成的值，直到你执行 `ALTER SEQUENCE ... RESTART`。
 
-## `SEQUENCE` function
+## `SEQUENCE` 函数
 
-You can control a sequence through the following expression functions:
+你可以通过以下表达式函数控制序列：
 
-+ `NEXTVAL` or `NEXT VALUE FOR`
++ `NEXTVAL` 或 `NEXT VALUE FOR`
 
-    Essentially, both are the `NEXTVAL()` function that gets the next valid value of a sequence object. The parameter of the `NEXTVAL()` function is the `identifier` of the sequence.
+    本质上，两者都是 `NEXTVAL()` 函数，用于获取序列对象的下一个有效值。`NEXTVAL()` 函数的参数是序列的 `identifier`。
 
 + `LASTVAL`
 
-    This function gets the last used value of this session. If the value does not exist, `NULL` is used. The parameter of this function is the `identifier` of the sequence.
+    此函数获取此会话的最后使用值。如果该值不存在，则使用 `NULL`。此函数的参数是序列的 `identifier`。
 
 + `SETVAL`
 
-    This function sets the progression of the current value for a sequence. The first parameter of this function is the `identifier` of the sequence; the second parameter is `num`.
+    此函数设置序列当前值的进程。此函数的第一个参数是序列的 `identifier`；第二个参数是 `num`。
 
-> **Note:**
+> **注意：**
 >
-> In the implementation of a sequence in TiDB, the `SETVAL` function cannot change the initial progression or cycle progression of this sequence. This function only returns the next valid value based on this progression.
+> 在 TiDB 的序列实现中，`SETVAL` 函数不能更改此序列的初始进程或循环进程。此函数仅根据此进程返回下一个有效值。
 
-## Examples
+## 示例
 
-Create a sequence named `s1`:
+创建一个名为 `s1` 的序列：
 
 ```sql
 CREATE SEQUENCE s1;
@@ -94,7 +94,7 @@ CREATE SEQUENCE s1;
 Query OK, 0 rows affected (0.15 sec)
 ```
 
-Get the next two values from the sequence by executing the following SQL statement twice:
+通过执行以下 SQL 语句两次从序列中获取接下来的两个值：
 
 ```sql
 SELECT NEXTVAL(s1);
@@ -122,7 +122,7 @@ SELECT NEXTVAL(s1);
 1 row in set (0.00 sec)
 ```
 
-Change the increment of the sequence to `2`:
+将序列的增量更改为 `2`：
 
 ```sql
 ALTER SEQUENCE s1 INCREMENT=2;
@@ -132,7 +132,7 @@ ALTER SEQUENCE s1 INCREMENT=2;
 Query OK, 0 rows affected (0.18 sec)
 ```
 
-Now, get the next two values from the sequence again:
+现在，再次从序列中获取接下来的两个值：
 
 ```sql
 SELECT NEXTVAL(s1);
@@ -160,9 +160,9 @@ SELECT NEXTVAL(s1);
 1 row in set (0.00 sec)
 ```
 
-As you can see from the output, the values now increase by two, following the `ALTER SEQUENCE` statement.
+从输出可以看出，在执行 `ALTER SEQUENCE` 语句后，值现在每次增加 2。
 
-You can also change other parameters of the sequence. For example, you can change the `MAXVALUE` of the sequence as follows:
+你还可以更改序列的其他参数。例如，你可以按如下方式更改序列的 `MAXVALUE`：
 
 ```sql
 CREATE SEQUENCE s2 MAXVALUE=10;
@@ -191,25 +191,25 @@ Create Sequence: CREATE SEQUENCE `s2` start with 1 minvalue 1 maxvalue 100 incre
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension. The implementation is modeled on sequences available in MariaDB.
+此语句是 TiDB 扩展。其实现是基于 MariaDB 中可用的序列。
 
-Except for the `SETVAL` function, all other functions have the same _progressions_ as MariaDB. Here "progression" means that the numbers in a sequence follow a certain arithmetic progression rule defined by the sequence. Although you can use `SETVAL` to set the current value of a sequence, the subsequent values of the sequence still follow the original progression rule.
+除了 `SETVAL` 函数外，所有其他函数都具有与 MariaDB 相同的_进程_。这里的"进程"意味着序列中的数字遵循由序列定义的某个算术进程规则。虽然你可以使用 `SETVAL` 设置序列的当前值，但序列的后续值仍然遵循原始进程规则。
 
-For example:
+例如：
 
 ```
-1, 3, 5, ...            // The sequence starts from 1 and increments by 2.
-SELECT SETVAL(seq, 6)   // Sets the current value of a sequence to 6.
-7, 9, 11, ...           // Subsequent values still follow the progression rule.
+1, 3, 5, ...            // 序列从 1 开始，每次增加 2。
+SELECT SETVAL(seq, 6)   // 将序列的当前值设置为 6。
+7, 9, 11, ...           // 后续值仍然遵循进程规则。
 ```
 
-In the `CYCLE` mode, the initial value of a sequence in the first round is the value of the `START` parameter, and the initial value in the subsequent rounds is the value of `MinValue` (`INCREMENT` > 0) or `MaxValue` (`INCREMENT` < 0).
+在 `CYCLE` 模式下，序列在第一轮中的初始值是 `START` 参数的值，在后续轮次中的初始值是 `MinValue`（`INCREMENT` > 0）或 `MaxValue`（`INCREMENT` < 0）的值。
 
-## See also
+## 另请参阅
 
 * [CREATE SEQUENCE](/sql-statements/sql-statement-create-sequence.md)
 * [DROP SEQUENCE](/sql-statements/sql-statement-drop-sequence.md)
 * [SHOW CREATE SEQUENCE](/sql-statements/sql-statement-show-create-sequence.md)
-* [Sequence Functions](/functions-and-operators/sequence-functions.md)
+* [序列函数](/functions-and-operators/sequence-functions.md)

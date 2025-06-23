@@ -1,44 +1,44 @@
 ---
-title: Create Tickets and Subscribe to Ticket Updates in Slack
-summary: Introduces detailed information about the Slack ticket creation and update subscription.
+title: 在 Slack 中创建工单和订阅工单更新
+summary: 介绍在 Slack 中创建工单和订阅工单更新的详细信息。
 ---
 
-# Create Tickets and Subscribe to Ticket Updates in Slack
+# 在 Slack 中创建工单和订阅工单更新
 
-For customers subscribed to the **Enterprise** [support plan](/tidb-cloud/connected-care-detail.md), TiDB Cloud provides a ticket bot called **PingCAP Support Bot** in [Slack](https://slack.com/), to support quick ticket creation.
+对于订阅了**企业版**[支持计划](/tidb-cloud/connected-care-detail.md)的客户，TiDB Cloud 在 [Slack](https://slack.com/) 中提供了一个名为 **PingCAP Support Bot** 的工单机器人，以支持快速创建工单。
 
-> **Note:**
+> **注意：**
 >
-> The ticket support feature for Slack is available upon request. If you are interested in trying this feature, contact TiDB Cloud support at <a href="mailto:support@pingcap.com">support@pingcap.com</a> or reach out to your Technical Account Manager (TAM).
+> Slack 的工单支持功能需要申请才能使用。如果你对尝试此功能感兴趣，请通过 <a href="mailto:support@pingcap.com">support@pingcap.com</a> 联系 TiDB Cloud 支持团队，或联系你的技术客户经理（TAM）。
 
-## Create a support ticket
+## 创建支持工单
 
-In the Slack support channel, you only need to mention **PingCAP Support Bot** and describe the problem in a message. Then, the ticket bot will send you a message with a **Raise request** button.
+在 Slack 支持频道中，你只需要在消息中提及 **PingCAP Support Bot** 并描述问题。然后，工单机器人会向你发送一条带有**提出请求**按钮的消息。
 
 ![slack-ticket-creation-1](/media/tidb-cloud/connected-slack-ticket-creation-1.png)
 
-Click **Raise request** to open a form, fill it out according to the problem, and then click **Create** to submit the ticket.
+点击**提出请求**打开表单，根据问题填写表单，然后点击**创建**提交工单。
 
 ![slack-ticket-creation-2](/media/tidb-cloud/connected-slack-ticket-creation-2.png)
 
-After successfully creating the ticket, the bot will reply with the ticket link. You can click the link to view the ticket details in the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals).
+成功创建工单后，机器人会回复工单链接。你可以点击链接在 [PingCAP 帮助中心](https://tidb.support.pingcap.com/servicedesk/customer/portals)查看工单详情。
 
 ![slack-ticket-creation-3](/media/tidb-cloud/connected-slack-ticket-creation-3.png)
 
 ![slack-ticket-creation-4](/media/tidb-cloud/connected-slack-ticket-creation-4.png)
 
-## Subscribe to ticket updates
+## 订阅工单更新
 
-The **Enterprise** support plan supports subscriptions to ticket updates in Slack. When a support engineer responds to a ticket, a ticket update message will appear in the Slack channel. The message includes information such as the ticket title, ticket link, and last comment content.
+**企业版**支持计划支持在 Slack 中订阅工单更新。当支持工程师回复工单时，工单更新消息会出现在 Slack 频道中。该消息包括工单标题、工单链接和最新评论内容等信息。
 
 ![slack-ticket-creation-5](/media/tidb-cloud/connected-slack-ticket-creation-5.png)
 
-## FAQs
+## 常见问题
 
-- How can I check the status of my ticket?
+- 如何查看我的工单状态？
 
-    Log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/user/requests) with the email address used to create the ticket. You can view all historical tickets and their status for the current account.
+    使用创建工单时使用的电子邮件地址登录 [PingCAP 帮助中心](https://tidb.support.pingcap.com/servicedesk/customer/user/requests)。你可以查看当前账户的所有历史工单及其状态。
 
-## Contact support
+## 联系支持
 
-For help or questions, please contact our support team at <a href="mailto:support@pingcap.com">support@pingcap.com</a>.
+如需帮助或有任何问题，请通过 <a href="mailto:support@pingcap.com">support@pingcap.com</a> 联系我们的支持团队。

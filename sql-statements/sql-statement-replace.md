@@ -1,13 +1,13 @@
 ---
-title: REPLACE | TiDB SQL Statement Reference
-summary: An overview of the usage of REPLACE for the TiDB database.
+title: REPLACE | TiDB SQL 语句参考
+summary: TiDB 数据库中 REPLACE 的使用概览。
 ---
 
 # REPLACE
 
-The `REPLACE` statement is semantically a combined `DELETE`+`INSERT` statement. It can be used to simplify application code.
+`REPLACE` 语句在语义上是一个组合的 `DELETE`+`INSERT` 语句。它可以用来简化应用程序代码。
 
-## Synopsis
+## 语法图
 
 ```ebnf+diagram
 ReplaceIntoStmt ::=
@@ -32,11 +32,11 @@ InsertValues ::=
 |   'SET' ColumnSetValue? ( ',' ColumnSetValue )*
 ```
 
-> **Note:**
+> **注意：**
 >
-> Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority (`PriorityOpt`) will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control.md) to manage resource usage for different SQL statements.
+> 从 v6.6.0 开始，TiDB 支持[资源控制](/tidb-resource-control.md)。你可以使用此功能在不同的资源组中以不同的优先级执行 SQL 语句。通过为这些资源组配置适当的配额和优先级，你可以更好地控制不同优先级 SQL 语句的调度。当启用资源控制时，语句优先级（`PriorityOpt`）将不再生效。建议你使用[资源控制](/tidb-resource-control.md)来管理不同 SQL 语句的资源使用。
 
-## Examples
+## 示例
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -70,11 +70,11 @@ mysql> SELECT * FROM t1;
 3 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `REPLACE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中的 `REPLACE` 语句与 MySQL 完全兼容。如果发现任何兼容性差异，请[报告问题](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 另请参阅
 
 * [DELETE](/sql-statements/sql-statement-delete.md)
 * [INSERT](/sql-statements/sql-statement-insert.md)

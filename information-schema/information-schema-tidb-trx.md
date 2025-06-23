@@ -1,18 +1,18 @@
 ---
 title: TIDB_TRX
-summary: Learn the `TIDB_TRX` INFORMATION_SCHEMA table.
+summary: 了解 `TIDB_TRX` INFORMATION_SCHEMA 表。
 ---
 
 # TIDB_TRX
 
-The `TIDB_TRX` table provides information about the transactions currently being executed on the TiDB node.
+`TIDB_TRX` 表提供 TiDB 节点上当前正在执行的事务信息。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC TIDB_TRX;
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 +-------------------------+-----------------------------------------------------------------+------+------+---------+-------+
@@ -34,43 +34,43 @@ The output is as follows:
 +-------------------------+-----------------------------------------------------------------+------+------+---------+-------+
 ```
 
-The meaning of each column field in the `TIDB_TRX` table is as follows:
+`TIDB_TRX` 表中各列字段的含义如下：
 
-* `ID`: The transaction ID, which is the `start_ts` (start timestamp) of the transaction.
-* `START_TIME`: The start time of the transaction, which is the physical time corresponding to the `start_ts` of the transaction.
-* `CURRENT_SQL_DIGEST`: The digest of the SQL statement currently being executed in the transaction.
-* `CURRENT_SQL_DIGEST_TEXT`: The normalized form of the SQL statement currently being executed by the transaction, that is, the SQL statement without arguments and format. It corresponds to `CURRENT_SQL_DIGEST`.
-* `STATE`: The current state of the transaction. The possible values ​​include:
-    * `Idle`: The transaction is in an idle state, that is, it is waiting for the user to input a query.
-    * `Running`: The transaction is executing a query.
-    * `LockWaiting`: The transaction is waiting for the pessimistic lock to be acquired. Note that the transaction enters this state at the beginning of the pessimistic locking operation, no matter whether it is blocked by other transactions or not.
-    * `Committing`: The transaction is in the process of commit.
-    * `RollingBack`: The transaction is being rolled back.
-* `WAITING_START_TIME`: When the value of `STATE` is `LockWaiting`, this column shows the start time of the waiting.
-* `MEM_BUFFER_KEYS`: The number of keys written into the memory buffer by the current transaction.
-* `MEM_BUFFER_BYTES`: The total number of key-value bytes written into the memory buffer by the current transaction.
-* `SESSION_ID`: The ID of the session to which this transaction belongs.
-* `USER`: The name of the user who performs the transaction.
-* `DB`: The current default database name of the session in which the transaction is executed.
-* `ALL_SQL_DIGESTS`: The digest list of statements that have been executed by the transaction. The list is shown as a string array in JSON format. Each transaction records at most the first 50 statements. Using the [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests) function, you can convert the information in this column into a list of corresponding normalized SQL statements.
-* `RELATED_TABLE_IDS`: The IDs of the tables, views, and other objects that the transaction accesses.
+* `ID`：事务 ID，即事务的 `start_ts`（开始时间戳）。
+* `START_TIME`：事务的开始时间，即事务的 `start_ts` 对应的物理时间。
+* `CURRENT_SQL_DIGEST`：事务中当前正在执行的 SQL 语句的摘要。
+* `CURRENT_SQL_DIGEST_TEXT`：事务当前正在执行的 SQL 语句的规范化形式，即不含参数和格式的 SQL 语句。它与 `CURRENT_SQL_DIGEST` 相对应。
+* `STATE`：事务的当前状态。可能的值包括：
+    * `Idle`：事务处于空闲状态，即正在等待用户输入查询。
+    * `Running`：事务正在执行查询。
+    * `LockWaiting`：事务正在等待获取悲观锁。注意，事务在悲观锁定操作开始时就会进入此状态，无论是否被其他事务阻塞。
+    * `Committing`：事务正在提交过程中。
+    * `RollingBack`：事务正在回滚中。
+* `WAITING_START_TIME`：当 `STATE` 的值为 `LockWaiting` 时，此列显示等待的开始时间。
+* `MEM_BUFFER_KEYS`：当前事务写入内存缓冲区的键的数量。
+* `MEM_BUFFER_BYTES`：当前事务写入内存缓冲区的键值对的总字节数。
+* `SESSION_ID`：此事务所属会话的 ID。
+* `USER`：执行事务的用户名。
+* `DB`：执行事务的会话当前默认的数据库名。
+* `ALL_SQL_DIGESTS`：事务已执行的语句的摘要列表。列表以 JSON 格式的字符串数组形式显示。每个事务最多记录前 50 条语句。使用 [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests) 函数，可以将此列中的信息转换为相应的规范化 SQL 语句列表。
+* `RELATED_TABLE_IDS`：事务访问的表、视图和其他对象的 ID。
 
-> **Note:**
+> **注意：**
 >
-> * Only users with the [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process) privilege can obtain the complete information in this table. Users without the PROCESS privilege can only query information of the transactions performed by the current user.
-> * The information (SQL digest) in the `CURRENT_SQL_DIGEST` and `ALL_SQL_DIGESTS` columns is the hash value calculated from the normalized SQL statement. The information in the `CURRENT_SQL_DIGEST_TEXT` column and the result returned from the `TIDB_DECODE_SQL_DIGESTS` function are internally queried from the statements summary tables, so it is possible that the corresponding statement cannot be found internally. For the detailed description of SQL digests and the statements summary tables, see [Statement Summary Tables](/statement-summary-tables.md).
-> * The [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests) function call has a high overhead. If the function is called to query historical SQL statements for a large number of transactions, the query might take a long time. If the cluster is large with many concurrent transactions, avoid directly using this function on the `ALL_SQL_DIGEST` column while querying the full table of `TIDB_TRX`. This means to avoid an SQL statement like ``SELECT *, tidb_decode_sql_digests(all_sql_digests) FROM TIDB_TRX``.
-> * Currently the `TIDB_TRX` table does not support showing information of TiDB internal transactions.
+> * 只有具有 [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process) 权限的用户才能获取此表中的完整信息。没有 PROCESS 权限的用户只能查询当前用户执行的事务的信息。
+> * `CURRENT_SQL_DIGEST` 和 `ALL_SQL_DIGESTS` 列中的信息（SQL 摘要）是从规范化 SQL 语句计算得出的哈希值。`CURRENT_SQL_DIGEST_TEXT` 列中的信息和 `TIDB_DECODE_SQL_DIGESTS` 函数返回的结果是从语句概要表内部查询的，因此可能找不到相应的语句。有关 SQL 摘要和语句概要表的详细说明，请参见[语句概要表](/statement-summary-tables.md)。
+> * [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests) 函数调用开销较高。如果对大量事务查询历史 SQL 语句，调用此函数可能需要较长时间。如果集群较大且并发事务较多，在查询 `TIDB_TRX` 的完整表时，避免直接在 `ALL_SQL_DIGEST` 列上使用此函数。这意味着要避免使用类似 ``SELECT *, tidb_decode_sql_digests(all_sql_digests) FROM TIDB_TRX`` 的 SQL 语句。
+> * 目前 `TIDB_TRX` 表不支持显示 TiDB 内部事务的信息。
 
-## Example
+## 示例
 
-View the `TIDB_TRX` table:
+查看 `TIDB_TRX` 表：
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.TIDB_TRX\G
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 *************************** 1. row ***************************
@@ -102,13 +102,13 @@ CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ?
 2 rows in set (0.01 sec)
 ```
 
-From the query result of this example, you can see that: the current node has two on-going transactions. One transaction is in the idle state (`STATE` is `Idle` and `CURRENT_SQL_DIGEST` is `NULL`), and this transaction has executed 3 statements (there are three records in the `ALL_SQL_DIGESTS` list, which are the digests of the three SQL statements that have been executed). Another transaction is executing a statement and waiting for the lock (`STATE` is `LockWaiting` and `WAITING_START_TIME` shows the start time of the waiting lock). The transaction has executed 2 statements, and the statement currently being executed is in the form of ``"update `t` set `v` = `v` + ? where `id` = ?"``.
+从这个示例的查询结果可以看出：当前节点有两个正在进行的事务。一个事务处于空闲状态（`STATE` 为 `Idle` 且 `CURRENT_SQL_DIGEST` 为 `NULL`），这个事务已经执行了 3 条语句（`ALL_SQL_DIGESTS` 列表中有三条记录，是已执行的三条 SQL 语句的摘要）。另一个事务正在执行语句并等待锁（`STATE` 为 `LockWaiting`，`WAITING_START_TIME` 显示等待锁的开始时间）。该事务已执行 2 条语句，当前正在执行的语句形式为 ``"update `t` set `v` = `v` + ? where `id` = ?"``。
 
 ```sql
 SELECT id, all_sql_digests, tidb_decode_sql_digests(all_sql_digests) AS all_sqls FROM INFORMATION_SCHEMA.TIDB_TRX\G
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 *************************** 1. row ***************************
@@ -121,18 +121,18 @@ all_sql_digests: ["e6f07d43b5c21db0fbb9a31feac2dc599787763393dd5acbfad80e247eb02
        all_sqls: ["begin","update `t` set `v` = `v` + ? where `id` = ?"]
 ```
 
-This query calls the [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests) function on the `ALL_SQL_DIGESTS` column of the `TIDB_TRX` table, and converts the SQL digest array into an array of normalized SQL statement through the system internal query. This helps you visually obtain the information of the statements that have been historically executed by the transaction. However, note that the preceding query scans the entire table of `TIDB_TRX` and calls the `TIDB_DECODE_SQL_DIGESTS` function for each row. Calling the `TIDB_DECODE_SQL_DIGESTS` function has a high overhead. Therefore, if many concurrent transactions exist in the cluster, try to avoid this type of query.
+此查询在 `TIDB_TRX` 表的 `ALL_SQL_DIGESTS` 列上调用 [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests) 函数，通过系统内部查询将 SQL 摘要数组转换为规范化 SQL 语句数组。这有助于你直观地获取事务历史执行的语句信息。但是请注意，上述查询扫描了 `TIDB_TRX` 的整个表，并对每一行调用 `TIDB_DECODE_SQL_DIGESTS` 函数。调用 `TIDB_DECODE_SQL_DIGESTS` 函数的开销较高。因此，如果集群中存在许多并发事务，请尽量避免这种类型的查询。
 
 ## CLUSTER_TIDB_TRX
 
-The `TIDB_TRX` table only provides information about the transactions that are being executed on a single TiDB node. If you want to view the information of the transactions that are being executed on all TiDB nodes in the entire cluster, you need to query the `CLUSTER_TIDB_TRX` table. Compared with the query result of the `TIDB_TRX` table, the query result of the `CLUSTER_TIDB_TRX` table includes an extra `INSTANCE` field. The `INSTANCE` field displays the IP address and port of each node in the cluster, which is used to distinguish the TiDB nodes where the transactions are located.
+`TIDB_TRX` 表仅提供单个 TiDB 节点上正在执行的事务信息。如果你想查看整个集群中所有 TiDB 节点上正在执行的事务信息，需要查询 `CLUSTER_TIDB_TRX` 表。与 `TIDB_TRX` 表的查询结果相比，`CLUSTER_TIDB_TRX` 表的查询结果多了一个 `INSTANCE` 字段。`INSTANCE` 字段显示集群中每个节点的 IP 地址和端口，用于区分事务所在的 TiDB 节点。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC CLUSTER_TIDB_TRX;
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 +-------------------------+-----------------------------------------------------------------+------+------+---------+-------+

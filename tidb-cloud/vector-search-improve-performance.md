@@ -1,36 +1,36 @@
 ---
-title: Improve Vector Search Performance
-summary: Learn best practices for improving the performance of TiDB Vector Search.
+title: 提升向量搜索性能
+summary: 了解提升 TiDB 向量搜索性能的最佳实践。
 ---
 
-# Improve Vector Search Performance
+# 提升向量搜索性能
 
-TiDB Vector Search enables you to perform Approximate Nearest Neighbor (ANN) queries that search for results similar to an image, document, or other input. To improve the query performance, review the following best practices.
+TiDB 向量搜索使你能够执行近似最近邻（ANN）查询，搜索与图像、文档或其他输入相似的结果。要提高查询性能，请参考以下最佳实践。
 
-## Add vector search index for vector columns
+## 为向量列添加向量搜索索引
 
-The [vector search index](/tidb-cloud/vector-search-index.md) dramatically improves the performance of vector search queries, usually by 10x or more, with a trade-off of only a small decrease of recall rate.
+[向量搜索索引](/tidb-cloud/vector-search-index.md)能显著提高向量搜索查询的性能，通常能提升 10 倍或更多，只需要牺牲很小的召回率。
 
-## Ensure vector indexes are fully built
+## 确保向量索引完全构建
 
-After you insert a large volume of vector data, some of it might be in the Delta layer waiting for persistence. The vector index for such data will be built after the data is persisted. Until all vector data is indexed, vector search performance is suboptimal. To check the index build progress, see [View index build progress](/tidb-cloud/vector-search-index.md#view-index-build-progress).
+在插入大量向量数据后，其中一部分可能在 Delta 层等待持久化。这些数据的向量索引将在数据持久化后构建。在所有向量数据都被索引之前，向量搜索性能是次优的。要检查索引构建进度，请参见[查看索引构建进度](/tidb-cloud/vector-search-index.md#view-index-build-progress)。
 
-## Reduce vector dimensions or shorten embeddings
+## 减少向量维度或缩短嵌入
 
-The computational complexity of vector search indexing and queries increases significantly as the dimension of vectors grows, requiring more floating-point comparisons.
+随着向量维度的增加，向量搜索索引和查询的计算复杂度显著增加，需要更多的浮点数比较。
 
-To optimize performance, consider reducing vector dimensions whenever feasible. This usually needs switching to another embedding model. When switching models, you need to evaluate the impact of the model change on the accuracy of vector queries.
+为了优化性能，请在可行的情况下考虑减少向量维度。这通常需要切换到另一个嵌入模型。切换模型时，你需要评估模型变更对向量查询准确性的影响。
 
-Certain embedding models like OpenAI `text-embedding-3-large` support [shortening embeddings](https://openai.com/index/new-embedding-models-and-api-updates/), which removes some numbers from the end of vector sequences without losing the embedding's concept-representing properties. You can also use such an embedding model to reduce the vector dimensions.
+某些嵌入模型（如 OpenAI `text-embedding-3-large`）支持[缩短嵌入](https://openai.com/index/new-embedding-models-and-api-updates/)，即从向量序列末尾删除一些数字，而不会丢失嵌入的概念表示属性。你也可以使用这样的嵌入模型来减少向量维度。
 
-## Exclude vector columns from the results
+## 从结果中排除向量列
 
-Vector embedding data is usually large and only used during the search process. By excluding vector columns from query results, you can greatly reduce the data transferred between the TiDB server and your SQL client, thereby improving query performance.
+向量嵌入数据通常很大，且仅在搜索过程中使用。通过从查询结果中排除向量列，你可以大大减少 TiDB 服务器和 SQL 客户端之间传输的数据量，从而提高查询性能。
 
-To exclude vector columns, explicitly list the columns you want to retrieve in the `SELECT` clause, instead of using `SELECT *` to retrieve all columns.
+要排除向量列，请在 `SELECT` 子句中明确列出你想要检索的列，而不是使用 `SELECT *` 检索所有列。
 
-## Warm up the index
+## 预热索引
 
-When accessing an index that has never been used or has not been accessed for a long time (cold access), TiDB needs to load the entire index from cloud storage or disk (instead of from memory). This process takes time and often results in higher query latency. Additionally, if there are no SQL queries for an extended period (for example, several hours), computing resources are reclaimed, causing subsequent access to become cold access.
+当访问从未使用过或长时间未访问（冷访问）的索引时，TiDB 需要从云存储或磁盘（而不是从内存）加载整个索引。这个过程需要时间，通常会导致更高的查询延迟。此外，如果长时间（例如几个小时）没有 SQL 查询，计算资源会被回收，导致后续访问变成冷访问。
 
-To avoid such query latency, warm up your index before actual workload by running similar vector search queries that hit the vector index.
+为了避免这种查询延迟，请在实际工作负载之前通过运行命中向量索引的类似向量搜索查询来预热索引。

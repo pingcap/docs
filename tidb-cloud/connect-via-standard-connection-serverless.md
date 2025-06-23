@@ -1,68 +1,68 @@
 ---
-title: Connect to TiDB Cloud Serverless via Public Endpoint
-summary: Learn how to connect to your TiDB Cloud Serverless cluster via public endpoint.
+title: 通过公共端点连接到 TiDB Cloud Serverless
+summary: 了解如何通过公共端点连接到你的 TiDB Cloud Serverless 集群。
 ---
 
-# Connect to TiDB Cloud Serverless via Public Endpoint
+# 通过公共端点连接到 TiDB Cloud Serverless
 
-This document describes how to connect to your TiDB Cloud Serverless cluster via a public endpoint, using a SQL client from your computer, as well as how to disable a public endpoint.
+本文介绍如何通过公共端点从你的计算机使用 SQL 客户端连接到 TiDB Cloud Serverless 集群，以及如何禁用公共端点。
 
-## Connect via a public endpoint
+## 通过公共端点连接
 
-> **Tip:**
+> **提示：**
 >
-> To learn how to connect to a TiDB Cloud Dedicated cluster via public endpoint, see [Connect to TiDB Cloud Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md).
+> 要了解如何通过公共端点连接到 TiDB Cloud Dedicated 集群，请参见[通过公共连接连接到 TiDB Cloud Dedicated](/tidb-cloud/connect-via-standard-connection.md)。
 
-To connect to a TiDB Cloud Serverless cluster via public endpoint, take the following steps:
+要通过公共端点连接到 TiDB Cloud Serverless 集群，请执行以下步骤：
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. 导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称进入其概览页面。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2. 点击右上角的**连接**。将显示连接对话框。
 
-3. In the dialog, keep the default setting of the connection type as `Public`, and select your preferred connection method and operating system to get the corresponding connection string.
+3. 在对话框中，保持连接类型的默认设置为 `Public`，并选择你首选的连接方法和操作系统以获取相应的连接字符串。
 
-    > **Note:**
+    > **注意：**
     >
-    > - Keeping the connection type as `Public` means the connection is via standard TLS connection. For more information, see [TLS Connection to TiDB Cloud Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md).
-    > - If you choose **Private Endpoint** in the **Connection Type** drop-down list, it means that the connection is via private endpoint. For more information, see [Connect to TiDB Cloud Serverless via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
+    > - 将连接类型保持为 `Public` 意味着通过标准 TLS 连接进行连接。更多信息，请参见[到 TiDB Cloud Serverless 的 TLS 连接](/tidb-cloud/secure-connections-to-serverless-clusters.md)。
+    > - 如果你在**连接类型**下拉列表中选择**私有端点**，则表示通过私有端点进行连接。更多信息，请参见[通过私有端点连接到 TiDB Cloud Serverless](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)。
 
-4. TiDB Cloud Serverless lets you create [branches](/tidb-cloud/branch-overview.md) for your cluster. After a branch is created, you can choose to connect to the branch via the **Branch** drop-down list. `main` represents the cluster itself.
+4. TiDB Cloud Serverless 允许你为集群创建[分支](/tidb-cloud/branch-overview.md)。创建分支后，你可以通过**分支**下拉列表选择连接到该分支。`main` 代表集群本身。
 
-5. If you have not set a password yet, click **Generate Password** to generate a random password. The generated password will not show again, so save your password in a secure location.
+5. 如果你还没有设置密码，点击**生成密码**生成随机密码。生成的密码不会再次显示，因此请将密码保存在安全的位置。
 
-6. Connect to your cluster with the connection string.
+6. 使用连接字符串连接到你的集群。
 
-    > **Note:**
+    > **注意：**
     >
-    > When you connect to a TiDB Cloud Serverless cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
-    > Your client IP must be in the allowed IP rules of the public endpoint of your cluster. For more information, see [Configure TiDB Cloud Serverless Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md).
+    > 当你连接到 TiDB Cloud Serverless 集群时，必须在用户名中包含集群的前缀，并用引号将名称括起来。更多信息，请参见[用户名前缀](/tidb-cloud/select-cluster-tier.md#用户名前缀)。
+    > 你的客户端 IP 必须在集群公共端点的允许 IP 规则中。更多信息，请参见[为公共端点配置 TiDB Cloud Serverless 防火墙规则](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)。
 
-## Disable a public endpoint
+## 禁用公共端点
 
-If you do not need to use a public endpoint of a TiDB Cloud Serverless cluster, you can disable it to prevent connections from the internet:
+如果你不需要使用 TiDB Cloud Serverless 集群的公共端点，可以禁用它以防止来自互联网的连接：
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. 导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称进入其概览页面。
 
-2. In the left navigation pane, click **Settings** > **Networking**.
+2. 在左侧导航栏中，点击**设置** > **网络**。
 
-3. On the **Networking** page, click **Disable**. A confirmation dialog is displayed.
+3. 在**网络**页面上，点击**禁用**。将显示确认对话框。
 
-4. Click **Disable** in the confirmation dialog.
+4. 在确认对话框中点击**禁用**。
 
-After disabling the public endpoint, the `Public` entry in the **Connection Type** drop-down list of the connect dialog is disabled. If users are still trying to access the cluster from the public endpoint, they will get an error.
+禁用公共端点后，连接对话框中**连接类型**下拉列表中的 `Public` 条目将被禁用。如果用户仍然尝试从公共端点访问集群，他们将收到错误。
 
-> **Note:**
+> **注意：**
 >
-> Disabling the public endpoint does not affect existing connections. It only prevents new connections from the internet.
+> 禁用公共端点不会影响现有连接。它只会阻止来自互联网的新连接。
 
-You can re-enable the public endpoint after disabling it:
+禁用后，你可以重新启用公共端点：
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. 导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称进入其概览页面。
 
-2. In the left navigation pane, click **Settings** > **Networking**.
+2. 在左侧导航栏中，点击**设置** > **网络**。
 
-3. On the **Networking** page, click **Enable**.
+3. 在**网络**页面上，点击**启用**。
 
-## What's next
+## 下一步
 
-After you have successfully connected to your TiDB cluster, you can [explore SQL statements with TiDB](/basic-sql-operations.md).
+成功连接到 TiDB 集群后，你可以[使用 TiDB 探索 SQL 语句](/basic-sql-operations.md)。

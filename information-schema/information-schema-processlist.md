@@ -1,19 +1,19 @@
 ---
 title: PROCESSLIST
-summary: Learn the `PROCESSLIST` information_schema table.
+summary: 了解 `PROCESSLIST` information_schema 表。
 ---
 
 # PROCESSLIST
 
-`PROCESSLIST`, just like [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md), is used to view the requests that are being handled.
+`PROCESSLIST` 与 [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md) 一样，用于查看正在处理的请求。
 
-The `PROCESSLIST` table has additional columns not present in `SHOW PROCESSLIST`:
+`PROCESSLIST` 表比 `SHOW PROCESSLIST` 多了以下列：
 
-* A `DIGEST` column to show the digest of the SQL statement.
-* A `MEM` column to show the memory used by the request that is being processed, in bytes.
-* A `DISK` column to show the disk usage in bytes.
-* A `TxnStart` column to show the start time of the transaction.
-* A `RESOURCE_GROUP` column to show the resource group name.
+* `DIGEST` 列，用于显示 SQL 语句的摘要。
+* `MEM` 列，用于显示正在处理的请求使用的内存，单位为字节。
+* `DISK` 列，用于显示磁盘使用量，单位为字节。
+* `TxnStart` 列，用于显示事务的开始时间。
+* `RESOURCE_GROUP` 列，用于显示资源组名称。
 
 ```sql
 USE information_schema;
@@ -63,25 +63,25 @@ SELECT * FROM processlist\G
 1 row in set (0.00 sec)
 ```
 
-Fields in the `PROCESSLIST` table are described as follows:
+`PROCESSLIST` 表中的字段说明如下：
 
-* ID: The ID of the user connection.
-* USER: The name of the user who is executing `PROCESS`.
-* HOST: The address that the user is connecting to.
-* DB: The name of the currently connected default database.
-* COMMAND: The command type that `PROCESS` is executing.
-* TIME: The current execution duration of `PROCESS`, in seconds.
-* STATE: The current connection state.
-* INFO: The requested statement that is being processed.
-* DIGEST: The digest of the SQL statement.
-* MEM: The memory used by the request that is being processed, in bytes.
-* DISK: The disk usage in bytes.
-* TxnStart: The start time of the transaction.
-* RESOURCE_GROUP: The resource group name.
+* ID：用户连接的 ID。
+* USER：执行 `PROCESS` 的用户名。
+* HOST：用户连接的地址。
+* DB：当前连接的默认数据库名称。
+* COMMAND：`PROCESS` 正在执行的命令类型。
+* TIME：`PROCESS` 当前执行的持续时间，单位为秒。
+* STATE：当前连接状态。
+* INFO：正在处理的请求语句。
+* DIGEST：SQL 语句的摘要。
+* MEM：正在处理的请求使用的内存，单位为字节。
+* DISK：磁盘使用量，单位为字节。
+* TxnStart：事务的开始时间。
+* RESOURCE_GROUP：资源组名称。
 
 ## CLUSTER_PROCESSLIST
 
-`CLUSTER_PROCESSLIST` is the cluster system table corresponding to `PROCESSLIST`. It is used to query the `PROCESSLIST` information of all TiDB nodes in the cluster. The table schema of `CLUSTER_PROCESSLIST` has one more column than `PROCESSLIST`, the `INSTANCE` column, which stores the address of the TiDB node this row of data is from.
+`CLUSTER_PROCESSLIST` 是对应于 `PROCESSLIST` 的集群系统表，用于查询集群中所有 TiDB 节点的 `PROCESSLIST` 信息。`CLUSTER_PROCESSLIST` 的表结构比 `PROCESSLIST` 多一列 `INSTANCE`，用于存储该行数据来自哪个 TiDB 节点的地址。
 
 ```sql
 SELECT * FROM information_schema.cluster_processlist;

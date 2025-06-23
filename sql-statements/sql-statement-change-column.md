@@ -1,19 +1,19 @@
 ---
-title: CHANGE COLUMN | TiDB SQL Statement Reference
-summary: An overview of the usage of CHANGE COLUMN for the TiDB database.
+title: CHANGE COLUMN | TiDB SQL 语句参考
+summary: TiDB 数据库中 CHANGE COLUMN 的使用概述。
 ---
 
 # CHANGE COLUMN
 
-The `ALTER TABLE.. CHANGE COLUMN` statement changes a column on an existing table. The change can include both renaming the column, and changing the data type to a compatible type.
+`ALTER TABLE.. CHANGE COLUMN` 语句用于修改现有表中的列。修改可以包括重命名列和将数据类型更改为兼容类型。
 
-Since v5.1.0, TiDB has supported changing the Reorg data type, including but not limited to:
+从 v5.1.0 开始，TiDB 支持更改 Reorg 数据类型，包括但不限于：
 
-- Changing `VARCHAR` to `BIGINT`
-- Modifying the `DECIMAL` precision
-- Compressing the length of `VARCHAR(10)` to `VARCHAR(5)`
+- 将 `VARCHAR` 更改为 `BIGINT`
+- 修改 `DECIMAL` 精度
+- 将 `VARCHAR(10)` 的长度压缩为 `VARCHAR(5)`
 
-## Synopsis
+## 语法
 
 ```ebnf+diagram
 AlterTableStmt
@@ -49,7 +49,7 @@ ColumnName ::=
     Identifier ( '.' Identifier ( '.' Identifier )? )?
 ```
 
-## Examples
+## 示例
 
 {{< copyable "sql" >}}
 
@@ -146,14 +146,14 @@ ALTER TABLE t CHANGE COLUMN a a DATETIME;
 ERROR 8200 (HY000): Unsupported modify column: change from original type decimal(13,7) to datetime is currently unsupported yet
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-* Changes of [Reorg-Data](/sql-statements/sql-statement-modify-column.md#reorg-data-change) types on primary key columns are not supported.
-* Changes of column types on partitioned tables are not supported.
-* Changes of column types on generated columns are not supported.
-* Changes from some data types (for example, TIME, BIT, SET, ENUM, and JSON types) to some other types are not supported due to the compatibility issues of the `CAST` function's behavior between TiDB and MySQL.
+* 不支持对主键列进行 [Reorg-Data](/sql-statements/sql-statement-modify-column.md#reorg-data-change) 类型的更改。
+* 不支持对分区表进行列类型更改。
+* 不支持对生成列进行列类型更改。
+* 由于 TiDB 和 MySQL 之间 `CAST` 函数行为的兼容性问题，不支持将某些数据类型（例如 TIME、BIT、SET、ENUM 和 JSON 类型）更改为其他类型。
 
-## See also
+## 另请参阅
 
 * [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 * [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)

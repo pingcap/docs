@@ -1,17 +1,17 @@
 ---
-title: SHOW COLLATION | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW COLLATION for the TiDB database.
+title: SHOW COLLATION | TiDB SQL 语句参考
+summary: TiDB 数据库中 SHOW COLLATION 的使用概述。
 ---
 
 # SHOW COLLATION
 
-This statement provides a static list of collations, and is included to provide compatibility with MySQL client libraries.
+此语句提供排序规则的静态列表，包含它是为了与 MySQL 客户端库保持兼容。
 
-> **Note:**
+> **注意：**
 >
-> Results of `SHOW COLLATION` vary when the ["new collation framework"](/character-set-and-collation.md#new-framework-for-collations) is enabled. For new collation framework details, refer to [Character Set and Collation](/character-set-and-collation.md).
+> 当启用["新的排序规则框架"](/character-set-and-collation.md#new-framework-for-collations)时，`SHOW COLLATION` 的结果会有所不同。有关新排序规则框架的详细信息，请参阅[字符集和排序规则](/character-set-and-collation.md)。
 
-## Synopsis
+## 语法
 
 ```ebnf+diagram
 ShowCollationStmt ::=
@@ -22,9 +22,9 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## Examples
+## 示例
 
-When new collation framework is disabled, only binary collations are displayed.
+当禁用新的排序规则框架时，只显示二进制排序规则。
 
 ```sql
 SHOW COLLATION;
@@ -43,7 +43,7 @@ SHOW COLLATION;
 5 rows in set (0.02 sec)
 ```
 
-When new collation framework is enabled, `utf8_general_ci` and `utf8mb4_general_ci` are additionally supported.
+当启用新的排序规则框架时，还额外支持 `utf8_general_ci` 和 `utf8mb4_general_ci`。
 
 ```sql
 SHOW COLLATION;
@@ -68,7 +68,7 @@ SHOW COLLATION;
 11 rows in set (0.001 sec)
 ```
 
-To filter on the character set, you can add a `WHERE` clause.
+要筛选字符集，你可以添加 `WHERE` 子句。
 
 ```sql
 SHOW COLLATION WHERE Charset="utf8mb4";
@@ -87,11 +87,11 @@ SHOW COLLATION WHERE Charset="utf8mb4";
 5 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The usage of the `SHOW COLLATION` statement in TiDB is fully compatible with MySQL. However, charsets in TiDB might have different default collations compared with MySQL. For details, refer to [Compatibility with MySQL](/mysql-compatibility.md). If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中 `SHOW COLLATION` 语句的用法与 MySQL 完全兼容。但是，TiDB 中的字符集可能与 MySQL 相比有不同的默认排序规则。详情请参阅[与 MySQL 的兼容性](/mysql-compatibility.md)。如果发现任何兼容性差异，请[报告问题](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 另请参阅
 
 * [SHOW CHARACTER SET](/sql-statements/sql-statement-show-character-set.md)
-* [Character Set and Collation](/character-set-and-collation.md)
+* [字符集和排序规则](/character-set-and-collation.md)

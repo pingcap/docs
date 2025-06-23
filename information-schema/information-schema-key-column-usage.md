@@ -1,11 +1,11 @@
 ---
 title: KEY_COLUMN_USAGE
-summary: Learn the `KEY_COLUMN_USAGE` information_schema table.
+summary: 了解 `KEY_COLUMN_USAGE` information_schema 表。
 ---
 
 # KEY_COLUMN_USAGE
 
-The `KEY_COLUMN_USAGE` table describes the key constraints of the columns, such as the primary key constraint.
+`KEY_COLUMN_USAGE` 表描述了列的键约束，例如主键约束。
 
 {{< copyable "sql" >}}
 
@@ -70,17 +70,17 @@ POSITION_IN_UNIQUE_CONSTRAINT: NULL
 2 rows in set (0.00 sec)
 ```
 
-The description of columns in the `KEY_COLUMN_USAGE` table is as follows:
+`KEY_COLUMN_USAGE` 表中各列的描述如下：
 
-* `CONSTRAINT_CATALOG`: The name of the catalog to which the constraint belongs. The value is always `def`.
-* `CONSTRAINT_SCHEMA`: The name of the schema to which the constraint belongs.
-* `CONSTRAINT_NAME`: The name of the constraint.
-* `TABLE_CATALOG`: The name of the catalog to which the table belongs. The value is always `def`.
-* `TABLE_SCHEMA`: The name of the schema to which the table belongs.
-* `TABLE_NAME`: The name of the table with constraints.
-* `COLUMN_NAME`: The name of the column with constraints.
-* `ORDINAL_POSITION`: The position of the column in the constraint, rather than in the table. The position number starts from `1`.
-* `POSITION_IN_UNIQUE_CONSTRAINT`: The unique constraint and the primary key constraint are empty. For foreign key constraints, this column is the position of the referenced table's key.
-* `REFERENCED_TABLE_SCHEMA`: The name of the schema referenced by the constraint. Currently in TiDB, the value of this column in all constraints is `nil`, except for the foreign key constraint.
-* `REFERENCED_TABLE_NAME`: The name of the table referenced by the constraint. Currently in TiDB, the value of this column in all constraints is `nil`, except for the foreign key constraint.
-* `REFERENCED_COLUMN_NAME`: The name of the column referenced by the constraint. Currently in TiDB, the value of this column in all constraints is `nil`, except for the foreign key constraint.
+* `CONSTRAINT_CATALOG`：约束所属的目录名称。该值始终为 `def`。
+* `CONSTRAINT_SCHEMA`：约束所属的数据库（schema）名称。
+* `CONSTRAINT_NAME`：约束的名称。
+* `TABLE_CATALOG`：表所属的目录名称。该值始终为 `def`。
+* `TABLE_SCHEMA`：表所属的数据库（schema）名称。
+* `TABLE_NAME`：具有约束的表名。
+* `COLUMN_NAME`：具有约束的列名。
+* `ORDINAL_POSITION`：列在约束中的位置，而不是在表中的位置。位置编号从 `1` 开始。
+* `POSITION_IN_UNIQUE_CONSTRAINT`：唯一约束和主键约束为空。对于外键约束，此列是被引用表的键的位置。
+* `REFERENCED_TABLE_SCHEMA`：约束引用的数据库（schema）名称。目前在 TiDB 中，除外键约束外，所有约束中该列的值都为 `nil`。
+* `REFERENCED_TABLE_NAME`：约束引用的表名。目前在 TiDB 中，除外键约束外，所有约束中该列的值都为 `nil`。
+* `REFERENCED_COLUMN_NAME`：约束引用的列名。目前在 TiDB 中，除外键约束外，所有约束中该列的值都为 `nil`。

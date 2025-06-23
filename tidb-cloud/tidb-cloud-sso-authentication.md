@@ -1,65 +1,65 @@
 ---
-title: Standard SSO Authentication
-summary: Learn how to log in to the TiDB Cloud console via your Google, GitHub, or Microsoft account.
+title: 标准 SSO 认证
+summary: 了解如何通过 Google、GitHub 或 Microsoft 账号登录 TiDB Cloud 控制台。
 ---
 
-# Standard SSO Authentication
+# 标准 SSO 认证
 
-This document describes how to log in to the [TiDB Cloud console](https://tidbcloud.com/) via basic Single Sign-on (SSO) authentication, which is quick and convenient.
+本文档介绍如何通过基本的单点登录（SSO）认证登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，这种方式快速且方便。
 
-TiDB Cloud supports SSO authentication for Google, GitHub, and Microsoft accounts. If you log in to TiDB Cloud via SSO authentication, because your ID and credentials are stored on the third-party Google, GitHub, and Microsoft platforms, you will not be able to modify your account password and enable multi-factor authentication (MFA) using the TiDB console.
+TiDB Cloud 支持 Google、GitHub 和 Microsoft 账号的 SSO 认证。如果你通过 SSO 认证登录 TiDB Cloud，由于你的 ID 和凭据存储在第三方 Google、GitHub 和 Microsoft 平台上，你将无法使用 TiDB 控制台修改账号密码和启用多因素认证（MFA）。
 
-> **Note:**
+> **注意：**
 >
-> If you want to log into TiDB Cloud through username and password, see [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md).
+> 如果你想通过用户名和密码登录 TiDB Cloud，请参见[密码认证](/tidb-cloud/tidb-cloud-password-authentication.md)。
 
-## Sign in with Google SSO 
+## 使用 Google SSO 登录
 
-To sign in with your Google account, take the following steps:
+要使用 Google 账号登录，请执行以下步骤：
 
-1. Go to the TiDB Cloud [login](https://tidbcloud.com/) page.
+1. 访问 TiDB Cloud [登录](https://tidbcloud.com/)页面。
 
-2. Click **Sign in with Google**. You will be directed to the Google login page.
+2. 点击 **Sign in with Google**。你将被重定向到 Google 登录页面。
 
-3. Follow the on-screen instructions to enter your Google username and password. 
+3. 按照屏幕上的说明输入你的 Google 用户名和密码。
 
-    If the login is successful, you will be directed to the TiDB Cloud console.
+    如果登录成功，你将被重定向到 TiDB Cloud 控制台。
 
-    > **Note:**
+    > **注意：**
     >
-    > - If this is the first time you sign in with Google, you will be asked whether to accept TiDB Cloud terms. After you read and agree with the terms, you will see the TiDB Cloud welcome page and then be directed to the TiDB Cloud console.
-   > - If you have enabled 2-Step Verification (also called two-factor authentication) for your Google account, you will also need to provide the verification code after entering your username and password.
+    > - 如果这是你第一次使用 Google 登录，系统会询问你是否接受 TiDB Cloud 条款。在你阅读并同意条款后，你将看到 TiDB Cloud 欢迎页面，然后被重定向到 TiDB Cloud 控制台。
+    > - 如果你为 Google 账号启用了两步验证（也称为双因素认证），在输入用户名和密码后，你还需要提供验证码。
 
-## Sign in with GitHub SSO
+## 使用 GitHub SSO 登录
 
-To sign in with your GitHub account, take the following steps:
+要使用 GitHub 账号登录，请执行以下步骤：
 
-1. Go to the TiDB Cloud [login](https://tidbcloud.com/) page.
+1. 访问 TiDB Cloud [登录](https://tidbcloud.com/)页面。
 
-2. Click **Sign in with GitHub**. You will be directed to the GitHub login page.
+2. 点击 **Sign in with GitHub**。你将被重定向到 GitHub 登录页面。
 
-3. Follow the on-screen instructions to enter your GitHub username and password.
+3. 按照屏幕上的说明输入你的 GitHub 用户名和密码。
 
-    If the login is successful, you will be directed to the TiDB Cloud console.
+    如果登录成功，你将被重定向到 TiDB Cloud 控制台。
 
-     > **Note:**
+     > **注意：**
      >
-     > - If this is the first time you sign in with GitHub, you will be asked whether to accept TiDB Cloud terms. After you read and agree with the terms, you will see the TiDB Cloud welcome page and then be directed to the TiDB Cloud console.
-     > - If you have configured two-factor authentication for your GitHub account, you will also need to provide the verification code after entering your username and password.
+     > - 如果这是你第一次使用 GitHub 登录，系统会询问你是否接受 TiDB Cloud 条款。在你阅读并同意条款后，你将看到 TiDB Cloud 欢迎页面，然后被重定向到 TiDB Cloud 控制台。
+     > - 如果你为 GitHub 账号配置了双因素认证，在输入用户名和密码后，你还需要提供验证码。
 
-## Sign in with Microsoft SSO
+## 使用 Microsoft SSO 登录
 
-To sign in with your Microsoft account, take the following steps:
+要使用 Microsoft 账号登录，请执行以下步骤：
 
-1. Go to the TiDB Cloud [login](https://tidbcloud.com/) page.
+1. 访问 TiDB Cloud [登录](https://tidbcloud.com/)页面。
 
-2. Click **Sign in with Microsoft**. You will be directed to the Microsoft login page.
+2. 点击 **Sign in with Microsoft**。你将被重定向到 Microsoft 登录页面。
 
-3. Follow the on-screen instructions to enter your Microsoft username and password.
+3. 按照屏幕上的说明输入你的 Microsoft 用户名和密码。
 
-    If the login is successful, you will be directed to the TiDB Cloud console.
+    如果登录成功，你将被重定向到 TiDB Cloud 控制台。
 
-     > **Note:**
+     > **注意：**
      >
-     > - If this is the first time you sign in with Microsoft, you will be asked whether to accept TiDB Cloud terms. After you read and agree with the terms, you will see the TiDB Cloud welcome page and then be directed to the TiDB Cloud console.
-     > - If you have set up two-step verification for your Microsoft account, you will also need to provide the verification code after entering your username and password.
+     > - 如果这是你第一次使用 Microsoft 登录，系统会询问你是否接受 TiDB Cloud 条款。在你阅读并同意条款后，你将看到 TiDB Cloud 欢迎页面，然后被重定向到 TiDB Cloud 控制台。
+     > - 如果你为 Microsoft 账号设置了两步验证，在输入用户名和密码后，你还需要提供验证码。

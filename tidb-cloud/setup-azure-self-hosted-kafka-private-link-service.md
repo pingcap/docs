@@ -1,169 +1,169 @@
 ---
-title: Set Up Self-Hosted Kafka Private Link Service in Azure
-summary: This document explains how to set up Private Link service for self-hosted Kafka in Azure and how to make it work with TiDB Cloud.
+title: 在 Azure 中设置自托管 Kafka Private Link 服务
+summary: 本文档说明如何在 Azure 中为自托管 Kafka 设置 Private Link 服务，以及如何使其与 TiDB Cloud 配合使用。
 ---
 
-# Set Up Self-Hosted Kafka Private Link Service in Azure
+# 在 Azure 中设置自托管 Kafka Private Link 服务
 
-This document describes how to set up Private Link service for self-hosted Kafka in Azure, and how to make it work with TiDB Cloud.
+本文档描述如何在 Azure 中为自托管 Kafka 设置 Private Link 服务，以及如何使其与 TiDB Cloud 配合使用。
 
-The mechanism works as follows:
+工作机制如下：
 
-1. The TiDB Cloud virtual network connects to the Kafka virtual network through private endpoints.
-2. Kafka clients need to communicate directly to all Kafka brokers.
-3. Each Kafka broker is mapped to a unique port of endpoints within the TiDB Cloud virtual network.
-4. Leverage the Kafka bootstrap mechanism and Azure resources to achieve the mapping.
+1. TiDB Cloud 虚拟网络通过私有端点连接到 Kafka 虚拟网络。
+2. Kafka 客户端需要直接与所有 Kafka broker 通信。
+3. 每个 Kafka broker 都映射到 TiDB Cloud 虚拟网络中端点的唯一端口。
+4. 利用 Kafka 引导机制和 Azure 资源实现映射。
 
-The following diagram shows the mechanism.
+下图显示了该机制。
 
-![Connect to Azure Self-Hosted Kafka Private Link Service](/media/tidb-cloud/changefeed/connect-to-azure-self-hosted-kafka-privatelink-service.png)
+![连接到 Azure 自托管 Kafka Private Link 服务](/media/tidb-cloud/changefeed/connect-to-azure-self-hosted-kafka-privatelink-service.png)
 
-The document provides an example of connecting to a Kafka Private Link service in Azure. While other configurations are possible based on similar port-mapping principles, this document covers the fundamental setup process of the Kafka Private Link service. For production environments, a more resilient Kafka Private Link service with enhanced operational maintainability and observability is recommended.
+本文档提供了连接到 Azure 中的 Kafka Private Link 服务的示例。虽然可以基于类似的端口映射原则进行其他配置，但本文档涵盖了 Kafka Private Link 服务的基本设置过程。对于生产环境，建议使用具有增强运维可维护性和可观察性的更具弹性的 Kafka Private Link 服务。
 
-## Prerequisites
+## 前提条件
 
-1. Ensure that you have the following authorization to set up a Kafka Private Link service in your own Azure account.
+1. 确保你有以下授权来在自己的 Azure 账户中设置 Kafka Private Link 服务。
 
-    - Manage virtual machines
-    - Manage virtual networks
-    - Manage load balancers
-    - Manage private link services
-    - Connect to virtual machines to configure Kafka nodes
+    - 管理虚拟机
+    - 管理虚拟网络
+    - 管理负载均衡器
+    - 管理私有链接服务
+    - 连接到虚拟机以配置 Kafka 节点
 
-2. [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md) on Azure if you do not have one.
+2. 如果你还没有在 Azure 上的 [TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)，请创建一个。
 
-3. Get the Kafka deployment information from your [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster.
+3. 从你的 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群获取 Kafka 部署信息。
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
-    2. In the left navigation pane, click **Data** > **Changefeed**.
-    3. On the **Changefeed** page, click **Create Changefeed** in the upper-right corner, and then provide the following information:
-        1. In **Destination**, select **Kafka**.
-        2. In **Connectivity Method**, select **Private Link**.
-    4. Note down the region information and the subscription of the TiDB Cloud Azure account in **Reminders before proceeding**. You will use it to authorize TiDB Cloud to access the Kafka Private Link service.
-    5. Generate the **Kafka Advertised Listener Pattern** for your Kafka Private Link service by providing a unique random string.
-        1. Input a unique random string. It can only include numbers or lowercase letters. You will use it to generate **Kafka Advertised Listener Pattern** later.
-        2. Click **Check usage and generate** to check if the random string is unique and generate **Kafka Advertised Listener Pattern** that will be used to assemble the EXTERNAL advertised listener for Kafka brokers.
+    1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称以进入其概览页面。
+    2. 在左侧导航栏中，点击**数据** > **变更数据捕获**。
+    3. 在**变更数据捕获**页面，点击右上角的**创建变更数据捕获**，然后提供以下信息：
+        1. 在**目标**中，选择 **Kafka**。
+        2. 在**连接方式**中，选择 **Private Link**。
+    4. 记下**继续之前的提醒**中的区域信息和 TiDB Cloud Azure 账户的订阅信息。你将使用它来授权 TiDB Cloud 访问 Kafka Private Link 服务。
+    5. 通过提供唯一的随机字符串为你的 Kafka Private Link 服务生成 **Kafka 广播监听器模式**。
+        1. 输入唯一的随机字符串。它只能包含数字或小写字母。你稍后将使用它来生成 **Kafka 广播监听器模式**。
+        2. 点击**检查使用情况并生成**以检查随机字符串是否唯一并生成 **Kafka 广播监听器模式**，该模式将用于组装 Kafka broker 的 EXTERNAL 广播监听器。
 
-Note down all the deployment information. You need to use it to configure your Kafka Private Link service later.
+记下所有部署信息。你稍后需要使用它来配置 Kafka Private Link 服务。
 
-The following table shows an example of the deployment information.
+下表显示了部署信息的示例。
 
-| Information     | Value    | Note    |
+| 信息     | 值    | 注释    |
 |--------|-----------------|---------------------------|
-| Region | Virginia (`eastus`) | N/A |
-| Subscription of TiDB Cloud Azure account | `99549169-6cee-4263-8491-924a3011ee31` | N/A |
-| Kafka Advertised Listener Pattern | The unique random string: `abc` | Generated pattern: `<broker_id>.abc.eastus.azure.3199745.tidbcloud.com:<port>`; |
+| 区域 | 弗吉尼亚 (`eastus`) | 不适用 |
+| TiDB Cloud Azure 账户的订阅 | `99549169-6cee-4263-8491-924a3011ee31` | 不适用 |
+| Kafka 广播监听器模式 | 唯一随机字符串：`abc` | 生成的模式：`<broker_id>.abc.eastus.azure.3199745.tidbcloud.com:<port>` |
 
-## Step 1. Set up a Kafka cluster
+## 步骤 1. 设置 Kafka 集群
 
-If you need to deploy a new cluster, follow the instructions in [Deploy a new Kafka cluster](#deploy-a-new-kafka-cluster).
+如果你需要部署新集群，请按照[部署新的 Kafka 集群](#部署新的-kafka-集群)中的说明进行操作。
 
-If you need to expose an existing cluster, follow the instructions in [Reconfigure a running Kafka cluster](#reconfigure-a-running-kafka-cluster).
+如果你需要暴露现有集群，请按照[重新配置运行中的 Kafka 集群](#重新配置运行中的-kafka-集群)中的说明进行操作。
 
-### Deploy a new Kafka cluster
+### 部署新的 Kafka 集群
 
-#### 1. Set up the Kafka virtual network
+#### 1. 设置 Kafka 虚拟网络
 
-1. Log in to the [Azure portal](https://portal.azure.com/), go to the [Virtual networks](https://portal.azure.com/#browse/Microsoft.Network%2FvirtualNetworks) page, and then click **+ Create** to create a virtual network.
-2. In the **Basic** tab, select your **Subscription**, **Resource group**, and **Region**, enter a name (for example, `kafka-pls-vnet`) in the **Virtual network name** field, and then click **Next**.
-3. In the **Security** tab, enable Azure Bastion, and then click **Next**.
-4. In the **IP addresses** tab, do the following:
+1. 登录 [Azure 门户](https://portal.azure.com/)，转到[虚拟网络](https://portal.azure.com/#browse/Microsoft.Network%2FvirtualNetworks)页面，然后点击**+ 创建**以创建虚拟网络。
+2. 在**基本信息**选项卡中，选择你的**订阅**、**资源组**和**区域**，在**虚拟网络名称**字段中输入名称（例如 `kafka-pls-vnet`），然后点击**下一步**。
+3. 在**安全性**选项卡中，启用 Azure Bastion，然后点击**下一步**。
+4. 在 **IP 地址**选项卡中，执行以下操作：
 
-    1. Set the address space of your virtual network, for example, `10.0.0.0/16`.
-    2. Click **Add a subnet** to create a subnet for brokers, fill in the following information, and then click **Add**.
-        - **Name**: `brokers-subnet`
-        - **IP address range**: `10.0.0.0/24`
-        - **Size**: `/24 (256 addresses)`
+    1. 设置虚拟网络的地址空间，例如 `10.0.0.0/16`。
+    2. 点击**添加子网**为 broker 创建子网，填写以下信息，然后点击**添加**。
+        - **名称**：`brokers-subnet`
+        - **IP 地址范围**：`10.0.0.0/24`
+        - **大小**：`/24（256 个地址）`
 
-        An `AzureBastionSubnet` will be created by default.
+        默认情况下将创建一个 `AzureBastionSubnet`。
 
-5. Click **Review + create** to verify the information.
-6. Click **Create**.
+5. 点击**查看 + 创建**以验证信息。
+6. 点击**创建**。
 
-#### 2. Set up Kafka brokers
+#### 2. 设置 Kafka broker
 
-**2.1. Create broker nodes**
+**2.1. 创建 broker 节点**
 
-1. Log in to the [Azure portal](https://portal.azure.com/), go to the [Virtual machines](https://portal.azure.com/#view/Microsoft_Azure_ComputeHub/ComputeHubMenuBlade/~/virtualMachinesBrowse) page, click **+ Create**, and then select **Azure virtual machine**.
-2. In the **Basic** tab, select your **Subscription**, **Resource group**, and **Region**, fill in the following information, and then click **Next : Disks**.
-    - **Virtual machine name**: `broker-node`
-    - **Availability options**: `Availability zone`
-    - **Zone options**: `Self-selected zone`
-    - **Availability zone**: `Zone 1`, `Zone 2`, `Zone 3`
-    - **Image**: `Ubuntu Server 24.04 LTS - x64 Gen2`
-    - **VM architecture:** `x64`
-    - **Size**: `Standard_D2s_v3`
-    - **Authentication type**: `SSH public key`
-    - **Username**: `azureuser`
-    - **SSH public key source:** `Generate new key pair`
-    - **Key pair name**: `kafka_broker_key`
-    - **Public inbound ports**: `Allow selected ports`
-    - **Select inbound ports**: `SSH (22)`
-3. Click **Next : Networking**, and then fill in the following information in the **Networking** tab:
-    - **Virtual network**: `kafka-pls-vnet`
-    - **Subnet**: `brokers-subnet`
-    - **Public IP**: `None`
-    - **NIC network security group**: `Basic`
-    - **Public inbound ports**: `Allow selected ports`
-    - Select inbound ports: `SSH (22)`
-    - **Load balancing options**: `None`
-4. Click **Review + create** to verify the information.
-5. Click **Create**. A **Generate new key pair** message is displayed.
-6. Click **Download private key and create resource** to download the private key to your local machine. You can see the progress of virtual machine creation.
+1. 登录 [Azure 门户](https://portal.azure.com/)，转到[虚拟机](https://portal.azure.com/#view/Microsoft_Azure_ComputeHub/ComputeHubMenuBlade/~/virtualMachinesBrowse)页面，点击**+ 创建**，然后选择 **Azure 虚拟机**。
+2. 在**基本信息**选项卡中，选择你的**订阅**、**资源组**和**区域**，填写以下信息，然后点击**下一步：磁盘**。
+    - **虚拟机名称**：`broker-node`
+    - **可用性选项**：`可用性区域`
+    - **区域选项**：`自选区域`
+    - **可用性区域**：`区域 1`、`区域 2`、`区域 3`
+    - **映像**：`Ubuntu Server 24.04 LTS - x64 Gen2`
+    - **VM 架构**：`x64`
+    - **大小**：`Standard_D2s_v3`
+    - **身份验证类型**：`SSH 公钥`
+    - **用户名**：`azureuser`
+    - **SSH 公钥源**：`生成新的密钥对`
+    - **密钥对名称**：`kafka_broker_key`
+    - **公共入站端口**：`允许选定的端口`
+    - **选择入站端口**：`SSH (22)`
+3. 点击**下一步：网络**，然后在**网络**选项卡中填写以下信息：
+    - **虚拟网络**：`kafka-pls-vnet`
+    - **子网**：`brokers-subnet`
+    - **公共 IP**：`无`
+    - **NIC 网络安全组**：`基本`
+    - **公共入站端口**：`允许选定的端口`
+    - **选择入站端口**：`SSH (22)`
+    - **负载均衡选项**：`无`
+4. 点击**查看 + 创建**以验证信息。
+5. 点击**创建**。将显示**生成新的密钥对**消息。
+6. 点击**下载私钥并创建资源**将私钥下载到本地计算机。你可以看到虚拟机创建的进度。
 
-**2.2. Prepare Kafka runtime binaries**
+**2.2. 准备 Kafka 运行时二进制文件**
 
-After the deployment of your virtual machine is completed, take the following steps:
+虚拟机部署完成后，执行以下步骤：
 
-1. In the [Azure portal](https://portal.azure.com/), go to the [**Resource groups**](https://portal.azure.com/#view/HubsExtension/BrowseResourceGroups.ReactView) page, click your resource group name, and then navigate to the page of each broker node (`broker-node-1`, `broker-node-2`, and `broker-node-3`).
+1. 在 [Azure 门户](https://portal.azure.com/)中，转到[**资源组**](https://portal.azure.com/#view/HubsExtension/BrowseResourceGroups.ReactView)页面，点击你的资源组名称，然后导航到每个 broker 节点（`broker-node-1`、`broker-node-2` 和 `broker-node-3`）的页面。
 
-2. On each page of the broker node, click **Connect > Bastion** in the left navigation pane, and then fill in the following information:
+2. 在每个 broker 节点的页面上，点击左侧导航栏中的**连接 > Bastion**，然后填写以下信息：
 
-    - **Authentication Type**: `SSH Private Key from Local File`
-    - **Username**: `azureuser`
-    - **Local File**: select the private key file that you downloaded before
-    - Select the **Open in new browser tab** option
+    - **身份验证类型**：`来自本地文件的 SSH 私钥`
+    - **用户名**：`azureuser`
+    - **本地文件**：选择之前下载的私钥文件
+    - 选择**在新的浏览器标签页中打开**选项
 
-3. On each page of the broker node, click **Connect** to open a new browser tab with a Linux terminal. For the three broker nodes, you need to open three browser tabs with Linux terminals.
+3. 在每个 broker 节点的页面上，点击**连接**以打开带有 Linux 终端的新浏览器标签页。对于三个 broker 节点，你需要打开三个带有 Linux 终端的浏览器标签页。
 
-4. In each Linux terminal, run the following commands to download binaries in each broker node.
+4. 在每个 Linux 终端中，运行以下命令以在每个 broker 节点中下载二进制文件。
 
     ```shell
-    # Download Kafka and OpenJDK, and then extract the files. You can choose the binary version based on your preference.
+    # 下载 Kafka 和 OpenJDK，然后解压文件。你可以根据偏好选择二进制版本。
     wget https://archive.apache.org/dist/kafka/3.7.1/kafka_2.13-3.7.1.tgz
     tar -zxf kafka_2.13-3.7.1.tgz
     wget https://download.java.net/java/GA/jdk22.0.2/c9ecb94cd31b495da20a27d4581645e8/9/GPL/openjdk-22.0.2_linux-x64_bin.tar.gz
     tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz
     ```
 
-**2.3. Set up Kafka nodes on each broker node**
+**2.3. 在每个 broker 节点上设置 Kafka 节点**
 
-1. Set up a KRaft Kafka cluster with three nodes. Each node serves both as a broker and a controller. For each broker node:
+1. 使用三个节点设置 KRaft Kafka 集群。每个节点同时作为 broker 和控制器。对于每个 broker 节点：
 
-    1. Configure `listeners`. All three brokers are the same and act as brokers and controller roles.
-        1. Configure the same CONTROLLER listener for all **controller** role nodes. If you only want to add the broker role nodes, you can omit the CONTROLLER listener in `server.properties`.
-        2. Configure two broker listeners: **INTERNAL** for internal Kafka client access and **EXTERNAL** for access from TiDB Cloud.
+    1. 配置 `listeners`。所有三个 broker 都相同，并作为 broker 和控制器角色。
+        1. 为所有**控制器**角色节点配置相同的 CONTROLLER 监听器。如果你只想添加 broker 角色节点，可以在 `server.properties` 中省略 CONTROLLER 监听器。
+        2. 配置两个 broker 监听器：**INTERNAL** 用于内部 Kafka 客户端访问，**EXTERNAL** 用于从 TiDB Cloud 访问。
 
-    2. For `advertised.listeners`, do the following:
-        1. Configure an INTERNAL advertised listener for each broker using the internal IP address of the broker node, which allows internal Kafka clients to connect to the broker via the advertised address.
-        2. Configure an EXTERNAL advertised listener based on **Kafka Advertised Listener Pattern** you get from TiDB Cloud for each broker node to help TiDB Cloud distinguish between different brokers. Different EXTERNAL advertised listeners help Kafka clients from the TiDB Cloud side route requests to the right broker.
-            - Use different `<port>` values to differentiate brokers in Kafka Private Link service access. Plan a port range for the EXTERNAL advertised listeners of all brokers. These ports do not have to be actual ports listened to by brokers. They are ports listened to by the load balancer in the Private Link service that will forward requests to different brokers.
-            - It is recommended to configure different broker IDs for different brokers to make it easy for troubleshooting.
+    2. 对于 `advertised.listeners`，执行以下操作：
+        1. 为每个 broker 使用 broker 节点的内部 IP 地址配置 INTERNAL 广播监听器，这允许内部 Kafka 客户端通过广播地址连接到 broker。
+        2. 根据从 TiDB Cloud 获取的 **Kafka 广播监听器模式**为每个 broker 节点配置 EXTERNAL 广播监听器，以帮助 TiDB Cloud 区分不同的 broker。不同的 EXTERNAL 广播监听器帮助 TiDB Cloud 端的 Kafka 客户端将请求路由到正确的 broker。
+            - 使用不同的 `<port>` 值来区分 Kafka Private Link 服务访问中的 broker。为所有 broker 的 EXTERNAL 广播监听器规划端口范围。这些端口不必是 broker 实际监听的端口。它们是 Private Link 服务中负载均衡器监听的端口，将请求转发到不同的 broker。
+            - 建议为不同的 broker 配置不同的 broker ID，以便于故障排除。
 
-    3. The planning values:
-        - CONTROLLER port: `29092`
-        - INTERNAL port: `9092`
-        - EXTERNAL port: `39092`
-        - Range of the EXTERNAL advertised listener ports: `9093~9095`
+    3. 规划值：
+        - CONTROLLER 端口：`29092`
+        - INTERNAL 端口：`9092`
+        - EXTERNAL 端口：`39092`
+        - EXTERNAL 广播监听器端口范围：`9093~9095`
 
-2. Use SSH to log in to each broker node. Create a configuration file `~/config/server.properties` with the following content for each broker node respectively.
+2. 使用 SSH 登录到每个 broker 节点。为每个 broker 节点分别创建配置文件 `~/config/server.properties`，内容如下：
 
     ```properties
     # broker-node-1 ~/config/server.properties
-    # 1. Replace {broker-node-1-ip}, {broker-node-2-ip}, {broker-node-3-ip} with the actual IP addresses.
-    # 2. Configure EXTERNAL in "advertised.listeners" based on the "Kafka Advertised Listener Pattern" in the "Prerequisites" section.
-    # 2.1 The pattern is "<broker_id>.abc.eastus.azure.3199745.tidbcloud.com:<port>".
-    # 2.2 So the EXTERNAL can be "b1.abc.eastus.azure.3199745.tidbcloud.com:9093". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port (9093) in the port range of the EXTERNAL advertised listener.
+    # 1. 将 {broker-node-1-ip}、{broker-node-2-ip}、{broker-node-3-ip} 替换为实际的 IP 地址。
+    # 2. 根据"前提条件"部分中的"Kafka 广播监听器模式"配置"advertised.listeners"中的 EXTERNAL。
+    # 2.1 模式是 "<broker_id>.abc.eastus.azure.3199745.tidbcloud.com:<port>"。
+    # 2.2 因此 EXTERNAL 可以是 "b1.abc.eastus.azure.3199745.tidbcloud.com:9093"。将 <broker_id> 替换为 "b" 前缀加上 "node.id" 属性，将 <port> 替换为 EXTERNAL 广播监听器端口范围内的唯一端口（9093）。
     process.roles=broker,controller
     node.id=1
     controller.quorum.voters=1@{broker-node-1-ip}:29092,2@{broker-node-2-ip}:29092,3@{broker-node-3-ip}:29092
@@ -177,10 +177,10 @@ After the deployment of your virtual machine is completed, take the following st
 
     ```properties
     # broker-node-2 ~/config/server.properties
-    # 1. Replace {broker-node-1-ip}, {broker-node-2-ip}, {broker-node-3-ip} with the actual IP addresses.
-    # 2. Configure EXTERNAL in "advertised.listeners" based on the "Kafka Advertised Listener Pattern" in the "Prerequisites" section.
-    # 2.1 The pattern is "<broker_id>.abc.eastus.azure.3199745.tidbcloud.com:<port>".
-    # 2.2 So the EXTERNAL can be "b2.abc.eastus.azure.3199745.tidbcloud.com:9094". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port (9094) in the port range of the EXTERNAL advertised listener.
+    # 1. 将 {broker-node-1-ip}、{broker-node-2-ip}、{broker-node-3-ip} 替换为实际的 IP 地址。
+    # 2. 根据"前提条件"部分中的"Kafka 广播监听器模式"配置"advertised.listeners"中的 EXTERNAL。
+    # 2.1 模式是 "<broker_id>.abc.eastus.azure.3199745.tidbcloud.com:<port>"。
+    # 2.2 因此 EXTERNAL 可以是 "b2.abc.eastus.azure.3199745.tidbcloud.com:9094"。将 <broker_id> 替换为 "b" 前缀加上 "node.id" 属性，将 <port> 替换为 EXTERNAL 广播监听器端口范围内的唯一端口（9094）。
     process.roles=broker,controller
     node.id=2
     controller.quorum.voters=1@{broker-node-1-ip}:29092,2@{broker-node-2-ip}:29092,3@{broker-node-3-ip}:29092
@@ -194,10 +194,10 @@ After the deployment of your virtual machine is completed, take the following st
 
     ```properties
     # broker-node-3 ~/config/server.properties
-    # 1. Replace {broker-node-1-ip}, {broker-node-2-ip}, {broker-node-3-ip} with the actual IP addresses.
-    # 2. Configure EXTERNAL in "advertised.listeners" based on the "Kafka Advertised Listener Pattern" in the "Prerequisites" section.
-    # 2.1 The pattern is "<broker_id>.abc.eastus.azure.3199745.tidbcloud.com:<port>".
-    # 2.2 So the EXTERNAL can be "b3.abc.eastus.azure.3199745.tidbcloud.com:9095". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port (9095) in the port range of the EXTERNAL advertised listener.
+    # 1. 将 {broker-node-1-ip}、{broker-node-2-ip}、{broker-node-3-ip} 替换为实际的 IP 地址。
+    # 2. 根据"前提条件"部分中的"Kafka 广播监听器模式"配置"advertised.listeners"中的 EXTERNAL。
+    # 2.1 模式是 "<broker_id>.abc.eastus.azure.3199745.tidbcloud.com:<port>"。
+    # 2.2 因此 EXTERNAL 可以是 "b3.abc.eastus.azure.3199745.tidbcloud.com:9095"。将 <broker_id> 替换为 "b" 前缀加上 "node.id" 属性，将 <port> 替换为 EXTERNAL 广播监听器端口范围内的唯一端口（9095）。
     process.roles=broker,controller
     node.id=3
     controller.quorum.voters=1@{broker-node-1-ip}:29092,2@{broker-node-2-ip}:29092,3@{broker-node-3-ip}:29092
@@ -209,7 +209,7 @@ After the deployment of your virtual machine is completed, take the following st
     log.dirs=./data
     ```
 
-3. Create a script, and then execute it to start the Kafka broker in each broker node.
+3. 创建脚本，然后在每个 broker 节点中执行它以启动 Kafka broker。
 
     ```shell
     SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -223,14 +223,14 @@ After the deployment of your virtual machine is completed, take the following st
 
     KAFKA_PIDS=$(ps aux | grep 'kafka.Kafka' | grep -v grep | awk '{print $2}')
     if [ -z "$KAFKA_PIDS" ]; then
-    echo "No Kafka processes are running."
+    echo "没有运行中的 Kafka 进程。"
     else
-    echo "Killing Kafka processes with PIDs: $KAFKA_PIDS"
+    echo "正在终止 PID 为 $KAFKA_PIDS 的 Kafka 进程"
     for PID in $KAFKA_PIDS; do
         kill -9 $PID
-        echo "Killed Kafka process with PID: $PID"
+        echo "已终止 PID 为 $PID 的 Kafka 进程"
     done
-    echo "All Kafka processes have been killed."
+    echo "所有 Kafka 进程已终止。"
     fi
 
     rm -rf $KAFKA_DATA_DIR
@@ -241,32 +241,31 @@ After the deployment of your virtual machine is completed, take the following st
     $KAFKA_STORAGE_CMD format -t "BRl69zcmTFmiPaoaANybiw" -c "$KAFKA_CONFIG_DIR/server.properties" > $KAFKA_LOG_DIR/server_format.log
     LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properties" &
     ```
+**2.4. 测试集群设置**
 
-**2.4. Test the cluster setting**
-
-1. Test the Kafka bootstrap.
+1. 测试 Kafka 引导。
 
     ```shell
     export JAVA_HOME=/home/azureuser/jdk-22.0.2
 
-    # Bootstrap from INTERNAL listener
+    # 从 INTERNAL 监听器引导
     ./kafka_2.13-3.7.1/bin/kafka-broker-api-versions.sh --bootstrap-server {one_of_broker_ip}:9092 | grep 9092
-    # Expected output (the actual order might be different)
+    # 预期输出（实际顺序可能不同）
     {broker-node-1-ip}:9092 (id: 1 rack: null) -> (
     {broker-node-2-ip}:9092 (id: 2 rack: null) -> (
     {broker-node-3-ip}:9092 (id: 3 rack: null) -> (
 
-    # Bootstrap from EXTERNAL listener
+    # 从 EXTERNAL 监听器引导
     ./kafka_2.13-3.7.1/bin/kafka-broker-api-versions.sh --bootstrap-server {one_of_broker_ip}:39092
-    # Expected output for the last 3 lines (the actual order might be different)
-    # The difference in the output from "bootstrap from INTERNAL listener" is that exceptions or errors might occur because advertised listeners cannot be resolved in kafka-pls-vnet.
-    # TiDB Cloud will make these addresses resolvable and route requests to the correct broker when you create a changefeed connected to this Kafka cluster via Private Link Service.
+    # 最后 3 行的预期输出（实际顺序可能不同）
+    # 与"从 INTERNAL 监听器引导"的输出不同之处在于，由于广播监听器无法在 kafka-pls-vnet 中解析，可能会出现异常或错误。
+    # 当你创建通过 Private Link Service 连接到此 Kafka 集群的变更数据捕获时，TiDB Cloud 将使这些地址可解析并将请求路由到正确的 broker。
     b1.abc.eastus.azure.3199745.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     b2.abc.eastus.azure.3199745.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     ```
 
-2. Create a producer script `produce.sh` in the bastion node.
+2. 在堡垒节点中创建生产者脚本 `produce.sh`。
 
     ```shell
     BROKER_LIST=$1
@@ -277,15 +276,15 @@ After the deployment of your virtual machine is completed, take the following st
     TOPIC="test-topic"
 
     create_topic() {
-        echo "Creating topic if it does not exist..."
+        echo "如果主题不存在则创建..."
         $KAFKA_DIR/kafka-topics.sh --create --topic $TOPIC --bootstrap-server $BROKER_LIST --if-not-exists --partitions 3 --replication-factor 3
     }
 
     produce_messages() {
-        echo "Producing messages to the topic..."
+        echo "向主题发送消息..."
         for ((chrono=1; chrono <= 10; chrono++)); do
-            message="Test message "$chrono
-            echo "Create "$message
+            message="测试消息 "$chrono
+            echo "创建 "$message
             echo $message | $KAFKA_DIR/kafka-console-producer.sh --broker-list $BROKER_LIST --topic $TOPIC
         done
     }
@@ -293,7 +292,7 @@ After the deployment of your virtual machine is completed, take the following st
     produce_messages
     ```
 
-3. Create a consumer script `consume.sh` in the bastion node.
+3. 在堡垒节点中创建消费者脚本 `consume.sh`。
 
     ```shell
     BROKER_LIST=$1
@@ -303,243 +302,240 @@ After the deployment of your virtual machine is completed, take the following st
     TOPIC="test-topic"
     CONSUMER_GROUP="test-group"
     consume_messages() {
-        echo "Consuming messages from the topic..."
+        echo "从主题消费消息..."
         $KAFKA_DIR/kafka-console-consumer.sh --bootstrap-server $BROKER_LIST --topic $TOPIC --from-beginning --timeout-ms 5000 --consumer-property group.id=$CONSUMER_GROUP
     }
     consume_messages
     ```
 
-4. Run the `produce.sh` and `consume.sh` scripts. These scripts automatically test connectivity and message flow to verify that the Kafka cluster is functioning correctly. The `produce.sh` script creates a topic with `--partitions 3 --replication-factor 3`, sends test messages, and connects to all three brokers using the `--broker-list` parameter. The `consume.sh` script reads messages from the topic to confirm successful message delivery.
+4. 运行 `produce.sh` 和 `consume.sh` 脚本。这些脚本自动测试连接性和消息流，以验证 Kafka 集群是否正常运行。`produce.sh` 脚本使用 `--partitions 3 --replication-factor 3` 创建主题，发送测试消息，并使用 `--broker-list` 参数连接到所有三个 broker。`consume.sh` 脚本从主题读取消息以确认消息传递成功。
 
     ```shell
-    # Test write message.
+    # 测试写入消息。
     ./produce.sh {one_of_broker_ip}:9092
     ```
 
     ```shell
-    # Expected output
-    Creating topic if it does not exist...
+    # 预期输出
+    如果主题不存在则创建...
 
-    Producing messages to the topic...
-    Create Test message 1
-    >>Create Test message 2
-    >>Create Test message 3
-    >>Create Test message 4
-    >>Create Test message 5
-    >>Create Test message 6
-    >>Create Test message 7
-    >>Create Test message 8
-    >>Create Test message 9
-    >>Create Test message 10
+    向主题发送消息...
+    创建 测试消息 1
+    >>创建 测试消息 2
+    >>创建 测试消息 3
+    >>创建 测试消息 4
+    >>创建 测试消息 5
+    >>创建 测试消息 6
+    >>创建 测试消息 7
+    >>创建 测试消息 8
+    >>创建 测试消息 9
+    >>创建 测试消息 10
     ```
 
     ```shell
-    # Test read message
+    # 测试读取消息
     ./consume.sh {one_of_broker_ip}:9092
     ```
 
     ```shell
-    # Expected example output (the actual message order might be different)
-    Consuming messages from the topic...
-    Test message 3
-    Test message 4
-    Test message 5
-    Test message 9
-    Test message 10
-    Test message 6
-    Test message 8
-    Test message 1
-    Test message 2
-    Test message 7
+    # 预期示例输出（实际消息顺序可能不同）
+    从主题消费消息...
+    测试消息 3
+    测试消息 4
+    测试消息 5
+    测试消息 9
+    测试消息 10
+    测试消息 6
+    测试消息 8
+    测试消息 1
+    测试消息 2
+    测试消息 7
     [2024-11-01 08:54:27,547] ERROR Error processing message, terminating consumer process:  (kafka.tools.ConsoleConsumer$)
     org.apache.kafka.common.errors.TimeoutException
-    Processed a total of 10 messages
+    已处理共计 10 条消息
     ```
+### 重新配置运行中的 Kafka 集群
 
-### Reconfigure a running Kafka cluster
+确保你的 Kafka 集群部署在与 TiDB 集群相同的区域。
 
-Ensure that your Kafka cluster is deployed in the same region as the TiDB cluster.
+**1. 为 broker 配置 EXTERNAL 监听器**
 
-**1. Configure the EXTERNAL listener for brokers**
+以下配置适用于 Kafka KRaft 集群。ZK 模式配置类似。
 
-The following configuration applies to a Kafka KRaft cluster. The ZK mode configuration is similar.
+1. 规划配置更改。
 
-1. Plan configuration changes.
+    1. 为每个 broker 配置一个用于从 TiDB Cloud 外部访问的 EXTERNAL **监听器**。选择一个唯一的端口作为 EXTERNAL 端口，例如 `39092`。
+    2. 根据从 TiDB Cloud 获取的 **Kafka 广播监听器模式**为每个 broker 节点配置 EXTERNAL **广播监听器**，以帮助 TiDB Cloud 区分不同的 broker。不同的 EXTERNAL 广播监听器帮助 TiDB Cloud 端的 Kafka 客户端将请求路由到正确的 broker。
+       - `<port>` 区分 Kafka Private Link 服务访问点的 broker。为所有 broker 的 EXTERNAL 广播监听器规划端口范围，例如 `从 9093 开始的范围`。这些端口不必是 broker 实际监听的端口。它们是 Private Link 服务的负载均衡器监听的端口，将请求转发到不同的 broker。
+        - 建议为不同的 broker 配置不同的 broker ID，以便于故障排除。
 
-    1. Configure an EXTERNAL **listener** for every broker for external access from TiDB Cloud. Select a unique port as the EXTERNAL port, for example, `39092`.
-    2. Configure an EXTERNAL **advertised listener** based on **Kafka Advertised Listener Pattern** you get from TiDB Cloud for every broker node to help TiDB Cloud differentiate between different brokers. Different EXTERNAL advertised listeners help Kafka clients from TiDB Cloud side route requests to the right broker.
-       - `<port>` differentiates brokers from Kafka Private Link service access points. Plan a port range for EXTERNAL advertised listeners of all brokers, for example, `range from 9093`. These ports do not have to be actual ports listened to by brokers. They are ports listened to by the load balancer for Private Link service that will forward requests to different brokers.
-        - It is recommended to configure different broker IDs for different brokers to make it easy for troubleshooting.
-
-2. Use SSH to log in to each broker node. Modify the configuration file of each broker with the following content:
+2. 使用 SSH 登录到每个 broker 节点。使用以下内容修改每个 broker 的配置文件：
 
      ```properties
-     # Add EXTERNAL listener
+     # 添加 EXTERNAL 监听器
      listeners=INTERNAL:...,EXTERNAL://0.0.0.0:39092
 
-     # Add EXTERNAL advertised listeners based on the "Kafka Advertised Listener Pattern" in the "Prerequisites" section
-     # 1. The pattern is "<broker_id>.abc.eastus.azure.3199745.tidbcloud.com:<port>".
-     # 2. So the EXTERNAL can be "bx.abc.eastus.azure.3199745.tidbcloud.com:xxxx". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port in the port range of the EXTERNAL advertised listener.
-     # For example
+     # 根据"前提条件"部分中的"Kafka 广播监听器模式"添加 EXTERNAL 广播监听器
+     # 1. 模式是 "<broker_id>.abc.eastus.azure.3199745.tidbcloud.com:<port>"。
+     # 2. 因此 EXTERNAL 可以是 "bx.abc.eastus.azure.3199745.tidbcloud.com:xxxx"。将 <broker_id> 替换为 "b" 前缀加上 "node.id" 属性，将 <port> 替换为 EXTERNAL 广播监听器端口范围内的唯一端口。
+     # 例如
      advertised.listeners=...,EXTERNAL://b1.abc.eastus.azure.3199745.tidbcloud.com:9093
 
-     # Configure the EXTERNAL map
+     # 配置 EXTERNAL 映射
     listener.security.protocol.map=...,EXTERNAL:PLAINTEXT
      ```
 
-3. After you reconfigure all the brokers, restart your Kafka brokers one by one.
+3. 重新配置所有 broker 后，逐个重启你的 Kafka broker。
 
-**2. Test EXTERNAL listener settings in your internal network**
+**2. 在内部网络中测试 EXTERNAL 监听器设置**
 
-You can download Kafka and OpenJDK in your Kafka client node.
+你可以在 Kafka 客户端节点中下载 Kafka 和 OpenJDK。
 
 ```shell
-# Download Kafka and OpenJDK, and then extract the files. You can choose the binary version based on your preference.
+# 下载 Kafka 和 OpenJDK，然后解压文件。你可以根据偏好选择二进制版本。
 wget https://archive.apache.org/dist/kafka/3.7.1/kafka_2.13-3.7.1.tgz
 tar -zxf kafka_2.13-3.7.1.tgz
 wget https://download.java.net/java/GA/jdk22.0.2/c9ecb94cd31b495da20a27d4581645e8/9/GPL/openjdk-22.0.2_linux-x64_bin.tar.gz
 tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz
 ```
 
-Execute the following script to test if the bootstrap works as expected.
+执行以下脚本以测试引导是否按预期工作。
 
 ```shell
 export JAVA_HOME=~/jdk-22.0.2
 
-# Bootstrap from the EXTERNAL listener
+# 从 EXTERNAL 监听器引导
 ./kafka_2.13-3.7.1/bin/kafka-broker-api-versions.sh --bootstrap-server {one_of_broker_ip}:39092
 
-# Expected output for the last 3 lines (the actual order might be different)
-# There will be some exceptions or errors because advertised listeners cannot be resolved in your Kafka network.
-# TiDB Cloud will make these addresses resolvable and route requests to the correct broker when you create a changefeed connected to this Kafka cluster via Private Link Service.
+# 最后 3 行的预期输出（实际顺序可能不同）
+# 由于广播监听器无法在你的 Kafka 网络中解析，将会出现一些异常或错误。
+# 当你创建通过 Private Link Service 连接到此 Kafka 集群的变更数据捕获时，TiDB Cloud 将使这些地址可解析并将请求路由到正确的 broker。
 b1.abc.eastus.azure.3199745.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 b2.abc.eastus.azure.3199745.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 ```
+## 步骤 2. 将 Kafka 集群暴露为 Private Link Service
 
-## Step 2. Expose the Kafka cluster as Private Link Service
+### 1. 设置负载均衡器
 
-### 1. Set up the load balancer
+1. 登录 [Azure 门户](https://portal.azure.com/)，转到[负载均衡](https://portal.azure.com/#view/Microsoft_Azure_Network/LoadBalancingHubMenuBlade/~/loadBalancers)页面，然后点击**+ 创建**以创建负载均衡器。
+2. 在**基本信息**选项卡中，选择你的**订阅**、**资源组**和**区域**，填写以下实例信息，然后点击**下一步：前端 IP 配置 >**。
 
-1. Log in to the [Azure portal](https://portal.azure.com/), go to the [Load balancing](https://portal.azure.com/#view/Microsoft_Azure_Network/LoadBalancingHubMenuBlade/~/loadBalancers) page, and then click **+ Create** to create a load balancer.
-2. In the **Basic** tab, select your **Subscription**, **Resource group**, and **Region**, fill in the following instance information, and then click **Next : Frontend IP configuration >**.
+    - **名称**：`kafka-lb`
+    - **SKU**：`标准`
+    - **类型**：`内部`
+    - **层级**：`区域`
 
-    - **Name**: `kafka-lb`
-    - **SKU**: `Standard`
-    - **Type**: `Internal`
-    - **Tier**: `Regional`
+3. 在**前端 IP 配置**选项卡中，点击**+ 添加前端 IP 配置**，填写以下信息，点击**保存**，然后点击**下一步：后端池 >**。
 
-3. In the **Frontend IP configuration** tab, click **+ Add a frontend IP configuration**, fill in the following information, click **Save**, and then click **Next : Backend pools >**.
+    - **名称**：`kafka-lb-ip`
+    - **IP 版本**：`IPv4`
+    - **虚拟网络**：`kafka-pls-vnet`
+    - **子网**：`brokers-subnet`
+    - **分配**：`动态`
+    - **可用性区域**：`区域冗余`
 
-    - **Name**: `kafka-lb-ip`
-    - **IP version**: `IPv4`
-    - **Virtual network**: `kafka-pls-vnet`
-    - **Subnet**: `brokers-subnet`
-    - **Assignment**: `Dynamic`
-    - **Availability zone**: `Zone-redundant`
+4. 在**后端池**选项卡中，添加三个后端池如下，然后点击**下一步：入站规则**。
 
-4. In the **Backend pools** tab, add three backend pools as follows, and then click **Next : Inbound rules**.
+    - 名称：`pool1`；后端池配置：`NIC`；IP 配置：`broker-node-1`
+    - 名称：`pool2`；后端池配置：`NIC`；IP 配置：`broker-node-2`
+    - 名称：`pool3`；后端池配置：`NIC`；IP 配置：`broker-node-3`
 
-    - Name: `pool1`; Backend Pool Configuration: `NIC`; IP configurations: `broker-node-1`
-    - Name: `pool2`; Backend Pool Configuration: `NIC`; IP configurations: `broker-node-2`
-    - Name: `pool3`; Backend Pool Configuration: `NIC`; IP configurations: `broker-node-3`
+5. 在**入站规则**选项卡中，添加三个负载均衡规则如下：
 
-5. In the **Inbound rules** tab, add three load balancing rules as follows:
+    1. 规则 1
 
-    1. Rule 1
+        - **名称**：`rule1`
+        - **IP 版本**：`IPv4`
+        - **前端 IP 地址**：`kafka-lb-ip`
+        - **后端池**：`pool1`
+        - **协议**：`TCP`
+        - **端口**：`9093`
+        - **后端端口**：`39092`
+        - **运行状况探测**：点击**创建新的**并填写探测信息。
+            - **名称**：`kafka-lb-hp`
+            - **协议**：`TCP`
+            - **端口**：`39092`
 
-        - **Name**: `rule1`
-        - **IP version**: `IPv4`
-        - **Frontend IP address**: `kafka-lb-ip`
-        - **Backend pool**: `pool1`
-        - **Protocol**: `TCP`
-        - **Port**: `9093`
-        - **Backend port**: `39092`
-        - **Health probe**: click **Create New** and fill in the probe information.
-            - **Name**: `kafka-lb-hp`
-            - **Protocol**: `TCP`
-            - **Port**: `39092`
+    2. 规则 2
 
-    2. Rule 2
+        - **名称**：`rule2`
+        - **IP 版本**：`IPv4`
+        - **前端 IP 地址**：`kafka-lb-ip`
+        - **后端池**：`pool2`
+        - **协议**：`TCP`
+        - **端口**：`9094`
+        - **后端端口**：`39092`
+        - **运行状况探测**：点击**创建新的**并填写探测信息。
+            - **名称**：`kafka-lb-hp`
+            - **协议**：`TCP`
+            - **端口**：`39092`
 
-        - **Name**: `rule2`
-        - **IP version**: `IPv4`
-        - **Frontend IP address**: `kafka-lb-ip`
-        - **Backend pool**: `pool2`
-        - **Protocol**: `TCP`
-        - **Port**: `9094`
-        - **Backend port**: `39092`
-        - **Health probe**: click **Create New** and fill in the probe information.
-            - **Name**: `kafka-lb-hp`
-            - **Protocol**: `TCP`
-            - **Port**: `39092`
+    3. 规则 3
 
-    3. Rule 3
+        - **名称**：`rule3`
+        - **IP 版本**：`IPv4`
+        - **前端 IP 地址**：`kafka-lb-ip`
+        - **后端池**：`pool3`
+        - **协议**：`TCP`
+        - **端口**：`9095`
+        - **后端端口**：`39092`
+        - **运行状况探测**：点击**创建新的**并填写探测信息。
+            - **名称**：`kafka-lb-hp`
+            - **协议**：`TCP`
+            - **端口**：`39092`
 
-        - **Name**: `rule3`
-        - **IP version**: `IPv4`
-        - **Frontend IP address**: `kafka-lb-ip`
-        - **Backend pool**: `pool3`
-        - **Protocol**: `TCP`
-        - **Port**: `9095`
-        - **Backend port**: `39092`
-        - **Health probe**: click **Create New** and fill in the probe information.
-            - **Name**: `kafka-lb-hp`
-            - **Protocol**: `TCP`
-            - **Port**: `39092`
+6. 点击**下一步：出站规则**，点击**下一步：标记 >**，然后点击**下一步：查看 + 创建**以验证信息。
 
-6. Click **Next : Outbound rule**, click **Next : Tags >**, and then click **Next : Review + create** to verify the information.
+7. 点击**创建**。
 
-7. Click **Create**.
+### 2. 设置 Private Link Service
 
-### 2. Set up Private Link Service
+1. 登录 [Azure 门户](https://portal.azure.com/)，转到[私有链接服务](https://portal.azure.com/#view/Microsoft_Azure_Network/PrivateLinkCenterBlade/~/privatelinkservices)页面，然后点击**+ 创建**以为 Kafka 负载均衡器创建 Private Link Service。
 
-1. Log in to the [Azure portal](https://portal.azure.com/), go to the [Private link services](https://portal.azure.com/#view/Microsoft_Azure_Network/PrivateLinkCenterBlade/~/privatelinkservices) page, and then click **+ Create** to create a Private Link service for the Kafka load balancer.
+2. 在**基本信息**选项卡中，选择你的**订阅**、**资源组**和**区域**，在**名称**字段中填写 `kafka-pls`，然后点击**下一步：出站设置 >**。
 
-2. In the **Basic** tab, select your **Subscription**, **Resource group**, and **Region**, fill in `kafka-pls` in the **Name** field, and then click **Next : Outbound settings >**.
+3. 在**出站设置**选项卡中，填写参数如下，然后点击**下一步：访问安全性 >**。
 
-3. In the **Outbound settings** tab, fill in the parameters as follows, and then click **Next : Access security >**.
+    - **负载均衡器**：`kafka-lb`
+    - **负载均衡器前端 IP 地址**：`kafka-lb-ip`
+    - **源 NAT 子网**：`kafka-pls-vnet/brokers-subnet`
 
-    - **Load balancer**: `kafka-lb`
-    - **Load balancer frontend IP address**: `kafka-lb-ip`
-    - **Source NAT subnet**: `kafka-pls-vnet/brokers-subnet`
+4. 在**访问安全性**选项卡中，执行以下操作：
 
-4. In the **Access security** tab, do the following:
+    - 对于**可见性**，选择**按订阅限制**或**具有你别名的任何人**。
+    - 对于**订阅级别访问和自动批准**，点击**添加订阅**以添加你在[前提条件](#前提条件)中获取的 TiDB Cloud Azure 账户的订阅。
 
-    - For **Visibility**, select **Restricted by subscription** or **Anyone with your alias**.
-    - For **Subscription-level access and auto-approval**, click **Add subscriptions** to add the subscription of TiDB Cloud Azure account you got in [Prerequisites](#prerequisites).
+5. 点击**下一步：标记 >**，然后点击**下一步：查看 + 创建 >**以验证信息。
 
-5. Click **Next : Tags >**, and then click **Next : Review + create >** to verify the information.
+6. 点击**创建**。操作完成后，记下 Private Link Service 的别名，以供后续使用。
+## 步骤 3. 从 TiDB Cloud 连接
 
-6. Click **Create**. When the operation is done, note down the alias of the Private Link service for later use.
+1. 返回 [TiDB Cloud 控制台](https://tidbcloud.com)，通过**私有链接**为集群创建变更数据捕获以连接到 Kafka 集群。更多信息，请参阅[导出到 Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md)。
 
-## Step 3. Connect from TiDB Cloud
+2. 当你进入**配置变更数据捕获目标 > 连接方式 > Private Link**时，使用相应的值填写以下字段和其他所需字段。
 
-1. Return to the [TiDB Cloud console](https://tidbcloud.com) to create a changefeed for the cluster to connect to the Kafka cluster by **Private Link**. For more information, see [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
+    - **Kafka 广播监听器模式**：你在[前提条件](#前提条件)中用于生成 **Kafka 广播监听器模式**的唯一随机字符串。
+    - **Private Link Service 的别名**：你在[2. 设置 Private Link Service](#2-设置-private-link-service)中获取的 Private Link Service 的别名。
+    - **引导端口**：`9093,9094,9095`。
 
-2. When you proceed to **Configure the changefeed target > Connectivity Method > Private Link**, fill in the following fields with corresponding values and other fields as needed.
+3. 按照[导出到 Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md)中的步骤继续操作。
 
-    - **Kafka Advertised Listener Pattern**: the unique random string that you use to generate **Kafka Advertised Listener Pattern** in [Prerequisites](#prerequisites).
-    - **Alias of the Private Link Service**: the alias of the Private Link service that you got in [2. Set up Private Link Service](#2-set-up-private-link-service).
-    - **Bootstrap Ports**: `9093,9094,9095`.
+现在你已成功完成任务。
 
-3. Proceed with the steps in [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
+## 常见问题
 
-Now you have successfully finished the task.
+### 如何从两个不同的 TiDB Cloud 项目连接到同一个 Kafka Private Link Service？
 
-## FAQ
+如果你已按照本文档成功设置了从第一个项目的连接，你可以按照以下步骤从第二个项目连接到同一个 Kafka Private Link Service：
 
-### How to connect to the same Kafka Private Link service from two different TiDB Cloud projects?
+1. 按照本文档从头开始操作。
 
-If you have already followed this document to successfully set up the connection from the first project, you can connect to the same Kafka Private Link service from the second project as follows:
+2. 当你进入[步骤 1. 设置 Kafka 集群](#步骤-1-设置-kafka-集群)时，按照[重新配置运行中的 Kafka 集群](#重新配置运行中的-kafka-集群)创建另一组 EXTERNAL 监听器和广播监听器。你可以将其命名为 **EXTERNAL2**。注意，**EXTERNAL2** 的端口范围可以与 **EXTERNAL** 重叠。
 
-1. Follow instructions from the beginning of this document.
+3. 重新配置 broker 后，创建新的负载均衡器和新的 Private Link Service。
 
-2. When you proceed to [Step 1. Set up a Kafka cluster](#step-1-set-up-a-kafka-cluster), follow [Reconfigure a running Kafka cluster](#reconfigure-a-running-kafka-cluster) to create another group of EXTERNAL listeners and advertised listeners. You can name it as **EXTERNAL2**. Note that the port range of **EXTERNAL2** can overlap with the **EXTERNAL**.
+4. 使用以下信息配置 TiDB Cloud 连接：
 
-3. After reconfiguring brokers, create a new load balancer and a new Private Link service.
-
-4. Configure the TiDB Cloud connection with the following information:
-
-    - New Kafka Advertised Listener Group
-    - New Private Link service
+    - 新的 Kafka 广播监听器组
+    - 新的 Private Link Service

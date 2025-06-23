@@ -1,70 +1,70 @@
 ---
-title: Prepared Statements
-summary: Learn about how to use the TiDB prepared statements.
+title: 预处理语句
+summary: 了解如何使用 TiDB 预处理语句。
 ---
 
-# Prepared Statements
+# 预处理语句
 
-A [prepared statement](/sql-statements/sql-statement-prepare.md) templatizes multiple SQL statements in which only parameters are different. It separates the SQL statements from the parameters. You can use it to improve the following aspects of SQL statements:
+[预处理语句](/sql-statements/sql-statement-prepare.md)将多个只有参数不同的 SQL 语句模板化。它将 SQL 语句与参数分离。你可以使用它来改进 SQL 语句的以下方面：
 
-- **Security**: Because parameters and statements are separated, the risk of [SQL injection](https://en.wikipedia.org/wiki/SQL_injection) attacks is avoided.
-- **Performance**: Because the statement is parsed in advance on the TiDB server, only parameters are passed for subsequent executions, saving the cost of parsing the entire SQL statements, splicing SQL statement strings, and network transmission.
+- **安全性**：由于参数和语句是分离的，避免了 [SQL 注入](https://en.wikipedia.org/wiki/SQL_injection)攻击的风险。
+- **性能**：由于语句在 TiDB 服务器上预先解析，后续执行时只传递参数，节省了解析整个 SQL 语句、拼接 SQL 语句字符串和网络传输的成本。
 
-In most applications, SQL statements can be enumerated. You can use a limited number of SQL statements to complete data queries for the entire application. So using a prepared statement is a best practice.
+在大多数应用程序中，SQL 语句是可枚举的。你可以使用有限数量的 SQL 语句来完成整个应用程序的数据查询。因此使用预处理语句是一种最佳实践。
 
-## SQL syntax
+## SQL 语法
 
-This section describes the SQL syntax for creating, running and deleting a prepared statement.
+本节描述创建、运行和删除预处理语句的 SQL 语法。
 
-### Create a prepared statement
+### 创建预处理语句
 
 ```sql
 PREPARE {prepared_statement_name} FROM '{prepared_statement_sql}';
 ```
 
-| Parameter Name | Description |
+| 参数名称 | 描述 |
 | :-------------------------: | :------------------------------------: |
-| `{prepared_statement_name}` | name of the prepared statement|
-| `{prepared_statement_sql}`  | the prepared statement SQL with a question mark as a placeholder |
+| `{prepared_statement_name}` | 预处理语句的名称 |
+| `{prepared_statement_sql}`  | 使用问号作为占位符的预处理语句 SQL |
 
-See [PREPARE statement](/sql-statements/sql-statement-prepare.md) for more information.
+更多信息请参见 [PREPARE 语句](/sql-statements/sql-statement-prepare.md)。
 
-### Use the prepared statement
+### 使用预处理语句
 
-A prepared statement can only use **user variables** as parameters, so use the [`SET` statement](/sql-statements/sql-statement-set-variable.md) to set the variables before the [`EXECUTE` statement](/sql-statements/sql-statement-execute.md) can call the prepared statement.
+预处理语句只能使用**用户变量**作为参数，因此在使用 [`EXECUTE` 语句](/sql-statements/sql-statement-execute.md)调用预处理语句之前，需要使用 [`SET` 语句](/sql-statements/sql-statement-set-variable.md)设置变量。
 
 ```sql
 SET @{parameter_name} = {parameter_value};
 EXECUTE {prepared_statement_name} USING @{parameter_name};
 ```
 
-| Parameter Name | Description |
+| 参数名称 | 描述 |
 | :-------------------------: | :-------------------------------------------------------------------: |
-|     `{parameter_name}`      |                              user variable name                               |
-|     `{parameter_value}`     |                              user variable value                               |
-| `{prepared_statement_name}` | The name of the preprocessing statement, which must be the same as the name defined in the [Create a prepared statement](#create-a-prepared-statement) |
+|     `{parameter_name}`      | 用户变量名称 |
+|     `{parameter_value}`     | 用户变量值 |
+| `{prepared_statement_name}` | 预处理语句的名称，必须与[创建预处理语句](#创建预处理语句)中定义的名称相同 |
 
-See the [`EXECUTE` statement](/sql-statements/sql-statement-execute.md) for more information.
+更多信息请参见 [`EXECUTE` 语句](/sql-statements/sql-statement-execute.md)。
 
-### Delete the prepared statement
+### 删除预处理语句
 
 ```sql
 DEALLOCATE PREPARE {prepared_statement_name};
 ```
 
-| Parameter Name | Description |
+| 参数名称 | 描述 |
 | :-------------------------: | :-------------------------------------------------------------------: |
-| `{prepared_statement_name}` | The name of the preprocessing statement, which must be the same as the name defined in the [Create a prepared statement](#create-a-prepared-statement) |
+| `{prepared_statement_name}` | 预处理语句的名称，必须与[创建预处理语句](#创建预处理语句)中定义的名称相同 |
 
-See the [`DEALLOCATE` statement](/sql-statements/sql-statement-deallocate.md) for more information.
+更多信息请参见 [`DEALLOCATE` 语句](/sql-statements/sql-statement-deallocate.md)。
 
-## Examples
+## 示例
 
-This section describes two examples of prepared statements: `SELECT` data and `INSERT` data.
+本节描述预处理语句的两个示例：`SELECT` 数据和 `INSERT` 数据。
 
-### `SELECT` example
+### `SELECT` 示例
 
-For example, you need to query a book with `id = 1` in the [`bookshop` application](/develop/dev-guide-bookshop-schema-design.md#books-table).
+例如，你需要在 [`bookshop` 应用程序](/develop/dev-guide-bookshop-schema-design.md#books-table)中查询 `id = 1` 的图书。
 
 <SimpleTab groupId="language">
 
@@ -74,7 +74,7 @@ For example, you need to query a book with `id = 1` in the [`bookshop` applicati
 PREPARE `books_query` FROM 'SELECT * FROM `books` WHERE `id` = ?';
 ```
 
-Running result:
+运行结果：
 
 ```
 Query OK, 0 rows affected (0.01 sec)
@@ -84,7 +84,7 @@ Query OK, 0 rows affected (0.01 sec)
 SET @id = 1;
 ```
 
-Running result:
+运行结果：
 
 ```
 Query OK, 0 rows affected (0.04 sec)
@@ -94,7 +94,7 @@ Query OK, 0 rows affected (0.04 sec)
 EXECUTE `books_query` USING @id;
 ```
 
-Running result:
+运行结果：
 
 ```
 +---------+---------------------------------+--------+---------------------+-------+--------+
@@ -110,7 +110,7 @@ Running result:
 <div label="Java" value="java">
 
 ```java
-// ds is an entity of com.mysql.cj.jdbc.MysqlDataSource
+// ds 是 com.mysql.cj.jdbc.MysqlDataSource 的实例
 try (Connection connection = ds.getConnection()) {
     PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `books` WHERE `id` = ?");
     preparedStatement.setLong(1, 1);
@@ -119,7 +119,7 @@ try (Connection connection = ds.getConnection()) {
     if(!res.next()) {
         System.out.println("No books in the table with id 1");
     } else {
-        // got book's info, which id is 1
+        // 获取 id 为 1 的图书信息
         System.out.println(res.getLong("id"));
         System.out.println(res.getString("title"));
         System.out.println(res.getString("type"));
@@ -133,9 +133,9 @@ try (Connection connection = ds.getConnection()) {
 
 </SimpleTab>
 
-### `INSERT` example
+### `INSERT` 示例
 
-Using the [`books` table](/develop/dev-guide-bookshop-schema-design.md#books-table) as an example, you need to insert a book with `title = TiDB Developer Guide`, `type = Science & Technology`, `stock = 100`, `price = 0.0`, and `published_at = NOW()` (current time of insertion). Note that you don't need to specify the `AUTO_RANDOM` attribute in the **primary key** of the `books` table. For more information about inserting data, see [Insert Data](/develop/dev-guide-insert-data.md).
+以 [`books` 表](/develop/dev-guide-bookshop-schema-design.md#books-table)为例，你需要插入一本 `title = TiDB Developer Guide`、`type = Science & Technology`、`stock = 100`、`price = 0.0` 和 `published_at = NOW()`（插入时的当前时间）的图书。注意，你不需要在 `books` 表的**主键**中指定 `AUTO_RANDOM` 属性。有关插入数据的更多信息，请参见[插入数据](/develop/dev-guide-insert-data.md)。
 
 <SimpleTab groupId="language">
 
@@ -145,7 +145,7 @@ Using the [`books` table](/develop/dev-guide-bookshop-schema-design.md#books-tab
 PREPARE `books_insert` FROM 'INSERT INTO `books` (`title`, `type`, `stock`, `price`, `published_at`) VALUES (?, ?, ?, ?, ?);';
 ```
 
-Running result:
+运行结果：
 
 ```
 Query OK, 0 rows affected (0.03 sec)
@@ -159,7 +159,7 @@ SET @price = 0.0;
 SET @published_at = NOW();
 ```
 
-Running result:
+运行结果：
 
 ```
 Query OK, 0 rows affected (0.04 sec)
@@ -169,7 +169,7 @@ Query OK, 0 rows affected (0.04 sec)
 EXECUTE `books_insert` USING @title, @type, @stock, @price, @published_at;
 ```
 
-Running result:
+运行结果：
 
 ```
 Query OK, 1 row affected (0.03 sec)
@@ -196,45 +196,45 @@ try (Connection connection = ds.getConnection()) {
 }
 ```
 
-As you can see, JDBC helps you control the life cycle of prepared statements and you don't need to manually create, use, or delete prepared statements in your application. However, note that because TiDB is compatible with MySQL, the default configuration for using MySQL JDBC Driver on the client-side is not to enable the **_server-side_** prepared statement option, but to use the client-side prepared statement.
+如你所见，JDBC 帮助你控制预处理语句的生命周期，你不需要在应用程序中手动创建、使用或删除预处理语句。但是请注意，由于 TiDB 兼容 MySQL，在客户端使用 MySQL JDBC Driver 的默认配置是不启用**_服务器端_**预处理语句选项，而是使用客户端预处理语句。
 
-The following configurations help you use the TiDB server-side prepared statements under JDBC:
+以下配置可帮助你在 JDBC 下使用 TiDB 服务器端预处理语句：
 
-|            Parameter            |                 Means                  |   Recommended Scenario   | Recommended Configuration|
+|            参数            |                 含义                  |   推荐场景   | 推荐配置 |
 | :------------------------: | :-----------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------: |
-|    `useServerPrepStmts`    |    Whether to use the server side to enable prepared statements    |  When you need to use a prepared statement more than once                                                             |          `true`          |
-|      `cachePrepStmts`      |       Whether the client caches prepared statements        |                                                           `useServerPrepStmts=true`                                                             |          `true`          |
-|  `prepStmtCacheSqlLimit`   |  Maximum size of a prepared statement (256 characters by default)  | When the prepared statement is greater than 256 characters | Configured according to the actual size of the prepared statement |
-|    `prepStmtCacheSize`     | Maximum number of prepared statements (25 by default) | When the number of prepared statements is greater than 25  | Configured according to the actual number of prepared statements |
+|    `useServerPrepStmts`    |    是否使用服务器端启用预处理语句    |  当你需要多次使用预处理语句时                                                             |          `true`          |
+|      `cachePrepStmts`      |       客户端是否缓存预处理语句        |                                                           `useServerPrepStmts=true`                                                             |          `true`          |
+|  `prepStmtCacheSqlLimit`   |  预处理语句的最大大小（默认 256 字符）  | 当预处理语句大于 256 字符时 | 根据预处理语句的实际大小配置 |
+|    `prepStmtCacheSize`     | 预处理语句的最大数量（默认 25 个） | 当预处理语句数量大于 25 个时  | 根据预处理语句的实际数量配置 |
 
-The following is a typical scenario of JDBC connection string configurations. Host: `127.0.0.1`, Port: `4000`, User name: `root`, Password: null, Default database: `test`:
+以下是 JDBC 连接字符串配置的典型场景。主机：`127.0.0.1`，端口：`4000`，用户名：`root`，密码：null，默认数据库：`test`：
 
 ```
 jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPrepStmts=true&prepStmtCacheSqlLimit=2048&prepStmtCacheSize=256&rewriteBatchedStatements=true&allowMultiQueries=true
 ```
 
-You can also see the [insert rows](/develop/dev-guide-insert-data.md#insert-rows) chapter if you need to change other JDBC parameters when inserting data.
+如果你在插入数据时需要更改其他 JDBC 参数，也可以参见[插入行](/develop/dev-guide-insert-data.md#插入行)章节。
 
-For a complete example in Java, see:
+有关 Java 的完整示例，请参见：
 
-- [Connect to TiDB with JDBC](/develop/dev-guide-sample-application-java-jdbc.md)
-- [Connect to TiDB with Hibernate](/develop/dev-guide-sample-application-java-hibernate.md)
-- [Connect to TiDB with Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md)
+- [使用 JDBC 连接到 TiDB](/develop/dev-guide-sample-application-java-jdbc.md)
+- [使用 Hibernate 连接到 TiDB](/develop/dev-guide-sample-application-java-hibernate.md)
+- [使用 Spring Boot 连接到 TiDB](/develop/dev-guide-sample-application-java-spring-boot.md)
 
 </div>
 
 </SimpleTab>
 
-## Need help?
+## 需要帮助？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

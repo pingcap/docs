@@ -1,28 +1,28 @@
 ---
-title: SQL Development Specifications
-summary: Learn about the SQL development specifications for TiDB.
+title: SQL 开发规范
+summary: 了解 TiDB 的 SQL 开发规范。
 ---
 
-# SQL Development Specifications
+# SQL 开发规范
 
-This document introduces some general development specifications for using SQL.
+本文介绍使用 SQL 时的一些通用开发规范。
 
-## Create and delete tables
+## 创建和删除表
 
-- Basic principle: under the premise of following the table naming convention, it is recommended that the application internally packages the table creation and deletion statements and adds judgment logic to prevent abnormal interruption of business processes.
-- Details: `create table if not exists table_name` or `drop table if exists table_name` statements are recommended to add `if` judgments to avoid abnormal interruptions caused by SQL commands running abnormally on the application side.
+- 基本原则：在遵循表命名规范的前提下，建议应用程序内部封装表的创建和删除语句，并添加判断逻辑，以防止业务流程异常中断。
+- 详细说明：建议使用 `create table if not exists table_name` 或 `drop table if exists table_name` 语句添加 `if` 判断，以避免应用程序端 SQL 命令运行异常导致的中断。
 
-## `SELECT *` usage
+## `SELECT *` 的使用
 
-- Basic principle: avoid using `SELECT *` for queries.
-- Details: select the appropriate columns as required and avoid using `SELECT *` to read all fields because such operations consume network bandwidth. Consider adding the queried fields to the index to make effective use of the covering index.
+- 基本原则：避免使用 `SELECT *` 进行查询。
+- 详细说明：根据需要选择适当的列，避免使用 `SELECT *` 读取所有字段，因为这样的操作会消耗网络带宽。考虑将查询的字段添加到索引中，以有效利用覆盖索引。
 
-## Use functions on fields
+## 在字段上使用函数
 
-- Basic principle: You can use related functions on the queried fields. To avoid index failure, do not use any functions on the filtered fields in the `WHERE` clause, including data type conversion functions. You may consider using the expression index.
-- Detailed description:
+- 基本原则：可以在查询的字段上使用相关函数。为避免索引失效，不要在 `WHERE` 子句的过滤字段上使用任何函数，包括数据类型转换函数。你可以考虑使用表达式索引。
+- 详细说明：
 
-    NOT recommended:
+    不推荐：
 
     {{< copyable "sql" >}}
 
@@ -32,7 +32,7 @@ This document introduces some general development specifications for using SQL.
     WHERE DATE_FORMAT(gmt_create, '%Y%m%d %H:%i:%s') = '20090101 00:00:00'
     ```
 
-    Recommended:
+    推荐：
 
     {{< copyable "sql" >}}
 
@@ -42,27 +42,27 @@ This document introduces some general development specifications for using SQL.
     WHERE gmt_create = str_to_date('20090101 00:00:00', '%Y%m%d %H:%i:%s')
     ```
 
-## Other specifications
+## 其他规范
 
-- Do not perform mathematical operations or functions on the index column in the `WHERE` condition.
-- Replace `OR` with `IN` or `UNION`. The number of `IN` must be less than `300`.
-- Avoid using the `%` prefix for fuzzy prefix queries.
-- If the application uses **Multi Statements** to execute SQL, that is, multiple SQLs are joined with semicolons and sent to the client for execution at once, TiDB only returns the result of the first SQL execution.
-- When you use expressions, check if the expressions support computing push-down to the storage layer (TiKV or TiFlash). If not, you should expect more memory consumption and even OOM at the TiDB layer. Computing that can be pushed down to the storage layer is as follows:
-    - [TiFlash supported push-down calculations](/tiflash/tiflash-supported-pushdown-calculations.md).
-    - [TiKV - List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md).
-    - [Predicate push down](/predicate-push-down.md).
+- 不要在 `WHERE` 条件中对索引列进行数学运算或函数运算。
+- 用 `IN` 或 `UNION` 替代 `OR`。`IN` 的数量必须小于 `300`。
+- 避免使用 `%` 前缀进行模糊前缀查询。
+- 如果应用程序使用 **Multi Statements** 执行 SQL，即多个 SQL 用分号连接并一次性发送到客户端执行，TiDB 只返回第一个 SQL 的执行结果。
+- 使用表达式时，检查表达式是否支持计算下推到存储层（TiKV 或 TiFlash）。如果不支持，你应该预期 TiDB 层会有更多的内存消耗，甚至可能出现 OOM。可以下推到存储层的计算包括：
+    - [TiFlash 支持的下推计算](/tiflash/tiflash-supported-pushdown-calculations.md)。
+    - [TiKV - 下推表达式列表](/functions-and-operators/expressions-pushed-down.md)。
+    - [谓词下推](/predicate-push-down.md)。
 
-## Need help?
+## 需要帮助？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

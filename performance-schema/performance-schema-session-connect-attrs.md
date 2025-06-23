@@ -1,24 +1,24 @@
 ---
 title: SESSION_CONNECT_ATTRS
-summary: Learn the `SESSION_CONNECT_ATTRS` performance_schema table.
+summary: 了解 `SESSION_CONNECT_ATTRS` performance_schema 表。
 ---
 
 # SESSION\_CONNECT\_ATTRS
 
-The `SESSION_CONNECT_ATTRS` table provides information about connection attributes. Session attributes are key-value pairs that are sent by the client when establishing a connection.
+`SESSION_CONNECT_ATTRS` 表提供了连接属性的信息。会话属性是客户端在建立连接时发送的键值对。
 
-Common attributes:
+常见属性：
 
-| Attribute Name    | Example       | Description                |
-|-------------------|---------------|----------------------------|
-| `_client_name`    | `libmysql`    | Client library name        |
-| `_client_version` | `8.0.33`      | Client library version     |
-| `_os`             | `Linux`       | Operating System           |
-| `_pid`            | `712927`      | Process ID                 |
-| `_platform`       | `x86_64`      | CPU Architecture           |
-| `program_name`    | `mysqlsh`     | Program name               |
+| 属性名称          | 示例          | 描述                     |
+|-------------------|---------------|--------------------------|
+| `_client_name`    | `libmysql`    | 客户端库名称             |
+| `_client_version` | `8.0.33`      | 客户端库版本             |
+| `_os`             | `Linux`       | 操作系统                 |
+| `_pid`            | `712927`      | 进程 ID                  |
+| `_platform`       | `x86_64`      | CPU 架构                 |
+| `program_name`    | `mysqlsh`     | 程序名称                 |
 
-You can view the columns of the `SESSION_CONNECT_ATTRS` table as follows:
+你可以按如下方式查看 `SESSION_CONNECT_ATTRS` 表的列：
 
 {{< copyable "sql" >}}
 
@@ -38,7 +38,7 @@ DESCRIBE session_connect_attrs;
 +------------------+---------------------+------+-----+---------+-------+
 ```
 
-You can view the information on session attributes stored in the `SESSION_CONNECT_ATTRS` table as follows:
+你可以按如下方式查看存储在 `SESSION_CONNECT_ATTRS` 表中的会话属性信息：
 
 {{< copyable "sql" >}}
 
@@ -60,9 +60,9 @@ TABLE SESSION_CONNECT_ATTRS;
 +----------------+-----------------+------------+------------------+
 ```
 
-Fields in the `SESSION_CONNECT_ATTRS` table are described as follows:
+`SESSION_CONNECT_ATTRS` 表中的字段说明如下：
 
-* `PROCESSLIST_ID`: Processlist ID of the session.
-* `ATTR_NAME`: Attribute name.
-* `ATTR_VALUE`: Attribute value.
-* `ORDINAL_POSITION`: Ordinal position of the name/value pair.
+* `PROCESSLIST_ID`：会话的进程列表 ID。
+* `ATTR_NAME`：属性名称。
+* `ATTR_VALUE`：属性值。
+* `ORDINAL_POSITION`：名称/值对的序号位置。

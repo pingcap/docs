@@ -1,56 +1,56 @@
 ---
-title: Push-down calculations Supported by TiFlash
-summary: Learn the push-down calculations supported by TiFlash.
+title: TiFlash 支持的下推计算
+summary: 了解 TiFlash 支持的下推计算。
 ---
 
-# Push-down Calculations Supported by TiFlash
+# TiFlash 支持的下推计算
 
-This document introduces the push-down calculations supported by TiFlash.
+本文介绍 TiFlash 支持的下推计算。
 
-## Push-down operators
+## 下推算子
 
-TiFlash supports the push-down of the following operators:
+TiFlash 支持下推以下算子：
 
-* TableScan: Reads data from tables.
-* Selection: Filters data.
-* HashAgg: Performs data aggregation based on the [Hash Aggregation](/explain-aggregation.md#hash-aggregation) algorithm.
-* StreamAgg: Performs data aggregation based on the [Stream Aggregation](/explain-aggregation.md#stream-aggregation) algorithm. SteamAgg only supports the aggregation without the `GROUP BY` condition.
-* TopN: Performs the TopN calculation.
-* Limit: Performs the limit calculation.
-* Project: Performs the projection calculation.
-* HashJoin: Performs the join calculation using the [Hash Join](/explain-joins.md#hash-join) algorithm, but with the following conditions:
-    * The operator can be pushed down only in the [MPP mode](/tiflash/use-tiflash-mpp-mode.md).
-    * Supported joins are Inner Join, Left Join, Semi Join, Anti Semi Join, Left Semi Join, and Anti Left Semi Join.
-    * The preceding joins support both Equi Join and Non-Equi Join (Cartesian Join or Null-aware Semi Join). When calculating Cartesian Join or Null-aware Semi Join, the Broadcast algorithm, instead of the Shuffle Hash Join algorithm, is used.
-* [Window functions](/functions-and-operators/window-functions.md): Currently, TiFlash supports `ROW_NUMBER()`, `RANK()`, `DENSE_RANK()`, `LEAD()`, `LAG()`, `FIRST_VALUE()`, and `LAST_VALUE()`.
+* TableScan：读取表中的数据。
+* Selection：过滤数据。
+* HashAgg：基于[哈希聚合](/explain-aggregation.md#hash-aggregation)算法执行数据聚合。
+* StreamAgg：基于[流式聚合](/explain-aggregation.md#stream-aggregation)算法执行数据聚合。StreamAgg 仅支持不带 `GROUP BY` 条件的聚合。
+* TopN：执行 TopN 计算。
+* Limit：执行 limit 计算。
+* Project：执行投影计算。
+* HashJoin：使用[哈希连接](/explain-joins.md#hash-join)算法执行连接计算，但有以下条件：
+    * 该算子仅在 [MPP 模式](/tiflash/use-tiflash-mpp-mode.md)下可以下推。
+    * 支持的连接类型包括 Inner Join、Left Join、Semi Join、Anti Semi Join、Left Semi Join 和 Anti Left Semi Join。
+    * 上述连接类型支持等值连接和非等值连接（笛卡尔积连接或空感知半连接）。在计算笛卡尔积连接或空感知半连接时，使用广播算法而不是 Shuffle Hash Join 算法。
+* [窗口函数](/functions-and-operators/window-functions.md)：目前 TiFlash 支持 `ROW_NUMBER()`、`RANK()`、`DENSE_RANK()`、`LEAD()`、`LAG()`、`FIRST_VALUE()` 和 `LAST_VALUE()`。
 
-In TiDB, operators are organized in a tree structure. For an operator to be pushed down to TiFlash, all of the following prerequisites must be met:
+在 TiDB 中，算子以树状结构组织。要将算子下推到 TiFlash，必须满足以下所有前提条件：
 
-+ All of its child operators can be pushed down to TiFlash.
-+ If an operator contains expressions (most of the operators contain expressions), all expressions of the operator can be pushed down to TiFlash.
++ 其所有子算子都可以下推到 TiFlash。
++ 如果算子包含表达式（大多数算子都包含表达式），则该算子的所有表达式都可以下推到 TiFlash。
 
-## Push-down expressions
+## 下推表达式
 
-TiFlash supports the following push-down expressions:
+TiFlash 支持以下下推表达式：
 
-| Expression Type | Operations |
+| 表达式类型 | 运算符和函数 |
 | :-------------- | :------------------------------------- |
-| [Numeric functions and operators](/functions-and-operators/numeric-functions-and-operators.md) | `+`, `-`, `/`, `*`, `%`, `>=`, `<=`, `=`, `!=`, `<`, `>`, `ROUND()`, `ABS()`, `FLOOR(int)`, `CEIL(int)`, `CEILING(int)`, `SQRT()`, `LOG()`, `LOG2()`, `LOG10()`, `LN()`, `EXP()`, `POW()`, `POWER()`, `SIGN()`, `RADIANS()`, `DEGREES()`, `CONV()`, `CRC32()`, `GREATEST(int/real)`, `LEAST(int/real)` |
-| [Logical functions](/functions-and-operators/control-flow-functions.md) and [operators](/functions-and-operators/operators.md) | `AND`, `OR`, `NOT`, `CASE WHEN`, `IF()`, `IFNULL()`, `ISNULL()`, `IN`, `LIKE`, `ILIKE`, `COALESCE`, `IS` |
-| [Bitwise operations](/functions-and-operators/bit-functions-and-operators.md) | `&` (bitand), <code>\|</code> (bitor), `~` (bitneg), `^` (bitxor) |
-| [String functions](/functions-and-operators/string-functions.md) | `SUBSTR()`, `CHAR_LENGTH()`, `REPLACE()`, `CONCAT()`, `CONCAT_WS()`, `LEFT()`, `RIGHT()`, `ASCII()`, `LENGTH()`, `TRIM()`, `LTRIM()`, `RTRIM()`, `POSITION()`, `FORMAT()`, `LOWER()`, `UCASE()`, `UPPER()`, `SUBSTRING_INDEX()`, `LPAD()`, `RPAD()`, `STRCMP()` |
-| [Regular expression functions and operators](/functions-and-operators/string-functions.md) | `REGEXP`, `REGEXP_LIKE()`, `REGEXP_INSTR()`, `REGEXP_SUBSTR()`, `REGEXP_REPLACE()`, `RLIKE` |
-| [Date functions](/functions-and-operators/date-and-time-functions.md) | `DATE_FORMAT()`, `TIMESTAMPDIFF()`, `FROM_UNIXTIME()`, `UNIX_TIMESTAMP(int)`, `UNIX_TIMESTAMP(decimal)`, `STR_TO_DATE(date)`, `STR_TO_DATE(datetime)`, `DATEDIFF()`, `YEAR()`, `MONTH()`, `DAY()`, `EXTRACT(datetime)`, `DATE()`, `HOUR()`, `MICROSECOND()`, `MINUTE()`, `SECOND()`, `SYSDATE()`, `DATE_ADD/ADDDATE(datetime, int)`, `DATE_ADD/ADDDATE(string, int/real)`, `DATE_SUB/SUBDATE(datetime, int)`, `DATE_SUB/SUBDATE(string, int/real)`, `QUARTER()`, `DAYNAME()`, `DAYOFMONTH()`, `DAYOFWEEK()`, `DAYOFYEAR()`, `LAST_DAY()`, `MONTHNAME()`, `TO_SECONDS()`, `TO_DAYS()`, `FROM_DAYS()`, `WEEKOFYEAR()` |
-| [JSON function](/functions-and-operators/json-functions.md) | `JSON_LENGTH()`, `->`, `->>`, `JSON_EXTRACT()`, `JSON_ARRAY()`, `JSON_DEPTH()`, `JSON_VALID()`, `JSON_KEYS()`, `JSON_CONTAINS_PATH()`, `JSON_UNQUOTE()` |
-| [Conversion functions](/functions-and-operators/cast-functions-and-operators.md) | `CAST(int AS DOUBLE), CAST(int AS DECIMAL)`, `CAST(int AS STRING)`, `CAST(int AS TIME)`, `CAST(double AS INT)`, `CAST(double AS DECIMAL)`, `CAST(double AS STRING)`, `CAST(double AS TIME)`, `CAST(string AS INT)`, `CAST(string AS DOUBLE), CAST(string AS DECIMAL)`, `CAST(string AS TIME)`, `CAST(decimal AS INT)`, `CAST(decimal AS STRING)`, `CAST(decimal AS TIME)`, `CAST(decimal AS DOUBLE)`, `CAST(time AS INT)`, `CAST(time AS DECIMAL)`, `CAST(time AS STRING)`, `CAST(time AS REAL)`, `CAST(json AS JSON)`, `CAST(json AS STRING)`, `CAST(int AS JSON)`, `CAST(real AS JSON)`, `CAST(decimal AS JSON)`, `CAST(string AS JSON)`, `CAST(time AS JSON)`, `CAST(duration AS JSON)` |
-| [Aggregate functions](/functions-and-operators/aggregate-group-by-functions.md) | `MIN()`, `MAX()`, `SUM()`, `COUNT()`, `AVG()`, `APPROX_COUNT_DISTINCT()`, `GROUP_CONCAT()` |
-| [Miscellaneous functions](/functions-and-operators/miscellaneous-functions.md) | `INET_NTOA()`, `INET_ATON()`, `INET6_NTOA()`, `INET6_ATON()` |
+| [数值函数和运算符](/functions-and-operators/numeric-functions-and-operators.md) | `+`、`-`、`/`、`*`、`%`、`>=`、`<=`、`=`、`!=`、`<`、`>`、`ROUND()`、`ABS()`、`FLOOR(int)`、`CEIL(int)`、`CEILING(int)`、`SQRT()`、`LOG()`、`LOG2()`、`LOG10()`、`LN()`、`EXP()`、`POW()`、`POWER()`、`SIGN()`、`RADIANS()`、`DEGREES()`、`CONV()`、`CRC32()`、`GREATEST(int/real)`、`LEAST(int/real)` |
+| [逻辑函数](/functions-and-operators/control-flow-functions.md)和[运算符](/functions-and-operators/operators.md) | `AND`、`OR`、`NOT`、`CASE WHEN`、`IF()`、`IFNULL()`、`ISNULL()`、`IN`、`LIKE`、`ILIKE`、`COALESCE`、`IS` |
+| [位运算](/functions-and-operators/bit-functions-and-operators.md) | `&`（按位与）、<code>\|</code>（按位或）、`~`（按位取反）、`^`（按位异或） |
+| [字符串函数](/functions-and-operators/string-functions.md) | `SUBSTR()`、`CHAR_LENGTH()`、`REPLACE()`、`CONCAT()`、`CONCAT_WS()`、`LEFT()`、`RIGHT()`、`ASCII()`、`LENGTH()`、`TRIM()`、`LTRIM()`、`RTRIM()`、`POSITION()`、`FORMAT()`、`LOWER()`、`UCASE()`、`UPPER()`、`SUBSTRING_INDEX()`、`LPAD()`、`RPAD()`、`STRCMP()` |
+| [正则表达式函数和运算符](/functions-and-operators/string-functions.md) | `REGEXP`、`REGEXP_LIKE()`、`REGEXP_INSTR()`、`REGEXP_SUBSTR()`、`REGEXP_REPLACE()`、`RLIKE` |
+| [日期函数](/functions-and-operators/date-and-time-functions.md) | `DATE_FORMAT()`、`TIMESTAMPDIFF()`、`FROM_UNIXTIME()`、`UNIX_TIMESTAMP(int)`、`UNIX_TIMESTAMP(decimal)`、`STR_TO_DATE(date)`、`STR_TO_DATE(datetime)`、`DATEDIFF()`、`YEAR()`、`MONTH()`、`DAY()`、`EXTRACT(datetime)`、`DATE()`、`HOUR()`、`MICROSECOND()`、`MINUTE()`、`SECOND()`、`SYSDATE()`、`DATE_ADD/ADDDATE(datetime, int)`、`DATE_ADD/ADDDATE(string, int/real)`、`DATE_SUB/SUBDATE(datetime, int)`、`DATE_SUB/SUBDATE(string, int/real)`、`QUARTER()`、`DAYNAME()`、`DAYOFMONTH()`、`DAYOFWEEK()`、`DAYOFYEAR()`、`LAST_DAY()`、`MONTHNAME()`、`TO_SECONDS()`、`TO_DAYS()`、`FROM_DAYS()`、`WEEKOFYEAR()` |
+| [JSON 函数](/functions-and-operators/json-functions.md) | `JSON_LENGTH()`、`->`、`->>`、`JSON_EXTRACT()`、`JSON_ARRAY()`、`JSON_DEPTH()`、`JSON_VALID()`、`JSON_KEYS()`、`JSON_CONTAINS_PATH()`、`JSON_UNQUOTE()` |
+| [类型转换函数](/functions-and-operators/cast-functions-and-operators.md) | `CAST(int AS DOUBLE)、CAST(int AS DECIMAL)`、`CAST(int AS STRING)`、`CAST(int AS TIME)`、`CAST(double AS INT)`、`CAST(double AS DECIMAL)`、`CAST(double AS STRING)`、`CAST(double AS TIME)`、`CAST(string AS INT)`、`CAST(string AS DOUBLE)、CAST(string AS DECIMAL)`、`CAST(string AS TIME)`、`CAST(decimal AS INT)`、`CAST(decimal AS STRING)`、`CAST(decimal AS TIME)`、`CAST(decimal AS DOUBLE)`、`CAST(time AS INT)`、`CAST(time AS DECIMAL)`、`CAST(time AS STRING)`、`CAST(time AS REAL)`、`CAST(json AS JSON)`、`CAST(json AS STRING)`、`CAST(int AS JSON)`、`CAST(real AS JSON)`、`CAST(decimal AS JSON)`、`CAST(string AS JSON)`、`CAST(time AS JSON)`、`CAST(duration AS JSON)` |
+| [聚合函数](/functions-and-operators/aggregate-group-by-functions.md) | `MIN()`、`MAX()`、`SUM()`、`COUNT()`、`AVG()`、`APPROX_COUNT_DISTINCT()`、`GROUP_CONCAT()` |
+| [其他函数](/functions-and-operators/miscellaneous-functions.md) | `INET_NTOA()`、`INET_ATON()`、`INET6_NTOA()`、`INET6_ATON()` |
 
-## Restrictions
+## 限制
 
-* Expressions that contain the Bit, Set, and Geometry types cannot be pushed down to TiFlash.
+* 包含 Bit、Set 和 Geometry 类型的表达式不能下推到 TiFlash。
 
-* The `DATE_ADD()`, `DATE_SUB()`, `ADDDATE()`, and `SUBDATE()` functions support the following interval types only. If other interval types are used, TiFlash reports errors.
+* `DATE_ADD()`、`DATE_SUB()`、`ADDDATE()` 和 `SUBDATE()` 函数仅支持以下间隔类型。如果使用其他间隔类型，TiFlash 会报错。
 
     * DAY
     * WEEK
@@ -60,15 +60,15 @@ TiFlash supports the following push-down expressions:
     * MINUTE
     * SECOND
 
-If a query encounters unsupported push-down calculations, TiDB needs to complete the remaining calculations, which might greatly affect the TiFlash acceleration effect. The currently unsupported operators and expressions might be supported in future versions.
+如果查询遇到不支持的下推计算，TiDB 需要完成剩余的计算，这可能会大大影响 TiFlash 的加速效果。当前不支持的算子和表达式可能会在未来版本中得到支持。
 
-Functions like `MAX()` are supported for push-down when used as aggregate functions, but not as window functions.
+像 `MAX()` 这样的函数在作为聚合函数时支持下推，但作为窗口函数时不支持下推。
 
-## Examples
+## 示例
 
-This section provides some examples of pushing down operators and expressions to TiFlash.
+本节提供一些将算子和表达式下推到 TiFlash 的示例。
 
-### Example 1: Push operators down to TiFlash
+### 示例 1：将算子下推到 TiFlash
 
 ```sql
 CREATE TABLE t(id INT PRIMARY KEY, a INT);
@@ -88,9 +88,9 @@ EXPLAIN SELECT * FROM t LIMIT 3;
 5 rows in set (0.18 sec)
 ```
 
-In the preceding example, the operator `Limit` is pushed down to TiFlash for filtering data, which helps reduce the amount of data to be transferred over the network and reduce the network overhead. This is indicated by the `mpp[tiflash]` value of the `task` column on the row of the `Limit_15` operator.
+在上述示例中，`Limit` 算子被下推到 TiFlash 进行数据过滤，这有助于减少需要通过网络传输的数据量，从而减少网络开销。这可以从 `Limit_15` 算子所在行的 `task` 列值为 `mpp[tiflash]` 看出。
 
-### Example 2: Push expressions down to TiFlash
+### 示例 2：将表达式下推到 TiFlash
 
 ```sql
 CREATE TABLE t(id INT PRIMARY KEY, a INT);
@@ -114,9 +114,9 @@ EXPLAIN SELECT MAX(id + a) FROM t GROUP BY a;
 8 rows in set (0.18 sec)
 ```
 
-In the preceding example, the expression `id + a` is pushed down to TiFlash for calculation in advance. This helps reduce the amount of data to be transferred over the network, thus reducing the network transmission overhead and improving the overall calculation performance. This is indicated by the `mpp[tiflash]` value in the `task` column of the row where the `operator` column has the `plus(test.t.id, test.t.a)` value.
+在上述示例中，表达式 `id + a` 被提前下推到 TiFlash 进行计算。这有助于减少需要通过网络传输的数据量，从而减少网络传输开销并提高整体计算性能。这可以从 `operator` 列值包含 `plus(test.t.id, test.t.a)` 的行中 `task` 列值为 `mpp[tiflash]` 看出。
 
-### Example 3: Restrictions for pushdown
+### 示例 3：下推限制
 
 ```sql
 CREATE TABLE t(id INT PRIMARY KEY, a INT);
@@ -137,9 +137,9 @@ EXPLAIN SELECT id FROM t WHERE TIME(now()+ a) < '12:00:00';
 5 rows in set, 3 warnings (0.20 sec)
 ```
 
-The preceding example only performs `TableFullScan` on TiFlash. Other functions are calculated and filtered on `root` and are not pushed down to TiFlash.
+上述示例仅在 TiFlash 上执行 `TableFullScan`。其他函数在 `root` 上计算和过滤，未下推到 TiFlash。
 
-You can identify the operators and expressions that cannot be pushed down to TiFlash by running the following command:
+你可以通过运行以下命令来识别无法下推到 TiFlash 的算子和表达式：
 
 ```sql
 SHOW WARNINGS;
@@ -154,9 +154,9 @@ SHOW WARNINGS;
 3 rows in set (0.18 sec)
 ```
 
-The expressions in the preceding example cannot be completely pushed down to TiFlash, because the functions `Time` and `Cast` cannot be pushed down to TiFlash.
+上述示例中的表达式无法完全下推到 TiFlash，因为函数 `Time` 和 `Cast` 无法下推到 TiFlash。
 
-### Example 4: Window functions
+### 示例 4：窗口函数
 
 ```sql
 CREATE TABLE t(id INT PRIMARY KEY, c1 VARCHAR(100));
@@ -181,7 +181,7 @@ EXPLAIN SELECT id, ROW_NUMBER() OVER (PARTITION BY id > 10) FROM t;
 
 ```
 
-In this output, you can see that the `Window` operation has a value of `mpp[tiflash]` in the `task` column, indicating that the `ROW_NUMBER() OVER (PARTITION BY id > 10)` operation can be pushed down to TiFlash.
+在此输出中，你可以看到 `Window` 操作在 `task` 列中的值为 `mpp[tiflash]`，表明 `ROW_NUMBER() OVER (PARTITION BY id > 10)` 操作可以下推到 TiFlash。
 
 ```sql
 CREATE TABLE t(id INT PRIMARY KEY, c1 VARCHAR(100));
@@ -203,4 +203,4 @@ EXPLAIN SELECT id, MAX(id) OVER (PARTITION BY id > 10) FROM t;
 7 rows in set (0.0010 sec)
 ```
 
-In this output, you can see that the `Window` operation has a value of `root` in the `task` column, indicating that the `MAX(id) OVER (PARTITION BY id > 10)` operation cannot be pushed down to TiFlash. This is because `MAX()` is only supported for push-down as an aggregate function and not as a window function.
+在此输出中，你可以看到 `Window` 操作在 `task` 列中的值为 `root`，表明 `MAX(id) OVER (PARTITION BY id > 10)` 操作无法下推到 TiFlash。这是因为 `MAX()` 仅在作为聚合函数时支持下推，而作为窗口函数时不支持下推。

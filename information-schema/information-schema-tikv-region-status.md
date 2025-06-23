@@ -1,22 +1,22 @@
 ---
 title: TIKV_REGION_STATUS
-summary: Learn the `TIKV_REGION_STATUS` information_schema table.
+summary: 了解 `TIKV_REGION_STATUS` information_schema 表。
 ---
 
 # TIKV_REGION_STATUS
 
-The `TIKV_REGION_STATUS` table shows some basic information of TiKV Regions via PD's API, like the Region ID, starting and ending key-values, and read and write traffic.
+`TIKV_REGION_STATUS` 表通过 PD 的 API 显示了 TiKV Region 的一些基本信息，如 Region ID、起始和结束键值、读写流量等。
 
-> **Note:**
+> **注意：**
 >
-> This table is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> 此表在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC TIKV_REGION_STATUS;
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 +---------------------------+-------------+------+------+---------+-------+
@@ -46,32 +46,32 @@ The output is as follows:
 20 rows in set (0.00 sec)
 ```
 
-The descriptions of the columns in the `TIKV_REGION_STATUS` table are as follows:
+`TIKV_REGION_STATUS` 表中各列的描述如下：
 
-* `REGION_ID`: The ID of the Region.
-* `START_KEY`: The value of the start key of the Region.
-* `END_KEY`: The value of the end key of the Region.
-* `TABLE_ID`: The ID of the table to which the Region belongs.
-* `DB_NAME`: The name of the database to which `TABLE_ID` belongs.
-* `TABLE_NAME`: The name of the table to which the Region belongs.
-* `IS_INDEX`: Whether the Region data is an index. 0 means that it is not an index, while 1 means that it is an index. If the current Region contains both table data and index data, there will be multiple rows of records, and `IS_INDEX` is 0 and 1 respectively.
-* `INDEX_ID`: The ID of the index to which the Region belongs. If `IS_INDEX` is 0, the value of this column is NULL.
-* `INDEX_NAME`: The name of the index to which the Region belongs. If `IS_INDEX` is 0, the value of this column is NULL.
-* `IS_PARTITION`: Whether the table to which the Region belongs is partitioned.
-* `PARTITION_ID`: If the table to which the Region belongs is partitioned, this column displays the ID of the partition to which the Region belongs.
-* `PARTITION_NAME`: If the table to which the Region belongs is partitioned, this column displays the name of the partition to which the Region belongs.
-* `EPOCH_CONF_VER`: The version number of the Region configuration. The version number increases when a peer is added or removed.
-* `EPOCH_VERSION`: The current version number of the Region. The version number increases when the Region is split or merged.
-* `WRITTEN_BYTES`: The amount of data (bytes) written to the Region.
-* `READ_BYTES`: The amount of data (bytes) that has been read from the Region.
-* `APPROXIMATE_SIZE`: The approximate data size (MB) of the Region.
-* `APPROXIMATE_KEYS`: The approximate number of keys in the Region.
-* `REPLICATIONSTATUS_STATE`: The current replication status of the Region. The status might be `UNKNOWN`, `SIMPLE_MAJORITY`, or `INTEGRITY_OVER_LABEL`.
-* `REPLICATIONSTATUS_STATEID`: The identifier corresponding to `REPLICATIONSTATUS_STATE`.
+* `REGION_ID`：Region 的 ID。
+* `START_KEY`：Region 的起始键值。
+* `END_KEY`：Region 的结束键值。
+* `TABLE_ID`：Region 所属表的 ID。
+* `DB_NAME`：`TABLE_ID` 所属的数据库名称。
+* `TABLE_NAME`：Region 所属的表名。
+* `IS_INDEX`：Region 数据是否为索引。0 表示不是索引，1 表示是索引。如果当前 Region 同时包含表数据和索引数据，将会有多行记录，`IS_INDEX` 分别为 0 和 1。
+* `INDEX_ID`：Region 所属索引的 ID。如果 `IS_INDEX` 为 0，则该列值为 NULL。
+* `INDEX_NAME`：Region 所属索引的名称。如果 `IS_INDEX` 为 0，则该列值为 NULL。
+* `IS_PARTITION`：Region 所属的表是否为分区表。
+* `PARTITION_ID`：如果 Region 所属的表是分区表，该列显示 Region 所属分区的 ID。
+* `PARTITION_NAME`：如果 Region 所属的表是分区表，该列显示 Region 所属分区的名称。
+* `EPOCH_CONF_VER`：Region 配置的版本号。当添加或删除节点时，版本号会增加。
+* `EPOCH_VERSION`：Region 的当前版本号。当 Region 发生分裂或合并时，版本号会增加。
+* `WRITTEN_BYTES`：写入 Region 的数据量（字节）。
+* `READ_BYTES`：从 Region 读取的数据量（字节）。
+* `APPROXIMATE_SIZE`：Region 的近似数据大小（MB）。
+* `APPROXIMATE_KEYS`：Region 中近似的键数量。
+* `REPLICATIONSTATUS_STATE`：Region 当前的复制状态。状态可能为 `UNKNOWN`、`SIMPLE_MAJORITY` 或 `INTEGRITY_OVER_LABEL`。
+* `REPLICATIONSTATUS_STATEID`：与 `REPLICATIONSTATUS_STATE` 对应的标识符。
 
-Also, you can implement the `top confver`, `top read` and `top write` operations in pd-ctl via the `ORDER BY X LIMIT Y` operation on the `EPOCH_CONF_VER`, `WRITTEN_BYTES` and `READ_BYTES` columns.
+此外，你可以通过对 `EPOCH_CONF_VER`、`WRITTEN_BYTES` 和 `READ_BYTES` 列执行 `ORDER BY X LIMIT Y` 操作来实现 pd-ctl 中的 `top confver`、`top read` 和 `top write` 操作。
 
-You can query the top 3 Regions with the most write data using the following SQL statement:
+你可以使用以下 SQL 语句查询写入数据最多的前 3 个 Region：
 
 ```sql
 SELECT * FROM tikv_region_status ORDER BY written_bytes DESC LIMIT 3;

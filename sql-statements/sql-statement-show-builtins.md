@@ -1,20 +1,20 @@
 ---
 title: SHOW BUILTINS
-summary: The usage of SHOW BUILTINS in TiDB.
+summary: TiDB 中 SHOW BUILTINS 的使用。
 ---
 
 # SHOW BUILTINS
 
-`SHOW BUILTINS` is used to list all supported builtin functions in TiDB.
+`SHOW BUILTINS` 用于列出 TiDB 中所有支持的内置函数。
 
-## Synopsis
+## 语法概要
 
 ```ebnf+diagram
 ShowBuiltinsStmt ::=
     "SHOW" "BUILTINS"
 ```
 
-## Examples
+## 示例
 
 ```sql
 SHOW BUILTINS;
@@ -297,6 +297,6 @@ SHOW BUILTINS;
 268 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension to MySQL syntax.
+此语句是 TiDB 对 MySQL 语法的扩展。

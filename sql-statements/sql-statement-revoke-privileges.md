@@ -1,13 +1,13 @@
 ---
-title: REVOKE <privileges> | TiDB SQL Statement Reference
-summary: An overview of the usage of REVOKE <privileges> for the TiDB database.
+title: REVOKE <privileges> | TiDB SQL 语句参考
+summary: TiDB 数据库中 REVOKE <privileges> 的使用概述。
 ---
 
 # `REVOKE <privileges>`
 
-This statement removes privileges from an existing user. Executing this statement requires the `GRANT OPTION` privilege and all privileges you revoke.
+此语句用于撤销现有用户的权限。执行此语句需要 `GRANT OPTION` 权限以及你要撤销的所有权限。
 
-## Synopsis
+## 语法概要
 
 ```ebnf+diagram
 RevokeStmt ::=
@@ -56,7 +56,7 @@ UserSpecList ::=
     UserSpec ( ',' UserSpec )*
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> CREATE USER 'newuser' IDENTIFIED BY 'mypassword';
@@ -92,17 +92,17 @@ mysql> SHOW GRANTS FOR 'newuser';
 ERROR 1141 (42000): There is no such grant defined for user 'newuser' on host '%'
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-* In TiDB, after the `REVOKE <privileges>` statement is executed successfully, the execution result takes effect immediately on the current connection. Whereas [in MySQL, for some privileges, the execution results take effect only on subsequent connections](https://dev.mysql.com/doc/refman/8.0/en/privilege-changes.html). See [TiDB #39356](https://github.com/pingcap/tidb/issues/39356) for details.
+* 在 TiDB 中，`REVOKE <privileges>` 语句成功执行后，执行结果会立即在当前连接上生效。而[在 MySQL 中，对于某些权限，执行结果仅在后续连接中生效](https://dev.mysql.com/doc/refman/8.0/en/privilege-changes.html)。详情请参见 [TiDB #39356](https://github.com/pingcap/tidb/issues/39356)。
 
-## See also
+## 另请参阅
 
 * [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
 * [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
 
 <CustomContent platform="tidb">
 
-* [Privilege Management](/privilege-management.md)
+* [权限管理](/privilege-management.md)
 
 </CustomContent>

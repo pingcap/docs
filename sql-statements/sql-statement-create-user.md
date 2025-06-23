@@ -1,13 +1,13 @@
 ---
-title: CREATE USER | TiDB SQL Statement Reference
-summary: An overview of the usage of CREATE USER for the TiDB database.
+title: CREATE USER | TiDB SQL 语句参考
+summary: TiDB 数据库中 CREATE USER 的使用概述。
 ---
 
 # CREATE USER
 
-This statement creates a new user, specified with a password. In the MySQL privilege system, a user is the combination of a username and the host from which they are connecting from. Thus, it is possible to create a user `'newuser2'@'192.168.1.1'` who is only able to connect from the IP address `192.168.1.1`. It is also possible to have two users have the same user-portion, and different permissions as they login from different hosts.
+此语句用于创建一个新用户，并指定密码。在 MySQL 权限系统中，用户是用户名和其连接来源主机的组合。因此，可以创建一个只能从 IP 地址 `192.168.1.1` 连接的用户 `'newuser2'@'192.168.1.1'`。同时也可以让两个用户具有相同的用户名部分，但因为从不同的主机登录而具有不同的权限。
 
-## Synopsis
+## 语法
 
 ```ebnf+diagram
 CreateUserStmt ::=
@@ -48,37 +48,37 @@ RequireClauseOpt ::= ('REQUIRE' ('NONE' | 'SSL' | 'X509' | RequireListElement ('
 RequireListElement ::= 'ISSUER' Issuer | 'SUBJECT' Subject | 'CIPHER' Cipher | 'SAN' SAN | 'TOKEN_ISSUER' TokenIssuer
 ```
 
-## Examples
+## 示例
 
-Create a user with the `newuserpassword` password.
+创建一个密码为 `newuserpassword` 的用户：
 
 ```sql
 mysql> CREATE USER 'newuser' IDENTIFIED BY 'newuserpassword';
 Query OK, 1 row affected (0.04 sec)
 ```
 
-Create a user who can only log in to `192.168.1.1`.
+创建一个只能从 `192.168.1.1` 登录的用户：
 
 ```sql
 mysql> CREATE USER 'newuser2'@'192.168.1.1' IDENTIFIED BY 'newuserpassword';
 Query OK, 1 row affected (0.02 sec)
 ```
 
-Create a user who is enforced to log in using TLS connection.
+创建一个必须使用 TLS 连接登录的用户：
 
 ```sql
 CREATE USER 'newuser3'@'%' IDENTIFIED BY 'newuserpassword' REQUIRE SSL;
 Query OK, 1 row affected (0.02 sec)
 ```
 
-Create a user who is required to use X.509 certificate at login.
+创建一个登录时需要使用 X.509 证书的用户：
 
 ```sql
 CREATE USER 'newuser4'@'%' IDENTIFIED BY 'newuserpassword' REQUIRE ISSUER '/C=US/ST=California/L=San Francisco/O=PingCAP';
 Query OK, 1 row affected (0.02 sec)
 ```
 
-Create a user who is locked upon creation.
+创建一个创建时就被锁定的用户：
 
 ```sql
 CREATE USER 'newuser5'@'%' ACCOUNT LOCK;
@@ -88,7 +88,7 @@ CREATE USER 'newuser5'@'%' ACCOUNT LOCK;
 Query OK, 1 row affected (0.02 sec)
 ```
 
-Create a user with a comment.
+创建一个带有注释的用户：
 
 ```sql
 CREATE USER 'newuser6'@'%' COMMENT 'This user is created only for test';
@@ -104,7 +104,7 @@ SELECT * FROM information_schema.user_attributes;
 1 rows in set (0.00 sec)
 ```
 
-Create a user with an `email` attribute.
+创建一个带有 `email` 属性的用户：
 
 ```sql
 CREATE USER 'newuser7'@'%' ATTRIBUTE '{"email": "user@pingcap.com"}';
@@ -120,7 +120,7 @@ SELECT * FROM information_schema.user_attributes;
 1 rows in set (0.00 sec)
 ```
 
-Create a user who is not allowed to reuse the last 5 passwords:
+创建一个不允许重复使用最近 5 个密码的用户：
 
 ```sql
 CREATE USER 'newuser8'@'%' PASSWORD HISTORY 5;
@@ -130,7 +130,7 @@ CREATE USER 'newuser8'@'%' PASSWORD HISTORY 5;
 Query OK, 1 row affected (0.02 sec)
 ```
 
-Create a user whose password is manually expired:
+创建一个密码已手动过期的用户：
 
 ```sql
 CREATE USER 'newuser9'@'%' PASSWORD EXPIRE;
@@ -140,7 +140,7 @@ CREATE USER 'newuser9'@'%' PASSWORD EXPIRE;
 Query OK, 1 row affected (0.02 sec)
 ```
 
-Create a user that uses the resource group `rg1`.
+创建一个使用资源组 `rg1` 的用户：
 
 ```sql
 CREATE USER 'newuser7'@'%' RESOURCE GROUP rg1;
@@ -156,19 +156,19 @@ SELECT USER, HOST, USER_ATTRIBUTES FROM MYSQL.USER WHERE USER='newuser7';
 1 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The following `CREATE USER` options are not yet supported by TiDB, and will be parsed but ignored:
+以下 `CREATE USER` 选项尚未被 TiDB 支持，将被解析但会被忽略：
 
-* TiDB does not support `WITH MAX_QUERIES_PER_HOUR`, `WITH MAX_UPDATES_PER_HOUR`, and `WITH MAX_USER_CONNECTIONS` options.
-* TiDB does not support the `DEFAULT ROLE` option.
+* TiDB 不支持 `WITH MAX_QUERIES_PER_HOUR`、`WITH MAX_UPDATES_PER_HOUR` 和 `WITH MAX_USER_CONNECTIONS` 选项。
+* TiDB 不支持 `DEFAULT ROLE` 选项。
 
-## See also
+## 另请参阅
 
 <CustomContent platform="tidb">
 
-* [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
-* [Privilege Management](/privilege-management.md)
+* [与 MySQL 的安全兼容性](/security-compatibility-with-mysql.md)
+* [权限管理](/privilege-management.md)
 
 </CustomContent>
 

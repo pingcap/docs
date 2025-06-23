@@ -1,148 +1,148 @@
 ---
-title: Table Attributes
-summary: Learn how to use the table attribute feature of TiDB.
+title: 表属性
+summary: 了解如何使用 TiDB 的表属性功能。
 ---
 
-# Table Attributes
+# 表属性
 
-The Table Attributes feature is introduced in TiDB v5.3.0. Using this feature, you can add specific attributes to a table or partition to perform the operations corresponding to the attributes. For example, you can use table attributes to control the Region merge behavior.
+表属性功能在 TiDB v5.3.0 中引入。使用此功能，你可以为表或分区添加特定属性，以执行与这些属性相对应的操作。例如，你可以使用表属性来控制 Region 合并行为。
 
 <CustomContent platform="tidb">
 
-Currently, TiDB only supports adding the `merge_option` attribute to a table or partition to control the Region merge behavior. The `merge_option` attribute is only part of how to deal with hotspots. For more information, refer to [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
+目前，TiDB 仅支持为表或分区添加 `merge_option` 属性来控制 Region 合并行为。`merge_option` 属性只是处理热点问题的一部分。更多信息，请参考[热点问题处理](/troubleshoot-hot-spot-issues.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Currently, TiDB only supports adding the `merge_option` attribute to a table or partition to control the Region merge behavior. The `merge_option` attribute is only part of how to deal with hotspots.
+目前，TiDB 仅支持为表或分区添加 `merge_option` 属性来控制 Region 合并行为。`merge_option` 属性只是处理热点问题的一部分。
 
 </CustomContent>
 
-> **Note:**
+> **注意：**
 >
-> - When you use TiDB Binlog or TiCDC to perform replication or use BR to perform incremental backup, the replication or backup operations skip the DDL statement that sets table attributes. To use table attributes in the downstream or in the backup cluster, you need to manually execute the DDL statement in the downstream or in the backup cluster.
+> - 当你使用 TiDB Binlog 或 TiCDC 执行复制，或使用 BR 执行增量备份时，复制或备份操作会跳过设置表属性的 DDL 语句。要在下游或备份集群中使用表属性，你需要在下游或备份集群中手动执行 DDL 语句。
 
-## Usage
+## 用法
 
-The table attribute is in the form of `key=value`. Multiple attributes are separated by commas. In the following examples, `t` is the name of the table to be modified, `p` is the name of the partition to be modified. Items in `[]` are optional.
+表属性的形式为 `key=value`。多个属性之间用逗号分隔。在以下示例中，`t` 是要修改的表名，`p` 是要修改的分区名。`[]` 中的项为可选项。
 
-+ Set attributes for a table or partition:
++ 为表或分区设置属性：
 
     ```sql
     ALTER TABLE t [PARTITION p] ATTRIBUTES [=] 'key=value[, key1=value1...]';
     ```
 
-+ Reset attributes for a table or partition:
++ 重置表或分区的属性：
 
     ```sql
     ALTER TABLE t [PARTITION p] ATTRIBUTES [=] DEFAULT;
     ```
 
-+ See the attributes of all tables and partitions:
++ 查看所有表和分区的属性：
 
     ```sql
     SELECT * FROM information_schema.attributes;
     ```
 
-+ See the attribute configured to a table or partition:
++ 查看表或分区配置的属性：
 
     ```sql
     SELECT * FROM information_schema.attributes WHERE id='schema/t[/p]';
     ```
 
-+ See all tables and partitions that have a specific attribute:
++ 查看具有特定属性的所有表和分区：
 
     ```sql
     SELECT * FROM information_schema.attributes WHERE attributes LIKE '%key%';
     ```
 
-## Attribute override rules
+## 属性覆盖规则
 
-The attribute configured to a table takes effect on all partitions of the table. However, there is one exception: If the table and partition are configured with the same attribute but different attribute values, the partition attribute overrides the table attribute. For example, suppose that the table `t` is configured with the `key=value` attribute, and the partition `p` is configured with `key=value1`.
+为表配置的属性对该表的所有分区都生效。但有一个例外：如果表和分区配置了相同的属性但属性值不同，分区属性会覆盖表属性。例如，假设表 `t` 配置了 `key=value` 属性，分区 `p` 配置了 `key=value1`。
 
 ```sql
 ALTER TABLE t ATTRIBUTES[=]'key=value';
 ALTER TABLE t PARTITION p ATTRIBUTES[=]'key=value1';
 ```
 
-In this case, `key=value1` is the attribute that actually takes effect on the `p1` partition.
+在这种情况下，`key=value1` 是在 `p1` 分区上实际生效的属性。
 
-## Control the Region merge behavior using table attributes
+## 使用表属性控制 Region 合并行为
 
-### User scenarios
+### 使用场景
 
-If there is a write hotspot or read hotspot, you can use table attributes to control the Region merge behavior. You can first add the `merge_option` attribute to a table or partition and then set its value to `deny`. The two scenarios are as follows.
+如果存在写热点或读热点，你可以使用表属性来控制 Region 合并行为。你可以首先为表或分区添加 `merge_option` 属性，然后将其值设置为 `deny`。以下是两种场景。
 
-#### Write hotspot on a newly created table or partition
+#### 新建表或分区的写热点
 
-If a hotspot issue occurs when data is written to a newly created table or partition, you usually need to split and scatter Regions. However, if there is a certain time interval between the split/scatter operation and writes, these operations do not truly avoid the write hotspot. This is because the split operation performed when the table or partition is created produces empty Regions, so if the time interval exists, the split Regions might be merged. To handle this case, you can add the `merge_option` attribute to the table or partition and set the attribute value to `deny`.
+如果在向新建的表或分区写入数据时出现热点问题，通常需要拆分和打散 Region。但是，如果拆分/打散操作与写入之间存在一定的时间间隔，这些操作并不能真正避免写热点。这是因为在创建表或分区时执行的拆分操作会产生空的 Region，所以如果存在时间间隔，拆分的 Region 可能会被合并。要处理这种情况，你可以为表或分区添加 `merge_option` 属性，并将属性值设置为 `deny`。
 
-#### Periodic read hotspot in read-only scenarios
+#### 只读场景中的周期性读热点
 
-Suppose that in a read-only scenario, you try to reduce the periodic read hotspot that occurs on a table or partition by manually splitting Regions, and you do not want the manually split Regions to be merged after the hotspot issue is resolved. In this case, you can add the `merge_option` attribute to the table or partition and set its value to `deny`.
+假设在只读场景中，你尝试通过手动拆分 Region 来减少表或分区上出现的周期性读热点，并且你不希望手动拆分的 Region 在热点问题解决后被合并。在这种情况下，你可以为表或分区添加 `merge_option` 属性，并将其值设置为 `deny`。
 
-### Usage
+### 用法
 
-+ Prevent the Regions of a table from merging:
++ 防止表的 Region 合并：
 
     ```sql
     ALTER TABLE t ATTRIBUTES 'merge_option=deny';
     ```
 
-+ Allow merging Regions belonging to a table:
++ 允许合并属于表的 Region：
 
     ```sql
     ALTER TABLE t ATTRIBUTES 'merge_option=allow';
     ```
 
-+ Reset attributes of a table:
++ 重置表的属性：
 
     ```sql
     ALTER TABLE t ATTRIBUTES DEFAULT;
     ```
 
-+ Prevent the Regions of a partition from merging:
++ 防止分区的 Region 合并：
 
     ```sql
     ALTER TABLE t PARTITION p ATTRIBUTES 'merge_option=deny';
     ```
 
-+ Allow merging Regions belonging to a partition:
++ 允许合并属于分区的 Region：
 
     ```sql
     ALTER TABLE t PARTITION p ATTRIBUTES 'merge_option=allow';
     ```
 
-+ See all tables or partitions configured the `merge_option` attribution:
++ 查看所有配置了 `merge_option` 属性的表或分区：
 
     ```sql
     SELECT * FROM information_schema.attributes WHERE attributes LIKE '%merge_option%';
     ```
 
-### Attribute override rules
+### 属性覆盖规则
 
 ```sql
 ALTER TABLE t ATTRIBUTES 'merge_option=deny';
 ALTER TABLE t PARTITION p ATTRIBUTES 'merge_option=allow';
 ```
 
-When the above two attributes are configured at the same time, the Regions belonging to the partition `p` can actually be merged. When the attribute of the partition is reset, the partition `p` inherits the attribute from the table `t`, and the Regions cannot be merged.
+当同时配置上述两个属性时，属于分区 `p` 的 Region 实际上可以被合并。当重置分区的属性时，分区 `p` 会继承表 `t` 的属性，Region 不能被合并。
 
 <CustomContent platform="tidb">
 
-> **Note:**
+> **注意：**
 >
-> - For a table with partitions, if the `merge_option` attribute is configured at the table level only, even if `merge_option=allow`, the table is still split into multiple Regions by default according to the actual number of partitions. To merge all Regions, you need to [reset the attribute of the table](#usage).
-> - When using the `merge_option` attribute, you need to pay attention to the PD configuration parameter [`split-merge-interval`](/pd-configuration-file.md#split-merge-interval). Suppose that the `merge_option` attribute is not configured. In this case, if Regions meet conditions, Regions can be merged after the interval specified by `split-merge-interval`. If the `merge_option` attribute is configured, PD decides whether to merge Regions after the specified interval according to the `merge_option` configuration.
+> - 对于带有分区的表，如果仅在表级别配置了 `merge_option` 属性，即使 `merge_option=allow`，该表默认仍会根据实际分区数量拆分为多个 Region。要合并所有 Region，你需要[重置表的属性](#用法)。
+> - 使用 `merge_option` 属性时，你需要注意 PD 配置参数 [`split-merge-interval`](/pd-configuration-file.md#split-merge-interval)。假设未配置 `merge_option` 属性。在这种情况下，如果 Region 满足条件，Region 可以在 `split-merge-interval` 指定的间隔后合并。如果配置了 `merge_option` 属性，PD 会根据 `merge_option` 配置在指定间隔后决定是否合并 Region。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注意：**
 >
-> - For a table with partitions, if the `merge_option` attribute is configured at the table level only, even if `merge_option=allow`, the table is still split into multiple Regions by default according to the actual number of partitions. To merge all Regions, you need to [reset the attribute of the table](#usage).
-> - Suppose that the `merge_option` attribute is not configured. In this case, if Regions meet conditions, Regions can be merged after one hour. If the `merge_option` attribute is configured, PD decides whether to merge Regions after one hour according to the `merge_option` configuration.
+> - 对于带有分区的表，如果仅在表级别配置了 `merge_option` 属性，即使 `merge_option=allow`，该表默认仍会根据实际分区数量拆分为多个 Region。要合并所有 Region，你需要[重置表的属性](#用法)。
+> - 假设未配置 `merge_option` 属性。在这种情况下，如果 Region 满足条件，Region 可以在一小时后合并。如果配置了 `merge_option` 属性，PD 会根据 `merge_option` 配置在一小时后决定是否合并 Region。
 
 </CustomContent>

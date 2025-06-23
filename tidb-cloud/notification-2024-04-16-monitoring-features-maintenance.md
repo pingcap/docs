@@ -1,46 +1,46 @@
 ---
-title: 2024-04-16 TiDB Cloud Monitoring Features Maintenance Notification
-summary: Learn about the details of the TiDB Cloud monitoring features maintenance on April 16, 2024, such as the maintenance window, reason, and impact.
+title: 2024-04-16 TiDB Cloud 监控功能维护通知
+summary: 了解 2024 年 4 月 16 日 TiDB Cloud 监控功能维护的详细信息，如维护时间窗口、原因和影响。
 ---
 
-# [2024-04-16] TiDB Cloud Monitoring Features Maintenance Notification
+# [2024-04-16] TiDB Cloud 监控功能维护通知
 
-This notification describes the details that you need to know about the TiDB Cloud [monitoring features](/tidb-cloud/monitor-tidb-cluster.md) maintenance on April 16, 2024.
+本通知描述了你需要了解的 2024 年 4 月 16 日 TiDB Cloud [监控功能](/tidb-cloud/monitor-tidb-cluster.md)维护的详细信息。
 
-## Maintenance window
+## 维护时间窗口
 
-- Start time: 2024-04-16 08:00 (UTC+0)
-- End time: 2024-04-16 12:00 (UTC+0)
-- Duration: 4 hours
+- 开始时间：2024-04-16 08:00 (UTC+0)
+- 结束时间：2024-04-16 12:00 (UTC+0)
+- 持续时间：4 小时
 
-## Impact
+## 影响
 
-### Affected regions
+### 受影响的区域
 
-During the maintenance window, the monitoring features in the following regions will be affected:
+在维护时间窗口期间，以下区域的监控功能将受到影响：
 
-- TiDB Cloud Dedicated clusters：
-    - Cloud Provider: AWS, Region: Tokyo (ap-northeast-1)
-    - Cloud Provider: AWS, Region: N. Virginia (us-east-1)
+- TiDB Cloud Dedicated 集群：
+    - 云服务提供商：AWS，区域：东京 (ap-northeast-1)
+    - 云服务提供商：AWS，区域：弗吉尼亚北部 (us-east-1)
 
-- TiDB Cloud Serverless clusters：
-    - Cloud Provider: AWS, Region: Tokyo (ap-northeast-1)
-    - Cloud Provider: AWS, Region: N. Virginia (us-east-1)
+- TiDB Cloud Serverless 集群：
+    - 云服务提供商：AWS，区域：东京 (ap-northeast-1)
+    - 云服务提供商：AWS，区域：弗吉尼亚北部 (us-east-1)
 
-### Affected monitoring features
+### 受影响的监控功能
 
-> **Note:**
+> **注意：**
 >
-> The maintenance only affects monitoring features in the TiDB cluster. All the other functionalities remain unaffected. You can continue to manage the TiDB cluster and perform read/write operations or other operations as usual.
+> 维护仅影响 TiDB 集群中的监控功能。所有其他功能保持不变。你可以继续管理 TiDB 集群并照常执行读写操作或其他操作。
 
-- The **Metrics** page will be temporarily unavailable for several short periods (each less than 20 minutes).
-- The **Slow Query** page will be temporarily unavailable for several short periods (each less than 5 minutes).
-- The metrics integration with Prometheus, DataDog, and NewRelic might have breakpoints.
+- **指标**页面将在几个短时间段内暂时不可用（每次不超过 20 分钟）。
+- **慢查询**页面将在几个短时间段内暂时不可用（每次不超过 5 分钟）。
+- 与 Prometheus、DataDog 和 NewRelic 的指标集成可能会出现断点。
 
-## Completion and resumption
+## 完成和恢复
 
-Once the maintenance is successfully completed, the affected functionalities will be reinstated, offering you an even better experience.
+一旦维护成功完成，受影响的功能将恢复，为你提供更好的体验。
 
-## Get support
+## 获取支持
 
-If you have any questions or need assistance, contact our [support team](/tidb-cloud/tidb-cloud-support.md). We are here to address your concerns and provide any necessary guidance.
+如果你有任何问题或需要帮助，请联系我们的[支持团队](/tidb-cloud/tidb-cloud-support.md)。我们随时为你解答疑虑并提供必要的指导。

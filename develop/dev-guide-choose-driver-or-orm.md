@@ -1,50 +1,50 @@
 ---
-title: Choose Driver or ORM
-summary: Learn how to choose a driver or ORM framework to connect to TiDB.
+title: 选择驱动或 ORM
+summary: 了解如何选择驱动或 ORM 框架来连接 TiDB。
 ---
 
-# Choose Driver or ORM
+# 选择驱动或 ORM
 
-> **Note:**
+> **注意：**
 >
-> TiDB provides the following two support levels for drivers and ORMs:
+> TiDB 为驱动和 ORM 提供以下两个支持级别：
 >
-> - **Full**: indicates that TiDB is compatible with most features of the tool and maintains compatibility with its newer versions. PingCAP will periodically conduct compatibility tests with the latest version of [Third-party tools supported by TiDB](/develop/dev-guide-third-party-support.md).
-> - **Compatible**: indicates that because the corresponding third-party tool is adapted to MySQL and TiDB is highly compatible with the MySQL protocol, so TiDB can use most features of the tool. However, PingCAP has not completed a full test on all features of the tool, which might lead to some unexpected behaviors.
+> - **完全支持**：表示 TiDB 与该工具的大多数功能兼容，并保持与其新版本的兼容性。PingCAP 会定期对[TiDB 支持的第三方工具](/develop/dev-guide-third-party-support.md)的最新版本进行兼容性测试。
+> - **兼容**：表示由于相应的第三方工具适配了 MySQL，而 TiDB 与 MySQL 协议高度兼容，因此 TiDB 可以使用该工具的大多数功能。但是，PingCAP 尚未对该工具的所有功能进行完整测试，这可能会导致一些意外行为。
 >
-> For more information, refer to [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md).
+> 更多信息，请参考 [TiDB 支持的第三方工具](/develop/dev-guide-third-party-support.md)。
 
-TiDB is highly compatible with the MySQL protocol but some features are incompatible with MySQL. For a full list of compatibility differences, see [MySQL Compatibility](/mysql-compatibility.md).
+TiDB 与 MySQL 协议高度兼容，但某些功能与 MySQL 不兼容。有关兼容性差异的完整列表，请参阅 [MySQL 兼容性](/mysql-compatibility.md)。
 
 ## Java
 
-This section describes how to use drivers and ORM frameworks in Java.
+本节介绍如何在 Java 中使用驱动和 ORM 框架。
 
-### Java drivers
+### Java 驱动
 
 <SimpleTab>
 <div label="MySQL-JDBC">
 
-Support level: **Full**
+支持级别：**完全支持**
 
-You can follow the [MySQL documentation](https://dev.mysql.com/doc/connector-j/en/) to download and configure a Java JDBC driver. It is recommended to use the latest GA version of MySQL Connector/J with TiDB v6.3.0 or later.
+你可以按照 [MySQL 文档](https://dev.mysql.com/doc/connector-j/)下载和配置 Java JDBC 驱动。建议在 TiDB v6.3.0 或更高版本中使用最新的 GA 版本 MySQL Connector/J。
 
-> **Warning:**
+> **警告：**
 >
-> There is a [bug](https://bugs.mysql.com/bug.php?id=106252) in the MySQL Connector/J 8.0 versions before 8.0.31 (see [MySQL JDBC bugs](/develop/dev-guide-third-party-tools-compatibility.md#mysql-jdbc-bugs) for details), which might cause threads to hang when using TiDB versions earlier than v6.3.0. To avoid this issue, do **NOT** use MySQL Connector/J 8.0.31 or an earlier version.
+> MySQL Connector/J 8.0.31 之前的 8.0 版本中存在一个[错误](https://bugs.mysql.com/bug.php?id=106252)（详见 [MySQL JDBC 错误](/develop/dev-guide-third-party-tools-compatibility.md#mysql-jdbc-bugs)），在使用早于 v6.3.0 的 TiDB 版本时可能会导致线程挂起。为避免此问题，请**不要**使用 MySQL Connector/J 8.0.31 或更早版本。
 
-For an example of how to build a complete application, see [Build a simple CRUD app with TiDB and JDBC](/develop/dev-guide-sample-application-java-jdbc.md).
+有关如何构建完整应用程序的示例，请参阅[使用 TiDB 和 JDBC 构建简单的 CRUD 应用程序](/develop/dev-guide-sample-application-java-jdbc.md)。
 
 </div>
 <div label="TiDB-JDBC">
 
-Support level: **Full**
+支持级别：**完全支持**
 
-[TiDB-JDBC](https://github.com/pingcap/mysql-connector-j) is a customized Java driver based on MySQL 8.0.29. Compiled based on MySQL official version 8.0.29, TiDB-JDBC fixes the bug of multi-parameter and multi-field EOF in the prepare mode in the original JDBC, and adds features such as automatic TiCDC snapshot maintenance and the SM3 authentication plugin.
+[TiDB-JDBC](https://github.com/pingcap/mysql-connector-j) 是基于 MySQL 8.0.29 的定制 Java 驱动。TiDB-JDBC 基于 MySQL 官方版本 8.0.29 编译，修复了原始 JDBC 在预处理模式下多参数和多字段 EOF 的错误，并添加了自动 TiCDC 快照维护和 SM3 认证插件等功能。
 
-The authentication based on SM3 is only supported in TiDB's TiDB-JDBC.
+基于 SM3 的认证仅在 TiDB 的 TiDB-JDBC 中支持。
 
-If you are using Maven, add the following content to the `<dependencies></dependencies>` section in the `pom.xml` file:
+如果你使用 Maven，请在 `pom.xml` 文件的 `<dependencies></dependencies>` 部分添加以下内容：
 
 ```xml
 <dependency>
@@ -54,7 +54,7 @@ If you are using Maven, add the following content to the `<dependencies></depend
 </dependency>
 ```
 
-If you need to enable SM3 authentication, add the following content to the `<dependencies></dependencies>` section in the `pom.xml` file:
+如果你需要启用 SM3 认证，请在 `pom.xml` 文件的 `<dependencies></dependencies>` 部分添加以下内容：
 
 ```xml
 <dependency>
@@ -74,7 +74,7 @@ If you need to enable SM3 authentication, add the following content to the `<dep
 </dependency>
 ```
 
-If you use Gradle, add the following content to `dependencies`:
+如果你使用 Gradle，请在 `dependencies` 中添加以下内容：
 
 ```gradle
 implementation group: 'io.github.lastincisor', name: 'mysql-connector-java', version: '8.0.29-tidb-1.0.0'
@@ -85,22 +85,22 @@ implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67
 </div>
 </SimpleTab>
 
-### Java ORM frameworks
+### Java ORM 框架
 
 <SimpleTab>
 <div label="Hibernate">
 
-> **Note:**
+> **注意：**
 >
-> - Currently, Hibernate does [not support nested transactions](https://stackoverflow.com/questions/37927208/nested-transaction-in-spring-app-with-jpa-postgres).
+> - 目前，Hibernate [不支持嵌套事务](https://stackoverflow.com/questions/37927208/nested-transaction-in-spring-app-with-jpa-postgres)。
 >
-> - Since v6.2.0, TiDB supports [savepoint](/sql-statements/sql-statement-savepoint.md). To use the `Propagation.NESTED` transaction propagation option in `@Transactional`, that is, to set `@Transactional(propagation = Propagation.NESTED)`, make sure that your TiDB is v6.2.0 or later.
+> - 从 v6.2.0 开始，TiDB 支持[保存点](/sql-statements/sql-statement-savepoint.md)。要在 `@Transactional` 中使用 `Propagation.NESTED` 事务传播选项，即设置 `@Transactional(propagation = Propagation.NESTED)`，请确保你的 TiDB 是 v6.2.0 或更高版本。
 
-Support level: **Full**
+支持级别：**完全支持**
 
-To avoid manually managing complex relationships between different dependencies of an application, you can use [Gradle](https://gradle.org/install) or [Maven](https://maven.apache.org/install.html) to get all dependencies of your application, including those indirect ones. Note that only Hibernate `6.0.0.Beta2` or above supports the TiDB dialect.
+为避免手动管理应用程序不同依赖项之间的复杂关系，你可以使用 [Gradle](https://gradle.org/install) 或 [Maven](https://maven.apache.org/install.html) 获取应用程序的所有依赖项，包括那些间接依赖项。请注意，只有 Hibernate `6.0.0.Beta2` 或更高版本支持 TiDB 方言。
 
-If you are using Maven, add the following to your `<dependencies></dependencies>`:
+如果你使用 Maven，请在 `<dependencies></dependencies>` 中添加以下内容：
 
 ```xml
 <dependency>
@@ -116,31 +116,31 @@ If you are using Maven, add the following to your `<dependencies></dependencies>
 </dependency>
 ```
 
-If you are using Gradle, add the following to your `dependencies`:
+如果你使用 Gradle，请在 `dependencies` 中添加以下内容：
 
 ```gradle
 implementation 'org.hibernate:hibernate-core:6.2.3.Final'
 implementation 'mysql:mysql-connector-java:8.0.33'
 ```
 
-- For an example of using Hibernate to build a TiDB application by native Java, see [Build a simple CRUD app with TiDB and Hibernate](/develop/dev-guide-sample-application-java-hibernate.md).
-- For an example of using Spring Data JPA or Hibernate to build a TiDB application by Spring, see [Build a TiDB app using Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md).
+- 有关使用原生 Java 的 Hibernate 构建 TiDB 应用程序的示例，请参阅[使用 TiDB 和 Hibernate 构建简单的 CRUD 应用程序](/develop/dev-guide-sample-application-java-hibernate.md)。
+- 有关使用 Spring Data JPA 或 Hibernate 通过 Spring 构建 TiDB 应用程序的示例，请参阅[使用 Spring Boot 构建 TiDB 应用程序](/develop/dev-guide-sample-application-java-spring-boot.md)。
 
-In addition, you need to specify the TiDB dialect in your [Hibernate configuration file](https://www.tutorialspoint.com/hibernate/hibernate_configuration.htm): `org.hibernate.dialect.TiDBDialect`, which is only supported by Hibernate `6.0.0.Beta2` or above. If your `Hibernate` version is earlier than `6.0.0.Beta2`, upgrade it first.
+此外，你需要在 [Hibernate 配置文件](https://www.tutorialspoint.com/hibernate/hibernate_configuration.htm)中指定 TiDB 方言：`org.hibernate.dialect.TiDBDialect`，该方言仅在 Hibernate `6.0.0.Beta2` 或更高版本中支持。如果你的 `Hibernate` 版本早于 `6.0.0.Beta2`，请先升级。
 
-> **Note:**
+> **注意：**
 >
-> If you are unable to upgrade your `Hibernate` version, use the MySQL 5.7 dialect `org.hibernate.dialect.MySQL57Dialect` instead. However, this setting might cause unpredictable results and the absence of some TiDB-specific features, such as [sequences](/sql-statements/sql-statement-create-sequence.md).
+> 如果你无法升级 `Hibernate` 版本，请使用 MySQL 5.7 方言 `org.hibernate.dialect.MySQL57Dialect` 代替。但是，此设置可能会导致不可预测的结果，并且缺少一些 TiDB 特有的功能，例如[序列](/sql-statements/sql-statement-create-sequence.md)。
 
 </div>
 
 <div label="MyBatis">
 
-Support level: **Full**
+支持级别：**完全支持**
 
-To avoid manually managing complex relationships between different dependencies of an application, you can use [Gradle](https://gradle.org/install) or [Maven](https://maven.apache.org/install.html) to get all dependencies of your application, including those indirect dependencies.
+为避免手动管理应用程序不同依赖项之间的复杂关系，你可以使用 [Gradle](https://gradle.org/install) 或 [Maven](https://maven.apache.org/install.html) 获取应用程序的所有依赖项，包括那些间接依赖项。
 
-If you are using Maven, add the following to your `<dependencies></dependencies>`:
+如果你使用 Maven，请在 `<dependencies></dependencies>` 中添加以下内容：
 
 ```xml
 <dependency>
@@ -156,34 +156,34 @@ If you are using Maven, add the following to your `<dependencies></dependencies>
 </dependency>
 ```
 
-If you are using Gradle, add the following to your `dependencies`:
+如果你使用 Gradle，请在 `dependencies` 中添加以下内容：
 
 ```gradle
 implementation 'org.mybatis:mybatis:3.5.13'
 implementation 'mysql:mysql-connector-java:8.0.33'
 ```
 
-For an example of using MyBatis to build a TiDB application, see [Build a simple CRUD app with TiDB and MyBatis](/develop/dev-guide-sample-application-java-mybatis.md).
+有关使用 MyBatis 构建 TiDB 应用程序的示例，请参阅[使用 TiDB 和 MyBatis 构建简单的 CRUD 应用程序](/develop/dev-guide-sample-application-java-mybatis.md)。
 
 </div>
 
 </SimpleTab>
 
-### Java client load balancing
+### Java 客户端负载均衡
 
 **tidb-loadbalance**
 
-Support level: **Full**
+支持级别：**完全支持**
 
-[tidb-loadbalance](https://github.com/pingcap/tidb-loadbalance) is a load balancing component on the application side. With tidb-loadbalance, you can automatically maintain the node information of TiDB server and distribute JDBC connections on the client using the tidb-loadbalance policies. Using a direct JDBC connection between the client application and TiDB server has higher performance than using the load balancing component.
+[tidb-loadbalance](https://github.com/pingcap/tidb-loadbalance) 是应用程序端的负载均衡组件。使用 tidb-loadbalance，你可以自动维护 TiDB 服务器的节点信息，并使用 tidb-loadbalance 策略在客户端分配 JDBC 连接。客户端应用程序和 TiDB 服务器之间使用直接 JDBC 连接的性能比使用负载均衡组件更高。
 
-Currently, tidb-loadbalance supports the following policies: roundrobin, random, and weight.
+目前，tidb-loadbalance 支持以下策略：轮询、随机和权重。
 
-> **Note:**
+> **注意：**
 >
-> tidb-loadbalance must be used with [mysql-connector-j](https://github.com/pingcap/mysql-connector-j).
+> tidb-loadbalance 必须与 [mysql-connector-j](https://github.com/pingcap/mysql-connector-j) 一起使用。
 
-If you are using Maven, add the following content to the element body of `<dependencies></dependencies>` in the `pom.xml` file:
+如果你使用 Maven，请在 `pom.xml` 文件的 `<dependencies></dependencies>` 元素体中添加以下内容：
 
 ```xml
 <dependency>
@@ -198,7 +198,7 @@ If you are using Maven, add the following content to the element body of `<depen
 </dependency>
 ```
 
-If you are using Gradle, add the following content to `dependencies`:
+如果你使用 Gradle，请在 `dependencies` 中添加以下内容：
 
 ```gradle
 implementation group: 'io.github.lastincisor', name: 'mysql-connector-java', version: '8.0.29-tidb-1.0.0'
@@ -207,117 +207,117 @@ implementation group: 'io.github.lastincisor', name: 'tidb-loadbalance', version
 
 ## Golang
 
-This section describes how to use drivers and ORM frameworks in Golang.
+本节介绍如何在 Golang 中使用驱动和 ORM 框架。
 
-### Golang drivers
+### Golang 驱动
 
 **go-sql-driver/mysql**
 
-Support level: **Full**
+支持级别：**完全支持**
 
-To download and configure a Golang driver, refer to the [go-sql-driver/mysql documentation](https://github.com/go-sql-driver/mysql).
+要下载和配置 Golang 驱动，请参考 [go-sql-driver/mysql 文档](https://github.com/go-sql-driver/mysql)。
 
-For an example of how to build a complete application, see [Connect to TiDB with Go-MySQL-Driver](/develop/dev-guide-sample-application-golang-sql-driver.md).
+有关如何构建完整应用程序的示例，请参阅[使用 Go-MySQL-Driver 连接到 TiDB](/develop/dev-guide-sample-application-golang-sql-driver.md)。
 
-### Golang ORM frameworks
+### Golang ORM 框架
 
 **GORM**
 
-Support level: **Full**
+支持级别：**完全支持**
 
-GORM is a popular ORM framework for Golang. To get all dependencies in your application, you can use the `go get` command.
+GORM 是一个流行的 Golang ORM 框架。要获取应用程序中的所有依赖项，你可以使用 `go get` 命令。
 
 ```shell
 go get -u gorm.io/gorm
 go get -u gorm.io/driver/mysql
 ```
 
-For an example of using GORM to build a TiDB application, see [Connect to TiDB with GORM](/develop/dev-guide-sample-application-golang-gorm.md).
+有关使用 GORM 构建 TiDB 应用程序的示例，请参阅[使用 GORM 连接到 TiDB](/develop/dev-guide-sample-application-golang-gorm.md)。
 
 ## Python
 
-This section describes how to use drivers and ORM frameworks in Python.
+本节介绍如何在 Python 中使用驱动和 ORM 框架。
 
-### Python drivers
+### Python 驱动
 
 <SimpleTab>
 <div label="PyMySQL">
 
-Support level: **Compatible**
+支持级别：**兼容**
 
-You can follow the [PyMySQL documentation](https://pypi.org/project/PyMySQL/) to download and configure the driver. It is recommended to use PyMySQL 1.0.2 or later versions.
+你可以按照 [PyMySQL 文档](https://pypi.org/project/PyMySQL/)下载和配置驱动。建议使用 PyMySQL 1.0.2 或更高版本。
 
-For an example of using PyMySQL to build a TiDB application, see [Connect to TiDB with PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md).
+有关使用 PyMySQL 构建 TiDB 应用程序的示例，请参阅[使用 PyMySQL 连接到 TiDB](/develop/dev-guide-sample-application-python-pymysql.md)。
 
 </div>
 <div label="mysqlclient">
 
-Support level: **Compatible**
+支持级别：**兼容**
 
-You can follow the [mysqlclient documentation](https://pypi.org/project/mysqlclient/) to download and configure the driver. It is recommended to use mysqlclient 2.1.1 or later versions.
+你可以按照 [mysqlclient 文档](https://pypi.org/project/mysqlclient/)下载和配置驱动。建议使用 mysqlclient 2.1.1 或更高版本。
 
-For an example of using mysqlclient to build a TiDB application, see [Connect to TiDB with mysqlclient](/develop/dev-guide-sample-application-python-mysqlclient.md).
+有关使用 mysqlclient 构建 TiDB 应用程序的示例，请参阅[使用 mysqlclient 连接到 TiDB](/develop/dev-guide-sample-application-python-mysqlclient.md)。
 
 </div>
 <div label="MySQL Connector/Python">
 
-Support level: **Compatible**
+支持级别：**兼容**
 
-You can follow the [MySQL Connector/Python documentation](https://dev.mysql.com/doc/connector-python/en/connector-python-installation-binary.html) to download and configure the driver. It is recommended to use Connector/Python 8.0.31 or later versions.
+你可以按照 [MySQL Connector/Python 文档](https://dev.mysql.com/doc/connector-python/en/connector-python-installation-binary.html)下载和配置驱动。建议使用 Connector/Python 8.0.31 或更高版本。
 
-For an example of using MySQL Connector/Python to build a TiDB application, see [Connect to TiDB with MySQL Connector/Python](/develop/dev-guide-sample-application-python-mysql-connector.md).
+有关使用 MySQL Connector/Python 构建 TiDB 应用程序的示例，请参阅[使用 MySQL Connector/Python 连接到 TiDB](/develop/dev-guide-sample-application-python-mysql-connector.md)。
 
 </div>
 </SimpleTab>
 
-### Python ORM frameworks
+### Python ORM 框架
 
 <SimpleTab>
 <div label="Django">
 
-Support level: **Full**
+支持级别：**完全支持**
 
-[Django](https://docs.djangoproject.com/) is a popular Python web framework. To solve the compatibility issue between TiDB and Django, PingCAP provides a TiDB dialect `django-tidb`. To install it, you can see the [`django-tidb` documentation](https://github.com/pingcap/django-tidb#installation-guide).
+[Django](https://docs.djangoproject.com/) 是一个流行的 Python Web 框架。为解决 TiDB 和 Django 之间的兼容性问题，PingCAP 提供了 TiDB 方言 `django-tidb`。要安装它，你可以参考 [`django-tidb` 文档](https://github.com/pingcap/django-tidb#installation-guide)。
 
-For an example of using Django to build a TiDB application, see [Connect to TiDB with Django](/develop/dev-guide-sample-application-python-django.md).
+有关使用 Django 构建 TiDB 应用程序的示例，请参阅[使用 Django 连接到 TiDB](/develop/dev-guide-sample-application-python-django.md)。
 
 </div>
 <div label="SQLAlchemy">
 
-Support level: **Full**
+支持级别：**完全支持**
 
-[SQLAlchemy](https://www.sqlalchemy.org/) is a popular ORM framework for Python. To get all dependencies in your application, you can use the `pip install SQLAlchemy==1.4.44` command. It is recommended to use SQLAlchemy 1.4.44 or later versions.
+[SQLAlchemy](https://www.sqlalchemy.org/) 是一个流行的 Python ORM 框架。要获取应用程序中的所有依赖项，你可以使用 `pip install SQLAlchemy==1.4.44` 命令。建议使用 SQLAlchemy 1.4.44 或更高版本。
 
-For an example of using SQLAlchemy to build a TiDB application, see [Connect to TiDB with SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md).
+有关使用 SQLAlchemy 构建 TiDB 应用程序的示例，请参阅[使用 SQLAlchemy 连接到 TiDB](/develop/dev-guide-sample-application-python-sqlalchemy.md)。
 
 </div>
 <div label="peewee">
 
-Support level: **Compatible**
+支持级别：**兼容**
 
-[peewee](http://docs.peewee-orm.com/en/latest/) is a popular ORM framework for Python. To get all dependencies in your application, you can use the `pip install peewee==3.15.4` command. It is recommended to use peewee 3.15.4 or later versions.
+[peewee](http://docs.peewee-orm.com/en/latest/) 是一个流行的 Python ORM 框架。要获取应用程序中的所有依赖项，你可以使用 `pip install peewee==3.15.4` 命令。建议使用 peewee 3.15.4 或更高版本。
 
-For an example of using peewee to build a TiDB application, see [Connect to TiDB with peewee](/develop/dev-guide-sample-application-python-peewee.md).
+有关使用 peewee 构建 TiDB 应用程序的示例，请参阅[使用 peewee 连接到 TiDB](/develop/dev-guide-sample-application-python-peewee.md)。
 
 </div>
 </SimpleTab>
 
 <CustomContent platform="tidb-cloud">
 
-After you have determined the driver or ORM, you can [connect to your TiDB cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
+在确定了驱动或 ORM 之后，你可以[连接到你的 TiDB 集群](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)。
 
 </CustomContent>
 
-## Need help?
+## 需要帮助？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

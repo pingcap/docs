@@ -1,25 +1,25 @@
 ---
-title: Generated Columns
-summary: Learn how to use generated columns.
+title: 生成列
+summary: 了解如何使用生成列。
 ---
 
-# Generated Columns
+# 生成列
 
-This document introduces the concept and usage of generated columns.
+本文介绍生成列的概念和用法。
 
-## Basic concepts
+## 基本概念
 
-Unlike general columns, the value of the generated column is calculated by the expression in the column definition. When inserting or updating a generated column, you cannot assign a value, but only use `DEFAULT`.
+与普通列不同，生成列的值是由列定义中的表达式计算得出的。在插入或更新生成列时，你不能为其赋值，只能使用 `DEFAULT`。
 
-There are two kinds of generated columns: virtual and stored. A virtual generated column occupies no storage and is computed when it is read. A stored generated column is computed when it is written (inserted or updated) and occupies storage. Compared with the virtual generated columns, the stored generated columns have better read performance, but take up more disk space.
+生成列有两种类型：虚拟生成列和存储生成列。虚拟生成列不占用存储空间，在读取时计算。存储生成列在写入（插入或更新）时计算，并占用存储空间。与虚拟生成列相比，存储生成列具有更好的读取性能，但会占用更多磁盘空间。
 
-You can create an index on a generated column whether it is virtual or stored.
+无论是虚拟生成列还是存储生成列，你都可以在其上创建索引。
 
-## Usage
+## 用法
 
-One of the main usage of generated columns is to extract data from the JSON data type and indexing the data.
+生成列的主要用途之一是从 JSON 数据类型中提取数据并为其建立索引。
 
-In both MySQL 8.0 and TiDB, columns of type JSON cannot be indexed directly. That is, the following table schema is **not supported**:
+在 MySQL 8.0 和 TiDB 中，JSON 类型的列不能直接创建索引。也就是说，以下表结构是**不支持的**：
 
 {{< copyable "sql" >}}
 
@@ -32,9 +32,9 @@ CREATE TABLE person (
 );
 ```
 
-To index a JSON column, you must extract it as a generated column first.
+要为 JSON 列创建索引，你必须先将其提取为生成列。
 
-Using the `city` field in `address_info` as an example, you can create a virtual generated column and add an index for it:
+以 `address_info` 中的 `city` 字段为例，你可以创建一个虚拟生成列并为其添加索引：
 
 {{< copyable "sql" >}}
 
@@ -43,14 +43,14 @@ CREATE TABLE person (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     address_info JSON,
-    city VARCHAR(64) AS (JSON_UNQUOTE(JSON_EXTRACT(address_info, '$.city'))), -- virtual generated column
-    -- city VARCHAR(64) AS (JSON_UNQUOTE(JSON_EXTRACT(address_info, '$.city'))) VIRTUAL, -- virtual generated column
-    -- city VARCHAR(64) AS (JSON_UNQUOTE(JSON_EXTRACT(address_info, '$.city'))) STORED, -- stored generated column
+    city VARCHAR(64) AS (JSON_UNQUOTE(JSON_EXTRACT(address_info, '$.city'))), -- 虚拟生成列
+    -- city VARCHAR(64) AS (JSON_UNQUOTE(JSON_EXTRACT(address_info, '$.city'))) VIRTUAL, -- 虚拟生成列
+    -- city VARCHAR(64) AS (JSON_UNQUOTE(JSON_EXTRACT(address_info, '$.city'))) STORED, -- 存储生成列
     KEY (city)
 );
 ```
 
-In this table, the `city` column is a **virtual generated column** and has an index. The following query can use the index to speed up the execution:
+在这个表中，`city` 列是一个**虚拟生成列**并且有一个索引。以下查询可以使用该索引来加速执行：
 
 {{< copyable "sql" >}}
 
@@ -75,9 +75,9 @@ EXPLAIN SELECT name, id FROM person WHERE city = 'Beijing';
 +---------------------------------+---------+-----------+--------------------------------+-------------------------------------------------------------+
 ```
 
-From the query execution plan, it can be seen that the `city` index is used to read the `HANDLE` of the row that meets the condition `city ='Beijing'`, and then it uses this `HANDLE` to read the data of the row.
+从查询执行计划可以看出，使用了 `city` 索引来读取满足条件 `city ='Beijing'` 的行的 `HANDLE`，然后使用这个 `HANDLE` 来读取行的数据。
 
-If no data exists at path `$.city`, `JSON_EXTRACT` returns `NULL`. If you want to enforce a constraint that `city` must be `NOT NULL`, you can define the virtual generated column as follows:
+如果路径 `$.city` 处不存在数据，`JSON_EXTRACT` 返回 `NULL`。如果你想强制约束 `city` 必须为 `NOT NULL`，可以按如下方式定义虚拟生成列：
 
 {{< copyable "sql" >}}
 
@@ -91,9 +91,9 @@ CREATE TABLE person (
 );
 ```
 
-## Validation of generated columns
+## 生成列的验证
 
-Both `INSERT` and `UPDATE` statements check virtual column definitions. Rows that do not pass validation return errors:
+`INSERT` 和 `UPDATE` 语句都会检查虚拟列定义。不通过验证的行会返回错误：
 
 {{< copyable "sql" >}}
 
@@ -102,11 +102,11 @@ mysql> INSERT INTO person (name, address_info) VALUES ('Morgan', JSON_OBJECT('Co
 ERROR 1048 (23000): Column 'city' cannot be null
 ```
 
-## Generated columns index replacement rule
+## 生成列索引替换规则
 
-When an expression in a query is strictly equivalent to a generated column with an index, TiDB replaces the expression with the corresponding generated column, so that the optimizer can take that index into account during execution plan construction.
+当查询中的表达式与带有索引的生成列严格等价时，TiDB 会用相应的生成列替换该表达式，这样优化器在构建执行计划时就可以考虑使用该索引。
 
-The following example creates a generated column for the expression `a+1` and adds an index. The column type of `a` is int and the column type of `a+1` is bigint. If the type of the generated column is set to int, the replacement will not occur. For type conversion rules, see [Type Conversion of Expression Evaluation](/functions-and-operators/type-conversion-in-expression-evaluation.md).
+以下示例为表达式 `a+1` 创建生成列并添加索引。列 `a` 的类型为 int，`a+1` 的列类型为 bigint。如果将生成列的类型设置为 int，则不会发生替换。关于类型转换规则，请参见[表达式求值的类型转换](/functions-and-operators/type-conversion-in-expression-evaluation.md)。
 
 ```sql
 create table t(a int);
@@ -141,17 +141,17 @@ desc select a+1 from t where a+1=3;
 2 rows in set (0.01 sec)
 ```
 
-> **Note:**
+> **注意：**
 >
-> If the expression to be replaced and the generated column are both the string type but with different lengths, you can still replace the expression by setting the system variable [`tidb_enable_unsafe_substitute`](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630) to `ON`. When configuring this system variable, ensure that the value calculated by the generated column strictly satisfies the definition of the generated column. Otherwise, the data might be truncated due to the difference in length, resulting in an incorrect result. See GitHub issue [#35490](https://github.com/pingcap/tidb/issues/35490#issuecomment-1211658886).
+> 如果要替换的表达式和生成列都是字符串类型但长度不同，你可以通过将系统变量 [`tidb_enable_unsafe_substitute`](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630) 设置为 `ON` 来实现替换。在配置此系统变量时，请确保生成列计算的值严格满足生成列的定义。否则，由于长度差异可能导致数据被截断，从而导致结果不正确。详见 GitHub issue [#35490](https://github.com/pingcap/tidb/issues/35490#issuecomment-1211658886)。
 
-## Limitations
+## 限制
 
-The current limitations of JSON and generated columns are as follows:
+JSON 和生成列当前的限制如下：
 
-- You cannot add a stored generated column through `ALTER TABLE`.
-- You can neither convert a stored generated column to a normal column through the `ALTER TABLE` statement nor convert a normal column to a stored generated column.
-- You cannot modify the expression of a stored generated column through the `ALTER TABLE` statement.
-- Not all [JSON functions](/functions-and-operators/json-functions.md) are supported.
-- The [`NULLIF()` function](/functions-and-operators/control-flow-functions.md#nullif) is not supported. You can use the [`CASE` function](/functions-and-operators/control-flow-functions.md#case) instead.
-- Currently, the generated column index replacement rule is valid only when the generated column is a virtual generated column. It is not valid on the stored generated column, but the index can still be used by directly using the generated column itself.
+- 不能通过 `ALTER TABLE` 添加存储生成列。
+- 不能通过 `ALTER TABLE` 语句将存储生成列转换为普通列，也不能将普通列转换为存储生成列。
+- 不能通过 `ALTER TABLE` 语句修改存储生成列的表达式。
+- 不是所有的 [JSON 函数](/functions-and-operators/json-functions.md)都支持。
+- 不支持 [`NULLIF()` 函数](/functions-and-operators/control-flow-functions.md#nullif)。你可以使用 [`CASE` 函数](/functions-and-operators/control-flow-functions.md#case)代替。
+- 目前，生成列索引替换规则仅在生成列是虚拟生成列时有效。对于存储生成列不生效，但可以通过直接使用生成列本身来使用索引。

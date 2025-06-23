@@ -1,70 +1,70 @@
 ---
-title: SQL Prepared Execution Plan Cache
-summary: Learn about SQL Prepared Execution Plan Cache in TiDB.
+title: SQL Prepared 执行计划缓存
+summary: 了解 TiDB 中的 SQL Prepared 执行计划缓存。
 ---
 
-# SQL Prepared Execution Plan Cache
+# SQL Prepared 执行计划缓存
 
-TiDB supports execution plan caching for `Prepare` and `Execute` queries. This includes both forms of prepared statements:
+TiDB 支持对 `Prepare` 和 `Execute` 查询的执行计划缓存。这包括两种形式的预处理语句：
 
-- Using the `COM_STMT_PREPARE` and `COM_STMT_EXECUTE` protocol features.
-- Using the SQL statements `PREPARE` and `EXECUTE`.
+- 使用 `COM_STMT_PREPARE` 和 `COM_STMT_EXECUTE` 协议特性。
+- 使用 SQL 语句 `PREPARE` 和 `EXECUTE`。
 
-The TiDB optimizer handles these two types of queries in the same way: when preparing, the parameterized query is parsed into an AST (Abstract Syntax Tree) and cached; in later execution, the execution plan is generated based on the stored AST and specific parameter values.
+TiDB 优化器以相同的方式处理这两种类型的查询：在准备阶段，将参数化查询解析为 AST（抽象语法树）并缓存；在后续执行时，基于存储的 AST 和具体参数值生成执行计划。
 
-When the execution plan cache is enabled, in the first execution every `Prepare` statement checks whether the current query can use the execution plan cache, and if the query can use it, then put the generated execution plan into a cache implemented by LRU (Least Recently Used) linked list. In the subsequent `Execute` queries, the execution plan is obtained from the cache and checked for availability. If the check succeeds, the step of generating an execution plan is skipped. Otherwise, the execution plan is regenerated and saved in the cache.
+当启用执行计划缓存时，每个 `Prepare` 语句在首次执行时会检查当前查询是否可以使用执行计划缓存，如果可以使用，则将生成的执行计划放入由 LRU（最近最少使用）链表实现的缓存中。在后续的 `Execute` 查询中，从缓存中获取执行计划并检查其可用性。如果检查成功，则跳过生成执行计划的步骤。否则，重新生成执行计划并保存在缓存中。
 
-TiDB also supports execution plan caching for some non-`PREPARE` statements, similar to the `Prepare`/`Execute` statements. For more details, refer to [Non-prepared plan cache](/sql-non-prepared-plan-cache.md).
+TiDB 还支持对某些非 `PREPARE` 语句的执行计划缓存，类似于 `Prepare`/`Execute` 语句。更多详情，请参考[非预处理执行计划缓存](/sql-non-prepared-plan-cache.md)。
 
-In the current version of TiDB, if a `Prepare` statement meets any of the following conditions, the query or the plan is not cached:
+在当前版本的 TiDB 中，如果 `Prepare` 语句满足以下任一条件，则不会缓存查询或计划：
 
-- The query contains SQL statements other than `SELECT`, `UPDATE`, `INSERT`, `DELETE`, `Union`, `Intersect`, and `Except`.
-- The query accesses temporary tables, or a table that contains generated columns, or uses static mode (that is, [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51) is set to `static`) to access partitioning tables.
-- The query contains non-correlated sub-queries, such as `SELECT * FROM t1 WHERE t1.a > (SELECT 1 FROM t2 WHERE t2.b < 1)`.
-- The query contains correlated sub-queries with `PhysicalApply` operators in the execution plan, such as `SELECT * FROM t1 WHERE t1.a > (SELECT a FROM t2 WHERE t1.b > t2.b)`.
-- The query contains the `ignore_plan_cache` or `set_var` hint, such as `SELECT /*+ ignore_plan_cache() */ * FROM t` or `SELECT /*+ set_var(max_execution_time=1) */ * FROM t`.
-- The query contains variables other than `?` (including system variables or user-defined variables), such as `select * from t where a>? and b>@x`.
-- The query contains the functions that cannot be cached: `database()`, `current_user`, `current_role`, `user`, `connection_id`, `last_insert_id`, `row_count`, `version`, and `like`.
-- The query uses a variable as the `LIMIT` parameter (such as `LIMIT ?` and `LIMIT 10, ?`) and the variable value is greater than 10000.
-- The query contains `?` after `Order By`, such as `Order By ?`. Such queries sort data based on the column specified by `?`. If the queries targeting different columns use the same execution plan, the results will be wrong. Therefore, such queries are not cached. However, if the query is a common one, such as `Order By a+?`, it is cached.
-- The query contains `?` after `Group By`, such as `Group By?`. Such queries group data based on the column specified by `?`. If the queries targeting different columns use the same execution plan, the results will be wrong. Therefore, such queries are not cached. However, if the query is a common one, such as `Group By a+?`, it is cached.
-- The query contains `?` in the definition of the `Window Frame` window function, such as `(partition by year order by sale rows ? preceding)`. If `?` appears elsewhere in the window function, the query is cached.
-- The query contains parameters for comparing `int` and `string`, such as `c_int >= ?` or `c_int in (?, ?)`, in which `?` indicates the string type, such as `set @x='123'`. To ensure that the query result is compatible with MySQL, parameters need to be adjusted in each query, so such queries are not cached.
-- The plan attempts to access `TiFlash`.
-- In most cases, the plan that contains `TableDual` is not cached, unless the current `Prepare` statement does not have parameters.
-- The query accesses TiDB system views, such as `information_schema.columns`. It is not recommended to use `Prepare` and `Execute` statements to access system views.
+- 查询包含除 `SELECT`、`UPDATE`、`INSERT`、`DELETE`、`Union`、`Intersect` 和 `Except` 之外的 SQL 语句。
+- 查询访问临时表，或包含生成列的表，或使用静态模式（即 [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51) 设置为 `static`）访问分区表。
+- 查询包含非相关子查询，如 `SELECT * FROM t1 WHERE t1.a > (SELECT 1 FROM t2 WHERE t2.b < 1)`。
+- 查询包含在执行计划中带有 `PhysicalApply` 算子的相关子查询，如 `SELECT * FROM t1 WHERE t1.a > (SELECT a FROM t2 WHERE t1.b > t2.b)`。
+- 查询包含 `ignore_plan_cache` 或 `set_var` 提示，如 `SELECT /*+ ignore_plan_cache() */ * FROM t` 或 `SELECT /*+ set_var(max_execution_time=1) */ * FROM t`。
+- 查询包含除 `?` 之外的变量（包括系统变量或用户定义变量），如 `select * from t where a>? and b>@x`。
+- 查询包含无法缓存的函数：`database()`、`current_user`、`current_role`、`user`、`connection_id`、`last_insert_id`、`row_count`、`version` 和 `like`。
+- 查询使用变量作为 `LIMIT` 参数（如 `LIMIT ?` 和 `LIMIT 10, ?`）且变量值大于 10000。
+- 查询在 `Order By` 后包含 `?`，如 `Order By ?`。这类查询基于 `?` 指定的列进行排序。如果针对不同列的查询使用相同的执行计划，结果将会错误。因此，这类查询不会被缓存。但是，如果查询是常见的，如 `Order By a+?`，则会被缓存。
+- 查询在 `Group By` 后包含 `?`，如 `Group By?`。这类查询基于 `?` 指定的列进行分组。如果针对不同列的查询使用相同的执行计划，结果将会错误。因此，这类查询不会被缓存。但是，如果查询是常见的，如 `Group By a+?`，则会被缓存。
+- 查询在窗口函数的 `Window Frame` 定义中包含 `?`，如 `(partition by year order by sale rows ? preceding)`。如果 `?` 出现在窗口函数的其他位置，则查询会被缓存。
+- 查询包含用于比较 `int` 和 `string` 的参数，如 `c_int >= ?` 或 `c_int in (?, ?)`，其中 `?` 表示字符串类型，如 `set @x='123'`。为确保查询结果与 MySQL 兼容，需要在每次查询时调整参数，因此这类查询不会被缓存。
+- 计划尝试访问 `TiFlash`。
+- 在大多数情况下，包含 `TableDual` 的计划不会被缓存，除非当前 `Prepare` 语句没有参数。
+- 查询访问 TiDB 系统视图，如 `information_schema.columns`。不建议使用 `Prepare` 和 `Execute` 语句访问系统视图。
 
-TiDB has a limitation on the number of `?` in a query. If a query contains more than 65535 `?`, an error `Prepared statement contains too many placeholders` is reported.
+TiDB 对查询中的 `?` 数量有限制。如果查询包含超过 65535 个 `?`，将报错 `Prepared statement contains too many placeholders`。
 
-The LRU linked list is designed as a session-level cache because `Prepare`/`Execute` cannot be executed across sessions. Each element of the LRU list is a key-value pair. The value is the execution plan, and the key is composed of the following parts:
+LRU 链表被设计为会话级缓存，因为 `Prepare`/`Execute` 不能跨会话执行。LRU 列表的每个元素都是一个键值对。值是执行计划，键由以下部分组成：
 
-- The name of the database where `Execute` is executed
-- The identifier of the `Prepare` statement, that is, the name after the `PREPARE` keyword
-- The current schema version, which is updated after every successfully executed DDL statement
-- The SQL mode when executing `Execute`
-- The current time zone, which is the value of the `time_zone` system variable
-- The value of the `sql_select_limit` system variable
+- 执行 `Execute` 的数据库名称
+- `Prepare` 语句的标识符，即 `PREPARE` 关键字后的名称
+- 当前的 schema 版本，每次成功执行 DDL 语句后都会更新
+- 执行 `Execute` 时的 SQL 模式
+- 当前时区，即 `time_zone` 系统变量的值
+- `sql_select_limit` 系统变量的值
 
-Any change in the preceding information (for example, switching databases, renaming `Prepare` statement, executing DDL statements, or modifying the value of SQL mode/`time_zone`), or the LRU cache elimination mechanism causes the execution plan cache miss when executing.
+上述信息的任何变化（例如，切换数据库、重命名 `Prepare` 语句、执行 DDL 语句或修改 SQL 模式/`time_zone` 的值），或 LRU 缓存淘汰机制都会导致执行时执行计划缓存未命中。
 
-After the execution plan cache is obtained from the cache, TiDB first checks whether the execution plan is still valid. If the current `Execute` statement is executed in an explicit transaction, and the referenced table is modified in the transaction pre-order statement, the cached execution plan accessing this table does not contain the `UnionScan` operator, then it cannot be executed.
+从缓存中获取执行计划后，TiDB 首先检查执行计划是否仍然有效。如果当前 `Execute` 语句在显式事务中执行，并且在事务前序语句中修改了引用的表，则访问该表的缓存执行计划不包含 `UnionScan` 算子，因此无法执行。
 
-After the validation test is passed, the scan range of the execution plan is adjusted according to the current parameter values, and then used to perform data querying.
+通过验证测试后，根据当前参数值调整执行计划的扫描范围，然后用于执行数据查询。
 
-There are several points worth noting about execution plan caching and query performance:
+关于执行计划缓存和查询性能，有几点值得注意：
 
-- No matter an execution plan is cached or not, it is affected by SQL bindings. For execution plans that have not been cached (the first `Execute`), these plans are affected by existing SQL bindings. For execution plans that have been cached, if new SQL Bindings are created, these plans become invalid.
-- Cached plans are not affected by changes in statistics, optimization rules, and blocklist pushdown by expressions.
-- Considering that the parameters of `Execute` are different, the execution plan cache prohibits some aggressive query optimization methods that are closely related to specific parameter values to ensure adaptability. This causes that the query plan may not be optimal for certain parameter values. For example, the filter condition of the query is `where a > ? And a < ?`, the parameters of the first `Execute` statement are `2` and `1` respectively. Considering that these two parameters maybe be `1` and `2` in the next execution time, the optimizer does not generate the optimal `TableDual` execution plan that is specific to current parameter values;
-- If cache invalidation and elimination are not considered, an execution plan cache is applied to various parameter values, which in theory also results in non-optimal execution plans for certain values. For example, if the filter condition is `where a < ?` and the parameter value used for the first execution is `1`, then the optimizer generates the optimal `IndexScan` execution plan and puts it into the cache. In the subsequent executions, if the value becomes `10000`, the `TableScan` plan might be the better one. But due to the execution plan cache, the previously generated `IndexScan` is used for execution. Therefore, the execution plan cache is more suitable for application scenarios where the query is simple (the ratio of compilation is high) and the execution plan is relatively fixed.
+- 无论执行计划是否被缓存，它都会受到 SQL 绑定的影响。对于未缓存的执行计划（第一次 `Execute`），这些计划受现有 SQL 绑定的影响。对于已缓存的执行计划，如果创建了新的 SQL 绑定，这些计划将变为无效。
+- 缓存的计划不受统计信息、优化规则和表达式下推黑名单变化的影响。
+- 考虑到 `Execute` 的参数不同，执行计划缓存禁止了一些与特定参数值密切相关的激进查询优化方法，以确保适应性。这导致查询计划可能对某些参数值不是最优的。例如，查询的过滤条件是 `where a > ? And a < ?`，第一次 `Execute` 语句的参数分别是 `2` 和 `1`。考虑到这两个参数在下次执行时可能是 `1` 和 `2`，优化器不会生成针对当前参数值的最优 `TableDual` 执行计划；
+- 如果不考虑缓存失效和淘汰，执行计划缓存适用于各种参数值，这在理论上也会导致某些值的执行计划不是最优的。例如，如果过滤条件是 `where a < ?` 且第一次执行使用的参数值是 `1`，那么优化器会生成最优的 `IndexScan` 执行计划并将其放入缓存。在后续执行中，如果值变为 `10000`，`TableScan` 计划可能是更好的选择。但由于执行计划缓存，会使用之前生成的 `IndexScan` 进行执行。因此，执行计划缓存更适合于查询简单（编译比例高）且执行计划相对固定的应用场景。
 
-Starting from v6.1.0, the execution plan cache is enabled by default. You can control prepared plan cache via the system variable [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610).
+从 v6.1.0 开始，执行计划缓存默认启用。你可以通过系统变量 [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610) 控制预处理计划缓存。
 
-> **Note:**
+> **注意：**
 >
-> The [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610) system variable controls the execution plan cache only for `Prepare`/`Execute` queries, not for normal queries. For the execution plan cache for normal queries, see [SQL Non-Prepared Execution Plan Cache](/sql-non-prepared-plan-cache.md).
+> [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610) 系统变量仅控制 `Prepare`/`Execute` 查询的执行计划缓存，不控制普通查询的执行计划缓存。关于普通查询的执行计划缓存，请参见[SQL 非预处理执行计划缓存](/sql-non-prepared-plan-cache.md)。
 
-After the execution plan cache feature is enabled, you can use the session-level system variable [`last_plan_from_cache`](/system-variables.md#last_plan_from_cache-new-in-v40) to see whether the previous `Execute` statement used the cached execution plan, for example:
+启用执行计划缓存功能后，你可以使用会话级系统变量 [`last_plan_from_cache`](/system-variables.md#last_plan_from_cache-new-in-v40) 查看上一个 `Execute` 语句是否使用了缓存的执行计划，例如：
 
 {{< copyable "sql" >}}
 
@@ -76,7 +76,7 @@ Query OK, 0 rows affected (0.00 sec)
 MySQL [test]> set @a = 1;
 Query OK, 0 rows affected (0.00 sec)
 
--- The first execution generates an execution plan and saves it in the cache.
+-- 第一次执行生成执行计划并保存在缓存中。
 MySQL [test]> execute stmt using @a;
 Empty set (0.00 sec)
 MySQL [test]> select @@last_plan_from_cache;
@@ -87,7 +87,7 @@ MySQL [test]> select @@last_plan_from_cache;
 +------------------------+
 1 row in set (0.00 sec)
 
--- The second execution hits the cache.
+-- 第二次执行命中缓存。
 MySQL [test]> execute stmt using @a;
 Empty set (0.00 sec)
 MySQL [test]> select @@last_plan_from_cache;
@@ -99,7 +99,7 @@ MySQL [test]> select @@last_plan_from_cache;
 1 row in set (0.00 sec)
 ```
 
-If you find that a certain set of `Prepare`/`Execute` has unexpected behavior due to the execution plan cache, you can use the `ignore_plan_cache()` SQL hint to skip using the execution plan cache for the current statement. Still, use the preceding statement as an example:
+如果你发现某个 `Prepare`/`Execute` 由于执行计划缓存而出现意外行为，可以使用 `ignore_plan_cache()` SQL 提示跳过当前语句的执行计划缓存。仍以上述语句为例：
 
 {{< copyable "sql" >}}
 
@@ -128,16 +128,16 @@ MySQL [test]> select @@last_plan_from_cache;
 1 row in set (0.00 sec)
 ```
 
-## Diagnostics of Prepared Plan Cache
+## 预处理计划缓存的诊断
 
-Some queries or plans cannot be cached. You can use the `SHOW WARNINGS` statement to check whether the query or plan is cached. If it is not cached, you can check the reason for the failure in the result. For example:
+某些查询或计划无法被缓存。你可以使用 `SHOW WARNINGS` 语句检查查询或计划是否被缓存。如果未被缓存，你可以在结果中查看失败的原因。例如：
 
 ```sql
-mysql> PREPARE st FROM 'SELECT * FROM t WHERE a > (SELECT MAX(a) FROM t)';  -- The query contains a subquery and cannot be cached.
+mysql> PREPARE st FROM 'SELECT * FROM t WHERE a > (SELECT MAX(a) FROM t)';  -- 查询包含子查询，无法缓存。
 
 Query OK, 0 rows affected, 1 warning (0.01 sec)
 
-mysql> show warnings;  -- Checks the reason why the query plan cannot be cached.
+mysql> show warnings;  -- 检查查询计划无法缓存的原因。
 
 +---------+------+-----------------------------------------------+
 | Level   | Code | Message                                       |
@@ -154,7 +154,7 @@ mysql> set @a='1';
 
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> execute st using @a;  -- The optimization converts a non-INT type to an INT type, and the execution plan might change with the change of the parameter, so TiDB does not cache the plan.
+mysql> execute st using @a;  -- 优化将非 INT 类型转换为 INT 类型，执行计划可能随参数变化而变化，所以 TiDB 不缓存该计划。
 
 Empty set, 1 warning (0.01 sec)
 
@@ -168,64 +168,64 @@ mysql> show warnings;
 1 row in set (0.00 sec)
 ```
 
-## Memory management of Prepared Plan Cache
+## 预处理计划缓存的内存管理
 
 <CustomContent platform="tidb">
 
-Using Prepared Plan Cache incurs memory overhead. To view the total memory consumption by the cached execution plans of all sessions in each TiDB instance, you can use the [**Plan Cache Memory Usage** monitoring panel](/grafana-tidb-dashboard.md) in Grafana.
+使用预处理计划缓存会产生内存开销。要查看每个 TiDB 实例中所有会话的缓存执行计划的总内存消耗，你可以使用 Grafana 中的 [**Plan Cache Memory Usage** 监控面板](/grafana-tidb-dashboard.md)。
 
-> **Note:**
+> **注意：**
 >
-> Because of the memory reclaim mechanism of Golang and some uncounted memory structures, the memory displayed in Grafana is not equal to the actual heap memory usage. It is tested that there is a deviation of about ±20% between the memory displayed in Grafana and the actual heap memory usage.
+> 由于 Golang 的内存回收机制和一些未计数的内存结构，Grafana 中显示的内存不等于实际的堆内存使用量。经测试，Grafana 中显示的内存与实际堆内存使用量之间存在约 ±20% 的偏差。
 
-To view the total number of execution plans cached in each TiDB instance, you can use the [**Plan Cache Plan Num** panel](/grafana-tidb-dashboard.md) in Grafana.
+要查看每个 TiDB 实例中缓存的执行计划总数，你可以使用 Grafana 中的 [**Plan Cache Plan Num** 面板](/grafana-tidb-dashboard.md)。
 
-The following is an example of the **Plan Cache Memory Usage** and **Plan Cache Plan Num** panels in Grafana:
+以下是 Grafana 中 **Plan Cache Memory Usage** 和 **Plan Cache Plan Num** 面板的示例：
 
 ![grafana_panels](/media/planCache-memoryUsage-planNum-panels.png)
 
-Starting from v7.1.0, you can control the maximum number of plans that can be cached in each session by configuring the system variable [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710). For different environments, the recommended value is as follows and you can adjust it according to the monitoring panels:
+从 v7.1.0 开始，你可以通过配置系统变量 [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710) 来控制每个会话中可以缓存的计划的最大数量。对于不同的环境，建议值如下，你可以根据监控面板进行调整：
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Using Prepared Plan Cache has some memory overhead. In internal tests, each cached plan consumes an average of 100 KiB of memory. Because Plan Cache is currently at the `SESSION` level, the total memory consumption is approximately `the number of sessions * the average number of cached plans in a session * 100 KiB`.
+使用预处理计划缓存会产生一些内存开销。在内部测试中，每个缓存的计划平均消耗 100 KiB 内存。由于计划缓存目前是在 `SESSION` 级别，总内存消耗大约是 `会话数 * 每个会话中缓存的平均计划数 * 100 KiB`。
 
-For example, the current TiDB instance has 50 sessions in concurrency and each session has approximately 100 cached plans. The total memory consumption is approximately `50 * 100 * 100 KiB` = `512 MB`.
+例如，当前 TiDB 实例有 50 个并发会话，每个会话大约有 100 个缓存的计划。总内存消耗大约是 `50 * 100 * 100 KiB` = `512 MB`。
 
-You can control the maximum number of plans that can be cached in each session by configuring the system variable [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710). For different environments, the recommended value is as follows:
+你可以通过配置系统变量 [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710) 来控制每个会话中可以缓存的计划的最大数量。对于不同的环境，建议值如下：
 
 </CustomContent>
 
-- When the memory threshold of the TiDB server instance is <= 64 GiB, set `tidb_session_plan_cache_size` to `50`.
-- When the memory threshold of the TiDB server instance is > 64 GiB, set `tidb_session_plan_cache_size` to `100`.
+- 当 TiDB 服务器实例的内存阈值 <= 64 GiB 时，将 `tidb_session_plan_cache_size` 设置为 `50`。
+- 当 TiDB 服务器实例的内存阈值 > 64 GiB 时，将 `tidb_session_plan_cache_size` 设置为 `100`。
 
-Starting from v7.1.0, you can control the maximum size of a plan that can be cached using the system variable [`tidb_plan_cache_max_plan_size`](/system-variables.md#tidb_plan_cache_max_plan_size-new-in-v710). The default value is 2 MB. If the size of a plan exceeds this value, the plan will not be cached.
+从 v7.1.0 开始，你可以使用系统变量 [`tidb_plan_cache_max_plan_size`](/system-variables.md#tidb_plan_cache_max_plan_size-new-in-v710) 控制可以缓存的计划的最大大小。默认值为 2 MB。如果计划的大小超过此值，则不会缓存该计划。
 
-When the unused memory of the TiDB server is less than a certain threshold, the memory protection mechanism of plan cache is triggered, through which some cached plans will be evicted.
+当 TiDB 服务器的未使用内存小于某个阈值时，会触发计划缓存的内存保护机制，通过该机制将驱逐一些缓存的计划。
 
-You can control the threshold by configuring the system variable `tidb_prepared_plan_cache_memory_guard_ratio`. The threshold is 0.1 by default, which means when the unused memory of the TiDB server is less than 10% of the total memory (90% of the memory is used), the memory protection mechanism is triggered.
+你可以通过配置系统变量 `tidb_prepared_plan_cache_memory_guard_ratio` 来控制阈值。阈值默认为 0.1，这意味着当 TiDB 服务器的未使用内存小于总内存的 10%（90% 的内存已使用）时，将触发内存保护机制。
 
 <CustomContent platform="tidb">
 
-Due to memory limit, plan cache might be missed sometimes. You can check the status by viewing the [`Plan Cache Miss OPS` metric](/grafana-tidb-dashboard.md) in the Grafana dashboard.
+由于内存限制，计划缓存有时可能会未命中。你可以通过查看 Grafana 仪表板中的 [`Plan Cache Miss OPS` 指标](/grafana-tidb-dashboard.md)来检查状态。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Due to memory limit, plan cache might be missed sometimes.
+由于内存限制，计划缓存有时可能会未命中。
 
 </CustomContent>
 
-## Clear execution plan cache
+## 清除执行计划缓存
 
-You can clear execution plan cache by executing the `ADMIN FLUSH [SESSION | INSTANCE] PLAN_CACHE` statement.
+你可以通过执行 `ADMIN FLUSH [SESSION | INSTANCE] PLAN_CACHE` 语句来清除执行计划缓存。
 
-In this statement, `[SESSION | INSTANCE]` specifies whether the plan cache is cleared for the current session or the whole TiDB instance. If the scope is not specified, the preceding statement applies to the `SESSION` cache by default.
+在此语句中，`[SESSION | INSTANCE]` 指定是清除当前会话还是整个 TiDB 实例的计划缓存。如果未指定范围，则上述语句默认应用于 `SESSION` 缓存。
 
-The following is an example of clearing the `SESSION` execution plan cache:
+以下是清除 `SESSION` 执行计划缓存的示例：
 
 {{< copyable "sql" >}}
 
@@ -242,7 +242,7 @@ Empty set (0.00 sec)
 MySQL [test]> execute stmt;
 Empty set (0.00 sec)
 
-MySQL [test]> select @@last_plan_from_cache; -- Select the cached plan
+MySQL [test]> select @@last_plan_from_cache; -- 选择缓存的计划
 +------------------------+
 | @@last_plan_from_cache |
 +------------------------+
@@ -250,13 +250,13 @@ MySQL [test]> select @@last_plan_from_cache; -- Select the cached plan
 +------------------------+
 1 row in set (0.00 sec)
 
-MySQL [test]> admin flush session plan_cache; -- Clear the cached plan of the current session
+MySQL [test]> admin flush session plan_cache; -- 清除当前会话的缓存计划
 Query OK, 0 rows affected (0.00 sec)
 
 MySQL [test]> execute stmt;
 Empty set (0.00 sec)
 
-MySQL [test]> select @@last_plan_from_cache; -- The cached plan cannot be selected again, because it has been cleared
+MySQL [test]> select @@last_plan_from_cache; -- 无法再次选择缓存的计划，因为它已被清除
 +------------------------+
 | @@last_plan_from_cache |
 +------------------------+
@@ -265,7 +265,7 @@ MySQL [test]> select @@last_plan_from_cache; -- The cached plan cannot be select
 1 row in set (0.00 sec)
 ```
 
-Currently, TiDB does not support clearing `GLOBAL` execution plan cache. That means you cannot clear the cached plan of the whole TiDB cluster. The following error is reported if you try to clear the `GLOBAL` execution plan cache:
+目前，TiDB 不支持清除 `GLOBAL` 执行计划缓存。这意味着你无法清除整个 TiDB 集群的缓存计划。如果你尝试清除 `GLOBAL` 执行计划缓存，将报告以下错误：
 
 {{< copyable "sql" >}}
 
@@ -274,59 +274,59 @@ MySQL [test]> admin flush global plan_cache;
 ERROR 1105 (HY000): Do not support the 'admin flush global scope.'
 ```
 
-## Ignore the `COM_STMT_CLOSE` command and the `DEALLOCATE PREPARE` statement
+## 忽略 `COM_STMT_CLOSE` 命令和 `DEALLOCATE PREPARE` 语句
 
-To reduce the syntax parsing cost of SQL statements, it is recommended that you run `prepare stmt` once, then `execute stmt` multiple times before running `deallocate prepare`:
+为了减少 SQL 语句的语法解析成本，建议你运行一次 `prepare stmt`，然后多次运行 `execute stmt`，最后运行 `deallocate prepare`：
 
 {{< copyable "sql" >}}
 
 ```sql
-MySQL [test]> prepare stmt from '...'; -- Prepare once
-MySQL [test]> execute stmt using ...;  -- Execute once
+MySQL [test]> prepare stmt from '...'; -- 准备一次
+MySQL [test]> execute stmt using ...;  -- 执行一次
 MySQL [test]> ...
-MySQL [test]> execute stmt using ...;  -- Execute multiple times
-MySQL [test]> deallocate prepare stmt; -- Release the prepared statement
+MySQL [test]> execute stmt using ...;  -- 执行多次
+MySQL [test]> deallocate prepare stmt; -- 释放预处理语句
 ```
 
-In real practice, you may be used to running `deallocate prepare` each time after running `execute stmt`, as shown below:
+在实际操作中，你可能习惯于每次运行 `execute stmt` 后都运行 `deallocate prepare`，如下所示：
 
 {{< copyable "sql" >}}
 
 ```sql
-MySQL [test]> prepare stmt from '...'; -- Prepare once
+MySQL [test]> prepare stmt from '...'; -- 准备一次
 MySQL [test]> execute stmt using ...;
-MySQL [test]> deallocate prepare stmt; -- Release the prepared statement
-MySQL [test]> prepare stmt from '...'; -- Prepare twice
+MySQL [test]> deallocate prepare stmt; -- 释放预处理语句
+MySQL [test]> prepare stmt from '...'; -- 准备两次
 MySQL [test]> execute stmt using ...;
-MySQL [test]> deallocate prepare stmt; -- Release the prepared statement
+MySQL [test]> deallocate prepare stmt; -- 释放预处理语句
 ```
 
-In such practice, the plan obtained by the first executed statement cannot be reused by the second executed statement.
+在这种情况下，第一个执行语句获得的计划无法被第二个执行语句重用。
 
-To address the problem, you can set the system variable [`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600) to `ON` so TiDB ignores commands to close `prepare stmt`:
+为了解决这个问题，你可以将系统变量 [`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600) 设置为 `ON`，这样 TiDB 就会忽略关闭 `prepare stmt` 的命令：
 
 {{< copyable "sql" >}}
 
 ```sql
-mysql> set @@tidb_ignore_prepared_cache_close_stmt=1;  -- Enable the variable
+mysql> set @@tidb_ignore_prepared_cache_close_stmt=1;  -- 启用变量
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> prepare stmt from 'select * from t'; -- Prepare once
+mysql> prepare stmt from 'select * from t'; -- 准备一次
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> execute stmt;                        -- Execute once
+mysql> execute stmt;                        -- 执行一次
 Empty set (0.00 sec)
 
-mysql> deallocate prepare stmt;             -- Release after the first execute
+mysql> deallocate prepare stmt;             -- 第一次执行后释放
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> prepare stmt from 'select * from t'; -- Prepare twice
+mysql> prepare stmt from 'select * from t'; -- 准备两次
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> execute stmt;                        -- Execute twice
+mysql> execute stmt;                        -- 执行两次
 Empty set (0.00 sec)
 
-mysql> select @@last_plan_from_cache;       -- Reuse the last plan
+mysql> select @@last_plan_from_cache;       -- 重用上一个计划
 +------------------------+
 | @@last_plan_from_cache |
 +------------------------+
@@ -335,11 +335,11 @@ mysql> select @@last_plan_from_cache;       -- Reuse the last plan
 1 row in set (0.00 sec)
 ```
 
-### Monitoring
+### 监控
 
 <CustomContent platform="tidb">
 
-In [the Grafana dashboard](/grafana-tidb-dashboard.md) on the TiDB page in the **Executor** section, there are the "Queries Using Plan Cache OPS" and "Plan Cache Miss OPS" graphs. These graphs can be used to check if both TiDB and the application are configured correctly to allow the SQL Plan Cache to work correctly. The **Server** section on the same page provides the "Prepared Statement Count" graph. This graph shows a non-zero value if the application uses prepared statements, which is required for the SQL Plan Cache to function correctly.
+在 TiDB 页面的 **Executor** 部分的 [Grafana 仪表板](/grafana-tidb-dashboard.md)中，有 "Queries Using Plan Cache OPS" 和 "Plan Cache Miss OPS" 图表。这些图表可用于检查 TiDB 和应用程序是否都正确配置以允许 SQL 计划缓存正常工作。同一页面的 **Server** 部分提供了 "Prepared Statement Count" 图表。如果应用程序使用预处理语句（这是 SQL 计划缓存正常工作所必需的），此图表会显示非零值。
 
 ![`sql_plan_cache`](/media/performance/sql_plan_cache.png)
 
@@ -347,6 +347,6 @@ In [the Grafana dashboard](/grafana-tidb-dashboard.md) on the TiDB page in the *
 
 <CustomContent platform="tidb-cloud">
 
-On the [**Monitoring**](/tidb-cloud/built-in-monitoring.md) page of the [TiDB Cloud console](https://tidbcloud.com/), you can check the `Queries Using Plan Cache OPS` metric to get the number of queries using or missing plan cache per second in all TiDB instances.
+在 [TiDB Cloud 控制台](https://tidbcloud.com/) 的[**监控**](/tidb-cloud/built-in-monitoring.md)页面上，你可以查看 `Queries Using Plan Cache OPS` 指标，以获取所有 TiDB 实例中每秒使用或未命中计划缓存的查询数。
 
 </CustomContent>

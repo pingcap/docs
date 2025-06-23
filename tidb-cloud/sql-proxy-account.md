@@ -1,90 +1,90 @@
 ---
-title: SQL Proxy Account
-summary: Learn about the SQL proxy account in TiDB Cloud.
+title: SQL 代理账号
+summary: 了解 TiDB Cloud 中的 SQL 代理账号。
 ---
 
-# SQL Proxy Account
+# SQL 代理账号
 
-A SQL proxy account is a SQL user account that is automatically created by TiDB Cloud to access the database via [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) or [Data Service](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice) on behalf of a TiDB Cloud user. For example, `testuser@pingcap.com` is a TiDB Cloud user account, while `3jhEcSimm7keKP8.testuser._41mqK6H4` is its corresponding SQL proxy account.
+SQL 代理账号是由 TiDB Cloud 自动创建的 SQL 用户账号，用于代表 TiDB Cloud 用户通过 [SQL 编辑器](/tidb-cloud/explore-data-with-chat2query.md)或[数据服务](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)访问数据库。例如，`testuser@pingcap.com` 是一个 TiDB Cloud 用户账号，而 `3jhEcSimm7keKP8.testuser._41mqK6H4` 是其对应的 SQL 代理账号。
 
-SQL proxy accounts provide a secure, token-based authentication mechanism for accessing the database in TiDB Cloud. By eliminating the need for traditional username and password credentials, SQL proxy accounts enhance security and simplify access management.
+SQL 代理账号为 TiDB Cloud 中的数据库访问提供了一个安全的、基于令牌的身份验证机制。通过消除传统的用户名和密码凭证的需求，SQL 代理账号增强了安全性并简化了访问管理。
 
-The key benefits of SQL proxy accounts are as follows:
+SQL 代理账号的主要优势如下：
 
-- Enhanced security: mitigates risks associated with static credentials by using JWT tokens.
-- Streamlined access: restricts access specifically to the SQL Editor and Data Service, ensuring precise control.
-- Ease of management: simplifies authentication for developers and administrators working with TiDB Cloud.
+- 增强安全性：通过使用 JWT 令牌降低与静态凭证相关的风险。
+- 简化访问：将访问权限特别限制在 SQL 编辑器和数据服务上，确保精确控制。
+- 易于管理：简化了在 TiDB Cloud 中工作的开发人员和管理员的身份验证。
 
-## Identify the SQL proxy account
+## 识别 SQL 代理账号
 
-If you want to identify whether a specific SQL account is a SQL proxy account, take the following steps:
+如果你想确定特定的 SQL 账号是否为 SQL 代理账号，请执行以下步骤：
 
-1. Examine the `mysql.user` table:
+1. 检查 `mysql.user` 表：
 
     ```sql
     USE mysql;
     SELECT user FROM user WHERE plugin = 'tidb_auth_token';
     ```
 
-2. Check grants for the SQL account. If roles like `role_admin`, `role_readonly`, or `role_readwrite` are listed, then it is a SQL proxy account.
+2. 检查该 SQL 账号的授权。如果列出了 `role_admin`、`role_readonly` 或 `role_readwrite` 等角色，则它是一个 SQL 代理账号。
 
     ```sql
     SHOW GRANTS for 'username';
     ```
 
-## How the SQL proxy account is created
+## SQL 代理账号如何创建
 
-The SQL proxy account is automatically created during TiDB Cloud cluster initialization for the TiDB Cloud user who is granted a role with permissions in the cluster.
+当在集群中被授予具有权限的角色的 TiDB Cloud 用户，在 TiDB Cloud 集群初始化期间会自动创建 SQL 代理账号。
 
-## How the SQL proxy account is deleted
+## SQL 代理账号如何删除
 
-When a user is removed from [an organization](/tidb-cloud/manage-user-access.md#remove-an-organization-member) or [a project](/tidb-cloud/manage-user-access.md#remove-a-project-member), or their role changes to one that does not have access to the cluster, the SQL proxy account is automatically deleted.
+当用户从[组织](/tidb-cloud/manage-user-access.md#remove-an-organization-member)或[项目](/tidb-cloud/manage-user-access.md#remove-a-project-member)中被移除，或其角色更改为无法访问集群的角色时，SQL 代理账号会自动删除。
 
-Note that if a SQL proxy account is manually deleted, it will be automatically recreated when the user log in to the TiDB Cloud console next time.
+请注意，如果手动删除了 SQL 代理账号，当用户下次登录 TiDB Cloud 控制台时，该账号会自动重新创建。
 
-## SQL proxy account username
+## SQL 代理账号用户名
 
-In some cases, the SQL proxy account username is exactly the same as the TiDB Cloud username, but in other cases it is not exactly the same. The SQL proxy account username is determined by the length of the TiDB Cloud user's email address. The rules are as follows:
+在某些情况下，SQL 代理账号用户名与 TiDB Cloud 用户名完全相同，但在其他情况下则不完全相同。SQL 代理账号用户名由 TiDB Cloud 用户的电子邮件地址长度决定。规则如下：
 
-| Environment | Email length | Username format |
+| 环境 | 邮箱长度 | 用户名格式 |
 | ----------- | ------------ | --------------- |
-| TiDB Cloud Dedicated | <= 32 characters | Full email address |
-| TiDB Cloud Dedicated | > 32 characters | `prefix($email, 23)_prefix(base58(sha1($email)), 8)` |
-| TiDB Cloud Serverless | <= 15 characters | `serverless_unique_prefix + "." + email` |
-| TiDB Cloud Serverless | > 15 characters | `serverless_unique_prefix + "." + prefix($email, 6)_prefix(base58(sha1($email)), 8)` |
+| TiDB Cloud Dedicated | <= 32 字符 | 完整邮箱地址 |
+| TiDB Cloud Dedicated | > 32 字符 | `prefix($email, 23)_prefix(base58(sha1($email)), 8)` |
+| TiDB Cloud Serverless | <= 15 字符 | `serverless_unique_prefix + "." + email` |
+| TiDB Cloud Serverless | > 15 字符 | `serverless_unique_prefix + "." + prefix($email, 6)_prefix(base58(sha1($email)), 8)` |
 
-Examples:
+示例：
 
-| Environment | Email address | SQL proxy account username |
+| 环境 | 邮箱地址 | SQL 代理账号用户名 |
 | ----------- | ----- | -------- |
 | TiDB Cloud Dedicated | `user@pingcap.com` | `user@pingcap.com` |
 | TiDB Cloud Dedicated | `longemailaddressexample@pingcap.com` | `longemailaddressexample_48k1jwL9` |
 | TiDB Cloud Serverless | `u1@pingcap.com` | `{user_name_prefix}.u1@pingcap.com` |
 | TiDB Cloud Serverless | `longemailaddressexample@pingcap.com` | `{user_name_prefix}.longem_48k1jwL9`|
 
-> **Note:**
+> **注意：**
 >
-> In the preceding table, `{user_name_prefix}` is a unique prefix generated by TiDB Cloud to distinguish TiDB Cloud Serverless clusters. For details, see the [user name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) of TiDB Cloud Serverless clusters.
+> 在上表中，`{user_name_prefix}` 是由 TiDB Cloud 生成的唯一前缀，用于区分 TiDB Cloud Serverless 集群。详情请参见 TiDB Cloud Serverless 集群的[用户名前缀](/tidb-cloud/select-cluster-tier.md#user-name-prefix)。
 
-## SQL proxy account password
+## SQL 代理账号密码
 
-Since SQL proxy accounts are JWT token-based, it is not necessary to manage passwords for these accounts. The security token is automatically managed by the system.
+由于 SQL 代理账号基于 JWT 令牌，因此无需管理这些账号的密码。安全令牌由系统自动管理。
 
-## SQL proxy account roles
+## SQL 代理账号角色
 
-The SQL proxy account's role depends on the TiDB Cloud user's IAM role:
+SQL 代理账号的角色取决于 TiDB Cloud 用户的 IAM 角色：
 
-- Organization level:
-    - Organization Owner: role_admin
-    - Organization Billing Manager: No proxy account
-    - Organization Viewer: No proxy account
-    - Organization Console Audit Manager: No proxy account
+- 组织级别：
+    - 组织所有者：role_admin
+    - 组织计费管理员：无代理账号
+    - 组织查看者：无代理账号
+    - 组织控制台审计管理员：无代理账号
 
-- Project level:
-    - Project Owner: role_admin
-    - Project Data Access Read-Write: role_readwrite
-    - Project Data Access Read-Only: role_readonly
+- 项目级别：
+    - 项目所有者：role_admin
+    - 项目数据访问读写：role_readwrite
+    - 项目数据访问只读：role_readonly
 
-## SQL proxy account access control
+## SQL 代理账号访问控制
 
-SQL proxy accounts are JWT token-based and only accessible to the Data Service and SQL Editor. It is impossible to access the TiDB Cloud cluster using a SQL proxy account with a username and password.
+SQL 代理账号基于 JWT 令牌，只能通过数据服务和 SQL 编辑器访问。无法使用用户名和密码通过 SQL 代理账号访问 TiDB Cloud 集群。

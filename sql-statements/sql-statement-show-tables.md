@@ -1,15 +1,15 @@
 ---
-title: SHOW [FULL] TABLES | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW [FULL] TABLES for the TiDB database.
+title: SHOW [FULL] TABLES | TiDB SQL 语句参考
+summary: TiDB 数据库中 SHOW [FULL] TABLES 的使用概览。
 ---
 
 # SHOW [FULL] TABLES
 
-This statement shows a list of tables and views in the currently selected database. The optional keyword `FULL` indicates if a table is of type `BASE TABLE`, `SEQUENCE`, or `VIEW`.
+该语句显示当前选定数据库中的表和视图列表。可选关键字 `FULL` 表示一个表是 `BASE TABLE`、`SEQUENCE` 还是 `VIEW` 类型。
 
-To show tables in a different database, use `SHOW TABLES IN DatabaseName`.
+要显示其他数据库中的表，使用 `SHOW TABLES IN DatabaseName`。
 
-## Synopsis
+## 语法图
 
 ```ebnf+diagram
 ShowTableStmt ::=
@@ -20,7 +20,7 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> CREATE TABLE t1 (a int);
@@ -75,11 +75,11 @@ mysql> SHOW TABLES IN mysql;
 20 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `SHOW [FULL] TABLES` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中的 `SHOW [FULL] TABLES` 语句与 MySQL 完全兼容。如果发现任何兼容性差异，请[报告问题](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 另请参阅
 
 * [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 * [DROP TABLE](/sql-statements/sql-statement-drop-table.md)

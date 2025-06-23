@@ -1,11 +1,11 @@
 ---
 title: VARIABLES_INFO
-summary: Learn the `VARIABLES_INFO` information_schema table.
+summary: 了解 `VARIABLES_INFO` information_schema 表。
 ---
 
 # VARIABLES_INFO
 
-The `VARIABLES_INFO` table provides information about the default value, current value, and scope of [system variables](/system-variables.md) in the current TiDB instance or TiDB cluster.
+`VARIABLES_INFO` 表提供了当前 TiDB 实例或 TiDB 集群中[系统变量](/system-variables.md)的默认值、当前值和作用范围等信息。
 
 ```sql
 USE information_schema;
@@ -43,13 +43,13 @@ SELECT * FROM variables_info ORDER BY variable_name LIMIT 3;
 3 rows in set (0.01 sec)
 ```
 
-Fields in the `VARIABLES_INFO` table are described as follows:
+`VARIABLES_INFO` 表中各字段的描述如下：
 
-* `VARIABLE_NAME`: the name of the system variable.
-* `VARIABLE_SCOPE`: the scope of the system variable. `SESSION` means that the system variable is only valid in the current session. `INSTANCE` means that the system variable is valid in the TiDB instance. `GLOBAL` means that the system variable is valid in the TiDB cluster. `NONE` means that the system variable is read only in the TiDB cluster.
-* `DEFAULT_VALUE`: the default value of the system variable.
-* `CURRENT_VALUE`: the current value of the system variable. If the scope includes `SESSION`, `CURRENT_VALUE` is the value in the current session.
-* `MIN_VALUE`: the minimum value allowed for the system variable. If the system variable is not numeric, `MIN_VALUE` is NULL.
-* `MAX_VALUE`: the maximum value allowed for the system variable. If the system variable is not numeric, `MAX_VALUE` is NULL.
-* `POSSIBLE_VALUES`: the possible values of the system variable. If the system variable is not an enum type, `POSSIBLE_VALUES` is NULL.
-* `IS_NOOP`: whether the system variable is a `noop` system variable.
+* `VARIABLE_NAME`：系统变量的名称。
+* `VARIABLE_SCOPE`：系统变量的作用范围。`SESSION` 表示系统变量仅在当前会话中有效。`INSTANCE` 表示系统变量在 TiDB 实例中有效。`GLOBAL` 表示系统变量在 TiDB 集群中有效。`NONE` 表示系统变量在 TiDB 集群中为只读。
+* `DEFAULT_VALUE`：系统变量的默认值。
+* `CURRENT_VALUE`：系统变量的当前值。如果作用范围包含 `SESSION`，则 `CURRENT_VALUE` 为当前会话中的值。
+* `MIN_VALUE`：系统变量允许的最小值。如果系统变量不是数值类型，则 `MIN_VALUE` 为 NULL。
+* `MAX_VALUE`：系统变量允许的最大值。如果系统变量不是数值类型，则 `MAX_VALUE` 为 NULL。
+* `POSSIBLE_VALUES`：系统变量的可能值。如果系统变量不是枚举类型，则 `POSSIBLE_VALUES` 为 NULL。
+* `IS_NOOP`：系统变量是否为 `noop`（无操作）系统变量。

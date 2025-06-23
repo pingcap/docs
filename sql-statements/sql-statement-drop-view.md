@@ -1,13 +1,13 @@
 ---
-title: DROP VIEW | TiDB SQL Statement Reference
-summary: An overview of the usage of DROP VIEW for the TiDB database.
+title: DROP VIEW | TiDB SQL 语句参考
+summary: TiDB 数据库中 DROP VIEW 的使用概述。
 ---
 
 # DROP VIEW
 
-This statement drops a view object from the currently selected database. It does not affect any base tables that a view references.
+此语句从当前选择的数据库中删除视图对象。它不会影响视图引用的任何基表。
 
-## Synopsis
+## 语法
 
 ```ebnf+diagram
 DropViewStmt ::=
@@ -20,7 +20,7 @@ TableName ::=
     Identifier ('.' Identifier)?
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -71,11 +71,11 @@ mysql> SELECT * FROM t1;
 5 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `DROP VIEW` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中的 `DROP VIEW` 语句与 MySQL 完全兼容。如果发现任何兼容性差异，请[报告问题](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 另请参阅
 
 * [CREATE VIEW](/sql-statements/sql-statement-create-view.md)
 * [DROP TABLE](/sql-statements/sql-statement-drop-table.md)

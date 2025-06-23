@@ -1,37 +1,37 @@
 ---
-title: Encryption and Compression Functions
-summary: Learn about the encryption and compression functions.
+title: 加密和压缩函数
+summary: 了解加密和压缩函数。
 ---
 
-# Encryption and Compression Functions
+# 加密和压缩函数
 
-TiDB supports most of the [encryption and compression functions](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html) available in MySQL 8.0.
+TiDB 支持 MySQL 8.0 中提供的大多数[加密和压缩函数](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html)。
 
-## Supported functions
+## 支持的函数
 
-| Name                                                          | Description                                       |
+| 名称                                                          | 描述                                       |
 |:--------------------------------------------------------------|:--------------------------------------------------|
-| [`AES_DECRYPT()`](#aes_decrypt)                               | Decrypt using AES                                 |
-| [`AES_ENCRYPT()`](#aes_encrypt)                               | Encrypt using AES                                 |
-| [`COMPRESS()`](#compress)                                     | Compress and return result as a binary string     |
-| [`MD5()`](#md5)                                               | Calculate MD5 checksum                            |
-| [`PASSWORD()`](#password)                                     | Calculate and return a password string            |
-| [`RANDOM_BYTES()`](#random_bytes)                             | Return a random byte vector                       |
-| [`SHA()`](#sha)                                               | Calculate an SHA-1 160-bit checksum               |
-| [`SHA1()`](#sha1)                                             | Calculate an SHA-1 160-bit checksum               |
-| [`SHA2()`](#sha2)                                             | Calculate an SHA-2 checksum                       |
-| [`SM3()`](#sm3)                                               | Calculate an SM3 checksum                         |
-| [`UNCOMPRESS()`](#uncompress)                                 | Uncompress a compressed string                    |
-| [`UNCOMPRESSED_LENGTH()`](#uncompressed_length)               | Return the length of a string before compression  |
-| [`VALIDATE_PASSWORD_STRENGTH()`](#validate_password_strength) | Validate the password strength                    |
+| [`AES_DECRYPT()`](#aes_decrypt)                               | 使用 AES 解密                                 |
+| [`AES_ENCRYPT()`](#aes_encrypt)                               | 使用 AES 加密                                 |
+| [`COMPRESS()`](#compress)                                     | 压缩并以二进制字符串形式返回结果     |
+| [`MD5()`](#md5)                                               | 计算 MD5 校验和                            |
+| [`PASSWORD()`](#password)                                     | 计算并返回密码字符串            |
+| [`RANDOM_BYTES()`](#random_bytes)                             | 返回随机字节向量                       |
+| [`SHA()`](#sha)                                               | 计算 SHA-1 160 位校验和               |
+| [`SHA1()`](#sha1)                                             | 计算 SHA-1 160 位校验和               |
+| [`SHA2()`](#sha2)                                             | 计算 SHA-2 校验和                       |
+| [`SM3()`](#sm3)                                               | 计算 SM3 校验和                         |
+| [`UNCOMPRESS()`](#uncompress)                                 | 解压缩压缩的字符串                    |
+| [`UNCOMPRESSED_LENGTH()`](#uncompressed_length)               | 返回压缩前字符串的长度  |
+| [`VALIDATE_PASSWORD_STRENGTH()`](#validate_password_strength) | 验证密码强度                    |
 
 ### [`AES_DECRYPT()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_aes-decrypt)
 
-The `AES_DECRYPT(data, key [,iv])` function decrypts `data` that was previously encrypted using the [`AES_ENCRYPT()`](#aes_encrypt) function with the same `key`.
+`AES_DECRYPT(data, key [,iv])` 函数使用与 [`AES_ENCRYPT()`](#aes_encrypt) 函数相同的 `key` 解密之前加密的 `data`。
 
-You can use the [`block_encryption_mode`](/system-variables.md#block_encryption_mode) system variable to select the [Advanced Encryption Standard (AES)](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) encryption mode.
+你可以使用 [`block_encryption_mode`](/system-variables.md#block_encryption_mode) 系统变量来选择 [高级加密标准 (AES)](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) 加密模式。
 
-For encryption modes that require an initialization vector, set it with the `iv` argument. The default value is `NULL`.
+对于需要初始化向量的加密模式，可以使用 `iv` 参数设置。默认值为 `NULL`。
 
 ```sql
 SELECT AES_DECRYPT(0x28409970815CD536428876175F1A4923, 'secret');
@@ -48,11 +48,11 @@ SELECT AES_DECRYPT(0x28409970815CD536428876175F1A4923, 'secret');
 
 ### [`AES_ENCRYPT()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_aes-encrypt)
 
-The `AES_ENCRYPT(data, key [,iv])` function encrypts `data` with `key` using the [Advanced Encryption Standard (AES)](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) algorithm.
+`AES_ENCRYPT(data, key [,iv])` 函数使用 [高级加密标准 (AES)](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) 算法用 `key` 加密 `data`。
 
-You can use the [`block_encryption_mode`](/system-variables.md#block_encryption_mode) system variable to select the AES encryption mode.
+你可以使用 [`block_encryption_mode`](/system-variables.md#block_encryption_mode) 系统变量来选择 AES 加密模式。
 
-For encryption modes that require an initialization vector, set it with the `iv` argument. The default value is `NULL`.
+对于需要初始化向量的加密模式，可以使用 `iv` 参数设置。默认值为 `NULL`。
 
 ```sql
 SELECT AES_ENCRYPT(0x616263,'secret');
@@ -69,15 +69,15 @@ SELECT AES_ENCRYPT(0x616263,'secret');
 
 ### [`COMPRESS()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_compress)
 
-The `COMPRESS(expr)` function returns a compressed version of the input data `expr`.
+`COMPRESS(expr)` 函数返回输入数据 `expr` 的压缩版本。
 
-- If the argument is `NULL`, the function returns `NULL`.
-- If the argument is an empty string, the function returns a zero-length value.
+- 如果参数为 `NULL`，函数返回 `NULL`。
+- 如果参数为空字符串，函数返回零长度值。
 
-For non-zero length argument, the function returns a binary string with the following structure:
+对于非零长度参数，函数返回具有以下结构的二进制字符串：
 
-- Bytes 0 to 3: the uncompressed length
-- Bytes 4 to the end: the zlib compressed data
+- 字节 0 到 3：未压缩的长度
+- 字节 4 到结尾：zlib 压缩的数据
 
 ```sql
 SELECT COMPRESS(0x414243);
@@ -92,9 +92,9 @@ SELECT COMPRESS(0x414243);
 1 row in set (0.00 sec)
 ```
 
-In this output, `0x03000000` represents the uncompressed length (3) and `0x789C72747206040000FFFF018D00C7` is the zlib compressed data.
+在此输出中，`0x03000000` 表示未压缩的长度（3），`0x789C72747206040000FFFF018D00C7` 是 zlib 压缩的数据。
 
-An example of using Python to decode this outside of TiDB:
+使用 Python 在 TiDB 外部解码的示例：
 
 ```python
 import codecs
@@ -105,7 +105,7 @@ print(int.from_bytes(data[:4], byteorder='little'))  # 3
 print(zlib.decompress(data[4:]))  # b'ABC'
 ```
 
-For short strings, `COMPRESS()` might return more bytes than the input. The following example shows that a string of 100 `a` characters compresses to 19 bytes.
+对于短字符串，`COMPRESS()` 可能返回比输入更多的字节。以下示例显示 100 个 `a` 字符的字符串压缩为 19 个字节。
 
 ```sql
 WITH x AS (SELECT REPEAT('a',100) 'a')
@@ -123,7 +123,7 @@ SELECT LENGTH(a),LENGTH(COMPRESS(a)) FROM x;
 
 ### [`MD5()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_md5)
 
-The `MD5(expr)` function calculates a 128-bit [MD5](https://en.wikipedia.org/wiki/MD5) hash for the given argument `expr`.
+`MD5(expr)` 函数为给定参数 `expr` 计算 128 位 [MD5](https://en.wikipedia.org/wiki/MD5) 哈希值。
 
 ```sql
 SELECT MD5('abc');
@@ -140,11 +140,11 @@ SELECT MD5('abc');
 
 ### [`PASSWORD()`](https://dev.mysql.com/doc/refman/5.7/en/encryption-functions.html#function_password)
 
-> **Warning:**
+> **警告：**
 >
-> This function is deprecated in MySQL 5.7 and removed in MySQL 8.0. It is deprecated in TiDB. It is not recommended to use this function.
+> 此函数在 MySQL 5.7 中已弃用，在 MySQL 8.0 中已移除。在 TiDB 中已弃用。不建议使用此函数。
 
-The `PASSWORD(str)` function calculates a password hash that can be used with the `mysql_native_password` authentication method.
+`PASSWORD(str)` 函数计算可用于 `mysql_native_password` 认证方法的密码哈希。
 
 ```sql
 SELECT PASSWORD('secret');
@@ -163,7 +163,7 @@ Warning (Code 1681): PASSWORD is deprecated and will be removed in a future rele
 
 ### [`RANDOM_BYTES()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_random-bytes)
 
-The `RANDOM_BYTES(n)` function returns `n` random bytes.
+`RANDOM_BYTES(n)` 函数返回 `n` 个随机字节。
 
 ```sql
 SELECT RANDOM_BYTES(3);
@@ -180,11 +180,11 @@ SELECT RANDOM_BYTES(3);
 
 ### [`SHA()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_sha1)
 
-The `SHA()` function is an alias for [`SHA1`](#sha1).
+`SHA()` 函数是 [`SHA1`](#sha1) 的别名。
 
 ### [`SHA1()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_sha1)
 
-The `SHA1(expr)` function calculates a 160-bit [SHA-1](https://en.wikipedia.org/wiki/SHA-1) hash for the given argument `expr`.
+`SHA1(expr)` 函数为给定参数 `expr` 计算 160 位 [SHA-1](https://en.wikipedia.org/wiki/SHA-1) 哈希值。
 
 ```sql
 SELECT SHA1('abc');
@@ -201,11 +201,11 @@ SELECT SHA1('abc');
 
 ### [`SHA2()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_sha2)
 
-The `SHA2(str, n)` function calculates a hash using an algorithm from the [SHA-2](https://en.wikipedia.org/wiki/SHA-2) family. The `n` argument is used to select the algorithm. `SHA2()` returns `NULL` if any of the arguments are `NULL` or if the algorithm selected by `n` is unknown or unsupported.
+`SHA2(str, n)` 函数使用 [SHA-2](https://en.wikipedia.org/wiki/SHA-2) 系列算法计算哈希值。参数 `n` 用于选择算法。如果任何参数为 `NULL` 或者 `n` 选择的算法未知或不支持，`SHA2()` 返回 `NULL`。
 
-The following lists supported algorithms:
+以下列出支持的算法：
 
-| n   | Algorithm |
+| n   | 算法 |
 |-----|-----------|
 | 0   | SHA-256   |
 | 224 | SHA-224   |
@@ -228,11 +228,11 @@ SELECT SHA2('abc',224);
 
 ### `SM3()`
 
-> **Note:**
+> **注意：**
 >
-> The `SM3()` function is a TiDB extension and is not implemented in MySQL.
+> `SM3()` 函数是 TiDB 的扩展，MySQL 中未实现。
 
-The `SM3(str)` function calculates a 256-bit [ShangMi 3 (SM3)](https://en.wikipedia.org/wiki/SM3_(hash_function)) hash for the given argument `str`.
+`SM3(str)` 函数为给定参数 `str` 计算 256 位 [商密 3 (SM3)](https://en.wikipedia.org/wiki/SM3_(hash_function)) 哈希值。
 
 ```sql
 SELECT SM3('abc');
@@ -249,7 +249,7 @@ SELECT SM3('abc');
 
 ### [`UNCOMPRESS()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_uncompress)
 
-The `UNCOMPRESS(data)` function decompresses the data that was compressed with the [`COMPRESS()`](#compress) function.
+`UNCOMPRESS(data)` 函数解压缩使用 [`COMPRESS()`](#compress) 函数压缩的数据。
 
 ```sql
 SELECT UNCOMPRESS(0x03000000789C72747206040000FFFF018D00C7);
@@ -266,7 +266,7 @@ SELECT UNCOMPRESS(0x03000000789C72747206040000FFFF018D00C7);
 
 ### [`UNCOMPRESSED_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_uncompressed-length)
 
-The `UNCOMPRESSED_LENGTH(data)` function returns the first 4 bytes of the compressed data, which store the length that the compressed string had before being compressed with the [`COMPRESS()`](#compress) function.
+`UNCOMPRESSED_LENGTH(data)` 函数返回压缩数据的前 4 个字节，这些字节存储了字符串在使用 [`COMPRESS()`](#compress) 函数压缩之前的长度。
 
 ```sql
 SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
@@ -285,27 +285,27 @@ SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
 
 <CustomContent platform="tidb">
 
-The `VALIDATE_PASSWORD_STRENGTH(str)` function is used as part of [password management](/password-management.md). It calculates the strength of a password and returns a value between 0 and 100.
+`VALIDATE_PASSWORD_STRENGTH(str)` 函数作为[密码管理](/password-management.md)的一部分使用。它计算密码的强度并返回一个介于 0 和 100 之间的值。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-The `VALIDATE_PASSWORD_STRENGTH(str)` function is used as part of password management. It calculates the strength of a password and returns a value between 0 and 100.
+`VALIDATE_PASSWORD_STRENGTH(str)` 函数作为密码管理的一部分使用。它计算密码的强度并返回一个介于 0 和 100 之间的值。
 
 </CustomContent>
 
-The [`validate_password.*`](/system-variables.md) system variables affect the behavior of the `VALIDATE_PASSWORD_STRENGTH()` function.
+[`validate_password.*`](/system-variables.md) 系统变量会影响 `VALIDATE_PASSWORD_STRENGTH()` 函数的行为。
 
-Examples:
+示例：
 
-- To enable the password complexity check, set the [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650) system variable to `ON`:
+- 要启用密码复杂度检查，将 [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650) 系统变量设置为 `ON`：
 
     ```sql
     SET GLOBAL validate_password.enable=ON;
     ```
 
-- View password validation-related system variables:
+- 查看密码验证相关的系统变量：
 
     ```sql
     SHOW VARIABLES LIKE 'validate_password.%';
@@ -327,7 +327,7 @@ Examples:
     8 rows in set (0.01 sec)
     ```
 
-- Check the password strength of an empty string, which returns `0`:
+- 检查空字符串的密码强度，返回 `0`：
 
     ```sql
     SELECT VALIDATE_PASSWORD_STRENGTH('');
@@ -342,7 +342,7 @@ Examples:
     1 row in set (0.00 sec)
     ```
 
-- Check the password strength of a short string `abcdef`, which returns `25`:
+- 检查短字符串 `abcdef` 的密码强度，返回 `25`：
 
     ```sql
     SELECT VALIDATE_PASSWORD_STRENGTH('abcdef');
@@ -357,7 +357,7 @@ Examples:
     1 row in set (0.00 sec)
     ```
 
-- Check the password strength of a longer string `abcdefghi`, which returns `50`. This string is longer than the default value of [`validate_password.length`](/system-variables.md#validate_passwordlength-new-in-v650):
+- 检查较长字符串 `abcdefghi` 的密码强度，返回 `50`。此字符串长度超过 [`validate_password.length`](/system-variables.md#validate_passwordlength-new-in-v650) 的默认值：
 
     ```sql
     SELECT VALIDATE_PASSWORD_STRENGTH('abcdefghi');
@@ -372,7 +372,7 @@ Examples:
     1 row in set (0.00 sec)
     ```
 
-- Adding an upper-case character to the string does not improve the password strength:
+- 添加大写字符到字符串不会提高密码强度：
 
     ```sql
     SELECT VALIDATE_PASSWORD_STRENGTH('Abcdefghi');
@@ -387,7 +387,7 @@ Examples:
     1 row in set (0.01 sec)
     ```
 
-- Adding numbers to the string also does not improve the password strength:
+- 添加数字到字符串也不会提高密码强度：
 
     ```sql
     SELECT VALIDATE_PASSWORD_STRENGTH('Abcdefghi123');
@@ -402,7 +402,7 @@ Examples:
     1 row in set (0.00 sec)
     ```
 
-- Finally, adding special characters to the string brings the password strength to `100`, indicating a strong password:
+- 最后，添加特殊字符到字符串使密码强度达到 `100`，表示这是一个强密码：
 
     ```sql
     SELECT VALIDATE_PASSWORD_STRENGTH('Abcdefghi123%$#');
@@ -417,12 +417,12 @@ Examples:
     1 row in set (0.00 sec)
     ```
 
-## Unsupported functions
+## 不支持的函数
 
-* TiDB does not support the functions only available in MySQL Enterprise [Issue #2632](https://github.com/pingcap/tidb/issues/2632).
+* TiDB 不支持仅在 MySQL Enterprise 中可用的函数 [Issue #2632](https://github.com/pingcap/tidb/issues/2632)。
 
-## MySQL compatibility
+## MySQL 兼容性
 
-* TiDB does not support the `STATEMENT_DIGEST()` and `STATEMENT_DIGEST_TEXT()` functions.
-* TiDB does not support the `kdf_name`, `salt`, and `iterations` arguments for [`AES_ENCRYPT()`](#aes_encrypt) and [`AES_DECRYPT`](#aes_decrypt) that MySQL added in MySQL 8.0.30.
-* MySQL does not implement the [`SM3()`](#sm3) function.
+* TiDB 不支持 `STATEMENT_DIGEST()` 和 `STATEMENT_DIGEST_TEXT()` 函数。
+* TiDB 不支持 MySQL 8.0.30 中为 [`AES_ENCRYPT()`](#aes_encrypt) 和 [`AES_DECRYPT`](#aes_decrypt) 添加的 `kdf_name`、`salt` 和 `iterations` 参数。
+* MySQL 未实现 [`SM3()`](#sm3) 函数。

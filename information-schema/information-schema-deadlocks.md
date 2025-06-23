@@ -1,18 +1,18 @@
 ---
 title: DEADLOCKS
-summary: Learn the `DEADLOCKS` INFORMATION_SCHEMA table.
+summary: 了解 `DEADLOCKS` INFORMATION_SCHEMA 表。
 ---
 
 # DEADLOCKS
 
-The `DEADLOCKS` table shows the information of the several deadlock errors that have occurred recently on the current TiDB node.
+`DEADLOCKS` 表显示当前 TiDB 节点上最近发生的几次死锁错误的信息。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC deadlocks;
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 +-------------------------+---------------------+------+------+---------+-------+
@@ -30,138 +30,138 @@ The output is as follows:
 +-------------------------+---------------------+------+------+---------+-------+
 ```
 
-The `DEADLOCKS` table uses multiple rows to show the same deadlock event, and each row displays the information about one of the transactions involved in the deadlock event. If the TiDB node records multiple deadlock errors, each error is distinguished using the `DEADLOCK_ID` column. The same `DEADLOCK_ID` indicates the same deadlock event. Note that `DEADLOCK_ID` **does not guarantee global uniqueness and will not be persisted**. It only shows the same deadlock event in the same result set.
+`DEADLOCKS` 表使用多行来显示同一个死锁事件，每一行显示死锁事件中涉及的其中一个事务的信息。如果 TiDB 节点记录了多个死锁错误，则使用 `DEADLOCK_ID` 列来区分每个错误。相同的 `DEADLOCK_ID` 表示同一个死锁事件。注意，`DEADLOCK_ID` **不保证全局唯一性且不会被持久化**，它仅用于在同一个结果集中表示同一个死锁事件。
 
-The meaning of each column field in the `DEADLOCKS` table is as follows:
+`DEADLOCKS` 表中各列字段的含义如下：
 
-* `DEADLOCK_ID`: The ID of the deadlock event. When multiple deadlock errors exist in the table, you can use this column to distinguish rows that belong to different deadlock errors.
-* `OCCUR_TIME`: The time when the deadlock error occurs.
-* `RETRYABLE`: Whether the deadlock error can be retried. For the description of retryable deadlock errors, see the [Retryable deadlock errors](#retryable-deadlock-errors) section.
-* `TRY_LOCK_TRX_ID`: The ID of the transaction that tries to acquire lock. This ID is also the `start_ts` of the transaction.
-* `CURRENT_SQL_DIGEST`: The digest of the SQL statement currently being executed in the lock-acquiring transaction.
-* `CURRENT_SQL_DIGEST_TEXT`: The normalized form of the SQL statement that is currently being executed in the lock-acquiring transaction.
-* `KEY`: The blocked key that the transaction tries to lock. The value of this field is displayed in the form of hexadecimal string.
-* `KEY_INFO`: The detailed information of `KEY`. See the [`KEY_INFO`](#key_info) section.
-* `TRX_HOLDING_LOCK`: The ID of the transaction that currently holds the lock on the key and causes blocking. This ID is also the `start_ts` of the transaction.
+* `DEADLOCK_ID`：死锁事件的 ID。当表中存在多个死锁错误时，可以使用此列来区分属于不同死锁错误的行。
+* `OCCUR_TIME`：死锁错误发生的时间。
+* `RETRYABLE`：死锁错误是否可以重试。关于可重试死锁错误的说明，请参见[可重试死锁错误](#可重试死锁错误)部分。
+* `TRY_LOCK_TRX_ID`：尝试获取锁的事务 ID。此 ID 也是事务的 `start_ts`。
+* `CURRENT_SQL_DIGEST`：获取锁事务中当前正在执行的 SQL 语句的摘要。
+* `CURRENT_SQL_DIGEST_TEXT`：获取锁事务中当前正在执行的 SQL 语句的规范化形式。
+* `KEY`：事务尝试锁定的被阻塞的键。此字段的值以十六进制字符串形式显示。
+* `KEY_INFO`：`KEY` 的详细信息。参见 [`KEY_INFO`](#key_info) 部分。
+* `TRX_HOLDING_LOCK`：当前持有该键的锁并导致阻塞的事务 ID。此 ID 也是事务的 `start_ts`。
 
 <CustomContent platform="tidb">
 
-To adjust the maximum number of deadlock events that can be recorded in the `DEADLOCKS` table, adjust the [`pessimistic-txn.deadlock-history-capacity`](/tidb-configuration-file.md#deadlock-history-capacity) configuration in the TiDB configuration file. By default, the information of the recent 10 deadlock events is recorded in the table.
+要调整 `DEADLOCKS` 表中可以记录的最大死锁事件数，请在 TiDB 配置文件中调整 [`pessimistic-txn.deadlock-history-capacity`](/tidb-configuration-file.md#deadlock-history-capacity) 配置。默认情况下，表中记录最近 10 次死锁事件的信息。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-The information of the recent 10 deadlock events is recorded in the `DEADLOCKS` table.
+`DEADLOCKS` 表中记录最近 10 次死锁事件的信息。
 
 </CustomContent>
 
-> **Warning:**
+> **警告：**
 >
-> * Only users with the [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process) privilege can query this table.
-> * The information (SQL digest) in the `CURRENT_SQL_DIGEST` column is the hash value calculated from the normalized SQL statement. The information in the `CURRENT_SQL_DIGEST_TEXT` column is internally queried from statements summary tables, so it is possible that the corresponding statement cannot be found internally. For the detailed description of SQL digests and the statements summary tables, see [Statement Summary Tables](/statement-summary-tables.md).
+> * 只有具有 [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process) 权限的用户才能查询此表。
+> * `CURRENT_SQL_DIGEST` 列中的信息（SQL 摘要）是从规范化 SQL 语句计算得出的哈希值。`CURRENT_SQL_DIGEST_TEXT` 列中的信息是从语句概要表内部查询的，因此可能找不到相应的语句。有关 SQL 摘要和语句概要表的详细说明，请参见[语句概要表](/statement-summary-tables.md)。
 
 ## `KEY_INFO`
 
-The `KEY_INFO` column shows the detailed information of the `KEY` column. The information is shown in the JSON format. The description of each field is as follows:
+`KEY_INFO` 列显示 `KEY` 列的详细信息。信息以 JSON 格式显示。各字段说明如下：
 
-* `"db_id"`: The ID of the schema to which the key belongs.
-* `"db_name"`: The name of the schema to which the key belongs.
-* `"table_id"`: The ID of the table to which the key belongs.
-* `"table_name"`: The name of the table to which the key belongs.
-* `"partition_id"`: The ID of the partition where the key is located.
-* `"partition_name"`: The name of the partition where the key is located.
-* `"handle_type"`: The handle type of the row key (that is, the key that stores a row of data). The possible values ​​are as follows:
-    * `"int"`: The handle type is int, which means that the handle is the row ID.
-    * `"common"`: The handle type is not int64. This type is shown in the non-int primary key when clustered index is enabled.
-    * `"unknown"`: The handle type is currently not supported.
-* `"handle_value"`: The handle value.
-* `"index_id"`: The index ID to which the index key (the key that stores the index) belongs.
-* `"index_name"`: The name of the index to which the index key belongs.
-* `"index_values"`: The index value in the index key.
+* `"db_id"`：键所属 schema 的 ID。
+* `"db_name"`：键所属 schema 的名称。
+* `"table_id"`：键所属表的 ID。
+* `"table_name"`：键所属表的名称。
+* `"partition_id"`：键所在分区的 ID。
+* `"partition_name"`：键所在分区的名称。
+* `"handle_type"`：行键（即存储一行数据的键）的句柄类型。可能的值如下：
+    * `"int"`：句柄类型为 int，表示句柄是行 ID。
+    * `"common"`：句柄类型不是 int64。这种类型在启用聚簇索引时的非整数主键中显示。
+    * `"unknown"`：当前不支持的句柄类型。
+* `"handle_value"`：句柄值。
+* `"index_id"`：索引键（存储索引的键）所属的索引 ID。
+* `"index_name"`：索引键所属的索引名称。
+* `"index_values"`：索引键中的索引值。
 
-In the above fields, if the information of a field is not applicable or currently unavailable, the field is omitted in the query result. For example, the row key information does not contain `index_id`, `index_name`, and `index_values`; the index key does not contain `handle_type` and `handle_value`; non-partitioned tables do not display `partition_id` and `partition_name`; the key information in the deleted table cannot obtain schema information such as `table_name`, `db_id`, `db_name`, and `index_name`, and it is unable to distinguish whether the table is a partitioned table.
+在上述字段中，如果某个字段的信息不适用或当前不可用，则该字段在查询结果中会被省略。例如，行键信息不包含 `index_id`、`index_name` 和 `index_values`；索引键不包含 `handle_type` 和 `handle_value`；非分区表不显示 `partition_id` 和 `partition_name`；已删除表中的键信息无法获取 `table_name`、`db_id`、`db_name` 和 `index_name` 等 schema 信息，也无法区分该表是否为分区表。
 
-> **Note:**
+> **注意：**
 >
-> If a key comes from a table with partitioning enabled, and the information of the schema to which the key belongs cannot be queried due to some reasons (for example, the table to which the key belongs has been deleted) during the query, the ID of the partition to which the key belongs might be appear in the `table_id` field. This is because TiDB encodes the keys of different partitions in the same way as it encodes the keys of several independent tables. Therefore, when the schema information is missing, TiDB cannot confirm whether the key belongs to an unpartitioned table or to one partition of a table.
+> 如果一个键来自启用了分区的表，并且在查询期间由于某些原因（例如，键所属的表已被删除）无法查询到该键所属的 schema 信息，则该键所属的分区的 ID 可能会出现在 `table_id` 字段中。这是因为 TiDB 对不同分区的键的编码方式与对几个独立表的键的编码方式相同。因此，当缺少 schema 信息时，TiDB 无法确认该键是属于非分区表还是属于某个表的一个分区。
 
-## Retryable deadlock errors
+## 可重试死锁错误
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注意：**
 >
-> This section is not applicable to TiDB Cloud.
+> 此部分不适用于 TiDB Cloud。
 
 </CustomContent>
 
 <CustomContent platform="tidb">
 
-> **Note:**
+> **注意：**
 >
-> The `DEADLOCKS` table does not collect the information of retryable deadlock errors by default. If you want the table to collect the retryable deadlock error information, you can adjust the value of [`pessimistic-txn.deadlock-history-collect-retryable`](/tidb-configuration-file.md#deadlock-history-collect-retryable) in the TiDB configuration file.
+> 默认情况下，`DEADLOCKS` 表不收集可重试死锁错误的信息。如果你希望表收集可重试死锁错误信息，可以在 TiDB 配置文件中调整 [`pessimistic-txn.deadlock-history-collect-retryable`](/tidb-configuration-file.md#deadlock-history-collect-retryable) 的值。
 
 </CustomContent>
 
-When transaction A is blocked by a lock already held by transaction B, and transaction B is directly or indirectly blocked by the lock held by the current transaction A, a deadlock error will occur. In this deadlock, there might be two cases:
+当事务 A 被事务 B 已持有的锁阻塞，而事务 B 又直接或间接地被当前事务 A 持有的锁阻塞时，就会发生死锁错误。在这个死锁中，可能存在两种情况：
 
-+ Case 1: Transaction B might be (directly or indirectly) blocked by a lock generated by a statement that has been executed after transaction A starts and before transaction A gets blocked.
-+ Case 2: Transaction B might also be blocked by the statement currently being executed in transaction A.
++ 情况 1：事务 B 可能被事务 A 在开始后、被阻塞前执行的语句生成的锁（直接或间接）阻塞。
++ 情况 2：事务 B 也可能被事务 A 当前正在执行的语句阻塞。
 
-In case 1, TiDB will report a deadlock error to the client of transaction A and terminate the transaction.
+在情况 1 中，TiDB 会向事务 A 的客户端报告死锁错误并终止事务。
 
-In case 2, the statement currently being executed in transaction A will be automatically retried in TiDB. For example, suppose that transaction A executes the following statement:
+在情况 2 中，TiDB 会自动重试事务 A 当前正在执行的语句。例如，假设事务 A 执行以下语句：
 
 ```sql
 UPDATE t SET v = v + 1 WHERE id = 1 OR id = 2;
 ```
 
-Transaction B executes the following two statements successively.
+事务 B 依次执行以下两条语句：
 
 ```sql
 UPDATE t SET v = 4 WHERE id = 2;
 UPDATE t SET v = 2 WHERE id = 1;
 ```
 
-Then if transaction A locks the two rows with `id = 1` and `id = 2`, and the two transactions run in the following sequence:
+然后，如果事务 A 锁定 `id = 1` 和 `id = 2` 的两行，并且两个事务按以下顺序运行：
 
-1. Transaction A locks the row with `id = 1`.
-2. Transaction B executes the first statement and locks the row with `id = 2`.
-3. Transaction B executes the second statement and tries to lock the row with `id = 1`, which is blocked by transaction A.
-4. Transaction A tries to lock the row with `id = 2` and is blocked by transaction B, which forms a deadlock.
+1. 事务 A 锁定 `id = 1` 的行。
+2. 事务 B 执行第一条语句并锁定 `id = 2` 的行。
+3. 事务 B 执行第二条语句并尝试锁定 `id = 1` 的行，被事务 A 阻塞。
+4. 事务 A 尝试锁定 `id = 2` 的行并被事务 B 阻塞，形成死锁。
 
-For this case, because the statement of transaction A that blocks other transactions is also the statement currently being executed, the pessimistic lock on the current statement can be resolved (so that transaction B can continue to run), and the current statement can be retried. TiDB uses the key hash internally to determine whether this is the case.
+对于这种情况，由于阻塞其他事务的事务 A 的语句也是当前正在执行的语句，因此可以解除当前语句的悲观锁（以便事务 B 可以继续运行），并重试当前语句。TiDB 内部使用键的哈希来判断是否属于这种情况。
 
-When a retryable deadlock occurs, the internal automatic retry will not cause a transaction error, so it is transparent to the client. However, if this situation occurs frequently, the performance might be affected. When this occurs, you can see `single statement deadlock, retry statement` in the TiDB log.
+当发生可重试死锁时，内部自动重试不会导致事务错误，因此对客户端是透明的。但是，如果这种情况频繁发生，可能会影响性能。发生这种情况时，你可以在 TiDB 日志中看到 `single statement deadlock, retry statement`。
 
-## Example 1
+## 示例 1
 
-Assume that the table definition and the initial data is as follows:
+假设表定义和初始数据如下：
 
 ```sql
 CREATE TABLE t (id int primary key, v int);
 INSERT INTO t VALUES (1, 10), (2, 20);
 ```
 
-Two transactions are executed in the following order:
+两个事务按以下顺序执行：
 
-| Transaction 1                               | Transaction 2                               | Description                 |
+| 事务 1                               | 事务 2                               | 说明                 |
 |--------------------------------------|--------------------------------------|----------------------|
 | `BEGIN;`                             |                                      |                      |
 |                                      | `BEGIN;`                             |                      |
 | `UPDATE t SET v = 11 WHERE id = 1;`  |                                      |                      |
 |                                      | `UPDATE t SET v = 21 WHERE id = 2;`  |                      |
-| `UPDATE t SET v = 12 WHERE id = 2;`  |                                      | Transaction 1 gets blocked.          |
-|                                      | `UPDATE t SET v = 22 WHERE id = 1;`  | Transaction 2 reports a deadlock error.  |
+| `UPDATE t SET v = 12 WHERE id = 2;`  |                                      | 事务 1 被阻塞          |
+|                                      | `UPDATE t SET v = 22 WHERE id = 1;`  | 事务 2 报告死锁错误  |
 
-Next, transaction 2 reports a deadlock error. At this time, query the `DEADLOCKS` table:
+接下来，事务 2 报告死锁错误。此时，查询 `DEADLOCKS` 表：
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.DEADLOCKS;
 ```
 
-The expected output is as follows:
+预期输出如下：
 
 ```sql
 +-------------+----------------------------+-----------+--------------------+------------------------------------------------------------------+-----------------------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------+--------------------+
@@ -172,11 +172,11 @@ The expected output is as follows:
 +-------------+----------------------------+-----------+--------------------+------------------------------------------------------------------+-----------------------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------+--------------------+
 ```
 
-Two rows of data are generated in the `DEADLOCKS` table. The `DEADLOCK_ID` field of both rows is `1`, which means that the information in both rows belongs to the same deadlock error. The first row shows that on the key of `"7480000000000000355F728000000000000002"`, the transaction of the ID `"426812829645406216"` is blocked by the transaction of the ID `"426812829645406217"`. The second row shows that on the key of `"7480000000000000355F728000000000000001"`, the transaction of the ID `"426812829645406217"` is blocked by the transaction of the ID `426812829645406216`, which constitutes mutual blocking and forms a deadlock.
+在 `DEADLOCKS` 表中生成了两行数据。两行的 `DEADLOCK_ID` 字段都是 `1`，表示两行中的信息属于同一个死锁错误。第一行显示，在键 `"7480000000000000355F728000000000000002"` 上，ID 为 `"426812829645406216"` 的事务被 ID 为 `"426812829645406217"` 的事务阻塞。第二行显示，在键 `"7480000000000000355F728000000000000001"` 上，ID 为 `"426812829645406217"` 的事务被 ID 为 `426812829645406216` 的事务阻塞，这构成了互相阻塞，形成了死锁。
 
-## Example 2
+## 示例 2
 
-Assume that you query the `DEADLOCKS` table and get the following result:
+假设你查询 `DEADLOCKS` 表，得到以下结果：
 
 ```sql
 +-------------+----------------------------+-----------+--------------------+------------------------------------------------------------------+-----------------------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------+--------------------+
@@ -190,20 +190,20 @@ Assume that you query the `DEADLOCKS` table and get the following result:
 +-------------+----------------------------+-----------+--------------------+------------------------------------------------------------------+-----------------------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------+--------------------+
 ```
 
-The `DEADLOCK_ID` column in the preceding query result shows that the first two rows together represent the information of a deadlock error, and the two transactions that wait for each other form the deadlock. The next three rows together represent the information of another deadlock error, and the three transactions that wait in a cycle form the deadlock.
+上述查询结果中的 `DEADLOCK_ID` 列显示，前两行一起表示一个死锁错误的信息，两个相互等待的事务形成了死锁。接下来的三行一起表示另一个死锁错误的信息，三个循环等待的事务形成了死锁。
 
 ## CLUSTER_DEADLOCKS
 
-The `CLUSTER_DEADLOCKS` table returns information about the recent deadlock errors on each TiDB node in the entire cluster, which is the combined information of the `DEADLOCKS` table on each node. `CLUSTER_DEADLOCKS` also includes an additional `INSTANCE` column to display the IP address and port of the node to distinguish between different TiDB nodes.
+`CLUSTER_DEADLOCKS` 表返回整个集群中每个 TiDB 节点上最近的死锁错误信息，这是每个节点上 `DEADLOCKS` 表信息的组合。`CLUSTER_DEADLOCKS` 还包括一个额外的 `INSTANCE` 列，用于显示节点的 IP 地址和端口，以区分不同的 TiDB 节点。
 
-Note that, because `DEADLOCK_ID` does not guarantee global uniqueness, in the query result of the `CLUSTER_DEADLOCKS` table, you need to use the `INSTANCE` and `DEADLOCK_ID` together to distinguish the information of different deadlock errors in the result set.
+注意，由于 `DEADLOCK_ID` 不保证全局唯一性，在 `CLUSTER_DEADLOCKS` 表的查询结果中，你需要同时使用 `INSTANCE` 和 `DEADLOCK_ID` 来区分结果集中不同死锁错误的信息。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC CLUSTER_DEADLOCKS;
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 +-------------------------+---------------------+------+------+---------+-------+

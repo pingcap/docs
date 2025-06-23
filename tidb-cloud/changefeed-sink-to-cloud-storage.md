@@ -1,52 +1,52 @@
 ---
-title: Sink to Cloud Storage
-summary: This document explains how to create a changefeed to stream data from TiDB Cloud to Amazon S3 or GCS. It includes restrictions, configuration steps for the destination, replication, and specification, as well as starting the replication process.
+title: 导出数据到云存储
+summary: 本文介绍如何创建 changefeed 将数据从 TiDB Cloud 流式传输到 Amazon S3 或 GCS。包括限制、目标配置步骤、复制和规格配置，以及启动复制过程。
 ---
 
-# Sink to Cloud Storage
+# 导出数据到云存储
 
-This document describes how to create a changefeed to stream data from TiDB Cloud to cloud storage. Currently, Amazon S3 and GCS are supported.
+本文介绍如何创建 changefeed 将数据从 TiDB Cloud 流式传输到云存储。目前支持 Amazon S3 和 GCS。
 
-> **Note:**
+> **注意：**
 >
-> - To stream data to cloud storage, make sure that your TiDB cluster version is v7.1.1 or later. To upgrade your TiDB Cloud Dedicated cluster to v7.1.1 or later, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
-> - For [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters, the changefeed feature is unavailable.
+> - 要将数据流式传输到云存储，请确保你的 TiDB 集群版本为 v7.1.1 或更高版本。要将 TiDB Cloud Dedicated 集群升级到 v7.1.1 或更高版本，请[联系 TiDB Cloud 支持团队](/tidb-cloud/tidb-cloud-support.md)。
+> - 对于 [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 集群，changefeed 功能不可用。
 
-## Restrictions
+## 限制
 
-- For each TiDB Cloud cluster, you can create up to 100 changefeeds.
-- Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
-- If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
+- 每个 TiDB Cloud 集群最多可以创建 100 个 changefeed。
+- 由于 TiDB Cloud 使用 TiCDC 建立 changefeed，因此它具有与 TiCDC 相同的[限制](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)。
+- 如果要复制的表没有主键或非空唯一索引，在某些重试场景下，由于缺少唯一约束，可能会导致下游插入重复数据。
 
-## Step 1. Configure destination
+## 步骤 1. 配置目标
 
-Navigate to the cluster overview page of the target TiDB cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed**, and select **Amazon S3** or **GCS** as the destination. The configuration process varies depend on the destination you choose.
+导航到目标 TiDB 集群的集群概览页面。在左侧导航栏中点击**数据** > **Changefeed**，点击**创建 Changefeed**，然后选择 **Amazon S3** 或 **GCS** 作为目标。配置过程根据你选择的目标而有所不同。
 
 <SimpleTab>
 <div label="Amazon S3">
 
-For **Amazon S3**, fill the **S3 Endpoint** area: `S3 URI`, `Access Key ID`, and `Secret Access Key`. Make the S3 bucket in the same region with your TiDB cluster.
+对于 **Amazon S3**，填写 **S3 端点**区域：`S3 URI`、`Access Key ID` 和 `Secret Access Key`。确保 S3 存储桶与你的 TiDB 集群在同一区域。
 
 ![s3_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-s3-endpoint.jpg)
 
 </div>
 <div label="GCS">
 
-For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bucket access. Take the following steps:
+对于 **GCS**，在填写 **GCS 端点**之前，你需要先授予 GCS 存储桶访问权限。请按照以下步骤操作：
 
-1. In the TiDB Cloud console, record the **Service Account ID**, which will be used to grant TiDB Cloud access to your GCS bucket.
+1. 在 TiDB Cloud 控制台中，记录**服务账号 ID**，该 ID 将用于授予 TiDB Cloud 访问你的 GCS 存储桶的权限。
 
     ![gcs_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-endpoint.png)
 
-2. In the Google Cloud console, create an IAM role for your GCS bucket.
+2. 在 Google Cloud 控制台中，为你的 GCS 存储桶创建 IAM 角色。
 
-    1. Sign in to the [Google Cloud console](https://console.cloud.google.com/).
-    2. Go to the [Roles](https://console.cloud.google.com/iam-admin/roles) page, and then click **Create role**.
+    1. 登录 [Google Cloud 控制台](https://console.cloud.google.com/)。
+    2. 转到[角色](https://console.cloud.google.com/iam-admin/roles)页面，然后点击**创建角色**。
 
-        ![Create a role](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-create-role.png)
+        ![创建角色](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-create-role.png)
 
-    3. Enter a name, description, ID, and role launch stage for the role. The role name cannot be changed after the role is created.
-    4. Click **Add permissions**. Add the following permissions to the role, and then click **Add**.
+    3. 为角色输入名称、描述、ID 和角色启动阶段。角色创建后，角色名称无法更改。
+    4. 点击**添加权限**。将以下权限添加到角色，然后点击**添加**。
 
         - storage.buckets.get
         - storage.objects.create
@@ -55,114 +55,114 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
         - storage.objects.list
         - storage.objects.update
 
-    ![Add permissions](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-assign-permission.png)
+    ![添加权限](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-assign-permission.png)
 
-3. Go to the [Bucket](https://console.cloud.google.com/storage/browser) page, and choose a GCS bucket you want TiDB Cloud to access. Note that the GCS bucket must be in the same region as your TiDB cluster.
+3. 转到[存储桶](https://console.cloud.google.com/storage/browser)页面，选择你希望 TiDB Cloud 访问的 GCS 存储桶。请注意，GCS 存储桶必须与你的 TiDB 集群在同一区域。
 
-4. On the **Bucket details** page, click the **Permissions** tab, and then click **Grant access**.
+4. 在**存储桶详情**页面，点击**权限**标签，然后点击**授予访问权限**。
 
-    ![Grant Access to the bucket ](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-grant-access-1.png)
+    ![授予存储桶访问权限](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-grant-access-1.png)
 
-5. Fill in the following information to grant access to your bucket, and then click **Save**.
+5. 填写以下信息以授予存储桶访问权限，然后点击**保存**。
 
-    - In the **New Principals** field, paste the **Service Account ID** of the target TiDB cluster you recorded before.
-    - In the **Select a role** drop-down list, type the name of the IAM role you just created, and then choose the name from the filter result.
+    - 在**新主体**字段中，粘贴你之前记录的目标 TiDB 集群的**服务账号 ID**。
+    - 在**选择角色**下拉列表中，输入你刚刚创建的 IAM 角色名称，然后从筛选结果中选择该名称。
 
-    > **Note:**
+    > **注意：**
     >
-    > To remove the access to TiDB Cloud, simply remove the access that you have granted.
+    > 要移除 TiDB Cloud 的访问权限，只需移除你已授予的访问权限即可。
 
-6. On the **Bucket details** page, click the **Objects** tab.
+6. 在**存储桶详情**页面，点击**对象**标签。
 
-    - To get a bucket's gsutil URI, click the copy button and add `gs://` as a prefix. For example, if the bucket name is `test-sink-gcs`, the URI would be `gs://test-sink-gcs/`.
+    - 要获取存储桶的 gsutil URI，点击复制按钮并添加 `gs://` 作为前缀。例如，如果存储桶名称为 `test-sink-gcs`，则 URI 为 `gs://test-sink-gcs/`。
 
-        ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri01.png)
+        ![获取存储桶 URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri01.png)
 
-    - To get a folder's gsutil URI, open the folder, click the copy button, and add `gs://` as a prefix. For example, if the bucket name is `test-sink-gcs` and the folder name is `changefeed-xxx`, the URI would be `gs://test-sink-gcs/changefeed-xxx/`.
+    - 要获取文件夹的 gsutil URI，打开文件夹，点击复制按钮，并添加 `gs://` 作为前缀。例如，如果存储桶名称为 `test-sink-gcs`，文件夹名称为 `changefeed-xxx`，则 URI 为 `gs://test-sink-gcs/changefeed-xxx/`。
 
-        ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri02.png)
+        ![获取存储桶 URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri02.png)
 
-7. In the TiDB Cloud console, go to the Changefeed's **Configure Destination** page, and fill in the **bucket gsutil URI** field.
+7. 在 TiDB Cloud 控制台中，转到 Changefeed 的**配置目标**页面，并填写**存储桶 gsutil URI** 字段。
 
 </div>
 </SimpleTab>
 
-Click **Next** to establish the connection from the TiDB Cloud Dedicated cluster to Amazon S3 or GCS. TiDB Cloud will automatically test and verify if the connection is successful.
+点击**下一步**以建立从 TiDB Cloud Dedicated 集群到 Amazon S3 或 GCS 的连接。TiDB Cloud 将自动测试并验证连接是否成功。
 
-- If yes, you are directed to the next step of configuration.
-- If not, a connectivity error is displayed, and you need to handle the error. After the error is resolved, click **Next** to retry the connection.
+- 如果成功，你将进入下一步配置。
+- 如果失败，将显示连接错误，你需要处理该错误。错误解决后，点击**下一步**重试连接。
 
-## Step 2. Configure replication
+## 步骤 2. 配置复制
 
-1. Customize **Table Filter** to filter the tables that you want to replicate. For the rule syntax, refer to [table filter rules](https://docs.pingcap.com/tidb/stable/ticdc-filter#changefeed-log-filters).
+1. 自定义**表过滤器**以过滤要复制的表。有关规则语法，请参考[表过滤规则](https://docs.pingcap.com/tidb/stable/ticdc-filter#changefeed-log-filters)。
 
-    ![the table filter of changefeed](/media/tidb-cloud/changefeed/sink-to-s3-02-table-filter.jpg)
+    ![changefeed 的表过滤器](/media/tidb-cloud/changefeed/sink-to-s3-02-table-filter.jpg)
 
-    - **Filter Rules**: you can set filter rules in this column. By default, there is a rule `*.*`, which stands for replicating all tables. When you add a new rule, TiDB Cloud queries all the tables in TiDB and displays only the tables that match the rules in the box on the right. You can add up to 100 filter rules.
-    - **Tables with valid keys**: this column displays the tables that have valid keys, including primary keys or unique indexes.
-    - **Tables without valid keys**: this column shows tables that lack primary keys or unique keys. These tables present a challenge during replication because the absence of a unique identifier can result in inconsistent data when handling duplicate events downstream. To ensure data consistency, it is recommended to add unique keys or primary keys to these tables before initiating the replication. Alternatively, you can employ filter rules to exclude these tables. For example, you can exclude the table `test.tbl1` by using the rule `"!test.tbl1"`.
+    - **过滤规则**：你可以在此列设置过滤规则。默认有一个规则 `*.*`，表示复制所有表。添加新规则时，TiDB Cloud 会查询 TiDB 中的所有表，并在右侧框中仅显示匹配规则的表。你最多可以添加 100 个过滤规则。
+    - **具有有效键的表**：此列显示具有有效键（包括主键或唯一索引）的表。
+    - **没有有效键的表**：此列显示缺少主键或唯一键的表。这些表在复制过程中会带来挑战，因为缺少唯一标识符可能会导致在处理下游重复事件时出现数据不一致。为确保数据一致性，建议在开始复制之前为这些表添加唯一键或主键。或者，你可以使用过滤规则排除这些表。例如，你可以使用规则 `"!test.tbl1"` 排除表 `test.tbl1`。
 
-2. Customize **Event Filter** to filter the events that you want to replicate.
+2. 自定义**事件过滤器**以过滤要复制的事件。
 
-    - **Tables matching**: you can set which tables the event filter will be applied to in this column. The rule syntax is the same as that used for the preceding **Table Filter** area. You can add up to 10 event filter rules per changefeed.
-    - **Ignored events**: you can set which types of events the event filter will exclude from the changefeed.
+    - **匹配表**：你可以在此列设置事件过滤器将应用于哪些表。规则语法与前面的**表过滤器**区域使用的语法相同。每个 changefeed 最多可以添加 10 个事件过滤规则。
+    - **忽略的事件**：你可以设置事件过滤器将从 changefeed 中排除哪些类型的事件。
 
-3. In the **Start Replication Position** area, select one of the following replication positions:
+3. 在**开始复制位置**区域，选择以下复制位置之一：
 
-    - Start replication from now on
-    - Start replication from a specific [TSO](https://docs.pingcap.com/tidb/stable/glossary#tso)
-    - Start replication from a specific time
+    - 从现在开始复制
+    - 从特定 [TSO](https://docs.pingcap.com/tidb/stable/glossary#tso) 开始复制
+    - 从特定时间开始复制
 
-4. In the **Data Format** area, select either the **CSV** or **Canal-JSON** format.
+4. 在**数据格式**区域，选择 **CSV** 或 **Canal-JSON** 格式。
 
     <SimpleTab>
-    <div label="Configure CSV format">
+    <div label="配置 CSV 格式">
 
-    To configure the **CSV** format, fill in the following fields:
+    要配置 **CSV** 格式，请填写以下字段：
 
-    - **Binary Encode Method**: The encoding method for binary data. You can choose **base64** (default) or **hex**. If you want to integrate with AWS DMS, use **hex**.
-    - **Date Separator**: To rotate data based on the year, month, and day, or choose not to rotate at all.
-    - **Delimiter**: Specify the character used to separate values in the CSV file. The comma (`,`) is the most commonly used delimiter.
-    - **Quote**: Specify the character used to enclose values that contain the delimiter character or special characters. Typically, double quotes (`"`) are used as the quote character.
-    - **Null/Empty Values**: Specify how null or empty values are represented in the CSV file. This is important for proper handling and interpretation of the data.
-    - **Include Commit Ts**: Control whether to include [`commit-ts`](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-cloud-storage#replicate-change-data-to-storage-services) in the CSV row.
+    - **二进制编码方法**：二进制数据的编码方法。你可以选择 **base64**（默认）或 **hex**。如果要与 AWS DMS 集成，请使用 **hex**。
+    - **日期分隔符**：根据年、月、日轮换数据，或选择不轮换。
+    - **分隔符**：指定用于分隔 CSV 文件中值的字符。逗号（`,`）是最常用的分隔符。
+    - **引号**：指定用于包围包含分隔符或特殊字符的值的字符。通常使用双引号（`"`）作为引号字符。
+    - **空值/空值**：指定如何在 CSV 文件中表示空值或空值。这对于正确处理和解释数据很重要。
+    - **包含提交时间戳**：控制是否在 CSV 行中包含 [`commit-ts`](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-cloud-storage#replicate-change-data-to-storage-services)。
 
     </div>
-    <div label="Configure Canal-JSON format">
+    <div label="配置 Canal-JSON 格式">
 
-    Canal-JSON is a plain JSON text format. To configure it, fill in the following fields:
+    Canal-JSON 是一种纯 JSON 文本格式。要配置它，请填写以下字段：
 
-    - **Date Separator**: To rotate data based on the year, month, and day, or choose not to rotate at all.
-    - **Enable TiDB Extension**: When you enable this option, TiCDC sends [WATERMARK events](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#watermark-event) and adds the [TiDB extension field](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field) to Canal-JSON messages.
+    - **日期分隔符**：根据年、月、日轮换数据，或选择不轮换。
+    - **启用 TiDB 扩展**：启用此选项后，TiCDC 会发送 [WATERMARK 事件](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#watermark-event)并在 Canal-JSON 消息中添加 [TiDB 扩展字段](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field)。
 
     </div>
     </SimpleTab>
 
-5. In the **Flush Parameters** area, you can configure two items:
+5. 在**刷新参数**区域，你可以配置两个项目：
 
-    - **Flush Interval**: set to 60 seconds by default, adjustable within a range of 2 seconds to 10 minutes;
-    - **File Size**: set to 64 MB by default, adjustable within a range of 1 MB to 512 MB.
+    - **刷新间隔**：默认设置为 60 秒，可在 2 秒到 10 分钟范围内调整；
+    - **文件大小**：默认设置为 64 MB，可在 1 MB 到 512 MB 范围内调整。
 
-    ![Flush Parameters](/media/tidb-cloud/changefeed/sink-to-cloud-storage-flush-parameters.jpg)
+    ![刷新参数](/media/tidb-cloud/changefeed/sink-to-cloud-storage-flush-parameters.jpg)
 
-    > **Note:**
+    > **注意：**
     >
-    > These two parameters will affect the quantity of objects generated in cloud storage for each individual database table. If there are a large number of tables, using the same configuration will increase the number of objects generated and subsequently raise the cost of invoking the cloud storage API. Therefore, it is recommended to configure these parameters appropriately based on your Recovery Point Objective (RPO) and cost requirements.
+    > 这两个参数将影响每个数据库表在云存储中生成的对象数量。如果有大量表，使用相同的配置将增加生成的对象数量，从而增加调用云存储 API 的成本。因此，建议根据你的恢复点目标（RPO）和成本要求适当配置这些参数。
 
-## Step 3. Configure specification
+## 步骤 3. 配置规格
 
-Click **Next** to configure your changefeed specification.
+点击**下一步**以配置你的 changefeed 规格。
 
-1. In the **Changefeed Specification** area, specify the number of Replication Capacity Units (RCUs) to be used by the changefeed.
-2. In the **Changefeed Name** area, specify a name for the changefeed.
+1. 在 **Changefeed 规格**区域，指定 changefeed 将使用的复制容量单位（RCU）数量。
+2. 在 **Changefeed 名称**区域，为 changefeed 指定一个名称。
 
-## Step 4. Review the configuration and start replication
+## 步骤 4. 查看配置并开始复制
 
-Click **Next** to review the changefeed configuration.
+点击**下一步**以查看 changefeed 配置。
 
-- If you have verified that all configurations are correct, click **Create** to proceed with the creation of the changefeed.
-- If you need to modify any configurations, click **Previous** to go back and make the necessary changes.
+- 如果你已验证所有配置都正确，点击**创建**以继续创建 changefeed。
+- 如果你需要修改任何配置，点击**上一步**返回并进行必要的更改。
 
-The sink will start shortly, and you will observe the status of the sink changing from **Creating** to **Running**.
+导出将很快开始，你将看到导出状态从**创建中**变为**运行中**。
 
-Click the name of the changefeed to go to its details page. On this page, you can view more information about the changefeed, including the checkpoint status, replication latency, and other relevant metrics.
+点击 changefeed 的名称以转到其详情页面。在此页面上，你可以查看有关 changefeed 的更多信息，包括检查点状态、复制延迟和其他相关指标。

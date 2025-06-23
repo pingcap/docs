@@ -1,34 +1,34 @@
 ---
-title: TABLE | TiDB SQL Statement Reference
-summary: An overview of the usage of TABLE for the TiDB database.
+title: TABLE | TiDB SQL 语句参考
+summary: TiDB 数据库中 TABLE 的使用概述。
 ---
 
 # TABLE
 
-The `TABLE` statement can be used instead of `SELECT * FROM` when no aggregation or complex filtering is needed.
+当不需要聚合或复杂过滤时，可以使用 `TABLE` 语句代替 `SELECT * FROM`。
 
-## Synopsis
+## 语法图
 
 ```ebnf+diagram
 TableStmt ::=
     "TABLE" Table ( "ORDER BY" Column )? ( "LIMIT" NUM )?
 ```
 
-## Examples
+## 示例
 
-Create table `t1`:
+创建表 `t1`：
 
 ```sql
 CREATE TABLE t1(id INT PRIMARY KEY);
 ```
 
-Insert some data into `t1`:
+向 `t1` 插入一些数据：
 
 ```sql
 INSERT INTO t1 VALUES (1),(2),(3);
 ```
 
-View the data in table `t1`:
+查看表 `t1` 中的数据：
 
 ```sql
 TABLE t1;
@@ -45,7 +45,7 @@ TABLE t1;
 3 rows in set (0.01 sec)
 ```
 
-Query `t1` and sort the result by the `id` field in descending order:
+查询 `t1` 并按 `id` 字段降序排序：
 
 ```sql
 TABLE t1 ORDER BY id DESC;
@@ -62,7 +62,7 @@ TABLE t1 ORDER BY id DESC;
 3 rows in set (0.01 sec)
 ```
 
-Query the first record in `t1`:
+查询 `t1` 中的第一条记录：
 
 ```sql
 TABLE t1 LIMIT 1;
@@ -77,11 +77,11 @@ TABLE t1 LIMIT 1;
 1 row in set (0.01 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `TABLE` statement was introduced in MySQL 8.0.19.
+`TABLE` 语句在 MySQL 8.0.19 中引入。
 
-## See also
+## 另请参阅
 
 - [`SELECT`](/sql-statements/sql-statement-select.md)
-- [`TABLE` statements in MySQL](https://dev.mysql.com/doc/refman/8.0/en/table.html)
+- [MySQL 中的 `TABLE` 语句](https://dev.mysql.com/doc/refman/8.0/en/table.html)

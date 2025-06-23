@@ -1,205 +1,205 @@
 ---
-title: TiDB Cloud Release Notes in 2022
-summary: Learn about the release notes of TiDB Cloud in 2022.
+title: 2022 年 TiDB Cloud 发布说明
+summary: 了解 2022 年 TiDB Cloud 的发布说明。
 ---
 
-# TiDB Cloud Release Notes in 2022
+# 2022 年 TiDB Cloud 发布说明
 
-This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2022.
+此页面列出了 2022 年 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 的发布说明。
 
-## December 28, 2022
+## 2022 年 12月 28 日
 
-**General changes**
+**常规变更**
 
-- Currently, after upgrading the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.3.0](https://docs-archive.pingcap.com/tidb/v6.3/release-6.3.0) to [v6.4.0](https://docs-archive.pingcap.com/tidb/v6.4/release-6.4.0), the cold start becomes slower in certain circumstances. So we roll back the default TiDB version of all Serverless Tier clusters from v6.4.0 to v6.3.0, then fix the problem as soon as possible, and upgrade it later again.
+- 目前，在将所有 [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 集群的默认 TiDB 版本从 [v6.3.0](https://docs-archive.pingcap.com/tidb/v6.3/release-6.3.0) 升级到 [v6.4.0](https://docs-archive.pingcap.com/tidb/v6.4/release-6.4.0) 之后，在某些情况下冷启动速度变慢。 因此，我们将所有 Serverless Tier 集群的默认 TiDB 版本从 v6.4.0 回滚到 v6.3.0，然后尽快解决该问题，并在稍后再次升级。
 
-## December 27, 2022
+## 2022 年 12月 27 日
 
-**General changes**
+**常规变更**
 
-- Upgrade the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.3.0](https://docs-archive.pingcap.com/tidb/v6.3/release-6.3.0) to [v6.4.0](https://docs-archive.pingcap.com/tidb/v6.4/release-6.4.0).
+- 将所有[Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)集群的默认 TiDB 版本从 [v6.3.0](https://docs-archive.pingcap.com/tidb/v6.3/release-6.3.0) 升级到 [v6.4.0](https://docs-archive.pingcap.com/tidb/v6.4/release-6.4.0)。
 
-- The point-in-time recovery (PITR) for Dedicated Tier clusters is now in General Availability (GA).
+- Dedicated Tier 集群的时间点恢复 (PITR) 现在已正式发布 (GA)。
 
-    PITR supports restoring data of any point in time to a new cluster. To use the PITR feature, make sure that your TiDB cluster version is at least v6.4.0 and the TiKV node size is at least 8 vCPU and 16 GiB.
+    PITR 支持将任何时间点的数据恢复到新集群。要使用 PITR 功能，请确保你的 TiDB 集群版本至少为 v6.4.0，并且 TiKV 节点大小至少为 8 vCPU 和 16 GiB。
 
-    You can enable or disable the PITR feature in the **Backup Settings** of the [TiDB Cloud console](https://tidbcloud.com).
+    你可以在 [TiDB Cloud 控制台](https://tidbcloud.com)的**备份设置**中启用或禁用 PITR 功能。
 
-    For more information, see [Back up and restore TiDB cluster data](/tidb-cloud/backup-and-restore.md).
+    有关更多信息，请参阅[备份和恢复 TiDB 集群数据](/tidb-cloud/backup-and-restore.md)。
 
-- Support managing multiple changefeeds and editing existing changefeeds.
+- 支持管理多个 Changefeed 并编辑现有 Changefeed。
 
-    - You can now create as many changefeeds as needed to manage different data replication tasks. Currently, each cluster can have up to 10 changefeeds. For more details, refer to [Changefeed overview](/tidb-cloud/changefeed-overview.md).
-    - You can edit the configuration of an existing changefeed in the paused status. For more information, see [Edit a changefeed](/tidb-cloud/changefeed-overview.md#edit-a-changefeed).
+    - 你现在可以根据需要创建任意数量的 Changefeed 来管理不同的数据复制任务。目前，每个集群最多可以有 10 个 Changefeed。有关更多详细信息，请参阅[Changefeed 概述](/tidb-cloud/changefeed-overview.md)。
+    - 你可以编辑处于暂停状态的现有 Changefeed 的配置。有关更多信息，请参阅[编辑 Changefeed](/tidb-cloud/changefeed-overview.md#edit-a-changefeed)。
 
-- Support directly migrating data from Amazon Aurora MySQL, Amazon Relational Database Service (RDS) MySQL, or self-hosted MySQL-compatible databases to TiDB Cloud online. This feature is now in General Availability.
+- 支持直接将数据从 Amazon Aurora MySQL、Amazon Relational Database Service (RDS) MySQL 或自托管的 MySQL 兼容数据库在线迁移到 TiDB Cloud。此功能现已正式发布。
 
-    - Provide services in the following 6 regions:
-        - AWS Oregon (us-west-2)
-        - AWS N. Virginia (us-east-1)
-        - AWS Mumbai (ap-south-1)
-        - AWS Singapore (ap-southeast-1)
-        - AWS Tokyo (ap-northeast-1)
-        - AWS Frankfurt (eu-central-1)
-    - Support multiple specifications. You can choose an appropriate specification according to the required performance to achieve optimal data migration experience.
+    - 在以下 6 个区域提供服务：
+        - AWS 俄勒冈 (us-west-2)
+        - AWS 北弗吉尼亚 (us-east-1)
+        - AWS 孟买 (ap-south-1)
+        - AWS 新加坡 (ap-southeast-1)
+        - AWS 东京 (ap-northeast-1)
+        - AWS 法兰克福 (eu-central-1)
+    - 支持多种规格。你可以根据所需的性能选择合适的规格，以获得最佳的数据迁移体验。
 
-  For how to migrate data to TiDB Cloud, refer to [user documentation](/tidb-cloud/migrate-from-mysql-using-data-migration.md). For billing details, refer to [Data Migration billing](/tidb-cloud/tidb-cloud-billing-dm.md).
+  有关如何将数据迁移到 TiDB Cloud，请参阅[用户文档](/tidb-cloud/migrate-from-mysql-using-data-migration.md)。有关计费详情，请参阅[数据迁移计费](/tidb-cloud/tidb-cloud-billing-dm.md)。
 
-- Support importing local CSV files to TiDB Cloud.
+- 支持将本地 CSV 文件导入到 TiDB Cloud。
 
-    It only takes a few clicks to complete the task configuration, and then your local CSV data can be quickly imported into your TiDB cluster. When using this method, you do not need to provide the cloud storage bucket path and Role ARN. The whole importing process is quick and smooth.
+    只需点击几下即可完成任务配置，然后你的本地 CSV 数据就可以快速导入到你的 TiDB 集群中。使用此方法时，你无需提供云存储桶路径和 Role ARN。整个导入过程快速而流畅。
 
-    For more information, see [Import local files to TiDB Cloud](/tidb-cloud/tidb-cloud-import-local-files.md).
+    有关更多信息，请参阅[将本地文件导入到 TiDB Cloud](/tidb-cloud/tidb-cloud-import-local-files.md)。
 
-## December 20, 2022
+## 2022 年 12月 20 日
 
-**General changes**
+**常规变更**
 
-- Add the label `project name` to the [Datadog](/tidb-cloud/monitor-datadog-integration.md) Dashboard as a filter to provide project information.
+- 将标签 `project name` 添加到 [Datadog](/tidb-cloud/monitor-datadog-integration.md) 仪表盘，作为过滤器以提供项目信息。
 
-    You can use the filter `project name` to quickly find the cluster you want.
+    你可以使用过滤器 `project name` 快速找到你想要的集群。
 
-## December 13, 2022
+## 2022 年 12月 13 日
 
-**General changes**
+**常规变更**
 
-- Introduce TiDB Cloud SQL Editor (Beta) for Serverless Tier.
+- 推出 TiDB Cloud SQL 编辑器（Beta）用于 Serverless Tier。
 
-    This is a web-based SQL editor that allows you to directly edit and run SQL queries against databases of Serverless Tier. You can locate it easily in the left navigation bar of your Serverless Tier cluster.
+    这是一个基于 Web 的 SQL 编辑器，允许你直接编辑和运行针对 Serverless Tier 数据库的 SQL 查询。 你可以在 Serverless Tier 集群的左侧导航栏中轻松找到它。
 
-    For Serverless Tier, the Web SQL Shell is replaced by the SQL Editor.
+    对于 Serverless Tier，Web SQL Shell 已被 SQL 编辑器取代。
 
-- Support using [Changefeeds](/tidb-cloud/changefeed-overview.md) to stream data for Dedicated Tier.
+- 支持使用 [Changefeeds](/tidb-cloud/changefeed-overview.md) 为 Dedicated Tier 流式传输数据。
 
-    - Support [streaming data change logs to MySQL](/tidb-cloud/changefeed-sink-to-mysql.md).
+    - 支持 [将数据变更日志流式传输到 MySQL](/tidb-cloud/changefeed-sink-to-mysql.md)。
 
-      When data is migrated from MySQL/Aurora to TiDB, it is often necessary to use MySQL as a stand-by database to prevent unexpected data migration problems. In this case, you can use MySQL sink to stream data from TiDB to MySQL.
+      当数据从 MySQL/Aurora 迁移到 TiDB 时，通常需要使用 MySQL 作为备用数据库，以防止出现意外的数据迁移问题。 在这种情况下，你可以使用 MySQL sink 将数据从 TiDB 流式传输到 MySQL。
 
-    - Support [streaming data change logs to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md) (Beta).
+    - 支持 [将数据变更日志流式传输到 Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md) (Beta)。
 
-      Streaming TiDB data to the message queue is a very common requirement for data integration scenarios. You can use Kafka sink to realize integration with other data processing systems (such as Snowflake), or support business consuming.
+      将 TiDB 数据流式传输到消息队列是数据集成场景中非常常见的需求。 你可以使用 Kafka sink 来实现与其他数据处理系统（例如 Snowflake）的集成，或者支持业务消费。
 
-    For more information, refer to [Changefeed Overview](/tidb-cloud/changefeed-overview.md).
+    有关更多信息，请参阅 [Changefeed 概述](/tidb-cloud/changefeed-overview.md)。
 
-- Organization owners can edit the organization's name in **Organization Settings**.
+- 组织所有者可以在**组织设置**中编辑组织的名称。
 
-**Console changes**
+**控制台变更**
 
-- Optimize the navigation layout of the [TiDB Cloud console](https://tidbcloud.com) to provide users with a new navigation experience.
+- 优化 [TiDB Cloud 控制台](https://tidbcloud.com) 的导航布局，为用户提供全新的导航体验。
 
-    The new layout includes the following changes:
+    新布局包括以下更改：
 
-    - Introduce the left navigation bar to maximize screen usage efficiency.
-    - Adopt a flatter navigation hierarchy.
+    - 引入左侧导航栏，最大限度地提高屏幕使用效率。
+    - 采用更扁平的导航层次结构。
 
-- Improve the [**Connect**](/tidb-cloud/connect-to-tidb-cluster-serverless.md) experience for Serverless Tier users.
+- 改善 Serverless Tier 用户的 [**连接**](/tidb-cloud/connect-to-tidb-cluster-serverless.md) 体验。
 
-    Now developers can connect to SQL editor or with their preferred tools in just a few clicks without context switching.
+    现在，开发人员只需点击几下，即可连接到 SQL 编辑器或使用他们喜欢的工具，而无需切换上下文。
 
-## December 6, 2022
+## 2022 年 12月 6 日
 
-**General changes**
+**常规变更**
 
-- Upgrade the default TiDB version of new [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v6.1.2](https://docs.pingcap.com/tidb/stable/release-6.1.2) to [v6.1.3](https://docs.pingcap.com/tidb/stable/release-6.1.3).
+- 将新 [专用层](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的默认 TiDB 版本从 [v6.1.2](https://docs.pingcap.com/tidb/stable/release-6.1.2) 升级到 [v6.1.3](https://docs.pingcap.com/tidb/stable/release-6.1.3)。
 
-## November 29, 2022
+## 2022 年 11月 29 日
 
-**General changes**
+**常规变更**
 
-- Improve the user experience from AWS Marketplace and Google Cloud Marketplace.
+- 改善来自 AWS Marketplace 和 Google Cloud Marketplace 的用户体验。
 
-    No matter whether you are new to TiDB Cloud or you already have a TiDB Cloud account, now you can link with your AWS or GCP billing account, which makes it easier to complete AWS or GCP Marketplace subscriptions.
+    无论你是 TiDB Cloud 的新用户还是已经拥有 TiDB Cloud 帐户，现在你都可以与你的 AWS 或 GCP 结算帐户关联，从而更轻松地完成 AWS 或 GCP Marketplace 订阅。
 
-    For how to make the link, see [Billing from AWS Marketplace or Google Cloud Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-azure-marketplace-or-google-cloud-marketplace).
+    有关如何建立关联，请参阅[从 AWS Marketplace 或 Google Cloud Marketplace 结算](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-azure-marketplace-or-google-cloud-marketplace)。
 
-## November 22, 2022
+## 2022 年 11月 22 日
 
-**General changes**
+**常规变更**
 
-* Support directly migrating data from Amazon Aurora MySQL, Amazon Relational Database Service (RDS) MySQL, or self-hosted MySQL-compatible databases to TiDB Cloud online (beta).
+* 支持直接将数据从 Amazon Aurora MySQL、Amazon Relational Database Service (RDS) MySQL 或自托管的 MySQL 兼容数据库在线迁移到 TiDB Cloud（beta 版）。
 
-    Previously, you needed to pause your business and import data offline, or use third-party tools to migrate data to TiDB Cloud, which was complicated. Now, with the **Data Migration** feature, you only need to perform operations on your TiDB Cloud console and securely migrate your data to TiDB Cloud with minimal downtime.
+    以前，你需要暂停业务并离线导入数据，或者使用第三方工具将数据迁移到 TiDB Cloud，这很复杂。现在，借助 **数据迁移** 功能，你只需在 TiDB Cloud 控制台上执行操作，即可安全地将数据迁移到 TiDB Cloud，且停机时间最短。
 
-    In addition, Data Migration provides full and incremental data migration capabilities to migrate both existing data and ongoing changes from your data source to TiDB Cloud.
+    此外，数据迁移还提供完整和增量数据迁移功能，可将现有数据和正在进行的更改从数据源迁移到 TiDB Cloud。
 
-    Currently, the Data Migration feature is still **in beta**. It is available only for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters and only in the AWS Oregon (us-west-2) and AWS Singapore (ap-southeast-1) regions. You can create one migration job for free for each organization. To create multiple migration jobs for an organization, you need to [file a ticket](/tidb-cloud/tidb-cloud-support.md).
+    目前，数据迁移功能仍处于 **beta 版**。它仅适用于 [专用层](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群，且仅在 AWS 俄勒冈 (us-west-2) 和 AWS 新加坡 (ap-southeast-1) 区域提供。每个组织可以免费创建一个迁移作业。要为一个组织创建多个迁移作业，你需要[提交工单](/tidb-cloud/tidb-cloud-support.md)。
 
-    For detailed information, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
+    有关详细信息，请参阅[使用数据迁移将 MySQL 兼容数据库迁移到 TiDB Cloud](/tidb-cloud/migrate-from-mysql-using-data-migration.md)。
 
-## November 15, 2022
+## 2022 年 11月 15 日
 
-**General changes**
+**常规变更**
 
-* Support point-in-time recovery (PITR) for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters (beta).
+* 支持[专用层](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)集群的时间点恢复 (PITR)（测试版）。
 
-    PITR supports restoring data of any point in time to a new cluster. You can use it to:
+    PITR 支持将任何时间点的数据恢复到新集群。你可以使用它来：
 
-    * Reduce RPO in disaster recovery.
-    * Resolve data write errors by restoring point-in-time that is before the error event.
-    * Audit the historical data of the business.
+    * 降低灾难恢复中的 RPO。
+    * 通过恢复到错误事件发生前的时间点来解决数据写入错误。
+    * 审计业务的历史数据。
 
-  To use the PITR feature, make sure that your TiDB cluster version is at least v6.3.0 and the TiKV node size is at least 8 vCPU and 16 GiB.
+  要使用 PITR 功能，请确保你的 TiDB 集群版本至少为 v6.3.0，并且 TiKV 节点大小至少为 8 个 vCPU 和 16 GiB。
 
-  By default, backup data is stored in the same region where the cluster is created. In Japan, for TiDB clusters hosted on GCP with PITR enabled, you can choose to store backup data in one or two regions (Tokyo and/or Osaka). Restoring data from an alternative region provides a higher level of data safety and can tolerate region failures.
+  默认情况下，备份数据存储在创建集群的同一区域中。在日本，对于在 GCP 上托管且启用了 PITR 的 TiDB 集群，你可以选择在一个或两个区域（东京和/或大阪）中存储备份数据。从备用区域恢复数据可提供更高的数据安全性，并且可以容忍区域故障。
 
-  For more information, see [Back Up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md).
+  有关更多信息，请参见[备份和恢复 TiDB 集群数据](/tidb-cloud/backup-and-restore.md)。
 
-  This feature is still in beta and only available upon request:
+  此功能仍处于测试阶段，仅应要求提供：
 
-    * Click **Help** in the lower-right corner of TiDB Cloud console.
-    * In the dialog, fill in "Apply for PITR" in the **Description** field and click **Send**.
+    * 点击 TiDB Cloud 控制台右下角的**帮助**。
+    * 在对话框中，在**描述**字段中填写“申请 PITR”，然后点击**发送**。
 
-* The database audit logging feature is now GA.
+* 数据库审计日志记录功能现已正式发布 (GA)。
 
-    You can use database audit logging to record a history of user access details (such as any SQL statements executed) in logs and conduct a periodic analysis of the database audit logs, which helps keep your database secure.
+    你可以使用数据库审计日志记录来记录用户访问详细信息（例如执行的任何 SQL 语句）的历史记录，并定期分析数据库审计日志，这有助于确保数据库的安全。
 
-    For more information, see [Database Audit Logging](/tidb-cloud/tidb-cloud-auditing.md).
+    有关更多信息，请参见[数据库审计日志记录](/tidb-cloud/tidb-cloud-auditing.md)。
 
-## November 8, 2022
+## 2022 年 11月 8 日
 
-**General changes**
+**常规变更**
 
-* Improve the user feedback channel.
+* 改进用户反馈渠道。
 
-    Now you can request a demo or credits in **Support** > **Give Feedback** in the TiDB Cloud console. This can be helpful if you want to learn more about TiDB Cloud.
+    现在你可以在 TiDB Cloud 控制台的**支持** > **提供反馈**中请求演示或信用额度。如果你想了解更多关于 TiDB Cloud 的信息，这将很有帮助。
 
-    After receiving your request, we will contact you to provide help as soon as possible.
+    收到你的请求后，我们将尽快与你联系以提供帮助。
 
-## October 28, 2022
+## 2022 年 10月 28 日
 
-**General changes**
+**常规变更**
 
-* Developer Tier is upgraded to [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless). Serverless Tier, a fully-managed, auto-scaling deployment of TiDB, is now available. It is still in beta and free to use.
+* 开发者层级已升级到[无服务器层级](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)。无服务器层级是 TiDB 的完全托管、自动伸缩部署，现已可用。它仍处于 Beta 阶段，可免费使用。
 
-    * A Serverless Tier cluster still contains fully functional HTAP ability as Dedicated Tier clusters.
-    * Serverless Tier offers you faster cluster creation time and instantaneous cold start time. Compared with Developer Tier, the creation time reduces from minutes to seconds.
-    * You do not need to worry about deployment topology. Serverless Tier will adjust automatically according to your requests.
-    * Serverless Tier [enforces TLS connection to clusters for the sake of security](/tidb-cloud/secure-connections-to-serverless-clusters.md).
-    * Existing Developer Tier clusters will be automatically migrated to Serverless Tier in the coming months. Your ability to use your cluster should not be affected, and you will not be charged for the use of your Serverless Tier cluster in beta.
+    * 无服务器层级集群仍然包含与专用层级集群完全相同功能的 HTAP 能力。
+    * 无服务器层级为你提供更快的集群创建时间和即时冷启动时间。与开发者层级相比，创建时间从几分钟缩短到几秒钟。
+    * 你无需担心部署拓扑。无服务器层级将根据你的请求自动调整。
+    * 无服务器层级[为了安全起见，强制执行与集群的 TLS 连接](/tidb-cloud/secure-connections-to-serverless-clusters.md)。
+    * 现有的开发者层级集群将在未来几个月 内自动迁移到无服务器层级。你使用集群的能力不应受到影响，并且你不会因在 Beta 版中使用无服务器层级集群而被收费。
 
-  Get started [here](/tidb-cloud/tidb-cloud-quickstart.md).
+  从[这里](/tidb-cloud/tidb-cloud-quickstart.md)开始。
 
-## October 25, 2022
+## 2022 年 10月 25 日
 
-**General changes**
+**常规变更**
 
-- Support dynamically changing and persisting a subset of TiDB system variables (beta).
+- 支持动态更改和持久化 TiDB 系统变量的子集（beta）。
 
-    You can use the standard SQL statement to set a new value for a supported system variable.
+    你可以使用标准 SQL 语句为支持的系统变量设置新值。
 
     ```sql
     SET [GLOBAL|SESSION] <variable>
     ```
 
-    For example:
+    例如：
 
     ```sql
     SET GLOBAL tidb_committer_concurrency = 127;
     ```
 
-    If a variable is set at the `GLOBAL` level, the variable will be applied to the cluster and persistent (keep effective even after you restart or reload the server). A variable at the `SESSION` level is not persistent and is only effective in the current session.
+    如果在 `GLOBAL` 级别设置变量，则该变量将应用于集群并持久化（即使在你重新启动或重新加载服务器后仍保持有效）。`SESSION` 级别的变量不是持久的，仅在当前会话中有效。
 
-    **This feature is still in beta**, and only a limited number of variables are supported. It is not recommended to modify other [system variables](/system-variables.md) due to uncertainty of the side effects. See the following list for all supported variables based on TiDB v6.1:
+    **此功能仍处于 beta 阶段**，仅支持有限数量的变量。不建议修改其他 [系统变量](/system-variables.md)，因为存在不确定性的副作用。请参阅以下列表，了解基于 TiDB v6.1 的所有支持的变量：
 
     - [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610)
     - [`tidb_committer_concurrency`](/system-variables.md#tidb_committer_concurrency-new-in-v610)
@@ -211,408 +211,408 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610)
     - [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len)
 
-- Upgrade the default TiDB version of new [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v6.1.1](https://docs.pingcap.com/tidb/stable/release-6.1.1) to [v6.1.2](https://docs.pingcap.com/tidb/stable/release-6.1.2).
+- 将新的 [专用层](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的默认 TiDB 版本从 [v6.1.1](https://docs.pingcap.com/tidb/stable/release-6.1.1) 升级到 [v6.1.2](https://docs.pingcap.com/tidb/stable/release-6.1.2)。
 
-## October 19, 2022
+## 2022 年 10月 19 日
 
-**Integration changes**
+**集成变更**
 
-* Publish [TiDB Cloud Vercel Integration](https://vercel.com/integrations/tidb-cloud) in [Vercel Integration Marketplace](https://vercel.com/integrations#databases).
+* 在 [Vercel Integration Marketplace](https://vercel.com/integrations#databases) 中发布 [TiDB Cloud Vercel 集成](https://vercel.com/integrations/tidb-cloud)。
 
-    [Vercel](https://vercel.com) is the platform for frontend developers, providing the speed and reliability innovators need to create at the moment of inspiration. Using TiDB Cloud Vercel Integration, you can easily connect your Vercel projects to TiDB Cloud clusters. For details, see the document [Integrate TiDB Cloud with Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md).
+    [Vercel](https://vercel.com) 是前端开发者的平台，提供创新者所需的快速性和可靠性，以便在灵感迸发时进行创作。 使用 TiDB Cloud Vercel 集成，你可以轻松地将你的 Vercel 项目连接到 TiDB Cloud 集群。 有关详细信息，请参阅文档 [将 TiDB Cloud 与 Vercel 集成](/tidb-cloud/integrate-tidbcloud-with-vercel.md)。
 
-* Publish [TiDB Cloud Starter Template](https://vercel.com/templates/next.js/tidb-cloud-starter) in [Vercel template list](https://vercel.com/templates).
+* 在 [Vercel 模板列表](https://vercel.com/templates) 中发布 [TiDB Cloud Starter Template](https://vercel.com/templates/next.js/tidb-cloud-starter)。
 
-    You can use this template as a start to try out Vercel and TiDB Cloud. Before using this template, you need to [import data into your TiDB Cloud cluster](https://github.com/pingcap/tidb-prisma-vercel-demo#2-import-table-structures-and-data) first.
+    你可以使用此模板作为尝试 Vercel 和 TiDB Cloud 的起点。 在使用此模板之前，你需要先[将数据导入到你的 TiDB Cloud 集群中](https://github.com/pingcap/tidb-prisma-vercel-demo#2-import-table-structures-and-data)。
 
-## October 18, 2022
+## 2022 年 10月 18 日
 
-**General changes**
+**常规变更**
 
-* For Dedicated Tier clusters, the minimum storage size of a TiKV or TiFlash node is changed from 500 GiB to 200 GiB. This will be more cost-effective for users whose workloads are in small data volumes.
+* 对于专用层集群，TiKV 或 TiFlash 节点的最小存储大小从 500 GiB 更改为 200 GiB。 这对于工作负载数据量较小的用户来说更具成本效益。
 
-    For more details, see [TiKV node storage](/tidb-cloud/size-your-cluster.md#tikv-node-storage-size) and [TiFlash node storage](/tidb-cloud/size-your-cluster.md#tiflash-node-storage).
+    有关更多详细信息，请参见 [TiKV 节点存储](/tidb-cloud/size-your-cluster.md#tikv-node-storage-size) 和 [TiFlash 节点存储](/tidb-cloud/size-your-cluster.md#tiflash-node-storage)。
 
-* Introduce online contracts to customize TiDB Cloud subscriptions and meet compliance requirements.
+* 引入在线合同以自定义 TiDB Cloud 订阅并满足合规性要求。
 
-    A [**Contract** tab](/tidb-cloud/tidb-cloud-billing.md#contract) is added to the **Billing** page of the TiDB Cloud console. If you have agreed with our sales on a contract and received an email to process the contract online, you can go to the **Contract** tab to review and accept the contract. To learn more about contracts, feel free to [contact our sales](https://www.pingcap.com/contact-us/).
+    [**合同** 选项卡](/tidb-cloud/tidb-cloud-billing.md#contract) 已添加到 TiDB Cloud 控制台的 **账单** 页面。 如果你已与我们的销售人员就合同达成一致，并收到一封电子邮件以在线处理合同，则可以转到 **合同** 选项卡以查看和接受合同。 要了解有关合同的更多信息，请随时[联系我们的销售](https://www.pingcap.com/contact-us/)。
 
-**Documentation changes**
+**文档变更**
 
-* Add [documentation](/tidb-cloud/terraform-tidbcloud-provider-overview.md) for [TiDB Cloud Terraform Provider](https://registry.terraform.io/providers/tidbcloud/tidbcloud).
+* 添加 [文档](/tidb-cloud/terraform-tidbcloud-provider-overview.md) 以用于 [TiDB Cloud Terraform Provider](https://registry.terraform.io/providers/tidbcloud/tidbcloud)。
 
-    TiDB Cloud Terraform Provider is a plugin that allows you to use [Terraform](https://www.terraform.io/) to manage TiDB Cloud resources, such as clusters, backups, and restores. If you are looking for a simple way to automate resource provisioning and your infrastructure workflow, you can try out TiDB Cloud Terraform Provider according to the [documentation](/tidb-cloud/terraform-tidbcloud-provider-overview.md).
+    TiDB Cloud Terraform Provider 是一个插件，允许你使用 [Terraform](https://www.terraform.io/) 来管理 TiDB Cloud 资源，例如集群、备份和恢复。 如果你正在寻找一种简单的方法来自动化资源配置和基础架构工作流程，你可以根据 [文档](/tidb-cloud/terraform-tidbcloud-provider-overview.md) 试用 TiDB Cloud Terraform Provider。
 
-## October 11, 2022
+## 2022 年 10月 11 日
 
-**General changes**
+**常规变更**
 
-* Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.2.0](https://docs-archive.pingcap.com/tidb/v6.2/release-6.2.0) to [v6.3.0](https://docs-archive.pingcap.com/tidb/v6.3/release-6.3.0).
+* 将新的[开发者层](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)集群的默认 TiDB 版本从 [v6.2.0](https://docs-archive.pingcap.com/tidb/v6.2/release-6.2.0) 升级到 [v6.3.0](https://docs-archive.pingcap.com/tidb/v6.3/release-6.3.0)。
 
-**Console changes**
+**控制台变更**
 
-* Optimize billing information on the [billing details page](/tidb-cloud/tidb-cloud-billing.md#billing-details):
+* 优化[账单详情页](/tidb-cloud/tidb-cloud-billing.md#billing-details)上的账单信息：
 
-    * Provide more fine-grained billing information at the node level in the **Summary By Service** section.
-    * Add a **Usage Details** section. You can also download usage details as a CSV file.
+    * 在**按服务汇总**部分提供更细粒度的节点级别账单信息。
+    * 添加**使用详情**部分。你还可以将使用详情下载为 CSV 文件。
 
-## September 27, 2022
+## 2022 年 9月 27 日
 
-**General changes**
+**常规变更**
 
-* Support joining multiple organizations by invitation.
+* 支持通过邀请加入多个组织。
 
-    In the TiDB Cloud console, you can view all organizations you have joined and switch between them. For details, see [Switch between organizations](/tidb-cloud/manage-user-access.md#view-and-switch-between-organizations).
+    在 TiDB Cloud 控制台中，你可以查看你已加入的所有组织并在它们之间切换。有关详细信息，请参阅[在组织之间切换](/tidb-cloud/manage-user-access.md#view-and-switch-between-organizations)。
 
-* Add the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) page for SQL diagnosis.
+* 添加用于 SQL 诊断的[慢查询](/tidb-cloud/tune-performance.md#slow-query)页面。
 
-    On the Slow Query page, you can search and view all slow queries in your TiDB cluster, and explore the bottlenecks of each slow query by viewing its [execution plan](https://docs.pingcap.com/tidbcloud/explain-overview), SQL execution information, and other details.
+    在“慢查询”页面上，你可以搜索和查看 TiDB 集群中的所有慢查询，并通过查看其[执行计划](https://docs.pingcap.com/tidbcloud/explain-overview)、SQL 执行信息和其他详细信息来探索每个慢查询的瓶颈。
 
-* When you reset the password for your account, TiDB Cloud will check your new password input against your last four passwords, and remind you to avoid using any of them. Any of the four used passwords will not be permitted.
+* 当你重置帐户密码时，TiDB Cloud 会根据你最近的四个密码检查你的新密码输入，并提醒你避免使用它们中的任何一个。不允许使用任何四个已使用的密码。
 
-    For details, see [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md).
+    有关详细信息，请参阅[密码验证](/tidb-cloud/tidb-cloud-password-authentication.md)。
 
-## September 20, 2022
+## 2022 年 9月 20 日
 
-**General changes**
+**常规变更**
 
-* Introduce the [cost quota-based invoice](/tidb-cloud/tidb-cloud-billing.md#invoices) for self-service users.
+* 为自助服务用户引入[基于成本配额的发票](/tidb-cloud/tidb-cloud-billing.md#invoices)。
 
-    TiDB Cloud will generate an invoice once your cost reaches a quota. To raise the quota or to receive invoices per month, contact [our sales](https://www.pingcap.com/contact-us/).
+    当你的成本达到配额时，TiDB Cloud 将生成发票。要提高配额或每月 接收发票，请联系[我们的销售](https://www.pingcap.com/contact-us/)。
 
-* Exempt the storage operation fee from the Data Backup Cost. See [TiDB Cloud Pricing Details](https://www.pingcap.com/tidb-cloud-pricing-details/) for the latest pricing information.
+* 免除数据备份成本中的存储操作费用。 有关最新定价信息，请参阅[TiDB Cloud 定价详情](https://www.pingcap.com/tidb-cloud-pricing-details/)。
 
-**Console changes**
+**控制台变更**
 
-* Provide a new web UI for data import. The new UI provides better user experience and makes data import more efficient.
+* 提供用于数据导入的全新 Web UI。 新的 UI 提供更好的用户体验，并使数据导入更加高效。
 
-    Using the new UI, you can preview the data to be imported, view the import process, and manage all import tasks easily.
+    使用新的 UI，你可以预览要导入的数据，查看导入过程，并轻松管理所有导入任务。
 
-**API changes**
+**API 变更**
 
-* The TiDB Cloud API (beta) is now available to all users.
+* TiDB Cloud API（beta）现已向所有用户开放。
 
-    You can start using the API by creating an API key in the TiDB Cloud console. For more information, refer to [API documentation](/tidb-cloud/api-overview.md).
+    你可以通过在 TiDB Cloud 控制台中创建 API 密钥来开始使用 API。 有关更多信息，请参阅[API 文档](/tidb-cloud/api-overview.md)。
 
-## September 15, 2022
+## 2022 年 9月 15 日
 
-**General changes**
+**常规变更**
 
-* Support connecting to TiDB Cloud [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters via TLS.
+* 支持通过 TLS 连接到 TiDB Cloud [专用层级](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。
 
-    For Dedicated Tier clusters, the **Standard Connection** tab in the [Connect](/tidb-cloud/connect-via-standard-connection.md) dialog now provides a link to download the TiDB cluster CA and also provides the connection string and sample code for TLS connection. You can [connect to your Dedicated Tier cluster via TLS](/tidb-cloud/connect-via-standard-connection.md) using third-party MySQL clients, MyCLI, and multiple connection methods for your applications, such as JDBC, Python, Go, and Node.js. This feature ensures the security of data transmission from your applications to TiDB clusters.
+    对于专用层级集群，[连接](/tidb-cloud/connect-via-standard-connection.md)对话框中的**标准连接**选项卡现在提供了一个链接，用于下载 TiDB 集群 CA，并提供 TLS 连接的连接字符串和示例代码。 你可以使用第三方 MySQL 客户端、MyCLI 以及应用程序的多种连接方法（例如 JDBC、Python、Go 和 Node.js）[通过 TLS 连接到你的专用层级集群](/tidb-cloud/connect-via-standard-connection.md)。 此功能可确保从你的应用程序到 TiDB 集群的数据传输安全。
 
-## September 14, 2022
+## 2022 年 9月 14 日
 
-**Console changes**
+**控制台变更**
 
-* Optimize the UI of the [Clusters](https://tidbcloud.com/project/clusters) page and the cluster overview page for better user experience.
+* 优化[集群](https://tidbcloud.com/project/clusters)页面和集群概览页面的UI，以获得更好的用户体验。
 
-    In the new design, the entrances of upgrade to Dedicated Tier, cluster connection, and data import are highlighted.
+    在新的设计中，升级到专用层、集群连接和数据导入的入口被突出显示。
 
-* Introduce Playground for [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+* 为[开发者层](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)集群引入 Playground。
 
-    Playground contains a pre-loaded dataset of GitHub events, which allows you to get started with TiDB Cloud by running queries instantly, without importing your data or connecting to a client.
+    Playground 包含一个预加载的 GitHub 事件数据集，允许你通过立即运行查询来开始使用 TiDB Cloud，而无需导入数据或连接到客户端。
 
-## September 13, 2022
+## 2022 年 9月 13 日
 
-**General changes**
+**通用变更**
 
-* Support a new Google Cloud region for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters: `N. Virginia (us-east4)`.
+* 支持新的 Google Cloud 区域，用于 [专用层](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群：`N. Virginia (us-east4)`。
 
-## September 9, 2022
+## 2022 年 9月 9 日
 
-**General changes**
+**常规变更**
 
-* Provide [more metrics](/tidb-cloud/monitor-datadog-integration.md#metrics-available-to-datadog) of Dedicated Tier clusters in Datadog to help you better understand the cluster performance status.
+* 在 Datadog 中提供 Dedicated Tier 集群的[更多指标](/tidb-cloud/monitor-datadog-integration.md#metrics-available-to-datadog)，以帮助你更好地了解集群性能状态。
 
-    If you have [integrated TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration.md), you can view these metrics in your Datadog dashboards directly.
+    如果你已将 TiDB Cloud 与 [Datadog 集成](/tidb-cloud/monitor-datadog-integration.md)，则可以直接在 Datadog 仪表板中查看这些指标。
 
-## September 6, 2022
+## 2022 年 9月 6 日
 
-**General changes**
+**通用变更**
 
-* Upgrade the default TiDB version of new [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) to [v6.1.1](https://docs.pingcap.com/tidb/stable/release-6.1.1).
+* 将新[专用层](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)集群的默认 TiDB 版本从 [v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) 升级到 [v6.1.1](https://docs.pingcap.com/tidb/stable/release-6.1.1)。
 
-**Console changes**
+**控制台变更**
 
-* Now you can [apply for a PoC](/tidb-cloud/tidb-cloud-poc.md) from the entry in the upper-right corner of the TiDB Cloud console.
+* 现在，你可以从 TiDB Cloud 控制台右上角的入口[申请 PoC](/tidb-cloud/tidb-cloud-poc.md)。
 
-**API changes**
+**API 变更**
 
-* Support increasing the storage of a TiKV or TiFlash node through the [TiDB Cloud API](/tidb-cloud/api-overview.md). You can use the `storage_size_gib` field of the API endpoint to do the scaling.
+* 支持通过 [TiDB Cloud API](/tidb-cloud/api-overview.md) 增加 TiKV 或 TiFlash 节点的存储。 你可以使用 API 端点的 `storage_size_gib` 字段进行扩容。
 
-    Currently, TiDB Cloud API is still in beta and only available upon request.
+    目前，TiDB Cloud API 仍处于 Beta 阶段，仅应要求提供。
 
-    For details, see [Modify a Dedicated Tier cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster).
+    有关详细信息，请参阅[修改专用层集群](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)。
 
-## August 30, 2022
+## 2022 年 8月 30 日
 
-**General changes**
+**常规变更**
 
-* Support AWS PrivateLink-powered endpoint connection as a new network access management option for TiDB Cloud [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+* 支持 AWS PrivateLink 驱动的终端节点连接，作为 TiDB Cloud [专用层](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的一种新的网络访问管理选项。
 
-    The endpoint connection is secure and private, and does not expose your data to the public internet. In addition, the endpoint connection supports CIDR overlap and is easier for network management.
+    终端节点连接是安全且私密的，不会将你的数据暴露给公共互联网。此外，终端节点连接支持 CIDR 重叠，并且更易于网络管理。
 
-    For more information, see [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md).
+    有关更多信息，请参阅 [设置私有终端节点连接](/tidb-cloud/set-up-private-endpoint-connections.md)。
 
-**Console changes**
+**控制台变更**
 
-* Provide sample connection strings of MySQL, MyCLI, JDBC, Python, Go, and Node.js in the **VPC Peering** tab and **Private Endpoint** tab of the [Connect](/tidb-cloud/connect-to-tidb-cluster.md) dialog for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+* 在 [专用层](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的 [连接](/tidb-cloud/connect-to-tidb-cluster.md) 对话框的 **VPC 对等连接** 选项卡和 **私有终端节点** 选项卡中，提供 MySQL、MyCLI、JDBC、Python、Go 和 Node.js 的示例连接字符串。
 
-    You can easily connect to your Dedicated Tier cluster by simply copying and pasting the connection codes to your apps.
+    你只需将连接代码复制并粘贴到你的应用程序中，即可轻松连接到你的专用层集群。
 
-## August 24, 2022
+## 2022 年 8月 24 日
 
-**General changes**
+**常规变更**
 
-* Support pausing or resuming a Dedicated Tier cluster.
+* 支持暂停或恢复专用层集群。
 
-    You can [pause or resume your Dedicated Tier cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md) in TiDB Cloud. When a cluster is paused, Node Compute Cost will not be charged.
+    你可以在 TiDB Cloud 中[暂停或恢复你的专用层集群](/tidb-cloud/pause-or-resume-tidb-cluster.md)。集群暂停后，节点计算费用将不会被收取。
 
-## August 23, 2022
+## 2022 年 8月 23 日
 
-**General changes**
+**常规变更**
 
-* Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) to [v6.2.0](https://docs-archive.pingcap.com/tidb/v6.2/release-6.2.0).
+* 将新的[开发者层级](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)集群的默认 TiDB 版本从 [v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) 升级到 [v6.2.0](https://docs-archive.pingcap.com/tidb/v6.2/release-6.2.0)。
 
-**API changes**
+**API 变更**
 
-* Introduce TiDB Cloud API as beta.
+* 引入 TiDB Cloud API 作为 beta 版本。
 
-    Through this API, you can manage TiDB Cloud resources such as clusters automatically and efficiently. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
+    通过此 API，你可以自动高效地管理 TiDB Cloud 资源（例如集群）。 有关更多信息，请参见 [TiDB Cloud API 文档](https://docs.pingcap.com/tidbcloud/api/v1beta)。
 
-    Currently, TiDB Cloud API is still in beta and only available upon request. You can apply for API access by submitting a request:
+    目前，TiDB Cloud API 仍处于 beta 阶段，仅应要求提供。 你可以通过提交请求来申请 API 访问权限：
 
-    * Click **Help** in the lower-right corner of [TiDB Cloud console](https://tidbcloud.com/project/clusters).
-    * In the dialog, fill in "Apply for TiDB Cloud API" in the **Description** field and click **Send**.
+    * 点击 [TiDB Cloud 控制台](https://tidbcloud.com/project/clusters) 右下角的 **帮助**。
+    * 在对话框中，在 **描述** 字段中填写“申请 TiDB Cloud API”，然后点击 **发送**。
 
-## August 16, 2022
+## 2022 年 8月 16 日
 
-* Add `2 vCPU, 8 GiB (Beta)` node size of TiDB and TiKV as beta.
+* 添加 `2 vCPU, 8 GiB (Beta)` 节点大小的 TiDB 和 TiKV 作为 Beta 版本。
 
-    * For each `2 vCPU, 8 GiB (Beta)` TiKV node, the storage size is between 200 GiB and 500 GiB.
+    * 对于每个 `2 vCPU, 8 GiB (Beta)` TiKV 节点，存储大小在 200 GiB 到 500 GiB 之间。
 
-    * Suggested usage scenarios:
+    * 建议的使用场景：
 
-        * Low-workload production environments for SMB
-        * PoC and staging environments
-        * Development environments
+        * 中小企业的低负载生产环境
+        * PoC 和预发布环境
+        * 开发环境
 
-* Introduce [Credits](/tidb-cloud/tidb-cloud-billing.md#credits) (previously named as trail points) for PoC users.
+* 为 PoC 用户引入 [Credits](/tidb-cloud/tidb-cloud-billing.md#credits)（之前称为试用积分）。
 
-    You can now view information about your organization's credits on the **Credits** tab of the **Billing** page, the credits can be used to pay for TiDB Cloud fees. You can <a href="mailto:tidbcloud-support@pingcap.com">contact us</a> to get credits.
+    现在你可以在**账单**页面的 **Credits** 选项卡上查看有关你组织积分的信息，这些积分可用于支付 TiDB Cloud 费用。 你可以<a href="mailto:tidbcloud-support@pingcap.com">联系我们</a>以获取积分。
 
-## August 9, 2022
+## 2022 年 8月 9 日
 
-* Add the support of the GCP region `Osaka` for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster creation.
+* 添加对GCP区域`Osaka`的支持，用于创建[专用层](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)集群。
 
-## August 2, 2022
+## 2022 年 8月 2 日
 
-* The `4 vCPU, 16 GiB` node size of TiDB and TiKV is now in General Availability (GA).
+* TiDB 和 TiKV 的 `4 vCPU, 16 GiB` 节点大小现已正式发布 (GA)。
 
-    * For each `4 vCPU, 16 GiB` TiKV node, the storage size is between 200 GiB and 2 TiB.
-    * Suggested usage scenarios:
+    * 对于每个 `4 vCPU, 16 GiB` TiKV 节点，存储大小在 200 GiB 到 2 TiB 之间。
+    * 建议的使用场景：
 
-        * Low workload production environments for SMB
-        * PoC and staging environments
-        * Development environments
+        * 适用于中小企业的低工作负载生产环境
+        * PoC 和暂存环境
+        * 开发环境
 
-* Add a [Monitoring page](/tidb-cloud/built-in-monitoring.md) to the **Diagnosis** tab for [Dedicated Tier clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
+* 在 [专用层集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的 **诊断** 选项卡中添加 [监控页面](/tidb-cloud/built-in-monitoring.md)。
 
-    The Monitoring page provides a system-level entry for overall performance diagnosis. According to the top-down performance analysis methodology, the Monitoring page organizes TiDB performance metrics based on database time breakdown and displays these metrics in different colors. By checking these colors, you can identify performance bottlenecks of the entire system at the first glance, which significantly reduces performance diagnosis time and simplifies performance analysis and diagnosis.
+    监控页面提供了一个系统级的入口，用于整体性能诊断。根据自上而下的性能分析方法，监控页面根据数据库时间分解组织 TiDB 性能指标，并以不同的颜色显示这些指标。通过检查这些颜色，你可以一目了然地识别整个系统的性能瓶颈，从而大大缩短性能诊断时间，简化性能分析和诊断。
 
-* Add a switch to enable or disable **Custom Pattern** on the **Data Import** page for CSV and Parquet source files.
+* 在 CSV 和 Parquet 源文件的 **数据导入** 页面上添加一个开关，用于启用或禁用 **自定义模式**。
 
-    The **Custom Pattern** feature is disabled by default. You can enable it when you are going to import CSV or Parquet files whose filenames match a certain pattern to a single target table.
+    **自定义模式** 功能默认禁用。当你要将文件名与特定模式匹配的 CSV 或 Parquet 文件导入到单个目标表时，可以启用它。
 
-    For more information, see [Import CSV Files](/tidb-cloud/import-csv-files.md) and [Import Apache Parquet Files](/tidb-cloud/import-parquet-files.md).
+    有关更多信息，请参阅 [导入 CSV 文件](/tidb-cloud/import-csv-files.md) 和 [导入 Apache Parquet 文件](/tidb-cloud/import-parquet-files.md)。
 
-* Add TiDB Cloud Support Plans (Basic, Standard, Enterprise, and Premium) to meet different support needs of customers' organizations. For more information, see [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+* 添加 TiDB Cloud 支持计划（基本、标准、企业和高级），以满足客户组织的不同支持需求。有关更多信息，请参阅 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。
 
-* Optimize the UI of the [Clusters](https://tidbcloud.com/project/clusters) page and the cluster details page:
+* 优化 [集群](https://tidbcloud.com/project/clusters) 页面和集群详细信息页面的 UI：
 
-    * Add **Connect** and **Import data** buttons to the **Clusters** page.
-    * Move **Connect** and **Import data** buttons to the upper-right corner on the cluster details page.
+    * 在 **集群** 页面上添加 **连接** 和 **导入数据** 按钮。
+    * 将 **连接** 和 **导入数据** 按钮移动到集群详细信息页面的右上角。
 
-## July 28, 2022
+## 2022 年 7月 28 日
 
-* Add the **Allow Access from Anywhere** button to the **Security Quick Start** dialog, which allows your cluster to be accessible by any IP addresses. For more information, see [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md).
+* 在**安全快速入门**对话框中添加**允许从任何位置访问**按钮，允许任何 IP 地址访问你的集群。 更多信息，请参阅 [配置集群安全设置](/tidb-cloud/configure-security-settings.md)。
 
-## July 26, 2022
+## 2022 年 7月 26 日
 
-* Support automatic hibernation and resuming for new [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless).
+* 支持新的[开发者层集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)的自动休眠和恢复。
 
-    A Developer Tier cluster will not be deleted after 7 days of inactivity so you can still use it at any time until the one-year free trial ends. After 24 hours of inactivity, the Developer Tier cluster will hibernate automatically. To resume the cluster, either send a new connection to the cluster or click the **Resume** button in the TiDB Cloud console. The cluster will be resumed within 50 seconds and back to service automatically.
+    开发者层集群在不活动 7 天后不会被删除，因此你可以在一年免费试用期结束前的任何时间使用它。 不活动 24 小时后，开发者层集群将自动休眠。 要恢复集群，请向集群发送新连接，或单击 TiDB Cloud 控制台中的**恢复**按钮。 集群将在 50 秒内恢复并自动恢复服务。
 
-* Add a user name prefix limitation for new [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless).
+* 为新的[开发者层集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)添加用户名前缀限制。
 
-    Whenever you use or set a database user name, you must include the prefix for your cluster in the user name. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+    无论何时使用或设置数据库用户名，都必须在用户名中包含集群的前缀。 有关更多信息，请参见[用户名前缀](/tidb-cloud/select-cluster-tier.md#user-name-prefix)。
 
-* Disable the backup and restore feature for [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless).
+* 禁用[开发者层集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)的备份和恢复功能。
 
-    The backup and restore feature (including both automatic backup and manual backup) is disabled for Developer Tier clusters. You can still use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
+    开发者层集群禁用备份和恢复功能（包括自动备份和手动备份）。 你仍然可以使用 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) 导出数据作为备份。
 
-* Increase the storage size of a [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster from 500 MiB to 1 GiB.
-* Add breadcrumbs to the TiDB Cloud console to improve the navigation experience.
-* Support configuring multiple filter rules when you import data into TiDB Cloud.
-* Remove the **Traffic Filters** page from **Project Settings**, and remove the **Add Rules from Default Set** button from the **Connect to TiDB** dialog.
+* 将[开发者层](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)集群的存储大小从 500 MiB 增加到 1 GiB。
+* 向 TiDB Cloud 控制台添加面包屑导航，以改善导航体验。
+* 支持在将数据导入 TiDB Cloud 时配置多个过滤规则。
+* 从**项目设置**中删除**流量过滤器**页面，并从**连接到 TiDB** 对话框中删除**从默认集添加规则**按钮。
 
-## July 19, 2022
+## 2022 年 7月 19 日
 
-* Provide a new option for [TiKV node size](/tidb-cloud/size-your-cluster.md#tikv-vcpu-and-ram): `8 vCPU, 32 GiB`. You can choose either `8 vCPU, 32 GiB` or `8 vCPU, 64 GiB` for an 8 vCPU TiKV node.
-* Support syntax highlighting in sample code provided in the [**Connect to TiDB**](/tidb-cloud/connect-via-standard-connection.md) dialog to improve code readability. You can easily identify the parameters that you need to replace in the sample code.
-* Support automatically validating whether TiDB Cloud can access your source data after you confirm the import task on the [**Data Import Task**](/tidb-cloud/import-sample-data.md) page.
-* Change the theme color of the TiDB Cloud console to make it consistent with that of [PingCAP website](https://www.pingcap.com/).
+* 为 [TiKV 节点大小](/tidb-cloud/size-your-cluster.md#tikv-vcpu-and-ram) 提供一个新的选项：`8 vCPU, 32 GiB`。对于一个 8 vCPU 的 TiKV 节点，你可以选择 `8 vCPU, 32 GiB` 或 `8 vCPU, 64 GiB`。
+* 在 [**连接到 TiDB**](/tidb-cloud/connect-via-standard-connection.md) 对话框中提供的示例代码中支持语法高亮，以提高代码的可读性。你可以轻松识别需要在示例代码中替换的参数。
+* 支持在你确认 [**数据导入任务**](/tidb-cloud/import-sample-data.md) 页面上的导入任务后，自动验证 TiDB Cloud 是否可以访问你的源数据。
+* 更改 TiDB Cloud 控制台的主题颜色，使其与 [PingCAP 网站](https://www.pingcap.com/) 的主题颜色保持一致。
 
-## July 12, 2022
+## 2022 年 7月 12 日
 
-* Add the **Validate** button to the [**Data Import Task**](/tidb-cloud/import-sample-data.md) page for Amazon S3, which helps you detect data access issues before the data import starts.
-* Add **Billing Profile** under the [**Payment Method**](/tidb-cloud/tidb-cloud-billing.md#payment-method) tab. By providing your tax registration number in **Billing Profile**, certain taxes might be exempted from your invoice. For more information, see [Edit billing profile information](/tidb-cloud/tidb-cloud-billing.md#billing-profile).
+* 在 Amazon S3 的 [**数据导入任务**](/tidb-cloud/import-sample-data.md) 页面添加 **Validate** 按钮，帮助你在数据导入开始前检测数据访问问题。
+* 在 [**付款方式**](/tidb-cloud/tidb-cloud-billing.md#payment-method) 选项卡下添加 **账单资料**。 通过在 **账单资料** 中提供你的税务登记号码，某些税款可能会从你的发票中免除。 有关更多信息，请参阅 [编辑账单资料信息](/tidb-cloud/tidb-cloud-billing.md#billing-profile)。
 
-## July 05, 2022
+## 2022 年 7月 5 日
 
-* The columnar storage [TiFlash](/tiflash/tiflash-overview.md) is now in General Availability (GA).
+* 列式存储 [TiFlash](/tiflash/tiflash-overview.md) 现已正式发布 (GA)。
 
-    - TiFlash makes TiDB essentially an Hybrid Transactional/Analytical Processing (HTAP) database. Your application data is first stored in TiKV and then replicated to TiFlash via the Raft consensus algorithm. So it is real time replication from the row storage to the columnar storage.
-    - For tables with TiFlash replicas, the TiDB optimizer automatically determines whether to use either TiKV or TiFlash replicas based on the cost estimation.
+    - TiFlash 使 TiDB 本质上成为混合事务/分析处理 (HTAP) 数据库。你的应用程序数据首先存储在 TiKV 中，然后通过 Raft 共识算法复制到 TiFlash。因此，它是从行存储到列存储的实时复制。
+    - 对于具有 TiFlash 副本的表，TiDB 优化器会自动根据成本估算确定是使用 TiKV 还是 TiFlash 副本。
 
-    To experience the benefits brought by TiFlash, see [TiDB Cloud HTAP Quick Start Guide](/tidb-cloud/tidb-cloud-htap-quickstart.md).
+    要体验 TiFlash 带来的好处，请参阅 [TiDB Cloud HTAP 快速入门指南](/tidb-cloud/tidb-cloud-htap-quickstart.md)。
 
-* Support [increasing the storage size](/tidb-cloud/scale-tidb-cluster.md#change-storage) of TiKV and TiFlash for a Dedicated Tier cluster.
-* Support showing the memory information in the node size field.
+* 支持[增加 TiKV 和 TiFlash 的存储大小](/tidb-cloud/scale-tidb-cluster.md#change-storage)，适用于专用层集群。
+* 支持在节点大小字段中显示内存信息。
 
-## June 28, 2022
+## 2022 年 6月 28 日
 
-* Upgrade TiDB Cloud Dedicated Tier from [TiDB v5.4.1](https://docs.pingcap.com/tidb/stable/release-5.4.1) to [TiDB v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0).
+* 将 TiDB Cloud Dedicated Tier 从 [TiDB v5.4.1](https://docs.pingcap.com/tidb/stable/release-5.4.1) 升级到 [TiDB v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0)。
 
-## June 23, 2022
+## 2022 年 6月 23 日
 
-* Increase the maximum [storage capacity of TiKV](/tidb-cloud/size-your-cluster.md#tikv-node-storage-size) on TiDB Cloud.
+* 增加 TiDB Cloud 上 TiKV 的最大[存储容量](/tidb-cloud/size-your-cluster.md#tikv-node-storage-size)。
 
-    * 8 vCPU or 16 vCPU TiKV: support up to 4 TiB storage capacity.
-    * 4 vCPU TiKV: support up to 2 TiB storage capacity.
+    * 8 vCPU 或 16 vCPU TiKV：支持高达 4 TiB 的存储容量。
+    * 4 vCPU TiKV：支持高达 2 TiB 的存储容量。
 
-## June 21, 2022
+## 2022 年 6月 21 日
 
-* Add the support of the GCP region `Taiwan` for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster creation.
-* Support [updating user profiles](/tidb-cloud/manage-user-access.md#manage-user-profiles) in the TiDB Cloud console, including first name, last time, company name, country, and phone number.
-* Provide the connection strings for MySQL, MyCLI, JDBC, Python, Go, and Node.js in the [**Connect to TiDB**](/tidb-cloud/connect-via-standard-connection.md) dialog so you can easily connect to your TiDB cluster.
-* Support obtaining bucket regions from bucket URIs automatically during data import to save your effort to fill in such information.
+* 为[专用层](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)集群创建添加对GCP区域`台湾`的支持。
+* 支持在TiDB Cloud控制台中[更新用户个人资料](/tidb-cloud/manage-user-access.md#manage-user-profiles)，包括名字、姓氏、公司名称、国家和电话号码。
+* 在[**连接到TiDB**](/tidb-cloud/connect-via-standard-connection.md)对话框中提供MySQL、MyCLI、JDBC、Python、Go和Node.js的连接字符串，以便你可以轻松连接到你的TiDB集群。
+* 支持在数据导入期间自动从存储桶URI获取存储桶区域，从而节省你填写此类信息的工作量。
 
-## June 16, 2022
+## 2022 年 6月 16 日
 
-* Simplify the [cluster creation process](/tidb-cloud/create-tidb-cluster.md).
+* 简化[集群创建流程](/tidb-cloud/create-tidb-cluster.md)。
 
-    - When you create a cluster, TiDB Cloud provides a default cluster name. You can either use the default name or update it.
-    - When you create a cluster, you do not need to set the password on the **Create a Cluster** page.
-    - During or after the cluster creation, you can set the root password to access the cluster and also the IP addresses to connect to the cluster in the **Security Quick Start** dialog box.
+    - 创建集群时，TiDB Cloud 提供默认集群名称。 你可以使用默认名称或更新它。
+    - 创建集群时，你无需在**创建集群**页面上设置密码。
+    - 在集群创建期间或之后，你可以设置 root 密码以访问集群，并在**安全快速入门**对话框中设置连接到集群的 IP 地址。
 
-## June 14, 2022
+## 2022 年 6月 14 日
 
-* Upgrade TiDB Cloud to [TiDB v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) for Developer Tier.
-* Optimize the entrance of **Project Settings**. From the TiDB Cloud console, you can choose a target project and go to its settings easily by clicking the **Project Settings** tab.
-* Optimize the experience of password expiration by providing expiration messages in the TiDB Cloud console.
+* 将 TiDB Cloud 升级到 [TiDB v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) 以用于开发者层级。
+* 优化 **项目设置** 的入口。 从 TiDB Cloud 控制台，你可以选择一个目标项目，然后点击 **项目设置** 选项卡轻松进入其设置。
+* 通过在 TiDB Cloud 控制台中提供过期消息，优化密码过期的体验。
 
-## June 7, 2022
+## 2022 年 6月 7 日
 
-* Add the [Try Free](https://tidbcloud.com/free-trial) registration page to quickly sign up for TiDB Cloud.
-* Remove the **Proof of Concept plan** option from the plan selection page. If you want to apply for a 14-day PoC trial for free, <a href="mailto:tidbcloud-support@pingcap.com">contact us</a>. For more information, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
-* Improve the system security by prompting users who sign up for TiDB Cloud with emails and passwords to reset their passwords every 90 days. For more information, see [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md).
+* 添加 [免费试用](https://tidbcloud.com/free-trial) 注册页面，以便快速注册 TiDB Cloud。
+* 从套餐选择页面移除 **概念验证计划** 选项。 如果你想免费申请 14 天的 PoC 试用，请<a href="mailto:tidbcloud-support@pingcap.com">联系我们</a>。 更多信息，请参见 [使用 TiDB Cloud 执行概念验证 (PoC)](/tidb-cloud/tidb-cloud-poc.md)。
+* 通过提示使用电子邮件和密码注册 TiDB Cloud 的用户每 90 天重置密码来提高系统安全性。 更多信息，请参见 [密码验证](/tidb-cloud/tidb-cloud-password-authentication.md)。
 
-## May 24, 2022
+## 2022 年 5月 24 日
 
-* Support customizing TiDB port number when you [create](/tidb-cloud/create-tidb-cluster.md) or [restore](/tidb-cloud/backup-and-restore.md#restore) a Dedicated Tier cluster.
+* 支持在[创建](/tidb-cloud/create-tidb-cluster.md)或[恢复](/tidb-cloud/backup-and-restore.md#restore) Dedicated Tier 集群时自定义 TiDB 端口号。
 
-## May 19, 2022
+## 2022 年 5月 19 日
 
-* Add the support of the AWS region `Frankfurt` for [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster creation.
+* 为[开发者层](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)集群创建添加对AWS区域`Frankfurt`的支持。
 
-## May 18, 2022
+## 2022 年 5月 18 日
 
-* Support [signing up](https://tidbcloud.com/signup) TiDB Cloud with a GitHub account.
+* 支持使用 GitHub 帐户[注册](https://tidbcloud.com/signup) TiDB Cloud。
 
-## May 13, 2022
+## 2022 年 5月 13 日
 
-* Support [signing up](https://tidbcloud.com/signup) TiDB Cloud with a Google account.
+* 支持使用 Google 账号[注册](https://tidbcloud.com/signup) TiDB Cloud。
 
-## May 1, 2022
+## 2022 年 5月 1 日
 
-* Support configuring vCPU size of TiDB, TiKV, and TiFlash when you [create](/tidb-cloud/create-tidb-cluster.md) or [restore](/tidb-cloud/backup-and-restore.md#restore) a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster.
-* Add the support of the AWS region `Mumbai` for cluster creation.
-* Update the compute, storage, and data transfer cost for [TiDB Cloud billing](/tidb-cloud/tidb-cloud-billing.md).
+* 支持在[创建](/tidb-cloud/create-tidb-cluster.md)或[恢复](/tidb-cloud/backup-and-restore.md#restore)[专用层](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)集群时配置 TiDB、TiKV 和 TiFlash 的 vCPU 大小。
+* 增加对 AWS 区域 `Mumbai` 创建集群的支持。
+* 更新 [TiDB Cloud 账单](/tidb-cloud/tidb-cloud-billing.md)的计算、存储和数据传输成本。
 
-## April 7, 2022
+## 2022 年 4月 7 日
 
-* Upgrade TiDB Cloud to [TiDB v6.0.0](https://docs-archive.pingcap.com/tidb/v6.0/release-6.0.0-dmr) for Developer Tier.
+* 将 TiDB Cloud 升级到 [TiDB v6.0.0](https://docs-archive.pingcap.com/tidb/v6.0/release-6.0.0-dmr)，用于开发者层。
 
-## March 31, 2022
+## 2022 年 3月 31 日
 
-TiDB Cloud is now in General Availability. You can [sign up](https://tidbcloud.com/signup) and select one of the following options:
+TiDB Cloud 现在已正式发布 (GA)。 你可以[注册](https://tidbcloud.com/signup)并选择以下选项之一：
 
-* Get started with [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) for free.
-* <a href="mailto:tidbcloud-support@pingcap.com">Contact us</a> to apply for a 14-day PoC trial for free.
-* Get full access with [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
+* 免费开始使用 [开发者层级](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)。
+* <a href="mailto:tidbcloud-support@pingcap.com">联系我们</a> 申请 14 天的免费 PoC 试用。
+* 通过 [专用层级](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 获得完全访问权限。
 
-## March 25, 2022
+## 2022 年 3月 25 日
 
-New feature:
+新功能：
 
-* Support [TiDB Cloud built-in alerting](/tidb-cloud/monitor-built-in-alerting.md).
+* 支持 [TiDB Cloud 内置告警](/tidb-cloud/monitor-built-in-alerting.md)。
 
-    With the TiDB Cloud built-in alerting feature, you can be notified by emails whenever a TiDB Cloud cluster in your project triggers one of TiDB Cloud built-in alert conditions.
+    使用 TiDB Cloud 内置告警功能，当你的项目中 TiDB Cloud 集群触发 TiDB Cloud 内置告警条件时，你可以通过电子邮件收到通知。
 
-## March 15, 2022
+## 2022 年 3月 15 日
 
-General changes:
+常规变更：
 
-* No cluster tier with the fixed cluster size any more. You can customize the [cluster size](/tidb-cloud/size-your-cluster.md) of TiDB, TiKV, and TiFlash easily.
-* Support adding [TiFlash](/tiflash/tiflash-overview.md) nodes for an existing cluster without TiFlash.
-* Support specifying the storage size (500 to 2048 GiB) when [creating a new cluster](/tidb-cloud/create-tidb-cluster.md). The storage size cannot be changed after the cluster is created.
-* Introduce a new public region: `eu-central-1`.
-* Deprecate 8 vCPU TiFlash and provide 16 vCPU TiFlash.
-* Separate the price of CPU and storage (both have 30% public preview discount).
-* Update the [billing information](/tidb-cloud/tidb-cloud-billing.md) and the [price table](https://www.pingcap.com/pricing/).
+* 不再有固定集群大小的集群层级。你可以轻松自定义 TiDB、TiKV 和 TiFlash 的[集群大小](/tidb-cloud/size-your-cluster.md)。
+* 支持为没有 TiFlash 的现有集群添加 [TiFlash](/tiflash/tiflash-overview.md) 节点。
+* 支持在[创建新集群](/tidb-cloud/create-tidb-cluster.md)时指定存储大小（500 到 2048 GiB）。集群创建后，存储大小无法更改。
+* 引入一个新的公共区域：`eu-central-1`。
+* 弃用 8 vCPU TiFlash，并提供 16 vCPU TiFlash。
+* 分离 CPU 和存储的价格（两者都有 30% 的公开预览折扣）。
+* 更新[计费信息](/tidb-cloud/tidb-cloud-billing.md)和[价格表](https://www.pingcap.com/pricing/)。
 
-New features:
+新功能：
 
-* Support [the Prometheus and Grafana integration](/tidb-cloud/monitor-prometheus-and-grafana-integration.md).
+* 支持 [Prometheus 和 Grafana 集成](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)。
 
-    With the Prometheus and Grafana integration, you can configure a [Prometheus](https://prometheus.io/) service to read key metrics from the TiDB Cloud endpoint and view the metrics using [Grafana](https://grafana.com/).
+    通过 Prometheus 和 Grafana 集成，你可以配置一个 [Prometheus](https://prometheus.io/) 服务来从 TiDB Cloud 端点读取关键指标，并使用 [Grafana](https://grafana.com/) 查看这些指标。
 
-* Support assigning a default backup time based on the selected region of your new cluster.
+* 支持根据新集群的所选区域分配默认备份时间。
 
-    For more information, see [Back up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md).
+    有关更多信息，请参阅[备份和恢复 TiDB 集群数据](/tidb-cloud/backup-and-restore.md)。
 
-## March 04, 2022
+## 2022 年 3月 4 日
 
-New feature:
+新功能：
 
-* Support [the Datadog integration](/tidb-cloud/monitor-datadog-integration.md).
+* 支持 [Datadog 集成](/tidb-cloud/monitor-datadog-integration.md)。
 
-    With the Datadog integration, you can configure TiDB Cloud to send metric data about your TiDB clusters to [Datadog](https://www.datadoghq.com/). After that, you can view these metrics in your Datadog dashboards directly.
+    通过 Datadog 集成，你可以配置 TiDB Cloud 以将有关 TiDB 集群的指标数据发送到 [Datadog](https://www.datadoghq.com/)。 之后，你可以直接在 Datadog 仪表板中查看这些指标。
 
-## February 15, 2022
+## 2022 年 2月 15 日
 
-General change:
+常规变更：
 
-* Upgrade TiDB Cloud to [TiDB v5.4.0](https://docs.pingcap.com/tidb/stable/release-5.4.0) for Developer Tier.
+* 将 TiDB Cloud 升级到 [TiDB v5.4.0](https://docs.pingcap.com/tidb/stable/release-5.4.0)，适用于开发者层级。
 
-Improvement:
+改进：
 
-* Support using custom file names when importing [CSV files](/tidb-cloud/import-csv-files.md) or [Apache Parquet files](/tidb-cloud/import-parquet-files.md) into TiDB Cloud.
+* 支持在将 [CSV 文件](/tidb-cloud/import-csv-files.md) 或 [Apache Parquet 文件](/tidb-cloud/import-parquet-files.md) 导入到 TiDB Cloud 时使用自定义文件名。
 
-## January 11, 2022
+## 2022 年 1月 11 日
 
-General change:
+常规变更：
 
-* Upgrade TiDB Operator to [v1.2.6](https://docs.pingcap.com/tidb-in-kubernetes/stable/release-1.2.6).
+* 将 TiDB Operator 升级到 [v1.2.6](https://docs.pingcap.com/tidb-in-kubernetes/stable/release-1.2.6)。
 
-Improvement:
+改进：
 
-* Add a suggested option `--connect-timeout 15` to the MySQL client on the [**Connect**](/tidb-cloud/connect-via-standard-connection.md) page.
+* 在 [**连接**](/tidb-cloud/connect-via-standard-connection.md) 页面上的 MySQL 客户端添加建议选项 `--connect-timeout 15`。
 
-Bug fixes:
+Bug 修复：
 
-* Fix the issue that a user cannot create a cluster if the password contains a single quote.
-* Fix the issue that even an organization only has one owner, the owner can be deleted or changed to another role.
+* 修复了密码包含单引号时用户无法创建集群的问题。
+* 修复了即使一个组织只有一个所有者，所有者也可以被删除或更改为其他角色的问题。

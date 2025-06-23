@@ -1,17 +1,17 @@
 ---
-title: Best Practices for Indexing
-summary: Learn some best practices for creating and using indexes in TiDB.
+title: 索引最佳实践
+summary: 了解在 TiDB 中创建和使用索引的一些最佳实践。
 ---
 
 <!-- markdownlint-disable MD029 -->
 
-# Best Practices for Indexing
+# 索引最佳实践
 
-This document introduces some best practices for creating and using indexes in TiDB.
+本文档介绍在 TiDB 中创建和使用索引的一些最佳实践。
 
-## Before you begin
+## 开始之前
 
-This section takes the `books` table in the [bookshop](/develop/dev-guide-bookshop-schema-design.md) database as an example.
+本节以 [bookshop](/develop/dev-guide-bookshop-schema-design.md) 数据库中的 `books` 表为例。
 
 ```sql
 CREATE TABLE `books` (
@@ -25,23 +25,23 @@ CREATE TABLE `books` (
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 ```
 
-## Best practices for creating indexes
+## 创建索引的最佳实践
 
-- Creating a combined index with multiple columns, which is an optimization called [covering index optimization](/explain-indexes.md#indexreader). **Covering index optimization** allows TiDB to query data directly on indexes, which helps improve performance.
-- Avoid creating a secondary index on columns that you do not query often. A useful secondary index can speed up queries, but be aware that it also has side effects. Each time you add an index, an additional Key-Value is added when you insert a row. The more indexes you have, the slower you write, and the more space it consumes. In addition, too many indexes affect optimizer runtime, and inappropriate indexes can mislead the optimizer. So, more indexes do not always mean better performance.
-- Create an appropriate index based on your application. In principle, create indexes only on the columns to be used in queries to improve performance. The following cases are suitable for creating an index:
+- 创建包含多个列的联合索引，这是一种称为[覆盖索引优化](/explain-indexes.md#indexreader)的优化。**覆盖索引优化**允许 TiDB 直接在索引上查询数据，这有助于提高性能。
+- 避免在不经常查询的列上创建二级索引。有用的二级索引可以加快查询速度，但要注意它也有副作用。每次添加索引时，插入一行时都会添加一个额外的 Key-Value。索引越多，写入速度越慢，占用的空间也越多。此外，过多的索引会影响优化器运行时间，不恰当的索引可能会误导优化器。因此，更多的索引并不总是意味着更好的性能。
+- 根据你的应用程序创建适当的索引。原则上，只在需要用于查询的列上创建索引以提高性能。以下情况适合创建索引：
 
-    - Columns with a high distinction degree can significantly reduce the number of filtered rows. For example, it is recommended to create an index on the personal ID number, but not on the gender.
-    - Use combined indexes when querying with multiple conditions. Note that columns with equivalent conditions need to be placed in the front of the combined index. Here is an example: if the `select* from t where c1 = 10 and c2 = 100 and c3 > 10` query is frequently used, consider creating a combined index `Index cidx (c1, c2, c3)`, so that an index prefix can be constructed to scan by query conditions.
+    - 区分度高的列可以显著减少过滤的行数。例如，建议在身份证号码上创建索引，但不建议在性别上创建索引。
+    - 在使用多个条件查询时使用联合索引。注意，等值条件的列需要放在联合索引的前面。这里有一个例子：如果经常使用 `select* from t where c1 = 10 and c2 = 100 and c3 > 10` 查询，考虑创建联合索引 `Index cidx (c1, c2, c3)`，这样可以根据查询条件构建索引前缀进行扫描。
 
-- Name your secondary index meaningfully, and it is recommended to follow the table naming conventions of your company or organization. If such naming conventions do not exist, follow the rules in [Index Naming Specification](/develop/dev-guide-object-naming-guidelines.md).
+- 为二级索引命名时要有意义，建议遵循公司或组织的表命名约定。如果不存在这样的命名约定，请遵循[索引命名规范](/develop/dev-guide-object-naming-guidelines.md)中的规则。
 
-## Best practices for using indexes
+## 使用索引的最佳实践
 
-- Indexes are to speed up queries, so make sure that the existing indexes are actually used by some queries. If an index is not used by any query, the index is meaningless, and you need to drop it.
-- When using a combined index, follow the left-prefix rule.
+- 索引是为了加快查询速度，所以要确保现有的索引实际上被某些查询使用。如果一个索引没有被任何查询使用，这个索引就是无意义的，你需要删除它。
+- 使用联合索引时，遵循最左前缀原则。
 
-    Suppose that you create a new combined index on the `title` and `published_at` columns:
+    假设你在 `title` 和 `published_at` 列上创建一个新的联合索引：
 
     {{< copyable "sql" >}}
 
@@ -49,7 +49,7 @@ CREATE TABLE `books` (
     CREATE INDEX title_published_at_idx ON books (title, published_at);
     ```
 
-    The following query can still use the combined index:
+    以下查询仍然可以使用联合索引：
 
     {{< copyable "sql" >}}
 
@@ -57,7 +57,7 @@ CREATE TABLE `books` (
     SELECT * FROM books WHERE title = 'database';
     ```
 
-    However, the following query cannot use the combined index because the condition for the leftmost first column in the index is not specified:
+    但是，以下查询无法使用联合索引，因为没有指定索引中最左边第一列的条件：
 
     {{< copyable "sql" >}}
 
@@ -65,9 +65,9 @@ CREATE TABLE `books` (
     SELECT * FROM books WHERE published_at = '2018-08-18 21:42:08';
     ```
 
-- When using an index column as a condition in a query, do not use calculation, function, or type conversion on it, which will prevent the TiDB optimizer from using the index.
+- 在查询中使用索引列作为条件时，不要对其进行计算、函数运算或类型转换，这会阻止 TiDB 优化器使用索引。
 
-    Suppose that you create a new index on the time type column `published_at`:
+    假设你在时间类型列 `published_at` 上创建一个新索引：
 
     {{< copyable "sql" >}}
 
@@ -75,7 +75,7 @@ CREATE TABLE `books` (
     CREATE INDEX published_at_idx ON books (published_at);
     ```
 
-    However, the following query cannot use the index on `published_at`:
+    但是，以下查询无法使用 `published_at` 上的索引：
 
     {{< copyable "sql" >}}
 
@@ -83,7 +83,7 @@ CREATE TABLE `books` (
     SELECT * FROM books WHERE YEAR(published_at)=2022;
     ```
 
-    To use the index on `published_at`, you can rewrite the query as follows, which avoids using any function on the index column:
+    要使用 `published_at` 上的索引，你可以将查询重写如下，这样可以避免在索引列上使用任何函数：
 
     {{< copyable "sql" >}}
 
@@ -91,7 +91,7 @@ CREATE TABLE `books` (
     SELECT * FROM books WHERE published_at >= '2022-01-01' AND published_at < '2023-01-01';
     ```
 
-    You can also use an expression index to create an expression index for `YEAR(Published at)` in the query condition:
+    你也可以使用表达式索引为查询条件中的 `YEAR(published_at)` 创建一个表达式索引：
 
     {{< copyable "sql" >}}
 
@@ -99,15 +99,15 @@ CREATE TABLE `books` (
     CREATE INDEX published_year_idx ON books ((YEAR(published_at)));
     ```
 
-    Now, if you execute the `SELECT * FROM books WHERE YEAR(published_at)=2022;` query, the query can use the `published_year_idx` index to speed up the execution.
+    现在，如果你执行 `SELECT * FROM books WHERE YEAR(published_at)=2022;` 查询，查询可以使用 `published_year_idx` 索引来加速执行。
 
-    > **Warning:**
+    > **警告：**
     >
-    > Currently, expression index is an experimental feature, and it needs to be enabled in the TiDB configuration file. For more details, see [expression index](/sql-statements/sql-statement-create-index.md#expression-index).
+    > 目前，表达式索引是一个实验性功能，需要在 TiDB 配置文件中启用。更多详情，请参阅[表达式索引](/sql-statements/sql-statement-create-index.md#expression-index)。
 
-- Try to use a covering index, in which the columns in the index contain the columns to be queried, and avoid querying all columns with `SELECT *` statements.
+- 尽量使用覆盖索引，其中索引中的列包含要查询的列，避免使用 `SELECT *` 语句查询所有列。
 
-    The following query only needs to scan the index `title_published_at_idx` to get the data:
+    以下查询只需要扫描索引 `title_published_at_idx` 就能获取数据：
 
     {{< copyable "sql" >}}
 
@@ -115,7 +115,7 @@ CREATE TABLE `books` (
     SELECT title, published_at FROM books WHERE title = 'database';
     ```
 
-    Although the following query statement can use the combined index `(title, published_at)`, it causes an extra cost to query the non-indexed column, which requires TiDB to query row data according to the reference stored in the index data (usually the primary key information).
+    虽然以下查询语句可以使用联合索引 `(title, published_at)`，但它会导致查询非索引列的额外开销，这需要 TiDB 根据索引数据中存储的引用（通常是主键信息）来查询行数据。
 
     {{< copyable "sql" >}}
 
@@ -123,7 +123,7 @@ CREATE TABLE `books` (
     SELECT * FROM books WHERE title = 'database';
     ```
 
-- A query cannot use indexes when the query condition contains `!=` or `NOT IN`. For example, the following query cannot use any indexes:
+- 当查询条件包含 `!=` 或 `NOT IN` 时，查询无法使用索引。例如，以下查询无法使用任何索引：
 
     {{< copyable "sql" >}}
 
@@ -131,7 +131,7 @@ CREATE TABLE `books` (
     SELECT * FROM books WHERE title != 'database';
     ```
 
-- A query cannot use indexes if the `LIKE` condition starts with wildcard `%` in the query. For example, the following query cannot use any indexes:
+- 如果 `LIKE` 条件在查询中以通配符 `%` 开头，查询无法使用索引。例如，以下查询无法使用任何索引：
 
     {{< copyable "sql" >}}
 
@@ -139,9 +139,9 @@ CREATE TABLE `books` (
     SELECT * FROM books WHERE title LIKE '%database';
     ```
 
-- When the query condition has multiple indexes available, and you know which index is the best in practice, it is recommended to use [Optimizer Hint](/optimizer-hints.md) to force the TiDB optimizer to use this index. This can prevent the TiDB optimizer from selecting the wrong index due to inaccurate statistics or other problems.
+- 当查询条件有多个可用索引，并且你在实践中知道哪个索引是最好的，建议使用[优化器提示](/optimizer-hints.md)强制 TiDB 优化器使用这个索引。这可以防止 TiDB 优化器由于统计信息不准确或其他问题而选择错误的索引。
 
-    In the following query, assuming that indexes `id_idx` and `title_idx` are available on the column `id` and `title` respectively, if you know that `id_idx` is better, you can use `USE INDEX` hint in SQL to force the TiDB optimizer to use the `id_idx` index.
+    在以下查询中，假设列 `id` 和 `title` 分别有可用的索引 `id_idx` 和 `title_idx`，如果你知道 `id_idx` 更好，你可以在 SQL 中使用 `USE INDEX` 提示强制 TiDB 优化器使用 `id_idx` 索引。
 
     {{< copyable "sql" >}}
 
@@ -149,18 +149,18 @@ CREATE TABLE `books` (
     SELECT * FROM t USE INDEX(id_idx) WHERE id = 1 and title = 'database';
     ```
 
-- When using the `IN` expression in a query condition, it is recommended that the number of value matched after it does not exceed 300, otherwise the execution efficiency will be poor.
+- 在查询条件中使用 `IN` 表达式时，建议其后匹配的值不要超过 300 个，否则执行效率会很差。
 
-## Need help?
+## 需要帮助？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

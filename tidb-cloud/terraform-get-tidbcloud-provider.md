@@ -1,47 +1,47 @@
 ---
-title: Get TiDB Cloud Terraform Provider
-summary: Learn how to get TiDB Cloud Terraform Provider.
+title: 获取 TiDB Cloud Terraform Provider
+summary: 了解如何获取 TiDB Cloud Terraform Provider。
 ---
 
-# Get TiDB Cloud Terraform Provider
+# 获取 TiDB Cloud Terraform Provider
 
-You will learn how to get TiDB Cloud Terraform Provider in this document.
+本文档将介绍如何获取 TiDB Cloud Terraform Provider。
 
-## Prerequisites
+## 前提条件
 
-Make sure that the requirements in [TiDB Cloud Terraform Provider Overview](/tidb-cloud/terraform-tidbcloud-provider-overview.md#requirements) are met.
+确保满足 [TiDB Cloud Terraform Provider 概览](/tidb-cloud/terraform-tidbcloud-provider-overview.md#requirements)中的要求。
 
-## Step 1. Install Terraform
+## 步骤 1. 安装 Terraform
 
-TiDB Cloud Terraform Provider has been released to [Terraform Registry](https://registry.terraform.io/). All you need to do is install Terraform (>=1.0).
+TiDB Cloud Terraform Provider 已发布到 [Terraform Registry](https://registry.terraform.io/)。你只需要安装 Terraform (>=1.0)。
 
-For macOS, you can install Terraform with Homebrew according to the following steps.
+对于 macOS，你可以按照以下步骤使用 Homebrew 安装 Terraform。
 
-1. Install the HashiCorp tap, a repository with all the required Homebrew packages.
+1. 安装 HashiCorp tap，这是一个包含所有必需 Homebrew 包的仓库。
 
     ```shell
     brew tap hashicorp/tap
     ```
 
-2. Install Terraform with `hashicorp/tap/terraform`.
+2. 使用 `hashicorp/tap/terraform` 安装 Terraform。
 
     ```shell
     brew install hashicorp/tap/terraform
     ```
 
-For other operating systems, see [Terraform documentation](https://learn.hashicorp.com/tutorials/terraform/install-cli) for instructions.
+对于其他操作系统，请参阅 [Terraform 文档](https://learn.hashicorp.com/tutorials/terraform/install-cli)获取说明。
 
-## Step 2. Create an API key
+## 步骤 2. 创建 API 密钥
 
-TiDB Cloud API uses HTTP Digest Authentication. It protects your private key from being sent over the network.
+TiDB Cloud API 使用 HTTP 摘要认证。它可以防止你的私钥在网络上传输。
 
-Currently, TiDB Cloud Terraform Provider does not support managing API keys. So you need to create an API key in the [TiDB Cloud console](https://tidbcloud.com/project/clusters).
+目前，TiDB Cloud Terraform Provider 不支持管理 API 密钥。因此，你需要在 [TiDB Cloud 控制台](https://tidbcloud.com/project/clusters)中创建 API 密钥。
 
-For detailed steps, see [TiDB Cloud API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
+详细步骤，请参阅 [TiDB Cloud API 文档](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)。
 
-## Step 3. Download TiDB Cloud Terraform Provider
+## 步骤 3. 下载 TiDB Cloud Terraform Provider
 
-1. Create a `main.tf` file:
+1. 创建 `main.tf` 文件：
 
    ```
    terraform {
@@ -55,11 +55,11 @@ For detailed steps, see [TiDB Cloud API documentation](https://docs.pingcap.com/
    }
    ```
 
-   - The `source` attribute specifies the target Terraform provider to be downloaded from [Terraform Registry](https://registry.terraform.io/).
-   - The `version` attribute is optional, which specifies the version of the Terraform provider. If it is not specified, the latest provider version is used by default.
-   - The `required_version` is optional, which specifies the version of Terraform. If it is not specified, the latest Terraform version is used by default.
+   - `source` 属性指定要从 [Terraform Registry](https://registry.terraform.io/) 下载的目标 Terraform provider。
+   - `version` 属性是可选的，它指定 Terraform provider 的版本。如果未指定，默认使用最新的 provider 版本。
+   - `required_version` 是可选的，它指定 Terraform 的版本。如果未指定，默认使用最新的 Terraform 版本。
 
-2. Run the `terraform init` command to download TiDB Cloud Terraform Provider from Terraform Registry.
+2. 运行 `terraform init` 命令从 Terraform Registry 下载 TiDB Cloud Terraform Provider。
 
    ```
    $ terraform init
@@ -81,9 +81,9 @@ For detailed steps, see [TiDB Cloud API documentation](https://docs.pingcap.com/
    commands will detect it and remind you to do so if necessary.
    ```
 
-## Step 4. Configure TiDB Cloud Terraform Provider with the API key
+## 步骤 4. 使用 API 密钥配置 TiDB Cloud Terraform Provider
 
-You can configure the `main.tf` file as follows:
+你可以按如下方式配置 `main.tf` 文件：
 
 ```
 terraform {
@@ -100,20 +100,20 @@ provider "tidbcloud" {
 }
 ```
 
-`public_key` and `private_key` are the API key's public key and private key. You can also pass them through the environment variables:
+`public_key` 和 `private_key` 是 API 密钥的公钥和私钥。你也可以通过环境变量传递它们：
 
 ```
 export TIDBCLOUD_PUBLIC_KEY=${public_key}
 export TIDBCLOUD_PRIVATE_KEY=${private_key}
 ```
 
-Now, you can use the TiDB Cloud Terraform Provider.
+现在，你可以使用 TiDB Cloud Terraform Provider 了。
 
-## Step 5. Configure TiDB Cloud Terraform Provider with sync configuration
+## 步骤 5. 使用同步配置配置 TiDB Cloud Terraform Provider
 
-Terraform provider (>= 0.3.0) supports an optional parameter `sync`.
+Terraform provider (>= 0.3.0) 支持一个可选参数 `sync`。
 
-By setting `sync` to `true`, you can create, update, or delete resources synchronously. Here is an example:
+通过将 `sync` 设置为 `true`，你可以同步创建、更新或删除资源。以下是一个示例：
 
 ```
 provider "tidbcloud" {
@@ -123,8 +123,8 @@ provider "tidbcloud" {
 }
 ```
 
-Setting `sync` to `true` is recommended, but note that `sync` currently only works with the cluster resource. If you need synchronous operations for other resources, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+建议将 `sync` 设置为 `true`，但请注意，`sync` 目前仅适用于集群资源。如果你需要对其他资源进行同步操作，请[联系 TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。
 
-## Next step
+## 下一步
 
-Get started by managing a cluster with the [cluster resource](/tidb-cloud/terraform-use-cluster-resource.md).
+通过[集群资源](/tidb-cloud/terraform-use-cluster-resource.md)开始管理集群。

@@ -1,44 +1,44 @@
 ---
-title: Connect to TiDB Cloud Dedicated via Public Connection
-summary: Learn how to connect to your TiDB Cloud cluster via public connection.
+title: 通过公共连接连接到 TiDB Cloud Dedicated
+summary: 了解如何通过公共连接连接到 TiDB Cloud 集群。
 ---
 
-# Connect to TiDB Cloud Dedicated via Public Connection
+# 通过公共连接连接到 TiDB Cloud Dedicated
 
-This document describes how to connect to your TiDB Cloud Dedicated cluster via public connection. The public connection exposes a public endpoint with traffic filters, so you can connect to your TiDB Cloud Dedicated cluster via a SQL client from your laptop.
+本文档介绍如何通过公共连接连接到 TiDB Cloud Dedicated 集群。公共连接暴露了一个带有流量过滤器的公共端点，因此你可以通过笔记本电脑上的 SQL 客户端连接到 TiDB Cloud Dedicated 集群。
 
-> **Tip:**
+> **提示：**
 >
-> To learn how to connect to a TiDB Cloud Serverless cluster via public connection, see [Connect to TiDB Cloud Serverless via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md).
+> 要了解如何通过公共连接连接到 TiDB Cloud Serverless 集群，请参阅[通过公共端点连接到 TiDB Cloud Serverless](/tidb-cloud/connect-via-standard-connection-serverless.md)。
 
-## Prerequisite: Configure IP access list
+## 前提条件：配置 IP 访问列表
 
-For public connections, TiDB Cloud Dedicated only allows client connections from addresses in the IP access list. If you have not configured the IP access list, follow the steps in [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md) to configure it before your first connection.
+对于公共连接，TiDB Cloud Dedicated 只允许来自 IP 访问列表中地址的客户端连接。如果你尚未配置 IP 访问列表，请在首次连接之前按照[配置 IP 访问列表](/tidb-cloud/configure-ip-access-list.md)中的步骤进行配置。
 
-## Connect to the cluster
+## 连接到集群
 
-To connect to a TiDB Cloud Dedicated cluster via public connection, take the following steps:
+要通过公共连接连接到 TiDB Cloud Dedicated 集群，请执行以下步骤：
 
-1. Open the overview page of the target cluster.
+1. 打开目标集群的概览页面。
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面。
 
-        > **Tip:**
+        > **提示：**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > 你可以使用左上角的组合框在组织、项目和集群之间切换。
 
-    2. Click the name of your target cluster to go to its overview page.
+    2. 点击目标集群的名称以进入其概览页面。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2. 点击右上角的**连接**。此时会显示一个连接对话框。
 
-3. In the connection dialog, select **Public** from the **Connection Type** drop-down list.
+3. 在连接对话框中，从**连接类型**下拉列表中选择**公共**。
 
-    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md) to configure it before your first connection.
+    如果你尚未配置 IP 访问列表，请点击**配置 IP 访问列表**或按照[配置 IP 访问列表](/tidb-cloud/configure-ip-access-list.md)中的步骤进行配置，然后再进行首次连接。
 
-4. Click **CA cert** to download CA cert for TLS connection to TiDB clusters. The CA cert supports TLS 1.2 version by default.
+4. 点击 **CA 证书**下载用于 TLS 连接到 TiDB 集群的 CA 证书。CA 证书默认支持 TLS 1.2 版本。
 
-5. Choose your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
+5. 选择你喜欢的连接方式，然后参考选项卡上的连接字符串和示例代码连接到你的集群。
 
-## What's next
+## 下一步
 
-After you have successfully connected to your TiDB cluster, you can [explore SQL statements with TiDB](/basic-sql-operations.md).
+成功连接到 TiDB 集群后，你可以[使用 TiDB 探索 SQL 语句](/basic-sql-operations.md)。

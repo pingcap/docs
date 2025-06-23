@@ -1,13 +1,13 @@
 ---
-title: ROLLBACK | TiDB SQL Statement Reference
-summary: An overview of the usage of ROLLBACK for the TiDB database.
+title: ROLLBACK | TiDB SQL 语句参考
+summary: TiDB 数据库中 ROLLBACK 的使用概览。
 ---
 
 # ROLLBACK
 
-This statement reverts all changes in the current transaction inside of TiDB. It is the opposite of a `COMMIT` statement.
+此语句撤销 TiDB 中当前事务的所有更改。它是 `COMMIT` 语句的反操作。
 
-## Synopsis
+## 语法
 
 ```ebnf+diagram
 RollbackStmt ::=
@@ -18,7 +18,7 @@ CompletionTypeWithinTransaction ::=
 |   'NO'? 'RELEASE'
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> CREATE TABLE t1 (a INT NOT NULL PRIMARY KEY);
@@ -37,12 +37,12 @@ mysql> SELECT * FROM t1;
 Empty set (0.01 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-* TiDB parses but ignores the syntax `ROLLBACK AND [NO] RELEASE`. This functionality is used in MySQL to disconnect the client session immediately after rolling back the transaction. In TiDB, it is recommended to instead use the `mysql_close()` functionality of your client driver.
-* TiDB parses but ignores the syntax `ROLLBACK AND [NO] CHAIN`. This functionality is used in MySQL to immediately start a new transaction with the same isolation level while the current transaction is being rolled back. In TiDB, it is recommended to instead start a new transaction.
+* TiDB 解析但忽略 `ROLLBACK AND [NO] RELEASE` 语法。此功能在 MySQL 中用于在回滚事务后立即断开客户端会话连接。在 TiDB 中，建议改用客户端驱动程序的 `mysql_close()` 功能。
+* TiDB 解析但忽略 `ROLLBACK AND [NO] CHAIN` 语法。此功能在 MySQL 中用于在当前事务回滚时立即以相同的隔离级别启动新事务。在 TiDB 中，建议直接启动新事务。
 
-## See also
+## 另请参阅
 
 * [SAVEPOINT](/sql-statements/sql-statement-savepoint.md)
 * [COMMIT](/sql-statements/sql-statement-commit.md)

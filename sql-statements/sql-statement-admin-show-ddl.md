@@ -1,13 +1,13 @@
 ---
-title: ADMIN SHOW DDL [JOBS|JOB QUERIES] | TiDB SQL Statement Reference
-summary: An overview of the usage of ADMIN for the TiDB database.
+title: ADMIN SHOW DDL [JOBS|JOB QUERIES] | TiDB SQL 语句参考
+summary: TiDB 数据库中 ADMIN 使用概览。
 ---
 
 # ADMIN SHOW DDL [JOBS|JOB QUERIES]
 
-The `ADMIN SHOW DDL [JOBS|JOB QUERIES]` statement shows information about running and recently completed DDL jobs.
+`ADMIN SHOW DDL [JOBS|JOB QUERIES]` 语句显示正在运行和最近完成的 DDL 作业的信息。
 
-## Synopsis
+## 语法图
 
 ```ebnf+diagram
 AdminShowDDLStmt ::=
@@ -25,18 +25,18 @@ WhereClauseOptional ::=
     WhereClause?
 ```
 
-## Examples
+## 示例
 
 ### `ADMIN SHOW DDL`
 
-To view the status of the currently running DDL jobs, use `ADMIN SHOW DDL`. The output includes the current schema version, the DDL ID and address of the owner, the running DDL jobs and SQL statements, and the DDL ID of the current TiDB instance. The returned result fields are described as follows:
+要查看当前正在运行的 DDL 作业的状态，使用 `ADMIN SHOW DDL`。输出包括当前的 schema 版本、owner 的 DDL ID 和地址、正在运行的 DDL 作业和 SQL 语句，以及当前 TiDB 实例的 DDL ID。返回结果字段说明如下：
 
-- `SCHEMA_VER`: a number indicating the version of the schema.
-- `OWNER_ID`: the UUID of the DDL owner. See also [`TIDB_IS_DDL_OWNER()`](/functions-and-operators/tidb-functions.md).
-- `OWNER_ADDRESS`: the IP address of the DDL owner.
-- `RUNNING_JOBS`: details about the running DDL job.
-- `SELF_ID`: the UUID of the TiDB node to which you are currently connected. If `SELF_ID` is the same as the `OWNER_ID`, it means that you are connected to the DDL owner.
-- `QUERY`: the statements of the queries.
+- `SCHEMA_VER`：表示 schema 的版本号。
+- `OWNER_ID`：DDL owner 的 UUID。另请参阅 [`TIDB_IS_DDL_OWNER()`](/functions-and-operators/tidb-functions.md)。
+- `OWNER_ADDRESS`：DDL owner 的 IP 地址。
+- `RUNNING_JOBS`：正在运行的 DDL 作业的详细信息。
+- `SELF_ID`：当前连接的 TiDB 节点的 UUID。如果 `SELF_ID` 与 `OWNER_ID` 相同，表示你当前连接的是 DDL owner。
+- `QUERY`：查询的语句。
 
 ```sql
 ADMIN SHOW DDL\G;
@@ -55,71 +55,42 @@ OWNER_ADDRESS: 0.0.0.0:4000
 
 ### `ADMIN SHOW DDL JOBS`
 
-The `ADMIN SHOW DDL JOBS` statement is used to view all the results in the current DDL job queue, including running and queuing tasks, as well as the latest ten results in the completed DDL job queue. The returned result fields are described as follows:
+`ADMIN SHOW DDL JOBS` 语句用于查看当前 DDL 作业队列中的所有结果，包括正在运行和排队的任务，以及已完成的 DDL 作业队列中的最新十个结果。返回结果字段说明如下：
 
-<CustomContent platform="tidb">
+- `JOB_ID`：每个 DDL 操作对应一个 DDL 作业。`JOB_ID` 是全局唯一的。
+- `DB_NAME`：执行 DDL 操作的数据库名称。
+- `TABLE_NAME`：执行 DDL 操作的表名。
+- `JOB_TYPE`：DDL 操作的类型。常见的作业类型包括：
+    - `create schema`：用于 [`CREATE SCHEMA`](/sql-statements/sql-statement-create-database.md) 操作。
+    - `create table`：用于 [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) 操作。
+    - `create view`：用于 [`CREATE VIEW`](/sql-statements/sql-statement-create-view.md) 操作。
+    - `ingest`：使用由 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) 配置的加速索引回填。
+    - `txn`：基本事务回填。
+    - `add index /* txn-merge */`：使用临时索引的事务回填，该索引在回填完成后与原始索引合并。
+- `SCHEMA_STATE`：DDL 操作的 schema 对象的当前状态。如果 `JOB_TYPE` 是 `ADD INDEX`，则是索引的状态；如果是 `ADD COLUMN`，则是列的状态；如果是 `CREATE TABLE`，则是表的状态。常见状态包括：
+    - `none`：表示不存在。通常在 `DROP` 操作之后或 `CREATE` 操作失败并回滚后，会变成 `none` 状态。
+    - `delete only`、`write only`、`delete reorganization`、`write reorganization`：这四个状态是中间状态。有关它们的具体含义，请参阅[TiDB 中在线 DDL 异步变更的工作原理](/ddl-introduction.md#tidb-中在线-ddl-异步变更的工作原理)。由于中间状态转换很快，这些状态在操作过程中通常不可见。只有在执行 `ADD INDEX` 操作时才能看到 `write reorganization` 状态，表示正在添加索引数据。
+    - `public`：表示存在且可供用户使用。通常在 `CREATE TABLE` 和 `ADD INDEX`（或 `ADD COLUMN`）操作完成后，会变成 `public` 状态，表示新创建的表、列和索引可以正常读写。
+- `SCHEMA_ID`：执行 DDL 操作的数据库的 ID。
+- `TABLE_ID`：执行 DDL 操作的表的 ID。
+- `ROW_COUNT`：执行 `ADD INDEX` 操作时，表示已添加的数据行数。
+- `CREATE_TIME`：DDL 操作的创建时间。
+- `START_TIME`：DDL 操作的开始时间。
+- `END_TIME`：DDL 操作的结束时间。
+- `STATE`：DDL 操作的状态。常见状态包括：
+    - `none`：表示操作尚未开始。
+    - `queueing`：表示操作作业已进入 DDL 作业队列但尚未执行，因为它仍在等待早期的 DDL 作业完成。另一个原因可能是执行 `DROP` 操作后，`queueing` 状态会变成 `done` 状态，但很快会更新为 `synced` 状态，表示所有 TiDB 实例都已同步到该状态。
+    - `running`：表示正在执行操作。
+    - `synced`：表示操作已成功执行，所有 TiDB 实例都已同步到此状态。
+    - `rollback done`：表示操作失败且回滚已完成。
+    - `rollingback`：表示操作失败且正在回滚。
+    - `cancelling`：表示正在取消操作。此状态仅在使用 [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md) 命令取消 DDL 作业时出现。
+    - `cancelled`：表示操作已被取消。
+    - `pausing`：表示正在暂停操作。
+    - `paused`：表示操作已暂停。此状态仅在使用 [`ADMIN PAUSED DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) 命令暂停 DDL 作业时出现。你可以使用 [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md) 命令恢复 DDL 作业。
+    - `done`：表示操作已在 TiDB owner 节点上成功执行，但其他 TiDB 节点尚未同步此 DDL 作业执行的更改。
 
-- `JOB_ID`: each DDL operation corresponds to a DDL job. `JOB_ID` is globally unique.
-- `DB_NAME`: the name of the database where the DDL operation is performed.
-- `TABLE_NAME`: the name of the table where the DDL operation is performed.
-- `JOB_TYPE`: the type of DDL operation. Common job types include the following:
-    - `create schema`: for [`CREATE SCHEMA`](/sql-statements/sql-statement-create-database.md) operations.
-    - `create table`: for [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) operations.
-    - `create view`: for [`CREATE VIEW`](/sql-statements/sql-statement-create-view.md) operations.
-    - `ingest`: ingestion with accelerated index backfilling as configured by [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630).
-    - `txn`: basic transactional backfilling.
-    - `add index /* txn-merge */`: transactional backfilling with a temporary index that gets merged with the original index when the backfilling is finished.
-- `SCHEMA_STATE`: the current state of the schema object that the DDL operates on. If `JOB_TYPE` is `ADD INDEX`, it is the state of the index; if `JOB_TYPE` is `ADD COLUMN`, it is the state of the column; if `JOB_TYPE` is `CREATE TABLE`, it is the state of the table. Common states include the following:
-    - `none`: indicates that it does not exist. Generally, after the `DROP` operation or after the `CREATE` operation fails and rolls back, it will become the `none` state.
-    - `delete only`, `write only`, `delete reorganization`, `write reorganization`: these four states are intermediate states. For their specific meanings, see [How the Online DDL Asynchronous Change Works in TiDB](/ddl-introduction.md#how-the-online-ddl-asynchronous-change-works-in-tidb). As the intermediate state conversion is fast, these states are generally not visible during operation. Only when performing `ADD INDEX` operation can the `write reorganization` state be seen, indicating that index data is being added.
-    - `public`: indicates that it exists and is available to users. Generally, after `CREATE TABLE` and `ADD INDEX` (or `ADD COLUMN`) operations are completed, it will become the `public` state, indicating that the newly created table, column, and index can be read and written normally.
-- `SCHEMA_ID`: the ID of the database where the DDL operation is performed.
-- `TABLE_ID`: the ID of the table where the DDL operation is performed.
-- `ROW_COUNT`: when performing the `ADD INDEX` operation, it is the number of data rows that have been added.
-- `CREATE_TIME`: the creation time of the DDL operation.
-- `START_TIME`: the start time of the DDL operation.
-- `END_TIME`: the end time of the DDL operation.
-- `STATE`: the state of the DDL operation. Common states include the following:
-    - `none`: indicates that the operation has not started yet.
-    - `queueing`: indicates that the operation job has entered the DDL job queue but has not been executed because it is still waiting for an earlier DDL job to complete. Another reason might be that after executing the `DROP` operation, the `queueing` state will become the `done` state, but it will soon be updated to the `synced` state, indicating that all TiDB instances have been synchronized to that state.
-    - `running`: indicates that the operation is being executed.
-    - `synced`: indicates that the operation has been executed successfully and all TiDB instances have been synchronized to this state.
-    - `rollback done`: indicates that the operation has failed and the rollback has been completed.
-    - `rollingback`: indicates that the operation has failed and is rolling back.
-    - `cancelling`: indicates that the operation is being canceled. This state only appears when you use the [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md) command to cancel the DDL job.
-    - `cancelled`: indicates that the operation has been canceled.
-    - `pausing`: indicates that the operation is being paused.
-    - `paused`: indicates that the operation has been paused. This state only appears when you use the [`ADMIN PAUSED DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) command to pause the DDL job. You can use the [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md) command to resume the DDL job.
-    - `done`: indicates that the operation has been successfully executed on the TiDB owner node, but other TiDB nodes have not yet synchronized the changes performed by this DDL job.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- `JOB_ID`: each DDL operation corresponds to a DDL job. `JOB_ID` is globally unique.
-- `DB_NAME`: the name of the database where the DDL operation is performed.
-- `TABLE_NAME`: the name of the table where the DDL operation is performed.
-- `JOB_TYPE`: the type of DDL operation.
-- `SCHEMA_STATE`: the current state of the schema object that the DDL operates on. If `JOB_TYPE` is `ADD INDEX`, it is the state of the index; if `JOB_TYPE` is `ADD COLUMN`, it is the state of the column; if `JOB_TYPE` is `CREATE TABLE`, it is the state of the table. Common states include the following:
-    - `none`: indicates that it does not exist. Generally, after the `DROP` operation or after the `CREATE` operation fails and rolls back, it will become the `none` state.
-    - `delete only`, `write only`, `delete reorganization`, `write reorganization`: these four states are intermediate states. For their specific meanings, see [How the Online DDL Asynchronous Change Works in TiDB](https://docs.pingcap.com/tidb/stable/ddl-introduction#how-the-online-ddl-asynchronous-change-works-in-tidb). As the intermediate state conversion is fast, these states are generally not visible during operation. Only when performing `ADD INDEX` operation can the `write reorganization` state be seen, indicating that index data is being added.
-    - `public`: indicates that it exists and is available to users. Generally, after `CREATE TABLE` and `ADD INDEX` (or `ADD COLUMN`) operations are completed, it will become the `public` state, indicating that the newly created table, column, and index can be read and written normally.
-- `SCHEMA_ID`: the ID of the database where the DDL operation is performed.
-- `TABLE_ID`: the ID of the table where the DDL operation is performed.
-- `ROW_COUNT`: when performing the `ADD INDEX` operation, it is the number of data rows that have been added.
-- `START_TIME`: the start time of the DDL operation.
-- `STATE`: the state of the DDL operation. Common states include the following:
-    - `queueing`: indicates that the operation job has entered the DDL job queue but has not been executed because it is still waiting for an earlier DDL job to complete. Another reason might be that after executing the `DROP` operation, it will become the `none` state, but it will soon be updated to the `synced` state, indicating that all TiDB instances have been synchronized to that state.
-    - `running`: indicates that the operation is being executed.
-    - `synced`: indicates that the operation has been executed successfully and all TiDB instances have been synchronized to this state.
-    - `rollback done`: indicates that the operation has failed and the rollback has been completed.
-    - `rollingback`: indicates that the operation has failed and is rolling back.
-    - `cancelling`: indicates that the operation is being canceled. This state only appears when you use the [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md) command to cancel the DDL job.
-    - `paused`: indicates that the operation has been paused. This state only appears when you use the [`ADMIN PAUSED DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) command to pause the DDL job. You can use the [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md) command to resume the DDL job.
-
-</CustomContent>
-
-The following example shows the results of `ADMIN SHOW DDL JOBS`:
+以下示例显示 `ADMIN SHOW DDL JOBS` 的结果：
 
 ```sql
 ADMIN SHOW DDL JOBS;
@@ -146,26 +117,26 @@ mysql> ADMIN SHOW DDL JOBS;
 12 rows in set (0.00 sec)
 ```
 
-From the output above:
+从上面的输出可以看出：
 
-- Job 59 is currently in progress (`STATE` of `running`). The schema state is currently in `write reorganization`, but will switch to `public` once the task is completed to note that the change can be observed publicly by user sessions. The `end_time` column is also `NULL` indicating that the completion time for the job is currently not known.
+- 作业 59 当前正在进行中（`STATE` 为 `running`）。schema 状态当前为 `write reorganization`，但一旦任务完成，将切换到 `public` 以表示用户会话可以公开观察到此更改。`end_time` 列也是 `NULL`，表示当前不知道作业的完成时间。
 
-- Job 60 is an `add index` job, which is currently queued waiting for job 59 to complete. When job 59 completes, the `STATE` of job 60 will switch to `running`.
+- 作业 60 是一个 `add index` 作业，当前正在排队等待作业 59 完成。当作业 59 完成时，作业 60 的 `STATE` 将切换为 `running`。
 
-- For destructive changes such as dropping an index or dropping a table, the `SCHEMA_STATE` will change to `none` when the job is complete. For additive changes, the `SCHEMA_STATE` will change to `public`.
+- 对于删除索引或删除表等破坏性更改，作业完成时 `SCHEMA_STATE` 将变为 `none`。对于添加性更改，`SCHEMA_STATE` 将变为 `public`。
 
-To limit the number of rows shown, specify a number and a where condition:
+要限制显示的行数，可以指定数字和 where 条件：
 
 ```sql
 ADMIN SHOW DDL JOBS [NUM] [WHERE where_condition];
 ```
 
-* `NUM`: to view the last `NUM` results in the completed DDL job queue. If not specified, `NUM` is by default 10.
-* `WHERE`: to add filter conditions.
+* `NUM`：查看已完成的 DDL 作业队列中的最后 `NUM` 个结果。如果未指定，`NUM` 默认为 10。
+* `WHERE`：添加过滤条件。
 
 ### `ADMIN SHOW DDL JOB QUERIES`
 
-To view the original SQL statements of the DDL job corresponding to `job_id`, use `ADMIN SHOW DDL JOB QUERIES`:
+要查看与 `job_id` 对应的 DDL 作业的原始 SQL 语句，使用 `ADMIN SHOW DDL JOB QUERIES`：
 
 ```sql
 ADMIN SHOW DDL JOBS;
@@ -182,64 +153,64 @@ mysql> ADMIN SHOW DDL JOB QUERIES 51;
 1 row in set (0.02 sec)
 ```
 
-You can only search the running DDL job corresponding to `job_id` within the last ten results in the DDL history job queue.
+你只能在 DDL 历史作业队列的最后十个结果中搜索与 `job_id` 对应的正在运行的 DDL 作业。
 
 ### `ADMIN SHOW DDL JOB QUERIES LIMIT m OFFSET n`
 
- To view the original SQL statements of the DDL job within a specified range `[n+1, n+m]` corresponding to `job_id`, use `ADMIN SHOW DDL JOB QUERIES LIMIT m OFFSET n`:
+要查看与 `job_id` 对应的指定范围 `[n+1, n+m]` 内的 DDL 作业的原始 SQL 语句，使用 `ADMIN SHOW DDL JOB QUERIES LIMIT m OFFSET n`：
 
 ```sql
- ADMIN SHOW DDL JOB QUERIES LIMIT m;  # Retrieve first m rows
- ADMIN SHOW DDL JOB QUERIES LIMIT n, m;  # Retrieve rows [n+1, n+m]
- ADMIN SHOW DDL JOB QUERIES LIMIT m OFFSET n;  # Retrieve rows [n+1, n+m]
- ```
+ADMIN SHOW DDL JOB QUERIES LIMIT m;  # 检索前 m 行
+ADMIN SHOW DDL JOB QUERIES LIMIT n, m;  # 检索第 [n+1, n+m] 行
+ADMIN SHOW DDL JOB QUERIES LIMIT m OFFSET n;  # 检索第 [n+1, n+m] 行
+```
 
- where `n` and `m` are integers greater or equal to 0.
+其中 `n` 和 `m` 是大于等于 0 的整数。
 
- ```sql
- ADMIN SHOW DDL JOB QUERIES LIMIT 3;  # Retrieve first 3 rows
- +--------+--------------------------------------------------------------+
- | JOB_ID | QUERY                                                        |
- +--------+--------------------------------------------------------------+
- |     59 | ALTER TABLE t1 ADD INDEX index2 (col2)                       |
- |     60 | ALTER TABLE t2 ADD INDEX index1 (col1)                       |
- |     58 | CREATE TABLE t2 (id INT NOT NULL PRIMARY KEY auto_increment) |
- +--------+--------------------------------------------------------------+
- 3 rows in set (0.00 sec)
- ```
+```sql
+ADMIN SHOW DDL JOB QUERIES LIMIT 3;  # 检索前 3 行
++--------+--------------------------------------------------------------+
+| JOB_ID | QUERY                                                        |
++--------+--------------------------------------------------------------+
+|     59 | ALTER TABLE t1 ADD INDEX index2 (col2)                       |
+|     60 | ALTER TABLE t2 ADD INDEX index1 (col1)                       |
+|     58 | CREATE TABLE t2 (id INT NOT NULL PRIMARY KEY auto_increment) |
++--------+--------------------------------------------------------------+
+3 rows in set (0.00 sec)
+```
 
- ```sql
- ADMIN SHOW DDL JOB QUERIES LIMIT 6, 2;  # Retrieve rows 7-8
- +--------+----------------------------------------------------------------------------+
- | JOB_ID | QUERY                                                                      |
- +--------+----------------------------------------------------------------------------+
- |     52 | ALTER TABLE t1 ADD INDEX index1 (col1)                                     |
- |     51 | CREATE TABLE IF NOT EXISTS t1 (id INT NOT NULL PRIMARY KEY auto_increment) |
- +--------+----------------------------------------------------------------------------+
- 3 rows in set (0.00 sec)
- ```
+```sql
+ADMIN SHOW DDL JOB QUERIES LIMIT 6, 2;  # 检索第 7-8 行
++--------+----------------------------------------------------------------------------+
+| JOB_ID | QUERY                                                                      |
++--------+----------------------------------------------------------------------------+
+|     52 | ALTER TABLE t1 ADD INDEX index1 (col1)                                     |
+|     51 | CREATE TABLE IF NOT EXISTS t1 (id INT NOT NULL PRIMARY KEY auto_increment) |
++--------+----------------------------------------------------------------------------+
+3 rows in set (0.00 sec)
+```
 
- ```sql
- ADMIN SHOW DDL JOB QUERIES LIMIT 3 OFFSET 4;  # Retrieve rows 5-7
- +--------+----------------------------------------+
- | JOB_ID | QUERY                                  |
- +--------+----------------------------------------+
- |     54 | DROP TABLE IF EXISTS t3                |
- |     53 | ALTER TABLE t1 DROP INDEX index1       |
- |     52 | ALTER TABLE t1 ADD INDEX index1 (col1) |
- +--------+----------------------------------------+
- 3 rows in set (0.00 sec)
- ```
+```sql
+ADMIN SHOW DDL JOB QUERIES LIMIT 3 OFFSET 4;  # 检索第 5-7 行
++--------+----------------------------------------+
+| JOB_ID | QUERY                                  |
++--------+----------------------------------------+
+|     54 | DROP TABLE IF EXISTS t3                |
+|     53 | ALTER TABLE t1 DROP INDEX index1       |
+|     52 | ALTER TABLE t1 ADD INDEX index1 (col1) |
++--------+----------------------------------------+
+3 rows in set (0.00 sec)
+```
 
- You can search the running DDL job corresponding to `job_id` within an arbitrarily specified range of results in the DDL history job queue. This syntax does not have the limitation of the last ten results of `ADMIN SHOW DDL JOB QUERIES`.
+你可以在 DDL 历史作业队列中任意指定范围内搜索与 `job_id` 对应的正在运行的 DDL 作业。此语法没有 `ADMIN SHOW DDL JOB QUERIES` 最后十个结果的限制。
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension to MySQL syntax.
+此语句是 TiDB 对 MySQL 语法的扩展。
 
-## See also
+## 另请参阅
 
-* [DDL introduction](/ddl-introduction.md)
+* [DDL 简介](/ddl-introduction.md)
 * [ADMIN CANCEL DDL](/sql-statements/sql-statement-admin-cancel-ddl.md)
 * [ADMIN PAUSE DDL](/sql-statements/sql-statement-admin-pause-ddl.md)
 * [ADMIN RESUME DDL](/sql-statements/sql-statement-admin-resume-ddl.md)

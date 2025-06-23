@@ -1,65 +1,65 @@
 ---
-title: TiDB Specific Functions
-summary: Learn about the usage of TiDB specific functions.
+title: TiDB 特有函数
+summary: 了解 TiDB 特有函数的使用方法。
 ---
 
-# TiDB Specific Functions
+# TiDB 特有函数
 
-The following functions are TiDB extensions, and are not present in MySQL:
+以下函数是 TiDB 的扩展，在 MySQL 中不存在：
 
 <CustomContent platform="tidb">
 
-| Function name | Function description |
+| 函数名称 | 函数描述 |
 | :-------------- | :------------------------------------- |
-| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | Returns the name of the resource group that the current session is bound to. See [using resource control to achieve resource isolation](/tidb-resource-control.md). |
-| [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | Instructs TiDB to read the most recent data within a specified time range. See [reading historical data using the `AS OF TIMESTAMP` clause](/as-of-timestamp.md). |
-| [`TIDB_CURRENT_TSO()`](#tidb_current_tso) | Returns the current [TimeStamp Oracle (TSO) in TiDB](/tso.md). |
-| [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | Decodes binary plans. |
-| [`TIDB_DECODE_KEY()`](#tidb_decode_key) | Decodes a TiDB-encoded key entry into a JSON structure containing `_tidb_rowid` and `table_id`. These encoded keys can be found in some system tables and logging outputs. |
-| [`TIDB_DECODE_PLAN()`](#tidb_decode_plan) | Decodes a TiDB execution plan. |
-| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | Queries the normalized SQL statements (a form without formats and arguments) corresponding to a set of SQL digests in the cluster. |
-| [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest) | Gets a digest for a query string. |
-| [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner) | Checks whether or not the TiDB instance you are connected to is the DDL Owner. The DDL Owner is the TiDB instance that is tasked with executing DDL statements on behalf of all other nodes in the cluster. |
-| [`TIDB_PARSE_TSO()`](#tidb_parse_tso) | Extracts the physical timestamp from a TiDB TSO timestamp. See also: [`tidb_current_ts`](/system-variables.md#tidb_current_ts). |
-| [`TIDB_PARSE_TSO_LOGICAL()`](#tidb_parse_tso_logical) | Extracts the logical timestamp from a TiDB TSO timestamp. |
-| [`TIDB_ROW_CHECKSUM()`](#tidb_row_checksum) | Queries the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`. See also: [Data integrity validation for single-row data](/ticdc/ticdc-integrity-check.md). |
-| [`TIDB_SHARD()`](#tidb_shard) | Creates a shard index to scatter the index hotspot. A shard index is an expression index with a `TIDB_SHARD` function as the prefix.|
-| [`TIDB_VERSION()`](#tidb_version) | Returns the TiDB version with additional build information. |
-| [`VITESS_HASH()`](#vitess_hash) | Returns the hash of a number. This function is compatible with the `HASH` function of Vitess, and is intended to help the data migration from Vitess. |
+| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | 返回当前会话绑定的资源组的名称。请参阅[使用资源控制实现资源隔离](/tidb-resource-control.md)。 |
+| [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | 指示 TiDB 读取指定时间范围内最新的数据。请参阅[使用 `AS OF TIMESTAMP` 子句读取历史数据](/as-of-timestamp.md)。 |
+| [`TIDB_CURRENT_TSO()`](#tidb_current_tso) | 返回 TiDB 中当前的 [TimeStamp Oracle (TSO)](/tso.md)。 |
+| [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | 解码二进制计划。 |
+| [`TIDB_DECODE_KEY()`](#tidb_decode_key) | 将 TiDB 编码的键条目解码为包含 `_tidb_rowid` 和 `table_id` 的 JSON 结构。这些编码的键可以在一些系统表和日志输出中找到。 |
+| [`TIDB_DECODE_PLAN()`](#tidb_decode_plan) | 解码 TiDB 执行计划。 |
+| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | 查询集群中一组 SQL 摘要对应的规范化 SQL 语句（一种没有格式和参数的形式）。 |
+| [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest) | 获取查询字符串的摘要。 |
+| [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner) | 检查你连接的 TiDB 实例是否为 DDL Owner。DDL Owner 是负责代表集群中所有其他节点执行 DDL 语句的 TiDB 实例。 |
+| [`TIDB_PARSE_TSO()`](#tidb_parse_tso) | 从 TiDB TSO 时间戳中提取物理时间戳。另请参阅：[`tidb_current_ts`](/system-variables.md#tidb_current_ts)。 |
+| [`TIDB_PARSE_TSO_LOGICAL()`](#tidb_parse_tso_logical) | 从 TiDB TSO 时间戳中提取逻辑时间戳。 |
+| [`TIDB_ROW_CHECKSUM()`](#tidb_row_checksum) | 查询行的校验和值。此函数只能在 FastPlan 进程中的 `SELECT` 语句中使用。也就是说，你可以通过 `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` 或 `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)` 等语句进行查询。另请参阅：[单行数据的数据完整性验证](/ticdc/ticdc-integrity-check.md)。 |
+| [`TIDB_SHARD()`](#tidb_shard) | 创建一个分片索引来分散索引热点。分片索引是以 `TIDB_SHARD` 函数作为前缀的表达式索引。|
+| [`TIDB_VERSION()`](#tidb_version) | 返回包含其他构建信息的 TiDB 版本。 |
+| [`VITESS_HASH()`](#vitess_hash) | 返回数字的哈希值。此函数与 Vitess 的 `HASH` 函数兼容，旨在帮助从 Vitess 迁移数据。 |
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-| Function name | Function description |
+| 函数名称 | 函数描述 |
 | :-------------- | :------------------------------------- |
-| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | Returns the resource group name that the current session is bound to. See [using resource control to achieve resource isolation](/tidb-resource-control.md). |
-| [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | Instructs TiDB to read most recent data within a specified time range. See [reading historical data using the `AS OF TIMESTAMP` clause](/as-of-timestamp.md). |
-| [`TIDB_CURRENT_TSO()`](#tidb_current_tso) | Returns the current [TimeStamp Oracle (TSO) in TiDB](/tso.md). |
-| [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | Decodes binary plans. |
-| [`TIDB_DECODE_KEY()`](#tidb_decode_key) | Decodes a TiDB-encoded key entry into a JSON structure containing `_tidb_rowid` and `table_id`. These encoded keys can be found in some system tables and logging outputs. |
-| [`TIDB_DECODE_PLAN()`](#tidb_decode_plan) | Decodes a TiDB execution plan. |
-| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | Queries the normalized SQL statements (a form without formats and arguments) corresponding to a set of SQL digests in the cluster. |
-| [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest) | Gets a digest for a query string. |
-| [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner) | Checks whether or not the TiDB instance you are connected to is the DDL Owner. The DDL Owner is the TiDB instance that is tasked with executing DDL statements on behalf of all other nodes in the cluster. |
-| [`TIDB_PARSE_TSO()`](#tidb_parse_tso) | Extracts the physical timestamp from a TiDB TSO timestamp. See also: [`tidb_current_ts`](/system-variables.md#tidb_current_ts). |
-| [`TIDB_PARSE_TSO_LOGICAL()`](#tidb_parse_tso_logical) | Extracts the logical timestamp from a TiDB TSO timestamp. |
-| [`TIDB_ROW_CHECKSUM()`](#tidb_row_checksum) | Queries the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`. See also: [Data integrity validation for single-row data](https://docs.pingcap.com/tidb/stable/ticdc-integrity-check). |
-| [`TIDB_SHARD()`](#tidb_shard) | Creates a shard index to scatter the index hotspot. A shard index is an expression index with a `TIDB_SHARD` function as the prefix.|
-| [`TIDB_VERSION()`](#tidb_version) | Returns the TiDB version with additional build information. |
-| [`VITESS_HASH()`](#vitess_hash) | Returns the hash of a number. This function is compatible with the `HASH` function of Vitess, and is intended to help the data migration from Vitess. |
+| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | 返回当前会话绑定的资源组的名称。请参阅[使用资源控制实现资源隔离](/tidb-resource-control.md)。 |
+| [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | 指示 TiDB 读取指定时间范围内最新的数据。请参阅[使用 `AS OF TIMESTAMP` 子句读取历史数据](/as-of-timestamp.md)。 |
+| [`TIDB_CURRENT_TSO()`](#tidb_current_tso) | 返回 TiDB 中当前的 [TimeStamp Oracle (TSO)](/tso.md)。 |
+| [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | 解码二进制计划。 |
+| [`TIDB_DECODE_KEY()`](#tidb_decode_key) | 将 TiDB 编码的键条目解码为包含 `_tidb_rowid` 和 `table_id` 的 JSON 结构。这些编码的键可以在一些系统表和日志输出中找到。 |
+| [`TIDB_DECODE_PLAN()`](#tidb_decode_plan) | 解码 TiDB 执行计划。 |
+| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | 查询集群中一组 SQL 摘要对应的规范化 SQL 语句（一种没有格式和参数的形式）。 |
+| [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest) | 获取查询字符串的摘要。 |
+| [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner) | 检查你连接的 TiDB 实例是否为 DDL Owner。DDL Owner 是负责代表集群中所有其他节点执行 DDL 语句的 TiDB 实例。 |
+| [`TIDB_PARSE_TSO()`](#tidb_parse_tso) | 从 TiDB TSO 时间戳中提取物理时间戳。另请参阅：[`tidb_current_ts`](/system-variables.md#tidb_current_ts)。 |
+| [`TIDB_PARSE_TSO_LOGICAL()`](#tidb_parse_tso_logical) | 从 TiDB TSO 时间戳中提取逻辑时间戳。 |
+| [`TIDB_ROW_CHECKSUM()`](#tidb_row_checksum) | 查询行的校验和值。此函数只能在 FastPlan 进程中的 `SELECT` 语句中使用。也就是说，你可以通过 `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` 或 `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)` 等语句进行查询。另请参阅：[单行数据的数据完整性验证](https://docs.pingcap.com/tidb/stable/ticdc-integrity-check)。 |
+| [`TIDB_SHARD()`](#tidb_shard) | 创建一个分片索引来分散索引热点。分片索引是以 `TIDB_SHARD` 函数作为前缀的表达式索引。|
+| [`TIDB_VERSION()`](#tidb_version) | 返回包含其他构建信息的 TiDB 版本。 |
+| [`VITESS_HASH()`](#vitess_hash) | 返回数字的哈希值。此函数与 Vitess 的 `HASH` 函数兼容，旨在帮助从 Vitess 迁移数据。 |
 
 </CustomContent>
 
 ## CURRENT_RESOURCE_GROUP
 
-The `CURRENT_RESOURCE_GROUP()` function is used to show the resource group name that the current session is bound to. When the [Resource control](/tidb-resource-control.md) feature is enabled, the available resources that can be used by SQL statements are restricted by the resource quota of the bound resource group.
+`CURRENT_RESOURCE_GROUP()` 函数用于显示当前会话绑定的资源组名称。当 [资源管控](/tidb-resource-control.md) 功能启用时，SQL 语句可用的资源会受到绑定资源组的资源配额限制。
 
-When a session is established, TiDB binds the session to the resource group that the login user is bound to by default. If the user is not bound to any resource groups, the session is bound to the `default` resource group. Once the session is established, the bound resource group will not change by default, even if the bound resource group of the user is changed via [modifying the resource group bound to the user](/sql-statements/sql-statement-alter-user.md#modify-basic-user-information). To change the bound resource group of the current session, you can use [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md).
+当会话建立时，TiDB 默认将该会话绑定到登录用户所绑定的资源组。如果用户未绑定到任何资源组，则该会话将绑定到 `default` 资源组。会话建立后，默认情况下绑定的资源组不会更改，即使通过 [修改用户绑定的资源组](/sql-statements/sql-statement-alter-user.md#modify-basic-user-information) 更改了用户的绑定资源组。要更改当前会话的绑定资源组，可以使用 [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)。
 
-Examples:
+示例：
 
-Create a user `user1`, create two resource groups `rg1` and `rg2`, and bind the user `user1` to the resource group `rg1`:
+创建用户 `user1`，创建两个资源组 `rg1` 和 `rg2`，并将用户 `user1` 绑定到资源组 `rg1`：
 
 ```sql
 CREATE USER 'user1';
@@ -68,7 +68,7 @@ CREATE RESOURCE GROUP rg2 RU_PER_SEC = 2000;
 ALTER USER 'user1' RESOURCE GROUP `rg1`;
 ```
 
-Use `user1` to log in and view the resource group bound to the current user:
+使用 `user1` 登录并查看绑定到当前用户的资源组：
 
 ```sql
 SELECT CURRENT_RESOURCE_GROUP();
@@ -83,7 +83,7 @@ SELECT CURRENT_RESOURCE_GROUP();
 1 row in set (0.00 sec)
 ```
 
-Execute `SET RESOURCE GROUP` to set the resource group for the current session to `rg2`, and then view the resource group bound to the current user:
+执行 `SET RESOURCE GROUP` 将当前会话的资源组设置为 `rg2`，然后查看绑定到当前用户的资源组：
 
 ```sql
 SET RESOURCE GROUP `rg2`;
@@ -101,11 +101,11 @@ SELECT CURRENT_RESOURCE_GROUP();
 
 ## TIDB_BOUNDED_STALENESS
 
-The `TIDB_BOUNDED_STALENESS()` function is used as part of [`AS OF TIMESTAMP`](/as-of-timestamp.md) syntax.
+`TIDB_BOUNDED_STALENESS()` 函数用于 [`AS OF TIMESTAMP`](/as-of-timestamp.md) 语法的一部分。
 
 ## TIDB_CURRENT_TSO
 
-The `TIDB_CURRENT_TSO()` function returns the [TSO](/tso.md) for the current transaction. This is similar to the [`tidb_current_ts`](/system-variables.md#tidb_current_ts) system variable.
+`TIDB_CURRENT_TSO()` 函数返回当前事务的 [TSO](/tso.md)。这类似于 [`tidb_current_ts`](/system-variables.md#tidb_current_ts) 系统变量。
 
 ```sql
 BEGIN;
@@ -143,11 +143,11 @@ SELECT @@tidb_current_ts;
 
 ## TIDB_DECODE_BINARY_PLAN
 
-The `TIDB_DECODE_BINARY_PLAN(binary_plan)` function decodes binary plans, like the ones in the `BINARY_PLAN` column of the [`STATEMENTS_SUMMARY`](/statement-summary-tables.md) table.
+`TIDB_DECODE_BINARY_PLAN(binary_plan)` 函数解码二进制计划，例如 [`STATEMENTS_SUMMARY`](/statement-summary-tables.md) 表的 `BINARY_PLAN` 列中的二进制计划。
 
-The [`tidb_generate_binary_plan`](/system-variables.md#tidb_generate_binary_plan-new-in-v620) variable must be set to `ON` for the binary plans to be available.
+必须将 [`tidb_generate_binary_plan`](/system-variables.md#tidb_generate_binary_plan-new-in-v620) 变量设置为 `ON`，二进制计划才可用。
 
-Example:
+示例：
 
 ```sql
 SELECT BINARY_PLAN,TIDB_DECODE_BINARY_PLAN(BINARY_PLAN) FROM information_schema.STATEMENTS_SUMMARY LIMIT 1\G
@@ -166,9 +166,9 @@ TIDB_DECODE_BINARY_PLAN(BINARY_PLAN):
 
 ## TIDB_DECODE_KEY
 
-The `TIDB_DECODE_KEY()` function decodes a TiDB-encoded key entry into a JSON structure containing `_tidb_rowid` and `table_id`. These encoded keys exist in some system tables and logging outputs.
+`TIDB_DECODE_KEY()` 函数将 TiDB 编码的键条目解码为包含 `_tidb_rowid` 和 `table_id` 的 JSON 结构。这些编码的键存在于某些系统表和日志输出中。
 
-In the following example, the table `t1` has a hidden `rowid` that is generated by TiDB. The `TIDB_DECODE_KEY()` function is used in the statement. From the result, you can see that the hidden `rowid` is decoded and output, which is a typical result for the non-clustered primary key.
+在以下示例中，表 `t1` 具有由 TiDB 生成的隐藏 `rowid`。 `TIDB_DECODE_KEY()` 函数用于该语句中。 从结果中，你可以看到隐藏的 `rowid` 被解码并输出，这是非聚集主键的典型结果。
 
 ```sql
 SELECT START_KEY, TIDB_DECODE_KEY(START_KEY) FROM information_schema.tikv_region_status WHERE table_name='t1' AND REGION_ID=2\G
@@ -181,7 +181,7 @@ TIDB_DECODE_KEY(START_KEY): {"_tidb_rowid":1958897,"table_id":"59"}
 1 row in set (0.00 sec)
 ```
 
-In the following example, the table `t2` has a compound clustered primary key. From the JSON output, you can see a `handle` that contains the name and value for both of the columns that are part of the primary key.
+在以下示例中，表 `t2` 具有复合聚集主键。 从 JSON 输出中，你可以看到一个 `handle`，其中包含作为主键一部分的两个列的名称和值。
 
 ```sql
 SHOW CREATE TABLE t2\G
@@ -238,7 +238,7 @@ SELECT tidb_decode_key('7480000000000000FF3E5F720400000000FF0000000601633430FF33
 1 row in set (0.001 sec)
 ```
 
-In the following example, the first Region of a table starts with a key that only has the `table_id` of the table. The last Region of the table ends with `table_id + 1`. Any Regions in between have longer keys that includes a `_tidb_rowid` or `handle`.
+在以下示例中，表的第一个 Region 以仅具有表的 `table_id` 的键开头。 该表的最后一个 Region 以 `table_id + 1` 结尾。 之间的任何 Region 都有更长的键，其中包括 `_tidb_rowid` 或 `handle`。
 
 ```sql
 SELECT
@@ -266,13 +266,13 @@ ORDER BY
 4 rows in set (0.031 sec)
 ```
 
-`TIDB_DECODE_KEY` returns valid JSON on success and returns the argument value if it fails to decode.
+`TIDB_DECODE_KEY` 成功时返回有效的 JSON，如果解码失败，则返回参数值。
 
 ## TIDB_DECODE_PLAN
 
-You can find TiDB execution plans in encoded form in the slow query log. The `TIDB_DECODE_PLAN()` function is then used to decode the encoded plans into a human-readable form.
+你可以在慢查询日志中找到编码形式的 TiDB 执行计划。 `TIDB_DECODE_PLAN()` 函数用于将编码后的计划解码为人类可读的形式。
 
-This function is useful because a plan is captured at the time the statement is executed. Re-executing the statement in `EXPLAIN` might produce different results as data distribution and statistics evolves over time.
+此函数很有用，因为计划是在语句执行时捕获的。 在 `EXPLAIN` 中重新执行该语句可能会产生不同的结果，因为数据分布和统计信息会随着时间的推移而演变。
 
 ```sql
 SELECT tidb_decode_plan('8QIYMAkzMV83CQEH8E85LjA0CWRhdGE6U2VsZWN0aW9uXzYJOTYwCXRpbWU6NzEzLjHCtXMsIGxvb3BzOjIsIGNvcF90YXNrOiB7bnVtOiAxLCBtYXg6IDU2OC41wgErRHByb2Nfa2V5czogMCwgcnBjXxEpAQwFWBAgNTQ5LglZyGNvcHJfY2FjaGVfaGl0X3JhdGlvOiAwLjAwfQkzLjk5IEtCCU4vQQoxCTFfNgkxXzAJMwm2SGx0KHRlc3QudC5hLCAxMDAwMCkNuQRrdgmiAHsFbBQzMTMuOMIBmQnEDDk2MH0BUgEEGAoyCTQzXzUFVwX1oGFibGU6dCwga2VlcCBvcmRlcjpmYWxzZSwgc3RhdHM6cHNldWRvCTk2ISE2aAAIMTUzXmYA')\G
@@ -280,7 +280,7 @@ SELECT tidb_decode_plan('8QIYMAkzMV83CQEH8E85LjA0CWRhdGE6U2VsZWN0aW9uXzYJOTYwCXR
 
 ```sql
 *************************** 1. row ***************************
-  tidb_decode_plan('8QIYMAkzMV83CQEH8E85LjA0CWRhdGE6U2VsZWN0aW9uXzYJOTYwCXRpbWU6NzEzLjHCtXMsIGxvb3BzOjIsIGNvcF90YXNrOiB7bnVtOiAxLCBtYXg6IDU2OC41wgErRHByb2Nfa2V5czogMCwgcnBjXxEpAQwFWBAgNTQ5LglZyGNvcHJfY2FjaGVfaGl0X3JhdGlvOiAwLjAwfQkzLjk5IEtCCU4vQQoxCTFfNgkxXz:     id                     task         estRows    operator info                              actRows    execution info                                                                                                                         memory     disk
+  tidb_decode_plan('8QIYMAkzMV83CQEH8E85LjA0CWRhdGE6U2VsZWN0aW9uXzYJOTYwCXRpbWU6NzEzLjHCtXMsIGxvb3BzOjIsIGNvcF90YXNrOiB7bnVtOiAxLCBtYXg6IDU2OC41wgErRHByb2Nfa2V5czogMCwgcnBjXxEpAQwFWBAgNTQ5LglZyGNvcHJfY2FjaGVfaGl0X3JhdGlvOiAwLjAwfQkzLjk5IEtCCU4vQQoxCTFfNgkxXzAJMwm2SGx0KHRlc3QudC5hLCAxMDAwMCkNuQRrdgmiAHsFbBQzMTMuOMIBmQnEDDk2MH0BUgEEGAoyCTQzXzUFVwX1oGFibGU6dCwga2VlcCBvcmRlcjpmYWxzZSwgc3RhdHM6cHNldWRvCTk2ISE2aAAIMTUzXmYA'):     id                     task         estRows    operator info                              actRows    execution info                                                                                                                         memory     disk
     TableReader_7          root         319.04     data:Selection_6                           960        time:713.1µs, loops:2, cop_task: {num: 1, max: 568.5µs, proc_keys: 0, rpc_num: 1, rpc_time: 549.1µs, copr_cache_hit_ratio: 0.00}    3.99 KB    N/A
     └─Selection_6          cop[tikv]    319.04     lt(test.t.a, 10000)                        960        tikv_task:{time:313.8µs, loops:960}                                                                                                   N/A        N/A
       └─TableFullScan_5    cop[tikv]    960        table:t, keep order:false, stats:pseudo    960        tikv_task:{time:153µs, loops:960}                                                                                                     N/A        N/A
@@ -288,19 +288,19 @@ SELECT tidb_decode_plan('8QIYMAkzMV83CQEH8E85LjA0CWRhdGE6U2VsZWN0aW9uXzYJOTYwCXR
 
 ## TIDB_DECODE_SQL_DIGESTS
 
-The `TIDB_DECODE_SQL_DIGESTS()` function is used to query the normalized SQL statements (a form without formats and arguments) corresponding to the set of SQL digests in the cluster. This function accepts 1 or 2 arguments:
+`TIDB_DECODE_SQL_DIGESTS()` 函数用于查询集群中 SQL 摘要集合对应的规范化 SQL 语句（一种不包含格式和参数的形式）。此函数接受 1 个或 2 个参数：
 
-* `digests`: A string. This parameter is in the format of a JSON string array, and each string in the array is a SQL digest.
-* `stmtTruncateLength`: An integer (optional). It is used to limit the length of each SQL statement in the returned result. If a SQL statement exceeds the specified length, the statement is truncated. `0` means that the length is unlimited.
+* `digests`: 一个字符串。此参数的格式为 JSON 字符串数组，数组中的每个字符串都是一个 SQL 摘要。
+* `stmtTruncateLength`: 一个整数（可选）。它用于限制返回结果中每个 SQL 语句的长度。如果 SQL 语句超过指定的长度，则该语句将被截断。`0` 表示长度不受限制。
 
-This function returns a string, which is in the format of a JSON string array. The *i*-th item in the array is the normalized SQL statement corresponding to the *i*-th element in the `digests` parameter. If an element in the `digests` parameter is not a valid SQL digest or the system cannot find the corresponding SQL statement, the corresponding item in the returned result is `null`. If the truncation length is specified (`stmtTruncateLength > 0`), for each statement in the returned result that exceeds this length, the first `stmtTruncateLength` characters are retained and the suffix `"..."` is added at the end to indicate the truncation. If the `digests` parameter is `NULL`, the returned value of the function is `NULL`.
+此函数返回一个字符串，其格式为 JSON 字符串数组。数组中的第 *i* 项是 `digests` 参数中第 *i* 个元素对应的规范化 SQL 语句。如果 `digests` 参数中的某个元素不是有效的 SQL 摘要，或者系统无法找到相应的 SQL 语句，则返回结果中对应的项为 `null`。如果指定了截断长度 (`stmtTruncateLength > 0`)，对于返回结果中超过此长度的每个语句，将保留前 `stmtTruncateLength` 个字符，并在末尾添加 `"..."` 后缀以指示截断。如果 `digests` 参数为 `NULL`，则该函数的返回值为 `NULL`。
 
-> **Note:**
+> **注意：**
 >
-> * Only users with the [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process) privilege can use this function.
-> * When `TIDB_DECODE_SQL_DIGESTS` is executed, TiDB queries the statement corresponding to each SQL digest from the statement summary tables, so there is no guarantee that the corresponding statement can always be found for any SQL digest. Only the statements that have been executed in the cluster can be found, and whether these SQL statements can be queried or not is also affected by the related configuration of the statement summary tables. For the detailed description of the statement summary table, see [Statement Summary Tables](/statement-summary-tables.md).
-> * This function has a high overhead. In queries with a large number of rows (for example, querying the full table of `information_schema.cluster_tidb_trx` on a large and busy cluster), using this function might cause the queries to run for too long. Use it with caution.
->     * This function has a high overhead because every time it is called, it internally queries the `STATEMENTS_SUMMARY`, `STATEMENTS_SUMMARY_HISTORY`, `CLUSTER_STATEMENTS_SUMMARY`, and `CLUSTER_STATEMENTS_SUMMARY_HISTORY` tables, and the query involves the `UNION` operation. This function currently does not support vectorization, that is, when calling this function for multiple rows of data, the above query is performed separately for each row.
+> * 只有具有 [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process) 权限的用户才能使用此函数。
+> * 当执行 `TIDB_DECODE_SQL_DIGESTS` 时，TiDB 会从语句摘要表中查询每个 SQL 摘要对应的语句，因此不能保证始终可以为任何 SQL 摘要找到相应的语句。只能找到在集群中执行过的语句，并且是否可以查询到这些 SQL 语句也受到语句摘要表相关配置的影响。有关语句摘要表的详细描述，请参见 [语句摘要表](/statement-summary-tables.md)。
+> * 此函数开销很高。在具有大量行的查询中（例如，在大规模且繁忙的集群上查询 `information_schema.cluster_tidb_trx` 的全表），使用此函数可能会导致查询运行时间过长。请谨慎使用。
+>     * 此函数开销很高，因为它每次调用时，都会在内部查询 `STATEMENTS_SUMMARY`、`STATEMENTS_SUMMARY_HISTORY`、`CLUSTER_STATEMENTS_SUMMARY` 和 `CLUSTER_STATEMENTS_SUMMARY_HISTORY` 表，并且查询涉及 `UNION` 操作。此函数目前不支持向量化，也就是说，当为多行数据调用此函数时，上述查询会为每一行单独执行。
 
 ```sql
 SET @digests = '["e6f07d43b5c21db0fbb9a31feac2dc599787763393dd5acbfad80e247eb02ad5","38b03afa5debbdf0326a014dbe5012a62c51957f1982b3093e748460f8b00821","e5796985ccafe2f71126ed6c0ac939ffa015a8c0744a24b7aee6d587103fd2f7"]';
@@ -317,7 +317,7 @@ SELECT TIDB_DECODE_SQL_DIGESTS(@digests);
 1 row in set (0.00 sec)
 ```
 
-In the above example, the parameter is a JSON array containing 3 SQL digests, and the corresponding SQL statements are the three items in the query results. But the SQL statement corresponding to the second SQL digest cannot be found from the cluster, so the second item in the result is `null`.
+在上面的示例中，参数是一个包含 3 个 SQL 摘要的 JSON 数组，相应的 SQL 语句是查询结果中的三个项。但是无法从集群中找到与第二个 SQL 摘要对应的 SQL 语句，因此结果中的第二项为 `null`。
 
 ```sql
 SELECT TIDB_DECODE_SQL_DIGESTS(@digests, 10);
@@ -332,18 +332,18 @@ SELECT TIDB_DECODE_SQL_DIGESTS(@digests, 10);
 1 row in set (0.01 sec)
 ```
 
-The above call specifies the second parameter (that is, the truncation length) as 10, and the length of the third statement in the query result is greater than 10. Therefore, only the first 10 characters are retained, and `"..."` is added at the end, which indicates the truncation.
+上面的调用将第二个参数（即截断长度）指定为 10，并且查询结果中第三个语句的长度大于 10。因此，仅保留前 10 个字符，并在末尾添加 `"..."`，表示截断。
 
-See also:
+另请参阅：
 
-- [Statement summary tables](/statement-summary-tables.md)
+- [语句摘要表](/statement-summary-tables.md)
 - [`INFORMATION_SCHEMA.TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
 
 ## TIDB_ENCODE_SQL_DIGEST
 
-The `TIDB_ENCODE_SQL_DIGEST(query_str)` returns the SQL digest for a query string.
+`TIDB_ENCODE_SQL_DIGEST(query_str)` 返回查询字符串的 SQL 摘要。
 
-In the following example you can see that both queries get the same query digest, which is because the digest will be `select ?` for both of them.
+在以下示例中，你可以看到两个查询都获得了相同的查询摘要，这是因为对于它们来说，摘要都将是 `select ?`。
 
 ```sql
 SELECT TIDB_ENCODE_SQL_DIGEST('SELECT 1');
@@ -373,7 +373,7 @@ SELECT TIDB_ENCODE_SQL_DIGEST('SELECT 2');
 
 ## TIDB_IS_DDL_OWNER
 
-The `TIDB_IS_DDL_OWNER()` function returns `1` if the instance you are connected to is the DDL owner.
+`TIDB_IS_DDL_OWNER()` 函数用于判断你当前连接的实例是否为 DDL Owner，如果是则返回 `1`。
 
 ```sql
 SELECT TIDB_IS_DDL_OWNER();
@@ -390,12 +390,12 @@ SELECT TIDB_IS_DDL_OWNER();
 
 ## TIDB_PARSE_TSO
 
-The `TIDB_PARSE_TSO()` function extracts the physical timestamp from a TiDB TSO timestamp. [TSO](/tso.md) stands for Time Stamp Oracle and is a monotonically increasing timestamp given out by PD (Placement Driver) for every transaction.
+`TIDB_PARSE_TSO()` 函数从 TiDB TSO 时间戳中提取物理时间戳。[TSO](/tso.md) 代表时间戳预言机（Time Stamp Oracle），是由 PD (Placement Driver) 为每个事务发出的单调递增的时间戳。
 
-A TSO is a number that consists of two parts:
+TSO 是一个由两部分组成的数字：
 
-- A physical timestamp
-- A logical counter
+- 一个物理时间戳
+- 一个逻辑计数器
 
 ```sql
 BEGIN;
@@ -412,11 +412,11 @@ ROLLBACK;
 1 row in set (0.0012 sec)
 ```
 
-Here `TIDB_PARSE_TSO` is used to extract the physical timestamp from the timestamp number that is available in the `tidb_current_ts` session variable. Because timestamps are given out per transaction, this function is running in a transaction.
+这里 `TIDB_PARSE_TSO` 用于从 `tidb_current_ts` 会话变量中可用的时间戳数字中提取物理时间戳。因为时间戳是为每个事务发出的，所以此函数在事务中运行。
 
 ## TIDB_PARSE_TSO_LOGICAL
 
-The `TIDB_PARSE_TSO_LOGICAL(tso)` function returns the logical part of a [TSO](/tso.md) timestamp.
+`TIDB_PARSE_TSO_LOGICAL(tso)` 函数返回 [TSO](/tso.md) 时间戳的逻辑部分。
 
 ```sql
 SELECT TIDB_PARSE_TSO_LOGICAL(450456244814610433);
@@ -446,17 +446,17 @@ SELECT TIDB_PARSE_TSO_LOGICAL(450456244814610434);
 
 ## TIDB_ROW_CHECKSUM
 
-The `TIDB_ROW_CHECKSUM()` function is used to query the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`.
+`TIDB_ROW_CHECKSUM()` 函数用于查询行的校验和值。此函数只能在 FastPlan 进程中的 `SELECT` 语句中使用。也就是说，你可以通过类似 `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` 或 `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)` 的语句进行查询。
 
-To enable the checksum feature of single-row data in TiDB (controlled by the system variable [`tidb_enable_row_level_checksum`](/system-variables.md#tidb_enable_row_level_checksum-new-in-v710)), run the following statement:
+要启用 TiDB 中单行数据的校验和功能（由系统变量 [`tidb_enable_row_level_checksum`](/system-variables.md#tidb_enable_row_level_checksum-new-in-v710) 控制），请运行以下语句：
 
 ```sql
 SET GLOBAL tidb_enable_row_level_checksum = ON;
 ```
 
-This configuration only takes effect for newly created sessions, so you need to reconnect to TiDB.
+此配置仅对新创建的会话生效，因此你需要重新连接到 TiDB。
 
-Create table `t` and insert data:
+创建表 `t` 并插入数据：
 
 ```sql
 USE test;
@@ -464,13 +464,13 @@ CREATE TABLE t (id INT PRIMARY KEY, k INT, c CHAR(1));
 INSERT INTO t VALUES (1, 10, 'a');
 ```
 
-The following statement shows how to query the checksum value of the row where `id = 1` in table `t`:
+以下语句展示了如何查询表 `t` 中 `id = 1` 的行的校验和值：
 
 ```sql
 SELECT *, TIDB_ROW_CHECKSUM() FROM t WHERE id = 1;
 ```
 
-The output is as follows:
+输出如下：
 
 ```sql
 +----+------+------+---------------------+
@@ -483,41 +483,41 @@ The output is as follows:
 
 ## TIDB_SHARD
 
-The `TIDB_SHARD()` function creates a shard index to scatter the index hotspot. A shard index is an expression index prefixed with a `TIDB_SHARD()` function.
+`TIDB_SHARD()` 函数用于创建 shard 索引，以分散索引热点。shard 索引是以 `TIDB_SHARD()` 函数为前缀的表达式索引。
 
-- Creation:
+- 创建：
 
-    To create a shard index for the index field `a`, you can use `uk((tidb_shard(a)), a))`. When there is a hotspot caused by monotonically increasing or decreasing data on the index field `a` in the unique secondary index `uk((tidb_shard(a)), a))`, the index's prefix `tidb_shard(a)` can scatter the hotspot to improve the scalability of the cluster.
+    要为索引字段 `a` 创建 shard 索引，可以使用 `uk((tidb_shard(a)), a))`。当唯一二级索引 `uk((tidb_shard(a)), a))` 中的索引字段 `a` 上存在由单调递增或递减数据引起的热点时，索引的前缀 `tidb_shard(a)` 可以分散热点，从而提高集群的可扩展性。
 
-- Scenarios:
+- 场景：
 
-    - There is a write hotspot caused by monotonically increasing or decreasing keys on the unique secondary index, and the index contains integer type fields.
-    - The SQL statement executes an equality query based on all fields of the secondary index, either as a separate `SELECT` or as an internal query generated by `UPDATE`, `DELETE` and so on. The equality query includes two ways: `a = 1` or `a IN (1, 2, ......)`.
+    - 唯一二级索引上存在由单调递增或递减的键引起的写入热点，并且该索引包含整数类型字段。
+    - SQL 语句基于二级索引的所有字段执行等值查询，无论是单独的 `SELECT` 还是由 `UPDATE`、`DELETE` 等生成的内部查询。等值查询包括两种方式：`a = 1` 或 `a IN (1, 2, ......)`。
 
-- Limitations:
+- 限制：
 
-    - Cannot be used in inequality queries.
-    - Cannot be used in queries that contain `OR` mixed with an outmost `AND` operator.
-    - Cannot be used in the `GROUP BY` clause.
-    - Cannot be used in the `ORDER BY` clause.
-    - Cannot be used in the `ON` clause.
-    - Cannot be used in the `WHERE` subquery.
-    - Can be used to scatter unique indexes of only the integer fields.
-    - Might not take effect in composite indexes.
-    - Cannot go through FastPlan process, which affects optimizer performance.
-    - Cannot be used to prepare the execution plan cache.
+    - 不能用于不等值查询。
+    - 不能用于包含 `OR` 且与最外层 `AND` 运算符混合的查询。
+    - 不能用于 `GROUP BY` 子句。
+    - 不能用于 `ORDER BY` 子句。
+    - 不能用于 `ON` 子句。
+    - 不能用于 `WHERE` 子查询。
+    - 只能用于分散整数字段的唯一索引。
+    - 可能在复合索引中不起作用。
+    - 不能通过 FastPlan 过程，这会影响优化器性能。
+    - 不能用于准备执行计划缓存。
 
-The following example shows how to use the `TIDB_SHARD()` function.
+以下示例展示了如何使用 `TIDB_SHARD()` 函数。
 
-- Use the `TIDB_SHARD()` function to calculate the SHARD value.
+- 使用 `TIDB_SHARD()` 函数计算 SHARD 值。
 
-    The following statement shows how to use the `TIDB_SHARD()` function to calculate the SHARD value of `12373743746`:
+    以下语句展示了如何使用 `TIDB_SHARD()` 函数计算 `12373743746` 的 SHARD 值：
 
     ```sql
     SELECT TIDB_SHARD(12373743746);
     ```
 
-- The SHARD value is:
+- SHARD 值为：
 
     ```sql
     +-------------------------+
@@ -528,7 +528,7 @@ The following example shows how to use the `TIDB_SHARD()` function.
     1 row in set (0.00 sec)
     ```
 
-- Create a shard index using the `TIDB_SHARD()` function:
+- 使用 `TIDB_SHARD()` 函数创建 shard 索引：
 
     ```sql
     CREATE TABLE test(id INT PRIMARY KEY CLUSTERED, a INT, b INT, UNIQUE KEY uk((tidb_shard(a)), a));
@@ -536,7 +536,7 @@ The following example shows how to use the `TIDB_SHARD()` function.
 
 ## TIDB_VERSION
 
-The `TIDB_VERSION()` function is used to get the version and build details of the TiDB server that you are connected to. You can use this function when reporting issues on GitHub.
+`TIDB_VERSION()` 函数用于获取你所连接的 TiDB 服务器的版本和构建详情。你可以在 GitHub 上报告问题时使用此函数。
 
 ```sql
 SELECT TIDB_VERSION()\G
@@ -558,9 +558,9 @@ Store: tikv
 
 ## VITESS_HASH
 
-The `VITESS_HASH(num)` function is used to hash a number in the same way Vitess does this. This is to aid migration from Vitess to TiDB.
+`VITESS_HASH(num)` 函数用于以与 Vitess 相同的方式哈希一个数字。这有助于从 Vitess 迁移到 TiDB。
 
-Example:
+示例：
 
 ```sql
 SELECT VITESS_HASH(123);

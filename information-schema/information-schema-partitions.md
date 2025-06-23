@@ -1,18 +1,18 @@
 ---
 title: PARTITIONS
-summary: Learn the `PARTITIONS` INFORMATION_SCHEMA table.
+summary: 了解 `PARTITIONS` INFORMATION_SCHEMA 表。
 ---
 
 # PARTITIONS
 
-The `PARTITIONS` table provides information about [partitioned tables](/partitioned-table.md).
+`PARTITIONS` 表提供了关于[分区表](/partitioned-table.md)的信息。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC partitions;
 ```
 
-The output is as follows:
+输出如下：
 
 ```sql
 +-------------------------------+--------------+------+------+---------+-------+
@@ -54,7 +54,7 @@ CREATE TABLE test.t1 (id INT NOT NULL PRIMARY KEY) PARTITION BY HASH (id) PARTIT
 SELECT * FROM PARTITIONS WHERE table_schema='test' AND table_name='t1'\G
 ```
 
-The output is as follows:
+输出如下：
 
 ```sql
 *************************** 1. row ***************************
@@ -116,6 +116,6 @@ SUBPARTITION_ORDINAL_POSITION: NULL
 2 rows in set (0.00 sec)
 ```
 
-## See also
+## 另请参阅
 
-- [Explain statements using partitions](/explain-partitions.md)
+- [使用分区的 Explain 语句](/explain-partitions.md)

@@ -1,91 +1,91 @@
 ---
-title: CRUD SQL in TiDB
-summary: A brief introduction to TiDB's CRUD SQL.
+title: TiDB 中的 CRUD SQL
+summary: TiDB CRUD SQL 的简要介绍。
 ---
 
-# CRUD SQL in TiDB
+# TiDB 中的 CRUD SQL
 
-This document briefly introduces how to use TiDB's CRUD SQL.
+本文简要介绍如何使用 TiDB 的 CRUD SQL。
 
-## Before you start
+## 开始之前
 
-Please make sure you are connected to a TiDB cluster. If not, refer to [Build a TiDB Cloud Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-serverless-cluster) to create a TiDB Cloud Serverless cluster.
+请确保你已连接到 TiDB 集群。如果没有，请参考[构建 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-serverless-cluster)来创建一个 TiDB Cloud Serverless 集群。
 
-## Explore SQL with TiDB
+## 使用 TiDB 探索 SQL
 
-> **Note:**
+> **注意：**
 >
-> This document references and simplifies [Explore SQL with TiDB](/basic-sql-operations.md). For more details, see [Explore SQL with TiDB](/basic-sql-operations.md).
+> 本文参考并简化了[使用 TiDB 探索 SQL](/basic-sql-operations.md)。更多详细信息，请参见[使用 TiDB 探索 SQL](/basic-sql-operations.md)。
 
-TiDB is compatible with MySQL, you can use MySQL statements directly in most cases. For unsupported features, see [Compatibility with MySQL](/mysql-compatibility.md#unsupported-features).
+TiDB 与 MySQL 兼容，在大多数情况下你可以直接使用 MySQL 语句。有关不支持的功能，请参见[与 MySQL 的兼容性](/mysql-compatibility.md#unsupported-features)。
 
-To experiment with SQL and test out TiDB compatibility with MySQL queries, you can try [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=basic-sql-operations). You can also first deploy a TiDB cluster and then run SQL statements in it.
+要试验 SQL 并测试 TiDB 与 MySQL 查询的兼容性，你可以尝试使用 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=basic-sql-operations)。你也可以先部署一个 TiDB 集群，然后在其中运行 SQL 语句。
 
-This page walks you through the basic TiDB SQL statements such as DDL, DML, and CRUD operations. For a complete list of TiDB statements, see [SQL Statement Overview](/sql-statements/sql-statement-overview.md).
+本页将指导你了解基本的 TiDB SQL 语句，如 DDL、DML 和 CRUD 操作。有关 TiDB 语句的完整列表，请参见 [SQL 语句概览](/sql-statements/sql-statement-overview.md)。
 
-## Category
+## 分类
 
-SQL is divided into the following 4 types according to their functions:
+SQL 根据其功能分为以下 4 种类型：
 
-- **DDL (Data Definition Language)**: It is used to define database objects, including databases, tables, views, and indexes.
+- **DDL（数据定义语言）**：用于定义数据库对象，包括数据库、表、视图和索引。
 
-- **DML (Data Manipulation Language)**: It is used to manipulate application related records.
+- **DML（数据操作语言）**：用于操作应用程序相关的记录。
 
-- **DQL (Data Query Language)**: It is used to query the records after conditional filtering.
+- **DQL（数据查询语言）**：用于在条件过滤后查询记录。
 
-- **DCL (Data Control Language)**: It is used to define access privileges and security levels.
+- **DCL（数据控制语言）**：用于定义访问权限和安全级别。
 
-The following mainly introduces DML and DQL. For more information about DDL and DCL, see [Explore SQL with TiDB](/basic-sql-operations.md) or [SQL Statement Overview](/sql-statements/sql-statement-overview.md).
+以下主要介绍 DML 和 DQL。有关 DDL 和 DCL 的更多信息，请参见[使用 TiDB 探索 SQL](/basic-sql-operations.md)或 [SQL 语句概览](/sql-statements/sql-statement-overview.md)。
 
-## Data Manipulation Language
+## 数据操作语言
 
-Common DML features are adding, modifying, and deleting table records. The corresponding commands are `INSERT`, `UPDATE`, and `DELETE`.
+常见的 DML 功能是添加、修改和删除表记录。对应的命令是 `INSERT`、`UPDATE` 和 `DELETE`。
 
-To insert data into a table, use the `INSERT` statement:
+要向表中插入数据，使用 `INSERT` 语句：
 
 ```sql
 INSERT INTO person VALUES(1,'tom','20170912');
 ```
 
-To insert a record containing data of some fields into a table, use the `INSERT` statement:
+要向表中插入包含部分字段数据的记录，使用 `INSERT` 语句：
 
 ```sql
 INSERT INTO person(id,name) VALUES('2','bob');
 ```
 
-To update some fields of a record in a table, use the `UPDATE` statement:
+要更新表中某条记录的部分字段，使用 `UPDATE` 语句：
 
 ```sql
 UPDATE person SET birthday='20180808' WHERE id=2;
 ```
 
-To delete the data in a table, use the `DELETE` statement:
+要删除表中的数据，使用 `DELETE` 语句：
 
 ```sql
 DELETE FROM person WHERE id=2;
 ```
 
-> **Note:**
+> **注意：**
 >
-> The `UPDATE` and `DELETE` statements without the `WHERE` clause as a filter operate on the entire table.
+> 没有 `WHERE` 子句作为过滤条件的 `UPDATE` 和 `DELETE` 语句会对整个表进行操作。
 
-## Data Query Language
+## 数据查询语言
 
-DQL is used to retrieve the desired data rows from a table or multiple tables.
+DQL 用于从一个或多个表中检索所需的数据行。
 
-To view the data in a table, use the `SELECT` statement:
+要查看表中的数据，使用 `SELECT` 语句：
 
 ```sql
 SELECT * FROM person;
 ```
 
-To query a specific column, add the column name after the `SELECT` keyword:
+要查询特定列，在 `SELECT` 关键字后添加列名：
 
 ```sql
 SELECT name FROM person;
 ```
 
-The result is as follows:
+结果如下：
 
 ```
 +------+
@@ -96,22 +96,22 @@ The result is as follows:
 1 rows in set (0.00 sec)
 ```
 
-Use the `WHERE` clause to filter all records that match the conditions and then return the result:
+使用 `WHERE` 子句过滤所有匹配条件的记录，然后返回结果：
 
 ```sql
 SELECT * FROM person WHERE id < 5;
 ```
 
-## Need help?
+## 需要帮助？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

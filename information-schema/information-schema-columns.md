@@ -1,18 +1,18 @@
 ---
 title: COLUMNS
-summary: Learn the `COLUMNS` INFORMATION_SCHEMA table.
+summary: 了解 `COLUMNS` INFORMATION_SCHEMA 表。
 ---
 
 # COLUMNS
 
-The `COLUMNS` table provides detailed information about columns in tables.
+`COLUMNS` 表提供了关于表中列的详细信息。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC COLUMNS;
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 +--------------------------+---------------+------+------+---------+-------+
@@ -32,7 +32,7 @@ The output is as follows:
 | NUMERIC_SCALE            | bigint(21)    | YES  |      | NULL    |       |
 | DATETIME_PRECISION       | bigint(21)    | YES  |      | NULL    |       |
 | CHARACTER_SET_NAME       | varchar(32)   | YES  |      | NULL    |       |
-| COLLATION_NAME           | varchar(32)   | YES  |      | NULL    |       |
+| COLLATION_NAME          | varchar(32)   | YES  |      | NULL    |       |
 | COLUMN_TYPE              | text          | YES  |      | NULL    |       |
 | COLUMN_KEY               | varchar(3)    | YES  |      | NULL    |       |
 | EXTRA                    | varchar(30)   | YES  |      | NULL    |       |
@@ -43,14 +43,14 @@ The output is as follows:
 21 rows in set (0.00 sec)
 ```
 
-Create a table `test.t1` and query the information in the `COLUMNS` table:
+创建表 `test.t1` 并查询 `COLUMNS` 表中的信息：
 
 ```sql
 CREATE TABLE test.t1 (a int);
 SELECT * FROM COLUMNS WHERE table_schema='test' AND TABLE_NAME='t1'\G
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 *************************** 1. row ***************************
@@ -78,41 +78,41 @@ CHARACTER_MAXIMUM_LENGTH: NULL
 1 row in set (0.02 sec)
 ```
 
-The description of columns in the `COLUMNS` table is as follows:
+`COLUMNS` 表中各列的描述如下：
 
-* `TABLE_CATALOG`: The name of the catalog to which the table with the column belongs. The value is always `def`.
-* `TABLE_SCHEMA`: The name of the schema in which the table with the column is located.
-* `TABLE_NAME`: The name of the table with the column.
-* `COLUMN_NAME`: The name of the column.
-* `ORDINAL_POSITION`: The position of the column in the table.
-* `COLUMN_DEFAULT`: The default value of the column. If the explicit default value is `NULL`, or if the column definition does not include the `default` clause, this value is `NULL`.
-* `IS_NULLABLE`: Whether the column is nullable. If the column can store null values, this value is `YES`; otherwise, it is `NO`.
-* `DATA_TYPE`: The type of data in the column.
-* `CHARACTER_MAXIMUM_LENGTH`: For string columns, the maximum length in characters.
-* `CHARACTER_OCTET_LENGTH`: For string columns, the maximum length in bytes.
-* `NUMERIC_PRECISION`: The numeric precision of a number-type column.
-* `NUMERIC_SCALE`: The numeric scale of a number-type column.
-* `DATETIME_PRECISION`: For time-type columns, the fractional seconds precision.
-* `CHARACTER_SET_NAME`: The name of the character set of a string column.
-* `COLLATION_NAME`: The name of the collation of a string column.
-* `COLUMN_TYPE`: The column type.
-* `COLUMN_KEY`: Whether this column is indexed. This field might have the following values:
-    * Empty: This column is not indexed, or this column is indexed and is the second column in a multi-column non-unique index.
-    * `PRI`: This column is the primary key or one of multiple primary keys.
-    * `UNI`: This column is the first column of the unique index.
-    * `MUL`: The column is the first column of a non-unique index, in which a given value is allowed to occur for multiple times.
-* `EXTRA`: Any additional information of the given column.
-* `PRIVILEGES`: The privilege that the current user has on this column. Currently, this value is fixed in TiDB, and is always `select,insert,update,references`.
-* `COLUMN_COMMENT`: Comments contained in the column definition.
-* `GENERATION_EXPRESSION`: For generated columns, this value displays the expression used to calculate the column value. For non-generated columns, the value is empty.
+* `TABLE_CATALOG`：包含该列的表所属的目录名称。该值始终为 `def`。
+* `TABLE_SCHEMA`：包含该列的表所在的数据库（schema）名称。
+* `TABLE_NAME`：包含该列的表名。
+* `COLUMN_NAME`：列名。
+* `ORDINAL_POSITION`：该列在表中的位置。
+* `COLUMN_DEFAULT`：列的默认值。如果显式默认值为 `NULL`，或者列定义中不包含 `default` 子句，则该值为 `NULL`。
+* `IS_NULLABLE`：该列是否可为空。如果该列可以存储 NULL 值，则该值为 `YES`；否则为 `NO`。
+* `DATA_TYPE`：列中数据的类型。
+* `CHARACTER_MAXIMUM_LENGTH`：对于字符串列，表示最大字符长度。
+* `CHARACTER_OCTET_LENGTH`：对于字符串列，表示最大字节长度。
+* `NUMERIC_PRECISION`：数字类型列的数值精度。
+* `NUMERIC_SCALE`：数字类型列的数值小数位数。
+* `DATETIME_PRECISION`：对于时间类型列，表示小数秒精度。
+* `CHARACTER_SET_NAME`：字符串列的字符集名称。
+* `COLLATION_NAME`：字符串列的排序规则名称。
+* `COLUMN_TYPE`：列类型。
+* `COLUMN_KEY`：该列是否被索引。该字段可能有以下值：
+    * 空：该列未被索引，或该列被索引但是是多列非唯一索引中的第二列。
+    * `PRI`：该列是主键或多个主键之一。
+    * `UNI`：该列是唯一索引的第一列。
+    * `MUL`：该列是非唯一索引的第一列，其中给定值允许出现多次。
+* `EXTRA`：给定列的任何附加信息。
+* `PRIVILEGES`：当前用户对该列拥有的权限。目前在 TiDB 中该值是固定的，始终为 `select,insert,update,references`。
+* `COLUMN_COMMENT`：列定义中包含的注释。
+* `GENERATION_EXPRESSION`：对于生成列，该值显示用于计算列值的表达式。对于非生成列，该值为空。
 
-The corresponding `SHOW` statement is as follows:
+对应的 `SHOW` 语句如下：
 
 ```sql
 SHOW COLUMNS FROM t1 FROM test;
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 +-------+---------+------+------+---------+-------+
@@ -123,6 +123,6 @@ The output is as follows:
 1 row in set (0.00 sec)
 ```
 
-## See also
+## 另请参阅
 
 - [`SHOW COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)

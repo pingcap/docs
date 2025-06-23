@@ -1,22 +1,22 @@
 ---
 title: ADMIN RECOVER INDEX
-summary: An overview of the usage of ADMIN RECOVER INDEX for the TiDB database.
+summary: TiDB 数据库中 ADMIN RECOVER INDEX 的使用概览。
 ---
 
 # ADMIN RECOVER INDEX
 
-When the row data and index data are inconsistent, you can use the `ADMIN RECOVER INDEX` statement to recover the consistency based on the redundant indexes. Note that this syntax does not support [foreign key constraints](/foreign-key.md) yet.
+当行数据和索引数据不一致时，你可以使用 `ADMIN RECOVER INDEX` 语句基于冗余索引恢复一致性。注意，此语法目前还不支持[外键约束](/foreign-key.md)。
 
-## Synopsis
+## 语法图
 
 ```ebnf+diagram
 AdminRecoverStmt ::=
     'ADMIN' 'RECOVER' 'INDEX' TableName IndexName
 ```
 
-## Examples
+## 示例
 
-Assume that the `tbl` table in a database has inconsistent row data and index due to some reasons (for example, some row data is lost in the cluster in a disaster recovery scenario):
+假设数据库中的 `tbl` 表由于某些原因（例如，在灾难恢复场景中集群中的某些行数据丢失）导致行数据和索引不一致：
 
 ```sql
 SELECT * FROM tbl;
@@ -26,13 +26,13 @@ ADMIN CHECK INDEX tbl idx ;
 ERROR 1105 (HY000): handle &kv.CommonHandle{encoded:[]uint8{0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xf8}, colEndOffsets:[]uint16{0xa}}, index:types.Datum{k:0x5, decimal:0x0, length:0x0, i:0, collation:"utf8mb4_bin", b:[]uint8{0x0}, x:interface {}(nil)} != record:<nil>
 ```
 
-It can be seen from the error message of the `SELECT` query that, the `tbl` table contains three rows of data and two rows of index data, which means inconsistent row data and index data. At the same time, at least one row of data has no corresponding index. In this case, you can use the `ADMIN RECOVER INDEX` statement to supplement the missing index:
+从 `SELECT` 查询的错误消息可以看出，`tbl` 表包含三行数据和两行索引数据，这意味着行数据和索引数据不一致。同时，至少有一行数据没有对应的索引。在这种情况下，你可以使用 `ADMIN RECOVER INDEX` 语句来补充缺失的索引：
 
 ```sql
 ADMIN RECOVER INDEX tbl idx;
 ```
 
-The execution result is as follows:
+执行结果如下：
 
 ```sql
 ADMIN RECOVER INDEX tbl idx;
@@ -44,7 +44,7 @@ ADMIN RECOVER INDEX tbl idx;
 1 row in set (0.00 sec)
 ```
 
-You can execute the `ADMIN CHECK INDEX` statement again to check the consistency of data and index, and verify whether the data has been restored to normal state:
+你可以再次执行 `ADMIN CHECK INDEX` 语句来检查数据和索引的一致性，并验证数据是否已恢复正常：
 
 ```sql
 ADMIN CHECK INDEX tbl idx;
@@ -53,39 +53,39 @@ Query OK, 0 rows affected (0.01 sec)
 
 <CustomContent platform="tidb">
 
-> **Note:**
+> **注意：**
 >
-> When the data and index are inconsistent due to the loss of replicas:
+> 当由于副本丢失导致数据和索引不一致时：
 >
-> - There might be a loss of both row data and index data. To address the issue, use the [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md) and `ADMIN RECOVER INDEX` statements together to recover the consistency of row data and index data.
-> - The `ADMIN RECOVER INDEX` statement is always executed in a single thread. When the table data is large, it is recommended to recover the index data by rebuilding the index.
-> - When you execute the `ADMIN RECOVER INDEX` statement, the corresponding table or index is not locked and TiDB allows other sessions to modify the table records at the same time. However, in this case, `ADMIN RECOVER INDEX` might not be able to handle all table records correctly. Therefore, when you execute `ADMIN RECOVER INDEX`, avoid modifying the table data at the same time.
-> - If you use the enterprise edition of TiDB, you can [submit a request](/support.md) to contact the support engineer for help.
+> - 可能同时存在行数据和索引数据的丢失。要解决此问题，请同时使用 [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md) 和 `ADMIN RECOVER INDEX` 语句来恢复行数据和索引数据的一致性。
+> - `ADMIN RECOVER INDEX` 语句始终以单线程执行。当表数据较大时，建议通过重建索引来恢复索引数据。
+> - 执行 `ADMIN RECOVER INDEX` 语句时，相应的表或索引不会被锁定，TiDB 允许其他会话同时修改表记录。但是，在这种情况下，`ADMIN RECOVER INDEX` 可能无法正确处理所有表记录。因此，执行 `ADMIN RECOVER INDEX` 时，应避免同时修改表数据。
+> - 如果你使用 TiDB 企业版，可以[提交请求](/support.md)联系支持工程师寻求帮助。
 >
-> The `ADMIN RECOVER INDEX` statement is not atomic: if the statement is interrupted during execution, it is recommended to execute it again until it succeeds.
+> `ADMIN RECOVER INDEX` 语句不是原子性的：如果语句在执行过程中被中断，建议重新执行直到成功。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注意：**
 >
-> When the data and index are inconsistent due to the loss of replicas:
+> 当由于副本丢失导致数据和索引不一致时：
 >
-> - There might be a loss of both row data and index data. To address the issue, use the [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md) and `ADMIN RECOVER INDEX` statements together to recover the consistency of row data and index data.
-> - The `ADMIN RECOVER INDEX` statement is always executed in a single thread. When the table data is large, it is recommended to recover the index data by rebuilding the index.
-> - When you execute the `ADMIN RECOVER INDEX` statement, the corresponding table or index is not locked and TiDB allows other sessions to modify the table records at the same time. However, in this case, `ADMIN RECOVER INDEX` might not be able to handle all table records correctly. Therefore, when you execute `ADMIN RECOVER INDEX`, avoid modifying the table data at the same time.
-> - If you use the enterprise edition of TiDB, you can [submit a request](https://tidb.support.pingcap.com/) to contact the support engineer for help.
+> - 可能同时存在行数据和索引数据的丢失。要解决此问题，请同时使用 [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md) 和 `ADMIN RECOVER INDEX` 语句来恢复行数据和索引数据的一致性。
+> - `ADMIN RECOVER INDEX` 语句始终以单线程执行。当表数据较大时，建议通过重建索引来恢复索引数据。
+> - 执行 `ADMIN RECOVER INDEX` 语句时，相应的表或索引不会被锁定，TiDB 允许其他会话同时修改表记录。但是，在这种情况下，`ADMIN RECOVER INDEX` 可能无法正确处理所有表记录。因此，执行 `ADMIN RECOVER INDEX` 时，应避免同时修改表数据。
+> - 如果你使用 TiDB 企业版，可以[提交请求](https://tidb.support.pingcap.com/)联系支持工程师寻求帮助。
 >
-> The `ADMIN RECOVER INDEX` statement is not atomic: if the statement is interrupted during execution, it is recommended to execute it again until it succeeds.
+> `ADMIN RECOVER INDEX` 语句不是原子性的：如果语句在执行过程中被中断，建议重新执行直到成功。
 
 </CustomContent>
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension to MySQL syntax.
+该语句是 TiDB 对 MySQL 语法的扩展。
 
-## See also
+## 另请参阅
 
 * [`ADMIN CHECK TABLE/INDEX`](/sql-statements/sql-statement-admin-check-table-index.md)
 * [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md)

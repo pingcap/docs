@@ -1,15 +1,15 @@
 ---
 title: DROP [GLOBAL|SESSION] BINDING
-summary: Use of DROP BINDING in TiDB database.
+summary: TiDB 数据库中 DROP BINDING 的使用方法。
 ---
 
 # DROP [GLOBAL|SESSION] BINDING
 
-This statement removes a binding from a specific SQL statement. Bindings can be used to inject a hint into a statement without requiring changes to the underlying query.
+此语句从特定的 SQL 语句中删除绑定。绑定可用于在不需要更改底层查询的情况下向语句注入提示。
 
-A `BINDING` can be on either a `GLOBAL` or `SESSION` basis. The default is `SESSION`.
+`BINDING` 可以是 `GLOBAL` 或 `SESSION` 级别。默认为 `SESSION`。
 
-## Synopsis
+## 语法
 
 ```ebnf+diagram
 DropBindingStmt ::=
@@ -23,11 +23,11 @@ BindableStmt ::=
     ( SelectStmt | UpdateStmt | InsertIntoStmt | ReplaceIntoStmt | DeleteStmt )
 ```
 
-## Examples
+## 示例
 
-You can remove a binding according to a SQL statement or `sql_digest`.
+你可以根据 SQL 语句或 `sql_digest` 删除绑定。
 
-The following example shows how to remove a binding according to a SQL statement.
+以下示例展示如何根据 SQL 语句删除绑定。
 
 {{< copyable "sql" >}}
 
@@ -134,7 +134,7 @@ mysql> SHOW SESSION BINDINGS\G
 Empty set (0.00 sec)
 ```
 
-The following example shows how to remove a binding according to `sql_digest`.
+以下示例展示如何根据 `sql_digest` 删除绑定。
 
 ```sql
 mysql> CREATE TABLE t(id INT PRIMARY KEY , a INT, KEY(a));
@@ -193,14 +193,14 @@ ERROR:
 No query specified
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension to MySQL syntax.
+此语句是 TiDB 对 MySQL 语法的扩展。
 
-## See also
+## 另请参阅
 
 * [CREATE [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-create-binding.md)
 * [SHOW [GLOBAL|SESSION] BINDINGS](/sql-statements/sql-statement-show-bindings.md)
 * [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
-* [Optimizer Hints](/optimizer-hints.md)
-* [SQL Plan Management](/sql-plan-management.md)
+* [优化器提示](/optimizer-hints.md)
+* [SQL 执行计划管理](/sql-plan-management.md)

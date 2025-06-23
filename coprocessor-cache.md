@@ -1,55 +1,55 @@
 ---
-title: Coprocessor Cache
-summary: Learn the features of Coprocessor Cache.
+title: Coprocessor 缓存
+summary: 了解 Coprocessor 缓存的功能特性。
 ---
 
-# Coprocessor Cache
+# Coprocessor 缓存
 
-Starting from v4.0, the TiDB instance supports caching the results of the calculation that is pushed down to TiKV (the Coprocessor Cache feature), which can accelerate the calculation process in some scenarios.
+从 v4.0 开始，TiDB 实例支持缓存下推到 TiKV 的计算结果（Coprocessor 缓存功能），这可以在某些场景下加速计算过程。
 
-## Configuration
+## 配置
 
 <CustomContent platform="tidb">
 
-You can configure Coprocessor Cache via the `tikv-client.copr-cache` configuration items in the TiDB configuration file. For details about how to enable and configure Coprocessor Cache, see [TiDB Configuration File](/tidb-configuration-file.md#tikv-clientcopr-cache-new-in-v400).
+你可以通过 TiDB 配置文件中的 `tikv-client.copr-cache` 配置项配置 Coprocessor 缓存。有关如何启用和配置 Coprocessor 缓存的详细信息，请参见 [TiDB 配置文件](/tidb-configuration-file.md#tikv-clientcopr-cache-new-in-v400)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-The Coprocessor Cache feature is enabled by default. The maximum size of the data that can be cached is 1000 MB.
+Coprocessor 缓存功能默认启用。可以缓存的数据的最大大小为 1000 MB。
 
 </CustomContent>
 
-## Feature description
+## 功能说明
 
-+ When a SQL statement is executed on a single TiDB instance for the first time, the execution result is not cached.
-+ Calculation results are cached in the memory of TiDB. If the TiDB instance is restarted, the cache becomes invalid.
-+ The cache is not shared among TiDB instances.
-+ Only push-down calculation result is cached. Even if cache is hit, TiDB still need to perform subsequent calculation.
-+ The cache is in the unit of Region. Writing data to a Region causes the Region cache to be invalid. For this reason, the Coprocessor Cache feature mainly takes effect on the data that rarely changes.
-+ When push-down calculation requests are the same, the cache is hit. Usually in the following scenarios, the push-down calculation requests are the same or partially the same:
-    - The SQL statements are the same. For example, the same SQL statement is executed repeatedly.
++ 当 SQL 语句第一次在单个 TiDB 实例上执行时，执行结果不会被缓存。
++ 计算结果缓存在 TiDB 的内存中。如果 TiDB 实例重启，缓存将失效。
++ 缓存不在 TiDB 实例之间共享。
++ 只缓存下推计算结果。即使命中缓存，TiDB 仍然需要执行后续计算。
++ 缓存以 Region 为单位。向 Region 写入数据会导致该 Region 的缓存失效。因此，Coprocessor 缓存功能主要对很少变化的数据有效。
++ 当下推计算请求相同时，缓存会命中。通常在以下场景中，下推计算请求相同或部分相同：
+    - SQL 语句相同。例如，重复执行相同的 SQL 语句。
 
-        In this scenario, all the push-down calculation requests are consistent, and all requests can use the push-down calculation cache.
+        在这种场景下，所有下推计算请求都一致，所有请求都可以使用下推计算缓存。
 
-    - The SQL statements contain a changing condition, and the other parts are consistent. The changing condition is the primary key of the table or the partition.
+    - SQL 语句包含一个变化的条件，其他部分一致。变化的条件是表的主键或分区。
 
-        In this scenario, some of the push-down calculation requests are the same with some previous requests, and these calculation requests can use the cached (previous) push-down calculation result.
+        在这种场景下，一些下推计算请求与之前的某些请求相同，这些计算请求可以使用缓存的（之前的）下推计算结果。
 
-    - The SQL statements contain multiple changing conditions and the other parts are consistent. The changing conditions exactly match a compound index column.
+    - SQL 语句包含多个变化的条件，其他部分一致。变化的条件恰好匹配复合索引列。
 
-        In this scenario, some of the push-down calculation requests are the same with some previous requests, and these calculation requests can use the cached (previous) push-down calculation result.
+        在这种场景下，一些下推计算请求与之前的某些请求相同，这些计算请求可以使用缓存的（之前的）下推计算结果。
 
-+ This feature is transparent to users. Enabling or disabling this feature does not affect the calculation result and only affects the SQL execution time.
++ 此功能对用户透明。启用或禁用此功能不会影响计算结果，只会影响 SQL 执行时间。
 
-## Check the cache effect
+## 检查缓存效果
 
-You can check the cache effect of Coprocessor by executing `EXPLAIN ANALYZE` or viewing the Grafana monitoring panel.
+你可以通过执行 `EXPLAIN ANALYZE` 或查看 Grafana 监控面板来检查 Coprocessor 的缓存效果。
 
-### Use `EXPLAIN ANALYZE`
+### 使用 `EXPLAIN ANALYZE`
 
-You can view the cache hit rate in [Operators for accessing tables](/choose-index.md#operators-for-accessing-tables) by using the [`EXPLAIN ANALYZE` statement](/sql-statements/sql-statement-explain-analyze.md). See the following example:
+你可以使用 [`EXPLAIN ANALYZE` 语句](/sql-statements/sql-statement-explain-analyze.md)在[访问表的算子](/choose-index.md#访问表的算子)中查看缓存命中率。请看以下示例：
 
 ```sql
 EXPLAIN ANALYZE SELECT * FROM t USE INDEX(a);
@@ -63,8 +63,8 @@ EXPLAIN ANALYZE SELECT * FROM t USE INDEX(a);
 3 rows in set (0.62 sec)
 ```
 
-The column `execution info` of the execution result gives the `copr_cache_hit_ratio` information, which indicates the hit rate of the Coprocessor Cache. The `0.75` in the above example means that the hit rate is about 75%.
+执行结果的 `execution info` 列给出了 `copr_cache_hit_ratio` 信息，表示 Coprocessor 缓存的命中率。上述示例中的 `0.75` 表示命中率约为 75%。
 
-### View the Grafana monitoring panel
+### 查看 Grafana 监控面板
 
-In Grafana, you can see the **copr-cache** panel in the `distsql` subsystem under the `tidb` namespace. This panel monitors the number of hits, misses, and cache discards of the Coprocessor Cache in the entire cluster.
+在 Grafana 中，你可以在 `tidb` 命名空间下的 `distsql` 子系统中看到 **copr-cache** 面板。此面板监控整个集群中 Coprocessor 缓存的命中次数、未命中次数和缓存丢弃次数。

@@ -1,69 +1,69 @@
 ---
-title: Database Audit Logging
-summary: Learn about how to audit a cluster in TiDB Cloud.
+title: 数据库审计日志
+summary: 了解如何在 TiDB Cloud 中审计集群。
 ---
 
-# Database Audit Logging
+# 数据库审计日志
 
-TiDB Cloud provides you with a database audit logging feature to record a history of user access details (such as any SQL statements executed) in logs.
+TiDB Cloud 提供数据库审计日志功能，可以在日志中记录用户访问详情的历史记录（例如执行的任何 SQL 语句）。
 
-> **Note:**
+> **注意：**
 >
-> Currently, the database audit logging feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for database audit logging" in the **Description** field and click **Submit**.
+> 目前，数据库审计日志功能仅供申请使用。要申请此功能，请点击 [TiDB Cloud 控制台](https://tidbcloud.com)右下角的 **?**，然后点击 **Request Support**。然后，在 **Description** 字段中填写"申请数据库审计日志"，并点击 **Submit**。
 
-To assess the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to conduct a periodic analysis of the database audit logs.
+为了评估组织的用户访问策略和其他信息安全措施的有效性，定期分析数据库审计日志是一种安全最佳实践。
 
-The audit logging feature is disabled by default. To audit a cluster, you need to enable the audit logging first, and then specify the auditing filter rules.
+审计日志功能默认是禁用的。要审计集群，你需要先启用审计日志，然后指定审计过滤规则。
 
-> **Note:**
+> **注意：**
 >
-> Because audit logging consumes cluster resources, be prudent about whether to audit a cluster.
+> 由于审计日志会消耗集群资源，请谨慎考虑是否对集群进行审计。
 
-## Prerequisites
+## 前提条件
 
-- You are using a TiDB Cloud Dedicated cluster. Audit logging is not available for TiDB Cloud Serverless clusters.
-- You are in the `Organization Owner` or `Project Owner` role of your organization. Otherwise, you cannot see the database audit-related options in the TiDB Cloud console. For more information, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
+- 你正在使用 TiDB Cloud Dedicated 集群。TiDB Cloud Serverless 集群不支持审计日志。
+- 你是组织的 `Organization Owner` 或 `Project Owner` 角色。否则，你将无法在 TiDB Cloud 控制台中看到数据库审计相关选项。有关更多信息，请参见[用户角色](/tidb-cloud/manage-user-access.md#用户角色)。
 
-## Enable audit logging
+## 启用审计日志
 
-TiDB Cloud supports recording the audit logs of a TiDB Cloud Dedicated cluster to your cloud storage service. Before enabling database audit logging, configure your cloud storage service on the cloud provider where the cluster is located.
+TiDB Cloud 支持将 TiDB Cloud Dedicated 集群的审计日志记录到你的云存储服务中。在启用数据库审计日志之前，请在集群所在的云服务提供商上配置你的云存储服务。
 
-> **Note:**
+> **注意：**
 >
-> For TiDB clusters deployed on AWS, you can choose to store audit log files in TiDB Cloud when enabling database audit logging. Currently, this feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply to store audit log files in TiDB Cloud" in the **Description** field and click **Submit**.
+> 对于部署在 AWS 上的 TiDB 集群，你可以在启用数据库审计日志时选择将审计日志文件存储在 TiDB Cloud 中。目前，此功能仅供申请使用。要申请此功能，请点击 [TiDB Cloud 控制台](https://tidbcloud.com)右下角的 **?**，然后点击 **Request Support**。然后，在 **Description** 字段中填写"申请将审计日志文件存储在 TiDB Cloud 中"，并点击 **Submit**。
 
-### Enable audit logging for AWS
+### 为 AWS 启用审计日志
 
-To enable audit logging for AWS, take the following steps:
+要为 AWS 启用审计日志，请执行以下步骤：
 
-#### Step 1. Create an Amazon S3 bucket
+#### 步骤 1. 创建 Amazon S3 存储桶
 
-Specify an Amazon S3 bucket in your corporate-owned AWS account as a destination to which TiDB Cloud writes the audit logs.
+在你公司拥有的 AWS 账号中指定一个 Amazon S3 存储桶作为 TiDB Cloud 写入审计日志的目标位置。
 
-> Note:
+> 注意：
 >
-> Do not enable object lock on the AWS S3 bucket. Enabling object lock will prevent TiDB Cloud from pushing audit log files to S3.
+> 不要在 AWS S3 存储桶上启用对象锁定。启用对象锁定将阻止 TiDB Cloud 将审计日志文件推送到 S3。
 
-For more information, see [Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) in the AWS User Guide.
+有关更多信息，请参见 AWS 用户指南中的[创建存储桶](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)。
 
-#### Step 2. Configure Amazon S3 access
+#### 步骤 2. 配置 Amazon S3 访问权限
 
-1. Get the TiDB Cloud Account ID and the External ID of the TiDB cluster that you want to enable audit logging.
+1. 获取你要启用审计日志的 TiDB 集群的 TiDB Cloud 账号 ID 和外部 ID。
 
-    1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. 在 TiDB Cloud 控制台中，导航到项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
 
-        > **Tip:**
+        > **提示：**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > 你可以使用左上角的组合框在组织、项目和集群之间切换。
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
-    3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
-    4. In the **Enable Database Audit Logging** dialog, locate the **AWS IAM Policy Settings** section, and record **TiDB Cloud Account ID** and **TiDB Cloud External ID** for later use.
+    2. 点击目标集群的名称进入其概览页面，然后在左侧导航栏中点击 **Settings** > **DB Audit Logging**。
+    3. 在 **DB Audit Logging** 页面，点击右上角的 **Enable**。
+    4. 在 **Enable Database Audit Logging** 对话框中，找到 **AWS IAM Policy Settings** 部分，记录 **TiDB Cloud Account ID** 和 **TiDB Cloud External ID** 以供后续使用。
 
-2. In the AWS Management Console, go to **IAM** > **Access Management** > **Policies**, and then check whether there is a storage bucket policy with the `s3:PutObject` write-only permission.
+2. 在 AWS 管理控制台中，转到 **IAM** > **Access Management** > **Policies**，然后检查是否存在具有 `s3:PutObject` 只写权限的存储桶策略。
 
-    - If yes, record the matched storage bucket policy for later use.
-    - If not, go to **IAM** > **Access Management** > **Policies** > **Create Policy**, and define a bucket policy according to the following policy template.
+    - 如果存在，记录匹配的存储桶策略以供后续使用。
+    - 如果不存在，转到 **IAM** > **Access Management** > **Policies** > **Create Policy**，并根据以下策略模板定义存储桶策略。
 
         ```json
         {
@@ -78,259 +78,259 @@ For more information, see [Creating a bucket](https://docs.aws.amazon.com/Amazon
         }
         ```
 
-        In the template, `<Your S3 bucket ARN>` is the Amazon Resource Name (ARN) of your S3 bucket where the audit log files are to be written. You can go to the **Properties** tab in your S3 bucket and get the ARN value in the **Bucket Overview** area. In the `"Resource"` field, you need to add `/*` after the ARN. For example, if the ARN is `arn:aws:s3:::tidb-cloud-test`, you need to configure the value of the `"Resource"` field as `"arn:aws:s3:::tidb-cloud-test/*"`.
+        在模板中，`<Your S3 bucket ARN>` 是要写入审计日志文件的 S3 存储桶的 Amazon 资源名称（ARN）。你可以转到 S3 存储桶的 **Properties** 标签页，在 **Bucket Overview** 区域获取 ARN 值。在 `"Resource"` 字段中，你需要在 ARN 后添加 `/*`。例如，如果 ARN 是 `arn:aws:s3:::tidb-cloud-test`，你需要将 `"Resource"` 字段的值配置为 `"arn:aws:s3:::tidb-cloud-test/*"`。
 
-3. Go to **IAM** > **Access Management** > **Roles**, and then check whether a role whose trust entity corresponds to the TiDB Cloud Account ID and the External ID that you recorded earlier already exists.
+3. 转到 **IAM** > **Access Management** > **Roles**，然后检查是否已存在一个信任实体对应于你之前记录的 TiDB Cloud 账号 ID 和外部 ID 的角色。
 
-    - If yes, record the matched role for later use.
-    - If not, click **Create role**, select **Another AWS account** as the trust entity type, and then enter the TiDB Cloud Account ID value into the **Account ID** field. Then, choose the **Require External ID** option and enter the TiDB Cloud External ID value into the **External ID** field.
+    - 如果存在，记录匹配的角色以供后续使用。
+    - 如果不存在，点击 **Create role**，选择 **Another AWS account** 作为信任实体类型，然后在 **Account ID** 字段中输入 TiDB Cloud 账号 ID 值。然后，选择 **Require External ID** 选项，并在 **External ID** 字段中输入 TiDB Cloud 外部 ID 值。
 
-4. In **IAM** > **Access Management** > **Roles**, click the role name from the previous step to go to the **Summary** page, and then take the following steps:
+4. 在 **IAM** > **Access Management** > **Roles** 中，点击上一步中的角色名称进入 **Summary** 页面，然后执行以下步骤：
 
-    1. Under the **Permissions** tab, check whether the recorded policy with the `s3:PutObject` write-only permission is attached to the role. If not, choose **Attach Policies**, search for the needed policy, and then click **Attach Policy**.
-    2. Return to the **Summary** page and copy the **Role ARN** value to your clipboard.
+    1. 在 **Permissions** 标签页下，检查是否已将具有 `s3:PutObject` 只写权限的记录策略附加到角色。如果没有，选择 **Attach Policies**，搜索所需策略，然后点击 **Attach Policy**。
+    2. 返回 **Summary** 页面并复制 **Role ARN** 值到剪贴板。
 
-#### Step 3. Enable audit logging
+#### 步骤 3. 启用审计日志
 
-In the TiDB Cloud console, go back to the **Enable Database Audit Logging** dialog box where you got the TiDB Cloud account ID and the External ID values, and then take the following steps:
+在 TiDB Cloud 控制台中，返回获取 TiDB Cloud 账号 ID 和外部 ID 值的 **Enable Database Audit Logging** 对话框，然后执行以下步骤：
 
-1. In the **Bucket URI** field, enter the URI of your S3 bucket where the audit log files are to be written.
-2. In the **Bucket Region** drop-down list, select the AWS region where the bucket locates.
-3. In the **Role ARN** field, fill in the Role ARN value that you copied in [Step 2. Configure Amazon S3 access](#step-2-configure-amazon-s3-access).
-4. Click **Test Connection** to verify whether TiDB Cloud can access and write to the bucket.
+1. 在 **Bucket URI** 字段中，输入要写入审计日志文件的 S3 存储桶的 URI。
+2. 在 **Bucket Region** 下拉列表中，选择存储桶所在的 AWS 区域。
+3. 在 **Role ARN** 字段中，填入你在[步骤 2. 配置 Amazon S3 访问权限](#步骤-2-配置-amazon-s3-访问权限)中复制的 Role ARN 值。
+4. 点击 **Test Connection** 验证 TiDB Cloud 是否可以访问和写入存储桶。
 
-    If it is successful, **The connection is successfully** is displayed. Otherwise, check your access configuration.
+    如果成功，将显示 **The connection is successfully**。否则，请检查你的访问配置。
 
-5. Click **Enable** to enable audit logging for the cluster.
+5. 点击 **Enable** 为集群启用审计日志。
 
-    TiDB Cloud is ready to write audit logs for the specified cluster to your Amazon S3 bucket.
+    TiDB Cloud 已准备好将指定集群的审计日志写入你的 Amazon S3 存储桶。
 
-> **Note:**
+> **注意：**
 >
-> - After enabling audit logging, if you make any new changes to the bucket URI, location, or ARN, you must click **Test Connection** again to verify that TiDB Cloud can connect to the bucket. Then, click **Enable** to apply the changes.
-> - To remove TiDB Cloud's access to your Amazon S3, simply delete the trust policy granted to this cluster in the AWS Management Console.
+> - 启用审计日志后，如果你对存储桶 URI、位置或 ARN 进行任何新的更改，必须再次点击 **Test Connection** 以验证 TiDB Cloud 是否可以连接到存储桶。然后，点击 **Enable** 应用更改。
+> - 要移除 TiDB Cloud 对 Amazon S3 的访问权限，只需在 AWS 管理控制台中删除授予此集群的信任策略即可。
 
-### Enable audit logging for Google Cloud
+### 为 Google Cloud 启用审计日志
 
-To enable audit logging for Google Cloud, take the following steps:
+要为 Google Cloud 启用审计日志，请执行以下步骤：
 
-#### Step 1. Create a GCS bucket
+#### 步骤 1. 创建 GCS 存储桶
 
-Specify a Google Cloud Storage (GCS) bucket in your corporate-owned Google Cloud account as a destination to which TiDB Cloud writes audit logs.
+在你公司拥有的 Google Cloud 账号中指定一个 Google Cloud Storage (GCS) 存储桶作为 TiDB Cloud 写入审计日志的目标位置。
 
-For more information, see [Creating storage buckets](https://cloud.google.com/storage/docs/creating-buckets) in the Google Cloud Storage documentation.
+有关更多信息，请参见 Google Cloud Storage 文档中的[创建存储桶](https://cloud.google.com/storage/docs/creating-buckets)。
 
-#### Step 2. Configure GCS access
+#### 步骤 2. 配置 GCS 访问权限
 
-1. Get the Google Cloud Service Account ID of the TiDB cluster that you want to enable audit logging.
+1. 获取你要启用审计日志的 TiDB 集群的 Google Cloud 服务账号 ID。
 
-    1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. 在 TiDB Cloud 控制台中，导航到项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
 
-        > **Tip:**
+        > **提示：**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > 你可以使用左上角的组合框在组织、项目和集群之间切换。
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
-    3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
-    4. In the **Enable Database Audit Logging** dialog, locate the **Google Cloud Server Account ID** section, and record **Service Account ID** for later use.
+    2. 点击目标集群的名称进入其概览页面，然后在左侧导航栏中点击 **Settings** > **DB Audit Logging**。
+    3. 在 **DB Audit Logging** 页面，点击右上角的 **Enable**。
+    4. 在 **Enable Database Audit Logging** 对话框中，找到 **Google Cloud Server Account ID** 部分，记录 **Service Account ID** 以供后续使用。
 
-2. In the Google Cloud console, go to **IAM & Admin** > **Roles**, and then check whether a role with the following write-only permissions of the storage container exists.
+2. 在 Google Cloud 控制台中，转到 **IAM & Admin** > **Roles**，然后检查是否存在具有以下存储容器只写权限的角色。
 
     - storage.objects.create
     - storage.objects.delete
 
-    If yes, record the matched role for the TiDB cluster for later use. If not, go to **IAM & Admin** > **Roles** > **CREATE ROLE** to define a role for the TiDB cluster.
+    如果存在，为 TiDB 集群记录匹配的角色以供后续使用。如果不存在，转到 **IAM & Admin** > **Roles** > **CREATE ROLE** 为 TiDB 集群定义角色。
 
-3. Go to **Cloud Storage** > **Browser**, select the GCS bucket you want TiDB Cloud to access, and then click **SHOW INFO PANEL**.
+3. 转到 **Cloud Storage** > **Browser**，选择你想要 TiDB Cloud 访问的 GCS 存储桶，然后点击 **SHOW INFO PANEL**。
 
-    The panel is displayed.
+    面板将显示。
 
-4. In the panel, click **ADD PRINCIPAL**.
+4. 在面板中，点击 **ADD PRINCIPAL**。
 
-    The dialog box for adding principals is displayed.
+    将显示添加主体的对话框。
 
-5. In the dialog box, take the following steps:
+5. 在对话框中，执行以下步骤：
 
-    1. In the **New Principals** field, paste the Google Cloud Service Account ID of the TiDB cluster.
-    2. In the **Role** drop-down list, choose the role of the target TiDB cluster.
-    3. Click **SAVE**.
+    1. 在 **New Principals** 字段中，粘贴 TiDB 集群的 Google Cloud 服务账号 ID。
+    2. 在 **Role** 下拉列表中，选择目标 TiDB 集群的角色。
+    3. 点击 **SAVE**。
 
-#### Step 3. Enable audit logging
+#### 步骤 3. 启用审计日志
 
-In the TiDB Cloud console, go back to the **Enable Database Audit Logging** dialog box where you got the TiDB Cloud account ID, and then take the following steps:
+在 TiDB Cloud 控制台中，返回获取 TiDB Cloud 账号 ID 的 **Enable Database Audit Logging** 对话框，然后执行以下步骤：
 
-1. In the **Bucket URI** field, enter your full GCS bucket name.
-2. In the **Bucket Region** field, select the GCS region where the bucket locates.
-3. Click **Test Connection** to verify whether TiDB Cloud can access and write to the bucket.
+1. 在 **Bucket URI** 字段中，输入你的完整 GCS 存储桶名称。
+2. 在 **Bucket Region** 字段中，选择存储桶所在的 GCS 区域。
+3. 点击 **Test Connection** 验证 TiDB Cloud 是否可以访问和写入存储桶。
 
-    If it is successful, **The connection is successfully** is displayed. Otherwise, check your access configuration.
+    如果成功，将显示 **The connection is successfully**。否则，请检查你的访问配置。
 
-4. Click **Enable** to enable audit logging for the cluster.
+4. 点击 **Enable** 为集群启用审计日志。
 
-    TiDB Cloud is ready to write audit logs for the specified cluster to your GCS bucket.
+    TiDB Cloud 已准备好将指定集群的审计日志写入你的 GCS 存储桶。
 
-> **Note:**
+> **注意：**
 >
-> - After enabling audit logging, if you make any new changes to the bucket URI or location, you must click **Test Connection** again to verify that TiDB Cloud can connect to the bucket. Then, click **Enable** to apply the changes.
-> - To remove TiDB Cloud's access to your GCS bucket, delete the trust policy granted to this cluster in the Google Cloud console.
+> - 启用审计日志后，如果你对存储桶 URI 或位置进行任何新的更改，必须再次点击 **Test Connection** 以验证 TiDB Cloud 是否可以连接到存储桶。然后，点击 **Enable** 应用更改。
+> - 要移除 TiDB Cloud 对 GCS 存储桶的访问权限，请在 Google Cloud 控制台中删除授予此集群的信任策略。
 
-### Enable audit logging for Azure
+### 为 Azure 启用审计日志
 
-To enable audit logging for Azure, take the following steps:
+要为 Azure 启用审计日志，请执行以下步骤：
 
-#### Step 1. Create an Azure storage account
+#### 步骤 1. 创建 Azure 存储账号
 
-Create an Azure storage account in your organization's Azure subscription as the destination to which TiDB Cloud writes the database audit logs.
+在你组织的 Azure 订阅中创建一个 Azure 存储账号作为 TiDB Cloud 写入数据库审计日志的目标位置。
 
-For more information, see [Create an Azure storage account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal) in Azure documentation.
+有关更多信息，请参见 Azure 文档中的[创建 Azure 存储账号](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal)。
 
-#### Step 2. Configure Azure Blob Storage access
+#### 步骤 2. 配置 Azure Blob 存储访问权限
 
-1. In the [Azure portal](https://portal.azure.com/), create a container used for storing database audit logs.
+1. 在 [Azure 门户](https://portal.azure.com/)中，创建用于存储数据库审计日志的容器。
 
-    1. In the left navigation pane of the Azure portal, click **Storage Accounts**, and then click the storage account for storing database audit logs.
+    1. 在 Azure 门户的左侧导航栏中，点击 **Storage Accounts**，然后点击用于存储数据库审计日志的存储账号。
 
-        > **Tip:**
+        > **提示：**
         >
-        > If the left navigation pane is hidden, click the menu button in the upper-left corner to toggle its visibility.
+        > 如果左侧导航栏被隐藏，点击左上角的菜单按钮切换其可见性。
 
-    2. In the navigation pane for the selected storage account, click **Data storage > Containers**, and then click **+ Container** to open the **New container** pane.
+    2. 在所选存储账号的导航栏中，点击 **Data storage > Containers**，然后点击 **+ Container** 打开 **New container** 窗格。
 
-    3. In the **New container** pane, enter a name for your new container, set the anonymous access level (the recommended level is **Private**, which means no anonymous access), and then click **Create**. The new container will be created and displayed in the container list in a few seconds.
+    3. 在 **New container** 窗格中，输入新容器的名称，设置匿名访问级别（推荐级别是 **Private**，表示无匿名访问），然后点击 **Create**。新容器将在几秒钟内创建并显示在容器列表中。
 
-2. Get the URL of the target container.
+2. 获取目标容器的 URL。
 
-    1. In the container list, select the target container, click **...** for the container, and then select **Container properties**.
-    2. On the displayed properties page, copy the **URL** value for later use, and then return to the container list.
+    1. 在容器列表中，选择目标容器，点击容器的 **...**，然后选择 **Container properties**。
+    2. 在显示的属性页面上，复制 **URL** 值以供后续使用，然后返回容器列表。
 
-3. Generate a SAS token for the target container.
+3. 为目标容器生成 SAS 令牌。
 
-    1. In the container list, select the target container, click **...** for the container, and then select **Generate SAS**.
-    2. In the displayed **Generate SAS** pane, select **Account key** for **Signing method**.
-    3. In the **Permissions** drop-down list, select **Read**, **Write**, and **Create** to allow writing audit log files.
-    4. In the **Start** and **Expiry** fields, specify a validity period for the SAS token.
+    1. 在容器列表中，选择目标容器，点击容器的 **...**，然后选择 **Generate SAS**。
+    2. 在显示的 **Generate SAS** 窗格中，为 **Signing method** 选择 **Account key**。
+    3. 在 **Permissions** 下拉列表中，选择 **Read**、**Write** 和 **Create** 以允许写入审计日志文件。
+    4. 在 **Start** 和 **Expiry** 字段中，指定 SAS 令牌的有效期。
 
-        > **Note:**
+        > **注意：**
         >
-        > - The audit feature needs to continuously write audit logs to the storage account, so the SAS token must have a sufficiently long validity period. However, longer validity increases the risk of token leakage. For security, it is recommended to replace your SAS token every six to twelve months.
-        > - The generated SAS token cannot be revoked, so you need to set its validity period carefully.
-        > - Make sure to re-generate and update the SAS token before it expires to ensure continuous availability of audit logs.
+        > - 审计功能需要持续将审计日志写入存储账号，因此 SAS 令牌必须具有足够长的有效期。但是，较长的有效期会增加令牌泄露的风险。为了安全起见，建议每六到十二个月更换一次 SAS 令牌。
+        > - 生成的 SAS 令牌无法撤销，因此你需要谨慎设置其有效期。
+        > - 确保在令牌过期之前重新生成并更新 SAS 令牌，以确保审计日志的持续可用性。
 
-    5. For **Allowed protocols**, select **HTTPS only** to ensure secure access.
-    6. Click **Generate SAS token and URL**, and then copy the displayed **Blob SAS token** for later use.
+    5. 对于 **Allowed protocols**，选择 **HTTPS only** 以确保安全访问。
+    6. 点击 **Generate SAS token and URL**，然后复制显示的 **Blob SAS token** 以供后续使用。
 
-#### Step 3. Enable audit logging
+#### 步骤 3. 启用审计日志
 
-1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. 在 TiDB Cloud 控制台中，导航到项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
 
-    > **Tip:**
+    > **提示：**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > 你可以使用左上角的组合框在组织、项目和集群之间切换。
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
-3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
-4. In the **Enable Database Audit Logging** dialog, provide the blob URL and SAS token that you obtained from [Step 2. Configure Azure Blob access](#step-2-configure-azure-blob-storage-access):
+2. 点击目标集群的名称进入其概览页面，然后在左侧导航栏中点击 **Settings** > **DB Audit Logging**。
+3. 在 **DB Audit Logging** 页面，点击右上角的 **Enable**。
+4. 在 **Enable Database Audit Logging** 对话框中，提供从[步骤 2. 配置 Azure Blob 访问权限](#步骤-2-配置-azure-blob-存储访问权限)获取的 blob URL 和 SAS 令牌：
 
-    - In the **Blob URL** field, enter the URL of the container where audit logs will be stored.
-    - In the **SAS Token** field, enter the SAS token for accessing the container.
+    - 在 **Blob URL** 字段中，输入存储审计日志的容器的 URL。
+    - 在 **SAS Token** 字段中，输入用于访问容器的 SAS 令牌。
 
-5. Click **Test Connection** to verify whether TiDB Cloud can access and write to the container.
+5. 点击 **Test Connection** 验证 TiDB Cloud 是否可以访问和写入容器。
 
-    If it is successful, **The connection is successfully** is displayed. Otherwise, check your access configuration.
+    如果成功，将显示 **The connection is successfully**。否则，请检查你的访问配置。
 
-6. Click **Enable** to enable audit logging for the cluster.
+6. 点击 **Enable** 为集群启用审计日志。
 
-    TiDB Cloud is ready to write audit logs for the specified cluster to your Azure blob container.
+    TiDB Cloud 已准备好将指定集群的审计日志写入你的 Azure blob 容器。
 
-> **Note:**
+> **注意：**
 >
-> After enabling audit logging, if you make new changes to the **Blob URL** or **SAS Token** fields, you must click **Test Connection** again to verify that TiDB Cloud can connect to the container. Then, click **Enable** to apply the changes.
+> 启用审计日志后，如果你对 **Blob URL** 或 **SAS Token** 字段进行新的更改，必须再次点击 **Test Connection** 以验证 TiDB Cloud 是否可以连接到容器。然后，点击 **Enable** 应用更改。
 
-## Specify auditing filter rules
+## 指定审计过滤规则
 
-After enabling audit logging, you must specify auditing filter rules to control which user access events to capture and write to audit logs. If no filter rules are specified, TiDB Cloud does not log anything.
+启用审计日志后，你必须指定审计过滤规则来控制要捕获并写入审计日志的用户访问事件。如果未指定过滤规则，TiDB Cloud 不会记录任何内容。
 
-To specify auditing filter rules for a cluster, take the following steps:
+要为集群指定审计过滤规则，请执行以下步骤：
 
-1. On the **DB Audit Logging** page, click **Add Filter Rule** in the **Log Filter Rules** section to add an audit filter rule.
+1. 在 **DB Audit Logging** 页面的 **Log Filter Rules** 部分，点击 **Add Filter Rule** 添加审计过滤规则。
 
-    You can add one audit rule at a time. Each rule specifies a user expression, database expression, table expression, and access type. You can add multiple audit rules to meet your auditing requirements.
+    你一次可以添加一个审计规则。每个规则指定一个用户表达式、数据库表达式、表表达式和访问类型。你可以添加多个审计规则以满足你的审计要求。
 
-2.In the **Log Filter Rules** section, click **>** to expand and view the list of audit rules you have added.
+2. 在 **Log Filter Rules** 部分，点击 **>** 展开并查看你已添加的审计规则列表。
 
-> **Note:**
+> **注意：**
 >
-> - The filter rules are regular expressions and case-sensitive. If you use the wildcard rule `.*`, all users, databases, or table events in the cluster are logged.
-> - Because audit logging consumes cluster resources, be prudent when specifying filter rules. To minimize the consumption, it is recommended that you specify filter rules to limit the scope of audit logging to specific database objects, users, and actions, where possible.
+> - 过滤规则是正则表达式且区分大小写。如果使用通配符规则 `.*`，将记录集群中所有用户、数据库或表事件。
+> - 由于审计日志会消耗集群资源，请谨慎指定过滤规则。为了最小化消耗，建议你指定过滤规则以尽可能将审计日志的范围限制在特定的数据库对象、用户和操作上。
 
-## View audit logs
+## 查看审计日志
 
-By default, TiDB Cloud stores database audit log files in your storage service, so you need to read the audit log information from your storage service.
+默认情况下，TiDB Cloud 将数据库审计日志文件存储在你的存储服务中，因此你需要从你的存储服务中读取审计日志信息。
 
-> **Note:**
+> **注意：**
 >
-> If you have requested and chosen to store audit log files in TiDB Cloud, you can download them from the **Audit Log Access** section on the **Database Audit Logging** page.
+> 如果你已申请并选择将审计日志文件存储在 TiDB Cloud 中，你可以从 **Database Audit Logging** 页面的 **Audit Log Access** 部分下载它们。
 
-TiDB Cloud audit logs are readable text files with the cluster ID, Pod ID, and log creation date incorporated into the fully qualified filenames.
+TiDB Cloud 审计日志是可读的文本文件，文件名中包含集群 ID、Pod ID 和日志创建日期。
 
-For example, `13796619446086334065/tidb-0/tidb-audit-2022-04-21T18-16-29.529.log`. In this example, `13796619446086334065` indicates the cluster ID and `tidb-0` indicates the Pod ID.
+例如，`13796619446086334065/tidb-0/tidb-audit-2022-04-21T18-16-29.529.log`。在此示例中，`13796619446086334065` 表示集群 ID，`tidb-0` 表示 Pod ID。
 
-## Disable audit logging
+## 禁用审计日志
 
-If you no longer want to audit a cluster, go to the page of the cluster, click **Settings** > **Audit Settings**, and then toggle the audit setting in the upper-right corner to **Off**.
+如果你不再想审计集群，请转到集群页面，点击 **Settings** > **Audit Settings**，然后将右上角的审计设置切换为 **Off**。
 
-> **Note:**
+> **注意：**
 >
-> Each time the size of the log file reaches 10 MiB, the log file will be pushed to the cloud storage bucket. Therefore, after the audit log is disabled, the log file whose size is smaller than 10 MiB will not be automatically pushed to the cloud storage bucket. To get the log file in this situation, contact [PingCAP support](/tidb-cloud/tidb-cloud-support.md).
+> 每当日志文件大小达到 10 MiB 时，日志文件将被推送到云存储桶。因此，在禁用审计日志后，大小小于 10 MiB 的日志文件不会自动推送到云存储桶。要在这种情况下获取日志文件，请联系 [PingCAP 支持](/tidb-cloud/tidb-cloud-support.md)。
 
-## Audit log fields
+## 审计日志字段
 
-For each database event record in audit logs, TiDB provides the following fields:
+对于审计日志中的每个数据库事件记录，TiDB 提供以下字段：
 
-> **Note:**
+> **注意：**
 >
-> In the following tables, the empty maximum length of a field means that the data type of this field has a well-defined constant length (for example, 4 bytes for INTEGER).
+> 在下表中，字段的最大长度为空表示该字段的数据类型具有明确定义的固定长度（例如，INTEGER 为 4 字节）。
 
-| Col # | Field name | TiDB data type | Maximum length | Description |
+| 列号 | 字段名 | TiDB 数据类型 | 最大长度 | 描述 |
 |---|---|---|---|---|
-| 1 | N/A | N/A | N/A | Reserved for internal use |
-| 2 | N/A | N/A | N/A | Reserved for internal use |
-| 3 | N/A | N/A | N/A | Reserved for internal use |
-| 4 | ID       | INTEGER |  | Unique event ID  |
-| 5 | TIMESTAMP | TIMESTAMP |  | Time of event   |
-| 6 | EVENT_CLASS | VARCHAR | 15 | Event type     |
-| 7 | EVENT_SUBCLASS     | VARCHAR | 15 | Event subtype |
-| 8 | STATUS_CODE | INTEGER |  | Response status of the statement   |
-| 9 | COST_TIME | FLOAT |  | Time consumed by the statement    |
-| 10 | HOST | VARCHAR | 16 | Server IP    |
-| 11 | CLIENT_IP         | VARCHAR | 16 | Client IP   |
-| 12 | USER | VARCHAR | 17 | Login username    |
-| 13 | DATABASE | VARCHAR | 64 | Event-related database      |
-| 14 | TABLES | VARCHAR | 64 | Event-related table name          |
-| 15 | SQL_TEXT | VARCHAR | 64 KB | Masked SQL statement   |
-| 16 | ROWS | INTEGER |  | Number of affected rows (`0` indicates that no rows are affected)      |
+| 1 | N/A | N/A | N/A | 保留供内部使用 |
+| 2 | N/A | N/A | N/A | 保留供内部使用 |
+| 3 | N/A | N/A | N/A | 保留供内部使用 |
+| 4 | ID       | INTEGER |  | 唯一事件 ID  |
+| 5 | TIMESTAMP | TIMESTAMP |  | 事件时间   |
+| 6 | EVENT_CLASS | VARCHAR | 15 | 事件类型     |
+| 7 | EVENT_SUBCLASS     | VARCHAR | 15 | 事件子类型 |
+| 8 | STATUS_CODE | INTEGER |  | 语句的响应状态   |
+| 9 | COST_TIME | FLOAT |  | 语句消耗的时间    |
+| 10 | HOST | VARCHAR | 16 | 服务器 IP    |
+| 11 | CLIENT_IP         | VARCHAR | 16 | 客户端 IP   |
+| 12 | USER | VARCHAR | 17 | 登录用户名    |
+| 13 | DATABASE | VARCHAR | 64 | 事件相关的数据库      |
+| 14 | TABLES | VARCHAR | 64 | 事件相关的表名          |
+| 15 | SQL_TEXT | VARCHAR | 64 KB | 掩码 SQL 语句   |
+| 16 | ROWS | INTEGER |  | 受影响的行数（`0` 表示没有行受影响）      |
 
-Depending on the EVENT_CLASS field value set by TiDB, database event records in audit logs also contain additional fields as follows:
+根据 TiDB 设置的 EVENT_CLASS 字段值，审计日志中的数据库事件记录还包含以下附加字段：
 
-- If the EVENT_CLASS value is `CONNECTION`, database event records also contain the following fields:
+- 如果 EVENT_CLASS 值为 `CONNECTION`，数据库事件记录还包含以下字段：
 
-    | Col # | Field name | TiDB data type | Maximum length | Description |
+    | 列号 | 字段名 | TiDB 数据类型 | 最大长度 | 描述 |
     |---|---|---|---|---|
-    | 17 | CLIENT_PORT | INTEGER |  | Client port number |
-    | 18 | CONNECTION_ID | INTEGER |  | Connection ID |
-    | 19 | CONNECTION_TYPE  | VARCHAR | 12 | Connection via `socket` or `unix-socket` |
-    | 20 | SERVER_ID | INTEGER |  | TiDB server ID |
-    | 21 | SERVER_PORT | INTEGER |  | The port that the TiDB server uses to listen to client communicating via the MySQL protocol |
-    | 22 | SERVER_OS_LOGIN_USER | VARCHAR | 17 | The username of the TiDB process startup system  |
-    | 23 | OS_VERSION | VARCHAR | N/A | The version of the operating system where the TiDB server is located  |
-    | 24 | SSL_VERSION | VARCHAR | 6 | The current SSL version of TiDB |
-    | 25 | PID | INTEGER |  | The PID of the TiDB process |
+    | 17 | CLIENT_PORT | INTEGER |  | 客户端端口号 |
+    | 18 | CONNECTION_ID | INTEGER |  | 连接 ID |
+    | 19 | CONNECTION_TYPE  | VARCHAR | 12 | 通过 `socket` 或 `unix-socket` 连接 |
+    | 20 | SERVER_ID | INTEGER |  | TiDB 服务器 ID |
+    | 21 | SERVER_PORT | INTEGER |  | TiDB 服务器用于监听通过 MySQL 协议通信的客户端的端口 |
+    | 22 | SERVER_OS_LOGIN_USER | VARCHAR | 17 | TiDB 进程启动系统的用户名  |
+    | 23 | OS_VERSION | VARCHAR | N/A | TiDB 服务器所在操作系统的版本  |
+    | 24 | SSL_VERSION | VARCHAR | 6 | TiDB 当前的 SSL 版本 |
+    | 25 | PID | INTEGER |  | TiDB 进程的 PID |
 
-- If the EVENT_CLASS value is `TABLE_ACCESS` or `GENERAL`, database event records also contain the following fields:
+- 如果 EVENT_CLASS 值为 `TABLE_ACCESS` 或 `GENERAL`，数据库事件记录还包含以下字段：
 
-    | Col # | Field name | TiDB data type | Maximum length | Description |
+    | 列号 | 字段名 | TiDB 数据类型 | 最大长度 | 描述 |
     |---|---|---|---|---|
-    | 17 | CONNECTION_ID | INTEGER |  | Connection ID   |
-    | 18 | COMMAND | VARCHAR | 14 | The command type of the MySQL protocol |
-    | 19 | SQL_STATEMENT  | VARCHAR | 17 | The SQL statement type |
-    | 20 | PID | INTEGER |  | The PID of the TiDB process  |
+    | 17 | CONNECTION_ID | INTEGER |  | 连接 ID   |
+    | 18 | COMMAND | VARCHAR | 14 | MySQL 协议的命令类型 |
+    | 19 | SQL_STATEMENT  | VARCHAR | 17 | SQL 语句类型 |
+    | 20 | PID | INTEGER |  | TiDB 进程的 PID  |

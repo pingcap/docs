@@ -1,13 +1,13 @@
 ---
-title: SET TRANSACTION | TiDB SQL Statement Reference
-summary: An overview of the usage of SET TRANSACTION for the TiDB database.
+title: SET TRANSACTION | TiDB SQL 语句参考
+summary: TiDB 数据库中 SET TRANSACTION 的使用概述。
 ---
 
 # SET TRANSACTION
 
-The `SET TRANSACTION` statement can be used to change the current isolation level on a `GLOBAL` or `SESSION` basis. This syntax is an alternative to `SET transaction_isolation='new-value'` and is included for compatibility with both MySQL, and the SQL standards.
+`SET TRANSACTION` 语句可用于在 `GLOBAL` 或 `SESSION` 级别更改当前的隔离级别。这种语法是 `SET transaction_isolation='new-value'` 的替代方式，包含它是为了与 MySQL 和 SQL 标准保持兼容。
 
-## Synopsis
+## 语法
 
 ```ebnf+diagram
 SetStmt ::=
@@ -26,7 +26,7 @@ AsOfClause ::=
     ( 'AS' 'OF' 'TIMESTAMP' Expression)
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> SHOW SESSION VARIABLES LIKE 'transaction_isolation';
@@ -60,14 +60,14 @@ mysql> SHOW SESSION VARIABLES LIKE 'transaction_isolation';
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-* TiDB supports the ability to set a transaction as read-only in syntax only.
-* The isolation levels `READ-UNCOMMITTED` and `SERIALIZABLE` are not supported.
-* The `REPEATABLE-READ` isolation level is achieved through using the snapshot isolation technology, which is partly compatible with MySQL.
-* In pessimistic transactions, TiDB supports two isolation levels compatible with MySQL: `REPEATABLE-READ` and `READ-COMMITTED`. For a detailed description, see [Isolation Levels](/transaction-isolation-levels.md).
+* TiDB 仅在语法上支持将事务设置为只读。
+* 不支持 `READ-UNCOMMITTED` 和 `SERIALIZABLE` 隔离级别。
+* `REPEATABLE-READ` 隔离级别是通过使用快照隔离技术实现的，与 MySQL 部分兼容。
+* 在悲观事务中，TiDB 支持两种与 MySQL 兼容的隔离级别：`REPEATABLE-READ` 和 `READ-COMMITTED`。详细说明请参见[隔离级别](/transaction-isolation-levels.md)。
 
-## See also
+## 另请参阅
 
 * [`SET [GLOBAL|SESSION] <variable>`](/sql-statements/sql-statement-set-variable.md)
-* [Isolation Levels](/transaction-isolation-levels.md)
+* [隔离级别](/transaction-isolation-levels.md)

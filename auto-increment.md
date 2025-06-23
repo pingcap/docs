@@ -1,41 +1,41 @@
 ---
 title: AUTO_INCREMENT
-summary: Learn the `AUTO_INCREMENT` column attribute of TiDB.
+summary: 了解 TiDB 的 `AUTO_INCREMENT` 列属性。
 ---
 
 # AUTO_INCREMENT
 
-This document introduces the `AUTO_INCREMENT` column attribute, including its concept, implementation principles, auto-increment related features, and restrictions.
+本文介绍 `AUTO_INCREMENT` 列属性，包括其概念、实现原理、自增相关特性和限制。
 
 <CustomContent platform="tidb">
 
-> **Note:**
+> **注意：**
 >
-> The `AUTO_INCREMENT` attribute might cause hotspot in production environments. See [Troubleshoot HotSpot Issues](/troubleshoot-hot-spot-issues.md) for details. It is recommended to use [`AUTO_RANDOM`](/auto-random.md) instead.
+> `AUTO_INCREMENT` 属性可能在生产环境中造成热点问题。详情请参见[热点问题处理](/troubleshoot-hot-spot-issues.md)。建议使用 [`AUTO_RANDOM`](/auto-random.md) 代替。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注意：**
 >
-> The `AUTO_INCREMENT` attribute might cause hotspot in production environments. See [Troubleshoot HotSpot Issues](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#handle-auto-increment-primary-key-hotspot-tables-using-auto_random) for details. It is recommended to use [`AUTO_RANDOM`](/auto-random.md) instead.
+> `AUTO_INCREMENT` 属性可能在生产环境中造成热点问题。详情请参见[热点问题处理](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#handle-auto-increment-primary-key-hotspot-tables-using-auto_random)。建议使用 [`AUTO_RANDOM`](/auto-random.md) 代替。
 
 </CustomContent>
 
-You can also use the `AUTO_INCREMENT` parameter in the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) statement to specify the initial value of the increment field.
+你也可以在 [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) 语句中使用 `AUTO_INCREMENT` 参数来指定自增字段的初始值。
 
-## Concept
+## 概念
 
-`AUTO_INCREMENT` is a column attribute that is used to automatically fill in default column values. When the `INSERT` statement does not specify values for the `AUTO_INCREMENT` column, the system automatically assigns values to this column.
+`AUTO_INCREMENT` 是一个列属性，用于自动填充默认列值。当 `INSERT` 语句没有为 `AUTO_INCREMENT` 列指定值时，系统会自动为该列分配值。
 
-For performance reasons, `AUTO_INCREMENT` numbers are allocated in a batch of values (30 thousand by default) to each TiDB server. This means that while `AUTO_INCREMENT` numbers are guaranteed to be unique, values assigned to an `INSERT` statement will only be monotonic on a per TiDB server basis.
+出于性能考虑，`AUTO_INCREMENT` 数值会按批次（默认为 3 万个）分配给每个 TiDB 服务器。这意味着虽然 `AUTO_INCREMENT` 数值保证是唯一的，但分配给 `INSERT` 语句的值只在每个 TiDB 服务器基础上保持单调递增。
 
-> **Note:**
+> **注意：**
 >
-> If you want the `AUTO_INCREMENT` numbers to be monotonic on all TiDB servers and your TiDB version is v6.5.0 or later, it is recommended to enable the [MySQL compatibility mode](#mysql-compatibility-mode).
+> 如果你希望 `AUTO_INCREMENT` 数值在所有 TiDB 服务器上都保持单调递增，并且你的 TiDB 版本是 v6.5.0 或更高版本，建议启用 [MySQL 兼容模式](#mysql-兼容模式)。
 
-The following is a basic example of `AUTO_INCREMENT`:
+以下是 `AUTO_INCREMENT` 的基本示例：
 
 {{< copyable "sql" >}}
 
@@ -65,7 +65,7 @@ mysql> SELECT * FROM t;
 5 rows in set (0.01 sec)
 ```
 
-In addition, `AUTO_INCREMENT` also supports the `INSERT` statements that explicitly specify column values. In such cases, TiDB stores the explicitly specified values:
+此外，`AUTO_INCREMENT` 也支持显式指定列值的 `INSERT` 语句。在这种情况下，TiDB 会存储显式指定的值：
 
 {{< copyable "sql" >}}
 
@@ -88,43 +88,43 @@ mysql> SELECT * FROM t;
 6 rows in set (0.01 sec)
 ```
 
-The usage above is the same as that of `AUTO_INCREMENT` in MySQL. However, in terms of the specific value that is implicitly assigned, TiDB differs from MySQL significantly.
+上述用法与 MySQL 中的 `AUTO_INCREMENT` 相同。但是，在隐式分配的具体值方面，TiDB 与 MySQL 有显著的不同。
 
-## Implementation principles
+## 实现原理
 
-TiDB implements the `AUTO_INCREMENT` implicit assignment in the following way:
+TiDB 以如下方式实现 `AUTO_INCREMENT` 隐式分配：
 
-For each auto-increment column, a globally visible key-value pair is used to record the maximum ID that has been assigned. In a distributed environment, communication between nodes has some overhead. Therefore, to avoid the issue of write amplification, each TiDB node applies for a batch of consecutive IDs as caches when assigning IDs, and then applies for the next batch of IDs after the first batch is assigned. Therefore, TiDB nodes do not apply to the storage node for IDs when assigning IDs each time. For example:
+对于每个自增列，使用一个全局可见的键值对来记录已分配的最大 ID。在分布式环境中，节点之间的通信有一定开销。因此，为了避免写放大问题，每个 TiDB 节点在分配 ID 时会申请一批连续的 ID 作为缓存，然后在第一批 ID 分配完后再申请下一批 ID。因此，TiDB 节点在每次分配 ID 时不需要向存储节点申请 ID。例如：
 
 ```sql
 CREATE TABLE t(id int UNIQUE KEY AUTO_INCREMENT, c int);
 ```
 
-Assume two TiDB instances, `A` and `B`, in the cluster. If you execute an `INSERT` statement on the `t` table on `A` and `B` respectively:
+假设集群中有两个 TiDB 实例 `A` 和 `B`。如果你在 `A` 和 `B` 上分别对 `t` 表执行 `INSERT` 语句：
 
 ```sql
 INSERT INTO t (c) VALUES (1)
 ```
 
-Instance `A` might cache the auto-increment IDs of `[1,30000]`, and instance `B` might cache the auto-increment IDs of `[30001,60000]`. In `INSERT` statements to be executed, these cached IDs of each instance will be assigned to the `AUTO_INCREMENT` column as the default values.
+实例 `A` 可能会缓存自增 ID `[1,30000]`，实例 `B` 可能会缓存自增 ID `[30001,60000]`。在要执行的 `INSERT` 语句中，这些缓存的 ID 将作为默认值分配给 `AUTO_INCREMENT` 列。
 
-## Basic Features
+## 基本特性
 
-### Uniqueness
+### 唯一性
 
-> **Warning:**
+> **警告：**
 >
-> When the cluster has multiple TiDB instances, if the table schema contains the auto-increment IDs, it is recommended not to use explicit insert and implicit assignment at the same time, which means using the default values of the auto-increment column and the custom values. Otherwise, it might break the uniqueness of implicitly assigned values.
+> 当集群有多个 TiDB 实例时，如果表结构包含自增 ID，建议不要同时使用显式插入和隐式分配，即使用自增列的默认值和自定义值。否则，可能会破坏隐式分配值的唯一性。
 
-In the example above, perform the following operations in order:
+在上面的例子中，按顺序执行以下操作：
 
-1. The client inserts a statement `INSERT INTO t VALUES (2, 1)` to instance `B`, which sets `id` to `2`. The statement is successfully executed.
+1. 客户端向实例 `B` 插入语句 `INSERT INTO t VALUES (2, 1)`，将 `id` 设置为 `2`。语句成功执行。
 
-2. The client sends a statement `INSERT INTO t (c) (1)` to instance `A`. This statement does not specify the value of `id`, so the ID is assigned by `A`. At present, because `A` caches the IDs of `[1, 30000]`, it might assign `2` as the value of the auto-increment ID, and increases the local counter by `1`. At this time, the data whose ID is `2` already exists in the database, so the `Duplicated Error` error is returned.
+2. 客户端向实例 `A` 发送语句 `INSERT INTO t (c) (1)`。此语句没有指定 `id` 的值，所以 ID 由 `A` 分配。目前，由于 `A` 缓存了 `[1, 30000]` 的 ID，它可能会分配 `2` 作为自增 ID 的值，并将本地计数器加 `1`。此时，数据库中已经存在 ID 为 `2` 的数据，所以会返回 `Duplicated Error` 错误。
 
-### Monotonicity
+### 单调性
 
-TiDB guarantees that `AUTO_INCREMENT` values are monotonic (always increasing) on a per-server basis. Consider the following example where consecutive `AUTO_INCREMENT` values of 1-3 are generated:
+TiDB 保证 `AUTO_INCREMENT` 值在每个服务器上是单调递增的（始终增加）。考虑以下示例，其中生成了连续的 `AUTO_INCREMENT` 值 1-3：
 
 {{< copyable "sql" >}}
 
@@ -150,7 +150,7 @@ Records: 3  Duplicates: 0  Warnings: 0
 3 rows in set (0.00 sec)
 ```
 
-Monotonicity is not the same guarantee as consecutive. Consider the following example:
+单调性与连续性不是相同的保证。考虑以下示例：
 
 {{< copyable "sql" >}}
 
@@ -189,11 +189,11 @@ Records: 2  Duplicates: 1  Warnings: 0
 3 rows in set (0.00 sec)
 ```
 
-In this example, the `AUTO_INCREMENT` value of `3` is allocated for the `INSERT` of the key `A` in `INSERT INTO t (a) VALUES ('A'), ('C') ON DUPLICATE KEY UPDATE cnt = cnt + 1;` but never used because this `INSERT` statement contains a duplicate key `A`. This leads to a gap where the sequence is non-consecutive. This behavior is considered legal, even though it differs from MySQL. MySQL will also have gaps in the sequence in other scenarios such as transactions being aborted and rolled back.
+在这个例子中，`AUTO_INCREMENT` 值 `3` 被分配给了 `INSERT INTO t (a) VALUES ('A'), ('C') ON DUPLICATE KEY UPDATE cnt = cnt + 1;` 中键 `A` 的 `INSERT`，但由于这个 `INSERT` 语句包含重复键 `A`，所以这个值从未被使用。这导致了序列中出现非连续的间隙。这种行为被认为是合法的，尽管它与 MySQL 不同。MySQL 在其他场景（如事务被中止和回滚）中也会在序列中出现间隙。
 
 ## AUTO_ID_CACHE
 
-The `AUTO_INCREMENT` sequence might appear to _jump_ dramatically if an `INSERT` operation is performed against a different TiDB server. This is caused by the fact that each server has its own cache of `AUTO_INCREMENT` values:
+如果对不同的 TiDB 服务器执行 `INSERT` 操作，`AUTO_INCREMENT` 序列可能会出现显著的"跳跃"。这是因为每个服务器都有自己的 `AUTO_INCREMENT` 值缓存：
 
 {{< copyable "sql" >}}
 
@@ -218,7 +218,7 @@ Query OK, 1 row affected (0.03 sec)
 4 rows in set (0.00 sec)
 ```
 
-A new `INSERT` operation against the initial TiDB server generates the `AUTO_INCREMENT` value of `4`. This is because the initial TiDB server still has space left in the `AUTO_INCREMENT` cache for allocation. In this case, the sequence of values cannot be considered globally monotonic, because the value of `4` is inserted after the value of `2000001`:
+对初始 TiDB 服务器执行新的 `INSERT` 操作会生成 `AUTO_INCREMENT` 值 `4`。这是因为初始 TiDB 服务器的 `AUTO_INCREMENT` 缓存中仍有可分配的空间。在这种情况下，序列值不能被视为全局单调的，因为值 `4` 是在值 `2000001` 之后插入的：
 
 ```sql
 mysql> INSERT INTO t (a) VALUES (NULL);
@@ -237,7 +237,7 @@ mysql> SELECT * FROM t ORDER BY b;
 5 rows in set (0.00 sec)
 ```
 
-The `AUTO_INCREMENT` cache does not persist across TiDB server restarts. The following `INSERT` statement is performed after the initial TiDB server is restarted:
+`AUTO_INCREMENT` 缓存不会在 TiDB 服务器重启后持续存在。以下 `INSERT` 语句是在初始 TiDB 服务器重启后执行的：
 
 ```sql
 mysql> INSERT INTO t (a) VALUES (NULL);
@@ -257,9 +257,9 @@ mysql> SELECT * FROM t ORDER BY b;
 6 rows in set (0.00 sec)
 ```
 
-A high rate of TiDB server restarts might contribute to the exhaustion of `AUTO_INCREMENT` values. In the above example, the initial TiDB server still has values `[5-30000]` free in its cache. These values are lost, and will not be reallocated.
+频繁的 TiDB 服务器重启可能会导致 `AUTO_INCREMENT` 值的耗尽。在上面的例子中，初始 TiDB 服务器的缓存中仍有值 `[5-30000]` 可用。这些值被丢失，不会被重新分配。
 
-It is not recommended to rely on`AUTO_INCREMENT` values being continuous. Consider the following example, where a TiDB server has a cache of values `[2000001-2030000]`. By manually inserting the value `2029998`, you can see the behavior as a new cache range is retrieved:
+不建议依赖 `AUTO_INCREMENT` 值的连续性。考虑以下示例，其中一个 TiDB 服务器有值 `[2000001-2030000]` 的缓存。通过手动插入值 `2029998`，你可以看到在获取新的缓存范围时的行为：
 
 ```sql
 mysql> INSERT INTO t (a) VALUES (2029998);
@@ -296,11 +296,11 @@ mysql> SELECT * FROM t ORDER BY b;
 11 rows in set (0.00 sec)
 ```
 
-After the value `2030000` is inserted, the next value is `2060001`. This jump in sequence is due to another TiDB server obtaining the intermediate cache range of `[2030001-2060000]`. When multiple TiDB servers are deployed, there will be gaps in the `AUTO_INCREMENT` sequence because cache requests are interleaved.
+在插入值 `2030000` 后，下一个值是 `2060001`。这个序列的跳跃是由于另一个 TiDB 服务器获得了中间缓存范围 `[2030001-2060000]`。当部署多个 TiDB 服务器时，由于缓存请求交错，`AUTO_INCREMENT` 序列中会出现间隙。
 
-### Cache size control
+### 缓存大小控制
 
-In earlier versions of TiDB, the cache size of the auto-increment ID was transparent to users. Starting from v3.0.14, v3.1.2, and v4.0.rc-2, TiDB has introduced the `AUTO_ID_CACHE` table option to allow users to set the cache size for allocating the auto-increment ID.
+在早期版本的 TiDB 中，自增 ID 的缓存大小对用户是透明的。从 v3.0.14、v3.1.2 和 v4.0.rc-2 开始，TiDB 引入了 `AUTO_ID_CACHE` 表选项，允许用户设置分配自增 ID 的缓存大小。
 
 ```sql
 CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 100;
@@ -329,7 +329,7 @@ SHOW CREATE TABLE t;
 1 row in set (0.00 sec)
 ```
 
-At this time, if you restart TiDB, the auto-increment ID cache will be lost, and new insert operations will allocate IDs starting from a higher value beyond the previously cached range.
+此时，如果重启 TiDB，自增 ID 缓存将丢失，新的插入操作将从超出先前缓存范围的更高值开始分配 ID。
 
 ```sql
 INSERT INTO t VALUES();
@@ -345,28 +345,28 @@ SELECT * FROM t;
 2 rows in set (0.01 sec)
 ```
 
-The newly allocated value is `101`. This shows that the size of cache for allocating auto-increment IDs is `100`.
+新分配的值是 `101`。这表明分配自增 ID 的缓存大小是 `100`。
 
-In addition, when the length of consecutive IDs in a batch `INSERT` statement exceeds the length of `AUTO_ID_CACHE`, TiDB increases the cache size accordingly to ensure that the statement can insert data properly.
+此外，当批量 `INSERT` 语句中连续 ID 的长度超过 `AUTO_ID_CACHE` 的长度时，TiDB 会相应地增加缓存大小，以确保语句可以正常插入数据。
 
-### Clear the auto-increment ID cache
+### 清除自增 ID 缓存
 
-In some scenarios, you might need to clear the auto-increment ID cache to ensure data consistency. For example:
+在某些场景下，你可能需要清除自增 ID 缓存以确保数据一致性。例如：
 
 <CustomContent platform="tidb">
 
-- In the scenario of incremental replication using [Data Migration (DM)](/dm/dm-overview.md), once the replication is complete, data writing to the downstream TiDB switches from DM to your application's write operations. Meanwhile, the ID writing mode of the auto-increment column usually switches from explicit insertion to implicit allocation.
+- 在使用 [Data Migration (DM)](/dm/dm-overview.md) 进行增量复制的场景中，一旦复制完成，数据写入下游 TiDB 的方式从 DM 切换到应用程序的写操作。同时，自增列的 ID 写入模式通常从显式插入切换到隐式分配。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-- In the scenario of incremental replication using the [Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md) feature, once the replication is complete, data writing to the downstream TiDB switches from DM to your application's write operations. Meanwhile, the ID writing mode of the auto-increment column usually switches from explicit insertion to implicit allocation.
+- 在使用[数据迁移](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)功能进行增量复制的场景中，一旦复制完成，数据写入下游 TiDB 的方式从 DM 切换到应用程序的写操作。同时，自增列的 ID 写入模式通常从显式插入切换到隐式分配。
 
 </CustomContent>
 
-- When your application involves both explicit ID insertion and implicit ID allocation, you need to clear the auto-increment ID cache to avoid conflicts between future implicitly allocated IDs and previously explicitly inserted IDs, which could result in primary key conflict errors. For more information, see [Uniqueness](/auto-increment.md#uniqueness).
+- 当你的应用程序同时涉及显式 ID 插入和隐式 ID 分配时，你需要清除自增 ID 缓存，以避免未来隐式分配的 ID 与先前显式插入的 ID 发生冲突，这可能导致主键冲突错误。更多信息，请参见[唯一性](/auto-increment.md#唯一性)。
 
-To clear the auto-increment ID cache on all TiDB nodes in the cluster, you can execute the `ALTER TABLE` statement with `AUTO_INCREMENT = 0`. For example:
+要清除集群中所有 TiDB 节点上的自增 ID 缓存，你可以执行带有 `AUTO_INCREMENT = 0` 的 `ALTER TABLE` 语句。例如：
 
 ```sql
 CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 100;
@@ -414,68 +414,68 @@ SELECT * FROM t;
 3 rows in set (0.01 sec)
 ```
 
-### Auto-increment step size and offset
+### 自增步长和偏移量
 
-Starting from v3.0.9 and v4.0.0-rc.1, similar to the behavior of MySQL, the value implicitly assigned to the auto-increment column is controlled by the `@@auto_increment_increment` and `@@auto_increment_offset` session variables.
+从 v3.0.9 和 v4.0.0-rc.1 开始，与 MySQL 的行为类似，隐式分配给自增列的值由 `@@auto_increment_increment` 和 `@@auto_increment_offset` 会话变量控制。
 
-The value (ID) implicitly assigned to auto-increment columns satisfies the following equation:
+隐式分配给自增列的值（ID）满足以下等式：
 
 `(ID - auto_increment_offset) % auto_increment_increment == 0`
 
-## MySQL compatibility mode
+## MySQL 兼容模式
 
-TiDB provides a MySQL-compatible mode for auto-increment columns that ensures strictly increasing IDs with minimal gaps. To enable this mode, set `AUTO_ID_CACHE` to `1` when creating a table:
+TiDB 为自增列提供了一个 MySQL 兼容模式，可确保 ID 严格递增且间隙最小。要启用此模式，在创建表时将 `AUTO_ID_CACHE` 设置为 `1`：
 
 ```sql
 CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 1;
 ```
 
-When `AUTO_ID_CACHE` is set to `1`, IDs are strictly increasing across all TiDB instances, each ID is guaranteed to be unique, and gaps between IDs are minimal compared to the default cache mode (`AUTO_ID_CACHE 0` with 30000 cached values).
+当 `AUTO_ID_CACHE` 设置为 `1` 时，ID 在所有 TiDB 实例上严格递增，每个 ID 都保证是唯一的，并且与默认缓存模式（`AUTO_ID_CACHE 0` 缓存 30000 个值）相比，ID 之间的间隙最小。
 
-For example, with `AUTO_ID_CACHE 1`, you might see a sequence as follows:
-
-```sql
-INSERT INTO t VALUES (); -- Returns ID 1
-INSERT INTO t VALUES (); -- Returns ID 2
-INSERT INTO t VALUES (); -- Returns ID 3
--- After failover
-INSERT INTO t VALUES (); -- Might return ID 5
-```
-
-In contrast, with the default cache (`AUTO_ID_CACHE 0`), larger gaps can occur:
+例如，使用 `AUTO_ID_CACHE 1` 时，你可能会看到如下序列：
 
 ```sql
-INSERT INTO t VALUES (); -- Returns ID 1
-INSERT INTO t VALUES (); -- Returns ID 2
--- New TiDB instance allocates next batch
-INSERT INTO t VALUES (); -- Returns ID 30001
+INSERT INTO t VALUES (); -- 返回 ID 1
+INSERT INTO t VALUES (); -- 返回 ID 2
+INSERT INTO t VALUES (); -- 返回 ID 3
+-- 故障转移后
+INSERT INTO t VALUES (); -- 可能返回 ID 5
 ```
 
-While IDs are always increasing and without significant gaps like those seen with `AUTO_ID_CACHE 0`, small gaps in the sequence might still occur in the following scenarios. These gaps are necessary to maintain both uniqueness and the strictly increasing property of the IDs.
+相比之下，使用默认缓存（`AUTO_ID_CACHE 0`）时，可能会出现更大的间隙：
 
-- During failover when the primary instance exits or crashes
+```sql
+INSERT INTO t VALUES (); -- 返回 ID 1
+INSERT INTO t VALUES (); -- 返回 ID 2
+-- 新的 TiDB 实例分配下一批
+INSERT INTO t VALUES (); -- 返回 ID 30001
+```
 
-    After you enable the MySQL compatibility mode, the allocated IDs are **unique** and **monotonically increasing**, and the behavior is almost the same as MySQL. Even when accessing across multiple TiDB instances, ID monotonicity is maintained. However, if the primary instance of the centralized service crashes, a few IDs might become non-continuous. This occurs because the secondary instance discards some IDs allocated by the primary instance during failover to ensure ID uniqueness.
+虽然 ID 始终递增且没有像 `AUTO_ID_CACHE 0` 那样的显著间隙，但在以下场景中序列中可能仍会出现小的间隙。这些间隙是必要的，以维持 ID 的唯一性和严格递增的特性。
 
-- During rolling upgrades of TiDB nodes
-- During normal concurrent transactions (similar to MySQL)
+- 主实例退出或崩溃时的故障转移期间
 
-> **Note:**
+    启用 MySQL 兼容模式后，分配的 ID 是**唯一**且**单调递增**的，行为与 MySQL 几乎相同。即使跨多个 TiDB 实例访问，也保持 ID 的单调性。但是，如果中心化服务的主实例崩溃，少数 ID 可能会变得不连续。这是因为在故障转移期间，备用实例会丢弃主实例分配的一些 ID，以确保 ID 的唯一性。
+
+- TiDB 节点滚动升级期间
+- 正常并发事务期间（与 MySQL 类似）
+
+> **注意：**
 >
-> The behavior and performance of `AUTO_ID_CACHE 1` has evolved across TiDB versions:
+> `AUTO_ID_CACHE 1` 的行为和性能在不同的 TiDB 版本中有所演变：
 >
-> - Before v6.4.0, each ID allocation requires a TiKV transaction, which affects performance.
-> - In v6.4.0, TiDB introduces a centralized allocating service that performs ID allocation as an in-memory operation, significantly improving performance.
-> - Starting from v8.1.0, TiDB removes the automatic `forceRebase` operation during primary node exits to enable faster restarts. While this might result in additional non-consecutive IDs during failover, it prevents potential write blocking when many tables use `AUTO_ID_CACHE 1`.
+> - v6.4.0 之前，每次 ID 分配都需要一个 TiKV 事务，这会影响性能。
+> - 在 v6.4.0 中，TiDB 引入了中心化分配服务，将 ID 分配作为内存操作执行，显著提高了性能。
+> - 从 v8.1.0 开始，TiDB 在主节点退出时移除了自动 `forceRebase` 操作，以实现更快的重启。虽然这可能在故障转移期间导致额外的非连续 ID，但它可以防止当许多表使用 `AUTO_ID_CACHE 1` 时可能出现的写入阻塞。
 
-## Restrictions
+## 限制
 
-Currently, `AUTO_INCREMENT` has the following restrictions when used in TiDB:
+目前，在 TiDB 中使用 `AUTO_INCREMENT` 有以下限制：
 
-- For TiDB v6.6.0 and earlier versions, the defined column must be either primary key or index prefixes.
-- It must be defined on the column of `INTEGER`, `FLOAT`, or `DOUBLE` type.
-- It cannot be specified on the same column with the `DEFAULT` column value.
-- `ALTER TABLE` cannot be used to add or modify columns with the `AUTO_INCREMENT` attribute, including using `ALTER TABLE ... MODIFY/CHANGE COLUMN` to add the `AUTO_INCREMENT` attribute to an existing column, or using `ALTER TABLE ... ADD COLUMN` to add a column with the `AUTO_INCREMENT` attribute.
-- `ALTER TABLE` can be used to remove the `AUTO_INCREMENT` attribute. However, starting from v2.1.18 and v3.0.4, TiDB uses the session variable `@@tidb_allow_remove_auto_inc` to control whether `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` can be used to remove the `AUTO_INCREMENT` attribute of a column. By default, you cannot use `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` to remove the `AUTO_INCREMENT` attribute.
-- `ALTER TABLE` requires the `FORCE` option to set the `AUTO_INCREMENT` value to a smaller value.
-- Setting the `AUTO_INCREMENT` to a value smaller than `MAX(<auto_increment_column>)` leads to duplicate keys because pre-existing values are not skipped.
+- 对于 TiDB v6.6.0 及更早版本，定义的列必须是主键或索引前缀。
+- 必须定义在 `INTEGER`、`FLOAT` 或 `DOUBLE` 类型的列上。
+- 不能在同一列上同时指定 `DEFAULT` 列值。
+- 不能使用 `ALTER TABLE` 添加或修改带有 `AUTO_INCREMENT` 属性的列，包括使用 `ALTER TABLE ... MODIFY/CHANGE COLUMN` 为现有列添加 `AUTO_INCREMENT` 属性，或使用 `ALTER TABLE ... ADD COLUMN` 添加带有 `AUTO_INCREMENT` 属性的列。
+- 可以使用 `ALTER TABLE` 移除 `AUTO_INCREMENT` 属性。但是，从 v2.1.18 和 v3.0.4 开始，TiDB 使用会话变量 `@@tidb_allow_remove_auto_inc` 来控制是否可以使用 `ALTER TABLE MODIFY` 或 `ALTER TABLE CHANGE` 移除列的 `AUTO_INCREMENT` 属性。默认情况下，不能使用 `ALTER TABLE MODIFY` 或 `ALTER TABLE CHANGE` 移除 `AUTO_INCREMENT` 属性。
+- `ALTER TABLE` 需要 `FORCE` 选项才能将 `AUTO_INCREMENT` 值设置为较小的值。
+- 将 `AUTO_INCREMENT` 设置为小于 `MAX(<auto_increment_column>)` 的值会导致重复键，因为不会跳过已存在的值。

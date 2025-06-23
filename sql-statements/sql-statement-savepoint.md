@@ -1,11 +1,11 @@
 ---
-title: SAVEPOINT | TiDB SQL Statement Reference
-summary: An overview of the usage of SAVEPOINT for the TiDB database.
+title: SAVEPOINT | TiDB SQL 语句参考
+summary: TiDB 数据库中 SAVEPOINT 的使用概述。
 ---
 
 # SAVEPOINT
 
-`SAVEPOINT` is a feature introduced in TiDB v6.2.0. The syntax is as follows:
+`SAVEPOINT` 是 TiDB v6.2.0 引入的功能。语法如下：
 
 ```sql
 SAVEPOINT identifier
@@ -13,30 +13,30 @@ ROLLBACK TO [SAVEPOINT] identifier
 RELEASE SAVEPOINT identifier
 ```
 
-> **Warning:**
+> **警告：**
 >
-> - You cannot use `SAVEPOINT` with TiDB Binlog enabled.
-> - You cannot use `SAVEPOINT` in pessimistic transactions when [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) is disabled.
+> - 启用 TiDB Binlog 时不能使用 `SAVEPOINT`。
+> - 当 [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) 被禁用时，不能在悲观事务中使用 `SAVEPOINT`。
 
-- `SAVEPOINT` is used to set a savepoint of a specified name in the current transaction. If a savepoint with the same name already exists, it will be deleted and a new savepoint with the same name will be set.
+- `SAVEPOINT` 用于在当前事务中设置指定名称的保存点。如果已存在同名的保存点，它将被删除，并设置一个同名的新保存点。
 
-- `ROLLBACK TO SAVEPOINT` rolls back a transaction to the savepoint of a specified name and does not terminate the transaction. Data changes made to the table data after the savepoint will be reverted in the rollback, and all savepoints after the savepoint are deleted. In a pessimistic transaction, the locks held by the transaction are not rolled back. Instead, the locks will be released when the transaction ends.
+- `ROLLBACK TO SAVEPOINT` 将事务回滚到指定名称的保存点，且不会终止事务。保存点之后对表数据所做的更改将在回滚中被撤销，该保存点之后的所有保存点都将被删除。在悲观事务中，事务持有的锁不会被回滚。相反，这些锁将在事务结束时释放。
 
-    If the savepoint specified in the `ROLLBACK TO SAVEPOINT` statement does not exist, the statement returns the following error:
-
-    ```
-    ERROR 1305 (42000): SAVEPOINT identifier does not exist
-    ```
-
-- `RELEASE SAVEPOINT` statement removes the named savepoint and **all savepoints** after this savepoint from the current transaction, without committing or rolling back the current transaction. If the savepoint of the specified name does not exist, the following error is returned:
+    如果 `ROLLBACK TO SAVEPOINT` 语句中指定的保存点不存在，该语句将返回以下错误：
 
     ```
     ERROR 1305 (42000): SAVEPOINT identifier does not exist
     ```
 
-    After the transaction is committed or rolled back, all savepoints in the transaction will be deleted.
+- `RELEASE SAVEPOINT` 语句从当前事务中删除指定名称的保存点以及该保存点之后的**所有保存点**，而不会提交或回滚当前事务。如果指定名称的保存点不存在，将返回以下错误：
 
-## Synopsis
+    ```
+    ERROR 1305 (42000): SAVEPOINT identifier does not exist
+    ```
+
+    事务提交或回滚后，事务中的所有保存点都将被删除。
+
+## 语法概要
 
 ```ebnf+diagram
 SavepointStmt ::=
@@ -49,9 +49,9 @@ ReleaseSavepointStmt ::=
     "RELEASE" "SAVEPOINT" Identifier
 ```
 
-## Examples
+## 示例
 
-Create a table `t1`:
+创建表 `t1`：
 
 ```sql
 CREATE TABLE t1 (a INT NOT NULL PRIMARY KEY);
@@ -61,7 +61,7 @@ CREATE TABLE t1 (a INT NOT NULL PRIMARY KEY);
 Query OK, 0 rows affected (0.12 sec)
 ```
 
-Start the current transaction:
+开始当前事务：
 
 ```sql
 BEGIN;
@@ -71,7 +71,7 @@ BEGIN;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-Insert data into the table and set a savepoint `sp1`:
+向表中插入数据并设置保存点 `sp1`：
 
 ```sql
 INSERT INTO t1 VALUES (1);
@@ -89,7 +89,7 @@ SAVEPOINT sp1;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-Insert data into the table again and set a savepoint `sp2`:
+再次向表中插入数据并设置保存点 `sp2`：
 
 ```sql
 INSERT INTO t1 VALUES (2);
@@ -107,7 +107,7 @@ SAVEPOINT sp2;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-Release the savepoint `sp2`:
+释放保存点 `sp2`：
 
 ```sql
 RELEASE SAVEPOINT sp2;
@@ -117,7 +117,7 @@ RELEASE SAVEPOINT sp2;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-Roll back to the savepoint `sp1`:
+回滚到保存点 `sp1`：
 
 ```sql
 ROLLBACK TO SAVEPOINT sp1;
@@ -127,7 +127,7 @@ ROLLBACK TO SAVEPOINT sp1;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-Commit the transaction and query the table. Only the data inserted before `sp1` is returned.
+提交事务并查询表。只返回 `sp1` 之前插入的数据。
 
 ```sql
 COMMIT;
@@ -150,16 +150,16 @@ SELECT * FROM t1;
 1 row in set
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-When `ROLLBACK TO SAVEPOINT` is used to roll back a transaction to a specified savepoint, MySQL releases the locks held only after the specified savepoint, while in TiDB pessimistic transaction, TiDB does not immediately release the locks held after the specified savepoint. Instead, TiDB releases all locks when the transaction is committed or rolled back.
+当使用 `ROLLBACK TO SAVEPOINT` 将事务回滚到指定保存点时，MySQL 会立即释放仅在指定保存点之后持有的锁，而在 TiDB 悲观事务中，TiDB 不会立即释放指定保存点之后持有的锁。相反，TiDB 会在事务提交或回滚时释放所有锁。
 
-TiDB does not support the MySQL syntax `ROLLBACK WORK TO SAVEPOINT ...`.
+TiDB 不支持 MySQL 的 `ROLLBACK WORK TO SAVEPOINT ...` 语法。
 
-## See also
+## 另请参阅
 
 * [COMMIT](/sql-statements/sql-statement-commit.md)
 * [ROLLBACK](/sql-statements/sql-statement-rollback.md)
 * [START TRANSACTION](/sql-statements/sql-statement-start-transaction.md)
-* [TiDB Optimistic Transaction Mode](/optimistic-transaction.md)
-* [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md)
+* [TiDB 乐观事务模式](/optimistic-transaction.md)
+* [TiDB 悲观事务模式](/pessimistic-transaction.md)

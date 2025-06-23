@@ -1,171 +1,171 @@
 ---
-title: Connect to TiDB with SQLAlchemy
-summary: Learn how to connect to TiDB using SQLAlchemy. This tutorial gives Python sample code snippets that work with TiDB using SQLAlchemy.
+title: 使用 SQLAlchemy 连接 TiDB
+summary: 学习如何使用 SQLAlchemy 连接 TiDB。本教程提供使用 SQLAlchemy 操作 TiDB 的 Python 示例代码片段。
 ---
 
-# Connect to TiDB with SQLAlchemy
+# 使用 SQLAlchemy 连接 TiDB
 
-TiDB is a MySQL-compatible database, and [SQLAlchemy](https://www.sqlalchemy.org/) is a popular Python SQL toolkit and Object Relational Mapper (ORM).
+TiDB 是一个兼容 MySQL 的数据库，而 [SQLAlchemy](https://www.sqlalchemy.org/) 是一个流行的 Python SQL 工具包和对象关系映射器（ORM）。
 
-In this tutorial, you can learn how to use TiDB and SQLAlchemy to accomplish the following tasks:
+在本教程中，你可以学习如何使用 TiDB 和 SQLAlchemy 完成以下任务：
 
-- Set up your environment.
-- Connect to your TiDB cluster using SQLAlchemy.
-- Build and run your application. Optionally, you can find sample code snippets for basic CRUD operations.
+- 设置你的环境。
+- 使用 SQLAlchemy 连接到你的 TiDB 集群。
+- 构建并运行你的应用程序。你也可以找到基本 CRUD 操作的示例代码片段。
 
-> **Note:**
+> **注意：**
 >
-> This tutorial works with TiDB Cloud Serverless, TiDB Cloud Dedicated, and TiDB Self-Managed clusters.
+> 本教程适用于 TiDB Cloud Serverless、TiDB Cloud Dedicated 和 TiDB Self-Managed 集群。
 
-## Prerequisites
+## 前提条件
 
-To complete this tutorial, you need:
+要完成本教程，你需要：
 
-- [Python 3.8 or higher](https://www.python.org/downloads/).
-- [Git](https://git-scm.com/downloads).
-- A TiDB cluster.
+- [Python 3.8 或更高版本](https://www.python.org/downloads/)。
+- [Git](https://git-scm.com/downloads)。
+- 一个 TiDB 集群。
 
 <CustomContent platform="tidb">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**如果你还没有 TiDB 集群，可以按照以下方式创建：**
 
-- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+- （推荐）按照[创建 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md)创建你自己的 TiDB Cloud 集群。
+- 按照[部署本地测试 TiDB 集群](/quick-start-with-tidb.md#deploy-a-local-test-cluster)或[部署生产 TiDB 集群](/production-deployment-using-tiup.md)来创建本地集群。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**如果你还没有 TiDB 集群，可以按照以下方式创建：**
 
-- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
+- （推荐）按照[创建 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md)创建你自己的 TiDB Cloud 集群。
+- 按照[部署本地测试 TiDB 集群](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)或[部署生产 TiDB 集群](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)来创建本地集群。
 
 </CustomContent>
 
-## Run the sample app to connect to TiDB
+## 运行示例程序连接 TiDB
 
-This section demonstrates how to run the sample application code and connect to TiDB.
+本节演示如何运行示例应用程序代码并连接到 TiDB。
 
-### Step 1: Clone the sample app repository
+### 第 1 步：克隆示例程序仓库
 
-Run the following commands in your terminal window to clone the sample code repository:
+在终端窗口中运行以下命令来克隆示例代码仓库：
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-python-sqlalchemy-quickstart.git
 cd tidb-python-sqlalchemy-quickstart
 ```
 
-### Step 2: Install dependencies
+### 第 2 步：安装依赖
 
-Run the following command to install the required packages (including SQLAlchemy and PyMySQL) for the sample app:
+运行以下命令来安装示例程序所需的包（包括 SQLAlchemy 和 PyMySQL）：
 
 ```shell
 pip install -r requirements.txt
 ```
 
-#### Why use PyMySQL?
+#### 为什么使用 PyMySQL？
 
-SQLAlchemy is an ORM library that works with multiple databases. It provides a high-level abstraction of the database, which helps developers write SQL statements in a more object-oriented way. However, SQLAlchemy does not include a database driver. To connect to a database, you need to install a database driver. This sample application uses PyMySQL as the database driver, which is a pure Python MySQL client library that is compatible with TiDB and can be installed on all platforms.
+SQLAlchemy 是一个可以与多个数据库一起工作的 ORM 库。它提供了数据库的高级抽象，帮助开发人员以更面向对象的方式编写 SQL 语句。但是，SQLAlchemy 不包含数据库驱动程序。要连接到数据库，你需要安装一个数据库驱动程序。本示例应用程序使用 PyMySQL 作为数据库驱动程序，它是一个纯 Python MySQL 客户端库，与 TiDB 兼容，并且可以在所有平台上安装。
 
-You can also use other database drivers, such as [mysqlclient](https://github.com/PyMySQL/mysqlclient) and [mysql-connector-python](https://dev.mysql.com/doc/connector-python/en/). But they are not pure Python libraries and require the corresponding C/C++ compiler and MySQL client for compiling. For more information, refer to [SQLAlchemy official documentation](https://docs.sqlalchemy.org/en/20/core/engines.html#mysql).
+你也可以使用其他数据库驱动程序，如 [mysqlclient](https://github.com/PyMySQL/mysqlclient) 和 [mysql-connector-python](https://dev.mysql.com/doc/connector-python/en/)。但它们不是纯 Python 库，需要相应的 C/C++ 编译器和 MySQL 客户端来编译。更多信息，请参考 [SQLAlchemy 官方文档](https://docs.sqlalchemy.org/en/20/core/engines.html#mysql)。
 
-### Step 3: Configure connection information
+### 第 3 步：配置连接信息
 
-Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
+根据你选择的 TiDB 部署选项连接到你的 TiDB 集群。
 
 <SimpleTab>
 <div label="TiDB Cloud Serverless">
 
-> **Note:**
+> **注意：**
 >
-> Currently, TiDB Cloud Serverless clusters have a limitation: if there are no active connections for 5 minutes, they will shut down, which closes all connections. Therefore, when using SQLAlchemy with TiDB Cloud Serverless clusters, pooled connections might encounter `OperationalError` such as `Lost connection to MySQL server during query` or `MySQL Connection not available`. To avoid this error, you can set the `pool_recycle` parameter to `300`. For more information, see [Dealing with Disconnects](https://docs.sqlalchemy.org/en/20/core/pooling.html#dealing-with-disconnects) in SQLAlchemy documentation.
+> 目前，TiDB Cloud Serverless 集群有一个限制：如果 5 分钟内没有活动连接，它们将关闭，这会关闭所有连接。因此，在将 SQLAlchemy 与 TiDB Cloud Serverless 集群一起使用时，池化连接可能会遇到 `OperationalError`，如 `Lost connection to MySQL server during query` 或 `MySQL Connection not available`。要避免此错误，你可以将 `pool_recycle` 参数设置为 `300`。更多信息，请参阅 SQLAlchemy 文档中的[处理断开连接](https://docs.sqlalchemy.org/en/20/core/pooling.html#dealing-with-disconnects)。
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. 导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称进入其概览页面。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2. 点击右上角的**连接**。此时会显示一个连接对话框。
 
-3. Ensure the configurations in the connection dialog match your operating environment.
+3. 确保连接对话框中的配置与你的操作环境匹配。
 
-    - **Connection Type** is set to `Public`
-    - **Branch** is set to `main`
-    - **Connect With** is set to `General`
-    - **Operating System** matches your environment.
+    - **连接类型**设置为 `Public`
+    - **分支**设置为 `main`
+    - **连接方式**设置为 `General`
+    - **操作系统**与你的环境匹配。
 
-    > **Tip:**
+    > **提示：**
     >
-    > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
+    > 如果你的程序在 Windows Subsystem for Linux (WSL) 中运行，请切换到相应的 Linux 发行版。
 
-4. Click **Generate Password** to create a random password.
+4. 点击**生成密码**来创建随机密码。
 
-    > **Tip:**
+    > **提示：**
     > 
-    > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
+    > 如果你之前已经创建了密码，你可以使用原始密码，也可以点击**重置密码**生成新密码。
 
-5. Run the following command to copy `.env.example` and rename it to `.env`:
+5. 运行以下命令复制 `.env.example` 并将其重命名为 `.env`：
 
     ```shell
     cp .env.example .env
     ```
 
-6. Copy and paste the corresponding connection string into the `.env` file. The example result is as follows:
+6. 将相应的连接字符串复制并粘贴到 `.env` 文件中。示例结果如下：
 
     ```dotenv
-    TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
+    TIDB_HOST='{host}'  # 例如 gateway01.ap-northeast-1.prod.aws.tidbcloud.com
     TIDB_PORT='4000'
-    TIDB_USER='{user}'  # e.g. xxxxxx.root
+    TIDB_USER='{user}'  # 例如 xxxxxx.root
     TIDB_PASSWORD='{password}'
     TIDB_DB_NAME='test'
-    CA_PATH='{ssl_ca}'  # e.g. /etc/ssl/certs/ca-certificates.crt (Debian / Ubuntu / Arch)
+    CA_PATH='{ssl_ca}'  # 例如 /etc/ssl/certs/ca-certificates.crt (Debian / Ubuntu / Arch)
     ```
 
-    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog.
+    请确保将占位符 `{}` 替换为从连接对话框获得的连接参数。
 
-7. Save the `.env` file.
+7. 保存 `.env` 文件。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. 导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称进入其概览页面。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2. 点击右上角的**连接**。此时会显示一个连接对话框。
 
-3. In the connection dialog, select **Public** from the **Connection Type** drop-down list, and then click **CA cert** to download the CA certificate.
+3. 在连接对话框中，从**连接类型**下拉列表中选择 **Public**，然后点击 **CA cert** 下载 CA 证书。
 
-    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) to configure it before your first connection.
+    如果你还没有配置 IP 访问列表，请点击**配置 IP 访问列表**或按照[配置 IP 访问列表](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)中的步骤在首次连接之前进行配置。
 
-    In addition to the **Public** connection type, TiDB Cloud Dedicated supports **Private Endpoint** and **VPC Peering** connection types. For more information, see [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
+    除了 **Public** 连接类型外，TiDB Cloud Dedicated 还支持 **Private Endpoint** 和 **VPC Peering** 连接类型。更多信息，请参阅[连接到你的 TiDB Cloud Dedicated 集群](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)。
 
-4. Run the following command to copy `.env.example` and rename it to `.env`:
+4. 运行以下命令复制 `.env.example` 并将其重命名为 `.env`：
 
     ```shell
     cp .env.example .env
     ```
 
-5. Copy and paste the corresponding connection string into the `.env` file. The example result is as follows:
+5. 将相应的连接字符串复制并粘贴到 `.env` 文件中。示例结果如下：
 
     ```dotenv
-    TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
+    TIDB_HOST='{host}'  # 例如 tidb.xxxx.clusters.tidb-cloud.com
     TIDB_PORT='4000'
-    TIDB_USER='{user}'  # e.g. root
+    TIDB_USER='{user}'  # 例如 root
     TIDB_PASSWORD='{password}'
     TIDB_DB_NAME='test'
     CA_PATH='{your-downloaded-ca-path}'
     ```
 
-    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog, and configure `CA_PATH` with the certificate path downloaded in the previous step.
+    请确保将占位符 `{}` 替换为从连接对话框获得的连接参数，并将 `CA_PATH` 配置为上一步下载的证书路径。
 
-6. Save the `.env` file.
+6. 保存 `.env` 文件。
 
 </div>
 <div label="TiDB Self-Managed">
 
-1. Run the following command to copy `.env.example` and rename it to `.env`:
+1. 运行以下命令复制 `.env.example` 并将其重命名为 `.env`：
 
     ```shell
     cp .env.example .env
     ```
 
-2. Copy and paste the corresponding connection string into the `.env` file. The example result is as follows:
+2. 将相应的连接字符串复制并粘贴到 `.env` 文件中。示例结果如下：
 
     ```dotenv
     TIDB_HOST='{tidb_server_host}'
@@ -175,30 +175,30 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     TIDB_DB_NAME='test'
     ```
 
-    Be sure to replace the placeholders `{}` with the connection parameters, and remove the `CA_PATH` line. If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
+    请确保将占位符 `{}` 替换为连接参数，并删除 `CA_PATH` 行。如果你在本地运行 TiDB，默认主机地址是 `127.0.0.1`，密码为空。
 
-3. Save the `.env` file.
+3. 保存 `.env` 文件。
 
 </div>
 </SimpleTab>
 
-### Step 4: Run the code and check the result
+### 第 4 步：运行代码并检查结果
 
-1. Execute the following command to run the sample code:
+1. 执行以下命令运行示例代码：
 
     ```shell
     python sqlalchemy_example.py
     ```
 
-2. Check the [Expected-Output.txt](https://github.com/tidb-samples/tidb-python-sqlalchemy-quickstart/blob/main/Expected-Output.txt) to see if the output matches.
+2. 查看 [Expected-Output.txt](https://github.com/tidb-samples/tidb-python-sqlalchemy-quickstart/blob/main/Expected-Output.txt) 以确认输出是否匹配。
 
-## Sample code snippets
+## 示例代码片段
 
-You can refer to the following sample code snippets to complete your own application development.
+你可以参考以下示例代码片段来完成自己的应用程序开发。
 
-For complete sample code and how to run it, check out the [tidb-samples/tidb-python-sqlalchemy-quickstart](https://github.com/tidb-samples/tidb-python-sqlalchemy-quickstart) repository.
+要查看完整的示例代码及其运行方法，请查看 [tidb-samples/tidb-python-sqlalchemy-quickstart](https://github.com/tidb-samples/tidb-python-sqlalchemy-quickstart) 仓库。
 
-### Connect to TiDB
+### 连接到 TiDB
 
 ```python
 from sqlalchemy import create_engine, URL
@@ -228,9 +228,9 @@ engine = get_db_engine()
 Session = sessionmaker(bind=engine)
 ```
 
-When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, `${tidb_db_name}` and `${ca_path}` with the actual values of your TiDB cluster.
+使用此函数时，你需要将 `${tidb_host}`、`${tidb_port}`、`${tidb_user}`、`${tidb_password}`、`${tidb_db_name}` 和 `${ca_path}` 替换为你的 TiDB 集群的实际值。
 
-### Define a table
+### 定义表
 
 ```python
 from sqlalchemy import Column, Integer, String
@@ -247,9 +247,9 @@ class Player(Base):
     __tablename__ = "players"
 ```
 
-For more information, refer to [SQLAlchemy documentation: Mapping classes with declarative](https://docs.sqlalchemy.org/en/20/orm/declarative_mapping.html).
+更多信息，请参考 [SQLAlchemy 文档：使用声明式映射类](https://docs.sqlalchemy.org/en/20/orm/declarative_mapping.html)。
 
-### Insert data
+### 插入数据
 
 ```python
 with Session() as session:
@@ -258,9 +258,9 @@ with Session() as session:
     session.commit()
 ```
 
-For more information, refer to [Insert data](/develop/dev-guide-insert-data.md).
+更多信息，请参考[插入数据](/develop/dev-guide-insert-data.md)。
 
-### Query data
+### 查询数据
 
 ```python
 with Session() as session:
@@ -268,9 +268,9 @@ with Session() as session:
     print(player)
 ```
 
-For more information, refer to [Query data](/develop/dev-guide-get-data-from-single-table.md).
+更多信息，请参考[查询数据](/develop/dev-guide-get-data-from-single-table.md)。
 
-### Update data
+### 更新数据
 
 ```python
 with Session() as session:
@@ -279,9 +279,9 @@ with Session() as session:
     session.commit()
 ```
 
-For more information, refer to [Update data](/develop/dev-guide-update-data.md).
+更多信息，请参考[更新数据](/develop/dev-guide-update-data.md)。
 
-### Delete data
+### 删除数据
 
 ```python
 with Session() as session:
@@ -290,24 +290,24 @@ with Session() as session:
     session.commit()
 ```
 
-For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
+更多信息，请参考[删除数据](/develop/dev-guide-delete-data.md)。
 
-## Next steps
+## 下一步
 
-- Learn more usage of SQLAlchemy from [the documentation of SQLAlchemy](https://www.sqlalchemy.org/).
-- Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
-- Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
+- 从 [SQLAlchemy 的文档](https://www.sqlalchemy.org/)了解更多 SQLAlchemy 的用法。
+- 通过[开发者指南](/develop/dev-guide-overview.md)中的章节学习 TiDB 应用程序开发的最佳实践，例如[插入数据](/develop/dev-guide-insert-data.md)、[更新数据](/develop/dev-guide-update-data.md)、[删除数据](/develop/dev-guide-delete-data.md)、[单表读取](/develop/dev-guide-get-data-from-single-table.md)、[事务](/develop/dev-guide-transaction-overview.md)和 [SQL 性能优化](/develop/dev-guide-optimize-sql-overview.md)。
+- 通过专业的 [TiDB 开发者课程](https://www.pingcap.com/education/)学习，并在通过考试后获得 [TiDB 认证](https://www.pingcap.com/education/certification/)。
 
-## Need help?
+## 需要帮助？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

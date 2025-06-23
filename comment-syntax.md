@@ -1,15 +1,15 @@
 ---
-title: Comment Syntax
-summary: This document introduces the comment syntax supported by TiDB.
+title: 注释语法
+summary: 本文介绍 TiDB 支持的注释语法。
 ---
 
-# Comment Syntax
+# 注释语法
 
-This document describes the comment syntax supported by TiDB.
+本文描述 TiDB 支持的注释语法。
 
-TiDB supports three comment styles:
+TiDB 支持三种注释风格：
 
-- Use `#` to comment a line:
+- 使用 `#` 注释一行：
 
     {{< copyable "sql" >}}
 
@@ -26,7 +26,7 @@ TiDB supports three comment styles:
     1 row in set (0.00 sec)
     ```
 
-- Use `--` to comment a line:
+- 使用 `--` 注释一行：
 
     {{< copyable "sql" >}}
 
@@ -43,7 +43,7 @@ TiDB supports three comment styles:
     1 row in set (0.00 sec)
     ```
     
-    And this style requires at least one whitespace after `--`:
+    这种风格要求在 `--` 后至少有一个空格：
 
    {{< copyable "sql" >}}
 
@@ -60,7 +60,7 @@ TiDB supports three comment styles:
     1 row in set (0.01 sec)
     ```
 
-- Use `/* */` to comment a block or multiple lines:
+- 使用 `/* */` 注释一个块或多行：
 
    {{< copyable "sql" >}}
 
@@ -98,46 +98,46 @@ TiDB supports three comment styles:
     1 row in set (0.001 sec)
     ```
 
-## MySQL-compatible comment syntax
+## MySQL 兼容的注释语法
 
-The same as MySQL, TiDB supports a variant of C comment style:
-
-```
-/*! Specific code */
-```
-
-or
+与 MySQL 一样，TiDB 支持 C 风格注释语法的变体：
 
 ```
-/*!50110 Specific code */
+/*! 特定代码 */
 ```
 
-In this style, TiDB runs the statements in the comment.
+或
 
-For example:
+```
+/*!50110 特定代码 */
+```
+
+在这种风格中，TiDB 会执行注释中的语句。
+
+例如：
 
 ```sql
 SELECT /*! STRAIGHT_JOIN */ col1 FROM table1,table2 WHERE ...
 ```
 
-In TiDB, you can also use another version:
+在 TiDB 中，你也可以使用另一个版本：
 
 ```sql
 SELECT STRAIGHT_JOIN col1 FROM table1,table2 WHERE ...
 ```
 
-If the server version number is specified in the comment, for example, `/*!50110 KEY_BLOCK_SIZE=1024 */`, in MySQL it means that the contents in this comment are processed only when the MySQL version is or higher than 5.1.10. But in TiDB, the MySQL version number does not work and all contents in the comment are processed.
+如果在注释中指定了服务器版本号，例如 `/*!50110 KEY_BLOCK_SIZE=1024 */`，在 MySQL 中这意味着只有当 MySQL 版本是或高于 5.1.10 时才处理此注释中的内容。但在 TiDB 中，MySQL 版本号不起作用，注释中的所有内容都会被处理。
 
-## TiDB specific comment syntax
+## TiDB 特有的注释语法
 
-TiDB has its own comment syntax (that is, TiDB specific comment syntax), which can be divided into the following two types:
+TiDB 有自己的注释语法（即 TiDB 特有的注释语法），可以分为以下两种：
 
-* `/*T! Specific code */`: This syntax can only be parsed and executed by TiDB, and be ignored in other databases.
-* `/*T![feature_id] Specific code */`: This syntax is used to ensure compatibility between different versions of TiDB. TiDB can parse the SQL fragment in this comment only if it implements the corresponding feature of `feature_id` in the current version. For example, as the `AUTO_RANDOM` feature is introduced in v3.1.1, this version of TiDB can parse `/*T![auto_rand] auto_random */` into `auto_random`. Because the `AUTO_RANDOM` feature is not implemented in v3.0.0, the SQL statement fragment above is ignored. **Do not leave any space inside the `/*T![` characters**.
+* `/*T! 特定代码 */`：这种语法只能被 TiDB 解析和执行，在其他数据库中会被忽略。
+* `/*T![feature_id] 特定代码 */`：这种语法用于确保不同版本的 TiDB 之间的兼容性。TiDB 只有在当前版本实现了相应的 `feature_id` 功能时才能解析这个注释中的 SQL 片段。例如，由于 `AUTO_RANDOM` 功能是在 v3.1.1 中引入的，因此这个版本的 TiDB 可以将 `/*T![auto_rand] auto_random */` 解析为 `auto_random`。因为 v3.0.0 中没有实现 `AUTO_RANDOM` 功能，所以上述 SQL 语句片段会被忽略。**不要在 `/*T![` 字符内留有任何空格**。
 
-## Optimizer comment syntax
+## 优化器注释语法
 
-Another type of comment is specially treated as an optimizer hint:
+另一种注释类型被特别处理为优化器提示：
 
 {{< copyable "sql" >}}
 
@@ -145,10 +145,10 @@ Another type of comment is specially treated as an optimizer hint:
 SELECT /*+ hint */ FROM ...;
 ```
 
-For details about the optimizer hints that TiDB supports, see [Optimizer hints](/optimizer-hints.md).
+关于 TiDB 支持的优化器提示的详细信息，请参见[优化器提示](/optimizer-hints.md)。
 
-> **Note:**
+> **注意：**
 >
-> In MySQL client, the TiDB-specific comment syntax is treated as comments and cleared by default. In MySQL client before 5.7.7, hints are also seen as comments and are cleared by default. It is recommended to use the `--comments` option when you start the client. For example, `mysql -h 127.0.0.1 -P 4000 -uroot --comments`.
+> 在 MySQL 客户端中，TiDB 特有的注释语法默认被视为注释并被清除。在 MySQL 5.7.7 之前的客户端中，提示也被视为注释并默认被清除。建议在启动客户端时使用 `--comments` 选项。例如，`mysql -h 127.0.0.1 -P 4000 -uroot --comments`。
 
-For more information, see [Comment Syntax](https://dev.mysql.com/doc/refman/8.0/en/comments.html).
+更多信息，请参见 [Comment Syntax](https://dev.mysql.com/doc/refman/8.0/en/comments.html)。

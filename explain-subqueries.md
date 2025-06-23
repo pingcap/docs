@@ -1,13 +1,13 @@
 ---
-title: Explain Statements That Use Subqueries
-summary: Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
+title: 解释使用子查询的语句
+summary: 了解 TiDB 中 EXPLAIN 语句返回的执行计划信息。
 ---
 
-# Explain Statements That Use Subqueries
+# 解释使用子查询的语句
 
-TiDB performs [several optimizations](/subquery-optimization.md) to improve the performance of subqueries. This document describes some of these optimizations for common subqueries and how to interpret the output of `EXPLAIN`.
+TiDB 执行[多种优化](/subquery-optimization.md)来提高子查询的性能。本文档描述了一些常见子查询的优化方法，以及如何解释 `EXPLAIN` 的输出。
 
-The examples in this document are based on the following sample data:
+本文档中的示例基于以下示例数据：
 
 ```sql
 CREATE TABLE t1 (id BIGINT NOT NULL PRIMARY KEY auto_increment, pad1 BLOB, pad2 BLOB, pad3 BLOB, int_col INT NOT NULL DEFAULT 0);
@@ -45,9 +45,9 @@ SELECT SLEEP(1);
 ANALYZE TABLE t1, t2, t3;
 ```
 
-## Inner join (non-unique subquery)
+## 内连接（非唯一子查询）
 
-In the following example, the `IN` subquery searches for a list of IDs from the table `t2`. For semantic correctness, TiDB needs to guarantee that the column `t1_id` is unique. Using `EXPLAIN`, you can see the execution plan used to remove duplicates and perform an `INNER JOIN` operation:
+在以下示例中，`IN` 子查询从表 `t2` 中搜索 ID 列表。为了语义正确性，TiDB 需要保证列 `t1_id` 是唯一的。使用 `EXPLAIN`，你可以看到用于删除重复项并执行 `INNER JOIN` 操作的执行计划：
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2);
@@ -67,16 +67,16 @@ EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2);
 +--------------------------------+----------+-----------+------------------------------+---------------------------------------------------------------------------------------------------------------------------+
 ```
 
-From the query results above, you can see that TiDB uses the index join operation `IndexJoin_15` to join and transform the subquery. In the execution plan, the execution process is as follows:
+从上面的查询结果中，你可以看到 TiDB 使用索引连接操作 `IndexJoin_15` 来连接和转换子查询。在执行计划中，执行过程如下：
 
-1. The index scanning operator `└─IndexFullScan_26` at the TiKV side reads the values of the `t2.t1_id` column.
-2. Some tasks of the `└─StreamAgg_34` operator deduplicate the values of `t1_id` in TiKV.
-3. Some tasks of the `├─StreamAgg_44(Build)` operator deduplicate the values of `t1_id` in TiDB. The deduplication is performed by the aggregate function `firstrow(test.t2.t1_id)`.
-4. The operation results are joined with the primary key of the `t1` table. The join condition is `eq(test.t1.id, test.t2.t1_id)`.
+1. TiKV 端的索引扫描算子 `└─IndexFullScan_26` 读取 `t2.t1_id` 列的值。
+2. TiKV 中的 `└─StreamAgg_34` 算子任务对 `t1_id` 的值进行去重。
+3. TiDB 中的 `├─StreamAgg_44(Build)` 算子任务对 `t1_id` 的值进行去重。去重是通过聚合函数 `firstrow(test.t2.t1_id)` 完成的。
+4. 操作结果与 `t1` 表的主键进行连接。连接条件是 `eq(test.t1.id, test.t2.t1_id)`。
 
-## Inner join (unique subquery)
+## 内连接（唯一子查询）
 
-In the previous example, aggregation is required to ensure that the values of `t1_id` are unique before joining against the table `t1`. But in the following example, `t3.t1_id` is already guaranteed unique because of a `UNIQUE` constraint:
+在前面的示例中，在与表 `t1` 连接之前需要聚合以确保 `t1_id` 的值是唯一的。但在以下示例中，由于 `UNIQUE` 约束，`t3.t1_id` 已经保证是唯一的：
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t3);
@@ -94,13 +94,13 @@ EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t3);
 +-----------------------------+---------+-----------+------------------------------+---------------------------------------------------------------------------------------------------------------------------+
 ```
 
-Semantically because `t3.t1_id` is guaranteed unique, it can be executed directly as an `INNER JOIN`.
+从语义上讲，因为 `t3.t1_id` 保证是唯一的，所以它可以直接作为 `INNER JOIN` 执行。
 
-## Semi join (correlated subquery)
+## 半连接（相关子查询）
 
-In the previous two examples, TiDB is able to perform an `INNER JOIN` operation after the data inside the subquery is made unique (via `StreamAgg`) or guaranteed unique. Both joins are performed using an Index Join.
+在前面的两个示例中，TiDB 能够在子查询中的数据变得唯一（通过 `StreamAgg`）或保证唯一后执行 `INNER JOIN` 操作。两个连接都使用索引连接执行。
 
-In this example, TiDB chooses a different execution plan:
+在这个示例中，TiDB 选择了不同的执行计划：
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2 WHERE t1_id != t1.int_col);
@@ -119,13 +119,13 @@ EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2 WHERE t1_id != t1.int
 +-----------------------------+----------+-----------+------------------------------+--------------------------------------------------------------------------------------------------------+
 ```
 
-From the result above, you can see that TiDB uses a `Semi Join` algorithm. Semi-join differs from inner join: semi-join only permits the first value on the right key (`t2.t1_id`), which means that the duplicates are eliminated as a part of the join operator task. The join algorithm is also Merge Join, which is like an efficient zipper-merge as the operator reads data from both the left and the right side in sorted order.
+从上面的结果中，你可以看到 TiDB 使用了 `Semi Join` 算法。半连接与内连接不同：半连接只允许右键（`t2.t1_id`）上的第一个值，这意味着重复项作为连接算子任务的一部分被消除。连接算法也是归并连接，就像一个高效的拉链合并，因为算子按排序顺序从左右两侧读取数据。
 
-The original statement is considered a _correlated subquery_, because the subquery refers to a column (`t1.int_col`) that exists outside of the subquery. However, the output of `EXPLAIN` shows the execution plan after the [subquery decorrelation optimization](/correlated-subquery-optimization.md) has been applied. The condition `t1_id != t1.int_col` is rewritten to `t1.id != t1.int_col`. TiDB can perform this in `└─Selection_21` as it is reading data from the table `t1`, so this decorrelation and rewriting make the execution a lot more efficient.
+原始语句被认为是一个_相关子查询_，因为子查询引用了子查询外部存在的列（`t1.int_col`）。但是，`EXPLAIN` 的输出显示了应用[子查询去相关优化](/correlated-subquery-optimization.md)后的执行计划。条件 `t1_id != t1.int_col` 被重写为 `t1.id != t1.int_col`。TiDB 可以在读取表 `t1` 的数据时在 `└─Selection_21` 中执行此操作，因此这种去相关和重写使执行效率更高。
 
-## Anti semi join (`NOT IN` subquery)
+## 反半连接（`NOT IN` 子查询）
 
-In the following example, the query semantically returns all rows from the table `t3` _unless_ `t3.t1_id` is in the subquery:
+在以下示例中，查询语义上返回表 `t3` 中的所有行，_除非_ `t3.t1_id` 在子查询中：
 
 ```sql
 EXPLAIN SELECT * FROM t3 WHERE t1_id NOT IN (SELECT id FROM t1 WHERE int_col < 100);
@@ -144,13 +144,13 @@ EXPLAIN SELECT * FROM t3 WHERE t1_id NOT IN (SELECT id FROM t1 WHERE int_col < 1
 +-----------------------------+---------+-----------+---------------+-------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-This query starts by reading the table `t3` and then probes the table `t1` based on the `PRIMARY KEY`. The join type is an _anti semi join_; anti because this example is for the non-existence of the value (`NOT IN`) and semi-join because only the first row needs to match before the join is rejected.
+这个查询首先读取表 `t3`，然后根据 `PRIMARY KEY` 探测表 `t1`。连接类型是一个_反半连接_；反是因为这个示例是针对值的不存在（`NOT IN`），半连接是因为只需要第一行匹配就可以拒绝连接。
 
-## Null-aware semi join (`IN` and `= ANY` subqueries)
+## 空值感知半连接（`IN` 和 `= ANY` 子查询）
 
-The value of the `IN` or `= ANY` set operator is three-valued (`true`, `false`, and `NULL`). For the join type converted from either of the two operators, TiDB needs to be aware of the `NULL` on both sides of the join key and process it in a special way.
+`IN` 或 `= ANY` 集合运算符的值是三值的（`true`、`false` 和 `NULL`）。对于从这两个运算符转换而来的连接类型，TiDB 需要感知连接键两侧的 `NULL` 并以特殊方式处理。
 
-Subqueries containing `IN` and `= ANY` operators are converted to semi join and left outer semi join respectively. In the preceding example of [Semi join](#semi-join-correlated-subquery), since columns `test.t1.id` and `test.t2.t1_id` on both sides of the join key are `not NULL`, the semi join does not need to be considered as null-aware (`NULL` is not processed specially). TiDB processes the null-aware semi join based on the Cartesian product and filter without special optimization. The following is an example:
+包含 `IN` 和 `= ANY` 运算符的子查询分别转换为半连接和左外半连接。在前面的[半连接](#半连接相关子查询)示例中，由于连接键两侧的列 `test.t1.id` 和 `test.t2.t1_id` 都是 `not NULL`，因此半连接不需要考虑空值感知（不需要特殊处理 `NULL`）。TiDB 基于笛卡尔积和过滤器处理空值感知半连接，没有特殊优化。以下是一个示例：
 
 ```sql
 CREATE TABLE t(a INT, b INT);
@@ -188,33 +188,33 @@ tidb> EXPLAIN SELECT * FROM t WHERE (a,b) IN (SELECT * FROM s);
 8 rows in set (0.01 sec)
 ```
 
-In the first query statement `EXPLAIN SELECT (a,b) IN (SELECT * FROM s) FROM t;`, since columns `a` and `b` of tables `t` and `s` are NULLABLE, the left outer semi join converted by the `IN` subquery is null-aware. Specifically, the Cartesian product is calculated first, then the column connected by `IN` or `= ANY` is put into other conditions as a normal equality query for filtering.
+在第一个查询语句 `EXPLAIN SELECT (a,b) IN (SELECT * FROM s) FROM t;` 中，由于表 `t` 和 `s` 的列 `a` 和 `b` 都是 NULLABLE，由 `IN` 子查询转换的左外半连接是空值感知的。具体来说，首先计算笛卡尔积，然后将由 `IN` 或 `= ANY` 连接的列作为普通相等查询放入其他条件中进行过滤。
 
-In the second query statement `EXPLAIN SELECT * FROM t WHERE (a,b) IN (SELECT * FROM s);`, since columns `a` and `b` of tables `t` and `s` are NULLABLE, the `IN` subquery should have been converted to a null-aware semi join. But TiDB optimizes it by converting semi join to inner join and aggregate. This is because `NULL` and `false` are equivalent in `IN` subqueries for non-scalar output. The `NULL` rows in the push-down filter results in the negative semantics of the `WHERE` clause. Therefore, these rows can be ignored beforehand.
+在第二个查询语句 `EXPLAIN SELECT * FROM t WHERE (a,b) IN (SELECT * FROM s);` 中，由于表 `t` 和 `s` 的列 `a` 和 `b` 都是 NULLABLE，`IN` 子查询应该转换为空值感知半连接。但是 TiDB 通过将半连接转换为内连接和聚合来优化它。这是因为对于非标量输出，`IN` 子查询中的 `NULL` 和 `false` 是等价的。下推过滤器中的 `NULL` 行导致 `WHERE` 子句的负面语义。因此，可以提前忽略这些行。
 
-> **Note:**
+> **注意：**
 >
-> The `Exists` operator is also converted to semi join, but it is not null-aware.
+> `Exists` 运算符也转换为半连接，但它不是空值感知的。
 
-## Null-aware anti semi join (`NOT IN` and `!= ALL` subqueries)
+## 空值感知反半连接（`NOT IN` 和 `!= ALL` 子查询）
 
-The value of the `NOT IN` or `!= ALL` set operator is three-valued (`true`, `false`, and `NULL`). For the join type converted from either of the two operators, TiDB needs to be aware of the `NULL` on both sides of the join key and process it in a special way.
+`NOT IN` 或 `!= ALL` 集合运算符的值是三值的（`true`、`false` 和 `NULL`）。对于从这两个运算符转换而来的连接类型，TiDB 需要感知连接键两侧的 `NULL` 并以特殊方式处理。
 
-Subqueries containing `NOT IN` and `! = ALL` operators are converted to anti semi join and anti left outer semi join respectively. In the preceding example of [Anti semi join](#anti-semi-join-not-in-subquery), since columns `test.t3.t1_id` and `test.t1.id` on both sides of the join key are `not NULL`, the anti semi join does not need to be considered as null-aware (`NULL` is not processed specially).
+包含 `NOT IN` 和 `!= ALL` 运算符的子查询分别转换为反半连接和反左外半连接。在前面的[反半连接](#反半连接not-in-子查询)示例中，由于连接键两侧的列 `test.t3.t1_id` 和 `test.t1.id` 都是 `not NULL`，因此反半连接不需要考虑空值感知（不需要特殊处理 `NULL`）。
 
-TiDB v6.3.0 optimizes null-aware anti join (NAAJ) as follows:
+TiDB v6.3.0 对空值感知反连接（NAAJ）进行了以下优化：
 
-- Build hash join using the null-aware equality condition (NA-EQ)
+- 使用空值感知相等条件（NA-EQ）构建哈希连接
 
-    Set operators introduce the equality condition, which requires a special process for the `NULL` value of operators on both sides of the condition. The equality condition that requires null-aware is called NA-EQ. Different from earlier versions, TiDB v6.3.0 no longer processes NA-EQ as before, but places it in other conditions after join, and then determines the legitimacy of the result set after matching the Cartesian product.
+    集合运算符引入了相等条件，该条件需要对运算符两侧的 `NULL` 值进行特殊处理。需要空值感知的相等条件称为 NA-EQ。与早期版本不同，TiDB v6.3.0 不再像以前那样处理 NA-EQ，而是将其放在连接后的其他条件中，然后在匹配笛卡尔积后确定结果集的合法性。
 
-    Since TiDB v6.3.0, NA-EQ, a weakened equality condition, is still used to build hash join. This reduces the matching amount of data that needs to be traversed and speeds up the matching process. The acceleration is more significant when the percentage of total `DISTINCT()` values of the build table is almost 100%.
+    从 TiDB v6.3.0 开始，仍然使用 NA-EQ（一个弱化的相等条件）来构建哈希连接。这减少了需要遍历的匹配数据量，加快了匹配过程。当构建表的 `DISTINCT()` 值总百分比接近 100% 时，加速效果更显著。
 
-- Speed up the return of matching results using the special property of `NULL`
+- 利用 `NULL` 的特殊属性加快匹配结果的返回
 
-    Since anti semi join is a conjunctive normal form (CNF), a `NULL` on either side of the join leads to a definite result. This property can be used to speed up the return of the entire matching process.
+    由于反半连接是合取范式（CNF），连接任一侧的 `NULL` 都会导致确定的结果。可以利用这个属性来加快整个匹配过程的返回。
 
-The following is an example:
+以下是一个示例：
 
 ```sql
 CREATE TABLE t(a INT, b INT);
@@ -249,22 +249,22 @@ tidb> EXPLAIN SELECT * FROM t WHERE (a, b) NOT IN (SELECT * FROM s);
 5 rows in set (0.00 sec)
 ```
 
-In the first query statement `EXPLAIN SELECT (a, b) NOT IN (SELECT * FROM s) FROM t;`, since columns `a` and `b` of tables `t` and `s` are NULLABLE, the left outer semi join converted by `NOT IN` subquery is null-aware. The difference is that NAAJ optimization also uses the NA-EQ as the hash join condition, which greatly speeds up the join calculation.
+在第一个查询语句 `EXPLAIN SELECT (a, b) NOT IN (SELECT * FROM s) FROM t;` 中，由于表 `t` 和 `s` 的列 `a` 和 `b` 都是 NULLABLE，由 `NOT IN` 子查询转换的左外半连接是空值感知的。不同之处在于 NAAJ 优化也使用 NA-EQ 作为哈希连接条件，这大大加快了连接计算。
 
-In the second query statement `EXPLAIN SELECT * FROM t WHERE (a, b) NOT IN (SELECT * FROM s);`, since columns `a` and `b` of tables `t` and `s` are NULLABLE, the anti semi join converted by `NOT IN` subquery is null-aware. The difference is that NAAJ optimization also uses the NA-EQ as the hash join condition, which greatly speeds up the join calculation.
+在第二个查询语句 `EXPLAIN SELECT * FROM t WHERE (a, b) NOT IN (SELECT * FROM s);` 中，由于表 `t` 和 `s` 的列 `a` 和 `b` 都是 NULLABLE，由 `NOT IN` 子查询转换的反半连接是空值感知的。不同之处在于 NAAJ 优化也使用 NA-EQ 作为哈希连接条件，这大大加快了连接计算。
 
-Currently, TiDB can only be null-aware of anti semi join and anti left outer semi join. Only the hash join type is supported and its build table should be fixed to the right table.
+目前，TiDB 只能对反半连接和反左外半连接进行空值感知。只支持哈希连接类型，并且其构建表应固定为右表。
 
-> **Note:**
+> **注意：**
 >
-> The `Not Exists` operator is also converted to the anti semi join, but it is not null-aware.
+> `Not Exists` 运算符也转换为反半连接，但它不是空值感知的。
 
-## Explain statements using other types of subqueries
+## 解释使用其他类型子查询的语句
 
-+ [Explain Statements in the MPP Mode](/explain-mpp.md)
-+ [Explain Statements That Use Indexes](/explain-indexes.md)
-+ [Explain Statements That Use Joins](/explain-joins.md)
-+ [Explain Statements That Use Aggregation](/explain-aggregation.md)
-+ [Explain Statements Using Views](/explain-views.md)
-+ [Explain Statements Using Partitions](/explain-partitions.md)
-+ [Explain Statements Using Index Merge](/explain-index-merge.md)
++ [解释 MPP 模式下的语句](/explain-mpp.md)
++ [解释使用索引的语句](/explain-indexes.md)
++ [解释使用连接的语句](/explain-joins.md)
++ [解释使用聚合的语句](/explain-aggregation.md)
++ [解释使用视图的语句](/explain-views.md)
++ [解释使用分区的语句](/explain-partitions.md)
++ [解释使用索引合并的语句](/explain-index-merge.md)

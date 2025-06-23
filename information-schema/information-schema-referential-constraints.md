@@ -1,18 +1,18 @@
 ---
 title: REFERENTIAL_CONSTRAINTS
-summary: Learn the `REFERENTIAL_CONSTRAINTS` INFORMATION_SCHEMA table.
+summary: 了解 `REFERENTIAL_CONSTRAINTS` INFORMATION_SCHEMA 表。
 ---
 
 # REFERENTIAL_CONSTRAINTS
 
-The `REFERENTIAL_CONSTRAINTS` table provides information about [`FOREIGN KEY`](/foreign-key.md) relationships between tables.
+`REFERENTIAL_CONSTRAINTS` 表提供了表之间的 [`FOREIGN KEY`](/foreign-key.md)（外键）关系信息。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC REFERENTIAL_CONSTRAINTS;
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 +---------------------------+--------------+------+------+---------+-------+
@@ -25,8 +25,8 @@ The output is as follows:
 | UNIQUE_CONSTRAINT_SCHEMA  | varchar(64)  | NO   |      | NULL    |       |
 | UNIQUE_CONSTRAINT_NAME    | varchar(64)  | YES  |      | NULL    |       |
 | MATCH_OPTION              | varchar(64)  | NO   |      | NULL    |       |
-| UPDATE_RULE               | varchar(64)  | NO   |      | NULL    |       |
-| DELETE_RULE               | varchar(64)  | NO   |      | NULL    |       |
+| UPDATE_RULE              | varchar(64)  | NO   |      | NULL    |       |
+| DELETE_RULE              | varchar(64)  | NO   |      | NULL    |       |
 | TABLE_NAME                | varchar(64)  | NO   |      | NULL    |       |
 | REFERENCED_TABLE_NAME     | varchar(64)  | NO   |      | NULL    |       |
 +---------------------------+--------------+------+------+---------+-------+
@@ -50,7 +50,7 @@ CREATE TABLE test.child (
 SELECT * FROM REFERENTIAL_CONSTRAINTS\G
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 *************************** 1. row ***************************

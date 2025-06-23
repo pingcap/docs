@@ -1,63 +1,63 @@
 ---
-title: SQL Non-Prepared Execution Plan Cache
-summary: Learn about the principle, usage, and examples of the SQL non-prepared execution plan cache in TiDB.
+title: SQL 非预处理执行计划缓存
+summary: 了解 TiDB 中 SQL 非预处理执行计划缓存的原理、用法和示例。
 ---
 
-# SQL Non-Prepared Execution Plan Cache
+# SQL 非预处理执行计划缓存
 
-TiDB supports execution plan caching for some non-`PREPARE` statements, similar to the [`Prepare`/`Execute` statements](/sql-prepared-plan-cache.md). This feature allows these statements to skip the optimization phase and improve performance.
+TiDB 支持对某些非 `PREPARE` 语句进行执行计划缓存，类似于 [`Prepare`/`Execute` 语句](/sql-prepared-plan-cache.md)。此功能允许这些语句跳过优化阶段并提高性能。
 
-Enabling the non-prepared plan cache might incur additional memory and CPU overhead and might not be suitable for all situations. To determine whether to enable this feature in your scenario, refer to the [Performance benefits](#performance-benefits) and [Memory monitoring](#monitoring) sections.
+启用非预处理计划缓存可能会带来额外的内存和 CPU 开销，可能并不适合所有情况。要确定是否在你的场景中启用此功能，请参考[性能优势](#性能优势)和[内存监控](#监控)部分。
 
-## Principle
+## 原理
 
-The non-prepared plan cache is a session-level feature that shares a cache with the [prepared plan cache](/sql-prepared-plan-cache.md). The basic principle of the non-prepared plan cache is as follows:
+非预处理计划缓存是一个会话级别的功能，与[预处理计划缓存](/sql-prepared-plan-cache.md)共享一个缓存。非预处理计划缓存的基本原理如下：
 
-1. After you enable the non-prepared plan cache, TiDB first parameterizes the query based on the abstract syntax tree (AST). For example, `SELECT * FROM t WHERE b < 10 AND a = 1` is parameterized as `SELECT * FROM t WHERE b < ? and a = ?`.
-2. Then, TiDB uses the parameterized query to search the plan cache.
-3. If a reusable plan is found, it is directly used and the optimization phase is skipped.
-4. Otherwise, the optimizer generates a new plan and adds it back into the cache for reuse in the subsequent query.
+1. 启用非预处理计划缓存后，TiDB 首先基于抽象语法树（AST）对查询进行参数化。例如，`SELECT * FROM t WHERE b < 10 AND a = 1` 被参数化为 `SELECT * FROM t WHERE b < ? and a = ?`。
+2. 然后，TiDB 使用参数化的查询在计划缓存中搜索。
+3. 如果找到可重用的计划，则直接使用它并跳过优化阶段。
+4. 否则，优化器生成一个新计划并将其添加回缓存中，以供后续查询重用。
 
-## Usage
+## 用法
 
-To enable or disable the non-prepared plan cache, you can set the [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache) system variable. You can also control the size of the non-prepared plan cache using the [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710) system variable. When the number of cached plans exceeds `tidb_session_plan_cache_size`, TiDB evicts plans using the least recently used (LRU) strategy.
+要启用或禁用非预处理计划缓存，你可以设置 [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache) 系统变量。你还可以使用 [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710) 系统变量控制非预处理计划缓存的大小。当缓存的计划数量超过 `tidb_session_plan_cache_size` 时，TiDB 使用最近最少使用（LRU）策略淘汰计划。
 
-Starting from v7.1.0, you can control the maximum size of a plan that can be cached using the system variable [`tidb_plan_cache_max_plan_size`](/system-variables.md#tidb_plan_cache_max_plan_size-new-in-v710). The default value is 2 MB. If the size of a plan exceeds this value, the plan will not be cached.
+从 v7.1.0 开始，你可以使用系统变量 [`tidb_plan_cache_max_plan_size`](/system-variables.md#tidb_plan_cache_max_plan_size-new-in-v710) 控制可以缓存的计划的最大大小。默认值为 2 MB。如果计划的大小超过此值，则不会缓存该计划。
 
-> **Note:**
+> **注意：**
 >
-> The memory specified by `tidb_session_plan_cache_size` is shared between the prepared and non-prepared plan cache. If you have enabled the prepared plan cache for the current cluster, enabling the non-prepared plan cache might reduce the hit rate of the original prepared plan cache.
+> `tidb_session_plan_cache_size` 指定的内存在预处理和非预处理计划缓存之间共享。如果你已经为当前集群启用了预处理计划缓存，启用非预处理计划缓存可能会降低原有预处理计划缓存的命中率。
 
-## Example
+## 示例
 
-The following example shows how to use the non-prepared plan cache:
+以下示例展示如何使用非预处理计划缓存：
 
-1. Create a table `t` for testing:
+1. 创建一个测试表 `t`：
 
     ```sql
     CREATE TABLE t (a INT, b INT, KEY(b));
     ```
 
-2. Enable the non-prepared plan cache:
+2. 启用非预处理计划缓存：
 
     ```sql
     SET tidb_enable_non_prepared_plan_cache = ON;
     ```
 
-3. Execute the following two queries:
+3. 执行以下两个查询：
 
     ```sql
     SELECT * FROM t WHERE b < 10 AND a = 1;
     SELECT * FROM t WHERE b < 5 AND a = 2;
     ```
 
-4. Check whether the second query hits the cache:
+4. 检查第二个查询是否命中缓存：
 
     ```sql
     SELECT @@last_plan_from_cache;
     ```
 
-    If the value of `last_plan_from_cache` in the output is `1`, it means that the execution plan of the second query comes from the cache:
+    如果输出中 `last_plan_from_cache` 的值为 `1`，表示第二个查询的执行计划来自缓存：
 
     ```sql
     +------------------------+
@@ -68,66 +68,66 @@ The following example shows how to use the non-prepared plan cache:
     1 row in set (0.00 sec)
     ```
 
-## Restrictions
+## 限制
 
-### Cache suboptimal plans
+### 缓存次优计划
 
-TiDB only caches one plan for a parameterized query. For example, the queries `SELECT * FROM t WHERE a < 1` and `SELECT * FROM t WHERE a < 100000` share the same parameterized form, `SELECT * FROM t WHERE a < ?`, and thus share the same plan.
+TiDB 对于一个参数化查询只缓存一个计划。例如，查询 `SELECT * FROM t WHERE a < 1` 和 `SELECT * FROM t WHERE a < 100000` 共享相同的参数化形式 `SELECT * FROM t WHERE a < ?`，因此共享相同的计划。
 
-If this causes performance issues, you can use the `ignore_plan_cache()` hint to ignore plans in the cache, so that the optimizer generates a new execution plan for the SQL every time. If the SQL cannot be modified, you can create a binding to solve the problem. For example, `CREATE BINDING FOR SELECT ... USING SELECT /*+ ignore_plan_cache() */ ...`.
+如果这导致性能问题，你可以使用 `ignore_plan_cache()` 提示来忽略缓存中的计划，这样优化器每次都会为该 SQL 生成新的执行计划。如果无法修改 SQL，你可以创建绑定来解决问题。例如，`CREATE BINDING FOR SELECT ... USING SELECT /*+ ignore_plan_cache() */ ...`。
 
-### Usage restrictions
+### 使用限制
 
-Due to the preceding risks and the fact that the execution plan cache only provides significant benefits for simple queries (if a query is complex and takes a long time to execute, using the execution plan cache might not be very helpful), TiDB has strict restrictions on the scope of non-prepared plan cache. The restrictions are as follows:
+由于上述风险，以及执行计划缓存仅对简单查询提供显著优势（如果查询复杂且执行时间较长，使用执行计划缓存可能帮助不大），TiDB 对非预处理计划缓存的范围有严格限制。限制如下：
 
-- Queries or plans that are not supported by the [Prepared plan cache](/sql-prepared-plan-cache.md) are also not supported by the non-prepared plan cache.
-- Queries that contain complex operators such as `Window` or `Having` are not supported.
-- Queries that contain three or more `Join` tables or subqueries are not supported.
-- Queries that contain numbers or expressions directly after `ORDER BY` or `GROUP BY` are not supported, such as `ORDER BY 1` and `GROUP BY a+1`. Only `ORDER BY column_name` and `GROUP BY column_name` are supported.
-- Queries that filter on columns of `JSON`, `ENUM`, `SET`, or `BIT` type are not supported, such as `SELECT * FROM t WHERE json_col = '{}'`.
-- Queries that filter on `NULL` values are not supported, such as `SELECT * FROM t WHERE a is NULL`.
-- Queries with more than 200 parameters after parameterization are not supported by default, such as `SELECT * FROM t WHERE a in (1, 2, 3, ... 201)`. Starting from v7.3.0, you can modify this limit by setting the [`44823`](/optimizer-fix-controls.md#44823-new-in-v730) fix in the [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710) system variable.
-- Queries that access virtual columns, temporary tables, views, or memory tables are not supported, such as `SELECT * FROM INFORMATION_SCHEMA.COLUMNS`, where `COLUMNS` is a TiDB memory table.
-- Queries with hints or bindings are not supported.
-- DML statements or `SELECT` statements with the `FOR UPDATE` clause are not supported by default. To remove this restriction, you can execute `SET tidb_enable_non_prepared_plan_cache_for_dml = ON`.
+- [预处理计划缓存](/sql-prepared-plan-cache.md)不支持的查询或计划，非预处理计划缓存也不支持。
+- 不支持包含 `Window` 或 `Having` 等复杂运算符的查询。
+- 不支持包含三个或更多 `Join` 表或子查询的查询。
+- 不支持在 `ORDER BY` 或 `GROUP BY` 后直接包含数字或表达式的查询，如 `ORDER BY 1` 和 `GROUP BY a+1`。仅支持 `ORDER BY column_name` 和 `GROUP BY column_name`。
+- 不支持对 `JSON`、`ENUM`、`SET` 或 `BIT` 类型列进行过滤的查询，如 `SELECT * FROM t WHERE json_col = '{}'`。
+- 不支持对 `NULL` 值进行过滤的查询，如 `SELECT * FROM t WHERE a is NULL`。
+- 默认不支持参数化后参数超过 200 个的查询，如 `SELECT * FROM t WHERE a in (1, 2, 3, ... 201)`。从 v7.3.0 开始，你可以通过在 [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710) 系统变量中设置 [`44823`](/optimizer-fix-controls.md#44823-new-in-v730) 修复来修改此限制。
+- 不支持访问虚拟列、临时表、视图或内存表的查询，如 `SELECT * FROM INFORMATION_SCHEMA.COLUMNS`，其中 `COLUMNS` 是 TiDB 内存表。
+- 不支持带有提示或绑定的查询。
+- 默认不支持 DML 语句或带有 `FOR UPDATE` 子句的 `SELECT` 语句。要移除此限制，你可以执行 `SET tidb_enable_non_prepared_plan_cache_for_dml = ON`。
 
-After you enable this feature, the optimizer quickly evaluates the query. If it does not meet the support conditions for non-prepared plan cache, the query falls back to the regular optimization process.
+启用此功能后，优化器会快速评估查询。如果不满足非预处理计划缓存的支持条件，查询会回退到常规优化过程。
 
-## Performance benefits
+## 性能优势
 
-In internal tests, enabling the non-prepared plan cache feature can achieve significant performance benefits in most TP scenarios. For example, a performance improvement of about 4% in TPC-C tests, over 10% in some banking workloads, and 15% in Sysbench RangeScan.
+在内部测试中，启用非预处理计划缓存功能在大多数 TP 场景下都能获得显著的性能优势。例如，在 TPC-C 测试中性能提升约 4%，在某些银行工作负载中提升超过 10%，在 Sysbench RangeScan 中提升 15%。
 
-However, this feature also introduces some additional memory and CPU overhead, including determining whether the query is supported, parameterizing the query, and searching for a plan in the cache. If the cache cannot hit the majority of queries in your workload, enabling it might actually adversely affect performance.
+然而，此功能也会带来一些额外的内存和 CPU 开销，包括确定查询是否受支持、参数化查询和在缓存中搜索计划。如果缓存无法命中你工作负载中的大多数查询，启用它可能实际上会对性能产生不利影响。
 
-In this case, you need to observe the `non-prepared` metric in the **Queries Using Plan Cache OPS** panel and the `non-prepared-unsupported` metric in the **Plan Cache Miss OPS** panel on Grafana. If most queries are not supported and only a few can hit the plan cache, you can disable this feature.
+在这种情况下，你需要观察 Grafana 上 **Queries Using Plan Cache OPS** 面板中的 `non-prepared` 指标和 **Plan Cache Miss OPS** 面板中的 `non-prepared-unsupported` 指标。如果大多数查询不受支持，只有少数能命中计划缓存，你可以禁用此功能。
 
 ![non-prepared-unsupported](/media/non-prepapred-plan-cache-unsupprot.png)
 
-## Diagnostics
+## 诊断
 
-After enabling the non-prepared plan cache, you can execute the `EXPLAIN FORMAT='plan_cache' SELECT ...` statement to verify whether the query can hit the cache. For queries that cannot hit the cache, the system returns the reason in a warning.
+启用非预处理计划缓存后，你可以执行 `EXPLAIN FORMAT='plan_cache' SELECT ...` 语句来验证查询是否能命中缓存。对于无法命中缓存的查询，系统会在警告中返回原因。
 
-Note that if you do not add `FORMAT='plan_cache'`, the `EXPLAIN` statement will never hit the cache.
+请注意，如果你不添加 `FORMAT='plan_cache'`，`EXPLAIN` 语句将永远不会命中缓存。
 
-To verify whether the query hits the cache, execute the following `EXPLAIN FORMAT='plan_cache'` statement:
+要验证查询是否命中缓存，执行以下 `EXPLAIN FORMAT='plan_cache'` 语句：
 
 ```sql
 EXPLAIN FORMAT='plan_cache' SELECT * FROM (SELECT a+1 FROM t) t;
 ```
 
-The output is as follows:
+输出如下：
 
 ```sql
 3 rows in set, 1 warning (0.00 sec)
 ```
 
-To view the queries that cannot hit the cache, execute `SHOW warnings;`:
+要查看无法命中缓存的查询，执行 `SHOW warnings;`：
 
 ```sql
 SHOW warnings;
 ```
 
-The output is as follows:
+输出如下：
 
 ```sql
 +---------+------+-------------------------------------------------------------------------------+
@@ -138,29 +138,29 @@ The output is as follows:
 1 row in set (0.00 sec)
 ```
 
-In the preceding example, the query cannot hit the cache because the non-prepared plan cache does not support the `+` operation.
+在上述示例中，由于非预处理计划缓存不支持 `+` 操作，查询无法命中缓存。
 
-## Monitoring
+## 监控
 
-After enabling the non-prepared plan cache, you can monitor the memory usage, number of plans in the cache, and cache hit rate in the following panes:
+启用非预处理计划缓存后，你可以在以下面板中监控内存使用情况、缓存中的计划数量和缓存命中率：
 
 ![non-prepare-plan-cache](/media/tidb-non-prepared-plan-cache-metrics.png)
 
-You can also monitor the cache hit rate in the `statements_summary` table and slow query log. The following shows how to view the cache hit rate in the `statements_summary` table:
+你还可以在 `statements_summary` 表和慢查询日志中监控缓存命中率。以下展示如何在 `statements_summary` 表中查看缓存命中率：
 
-1. Create a table `t`:
+1. 创建表 `t`：
 
     ```sql
     CREATE TABLE t (a int);
     ```
 
-2. Enable the non-prepared plan cache:
+2. 启用非预处理计划缓存：
 
     ```sql
     SET @@tidb_enable_non_prepared_plan_cache=ON;
     ```
 
-3. Execute the following three queries:
+3. 执行以下三个查询：
 
     ```sql
     SELECT * FROM t WHERE a<1;
@@ -168,13 +168,13 @@ You can also monitor the cache hit rate in the `statements_summary` table and sl
     SELECT * FROM t WHERE a<3;
     ```
 
-4. Query the `statements_summary` table to view the cache hit rate:
+4. 查询 `statements_summary` 表以查看缓存命中率：
 
     ```sql
     SELECT digest_text, query_sample_text, exec_count, plan_in_cache, plan_cache_hits FROM INFORMATION_SCHEMA.STATEMENTS_SUMMARY WHERE query_sample_text LIKE '%SELECT * FROM %';
     ```
 
-    The output is as follows:
+    输出如下：
 
     ```sql
     +---------------------------------+------------------------------------------+------------+---------------+-----------------+
@@ -185,4 +185,4 @@ You can also monitor the cache hit rate in the `statements_summary` table and sl
     1 row in set (0.01 sec)
     ```
 
-    From the output, you can see that the query was executed three times and hit the cache twice.
+    从输出中可以看到，查询执行了三次，命中缓存两次。

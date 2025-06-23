@@ -1,50 +1,50 @@
 ---
-title: Use Knowledge Bases
-summary: Learn how to improve your Chat2Query results by using Chat2Query knowledge base APIs.
+title: 使用知识库
+summary: 了解如何通过使用 Chat2Query 知识库 API 来改进 Chat2Query 的查询结果。
 ---
 
-# Use Knowledge Bases
+# 使用知识库
 
-A knowledge base is a collection of structured data that can be used to enhance the SQL generation capabilities of Chat2Query.
+知识库是一组结构化数据的集合，可用于增强 Chat2Query 的 SQL 生成能力。
 
-Starting from v3, the Chat2Query API enables you to add or modify knowledge bases by calling knowledge base related endpoints of your Chat2Query Data App.
+从 v3 版本开始，Chat2Query API 允许你通过调用 Chat2Query Data App 的知识库相关端点来添加或修改知识库。
 
-> **Note:**
+> **注意：**
 >
-> Knowledge base related endpoints are available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters by default. To use knowledge base related endpoints on [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+> 知识库相关端点默认在 [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 集群上可用。如需在 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群上使用知识库相关端点，请联系 [TiDB Cloud 支持团队](/tidb-cloud/tidb-cloud-support.md)。
 
-## Before you begin
+## 开始之前
 
-Before creating a knowledge base for your database, make sure that you have the following:
+在为数据库创建知识库之前，请确保你已经具备以下条件：
 
-- A [Chat2Query Data App](/tidb-cloud/use-chat2query-api.md#create-a-chat2query-data-app)
-- An [API key for the Chat2Query Data App](/tidb-cloud/use-chat2query-api.md#create-an-api-key)
+- 一个 [Chat2Query Data App](/tidb-cloud/use-chat2query-api.md#create-a-chat2query-data-app)
+- 一个 [Chat2Query Data App 的 API 密钥](/tidb-cloud/use-chat2query-api.md#create-an-api-key)
 
-## Step 1. Create a knowledge base for the linked database
+## 步骤 1. 为关联数据库创建知识库
 
-> **Note:**
+> **注意：**
 >
-> The knowledge used by Chat2Query is **structured according to the database dimension**. You can connect multiple Chat2Query Data Apps to the same database, but each Chat2Query Data App can only use knowledge from a specific database it is linked to.
+> Chat2Query 使用的知识是**按数据库维度进行组织的**。你可以将多个 Chat2Query Data App 连接到同一个数据库，但每个 Chat2Query Data App 只能使用其关联数据库的知识。
 
-In your Chat2Query Data App, you can create a knowledge base for a specific database by calling the `/v3/knowledgeBases` endpoint. After creation, you will get a `knowledge_base_id` for future knowledge management.
+在你的 Chat2Query Data App 中，你可以通过调用 `/v3/knowledgeBases` 端点为特定数据库创建知识库。创建完成后，你将获得一个用于后续知识管理的 `knowledge_base_id`。
 
-The following is a general code example for calling this endpoint.
+以下是调用此端点的通用代码示例。
 
-> **Tip:**
+> **提示：**
 >
-> To get a specific code example for your endpoint, click the endpoint name in the left pane of your Data App, and then click **Show Code Example**. For more information, see [Get the example code of an endpoint](/tidb-cloud/use-chat2query-api.md#get-the-code-example-of-an-endpoint).
+> 要获取特定端点的代码示例，请在 Data App 左侧窗格中点击端点名称，然后点击 **Show Code Example**。更多信息，请参见[获取端点的示例代码](/tidb-cloud/use-chat2query-api.md#get-the-code-example-of-an-endpoint)。
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/knowledgeBases'\
  --header 'content-type: application/json'\
  --data-raw '{
-    "cluster_id": "<The ID of the cluster to which the database belongs>",
-    "database": "<The name of the target database>",
-    "description": "<Your knowledge base description>"
+    "cluster_id": "<数据库所属集群的 ID>",
+    "database": "<目标数据库的名称>",
+    "description": "<你的知识库描述>"
 }'
 ```
 
-An example response is as follows:
+示例响应如下：
 
 ```json
 {
@@ -59,31 +59,31 @@ An example response is as follows:
 }
 ```
 
-After getting the response, record the `knowledge_base_id` value in your response for later use.
+收到响应后，请记录响应中的 `knowledge_base_id` 值，以供后续使用。
 
-## Step 2. Choose a knowledge type
+## 步骤 2. 选择知识类型
 
-The knowledge base of each database can contain multiple types of knowledge. Before adding knowledge to your knowledge base, you need to choose a knowledge type that best suits your use case.
+每个数据库的知识库可以包含多种类型的知识。在向知识库添加知识之前，你需要选择最适合你使用场景的知识类型。
 
-Currently, Chat2Query knowledge bases support the following knowledge types. Each type is specifically designed for different scenarios and has a unique knowledge structure.
+目前，Chat2Query 知识库支持以下知识类型。每种类型都是为不同场景专门设计的，并具有独特的知识结构。
 
-- [Few-shot example](#few-shot-example)
-- [Term-sheet explanation](#term-sheet-explanation)
-- [Instruction](#instruction)
+- [少样本示例](#少样本示例)
+- [术语表解释](#术语表解释)
+- [指令](#指令)
 
-### Few-shot example
+### 少样本示例
 
-Few-shot example refers to the Q&A learning samples provided to Chat2Query, which include sample questions and their corresponding answers. These examples help Chat2Query handle new tasks more effectively.
+少样本示例是指提供给 Chat2Query 的问答学习样本，包括示例问题及其对应的答案。这些示例帮助 Chat2Query 更有效地处理新任务。
 
-> **Note:**
+> **注意：**
 >
-> Make sure the accuracy of newly added examples, because the quality of examples affects how well Chat2Query learns. Poor examples, such as mismatched questions and answers, can degrade the performance of Chat2Query on new tasks.
+> 请确保新添加示例的准确性，因为示例质量会影响 Chat2Query 的学习效果。不良示例（如问题和答案不匹配）可能会降低 Chat2Query 在新任务上的表现。
 
-#### Knowledge structure
+#### 知识结构
 
-Each example consists of a sample question and its corresponding answer.
+每个示例由一个示例问题及其对应答案组成。
 
-For example:
+例如：
 
 ```json
 {
@@ -92,78 +92,78 @@ For example:
 }
 ```
 
-#### Use cases
+#### 使用场景
 
-Few-Shot examples can significantly improve the performance of Chat2Query in various scenarios, including but not limited to the following:
+少样本示例可以显著提高 Chat2Query 在各种场景下的表现，包括但不限于以下情况：
 
-1. **When dealing with rare or complex questions**: if Chat2Query encounters infrequent or complex questions, adding few-shot examples can enhance its understanding and improve the accuracy of the results.
+1. **处理罕见或复杂问题时**：如果 Chat2Query 遇到不常见或复杂的问题，添加少样本示例可以增强其理解能力并提高结果的准确性。
 
-2. **When struggling with a certain type of question**: if Chat2Query frequently makes mistakes or has difficulty with specific questions, adding few-shot examples can help improve its performance on these questions.
+2. **在处理某类问题时遇到困难**：如果 Chat2Query 经常在特定问题上出错或遇到困难，添加少样本示例可以帮助改善其在这些问题上的表现。
 
-### Term-sheet explanation
+### 术语表解释
 
-Term-sheet explanation refers to a comprehensive explanation of a specific term or a group of similar terms, helping Chat2Query understand the meaning and usage of these terms.
+术语表解释是指对特定术语或一组相似术语的全面解释，帮助 Chat2Query 理解这些术语的含义和用法。
 
-> **Note:**
+> **注意：**
 >
-> Make sure the accuracy of newly added term explanations, because the quality of explanations affects how well Chat2Query learns. Incorrect interpretations do not improve Chat2Query results but also potentially lead to adverse effects.
+> 请确保新添加术语解释的准确性，因为解释质量会影响 Chat2Query 的学习效果。错误的解释不仅不会改善 Chat2Query 的结果，还可能导致负面影响。
 
-#### Knowledge structure
+#### 知识结构
 
-Each explanation includes either a single term or a list of similar terms and their detailed descriptions.
+每个解释包括单个术语或一组相似术语及其详细描述。
 
-For example:
+例如：
 
 ```json
 {
     "term": ["OSS"],
-    "description": "OSS Insight is a powerful tool that provides online data analysis for users based on nearly 6 billion rows of GitHub event data."
+    "description": "OSS Insight 是一个强大的工具，基于近 60 亿行 GitHub 事件数据为用户提供在线数据分析。"
 }
 ```
 
-#### Use cases
+#### 使用场景
 
-Term-sheet explanation is primarily used to improve Chat2Query's comprehension of user queries, especially in these situations:
+术语表解释主要用于提高 Chat2Query 对用户查询的理解，特别是在以下情况下：
 
-- **Dealing with industry-specific terminology or acronyms**: when your query contains industry-specific terminology or acronyms that might not be universally recognized, using a term-sheet explanation can help Chat2Query understand the meaning and usage of these terms.
-- **Dealing with ambiguities in user queries**: when your query contains ambiguous concepts that is confusing, using a term-sheet explanation can help Chat2Query clarify these ambiguities.
-- **Dealing with terms with various meanings**: when your query contains terms that carry different meanings in various contexts, using a term-sheet explanation can assist Chat2Query in discerning the correct interpretation.
+- **处理行业特定术语或缩写**：当你的查询包含可能不被普遍认知的行业特定术语或缩写时，使用术语表解释可以帮助 Chat2Query 理解这些术语的含义和用法。
+- **处理用户查询中的歧义**：当你的查询包含令人困惑的模糊概念时，使用术语表解释可以帮助 Chat2Query 澄清这些歧义。
+- **处理具有多种含义的术语**：当你的查询包含在不同上下文中具有不同含义的术语时，使用术语表解释可以帮助 Chat2Query 辨别正确的解释。
 
-### Instruction
+### 指令
 
-Instruction is a piece of textual command. It is used to guide or control the behavior of Chat2Query, specifically instructing it on how to generate SQL according to specific requirements or conditions.
+指令是一段文本命令。它用于指导或控制 Chat2Query 的行为，特别是指导它如何根据特定要求或条件生成 SQL。
 
-> **Note:**
+> **注意：**
 >
-> - The instruction has a length limit of 512 characters.
-> - Make sure to provide as clear and specific instructions as possible to ensure that Chat2Query can understand and execute the instructions effectively.
+> - 指令的长度限制为 512 个字符。
+> - 请确保提供尽可能清晰和具体的指令，以确保 Chat2Query 能够有效理解和执行指令。
 
-#### Knowledge structure
+#### 知识结构
 
-Instruction only includes a piece of textual command.
+指令仅包含一段文本命令。
 
-For example:
+例如：
 
 ```json
 {
-    "instruction": "If the task requires calculating the sequential growth rate, use the LAG function with the OVER clause in SQL"
+    "instruction": "如果任务需要计算环比增长率，请在 SQL 中使用带有 OVER 子句的 LAG 函数"
 }
 ```
 
-#### Use cases
+#### 使用场景
 
-Instruction can be used in many scenarios to guide Chat2Query to output according to your requirements, including but not limited to the following:
+指令可以在许多场景中用于指导 Chat2Query 按照你的要求输出，包括但不限于以下情况：
 
-- **Limiting query scope**: if you want the SQL to consider only certain tables or columns, use an instruction to specify this.
-- **Guiding SQL structure**: if you have specific requirements for the SQL structure, use an instruction to guide Chat2Query.
+- **限制查询范围**：如果你希望 SQL 只考虑某些表或列，可以使用指令来指定这一点。
+- **指导 SQL 结构**：如果你对 SQL 结构有特定要求，可以使用指令来指导 Chat2Query。
 
-## Step 3. Add knowledge to the newly created knowledge base
+## 步骤 3. 向新创建的知识库添加知识
 
-To add new knowledge, you can call the `/v3/knowledgeBases/{knowledge_base_id}/data` endpoint.
+要添加新知识，你可以调用 `/v3/knowledgeBases/{knowledge_base_id}/data` 端点。
 
-### Add a few-shot example type of knowledge
+### 添加少样本示例类型的知识
 
-For example, if you want Chat2Query to generate SQL statements of the count of rows in a table in a specific structure, you can add a few-shot example type of knowledge by calling `/v3/knowledgeBases/{knowledge_base_id}/data` as follows:
+例如，如果你希望 Chat2Query 以特定结构生成计算表中行数的 SQL 语句，你可以通过调用 `/v3/knowledgeBases/{knowledge_base_id}/data` 添加少样本示例类型的知识，如下所示：
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/knowledgeBases/<knowledge_base_id>/data'\
@@ -178,11 +178,11 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 }'
 ```
 
-In the preceding example code, `"type": "few-shot"` represents the few-shot example knowledge type.
+在上述示例代码中，`"type": "few-shot"` 表示少样本示例知识类型。
 
-### Add a term-sheet explanation type of knowledge
+### 添加术语表解释类型的知识
 
-For example, if you want Chat2Query to comprehend the meaning of the term `OSS` using your provided explanation, you can add a term-sheet explanation type of knowledge by calling `/v3/knowledgeBases/{knowledge_base_id}/data` as follows:
+例如，如果你希望 Chat2Query 使用你提供的解释来理解术语 `OSS` 的含义，你可以通过调用 `/v3/knowledgeBases/{knowledge_base_id}/data` 添加术语表解释类型的知识，如下所示：
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/knowledgeBases/<knowledge_base_id>/data'\
@@ -192,16 +192,16 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
     "meta_data": {},
     "raw_data": {
         "term": ["OSS"],
-        "description": "OSS Insight is a powerful tool that provides online data analysis for users based on nearly 6 billion rows of GitHub event data."
+        "description": "OSS Insight 是一个强大的工具，基于近 60 亿行 GitHub 事件数据为用户提供在线数据分析。"
     }
 }'
 ```
 
-In the preceding example code, `"type": "term-sheet"` represents the term-sheet explanation knowledge type.
+在上述示例代码中，`"type": "term-sheet"` 表示术语表解释知识类型。
 
-### Add an instruction type of knowledge
+### 添加指令类型的知识
 
-For example, if you want Chat2Query to consistently use the `LAG` function with the `OVER` clause in SQL queries when dealing with questions about sequential growth rate calculation, you can add an instruction type of knowledge by calling `/v3/knowledgeBases/{knowledge_base_id}/data` as follows:
+例如，如果你希望 Chat2Query 在处理有关环比增长率计算的问题时始终使用带有 `OVER` 子句的 `LAG` 函数，你可以通过调用 `/v3/knowledgeBases/{knowledge_base_id}/data` 添加指令类型的知识，如下所示：
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/knowledgeBases/<knowledge_base_id>/data'\
@@ -210,9 +210,9 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
     "type": "instruction",
     "meta_data": {},
     "raw_data": {
-        "instruction": "If the task requires calculating the sequential growth rate, use the LAG function with the OVER clause in SQL"
+        "instruction": "如果任务需要计算环比增长率，请在 SQL 中使用带有 OVER 子句的 LAG 函数"
     }
 }'
 ```
 
-In the preceding example code, `"type": "instruction"` represents the instruction knowledge type.
+在上述示例代码中，`"type": "instruction"` 表示指令知识类型。

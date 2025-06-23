@@ -1,18 +1,18 @@
 ---
 title: TIDB_CHECK_CONSTRAINTS
-summary: Learn the `TIDB_CHECK_CONSTRAINTS` INFORMATION_SCHEMA table.
+summary: 了解 `TIDB_CHECK_CONSTRAINTS` INFORMATION_SCHEMA 表。
 ---
 
 # TIDB\_CHECK\_CONSTRAINTS
 
-The `TIDB_CHECK_CONSTRAINTS` table provides information about [`CHECK` constraints](/constraints.md#check) on tables. In addition to the columns in [`CHECK_CONSTRAINTS`](/information-schema/information-schema-check-constraints.md), `TIDB_CHECK_CONSTRAINTS` provides the name and ID of the table that defines the `CHECK` constraint.
+`TIDB_CHECK_CONSTRAINTS` 表提供了表上 [`CHECK` 约束](/constraints.md#check)的信息。除了 [`CHECK_CONSTRAINTS`](/information-schema/information-schema-check-constraints.md) 中的列外，`TIDB_CHECK_CONSTRAINTS` 还提供了定义 `CHECK` 约束的表的名称和 ID。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC TIDB_CHECK_CONSTRAINTS;
 ```
 
-The output is as follows:
+输出如下：
 
 ```sql
 +--------------------+-------------+------+------+---------+-------+
@@ -28,7 +28,7 @@ The output is as follows:
 6 rows in set (0.00 sec)
 ```
 
-The following example adds a `CHECK` constraint using the `CREATE TABLE` statement:
+以下示例使用 `CREATE TABLE` 语句添加一个 `CHECK` 约束：
 
 ```sql
 SET GLOBAL tidb_enable_check_constraint = ON;
@@ -36,7 +36,7 @@ CREATE TABLE test.t1 (id INT PRIMARY KEY, CHECK (id%2 = 0));
 SELECT * FROM TIDB_CHECK_CONSTRAINTS\G
 ```
 
-The output is as follows:
+输出如下：
 
 ```sql
 *************************** 1. row ***************************
@@ -49,11 +49,11 @@ CONSTRAINT_CATALOG: def
 1 row in set (0.02 sec)
 ```
 
-Fields in the `TIDB_CHECK_CONSTRAINTS` table are described as follows:
+`TIDB_CHECK_CONSTRAINTS` 表中的字段说明如下：
 
-* `CONSTRAINT_CATALOG`: The catalog of the constraint, which is always `def`.
-* `CONSTRAINT_SCHEMA`: The schema of the constraint.
-* `CONSTRAINT_NAME`: The name of the constraint.
-* `CHECK_CLAUSE`: The clause of the check constraint.
-* `TABLE_NAME`: The name of the table where the constraint is located.
-* `TABLE_ID`: The ID of the table where the constraint is located.
+* `CONSTRAINT_CATALOG`：约束的目录，始终为 `def`。
+* `CONSTRAINT_SCHEMA`：约束的模式。
+* `CONSTRAINT_NAME`：约束的名称。
+* `CHECK_CLAUSE`：检查约束的子句。
+* `TABLE_NAME`：约束所在表的名称。
+* `TABLE_ID`：约束所在表的 ID。

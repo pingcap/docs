@@ -1,32 +1,32 @@
 ---
-title: TiDB Cloud API Overview
-summary: Learn about what is TiDB Cloud API, its features, and how to use API to manage your TiDB Cloud clusters.
+title: TiDB Cloud API 概述
+summary: 了解什么是 TiDB Cloud API，其特性以及如何使用 API 管理你的 TiDB Cloud 集群。
 ---
 
-# TiDB Cloud API Overview (Beta)
+# TiDB Cloud API 概述（Beta）
 
-> **Note:**
+> **注意：**
 >
-> TiDB Cloud API is in beta.
+> TiDB Cloud API 目前处于 beta 阶段。
 
-The TiDB Cloud API is a [REST interface](https://en.wikipedia.org/wiki/Representational_state_transfer) that provides you with programmatic access to manage administrative objects within TiDB Cloud. Through this API, you can automatically and efficiently manage resources such as Projects, Clusters, Backups, Restores, Imports, Billings, and resources in the [Data Service](/tidb-cloud/data-service-overview.md).
+TiDB Cloud API 是一个 [REST 接口](https://en.wikipedia.org/wiki/Representational_state_transfer)，为你提供了以编程方式访问和管理 TiDB Cloud 中管理对象的能力。通过这个 API，你可以自动且高效地管理项目、集群、备份、恢复、导入、计费以及 [Data Service](/tidb-cloud/data-service-overview.md) 中的资源。
 
-The API has the following features:
+该 API 具有以下特性：
 
-- **JSON entities.** All entities are expressed in JSON.
-- **HTTPS-only.** You can only access the API via HTTPS, ensuring all the data sent over the network is encrypted with TLS.
-- **Key-based access and digest authentication.** Before you access TiDB Cloud API, you must generate an API key, refer to [API Key Management](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-key-management). All requests are authenticated through [HTTP Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication), ensuring the API key is never sent over the network.
+- **JSON 实体。** 所有实体都以 JSON 格式表示。
+- **仅支持 HTTPS。** 你只能通过 HTTPS 访问 API，确保所有通过网络发送的数据都使用 TLS 加密。
+- **基于密钥的访问和摘要认证。** 在访问 TiDB Cloud API 之前，你必须生成一个 API 密钥，参考 [API 密钥管理](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-key-management)。所有请求都通过 [HTTP 摘要认证](https://en.wikipedia.org/wiki/Digest_access_authentication) 进行认证，确保 API 密钥永远不会在网络上传输。
 
-To start using TiDB Cloud API, refer to the following resources in TiDB Cloud API Documentation:
+要开始使用 TiDB Cloud API，请参考 TiDB Cloud API 文档中的以下资源：
 
-- [Get Started](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Get-Started)
-- [Authentication](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication)
-- [Rate Limiting](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Rate-Limiting)
-- API Full References
+- [入门指南](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Get-Started)
+- [认证](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication)
+- [速率限制](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Rate-Limiting)
+- API 完整参考
     - v1beta1
-        - [Billing](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
+        - [计费](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
         - [Data Service](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)
         - [IAM](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam)
-        - [MSP (Deprecated)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
+        - [MSP（已弃用）](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
     - [v1beta](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Project)
-- [Changelog](https://docs.pingcap.com/tidbcloud/api/v1beta#section/API-Changelog)
+- [更新日志](https://docs.pingcap.com/tidbcloud/api/v1beta#section/API-Changelog)
