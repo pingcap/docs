@@ -67,20 +67,20 @@ Multi-column indexes in SQL are ordered lexicographically. In the case of an ind
 
 The following table shows a sample dataset that illustrates how multi-column indexing refines search results:
 
-| City | Bedrooms | Price |
-| --- | --- | --- |
-| San Diego | 1 | 1000 |
-| San Diego | 1 | 1500 |
-| San Diego | 2 | 1000 |
-| San Diego | 2 | 2500 |
-| San Diego | 3 | 1000 |
-| San Diego | 3 | 2500 |
-| San Francisco | 1 | 1000 |
-| San Francisco | 1 | 1500 |
-| San Francisco | 2 | 1000 |
-| San Francisco | 2 | 1500 |
-| San Francisco | 3 | 2500 |
-| San Francisco | 3 | 3000 |
+| City          | Bedrooms | Price |
+| ------------- | -------- | ----- |
+| San Diego     | 1        | 1000  |
+| San Diego     | 1        | 1500  |
+| San Diego     | 2        | 1000  |
+| San Diego     | 2        | 2500  |
+| San Diego     | 3        | 1000  |
+| San Diego     | 3        | 2500  |
+| San Francisco | 1        | 1000  |
+| San Francisco | 1        | 1500  |
+| San Francisco | 2        | 1000  |
+| San Francisco | 2        | 1500  |
+| San Francisco | 3        | 2500  |
+| San Francisco | 3        | 3000  |
 
 ## Optimized queries and results
 
@@ -93,21 +93,14 @@ EXPLAIN FORMAT = "brief"
     WHERE city = 'San Francisco' AND bedrooms = 2 AND price < 2000;
 ```
 
-```sql
--- Plan for Query 2
-EXPLAIN FORMAT= "brief"
-    SELECT * FROM listings 
-    WHERE city = 'San Francisco' and bedrooms = 2 and price < 2000;
 ```
-
-```
-+-------------------------+------+--------------------------------------------------------------------------------------------+---------------------------------+
-| id                      | task | access object                                                                              | operator info                   |
-+-------------------------+------+--------------------------------------------------------------------------------------------+---------------------------------+
-| IndexLookUp             | root |                                                                                                                              | 
-| ├─IndexRangeScan(Build) | root |table:listings,index:idx_city_bedrooms_price ["San Francisco" 2 -inf, (city, bedrooms, price)|range:"San Francisco" 2 2000.00)|
-| └─TableRowIDScan(Probe) | root |table:listings                                                                                                                | 
-+-------------------------+------+---------------------------------------------------------------------------------------------+--------------------------------+
++------------------------+------+---------------------------------------------------------------------------------------------+---------------------------------+
+| id                     | task | access object                                                                               | operator info                   |
++------------------------+------+---------------------------------------------------------------------------------------------+---------------------------------+
+| IndexLookUp            | root |                                                                                             |                                 | 
+| ├─IndexRangeScan(Build)| root |table:listings,index:idx_city_bedrooms_price ["San Francisco" 2 -inf,(city, bedrooms, price)]|range:["San Francisco" 2 2000.00)|
+| └─TableRowIDScan(Probe)| root |table:listings                                                                               |                                 |
++------------------------+------+---------------------------------------------------------------------------------------------+---------------------------------+
 ```
 
 This query returns the following filtered results from the sample data:
@@ -236,7 +229,7 @@ These expressions are then combined using `AND`:
 
 After breaking down the conditions, TiDB's optimizer calculates ranges for each part and combines them. For this example, it derives:
 
-- For `(a1, b1) > (1, 10)`: it creates ranges like `(1, +inf]` for cases where `a1 > 1` and `(1, 10, 1, +inf]` for cases where `a1 = 1` and `b1 > 10`.
+- For `(a1, b1) > (1, 10)`: it creates ranges such as `(1, +inf]` for cases where `a1 > 1` and `(1, 10, 1, +inf]` for cases where `a1 = 1` and `b1 > 10`.
 - For `(a1, b1) < (10, 20)`: it creates ranges `[-inf, 10)` for cases where `a1 < 10` and `[10, -inf, 10, 20)` for cases where `a1 = 10` and `b1 < 20`.
 
 The final result combines these to get a refined range: `(1, 10, 1, +inf] UNION (1, 10) UNION [10, -inf, 10, 20)`.
