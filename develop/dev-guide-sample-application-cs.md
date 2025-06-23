@@ -79,6 +79,7 @@ public class Tutorial1
         catch (Exception ex)
         {
             Console.WriteLine(ex.ToString());
+            Environment.Exit(1);
         }
 
         Console.WriteLine("Connected to: " + conn.ServerVersion);
