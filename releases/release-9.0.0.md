@@ -251,7 +251,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
     For more information, see [documentation](/br/br-pitr-manual.md#compatibility-between-ongoing-log-backup-and-snapshot-restore).
 
-* Support redistribute data of a specific table (experimental) [#8986](https://github.com/tikv/pd/issues/8986) @[bufferflies](https://github.com/bufferflies) **tw@qiancai** <!--1724 beta.2-->
+* Support redistributing data of a specific table (experimental) [#8986](https://github.com/tikv/pd/issues/8986) @[bufferflies](https://github.com/bufferflies) **tw@qiancai** <!--1724 beta.2-->
 
     PD automatically schedules data to distribute it as evenly as possible across all TiKV nodes in a cluster. However, this automatic scheduling is based on the overall cluster. In some cases, even if the cluster-wide data distribution is balanced, the data of a specific table might still be unevenly distributed across TiKV nodes.
 
