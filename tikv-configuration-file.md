@@ -1434,7 +1434,7 @@ Configuration items related to Titan.
 
 > **Warning**
 >
-> When disabling Titan for TiDB versions earlier than v8.5.0, it is not recommended to modify this configuration item to `false` to avoid TiKV crashes. To disable Titan, refer to the steps in [Disable Titan](/storage-engine/titan-configuration.md#disable-titan).
+> When disabling Titan for TiDB versions earlier than v8.5.0, it is not recommended to modify this configuration item to `false`, as this might cause TiKV to crash. To disable Titan, refer to the steps in [Disable Titan](/storage-engine/titan-configuration.md#disable-titan).
 
 > **Note:**
 >
