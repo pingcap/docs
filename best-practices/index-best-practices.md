@@ -305,7 +305,7 @@ For safety, keep the index invisible for at least one full business cycle to ens
 
 Effective index management is crucial for maintaining database performance in TiDB. By leveraging TiDB's built-in observability tools, you can easily identify, evaluate, and optimize indexes without risking system stability.
 
-By following the following best practices, you can keep your databases optimized, reduce unnecessary resource consumption, and maintain peak query performance.
+By following these best practices, you can keep your databases optimized, reduce unnecessary resource consumption, and maintain peak query performance.
 
 - Monitor index usage regularly
 
