@@ -8,15 +8,15 @@ aliases: ['/tidb/dev/sample-application-cs','/tidb/dev/dev-guide-sample-applicat
 
 C# (a.k.a. C-Sharp) is one of the languages from the .NET family created by Microsoft. Other languages for .NET are VB.NET and F#. In this tutorial, you will use C# and the MySQL Connector/NET to connect from a C# application to TiDB over the MySQL protocol. This is possible because TiDB is highly [compatible with MySQL](/mysql-compatibility.md).
 
-While .NET is often used on Windows, it is also available for macOS and Linux. For all platforms the commands and the code are similar. There may be small differences in the prompt and file paths.
+While .NET is often used on Windows, it is also available for macOS and Linux. For all platforms, the commands and the code are similar. There might be small differences in the prompts and file paths.
 
 ## Prerequisites
 
-The .NET 9.0 SDK, which can be downloaded from <https://dotnet.microsoft.com/en-us/download>.
+Download the [.NET 9.0 SDK](https://dotnet.microsoft.com/en-us/download).
 
-This tutorial will use the command-line `dotnet` command. It is also possible to use the VS Code IDE to work with C# code.
+This tutorial uses the command-line `dotnet` command. It is also possible to use the VS Code IDE to work with C# code.
 
-And you will need a TiDB cluster. This can be a serverless or dedicated instance on TiDB Cloud or a self-managed instance, for example with `tiup playground`.
+You need a TiDB Cloud Serverless or TiDB Cloud Dedicated cluster on TiDB Cloud, or a self-managed TiDB instance, for example with `tiup playground`.
 
 ## Step 1. Set up a console project
 
