@@ -64,6 +64,7 @@ log  : Restored /home/dvaneeden/tidb_cs/tidb_cs.csproj (in 551 ms).
 Replace the "Hello World" example in `Program.cs` with the following code.
 
 ```cs
+using System;
 using MySql.Data.MySqlClient;
 public class Tutorial1
 {
