@@ -434,7 +434,7 @@
     - [Use UUIDs](/best-practices/uuid.md)
     - [Read-Only Storage Nodes](/best-practices/readonly-nodes.md)
     - [Handle Millions of Tables in SaaS Multi-Tenant Scenarios](/best-practices/saas-best-practices.md)
-    - [Multi-Column Index Optimization](/best-practices/multi-column-index-optimization.md)
+    - [Multi-Column Index Optimization](/best-practices/multi-column-index-best-practices.md)
   - [Use Placement Rules](/configure-placement-rules.md)
   - [Use Load Base Split](/configure-load-base-split.md)
   - [Use Store Limit](/configure-store-limit.md)

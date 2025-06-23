@@ -1,11 +1,13 @@
 ---
-title: Multi-Column Index Optimization
-summary: Learn how to use multi-column indexes effectively in TiDB and understand advanced optimization techniques.
+title: Best Practices for Optimizing Multi-Column Indexes
+summary: Learn how to use multi-column indexes effectively in TiDB and apply advanced optimization techniques.
 ---
 
-# Multi-Column Index Optimization
+# Best Practices for Optimizing Multi-Column Indexes
 
-In today's data-driven world, efficiently handling complex queries on large datasets is critical to keeping applications responsive and performant. For TiDB, a distributed SQL database designed to manage high-scale and high-demand environments, optimizing data access paths is essential to delivering smooth and efficient queries. Indexes are a powerful tool for improving query performance by avoiding the need to scan all rows in a table. TiDB's query optimizer leverages multi-column indexes to intelligently filter data, handling complex query conditions that traditional databases such as MySQL cannot process as effectively. 
+In today's data-driven world, efficiently handling complex queries on large datasets is critical to keeping applications responsive and performant. For TiDB, a distributed SQL database designed to manage high-scale and high-demand environments, optimizing data access paths is essential to delivering smooth and efficient queries.
+
+Indexes are a powerful tool for improving query performance by avoiding the need to scan all rows in a table. TiDB's query optimizer leverages multi-column indexes to intelligently filter data, handling complex query conditions that traditional databases such as MySQL cannot process as effectively. 
 
 This document walks you through how multi-column indexes function, why they are crucial, and how TiDB's optimization transforms intricate query conditions into efficient access paths. After optimization, you can achieve faster responses, minimized table scans, and streamlined performance, even at massive scale.
 
@@ -13,8 +15,8 @@ Without these optimizations, query performance in large TiDB databases can degra
 
 ## Prerequisites
 
-- You can use the multi-column index feature on TiDB v8.3 and later versions. 
-- Before using this feature, you need to change the value of the [optimizer fix control **54337**](/optimizer-fix-controls.md#54337-new-in-v830) to `ON`.
+- The multi-column index feature is available in TiDB v8.3 and later versions. 
+- Before using this feature, you must set the value of the [optimizer fix control **54337**](/optimizer-fix-controls.md#54337-new-in-v830) to `ON`.
 
 ## Background: multi-column indexes
 
@@ -30,19 +32,21 @@ CREATE TABLE listings (
 );
 ```
 
-Suppose this table has 20 million listings across the United States. If you want to find all listings with a price under `$2,000`, you can add an index on the price column. This index allows the optimizer to filter out rows, scanning only the range `[-inf, 2000.00)`. This helps reduce the search to about 14 million rows (assuming 70% of rentals are priced above `$2,000`). In the query execution plan, TiDB performs an index range scan on price. This limits the need for a full table scan and improves efficiency.
+Suppose this table has 20 million listings across the United States. If you want to find all listings with a price under $2,000, you can add an index on the price column. This index allows the optimizer to filter out rows, scanning only the range `[-inf, 2000.00)`. This helps reduce the search to about 14 million rows (assuming 70% of rentals are priced above `$2,000`). In the query execution plan, TiDB performs an index range scan on price. This limits the need for a full table scan and improves efficiency.
 
 ```sql
 -- Query 1: Find listings with price < 2000
-EXPLAIN FORMAT=BRIEF
-    SELECT * FROM listings WHERE price < 2000;
------+------------------------------------------------------+--------------------------
-| id  task                | access object                        | operator info   
-+-----------------------------+---------+-----------+-----------------------------------
-| IndexLookUp             | root                                 | 
-| ├─IndexRangeScan(Build) | table:listings,index:price_idx(price)| range:[-inf,2000.00) 
-| └─TableRowIDScan(Probe) | table:listings                       | 
-+-----------------------------+---------+-----------+-----------------------------------
+EXPLAIN FORMAT = "brief" SELECT * FROM listings WHERE price < 2000;
+```
+
+```
++-----------------------------+---------+----------------------------------------------+---------------------------+
+| id                          | task    | access object                                | operator info             |
++-----------------------------+---------+----------------------------------------------+---------------------------+
+| IndexLookUp                 | root    |                                              |                           |
+| ├─IndexRangeScan(Build)     | root    | table: listings, index: price_idx(price)     | range: [-inf, 2000.00)    |
+| └─TableRowIDScan(Probe)     | root    | table: listings                              |                           |
++-----------------------------+---------+----------------------------------------------+---------------------------+
 ```
 
 While this filter improves performance, it might still return a large number of rows. This is not ideal for a user looking for more specific listings. Adding filters, such as specifying the city, number of bedrooms, and a maximum price, narrows the results significantly. For example, a query to find two-bedroom listings in San Francisco under `$2,000` is more useful, likely returning only a few dozen rows.
@@ -53,11 +57,11 @@ To optimize this query, you can create a multi-column index on `city`, `bedrooms
 CREATE INDEX idx_city_bedrooms_price ON listings (city, bedrooms, price);
 ```
 
-Multi-column indexes in SQL are lexicographically ordered, meaning they are sorted first by the values of `city`, then by the values of `bedrooms` within each city, and finally by the values of `price` within each city-bedroom combination. This ordering allows TiDB to efficiently access rows based on each condition:
+Multi-column indexes in SQL are ordered lexicographically. In the case of an index on `(city, bedrooms, price)`, the data is first sorted by `city`, then by `bedrooms` within each city, and finally by `price` within each `(city, bedrooms)` combination. This ordering lets TiDB efficiently access rows based on each condition:
 
-1. Filtering by `city` as the primary filter.
-2. Optionally filtering by `bedrooms` within that city.
-3. Optionally filtering by `price` within the city-bedroom grouping.
+1. Filter by `city`, which is the primary filter.
+2. Optionally filter by `bedrooms` within that city.
+3. Optionally filter by `price` within the city-bedroom grouping.
 
 ## Sample data
 
@@ -80,7 +84,7 @@ The following table shows a sample dataset that illustrates how multi-column ind
 
 ## Optimized queries and results
 
-Using the multi-column index, TiDB can efficiently narrow the range to find listings in San Francisco with two bedrooms and a price under `$2,000`:
+Using the multi-column index, TiDB can efficiently narrow the scan range to find listings in San Francisco with two bedrooms and a price under $2,000:
 
 ```sql
 -- Query 2: Find two-bedroom listings in San Francisco under $2,000
