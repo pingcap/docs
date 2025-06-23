@@ -287,9 +287,9 @@ After making the index invisible, observe the system's query performance:
 
 ### Best practices for using invisible indexes
 
-- Test during off-peak hours – monitor performance impact in a controlled environment.
-- Use query monitoring tools – analyze query execution plans before and after marking an index as invisible.
-- Confirm over multiple workloads – ensure that the index is not needed for specific reports or scheduled queries.
+- Test during off-peak hours: monitor performance impact in a controlled environment.
+- Use query monitoring tools: analyze query execution plans before and after marking an index as invisible.
+- Confirm over multiple workloads: ensure that the index is not needed for specific reports or scheduled queries.
 
 By leveraging invisible indexes, you can validate index removal decisions without risk, ensuring a more controlled and predictable database optimization process.
 
@@ -312,7 +312,7 @@ By following the following best practices, you can keep your databases optimized
     - Use `TIDB_INDEX_USAGE` to track index query activity.
     - Use `CLUSTER_TIDB_INDEX_USAGE` for a cluster-wide view of index behavior.
 
-- Identify Unused Indexes with Confidence
+- Identify unused indexes with confidence
 
     - Use `schema_unused_indexes` to list indexes that have not been used since the last restart.
     - Be cautious—some indexes might be used infrequently but remain critical for specific queries.
