@@ -293,25 +293,6 @@ If you only need to import `file-01.csv` and `file-03.csv` into the target table
 IMPORT INTO t FROM '/path/to/file-0[13].csv';
 ```
 
-#### Import data from a nested directory structure
-
-You can use wildcards to import data from a common directory structure, such as one organized by date. For example, assume your sales data is stored in S3 and organized by year and quarter:
-
-```
-/path/to/sales-data/2023/q1/data.csv
-/path/to/sales-data/2023/q2/data.csv
-/path/to/sales-data/2023/q3/data.csv
-/path/to/sales-data/2023/q4/data.csv
-/path/to/sales-data/2024/q1/data.csv
-...
-```
-
-To import all `data.csv` files from all quarters across all years, you can use a wildcard for each directory level:
-
-```sql
-IMPORT INTO sales FROM '/path/to/sales-data/*/*/data.csv';
-```
-
 #### Import data files from Amazon S3 or GCS
 
 - Import data files from Amazon S3:
