@@ -128,7 +128,6 @@ In the `fileLocation` parameter, you can specify a single file, or use the `*` a
 - Import all files with the `foo` prefix in a specified path: `s3://<bucket-name>/path/to/data/foo*`
 - Import all files with the `foo` prefix and the `.csv` suffix in a specified path: `s3://<bucket-name>/path/to/data/foo*.csv`
 - Import `1.csv` and `2.csv` in a specified path: `s3://<bucket-name>/path/to/data/[12].csv`
-- Import `foo.csv` files from all immediate sub-paths: `s3://<bucket-name>/path/to/*/foo.csv` (add another `*/` for each extra directory level, for example `path/to/*/*/foo.csv`)
 
 > **Note:**
 >
