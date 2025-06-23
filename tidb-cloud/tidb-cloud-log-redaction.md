@@ -46,7 +46,7 @@ After disabling log redaction, note the following:
 
 ## Check the updated logs
 
-To confirm that log redaction is disabled, do the following:
+To check the updated logs after log redaction is disabled, do the following:
 
 1. Simulate a performance issue caused by a slow query. For example, execute the following SQL statement:
 
