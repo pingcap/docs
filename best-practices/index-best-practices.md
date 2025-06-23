@@ -120,7 +120,7 @@ Identify unused and inefficient indexes using `TIDB_INDEX_USAGE as follows:
 
 By leveraging `TIDB_INDEX_USAGE`, you can gain detailed insights into index performance, making it easier to remove unnecessary indexes and optimize query execution.
 
-####Handle index usage data efficiently
+### Handle index usage data efficiently
 
 #### Delayed data updates
 
