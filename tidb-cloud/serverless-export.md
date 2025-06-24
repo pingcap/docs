@@ -416,12 +416,10 @@ ticloud serverless export cancel -c <cluster-id> -e <export-id>
 
 ## Export speed
 
-The export speed depends on your [cluster plan](/tidb-cloud/select-cluster-tier.md#cluster-plans). For details, see the following table:
+The export speed depends on the spending limit of your TiDB Cloud Starter cluster:
 
-| Plan               | Export speed       |
-|:-------------------|:-------------------|
-| Free cluster plan      | Up to 25 MiB/s      |
-| Scalable cluster plan  | Up to 100 MiB/s     |
+- If the spending limit is set to 0, the export speed is up to 25 MiB/s.
+- If the spending limit is greater than 0, the export speed is up to 100 MiB/s.
 
 ## Pricing
 
