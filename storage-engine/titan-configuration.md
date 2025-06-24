@@ -118,7 +118,15 @@ To disable Titan, you can configure the `rocksdb.defaultcf.titan.blob-run-mode` 
 - When the option is set to `read-only`, all newly written values are written into RocksDB, regardless of the value size.
 - When the option is set to `fallback`, all newly written values are written into RocksDB, regardless of the value size. Also, all compacted values stored in the Titan blob file are automatically moved back to RocksDB.
 
+<<<<<<< HEAD
 To fully disable Titan for all existing and future data, you can follow these steps:
+=======
+To disable Titan for all existing and future data, you can take the following steps. Note that you can skip Step 2 because it greatly affects online traffic performance. In fact even without Step 2, the data compaction consumes extra I/O and CPU resources when it moves data from Titan to RocksDB, and performance will degrade (sometimes as much as 50%) when TiKV I/O or CPU resources are limited.
+
+> **Warning:**
+>
+> When disabling Titan for TiDB versions earlier than v8.5.0, it is not recommended to modify the TiKV configuration item [`rocksdb.titan.enabled`](/tikv-configuration-file.md#enabled) to `false`, as this might cause TiKV to crash. Following Step 1 is sufficient to disable Titan.
+>>>>>>> 445dea0c18 (titan-configuration: remove the unrecommended steps of updating TiKV configuration  (#21217))
 
 1. Update the configuration of the TiKV nodes you wish to disable Titan for. You can update configuration in two methods:
 
@@ -139,6 +147,7 @@ To fully disable Titan for all existing and future data, you can follow these st
 
 3. After the compaction is finished, you should wait for the **Blob file count** metrics under **TiKV-Details**/**Titan - kv** to decrease to `0`.
 
+<<<<<<< HEAD
 4. Update the configuration of these TiKV nodes to disable Titan.
 
     ```toml
@@ -146,6 +155,8 @@ To fully disable Titan for all existing and future data, you can follow these st
     enabled = false
     ```
 
+=======
+>>>>>>> 445dea0c18 (titan-configuration: remove the unrecommended steps of updating TiKV configuration  (#21217))
 ## Level Merge (experimental)
 
 In TiKV 4.0, [Level Merge](/storage-engine/titan-overview.md#level-merge), a new algorithm, is introduced to improve the performance of range query and to reduce the impact of Titan GC on the foreground write operations. You can enable Level Merge using the following option:
