@@ -110,7 +110,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
     For more information, see [documentation](/tiflash/tiflash-supported-pushdown-calculations.md).
 
-* Support pushing down the following date functions to TiKV [#59365](https://github.com/pingcap/tidb/issues/59365) [#18184](https://github.com/tikv/tikv/issues/18184) [#58940](https://github.com/pingcap/tidb/issues/58940) [#59497](https://github.com/pingcap/tidb/issues/59497) @[wshwsh12](https://github.com/wshwsh12) @[xzhangxian1008] @[gengliqi](https://github.com/gengliqi)
+* Support pushing down the following date functions to TiKV [#59365](https://github.com/pingcap/tidb/issues/59365) [#18184](https://github.com/tikv/tikv/issues/18184) [#58940](https://github.com/pingcap/tidb/issues/58940) [#59497](https://github.com/pingcap/tidb/issues/59497) @[wshwsh12](https://github.com/wshwsh12) @[xzhangxian1008](https://github.com/xzhangxian1008) @[gengliqi](https://github.com/gengliqi)
 
     * `FROM_UNIXTIME()`
     * `TIMESTAMPDIFF()`
@@ -314,7 +314,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 | TiKV | [`storage.max-ts.max-drift`](/tikv-configuration-file.md#max-drift-new-in-v900) | Newly added | Specifies the maximum time by which the timestamp of a read or write request can exceed the PD TSO cached in TiKV. The default value is `"60s"`. |
 | TiFlash | [`hashagg_use_magic_hash`](/tiflash/tiflash-configuration.md#hashagg_use_magic_hash-new-in-v900) | Newly added | Controls the hash function TiFlash uses for aggregation. |
 | TiFlash| [`format_version`](/tiflash/tiflash-configuration.md#format_version) | Modified | Changes the default value from `7` to `8`, which means the default DTFile file format for v9.0.0 or a later version is `8`. This new format supports a new string serialization scheme that improves string read and write performance. |
+<!--
 | TiCDC | [`newarch`](/ticdc/ticdc-server-config.md#newarch) | Newly added | Controls whether to enable the [TiCDC new architecture](/ticdc/ticdc-new-arch.md). By default, `newarch` is not specified, indicating that the old architecture is used. `newarch` applies only to the new architecture. If `newarch` is added to the configuration file of the TiCDC old architecture, it might cause parsing failures. |
+-->
 | BR | [`--checkpoint-storage`](/br/br-checkpoint-restore.md#implementation-details-store-checkpoint-data-in-the-external-storage) | Newly added | Specifies the external storage for BR to store checkpoint data. | 
 | DM | [`redact-info-log`](/dm/dm-worker-configuration-file.md#redact-info-log-new-in-v900) | Newly added | Controls whether to enable DM log redaction. |
 | TiProxy | [`enable-traffic-replay`](/tiproxy/tiproxy-configuration.md#enable-traffic-replay)  | Newly added | Specifies whether to enable [traffic replay](/tiproxy/tiproxy-traffic-replay.md). If it is set to `false`, traffic capture and replay operations will result in errors. |
@@ -359,7 +361,6 @@ The following features are planned for deprecation in future versions:
     - (dup): release-8.5.1.md > Improvements> TiDB - Support folding read-only user-defined variables into constants [#52742](https://github.com/pingcap/tidb/issues/52742) @[winoros](https://github.com/winoros)
     - (dup): release-8.5.1.md > Improvements> TiDB - Adjust the default threshold of statistics memory cache to 20% of the total memory [#58014](https://github.com/pingcap/tidb/issues/58014) @[hawkingrei](https://github.com/hawkingrei)
     - (dup): release-7.5.6.md > Improvements> TiDB - Limit the execution of GC for TTL tables and related statistics collection tasks to the owner node, thereby reducing overhead [#59357](https://github.com/pingcap/tidb/issues/59357) @[lcwangchao](https://github.com/lcwangchao)
-    - (dup): release-8.5.1.md > Improvements> TiDB - Adjust the default threshold of statistics memory cache to 20% of the total memory [#58014](https://github.com/pingcap/tidb/issues/58014) @[hawkingrei](https://github.com/hawkingrei)
     - Optimize the CPU usage of internal SQL statements in the Distributed eXecution Framework (DXF) [#59344](https://github.com/pingcap/tidb/issues/59344) @[D3Hunter](https://github.com/D3Hunter)
     - Add more detailed spill information to the execution result of `EXPLAIN ANALYZE` [#59076](https://github.com/pingcap/tidb/issues/59076) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - Support Left Outer Anti Semi Join in Hash Join v2 [#58479](https://github.com/pingcap/tidb/pull/58479) @[wshwsh12](https://github.com/wshwsh12)
@@ -427,7 +428,6 @@ The following features are planned for deprecation in future versions:
     - Fix the issue that an error might occur when using `IMPORT INTO ... FROM SELECT` to import data into TiFlash [#58443](https://github.com/pingcap/tidb/issues/58443) @[D3Hunter](https://github.com/D3Hunter)
     - Fix the issue that `IMPORT INTO ... FROM SELECT` does not convert negative numbers correctly [#58613](https://github.com/pingcap/tidb/issues/58613) @[D3Hunter](https://github.com/D3Hunter)
     - Fix the issue that logs do not display node information when some TiDB nodes do not synchronize the schema version [#58480](https://github.com/pingcap/tidb/issues/58480) @[D3Hunter](https://github.com/D3Hunter)
-    - Fix the potential issue that multiple views with the same name could be created [#58769](https://github.com/pingcap/tidb/issues/58769) @[tiancaiamao](https://github.com/tiancaiamao)
     - Fix the issue that the row count is not updated correctly when adding indexes in the TiDB Distributed eXecution Framework (DXF) [#58573](https://github.com/pingcap/tidb/issues/58573) @[D3Hunter](https://github.com/D3Hunter)
     - Fix an out-of-memory (OOM) issue that might occur during global sorting on tables with many indexes [#59508](https://github.com/pingcap/tidb/issues/59508) @[D3Hunter](https://github.com/D3Hunter)
     - Fix the issue that the `truncate` expression returns incorrect results when the first argument is `0` and the second argument is too large [#57651](https://github.com/pingcap/tidb/issues/57651) @[xzhangxian1008](https://github.com/xzhangxian1008)
@@ -504,7 +504,6 @@ The following features are planned for deprecation in future versions:
     - Fix the issue that the PD client retry policy is not properly initialized [#9013](https://github.com/tikv/pd/issues/9013) @[rleungx](https://github.com/rleungx)
     - Fix the issue that an incorrect error message is returned when querying a non-existent Region via API [#8868](https://github.com/tikv/pd/issues/8868) @[lhy1024](https://github.com/lhy1024)
     - Fix the issue that the ping API is incorrectly forwarded [#9031](https://github.com/tikv/pd/issues/9031) @[rleungx](https://github.com/rleungx)
-    - Fix the issue that TTL cache goroutines might leak [#9047](https://github.com/tikv/pd/issues/9047) @[bufferflies](https://github.com/bufferflies)
     - Fix the issue that forwarding TSO requests in microservice mode might cause TiDB to panic [#9091](https://github.com/tikv/pd/issues/9091) @[lhy1024](https://github.com/lhy1024)
     - Fix the issue that network problems in PD might prevent the TSO client from initializing [#58239](https://github.com/pingcap/tidb/issues/58239) @[okJiang](https://github.com/okJiang)
 
