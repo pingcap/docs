@@ -279,15 +279,15 @@ To maintain high performance and efficient resource usage, regular index optimiz
 
 1. Monitor index usage regularly.
 
-  - Use [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md) and [`CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md#cluster_tidb_index_usage) to track index activity.
-  - Identify unused indexes with [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) and evaluate whether they can be removed.
-  - Monitor query execution plans to detect inefficient indexes that might cause excessive I/O.
+    - Use [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md) and [`CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md#cluster_tidb_index_usage) to track index activity.
+    - Identify unused indexes with [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) and evaluate whether they can be removed.
+    - Monitor query execution plans to detect inefficient indexes that might cause excessive I/O.
 
 2. Validate before removing indexes.
 
-  - Use [`ALTER TABLE ... INVISIBLE`](/sql-statements/sql-statement-alter-table.md) to make an index invisible to temporarily disable an index and observe the impact before permanent deletion.
-  - If query performance remains stable, proceed with index removal.
-  - Ensure a sufficient observation period to account for all query patterns before making a final decision.
+    - Use [`ALTER TABLE ... INVISIBLE`](/sql-statements/sql-statement-alter-table.md) to make an index invisible to temporarily disable an index and observe the impact before permanent deletion.
+    - If query performance remains stable, proceed with index removal.
+    - Ensure a sufficient observation period to account for all query patterns before making a final decision.
 
 3. Optimize existing indexes.
 
