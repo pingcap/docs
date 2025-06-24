@@ -1156,23 +1156,12 @@ Configuration items related to Titan.
 
 ### `enabled`
 
-<<<<<<< HEAD
-+ Enables or disables Titan
-+ Default value: `false`
-=======
 > **Warning**
 >
 > When disabling Titan for TiDB versions earlier than v8.5.0, it is not recommended to modify this configuration item to `false`, as this might cause TiKV to crash. To disable Titan, refer to the steps in [Disable Titan](/storage-engine/titan-configuration.md#disable-titan).
 
-> **Note:**
->
-> - To enhance the performance of wide table and JSON data writing and point query, starting from TiDB v7.6.0, the default value changes from `false` to `true`, which means that Titan is enabled by default.
-> - Existing clusters upgraded to v7.6.0 or later versions retain the original configuration, which means that if Titan is not explicitly enabled, it still uses RocksDB.
-> - If the cluster has enabled Titan before upgrading to TiDB v7.6.0 or later versions, Titan will be retained after the upgrade, and the [`min-blob-size`](/tikv-configuration-file.md#min-blob-size) configuration before the upgrade will be retained. If you do not explicitly configure the value before the upgrade, the default value of the previous version `1KiB` will be retained to ensure the stability of the cluster configuration after the upgrade.
-
-+ Enables or disables Titan.
-+ Default value: `true`
->>>>>>> 445dea0c18 (titan-configuration: remove the unrecommended steps of updating TiKV configuration  (#21217))
++ Enables or disables Titan
++ Default value: `false`
 
 ### `dirname`
 
