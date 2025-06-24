@@ -142,7 +142,7 @@ To disable Titan for all existing and future data, you can follow these steps. N
 
 > **Warning:**
 >
-> When disabling Titan for TiDB versions earlier than v8.5.0, it is not recommended to update the TiKV configuration item [`rocksdb.titan.enabled`](/tikv-configuration-file.md#enabled) to `false`, as this might cause TiKV to crash. Following Step 1 is sufficient to disable Titan.
+> When disabling Titan for TiDB versions earlier than v8.5.0, it is not recommended to modify the TiKV configuration item [`rocksdb.titan.enabled`](/tikv-configuration-file.md#enabled) to `false`, as this might cause TiKV to crash. Following Step 1 is sufficient to disable Titan.
 
 1. Update the configuration of the TiKV nodes you wish to disable Titan for. You can update configuration in two methods:
 
