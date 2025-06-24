@@ -273,33 +273,53 @@ After making the index invisible, observe the system's query performance:
 
 For safety, keep the index invisible for at least one full business cycle to ensure all workloads have been tested before making a final decision.
 
-## Summary and key takeaways
+## Top five best practices for index optimization
 
-Effective index management is crucial for maintaining database performance in TiDB. By using TiDB's built-in observability tools, you can easily identify, evaluate, and optimize indexes without risking system stability.
+To maintain high performance and efficient resource usage, regular index optimization is part of database maintenance. The following are the best practices for managing indexes effectively in TiDB.
 
-By following these best practices, you can keep your databases optimized, reduce unnecessary resource consumption, and maintain peak query performance.
+1. Monitor index usage regularly.
 
-- Monitor index usage regularly
+  - Use [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md) and [`CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md#cluster_tidb_index_usage) to track index activity.
+  - Identify unused indexes with [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) and evaluate whether they can be removed.
+  - Monitor query execution plans to detect inefficient indexes that might cause excessive I/O.
 
-    - Use [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md) to track index query activity.
-    - Use [`CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md#cluster_tidb_index_usage) to get a cluster-wide view of index behavior.
+2. Validate before removing indexes.
 
-- Identify unused indexes with confidence
+  - Use [`ALTER TABLE ... INVISIBLE`](/sql-statements/sql-statement-alter-table.md) to make an index invisible to temporarily disable an index and observe the impact before permanent deletion.
+  - If query performance remains stable, proceed with index removal.
+  - Ensure a sufficient observation period to account for all query patterns before making a final decision.
 
-    - Use [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) to list indexes that have not been used since the last restart.
-    - Note that some indexes might be used infrequently but remain critical for specific queries.
+3. Optimize existing indexes.
 
-- Safely test index removal with invisible indexes
+    - Consolidating redundant indexes can reduce storage overhead and improve write performance. If multiple indexes serve similar queries, they might be candidates for merging into a single, more efficient index. 
 
-    - Use [`ALTER TABLE ... INVISIBLE`](/sql-statements/sql-statement-alter-table.md) to make an index `INVISIBLE` before dropping it to validate its necessity.
-    - Restore visibility if query performance is negatively affected.
+        - To find indexes with overlapping prefixes (which might indicate redundancy), run the following:
 
-- Optimize indexes to reduce overhead
+            ```sql
+            SELECT TABLE_SCHEMA, TABLE_NAME, INDEX_NAME, COLUMN_NAME, SEQ_IN_INDEX
+            FROM INFORMATION_SCHEMA.STATISTICS
+            WHERE TABLE_NAME = 'your_table'
+            ORDER BY TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME, SEQ_IN_INDEX;
+            ```
+        
+        - If two indexes have the same leading columns, consider merging them into a composite index instead.
 
-    - Avoid redundant or low-selectivity indexes that consume storage and slow down write operations.
-    - Optimize index structures to improve query filtering efficiency.
+    - Improve selectivity. Low-selectivity indexes (those filtering too many rows) can be optimized by:
+         
+        - Adding additional columns to improve filtering efficiency.
+        - Changing index structure (for example, prefix indexes, composite indexes).
 
-- Prioritize ongoing index maintenance
+    - Analyze index selectivity. Use `PERCENTAGE_ACCESS_*` fields in `TIDB_INDEX_USAGE` to evaluate how well an index filters data.
 
-    - Regularly audit indexes after schema changes, application updates, or workload shifts.
-    - Use TiDB's execution plan analysis tools to ensure indexes are used effectively.
+4. Be mindful of DML performance impact.
+  
+    - Avoid excessive indexing. Each additional index increases overhead on `INSERT`, `UPDATE`, and `DELETE` operations.
+    - Index only what is necessary for queries to minimize the maintenance cost on write-heavy workloads.
+
+5. Test and tune regularly.
+
+    - Perform index audits periodically, especially after significant workload changes.
+    - Use TiDB's execution plan analysis tools to verify whether indexes are being used optimally.
+    - When adding new indexes, test them in an isolated environment first to prevent unexpected regressions.
+
+By following these best practices, you can ensure efficient query execution, reduce unnecessary storage overhead, and maintain optimal database performance.
