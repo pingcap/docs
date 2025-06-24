@@ -156,6 +156,7 @@ EXPLAIN FORMAT = "brief"
 | └─TableRowIDScan(Probe) | root | table:listings                                                       |                                                  |
 +-------------------------+------+----------------------------------------------------------------------+--------------------------------------------------+
 ```
+
 ### Example 2: non-overlapping ranges
 
 In a different scenario, imagine a query that looks for affordable single-bedroom listings in either San Francisco or San Diego. Here, the `OR` condition specifies two distinct ranges for different cities:
