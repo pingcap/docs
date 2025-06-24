@@ -43,7 +43,7 @@ If you require the features listed in this document, [contact us](https://www.pi
 ### Stream data
 
 - Changefeed is not supported for TiDB Cloud Starter currently.
-- The Data Migration feaure that migrates data from MySQL-compatible databases to TiDB Cloud is not supported for TiDB Cloud Starter currently.
+- The Data Migration feature that migrates data from MySQL-compatible databases to TiDB Cloud is not supported for TiDB Cloud Starter currently.
 
 ### Time to live (TTL)
 

@@ -440,7 +440,7 @@ The following example shows how to create a TiDB Cloud Dedicated cluster.
 
     tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
 
-    $ terraform state show tidbcloud_cluster.example_cluste
+    $ terraform state show tidbcloud_cluster.example_cluster
 
     # tidbcloud_cluster.example_cluster:
     resource "tidbcloud_cluster" "example_cluster" {
