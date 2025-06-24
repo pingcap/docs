@@ -573,4 +573,7 @@ To learn about the performance of TiDB v9.0.0, you can refer to the [performance
 
 We would like to thank the following contributors from the TiDB community:
 
+- [b6g](https://github.com/b6g)
+- [mengxian-li](https://github.com/mengxian-li)
 - [SandeepPadhi](https://github.com/SandeepPadhi)
+- [takaebato](https://github.com/takaebato)
