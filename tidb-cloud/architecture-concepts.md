@@ -9,7 +9,7 @@ TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings the flex
 
 TiDB is MySQL-compatible, making it easy to migrate and work with existing applications, while offering seamless scalability to handle everything from small workloads to massive, high-performance clusters. It supports both transactional (OLTP) and analytical (OLAP) workloads in one system, simplifying operations and enabling real-time insights.
 
-TiDB Cloud provides **TiDB Cloud Starter** for auto-scaling, cost-efficient workloads and **TiDB Cloud Essential** for production ready workloads with provisoned capacity. TiDB Cloud makes it easy to scale your database, handle complex management tasks, and stay focused on developing reliable, high-performing applications.
+TiDB Cloud provides **TiDB Cloud Starter** for auto-scaling, cost-efficient workloads and **TiDB Cloud Essential** for production ready workloads with provisioned capacity. TiDB Cloud makes it easy to scale your database, handle complex management tasks, and stay focused on developing reliable, high-performing applications.
 
 ## TiDB Cloud
 
