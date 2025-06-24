@@ -141,9 +141,9 @@ In this case, the two ranges overlap, so the optimizer combines them into a sing
 
 ```sql
 -- Query 3: Overlapping price ranges
-EXPLAIN FORMAT = "brief" 
-    SELECT * FROM listings 
-    WHERE (city = 'New York' AND bedrooms = 2 AND price >= 1000 AND price < 2000) 
+EXPLAIN FORMAT = "brief"
+    SELECT * FROM listings
+    WHERE (city = 'New York' AND bedrooms = 2 AND price >= 1000 AND price < 2000)
        OR (city = 'New York' AND bedrooms = 2 AND price >= 1500 AND price < 2500);
 ```
 
@@ -169,10 +169,10 @@ Because the index ranges do not overlap, they remain separate in the execution p
 ```sql
 -- Query 4: Non-overlapping ranges for different cities
 
-EXPLAIN FORMAT = "brief" 
-    SELECT * FROM listings 
+EXPLAIN FORMAT = "brief"
+    SELECT * FROM listings
     WHERE
-        (city = 'San Francisco' AND bedrooms = 1 AND price >= 1500 AND price < 2500) 
+        (city = 'San Francisco' AND bedrooms = 1 AND price >= 1500 AND price < 2500)
      OR (city = 'San Diego' AND bedrooms = 1 AND price >= 1000 AND price < 1500);
 ```
 
@@ -200,7 +200,7 @@ Consider a table `t1` that is defined as follows:
 CREATE TABLE t1 (
     a1 INT,
     b1 INT,
-    c1 INT, 
+    c1 INT,
     KEY iab (a1,b1)
 );
 ```
@@ -241,8 +241,8 @@ The following query plan shows the derived ranges:
 
 ```sql
 -- Query 5: Conjunctive conditions on (a1, b1)
-EXPLAIN FORMAT = "brief" 
-    SELECT * FROM t1 
+EXPLAIN FORMAT = "brief"
+    SELECT * FROM t1
     WHERE (a1, b1) > (1, 10) AND (a1, b1) < (10, 20);
 ```
 
