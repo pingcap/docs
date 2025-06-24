@@ -164,7 +164,7 @@ In a different scenario, imagine a query that looks for affordable single-bedroo
 - Listings in San Francisco, 1 bedroom, priced between `$1,500` and `$2,500`
 - Listings in San Diego, 1 bedroom, priced between `$1,000` and `$1,500`
 
-Because there is no overlap between these ranges, they remain separate in the execution plan, with each city having its own index range:
+Because the index ranges do not overlap, they remain separate in the execution plan, with each city having its own index range:
 
 ```sql
 -- Query 4: Non-overlapping ranges for different cities
