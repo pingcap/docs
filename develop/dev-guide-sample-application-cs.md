@@ -69,7 +69,8 @@ public class Tutorial1
 {
     public static void Main()
     {
-        string connStr = "server=127.0.0.1;user=root;database=test;port=4000";
+        // For production, always use strong, unique passwords.
+        string connStr = "server=127.0.0.1;user=root;database=test;port=4000;AllowUserVariables=true";
         MySqlConnection conn = new MySqlConnection(connStr);
         try
         {
