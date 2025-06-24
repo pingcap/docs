@@ -19,13 +19,11 @@ Proactively identifying and optimizing indexes helps:
 - Optimize query execution: efficient indexes reduce the number of rows scanned, improving query speed and response times.
 - Streamline database management: fewer and well-optimized indexes simplify backups, recovery, and schema changes.
 
-TiDB v8.0.0 introduces the [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md) table and a view [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) to help DBAs and developers track index usage patterns and make data-driven decisions. This document explores the tools needed to detect and eliminate unused or inefficient indexes, improving TiDB's performance and stability.
+TiDB v8.0.0 introduces the [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md) table and the [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) table to help you track index usage patterns and make data-driven decisions. 
 
-## Making index optimization a habit
+Because indexes evolve with changing business logic, regular index audits are a standard part of database maintenance. TiDB provides built-in observability tools to help you detect, evaluate, and optimize indexes without risk.
 
-Because indexes evolve with changing business logic, regular index audits should be a standard part of database maintenance. TiDB provides built-in observability tools to help users detect, evaluate, and optimize indexes without risk.
-
-The next section describes how `TIDB_INDEX_USAGE` and `schema_unused_indexes` help DBAs efficiently track and optimize indexes.
+This document describes the tools that you can use to detect and eliminate unused or inefficient indexes, thus improving TiDB's performance and stability.
 
 ## TiDB index optimization: a data-driven approach
 
@@ -48,7 +46,7 @@ By using these observability tools, you can confidently clean up redundant index
 
 Introduced in [TiDB v8.0.0](/releases/release-8.0.0.md), the `TIDB_INDEX_USAGE` system table provides real-time insights into how indexes are used, helping you optimize query performance and remove unnecessary indexes.
 
-This system table enables you to:
+With `TIDB_INDEX_USAGE`, you can:
 
 - Detect unused indexes: identify indexes that have not been accessed by queries, helping determine which ones can be safely removed.
 - Analyze index efficiency: track how frequently an index is used and whether it contributes to efficient query execution.
@@ -87,44 +85,31 @@ DESC TIDB_INDEX_USAGE;
 14 rows in set (0.00 sec)
 ```
 
-The columns in the `TIDB_INDEX_USAGE` table are as follows:
-
-* `TABLE_SCHEMA`: The name of the database to which the table containing the index belongs.
-* `TABLE_NAME`: The name of the table containing the index.
-* `INDEX_NAME`: The name of the index.
-* `QUERY_TOTAL`: The total number of statements accessing the index.
-* `KV_REQ_TOTAL`: The total number of KV requests generated when accessing the index.
-* `ROWS_ACCESS_TOTAL`: The total number of rows scanned when accessing the index.
-* `PERCENTAGE_ACCESS_0`: The number of times the row access ratio (the percentage of accessed rows out of the total number of rows in the table) is 0.
-* `PERCENTAGE_ACCESS_0_1`: The number of times the row access ratio is between 0% and 1%.
-* `PERCENTAGE_ACCESS_1_10`: The number of times the row access ratio is between 1% and 10%.
-* `PERCENTAGE_ACCESS_10_20`: The number of times the row access ratio is between 10% and 20%.
-* `PERCENTAGE_ACCESS_20_50`: The number of times the row access ratio is between 20% and 50%.
-* `PERCENTAGE_ACCESS_50_100`: The number of times the row access ratio is between 50% and 100%.
-* `PERCENTAGE_ACCESS_100`: The number of times the row access ratio is 100%.
-* `LAST_ACCESS_TIME`: The time of the most recent access to the index.
+For the explanations of these columns, see [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md).
 
 ### Identify unused and inefficient indexes using `TIDB_INDEX_USAGE`
 
-Identify unused and inefficient indexes using `TIDB_INDEX_USAGE as follows:
+Identify unused and inefficient indexes using `TIDB_INDEX_USAGE` as follows:
 
 - Unused indexes:
 
     - If `QUERY_TOTAL = 0`, the index has not been used by any queries.
-    - If `LAST_ACCESS_TIME` is a long time ago, the index might no longer be relevant.
+    - If `LAST_ACCESS_TIME` shows a long time ago, the index might no longer be relevant.
 
-- Inefficient Indexes:
+- Inefficient indexes:
 
-    - High values in `PERCENTAGE_ACCESS_100` suggest full index scans, which might indicate an inefficient index.
-    - Comparing `ROWS_ACCESS_TOTAL / QUERY_TOTAL` helps determine whether the index scans too many rows relative to its usage.
+    - Large values in `PERCENTAGE_ACCESS_100` suggest full index scans, which might indicate an inefficient index.
+    - Compare `ROWS_ACCESS_TOTAL` and `QUERY_TOTAL` to determine whether the index scans too many rows relative to its usage.
 
 By leveraging `TIDB_INDEX_USAGE`, you can gain detailed insights into index performance, making it easier to remove unnecessary indexes and optimize query execution.
 
-### Handle index usage data efficiently
+### Considerations when using `TIDB_INDEX_USAGE`
 
-#### Delayed data updates
+Take the following into consideration when you use `TIDB_INDEX_USAGE`.
 
-To minimize performance impact, `TIDB_INDEX_USAGE` does not update instantly. Index usage metrics might be delayed by up to 5 minutes, so you should account for this when analyzing queries.
+#### Data updates are delayed
+
+To minimize performance impact, `TIDB_INDEX_USAGE` does not update instantly. Index usage metrics might be delayed by up to 5 minutes. Take this delay into consideration when you analyze queries.
 
 #### Index usage data is not persisted
 
@@ -132,11 +117,9 @@ To minimize performance impact, `TIDB_INDEX_USAGE` does not update instantly. In
 
 If a TiDB node is restarted, all index usage statistics from that node will be cleared.
 
-#### Planned enhancements for historical tracking
+#### Track historical data
 
-TiDB is developing a Workload Repository to periodically take snapshots for index usage data, allowing you to review trends over time instead of relying only on real-time metrics.
-
-Before this feature is available, you can periodically export index usage snapshots using the following:
+You can periodically export index usage snapshots using the following SQL statement:
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.TIDB_INDEX_USAGE INTO OUTFILE '/backup/index_usage_snapshot.csv';
@@ -144,19 +127,17 @@ SELECT * FROM INFORMATION_SCHEMA.TIDB_INDEX_USAGE INTO OUTFILE '/backup/index_us
 
 This allows for historical tracking by comparing snapshots over time to detect trends in index usage and make more informed pruning decisions.
 
-## Consolidate index usage data across TiDB nodes
+## Consolidate index usage data across TiDB nodes using `CLUSTER_TIDB_INDEX_USAGE`
 
-Because TiDB is a distributed SQL database, query workloads are spread across multiple nodes. Each TiDB node tracks its own local index usage, but for a global view of index performance, TiDB provides the [`CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md#cluster_tidb_index_usage) system table.
+Because TiDB is a distributed SQL database, query workloads are spread across multiple nodes. Each TiDB node tracks its own local index usage. For a global view of index performance, TiDB provides the [`CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md#cluster_tidb_index_usage) system table. This view consolidates index usage data from all TiDB nodes, ensuring that distributed query workloads are fully accounted for when optimizing indexing strategies.
 
-This view consolidates index usage data from all TiDB nodes, ensuring that distributed query workloads are fully accounted for when optimizing indexing strategies.
-
-Unlike `TIDB_INDEX_USAGE`, which provides insights at the node level, this cluster-wide view allows you to:
+Unlike `TIDB_INDEX_USAGE`, which provides insights at the node level, this cluster-wide view `CLUSTER_TIDB_INDEX_USAGE` lets you:
 
 - Detect inconsistencies in index usage. For example, an index might be frequently used on some nodes but unused on others.
 - Analyze global index patterns for distributed queries, ensuring indexing decisions reflect real-world workload distribution.
 - Optimize indexing strategies across all nodes, improving query efficiency for multi-node deployments.
 
-Different TiDB nodes may experience different query workloads, so an index that appears unused on some nodes may still be critical elsewhere. To segment index analysis by workload, run:
+Different TiDB nodes might experience different query workloads. An index that appears unused on some nodes might still be critical elsewhere. To segment index analysis by workload, run the following SQL statement:
 
 ```sql
 SELECT INSTANCE, TABLE_NAME, INDEX_NAME, SUM(QUERY_TOTAL) AS total_queries
@@ -165,37 +146,33 @@ GROUP BY INSTANCE, TABLE_NAME, INDEX_NAME
 ORDER BY total_queries DESC;
 ```
 
-This helps determine whether an index is truly unused across all nodes or only for specific instances, allowing DBAs to make informed decisions on index removal.
+This helps determine whether an index is truly unused across all nodes or only for specific instances, allowing you to make informed decisions on index removal.
 
 ### Key differences between `TIDB_INDEX_USAGE` and `CLUSTER_TIDB_INDEX_USAGE`
 
 The following tables show the key differences between `TIDB_INDEX_USAGE` and `CLUSTER_TIDB_INDEX_USAGE`.
 
-| Feature | `TIDB_INDEX_USAGE` | `CLUSTER_TIDB_INDEX_USAGE` |
-| ------- | ------------------ | -------------------------- |
-| Scope   | Tracks index usage within a single database                   | Aggregates index usage across the entire TiDB cluster   |
-| Index Tracking   | Data is local to each database                       | Centralized cluster-wide view                           |
-| Primary Use Case | Debugging index usage at the database instance level | Analyzing global index patterns and multi-node behavior |
+| Feature          | `TIDB_INDEX_USAGE`                                   | `CLUSTER_TIDB_INDEX_USAGE`                              |
+| ---------------- | ---------------------------------------------------- | ------------------------------------------------------- |
+| Scope            | Tracks index usage within a single database.         | Aggregates index usage across the entire TiDB cluster   |
+| Index tracking   | Data is local to each database.                      | Provides a centralized cluster-wide view                |
+| Primary use case | Debugs index usage at the database instance level    | Analyzes global index patterns and multi-node behavior  |
 
-### Using `CLUSTER_TIDB_INDEX_USAGE` effectively
+### Considerations when using `CLUSTER_TIDB_INDEX_USAGE`
 
-Since this system table consolidates data from multiple nodes, consider the following:
+Because this system table consolidates data from multiple nodes, consider the following:
 
 - Delayed data updates
 
-    The data is refreshed periodically to minimize performance impact. If index usage is analyzed immediately after a query execution, allow time for metrics to update.
+    The data is refreshed periodically to minimize performance impact. If index usage is analyzed immediately after a query execution, allow some time for the metrics to update.
 
 - Memory-based storage
 
     Like `TIDB_INDEX_USAGE`, this system table does not persist data across node restarts. If a node goes down, its recorded index usage data will be lost.
 
--  Future enhancements for historical tracking
+By using `CLUSTER_TIDB_INDEX_USAGE`, you can gain a global perspective on index behavior, ensuring indexing strategies are aligned with distributed query workloads.
 
-    TiDB is introducing a Workload Repository that will periodically snapshot index usage metrics, allowing you to analyze trends over time instead of relying solely on real-time data.
-
-By leveraging `CLUSTER_TIDB_INDEX_USAGE`, you can gain a global perspective on index behavior, ensuring indexing strategies are aligned with distributed query workloads.
-
-## Identify unused indexes with `schema_unused_indexes`
+## Identify unused indexes using `schema_unused_indexes`
 
 Manually analyzing index usage data can be time-consuming. To simplify this process, TiDB provides `schema_unused_indexes`, a system view that lists indexes that have not been used since the database is last restarted.
 
@@ -204,6 +181,8 @@ This provides a quick way for you to:
 - Identify indexes that are no longer in use, reducing unnecessary storage costs.
 - Speed up DML operations by eliminating indexes that add overhead to `INSERT`, `UPDATE`, and `DELETE` queries.
 - Streamline index audits without needing to manually analyze query patterns.
+
+By using `schema_unused_indexes`, you can quickly identify unnecessary indexes and reduce database overhead with minimal effort.
 
 ### How `schema_unused_indexes` works
 
@@ -219,7 +198,7 @@ A result similar to the following is returned:
 
 ```
 +-----------------+---------------+--------------------+
-| `object_schema` | `object_name` | `index_name`       |
+| object_schema   | object_name   | index_name         |
 +---------------- + ------------- + -------------------+
 | bookshop        | users         | nickname           |
 | bookshop        | ratings       | uniq_book_user_idx |
@@ -231,10 +210,9 @@ A result similar to the following is returned:
 #### Indexes are considered unused only since the last restart
 
 - If a TiDB node restarts, the usage tracking data is reset.
-
 - Ensure the system has been running long enough to capture a representative workload before relying on this data.
 
-#### Not all unused indexes should be dropped immediately
+#### Not all unused indexes can be dropped immediately
 
 Some indexes might be rarely used but still essential for specific queries, batch jobs, or reporting tasks. Before dropping an index, consider whether it supports the following:
 
@@ -244,82 +222,76 @@ Some indexes might be rarely used but still essential for specific queries, batc
 
 If the index appears in important but infrequent queries, it is recommended to keep it or make it invisible first.
 
-Use [invisible indexes](#safely-test-index-removal-with-invisible-indexes) to safely test whether an index can be removed without impacting performance.
-
-By leveraging `schema_unused_indexes`, you can quickly identify unnecessary indexes and reduce database overhead with minimal effort.
+You can use [invisible indexes](#safely-test-index-removal-with-invisible-indexes) to safely test whether an index can be removed without impacting performance.
 
 ### Manually create the `schema_unused_indexes` view
 
-Because `TIDB_INDEX_USAGE` is cleared after a TiDB node restarts, ensure that the node has been running for a sufficient amount of time before making decisions.
-
-For clusters upgraded from an earlier version to TiDB v8.0.0 or later, you must manually create the system schema and the included views. 
+Because `TIDB_INDEX_USAGE` is cleared after a TiDB node restarts, ensure that the node has been running for a sufficient amount of time before making decisions. For clusters upgraded from an earlier version to TiDB v8.0.0 or later, you must manually create the system schema and the included views. 
 
 For more information, see [Manually create the `schema_unused_indexes` view](/sys-schema/sys-schema-unused-indexes.md#manually-create-the-schema_unused_indexes-view). 
 
 ## Safely test index removal with invisible indexes
 
-Removing an index without proper validation can lead to unexpected performance issues, especially if the index is infrequently used but still critical for certain queries. To mitigate this risk, TiDB provides invisible indexes, allowing you to temporarily disable an index without deleting it.
+Removing an index without proper validation can lead to unexpected performance issues, especially if the index is infrequently used but still critical for certain queries. 
+
+To mitigate this risk, TiDB provides invisible indexes, allowing you to temporarily disable an index without deleting it. By using invisible indexes, you can validate index removal decisions without risk, ensuring a more controlled and predictable database optimization process.
 
 ### What are invisible indexes?
 
-An invisible index remains in the database but is ignored by the TiDB optimizer. This allows you to test whether an index is truly unnecessary without permanently removing it.
+An invisible index remains in the database but is ignored by the TiDB optimizer. You can use [`ALTER TABLE ... INVISIBLE`](/sql-statements/sql-statement-alter-table.md) to make an index invisible to test whether the index is truly unnecessary without permanently removing it.
 
-Key benefits include:
+Key benefits of invisible indexes include:
 
-- **Safe index testing**. Queries will no longer use the index, but it can be quickly restored if needed.
-- **Zero disruption to index storage**. The index remains intact, ensuring no need for costly re-creation.
-- **Performance monitoring**. As a DBA, you can observe query behavior without the index before making a final decision.
+- **Safe index testing**: queries will no longer use the index, but it can be quickly restored if needed.
+- **Zero disruption to index storage**: the index remains intact, ensuring no need for costly re-creation.
+- **Performance monitoring**: as a DBA, you can observe query behavior without the index before making a final decision.
 
-### Use invisible indexes in TiDB
+### Make an index invisible
 
-To make an index invisible (without dropping it), use:
+To make an index invisible without dropping it, run a SQL statement similar to the following:
 
 ```sql
 ALTER TABLE bookshop.users ALTER INDEX nickname INVISIBLE;
 ```
 
-### Monitor query performance
-
 After making the index invisible, observe the system's query performance:
 
 - If performance remains unchanged, the index is likely unnecessary and can be safely removed.
-- If query latency increases, the index might still be needed, and removal should be reconsidered.
+- If query latency increases, the index might still be needed.
 
-### Best practices for using invisible indexes
+### Considerations when using invisible indexes
 
-- Test during off-peak hours: monitor performance impact in a controlled environment.
-- Use query monitoring tools: analyze query execution plans before and after marking an index as invisible.
-- Confirm over multiple workloads: ensure that the index is not needed for specific reports or scheduled queries.
+- **Test during off-peak hours**: monitor performance impact in a controlled environment.
+- **Use query monitoring tools**: analyze query execution plans before and after marking an index invisible.
+- **Confirm over multiple workloads**: ensure that the index is not needed for specific reports or scheduled queries.
 
-By leveraging invisible indexes, you can validate index removal decisions without risk, ensuring a more controlled and predictable database optimization process.
-
-### How long should an index remain invisible?
+### How long can an index remain invisible?
 
 - OLTP workloads: monitor for at least one week to account for daily variations.
-- Batch processing/ETL workloads: allow one full reporting cycle (for example, a monthly financial report run).
-- Ad-hoc analytical queries: use query logs to confirm the index is not needed before dropping it.
+- Batch processing or ETL workloads: allow one full reporting cycle, for example, a monthly financial report.
+- Ad-hoc analytical queries: use query logs to confirm that the index is not needed before dropping it.
 
 For safety, keep the index invisible for at least one full business cycle to ensure all workloads have been tested before making a final decision.
 
 ## Summary and key takeaways
 
-Effective index management is crucial for maintaining database performance in TiDB. By leveraging TiDB's built-in observability tools, you can easily identify, evaluate, and optimize indexes without risking system stability.
+Effective index management is crucial for maintaining database performance in TiDB. By using TiDB's built-in observability tools, you can easily identify, evaluate, and optimize indexes without risking system stability.
 
 By following these best practices, you can keep your databases optimized, reduce unnecessary resource consumption, and maintain peak query performance.
 
 - Monitor index usage regularly
 
-    - Use `TIDB_INDEX_USAGE` to track index query activity.
-    - Use `CLUSTER_TIDB_INDEX_USAGE` for a cluster-wide view of index behavior.
+    - Use [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md) to track index query activity.
+    - Use [`CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md#cluster_tidb_index_usage) to get a cluster-wide view of index behavior.
 
 - Identify unused indexes with confidence
 
-    - Use `schema_unused_indexes` to list indexes that have not been used since the last restart.
-    - Be cautious—some indexes might be used infrequently but remain critical for specific queries.
+    - Use [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) to list indexes that have not been used since the last restart.
+    - Note that some indexes might be used infrequently but remain critical for specific queries.
 
 - Safely test index removal with invisible indexes
 
-    - Mark an index as `INVISIBLE` before dropping it to validate its necessity.
+    - Use [`ALTER TABLE ... INVISIBLE`](/sql-statements/sql-statement-alter-table.md) to make an index `INVISIBLE` before dropping it to validate its necessity.
     - Restore visibility if query performance is negatively affected.
 
 - Optimize indexes to reduce overhead
