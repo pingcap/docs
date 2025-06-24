@@ -76,10 +76,6 @@ TiDB also provides a system variable (`max_execution_time`, `0` by default, indi
 
 ## JDBC query timeout
 
-对于 `v6.1` 及之后版本的 TiDB，`enable-global-kill` 的参数默认为 `true`, 你可以使用 MySQL JDBC 的查询超时设置 `setQueryTimeout()` 来控制查询超时。
-
-然而，`setQueryTimeout()` 对 `v6.1` 版本前的 TiDB 不起作用。这是因为客户端在超时后，会向数据库发送一个 KILL 命令。但是由于 tidb-server 是负载均衡的，为防止在错误的 tidb-server 上终止连接，tidb-server 不会执行这个 KILL。这时就要用 `MAX_EXECUTION_TIME` 实现查询超时的效果。
-
 Starting from TiDB `v6.1` version, the `enable-global-kill` parameter is enabled by default `true`. This allows you to control query timeouts using the MySQL JDBC method `setQueryTimeout()`.
 
 However, for TiDB versions earlier than `v6.1`, `setQueryTimeout()` does **_NOT_** work for TiDB, because the client sends a `KILL` command to the database when it detects the timeout. However, the tidb-server is load balanced, and it will not execute this `KILL` command to avoid termination of the connection on a wrong tidb-server. You need to use `MAX_EXECUTION_TIME` to check the query timeout effect.
