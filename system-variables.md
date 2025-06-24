@@ -6305,14 +6305,14 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 > - `PARALLEL` and `PARALLEL-FAST` modes are designed to reduce the average time for retrieving TS in TiDB. In situations with significant latency fluctuations, such as long-tail latency or latency spikes, these two modes might not provide any remarkable performance improvements.
 
 
-### tidb_cb_pd_metadata_error_rate_threshold_pct
+### tidb_cb_pd_metadata_error_rate_threshold_ratio
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `0`
 - Range: `[0, 1]`
-- This variable is used to control when TiDB triggers the circuit breaker. If set to 0 (the default) then the circuit breaker is disabled. If the variable is set to 0.01 to 1 then the circuit breaker is triggered if the error rate percentage, of the specific requests sent to PD, meets or exceeds the threshold.
+- This variable is used to control when TiDB triggers the circuit breaker. If set to 0 (the default) then the circuit breaker is disabled. If the variable is set to 0.01 to 1 then the circuit breaker is triggered if the error rate ratio, of the specific requests sent to PD, meets or exceeds the threshold.
 
 ### tidb_ttl_delete_rate_limit <span class="version-mark">New in v6.5.0</span>
 
