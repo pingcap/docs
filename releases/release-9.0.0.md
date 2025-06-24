@@ -237,8 +237,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
     In v9.0.0, TiCDC introduces a new architecture (experimental) that improves real-time data replication performance, scalability, and stability while reducing resource costs. This new architecture redesigns TiCDC core components and optimizes its data processing workflows.
 
     With this new architecture, TiCDC can now scale its replication capability nearly linearly and replicate millions of tables with lower resource costs. Changefeed latency is reduced and performance is more stable in scenarios with high traffic, frequent DDL operations, and during cluster scaling events.
-
+    <!--
     For more information, see [documentation](/ticdc/ticdc-new-arch.md).
+    -->
 
 * TiCDC supports DDL events and WATERMARK events for the Debezium protocol [#11566](https://github.com/pingcap/tiflow/issues/11566) @[wk989898](https://github.com/wk989898)
 
@@ -412,7 +413,6 @@ The following features are planned for deprecation in future versions:
     + TiDB Lightning
 
         - (dup): release-6.5.12.md > Improvements> Tools> TiDB Lightning - Add a row width check when parsing CSV files to prevent OOM issues [#58590](https://github.com/pingcap/tidb/issues/58590) @[D3Hunter](https://github.com/D3Hunter)
-
 
 ## Bug fixes
 
