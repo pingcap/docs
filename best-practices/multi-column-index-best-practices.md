@@ -190,9 +190,9 @@ By creating either merged or distinct ranges based on overlap, the optimizer can
 
 ## Conjunctive conditions (`AND` conditions) in multi-column indexes
 
-For queries with **AND** conditions (also known as conjunctive conditions), TiDB's optimizer creates a range for each condition. It then finds the overlap (intersection) of these ranges to get a precise result for index access. If each condition has only one range, this is straightforward, but it becomes more complex if any condition contains multiple ranges. In such cases, TiDB combines these ranges to produce the most selective, efficient result.
+For queries with **AND** conditions (also known as conjunctive conditions), the TiDB optimizer creates a range for each condition. It then finds the overlap (intersection) of these ranges to get a precise result for index access. If each condition has only one range, this is straightforward, but it becomes more complex if any condition contains multiple ranges. In such cases, TiDB combines these ranges to produce the most selective, efficient result.
 
-### Example table setup
+### Example 1: table setup
 
 Consider a table `t1` that is defined as follows:
 
@@ -211,31 +211,31 @@ Suppose you have a query with the following conditions:
 (a1, b1) > (1, 10) AND (a1, b1) < (10, 20)
 ```
 
-This query involves comparing multiple columns and requires two steps to process:
+This query involves comparing multiple columns, and requires the TiDB optimizer to process it in the following two steps:
 
-### Step 1: expression translation
+1. Translate the expressions.
 
-TiDB's optimizer breaks down these complex conditions into simpler parts.
+    The TiDB optimizer breaks down these complex conditions into simpler parts.
 
-- `(a1, b1) > (1, 10)` translates to `(a1 > 1) OR (a1 = 1 AND b1 > 10)`, meaning it includes all cases where `a1` is greater than `1` or where `a1` is exactly `1` and `b1` is greater than `10`.
-- `(a1, b1) < (10, 20)` translates to `(a1 < 10) OR (a1 = 10 AND b1 < 20)`, covering cases where `a1` is less than `10` or where `a1` is exactly `10` and `b1` is less than `20`.
+    - `(a1, b1) > (1, 10)` translates to `(a1 > 1) OR (a1 = 1 AND b1 > 10)`, meaning it includes all cases where `a1` is greater than `1` or where `a1` is exactly `1` and `b1` is greater than `10`.
+    - `(a1, b1) < (10, 20)` translates to `(a1 < 10) OR (a1 = 10 AND b1 < 20)`, covering cases where `a1` is less than `10` or where `a1` is exactly `10` and `b1` is less than `20`.
 
-These expressions are then combined using `AND`:
+    These expressions are then combined using `AND`:
 
-```sql
-((a1 > 1) OR (a1 = 1 AND b1 > 10)) AND ((a1 < 10) OR (a1 = 10 AND b1 < 20))
-```
+    ```sql
+    ((a1 > 1) OR (a1 = 1 AND b1 > 10)) AND ((a1 < 10) OR (a1 = 10 AND b1 < 20))
+    ```
 
-### Step 2: range derivation and combination
+2. Derive and combine ranges.
 
-After breaking down the conditions, TiDB's optimizer calculates ranges for each part and combines them. For this example, it derives:
+    After breaking down the conditions, the TiDB optimizer calculates ranges for each part and combines them. For this example, it derives:
 
-- For `(a1, b1) > (1, 10)`: it creates ranges such as `(1, +inf]` for cases where `a1 > 1` and `(1, 10, 1, +inf]` for cases where `a1 = 1` and `b1 > 10`.
-- For `(a1, b1) < (10, 20)`: it creates ranges `[-inf, 10)` for cases where `a1 < 10` and `[10, -inf, 10, 20)` for cases where `a1 = 10` and `b1 < 20`.
+    - For `(a1, b1) > (1, 10)`: it creates ranges such as `(1, +inf]` for cases where `a1 > 1` and `(1, 10, 1, +inf]` for cases where `a1 = 1` and `b1 > 10`.
+    - For `(a1, b1) < (10, 20)`: it creates ranges `[-inf, 10)` for cases where `a1 < 10` and `[10, -inf, 10, 20)` for cases where `a1 = 10` and `b1 < 20`.
 
-The final result combines these to get a refined range: `(1, 10, 1, +inf] UNION (1, 10) UNION [10, -inf, 10, 20)`.
+    The final result combines these to get a refined range: `(1, 10, 1, +inf] UNION (1, 10) UNION [10, -inf, 10, 20)`.
 
-### Query plan example
+### Example 2: query plan
 
 The following query plan shows the derived ranges:
 
@@ -258,10 +258,10 @@ EXPLAIN FORMAT = "brief"
 
 In this example, the table has about 500 million rows. However, this optimization allows TiDB to narrow down the access to only around 4,000 rows, just 0.0008% of the total data. This refinement drastically reduces query latency to a few milliseconds, as opposed to over two minutes without optimization.
 
-Unlike MySQL, which requires a full table scan for such conditions, TiDB's optimizer can handle complex row expressions efficiently by leveraging these derived ranges.
+Unlike MySQL, which requires a full table scan for such conditions, the TiDB optimizer can handle complex row expressions efficiently by leveraging these derived ranges.
 
 ## Conclusion
 
-TiDB's optimizer uses multi-column indexes and advanced range derivation to significantly lower data access costs for complex SQL queries. By effectively managing both conjunctive (`AND`) and disjunctive (`OR`) conditions, TiDB converts row-based expressions into optimal access paths, reducing query times and enhancing performance. Unlike MySQL, TiDB supports union and intersection operations on multi-column indexes, allowing efficient processing of intricate filters. In practical use, this optimization enables TiDB to complete queries in just a few milliseconds—compared to over two minutes without it, demonstrating a substantial reduction in latency.
+the TiDB optimizer uses multi-column indexes and advanced range derivation to significantly lower data access costs for complex SQL queries. By effectively managing both conjunctive (`AND`) and disjunctive (`OR`) conditions, TiDB converts row-based expressions into optimal access paths, reducing query times and enhancing performance. Unlike MySQL, TiDB supports union and intersection operations on multi-column indexes, allowing efficient processing of intricate filters. In practical use, this optimization enables TiDB to complete queries in just a few milliseconds—compared to over two minutes without it, demonstrating a substantial reduction in latency.
 
 Check out the [comparison white paper](https://www.pingcap.com/ebook-whitepaper/tidb-vs-mysql-product-comparison-guide/) to discover even more differences between MySQL and TiDB's architecture, and why this matters for scalability, reliability, and hybrid transactional and analytical workloads.
