@@ -18,9 +18,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see [TiDB Cloud Serverless Database Audit Logging](/tidb-cloud/serverless-audit-logging.md).
 
-- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) supports user-controlled log redaction.  
+- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) supports user-controlled log redaction.
 
-    You can now enable or disable log redaction for your TiDB Cloud Dedicated clusters. This feature lets you manage the redaction status of cluster logs by yourself. 
+    You can now enable or disable log redaction for your TiDB Cloud Dedicated clusters. You can manage the redaction status of cluster logs by yourself using this feature.
 
     For more information, see [User-Controlled Log Redaction](/tidb-cloud/tidb-cloud-log-redaction.md).
 
