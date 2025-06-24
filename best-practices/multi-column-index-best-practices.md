@@ -7,15 +7,15 @@ summary: Learn how to use multi-column indexes effectively in TiDB and apply adv
 
 In today's data-driven world, efficiently handling complex queries on large datasets is critical to keeping applications responsive and performant. For TiDB, a distributed SQL database designed to manage high-scale and high-demand environments, optimizing data access paths is essential to delivering smooth and efficient queries.
 
-Indexes are a powerful tool for improving query performance by avoiding the need to scan all rows in a table. TiDB's query optimizer leverages multi-column indexes to intelligently filter data, handling complex query conditions that traditional databases such as MySQL cannot process as effectively. 
+Indexes are a powerful tool for improving query performance by avoiding the need to scan all rows in a table. TiDB's query optimizer leverages multi-column indexes to intelligently filter data, handling complex query conditions that traditional databases such as MySQL cannot process as effectively.
 
 This document walks you through how multi-column indexes function, why they are crucial, and how TiDB's optimization transforms intricate query conditions into efficient access paths. After optimization, you can achieve faster responses, minimized table scans, and streamlined performance, even at massive scale.
 
-Without these optimizations, query performance in large TiDB databases can degrade quickly. Full table scans and inadequate filtering can turn milliseconds into minutes. Additionally, excessive memory use can lead to out-of-memory (OOM) errors, especially in constrained environments. TiDB's targeted approach ensures only relevant data is accessed. This keeps latency low and memory usage efficient, even for the most complex queries. 
+Without these optimizations, query performance in large TiDB databases can degrade quickly. Full table scans and inadequate filtering can turn milliseconds into minutes. Additionally, excessive memory use can lead to out-of-memory (OOM) errors, especially in constrained environments. TiDB's targeted approach ensures only relevant data is accessed. This keeps latency low and memory usage efficient, even for the most complex queries.
 
 ## Prerequisites
 
-- The multi-column index feature is available in TiDB v8.3 and later versions. 
+- The multi-column index feature is available in TiDB v8.3 and later versions.
 - Before using this feature, you must set the value of the [optimizer fix control **54337**](/optimizer-fix-controls.md#54337-new-in-v830) to `ON`.
 
 ## Background: multi-column indexes
@@ -88,8 +88,8 @@ Using the multi-column index, TiDB can efficiently narrow the scan range to find
 
 ```sql
 -- Query 2: Find two-bedroom listings in San Francisco under $2,000
-EXPLAIN FORMAT = "brief" 
-    SELECT * FROM listings 
+EXPLAIN FORMAT = "brief"
+    SELECT * FROM listings
     WHERE city = 'San Francisco' AND bedrooms = 2 AND price < 2000;
 ```
 
@@ -97,7 +97,7 @@ EXPLAIN FORMAT = "brief"
 +------------------------+------+---------------------------------------------------------------------------------------------+---------------------------------+
 | id                     | task | access object                                                                               | operator info                   |
 +------------------------+------+---------------------------------------------------------------------------------------------+---------------------------------+
-| IndexLookUp            | root |                                                                                             |                                 | 
+| IndexLookUp            | root |                                                                                             |                                 |
 | ├─IndexRangeScan(Build)| root |table:listings,index:idx_city_bedrooms_price ["San Francisco" 2 -inf,(city, bedrooms, price)]|range:["San Francisco" 2 2000.00)|
 | └─TableRowIDScan(Probe)| root |table:listings                                                                               |                                 |
 +------------------------+------+---------------------------------------------------------------------------------------------+---------------------------------+
