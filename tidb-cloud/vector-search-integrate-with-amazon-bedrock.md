@@ -9,7 +9,7 @@ This tutorial demonstrates how to integrate the [vector search](/tidb-cloud/vect
 
 > **Note**
 >
-> TiDB Vector Search is only available for TiDB Self-Managed (TiDB >= v8.4) and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless). It is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
+> TiDB Vector Search is available for TiDB Self-Managed (TiDB >= v8.4), TiDB Cloud Starter, and TiDB Cloud Essential.
 
 > **Tip**
 >
@@ -29,9 +29,9 @@ To complete this tutorial, you need:
     aws configure set region <your-region>
     ```
 
-- A TiDB Cloud Serverless cluster
+- A TiDB Cloud Starter cluster or a TiDB Cloud Essential cluster
 
-    Follow [creating a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
+    Follow [creating a TiDB Cloud cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
 
 - An AWS account with the [required permissions for Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html) and access to the following models:
 
@@ -46,9 +46,9 @@ This section provides step-by-step instructions for integrating TiDB Vector Sear
 
 ### Step 1. Set the environment variables
 
-Get the TiDB connection information from the [TiDB Cloud console](https://tidbcloud.com/) and set the environment variables in your development environment as follows:
+Get the TiDB connection information from the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud) and set the environment variables in your development environment as follows:
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**Clusters**](https://console.tidb.io/project/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
@@ -234,14 +234,14 @@ class Entity(Base):
 Base.metadata.create_all(engine)
 ```
 
-### Step 7. Save the vector data to TiDB Cloud Serverless
+### Step 7. Save the vector data to TiDB Cloud
 
-In `demo.py`, add the following code to save the vector data to your TiDB Cloud Serverless cluster:
+In `demo.py`, add the following code to save the vector data to your TiDB Cloud cluster:
 
 ```python
 # ---- Saving Vectors to TiDB ----
 def save_entities_with_embedding(session, contents):
-    """Save multiple entities with their embeddings to the TiDB Serverless database."""
+    """Save multiple entities with their embeddings to the TiDB database."""
     for content in contents:
         entity = Entity(content=content, content_vec=embedding(content))
         session.add(entity)
