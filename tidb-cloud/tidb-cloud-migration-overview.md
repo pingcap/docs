@@ -35,11 +35,11 @@ If you have data files in SQL, CSV, Parquet, or Aurora Snapshot formats, you can
 
 - Import CSV files from cloud storage into TiDB Cloud
 
-    You can import CSV files from cloud storage into TiDB Cloud. For more information, see [Import CSV Files from Cloud Storage into TiDB Cloud Starter](/tidb-cloud/import-csv-files-serverless.md).
+    You can import CSV files from cloud storage such as Amazon S3 into TiDB Cloud. For more information, see [Import CSV Files from Cloud Storage into TiDB Cloud Starter](/tidb-cloud/import-csv-files-serverless.md).
 
 - Import Apache Parquet files from cloud storage into TiDB Cloud
 
-    You can import Parquet files from cloud storage into TiDB Cloud. For more information, see [Import Apache Parquet Files from Cloud Storage into TiDB Cloud Starter](/tidb-cloud/import-parquet-files-serverless.md).
+    You can import Parquet files from cloud storage such as Amazon S3 into TiDB Cloud. For more information, see [Import Apache Parquet Files from Cloud Storage into TiDB Cloud Starter](/tidb-cloud/import-parquet-files-serverless.md).
 
 ## Reference
 
