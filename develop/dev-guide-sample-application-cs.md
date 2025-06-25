@@ -7,19 +7,17 @@ summary: Learn how to connect to TiDB using C#. This tutorial gives C# sample co
 
 C# (a.k.a. C-Sharp) is one of the languages from the .NET family created by Microsoft. Other languages for .NET are VB.NET and F#. In this tutorial, you will use C# and the MySQL Connector/NET to connect from a C# application to TiDB over the MySQL protocol. This is possible because TiDB is highly [compatible with MySQL](/mysql-compatibility.md).
 
-While .NET is often used on Windows, it is also available for macOS and Linux. For all platforms, the commands and the code are similar. There might be small differences in the prompts and file paths.
+While .NET is commonly used on Windows, it is also available for macOS and Linux. Across all platforms, the commands and code are largely the same, with only minor differences in prompts and file paths.
 
 ## Prerequisites
 
-Download the [.NET 9.0 SDK](https://dotnet.microsoft.com/en-us/download).
-
-This tutorial uses the command-line `dotnet` command. It is also possible to use the VS Code IDE to work with C# code.
-
-You need a TiDB Cloud Serverless or TiDB Cloud Dedicated cluster on TiDB Cloud, or a self-managed TiDB instance, for example with `tiup playground`.
+- Download the [.NET 9.0 SDK](https://dotnet.microsoft.com/en-us/download).
+- This tutorial uses the `dotnet` command-line tool. Alternatively, you can use the Visual Studio Code IDE to work with C# code.
+- To complete this tutorial, you need access to a TiDB instance. You can use a TiDB Cloud Serverless or TiDB Cloud Dedicated cluster on TiDB Cloud, or a TiDB Self-Managed cluster, such as one started using `tiup playground`.
 
 ## Step 1. Set up a console project
 
-Create a new project with the `console` template. This will create a new directory called `tidb_cs`. Either switch to where you want this directory to be created or specify a full path.
+Create a new project using the `console` template. This will generate a new directory named `tidb_cs`. Before running the following command, either navigate to the location where you want this directory to be created, or specify a full path.
 
 ```
 $ dotnet new console -o tidb_cs
@@ -32,7 +30,7 @@ Restore succeeded.
 
 ## Step 2. Add the MySql.Data package
 
-The package manager for .NET is called NuGet. The NuGet package name for MySQL Connector/NET is [MySql.Data](https://www.nuget.org/packages/MySql.Data). This brings support for the MySQL protocol to .NET. If you do not specify a version, you get the latest stable version (which is 9.3.0 at the time of writing).
+The package manager for .NET is called NuGet. The NuGet package name for MySQL Connector/NET is [MySql.Data](https://www.nuget.org/packages/MySql.Data), which provides support for the MySQL protocol in .NET applications. If you do not specify a version, NuGet installs the latest stable version (for example, version 9.3.0).
 
 ```
 $ cd tidb_cs
