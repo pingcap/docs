@@ -33,19 +33,19 @@ If you have data files in SQL, CSV, Parquet, or Aurora Snapshot formats, you can
 
     You can import sample data (SQL file) to TiDB Cloud to quickly get familiar with the TiDB Cloud interface and the import process. For more information, see [Import Sample Data to TiDB Cloud](/tidb-cloud/import-sample-data-serverless.md).
 
-- Import CSV files from Amazon S3 or GCS into TiDB Cloud
+- Import CSV files from cloud storage into TiDB Cloud
 
-    You can import CSV files from Amazon S3 or GCS into TiDB Cloud. For more information, see [Import CSV Files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Starter](/tidb-cloud/import-csv-files-serverless.md).
+    You can import CSV files from cloud storage such as Amazon S3 into TiDB Cloud. For more information, see [Import CSV Files from Cloud Storage into TiDB Cloud Starter](/tidb-cloud/import-csv-files-serverless.md).
 
-- Import Apache Parquet files from Amazon S3 or GCS into TiDB Cloud
+- Import Apache Parquet files from cloud storage into TiDB Cloud
 
-    You can import Parquet files from Amazon S3 or GCS into TiDB Cloud. For more information, see [Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-parquet-files-serverless.md).
+    You can import Parquet files from cloud storage such as Amazon S3 into TiDB Cloud. For more information, see [Import Apache Parquet Files from Cloud Storage into TiDB Cloud Starter](/tidb-cloud/import-parquet-files-serverless.md).
 
 ## Reference
 
-### Configure Amazon S3 access and GCS access
+### Configure cloud storage access
 
-If your source data is stored in Amazon S3 or Google Cloud Storage (GCS) buckets, before importing or migrating the data to TiDB Cloud, you need to configure access to the buckets. For more information, see [Configure Amazon S3 access and GCS access](/tidb-cloud/serverless-external-storage.md).
+If your source data is stored in cloud storage, before importing or migrating the data to TiDB Cloud, you need to configure access to the storage. For more information, see [Configure cloud storage access](/tidb-cloud/serverless-external-storage.md).
 
 ### Naming conventions for data import
 
