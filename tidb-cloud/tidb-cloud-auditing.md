@@ -1,9 +1,9 @@
 ---
-title: Database Audit Logging
+title: TiDB Cloud Dedicated Database Audit Logging
 summary: TiDB Cloudでクラスターを監査する方法について説明します。
 ---
 
-# データベース監査ログ {#database-audit-logging}
+# TiDB Cloud専用データベース監査ログ {#tidb-cloud-dedicated-database-audit-logging}
 
 TiDB Cloud は、ユーザー アクセスの詳細 (実行された SQL ステートメントなど) の履歴をログに記録するデータベース監査ログ機能を提供します。
 

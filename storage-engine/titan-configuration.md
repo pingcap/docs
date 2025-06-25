@@ -81,7 +81,7 @@ Titanパラメータを適切に設定することで、データベースのパ
 
 ### <code>min-blob-size</code> {#code-min-blob-size-code}
 
-[`min-blob-size`](/tikv-configuration-file.md#min-blob-size)使用すると、RocksDB に保存するデータと Titan の BLOB ファイルに保存するデータを決定するための値のサイズのしきい値を設定できます。テストによると、 `32KB`適切なしきい値です。これにより、RocksDB と比較して Titan のパフォーマンスが低下しないことが保証されます。ただし、多くのシナリオでは、この値は最適ではありません。適切な値を選択するには、 [`min-blob-size`がパフォーマンスに与える影響](/storage-engine/titan-overview.md#impact-of-min-blob-size-on-performance)を参照することをお勧めします。書き込みパフォーマンスをさらに向上させ、スキャンパフォーマンスの低下を許容できる場合は、最小値の`1KB`に設定できます。
+[`min-blob-size`](/tikv-configuration-file.md#min-blob-size)使用すると、RocksDB に保存するデータと Titan の BLOB ファイルに保存するデータを決定するための値のサイズのしきい値を設定できます。テストによると、適切なしきい値は`32KB`です。これにより、RocksDB と比較して Titan のパフォーマンスが低下しないことが保証されます。ただし、多くのシナリオでは、この値は最適ではありません。適切な値を選択するには、 [`min-blob-size`がパフォーマンスに与える影響](/storage-engine/titan-overview.md#impact-of-min-blob-size-on-performance)を参照することをお勧めします。書き込みパフォーマンスをさらに向上させ、スキャンパフォーマンスの低下を許容できる場合は、最小値の`1KB`に設定できます。
 
 ### <code>blob-file-compression</code>と<code>zstd-dict-size</code> {#code-blob-file-compression-code-and-code-zstd-dict-size-code}
 
@@ -138,7 +138,11 @@ Titanを無効にするには、オプション`rocksdb.defaultcf.titan.blob-run
 -   オプションを`read-only`に設定すると、値のサイズに関係なく、新しく書き込まれたすべての値が RocksDB に書き込まれます。
 -   このオプションを`fallback`に設定すると、新しく書き込まれたすべての値は、値のサイズに関係なく、RocksDBに書き込まれます。また、Titan BLOBファイルに保存されたすべての圧縮された値は、自動的にRocksDBに戻されます。
 
-既存および将来のすべてのデータに対してTitanを無効にするには、以下の手順に従ってください。手順2はオンライントラフィックのパフォーマンスに大きな影響を与えるため、省略できます。実際、手順2を実行しなくても、TitanからRocksDBへのデータ移動時にデータ圧縮によって余分なI/OとCPUリソースが消費され、TiKVのI/OまたはCPUリソースが制限されている場合はパフォーマンスが低下します（最大50%低下する場合もあります）。
+既存および将来のすべてのデータに対してTitanを無効にするには、以下の手順を実行してください。手順2はオンライントラフィックのパフォーマンスに大きく影響するため、省略できます。実際、手順2を実行しなくても、TitanからRocksDBへのデータ移動時にデータ圧縮によって余分なI/OとCPUリソースが消費され、TiKVのI/OまたはCPUリソースが制限されている場合はパフォーマンスが低下します（最大50%低下する場合もあります）。
+
+> **警告：**
+>
+> v8.5.0より前のバージョンのTiDBでTitanを無効にする場合、TiKV構成項目[`rocksdb.titan.enabled`](/tikv-configuration-file.md#enabled) ～ `false`変更することは推奨されません。TiKVがクラッシュする可能性があります。手順1に従うだけでTitanを無効化できます。
 
 1.  Titanを無効化したいTiKVノードの設定を更新します。設定の更新は2つの方法で行えます。
 
@@ -167,17 +171,6 @@ Titanを無効にするには、オプション`rocksdb.defaultcf.titan.blob-run
     ```
 
 3.  圧縮が完了したら、 **TiKV-Details** / **Titan - kv**の下の**Blob ファイル数**メトリックが`0`に減少するまで待ちます。
-
-4.  TiDB v8.5.0 以降のバージョンの場合、これらの TiKV ノードの構成を更新して Titan を無効にします。
-
-    > **警告：**
-    >
-    > v8.5.0より前のバージョンでは、TiKVがクラッシュする可能性があるため、この手順をスキップすることをお勧めします。これらの以前のバージョンでは、手順1を実行するだけでTitanを無効化できます。データ移行完了後、手順1の設定変更とこの手順の以降の変更との間にパフォーマンスの違いはありません。
-
-    ```toml
-    [rocksdb.titan]
-    enabled = false
-    ```
 
 ## レベルマージ（実験的） {#level-merge-experimental}
 

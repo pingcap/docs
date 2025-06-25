@@ -364,10 +364,12 @@
             -   [TiDB Cloud専用へのTLS接続](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
     -   データアクセス制御
         -   [顧客管理の暗号化キーを使用した保存時の暗号化](/tidb-cloud/tidb-cloud-encrypt-cmek.md)
+        -   [ユーザー制御のログ編集](/tidb-cloud/tidb-cloud-log-redaction.md)
     -   データベースアクセス制御
         -   [クラスタパスワード設定を構成する](/tidb-cloud/configure-security-settings.md)
     -   監査管理
-        -   [データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)
+        -   [TiDB Cloud専用データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)
+        -   [TiDB Cloudサーバーレス データベース監査ログ](/tidb-cloud/serverless-audit-logging.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
         -   [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)
 -   請求する
     -   [請求書](/tidb-cloud/tidb-cloud-billing.md#invoices)
@@ -618,7 +620,7 @@
         -   [分離レベル](/transaction-isolation-levels.md)
         -   [楽観的トランザクション](/optimistic-transaction.md)
         -   [悲観的な取引](/pessimistic-transaction.md)
-        -   [非トランザクションDML文](/non-transactional-dml.md)
+        -   [非トランザクションDMLステートメント](/non-transactional-dml.md)
     -   [ビュー](/views.md)
     -   [パーティショニング](/partitioned-table.md)
     -   [一時テーブル](/temporary-tables.md)
@@ -743,6 +745,17 @@
             -   [消去](/tidb-cloud/ticloud-serverless-sql-user-delete.md)
             -   [リスト](/tidb-cloud/ticloud-serverless-sql-user-list.md)
             -   [アップデート](/tidb-cloud/ticloud-serverless-sql-user-update.md)
+        -   監査ログ
+            -   [設定](/tidb-cloud/ticloud-auditlog-config.md)
+            -   [説明する](/tidb-cloud/ticloud-auditlog-describe.md)
+            -   [ダウンロード](/tidb-cloud/ticloud-auditlog-download.md)
+            -   フィルタールール
+                -   [作成する](/tidb-cloud/ticloud-auditlog-filter-create.md)
+                -   [消去](/tidb-cloud/ticloud-auditlog-filter-delete.md)
+                -   [説明する](/tidb-cloud/ticloud-auditlog-filter-describe.md)
+                -   [リスト](/tidb-cloud/ticloud-auditlog-filter-list.md)
+                -   [テンプレート](/tidb-cloud/ticloud-auditlog-filter-template.md)
+                -   [アップデート](/tidb-cloud/ticloud-auditlog-filter-update.md)
         -   承認済みネットワーク
             -   [作成する](/tidb-cloud/ticloud-serverless-authorized-network-create.md)
             -   [消去](/tidb-cloud/ticloud-serverless-authorized-network-delete.md)
@@ -830,7 +843,7 @@
         -   接続: IMチケットの作成とサブスクリプションの更新
             -   [Slack 経由でチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
             -   [Larkでチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-lark-ticket-creation.md)
-        -   接続: サポートチケットの IM 対話
+        -   接続: サポートチケットのIMインタラクション
             -   [Slack経由でサポートチケットとやり取りする](/tidb-cloud/connected-slack-ticket-interaction.md)
             -   [Lark経由でサポートチケットとやり取りする](/tidb-cloud/connected-lark-ticket-interaction.md)
     -   [サポートを受ける](/tidb-cloud/tidb-cloud-support.md)
