@@ -15,6 +15,8 @@ The basic format of the URI is as follows:
 
 ## Amazon S3 URI format
 
+<CustomContent platform="tidb">
+
 - `scheme`: `s3`
 - `host`: `bucket name`
 - `parameters`:
@@ -48,11 +50,41 @@ tiup cdc:v7.5.0 cli changefeed create \
     --config=cdc_csv.toml
 ```
 
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- `scheme`: `s3`
+- `host`: `bucket name`
+- `parameters`:
+
+    - `access-key`: Specifies the access key.
+    - `secret-access-key`: Specifies the secret access key.
+    - `session-token`: Specifies the temporary session token.
+    - `use-accelerate-endpoint`: Specifies whether to use the accelerate endpoint on Amazon S3 (defaults to `false`).
+    - `endpoint`: Specifies the URL of custom endpoint for S3-compatible services (for example, `<https://s3.example.com/>`).
+    - `force-path-style`: Use path style access rather than virtual hosted style access (defaults to `true`).
+    - `storage-class`: Specifies the storage class of the uploaded objects (for example, `STANDARD` or `STANDARD_IA`).
+    - `sse`: Specifies the server-side encryption algorithm used to encrypt the uploaded objects (value options: empty, `AES256`, or `aws:kms`).
+    - `sse-kms-key-id`: Specifies the KMS ID if `sse` is set to `aws:kms`.
+    - `acl`: Specifies the canned ACL of the uploaded objects (for example, `private` or `authenticated-read`).
+    - `role-arn`: To allow TiDB Cloud to access Amazon S3 data using a specific [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html), provide the role's [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the `role-arn` URL query parameter. For example: `arn:aws:iam::888888888888:role/my-role`.
+
+        > **Note:**
+        >
+        > - To automatically create an IAM role, navigate to the **Import Data from Amazon S3** page of your cluster in the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), fill in the **Folder URI** field, click **Click here to create new one with AWS CloudFormation** under the **Role ARN** field, and then follow the on-screen instructions in the **Add New Role ARN** dialog.
+        > - If you have any trouble creating the IAM role using AWS CloudFormation, click **click Having trouble? Create Role ARN manually** in the **Add New Role ARN** dialog to get the TiDB Cloud Account ID and TiDB Cloud External ID, and then follow the steps in [Configure Amazon S3 access using a Role ARN](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access-using-a-role-arn) to create the role manually. When configuring the IAM role, make sure to enter the TiDB Cloud account ID in the **Account ID** field and select **Require external ID** to protect against [confused deputy attacks](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html).
+        > - To enhance security, you can reduce the valid duration of the IAM role by configuring a shorter **Max session duration**. For more information, see [Update the maximum session duration for a role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_update-role-settings.html#id_roles_update-session-duration) in AWS documentation.
+
+    - `external-id`: Specifies the TiDB Cloud External ID, which is required for TiDB Cloud to access Amazon S3 data. You can obtain this ID from the **Add New Role ARN** dialog in the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud). For more information, see [Configure Amazon S3 access using a Role ARN](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access-using-a-role-arn).
+
 The following is an example of an Amazon S3 URI for [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md). In this example, you need to specify a specific filename `test.csv`.
 
 ```shell
 s3://external/test.csv?access-key=${access-key}&secret-access-key=${secret-access-key}
 ```
+
+</CustomContent>
 
 ## GCS URI format
 
@@ -64,11 +96,15 @@ s3://external/test.csv?access-key=${access-key}&secret-access-key=${secret-acces
     - `storage-class`: Specifies the storage class of the uploaded objects (for example, `STANDARD` or `COLDLINE`)
     - `predefined-acl`: Specifies the predefined ACL of the uploaded objects (for example, `private` or `project-private`)
 
+<CustomContent platform="tidb">
+
 The following is an example of a GCS URI for TiDB Lightning and BR. In this example, you need to specify a specific file path `testfolder`.
 
 ```shell
 gcs://external/testfolder?credentials-file=${credentials-file-path}
 ```
+
+</CustomContent>
 
 The following is an example of a GCS URI for [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md). In this example, you need to specify a specific filename `test.csv`.
 
