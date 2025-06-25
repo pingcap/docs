@@ -8,6 +8,28 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## June 24, 2025
+
+**General changes**
+
+- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) database audit logging (beta) is now available upon request. This feature lets you record a history of user access details (such as any SQL statements executed) in logs.
+
+    To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for TiDB Cloud Serverless database audit logging" in the Description field and click **Submit**.
+
+    For more information, see [TiDB Cloud Serverless Database Audit Logging](/tidb-cloud/serverless-audit-logging.md).
+
+- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) supports user-controlled log redaction.
+
+    You can now enable or disable log redaction for your TiDB Cloud Dedicated clusters to manage the redaction status of cluster logs by yourself.
+
+    For more information, see [User-Controlled Log Redaction](/tidb-cloud/tidb-cloud-log-redaction.md).
+
+- Encryption at Rest with Customer-Managed Encryption Keys (CMEK) is now generally available (GA) for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on AWS.
+
+    This feature enables you to secure your data at rest by leveraging a symmetric encryption key that you manage through Key Management Service (KMS).
+
+    For more information, see [Encryption at Rest Using Customer-Managed Encryption Keys](/tidb-cloud/tidb-cloud-encrypt-cmek.md).
+
 ## June 17, 2025
 
 **General changes**

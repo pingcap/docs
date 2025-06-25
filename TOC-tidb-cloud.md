@@ -363,10 +363,12 @@
       - [TLS Connections to TiDB Cloud Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
   - Data Access Control
       - [Encryption at Rest Using Customer-Managed Encryption Keys](/tidb-cloud/tidb-cloud-encrypt-cmek.md)
+      - [User-Controlled Log Redaction](/tidb-cloud/tidb-cloud-log-redaction.md)
   - Database Access Control
     - [Configure Cluster Password Settings](/tidb-cloud/configure-security-settings.md)
   - Audit Management
-    - [Database Audit Logging](/tidb-cloud/tidb-cloud-auditing.md)
+    - [TiDB Cloud Dedicated Database Audit Logging](/tidb-cloud/tidb-cloud-auditing.md)
+    - [TiDB Cloud Serverless Database Audit Logging](/tidb-cloud/serverless-audit-logging.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [Console Audit Logging](/tidb-cloud/tidb-cloud-console-auditing.md)
 - Billing
   - [Invoices](/tidb-cloud/tidb-cloud-billing.md#invoices)
@@ -742,6 +744,17 @@
       - [delete](/tidb-cloud/ticloud-serverless-sql-user-delete.md)
       - [list](/tidb-cloud/ticloud-serverless-sql-user-list.md)
       - [update](/tidb-cloud/ticloud-serverless-sql-user-update.md)
+    - audit-log
+      - [config](/tidb-cloud/ticloud-auditlog-config.md)
+      - [describe](/tidb-cloud/ticloud-auditlog-describe.md)
+      - [download](/tidb-cloud/ticloud-auditlog-download.md)
+      - filter-rule
+        - [create](/tidb-cloud/ticloud-auditlog-filter-create.md)
+        - [delete](/tidb-cloud/ticloud-auditlog-filter-delete.md)
+        - [describe](/tidb-cloud/ticloud-auditlog-filter-describe.md)
+        - [list](/tidb-cloud/ticloud-auditlog-filter-list.md)
+        - [template](/tidb-cloud/ticloud-auditlog-filter-template.md)
+        - [update](/tidb-cloud/ticloud-auditlog-filter-update.md)
     - authorized-network
       - [create](/tidb-cloud/ticloud-serverless-authorized-network-create.md)
       - [delete](/tidb-cloud/ticloud-serverless-authorized-network-delete.md)
