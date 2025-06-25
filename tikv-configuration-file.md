@@ -54,7 +54,7 @@ TiKV設定ファイルは、コマンドラインパラメータよりも多く�
 
 -   ログに関するコンフィグレーション項目。
 
--   バージョン5.4.0以降、TiKVとTiDBのログ設定項目の整合性を保つため、TiKVは以前の設定項目`log-rotation-timespan`廃止し、 `log-level` `log-file`以下の設定項目に変更`log-rotation-size`ました。古い設定項目のみを設定し、その値をデフォルト以外の値に設定した場合、古い設定`log-format`と新しい設定項目の互換性は維持されます。古い設定項目と新しい設定項目の両方を設定した場合、新しい設定項目が有効になります。
+-   バージョン5.4.0以降、TiKVとTiDBのログ設定項目の整合性を保つため、TiKVは以前の設定項目`log-rotation-timespan`廃止し、 `log-level` `log-file`以下の設定`log-format`に変更`log-rotation-size`ました。古い設定項目のみを設定し、その値をデフォルト以外の値に設定した場合、古い設定項目と新しい設定項目の互換性は維持されます。古い設定項目と新しい設定項目の両方を設定した場合、新しい設定項目が有効になります。
 
 ### <code>level</code> <span class="version-mark">v5.4.0 の新機能</span> {#code-level-code-span-class-version-mark-new-in-v5-4-0-span}
 
@@ -815,7 +815,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>region-compact-tombstones-percent</code> {#code-region-compact-tombstones-percent-code}
 
--   RocksDBの圧縮をトリガーするために必要な墓石の割合
+-   RocksDBの圧縮をトリガーするために必要なトゥームストーンの割合
 -   デフォルト値: `30`
 -   最小値: `1`
 -   最大値: `100`
@@ -1079,7 +1079,7 @@ Raftstoreに関連するコンフィグレーション項目。
 > 定期的なフルコンパクションは実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 
 -   TiKVが定期的なフルコンパクションを開始する特定の時刻を設定します。配列で複数のスケジュールを指定できます。例：
-    -   `periodic-full-compact-start-times = ["03:00", "23:00"]` 、TiKV ノードのローカル タイム ゾーンに基づいて、TiKV が毎日午前 3 時と午後 11 時に完全圧縮を実行することを示します。
+    -   `periodic-full-compact-start-times = ["03:00", "23:00"]` TiKV ノードのローカル タイム ゾーンに基づいて、TiKV が毎日午前 3 時と午後 11 時に完全圧縮を実行することを示します。
     -   `periodic-full-compact-start-times = ["03:00 +0000", "23:00 +0000"]` 、TiKV が UTC タイムゾーンで毎日午前 3:00 と午後 11:00 に完全圧縮を実行することを示します。
     -   `periodic-full-compact-start-times = ["03:00 +0800", "23:00 +0800"]` 、TiKV が UTC+08:00 タイムゾーンで毎日午前 3:00 と午後 11:00 に完全圧縮を実行することを示します。
 -   デフォルト値: `[]` 。定期的な完全圧縮はデフォルトで無効になっていることを意味します。
@@ -1107,7 +1107,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>min-pending-apply-region-count</code><span class="version-mark">バージョン8.0.0の新機能</span> {#code-min-pending-apply-region-count-code-span-class-version-mark-new-in-v8-0-0-span}
 
--   TiKV の起動時にRaftログの適用がビジー状態にあるリージョンの最大数。Raftstoreは、このようなリージョンの数がこの値を下回っている場合にのみリーダー転送を受け入れるため、ローリング再起動時の可用性の低下が軽減されます。
+-   TiKV の起動時にRaftログの適用がビジー状態にあるリージョンの最大数。Raftstoreは、このようなリージョンの数がこの値を下回っている場合にのみリーダー転送を受け入れるため、ローリング再起動時の可用性の低下を軽減できます。
 -   デフォルト値: `10`
 
 ### <code>request-voter-replicated-index-interval</code> <span class="version-mark">v6.6.0 の新機能</span> {#code-request-voter-replicated-index-interval-code-span-class-version-mark-new-in-v6-6-0-span}
@@ -1439,6 +1439,10 @@ Titan に関連するコンフィグレーション項目。
 
 ### <code>enabled</code> {#code-enabled-code}
 
+> **警告**
+>
+> v8.5.0より前のバージョンのTiDBでTitanを無効にする場合、この設定項目を`false`に変更することは推奨されません。TiKVがクラッシュする可能性があります。Titanを無効にするには、 [タイタンを無効にする](/storage-engine/titan-configuration.md#disable-titan)の手順を参照してください。
+
 > **注記：**
 >
 > -   ワイド テーブルと JSON データの書き込みおよびポイント クエリのパフォーマンスを向上させるために、TiDB v7.6.0 以降では既定値が`false`から`true`に変更され、Titan がデフォルトで有効になります。
@@ -1612,7 +1616,7 @@ Titan に関連するコンフィグレーション項目。
 
 ### <code>level0-slowdown-writes-trigger</code> {#code-level0-slowdown-writes-trigger-code}
 
--   書き込みストールをトリガーするL0ファイルの最大数。1 `storage.flow-control.enable` `true`に設定した場合、 `storage.flow-control.l0-files-threshold`この設定項目を上書きします。
+-   書き込み停止を引き起こすL0ファイルの最大数。1 `storage.flow-control.enable` `true`に設定した場合、 `storage.flow-control.l0-files-threshold`この設定項目を上書きします。
 -   デフォルト値: `20`
 -   最小値: `0`
 
@@ -1771,7 +1775,7 @@ Titan に関連するコンフィグレーション項目。
 -   BLOBファイルのキャッシュサイズ
 -   デフォルト値: `"0GiB"`
 -   最小値: `0`
--   推奨値: `0` 。TiKV v8.0.0以降、設定項目`shared-blob-cache`導入され、デフォルトで有効になっているため、 `blob-cache-size`別途設定する必要はありません。7 `blob-cache-size`設定は、 `shared-blob-cache` `false`に設定されている場合にのみ有効になります。
+-   推奨値: `0` 。TiKV v8.0.0以降、設定項目`shared-blob-cache`が導入され、デフォルトで有効になっているため、 `blob-cache-size`別途設定する必要はありません。7 `blob-cache-size`設定は、 `shared-blob-cache` `false`に設定されている場合にのみ有効になります。
 -   単位: KiB|MiB|GiB
 
 ### <code>shared-blob-cache</code> (v8.0.0 の新機能) {#code-shared-blob-cache-code-new-in-v8-0-0}
@@ -2096,7 +2100,7 @@ Raft Engineに関連するコンフィグレーション項目。
 >
 > この構成項目は、 [`enable-log-recycle`](#enable-log-recycle-new-in-v630) `true`に設定されている場合にのみ有効になります。
 
--   Raft Engineのログリサイクル用に空のログファイルを生成するかどうかを決定します。有効にすると、 Raft Engineは初期化中にログリサイクル用の空のログファイルを自動的にバッチ処理し、初期化直後にログリサイクルを有効にします。
+-   Raft Engineのログリサイクル用に空のログファイルを生成するかどうかを決定します。有効にすると、 Raft Engineは初期化中にログリサイクル用の空のログファイルを自動的にバッチ処理し、初期化直後にログリサイクルが有効になります。
 -   デフォルト値: `false`
 
 ### <code>compression-level</code> <span class="version-mark">v7.4.0 の新機能</span> {#code-compression-level-code-span-class-version-mark-new-in-v7-4-0-span}
@@ -2478,7 +2482,7 @@ TiKV API V2が有効な場合にタイムスタンプの取得に関連するコ
 -   TiKV がこの設定項目で指定された期間に基づいて TSO キャッシュを事前割り当てすることを示します。TiKV は前回の期間に基づいて TSO の使用量を推定し、 `alloc-ahead-buffer`満たす TSO をローカルに要求してキャッシュします。
 -   この設定項目は、TiKV API V2が有効になっている場合にPD障害に対する許容度を高めるためによく使用されます（ `storage.api-version = 2` ）。
 -   この設定項目の値を大きくすると、TSO消費量とTiKVのメモリオーバーヘッドが増加する可能性があります。十分なTSOを確保するには、PDの[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)設定項目を減らすことをお勧めします。
--   テストによると、 `alloc-ahead-buffer`がデフォルト値のときに PD リーダーが失敗して別のノードに切り替わると、書き込み要求のレイテンシーが短期的に増加し、QPS が減少 (約 15%) します。
+-   テストによると、デフォルト値が`alloc-ahead-buffer`の場合、PD リーダーが失敗して別のノードに切り替わると、書き込み要求のレイテンシーが短期的に増加し、QPS が減少 (約 15%) します。
 -   業務への影響を回避するには、PD で`tso-update-physical-interval = "1ms"`設定し、TiKV で次の設定項目を設定します。
     -   `causal-ts.alloc-ahead-buffer = "6s"`
     -   `causal-ts.renew-batch-max-size = 65536`
@@ -2494,7 +2498,7 @@ TiKV API V2が有効な場合にタイムスタンプの取得に関連するコ
 ### <code>renew-batch-min-size</code> {#code-renew-batch-min-size-code}
 
 -   タイムスタンプ要求内の TSO の最小数。
--   TiKVは、前期間のタイムスタンプ消費量に応じて、キャッシュされるタイムスタンプの数を調整します。必要なTSOが少数の場合、TiKVは要求されるTSOの数を`renew-batch-min-size`達するまで減らします。アプリケーションで大規模なバースト書き込みトラフィックが頻繁に発生する場合は、必要に応じてこのパラメータを大きく設定できます。このパラメータは、単一のtikvサーバーのキャッシュサイズであることに注意してください。パラメータを大きすぎる値に設定し、クラスターに多数のtikvサーバーが含まれている場合、TSOの消費が急激に増加します。
+-   TiKVは、前期間のタイムスタンプ消費量に応じて、キャッシュされるタイムスタンプの数を調整します。必要なTSOが少数の場合、TiKVは要求されるTSOの数を`renew-batch-min-size`達するまで減らします。アプリケーションで大規模なバースト書き込みトラフィックが頻繁に発生する場合は、このパラメータを必要に応じて大きな値に設定できます。このパラメータは、単一のtikvサーバーのキャッシュサイズであることに注意してください。パラメータを大きすぎる値に設定し、クラスターに多数のtikvサーバーが含まれている場合、TSOの消費が急激に増加します。
 -   Grafanaの**TiKV-RAW** &gt; **Causal timestamp**パネルでは、 **TSOバッチサイズは**、アプリケーションのワークロードに応じて動的に調整された、ローカルにキャッシュされたタイムスタンプの数です。このメトリックを参照して`renew-batch-min-size`調整できます。
 -   デフォルト値: `100`
 

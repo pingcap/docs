@@ -3,54 +3,55 @@ title: TiDB Cloud CLI Reference
 summary: TiDB Cloud CLI の概要を説明します。
 ---
 
-# TiDB Cloud CLI リファレンス (ベータ版) {#tidb-cloud-cli-reference-beta}
+# TiDB Cloud CLI リファレンス（ベータ版） {#tidb-cloud-cli-reference-beta}
 
 > **注記：**
 >
 > TiDB Cloud CLI はベータ版です。
 
-TiDB Cloud CLI は、数行のコマンドでターミナルからTiDB Cloud を操作できるコマンドライン インターフェイスです。TiDB TiDB Cloud CLI では、 TiDB Cloudクラスターを簡単に管理したり、クラスターにデータをインポートしたり、その他の操作を実行したりできます。
+TiDB Cloud CLIは、数行のコマンドでターミナルからTiDB Cloudを操作できるコマンドラインインターフェースです。TiDB TiDB Cloud CLIでは、 TiDB Cloudクラスタの管理、クラスタへのデータのインポート、その他多くの操作を簡単に実行できます。
 
 ## 始める前に {#before-you-begin}
 
-最初に[TiDB Cloud CLI環境を設定する](/tidb-cloud/get-started-with-cli.md)実行してください。3 CLI `ticloud`インストールしたら、それを使用してコマンド ラインからTiDB Cloudクラスターを管理できます。
+最初に[TiDB Cloud CLI環境をセットアップする](/tidb-cloud/get-started-with-cli.md)必ず実行してください。3 CLI `ticloud`インストールしたら、それを使用してコマンドラインからTiDB Cloudクラスターを管理できます。
 
 ## 利用可能なコマンド {#commands-available}
 
-次の表に、 TiDB Cloud CLI で使用できるコマンドを示します。
+次の表は、TiDB Cloud CLI で使用できるコマンドの一覧です。
 
-ターミナルで`ticloud` CLI を使用するには、 `ticloud [command] [subcommand]`実行します。 [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview)使用している場合は、代わりに`tiup cloud [command] [subcommand]`使用します。
+ターミナルで`ticloud` CLI を使用するには、 `ticloud [command] [subcommand]`実行してください。 [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview)使用している場合は、代わりに`tiup cloud [command] [subcommand]`実行してください。
 
-| 指示                | サブコマンド                                | 説明                                   |
-| ----------------- | ------------------------------------- | ------------------------------------ |
-| 認証                | ログイン、ログアウト、whoami                     | ログインとログアウト                           |
-| サーバーレス (エイリアス: s) | 作成、削除、説明、一覧表示、更新、支出制限、リージョン、シェル       | TiDB Cloud Serverless クラスターを管理する     |
-| サーバーレスブランチ        | 作成、削除、説明、一覧表示、シェル                     | TiDB Cloud Serverlessブランチを管理する       |
-| サーバーレスインポート       | キャンセル、説明、リスト、開始                       | TiDB Cloud Serverless インポートタスクを管理する  |
-| サーバーレスエクスポート      | 作成、説明、リスト、キャンセル、ダウンロード                | TiDB Cloud Serverless エクスポートタスクを管理する |
-| サーバーレスSQLユーザー     | 作成、リスト、削除、更新                          | TiDB Cloud Serverless SQL ユーザーの管理    |
-| あい                | <li></li>                             | TiDBボットとチャット                         |
-| 完了                | bash、フィッシュ、パワーシェル、zsh                 | 指定されたシェルの完了スクリプトを生成する                |
-| 設定                | 作成、削除、説明、編集、リスト、設定、使用                 | ユーザープロファイルを構成する                      |
-| プロジェクト            | リスト                                   | プロジェクトの管理                            |
-| アップグレード           | <li></li>                             | CLIを最新バージョンに更新する                     |
-| ヘルプ               | 認証、構成、サーバーレス、AI、プロジェクト、アップグレード、ヘルプ、完了 | 任意のコマンドのヘルプをビュー                      |
+| 指示            | サブコマンド                                          | 説明                                    |
+| ------------- | ----------------------------------------------- | ------------------------------------- |
+| 認証            | ログイン、ログアウト、whoami                               | ログインとログアウト                            |
+| サーバーレス（別名: s） | 作成、削除、説明、一覧表示、更新、支出制限、リージョン、シェル                 | TiDB Cloud Serverless クラスターの管理        |
+| サーバーレスブランチ    | 作成、削除、説明、一覧表示、シェル                               | TiDB Cloud Serverlessブランチを管理する        |
+| サーバーレスインポート   | キャンセル、説明、リスト、開始                                 | TiDB Cloud Serverless インポートタスクを管理する   |
+| サーバーレスエクスポート  | 作成、説明、リスト、キャンセル、ダウンロード                          | TiDB Cloud Serverless エクスポートタスクを管理する  |
+| サーバーレスSQLユーザー | 作成、リスト、削除、更新                                    | TiDB Cloud Serverless SQL ユーザーの管理     |
+| サーバーレス監査ログ    | config、describe、filter-rule（別名:filter）、download | TiDB Cloud Serverless データベース監査ログを管理する |
+| 愛             | <li></li>                                       | TiDBボットとチャット                          |
+| 完了            | bash、fish、powershell、zsh                        | 指定されたシェルの補完スクリプトを生成する                 |
+| 設定            | 作成、削除、説明、編集、一覧表示、設定、使用                          | ユーザープロファイルを構成する                       |
+| プロジェクト        | リスト                                             | プロジェクトの管理                             |
+| アップグレード       | <li></li>                                       | CLIを最新バージョンに更新する                      |
+| ヘルプ           | 認証、構成、サーバーレス、AI、プロジェクト、アップグレード、ヘルプ、完了           | 任意のコマンドのヘルプをビュー                       |
 
 ## コマンドモード {#command-modes}
 
-TiDB Cloud CLI では、簡単に使用できるように、一部のコマンドに 2 つのモードが用意されています。
+TiDB Cloud CLI では、一部のコマンドに簡単に使用できる 2 つのモードが用意されています。
 
 -   インタラクティブモード
 
     フラグなしでコマンドを実行すると ( `ticloud config create`など)、CLI によって入力が求められます。
 
--   非対話モード
+-   非対話型モード
 
-    コマンドを実行するときに必要なすべての引数とフラグ (例: `ticloud config create --profile-name <profile-name> --public-key <public-key> --private-key <private-key>`を指定する必要があります。
+    コマンドを実行するときに必要なすべての引数とフラグ (例: `ticloud config create --profile-name <profile-name> --public-key <public-key> --private-key <private-key>` ) を指定する必要があります。
 
 ## ユーザープロフィール {#user-profile}
 
-TiDB Cloud CLI の場合、ユーザー プロファイルは、プロファイル名、公開キー、秘密キー、OAuth トークンなど、ユーザーに関連付けられたプロパティのコレクションです。TiDB TiDB Cloud CLI を使用するには、ユーザー プロファイルが必要です。
+TiDB Cloud CLI の場合、ユーザープロファイルとは、プロファイル名、公開鍵、秘密鍵、OAuth トークンなど、ユーザーに関連付けられたプロパティの集合です。TiDB TiDB Cloud CLI を使用するには、ユーザープロファイルが必要です。
 
 ### TiDB Cloud APIキーを使用してユーザープロファイルを作成する {#create-a-user-profile-with-tidb-cloud-api-key}
 
@@ -58,15 +59,15 @@ TiDB Cloud CLI の場合、ユーザー プロファイルは、プロファイ�
 
 ### OAuthトークンを使用してユーザープロファイルを作成する {#create-a-user-profile-with-oauth-token}
 
-現在のプロファイルに OAuth トークンを割り当てるには、 [`ticloud auth login`](/tidb-cloud/ticloud-auth-login.md)使用します。プロファイルが存在しない場合は、 `default`という名前のプロファイルが自動的に作成されます。
+現在のプロファイルにOAuthトークンを割り当てるには、 [`ticloud auth login`](/tidb-cloud/ticloud-auth-login.md)使用します。プロファイルが存在しない場合は、 `default`名前のプロファイルが自動的に作成されます。
 
 > **注記：**
 >
-> 前述の 2 つの方法では、 TiDB Cloud API キーが OAuth トークンよりも優先されます。現在のプロファイルで両方が使用可能な場合は、API キーが使用されます。
+> 上記の2つの方法では、 TiDB Cloud APIキーがOAuthトークンよりも優先されます。現在のプロファイルで両方が利用可能な場合は、APIキーが使用されます。
 
 ### すべてのユーザープロファイルを一覧表示する {#list-all-user-profiles}
 
-すべてのユーザー プロファイルを一覧表示するには[`ticloud config list`](/tidb-cloud/ticloud-config-list.md)使用します。
+すべてのユーザー プロファイルを一覧表示するには、 [`ticloud config list`](/tidb-cloud/ticloud-config-list.md)使用します。
 
 出力例は次のとおりです。
 
@@ -75,11 +76,11 @@ TiDB Cloud CLI の場合、ユーザー プロファイルは、プロファイ�
     dev
     staging
 
-この出力例では、ユーザー プロファイル`default`が現在アクティブです。
+この出力例では、ユーザー プロファイル`default`現在アクティブです。
 
 ### ユーザープロフィールを説明する {#describe-a-user-profile}
 
-ユーザー プロファイルのプロパティを取得するには[`ticloud config describe`](/tidb-cloud/ticloud-config-describe.md)使用します。
+ユーザー プロファイルのプロパティを取得するには、 [`ticloud config describe`](/tidb-cloud/ticloud-config-describe.md)使用します。
 
 出力例は次のとおりです。
 
@@ -96,7 +97,7 @@ TiDB Cloud CLI の場合、ユーザー プロファイルは、プロファイ�
 
 ### 別のユーザープロファイルに切り替える {#switch-to-another-user-profile}
 
-別のユーザー プロファイルに切り替えるには[`ticloud config use`](/tidb-cloud/ticloud-config-use.md)使用します。
+別のユーザー プロファイルに切り替えるには、 [`ticloud config use`](/tidb-cloud/ticloud-config-use.md)使用します。
 
 出力例は次のとおりです。
 
@@ -104,22 +105,22 @@ TiDB Cloud CLI の場合、ユーザー プロファイルは、プロファイ�
 
 ### 設定ファイルを編集する {#edit-the-config-file}
 
-[`ticloud config edit`](/tidb-cloud/ticloud-config-edit.md)使用して設定ファイルを編集用に開きます。
+[`ticloud config edit`](/tidb-cloud/ticloud-config-edit.md)使用して構成ファイルを開き、編集します。
 
 ### ユーザープロファイルを削除する {#delete-a-user-profile}
 
-ユーザー プロファイルを削除するには[`ticloud config delete`](/tidb-cloud/ticloud-config-delete.md)使用します。
+ユーザープロファイルを削除するには[`ticloud config delete`](/tidb-cloud/ticloud-config-delete.md)使用します。
 
 ## グローバルフラグ {#global-flags}
 
-次の表は、 TiDB Cloud CLI のグローバル フラグを示しています。
+次の表は、TiDB Cloud CLI のグローバル フラグを示しています。
 
-| フラグ               | 説明                                   | 必須  | 注記                                                             |
-| ----------------- | ------------------------------------ | --- | -------------------------------------------------------------- |
-| --色なし             | 出力のカラーを無効にします。                       | いいえ | 非対話型モードでのみ機能します。対話型モードでは、一部の UI コンポーネントで色を無効にしても機能しない可能性があります。 |
-| -P, --profile 文字列 | このコマンドで使用されるアクティブなユーザー プロファイルを指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                       |
-| -D、--デバッグ         | デバッグモードを有効にする                        | いいえ | 非対話型モードと対話型モードの両方で動作します。                                       |
+| フラグ               | 説明                                   | 必須  | 注記                                                      |
+| ----------------- | ------------------------------------ | --- | ------------------------------------------------------- |
+| --色なし             | 出力のカラーを無効にします。                       | いいえ | 非対話モードでのみ機能します。対話モードでは、一部のUIコンポーネントで色の無効化が機能しない場合があります。 |
+| -P, --profile 文字列 | このコマンドで使用されるアクティブなユーザー プロファイルを指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
+| -D, --debug       | デバッグモードを有効にする                        | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
 
 ## フィードバック {#feedback}
 
-TiDB Cloud CLI に関してご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)作成してください。また、あらゆる貢献を歓迎します。
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)作成してください。また、皆様からの貢献も歓迎いたします。
