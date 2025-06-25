@@ -78,10 +78,10 @@ tiup cdc:v7.5.0 cli changefeed create \
 
     - `external-id`: Specifies the TiDB Cloud External ID, which is required for TiDB Cloud to access Amazon S3 data. You can obtain this ID from the **Add New Role ARN** dialog in the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud). For more information, see [Configure Amazon S3 access using a Role ARN](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access-using-a-role-arn).
 
-The following is an example of an Amazon S3 URI for [`BACKUP`](/sql-statements/sql-statement-backup.md) and [`RESTORE`](/sql-statements/sql-statement-restore.md). This example uses the file path `testfolder`.
+The following is an example of an Amazon S3 URI for [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md). In this example, you need to specify a specific filename `test.csv`.
 
 ```shell
-s3://external/testfolder?access-key=${access-key}&secret-access-key=${secret-access-key}
+s3://external/test.csv?access-key=${access-key}&secret-access-key=${secret-access-key}
 ```
 
 </CustomContent>
