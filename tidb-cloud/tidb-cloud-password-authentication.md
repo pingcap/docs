@@ -121,9 +121,3 @@ Multi-factor authentication (MFA) adds additional security by requiring an Authe
 > **Note:**
 >
 > Disabling MFA reduces the security of your account. Proceed with caution.
-
-5. In the **Disable Multi-Factor Authentication** section, enter your account password and MFA authentication code to confirm the operation.
-
-> **Note:**
->
-> Disabling MFA reduces the security of your account. Proceed with caution.
