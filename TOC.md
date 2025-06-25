@@ -423,6 +423,7 @@
     - [Use the `tidb_snapshot` System Variable](/read-historical-data.md)
   - Best Practices
     - [Use TiDB](/best-practices/tidb-best-practices.md)
+    - [Optimize Multi-Column Indexes](/best-practices/multi-column-index-best-practices.md)
     - [Java Application Development](/best-practices/java-app-best-practices.md)
     - [Use HAProxy](/best-practices/haproxy-best-practices.md)
     - [Highly Concurrent Write](/best-practices/high-concurrency-best-practices.md)
@@ -432,8 +433,7 @@
     - [Three-node Hybrid Deployment](/best-practices/three-nodes-hybrid-deployment.md)
     - [Local Read Under Three Data Centers Deployment](/best-practices/three-dc-local-read.md)
     - [Use UUIDs](/best-practices/uuid.md)
-    - [Read-Only Storage Nodes](/best-practices/readonly-nodes.md)
-    - [Optimize Multi-Column Indexes](/best-practices/multi-column-index-best-practices.md)
+    - [Read-Only Storage Nodes](/best-practices/readonly-nodes.md)    
     - [Handle Millions of Tables in SaaS Multi-Tenant Scenarios](/best-practices/saas-best-practices.md)
   - [Use Placement Rules](/configure-placement-rules.md)
   - [Use Load Base Split](/configure-load-base-split.md)
