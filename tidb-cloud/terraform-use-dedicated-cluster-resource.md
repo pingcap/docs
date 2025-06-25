@@ -5,7 +5,7 @@ summary: Learn how to use the TiDB Cloud Dedicated cluster resource to create an
 
 # Use TiDB Cloud Dedicated Cluster Resource
 
-This document introduces how to manage a TiDB Cloud Dedicated cluster with the `tidbcloud_dedicated_cluster` resource.
+This document introduces how to manage a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster with the `tidbcloud_dedicated_cluster` resource.
 
 In addition, you will also learn how to get the necessary information with the `tidbcloud_projects` data source and use `tidbcloud_dedicated_node_group` resource to manage TiDB node groups of your TiDB Cloud Dedicated cluster.
 
@@ -60,7 +60,7 @@ To retrieve the information about all available projects, use the `tidbcloud_pro
 
     - Use the `output` block to define the data source information to be displayed in the output, and expose the information for other Terraform configurations to use.
 
-        The `output` block works similarly to returned values in programming languages. See [Terraform documentation](https://www.terraform.io/language/values/outputs) for more details.
+        The `output` block works similarly to returned values in programming languages. For more information, see the [Terraform documentation](https://www.terraform.io/language/values/outputs).
 
     To get all the available configurations for the resources and data sources, see the [Terraform provider configuration documentation](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs).
 
@@ -123,7 +123,7 @@ Now, you can get all the available projects from the output. Copy one of the pro
 
 > **Note:**
 >
-> - Before you begin, make sure that you have set a CIDR in the TiDB Cloud console. For more information, see [Set a CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region). 
+> - Before you begin, make sure that you have set a CIDR in the [TiDB Cloud console](https://tidbcloud.com). For more information, see [Set a CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region). 
 > - You can also [create a `dedicated_network_container` resource](/tidb-cloud/terraform-use-dedicated-network-container-resource.md) to manage your CIDR.
 
 You can create a TiDB Cloud Dedicated cluster using the `tidbcloud_dedicated_cluster` resource as follows:
@@ -167,8 +167,8 @@ You can create a TiDB Cloud Dedicated cluster using the `tidbcloud_dedicated_clu
     Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
 
     - To use the TiDB Cloud Dedicated cluster resource, set the resource type as `tidbcloud_dedicated_cluster`.
-    - For the resource name, you can define it according to your need. For example, `example_cluster`.
-    - For the resource details, you can configure them according to the Project ID and the dedicated cluster specification information. 
+    - For the resource name, you can define it as needed. For example, `example_cluster`.
+    - For the resource details, you can configure them according to the Project ID and the TiDB Cloud Dedicated cluster specification information. 
     - To get the TiDB Cloud Dedicated cluster specification information, see [tidbcloud_dedicated_cluster (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_cluster).
 
 3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
@@ -563,7 +563,7 @@ For a TiDB Cloud Dedicated cluster, you can use Terraform to manage resources as
 
 The `MODIFYING` state indicates that the cluster is being modified. The state will change to `ACTIVE` once the modification is complete.
 
-### Scale a TiDB Cloud Dedicated cluster
+### Scale a cluster
 
 You can scale a TiDB Cloud Dedicated cluster when its state is `ACTIVE`.
 
@@ -590,7 +590,7 @@ You can scale a TiDB Cloud Dedicated cluster when its state is `ACTIVE`.
 
 2. Run the `terraform apply` command and type `yes` for confirmation:
 
-   ```
+    ```
     tidbcloud_dedicated_cluster.example_cluster: Refreshing state...
 
     Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
@@ -918,7 +918,7 @@ You can update a TiDB node group of the cluster when its state is `ACTIVE`.
 
 1. In the `cluster.tf` file that is used when you [create the cluster](#create-a-cluster-using-the-cluster-resource), edit the configurations of `tidbcloud_dedicated_node_group`.
 
-    For example, to change the node count to 1, you can edit the configurations as follows:
+    For example, to change the node count to `1`, edit the configurations as follows:
 
     ```
     resource "tidbcloud_dedicated_node_group" "example_group" {
@@ -1047,8 +1047,6 @@ Now, if you run the `terraform show` command, you will get nothing because the r
 $ terraform show
 ```
 
-Now, you have created and managed a TiDB Cloud Dedicated cluster with Terraform.
-
 ## Import a cluster
 
 For a TiDB cluster that is not managed by Terraform, you can use Terraform to manage it just by importing it.
@@ -1068,7 +1066,7 @@ Import a cluster that is not created by Terraform as follows:
 
 2. Generate the new configuration file.
 
-    Generate the new configuration file for the new dedicated cluster resource according to the import block:
+    Generate the new configuration file for the new TiDB Cloud Dedicated cluster resource according to the import block:
 
       ```shell
       terraform plan -generate-config-out=generated.tf

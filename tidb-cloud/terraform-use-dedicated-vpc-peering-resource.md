@@ -5,7 +5,7 @@ summary: Learn how to use the TiDB Cloud Dedicated VPC peering resource to creat
 
 # Use TiDB Cloud Dedicated VPC Peering Resource
 
-This document introduces how to manage a TiDB Cloud dedicated VPC peering with the `tidbcloud_dedicated_vpc_peering` resource.
+This document introduces how to manage a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) VPC peering with the `tidbcloud_dedicated_vpc_peering` resource.
 
 The features of the `tidbcloud_dedicated_vpc_peering` resource include the following:
 
@@ -57,8 +57,8 @@ The following example shows how to create a TiDB Cloud Dedicated VPC peering.
     Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
 
     - To use the TiDB Cloud Dedicated VPC peering resource, set the resource type as `tidbcloud_dedicated_vpc_peering`.
-    - For the resource name, you can define it according to your need. For example, `example`.
-    - If you don't know how to get the values of the required arguments, see [Connect to TiDB Cloud Dedicated via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md).
+    - For the resource name, you can define it as needed. For example, `example`.
+    - If you do not know how to get the values of the required arguments, see [Connect to TiDB Cloud Dedicated via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md).
     - To get the TiDB Cloud Dedicated VPC peering specification information, see [tidbcloud_dedicated_vpc_peering (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_vpc_peering).
 
 3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
@@ -100,7 +100,7 @@ The following example shows how to create a TiDB Cloud Dedicated VPC peering.
 
    In the preceding result, Terraform generates an execution plan for you, which describes the actions Terraform will take:
 
-   - You can check the difference between the configurations and the states.
+   - You can check the differences between the configurations and the states.
    - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
    - The `known after apply` shows that you will get the value after `apply`.
 
@@ -117,7 +117,7 @@ The following example shows how to create a TiDB Cloud Dedicated VPC peering.
     tidbcloud_dedicated_vpc_peering.example: Still creating... [10s elapsed]
     ```
 
-    The status of the resource will keep being `Creating` until the you approve the VPC peering connection in your cloud provider console. After you approve the VPC peering connection, you can take [Approve and Configure the VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md#step-2-approve-and-configure-the-vpc-peering) as a reference, the status will change to `Active`.
+    The status of the resource will remain `Creating` until the you approve the VPC peering connection in your cloud provider console. After you approve the VPC peering connection, you can take [Approve and Configure the VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md#step-2-approve-and-configure-the-vpc-peering) as a reference, the status will change to `Active`.
 
 5. Use the `terraform show` or `terraform state show tidbcloud_dedicated_vpc_peering.${resource-name}` command to inspect the state of your resource. The former command shows the states of all resources and data sources.
 
@@ -163,7 +163,7 @@ For example, you can import a VPC peering that is not created by Terraform.
 
 2. Generate the new configuration file.
 
-    Generate the new configuration file for the new TiDB Cloud Dedicated vpc peering resource according to the import block:
+    Generate the new configuration file for the new TiDB Cloud Dedicated VPC peering resource according to the import block:
 
     ```shell
     terraform plan -generate-config-out=generated.tf

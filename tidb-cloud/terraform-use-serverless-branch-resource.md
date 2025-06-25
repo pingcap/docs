@@ -5,7 +5,7 @@ summary: Learn how to use the serverless branch resource to create and modify a 
 
 # Use TiDB Cloud Serverless Branch Resource
 
-This document introduces how to manage a TiDB Cloud Serverless branch using the `tidbcloud_serverless_branch` resource.
+This document introduces how to manage a [TiDB Cloud Serverless branch](/tidb-cloud/branch-manage.md) using the `tidbcloud_serverless_branch` resource.
 
 The features of the `tidbcloud_serverless_branch` resource include the following:
 
@@ -20,7 +20,7 @@ The features of the `tidbcloud_serverless_branch` resource include the following
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
-- [Create a TiDB Cloud Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
+- [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
 
 ## Create a TiDB Cloud Serverless branch using the TiDB Cloud Serverless branch resource
 
@@ -98,7 +98,7 @@ The following example shows how to create a TiDB Cloud Serverless branch.
 
     In the preceding result, Terraform generates an execution plan for you, which describes the actions that Terraform will take:
 
-    - You can check the difference between the configurations and the states.
+    - You can check the differences between the configurations and the states.
     - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
     - The `known after apply` shows that you will get the value after `apply`.
 
@@ -160,7 +160,7 @@ The following example shows how to create a TiDB Cloud Serverless branch.
 
 ## Import a TiDB Cloud Serverless branch
 
-For a TiDB Serverless branch that is not managed by Terraform, you can use Terraform to manage it just by importing it.
+For a TiDB Cloud Serverless branch that is not managed by Terraform, you can use Terraform to manage it just by importing it.
 
 Import a TiDB Cloud Serverless branch that is not created by Terraform as follows:
 

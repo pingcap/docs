@@ -17,7 +17,7 @@ The features of the `tidbcloud_sql_user` resource include the following:
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
-- [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md) or [a TiDB Cloud Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
+- [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md) or [a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
 
 ## Create a SQL user using the SQL user resource
 
@@ -88,7 +88,7 @@ The following example shows how to create a TiDB Cloud SQL user.
 
    In the preceding result, Terraform generates an execution plan for you, which describes the actions Terraform will take:
 
-   - You can check the difference between the configurations and the states.
+   - You can check the differences between the configurations and the states.
    - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
    - The `known after apply` shows that you will get the value after `apply`.
 
@@ -208,7 +208,7 @@ For example, you can import a SQL user that is not created by Terraform as follo
 
 1. Add an import block for the new SQL user resource
 
-- Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,user_name`:
+    Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,user_name`:
 
     ```
     import {

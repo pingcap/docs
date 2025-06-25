@@ -5,7 +5,7 @@ summary: Learn how to use the TiDB Cloud Dedicated private endpoint connection r
 
 # Use TiDB Cloud Dedicated Private Endpoint Connection Resource
 
-This document introduces how to manage a TiDB Cloud Dedicated private endpoint connection using the `tidbcloud_dedicated_private_endpoint_connection` resource.
+This document introduces how to manage a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) private endpoint connection using the `tidbcloud_dedicated_private_endpoint_connection` resource.
 
 The features of the `tidbcloud_dedicated_private_endpoint_connection` resource include the following:
 
@@ -100,7 +100,7 @@ The following example shows how to create a TiDB Cloud Dedicated private endpoin
 
    In the preceding result, Terraform generates an execution plan for you, which describes the actions Terraform will take:
 
-   - You can check the difference between the configurations and the states.
+   - You can check the differences between the configurations and the states.
    - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
    - The `known after apply` shows that you will get the value after `apply`.
 
@@ -163,21 +163,21 @@ For a TiDB Cloud Dedicated private endpoint connection that is not managed by Te
 
 2. Generate the new configuration file.
 
-Generate the new configuration file for the new TiDB Cloud Dedicated private endpoint connection resource according to the import block:
+    Generate the new configuration file for the new TiDB Cloud Dedicated private endpoint connection resource according to the import block:
 
     ```shell
     terraform plan -generate-config-out=generated.tf
     ```
 
-Do not specify an existing `.tf` file name in the preceding command. Otherwise, Terraform will return an error.
+    Do not specify an existing `.tf` file name in the preceding command. Otherwise, Terraform will return an error.
 
-Then the `generated.tf` file is created in the current directory, which contains the configuration of the imported resource.
+    Then the `generated.tf` file is created in the current directory, which contains the configuration of the imported resource.
 
 3. Review and apply the generated configuration.
 
-Review the generated configuration file to ensure it meets your needs. Optionally, you can move the contents of this file to your preferred location.
+    Review the generated configuration file to ensure it meets your needs. Optionally, you can move the contents of this file to your preferred location.
 
-Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
+    Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
 
     ```shell
     tidbcloud_dedicated_private_endpoint_connection.example: Importing... [id=aws-1934187953894000000,example]
@@ -186,7 +186,7 @@ Then, run `terraform apply` to import your infrastructure. After applying, the e
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```
 
-Now you can manage the imported TiDB Cloud Dedicated private endpoint connection with Terraform.
+    Now you can manage the imported TiDB Cloud Dedicated private endpoint connection with Terraform.
 
 ## Delete a TiDB Cloud Dedicated private endpoint connection
 

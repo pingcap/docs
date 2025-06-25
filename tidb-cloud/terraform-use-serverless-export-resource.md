@@ -5,7 +5,7 @@ summary: Learn how to use the TiDB Cloud Serverless export resource to create an
 
 # Use TiDB Cloud Serverless Export Resource
 
-This document introduces how to manage a TiDB Cloud Serverless export using the `tidbcloud_serverless_export` resource.
+This document introduces how to manage a [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) export using the `tidbcloud_serverless_export` resource.
 
 The features of the `tidbcloud_serverless_export` resource include the following:
 
@@ -20,7 +20,7 @@ The features of the `tidbcloud_serverless_export` resource include the following
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
-- [Create a TiDB Cloud Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
+- [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
 
 ## Create a TiDB Cloud Serverless export using the TiDB Cloud Serverless export resource
 

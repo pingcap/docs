@@ -5,7 +5,7 @@ summary: Learn how to use the TiDB Cloud Dedicated network container resource to
 
 # Use TiDB Cloud Dedicated Network Container Resource
 
-This document introduces how to manage a TiDB Cloud Dedicated network container using the `tidbcloud_dedicated_network_container` resource.
+This document introduces how to manage a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) network container using the `tidbcloud_dedicated_network_container` resource.
 
 The features of the `tidbcloud_dedicated_network_container` resource include the following:
 
@@ -91,11 +91,11 @@ The following example shows how to create a TiDB Cloud Dedicated network contain
         Enter a value:
     ```
 
-   In the preceding result, Terraform generates an execution plan for you, which describes the actions Terraform will take:
+    In the preceding result, Terraform generates an execution plan for you, which describes the actions Terraform will take:
 
-   - You can check the difference between the configurations and the states.
-   - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
-   - The `known after apply` shows that you will get the value after `apply`.
+    - You can check the differences between the configurations and the states.
+    - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
+    - The `known after apply` shows that you will get the value after `apply`.
 
 4. If everything in your plan looks fine, type `yes` to continue:
 
@@ -110,7 +110,7 @@ The following example shows how to create a TiDB Cloud Dedicated network contain
     tidbcloud_dedicated_network_container.example: Creation complete after 4s
     ```
 
-    The status of the resource will remain `INACTIVE` until you create a TiDB Cloud Dedicated cluster in the region of the dedicated network container. Then, the status will change to `ACTIVE`.
+    The status of the resource will remain `INACTIVE` until you create a TiDB Cloud Dedicated cluster in the region of the TiDB Cloud Dedicated network container. Then, the status will change to `ACTIVE`.
     ```
 
 5. Use the `terraform show` or `terraform state show tidbcloud_dedicated_network_container.${resource-name}` command to inspect the state of your resource. The former command shows the states of all resources and data sources.

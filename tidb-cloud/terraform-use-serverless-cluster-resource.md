@@ -5,7 +5,7 @@ summary: Learn how to use the TiDB Cloud Serverless cluster resource to create a
 
 # Use TiDB Cloud Serverless Cluster Resource
 
-This document introduces how to manage a TiDB Cloud Serverless cluster with the `tidbcloud_serverless_cluster` resource.
+This document introduces how to manage a [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster with the `tidbcloud_serverless_cluster` resource.
 
 In addition, you will also learn how to get the necessary information with the `tidbcloud_projects` data source.
 
@@ -158,7 +158,7 @@ The following example shows how to create a TiDB Cloud Serverless cluster.
     Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
 
     - To use the TiDB Cloud Serverless cluster resource, set the resource type as `tidbcloud_serverless_cluster`.
-    - For the resource name, you can define it according to your need. For example, `example`.
+    - For the resource name, you can define it as needed. For example, `example`.
     - For the resource details, you can configure them according to the Project ID and the TiDB Cloud Serverless cluster specification information.
     - To get the TiDB Cloud Serverless cluster specification information, see [tidbcloud_serverless_cluster (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_cluster).
 
@@ -210,7 +210,7 @@ The following example shows how to create a TiDB Cloud Serverless cluster.
 
     In the preceding result, Terraform generates an execution plan for you, which describes the actions that Terraform will take:
 
-    - You can check the difference between the configurations and the states.
+    - You can check the differences between the configurations and the states.
     - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
     - The `known after apply` shows that you will get the value after `apply`.
 
@@ -420,7 +420,7 @@ resource "tidbcloud_serverless_cluster" "example" {
 
 ## Import a TiDB Cloud Serverless cluster
 
-For a TiDB Serverless cluster that is not managed by Terraform, you can use Terraform to manage it just by importing it.
+For a TiDB Cloud Serverless cluster that is not managed by Terraform, you can use Terraform to manage it just by importing it.
 
 Import a TiDB Cloud Serverless cluster that is not created by Terraform as follows:
 
