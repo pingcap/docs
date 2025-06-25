@@ -185,9 +185,7 @@ After configuring the Amazon S3 access, you can perform the data import task in 
 
     2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
-2. Select **Import data from S3**.
-
-    If this is your first time importing data into this cluster, select **Import From Amazon S3**.
+2. Select **Import data from Cloud Storage**, and then click **Amazon S3**.
 
 3. On the **Import Data from Amazon S3** page, fill in the following information:
 
