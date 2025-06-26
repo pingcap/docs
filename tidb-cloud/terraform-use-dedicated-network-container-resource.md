@@ -7,6 +7,10 @@ summary: Learn how to use the TiDB Cloud Dedicated network container resource to
 
 This document describes how to manage a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) network container using the `tidbcloud_dedicated_network_container` resource.
 
+The `tidbcloud_dedicated_network_container` resource allows you to manage a TiDB Cloud Dedicated CIDR block, which is used for creating VPC for TiDB Cloud Dedicated clusters.
+
+Before adding VPC Peering requests to a region, you must set a CIDR for that region and create an initial TiDB Cloud Dedicated cluster in that region. Once the first Dedicated cluster is created, TiDB Cloud will create the VPC of the cluster, allowing you to establish a peering link to your application's VPC.
+
 The features of the `tidbcloud_dedicated_network_container` resource include the following:
 
 - Create TiDB Cloud Dedicated network containers.
