@@ -191,7 +191,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
     TiDB introduces Table Mode to enhance the stability and consistency of backup and restore tasks. When performing snapshot restore or PITR (Point-in-Time Recovery), the Table Mode of the target table is set to `restore`. In this mode, all user read and write operations on the table are blocked. Once the restore process completes, the Table Mode automatically switches back to `normal`, allowing regular access to the table. This mechanism ensures greater stability and consistency during data recovery.
 
-    For more information, see [Documentation](link).
+    For more information, see [Documentation](/br/br-pitr-guide.md).
 
 * Introduce a new system variable `max_user_connections` to limit the number of connections that different users can establish [#59203](https://github.com/pingcap/tidb/issues/59203) @[joccau](https://github.com/joccau) tw@hfxsd<!--2017-->
 
