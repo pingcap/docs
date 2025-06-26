@@ -841,6 +841,7 @@ You can add a TiDB node group to the cluster when its state is `ACTIVE`.
         display_name = "test-node-group"
     }
     ```
+
 2. Run the `terraform apply` command and type `yes` for confirmation:
 
     ```shell

@@ -211,6 +211,7 @@ For example, you can import a SQL user that is not created by Terraform as follo
       id = "${id}"
     }
     ```
+
 2. Generate the new configuration file
 
     Generate the new configuration file for the new SQL user resource according to the import block:
