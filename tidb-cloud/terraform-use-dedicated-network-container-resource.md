@@ -5,7 +5,7 @@ summary: Learn how to use the TiDB Cloud Dedicated network container resource to
 
 # Use TiDB Cloud Dedicated Network Container Resource
 
-This document introduces how to manage a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) network container using the `tidbcloud_dedicated_network_container` resource.
+This document describes how to manage a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) network container using the `tidbcloud_dedicated_network_container` resource.
 
 The features of the `tidbcloud_dedicated_network_container` resource include the following:
 
@@ -21,7 +21,7 @@ The features of the `tidbcloud_dedicated_network_container` resource include the
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
 
-## Create a TiDB Cloud Dedicated network container using the TiDB Cloud Dedicated network container resource
+## Create a TiDB Cloud Dedicated network container
 
 You can create a TiDB Cloud Dedicated network container using the `tidbcloud_dedicated_network_container` resource.
 
@@ -95,7 +95,7 @@ The following example shows how to create a TiDB Cloud Dedicated network contain
 
     - You can check the differences between the configurations and the states.
     - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
-    - The `known after apply` shows that you will get the value after `apply`.
+    - `known after apply` indicates that you will get the corresponding value after `apply`.
 
 4. If everything in your plan looks fine, type `yes` to continue:
 
@@ -111,7 +111,6 @@ The following example shows how to create a TiDB Cloud Dedicated network contain
     ```
 
     The status of the resource will remain `INACTIVE` until you create a TiDB Cloud Dedicated cluster in the region of the TiDB Cloud Dedicated network container. Then, the status will change to `ACTIVE`.
-    ```
 
 5. Use the `terraform show` or `terraform state show tidbcloud_dedicated_network_container.${resource-name}` command to inspect the state of your resource. The former command shows the states of all resources and data sources.
 
@@ -152,19 +151,19 @@ For example, you can import a network container that is not created by Terraform
 
 2. Generate the new configuration file.
 
-    Generate the new configuration file for the new TiDB Cloud Dedicated vpc peering resource according to the import block:
+    Generate the new configuration file for the new TiDB Cloud Dedicated network container resource according to the import block:
 
     ```shell
     terraform plan -generate-config-out=generated.tf
     ```
 
-    Do not specify an existing `.tf` file name in the preceding command. Otherwise, Terraform will return an error.
+    Do not specify an existing `.tf` filename in the preceding command. Otherwise, Terraform will return an error.
 
     Then the `generated.tf` file is created in the current directory, which contains the configuration of the imported resource.
 
 3. Review and apply the generated configuration.
 
-    Review the generated configuration file to ensure it meets your needs. Optionally, you can move the contents of this file to your preferred location.
+    Review the generated configuration file to ensure that it meets your needs. Optionally, you can move the contents of this file to your preferred location.
 
     Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
 

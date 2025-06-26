@@ -5,7 +5,7 @@ summary: Learn how to use the TiDB Cloud Serverless cluster resource to create a
 
 # Use TiDB Cloud Serverless Cluster Resource
 
-This document introduces how to manage a [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster with the `tidbcloud_serverless_cluster` resource.
+This document describes how to manage a [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster with the `tidbcloud_serverless_cluster` resource.
 
 In addition, you will also learn how to get the necessary information with the `tidbcloud_projects` data source.
 
@@ -119,7 +119,7 @@ To retrieve the information about all available projects, use the `tidbcloud_pro
 
 Now, you can get all the available projects from the output. Copy one of the project IDs that you need.
 
-## Create a TiDB Cloud Serverless cluster using the TiDB Cloud Serverless cluster resource
+## Create a TiDB Cloud Serverless cluster
 
 You can create a TiDB Cloud Serverless cluster using the `tidbcloud_serverless_cluster` resource.
 
@@ -212,7 +212,7 @@ The following example shows how to create a TiDB Cloud Serverless cluster.
 
     - You can check the differences between the configurations and the states.
     - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
-    - The `known after apply` shows that you will get the value after `apply`.
+    - `known after apply` indicates that you will get the corresponding value after `apply`.
 
 4. If everything in your plan looks fine, type `yes` to continue:
 
@@ -443,7 +443,7 @@ Import a TiDB Cloud Serverless cluster that is not created by Terraform as follo
       terraform plan -generate-config-out=generated.tf
       ```
 
-    Do not specify an existing `.tf` file name in the preceding command. Otherwise, Terraform will return an error.
+    Do not specify an existing `.tf` filename in the preceding command. Otherwise, Terraform will return an error.
 
 3. Review and apply the generated configuration.
 

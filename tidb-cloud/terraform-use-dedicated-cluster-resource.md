@@ -5,9 +5,9 @@ summary: Learn how to use the TiDB Cloud Dedicated cluster resource to create an
 
 # Use TiDB Cloud Dedicated Cluster Resource
 
-This document introduces how to manage a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster with the `tidbcloud_dedicated_cluster` resource.
+This document describes how to manage a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster with the `tidbcloud_dedicated_cluster` resource.
 
-In addition, you will also learn how to get the necessary information with the `tidbcloud_projects` data source and use `tidbcloud_dedicated_node_group` resource to manage TiDB node groups of your TiDB Cloud Dedicated cluster.
+In addition, you will also learn how to get the necessary information with the `tidbcloud_projects` data source and use the `tidbcloud_dedicated_node_group` resource to manage TiDB node groups of your TiDB Cloud Dedicated cluster.
 
 The features of the `tidbcloud_dedicated_cluster` resource include the following:
 
@@ -119,7 +119,7 @@ To retrieve the information about all available projects, use the `tidbcloud_pro
 
 Now, you can get all the available projects from the output. Copy one of the project IDs that you need.
 
-## Create a TiDB Cloud Dedicated cluster using the TiDB Cloud Dedicated cluster resource
+## Create a TiDB Cloud Dedicated cluster
 
 > **Note:**
 >
@@ -569,7 +569,7 @@ You can scale a TiDB Cloud Dedicated cluster when its state is `ACTIVE`.
 
 1. In the `cluster.tf` file that is used when you [create the cluster](#create-a-cluster-using-the-cluster-resource), edit the configurations of `tidb_node_setting`, `tikv_node_setting` and `tiflash_node_setting`.
 
-    For example, to add one more TiDB nodes, three more TiKV nodes (the number of TiKV nodes needs to be a multiple of 3, because its scaling step is 3), and one more TiFlash node, you can edit the configurations as follows:
+    For example, to add one more TiDB node, three more TiKV nodes (the number of TiKV nodes needs to be a multiple of 3, because its scaling step is 3), and one more TiFlash node, you can edit the configurations as follows:
 
     ```
      tidb_node_setting = {
@@ -755,7 +755,7 @@ You can pause a cluster when its state is `ACTIVE` or resume a cluster when its 
    Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
    ```
 
-3. Use the `terraform state show tidbcloud_dedicate_cluster.${resource-name}` command to check the state:
+3. Use the `terraform state show tidbcloud_dedicated_cluster.${resource-name}` command to check the state:
 
     ```
     $ terraform state show tidbcloud_dedicate_cluster.example_cluster

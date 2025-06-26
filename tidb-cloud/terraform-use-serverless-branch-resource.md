@@ -5,24 +5,24 @@ summary: Learn how to use the serverless branch resource to create and modify a 
 
 # Use TiDB Cloud Serverless Branch Resource
 
-This document introduces how to manage a [TiDB Cloud Serverless branch](/tidb-cloud/branch-manage.md) using the `tidbcloud_serverless_branch` resource.
+This document describes how to manage a [TiDB Cloud Serverless branch](/tidb-cloud/branch-manage.md) using the `tidbcloud_serverless_branch` resource.
 
 The features of the `tidbcloud_serverless_branch` resource include the following:
 
-- Create TiDB Cloud Serverless branch.
-- Import TiDB Cloud Serverless branch.
-- Delete TiDB Cloud Serverless branch.
+- Create TiDB Cloud Serverless branches.
+- Import TiDB Cloud Serverless branches.
+- Delete TiDB Cloud Serverless branches.
 
 > **Note:**
 >
-> TiDB Cloud Serverless branch resource can not be modified. If you want to change the configuration of a serverless branch resource, you need to delete the existing one and create a new one.
+> TiDB Cloud Serverless branch resource cannot be modified. If you want to change the configuration of a serverless branch resource, you need to delete the existing one and create a new one.
 
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
 - [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
 
-## Create a TiDB Cloud Serverless branch using the TiDB Cloud Serverless branch resource
+## Create a TiDB Cloud Serverless branch
 
 You can create a TiDB Cloud Serverless branch using the `tidbcloud_serverless_branch` resource.
 
@@ -56,7 +56,7 @@ The following example shows how to create a TiDB Cloud Serverless branch.
     Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
 
     - To use the serverless branch resource, set the resource type as `tidbcloud_serverless_branch`.
-    - For the resource name, you can define it according to your need. For example, `example`.
+    - For the resource name, you can define it as needed. For example, `example`.
     - For the resource details, you can configure them according to the serverless branch specification information.
     - To get the serverless branch specification information, see [tidbcloud_serverless_branch (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_branch).
 
@@ -100,7 +100,7 @@ The following example shows how to create a TiDB Cloud Serverless branch.
 
     - You can check the differences between the configurations and the states.
     - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
-    - The `known after apply` shows that you will get the value after `apply`.
+    - `known after apply` indicates that you will get the corresponding value after `apply`.
 
 4. If everything in your plan looks fine, type `yes` to continue:
 
@@ -183,7 +183,7 @@ Import a TiDB Cloud Serverless branch that is not created by Terraform as follow
       terraform plan -generate-config-out=generated.tf
       ```
 
-    Do not specify an existing `.tf` file name in the preceding command. Otherwise, Terraform will return an error.
+    Do not specify an existing `.tf` filename in the preceding command. Otherwise, Terraform will return an error.
 
 3. Review and apply the generated configuration.
 
