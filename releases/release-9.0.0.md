@@ -210,7 +210,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
   By supporting the `gb18030` character set and its collations, TiDB v9.0.0 improves compatibility with Chinese-language applications. This enhancement simplifies character set selection and operations in multilingual and multi-encoding scenarios, improving the overall user experience.
 
-    For more information, see [Documentation](link).
+    For more information, see [Documentation](/character-set-gb18030.md).
 
 * Support creating global indexes on non-unique columns of partitioned tables [#58650](https://github.com/pingcap/tidb/issues/58650) @[Defined2014](https://github.com/Defined2014) @[mjonss](https://github.com/mjonss) **tw@qiancai**<!--2057-->
 
