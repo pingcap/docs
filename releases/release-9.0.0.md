@@ -201,15 +201,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
 ### SQL
 
-* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234 beta.2-->
+* Support the `gb18030` character set and `gb18030_bin` and `gb18030_chinese_ci` collations [#17470](https://github.com/tikv/tikv/issues/17470) [#55791](https://github.com/pingcap/tidb/issues/55791) @[cbcwestwolf](https://github.com/cbcwestwolf) *tw@hfxsd* <!--1962 beta.2--> 
 
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
+    Starting from v9.0.0, TiDB supports the `gb18030` character set along with the `gb18030_bin` and `gb18030_chinese_ci` collations, enabling better handling of Chinese-language data storage and query requirements.
 
-    For more information, see [Documentation](link).
+    - The `gb18030` character set is a widely used standard for Chinese character encoding.
+    - The `gb18030_bin` collation provides precise binary-based sorting, while `gb18030_chinese_ci` supports case-insensitive general collation. These two collations offer more flexible and efficient sorting and comparison for text encoded in `gb18030`.
 
-* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234 beta.2-->
-
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
+  By supporting the `gb18030` character set and its collations, TiDB v9.0.0 improves compatibility with Chinese-language applications. This enhancement simplifies character set selection and operations in multilingual and multi-encoding scenarios, improving the overall user experience.
 
     For more information, see [Documentation](link).
 
