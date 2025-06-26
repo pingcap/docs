@@ -124,7 +124,7 @@ The following example shows how to create a TiDB Cloud SQL user.
 
 You can use Terraform to change the password or user roles of a SQL user as follows:
 
-1. In the `sql_user.tf` file that is used when you [create the SQL user](#create-a-sql-user-using-the-sql-user-resource), change the `password`, `builtin_role`, and `custom_roles` (if applicable).
+1. In the `sql_user.tf` file that is used when you [create the SQL user](#create-a-sql-user), change the `password`, `builtin_role`, and `custom_roles` (if applicable).
 
     For example:
 

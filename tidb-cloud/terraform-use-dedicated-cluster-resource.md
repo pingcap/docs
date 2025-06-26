@@ -394,7 +394,7 @@ For a TiDB Cloud Dedicated cluster, you can use Terraform to manage resources as
 
 ### Add a TiFlash component
 
-1. In the `cluster.tf` file that is used when you [create the cluster](#create-a-dedicated-cluster-using-the-dedicated-cluster-resource), add the `tiflash_node_setting` configuration.
+1. In the `cluster.tf` file that is used when you [create the cluster](#create-a-tidb-cloud-dedicated-cluster), add the `tiflash_node_setting` configuration.
 
     For example:
 
@@ -567,7 +567,7 @@ The `MODIFYING` state indicates that the cluster is being modified. The state wi
 
 You can scale a TiDB Cloud Dedicated cluster when its state is `ACTIVE`.
 
-1. In the `cluster.tf` file that is used when you [create the cluster](#create-a-cluster-using-the-cluster-resource), edit the configurations of `tidb_node_setting`, `tikv_node_setting` and `tiflash_node_setting`.
+1. In the `cluster.tf` file that is used when you [create the cluster](#create-a-tidb-cloud-dedicated-cluster), edit the configurations of `tidb_node_setting`, `tikv_node_setting` and `tiflash_node_setting`.
 
     For example, to add one more TiDB node, three more TiKV nodes (the number of TiKV nodes needs to be a multiple of 3, because its scaling step is 3), and one more TiFlash node, you can edit the configurations as follows:
 
@@ -673,7 +673,7 @@ You can pause a cluster when its state is `ACTIVE` or resume a cluster when its 
 - Set `paused = true` to pause a cluster.
 - Set `paused = false` to resume a cluster.
 
-1. In the `cluster.tf` file that is used when you [create the cluster](#create-a-cluster-using-the-cluster-resource), add `pause = true` to the configurations:
+1. In the `cluster.tf` file that is used when you [create the cluster](#create-a-tidb-cloud-dedicated-cluster), add `pause = true` to the configurations:
 
     ```
     paused = true
@@ -830,7 +830,7 @@ You can pause a cluster when its state is `ACTIVE` or resume a cluster when its 
 
 You can add a TiDB node group to the cluster when its state is `ACTIVE`.
 
-1. In the `cluster.tf` file that is used when you [create the cluster](#create-a-cluster-using-the-cluster-resource), add the `tidbcloud_dedicated_node_group` configuration.
+1. In the `cluster.tf` file that is used when you [create the cluster](#create-a-tidb-cloud-dedicated-cluster), add the `tidbcloud_dedicated_node_group` configuration.
 
     For example, to add a TiDB node group with 3 nodes, you can edit the configurations as follows:
 
@@ -916,7 +916,7 @@ You can add a TiDB node group to the cluster when its state is `ACTIVE`.
 
 You can update a TiDB node group of the cluster when its state is `ACTIVE`.
 
-1. In the `cluster.tf` file that is used when you [create the cluster](#create-a-cluster-using-the-cluster-resource), edit the configurations of `tidbcloud_dedicated_node_group`.
+1. In the `cluster.tf` file that is used when you [create the cluster](#create-a-tidb-cloud-dedicated-cluster), edit the configurations of `tidbcloud_dedicated_node_group`.
 
     For example, to change the node count to `1`, edit the configurations as follows:
 
