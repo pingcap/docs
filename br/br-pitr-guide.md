@@ -100,6 +100,8 @@ Restore KV Files <--------------------------------------------------------------
 *** ["restore log success summary"] [total-take=xxx.xx] [restore-from={TS}] [restore-to={TS}] [total-kv-count=xxx] [total-size=xxx]
 ```
 
+During the restore, the `Table Mode` of the restored table will be set to `restore`, and users will be prohibited from performing any read and write operations on the table in `Restore Mode`. When the data restore is completed, the Table Mode will be automatically reset to the `normal` state, and users can read and write the table normally, thereby improving task stability and data consistency during data restore.
+
 ## Clean up outdated data
 
 As described in the [Usage Overview of TiDB Backup and Restore](/br/br-use-overview.md):
