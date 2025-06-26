@@ -68,8 +68,7 @@ Configure the bucket access for TiDB Cloud and get the Role ARN as follows:
                     "Sid": "VisualEditor1",
                     "Effect": "Allow",
                     "Action": [
-                        "s3:ListBucket",
-                        "s3:GetBucketLocation"
+                        "s3:ListBucket"
                     ],
                     "Resource": "<Your S3 bucket ARN>"
                 }
