@@ -98,15 +98,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
 ### Performance
 
-* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234 beta.2-->
+* Optimize performance for creating databases, tables, and adding columns in scenarios with foreign keys [#61126](https://github.com/pingcap/tidb/issues/61126) @[GMHDBJD](https://github.com/GMHDBJD) @[River2000i](https://github.com/River2000i) **tw@hfxsd** <!--1896 beta.2-->
 
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
+    In earlier versions, TiDB encounters significant performance bottlenecks when creating tables with foreign keys in certain SaaS scenarios, especially when the number of tables in a cluster reaches tens of millions. A large number of foreign key relationships further slows down the execution of DDL operations such as `CREATE TABLE` and `ADD COLUMN`.
 
-    For more information, see [Documentation](link).
-
-* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234 beta.2-->
-
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
+    Starting from v9.0.0, TiDB optimizes the handling of related metadata, significantly improving DDL performance in scenarios with extremely large table counts. According to internal tests, under idle cluster workload and with a connection to the DDL owner node, the table creation speed can reach up to 126 tables per second, and the average execution speed of the `ADD COLUMN` operation is approximately 45.5 tables per second.
 
     For more information, see [Documentation](link).
 
@@ -185,15 +181,15 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
 ### Reliability
 
-* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234 beta.2-->
+* Introduce a mechanism for detecting connection interruption to automatically terminate running SQL statements on the server side once the client is disconnected [#60685](https://github.com/pingcap/tidb/pull/60685) @[Defined2014](https://github.com/Defined2014) **tw@hfxsd** <!--2060 beta.2-->
 
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
+    To improve resource utilization and system stability, TiDB v9.0.0 introduces a mechanism for detecting connection interruption. When a client connection is unexpectedly closed, TiDB terminates SQL statements that are still running on that connection, promptly releasing resources and preventing long-running invalid statements from impacting system performance.
 
     For more information, see [Documentation](link).
 
-* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234 beta.2-->
+* Introduce Table Mode to restrict read and write operations during data restore, improving task stability and data consistency [#59008](https://github.com/pingcap/tidb/issues/59008) @[fishiu](https://github.com/fishiu) @[River2000i](https://github.com/River2000i) @[Tristan1900](https://github.com/Tristan1900) @[Leavrth](https://github.com/Leavrth)   **tw@hfxsd** <!--2056 beta.2-->
 
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
+    TiDB introduces Table Mode to enhance the stability and consistency of backup and restore tasks. When performing snapshot restore or PITR (Point-in-Time Recovery), the Table Mode of the target table is set to `restore`. In this mode, all user read and write operations on the table are blocked. Once the restore process completes, the Table Mode automatically switches back to `normal`, allowing regular access to the table. This mechanism ensures greater stability and consistency during data recovery.
 
     For more information, see [Documentation](link).
 
