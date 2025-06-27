@@ -166,7 +166,7 @@ The following table lists the compatibility matrix for log backups. Note that al
 | v7.1.0    | -                | v7.5.0 and later  |
 | v7.5.0    | v7.5.0 and later | -                 |
 | v8.1.0    | v8.1.0 and later | -                 |
-| v8.5.0    | v8.5.0 and later           | -                 |
+| v8.5.0    | v8.5.0 and later | -                 |
 
 > **Note:**
 >
