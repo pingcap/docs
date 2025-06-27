@@ -105,7 +105,7 @@ At the project level, TiDB Cloud defines three roles, in which `Project Owner` c
 | Manage cluster operations in the project, such as cluster creation, modification, and deletion. | ✅ | ❌ | ❌ | ❌ |
 | Manage branches for TiDB Cloud Starter clusters in the project, such as branch creation, connection, and deletion. | ✅ | ❌ | ❌ | ❌ |
 | Manage cluster data such as data import, data backup and restore, and data migration. | ✅ | ✅ | ❌ | ❌ |
-| Review and reset cluster passwords. | ✅ | ✅ | ✅ | ❌ |
+| Review and reset cluster passwords. | ✅ | ❌ | ❌ | ❌ |
 | View cluster overview, backup records, metrics, events in the project. | ✅ | ✅ | ✅ | ✅ |
 
 ## Manage organization access
