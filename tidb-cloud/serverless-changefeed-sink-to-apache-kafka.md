@@ -187,7 +187,7 @@ The main configuration fields are as follows:
     - Open Protocol is a row-level data change notification protocol that provides data sources for monitoring, caching, full-text indexing, analysis engines, and primary-secondary replication between different databases. For more information, see [Open Protocol data format](https://docs.pingcap.com/tidb/stable/ticdc-open-protocol). 
     - Debezium is a tool for capturing database changes. It converts each captured database change into a message called an "event" and sends these events to Kafka. For more information, see [Debezium data format](https://docs.pingcap.com/tidb/stable/ticdc-debezium).
 
-5. **data_format.enable_tidb_extension**: if you want to add TiDB-extension fields to the Kafka message body.
+5. **data_format.enable_tidb_extension**: if you want to add TiDB-extension fields to the Kafka message body with `AVRO` or `CANAL_JSON` data format.
 
     For more information about TiDB-extension fields, see [TiDB extension fields in Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol#tidb-extension-fields) and [TiDB extension fields in Canal-JSON data format](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field).
 
@@ -214,17 +214,21 @@ The main configuration fields are as follows:
 
         If you want the changefeed to create one Kafka topic for all changelogs, choose this mode. Then, all Kafka messages in the changefeed will be sent to one Kafka topic. You can define the topic name in the `default_topic` field.
 
-8. **topic_partition_config.default_topic**: The default topic name for non-row events, such as Create Schema Event and Resolved Ts Event. If you set the `dispatch_type` to `ONE_TOPIC`, this field is required.
+> Note
+>
+> If you use `AVRO` data format, only `BY_TABLE` dispatch type is supported.
+
+1. **topic_partition_config.default_topic**: The default topic name for non-row events, such as Create Schema Event and Resolved Ts Event. If you set the `dispatch_type` to `ONE_TOPIC`, this field is required.
 
     - `topic_prefix`: The prefix for the topic name.
     - `separator`: The separator between a database name and table name in the topic name.
     - `topic_suffix`: The suffix for the topic name.
 
-9. **topic_partition_config.replication_factor**: controls how many Kafka servers each Kafka message is replicated to. The valid value ranges from [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) to the number of Kafka brokers.
+2. **topic_partition_config.replication_factor**: controls how many Kafka servers each Kafka message is replicated to. The valid value ranges from [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) to the number of Kafka brokers.
 
-10. **topic_partition_config.partition_num**: controls how many partitions exist in a topic. The valid value range is `[1, 10 * the number of Kafka brokers]`.
+3.  **topic_partition_config.partition_num**: controls how many partitions exist in a topic. The valid value range is `[1, 10 * the number of Kafka brokers]`.
 
-11. **topic_partition_config.partition_dispatchers**: decide which partition a Kafka message will be sent to. `partition_type` Support `TABLE`, `INDEX_VALUE`, `TS` and `COLUMN`.
+4.  **topic_partition_config.partition_dispatchers**: decide which partition a Kafka message will be sent to. `partition_type` Support `TABLE`, `INDEX_VALUE`, `TS` and `COLUMN`.
 
     - **Distribute changelogs by primary key or index value to Kafka partition**
 
@@ -244,7 +248,7 @@ The main configuration fields are as follows:
 
     For more information about the matching rules, see [Partition dispatchers](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-kafka/#partition-dispatchers).
 
-12. **column_selectors**: columns from events and send only the data changes related to those columns to the downstream.
+5.  **column_selectors**: columns from events and send only the data changes related to those columns to the downstream.
 
     - `matcher`: specify which tables the column selector applies to. For tables that do not match any rule, all columns are sent.
     - `columns`: specify which columns of the matched tables will be sent to the downstream.
