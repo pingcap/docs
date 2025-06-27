@@ -70,7 +70,7 @@ To enable Global Sort, follow these steps:
 
 The algorithm of the Global Sort feature is as follows:
 
-![Algorithm of Global Sort](/media/dist-task/global-sort.jpeg)
+![Algorithm of Global Sort](./media/dist-task/global-sort.jpeg)
 
 The detailed implementation principles are as follows:
 

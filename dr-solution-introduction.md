@@ -19,7 +19,7 @@ This document introduces the disaster recovery (DR) solutions provided by TiDB. 
 
 The following figure illustrates these two concepts:
 
-![RTO and RPO](/media/dr/rto-rpo.png)
+![RTO and RPO](./media/dr/rto-rpo.png)
 
 - Error tolerance objective: Because a disaster can affect different regions. In this document, the term error tolerance objective is used to describe the maximum range of a disaster that the system can tolerate.
 - Region: This document focuses on regional DR and "region" mentioned here refers to a geographical area or city.
@@ -30,7 +30,7 @@ Before introducing specific DR solutions, this section introduces the architectu
 
 ### TiDB
 
-![TiDB architecture](/media/dr/tidb-architecture.png)
+![TiDB architecture](./media/dr/tidb-architecture.png)
 
 TiDB is designed with an architecture of separated computing and storage:
 
@@ -42,7 +42,7 @@ TiDB stores three complete data replicas. Therefore, it is naturally capable of 
 
 ### TiCDC
 
-![TiCDC architecture](/media/ticdc/cdc-architecture.png)
+![TiCDC architecture](./media/ticdc/cdc-architecture.png)
 
 As an incremental data replication tool for TiDB, TiCDC is highly available through PD's etcd. TiCDC pulls data changes from TiKV nodes through multiple Capture processes, and then sorts and merges data changes internally. After that, TiCDC replicates data to multiple downstream systems by using multiple replication tasks. In the preceding architecture diagram:
 
@@ -53,7 +53,7 @@ It can be seen from the preceding architecture diagram that, the architecture of
 
 ### BR
 
-![BR architecture](/media/br/br-snapshot-arch.png)
+![BR architecture](./media/br/br-snapshot-arch.png)
 
 As a backup and restore tool for TiDB, BR can perform full snapshot backup based on a specific time point and continuous log backup of a TiDB cluster. When the TiDB cluster is completely unavailable, you can restore the backup files in a new cluster. BR is usually considered the last resort for data security.
 
@@ -61,7 +61,7 @@ As a backup and restore tool for TiDB, BR can perform full snapshot backup based
 
 ### DR solution based on primary and secondary clusters
 
-![Primary-secondary cluster DR](/media/dr/ticdc-dr.png)
+![Primary-secondary cluster DR](./media/dr/ticdc-dr.png)
 
 The preceding architecture contains two TiDB clusters, cluster 1 runs in region 1 and handles read and write requests. Cluster 2 runs in region 2 and works as the secondary cluster. When cluster 1 encounters a disaster, cluster 2 takes over services. Data changes are replicated between the two clusters using TiCDC. This architecture is also called the "1:1" DR solution.
 
@@ -69,7 +69,7 @@ This architecture is simple and highly available with region-level error toleran
 
 ### DR solution based on multiple replicas in a single cluster
 
-![Multi-replica cluster DR](/media/dr/multi-replica-dr.png)
+![Multi-replica cluster DR](./media/dr/multi-replica-dr.png)
 
 In the preceding architecture, each region has two complete data replicas located in different available zones (AZs). The entire cluster is across three regions. Region 1 is the primary region that handles read and write requests. When region 1 is completely unavailable due to a disaster, region 2 can be used as a DR region. Region 3 is a replica used to meet the majority protocol. This architecture is also called the "2-2-1" solution.
 
@@ -79,7 +79,7 @@ This solution provides region-level error tolerance, scalable write capability, 
 
 The preceding two solutions provide regional DR. However, they fail to work if multiple regions are unavailable at the same time. If your system is very important and requires error tolerance objective to cover multiple regions, you need to combine these two solutions.
 
-![TiCDC-based multi-replica cluster DR](/media/dr/ticdc-multi-replica-dr.png)
+![TiCDC-based multi-replica cluster DR](./media/dr/ticdc-multi-replica-dr.png)
 
 In the preceding architecture, there are two TiDB clusters. Cluster 1 has five replicas that span three regions. Region 1 contains two replicas that work as the primary region and handle write requests. Region 2 has two replicas that work as the DR region for region 1. This region provides read services that are not sensitive to latency. Located in Region 3, the last replica is used for voting.
 
@@ -89,7 +89,7 @@ Of course, if the error tolerance objective is multiple regions and RPO must be 
 
 ### DR solution based on BR
 
-![BR-based cluster DR](/media/dr/br-dr.png)
+![BR-based cluster DR](./media/dr/br-dr.png)
 
 In this architecture, TiDB cluster 1 is deployed in region 1. BR regularly backs up the data of cluster 1 to region 2, and continuously backs up the data change logs of this cluster to region 2 as well. When region 1 encounters a disaster and cluster 1 cannot be recovered, you can use the backup data and data change logs to restore a new cluster (cluster 2) in region 2 to provide services.
 

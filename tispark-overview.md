@@ -6,7 +6,7 @@ aliases: ['/docs/dev/tispark-overview/','/docs/dev/reference/tispark/','/docs/de
 
 # TiSpark User Guide
 
-![TiSpark architecture](/media/tispark-architecture.png)
+![TiSpark architecture](./media/tispark-architecture.png)
 
 ## TiSpark vs TiFlash
 

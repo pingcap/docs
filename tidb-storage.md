@@ -7,7 +7,7 @@ summary: Understand the storage layer of a TiDB database.
 
 This document introduces some design ideas and key concepts of [TiKV](https://github.com/tikv/tikv).
 
-![storage-architecture](/media/tidb-storage-architecture-1.png)
+![storage-architecture](./media/tidb-storage-architecture-1.png)
 
 ## Key-Value pairs
 
@@ -38,7 +38,7 @@ Raft is a consensus algorithm. This document only briefly introduces Raft. For m
 
 TiKV use Raft to perform data replication. Each data change will be recorded as a Raft log. Through Raft log replication, data is safely and reliably replicated to multiple nodes of the Raft group. However, according to Raft protocol, successful writes only need that data is replicated to the majority of nodes.
 
-![Raft in TiDB](/media/tidb-storage-1.png)
+![Raft in TiDB](./media/tidb-storage-1.png)
 
 In summary, TiKV can quickly store data on disk via the standalone machine RocksDB, and replicate data to multiple machines via Raft in case of machine failure. Data is written through the interface of Raft instead of to RocksDB. With the implementation of Raft, TiKV becomes a distributed Key-Value storage. Even with a few machine failures, TiKV can automatically complete replicas by virtue of the native Raft protocol, which does not impact the application.
 
@@ -51,7 +51,7 @@ To make it easy to understand, let's assume that all data only has one replica. 
 
 TiKV chooses the second solution that divides the whole Key-Value space into a series of consecutive Key segments. Each segment is called a Region. Each Region can be described by `[StartKey, EndKey)`, a left-closed and right-open interval. The default size limit for each Region is 256 MiB and the size can be configured.
 
-![Region in TiDB](/media/tidb-storage-2.png)
+![Region in TiDB](./media/tidb-storage-2.png)
 
 Note that the Region here has nothing to do with the table in SQL. In this document, forget about SQL and focus on KV for now. After dividing data into Regions, TiKV will perform two important tasks:
 
@@ -68,7 +68,7 @@ These two tasks are very important and will be introduced one by one.
 
     One of the Replicas serves as the Leader of the Group and other as the Follower. By default, all reads and writes are processed through the Leader, where reads are done and write are replicated to followers. The following diagram shows the whole picture about Region and Raft group.
 
-![TiDB Storage](/media/tidb-storage-3.png)
+![TiDB Storage](./media/tidb-storage-3.png)
 
 As we distribute and replicate data in Regions, we have a distributed Key-Value system that, to some extent, has the capability of disaster recovery. You no longer need to worry about the capacity, or disk failure and data loss.
 

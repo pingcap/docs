@@ -132,7 +132,7 @@ For example, to execute the `select count(*) from user where name = "TiDB"` SQL 
 
 **The entire process is illustrated as follows:**
 
-![naive sql flow](/media/tidb-computing-native-sql-flow.jpeg)
+![naive sql flow](./media/tidb-computing-native-sql-flow.jpeg)
 
 This solution is intuitive and feasible, but has some obvious problems in a distributed database scenario:
 
@@ -146,12 +146,12 @@ To solve the problems above, the computation should be as close to the storage n
 
 The following image shows how data returns layer by layer:
 
-![dist sql flow](/media/tidb-computing-dist-sql-flow.png)
+![dist sql flow](./media/tidb-computing-dist-sql-flow.png)
 
 ### Architecture of SQL layer
 
 The previous sections introduce some functions of the SQL layer and I hope you have a basic understanding of how SQL statements are handled. In fact, TiDB's SQL layer is much more complicated, with many modules and layers. The following diagram lists the important modules and calling relationships:
 
-![tidb sql layer](/media/tidb-computing-tidb-sql-layer.png)
+![tidb sql layer](./media/tidb-computing-tidb-sql-layer.png)
 
 The user's SQL request is sent to TiDB Server either directly or via `Load Balancer`. TiDB Server will parse `MySQL Protocol Packet`, get the content of requests, parse the SQL request syntactically and semantically, develop and optimize query plans, execute a query plan, get and process the data. All data is stored in the TiKV cluster, so in this process, TiDB Server needs to interact with TiKV and get the data. Finally, TiDB Server needs to return the query results to the user.

@@ -39,7 +39,7 @@ However, in the process of merging and migrating sharded tables, if DDL statemen
 
 Here is a simple example:
 
-![shard-ddl-example-1](/media/dm/shard-ddl-example-1.png)
+![shard-ddl-example-1](./media/dm/shard-ddl-example-1.png)
 
 In the above example, the merging process is simplified, where only two MySQL instances exist in the upstream and each instance has only one table. When the migration begins, the table schema version of two sharded tables is marked as `schema V1`, and the table schema version after executing DDL statements is marked as `schema V2`.
 
@@ -57,7 +57,7 @@ Assume that the DDL statements of sharded tables are not processed during the mi
 
 This section shows how DM migrates DDL statements in the process of merging sharded tables based on the above example in the pessimistic mode.
 
-![shard-ddl-flow](/media/dm/shard-ddl-flow.png)
+![shard-ddl-flow](./media/dm/shard-ddl-flow.png)
 
 In this example, `DM-worker-1` migrates the data from MySQL instance 1 and `DM-worker-2` migrates the data from MySQL instance 2. `DM-master` coordinates the DDL migration among multiple DM-workers. Starting from `DM-worker-1` receiving the DDL statements, the DDL migration process is simplified as follows:
 
@@ -81,7 +81,7 @@ In the above example, only one sharded table needs to be merged in the upstream 
 
 Assume that there are two sharded tables, namely `table_1` and `table_2`, to be merged in one MySQL instance:
 
-![shard-ddl-example-2](/media/dm/shard-ddl-example-2.png)
+![shard-ddl-example-2](./media/dm/shard-ddl-example-2.png)
 
 Because data comes from the same MySQL instance, all the data is obtained from the same binlog stream. In this case, the time sequence is as follows:
 

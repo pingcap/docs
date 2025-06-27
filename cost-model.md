@@ -7,7 +7,7 @@ summary: Learn how the cost model used by TiDB works during physical optimizatio
 
 TiDB uses a cost model to choose an index and operator during [physical optimization](/sql-physical-optimization.md). The process is illustrated in the following diagram:
 
-![CostModel](/media/cost-model.png)
+![CostModel](./media/cost-model.png)
 
 TiDB calculates the access cost of each index and the execution cost of each physical operator in plans (such as HashJoin and IndexJoin) and chooses the minimum cost plan.
 

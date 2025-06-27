@@ -8,7 +8,7 @@ aliases: ['/docs/dev/best-practices/haproxy-best-practices/','/docs/dev/referenc
 
 This document describes best practices for configuration and usage of [HAProxy](https://github.com/haproxy/haproxy) in TiDB. HAProxy provides load balancing for TCP-based applications. From TiDB clients, you can manipulate data just by connecting to the floating virtual IP address provided by HAProxy, which helps to achieve load balance in the TiDB server layer.
 
-![HAProxy Best Practices in TiDB](/media/haproxy.jpg)
+![HAProxy Best Practices in TiDB](./media/haproxy.jpg)
 
 > **Note:**
 >

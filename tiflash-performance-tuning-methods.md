@@ -19,7 +19,7 @@ Example: Resource utilization during [CH-benCHmark workload](/benchmark/benchmar
 
 This TiFlash cluster consists of two nodes, each node configured with 16 cores and 48 GB of memory. During the CH-benCHmark workload, CPU utilization can reach up to 1500%, memory usage can reach up to 20 GB, and IO utilization can reach up to 91%. These metrics indicate that TiFlash node resources are approaching saturation.
 
-![CH-TiFlash-MPP](/media/performance/tiflash/tiflash-resource-usage.png)  
+![CH-TiFlash-MPP](./media/performance/tiflash/tiflash-resource-usage.png)  
 
 ## Key metrics for TiFlash performance
 
@@ -57,13 +57,13 @@ In the workload of the following diagram, `run_mpp_task` and `mpp_establish_conn
 
 The processing duration of `cop` requests is relatively small, indicating that some of the requests are pushed down to TiFlash for data access and filtering through the coprocessor.
 
-![CH-TiFlash-MPP](/media/performance/tiflash/ch-2tiflash-op.png)
+![CH-TiFlash-MPP](./media/performance/tiflash/ch-2tiflash-op.png)
 
 Example 2: TiFlash `cop` requests constitute the majority of the total processing duration
 
 In the workload of the following diagram, `cop` requests constitute the majority of the total processing duration. In this case, you can check the SQL execution plan to see why these `cop` requests are generated.
 
-![Cop](/media/performance/tiflash/tiflash_request_duration_by_type.png)
+![Cop](./media/performance/tiflash/tiflash_request_duration_by_type.png)
 
 ### Raft-related metrics
 
@@ -104,10 +104,10 @@ As shown in the following diagram, the `Raft Wait Index Duration` and the 99th p
 
 In this cluster, there are two TiFlash nodes. The incremental data replication speed from TiKV to TiFlash is approximately 28 MB per second. The maximum write throughput of the stable layer (File Descriptor) is 939 MB/s, and the maximum read throughput is 1.1 GiB/s. Meanwhile, the maximum write throughput of the Delta layer (Page) is 74 MB/s, and the maximum read throughput is 111 MB/s. In this environment, TiFlash uses dedicated NVME disks, which have strong IO throughput capabilities.
 
-![CH-2TiFlash-OP](/media/performance/tiflash/ch-2tiflash-raft-io-flow.png)
+![CH-2TiFlash-OP](./media/performance/tiflash/ch-2tiflash-raft-io-flow.png)
 
 Example 2: Raft and IO metrics of the [CH-benCHmark workload](/benchmark/benchmark-tidb-using-ch.md) in a public cloud deployment environment
 
 As shown in the following diagram, the 99th percentile of `Raft Wait Index Duration` is up to 438 milliseconds, and 99th percentile of the `Raft Batch Read Index Duration` is up to 125 milliseconds. This cluster has only one TiFlash node. TiKV replicates about 5 MB of incremental data to TiFlash per second. The maximum write traffic of the stable layer (File Descriptor) is 78 MB/s and the maximum read traffic is 221 MB/s. In the meantime, the maximum write traffic of the Delta layer (Page) is 8 MB/s and the maximum read traffic is 18 MB/s. In this environment, TiFlash uses an AWS EBS cloud disk, which has relatively weak IO throughput.
 
-![CH-TiFlash-MPP](/media/performance/tiflash/ch-1tiflash-raft-io-flow-cloud.png)
+![CH-TiFlash-MPP](./media/performance/tiflash/ch-1tiflash-raft-io-flow-cloud.png)

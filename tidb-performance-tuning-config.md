@@ -194,7 +194,7 @@ Instance plan cache provides better memory efficiency than session-level plan ca
 
 In scenarios with multiple connections and complex queries, session-level plan cache would require significantly more memory to achieve similar hit ratios, making instance plan cache the more efficient choice.
 
-![Instance plan cache: Queries Using Plan Cache OPS](/media/performance/instance-plan-cache.png)
+![Instance plan cache: Queries Using Plan Cache OPS](./media/performance/instance-plan-cache.png)
 
 #### Test workload
 
@@ -243,7 +243,7 @@ The performance improvement observed in the key settings is primarily attributed
 
 This significant reduction in compaction overhead contributes to the overall throughput improvement seen in the key settings configuration.
 
-![Titan RocksDB compaction:](/media/performance/titan-rocksdb-compactions.png)
+![Titan RocksDB compaction:](./media/performance/titan-rocksdb-compactions.png)
 
 #### Test workload
 

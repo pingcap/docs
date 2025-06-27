@@ -37,7 +37,7 @@ To address the above challenges, it is necessary to start with the data segmenta
 
 TiDB splits data into Regions, each representing a range of data with a size limit of 96M by default. Each Region has multiple replicas, and each group of replicas is called a Raft Group. In a Raft Group, the Region Leader executes the read and write tasks (TiDB supports [Follower-Read](/follower-read.md)) within the data range. The Region Leader is automatically scheduled by the Placement Driver (PD) component to different physical nodes evenly to distribute the read and write pressure.
 
-![TiDB Data Overview](/media/best-practices/tidb-data-overview.png)
+![TiDB Data Overview](./media/best-practices/tidb-data-overview.png)
 
 In theory, if an application has no write hotspot, TiDB, by the virtue of its architecture, can not only linearly scale its read and write capacities, but also make full use of the distributed resources. From this point of view, TiDB is especially suitable for the high-concurrent and write-intensive scenario.
 
@@ -94,19 +94,19 @@ In theory, the above operation seems to comply with the TiDB best practices, and
 
 For the cluster topology, 2 TiDB nodes, 3 PD nodes and 6 TiKV nodes are deployed. Ignore the QPS performance, because this test is to clarify the principle rather than for benchmark.
 
-![QPS1](/media/best-practices/QPS1.png)
+![QPS1](./media/best-practices/QPS1.png)
 
 The client starts "intensive" write requests in a short time, which is 3K QPS received by TiDB. In theory, the load pressure should be evenly distributed to 6 TiKV nodes. However, from the CPU usage of each TiKV node, the load distribution is uneven. The `tikv-3` node is the write hotspot.
 
-![QPS2](/media/best-practices/QPS2.png)
+![QPS2](./media/best-practices/QPS2.png)
 
-![QPS3](/media/best-practices/QPS3.png)
+![QPS3](./media/best-practices/QPS3.png)
 
 [Raft store CPU](/grafana-tikv-dashboard.md) is the CPU usage rate for the `raftstore` thread, usually representing the write load. In this scenario, `tikv-3` is the Leader of this Raft Group; `tikv-0` and `tikv-1` are the followers. The loads of other nodes are almost empty.
 
 The monitoring metrics of PD also confirms that hotspot has been caused.
 
-![QPS4](/media/best-practices/QPS4.png)
+![QPS4](./media/best-practices/QPS4.png)
 
 ## Hotspot causes
 
@@ -118,13 +118,13 @@ In the above test, the operation does not reach the ideal performance expected i
 
 In a short period of time, a huge volume of data is continuously written to the same Region.
 
-![TiKV Region Split](/media/best-practices/tikv-Region-split.png)
+![TiKV Region Split](./media/best-practices/tikv-Region-split.png)
 
 The above diagram illustrates the Region splitting process. As data is continuously written into TiKV, TiKV splits a Region into multiple Regions. Because the leader election is started on the original store where the Region Leader to be split is located, the leaders of the two newly split Regions might be still on the same store. This splitting process might also happen on the newly split Region 2 and Region 3. In this way, write pressure is concentrated on TiKV-Node 1.
 
 During the continuous write process, after finding that hotspot is caused on Node 1, PD evenly distributes the concentrated Leaders to other nodes. If the number of TiKV nodes is more than the number of Region replicas, TiKV will try to migrate these Regions to idle nodes. These two operations during the write process are also reflected in the PD's monitoring metrics:
 
-![QPS5](/media/best-practices/QPS5.png)
+![QPS5](./media/best-practices/QPS5.png)
 
 After a period of continuous writes, PD automatically schedules the entire TiKV cluster to a state where pressure is evenly distributed. By that time, the capacity of the whole cluster can be fully used.
 
@@ -150,7 +150,7 @@ SPLIT TABLE table_name [INDEX index_name] BY (value_list) [, (value_list)]
 
 However, TiDB does not automatically perform this pre-split operation. The reason is related to the data distribution in TiDB.
 
-![Table Region Range](/media/best-practices/table-Region-range.png)
+![Table Region Range](./media/best-practices/table-Region-range.png)
 
 From the diagram above, according to the encoding rule of a row's key, the `rowID` is the only variable part. In TiDB, `rowID` is an `Int64` integer. However, you might not need to evenly split the `Int64` integer range to the desired number of ranges and then to distribute these ranges to different nodes, because Region split must also be based on the actual situation.
 
@@ -192,11 +192,11 @@ ORDER BY
 
 Then operate the write load again:
 
-![QPS6](/media/best-practices/QPS6.png)
+![QPS6](./media/best-practices/QPS6.png)
 
-![QPS7](/media/best-practices/QPS7.png)
+![QPS7](./media/best-practices/QPS7.png)
 
-![QPS8](/media/best-practices/QPS8.png)
+![QPS8](./media/best-practices/QPS8.png)
 
 You can see that the apparent hotspot problem has been resolved now.
 

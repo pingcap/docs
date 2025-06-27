@@ -285,7 +285,7 @@ The xx.dot is the result returned by the above statement.
 
 If your computer has no `dot` program, copy the result to [this website](http://www.webgraphviz.com/) to get a tree diagram:
 
-![Explain Dot](/media/explain_dot.png)
+![Explain Dot](./media/explain_dot.png)
 
 </div>
 

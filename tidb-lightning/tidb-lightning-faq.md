@@ -148,7 +148,7 @@ The purpose of placement rule in SQL is to control the data location of certain 
 
 Suppose the source cluster has the following topology:
 
-![TiDB Lightning FAQ - source cluster topology](/media/lightning-faq-source-cluster-topology.jpg)
+![TiDB Lightning FAQ - source cluster topology](./media/lightning-faq-source-cluster-topology.jpg)
 
 The source cluster has the following placement policy:
 
@@ -158,11 +158,11 @@ CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east" REGIONS="us-east,us-west";
 
 **Situation 1:** The target cluster has 3 replicas, and the topology is different from the source cluster. In such cases, when TiDB Lightning creates the placement policy in the target cluster, it will not report an error. However, the semantics in the target cluster is wrong.
 
-![TiDB Lightning FAQ - situation 1](/media/lightning-faq-situation-1.jpg)
+![TiDB Lightning FAQ - situation 1](./media/lightning-faq-situation-1.jpg)
 
 **Situation 2:** The target cluster locates the follower replica in another TiKV node in region "us-mid" and does not have the region "us-west" in the topology. In such cases, when creating the placement policy in the target cluster, TiDB Lightning will report an error.
 
-![TiDB Lightning FAQ - situation 2](/media/lightning-faq-situation-2.jpg)
+![TiDB Lightning FAQ - situation 2](./media/lightning-faq-situation-2.jpg)
 
 **Workaround:**
 

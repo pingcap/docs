@@ -14,7 +14,7 @@ This document introduces the workflow of Raftstore (a core module of TiKV), expl
 
 A TiKV instance has multiple Regions on it. The Raftstore module drives the Raft state machine to process Region messages. These messages include processing read or write requests on Regions, persisting or replicating Raft logs, and processing Raft heartbeats. However, an increasing number of Regions can affect performance of the whole cluster. To understand this, it is necessary to learn the workflow of Raftstore shown as follows:
 
-![Raftstore Workflow](/media/best-practices/raft-process.png)
+![Raftstore Workflow](./media/best-practices/raft-process.png)
 
 > **Note:**
 >
@@ -41,7 +41,7 @@ You can check the following monitoring metrics in Grafana's **TiKV Dashboard**:
 
     Reference value: lower than `raftstore.store-pool-size * 85%`.
 
-    ![Check Raftstore CPU](/media/best-practices/raft-store-cpu.png)
+    ![Check Raftstore CPU](./media/best-practices/raft-store-cpu.png)
 
 + `Propose wait duration` in the **Raft Propose** panel
 
@@ -49,7 +49,7 @@ You can check the following monitoring metrics in Grafana's **TiKV Dashboard**:
 
     Reference value: lower than 50~100 ms according to the cluster size
 
-    ![Check Propose wait duration](/media/best-practices/propose-wait-duration.png)
+    ![Check Propose wait duration](./media/best-practices/propose-wait-duration.png)
 
 + `Commit log duration` in the **Raft IO** panel
 
@@ -61,7 +61,7 @@ You can check the following monitoring metrics in Grafana's **TiKV Dashboard**:
 
   Reference value: lower than 200-500 ms.
 
-    ![Check Commit log duration](/media/best-practices/commit-log-duration.png)
+    ![Check Commit log duration](./media/best-practices/commit-log-duration.png)
 
 ## Performance tuning methods
 
@@ -172,7 +172,7 @@ In TiKV, pd-worker regularly reports Region Meta information to PD. When TiKV is
 
 You can check **Worker pending tasks** under **Task** in the **TiKV Grafana** panel to determine whether pd-worker has tasks piled up. Generally, `pending tasks` should be kept at a relatively low value.
 
-![Check pd-worker](/media/best-practices/pd-worker-metrics.png)
+![Check pd-worker](./media/best-practices/pd-worker-metrics.png)
 
 pd-worker has been optimized for better performance since [v3.0.5](/releases/release-3.0.5.md#tikv). If you encounter a similar problem, it is recommended to upgrade to the latest version.
 

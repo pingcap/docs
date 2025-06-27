@@ -11,13 +11,13 @@ This document introduces the architecture and process of TiDB snapshot backup an
 
 The TiDB snapshot backup and restore architecture is as follows:
 
-![BR snapshot backup and restore architecture](/media/br/br-snapshot-arch.png)
+![BR snapshot backup and restore architecture](./media/br/br-snapshot-arch.png)
 
 ## Process of backup
 
 The process of a cluster snapshot backup is as follows:
 
-![snapshot backup process design](/media/br/br-snapshot-backup-ts.png)
+![snapshot backup process design](./media/br/br-snapshot-backup-ts.png)
 
 The complete backup process is as follows:
 
@@ -54,7 +54,7 @@ The complete backup process is as follows:
 
 The process of a cluster snapshot restore is as follows:
 
-![snapshot restore process design](/media/br/br-snapshot-restore-ts.png)
+![snapshot restore process design](./media/br/br-snapshot-restore-ts.png)
 
 The complete restore process is as follows:
 

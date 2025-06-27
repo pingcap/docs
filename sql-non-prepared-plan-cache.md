@@ -101,7 +101,7 @@ However, this feature also introduces some additional memory and CPU overhead, i
 
 In this case, you need to observe the `non-prepared` metric in the **Queries Using Plan Cache OPS** panel and the `non-prepared-unsupported` metric in the **Plan Cache Miss OPS** panel on Grafana. If most queries are not supported and only a few can hit the plan cache, you can disable this feature.
 
-![non-prepared-unsupported](/media/non-prepapred-plan-cache-unsupprot.png)
+![non-prepared-unsupported](./media/non-prepapred-plan-cache-unsupprot.png)
 
 ## Diagnostics
 
@@ -144,7 +144,7 @@ In the preceding example, the query cannot hit the cache because the non-prepare
 
 After enabling the non-prepared plan cache, you can monitor the memory usage, number of plans in the cache, and cache hit rate in the following panes:
 
-![non-prepare-plan-cache](/media/tidb-non-prepared-plan-cache-metrics.png)
+![non-prepare-plan-cache](./media/tidb-non-prepared-plan-cache-metrics.png)
 
 You can also monitor the cache hit rate in the `statements_summary` table and slow query log. The following shows how to view the cache hit rate in the `statements_summary` table:
 

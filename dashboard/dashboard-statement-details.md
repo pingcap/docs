@@ -12,7 +12,7 @@ Click any item in the list to enter the detail page of the SQL statement to view
 - The execution plan list: If a SQL statement has multiple execution plans, this list is displayed. Besides text information of execution plans, TiDB v6.2.0 introduces visual execution plans, through which you can learn each operator of a statement and detailed information more intuitively. You can select different execution plans, and the details of the selected plans are displayed below the list (area 2 in the following figure).
 - Execution detail of plans, which displays the detailed information of the selected execution plans. See [Execution plan in details](#execution-details-of-plans) (area 3 in the following figure).
 
-![Details](/media/dashboard/dashboard-statement-detail-v660.png)
+![Details](./media/dashboard/dashboard-statement-detail-v660.png)
 
 ## Fast plan binding
 
@@ -24,29 +24,29 @@ Starting from v6.6.0, TiDB introduces the fast plan binding feature. You can qui
 
 1. Click **Plan Binding**. The **Plan Binding** dialog box is displayed.
 
-    ![Fast plan binding - not bound - entry](/media/dashboard/dashboard-quick-binding-entry-notbound.png)
+    ![Fast plan binding - not bound - entry](./media/dashboard/dashboard-quick-binding-entry-notbound.png)
 
 2. Select a plan that you want to bind and click **Bind**.
 
-    ![Fast plan binding - popup](/media/dashboard/dashboard-quick-binding-popup-notbound.png)
+    ![Fast plan binding - popup](./media/dashboard/dashboard-quick-binding-popup-notbound.png)
 
 3. After the binding is completed, you can see the **Bound** label.
 
-    ![Fast plan binding - popup - binding completed](/media/dashboard/dashboard-quick-binding-popup-bound.png)
+    ![Fast plan binding - popup - binding completed](./media/dashboard/dashboard-quick-binding-popup-bound.png)
 
 #### Drop an existing binding
 
 1. On the page of a SQL statement that has an existing binding, click **Plan Binding**. The **Plan Binding** dialog box is displayed.
 
-    ![Fast plan binding - bound - entry](/media/dashboard/dashboard-quick-binding-entry-bound.png)
+    ![Fast plan binding - bound - entry](./media/dashboard/dashboard-quick-binding-entry-bound.png)
 
 2. Click **Drop**.
 
-    ![Fast plan binding - popup - bound](/media/dashboard/dashboard-quick-binding-popup-bound.png)
+    ![Fast plan binding - popup - bound](./media/dashboard/dashboard-quick-binding-popup-bound.png)
 
 3. After the binding is dropped, you can see the **Not bound** label.
 
-    ![Fast plan binding - popup](/media/dashboard/dashboard-quick-binding-popup-notbound.png)
+    ![Fast plan binding - popup](./media/dashboard/dashboard-quick-binding-popup-notbound.png)
 
 ### Limitation
 
@@ -67,7 +67,7 @@ The execution detail of plans includes the following information:
 - Execution plan: Complete information about execution plans, displayed in table, graph, and text. For details of the execution plan, see [Understand the Query Execution Plan](/explain-overview.md). If multiple execution plans are selected, only (any) one of them is displayed.
 - For basic information, execution time, Coprocessor read, transaction, and slow query of the SQL statement, you can click the corresponding tab titles to switch among different information.
 
-![Execution details of plans](/media/dashboard/dashboard-statement-plans-detail.png)
+![Execution details of plans](./media/dashboard/dashboard-statement-plans-detail.png)
 
 ### SQL sample
 
@@ -81,7 +81,7 @@ On TiDB Dashboard, you can view execution plans in three ways: table, text, and 
 
 The table format provides detailed information about the execution plan, which helps you quickly identify abnormal operator metrics and compare the status of different operators. The following figure shows an execution plan in table format:
 
-![Execution plan in table format](/media/dashboard/dashboard-table-plan.png)
+![Execution plan in table format](./media/dashboard/dashboard-table-plan.png)
 
 The table format displays similar information to the text format but provides more user-friendly interactions:
 
@@ -90,13 +90,13 @@ The table format displays similar information to the text format but provides mo
 - If the execution plan is large, you can download it as a text file for local analysis.
 - You can hide and manage columns using the column picker.
 
-![Execution plan in table format - column picker](/media/dashboard/dashboard-table-plan-columnpicker.png)
+![Execution plan in table format - column picker](./media/dashboard/dashboard-table-plan-columnpicker.png)
 
 #### Execution plan in graph format
 
 The graph format is more suitable for viewing the execution plan tree of a complex SQL statement and understanding each operator and its corresponding content in detail. The following figure shows an execution plan in graph format:
 
-![Execution plan in graph format](/media/dashboard/dashboard-visual-plan-2.png)
+![Execution plan in graph format](./media/dashboard/dashboard-visual-plan-2.png)
 
 - The graph shows the execution from left to right, and from top to bottom.
 - Upper nodes are parent operators and lower nodes are child operators.
@@ -105,19 +105,19 @@ The graph format is more suitable for viewing the execution plan tree of a compl
 
 Click the node area, and the detailed operator information is displayed on the right sidebar.
 
-![Execution plan in graph format - sidebar](/media/dashboard/dashboard-visual-plan-popup.png)
+![Execution plan in graph format - sidebar](./media/dashboard/dashboard-visual-plan-popup.png)
 
 ### SQL execution details
 
 For basic information, execution time, Coprocessor read, transaction, and slow query of the SQL statement, you can click the corresponding tab titles to switch among different information.
 
-![Show different execution information](/media/dashboard/dashboard-slow-queries-detail2-v620.png)
+![Show different execution information](./media/dashboard/dashboard-slow-queries-detail2-v620.png)
 
 #### Basic tab
 
 The basic information of a SQL execution includes the table names, index name, execution count, and total latency. The **Description** column provides detailed description of each field.
 
-![Basic information](/media/dashboard/dashboard-statement-plans-basic.png)
+![Basic information](./media/dashboard/dashboard-statement-plans-basic.png)
 
 #### Time tab
 
@@ -127,24 +127,24 @@ Click the **Time** tab, and you can see how long each stage of the execution pla
 >
 > Because some operations might be performed in parallel within a single SQL statement, the cumulative duration of each stage might exceed the actual execution time of the SQL statement.
 
-![Execution time](/media/dashboard/dashboard-statement-plans-time.png)
+![Execution time](./media/dashboard/dashboard-statement-plans-time.png)
 
 #### Coprocessor Read tab
 
 Click the **Coprocessor Read** tab, and you can see information related to Coprocessor read.
 
-![Coprocessor read](/media/dashboard/dashboard-statement-plans-cop-read.png)
+![Coprocessor read](./media/dashboard/dashboard-statement-plans-cop-read.png)
 
 #### Transaction tab
 
 Click the **Transaction** tab, and you can see information related to execution plans and transactions, such as the average number of written keys or the maximum number of written keys.
 
-![Transaction](/media/dashboard/dashboard-statement-plans-transaction.png)
+![Transaction](./media/dashboard/dashboard-statement-plans-transaction.png)
 
 #### Slow Query tab
 
 If an execution plan is executed too slowly, you can see its associated slow query records under the **Slow Query** tab.
 
-![Slow Query](/media/dashboard/dashboard-statement-plans-slow-queries.png)
+![Slow Query](./media/dashboard/dashboard-statement-plans-slow-queries.png)
 
 The information displayed in this area has the same structure with the slow query page. See [TiDB Dashboard Slow Query Page](/dashboard/dashboard-slow-query.md) for details.

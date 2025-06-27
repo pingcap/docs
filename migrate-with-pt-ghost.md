@@ -54,7 +54,7 @@ The workflow of DM:
 
 - Apply DDLs recorded downstream.
 
-![dm-online-ddl](/media/dm/dm-online-ddl.png)
+![dm-online-ddl](./media/dm/dm-online-ddl.png)
 
 The change in the workflow brings the following advantages:
 

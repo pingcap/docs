@@ -15,7 +15,7 @@ This section describes the Join types in detail.
 
 The join result of an inner join returns only rows that match the join condition.
 
-![Inner Join](/media/develop/inner-join.png)
+![Inner Join](./media/develop/inner-join.png)
 
 For example, if you want to know the most prolific author, you need to join the author table named `authors` with the book author table named `book_authors`.
 
@@ -88,7 +88,7 @@ public List<Author> getTop10AuthorsOrderByBooks() throws SQLException {
 
 The left outer join returns all the rows in the left table and the values ​​in the right table that match the join condition. If no rows are matched in the right table, it will be filled with `NULL`.
 
-![Left Outer Join](/media/develop/left-outer-join.png)
+![Left Outer Join](./media/develop/left-outer-join.png)
 
 In some cases, you want to use multiple tables to complete the data query, but do not want the data set to become too small because the join condition are not met.
 
@@ -191,7 +191,7 @@ public List<Book> getLatestBooksWithAverageScore() throws SQLException {
 
 A right outer join returns all the records in the right table and the values ​​in the left table that match the join condition. If there is no matching value, it is filled with `NULL`.
 
-![Right Outer Join](/media/develop/right-outer-join.png)
+![Right Outer Join](./media/develop/right-outer-join.png)
 
 ### CROSS JOIN
 

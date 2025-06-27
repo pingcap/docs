@@ -28,11 +28,11 @@ Expected output: If the `Status` information of each node is `Up`, the cluster r
 
 1. Log in to TiDB Dashboard at `${pd-ip}:${pd-port}/dashboard`. The username and password is the same as that of the TiDB `root` user. If you have modified the `root` password, enter the modified password. The password is empty by default.
 
-    ![TiDB-Dashboard](/media/tiup/tidb-dashboard.png)
+    ![TiDB-Dashboard](./media/tiup/tidb-dashboard.png)
 
 2. The home page displays the node information in the TiDB cluster.
 
-    ![TiDB-Dashboard-status](/media/tiup/tidb-dashboard-status.png)
+    ![TiDB-Dashboard-status](./media/tiup/tidb-dashboard-status.png)
 
 ### Use Grafana
 
@@ -40,7 +40,7 @@ Expected output: If the `Status` information of each node is `Up`, the cluster r
 
 2. To check the TiDB port status and load monitoring information, click **Overview**.
 
-    ![Grafana-overview](/media/tiup/grafana-overview.png)
+    ![Grafana-overview](./media/tiup/grafana-overview.png)
 
 ## Log in to the database and perform simple operations
 

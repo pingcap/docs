@@ -19,7 +19,7 @@ TiCDC does not provide any standard way for implementing a consumer. This docume
 
 The following diagram shows the overall consumption process of the consumer:
 
-![TiCDC storage consumer overview](/media/ticdc/ticdc-storage-consumer-overview.png)
+![TiCDC storage consumer overview](./media/ticdc/ticdc-storage-consumer-overview.png)
 
 The components of the consumer and their features are described as follows:
 

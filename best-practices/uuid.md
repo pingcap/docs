@@ -51,7 +51,7 @@ In the screenshot of the [Key Visualizer](/tidb-cloud/tune-performance.md#key-vi
 
 </CustomContent>
 
-![Key Visualizer](/media/best-practices/uuid_keyviz.png)
+![Key Visualizer](./media/best-practices/uuid_keyviz.png)
 
 ```sql
 CREATE TABLE `uuid_demo_1` (

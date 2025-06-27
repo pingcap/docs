@@ -11,7 +11,7 @@ A TiDB Cloud recovery group allows you to replicate your databases between TiDB 
 
 A recovery group consists of a set of replicated databases that can be failed over together between two TiDB Cloud Dedicated clusters. Each recovery group is assigned a primary cluster, and databases on this primary cluster are associated with the group and are then replicated to the secondary cluster.
 
-![Recovery Group](/media/tidb-cloud/recovery-group/recovery-group-overview.png)
+![Recovery Group](./media/tidb-cloud/recovery-group/recovery-group-overview.png)
 
 - Recovery Group: a group of databases that are replicated between two clusters
 - Primary Cluster: the cluster where the database is actively written by the application

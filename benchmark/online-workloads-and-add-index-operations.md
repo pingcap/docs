@@ -112,7 +112,7 @@ sysbench $testname \
 | 32    | 54 |   229.2 |           4583 |
 | 48    | 57 |   230.1 |           4601 |
 
-![add-index-load-1-b32](/media/add-index-load-1-b32.png)
+![add-index-load-1-b32](./media/add-index-load-1-b32.png)
 
 #### `tidb_ddl_reorg_batch_size = 64`
 
@@ -126,7 +126,7 @@ sysbench $testname \
 | 32    | 42 |   185.2 |           3715 |
 | 48    | 45 |   189.2 |           3794 |
 
-![add-index-load-1-b64](/media/add-index-load-1-b64.png)
+![add-index-load-1-b64](./media/add-index-load-1-b64.png)
 
 #### `tidb_ddl_reorg_batch_size = 128`
 
@@ -140,7 +140,7 @@ sysbench $testname \
 | 32    | 35 |   130.8 |           2629 |
 | 48    | 35 |   120.5 |           2425 |
 
-![add-index-load-1-b128](/media/add-index-load-1-b128.png)
+![add-index-load-1-b128](./media/add-index-load-1-b128.png)
 
 #### `tidb_ddl_reorg_batch_size = 256`
 
@@ -154,7 +154,7 @@ sysbench $testname \
 | 32    | 36 |   113.5 |           2268 |
 | 48    | 33 |   86.2 |           1715 |
 
-![add-index-load-1-b256](/media/add-index-load-1-b256.png)
+![add-index-load-1-b256](./media/add-index-load-1-b256.png)
 
 #### `tidb_ddl_reorg_batch_size = 512`
 
@@ -168,7 +168,7 @@ sysbench $testname \
 | 32    | 33 |   72.5 |           1503 |
 | 48    | 33 |   54.2 |           1318 |
 
-![add-index-load-1-b512](/media/add-index-load-1-b512.png)
+![add-index-load-1-b512](./media/add-index-load-1-b512.png)
 
 #### `tidb_ddl_reorg_batch_size = 1024`
 
@@ -182,7 +182,7 @@ sysbench $testname \
 | 32    | 42 |   93.2 |           1835 |
 | 48    | 51 |   115.7 |           2261 |
 
-![add-index-load-1-b1024](/media/add-index-load-1-b1024.png)
+![add-index-load-1-b1024](./media/add-index-load-1-b1024.png)
 
 #### `tidb_ddl_reorg_batch_size = 2048`
 
@@ -196,7 +196,7 @@ sysbench $testname \
 | 32    | 1130 |   26.69 |           547 |
 | 48    | 893 |   27.5 |           552 |
 
-![add-index-load-1-b2048](/media/add-index-load-1-b2048.png)
+![add-index-load-1-b2048](./media/add-index-load-1-b2048.png)
 
 #### `tidb_ddl_reorg_batch_size = 4096`
 
@@ -210,7 +210,7 @@ sysbench $testname \
 | 32    | 942 |   114 |           2267 |
 | 48    | 187 |   54.2 |           1416 |
 
-![add-index-load-1-b4096](/media/add-index-load-1-b4096.png)
+![add-index-load-1-b4096](./media/add-index-load-1-b4096.png)
 
 ### Test conclusion
 
@@ -247,7 +247,7 @@ When you perform frequent write operations (this test involves `UPDATE`, `INSERT
 | 32    | 46 |   533.4 |           8103 |
 | 48    | 46 |   532.2 |           8074 |
 
-![add-index-load-2-b32](/media/add-index-load-2-b32.png)
+![add-index-load-2-b32](./media/add-index-load-2-b32.png)
 
 #### `tidb_ddl_reorg_batch_size = 1024`
 
@@ -261,7 +261,7 @@ When you perform frequent write operations (this test involves `UPDATE`, `INSERT
 | 32    | 31 |   467.5 |           7516 |
 | 48    | 30 |   562.1 |           7442 |
 
-![add-index-load-2-b1024](/media/add-index-load-2-b1024.png)
+![add-index-load-2-b1024](./media/add-index-load-2-b1024.png)
 
 #### `tidb_ddl_reorg_batch_size = 4096`
 
@@ -275,7 +275,7 @@ When you perform frequent write operations (this test involves `UPDATE`, `INSERT
 | 32    | 30 |   441.9 |           7057 |
 | 48    | 30 |   440.1 |           7004 |
 
-![add-index-load-2-b4096](/media/add-index-load-2-b4096.png)
+![add-index-load-2-b4096](./media/add-index-load-2-b4096.png)
 
 ### Test conclusion
 
@@ -309,7 +309,7 @@ When you only perform query operations to the target column of the `ADD INDEX` s
 | 32    | 42 |   343.1 |           6695 |
 | 48    | 42 |   333.4 |           6454 |
 
-![add-index-load-3-b32](/media/add-index-load-3-b32.png)
+![add-index-load-3-b32](./media/add-index-load-3-b32.png)
 
 #### `tidb_ddl_reorg_batch_size = 1024`
 
@@ -323,7 +323,7 @@ When you only perform query operations to the target column of the `ADD INDEX` s
 | 32    | 32 |   300.6 |           6017 |
 | 48    | 31 |   279.5 |           5612 |
 
-![add-index-load-3-b1024](/media/add-index-load-3-b1024.png)
+![add-index-load-3-b1024](./media/add-index-load-3-b1024.png)
 
 #### `tidb_ddl_reorg_batch_size = 4096`
 
@@ -337,7 +337,7 @@ When you only perform query operations to the target column of the `ADD INDEX` s
 | 32    | 32 |   220.2 |           4924 |
 | 48    | 33 |   214.8 |           4544 |
 
-![add-index-load-3-b4096](/media/add-index-load-3-b4096.png)
+![add-index-load-3-b4096](./media/add-index-load-3-b4096.png)
 
 ### Test conclusion
 

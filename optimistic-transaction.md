@@ -18,7 +18,7 @@ Before enabling optimistic transactions, make sure that your application correct
 
 To support distributed transactions, TiDB adopts two-phase commit (2PC) in optimistic transactions. The procedure is as follows:
 
-![2PC in TiDB](/media/2pc-in-tidb.png)
+![2PC in TiDB](./media/2pc-in-tidb.png)
 
 1. The client begins a transaction.
 
@@ -144,6 +144,6 @@ scheduler-concurrency = 2048000
 
 In addition, TiKV supports monitoring the time spent on waiting latches in the scheduler.
 
-![Scheduler latch wait duration](/media/optimistic-transaction-metric.png)
+![Scheduler latch wait duration](./media/optimistic-transaction-metric.png)
 
 When `Scheduler latch wait duration` is high and there are no slow writes, it can be safely concluded that there are many write conflicts at this time.

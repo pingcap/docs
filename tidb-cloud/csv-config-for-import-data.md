@@ -9,7 +9,7 @@ This document introduces CSV configurations for the Import Data service on TiDB 
 
 The following is the CSV Configuration window when you use the Import Data service on TiDB Cloud to import CSV files. For more information, see [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md).
 
-![CSV Configurations](/media/tidb-cloud/import-data-csv-config.png)
+![CSV Configurations](./media/tidb-cloud/import-data-csv-config.png)
 
 ## Separator
 
