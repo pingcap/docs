@@ -51,10 +51,10 @@ ticloud serverless changefeed create --cluster-id <cluster-id> --name <changefee
 
 - `<cluster-id>`: the ID of the TiDB Cloud cluster that you want to create the changefeed for.
 - `<changefeed-name>`: the name of the changefeed, it is optional. If you do not specify a name, TiDB Cloud automatically generates a name for the changefeed.
-- type: the type of the changefeed, which is `KAFKA` in this case.
-- kafka: a JSON string that contains the configurations for the changefeed to stream data to Apache Kafka. See [Kafka configurations](#kafka-configurations) for more information about the configurations.
-- filter: a JSON string that contains the configurations for the changefeed to filter tables and events. See [Filter configurations](#filter-configurations) for more information about the configurations.
-- start-tso: the TSO from which the changefeed starts to replicate data. If you do not specify a TSO, the current TSO is used by default. To learn more about TSO, see [TSO in TiDB](https://docs.pingcap.com/tidb/stable/tso/). 
+- `type`: the type of the changefeed, which is `KAFKA` in this case.
+- `kafka`: a JSON string that contains the configurations for the changefeed to stream data to Apache Kafka. See [Kafka configurations](#kafka-configurations) for more information about the configurations.
+- `filter:` a JSON string that contains the configurations for the changefeed to filter tables and events. See [Filter configurations](#filter-configurations) for more information about the configurations.
+- `start-tso`: the TSO from which the changefeed starts to replicate data. If you do not specify a TSO, the current TSO is used by default. To learn more about TSO, see [TSO in TiDB](https://docs.pingcap.com/tidb/stable/tso/). 
 
 ### Filter configurations
 
@@ -171,7 +171,7 @@ The main configuration fields are as follows:
    
 2. **broker**: Contains Kafka broker connection information:
    
-    - `kafka_version`: The Kafka version, such as `VERSION_2XX`.
+    - `kafka_version`: The Kafka version, support `VERSION_2XX` and `VERSION_3XX`.
     - `broker_endpoints`: Comma-separated list of broker endpoints.
     - `tls_enable`: Whether to enable TLS for the connection.
     - `compression`: The compression type for messages, support `NONE`, `GZIP`, `LZ4`, `SNAPPY`, and `ZSTD`.
@@ -183,7 +183,6 @@ The main configuration fields are as follows:
     - Avro is a compact, fast, and binary data format with rich data structures, which is widely used in various flow systems. For more information, see [Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol).
     - Canal-JSON is a plain JSON text format, which is easy to parse. For more information, see [Canal-JSON data format](https://docs.pingcap.com/tidb/stable/ticdc-canal-json).
     - Open Protocol is a row-level data change notification protocol that provides data sources for monitoring, caching, full-text indexing, analysis engines, and primary-secondary replication between different databases. For more information, see [Open Protocol data format](https://docs.pingcap.com/tidb/stable/ticdc-open-protocol). 
-    - Debezium is a tool for capturing database changes. It converts each captured database change into a message called an "event" and sends these events to Kafka. For more information, see [Debezium data format](https://docs.pingcap.com/tidb/stable/ticdc-debezium).
 
 5. **data_format.enable_tidb_extension**: if you want to add TiDB-extension fields to the Kafka message body with `AVRO` or `CANAL_JSON` data format.
 
@@ -198,35 +197,29 @@ The main configuration fields are as follows:
 
     - **Distribute changelogs by table to Kafka Topics**
 
-        If you want the changefeed to create a dedicated Kafka topic for each table, choose this mode. Then, all Kafka messages of a table are sent to a dedicated Kafka topic. You can customize topic names for tables by setting a `topic_prefix`, a `separator` and between a database name and table name, and a `topic_suffix`. For example, if you set the separator as `_`, the topic names are in the format of `<Prefix><DatabaseName>_<TableName><Suffix>`.
+        If you want the changefeed to create a dedicated Kafka topic for each table, set `dispatch_type` to `BY_TABLE`. Then, all Kafka messages of a table are sent to a dedicated Kafka topic. You can customize topic names for tables by setting a `topic_prefix`, a `separator` and between a database name and table name, and a `topic_suffix`. For example, if you set the separator as `_`, the topic names are in the format of `<Prefix><DatabaseName>_<TableName><Suffix>`.
 
         For changelogs of non-row events, such as Create Schema Event, you can specify a topic name in the `default_topic` field. The changefeed will create a topic accordingly to collect such changelogs.
 
     - **Distribute changelogs by database to Kafka Topics**
 
-        If you want the changefeed to create a dedicated Kafka topic for each database, choose this mode. Then, all Kafka messages of a database are sent to a dedicated Kafka topic. You can customize topic names of databases by setting a `topic_prefix` and a `topic_suffix`.
+        If you want the changefeed to create a dedicated Kafka topic for each database, set `dispatch_type` to `BY_DATABASE`. Then, all Kafka messages of a database are sent to a dedicated Kafka topic. You can customize topic names of databases by setting a `topic_prefix` and a `topic_suffix`.
 
         For changelogs of non-row events, such as Resolved Ts Event, you can specify a topic name in the `default_topic` field. The changefeed will create a topic accordingly to collect such changelogs.
 
     - **Send all changelogs to one specified Kafka Topic**
 
-        If you want the changefeed to create one Kafka topic for all changelogs, choose this mode. Then, all Kafka messages in the changefeed will be sent to one Kafka topic. You can define the topic name in the `default_topic` field.
+        If you want the changefeed to create one Kafka topic for all changelogs, set `dispatch_type` to `ONE_TOPIC`. Then, all Kafka messages in the changefeed will be sent to one Kafka topic. You can define the topic name in the `default_topic` field.
 
 > Note
 >
 > If you use `AVRO` data format, only `BY_TABLE` dispatch type is supported.
 
-1. **topic_partition_config.default_topic**: The default topic name for non-row events, such as Create Schema Event and Resolved Ts Event. If you set the `dispatch_type` to `ONE_TOPIC`, this field is required.
+8. **topic_partition_config.replication_factor**: controls how many Kafka servers each Kafka message is replicated to. The valid value ranges from [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) to the number of Kafka brokers.
 
-    - `topic_prefix`: The prefix for the topic name.
-    - `separator`: The separator between a database name and table name in the topic name.
-    - `topic_suffix`: The suffix for the topic name.
+9. **topic_partition_config.partition_num**: controls how many partitions exist in a topic. The valid value range is `[1, 10 * the number of Kafka brokers]`.
 
-2. **topic_partition_config.replication_factor**: controls how many Kafka servers each Kafka message is replicated to. The valid value ranges from [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) to the number of Kafka brokers.
-
-3.  **topic_partition_config.partition_num**: controls how many partitions exist in a topic. The valid value range is `[1, 10 * the number of Kafka brokers]`.
-
-4.  **topic_partition_config.partition_dispatchers**: decide which partition a Kafka message will be sent to. `partition_type` Support `TABLE`, `INDEX_VALUE`, `TS` and `COLUMN`.
+10. **topic_partition_config.partition_dispatchers**: decide which partition a Kafka message will be sent to. `partition_type` Support `TABLE`, `INDEX_VALUE`, `TS` and `COLUMN`.
 
     - **Distribute changelogs by primary key or index value to Kafka partition**
 
@@ -238,7 +231,7 @@ The main configuration fields are as follows:
 
     - **Distribute changelogs by timestamp to Kafka partition**
 
-        If you want the changefeed to send Kafka messages to different Kafka partitions randomly, set `partition_type` to `TS`.. The commitTs of a row changelog will determine which partition the changelog is sent to. This distribution method provides a better partition balance and ensures orderliness in each partition. However, multiple changes of a data item might be sent to different partitions and the consumer progress of different consumers might be different, which might cause data inconsistency. Therefore, the consumer needs to sort the data from multiple partitions by commitTs before consuming.
+        If you want the changefeed to send Kafka messages to different Kafka partitions randomly, set `partition_type` to `TS`. The commitTs of a row changelog will determine which partition the changelog is sent to. This distribution method provides a better partition balance and ensures orderliness in each partition. However, multiple changes of a data item might be sent to different partitions and the consumer progress of different consumers might be different, which might cause data inconsistency. Therefore, the consumer needs to sort the data from multiple partitions by commitTs before consuming.
 
     - **Distribute changelogs by column value to Kafka partition**
 
@@ -246,7 +239,7 @@ The main configuration fields are as follows:
 
     For more information about the matching rules, see [Partition dispatchers](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-kafka/#partition-dispatchers).
 
-5.  **column_selectors**: columns from events and send only the data changes related to those columns to the downstream.
+11. **column_selectors**: columns from events and send only the data changes related to those columns to the downstream.
 
     - `matcher`: specify which tables the column selector applies to. For tables that do not match any rule, all columns are sent.
     - `columns`: specify which columns of the matched tables will be sent to the downstream.
