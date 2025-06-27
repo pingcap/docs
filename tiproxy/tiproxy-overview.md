@@ -204,6 +204,10 @@ If you need to upgrade TiProxy, add [`--tiproxy-version`](/tiup/tiup-component-c
 tiup cluster upgrade <cluster-name> <version> --tiproxy-version <tiproxy-version>
 ```
 
+> **Note:**
+>
+> This command will also upgrade the TiDB cluster. The TiDB cluster will always be restarted even if the TiDB version is not changed.
+
 ### Restart the TiDB cluster
 
 When you restart the TiDB cluster using [`tiup cluster restart`](/tiup/tiup-component-cluster-restart.md), TiDB servers are not rolling restarted, which causes the client connection to be disconnected. Therefore, avoid using this command.
