@@ -83,7 +83,7 @@ Full Restore <------------------------------------------------------------------
 *** ["Full Restore success summary"] *** [total-take=4.344617542s] [total-kv=5] [total-kv-size=327B] [average-speed=75.27B/s] [restore-data-size(after-compressed)=4.813kB] [Size=4813] [BackupTS=435844901803917314]
 ```
 
-During the restore, the `Table Mode` of the restored table will be set to `restore`, and users will be prohibited from performing any read and write operations on the table in `Restore Mode`. When the data restore is completed, the Table Mode will be automatically reset to the `normal` state, and users can read and write the table normally, thereby improving task stability and data consistency during data restore.
+During restore, the restored table's table mode is set to `restore`, which prevents you from performing any read or write operations. After data restore completes, the table mode is automatically reset to `normal`, and you can read and write the table normally. This improves task stability and data consistency.
 
 ### Restore a database or a table
 
