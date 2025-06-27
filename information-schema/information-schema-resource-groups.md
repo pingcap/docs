@@ -87,7 +87,7 @@ The descriptions of the columns in the `RESOURCE_GROUPS` table are as follows:
 
     - `OFF`: indicates that the resource group is not allowed to overuse any remaining system resources.
     - `MODERATED`: indicates that the resource group is allowed to overuse remaining system resources to a limited extent, with priority given to allocated resources within its quota.
-    - `UNLIMITED`: indicates that the resource group can overuse remaining system resources without limitation, and the remaining system resources are treated as equal to the resources within the quota during allocation.
+    - `UNLIMITED`: indicates that the resource group can overuse remaining system resources without limitation, and the excess system resources are treated as equal to the resources within the quota during allocation.
 
 > **Note:**
 >
