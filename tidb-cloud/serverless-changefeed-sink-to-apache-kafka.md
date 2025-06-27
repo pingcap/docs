@@ -41,7 +41,7 @@ To allow TiDB Cloud changefeeds to stream data to Apache Kafka and create Kafka 
 
 For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources](https://docs.confluent.io/platform/current/kafka/authorization.html#resources) and [Adding ACLs](https://docs.confluent.io/platform/current/kafka/authorization.html#adding-acls) in Confluent documentation for more information.
 
-## Create a changefeed to stream data to Apache Kafka
+## Create a changefeed sink to Apache Kafka with TiDB Cloud CLI
 
 To create a changefeed to stream data from TiDB Cloud to Apache Kafka, using the TiDB Cloud CLI command:
 
@@ -178,7 +178,7 @@ The main configuration fields are as follows:
 
 "DISABLE", "SASL_PLAIN", "SASL_SCRAM_SHA_256", "SASL_SCRAM_SHA_512"
 
-3. **authentication**: Authentication settings for connecting to kafka, support `DISABLE`, `SASL_PLAIN`, `SASL_SCRAM_SHA_256` and `SASL_SCRAM_SHA_512`. The `user_name` and `password` fields are required if you set the `auth_type` to `SASL_PLAIN`, `SASL_SCRAM_SHA_256`, or `SASL_SCRAM_SHA_512`.
+3. **authentication**: Authentication settings for connecting to Kafka, support `DISABLE`, `SASL_PLAIN`, `SASL_SCRAM_SHA_256` and `SASL_SCRAM_SHA_512`. The `user_name` and `password` fields are required if you set the `auth_type` to `SASL_PLAIN`, `SASL_SCRAM_SHA_256`, or `SASL_SCRAM_SHA_512`.
    
 4. **data_format.protocol**: Support `CANAL_JSON`, `AVRO`, and `OPEN_PROTOCOL`.
 
