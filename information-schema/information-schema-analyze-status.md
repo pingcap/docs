@@ -1,6 +1,6 @@
 ---
 title: ANALYZE_STATUS
-summary: 了解 `ANALYZE_STATUS` information_schema 表。
+summary: "了解 `ANALYZE_STATUS` information_schema 表。"
 ---
 
 # ANALYZE_STATUS

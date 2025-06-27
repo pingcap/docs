@@ -1,6 +1,6 @@
 ---
 title: SHOW TABLE NEXT_ROW_ID
-summary: 了解在 TiDB 中 `SHOW TABLE NEXT_ROW_ID` 的用法。
+summary: "了解在 TiDB 中 `SHOW TABLE NEXT_ROW_ID` 的用法。"
 ---
 
 # SHOW TABLE NEXT_ROW_ID

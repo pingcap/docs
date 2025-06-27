@@ -1,6 +1,6 @@
 ---
 title: PARTITIONS
-summary: 了解 `PARTITIONS` INFORMATION_SCHEMA 表。
+summary: "了解 `PARTITIONS` INFORMATION_SCHEMA 表。"
 ---
 
 # PARTITIONS

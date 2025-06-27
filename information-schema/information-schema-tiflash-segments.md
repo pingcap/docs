@@ -1,6 +1,6 @@
 ---
 title: TIFLASH_SEGMENTS
-summary: 了解 `TIFLASH_SEGMENTS` information_schema 表。
+summary: "了解 `TIFLASH_SEGMENTS` information_schema 表。"
 ---
 
 # TIFLASH_SEGMENTS

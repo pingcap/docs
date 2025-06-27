@@ -1,6 +1,6 @@
 ---
 title: EXPLAIN 使用视图的语句
-summary: 了解 TiDB 中 `EXPLAIN` 语句返回的执行计划信息。
+summary: "了解 TiDB 中 `EXPLAIN` 语句返回的执行计划信息。"
 ---
 
 # EXPLAIN 使用视图的语句

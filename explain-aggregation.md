@@ -1,6 +1,6 @@
 ---
 title: 使用聚合的 EXPLAIN 语句
-summary: 了解 TiDB 中 `EXPLAIN` 语句返回的执行计划信息。
+summary: "了解 TiDB 中 `EXPLAIN` 语句返回的执行计划信息。"
 ---
 
 # 使用聚合的 EXPLAIN 语句

@@ -1,6 +1,6 @@
 ---
 title: CLUSTER_INFO
-summary: 了解 `CLUSTER_INFO` 集群拓扑信息表。
+summary: "了解 `CLUSTER_INFO` 集群拓扑信息表。"
 ---
 
 # CLUSTER_INFO

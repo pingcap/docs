@@ -1,6 +1,6 @@
 ---
 title: TIDB_HOT_REGIONS_HISTORY
-summary: 了解 `TIDB_HOT_REGIONS_HISTORY` information_schema 表。
+summary: "了解 `TIDB_HOT_REGIONS_HISTORY` information_schema 表。"
 ---
 
 # TIDB_HOT_REGIONS_HISTORY

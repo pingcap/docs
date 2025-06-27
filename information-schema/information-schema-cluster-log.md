@@ -1,6 +1,6 @@
 ---
 title: CLUSTER_LOG
-summary: Learn the `CLUSTER_LOG` information_schema table.
+summary: "Learn the `CLUSTER_LOG` information_schema table."
 ---
 
 # CLUSTER_LOG

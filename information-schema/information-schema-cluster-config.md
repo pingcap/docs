@@ -1,6 +1,6 @@
 ---
 title: CLUSTER_CONFIG
-summary: Learn the `CLUSTER_CONFIG` information_schema table.
+summary: "Learn the `CLUSTER_CONFIG` information_schema table."
 ---
 
 # CLUSTER_CONFIG

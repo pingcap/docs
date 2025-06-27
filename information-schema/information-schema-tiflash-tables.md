@@ -1,6 +1,6 @@
 ---
 title: TIFLASH_TABLES
-summary: 了解 `TIFLASH_TABLES` information_schema 表。
+summary: "了解 `TIFLASH_TABLES` information_schema 表。"
 ---
 
 # TIFLASH_TABLES

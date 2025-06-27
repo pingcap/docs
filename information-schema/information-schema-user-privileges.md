@@ -1,6 +1,6 @@
 ---
 title: USER_PRIVILEGES
-summary: 了解 `USER_PRIVILEGES` information_schema 表。
+summary: "了解 `USER_PRIVILEGES` information_schema 表。"
 ---
 
 # USER_PRIVILEGES

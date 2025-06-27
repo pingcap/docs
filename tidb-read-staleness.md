@@ -1,6 +1,6 @@
 ---
 title: 使用 `tidb_read_staleness` 系统变量读取历史数据
-summary: 了解如何使用 `tidb_read_staleness` 系统变量读取历史数据。
+summary: "了解如何使用 `tidb_read_staleness` 系统变量读取历史数据。"
 ---
 
 # 使用 `tidb_read_staleness` 系统变量读取历史数据

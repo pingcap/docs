@@ -1,6 +1,6 @@
 ---
 title: PROCESSLIST
-summary: 了解 `PROCESSLIST` information_schema 表。
+summary: "了解 `PROCESSLIST` information_schema 表。"
 ---
 
 # PROCESSLIST
@@ -89,7 +89,7 @@ SELECT * FROM information_schema.cluster_processlist;
 
 ```sql
 +-----------------+-----+------+----------+------+---------+------+------------+------------------------------------------------------+-----+----------------------------------------+----------------+
-| INSTANCE        | ID  | USER | HOST     | DB   | COMMAND | TIME | STATE      | INFO                                                 | MEM | TxnStart                               | RESOURCE_GROUP | 
+| INSTANCE        | ID  | USER | HOST     | DB   | COMMAND | TIME | STATE      | INFO                                                 | MEM | TxnStart                               | RESOURCE_GROUP |
 +-----------------+-----+------+----------+------+---------+------+------------+------------------------------------------------------+-----+----------------------------------------+----------------+
 
 | 10.0.1.22:10080 | 150 | u1   | 10.0.1.1 | test | Query   | 0    | autocommit | select count(*) from usertable                       | 372 | 05-28 03:54:21.230(416976223923077223) | default        |

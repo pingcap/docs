@@ -1,6 +1,6 @@
 ---
 title: INSPECTION_RESULT
-summary: Learn the `INSPECTION_RESULT` diagnostic result table.
+summary: "Learn the `INSPECTION_RESULT` diagnostic result table."
 ---
 
 # INSPECTION_RESULT

@@ -1,6 +1,6 @@
 ---
 title: IMPORT INTO vs. TiDB Lightning
-summary: Learn about the differences between `IMPORT INTO` and TiDB Lightning.
+summary: "Learn about the differences between `IMPORT INTO` and TiDB Lightning."
 ---
 
 # IMPORT INTO vs. TiDB Lightning

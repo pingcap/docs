@@ -1,6 +1,6 @@
 ---
 title: CLUSTER_HARDWARE
-summary: Learn the `CLUSTER_HARDWARE` information_schema table.
+summary: "Learn the `CLUSTER_HARDWARE` information_schema table."
 ---
 
 # CLUSTER_HARDWARE

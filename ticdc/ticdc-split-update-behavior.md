@@ -1,6 +1,6 @@
 ---
 title: TiCDC Behavior in Splitting UPDATE Events
-summary: Introduce the behavior changes about whether TiCDC splits `UPDATE` events, including the reasons and the impact of these changes.
+summary: "Introduce the behavior changes about whether TiCDC splits `UPDATE` events, including the reasons and the impact of these changes."
 ---
 
 # TiCDC Behavior in Splitting UPDATE Events

@@ -1,6 +1,6 @@
 ---
 title: UUID 最佳实践
-summary: UUID 作为主键时具有以下优势：减少网络往返、支持大多数编程语言和数据库、防止枚举攻击。建议将 UUID 以二进制形式存储在 `BINARY(16)` 列中。同时建议在 TiDB 中不要设置 `swap_flag` 以防止热点。MySQL 也支持 UUID。
+summary: "UUID 作为主键时具有以下优势：减少网络往返、支持大多数编程语言和数据库、防止枚举攻击。建议将 UUID 以二进制形式存储在 `BINARY(16)` 列中。同时建议在 TiDB 中不要设置 `swap_flag` 以防止热点。MySQL 也支持 UUID。"
 ---
 
 # UUID 最佳实践

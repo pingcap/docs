@@ -1,6 +1,6 @@
 ---
 title: TABLE_CONSTRAINTS
-summary: 了解 `TABLE_CONSTRAINTS` information_schema 表。
+summary: "了解 `TABLE_CONSTRAINTS` information_schema 表。"
 ---
 
 # TABLE_CONSTRAINTS

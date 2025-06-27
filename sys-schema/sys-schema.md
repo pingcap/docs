@@ -1,6 +1,6 @@
 ---
 title: sys Schema
-summary: 了解 `sys` schema 中的系统表。
+summary: "了解 `sys` schema 中的系统表。"
 ---
 
 # `sys` Schema

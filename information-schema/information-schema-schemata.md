@@ -1,6 +1,6 @@
 ---
 title: SCHEMATA
-summary: 了解 `SCHEMATA` information_schema 表。
+summary: "了解 `SCHEMATA` information_schema 表。"
 ---
 
 # SCHEMATA

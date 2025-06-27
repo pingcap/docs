@@ -1,6 +1,6 @@
 ---
 title: SQL 逻辑优化
-summary: SQL 逻辑优化章节解释了 TiDB 查询计划生成中的关键逻辑重写。例如，由于 TiDB 的重写，`IN` 子查询 `t.a in (select t1.a from t1 where t1.b=t.b)` 不会存在。关键重写包括子查询相关优化、列裁剪、相关子查询去关联化、消除 Max/Min、谓词下推、分区裁剪、TopN 和 Limit 算子下推以及连接重排序。
+summary: "SQL 逻辑优化章节解释了 TiDB 查询计划生成中的关键逻辑重写。例如，由于 TiDB 的重写，`IN` 子查询 `t.a in (select t1.a from t1 where t1.b=t.b)` 不会存在。关键重写包括子查询相关优化、列裁剪、相关子查询去关联化、消除 Max/Min、谓词下推、分区裁剪、TopN 和 Limit 算子下推以及连接重排序。"
 ---
 
 # SQL 逻辑优化

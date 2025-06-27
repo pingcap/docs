@@ -1,6 +1,6 @@
 ---
 title: PLACEMENT_POLICIES
-summary: 了解 `PLACEMENT_POLICIES` information_schema 表。
+summary: "了解 `PLACEMENT_POLICIES` information_schema 表。"
 ---
 
 # PLACEMENT_POLICIES
@@ -45,7 +45,7 @@ DESC placement_policies;
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE t1 (a INT); 
+CREATE TABLE t1 (a INT);
 CREATE PLACEMENT POLICY p1 primary_region="us-east-1" regions="us-east-1";
 CREATE TABLE t3 (a INT) PLACEMENT POLICY=p1;
 SHOW PLACEMENT; -- 显示所有信息，包括表 t3

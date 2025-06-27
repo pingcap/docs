@@ -1,6 +1,6 @@
 ---
 title: SESSION_CONNECT_ATTRS
-summary: 了解 `SESSION_CONNECT_ATTRS` performance_schema 表。
+summary: "了解 `SESSION_CONNECT_ATTRS` performance_schema 表。"
 ---
 
 # SESSION\_CONNECT\_ATTRS

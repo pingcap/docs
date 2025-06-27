@@ -1,6 +1,6 @@
 ---
 title: DESC | TiDB SQL 语句参考
-summary: TiDB 数据库中 `DESC` 的使用概览。
+summary: "TiDB 数据库中 `DESC` 的使用概览。"
 ---
 
 # DESC

@@ -1,6 +1,6 @@
 ---
 title: INSPECTION_RULES
-summary: Learn the `INSPECTION_RULES` information_schema table.
+summary: "Learn the `INSPECTION_RULES` information_schema table."
 ---
 
 # INSPECTION_RULES

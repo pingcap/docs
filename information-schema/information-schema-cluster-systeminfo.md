@@ -1,6 +1,6 @@
 ---
 title: CLUSTER_SYSTEMINFO
-summary: Learn the `CLUSTER_SYSTEMINFO` kernel parameter table.
+summary: "Learn the `CLUSTER_SYSTEMINFO` kernel parameter table."
 ---
 
 # CLUSTER_SYSTEMINFO

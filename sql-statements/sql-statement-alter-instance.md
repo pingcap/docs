@@ -1,6 +1,6 @@
 ---
 title: ALTER INSTANCE
-summary: 了解 TiDB 中 `ALTER INSTANCE` 的使用概述。
+summary: "了解 TiDB 中 `ALTER INSTANCE` 的使用概述。"
 ---
 
 # ALTER INSTANCE

@@ -1,6 +1,6 @@
 ---
 title: schema_unused_indexes
-summary: 了解 `sys` schema 中的 `schema_unused_indexes` 表。
+summary: "了解 `sys` schema 中的 `schema_unused_indexes` 表。"
 ---
 
 # `schema_unused_indexes`

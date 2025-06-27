@@ -1,6 +1,6 @@
 ---
 title: KEYWORDS
-summary: 了解 `KEYWORDS` INFORMATION_SCHEMA 表。
+summary: "了解 `KEYWORDS` INFORMATION_SCHEMA 表。"
 ---
 
 # KEYWORDS

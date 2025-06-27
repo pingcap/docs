@@ -1,6 +1,6 @@
 ---
 title: DDL_JOBS
-summary: 了解 `DDL_JOBS` information_schema 表。
+summary: "了解 `DDL_JOBS` information_schema 表。"
 ---
 
 # DDL_JOBS

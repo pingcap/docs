@@ -1,6 +1,6 @@
 ---
 title: SEQUENCES
-summary: 了解 `SEQUENCES` INFORMATION_SCHEMA 表。
+summary: "了解 `SEQUENCES` INFORMATION_SCHEMA 表。"
 ---
 
 # SEQUENCES

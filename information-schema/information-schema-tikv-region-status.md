@@ -1,6 +1,6 @@
 ---
 title: TIKV_REGION_STATUS
-summary: 了解 `TIKV_REGION_STATUS` information_schema 表。
+summary: "了解 `TIKV_REGION_STATUS` information_schema 表。"
 ---
 
 # TIKV_REGION_STATUS

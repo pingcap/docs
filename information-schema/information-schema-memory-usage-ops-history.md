@@ -1,6 +1,6 @@
 ---
 title: MEMORY_USAGE_OPS_HISTORY
-summary: 了解 `MEMORY_USAGE_OPS_HISTORY` information_schema 系统表。
+summary: "了解 `MEMORY_USAGE_OPS_HISTORY` information_schema 系统表。"
 ---
 
 # MEMORY_USAGE_OPS_HISTORY

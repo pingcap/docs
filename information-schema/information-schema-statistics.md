@@ -1,6 +1,6 @@
 ---
 title: STATISTICS
-summary: 了解 `STATISTICS` information_schema 表。
+summary: "了解 `STATISTICS` information_schema 表。"
 ---
 
 # STATISTICS

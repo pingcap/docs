@@ -1,6 +1,6 @@
 ---
 title: CLUSTER_LOAD
-summary: Learn the `CLUSTER_LOAD` information_schema table.
+summary: "Learn the `CLUSTER_LOAD` information_schema table."
 ---
 
 # CLUSTER_LOAD

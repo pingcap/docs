@@ -1,6 +1,6 @@
 ---
 title: TiDB 查询执行计划概览
-summary: 了解 TiDB 中 `EXPLAIN` 语句返回的执行计划信息。
+summary: "了解 TiDB 中 `EXPLAIN` 语句返回的执行计划信息。"
 ---
 
 # TiDB 查询执行计划概览

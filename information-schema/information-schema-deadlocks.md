@@ -1,6 +1,6 @@
 ---
 title: DEADLOCKS
-summary: 了解 `DEADLOCKS` INFORMATION_SCHEMA 表。
+summary: "了解 `DEADLOCKS` INFORMATION_SCHEMA 表。"
 ---
 
 # DEADLOCKS

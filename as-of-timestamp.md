@@ -1,6 +1,6 @@
 ---
 title: 使用 `AS OF TIMESTAMP` 子句读取历史数据
-summary: 了解如何使用 `AS OF TIMESTAMP` 语句子句读取历史数据。
+summary: "了解如何使用 `AS OF TIMESTAMP` 语句子句读取历史数据。"
 ---
 
 # 使用 `AS OF TIMESTAMP` 子句读取历史数据

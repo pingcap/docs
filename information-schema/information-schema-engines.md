@@ -1,6 +1,6 @@
 ---
 title: ENGINES
-summary: 了解 `ENGINES` information_schema 表。
+summary: "了解 `ENGINES` information_schema 表。"
 ---
 
 # ENGINES

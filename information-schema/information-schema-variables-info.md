@@ -1,6 +1,6 @@
 ---
 title: VARIABLES_INFO
-summary: 了解 `VARIABLES_INFO` information_schema 表。
+summary: "了解 `VARIABLES_INFO` information_schema 表。"
 ---
 
 # VARIABLES_INFO

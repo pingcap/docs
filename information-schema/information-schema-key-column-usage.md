@@ -1,6 +1,6 @@
 ---
 title: KEY_COLUMN_USAGE
-summary: 了解 `KEY_COLUMN_USAGE` information_schema 表。
+summary: "了解 `KEY_COLUMN_USAGE` information_schema 表。"
 ---
 
 # KEY_COLUMN_USAGE

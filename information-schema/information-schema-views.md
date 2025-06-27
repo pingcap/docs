@@ -1,6 +1,6 @@
 ---
 title: VIEWS
-summary: 了解 `VIEWS` INFORMATION_SCHEMA 表。
+summary: "了解 `VIEWS` INFORMATION_SCHEMA 表。"
 ---
 
 # VIEWS

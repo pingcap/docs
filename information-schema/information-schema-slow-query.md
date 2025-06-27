@@ -1,6 +1,6 @@
 ---
 title: SLOW_QUERY
-summary: 了解 `SLOW_QUERY` INFORMATION_SCHEMA 表。
+summary: "了解 `SLOW_QUERY` INFORMATION_SCHEMA 表。"
 ---
 
 # SLOW_QUERY

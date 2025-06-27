@@ -1,6 +1,6 @@
 ---
 title: COLUMNS
-summary: 了解 `COLUMNS` INFORMATION_SCHEMA 表。
+summary: "了解 `COLUMNS` INFORMATION_SCHEMA 表。"
 ---
 
 # COLUMNS

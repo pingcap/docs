@@ -1,6 +1,6 @@
 ---
 title: Bookshop 示例应用程序
-summary: Bookshop 是一个用于购买和评价图书的在线书店应用程序。你可以通过 TiUP 或 TiDB Cloud 导入表结构和数据。方法 1 使用 TiUP 快速生成和导入示例数据，而方法 2 从 Amazon S3 导入数据到 TiDB Cloud。数据库表包括 books、authors、users、ratings、book_authors 和 orders。数据库初始化脚本 `dbinit.sql` 创建 Bookshop 应用程序的表结构。
+summary: "Bookshop 是一个用于购买和评价图书的在线书店应用程序。你可以通过 TiUP 或 TiDB Cloud 导入表结构和数据。方法 1 使用 TiUP 快速生成和导入示例数据，而方法 2 从 Amazon S3 导入数据到 TiDB Cloud。数据库表包括 books、authors、users、ratings、book_authors 和 orders。数据库初始化脚本 `dbinit.sql` 创建 Bookshop 应用程序的表结构。"
 ---
 
 # Bookshop 示例应用程序

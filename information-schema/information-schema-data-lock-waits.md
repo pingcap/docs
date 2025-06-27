@@ -1,6 +1,6 @@
 ---
 title: DATA_LOCK_WAITS
-summary: 了解 `DATA_LOCK_WAITS` information_schema 表。
+summary: "了解 `DATA_LOCK_WAITS` information_schema 表。"
 ---
 
 # DATA_LOCK_WAITS

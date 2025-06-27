@@ -1,6 +1,6 @@
 ---
 title: TIDB_TRX
-summary: 了解 `TIDB_TRX` INFORMATION_SCHEMA 表。
+summary: "了解 `TIDB_TRX` INFORMATION_SCHEMA 表。"
 ---
 
 # TIDB_TRX

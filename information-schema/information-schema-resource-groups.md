@@ -1,6 +1,6 @@
 ---
 title: RESOURCE_GROUPS
-summary: 了解 `RESOURCE_GROUPS` information_schema 表。
+summary: "了解 `RESOURCE_GROUPS` information_schema 表。"
 ---
 
 # RESOURCE_GROUPS

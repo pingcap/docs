@@ -1,6 +1,6 @@
 ---
 title: DISTINCT 优化
-summary: 介绍 TiDB 查询优化器中的 `distinct` 优化。
+summary: "介绍 TiDB 查询优化器中的 `distinct` 优化。"
 ---
 
 # DISTINCT 优化

@@ -1,6 +1,6 @@
 ---
 title: 使用系统变量 `tidb_snapshot` 读取历史数据
-summary: 了解如何使用系统变量 `tidb_snapshot` 从历史版本读取数据。
+summary: "了解如何使用系统变量 `tidb_snapshot` 从历史版本读取数据。"
 ---
 
 # 使用系统变量 `tidb_snapshot` 读取历史数据

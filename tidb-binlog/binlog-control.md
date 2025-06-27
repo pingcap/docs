@@ -1,6 +1,6 @@
 ---
 title: binlogctl
-summary: Learns how to use `binlogctl`.
+summary: "Learns how to use `binlogctl`."
 ---
 
 # binlogctl

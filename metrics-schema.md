@@ -1,6 +1,6 @@
 ---
 title: Metrics Schema
-summary: Learn the `METRICS_SCHEMA` schema.
+summary: "Learn the `METRICS_SCHEMA` schema."
 ---
 
 # Metrics Schema

@@ -1,6 +1,6 @@
 ---
 title: TIDB_INDEXES
-summary: 了解 `TIDB_INDEXES` information_schema 表。
+summary: "了解 `TIDB_INDEXES` information_schema 表。"
 ---
 
 # TIDB_INDEXES

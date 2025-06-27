@@ -1,6 +1,6 @@
 ---
 title: mysql.user
-summary: 了解 `mysql` 架构中的 `user` 表。
+summary: "了解 `mysql` 架构中的 `user` 表。"
 ---
 
 # `mysql.user`

@@ -1,6 +1,6 @@
 ---
 title: FLASHBACK TABLE
-summary: 了解如何使用 `FLASHBACK TABLE` 语句恢复表。
+summary: "了解如何使用 `FLASHBACK TABLE` 语句恢复表。"
 ---
 
 # FLASHBACK TABLE

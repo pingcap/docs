@@ -1,6 +1,6 @@
 ---
 title: COLLATIONS
-summary: 了解 `COLLATIONS` information_schema 表。
+summary: "了解 `COLLATIONS` information_schema 表。"
 ---
 
 # COLLATIONS
