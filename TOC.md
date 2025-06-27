@@ -423,6 +423,7 @@
     - [Use the `tidb_snapshot` System Variable](/read-historical-data.md)
   - Best Practices
     - [Use TiDB](/best-practices/tidb-best-practices.md)
+    - [Index Best Practices](/best-practices/index-best-practices.md)
     - [Java Application Development](/best-practices/java-app-best-practices.md)
     - [Use HAProxy](/best-practices/haproxy-best-practices.md)
     - [Highly Concurrent Write](/best-practices/high-concurrency-best-practices.md)
