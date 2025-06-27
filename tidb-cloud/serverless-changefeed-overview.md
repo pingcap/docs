@@ -5,10 +5,11 @@ summary: TiDB Cloud changefeed helps you stream data from TiDB Cloud to other da
 
 # Changefeed (Beta)
 
-TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, TiDB Cloud supports streaming data to Apache Kafka.
+TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services.
+
 > **Note:**
 >
-> - Currently, you can manager changefeeds only with [TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md).
+> - Currently, you can manage changefeeds only with [TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md).
 > - Currently, TiDB Cloud only allows up to 100 changefeeds per cluster.
 > - Currently, TiDB Cloud only allows up to 100 table filter rules per changefeed.
 
@@ -46,7 +47,7 @@ ticloud serverless changefeed resume --cluster-id <cluster-id> --changefeed-id <
 >
 > TiDB Cloud currently only allows editing changefeeds in the paused status.
 
-To edit a changefeed sink to kafka, you can pause the changefeed first, and then edit with the TiDB Cloud CLI command:
+To edit a changefeed sink to kafka, you can pause the changefeed first, and then edit it with the TiDB Cloud CLI command:
 
 ```bash
 ticloud serverless changefeed edit --cluster-id <cluster-id> --changefeed-id <changefeed-id> --name <newname> --kafka <full-specified-kafka> --filter <full-specified-filter>

@@ -107,10 +107,10 @@ To get the explanation of the template, using the TiDB Cloud CLI command:
 ticloud serverless changefeed template --explain
 ```
 
-The configurations in the `kafka` JSON string are used to configure how the changefeed streams data to Apache Kafka. Below is an example of a `filter` configuration:
+The configurations in the `kafka` JSON string are used to configure how the changefeed streams data to Apache Kafka. Below is an example of a `kafka` configuration:
 
 <details>
-<summary>Example filter configuration</summary>
+<summary>Example kafka configuration</summary>
 
 ```json
 {
@@ -175,8 +175,6 @@ The main configuration fields are as follows:
     - `broker_endpoints`: Comma-separated list of broker endpoints.
     - `tls_enable`: Whether to enable TLS for the connection.
     - `compression`: The compression type for messages, support `NONE`, `GZIP`, `LZ4`, `SNAPPY`, and `ZSTD`.
-
-"DISABLE", "SASL_PLAIN", "SASL_SCRAM_SHA_256", "SASL_SCRAM_SHA_512"
 
 3. **authentication**: Authentication settings for connecting to Kafka, support `DISABLE`, `SASL_PLAIN`, `SASL_SCRAM_SHA_256` and `SASL_SCRAM_SHA_512`. The `user_name` and `password` fields are required if you set the `auth_type` to `SASL_PLAIN`, `SASL_SCRAM_SHA_256`, or `SASL_SCRAM_SHA_512`.
    
