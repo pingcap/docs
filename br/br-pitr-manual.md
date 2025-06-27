@@ -538,7 +538,7 @@ tiup br restore point --pd="${PD_IP}:2379" \
 
 > **Note:**
 >
-> - When using filters, ensure that the filtered data maintains referential integrity.
+When you use filters, ensure that the filtered data maintains referential integrity.
 > - Filter options apply to both snapshot and log backup restoration phases.
 > - Multiple `--filter` options can be specified to include or exclude different patterns.
 > - PITR filtering does not support system tables yet. If you need to restore specific system tables, use `br restore full` with filters instead, which will restore only the snapshot backup data (not log backup data).
@@ -599,7 +599,7 @@ Starting from TiDB v9.0.0, you can perform PITR operations while a log backup ta
 
 #### Important limitation for PITR with ongoing log backup
 
-When performing PITR operations while log backup is running, the restored data will be recorded in the log backup. However, during the restore time window, the data may not be consistent due to the nature of log restore operations. The system writes metadata to external storage to mark both the time range and data range where consistency cannot be guaranteed.
+When you perform PITR operations while log backup is running, the restored data will be recorded in the log backup. However, during the restore time window, the data may not be consistent due to the nature of log restore operations. The system writes metadata to external storage to mark both the time range and data range where consistency cannot be guaranteed.
 
 If such inconsistency occurs during the time range `[t1, t2)`, you cannot restore data from that time period. Instead, you must:
 
