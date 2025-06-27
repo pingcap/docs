@@ -176,7 +176,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 * TiProxy officially supports the traffic replay feature (GA) [#642](https://github.com/pingcap/tiproxy/issues/642) @[djshow832](https://github.com/djshow832) tw@hfxsd<!--2062-->
 
     In TiProxy v1.3.0, the traffic replay feature is released as an experimental feature. In TiProxy v1.4.0, the traffic replay feature becomes generally available (GA). TiProxy provides specialized SQL commands for traffic capture and replay. This feature lets you easily capture access traffic from TiDB production clusters and replay it at a specified rate in test clusters, facilitating business validation.
-    
+
     For more information, see [documentation](/tiproxy/tiproxy-traffic-replay.md).
 
 ### Reliability
@@ -196,12 +196,22 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 * Introduce a new system variable `max_user_connections` to limit the number of connections that different users can establish [#59203](https://github.com/pingcap/tidb/issues/59203) @[joccau](https://github.com/joccau) tw@hfxsd<!--2017-->
 
     Starting from v9.0.0, you can use the `max_user_connections` system variable to limit the number of connections that a single user can establish to a single TiDB node. This helps prevent issues where excessive [token](/tidb-configuration-file.md#token-limit) consumption by one user causes delays in responding to requests from other users.
-    
+
     For more information, see [documentation](/system-variables.md#max_user_connections-new-in-v900).
+
+* Restrict resource groups from overusing system resources [#9057](https://github.com/tikv/pd/issues/9057) [#59389](https://github.com/pingcap/tidb/issues/59389) @[lhy1024](https://github.com/lhy1024) **tw@lilin90** <!--1940 beta.2-->
+
+    Before v9.0.0, when the `BURSTABLE` attribute is set for a resource group, TiDB allows the group’s applications to overuse system resources. However, such overuse could crowd out resources allocated to other resource groups, impacting their SLAs. Starting from v9.0.0, TiDB introduces support for different `BURSTABLE` modes. If you do not explicitly specify a value for `BURSTABLE`, the `MODERATED` mode is enabled by default. In this mode, TiDB dynamically adjusts the limit on excess resource usage, aiming to prioritize satisfying quotas across all resource groups. The previous unlimited mode remains available and you can explicitly configure it using `BURSTABLE=UNLIMITED`.
+
+    Note that if you upgrade the TiDB cluster from an earlier version to v9.0.0, existing resource groups retain their original behavior (`UNLIMITED`). To switch to the `MODERATED` mode, you must modify the resource group configuration using [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md).
+
+    The `MODERATED` mode is well-suited for environments where multiple resource groups have similar priority. It allows some groups to safely overflow their quotas, improving resource utilization while maintaining quality of service.
+
+    For more information, see [documentation](/sql-statements/sql-statement-create-resource-group.md).
 
 ### SQL
 
-* Support the `gb18030` character set and `gb18030_bin` and `gb18030_chinese_ci` collations [#17470](https://github.com/tikv/tikv/issues/17470) [#55791](https://github.com/pingcap/tidb/issues/55791) @[cbcwestwolf](https://github.com/cbcwestwolf) *tw@hfxsd* <!--1962 beta.2--> 
+* Support the `gb18030` character set and `gb18030_bin` and `gb18030_chinese_ci` collations [#17470](https://github.com/tikv/tikv/issues/17470) [#55791](https://github.com/pingcap/tidb/issues/55791) @[cbcwestwolf](https://github.com/cbcwestwolf) *tw@hfxsd* <!--1962 beta.2-->
 
     Starting from v9.0.0, TiDB supports the `gb18030` character set along with the `gb18030_bin` and `gb18030_chinese_ci` collations, enabling better handling of Chinese-language data storage and query requirements.
 
