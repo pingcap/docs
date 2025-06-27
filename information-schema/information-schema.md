@@ -95,8 +95,6 @@ Information Schema 提供了一种 ANSI 标准的方式来查看系统元数据�
 | [`VIEWS`](/information-schema/information-schema-views.md)                              | 提供当前用户可见的视图列表。类似于运行 `SHOW FULL TABLES WHERE table_type = 'VIEW'` |
 </CustomContent>
 
-</CustomContent>
-
 ## 属于 TiDB 扩展的表
 
 <CustomContent platform="tidb">
