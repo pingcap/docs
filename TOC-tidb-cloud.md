@@ -14,6 +14,7 @@
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
   - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
+<<<<<<< HEAD
 - Key Concepts
   - [Overview](/tidb-cloud/key-concepts.md)
   - [Architecture](/tidb-cloud/architecture-concepts.md)
@@ -126,6 +127,59 @@
     - [Object Naming Convention](/develop/dev-guide-object-naming-guidelines.md)
     - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
   - [Bookshop Example Application](/develop/dev-guide-bookshop-schema-design.md)
+=======
+- Develop Applications
+  - [Overview](/develop/dev-guide-overview.md)
+  - Quick Start
+    - [Build a TiDB Cloud Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
+    - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
+  - Connect to TiDB Cloud
+    - GUI Database Tools
+      - [JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)
+      - [DBeaver](/develop/dev-guide-gui-dbeaver.md)
+      - [VS Code](/develop/dev-guide-gui-vscode-sqltools.md)
+      - [MySQL Workbench](/develop/dev-guide-gui-mysql-workbench.md)
+      - [Navicat](/develop/dev-guide-gui-navicat.md)
+    - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
+    - BI
+      - [Looker Studio](/tidb-cloud/dev-guide-bi-looker-studio.md)
+    - Java
+      - [JDBC](/develop/dev-guide-sample-application-java-jdbc.md)
+      - [MyBatis](/develop/dev-guide-sample-application-java-mybatis.md)
+      - [Hibernate](/develop/dev-guide-sample-application-java-hibernate.md)
+      - [Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md)
+      - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
+    - Go
+      - [Go-MySQL-Driver](/develop/dev-guide-sample-application-golang-sql-driver.md)
+      - [GORM](/develop/dev-guide-sample-application-golang-gorm.md)
+    - Python
+      - [mysqlclient](/develop/dev-guide-sample-application-python-mysqlclient.md)
+      - [MySQL Connector/Python](/develop/dev-guide-sample-application-python-mysql-connector.md)
+      - [PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
+      - [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
+      - [peewee](/develop/dev-guide-sample-application-python-peewee.md)
+      - [Django](/develop/dev-guide-sample-application-python-django.md)
+    - Node.js
+      - [node-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
+      - [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
+      - [Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md)
+      - [Sequelize](/develop/dev-guide-sample-application-nodejs-sequelize.md)
+      - [TypeORM](/develop/dev-guide-sample-application-nodejs-typeorm.md)
+      - [Next.js](/develop/dev-guide-sample-application-nextjs.md)
+      - [AWS Lambda](/develop/dev-guide-sample-application-aws-lambda.md)
+    - Ruby
+      - [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
+      - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
+    - C#
+      - [C#](/develop/dev-guide-sample-application-cs.md)
+    - [WordPress](/tidb-cloud/dev-guide-wordpress.md)
+    - Serverless Driver (Beta)
+      - [TiDB Cloud Serverless Driver](/tidb-cloud/serverless-driver.md)
+      - [Node.js Example](/tidb-cloud/serverless-driver-node-example.md)
+      - [Prisma Example](/tidb-cloud/serverless-driver-prisma-example.md)
+      - [Kysely Example](/tidb-cloud/serverless-driver-kysely-example.md)
+      - [Drizzle Example](/tidb-cloud/serverless-driver-drizzle-example.md)
+>>>>>>> c69f80a7cf (Add C# / .NET example (#21206))
   - Third-Party Support
     - [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)
     - [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)
