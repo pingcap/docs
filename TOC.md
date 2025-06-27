@@ -48,6 +48,8 @@
     - Ruby
       - [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
       - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
+    - C#
+      - [C#](/develop/dev-guide-sample-application-cs.md)
   - Connect to TiDB
     - GUI Database Tools
       - [JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)
