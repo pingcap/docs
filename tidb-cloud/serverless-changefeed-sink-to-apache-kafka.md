@@ -52,8 +52,8 @@ ticloud serverless changefeed create --cluster-id <cluster-id> --name <changefee
 - `<cluster-id>`: the ID of the TiDB Cloud cluster that you want to create the changefeed for.
 - `<changefeed-name>`: the name of the changefeed, it is optional. If you do not specify a name, TiDB Cloud automatically generates a name for the changefeed.
 - type: the type of the changefeed, which is `KAFKA` in this case.
-- kafka: a JSON string that contains the configurations for the changefeed to stream data to Apache Kafka. See []() for more information about the configurations.
-- filter: a JSON string that contains the configurations for the changefeed to filter tables and events. See []() for more information about the configurations.
+- kafka: a JSON string that contains the configurations for the changefeed to stream data to Apache Kafka. See [Kafka configurations](#kafka-configurations) for more information about the configurations.
+- filter: a JSON string that contains the configurations for the changefeed to filter tables and events. See [Filter configurations](#filter-configurations) for more information about the configurations.
 - start-tso: the TSO from which the changefeed starts to replicate data. If you do not specify a TSO, the current TSO is used by default. To learn more about TSO, see [TSO in TiDB](https://docs.pingcap.com/tidb/stable/tso/). 
 
 ### Filter configurations
