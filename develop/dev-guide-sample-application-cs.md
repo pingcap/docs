@@ -97,7 +97,7 @@ public class Tutorial1
 }
 ```
 
-This connects to a TiDB instance on the specified IP and port. If you use TiDB Cloud, replace connection string parameters (such as hostname, port, user, and password) with the details provided in the TiDB Cloud console.
+This connects to a TiDB instance on the specified IP and port. If you use TiDB Cloud, replace connection string parameters (such as hostname, port, user, and password) with the details provided in the [TiDB Cloud console](https://tidbcloud.com/).
 
 The code connects to the database, prints its version, then executes a SQL query using [`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version) to retrieve more detailed version information, and finally prints this result.
 
