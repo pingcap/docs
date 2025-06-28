@@ -206,7 +206,7 @@ tiup cluster upgrade <cluster-name> <version> --tiproxy-version <tiproxy-version
 
 > **Note:**
 >
-> This command will also upgrade the TiDB cluster. The TiDB cluster will always be restarted even if the TiDB version is not changed.
+> This command also upgrades and restarts the TiDB cluster, even if the cluster version does not change.
 
 ### Restart the TiDB cluster
 
