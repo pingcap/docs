@@ -289,7 +289,7 @@ Configuration items related to scheduling
 
 > **Warning:**
 >
-> Setting this configuration item to `"v2"` is an experimental feature. It is not recommended to use it in production environments.
+> This configuration is an experimental feature. It is not recommended to use it in production environments.
 
 + Controls the maximum Region size that can be scheduled for hot Region scheduling.
 + Default value: `512`
