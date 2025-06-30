@@ -191,7 +191,9 @@ The main configuration fields are as follows:
 6. **data_format.avro_config**: If you select **Avro** as your data format, you need to set the Avro-specific configurations:
 
     - `decimal_handling_mode` and `bigint_unsigned_handling_mode`: specify how TiDB Cloud handles the decimal and unsigned bigint data types in Kafka messages.
-    - `schema_registry`: the schema registry endpoint. If you enable `enable_http_auth`, the fields for user name and password are required.
+    - `schema_registry`: the schema registry endpoint. If auth is required, please set `enable_http_auth` to ture and full in the user name and password. Currently, TiDB Cloud only supports Confluent schema registry. If you need other schema registry, such as aws glue schema registry, pleas contact [TiDB Cloud support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+
+        For more information about the Avro configurations, see [Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol).
 
 7. **topic_partition_config.dispatch_type**: Support `ONE_TOPIC`, `BY_TABLE` and `BY_DATABASE`. Controls how the changefeed creates Kafka topics, by table, by database, or creating one topic for all changelogs.
 
