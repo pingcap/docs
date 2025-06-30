@@ -295,7 +295,7 @@ The following PD configuration items can be modified dynamically:
 | `schedule.enable-joint-consensus` | Controls whether to use Joint Consensus for replica scheduling |
 | `schedule.hot-regions-write-interval` | The time interval at which PD stores hot Region information |
 | `schedule.hot-regions-reserved-days` | Specifies how many days the hot Region information is retained |
-| `schedule.max-movable-hot-peer-size` | Controls the maximum Region size that can be scheduled for hot Region scheduling. |
+| `schedule.max-movable-hot-peer-size` | Controls the maximum Region size that can be scheduled for hot Region scheduling |
 | `schedule.store-limit-version` | Controls the version of [store limit](/configure-store-limit.md) |
 | `replication.max-replicas` | Sets the maximum number of replicas |
 | `replication.location-labels` | The topology information of a TiKV cluster |
