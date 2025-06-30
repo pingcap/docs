@@ -240,8 +240,8 @@ After deploying a TiFlash node and starting replication by executing `ALTER TABL
 
     Search the `pd.log` file for the `table-<table_id>-r` keyword and scheduling behaviors like `add operator`. Alternatively, check whether there are `add-rule-peer` operator on the "Operator/Schedule operator create" of PD Dashboard on Grafana. You can also check the value "Scheduler/Patrol Region time" on the PD Dashboard on Grafana. "Patrol Region time" reflects the duration for PD to scan all Regions and generate scheduling operations. A high value might cause delays in scheduling.
 
-    - If the keyword is found, the PD schedules properly.
-    - If no scheduling operations are running, or the **Patrol Region time** is more than 30 minutes, the PD does not schedule properly or is scheduling slowly.
+    - If the` pd.log` contains the keyword `table-<table_id>-r` along with `add operator` scheduling actions, or if the duration values on the "Scheduler/Patrol Region time" panel appear normal, it indicates that PD scheduling is functioning properly.
+    - If no `add-rule-peer` scheduling operations are running, or the **Patrol Region time** is more than 30 minutes, the PD does not schedule properly or is scheduling slowly.
 
 If the preceding methods cannot resolve your issue, collect the TiDB, PD, and TiFlash log files, and [get support](/support.md) from PingCAP or the community.
 
