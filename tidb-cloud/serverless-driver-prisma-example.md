@@ -68,7 +68,6 @@ const prisma = new PrismaClient({ adapter });
 ```
 
 Then, queries from Prisma Client can be sent to the TiDB Cloud serverless driver for processing.
->>>>>>> 194df99145 (update prisma-adapter (#20794))
 
 ## Use the Prisma adapter in Node.js environments
 
