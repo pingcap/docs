@@ -129,11 +129,11 @@ tiup br restore full \
 
 > **Note:**
 >
-> Starting from v9.0.0, when the parameter `--load-stats` is set to false, br will not update the relevant information of the restored tables in the table `mysql.stats_meta`. And then you can manually execute `analyze table` SQL after the recovery is complete to update statistics.
+> Starting from v9.0.0, when the `--load-stats` parameter is set to false, BR no longer writes statistics for the restored tables to the `mysql.stats_meta` table. After the restore is complete, you can manually execute the `ANALYZE TABLE` SQL statement to update the relevant statistics.
 
 When the backup and restore feature backs up data, it stores statistics in JSON format within the `backupmeta` file. When restoring data, it loads statistics in JSON format into the cluster. For more information, see [LOAD STATS](/sql-statements/sql-statement-load-stats.md).
 
-Starting from 9.0.0, BR introduces the parameter `--fast-load-sys-tables`, which is enabled by default. When the br restore data in a new cluster and the IDs of tables and partitions can be reused (otherwise, it will automatically fall back to logically load statistic data), by setting `--fast-load-sys-tables`, br will use the `RENAME TABLE` DDL to atomically swap the system tables in the database `__TiDB_BR_Temporary_mysql` with the system tables in the database `mysql`.
+Starting from 9.0.0, BR introduces the `--fast-load-sys-tables` parameter, which is enabled by default. When restoring data to a new cluster using the `br` command-line tool, and the IDs of tables and partitions between the upstream and downstream clusters can be reused (otherwise, BR will automatically fall back to logically load statistics), enabling `--fast-load-sys-tables` lets BR to  first restore the statistics-related system tables to the temporary system database `__TiDB_BR_Temporary_mysql`, and then atomically swap these tables with the corresponding tables in the `mysql` database using the `RENAME TABLE` statement.
 
 The following is an example:
 
@@ -194,7 +194,7 @@ Download&Ingest SST <-----------------------------------------------------------
 Restore Pipeline <-------------------------/...............................................> 17.12%
 ```
 
-Starting from TiDB v9.0.0, BR lets you specify `--fast-load-sys-tables` to restore statistic data physically in a new cluster:
+Starting from TiDB v9.0.0, BR lets you specify `--fast-load-sys-tables` to restore statistics physically in a new cluster:
 
 ```shell
 tiup br restore full \
@@ -208,7 +208,7 @@ tiup br restore full \
 
 > **Note:**
 >
-> Different from restoring system tables logically by `REPLACE INTO` SQL, restoring system tables physically will completely overwrite the original data in the system tables.
+> Unlike the logical restoration of system tables using the `REPLACE INTO` SQL statement, physical restoration completely overwrites the existing data in the system tables.
 
 ## Restore a database or a table
 
