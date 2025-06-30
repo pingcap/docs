@@ -287,6 +287,10 @@ Configuration items related to scheduling
 
 ### `max-movable-hot-peer-size` <span class="version-mark">New in v6.1.0</span>
 
+> **Warning:**
+>
+> Setting this configuration item to `"v2"` is an experimental feature. It is not recommended to use it in production environments.
+
 + Controls the maximum Region size that can be scheduled for hot Region scheduling.
 + Default value: `512`
 + Unit: MiB
