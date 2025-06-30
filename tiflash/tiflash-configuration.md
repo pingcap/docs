@@ -124,7 +124,7 @@ Configure storage path related settings.
 #### `storage.api_version` <span class="version-mark">New in v9.0.0</span>
 
 - The API version that TiFlash uses to communicate with PD and TiKV.
-- Optional values:
+- Value options:
     - `1`: TiFlash uses API V1 to communicate with PD and TiKV.
     - `2`: TiFlash uses API V2 to communicate with PD and TiKV to support the multi-tenancy feature.
 - Default value: `1`
