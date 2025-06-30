@@ -97,9 +97,9 @@ The complete PITR process is as follows:
 
 Log backup generates the following types of files:
 
+- `{resolved_ts}-{uuid}.meta` file: is generated every time each TiKV node uploads the log backup data and stores metadata of all log backup data files uploaded this time. The `{resolved_ts}` is the resolved timestamp of the TiKV node. The latest `resolved_ts` of the log backup task is the minimum resolved timestamp among all TiKV nodes. The `{uuid}` is generated randomly when the file is created.
+- `{store_id}.ts` file: is updated with global checkpoint ts every time each TiKV node uploads the log backup data. The `{store_id}` is the store ID of the TiKV node.
 - `{min_ts}-{uuid}.log` file: stores the KV change log data of the backup task. The `{min_ts}` is the minimum TSO timestamp of the KV change log data in the file, and the `{uuid}` is generated randomly when the file is created.
-- `{checkpoint_ts}-{uuid}.meta` file: is generated every time each TiKV node uploads the log backup data and stores metadata of all log backup data files uploaded this time. The `{checkpoint_ts}` is the log backup checkpoint of the TiKV node, and the global checkpoint is the minimum checkpoint of all TiKV nodes. The `{uuid}` is generated randomly when the file is created.
-- `{store_id}.ts` file: this file is updated with global checkpoint ts every time each TiKV node uploads the log backup data. The `{store_id}` is the store ID of the TiKV node.
 - `v1_stream_truncate_safepoint.txt` file: stores the timestamp corresponding to the latest backup data in storage that deleted by `br log truncate`.
 
 ### Structure of backup files
