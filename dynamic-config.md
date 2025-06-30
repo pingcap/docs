@@ -266,11 +266,12 @@ The following PD configuration items can be modified dynamically:
 | `cluster-version` | The cluster version |
 | `schedule.max-merge-region-size` | Controls the size limit of `Region Merge` (in MiB) |
 | `schedule.max-merge-region-keys` | Specifies the maximum numbers of the `Region Merge` keys |
-| `schedule.patrol-region-interval` | Determines the frequency at which `replicaChecker` checks the health state of a Region |
+| `schedule.patrol-region-interval` | Determines the frequency at which the checker inspects the health state of a Region |
 | `schedule.split-merge-interval` | Determines the time interval of performing split and merge operations on the same Region |
 | `schedule.max-snapshot-count` | Determines the maximum number of snapshots that a single store can send or receive at the same time |
 | `schedule.max-pending-peer-count` | Determines the maximum number of pending peers in a single store |
 | `schedule.max-store-down-time` | The downtime after which PD judges that the disconnected store cannot be recovered |
+| `schedule.max-store-preparing-time` | Controls the maximum waiting time for the store to go online |
 | `schedule.leader-schedule-policy` | Determines the policy of Leader scheduling |
 | `schedule.leader-schedule-limit` | The number of Leader scheduling tasks performed at the same time |
 | `schedule.region-schedule-limit` | The number of Region scheduling tasks performed at the same time |
@@ -288,16 +289,39 @@ The following PD configuration items can be modified dynamically:
 | `schedule.enable-location-replacement` | Determines whether to enable isolation level check |
 | `schedule.enable-cross-table-merge` | Determines whether to enable cross-table merge |
 | `schedule.enable-one-way-merge` | Enables one-way merge, which only allows merging with the next adjacent Region |
+| `schedule.region-score-formula-version` | Controls the version of the Region score formula |
+| `schedule.scheduler-max-waiting-operator` | Controls the number of waiting operators in each scheduler |
+| `schedule.enable-debug-metrics` | Enables the metrics for debugging |
+| `schedule.enable-joint-consensus` | Controls whether to use Joint Consensus for replica scheduling |
+| `schedule.hot-regions-write-interval` | The time interval at which PD stores hot Region information |
+| `schedule.hot-regions-reserved-days` | Specifies how many days the hot Region information is retained |
+| `schedule.max-movable-hot-peer-size` | Controls the maximum Region size that can be scheduled for hot Region scheduling |
+| `schedule.store-limit-version` | Controls the version of [store limit](/configure-store-limit.md) |
 | `replication.max-replicas` | Sets the maximum number of replicas |
 | `replication.location-labels` | The topology information of a TiKV cluster |
 | `replication.enable-placement-rules` | Enables Placement Rules |
 | `replication.strictly-match-label` | Enables the label check |
+| `replication.isolation-level` | The minimum topological isolation level of a TiKV cluster |
 | `pd-server.use-region-storage` | Enables independent Region storage |
 | `pd-server.max-gap-reset-ts` | Sets the maximum interval of resetting timestamp (BR) |
 | `pd-server.key-type` | Sets the cluster key type |
 | `pd-server.metric-storage` | Sets the storage address of the cluster metrics |
 | `pd-server.dashboard-address` | Sets the dashboard address |
+| `pd-server.flow-round-by-digit` | Specifies the number of lowest digits to round for the Region flow information |
+| `pd-server.min-resolved-ts-persistence-interval` | Determines the interval at which the minimum resolved timestamp is persistent to the PD |
+| `pd-server.server-memory-limit` | The memory limit ratio for a PD instance |
+| `pd-server.server-memory-limit-gc-trigger` | The threshold ratio at which PD tries to trigger GC |
+| `pd-server.enable-gogc-tuner` | Controls whether to enable the GOGC Tuner |
+| `pd-server.gc-tuner-threshold` | The maximum memory threshold ratio for tuning GOGC |
 | `replication-mode.replication-mode` | Sets the backup mode |
+| `replication-mode.dr-auto-sync.label-key` | Distinguishes different AZs and needs to match Placement Rules |
+| `replication-mode.dr-auto-sync.primary` | The primary AZ |
+| `replication-mode.dr-auto-sync.dr` | The disaster recovery (DR) AZ |
+| `replication-mode.dr-auto-sync.primary-replicas` | The number of Voter replicas in the primary AZ |
+| `replication-mode.dr-auto-sync.dr-replicas` | The number of Voter replicas in the disaster recovery (DR) AZ |
+| `replication-mode.dr-auto-sync.wait-store-timeout` | The waiting time for switching to asynchronous replication mode when network isolation or failure occurs |
+| `replication-mode.dr-auto-sync.wait-recover-timeout` | The waiting time for switching back to the `sync-recover` status after the network recovers |
+| `replication-mode.dr-auto-sync.pause-region-split` | Controls whether to pause Region split operations in the `async_wait` and `async` statuses |
 
 For detailed parameter description, refer to [PD Configuration File](/pd-configuration-file.md).
 
