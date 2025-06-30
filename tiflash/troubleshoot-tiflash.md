@@ -12,9 +12,9 @@ This section describes some commonly encountered issues when using TiFlash, the 
 
 The issue might occur due to different reasons. It is recommended that you troubleshoot it as follows:
 
-1. Check whether your system is RedHat Enterprise Linux 8.
+1. Check whether your system is CentOS 8.
 
-    RedHat Enterprise Linux 8 does not have the `libnsl.so` system library. You can manually install it via the following command:
+    CentOS 8 does not have the `libnsl.so` system library. You can manually install it using the following command:
 
     ```shell
     dnf install libnsl
@@ -136,7 +136,7 @@ In this example, the warning message shows that TiDB does not select the MPP mod
 
 After the TiDB cluster is deployed, if the TiFlash replicas consistently fail to be created, or if the TiFlash replicas are initially created normally but all or some tables fail to be created after a period of time, you can do the following to troubleshoot the issue:
 
-1. Check whether PD enables the `Placement Rules` feature. This feature is enabled by default since v5.0:
+1. Check whether PD enables the `Placement Rules` feature. Starting from v5.0, this feature is enabled by default:
 
     ```shell
     echo 'config show replication' | /path/to/pd-ctl -u http://${pd-ip}:${pd-port}
@@ -153,7 +153,7 @@ After the TiDB cluster is deployed, if the TiFlash replicas consistently fail to
     tiup ctl:nightly pd -u http://${pd-ip}:${pd-port} store
     ```
 
-    The TiFlash's `store.labels` includes information such as `{"key": "engine", "value": "tiflash"}`. You can check this information to confirm a TiFlash instance.
+    The TiFlash's `store.labels` includes the information such as `{"key": "engine", "value": "tiflash"}`. You can check this information to confirm a TiFlash instance.
 
 4. Check whether the `count` of Placement Rule with the `default` ID is correct:
 
@@ -208,7 +208,7 @@ If all the preceding configurations or TiFlash status are normal, follow the ins
 
 After deploying a TiFlash node and starting replication by executing `ALTER TABLE ... SET TIFLASH REPLICA ...`, no data is replicated to it. In this case, you can identify and address the problem by performing the following steps:
 
-1. Check whether the replication is successful by running the `ALTER table <tbl_name> set tiflash replica <num>` command and check the output.
+1. Check whether the replication is successful by running `ALTER TABLE ... SET TIFLASH REPLICA ...<num>` and check the output.
 
     - If the query is blocked, run the `SELECT * FROM information_schema.tiflash_replica` statement to check whether TiFlash replicas have been created.
         - Check whether the DDL statement is executed as expected through [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md). Or there are any other DDL statement that block altering TiFlash replica statement being executed.
@@ -222,7 +222,7 @@ After deploying a TiFlash node and starting replication by executing `ALTER TABL
    - If changes are detected, it indicates TiFlash replication is functioning normally (though potentially at a slower pace). Refer to [Data replication is slow](#data-replication-is-slow) for optimization configurations.
    - If no, TiFlash replication is abnormal. Go to the next step.
 
-3. Check whether TiDB has created any placement rule for the table.
+3. Check whether TiDB has successfully created any placement rule for the table.
 
     Search the logs of TiDB DDL Owner and check whether TiDB has notified PD to add placement rules. For non-partitioned tables, search `ConfigureTiFlashPDForTable`. For partitioned tables, search `ConfigureTiFlashPDForPartitions`.
 
@@ -243,7 +243,7 @@ After deploying a TiFlash node and starting replication by executing `ALTER TABL
     - If the keyword is found, the PD schedules properly.
     - If no scheduling operations are running, or the **Patrol Region time** is more than 30 minutes, the PD does not schedule properly or is scheduling slowly.
 
-If the preceding methods cannot resolve your issue, collect the TiDB, PD, TiFlash log files and [get support](/support.md) from PingCAP or the community.
+If the preceding methods cannot resolve your issue, collect the TiDB, PD, and TiFlash log files, and [get support](/support.md) from PingCAP or the community.
 
 ## Data replication is slow
 
