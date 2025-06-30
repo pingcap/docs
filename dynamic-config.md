@@ -273,11 +273,7 @@ The following PD configuration items can be modified dynamically:
 | `cluster-version` | The cluster version |
 | `schedule.max-merge-region-size` | Controls the size limit of `Region Merge` (in MiB) |
 | `schedule.max-merge-region-keys` | Specifies the maximum numbers of the `Region Merge` keys |
-<<<<<<< HEAD
-| `schedule.patrol-region-interval` | Determines the frequency at which `replicaChecker` checks the health state of a Region |
-=======
 | `schedule.patrol-region-interval` | Determines the frequency at which the checker inspects the health state of a Region |
->>>>>>> 885805fa1a (pd: complement pd section (#21204))
 | `schedule.split-merge-interval` | Determines the time interval of performing split and merge operations on the same Region |
 | `schedule.max-snapshot-count` | Determines the maximum number of snapshots that a single store can send or receive at the same time |
 | `schedule.max-pending-peer-count` | Determines the maximum number of pending peers in a single store |
@@ -303,14 +299,11 @@ The following PD configuration items can be modified dynamically:
 | `schedule.region-score-formula-version` | Controls the version of the Region score formula |
 | `schedule.scheduler-max-waiting-operator` | Controls the number of waiting operators in each scheduler |
 | `schedule.enable-debug-metrics` | Enables the metrics for debugging |
-| `schedule.enable-heartbeat-concurrent-runner` | Enables asynchronous concurrent processing for Region heartbeats |
-| `schedule.enable-heartbeat-breakdown-metrics` | Enables breakdown metrics for Region heartbeats to measure the time consumed in each stage of Region heartbeat processing |
 | `schedule.enable-joint-consensus` | Controls whether to use Joint Consensus for replica scheduling |
 | `schedule.hot-regions-write-interval` | The time interval at which PD stores hot Region information |
 | `schedule.hot-regions-reserved-days` | Specifies how many days the hot Region information is retained |
 | `schedule.max-movable-hot-peer-size` | Controls the maximum Region size that can be scheduled for hot Region scheduling. |
 | `schedule.store-limit-version` | Controls the version of [store limit](/configure-store-limit.md) |
-| `schedule.patrol-region-worker-count` | Controls the number of concurrent operators created by the checker when inspecting the health state of a Region |
 | `replication.max-replicas` | Sets the maximum number of replicas |
 | `replication.location-labels` | The topology information of a TiKV cluster |
 | `replication.enable-placement-rules` | Enables Placement Rules |
