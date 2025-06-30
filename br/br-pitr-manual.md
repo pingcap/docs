@@ -502,11 +502,11 @@ Starting from TiDB v9.0.0, you can use filters during PITR to selectively restor
 
 The filter patterns follow the same syntax as [table filters](/table-filter.md) used in other BR operations:
 
-- `'*.*'` - matches all databases and tables
-- `'db1.*'` - matches all tables in database `db1`
-- `'db1.table1'` - matches specific table `table1` in database `db1`
-- `'db*.tbl*'` - matches databases starting with `db` and tables starting with `tbl`
-- `'!mysql.*'` - excludes all tables in the `mysql` database
+- `'*.*'`: matches all databases and tables.
+- `'db1.*'`: matches all tables in database `db1`.
+- `'db1.table1'`: matches specific table `table1` in database `db1`.
+- `'db*.tbl*'`: matches databases starting with `db` and tables starting with `tbl`.
+- `'!mysql.*'`: excludes all tables in the `mysql` database.
 
 Usage examples:
 
@@ -538,15 +538,14 @@ tiup br restore point --pd="${PD_IP}:2379" \
 
 > **Note:**
 >
-When you use filters, ensure that the filtered data maintains referential integrity.
+> - When using filters, ensure that the target cluster does not contain databases or tables that match the filter, or the restore will fail with an error.
 > - Filter options apply to both snapshot and log backup restoration phases.
 > - Multiple `--filter` options can be specified to include or exclude different patterns.
 > - PITR filtering does not support system tables yet. If you need to restore specific system tables, use `br restore full` with filters instead, which will restore only the snapshot backup data (not log backup data).
-> - The target databases and tables specified in the filter must not exist in the cluster, or the restore will fail with an error.
 
 ### Concurrent restore operations
 
-Starting from TiDB v9.0.0, you can run multiple PITR operations concurrently. This feature allows you to restore different datasets simultaneously, improving restore efficiency for large-scale operations.
+Starting from TiDB v9.0.0, you can run multiple PITR restore tasks concurrently. This feature allows you to restore different datasets in parallel, improving efficiency for large-scale restore scenarios.
 
 Usage example for concurrent restores:
 
@@ -570,7 +569,7 @@ tiup br restore point --pd="${PD_IP}:2379" \
 
 > **Note:**
 >
-> - Each concurrent restore operation must target different databases or non-overlapping table sets. Attempting to restore overlapping datasets concurrently will result in an error.
+> Each concurrent restore operation must target different databases or non-overlapping table sets. Attempting to restore overlapping datasets concurrently will result in an error.
 
 ### Compatibility between ongoing log backup and snapshot restore
 
@@ -599,10 +598,45 @@ Starting from TiDB v9.0.0, you can perform PITR operations while a log backup ta
 
 #### Important limitation for PITR with ongoing log backup
 
-When you perform PITR operations while log backup is running, the restored data will be recorded in the log backup. However, during the restore time window, the data may not be consistent due to the nature of log restore operations. The system writes metadata to external storage to mark both the time range and data range where consistency cannot be guaranteed.
+When you perform PITR operations while log backup is running, the restored data will also be recorded in the log backup. However, during the restore operation time window, there may be data inconsistency risks due to the nature of log restore operations. The system writes metadata to external storage to mark both the time range and data range where consistency cannot be guaranteed.
 
-If such inconsistency occurs during the time range `[t1, t2)`, you cannot restore data from that time period. Instead, you must:
+If such inconsistency occurs during the time range `[t1, t2)`, you cannot directly restore data from that time period and must choose one of the following alternatives:
 
-- Restore data up to `t1` (before the inconsistent period), or
+- Restore data up to `t1` (before the inconsistent period)
 - Take a new snapshot backup after `t2` and use that for future PITR operations
-- 
+
+## Abort restore operations
+
+You can use the `tiup br abort` command to clean up registry entries and checkpoint data when a restore operation fails. This command automatically finds and removes the relevant metadata based on the original restore parameters, including entries in the `mysql.tidb_restore_registry` table and checkpoint data (whether stored in the local database or external storage). Note that the `abort` command only cleans up metadata; any actual restored data must be manually dropped from the cluster.
+
+### Usage examples
+
+Use the same parameters as the original restore command:
+
+```shell
+# Abort a PITR operation
+tiup br abort restore point --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--full-backup-storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}'
+
+# Abort a PITR operation with filters
+tiup br abort restore point --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--full-backup-storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--filter 'db1.*'
+
+# Abort a full restore
+tiup br abort restore full --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}'
+
+# Abort a database restore
+tiup br abort restore db --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--db database_name
+
+# Abort a table restore
+tiup br abort restore table --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--db database_name --table table_name
+```
+
