@@ -134,11 +134,17 @@ The configurations in the `kafka` JSON string are used to configure how the chan
                 "avro_config": {
                         "decimal_handling_mode": "PRECISE",
                         "bigint_unsigned_handling_mode": "LONG",
-                        "schema_registry": {
-                                "schema_registry_endpoints": "",
+                        "confluent_schema_registry": {
+                                "endpoint": "",
                                 "enable_http_auth": false,
                                 "user_name": "",
                                 "password": ""
+                        },
+                        "aws_glue_schema_registry": {
+                                "region": "",
+                                "name": "",
+                                "access_key_id": "",
+                                "secret_access_key": ""
                         }
                 }
         },
@@ -191,7 +197,8 @@ The main configuration fields are as follows:
 6. **data_format.avro_config**: If you select **Avro** as your data format, you need to set the Avro-specific configurations:
 
     - `decimal_handling_mode` and `bigint_unsigned_handling_mode`: specify how TiDB Cloud handles the decimal and unsigned bigint data types in Kafka messages.
-    - `schema_registry`: the schema registry endpoint. If auth is required, please set `enable_http_auth` to ture and full in the user name and password. Currently, TiDB Cloud only supports Confluent schema registry. If you need other schema registry, such as aws glue schema registry, pleas contact [TiDB Cloud support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+    - `confluent_schema_registry`: the configuration of confluent schema registry. If auth is required, please set `enable_http_auth` to true and full in the user name and password. See [Confluent Schema Registry](https://docs.confluent.io/platform/current/schema-registry/index.html) for more information.
+    - `aws_glue_schema_registry`: the configuration of AWS Glue schema registry. If you want to use AWS Glue schema registry, you need to set the region, name, access key ID, and secret access key. See [AWS Glue Schema Registry](https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html) for more information.
 
         For more information about the Avro configurations, see [Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol).
 
