@@ -104,8 +104,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
     Starting from v9.0.0, TiDB optimizes the handling of related metadata, significantly improving DDL performance in scenarios with extremely large table counts. According to internal tests, under idle cluster workload and with a connection to the DDL owner node, the table creation speed can reach up to 126 tables per second, and the average execution speed of the `ADD COLUMN` operation is approximately 45.5 tables per second.
 
-    For more information, see [Documentation](link).
-
 * In scenarios with hundreds of thousands to millions of users, the performance of creating and modifying users has improved by 77 times [#55563](https://github.com/pingcap/tidb/issues/55563) @[tiancaiamao](https://github.com/tiancaiamao) tw@hfxsd <!--1941-->
 
     In previous versions, when the number of users in a cluster exceeded 200,000, the QPS for creating and modifying users drops to 1. In certain SaaS environments, if there is a need to create millions of users and periodically update user passwords in bulk, it can take up to 2 days or more, which is unacceptable for some SaaS businesses.
@@ -184,8 +182,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 * Introduce a mechanism for detecting connection interruption to automatically terminate running SQL statements on the server side once the client is disconnected [#60685](https://github.com/pingcap/tidb/pull/60685) @[Defined2014](https://github.com/Defined2014) **tw@hfxsd** <!--2060 beta.2-->
 
     To improve resource utilization and system stability, TiDB v9.0.0 introduces a mechanism for detecting connection interruption. When a client connection is unexpectedly closed, TiDB terminates SQL statements that are still running on that connection, promptly releasing resources and preventing long-running invalid statements from impacting system performance.
-
-    For more information, see [Documentation](link).
 
 * Introduce the table mode to restrict read and write operations during data restore, improving task stability and data consistency [#59008](https://github.com/pingcap/tidb/issues/59008) @[fishiu](https://github.com/fishiu) @[River2000i](https://github.com/River2000i) @[Tristan1900](https://github.com/Tristan1900) @[Leavrth](https://github.com/Leavrth)   **tw@hfxsd** <!--2056 beta.2-->
 
