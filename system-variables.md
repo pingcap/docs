@@ -3393,6 +3393,18 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This variable is used to set whether to ignore the commands for closing prepared statement cache.
 - When this variable is set to `ON`, the `COM_STMT_CLOSE` command of the Binary protocol and the [`DEALLOCATE PREPARE`](/sql-statements/sql-statement-deallocate.md) statement of the text protocol are ignored. For details, see [Ignore the `COM_STMT_CLOSE` command and the `DEALLOCATE PREPARE` statement](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement).
 
+### tidb_ignore_inlist_plan_digest <span class="version-mark">New in v7.6.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether TiDB ignores the element differences in the `IN` list across different queries when generating Plan Digests.
+
+    - When it is the default value `OFF`, TiDB does not ignore the element differences (including the difference in the number of elements) in the `IN` list when generating Plan Digests. The element differences in the `IN` list result in different Plan Digests.
+    - When it is set to `ON`, TiDB ignores the element differences (including the difference in the number of elements) in the `IN` list and uses `...` to replace elements in the `IN` list in Plan Digests. In this case, TiDB generates the same Plan Digests for `IN` queries of the same type.
+
 ### tidb_index_join_batch_size
 
 - Scope: SESSION | GLOBAL
@@ -3513,7 +3525,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Warning:**
 >
-> Currently, Instance Plan Cache is an experimental feature. is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> Currently, Instance Plan Cache is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -5574,7 +5586,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Unit: Byte
-- Default value: `0`, which means that the memory quota is automatically set to half of the total memory size of the TiDB instance.
+- Default value: `0`, which means the memory quota for the TiDB statistics cache is 20% of the TiDB instance's total memory. Before v8.5.1, `0` means the memory quota is 50% of the TiDB instance's total memory.
 - Range: `[0, 1099511627776]`
 - This variable sets the memory quota for the TiDB statistics cache.
 
@@ -5799,7 +5811,15 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Integer
 - Default value: `3000`
 - Range: `[1, 32767]`
-- This variable is used to set the maximum number of statements that [statement summary tables](/statement-summary-tables.md) store in memory.
+- This variable is used to limit the number of SQL digests that the [`statements_summary`](/statement-summary-tables.md#statements_summary) and [`statements_summary_history`](/statement-summary-tables.md#statements_summary_history) tables can store in memory totally.
+
+<CustomContent platform="tidb">
+
+> **Note:**
+>
+> When [`tidb_stmt_summary_enable_persistent`](/statement-summary-tables.md#persist-statements-summary) is enabled, `tidb_stmt_summary_max_stmt_count` only limits the number of SQL digests that the [`statements_summary`](/statement-summary-tables.md#statements_summary) table can store in memory.
+
+</CustomContent>
 
 ### tidb_stmt_summary_refresh_interval <span class="version-mark">New in v4.0</span>
 

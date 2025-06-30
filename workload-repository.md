@@ -5,7 +5,7 @@ summary: Introduces the workload repository system for collecting and storing hi
 
 # TiDB Workload Repository
 
-The workload repository is a system for collecting and storing historical workload data from a TiDB cluster. It periodically samples various system tables to track cluster performance and usage patterns over time.
+The Workload Repository is a system for collecting and storing historical workload data from a TiDB cluster. It periodically samples various system tables to track cluster performance and usage patterns over time.
 
 ## Enable the Workload Repository
 

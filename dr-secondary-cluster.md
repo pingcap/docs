@@ -65,7 +65,7 @@ For details about how to deploy TiDB primary and secondary clusters, see [Deploy
 
 When deploying TiCDC, note that the secondary cluster and TiCDC must be deployed and managed together, and the network between them must be connected.
 
-- To deploy TiCDC on an existing primary cluster, see [Deploy TiCDC](/ticdc/deploy-ticdc.md#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup).
+- To deploy TiCDC on an existing primary cluster, see [Deploy TiCDC](/ticdc/deploy-ticdc.md#add-or-scale-out-ticdc).
 - To deploy a new primary cluster and TiCDC, use the following deployment template and modify the configuration parameters as needed:
 
     ```yaml

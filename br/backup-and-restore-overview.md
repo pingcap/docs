@@ -26,7 +26,7 @@ This section describes the prerequisites for using TiDB backup and restore, incl
 - PITR does not support restoring the data of user tables or privilege tables from system tables.
 - BR does not support running multiple backup tasks on a cluster **at the same time**.
 - It is not recommended to back up tables that are being restored, because the backed-up data might be problematic.
-- When a PITR is running, you cannot run a log backup task or use TiCDC to replicate data to a downstream cluster.
+- When restoring a cluster using PITR, you cannot run a log backup task or use TiCDC to replicate data to a downstream cluster.
 
 ### Some tips
 
@@ -166,7 +166,7 @@ The following table lists the compatibility matrix for log backups. Note that al
 | v8.1.0 | v8.1.0 and later | - |
 > **Note:**
 >
-> - When only user data is backed up (full backup or log backup), all versions are compatible with each other.
+> - When only data of non-system tables is backed up (full backup or log backup), all versions are compatible with each other.
 > - In scenarios where restoring the `mysql` system table is incompatible, you can resolve the problem by setting `--with-sys-table=false` to skip restoring all system tables, or use a more fine-grained filter to just skip incompatible system tables, for example: `--filter '*.*' --filter "__TiDB_BR_Temporary_*.*" --filter '!mysql.*' --filter 'mysql.bind_info' --filter 'mysql.user' --filter 'mysql.global_priv' --filter 'mysql.global_grants' --filter 'mysql.default_roles' --filter 'mysql.role_edges' --filter '!sys.*' --filter '!INFORMATION_SCHEMA.*' --filter '!PERFORMANCE_SCHEMA.*' --filter '!METRICS_SCHEMA.*' --filter '!INSPECTION_SCHEMA.*'`.
 > - `-` means that there are no compatibility restrictions for the corresponding scenario.
 
