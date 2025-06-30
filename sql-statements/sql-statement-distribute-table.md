@@ -5,6 +5,11 @@ summary: An overview of the usage of DISTRIBUTE TABLE for the TiDB database.
 
 # DISTRIBUTE TABLE
 
+> **Warning:**
+>
+> - This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> - This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+
 The `DISTRIBUTE TABLE` statement redistributes and reschedules Regions of a specified table to achieve a balanced distribution at the table level. Executing this statement helps prevent Regions from being concentrated on a few TiFlash or TiKV nodes, addressing the issue of uneven region distribution in the table.
 
 ## Syntax
@@ -39,11 +44,11 @@ DISTRIBUTE TABLE t1 RULE="leader-scatter" ENGINE="tikv" TIMEOUT="1h";
 ```
 
 ```
-+---------+
-| JOB_ID  |
-+---------+
-| 100     |
-+---------+
++--------+
+| JOB_ID |
++--------+
+|    100 |
++--------+
 ```
 
 Redistribute the Regions of the Learners in the table `t2` on TiFlash:
@@ -55,11 +60,11 @@ DISTRIBUTE TABLE t2 RULE="learner-scatter" ENGINE="tiflash";
 ```
 
 ```
-+---------+
-| JOB_ID  |
-+---------+
-| 101     |
-+---------+
++--------+
+| JOB_ID |
++--------+
+|    101 |
++--------+
 ```
 
 Redistribute the Regions of the Peers in the table `t3`'s `p1` and `p2` partitions on TiKV:
@@ -74,14 +79,14 @@ DISTRIBUTE TABLE t3 PARTITION (p1, p2) RULE="peer-scatter" ENGINE="tikv";
 ```
 
 ```
-+---------+
-| JOB_ID  |
-+---------+
-| 102     |
-+---------+
++--------+
+| JOB_ID |
++--------+
+|    102 |
++--------+
 ```
 
-Redistribute the Regions of the Leaders in the table `t4`'s `p1` and `p2` partitions on TiFlash:
+Redistribute the Regions of the Learner in the table `t4`'s `p1` and `p2` partitions on TiFlash:
 
 ```sql
 CREATE TABLE t4 ( a INT, b INT, INDEX idx(b)) PARTITION BY RANGE( a ) (
@@ -89,15 +94,15 @@ CREATE TABLE t4 ( a INT, b INT, INDEX idx(b)) PARTITION BY RANGE( a ) (
     PARTITION p2 VALUES LESS THAN (20000),
     PARTITION p3 VALUES LESS THAN (MAXVALUE) );
 ...
-DISTRIBUTE TABLE t4 PARTITION (p1, p2) RULE="leader-scatter" ENGINE="tiflash";
+DISTRIBUTE TABLE t4 PARTITION (p1, p2) RULE="learner-scatter" ENGINE="tiflash";
 ```
 
 ```
-+---------+
-| JOB_ID  |
-+---------+
-| 103     |
-+---------+
++--------+
+| JOB_ID |
++--------+
+|    103 |
++--------+
 ```
 
 ## Notes
