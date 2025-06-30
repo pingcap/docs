@@ -48,6 +48,8 @@
     - Ruby
       - [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
       - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
+    - C#
+      - [C#](/develop/dev-guide-sample-application-cs.md)
   - Connect to TiDB
     - GUI Database Tools
       - [JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)
@@ -423,6 +425,7 @@
     - [Use the `tidb_snapshot` System Variable](/read-historical-data.md)
   - Best Practices
     - [Use TiDB](/best-practices/tidb-best-practices.md)
+    - [Optimize Multi-Column Indexes](/best-practices/multi-column-index-best-practices.md)
     - [Java Application Development](/best-practices/java-app-best-practices.md)
     - [Use HAProxy](/best-practices/haproxy-best-practices.md)
     - [Highly Concurrent Write](/best-practices/high-concurrency-best-practices.md)

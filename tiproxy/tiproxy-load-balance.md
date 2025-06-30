@@ -56,7 +56,7 @@ server_configs:
   tiproxy:
     balance.label-name: "app"
   tidb:
-    graceful-wait-before-shutdown: 15
+    graceful-wait-before-shutdown: 30
 
 tiproxy_servers:
   - host: tiproxy-host-1
@@ -161,7 +161,7 @@ component_versions:
   tiproxy: "v1.1.0"
 server_configs:
   tidb:
-    graceful-wait-before-shutdown: 15
+    graceful-wait-before-shutdown: 30
 tiproxy_servers:
   - host: tiproxy-host-1
     config:

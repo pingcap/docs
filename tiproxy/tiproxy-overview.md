@@ -78,14 +78,14 @@ The following steps describe how to deploy TiProxy when creating a new cluster.
 
 1. Configure the TiDB instances.
 
-    When using TiProxy, you need to configure [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) for TiDB. This value must be greater than the duration of the longest transaction of the application, which can avoid client connection interruption when the TiDB server goes offline. You can view the transaction duration through the [Transaction metrics on the TiDB monitoring dashboard](/grafana-tidb-dashboard.md#transaction). For details, see [Limitations](#limitations).
+    When using TiProxy, you need to configure [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) for TiDB. This value must be at least 10 seconds greater than the duration of the longest transaction of your application, which avoids client connection interruption when the TiDB server goes offline. You can view the transaction duration through the [Transaction metrics on the TiDB monitoring dashboard](/grafana-tidb-dashboard.md#transaction). For more information, see [Limitations](#limitations).
 
     A configuration example is as follows:
 
     ```yaml
     server_configs:
       tidb:
-        graceful-wait-before-shutdown: 15
+        graceful-wait-before-shutdown: 30
     ```
 
 2. Configure the TiProxy instances.
@@ -166,14 +166,14 @@ For clusters that do not have TiProxy deployed, you can enable TiProxy by scalin
 
 3. Modify the TiDB configuration.
 
-   When using TiProxy, you need to configure [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) for TiDB. This value must be greater than the duration of the longest transaction of the application to avoid client connection interruption when the TiDB server goes offline. You can view the transaction duration through the [Transaction metrics on the TiDB monitoring dashboard](/grafana-tidb-dashboard.md#transaction). For details, see [Limitations](#limitations).
+   When using TiProxy, you need to configure [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) for TiDB. This value must be at least 10 seconds greater than the duration of the longest transaction of your application to avoid client connection interruption when the TiDB server goes offline. You can view the transaction duration through the [Transaction metrics on the TiDB monitoring dashboard](/grafana-tidb-dashboard.md#transaction). For more information, see [Limitations](#limitations).
 
    A configuration example is as follows:
 
     ```yaml
     server_configs:
       tidb:
-        graceful-wait-before-shutdown: 15
+        graceful-wait-before-shutdown: 30
     ```
 
 4. Reload TiDB configuration.
@@ -244,10 +244,10 @@ TiProxy cannot keep the client connection in the following scenarios:
 - TiProxy performs scaling in, upgrade, or restart. Once TiProxy is offline, the client connection is broken.
 - TiDB actively disconnects the connection. For example, when a session does not send a request for a period of time longer than `wait_timeout`, TiDB actively disconnects the connection, and TiProxy also disconnects the client connection.
 
-TiProxy cannot migrate connections in the following scenarios, and thus cannot keep the client connection or achieve load balancing:
+TiProxy cannot migrate connections in the following scenarios, and thus cause the client connection to be interrupted or the load balancing to fail:
 
-- The duration of a single statement or a single transaction exceeds the [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) configured on the TiDB server.
-- The session uses the cursor to read data, and the cursor is not closed or the data is not read within the [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) configured on the TiDB server.
+- A long-running single statement or single transaction: the execution time exceeds the value of the [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) configured in the TiDB server minus 10 seconds.
+- Using cursors and not completing in time: the session uses a cursor to read data, but does not complete data reading or close the cursor after the value of [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) configured in TiDB server minus 10 seconds.
 - The session creates a [local temporary table](/temporary-tables.md#local-temporary-tables).
 - The session holds a [user-level lock](/functions-and-operators/locking-functions.md).
 - The session holds a [table lock](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md).
