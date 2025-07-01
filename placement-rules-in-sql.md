@@ -15,11 +15,7 @@ This feature can fulfill the following use cases:
 
 > **Note:**
 >
-<<<<<<< HEAD
 > This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
-=======
-> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
->>>>>>> b7b0e7c6d6 (update variables (#21291))
 
 ## Overview
 
