@@ -100,7 +100,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
 * Optimize performance for creating databases, tables, and adding columns in scenarios with foreign keys [#61126](https://github.com/pingcap/tidb/issues/61126) @[GMHDBJD](https://github.com/GMHDBJD) @[River2000i](https://github.com/River2000i) **tw@hfxsd** <!--1896 beta.2-->
 
-    In earlier versions, TiDB encounters significant performance bottlenecks when creating tables with foreign keys in certain SaaS scenarios, especially when the number of tables in a cluster reaches tens of millions. A large number of foreign key relationships further slows down the execution of DDL operations such as `CREATE TABLE` and `ADD COLUMN`.
+    Before v9.0.0, TiDB encounters significant performance bottlenecks when creating tables with foreign keys in certain SaaS scenarios, especially when the number of tables in a cluster reaches tens of millions. A large number of foreign key relationships further slows down the execution of DDL operations such as `CREATE TABLE` and `ADD COLUMN`.
 
     Starting from v9.0.0, TiDB optimizes the handling of related metadata, significantly improving DDL performance in scenarios with extremely large table counts. According to internal tests, under idle cluster workload and with a connection to the DDL owner node, the table creation speed can reach up to 126 tables per second, and the average execution speed of the `ADD COLUMN` operation is approximately 45.5 tables per second.
 
