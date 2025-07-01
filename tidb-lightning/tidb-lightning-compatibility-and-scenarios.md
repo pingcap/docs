@@ -33,21 +33,9 @@ If TiDB Lightning logical import mode does not meet your application's performan
 
 ### Used with log backup
 
-You can perform in different scenarios as follows:
+In this scenario, if [PITR](/br/br-log-architecture.md#process-of-pitr) is enabled, the compatibility check will report an error after TiDB Lightning starts. If you are sure that these tables do not need backup, you can change the `Lightning.check-requirements` parameter in the [TiDB Lightning configuration file](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) to `false` and restart the import task.
 
-- Scenario 1: tables in physical import mode do not need to be backed up
-
-    In this scenario, if [PITR](/br/br-log-architecture.md#process-of-pitr) is enabled, the compatibility check will report an error after TiDB Lightning starts. If you are sure that these tables do not need backup or [log backup](/br/br-pitr-guide.md), you can change the `Lightning.check-requirements` parameter in the [TiDB Lightning configuration file](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) to `false` and restart the import task.
-
-- Scenario 2: after the physical import is finished, there will be no new DML operations on the table
-
-    This scenario does not involve incremental data writes, so it is sufficient to perform a table-level snapshot backup of the table after completing the data import in TiDB Lightning physical import mode, as described in [Back up a table](/br/br-snapshot-manual.md#back-up-a-table).
-
-    During data recovery, the snapshot data of the table is restored. See [Restore a table](/br/br-snapshot-manual.md#restore-a-table) for the procedure.
-
-- Scenario 3: after the physical import is finished, there will be new DML operations on the table (not supported)
-
-    In this scenario, you can only choose either [full snapshot backup](/br/br-snapshot-guide.md) or [log backup](/br/br-pitr-guide.md) for this table. You cannot back up and restore both the full snapshot data and log backup data of this table.
+Data imported using TiDB Lightning physical import mode cannot be backed up via log backup. If you need to back up the table, it is recommended to perform a table-level snapshot backup after the import, as described in [Back up a table](/br/br-snapshot-manual.md#back-up-a-table). 
 
 ### Used with TiCDC
 
@@ -71,21 +59,9 @@ This section describes how to use `IMPORT INTO` together with [log backup](/br/b
 
 ### Used with log backup
 
-You can perform in different scenarios as follows:
+In this scenario, if [PITR](/br/br-log-architecture.md#process-of-pitr) is enabled, the compatibility check will report an error after you submit the `IMPORT INTO` statement. If you are sure that these tables do not need backup, you can include `DISABLE_PRECHECK` (introduced in v8.0.0) in [`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions) of that statement, and then resubmit it. In this way, the data import task ignores the compatibility check and imports the data directly.
 
-- Scenario 1: tables do not need to be backed up
-
-    In this scenario, if [PITR](/br/br-log-architecture.md#process-of-pitr) is enabled, the compatibility check will report an error after you submit the `IMPORT INTO` statement. If you are sure that these tables do not need backup or [log backup](/br/br-pitr-guide.md), you can include `DISABLE_PRECHECK` (introduced in v8.0.0) in [`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions) of that statement, and then resubmit it. In this way, the data import task ignores the compatibility check and imports the data directly.
-
-- Scenario 2: after the import is finished, there will be no new DML operations on the table
-
-    This scenario does not involve incremental data writes, so it is sufficient to perform a table-level snapshot backup of the table after completing the data import, as described in [Back up a table](/br/br-snapshot-manual.md#back-up-a-table).
-
-    During data recovery, the snapshot data of the table is restored. See [Restore a table](/br/br-snapshot-manual.md#restore-a-table) for the procedure.
-
-- Scenario 3: after the import is finished, there will be new DML operations on the table (not supported)
-
-    In this scenario, you can only choose either [full snapshot backup](/br/br-snapshot-guide.md) or [log backup](/br/br-pitr-guide.md) for this table. You cannot back up and restore both the full snapshot data and log backup data of this table.
+Data imported using 'IMPORT INTO' cannot be backed up via log backup. If you need to back up the table, it is recommended to perform a table-level snapshot backup after the import, as described in [Back up a table](/br/br-snapshot-manual.md#back-up-a-table).
 
 ### Used with TiCDC
 
