@@ -583,6 +583,7 @@ Starting from v9.0.0, when a log backup task is running, if all of the following
 - Neither the data to be restored nor the log backup has enabled local encryption. For details, see [log backup encryption](#encrypt-the-log-backup-data) and [snapshot backup encryption](/br/br-snapshot-manual.md#encrypt-the-backup-data).
 
 If any of the above conditions are not met, you can complete the recovery by following these steps:
+
 1. [Stop the log backup task](#stop-a-log-backup-task).
 2. Perform the data restore.
 3. After the restore is complete, perform a new snapshot backup.
@@ -639,4 +640,3 @@ tiup br abort restore table --pd="${PD_IP}:2379" \
 --storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
 --db database_name --table table_name
 ```
-
