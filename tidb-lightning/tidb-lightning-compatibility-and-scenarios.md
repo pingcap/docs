@@ -61,7 +61,7 @@ This section describes how to use `IMPORT INTO` together with [log backup](/br/b
 
 In this scenario, if [PITR](/br/br-log-architecture.md#process-of-pitr) is enabled, the compatibility check will report an error after you submit the `IMPORT INTO` statement. If you are sure that these tables do not need backup, you can include `DISABLE_PRECHECK` (introduced in v8.0.0) in [`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions) of that statement, and then resubmit it. In this way, the data import task ignores the compatibility check and imports the data directly.
 
-Data imported using 'IMPORT INTO' cannot be backed up via log backup. If you need to back up the table, it is recommended to perform a table-level snapshot backup after the import, as described in [Back up a table](/br/br-snapshot-manual.md#back-up-a-table).
+Data imported using `IMPORT INTO` cannot be backed up via log backup. If you need to back up the table, it is recommended to perform a table-level snapshot backup after the import, as described in [Back up a table](/br/br-snapshot-manual.md#back-up-a-table).
 
 ### Used with TiCDC
 
