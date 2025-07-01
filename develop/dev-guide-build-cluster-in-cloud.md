@@ -21,7 +21,7 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 </CustomContent>
 
-## Step 1. Create a {{{ .starter }}} cluster {#step-1-create-a-tidb-cloud-cluster}
+## Step 1. Create a {{{ .starter }}} cluster
 
 1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up for an account.
 
