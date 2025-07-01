@@ -6352,13 +6352,13 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Enumeration
 - Default value: `legacy`.
-- Possible values: `legacy`, `optimized`
+- Value options: `legacy`, `optimized`
 - This variable is used to control whether TiFlash uses an optimized version of hash join. The value is `legacy` by default, which means the optimized version is not used. If it is set to `optimized`, TiFlash uses the optimized version to execute hash join for better performance.
 
 > **Note:**
 >
-> - Currently, the optimized hash join only supports inner join, so for other joins, even if `tiflash_hash_join_version` is set to `optimized`, TiFlash still uses the legacy hash join.
-> - Currently, the optimized hash join in TiFlash does not support spilling data to disk when the memory usage exceeds its quota. As a result, if both [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740) and [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740) are set to values greater than `0`, or if [`tidb_max_bytes_before_tiflash_external_join`](/system-variables.md#tidb_max_bytes_before_tiflash_external_join-new-in-v700) is greater than `0`, TiFlash will not use the optimized hash join.
+> - Currently, the optimized hash join only supports inner join. For other joins, even if `tiflash_hash_join_version` is set to `optimized`, TiFlash still uses the `legacy` hash join.
+> - Currently, the optimized hash join in TiFlash does not support spilling data to disk when the memory usage exceeds the limit. As a result, if both [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740) and [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740) are set to values greater than `0`, or if [`tidb_max_bytes_before_tiflash_external_join`](/system-variables.md#tidb_max_bytes_before_tiflash_external_join-new-in-v700) is greater than `0`, TiFlash will not use the optimized hash join.
 
 ### tikv_client_read_timeout <span class="version-mark">New in v7.4.0</span>
 
