@@ -49,7 +49,7 @@ In the preceding command:
 
 > **Note:**
 >
-> - The BR tool already supports self-adapting to GC. It automatically registers `backupTS` (the latest PD timestamp by default) to PD's `safePoint` to ensure that TiDB's GC Safe Point does not move forward during the backup, thus avoiding manually setting GC configurations.
+> The BR tool already supports self-adapting to GC. It automatically registers `backupTS` (the latest PD timestamp by default) to PD's `safePoint` to ensure that TiDB's GC Safe Point does not move forward during the backup, thus avoiding manually setting GC configurations.
 
 During backup, a progress bar is displayed in the terminal, as shown below. When the progress bar advances to 100%, the backup is complete.
 
@@ -297,19 +297,19 @@ Checksum is a method used by the BR tool to verify the integrity of backup and r
 
 Balancing performance and security considerations, BR handles table-level checksums as follows:
 
-### Backup Checksum
+### Backup checksum
 
 Starting from v8.5.0, when performing full backups, the BR tool does not calculate table-level checksums by default (`--checksum=false`) to improve backup performance. If you need to calculate table-level checksums during backup, you can explicitly specify `--checksum=true`. File-level checksums will always be calculated to ensure the integrity of backup files.
 
 Calculating table-level checksums can verify data integrity during backup but increases backup time. In most cases, it's safe to use the default setting (no table-level checksum) to improve backup speed.
 
-### Restore Checksum
+### Restore checksum
 
 Starting from v9.0.0, the BR tool does not perform table-level checksum verification (`--checksum=false`) by default during restore operations to improve restore performance. If you need to perform table-level checksum verification, you can explicitly specify `--checksum=true`. File-level checksum verification is always performed to ensure the basic integrity of restored data.
 
 After restoration, data validation is usually performed to ensure data security. When table-level checksums are disabled, the comprehensive validation step for table data is skipped, thereby accelerating the restore process. For scenarios with strict data integrity requirements, you may choose to enable table-level checksums.
 
-### Checksum Configuration Examples
+### Checksum configuration examples
 
 Enable table-level checksums during backup:
 
