@@ -185,7 +185,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
 * Introduce the table mode to restrict read and write operations during data restore, improving task stability and data consistency [#59008](https://github.com/pingcap/tidb/issues/59008) @[fishiu](https://github.com/fishiu) @[River2000i](https://github.com/River2000i) @[Tristan1900](https://github.com/Tristan1900) @[Leavrth](https://github.com/Leavrth)   **tw@hfxsd** <!--2056 beta.2-->
 
-    TiDB introduces the table mode to enhance the stability and consistency of backup and restore tasks. When performing snapshot restore or PITR (Point-in-Time Recovery), the table mode of the target table is automatically set to `restore`. In this mode, all user read and write operations on the table are blocked. Once the restore process completes, the table mode automatically switches back to `normal`, allowing regular access to the table. This mechanism ensures greater stability and consistency during data recovery.
+    TiDB v9.0.0 introduces the table mode to enhance the stability and consistency of backup and restore tasks. When performing snapshot restore or PITR (Point-in-Time Recovery), the table mode of the target table is automatically set to `restore`. In this mode, all user read and write operations on the table are blocked. Once the restore process completes, the table mode automatically switches back to `normal`, allowing regular access to the table. This mechanism ensures greater stability and consistency during data recovery.
 
     For more information, see [Documentation](/br/br-pitr-guide.md).
 
