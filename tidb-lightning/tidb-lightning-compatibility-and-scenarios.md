@@ -35,7 +35,7 @@ If TiDB Lightning logical import mode does not meet your application's performan
 
     In this scenario, if [PITR](/br/br-log-architecture.md#process-of-pitr) is enabled, the compatibility check will report an error after TiDB Lightning starts. If you are sure that these tables do not need backup, you can change the `Lightning.check-requirements` parameter in the [TiDB Lightning configuration file](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) to `false` and restart the import task.
 
-    Data imported using TiDB Lightning's physical import mode cannot be backed up via log backup. If you need to back up the table, it is recommended to perform a table-level snapshot backup after the import, as described in [Back up a table](/br/br-snapshot-manual.md#back-up-a-table). During data recovery, the snapshot data of the table is restored. See [Restore a table](/br/br-snapshot-manual.md#restore-a-table) for the procedure.
+    Data imported using TiDB Lightning physical import mode cannot be backed up via log backup. If you need to back up the table, it is recommended to perform a table-level snapshot backup after the import, as described in [Back up a table](/br/br-snapshot-manual.md#back-up-a-table). 
 
 ### Used with TiCDC
 
@@ -59,7 +59,7 @@ This section describes how to use `IMPORT INTO` together with [log backup](/br/b
 
 ### Used with log backup
 
-    In this scenario, if [PITR](/br/br-log-architecture.md#process-of-pitr) is enabled, the compatibility check will report an error after you submit the `IMPORT INTO` statement. If you are sure that these tables do not need backup or [log backup](/br/br-pitr-guide.md), you can include `DISABLE_PRECHECK` (introduced in v8.0.0) in [`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions) of that statement, and then resubmit it. In this way, the data import task ignores the compatibility check and imports the data directly.
+    In this scenario, if [PITR](/br/br-log-architecture.md#process-of-pitr) is enabled, the compatibility check will report an error after you submit the `IMPORT INTO` statement. If you are sure that these tables do not need backup, you can include `DISABLE_PRECHECK` (introduced in v8.0.0) in [`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions) of that statement, and then resubmit it. In this way, the data import task ignores the compatibility check and imports the data directly.
 
     Data imported using 'IMPORT INTO' cannot be backed up via log backup. If you need to back up the table, it is recommended to perform a table-level snapshot backup after the import, as described in [Back up a table](/br/br-snapshot-manual.md#back-up-a-table).
 
