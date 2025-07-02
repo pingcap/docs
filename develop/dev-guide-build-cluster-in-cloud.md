@@ -21,7 +21,7 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 </CustomContent>
 
-## Step 1. Create a {{{ .starter }}} cluster
+## Step 1. Create a {{{ .starter }}} cluster {#step-1-create-a-tidb-cloud-cluster}
 
 1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up for an account.
 
@@ -130,7 +130,7 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 </SimpleTab>
 
-2. Run the connection string obtained in [Step 1](#step-1-create-a-tidb-cloud-serverless-cluster).
+2. Run the connection string obtained in [Step 1](#step-1-create-a-tidb-cloud-cluster).
 
     {{< copyable "shell-regular" >}}
 
