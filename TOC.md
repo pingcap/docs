@@ -49,6 +49,8 @@
         -   ルビー
             -   [MySQL2](/develop/dev-guide-sample-application-ruby-mysql2.md)
             -   [レール](/develop/dev-guide-sample-application-ruby-rails.md)
+        -   C#
+            -   [C#](/develop/dev-guide-sample-application-cs.md)
     -   TiDBに接続する
         -   GUIデータベースツール
             -   [ジェットブレインズ データグリップ](/develop/dev-guide-gui-datagrip.md)
@@ -491,7 +493,7 @@
             -   [ブロックリストと許可リスト](/dm/dm-block-allow-table-lists.md)
             -   [Binlogイベントフィルター](/dm/dm-binlog-event-filter.md)
             -   [SQL 式を使用して DML をフィルタリングする](/dm/feature-expression-filter.md)
-            -   [オンラインDDLツールのサポート](/dm/dm-online-ddl-tool-support.md)
+            -   [オンライン DDL ツールのサポート](/dm/dm-online-ddl-tool-support.md)
             -   [暗号化と復号化のための秘密鍵をカスタマイズする](/dm/dm-customized-secret-key.md)
             -   データ移行タスクの管理
                 -   [タスクの事前チェック](/dm/dm-precheck.md)

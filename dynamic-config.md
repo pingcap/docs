@@ -253,44 +253,68 @@ Query OK, 0 rows affected (0.01 sec)
 
 次の PD 構成項目は動的に変更できます。
 
-| コンフィグレーション項目                               | 説明                                               |
-| :----------------------------------------- | :----------------------------------------------- |
-| `log.level`                                | ログレベル                                            |
-| `cluster-version`                          | クラスターバージョン                                       |
-| `schedule.max-merge-region-size`           | `Region Merge` （MiB単位）のサイズ制限を制御します               |
-| `schedule.max-merge-region-keys`           | `Region Merge`キーの最大数を指定します                       |
-| `schedule.patrol-region-interval`          | `replicaChecker`のヘルス状態をチェックする頻度を決定します            |
-| `schedule.split-merge-interval`            | 同じリージョンで分割および結合操作を実行する時間間隔を決定します                 |
-| `schedule.max-snapshot-count`              | 単一のストアが同時に送受信できるスナップショットの最大数を決定します               |
-| `schedule.max-pending-peer-count`          | 単一ストア内の保留中のピアの最大数を決定します                          |
-| `schedule.max-store-down-time`             | PDが切断されたストアを回復できないと判断するまでのダウンタイム                 |
-| `schedule.leader-schedule-policy`          | Leaderのスケジュールポリシーを決定する                           |
-| `schedule.leader-schedule-limit`           | 同時に実行されるLeaderスケジュールタスクの数                        |
-| `schedule.region-schedule-limit`           | 同時に実行されるリージョンスケジュールタスクの数                         |
-| `schedule.replica-schedule-limit`          | 同時に実行されるレプリカスケジュールタスクの数                          |
-| `schedule.merge-schedule-limit`            | 同時に実行される`Region Merge`スケジュールタスクの数                |
-| `schedule.hot-region-schedule-limit`       | 同時に実行されるホットリージョンスケジューリングタスクの数                    |
-| `schedule.hot-region-cache-hits-threshold` | リージョンがホットスポットとみなされる閾値を決定します                      |
-| `schedule.high-space-ratio`                | 店舗の収容能力が十分である閾値比率                                |
-| `schedule.low-space-ratio`                 | 店舗の収容能力が不足する閾値比率                                 |
-| `schedule.tolerant-size-ratio`             | `balance`バッファサイズを制御します                           |
-| `schedule.enable-remove-down-replica`      | `DownReplica`自動的に削除する機能を有効にするかどうかを決定します          |
-| `schedule.enable-replace-offline-replica`  | `OfflineReplica`移行する機能を有効にするかどうかを決定します           |
-| `schedule.enable-make-up-replica`          | レプリカを自動的に補完する機能を有効にするかどうかを決定します                  |
-| `schedule.enable-remove-extra-replica`     | 余分なレプリカを削除する機能を有効にするかどうかを決定します                   |
-| `schedule.enable-location-replacement`     | 分離レベルチェックを有効にするかどうかを決定します                        |
-| `schedule.enable-cross-table-merge`        | テーブル間の結合を有効にするかどうかを決定します                         |
-| `schedule.enable-one-way-merge`            | 一方向のマージを有効にします。これにより、隣接する次のリージョンとのマージのみが可能になります。 |
-| `replication.max-replicas`                 | レプリカの最大数を設定する                                    |
-| `replication.location-labels`              | TiKVクラスタのトポロジ情報                                  |
-| `replication.enable-placement-rules`       | 配置ルールを有効にする                                      |
-| `replication.strictly-match-label`         | ラベルチェックを有効にする                                    |
-| `pd-server.use-region-storage`             | 独立したリージョンstorageを有効にする                           |
-| `pd-server.max-gap-reset-ts`               | タイムスタンプをリセットする最大間隔を設定します（BR）                     |
-| `pd-server.key-type`                       | クラスタキータイプを設定する                                   |
-| `pd-server.metric-storage`                 | クラスターメトリックのstorageアドレスを設定します                     |
-| `pd-server.dashboard-address`              | ダッシュボードのアドレスを設定する                                |
-| `replication-mode.replication-mode`        | バックアップモードを設定します                                  |
+| コンフィグレーション項目                                         | 説明                                                   |
+| :--------------------------------------------------- | :--------------------------------------------------- |
+| `log.level`                                          | ログレベル                                                |
+| `cluster-version`                                    | クラスターバージョン                                           |
+| `schedule.max-merge-region-size`                     | `Region Merge` （MiB単位）のサイズ制限を制御します                   |
+| `schedule.max-merge-region-keys`                     | `Region Merge`キーの最大数を指定します                           |
+| `schedule.patrol-region-interval`                    | チェッカーがリージョンのヘルス状態を検査する頻度を決定します                       |
+| `schedule.split-merge-interval`                      | 同じリージョンで分割および結合操作を実行する時間間隔を決定します                     |
+| `schedule.max-snapshot-count`                        | 単一のストアが同時に送受信できるスナップショットの最大数を決定します                   |
+| `schedule.max-pending-peer-count`                    | 単一ストア内の保留中のピアの最大数を決定します                              |
+| `schedule.max-store-down-time`                       | PDが切断されたストアを回復できないと判断するまでのダウンタイム                     |
+| `schedule.max-store-preparing-time`                  | ストアがオンラインになるまでの最大待ち時間を制御します                          |
+| `schedule.leader-schedule-policy`                    | Leaderのスケジュールポリシーを決定する                               |
+| `schedule.leader-schedule-limit`                     | 同時に実行されるLeaderスケジュールタスクの数                            |
+| `schedule.region-schedule-limit`                     | 同時に実行されるリージョンスケジュールタスクの数                             |
+| `schedule.replica-schedule-limit`                    | 同時に実行されるレプリカスケジュールタスクの数                              |
+| `schedule.merge-schedule-limit`                      | 同時に実行される`Region Merge`スケジュールタスクの数                    |
+| `schedule.hot-region-schedule-limit`                 | 同時に実行されるホットリージョンスケジューリングタスクの数                        |
+| `schedule.hot-region-cache-hits-threshold`           | リージョンがホットスポットとみなされる閾値を決定します                          |
+| `schedule.high-space-ratio`                          | 店舗の収容能力が十分である閾値比率                                    |
+| `schedule.low-space-ratio`                           | 店舗の収容能力が不足する閾値比率                                     |
+| `schedule.tolerant-size-ratio`                       | `balance`バッファサイズを制御します                               |
+| `schedule.enable-remove-down-replica`                | `DownReplica`自動的に削除する機能を有効にするかどうかを決定します              |
+| `schedule.enable-replace-offline-replica`            | `OfflineReplica`移行する機能を有効にするかどうかを決定します               |
+| `schedule.enable-make-up-replica`                    | レプリカを自動的に補完する機能を有効にするかどうかを決定します                      |
+| `schedule.enable-remove-extra-replica`               | 余分なレプリカを削除する機能を有効にするかどうかを決定します                       |
+| `schedule.enable-location-replacement`               | 分離レベルチェックを有効にするかどうかを決定します                            |
+| `schedule.enable-cross-table-merge`                  | テーブル間の結合を有効にするかどうかを決定します                             |
+| `schedule.enable-one-way-merge`                      | 一方向のマージを有効にします。これにより、隣接する次のリージョンとのマージのみが可能になります。     |
+| `schedule.region-score-formula-version`              | リージョンスコアの計算式のバージョンを制御します                             |
+| `schedule.scheduler-max-waiting-operator`            | 各スケジューラの待機オペレータの数を制御します                              |
+| `schedule.enable-debug-metrics`                      | デバッグ用のメトリクスを有効にする                                    |
+| `schedule.enable-joint-consensus`                    | レプリカのスケジュールにジョイントコンセンサスを使用するかどうかを制御します               |
+| `schedule.hot-regions-write-interval`                | PDがホットリージョン情報を保存する時間間隔                               |
+| `schedule.hot-regions-reserved-days`                 | ホットリージョン情報を保持する日数を指定します                              |
+| `schedule.max-movable-hot-peer-size`                 | ホットリージョンスケジュールにスケジュールできる最大リージョンサイズを制御します             |
+| `schedule.store-limit-version`                       | [店舗制限](/configure-store-limit.md)のバージョンを制御します        |
+| `replication.max-replicas`                           | レプリカの最大数を設定する                                        |
+| `replication.location-labels`                        | TiKVクラスタのトポロジ情報                                      |
+| `replication.enable-placement-rules`                 | 配置ルールを有効にする                                          |
+| `replication.strictly-match-label`                   | ラベルチェックを有効にする                                        |
+| `replication.isolation-level`                        | TiKVクラスタの最小トポロジカル分離レベル                               |
+| `pd-server.use-region-storage`                       | 独立したリージョンstorageを有効にする                               |
+| `pd-server.max-gap-reset-ts`                         | タイムスタンプをリセットする最大間隔を設定します（BR）                         |
+| `pd-server.key-type`                                 | クラスタキータイプを設定する                                       |
+| `pd-server.metric-storage`                           | クラスターメトリックのstorageアドレスを設定します                         |
+| `pd-server.dashboard-address`                        | ダッシュボードのアドレスを設定する                                    |
+| `pd-server.flow-round-by-digit`                      | リージョンフロー情報を丸める最下位桁数を指定します                            |
+| `pd-server.min-resolved-ts-persistence-interval`     | 最小解決タイムスタンプがPDに永続的に保存される間隔を決定します。                    |
+| `pd-server.server-memory-limit`                      | PDインスタンスのメモリ制限比率                                     |
+| `pd-server.server-memory-limit-gc-trigger`           | PDがGCをトリガーしようとする閾値比率                                 |
+| `pd-server.enable-gogc-tuner`                        | GOGCチューナーを有効にするかどうかを制御します                            |
+| `pd-server.gc-tuner-threshold`                       | GOGCのチューニングにおける最大メモリ閾値比                              |
+| `replication-mode.replication-mode`                  | バックアップモードを設定します                                      |
+| `replication-mode.dr-auto-sync.label-key`            | 異なるAZを区別し、配置ルールに一致させる必要がある                           |
+| `replication-mode.dr-auto-sync.primary`              | プライマリAZ                                              |
+| `replication-mode.dr-auto-sync.dr`                   | 災害復旧（DR）AZ                                           |
+| `replication-mode.dr-auto-sync.primary-replicas`     | プライマリ AZ 内の Voter レプリカの数                             |
+| `replication-mode.dr-auto-sync.dr-replicas`          | 災害復旧（DR）AZ内の投票者レプリカの数                                |
+| `replication-mode.dr-auto-sync.wait-store-timeout`   | ネットワークの分離や障害が発生したときに非同期レプリケーションモードに切り替えるまでの待機時間      |
+| `replication-mode.dr-auto-sync.wait-recover-timeout` | ネットワークが回復した後、 `sync-recover`状態に戻るまでの待機時間             |
+| `replication-mode.dr-auto-sync.pause-region-split`   | `async_wait`と`async`ステータスでリージョン分割操作を一時停止するかどうかを制御します |
 
 詳細なパラメータの説明については[PDコンフィグレーションファイル](/pd-configuration-file.md)を参照してください。
 

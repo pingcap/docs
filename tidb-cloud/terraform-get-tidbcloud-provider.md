@@ -110,7 +110,6 @@ Terraform プロバイダー (&gt;= 0.3.0) は、オプションのパラメー�
     provider "tidbcloud" {
       public_key = "your_public_key"
       private_key = "your_private_key"
-      sync = true
     }
 
 `sync` ～ `true`設定が推奨されますが、 `sync`現在クラスターリソースでのみ機能することに注意してください。他のリソースに対して同期操作が必要な場合は、 [TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md)してください。

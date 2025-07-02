@@ -70,8 +70,7 @@ TiDB Cloud Dedicated クラスターが Amazon S3 バケット内のソースデ
                     "Sid": "VisualEditor1",
                     "Effect": "Allow",
                     "Action": [
-                        "s3:ListBucket",
-                        "s3:GetBucketLocation"
+                        "s3:ListBucket"
                     ],
                     "Resource": "<Your S3 bucket ARN>"
                 }

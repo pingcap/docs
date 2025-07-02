@@ -75,6 +75,8 @@
     -   ルビー
         -   [MySQL2](/develop/dev-guide-sample-application-ruby-mysql2.md)
         -   [レール](/develop/dev-guide-sample-application-ruby-rails.md)
+    -   C#
+        -   [C#](/develop/dev-guide-sample-application-cs.md)
     -   [ワードプレス](/tidb-cloud/dev-guide-wordpress.md)
     -   サーバーレスDriver![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
         -   [TiDB CloudサーバーレスDriver](/tidb-cloud/serverless-driver.md)
@@ -159,7 +161,7 @@
             -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections.md)
             -   [Azure のプライベート エンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
             -   [プライベートエンドポイント経由で Google Cloud に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
-            -   [VPC ピアリング経由で接続](/tidb-cloud/set-up-vpc-peering-connections.md)
+            -   [VPCピアリング経由で接続](/tidb-cloud/set-up-vpc-peering-connections.md)
             -   [SQL シェル経由で接続する](/tidb-cloud/connect-via-sql-shell.md)
         -   [TiDB Cloud専用クラスタのスケール](/tidb-cloud/scale-tidb-cluster.md)
         -   [TiDB Cloud専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md)
@@ -399,7 +401,15 @@
     -   テラフォーム
         -   [Terraform 統合の概要](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
         -   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)
-        -   [クラスタリソースの使用](/tidb-cloud/terraform-use-cluster-resource.md)
+        -   [TiDB Cloud専用クラスタリソースを使用する](/tidb-cloud/terraform-use-dedicated-cluster-resource.md)
+        -   [TiDB Cloud専用プライベートエンドポイント接続リソースを使用する](/tidb-cloud/terraform-use-dedicated-private-endpoint-connection-resource.md)
+        -   [TiDB Cloud専用 VPC ピアリング リソースを使用する](/tidb-cloud/terraform-use-dedicated-vpc-peering-resource.md)
+        -   [TiDB Cloud専用ネットワークコンテナリソースを使用する](/tidb-cloud/terraform-use-dedicated-network-container-resource.md)
+        -   [TiDB Cloud Serverless クラスタリソースを使用する](/tidb-cloud/terraform-use-serverless-cluster-resource.md)
+        -   [TiDB Cloud Serverless Branchリソースを使用する](/tidb-cloud/terraform-use-serverless-branch-resource.md)
+        -   [TiDB Cloud Serverless エクスポート リソースを使用する](/tidb-cloud/terraform-use-serverless-export-resource.md)
+        -   [SQL ユーザー リソースを使用する](/tidb-cloud/terraform-use-sql-user-resource.md)
+        -   [クラスタリソースの使用 (非推奨)](/tidb-cloud/terraform-use-cluster-resource.md)
         -   [バックアップリソースを使用する](/tidb-cloud/terraform-use-backup-resource.md)
         -   [復元リソースを使用する](/tidb-cloud/terraform-use-restore-resource.md)
         -   [インポートリソースの使用](/tidb-cloud/terraform-use-import-resource.md)
@@ -815,7 +825,7 @@
             -   [TPC-C パフォーマンステストレポート](/tidb-cloud/v7.1-performance-benchmarking-with-tpcc.md)
             -   [Sysbenchパフォーマンステストレポート](/tidb-cloud/v7.1-performance-benchmarking-with-sysbench.md)
         -   TiDB v6.5
-            -   [TPC-Cパフォーマンステストレポート](/tidb-cloud/v6.5-performance-benchmarking-with-tpcc.md)
+            -   [TPC-C パフォーマンステストレポート](/tidb-cloud/v6.5-performance-benchmarking-with-tpcc.md)
             -   [Sysbenchパフォーマンステストレポート](/tidb-cloud/v6.5-performance-benchmarking-with-sysbench.md)
     -   [システム変数](/system-variables.md)
     -   [サーバーステータス変数](/status-variables.md)
@@ -843,7 +853,7 @@
         -   接続: IMチケットの作成とサブスクリプションの更新
             -   [Slack 経由でチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
             -   [Larkでチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-lark-ticket-creation.md)
-        -   接続: サポートチケットのIMインタラクション
+        -   接続: サポートチケットの IM 対話
             -   [Slack経由でサポートチケットとやり取りする](/tidb-cloud/connected-slack-ticket-interaction.md)
             -   [Lark経由でサポートチケットとやり取りする](/tidb-cloud/connected-lark-ticket-interaction.md)
     -   [サポートを受ける](/tidb-cloud/tidb-cloud-support.md)
