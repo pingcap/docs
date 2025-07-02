@@ -231,7 +231,7 @@ TLS object fields:
 + `key`: specifies the private key
 + `auto-certs`: mostly used for tests. It generates certificates if no certificate or key is specified.
 + `skip-ca`: skips verifying certificates using CA on client object or skips server-side verification on server object.
-+ `min-tls-version`: sets the minimum TLS version. Possible values are `1.0`、`1.1`、`1.2`, and `1.3`. The default value is `1.2`, which allows v1.2 or higher TLS versions.
++ `min-tls-version`: sets the minimum TLS version. Possible values are `1.0`, `1.1`, `1.2`, and `1.3`. The default value is `1.2`, which allows v1.2 or higher TLS versions.
 + `rsa-key-size`: sets the RSA key size when `auto-certs` is enabled.
 + `autocert-expire-duration`: sets the default expiration duration for auto-generated certificates.
 
