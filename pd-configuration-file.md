@@ -172,7 +172,7 @@ pd-server関連のコンフィグレーション項目
 ### <code>flow-round-by-digit</code> <span class="version-mark">TiDB 5.1 の新機能</span> {#code-flow-round-by-digit-code-span-class-version-mark-new-in-tidb-5-1-span}
 
 -   デフォルト値: 3
--   PDはフロー番号の最下位桁を丸めることで、リージョンフロー情報の変更に伴う統計情報の更新を削減します。この設定項目は、リージョンフロー情報の最小桁数を指定します。例えば、フロー`100512`デフォルト値が`3`であるため、 `101000`に丸められます。この設定により、 `trace-region-flow`置き換えられます。
+-   PDはフロー番号の最下位桁を丸めることで、リージョンフロー情報の変更に伴う統計情報の更新を削減します。この設定項目は、リージョンフロー情報の最小桁数を指定します。例えば、フロー`100512`デフォルト値が`3`あるため、 `101000`に丸められます。この設定により、 `trace-region-flow`置き換えられます。
 
 > **注記：**
 >
@@ -298,6 +298,12 @@ pd-server関連のコンフィグレーション項目
 
 -   同じリージョンにおける`split`の操作と`merge`操作間の時間間隔を制御します。つまり、新しく分割されたリージョンはしばらくの間マージされません。
 -   デフォルト値: `1h`
+
+### <code>max-movable-hot-peer-size</code> <span class="version-mark">v6.1.0 の新機能</span> {#code-max-movable-hot-peer-size-code-span-class-version-mark-new-in-v6-1-0-span}
+
+-   ホットリージョンスケジューリングにスケジュールできる最大リージョンサイズを制御します。
+-   デフォルト値: `512`
+-   単位: MiB
 
 ### <code>max-snapshot-count</code> {#code-max-snapshot-count-code}
 
@@ -552,7 +558,7 @@ pd-server関連のコンフィグレーション項目
 
 -   読み取りフローからRUへの変換の基礎係数
 -   デフォルト値: 1/(64 * 1024)
--   1 RU = 64 KiB 読み取りバイト
+-   1 RU = 64 KiB の読み取りバイト
 
 #### <code>write-cost-per-byte</code> {#code-write-cost-per-byte-code}
 

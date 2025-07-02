@@ -5,7 +5,7 @@ summary: このドキュメントでは、 TiDB Cloudから Apache Kafka へデ�
 
 # Apache Kafka にシンクする {#sink-to-apache-kafka}
 
-このドキュメントでは、TiDB Cloudから Apache Kafka にデータをストリーミングするための変更フィードを作成する方法について説明します。
+このドキュメントでは、 TiDB Cloudから Apache Kafka にデータをストリーミングするための変更フィードを作成する方法について説明します。
 
 > **注記：**
 >
@@ -58,7 +58,7 @@ TiDB Cloudは現在、セルフホスト型KafkaのPrivate Connectのみをサ�
     -   エンドポイントサービス名
     -   ブートストラップポート
 
--   Apache Kafka サービスが Google Cloud でホストされている場合は、手順[Google Cloud でセルフホスト型 Kafka プライベート サービス接続を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)に従ってネットワーク接続が適切に構成されていることを確認してください。セットアップ後、 TiDB Cloudコンソールで以下の情報を入力して変更フィードを作成してください。
+-   Apache Kafka サービスが Google Cloud でホストされている場合は、手順[Google Cloud でセルフホスト型 Kafka プライベート サービス接続を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)に従ってネットワーク接続が適切に構成されていることを確認してください。セットアップ後、 TiDB Cloudコンソールで以下の情報を入力して、変更フィードを作成します。
 
     -   Kafka アドバタイズドリスナーパターンの ID
     -   サービスアタッチメント
@@ -173,7 +173,7 @@ TiDB Cloud変更フィードが Apache Kafka にデータをストリーミン�
 13. [TiDB Cloudコンソール](https://tidbcloud.com)に戻り、接続リクエストを承認したことを確認してください。TiDB TiDB Cloud は接続をテストし、テストが成功すると次のページに進みます。
 
 </div>
-<div label="Private Service Connect">
+<div label="Private Service Connect (Google Cloud)">
 
 1.  **[接続方法]**で、 **[プライベート サービス接続]**を選択します。
 
