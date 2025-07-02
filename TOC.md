@@ -48,6 +48,8 @@
     - Ruby
       - [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
       - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
+    - C#
+      - [C#](/develop/dev-guide-sample-application-cs.md)
   - Connect to TiDB
     - GUI Database Tools
       - [JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)
@@ -423,6 +425,7 @@
     - [Use the `tidb_snapshot` System Variable](/read-historical-data.md)
   - Best Practices
     - [Use TiDB](/best-practices/tidb-best-practices.md)
+    - [Optimize Multi-Column Indexes](/best-practices/multi-column-index-best-practices.md)
     - [Java Application Development](/best-practices/java-app-best-practices.md)
     - [Use HAProxy](/best-practices/haproxy-best-practices.md)
     - [Highly Concurrent Write](/best-practices/high-concurrency-best-practices.md)
@@ -966,12 +969,13 @@
       - [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md)
       - [GROUP BY Modifiers](/functions-and-operators/group-by-modifier.md)
       - [Window Functions](/functions-and-operators/window-functions.md)
-      - [Miscellaneous Functions](/functions-and-operators/miscellaneous-functions.md)
-      - [Precision Math](/functions-and-operators/precision-math.md)
-      - [Set Operations](/functions-and-operators/set-operators.md)
       - [Sequence Functions](/functions-and-operators/sequence-functions.md)
-      - [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md)
+      - [Utility Functions](/functions-and-operators/utility-functions.md)
+      - [Miscellaneous Functions](/functions-and-operators/miscellaneous-functions.md)
       - [TiDB Specific Functions](/functions-and-operators/tidb-functions.md)
+      - [Precision Math](/functions-and-operators/precision-math.md)
+      - [Set Operations](/functions-and-operators/set-operators.md)      
+      - [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md)      
       - [Comparisons between Functions and Syntax of Oracle and TiDB](/oracle-functions-to-tidb.md)
     - [Clustered Indexes](/clustered-indexes.md)
     - [Vector Index](/vector-search/vector-search-index.md)
@@ -1096,6 +1100,7 @@
   - [Release Support Policy](https://www.pingcap.com/tidb-release-support-policy/)
   - [TiDB Installation Packages](/binary-package.md)
   - v8.5
+    - [8.5.2](/releases/release-8.5.2.md)
     - [8.5.1](/releases/release-8.5.1.md)
     - [8.5.0](/releases/release-8.5.0.md)
   - v8.4

@@ -40,7 +40,7 @@ The `BEGIN PESSIMISTIC;` and `BEGIN OPTIMISTIC;` statements take precedence over
 
 ## Behaviors
 
-Pessimistic transactions in TiDB behave similarly to those in MySQL. See the minor differences in [Difference with MySQL InnoDB](#difference-with-mysql-innodb).
+Pessimistic transactions in TiDB behave similarly to those in MySQL. See the minor differences in [Differences from MySQL InnoDB](#differences-from-mysql-innodb).
 
 - For pessimistic transactions, TiDB introduces snapshot read and current read.
 
@@ -82,7 +82,7 @@ Pessimistic transactions in TiDB behave similarly to those in MySQL. See the min
 
 - TiDB supports the `FOR UPDATE OF TABLES` syntax. For a statement that joins multiple tables, TiDB only applies pessimistic locks on the rows that are associated with the tables in `OF TABLES`.
 
-## Difference with MySQL InnoDB
+## Differences from MySQL InnoDB
 
 1. When TiDB executes DML or `SELECT FOR UPDATE` statements that use range in the WHERE clause, concurrent DML statements within the range are not blocked.
 

@@ -55,6 +55,8 @@
     - Ruby
       - [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
       - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
+    - C#
+      - [C#](/develop/dev-guide-sample-application-cs.md)
     - [WordPress](/tidb-cloud/dev-guide-wordpress.md)
     - Serverless Driver (Beta)
       - [TiDB Cloud Serverless Driver](/tidb-cloud/serverless-driver.md)
@@ -591,6 +593,7 @@
       - [Sequence Functions](/functions-and-operators/sequence-functions.md)
       - [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md)
       - [TiDB Specific Functions](/functions-and-operators/tidb-functions.md)
+      - [Utility Functions](/functions-and-operators/utility-functions.md)
     - [Clustered Indexes](/clustered-indexes.md)
     - [Constraints](/constraints.md)
     - [Generated Columns](/generated-columns.md)

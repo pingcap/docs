@@ -38,7 +38,7 @@ IndexPartSpecification
 
 IndexOption
          ::= 'KEY_BLOCK_SIZE' '='? LengthNum
-           | IndexType
+           | 'USING' IndexType
            | 'WITH' 'PARSER' Identifier
            | 'COMMENT' stringLit
            | 'VISIBLE'

@@ -78,7 +78,7 @@ This document only describes parameters that are not included in command-line pa
 ### `lease`
 
 + The timeout of the PD Leader Key lease. After the timeout, the system re-elects a Leader.
-+ Default value: `3`
++ Default value: Starting from v8.5.2, the default value is `5`. Before v8.5.2, the default value is `3`. 
 + Unit: second
 
 ### `quota-backend-bytes`
@@ -311,6 +311,12 @@ Configuration items related to scheduling
 
 + Controls the time interval between the `split` and `merge` operations on the same Region. That means a newly split Region will not be merged for a while.
 + Default value: `1h`
+
+### `max-movable-hot-peer-size` <span class="version-mark">New in v6.1.0</span>
+
++ Controls the maximum Region size that can be scheduled for hot Region scheduling.
++ Default value: `512`
++ Unit: MiB
 
 ### `max-snapshot-count`
 
