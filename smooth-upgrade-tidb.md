@@ -27,7 +27,7 @@ Refer to the following table for the upgrade methods supported by specific versi
 | Original version | Upgraded version | Upgrade methods | Note |
 |------|--------|-------------|-------------|
 | < v7.1.0  | Any version                 | Does not support smooth upgrade. | |
-| v7.1.0    | v7.1.1、v7.2.0, or v7.3.0   | Smooth upgrade is automatically supported. No additional operations are required. | Experimental feature. It might encounter the issue [#44760](https://github.com/pingcap/tidb/pull/44760). |
+| v7.1.0    | v7.1.1, v7.2.0, or v7.3.0   | Smooth upgrade is automatically supported. No additional operations are required. | Experimental feature. It might encounter the issue [#44760](https://github.com/pingcap/tidb/pull/44760). |
 | v7.1.1    | v7.2.0 or v7.3.0         | Smooth upgrade is automatically supported. No additional operations are required. | Experimental feature.  |
 | v7.2.0    | v7.3.0                   | Smooth upgrade is automatically supported. No additional operations are required. | Experimental feature.  |
 | [v7.1.2, v7.2.0)                     | [v7.1.2, v7.2.0) | Enable smooth upgrade by sending the `/upgrade/start` HTTP request. There are two methods: [Use TiUP](#use-tiup-to-upgrade) and [Other upgrade methods](#other-upgrade-methods) | When smooth upgrade is not enabled, ensure that no DDL operations are performed during the upgrade. |
