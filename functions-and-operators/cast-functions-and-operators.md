@@ -43,6 +43,7 @@ The following types are supported:
 | `SIGNED [INTEGER]`   | Signed integer   | Yes                                                        |
 | `TIME(fsp)`          | Time             | Yes                                                        |
 | `UNSIGNED [INTEGER]` | Unsigned integer | Yes                                                        |
+| `VECTOR`             | Vector           | No                                                         |
 | `YEAR`               | Year             | No                                                         |
 
 Examples:
