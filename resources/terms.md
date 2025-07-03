@@ -237,7 +237,7 @@
 | listening address | 监听地址 |  |
 | load | 负载 |  |
 | load | 加载 |  |
-| Local Persist Volume(s)/LPV(s) | 本地持久化卷 |  |
+| Local Persistent Volume(s)/LPV(s) | 本地持久化卷 |  |
 | locality | 局部性 |  |
 | localization (L10N) | 本地化 |  |
 | lock | 锁 |  |
@@ -267,14 +267,14 @@
 | monotone increasing | 单调递增 |  |
 | mount option(s) | 挂载参数 |  |
 | mount/mounting | 挂载 |  |
-| multi nodes | 多节点 |  |
+| multi-node | 多节点 |  |
 | multi-tenancy | 多租户技术 |  |
 | Multi-Version Concurrency Control (MVCC) | 多版本并发控制 |  |
 | mutation | 变异 |  |
 | mutex | 互斥锁 | Mutual exclusion |
 | MySQL syntax | MySQL 语法 |  |
 | namespace | 命名空间 |  |
-| nest loop | 嵌套循环 |  |
+| nested loop | 嵌套循环 |  |
 | node | 节点 |  |
 | non-unique index | 非唯一索引 |  |
 | null | 空值 |  |
@@ -287,7 +287,7 @@
 | open source | 开源 | 名词 (noun) |
 | open-source | 开源 | 可用作形容词 (adj) 或动词 (verb) |
 | operating environment | 运行环境 |  |
-| operation and administer | 运维 |  |
+| operation and administration | 运维 |  |
 | operational data store (ODS) | 操作数据存储 |  |
 | operational status | 运行状态 |  |
 | operator | 运算符/操作符/算子 |  |
@@ -367,9 +367,9 @@
 | rough set | 粗糙集 |  |
 | routine | 例程 |  |
 | row store | 行存 |  |
-| rule based optimization (RBO) | 基于规则的优化 |  |
+| Rule-Based Optimization (RBO) | 基于规则的优化 |  |
 | runtime | 运行时 |  |
-| Scalar Function | 标量函数 |  |
+| scalar function | 标量函数 |  |
 | scale | 扩展 |  |
 | scale in | 缩容 |  |
 | scale out | 扩容 |  |
@@ -389,7 +389,7 @@
 | sign bit | 符号位 |  |
 | simulate | 模拟 |  |
 | single-instance | 单机 |  |
-| single point of failure (SPOF) | 单点故障 |  ||
+| single point of failure (SPOF) | 单点故障 |   |
 | skip list | 跳跃表 |  |
 | slave | 从库 |  |
 | slow query | 慢查询 |  |
@@ -425,7 +425,7 @@
 | target machine | （部署）目标机器 |  |
 | technology stack | 技术栈 |  |
 | test | 测试 |  |
-| the configuration file | 配置文件 |  |
+| configuration file | 配置文件 |  |
 | Transparent Huge Pages (THP) | 透明大页 | A Linux memory management system |
 | thread | 线程 |  |
 | thread pool | 线程池 |  |
@@ -447,11 +447,10 @@
 | traffic flow control | 流控/流量控制 |  |
 | transaction | 事务 |  |
 | traverse | 遍历 |  |
-| trie | 字典树 |  |
-| trie | 单词查找树 |  |
+| trie | 字典树 / 单词查找树 |  |
 | tutorial | 教程 |  |
 | type | 类型 |  |
-| type infer | 类型推导 |  |
+| type inference | 类型推导 |  |
 | unbind | 解除（对服务、软件的）依赖，绑定，关联 |  |
 | underlying table | 底层表 |  |
 | unidirectional data flow | 单向数据流 |  |
@@ -465,7 +464,7 @@
 | verification | 验证 |  |
 | verify | 验证 |  |
 | Vertical Pod Autoscaling (VPA) | Pod 自动垂直扩容 | TiDB on Kubernetes |
-| wild card | 通配符 |  |
+| wildcard | 通配符 |  |
 | work queue(s) | 工作队列 |  |
 | wrapper | 封装器 |  |
 | write amplification (WA) | 写放大 |  |
