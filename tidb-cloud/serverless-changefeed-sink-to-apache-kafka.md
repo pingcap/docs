@@ -27,7 +27,7 @@ Ensure that your TiDB cluster can connect to the Apache Kafka service. Currently
 
 > **Note:**
 >
-> If you want to expose your Apache Kafka through a more secure method, such as private link or VPC peering, please contact us for help. To request it, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in your request in the **Description** field and click **Submit**.
+> If you want to expose your Apache Kafka through a more secure method, such as Private Link or VPC peering, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in your request in the **Description** field and click **Submit**.
 
 To enable public IP access to your Apache Kafka service, assign public IP addresses to all Kafka brokers.
 
