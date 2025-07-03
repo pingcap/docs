@@ -3,7 +3,7 @@ title: Changefeed for TiDB Cloud Serverless
 summary: TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services.
 ---
 
-# Changefeed (Beta)
+# Changefeed for TiDB Cloud Serverless (Beta)
 
 TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. This document provides an overview of the changefeed feature for TiDB Cloud Serverless.
 
@@ -13,20 +13,18 @@ TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data servic
 > - Currently, TiDB Cloud only allows up to 100 changefeeds per cluster.
 > - Currently, TiDB Cloud only allows up to 100 table filter rules per changefeed.
 
-## List the changefeeds for your cluster
-
-To access the changefeed feature, using the TiDB Cloud CLI command:
-
-```bash
-ticloud serverless changefeed list --cluster-id <cluster-id>
-```
-
 ## Create a changefeed
 
 To create a changefeed, refer to the following document:
 
 - [Sink to Apache Kafka](/tidb-cloud/serverless-changefeed-sink-to-apache-kafka.md)
 
+## List the changefeeds for your cluster
+
+To list the changefeeds for your cluster, run the following TiDB Cloud CLI command:
+
+```bash
+ticloud serverless changefeed list --cluster-id <cluster-id>
 ## Pause or resume a changefeed
 
 To pause a changefeed, run the following TiDB Cloud CLI command:
@@ -47,7 +45,7 @@ ticloud serverless changefeed resume --cluster-id <cluster-id> --changefeed-id <
 >
 > TiDB Cloud currently only allows editing changefeeds in the paused status.
 
-To edit a changefeed sink to kafka, you need to pause the changefeed first, and then edit it with the following TiDB Cloud CLI command:
+To edit a changefeed to kafka, you need to pause the changefeed first, and then edit it with the following TiDB Cloud CLI command:
 
 ```bash
 ticloud serverless changefeed edit --cluster-id <cluster-id> --changefeed-id <changefeed-id> --name <newname> --kafka <full-specified-kafka> --filter <full-specified-filter>
@@ -63,11 +61,11 @@ ticloud serverless changefeed delete --cluster-id <cluster-id> --changefeed-id <
 
 ## Changefeed billing
 
-Currently, the changefeed feature for TiDB Cloud Serverless in beta and available for free.
+Currently, the changefeed feature for TiDB Cloud Serverless is in beta and available for free.
 
 ## Changefeed states
 
-The state of a changefeed represents the running state of the changefeed. During the running process, changefeed might fail with errors, be manually paused or resumed. These behaviors can lead to changes of the changefeed state.
+The state of a changefeed represents the running state of the changefeed. During the running process, the changefeed might fail with errors, or be manually paused or resumed. These behaviors can lead to changes of the changefeed state.
 
 The states are described as follows:
 
