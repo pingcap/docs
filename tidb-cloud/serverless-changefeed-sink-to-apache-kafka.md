@@ -29,7 +29,6 @@ Ensure that your TiDB cluster can connect to the Apache Kafka service. Currently
 >
 > If you want to expose your Apache Kafka through a more secure method, such as private link or VPC peering, please contact us for help. To request it, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in your request in the **Description** field and click **Submit**.
 
-
 To enable public IP access to your Apache Kafka service, assign public IP addresses to all Kafka brokers.
 
 ### Kafka ACL authorization
@@ -90,6 +89,7 @@ The following is an example `filter` configuration:
 - `filterRule`: filters the tables to replicate. For the detailed rule syntax, see [Table Filter](https://docs.pingcap.com/tidb/stable/table-filter/).
 - `eventFilterRule`: filters specific events for the matched tables. You can use the `matcher` field to specify the target tables, and use the `ignore_event` field to list the event types to skip. For supported event types, see [Event filter rules](https://docs.pingcap.com/tidb/stable/ticdc-filter/#event-filter-rules).
 - `mode`: controls the behavior for unsupported tables. You can set it to one of the following:
+  
    - `IGNORE_NOT_SUPPORT_TABLE`: skip tables that do not support replication (for example, tables without primary or unique keys).
    - `FORCE_SYNC`: force replication of all tables regardless of support status.
 
@@ -242,7 +242,7 @@ The main configuration fields are as follows:
 
     For more information about the matching rules, see [Partition dispatchers](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-kafka/#partition-dispatchers).
 
-1.  **column_selectors**: selects columns from events. TiDB Cloud only sends the data changes related to those columns to the downstream.
+-  `column_selectors`: selects columns from events. TiDB Cloud only sends the data changes related to those columns to the downstream.
 
     - `matcher`: specifies which tables the column selector applies to. For tables that do not match any rule, all columns are sent.
     - `columns`: specifies which columns of the matched tables will be sent to the downstream.
