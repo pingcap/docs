@@ -1,11 +1,11 @@
 ---
-title: Sink to Apache Kafka
-summary: This document explains how to create a changefeed to stream data from TiDB Cloud to Apache Kafka. It includes restrictions, prerequisites, and steps to configure the changefeed for Apache Kafka. The process involves setting up network connections, adding permissions for Kafka ACL authorization, and configuring the changefeed specification.
+title: Sink Data from TiDB Cloud Serverless to Apache Kafka
+summary: This document explains how to create a changefeed to stream data from TiDB Cloud Serverless to Apache Kafka. It includes restrictions, prerequisites, and steps to configure the changefeed for Apache Kafka. The process involves setting up network connections, adding permissions for Kafka ACL authorization, and configuring the changefeed specification.
 ---
 
-# Sink to Apache Kafka
+# Sink Data from TiDB Cloud Serverless to Apache Kafka
 
-This document describes how to create a changefeed to stream data from TiDB Cloud to Apache Kafka.
+This document describes how to create a changefeed to stream data from TiDB Cloud Serverless to Apache Kafka.
 
 ## Restrictions
 
@@ -23,14 +23,14 @@ Before creating a changefeed to stream data to Apache Kafka, you need to complet
 
 ### Network
 
-Ensure that your TiDB cluster can connect to the Apache Kafka service. Currently, TiDB cluster can only connect to Apache Kafka through the Public IP.
+Ensure that your TiDB cluster can connect to the Apache Kafka service. Currently, TiDB Serverless clusters can only connect to Apache Kafka through public IP addresses.
 
 > **Note:**
 >
 > If you want to expose your Apache Kafka through a more secure method, such as private link or VPC peering, please contact us for help. To request it, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for TiDB Cloud Serverless database audit logging" in the **Description** field and click **Submit**.
 
 
-To provide Public IP access to your Apache Kafka service, assign Public IP addresses to all your Kafka brokers. 
+To enable public IP access to your Apache Kafka service, assign public IP addresses to all Kafka brokers.
 
 ### Kafka ACL authorization
 
@@ -41,36 +41,38 @@ To allow TiDB Cloud changefeeds to stream data to Apache Kafka and create Kafka 
 
 For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources](https://docs.confluent.io/platform/current/kafka/authorization.html#resources) and [Adding ACLs](https://docs.confluent.io/platform/current/kafka/authorization.html#adding-acls) in Confluent documentation for more information.
 
-## Create a changefeed sink to Apache Kafka with TiDB Cloud CLI
+## Create a changefeed with TiDB Cloud CLI
 
-To create a changefeed to stream data from TiDB Cloud to Apache Kafka, using the TiDB Cloud CLI command:
+To create a changefeed that streams data from TiDB Cloud to Apache Kafka, use the following TiDB Cloud CLI command:
 
 ```bash
 ticloud serverless changefeed create --cluster-id <cluster-id> --name <changefeed-name> --type KAFKA --kafka <kafka-json> --filter <filter-json> --start-tso <start-tso>
 ```
 
 - `<cluster-id>`: the ID of the TiDB Cloud cluster that you want to create the changefeed for.
-- `<changefeed-name>`: the name of the changefeed, it is optional. If you do not specify a name, TiDB Cloud automatically generates a name for the changefeed.
-- `type`: the type of the changefeed, which is `KAFKA` in this case.
-- `kafka`: a JSON string that contains the configurations for the changefeed to stream data to Apache Kafka. See [Kafka configurations](#kafka-configurations) for more information about the configurations.
-- `filter:` a JSON string that contains the configurations for the changefeed to filter tables and events. See [Filter configurations](#filter-configurations) for more information about the configurations.
-- `start-tso`: the TSO from which the changefeed starts to replicate data. If you do not specify a TSO, the current TSO is used by default. To learn more about TSO, see [TSO in TiDB](https://docs.pingcap.com/tidb/stable/tso/). 
+- `<changefeed-name>` (optional): the name of the changefeed. If not specified, TiDB Cloud automatically generates a changefeed name.
+- `type`: the changefeed type. To stream data to Apache Kafka, set it to `KAFKA`.
+- `kafka`: a JSON string that contains the configuration for streaming data to Apache Kafka. For more information, see [Kafka configurations](#kafka-configurations).
+- `filter`: a JSON string that specifies which tables and events to replicate. For more information, see [Filter configurations](#filter-configurations).
+- `start-tso`: the TSO from which the changefeed starts to replicate data. If not specified, the current TSO is used by default. For more information, see [TSO in TiDB](https://docs.pingcap.com/tidb/stable/tso/).
 
 ### Filter configurations
 
-To get a template of `filter` configurations, using the TiDB Cloud CLI command:
+You can specify `--filter <filter-json>` to filter tables and events that you want to replicate. 
+
+To get a template of `filter` configurations, run the following TiDB Cloud CLI command:
 
 ```bash
 ticloud serverless changefeed template
 ```
 
-To get the explanation of the template, using the TiDB Cloud CLI command:
+To view explanations of the template, run the following TiDB Cloud CLI command:
 
 ```bash
 ticloud serverless changefeed template --explain
 ```
 
-The configurations in the `filter` JSON string are used to filter tables and events that you want to replicate. Below is an example of a `filter` configuration:
+The following is an example `filter` configuration:
 
 <details>
 <summary>Example filter configuration</summary>
@@ -89,25 +91,29 @@ The configurations in the `filter` JSON string are used to filter tables and eve
 ```
 </details>
 
-1. **Filter Rule**: you can set `filter rules` to filter the tables that you want to replicate. See [Table Filter](https://docs.pingcap.com/tidb/stable/table-filter/) for more information about the rule syntax.
-2. **Event Filter Rule**: you can set the `matcher` and `ignore_event` to ignore some events matching the rules. See [Event filter rules](https://docs.pingcap.com/tidb/stable/ticdc-filter/#event-filter-rules) to get all the supported event types.
-3. **mode**: set mode to `IGNORE_NOT_SUPPORT_TABLE` to ignore the tables that do not support replication, such as the tables that do not have primary keys or unique indexes. set mode to `FORCE_SYNC` to force the changefeed to replicate all tables.
+- `filterRule`: filters the tables to replicate. For the detailed rule syntax, see [Table Filter](https://docs.pingcap.com/tidb/stable/table-filter/).
+- `eventFilterRule`: filters specific events for the matched tables. You can use the `matcher` field to specify the target tables, and use the `ignore_event` field to list the event types to skip. For supported event types, see [Event filter rules](https://docs.pingcap.com/tidb/stable/ticdc-filter/#event-filter-rules).
+- `mode`: controls the behavior for unsupported tables. You can set it to one of the following:
+   - `IGNORE_NOT_SUPPORT_TABLE`: skip tables that do not support replication (for example, tables without primary or unique keys).
+   - `FORCE_SYNC`: force replication of all tables regardless of support status.
 
 ### Kafka configurations
 
-To get a template of `kafka` configurations, using the TiDB Cloud CLI command:
+You can specify `--kafka <kafka-json>` to configure how the changefeed streams data to Apache Kafka.
+
+To get a template of `kafka` configurations, run the following TiDB Cloud CLI command:
 
 ```bash
 ticloud serverless changefeed template
 ```
 
-To get the explanation of the template, using the TiDB Cloud CLI command:
+To view explanations of the template, run the following TiDB Cloud CLI command:
 
 ```bash
 ticloud serverless changefeed template --explain
 ```
 
-The configurations in the `kafka` JSON string are used to configure how the changefeed streams data to Apache Kafka. Below is an example of a `kafka` configuration:
+The following is an example `kafka` configuration:
 
 <details>
 <summary>Example kafka configuration</summary>
@@ -173,32 +179,32 @@ The configurations in the `kafka` JSON string are used to configure how the chan
 
 The main configuration fields are as follows:
 
-1. **network_info**: Only `PUBLIC` network type is supported for now. This means that the TiDB cluster can connect to the Apache Kafka service through the Public IP.
-   
-2. **broker**: Contains Kafka broker connection information:
-   
-    - `kafka_version`: The Kafka version, support `VERSION_2XX` and `VERSION_3XX`.
-    - `broker_endpoints`: Comma-separated list of broker endpoints.
-    - `tls_enable`: Whether to enable TLS for the connection.
-    - `compression`: The compression type for messages, support `NONE`, `GZIP`, `LZ4`, `SNAPPY`, and `ZSTD`.
+- `network_info`: currently, only the `PUBLIC` network type is supported. This means that the TiDB Cloud Serverless clusters can only connect to the Apache Kafka service through public IP addresses.
 
-3. **authentication**: Authentication settings for connecting to Kafka, support `DISABLE`, `SASL_PLAIN`, `SASL_SCRAM_SHA_256` and `SASL_SCRAM_SHA_512`. The `user_name` and `password` fields are required if you set the `auth_type` to `SASL_PLAIN`, `SASL_SCRAM_SHA_256`, or `SASL_SCRAM_SHA_512`.
-   
-4. **data_format.protocol**: Support `CANAL_JSON`, `AVRO`, and `OPEN_PROTOCOL`.
+- `broker`: specifies the Kafka broker connection information.
 
-    - Avro is a compact, fast, and binary data format with rich data structures, which is widely used in various flow systems. For more information, see [Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol).
-    - Canal-JSON is a plain JSON text format, which is easy to parse. For more information, see [Canal-JSON data format](https://docs.pingcap.com/tidb/stable/ticdc-canal-json).
-    - Open Protocol is a row-level data change notification protocol that provides data sources for monitoring, caching, full-text indexing, analysis engines, and primary-secondary replication between different databases. For more information, see [Open Protocol data format](https://docs.pingcap.com/tidb/stable/ticdc-open-protocol). 
+    - `kafka_version`: the Kafka version. Supported values: `VERSION_2XX` or `VERSION_3XX`.
+    - `broker_endpoints`: a comma-separated list of Kafka brokers.
+    - `tls_enable`: whether to enable TLS for the connection.
+    - `compression`: the message compression type. Supported values: `NONE`, `GZIP`, `LZ4`, `SNAPPY`, or `ZSTD`.
 
-5. **data_format.enable_tidb_extension**: if you want to add TiDB-extension fields to the Kafka message body with `AVRO` or `CANAL_JSON` data format.
+- `authentication`: specifies the Kafka authentication method. Supported values of `auth_type`: `DISABLE`, `SASL_PLAIN`, `SASL_SCRAM_SHA_256`, or `SASL_SCRAM_SHA_512`. If you set `auth_type` to `SASL_PLAIN`, `SASL_SCRAM_SHA_256`, or `SASL_SCRAM_SHA_512`, `user_name` and `password` are required.
 
-    For more information about TiDB-extension fields, see [TiDB extension fields in Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol#tidb-extension-fields) and [TiDB extension fields in Canal-JSON data format](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field).
+- `data_format.protocol`: specifies the the output format. 
 
-6. **data_format.avro_config**: If you select **Avro** as your data format, you need to set the Avro-specific configurations:
+    - `AVRO`: Avro is a compact, fast, and binary data format with rich data structures, which is widely used in various flow systems. For more information, see [Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol).
+    - `CANAL_JSON`: Canal-JSON is a plain JSON text format, which is easy to parse. For more information, see [Canal-JSON data format](https://docs.pingcap.com/tidb/stable/ticdc-canal-json).
+    - `OPEN_PROTOCOL`: Open Protocol is a row-level data change notification protocol that provides data sources for monitoring, caching, full-text indexing, analysis engines, and primary-secondary replication between different databases. For more information, see [Open Protocol data format](https://docs.pingcap.com/tidb/stable/ticdc-open-protocol).
 
-    - `decimal_handling_mode` and `bigint_unsigned_handling_mode`: specify how TiDB Cloud handles the decimal and unsigned bigint data types in Kafka messages.
-    - `confluent_schema_registry`: the configuration of confluent schema registry. If auth is required, please set `enable_http_auth` to true and full in the user name and password. See [Confluent Schema Registry](https://docs.confluent.io/platform/current/schema-registry/index.html) for more information.
-    - `aws_glue_schema_registry`: the configuration of AWS Glue schema registry. If you want to use AWS Glue schema registry, you need to set the region, name, access key ID, and secret access key. See [AWS Glue Schema Registry](https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html) for more information.
+- `data_format.enable_tidb_extension`: controls whether to include TiDB-specific extension fields in Kafka messages when using the `AVRO` or `CANAL_JSON` format.
+
+    For more information about TiDB extension fields, see [TiDB extension fields in Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol#tidb-extension-fields) and [TiDB extension fields in Canal-JSON data format](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field).
+
+- `data_format.avro_config`: if you select **Avro** as your data format, you need to set the Avro-specific configurations.
+
+    - `decimal_handling_mode` and `bigint_unsigned_handling_mode`: controls how TiDB Cloud handles the decimal and unsigned bigint data types in Kafka messages.
+    - `confluent_schema_registry`: the configuration for confluent schema registry. If authentication is required, set `enable_http_auth` to `true` and configure the `user_name` and `password`. For more information, see [Confluent Schema Registry](https://docs.confluent.io/platform/current/schema-registry/index.html).
+    - `aws_glue_schema_registry`: the configuration for AWS Glue schema registry. If you want to use AWS Glue schema registry, set `region`, `name`, `access_key_id`, and `secret_access_key` accordingly. For more information, see [AWS Glue Schema Registry](https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html).
 
         For more information about the Avro configurations, see [Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol).
 
@@ -224,33 +230,33 @@ The main configuration fields are as follows:
 >
 > If you use `AVRO` data format, only `BY_TABLE` dispatch type is supported.
 
-8. **topic_partition_config.replication_factor**: controls how many Kafka servers each Kafka message is replicated to. The valid value ranges from [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) to the number of Kafka brokers.
+- `topic_partition_config.replication_factor`: controls how many Kafka brokers each Kafka message is replicated to. The valid value ranges from [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) to the total number of Kafka brokers.
 
-9. **topic_partition_config.partition_num**: controls how many partitions exist in a topic. The valid value range is `[1, 10 * the number of Kafka brokers]`.
+- `topic_partition_config.partition_num`: controls how many partitions exist in a topic. The valid value range is `[1, 10 * the total number of Kafka brokers]`.
 
-10. **topic_partition_config.partition_dispatchers**: decide which partition a Kafka message will be sent to. `partition_type` Support `TABLE`, `INDEX_VALUE`, `TS` and `COLUMN`.
+- `topic_partition_config.partition_dispatchers`: controls which partition a Kafka message will be sent to. Support values: `INDEX_VALUE`, `TABLE`, `TS` and `COLUMN`.
 
-    - **Distribute changelogs by primary key or index value to Kafka partition**
+    - `INDEX_VALUE`: distributes changelogs by primary key or index value to Kafka partitions.
 
         If you want the changefeed to send Kafka messages of a table to different partitions, set `partition_type` to `INDEX_VALUE` and set the `index_name`. The primary key or index value of a row changelog will determine which partition the changelog is sent to. This distribution method provides a better partition balance and ensures row-level orderliness.
 
-    - **Distribute changelogs by table to Kafka partition**
+    - `TABLE`: distributes changelogs by table to Kafka partitions.
 
         If you want the changefeed to send Kafka messages of a table to one Kafka partition, set `partition_type` to `TABLE`. The table name of a row changelog will determine which partition the changelog is sent to. This distribution method ensures table orderliness but might cause unbalanced partitions.
 
-    - **Distribute changelogs by timestamp to Kafka partition**
+    - `TS`: distributes changelogs by timestamp to Kafka partitions.
 
         If you want the changefeed to send Kafka messages to different Kafka partitions randomly, set `partition_type` to `TS`. The commitTs of a row changelog will determine which partition the changelog is sent to. This distribution method provides a better partition balance and ensures orderliness in each partition. However, multiple changes of a data item might be sent to different partitions and the consumer progress of different consumers might be different, which might cause data inconsistency. Therefore, the consumer needs to sort the data from multiple partitions by commitTs before consuming.
 
-    - **Distribute changelogs by column value to Kafka partition**
+    - `COLUMN`: distributes changelogs by column value to Kafka partitions.
 
         If you want the changefeed to send Kafka messages of a table to different partitions, set `partition_type` to `COLUMN` and set the `columns`. The specified column values of a row changelog will determine which partition the changelog is sent to. This distribution method ensures orderliness in each partition and guarantees that the changelog with the same column values is send to the same partition.
 
     For more information about the matching rules, see [Partition dispatchers](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-kafka/#partition-dispatchers).
 
-11. **column_selectors**: columns from events and send only the data changes related to those columns to the downstream.
+11. **column_selectors**: selects columns from events. TiDB Cloud only sends the data changes related to those columns to the downstream.
 
-    - `matcher`: specify which tables the column selector applies to. For tables that do not match any rule, all columns are sent.
-    - `columns`: specify which columns of the matched tables will be sent to the downstream.
+    - `matcher`: specifies which tables the column selector applies to. For tables that do not match any rule, all columns are sent.
+    - `columns`: specifies which columns of the matched tables will be sent to the downstream.
 
     For more information about the matching rules, see [Column selectors](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-kafka/#column-selectors).
