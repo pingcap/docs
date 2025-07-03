@@ -41,7 +41,7 @@
 | Cartesian product | 笛卡尓积 |  |
 | case-sensitive | 大小写敏感 |  |
 | certificate signing request (CSR) | 证书签名请求 |  |
-| cost based optimization (CBO) | 基于代价的优化 |  |
+| Cost-Based Optimization (CBO) | 基于代价的优化 |  |
 | Custom Resource Definition (CRD) | 自定义资源类型 |  |
 | checksum | 校验和 |  |
 | circular dependency | 循环依赖 |  |
