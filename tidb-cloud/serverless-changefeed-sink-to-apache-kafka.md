@@ -18,8 +18,8 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
 Before creating a changefeed to stream data to Apache Kafka, you need to complete the following prerequisites:
 
-- Set up your network connection
-- Add permissions for Kafka ACL authorization
+- Set up your network connection.
+- Add permissions for Kafka ACL authorization.
 
 ### Network
 
@@ -182,7 +182,7 @@ The main configuration fields are as follows:
 
 - `authentication`: specifies the Kafka authentication method. Supported values of `auth_type`: `DISABLE`, `SASL_PLAIN`, `SASL_SCRAM_SHA_256`, or `SASL_SCRAM_SHA_512`. If you set `auth_type` to `SASL_PLAIN`, `SASL_SCRAM_SHA_256`, or `SASL_SCRAM_SHA_512`, `user_name` and `password` are required.
 
-- `data_format.protocol`: specifies the the output format. 
+- `data_format.protocol`: specifies the output format. 
 
     - `AVRO`: Avro is a compact, fast, and binary data format with rich data structures, which is widely used in various flow systems. For more information, see [Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol).
     - `CANAL_JSON`: Canal-JSON is a plain JSON text format, which is easy to parse. For more information, see [Canal-JSON data format](https://docs.pingcap.com/tidb/stable/ticdc-canal-json).
@@ -200,7 +200,7 @@ The main configuration fields are as follows:
 
         For more information about the Avro configurations, see [Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol).
 
-- `topic_partition_config.dispatch_type`: controls how the changefeed creates Kafka topics. Support values: `ONE_TOPIC`, `BY_TABLE`, or `BY_DATABASE`. If you use the `AVRO` data format, only the `BY_TABLE` dispatch type is supported.
+- `topic_partition_config.dispatch_type`: controls how the changefeed creates Kafka topics. Supported values: `ONE_TOPIC`, `BY_TABLE`, or `BY_DATABASE`. If you use the `AVRO` data format, only the `BY_TABLE` dispatch type is supported.
 
     - `BY_TABLE`: distributes changelogs by table to Kafka topics.
 
@@ -238,7 +238,7 @@ The main configuration fields are as follows:
 
     - `COLUMN`: distributes changelogs by column value to Kafka partitions.
 
-        If you want the changefeed to send Kafka messages of a table to different partitions, set `partition_type` to `COLUMN` and set the `columns`. The specified column values of a row changelog will determine which partition the changelog is sent to. This distribution method ensures orderliness in each partition and guarantees that the changelog with the same column values is send to the same partition.
+        If you want the changefeed to send Kafka messages of a table to different partitions, set `partition_type` to `COLUMN` and set the `columns`. The specified column values of a row changelog will determine which partition the changelog is sent to. This distribution method ensures orderliness in each partition and guarantees that the changelogs with the same column values are sent to the same partition.
 
     For more information about the matching rules, see [Partition dispatchers](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-kafka/#partition-dispatchers).
 
