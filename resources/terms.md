@@ -120,7 +120,6 @@
 | effective range | 生效范围 |  |
 | earlier version | 以下版本 |  |
 | edit | 修改/编辑（如：修改 ini 文件） |  |
-| effective range | 生效范围 |  |
 | elect | 选举 |  |
 | engine file | 引擎文件 |  |
 | environment variable | 环境变量 |  |
