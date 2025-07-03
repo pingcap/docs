@@ -7,7 +7,7 @@ summary: Learn about how to use Customer-Managed Encryption Key (CMEK) in TiDB C
 
 > **Note:**
 >
-> CMEK is similar to Bring Your Own Key (BYOK). With BYOK, you typically generate the key locally and upload it. However, TiDB Cloud only supports keys generated within [AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html).
+> Customer-Managed Encryption Key (CMEK) is similar to Bring Your Own Key (BYOK). With BYOK, you typically generate the key locally and upload it. However, TiDB Cloud only supports keys generated within [AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html).
 
 Customer-Managed Encryption Key (CMEK) allows you to secure your static data in a TiDB Cloud Dedicated cluster by utilizing a symmetric encryption key that is under your complete control. This key is referred to as the CMEK key.
 
