@@ -37,11 +37,11 @@ SELECT * FROM information_schema.resource_groups; -- View all resource groups. T
 ```
 
 ```sql
-+---------+------------+----------+----------------+-------------+------------+
-| NAME    | RU_PER_SEC | PRIORITY | BURSTABLE      | QUERY_LIMIT | BACKGROUND |
-+---------+------------+----------+----------------+-------------+------------+
-| default | UNLIMITED  | MEDIUM   | YES(UNLIMITED) | NULL        | NULL       |
-+---------+------------+----------+----------------+-------------+------------+
++---------+------------+----------+-----------+-------------+------------+
+| NAME    | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT | BACKGROUND |
++---------+------------+----------+-----------+-------------+------------+
+| default | UNLIMITED  | MEDIUM   | UNLIMITED | NULL        | NULL       |
++---------+------------+----------+-----------+-------------+------------+
 ```
 
 ```sql
