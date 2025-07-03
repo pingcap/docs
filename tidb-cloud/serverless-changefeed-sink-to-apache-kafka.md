@@ -1,11 +1,15 @@
 ---
-title: Sink Data from TiDB Cloud Serverless to Apache Kafka
+title: Stream Data from TiDB Cloud Serverless to Apache Kafka
 summary: This document explains how to create a changefeed to stream data from TiDB Cloud Serverless to Apache Kafka. It includes restrictions, prerequisites, and steps to configure the changefeed for Apache Kafka. The process involves setting up network connections, adding permissions for Kafka ACL authorization, and configuring the changefeed specification.
 ---
 
-# Sink Data from TiDB Cloud Serverless to Apache Kafka
+# Stream Data from TiDB Cloud Serverless to Apache Kafka
 
 This document describes how to create a changefeed to stream data from TiDB Cloud Serverless to Apache Kafka.
+
+> **Note:**
+>
+> - For [TiDB Cloud Dedicated clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated), see [Stream Data from TiDB Cloud Dedicated to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
 
 ## Restrictions
 
