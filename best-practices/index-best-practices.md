@@ -1,9 +1,9 @@
 ---
-title: Index Best Practices
-summary: This document summarizes best practices for using indexes in TiDB.
+title: Best Practices for Managing Indexes and Identifying Unused Indexes
+summary: This document summarizes best practices for managing indexes and identifying unused indexes.
 ---
 
-# Index Best Practices
+# Best Practices for Managing Indexes and Identifying Unused Indexes
 
 Indexes are essential for optimizing database query performance, reducing the need to scan large amounts of data. However, as applications evolve, business logic changes, and data volume grows, indexing inefficiencies emerge, including the following:
 
@@ -19,9 +19,9 @@ Proactively identifying and optimizing indexes helps:
 - Optimize query execution: efficient indexes reduce the number of rows scanned, improving query speed and response times.
 - Streamline database management: fewer and well-optimized indexes simplify backups, recovery, and schema changes.
 
-TiDB v8.0.0 introduces the [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md) table and the [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) table to help you track index usage patterns and make data-driven decisions. 
-
 Because indexes evolve with changing business logic, regular index audits are a standard part of database maintenance. TiDB provides built-in observability tools to help you detect, evaluate, and optimize indexes without risk.
+
+TiDB v8.0.0 introduces the [`INFORMATION_SCHEMA.TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md) table and the [`mysql.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) table to help you track index usage patterns and make data-driven decisions. 
 
 This document describes the tools that you can use to detect and eliminate unused or inefficient indexes, thus improving TiDB's performance and stability.
 
@@ -36,8 +36,8 @@ Indexes are essential for query performance, but removing them without proper an
 
 TiDB simplifies index optimization by introducing the following powerful tools:
 
-- `TIDB_INDEX_USAGE`: monitors index usage patterns and query frequency.
-- `schema_unused_indexes`: lists indexes that have not been used since the database is last restarted.
+- `INFORMATION_SCHEMA.TIDB_INDEX_USAGE`: monitors index usage patterns and query frequency.
+- `mysql.schema_unused_indexes`: lists indexes that have not been used since the database is last restarted.
 - Invisible indexes: allows you to test the impact of removing an index before permanently deleting it.
 
 By using these observability tools, you can confidently clean up redundant indexes without risking performance degradation.
@@ -164,7 +164,7 @@ Because this system table consolidates data from multiple nodes, consider the fo
 
 - Delayed data updates
 
-    The data is refreshed periodically to minimize performance impact. If index usage is analyzed immediately after a query execution, allow some time for the metrics to update.
+    To minimize performance impact, `CLUSTER_TIDB_INDEX_USAGE` does not update instantly. Index usage metrics might be delayed by up to 5 minutes. Take this delay into consideration when you analyze queries.
 
 - Memory-based storage
 
@@ -226,7 +226,7 @@ You can use [invisible indexes](#safely-test-index-removal-with-invisible-indexe
 
 ### Manually create the `schema_unused_indexes` view
 
-Because `TIDB_INDEX_USAGE` is cleared after a TiDB node restarts, ensure that the node has been running for a sufficient amount of time before making decisions. For clusters upgraded from an earlier version to TiDB v8.0.0 or later, you must manually create the system schema and the included views. 
+For clusters upgraded from an earlier version to TiDB v8.0.0 or later, you must manually create the system schema and the included views. 
 
 For more information, see [Manually create the `schema_unused_indexes` view](/sys-schema/sys-schema-unused-indexes.md#manually-create-the-schema_unused_indexes-view). 
 
