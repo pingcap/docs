@@ -27,7 +27,7 @@ Ensure that your TiDB cluster can connect to the Apache Kafka service. Currently
 
 > **Note:**
 >
-> If you want to expose your Apache Kafka through a more secure method, such as private link or VPC peering, please contact us for help. To request it, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for TiDB Cloud Serverless database audit logging" in the **Description** field and click **Submit**.
+> If you want to expose your Apache Kafka through a more secure method, such as private link or VPC peering, please contact us for help. To request it, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in your request in the **Description** field and click **Submit**.
 
 
 To enable public IP access to your Apache Kafka service, assign public IP addresses to all Kafka brokers.
@@ -196,6 +196,10 @@ The main configuration fields are as follows:
     - `CANAL_JSON`: Canal-JSON is a plain JSON text format, which is easy to parse. For more information, see [Canal-JSON data format](https://docs.pingcap.com/tidb/stable/ticdc-canal-json).
     - `OPEN_PROTOCOL`: Open Protocol is a row-level data change notification protocol that provides data sources for monitoring, caching, full-text indexing, analysis engines, and primary-secondary replication between different databases. For more information, see [Open Protocol data format](https://docs.pingcap.com/tidb/stable/ticdc-open-protocol).
 
+> Note
+>
+> If you use `AVRO` data format, only `BY_TABLE` dispatch type is supported.
+
 - `data_format.enable_tidb_extension`: controls whether to include TiDB-specific extension fields in Kafka messages when using the `AVRO` or `CANAL_JSON` format.
 
     For more information about TiDB extension fields, see [TiDB extension fields in Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol#tidb-extension-fields) and [TiDB extension fields in Canal-JSON data format](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field).
@@ -226,10 +230,6 @@ The main configuration fields are as follows:
 
         If you want the changefeed to create one Kafka topic for all changelogs, set `dispatch_type` to `ONE_TOPIC`. Then, all Kafka messages in the changefeed will be sent to one Kafka topic. You can define the topic name in the `default_topic` field.
 
-> Note
->
-> If you use `AVRO` data format, only `BY_TABLE` dispatch type is supported.
-
 - `topic_partition_config.replication_factor`: controls how many Kafka brokers each Kafka message is replicated to. The valid value ranges from [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) to the total number of Kafka brokers.
 
 - `topic_partition_config.partition_num`: controls how many partitions exist in a topic. The valid value range is `[1, 10 * the total number of Kafka brokers]`.
@@ -254,7 +254,7 @@ The main configuration fields are as follows:
 
     For more information about the matching rules, see [Partition dispatchers](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-kafka/#partition-dispatchers).
 
-11. **column_selectors**: selects columns from events. TiDB Cloud only sends the data changes related to those columns to the downstream.
+1.  **column_selectors**: selects columns from events. TiDB Cloud only sends the data changes related to those columns to the downstream.
 
     - `matcher`: specifies which tables the column selector applies to. For tables that do not match any rule, all columns are sent.
     - `columns`: specifies which columns of the matched tables will be sent to the downstream.
