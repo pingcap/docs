@@ -38,7 +38,7 @@
 | cache | 缓存 |  |
 | cache miss | 缓存未命中 |  |
 | canary test | 灰度测试 |  |
-| Cartesian product | 笛卡尓积 |  |
+| Cartesian product | 笛卡尔积 |  |
 | case-sensitive | 大小写敏感 |  |
 | certificate signing request (CSR) | 证书签名请求 |  |
 | Cost-Based Optimization (CBO) | 基于代价的优化 |  |
