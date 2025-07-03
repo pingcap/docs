@@ -15,7 +15,7 @@ TiFlash is incompatible with TiDB in the following situations:
     * Currently, TiFlash's decimal division calculation is incompatible with that of TiDB. For example, when dividing decimal, TiFlash performs the calculation always using the type inferred from the compiling. However, TiDB performs this calculation using a type that is more precise than that inferred from the compiling. Therefore, some SQL statements involving the decimal division return different execution results when executed in TiDB + TiKV and in TiDB + TiFlash. For example:
 
         ```sql
-        mysql> CREATE TABLE t (a decimal(3,0), b decimal(10, 0));
+        mysql> CREATE TABLE t (a DECIMAL(3,0), b DECIMAL(10, 0));
         Query OK, 0 rows affected (0.07 sec)
         mysql> INSERT INTO t VALUES (43, 1044774912);
         Query OK, 1 row affected (0.03 sec)
@@ -36,4 +36,4 @@ TiFlash is incompatible with TiDB in the following situations:
         Empty set (0.01 sec)
         ```
 
-        In the example above, `a/b`'s inferred type from the compiling is `DECIMAL(7,4)` both in TiDB and in TiFlash. Constrained by `DECIMAL(7,4)`, `a/b`'s returned type should be `0.0000`. In TiDB, `a/b`'s runtime precision is higher than `DECIMAL(7,4)`, so the original table data is not filtered by the `WHERE a/b` condition. However, in TiFlash, the calculation of `a/b` uses `DECIMAL(7,4)` as the result type, so the original table data is filtered by the `WHERE a/b` condition.
+        In the preceding example, `a/b`'s inferred type from the compiling is `DECIMAL(7,4)` both in TiDB and in TiFlash. Constrained by `DECIMAL(7,4)`, `a/b`'s returned type is `0.0000`. In TiDB, `a/b`'s runtime precision is higher than `DECIMAL(7,4)`, so the original table data is not filtered by the `WHERE a/b` condition. However, in TiFlash, the calculation of `a/b` uses `DECIMAL(7,4)` as the result type, so the original table data is filtered by the `WHERE a/b` condition.
