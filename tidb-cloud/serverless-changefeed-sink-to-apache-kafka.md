@@ -74,9 +74,6 @@ ticloud serverless changefeed template --explain
 
 The following is an example `filter` configuration:
 
-<details>
-<summary>Example filter configuration</summary>
-
 ```json
 {
   "filterRule": ["test.t1", "test.t2"],
@@ -89,7 +86,6 @@ The following is an example `filter` configuration:
   ]
 }
 ```
-</details>
 
 - `filterRule`: filters the tables to replicate. For the detailed rule syntax, see [Table Filter](https://docs.pingcap.com/tidb/stable/table-filter/).
 - `eventFilterRule`: filters specific events for the matched tables. You can use the `matcher` field to specify the target tables, and use the `ignore_event` field to list the event types to skip. For supported event types, see [Event filter rules](https://docs.pingcap.com/tidb/stable/ticdc-filter/#event-filter-rules).
@@ -114,9 +110,6 @@ ticloud serverless changefeed template --explain
 ```
 
 The following is an example `kafka` configuration:
-
-<details>
-<summary>Example kafka configuration</summary>
 
 ```json
 {
@@ -175,7 +168,6 @@ The following is an example `kafka` configuration:
         }]
 }
 ```
-</details>
 
 The main configuration fields are as follows:
 
@@ -195,10 +187,6 @@ The main configuration fields are as follows:
     - `AVRO`: Avro is a compact, fast, and binary data format with rich data structures, which is widely used in various flow systems. For more information, see [Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol).
     - `CANAL_JSON`: Canal-JSON is a plain JSON text format, which is easy to parse. For more information, see [Canal-JSON data format](https://docs.pingcap.com/tidb/stable/ticdc-canal-json).
     - `OPEN_PROTOCOL`: Open Protocol is a row-level data change notification protocol that provides data sources for monitoring, caching, full-text indexing, analysis engines, and primary-secondary replication between different databases. For more information, see [Open Protocol data format](https://docs.pingcap.com/tidb/stable/ticdc-open-protocol).
-
-> Note
->
-> If you use `AVRO` data format, only `BY_TABLE` dispatch type is supported.
 
 - `data_format.enable_tidb_extension`: controls whether to include TiDB-specific extension fields in Kafka messages when using the `AVRO` or `CANAL_JSON` format.
 
