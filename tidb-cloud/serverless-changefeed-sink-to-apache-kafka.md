@@ -208,21 +208,21 @@ The main configuration fields are as follows:
 
         For more information about the Avro configurations, see [Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol).
 
-7. **topic_partition_config.dispatch_type**: Support `ONE_TOPIC`, `BY_TABLE` and `BY_DATABASE`. Controls how the changefeed creates Kafka topics, by table, by database, or creating one topic for all changelogs.
+- `topic_partition_config.dispatch_type`: controls how the changefeed creates Kafka topics. Support values: `ONE_TOPIC`, `BY_TABLE`, or `BY_DATABASE`. If you use the `AVRO` data format, only the `BY_TABLE` dispatch type is supported.
 
-    - **Distribute changelogs by table to Kafka Topics**
+    - `BY_TABLE`: distributes changelogs by table to Kafka topics.
 
-        If you want the changefeed to create a dedicated Kafka topic for each table, set `dispatch_type` to `BY_TABLE`. Then, all Kafka messages of a table are sent to a dedicated Kafka topic. You can customize topic names for tables by setting a `topic_prefix`, a `separator` and between a database name and table name, and a `topic_suffix`. For example, if you set the separator as `_`, the topic names are in the format of `<Prefix><DatabaseName>_<TableName><Suffix>`.
+        If you want the changefeed to create a dedicated Kafka topic for each table, set `dispatch_type` to `BY_TABLE`. Then, all Kafka messages of a table are sent to a dedicated Kafka topic. You can customize topic names for tables by setting a `topic_prefix`, a `separator` between a database name and table name, and a `topic_suffix`. For example, if you set the separator as `_`, the topic names are in the format of `<Prefix><DatabaseName>_<TableName><Suffix>`.
 
         For changelogs of non-row events, such as Create Schema Event, you can specify a topic name in the `default_topic` field. The changefeed will create a topic accordingly to collect such changelogs.
 
-    - **Distribute changelogs by database to Kafka Topics**
+    - `BY_DATABASE`: distributes changelogs by database to Kafka topics.
 
         If you want the changefeed to create a dedicated Kafka topic for each database, set `dispatch_type` to `BY_DATABASE`. Then, all Kafka messages of a database are sent to a dedicated Kafka topic. You can customize topic names of databases by setting a `topic_prefix` and a `topic_suffix`.
 
         For changelogs of non-row events, such as Resolved Ts Event, you can specify a topic name in the `default_topic` field. The changefeed will create a topic accordingly to collect such changelogs.
 
-    - **Send all changelogs to one specified Kafka Topic**
+    - `ONE_TOPIC`: sends all changelogs to one specified Kafka topic.
 
         If you want the changefeed to create one Kafka topic for all changelogs, set `dispatch_type` to `ONE_TOPIC`. Then, all Kafka messages in the changefeed will be sent to one Kafka topic. You can define the topic name in the `default_topic` field.
 
