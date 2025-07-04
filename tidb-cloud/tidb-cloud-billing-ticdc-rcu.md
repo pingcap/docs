@@ -8,7 +8,7 @@ aliases: ['/tidbcloud/tidb-cloud-billing-tcu']
 
 > **Note:**
 >
-> This document is only applicable to [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless), the changefeed feature is currently in beta and available for free.
+> This document is only applicable to TiDB Cloud Dedicated. For TiDB Cloud Serverless, the [changefeed](/tidb-cloud/serverless-changefeed-overview.md) feature is currently in beta and available for free.
 
 ## RCU cost
 
