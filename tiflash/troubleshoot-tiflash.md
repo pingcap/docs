@@ -230,10 +230,10 @@ After deploying a TiFlash node and starting replication by executing `ALTER TABL
 
 2. Check whether TiFlash Region replication runs correctly.
 
-   Check whether there is any change in `progress` of `information_schema.tiflash_replica`. Alternatively, you can check the `progress` field with the keyword `Tiflash replica is not available` in TiDB logging:
+   Query the [`information_schema.tiflash_replica`](/information-schema/information-schema-tiflash-replica.md) table to check whether the `PROGRESS` field, which indicates the TiFlash replica synchronization progress, is changing. Alternatively, search for the keywords `Tiflash replica is not available` in the `tidb.log` to review related logs and the corresponding `progress` values.
 
-   - If changes are detected, it indicates TiFlash replication is functioning normally (though potentially at a slower pace). Refer to [Data replication is slow](#data-replication-is-slow) for optimization configurations.
-   - If no, TiFlash replication is abnormal. Go to the next step.
+   - If the replication progress changes, it indicates TiFlash replication is functioning normally, but potentially at a slow pace. Refer to [Data replication is slow](#data-replication-is-slow) for optimization configurations.
+   - If the replication progress does not change, TiFlash replication is abnormal. Go to the next step.
 
 3. Check whether TiDB has successfully created any placement rule for the table.
 
