@@ -134,7 +134,7 @@ SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>
 
 </CustomContent>
 
-The TiDB cluster triggers the TiFlash replica replication process when the following operations are performed:
+The TiDB cluster triggers the TiFlash replica replication process when either of the following operations is performed:
 
 * TiFlash replicas for a table are added.
 * When a new TiFlash instance is added, PD moves the TiFlash replicas to the new TiFlash instance.
@@ -153,7 +153,7 @@ The TiKV instance performs a table scan and sends the scanned data to TiFlash as
 
 2. Use [PD Control](https://docs.pingcap.com/tidb/stable/pd-control) to progressively ease the replica scheduling speed limit.
 
-    The default new replica speed limit is 30, which means, approximately 30 Regions add or remove TiFlash replicas on one TiFlash instance every minute. Executing the following command will adjust the limit to 60 for all TiFlash instances, which doubles the original speed:
+    The default new replica speed limit is 30, which means approximately 30 Regions add or remove TiFlash replicas on one TiFlash instance every minute. Executing the following command will adjust the limit to 60 for all TiFlash instances, which doubles the original speed:
 
     ```shell
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 add-peer

@@ -10,11 +10,11 @@ This section describes some commonly encountered issues when using TiFlash, the 
 
 ## TiFlash fails to start
 
-The issue might occur due to different reasons. It is recommended that you troubleshoot it as follows:
+TiFlash might fail to start properly due to various reasons. You can troubleshoot the issue step by step using the following approach:
 
 1. Check whether your system is CentOS 8.
 
-    CentOS 8 does not have the `libnsl.so` system library. You can manually install it using the following command:
+    CentOS 8 does not include the libnsl.so system library by default, which might cause TiFlash to fail to start. You can install it manually using the following command:
 
     ```shell
     dnf install libnsl
@@ -28,11 +28,11 @@ The issue might occur due to different reasons. It is recommended that you troub
 
 3. Use the PD Control tool to check whether there is any TiFlash instance that failed to go offline on the node (same IP and Port) and force the instance(s) to go offline. For detailed steps, refer to [Scale in a TiFlash cluster](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster).
 
-4. Check whether the CPU supports SIMD instructions
+4. Check whether the CPU supports SIMD instructions.
 
     Starting from v6.3, deploying TiFlash on Linux AMD64 architecture requires a CPU that supports the AVX2 instruction set. Verify this by ensuring that `grep avx2 /proc/cpuinfo` produces output. For Linux ARM64 architecture, the CPU must support the ARMv8 instruction set architecture. Verify this by ensuring that `grep 'crc32' /proc/cpuinfo | grep 'asimd'` produces output.
 
-    If you encounter this issue when deploying on a virtual machine, try changing the VM's CPU architecture to "Haswell" and then redeploy TiFlash.
+    If you encounter this issue when deploying on a virtual machine, try changing the VM's CPU architecture to Haswell and then redeploy TiFlash.
 
 If the preceding methods cannot resolve your issue, collect the TiFlash log files and [get support](/support.md) from PingCAP or the community.
 
@@ -145,7 +145,7 @@ After the TiDB cluster is deployed, if the TiFlash replicas consistently fail to
     - If `true` is returned, go to the next step.
     - If `false` is returned, [enable the Placement Rules feature](/configure-placement-rules.md#enable-placement-rules) and go to the next step.
 
-2. Check whether the TiFlash process is working normally by the `UpTime` on the TiFlash-Summary Grafana panel.
+2. Check whether the TiFlash process is working normally by the **UpTime** on the **TiFlash-Summary** Grafana panel.
 
 3. Check whether the connection between TiFlash and PD is normal.
 
@@ -161,8 +161,8 @@ After the TiDB cluster is deployed, if the TiFlash replicas consistently fail to
     tiup ctl:nightly pd -u http://${pd-ip}:${pd-port} config placement-rules show | grep -C 10 default
     ```
 
-    - If the value of `count` does not exceed the number of TiKV nodes in the cluster, go to the next step.
-    - If the value of `count` is greater than the number of TiKV nodes in the cluster. For example, if there is only one TiKV node in the testing cluster while the count is `3`, then PD will not add any Region peer to the TiFlash node. To address this issue, change `count` to an integer smaller than or equal to the number of TiKV nodes in the cluster.
+    - If the value of `count` is smaller than or equal to the number of TiKV nodes in the cluster, go to the next step.
+    - If the value of `count` is greater than the number of TiKV nodes in the cluster. For example, if there is only one TiKV node in the testing cluster while the `count` is `3`, then PD will not add any Region peer to the TiFlash node. To address this issue, change `count` to an integer smaller than or equal to the number of TiKV nodes in the cluster.
 
     > **Note:**
     >
@@ -182,7 +182,9 @@ After the TiDB cluster is deployed, if the TiFlash replicas consistently fail to
         }' <http://172.16.x.xxx:2379/pd/api/v1/config/rule>
     ```
 
-5. Check the remaining disk space percentage on the TiFlash nodes. The default value of [`low-space-ratio`](/pd-configuration-file.md#low-space-ratio) is `0.8`, meaning that when a node's used space exceeds 80% of its capacity, PD will avoid migrating Regions to that node to prevent disk space exhaustion. If all TiFlash nodes have insufficient remaining space, PD will stop scheduling new Region peers to TiFlash, causing replicas to remain in an unavailable state (that is, progress < 1).
+5. Check the remaining disk space percentage on the TiFlash nodes. 
+
+    When the disk usage of a TiFlash node exceeds the [`low-space-ratio`](/pd-configuration-file.md#low-space-ratio) setting (default: `0.8`), PD stops scheduling new data to that node to prevent disk exhaustion. If all TiFlash nodes have insufficient free disk space, PD cannot schedule new Region peers to TiFlash, causing replicas to remain unavailable (that is, progress < 1).
 
     - If the disk usage reaches or exceeds `low-space-ratio`, it indicates insufficient disk space. In this case, take one or more of the following actions:
 
@@ -198,11 +200,22 @@ After the TiDB cluster is deployed, if the TiFlash replicas consistently fail to
 
     - If the disk usage is less that the value of `low-space-ratio`, it indicates normal disk space availability. Proceed to the next step.
 
-6. Check whether there is any `down peer`. Remaining down peers might cause the replication to get stuck.
+6. Check whether there is any `down peer`. 
 
-    Run the `pd-ctl region check-down-peer` command to check whether there is any `down peer`. If any, run the `pd-ctl operator add remove-peer <region-id> <tiflash-store-id>` command to remove it.
+    Remaining down peers might cause the replication to get stuck. Run the following command to check whether there is any `down peer`. 
+    
+    ```shell
+    pd-ctl region check-down-peer
+    ```
+    
+    If any, run the following command to remove it.
 
-If all the preceding configurations or TiFlash status are normal, follow the instructions in [Data is not replicated to TiFlash](#data-is-not-replicated-to-tiflash) to identify which component or data replication process is experiencing issues.
+    ```shell
+    pd-ctl operator add remove-peer <region-id> <tiflash-store-id>
+    ```
+
+If all the preceding checks pass but the issue persists, follow the instructions in [Data is not replicated to TiFlash](#data-is-not-replicated-to-tiflash) to identify which component or data replication process is experiencing issues.
+
 
 ## Data is not replicated to TiFlash
 
@@ -224,24 +237,31 @@ After deploying a TiFlash node and starting replication by executing `ALTER TABL
 
 3. Check whether TiDB has successfully created any placement rule for the table.
 
-    Search the logs of TiDB DDL Owner and check whether TiDB has notified PD to add placement rules. For non-partitioned tables, search `ConfigureTiFlashPDForTable`. For partitioned tables, search `ConfigureTiFlashPDForPartitions`.
+    Search the logs of TiDB DDL Owner and check whether TiDB has notified PD to add placement rules. 
+    
+    - For non-partitioned tables, search `ConfigureTiFlashPDForTable`. 
+    - For partitioned tables, search `ConfigureTiFlashPDForPartitions`.
 
     - If the keyword is found, go to the next step.
-    - If not found, collect logs of the corresponding component for troubleshooting.
+    - If not found, collect logs of the corresponding component to [get support](/support.md).
 
 4. Check whether PD has configured any placement rule for tables.
 
-    Run the `curl http://<pd-ip>:<pd-port>/pd/api/v1/config/rules/group/tiflash` command to view all TiFlash placement rules on the current PD.
+    Run the following command to view all TiFlash placement rules on the current PD.
+    
+    ```shell
+    `curl http://<pd-ip>:<pd-port>/pd/api/v1/config/rules/group/tiflash`
+    ````
 
-    - If a rule with the ID being `table-<table_id>-r` is found, the PD has configured a placement rule successfully. Go to the next step.
-    - If not found, collect logs of the corresponding component for troubleshooting.
+    - If a rule with the ID format `table-<table_id>-r` exists, the PD has configured a placement rule successfully. Go to the next step.
+    - If such a rule does not exist, collect logs of the corresponding component to [get support](/support.md).
 
 5. Check whether the PD schedules properly.
 
-    Search the `pd.log` file for the `table-<table_id>-r` keyword and scheduling behaviors like `add operator`. Alternatively, check whether there are `add-rule-peer` operator on the "Operator/Schedule operator create" of PD Dashboard on Grafana. You can also check the value "Scheduler/Patrol Region time" on the PD Dashboard on Grafana. "Patrol Region time" reflects the duration for PD to scan all Regions and generate scheduling operations. A high value might cause delays in scheduling.
+    Search the `pd.log` file for the `table-<table_id>-r` keyword and scheduling logs like `add operator`. Alternatively, check whether there are `add-rule-peer` operator on the **Operator/Schedule operator create** of PD Dashboard on Grafana. You can also check the value **Scheduler/Patrol Region time** on the PD Dashboard on Grafana. **Patrol Region time** reflects the duration for PD to scan all Regions and generate scheduling operations. A high value might cause delays in scheduling.
 
-    - If the `pd.log` contains the keyword `table-<table_id>-r` along with `add operator` scheduling actions, or if the duration values on the "Scheduler/Patrol Region time" panel appear normal, it indicates that PD scheduling is functioning properly.
-    - If no `add-rule-peer` scheduling operations are running, or the **Patrol Region time** is more than 30 minutes, the PD does not schedule properly or is scheduling slowly.
+    - If the `pd.log` contains the keyword `table-<table_id>-r` along with `add operator` scheduling logs, or if the duration values on the **Scheduler/Patrol Region time** panel appear normal, it indicates that PD scheduling is functioning properly.
+    - If no `add-rule-peer` scheduling logs are found, or the **Patrol Region time** is more than 30 minutes, the PD does not schedule properly or is scheduling slowly. Collect the TiDB, PD, and TiFlash log files to [get support](/support.md).
 
 If the preceding methods cannot resolve your issue, collect the TiDB, PD, and TiFlash log files, and [get support](/support.md) from PingCAP or the community.
 
