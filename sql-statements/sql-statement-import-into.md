@@ -337,7 +337,7 @@ IMPORT INTO t FROM 's3://bucket/path/to/file.parquet?access-key=XXX&secret-acces
 
 If you are importing data with DXF and  Global Sort enabled, you can configure `MAX_WRITE_SPEED` as follows to mitigate the impact:
 
-1. Import a small dataset with unlimited speed. You can monitor the average import speed through Grafana: **TiDB** > **Import Into** > **Total encode/deliver/import-kv speed** > **Import KV**.
+1. Import a small dataset with unlimited speed, and monitor the average import speed through Grafana: **TiDB** > **Import Into** > **Total encode/deliver/import-kv speed** > **Import KV**.
 2. Calculate the upper limit of `MAX_WRITE_SPEED` using the following formula:
     - `MAX_WRITE_SPEED` = (Import speed) x (Number of Replicas) / (Number of TiDB nodes) / min(Number of TiKV nodes, THREAD)
 3. Set `MAX_WRITE_SPEED` to a value lower than the calculated result (for example, 4 to 8 times lower) to ensure workload performance.
