@@ -40,9 +40,9 @@ Consider an application that handles both transaction and BI workloads. To preve
 1. Set [`balance.label-name`](/tiproxy/tiproxy-configuration.md#label-name) to `"app"` in TiProxy, indicating that TiDB servers will be matched by the label name `"app"`, and connections will be routed to TiDB servers with matching label values.
 2. Deploy at least two TiProxy instances. Configure the TiProxy instance used for transactional workloads with [`labels`](/tiproxy/tiproxy-configuration.md#labels) as `{"app": "Order"}`, and the instance used for BI workloads with [`labels`](/tiproxy/tiproxy-configuration.md#labels) as `{"app": "BI"}`.
 3. Optional: For high availability, deploy at least four TiProxy instances, and configure different virtual IP addresses for different workloads. For example, configure two TiProxy instances used for transactional workloads with the virtual IP `10.0.1.10/24`, and two instances for BI workloads with the virtual IP `10.0.1.20/24`. This feature requires TiProxy v1.3.1 or later.
-4. Divide TiDB instances into two groups and configure their [`labels`](/tidb-configuration-file.md#labels). Add `app: "Order"` for one group and `app: "BI"` for the other.
+4. Divide TiDB instances into two groups and configure their [`labels`](/tidb-configuration-file.md#labels). Add the `"app": "Order"` label for one group and the `"app": "BI"` label for the other.
 5. Optional: For storage layer isolation, configure [Placement Rules](/configure-placement-rules.md) or [Resource Control](/tidb-resource-control-ru-groups.md).
-6. Direct transaction and BI clients to connect to their respective virtual IP addresses.
+6. If virtual IP is configured, the transaction and BI clients connect to 2 virtual IP addresses respectively. If virtual IP is not configured, the transaction and BI clients connect to 2 TiProxy addresses respectively.
 
 <img src="https://docs-download.pingcap.com/media/images/docs/tiproxy/tiproxy-balance-label-v2.png" alt="Label-based Load Balancing" width="600" />
 
