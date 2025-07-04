@@ -136,7 +136,7 @@ High availability configurations for TiProxy.
 
 + Default value: `""`
 + Support hot-reload: no
-+ Specifies the virtual IP address in the CIDR format, such as `"10.0.1.10/24"`. In a cluster with multiple TiProxy instances, only one instance binds to the virtual IP. If this instance goes offline, another TiProxy instance will automatically bind to the IP, ensuring clients can always connect to an available TiProxy through the virtual IP.
++ Specifies the virtual IP address in the CIDR format, such as `"10.0.1.10/24"`. When you configure multiple TiProxy instances in a cluster with the same virtual IP, only one instance binds to it at a time. If this instance goes offline, another TiProxy instance automatically takes over the virtual IP. This ensures that clients can always connect to an available TiProxy through the virtual IP.
 
 The following is an example configuration:
 
@@ -147,11 +147,13 @@ server_configs:
     ha.interface: "eth0"
 ```
 
+Starting from v1.3.1, TiProxy supports configuring multiple virtual IP addresses. When you need to isolate computing layer resources, you can configure multiple virtual IP addresses and use [label-based load balancing](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing) in combination. For an example configuration, see [label-based load balancing](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing).
+
 > **Note:**
 >
 > - Virtual IP is only supported on Linux operating systems.
 > - The Linux user running TiProxy must have permission to bind IP addresses.
-> - The virtual IP and the IPs of all TiProxy instances must be within the same CIDR range.
+> - The real and virtual IP addresses of one TiProxy instance must be within the same CIDR range.
 
 #### `interface`
 
