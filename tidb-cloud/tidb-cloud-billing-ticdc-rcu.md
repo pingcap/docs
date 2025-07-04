@@ -6,6 +6,10 @@ aliases: ['/tidbcloud/tidb-cloud-billing-tcu']
 
 # Changefeed Billing
 
+> **Note:**
+>
+> This document is only applicable to [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless), the changefeed feature is currently in beta and available for free.
+
 ## RCU cost
 
 TiDB Cloud measures the capacity of [changefeeds](/tidb-cloud/changefeed-overview.md) in TiCDC Replication Capacity Units (RCUs). When you [create a changefeed](/tidb-cloud/changefeed-overview.md#create-a-changefeed) for a cluster, you can select an appropriate specification. The higher the RCU, the better the replication performance. You will be charged for these TiCDC changefeed RCUs.

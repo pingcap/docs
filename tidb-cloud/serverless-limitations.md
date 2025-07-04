@@ -45,7 +45,7 @@ We are constantly filling in the feature gaps between TiDB Cloud Serverless and 
 
 ### Stream data
 
-- [Changefeed](/tidb-cloud/changefeed-overview.md) is not supported for TiDB Cloud Serverless currently.
+- You can manage changefeeds for TiDB Cloud Serverless only with [TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md) currently.
 - [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) is not supported for TiDB Cloud Serverless currently.
 
 ### Time to live (TTL)
