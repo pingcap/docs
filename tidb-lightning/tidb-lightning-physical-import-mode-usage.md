@@ -206,7 +206,7 @@ By default, TiDB Lightning pauses the cluster scheduling for the minimum range p
 
 ```toml
 [tikv-importer]
-# Limits the bandwidth to write data into TiKV for each TiDB Lightning instance in the physical import mode.
+# Limits the total write bandwidth from each TiDB Lightning instance to TiKV in the physical import mode.
 store-write-bwlimit = "128MiB"
 
 [tidb]
