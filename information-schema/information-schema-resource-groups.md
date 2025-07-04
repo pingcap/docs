@@ -73,7 +73,7 @@ SELECT * FROM information_schema.resource_groups WHERE NAME = 'rg1'; -- View the
 +------+------------+----------+-----------+-------------+------------+
 | NAME | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT | BACKGROUND |
 +------+------------+----------+-----------+-------------+------------+
-| rg1  | 1000       | MEDIUM   | NO        | NULL        | NULL       |
+| rg1  | 1000       | MEDIUM   | OFF       | NULL        | NULL       |
 +------+------------+----------+-----------+-------------+------------+
 1 row in set (0.00 sec)
 ```
