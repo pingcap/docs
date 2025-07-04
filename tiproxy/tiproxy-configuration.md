@@ -147,7 +147,7 @@ server_configs:
     ha.interface: "eth0"
 ```
 
-Only v1.3.1 and later versions support configuring multiple virtual IP addresses. When you need to isolate computing layer resources, you can configure multiple virtual IP addresses and use [label-based load balancing](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing) in combination. For an example, see [label-based load balancing](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing).
+Starting from v1.3.1, TiProxy supports configuring multiple virtual IP addresses. When you need to isolate computing layer resources, you can configure multiple virtual IP addresses and use [label-based load balancing](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing) in combination. For an example configuration, see [label-based load balancing](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing).
 
 > **Note:**
 >
