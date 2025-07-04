@@ -327,10 +327,10 @@
   - [Data App Configuration Files](/tidb-cloud/data-service-app-config-files.md)
   - [Response and Status Code](/tidb-cloud/data-service-response-and-status-code.md)
 - Stream Data
-  - TiDB Cloud Serverless
+  - TiDB Cloud Serverless Changefeeds ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [Changefeed Overview](/tidb-cloud/serverless-changefeed-overview.md)
     - [To Kafka Sink](/tidb-cloud/serverless-changefeed-sink-to-apache-kafka.md)
-  - TiDB Cloud Dedicated
+  - TiDB Cloud Dedicated Changefeeds
     - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
     - [To MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
     - [To Kafka Sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
