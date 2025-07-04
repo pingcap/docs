@@ -280,7 +280,7 @@ The `security` section specifies certificates and keys for TLS connections withi
 
 #### `store-write-bwlimit`
 
-- Limits the total write bandwidth from each TiDB Lightning instance to TiKV in the physical import mode.
+- Limits the write bandwidth from each TiDB Lightning instance to TiKV in the physical import mode.
 - Default value: `0`, which means no limit.
 
 #### `disk-quota`

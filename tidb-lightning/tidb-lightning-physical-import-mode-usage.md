@@ -57,7 +57,7 @@ duplicate-resolution = 'none'
 # The directory of local KV sorting.
 sorted-kv-dir = "./some-dir"
 
-# Limits the bandwidth to write data into TiKV for each TiDB Lightning instance
+# Limits the write bandwidth from each TiDB Lightning instance to TiKV
 # in the physical import mode.
 # store-write-bwlimit = "128MiB"
 
