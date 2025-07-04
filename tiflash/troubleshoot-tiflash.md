@@ -216,7 +216,6 @@ After the TiDB cluster is deployed, if the TiFlash replicas consistently fail to
 
 If all the preceding checks pass but the issue persists, follow the instructions in [Data is not replicated to TiFlash](#data-is-not-replicated-to-tiflash) to identify which component or data replication process is experiencing issues.
 
-
 ## Data is not replicated to TiFlash
 
 After deploying a TiFlash node and starting replication by executing `ALTER TABLE ... SET TIFLASH REPLICA ...`, no data is replicated to it. In this case, you can identify and address the problem by performing the following steps:
