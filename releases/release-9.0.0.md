@@ -98,11 +98,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
 ### Performance
 
-* Optimize performance for creating databases, tables, and adding columns in scenarios with foreign keys [#61126](https://github.com/pingcap/tidb/issues/61126) @[GMHDBJD](https://github.com/GMHDBJD) @[River2000i](https://github.com/River2000i) **tw@hfxsd** <!--1896 beta.2-->
+* Optimize performance for creating databases, tables, and adding columns in scenarios involving tables with foreign keys [#61126](https://github.com/pingcap/tidb/issues/61126) @[GMHDBJD](https://github.com/GMHDBJD) @[River2000i](https://github.com/River2000i) **tw@hfxsd** <!--1896 beta.2-->
 
     Before v9.0.0, TiDB encounters significant performance bottlenecks when creating tables with foreign keys in certain SaaS scenarios, especially when the number of tables in a cluster reaches tens of millions. A large number of foreign key relationships further slows down the execution of DDL operations such as `CREATE TABLE` and `ADD COLUMN`.
 
-    Starting from v9.0.0, TiDB optimizes the handling of related metadata, significantly improving DDL performance in scenarios with extremely large table counts. According to internal tests, under idle cluster workload and with a connection to the DDL owner node, the table creation speed can reach up to 126 tables per second, and the average execution speed of the `ADD COLUMN` operation is approximately 45.5 tables per second.
+    Starting from v9.0.0, TiDB optimizes the handling logic of related metadata, significantly improving DDL performance in scenarios with extremely large tables. According to internal tests, under idle cluster workload and with a connection to the DDL owner node, the table creation speed can reach up to 126 tables per second, and the average execution speed of the `ADD COLUMN` operation is approximately 45.5 tables per second.
 
 * In scenarios with hundreds of thousands to millions of users, the performance of creating and modifying users has improved by 77 times [#55563](https://github.com/pingcap/tidb/issues/55563) @[tiancaiamao](https://github.com/tiancaiamao) tw@hfxsd <!--1941-->
 
@@ -181,11 +181,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
 * Introduce a mechanism for detecting connection interruption to automatically terminate running SQL statements on the server side once the client is disconnected [#60685](https://github.com/pingcap/tidb/pull/60685) @[Defined2014](https://github.com/Defined2014) **tw@hfxsd** <!--2060 beta.2-->
 
-    To improve resource utilization and system stability, TiDB v9.0.0 introduces a mechanism for detecting connection interruption. When a client connection is unexpectedly closed, TiDB terminates SQL statements that are still running on that connection, promptly releasing resources and preventing long-running invalid statements from impacting system performance.
+    To improve resource utilization and system stability, TiDB v9.0.0 introduces a mechanism for detecting connection interruption. When a client disconnects unexpectedly, TiDB proactively terminates SQL statements that are still running on that connection, promptly releasing resources and preventing long-running invalid statements from impacting system performance.
 
 * Introduce the table mode to restrict read and write operations during data restore, improving task stability and data consistency [#59008](https://github.com/pingcap/tidb/issues/59008) @[fishiu](https://github.com/fishiu) @[River2000i](https://github.com/River2000i) @[Tristan1900](https://github.com/Tristan1900) @[Leavrth](https://github.com/Leavrth)   **tw@hfxsd** <!--2056 beta.2-->
 
-    TiDB v9.0.0 introduces the table mode to enhance the stability and consistency of backup and restore tasks. When performing snapshot restore or PITR (Point-in-Time Recovery), the table mode of the target table is automatically set to `restore`. In this mode, all user read and write operations on the table are blocked. Once the restore process completes, the table mode automatically switches back to `normal`, allowing regular access to the table. This mechanism ensures greater stability and consistency during data recovery.
+    TiDB v9.0.0 introduces the table mode to enhance the stability and consistency of backup and restore tasks. When performing snapshot restore or PITR (Point-in-Time Recovery), the table mode of the target table is automatically set to `restore`. In this mode, all read and write operations on the table are disallowed. Once the restore process completes, the table mode automatically switches back to `normal`, allowing regular read and write operations. This mechanism ensures greater stability and consistency during data recovery.
 
     For more information, see [Documentation](/br/br-pitr-guide.md).
 
@@ -207,9 +207,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
 ### SQL
 
-* Support the `gb18030` character set and `gb18030_bin` and `gb18030_chinese_ci` collations [#17470](https://github.com/tikv/tikv/issues/17470) [#55791](https://github.com/pingcap/tidb/issues/55791) @[cbcwestwolf](https://github.com/cbcwestwolf) *tw@hfxsd* <!--1962 beta.2-->
+* Support the `gb18030` character set, and `gb18030_bin` and `gb18030_chinese_ci` collations [#17470](https://github.com/tikv/tikv/issues/17470) [#55791](https://github.com/pingcap/tidb/issues/55791) @[cbcwestwolf](https://github.com/cbcwestwolf) *tw@hfxsd* <!--1962 beta.2-->
 
-    Starting from v9.0.0, TiDB supports the `gb18030` character set along with the `gb18030_bin` and `gb18030_chinese_ci` collations, enabling better handling of Chinese-language data storage and query requirements.
+    Starting from v9.0.0, TiDB supports the `gb18030` character set along with the `gb18030_bin` and `gb18030_chinese_ci` collations, improving TiDB's ability to store and query data in Chinese.
 
     - The `gb18030` character set is a widely used standard for Chinese character encoding.
     - The `gb18030_bin` collation provides precise binary-based sorting, while `gb18030_chinese_ci` supports case-insensitive general collation. These two collations offer more flexible and efficient sorting and comparison for text encoded in `gb18030`.
