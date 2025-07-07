@@ -4625,6 +4625,39 @@ SHOW WARNINGS;
 
 </details>
 
+### tidb_opt_risk_eq_skew_ratio <span class="version-mark">New in v9.0.0</span>
+
+**Note:**
+>
+> This TiDB variable is utilized by the TiDB query optimizer, and is not recommended
+> to be adjusted without guidance from TiDB support or engineering.
+
+- Scope: SESSION | GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Float
+- Range: `[0, 1]`
+- Default value: `0`
+- This variable controls the percentage of the risk between the original predicate
+selectivity estimate and the potential skew estimate for an equal predicate, if the
+value is not found in TopN or histogram buckets.
+
+
+### tidb_opt_risk_range_skew_ratio <span class="version-mark">New in v9.0.0</span>
+
+**Note:**
+>
+> This TiDB variable is utilized by the TiDB query optimizer, and is not recommended
+> to be adjusted without guidance from TiDB support or engineering.
+
+- Scope: SESSION | GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Float
+- Range: `[0, 1]`
+- Default value: `0`
+- This variable controls the percentage of the risk between the original predicate
+selectivity estimate and the potential skew estimate for a range predicate, if the
+search range is found within a single histogram bucket.
+
 ### tidb_opt_scan_factor
 
 - Scope: SESSION | GLOBAL
