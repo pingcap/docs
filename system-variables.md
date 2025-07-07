@@ -1307,7 +1307,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Integer
 - Default value: `2`
 - Range: `[0, 2147483647]`
-- This variable is used to increase the weight of the maximum time of TiDB `backoff`, that is, the maximum retry time for sending a retry request when an internal network or other component (TiKV, PD) failure is encountered. This variable can be used to adjust the maximum retry time and the minimum value is 1.
+- This variable is used to increase the weight of the maximum retry wait time of TiDB `backoff`, that is, the maximum retry wait time for sending a retry request when an internal network or other component (TiKV, PD) failure is encountered. This variable can be used to adjust the maximum retry wait time and the minimum value is `1`.
 
     For example, the base retry wait time for TiDB to take KV from TiKV is 15 seconds. When `tidb_backoff_weight = 2`, the maximum retry wait time for taking KV is: *base time \* 2 = 30 seconds*.
 
