@@ -2,8 +2,8 @@ name: JA Translation Cron
 
 on:
   schedule:
-    # every Wednesday at 9:00 AM
-    - cron: "0 9 * * 3"
+    # every Wednesday at 11:00 AM
+    - cron: "0 11 * * 3"
   workflow_dispatch:
 
 env:
