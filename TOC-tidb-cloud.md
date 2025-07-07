@@ -327,12 +327,16 @@
   - [数据应用配置文件](/tidb-cloud/data-service-app-config-files.md)
   - [响应和状态代码](/tidb-cloud/data-service-response-and-status-code.md)
 - 同步数据
-  - [Changefeed 概述](/tidb-cloud/changefeed-overview.md)
-  - [到 MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
-  - [到 Kafka Sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
-  - [到 Pulsar Sink](/tidb-cloud/changefeed-sink-to-apache-pulsar.md)
-  - [到 TiDB Cloud Sink](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
-  - [到云存储](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
+  - TiDB Cloud Serverless Changefeeds
+    - [Changefeed 概述](/tidb-cloud/serverless-changefeed-overview.md)
+    - [同步到 Kafka](/tidb-cloud/serverless-changefeed-sink-to-apache-kafka.md)
+  - TiDB Cloud Dedicated Changefeeds
+    - [Changefeed 概述](/tidb-cloud/changefeed-overview.md)
+    - [同步到 MySQL](/tidb-cloud/changefeed-sink-to-mysql.md)
+    - [同步到 Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
+    - [同步到 Pulsar](/tidb-cloud/changefeed-sink-to-apache-pulsar.md)
+    - [同步到 TiDB Cloud](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
+    - [同步到云存储](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
   - 参考
     - [在 AWS 中设置自托管 Kafka Private Link 服务](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
     - [在 Azure 中设置自托管 Kafka Private Link 服务](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)
