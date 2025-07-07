@@ -1307,11 +1307,19 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Integer
 - Default value: `2`
 - Range: `[0, 2147483647]`
-- This variable is used to increase the weight of the maximum time of TiDB `backoff`, that is, the maximum retry time for sending a retry request when an internal network or other component (TiKV, PD) failure is encountered. This variable can be used to adjust the maximum retry time and the minimum value is 1.
+- This variable is used to increase the weight of the maximum retry wait time of TiDB `backoff`, that is, the maximum retry wait time for sending a retry request when an internal network or other component (TiKV, PD) failure is encountered. This variable can be used to adjust the maximum retry wait time and the minimum value is `1`.
 
-    For example, the base timeout for TiDB to take TSO from PD is 15 seconds. When `tidb_backoff_weight = 2`, the maximum timeout for taking TSO is: *base time \* 2 = 30 seconds*.
+    For example, the base retry wait time for TiDB to take KV from TiKV is 15 seconds. When `tidb_backoff_weight = 2`, the maximum retry wait time for taking KV is: *base time \* 2 = 30 seconds*.
 
     In the case of a poor network environment, appropriately increasing the value of this variable can effectively alleviate error reporting to the application end caused by timeout. If the application end wants to receive the error information more quickly, minimize the value of this variable.
+
+<CustomContent platform="tidb">
+
+> **Note:**
+>
+> This system variable **does not apply** to obtaining TSO requests asynchronously. To adjust the timeout for obtaining TSO, configure the [`pd-server-timeout`](/tidb-configuration-file.md#pd-server-timeout) configuration item.
+
+</CustomContent>
 
 ### tidb_batch_commit
 
