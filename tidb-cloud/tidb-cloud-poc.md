@@ -68,6 +68,14 @@ To create a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud
     Once you submit the form, the TiDB Cloud Support team will review your application, contact you, and transfer credits to your account once the application is approved. You can also contact a PingCAP support engineer to assist with your PoC procedures to ensure the PoC runs as smoothly as possible.
 
 2. Refer to [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md) to create a TiDB Cloud Dedicated cluster for the PoC.
+   > **Note:**
+   >
+   > Before creating a TiDB Cloud Dedicated cluster, you must add one of the following payment methods:
+   >   - Credit Card
+   >   - Wire Transfer
+   >   - Marketplace (e.g., AWS Marketplace, Azure Marketplace, Google Cloud Marketplace)
+   >     
+   > PoC Credits will automatically offset eligible expenses incurred during the PoC period.
 
 Capacity planning is recommended for cluster sizing before you create a cluster. You can start with estimated numbers of TiDB, TiKV, or TiFlash nodes, and scale out the cluster later to meet performance requirements. You can find more details in the following documents or consult our support team.
 
