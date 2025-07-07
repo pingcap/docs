@@ -702,6 +702,14 @@ Configuration items related to opentracing.reporter.
 + The address at which the reporter sends spans to the jaeger-agent.
 + Default value: `""`
 
+## pd-client
+
+### `pd-server-timeout`
+
++ The timeout for TiDB to send requests to PD nodes via the PD client.
++ Default value: 3
++ Unit: second
+
 ## tikv-client
 
 ### `grpc-connection-count`
