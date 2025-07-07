@@ -4652,8 +4652,8 @@ value is not found in TopN or histogram buckets.
 - Type: Float
 - Range: `[0, 1]`
 - Default value: `0`
-- This variable controls the percentage of the risk between the original predicate
-selectivity estimate and the potential skew estimate for a range predicate, if the
+- This variable controls the ratio of risk between the original predicate
+selectivity estimate and the potential skew estimate for a range predicate, when the
 search range is found within a single histogram bucket.
 
 ### tidb_opt_scan_factor
