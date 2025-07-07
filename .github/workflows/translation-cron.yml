@@ -11,12 +11,12 @@ env:
   CLOUD_BRANCH: i18n-ja-release-8.1
 
 jobs:
-  dispatch-translation-ai:
+  dispatch-translation-zh:
     runs-on: ubuntu-latest
     continue-on-error: true
 
     steps:
-      - name: Dispatch translation-ai workflow
+      - name: Dispatch translation-zh workflow
         run: |
           curl \
           -X POST \
