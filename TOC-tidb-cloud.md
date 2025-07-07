@@ -327,7 +327,7 @@
   - [数据应用配置文件](/tidb-cloud/data-service-app-config-files.md)
   - [响应和状态代码](/tidb-cloud/data-service-response-and-status-code.md)
 - 同步数据
-  - TiDB Cloud Serverless Changefeeds
+  - TiDB Cloud Serverless Changefeeds ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [Changefeed 概述](/tidb-cloud/serverless-changefeed-overview.md)
     - [同步到 Kafka](/tidb-cloud/serverless-changefeed-sink-to-apache-kafka.md)
   - TiDB Cloud Dedicated Changefeeds
