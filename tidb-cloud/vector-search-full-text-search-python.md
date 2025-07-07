@@ -1,55 +1,56 @@
 ---
-title: 使用 Python 进行全文搜索
-summary: 全文搜索允许你检索精确关键词的文档。在检索增强生成（RAG）场景中，你可以将全文搜索与向量搜索结合使用，以提高检索质量。
+title: 使用Python进行全文搜索
+summary: 全文搜索让你能够根据精确关键词检索文档。在检索增强生成（RAG）场景中，你可以结合全文搜索和向量搜索以提升检索质量。
+aliases: ['/tidb/stable/vector-search-full-text-search-python']
 ---
 
-# 使用 Python 进行全文搜索
+# 使用Python进行全文搜索
 
-与专注于语义相似性的[向量搜索](/tidb-cloud/vector-search-overview.md)不同，全文搜索允许你检索精确关键词的文档。在检索增强生成（RAG）场景中，你可以将全文搜索与向量搜索结合使用，以提高检索质量。
+与[Vector Search](/tidb-cloud/vector-search-overview.md)，专注于语义相似性的搜索不同，全文搜索允许你根据精确关键词检索文档。在检索增强生成（RAG）场景中，你可以将全文搜索与向量搜索结合使用，以提升检索效果。
 
-TiDB 的全文搜索功能提供以下能力：
+TiDB中的全文搜索功能提供了以下能力：
 
 - **直接查询文本数据**：你可以直接搜索任何字符串列，无需进行嵌入处理。
 
-- **支持多种语言**：无需指定语言即可进行高质量搜索。TiDB 支持在同一个表中存储多种语言的文档，并自动为每个文档选择最佳的文本分析器。
+- **支持多语言**：无需指定语言即可实现高质量搜索。TiDB支持存储多语言文档在同一张表中，并会自动为每个文档选择最佳的文本分析器。
 
-- **按相关性排序**：搜索结果可以使用广泛采用的 [BM25 排序](https://en.wikipedia.org/wiki/Okapi_BM25)算法按相关性排序。
+- **按相关性排序**：搜索结果可以使用广泛采用的[BM25 ranking](https://en.wikipedia.org/wiki/Okapi_BM25)算法按相关性排序。
 
-- **完全兼容 SQL**：所有 SQL 功能，如预过滤、后过滤、分组和连接，都可以与全文搜索一起使用。
+- **与SQL完全兼容**：所有SQL功能，如预过滤、后过滤、分组和连接，都可以与全文搜索结合使用。
 
-> **提示：**
+> **Tip:**
 >
-> 关于 SQL 用法，请参见[使用 SQL 进行全文搜索](/tidb-cloud/vector-search-full-text-search-sql.md)。
+> 关于SQL的使用方法，请参见 [Full-Text Search with SQL](/tidb-cloud/vector-search-full-text-search-sql.md)。
 >
-> 要在 AI 应用中同时使用全文搜索和向量搜索，请参见[混合搜索](/tidb-cloud/vector-search-hybrid-search.md)。
+> 若要在你的AI应用中同时使用全文搜索和向量搜索，参见 [Hybrid Search](/tidb-cloud/vector-search-hybrid-search.md)。
 
 ## 前提条件
 
-全文搜索仍处于早期阶段，我们正在持续向更多客户推出。目前，全文搜索仅适用于以下产品选项和地区：
+全文搜索仍处于早期阶段，我们正在不断向更多客户推广。目前，全文搜索仅在以下产品选项和区域提供：
 
-- TiDB Cloud Serverless：`法兰克福 (eu-central-1)` 和 `新加坡 (ap-southeast-1)`
+- TiDB Cloud Serverless：`Frankfurt (eu-central-1)` 和 `Singapore (ap-southeast-1)`
 
-要完成本教程，请确保你在支持的地区有一个 TiDB Cloud Serverless 集群。如果你还没有，请按照[创建 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md)的说明创建一个。
+要完成本教程，确保你在支持的区域拥有一个TiDB Cloud Serverless集群。如果还没有，可以按照 [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) 创建。
 
 ## 开始使用
 
-### 步骤 1. 安装 [pytidb](https://github.com/pingcap/pytidb) Python SDK
+### 第1步：安装 [pytidb](https://github.com/pingcap/pytidb) Python SDK
 
-[pytidb](https://github.com/pingcap/pytidb) 是 TiDB 的官方 Python SDK，旨在帮助开发者高效构建 AI 应用。它内置支持向量搜索和全文搜索。
+[pytidb](https://github.com/pingcap/pytidb) 是TiDB的官方Python SDK，旨在帮助开发者高效构建AI应用。它内置支持向量搜索和全文搜索。
 
-要安装 SDK，请运行以下命令：
+安装SDK，请运行以下命令：
 
 ```shell
 pip install pytidb
 
-# （替代方案）要使用内置的嵌入函数和重排序器：
+# (可选) 若要使用内置的嵌入函数和重排序器：
 # pip install "pytidb[models]"
 
-# （可选）要将查询结果转换为 pandas DataFrame：
+# (可选) 若要将查询结果转换为pandas DataFrame：
 # pip install pandas
 ```
 
-### 步骤 2. 连接到 TiDB
+### 第2步：连接到TiDB
 
 ```python
 from pytidb import TiDBClient
@@ -63,13 +64,13 @@ db = TiDBClient.connect(
 )
 ```
 
-你可以从 [TiDB Cloud 控制台](https://tidbcloud.com)获取这些连接参数：
+你可以在 [TiDB Cloud控制台](https://tidbcloud.com) 获取这些连接参数：
 
-1. 导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称进入其概览页面。
+1. 进入 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群的名称，进入其概览页面。
 
-2. 点击右上角的**连接**。将显示一个连接对话框，列出连接参数。
+2. 点击右上角的 **Connect**。会显示一个连接对话框，列出连接参数。
 
-   例如，如果连接参数显示如下：
+   例如，如果显示的连接参数如下：
 
    ```text
    HOST:     gateway01.us-east-1.prod.shared.aws.tidbcloud.com
@@ -80,7 +81,7 @@ db = TiDBClient.connect(
    CA:       /etc/ssl/cert.pem
    ```
 
-   连接到 TiDB Cloud Serverless 集群的相应 Python 代码如下：
+   则对应的Python连接代码如下：
 
    ```python
    db = TiDBClient.connect(
@@ -92,15 +93,15 @@ db = TiDBClient.connect(
    )
    ```
 
-   请注意，上述示例仅用于演示目的。你需要使用自己的值填充参数并确保它们的安全性。
+   注意，上述示例仅用于演示。你需要填写自己的参数，并妥善保管。
 
-### 步骤 3. 创建表和全文索引
+### 第3步：创建表和全文索引
 
-以下是一个示例，创建一个名为 `chunks` 的表，包含以下列：
+以创建名为 `chunks` 的表为例，包含以下列：
 
-- `id` (int)：块的 ID。
-- `text` (text)：块的文本内容。
-- `user_id` (int)：创建块的用户 ID。
+- `id`（int）：块的ID
+- `text`（text）：块的文本内容
+- `user_id`（int）：创建该块的用户ID
 
 ```python
 from pytidb.schema import TableModel, Field
@@ -115,10 +116,10 @@ class Chunk(TableModel, table=True):
 table = db.create_table(schema=Chunk)
 
 if not table.has_fts_index("text"):
-    table.create_fts_index("text")   # 👈 在文本列上创建全文索引。
+    table.create_fts_index("text")   # 👈 在text列上创建全文索引
 ```
 
-### 步骤 4. 插入数据
+### 第4步：插入数据
 
 ```python
 table.bulk_insert(
@@ -130,9 +131,9 @@ table.bulk_insert(
 )
 ```
 
-### 步骤 5. 执行全文搜索
+### 第5步：执行全文搜索
 
-插入数据后，你可以按如下方式执行全文搜索：
+插入数据后，可以进行如下全文搜索：
 
 ```python
 df = (
@@ -146,27 +147,27 @@ df = (
 # 1   2  the quick brown        2
 ```
 
-完整示例请参见 [pytidb 全文搜索演示](https://github.com/pingcap/pytidb/blob/main/examples/fulltext_search)。
+完整示例请参见 [pytidb full-text search demo](https://github.com/pingcap/pytidb/blob/main/examples/fulltext_search)。
 
-## 另请参阅
+## 相关链接
 
 - [pytidb Python SDK 文档](https://github.com/pingcap/pytidb)
 
-- [混合搜索](/tidb-cloud/vector-search-hybrid-search.md)
+- [Hybrid Search](/tidb-cloud/vector-search-hybrid-search.md)
 
 ## 反馈与帮助
 
-全文搜索仍处于早期阶段，可用性有限。如果你想在尚未提供服务的地区尝试全文搜索，或者如果你有反馈或需要帮助，请随时联系我们：
+全文搜索仍处于早期阶段，访问权限有限。如果你想在尚未支持的区域试用全文搜索，或有反馈或需要帮助，欢迎联系我们：
 
 <CustomContent platform="tidb">
 
-- [加入我们的 Discord](https://discord.gg/zcqexutz2R)
+- [加入我们的Discord](https://discord.gg/zcqexutz2R)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- [加入我们的 Discord](https://discord.gg/zcqexutz2R)
+- [加入我们的Discord](https://discord.gg/zcqexutz2R)
 - [访问我们的支持门户](https://tidb.support.pingcap.com/)
 
 </CustomContent>

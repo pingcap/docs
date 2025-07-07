@@ -3,106 +3,106 @@ title: TiDB Log Backup and PITR Architecture
 summary: TiDB log backup and PITR architecture is introduced using a Backup & Restore (BR) tool as an example. The architecture includes log backup process design, system components, and key concepts. The PITR process involves restoring full backup data and log backup data. Log backup generates files such as log data, metadata, and global checkpoint.
 ---
 
-# TiDB Log Backup and PITR Architecture
+# TiDB Log Backup and PITR 架构
 
-This document introduces the architecture and process of TiDB log backup and point-in-time recovery (PITR) using a Backup & Restore (BR) tool as an example.
+本文介绍了以 Backup & Restore (BR) 工具为例的 TiDB 日志备份与点-in-时间恢复（PITR）架构与流程。
 
-## Architecture
+## 架构
 
-The log backup and PITR architecture is as follows:
+日志备份与 PITR 架构如下：
 
 ![BR log backup and PITR architecture](/media/br/br-log-arch.png)
 
-## Process of log backup
+## 日志备份流程
 
-The process of a cluster log backup is as follows:
+集群日志备份的流程如下：
 
 ![BR log backup process design](/media/br/br-log-backup-ts.png)
 
-System components and key concepts involved in the log backup process:
+涉及的系统组件与关键概念：
 
-* **local metadata**: indicates the metadata backed up by a single TiKV node, including local checkpoint ts, global checkpoint ts, and backup file information.
-* **local checkpoint ts** (in local metadata): indicates that all logs generated before local checkpoint ts in this TiKV node have been backed up to the target storage.
-* **global checkpoint ts**: indicates that all logs generated before global checkpoint ts in all TiKV nodes have been backed up to the target storage. TiDB Coordinator calculates this timestamp by collecting local checkpoint ts of all TiKV node and then reports it to PD.
-* **TiDB Coordinator**: a TiDB node is elected as the coordinator, which is responsible for collecting and calculating the progress of the entire log backup task (global checkpoint ts). This component is stateless in design, and after its failure, a new Coordinator is elected from the surviving TiDB nodes.
-* **TiKV log backup observer**: runs on each TiKV node in the TiDB cluster, which is responsible for backing up log data. If a TiKV node fails, backing up the data range on it will be taken by other TiKV nodes after region re-election, and these nodes will back up data of the failure range starting from global checkpoint ts.
+* **local metadata**：表示由单个 TiKV 节点备份的元数据，包括本地 checkpoint ts、全局 checkpoint ts 和备份文件信息。
+* **local checkpoint ts**（在本地元数据中）：表示在该 TiKV 节点中，所有在此时间点之前生成的日志已被备份到目标存储。
+* **global checkpoint ts**：表示所有 TiKV 节点中在此时间点之前生成的日志已被备份到目标存储。TiDB Coordinator 通过收集所有 TiKV 节点的 local checkpoint ts 计算得出，并报告给 PD。
+* **TiDB Coordinator**：由 TiDB 节点选举产生，负责收集和计算整个日志备份任务的进度（global checkpoint ts）。该组件为无状态设计，故障后由存活的 TiDB 节点中选举出新的 Coordinator。
+* **TiKV log backup observer**：运行在 TiDB 集群中的每个 TiKV 节点上，负责备份日志数据。如果某个 TiKV 节点故障，区域重选后由其他 TiKV 节点接管其数据范围的备份，这些节点将从 global checkpoint ts 开始备份故障范围内的数据。
 
-The complete backup process is as follows:
+完整的备份流程如下：
 
-1. BR receives the `br log start` command.
+1. BR 接收 `br log start` 命令。
 
-   * BR parses the checkpoint ts (the start time of log backup) and storage path of the backup task.
-   * **Register log backup task**: BR registers a log backup task in PD.
+   * BR 解析 checkpoint ts（日志备份的起始时间）和备份任务的存储路径。
+   * **Register log backup task**：BR 在 PD 中注册日志备份任务。
 
-2. TiKV monitors the creation and update of the log backup task.
+2. TiKV 监控日志备份任务的创建和更新。
 
-   * **Fetch log backup task**: The log backup observer of each TiKV node fetches the log backup task from PD and then backs up the log data in the specified range.
+   * **Fetch log backup task**：每个 TiKV 节点的 log backup observer 从 PD 获取日志备份任务，然后在指定范围内备份日志数据。
 
-3. The log backup observer backs up the KV change logs continuously.
+3. 日志备份观察者持续备份 KV 变更日志。
 
-   * **Read kv change data**: reads KV change data and then saves the change log to [backup files in custom format](#log-backup-files).
-   * **Fetch global checkpoint ts**: fetches the global checkpoint ts from PD.
-   * **Generate local metadata**: generates the local metadata of the backup task, including local checkpoint ts, global checkpoint ts, and backup file information.
-   * **Upload log data & metadata**: uploads the backup files and local metadata to the target storage periodically.
-   * **Configure GC**: requests PD to prevent data that have not been backed up (greater than local checkpoint ts) from being recycled by the [TiDB GC mechanism](/garbage-collection-overview.md).
+   * **Read kv change data**：读取 KV 变更数据，并将变更日志保存到[自定义格式的备份文件](#log-backup-files)中。
+   * **Fetch global checkpoint ts**：从 PD 获取 global checkpoint ts。
+   * **Generate local metadata**：生成备份任务的本地元数据，包括 local checkpoint ts、global checkpoint ts 和备份文件信息。
+   * **Upload log data & metadata**：定期将备份文件和本地元数据上传到目标存储。
+   * **Configure GC**：请求 PD 阻止未备份的数据（大于 local checkpoint ts）被 TiDB GC 机制回收。
 
-4. The TiDB Coordinator monitors the progress of the log backup task.
+4. TiDB Coordinator 监控日志备份任务的进度。
 
-   * **Watch backup progress**: gets the backup progress of each Region (Region checkpoint ts) by polling all TiKV nodes.
-   * **Report global checkpoint ts**: calculates the progress of the entire log backup task (global checkpoint ts) based on the Region checkpoint ts and then reports the global checkpoint ts to PD.
+   * **Watch backup progress**：通过轮询所有 TiKV 节点获取每个 Region（Region checkpoint ts）的备份进度。
+   * **Report global checkpoint ts**：根据 Region checkpoint ts 计算整个日志备份任务的进度（global checkpoint ts），并报告给 PD。
 
-5. PD persists the status of the log backup task, and you can view it using `br log status`.
+5. PD 持久化日志备份任务的状态，可以通过 `br log status` 查看。
 
-## Process of PITR
+## PITR 流程
 
-The process of PITR is as follows:
+点-in-时间恢复（PITR）的流程如下：
 
 ![Point-in-time recovery process design](/media/br/pitr-ts.png)
 
-The complete PITR process is as follows:
+完整的 PITR 流程如下：
 
-1. BR receives the `br restore point` command.
+1. BR 接收 `br restore point` 命令。
 
-   * BR parses the full backup data address, log backup data address, and the point-in-time recovery time.
-   * Queries the restore object (database or table) in the backup data and checks whether the table to be restored exists and meets the restore requirements.
+   * BR 解析全备数据地址、日志备份数据地址和点-in-时间恢复时间。
+   * 查询备份数据中的还原对象（数据库或表），并检查待还原的表是否存在且符合还原要求。
 
-2. BR restores the full backup data.
+2. BR 还原全备数据。
 
-   * Restores full backup data. For more details about the process of snapshot backup data restore, refer to [Restore snapshot backup data](/br/br-snapshot-architecture.md#process-of-restore).
+   * 还原全备数据。关于快照备份数据还原的详细流程，参考 [Restore snapshot backup data](/br/br-snapshot-architecture.md#process-of-restore)。
 
-3. BR restores the log backup data.
+3. BR 还原日志备份数据。
 
-   * **Read backup data**: reads the log backup data and calculates the log backup data that needs to be restored.
-   * **Fetch Region info**: fetches all Regions distributions by accessing PD.
-   * **Request TiKV to restore data**: creates a log restore request and sends it to the corresponding TiKV node. The log restore request contains the log backup data information to be restored.
+   * **Read backup data**：读取日志备份数据，计算需要还原的日志数据。
+   * **Fetch Region info**：通过访问 PD 获取所有 Region 的分布信息。
+   * **Request TiKV to restore data**：创建日志还原请求并发送给对应的 TiKV 节点。该请求包含待还原的日志备份数据信息。
 
-4. TiKV accepts the restore request from BR and initiates a log restore worker.
+4. TiKV 接受 BR 的还原请求并启动日志还原工作。
 
-   * The log restore worker gets the log backup data that needs to be restored.
+   * 日志还原工作获取需要还原的日志备份数据。
 
-5. TiKV restores the log backup data.
+5. TiKV 还原日志备份数据。
 
-   * **Download KVs**: the log restore worker downloads the corresponding backup data from the backup storage to a local directory according to the log restore request.
-   * **Rewrite KVs**: the log restore worker rewrites the KV data of the backup data according to the table ID of the restore cluster table, that is, replace the original table ID in the [Key-Value](/tidb-computing.md#mapping-table-data-to-key-value) with the new table ID. The restore worker also rewrites the index ID in the same way.
-   * **Apply KVs**: the log restore worker writes the processed KV data to the store (RocksDB) through the raft interface.
-   * **Report restore result**: the log restore worker returns the restore result to BR.
+   * **Download KVs**：日志还原工作根据还原请求，从备份存储下载对应的备份数据到本地目录。
+   * **Rewrite KVs**：日志还原工作根据还原集群表的表 ID 重写 KV 数据，即用新表 ID 替换 [Key-Value](/tidb-computing.md#mapping-table-data-to-key-value) 中的原始表 ID。还原工作也会以相同方式重写索引 ID。
+   * **Apply KVs**：日志还原工作通过 raft 接口将处理后的 KV 数据写入存储（RocksDB）。
+   * **Report restore result**：日志还原工作将还原结果返回给 BR。
 
-6. BR receives the restore result from each TiKV node.
+6. BR 接收每个 TiKV 节点的还原结果。
 
-   * If some data fails to be restored due to `RegionNotFound` or `EpochNotMatch`, for example, a TiKV node is down, BR will retry the restore.
-   * If there is any data fails to be restored and cannot be retried, the restore task fails.
-   * After all data is restored, the restore task succeeds.
+   * 如果部分数据因 `RegionNotFound` 或 `EpochNotMatch` 等原因未能还原，例如某个 TiKV 节点宕机，BR 会重试还原。
+   * 如果有数据无法还原且无法重试，整个还原任务失败。
+   * 所有数据还原完成后，还原任务成功。
 
-## Log backup files
+## 日志备份文件
 
-Log backup generates the following types of files:
+日志备份会生成以下类型的文件：
 
-- `{min_ts}-{uuid}.log` file: stores the KV change log data of the backup task. The `{min_ts}` is the minimum TSO timestamp of the KV change log data in the file, and the `{uuid}` is generated randomly when the file is created.
-- `{checkpoint_ts}-{uuid}.meta` file: is generated every time each TiKV node uploads the log backup data and stores metadata of all log backup data files uploaded this time. The `{checkpoint_ts}` is the log backup checkpoint of the TiKV node, and the global checkpoint is the minimum checkpoint of all TiKV nodes. The `{uuid}` is generated randomly when the file is created.
-- `{store_id}.ts` file: this file is updated with global checkpoint ts every time each TiKV node uploads the log backup data. The `{store_id}` is the store ID of the TiKV node.
-- `v1_stream_truncate_safepoint.txt` file: stores the timestamp corresponding to the latest backup data in storage that deleted by `br log truncate`.
+- `{resolved_ts}-{uuid}.meta` 文件：每次每个 TiKV 节点上传日志备份数据时生成，存储本次上传的所有日志备份文件的元数据。`{resolved_ts}` 为 TiKV 节点的 resolved timestamp。日志备份任务的最新 `resolved_ts` 为所有 TiKV 节点中最小的 resolved timestamp。`{uuid}` 在文件创建时随机生成。
+- `{store_id}.ts` 文件：每次每个 TiKV 节点上传日志备份数据时更新，存储全局 checkpoint ts。`{store_id}` 为 TiKV 节点的存储 ID。
+- `{min_ts}-{uuid}.log` 文件：存储备份任务的 KV 变更日志数据。`{min_ts}` 为该文件中 KV 变更日志数据的最小 TSO 时间戳，`{uuid}` 在文件创建时随机生成。
+- `v1_stream_truncate_safepoint.txt` 文件：存储由 `br log truncate` 删除的存储中最新备份数据对应的时间戳。
 
-### Structure of backup files
+### 备份文件结构
 
 ```
 .
@@ -120,13 +120,13 @@ Log backup generates the following types of files:
 └── v1_stream_truncate_safepoint.txt
 ```
 
-Explanation of the backup file directory structure:
+备份文件目录结构说明：
 
-- `backupmeta`: stores backup metadata. The `resolved_ts` in the filename indicates the backup progress, meaning that data before this TSO has been fully backed up. However, note that this TSO only reflects the progress of certain shards.
-- `global_checkpoint`: represents the global backup progress. It records the latest point in time to which data can be restored using `br restore point`.
-- `{date}/{hour}`: stores backup data for the corresponding date and hour. When cleaning up storage, always use `br log truncate` instead of manually deleting data. This is because the metadata references the data in this directory, and manual deletion might lead to restore failures or data inconsistencies after restore.
+- `backupmeta`：存储备份元数据。文件名中的 `resolved_ts` 表示备份进度，意味着该 TSO 之前的数据已完全备份。但请注意，该 TSO 仅反映某些分片的备份进度。
+- `global_checkpoint`：代表全局备份进度，记录可以用 `br restore point` 还原的最新时间点。
+- `{date}/{hour}`：存储对应日期和小时的备份数据。清理存储时，建议使用 `br log truncate`，而非手动删除数据。因为元数据引用了该目录中的数据，手动删除可能导致还原失败或还原后数据不一致。
 
-The following is an example:
+示例：
 
 ```
 .
