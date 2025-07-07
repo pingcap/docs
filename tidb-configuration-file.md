@@ -706,8 +706,9 @@ Configuration items related to opentracing.reporter.
 
 ### `pd-server-timeout`
 
-+ The timeout (in seconds) for TiDB to send requests to PD nodes via the PD client.
++ The timeout for TiDB to send requests to PD nodes via the PD client.
 + Default value: 3
++ Unit: second
 
 ## tikv-client
 
