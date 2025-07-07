@@ -1313,9 +1313,13 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
     In the case of a poor network environment, appropriately increasing the value of this variable can effectively alleviate error reporting to the application end caused by timeout. If the application end wants to receive the error information more quickly, minimize the value of this variable.
 
+<CustomContent platform="tidb">
+
 > **Note:**
 >
 > This system variable **does not apply** to obtaining TSO requests asynchronously. To adjust the timeout for obtaining TSO, configure the [`pd-server-timeout`](/tidb-configuration-file.md#pd-server-timeout) configuration item.
+
+</CustomContent>
 
 ### tidb_batch_commit
 
