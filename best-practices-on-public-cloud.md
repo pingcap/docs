@@ -136,14 +136,6 @@ Deploying TiDB across multiple availability zones (AZs) can lead to increased co
 
 To reduce cross-AZ read traffic, you can enable the [Follower Read feature](/follower-read.md), which allows TiDB to prioritize selecting replicas in the same availability zone. To enable this feature, set the [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40) variable to `closest-replicas` or `closest-adaptive`.
 
-To reduce cross-AZ write traffic in TiKV instances, you can enable the gRPC compression feature, which compresses data before transmitting it over the network. The following configuration example shows how to enable gzip gRPC compression for TiKV.
-
-```
-server_configs:
-  tikv:
-    server.grpc-compression-type: gzip
-```
-
 To reduce network traffic caused by the data shuffle of TiFlash MPP tasks, it is recommended to deploy multiple TiFlash instances in the same availability zones (AZs). 
 
 ## Mitigate live migration maintenance events on Google Cloud
