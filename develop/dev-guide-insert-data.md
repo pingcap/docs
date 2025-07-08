@@ -13,7 +13,7 @@ This document describes how to insert data into TiDB by using the SQL language w
 
 Before reading this document, you need to prepare the following:
 
-- [Build a TiDB Cloud Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Build a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md), [Create a Database](/develop/dev-guide-create-database.md), [Create a Table](/develop/dev-guide-create-table.md), and [Create Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md)
 
 ## Insert rows
@@ -246,7 +246,7 @@ The following are the recommended tools for bulk-insert:
 
 <CustomContent platform="tidb-cloud">
 
-- Data import: [Create Import](/tidb-cloud/import-sample-data.md) page in the [TiDB Cloud console](https://tidbcloud.com/). You can upload local CSV files (TiDB Cloud Serverless only), and import **Dumpling** logical dumps (schema and data), **CSV**, or **Parquet** files stored in Cloud Storage. For details, see the [Import CSV Files into TiDB Cloud Serverless](/tidb-cloud/import-csv-files-serverless.md) or [Import CSV Files into TiDB Cloud Dedicated](/tidb-cloud/import-csv-files.md).
+- Data import: [Create Import](/tidb-cloud/import-sample-data.md) page in the [TiDB Cloud console](https://tidbcloud.com/). You can upload local CSV files ({{{ .starter }}} only), and import **Dumpling** logical dumps (schema and data), **CSV**, or **Parquet** files stored in Cloud Storage. For details, see the [Import CSV Files into {{{ .starter }}}](/tidb-cloud/import-csv-files-serverless.md) or [Import CSV Files into TiDB Cloud Dedicated](/tidb-cloud/import-csv-files.md).
 - Data replication: [TiDB Data Migration](https://docs.pingcap.com/tidb/stable/dm-overview). You can replicate MySQL, MariaDB, and Amazon Aurora databases to TiDB. It also supports merging and migrating the sharded instances and tables from the source databases.
 - Data backup and restore: [Backup](/tidb-cloud/backup-and-restore.md) page in the TiDB Cloud console. Compared to **Dumpling**, backup and restore is more suitable for **_big data_** scenario.
 
