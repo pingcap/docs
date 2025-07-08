@@ -69,6 +69,15 @@ To create a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud
 
 2. Refer to [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md) to create a TiDB Cloud Dedicated cluster for the PoC.
 
+   > **Note:**
+   >
+   > Before creating a TiDB Cloud Dedicated cluster, you must add one of the following payment methods:
+   >  - Credit Card
+   >  - Wire Transfer
+   >  - Marketplace (such as AWS Marketplace, Azure Marketplace, or Google Cloud Marketplace)
+   >
+   > Your PoC credits will automatically be used to offset eligible expenses incurred during the PoC period.
+
 Capacity planning is recommended for cluster sizing before you create a cluster. You can start with estimated numbers of TiDB, TiKV, or TiFlash nodes, and scale out the cluster later to meet performance requirements. You can find more details in the following documents or consult our support team.
 
 - For more information about estimation practice, see [Size Your TiDB](/tidb-cloud/size-your-cluster.md).
