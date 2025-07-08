@@ -22,6 +22,30 @@ const writeLocalCfg = (cfg) => {
   fs.writeFileSync("./latest_translation_commit.json", data);
 };
 
+const parseTOCFile = (tocPath) => {
+  try {
+    const tocContent = fs.readFileSync(tocPath, "utf8");
+    const lines = tocContent.split("\n");
+    const filePaths = new Set();
+
+    for (const line of lines) {
+      const linkMatch = line.match(/\[([^\]]+)\]\(\/([^)]+)\)/);
+      if (linkMatch) {
+        const filePath = linkMatch[2];
+        if (filePath.endsWith(".md")) {
+          filePaths.add(filePath);
+        }
+      }
+    }
+
+    console.log(`Found ${filePaths.size} files in TOC: ${tocPath}`);
+    return filePaths;
+  } catch (error) {
+    console.error(`Error parsing TOC file ${tocPath}:`, error);
+    return new Set();
+  }
+};
+
 const ghGetBranch = async (branchName = "master") => {
   const result = await octokit.request(
     `GET /repos/pingcap/docs/branches/${branchName}`,
@@ -83,13 +107,31 @@ const deleteFile = (targetFile) => {
   fs.rmSync(targetFile);
 };
 
-const handleFiles = async (fileList = []) => {
-  console.log(fileList);
-  for (let file of fileList) {
-    const { status, raw_url, filename, previous_filename } = file;
-    if (!filename.endsWith(".md")) {
-      continue;
+const handleFiles = async (fileList = [], tocFilePaths) => {
+  console.log(`Processing ${fileList.length} files...`);
+
+  const addedModifiedFiles = fileList.filter((file) => {
+    if (!file.filename.endsWith(".md")) {
+      return false;
     }
+    if (file.status === "added" || file.status === "modified") {
+      return tocFilePaths.has(file.filename);
+    }
+    if (file.status === "removed") {
+      return true;
+    }
+    if (file.status === "renamed") {
+      return tocFilePaths.has(file.filename);
+    }
+    return false;
+  });
+
+  console.log(`Filtered to ${addedModifiedFiles.length} files to process`);
+
+  for (let file of addedModifiedFiles) {
+    const { status, raw_url, filename, previous_filename } = file;
+    console.log(`Processing: ${filename} (${status})`);
+
     switch (status) {
       case "added":
       case "modified":
@@ -106,13 +148,18 @@ const handleFiles = async (fileList = []) => {
   }
 };
 
+const TOC_FILE_PATH = "./TOC-tidb-cloud.md";
+
 const main = async () => {
   const { target: branchName, sha: base } = getLocalCfg();
   const targetBranchData = await ghGetBranch(branchName);
   const head = targetBranchData?.commit?.sha;
   const comparedDetails = await ghCompareCommits(base, head);
   const files = comparedDetails?.files || [];
-  handleFiles(files);
+
+  const tocFilePaths = parseTOCFile(TOC_FILE_PATH);
+
+  handleFiles(files, tocFilePaths);
   writeLocalCfg({
     target: branchName,
     sha: head,

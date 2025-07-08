@@ -1,4 +1,4 @@
-name: Translation by AI
+name: Translation(zh) by AI
 
 on:
   workflow_dispatch:
@@ -76,7 +76,7 @@ jobs:
             echo "No changes detected, skipped"
           fi
       - name: Create PR
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         if: steps.git_commit.outputs.committed == 1
         with:
           token: ${{ github.token }}
@@ -98,7 +98,7 @@ jobs:
 
             For details, see [tips for choosing the affected versions](https://github.com/pingcap/docs/blob/master/CONTRIBUTING.md#guideline-for-choosing-the-affected-versions).
 
-            - [x] ${env.CN_CLOUD_BRANCH}
+            - [x] ${{ env.CN_CLOUD_BRANCH }}
 
             ### What is the related PR or file link(s)?
 
