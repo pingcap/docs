@@ -33,8 +33,9 @@ jobs:
       - name: Download files by comparing commits
         run: |
           export GH_TOKEN=${{github.token}}
-          cd docs
+          cd docs/scripts
           ls
+          cd ..
           npm i
           node scripts/filterUpdateCloudFiles.js
           tree tmp
