@@ -82,7 +82,6 @@ jobs:
           path: "docs"
           token: ${{ github.token }}
           branch: zh-translation/${{ steps.build_id.outputs.id }}
-          base: ${{ env.CN_CLOUD_BRANCH }}
           title: "ci: ZH translation ${{ steps.build_id.outputs.id }}"
           body: |
             ### What is changed, added or deleted? (Required)
