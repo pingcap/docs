@@ -54,6 +54,7 @@ jobs:
           token: ${{ github.token }}
           branch: pr-test/${{ steps.build_id.outputs.id }}
           base: ${{ env.CN_CLOUD_BRANCH }}
+          delete-branch: false
           title: "test: PR Creation Test ${{ steps.build_id.outputs.id }}"
           body: |
             ### What is changed, added or deleted? (Required)
@@ -85,4 +86,3 @@ jobs:
             - [ ] Change aliases
             - [ ] Need modification after applied to another branch <!-- If yes, please comment "/label version-specific-changes-required" below to trigger the bot to add the label. -->
             - [ ] Might cause conflicts after applied to another branch
-          delete-branch: true
