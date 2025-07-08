@@ -50,6 +50,7 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         if: steps.git_commit.outputs.committed == 1
         with:
+          path: "docs"
           token: ${{ github.token }}
           branch: pr-test/${{ steps.build_id.outputs.id }}
           base: ${{ env.CN_CLOUD_BRANCH }}
