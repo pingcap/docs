@@ -53,6 +53,7 @@ jobs:
           path: "docs"
           token: ${{ github.token }}
           branch: pr-test/${{ steps.build_id.outputs.id }}
+          base: ${{ env.CN_CLOUD_BRANCH }}
           title: "test: PR Creation Test ${{ steps.build_id.outputs.id }}"
           body: |
             ### What is changed, added or deleted? (Required)
