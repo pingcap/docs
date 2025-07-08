@@ -35,7 +35,7 @@ jobs:
           export GH_TOKEN=${{github.token}}
           cd docs
           npm i
-          node scripts/filterUpdateFiles.js
+          node scripts/filterUpdateCloudFiles.js
           tree tmp
           cd ..
       - name: Copy new files to translator folder
