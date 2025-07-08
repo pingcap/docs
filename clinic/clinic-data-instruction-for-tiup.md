@@ -1,142 +1,154 @@
 ---
 title: PingCAP Clinic Diagnostic Data
-summary: PingCAP Clinic Diagnostic Service collects diagnostic data from TiDB and DM clusters using TiUP. Data types include cluster information, diagnostic data for TiDB, TiKV, PD, TiFlash, TiCDC, Prometheus monitoring, system variables, and node system information. Data is stored in Clinic Server for international and Chinese mainland users. The collected data is only used for troubleshooting cluster problems.
+summary: PingCAP Clinic Diagnostic Service 收集来自 TiDB 和 DM 集群的诊断数据，使用 TiUP。数据类型包括集群信息、TiDB、TiKV、PD、TiFlash、TiCDC、Prometheus 监控、系统变量和节点系统信息。数据存储在 Clinic Server 中，面向国际用户和中国大陆用户。收集的数据仅用于排查集群问题。
 ---
 
 # PingCAP Clinic Diagnostic Data
 
-This document provides the types of diagnostic data that can be collected by PingCAP Clinic Diagnostic Service (PingCAP Clinic) from the TiDB and DM clusters deployed using TiUP. Also, the document lists the parameters for data collection corresponding to each data type. When running a command to [collect data using Diag client (Diag)](/clinic/clinic-user-guide-for-tiup.md), you can add the required parameters to the command according to the types of the data to be collected.
+本文档介绍了 PingCAP Clinic Diagnostic Service（PingCAP Clinic）可以从使用 TiUP 部署的 TiDB 和 DM 集群中收集的诊断数据类型。同时，列出了每种数据类型对应的数据收集参数。当运行 [使用 Diag 客户端（Diag）收集数据的命令](/clinic/clinic-user-guide-for-tiup.md) 时，可以根据需要收集的数据类型，向命令中添加相应的参数。
 
-The diagnostic data collected by PingCAP Clinic is **only** used for troubleshooting cluster problems.
+PingCAP Clinic 收集的诊断数据 **仅** 用于排查集群问题。
 
-A diagnostic service deployed in the cloud, Clinic Server provides two independent services depending on the data storage location:
+部署在云端的诊断服务 Clinic Server 根据数据存储位置提供两个独立的服务：
 
-- [Clinic Server for international users](https://clinic.pingcap.com): If you upload the collected data to Clinic Server for international users, the data will be stored in the Amazon S3 service deployed by PingCAP in AWS US regions. PingCAP uses strict data access policies and only authorized technical support can access the data.
-- [Clinic Server for users in the Chinese mainland](https://clinic.pingcap.com.cn): If you upload the collected data to Clinic Server for users in the Chinese mainland, the data will be stored in the Amazon S3 service deployed by PingCAP in China (Beijing) regions. PingCAP uses strict data access policies and only authorized technical support can access the data.
+- [面向国际用户的 Clinic Server](https://clinic.pingcap.com)：如果你将收集到的数据上传到面向国际用户的 Clinic Server，数据将存储在 PingCAP 在 AWS 美国区域部署的 Amazon S3 服务中。PingCAP 使用严格的数据访问策略，只有授权的技术支持人员可以访问数据。
+- [面向中国大陆用户的 Clinic Server](https://clinic.pingcap.com.cn)：如果你将收集到的数据上传到面向中国大陆用户的 Clinic Server，数据将存储在 PingCAP 在中国（北京）区域部署的 Amazon S3 服务中。PingCAP 使用严格的数据访问策略，只有授权的技术支持人员可以访问数据。
 
-## TiDB clusters
+## TiDB 集群
 
-This section lists the types of diagnostic data that can be collected by [Diag](https://github.com/pingcap/diag) from the TiDB clusters deployed using TiUP.
+本节列出了可以通过 [Diag](https://github.com/pingcap/diag) 从使用 TiUP 部署的 TiDB 集群中收集的诊断数据类型。
 
-### TiDB cluster information
+### TiDB 集群信息
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
+| 数据类型 | 导出文件 | PingCAP Clinic 收集参数 |
 | :------ | :------ |:-------- |
-| Basic information of the cluster, including the cluster ID | `cluster.json` | The data is collected per run by default. |
-| Detailed information of the cluster | `meta.yaml` | The data is collected per run by default. |
+| 集群的基本信息，包括集群 ID | `cluster.json` | 默认每次运行时会收集数据。 |
+| 集群的详细信息 | `meta.yaml` | 默认每次运行时会收集数据。 |
 
-### TiDB diagnostic data
+### TiDB 诊断数据
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
+| 数据类型 | 导出文件 | PingCAP Clinic 收集参数 |
 | :------ | :------ |:-------- |
-| Log | `tidb.log` | `--include=log` |
-| Error log | `tidb_stderr.log` | `--include=log` |
-| Slow log | `tidb_slow_query.log` | `--include=log` |
-| Configuration file | `tidb.toml` | `--include=config` |
-| Real-time configuration | `config.json` | `--include=config` |
+| 日志 | `tidb.log` | `--include=log` |
+| 错误日志 | `tidb_stderr.log` | `--include=log` |
+| 慢查询日志 | `tidb_slow_query.log` | `--include=log` |
+| 审计日志 | `tidb-audit.log.json` | `--include=log` |
+| 配置文件 | `tidb.toml` | `--include=config` |
+| 实时配置 | `config.json` | `--include=config` |
 
-### TiKV diagnostic data
+### TiKV 诊断数据
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
+| 数据类型 | 导出文件 | PingCAP Clinic 收集参数 |
 | :------ | :------ |:-------- |
-| Log | `tikv.log` | `--include=log` |
-| Error log | `tikv_stderr.log` | `--include=log` |
-| Configuration file | `tikv.toml` | `--include=config` |
-| Real-time configuration | `config.json` | `--include=config` |
+| 日志 | `tikv.log` | `--include=log` |
+| 错误日志 | `tikv_stderr.log` | `--include=log` |
+| 配置文件 | `tikv.toml` | `--include=config` |
+| 实时配置 | `config.json` | `--include=config` |
 
-### PD diagnostic data
+### PD 诊断数据
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
+| 数据类型 | 导出文件 | PingCAP Clinic 收集参数 |
 | :------ | :------ |:-------- |
-| Log | `pd.log` | `--include=log` |
-| Error log | `pd_stderr.log` | `--include=log` |
-| Configuration file | `pd.toml` | `--include=config` |
-| Real-time configuration | `config.json` | `--include=config` |
-| Outputs of the command `tiup ctl:v<CLUSTER_VERSION> pd -u http://${pd IP}:${PORT} store` | `store.json` | `--include=config` |
-| Outputs of the command `tiup ctl:v<CLUSTER_VERSION> pd -u http://${pd IP}:${PORT} config placement-rules show` | `placement-rule.json` | `--include=config` |
+| 日志 | `pd.log` | `--include=log` |
+| 错误日志 | `pd_stderr.log` | `--include=log` |
+| 配置文件 | `pd.toml` | `--include=config` |
+| 实时配置 | `config.json` | `--include=config` |
+| `tiup ctl:v<CLUSTER_VERSION> pd -u http://${pd IP}:${PORT} store` 的输出 | `store.json` | `--include=config` |
+| `tiup ctl:v<CLUSTER_VERSION> pd -u http://${pd IP}:${PORT} config placement-rules show` 的输出 | `placement-rule.json` | `--include=config` |
 
-### TiFlash diagnostic data
+### TiFlash 诊断数据
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
+| 数据类型 | 导出文件 | PingCAP Clinic 收集参数 |
 | :------ | :------ |:-------- |
-| Log | `tiflash.log` | `--include=log` |
-| Error log | `tiflash_stderr.log` | `--include=log` |
-| Configuration file |  `tiflash-learner.toml`, `tiflash-preprocessed.toml`, `tiflash.toml` | `--include=config` |
-| Real-time configuration | `config.json` | `--include=config` |
+| 日志 | `tiflash.log` | `--include=log` |
+| 错误日志 | `tiflash_stderr.log` | `--include=log` |
+| 配置文件 |  `tiflash-learner.toml`, `tiflash-preprocessed.toml`, `tiflash.toml` | `--include=config` |
+| 实时配置 | `config.json` | `--include=config` |
 
-### TiCDC diagnostic data
+### TiCDC 诊断数据
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
+| 数据类型 | 导出文件 | PingCAP Clinic 收集参数 |
 | :------ | :------ |:-------- |
-| Log | `ticdc.log` | `--include=log`|
-| Error log | `ticdc_stderr.log` | `--include=log` |
-| Configuration file | `ticdc.toml` | `--include=config` |
-| Debug data | `info.txt`, `status.txt`, `changefeeds.txt`, `captures.txt`, `processors.txt` | `--include=debug` (Diag does not collect this data type by default) |
+| 日志 | `ticdc.log` | `--include=log`|
+| 错误日志 | `ticdc_stderr.log` | `--include=log` |
+| 配置文件 | `ticdc.toml` | `--include=config` |
+| 调试数据 | `info.txt`, `status.txt`, `changefeeds.txt`, `captures.txt`, `processors.txt` | `--include=debug`（Diag 默认不收集此数据类型） |
 
-### Prometheus monitoring data
+### Prometheus 监控数据
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
+| 数据类型 | 导出文件 | PingCAP Clinic 收集参数 |
 | :------ | :------ |:-------- |
-| All metrics data | `{metric_name}.json` | `--include=monitor` |
-| All alerts data | `alerts.json` | `--include=monitor` |
+| 所有指标数据 | `{metric_name}.json` | `--include=monitor` |
+| 所有告警数据 | `alerts.json` | `--include=monitor` |
 
-### TiDB system variables
+### TiDB 系统变量
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
+| 数据类型 | 导出文件 | PingCAP Clinic 收集参数 |
 | :------ | :------ |:-------- |
-| TiDB system variables | `mysql.tidb.csv` | `--include=db_vars` (Diag does not collect this data type by default; if you need to collect this data type, database credential is required) |
-| | `global_variables.csv` | `--include=db_vars` (Diag does not collect this data type by default) |
+| TiDB 系统变量 | `mysql.tidb.csv` | `--include=db_vars`（Diag 默认不收集此数据类型；如果需要收集此数据类型，需要数据库凭据） |
+| | `global_variables.csv` | `--include=db_vars`（Diag 默认不收集此数据类型） |
 
-### System information of the cluster node
+### 集群节点的系统信息
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
+| 数据类型 | 导出文件 | PingCAP Clinic 收集参数 |
 | :------ | :------ |:-------- |
-| Kernel log | `dmesg.log` | `--include=system` |
-| Basic information of the system and hardware | `insight.json` | `--include=system` |
-| Contents in the `/etc/security/limits.conf` | `limits.conf` | `--include=system` |
-| List of kernel parameters | `sysctl.conf` | `--include=system` |
-| Socket system information, which is the output of the `ss` command | `ss.txt` | `--include=system` |
+| 内核日志 | `dmesg.log` | `--include=system` |
+| 系统和硬件的基本信息 | `insight.json` | `--include=system` |
+| `/etc/security/limits.conf` 内容 | `limits.conf` | `--include=system` |
+| 内核参数列表 | `sysctl.conf` | `--include=system` |
+| Socket 系统信息（`ss` 命令输出） | `ss.txt` | `--include=system` |
 
-## DM clusters
+## DM 集群
 
-This section lists the types of diagnostic data that can be collected by Diag from the DM clusters deployed using TiUP.
+本节列出了可以通过 Diag 从使用 TiUP 部署的 DM 集群中收集的诊断数据类型。
 
-### DM cluster information
+### DM 集群信息
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
+| 数据类型 | 导出文件 | PingCAP Clinic 收集参数 |
 | :------ | :------ |:-------- |
-| Basic information of the cluster, including the cluster ID  | `cluster.json`| The data is collected per run by default. |
-| Detailed information of the cluster | `meta.yaml` | The data is collected per run by default. |
+| 集群的基本信息，包括集群 ID | `cluster.json`| 默认每次运行时会收集数据。 |
+| 集群的详细信息 | `meta.yaml` | 默认每次运行时会收集数据。 |
 
-### dm-master diagnostic data
+### dm-master 诊断数据
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
+| 数据类型 | 导出文件 | PingCAP Clinic 收集参数 |
 | :------ | :------ |:-------- |
-| Log | `dm-master.log` | `--include=log` |
-| Error log | `dm-master_stderr.log` | `--include=log` |
-| Configuration file | `dm-master.toml` | `--include=config` |
+| 日志 | `dm-master.log` | `--include=log` |
+| 错误日志 | `dm-master_stderr.log` | `--include=log` |
+| 配置文件 | `dm-master.toml` | `--include=config` |
 
-### dm-worker diagnostic data
+### dm-worker 诊断数据
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
+| 数据类型 | 导出文件 | PingCAP Clinic 收集参数 |
 | :------ | :------ |:-------- |
-| Log| `dm-worker.log` | `--include=log`|
-| Error log | `dm-worker_stderr.log` | `--include=log` |
-| Configuration file | `dm-work.toml` | `--include=config` |
+| 日志| `dm-worker.log` | `--include=log`|
+| 错误日志 | `dm-worker_stderr.log` | `--include=log` |
+| 配置文件 | `dm-work.toml` | `--include=config` |
 
-### Prometheus monitoring data
+### Prometheus 监控数据
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
+| 数据类型 | 导出文件 | PingCAP Clinic 收集参数 |
 | :------ | :------ |:-------- |
-| All metrics data | `{metric_name}.json` | `--include=monitor` |
-| All alerts data | `alerts.json` | `--include=monitor` |
+| 所有指标数据 | `{metric_name}.json` | `--include=monitor` |
+| 所有告警数据 | `alerts.json` | `--include=monitor` |
 
-### System information of the cluster node
+### 集群节点的系统信息
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
+| 数据类型 | 导出文件 | PingCAP Clinic 收集参数 |
 | :------ | :------ |:-------- |
-| Kernel log | `dmesg.log` | `--include=system` |
-| Basic information of the system and hardware | `insight.json` | `--include=system` |
-| Contents in the `/etc/security/limits.conf` system | `limits.conf` | `--include=system` |
-| List of kernel parameters | `sysctl.conf` | `--include=system` |
-| Socket system information, which is the output of the `ss` command | `ss.txt` | `--include=system` |
+| 内核日志 | `dmesg.log` | `--include=system` |
+| 系统和硬件的基本信息 | `insight.json` | `--include=system` |
+| `/etc/security/limits.conf` 内容 | `limits.conf` | `--include=system` |
+| 内核参数列表 | `sysctl.conf` | `--include=system` |
+| Socket 系统信息（`ss` 命令输出） | `ss.txt` | `--include=system` |
+
+### 日志文件分类
+
+你可以使用 `--include=log.<type>` 参数指定要收集的日志类型。
+
+日志类型：
+
+- `std`：文件名中包含 `stderr` 的日志文件。
+- `rocksdb`：以 `rocksdb` 前缀和 `.info` 后缀的日志文件。
+- `slow`：慢查询日志文件。
+- `unknown`：不匹配上述任何类型的日志文件。

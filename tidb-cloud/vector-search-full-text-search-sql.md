@@ -1,47 +1,48 @@
 ---
-title: 使用 SQL 进行全文搜索
-summary: 全文搜索允许你通过精确关键词检索文档。在检索增强生成（RAG）场景中，你可以将全文搜索与向量搜索结合使用，以提高检索质量。
+title: Full-Text Search with SQL
+summary: Full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
+aliases: ['/tidb/stable/vector-search-full-text-search-sql']
 ---
 
 # 使用 SQL 进行全文搜索
 
-与专注于语义相似度的[向量搜索](/tidb-cloud/vector-search-overview.md)不同，全文搜索允许你通过精确关键词检索文档。在检索增强生成（RAG）场景中，你可以将全文搜索与向量搜索结合使用，以提高检索质量。
+与 [Vector Search](/tidb-cloud/vector-search-overview.md)，专注于语义相似性的搜索不同，全文搜索允许你根据精确关键词检索文档。在 Retrieval-Augmented Generation (RAG) 场景中，你可以将全文搜索与向量搜索结合使用，以提升检索质量。
 
-TiDB 的全文搜索功能提供以下能力：
+TiDB 中的全文搜索功能提供了以下能力：
 
 - **直接查询文本数据**：你可以直接搜索任何字符串列，无需进行嵌入处理。
 
-- **支持多种语言**：无需指定语言即可实现高质量搜索。TiDB 中的文本分析器支持在同一个表中混合使用多种语言的文档，并自动为每个文档选择最佳的分析器。
+- **支持多语言**：无需指定语言即可实现高质量搜索。TiDB 中的文本分析器支持多种语言的文档混合在同一表中，并会自动为每个文档选择最佳的分析器。
 
-- **按相关性排序**：搜索结果可以使用广泛采用的 [BM25 排序](https://en.wikipedia.org/wiki/Okapi_BM25)算法按相关性排序。
+- **按相关性排序**：搜索结果可以使用广泛采用的 [BM25 排名](https://en.wikipedia.org/wiki/Okapi_BM25) 算法按相关性排序。
 
-- **完全兼容 SQL**：所有 SQL 功能，如预过滤、后过滤、分组和连接，都可以与全文搜索一起使用。
+- **完全兼容 SQL**：所有 SQL 功能，如预过滤、后过滤、分组和连接，都可以与全文搜索结合使用。
 
-> **提示：**
+> **Tip:**
 >
-> 关于 Python 用法，请参见[使用 Python 进行全文搜索](/tidb-cloud/vector-search-full-text-search-python.md)。
+> 关于 Python 的使用方法，参见 [Full-Text Search with Python](/tidb-cloud/vector-search-full-text-search-python.md)。
 >
-> 要在 AI 应用中同时使用全文搜索和向量搜索，请参见[混合搜索](/tidb-cloud/vector-search-hybrid-search.md)。
+> 若要在你的 AI 应用中同时使用全文搜索和向量搜索，参见 [Hybrid Search](/tidb-cloud/vector-search-hybrid-search.md)。
 
-## 开始使用
+## 入门指南
 
-全文搜索仍处于早期阶段，我们正在持续向更多客户推出。目前，全文搜索仅适用于以下产品选项和地区：
+全文搜索仍处于早期阶段，我们正在不断向更多客户推广。目前，全文搜索仅在以下产品选项和区域提供：
 
-- TiDB Cloud Serverless：`法兰克福 (eu-central-1)` 和 `新加坡 (ap-southeast-1)`
+- TiDB Cloud Serverless：`Frankfurt (eu-central-1)` 和 `Singapore (ap-southeast-1)`
 
-在使用全文搜索之前，请确保你的 TiDB Cloud Serverless 集群创建在支持的地区。如果你还没有集群，请按照[创建 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md)的说明创建一个。
+在使用全文搜索之前，请确保你的 TiDB Cloud Serverless 集群创建在支持的区域内。如果还没有，可以按照 [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) 创建。
 
-要执行全文搜索，请按照以下步骤操作：
+执行全文搜索的步骤如下：
 
-1. [**创建全文索引**](#创建全文索引)：创建带有全文索引的表，或为现有表添加全文索引。
+1. [**创建全文索引**](#create-a-full-text-index)：创建带有全文索引的表，或在现有表上添加全文索引。
 
-2. [**插入文本数据**](#插入文本数据)：向表中插入文本数据。
+2. [**插入文本数据**](#insert-text-data)：向表中插入文本数据。
 
-3. [**执行全文搜索**](#执行全文搜索)：使用文本查询和全文搜索函数执行全文搜索。
+3. [**执行全文搜索**](#perform-a-full-text-search)：使用文本查询和全文搜索函数进行搜索。
 
 ### 创建全文索引
 
-要执行全文搜索，需要全文索引，因为它提供了高效搜索和排序所需的数据结构。全文索引可以在新表上创建，也可以添加到现有表中。
+要执行全文搜索，必须创建全文索引，因为它提供了高效搜索和排名所需的数据结构。全文索引可以在新表上创建，也可以添加到已有表中。
 
 创建带有全文索引的表：
 
@@ -53,7 +54,7 @@ CREATE TABLE stock_items(
 );
 ```
 
-或为现有表添加全文索引：
+或者在已有表上添加全文索引：
 
 ```sql
 CREATE TABLE stock_items(
@@ -61,30 +62,30 @@ CREATE TABLE stock_items(
     title TEXT
 );
 
--- 你可能在这里插入一些数据。
--- 即使表中已经有数据，也可以创建全文索引。
+-- 你可以在插入数据后再创建全文索引。
+-- 即使表中已有数据，也可以创建全文索引。
 
 ALTER TABLE stock_items ADD FULLTEXT INDEX (title) WITH PARSER MULTILINGUAL ADD_COLUMNAR_REPLICA_ON_DEMAND;
 ```
 
-在 `WITH PARSER <PARSER_NAME>` 子句中可以使用以下解析器：
+`WITH PARSER <PARSER_NAME>` 子句支持的分析器有：
 
-- `STANDARD`：快速，适用于英文内容，按空格和标点符号分词。
+- `STANDARD`：速度快，适用于英文内容，按空格和标点符号拆分词语。
 
-- `MULTILINGUAL`：支持多种语言，包括英语、中文、日语和韩语。
+- `MULTILINGUAL`：支持多种语言，包括英文、中文、日语和韩语。
 
 ### 插入文本数据
 
-向带有全文索引的表中插入数据与向其他表插入数据完全相同。
+向带有全文索引的表中插入数据，方式与普通表相同。
 
-例如，你可以执行以下 SQL 语句来插入多种语言的数据。TiDB 的多语言解析器会自动处理文本。
+例如，可以执行以下 SQL 语句，插入多语言文本。TiDB 中的多语言分析器会自动处理文本。
 
 ```sql
 INSERT INTO stock_items VALUES (1, "イヤホン bluetooth ワイヤレスイヤホン ");
 INSERT INTO stock_items VALUES (2, "完全ワイヤレスイヤホン/ウルトラノイズキャンセリング 2.0 ");
 INSERT INTO stock_items VALUES (3, "ワイヤレス ヘッドホン Bluetooth 5.3 65時間再生 ヘッドホン 40mm HD ");
 INSERT INTO stock_items VALUES (4, "楽器用 オンイヤーヘッドホン 密閉型【国内正規品】");
-INSERT INTO stock_items VALUES (5, "ワイヤレスイヤホン ハイブリッドANC搭載 40dBまでアクティブノイズキャンセル");
+INSERT INTO stock_items VALUES (5, "ワイヤレスイヤホン ハイブリッドANC搭載 40dBまでアクティブノイズキャンセリング");
 INSERT INTO stock_items VALUES (6, "Lightweight Bluetooth Earbuds with 48 Hours Playtime");
 INSERT INTO stock_items VALUES (7, "True Wireless Noise Cancelling Earbuds - Compatible with Apple & Android, Built-in Microphone");
 INSERT INTO stock_items VALUES (8, "In-Ear Earbud Headphones with Mic, Black");
@@ -99,9 +100,9 @@ INSERT INTO stock_items VALUES (15, "皎月银 国家补贴 心率血氧监测 �
 
 ### 执行全文搜索
 
-要执行全文搜索，你可以使用 `FTS_MATCH_WORD()` 函数。
+可以使用 `FTS_MATCH_WORD()` 函数进行全文搜索。
 
-**示例：搜索最相关的 10 个文档**
+**示例：搜索最相关的 10 条文档**
 
 ```sql
 SELECT * FROM stock_items
@@ -121,7 +122,7 @@ SELECT * FROM stock_items
 |    5 | ワイヤレスイヤホン ハイブリッドANC搭載 40dBまでアクティブノイズキャンセル                                            |
 +------+-----------------------------------------------------------------------------------------------------------+
 
--- 尝试用另一种语言搜索：
+-- 试试用另一种语言搜索：
 SELECT * FROM stock_items
     WHERE fts_match_word("蓝牙耳机", title)
     ORDER BY fts_match_word("蓝牙耳机", title)
@@ -151,11 +152,11 @@ SELECT COUNT(*) FROM stock_items
 +----------+
 ```
 
-## 高级示例：连接搜索结果与其他表
+## 高级示例：将搜索结果与其他表连接
 
 你可以将全文搜索与其他 SQL 功能（如连接和子查询）结合使用。
 
-假设你有一个 `users` 表和一个 `tickets` 表，想要根据作者姓名的全文搜索来查找他们创建的工单：
+假设你有 `users` 表和 `tickets` 表，想根据用户姓名的全文搜索结果找到对应的工单：
 
 ```sql
 CREATE TABLE users(
@@ -178,7 +179,7 @@ INSERT INTO tickets VALUES (2, "Ticket 2", 1);
 INSERT INTO tickets VALUES (3, "Ticket 3", 2);
 ```
 
-你可以使用子查询根据作者姓名查找匹配的用户 ID，然后在外部查询中使用这些 ID 来检索和连接相关的工单信息：
+你可以用子查询找到匹配的用户 ID，然后在外层查询中使用这些 ID 来检索和连接相关的工单信息：
 
 ```sql
 SELECT t.title AS TICKET_TITLE, u.id AS AUTHOR_ID, u.name AS AUTHOR_NAME FROM tickets t
@@ -189,21 +190,21 @@ WHERE t.author_id IN
     WHERE fts_match_word("Alice", name)
 );
 
-+--------------+-----------+-------------+
-| TICKET_TITLE | AUTHOR_ID | AUTHOR_NAME |
-+--------------+-----------+-------------+
-| Ticket 1     |         1 | Alice Smith |
-| Ticket 2     |         1 | Alice Smith |
-+--------------+-----------+-------------+
++--------------+-----------+--------------+
+| TICKET_TITLE | AUTHOR_ID | AUTHOR_NAME  |
++--------------+-----------+--------------+
+| Ticket 1     |         1 | Alice Smith  |
+| Ticket 2     |         1 | Alice Smith  |
++--------------+-----------+--------------+
 ```
 
-## 另请参阅
+## 相关链接
 
-- [混合搜索](/tidb-cloud/vector-search-hybrid-search.md)
+- [Hybrid Search](/tidb-cloud/vector-search-hybrid-search.md)
 
 ## 反馈与帮助
 
-全文搜索仍处于早期阶段，可用性有限。如果你想在尚未开放的地区尝试全文搜索，或者如果你有反馈或需要帮助，请随时联系我们：
+全文搜索仍处于早期阶段，访问权限有限。如果你希望在尚未支持的区域试用全文搜索，或有反馈或需要帮助，欢迎联系我们：
 
 <CustomContent platform="tidb">
 

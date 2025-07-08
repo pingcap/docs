@@ -1,105 +1,105 @@
 ---
-title: TiDB Smooth Upgrade
-summary: This document introduces the smooth upgrade feature of TiDB, which supports upgrading TiDB clusters without manually canceling DDL operations.
+title: TiDB 平滑升级
+summary: 本文档介绍了 TiDB 的平滑升级功能，该功能支持在无需手动取消 DDL 操作的情况下升级 TiDB 集群。
 ---
 
-# TiDB Smooth Upgrade
+# TiDB 平滑升级
 
-This document introduces the smooth upgrade feature of TiDB, which supports upgrading TiDB clusters without manually canceling DDL operations.
+本文档介绍了 TiDB 的平滑升级功能，该功能支持在无需手动取消 DDL 操作的情况下升级 TiDB 集群。
 
-Starting from v7.1.0, when you upgrade TiDB to a later version, TiDB supports smooth upgrade. This feature removes the limitations during the upgrade process and provides a more user-friendly upgrade experience. Note that you need to ensure that there are no user-initiated DDL operations during the upgrade process.
+从 v7.1.0 版本开始，当你将 TiDB 升级到后续版本时，TiDB 支持平滑升级。该功能消除了升级过程中的限制，提供了更友好的升级体验。注意，在升级过程中，你需要确保没有用户发起的 DDL 操作。
 
-## Supported versions
+## 支持的版本
 
-Depending on whether the feature needs to be controlled by a switch, there are two ways to use smooth upgrade:
+根据该功能是否需要通过开关控制，有两种方式使用平滑升级：
 
-- The feature is enabled by default and does not need to be controlled by a switch. Currently, the versions that support this method are v7.1.0, v7.1.1, v7.2.0, and v7.3.0. The specific supported versions are as follows:
-    - Upgrade from v7.1.0 to v7.1.1, v7.2.0, or v7.3.0
-    - Upgrade from v7.1.1 to v7.2.0 or v7.3.0
-    - Upgrade from v7.2.0 to v7.3.0
+- 该功能默认启用，无需通过开关控制。目前，支持此方法的版本有 v7.1.0、v7.1.1、v7.2.0 和 v7.3.0。具体支持的版本如下：
+    - 从 v7.1.0 升级到 v7.1.1、v7.2.0 或 v7.3.0
+    - 从 v7.1.1 升级到 v7.2.0 或 v7.3.0
+    - 从 v7.2.0 升级到 v7.3.0
 
-- The feature is disabled by default, and can be enabled by sending the `/upgrade/start` request. For details, see [TiDB HTTP API](https://github.com/pingcap/tidb/blob/release-8.1/docs/tidb_http_api.md). The supported versions are as follows:
-    - Upgrade from v7.1.2 and later v7.1 versions (that is, v7.1.x, where x >= 2) to v7.4.0 and later versions
-    - Upgrade from v7.4.0 to later versions
+- 该功能默认禁用，可以通过发送 `/upgrade/start` 请求启用。详情请参见 [TiDB HTTP API](https://github.com/pingcap/tidb/blob/release-8.1/docs/tidb_http_api.md)。支持的版本如下：
+    - 从 v7.1.2 及之后的 v7.1 版本（即 v7.1.x，x >= 2）升级到 v7.4.0 及之后的版本
+    - 从 v7.4.0 升级到后续版本
 
-Refer to the following table for the upgrade methods supported by specific versions:
+请参考下表，了解特定版本支持的升级方式：
 
-| Original version | Upgraded version | Upgrade methods | Note |
+| 原始版本 | 升级版本 | 升级方式 | 备注 |
 |------|--------|-------------|-------------|
-| < v7.1.0  | Any version                 | Does not support smooth upgrade. | |
-| v7.1.0    | v7.1.1、v7.2.0, or v7.3.0   | Smooth upgrade is automatically supported. No additional operations are required. | Experimental feature. It might encounter the issue [#44760](https://github.com/pingcap/tidb/pull/44760). |
-| v7.1.1    | v7.2.0 or v7.3.0         | Smooth upgrade is automatically supported. No additional operations are required. | Experimental feature.  |
-| v7.2.0    | v7.3.0                   | Smooth upgrade is automatically supported. No additional operations are required. | Experimental feature.  |
-| [v7.1.2, v7.2.0)                     | [v7.1.2, v7.2.0) | Enable smooth upgrade by sending the `/upgrade/start` HTTP request. There are two methods: [Use TiUP](#use-tiup-to-upgrade) and [Other upgrade methods](#other-upgrade-methods) | When smooth upgrade is not enabled, ensure that no DDL operations are performed during the upgrade. |
-| [v7.1.2, v7.2.0) or >= v7.4.0             | >= v7.4.0 | Enable smooth upgrade by sending the `/upgrade/start` HTTP request. There are two methods: [Use TiUP](#use-tiup-to-upgrade) and [Other upgrade methods](#other-upgrade-methods)  | When smooth upgrade is not enabled, ensure that no DDL operations are performed during the upgrade. |
-| v7.1.0, v7.1.1, v7.2.0, and v7.3.0     | >= v7.4.0 | Does not support smooth upgrade. | |
+| < v7.1.0  | 任何版本                 | 不支持平滑升级。 | |
+| v7.1.0    | v7.1.1、v7.2.0 或 v7.3.0   | 自动支持平滑升级。无需额外操作。 | 实验性功能。可能遇到问题 [#44760](https://github.com/pingcap/tidb/pull/44760)。 |
+| v7.1.1    | v7.2.0 或 v7.3.0         | 自动支持平滑升级。无需额外操作。 | 实验性功能。  |
+| v7.2.0    | v7.3.0                   | 自动支持平滑升级。无需额外操作。 | 实验性功能。  |
+| [v7.1.2, v7.2.0)                     | [v7.1.2, v7.2.0) | 通过发送 `/upgrade/start` HTTP 请求启用平滑升级。有两种方法： [使用 TiUP](#use-tiup-to-upgrade) 和 [其他升级方法](#other-upgrade-methods) | 在未启用平滑升级时，确保升级期间不执行任何 DDL 操作。 |
+| [v7.1.2, v7.2.0) 或 >= v7.4.0             | >= v7.4.0 | 通过发送 `/upgrade/start` HTTP 请求启用平滑升级。有两种方法： [使用 TiUP](#use-tiup-to-upgrade) 和 [其他升级方法](#other-upgrade-methods) | 在未启用平滑升级时，确保升级期间不执行任何 DDL 操作。 |
+| v7.1.0、v7.1.1、v7.2.0 和 v7.3.0     | >= v7.4.0 | 不支持平滑升级。 | |
 
-## Feature introduction
+## 功能介绍
 
-Before the smooth upgrade feature is introduced, there are the following limitations on DDL operations during the upgrade process:
+在引入平滑升级功能之前，对升级过程中 DDL 操作存在以下限制：
 
-- Running DDL operations during the upgrade process might cause undefined behavior in TiDB.
-- Upgrading TiDB during the DDL operations might cause undefined behavior in TiDB.
+- 在升级过程中运行 DDL 操作可能导致 TiDB 出现未定义行为。
+- 在升级 TiDB 时进行 DDL 操作可能导致 TiDB 出现未定义行为。
 
-These limitations can be summarized as that you need to ensure that there are no user-initiated DDL operations during the upgrade process. After the smooth upgrade feature is introduced, TiDB is no longer subject to this limitation during the upgrade process.
+这些限制可以总结为：你需要确保在升级过程中没有用户发起的 DDL 操作。引入平滑升级功能后，TiDB 在升级过程中不再受此限制。
 
-For more information, see the **Warning** content in [Upgrade TiDB Using TiUP](/upgrade-tidb-using-tiup.md#upgrade-tidb-using-tiup).
+更多信息请参见 [Upgrade TiDB Using TiUP](/upgrade-tidb-using-tiup.md#upgrade-tidb-using-tiup) 中的 **Warning** 内容。
 
-### Upgrade steps
+### 升级步骤
 
-#### Use TiUP to upgrade
+#### 使用 TiUP 升级
 
-Starting from v1.14.0, TiUP automatically supports this feature. That is, you can directly use the `tiup cluster upgrade` command to upgrade TiDB clusters. Note that the `tiup cluster patch` command is not supported currently.
+从 v1.14.0 版本开始，TiUP 自动支持此功能。也就是说，你可以直接使用 `tiup cluster upgrade` 命令升级 TiDB 集群。注意，目前不支持 `tiup cluster patch` 命令。
 
-#### Use TiDB Operator to upgrade
+#### 使用 TiDB Operator 升级
 
-Currently, this feature is not supported. It will be supported as soon as possible.
+目前不支持此功能。会尽快支持。
 
-#### Other upgrade methods
+#### 其他升级方法
 
-You can take the following steps to upgrade TiDB manually or by using a script:
+你可以按照以下步骤手动或通过脚本升级 TiDB：
 
-1. Send the HTTP upgrade start request to any TiDB node in the cluster: `curl -X POST http://{TiDBIP}:10080/upgrade/start`.
-   * The TiDB cluster enters the **Upgrading** state.
-   * The DDL operations to be performed are paused.
+1. 发送 HTTP 升级开始请求到集群中的任意 TiDB 节点：`curl -X POST http://{TiDBIP}:10080/upgrade/start`。
+   * TiDB 集群进入 **Upgrading** 状态。
+   * 待执行的 DDL 操作被暂停。
 
-2. Replace the TiDB binary and perform a rolling upgrade. This process is the same as the original upgrade process.
-    * The system DDL operations are performed during the upgrade process.
+2. 替换 TiDB 二进制文件并进行滚动升级。此过程与原始升级流程相同。
+    * 升级过程中会执行系统 DDL 操作。
 
-3. After all TiDB nodes in the cluster are upgraded successfully, send the HTTP upgrade finish request to any TiDB node: `curl -X POST http://{TiDBIP}:10080/upgrade/finish`.
-    * The paused DDL operations of users are resumed.
+3. 当集群中的所有 TiDB 节点都成功升级后，向任意 TiDB 节点发送 HTTP 升级完成请求：`curl -X POST http://{TiDBIP}:10080/upgrade/finish`。
+    * 用户暂停的 DDL 操作将恢复。
 
-## Limitations
+## 限制
 
-When using the smooth upgrade feature, note the following limitations.
+在使用平滑升级功能时，请注意以下限制。
 
 > **Note:**
 >
-> The limitations in this section apply not only to scenarios using the smooth upgrade feature, but also to [upgrading TiDB using TiUP](/upgrade-tidb-using-tiup.md#upgrade-tidb-using-tiup).
+> 本节中的限制不仅适用于使用平滑升级功能的场景，也适用于 [使用 TiUP 升级 TiDB](/upgrade-tidb-using-tiup.md#upgrade-tidb-using-tiup)。
 
-### Limitations on user operations
+### 用户操作限制
 
-* Before the upgrade, consider the following restrictions:
+* 在升级前，应考虑以下限制：
 
-    * If there is a canceling DDL job in the cluster, that is, an ongoing DDL job is being canceled by a user, because the job in the canceling state cannot be paused, TiDB will retry canceling the job. If the retry fails, an error is reported and the upgrade is exited.
-    * If your current TiDB version is earlier than v8.1.0 and the TiDB Distributed eXecution Framework (DXF) is enabled, disable it by setting [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) to `OFF`. Make sure that all ongoing distributed `ADD INDEX` and `IMPORT INTO` tasks are completed. Alternatively, you can cancel these tasks and wait until the upgrade is complete to restart them. Otherwise, the `ADD INDEX` operations during the upgrade might cause data index inconsistency. If your current TiDB version is v8.1.0 or later, you do not need to disable the DXF, and you can just ignore this limitation.
+    * 如果集群中存在取消中的 DDL 作业，即用户正在取消的 DDL 作业，由于取消状态的作业无法暂停，TiDB 会重试取消作业。如果重试失败，会报错并退出升级。
+    * 如果你当前的 TiDB 版本早于 v8.1.0 且启用了 TiDB 分布式执行框架（DXF），请通过设置 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) 为 `OFF` 来禁用它。确保所有正在进行的分布式 `ADD INDEX` 和 `IMPORT INTO` 任务已完成。或者，你可以取消这些任务，等待升级完成后再重新启动它们。否则，升级期间的 `ADD INDEX` 操作可能导致数据索引不一致。如果你当前的 TiDB 版本为 v8.1.0 或更高，则无需禁用 DXF，可以忽略此限制。
 
-* In scenarios of using TiUP to upgrade TiDB, because TiUP upgrade has a timeout period, if the cluster has a large number of DDL jobs (more than 300) waiting in queues before the upgrade, the upgrade might fail.
+* 在使用 TiUP 升级 TiDB 时，由于 TiUP 升级存在超时限制，如果集群中有大量（超过 300 个）排队等待的 DDL 作业，升级可能失败。
 
-* During the upgrade, the following operations are not allowed:
+* 升级期间，不允许进行以下操作：
 
-    * Run DDL operations on system tables (`mysql.*`, `information_schema.*`, `performance_schema.*`, and `metrics_schema.*`).
-    * Manually cancel DDL jobs: `ADMIN CANCEL DDL JOBS job_id [, job_id] ...;`.
-    * Import data.
+    * 在系统表（`mysql.*`、`information_schema.*`、`performance_schema.*` 和 `metrics_schema.*`）上运行 DDL 操作。
+    * 手动取消 DDL 作业：`ADMIN CANCEL DDL JOBS job_id [, job_id] ...;`。
+    * 导入数据。
 
-### Limitations on tools
+### 工具限制
 
-* During the upgrade, use of the following tools is not supported:
+* 在升级期间，不支持使用以下工具：
 
-    * BR: BR might replicate the paused DDL jobs to TiDB. The paused DDL jobs cannot be automatically resumed, which might cause the DDL jobs to be stuck later.
+    * BR：BR 可能会复制暂停的 DDL 作业到 TiDB。暂停的 DDL 作业无法自动恢复，可能导致 DDL 作业后续卡住。
 
-    * DM and TiCDC: If you use DM or TiCDC to import SQL statements to TiDB during the upgrade process, and if one of the SQL statements contains DDL operations, the import operation is blocked and undefined errors might occur.
+    * DM 和 TiCDC：如果在升级过程中使用 DM 或 TiCDC 导入 SQL 语句到 TiDB，且其中某个 SQL 语句包含 DDL 操作，导入操作会被阻塞，可能出现未定义的错误。
 
-### Limitation on plugins
+### 插件限制
 
-The plugins installed in TiDB might contain DDL operations. However, during the upgrade, if the DDL operations in the plugins are performed on non-system tables, the upgrade might fail.
+在 TiDB 中安装的插件可能包含 DDL 操作。然而，在升级过程中，如果插件中的 DDL 操作是在非系统表上执行的，升级可能会失败。

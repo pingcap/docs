@@ -1,15 +1,15 @@
 ---
-title: Replicate Data to Kafka
-summary: Learn how to replicate data to Apache Kafka using TiCDC.
+title: 将数据复制到 Kafka
+summary: 学习如何使用 TiCDC 将数据复制到 Apache Kafka。
 ---
 
-# Replicate Data to Kafka
+# 将数据复制到 Kafka
 
-This document describes how to create a changefeed that replicates incremental data to Apache Kafka using TiCDC.
+本文档描述了如何创建一个 changefeed，将增量数据复制到 Apache Kafka，使用 TiCDC。
 
-## Create a replication task
+## 创建复制任务
 
-Create a replication task by running the following command:
+通过运行以下命令创建一个复制任务：
 
 ```shell
 cdc cli changefeed create \
@@ -24,29 +24,29 @@ ID: simple-replication-task
 Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1","opts":{},"create-time":"2023-11-28T22:04:08.103600025+08:00","start-ts":415241823337054209,"target-ts":0,"admin-job-type":0,"sort-engine":"unified","sort-dir":".","config":{"case-sensitive":false,"filter":{"rules":["*.*"],"ignore-txn-start-ts":null,"ddl-allow-list":null},"mounter":{"worker-num":16},"sink":{"dispatchers":null},"scheduler":{"type":"table-number","polling-time":-1}},"state":"normal","history":null,"error":null}
 ```
 
-- `--server`: The address of any TiCDC server in the TiCDC cluster.
-- `--changefeed-id`: The ID of the replication task. The format must match the `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
-- `--sink-uri`: The downstream address of the replication task. For details, see [Configure sink URI with `kafka`](#configure-sink-uri-for-kafka).
-- `--start-ts`: Specifies the starting TSO of the changefeed. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
-- `--target-ts`: Specifies the ending TSO of the changefeed. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
-- `--config`: Specifies the changefeed configuration file. For details, see [TiCDC Changefeed Configuration Parameters](/ticdc/ticdc-changefeed-config.md).
+- `--server`: TiCDC 集群中任意 TiCDC 服务器的地址。
+- `--changefeed-id`: 复制任务的 ID。格式必须符合 `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` 正则表达式。如果未指定此 ID，TiCDC 会自动生成一个 UUID（版本 4 格式）作为 ID。
+- `--sink-uri`: 复制任务的下游地址。详情请参见 [使用 `kafka` 配置 sink URI](#configure-sink-uri-for-kafka)。
+- `--start-ts`: 指定 changefeed 的起始 TSO。从此 TSO 开始，TiCDC 集群开始拉取数据。默认值为当前时间。
+- `--target-ts`: 指定 changefeed 的结束 TSO。到此 TSO，TiCDC 集群停止拉取数据。默认值为空，表示 TiCDC 不会自动停止拉取数据。
+- `--config`: 指定 changefeed 配置文件。详情请参见 [TiCDC Changefeed 配置参数](/ticdc/ticdc-changefeed-config.md)。
 
-## Supported Kafka versions
+## 支持的 Kafka 版本
 
-The following table shows the minimum supported Kafka versions for each TiCDC version:
+下表显示了每个 TiCDC 版本支持的最低 Kafka 版本：
 
-| TiCDC version            | Minimum supported Kafka version |
-|:-------------------------|:--------------------------------|
-| TiCDC >= v8.1.0          | 2.1.0                           |
-| v7.6.0 <= TiCDC < v8.1.0 | 2.4.0                           |
-| v7.5.2 <= TiCDC < v8.0.0 | 2.1.0                           |
-| v7.5.0 <= TiCDC < v7.5.2 | 2.4.0                           |
-| v6.5.0 <= TiCDC < v7.5.0 | 2.1.0                           |
-| v6.1.0 <= TiCDC < v6.5.0 | 2.0.0                           |
+| TiCDC 版本            | 最低支持的 Kafka 版本 |
+|:---------------------|:---------------------|
+| TiCDC >= v8.1.0      | 2.1.0                |
+| v7.6.0 <= TiCDC < v8.1.0 | 2.4.0            |
+| v7.5.2 <= TiCDC < v8.0.0 | 2.1.0            |
+| v7.5.0 <= TiCDC < v7.5.2 | 2.4.0            |
+| v6.5.0 <= TiCDC < v7.5.0 | 2.1.0            |
+| v6.1.0 <= TiCDC < v6.5.0 | 2.0.0            |
 
-## Configure sink URI for Kafka
+## 配置 Kafka 的 sink URI
 
-Sink URI is used to specify the connection information of the TiCDC target system. The format is as follows:
+Sink URI 用于指定 TiCDC 目标系统的连接信息。格式如下：
 
 ```shell
 [scheme]://[host]:[port][/path]?[query_parameters]
@@ -54,72 +54,71 @@ Sink URI is used to specify the connection information of the TiCDC target syste
 
 > **Tip:**
 > 
-> If there are multiple hosts or ports for the downstream Kafka, you can configure multiple `[host]:[port]` in the sink URI. For example:
+> 如果下游 Kafka 有多个主机或端口，可以在 sink URI 中配置多个 `[host]:[port]`。例如：
 >
 > ```shell
 > [scheme]://[host]:[port],[host]:[port],[host]:[port][/path]?[query_parameters]
 > ```
 
-Sample configuration:
+示例配置：
 
 ```shell
 --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1"
 ```
 
-The following are descriptions of sink URI parameters and values that can be configured for Kafka:
+以下是 Kafka sink URI 参数及其说明：
 
-| Parameter/Parameter value               | Description                                                        |
+| 参数/参数值 | 描述 |
 | :------------------ | :------------------------------------------------------------ |
-| `host`          | The IP address of the downstream Kafka services.                                 |
-| `port`               | The port for the downstream Kafka.                                          |
-| `topic-name` | Variable. The name of the Kafka topic. |
-| `protocol` | The protocol with which messages are output to Kafka. The value options are [`canal-json`](/ticdc/ticdc-canal-json.md)、[`open-protocol`](/ticdc/ticdc-open-protocol.md)、[`avro`](/ticdc/ticdc-avro-protocol.md)、[`debezium`](/ticdc/ticdc-debezium.md) and [`simple`](/ticdc/ticdc-simple-protocol.md).   |
-| `kafka-version`      | The version of the downstream Kafka. This value needs to be consistent with the actual version of the downstream Kafka.                      |
-| `kafka-client-id`    | Specifies the Kafka client ID of the replication task (optional. `TiCDC_sarama_producer_replication ID` by default). |
-| `partition-num`      | The number of the downstream Kafka partitions (optional. The value must be **no greater than** the actual number of partitions; otherwise, the replication task cannot be created successfully. `3` by default). |
-| `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `10MB` by default). From v5.0.6 and v4.0.6, the default value has changed from `64MB` and `256MB` to `10MB`. |
-| `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default). This value must be greater than or equal to the value of [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) in Kafka. |
-| `required-acks` | A parameter used in the `Produce` request, which notifies the broker of the number of replica acknowledgements it needs to receive before responding. Value options are `0` (`NoResponse`: no response, only `TCP ACK` is provided), `1` (`WaitForLocal`: responds only after local commits are submitted successfully), and `-1` (`WaitForAll`: responds after all replicated replicas are committed successfully. You can configure the minimum number of replicated replicas using the [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) configuration item of the broker). (Optional, the default value is `-1`).    |
-| `compression` | The compression algorithm used when sending messages (value options are `none`, `lz4`, `gzip`, `snappy`, and `zstd`; `none` by default). Note that the Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.|
-| `auto-create-topic` | Determines whether TiCDC creates the topic automatically when the `topic-name` passed in does not exist in the Kafka cluster (optional, `true` by default). |
-| `enable-tidb-extension` | Optional. `false` by default. When the output protocol is `canal-json`, if the value is `true`, TiCDC sends [WATERMARK events](/ticdc/ticdc-canal-json.md#watermark-event) and adds the [TiDB extension field](/ticdc/ticdc-canal-json.md#tidb-extension-field) to Kafka messages. From v6.1.0, this parameter is also applicable to the `avro` protocol. If the value is `true`, TiCDC adds [three TiDB extension fields](/ticdc/ticdc-avro-protocol.md#tidb-extension-fields) to the Kafka message. |
-| `max-batch-size` | New in v4.0.9. If the message protocol supports outputting multiple data changes to one Kafka message, this parameter specifies the maximum number of data changes in one Kafka message. It currently takes effect only when Kafka's `protocol` is `open-protocol` (optional, `16` by default). |
-| `enable-tls` | Whether to use TLS to connect to the downstream Kafka instance (optional, `false` by default). |
-| `ca` | The path of the CA certificate file needed to connect to the downstream Kafka instance (optional).  |
-| `cert` | The path of the certificate file needed to connect to the downstream Kafka instance (optional). |
-| `key` | The path of the certificate key file needed to connect to the downstream Kafka instance (optional). |
-| `insecure-skip-verify` | Whether to skip certificate verification when connecting to the downstream Kafka instance (optional, `false` by default). |
-| `sasl-user` | The identity (authcid) of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional). |
-| `sasl-password` | The password of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional). If it contains special characters, they need to be URL encoded. |
-| `sasl-mechanism` | The name of SASL authentication needed to connect to the downstream Kafka instance. The value can be `plain`, `scram-sha-256`, `scram-sha-512`, or `gssapi`. |
-| `sasl-gssapi-auth-type` | The gssapi authentication type. Values can be `user` or `keytab` (optional). |
-| `sasl-gssapi-keytab-path` | The gssapi keytab path (optional).|
-| `sasl-gssapi-kerberos-config-path` | The gssapi kerberos configuration path (optional). |
-| `sasl-gssapi-service-name` | The gssapi service name (optional). |
-| `sasl-gssapi-user` | The user name of gssapi authentication (optional). |
-| `sasl-gssapi-password` | The password of gssapi authentication (optional). If it contains special characters, they need to be URL encoded. |
-| `sasl-gssapi-realm` | The gssapi realm name (optional). |
-| `sasl-gssapi-disable-pafxfast` | Whether to disable the gssapi PA-FX-FAST (optional). |
-| `dial-timeout` | The timeout in establishing a connection with the downstream Kafka. The default value is `10s`. |
-| `read-timeout` | The timeout in getting a response returned by the downstream Kafka. The default value is `10s`. |
-| `write-timeout` | The timeout in sending a request to the downstream Kafka. The default value is `10s`. |
-| `avro-decimal-handling-mode` | Only effective with the `avro` protocol. Determines how Avro handles the DECIMAL field. The value can be `string` or `precise`, indicating either mapping the DECIMAL field to a string or a precise floating number.  |
-| `avro-bigint-unsigned-handling-mode` | Only effective with the `avro` protocol. Determines how Avro handles the BIGINT UNSIGNED field. The value can be `string` or `long`, indicating either mapping the BIGINT UNSIGNED field to a 64-bit signed number or a string.  |
+| `host` | 下游 Kafka 服务的 IP 地址。 |
+| `port` | 下游 Kafka 的端口。 |
+| `topic-name` | 变量。Kafka 主题的名称。 |
+| `protocol` | 输出到 Kafka 的消息协议。可选值包括 [`canal-json`](/ticdc/ticdc-canal-json.md)、[`open-protocol`](/ticdc/ticdc-open-protocol.md)、[`avro`](/ticdc/ticdc-avro-protocol.md)、[`debezium`](/ticdc/ticdc-debezium.md) 和 [`simple`](/ticdc/ticdc-simple-protocol.md)。 |
+| `kafka-version` | 下游 Kafka 的版本。此值需与实际的 Kafka 版本保持一致。 |
+| `kafka-client-id` | 指定复制任务的 Kafka 客户端 ID（可选，默认为 `TiCDC_sarama_producer_replication ID`）。 |
+| `partition-num` | 下游 Kafka 分区的数量（可选，值不能大于实际的分区数，否则无法成功创建复制任务，默认为 `3`）。 |
+| `max-message-bytes` | 每次发送到 Kafka broker 的最大数据大小（可选，默认为 `10MB`，从 v5.0.6 和 v4.0.6 起，默认值由 `64MB` 和 `256MB` 改为 `10MB`）。 |
+| `replication-factor` | Kafka 消息副本的数量（可选，默认为 `1`，此值必须大于等于 Kafka 中 [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) 的值）。 |
+| `required-acks` | 在 `Produce` 请求中使用的参数，通知 broker 在响应之前需要收到的副本确认数。可选值包括 `0`（`NoResponse`：无响应，只提供 `TCP ACK`）、`1`（`WaitForLocal`：仅在本地提交成功后响应）和 `-1`（`WaitForAll`：所有副本成功提交后响应。可以通过 Kafka 的 [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) 配置项设置最小副本数）。）（可选，默认值为 `-1`）。 |
+| `compression` | 发送消息时使用的压缩算法（可选，值包括 `none`、`lz4`、`gzip`、`snappy` 和 `zstd`，默认为 `none`）。注意，Snappy 压缩文件必须符合 [官方 Snappy 格式](https://github.com/google/snappy)，不支持其他变体。 |
+| `auto-create-topic` | 决定当传入的 `topic-name` 在 Kafka 集群中不存在时，TiCDC 是否自动创建主题（可选，默认为 `true`）。 |
+| `enable-tidb-extension` | 可选，默认为 `false`。当输出协议为 `canal-json` 时，如果值为 `true`，TiCDC 会发送 [WATERMARK 事件](/ticdc/ticdc-canal-json.md#watermark-event) 并在 Kafka 消息中添加 [TiDB 扩展字段](/ticdc/ticdc-canal-json.md#tidb-extension-field)。从 v6.1.0 起，此参数也适用于 `avro` 协议。若值为 `true`，TiCDC 会在 Kafka 消息中添加 [三个 TiDB 扩展字段](/ticdc/ticdc-avro-protocol.md#tidb-extension-fields)。 |
+| `max-batch-size` | 在 v4.0.9 中新增。若消息协议支持将多个数据变更输出到一条 Kafka 消息，此参数指定一条 Kafka 消息中的最大数据变更数。目前仅在 Kafka 的 `protocol` 为 `open-protocol` 时生效（可选，默认为 `16`）。 |
+| `enable-tls` | 是否使用 TLS 连接到下游 Kafka 实例（可选，默认为 `false`）。 |
+| `ca` | 连接到下游 Kafka 实例所需的 CA 证书文件路径（可选）。 |
+| `cert` | 连接到下游 Kafka 实例所需的证书文件路径（可选）。 |
+| `key` | 连接到下游 Kafka 实例所需的证书密钥文件路径（可选）。 |
+| `insecure-skip-verify` | 连接到下游 Kafka 实例时是否跳过证书验证（可选，默认为 `false`）。 |
+| `sasl-user` | 连接到下游 Kafka 实例所需的 SASL/PLAIN 或 SASL/SCRAM 认证的身份（authcid）（可选）。 |
+| `sasl-password` | 连接到下游 Kafka 实例所需的 SASL/PLAIN 或 SASL/SCRAM 认证的密码（可选，若包含特殊字符需进行 URL 编码）。 |
+| `sasl-mechanism` | 连接到下游 Kafka 实例所需的 SASL 认证机制。值可以是 `plain`、`scram-sha-256`、`scram-sha-512` 或 `gssapi`。 |
+| `sasl-gssapi-auth-type` | gssapi 认证类型。值可以是 `user` 或 `keytab`（可选）。 |
+| `sasl-gssapi-kerberos-config-path` | gssapi Kerberos 配置路径（可选）。 |
+| `sasl-gssapi-service-name` | gssapi 服务名（可选）。 |
+| `sasl-gssapi-user` | gssapi 认证的用户名（可选）。 |
+| `sasl-gssapi-password` | gssapi 认证的密码（可选，若包含特殊字符需进行 URL 编码）。 |
+| `sasl-gssapi-realm` | gssapi 领域名（可选）。 |
+| `sasl-gssapi-disable-pafxfast` | 是否禁用 gssapi 的 PA-FX-FAST（可选）。 |
+| `dial-timeout` | 建立与下游 Kafka 连接的超时时间，默认值为 `10s`。 |
+| `read-timeout` | 获取下游 Kafka 返回响应的超时时间，默认值为 `10s`。 |
+| `write-timeout` | 发送请求到下游 Kafka 的超时时间，默认值为 `10s`。 |
+| `avro-decimal-handling-mode` | 仅在 `avro` 协议下有效。决定 Avro 如何处理 DECIMAL 字段。值可以是 `string` 或 `precise`，表示将 DECIMAL 字段映射为字符串或精确浮点数。 |
+| `avro-bigint-unsigned-handling-mode` | 仅在 `avro` 协议下有效。决定 Avro 如何处理 BIGINT UNSIGNED 字段。值可以是 `string` 或 `long`，表示将 BIGINT UNSIGNED 字段映射为 64 位有符号数或字符串。 |
 
-### Best practices
+### 最佳实践
 
-* It is recommended that you create your own Kafka Topic. At a minimum, you need to set the maximum amount of data of each message that the Topic can send to the Kafka broker, and the number of downstream Kafka partitions. When you create a changefeed, these two settings correspond to `max-message-bytes` and `partition-num`, respectively.
-* If you create a changefeed with a Topic that does not yet exist, TiCDC will try to create the Topic using the `partition-num` and `replication-factor` parameters. It is recommended that you specify these parameters explicitly.
-* In most cases, it is recommended to use the `canal-json` protocol.
+* 建议你自己创建 Kafka 主题。至少需要设置每个主题能向 Kafka broker 发送的最大数据量，以及下游 Kafka 分区的数量。当你创建 changefeed 时，这两个设置分别对应 `max-message-bytes` 和 `partition-num`。
+* 如果你用不存在的主题创建 changefeed，TiCDC 会尝试使用 `partition-num` 和 `replication-factor` 参数自动创建主题。建议你显式指定这些参数。
+* 在大多数情况下，建议使用 `canal-json` 协议。
 
 > **Note:**
 >
-> When `protocol` is `open-protocol`, TiCDC encodes multiple events into one Kafka message and avoids generating messages that exceed the length specified by `max-message-bytes`. 
-> If the encoded result of a single row change event exceeds the value of `max-message-bytes`, the changefeed reports an error and prints logs.
+> 当 `protocol` 为 `open-protocol` 时，TiCDC 会将多个事件编码到一条 Kafka 消息中，避免生成超过 `max-message-bytes` 指定长度的消息。
+> 如果单个行变更事件的编码结果超过 `max-message-bytes`，changefeed 会报错并打印日志。
 
-### TiCDC uses the authentication and authorization of Kafka
+### TiCDC 使用 Kafka 的认证和授权
 
-The following are examples when using Kafka SASL authentication:
+以下是使用 Kafka SASL 认证的示例：
 
 - SASL/PLAIN
 
@@ -129,53 +128,53 @@ The following are examples when using Kafka SASL authentication:
 
 - SASL/SCRAM
 
-  SCRAM-SHA-256 and SCRAM-SHA-512 are similar to the PLAIN method. You just need to specify `sasl-mechanism` as the corresponding authentication method.
+  SCRAM-SHA-256 和 SCRAM-SHA-512 类似于 PLAIN 方法，只需将 `sasl-mechanism` 指定为对应的认证方式。
 
 - SASL/GSSAPI
 
-  SASL/GSSAPI `user` authentication:
+  SASL/GSSAPI `user` 认证：
 
   ```shell
   --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&sasl-mechanism=gssapi&sasl-gssapi-auth-type=user&sasl-gssapi-kerberos-config-path=/etc/krb5.conf&sasl-gssapi-service-name=kafka&sasl-gssapi-user=alice/for-kafka&sasl-gssapi-password=alice-secret&sasl-gssapi-realm=example.com"
   ```
 
-  Values of `sasl-gssapi-user` and `sasl-gssapi-realm` are related to the [principle](https://web.mit.edu/kerberos/krb5-1.5/krb5-1.5.4/doc/krb5-user/What-is-a-Kerberos-Principal_003f.html) specified in kerberos. For example, if the principle is set as `alice/for-kafka@example.com`, then `sasl-gssapi-user` and `sasl-gssapi-realm` are specified as `alice/for-kafka` and `example.com` respectively.
+  `sasl-gssapi-user` 和 `sasl-gssapi-realm` 的值与在 Kerberos 中指定的 [principle](https://web.mit.edu/kerberos/krb5-1.5/krb5-1.5.4/doc/krb5-user/What-is-a-Kerberos-Principal_003f.html) 相关。例如，如果 principle 设置为 `alice/for-kafka@example.com`，那么 `sasl-gssapi-user` 和 `sasl-gssapi-realm` 分别为 `alice/for-kafka` 和 `example.com`。
 
-  SASL/GSSAPI `keytab` authentication:
+  SASL/GSSAPI `keytab` 认证：
 
   ```shell
   --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&sasl-mechanism=gssapi&sasl-gssapi-auth-type=keytab&sasl-gssapi-kerberos-config-path=/etc/krb5.conf&sasl-gssapi-service-name=kafka&sasl-gssapi-user=alice/for-kafka&sasl-gssapi-keytab-path=/var/lib/secret/alice.key&sasl-gssapi-realm=example.com"
   ```
 
-  For more information about SASL/GSSAPI authentication methods, see [Configuring GSSAPI](https://docs.confluent.io/platform/current/kafka/authentication_sasl/authentication_sasl_gssapi.html).
+  更多关于 SASL/GSSAPI 认证方式的信息，请参见 [配置 GSSAPI](https://docs.confluent.io/platform/current/kafka/authentication_sasl/authentication_sasl_gssapi.html)。
 
-- TLS/SSL encryption
+- TLS/SSL 加密
 
-    If the Kafka broker has TLS/SSL encryption enabled, you need to add the `-enable-tls=true` parameter to `--sink-uri`. If you want to use self-signed certificates, you also need to specify `ca`, `cert` and `key` in `--sink-uri`.
+  如果 Kafka broker 启用了 TLS/SSL 加密，需要在 `--sink-uri` 中添加 `-enable-tls=true` 参数。如果要使用自签名证书，还需要在 `--sink-uri` 中指定 `ca`、`cert` 和 `key`。
 
-- ACL authorization
+- ACL 授权
 
-    The minimum set of permissions required for TiCDC to function properly is as follows.
+  TiCDC 正常运行所需的最低权限集如下：
 
-    - The `Create`, `Write`, and `Describe` permissions for the Topic [resource type](https://docs.confluent.io/platform/current/kafka/authorization.html#resources).
-    - The `DescribeConfig` permission for the Cluster resource type.
+  - Topic [资源类型](https://docs.confluent.io/platform/current/kafka/authorization.html#resources) 的 `Create`、`Write` 和 `Describe` 权限。
+  - Cluster 资源类型的 `DescribeConfig` 权限。
 
-  The usage scenarios for each permission are as follows:
+  每个权限的使用场景如下：
 
-    | Resource type | Type of operation      |  Scenario                           |
-    | :-------------| :------------- | :--------------------------------|
-    | Cluster       | `DescribeConfig`| Gets the cluster metadata while the changefeed is running |
-    | Topic         | `Describe`      | Tries to create a topic when the changefeed starts |                
-    | Topic         | `Create`        | Tries to create a topic when the changefeed starts  |
-    | Topic         | `Write`         | Sends data to the topic                   | 
+    | 资源类型 | 操作类型 | 场景 |
+    | :-------- | :-------- | :-------- |
+    | Cluster | `DescribeConfig` | 获取集群元数据（changefeed 运行中） |
+    | Topic | `Describe` | 在启动时尝试创建主题 |
+    | Topic | `Create` | 在启动时尝试创建主题 |
+    | Topic | `Write` | 发送数据到主题 |
 
-    When creating or starting a changefeed, you can disable the `Describe` and `Create` permissions if the specified Kafka topic already exists.
+  在创建或启动 changefeed 时，如果 Kafka 主题已存在，可以禁用 `Describe` 和 `Create` 权限。
 
-### Integrate TiCDC with Kafka Connect (Confluent Platform)
+### 将 TiCDC 集成到 Kafka Connect（Confluent Platform）
 
-To use the [data connectors](https://docs.confluent.io/current/connect/managing/connectors.html) provided by Confluent to stream data to relational or non-relational databases, you need to use the [`avro` protocol](/ticdc/ticdc-avro-protocol.md) and provide a URL for [Confluent Schema Registry](https://www.confluent.io/product/confluent-platform/data-compatibility/) in `schema-registry`.
+若要使用 Confluent 提供的 [数据连接器](https://docs.confluent.io/current/connect/managing/connectors.html) 将数据流式传输到关系型或非关系型数据库，需要使用 [`avro` 协议](/ticdc/ticdc-avro-protocol.md)，并在 `schema-registry` 中提供 [Confluent Schema Registry](https://www.confluent.io/product/confluent-platform/data-compatibility/) 的 URL。
 
-Sample configuration:
+示例配置：
 
 ```shell
 --sink-uri="kafka://127.0.0.1:9092/topic-name?&protocol=avro&replication-factor=3" --schema-registry="http://127.0.0.1:8081" --config changefeed_config.toml
@@ -188,11 +187,11 @@ dispatchers = [
 ]
 ```
 
-For detailed integration guide, see [Quick Start Guide on Integrating TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md).
+详细的集成指南请参见 [TiDB 与 Confluent Platform 集成快速入门指南](/ticdc/integrate-confluent-using-ticdc.md)。
 
-### Integrate TiCDC with AWS Glue Schema Registry
+### 将 TiCDC 与 AWS Glue Schema Registry 集成
 
-Starting from v7.4.0, TiCDC supports using the [AWS Glue Schema Registry](https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html) as the Schema Registry when users choose the [Avro protocol](/ticdc/ticdc-avro-protocol.md) for data replication. The configuration example is as follows:
+从 v7.4.0 起，TiCDC 支持在用户选择 [`Avro` 协议](/ticdc/ticdc-avro-protocol.md) 进行数据复制时，将 Schema Registry 设置为 [AWS Glue Schema Registry](https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html)。配置示例如下：
 
 ```shell
 ./cdc cli changefeed create --server=127.0.0.1:8300 --changefeed-id="kafka-glue-test" --sink-uri="kafka://127.0.0.1:9092/topic-name?&protocol=avro&replication-factor=3" --config changefeed_glue.toml
@@ -208,15 +207,15 @@ secret-access-key="xxxx"
 token="xxxx"
 ```
 
-In the above configuration, `region` and `registry-name` are required fields, while `access-key`, `secret-access-key`, and `token` are optional fields. The best practice is to set the AWS credentials as environment variables or store them in the `~/.aws/credentials` file instead of setting them in the changefeed configuration file.
+上述配置中，`region` 和 `registry-name` 为必填字段，`access-key`、`secret-access-key` 和 `token` 为可选字段。最佳实践是将 AWS 凭证设置为环境变量或存储在 `~/.aws/credentials` 文件中，而不是在 changefeed 配置文件中设置。
 
-For more information, refer to the [official AWS SDK for Go V2 documentation](https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/#specifying-credentials).
+更多信息请参见 [AWS SDK for Go V2 官方文档](https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/#specifying-credentials)。
 
-## Customize the rules for Topic and Partition dispatchers of Kafka Sink
+## 自定义 Kafka Sink 的 Topic 和 Partition 分发规则
 
-### Matcher rules
+### Matcher 规则
 
-Take the following configuration of `dispatchers` as an example:
+以下是 `dispatchers` 配置的示例：
 
 ```toml
 [sink]
@@ -228,64 +227,64 @@ dispatchers = [
 ]
 ```
 
-- For the tables that match the matcher rule, they are dispatched according to the policy specified by the corresponding topic expression. For example, the `test3.aa` table is dispatched according to "Topic expression 2"; the `test5.aa` table is dispatched according to "Topic expression 3".
-- For a table that matches multiple matcher rules, it is dispatched according to the first matching topic expression. For example, the `test1.aa` table is distributed according to "Topic expression 1".
-- For tables that do not match any matcher rule, the corresponding data change events are sent to the default topic specified in `--sink-uri`. For example, the `test10.aa` table is sent to the default topic.
-- For tables that match the matcher rule but do not specify a topic dispatcher, the corresponding data changes are sent to the default topic specified in `--sink-uri`. For example, the `test6.aa` table is sent to the default topic.
+- 匹配规则的表，将根据对应的主题表达式指定的策略进行分发。例如，`test3.aa` 表将根据 "Topic expression 2" 进行分发；`test5.aa` 表将根据 "Topic expression 3" 进行分发。
+- 一个表如果匹配多个 matcher 规则，将根据第一个匹配的主题表达式进行分发。例如，`test1.aa` 表将根据 "Topic expression 1" 进行分发。
+- 不匹配任何 matcher 规则的表，其对应的数据变更事件会发送到 `--sink-uri` 中指定的默认主题。例如，`test10.aa` 表会发送到默认主题。
+- 匹配规则但未指定主题分发器的表，其对应的数据变更也会发送到 `--sink-uri` 中的默认主题。例如，`test6.aa` 表会发送到默认主题。
 
-### Topic dispatchers
+### 主题分发器
 
-You can use topic = "xxx" to specify a Topic dispatcher and use topic expressions to implement flexible topic dispatching policies. It is recommended that the total number of topics be less than 1000.
+你可以使用 `topic = "xxx"` 来指定主题分发器，并用主题表达式实现灵活的主题分发策略。建议主题总数少于 1000 个。
 
-The format of the Topic expression is `[prefix]{schema}[middle][{table}][suffix]`.
+主题表达式的格式为 `[prefix]{schema}[middle][{table}][suffix]`。
 
-- `prefix`: optional. Indicates the prefix of the Topic Name.
-- `{schema}`: required. Used to match the schema name. Starting from v7.1.4, this parameter is optional.
-- `middle`: optional. Indicates the delimiter between schema name and table name.
-- `{table}`: optional. Used to match the table name.
-- `suffix`: optional. Indicates the suffix of the Topic Name.
+- `prefix`: 可选。表示主题名称的前缀。
+- `{schema}`: 必填。用于匹配 schema 名称。从 v7.1.4 起，此参数为可选。
+- `middle`: 可选。表示 schema 名称与 table 名称之间的分隔符。
+- `{table}`: 可选。用于匹配 table 名称。
+- `suffix`: 可选。表示主题名称的后缀。
 
-`prefix`, `middle` and `suffix` can only include the following characters: `a-z`, `A-Z`, `0-9`, `.`, `_` and `-`. `{schema}` and `{table}` are both lowercase. Placeholders such as `{Schema}` and `{TABLE}` are invalid.
+`prefix`、`middle` 和 `suffix` 只能包含以下字符：`a-z`、`A-Z`、`0-9`、`.`、`_` 和 `-`。`{schema}` 和 `{table}` 均为小写。像 `{Schema}` 和 `{TABLE}` 这样的占位符无效。
 
-Some examples:
+示例：
 
 - `matcher = ['test1.table1', 'test2.table2'], topic = "hello_{schema}_{table}"`
-    - The data change events corresponding to `test1.table1` are sent to the topic named `hello_test1_table1`.
-    - The data change events corresponding to `test2.table2` are sent to the topic named `hello_test2_table2`.
+    - `test1.table1` 对应的变更事件会发送到主题 `hello_test1_table1`。
+    - `test2.table2` 对应的变更事件会发送到主题 `hello_test2_table2`。
 - `matcher = ['test3.*', 'test4.*'], topic = "hello_{schema}_world"`
-    - The data change events corresponding to all tables in `test3` are sent to the topic named `hello_test3_world`.
-    - The data change events corresponding to all tables in `test4` are sent to the topic named `hello_test4_world`.
-- `matcher = ['test5.*, 'test6.*'], topic = "hard_code_topic_name"`
-    - The data change events corresponding to all tables in `test5` and `test6` are sent to the topic named `hard_code_topic_name`. You can specify the topic name directly.
+    - `test3` 中所有表对应的变更事件会发送到主题 `hello_test3_world`。
+    - `test4` 中所有表对应的变更事件会发送到主题 `hello_test4_world`。
+- `matcher = ['test5.*', 'test6.*'], topic = "hard_code_topic_name"`
+    - `test5` 和 `test6` 中所有表对应的变更事件会发送到主题 `hard_code_topic_name`。可以直接指定主题名。
 - `matcher = ['*.*'], topic = "{schema}_{table}"`
-    - All tables listened by TiCDC are dispatched to separate topics according to the "schema_table" rule. For example, for the `test.account` table, TiCDC dispatches its data change log to a Topic named `test_account`.
+    - TiCDC 监听的所有表会根据 "schema_table" 规则分发到不同的主题。例如，`test.account` 表的变更日志会分发到主题 `test_account`。
 
-### Dispatch DDL events
+### 分发 DDL 事件
 
-#### Schema-level DDLs
+#### Schema 级别的 DDL
 
-DDLs that are not related to a specific table are called schema-level DDLs, such as `create database` and `drop database`. The events corresponding to schema-level DDLs are sent to the default topic specified in `--sink-uri`.
+不涉及具体表的 DDL（如 `create database` 和 `drop database`）称为 schema 级别的 DDL，相关事件会发送到 `--sink-uri` 中指定的默认主题。
 
-#### Table-level DDLs
+#### 表级别的 DDL
 
-DDLs that are related to a specific table are called table-level DDLs, such as `alter table` and `create table`. The events corresponding to table-level DDLs are sent to the corresponding topic according to dispatcher configurations.
+涉及具体表的 DDL（如 `alter table` 和 `create table`）称为表级别的 DDL，相关事件会根据调度器配置发送到对应的主题。
 
-For example, for a dispatcher like `matcher = ['test.*'], topic = {schema}_{table}`, DDL events are dispatched as follows:
+例如，调度器配置为 `matcher = ['test.*'], topic = {schema}_{table}` 时：
 
-- If a single table is involved in the DDL event, the DDL event is sent to the corresponding topic as is. For example, for the DDL event `drop table test.table1`, the event is sent to the topic named `test_table1`.
-- If multiple tables are involved in the DDL event (`rename table` / `drop table` / `drop view` may involve multiple tables), the DDL event is split into multiple events and sent to the corresponding topics. For example, for the DDL event `rename table test.table1 to test.table10, test.table2 to test.table20`, the event `rename table test.table1 to test.table10` is sent to the topic named `test_table1` and the event `rename table test.table2 to test.table20` is sent to the topic named `test.table2`.
+- 如果 DDL 事件只涉及单个表，DDL 事件会原样发送到对应的主题。例如，`drop table test.table1` 会发送到主题 `test_table1`。
+- 如果涉及多个表（`rename table` / `drop table` / `drop view` 可能涉及多个表），DDL 事件会拆分成多个事件，分别发送到对应的主题。例如，`rename table test.table1 to test.table10, test.table2 to test.table20`，会将 `rename table test.table1 to test.table10` 发送到 `test_table1`，`rename table test.table2 to test.table20` 发送到 `test.table2`。
 
-### Partition dispatchers
+### 分区分发器
 
-You can use `partition = "xxx"` to specify a partition dispatcher. It supports five dispatchers: `default`, `index-value`, `columns`, `table`, and `ts`. The dispatcher rules are as follows:
+你可以使用 `partition = "xxx"` 来指定分区分发器。支持五种分发器：`default`、`index-value`、`columns`、`table` 和 `ts`。规则如下：
 
-- `default`: uses the `table` dispatcher rule by default. It calculates the partition number using the schema name and table name, ensuring data from a table is sent to the same partition. As a result, the data from a single table only exists in one partition and is guaranteed to be ordered. However, this dispatcher rule limits the send throughput, and the consumption speed cannot be improved by adding consumers.
-- `index-value`: calculates the partition number using either the primary key, a unique index, or an index explicitly specified by `index`, distributing table data across multiple partitions. The data from a single table is sent to multiple partitions, and the data in each partition is ordered. You can improve the consumption speed by adding consumers.
-- `columns`: calculates the partition number using the values of explicitly specified columns, distributing table data across multiple partitions. The data from a single table is sent to multiple partitions, and the data in each partition is ordered. You can improve the consumption speed by adding consumers.
-- `table`: calculates the partition number using the schema name and table name.
-- `ts`: calculates the partition number using the commitTs of the row change, distributing table data across multiple partitions. The data from a single table is sent to multiple partitions, and the data in each partition is ordered. You can improve the consumption speed by adding consumers. However, multiple changes of a data item might be sent to different partitions and the consumer progress of different consumers might be different, which might cause data inconsistency. Therefore, the consumer needs to sort the data from multiple partitions by commitTs before consuming.
+- `default`: 默认使用 `table` 分发规则。通过 schema 名和 table 名计算分区编号，确保来自同一表的数据在同一分区，保证顺序。此规则限制了发送吞吐量，增加消费者不会提升消费速度。
+- `index-value`: 使用主键、唯一索引或显式指定的 `index` 计算分区编号，将表数据分布到多个分区。单表数据会在多个分区中，且每个分区内有序。可以通过增加消费者提升速度。
+- `columns`: 使用显式指定的列值计算分区编号，将表数据分布到多个分区。单表数据会在多个分区中，且每个分区内有序。可以通过增加消费者提升速度。
+- `table`: 使用 schema 名和 table 名计算分区编号。
+- `ts`: 使用行变更的 `commitTs` 计算分区编号，将表数据分布到多个分区。单表数据会在多个分区中，且每个分区内有序。可以通过增加消费者提升速度，但可能导致同一数据项的多次变更被发送到不同分区，消费者进度不同，可能引发数据不一致。因此，消费者在消费前需要按 `commitTs` 排序。
 
-Take the following configuration of `dispatchers` as an example:
+以下是 `dispatchers` 配置示例：
 
 ```toml
 [sink]
@@ -297,17 +296,17 @@ dispatchers = [
 ]
 ```
 
-- Tables in the `test` database use the `index-value` dispatcher, which calculates the partition number using the value of the primary key or unique index. If a primary key exists, the primary key is used; otherwise, the shortest unique index is used.
-- Tables in the `test1` table use the `index-value` dispatcher and calculate the partition number using values of all columns in the index named `index1`. If the specified index does not exist, an error is reported. Note that the index specified by `index` must be a unique index.
-- Tables in the `test2` database use the `columns` dispatcher and calculate the partition number using the values of columns `id` and `a`. If any of the columns does not exist, an error is reported.
-- Tables in the `test3` database use the `table` dispatcher.
-- Tables in the `test4` database use the `default` dispatcher, that is the `table` dispatcher, as they do not match any of the preceding rules.
+- `test` 数据库中的表使用 `index-value` 分发器，按主键或唯一索引值计算分区编号。若存在主键，则用主键；否则用最短的唯一索引。
+- `test1` 数据库中的表使用 `index-value` 分发器，按名为 `index1` 的索引的所有列值计算分区编号。若索引不存在，则报错。注意，`index` 指定的索引必须是唯一索引。
+- `test2` 数据库中的表使用 `columns` 分发器，按 `id` 和 `a` 列的值计算分区编号。若任一列不存在，则报错。
+- `test3` 数据库中的表使用 `table` 分发器。
+- `test4` 数据库中的表使用 `default` 分发器，即 `table`，因为不匹配前述规则。
 
-If a table matches multiple dispatcher rules, the first matching rule takes precedence.
+如果一个表匹配多个分发规则，优先使用第一个匹配的规则。
 
 > **Note:**
 >
-> Since v6.1.0, to clarify the meaning of the configuration, the configuration used to specify the partition dispatcher has been changed from `dispatcher` to `partition`, with `partition` being an alias for `dispatcher`. For example, the following two rules are exactly equivalent.
+> 自 v6.1.0 起，为了明确配置的含义，用于指定分区分发器的配置项由 `dispatcher` 改为 `partition`，且 `partition` 为 `dispatcher` 的别名。例如，以下两个规则完全等价：
 >
 > ```
 > [sink]
@@ -317,17 +316,17 @@ If a table matches multiple dispatcher rules, the first matching rule takes prec
 > ]
 > ```
 >
-> However, `dispatcher` and `partition` cannot appear in the same rule. For example, the following rule is invalid.
+> 但 `dispatcher` 和 `partition` 不能同时出现在同一规则中。例如，以下规则无效：
 >
 > ```
 > {matcher = ['*.*'], dispatcher = "index-value", partition = "table"},
 > ```
 
-## Column selectors
+## 列选择器
 
-The column selector feature supports selecting columns from events and sending only the data changes related to those columns to the downstream.
+列选择器功能支持从事件中选择列，只发送与这些列相关的数据变更到下游。
 
-Take the following configuration of `column-selectors` as an example:
+以下是 `column-selectors` 配置示例：
 
 ```toml
 [sink]
@@ -339,102 +338,104 @@ column-selectors = [
 ]
 ```
 
-- For table `test.t1`, only columns `a` and `b` are sent.
-- For tables in the `test` database (excluding the `t1` table), all columns except `b` are sent.
-- For table `test1.t1`, any column starting with `column` is sent, except for `column1`.
-- For table `test3.t`, any 7-character column starting with `column` is sent, except for `column1`.
-- For tables that do not match any rule, all columns are sent.
+- 表 `test.t1` 只会发送列 `a` 和 `b`。
+- `test` 数据库中的所有表（不包括 `t1`）会发送所有列，除了 `b`。
+- 表 `test1.t1` 会发送所有以 `column` 开头的列，排除 `column1`。
+- 表 `test3.t` 会发送所有长度为 7 个字符、以 `column` 开头的列，排除 `column1`。
+- 不匹配任何规则的表，全部列都会被发送。
 
 > **Note:**
 >
-> After being filtered by the `column-selectors` rules, the data in the table must have a primary key or unique key to be replicated. Otherwise, the changefeed reports an error when it is created or running.
+> 经过 `column-selectors` 规则过滤后，表中的数据必须有主键或唯一键，才能进行复制。否则，创建或运行时 changefeed 会报错。
 
-## Scale out the load of a single large table to multiple TiCDC nodes
+## 将单个大表的负载扩展到多个 TiCDC 节点
 
-This feature splits the data replication range of a single large table into multiple ranges, according to the data volume and the number of modified rows per minute, and it makes the data volume and the number of modified rows replicated in each range approximately the same. This feature distributes these ranges to multiple TiCDC nodes for replication, so that multiple TiCDC nodes can replicate a large single table at the same time. This feature can solve the following two problems:
+此功能将单个大表的数据复制范围根据数据量和每分钟变更行数拆分成多个范围，使每个范围的数据量和变更行数大致相同。此功能将这些范围分配给多个 TiCDC 节点进行复制，从而多个 TiCDC 节点可以同时复制一个大表。此功能可以解决以下两个问题：
 
-- A single TiCDC node cannot replicate a large single table in time.
-- The resources (such as CPU and memory) consumed by TiCDC nodes are not evenly distributed.
+- 单个 TiCDC 节点无法及时复制完大表。
+- TiCDC 节点消耗的资源（如 CPU 和内存）分布不均。
 
 > **Warning:**
 >
-> TiCDC v7.0.0 only supports scaling out the load of a large single table on Kafka changefeeds.
+> TiCDC v7.0.0 仅支持在 Kafka changefeed 上扩展大表的负载。
 
-Sample configuration:
+示例配置：
 
 ```toml
 [scheduler]
-# The default value is "false". You can set it to "true" to enable this feature.
+# 默认值为 "false"。你可以设置为 "true" 来启用此功能。
 enable-table-across-nodes = true
-# When you enable this feature, it only takes effect for tables with the number of regions greater than the `region-threshold` value.
+# 启用此功能后，仅对 region 数量大于 `region-threshold` 的表生效。
 region-threshold = 100000
-# When you enable this feature, it takes effect for tables with the number of rows modified per minute greater than the `write-key-threshold` value.
-# Note:
-# * The default value of `write-key-threshold` is 0, which means that the feature does not split the table replication range according to the number of rows modified in a table by default.
-# * You can configure this parameter according to your cluster workload. For example, if it is configured as 30000, it means that the feature will split the replication range of a table when the number of modified rows per minute in the table exceeds 30000.
-# * When `region-threshold` and `write-key-threshold` are configured at the same time:
-#   TiCDC will check whether the number of modified rows is greater than `write-key-threshold` first.
-#   If not, next check whether the number of Regions is greater than `region-threshold`.
+# 启用此功能后，仅对每分钟变更行数大于 `write-key-threshold` 的表生效。
+# 注意：
+# * `write-key-threshold` 的默认值为 0，意味着默认不根据变更行数拆分复制范围。
+# * 你可以根据集群负载调整此参数。例如，设置为 30000，表示当表每分钟变更行数超过 30000 时，拆分复制范围。
+# * 当同时配置 `region-threshold` 和 `write-key-threshold` 时：
+#   TiCDC 会先检查变更行数是否大于 `write-key-threshold`。
+#   若不满足，再检查 region 数量是否大于 `region-threshold`。
 write-key-threshold = 30000
 ```
 
-You can query the number of Regions a table contains by the following SQL statement:
+你可以通过以下 SQL 查询表的 region 数量：
 
 ```sql
 SELECT COUNT(*) FROM INFORMATION_SCHEMA.TIKV_REGION_STATUS WHERE DB_NAME="database1" AND TABLE_NAME="table1" AND IS_INDEX=0;
 ```
 
-## Handle messages that exceed the Kafka topic limit
+## 处理超出 Kafka 主题限制的消息
 
-Kafka topic sets a limit on the size of messages it can receive. This limit is controlled by the [`max.message.bytes`](https://kafka.apache.org/documentation/#topicconfigs_max.message.bytes) parameter. If TiCDC Kafka sink sends data that exceeds this limit, the changefeed reports an error and cannot proceed to replicate data. To solve this problem, TiCDC adds a new configuration `large-message-handle-option` and provides the following solution.
+Kafka 主题对消息大小有限制，此限制由 [`max.message.bytes`](https://kafka.apache.org/documentation/#topicconfigs_max.message.bytes) 参数控制。如果 TiCDC Kafka sink 发送的数据超过此限制，changefeed 会报错，无法继续复制数据。为解决此问题，TiCDC 增加了 `large-message-handle-option` 配置，并提供以下方案。
 
-Currently, this feature supports two encoding protocols: Canal-JSON and Open Protocol. When using the Canal-JSON protocol, you must specify `enable-tidb-extension=true` in `sink-uri`.
+目前，此功能支持两种编码协议：Canal-JSON 和 Open Protocol。当使用 Canal-JSON 协议时，必须在 `sink-uri` 中指定 `enable-tidb-extension=true`。
 
-### TiCDC data compression
+### TiCDC 数据压缩
 
-Starting from v7.4.0, TiCDC Kafka sink supports compressing data immediately after encoding and comparing the compressed data size with the message size limit. This feature can effectively reduce the occurrence of messages exceeding the size limit.
+从 v7.4.0 起，TiCDC Kafka sink 支持在编码后立即压缩数据，并将压缩后的数据大小与消息大小限制进行比较。此功能能有效减少超出大小限制的消息发生。
 
-An example configuration is as follows:
+示例配置如下：
 
 ```toml
 [sink.kafka-config.large-message-handle]
-# This configuration is introduced in v7.4.0.
-# "none" by default, which means that the compression feature is disabled.
-# Possible values are "none", "lz4", and "snappy". The default value is "none".
+# 此配置在 v7.4.0 中引入。
+# 默认为 "none"，表示禁用压缩功能。
+# 可能的值为 "none"、"lz4" 和 "snappy"。默认值为 "none"。
 large-message-handle-compression = "none"
 ```
 
-When `large-message-handle-compression` is enabled, the message received by the consumer is encoded using a specific compression protocol, and the consumer application needs to use the specified compression protocol to decode the data.
+启用 `large-message-handle-compression` 后，接收的消息会使用指定的压缩协议编码，消费者端需要使用相应的压缩协议解码数据。
 
-This feature is different from the compression feature of the Kafka producer:
+此功能不同于 Kafka 生产者的压缩功能：
 
-* The compression algorithm specified in `large-message-handle-compression` compresses a single Kafka message. The compression is performed before comparing with the message size limit.
-* At the same time, you can also configure the compression algorithm by using the `compression` parameter in [`sink-uri`](#configure-sink-uri-for-kafka). This compression algorithm is applied to the entire data sending request, which contains multiple Kafka messages.
+* `large-message-handle-compression` 指定的压缩算法会压缩单条 Kafka 消息，压缩在与消息大小限制比较之前进行。
+* 你也可以在 [`sink-uri`](#configure-sink-uri-for-kafka) 中通过 `compression` 参数配置压缩算法，此压缩算法应用于整个数据请求（包含多条 Kafka 消息）。
 
-If you set `large-message-handle-compression`, when TiCDC receives a message, it first compares it to the value of the message size limit parameter, and messages larger than the size limit are compressed. If you also set `compression` in [`sink-uri`](#configure-sink-uri-for-kafka), TiCDC compresses the entire sending data request again at the sink level based on the `sink-uri` setting.
+如果设置了 `large-message-handle-compression`，TiCDC 在接收消息时会先与消息大小限制比较，超出限制的消息会被压缩。如果同时在 [`sink-uri`](#configure-sink-uri-for-kafka) 中设置了 `compression`，则会在 sink 层再次根据 `sink-uri` 设置压缩整个请求。
 
-The compression ratio for the two preceding compression methods is calculated as follows: `compression ratio = size before compression / size after compression * 100`.
+两种压缩方法的压缩比计算公式为：`compression ratio = size before compression / size after compression * 100`。
 
-### Send handle keys only
+### 仅发送 handle keys
 
-Starting from v7.3.0, TiCDC Kafka sink supports sending only the handle keys when the message size exceeds the limit. This can significantly reduce the message size and avoid changefeed errors and task failures caused by the message size exceeding the Kafka topic limit. Handle Key refers to the following:
+从 v7.3.0 起，TiCDC Kafka sink 支持在消息超出限制时，仅发送 handle keys，从而大幅减小消息体积，避免因消息超出 Kafka 主题限制导致的 changefeed 失败。
 
-* If the table to be replicated has primary key, the primary key is the handle key.
-* If the table does not have primary key but has NOT NULL Unique Key, the NOT NULL Unique Key is the handle key.
+Handle Key 指：
 
-The sample configuration is as follows:
+* 若待复制表有主键，则主键为 handle key。
+* 若无主键但有 NOT NULL 唯一索引，则该唯一索引为 handle key。
+
+示例配置如下：
 
 ```toml
 [sink.kafka-config.large-message-handle]
-# large-message-handle-option is introduced in v7.3.0.
-# Defaults to "none". When the message size exceeds the limit, the changefeed fails.
-# When set to "handle-key-only", if the message size exceeds the limit, only the handle key is sent in the data field. If the message size still exceeds the limit, the changefeed fails.
+# large-message-handle-option 在 v7.3.0 中引入。
+# 默认为 "none"。当消息超出限制时，changefeed 会失败。
+# 设置为 "handle-key-only" 时，超出限制时只会在数据字段中发送 handle key，若仍超出限制，changefeed 也会失败。
 large-message-handle-option = "claim-check"
 ```
 
-### Consume messages with handle keys only
+### 仅消费 handle keys 的消息
 
-The message format with handle keys only is as follows:
+只含 handle keys 的消息格式如下：
 
 ```json
 {
@@ -461,46 +462,46 @@ The message format with handle keys only is as follows:
         }
     ],
     "old": null,
-    "_tidb": {     // TiDB extension fields
-        "commitTs": 429918007904436226,  // A TiDB TSO timestamp
+    "_tidb": {     // TiDB 扩展字段
+        "commitTs": 429918007904436226,  // TiDB TSO 时间戳
         "onlyHandleKey": true
     }
 }
 ```
 
-When a Kafka consumer receives a message, it first checks the `onlyHandleKey` field. If this field exists and is `true`, it means that the message only contains the handle key of the complete data. In this case, to get the complete data, you need to query the upstream TiDB and use [`tidb_snapshot` to read historical data](/read-historical-data.md).
+当 Kafka 消费者收到此消息时，会先检查 `onlyHandleKey` 字段。若存在且为 `true`，表示消息只包含完整数据的 handle key。此时若需获取完整数据，需要向上游 TiDB 查询，并使用 [`tidb_snapshot` 读取历史数据](/read-historical-data.md)。
 
 > **Warning:**
 >
-> When the Kafka consumer processes data and queries TiDB, the data might have been deleted by GC. You need to [modify the GC Lifetime of the TiDB cluster](/system-variables.md#tidb_gc_life_time-new-in-v50) to a larger value to avoid this situation.
+> 当 Kafka 消费者处理数据并查询 TiDB 时，数据可能已被 GC 删除。你需要将 TiDB 集群的 [GC 生命周期](/system-variables.md#tidb_gc_life_time-new-in-v50) 设置为更大值，以避免此问题。
 
-### Send large messages to external storage
+### 将大消息发送到外部存储
 
-Starting from v7.4.0, TiCDC Kafka sink supports sending large messages to external storage when the message size exceeds the limit. Meanwhile, TiCDC sends a message to Kafka that contains the address of the large message in the external storage. This can avoid changefeed failures caused by the message size exceeding the Kafka topic limit.
+从 v7.4.0 起，TiCDC Kafka sink 支持在消息超出限制时，将大消息发送到外部存储，同时向 Kafka 发送包含大消息地址的消息，避免因消息超出 Kafka 主题限制导致的 changefeed 失败。
 
-An example configuration is as follows:
+示例配置如下：
 
 ```toml
 [sink.kafka-config.large-message-handle]
-# large-message-handle-option is introduced in v7.3.0.
-# Defaults to "none". When the message size exceeds the limit, the changefeed fails.
-# When set to "handle-key-only", if the message size exceeds the limit, only the handle key is sent in the data field. If the message size still exceeds the limit, the changefeed fails.
-# When set to "claim-check", if the message size exceeds the limit, the message is sent to external storage.
+# large-message-handle-option 在 v7.3.0 中引入。
+# 默认为 "none"。当消息超出限制时，changefeed 会失败。
+# 设置为 "handle-key-only" 时，超出限制时只会在数据字段中发送 handle key，若仍超出限制，changefeed 也会失败。
+# 设置为 "claim-check" 时，超出限制的消息会被存储到外部存储中。
 large-message-handle-option = "claim-check"
 claim-check-storage-uri = "s3://claim-check-bucket"
 ```
 
-When `large-message-handle-option` is set to `"claim-check"`, `claim-check-storage-uri` must be set to a valid external storage address. Otherwise, creating the changefeed will fail.
+当 `large-message-handle-option` 设置为 `"claim-check"` 时，`claim-check-storage-uri` 必须指向有效的外部存储地址，否则创建 changefeed 会失败。
 
 > **Tip**
 >
-> For more information about the URI parameters of Amazon S3, GCS, and Azure Blob Storage in TiCDC, see [URI Formats of External Storage Services](/external-storage-uri.md).
+> 有关 TiCDC 中 Amazon S3、GCS 和 Azure Blob 存储的 URI 格式的更多信息，请参见 [外部存储服务的 URI 格式](/external-storage-uri.md)。
 
-TiCDC does not clean up messages on external storage services. Data consumers need to manage external storage services on their own.
+TiCDC 不会清理外部存储中的消息，数据消费者需要自行管理外部存储。
 
-### Consume large messages from external storage
+### 从外部存储中消费大消息
 
-The Kafka consumer receives a message that contains the address of the large message in the external storage. The message format is as follows:
+Kafka 消费者收到的消息包含外部存储中大消息的地址，消息格式如下：
 
 ```json
 {
@@ -527,14 +528,14 @@ The Kafka consumer receives a message that contains the address of the large mes
         }
     ],
     "old": null,
-    "_tidb": {     // TiDB extension fields
-        "commitTs": 429918007904436226,  // A TiDB TSO timestamp
+    "_tidb": {     // TiDB 扩展字段
+        "commitTs": 429918007904436226,  // TiDB TSO 时间戳
         "claimCheckLocation": "s3:/claim-check-bucket/${uuid}.json"
     }
 }
 ```
 
-If the message contains the `claimCheckLocation` field, the Kafka consumer reads the large message data stored in JSON format according to the address provided by the field. The message format is as follows:
+如果消息中包含 `claimCheckLocation` 字段，Kafka 消费者会根据该字段提供的地址，从 JSON 格式的外部存储中读取大消息数据。消息格式如下：
 
 ```json
 {
@@ -543,4 +544,4 @@ If the message contains the `claimCheckLocation` field, the Kafka consumer reads
 }
 ```
 
-The `key` and `value` fields contain the encoded large message, which should have been sent to the corresponding field in the Kafka message. Consumers can parse the data in these two parts to restore the content of the large message.
+`key` 和 `value` 字段包含编码后的大消息，应该在 Kafka 消息的对应字段中。消费者可以解析这两部分数据，恢复大消息的内容。
