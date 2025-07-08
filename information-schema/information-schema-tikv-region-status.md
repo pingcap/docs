@@ -1,15 +1,15 @@
 ---
 title: TIKV_REGION_STATUS
-summary: "了解 `TIKV_REGION_STATUS` information_schema 表。"
+summary: 了解 `TIKV_REGION_STATUS` information_schema 表格。
 ---
 
 # TIKV_REGION_STATUS
 
-`TIKV_REGION_STATUS` 表通过 PD 的 API 显示了 TiKV Region 的一些基本信息，如 Region ID、起始和结束键值、读写流量等。
+`TIKV_REGION_STATUS` 表格通过 PD 的 API 展示了 TiKV Region 的一些基本信息，如 Region ID、起始和结束键值，以及读写流量。
 
-> **注意：**
+> **Note:**
 >
-> 此表在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> 该表在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -48,28 +48,28 @@ DESC TIKV_REGION_STATUS;
 
 `TIKV_REGION_STATUS` 表中各列的描述如下：
 
-* `REGION_ID`：Region 的 ID。
-* `START_KEY`：Region 的起始键值。
-* `END_KEY`：Region 的结束键值。
-* `TABLE_ID`：Region 所属表的 ID。
-* `DB_NAME`：`TABLE_ID` 所属的数据库名称。
-* `TABLE_NAME`：Region 所属的表名。
-* `IS_INDEX`：Region 数据是否为索引。0 表示不是索引，1 表示是索引。如果当前 Region 同时包含表数据和索引数据，将会有多行记录，`IS_INDEX` 分别为 0 和 1。
-* `INDEX_ID`：Region 所属索引的 ID。如果 `IS_INDEX` 为 0，则该列值为 NULL。
-* `INDEX_NAME`：Region 所属索引的名称。如果 `IS_INDEX` 为 0，则该列值为 NULL。
-* `IS_PARTITION`：Region 所属的表是否为分区表。
-* `PARTITION_ID`：如果 Region 所属的表是分区表，该列显示 Region 所属分区的 ID。
-* `PARTITION_NAME`：如果 Region 所属的表是分区表，该列显示 Region 所属分区的名称。
-* `EPOCH_CONF_VER`：Region 配置的版本号。当添加或删除节点时，版本号会增加。
-* `EPOCH_VERSION`：Region 的当前版本号。当 Region 发生分裂或合并时，版本号会增加。
-* `WRITTEN_BYTES`：写入 Region 的数据量（字节）。
-* `READ_BYTES`：从 Region 读取的数据量（字节）。
-* `APPROXIMATE_SIZE`：Region 的近似数据大小（MB）。
-* `APPROXIMATE_KEYS`：Region 中近似的键数量。
-* `REPLICATIONSTATUS_STATE`：Region 当前的复制状态。状态可能为 `UNKNOWN`、`SIMPLE_MAJORITY` 或 `INTEGRITY_OVER_LABEL`。
-* `REPLICATIONSTATUS_STATEID`：与 `REPLICATIONSTATUS_STATE` 对应的标识符。
+* `REGION_ID`: Region 的 ID。
+* `START_KEY`: Region 的起始键值。
+* `END_KEY`: Region 的结束键值。
+* `TABLE_ID`: 所属表的 ID。
+* `DB_NAME`: 所属数据库的名称。
+* `TABLE_NAME`: 所属表的名称。
+* `IS_INDEX`: Region 数据是否为索引。0 表示不是索引，1 表示是索引。如果当前 Region 同时包含表数据和索引数据，则会有多行记录，`IS_INDEX` 分别为 0 和 1。
+* `INDEX_ID`: 所属索引的 ID。如果 `IS_INDEX` 为 0，该列值为 NULL。
+* `INDEX_NAME`: 所属索引的名称。如果 `IS_INDEX` 为 0，该列值为 NULL。
+* `IS_PARTITION`: 所属表是否为分区表。
+* `PARTITION_ID`: 如果所属表为分区表，则显示该 Region 所属分区的 ID。
+* `PARTITION_NAME`: 如果所属表为分区表，则显示该 Region 所属分区的名称。
+* `EPOCH_CONF_VER`: Region 配置的版本号。添加或删除副本时版本号会增加。
+* `EPOCH_VERSION`: 当前 Region 的版本号。Region 分裂或合并时版本号会增加。
+* `WRITTEN_BYTES`: 写入到该 Region 的数据量（字节数）。
+* `READ_BYTES`: 从该 Region 读取的数据量（字节数）。
+* `APPROXIMATE_SIZE`: 该 Region 的近似数据大小（MB）。
+* `APPROXIMATE_KEYS`: 该 Region 的近似键数量。
+* `REPLICATIONSTATUS_STATE`: 当前 Region 的复制状态。状态可能为 `UNKNOWN`、`SIMPLE_MAJORITY` 或 `INTEGRITY_OVER_LABEL`。
+* `REPLICATIONSTATUS_STATEID`: 与 `REPLICATIONSTATUS_STATE` 对应的标识符。
 
-此外，你可以通过对 `EPOCH_CONF_VER`、`WRITTEN_BYTES` 和 `READ_BYTES` 列执行 `ORDER BY X LIMIT Y` 操作来实现 pd-ctl 中的 `top confver`、`top read` 和 `top write` 操作。
+此外，你可以通过在 pd-ctl 中对 `EPOCH_CONF_VER`、`WRITTEN_BYTES` 和 `READ_BYTES` 列使用 `ORDER BY X LIMIT Y` 操作，实现 `top confver`、`top read` 和 `top write` 的功能。
 
 你可以使用以下 SQL 语句查询写入数据最多的前 3 个 Region：
 

@@ -1,15 +1,15 @@
 ---
 title: TIDB_SERVERS_INFO
-summary: "了解 `TIDB_SERVERS_INFO` INFORMATION_SCHEMA 表。"
+summary: 了解 `TIDB_SERVERS_INFO` INFORMATION_SCHEMA 表。
 ---
 
 # TIDB_SERVERS_INFO
 
-`TIDB_SERVERS_INFO` 表提供了 TiDB 集群中 TiDB 服务器（即 tidb-server 进程）的信息。
+`TIDB_SERVERS_INFO` 表提供关于 TiDB 集群中 TiDB 服务器（即，tidb-server 进程）的信息。
 
-> **注意：**
+> **Note:**
 >
-> 此表在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> 该表在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
 
 ```sql
 USE INFORMATION_SCHEMA;

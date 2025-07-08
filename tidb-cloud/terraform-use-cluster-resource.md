@@ -1,19 +1,23 @@
 ---
-title: 使用集群资源
-summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
+title: 使用集群资源（已废弃）
+summary: 学习如何使用集群资源创建和修改 TiDB Cloud 集群。
 ---
 
-# 使用集群资源
+# 使用集群资源（已废弃）
+
+> **Warning:**
+>
+> 从 [TiDB Cloud Terraform Provider](https://registry.terraform.io/providers/tidbcloud/tidbcloud) v0.4.0 开始，`tidbcloud_cluster` 资源已被废弃。建议使用 `tidbcloud_dedicated_cluster` 或 `tidbcloud_serverless_cluster` 资源。更多信息请参见 [使用 TiDB Cloud 专用集群资源](/tidb-cloud/terraform-use-dedicated-cluster-resource.md) 或 [使用 TiDB Cloud 无服务器集群资源](/tidb-cloud/terraform-use-serverless-cluster-resource.md)。
 
 本文档介绍如何使用 `tidbcloud_cluster` 资源管理 TiDB Cloud 集群。
 
-此外，你还将学习如何使用 `tidbcloud_projects` 和 `tidbcloud_cluster_specs` 数据源获取必要信息。
+此外，你还将学习如何通过 `tidbcloud_projects` 和 `tidbcloud_cluster_specs` 数据源获取必要的信息。
 
-`tidbcloud_cluster` 资源的功能包括以下内容：
+`tidbcloud_cluster` 资源的功能包括：
 
-- 创建 TiDB Cloud Serverless 和 TiDB Cloud Dedicated 集群。
-- 修改 TiDB Cloud Dedicated 集群。
-- 删除 TiDB Cloud Serverless 和 TiDB Cloud Dedicated 集群。
+- 创建 TiDB Cloud 无服务器和专用集群。
+- 修改 TiDB Cloud 专用集群。
+- 删除 TiDB Cloud 无服务器和专用集群。
 
 ## 前提条件
 
@@ -21,13 +25,13 @@ summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
 
 ## 使用 `tidbcloud_projects` 数据源获取项目 ID
 
-每个 TiDB 集群都在一个项目中。在创建 TiDB 集群之前，你需要获取要在其中创建集群的项目 ID。
+每个 TiDB 集群都在一个项目中。在创建集群之前，你需要获取你想要创建集群的项目 ID。
 
-要查看所有可用项目的信息，你可以按照以下方式使用 `tidbcloud_projects` 数据源：
+要查看所有可用项目的信息，可以使用 `tidbcloud_projects` 数据源，示例如下：
 
-1. 在[获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) 时创建的 `main.tf` 文件中，添加 `data` 和 `output` 块，如下所示：
+1. 在你 [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) 时创建的 `main.tf` 文件中，添加 `data` 和 `output` 块：
 
-   ```
+   ```hcl
    terraform {
      required_providers {
        tidbcloud = {
@@ -37,9 +41,9 @@ summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
    }
 
    provider "tidbcloud" {
-     public_key = "your_public_key"
+     public_key  = "your_public_key"
      private_key = "your_private_key"
-     sync = true
+     sync        = true
    }
 
    data "tidbcloud_projects" "example_project" {
@@ -52,23 +56,23 @@ summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
    }
    ```
 
-   - 使用 `data` 块定义 TiDB Cloud 的数据源，包括数据源类型和数据源名称。
+   - 使用 `data` 块定义 TiDB Cloud 数据源，包括数据源类型和名称。
 
-      - 要使用项目数据源，请将数据源类型设置为 `tidbcloud_projects`。
-      - 对于数据源名称，你可以根据需要定义它。例如，"example_project"。
-      - 对于 `tidbcloud_projects` 数据源，你可以使用 `page` 和 `page_size` 属性来限制要检查的最大项目数。
+      - 要使用项目数据源，设置数据源类型为 `tidbcloud_projects`。
+      - 数据源名称可以根据需要定义，例如 "example_project"。
+      - `tidbcloud_projects` 数据源中，可以使用 `page` 和 `page_size` 属性限制最多查询的项目数量。
 
-   - 使用 `output` 块定义要在输出中显示的数据源信息，并公开信息供其他 Terraform 配置使用。
+   - 使用 `output` 块定义要在输出中显示的数据源信息，暴露信息供其他 Terraform 配置使用。
 
-      `output` 块的工作方式类似于编程语言中的返回值。有关更多详细信息，请参阅 [Terraform 文档](https://www.terraform.io/language/values/outputs)。
+      `output` 块的作用类似于编程语言中的返回值。详情请参见 [Terraform 文档](https://www.terraform.io/language/values/outputs)。
 
-   要获取资源和数据源的所有可用配置，请参阅此[配置文档](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)。
+   查看所有资源和数据源的配置详情，请参见 [配置文档](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)。
 
-2. 运行 `terraform apply` 命令以应用配置。你需要在确认提示时输入 `yes` 才能继续。
+2. 运行 `terraform apply` 命令应用配置。确认提示时输入 `yes`。
 
-   要跳过提示，请使用 `terraform apply --auto-approve`：
+   若要跳过提示，可以使用 `terraform apply --auto-approve`：
 
-   ```
+   ```bash
    $ terraform apply --auto-approve
 
    Changes to Outputs:
@@ -118,15 +122,16 @@ summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
    ```
 
 现在，你可以从输出中获取所有可用的项目。复制你需要的项目 ID。
+
 ## 使用 `tidbcloud_cluster_specs` 数据源获取集群规格信息
 
-在创建集群之前，你需要获取集群规格信息，其中包含所有可用的配置值（如支持的云服务提供商、区域和节点大小）。
+在创建集群之前，你需要获取集群规格信息，其中包含所有可用的配置值（如支持的云提供商、区域和节点大小）。
 
-要获取集群规格信息，你可以按照以下方式使用 `tidbcloud_cluster_specs` 数据源：
+要获取集群规格信息，可以使用 `tidbcloud_cluster_specs` 数据源，示例如下：
 
-1. 编辑 `main.tf` 文件，如下所示：
+1. 编辑 `main.tf` 文件为：
 
-    ```
+    ```hcl
     terraform {
       required_providers {
         tidbcloud = {
@@ -135,9 +140,9 @@ summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
       }
     }
     provider "tidbcloud" {
-      public_key = "your_public_key"
+      public_key  = "your_public_key"
       private_key = "your_private_key"
-      sync = true
+      sync        = true
     }
     data "tidbcloud_cluster_specs" "example_cluster_spec" {
     }
@@ -146,138 +151,139 @@ summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
     }
     ```
 
-2. 运行 `terraform apply --auto-approve` 命令，你将获得集群规格信息。
+2. 运行 `terraform apply --auto-approve`，即可获取集群规格信息。
 
-    点击以下行查看部分示例结果供参考。
+以下为部分示例结果，点击展开查看：
 
-    <details>
-      <summary>集群规格</summary>
+<details>
+  <summary>集群规格</summary>
 
-    ```
-    {
-        "cloud_provider" = "AWS"
-        "cluster_type" = "DEDICATED"
-        "region" = "eu-central-1"
-        "tidb" = tolist([
-          {
-            "node_quantity_range" = {
-              "min" = 1
-              "step" = 1
-            }
-            "node_size" = "4C16G"
-          },
-          {
-            "node_quantity_range" = {
-              "min" = 1
-              "step" = 1
-            }
-            "node_size" = "8C16G"
-          },
-          {
-            "node_quantity_range" = {
-              "min" = 1
-              "step" = 1
-            }
-            "node_size" = "16C32G"
-          },
-        ])
-        "tiflash" = tolist([
-          {
-            "node_quantity_range" = {
-              "min" = 0
-              "step" = 1
-            }
-            "node_size" = "8C64G"
-            "storage_size_gib_range" = {
-              "max" = 2048
-              "min" = 500
-            }
-          },
-          {
-            "node_quantity_range" = {
-              "min" = 0
-              "step" = 1
-            }
-            "node_size" = "16C128G"
-            "storage_size_gib_range" = {
-              "max" = 2048
-              "min" = 500
-            }
-          },
-        ])
-        "tikv" = tolist([
-          {
-            "node_quantity_range" = {
-              "min" = 3
-              "step" = 3
-            }
-            "node_size" = "4C16G"
-            "storage_size_gib_range" = {
-              "max" = 2048
-              "min" = 200
-            }
-          },
-          {
-            "node_quantity_range" = {
-              "min" = 3
-              "step" = 3
-            }
-            "node_size" = "8C32G"
-            "storage_size_gib_range" = {
-              "max" = 4096
-              "min" = 500
-            }
-          },
-          {
-            "node_quantity_range" = {
-              "min" = 3
-              "step" = 3
-            }
-            "node_size" = "8C64G"
-            "storage_size_gib_range" = {
-              "max" = 4096
-              "min" = 500
-            }
-          },
-          {
-            "node_quantity_range" = {
-              "min" = 3
-              "step" = 3
-            }
-            "node_size" = "16C64G"
-            "storage_size_gib_range" = {
-              "max" = 4096
-              "min" = 500
-            }
-          },
-        ])
-      }
-    ```
+```json
+{
+    "cloud_provider" = "AWS"
+    "cluster_type" = "DEDICATED"
+    "region" = "eu-central-1"
+    "tidb" = tolist([
+      {
+        "node_quantity_range" = {
+          "min" = 1
+          "step" = 1
+        }
+        "node_size" = "4C16G"
+      },
+      {
+        "node_quantity_range" = {
+          "min" = 1
+          "step" = 1
+        }
+        "node_size" = "8C16G"
+      },
+      {
+        "node_quantity_range" = {
+          "min" = 1
+          "step" = 1
+        }
+        "node_size" = "16C32G"
+      },
+    ])
+    "tiflash" = tolist([
+      {
+        "node_quantity_range" = {
+          "min" = 0
+          "step" = 1
+        }
+        "node_size" = "8C64G"
+        "storage_size_gib_range" = {
+          "max" = 2048
+          "min" = 500
+        }
+      },
+      {
+        "node_quantity_range" = {
+          "min" = 0
+          "step" = 1
+        }
+        "node_size" = "16C128G"
+        "storage_size_gib_range" = {
+          "max" = 2048
+          "min" = 500
+        }
+      },
+    ])
+    "tikv" = tolist([
+      {
+        "node_quantity_range" = {
+          "min" = 3
+          "step" = 3
+        }
+        "node_size" = "4C16G"
+        "storage_size_gib_range" = {
+          "max" = 2048
+          "min" = 200
+        }
+      },
+      {
+        "node_quantity_range" = {
+          "min" = 3
+          "step" = 3
+        }
+        "node_size" = "8C32G"
+        "storage_size_gib_range" = {
+          "max" = 4096
+          "min" = 500
+        }
+      },
+      {
+        "node_quantity_range" = {
+          "min" = 3
+          "step" = 3
+        }
+        "node_size" = "8C64G"
+        "storage_size_gib_range" = {
+          "max" = 4096
+          "min" = 500
+        }
+      },
+      {
+        "node_quantity_range" = {
+          "min" = 3
+          "step" = 3
+        }
+        "node_size" = "16C64G"
+        "storage_size_gib_range" = {
+          "max" = 4096
+          "min" = 500
+        }
+      },
+    ])
+  }
+```
 
-    </details>
+</details>
 
 在结果中：
 
-- `cloud_provider` 是可以托管 TiDB 集群的云服务提供商。
+- `cloud_provider` 表示 TiDB 集群可以托管的云提供商。
 - `region` 是 `cloud_provider` 的区域。
 - `node_quantity_range` 显示最小节点数和扩展节点的步长。
 - `node_size` 是节点的大小。
-- `storage_size_gib_range` 显示可以为节点设置的最小和最大存储大小。
+- `storage_size_gib_range` 表示可以为节点设置的最小和最大存储容量。
+
 ## 使用集群资源创建集群
 
-> **注意：**
+> **Note:**
 >
-> 在开始之前，请确保你已在 TiDB Cloud 控制台中设置了 CIDR。有关更多信息，请参阅[设置 CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)。
+> 在开始之前，确保你在 TiDB Cloud 控制台中设置了 CIDR。更多信息请参见 [设置 CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)。
 
 你可以使用 `tidbcloud_cluster` 资源创建集群。
 
-以下示例展示如何创建 TiDB Cloud Dedicated 集群。
+以下示例演示如何创建 TiDB Cloud 专用集群。
 
-1. 为集群创建一个目录并进入该目录。
+1. 创建一个集群目录并进入。
 
-2. 创建一个 `cluster.tf` 文件：
+2. 创建 `cluster.tf` 文件：
 
-    ```
+    ```hcl
    terraform {
      required_providers {
        tidbcloud = {
@@ -287,9 +293,9 @@ summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
    }
 
    provider "tidbcloud" {
-     public_key = "your_public_key"
+     public_key  = "your_public_key"
      private_key = "your_private_key"
-     sync = true
+     sync        = true
    }
 
     resource "tidbcloud_cluster" "example_cluster" {
@@ -303,28 +309,28 @@ summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
         port = 4000
         components = {
           tidb = {
-            node_size : "8C16G"
-            node_quantity : 1
+            node_size     = "8C16G"
+            node_quantity = 1
           }
           tikv = {
-            node_size : "8C32G"
-            storage_size_gib : 500,
-            node_quantity : 3
+            node_size        = "8C32G"
+            storage_size_gib = 500
+            node_quantity    = 3
           }
         }
       }
     }
     ```
 
-    使用 `resource` 块定义 TiDB Cloud 的资源，包括资源类型、资源名称和资源详细信息。
+    使用 `resource` 块定义 TiDB Cloud 资源，包括资源类型、资源名称和详细配置。
 
-    - 要使用集群资源，请将资源类型设置为 `tidbcloud_cluster`。
-    - 对于资源名称，你可以根据需要定义它。例如，`example_cluster`。
-    - 对于资源详细信息，你可以根据项目 ID 和集群规格信息进行配置。
+    - 要使用集群资源，设置资源类型为 `tidbcloud_cluster`。
+    - 资源名称可以根据需要定义，例如 `example_cluster`。
+    - 资源详细信息可根据项目 ID 和集群规格信息进行配置。
 
-3. 运行 `terraform apply` 命令。不建议在应用资源时使用 `terraform apply --auto-approve`。
+3. 运行 `terraform apply` 命令。建议不要使用 `terraform apply --auto-approve` 直接应用资源。
 
-    ```shell
+    ```bash
     $ terraform apply
 
     Terraform will perform the following actions:
@@ -370,15 +376,15 @@ summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
       Enter a value:
     ```
 
-   如上述结果所示，Terraform 为你生成了一个执行计划，描述了 Terraform 将采取的操作：
+   如上输出，Terraform 会生成执行计划，描述 Terraform 将采取的操作：
 
-   - 你可以检查配置和状态之间的差异。
-   - 你还可以看到此 `apply` 的结果。它将添加一个新资源，不会更改或销毁任何资源。
-   - `known after apply` 表示你将在 `apply` 后获得该值。
+   - 可以检查配置与状态的差异。
+   - 也可以看到此次 `apply` 的结果。它会添加一个新资源，没有资源会被更改或销毁。
+   - `known after apply` 表示在 `apply` 后会得到的值。
 
-4. 如果你的计划看起来没有问题，输入 `yes` 继续：
+4. 如果一切正常，输入 `yes` 继续：
 
-    ```
+    ```bash
     Do you want to perform these actions?
       Terraform will perform the actions described above.
       Only 'yes' will be accepted to approve.
@@ -389,12 +395,11 @@ summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
     tidbcloud_cluster.example_cluster: Creation complete after 1s [id=1379661944630234067]
 
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
-
     ```
 
-5. 使用 `terraform show` 或 `terraform state show tidbcloud_cluster.${resource-name}` 命令检查资源的状态。前者将显示所有资源和数据源的状态。
+5. 使用 `terraform show` 或 `terraform state show tidbcloud_cluster.${resource-name}` 查看资源状态。前者显示所有资源和数据源的状态。
 
-    ```shell
+    ```bash
     $ terraform state show tidbcloud_cluster.example_cluster
 
     # tidbcloud_cluster.example_cluster:
@@ -427,16 +432,16 @@ summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
     }
     ```
 
-    集群的状态是 `CREATING`。在这种情况下，你需要等待它变为 `AVAILABLE`，这通常需要至少 10 分钟。
+   集群状态为 `CREATING`，此时需要等待其变为 `AVAILABLE`，通常至少需要 10 分钟。
 
-6. 如果你想检查最新状态，运行 `terraform refresh` 命令更新状态，然后运行 `terraform state show tidbcloud_cluster.${resource-name}` 命令显示状态。
+6. 若要查看最新状态，运行 `terraform refresh` 更新状态，然后再次运行 `terraform state show tidbcloud_cluster.${resource-name}` 查看。
 
-    ```
+    ```bash
     $ terraform refresh
 
     tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
 
-    $ terraform state show tidbcloud_cluster.example_cluste
+    $ terraform state show tidbcloud_cluster.example_cluster
 
     # tidbcloud_cluster.example_cluster:
     resource "tidbcloud_cluster" "example_cluster" {
@@ -468,53 +473,54 @@ summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
     }
     ```
 
-当状态为 `AVAILABLE` 时，表示你的 TiDB 集群已创建完成并可以使用。
-## 修改 TiDB Cloud Dedicated 集群
+   当状态变为 `AVAILABLE` 时，表示集群已创建完成并可使用。
 
-对于 TiDB Cloud Dedicated 集群，你可以使用 Terraform 管理集群资源，如下所示：
+## 修改 TiDB Cloud 专用集群
 
-- 向集群添加 TiFlash 组件。
-- 扩缩容集群。
-- 暂停或恢复集群。
+对于 TiDB Cloud 专用集群，你可以通过 Terraform 管理集群资源，包括：
+
+- 添加 TiFlash 组件
+- 扩展集群规模
+- 暂停或恢复集群
 
 ### 添加 TiFlash 组件
 
-1. 在[创建集群](#使用集群资源创建集群)时使用的 `cluster.tf` 文件中，将 `tiflash` 配置添加到 `components` 字段。
+1. 在你 [创建集群](#创建集群-使用集群资源) 时的 `cluster.tf` 文件中，向 `components` 字段添加 `tiflash` 配置。
 
-    例如：
+   例如：
 
-    ```
+   ```hcl
         components = {
           tidb = {
-            node_size : "8C16G"
-            node_quantity : 1
+            node_size     = "8C16G"
+            node_quantity = 1
           }
           tikv = {
-            node_size : "8C32G"
-            storage_size_gib : 500
-            node_quantity : 3
+            node_size        = "8C32G"
+            storage_size_gib = 500
+            node_quantity    = 3
           }
           tiflash = {
-            node_size : "8C64G"
-            storage_size_gib : 500
-            node_quantity : 1
+            node_size        = "8C64G"
+            storage_size_gib = 500
+            node_quantity    = 1
           }
         }
-    ```
+   ```
 
-2. 运行 `terraform apply` 命令：
+2. 运行 `terraform apply`：
 
-    ```
+    ```bash
     $ terraform apply
 
     tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
 
-    Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+    Terraform 使用选定的提供者生成以下执行计划。资源操作用符号表示：
       ~ update in-place
 
-    Terraform will perform the following actions:
+    Terraform 将执行以下操作：
 
-      # tidbcloud_cluster.example_cluster will be updated in-place
+      # tidbcloud_cluster.example_cluster 将就地更新
       ~ resource "tidbcloud_cluster" "example_cluster" {
           ~ config         = {
               ~ components     = {
@@ -523,42 +529,41 @@ summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
                       + node_size        = "8C64G"
                       + storage_size_gib = 500
                     }
-                    # (2 unchanged attributes hidden)
+                    # (2 个未变更的属性隐藏)
                 }
-                # (3 unchanged attributes hidden)
+                # (3 个未变更的属性隐藏)
             }
             id             = "1379661944630234067"
             name           = "firstCluster"
-          ~ status         = "AVAILABLE" -> (known after apply)
-            # (4 unchanged attributes hidden)
+          ~ status         = "AVAILABLE" -> (已知后)
+            # (4 个未变更的属性隐藏)
         }
 
-    Plan: 0 to add, 1 to change, 0 to destroy.
+    Plan: 0 添加，1 修改，0 删除。
 
-    Do you want to perform these actions?
-      Terraform will perform the actions described above.
-      Only 'yes' will be accepted to approve.
+    你是否要执行这些操作？
+      Terraform 将执行上述操作。
+      只接受输入 'yes' 以确认。
 
-      Enter a value:
-
+      输入一个值：
     ```
 
-    如上述执行计划所示，将添加 TiFlash，并且将更改一个资源。
+   如上执行计划所示，TiFlash 将被添加，且有一项资源会被修改。
 
-3. 如果你的计划看起来没有问题，输入 `yes` 继续：
+3. 如果计划无误，输入 `yes` 继续：
 
+    ```bash
+      输入一个值: yes
+
+    tidbcloud_cluster.example_cluster: 正在修改... [id=1379661944630234067]
+    tidbcloud_cluster.example_cluster: 修改完成，耗时 2 秒 [id=1379661944630234067]
+
+    应用完成！资源：0 添加，1 修改，0 删除。
     ```
-      Enter a value: yes
 
-    tidbcloud_cluster.example_cluster: Modifying... [id=1379661944630234067]
-    tidbcloud_cluster.example_cluster: Modifications complete after 2s [id=1379661944630234067]
+4. 使用 `terraform state show tidbcloud_cluster.${资源名}` 查看状态：
 
-    Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
-    ```
-
-4. 使用 `terraform state show tidbcloud_cluster.${resource-name}` 查看状态：
-
-    ```
+    ```bash
     $ terraform state show tidbcloud_cluster.example_cluster
 
     # tidbcloud_cluster.example_cluster:
@@ -583,7 +588,7 @@ summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
                 }
             }
             ip_access_list = [
-                # (1 unchanged element hidden)
+                # (1 个未变更的元素隐藏)
             ]
             port           = 4000
             root_password  = "Your_root_password1."
@@ -596,96 +601,98 @@ summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
     }
     ```
 
-`MODIFYING` 状态表示集群正在更改中。等待一段时间后，状态将变为 `AVAILABLE`。
-### 扩缩容 TiDB 集群
+   `MODIFYING` 表示集群正在变更中，等待一段时间后状态会变为 `AVAILABLE`。
 
-当集群状态为 `AVAILABLE` 时，你可以扩缩容集群。
+### 扩展 TiDB 集群规模
 
-1. 在[创建集群](#使用集群资源创建集群)时使用的 `cluster.tf` 文件中，编辑 `components` 配置。
+当集群状态为 `AVAILABLE` 时，可以进行扩展。
 
-    例如，要为 TiDB 增加一个节点，为 TiKV 增加 3 个节点（TiKV 节点数需要是 3 的倍数，因为其步长为 3。你可以[从集群规格中获取此信息](#使用-tidbcloud_cluster_specs-数据源获取集群规格信息)），为 TiFlash 增加一个节点，你可以按如下方式编辑配置：
+1. 在你 [创建集群](#创建集群-使用集群资源) 时的 `cluster.tf` 文件中，编辑 `components` 配置。
 
-   ```
+   例如，为 TiDB 添加一个节点，为 TiKV 添加 3 个节点（TiKV 节点数必须是 3 的倍数，步长为 3，可参考 [获取集群规格信息](#获取集群规格信息-使用-tidbcloud_cluster_specs-数据源)），为 TiFlash 添加一个节点，配置如下：
+
+   ```hcl
        components = {
          tidb = {
-           node_size : "8C16G"
-           node_quantity : 2
+           node_size     = "8C16G"
+           node_quantity = 2
          }
          tikv = {
-           node_size : "8C32G"
-           storage_size_gib : 500
-           node_quantity : 6
+           node_size        = "8C32G"
+           storage_size_gib = 500
+           node_quantity    = 6
          }
          tiflash = {
-           node_size : "8C64G"
-           storage_size_gib : 500
-           node_quantity : 2
+           node_size        = "8C64G"
+           storage_size_gib = 500
+           node_quantity    = 2
          }
        }
    ```
 
-2. 运行 `terraform apply` 命令并输入 `yes` 确认：
+2. 运行 `terraform apply`，确认后输入 `yes`：
 
-   ```
-   $ terraform apply
+    ```bash
+    $ terraform apply
 
-   tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
+    tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
 
-   Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
-     ~ update in-place
+    Terraform 使用选定的提供者生成以下执行计划。资源操作用符号表示：
+      ~ update in-place
 
-   Terraform will perform the following actions:
+    Terraform 将执行以下操作：
 
-     # tidbcloud_cluster.example_cluster will be updated in-place
-     ~ resource "tidbcloud_cluster" "example_cluster" {
-         ~ config         = {
-             ~ components     = {
-                 ~ tidb    = {
-                     ~ node_quantity = 1 -> 2
-                       # (1 unchanged attribute hidden)
-                   }
-                 ~ tiflash = {
-                     ~ node_quantity    = 1 -> 2
-                       # (2 unchanged attributes hidden)
-                   }
-                 ~ tikv    = {
-                     ~ node_quantity    = 3 -> 6
-                       # (2 unchanged attributes hidden)
-                   }
-               }
-               # (3 unchanged attributes hidden)
-           }
-           id             = "1379661944630234067"
-           name           = "firstCluster"
-         ~ status         = "AVAILABLE" -> (known after apply)
-           # (4 unchanged attributes hidden)
-       }
+      # tidbcloud_cluster.example_cluster 将就地更新
+      ~ resource "tidbcloud_cluster" "example_cluster" {
+          ~ config         = {
+              ~ components     = {
+                  ~ tidb    = {
+                      ~ node_quantity = 1 -> 2
+                        # (未变更的属性隐藏)
+                    }
+                  ~ tiflash = {
+                      ~ node_quantity = 1 -> 2
+                        # (未变更的属性隐藏)
+                    }
+                  ~ tikv    = {
+                      ~ node_quantity = 3 -> 6
+                        # (未变更的属性隐藏)
+                    }
+                }
+                # (未变更的属性隐藏)
+            }
+            id             = "1379661944630234067"
+            name           = "firstCluster"
+          ~ status         = "AVAILABLE" -> (已知后)
+            # (未变更的属性隐藏)
+        }
 
-   Plan: 0 to add, 1 to change, 0 to destroy.
+    Plan: 0 添加，1 修改，0 删除。
 
-   Do you want to perform these actions?
-     Terraform will perform the actions described above.
-     Only 'yes' will be accepted to approve.
+    你是否要执行这些操作？
+      Terraform 将执行上述操作。
+      只接受输入 'yes' 以确认。
 
-     Enter a value: yes
+      输入一个值: yes
 
-   tidbcloud_cluster.example_cluster: Modifying... [id=1379661944630234067]
-   tidbcloud_cluster.example_cluster: Modifications complete after 2s [id=1379661944630234067]
+    tidbcloud_cluster.example_cluster: 正在修改... [id=1379661944630234067]
+    tidbcloud_cluster.example_cluster: 修改完成，耗时 2 秒 [id=1379661944630234067]
 
-   Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
-   ```
+    应用完成！资源：0 添加，1 修改，0 删除。
+    ```
 
-等待状态从 `MODIFYING` 变为 `AVAILABLE`。
+等待状态由 `MODIFYING` 转变为 `AVAILABLE`。
+
 ### 暂停或恢复集群
 
-当集群状态为 `AVAILABLE` 时，你可以暂停集群，或者当集群状态为 `PAUSED` 时，你可以恢复集群。
+你可以在集群状态为 `AVAILABLE` 时暂停，状态为 `PAUSED` 时恢复。
 
-- 设置 `paused = true` 暂停集群。
-- 设置 `paused = false` 恢复集群。
+- 设置 `paused = true` 来暂停集群。
+- 设置 `paused = false` 来恢复集群。
 
-1. 在[创建集群](#使用集群资源创建集群)时使用的 `cluster.tf` 文件中，将 `pause = true` 添加到 `config` 配置中：
+1. 在你 [创建集群](#创建集群-使用集群资源) 时的 `cluster.tf` 文件中，向 `config` 添加 `pause = true`：
 
-   ```
+   ```hcl
    config = {
        paused = true
        root_password = "Your_root_password1."
@@ -694,47 +701,45 @@ summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
      }
    ```
 
-2. 运行 `terraform apply` 命令并在检查后输入 `yes`：
+2. 运行 `terraform apply`，确认后输入 `yes`：
 
-   ```
+   ```bash
    $ terraform apply
 
    tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
 
-   Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+   Terraform 使用选定的提供者生成以下执行计划。资源操作用符号表示：
      ~ update in-place
 
-   Terraform will perform the following actions:
+   Terraform 将执行以下操作：
 
-     # tidbcloud_cluster.example_cluster will be updated in-place
+     # tidbcloud_cluster.example_cluster 将就地更新
      ~ resource "tidbcloud_cluster" "example_cluster" {
          ~ config         = {
              + paused         = true
-               # (4 unchanged attributes hidden)
+               # (4 个未变更的属性隐藏)
            }
            id             = "1379661944630234067"
            name           = "firstCluster"
-         ~ status         = "AVAILABLE" -> (known after apply)
-           # (4 unchanged attributes hidden)
+         ~ status         = "AVAILABLE" -> (已知后)
+           # (4 个未变更的属性隐藏)
        }
 
-   Plan: 0 to add, 1 to change, 0 to destroy.
+   你是否要执行这些操作？
+     Terraform 将执行上述操作。
+     只接受输入 'yes' 以确认。
 
-   Do you want to perform these actions?
-     Terraform will perform the actions described above.
-     Only 'yes' will be accepted to approve.
+     输入一个值：yes
 
-     Enter a value: yes
+   tidbcloud_cluster.example_cluster: 正在修改... [id=1379661944630234067]
+   tidbcloud_cluster.example_cluster: 修改完成，耗时 2 秒 [id=1379661944630234067]
 
-   tidbcloud_cluster.example_cluster: Modifying... [id=1379661944630234067]
-   tidbcloud_cluster.example_cluster: Modifications complete after 2s [id=1379661944630234067]
-
-   Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
+   应用完成！资源：0 添加，1 修改，0 删除。
    ```
 
-3. 使用 `terraform state show tidbcloud_cluster.${resource-name}` 命令检查状态：
+3. 使用 `terraform state show tidbcloud_cluster.${资源名}` 查看状态：
 
-   ```
+   ```bash
    $ terraform state show tidbcloud_cluster.example_cluster
 
    # tidbcloud_cluster.example_cluster:
@@ -759,7 +764,7 @@ summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
                }
            }
            ip_access_list = [
-               # (1 unchanged element hidden)
+               # (1 个未变更的元素隐藏)
            ]
            paused         = true
            port           = 4000
@@ -773,9 +778,9 @@ summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
    }
    ```
 
-4. 当你需要恢复集群时，设置 `paused = false`：
+4. 若要恢复集群，将 `paused = false`：
 
-   ```
+   ```hcl
    config = {
        paused = false
        root_password = "Your_root_password1."
@@ -784,9 +789,9 @@ summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
      }
    ```
 
-5. 运行 `terraform apply` 命令并输入 `yes` 确认。如果你使用 `terraform state show tidbcloud_cluster.${resource-name}` 命令检查状态，你会发现它变为 `RESUMING`：
+5. 运行 `terraform apply`，确认后输入 `yes`。使用 `terraform state show` 查看状态，状态会变为 `RESUMING`：
 
-   ```
+   ```bash
    # tidbcloud_cluster.example_cluster:
    resource "tidbcloud_cluster" "example_cluster" {
        cloud_provider = "AWS"
@@ -809,7 +814,7 @@ summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
                }
            }
            ip_access_list = [
-               # (1 unchanged element hidden)
+               # (1 个未变更的元素隐藏)
            ]
            paused         = false
            port           = 4000
@@ -823,18 +828,19 @@ summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
    }
    ```
 
-6. 等待一段时间，然后使用 `terraform refersh` 命令更新状态。状态最终将变为 `AVAILABLE`。
+等待一段时间后，运行 `terraform refresh` 更新状态，状态最终会变为 `AVAILABLE`。
 
-现在，你已经使用 Terraform 创建和管理了一个 TiDB Cloud Dedicated 集群。接下来，你可以尝试使用我们的[备份资源](/tidb-cloud/terraform-use-backup-resource.md)创建集群的备份。
+至此，你已使用 Terraform 创建并管理了 TiDB Cloud 专用集群。接下来，可以尝试通过我们的 [备份资源](/tidb-cloud/terraform-use-backup-resource.md) 创建集群备份。
+
 ## 导入集群
 
-对于不是由 Terraform 管理的 TiDB 集群，你可以通过导入它来使用 Terraform 管理它。
+对于未由 Terraform 管理的 TiDB 集群，你可以通过导入方式让 Terraform 管理。
 
-例如，你可以导入不是由 Terraform 创建的集群，或导入[使用恢复资源创建](/tidb-cloud/terraform-use-restore-resource.md#create-a-restore-task)的集群。
+例如，导入未由 Terraform 创建的集群，或导入 [由恢复资源创建的集群](/tidb-cloud/terraform-use-restore-resource.md#create-a-restore-task)。
 
-1. 创建一个 `import_cluster.tf` 文件，如下所示：
+1. 创建 `import_cluster.tf` 文件，内容如下：
 
-    ```
+    ```hcl
     terraform {
      required_providers {
        tidbcloud = {
@@ -845,27 +851,26 @@ summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
     resource "tidbcloud_cluster" "import_cluster" {}
     ```
 
-2. 通过 `terraform import tidbcloud_cluster.import_cluster projectId,clusterId` 导入集群：
+2. 使用 `terraform import tidbcloud_cluster.import_cluster projectId,clusterId` 导入：
 
    例如：
 
-    ```
+    ```bash
     $ terraform import tidbcloud_cluster.import_cluster 1372813089189561287,1379661944630264072
 
-    tidbcloud_cluster.import_cluster: Importing from ID "1372813089189561287,1379661944630264072"...
-    tidbcloud_cluster.import_cluster: Import prepared!
-      Prepared tidbcloud_cluster for import
-    tidbcloud_cluster.import_cluster: Refreshing state... [id=1379661944630264072]
+    tidbcloud_cluster.import_cluster: 正在从 ID "1372813089189561287,1379661944630264072" 导入...
+    tidbcloud_cluster.import_cluster: 导入准备完毕！
+      准备好导入 tidbcloud_cluster
+    tidbcloud_cluster.import_cluster: 正在刷新状态... [id=1379661944630264072]
 
-    Import successful!
+    导入成功！
 
-    The resources that were imported are shown above. These resources are now in
-    your Terraform state and will henceforth be managed by Terraform.
+    上述显示的资源已导入。现在这些资源已在你的 Terraform 状态中，从此由 Terraform 管理。
     ```
 
-3. 运行 `terraform state show tidbcloud_cluster.import_cluster` 命令检查集群的状态：
+3. 运行 `terraform state show tidbcloud_cluster.import_cluster` 查看集群状态：
 
-    ```
+    ```bash
     $ terraform state show tidbcloud_cluster.import_cluster
 
     # tidbcloud_cluster.import_cluster:
@@ -899,9 +904,9 @@ summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
     }
     ```
 
-4. 要使用 Terraform 管理集群，你可以将上一步的输出复制到你的配置文件中。注意，你需要删除 `id` 和 `status` 行，因为它们将由 Terraform 控制：
+4. 若要由 Terraform 管理该集群，可将导入后输出的配置复制到配置文件中。注意删除 `id` 和 `status` 行，因为它们由 Terraform 控制：
 
-    ```
+    ```hcl
     resource "tidbcloud_cluster" "import_cluster" {
           cloud_provider = "AWS"
           cluster_type   = "DEDICATED"
@@ -930,46 +935,46 @@ summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
     }
     ```
 
-5. 你可以使用 `terraform fmt` 格式化你的配置文件：
+5. 使用 `terraform fmt` 格式化配置文件：
 
-    ```
+    ```bash
     $ terraform fmt
     ```
 
-6. 为确保配置和状态的一致性，你可以执行 `terraform plan` 或 `terraform apply`。如果你看到 `No changes`，则导入成功。
+6. 运行 `terraform plan` 或 `terraform apply`，确保配置与状态一致。如果显示 `No changes`，说明导入成功。
 
-    ```
+    ```bash
     $ terraform apply
 
-    tidbcloud_cluster.import_cluster: Refreshing state... [id=1379661944630264072]
+    tidbcloud_cluster.import_cluster: 正在刷新状态... [id=1379661944630264072]
 
-    No changes. Your infrastructure matches the configuration.
+    无变化。你的基础设施与配置匹配。
 
-    Terraform has compared your real infrastructure against your configuration and found no differences, so no changes are needed.
+    Terraform 比较了你的实际基础设施与配置，没有发现差异，因此无需任何更改。
 
-    Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
+    应用完成！资源：0 添加，0 更改，0 删除。
     ```
 
-现在你可以使用 Terraform 管理集群了。
+现在，你可以用 Terraform 管理该集群。
 
 ## 删除集群
 
-要删除集群，进入包含相应 `cluster.tf` 文件的集群目录，然后运行 `terraform destroy` 命令销毁集群资源：
+要删除集群，进入对应的集群目录（包含 `cluster.tf` 文件的目录），运行：
 
-```
+```bash
 $ terraform destroy
 
 Plan: 0 to add, 0 to change, 1 to destroy.
 
-Do you really want to destroy all resources?
-Terraform will destroy all your managed infrastructure, as shown above.
-There is no undo. Only 'yes' will be accepted to confirm.
+你是否真的要删除所有资源？
+Terraform 将删除你管理的所有基础设施，如上所示。
+此操作无法撤销。只接受输入 'yes' 以确认。
 
-Enter a value: yes
+输入一个值：yes
 ```
 
-现在，如果你运行 `terraform show` 命令，你将得到空输出，因为资源已被清除：
+运行后，资源会被销毁。如果你运行 `terraform show`，将显示为空，因为资源已被清除：
 
-```
+```bash
 $ terraform show
 ```

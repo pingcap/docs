@@ -1,24 +1,24 @@
 ---
 title: ALTER PLACEMENT POLICY
-summary: TiDB 中 ALTER PLACEMENT POLICY 的使用方法。
+summary: 在 TiDB 中使用 ALTER PLACEMENT POLICY。
 ---
 
 # ALTER PLACEMENT POLICY
 
-`ALTER PLACEMENT POLICY` 用于修改先前创建的放置策略。使用该放置策略的所有表和分区都将自动更新。
+`ALTER PLACEMENT POLICY` 用于修改之前已创建的存放策略。所有使用该存放策略的表和分区将会自动更新。
 
-> **注意：**
+> **Note:**
 >
-> 此功能在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
 
-`ALTER PLACEMENT POLICY` 用新定义_替换_之前的策略。它不会将旧策略与新策略_合并_。在以下示例中，执行 `ALTER PLACEMENT POLICY` 时，`FOLLOWERS=4` 会丢失：
+`ALTER PLACEMENT POLICY` _替换_ 旧的策略为新的定义。它不会 _合并_ 旧策略与新策略。在以下示例中，执行 `ALTER PLACEMENT POLICY` 后，`FOLLOWERS=4` 将会丢失：
 
 ```sql
 CREATE PLACEMENT POLICY p1 FOLLOWERS=4;
 ALTER PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
 ```
 
-## 语法
+## 语法概要
 
 ```ebnf+diagram
 AlterPolicyStmt ::=
@@ -56,18 +56,16 @@ AdvancedPlacementOption ::=
 
 ## 示例
 
-> **注意：**
+> **Note:**
 >
-> 要了解集群中有哪些可用区域，请参见 [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)。
+> 若要了解你的集群中可用的区域，请参见 [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)。
 >
-> 如果你没有看到任何可用区域，你的 TiKV 安装可能没有正确设置标签。
-
-{{< copyable "sql" >}}
+> 如果没有看到任何可用区域，可能是你的 TiKV 安装没有正确设置标签。
 
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
 CREATE TABLE t1 (i INT) PLACEMENT POLICY=p1; -- 将策略 p1 分配给表 t1
-ALTER PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1,us-west-2" FOLLOWERS=4; -- t1 的规则将自动更新。
+ALTER PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1,us-west-2" FOLLOWERS=4; -- t1 的规则将会自动更新
 SHOW CREATE PLACEMENT POLICY p1\G
 ```
 
@@ -86,9 +84,9 @@ Create Policy | CREATE PLACEMENT POLICY `p1` PRIMARY_REGION="us-east-1" REGIONS=
 
 该语句是 TiDB 对 MySQL 语法的扩展。
 
-## 另请参阅
+## 相关链接
 
-* [SQL 中的放置规则](/placement-rules-in-sql.md)
+* [Placement Rules in SQL](/placement-rules-in-sql.md)
 * [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)
 * [CREATE PLACEMENT POLICY](/sql-statements/sql-statement-create-placement-policy.md)
 * [DROP PLACEMENT POLICY](/sql-statements/sql-statement-drop-placement-policy.md)

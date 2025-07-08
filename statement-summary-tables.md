@@ -1,13 +1,13 @@
 ---
-title: Statement Summary 表
-summary: 了解 TiDB 中的 Statement Summary 表。
+title: Statement Summary Tables
+summary: 了解 TiDB 中的 Statement Summary Table。
 ---
 
-# Statement Summary 表
+# Statement Summary Tables
 
-为了更好地处理 SQL 性能问题，MySQL 在 `performance_schema` 中提供了 [statement summary 表](https://dev.mysql.com/doc/refman/8.0/en/performance-schema-statement-summary-tables.html) 来监控带有统计信息的 SQL。其中，`events_statements_summary_by_digest` 表通过其丰富的字段（如延迟、执行次数、扫描行数和全表扫描等）在定位 SQL 问题时非常有用。
+为了更好地处理 SQL 性能问题，MySQL 在 `performance_schema` 中提供了 [statement summary tables](https://dev.mysql.com/doc/refman/8.0/en/performance-schema-statement-summary-tables.html)，用于监控带有统计信息的 SQL。在这些表中，`events_statements_summary_by_digest` 非常有用，它具有丰富的字段，如延迟、执行时间、扫描行数和全表扫描等，有助于定位 SQL 问题。
 
-因此，从 v4.0.0-rc.1 开始，TiDB 在 `information_schema` 中（_不是_ `performance_schema`）提供了与 `events_statements_summary_by_digest` 功能类似的系统表。
+因此，从 v4.0.0-rc.1 版本开始，TiDB 在 `information_schema`（**不是** `performance_schema`）中提供了与 `events_statements_summary_by_digest` 类似的系统表，具有相似的功能。
 
 - [`statements_summary`](#statements_summary)
 - [`statements_summary_history`](#statements_summary_history)
@@ -15,19 +15,17 @@ summary: 了解 TiDB 中的 Statement Summary 表。
 - [`cluster_statements_summary_history`](#statements_summary_evicted)
 - [`statements_summary_evicted`](#statements_summary_evicted)
 
-> **注意：**
+> **Note:**
 >
-> 上述表在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> 以上表在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
 
-本文详细介绍这些表，并说明如何使用它们来排查 SQL 性能问题。
+本文档详细介绍这些表，并说明如何利用它们排查 SQL 性能问题。
 
 ## `statements_summary`
 
-`statements_summary` 是 `information_schema` 中的系统表。`statements_summary` 按资源组、SQL 指纹和执行计划指纹对 SQL 语句进行分组，并为每个 SQL 类别提供统计信息。
+`statements_summary` 是 `information_schema` 中的系统表。它将 SQL 语句按资源组、SQL digest 和计划 digest 进行分组，并提供每个类别的统计信息。
 
-这里的"SQL 指纹"与慢日志中使用的含义相同，是通过规范化 SQL 语句计算得出的唯一标识符。规范化过程会忽略常量、空白字符，并且不区分大小写。因此，具有一致语法的语句具有相同的指纹。例如：
-
-{{< copyable "sql" >}}
+这里的“SQL digest”与慢日志中使用的相同，是通过规范化 SQL 语句计算得出的唯一标识符。规范化过程会忽略常量、空白字符，并且不区分大小写。因此，语法一致的语句具有相同的 digest。例如：
 
 ```sql
 SELECT * FROM employee WHERE id IN (1, 2, 3) AND salary BETWEEN 1000 AND 2000;
@@ -36,17 +34,15 @@ select * from EMPLOYEE where ID in (4, 5) and SALARY between 3000 and 4000;
 
 规范化后，它们都属于以下类别：
 
-{{< copyable "sql" >}}
-
 ```sql
 select * from employee where id in (...) and salary between ? and ?;
 ```
 
-这里的"执行计划指纹"是指通过规范化执行计划计算得出的唯一标识符。规范化过程会忽略常量。相同的 SQL 语句可能会因为执行计划不同而被分到不同的类别中。同一类别的 SQL 语句具有相同的执行计划。
+这里的“plan digest” 指通过规范化执行计划计算得出的唯一标识符。规范化过程会忽略常量。相同的 SQL 语句可能会被分到不同的类别，因为它们可能有不同的执行计划。属于同一类别的 SQL 语句具有相同的执行计划。
 
-`statements_summary` 存储 SQL 监控指标的聚合结果。通常，每个监控指标都包括最大值和平均值。例如，执行延迟指标对应两个字段：`AVG_LATENCY`（平均延迟）和 `MAX_LATENCY`（最大延迟）。
+`statements_summary` 存储 SQL 监控指标的聚合结果。一般来说，每个监控指标都包括最大值和平均值。例如，执行延迟指标对应两个字段：`AVG_LATENCY`（平均延迟）和 `MAX_LATENCY`（最大延迟）。
 
-为确保监控指标保持最新，`statements_summary` 表中的数据会定期清除，只保留和显示最近的聚合结果。定期数据清除由 `tidb_stmt_summary_refresh_interval` 系统变量控制。如果你恰好在清除后立即查询，显示的数据可能会很少。
+为了确保监控指标的实时性，`statements_summary` 表中的数据会定期清理，只保留近期的聚合结果并显示。数据清理由系统变量 `tidb_stmt_summary_refresh_interval` 控制。如果你在清理后立即查询，显示的数据可能非常少。
 
 以下是查询 `statements_summary` 的示例输出：
 
@@ -83,69 +79,69 @@ select * from employee where id in (...) and salary between ? and ?;
                  PLAN:  Point_Get_1     root    1       table:employee, handle:3100
 ```
 
-> **注意：**
+> **Note:**
 >
-> - 在 TiDB 中，statement summary 表中字段的时间单位是纳秒（ns），而在 MySQL 中时间单位是皮秒（ps）。
-> - 从 v7.5.1 和 v7.6.0 开始，对于启用了[资源控制](/tidb-resource-control.md)的集群，`statements_summary` 将按资源组进行聚合，例如，在不同资源组中执行的相同语句将被收集为不同的记录。
+> - 在 TiDB 中，statement summary 表中字段的时间单位为纳秒（ns），而在 MySQL 中为皮秒（ps）。
+> - 从 v7.5.1 和 v7.6.0 开始，对于启用 [resource control](/tidb-resource-control.md) 的集群，`statements_summary` 将按资源组进行聚合，例如，在不同资源组中执行的相同语句会作为不同的记录收集。
+
 ## `statements_summary_history`
 
-`statements_summary_history` 的表结构与 `statements_summary` 相同。`statements_summary_history` 保存一定时间范围内的历史数据。通过检查历史数据，你可以排查异常并比较不同时间范围的监控指标。
+`statements_summary_history` 的表结构与 `statements_summary` 相同，存储某个时间范围内的历史数据。通过查看历史数据，可以排查异常情况，并对比不同时间范围的监控指标。
 
-字段 `SUMMARY_BEGIN_TIME` 和 `SUMMARY_END_TIME` 表示历史时间范围的开始时间和结束时间。
+字段 `SUMMARY_BEGIN_TIME` 和 `SUMMARY_END_TIME` 表示历史时间范围的起始时间和结束时间。
 
 ## `statements_summary_evicted`
 
-[`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40) 系统变量限制了 `statements_summary` 和 `statements_summary_history` 表在内存中可以存储的 SQL 指纹总数。一旦超过此限制，TiDB 将从 `statements_summary` 和 `statements_summary_history` 表中淘汰最近最少使用的 SQL 指纹。
+[`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40) 系统变量限制了 `statements_summary` 和 `statements_summary_history` 表在内存中存储的 SQL digest 数量。一旦超出此限制，TiDB 会驱逐最少使用的 SQL digest，从 `statements_summary` 和 `statements_summary_history` 表中移除。
 
 <CustomContent platform="tidb">
 
-> **注意：**
+> **Note:**
 >
-> 当启用 [`tidb_stmt_summary_enable_persistent`](#persist-statements-summary) 时，`statements_summary_history` 表中的数据会持久化到磁盘。在这种情况下，`tidb_stmt_summary_max_stmt_count` 仅限制 `statements_summary` 表在内存中可以存储的 SQL 指纹数量，当超过 `tidb_stmt_summary_max_stmt_count` 时，TiDB 仅从 `statements_summary` 表中淘汰最近最少使用的 SQL 指纹。
+> 当 [`tidb_stmt_summary_enable_persistent`](#persist-statements-summary) 被启用时，`statements_summary_history` 表中的数据会持久化到磁盘。在这种情况下，`tidb_stmt_summary_max_stmt_count` 仅限制 `statements_summary` 表在内存中存储的 SQL digest 数量，TiDB 只会从 `statements_summary` 表中驱逐最少使用的 SQL digest。
 
 </CustomContent>
 
-`statements_summary_evicted` 表记录了发生淘汰的时间段以及在该时间段内淘汰的 SQL 指纹数量。此表可帮助你评估 `tidb_stmt_summary_max_stmt_count` 是否针对你的工作负载进行了适当配置。如果此表包含记录，则表明在某个时间点 SQL 指纹数量超过了 `tidb_stmt_summary_max_stmt_count`。
+`statements_summary_evicted` 表记录驱逐发生的时间段以及在此期间被驱逐的 SQL digest 数量。该表帮助你评估 `tidb_stmt_summary_max_stmt_count` 是否合理配置。如果该表中有记录，说明在某个时间点 SQL digest 数量超过了 `tidb_stmt_summary_max_stmt_count`。
 
 <CustomContent platform="tidb">
 
-在 [TiDB Dashboard 的 SQL 语句页面](/dashboard/dashboard-statement-list.md#others)中，被淘汰语句的信息显示在 `Others` 行中。
+在 [TiDB Dashboard 的 SQL 语句页面](/dashboard/dashboard-statement-list.md#others)，被驱逐的语句信息会显示在 `Others` 行。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-在[诊断页面的 SQL 语句标签页](/tidb-cloud/tune-performance.md#statement-analysis)中，被淘汰语句的信息显示在 `Others` 行中。
+在 [诊断页面的 SQL 语句标签页](/tidb-cloud/tune-performance.md#statement-analysis)，被驱逐的语句信息会显示在 `Others` 行。
 
 </CustomContent>
 
-## statement summary 的集群表
+## 语句摘要的 `cluster` 表
 
-`statements_summary`、`statements_summary_history` 和 `statements_summary_evicted` 表仅显示单个 TiDB 服务器的 statement summary。要查询整个集群的数据，你需要查询 `cluster_statements_summary`、`cluster_statements_summary_history` 或 `cluster_statements_summary_evicted` 表。
+`statements_summary`、`statements_summary_history` 和 `statements_summary_evicted` 表只显示单个 TiDB 服务器的语句摘要。若要查询整个集群的数据，需要查询 `cluster_statements_summary`、`cluster_statements_summary_history` 或 `cluster_statements_summary_evicted` 表。
 
-`cluster_statements_summary` 显示每个 TiDB 服务器的 `statements_summary` 数据。`cluster_statements_summary_history` 显示每个 TiDB 服务器的 `statements_summary_history` 数据。`cluster_statements_summary_evicted` 显示每个 TiDB 服务器的 `statements_summary_evicted` 数据。这些表使用 `INSTANCE` 字段表示 TiDB 服务器的地址。其他字段与 `statements_summary`、`statements_summary_history` 和 `statements_summary_evicted` 中的字段相同。
+`cluster_statements_summary` 展示每个 TiDB 服务器的 `statements_summary` 数据，`cluster_statements_summary_history` 展示每个 TiDB 服务器的 `statements_summary_history` 数据，`cluster_statements_summary_evicted` 展示每个 TiDB 服务器的 `statements_summary_evicted` 数据。这些表使用 `INSTANCE` 字段表示 TiDB 服务器的地址，其他字段与 `statements_summary`、`statements_summary_history` 和 `statements_summary_evicted` 相同。
+
 ## 参数配置
 
-以下系统变量用于控制 statement summary：
+以下系统变量用于控制语句摘要：
 
-- `tidb_enable_stmt_summary`：确定是否启用 statement summary 功能。`1` 表示启用，`0` 表示禁用。默认启用此功能。如果禁用此功能，系统表中的统计信息将被清除。下次启用此功能时，统计信息将重新计算。测试表明启用此功能对性能影响很小。
-- `tidb_stmt_summary_refresh_interval`：`statements_summary` 表刷新的时间间隔。时间单位为秒（s）。默认值为 `1800`。
-- `tidb_stmt_summary_history_size`：`statements_summary_history` 表中存储的每个 SQL 语句类别的大小，也是 `statements_summary_evicted` 表中的最大记录数。默认值为 `24`。
-- `tidb_stmt_summary_max_stmt_count`：限制 `statements_summary` 和 `statements_summary_history` 表在内存中可以存储的 SQL 指纹总数。默认值为 `3000`。
+- `tidb_enable_stmt_summary`：决定是否启用语句摘要功能。`1` 表示启用，`0` 表示禁用。默认启用。禁用后，系统表中的统计会被清空；再次启用时会重新计算。测试表明启用此功能对性能影响很小。
+- `tidb_stmt_summary_refresh_interval`：`statements_summary` 表的刷新间隔，单位为秒（s），默认值为 `1800`。
+- `tidb_stmt_summary_history_size`：存储在 `statements_summary_history` 表中的每个 SQL 语句类别的大小，也是 `statements_summary_evicted` 表中的最大记录数，默认值为 `24`。
+- `tidb_stmt_summary_max_stmt_count`：限制 `statements_summary` 和 `statements_summary_history` 表在内存中存储的 SQL digest 数量，默认值为 `3000`。
 
-    一旦超过此限制，TiDB 将从 `statements_summary` 和 `statements_summary_history` 表中淘汰最近最少使用的 SQL 指纹。这些被淘汰的指纹随后会在 [`statements_summary_evicted`](#statements_summary_evicted) 表中计数。
+    超出此限制后，TiDB 会从两个表中驱逐最少使用的 SQL digest，并在 [`statements_summary_evicted`](#statements_summary_evicted) 表中统计。
 
-    > **注意：**
+    > **Note:**
     >
-    > - 当一个 SQL 指纹被淘汰时，其在 `statements_summary` 和 `statements_summary_history` 表中所有时间范围的相关汇总数据都会被移除。因此，即使特定时间范围内的 SQL 指纹数量未超过限制，`statements_summary_history` 表中的 SQL 指纹数量可能少于实际的 SQL 指纹数量。如果出现这种情况并影响性能，建议增加 `tidb_stmt_summary_max_stmt_count` 的值。
-    > - 对于 TiDB Self-Managed，当启用 [`tidb_stmt_summary_enable_persistent`](#persist-statements-summary) 时，`statements_summary_history` 表中的数据会持久化到磁盘。在这种情况下，`tidb_stmt_summary_max_stmt_count` 仅限制 `statements_summary` 表在内存中可以存储的 SQL 指纹数量，当超过 `tidb_stmt_summary_max_stmt_count` 时，TiDB 仅从 `statements_summary` 表中淘汰最近最少使用的 SQL 指纹。
+    > - 当 SQL digest 被驱逐时，其所有时间范围的相关摘要数据会从 `statements_summary` 和 `statements_summary_history` 表中移除。因此，即使某个时间范围内的 SQL digest 数量未超出限制，`statements_summary_history` 表中的 SQL digest 数量也可能少于实际数量。如果此情况影响性能，建议增加 `tidb_stmt_summary_max_stmt_count` 的值。
+    > - 对于 TiDB 自托管版本，当 [`tidb_stmt_summary_enable_persistent`](#persist-statements-summary) 被启用时，`statements_summary_history` 表中的数据会持久化到磁盘。在这种情况下，`tidb_stmt_summary_max_stmt_count` 仅限制 `statements_summary` 表在内存中存储的 SQL digest 数量，TiDB 只会从 `statements_summary` 表中驱逐最少使用的 SQL digest。
 
-- `tidb_stmt_summary_max_sql_length`：指定 `DIGEST_TEXT` 和 `QUERY_SAMPLE_TEXT` 的最长显示长度。默认值为 `4096`。
-- `tidb_stmt_summary_internal_query`：确定是否统计 TiDB SQL 语句。`1` 表示统计，`0` 表示不统计。默认值为 `0`。
+- `tidb_stmt_summary_max_sql_length`：指定 `DIGEST_TEXT` 和 `QUERY_SAMPLE_TEXT` 的最大显示长度，默认值为 `4096`。
+- `tidb_stmt_summary_internal_query`：决定是否统计 TiDB SQL 语句。`1` 表示统计，`0` 表示不统计，默认值为 `0`。
 
-以下是 statement summary 配置的示例：
-
-{{< copyable "sql" >}}
+示例语句摘要配置如下：
 
 ```sql
 set global tidb_stmt_summary_max_stmt_count = 3000;
@@ -154,15 +150,16 @@ set global tidb_stmt_summary_refresh_interval = 1800;
 set global tidb_stmt_summary_history_size = 24;
 ```
 
-在上述配置生效后，`statements_summary` 表每 30 分钟清除一次，`statements_summary_history` 表最多存储 3000 种 SQL 语句。对于每种类型，`statements_summary_history` 表存储最近 24 个时间段的数据。`statements_summary_evicted` 表记录最近 24 个发生 SQL 语句淘汰的时间段。`statements_summary_evicted` 表每 30 分钟更新一次。
+配置生效后，`statements_summary` 表每 30 分钟清空一次，`statements_summary_history` 表最多存储 3000 种 SQL 语句。每种类型的 SQL 语句，`statements_summary_history` 表存储最近 24 个周期的数据。`statements_summary_evicted` 表记录最近 24 个周期内被驱逐的 SQL 语句。该表每 30 分钟更新一次。
 
-> **注意：**
+> **Note:**
 >
-> - 如果一个 SQL 类型每分钟都出现，则 `statements_summary_history` 存储最近 12 小时的数据。如果一个 SQL 类型每天只在 00:00 到 00:30 出现，则 `statements_summary_history` 存储最近 24 个时间段的数据，每个时间段为 1 天。因此，对于这个 SQL 类型，`statements_summary_history` 存储最近 24 天的数据。
-> - `tidb_stmt_summary_history_size`、`tidb_stmt_summary_max_stmt_count` 和 `tidb_stmt_summary_max_sql_length` 配置项会影响内存使用。建议你根据需求、SQL 大小、SQL 数量和机器配置来调整这些配置。不建议设置过大的值。你可以使用 `tidb_stmt_summary_history_size` \* `tidb_stmt_summary_max_stmt_count` \* `tidb_stmt_summary_max_sql_length` \* `3` 来计算内存使用量。
-### 为 statement summary 设置合适的大小
+> - 如果某个 SQL 类型每分钟出现一次，`statements_summary_history` 会存储最近 12 小时的数据；如果每天 00:00 到 00:30 之间出现一次，`statements_summary_history` 会存储最近 24 个周期（每天一个周期），每个周期为 1 天。因此，`statements_summary_history` 存储的是该 SQL 类型最近 24 天的数据。
+> - `tidb_stmt_summary_history_size`、`tidb_stmt_summary_max_stmt_count` 和 `tidb_stmt_summary_max_sql_length` 配置项会影响内存使用，建议根据实际需求、SQL 大小、SQL 数量和机器配置调整，不建议设置过大。可以通过 `tidb_stmt_summary_history_size` \* `tidb_stmt_summary_max_stmt_count` \* `tidb_stmt_summary_max_sql_length` \* `3` 估算内存用量。
 
-系统运行一段时间后（取决于系统负载），你可以检查 `statement_summary` 表以查看是否发生了 SQL 淘汰。例如：
+### 设置合理的语句摘要大小
+
+系统运行一段时间后（根据系统负载而定），可以检查 `statement_summary` 表，确认是否发生了 SQL 驱逐。例如：
 
 ```sql
 select @@global.tidb_stmt_summary_max_stmt_count;
@@ -185,7 +182,7 @@ select count(*) from information_schema.statements_summary;
 1 row in set (0.001 sec)
 ```
 
-你可以看到 `statements_summary` 表已经充满记录。然后从 `statements_summary_evicted` 表中检查被淘汰的数据：
+可以看到 `statements_summary` 表已满。接着查询被驱逐的数据：
 
 ```sql
 select * from information_schema.statements_summary_evicted;
@@ -202,4 +199,219 @@ select * from information_schema.statements_summary_evicted;
 2 row in set (0.001 sec)
 ```
 
-从上述结果可以看出，最多有 59 个 SQL 类别被淘汰。在这种情况下，建议你至少增加 59 条记录的 `statement_summary` 表大小，这意味着将大小增加到至少 3059 条记录。
+从结果可以看出，最多驱逐了 59 个 SQL 类别。建议将 `statement_summary` 表的大小至少增加到 3059 条记录，以容纳这些被驱逐的类别。
+
+## 限制
+
+默认情况下，语句摘要表存储在内存中。重启 TiDB 服务器后，所有数据会丢失。
+
+<CustomContent platform="tidb">
+
+为解决此问题，TiDB 在 v6.6.0 版本中实验性引入了 [statement summary persistence](#persist-statements-summary) 功能，默认关闭。启用后，历史数据不再存储在内存中，而是直接写入磁盘。这样，即使重启 TiDB 服务器，历史数据依然可用。
+
+</CustomContent>
+
+## 持久化语句摘要
+
+<CustomContent platform="tidb-cloud">
+
+此部分仅适用于 TiDB 自托管版本。对于 TiDB Cloud，`tidb_stmt_summary_enable_persistent` 参数的默认值为 `false`，且不支持动态修改。
+
+</CustomContent>
+
+> **Warning:**
+>
+> 语句摘要持久化是一个实验性功能，不建议在生产环境中使用。此功能可能会被更改或移除，且不提前通知。如发现 bug，可在 GitHub 上提交 [issue](https://github.com/pingcap/tidb)。
+
+<CustomContent platform="tidb">
+
+如 [限制](#limitation) 部分所述，语句摘要表默认存储在内存中。重启 TiDB 后，所有语句摘要信息会丢失。从 v6.6.0 开始，TiDB 实验性提供了配置项 [`tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660)，允许用户启用或禁用语句摘要持久化。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+如 [限制](#limitation) 部分所述，语句摘要表默认存储在内存中。重启 TiDB 后，所有语句摘要信息会丢失。从 v6.6.0 开始，TiDB 实验性提供了配置项 `tidb_stmt_summary_enable_persistent`，允许用户启用或禁用语句摘要持久化。
+
+</CustomContent>
+
+要启用语句摘要持久化，可以在 TiDB 配置文件中添加以下配置项：
+
+```toml
+[instance]
+tidb_stmt_summary_enable_persistent = true
+# 以下条目使用默认值，可根据需要修改。
+# tidb_stmt_summary_filename = "tidb-statements.log"
+# tidb_stmt_summary_file_max_days = 3
+# tidb_stmt_summary_file_max_size = 64 # MiB
+# tidb_stmt_summary_file_max_backups = 0
+```
+
+启用后，内存中只保存当前的实时数据，不存储历史数据。当实时数据刷新为历史数据时，数据会在 `tidb_stmt_summary_refresh_interval`（在 [参数配置](#parameter-configuration) 部分描述）间隔内写入磁盘。查询 `statements_summary_history` 或 `cluster_statements_summary_history` 表时，会返回内存和磁盘中合并的结果。
+
+<CustomContent platform="tidb">
+
+> **Note:**
+>
+> - 启用语句摘要持久化后，`tidb_stmt_summary_history_size` 配置将不再生效，因为内存不再保存历史数据。取而代之的，以下三个配置项会用来控制持久化的历史数据的保留时间和大小：[`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660)、[`tidb_stmt_summary_file_max_size`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660) 和 [`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660)。
+> - `tidb_stmt_summary_refresh_interval` 的值越小，数据写入磁盘越及时，但也意味着写入的冗余数据更多。
+
+</CustomContent>
+
+## 排查示例
+
+本节提供两个示例，演示如何利用语句摘要功能排查 SQL 性能问题。
+
+### 高 SQL 延迟是否由服务器端引起？
+
+在此示例中，客户端显示对 `employee` 表的点查询性能较慢。你可以对 SQL 文本进行模糊搜索：
+
+```sql
+SELECT avg_latency, exec_count, query_sample_text
+    FROM information_schema.statements_summary
+    WHERE digest_text LIKE 'select * from employee%';
+```
+
+`1ms` 和 `0.3ms` 被认为在 `avg_latency` 的正常范围内，因此可以判断服务器端不是原因。你可以从客户端或网络方面排查。
+
+```sql
++-------------+------------+------------------------------------------+
+| avg_latency | exec_count | query_sample_text                        |
++-------------+------------+------------------------------------------+
+|     1042040 |          2 | select * from employee where name='eric' |
+|      345053 |          3 | select * from employee where id=3100     |
++-------------+------------+------------------------------------------+
+2 rows in set (0.00 sec)
+```
+
+### 哪些类别的 SQL 语句耗时最长？
+
+如果在 10:00 到 10:30 期间 QPS 明显下降，可以从历史表中找出耗时最长的三个 SQL 类别：
+
+```sql
+SELECT sum_latency, avg_latency, exec_count, query_sample_text
+    FROM information_schema.statements_summary_history
+    WHERE summary_begin_time='2020-01-02 10:00:00'
+    ORDER BY sum_latency DESC LIMIT 3;
+```
+
+结果显示，以下三个类别的 SQL 语句总耗时最长，优先级较高，需重点优化：
+
+```sql
++-------------+-------------+------------+-----------------------------------------------------------------------+
+| sum_latency | avg_latency | exec_count | query_sample_text                                                     |
++-------------+-------------+------------+-----------------------------------------------------------------------+
+|     7855660 |     1122237 |          7 | select avg(salary) from employee where company_id=2013                |
+|     7241960 |     1448392 |          5 | select * from employee join company on employee.company_id=company.id |
+|     2084081 |     1042040 |          2 | select * from employee where name='eric'                              |
++-------------+-------------+------------+-----------------------------------------------------------------------+
+3 rows in set (0.00 sec)
+```
+
+## 字段说明
+
+### `statements_summary` 字段说明
+
+以下为 `statements_summary` 表中字段的说明。
+
+基础字段：
+
+- `STMT_TYPE`: SQL 语句类型。
+- `SCHEMA_NAME`: 当前执行该类别 SQL 语句的 schema。
+- `DIGEST`: 该类别 SQL 语句的 digest。
+- `DIGEST_TEXT`: 规范化的 SQL 语句。
+- `QUERY_SAMPLE_TEXT`: 该类别 SQL 语句的原始 SQL，只取一个。
+- `TABLE_NAMES`: SQL 语句涉及的所有表，多个用逗号分隔。
+- `INDEX_NAMES`: SQL 语句使用的所有索引，多个用逗号分隔。
+- `SAMPLE_USER`: 执行该类别 SQL 的用户，只取一个。
+- `PLAN_DIGEST`: 执行计划的 digest。
+- `PLAN`: 原始执行计划，多个语句只取一个的计划。
+- `BINARY_PLAN`: 编码为二进制的执行计划，多个语句只取一个的计划。执行 [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan) 解析具体执行计划。
+- `PLAN_CACHE_HITS`: 该类别 SQL 语句命中计划缓存的总次数。
+- `PLAN_IN_CACHE`: 表示之前执行的该类别 SQL 语句是否命中计划缓存。
+
+与执行时间相关的字段：
+
+- `SUMMARY_BEGIN_TIME`: 当前统计周期的起始时间。
+- `SUMMARY_END_TIME`: 当前统计周期的结束时间。
+- `FIRST_SEEN`: 该类别 SQL 语句首次被观察到的时间。
+- `LAST_SEEN`: 该类别 SQL 语句最后被观察到的时间。
+
+与 TiDB 服务器相关的字段：
+
+- `EXEC_COUNT`: 该类别 SQL 语句的总执行次数。
+- `SUM_ERRORS`: 执行过程中发生的错误总数。
+- `SUM_WARNINGS`: 执行过程中发生的警告总数。
+- `SUM_LATENCY`: 该类别 SQL 语句的总执行延迟。
+- `MAX_LATENCY`: 该类别 SQL 语句的最大执行延迟。
+- `MIN_LATENCY`: 该类别 SQL 语句的最小执行延迟。
+- `AVG_LATENCY`: 该类别 SQL 语句的平均执行延迟。
+- `AVG_PARSE_LATENCY`: 解析器的平均延迟。
+- `MAX_PARSE_LATENCY`: 解析器的最大延迟。
+- `AVG_COMPILE_LATENCY`: 编译器的平均延迟。
+- `MAX_COMPILE_LATENCY`: 编译器的最大延迟。
+- `AVG_MEM`: 平均内存（字节）。
+- `MAX_MEM`: 最大内存（字节）。
+- `AVG_DISK`: 平均磁盘空间（字节）。
+- `MAX_DISK`: 最大磁盘空间（字节）。
+
+与 TiKV Coprocessor 任务相关的字段：
+
+- `SUM_COP_TASK_NUM`: 发送的 Coprocessor 请求总数。
+- `MAX_COP_PROCESS_TIME`: Coprocessor 任务的最大执行时间。
+- `MAX_COP_PROCESS_ADDRESS`: 执行时间最长的 Coprocessor 任务的地址。
+- `MAX_COP_WAIT_TIME`: Coprocessor 任务的最大等待时间。
+- `MAX_COP_WAIT_ADDRESS`: 等待时间最长的 Coprocessor 任务的地址。
+- `AVG_PROCESS_TIME`: TiKV 中 SQL 语句的平均处理时间。
+- `MAX_PROCESS_TIME`: TiKV 中 SQL 语句的最大处理时间。
+- `AVG_WAIT_TIME`: TiKV 中 SQL 语句的平均等待时间。
+- `MAX_WAIT_TIME`: TiKV 中 SQL 语句的最大等待时间。
+- `AVG_BACKOFF_TIME`: SQL 语句遇到需要重试的错误时，重试前的平均等待时间。
+- `MAX_BACKOFF_TIME`: SQL 语句遇到需要重试的错误时，重试前的最大等待时间。
+- `AVG_TOTAL_KEYS`: Coprocessor 扫描的平均键数。
+- `MAX_TOTAL_KEYS`: Coprocessor 扫描的最大键数。
+- `AVG_PROCESSED_KEYS`: Coprocessor 处理的平均键数，不包括旧版本的 MVCC。`avg_total_keys` 与 `avg_processed_keys` 差异大，说明存在大量旧版本。
+- `MAX_PROCESSED_KEYS`: Coprocessor 处理的最大键数。
+
+事务相关字段：
+
+- `AVG_PREWRITE_TIME`: 预写阶段的平均时间。
+- `MAX_PREWRITE_TIME`: 预写阶段的最长时间。
+- `AVG_COMMIT_TIME`: 提交阶段的平均时间。
+- `MAX_COMMIT_TIME`: 提交阶段的最长时间。
+- `AVG_GET_COMMIT_TS_TIME`: 获取 `commit_ts` 的平均时间。
+- `MAX_GET_COMMIT_TS_TIME`: 获取 `commit_ts` 的最长时间。
+- `AVG_COMMIT_BACKOFF_TIME`: 提交阶段遇到错误需要重试时，重试前的平均等待时间。
+- `MAX_COMMIT_BACKOFF_TIME`: 提交阶段遇到错误需要重试时，重试前的最大等待时间。
+- `AVG_RESOLVE_LOCK_TIME`: 解决事务间锁冲突的平均时间。
+- `MAX_RESOLVE_LOCK_TIME`: 解决锁冲突的最长时间。
+- `AVG_LOCAL_LATCH_WAIT_TIME`: 本地事务的平均等待时间。
+- `MAX_LOCAL_LATCH_WAIT_TIME`: 本地事务的最大等待时间。
+- `AVG_WRITE_KEYS`: 写入的平均键数。
+- `MAX_WRITE_KEYS`: 写入的最大键数。
+- `AVG_WRITE_SIZE`: 写入数据的平均大小（字节）。
+- `MAX_WRITE_SIZE`: 写入数据的最大大小（字节）。
+- `AVG_PREWRITE_REGIONS`: 预写阶段涉及的平均 Region 数量。
+- `MAX_PREWRITE_REGIONS`: 预写阶段涉及的最大 Region 数量。
+- `AVG_TXN_RETRY`: 事务重试的平均次数。
+- `MAX_TXN_RETRY`: 事务重试的最大次数。
+- `SUM_BACKOFF_TIMES`: 遇到需要重试的错误时的重试总次数。
+- `BACKOFF_TYPES`: 需要重试的所有错误类型及对应的重试次数，格式为 `type:number`，多个用逗号分隔，例如 `txnLock:2,pdRPC:1`。
+- `AVG_AFFECTED_ROWS`: 影响的平均行数。
+- `PREV_SAMPLE_TEXT`: 当前 SQL 为 `COMMIT` 时，`PREV_SAMPLE_TEXT` 为 `COMMIT` 前的语句。此时，SQL 按 digest 和 `prev_sample_text` 分组，`COMMIT` 语句不同 `prev_sample_text` 会分到不同的行。当当前 SQL 不是 `COMMIT` 时，`PREV_SAMPLE_TEXT` 为空字符串。
+
+与资源控制相关的字段：
+
+- `AVG_REQUEST_UNIT_WRITE`: SQL 语句消耗的写 RU 的平均值。
+- `MAX_REQUEST_UNIT_WRITE`: SQL 语句消耗的写 RU 的最大值。
+- `AVG_REQUEST_UNIT_READ`: SQL 语句消耗的读 RU 的平均值。
+- `MAX_REQUEST_UNIT_READ`: SQL 语句消耗的读 RU 的最大值。
+- `AVG_QUEUED_RC_TIME`: 执行 SQL 时等待可用 RU 的平均等待时间。
+- `MAX_QUEUED_RC_TIME`: 执行 SQL 时等待可用 RU 的最大等待时间。
+- `RESOURCE_GROUP`: 绑定到 SQL 语句的资源组。
+
+### `statements_summary_evicted` 字段说明
+
+- `BEGIN_TIME`: 记录开始时间。
+- `END_TIME`: 记录结束时间。
+- `EVICTED_COUNT`: 在该时间段内被驱逐的 SQL 类别数。

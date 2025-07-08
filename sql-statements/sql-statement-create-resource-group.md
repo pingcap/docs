@@ -1,17 +1,17 @@
 ---
 title: CREATE RESOURCE GROUP
-summary: 了解 TiDB 中 CREATE RESOURCE GROUP 的使用方法。
+summary: 了解 TiDB 中 CREATE RESOURCE GROUP 的用法。
 ---
 
 # CREATE RESOURCE GROUP
 
-你可以使用 `CREATE RESOURCE GROUP` 语句创建资源组。
+你可以使用 `CREATE RESOURCE GROUP` 语句来创建资源组。
 
-> **注意：**
+> **Note:**
 >
-> 此功能在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
 
-## 语法
+## 概要
 
 ```ebnf+diagram
 CreateResourceGroupStmt ::=
@@ -70,21 +70,21 @@ ResourceGroupRunawayActionOption ::=
 |   KILL
 ```
 
-资源组名称参数（`ResourceGroupName`）必须全局唯一。
+资源组名称参数 (`ResourceGroupName`) 必须在全局范围内唯一。
 
-TiDB 支持以下 `DirectResourceGroupOption`，其中[请求单元 (RU)](/tidb-resource-control.md#what-is-request-unit-ru) 是 TiDB 中 CPU、IO 和其他系统资源的统一抽象单位。
+TiDB 支持以下 `DirectResourceGroupOption`，其中 [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) 是 TiDB 中 CPU、IO 及其他系统资源的统一抽象单位。
 
-| 选项     | 描述                         | 示例                |
-|---------------|-------------------------------------|------------------------|
-| `RU_PER_SEC`  | 每秒 RU 补充速率   | `RU_PER_SEC = 500` 表示该资源组每秒补充 500 个 RU    |
-| `PRIORITY`    | 在 TiKV 上处理任务的绝对优先级  | `PRIORITY = HIGH` 表示优先级高。如果未指定，默认值为 `MEDIUM`。 |
-| `BURSTABLE`   | 如果设置了 `BURSTABLE` 属性，TiDB 允许相应的资源组在超出配额时使用可用的系统资源。 |
-| `QUERY_LIMIT` | 当查询执行满足此条件时，该查询被识别为失控查询并执行相应的操作。 | `QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=EXACT DURATION='10m')` 表示当执行时间超过 60 秒时，该查询被识别为失控查询。查询被终止。在接下来的 10 分钟内，所有具有相同 SQL 文本的 SQL 语句都将立即被终止。`QUERY_LIMIT=()` 或 `QUERY_LIMIT=NULL` 表示不启用失控控制。参见[失控查询](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries)。 |
+| 选项             | 描述                                                         | 示例                                                         |
+|------------------|--------------------------------------------------------------|--------------------------------------------------------------|
+| `RU_PER_SEC`    | 每秒请求单位（RU）回填速率                                    | `RU_PER_SEC = 500` 表示该资源组每秒回填 500 RUs                     |
+| `PRIORITY`      | TiKV 上待处理任务的绝对优先级                                    | `PRIORITY = HIGH` 表示优先级为高。若未指定，默认值为 `MEDIUM`。     |
+| `BURSTABLE`     | 若设置 `BURSTABLE` 属性，TiDB 允许对应资源组在超出配额时使用系统可用资源。 |                                                              |
+| `QUERY_LIMIT`   | 当查询执行满足此条件时，识别为失控查询并执行相应操作。             | `QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=EXACT DURATION='10m')` 表示当查询执行时间超过 60 秒时，识别为失控查询，终止该查询。所有具有相同 SQL 文本的 SQL 语句将在接下来的 10 分钟内立即终止。`QUERY_LIMIT=()` 或 `QUERY_LIMIT=NULL` 表示未启用失控控制。详见 [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries)。 |
 
-> **注意：**
+> **Note:**
 >
 > - `CREATE RESOURCE GROUP` 语句只能在全局变量 [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) 设置为 `ON` 时执行。
-> TiDB 在集群初始化期间自动创建一个 `default` 资源组。对于此资源组，`RU_PER_SEC` 的默认值为 `UNLIMITED`（相当于 `INT` 类型的最大值，即 `2147483647`），并且处于 `BURSTABLE` 模式。所有未绑定到任何资源组的请求都会自动绑定到这个 `default` 资源组。当你为其他资源组创建新配置时，建议根据需要修改 `default` 资源组配置。
+> TiDB 在集群初始化时会自动创建一个 `default` 资源组。该资源组的 `RU_PER_SEC` 默认值为 `UNLIMITED`（等同于 `INT` 类型的最大值，即 `2147483647`），且处于 `BURSTABLE` 模式。所有未绑定到任何资源组的请求会自动绑定到此 `default` 资源组。当你为其他资源组创建新配置时，建议根据需要修改 `default` 资源组的配置。
 > - 目前，只有 `default` 资源组支持修改 `BACKGROUND` 配置。
 
 ## 示例
@@ -135,11 +135,11 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1' or NAME = 'rg
 
 ## MySQL 兼容性
 
-MySQL 也支持 [CREATE RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/create-resource-group.html)。但是，可接受的参数与 TiDB 的不同，因此它们不兼容。
+MySQL 也支持 [CREATE RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/create-resource-group.html)。但接受的参数与 TiDB 不同，因此不兼容。
 
-## 另请参阅
+## 相关链接
 
 * [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
 * [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
 * [ALTER USER RESOURCE GROUP](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)
-* [请求单元 (RU)](/tidb-resource-control.md#what-is-request-unit-ru)
+* [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru)

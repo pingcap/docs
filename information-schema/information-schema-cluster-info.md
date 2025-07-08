@@ -1,17 +1,15 @@
 ---
 title: CLUSTER_INFO
-summary: "了解 `CLUSTER_INFO` 集群拓扑信息表。"
+summary: 了解 `CLUSTER_INFO` 集群拓扑信息表。
 ---
 
 # CLUSTER_INFO
 
-`CLUSTER_INFO` 集群拓扑表提供了集群的当前拓扑信息，包括每个实例的版本信息、实例版本对应的 Git Hash、每个实例的启动时间以及每个实例的运行时间。
+`CLUSTER_INFO` 集群拓扑表提供了当前集群的拓扑信息、每个实例的版本信息、对应实例版本的 Git Hash、每个实例的启动时间以及运行时间。
 
-> **注意：**
+> **Note:**
 >
-> 此表在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群中不可用。
-
-{{< copyable "sql" >}}
+> 该表在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
 
 ```sql
 USE information_schema;
@@ -36,16 +34,14 @@ desc cluster_info;
 
 字段说明：
 
-* `TYPE`：实例类型。可选值为 `tidb`、`pd` 和 `tikv`。
-* `INSTANCE`：实例地址，格式为 `IP:PORT` 的字符串。
-* `STATUS_ADDRESS`：HTTP API 的服务地址。tikv-ctl、pd-ctl 或 tidb-ctl 中的某些命令可能会使用此 API 和地址。你还可以通过此地址获取更多集群信息。详情请参考 [TiDB HTTP API 文档](https://github.com/pingcap/tidb/blob/release-8.1/docs/tidb_http_api.md)。
-* `VERSION`：对应实例的语义版本号。为了与 MySQL 版本号兼容，TiDB 版本以 `${mysql-version}-${tidb-version}` 的格式显示。
-* `GIT_HASH`：编译实例版本时的 Git Commit Hash，用于标识两个实例是否为完全一致的版本。
-* `START_TIME`：对应实例的启动时间。
-* `UPTIME`：对应实例的运行时间。
-* `SERVER_ID`：对应实例的服务器 ID。
-
-{{< copyable "sql" >}}
+* `TYPE`: 实例类型。可选值为 `tidb`、`pd` 和 `tikv`。
+* `INSTANCE`: 实例地址，格式为 `IP:PORT` 的字符串。
+* `STATUS_ADDRESS`: HTTP API 的服务地址。部分在 tikv-ctl、pd-ctl 或 tidb-ctl 中的命令可能会使用此 API 和地址。你也可以通过此地址获取更多集群信息。详情请参考 [TiDB HTTP API document](https://github.com/pingcap/tidb/blob/release-8.1/docs/tidb_http_api.md)。
+* `VERSION`: 对应实例的语义版本号。为了与 MySQL 版本号兼容，TiDB 版本以 `${mysql-version}-${tidb-version}` 格式显示。
+* `GIT_HASH`: 编译实例版本时的 Git Commit Hash，用于识别两个实例是否为绝对一致的版本。
+* `START_TIME`: 对应实例的启动时间。
+* `UPTIME`: 对应实例的运行时间。
+* `SERVER_ID`: 对应实例的服务器 ID。
 
 ```sql
 SELECT * FROM cluster_info;
