@@ -28,33 +28,14 @@ jobs:
           echo "This is a test file for PR creation workflow." >> test-pr-creation.md
           echo "Created at: $(date)" >> test-pr-creation.md
 
-      - name: Git commit and push
-        id: git_commit
-        run: |
-          cd docs
-          git status
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git checkout -b pr-test/${{ steps.build_id.outputs.id }}
-          git add .
-          if git status | grep -q "Changes to be committed"
-          then
-            git commit -m "test: Add test file for PR creation workflow"
-            git push origin pr-test/${{ steps.build_id.outputs.id }}
-            echo "::set-output name=committed::1"
-          else
-            echo "No changes detected, skipped"
-          fi
-
       - name: Create PR
         uses: peter-evans/create-pull-request@v7
-        if: steps.git_commit.outputs.committed == 1
         with:
           path: "docs"
           token: ${{ github.token }}
           branch: pr-test/${{ steps.build_id.outputs.id }}
           base: ${{ env.CN_CLOUD_BRANCH }}
-          delete-branch: false
+          delete-branch: true
           title: "test: PR Creation Test ${{ steps.build_id.outputs.id }}"
           body: |
             ### What is changed, added or deleted? (Required)
