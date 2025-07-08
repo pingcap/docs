@@ -132,8 +132,8 @@ const parseTOCFile = (tocPath) => {
 
 // 获取 TOC 文件中的文件列表
 const getTOCFiles = () => {
-  // 优先检查 /tmp/TOC-tidb-cloud.md
-  const tmpTocPath = "/tmp/TOC-tidb-cloud.md";
+  // 优先检查 ./tmp/TOC-tidb-cloud.md
+  const tmpTocPath = "./tmp/TOC-tidb-cloud.md";
   const localTocPath = "TOC-tidb-cloud.md";
 
   let tocFiles = parseTOCFile(tmpTocPath);
