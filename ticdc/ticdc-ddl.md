@@ -11,38 +11,51 @@ This document describes the rules and special cases of DDL replication in TiCDC.
 
 Currently, TiCDC uses an allow list to determine whether to replicate a DDL statement. Only the DDL statements in the allow list are replicated to the downstream. The DDL statements not in the allow list are not replicated.
 
-The allow list of DDL statements supported by TiCDC is as follows:
+In addition, TiCDC determines whether to replicate a DDL statement to the downstream based on whether the table has a [valid index](/ticdc/ticdc-overview.md#valid-index) and whether the configuration item [`force-replicate`](/ticdc/ticdc-changefeed-config.md#force-replicate) is set to `true`. When `force-replicate=true`, the replication task attempts to forcibly [replicate tables without a valid index](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index).
 
-- create database
-- drop database
-- create table
-- drop table
-- add column
-- drop column
-- create index / add index
-- drop index
-- truncate table
-- modify column
-- rename table
-- alter column default value
-- alter table comment
-- rename index
-- add partition
-- drop partition
-- truncate partition
-- create view
-- drop view
-- alter table character set
-- alter database character set
-- recover table
-- add primary key
-- drop primary key
-- rebase auto id
-- alter table index visibility
-- exchange partition
-- reorganize partition
-- alter table ttl
-- alter table remove ttl
+The following is the allow list of DDL statements supported by TiCDC. The abbreviations in the table:
+
+- Y: Replication to the downstream is supported in this condition.
+- N: Replication to the downstream is not supported in this condition.
+
+> **Note**
+>
+> - When the upstream table has no valid index and `force-replicate=true` is not configured, the table will not be replicated. However, subsequent DDL statements (including `CREATE INDEX`, `ADD INDEX`, and `ADD PRIMARY KEY`) that create a valid index on this table will be replicated, which might cause inconsistency between downstream and upstream table schemas and lead to subsequent data replication failure.
+> - DDL statements (including `DROP INDEX` and `DROP PRIMARY KEY`) that drop the last valid index will not be replicated, causing subsequent data replication to fail.
+
+| DDL | A valid index exists | A valid index does not exist and `force-replicate` is `false` (default) | A valid index does not exist and `force-replicate` is set to `true` |
+|---|:---:|:---:| :---: |
+| `CREATE DATABASE` | Y | Y | Y |
+| `DROP DATABASE` | Y | Y | Y |
+| `ALTER DATABASE CHARACTER SET` | Y | Y | Y |
+| `CREATE INDEX` | Y | Y | Y |
+| `ADD INDEX` | Y | Y | Y |
+| `DROP INDEX` | Y | N | Y |
+| `ADD PRIMARY KEY` | Y | Y | Y |
+| `DROP PRIMARY KEY` | Y | N | Y |
+| `CREATE TABLE` | Y | N | Y |
+| `DROP TABLE` | Y | N | Y |
+| `ADD COLUMN` | Y | N | Y |
+| `DROP COLUMN` | Y | N | Y |
+| `TRUNCATE TABLE` | Y | N | Y |
+| `MODIFY COLUMN` | Y | N | Y |
+| `RENAME TABLE` | Y | N | Y |
+| `ALTER COLUMN DEFAULT VALUE` | Y | N | Y |
+| `ALTER TABLE COMMENT` | Y | N | Y |
+| `RENAME INDEX` | Y | N | Y |
+| `ADD PARTITION` | Y | N | Y |
+| `DROP PARTITION` | Y | N | Y |
+| `TRUNCATE PARTITION` | Y | N | Y |
+| `CREATE VIEW` | Y | N | Y |
+| `DROP VIEW` | Y | N | Y |
+| `ALTER TABLE CHARACTER SET` | Y | N | Y |
+| `RECOVER TABLE` | Y | N | Y |
+| `REBASE AUTO ID` | Y | N | Y |
+| `ALTER TABLE INDEX VISIBILITY` | Y | N | Y |
+| `EXCHANGE PARTITION` | Y | N | Y |
+| `REORGANIZE PARTITION` | Y | N | Y |
+| `ALTER TABLE TTL` | Y | N | Y |
+| `ALTER TABLE REMOVE TTL` | Y | N | Y |
 
 ## DDL replication considerations
 
@@ -79,12 +92,12 @@ TiCDC processes this type of DDL as follows:
 | `RENAME TABLE test.t1 TO test.t2` | Replicate | `test.t1` matches the filter rule |
 | `RENAME TABLE test.t1 TO ignore.t1` | Replicate | `test.t1` matches the filter rule |
 | `RENAME TABLE ignore.t1 TO ignore.t2` | Ignore | `ignore.t1` does not match the filter rule |
-| `RENAME TABLE test.n1 TO test.t1` | Report an error and exit the replication | `test.n1` does not match the filter rule, but `test.t1` matches the filter rule. This operation is illegal. In this case, refer to the error message for handling. |
+| `RENAME TABLE test.n1 TO test.t1` | Report an error and exit the replication | The old table name `test.n1` does not match the filter rule, but the new table name `test.t1` matches the filter rule. This operation is illegal. In this case, refer to the error message for handling. |
 | `RENAME TABLE ignore.t1 TO test.t1` | Report an error and exit the replication | Same reason as above. |
 
 #### Rename multiple tables in a DDL statement
 
-If a DDL statement renames multiple tables, TiCDC only replicates the DDL statement when the old database name, old table names, and the new database name all match the filter rule.
+If a DDL statement renames multiple tables, TiCDC replicates the DDL statement only when the **old database name**, **old table names**, and **new database name** all match the filter rule.
 
 In addition, TiCDC does not support the `RENAME TABLE` DDL that swaps the table names. The following is an example.
 
@@ -107,3 +120,33 @@ TiCDC processes this type of DDL as follows:
 ### DDL statement considerations
 
 When executing cross-database DDL statements (such as `CREATE TABLE db1.t1 LIKE t2`) in the upstream, it is recommended that you explicitly specify all relevant database names in DDL statements (such as `CREATE TABLE db1.t1 LIKE db2.t2`). Otherwise, cross-database DDL statements might not be executed correctly in the downstream due to the lack of database name information.
+
+### Notes on using event filter rules to filter DDL events
+
+If a filtered DDL statement involves table creation or deletion, TiCDC only filters out the DDL statement without affecting the replication behavior of DML statements. The following is an example.
+
+Assume that the configuration file of your changefeed is as follows:
+
+```toml
+[filter]
+rules = ['test.t*']
+
+[[filter.event-filters]]
+matcher = ["test.t1"] # This filter rule applies only to the t1 table in the test database.
+ignore-event = ["create table", "drop table", "truncate table", "rename table"]
+```
+
+| DDL | DDL behavior | DML behavior | Explanation |
+| --- | --- | --- | --- |
+| `CREATE TABLE test.t1 (id INT, name VARCHAR(50));` | Ignore | Replicate | `test.t1` matches the event filter rule, so the `CREATE TABLE` event is ignored. The replication of DML events remains unaffected. |
+| `CREATE TABLE test.t2 (id INT, name VARCHAR(50));` | Replicate | Replicate | `test.t2` does not match the event filter rule. |
+| `CREATE TABLE test.ignore (id INT, name VARCHAR(50));` | Ignore | Ignore | `test.ignore` matches the event filter rule, so both DDL and DML events are ignored. |
+| `DROP TABLE test.t1;` | Ignore | - | `test.t1` matches the event filter rule, so the `DROP TABLE` event is ignored. Because the table is deleted, TiCDC no longer replicates DML events for `t1`. |
+| `TRUNCATE TABLE test.t1;` | Ignore | Replicate | `test.t1` matches the event filter rule, so the `TRUNCATE TABLE` event is ignored. The replication of DML events remains unaffected. |
+| `RENAME TABLE test.t1 TO test.t2;` | Ignore | Replicate | `test.t1` matches the event filter rule, so the `RENAME TABLE` event is ignored. The replication of DML events remains unaffected. |
+| `RENAME TABLE test.t1 TO test.ignore;` | Ignore | Ignore | `test.t1` matches the event filter rule, so the `RENAME TABLE` event is ignored. `test.ignore` matches the event filter rule, so both DDL and DML events are ignored. |
+
+> **Note:**
+>
+> - When replicating data to a database, use the event filter to filter DDL events with caution. Ensure that the upstream and downstream database schemas remain consistent during replication. Otherwise, TiCDC might report errors or cause undefined replication behavior.
+> - For versions earlier than v6.5.8, v7.1.4, and v7.5.1, using the event filter to filter DDL events involving table creation or deletion affects DML replication. It is not recommended to use this feature in these versions.

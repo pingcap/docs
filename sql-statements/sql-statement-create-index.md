@@ -158,6 +158,7 @@ Expression index involves various kinds of expressions. To ensure correctness, o
 - [`JSON_QUOTE()`](/functions-and-operators/json-functions.md)
 - [`JSON_REMOVE()`](/functions-and-operators/json-functions.md)
 - [`JSON_REPLACE()`](/functions-and-operators/json-functions.md)
+- [`JSON_SCHEMA_VALID()`](/functions-and-operators/json-functions/json-functions-validate.md)
 - [`JSON_SEARCH()`](/functions-and-operators/json-functions.md)
 - [`JSON_SET()`](/functions-and-operators/json-functions.md)
 - [`JSON_STORAGE_SIZE()`](/functions-and-operators/json-functions.md)

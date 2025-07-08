@@ -15,7 +15,7 @@ The cached table feature is suitable for tables with the following characteristi
 
 - The data volume of the table is small, for example, less than 4 MiB.
 - The table is read-only or rarely updated, for example, with a write QPS (queries per second) of less than 10 times per minute.
-- The table is frequently accessed, and you expect a better read performance, for example, when encountering hotspots on small tables during direct reads from from TiKV.
+- The table is frequently accessed, and you expect a better read performance, for example, when encountering hotspots on small tables during direct reads from TiKV.
 
 When the data volume of the table is small but the data is frequently accessed, the data is concentrated on a Region in TiKV and makes it a hotspot Region, which affects the performance. Therefore, the typical usage scenarios of cached tables are as follows:
 
@@ -215,7 +215,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 Cached tables are only suitable for scenarios with small tables, because TiDB loads the data of an entire table into memory, and the cached data becomes invalid after modification and needs to be reloaded.
 
-Currently, the size limit of a cached table is 64 MB in TiDB. If the table data exceeds 64 MB, executing `ALTER TABLE t CACHE` will fail.
+Currently, the size limit of a cached table is 64 MiB in TiDB. If the table data exceeds 64 MiB, executing `ALTER TABLE t CACHE` will fail.
 
 ## Compatibility restrictions with other TiDB features
 

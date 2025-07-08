@@ -14,7 +14,7 @@ TiDB is highly compatible with the MySQL protocol and the common features and sy
 
 <CustomContent platform="tidb-cloud">
 
-TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 5.7 and MySQL 8.0. The ecosystem tools for MySQL (PHPMyAdmin, Navicat, MySQL Workbench, DBeaver and [more](https://docs.pingcap.com/tidb/v7.2/dev-guide-third-party-support#gui)) and the MySQL client can be used for TiDB.
+TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 5.7 and MySQL 8.0. The ecosystem tools for MySQL (PHPMyAdmin, Navicat, MySQL Workbench, DBeaver and [more](https://docs.pingcap.com/tidb/stable/dev-guide-third-party-support#gui)) and the MySQL client can be used for TiDB.
 
 </CustomContent>
 
@@ -33,15 +33,7 @@ It's important to note that TiDB does not support the MySQL replication protocol
 
 > **Note:**
 >
-> This page describes general differences between MySQL and TiDB. For more information on compatibility with MySQL in the areas of security and pessimistic transaction mode, refer to the dedicated pages on [Security](/security-compatibility-with-mysql.md) and [Pessimistic Transaction Mode](/pessimistic-transaction.md#difference-with-mysql-innodb).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-> **Note:**
->
-> For information about transaction differences between MySQL and TiDB, see [Pessimistic Transaction Mode](/pessimistic-transaction.md#difference-with-mysql-innodb).
+> This page describes general differences between MySQL and TiDB. For more information on compatibility with MySQL in the areas of security, see [Security Compatibility with MySQL](/security-compatibility-with-mysql.md).
 
 </CustomContent>
 
@@ -72,6 +64,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 + Descending Index [#2519](https://github.com/pingcap/tidb/issues/2519)
 + `SKIP LOCKED` syntax [#18207](https://github.com/pingcap/tidb/issues/18207)
 + Lateral derived tables [#40328](https://github.com/pingcap/tidb/issues/40328)
++ JOIN ON subquery [#11414](https://github.com/pingcap/tidb/issues/11414)
 
 ## Differences from MySQL
 
@@ -137,13 +130,13 @@ As shown, because of the shared allocator, the `id` increments by 2 each time. T
 
 <CustomContent platform="tidb">
 
-TiDB utilizes a combination of [Prometheus and Grafana](/tidb-monitoring-api.md) for storing and querying performance monitoring metrics. In TiDB, performance schema tables do not return any results.
+TiDB utilizes a combination of [Prometheus and Grafana](/tidb-monitoring-api.md) for storing and querying performance monitoring metrics. In TiDB, most [performance schema tables](/performance-schema/performance-schema.md) do not return any results.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-To check performance metrics in TiDB Cloud, you can either check the cluster overview page on the TiDB Cloud console or use [third-party monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md). Performance schema tables return empty results in TiDB.
+To check performance metrics in TiDB Cloud, you can either check the cluster overview page in the TiDB Cloud console or use [third-party monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md). Most [performance schema tables](/performance-schema/performance-schema.md) return empty results in TiDB.
 
 </CustomContent>
 
@@ -292,3 +285,7 @@ The following statements for creating, modifying, and dropping resource groups h
 - [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md)
 - [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md)
 - [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md)
+
+## Differences on pessimistic transaction (lock) with MySQL InnoDB
+
+For differences on pessimistic transaction (lock) between TiDB and MySQL InnoDB, see [Differences from MySQL InnoDB](/pessimistic-transaction.md#differences-from-mysql-innodb).

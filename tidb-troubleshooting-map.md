@@ -211,15 +211,11 @@ To learn more about the inconsistency error and how to bypass the check, see [Tr
 
 ### 4.1 TiKV panics and fails to start
 
-- 4.1.1 `sync-log = false`. The `unexpected raft log index: last_index X < applied_index Y` error is returned after the machine is powered off.
-
-    This issue is expected. You can restore the Region using `tikv-ctl`.
-
-- 4.1.2 If TiKV is deployed on a virtual machine, when the virtual machine is killed or the physical machine is powered off, the `entries[X, Y] is unavailable from storage` error is reported.
+- 4.1.1 If TiKV is deployed on a virtual machine, when the virtual machine is killed or the physical machine is powered off, the `entries[X, Y] is unavailable from storage` error is reported.
 
     This issue is expected. The `fsync` of virtual machines is not reliable, so you need to restore the Region using `tikv-ctl`.
 
-- 4.1.3 For other unexpected causes, [report a bug](https://github.com/tikv/tikv/issues/new?template=bug-report.md).
+- 4.1.2 For other unexpected causes, [report a bug](https://github.com/tikv/tikv/issues/new?template=bug-report.md).
 
 ### 4.2 TiKV OOM
 
@@ -271,7 +267,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
     - `append log duration` is high, which causes slow processing of messages. You can refer to [4.5](#45-tikv-write-is-slow) to analyze why `append log duration` is high.
     - raftstore receives a large batch of messages in an instant (check in the TiKV Raft messages dashboard), and fails to process them. Usually the short-term `channel full` status does not affect the service.
 
-- 4.3.4 TiKV coprocessor is in a queue. The number of piled up tasks exceeds `coprocessor threads * readpool.coprocessor.max-tasks-per-worker-[normal|low|high]`. Too many large queries leads to the tasks piling up in coprocessor. You need to check whether a execution plan change causes a large number of table scan operations. Refer to [3.3](#33-wrong-execution-plan).
+- 4.3.4 TiKV coprocessor is in a queue. The number of piled up tasks exceeds `coprocessor threads * readpool.coprocessor.max-tasks-per-worker-[normal|low|high]`. Too many large queries leads to the tasks piling up in coprocessor. You need to check whether an execution plan change causes a large number of table scan operations. Refer to [3.3](#33-wrong-execution-plan).
 
 ### 4.4 Some TiKV nodes drop Leader frequently
 
@@ -291,7 +287,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 ### 4.5 TiKV write is slow
 
-- 4.5.1 Check whether the TiKV write is low by viewing the `prewrite/commit/raw-put` duration of TiKV gRPC (only for RawKV clusters). Generally, you can locate the slow phase according to the [performance-map](https://github.com/pingcap/tidb-map/blob/master/maps/performance-map.png). Some common situations are listed as follows.
+- 4.5.1 Check whether the TiKV write is slow by viewing the `prewrite/commit/raw-put` duration of TiKV gRPC (only for RawKV clusters). Generally, you can locate the slow phase according to the [performance-map](https://github.com/pingcap/tidb-map/blob/master/maps/performance-map.png). Some common situations are listed as follows.
 
 - 4.5.2 The scheduler CPU is busy (only for transaction kv).
 

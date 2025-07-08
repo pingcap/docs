@@ -23,6 +23,9 @@ You can enable the schema caching feature by configuring the system variable [`t
 
 In scenarios with a large number of databases and tables, the following known issues exist:
 
+- The number of tables in a single cluster cannot exceed 3 million.
+- If the number of tables in a single cluster exceeds 300,000, do not set the value of [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800) to `0`, because it might cause TiDB to run out of memory (OOM).
+- Using foreign keys might increase the execution time of DDL operations in a cluster.
 - When the tables are irregularly accessed, such as one set of tables are accessed at time1 while another set are accessed at time2, and the value of `tidb_schema_cache_size` is small, the schema information might be frequently evicted and cached, leading to performance fluctuations. This feature is more suitable for scenarios where frequently accessed databases and tables are relatively fixed.
 - Statistics information might not be collected in a timely manner.
 - Access to some metadata information might become slower.

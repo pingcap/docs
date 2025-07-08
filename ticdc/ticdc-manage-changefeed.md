@@ -170,7 +170,7 @@ cdc cli changefeed resume --server=http://10.0.10.25:8300 --changefeed-id simple
 ```
 
 - `--changefeed-id=uuid` represents the ID of the changefeed that corresponds to the replication task you want to resume.
-- `--overwrite-checkpoint-ts`: starting from v6.2.0, you can specify the starting TSO of resuming the replication task. TiCDC starts pulling data from the specified TSO. The argument accepts `now` or a specific TSO (such as 434873584621453313). The specified TSO must be in the range of (GC safe point, CurrentTSO]. If this argument is not specified, TiCDC replicates data from the current `checkpoint-ts` by default.
+- `--overwrite-checkpoint-ts`: starting from v6.2.0, you can specify the starting TSO of resuming the replication task. TiCDC starts pulling data from the specified TSO. The argument accepts `now` or a specific TSO (such as 434873584621453313). The specified TSO must be in the range of (GC safe point, CurrentTSO]. If this argument is not specified, TiCDC replicates data from the current `checkpoint-ts` by default. You can use the `cdc cli changefeed list` command to check the current value of `checkpoint-ts`.
 - `--no-confirm`: when the replication is resumed, you do not need to confirm the related information. Defaults to `false`.
 
 > **Note:**
@@ -254,6 +254,39 @@ Currently, you can modify the following configuration items:
     - `status.tables`: Each key number represents the ID of the replication table, corresponding to `tidb_table_id` of a table in TiDB.
     - `resolved-ts`: The largest TSO among the sorted data in the current processor.
     - `checkpoint-ts`: The largest TSO that has been successfully written to the downstream in the current processor.
+
+## Security mechanism
+
+Starting from v9.0.0, TiCDC introduces a security mechanism to prevent users from accidentally configuring the same TiDB cluster as both the upstream and downstream for data replication, which could lead to circular replication and data anomalies.
+
+When creating, updating, or resuming a replication task, TiCDC automatically checks whether the upstream and downstream TiDB clusters have the same `cluster_id`. If TiCDC detects the same  `cluster_id` for both the upstream and downstream, it will reject the task. The `cluster_id` (introduced in v9.0.0) is a unique identifier for TiDB clusters. You can query it using the following SQL statement:
+
+```sql
+SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME = 'cluster_id';
+```
+
+### Compatibility
+
+- For non-TiDB downstream systems (such as MySQL and Kafka), TiCDC skips this check to ensure compatibility.
+- For TiDB versions earlier than v9.0.0, the system cannot retrieve the `cluster_id`, so TiCDC still lets you create replication tasks to ensure no impact on existing functionality. In these cases, because of the lack of `cluster_id`, you need to manually check the configurations to avoid potential issues.
+
+### Example error messages
+
+When creating, updating, or resuming a replication task, TiCDC will report an error if it detects the same `cluster_id` for both the upstream and downstream TiDB clusters. The following is a typical example:
+
+When using the CLI command to create a replication task with the same cluster as both the upstream and downstream:
+
+```
+cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://root:@127.0.0.1:8300/" --changefeed-id="create-cmd"
+```
+
+You will receive the following error message:
+
+```
+Error: [CDC:ErrSameUpstreamDownstream]TiCDC does not support creating a changefeed with the same TiDB cluster as both the source and the target for the changefeed.
+```
+
+This error message includes the error code `CDC:ErrSameUpstreamDownstream`, indicating that TiCDC detected the same cluster being used as both the upstream and downstream. If you encounter this error, check whether the `sink-uri` parameter for your replication task is configured correctly.
 
 ## Replicate tables with the new framework for collations enabled
 

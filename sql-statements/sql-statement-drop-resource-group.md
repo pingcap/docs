@@ -87,4 +87,4 @@ MySQL also supports [DROP RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/e
 
 * [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
 * [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
-* [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru)
+* [Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)

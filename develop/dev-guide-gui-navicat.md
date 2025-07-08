@@ -62,7 +62,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     >
     > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
 
-5. Launch Navicat Premium, click **Connection** in the upper-left corner, select **PingCAP** from the **Venfor Filter** list, and double-click **TiDB** in the right panel.
+5. Launch Navicat Premium, click **Connection** in the upper-left corner, select **PingCAP** from the **Vendor Filter** list, and double-click **TiDB** in the right panel.
 
     ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 
@@ -95,11 +95,11 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
     If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) to configure it before your first connection.
 
-    In addition to the **Public** connection type, TiDB Dedicated supports **Private Endpoint** and **VPC Peering** connection types. For more information, see [Connect to Your TiDB Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
+    In addition to the **Public** connection type, TiDB Cloud Dedicated supports **Private Endpoint** and **VPC Peering** connection types. For more information, see [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
 
 4. Click **CA cert** to download the CA certificate.
 
-5. Launch Navicat Premium, click **Connection** in the upper-left corner, select **PingCAP** from the **Venfor Filter** list, and double-click **TiDB** in the right panel.
+5. Launch Navicat Premium, click **Connection** in the upper-left corner, select **PingCAP** from the **Vendor Filter** list, and double-click **TiDB** in the right panel.
 
     ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 
@@ -124,7 +124,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 </div>
 <div label="TiDB Self-Managed">
 
-1. Launch Navicat Premium, click **Connection** in the upper-left corner, select **PingCAP** from the **Venfor Filter** list, and double-click **TiDB** in the right panel.
+1. Launch Navicat Premium, click **Connection** in the upper-left corner, select **PingCAP** from the **Vendor Filter** list, and double-click **TiDB** in the right panel.
 
     ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 

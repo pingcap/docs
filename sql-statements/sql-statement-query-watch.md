@@ -54,7 +54,7 @@ DropQueryWatchStmt ::=
 
 ## Parameters
 
-See [`QUERY WATCH` parameters](/tidb-resource-control.md#query-watch-parameters).
+See [`QUERY WATCH` parameters](/tidb-resource-control-runaway-queries.md#query-watch-parameters).
 
 ## MySQL compatibility
 
@@ -62,4 +62,4 @@ This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 
-* [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries)
+* [Runaway Queries](/tidb-resource-control-runaway-queries.md)

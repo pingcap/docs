@@ -14,9 +14,23 @@ In this tutorial, you can learn how to use TiDB and JDBC to accomplish the follo
 - Connect to your TiDB cluster using JDBC.
 - Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
 
+<CustomContent platform="tidb">
+
 > **Note:**
 >
-> This tutorial works with TiDB Cloud Serverless, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> - This tutorial works with TiDB Cloud Serverless, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> - Starting from TiDB v7.4, if `connectionCollation` is not configured, and `characterEncoding` is either not configured or set to `UTF-8` in the JDBC URL, the collation used in a JDBC connection depends on the JDBC driver version. For more information, see [Collation used in JDBC connections](/faq/sql-faq.md#collation-used-in-jdbc-connections).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> - This tutorial works with TiDB Cloud Serverless, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> - Starting from TiDB v7.4, if `connectionCollation` is not configured, and `characterEncoding` is either not configured or set to `UTF-8` in the JDBC URL, the collation used in a JDBC connection depends on the JDBC driver version. For more information, see [Collation used in JDBC connections](https://docs.pingcap.com/tidb/stable/sql-faq#collation-used-in-jdbc-connections).
+
+</CustomContent>
 
 ## Prerequisites
 
@@ -123,7 +137,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) to configure it before your first connection.
 
-    In addition to the **Public** connection type, TiDB Dedicated supports **Private Endpoint** and **VPC Peering** connection types. For more information, see [Connect to Your TiDB Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
+    In addition to the **Public** connection type, TiDB Cloud Dedicated supports **Private Endpoint** and **VPC Peering** connection types. For more information, see [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
 
 4. Run the following command to copy `env.sh.example` and rename it to `env.sh`:
 

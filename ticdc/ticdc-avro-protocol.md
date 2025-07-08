@@ -83,6 +83,8 @@ The data format of Value is the same as that of Key, by default. However, `field
 > - For Delete events, Avro only encodes the Key part. The Value part is empty. 
 > - For Insert events, Avro encodes all column data to the Value part. 
 > - For Update events, Avro encodes only all column data that is updated to the Value part.
+>
+> The Avro protocol does not encode the old values for Update and Delete events. Additionally, to be compatible with most Confluent sink connectors that rely on `null` records to identify deletions (`delete.on.null`), Delete events do not include extension information, such as `_tidb_commit_ts`, even when `enable-tidb-extension` is enabled. If you need these features, consider using other protocols such as Canal-JSON or Debezium.
 
 ## TiDB extension fields
 
@@ -203,6 +205,7 @@ If one column can be NULL, the Column data format can be:
 | ENUM       | ENUM      | string    |  -                                                                                                                         |
 | SET        | SET       | string    |  -                                                                                                                         |
 | DECIMAL    | DECIMAL   | bytes     | When `avro-decimal-handling-mode` is string, AVRO_TYPE is string.                                                         |
+| TiDBVECTORFloat32 | TiDBVECTORFloat32 | string | - |
 
 In the Avro protocol, two other `sink-uri` parameters might affect the Column data format as well: `avro-decimal-handling-mode` and `avro-bigint-unsigned-handling-mode`.
 

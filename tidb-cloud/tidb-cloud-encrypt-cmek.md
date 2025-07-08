@@ -11,7 +11,8 @@ Once CMEK is enabled for a project, all clusters created within that project enc
 
 > **Note:**
 >
-> Currently, this feature is only available upon request. If you need to try out this feature, contact [support](/tidb-cloud/tidb-cloud-support.md).
+> - CMEK is similar to Bring Your Own Key (BYOK). With BYOK, you typically generate the key locally and upload it. However, TiDB Cloud only supports keys generated within [AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html).
+> - Currently, this feature is only available upon request. If you need to try out this feature, contact [support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Restrictions
 

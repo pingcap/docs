@@ -76,7 +76,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - [Data Service (beta)](https://tidbcloud.com/console/data-service) supports automatically generating vector search endpoints.
 
-    If your table contains [vector data types](/vector-search-data-types.md), you can automatically generate a vector search endpoint that calculates vector distances based on your selected distance function.
+    If your table contains [vector data types](/vector-search/vector-search-data-types.md), you can automatically generate a vector search endpoint that calculates vector distances based on your selected distance function.
 
     This feature enables seamless integration with AI platforms such as [Dify](https://docs.dify.ai/guides/tools) and [GPTs](https://openai.com/blog/introducing-gpts), enhancing your applications with advanced natural language processing and AI capabilities for more complex tasks and intelligent solutions.
 
@@ -122,12 +122,12 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     The vector search (beta) feature provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video. This feature enables developers to easily build scalable applications with generative artificial intelligence (AI) capabilities using familiar MySQL skills. Key features include:
 
-    - [Vector data types](/vector-search-data-types.md), [vector index](/vector-search-index.md), and [vector functions and operators](/vector-search-functions-and-operators.md).
-    - Ecosystem integrations with [LangChain](/vector-search-integrate-with-langchain.md), [LlamaIndex](/vector-search-integrate-with-llamaindex.md), and [JinaAI](/vector-search-integrate-with-jinaai-embedding.md).
-    - Programming language support for Python: [SQLAlchemy](/vector-search-integrate-with-sqlalchemy.md), [Peewee](/vector-search-integrate-with-peewee.md), and [Django ORM](/vector-search-integrate-with-django-orm.md).
-    - Sample applications and tutorials: perform semantic searches for documents using [Python](/vector-search-get-started-using-python.md) or [SQL](/vector-search-get-started-using-sql.md).
+    - [Vector data types](/vector-search/vector-search-data-types.md), [vector index](/vector-search/vector-search-index.md), and [vector functions and operators](/vector-search/vector-search-functions-and-operators.md).
+    - Ecosystem integrations with [LangChain](/vector-search/vector-search-integrate-with-langchain.md), [LlamaIndex](/vector-search/vector-search-integrate-with-llamaindex.md), and [JinaAI](/vector-search/vector-search-integrate-with-jinaai-embedding.md).
+    - Programming language support for Python: [SQLAlchemy](/vector-search/vector-search-integrate-with-sqlalchemy.md), [Peewee](/vector-search/vector-search-integrate-with-peewee.md), and [Django ORM](/vector-search/vector-search-integrate-with-django-orm.md).
+    - Sample applications and tutorials: perform semantic searches for documents using [Python](/vector-search/vector-search-get-started-using-python.md) or [SQL](/vector-search/vector-search-get-started-using-sql.md).
 
-  For more information, see [Vector search (beta) overview](/vector-search-overview.md).
+  For more information, see [Vector search (beta) overview](/vector-search/vector-search-overview.md).
 
 - [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) now offers weekly email reports for organization owners.
 

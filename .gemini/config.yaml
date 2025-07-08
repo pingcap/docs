@@ -1,0 +1,9 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+title: RepoConfig
+description: Configuration for Gemini Code Assist on a repository.
+
+have_fun: false  # Disables fun features like poems in PR summaries
+
+code_review:
+  disable: false  # Enables code reviews
+  comment_severity_threshold: LOW ## Allows low severity comments such as grammar and spelling mistakes to be added to the PR

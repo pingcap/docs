@@ -29,7 +29,7 @@ This document introduces the user scenarios, supported upstreams and downstreams
 - **User scenario**: Full data import into TiDB
 - **Upstream (the imported source file)**:
     - Files exported from Dumpling
-    - Parquet files exported by Amazon Aurora or Apache Hive
+    - Parquet files exported by Amazon Aurora, Apache Hive, and Snowflake
     - CSV files
     - Data from local disks or Amazon S3
 - **Downstream**: TiDB
@@ -49,7 +49,7 @@ This document introduces the user scenarios, supported upstreams and downstreams
 - **Advantages**:
     - Support the table-filter feature that enables you to filter data easier
     - Support exporting data to Amazon S3
-- **Limitation**:
+- **Recommendation**:
     - If you want to restore the exported data to a database other than TiDB, it is recommended to use Dumpling.
     - If you want to restore the exported data to another TiDB cluster, it is recommended to use Backup & Restore (BR).
 

@@ -619,7 +619,6 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - Scope: SESSION
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
-- Default value: `OFF`
 - This variable is used to show whether the execution plan used in the previous statement was influenced by a [plan binding](/sql-plan-management.md)
 
 ### last_plan_from_cache <span class="version-mark">New in v4.0</span>
@@ -627,14 +626,13 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - Scope: SESSION
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
-- Default value: `OFF`
 - This variable is used to show whether the execution plan used in the previous `execute` statement is taken directly from the plan cache.
 
 ### last_sql_use_alloc <span class="version-mark">New in v6.4.0</span>
 
 - Scope: SESSION
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `OFF`
+- Type: Boolean
 - This variable is read-only. It is used to show whether the previous statement uses a cached chunk object (chunk allocation).
 
 ### license
@@ -659,6 +657,18 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - The maximum packet size allowed by the server and the client in one transmission of packets.
 - In the `SESSION` scope, this variable is read-only.
 - This variable is compatible with MySQL.
+
+### max_user_connections <span class="version-mark">New in v9.0.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 100000]`
+- This variable controls the maximum number of connections a user can establish to a TiDB server instance. It is used for resource control.
+- The default value `0` means there is no limit for user connections. When the value is greater than `0` and the number of user connections reaches this value, the TiDB server will reject the user's new connection.
+- If the value of this variable exceeds [`max_connections`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#max_connections), TiDB uses `max_connections` to limit the maximum number of connections a single user can establish. For example, if `max_user_connections` of a user is set to `2000`, but `max_connections` is `1000`, the user can actually establish up to `1000` connections to a TiDB server instance.
 
 ### password_history <span class="version-mark">New in v6.5.0</span>
 
@@ -689,12 +699,13 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Default value: `UNSPECIFIED`
-- Value options: `UNSPECIFIED`, `0`, `1`, `2`
+- Value options: `UNSPECIFIED`, `0`, `1`, `2`, `3`
 - This variable is used to specify different versions of the MPP execution plan. After a version is specified, TiDB selects the specified version of the MPP execution plan. The meanings of the variable values are as follows:
-    - `UNSPECIFIED`: means unspecified. TiDB automatically selects the latest version `2`.
+    - `UNSPECIFIED`: means unspecified. TiDB automatically selects the latest version `3`.
     - `0`: compatible with all TiDB cluster versions. Features with the MPP version greater than `0` do not take effect in this mode.
     - `1`: new in v6.6.0, used to enable data exchange with compression on TiFlash. For details, see [MPP version and exchange data compression](/explain-mpp.md#mpp-version-and-exchange-data-compression).
     - `2`: new in v7.3.0, used to provide more accurate error messages when MPP tasks encounter errors on TiFlash.
+    - `3`: new in v9.0.0, used to enable the new string data exchange format of TiFlash to improve string serialization and deserialization efficiency, thereby improving query performance.
 
 ### password_reuse_interval <span class="version-mark">New in v6.5.0</span>
 
@@ -783,8 +794,10 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
-- Default value: `OFF`
-- This variable controls whether to enable the Active PD Follower feature (currently only applicable to requests for Region information). When the value is `OFF`, TiDB only obtains Region information from the PD leader. When the value is `ON`, TiDB evenly distributes requests for Region information to all PD servers, and PD followers can also handle Region requests, thereby reducing the CPU pressure on the PD leader.
+- Default value: `ON`. Before v9.0.0, the default value is `OFF`.
+- This variable controls whether to enable the [Active PD Follower](https://docs.pingcap.com/tidb/stable/tune-region-performance#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service) feature, which currently only applicable to requests for Region information.
+    - When it is `OFF`, TiDB only obtains Region information from the PD leader.
+    - When it is `ON`, TiDB evenly distributes Region information requests to all PD servers, so PD followers can also handle Region requests, reducing the CPU pressure on the PD leader. Starting from v9.0.0, Region information requests from TiDB Lightning are also evenly sent to all PD nodes when the value is `ON`.
 - Scenarios for enabling Active PD Follower:
     * In a cluster with a large number of Regions, the PD leader experiences high CPU pressure due to the increased overhead of handling heartbeats and scheduling tasks.
     * In a TiDB cluster with many TiDB instances, the PD leader experiences high CPU pressure due to a high concurrency of requests for Region information.
@@ -1004,6 +1017,21 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Default value: (system dependent)
 - This variable shows the system time zone from when TiDB was first bootstrapped. See also [`time_zone`](#time_zone).
 
+### tidb_accelerate_user_creation_update <span class="version-mark">New in v9.0.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- When the number of SQL users in TiDB is very large (for example, more than 100,000), operations such as creating users, modifying passwords, and setting permissions might experience significant performance degradation. This occurs because each user update operation triggers the reloading of all user data into memory.
+- To optimize performance in environments with a large number of users, it is recommended to set this variable to `ON`.
+- `OFF` or `0`: every time an operation such as user creation, password modification, or permission setting is performed, TiDB reloads all user data into memory. In scenarios with many users, this setting might cause significant performance degradation.
+- `ON` or `1`: TiDB uses a more efficient user data loading strategy as follows:
+    - When you create users or perform operations such as modifying passwords and setting permissions for **non-logged-in** users, TiDB **does not** reload all user data into memory.
+    - When you perform operations on **logged-in** users, TiDB only reloads the updated data for those specific users into memory.
+    - In scenarios with many users, this setting can significantly improve performance.
+
 ### tidb_adaptive_closest_read_threshold <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -1052,7 +1080,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 - Scope: NONE
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `json_array, json_array_append, json_array_insert, json_contains, json_contains_path, json_depth, json_extract, json_insert, json_keys, json_length, json_merge_patch, json_merge_preserve, json_object, json_pretty, json_quote, json_remove, json_replace, json_search, json_set, json_storage_size, json_type, json_unquote, json_valid, lower, md5, reverse, tidb_shard, upper, vitess_hash`
+- Default value: `json_array, json_array_append, json_array_insert, json_contains, json_contains_path, json_depth, json_extract, json_insert, json_keys, json_length, json_merge_patch, json_merge_preserve, json_object, json_pretty, json_quote, json_remove, json_replace, json_schema_valid, json_search, json_set, json_storage_size, json_type, json_unquote, json_valid, lower, md5, reverse, tidb_shard, upper, vitess_hash`
 - This read-only variable is used to show the functions that are allowed to be used for creating [expression indexes](/sql-statements/sql-statement-create-index.md#expression-index).
 
 ### tidb_allow_mpp <span class="version-mark">New in v5.0</span>
@@ -1196,7 +1224,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 2147483647]`
-- This variable is used to set the concurrency within a single automatic statistics collection task. Before v8.4.0, this concurrency is fixed at `1`. To speed up statistics collection tasks, you can increase this concurrency based on your cluster's available resources.
+- This variable controls the number of concurrent auto-analyze operations that can run in a TiDB cluster. Before v8.4.0, this concurrency is fixed at 1. To accelerate statistics collection tasks, you can increase this concurrency based on the available resources in your cluster.
 
 ### tidb_auto_analyze_end_time
 
@@ -1205,15 +1233,20 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Time
 - Default value: `23:59 +0000`
-- This variable is used to restrict the time window that the automatic update of statistics is permitted. For example, to only allow automatic statistics updates between 1 AM and 3 AM in UTC time, set `tidb_auto_analyze_start_time='01:00 +0000'` and `tidb_auto_analyze_end_time='03:00 +0000'`.
+- This variable is used to restrict the time window that the automatic update of statistics is permitted. For example, to only allow automatic statistics updates between 1 AM and 3 AM in UTC time, set the time as follows:
+
+    - `tidb_auto_analyze_start_time='01:00 +0000'`
+    - `tidb_auto_analyze_end_time='03:00 +0000'`
+
+- If the time in the parameter includes the timezone information, that timezone will be used for parsing. Otherwise, the timezone specified by the `time_zone` in the current session will be used. For example, `01:00 +0000` refers to 1:00 AM in UTC.
 
 ### tidb_auto_analyze_partition_batch_size <span class="version-mark">New in v6.4.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `128`. Before v7.6.0, the default value is `1`.
-- Range: `[1, 1024]`
+- Default value: `8192`. Before v7.6.0, the default value is `1`. For versions from v7.6.0 to v8.1.x, the default value is `128`. Starting from v8.2.0, the default value changes to `8192`.
+- Range: `[1, 8192]`. Before v8.2.0, the value range is `[1, 1024]`.
 - This variable specifies the number of partitions that TiDB [automatically analyzes](/statistics.md#automatic-update) when analyzing a partitioned table (which means automatically collecting statistics on a partitioned table).
 - If the value of this variable is smaller than the number of partitions, TiDB automatically analyzes all partitions of the partitioned table in multiple batches. If the value of this variable is greater than or equal to the number of partitions, TiDB analyzes all partitions of the partitioned table at the same time.
 - If the number of partitions of a partitioned table is far greater than this variable value and the auto-analyze takes a long time, you can increase the value of this variable to reduce the time consumption.
@@ -1239,7 +1272,12 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Time
 - Default value: `00:00 +0000`
-- This variable is used to restrict the time window that the automatic update of statistics is permitted. For example, to only allow automatic statistics updates between 1 AM and 3 AM in UTC time, set `tidb_auto_analyze_start_time='01:00 +0000'` and `tidb_auto_analyze_end_time='03:00 +0000'`.
+- This variable is used to restrict the time window that the automatic update of statistics is permitted. For example, to only allow automatic statistics updates between 1 AM and 3 AM in UTC time, set the time as follows:
+
+    - `tidb_auto_analyze_start_time='01:00 +0000'`
+    - `tidb_auto_analyze_end_time='03:00 +0000'`
+
+- If the time in the parameter includes the timezone information, that timezone will be used for parsing. Otherwise, the timezone specified by the `time_zone` in the current session will be used. For example, `01:00 +0000` refers to 1:00 AM in UTC.
 
 ### tidb_auto_build_stats_concurrency <span class="version-mark">New in v6.5.0</span>
 
@@ -1269,11 +1307,19 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Integer
 - Default value: `2`
 - Range: `[0, 2147483647]`
-- This variable is used to increase the weight of the maximum time of TiDB `backoff`, that is, the maximum retry time for sending a retry request when an internal network or other component (TiKV, PD) failure is encountered. This variable can be used to adjust the maximum retry time and the minimum value is 1.
+- This variable is used to increase the weight of the maximum retry wait time of TiDB `backoff`, that is, the maximum retry wait time for sending a retry request when an internal network or other component (TiKV, PD) failure is encountered. This variable can be used to adjust the maximum retry wait time and the minimum value is `1`.
 
-    For example, the base timeout for TiDB to take TSO from PD is 15 seconds. When `tidb_backoff_weight = 2`, the maximum timeout for taking TSO is: *base time \* 2 = 30 seconds*.
+    For example, the base retry wait time for TiDB to take KV from TiKV is 15 seconds. When `tidb_backoff_weight = 2`, the maximum retry wait time for taking KV is: *base time \* 2 = 30 seconds*.
 
     In the case of a poor network environment, appropriately increasing the value of this variable can effectively alleviate error reporting to the application end caused by timeout. If the application end wants to receive the error information more quickly, minimize the value of this variable.
+
+<CustomContent platform="tidb">
+
+> **Note:**
+>
+> This system variable **does not apply** to obtaining TSO requests asynchronously. To adjust the timeout for obtaining TSO, configure the [`pd-server-timeout`](/tidb-configuration-file.md#pd-server-timeout) configuration item.
+
+</CustomContent>
 
 ### tidb_batch_commit
 
@@ -1695,16 +1741,19 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - This variable is used to set the priority of executing the `ADD INDEX` operation in the `re-organize` phase.
 - You can set the value of this variable to `PRIORITY_LOW`, `PRIORITY_NORMAL` or `PRIORITY_HIGH`.
 
-### tidb_ddl_reorg_max_write_speed <span class="version-mark">New in v8.5.0</span>
+### tidb_ddl_reorg_max_write_speed <span class="version-mark">New in v6.5.12, v7.5.5, and v8.5.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Integer
+- Type: String
 - Default value: `0`
-- Range: `[0, 1125899906842624]` (the maximum value that can be set is 1 PiB)
+- Range: `[0, 1PiB]`
 - This variable limits the write bandwidth for each TiKV node and only takes effect when index creation acceleration is enabled (controlled by the [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630) variable). When the data size in your cluster is quite large (such as billions of rows), limiting the write bandwidth for index creation can effectively reduce the impact on application workloads.
-- The default value `0` means no write bandwidth limit. The default unit is bytes per second. You can also set the value in formats such as `'1GiB'` or `'256MiB'`.
+- The default value `0` means no write bandwidth limit.
+- You can specify the value of this variable either with a unit or without a unit.
+    - When you specify the value without a unit, the default unit is bytes per second. For example, `67108864` represents `64MiB` per second.
+    - When you specify the value with a unit, supported units include KiB, MiB, GiB, and TiB. For example, `'1GiB`' represents 1 GiB per second, and `'256MiB'` represents 256 MiB per second.
 
 ### tidb_ddl_reorg_worker_cnt
 
@@ -1731,7 +1780,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `ON`. Before v8.5.0, the default value is `OFF`.
 - This variable is used to control whether to enable [TiDB Accelerated Table Creation](/accelerated-table-creation.md).
 - Starting from v8.0.0, TiDB supports accelerating table creation by the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) statement using `tidb_enable_fast_create_table`.
-- This variable is renamed from the variable [`tidb_ddl_version`](https://docs.pingcap.com/tidb/v7.6/system-variables#tidb_ddl_version-new-in-v760) that is introduced in v7.6.0. Starting from v8.0.0, `tidb_ddl_version` no longer takes effect.
+- This variable is renamed from the variable [`tidb_ddl_version`](https://docs-archive.pingcap.com/tidb/v7.6/system-variables#tidb_ddl_version-new-in-v760) that is introduced in v7.6.0. Starting from v8.0.0, `tidb_ddl_version` no longer takes effect.
 - Starting from TiDB v8.5.0, the accelerated table creation feature is enabled by default for newly created clusters, with `tidb_enable_fast_create_table` set to `ON`. For clusters upgraded from v8.4.0 or earlier versions, the default value of `tidb_enable_fast_create_table` remains unchanged.
 
 ### tidb_default_string_match_selectivity <span class="version-mark">New in v6.2.0</span>
@@ -1830,18 +1879,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Value options: `"standard"`, `"bulk"`
 - This variable controls the execution mode of DML statements.
     - `"standard"` indicates the standard DML execution mode, where TiDB transactions are cached in memory before being committed. This mode is suitable for high-concurrency transaction scenarios with potential conflicts and is the default recommended execution mode.
-    - `"bulk"` indicates the bulk DML execution mode, which is suitable for scenarios where a large amount of data is written, causing excessive memory usage in TiDB.
-        - During the execution of TiDB transactions, the data is not fully cached in the TiDB memory, but is continuously written to TiKV to reduce memory usage and smooth the write pressure.
-        - Only `INSERT`, `UPDATE`, `REPLACE`, and `DELETE` statements are affected by the `"bulk"` mode. Due to the pipelined execution in `"bulk"` mode, the usage of `INSERT IGNORE ... ON DUPLICATE UPDATE ...` might result in a `Duplicate entry` error when updates cause conflicts. In contrast, in `"standard"` mode, because the `IGNORE` keyword is set, this error would be ignored and not be returned to the user.
-        - `"bulk"` mode is only suitable for scenarios where a large amount of **data is written without conflicts**. This mode is not efficient for handling write conflicts, as write-write conflicts might cause large transactions to fail and be rolled back.
-        - `"bulk"` mode only takes effect on statements with auto-commit enabled, and requires the [`pessimistic-auto-commit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#pessimistic-auto-commit-new-in-v600) configuration item to be set to `false`.
-        - When using the `"bulk"` mode to execute statements, ensure that the [metadata lock](/metadata-lock.md) remains enabled during the execution process.
-        - `"bulk"` mode cannot be used on [temporary tables](/temporary-tables.md) and [cached tables](/cached-tables.md).
-        - `"bulk"` mode cannot be used on tables containing foreign keys and tables referenced by foreign keys when the foreign key constraint check is enabled (`foreign_key_checks = ON`).
-        - In situations that the environment does not support or is incompatible with the `"bulk"` mode, TiDB falls back to the `"standard"` mode and returns a warning message. To verify if the `"bulk"` mode is used, you can check the `pipelined` field using [`tidb_last_txn_info`](#tidb_last_txn_info-new-in-v409). A `true` value indicates that the `"bulk"` mode is used.
-        - When executing large transactions in the `"bulk"` mode, the transaction duration might be long. For transactions in this mode, the maximum TTL of the transaction lock is the greater value between [`max-txn-ttl`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#max-txn-ttl) and 24 hours. Additionally, if the transaction execution time exceeds the value set by [`tidb_gc_max_wait_time`](#tidb_gc_max_wait_time-new-in-v610), the GC might force a rollback of the transaction, leading to its failure.
-        - When TiDB executes transactions in the `"bulk"` mode, transaction size is not limited by the TiDB configuration item [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit).
-        - This mode is implemented by the Pipelined DML feature. For detailed design and GitHub issues, see [Pipelined DML](https://github.com/pingcap/tidb/blob/master/docs/design/2024-01-09-pipelined-DML.md) and [#50215](https://github.com/pingcap/tidb/issues/50215).
+    - `"bulk"` indicates the pipelined DML execution mode, which is suitable for scenarios where a large amount of data is written, causing excessive memory usage in TiDB. For more information, see [Pipelined DML](/pipelined-dml.md).
 
 ### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
 
@@ -2017,7 +2055,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
-- Default value: `OFF`
+- Default value: `ON`. Before v8.3.0, the default value is `OFF`.
 - This variable controls whether to enable TiDB to collect `PREDICATE COLUMNS`. After enabling the collection, if you disable it, the information of previously collected `PREDICATE COLUMNS` is cleared. For details, see [Collect statistics on some columns](/statistics.md#collect-statistics-on-some-columns).
 
 ### tidb_enable_enhanced_security
@@ -2508,8 +2546,8 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
-- Default value: `OFF`
-- This variable controls whether to enable the `PLAN REPLAYER CAPTURE` feature. The default value `OFF` means to disable the `PLAN REPLAYER CAPTURE` feature.
+- Default value: `ON`
+- This variable controls whether to enable the `PLAN REPLAYER CAPTURE` feature. The default value `ON` means to enable the `PLAN REPLAYER CAPTURE` feature.
 
 </CustomContent>
 
@@ -2547,6 +2585,14 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - This variable controls whether to enable the [`PLAN REPLAYER CONTINUOUS CAPTURE` feature](/sql-plan-replayer.md#use-plan-replayer-continuous-capture). The default value `OFF` means to disable the feature.
 
 </CustomContent>
+
+### tidb_enable_point_get_cache
+
+- Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): YES
+- Type: Boolean
+- Default value: `OFF`
+- When you set the table lock type of [`LOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md) to `READ`, setting this variable to `ON` enables caching of point query results, reducing the overhead of repeated queries and improving point query performance.
 
 ### tidb_enable_prepared_plan_cache <span class="version-mark">New in v6.1.0</span>
 
@@ -2623,7 +2669,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `ON`
 - Type: Boolean
-- This variable is a switch for [the resource control feature](/tidb-resource-control.md). When this variable is set to `ON`, the TiDB cluster can isolate application resources based on resource groups.
+- This variable is a switch for [the resource control feature](/tidb-resource-control-ru-groups.md). When this variable is set to `ON`, the TiDB cluster can isolate application resources based on resource groups.
 
 ### tidb_enable_reuse_chunk <span class="version-mark">New in v6.4.0</span>
 
@@ -2805,7 +2851,7 @@ Query OK, 0 rows affected (0.09 sec)
 > **Note:**
 >
 > - Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, enabling the TSO Follower Proxy might increase the execution latency in TiDB and affect the QPS performance of the cluster.
-> - This feature is incompatble with [`tidb_tso_client_rpc_mode`](#tidb_tso_client_rpc_mode-new-in-v840). If this feature is enabled, [`tidb_tso_client_rpc_mode`](#tidb_tso_client_rpc_mode-new-in-v840) does not take effect.
+> - This feature is incompatible with [`tidb_tso_client_rpc_mode`](#tidb_tso_client_rpc_mode-new-in-v840). If this feature is enabled, [`tidb_tso_client_rpc_mode`](#tidb_tso_client_rpc_mode-new-in-v840) does not take effect.
 
 ### tidb_enable_unsafe_substitute <span class="version-mark">New in v6.3.0</span>
 
@@ -2876,6 +2922,10 @@ Query OK, 0 rows affected (0.09 sec)
 MPP is a distributed computing framework provided by the TiFlash engine, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms. For details about the selection of the MPP mode, refer to [Control whether to select the MPP mode](/tiflash/use-tiflash-mpp-mode.md#control-whether-to-select-the-mpp-mode).
 
 ### tidb_evolve_plan_baselines <span class="version-mark">New in v4.0</span>
+
+> **Warning:**
+>
+> The feature controlled by this variable is experimental. It is not recommended that you use it in the production environment. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -3003,7 +3053,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Note:**
 >
-> Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control.md) to manage resource usage for different SQL statements.
+> Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control-ru-groups.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control-ru-groups.md) to manage resource usage for different SQL statements.
 
 ### tidb_gc_concurrency <span class="version-mark">New in v5.0</span>
 
@@ -3137,7 +3187,16 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - This variable is used to set whether to record all SQL statements in the [log](/tidb-configuration-file.md#logfile). This feature is disabled by default. If maintenance personnel needs to trace all SQL statements when locating issues, they can enable this feature.
 
+- If the [`log.general-log-file`](/tidb-configuration-file.md#general-log-file-new-in-v800) configuration item is specified, the general log is written to the specified file separately.
+
+- The [`log.format`](/tidb-configuration-file.md#format) configuration item enables you to configure the log message format, whether the general log is in a separate file or combined with other logs.
+
+- The [`tidb_redact_log`](#tidb_redact_log) variable enables you to redact SQL statements recorded in the general log.
+
+- Only successfully executed statements are logged in the general log. Failed statements are not recorded in the general log but are instead logged in the TiDB log with a `command dispatched failed` message.
+
 - To see all records of this feature in the log, you need to set the TiDB configuration item [`log.level`](/tidb-configuration-file.md#level) to `"info"` or `"debug"` and then query the `"GENERAL_LOG"` string. The following information is recorded:
+    - `time`: The time of the event.
     - `conn`: The ID of the current session.
     - `user`: The current session user.
     - `schemaVersion`: The current schema version.
@@ -3265,21 +3324,17 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_hash_join_version <span class="version-mark">New in v8.4.0</span>
 
-> **Warning:**
->
-> The feature controlled by this variable is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Enumeration
-- Default value: `legacy`
+- Default value: `optimized`. Before v9.0.0, the default value is `legacy`.
 - Possible values: `legacy`, `optimized`
-- This variable is used to control whether TiDB uses an optimized version of hash join. The value is `legacy` by default, which means the optimized version is not used. If it is set to `optimized`, TiDB uses the optimized version to execute hash join for better performance.
+- This variable is used to control whether TiDB uses the [optimized version of hash join](/sql-statements/sql-statement-explain-analyze.md#hashjoinv2). If it is set to `optimized`, TiDB uses the optimized version to execute hash join for better performance.
 
 > **Note:**
 >
-> Currently, the optimized hash join only supports inner join and outer join, so for other joins, even if `tidb_hash_join_version` is set to `optimized`, TiDB still uses the legacy hash join.
+> Currently, the optimized hash join only supports inner join, outer join, semi join, and anti semi join. For other joins, even if `tidb_hash_join_version` is set to `optimized`, TiDB still uses the `legacy` hash join.
 
 ### tidb_hashagg_final_concurrency
 
@@ -3345,6 +3400,18 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `OFF`
 - This variable is used to set whether to ignore the commands for closing prepared statement cache.
 - When this variable is set to `ON`, the `COM_STMT_CLOSE` command of the Binary protocol and the [`DEALLOCATE PREPARE`](/sql-statements/sql-statement-deallocate.md) statement of the text protocol are ignored. For details, see [Ignore the `COM_STMT_CLOSE` command and the `DEALLOCATE PREPARE` statement](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement).
+
+### tidb_ignore_inlist_plan_digest <span class="version-mark">New in v7.6.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether TiDB ignores the element differences in the `IN` list across different queries when generating Plan Digests.
+
+    - When it is the default value `OFF`, TiDB does not ignore the element differences (including the difference in the number of elements) in the `IN` list when generating Plan Digests. The element differences in the `IN` list result in different Plan Digests.
+    - When it is set to `ON`, TiDB ignores the element differences (including the difference in the number of elements) in the `IN` list and uses `...` to replace elements in the `IN` list in Plan Digests. In this case, TiDB generates the same Plan Digests for `IN` queries of the same type.
 
 ### tidb_index_join_batch_size
 
@@ -3466,7 +3533,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Warning:**
 >
-> Currently, Instance Plan Cache is an experimental feature. is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> Currently, Instance Plan Cache is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -3503,11 +3570,10 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - This is a read-only variable. It is internally used in TiDB to query the transaction information of the last DML statement. The information includes:
-    - `txn_scope`: The scope of the transaction, which can be `global` or `local`.
     - `start_ts`: The start timestamp of the transaction.
     - `for_update_ts`: The `for_update_ts` of the previously executed DML statement. This is an internal term of TiDB used for tests. Usually, you can ignore this information.
     - `error`: The error message, if any.
-    - `ru_consumption`: Consumed [RU](/tidb-resource-control.md#what-is-request-unit-ru) for executing the statement.
+    - `ru_consumption`: Consumed [RU](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) for executing the statement.
 
 ### tidb_last_txn_info <span class="version-mark">New in v4.0.9</span>
 
@@ -3630,7 +3696,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
-- Default value: `43200`
+- Default value: `43200` (12 hours)
 - Range: `[0, 2147483647]`
 - Unit: Seconds
 - This variable is used to specify the maximum execution time of automatic `ANALYZE` tasks. When the execution time of an automatic `ANALYZE` task exceeds the specified time, the task will be terminated. When the value of this variable is `0`, there is no limit to the maximum execution time of automatic `ANALYZE` tasks.
@@ -3739,6 +3805,22 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `1024`
 - Range: `[100, 16384]`
 - This variable is used to set the maximum number of schema versions (the table IDs modified for corresponding versions) allowed to be cached. The value range is 100 ~ 16384.
+
+### tidb_max_dist_task_nodes <span class="version-mark">New in v9.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `-1`
+- Range: `-1` or `[1, 128]`
+- This variable defines the maximum number of TiDB nodes that the Distributed eXecution Framework (DXF) tasks can use. The default value is `-1`, which indicates that automatic mode is enabled. In automatic mode, TiDB dynamically calculates the value as `min(3, tikv_nodes / 3)`, where `tikv_nodes` represents the number of TiKV nodes in the cluster.
+
+> **Note:**
+> 
+> If you explicitly set the [`tidb_service_scope`](#tidb_service_scope-new-in-v740) system variable for some TiDB nodes, the Distributed eXecution Framework schedules tasks only to these nodes. In this case, even if you set `tidb_max_dist_task_nodes` to a larger value, the framework uses no more than the number of nodes explicitly configured with `tidb_service_scope`.
+>
+> For example, if the cluster has 10 TiDB nodes, and 4 of them are configured with `tidb_service_scope = group1`, then even if you set `tidb_max_dist_task_nodes = 5`, only 4 nodes participate in task execution.
 
 ### tidb_max_paging_size <span class="version-mark">New in v6.3.0</span>
 
@@ -4269,7 +4351,7 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `""`
 - This variable is used to control some internal behaviors of the optimizer.
 - The optimizer's behavior might vary depending on user scenarios or SQL statements. This variable provides a more fine-grained control over the optimizer and helps to prevent performance regression after upgrading caused by behavior changes in the optimizer.
-- For a more detailed introduction, see [Optimizer Fix Controls](https://docs.pingcap.com/tidb/v7.2/optimizer-fix-controls).
+- For a more detailed introduction, see [Optimizer Fix Controls](/optimizer-fix-controls.md).
 
 </CustomContent>
 
@@ -4895,7 +4977,23 @@ SHOW WARNINGS;
 >
 > - Depending on the specific business scenario, enabling this option might cause a certain degree of throughput reduction (average latency increase) for transactions with frequent lock conflicts.
 > - This option only takes effect on statements that need to lock a single key. If a statement needs to lock multiple rows at the same time, this option will not take effect on such statements.
-> - This feature is introduced in v6.6.0 by the [`tidb_pessimistic_txn_aggressive_locking`](https://docs.pingcap.com/tidb/v6.6/system-variables#tidb_pessimistic_txn_aggressive_locking-new-in-v660) variable, which is disabled by default.
+> - This feature is introduced in v6.6.0 by the [`tidb_pessimistic_txn_aggressive_locking`](https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_pessimistic_txn_aggressive_locking-new-in-v660) variable, which is disabled by default.
+
+### tidb_pipelined_dml_resource_policy <span class="version-mark">New in v9.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: String
+- Default value: `"standard"`
+- Possible values: `"standard"`, `"conservative"`, and `"custom{...}"`
+- This variable controls the resource usage policy for [Pipelined DML](/pipelined-dml.md). It takes effect only when [`tidb_dml_type`](#tidb_dml_type-new-in-v800) is set to `bulk`. The meaning of each possible value is as follows:
+    - `"standard"`: the default resource usage policy.
+    - `"conservative"`: Pipelined DML uses fewer resources, but its execution speed is slower than the default policy, suitable for scenarios with sensitive resource usage.
+    - `"custom{option1=value1,option2=value2,...}"`: a custom resource usage policy. You can specify only the required options. For example, `"custom{concurrency=8,write_throttle_ratio=0.5}"`. Make sure that the value is enclosed in double quotes. The supported custom options include the following:
+        - `concurrency`: specifies the concurrency of the flush operation, which affects the execution speed and resource usage of Pipelined DML. The value range is `[1, 8192]`.
+        - `resolve_concurrency`: specifies the concurrency of the asynchronous resolve lock operations. It affects the resource usage of Pipelined DML but not its execution speed. The value range is `[1, 8192]`.
+        - `write_throttle_ratio`: specifies the ratio of the active throttle time to the total time. The larger the value, the higher the ratio of throttle time in total time, and the more resources are saved. `0` means no throttle. The value range is `[0, 1)`.
 
 ### tidb_placement_mode <span class="version-mark">New in v6.0.0</span>
 
@@ -5156,7 +5254,7 @@ SHOW WARNINGS;
 - Type: String
 - Default value: `""`
 - Possible values: `"ddl"`, `"stats"`, `"br"`, `"lightning"`, `"background"`
-- This variable is used to explicitly specify the task type for the current session, which is identified and controlled by [Resource Control](/tidb-resource-control.md). For example: `SET @@tidb_request_source_type = "background"`.
+- This variable is used to explicitly specify the task type for the current session, which is identified and controlled by [Resource Control](/tidb-resource-control-ru-groups.md). For example: `SET @@tidb_request_source_type = "background"`.
 
 ### tidb_resource_control_strict_mode <span class="version-mark">New in v8.2.0</span>
 
@@ -5451,6 +5549,16 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 </CustomContent>
 
+### tidb_slow_txn_log_threshold <span class="version-mark">New in v7.0.0</span>
+
+- Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Unsigned integer
+- Default value: `0`
+- Range: `[0, 9223372036854775807]`
+- Unit: Milliseconds
+- This variable sets the threshold for slow transaction logging. When the execution time of a transaction exceeds this threshold, TiDB logs detailed information about the transaction. When the value is set to `0`, this feature is disabled.
+
 ### tidb_snapshot
 
 - Scope: SESSION
@@ -5486,7 +5594,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Unit: Byte
-- Default value: `0`, which means that the memory quota is automatically set to half of the total memory size of the TiDB instance.
+- Default value: `0`, which means the memory quota for the TiDB statistics cache is 20% of the TiDB instance's total memory. Before v8.5.1, `0` means the memory quota is 50% of the TiDB instance's total memory.
 - Range: `[0, 1099511627776]`
 - This variable sets the memory quota for the TiDB statistics cache.
 
@@ -5711,7 +5819,15 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Integer
 - Default value: `3000`
 - Range: `[1, 32767]`
-- This variable is used to set the maximum number of statements that [statement summary tables](/statement-summary-tables.md) store in memory.
+- This variable is used to limit the number of SQL digests that the [`statements_summary`](/statement-summary-tables.md#statements_summary) and [`statements_summary_history`](/statement-summary-tables.md#statements_summary_history) tables can store in memory totally.
+
+<CustomContent platform="tidb">
+
+> **Note:**
+>
+> When [`tidb_stmt_summary_enable_persistent`](/statement-summary-tables.md#persist-statements-summary) is enabled, `tidb_stmt_summary_max_stmt_count` only limits the number of SQL digests that the [`statements_summary`](/statement-summary-tables.md#statements_summary) table can store in memory.
+
+</CustomContent>
 
 ### tidb_stmt_summary_refresh_interval <span class="version-mark">New in v4.0</span>
 
@@ -6196,6 +6312,98 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - This variable is used to set the concurrency degree of the window operator.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 
+### tidb_workload_repository_dest <span class="version-mark">New in v9.0.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: String
+- Default value: `''`
+
+<CustomContent platform="tidb">
+
+- This variable is used to set the destination of the [Workload Repository](/workload-repository.md).
+- The value can be either `'table'` (enabling the workload repository) or `''` (disabling the workload repository).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- This variable is used to set the destination of the [Workload Repository](https://docs.pingcap.com/tidb/dev/workload-repository).
+- The value can be either `'table'` (enabling the workload repository) or `''` (disabling the workload repository).
+
+</CustomContent>
+
+### tidb_workload_repository_active_sampling_interval <span class="version-mark">New in v9.0.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `5`
+- Range: `[0, 600]`
+- Unit: Seconds
+
+<CustomContent platform="tidb">
+
+- Sets the sampling interval for the [Workload Repository](/workload-repository.md)'s time-based sampling process.
+- Setting the value to `0` disables the time-based sampling process.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Sets the sampling interval for the [Workload Repository](https://docs.pingcap.com/tidb/dev/workload-repository)'s time-based sampling process.
+- Setting the value to `0` disables the time-based sampling process.
+
+</CustomContent>
+
+### tidb_workload_repository_retention_days <span class="version-mark">New in v9.0.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `7`
+- Range: `[0, 365]`
+- Unit: Days
+
+<CustomContent platform="tidb">
+
+- Sets the number of days that [Workload Repository](/workload-repository.md) data is retained.
+- Setting the value to `0` disables automatic purging of old data.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Sets the number of days that [Workload Repository](https://docs.pingcap.com/tidb/dev/workload-repository) data is retained.
+- Setting the value to `0` disables automatic purging of old data.
+
+</CustomContent>
+
+### tidb_workload_repository_snapshot_interval <span class="version-mark">New in v9.0.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `3600`
+- Range: `[900, 7200]`
+- Unit: Seconds
+
+<CustomContent platform="tidb">
+
+- Sets the sampling interval for the [Workload Repository](/workload-repository.md)'s snapshot sampling process.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Sets the sampling interval for the [Workload Repository](https://docs.pingcap.com/tidb/dev/workload-repository)'s snapshot sampling process.
+
+</CustomContent>
+
 ### tiflash_fastscan <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -6211,7 +6419,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Default value: `8192`
 - Range: `[1, 18446744073709551615]`
 - When Fine Grained Shuffle is enabled, the window function pushed down to TiFlash can be executed in parallel. This variable controls the batch size of the data sent by the sender.
-- Impact on performance: set a reasonable size according to your business requirements. Improper setting affects the performance. If the value is set too small, for example `1`, it causes one network transfer per Block. If the value is set too large, for example, the total number of rows of the table, it causes the receiving end to spend most of the time waiting for data, and the piplelined computation cannot work. To set a proper value, you can observe the distribution of the number of rows received by the TiFlash receiver. If most threads receive only a few rows, for example a few hundred, you can increase this value to reduce the network overhead.
+- Impact on performance: set a reasonable size according to your business requirements. Improper setting affects the performance. If the value is set too small, for example `1`, it causes one network transfer per Block. If the value is set too large, for example, the total number of rows of the table, it causes the receiving end to spend most of the time waiting for data, and the pipelined computation cannot work. To set a proper value, you can observe the distribution of the number of rows received by the TiFlash receiver. If most threads receive only a few rows, for example a few hundred, you can increase this value to reduce the network overhead.
 
 ### tiflash_fine_grained_shuffle_stream_count <span class="version-mark">New in v6.2.0</span>
 
@@ -6357,19 +6565,6 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - In the Stale Read scenarios, this session variable is used to help record the Stable Read timestamp value.
-- This variable is used for the internal operation of TiDB. It is **NOT recommended** to set this variable.
-
-### txn_scope
-
-> **Note:**
->
-> This variable is read-only for [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
-
-- Scope: SESSION
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `global`
-- Value options: `global` and `local`
-- This variable is used to set whether the current session transaction is a global transaction or a local transaction.
 - This variable is used for the internal operation of TiDB. It is **NOT recommended** to set this variable.
 
 ### validate_password.check_user_name <span class="version-mark">New in v6.5.0</span>

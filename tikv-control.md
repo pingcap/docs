@@ -329,7 +329,7 @@ Use the `compact-cluster` command to manually compact data of the whole TiKV clu
 
 ### Set a Region to tombstone
 
-The `tombstone` command is usually used in circumstances where the sync-log is not enabled, and some data written in the Raft state machine is lost caused by power down.
+The `tombstone` command is usually used in circumstances where some data written in the Raft state machine is lost caused by power down.
 
 In a TiKV instance, you can use this command to set the status of some Regions to tombstone. Then when you restart the instance, those Regions are skipped to avoid the restart failure caused by damaged Raft state machines of those Regions. Those Regions need to have enough healthy replicas in other TiKV instances to be able to continue the reads and writes through the Raft mechanism.
 
@@ -442,14 +442,6 @@ success
 
 ```shell
 tikv-ctl --host ip:port modify-tikv-config -n raftdb.defaultcf.disable-auto-compactions -v true
-```
-
-```
-success
-```
-
-```shell
-tikv-ctl --host ip:port modify-tikv-config -n raftstore.sync-log -v false
 ```
 
 ```

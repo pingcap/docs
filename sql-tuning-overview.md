@@ -14,3 +14,4 @@ This section introduces several concepts about query execution:
 - [Understanding the Query Execution Plan](/explain-overview.md) introduces how to use the `EXPLAIN` statement to understand how TiDB has decided to execute a statement.
 - [SQL Optimization Process](/sql-optimization-concepts.md) introduces what optimizations TiDB is capable of using to improve query execution performance.
 - [Control Execution Plans](/control-execution-plan.md) introduces ways to control the generation of the execution plan. This can be useful in cases where the execution plan decided by TiDB is suboptimal.
+- [Index Advisor](/index-advisor.md) introduces how to let TiDB recommend indexes for you automatically based on your workload.

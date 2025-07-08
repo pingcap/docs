@@ -49,30 +49,6 @@ The monitoring machine is recommended to use standalone deployment. It is recomm
 
 Check the time difference between the machine time of the monitor and the time within the cluster. If it is large, you can correct the time and the monitor will display all the metrics.
 
-### What is the function of supervise/svc/svstat service?
-
-- supervise: the daemon process, to manage the processes
-- svc: to start and stop the service
-- svstat: to check the process status
-
-### Description of inventory.ini variables
-
-| Variable        | Description                                                |
-| ---- | ------- |
-| `cluster_name` | the name of a cluster, adjustable |
-| `tidb_version` | the version of TiDB |
-| `deployment_method` | the method of deployment, binary by default, Docker optional |
-| `process_supervision` | the supervision way of processes, systemd by default, supervise optional |
-| `timezone` | the timezone of the managed node, adjustable, `Asia/Shanghai` by default, used with the `set_timezone` variable |
-| `set_timezone` | to edit the timezone of the managed node, True by default; False means closing |
-| `enable_elk` | currently not supported |
-| `enable_firewalld` | to enable the firewall, closed by default |
-| `enable_ntpd` | to monitor the NTP service of the managed node, True by default; do not close it |
-| `machine_benchmark` | to monitor the disk IOPS of the managed node, True by default; do not close it |
-| `set_hostname` | to edit the hostname of the managed node based on the IP, False by default |
-| `enable_slow_query_log` | to record the slow query log of TiDB into a single file: ({{ deploy_dir }}/log/tidb_slow_query.log). False by default, to record it into the TiDB log |
-| `deploy_without_tidb` | the Key-Value mode, deploy only PD, TiKV and the monitoring service, not TiDB; set the IP of the tidb_servers host group to null in the `inventory.ini` file |
-
 ### How to separately record the slow query log in TiDB? How to locate the slow query SQL statement?
 
 1. The slow query definition for TiDB is in the TiDB configuration file. The `tidb_slow_log_threshold: 300` parameter is used to configure the threshold value of the slow query (unit: millisecond).

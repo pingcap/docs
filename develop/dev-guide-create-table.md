@@ -5,7 +5,7 @@ summary: Learn the definitions, rules, and guidelines in table creation.
 
 # Create a Table
 
-This document introduces how to create tables using the SQL statement and the related best practices. An example of the TiDB-based [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application) is provided to illustrate the best practices.
+This document introduces how to create tables using the SQL statement and the related best practices. An example of the TiDB-based [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application is provided to illustrate the best practices.
 
 ## Before you start
 
@@ -135,7 +135,7 @@ CREATE TABLE `bookshop`.`users` (
 
 TiDB supports the [clustered index](/clustered-indexes.md) feature since v5.0. This feature controls how data is stored in tables containing primary keys. It provides TiDB the ability to organize tables in a way that can improve the performance of certain queries.
 
-The term clustered in this context refers to the organization of how data is stored and not a group of database servers working together. Some database management systems refer to clustered indexes as index-organized tables (IOT).
+The term clustered in this context refers to the organization of how data is stored and not a group of database servers working together. Some database management systems refer to clustered index tables as index-organized tables (IOT).
 
 Currently, tables **_containing primary_** keys in TiDB are divided into the following two categories:
 

@@ -106,4 +106,4 @@ Note that for multiple versions of the same Key, versions with larger numbers ar
 
 ## Distributed ACID transaction
 
-Transaction of TiKV adopts the model used by Google in BigTable: [Percolator](https://research.google.com/pubs/pub36726.html). TiKV's implementation is inspired by this paper, with a lot of optimizations. See [transaction overview](/transaction-overview.md) for details.
+Transaction of TiKV adopts the model used by Google in BigTable: [Percolator](https://research.google/pubs/large-scale-incremental-processing-using-distributed-transactions-and-notifications/). TiKV's implementation is inspired by this paper, with a lot of optimizations. See [transaction overview](/transaction-overview.md) for details.

@@ -28,7 +28,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Date and time types](/data-type-date-and-time.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [String types](/data-type-string.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [JSON type](/data-type-json.md) | Y | Y | Y | Y | Y | E | E | E | E | E |
-| [Vectort types](/vector-search-data-types.md) | E | N | N | N | N | N | N | N | N | N |
+| [Vector types](/vector-search/vector-search-data-types.md) | E | N | N | N | N | N | N | N | N | N |
 | [Control flow functions](/functions-and-operators/control-flow-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [String functions](/functions-and-operators/string-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Numeric functions and operators](/functions-and-operators/numeric-functions-and-operators.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
@@ -36,7 +36,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Bit functions and operators](/functions-and-operators/bit-functions-and-operators.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Cast functions and operators](/functions-and-operators/cast-functions-and-operators.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Encryption and compression functions](/functions-and-operators/encryption-and-compression-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Vector functions and operators](/vector-search-functions-and-operators.md) | E | N | N | N | N | N | N | N | N | N |
+| [Vector functions and operators](/vector-search/vector-search-functions-and-operators.md) | E | N | N | N | N | N | N | N | N | N |
 | [Information functions](/functions-and-operators/information-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [JSON functions](/functions-and-operators/json-functions.md) | Y | Y | Y | Y | Y | E | E | E | E | E |
 | [Aggregation functions](/functions-and-operators/aggregate-group-by-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
@@ -67,7 +67,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Foreign key](/foreign-key.md) | Y | E | E | E | N | N | N | N | N | N |
 | [TiFlash late materialization](/tiflash/tiflash-late-materialization.md) | Y | Y | Y | Y | N | N | N | N | N | N |
 | [Global index](/partitioned-table.md#global-indexes) | Y |  N | N  | N | N | N | N | N | N | N |
-| [Vector index](/vector-search-index.md) | E | N | N | N | N | N | N | N | N | N |
+| [Vector index](/vector-search/vector-search-index.md) | E | N | N | N | N | N | N | N | N | N |
 
 ## SQL statements
 
@@ -98,7 +98,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 
 | Advanced SQL features | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| [Vector search](/vector-search-overview.md) |  E |  N |  N  | N | N | N | N | N | N | N |
+| [Vector search](/vector-search/vector-search-overview.md) |  E |  N |  N  | N | N | N | N | N | N | N |
 | [Prepared statement cache](/sql-prepared-plan-cache.md) | Y | Y | Y | Y | Y | Y | Y | Y | E | E |
 | [Non-prepared statement cache](/sql-non-prepared-plan-cache.md) | Y | Y | Y | E | N | N | N | N | N | N |
 | [Instance-level execution plan cache](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840) | E | N | N | N | N | N | N | N | N | N |
@@ -154,7 +154,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Repeatable-read isolation (snapshot isolation)](/transaction-isolation-levels.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Read-committed isolation](/transaction-isolation-levels.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Automatically terminating long-running idle transactions](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760) | Y | Y | N | N | N | N | N | N | N | N |
-| [Bulk DML execution mode (`tidb_dml_type = "bulk"`)](/system-variables.md#tidb_dml_type-new-in-v800) | E |  N | N | N | N | N | N | N | N |
+| [Bulk DML execution mode (`tidb_dml_type = "bulk"`)](/system-variables.md#tidb_dml_type-new-in-v800) | E |  E | N | N | N | N | N | N | N | N |
 
 ## Partitioning
 
@@ -174,6 +174,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Range INTERVAL partitioning](/partitioned-table.md#range-interval-partitioning) | Y | Y | Y | Y | E | N | N | N | N | N |
 | [Convert a partitioned table to a non-partitioned table](/partitioned-table.md#convert-a-partitioned-table-to-a-non-partitioned-table) | Y | Y | Y | N | N | N | N | N | N | N |
 | [Partition an existing table](/partitioned-table.md#partition-an-existing-table) | Y | Y | Y | N | N | N | N | N | N | N |
+| [Global index](/partitioned-table.md#global-indexes) | Y | N | N | N | N | N | N | N | N | N |
 
 ## Statistics
 
@@ -258,11 +259,11 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Global memory control](/configure-memory-usage.md#configure-the-memory-usage-threshold-of-a-tidb-server-instance) | Y | Y | Y | Y | Y | N | N | N | N | N |
 | [Cross-cluster RawKV replication](/tikv-configuration-file.md#api-version-new-in-v610) | E | E | E | E | E | N | N | N | N | N |
 | [Green GC](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50) | E | E | E | E | E | E | E | E | E | E |
-| [Resource control](/tidb-resource-control.md) | Y | Y | Y | Y | N | N | N | N | N | N |
-| [Runaway Queries management](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries) | Y | Y | E | N | N | N | N | N | N | N |
-| [Background tasks management](/tidb-resource-control.md#manage-background-tasks) | E | E | E | N | N | N | N | N | N | N |
+| [Resource control](/tidb-resource-control-ru-groups.md) | Y | Y | Y | Y | N | N | N | N | N | N |
+| [Runaway Queries management](/tidb-resource-control-runaway-queries.md) | Y | Y | E | N | N | N | N | N | N | N |
+| [Background tasks management](/tidb-resource-control-background-tasks.md) | E | E | E | N | N | N | N | N | N | N |
 | [TiFlash Disaggregated Storage and Compute Architecture and S3 Support](/tiflash/tiflash-disaggregated-and-s3.md) | Y | Y | Y | E | N | N | N | N | N | N |
-| [Selecting TiDB nodes for the Distributed eXecution Framework (DXF) tasks](/system-variables.md#tidb_service_scope-new-in-v740) | Y | Y | N | N | N | N | N | N | N |
+| [Selecting TiDB nodes for the Distributed eXecution Framework (DXF) tasks](/system-variables.md#tidb_service_scope-new-in-v740) | Y | Y | Y | N | N | N | N | N | N | N |
 | PD Follower Proxy (controlled by [`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530)) | Y | Y | Y | Y | Y | Y | Y | Y | N | N |
 | [Active PD Follower](/tune-region-performance.md#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service) (controlled by [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)) | Y | E | N | N | N | N | N | N | N | N |
 | [PD microservices](/pd-microservices.md) | E | E | N | N | N | N | N | N | N | N |

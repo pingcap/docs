@@ -54,7 +54,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/v8.4/system-variables#tidb_auto_analyze_concurrency-new-in-v840">Concurrent automatic statistics collection</a></td>
-    <td>You can set the concurrency within a single automatic statistics collection task using the system variable <code>tidb_auto_analyze_concurrency</code>. TiDB automatically determines the concurrency of scanning tasks based on node scale and hardware specifications. This improves statistics collection efficiency by fully utilizing system resources, reduces manual tuning, and ensures stable cluster performance.</td>
+    <td>Introduce the system variable <code>tidb_auto_analyze_concurrency</code> to control the number of concurrent auto-analyze operations within a TiDB cluster. TiDB automatically determines the concurrency of scanning tasks based on node scale and hardware specifications. This improves statistics collection efficiency by fully utilizing system resources, reduces manual tuning, and ensures stable cluster performance.</td>
   </tr>
   <tr>
     <td rowspan="1">SQL</td>
@@ -150,13 +150,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
     You can observe the corresponding fields (`RESOURCE_GROUP`, `MAX_REQUEST_UNIT_WRITE`, `MAX_REQUEST_UNIT_READ`, `MAX_PROCESSED_KEYS`) in the [Statement Summary Tables](/statement-summary-tables.md) to determine the condition values based on historical execution.
 
-    For more information, see [documentation](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries).
+    For more information, see [documentation](/tidb-resource-control-runaway-queries.md).
 
 * Support switching resource groups for runaway queries [#54434](https://github.com/pingcap/tidb/issues/54434) @[JmPotato](https://github.com/JmPotato)
 
-    Starting from TiDB v8.4.0, you can switch the resource group of runaway queries to a specific one. If the `COOLDOWN` mechanism fails to lower resource consumption, you can create a [resource group](/tidb-resource-control.md#create-a-resource-group), limit its resource size, and set the `SWITCH_GROUP` parameter to move identified runaway queries to this group. Meanwhile, subsequent queries within the same session will continue to execute in the original resource group. By switching resource groups, you can manage resource usage more precisely, and control the resource consumption more strictly.
+    Starting from TiDB v8.4.0, you can switch the resource group of runaway queries to a specific one. If the `COOLDOWN` mechanism fails to lower resource consumption, you can create a [resource group](/tidb-resource-control-ru-groups.md#create-a-resource-group), limit its resource size, and set the `SWITCH_GROUP` parameter to move identified runaway queries to this group. Meanwhile, subsequent queries within the same session will continue to execute in the original resource group. By switching resource groups, you can manage resource usage more precisely, and control the resource consumption more strictly.
 
-    For more information, see [documentation](/tidb-resource-control.md#query_limit-parameters).
+    For more information, see [documentation](/tidb-resource-control-runaway-queries.md#query_limit-parameters).
 
 * Support setting the cluster-level Region scattering strategy using the `tidb_scatter_region` system variable [#55184](https://github.com/pingcap/tidb/issues/55184) @[D3Hunter](https://github.com/D3Hunter)
 
@@ -170,7 +170,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
     TiDB resource control can identify and lower the priority of background tasks. In certain scenarios, you might want to limit the resource consumption of background tasks, even when resources are available. Starting from v8.4.0, you can use the `UTILIZATION_LIMIT` parameter to set the maximum percentage of resources that background tasks can consume. Each node will keep the resource usage of all background tasks below this percentage. This feature enables precise control over resource consumption for background tasks, further enhancing cluster stability.
 
-    For more information, see [documentation](/tidb-resource-control.md#manage-background-tasks).
+    For more information, see [documentation](/tidb-resource-control-background-tasks.md).
 
 * Optimize the resource allocation strategy of resource groups [#50831](https://github.com/pingcap/tidb/issues/50831) @[nolouch](https://github.com/nolouch)
 
@@ -200,13 +200,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
     Vector search is a search method based on data semantics, which provides more relevant search results. As one of the core functions of AI and large language models (LLMs), vector search can be used in various scenarios such as Retrieval-Augmented Generation (RAG), semantic search, and recommendation systems.
 
-    Starting from v8.4.0, TiDB supports [vector data types](/vector-search-data-types.md) and [vector search indexes](/vector-search-index.md), offering powerful vector search capabilities. TiDB vector data types support up to 16,383 dimensions and support various [distance functions](/vector-search-functions-and-operators.md#vector-functions), including L2 distance (Euclidean distance), cosine distance, negative inner product, and L1 distance (Manhattan distance).
+    Starting from v8.4.0, TiDB supports [vector data types](/vector-search/vector-search-data-types.md) and [vector search indexes](/vector-search/vector-search-index.md), offering powerful vector search capabilities. TiDB vector data types support up to 16,383 dimensions and support various [distance functions](/vector-search/vector-search-functions-and-operators.md#vector-functions), including L2 distance (Euclidean distance), cosine distance, negative inner product, and L1 distance (Manhattan distance).
 
     To start vector search, you only need to create a table with vector data types, insert vector data, and then perform a query of vector data. You can also perform mixed queries of vector data and traditional relational data.
 
-    To enhance the performance of vector search, you can create and use [vector search indexes](/vector-search-index.md). Note that TiDB vector search indexes rely on TiFlash. Before using vector search indexes, make sure that TiFlash nodes are deployed in your TiDB cluster.
+    To enhance the performance of vector search, you can create and use [vector search indexes](/vector-search/vector-search-index.md). Note that TiDB vector search indexes rely on TiFlash. Before using vector search indexes, make sure that TiFlash nodes are deployed in your TiDB cluster.
 
-    For more information, see [documentation](/vector-search-overview.md).
+    For more information, see [documentation](/vector-search/vector-search-overview.md).
 
 ### DB operations
 
@@ -290,7 +290,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 | [`tidb_opt_prefer_range_scan`](/system-variables.md#tidb_opt_prefer_range_scan-new-in-v50) | Modified | Changes the default value from `OFF` to `ON`. For tables with no statistics (pseudo-statistics) or empty tables (zero statistics), the optimizer prefers interval scans over full table scans. |
 | [`tidb_scatter_region`](/system-variables.md#tidb_scatter_region) | Modified | Before v8.4.0, its type is boolean, it only supports `ON` and `OFF`, and the Region of the newly created table only supports table level scattering after it is enabled. Starting from v8.4.0, the `SESSION` scope is added, the type is changed from boolean to enumeration, the default value is changed from `OFF` to null, and the optional values `TABLE` and `GLOBAL` are added. In addition, it now supports cluster-level scattering policy to avoid the TiKV OOM issues caused by uneven distribution of regions during fast table creation in batches.|
 | [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800) | Modified | Changes the default value from `0` to `536870912` (512 MiB), indicating that this feature is enabled by default. The minimum value allowed is set to `67108864` (64 MiB). |
-| [`tidb_auto_analyze_concurrency`](/system-variables.md#tidb_auto_analyze_concurrency-new-in-v840)| Newly added | Sets the concurrency within a single automatic statistics collection task. Before v8.4.0, this concurrency is fixed at `1`. To speed up statistics collection tasks, you can increase this concurrency based on your cluster's available resources. |
+| [`tidb_auto_analyze_concurrency`](/system-variables.md#tidb_auto_analyze_concurrency-new-in-v840)| Newly added | Sets the concurrency for auto-analyze operations within a TiDB cluster. Before v8.4.0, this concurrency is fixed at `1`. To speed up statistics collection tasks, you can increase this concurrency based on your cluster's available resources. |
 | [`tidb_enable_instance_plan_cache`](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840)| Newly added | Controls whether to enable the Instance Plan Cache feature. |
 | [`tidb_enable_stats_owner`](/system-variables.md#tidb_enable_stats_owner-new-in-v840)| Newly added | Controls whether the corresponding TiDB instance can run automatic statistics update tasks. |
 | [`tidb_hash_join_version`](/system-variables.md#tidb_hash_join_version-new-in-v840) | Newly added | Controls whether TiDB uses an optimized version of the Hash Join operator. The default value of `legacy` means that the optimized version is not used. If you set it to `optimized`, TiDB uses the optimized version of the Hash Join operator when executing it to improve Hash Join performance. |
@@ -327,7 +327,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 | BR | [`--master-key`](/br/br-pitr-manual.md#encrypt-the-log-backup-data) | Newly added | Specifies the master key for log backup data. It can be a master key stored on a local disk or a master key managed by a cloud Key Management Service (KMS). |
 | BR | [`--master-key-crypter-method`](/br/br-pitr-manual.md#encrypt-the-log-backup-data) | Newly added | Specifies the encryption algorithm based on the master key for log backup data, which can be `aes128-ctr`, `aes192-ctr`, or `aes256-ctr`. The default value is `plaintext`, indicating that data is not encrypted. |
 
-## Offline package changes
+### Offline package changes
 
 Starting from v8.4.0, the following contents are removed from the `TiDB-community-toolkit` [binary package](/binary-package.md):
 
@@ -336,12 +336,12 @@ Starting from v8.4.0, the following contents are removed from the `TiDB-communit
 - `binlogctl`
 - `arbiter`
 
-## Operating system and platform requirement changes
+### Operating system and platform requirement changes
 
 Before upgrading TiDB, ensure that your operating system version meets the [OS and platform requirements](/hardware-and-software-requirements.md#os-and-platform-requirements).
 
-- According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS Linux 7 ends on June 30, 2024. TiDB ends the support for CentOS 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version. Upgrading a TiDB cluster on CentOS 7 to v8.4.0 or later will cause the cluster to become unavailable.
-- According to [Red Hat Enterprise Linux Life Cycle](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates), the maintenance support for Red Hat Enterprise Linux 7 ends on June 30, 2024. TiDB ends the support for Red Hat Enterprise Linux 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version. Upgrading a TiDB cluster on Red Hat Enterprise Linux 7 to v8.4.0 or later will cause the cluster to become unavailable.
+- According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS Linux 7 ended on June 30, 2024. Therefore, TiDB drops the support of CentOS 7 in v8.4.0. It is recommended to use Rocky Linux 9.1 or a later version. Upgrading a TiDB cluster on CentOS 7 to v8.4.0 will cause the cluster to become unavailable.
+- According to [Red Hat Enterprise Linux Life Cycle](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates), the maintenance support for Red Hat Enterprise Linux 7 ended on June 30, 2024. TiDB ends the support for Red Hat Enterprise Linux 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version. Upgrading a TiDB cluster on Red Hat Enterprise Linux 7 to v8.4.0 or later will cause the cluster to become unavailable.
 
 ## Removed features
 
@@ -371,11 +371,11 @@ The following features are planned for deprecation in future versions:
     - Optimize the efficiency of constructing BatchCop tasks when scanning a large amount of data [#55915](https://github.com/pingcap/tidb/issues/55915) [#55413](https://github.com/pingcap/tidb/issues/55413) @[wshwsh12](https://github.com/wshwsh12)
     - Optimize the transaction's buffer to reduce write latency in transactions and TiDB CPU usage [#55287](https://github.com/pingcap/tidb/issues/55287) @[you06](https://github.com/you06)
     - Optimize the execution performance of DML statements when the system variable `tidb_dml_type` is set to `"bulk"` [#50215](https://github.com/pingcap/tidb/issues/50215) @[ekexium](https://github.com/ekexium)
-    - Support using [Optimizer Fix Control 47400](/optimizer-fix-controls.md#47400-new-in-v840) to control whether the optimizer limits the minimum value estimated for `estRows` to `1`, which is consistent with databases such as Oracle and DB2 [#47400](https://github.com/pingcap/tidb/issues/47400) @[terry1purcell](https://github.com/terry1purcell)
+    - Support using [Optimizer Fix Control 47400](/optimizer-fix-controls.md#47400-new-in-v840) to control whether the optimizer limits the minimum value estimated for `estRows` to `1`, which is consistent with databases such as Oracle and Db2 [#47400](https://github.com/pingcap/tidb/issues/47400) @[terry1purcell](https://github.com/terry1purcell)
     - Add write control to the [`mysql.tidb_runaway_queries`](/mysql-schema/mysql-schema.md#system-tables-related-to-runaway-queries) log table to reduce overhead caused by a large number of concurrent writes [#54434](https://github.com/pingcap/tidb/issues/54434) @[HuSharp](https://github.com/HuSharp)
     - Support Index Join by default when the inner table has `Selection`, `Projection`, or `Aggregation` operators on it [#47233](https://github.com/pingcap/tidb/issues/47233) @[winoros](https://github.com/winoros)
     - Reduce the number of column details fetched from TiKV for `DELETE` operations in certain scenarios, lowering the resource overhead of these operations [#38911](https://github.com/pingcap/tidb/issues/38911) @[winoros](https://github.com/winoros)
-    - Support setting the concurrency within a single automatic statistics collection task using the system variable `tidb_auto_analyze_concurrency` [#53460](https://github.com/pingcap/tidb/issues/53460) @[hawkingrei](https://github.com/hawkingrei)
+    - Support setting the concurrency for auto-analyze operations within a TiDB cluster using the system variable `tidb_auto_analyze_concurrency` [#53460](https://github.com/pingcap/tidb/issues/53460) @[hawkingrei](https://github.com/hawkingrei)
     - Optimize the logic of an internal function to improve performance when querying tables with numerous columns [#52112](https://github.com/pingcap/tidb/issues/52112) @[Rustin170506](https://github.com/Rustin170506)
     - Simplify filter conditions like `a = 1 AND (a > 1 OR (a = 1 AND b = 2))` to `a = 1 AND b = 2` [#56005](https://github.com/pingcap/tidb/issues/56005) @[ghazalfamilyusa](https://github.com/ghazalfamilyusa)
     - Increase the cost of table scans in the cost model for scenarios with a high risk of suboptimal execution plans, making the optimizer prefer indexes [#56012](https://github.com/pingcap/tidb/issues/56012) @[terry1purcell](https://github.com/terry1purcell)

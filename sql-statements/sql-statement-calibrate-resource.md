@@ -5,7 +5,7 @@ summary: An overview of the usage of CALIBRATE RESOURCE for the TiDB database.
 
 # `CALIBRATE RESOURCE`
 
-The `CALIBRATE RESOURCE` statement is used to estimate and output the ['Request Unit (RU)`](/tidb-resource-control#what-is-request-unit-ru) capacity of the current cluster.
+The `CALIBRATE RESOURCE` statement is used to estimate and output the ['Request Unit (RU)`](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) capacity of the current cluster.
 
 > **Note:**
 >

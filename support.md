@@ -30,4 +30,4 @@ If you encounter a problem when you use TiDB, you can reach out for support from
 + Learn TiDB's implementation and design
 
     - [TiDB development guide](https://pingcap.github.io/tidb-dev-guide/)
-    - [TiDB Internals forum](https://internals.tidb.io/)
+    - [Discussions on GitHub](https://github.com/orgs/pingcap/discussions)
