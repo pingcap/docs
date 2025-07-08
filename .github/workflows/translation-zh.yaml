@@ -35,7 +35,7 @@ jobs:
           export GH_TOKEN=${{github.token}}
           cd docs
           npm i
-          node scripts/filterUpdateFiles.js
+          node scripts/filterUpdateCloudFiles.js
           tree tmp
           cd ..
       - name: Copy new files to translator folder
@@ -79,6 +79,7 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         if: steps.git_commit.outputs.committed == 1
         with:
+          path: "docs"
           token: ${{ github.token }}
           branch: zh-translation/${{ steps.build_id.outputs.id }}
           base: ${{ env.CN_CLOUD_BRANCH }}
