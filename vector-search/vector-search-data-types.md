@@ -17,7 +17,7 @@ A vector is a sequence of floating-point numbers, such as `[0.3, 0.5, -0.1, ...]
 
 > **Note:**
 >
-> Vector data types are only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> Vector data types are only available for TiDB Self-Managed clusters and [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 The following Vector data types are currently available:
 

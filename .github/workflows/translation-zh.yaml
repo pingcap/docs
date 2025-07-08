@@ -1,4 +1,4 @@
-name: Translation by AI
+name: Translation(zh) by AI
 
 on:
   workflow_dispatch:
@@ -35,7 +35,7 @@ jobs:
           export GH_TOKEN=${{github.token}}
           cd docs
           npm i
-          node scripts/filterUpdateFiles.js
+          node scripts/filterUpdateCloudFiles.js
           tree tmp
           cd ..
       - name: Copy new files to translator folder
@@ -76,8 +76,10 @@ jobs:
             echo "No changes detected, skipped"
           fi
       - name: Create PR
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
+        if: steps.git_commit.outputs.committed == 1
         with:
+          path: "docs"
           token: ${{ github.token }}
           branch: zh-translation/${{ steps.build_id.outputs.id }}
           base: ${{ env.CN_CLOUD_BRANCH }}
@@ -97,7 +99,7 @@ jobs:
 
             For details, see [tips for choosing the affected versions](https://github.com/pingcap/docs/blob/master/CONTRIBUTING.md#guideline-for-choosing-the-affected-versions).
 
-            - [x] ${env.CN_CLOUD_BRANCH}
+            - [x] ${{ env.CN_CLOUD_BRANCH }}
 
             ### What is the related PR or file link(s)?
 
