@@ -1,17 +1,17 @@
 ---
 title: LOAD STATS
-summary: TiDB 数据库中 LOAD STATS 的使用概览。
+summary: 关于 TiDB 数据库中 LOAD STATS 使用情况的概述。
 ---
 
 # LOAD STATS
 
 `LOAD STATS` 语句用于将统计信息加载到 TiDB 中。
 
-> **注意：**
+> **Note:**
 >
-> 此功能在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
 
-## 语法图
+## 概述
 
 ```ebnf+diagram
 LoadStatsStmt ::=
@@ -24,9 +24,7 @@ LoadStatsStmt ::=
 
 你也可以使用 `LOAD STATS ${stats_path}` 来加载特定的统计信息文件。
 
-`${stats_path}` 可以是绝对路径或相对路径。如果使用相对路径，则从启动 `tidb-server` 的路径开始查找相应的文件。以下是一个示例：
-
-{{< copyable "sql" >}}
+`${stats_path}` 可以是绝对路径或相对路径。如果使用相对路径，系统会从 `tidb-server` 启动的路径开始查找对应的文件。示例如下：
 
 ```sql
 LOAD STATS '/tmp/stats.json';
@@ -40,6 +38,6 @@ Query OK, 0 rows affected (0.00 sec)
 
 该语句是 TiDB 对 MySQL 语法的扩展。
 
-## 另请参阅
+## 相关链接
 
-* [统计信息](/statistics.md)
+* [Statistics](/statistics.md)

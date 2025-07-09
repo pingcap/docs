@@ -1,15 +1,15 @@
 ---
 title: TIKV_REGION_PEERS
-summary: "了解 `TIKV_REGION_PEERS` INFORMATION_SCHEMA 表。"
+summary: 了解 `TIKV_REGION_PEERS` INFORMATION_SCHEMA 表。
 ---
 
 # TIKV_REGION_PEERS
 
-`TIKV_REGION_PEERS` 表显示了 TiKV 中单个 Region 节点的详细信息，例如它是否是 learner 或 leader。
+`TIKV_REGION_PEERS` 表显示 TiKV 中单个 Region 节点的详细信息，例如它是否是 learner 或 leader。
 
-> **注意：**
+> **Note:**
 >
-> 此表在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> 该表在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -30,10 +30,10 @@ DESC TIKV_REGION_PEERS;
 | STATUS       | varchar(10) | YES  |      | 0       |       |
 | DOWN_SECONDS | bigint(21)  | YES  |      | 0       |       |
 +--------------+-------------+------+------+---------+-------+
-7 rows in set (0.01 sec)
+7 行，耗时 0.01 秒
 ```
 
-例如，你可以使用以下 SQL 语句查询 `WRITTEN_BYTES` 值最大的前 3 个 Region 对应的具体 TiKV 地址：
+例如，你可以使用以下 SQL 语句查询 `WRITTEN_BYTES` 取值最大前 3 个 Region 的具体 TiKV 地址：
 
 ```sql
 SELECT
@@ -52,13 +52,13 @@ WHERE
 
 `TIKV_REGION_PEERS` 表中的字段说明如下：
 
-* REGION_ID：Region 的 ID。
-* PEER_ID：Region peer 的 ID。
-* STORE_ID：Region 所在 TiKV store 的 ID。
-* IS_LEARNER：peer 是否为 learner。
-* IS_LEADER：peer 是否为 leader。
-* STATUS：peer 的状态：
-    * PENDING：暂时不可用。
-    * DOWN：离线且已转换。该 peer 不再提供服务。
+* REGION_ID：Region ID。
+* PEER_ID：Region 节点的 ID。
+* STORE_ID：Region 所在的 TiKV 存储节点的 ID。
+* IS_LEARNER：是否为 learner。
+* IS_LEADER：是否为 leader。
+* STATUS：节点状态：
+    * PENDING：临时不可用。
+    * DOWN：离线并已转换。该节点不再提供服务。
     * NORMAL：正常运行。
-* DOWN_SECONDS：离线持续时间，单位为秒。
+* DOWN_SECONDS：离线时长（秒）。

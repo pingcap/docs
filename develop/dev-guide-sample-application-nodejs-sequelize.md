@@ -1,25 +1,25 @@
 ---
 title: 使用 Sequelize 连接 TiDB
-summary: 了解如何使用 Sequelize 连接 TiDB。本教程提供使用 Sequelize 操作 TiDB 的 Node.js 示例代码片段。
+summary: 学习如何使用 Sequelize 连接 TiDB。本教程提供了适用于 TiDB 的 Node.js 示例代码片段，使用 Sequelize 实现。
 ---
 
 # 使用 Sequelize 连接 TiDB
 
-TiDB 是一个兼容 MySQL 的数据库，而 [Sequelize](https://sequelize.org/) 是一个流行的 Node.js ORM 框架。
+TiDB 是一个与 MySQL 兼容的数据库，[Sequelize](https://sequelize.org/) 是 Node.js 中流行的 ORM 框架。
 
-在本教程中，你将学习如何使用 TiDB 和 Sequelize 完成以下任务：
+在本教程中，你可以学习如何使用 TiDB 和 Sequelize 完成以下任务：
 
-- 设置环境。
-- 使用 Sequelize 连接到 TiDB 集群。
-- 构建并运行应用程序。你也可以查看基本 CRUD 操作的[示例代码片段](#示例代码片段)。
+- 设置你的环境。
+- 使用 Sequelize 连接到你的 TiDB 集群。
+- 构建并运行你的应用程序。可选地，你还可以查阅 [示例代码片段](#sample-code-snippets) 以了解基本的 CRUD 操作。
 
-> **注意**
+> **Note**
 >
-> 本教程适用于 TiDB Cloud Serverless、TiDB Cloud Dedicated 和 TiDB Self-Managed。
+> 本教程适用于 {{{ .starter }}}、TiDB Cloud Dedicated 和 TiDB Self-Managed。
 
-## 前提条件
+## 先决条件
 
-要完成本教程，你需要：
+完成本教程，你需要：
 
 - [Node.js **18**](https://nodejs.org/en/download/) 或更高版本。
 - [Git](https://git-scm.com/downloads)。
@@ -29,80 +29,80 @@ TiDB 是一个兼容 MySQL 的数据库，而 [Sequelize](https://sequelize.org/
 
 **如果你还没有 TiDB 集群，可以按照以下方式创建：**
 
-- （推荐）按照[创建 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md)的说明创建你自己的 TiDB Cloud 集群。
-- 按照[部署本地测试 TiDB 集群](/quick-start-with-tidb.md#deploy-a-local-test-cluster)或[部署生产 TiDB 集群](/production-deployment-using-tiup.md)的说明创建本地集群。
+- （推荐）参考 [创建 {{{ .starter }}} 集群](/develop/dev-guide-build-cluster-in-cloud.md) 来创建你自己的 TiDB Cloud 集群。
+- 也可以参考 [部署本地测试 TiDB 集群](/quick-start-with-tidb.md#deploy-a-local-test-cluster) 或 [部署生产环境 TiDB 集群](/production-deployment-using-tiup.md) 来创建本地集群。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
 **如果你还没有 TiDB 集群，可以按照以下方式创建：**
 
-- （推荐）按照[创建 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md)的说明创建你自己的 TiDB Cloud 集群。
-- 按照[部署本地测试 TiDB 集群](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)或[部署生产 TiDB 集群](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)的说明创建本地集群。
+- （推荐）参考 [创建 {{{ .starter }}} 集群](/develop/dev-guide-build-cluster-in-cloud.md) 来创建你自己的 TiDB Cloud 集群。
+- 也可以参考 [部署本地测试 TiDB 集群](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) 或 [部署生产环境 TiDB 集群](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) 来创建本地集群。
 
 </CustomContent>
 
-## 运行示例程序连接 TiDB
+## 运行示例应用以连接 TiDB
 
-本节演示如何运行示例应用程序代码并连接到 TiDB。
+本节演示如何运行示例应用代码并连接到 TiDB。
 
-> **注意**
+> **Note**
 >
-> 有关完整的代码片段和运行说明，请参阅 [tidb-samples/tidb-nodejs-sequelize-quickstart](https://github.com/tidb-samples/tidb-nodejs-sequelize-quickstart) GitHub 仓库。
+> 完整的代码片段和运行说明，请参考 [tidb-samples/tidb-nodejs-sequelize-quickstart](https://github.com/tidb-samples/tidb-nodejs-sequelize-quickstart) GitHub 仓库。
 
-### 步骤 1：克隆示例程序仓库
+### 第一步：克隆示例应用仓库
 
-在终端窗口中运行以下命令来克隆示例代码仓库：
+在终端窗口中运行以下命令以克隆示例代码仓库：
 
 ```bash
 git clone git@github.com:tidb-samples/tidb-nodejs-sequelize-quickstart.git
 cd tidb-nodejs-sequelize-quickstart
 ```
 
-### 步骤 2：安装依赖
+### 第二步：安装依赖
 
-运行以下命令为示例程序安装所需的包（包括 `sequelize`）：
+运行以下命令以安装示例应用所需的包（包括 `sequelize`）：
 
 ```bash
 npm install
 ```
 
-### 步骤 3：配置连接信息
+### 第三步：配置连接信息
 
-根据你选择的 TiDB 部署选项连接到 TiDB 集群。
+根据你选择的 TiDB 部署方式，连接到你的 TiDB 集群。
 
 <SimpleTab>
 
-<div label="TiDB Cloud Serverless">
+<div label="{{{ .starter }}}">
 
-1. 导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称进入其概览页面。
+1. 进入 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，然后点击目标集群的名称，进入其概览页面。
 
-2. 点击右上角的**连接**。将显示连接对话框。
+2. 点击右上角的 **Connect**，会显示连接对话框。
 
-3. 确保连接对话框中的配置与你的操作环境匹配。
+3. 确认连接对话框中的配置与你的操作环境一致。
 
-    - **连接类型**设置为 `Public`
-    - **分支**设置为 `main`
-    - **连接方式**设置为 `General`
-    - **操作系统**与你的环境匹配。
+    - **Connection Type** 设置为 `Public`
+    - **Branch** 设置为 `main`
+    - **Connect With** 设置为 `General`
+    - **Operating System** 与你的环境匹配。
 
-    > **注意**
+    > **Note**
     >
-    > 在 Node.js 应用程序中，你不必提供 SSL CA 证书，因为 Node.js 在建立 TLS (SSL) 连接时默认使用内置的 [Mozilla CA 证书](https://wiki.mozilla.org/CA/Included_Certificates)。
+    > 在 Node.js 应用中，你无需提供 SSL CA 证书，因为 Node.js 在建立 TLS（SSL）连接时默认使用内置的 [Mozilla CA 证书](https://wiki.mozilla.org/CA/Included_Certificates)。
 
-4. 点击**生成密码**创建随机密码。
+4. 点击 **Generate Password** 以生成随机密码。
 
-    > **提示**
+    > **Tip**
     >
-    > 如果你之前已经生成过密码，可以使用原密码，也可以点击**重置密码**生成新密码。
+    > 如果之前已生成过密码，可以使用原有密码，或点击 **Reset Password** 生成新密码。
 
-5. 运行以下命令复制 `.env.example` 并将其重命名为 `.env`：
+5. 运行以下命令，将 `.env.example` 复制并重命名为 `.env`：
 
     ```shell
     cp .env.example .env
     ```
 
-6. 编辑 `.env` 文件，按如下方式设置环境变量，用连接对话框中的连接参数替换相应的占位符 `{}`：
+6. 编辑 `.env` 文件，按照以下方式设置环境变量，将对应的占位符 `{}` 替换为连接对话框中的连接参数：
 
     ```dotenv
     TIDB_HOST='{host}'
@@ -119,23 +119,23 @@ npm install
 
 <div label="TiDB Cloud Dedicated">
 
-1. 导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称进入其概览页面。
+1. 进入 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，然后点击目标集群的名称，进入其概览页面。
 
-2. 点击右上角的**连接**。将显示连接对话框。
+2. 点击右上角的 **Connect**，会显示连接对话框。
 
-3. 在连接对话框中，从**连接类型**下拉列表中选择**公共端点**，然后点击 **CA 证书**下载 CA 证书。
+3. 在连接对话框中，从 **Connection Type** 下拉列表选择 **Public**，然后点击 **CA cert** 下载 CA 证书。
 
-    如果你尚未配置 IP 访问列表，请在首次连接之前点击**配置 IP 访问列表**或按照[配置 IP 访问列表](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)中的步骤进行配置。
+    如果尚未配置 IP 访问列表，请点击 **Configure IP Access List** 或按照 [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) 的步骤进行配置，然后再首次连接。
 
-    除了**公共端点**连接类型外，TiDB Cloud Dedicated 还支持**专用端点**和 **VPC 对等连接**连接类型。更多信息，请参见[连接到 TiDB Cloud Dedicated 集群](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)。
+    除了 **Public** 连接类型外，TiDB Cloud Dedicated 还支持 **Private Endpoint** 和 **VPC Peering** 连接类型。更多信息请参见 [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)。
 
-4. 运行以下命令复制 `.env.example` 并将其重命名为 `.env`：
+4. 运行以下命令，将 `.env.example` 复制并重命名为 `.env`：
 
     ```shell
     cp .env.example .env
     ```
 
-5. 编辑 `.env` 文件，按如下方式设置环境变量，用连接对话框中的连接参数替换相应的占位符 `{}`：
+5. 编辑 `.env` 文件，按照以下方式设置环境变量，将对应的占位符 `{}` 替换为连接对话框中的连接参数：
 
     ```shell
     TIDB_HOST='{host}'
@@ -153,13 +153,13 @@ npm install
 
 <div label="TiDB Self-Managed">
 
-1. 运行以下命令复制 `.env.example` 并将其重命名为 `.env`：
+1. 运行以下命令，将 `.env.example` 复制并重命名为 `.env`：
 
     ```shell
     cp .env.example .env
     ```
 
-2. 编辑 `.env` 文件，按如下方式设置环境变量，用连接对话框中的连接参数替换相应的占位符 `{}`：
+2. 编辑 `.env` 文件，按照以下方式设置环境变量，将对应的占位符 `{}` 替换为连接对话框中的连接参数：
 
     ```shell
     TIDB_HOST='{host}'
@@ -169,7 +169,7 @@ npm install
     TIDB_DB_NAME='test'
     ```
 
-    如果你在本地运行 TiDB，默认主机地址是 `127.0.0.1`，密码为空。
+    如果你在本地运行 TiDB，默认主机地址为 `127.0.0.1`，密码为空。
 
 3. 保存 `.env` 文件。
 
@@ -177,9 +177,9 @@ npm install
 
 </SimpleTab>
 
-### 步骤 4：运行示例程序
+### 第四步：运行示例应用
 
-运行以下命令执行示例代码：
+运行以下命令以执行示例代码：
 
 ```shell
 npm start
@@ -204,9 +204,9 @@ Executing (default): DELETE FROM `players` WHERE `id` = 6
 
 ## 示例代码片段
 
-你可以参考以下示例代码片段来完成自己的应用程序开发。
+你可以参考以下示例代码片段，完成你自己的应用开发。
 
-有关完整的示例代码和运行方法，请查看 [tidb-samples/tidb-nodejs-sequelize-quickstart](https://github.com/tidb-samples/tidb-nodejs-sequelize-quickstart) 仓库。
+完整示例代码和运行方式，请查阅 [tidb-samples/tidb-nodejs-sequelize-quickstart](https://github.com/tidb-samples/tidb-nodejs-sequelize-quickstart) 仓库。
 
 ### 连接到 TiDB
 
@@ -219,18 +219,18 @@ import { Sequelize } from 'sequelize';
 export function initSequelize() {
   return new Sequelize({
     dialect: 'mysql',
-    host: process.env.TIDB_HOST || 'localhost',     // TiDB 主机，例如：{gateway-region}.aws.tidbcloud.com
+    host: process.env.TIDB_HOST || 'localhost',     // TiDB 主机地址，例如：{gateway-region}.aws.tidbcloud.com
     port: Number(process.env.TIDB_PORT) || 4000,    // TiDB 端口，默认：4000
-    username: process.env.TIDB_USER || 'root',      // TiDB 用户，例如：{prefix}.root
+    username: process.env.TIDB_USER || 'root',      // TiDB 用户名，例如：{prefix}.root
     password: process.env.TIDB_PASSWORD || 'root',  // TiDB 密码
-    database: process.env.TIDB_DB_NAME || 'test',   // TiDB 数据库名称，默认：test
+    database: process.env.TIDB_DB_NAME || 'test',   // TiDB 数据库名，默认：test
     dialectOptions: {
       ssl:
         process.env?.TIDB_ENABLE_SSL === 'true'     // （可选）启用 SSL
           ? {
               minVersion: 'TLSv1.2',
               rejectUnauthorized: true,
-              ca: process.env.TIDB_CA_PATH          // （可选）自定义 CA 证书的路径
+              ca: process.env.TIDB_CA_PATH          // （可选）自定义 CA 证书路径
                 ? readFileSync(process.env.TIDB_CA_PATH)
                 : undefined,
             }
@@ -243,9 +243,9 @@ export async function getSequelize() {
     sequelize = initSequelize();
     try {
       await sequelize.authenticate();
-      logger.info('Connection has been established successfully.');
+      logger.info('连接已成功建立。');
     } catch (error) {
-      logger.error('Unable to connect to the database:');
+      logger.error('无法连接到数据库：');
       logger.error(error);
       throw error;
     }
@@ -256,27 +256,27 @@ export async function getSequelize() {
 
 ### 插入数据
 
-以下查询创建一个 `Players` 记录并返回一个 `Players` 对象：
+以下示例向 `Players` 表插入一条记录，并返回一个 `Players` 对象：
 
 ```typescript
-logger.info('Creating a new player...');
+logger.info('创建新玩家...');
 const newPlayer = await playersModel.create({
   id: 6,
   coins: 600,
   goods: 600,
 });
-logger.info('Created a new player.');
+logger.info('新玩家已创建。');
 logger.info(newPlayer.toJSON());
 ```
 
-更多信息，请参考[插入数据](/develop/dev-guide-insert-data.md)。
+更多信息，请参考 [Insert data](/develop/dev-guide-insert-data.md)。
 
 ### 查询数据
 
-以下查询返回一个金币数量大于 `300` 的 `Players` 记录：
+以下查询返回 `coins` 大于 `300` 的单个 `Players` 记录：
 
 ```typescript
-logger.info('Reading all players with coins > 300...');
+logger.info('读取所有 coins > 300 的玩家...');
 const allPlayersWithCoinsGreaterThan300 = await playersModel.findAll({
   where: {
     coins: {
@@ -284,55 +284,55 @@ const allPlayersWithCoinsGreaterThan300 = await playersModel.findAll({
     },
   },
 });
-logger.info('Read all players with coins > 300.');
+logger.info('已读取所有 coins > 300 的玩家。');
 logger.info(allPlayersWithCoinsGreaterThan300.map((p) => p.toJSON()));
 ```
 
-更多信息，请参考[查询数据](/develop/dev-guide-get-data-from-single-table.md)。
+更多信息，请参考 [Query data](/develop/dev-guide-get-data-from-single-table.md)。
 
 ### 更新数据
 
-以下查询将在[插入数据](#插入数据)部分创建的 ID 为 `6` 的 `Players` 的金币和物品数量设置为 `700`：
+以下查询将 `ID` 为 `6` 的 `Players` 的 `coins` 和 `goods` 设置为 `700`，该记录在 [插入数据](#insert-data) 部分已创建：
 
 ```typescript
-logger.info('Updating the new player...');
+logger.info('更新新玩家...');
 await newPlayer.update({ coins: 700, goods: 700 });
-logger.info('Updated the new player.');
+logger.info('已更新新玩家。');
 logger.info(newPlayer.toJSON());
 ```
 
-更多信息，请参考[更新数据](/develop/dev-guide-update-data.md)。
+更多信息，请参考 [Update data](/develop/dev-guide-update-data.md)。
 
 ### 删除数据
 
-以下查询删除在[插入数据](#插入数据)部分创建的 ID 为 `6` 的 `Player` 记录：
+以下查询删除在 [插入数据](#insert-data) 部分创建的 `ID` 为 `6` 的 `Player` 记录：
 
 ```typescript
-logger.info('Deleting the new player...');
+logger.info('删除新玩家...');
 await newPlayer.destroy();
 const deletedNewPlayer = await playersModel.findByPk(6);
-logger.info('Deleted the new player.');
+logger.info('已删除新玩家。');
 logger.info(deletedNewPlayer?.toJSON());
 ```
 
-更多信息，请参考[删除数据](/develop/dev-guide-delete-data.md)。
+更多信息，请参考 [Delete data](/develop/dev-guide-delete-data.md)。
 
-## 下一步
+## 后续步骤
 
-- 从 [Sequelize 文档](https://sequelize.org/)中了解更多 ORM 框架 Sequelize 驱动程序的用法。
-- 通过[开发者指南](/develop/dev-guide-overview.md)中的章节了解 TiDB 应用程序开发的最佳实践，例如[插入数据](/develop/dev-guide-insert-data.md)、[更新数据](/develop/dev-guide-update-data.md)、[删除数据](/develop/dev-guide-delete-data.md)、[单表读取](/develop/dev-guide-get-data-from-single-table.md)、[事务](/develop/dev-guide-transaction-overview.md)和 [SQL 性能优化](/develop/dev-guide-optimize-sql-overview.md)。
-- 通过专业的 [TiDB 开发者课程](https://www.pingcap.com/education/)学习，并在通过考试后获得 [TiDB 认证](https://www.pingcap.com/education/certification/)。
+- 了解更多关于 ORM 框架 Sequelize 驱动的用法，请参考 [Sequelize 文档](https://sequelize.org/)。
+- 通过 [开发者指南](https://www.pingcap.com/education/) 中的章节学习 TiDB 应用开发的最佳实践，例如 [Insert data](/develop/dev-guide-insert-data.md)、[Update data](/develop/dev-guide-update-data.md)、[Delete data](/develop/dev-guide-delete-data.md)、[单表读取](/develop/dev-guide-get-data-from-single-table.md)、[事务](/develop/dev-guide-transaction-overview.md) 和 [SQL 性能优化](/develop/dev-guide-optimize-sql-overview.md)。
+- 通过专业的 [TiDB 开发者课程](https://www.pingcap.com/education/) 学习，并在考试通过后获得 [TiDB 认证](https://www.pingcap.com/education/certification/)。
 
 ## 需要帮助？
 
 <CustomContent platform="tidb">
 
-在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区咨询，或者[提交支持工单](/support.md)。
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或 [提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区咨询，或者[提交支持工单](https://tidb.support.pingcap.com/)。
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或 [提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>
