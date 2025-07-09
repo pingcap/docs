@@ -7,13 +7,13 @@ summary: Learn about how to optimize your resource allocation for TiDB Cloud Ded
 
 As a Hybrid Transactional and Analytical Processing (HTAP) database, [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters can support multiple business applications, each with different quality of service (QoS) requirements. In some cases, you might need to allocate more resources to high-priority applications to maintain acceptable latency levels.
 
-TiDB Cloud Dedicated offers resource optimization features, including [Resource Control](/tidb-resource-control.md) and the [TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md) feature. These features help you allocate resources efficiently in multi-business scenarios.
+TiDB Cloud Dedicated offers resource optimization features, including [Resource Control](/tidb-resource-control-ru-groups.md) and the [TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md) feature. These features help you allocate resources efficiently in multi-business scenarios.
 
 ## Use Resource Control
 
-[Resource Control](/tidb-resource-control.md) lets you divide the storage nodes (TiKV or TiFlash) of a TiDB Cloud Dedicated cluster into multiple logical groups. In systems with mixed workloads, you can assign workloads to separate resource groups to ensure resource isolation and meet QoS requirements.
+[Resource Control](/tidb-resource-control-ru-groups.md) lets you divide the storage nodes (TiKV or TiFlash) of a TiDB Cloud Dedicated cluster into multiple logical groups. In systems with mixed workloads, you can assign workloads to separate resource groups to ensure resource isolation and meet QoS requirements.
 
-If the cluster experiences unexpected SQL performance issues, you can use [SQL bindings](/sql-statements/sql-statement-create-binding.md) or [manage runaway queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries) alongside resource groups to temporarily limit the resource consumption of specific SQL statements.
+If the cluster experiences unexpected SQL performance issues, you can use [SQL bindings](/sql-statements/sql-statement-create-binding.md) or [manage runaway queries](/tidb-resource-control-ru-groups.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries) alongside resource groups to temporarily limit the resource consumption of specific SQL statements.
 
 By using Resource Control effectively, you can reduce the number of clusters, simplify operations and maintenance, and lower management costs.
 
