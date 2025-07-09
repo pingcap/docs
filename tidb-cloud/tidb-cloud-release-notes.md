@@ -107,7 +107,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - Relevance-based ranking: results are ranked using the industry-standard BM25 algorithm for optimal relevance.
     - Native SQL compatibility: seamlessly use SQL features such as filtering, grouping, and joining with full-text search.
 
-  To get started, see [Full Text Search with SQL](/vector-search/vector-search-full-text-search-sql.md) or [Full Text Search with Python](/vector-search/vector-search-full-text-search-python.md).
+  To get started, see [Full Text Search with SQL](/tidb-cloud/vector-search-full-text-search-sql.md) or [Full Text Search with Python](/tidb-cloud/vector-search-full-text-search-python.md).
 
 - Increase the maximum TiFlash node storage for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster:
 
