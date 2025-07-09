@@ -244,8 +244,10 @@
        - [Configuration](/garbage-collection-configuration.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
   - Optimize Resource Allocation
-    - [Overview of Resource Allocation](/tidb-cloud/optimize-resource-allocation.md)
-    - [Resource Control](/tidb-resource-control.md)
+    - Resource Manager
+      - [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md)
+      - [Manage Runaway Queries](/tidb-resource-control-runaway-queries.md)
+      - [Manage Background Tasks](/tidb-resource-control-background-tasks.md)
     - TiDB Node Group
       - [Overview of TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md)
       - [Manage TiDB Node Groups](/tidb-cloud/tidb-node-group-management.md)
@@ -829,12 +831,6 @@
   - [System Variables](/system-variables.md)
   - [Server Status Variables](/status-variables.md)
   - [Table Filter](/table-filter.md)
-  - Optimize Resource Allocation
-    - [Overview of Resource Allocation](/tidb-cloud/optimize-resource-allocation.md)
-    - [Resource Control](/tidb-resource-control.md)
-    - TiDB Node Group
-      - [Overview of TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md)
-      - [Manage TiDB Node Groups](/tidb-cloud/tidb-node-group-management.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
   - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
