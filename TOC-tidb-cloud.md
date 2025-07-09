@@ -612,6 +612,7 @@
       - [Functions That Return JSON](/functions-and-operators/json-functions/json-functions-return.md)
       - [JSON Utility Functions](/functions-and-operators/json-functions/json-functions-utility.md)
       - [Functions That Aggregate JSON](/functions-and-operators/json-functions/json-functions-aggregate.md)
+      - [Functions That Validate JSON](/functions-and-operators/json-functions/json-functions-validate.md)
     - [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md)
     - [GROUP BY Modifiers](/functions-and-operators/group-by-modifier.md)
     - [Window Functions](/functions-and-operators/window-functions.md)
