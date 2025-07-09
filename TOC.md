@@ -20,7 +20,7 @@
 -   開発する
     -   [概要](/develop/dev-guide-overview.md)
     -   クイックスタート
-        -   [TiDB Cloudサーバーレスクラスタの構築](/develop/dev-guide-build-cluster-in-cloud.md)
+        -   [{{{ .starter }}}クラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
         -   [TiDB の CRUD SQL](/develop/dev-guide-tidb-crud-sql.md)
     -   アプリケーション例
         -   Java
@@ -493,7 +493,7 @@
             -   [ブロックリストと許可リスト](/dm/dm-block-allow-table-lists.md)
             -   [Binlogイベントフィルター](/dm/dm-binlog-event-filter.md)
             -   [SQL 式を使用して DML をフィルタリングする](/dm/feature-expression-filter.md)
-            -   [オンライン DDL ツールのサポート](/dm/dm-online-ddl-tool-support.md)
+            -   [オンラインDDLツールのサポート](/dm/dm-online-ddl-tool-support.md)
             -   [暗号化と復号化のための秘密鍵をカスタマイズする](/dm/dm-customized-secret-key.md)
             -   データ移行タスクの管理
                 -   [タスクの事前チェック](/dm/dm-precheck.md)
@@ -631,7 +631,7 @@
             -   [TiCDC Changefeedフィード構成](/ticdc/ticdc-changefeed-config.md)
             -   出力プロトコル
                 -   [TiCDC Avroプロトコル](/ticdc/ticdc-avro-protocol.md)
-                -   [TiCDC Canal- JSON プロトコル](/ticdc/ticdc-canal-json.md)
+                -   [TiCDC Canal-JSON プロトコル](/ticdc/ticdc-canal-json.md)
                 -   [TiCDC CSV プロトコル](/ticdc/ticdc-csv.md)
                 -   [TiCDC デベジウムプロトコル](/ticdc/ticdc-debezium.md)
                 -   [TiCDCオープンプロトコル](/ticdc/ticdc-open-protocol.md)

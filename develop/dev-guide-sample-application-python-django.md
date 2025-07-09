@@ -15,7 +15,7 @@ TiDB は MySQL 互換のデータベースであり、 [ジャンゴ](https://ww
 
 > **注記：**
 >
-> このチュートリアルは、 TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed クラスターで機能します。
+> このチュートリアルは、{{{ .starter }}}、 TiDB Cloud Dedicated、および TiDB Self-Managed クラスターで機能します。
 
 ## 前提条件 {#prerequisites}
 
@@ -29,7 +29,7 @@ TiDB は MySQL 互換のデータベースであり、 [ジャンゴ](https://ww
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [{{{ .starter }}} クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
@@ -37,7 +37,7 @@ TiDB は MySQL 互換のデータベースであり、 [ジャンゴ](https://ww
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [{{{ .starter }}} クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
@@ -78,7 +78,7 @@ mysqlclient のインストールで問題が発生した場合は、 [mysqlclie
 選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
 <SimpleTab>
-<div label="TiDB Cloud Serverless">
+<div label="{{{ .starter }}}">
 
 1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -123,7 +123,7 @@ mysqlclient のインストールで問題が発生した場合は、 [mysqlclie
 
     プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに置き換えてください。
 
-    TiDB Cloud Serverless は安全な接続を必要とします。mysqlclient の`ssl_mode`デフォルトで`PREFERRED`に設定されているため、 `CA_PATH`手動で指定する必要はありません。空のままにしておいてください。ただし、特別な理由により`CA_PATH`手動で指定する必要がある場合は、 [TiDB Cloud ServerlessへのTLS接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters)を参照して、さまざまなオペレーティングシステムの証明書パスを取得できます。
+    {{{ .starter }}} は安全な接続を必要とします。mysqlclient の`ssl_mode`デフォルトで`PREFERRED`に設定されているため、 `CA_PATH`手動で指定する必要はありません。空のままにしておいてください。ただし、特別な理由により`CA_PATH`手動で指定する必要がある場合は、 [{{{ .starter }}} への TLS 接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters)を参照して、さまざまなオペレーティングシステムの証明書パスを取得できます。
 
 7.  `.env`ファイルを保存します。
 
@@ -222,7 +222,7 @@ python manage.py migrate
 
 次のサンプル コード スニペットを参照して、独自のアプリケーション開発を完了することができます。
 
-完全なサンプル コードとその実行方法については、 [tidb-サンプル/tidb-python-django-quickstart](https://github.com/tidb-samples/tidb-python-django-quickstart)リポジトリを参照してください。
+完全なサンプル コードとその実行方法については、 [tidb-samples/tidb-python-django-quickstart](https://github.com/tidb-samples/tidb-python-django-quickstart)リポジトリを参照してください。
 
 ### TiDBに接続する {#connect-to-tidb}
 

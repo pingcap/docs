@@ -3,13 +3,13 @@ title: LOAD STATS
 summary: TiDB データベースの LOAD STATS の使用法の概要。
 ---
 
-# ロード統計 {#load-stats}
+# 負荷統計 {#load-stats}
 
-`LOAD STATS`ステートメントは、統計を TiDB にロードするために使用されます。
+`LOAD STATS`ステートメントは統計を TiDB にロードするために使用されます。
 
 > **注記：**
 >
-> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> この機能は[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
 
 ## 概要 {#synopsis}
 
@@ -20,11 +20,11 @@ LoadStatsStmt ::=
 
 ## 例 {#examples}
 
-アドレス`http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}`アクセスすると、TiDB インスタンスの統計情報をダウンロードできます。
+アドレス`http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}`アクセスすると、TiDB インスタンスの統計をダウンロードできます。
 
 `LOAD STATS ${stats_path}`使用して特定の統計ファイルを読み込むこともできます。
 
-`${stats_path}`は絶対パスでも相対パスでもかまいません。相対パスを使用する場合、対応するファイルは`tidb-server`が開始するパスから検索されます。次に例を示します。
+`${stats_path}`絶対パスでも相対パスでも構いません。相対パスを使用した場合、対応するファイルは`tidb-server`開始するパスから検索されます。以下に例を示します。
 
 ```sql
 LOAD STATS '/tmp/stats.json';
@@ -32,7 +32,7 @@ LOAD STATS '/tmp/stats.json';
 
     Query OK, 0 rows affected (0.00 sec)
 
-## MySQL 互換性 {#mysql-compatibility}
+## MySQLの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL 構文に対する TiDB 拡張です。
 

@@ -119,11 +119,11 @@ systemctl start docker
 
 ### オプション1: TiDB CloudとProxySQLを統合する {#option-1-integrate-tidb-cloud-with-proxysql}
 
-この統合では、 [ProxySQL Docker イメージ](https://hub.docker.com/r/proxysql/proxysql)とTiDB Cloud Serverless クラスターを使用します。以下の手順ではポート`16033`に ProxySQL を設定するため、このポートが使用可能であることを確認してください。
+この統合では、 [ProxySQL Docker イメージ](https://hub.docker.com/r/proxysql/proxysql)と {{{ .starter }}} クラスターを使用します。以下の手順では、ポート`16033`に ProxySQL を設定するため、このポートが使用可能であることを確認してください。
 
-#### ステップ1. TiDB Cloud Serverlessクラスターを作成する {#step-1-create-a-tidb-cloud-serverless-cluster}
+#### ステップ1. {{{ .starter }}} クラスターを作成する {#step-1-create-a-starter-cluster}
 
-1.  [無料のTiDB Cloud Serverlessクラスターを作成する](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster) 。クラスターに設定したルートパスワードを覚えておいてください。
+1.  [無料の {{{ .starter }}} クラスターを作成する](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster) 。クラスターに設定したルートパスワードを覚えておいてください。
 2.  後で使用するために、クラスターのホスト名、ポート、およびユーザー名を取得します。
 
     1.  [クラスター](https://tidbcloud.com/project/clusters)ページで、クラスター名をクリックしてクラスターの概要ページに移動します。
@@ -325,12 +325,12 @@ systemctl start docker
     >
     > 1.  クラスターのユーザー名とパスワードを使用してユーザーを追加します。
     > 2.  ユーザーを監視アカウントに割り当てます。
-    > 3.  TiDB Cloud Serverless クラスターをホストのリストに追加します。
-    > 4.  ProxySQL とTiDB Cloud Serverless クラスター間の安全な接続を有効にします。
+    > 3.  {{{ .starter }}} クラスターをホストのリストに追加します。
+    > 4.  ProxySQL と {{{ .starter }}} クラスター間の安全な接続を有効にします。
     >
-    > より深く理解するために、 `proxysql-prepare.sql`ファイルを確認することを強くお勧めします。ProxySQL の設定の詳細については、 [ProxySQLドキュメント](https://proxysql.com/documentation/proxysql-configuration/)参照してください。
+    > より深く理解するために、 `proxysql-prepare.sql`ファイルを確認することを強くお勧めします。ProxySQL の設定の詳細については、 [ProxySQL ドキュメント](https://proxysql.com/documentation/proxysql-configuration/)参照してください。
 
-    以下は出力例です。出力にクラスターのホスト名が表示されています。これは、ProxySQL とTiDB Cloud Serverless クラスター間の接続が確立されていることを意味します。
+    以下は出力例です。出力にクラスターのホスト名が表示されています。これは、ProxySQL と {{{ .starter }}} クラスター間の接続が確立されていることを意味します。
 
         *************************** 1. row ***************************
             hostgroup_id: 0
@@ -384,7 +384,7 @@ systemctl start docker
     SELECT VERSION();
     ```
 
-    TiDBのバージョンが表示されていれば、ProxySQL経由でTiDB Cloud Serverlessクラスターに正常に接続されています。MySQLクライアントを終了するには、 `quit`入力して<kbd>Enterキー</kbd>を押してください。
+    TiDBのバージョンが表示されている場合は、ProxySQLを介して{{{.starter}}}クラスターに正常に接続されています。MySQLクライアントを終了するには、 `quit`入力して<kbd>Enterキー</kbd>を押してください。
 
     > **注記：**
     >
@@ -670,7 +670,7 @@ ProxySQLをTiDBのプロキシとして使用するには、ProxySQLを設定す
 
 > **注記：**
 >
-> 以下のセクションでは、ProxySQL の必須設定項目のみを記載しています。設定項目の包括的なリストについては、 [ProxySQLドキュメント](https://proxysql.com/documentation/proxysql-configuration/)参照してください。
+> 以下のセクションでは、ProxySQL の必須設定項目のみを記載しています。設定項目の包括的なリストについては、 [ProxySQL ドキュメント](https://proxysql.com/documentation/proxysql-configuration/)参照してください。
 
 ##### オプション 1: 管理インターフェースを使用して ProxySQL を構成する {#option-1-configure-proxysql-using-the-admin-interface}
 
@@ -682,7 +682,7 @@ ProxySQLをTiDBのプロキシとして使用するには、ProxySQLを設定す
 
     上記の手順を実行すると、ProxySQL 管理者プロンプトが表示されます。
 
-2.  使用するTiDBクラスターを設定します。ProxySQLに1つまたは複数のTiDBクラスターを追加できます。以下の文は、例えば1つのTiDB Cloud Dedicatedクラスターを追加します。1と`<tidb cloud dedicated cluster host>` `<tidb cloud dedicated cluster port>` 、 TiDB Cloudのエンドポイントとポート番号（デフォルトは`4000` ）に置き換えてください。
+2.  使用するTiDBクラスターを設定します。ProxySQLに1つまたは複数のTiDBクラスターを追加できます。以下の文は、例えば1つのTiDB Cloud Dedicatedクラスターを追加します。1と`<tidb cloud dedicated cluster port>` `<tidb cloud dedicated cluster host>` TiDB Cloudのエンドポイントとポート番号（デフォルトは`4000` ）に置き換えてください。
 
     ```sql
     INSERT INTO mysql_servers(hostgroup_id, hostname, port) 
@@ -991,7 +991,7 @@ ProxySQLをTiDBのプロキシとして使用するには、ProxySQLを設定す
     > -   ルール`^SELECT.*FOR UPDATE$`に、 `rule_id`を`1` 、 `destination_hostgroup`を`0`として追加します。SQL文がこのルールに一致する場合、リクエストは`hostgroup`を`0`としてTiDBクラスターに転送されます。
     > -   ルール`^SELECT`に、 `rule_id`を`2` 、 `destination_hostgroup`を`1`として追加します。SQL文がこのルールに一致する場合、リクエストは`hostgroup`を`1`としてTiDBクラスターに転送されます。
     >
-    > より深く理解するために、 `proxysql-prepare.sql`ファイルを確認することを強くお勧めします。ProxySQL の設定の詳細については、 [ProxySQLドキュメント](https://proxysql.com/documentation/proxysql-configuration/)参照してください。
+    > より深く理解するために、 `proxysql-prepare.sql`ファイルを確認することを強くお勧めします。ProxySQL の設定の詳細については、 [ProxySQL ドキュメント](https://proxysql.com/documentation/proxysql-configuration/)参照してください。
 
     以下は、ProxySQL パターンがクエリ ルールと一致する方法に関する追加情報です。
 

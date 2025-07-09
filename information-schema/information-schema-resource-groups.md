@@ -5,11 +5,11 @@ summary: RESOURCE_GROUPS` information_schema テーブルについて学習し�
 
 # リソースグループ {#resource-groups}
 
-`RESOURCE_GROUPS`表には、すべてのリソース グループに関する情報が表示されます。詳細については、 [リソース制御を使用してリソースの分離を実現する](/tidb-resource-control.md)参照してください。
+`RESOURCE_GROUPS`表にはすべてのリソースグループに関する情報が表示されます。詳細については、 [リソース制御を使用してリソースの分離を実現する](/tidb-resource-control.md)参照してください。
 
 > **注記：**
 >
-> このテーブルは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> このテーブルは[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 ```sql
 USE information_schema;
@@ -76,13 +76,13 @@ SELECT * FROM information_schema.resource_groups WHERE NAME = 'rg1'; -- View the
 1 row in set (0.00 sec)
 ```
 
-`RESOURCE_GROUPS`の表の列の説明は次のとおりです。
+`RESOURCE_GROUPS`表の列の説明は次のとおりです。
 
 -   `NAME` : リソース グループの名前。
--   `RU_PER_SEC` : リソース グループのバックフィル速度。単位は RU/秒で、RU は[リクエストユニット](/tidb-resource-control.md#what-is-request-unit-ru)意味します。
--   `PRIORITY` : TiKV で処理されるタスクの絶対的な優先度。 `PRIORITY`設定に従って、さまざまなリソースがスケジュールされます。 `PRIORITY`が高いタスクが最初にスケジュールされます。 `PRIORITY`が同じリソース グループの場合、タスクは`RU_PER_SEC`構成に従って比例してスケジュールされます。 `PRIORITY`が指定されていない場合、デフォルトの優先度は`MEDIUM`です。
+-   `RU_PER_SEC` : リソースグループのバックフィル速度。単位はRU/秒で、RUは[リクエストユニット](/tidb-resource-control.md#what-is-request-unit-ru)意味します。
+-   `PRIORITY` : TiKVで処理されるタスクの絶対的な優先度。異なるリソースは`PRIORITY`設定に従ってスケジュールされます`PRIORITY`が高いタスクが最初にスケジュールされます。同じ`PRIORITY`のリソースグループの場合、タスクは`RU_PER_SEC`設定に従って比例的にスケジュールされます。10 `PRIORITY`指定されていない場合、デフォルトの優先度は`MEDIUM`です。
 -   `BURSTABLE` : リソース グループが利用可能なシステム リソースを過剰に使用することを許可するかどうか。
 
 > **注記：**
 >
-> TiDB は、クラスターの初期化中に`default`リソース グループを自動的に作成します。このリソース グループの場合、デフォルト値は`RU_PER_SEC`で、 `UNLIMITED` ( `INT`タイプの最大値である`2147483647`に相当) であり、 `BURSTABLE`モードです。どのリソース グループにもバインドされていないすべてのリクエストは、この`default`リソース グループに自動的にバインドされます。別のリソース グループに新しい構成を作成する場合は、必要に応じて`default`リソース グループの構成を変更することをお勧めします。
+> TiDBは、クラスタの初期化中に自動的にリソースグループ`default`を作成します。このリソースグループでは、デフォルト値は`RU_PER_SEC`ですが、 `UNLIMITED` （ `INT`タイプの最大値である`2147483647`相当）に設定され、モードは`BURSTABLE`です。どのリソースグループにもバインドされていないすべてのリクエストは、この`default`リソースグループに自動的にバインドされます。別のリソースグループの新しい構成を作成する場合は、必要に応じて`default`リソースグループの設定を変更することをお勧めします。

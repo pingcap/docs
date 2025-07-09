@@ -13,7 +13,7 @@ C#（「Cシャープ」と発音）は、Microsoftによって開発された.N
 
 -   [.NET 9.0 SDK](https://dotnet.microsoft.com/en-us/download)ダウンロードしてください。
 -   このチュートリアルでは、 `dotnet`コマンドラインツールを使用します。または、Visual Studio Code IDE を使用して C# コードを操作することもできます。
--   このチュートリアルを完了するには、TiDBインスタンスへのアクセスが必要です。TiDB TiDB Cloudの[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-serverless)または[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-dedicated)クラスター、あるいは`tiup playground`で開始したような TiDB Self-Managed クラスターを使用できます。
+-   このチュートリアルを完了するには、TiDBインスタンスへのアクセスが必要です。TiDB TiDB Cloudの[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-serverless)または[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-dedicated)クラスター、あるいは`tiup playground`で開始したような TiDB Self-Managed クラスターを使用できます。
 
 ## ステップ1. コンソールプロジェクトを設定する {#step-1-set-up-a-console-project}
 

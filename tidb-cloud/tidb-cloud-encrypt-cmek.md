@@ -9,6 +9,11 @@ summary: TiDB Cloudで顧客管理暗号化キー (CMEK) を使用する方法�
 
 プロジェクトでCMEKを有効にすると、そのプロジェクト内で作成されるすべてのクラスタは、CMEK鍵を使用して静的データを暗号化します。さらに、これらのクラスタによって生成されるバックアップデータも同じ鍵を使用して暗号化されます。CMEKが有効になっていない場合、 TiDB Cloudはエスクロー鍵を使用して、クラスタ内のすべての保存データを暗号化します。
 
+> **注記：**
+>
+> -   CMEKはBring Your Own Key（BYOK）に似ています。BYOKでは通常、ローカルで鍵を生成してアップロードします。ただし、 TiDB Cloudは[AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html)以内に生成された鍵のみをサポートします。
+> -   現在、この機能はリクエストに応じてのみご利用いただけます。この機能をお試しになりたい場合は、 [サポート](/tidb-cloud/tidb-cloud-support.md)ご連絡ください。
+
 ## 制限 {#restrictions}
 
 -   現在、 TiDB Cloud はCMEK を提供するために AWS KMS の使用のみをサポートしています。

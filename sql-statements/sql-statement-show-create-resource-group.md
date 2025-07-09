@@ -9,7 +9,7 @@ summary: TiDB での SHOW CREATE RESOURCE GROUP の使用方法を学習しま�
 
 > **注記：**
 >
-> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> この機能は[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
 
 ## 概要 {#synopsis}
 
@@ -44,7 +44,7 @@ SHOW CREATE RESOURCE GROUP rg1;
 1 row in set (0.01 sec)
 ```
 
-## MySQL 互換性 {#mysql-compatibility}
+## MySQLの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL の TiDB 拡張機能です。
 
@@ -53,4 +53,4 @@ SHOW CREATE RESOURCE GROUP rg1;
 -   [TiDB リソース制御](/tidb-resource-control.md)
 -   [リソースグループの作成](/sql-statements/sql-statement-alter-resource-group.md)
 -   [リソースグループの変更](/sql-statements/sql-statement-alter-resource-group.md)
--   [リソースグループを削除](/sql-statements/sql-statement-drop-resource-group.md)
+-   [リソースグループの削除](/sql-statements/sql-statement-drop-resource-group.md)

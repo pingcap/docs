@@ -17,8 +17,8 @@ TiDB は MySQL 互換のデータベースであり、JDBC (Java Database Connec
 
 > **注記：**
 >
-> -   このチュートリアルは、 TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed で機能します。
-> -   TiDB v7.4以降、JDBC URLで`connectionCollation`設定されておらず、 `characterEncoding`設定されていないか`UTF-8`に設定されている場合、JDBC接続で使用される照合順序はJDBCドライバーのバージョンによって異なります。詳細については、 [JDBC接続で使用される照合順序](/faq/sql-faq.md#collation-used-in-jdbc-connections)参照してください。
+> -   このチュートリアルは、{{{ .starter }}}、 TiDB Cloud Dedicated、および TiDB Self-Managed で動作します。
+> -   TiDB v7.4以降、JDBC URLで`connectionCollation`が設定されておらず、 `characterEncoding`設定されていないか`UTF-8`に設定されている場合、JDBC接続で使用される照合順序はJDBCドライバーのバージョンによって異なります。詳細については、 [JDBC接続で使用される照合順序](/faq/sql-faq.md#collation-used-in-jdbc-connections)参照してください。
 
 </CustomContent>
 
@@ -26,8 +26,8 @@ TiDB は MySQL 互換のデータベースであり、JDBC (Java Database Connec
 
 > **注記：**
 >
-> -   このチュートリアルは、 TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed で機能します。
-> -   TiDB v7.4以降、JDBC URLで`connectionCollation`が設定されておらず、 `characterEncoding`設定されていないか`UTF-8`に設定されている場合、JDBC接続で使用される照合順序はJDBCドライバーのバージョンによって異なります。詳細については、 [JDBC接続で使用される照合順序](https://docs.pingcap.com/tidb/stable/sql-faq#collation-used-in-jdbc-connections)参照してください。
+> -   このチュートリアルは、{{{ .starter }}}、 TiDB Cloud Dedicated、および TiDB Self-Managed で動作します。
+> -   TiDB v7.4以降、JDBC URLで`connectionCollation`設定されておらず、 `characterEncoding`設定されていないか`UTF-8`に設定されている場合、JDBC接続で使用される照合順序はJDBCドライバーのバージョンによって異なります。詳細については、 [JDBC接続で使用される照合順序](https://docs.pingcap.com/tidb/stable/sql-faq#collation-used-in-jdbc-connections)参照してください。
 
 </CustomContent>
 
@@ -44,7 +44,7 @@ TiDB は MySQL 互換のデータベースであり、JDBC (Java Database Connec
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [{{{ .starter }}} クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
@@ -52,11 +52,11 @@ TiDB は MySQL 互換のデータベースであり、JDBC (Java Database Connec
 
 > **注記：**
 >
-> セキュリティ上の理由から、インターネット経由でTiDBクラスタに接続する場合は、 `VERIFY_IDENTITY`使用してTLS接続を確立することをお勧めします。TiDB TiDB Cloud ServerlessとTiDB Cloud DedicatedはどちらもSubject Alternative Name（SAN）証明書を使用するため、MySQL Connector/Jのバージョンは[8.0.22](https://dev.mysql.com/doc/relnotes/connector-j/en/news-8-0-22.html)以上である必要があります。
+> セキュリティ上の理由から、インターネット経由でTiDBクラスターに接続する場合は、 `VERIFY_IDENTITY`使用してTLS接続を確立することをお勧めします。{{{ .starter }}}とTiDB Cloud DedicatedはどちらもSubject Alternative Name（SAN）証明書を使用するため、MySQL Connector/Jのバージョンは[8.0.22](https://dev.mysql.com/doc/relnotes/connector-j/en/news-8-0-22.html)以上である必要があります。
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [{{{ .starter }}} クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
@@ -79,7 +79,7 @@ cd tidb-java-jdbc-quickstart
 選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
 <SimpleTab>
-<div label="TiDB Cloud Serverless">
+<div label="{{{ .starter }}}">
 
 1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -124,7 +124,7 @@ cd tidb-java-jdbc-quickstart
 
     プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに置き換えてください。
 
-    TiDB Cloud Serverless は安全な接続を必要とします。そのため、 `USE_SSL`値を`true`に設定する必要があります。
+    {{{ .starter }}} は安全な接続を必要とします。そのため、 `USE_SSL`の値を`true`に設定する必要があります。
 
 7.  `env.sh`ファイルを保存します。
 

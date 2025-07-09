@@ -11,7 +11,7 @@ summary: テーブル作成における定義、ルール、ガイドライン�
 
 このドキュメントを読む前に、次のタスクが完了していることを確認してください。
 
--   [TiDB Cloudサーバーレスクラスタの構築](/develop/dev-guide-build-cluster-in-cloud.md) 。
+-   [{{{ .starter }}}クラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)読んでください。
 -   [データベースを作成する](/develop/dev-guide-create-database.md) 。
 
@@ -290,7 +290,7 @@ ALTER TABLE `bookshop`.`ratings` SET TIFLASH REPLICA 1;
 
 > **注記：**
 >
-> クラスターに**TiFlash**ノードが含まれていない場合、この SQL 文はエラー`1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0`報告します。5 [TiDB Cloudサーバーレスクラスタの構築](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-serverless-cluster)使用して、 **TiFlash**を含むTiDB Cloud Serverless クラスターを作成できます。
+> クラスターに**TiFlash**ノードが含まれていない場合、この SQL 文はエラー`1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0`報告します。5 [{{{ .starter }}}クラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-cluster)使用すると、 **TiFlash**を含む {{{ .starter }}} クラスターを作成できます。
 
 次に、次のクエリを実行できます。
 

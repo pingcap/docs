@@ -3,13 +3,13 @@ title: DROP RESOURCE GROUP
 summary: TiDB での DROP RESOURCE GROUP の使用方法を学習します。
 ---
 
-# リソースグループを削除 {#drop-resource-group}
+# リソースグループの削除 {#drop-resource-group}
 
 `DROP RESOURCE GROUP`ステートメントを使用してリソース グループを削除できます。
 
 > **注記：**
 >
-> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> この機能は[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
 
 ## 概要 {#synopsis}
 
@@ -27,7 +27,7 @@ ResourceGroupName ::=
 
 > **注記：**
 >
-> -   `DROP RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)が`ON`に設定されている場合にのみ実行できます。
+> -   `DROP RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) `ON`に設定されている場合にのみ実行できます。
 > -   `default`リソース グループは予約されており、削除できません。
 
 ## 例 {#examples}
@@ -77,12 +77,12 @@ Query OK, 1 rows affected (0.09 sec)
 Empty set (0.00 sec)
 ```
 
-## MySQL 互換性 {#mysql-compatibility}
+## MySQLの互換性 {#mysql-compatibility}
 
-MySQL も[リソースグループを削除](https://dev.mysql.com/doc/refman/8.0/en/drop-resource-group.html)サポートしていますが、TiDB は`FORCE`パラメータをサポートしていません。
+MySQL も[リソースグループの削除](https://dev.mysql.com/doc/refman/8.0/en/drop-resource-group.html)サポートしていますが、 TiDB は`FORCE`パラメータをサポートしていません。
 
 ## 参照 {#see-also}
 
 -   [リソースグループの変更](/sql-statements/sql-statement-alter-resource-group.md)
 -   [リソースグループの作成](/sql-statements/sql-statement-create-resource-group.md)
--   [リクエストユニット (RU)](/tidb-resource-control.md#what-is-request-unit-ru)
+-   [リクエストユニット（RU）](/tidb-resource-control.md#what-is-request-unit-ru)

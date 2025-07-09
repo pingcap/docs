@@ -5,11 +5,11 @@ summary: TIKV_REGION_PEERS` INFORMATION_SCHEMA テーブルについて学習し
 
 # TIKV_REGION_PEERS {#tikv-region-peers}
 
-`TIKV_REGION_PEERS`表には、TiKV 内の単一のリージョンノードの詳細情報 (学習者であるかリーダーであるかなど) が表示されます。
+`TIKV_REGION_PEERS`テーブルには、TiKV 内の単一のリージョンノードの詳細情報 (学習者であるかリーダーであるかなど) が表示されます。
 
 > **注記：**
 >
-> このテーブルは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> このテーブルは[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -59,6 +59,6 @@ WHERE
 -   IS_LEADER: ピアがリーダーであるかどうか。
 -   ステータス: ピアのステータス:
     -   保留中: 一時的に利用できません。
-    -   DOWN: オフラインで変換されました。このピアはサービスを提供しなくなりました。
+    -   DOWN: オフラインで変換済み。このピアはサービスを提供していません。
     -   正常: 正常に動作しています。
--   DOWN_SECONDS: オフラインの継続時間（秒単位）。
+-   DOWN_SECONDS: オフラインの継続時間（秒）。

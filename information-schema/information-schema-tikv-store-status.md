@@ -3,13 +3,13 @@ title: TIKV_STORE_STATUS
 summary: TIKV_STORE_STATUS` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# TIKV_ストアステータス {#tikv-store-status}
+# TIKV_ストア_ステータス {#tikv-store-status}
 
-`TIKV_STORE_STATUS`表には、クラスターに割り当てられた ID、アドレスとポート、現在のノードのステータス、容量、リージョンリーダーの数など、PD の API 経由の TiKV ノードの基本情報が表示されます。
+表`TIKV_STORE_STATUS`は、クラスターに割り当てられた ID、アドレスとポート、現在のノードのステータス、容量、リージョンリーダーの数など、PD の API 経由の TiKV ノードの基本情報が表示されます。
 
 > **注記：**
 >
-> このテーブルは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> このテーブルは[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -45,11 +45,11 @@ DESC TIKV_STORE_STATUS;
 19 rows in set (0.00 sec)
 ```
 
-`TIKV_STORE_STATUS`の表の列の説明は次のとおりです。
+`TIKV_STORE_STATUS`表の列の説明は次のとおりです。
 
 -   `STORE_ID` : ストアの ID。
 -   `ADDRESS` : ストアのアドレス。
--   `STORE_STATE` : ストア状態の識別子`STORE_STATE_NAME`に対応します。
+-   `STORE_STATE` : ストア状態の識別子`STORE_STATE_NAME`に相当します。
 -   `STORE_STATE_NAME` : ストア状態の名前。名前は`Up` 、 `Offline` 、または`Tombstone`です。
 -   `LABEL` : ストアに設定されたラベル。
 -   `VERSION` : ストアのバージョン番号。
