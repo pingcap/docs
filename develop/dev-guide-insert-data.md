@@ -13,7 +13,7 @@ summary: データの挿入方法について学習します。
 
 このドキュメントを読む前に、次のものを準備する必要があります。
 
--   [TiDB Cloudサーバーレスクラスタの構築](/develop/dev-guide-build-cluster-in-cloud.md) 。
+-   [{{{ .starter }}}クラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md) [データベースを作成する](/develop/dev-guide-create-database.md) [セカンダリインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md) [テーブルを作成する](/develop/dev-guide-create-table.md)
 
 ## 行を挿入する {#insert-rows}
@@ -240,7 +240,7 @@ Python の完全な例については、以下を参照してください。
 
 <CustomContent platform="tidb-cloud">
 
--   データのインポート： [TiDB Cloudコンソール](https://tidbcloud.com/)の[インポートの作成](/tidb-cloud/import-sample-data.md)ページ。ローカルの CSV ファイルをアップロード（TiDB Cloud Serverless のみ）し、Cloud Storage に保存されている**Dumpling**論理ダンプ（スキーマとデータ）、 **CSV**ファイル、または**Parquet**ファイルをインポートできます。詳細については、 [CSVファイルをTiDB Cloud Serverlessにインポートする](/tidb-cloud/import-csv-files-serverless.md)または[CSVファイルをTiDB Cloud Dedicatedにインポート](/tidb-cloud/import-csv-files.md)ご覧ください。
+-   データのインポート： [TiDB Cloudコンソール](https://tidbcloud.com/)の[インポートの作成](/tidb-cloud/import-sample-data.md)ページ。ローカルの CSV ファイル（{{{ .starter }}} のみ）をアップロードし、Cloud Storage に保存されている**Dumpling**論理ダンプ（スキーマとデータ）、 **CSV**ファイル、または**Parquet**ファイルをインポートできます。詳細については、 [CSV ファイルを {{{ .starter }}} にインポートする](/tidb-cloud/import-csv-files-serverless.md)または[CSVファイルをTiDB Cloud Dedicatedにインポート](/tidb-cloud/import-csv-files.md)ご覧ください。
 -   データレプリケーション： [TiDBデータ移行](https://docs.pingcap.com/tidb/stable/dm-overview) . MySQL、MariaDB、Amazon AuroraデータベースをTiDBに複製できます。また、ソースデータベースからシャード化されたインスタンスとテーブルのマージと移行もサポートしています。
 -   データのバックアップとリストア： TiDB Cloudコンソールの[バックアップ](/tidb-cloud/backup-and-restore.md)ページ。Dumpling**と**比較して、バックアップとリストアは***ビッグデータ***シナリオに適しています。
 
@@ -280,7 +280,7 @@ INSERT INTO `bookshop`.`users` (`id`, `balance`, `nickname`) VALUES (1, 0.00, 'n
     INSERT INTO `bookshop`.`users` (`balance`, `nickname`) VALUES (0.00, 'nicky');
     ```
 
--   この列を指定する***必要がある***ことが確実な場合は、ユーザー変数を変更することで、挿入時に[`SET`文](https://docs.pingcap.com/tidb/stable/sql-statement-set-variable)を使用して`AUTO_RANDOM`列を指定できるようにすることができます。
+-   この列を指定する***必要がある***ことが確実な場合は、ユーザー変数を変更することで、挿入時に[`SET`ステートメント](https://docs.pingcap.com/tidb/stable/sql-statement-set-variable)を使用して`AUTO_RANDOM`列を指定できるようにすることができます。
 
     ```sql
     SET @@allow_auto_random_explicit_insert = true;

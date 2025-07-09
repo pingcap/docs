@@ -9,7 +9,7 @@ summary: TiDB の ALTER RANGE の使用法の概要。
 
 > **注記：**
 >
-> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> この機能は[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
 
 ## 概要 {#synopsis}
 
@@ -33,4 +33,4 @@ ALTER RANGE global PLACEMENT POLICY = "deploy111";
 ALTER RANGE meta PLACEMENT POLICY = "five_replicas";
 ```
 
-上記の例では、2 つの配置ポリシー ( `deploy111`と`five_replicas` ) を作成し、異なるリージョンの制約を指定してから、配置ポリシー`deploy111`をクラスター範囲内のすべてのデータに適用し、配置ポリシー`five_replicas`をメタデータ範囲に適用します。
+上記の例では、2 つの配置ポリシー ( `deploy111`と`five_replicas` ) を作成し、異なるリージョンの制約を指定してから、 `deploy111`配置ポリシーをクラスター範囲内のすべてのデータに適用し、 `five_replicas`配置ポリシーをメタデータ範囲に適用します。

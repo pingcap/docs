@@ -5,11 +5,11 @@ summary: RUNAWAY_WATCHES` INFORMATION_SCHEMA テーブルについて学習し�
 
 # ランナウェイウォッチ {#runaway-watches}
 
-`RUNAWAY_WATCHES`表には、予想よりも多くのリソースを消費するランナウェイ クエリの監視リストが表示されます。詳細については、 [ランナウェイクエリ](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries)参照してください。
+`RUNAWAY_WATCHES`表は、予想以上にリソースを消費するランナウェイクエリの監視リストを示しています。詳細については、 [ランナウェイクエリ](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries)参照してください。
 
 > **注記：**
 >
-> このテーブルは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> このテーブルは[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -34,7 +34,7 @@ DESC RUNAWAY_WATCHES;
 
 ## 例 {#examples}
 
-ランナウェイクエリのウォッチリストをクエリします。
+ランナウェイクエリの監視リストをクエリします。
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES\G
@@ -70,7 +70,7 @@ RESOURCE_GROUP_NAME: rg2
 QUERY WATCH ADD RESOURCE GROUP rg1 SQL TEXT EXACT TO 'select * from sbtest.sbtest1';
 ```
 
-ランナウェイクエリのウォッチリストを再度クエリします。
+ランナウェイクエリの監視リストを再度クエリします。
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES\G
@@ -109,15 +109,15 @@ RESOURCE_GROUP_NAME: rg1
 3 row in set (0.00 sec)
 ```
 
-`RUNAWAY_WATCHES`表の各列フィールドの意味は次のとおりです。
+`RUNAWAY_WATCHES`テーブル内の各列フィールドの意味は次のとおりです。
 
 -   `ID` : 監視項目の ID。
 -   `RESOURCE_GROUP_NAME` : リソース グループの名前。
 -   `START_TIME` : 開始時刻。
--   `END_TIME` : 終了時刻`UNLIMITED`監視項目の有効期間が無制限であることを意味します。
+-   `END_TIME` : 終了時刻。2 `UNLIMITED` 、監視項目の有効期間が無制限であることを意味します。
 -   `WATCH` : クイック識別の一致タイプ。値は次のとおりです。
-    -   `Plan` 、プラン ダイジェストが一致していることを示します。この場合、 `WATCH_TEXT`列目にプラン ダイジェストが表示されます。
-    -   `Similar` SQL ダイジェストが一致したことを示します。この場合、 `WATCH_TEXT`列目に SQL ダイジェストが表示されます。
-    -   `Exact` SQL テキストが一致したことを示します。この場合、 `WATCH_TEXT`列目に SQL テキストが表示されます。
--   `SOURCE` : 監視項目のソース。2 `QUERY_LIMIT`で識別された場合は、識別された TiDB IP アドレスが表示されます。手動で追加された場合は、 `manual`が表示されます。
+    -   `Plan`プランダイジェストが一致していることを示します。この場合、 `WATCH_TEXT`列目にプランダイジェストが表示されます。
+    -   `Similar` SQLダイジェストが一致したことを示します。この場合、 `WATCH_TEXT`列目にSQLダイジェストが表示されます。
+    -   `Exact` SQLテキストが一致したことを示します。この場合、 `WATCH_TEXT`列目にSQLテキストが表示されます。
+-   `SOURCE` : 監視対象項目のソース。2 `QUERY_LIMIT`で識別された場合は、識別された TiDB IP アドレスが表示されます。手動で追加された場合は`manual`表示されます。
 -   `ACTION` : 識別後の対応する操作。

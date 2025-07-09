@@ -9,7 +9,7 @@ summary: TiDB での CREATE PLACEMENT POLICY の使用法。
 
 > **注記：**
 >
-> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> この機能は[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
 
 ## 概要 {#synopsis}
 
@@ -72,13 +72,13 @@ SHOW CREATE PLACEMENT POLICY p1;
     +--------+---------------------------------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## MySQL 互換性 {#mysql-compatibility}
+## MySQLの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
 ## 参照 {#see-also}
 
--   [SQL の配置ルール](/placement-rules-in-sql.md)
+-   [SQLの配置ルール](/placement-rules-in-sql.md)
 -   [表示配置](/sql-statements/sql-statement-show-placement.md)
 -   [配置ポリシーの変更](/sql-statements/sql-statement-alter-placement-policy.md)
 -   [ドロップ配置ポリシー](/sql-statements/sql-statement-drop-placement-policy.md)

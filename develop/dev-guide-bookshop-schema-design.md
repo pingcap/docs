@@ -103,7 +103,7 @@ tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --rati
 
 3.  **「Amazon S3 からのデータのインポート」**ページで、次のソースデータ情報を設定します。
 
-    -   **インポートファイル数**： TiDB Cloud Serverlessの場合は**「複数ファイル」**を選択してください。このフィールドはTiDB Cloud Dedicatedでは使用できません。
+    -   **インポートファイル数**：{{{.starter}}}の場合は**「複数ファイル」**を選択してください。このフィールドはTiDB Cloud Dedicatedでは使用できません。
     -   **含まれるスキーマ ファイル**:**はいを**選択します。
     -   **データ形式**: **SQL**を選択します。
     -   **フォルダー URI** : `s3://developer.pingcap.com/bookshop/`を入力します。
@@ -221,7 +221,7 @@ WHERE table_schema LIKE 'bookshop';
 | 書籍ID   | ビッグイント(20) | 書籍の一意のID（ [本](#books-table)にリンク）           |
 | ユーザーID | ビッグイント(20) | ユーザー固有識別子（ [ユーザー](#users-table)に関連付けられている） |
 | 量      | タイニーイント(4) | 購入数量                                       |
-| 注文した日時 | 日時         | 購入時間                                       |
+| 注文時    | 日時         | 購入時間                                       |
 
 ## データベース初期化スクリプト<code>dbinit.sql</code> {#database-initialization-script-code-dbinit-sql-code}
 

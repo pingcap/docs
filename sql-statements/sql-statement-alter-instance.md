@@ -5,11 +5,11 @@ summary: TiDB での ALTER INSTANCE` の使用法の概要を学習します。
 
 # インスタンスの変更 {#alter-instance}
 
-`ALTER INSTANCE`ステートメントは、単一の TiDB インスタンスに変更を加えるために使用されます。現在、TiDB は`RELOAD TLS`句のみをサポートしています。
+`ALTER INSTANCE`文は、単一の TiDB インスタンスに変更を加えるために使用されます。現在、TiDB は`RELOAD TLS`句のみをサポートしています。
 
 > **注記：**
 >
-> [TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) TLS 証明書を自動的に更新できるため、この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターには適用されません。
+> [{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) TLS 証明書を自動的に更新できるため、この機能は[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターには適用されません。
 
 ## TLSをリロード {#reload-tls}
 
@@ -25,9 +25,9 @@ summary: TiDB での ALTER INSTANCE` の使用法の概要を学習します。
 
 </CustomContent>
 
-新しくロードされた証明書、キー、および CA は、ステートメントが正常に実行された後に確立された接続で有効になります。このステートメントの実行前に確立された接続は影響を受けません。
+新しくロードされた証明書、鍵、およびCAは、ステートメントが正常に実行された後に確立された接続に対して有効になります。このステートメントの実行前に確立された接続には影響しません。
 
-再読み込み中にエラーが発生した場合、デフォルトではこのエラーメッセージが返され、以前のキーと証明書が引き続き使用されます。ただし、オプションの`NO ROLLBACK ON ERROR`追加した場合は、再読み込み中にエラーが発生してもエラーは返されず、後続のリクエストは TLS セキュリティ接続が無効な状態で処理されます。
+再読み込み中にエラーが発生した場合、デフォルトではこのエラーメッセージが返され、以前の鍵と証明書が引き続き使用されます。ただし、オプションの`NO ROLLBACK ON ERROR`追加した場合、再読み込み中にエラーが発生してもエラーは返されず、以降のリクエストはTLSセキュリティ接続が無効になった状態で処理されます。
 
 ## 構文図 {#syntax-diagram}
 
@@ -47,9 +47,9 @@ InstanceOption ::=
 ALTER INSTANCE RELOAD TLS;
 ```
 
-## MySQL 互換性 {#mysql-compatibility}
+## MySQLの互換性 {#mysql-compatibility}
 
-`ALTER INSTANCE RELOAD TLS`ステートメントは、元の構成パスからの再ロードのみをサポートします。ロード パスを動的に変更したり、TiDB の起動時に TLS 暗号化接続機能を動的に有効にしたりすることはサポートされません。この機能は、TiDB を再起動するとデフォルトで無効になります。
+`ALTER INSTANCE RELOAD TLS`文は、元の設定パスからの再ロードのみをサポートします。ロードパスの動的な変更や、TiDB 起動時の TLS 暗号化接続機能の動的な有効化はサポートしていません。この機能は、TiDB の再起動時にデフォルトで無効になります。
 
 ## 参照 {#see-also}
 

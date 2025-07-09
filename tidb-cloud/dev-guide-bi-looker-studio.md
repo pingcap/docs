@@ -25,7 +25,7 @@ TiDB は MySQL 互換のデータベース、 TiDB Cloud Serverless は完全に
 
 **TiDB Cloud Serverless クラスターがない場合は、次のように作成できます。**
 
--   [TiDB Cloud Serverless クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-serverless-cluster)
+-   [TiDB Cloud Serverless クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-cluster)
 
 ## ステップ1.データセットをインポートする {#step-1-import-a-dataset}
 

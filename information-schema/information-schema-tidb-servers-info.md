@@ -5,11 +5,11 @@ summary: TIDB_SERVERS_INFO` INFORMATION_SCHEMA テーブルについて学習し
 
 # TIDB_サーバー情報 {#tidb-servers-info}
 
-`TIDB_SERVERS_INFO`テーブルには、TiDBクラスタ内の TiDB サーバー (つまり、tidb-server プロセス) に関する情報が提供されます。
+`TIDB_SERVERS_INFO`テーブルは、TiDBクラスタ内の TiDB サーバー (つまり、tidb-server プロセス) に関する情報を提供します。
 
 > **注記：**
 >
-> このテーブルは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> このテーブルは[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -35,7 +35,7 @@ DESC tidb_servers_info;
 9 rows in set (0.00 sec)
 ```
 
-`TIDB_SERVERS_INFO`テーブルをビュー。
+`TIDB_SERVERS_INFO`テーブルをビュー:
 
 ```sql
 SELECT * FROM TIDB_SERVERS_INFO\G

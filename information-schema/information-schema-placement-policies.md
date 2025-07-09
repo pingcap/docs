@@ -5,11 +5,11 @@ summary: PLACEMENT_POLICIES` information_schema テーブルについて学習�
 
 # 配置ポリシー {#placement-policies}
 
-`PLACEMENT_POLICIES`表には、すべての配置ポリシーに関する情報が記載されています。詳細については、 [SQL の配置ルール](/placement-rules-in-sql.md)を参照してください。
+`PLACEMENT_POLICIES`表にはすべての配置ポリシーに関する情報が記載されています。詳細については[SQLの配置ルール](/placement-rules-in-sql.md)を参照してください。
 
 > **注記：**
 >
-> このテーブルは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> このテーブルは[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 ```sql
 USE information_schema;
@@ -38,7 +38,7 @@ DESC placement_policies;
 
 ## 例 {#examples}
 
-`PLACEMENT_POLICIES`テーブルには、すべての配置ポリシーのみが表示されます。配置ルールの標準バージョン (すべての配置ポリシーと配置ポリシーが割り当てられたオブジェクトを含む) を表示するには、代わりにステートメント`SHOW PLACEMENT`使用します。
+`PLACEMENT_POLICIES`表には、すべての配置ポリシーのみが表示されます。配置ルールの標準バージョン（すべての配置ポリシーと配置ポリシーが適用されたオブジェクトを含む）を表示するには、代わりにステートメント`SHOW PLACEMENT`使用します。
 
 ```sql
 CREATE TABLE t1 (a INT); 

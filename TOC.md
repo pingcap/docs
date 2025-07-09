@@ -20,7 +20,7 @@
 -   開発する
     -   [概要](/develop/dev-guide-overview.md)
     -   クイックスタート
-        -   [TiDB Cloudサーバーレスクラスタの構築](/develop/dev-guide-build-cluster-in-cloud.md)
+        -   [{{{ .starter }}}クラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
         -   [TiDB の CRUD SQL](/develop/dev-guide-tidb-crud-sql.md)
     -   アプリケーション例
         -   Java
@@ -493,7 +493,7 @@
             -   [ブロックリストと許可リスト](/dm/dm-block-allow-table-lists.md)
             -   [Binlogイベントフィルター](/dm/dm-binlog-event-filter.md)
             -   [SQL 式を使用して DML をフィルタリングする](/dm/feature-expression-filter.md)
-            -   [オンラインDDLツールのサポート](/dm/dm-online-ddl-tool-support.md)
+            -   [オンライン DDL ツールのサポート](/dm/dm-online-ddl-tool-support.md)
             -   [暗号化と復号化のための秘密鍵をカスタマイズする](/dm/dm-customized-secret-key.md)
             -   データ移行タスクの管理
                 -   [タスクの事前チェック](/dm/dm-precheck.md)
@@ -968,7 +968,7 @@
             -   [分離レベル](/transaction-isolation-levels.md)
             -   [楽観的トランザクション](/optimistic-transaction.md)
             -   [悲観的な取引](/pessimistic-transaction.md)
-            -   [非トランザクションDML文](/non-transactional-dml.md)
+            -   [非トランザクションDMLステートメント](/non-transactional-dml.md)
         -   [ビュー](/views.md)
         -   [パーティショニング](/partitioned-table.md)
         -   [一時テーブル](/temporary-tables.md)

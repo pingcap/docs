@@ -7,19 +7,19 @@ summary: SLOW_QUERY` INFORMATION_SCHEMA テーブルについて学習します�
 
 <CustomContent platform="tidb">
 
-`SLOW_QUERY`テーブルは、TiDB [遅いログファイル](/tidb-configuration-file.md#slow-query-file)の解析結果である現在のノードのスロークエリ情報を提供します。テーブル内の列名は、スローログ内のフィールド名に対応しています。
+`SLOW_QUERY`テーブルは、TiDB [遅いログファイル](/tidb-configuration-file.md#slow-query-file)の解析結果である、現在のノードのスロークエリ情報を提供します。テーブル内の列名は、スローログ内のフィールド名に対応しています。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-`SLOW_QUERY`テーブルは、TiDB [遅いログファイル](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#slow-query-file)の解析結果である現在のノードのスロークエリ情報を提供します。テーブル内の列名は、スローログ内のフィールド名に対応しています。
+`SLOW_QUERY`テーブルは、TiDB [遅いログファイル](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#slow-query-file)の解析結果である、現在のノードのスロークエリ情報を提供します。テーブル内の列名は、スローログ内のフィールド名に対応しています。
 
 </CustomContent>
 
 > **注記：**
 >
-> このテーブルは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> このテーブルは[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 <CustomContent platform="tidb">
 
@@ -119,15 +119,15 @@ DESC SLOW_QUERY;
     +-------------------------------+---------------------+------+------+---------+-------+
     79 rows in set (0.00 sec)
 
-`Query`列の最大ステートメント長は、 [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40)システム変数によって制限されます。
+`Query`列目のステートメントの最大長は、 [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40)システム変数によって制限されます。
 
 ## CLUSTER_SLOW_QUERY テーブル {#cluster-slow-query-table}
 
-`CLUSTER_SLOW_QUERY`テーブルは、クラスター内のすべてのノードのスロー クエリ情報を提供します。これは、TiDB スロー ログ ファイルの解析結果です。 `CLUSTER_SLOW_QUERY`テーブルは、 `SLOW_QUERY`と同じように使用できます。 `CLUSTER_SLOW_QUERY`テーブルのテーブル スキーマは、 `CLUSTER_SLOW_QUERY`に`INSTANCE`列が追加されている点で`SLOW_QUERY`テーブルのテーブル スキーマと異なります。 `INSTANCE`列は、スロー クエリの行情報の TiDB ノード アドレスを表します。
+`CLUSTER_SLOW_QUERY`テーブル`CLUSTER_SLOW_QUERY` 、クラスター内のすべてのノードのスロークエリ情報を提供します。これは、TiDBスローログファイルの解析結果です。3 テーブルは`CLUSTER_SLOW_QUERY` `SLOW_QUERY`と同じように使用できます。7 テーブルのテーブルスキーマは、 `CLUSTER_SLOW_QUERY`列に`INSTANCE`列が追加されている点で`SLOW_QUERY`テーブルと異なります。15 `INSTANCE`は、スロークエリの行情報の TiDB ノードアドレスを表します。
 
 > **注記：**
 >
-> このテーブルは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> このテーブルは[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 <CustomContent platform="tidb">
 
@@ -229,7 +229,7 @@ DESC CLUSTER_SLOW_QUERY;
 80 rows in set (0.00 sec)
 ```
 
-クラスター システム テーブルを照会すると、TiDB はすべてのノードからデータを取得するのではなく、関連する計算を他のノードにプッシュダウンします。実行プランは次のようになります。
+クラスタシステムテーブルへのクエリ実行時、TiDBはすべてのノードからデータを取得するのではなく、関連する計算を他のノードにプッシュダウンします。実行プランは以下のとおりです。
 
 ```sql
 DESC SELECT COUNT(*) FROM CLUSTER_SLOW_QUERY WHERE user = 'u1';
@@ -249,9 +249,9 @@ DESC SELECT COUNT(*) FROM CLUSTER_SLOW_QUERY WHERE user = 'u1';
 4 rows in set (0.00 sec)
 ```
 
-上記の実行プランでは、条件`user = u1`が他の ( `cop` ) TiDB ノードにプッシュダウンされ、集計演算子もプッシュダウンされます (グラフの`StreamAgg`演算子)。
+上記の実行プランでは、 `user = u1`条件が他の（ `cop` ）TiDBノードにプッシュダウンされ、集計演算子もプッシュダウンされます（グラフの`StreamAgg`の演算子）。
 
-現在、システム テーブルの統計が収集されていないため、一部の集計演算子をプッシュダウンできず、実行速度が遅くなることがあります。この場合、SQL HINT を手動で指定して集計演算子をプッシュダウンできます。例:
+現在、システムテーブルの統計情報が収集されていないため、一部の集計演算子をプッシュダウンできず、実行速度が低下することがあります。このような場合は、SQL HINTを手動で指定して、集計演算子をプッシュダウンすることができます。例：
 
 ```sql
 SELECT /*+ AGG_TO_COP() */ COUNT(*) FROM CLUSTER_SLOW_QUERY GROUP BY user;
