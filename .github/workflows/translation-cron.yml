@@ -78,6 +78,9 @@ jobs:
       - name: Copy new files to translator folder
         run: |
           cp -r docs/tmp markdown-translator/markdowns
+      - name: Copy variables.json to translator folder
+        run: |
+          cp docs/tmp/variables.json markdown-translator/variables.json
       - name: Config and translate
         run: |
           cd markdown-translator
