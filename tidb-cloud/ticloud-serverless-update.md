@@ -35,13 +35,13 @@ ticloud serverless update -c <cluster-id> --labels "{\"label1\":\"value1\"}"
 
 In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
-| Flag                     | Description                                           | Required | Note                                                 |
-|--------------------------|-------------------------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string  | Specifies the ID of the cluster.                   | Yes      | Only works in non-interactive mode.                  |
-| -n --display-name string | Specifies a new name for the cluster.      | No       | Only works in non-interactive mode.                  |.
-| --annotations string     | Specifies new annotations for the cluster | No       | Only works in non-interactive mode.                  |
-| --labels string          | Specifies new labels for the cluster.      | No       | Only works in non-interactive mode.                  |
-| -h, --help               | Shows help information for this command.                    | No       | Works in both non-interactive and interactive modes. |
+| Flag                      | Description                                 | Required | Note                                                 |
+|---------------------------|---------------------------------------------|----------|------------------------------------------------------|
+| -c, --cluster-id string   | Specifies the ID of the cluster.            | Yes      | Only works in non-interactive mode.                  |
+| -n --display-name string  | Specifies a new name for the cluster.       | No       | Only works in non-interactive mode.                  |.
+| --labels string           | Specifies new labels for the cluster.       | No       | Only works in non-interactive mode.                  |
+| --disable-public-endpoint | Disables the public endpoint of the cluster. | No       | Only works in non-interactive mode.                  |
+| -h, --help                | Shows help information for this command.    | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
 

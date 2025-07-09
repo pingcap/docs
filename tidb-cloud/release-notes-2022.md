@@ -11,13 +11,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Currently, after upgrading the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0) to [v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0), the cold start becomes slower in certain circumstances. So we roll back the default TiDB version of all Serverless Tier clusters from v6.4.0 to v6.3.0, then fix the problem as soon as possible, and upgrade it later again.
+- Currently, after upgrading the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.3.0](https://docs-archive.pingcap.com/tidb/v6.3/release-6.3.0) to [v6.4.0](https://docs-archive.pingcap.com/tidb/v6.4/release-6.4.0), the cold start becomes slower in certain circumstances. So we roll back the default TiDB version of all Serverless Tier clusters from v6.4.0 to v6.3.0, then fix the problem as soon as possible, and upgrade it later again.
 
 ## December 27, 2022
 
 **General changes**
 
-- Upgrade the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0) to [v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0).
+- Upgrade the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.3.0](https://docs-archive.pingcap.com/tidb/v6.3/release-6.3.0) to [v6.4.0](https://docs-archive.pingcap.com/tidb/v6.4/release-6.4.0).
 
 - The point-in-time recovery (PITR) for Dedicated Tier clusters is now in General Availability (GA).
 
@@ -110,7 +110,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     No matter whether you are new to TiDB Cloud or you already have a TiDB Cloud account, now you can link with your AWS or GCP billing account, which makes it easier to complete AWS or GCP Marketplace subscriptions.
 
-    For how to make the link, see [Billing from AWS Marketplace or Google Cloud Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace).
+    For how to make the link, see [Billing from AWS Marketplace or Google Cloud Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-azure-marketplace-or-google-cloud-marketplace).
 
 ## November 22, 2022
 
@@ -231,7 +231,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 * For Dedicated Tier clusters, the minimum storage size of a TiKV or TiFlash node is changed from 500 GiB to 200 GiB. This will be more cost-effective for users whose workloads are in small data volumes.
 
-    For more details, see [TiKV node storage](/tidb-cloud/size-your-cluster.md#tikv-node-storage) and [TiFlash node storage](/tidb-cloud/size-your-cluster.md#tiflash-node-storage).
+    For more details, see [TiKV node storage](/tidb-cloud/size-your-cluster.md#tikv-node-storage-size) and [TiFlash node storage](/tidb-cloud/size-your-cluster.md#tiflash-node-storage).
 
 * Introduce online contracts to customize TiDB Cloud subscriptions and meet compliance requirements.
 
@@ -247,7 +247,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-* Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.2.0](https://docs.pingcap.com/tidb/v6.2/release-6.2.0) to [v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0).
+* Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.2.0](https://docs-archive.pingcap.com/tidb/v6.2/release-6.2.0) to [v6.3.0](https://docs-archive.pingcap.com/tidb/v6.3/release-6.3.0).
 
 **Console changes**
 
@@ -262,7 +262,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 * Support joining multiple organizations by invitation.
 
-    In the TiDB Cloud console, you can view all organizations you have joined and switch between them. For details, see [Switch between organizations](/tidb-cloud/manage-user-access.md#switch-between-organizations).
+    In the TiDB Cloud console, you can view all organizations you have joined and switch between them. For details, see [Switch between organizations](/tidb-cloud/manage-user-access.md#view-and-switch-between-organizations).
 
 * Add the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) page for SQL diagnosis.
 
@@ -306,7 +306,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-* Optimize the UI of the [Clusters](https://tidbcloud.com/console/clusters) page and the cluster overview page for better user experience.
+* Optimize the UI of the [Clusters](https://tidbcloud.com/project/clusters) page and the cluster overview page for better user experience.
 
     In the new design, the entrances of upgrade to Dedicated Tier, cluster connection, and data import are highlighted.
 
@@ -374,7 +374,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-* Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) to [v6.2.0](https://docs.pingcap.com/tidb/v6.2/release-6.2.0).
+* Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) to [v6.2.0](https://docs-archive.pingcap.com/tidb/v6.2/release-6.2.0).
 
 **API changes**
 
@@ -384,7 +384,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     Currently, TiDB Cloud API is still in beta and only available upon request. You can apply for API access by submitting a request:
 
-    * Click **Help** in the lower-right corner of [TiDB Cloud console](https://tidbcloud.com/console/clusters).
+    * Click **Help** in the lower-right corner of [TiDB Cloud console](https://tidbcloud.com/project/clusters).
     * In the dialog, fill in "Apply for TiDB Cloud API" in the **Description** field and click **Send**.
 
 ## August 16, 2022
@@ -430,7 +430,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 * Add TiDB Cloud Support Plans (Basic, Standard, Enterprise, and Premium) to meet different support needs of customers' organizations. For more information, see [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
-* Optimize the UI of the [Clusters](https://tidbcloud.com/console/clusters) page and the cluster details page:
+* Optimize the UI of the [Clusters](https://tidbcloud.com/project/clusters) page and the cluster details page:
 
     * Add **Connect** and **Import data** buttons to the **Clusters** page.
     * Move **Connect** and **Import data** buttons to the upper-right corner on the cluster details page.
@@ -488,7 +488,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## June 23, 2022
 
-* Increase the maximum [storage capacity of TiKV](/tidb-cloud/size-your-cluster.md#tikv-node-storage) on TiDB Cloud.
+* Increase the maximum [storage capacity of TiKV](/tidb-cloud/size-your-cluster.md#tikv-node-storage-size) on TiDB Cloud.
 
     * 8 vCPU or 16 vCPU TiKV: support up to 4 TiB storage capacity.
     * 4 vCPU TiKV: support up to 2 TiB storage capacity.
@@ -544,7 +544,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## April 7, 2022
 
-* Upgrade TiDB Cloud to [TiDB v6.0.0](https://docs.pingcap.com/tidb/v6.0/release-6.0.0-dmr) for Developer Tier.
+* Upgrade TiDB Cloud to [TiDB v6.0.0](https://docs-archive.pingcap.com/tidb/v6.0/release-6.0.0-dmr) for Developer Tier.
 
 ## March 31, 2022
 

@@ -138,7 +138,7 @@ For more information about the solutions to solve such conflicts, see [Remove th
 
 ### Step 4. Configure Amazon S3 access
 
-Follow the instructions in [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access) to get the role ARN to access the source data.
+Follow the instructions in [Configure Amazon S3 access](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access) to get the role ARN to access the source data.
 
 The following example only lists key policy configurations. Replace the Amazon S3 path with your own values.
 
@@ -177,21 +177,19 @@ After configuring the Amazon S3 access, you can perform the data import task in 
 
 1. Open the **Import** page for your target cluster.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
         > **Tip:**
         >
-        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
-2. Select **Import data from S3**.
-
-    If this is your first time importing data into this cluster, select **Import From Amazon S3**.
+2. Select **Import data from Cloud Storage**, and then click **Amazon S3**.
 
 3. On the **Import Data from Amazon S3** page, fill in the following information:
 
-    - **Import File Count**: select **Multiple files**.
+    - **Import File Count**: for TiDB Cloud Serverless, select **Multiple files**. This field is not available in TiDB Cloud Dedicated.
     - **Included Schema Files**: select **No**.
     - **Data Format**: select **CSV**.
     - **Folder URI**: fill in the bucket URI of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales/` in this example, so that TiDB Cloud can import and merge the data in all MySQL instances into `store.sales` in one go.
