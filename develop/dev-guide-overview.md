@@ -18,7 +18,7 @@ Build your application with the language you use by following the guides with sa
 <DevLangAccordion label="JavaScript" defaultExpanded>
 <DevToolCard title="Serverless Driver (beta)" logo="tidb" docLink="/tidbcloud/serverless-driver" githubLink="https://github.com/tidbcloud/serverless-js">
 
-Connect to TiDB Cloud over HTTPS in Edge Function.
+Connect to TiDB Cloud over HTTPS from edge environments.
 
 </DevToolCard>
 <DevToolCard title="Next.js" logo="nextjs" docLink="/tidbcloud/dev-guide-sample-application-nextjs" githubLink="https://github.com/vercel/next.js">
@@ -66,7 +66,7 @@ Connect Django application with django-tidb to TiDB Cloud.
 </DevToolCard>
 <DevToolCard title="MySQL Connector/Python" logo="python" docLink="/tidbcloud/dev-guide-sample-application-python-mysql-connector" githubLink="https://github.com/mysql/mysql-connector-python">
 
-Connect to TiDB Cloud with MySQL official package.
+Connect to TiDB Cloud with the official MySQL package.
 
 </DevToolCard>
 <DevToolCard title="PyMySQL" logo="python" docLink="/tidbcloud/dev-guide-sample-application-python-pymysql" githubLink="https://github.com/PyMySQL/PyMySQL">
@@ -140,11 +140,11 @@ Connect to TiDB Cloud with mysql2 driver.
 </DevToolCard>
 </DevLangAccordion>
 
-In addition to these guides, PingCAP works with the community to [support the third-party MySQL driver, ORMs and tools](/develop/dev-guide-third-party-support.md).
+In addition to these guides, PingCAP works with the community to support [third-party MySQL drivers, ORMs, and tools](/develop/dev-guide-third-party-support.md).
 
 ## Use MySQL client software
 
-As TiDB is a MySQL-compatible database, you can use many client software tools to connect to TiDB Cloud and manage the databases just like you did before. Or, use our <a href="/tidbcloud/get-started-with-cli">command line tool</a> to connect and manage your databases.
+As TiDB is a MySQL-compatible database, you can use many familiar client software tools to connect to TiDB Cloud and manage your databases. Or, you can use our <a href="/tidbcloud/get-started-with-cli">command line tool</a> to connect and manage your databases.
 
 <DevToolGroup>
 <DevToolCard title="MySQL Workbench" logo="mysql-1" docLink="/tidbcloud/dev-guide-gui-mysql-workbench">
@@ -154,7 +154,7 @@ Connect and manage TiDB Cloud databases with MySQL Workbench.
 </DevToolCard>
 <DevToolCard title="Visual Studio Code" logo="vscode" docLink="/tidbcloud/dev-guide-gui-vscode-sqltools">
 
-Connect and manage TiDB Cloud databases with SQLTools extension in VSCode.
+Connect and manage TiDB Cloud databases with the SQLTools extension in VS Code.
 
 </DevToolCard>
 <DevToolCard title="DBeaver" logo="dbeaver" docLink="/tidbcloud/dev-guide-gui-dbeaver">
@@ -174,8 +174,8 @@ Connect and manage TiDB Cloud databases with DataGrip by JetBrains.
 Learn other topics about developing with TiDB Cloud.
 
 - Use <a href="/tidbcloud/get-started-with-cli">TiDB Cloud CLI</a> to develop, manage and deploy your applications.
-- Explore popular <a href="/tidbcloud/integrate-tidbcloud-with-airbyte">services integrations</a> with TiDB Cloud.
-- Use [TiDB database development reference](/develop/dev-guide-schema-design-overview.md) to design, interact, optimize and troubleshoot with your data and schema.
+- Explore popular <a href="/tidbcloud/integrate-tidbcloud-with-airbyte">service integrations</a> with TiDB Cloud.
+- Follow [TiDB database development reference](/develop/dev-guide-schema-design-overview.md) to design, interact with, optimize, and troubleshoot your data and schema.
 - Follow the free online course [Introduction to TiDB](https://eng.edu.pingcap.com/catalog/info/id:203/?utm_source=docs-dev-guide).
 
 </CustomContent>
@@ -186,7 +186,7 @@ This guide is written for application developers, but if you are interested in t
 
 This tutorial shows how to quickly build an application using TiDB, the possible use cases of TiDB and how to handle common problems.
 
-Before reading this page, it is recommended that you read the [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md).
+Before reading this page, it is recommended that you read the [Quick Start with TiDB Self-Managed](/quick-start-with-tidb.md).
 
 ## TiDB basics
 
