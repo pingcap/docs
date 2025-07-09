@@ -13,7 +13,7 @@ TiDB Cloud Dedicated offers resource optimization features, including [Resource 
 
 [Resource Control](/tidb-resource-control-ru-groups.md) lets you divide the storage nodes (TiKV or TiFlash) of a TiDB Cloud Dedicated cluster into multiple logical groups. In systems with mixed workloads, you can assign workloads to separate resource groups to ensure resource isolation and meet QoS requirements.
 
-If the cluster experiences unexpected SQL performance issues, you can use [SQL bindings](/sql-statements/sql-statement-create-binding.md) or [manage runaway queries](/tidb-resource-control-ru-groups.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries) alongside resource groups to temporarily limit the resource consumption of specific SQL statements.
+If the cluster experiences unexpected SQL performance issues, you can use [SQL bindings](/sql-statements/sql-statement-create-binding.md) or [manage runaway queries](/tidb-resource-control-runaway-queries.md) alongside resource groups to temporarily limit the resource consumption of specific SQL statements.
 
 By using Resource Control effectively, you can reduce the number of clusters, simplify operations and maintenance, and lower management costs.
 
