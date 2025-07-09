@@ -72,7 +72,11 @@ jobs:
           export GH_TOKEN=${{github.token}}
           cd docs
           npm i
-          node scripts/filterUpdateFiles.js
+          if [ "${{ matrix.name }}" = "Cloud" ]; then
+            node scripts/filterUpdateFiles.js --cloud
+          else
+            node scripts/filterUpdateFiles.js
+          fi
           tree tmp
           cd ..
       - name: Copy new files to translator folder
