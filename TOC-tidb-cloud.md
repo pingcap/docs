@@ -436,6 +436,7 @@
   - SQL Statements
     - [Overview](/sql-statements/sql-statement-overview.md)
     - [`ADMIN`](/sql-statements/sql-statement-admin.md)
+    - [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)
     - [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
     - [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
     - [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)
@@ -618,6 +619,7 @@
     - [Utility Functions](/functions-and-operators/utility-functions.md)
     - [Miscellaneous Functions](/functions-and-operators/miscellaneous-functions.md)
     - [TiDB Specific Functions](/functions-and-operators/tidb-functions.md)
+    - [Utility Functions](/functions-and-operators/utility-functions.md)
     - [Precision Math](/functions-and-operators/precision-math.md)
     - [Set Operations](/functions-and-operators/set-operators.md)
     - [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md)
@@ -632,6 +634,7 @@
     - [Optimistic Transactions](/optimistic-transaction.md)
     - [Pessimistic Transactions](/pessimistic-transaction.md)
     - [Non-Transactional DML Statements](/non-transactional-dml.md)
+    - [Pipelined DML](/pipelined-dml.md)
   - [Views](/views.md)
   - [Partitioning](/partitioned-table.md)
   - [Temporary Tables](/temporary-tables.md)
@@ -651,6 +654,7 @@
   - System Tables
     - `mysql` Schema
       - [Overview](/mysql-schema/mysql-schema.md)
+      - [`tidb_mdl_view`](/mysql-schema/mysql-schema-tidb-mdl-view.md)
       - [`user`](/mysql-schema/mysql-schema-user.md)
     - INFORMATION_SCHEMA
       - [Overview](/information-schema/information-schema.md)
