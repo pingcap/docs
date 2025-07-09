@@ -138,7 +138,7 @@ To import the CSV files to TiDB Cloud Serverless, take the following steps:
 
 6. Click **Next**.
 
-7. Wait the scan result, check the data files and target tables, and then click **Start Import**.
+7. Review the scan result, check data files found and target tables to import, and then click **Start Import**.
 
 8. When the import progress shows **Completed**, check the imported tables.
 
@@ -193,7 +193,7 @@ To import the CSV files to TiDB Cloud Serverless, take the following steps:
 
 6. Click **Next**.
 
-7. Wait the scan result, check the data files and target tables, and then click **Start Import**.
+7. Review the scan result, check data files found and target tables to import, and then click **Start Import**.
 
 8. When the import progress shows **Completed**, check the imported tables.
 
@@ -248,7 +248,7 @@ To import the CSV files to TiDB Cloud Serverless, take the following steps:
 
 6. Click **Next**.
 
-7. Wait the scan result, check the data files and target tables, and then click **Start Import**.
+7. Review the scan result, check data files found and target tables to import, and then click **Start Import**.
 
 8. When the import progress shows **Completed**, check the imported tables.
 
@@ -303,7 +303,7 @@ To import the CSV files to TiDB Cloud Serverless, take the following steps:
 
 6. Click **Next**.
 
-7. Wait the scan result, check the data files and target tables, and then click **Start Import**.
+7. Review the scan result, check data files found and target tables to import, and then click **Start Import**.
 
 8. When the import progress shows **Completed**, check the imported tables.
 
