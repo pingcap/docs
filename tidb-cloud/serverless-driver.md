@@ -1,6 +1,7 @@
 ---
 title: TiDB Cloud Serverless Driver (Beta)
 summary: Learn how to connect to TiDB Cloud Serverless from serverless and edge environments.
+aliases: ['/tidbcloud/serverless-driver-config']
 ---
 
 # TiDB Cloud Serverless Driver (Beta)
@@ -122,7 +123,7 @@ Learn more about [using TiDB Cloud serverless driver in Netlify](/tidb-cloud/int
 <div label="Deno">
 
 ```ts
-import { connect } from "npm:@tidbcloud/serverless-js"
+import { connect } from "npm:@tidbcloud/serverless"
 
 const conn = connect({url: Deno.env.get('DATABASE_URL')})
 const result = await conn.execute('show tables')
@@ -133,7 +134,7 @@ const result = await conn.execute('show tables')
 <div label="Bun">
 
 ```ts
-import { connect } from "@tidbcloud/serverless-js"
+import { connect } from "@tidbcloud/serverless"
 
 const conn = connect({url: Bun.env.DATABASE_URL})
 const result = await conn.execute('show tables')
