@@ -112,10 +112,10 @@ To import the Parquet files to TiDB Cloud Serverless, take the following steps:
 3. On the **Import Data from Cloud Storage** page, provide the following information:
 
     - Select **Amazon S3** as the storage provider.
-    - enter the **Source Files URI**.
+    - **Source Files URI**:
         - When importing one file, enter the source file URI and name in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `s3://sampledata/ingest/TableName.01.parquet`.
         - When importing multiple files, enter the source file URI and name in the following format `s3://[bucket_name]/[data_source_folder]/`. For example, `s3://sampledata/ingest/`.
-    - select the **Credential**
+    - **Credential**:
         - **AWS Role ARN**: enter the AWS Role ARN value.
         - **AWS Access Key**: enter the AWS access key ID and AWS secret access key.
 
@@ -169,7 +169,7 @@ To import the Parquet files to TiDB Cloud Serverless, take the following steps:
 3. On the **Import Data from Google Cloud Storage** page, provide the following information:
 
     - Select **Google Cloud Storage** as the storage provider.
-    - **Source Files URI**.
+    - **Source Files URI**:
         - When importing one file, enter the source file URI and name in the following format `[gcs|gs]://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `[gcs|gs]://sampledata/ingest/TableName.01.parquet`.
         - When importing multiple files, enter the source file URI and name in the following format `[gcs|gs]://[bucket_name]/[data_source_folder]/`. For example, `[gcs|gs]://sampledata/ingest/`.
     - **Credential**: you can use a GCS IAM Role Service Account key to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
@@ -224,7 +224,7 @@ To import the Parquet files to TiDB Cloud Serverless, take the following steps:
 3. On the **Import Data from Cloud Storage** page, provide the following information:
 
     - Select **Azure Blob Storage** as the storage provider.
-    - **Source Files URI**.
+    - **Source Files URI**:
         - When importing one file, enter the source file URI and name in the following format `[azure|https]://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `[azure|https]://sampledata/ingest/TableName.01.parquet`.
         - When importing multiple files, enter the source file URI and name in the following format `[azure|https]://[bucket_name]/[data_source_folder]/`. For example, `s3://sampledata/ingest/`.
     - **Credential**: you can use a shared access signature (SAS) token to access your bucket. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access)
@@ -279,7 +279,7 @@ To import the Parquet files to TiDB Cloud Serverless, take the following steps:
 3. On the **Import Data from Cloud Storage** page, provide the following information:
 
     - Select **Alibaba Cloud OSS** as the storage provider.
-    - **Source Files URI**.
+    - **Source Files URI**:
         - When importing one file, enter the source file URI and name in the following format `oss://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `oss://sampledata/ingest/TableName.01.parquet`.
         - When importing multiple files, enter the source file URI and name in the following format `oss://[bucket_name]/[data_source_folder]/`. For example, `s3://sampledata/ingest/`.
     - **Credential**: you can use an AccessKey pair to access your bucket. For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access).

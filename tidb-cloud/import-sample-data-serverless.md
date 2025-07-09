@@ -27,7 +27,7 @@ This document describes how to import the sample data into TiDB Cloud Serverless
 
    - Select **Amazon S3** as the storage provider.
    - **Source Files URI**: enter the sample data URI `s3://tidbcloud-sample-data/data-ingestion/`.
-   - select the **Credential**
+   - **Credential**:
       - **AWS Role ARN**: enter `arn:aws:iam::801626783489:role/import-sample-access`.
       - **AWS Access Key**: skip this option for the sample data.
 
