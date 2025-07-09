@@ -122,9 +122,9 @@ To import the CSV files to TiDB Cloud Starter, take the following steps:
         * In **Source File URIs and Names**, enter file names in the format `[file_name].csv`. For example: `TableName.01.csv`.
         * You can also use wildcards to match multiple files:
 
-            * `my-data?.csv`: Matches all CSV files that start with `my-data` followed by a single character (e.g., `my-data1.csv`, `my-data2.csv`).
+            * `my-data?.csv`: Matches all CSV files that start with `my-data` followed by a single character (for example, `my-data1.csv`, `my-data2.csv`).
 
-            * `my-data*.csv`: Matches all CSV files that start with `my-data` (e.g., `my-data-2023.csv`, `my-data-final.csv`).
+            * `my-data*.csv`: Matches all CSV files that start with `my-data` (for example, `my-data-2023.csv`, `my-data-final.csv`).
 
       > Only `*` and `?` wildcards are supported.
 
@@ -177,9 +177,9 @@ To import the CSV files to TiDB Cloud Starter, take the following steps:
         * In **Source File URIs and Names**, enter file names in the format `[file_name].csv`. For example: `TableName.01.csv`.
         * You can also use wildcards to match multiple files:
 
-            * `my-data?.csv`: Matches all CSV files that start with `my-data` followed by a single character (e.g., `my-data1.csv`, `my-data2.csv`).
+            * `my-data?.csv`: Matches all CSV files that start with `my-data` followed by a single character (for example, `my-data1.csv`, `my-data2.csv`).
 
-            * `my-data*.csv`: Matches all CSV files that start with `my-data` (e.g., `my-data-2023.csv`, `my-data-final.csv`).
+            * `my-data*.csv`: Matches all CSV files that start with `my-data` (for example, `my-data-2023.csv`, `my-data-final.csv`).
 
       > Only `*` and `?` wildcards are supported.
 
@@ -232,9 +232,9 @@ To import the CSV files to TiDB Cloud Starter, take the following steps:
         * In **Source File URIs and Names**, enter file names in the format `[file_name].csv`. For example: `TableName.01.csv`.
         * You can also use wildcards to match multiple files:
 
-            * `my-data?.csv`: Matches all CSV files that start with `my-data` followed by a single character (e.g., `my-data1.csv`, `my-data2.csv`).
+            * `my-data?.csv`: Matches all CSV files that start with `my-data` followed by a single character (for example, `my-data1.csv`, `my-data2.csv`).
 
-            * `my-data*.csv`: Matches all CSV files that start with `my-data` (e.g., `my-data-2023.csv`, `my-data-final.csv`).
+            * `my-data*.csv`: Matches all CSV files that start with `my-data` (for example, `my-data-2023.csv`, `my-data-final.csv`).
 
       > Only `*` and `?` wildcards are supported.
 
@@ -287,9 +287,9 @@ To import the CSV files to TiDB Cloud Starter, take the following steps:
         * In **Source File URIs and Names**, enter file names in the format `[file_name].csv`. For example: `TableName.01.csv`.
         * You can also use wildcards to match multiple files:
 
-            * `my-data?.csv`: Matches all CSV files that start with `my-data` followed by a single character (e.g., `my-data1.csv`, `my-data2.csv`).
+            * `my-data?.csv`: Matches all CSV files that start with `my-data` followed by a single character (for example, `my-data1.csv`, `my-data2.csv`).
 
-            * `my-data*.csv`: Matches all CSV files that start with `my-data` (e.g., `my-data-2023.csv`, `my-data-final.csv`).
+            * `my-data*.csv`: Matches all CSV files that start with `my-data` (for example, `my-data-2023.csv`, `my-data-final.csv`).
 
       > Only `*` and `?` wildcards are supported.
 
