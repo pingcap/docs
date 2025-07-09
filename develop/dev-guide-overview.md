@@ -186,7 +186,7 @@ This guide is written for application developers, but if you are interested in t
 
 This tutorial shows how to quickly build an application using TiDB, the possible use cases of TiDB and how to handle common problems.
 
-Before reading this page, it is recommended that you read the [Quick Start with TiDB Self-Managed](/quick-start-with-tidb.md).
+Before reading this page, it is recommended that you read the [Quick Start with TiDB Self-Managed](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb/).
 
 ## TiDB basics
 
@@ -204,7 +204,7 @@ You can start a transaction using [`BEGIN`](/sql-statements/sql-statement-begin.
 
 TiDB guarantees atomicity for all statements between the start of `BEGIN` and the end of `COMMIT` or `ROLLBACK`, that is, all statements that are executed during this period either succeed or fail as a whole. This is used to ensure data consistency you need for application development.
 
-If you are not sure what an **optimistic transaction** is, do **_NOT_** use it yet. Because **optimistic transactions** require that the application can correctly handle [all errors](/error-codes.md) returned by the `COMMIT` statement. If you are not sure how your application handles them, use a **pessimistic transaction** instead.
+If you are not sure what an **optimistic transaction** is, do **_NOT_** use it yet. Because **optimistic transactions** require that the application can correctly handle [all errors](https://docs.pingcap.com/tidb/v8.5/error-codes/) returned by the `COMMIT` statement. If you are not sure how your application handles them, use a **pessimistic transaction** instead.
 
 ## The way applications interact with TiDB
 
@@ -216,7 +216,7 @@ Since TiDB is compatible with the MySQL protocol and MySQL syntax, most of the O
 
 - [Quick Start](/develop/dev-guide-build-cluster-in-cloud.md)
 - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
-- [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
+- [Connect to TiDB](https://docs.pingcap.com/tidb/v8.5/dev-guide-connect-to-tidb/)
 - [Database Schema Design](/develop/dev-guide-schema-design-overview.md)
 - [Write Data](/develop/dev-guide-insert-data.md)
 - [Read Data](/develop/dev-guide-get-data-from-single-table.md)
@@ -226,6 +226,6 @@ Since TiDB is compatible with the MySQL protocol and MySQL syntax, most of the O
 
 ## Need help?
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://docs.pingcap.com/tidb/v8.5/support/).
 
 </CustomContent>
