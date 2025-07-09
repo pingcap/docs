@@ -35,12 +35,15 @@ jobs:
           export GH_TOKEN=${{github.token}}
           cd docs
           npm i
-          node scripts/filterUpdateCloudFiles.js
+          node scripts/filterUpdateFiles.js --cloud
           tree tmp
           cd ..
       - name: Copy new files to translator folder
         run: |
           cp -r docs/tmp markdown-translator/markdowns
+      - name: Copy variables.json to translator folder
+        run: |
+          cp docs/tmp/variables.json docs/variables.json || true
       - name: Config and translate
         run: |
           cd markdown-translator
