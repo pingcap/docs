@@ -13,7 +13,7 @@ TiDB Cloud provides the following two options of cluster tiers. Before creating 
 - [TiDB Cloud Serverless](#tidb-cloud-serverless) (now [{{{ .starter }}}](https://docs.tidb.io/tidbcloud/select-cluster-tier/#tidb-cloud-starter))
 - [TiDB Cloud Dedicated](#tidb-cloud-dedicated)
 
-## TiDB Cloud Serverless (now {{{ .starter }}}) {tidb-cloud-serverless}
+## TiDB Cloud Serverless
 
 <!--To be confirmed-->
 TiDB Cloud Serverless (now [{{{ .starter }}}](https://docs.tidb.io/tidbcloud/select-cluster-tier/#tidb-cloud-starter)) is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free tier and consumption based billing once free limits are exceeded.
