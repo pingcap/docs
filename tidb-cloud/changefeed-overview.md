@@ -93,7 +93,7 @@ To learn the billing for changefeeds in TiDB Cloud, see [Changefeed billing](/ti
 
 ## Changefeed states
 
-The state of a replication task represents the running state of the replication task. During the running process, replication tasks might fail with errors, be manually paused, resumed, or reach the specified `TargetTs`. These behaviors can lead to changes of the replication task state.
+The state of a replication task represents the running state of the replication task. During the running process, replication tasks might fail with errors, or be manually paused or resumed. These behaviors can lead to changes of the replication task state.
 
 The states are described as follows:
 
