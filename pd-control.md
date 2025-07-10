@@ -441,7 +441,6 @@ Usage:
 
 ### `member [delete | leader_priority | leader [show | resign | transfer <member_name>]]`
 
-
 > **Note:**
 >
 > **DO NOT** use the `member delete` command to scale in PD in a production environment. To scale in PD nodes, see [Scale a TiDB Cluster Using TiUP](/scale-tidb-using-tiup.md) and [Manually Scale TiDB on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster/).
