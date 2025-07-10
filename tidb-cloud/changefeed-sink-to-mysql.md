@@ -111,7 +111,13 @@ After completing the prerequisites, you can sink your data to MySQL.
 6. Customize **Event Filter** to filter the events that you want to replicate.
 
     - **Tables matching**: you can set which tables the event filter will be applied to in this column. The rule syntax is the same as that used for the preceding **Table Filter** area. You can add up to 10 event filter rules per changefeed.
-    - **Ignored events**: you can set which types of events the event filter will exclude from the changefeed.
+    - **Event Filter**: You can apply the following event filters to exclude changeable data from the changefeed:
+        - **Ignore event**: Excludes specified event types.
+        - **Ignore SQL**: Excludes DDL events that match specified expressions. For example, expressions like `^drop` or `add column` will exclude DDLs that start with `DROP` or include `ADD COLUMN`.
+        - **Ignore insert value expression**: Excludes `INSERT` DMLs that meet specific conditions. For example, `id >= 100` will exclude insert statements where `id` is greater than or equal to 100.
+        - **Ignore update new value expression**: Excludes `UPDATE` DMLs where the new value matches a specified condition. For example, `gender = 'male'` will exclude updates that result in `gender` being `male`.
+        - **Ignore update old value expression**: Excludes `UPDATE` DMLs where the previous value matches a specified condition. For example, `age < 18` will exclude updates where the old value of `age` is less than 18.
+        - **Ignore delete value expression**: Excludes `DELETE` DMLs that meet a specified condition. For example, `name = 'john'` will exclude delete statements where the name is `'john'`.
 
 7. In **Start Replication Position**, configure the starting position for your MySQL sink.
 
