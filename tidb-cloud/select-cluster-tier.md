@@ -16,15 +16,9 @@ TiDB Cloud provides the following two options of cluster plan. Before creating a
 ## TiDB Cloud Starter
 
 <!--To be confirmed-->
-TiDB Cloud Starter (formerly Serverless) is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free plan and consumption based billing once free limits are exceeded.
+TiDB Cloud Starter (formerly Serverless) is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database.
 
-### Cluster plans
-
-TiDB Cloud Starter offers two service plans to meet different user requirements. Whether you are just getting started or scaling to meet the increasing application demands, these service plans provide the flexibility and capability you need.
-
-#### Free cluster plan
-
-The free cluster plan is ideal for those who are getting started with TiDB Cloud Starter. It provides developers and small teams with the following essential features:
+The Starter plan is ideal for those who are getting started with TiDB Cloud Starter. It provides developers and small teams with the following features:
 
 - **No cost**: This plan is completely free, with no credit card required to get started.
 - **Storage**: Provides an initial 5 GiB of row-based storage and 5 GiB of columnar storage.
