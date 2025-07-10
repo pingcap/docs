@@ -157,7 +157,7 @@ The steps vary depending on the connectivity method you select.
 13. Return to the [TiDB Cloud console](https://tidbcloud.com) to confirm that you have accepted the connection request. TiDB Cloud will test the connection and proceed to the next page if the test succeeds.
 
 </div>
-<div label="Private Service Connect">
+<div label="Private Service Connect (Google Cloud)">
 
 1. In **Connectivity Method**, select **Private Service Connect**.    
 2. Ensure that you fill in the same unique ID in **Kafka Advertised Listener Pattern** when you [Set Up Self-Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md) in the **Network** section.
@@ -216,7 +216,7 @@ The steps vary depending on the connectivity method you select.
         - **Ignore SQL**: Excludes DDL events that match specified expressions. For example, expressions like `^drop` or `add column` will exclude DDLs that start with `DROP` or include `ADD COLUMN`.
         - **Ignore insert value expression**: Excludes `INSERT` DMLs that meet specific conditions. For example, `id >= 100` will exclude insert statements where `id` is greater than or equal to 100.
         - **Ignore update new value expression**: Excludes `UPDATE` DMLs where the new value matches a specified condition. For example, `gender = 'male'` will exclude updates that result in `gender` being `male`.
-        - **Ignore update old value expression**: Excludes `UPDATE` DMLs where the previous value matches a specified condition. For example, `age < 18` will exclude updates where the old value of `age` is less than 18.
+        - **Ignore update old value expression**: Excludes `UPDATE` DMLs where the old value matches a specified condition. For example, `age < 18` will exclude updates where the old value of `age` is less than 18.
         - **Ignore delete value expression**: Excludes `DELETE` DMLs that meet a specified condition. For example, `name = 'john'` will exclude delete statements where the name is `'john'`.
 
 3. Customize **Column Selector** to select columns from events and send only the data changes related to those columns to the downstream.

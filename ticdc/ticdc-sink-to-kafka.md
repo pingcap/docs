@@ -73,7 +73,7 @@ The following are descriptions of sink URI parameters and values that can be con
 | `host`          | The IP address of the downstream Kafka services.                                 |
 | `port`               | The port for the downstream Kafka.                                          |
 | `topic-name` | Variable. The name of the Kafka topic. |
-| `protocol` | The protocol with which messages are output to Kafka. The value options are [`canal-json`](/ticdc/ticdc-canal-json.md)、[`open-protocol`](/ticdc/ticdc-open-protocol.md)、[`avro`](/ticdc/ticdc-avro-protocol.md)、[`debezium`](/ticdc/ticdc-debezium.md) and [`simple`](/ticdc/ticdc-simple-protocol.md).   |
+| `protocol` | The protocol with which messages are output to Kafka. The value options are [`canal-json`](/ticdc/ticdc-canal-json.md), [`open-protocol`](/ticdc/ticdc-open-protocol.md), [`avro`](/ticdc/ticdc-avro-protocol.md), [`debezium`](/ticdc/ticdc-debezium.md) and [`simple`](/ticdc/ticdc-simple-protocol.md). |
 | `kafka-version`      | The version of the downstream Kafka. This value needs to be consistent with the actual version of the downstream Kafka.                      |
 | `kafka-client-id`    | Specifies the Kafka client ID of the replication task (optional. `TiCDC_sarama_producer_replication ID` by default). |
 | `partition-num`      | The number of the downstream Kafka partitions (optional. The value must be **no greater than** the actual number of partitions; otherwise, the replication task cannot be created successfully. `3` by default). |
