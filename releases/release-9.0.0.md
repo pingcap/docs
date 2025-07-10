@@ -73,6 +73,18 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
 ### Scalability
 
+* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234 beta.2-->
+
+    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
+
+    For more information, see [Documentation](link).
+
+* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234 beta.2-->
+
+    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
+
+    For more information, see [Documentation](link).
+
 * PD supports the microservice mode (GA) [#5766](https://github.com/tikv/pd/issues/5766) @[binshi-bing](https://github.com/binshi-bing)
 
     In v8.0.0, the PD microservice mode is released as an experimental feature. Starting from v9.0.0, the PD microservice mode is generally available (GA). This mode splits the timestamp allocation and cluster scheduling functions of PD into separate microservices that can be deployed independently, thereby enhancing performance scalability for PD and addressing performance bottlenecks of PD in large-scale clusters.
@@ -85,6 +97,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
     For more information, see [documentation](/pd-microservices.md).
 
 ### Performance
+
+* Optimize performance for creating databases, tables, and adding columns in scenarios involving tables with foreign keys [#61126](https://github.com/pingcap/tidb/issues/61126) @[GMHDBJD](https://github.com/GMHDBJD) @[River2000i](https://github.com/River2000i) **tw@hfxsd** <!--1896 beta.2-->
+
+    Before v9.0.0, TiDB encounters significant performance bottlenecks when creating tables with foreign keys in certain SaaS scenarios, especially when the number of tables in a cluster reaches tens of millions. A large number of foreign key relationships further slows down the execution of DDL operations such as `CREATE TABLE` and `ADD COLUMN`.
+
+    Starting from v9.0.0, TiDB optimizes the handling logic of related metadata, significantly improving DDL performance in scenarios with extremely large tables. According to internal tests, under idle cluster workload and with a connection to the DDL owner node, the table creation speed can reach up to 126 tables per second, and the average execution speed of the `ADD COLUMN` operation is approximately 45.5 tables per second.
 
 * In scenarios with hundreds of thousands to millions of users, the performance of creating and modifying users has improved by 77 times [#55563](https://github.com/pingcap/tidb/issues/55563) @[tiancaiamao](https://github.com/tiancaiamao)
 
@@ -141,21 +159,64 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
 ### Availability
 
+* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234 beta.2-->
+
+    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
+
+    For more information, see [Documentation](link).
+
+* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234 beta.2-->
+
+    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
+
+    For more information, see [Documentation](link).
+
 * TiProxy officially supports the traffic replay feature (GA) [#642](https://github.com/pingcap/tiproxy/issues/642) @[djshow832](https://github.com/djshow832)
 
     In TiProxy v1.3.0, the traffic replay feature is released as an experimental feature. In TiProxy v1.4.0, the traffic replay feature becomes generally available (GA). TiProxy provides specialized SQL commands for traffic capture and replay. This feature lets you easily capture access traffic from TiDB production clusters and replay it at a specified rate in test clusters, facilitating business validation.
-    
+
     For more information, see [documentation](/tiproxy/tiproxy-traffic-replay.md).
 
 ### Reliability
 
+* Introduce a mechanism for detecting connection interruption to automatically terminate running SQL statements on the server side once the client is disconnected [#60685](https://github.com/pingcap/tidb/pull/60685) @[Defined2014](https://github.com/Defined2014) **tw@hfxsd** <!--2060 beta.2-->
+
+    To improve resource utilization and system stability, TiDB v9.0.0 introduces a mechanism for detecting connection interruption. When a client disconnects unexpectedly, TiDB proactively terminates SQL statements that are still running on that connection, promptly releasing resources and preventing long-running invalid statements from impacting system performance.
+
+* Introduce the table mode to restrict read and write operations during data restore, improving task stability and data consistency [#59008](https://github.com/pingcap/tidb/issues/59008) @[fishiu](https://github.com/fishiu) @[River2000i](https://github.com/River2000i) @[Tristan1900](https://github.com/Tristan1900) @[Leavrth](https://github.com/Leavrth)   **tw@hfxsd** <!--2056 beta.2-->
+
+    TiDB v9.0.0 introduces the table mode to enhance the stability and consistency of backup and restore tasks. When performing snapshot restore or PITR (Point-in-Time Recovery), the table mode of the target table is automatically set to `restore`. In this mode, all read and write operations on the table are disallowed. Once the restore process completes, the table mode automatically switches back to `normal`, allowing regular read and write operations. This mechanism ensures greater stability and consistency during data recovery.
+
+    For more information, see [Documentation](/br/br-pitr-guide.md).
+
 * Introduce a new system variable `max_user_connections` to limit the number of connections that different users can establish [#59203](https://github.com/pingcap/tidb/issues/59203) @[joccau](https://github.com/joccau)
 
     Starting from v9.0.0, you can use the `max_user_connections` system variable to limit the number of connections that a single user can establish to a single TiDB node. This helps prevent issues where excessive [token](/tidb-configuration-file.md#token-limit) consumption by one user causes delays in responding to requests from other users.
-    
+
     For more information, see [documentation](/system-variables.md#max_user_connections-new-in-v900).
 
+* Restrict resource groups from overusing system resources [#9057](https://github.com/tikv/pd/issues/9057) [#59389](https://github.com/pingcap/tidb/issues/59389) @[lhy1024](https://github.com/lhy1024) **tw@lilin90** <!--1940 beta.2-->
+
+    Before v9.0.0, when the `BURSTABLE` attribute is set for a resource group, TiDB allows the group’s applications to overuse system resources. However, such overuse could crowd out resources allocated to other resource groups, impacting their SLAs. Starting from v9.0.0, TiDB introduces support for different `BURSTABLE` modes. If you do not explicitly specify a value for `BURSTABLE`, the `MODERATED` mode is enabled by default. In this mode, TiDB dynamically adjusts the limit on excess resource usage, aiming to prioritize satisfying quotas across all resource groups. The previous unlimited mode remains available and you can explicitly configure it using `BURSTABLE=UNLIMITED`.
+
+    Note that if you upgrade the TiDB cluster from an earlier version to v9.0.0, existing resource groups retain their original behavior (`UNLIMITED`). To switch to the `MODERATED` mode, you must modify the resource group configuration using [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md).
+
+    The `MODERATED` mode is well-suited for environments where multiple resource groups have similar priority. It allows some groups to safely overflow their quotas, improving resource utilization while maintaining quality of service.
+
+    For more information, see [documentation](/sql-statements/sql-statement-create-resource-group.md).
+
 ### SQL
+
+* Support the `gb18030` character set, and `gb18030_bin` and `gb18030_chinese_ci` collations [#17470](https://github.com/tikv/tikv/issues/17470) [#55791](https://github.com/pingcap/tidb/issues/55791) @[cbcwestwolf](https://github.com/cbcwestwolf) *tw@hfxsd* <!--1962 beta.2-->
+
+    Starting from v9.0.0, TiDB supports the `gb18030` character set along with the `gb18030_bin` and `gb18030_chinese_ci` collations, improving TiDB's ability to store and query data in Chinese.
+
+    - The `gb18030` character set is a widely used standard for Chinese character encoding.
+    - The `gb18030_bin` collation provides precise binary-based sorting, while `gb18030_chinese_ci` supports case-insensitive general collation. These two collations offer more flexible and efficient sorting and comparison for text encoded in `gb18030`.
+
+  By supporting the `gb18030` character set and its collations, TiDB v9.0.0 improves compatibility with Chinese-language applications. This enhancement simplifies character set selection and operations in multilingual and multi-encoding scenarios, improving the overall user experience.
+
+    For more information, see [Documentation](/character-set-gb18030.md).
 
 * Support creating global indexes on non-unique columns of partitioned tables [#58650](https://github.com/pingcap/tidb/issues/58650) @[Defined2014](https://github.com/Defined2014) @[mjonss](https://github.com/mjonss)
 
@@ -164,6 +225,18 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
     For more information, see [documentation](/partitioned-table.md#global-indexes).
 
 ### DB operations
+
+* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234 beta.2-->
+
+    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
+
+    For more information, see [Documentation](link).
+
+* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234 beta.2-->
+
+    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
+
+    For more information, see [Documentation](link).
 
 * TiDB Index Advisor [#12303](https://github.com/pingcap/tidb/issues/12303) @[qw4990](https://github.com/qw4990)
 
@@ -179,7 +252,29 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
     For more information, see [documentation](/br/br-pitr-manual.md#compatibility-between-ongoing-log-backup-and-snapshot-restore).
 
+* Support redistributing data of a specific table (experimental) [#8986](https://github.com/tikv/pd/issues/8986) @[bufferflies](https://github.com/bufferflies) **tw@qiancai** <!--1724 beta.2-->
+
+    PD automatically schedules data to distribute it as evenly as possible across all TiKV nodes in a cluster. However, this automatic scheduling is based on the overall cluster. In some cases, even if the cluster-wide data distribution is balanced, the data of a specific table might still be unevenly distributed across TiKV nodes.
+
+    Starting from v9.0.0, you can use the [`SHOW TABLE DISTRIBUTION`](/sql-statements/sql-statement-show-distribution-jobs.md) statement to check how the data of a specific table is distributed across all TiKV nodes. If the data distribution is unbalanced, you can use the [`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md) statement to redistribute the table's data (experimental) to improve load balancing.
+
+    Note that redistributing the data of a specific table is a one-time task with a timeout limit. If the distribution task is not completed before the timeout, it will automatically exit.
+
+    For more information, see [documentation](/sql-statements/sql-statement-distribute-table.md).
+
 ### Observability
+
+* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234 beta.2-->
+
+    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
+
+    For more information, see [Documentation](link).
+
+* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234 beta.2-->
+
+    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
+
+    For more information, see [Documentation](link).
 
 * Add the TiDB Workload Repository feature to support persisting historical workload data into TiKV [#58247](https://github.com/pingcap/tidb/issues/58247) @[xhebox](https://github.com/xhebox) @[henrybw](https://github.com/henrybw) @[wddevries](https://github.com/wddevries)
 
@@ -228,9 +323,51 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
     For more information, see [documentation](/sql-statements/sql-statement-explain-analyze.md).
 
+* Add storage engine identifiers to statement summary tables and slow query logs [#61736](https://github.com/pingcap/tidb/issues/61736) @[henrybw](https://github.com/henrybw) **tw@Oreoxmt**<!--2034 beta.2-->
+
+    When both TiKV and TiFlash are deployed in a cluster, users often need to filter SQL statements by storage engine during database diagnostics and performance optimization. For example, if TiFlash is under high load, users might need to identify SQL statements running on TiFlash to locate potential causes. To meet this need, starting from v9.0.0, TiDB adds storage engine identifier fields to statement summary tables and slow query logs.
+
+    New fields in [statement summary tables](/statement-summary-tables.md):
+
+    * `STORAGE_KV`: `1` indicates that the SQL statement accesses TiKV.
+    * `STORAGE_MPP`: `1` indicates that the SQL statement accesses TiFlash.
+
+    New fields in [slow query logs](/identify-slow-queries.md):
+
+    * `Storage_from_kv`: `true` indicates that the SQL statement accesses TiKV.
+    * `Storage_from_mpp`: `true` indicates that the SQL statement accesses TiFlash.
+
+    This feature simplifies workflows in certain diagnostics and performance optimization scenarios and improves issue identification efficiency.
+
+    For more information, see [Statement Summary Tables](/statement-summary-tables.md) and [Identify Slow Queries](/identify-slow-queries.md).
+
 ### Security
 
+* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234 beta.2-->
+
+    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
+
+    For more information, see [Documentation](link).
+
+* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234 beta.2-->
+
+    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
+
+    For more information, see [Documentation](link).
+
 ### Data migration
+
+* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234 beta.2-->
+
+    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
+
+    For more information, see [Documentation](link).
+
+* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234 beta.2-->
+
+    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
+
+    For more information, see [Documentation](link).
 
 * TiCDC introduces a new architecture for improved performance, scalability, and stability (experimental) [#442](https://github.com/pingcap/ticdc/issues/442) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
