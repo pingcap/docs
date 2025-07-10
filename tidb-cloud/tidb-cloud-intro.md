@@ -64,7 +64,7 @@ With TiDB Cloud, you can get the following key features:
 
 TiDB Cloud provides the following two deployment options:
 
-- [TiDB Cloud Serverless](https://www.pingcap.com/tidb-cloud-serverless)
+- [TiDB Cloud Serverless](https://www.pingcap.com/tidb-cloud-serverless) (renamed to [{{{ .starter }}}](https://docs.tidb.io/tidbcloud/select-cluster-tier/#tidb-cloud-starter))
 
     TiDB Cloud Serverless is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free tier and consumption based billing once free limits are exceeded.
 
