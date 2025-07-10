@@ -23,7 +23,7 @@ jobs:
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: token ${{ github.token }}" \
           https://api.github.com/repos/${{ github.repository }}/actions/workflows/translation-zh.yml/dispatches \
-          -d '{"ref":"main","inputs":{"branch":"main"}}'
+          -d '{"ref":"master","inputs":{"branch":"master"}}'
 
   # build a matrix of branches to translate, including LTS and Cloud
   build-matrix:
