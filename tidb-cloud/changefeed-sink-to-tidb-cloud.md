@@ -86,7 +86,7 @@ After completing the prerequisites, you can sink your data to the destination Ti
         - **Ignore SQL**: Excludes DDL events that match specified expressions. For example, expressions like `^drop` or `add column` will exclude DDLs that start with `DROP` or include `ADD COLUMN`.
         - **Ignore insert value expression**: Excludes `INSERT` DMLs that meet specific conditions. For example, `id >= 100` will exclude insert statements where `id` is greater than or equal to 100.
         - **Ignore update new value expression**: Excludes `UPDATE` DMLs where the new value matches a specified condition. For example, `gender = 'male'` will exclude updates that result in `gender` being `male`.
-        - **Ignore update old value expression**: Excludes `UPDATE` DMLs where the previous value matches a specified condition. For example, `age < 18` will exclude updates where the old value of `age` is less than 18.
+        - **Ignore update old value expression**: Excludes `UPDATE` DMLs where the old value matches a specified condition. For example, `age < 18` will exclude updates where the old value of `age` is less than 18.
         - **Ignore delete value expression**: Excludes `DELETE` DMLs that meet a specified condition. For example, `name = 'john'` will exclude delete statements where the name is `'john'`.
 
 7. In the **Start Replication Position** area, fill in the TSO that you get from Dumpling exported metadata files.

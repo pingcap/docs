@@ -211,7 +211,7 @@ The steps vary depending on the connectivity method you select.
 2. Customize **Event Filter** to filter the events that you want to replicate.
 
     - **Tables matching**: you can set which tables the event filter will be applied to in this column. The rule syntax is the same as that used for the preceding **Table Filter** area. You can add up to 10 event filter rules per changefeed.
-    - **Event Filter**: You can apply the following event filters to exclude changeable data from the changefeed:
+    - **Event Filter**: You can apply the following event filters to exclude specific events from the changefeed:
         - **Ignore event**: Excludes specified event types.
         - **Ignore SQL**: Excludes DDL events that match specified expressions. For example, expressions like `^drop` or `add column` will exclude DDLs that start with `DROP` or include `ADD COLUMN`.
         - **Ignore insert value expression**: Excludes `INSERT` DMLs that meet specific conditions. For example, `id >= 100` will exclude insert statements where `id` is greater than or equal to 100.
