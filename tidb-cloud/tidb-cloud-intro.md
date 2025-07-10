@@ -66,7 +66,7 @@ TiDB Cloud provides the following two deployment options:
 
 <!--TBD, ToDo: Not sure the URL for TiDB Cloud Starter-->
 
-- TiDB Cloud Starter
+- TiDB Cloud Starter (formerly Serverless)
 
     TiDB Cloud Starter is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free tier and consumption based billing once free limits are exceeded.
 

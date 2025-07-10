@@ -12,7 +12,7 @@ This tutorial guides you through an easy way to get started with TiDB Cloud. You
 
 ## Step 1: Create a TiDB cluster
 
-[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter) is the best way to get started with TiDB Cloud. To create a TiDB Cloud Starter cluster, follow these steps:
+[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter) (formerly Serverless) is the best way to get started with TiDB Cloud. To create a TiDB Cloud Starter cluster, follow these steps:
 
 1. If you do not have a TiDB Cloud account, click [here](https://console.tidb.io/free-trial?provider_source=alicloud) to sign up.
 
