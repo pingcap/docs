@@ -117,9 +117,7 @@ To import the CSV files to TiDB Cloud Starter, take the following steps:
 
     * If you **do not use** the [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md), you need to manually configure the mapping settings. This allows you to define custom rules to associate each source CSV file with its corresponding target table.
 
-      After setting the custom mapping rules, the system will re-scan the source files accordingly.
-
-        * In **Source File URIs and Names**, enter file names in the format `[file_name].csv`. For example: `TableName.01.csv`.
+        * In **Source**, enter file names in the format `[file_name].csv`. For example: `TableName.01.csv`.
         * You can also use wildcards to match multiple files:
 
             * `my-data?.csv`: Matches all CSV files that start with `my-data` followed by a single character (for example, `my-data1.csv`, `my-data2.csv`).
@@ -136,7 +134,7 @@ To import the CSV files to TiDB Cloud Starter, take the following steps:
    >
    > When importing one file, you can only use mapping settings and the source file cannot be modified.
 
-6. Click **Next**.
+6. Click **Next**, the system will scan the source files accordingly.
 
 7. Review the scan result, check data files found and target tables to import, and then click **Start Import**.
 
@@ -172,9 +170,7 @@ To import the CSV files to TiDB Cloud Starter, take the following steps:
 
     * If you **do not use** the [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md), you need to manually configure the mapping settings. This allows you to define custom rules to associate each source CSV file with its corresponding target table.
 
-      After setting the custom mapping rules, the system will re-scan the source files accordingly.
-
-        * In **Source File URIs and Names**, enter file names in the format `[file_name].csv`. For example: `TableName.01.csv`.
+        * In **Source**, enter file names in the format `[file_name].csv`. For example: `TableName.01.csv`.
         * You can also use wildcards to match multiple files:
 
             * `my-data?.csv`: Matches all CSV files that start with `my-data` followed by a single character (for example, `my-data1.csv`, `my-data2.csv`).
@@ -191,7 +187,7 @@ To import the CSV files to TiDB Cloud Starter, take the following steps:
    >
    > When importing one file, you can only use mapping settings and the source file cannot be modified.
 
-6. Click **Next**.
+6. Click **Next**, the system will scan the source files accordingly..
 
 7. Review the scan result, check data files found and target tables to import, and then click **Start Import**.
 
@@ -227,9 +223,7 @@ To import the CSV files to TiDB Cloud Starter, take the following steps:
 
     * If you **do not use** the [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md), you need to manually configure the mapping settings. This allows you to define custom rules to associate each source CSV file with its corresponding target table.
 
-      After setting the custom mapping rules, the system will re-scan the source files accordingly.
-
-        * In **Source File URIs and Names**, enter file names in the format `[file_name].csv`. For example: `TableName.01.csv`.
+        * In **Source**, enter file names in the format `[file_name].csv`. For example: `TableName.01.csv`.
         * You can also use wildcards to match multiple files:
 
             * `my-data?.csv`: Matches all CSV files that start with `my-data` followed by a single character (for example, `my-data1.csv`, `my-data2.csv`).
@@ -246,7 +240,7 @@ To import the CSV files to TiDB Cloud Starter, take the following steps:
    >
    > When importing one file, you can only use mapping settings and the source file cannot be modified. 
 
-6. Click **Next**.
+6. Click **Next**, the system will scan the source files accordingly..
 
 7. Review the scan result, check data files found and target tables to import, and then click **Start Import**.
 
@@ -282,9 +276,7 @@ To import the CSV files to TiDB Cloud Starter, take the following steps:
 
     * If you **do not use** the [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md), you need to manually configure the mapping settings. This allows you to define custom rules to associate each source CSV file with its corresponding target table.
 
-      After setting the custom mapping rules, the system will re-scan the source files accordingly.
-
-        * In **Source File URIs and Names**, enter file names in the format `[file_name].csv`. For example: `TableName.01.csv`.
+        * In **Source**, enter file names in the format `[file_name].csv`. For example: `TableName.01.csv`.
         * You can also use wildcards to match multiple files:
 
             * `my-data?.csv`: Matches all CSV files that start with `my-data` followed by a single character (for example, `my-data1.csv`, `my-data2.csv`).
@@ -301,7 +293,7 @@ To import the CSV files to TiDB Cloud Starter, take the following steps:
    >
    > When importing one file, you can only use mapping settings and the source file cannot be modified.
 
-6. Click **Next**.
+6. Click **Next**, the system will scan the source files accordingly..
 
 7. Review the scan result, check data files found and target tables to import, and then click **Start Import**.
 
