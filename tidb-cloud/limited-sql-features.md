@@ -94,6 +94,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `information_schema` | `SLOW_QUERY` | Supported | Not supported [^5] |
 | `information_schema` | `STATEMENTS_SUMMARY` | Supported | Not supported [^6] |
 | `information_schema` | `STATEMENTS_SUMMARY_EVICTED` | Supported | Not supported [^6] |
+| `information_schema` | `STATEMENTS_SUMMARY_HISTORY` | Supported | Supported |
 | `information_schema` | `TIDB_HOT_REGIONS` | Not supported [^4] | Not supported [^4] |
 | `information_schema` | `TIDB_HOT_REGIONS_HISTORY` | Supported | Not supported [^1] |
 | `information_schema` | `TIDB_SERVERS_INFO` | Supported | Not supported [^1] |
