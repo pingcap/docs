@@ -503,8 +503,8 @@ Starting from TiDB v9.0.0, you can use filters during PITR to selectively restor
 The filter patterns follow the same syntax as [table filters](/table-filter.md) used in other BR operations:
 
 - `'*.*'`: matches all databases and tables.
-- `'db1.*'`: matches all tables in database `db1`.
-- `'db1.table1'`: matches specific table `table1` in database `db1`.
+- `'db1.*'`: matches all tables in the database `db1`.
+- `'db1.table1'`: matches the specific table `table1` in the database `db1`.
 - `'db*.tbl*'`: matches databases starting with `db` and tables starting with `tbl`.
 - `'!mysql.*'`: excludes all tables in the `mysql` database.
 
@@ -538,7 +538,7 @@ tiup br restore point --pd="${PD_IP}:2379" \
 
 > **Note:**
 >
-> - When using filters, ensure that the target cluster does not contain databases or tables that match the filter, or the restore will fail with an error.
+> - When using filters, ensure that the target cluster does not contain databases or tables that match the filter. Otherwise, the restore will fail with an error.
 > - Filter options apply to both snapshot and log backup restoration phases.
 > - Multiple `--filter` options can be specified to include or exclude different patterns.
 > - PITR filtering does not support system tables yet. If you need to restore specific system tables, use `br restore full` with filters instead, which will restore only the snapshot backup data (not log backup data).
@@ -599,7 +599,7 @@ Starting from TiDB v9.0.0, you can perform PITR operations while a log backup ta
 
 #### Important limitation for PITR with ongoing log backup
 
-When you perform PITR operations while log backup is running, the restored data will also be recorded in the log backup. However, during the restore operation time window, there may be data inconsistency risks due to the nature of log restore operations. The system writes metadata to external storage to mark both the time range and data range where consistency cannot be guaranteed.
+When you perform PITR operations while log backup is running, the restored data will also be recorded in the log backup. However, during the restore operation time window, there are data inconsistency risks due to the nature of log restore operations. The system writes metadata to external storage to mark both the time range and data range where consistency cannot be guaranteed.
 
 If such inconsistency occurs during the time range `[t1, t2)`, you cannot directly restore data from that time period and must choose one of the following alternatives:
 
@@ -608,7 +608,7 @@ If such inconsistency occurs during the time range `[t1, t2)`, you cannot direct
 
 ## Abort restore operations
 
-You can use the `tiup br abort` command to clean up registry entries and checkpoint data when a restore operation fails. This command automatically finds and removes the relevant metadata based on the original restore parameters, including entries in the `mysql.tidb_restore_registry` table and checkpoint data (whether stored in the local database or external storage). Note that the `abort` command only cleans up metadata; any actual restored data must be manually dropped from the cluster.
+You can use the `tiup br abort` command to clean up registry entries and checkpoint data when a restore operation fails. This command automatically finds and removes the relevant metadata based on the original restore parameters, including entries in the `mysql.tidb_restore_registry` table and checkpoint data (whether stored in the local database or external storage). Note that the `abort` command only cleans up metadata. Any actual restored data must be manually dropped from the cluster.
 
 ### Usage examples
 
