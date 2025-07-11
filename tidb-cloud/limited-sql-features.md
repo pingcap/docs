@@ -94,7 +94,6 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `information_schema` | `SLOW_QUERY` | Supported | Not supported [^5] |
 | `information_schema` | `STATEMENTS_SUMMARY` | Supported | Not supported [^6] |
 | `information_schema` | `STATEMENTS_SUMMARY_EVICTED` | Supported | Not supported [^6] |
-| `information_schema` | `STATEMENTS_SUMMARY_HISTORY` | Supported | Not supported [^6] |
 | `information_schema` | `TIDB_HOT_REGIONS` | Not supported [^4] | Not supported [^4] |
 | `information_schema` | `TIDB_HOT_REGIONS_HISTORY` | Supported | Not supported [^1] |
 | `information_schema` | `TIDB_SERVERS_INFO` | Supported | Not supported [^1] |
@@ -132,6 +131,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `require_secure_transport` | Not supported [^12] | Read-only [^10] |
 | `skip_name_resolve` | No limitation | Read-only [^10] |
 | `sql_log_bin` | No limitation | Read-only [^10] |
+| `tidb_analyze_skip_column_types` | No limitation | Read-only [^10] |
 | `tidb_cdc_write_source` | No limitation | Read-only [^10] |
 | `tidb_check_mb4_value_in_utf8` | Not supported [^4] | Not supported [^4] |
 | `tidb_config` | Not supported [^4] | Not supported [^4] |
