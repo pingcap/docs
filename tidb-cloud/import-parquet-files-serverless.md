@@ -269,7 +269,7 @@ To import the Parquet files to TiDB Cloud Starter, take the following steps:
     - **Storage Provider**: select **Alibaba Cloud OSS**.
     - **Source Files URI**:
         - When importing one file, enter the source file URI and name in the following format `oss://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `oss://sampledata/ingest/TableName.01.parquet`.
-        - When importing multiple files, enter the source file URI and name in the following format `oss://[bucket_name]/[data_source_folder]/`. For example, `s3://sampledata/ingest/`.
+        - When importing multiple files, enter the source file URI and name in the following format `oss://[bucket_name]/[data_source_folder]/`. For example, `oss://sampledata/ingest/`.
     - **Credential**: you can use an AccessKey pair to access your bucket. For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access).
 
 4. Click **Next**.
