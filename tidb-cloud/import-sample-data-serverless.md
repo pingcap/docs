@@ -25,7 +25,7 @@ This document describes how to import the sample data into TiDB Cloud Starter vi
 
 3. On the **Import Data from Cloud Storage** page, provide the following information:
 
-   - Select **Amazon S3** as the storage provider.
+   - **Storage Provider**: select **Amazon S3**.
    - **Source Files URI**: enter the sample data URI `s3://tidbcloud-sample-data/data-ingestion/`.
    - **Credential**:
       - **AWS Role ARN**: enter `arn:aws:iam::801626783489:role/import-sample-access`.
