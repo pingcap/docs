@@ -17,7 +17,7 @@ Vector search offers a powerful solution for semantic similarity searches across
 
 <CustomContent platform="tidb-cloud">
 
-> **Warning:**
+> **Note:**
 >
 > The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
