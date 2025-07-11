@@ -291,7 +291,7 @@ Referenced in:
 
 Referenced in:
 
-- [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md)
+- [Best Practices for High-Concurrency Writes](/best-practices/high-concurrency-best-practices.md)
 - [System Variables](/system-variables.md#cte_max_recursion_depth)
 - [TiDB 5.1 Release Notes](/releases/release-5.1.0.md)
 
@@ -3335,7 +3335,7 @@ Referenced in:
 - [Best Practices for Read-Only Storage Nodes](/best-practices/readonly-nodes.md)
 - [Follower Read](/follower-read.md)
 - [Follower Read](/develop/dev-guide-use-follower-read.md)
-- [Local Read under Three Data Centers Deployment](/best-practices/three-dc-local-read.md)
+- [Best Practices for Local Reads in Three-Data-Center Deployments](/best-practices/three-dc-local-read.md)
 - [Optimizer Hints](/optimizer-hints.md)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md#tidb_replica_read-new-in-v40)
@@ -3421,7 +3421,7 @@ Referenced in:
 
 Referenced in:
 
-- [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md)
+- [Best Practices for High-Concurrency Writes](/best-practices/high-concurrency-best-practices.md)
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [Split Region](/sql-statements/sql-statement-split-region.md)

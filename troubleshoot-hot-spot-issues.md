@@ -178,7 +178,7 @@ For more details, see [Coprocessor Cache](/coprocessor-cache.md).
 
 **See also:**
 
-- [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md)
+- [Best Practices for High-Concurrency Writes](/best-practices/high-concurrency-best-practices.md)
 - [Split Region](/sql-statements/sql-statement-split-region.md)
 
 ## Scatter read hotspots
