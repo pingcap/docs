@@ -107,43 +107,44 @@ To import the Parquet files to TiDB Cloud Serverless, take the following steps:
 
     2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
-2. Select **Import data from Cloud Storage**, and then click **Amazon S3**.
+2. Click **Import data from Cloud Storage**.
 
-3. On the **Import Data from Amazon S3** page, provide the following information for the source Parquet files:
+3. On the **Import Data from Cloud Storage** page, provide the following information:
 
-    - **Import File Count**: select **One file** or **Multiple files** as needed.
-    - **Included Schema Files**: this field is only visible when importing multiple files. If the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
-    - **Data Format**: select **Parquet**.
-    - **File URI** or **Folder URI**:
+    - **Storage Provider**: select **Amazon S3**.
+    - **Source Files URI**:
         - When importing one file, enter the source file URI and name in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `s3://sampledata/ingest/TableName.01.parquet`.
         - When importing multiple files, enter the source file URI and name in the following format `s3://[bucket_name]/[data_source_folder]/`. For example, `s3://sampledata/ingest/`.
-    - **Bucket Access**: you can use either an AWS Role ARN or an AWS access key to access your bucket. For more information, see [Configure Amazon S3 access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+    - **Credential**: you can use either an AWS Role ARN or an AWS access key to access your bucket. For more information, see [Configure Amazon S3 access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
         - **AWS Role ARN**: enter the AWS Role ARN value.
         - **AWS Access Key**: enter the AWS access key ID and AWS secret access key.
 
-4. Click **Connect**.
+4. Click **Next**.
 
-5. In the **Destination** section, select the target database and table.
+5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
 
-    When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding Parquet file. After that, the data source files will be re-scanned using the provided custom mapping rule.
-
-    When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `s3://sampledata/ingest/TableName.01.parquet`.
-
-    You can also use wildcards to match the source files. For example:
-
-    - `s3://[bucket_name]/[data_source_folder]/my-data?.parquet`: all Parquet files starting with `my-data` followed by one character (such as `my-data1.parquet` and `my-data2.parquet`) in that folder will be imported into the same target table.
-
-    - `s3://[bucket_name]/[data_source_folder]/my-data*.parquet`: all Parquet files in the folder starting with `my-data` will be imported into the same target table.
-
-    Note that only `?` and `*` are supported.
+    When a directory is specified in **Source Files URI**, the **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
 
     > **Note:**
     >
-    > The URI must contain the data source folder.
+    > When a single file is specified in **Source Files URI**, the **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud automatically populates the **Source** field with the file name. In this case, you only need to select the target database and table for data import.
 
-6. Click **Start Import**.
+    - To let TiDB Cloud automatically map all source files that follow the [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **Parquet** as the data format.
 
-7. When the import progress shows **Completed**, check the imported tables.
+    - To manually configure the mapping rules to associate your source Parquet files with the target database and table, unselect this option, and then fill in the following fields:
+
+        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example: `TableName.01.parquet`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
+
+            - `my-data?.parquet`: matches all Parquet files that start with `my-data` followed by a single character, such as `my-data1.parquet` and `my-data2.parquet`.
+            - `my-data*.parquet`: matches all Parquet files that start with `my-data`, such as `my-data-2023.parquet` and `my-data-final.parquet`.
+
+        - **Target Database** and **Target Table**: select the target database and table to import the data to.
+
+6. Click **Next**. TiDB Cloud scans the source files accordingly.
+
+7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
+
+8. When the import progress shows **Completed**, check the imported tables.
 
 </div>
 
@@ -159,41 +160,42 @@ To import the Parquet files to TiDB Cloud Serverless, take the following steps:
 
     2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
-2. Select **Import data from Cloud Storage**, and then click **Google Cloud Storage**.
+2. Click **Import data from Cloud Storage**.
 
-3. On the **Import Data from Google Cloud Storage** page, provide the following information for the source Parquet files:
+3. On the **Import Data from Google Cloud Storage** page, provide the following information:
 
-    - **Import File Count**: select **One file** or **Multiple files** as needed.
-    - **Included Schema Files**: this field is only visible when importing multiple files. If the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
-    - **Data Format**: select **Parquet**.
-    - **File URI** or **Folder URI**:
+    - **Storage Provider**: select **Google Cloud Storage**.
+    - **Source Files URI**:
         - When importing one file, enter the source file URI and name in the following format `[gcs|gs]://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `[gcs|gs]://sampledata/ingest/TableName.01.parquet`.
         - When importing multiple files, enter the source file URI and name in the following format `[gcs|gs]://[bucket_name]/[data_source_folder]/`. For example, `[gcs|gs]://sampledata/ingest/`.
-    - **Bucket Access**: you can use a GCS IAM Role to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
+    - **Credential**: you can use a GCS IAM Role Service Account key to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
 
-4. Click **Connect**.
+4. Click **Next**.
 
-5. In the **Destination** section, select the target database and table.
+5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
 
-    When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding Parquet file. After that, the data source files will be re-scanned using the provided custom mapping rule.
-
-    When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `[gcs|gs]://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `[gcs|gs]://sampledata/ingest/TableName.01.parquet`.
-
-    You can also use wildcards to match the source files. For example:
-
-    - `[gcs|gs]://[bucket_name]/[data_source_folder]/my-data?.parquet`: all Parquet files starting with `my-data` followed by one character (such as `my-data1.parquet` and `my-data2.parquet`) in that folder will be imported into the same target table.
-
-    - `[gcs|gs]://[bucket_name]/[data_source_folder]/my-data*.parquet`: all Parquet files in the folder starting with `my-data` will be imported into the same target table.
-
-    Note that only `?` and `*` are supported.
+    When a directory is specified in **Source Files URI**, the **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
 
     > **Note:**
     >
-    > The URI must contain the data source folder.
+    > When a single file is specified in **Source Files URI**, the **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud automatically populates the **Source** field with the file name. In this case, you only need to select the target database and table for data import.
 
-6. Click **Start Import**.
+    - To let TiDB Cloud automatically map all source files that follow the [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **Parquet** as the data format.
 
-7. When the import progress shows **Completed**, check the imported tables.
+    - To manually configure the mapping rules to associate your source Parquet files with the target database and table, unselect this option, and then fill in the following fields:
+
+        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example: `TableName.01.parquet`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
+
+            - `my-data?.parquet`: matches all Parquet files that start with `my-data` followed by a single character, such as `my-data1.parquet` and `my-data2.parquet`.
+            - `my-data*.parquet`: matches all Parquet files that start with `my-data`, such as `my-data-2023.parquet` and `my-data-final.parquet`.
+
+        - **Target Database** and **Target Table**: select the target database and table to import the data to.
+
+6. Click **Next**. TiDB Cloud scans the source files accordingly.
+
+7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
+
+8. When the import progress shows **Completed**, check the imported tables.
 
 </div>
 
@@ -209,41 +211,42 @@ To import the Parquet files to TiDB Cloud Serverless, take the following steps:
 
     2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
-2. Select **Import data from Cloud Storage**, and then click **Azure Blob Storage**.
+2. Click **Import data from Cloud Storage**.
 
-3. On the **Import Data from Azure Blob Storage** page, provide the following information for the source Parquet files:
+3. On the **Import Data from Cloud Storage** page, provide the following information:
 
-    - **Import File Count**: select **One file** or **Multiple files** as needed.
-    - **Included Schema Files**: this field is only visible when importing multiple files. If the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
-    - **Data Format**: select **Parquet**.
-    - **File URI** or **Folder URI**:
+    - **Storage Provider**: select **Azure Blob Storage**.
+    - **Source Files URI**:
         - When importing one file, enter the source file URI and name in the following format `[azure|https]://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `[azure|https]://sampledata/ingest/TableName.01.parquet`.
         - When importing multiple files, enter the source file URI and name in the following format `[azure|https]://[bucket_name]/[data_source_folder]/`. For example, `[azure|https]://sampledata/ingest/`.
-    - **Bucket Access**: you can use a shared access signature (SAS) token to access your bucket. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+    - **Credential**: you can use a shared access signature (SAS) token to access your bucket. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access)
 
-4. Click **Connect**.
+4. Click **Next**.
 
-5. In the **Destination** section, select the target database and table.
+5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
 
-    When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding Parquet file. After that, the data source files will be re-scanned using the provided custom mapping rule.
-
-    When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `[azure|https]://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `[azure|https]://sampledata/ingest/TableName.01.parquet`.
-
-    You can also use wildcards to match the source files. For example:
-
-    - `[azure|https]://[bucket_name]/[data_source_folder]/my-data?.parquet`: all Parquet files starting with `my-data` followed by one character (such as `my-data1.parquet` and `my-data2.parquet`) in that folder will be imported into the same target table.
-
-    - `[azure|https]://[bucket_name]/[data_source_folder]/my-data*.parquet`: all Parquet files in the folder starting with `my-data` will be imported into the same target table.
-
-    Note that only `?` and `*` are supported.
+    When a directory is specified in **Source Files URI**, the **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
 
     > **Note:**
     >
-    > The URI must contain the data source folder.
+    > When a single file is specified in **Source Files URI**, the **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud automatically populates the **Source** field with the file name. In this case, you only need to select the target database and table for data import.
 
-6. Click **Start Import**.
+    - To let TiDB Cloud automatically map all source files that follow the [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **Parquet** as the data format.
 
-7. When the import progress shows **Completed**, check the imported tables.
+    - To manually configure the mapping rules to associate your source Parquet files with the target database and table, unselect this option, and then fill in the following fields:
+
+        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example: `TableName.01.parquet`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
+
+            - `my-data?.parquet`: matches all Parquet files that start with `my-data` followed by a single character, such as `my-data1.parquet` and `my-data2.parquet`.
+            - `my-data*.parquet`: matches all Parquet files that start with `my-data`, such as `my-data-2023.parquet` and `my-data-final.parquet`.
+
+        - **Target Database** and **Target Table**: select the target database and table to import the data to.
+
+6. Click **Next**. TiDB Cloud scans the source files accordingly.
+
+7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
+
+8. When the import progress shows **Completed**, check the imported tables.
 
 </div>
 
@@ -259,41 +262,42 @@ To import the Parquet files to TiDB Cloud Serverless, take the following steps:
 
     2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
-2. Select **Import data from Cloud Storage**, and then click **Alibaba Cloud OSS**.
+2. Click **Import data from Cloud Storage**.
 
-3. On the **Import Data from Alibaba Cloud OSS** page, provide the following information for the source Parquet files:
+3. On the **Import Data from Cloud Storage** page, provide the following information:
 
-    - **Import File Count**: select **One file** or **Multiple files** as needed.
-    - **Included Schema Files**: this field is only visible when importing multiple files. If the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
-    - **Data Format**: select **Parquet**.
-    - **File URI** or **Folder URI**:
+    - **Storage Provider**: select **Alibaba Cloud OSS**.
+    - **Source Files URI**:
         - When importing one file, enter the source file URI and name in the following format `oss://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `oss://sampledata/ingest/TableName.01.parquet`.
         - When importing multiple files, enter the source file URI and name in the following format `oss://[bucket_name]/[data_source_folder]/`. For example, `oss://sampledata/ingest/`.
-    - **Bucket Access**: you can use an AccessKey pair to access your bucket. For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access).
+    - **Credential**: you can use an AccessKey pair to access your bucket. For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access).
 
-4. Click **Connect**.
+4. Click **Next**.
 
-5. In the **Destination** section, select the target database and table.
+5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
 
-    When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding Parquet file. After that, the data source files will be re-scanned using the provided custom mapping rule.
-
-    When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `oss://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `oss://sampledata/ingest/TableName.01.parquet`.
-
-    You can also use wildcards to match the source files. For example:
-
-    - `oss://[bucket_name]/[data_source_folder]/my-data?.parquet`: all Parquet files starting with `my-data` followed by one character (such as `my-data1.parquet` and `my-data2.parquet`) in that folder will be imported into the same target table.
-
-    - `oss://[bucket_name]/[data_source_folder]/my-data*.parquet`: all Parquet files in the folder starting with `my-data` will be imported into the same target table.
-
-    Note that only `?` and `*` are supported.
+    When a directory is specified in **Source Files URI**, the **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
 
     > **Note:**
     >
-    > The URI must contain the data source folder.
+    > When a single file is specified in **Source Files URI**, the **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud automatically populates the **Source** field with the file name. In this case, you only need to select the target database and table for data import.
 
-6. Click **Start Import**.
+    - To let TiDB Cloud automatically map all source files that follow the [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **Parquet** as the data format.
 
-7. When the import progress shows **Completed**, check the imported tables.
+    - To manually configure the mapping rules to associate your source Parquet files with the target database and table, unselect this option, and then fill in the following fields:
+
+        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example: `TableName.01.parquet`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
+
+            - `my-data?.parquet`: matches all Parquet files that start with `my-data` followed by a single character, such as `my-data1.parquet` and `my-data2.parquet`.
+            - `my-data*.parquet`: matches all Parquet files that start with `my-data`, such as `my-data-2023.parquet` and `my-data-final.parquet`.
+
+        - **Target Database** and **Target Table**: select the target database and table to import the data to.
+
+6. Click **Next**. TiDB Cloud scans the source files accordingly.
+
+7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
+
+8. When the import progress shows **Completed**, check the imported tables.
 
 </div>
 

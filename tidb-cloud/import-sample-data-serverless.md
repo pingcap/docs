@@ -21,19 +21,25 @@ This document describes how to import the sample data into TiDB Cloud Serverless
 
     2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
-2. Select **Import data from Cloud Storage**, and then click **Amazon S3**.
+2. Click **Import data from Cloud Storage**.
 
-3. On the **Import Data from Amazon S3** page, configure the following source data information:
+3. On the **Import Data from Cloud Storage** page, provide the following information:
 
-    - **Import File Count**: for the sample data, select **Multiple files**.
-    - **Included Schema Files**: for the sample data, select **Yes**.
-    - **Data Format**: select **SQL**. 
-    - **Folder URI** or **File URI**: enter the sample data URI `s3://tidbcloud-sample-data/data-ingestion/`.
-    - **Bucket Access**: for the sample data, you can only use a Role ARN to access its bucket. For your own data, you can use either an AWS access key or a Role ARN to access your bucket.
-        - **AWS Role ARN**: enter `arn:aws:iam::801626783489:role/import-sample-access`.
-        - **AWS Access Key**: skip this option for the sample data.
+   - **Storage Provider**: select **Amazon S3**.
+   - **Source Files URI**: enter the sample data URI `s3://tidbcloud-sample-data/data-ingestion/`.
+   - **Credential**:
+      - **AWS Role ARN**: enter `arn:aws:iam::801626783489:role/import-sample-access`.
+      - **AWS Access Key**: skip this option for the sample data.
 
-4. Click **Connect** > **Start Import**.
+4. Click **Next**.
+
+5. In the **Destination Mapping** section, keep the **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option selected and select **SQL** as the data format.
+
+6. Click **Next**.
+
+7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
+
+8. When the import progress shows **Completed**, check the imported tables.
 
 When the data import progress shows **Completed**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud Serverless.
 
