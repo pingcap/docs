@@ -123,28 +123,26 @@ To import the Parquet files to TiDB Cloud Serverless, take the following steps:
 
 5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
 
-    * The **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default. If you unselect it, you need to manually configure the mapping rules to associate your source CSV files with the target database and table.
+    When a directory is specified in **Source Files URI**, the **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
 
-        * In **Source**, enter file names in the format `[file_name].parquet`. For example: `TableName.01.parquet`.
-        * You can also use wildcards to match multiple files:
+    > **Note:**
+    >
+    > When a single file is specified in **Source Files URI**, the **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud automatically populates the **Source** field with the file name. In this case, you only need to select the target database and table for data import.
 
-            * `my-data?.parquet`: Matches all Parquet files that start with `my-data` followed by a single character (for example, `my-data1.parquet`, `my-data2.parquet`).
+    - To let TiDB Cloud automatically map all source files that follow the [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **Parquet** as the data format.
 
-            * `my-data*.parquet`: Matches all Parquet files that start with `my-data` (for example, `my-data-2023.parquet`, `my-data-final.parquet`).
+    - To manually configure the mapping rules to associate your source Parquet files with the target database and table, unselect this option, and then fill in the following fields:
 
-      > Only `*` and `?` wildcards are supported.
+        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example: `TableName.01.parquet`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
 
-    * If you **use** the naming conventions, all source files that conform to the format will be automatically mapped to their corresponding tables.
+            - `my-data?.parquet`: matches all Parquet files that start with `my-data` followed by a single character, such as `my-data1.parquet` and `my-data2.parquet`.
+            - `my-data*.parquet`: matches all Parquet files that start with `my-data`, such as `my-data-2023.parquet` and `my-data-final.parquet`.
 
-        * Select **Parquet** as the data format.
+        - **Target Database** and **Target Table**: select the target database and table to import the data to.
 
-   > **Note:**
-   >
-   > When importing one file, you can only use mapping settings and the source file cannot be modified.
+6. Click **Next**. TiDB Cloud scans the source files accordingly.
 
-6. Click **Next**, the system will scan the source files accordingly..
-
-7. Review the scan result, check data files found and target tables to import, and then click **Start Import**.
+7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
 
 8. When the import progress shows **Completed**, check the imported tables.
 
@@ -176,28 +174,26 @@ To import the Parquet files to TiDB Cloud Serverless, take the following steps:
 
 5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
 
-    * The **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default. If you unselect it, you need to manually configure the mapping rules to associate your source CSV files with the target database and table.
+    When a directory is specified in **Source Files URI**, the **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
 
-        * In **Source**, enter file names in the format `[file_name].parquet`. For example: `TableName.01.parquet`.
-        * You can also use wildcards to match multiple files:
+    > **Note:**
+    >
+    > When a single file is specified in **Source Files URI**, the **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud automatically populates the **Source** field with the file name. In this case, you only need to select the target database and table for data import.
 
-            * `my-data?.parquet`: Matches all Parquet files that start with `my-data` followed by a single character (for example, `my-data1.parquet`, `my-data2.parquet`).
+    - To let TiDB Cloud automatically map all source files that follow the [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **Parquet** as the data format.
 
-            * `my-data*.parquet`: Matches all Parquet files that start with `my-data` (for example, `my-data-2023.parquet`, `my-data-final.parquet`).
+    - To manually configure the mapping rules to associate your source Parquet files with the target database and table, unselect this option, and then fill in the following fields:
 
-      > Only `*` and `?` wildcards are supported.
+        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example: `TableName.01.parquet`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
 
-    * If you **use** the naming conventions, all source files that conform to the format will be automatically mapped to their corresponding tables.
+            - `my-data?.parquet`: matches all Parquet files that start with `my-data` followed by a single character, such as `my-data1.parquet` and `my-data2.parquet`.
+            - `my-data*.parquet`: matches all Parquet files that start with `my-data`, such as `my-data-2023.parquet` and `my-data-final.parquet`.
 
-        * Select **Parquet** as the data format.
+        - **Target Database** and **Target Table**: select the target database and table to import the data to.
 
-   > **Note:**
-   >
-   > When importing one file, you can only use mapping settings and the source file cannot be modified.
+6. Click **Next**. TiDB Cloud scans the source files accordingly.
 
-6. Click **Next**, the system will scan the source files accordingly..
-
-7. Review the scan result, check data files found and target tables to import, and then click **Start Import**.
+7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
 
 8. When the import progress shows **Completed**, check the imported tables.
 
@@ -229,28 +225,26 @@ To import the Parquet files to TiDB Cloud Serverless, take the following steps:
 
 5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
 
-    * The **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default. If you unselect it, you need to manually configure the mapping rules to associate your source CSV files with the target database and table.
+    When a directory is specified in **Source Files URI**, the **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
 
-        * In **Source**, enter file names in the format `[file_name].parquet`. For example: `TableName.01.parquet`.
-        * You can also use wildcards to match multiple files:
+    > **Note:**
+    >
+    > When a single file is specified in **Source Files URI**, the **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud automatically populates the **Source** field with the file name. In this case, you only need to select the target database and table for data import.
 
-            * `my-data?.parquet`: Matches all Parquet files that start with `my-data` followed by a single character (for example, `my-data1.parquet`, `my-data2.parquet`).
+    - To let TiDB Cloud automatically map all source files that follow the [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **Parquet** as the data format.
 
-            * `my-data*.parquet`: Matches all Parquet files that start with `my-data` (for example, `my-data-2023.parquet`, `my-data-final.parquet`).
+    - To manually configure the mapping rules to associate your source Parquet files with the target database and table, unselect this option, and then fill in the following fields:
 
-      > Only `*` and `?` wildcards are supported.
+        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example: `TableName.01.parquet`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
 
-    * If you **use** the naming conventions, all source files that conform to the format will be automatically mapped to their corresponding tables.
+            - `my-data?.parquet`: matches all Parquet files that start with `my-data` followed by a single character, such as `my-data1.parquet` and `my-data2.parquet`.
+            - `my-data*.parquet`: matches all Parquet files that start with `my-data`, such as `my-data-2023.parquet` and `my-data-final.parquet`.
 
-        * Select **Parquet** as the data format.
+        - **Target Database** and **Target Table**: select the target database and table to import the data to.
 
-   > **Note:**
-   >
-   > When importing one file, you can only use mapping settings and the source file cannot be modified.
+6. Click **Next**. TiDB Cloud scans the source files accordingly.
 
-6. Click **Next**, the system will scan the source files accordingly..
-
-7. Review the scan result, check data files found and target tables to import, and then click **Start Import**.
+7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
 
 8. When the import progress shows **Completed**, check the imported tables.
 
@@ -282,28 +276,26 @@ To import the Parquet files to TiDB Cloud Serverless, take the following steps:
 
 5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
 
-    * The **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default. If you unselect it, you need to manually configure the mapping rules to associate your source CSV files with the target database and table.
+    When a directory is specified in **Source Files URI**, the **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
 
-        * In **Source**, enter file names in the format `[file_name].parquet`. For example: `TableName.01.parquet`.
-        * You can also use wildcards to match multiple files:
+    > **Note:**
+    >
+    > When a single file is specified in **Source Files URI**, the **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud automatically populates the **Source** field with the file name. In this case, you only need to select the target database and table for data import.
 
-            * `my-data?.parquet`: Matches all Parquet files that start with `my-data` followed by a single character (for example, `my-data1.parquet`, `my-data2.parquet`).
+    - To let TiDB Cloud automatically map all source files that follow the [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **Parquet** as the data format.
 
-            * `my-data*.parquet`: Matches all Parquet files that start with `my-data` (for example, `my-data-2023.parquet`, `my-data-final.parquet`).
+    - To manually configure the mapping rules to associate your source Parquet files with the target database and table, unselect this option, and then fill in the following fields:
 
-      > Only `*` and `?` wildcards are supported.
+        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example: `TableName.01.parquet`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
 
-    * If you **use** the naming conventions, all source files that conform to the format will be automatically mapped to their corresponding tables.
+            - `my-data?.parquet`: matches all Parquet files that start with `my-data` followed by a single character, such as `my-data1.parquet` and `my-data2.parquet`.
+            - `my-data*.parquet`: matches all Parquet files that start with `my-data`, such as `my-data-2023.parquet` and `my-data-final.parquet`.
 
-        * Select **Parquet** as the data format.
+        - **Target Database** and **Target Table**: select the target database and table to import the data to.
 
-   > **Note:**
-   >
-   > When importing one file, you can only use mapping settings and the source file cannot be modified.
+6. Click **Next**. TiDB Cloud scans the source files accordingly.
 
-6. Click **Next**, the system will scan the source files accordingly.
-
-7. Review the scan result, check data files found and target tables to import, and then click **Start Import**.
+7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
 
 8. When the import progress shows **Completed**, check the imported tables.
 
