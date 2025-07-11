@@ -79,7 +79,6 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 ### `tikv-worker-url` <span class="version-mark">New in v9.0.0</span>
 
-
 > **Warning:**
 >
 > This configuration item is currently unused and might be removed in a future release without prior notice.
