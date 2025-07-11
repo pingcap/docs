@@ -103,11 +103,11 @@ To import the CSV files to TiDB Cloud Serverless, take the following steps:
 
 3. On the **Import Data from Cloud Storage** page, provide the following information:
 
-    - Select **Amazon S3** as the storage provider.
+    - **Storage Provider**: select **Amazon S3**.
     - **Source Files URI**:
         - When importing one file, enter the source file URI and name in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `s3://sampledata/ingest/TableName.01.csv`.
         - When importing multiple files, enter the source file URI and name in the following format `s3://[bucket_name]/[data_source_folder]/`. For example, `s3://sampledata/ingest/`.
-    - **Credential**:
+    - **Credential**: you can use either an AWS Role ARN or an AWS access key to access your bucket. For more information, see [Configure Amazon S3 access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
         - **AWS Role ARN**: enter the AWS Role ARN value.
         - **AWS Access Key**: enter the AWS access key ID and AWS secret access key.
 
@@ -115,7 +115,7 @@ To import the CSV files to TiDB Cloud Serverless, take the following steps:
 
 5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
 
-    * If you **do not use** the [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md), you need to manually configure the mapping settings. This allows you to define custom rules to associate each source CSV file with its corresponding target table.
+    * The **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default. If you unselect it, you need to manually configure the mapping rules to associate your source CSV files with the target database and table.
 
         * In **Source**, enter file names in the format `[file_name].csv`. For example: `TableName.01.csv`.
         * You can also use wildcards to match multiple files:
@@ -158,7 +158,7 @@ To import the CSV files to TiDB Cloud Serverless, take the following steps:
 
 3. On the **Import Data from Cloud Storage** page, provide the following information:
 
-    - Select **Google Cloud Storage** as the storage provider.
+    - **Storage Provider**: select **Google Cloud Storage**.
     - **Source Files URI**:
         - When importing one file, enter the source file URI and name in the following format `[gcs|gs]://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `[gcs|gs]://sampledata/ingest/TableName.01.csv`.
         - When importing multiple files, enter the source file URI and name in the following format `[gcs|gs]://[bucket_name]/[data_source_folder]/`. For example, `s3://sampledata/ingest/`.
@@ -211,7 +211,7 @@ To import the CSV files to TiDB Cloud Serverless, take the following steps:
 
 3. On the **Import Data from Cloud Storage** page, provide the following information:
 
-    - Select **Azure Blob Storage** as the storage provider.
+    - **Storage Provider**: select **Azure Blob Storage**.
     - **Source Files URI**:
         - When importing one file, enter the source file URI and name in the following format `[azure|https]://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `[azure|https]://sampledata/ingest/TableName.01.csv`.
         - When importing multiple files, enter the source file URI and name in the following format `[azure|https]://[bucket_name]/[data_source_folder]/`. For example, `s3://sampledata/ingest/`.
@@ -264,7 +264,7 @@ To import the CSV files to TiDB Cloud Serverless, take the following steps:
 
 3. On the **Import Data from Cloud Storage** page, provide the following information:
 
-    - Select **Alibaba Cloud OSS** as the storage provider.
+    - **Storage Provider**: select **Alibaba Cloud OSS**.
     - **Source Files URI**:
         - When importing one file, enter the source file URI and name in the following format `oss://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `oss://sampledata/ingest/TableName.01.csv`.
         - When importing multiple files, enter the source file URI and name in the following format `oss://[bucket_name]/[data_source_folder]/`. For example, `s3://sampledata/ingest/`.
