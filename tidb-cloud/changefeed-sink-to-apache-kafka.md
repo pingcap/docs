@@ -211,13 +211,13 @@ The steps vary depending on the connectivity method you select.
 2. Customize **Event Filter** to filter the events that you want to replicate.
 
     - **Tables matching**: you can set which tables the event filter will be applied to in this column. The rule syntax is the same as that used for the preceding **Table Filter** area. You can add up to 10 event filter rules per changefeed.
-    - **Event Filter**: You can apply the following event filters to exclude specific events from the changefeed:
-        - **Ignore event**: Excludes specified event types.
-        - **Ignore SQL**: Excludes DDL events that match specified expressions. For example, expressions like `^drop` or `add column` will exclude DDLs that start with `DROP` or include `ADD COLUMN`.
-        - **Ignore insert value expression**: Excludes `INSERT` DMLs that meet specific conditions. For example, `id >= 100` will exclude insert statements where `id` is greater than or equal to 100.
-        - **Ignore update new value expression**: Excludes `UPDATE` DMLs where the new value matches a specified condition. For example, `gender = 'male'` will exclude updates that result in `gender` being `male`.
-        - **Ignore update old value expression**: Excludes `UPDATE` DMLs where the old value matches a specified condition. For example, `age < 18` will exclude updates where the old value of `age` is less than 18.
-        - **Ignore delete value expression**: Excludes `DELETE` DMLs that meet a specified condition. For example, `name = 'john'` will exclude delete statements where the name is `'john'`.
+    - **Event Filter**: you can use the following event filters to exclude specific events from the changefeed:
+        - **Ignore event**: excludes specified event types.
+	    - **Ignore SQL**: excludes DDL events that match specified expressions. For example, `^drop` excludes statements starting with `DROP`, and `add column` excludes statements containing `ADD COLUMN`.
+	    - **Ignore insert value expression**: excludes `INSERT` statements that meet specific conditions. For example, `id >= 100` excludes `INSERT` statements where `id` is greater than or equal to 100.
+	    - **Ignore update new value expression**: excludes `UPDATE` statements where the new value matches a specified condition. For example, `gender = 'male'` excludes updates that result in `gender` being `male`.
+	    - **Ignore update old value expression**: excludes `UPDATE` statements where the old value matches a specified condition. For example, `age < 18` excludes updates where the old value of `age` is less than 18.
+	    - **Ignore delete value expression**: excludes `DELETE` statements that meet a specified condition. For example, `name = 'john'` excludes `DELETE` statements where the name is `'john'`.
 
 3. Customize **Column Selector** to select columns from events and send only the data changes related to those columns to the downstream.
 
