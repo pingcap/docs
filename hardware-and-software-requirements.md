@@ -248,7 +248,7 @@ As an open-source distributed SQL database, TiDB requires the following network 
 | Alertmanager | 9093 | the port for the alert web service |
 | Alertmanager | 9094 | the alert communication port |
 
-## Disk space requirements
+## Storage requirements
 
 <table>
 <thead>
@@ -291,6 +291,8 @@ As an open-source distributed SQL database, TiDB requires the following network 
   </tr>
 </tbody>
 </table>
+
+TiDB supports XFS and Ext4 filesystems, other filesystems are not recommended for production deployments.
 
 ## Web browser requirements
 
