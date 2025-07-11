@@ -77,7 +77,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 + Default value: `-1`
 + When the remaining available storage in `tmp-storage-path` is lower than the value defined by `tmp-storage-quota`, the TiDB server reports an error when it is started, and exits.
 
-### `tikv-worker-url` <span class="version-mark">New in v9.0.0-xxxx</span>
+### `tikv-worker-url` <span class="version-mark">New in v9.0.0</span>
 
 + Specifies the url of tikv-worker. This option is added but currently unused and may be removed in a future release without notice.
 
