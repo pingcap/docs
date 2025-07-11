@@ -168,7 +168,7 @@ To import the CSV files to TiDB Cloud Starter, take the following steps:
 
 5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
 
-    * If you **do not use** the [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md), you need to manually configure the mapping settings. This allows you to define custom rules to associate each source CSV file with its corresponding target table.
+    * The **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default. If you unselect it, you need to manually configure the mapping rules to associate your source CSV files with the target database and table.
 
         * In **Source**, enter file names in the format `[file_name].csv`. For example: `TableName.01.csv`.
         * You can also use wildcards to match multiple files:
@@ -221,7 +221,7 @@ To import the CSV files to TiDB Cloud Starter, take the following steps:
 
 5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
 
-    * If you **do not use** the [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md), you need to manually configure the mapping settings. This allows you to define custom rules to associate each source CSV file with its corresponding target table.
+    * The **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default. If you unselect it, you need to manually configure the mapping rules to associate your source CSV files with the target database and table.
 
         * In **Source**, enter file names in the format `[file_name].csv`. For example: `TableName.01.csv`.
         * You can also use wildcards to match multiple files:
@@ -274,7 +274,7 @@ To import the CSV files to TiDB Cloud Starter, take the following steps:
 
 5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
 
-    * If you **do not use** the [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md), you need to manually configure the mapping settings. This allows you to define custom rules to associate each source CSV file with its corresponding target table.
+    * The **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default. If you unselect it, you need to manually configure the mapping rules to associate your source CSV files with the target database and table.
 
         * In **Source**, enter file names in the format `[file_name].csv`. For example: `TableName.01.csv`.
         * You can also use wildcards to match multiple files:
