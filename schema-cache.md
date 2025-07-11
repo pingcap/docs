@@ -20,8 +20,20 @@ You can enable the schema caching feature by configuring the system variable [`t
 - In scenarios with a large number of databases and tables (for example, more than 100,000 databases and tables) or when the number of databases and tables is large enough to affect system performance, it is recommended to enable the schema caching feature.
 - You can monitor the hit rate of the schema cache by observing the subpanel **Infoschema v2 Cache Operation** under the **Schema load** section in TiDB Dashboard. If the hit rate is low, you can increase the value of [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800).
 - You can monitor the current size of the schema cache being used by observing the subpanel **Infoschema v2 Cache Size** under the **Schema load** section in TiDB Dashboard.
+
+<CustomContent platform="tidb">
+
 - It is recommended to disable [`performance.force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710) to reduce TiDB startup time.
 - If you need to create a large number of tables (for example, more than 100,000 tables), it is recommended to set the [`split-table`](/tidb-configuration-file.md#split-table) parameter to `false` to reduce the number of Regions and thus decrease TiKV's memory usage.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- It is recommended to disable [`performance.force-init-stats`](https://docs.pingcap.com/zh/tidb/stable/tidb-configuration-file/#force-init-stats-new-in-v657-and-v710) to reduce TiDB startup time.
+- If you need to create a large number of tables (for example, more than 100,000 tables), it is recommended to set the [`split-table`](https://docs.pingcap.com/zh/tidb/stable/tidb-configuration-file/#split-table) parameter to `false` to reduce the number of Regions and thus decrease TiKV's memory usage.
+
+</CustomContent>
 
 ## Known limitations
 
