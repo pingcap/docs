@@ -33,11 +33,11 @@ This document describes how to import the sample data into TiDB Cloud Serverless
 
 4. Click **Next**.
 
-5. In the **Destination Mapping** section, use the [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) and select **SQL** as the data format 
+5. In the **Destination Mapping** section, keep the **Use [TiDB Dumpling file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option selected and select **SQL** as the data format.
 
 6. Click **Next**.
 
-7. Review the scan result, check data files found and target tables to import, and then click **Start Import**.
+7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
 
 8. When the import progress shows **Completed**, check the imported tables.
 
