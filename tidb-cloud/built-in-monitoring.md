@@ -9,16 +9,15 @@ TiDB Cloud collects and displays a full set of standard metrics of your cluster 
 
 ## View the Metrics page
 
-To view the metrics on the Metrics page, take the following steps:
+To view the metrics on the **Metrics** page, take the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
 
     > **Tip:**
     >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. Click the name of the target cluster. The cluster overview page is displayed.
-3. Click **Metrics** in the left navigation pane.
+2. In the left navigation pane, click **Monitoring** > **Metrics**.
 
 ## Metrics retention policy
 
@@ -26,7 +25,7 @@ For TiDB Cloud Dedicated clusters and TiDB Cloud Serverless clusters, the metric
 
 ## Metrics for TiDB Cloud Dedicated clusters
 
-The following sections illustrate the metrics on the Metrics page for TiDB Cloud Dedicated clusters.
+The following sections illustrate the metrics on the **Metrics** page for TiDB Cloud Dedicated clusters.
 
 ### Overview
 
@@ -82,10 +81,10 @@ The following sections illustrate the metrics on the Metrics page for TiDB Cloud
 
 ## Metrics for TiDB Cloud Serverless clusters
 
-The Metrics page provides two tabs for metrics of TiDB Cloud Serverless clusters:
+The **Metrics** page provides two tabs for metrics of TiDB Cloud Serverless clusters:
 
-- Cluster Status: displays the cluster-level main metrics.
-- Database Status: displays the database-level main metrics.
+- **Cluster Status**: displays the cluster-level main metrics.
+- **Database Status**: displays the database-level main metrics.
 
 ### Cluster Status
 

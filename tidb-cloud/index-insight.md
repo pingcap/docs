@@ -30,7 +30,7 @@ Before enabling the Index Insight feature, make sure that you have created a TiD
 
 ### Step 1: Enable Index Insight
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of your TiDB Cloud Dedicated cluster, and then click **Diagnosis** in the left navigation pane.
+1. Navigate to the [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) page of your TiDB Cloud Dedicated cluster.
 
 2. Click the **Index Insight BETA** tab. The **Index Insight overview** page is displayed.
 

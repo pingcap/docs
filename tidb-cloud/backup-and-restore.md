@@ -16,11 +16,21 @@ This document describes how to back up and restore your TiDB Cloud Dedicated clu
 
 - For clusters of v6.2.0 or later versions, TiDB Cloud Dedicated supports restoring user accounts and SQL bindings from backups by default.
 - TiDB Cloud Dedicated does not support restoring system variables stored in the `mysql` schema. 
-- It is recommended that you import data first, then perform a **manual** snapshot backup, and finally enable Point-in-time Restore. Because the data imported through the TiDB Cloud console **does not** generate change logs, it cannot be automatically detected and backed up. For more information, see [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md). 
+- It is recommended that you import data first, then perform a **manual** snapshot backup, and finally enable Point-in-time Restore. Because the data imported through the TiDB Cloud console **does not** generate change logs, it cannot be automatically detected and backed up. For more information, see [Import CSV Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-csv-files.md). 
 - If you turn on and off Point-in-time Restore multiple times, you can only choose a time point within the recoverable range after the most recent Point-in-time Restore is enabled. The earlier recoverable range is not accessible.
 - DO NOT modify the switches of **Point-in-time Restore** and **Dual Region Backup** at the same time.
 
 ## Backup
+
+### View the Backup page
+
+1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
+
+    > **Tip:**
+    >
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+
+2. In the left navigation pane, click **Data** > **Backup**.
 
 ### Turn on auto backup
 
@@ -40,11 +50,11 @@ This feature supports restoring data of any point in time to a new cluster. You 
 
 It is strongly recommended to turn on this feature. The cost is the same as snapshot backup. For more information, refer to [Data Backup Cost](https://www.pingcap.com/tidb-dedicated-pricing-details#backup-storage-cost).
 
-To turn on this feature, perform the following steps:
+To turn on this feature for your TiDB Cloud Dedicated cluster, perform the following steps:
 
-1. Navigate to the **Backup** page of a TiDB Cloud Dedicated cluster.
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
-2. Click **Backup Settings**.
+2. Click **Backup Setting**.
 
 3. Toggle the **Auto Backup** switch to **On**.
 
@@ -54,30 +64,28 @@ To turn on this feature, perform the following steps:
     >
     > Point-in-Time Restore only takes effect after the next backup task is completed. To make it take effect earlier, you can [manually perform a backup](#perform-a-manual-backup) after enabling it.
 
-5. Click **Confirm** to preview the configuration changes.
-
-6. Click **Confirm** again to save changes.
+5. Click **Save** to save changes.
 
 #### Configure backup schedule
 
 TiDB Cloud Dedicated supports daily and weekly backup schedules. By default, the backup schedule is set to daily. You can choose a specific time of the day or week to start snapshot backup.
 
-To configure the backup schedule, perform the following steps:
+To configure the backup schedule for your TiDB Cloud Dedicated cluster, perform the following steps:
 
-1. Navigate to the **Backup** page of a TiDB Cloud Dedicated cluster.
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
-2. Click **Backup Settings**.
+2. Click **Backup Setting**.
 
 3. Toggle the **Auto Backup** switch to **On**.
 
 4. Configure the backup schedule as follows:
 
-    - In **Backup Scheduler**, select either the **Daily** or **Weekly** checkbox. If you select **Weekly**, you need to specify the days of the week for the backup.
+    - In **Backup Cycle**, click either the **Daily Backup** or **Weekly Backup** tab. For **Weekly Backup**, you need to specify the days of the week for the backup.
 
         > **Warning**
         >
         > - When weekly backup is enabled, the Point-in-time Restore feature is enabled by default and cannot be disabled.
-        > - If you change the backup scheduler from weekly to daily, the Point-in-time Restore feature remains its original setting. You can manually disable it if needed.
+        > - If you change the backup cycle from weekly to daily, the Point-in-time Restore feature remains its original setting. You can manually disable it if needed.
 
     - In **Backup Time**, schedule a start time for the daily or weekly cluster backup.
 
@@ -91,32 +99,31 @@ To configure the backup schedule, perform the following steps:
 
         > **Note**
         >
-        > - After you delete a cluster, the automatic backup files will be retained for a specified period, as set in backup retention. You need to delete the backup files accordingly.
-        > - After you delete a cluster, the existing manual backup files will be retained until you manually delete them, or your account is closed.
+        > - All auto-backups, except the latest one, will be deleted if their lifetime exceeds the retention period. The latest auto-backup will not be deleted unless you delete it manually. This ensures that you can restore cluster data if accidental deletion occurs.
+        > - After you delete a cluster, auto-backups with a lifetime within the retention period will be moved to the recycle bin.
 
 ### Turn on dual region backup
 
 > **Note:**
 >
-> TiDB Cloud Dedicated clusters hosted on Google Cloud work seamlessly with Google Cloud Storage. Similar to Google Cloud Storage, **TiDB Cloud Dedicated supports dual-region pairing only within the same multi-region code as Google dual-region storage**. For example, in Asia, currently you must pair Tokyo and Osaka together for dual-region storage. For more information, refer to [Dual-regions](https://cloud.google.com/storage/docs/locations#location-dr).
+> - Currently, the dual region backup feature is only available for clusters hosted on AWS and Google Cloud.
+> - TiDB Cloud Dedicated clusters hosted on Google Cloud work seamlessly with Google Cloud Storage. Similar to Google Cloud Storage, **TiDB Cloud Dedicated supports dual-region pairing only within the same multi-region code as Google dual-region storage**. For example, in Asia, currently you must pair Tokyo and Osaka together for dual-region storage. For more information, refer to [Dual-regions](https://cloud.google.com/storage/docs/locations#location-dr).
 
 TiDB Cloud Dedicated supports dual region backup by replicating backups from your cluster region to another different region. After you enable this feature, all backups are automatically replicated to the specified region. This provides cross-region data protection and disaster recovery capabilities. It is estimated that approximately 99% of the data can be replicated to the secondary region within an hour.
 
 Dual region backup costs include both backup storage usage and cross-region data transfer fees. For more information, refer to [Data Backup Cost](https://www.pingcap.com/tidb-dedicated-pricing-details#backup-storage-cost).
 
-To turn on dual region backup, perform the following steps:
+To turn on dual region backup for your TiDB Cloud Dedicated cluster, perform the following steps:
 
-1. Navigate to the **Backup** page of a TiDB Cloud Dedicated cluster.
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
-2. Click **Backup Settings**.
+2. Click **Backup Setting**.
 
 3. Toggle the **Dual Region Backup** switch to **On**.
 
-4. From the **Dual Region** drop-down list, select a region to store the backup files.
+4. From the **Secondary Region** drop-down list, select a region to store the backup files.
 
-5. Click **Confirm** to preview the configuration changes.
-
-6. Click **Confirm** again to save changes.
+5. Click **Save** to save changes.
 
 ### Turn off auto backup
 
@@ -124,17 +131,15 @@ To turn on dual region backup, perform the following steps:
 >
 > Turning off auto backup will also turn off point-in-time restore by default.
 
-To turn off auto backup, perform the following steps:
+To turn off auto backup for your TiDB Cloud Dedicated cluster, perform the following steps:
 
-1. Navigate to the **Backup** page of a TiDB Cloud Dedicated cluster.
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
-2. Click **Backup Settings**.
+2. Click **Backup Setting**.
 
 3. Toggle the **Auto Backup** switch to **Off**.
 
-4. Click **Confirm** to preview the configuration changes.
-
-5. Click **Confirm** again to save changes.
+4. Click **Save** to save changes.
 
 ### Turn off dual region backup
 
@@ -142,29 +147,32 @@ To turn off auto backup, perform the following steps:
 >
 > Disabling dual region backup does not immediately delete the backups in the secondary region. These backups will be cleaned up later according to the backup retention schedule. To remove them immediately, you can manually [delete the backups](#delete-backups).
 
-To turn off dual region backup, perform the following steps:
+To turn off dual region backup for your TiDB Cloud Dedicated cluster, perform the following steps:
 
-1. Navigate to the **Backup** page of a TiDB Cloud Dedicated cluster.
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
-2. Click **Backup Settings**.
+2. Click **Backup Setting**.
 
 3. Toggle the **Dual Region Backup** switch to **Off**.
 
-4. Click **Confirm** to preview the configuration changes.
-
-5. Click **Confirm** again to save changes.
+4. Click **Save** to save changes.
 
 ### Perform a manual backup
 
 Manual backups are user-initiated backups that enable you to back up your data to a known state as needed, and then restore to that state at any time.
 
+> **Note**
+>
+> - Manual backups are retained indefinitely until you choose to delete them manually or your account is closed.
+> - After a TiDB Cloud Dedicated cluster is deleted, its existing manual backups will be moved to the recycle bin and kept there until manually deleted or your account is closed.
+
 To apply a manual backup to your TiDB Cloud Dedicated cluster, perform the following steps:
 
-1. Navigate to the **Backup** tab of a cluster.
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
-2. Click **Manual Backup**. The setting window displays.
+2. In the upper-right corner, click **...** > **Manual Backup**. 
 
-3. Enter a **Name**.
+3. In the displayed dialog, enter a **Name**.
 
 4. Click **Confirm**. Then your cluster data is backed up.
 
@@ -172,19 +180,19 @@ To apply a manual backup to your TiDB Cloud Dedicated cluster, perform the follo
 
 #### Delete backup files
 
-To delete an existing backup file, perform the following steps:
+To delete an existing backup file for your TiDB Cloud Dedicated cluster, perform the following steps:
 
-1. Navigate to the **Backup** tab of a cluster.
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
-2. Click **Delete** for the backup file that you want to delete.
+2. Locate the corresponding backup file you want to delete, and click **...** > **Delete** in the **Action** column.
 
 #### Delete a running backup job
 
-To delete a running backup job, it is similar as [**Delete backup files**](#delete-backup-files).
+To delete a running backup job for your TiDB Cloud Dedicated cluster, follow a process similar to [**Delete backup files**](#delete-backup-files).
 
-1. Navigate to the **Backup** tab of a cluster.
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
-2. Click **Delete** for the backup file that is in the **Pending** or **Running** state.
+2. Locate the running backup job that is in the **Pending** or **Running** state, and click **...** > **Delete** in the **Action** column.
 
 ## Restore
 
@@ -196,7 +204,7 @@ To delete a running backup job, it is similar as [**Delete backup files**](#dele
 
 To restore your TiDB Cloud Dedicated cluster data from a backup to a new cluster, take the following steps:
 
-1. Navigate to the **Backup** tab of a cluster.
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
 2. Click **Restore**. The setting window displays.
 
@@ -211,7 +219,7 @@ To restore your TiDB Cloud Dedicated cluster data from a backup to a new cluster
     <SimpleTab>
     <div label="Select Time Point">
 
-    To restore data of any point in time within the backup retention to a new cluster, make sure that **Point-in-time Restore** in **Backup Settings** is on and then take the following steps:
+    To restore data of any point in time within the backup retention to a new cluster, make sure that **Point-in-time Restore** in **Backup Setting** is on and then take the following steps:
 
     - Click **Select Time Point**.
     - Select **Date** and **Time** you want to restore to.
@@ -228,7 +236,7 @@ To restore your TiDB Cloud Dedicated cluster data from a backup to a new cluster
     </div>
     </SimpleTab>
 
-5. In **Restore to Region**, select the same region as the **Backup Storage Region** configured in the **Backup Settings**.
+5. In **Restore to Region**, select the same region as the **Primary Region** configured in the **Backup Setting**.
 
 6. In the **Restore** window, you can also make the following changes if necessary:
 
@@ -250,16 +258,16 @@ To restore your TiDB Cloud Dedicated cluster data from a backup to a new cluster
 
 To restore a deleted cluster from recycle bin, take the following steps:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
-3. On the **Project Settings** page of your project, click **Recycle Bin** in the left navigation pane, locate the cluster you want to restore, and then click **Backups** in the **Action** column.
-4. Locate your desired backup time, and then click **Restore** in the **Action** column.
-5. In the **Restore** window, make the following changes if necessary:
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Project Settings** > **Recycle Bin**.
+3. On the **Recycle Bin** page, locate the cluster you want to restore, click **...** in the **Action** column, and then click **Backups**.
+4. On the **Backups** page, locate your desired backup time, click **...** in the **Action** column, and then click **Restore**.
+5. On the **Restore** page, specify a name for the new cluster, and then make the following changes if necessary:
 
     - Update the port number of the cluster.
     - Increase the node number, vCPU and RAM, and storage for the cluster.
 
-6. Click **Confirm**.
+6. In the **Summary** section, check the restore information, and then click **Restore**.
 
    The cluster restore process starts and the **Password Settings** dialog box is displayed.
 

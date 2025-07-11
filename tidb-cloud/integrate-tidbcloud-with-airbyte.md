@@ -54,7 +54,7 @@ Conveniently, the steps are the same for setting TiDB as the source and the dest
     - Username: The username to access the database
     - Password: The password of the username
 
-    You can get the parameter values from the connection dialog of your cluster. To open the dialog, go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner.
+    You can get the parameter values from the connection dialog of your cluster. To open the dialog, go to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner.
 
 3. Enable **SSL Connection**, and set TLS protocols to **TLSv1.2** or **TLSv1.3** in **JDBC URL Params**.
 
@@ -87,7 +87,7 @@ The following steps use TiDB as both a source and a destination. Other connector
 
     > **Tip:**
     >
-    > The TiDB connector supports both Incremental and Full Refresh syncs.
+    > The TiDB connector supports both [Incremental and Full Refresh syncs](https://airbyte.com/blog/understanding-data-replication-modes).
     >
     > - In Incremental mode, Airbyte only reads records added to the source since the last sync job. The first sync using Incremental mode is equivalent to Full Refresh mode.
     > - In Full Refresh mode, Airbyte reads all records in the source and replicates to the destination in every sync task. You can set the sync mode for every table named **Namespace** in Airbyte individually.
@@ -102,7 +102,7 @@ The following steps use TiDB as both a source and a destination. Other connector
 
 ## Limitations
 
-- The TiDB connector does not support the Change Data Capture (CDC) feature.
+- The TiDB connector cannot use the Change Data Capture (CDC) feature provided by TiCDC. The incremental sync is performed based on a cursor mechanism.
 - TiDB destination converts the `timestamp` type to the `varchar` type in default normalization mode. It happens because Airbyte converts the timestamp type to string during transmission, and TiDB does not support `cast ('2020-07-28 14:50:15+1:00' as timestamp)`.
 - For some large ELT missions, you need to increase the parameters of [transaction restrictions](/develop/dev-guide-transaction-restraints.md#large-transaction-restrictions) in TiDB.
 

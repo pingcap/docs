@@ -5,7 +5,7 @@ summary: Learn about how to perform a Proof of Concept (PoC) with TiDB Cloud.
 
 # Perform a Proof of Concept (PoC) with TiDB Cloud
 
-TiDB Cloud is a Database-as-a-Service (DBaaS) product that delivers everything great about TiDB in a fully managed cloud database. It helps you focus on your applications, instead of the complexities of your database. TiDB Cloud is currently available on both Amazon Web Services (AWS) and Google Cloud.
+TiDB Cloud is a Database-as-a-Service (DBaaS) product that delivers everything great about TiDB in a fully managed cloud database. It helps you focus on your applications, instead of the complexities of your database. TiDB Cloud is currently available on Amazon Web Services (AWS), Google Cloud, and Microsoft Azure.
 
 Initiating a proof of concept (PoC) is the best way to determine whether TiDB Cloud is the best fit for your business needs. It will also get you familiar with the key features of TiDB Cloud in a short time. By running performance tests, you can see whether your workload can run efficiently on TiDB Cloud. You can also evaluate the efforts required to migrate your data and adapt configurations.
 
@@ -119,7 +119,7 @@ You can import data in various formats to TiDB Cloud:
 - [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
 - [Import Local Files to TiDB Cloud](/tidb-cloud/tidb-cloud-import-local-files.md)
 - [Import sample data in the SQL file format](/tidb-cloud/import-sample-data.md)
-- [Import CSV Files from Amazon S3 or GCS](/tidb-cloud/import-csv-files.md)
+- [Import CSV Files from Cloud Storage](/tidb-cloud/import-csv-files.md)
 - [Import Apache Parquet Files](/tidb-cloud/import-parquet-files.md)
 
 > **Note:**
@@ -135,8 +135,8 @@ Before testing the workload, consider performing a manual backup, so that you ca
 After kicking off the workload, you can observe the system using the following methods:
 
 - The commonly used metrics of the cluster can be found on the cluster overview page, including Total QPS, Latency, Connections, TiFlash Request QPS, TiFlash Request Duration, TiFlash Storage Size, TiKV Storage Size, TiDB CPU, TiKV CPU, TiKV IO Read, and TiKV IO Write. See [Monitor a TiDB Cluster](/tidb-cloud/monitor-tidb-cluster.md).
-- Go to **Diagnosis > Statements**, where you can observe SQL execution and easily locate performance problems without querying the system tables. See [Statement Analysis](/tidb-cloud/tune-performance.md).
-- Go to **Diagnosis > Key Visualizer**, where you can view TiDB data access patterns and data hotspots. See [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer).
+- Navigate to the [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) page of your cluster, and then check the **SQL Statement** tab, where you can observe SQL execution and easily locate performance problems without querying the system tables. See [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis).
+- Navigate to the [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) page of your cluster, and then check the **Key Visualizer** tab, where you can view TiDB data access patterns and data hotspots. See [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer).
 - You can also integrate these metrics to your own Datadog and Prometheus. See [Third-Party Monitoring Integrations](/tidb-cloud/third-party-monitoring-integrations.md).
 
 Now it is time for evaluating the test results.
@@ -160,9 +160,9 @@ The following are tips for performance tuning:
 
 - Improve query performance
 
-    - Check the SQL execution plan on the **Diagnostic > Statements** page.
-    - Check hotspot issues on the **Dashboard > Key Visualizer** page.
-    - Monitor if the TiDB cluster is running out of capacity on the **Overview > Capacity Metrics** page.
+    - Check the SQL execution plan on the [**SQL Statement**](/tidb-cloud/tune-performance.md#statement-analysis) tab of the [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) page.
+    - Check hotspot issues on the [**Key Visualizer**](/tidb-cloud/tune-performance.md#key-visualizer) tab of the [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) page.
+    - Monitor if the TiDB cluster is running out of capacity on the [**Metrics**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) page.
     - Use the TiFlash feature to optimize analytical processing. See [Use an HTAP Cluster](/tiflash/tiflash-overview.md).
 
 ## Step 7. Explore more features
@@ -175,7 +175,7 @@ Now the workload testing is finished, you can explore more features, for example
 
 - Backup
 
-    To avoid vendor lock-in, you can use daily full backup to migrate data to a new cluster and use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data. For more information, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) and [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore-serverless.md#backup).
+    To avoid vendor lock-in, you can use daily full backup to migrate data to a new cluster and use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data. For more information, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) and [Back Up and Restore TiDB Cloud Serverless Data](/tidb-cloud/backup-and-restore-serverless.md).
 
 ## Step 8. Clean up the environment and finish the PoC
 
@@ -212,11 +212,11 @@ You can scale out clusters on the console by yourself. If you need to scale in a
 
 Once your application for the PoC is approved, you will receive credits in your account. Generally, the credits are sufficient for a 14-day PoC. The credits are charged by the type of nodes and the number of nodes, on an hourly basis. For more information, see [TiDB Cloud Billing](/tidb-cloud/tidb-cloud-billing.md#credits).
 
-To check the credits left for your PoC, go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your target project, as shown in the following screenshot.
+To check the credits left for your PoC, go to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your target project, as shown in the following screenshot.
 
 ![TiDB Cloud PoC Credits](/media/tidb-cloud/poc-points.png)
 
-Alternatively, you can also click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console, click **Billing**, and click **Credits** to see the credit details page.
+Alternatively, you can also switch to your target organization using the combo box in the upper-left corner of the TiDB Cloud console, click **Billing** in the left navigation pane, and then click the **Credits** tab to view the credit information.
 
 To save credits, remove the cluster that you are not using. Currently, you cannot stop a cluster. You need to ensure that your backups are up to date before removing a cluster, so you can restore the cluster later when you want to resume your PoC.
 

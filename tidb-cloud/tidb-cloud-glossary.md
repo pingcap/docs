@@ -59,6 +59,14 @@ An endpoint in Data Service is a web API that you can customize to execute SQL s
 
 For more information, see [Manage an endpoint](/tidb-cloud/data-service-manage-endpoint.md).
 
+## F
+
+### Full-text search
+
+Unlike [Vector Search](/vector-search/vector-search-overview.md), which focuses on semantic similarity, full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
+
+For more information, see [Full-Text Search with SQL](/tidb-cloud/vector-search-full-text-search-sql.md) and [Full-Text Search with Python](/tidb-cloud/vector-search-full-text-search-python.md).
+
 ## M
 
 ### member
@@ -111,7 +119,7 @@ Project members are users who are invited to join one or more projects of the or
 
 ### Recycle Bin
 
-The place where the data of deleted clusters with valid backups is stored. Once a backed-up TiDB Cloud Dedicated cluster is deleted, the existing backup files of the cluster are moved to the recycle bin. For backup files from automatic backups, the recycle bin will retain them for a specified period. You can configure the backup retention in **Backup Settings**, and the default is 7 days. For backup files from manual backups, there is no expiration date. To avoid data loss, remember to restore the data to a new cluster in time. Note that if a cluster **has no backup**, the deleted cluster will not be displayed here.
+The place where the data of deleted clusters with valid backups is stored. Once a backed-up TiDB Cloud Dedicated cluster is deleted, the existing backup files of the cluster are moved to the recycle bin. For backup files from automatic backups, the recycle bin will retain them for a specified period. You can configure the backup retention in **Backup Setting**, and the default is 7 days. For backup files from manual backups, there is no expiration date. To avoid data loss, remember to restore the data to a new cluster in time. Note that if a cluster **has no backup**, the deleted cluster will not be displayed here.
 
 ### region
 
@@ -164,6 +172,10 @@ The storage node that stores the online transactional processing (OLTP) data. It
 A list of IP addresses and Classless Inter-Domain Routing (CIDR) addresses that are allowed to access the TiDB Cloud cluster via a SQL client. The traffic filter is empty by default.
 
 ## V
+
+### Vector search
+
+[Vector search](/vector-search/vector-search-overview.md) is a search method that prioritizes the meaning of your data to deliver relevant results. Unlike traditional full-text search, which relies on exact keyword matching and word frequency, vector search converts various data types (such as text, images, or audio) into high-dimensional vectors and queries based on the similarity between these vectors. This search method captures the semantic meaning and contextual information of the data, leading to a more precise understanding of user intent. Even when the search terms do not exactly match the content in the database, vector search can still provide results that align with the user's intent by analyzing the semantics of the data.
 
 ### Virtual Private Cloud
 

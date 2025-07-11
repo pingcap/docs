@@ -1,55 +1,34 @@
 ---
-title: Import Data into TiDB Cloud via MySQL CLI
-summary: Learn how to import Data into TiDB Cloud via MySQL CLI.
+title: Import Data into TiDB Cloud Dedicated via MySQL CLI
+summary: Learn how to import Data into TiDB Cloud Dedicated via MySQL CLI.
 ---
 
-# Import Data into TiDB Cloud via MySQL CLI
+# Import Data into TiDB Cloud Dedicated via MySQL CLI
 
-This document describes how to import data into TiDB Cloud via the [MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html). You can import data from an SQL file or a CSV file. The following sections provide step-by-step instructions for importing data from each type of file.
+This document describes how to import data into TiDB Cloud Dedicated via the [MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html). You can import data from an SQL file or a CSV file. The following sections provide step-by-step instructions for importing data from each type of file.
 
 ## Prerequisites
 
-Before you can import data via MySQL CLI to TiDB Cloud, you need the following prerequisites:
+Before you can import data via MySQL CLI to TiDB Cloud Dedicated, you need the following prerequisites:
 
-- You have access to your TiDB Cloud cluster. If you do not have a TiDB cluster, create one following the instructions in [Build a TiDB Cloud Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- You have access to your TiDB Cloud Dedicated cluster. If you do not have, create one following the instructions in [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
 - Install MySQL CLI on your local computer.
 
-## Step 1. Connect to your TiDB Cloud cluster
+## Step 1. Connect to your TiDB Cloud Dedicated cluster
 
-Connect to your TiDB cluster depending on the TiDB deployment option you have selected.
+Connect to your TiDB cluster.
 
-<SimpleTab>
-<div label="TiDB Cloud Serverless">
+1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+2. In the left navigation pane, click **Settings** > **Networking**.
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+3. On the **Networking** page, click **Add IP Address** in the **IP Access List** area.
 
-3. Ensure the configurations in the connection dialog match your operating environment.
+4. In the dialog, choose **Allow access from anywhere**, and then click **Confirm**.
 
-    - **Connection Type** is set to `Public`.
-    - **Connect With** is set to `MySQL CLI`.
-    - **Operating System** matches your environment.
-
-4. Click **Generate Password** to create a random password.
-
-    > **Tip:**
-    >
-    > If you have created a password before, either use the original password or click **Reset Password** to generate a new one.
-
-</div>
-<div label="TiDB Cloud Dedicated">
-
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
-
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
-
-3. Click **Allow Access from Anywhere**.
+5. In the upper-right corner, click **Connect** to open the dialog for connection information.
 
     For more details about how to obtain the connection string, see [Connect to TiDB Cloud Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md).
-
-</div>
-</SimpleTab>
 
 ## Step 2. Define the table and insert sample data
 
@@ -84,7 +63,7 @@ Do the following to import data from an SQL file:
 2. Use the following command to import data from the SQL file:
 
     ```bash
-    mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_cluster_host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<your_ca_path> -p <your_password> < product_data.sql
+    mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_cluster_host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<your_ca_path> -p<your_password> < product_data.sql
     ```
 
 > **Note:**

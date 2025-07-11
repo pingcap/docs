@@ -22,20 +22,28 @@ ticloud serverless create
 Create a TiDB Cloud Serverless cluster in non-interactive mode:
 
 ```shell
-ticloud serverless create --project-id <project-id> --display-name <display-name> --region <region>
+ticloud serverless create --display-name <display-name> --region <region>
 ```
+
+Create a TiDB Cloud Serverless cluster with a spending limit in non-interactive mode:
+
+```shell
+ticloud serverless create --display-name <display-name> --region <region> --spending-limit-monthly <spending-limit-monthly>
+``` 
 
 ## Flags
 
 In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
-| Flag                         | Description                                                                                | Required  | Note                                                |
-|------------------------------|--------------------------------------------------------------------------------------------|-----------|-----------------------------------------------------|
-| -n --display-name string     | Specifies the name of the cluster to be created.                                                   | Yes       | Only works in non-interactive mode.                 |
-| --spending-limit-monthly int | Specifies the maximum monthly spending limit in USD cents.                                                | No        | Only works in non-interactive mode.                 |
-| -p, --project-id string      | Specifies the ID of the project, in which the cluster will be created. The default value is `default project`. | No        | Only works in non-interactive mode.                 |
-| -r, --region string          | Specifies the Cloud region.                                                                               | Yes       | Only works in non-interactive mode.                 |
-| -h, --help                   | Shows help information for this command.                                                     | No        | Works in both non-interactive and interactive modes |
+| Flag                         | Description                                                                                                    | Required | Note                                                |
+|------------------------------|----------------------------------------------------------------------------------------------------------------|----------|-----------------------------------------------------|
+| -n --display-name string     | Specifies the name of the cluster to be created.                                                               | Yes      | Only works in non-interactive mode.                 |
+| --spending-limit-monthly int | Specifies the maximum monthly spending limit in USD cents.                                                     | No       | Only works in non-interactive mode.                 |
+| -p, --project-id string      | Specifies the ID of the project, in which the cluster will be created. The default value is `default project`. | No       | Only works in non-interactive mode.                 |
+| -r, --region string          | Specifies the name of cloud region. You can use "ticloud serverless region" to see all regions.                          | Yes      | Only works in non-interactive mode.                 |
+| --disable-public-endpoint    | Disables the public endpoint.                                                                       | No       | Only works in non-interactive mode.                 |
+| --encryption                 | Enables enhanced encryption at rest.                                                                | No       | Only works in non-interactive mode.                 |
+| -h, --help                   | Shows help information for this command.                                                                       | No       | Works in both non-interactive and interactive modes |
 
 ## Inherited flags
 
