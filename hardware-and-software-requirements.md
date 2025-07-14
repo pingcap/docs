@@ -288,7 +288,7 @@ As an open-source distributed SQL database, TiDB requires the following network 
 </tbody>
 </table>
 
-TiDB supports XFS and Ext4 filesystems, other filesystems are not recommended for production deployments.
+TiDB supports the XFS and Ext4 file systems. Other file systems are not recommended for production environments.  
 
 ## Web browser requirements
 
