@@ -132,6 +132,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `require_secure_transport` | Read-only [^10] |
 | `skip_name_resolve` | Read-only [^10] |
 | `sql_log_bin` | Read-only [^10] |
+| `tidb_analyze_skip_column_types` | Read-only [^10] |
 | `tidb_cdc_write_source` | Read-only [^10] |
 | `tidb_check_mb4_value_in_utf8` | Not supported [^4] |
 | `tidb_config` | Not supported [^4] |
