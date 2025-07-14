@@ -162,7 +162,11 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 
 | Component | CPU     | Memory | Local Storage  | Network  | Number of Instances (Minimum Requirement) |
 | :------: | :-----: | :-----: | :----------: | :------: | :----------------: |
+<<<<<<< HEAD
 | TiDB    | 8 core+   | 16 GB+  | No special requirements | Gigabit network card | 1 (can be deployed on the same machine with PD)      |
+=======
+| TiDB    | 8 core+   | 16 GB+  | [Storage requirements](#storage-requirements) | Gigabit network card | 1 (can be deployed on the same machine with PD)      |
+>>>>>>> 21916eefd3 (hardware-and-software-requirements: Add note about supported filesystems (#21379))
 | PD      | 4 core+   | 8 GB+  | SAS, 200 GB+ | Gigabit network card | 1 (can be deployed on the same machine with TiDB)       |
 | TiKV    | 8 core+   | 32 GB+  | SAS, 200 GB+ | Gigabit network card | 3       |
 | TiFlash | 32 core+  | 64 GB+  | SSD, 200 GB+ | Gigabit network card | 1     |
@@ -239,7 +243,7 @@ As an open-source distributed SQL database, TiDB requires the following network 
 | Alertmanager | 9093 | the port for the alert web service |
 | Alertmanager | 9094 | the alert communication port |
 
-## Disk space requirements
+## Storage requirements
 
 <table>
 <thead>
@@ -282,6 +286,8 @@ As an open-source distributed SQL database, TiDB requires the following network 
   </tr>
 </tbody>
 </table>
+
+TiDB supports the XFS and Ext4 file systems. Other file systems are not recommended for production environments.  
 
 ## Web browser requirements
 
