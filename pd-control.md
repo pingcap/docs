@@ -559,6 +559,10 @@ Usage:
 
 ### `member [delete | leader_priority | leader [show | resign | transfer <member_name>]]`
 
+> **Note:**
+>
+> **DO NOT** use the `member delete` command to remove PD nodes in a production environment. To remove a PD node, see [Scale in a TiDB/PD/TiKV cluster](/scale-tidb-using-tiup.md#scale-in-a-tidbpdtikv-cluster) and [Manually Scale TiDB on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster/).
+
 Use this command to view the PD members, remove a specified member, or configure the priority of leader.
 
 Usage:
