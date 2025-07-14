@@ -8,6 +8,42 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## July 15, 2025
+
+**General changes**
+
+- Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v8.1.2](https://docs.pingcap.com/tidb/stable/release-8.1.2/) to [v8.5.2](https://docs.pingcap.com/tidb/stable/release-8.5.2/).
+
+    Compared with v8.1.2, v8.5.2 includes new features, improvements, and bug fixes released in [v8.2.0-DMR](https://docs.pingcap.com/tidb/stable/release-8.2.0/), [v8.3.0-DMR](https://docs.pingcap.com/tidb/stable/release-8.3.0/), [v8.4.0-DMR](https://docs.pingcap.com/tidb/stable/release-8.4.0/), [v8.5.0](https://docs.pingcap.com/tidb/stable/release-8.5.0/), [v8.5.1](https://docs.pingcap.com/tidb/stable/release-8.5.1/), and [v8.5.2](https://docs.pingcap.com/tidb/stable/release-8.5.2/).
+
+- Provide a new node size for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted in the Google Cloud `Tokyo (asia-northeast1)` region:`32 vCPU, 128 GiB`
+
+    This new node size is available for TiDB, TiKV, and TiFlash nodes.
+
+- Support auditing the `BackupCompleted` event to enhance console audit logging for backup activities.
+
+    This enhancement lets you log backup completion activities to meet security and compliance requirements.
+
+    For more information, see [Console Audit Logging](/tidb-cloud/tidb-cloud-console-auditing.md).
+
+- Support filtering column values in [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) changefeeds.
+
+    You can now use expressions to filter specific column values in changefeeds to exclude irrelevant data at the source. This feature enables fine-grained filtering of DML events, helping you reduce resource consumption and improve performance.
+
+    For more information, see [Changefeed](/tidb-cloud/changefeed-overview.md).
+
+**Console changes**
+
+- Enhance the cloud storage import experience for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+
+    The import process is now streamlined into a 3-step wizard with intelligent pre-checks. The new wizard guides you through connection setup, file mapping, and bucket scanning. With the scanning, TiDB Cloud shows you exactly which files will be imported and their target destinations before the import, significantly reducing configuration complexity and preventing import failures.
+
+    For more information, see the following documentation:
+
+    - [Import Sample Data into TiDB Cloud Serverless](/tidb-cloud/import-sample-data-serverless.md)
+    - [Import CSV Files from Cloud Storage into TiDB Cloud Serverless](/tidb-cloud/import-csv-files-serverless.md)
+    - [Import Apache Parquet Files from Cloud Storage into TiDB Cloud Serverless](/tidb-cloud/import-parquet-files-serverless.md)
+
 ## June 24, 2025
 
 **General changes**
