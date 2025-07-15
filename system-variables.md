@@ -2741,21 +2741,23 @@ Query OK, 0 rows affected (0.09 sec)
 - Default value: `ON`
 - This variable is deprecated since v8.4.0. Its value will be fixed to the default value `ON`, that is, [table partitioning](/partitioned-table.md) is enabled by default.
 
-### tidb_enable_telemetry <span class="version-mark">New in v4.0.2 and deprecated in v8.1.0</span>
+### tidb_enable_telemetry <span class="version-mark">New in v4.0.2</span>
 
 > **Warning:**
 >
-> Starting from v8.1.0, the telemetry feature in TiDB is removed, and this variable is no longer functional. It is retained solely for compatibility with earlier versions.
+> - For versions earlier than v8.1.0, TiDB periodically reports telemetry data to PingCAP.
+> - For versions from v8.1.0 to v8.5.1, TiDB removes the telemetry feature and the `tidb_enable_telemetry` variable no longer takes effect. It is retained solely for compatibility with earlier versions.
+> - Starting from v8.5.3, TiDB reintroduces the telemetry feature. However, it only logs telemetry-related information locally and no longer sends data to PingCAP over the network.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
-- Default value: `OFF`
+- Default value: `ON`. Starting from v8.5.3, the default value is changed from `OFF` to `ON`.
 
 <CustomContent platform="tidb">
 
-- Before v8.1.0, this variable controls whether to enable the telemetry collection in TiDB.
+- This variable controls whether the telemetry feature is enabled in TiDB. Starting from v8.5.3, this variable only takes effect when the [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) configuration item of the TiDB instance is set to `true`.
 
 </CustomContent>
 
