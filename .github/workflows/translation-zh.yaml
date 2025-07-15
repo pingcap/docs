@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-  CN_CLOUD_BRANCH: i18n-zh-release-8.1
+  CN_CLOUD_BRANCH: i18n-zh-release-8.5
 
 jobs:
   translate:
