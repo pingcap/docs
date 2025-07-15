@@ -1,11 +1,11 @@
 ---
-title: Highly Concurrent Write Best Practices
+title: Best Practices for High-Concurrency Writes
 summary: This document provides best practices for handling highly-concurrent write-heavy workloads in TiDB. It addresses challenges and solutions for data distribution, hotspot cases, and complex hotspot problems. The article also discusses parameter configuration for optimizing performance.
 ---
 
-# Highly Concurrent Write Best Practices
+# Best Practices for High-Concurrency Writes
 
-This document describes best practices for handling highly-concurrent write-heavy workloads in TiDB, which can help to facilitate your application development.
+This document describes best practices for handling high-concurrency write-heavy workloads in TiDB, which can help to facilitate your application development.
 
 ## Target audience
 

@@ -11,7 +11,7 @@ Since the value of `AUTO_RANDOM` is random and unique, `AUTO_RANDOM` is often us
 
 <CustomContent platform="tidb">
 
-For more information about how to handle highly concurrent write-heavy workloads in TiDB, see [Highly concurrent write best practices](/best-practices/high-concurrency-best-practices.md).
+For more information about how to handle highly concurrent write-heavy workloads in TiDB, see [Best Practices for High-Concurrency Writes](/best-practices/high-concurrency-best-practices.md).
 
 </CustomContent>
 
