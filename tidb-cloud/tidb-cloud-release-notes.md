@@ -16,7 +16,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     Compared with v8.1.2, v8.5.2 includes new features, improvements, and bug fixes released in [v8.2.0-DMR](https://docs.pingcap.com/tidb/stable/release-8.2.0/), [v8.3.0-DMR](https://docs.pingcap.com/tidb/stable/release-8.3.0/), [v8.4.0-DMR](https://docs.pingcap.com/tidb/stable/release-8.4.0/), [v8.5.0](https://docs.pingcap.com/tidb/stable/release-8.5.0/), [v8.5.1](https://docs.pingcap.com/tidb/stable/release-8.5.1/), and [v8.5.2](https://docs.pingcap.com/tidb/stable/release-8.5.2/).
 
-- Provide a new node size for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted in the Google Cloud `Tokyo (asia-northeast1)` region:`32 vCPU, 128 GiB`
+- Provide a new node size for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted in the Google Cloud `Tokyo (asia-northeast1)` region: `32 vCPU, 128 GiB`
 
     This new node size is available for TiDB, TiKV, and TiFlash nodes.
 
