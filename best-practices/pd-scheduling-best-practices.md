@@ -1,9 +1,9 @@
 ---
-title: PD Scheduling Best Practices
+title: Best Practices for PD Scheduling
 summary: This document summarizes PD scheduling best practices, including scheduling process, load balancing, hot regions scheduling, cluster topology awareness, scale-down and failure recovery, region merge, query scheduling status, and control scheduling strategy. It also covers common scenarios such as uneven distribution of leaders/regions, slow node recovery, and troubleshooting TiKV nodes.
 ---
 
-# PD Scheduling Best Practices
+# Best Practices for PD Scheduling
 
 This document details the principles and strategies of PD scheduling through common scenarios to facilitate your application. This document assumes that you have a basic understanding of TiDB, TiKV and PD with the following core concepts:
 
