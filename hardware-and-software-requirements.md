@@ -162,11 +162,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 
 | Component | CPU     | Memory | Local Storage  | Network  | Number of Instances (Minimum Requirement) |
 | :------: | :-----: | :-----: | :----------: | :------: | :----------------: |
-<<<<<<< HEAD
-| TiDB    | 8 core+   | 16 GB+  | No special requirements | Gigabit network card | 1 (can be deployed on the same machine with PD)      |
-=======
 | TiDB    | 8 core+   | 16 GB+  | [Storage requirements](#storage-requirements) | Gigabit network card | 1 (can be deployed on the same machine with PD)      |
->>>>>>> 21916eefd3 (hardware-and-software-requirements: Add note about supported filesystems (#21379))
 | PD      | 4 core+   | 8 GB+  | SAS, 200 GB+ | Gigabit network card | 1 (can be deployed on the same machine with TiDB)       |
 | TiKV    | 8 core+   | 32 GB+  | SAS, 200 GB+ | Gigabit network card | 3       |
 | TiFlash | 32 core+  | 64 GB+  | SSD, 200 GB+ | Gigabit network card | 1     |
