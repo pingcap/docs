@@ -1,9 +1,5 @@
 ---
-<<<<<<< HEAD
-title: TiDB Cloud
-=======
 title: TiDB Cloud Documentation
->>>>>>> aed3b8f199 (release-8.5: sync the cloud docs to the latest version (#21355))
 aliases: ['/tidbcloud/privacy-policy', '/tidbcloud/terms-of-service', '/tidbcloud/service-level-agreement']
 hide_sidebar: true
 hide_commit: true

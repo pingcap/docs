@@ -1,11 +1,6 @@
 ---
-<<<<<<< HEAD
-title: TiDB Cloud Release Notes in 2024
-summary: Learn about the release notes of TiDB Cloud in 2024.
-=======
 title: TiDB Cloud Release Notes in 2025
 summary: Learn about the release notes of TiDB Cloud in 2025.
->>>>>>> aed3b8f199 (release-8.5: sync the cloud docs to the latest version (#21355))
 aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 ---
 
