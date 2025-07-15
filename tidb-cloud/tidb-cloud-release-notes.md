@@ -32,18 +32,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see [Changefeed](/tidb-cloud/changefeed-overview.md).
 
-**Console changes**
-
-- Enhance the cloud storage import experience for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
-
-    The import process is now streamlined into a 3-step wizard with intelligent pre-checks. This new wizard guides you through connection setup, file mapping, and bucket scanning. With the scanning, TiDB Cloud shows you exactly which files will be imported and their target destinations before the import, significantly reducing configuration complexity and preventing import failures.
-
-    For more information, see the following documentation:
-
-    - [Import Sample Data into TiDB Cloud Serverless](/tidb-cloud/import-sample-data-serverless.md)
-    - [Import CSV Files from Cloud Storage into TiDB Cloud Serverless](/tidb-cloud/import-csv-files-serverless.md)
-    - [Import Apache Parquet Files from Cloud Storage into TiDB Cloud Serverless](/tidb-cloud/import-parquet-files-serverless.md)
-
 ## June 24, 2025
 
 **General changes**
