@@ -74,7 +74,7 @@ To create a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud
    > Before creating a TiDB Cloud Dedicated cluster, you must add one of the following payment methods:
    >  - Add a credit card by following the on-screen instructions on the cluster creation page.
    >  - Contact the TiDB Cloud Support team to pay by wire transfer.
-   >  - Sign up for TiDB Cloud through a cloud marketplace (such as AWS, Azure, or Google Cloud) and pay using your cloud provider account.
+   >  - Sign up for TiDB Cloud through a cloud marketplace (AWS, Azure, or Google Cloud) and pay using your cloud provider account.
    >
    > Your PoC credits will automatically be used to offset eligible expenses incurred during the PoC period.
 
