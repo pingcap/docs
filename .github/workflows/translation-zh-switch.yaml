@@ -1,13 +1,20 @@
-name: Translation(zh) by AI
+name: ZH cloud translation switch
 
 on:
   workflow_dispatch:
-
-env:
-  CN_CLOUD_BRANCH: i18n-zh-release-8.5
+    inputs:
+      from:
+        description: "The last zh source branch. e.g. i18n-zh-release-8.1"
+        required: true
+      to:
+        description: "The target zh source branch. e.g. i18n-zh-release-8.5"
+        required: true
+      to_base:
+        description: "The base branch. e.g. release-8.5"
+        required: true
 
 jobs:
-  translate:
+  zh-translation:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,11 +24,29 @@ jobs:
           repository: "shczhen/markdown-translator"
           ref: "openai"
           path: "markdown-translator"
+
       - uses: actions/checkout@v4
-        name: Download docs repo and specified branch
+        name: Checkout from branch and create target branch
         with:
-          ref: "${{ env.CN_CLOUD_BRANCH }}"
+          ref: "${{ github.event.inputs.from }}"
           path: "docs"
+
+      - name: Create target branch
+        run: |
+          cd docs
+          git checkout -b "${{ github.event.inputs.to }}"
+          git push origin "${{ github.event.inputs.to }}"
+          cd ..
+
+      - name: Update latest_translation_commit.json
+        run: |
+          cd docs
+          echo '{"target":"${{ github.event.inputs.to_base }}","sha":""}' > latest_translation_commit.json
+          git add latest_translation_commit.json
+          git commit -m "ci: update latest_translation_commit.json for ${{ github.event.inputs.to_base }}"
+          git push origin "${{ github.event.inputs.to }}"
+          cd ..
+
       - uses: actions/setup-node@v4
         name: Setup node 18
         with:
@@ -35,15 +60,18 @@ jobs:
           export GH_TOKEN=${{github.token}}
           cd docs
           npm i
-          node scripts/filterUpdateFiles.js --cloud
+          node scripts/filterUpdateFiles.js --cloud --init
           tree tmp
           cd ..
+
       - name: Copy new files to translator folder
         run: |
           cp -r docs/tmp markdown-translator/markdowns
+
       - name: Copy variables.json to translator folder
         run: |
           cp docs/tmp/variables.json docs/variables.json || true
+
       - name: Config and translate
         run: |
           cd markdown-translator
@@ -53,6 +81,7 @@ jobs:
           yarn
           node src/index.js
           cd ..
+
       - name: Copy translated files to docs repo
         run: |
           cp -r markdown-translator/output/markdowns/* docs/
@@ -67,7 +96,7 @@ jobs:
           path: "docs"
           token: ${{ github.token }}
           branch: zh-translation/${{ steps.build_id.outputs.id }}
-          base: ${{ env.CN_CLOUD_BRANCH }}
+          base: "${{ github.event.inputs.to }}"
           title: "ci: ZH translation ${{ steps.build_id.outputs.id }}"
           body: |
             ### What is changed, added or deleted? (Required)
@@ -84,7 +113,7 @@ jobs:
 
             For details, see [tips for choosing the affected versions](https://github.com/pingcap/docs/blob/master/CONTRIBUTING.md#guideline-for-choosing-the-affected-versions).
 
-            - [x] ${{ env.CN_CLOUD_BRANCH }}
+            - [x] ${{ github.event.inputs.to }}
 
             ### What is the related PR or file link(s)?
 

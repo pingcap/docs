@@ -157,7 +157,7 @@ const getCloudTOCFiles = () => {
 };
 
 // filter the files in tmp directory by the toc file
-const filterFilesByTOC = () => {
+const filterFilesByTOC = (isInit = false) => {
   console.log("Filtering files in tmp directory by TOC...");
 
   // get the file list from the toc file
@@ -203,6 +203,14 @@ const filterFilesByTOC = () => {
 
     // only check markdown files, non-markdown files are kept
     if (relativePath.endsWith(".md")) {
+      // if isInit is true and the file is in tidb-cloud directory, delete it
+      if (isInit && relativePath.startsWith("tidb-cloud/")) {
+        console.log(`Deleting tidb-cloud file during init: ${relativePath}`);
+        deleteFile(filePath);
+        deletedCount++;
+        continue;
+      }
+
       // check if the markdown file is in the toc
       if (tocFiles.has(relativePath)) {
         console.log(`Keeping markdown file in TOC: ${relativePath}`);
@@ -260,7 +268,7 @@ const handleFiles = async (fileList = []) => {
   }
 };
 
-const main = async (isCloud = false) => {
+const main = async (isCloud = false, isInit = false) => {
   const { target: branchName, sha: base } = getLocalCfg();
   const targetBranchData = await ghGetBranch(branchName);
   const head = targetBranchData?.commit?.sha;
@@ -272,7 +280,7 @@ const main = async (isCloud = false) => {
 
   // if it is cloud mode, filter the files by the toc
   if (isCloud) {
-    filterFilesByTOC();
+    filterFilesByTOC(isInit);
   }
 
   writeLocalCfg({
@@ -283,5 +291,7 @@ const main = async (isCloud = false) => {
 
 const args = process.argv.slice(2);
 const isCloud = args.includes("--cloud");
+// for cloud mode, we only need update files not in the tidb-cloud directory
+const isInit = args.includes("--init");
 
-main(isCloud);
+main(isCloud, isInit);
