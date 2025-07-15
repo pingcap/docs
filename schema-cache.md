@@ -30,8 +30,8 @@ You can enable the schema caching feature by configuring the system variable [`t
 
 <CustomContent platform="tidb-cloud">
 
-- It is recommended to disable [`performance.force-init-stats`](https://docs.pingcap.com/zh/tidb/stable/tidb-configuration-file/#force-init-stats-new-in-v657-and-v710) to reduce TiDB startup time.
-- If you need to create a large number of tables (for example, more than 100,000 tables), it is recommended to set the [`split-table`](https://docs.pingcap.com/zh/tidb/stable/tidb-configuration-file/#split-table) parameter to `false` to reduce the number of Regions and thus decrease TiKV's memory usage.
+- It is recommended to disable [`performance.force-init-stats`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file/#force-init-stats-new-in-v657-and-v710) to reduce TiDB startup time.
+- If you need to create a large number of tables (for example, more than 100,000 tables), it is recommended to set the [`split-table`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file/#split-table) parameter to `false` to reduce the number of Regions and thus decrease TiKV's memory usage.
 
 </CustomContent>
 
