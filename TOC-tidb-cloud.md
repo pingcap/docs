@@ -237,6 +237,7 @@
         - [SQL Plan Management](/sql-plan-management.md)
         - [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
         - [Optimizer Fix Controls](/optimizer-fix-controls.md)
+      - [Index Advisor](/index-advisor.md)
     - [TiKV Follower Read](/follower-read.md)
     - [Coprocessor Cache](/coprocessor-cache.md)
     - Garbage Collection (GC)
@@ -716,6 +717,7 @@
   - [Metadata Lock](/metadata-lock.md)
   - [Use UUIDs](/best-practices/uuid.md)
   - [TiDB Accelerated Table Creation](/accelerated-table-creation.md)
+  - [Schema Cache](/schema-cache.md)
 - API Reference ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)   
   - [Overview](/tidb-cloud/api-overview.md) 
   - v1beta1
