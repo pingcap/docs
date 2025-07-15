@@ -97,7 +97,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
     - To specify the TiDB version and the number of instances of each component, run a command like this:
 
         ```shell
-        tiup playground v8.5.1 --db 2 --pd 3 --kv 3
+        tiup playground {{{ .tidb-version }}} --db 2 --pd 3 --kv 3
         ```
 
         It is recommended to run this command on a machine with at least 10 GiB of memory and 4 CPU cores. Insufficient resources might cause the system to crash.  
@@ -211,7 +211,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
     - To specify the TiDB version and the number of instances of each component, run a command like this:
 
         ```shell
-        tiup playground v8.5.1 --db 2 --pd 3 --kv 3
+        tiup playground {{{ .tidb-version }}} --db 2 --pd 3 --kv 3
         ```
 
         To view all available versions, run `tiup list tidb`.
@@ -412,7 +412,7 @@ Other requirements for the target machine include:
     ```
 
     - `<cluster-name>`: sets the cluster name.
-    - `<version>`: sets the TiDB cluster version, such as `v8.5.1`. You can see all the supported TiDB versions by running the `tiup list tidb` command.
+    - `<version>`: sets the TiDB cluster version, such as `{{{ .tidb-version }}}`. You can see all the supported TiDB versions by running the `tiup list tidb` command.
     - `--user`: specifies the user to initialize the environment.
     - `-p`: specifies the password used to connect to the target machine.
 

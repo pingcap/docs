@@ -38,7 +38,7 @@ summary: Learn how to quickly set up a data migration environment using TiUP Pla
 2. Start TiUP Playground with a target TiDB database and DM components:
 
     ```shell
-    tiup playground v8.5.1 --dm-master 1 --dm-worker 1 --tiflash 0 --without-monitor
+    tiup playground {{{ .tidb-version }}} --dm-master 1 --dm-worker 1 --tiflash 0 --without-monitor
     ```
 
 3. Verify the environment by checking in the output whether TiDB and DM are running:
