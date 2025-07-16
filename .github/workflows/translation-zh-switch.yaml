@@ -47,18 +47,29 @@ jobs:
           # Fetch the to_base branch
           git fetch origin "${{ github.event.inputs.to_base }}"
 
+          # Alternative approach: Use git read-tree for more precise control
+          # This approach merges everything except tidb-cloud folder
+
           # Create a temporary branch from to_base
           git checkout -b temp-merge-branch "origin/${{ github.event.inputs.to_base }}"
-
-          # Remove tidb-cloud folder from the temporary branch
-          git rm -r --cached tidb-cloud/ || true
-          git commit -m "Remove tidb-cloud folder for merge" || true
 
           # Switch back to target branch
           git checkout "${{ github.event.inputs.to }}"
 
-          # Force merge the temporary branch (excluding tidb-cloud)
-          git merge temp-merge-branch --no-edit --allow-unrelated-histories
+          # Use git read-tree to merge the to_base branch content
+          # This gives us more control over what gets merged
+          git read-tree --prefix="" temp-merge-branch
+
+          # Reset tidb-cloud folder to the target branch version
+          git reset HEAD tidb-cloud/ || true
+          git checkout -- tidb-cloud/ || true
+
+          # Stage all changes except tidb-cloud
+          git add -A
+          git reset HEAD tidb-cloud/ || true
+
+          # Commit the merge
+          git commit -m "Merge ${{ github.event.inputs.to_base }} excluding tidb-cloud folder" || true
 
           # Clean up temporary branch
           git branch -D temp-merge-branch
