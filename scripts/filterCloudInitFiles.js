@@ -1,5 +1,5 @@
-const fs = require("fs");
-const path = require("path");
+import * as fs from "fs";
+import path from "path";
 
 // Read the TOC file
 const tocContent = fs.readFileSync("TOC-tidb-cloud.md", "utf8");
