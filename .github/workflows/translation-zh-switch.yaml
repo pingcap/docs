@@ -71,6 +71,10 @@ jobs:
           # Clean up temporary branch
           git branch -D temp-merge-branch
 
+          # Get the latest filterCloudInitFiles.js from master branch
+          git fetch origin master
+          git checkout origin/master -- scripts/filterCloudInitFiles.js || true
+
           # Push the changes
           git push origin "${{ github.event.inputs.to }}"
           cd ..
