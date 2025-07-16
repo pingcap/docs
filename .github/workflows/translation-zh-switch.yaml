@@ -41,24 +41,39 @@ jobs:
       - name: Force merge to_base branch excluding tidb-cloud folder
         run: |
           cd docs
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
           # Fetch the to_base branch
           git fetch origin "${{ github.event.inputs.to_base }}"
+
+          # Simple and reliable approach: merge everything first, then restore tidb-cloud
+
+          # Store the current target branch state before merge
+          TARGET_BRANCH_HEAD=$(git rev-parse HEAD)
 
           # Create a temporary branch from to_base
           git checkout -b temp-merge-branch "origin/${{ github.event.inputs.to_base }}"
 
-          # Remove tidb-cloud folder from the temporary branch
-          git rm -r --cached tidb-cloud/ || true
-          git commit -m "Remove tidb-cloud folder for merge" || true
-
           # Switch back to target branch
           git checkout "${{ github.event.inputs.to }}"
 
-          # Force merge the temporary branch (excluding tidb-cloud)
-          git merge temp-merge-branch --no-edit --allow-unrelated-histories
+          # Merge the temporary branch with allow-unrelated-histories
+          git merge temp-merge-branch --no-edit --allow-unrelated-histories -X theirs
+
+          # After merge, restore tidb-cloud folder from the original target branch state
+          # Use the stored commit hash to restore the original tidb-cloud folder
+          git checkout $TARGET_BRANCH_HEAD -- tidb-cloud/ || true
+
+          # If there are any conflicts in tidb-cloud, resolve them by keeping the target branch version
+          git add tidb-cloud/ || true
 
           # Clean up temporary branch
           git branch -D temp-merge-branch
+
+          # Get the latest filterCloudInitFiles.js from master branch
+          git fetch origin master
+          git checkout origin/master -- scripts/filterCloudInitFiles.js || true
 
           # Push the changes
           git push origin "${{ github.event.inputs.to }}"
@@ -67,7 +82,9 @@ jobs:
       - name: Update latest_translation_commit.json
         run: |
           cd docs
-          echo '{"target":"${{ github.event.inputs.to_base }}","sha":""}' > latest_translation_commit.json
+          # Get the latest commit SHA from to_base branch
+          TO_BASE_SHA=$(git rev-parse origin/${{ github.event.inputs.to_base }})
+          echo '{"target":"${{ github.event.inputs.to_base }}","sha":"'$TO_BASE_SHA'"}' > latest_translation_commit.json
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add latest_translation_commit.json
