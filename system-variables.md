@@ -4049,12 +4049,16 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 
 ### tidb_mpp_store_fail_ttl
 
+> **Warning:**
+>
+> Starting from v9.0.0, this variable is deprecated. Its value will be fixed to `0s`, meaning TiDB no longer waits before sending queries to newly started TiFlash nodes, as additional delay is no longer necessary to prevent query failures.
+
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Duration
-- Default value: `60s`
-- The newly started TiFlash node does not provide services. To prevent queries from failing, TiDB limits the tidb-server sending queries to the newly started TiFlash node. This variable indicates the time range in which the newly started TiFlash node is not sent requests.
+- Default value: Before v9.0.0, the default value is `60s`. Starting from v9.0.0, the default value is `0s`.
+- The newly started TiFlash node does not provide services. To prevent queries from failing, TiDB limits the tidb-server from sending queries to the newly started TiFlash nodes. This variable indicates the time range during which the newly started TiFlash node does not send requests.
 
 ### tidb_multi_statement_mode <span class="version-mark">New in v4.0.11</span>
 
