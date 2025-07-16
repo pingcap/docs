@@ -496,11 +496,11 @@ tiup br restore point --pd="${PD_IP}:2379"
 --master-key "local:///path/to/master.key"
 ```
 
-### Restore with filters
+### Restore data using filters
 
-Starting from TiDB v9.0.0, you can use filters during PITR to selectively restore specific databases or tables. This allows for more granular control over what data gets restored during point-in-time recovery operations.
+Starting from TiDB v9.0.0, you can use filters during PITR to restore specific databases or tables, enabling more fine-grained control over the data to be restored.
 
-The filter patterns follow the same syntax as [table filters](/table-filter.md) used in other BR operations:
+The filter patterns follow the same [table filtering syntax](/table-filter.md) as other BR operations:
 
 - `'*.*'`: matches all databases and tables.
 - `'db1.*'`: matches all tables in the database `db1`.
@@ -527,7 +527,7 @@ tiup br restore point --pd="${PD_IP}:2379" \
 --restored-ts "2025-06-03 18:00:00+0800" \
 --filter 'db1.users' --filter 'db1.orders'
 
-# restore with pattern matching
+# restore using pattern matching
 tiup br restore point --pd="${PD_IP}:2379" \
 --storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
 --full-backup-storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
@@ -538,10 +538,10 @@ tiup br restore point --pd="${PD_IP}:2379" \
 
 > **Note:**
 >
-> - When using filters, ensure that the target cluster does not contain databases or tables that match the filter. Otherwise, the restore will fail with an error.
-> - Filter options apply to both snapshot and log backup restoration phases.
-> - Multiple `--filter` options can be specified to include or exclude different patterns.
-> - PITR filtering does not support system tables yet. If you need to restore specific system tables, use `br restore full` with filters instead, which will restore only the snapshot backup data (not log backup data).
+> - Before restoring data using filters, ensure that the target cluster does not contain any databases or tables that match the filter. Otherwise, the restore will fail with an error.
+> - The filter options apply during the restore phase for both snapshot and log backups.
+> - You can specify multiple `--filter` options to include or exclude different patterns.
+> - PITR filtering does not support system tables yet. If you need to restore specific system tables, use the `br restore full` command with filters instead. Note that this command restores only the snapshot backup data (not log backup data).
 
 ### Concurrent restore operations
 
@@ -569,7 +569,7 @@ tiup br restore point --pd="${PD_IP}:2379" \
 
 > **Note:**
 >
-> Each concurrent restore operation must target different databases or non-overlapping table sets. Attempting to restore overlapping datasets concurrently will result in an error.
+> Each concurrent restore operation must target a different database or a non-overlapping set of tables. Attempting to restore overlapping datasets concurrently will result in an error.
 
 ### Compatibility between ongoing log backup and snapshot restore
 
@@ -582,7 +582,7 @@ Starting from v9.0.0, when a log backup task is running, if all of the following
 - The data to be restored uses the same type of external storage as the target storage for the log backup.
 - Neither the data to be restored nor the log backup has enabled local encryption. For details, see [log backup encryption](#encrypt-the-log-backup-data) and [snapshot backup encryption](/br/br-snapshot-manual.md#encrypt-the-backup-data).
 
-If any of the above conditions are not met, you can complete the recovery by following these steps:
+If any of the above conditions are not met, you can restore the data by following these steps:
 
 1. [Stop the log backup task](#stop-a-log-backup-task).
 2. Perform the data restore.
@@ -599,20 +599,24 @@ Starting from TiDB v9.0.0, you can perform PITR operations while a log backup ta
 
 #### Important limitation for PITR with ongoing log backup
 
-When you perform PITR operations while log backup is running, the restored data will also be recorded in the log backup. However, during the restore operation time window, there are data inconsistency risks due to the nature of log restore operations. The system writes metadata to external storage to mark both the time range and data range where consistency cannot be guaranteed.
+When you perform the PITR operations while a log backup is running, the restored data will also be recorded in the ongoing log backup. However, due to the nature of log restore operations, data inconsistencies might occur within the restore window. The system writes metadata to external storage to mark both the time range and data range where consistency cannot be guaranteed.
 
-If such inconsistency occurs during the time range `[t1, t2)`, you cannot directly restore data from that time period and must choose one of the following alternatives:
+If such inconsistency occurs during the time range `[t1, t2)`, you cannot directly restore data from this period. Instead, choose one of the following alternatives:
 
-- Restore data up to `t1` (before the inconsistent period)
-- Take a new snapshot backup after `t2` and use that for future PITR operations
+- Restore data up to `t1` (to retrieve data before the inconsistent period).
+- Perform a new snapshot backup after `t2`, and use it as the base for future PITR operations.
 
 ## Abort restore operations
 
-You can use the `tiup br abort` command to clean up registry entries and checkpoint data when a restore operation fails. This command automatically finds and removes the relevant metadata based on the original restore parameters, including entries in the `mysql.tidb_restore_registry` table and checkpoint data (whether stored in the local database or external storage). Note that the `abort` command only cleans up metadata. Any actual restored data must be manually dropped from the cluster.
+If a restore operation fails, you can use the `tiup br abort` command to clean up registry entries and checkpoint data. This command automatically locates and removes relevant metadata based on the original restore parameters, including entries in the `mysql.tidb_restore_registry` table and checkpoint data (regardless of whether it is stored in a local database or external storage).
+
+> **Note:**
+>
+> The `abort` command only cleans up metadata. You need to manually delete any actual restored data from the cluster.
 
 ### Usage examples
 
-Use the same parameters as the original restore command:
+Use the same parameters as in the original restore command:
 
 ```shell
 # Abort a PITR operation
