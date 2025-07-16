@@ -49,6 +49,9 @@ jobs:
 
           # Simple and reliable approach: merge everything first, then restore tidb-cloud
 
+          # Store the current target branch state before merge
+          TARGET_BRANCH_HEAD=$(git rev-parse HEAD)
+
           # Create a temporary branch from to_base
           git checkout -b temp-merge-branch "origin/${{ github.event.inputs.to_base }}"
 
@@ -58,9 +61,9 @@ jobs:
           # Merge the temporary branch with allow-unrelated-histories
           git merge temp-merge-branch --no-edit --allow-unrelated-histories -X theirs
 
-          # After merge, restore tidb-cloud folder from the original target branch
-          # This ensures tidb-cloud folder is preserved from the target branch
-          git checkout HEAD -- tidb-cloud/ || true
+          # After merge, restore tidb-cloud folder from the original target branch state
+          # Use the stored commit hash to restore the original tidb-cloud folder
+          git checkout $TARGET_BRANCH_HEAD -- tidb-cloud/ || true
 
           # If there are any conflicts in tidb-cloud, resolve them by keeping the target branch version
           git add tidb-cloud/ || true
