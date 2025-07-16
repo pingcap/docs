@@ -8,7 +8,7 @@ on:
 
 env:
   LTS_BRANCH: i18n-ja-release-8.5
-  CLOUD_BRANCH: i18n-ja-release-8.1
+  CLOUD_BRANCH: i18n-ja-release-8.5
 
 jobs:
   dispatch-translation-zh:
@@ -23,7 +23,7 @@ jobs:
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: token ${{ github.token }}" \
           https://api.github.com/repos/${{ github.repository }}/actions/workflows/translation-zh.yml/dispatches \
-          -d '{"ref":"main","inputs":{"branch":"main"}}'
+          -d '{"ref":"master","inputs":{"branch":"master"}}'
 
   # build a matrix of branches to translate, including LTS and Cloud
   build-matrix:
@@ -78,6 +78,9 @@ jobs:
       - name: Copy new files to translator folder
         run: |
           cp -r docs/tmp markdown-translator/markdowns
+      - name: Copy variables.json to translator folder
+        run: |
+          cp docs/tmp/variables.json docs/variables.json || true
       - name: Config and translate
         run: |
           cd markdown-translator

@@ -25,7 +25,7 @@ We are constantly filling in the feature gaps between TiDB Cloud Serverless and 
 
 ### Encryption
 
-- Data persisted in your TiDB Cloud Serverless cluster is encrypted using the encryption tool provided by the cloud provider that manages your cluster. However, TiDB Cloud Serverless does not provide any additional optional measures for protecting data at-rest on disks beyond infrastructure-level encryption.
+- Data persisted in your TiDB Cloud Serverless cluster is encrypted using the encryption tool provided by the cloud provider that manages your cluster. For [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan), an optional second layer of encryption is available during the cluster creation process, providing an additional level of security beyond the default encryption at rest.
 - Using [customer-managed encryption keys (CMEK)](/tidb-cloud/tidb-cloud-encrypt-cmek.md) is currently unavailable.
 
 ### Maintenance window
