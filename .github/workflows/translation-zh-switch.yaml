@@ -41,6 +41,9 @@ jobs:
       - name: Force merge to_base branch excluding tidb-cloud folder
         run: |
           cd docs
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
           # Fetch the to_base branch
           git fetch origin "${{ github.event.inputs.to_base }}"
 
