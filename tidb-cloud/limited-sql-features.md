@@ -5,7 +5,7 @@ summary: TiDB Cloudの制限された SQL 機能について説明します。
 
 # TiDB Cloudの SQL 機能が制限されている {#limited-sql-features-on-tidb-cloud}
 
-TiDB Cloud はTiDB がサポートするほぼすべてのワークロードで動作しますが、TiDB Self-Managed とTiDB Cloud Dedicated/Serverless には機能面で若干の違いがあります。このドキュメントでは、 TiDB Cloudにおける SQL 機能の制限事項について説明します。TiDB Self-Managed とTiDB Cloud Dedicated/Serverless の機能ギャップは、継続的に埋めています。これらの機能やギャップを埋める必要がある場合は、機能リクエスト[お問い合わせ](/tidb-cloud/tidb-cloud-support.md)送信してください。
+TiDB Cloud は、TiDB がサポートするほぼすべてのワークロードで動作しますが、TiDB Self-Managed とTiDB Cloud Dedicated/Serverless の間には機能に若干の違いがあります。このドキュメントでは、 TiDB Cloudにおける SQL 機能の制限について説明します。TiDB Self-Managed とTiDB Cloud Dedicated/Serverless 間の機能ギャップは、常に埋められています。これらの機能やギャップを埋める必要がある場合は、機能リクエストを送信して[お問い合わせ](/tidb-cloud/tidb-cloud-support.md) 。
 
 ## 声明 {#statements}
 
@@ -94,7 +94,6 @@ TiDB Cloud はTiDB がサポートするほぼすべてのワークロードで�
 | `information_schema` | `SLOW_QUERY`                         | サポートされている       | サポートされていません[^5]  |
 | `information_schema` | `STATEMENTS_SUMMARY`                 | サポートされている       | サポートされていません[^6]  |
 | `information_schema` | `STATEMENTS_SUMMARY_EVICTED`         | サポートされている       | サポートされていません[^6]  |
-| `information_schema` | `STATEMENTS_SUMMARY_HISTORY`         | サポートされている       | サポートされていません[^6]  |
 | `information_schema` | `TIDB_HOT_REGIONS`                   | サポートされていません[^4] | サポートされていません[^4]  |
 | `information_schema` | `TIDB_HOT_REGIONS_HISTORY`           | サポートされている       | サポートされていません[^1]  |
 | `information_schema` | `TIDB_SERVERS_INFO`                  | サポートされている       | サポートされていません[^1]  |
@@ -132,6 +131,7 @@ TiDB Cloud はTiDB がサポートするほぼすべてのワークロードで�
 | `require_secure_transport`                | サポートされていません[^12] | 読み取り専用[^10]                |
 | `skip_name_resolve`                       | 制限なし             | 読み取り専用[^10]                |
 | `sql_log_bin`                             | 制限なし             | 読み取り専用[^10]                |
+| `tidb_analyze_skip_column_types`          | 制限なし             | 読み取り専用[^10]                |
 | `tidb_cdc_write_source`                   | 制限なし             | 読み取り専用[^10]                |
 | `tidb_check_mb4_value_in_utf8`            | サポートされていません[^4]  | サポートされていません[^4]            |
 | `tidb_config`                             | サポートされていません[^4]  | サポートされていません[^4]            |
