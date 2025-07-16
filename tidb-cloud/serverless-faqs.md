@@ -21,7 +21,7 @@ Get started with the 5-minute [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-qu
 
 ### How many TiDB Cloud Starter clusters can I create in TiDB Cloud?
 
-For each organization in TiDB Cloud, you can create a maximum of five [free clusters](/tidb-cloud/select-cluster-tier.md#free-cluster-plan) by default.
+For each organization in TiDB Cloud, you can create a maximum of five [free Starter clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter) by default.
 
 ### Are all TiDB Cloud features fully supported on TiDB Cloud Starter?
 
