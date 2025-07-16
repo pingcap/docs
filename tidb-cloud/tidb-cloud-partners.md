@@ -57,7 +57,7 @@ We will carefully evaluate your request and get back to you soon.
 As a TiDB Cloud MSP partner, there are two methods for you to manage your daily management tasks:
 
 - [TiDB Cloud Partner console](https://partner-console.tidbcloud.com)
-- [MSP Management API](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
+- [MSP Management API (deprecated)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
 
 After your complete the registration as a TiDB Cloud partner, you will receive an email notification to activate the account in the TiDB Cloud Partner console, and receive an API key for the MSP Management API.
 

@@ -17,7 +17,7 @@ Establishing a secure TLS connection between your client and your TiDB Cloud Ser
 
 In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of different connection methods and connect to your TiDB Cloud Serverless cluster as follows:
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your cluster to go to its overview page.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A dialog is displayed.
 
