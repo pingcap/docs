@@ -42,6 +42,8 @@ jobs:
         run: |
           cd docs
           echo '{"target":"${{ github.event.inputs.to_base }}","sha":""}' > latest_translation_commit.json
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git add latest_translation_commit.json
           git commit -m "ci: update latest_translation_commit.json for ${{ github.event.inputs.to_base }}"
           git push origin "${{ github.event.inputs.to }}"
