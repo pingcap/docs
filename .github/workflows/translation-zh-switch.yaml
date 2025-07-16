@@ -38,6 +38,32 @@ jobs:
           git push origin "${{ github.event.inputs.to }}"
           cd ..
 
+      - name: Force merge to_base branch excluding tidb-cloud folder
+        run: |
+          cd docs
+          # Fetch the to_base branch
+          git fetch origin "${{ github.event.inputs.to_base }}"
+
+          # Create a temporary branch from to_base
+          git checkout -b temp-merge-branch "origin/${{ github.event.inputs.to_base }}"
+
+          # Remove tidb-cloud folder from the temporary branch
+          git rm -r --cached tidb-cloud/ || true
+          git commit -m "Remove tidb-cloud folder for merge" || true
+
+          # Switch back to target branch
+          git checkout "${{ github.event.inputs.to }}"
+
+          # Force merge the temporary branch (excluding tidb-cloud)
+          git merge temp-merge-branch --no-edit --allow-unrelated-histories
+
+          # Clean up temporary branch
+          git branch -D temp-merge-branch
+
+          # Push the changes
+          git push origin "${{ github.event.inputs.to }}"
+          cd ..
+
       - name: Update latest_translation_commit.json
         run: |
           cd docs
@@ -62,7 +88,7 @@ jobs:
           export GH_TOKEN=${{github.token}}
           cd docs
           npm i
-          node scripts/filterUpdateFiles.js --cloud --init
+          node scripts/filterCloudInitFiles.js
           tree tmp
           cd ..
 
