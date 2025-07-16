@@ -82,7 +82,9 @@ jobs:
       - name: Update latest_translation_commit.json
         run: |
           cd docs
-          echo '{"target":"${{ github.event.inputs.to_base }}","sha":""}' > latest_translation_commit.json
+          # Get the latest commit SHA from to_base branch
+          TO_BASE_SHA=$(git rev-parse origin/${{ github.event.inputs.to_base }})
+          echo '{"target":"${{ github.event.inputs.to_base }}","sha":"'$TO_BASE_SHA'"}' > latest_translation_commit.json
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add latest_translation_commit.json
