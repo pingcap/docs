@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-  CN_CLOUD_BRANCH: i18n-zh-release-8.1
+  CN_CLOUD_BRANCH: i18n-zh-release-8.5
 
 jobs:
   translate:
@@ -35,12 +35,15 @@ jobs:
           export GH_TOKEN=${{github.token}}
           cd docs
           npm i
-          node scripts/filterUpdateCloudFiles.js
+          node scripts/filterUpdateFiles.js --cloud
           tree tmp
           cd ..
       - name: Copy new files to translator folder
         run: |
           cp -r docs/tmp markdown-translator/markdowns
+      - name: Copy variables.json to translator folder
+        run: |
+          cp docs/tmp/variables.json docs/variables.json || true
       - name: Config and translate
         run: |
           cd markdown-translator
@@ -58,26 +61,8 @@ jobs:
         id: build_id
         run: echo "::set-output name=id::$(date +%s)"
 
-      - name: Git commit and push
-        id: git_commit
-        run: |
-          cd docs
-          git status
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git checkout -b zh-translation/${{ steps.build_id.outputs.id }}
-          git add .
-          if git status | grep -q "Changes to be committed"
-          then
-            git commit -m "Update translated files"
-            git push origin zh-translation/${{ steps.build_id.outputs.id }}
-            echo "::set-output name=committed::1"
-          else
-            echo "No changes detected, skipped"
-          fi
       - name: Create PR
         uses: peter-evans/create-pull-request@v7
-        if: steps.git_commit.outputs.committed == 1
         with:
           path: "docs"
           token: ${{ github.token }}

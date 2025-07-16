@@ -1,9 +1,9 @@
 ---
-title: Basic SSO Authentication
+title: Standard SSO Authentication
 summary: Learn how to log in to the TiDB Cloud console via your Google, GitHub, or Microsoft account.
 ---
 
-# Basic SSO Authentication
+# Standard SSO Authentication
 
 This document describes how to log in to the [TiDB Cloud console](https://tidbcloud.com/) via basic Single Sign-on (SSO) authentication, which is quick and convenient.
 
