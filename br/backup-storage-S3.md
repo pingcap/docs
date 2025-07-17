@@ -9,7 +9,7 @@ The Backup & Restore (BR) tool supports using Amazon S3 or other Amazon S3-compa
 
 > **Tip:**
 >
-> To view the BR-related documentation for TiDB v7.5, click [TiDB Backup and Restore Use Cases](https://docs.pingcap.com/tidb/v7.5/backup-and-restore-use-cases/).
+> Starting from v6.5, the content of this document has been consolidated into [TiDB Backup and Restore Use Cases](https://docs.pingcap.com/tidb/v7.5/backup-and-restore-use-cases/#configure-backup-storage-amazon-s3). To view the v6.5 or later version of this document, click [TiDB Backup and Restore Use Cases](https://docs.pingcap.com/tidb/v7.5/backup-and-restore-use-cases/), and switch to the desired version using the version selector on the top left corner.
 
 ## Application scenarios
 
