@@ -1,6 +1,7 @@
 ---
 title: TiDB Backup and Restore Use Cases
 summary: TiDB provides snapshot and log backup solutions for specific use cases, such as timely data recovery and business audits. To use point-in-time recovery (PITR), deploy a TiDB cluster >= v6.2.0 and update BR to v7.6.0. Configure backup storage on Amazon S3 and set a backup policy to meet data loss and recovery requirements. Run log and snapshot backups, and use PITR to restore data to a specific time point. Clean up outdated data regularly. For detailed steps, refer to TiDB documentation.
+aliases: ['/tidb/v6.1/backup-storage-S3']
 ---
 
 # TiDB Backup and Restore Use Cases
