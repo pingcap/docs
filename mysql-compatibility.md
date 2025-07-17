@@ -1,30 +1,30 @@
 ---
-title: MySQL Compatibility
-summary: Learn about the compatibility of TiDB with MySQL, and the unsupported and different features.
+title: MySQL 兼容性
+summary: 了解 TiDB 与 MySQL 的兼容性，以及不支持和不同的功能。
 ---
 
-# MySQL Compatibility
+# MySQL 兼容性
 
 <CustomContent platform="tidb">
 
-TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 5.7 and MySQL 8.0. The ecosystem tools for MySQL (PHPMyAdmin, Navicat, MySQL Workbench, DBeaver and [more](/develop/dev-guide-third-party-support.md#gui)) and the MySQL client can be used for TiDB.
+TiDB 与 MySQL 协议以及 MySQL 5.7 和 MySQL 8.0 的常用功能和语法具有高度兼容性。MySQL 生态系统中的工具（PHPMyAdmin、Navicat、MySQL Workbench、DBeaver 以及 [更多](/develop/dev-guide-third-party-support.md#gui)）和 MySQL 客户端都可以用于 TiDB。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 5.7 and MySQL 8.0. The ecosystem tools for MySQL (PHPMyAdmin, Navicat, MySQL Workbench, DBeaver and [more](https://docs.pingcap.com/tidb/stable/dev-guide-third-party-support#gui)) and the MySQL client can be used for TiDB.
+TiDB 与 MySQL 协议以及 MySQL 5.7 和 MySQL 8.0 的常用功能和语法具有高度兼容性。MySQL 生态系统中的工具（PHPMyAdmin、Navicat、MySQL Workbench、DBeaver 以及 [更多](https://docs.pingcap.com/tidb/stable/dev-guide-third-party-support#gui)）和 MySQL 客户端都可以用于 TiDB。
 
 </CustomContent>
 
-However, some features of MySQL are not supported in TiDB. This could be because there is now a better way to solve the problem (such as the use of JSON instead of XML functions) or a lack of current demand versus effort required (such as stored procedures and functions). Additionally, some features might be difficult to implement in a distributed system.
+然而，MySQL 的一些功能在 TiDB 中不被支持。这可能是因为存在更好的解决方案（例如使用 JSON 代替 XML 函数）或当前需求与实现难度不符（例如存储过程和函数）。此外，一些功能在分布式系统中实现起来可能较为困难。
 
 <CustomContent platform="tidb">
 
-It's important to note that TiDB does not support the MySQL replication protocol. Instead, specific tools are provided to replicate data with MySQL:
+需要注意的是，TiDB 不支持 MySQL 的复制协议。相反，提供了专门的工具用于与 MySQL 进行数据复制：
 
-- Replicate data from MySQL: [TiDB Data Migration (DM)](/dm/dm-overview.md) is a tool that supports full data migration and incremental data replication from MySQL or MariaDB into TiDB.
-- Replicate data to MySQL: [TiCDC](/ticdc/ticdc-overview.md) is a tool for replicating the incremental data of TiDB by pulling TiKV change logs. TiCDC uses the [MySQL sink](/ticdc/ticdc-overview.md#replication-consistency) to replicate the incremental data of TiDB to MySQL.
+- 从 MySQL 复制数据：[TiDB Data Migration (DM)](/dm/dm-overview.md) 是一款支持从 MySQL 或 MariaDB 完整迁移和增量复制数据到 TiDB 的工具。
+- 复制数据到 MySQL：[TiCDC](/ticdc/ticdc-overview.md) 是一款通过拉取 TiKV 变更日志实现 TiDB 增量数据复制的工具。TiCDC 使用 [MySQL sink](/ticdc/ticdc-overview.md#replication-consistency) 将 TiDB 的增量数据复制到 MySQL。
 
 </CustomContent>
 
@@ -32,56 +32,56 @@ It's important to note that TiDB does not support the MySQL replication protocol
 
 > **Note:**
 >
-> This page describes general differences between MySQL and TiDB. For more information on compatibility with MySQL in the areas of security, see [Security Compatibility with MySQL](/security-compatibility-with-mysql.md).
+> 本页描述了 MySQL 与 TiDB 之间的一般差异。关于安全方面的 MySQL 兼容性，详见 [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)。
 
 </CustomContent>
 
-You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=mysql_compatibility).
+你可以在 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=mysql_compatibility) 试用 TiDB 的功能。
 
-## Unsupported features
+## 不支持的功能
 
-+ Stored procedures and functions
-+ Triggers
-+ Events
-+ User-defined functions
-+ `FULLTEXT` syntax and indexes [#1793](https://github.com/pingcap/tidb/issues/1793)
-+ `SPATIAL` (also known as `GIS`/`GEOMETRY`) functions, data types and indexes [#6347](https://github.com/pingcap/tidb/issues/6347)
-+ Character sets other than `ascii`, `latin1`, `binary`, `utf8`, `utf8mb4`, and `gbk`.
-+ Optimizer trace
-+ XML Functions
++ 存储过程和函数
++ 触发器
++ 事件
++ 用户定义函数
++ `FULLTEXT` 语法和索引 [#1793](https://github.com/pingcap/tidb/issues/1793)
++ `SPATIAL`（也称为 `GIS`/`GEOMETRY`）函数、数据类型和索引 [#6347](https://github.com/pingcap/tidb/issues/6347)
++ 除 `ascii`、`latin1`、`binary`、`utf8`、`utf8mb4` 和 `gbk` 之外的字符集
++ 优化器跟踪
++ XML 函数
 + X-Protocol [#1109](https://github.com/pingcap/tidb/issues/1109)
-+ Column-level privileges [#9766](https://github.com/pingcap/tidb/issues/9766)
-+ `XA` syntax (TiDB uses a two-phase commit internally, but this is not exposed via an SQL interface)
-+ `CREATE TABLE tblName AS SELECT stmt` syntax [#4754](https://github.com/pingcap/tidb/issues/4754)
-+ `CHECK TABLE` syntax [#4673](https://github.com/pingcap/tidb/issues/4673)
-+ `CHECKSUM TABLE` syntax [#1895](https://github.com/pingcap/tidb/issues/1895)
-+ `REPAIR TABLE` syntax
-+ `OPTIMIZE TABLE` syntax
-+ `HANDLER` statement
-+ `CREATE TABLESPACE` statement
++ 列级权限 [#9766](https://github.com/pingcap/tidb/issues/9766)
++ `XA` 语法（TiDB 内部使用两阶段提交，但不通过 SQL 接口暴露）
++ `CREATE TABLE tblName AS SELECT stmt` 语法 [#4754](https://github.com/pingcap/tidb/issues/4754)
++ `CHECK TABLE` 语法 [#4673](https://github.com/pingcap/tidb/issues/4673)
++ `CHECKSUM TABLE` 语法 [#1895](https://github.com/pingcap/tidb/issues/1895)
++ `REPAIR TABLE` 语法
++ `OPTIMIZE TABLE` 语法
++ `HANDLER` 语句
++ `CREATE TABLESPACE` 语句
 + "Session Tracker: Add GTIDs context to the OK packet"
 + Descending Index [#2519](https://github.com/pingcap/tidb/issues/2519)
-+ `SKIP LOCKED` syntax [#18207](https://github.com/pingcap/tidb/issues/18207)
++ `SKIP LOCKED` 语法 [#18207](https://github.com/pingcap/tidb/issues/18207)
 + Lateral derived tables [#40328](https://github.com/pingcap/tidb/issues/40328)
-+ JOIN ON subquery [#11414](https://github.com/pingcap/tidb/issues/11414)
++ JOIN ON 子查询 [#11414](https://github.com/pingcap/tidb/issues/11414)
 
-## Differences from MySQL
+## 与 MySQL 的差异
 
-### Auto-increment ID
+### 自增 ID
 
-+ In TiDB, the auto-incremental column values (IDs) are globally unique and incremental within a single TiDB server. To make the IDs incremental among multiple TiDB servers, you can use the [`AUTO_INCREMENT` MySQL compatibility mode](/auto-increment.md#mysql-compatibility-mode). However, the IDs are not necessarily allocated sequentially, so it is recommended that you avoid mixing default and custom values to prevent encountering the `Duplicated Error` message.
++ 在 TiDB 中，自增列的值（ID）在全局范围内唯一，并在单个 TiDB 服务器内递增。为了在多个 TiDB 服务器之间实现 ID 的递增，可以使用 [`AUTO_INCREMENT` MySQL 兼容模式](/auto-increment.md#mysql-compatibility-mode)。但需要注意的是，ID 不一定是连续分配的，因此建议避免混用默认值和自定义值，以防遇到 `Duplicated Error` 错误。
 
-+ You can use the `tidb_allow_remove_auto_inc` system variable to allow or forbid removing the `AUTO_INCREMENT` column attribute. To remove the column attribute, use the `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` syntax.
++ 你可以使用系统变量 `tidb_allow_remove_auto_inc` 来允许或禁止移除 `AUTO_INCREMENT` 列属性。若要移除该属性，可以使用 `ALTER TABLE MODIFY` 或 `ALTER TABLE CHANGE` 语法。
 
-+ TiDB does not support adding the `AUTO_INCREMENT` column attribute, and once removed, it cannot be recovered.
++ TiDB 不支持添加 `AUTO_INCREMENT` 列属性，一旦移除，无法恢复。
 
-+ For TiDB v6.6.0 and earlier versions, auto-increment columns in TiDB behave the same as in MySQL InnoDB, requiring them to be primary keys or index prefixes. Starting from v7.0.0, TiDB removes this restriction, allowing for more flexible table primary key definitions. [#40580](https://github.com/pingcap/tidb/issues/40580)
++ 对于 TiDB v6.6.0 及之前版本，TiDB 中的自增列行为与 MySQL InnoDB 相同，要求它们为主键或索引前缀。从 v7.0.0 开始，TiDB 移除了此限制，允许更灵活的表主键定义。[#40580](https://github.com/pingcap/tidb/issues/40580)
 
-For more details, see [`AUTO_INCREMENT`](/auto-increment.md).
+更多详情请参见 [`AUTO_INCREMENT`](/auto-increment.md)。
 
 > **Note:**
 >
-> + If you do not specify a primary key when creating a table, TiDB uses `_tidb_rowid` to identify the row. The allocation of this value shares an allocator with the auto-increment column (if such a column exists). If you specify an auto-increment column as the primary key, TiDB uses this column to identify the row. In this situation, the following situation might occur:
+> + 如果在创建表时未指定主键，TiDB 会使用 `_tidb_rowid` 来标识行。该值的分配与自增列（如果存在）共享一个分配器。如果你将自增列设为主键，TiDB 会使用此列来标识行。在这种情况下，可能会出现：
 
 ```sql
 mysql> CREATE TABLE t(id INT UNIQUE KEY AUTO_INCREMENT);
@@ -107,13 +107,13 @@ mysql> SELECT _tidb_rowid, id FROM t;
 3 rows in set (0.01 sec)
 ```
 
-As shown, because of the shared allocator, the `id` increments by 2 each time. This behavior changes in [MySQL compatibility mode](/auto-increment.md#mysql-compatibility-mode), where there is no shared allocator and therefore no skipping of numbers.
+如上所示，由于共享分配器，`id` 每次递增 2。在 [MySQL 兼容模式](/auto-increment.md#mysql-compatibility-mode)中，此行为会改变，不再使用共享分配器，因此不会跳号。
 
 <CustomContent platform="tidb">
 
 > **Note:**
 >
-> The `AUTO_INCREMENT` attribute might cause hotspot in production environments. See [Troubleshoot HotSpot Issues](/troubleshoot-hot-spot-issues.md) for details. It is recommended to use [`AUTO_RANDOM`](/auto-random.md) instead.
+> `AUTO_INCREMENT` 属性可能会在生产环境中引发热点问题。详情请参见 [Troubleshoot HotSpot Issues](/troubleshoot-hot-spot-issues.md)。建议使用 [`AUTO_RANDOM`](/auto-random.md) 代替。
 
 </CustomContent>
 
@@ -121,170 +121,170 @@ As shown, because of the shared allocator, the `id` increments by 2 each time. T
 
 > **Note:**
 >
-> The `AUTO_INCREMENT` attribute might cause hotspot in production environments. See [Troubleshoot HotSpot Issues](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#handle-auto-increment-primary-key-hotspot-tables-using-auto_random) for details. It is recommended to use [`AUTO_RANDOM`](/auto-random.md) instead.
+> `AUTO_INCREMENT` 属性可能会在生产环境中引发热点问题。详情请参见 [Troubleshoot HotSpot Issues](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#handle-auto-increment-primary-key-hotspot-tables-using-auto_random)。建议使用 [`AUTO_RANDOM`](/auto-random.md) 代替。
 
 </CustomContent>
 
-### Performance schema
+### 性能模式
 
 <CustomContent platform="tidb">
 
-TiDB utilizes a combination of [Prometheus and Grafana](/tidb-monitoring-api.md) for storing and querying performance monitoring metrics. In TiDB, most [performance schema tables](/performance-schema/performance-schema.md) do not return any results.
+TiDB 利用 [Prometheus 和 Grafana](/tidb-monitoring-api.md) 组合存储和查询性能监控指标。在 TiDB 中，大多数 [性能模式表](/performance-schema/performance-schema.md) 不会返回任何结果。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-To check performance metrics in TiDB Cloud, you can either check the cluster overview page in the TiDB Cloud console or use [third-party monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md). Most [performance schema tables](/performance-schema/performance-schema.md) return empty results in TiDB.
+在 TiDB Cloud 中查看性能指标，可以在 TiDB Cloud 控制台的集群概览页面查看，或使用 [第三方监控集成](/tidb-cloud/third-party-monitoring-integrations.md)。大多数 [性能模式表](/performance-schema/performance-schema.md) 在 TiDB 中返回空结果。
 
 </CustomContent>
 
-### Query Execution Plan
+### 查询执行计划
 
-The output format, content, and privilege settings of Query Execution Plan (`EXPLAIN`/`EXPLAIN FOR`) in TiDB differ significantly from those in MySQL.
+TiDB 中的查询执行计划（`EXPLAIN`/`EXPLAIN FOR`）的输出格式、内容和权限设置与 MySQL 有显著差异。
 
-In TiDB, the MySQL system variable `optimizer_switch` is read-only and has no effect on query plans. Although optimizer hints can be used in similar syntax to MySQL, the available hints and their implementation might differ.
+在 TiDB 中，MySQL 的系统变量 `optimizer_switch` 是只读的，不会影响查询计划。虽然可以使用类似 MySQL 的语法添加优化提示，但可用的提示和其实现可能不同。
 
-For more information, refer to [Understand the Query Execution Plan](/explain-overview.md).
+更多信息请参见 [Understand the Query Execution Plan](/explain-overview.md)。
 
-### Built-in functions
+### 内置函数
 
-TiDB supports most of the built-in functions in MySQL, but not all. You can use the statement [`SHOW BUILTINS`](/sql-statements/sql-statement-show-builtins.md) to get a list of the available functions.
+TiDB 支持大部分 MySQL 的内置函数，但并非全部。你可以使用 [`SHOW BUILTINS`](/sql-statements/sql-statement-show-builtins.md) 来获取可用函数的列表。
 
-### DDL operations
+### DDL 操作
 
-In TiDB, all supported DDL changes can be performed online. However, there are some major restrictions on DDL operations in TiDB compared to MySQL:
+在 TiDB 中，所有支持的 DDL 变更都可以在线进行。然而，与 MySQL 相比，TiDB 在 DDL 操作上存在一些主要限制：
 
-* When using a single `ALTER TABLE` statement to alter multiple schema objects (such as columns or indexes) of a table, specifying the same object in multiple changes is not supported. For example, if you execute the `ALTER TABLE t1 MODIFY COLUMN c1 INT, DROP COLUMN c1` command, the `Unsupported operate same column/index` error is output.
-* It is not supported to modify multiple TiDB-specific schema objects using a single `ALTER TABLE` statement, such as `TIFLASH REPLICA`, `SHARD_ROW_ID_BITS`, and `AUTO_ID_CACHE`.
-* TiDB does not support the changes of some data types using `ALTER TABLE`. For example, TiDB does not support the change from the `DECIMAL` type to the `DATE` type. If a data type change is unsupported, TiDB reports the `Unsupported modify column: type %d not match origin %d` error. Refer to [`ALTER TABLE`](/sql-statements/sql-statement-modify-column.md) for more details.
-* The `ALGORITHM={INSTANT,INPLACE,COPY}` syntax functions only as an assertion in TiDB, and does not modify the `ALTER` algorithm. See [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md) for further details.
-* Adding/Dropping the primary key of the `CLUSTERED` type is unsupported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
-* Different types of indexes (`HASH|BTREE|RTREE|FULLTEXT`) are not supported, and will be parsed and ignored when specified.
-* TiDB supports `HASH`, `RANGE`, `LIST`, and `KEY` partitioning types. For an unsupported partition type, TiDB returns `Warning: Unsupported partition type %s, treat as normal table`, where `%s` is the specific unsupported partition type.
-* Range, Range COLUMNS, List, and List COLUMNS partitioned tables support `ADD`, `DROP`, `TRUNCATE`, and `REORGANIZE` operations. Other partition operations are ignored.
-* Hash and Key partitioned tables support `ADD`, `COALESCE`, and `TRUNCATE` operations. Other partition operations are ignored.
-* The following syntaxes are not supported for partitioned tables:
+* 使用单个 `ALTER TABLE` 语句修改多个表结构对象（如列或索引）时，不支持对同一对象进行多次变更。例如，执行 `ALTER TABLE t1 MODIFY COLUMN c1 INT, DROP COLUMN c1` 时，会报 `Unsupported operate same column/index` 错误。
+* 不支持用单个 `ALTER TABLE` 语句修改多个 TiDB 特有的 schema 对象，如 `TIFLASH REPLICA`、`SHARD_ROW_ID_BITS` 和 `AUTO_ID_CACHE`。
+* TiDB 不支持通过 `ALTER TABLE` 改变某些数据类型。例如，不支持将 `DECIMAL` 类型改为 `DATE` 类型。如果不支持此类数据类型变更，会报 `Unsupported modify column: type %d not match origin %d` 错误。更多详情请参见 [`ALTER TABLE`](/sql-statements/sql-statement-modify-column.md)。
+* `ALGORITHM={INSTANT,INPLACE,COPY}` 语法在 TiDB 中仅作为断言，不会影响 `ALTER` 的算法。详见 [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)。
+* 不支持添加/删除 `CLUSTERED` 类型的主键。关于 `CLUSTERED` 主键的更多信息，请参见 [clustered index](/clustered-indexes.md)。
+* 不支持不同类型的索引（`HASH|BTREE|RTREE|FULLTEXT`），指定时会被解析后忽略。
+* TiDB 支持 `HASH`、`RANGE`、`LIST` 和 `KEY` 分区类型。不支持的分区类型会返回 `Warning: Unsupported partition type %s, treat as normal table`，其中 `%s` 为具体不支持的分区类型。
+* Range、Range COLUMNS、List 和 List COLUMNS 分区表支持 `ADD`、`DROP`、`TRUNCATE` 和 `REORGANIZE` 操作。其他分区操作会被忽略。
+* Hash 和 Key 分区表支持 `ADD`、`COALESCE` 和 `TRUNCATE` 操作。其他分区操作会被忽略。
+* 不支持以下分区语法：
 
     - `SUBPARTITION`
     - `{CHECK|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD} PARTITION`
 
-    For more details on partitioning, see [Partitioning](/partitioned-table.md).
+    更多关于分区的内容，请参见 [Partitioning](/partitioned-table.md)。
 
-### Analyzing tables
+### 表统计信息分析
 
-In TiDB, [Statistics Collection](/statistics.md#manual-collection) differs from MySQL in that it completely rebuilds the statistics for a table, making it a more resource-intensive operation that takes longer to complete. In contrast, MySQL/InnoDB performs a relatively lightweight and short-lived operation.
+在 TiDB 中，[Statistics Collection](/statistics.md#manual-collection) 与 MySQL 不同，它会完全重建表的统计信息，这是一项资源消耗较大的操作，耗时较长。而 MySQL/InnoDB 执行的是相对轻量且短暂的操作。
 
-For more information, refer to [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md).
+更多信息请参见 [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)。
 
-### Limitations of `SELECT` syntax
+### `SELECT` 语法的限制
 
-TiDB does not support the following `SELECT` syntax:
+TiDB 不支持以下 `SELECT` 语法：
 
 - `SELECT ... INTO @variable`
-- `SELECT .. GROUP BY expr` does not imply `GROUP BY expr ORDER BY expr` as it does in MySQL 5.7.
+- `SELECT .. GROUP BY expr` 不会像 MySQL 5.7 那样隐含 `GROUP BY expr ORDER BY expr`。
 
-For more details, see the [`SELECT`](/sql-statements/sql-statement-select.md) statement reference.
+更多详情请参见 [`SELECT`](/sql-statements/sql-statement-select.md)。
 
-### `UPDATE` statement
+### `UPDATE` 语句
 
-See the [`UPDATE`](/sql-statements/sql-statement-update.md) statement reference.
+详见 [`UPDATE`](/sql-statements/sql-statement-update.md)。
 
-### Views
+### 视图
 
-Views in TiDB are not updatable and do not support write operations such as `UPDATE`, `INSERT`, and `DELETE`.
+TiDB 中的视图不可更新，不支持 `UPDATE`、`INSERT` 和 `DELETE` 等写操作。
 
-### Temporary tables
+### 临时表
 
-For more information, see [Compatibility between TiDB local temporary tables and MySQL temporary tables](/temporary-tables.md#compatibility-with-mysql-temporary-tables).
+更多信息请参见 [TiDB 本地临时表与 MySQL 临时表的兼容性](/temporary-tables.md#compatibility-with-mysql-temporary-tables)。
 
-### Character sets and collations
+### 字符集和排序规则
 
-* To learn about the character sets and collations supported by TiDB, see [Character Set and Collation Overview](/character-set-and-collation.md).
+* 了解 TiDB 支持的字符集和排序规则，请参见 [Character Set and Collation Overview](/character-set-and-collation.md)。
 
-* For information on the MySQL compatibility of the GBK character set, refer to [GBK compatibility](/character-set-gbk.md#mysql-compatibility) .
+* 关于 GBK 字符集的 MySQL 兼容性信息，详见 [GBK compatibility](/character-set-gbk.md#mysql-compatibility)。
 
-* TiDB inherits the character set used in the table as the national character set.
+* TiDB 继承表中使用的字符集作为国家字符集。
 
-### Storage engines
+### 存储引擎
 
-TiDB allows for tables to be created with alternative storage engines. Despite this, the metadata as described by TiDB is for the InnoDB storage engine as a way to ensure compatibility.
+TiDB 允许创建使用其他存储引擎的表。尽管如此，TiDB 所描述的元数据是针对 InnoDB 存储引擎的，以确保兼容性。
 
 <CustomContent platform="tidb">
 
-To specify a storage engine using the [`--store`](/command-line-flags-for-tidb-configuration.md#--store) option, it is necessary to start the TiDB server. This storage engine abstraction feature is similar to MySQL.
+使用 [`--store`](/command-line-flags-for-tidb-configuration.md#--store) 选项指定存储引擎时，必须启动 TiDB 服务器。此存储引擎抽象功能类似于 MySQL。
 
 </CustomContent>
 
-### SQL modes
+### SQL 模式
 
-TiDB supports most [SQL modes](/sql-mode.md):
+TiDB 支持大部分 [SQL 模式](/sql-mode.md)：
 
-- The compatibility modes, such as `Oracle` and `PostgreSQL` are parsed but ignored. Compatibility modes are deprecated in MySQL 5.7 and removed in MySQL 8.0.
-- The `ONLY_FULL_GROUP_BY` mode has minor [semantic differences](/functions-and-operators/aggregate-group-by-functions.md#differences-from-mysql) from MySQL 5.7.
-- The `NO_DIR_IN_CREATE` and `NO_ENGINE_SUBSTITUTION` SQL modes in MySQL are accepted for compatibility, but are not applicable to TiDB.
+- 兼容模式（如 `Oracle` 和 `PostgreSQL`）会被解析但忽略。MySQL 5.7 中已弃用，MySQL 8.0 中已移除。
+- `ONLY_FULL_GROUP_BY` 模式与 MySQL 5.7 存在细微 [语义差异](/functions-and-operators/aggregate-group-by-functions.md#differences-from-mysql)。
+- MySQL 中的 `NO_DIR_IN_CREATE` 和 `NO_ENGINE_SUBSTITUTION` 模式在兼容性方面被接受，但不适用于 TiDB。
 
-### Default differences
+### 默认值差异
 
-TiDB has default differences when compared with MySQL 5.7 and MySQL 8.0:
+TiDB 与 MySQL 5.7 和 MySQL 8.0 在默认值上存在差异：
 
-- Default character set:
-    - TiDB's default value is `utf8mb4`.
-    - MySQL 5.7's default value is `latin1`.
-    - MySQL 8.0's default value is `utf8mb4`.
-- Default collation:
-    - TiDB's default collation is `utf8mb4_bin`.
-    - MySQL 5.7's default collation is `utf8mb4_general_ci`.
-    - MySQL 8.0's default collation is `utf8mb4_0900_ai_ci`.
-- Default SQL mode:
-    - TiDB's default SQL mode includes these modes: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION`.
-    - MySQL's default SQL mode:
-        - The default SQL mode in MySQL 5.7 is the same as TiDB.
-        - The default SQL mode in MySQL 8.0 includes these modes: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION`.
-- Default value of `lower_case_table_names`:
-    - The default value in TiDB is `2`, and only `2` is currently supported.
-    - MySQL defaults to the following values:
-        - On Linux: `0`. It means that table and database names are stored on disk according to the letter case specified in the `CREATE TABLE` or `CREATE DATABASE` statement. Name comparisons are case-sensitive.
-        - On Windows: `1`. It means table names are stored in lowercase on disk, and name comparisons are not case-sensitive. MySQL converts all table names to lowercase on storage and lookup. This behavior also applies to database names and table aliases.
-        - On macOS: `2`. It means table and database names are stored on disk according to the letter case specified in the `CREATE TABLE` or `CREATE DATABASE` statement, but MySQL converts them to lowercase on lookup. Name comparisons are not case-sensitive.
-- Default value of `explicit_defaults_for_timestamp`:
-    - The default value in TiDB is `ON`, and only `ON` is currently supported.
-    - MySQL defaults to the following values:
-        - For MySQL 5.7: `OFF`.
-        - For MySQL 8.0: `ON`.
+- 默认字符集：
+    - TiDB 的默认值为 `utf8mb4`。
+    - MySQL 5.7 的默认值为 `latin1`。
+    - MySQL 8.0 的默认值为 `utf8mb4`。
+- 默认排序规则：
+    - TiDB 的默认排序规则为 `utf8mb4_bin`。
+    - MySQL 5.7 的默认排序规则为 `utf8mb4_general_ci`。
+    - MySQL 8.0 的默认排序规则为 `utf8mb4_0900_ai_ci`。
+- 默认 SQL 模式：
+    - TiDB 的默认 SQL 模式包括：`ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION`。
+    - MySQL 的默认 SQL 模式：
+        - MySQL 5.7 的默认值与 TiDB 相同。
+        - MySQL 8.0 的默认值包括：`ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION`。
+- `lower_case_table_names` 的默认值：
+    - TiDB 的默认值为 `2`，且目前只支持 `2`。
+    - MySQL 默认值如下：
+        - 在 Linux 上：`0`，表示按创建表或数据库时指定的大小写存储，名称比较区分大小写。
+        - 在 Windows 上：`1`，表示表名存储为小写，名称比较不区分大小写。MySQL 在存储和查找时会将所有表名转换为小写。此行为也适用于数据库名和表别名。
+        - 在 macOS 上：`2`，表示按创建时指定的大小写存储，但在查找时会转换为小写，名称比较不区分大小写。
+- `explicit_defaults_for_timestamp` 的默认值：
+    - TiDB 的默认值为 `ON`，且目前只支持 `ON`。
+    - MySQL 默认值：
+        - MySQL 5.7：`OFF`。
+        - MySQL 8.0：`ON`。
 
-### Date and Time
+### 日期和时间
 
-TiDB supports named timezones with the following considerations:
+TiDB 支持命名时区，考虑如下：
 
-+ TiDB uses all the timezone rules presently installed in the system for calculation, typically the `tzdata` package. This makes it possible to use all timezone names without needing to import timezone table data. Importing timezone table data will not change the calculation rules.
-+ Currently, MySQL uses the local timezone by default, then relies on the current timezone rules built into the system (for example, when daylight savings time begins) for calculation. Without [importing timezone table data](https://dev.mysql.com/doc/refman/8.0/en/time-zone-support.html#time-zone-installation), MySQL cannot specify the timezone by name.
++ TiDB 使用系统中已安装的所有时区规则（通常为 `tzdata` 包）进行计算。这使得可以使用所有时区名称，无需导入时区表数据。导入时区表数据不会改变计算规则。
++ 目前，MySQL 默认使用本地时区，然后依赖系统内置的当前时区规则（例如夏令时开始时）进行计算。若未 [导入时区表数据](https://dev.mysql.com/doc/refman/8.0/en/time-zone-support.html#time-zone-installation)，MySQL 无法通过名称指定时区。
 
-### Type system differences
+### 类型系统差异
 
-The following column types are supported by MySQL but **not** by TiDB:
+MySQL 支持但 TiDB **不支持** 以下列类型：
 
-- `SQL_TSI_*` (includes SQL_TSI_MONTH, SQL_TSI_WEEK, SQL_TSI_DAY, SQL_TSI_HOUR, SQL_TSI_MINUTE, and SQL_TSI_SECOND, but excludes SQL_TSI_YEAR)
+- `SQL_TSI_*`（包括 SQL_TSI_MONTH、SQL_TSI_WEEK、SQL_TSI_DAY、SQL_TSI_HOUR、SQL_TSI_MINUTE 和 SQL_TSI_SECOND，但不包括 SQL_TSI_YEAR）
 
-### Regular expressions
+### 正则表达式
 
-For information about TiDB regular expression compatibility with MySQL, including `REGEXP_INSTR()`, `REGEXP_LIKE()`, `REGEXP_REPLACE()`, and `REGEXP_SUBSTR()`, see [Regular expression compatibility with MySQL](/functions-and-operators/string-functions.md#regular-expression-compatibility-with-mysql).
+关于 TiDB 与 MySQL 正则表达式兼容性的信息，包括 `REGEXP_INSTR()`、`REGEXP_LIKE()`、`REGEXP_REPLACE()` 和 `REGEXP_SUBSTR()`，请参见 [Regular expression compatibility with MySQL](/functions-and-operators/string-functions.md#regular-expression-compatibility-with-mysql)。
 
-### Incompatibility due to deprecated features
+### 不兼容的已弃用功能
 
-TiDB does not implement specific features deprecated in MySQL, including:
+TiDB 不实现 MySQL 中已弃用的特定功能，包括：
 
-- Specifying precision for floating-point types. MySQL 8.0 [deprecates](https://dev.mysql.com/doc/refman/8.0/en/floating-point-types.html) this feature, and it is recommended to use the `DECIMAL` type instead.
-- The `ZEROFILL` attribute. MySQL 8.0 [deprecates](https://dev.mysql.com/doc/refman/8.0/en/numeric-type-attributes.html) this feature, and it is recommended to pad numeric values in your application instead.
+- 指定浮点类型的精度。MySQL 8.0 [弃用](https://dev.mysql.com/doc/refman/8.0/en/floating-point-types.html) 了此功能，建议使用 `DECIMAL` 类型。
+- `ZEROFILL` 属性。MySQL 8.0 [弃用](https://dev.mysql.com/doc/refman/8.0/en/numeric-type-attributes.html)，建议在应用中用补零方式处理。
 
-### `CREATE RESOURCE GROUP`, `DROP RESOURCE GROUP`, and `ALTER RESOURCE GROUP` statements
+### `CREATE RESOURCE GROUP`、`DROP RESOURCE GROUP` 和 `ALTER RESOURCE GROUP` 语句
 
-The following statements for creating, modifying, and dropping resource groups have different supported parameters than MySQL. For details, see the following documents:
+创建、修改和删除资源组的相关语句参数支持与 MySQL 不同。详情请参见：
 
 - [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md)
 - [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md)
 - [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md)
 
-## Differences on pessimistic transaction (lock) with MySQL InnoDB
+## 与 MySQL InnoDB 的悲观事务（锁）差异
 
-For differences on pessimistic transaction (lock) between TiDB and MySQL InnoDB, see [Differences from MySQL InnoDB](/pessimistic-transaction.md#differences-from-mysql-innodb).
+关于 TiDB 和 MySQL InnoDB 在悲观事务（锁）方面的差异，详见 [Differences from MySQL InnoDB](/pessimistic-transaction.md#differences-from-mysql-innodb)。

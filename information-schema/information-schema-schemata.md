@@ -1,11 +1,11 @@
 ---
 title: SCHEMATA
-summary: Learn the `SCHEMATA` information_schema table.
+summary: 了解 `SCHEMATA` information_schema 表。
 ---
 
 # SCHEMATA
 
-The `SCHEMATA` table provides information about databases. The table data is equivalent to the result of the [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md) statement.
+`SCHEMATA` 表提供关于数据库的信息。该表数据等同于 [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md) 语句的结果。
 
 ```sql
 USE information_schema;

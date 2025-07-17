@@ -1,13 +1,13 @@
 ---
-title: REVOKE <role> | TiDB SQL Statement Reference
-summary: An overview of the usage of REVOKE <role> for the TiDB database.
+title: REVOKE <role> | TiDB SQL 语句参考
+summary: 关于在 TiDB 数据库中使用 REVOKE <role> 的概述。
 ---
 
 # `REVOKE <role>`
 
-This statement removes a previously assigned role from a specified user (or list of users).
+该语句用于撤销之前分配给指定用户（或用户列表）的角色。
 
-## Synopsis
+## 概要
 
 ```ebnf+diagram
 RevokeRoleStmt ::=
@@ -20,15 +20,15 @@ UsernameList ::=
     Username ( ',' Username )*
 ```
 
-## Examples
+## 示例
 
-Connect to TiDB as the `root` user:
+以 `root` 用户连接到 TiDB：
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u root
 ```
 
-Create a new role `analyticsteam` and a new user `jennifer`:
+创建一个新角色 `analyticsteam` 和一个新用户 `jennifer`：
 
 ```sql
 CREATE ROLE analyticsteam;
@@ -44,13 +44,13 @@ GRANT analyticsteam TO jennifer;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-Connect to TiDB as the `jennifer` user:
+以 `jennifer` 用户连接到 TiDB：
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u jennifer
 ```
 
-Note that by default `jennifer` needs to execute `SET ROLE analyticsteam` in order to be able to use the privileges associated with the `analyticsteam` role:
+注意，默认情况下，`jennifer` 需要执行 `SET ROLE analyticsteam` 才能使用与 `analyticsteam` 角色相关联的权限：
 
 ```sql
 SHOW GRANTS;
@@ -86,26 +86,26 @@ SHOW TABLES IN test;
 1 row in set (0.00 sec)
 ```
 
-Connect to TiDB as the `root` user:
+以 `root` 用户连接到 TiDB：
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u root
 ```
 
-The statement `SET DEFAULT ROLE` can be used to associate the role `analyticsteam` to `jennifer`:
+可以使用 `SET DEFAULT ROLE` 将 `analyticsteam` 角色关联到 `jennifer`：
 
 ```sql
 SET DEFAULT ROLE analyticsteam TO jennifer;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-Connect to TiDB as the `jennifer` user:
+以 `jennifer` 用户连接到 TiDB：
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u jennifer
 ```
 
-After this, the user `jennifer` has the privileges associated with the role `analyticsteam` and `jennifer` does not have to execute the statement `SET ROLE`:
+之后，用户 `jennifer` 将拥有与 `analyticsteam` 角色相关联的权限，且无需执行 `SET ROLE` 语句：
 
 ```sql
 SHOW GRANTS;
@@ -127,26 +127,26 @@ SHOW TABLES IN test;
 1 row in set (0.00 sec)
 ```
 
-Connect to TiDB as the `root` user:
+以 `root` 用户连接到 TiDB：
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u root
 ```
 
-Revoke the role of analyticsteam from `jennifer`:
+撤销 `jennifer` 的 `analyticsteam` 角色：
 
 ```sql
 REVOKE analyticsteam FROM jennifer;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-Connect to TiDB as the `jennifer` user:
+以 `jennifer` 用户连接到 TiDB：
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u jennifer
 ```
 
-Show the privileges of `jennifer`:
+显示 `jennifer` 的权限：
 
 ```sql
 SHOW GRANTS;
@@ -158,11 +158,11 @@ SHOW GRANTS;
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `REVOKE <role>` statement in TiDB is fully compatible with the roles feature in MySQL 8.0. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中的 `REVOKE <role>` 语句与 MySQL 8.0 中的角色功能完全兼容。如果发现任何兼容性差异，[请报告一个 bug](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 相关链接
 
 * [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)
 * [`DROP ROLE`](/sql-statements/sql-statement-drop-role.md)

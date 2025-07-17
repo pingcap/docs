@@ -1,15 +1,15 @@
 ---
 title: Set Operations
-summary: Learn the supported set operations in TiDB.
+summary: 了解 TiDB 支持的集合操作。
 ---
 
 # Set Operations
 
-TiDB supports three set operations using the UNION, EXCEPT, and INTERSECT operators. The smallest unit of a set is a [`SELECT` statement](/sql-statements/sql-statement-select.md).
+TiDB 支持使用 UNION、EXCEPT 和 INTERSECT 操作符的三种集合操作。集合的最小单位是一个 [`SELECT` statement](/sql-statements/sql-statement-select.md)。
 
 ## UNION operator
 
-In mathematics, the union of two sets A and B consists of all elements that are in A or in B. For example:
+在数学中，两个集合 A 和 B 的并集由所有在 A 或 B 中的元素组成。例如：
 
 ```sql
 SELECT 1 UNION SELECT 2;
@@ -22,7 +22,7 @@ SELECT 1 UNION SELECT 2;
 2 rows in set (0.00 sec)
 ```
 
-TiDB supports both `UNION DISTINCT` and `UNION ALL` operators. `UNION DISTINCT` removes duplicate records from the result set, while `UNION ALL` keeps all records including duplicates. `UNION DISTINCT` is used by default in TiDB.
+TiDB 支持 `UNION DISTINCT` 和 `UNION ALL` 两种操作符。`UNION DISTINCT` 会从结果集中移除重复的记录，而 `UNION ALL` 会保留所有记录，包括重复项。TiDB 默认使用 `UNION DISTINCT`。
 
 ```sql
 CREATE TABLE t1 (a int);
@@ -31,7 +31,7 @@ INSERT INTO t1 VALUES (1),(2);
 INSERT INTO t2 VALUES (1),(3);
 ```
 
-Examples for `UNION DISTINCT` and `UNION ALL` queries are respectively as follows:
+`UNION DISTINCT` 和 `UNION ALL` 查询的示例如下：
 
 ```sql
 SELECT * FROM t1 UNION DISTINCT SELECT * FROM t2;
@@ -58,7 +58,7 @@ SELECT * FROM t1 UNION ALL SELECT * FROM t2;
 
 ## EXCEPT operator
 
-If A and B are two sets, EXCEPT returns the difference set of A and B which consists of elements that are in A but not in B.
+如果 A 和 B 是两个集合，EXCEPT 返回 A 和 B 的差集，即在 A 中但不在 B 中的元素。
 
 ```sql
 SELECT * FROM t1 EXCEPT SELECT * FROM t2;
@@ -70,11 +70,11 @@ SELECT * FROM t1 EXCEPT SELECT * FROM t2;
 1 rows in set (0.00 sec)
 ```
 
-`EXCEPT ALL` operator is not yet supported.
+`EXCEPT ALL` 操作符尚不支持。
 
 ## INTERSECT operator
 
-In mathematics, the intersection of two sets A and B consists of all elements that are both in A and B, and no other elements.
+在数学中，两个集合 A 和 B 的交集由同时在 A 和 B 中的所有元素组成，且不包含其他元素。
 
 ```sql
 SELECT * FROM t1 INTERSECT SELECT * FROM t2;
@@ -86,7 +86,7 @@ SELECT * FROM t1 INTERSECT SELECT * FROM t2;
 1 rows in set (0.00 sec)
 ```
 
-`INTERSECT ALL` operator is not yet supported. INTERSECT operator has higher precedence over EXCEPT and UNION operators.
+`INTERSECT ALL` 操作符尚不支持。INTERSECT 操作符的优先级高于 EXCEPT 和 UNION 操作符。
 
 ```sql
 SELECT * FROM t1 UNION ALL SELECT * FROM t1 INTERSECT SELECT * FROM t2;
@@ -102,7 +102,7 @@ SELECT * FROM t1 UNION ALL SELECT * FROM t1 INTERSECT SELECT * FROM t2;
 
 ## Parentheses
 
-TiDB supports using parentheses to specify the precedence of set operations. Expressions in parentheses are processed first.
+TiDB 支持使用括号来指定集合操作的优先级。括号中的表达式会优先处理。
 
 ```sql
 (SELECT * FROM t1 UNION ALL SELECT * FROM t1) INTERSECT SELECT * FROM t2;
@@ -116,7 +116,7 @@ TiDB supports using parentheses to specify the precedence of set operations. Exp
 
 ## Use `ORDER BY` and `LIMIT`
 
-TiDB supports using `ORDER BY` or `LIMIT` clause on the entire result of set operations. These two clauses must be at the end of the entire statement.
+TiDB 支持在整个集合操作的结果上使用 `ORDER BY` 或 `LIMIT` 子句。这两个子句必须放在整个语句的最后。
 
 ```sql
 (SELECT * FROM t1 UNION ALL SELECT * FROM t1 INTERSECT SELECT * FROM t2) ORDER BY a LIMIT 2;

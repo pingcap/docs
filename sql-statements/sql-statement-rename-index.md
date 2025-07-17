@@ -1,13 +1,13 @@
 ---
-title: RENAME INDEX | TiDB SQL Statement Reference
-summary: An overview of the usage of RENAME INDEX for the TiDB database.
+title: RENAME INDEX | TiDB SQL 语句参考
+summary: 关于在 TiDB 数据库中使用 RENAME INDEX 的概述。
 ---
 
 # RENAME INDEX
 
-The statement `ALTER TABLE .. RENAME INDEX` renames an existing index to a new name. This operation is instant in TiDB, and requires only a meta data change.
+语句 `ALTER TABLE .. RENAME INDEX` 用于将现有索引重命名为新名称。 在 TiDB 中，此操作是即时的，只需更改元数据。
 
-## Synopsis
+## 概要
 
 ```ebnf+diagram
 AlterTableStmt
@@ -17,7 +17,7 @@ RenameIndexSpec
          ::= 'RENAME' ( 'KEY' | 'INDEX' ) Identifier 'TO' Identifier
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL, INDEX col1 (c1));
@@ -49,11 +49,11 @@ Create Table: CREATE TABLE `t1` (
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `RENAME INDEX` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中的 `RENAME INDEX` 语句与 MySQL 完全兼容。如果你发现任何兼容性差异，[请报告一个 bug](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 相关链接
 
 * [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
 * [CREATE INDEX](/sql-statements/sql-statement-create-index.md)

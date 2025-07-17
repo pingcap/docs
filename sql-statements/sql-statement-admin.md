@@ -1,11 +1,11 @@
 ---
-title: ADMIN | TiDB SQL Statement Reference
-summary: An overview of the usage of ADMIN for the TiDB database.
+title: ADMIN | TiDB SQL 语句参考
+summary: TiDB 中 ADMIN 的用法概述。
 ---
 
 # ADMIN
 
-This statement is a TiDB extension syntax, used to view the status of TiDB and check the data of tables in TiDB. This document introduces the following `ADMIN` related statements:
+此语句是 TiDB 的扩展语法，用于查看 TiDB 的状态以及检查 TiDB 中表的数据。本文介绍以下与 `ADMIN` 相关的语句：
 
 - [`ADMIN RELOAD`](#admin-reload-statement)
 - [`ADMIN PLUGINS`](#admin-plugins-related-statement)
@@ -14,101 +14,101 @@ This statement is a TiDB extension syntax, used to view the status of TiDB and c
 - [`ADMIN SHOW NEXT_ROW_ID`](#admin-show-next_row_id-statement)
 - [`ADMIN SHOW SLOW`](#admin-show-slow-statement)
 
-## DDL related statement
+## DDL 相关语句
 
 <CustomContent platform="tidb-cloud">
 
-| Statement                                                                                | Description                 |
+| 语句 | 描述 |
 |------------------------------------------------------------------------------------------|-----------------------------|
-| [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)             | Cancels the currently running DDL jobs. |
-| [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md)               | Pauses the currently running DDL jobs. |
-| [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md)             | Resumes the paused DDL jobs. |
-| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)          | Calculates the CRC64 of all rows + indexes of a table. |
-| [<code>ADMIN CHECK [TABLE\|INDEX]</code>](/sql-statements/sql-statement-admin-check-table-index.md) | Checks for consistency of a table or index. |
-| [<code>ADMIN SHOW DDL [JOBS\|QUERIES]</code>](/sql-statements/sql-statement-admin-show-ddl.md)      | Shows details about currently running or recently completed DDL jobs. |
+| [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)             | 取消当前正在运行的 DDL 任务。 |
+| [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md)               | 暂停当前正在运行的 DDL 任务。 |
+| [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md)             | 恢复已暂停的 DDL 任务。 |
+| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)          | 计算表所有行和索引的 CRC64。 |
+| [<code>ADMIN CHECK [TABLE\|INDEX]</code>](/sql-statements/sql-statement-admin-check-table-index.md) | 检查表或索引的一致性。 |
+| [<code>ADMIN SHOW DDL [JOBS\|QUERIES]</code>](/sql-statements/sql-statement-admin-show-ddl.md)      | 显示当前运行或最近完成的 DDL 任务的详细信息。 |
 
 </CustomContent>
 
 <CustomContent platform="tidb">
 
-| Statement                                                                                | Description                 |
+| 语句 | 描述 |
 |------------------------------------------------------------------------------------------|-----------------------------|
-| [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)             | Cancels a currently running DDL jobs. |
-| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)          | Calculates the CRC64 of all rows + indexes of a table. |
-| [<code>ADMIN CHECK [TABLE\|INDEX]</code>](/sql-statements/sql-statement-admin-check-table-index.md) | Checks for consistency of a table or index. |
-| [<code>ADMIN SHOW DDL [JOBS\|QUERIES]</code>](/sql-statements/sql-statement-admin-show-ddl.md)      | Shows details about currently running or recently completed DDL jobs. |
+| [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)             | 取消当前正在运行的 DDL 任务。 |
+| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)          | 计算表所有行和索引的 CRC64。 |
+| [<code>ADMIN CHECK [TABLE\|INDEX]</code>](/sql-statements/sql-statement-admin-check-table-index.md) | 检查表或索引的一致性。 |
+| [<code>ADMIN SHOW DDL [JOBS\|QUERIES]</code>](/sql-statements/sql-statement-admin-show-ddl.md)      | 显示当前运行或最近完成的 DDL 任务的详细信息。 |
 
 </CustomContent>
 
-## `ADMIN RELOAD` statement
+## `ADMIN RELOAD` 语句
 
 ```sql
 ADMIN RELOAD expr_pushdown_blacklist;
 ```
 
-The above statement is used to reload the blocklist pushed down by the expression.
+上述语句用于重新加载表达式推送黑名单。
 
 ```sql
 ADMIN RELOAD opt_rule_blacklist;
 ```
 
-The above statement is used to reload the blocklist of logic optimization rules.
+上述语句用于重新加载逻辑优化规则的黑名单。
 
-## `ADMIN PLUGINS` related statement
+## `ADMIN PLUGINS` 相关语句
 
 > **Note:**
 >
-> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
 
 ```sql
 ADMIN PLUGINS ENABLE plugin_name [, plugin_name] ...;
 ```
 
-The above statement is used to enable the `plugin_name` plugin.
+上述语句用于启用 `plugin_name` 插件。
 
 ```sql
 ADMIN PLUGINS DISABLE plugin_name [, plugin_name] ...;
 ```
 
-The above statement is used to disable the `plugin_name` plugin.
+上述语句用于禁用 `plugin_name` 插件。
 
-## `ADMIN BINDINGS` related statement
+## `ADMIN BINDINGS` 相关语句
 
 ```sql
 ADMIN FLUSH BINDINGS;
 ```
 
-The above statement is used to persist SQL Plan binding information.
+上述语句用于持久化 SQL 计划绑定信息。
 
 ```sql
 ADMIN CAPTURE BINDINGS;
 ```
 
-The above statement can generate the binding of SQL Plan from the `SELECT` statement that occurs more than once.
+上述语句可以从多次出现的 `SELECT` 语句中生成 SQL 计划绑定。
 
 ```sql
 ADMIN EVOLVE BINDINGS;
 ```
 
-After the automatic binding feature is enabled, the evolution of SQL Plan binding information is triggered every `bind-info-leave` (the default value is `3s`). The above statement is used to proactively trigger this evolution.
+在启用自动绑定功能后，每当 `bind-info-leave`（默认值为 `3s`）到达时，会触发 SQL 计划绑定信息的演变。上述语句用于主动触发此演变。
 
 ```sql
 ADMIN RELOAD BINDINGS;
 ```
 
-The above statement is used to reload SQL Plan binding information.
+上述语句用于重新加载 SQL 计划绑定信息。
 
-## `ADMIN REPAIR` statement
+## `ADMIN REPAIR` 语句
 
 <CustomContent platform="tidb-cloud">
 
 > **Note:**
 >
-> This TiDB statement is not applicable to TiDB Cloud.
+> 该 TiDB 语句不适用于 TiDB Cloud。
 
 </CustomContent>
 
-To overwrite the metadata of the stored table in an untrusted way in extreme cases, use `ADMIN REPAIR TABLE`:
+在极端情况下，为了以不可信的方式覆盖存储表的元数据，可以使用 `ADMIN REPAIR TABLE`：
 
 ```sql
 ADMIN REPAIR TABLE tbl_name CREATE TABLE STATEMENT;
@@ -116,23 +116,23 @@ ADMIN REPAIR TABLE tbl_name CREATE TABLE STATEMENT;
 
 <CustomContent platform="tidb">
 
-Here "untrusted" means that you need to manually ensure that the metadata of the original table can be covered by the `CREATE TABLE STATEMENT` operation. To use this `REPAIR` statement, enable the [`repair-mode`](/tidb-configuration-file.md#repair-mode) configuration item, and make sure that the tables to be repaired are listed in the [`repair-table-list`](/tidb-configuration-file.md#repair-table-list).
+这里的“untrusted”意味着你需要手动确保原始表的元数据可以被 `CREATE TABLE STATEMENT` 操作覆盖。使用此 `REPAIR` 语句前，请启用 [`repair-mode`](/tidb-configuration-file.md#repair-mode) 配置项，并确保待修复的表在 [`repair-table-list`](/tidb-configuration-file.md#repair-table-list) 中列出。
 
 </CustomContent>
 
-## `ADMIN SHOW NEXT_ROW_ID` statement
+## `ADMIN SHOW NEXT_ROW_ID` 语句
 
 ```sql
 ADMIN SHOW t NEXT_ROW_ID;
 ```
 
-The above statement is used to view the details of some special columns of a table. The output is the same as [SHOW TABLE NEXT_ROW_ID](/sql-statements/sql-statement-show-table-next-rowid.md).
+上述语句用于查看表中某些特殊列的详细信息。输出与 [SHOW TABLE NEXT_ROW_ID](/sql-statements/sql-statement-show-table-next-rowid.md) 相同。
 
-## `ADMIN SHOW SLOW` statement
+## `ADMIN SHOW SLOW` 语句
 
 > **Note:**
 >
-> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
 
 ```sql
 ADMIN SHOW SLOW RECENT N;
@@ -144,11 +144,11 @@ ADMIN SHOW SLOW TOP [INTERNAL | ALL] N;
 
 <CustomContent platform="tidb">
 
-For details, refer to [`ADMIN SHOW SLOW` command](/identify-slow-queries.md#admin-show-slow-command).
+详细信息请参考 [`ADMIN SHOW SLOW` command](/identify-slow-queries.md#admin-show-slow-command)。
 
 </CustomContent>
 
-## Synopsis
+## 概要
 
 ```ebnf+diagram
 AdminStmt ::=
@@ -199,9 +199,9 @@ TableNameList ::=
     TableName ( ',' TableName )*
 ```
 
-## Examples
+## 示例
 
-Run the following command to view the last 10 completed DDL jobs in the currently running DDL job queue. When `NUM` is not specified, only the last 10 completed DDL jobs is presented by default.
+运行以下命令以查看当前运行的 DDL 任务队列中最后 10 个已完成的 DDL 任务。当未指定 `NUM` 时，默认只显示最后 10 个已完成的 DDL 任务。
 
 ```sql
 ADMIN SHOW DDL JOBS;
@@ -225,7 +225,7 @@ ADMIN SHOW DDL JOBS;
 +--------+---------+------------+---------------------+----------------+-----------+----------+-----------+-----------------------------------+-----------------------------------+---------------+
 ```
 
-Run the following command to view the last 5 completed DDL jobs in the currently running DDL job queue:
+运行以下命令以查看当前运行的 DDL 任务队列中最后 5 个已完成的 DDL 任务：
 
 ```sql
 ADMIN SHOW DDL JOBS 5;
@@ -237,14 +237,10 @@ ADMIN SHOW DDL JOBS 5;
 +--------+---------+------------+---------------------+----------------+-----------+----------+-----------+-----------------------------------+-----------------------------------+---------------+
 | 45     | test    | t1         | add index     | write reorganization | 32        | 37       | 0         | 2019-01-10 12:38:36.501 +0800 CST |                                   | running       |
 | 44     | test    | t1         | add index     | none                 | 32        | 37       | 0         | 2019-01-10 12:36:55.18 +0800 CST  | 2019-01-10 12:36:55.852 +0800 CST | rollback done |
-| 43     | test    | t1         | add index     | public               | 32        | 37       | 6         | 2019-01-10 12:35:13.66 +0800 CST  | 2019-01-10 12:35:14.925 +0800 CST | synced        |
-| 42     | test    | t1         | drop index    | none                 | 32        | 37       | 0         | 2019-01-10 12:34:35.204 +0800 CST | 2019-01-10 12:34:36.958 +0800 CST | synced        |
-| 41     | test    | t1         | add index     | public               | 32        | 37       | 0         | 2019-01-10 12:33:22.62 +0800 CST  | 2019-01-10 12:33:24.625 +0800 CST | synced        |
-| 40     | test    | t1         | drop column   | none                 | 32        | 37       | 0         | 2019-01-10 12:33:08.212 +0800 CST | 2019-01-10 12:33:09.78 +0800 CST  | synced        |
 +--------+---------+------------+---------------------+----------------+-----------+----------+-----------+-----------------------------------+-----------------------------------+---------------+
 ```
 
-Run the following command to view the details of some special columns of a table. The output is the same as [SHOW TABLE NEXT_ROW_ID](/sql-statements/sql-statement-show-table-next-rowid.md).
+运行以下命令以查看某个表的特殊列的详细信息。输出与 [SHOW TABLE NEXT_ROW_ID](/sql-statements/sql-statement-show-table-next-rowid.md) 相同。
 
 ```sql
 ADMIN SHOW t NEXT_ROW_ID;
@@ -260,7 +256,7 @@ ADMIN SHOW t NEXT_ROW_ID;
 2 rows in set (0.01 sec)
 ```
 
-Run the following command to view the uncompleted DDL jobs in the test database. The results include the DDL jobs that are running and the last 5 DDL jobs that are completed but failed.
+运行以下命令以查看测试数据库中未完成的 DDL 任务。结果包括正在运行的 DDL 任务以及最后 5 个已完成但失败的 DDL 任务。
 
 ```sql
 ADMIN SHOW DDL JOBS 5 WHERE state != 'synced' AND db_name = 'test';
@@ -275,28 +271,28 @@ ADMIN SHOW DDL JOBS 5 WHERE state != 'synced' AND db_name = 'test';
 +--------+---------+------------+---------------------+----------------+-----------+----------+-----------+-----------------------------------+-----------------------------------+---------------+
 ```
 
-* `JOB_ID`: each DDL operation corresponds to one DDL job. `JOB_ID` is globally unique.
-* `DB_NAME`: the name of the database on which the DDL operations are performed.
-* `TABLE_NAME`: the name of the table on which the DDL operations are performed.
-* `JOB_TYPE`: the type of the DDL operations.
-* `SCHEMA_STATE`: the current state of the schema. If the `JOB_TYPE` is `add index`, it is the state of the index; if the `JOB_TYPE` is `add column`, it is the state of the column; if the `JOB_TYPE` is `create table`, it is the state of the table. The common states include:
-    * `none`: it indicates not existing. When the `drop` or `create` operation fails and rolls back, it usually becomes the `none` state.
-    * `delete only`, `write only`, `delete reorganization`, `write reorganization`: these four states are intermediate states. These states are not visible in common operations, because the conversion from the intermediate states is so quick. You can see the `write reorganization` state only in `add index` operations, which means that the index data is being added.
-    * `public`: it indicates existing and usable. When operations like `create table` and `add index/column` are finished, it usually becomes the `public` state, which means that the created table/column/index can be normally read and written now.
-* `SCHEMA_ID`: the ID of the database on which the DDL operations are performed.
-* `TABLE_ID`: the ID of the table on which the DDL operations are performed.
-* `ROW_COUNT`: the number of the data rows that have been added when running the `add index` operation.
-* `START_TIME`: the start time of the DDL operations.
-* `END_TIME`: the end time of the DDL operations.
-* `STATE`: the state of the DDL operations. The common states include:
-    * `none`: it indicates that the operation task has been put in the DDL job queue but has not been performed yet, because it is waiting for the previous tasks to complete. Another reason might be that it becomes the `none` state after running the drop operation, but it will soon be updated to the `synced` state, which means that all TiDB instances have been synced to this state.
-    * `running`: it indicates that the operation is being performed.
-    * `synced`: it indicates that the operation has been performed successfully and all TiDB instances have been synced to this state.
-    * `rollback done`: it indicates that the operation has failed and has finished rolling back.
-    * `rollingback`: it indicates that the operation has failed and is rolling back.
-    * `cancelling`: it indicates that the operation is being cancelled. This state only occurs when you cancel DDL jobs using the [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md) command.
-    * `paused`: it indicates that the operation has been paused. This state only appears when you use the [`ADMIN PAUSED DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) command to pause the DDL job. You can use the [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md) command to resume the DDL job.
+* `JOB_ID`：每个 DDL 操作对应一个 DDL 任务，`JOB_ID` 在全局范围内唯一。
+* `DB_NAME`：执行 DDL 操作的数据库名。
+* `TABLE_NAME`：执行 DDL 操作的表名。
+* `JOB_TYPE`：DDL 操作的类型。
+* `SCHEMA_STATE`：当前的 schema 状态。如果 `JOB_TYPE` 为 `add index`，则为索引状态；如果为 `add column`，则为列状态；如果为 `create table`，则为表状态。常见状态包括：
+    * `none`：表示不存在。当 `drop` 或 `create` 操作失败并回滚后，通常变为 `none` 状态。
+    * `delete only`、`write only`、`delete reorganization`、`write reorganization`：这四个状态为中间状态。这些状态在普通操作中不可见，因为中间状态的转换非常快。只有在 `add index` 操作中，才会看到 `write reorganization` 状态，表示索引数据正在添加中。
+    * `public`：表示存在且可用。当 `create table` 和 `add index/column` 操作完成后，通常变为 `public` 状态，意味着创建的表/列/索引可以正常读写。
+* `SCHEMA_ID`：执行 DDL 操作的数据库 ID。
+* `TABLE_ID`：执行 DDL 操作的表 ID。
+* `ROW_COUNT`：在执行 `add index` 操作时，已添加的数据行数。
+* `START_TIME`：DDL 操作的开始时间。
+* `END_TIME`：DDL 操作的结束时间。
+* `STATE`：DDL 操作的状态。常见状态包括：
+    * `none`：表示操作任务已放入 DDL 任务队列，但尚未执行，等待前置任务完成。另一种情况是执行 `drop` 后变为 `none`，但很快会更新为 `synced`，表示所有 TiDB 实例已同步到此状态。
+    * `running`：表示操作正在执行中。
+    * `synced`：表示操作已成功完成，所有 TiDB 实例已同步到此状态。
+    * `rollback done`：表示操作失败，已完成回滚。
+    * `rollingback`：表示操作失败，正在回滚。
+    * `cancelling`：表示操作正在取消。此状态仅在使用 [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md) 命令取消 DDL 任务时出现。
+    * `paused`：表示操作已暂停。此状态仅在使用 [`ADMIN PAUSED DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) 命令暂停 DDL 任务时出现。可以使用 [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md) 命令恢复 DDL 任务。
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension to MySQL syntax.
+此语句是 TiDB 对 MySQL 语法的扩展。

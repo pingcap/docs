@@ -1,15 +1,13 @@
 ---
-title: Explain Statements in the MPP Mode
-summary: Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
+title: 解释在 MPP 模式下的 Statements
+summary: 了解 TiDB 中 EXPLAIN 语句返回的执行计划信息。
 ---
 
-# Explain Statements in the MPP Mode
+# 解释在 MPP 模式下的 Statements
 
-TiDB supports using the [MPP mode](/tiflash/use-tiflash-mpp-mode.md) to execute queries. In the MPP mode, the TiDB optimizer generates execution plans for MPP. Note that the MPP mode is only available for tables that have replicas on [TiFlash](/tiflash/tiflash-overview.md).
+TiDB 支持使用 [MPP mode](/tiflash/use-tiflash-mpp-mode.md) 来执行查询。在 MPP 模式下，TiDB 优化器为 MPP 生成执行计划。注意，MPP 模式仅适用于在 [TiFlash](/tiflash/tiflash-overview.md) 上具有副本的表。
 
-The examples in this document are based on the following sample data:
-
-{{< copyable "sql" >}}
+本文中的示例基于以下样例数据：
 
 ```sql
 CREATE TABLE t1 (id int, value int);
@@ -19,25 +17,21 @@ ANALYZE TABLE t1;
 SET tidb_allow_mpp = 1;
 ```
 
-## MPP query fragments and MPP tasks
+## MPP 查询片段与 MPP 任务
 
-In the MPP mode, a query is logically sliced into multiple query fragments. Take the following statement as an example:
-
-{{< copyable "sql" >}}
+在 MPP 模式下，一个查询在逻辑上被切分成多个查询片段。以以下语句为例：
 
 ```sql
 EXPLAIN SELECT COUNT(*) FROM t1 GROUP BY id;
 ```
 
-This query is divided into two fragments in the MPP mode. One for the first-stage aggregation and the other for the second-stage aggregation, also the final aggregation. When this query is executed, each query fragment is instantiated into one or more MPP tasks.
+该查询在 MPP 模式下被划分为两个片段：一个用于第一阶段的聚合，另一个用于第二阶段的聚合（也是最终的聚合）。当执行此查询时，每个查询片段会被实例化为一个或多个 MPP 任务。
 
-## Exchange operators
+## Exchange 操作符
 
-`ExchangeReceiver` and `ExchangeSender`are two exchange operators specific for MPP execution plans. The `ExchangeReceiver` operator reads data from downstream query fragments and the `ExchangeSender` operator sends data from downstream query fragments to upstream query fragments. In the MPP mode, the root operator of each MPP query fragment is `ExchangeSender`, meaning that query fragments are delimited by the `ExchangeSender` operator.
+`ExchangeReceiver` 和 `ExchangeSender` 是专门用于 MPP 执行计划的两个交换操作符。`ExchangeReceiver` 从下游查询片段读取数据，`ExchangeSender` 将数据从下游查询片段发送到上游查询片段。在 MPP 模式下，每个 MPP 查询片段的根操作符是 `ExchangeSender`，意味着查询片段由 `ExchangeSender` 操作符界定。
 
-The following is a simple MPP execution plan:
-
-{{< copyable "sql" >}}
+以下是一个简单的 MPP 执行计划示例：
 
 ```sql
 EXPLAIN SELECT COUNT(*) FROM t1 GROUP BY id;
@@ -58,27 +52,25 @@ EXPLAIN SELECT COUNT(*) FROM t1 GROUP BY id;
 +------------------------------------+---------+-------------------+---------------+----------------------------------------------------+
 ```
 
-The above execution plan contains two query fragments:
+上述执行计划包含两个查询片段：
 
-* The first is `[TableFullScan_25, HashAgg_9, ExchangeSender_28]`, which is mainly responsible for the first-stage aggregation.
-* The second is `[ExchangeReceiver_29, HashAgg_27, Projection_26, ExchangeSender_30]`, which is mainly responsible for the second-stage aggregation.
+* 第一个为 `[TableFullScan_25, HashAgg_9, ExchangeSender_28]`，主要负责第一阶段的聚合。
+* 第二个为 `[ExchangeReceiver_29, HashAgg_27, Projection_26, ExchangeSender_30]`，主要负责第二阶段的聚合。
 
-The `operator info` column of the `ExchangeSender` operator shows the exchange type information. Currently, there are three exchange types. See the following:
+`ExchangeSender` 操作符的 `operator info` 列显示了交换类型信息。目前有三种交换类型，见下：
 
-* HashPartition: The `ExchangeSender` operator firstly partitions data according to the Hash values and then distributes data to the `ExchangeReceiver` operator of upstream MPP tasks. This exchange type is often used for Hash Aggregation and Shuffle Hash Join algorithms.
-* Broadcast: The `ExchangeSender` operator distributes data to upstream MPP tasks through broadcast. This exchange type is often used for Broadcast Join.
-* PassThrough: The `ExchangeSender` operator sends data to the only upstream MPP task, which is different from the Broadcast type. This exchange type is often used when returning data to TiDB.
+* HashPartition：`ExchangeSender` 操作符首先根据 Hash 值对数据进行分区，然后将数据分发到上游 MPP 任务的 `ExchangeReceiver`。此交换类型常用于 Hash 聚合和 Shuffle Hash Join 算法。
+* Broadcast：`ExchangeSender` 操作符通过广播将数据分发到上游 MPP 任务。此交换类型常用于 Broadcast Join。
+* PassThrough：`ExchangeSender` 操作符将数据发送到唯一的上游 MPP 任务，与 Broadcast 类型不同。此交换类型常用于返回数据给 TiDB。
 
-In the example execution plan, the exchange type of the operator `ExchangeSender_28` is HashPartition, meaning that it performs the Hash Aggregation algorithm. The exchange type of the operator `ExchangeSender_30` is PassThrough, meaning that it is used to return data to TiDB.
+在示例执行计划中，`ExchangeSender_28` 的交换类型为 HashPartition，意味着它执行 Hash 聚合算法；`ExchangeSender_30` 的交换类型为 PassThrough，意味着它用于将数据返回给 TiDB。
 
-MPP is also often applied to join operations. The MPP mode in TiDB supports the following two join algorithms:
+MPP 也常用于连接操作。TiDB 中的 MPP 模式支持以下两种连接算法：
 
-* Shuffle Hash Join: Shuffle the data input from the join operation using the HashPartition exchange type. Then, upstream MPP tasks join data within the same partition.
-* Broadcast Join: Broadcast data of the small table in the join operation to each node, after which each node joins the data separately.
+* Shuffle Hash Join：使用 HashPartition 交换类型对连接操作的输入数据进行洗牌，然后上游 MPP 任务在相同分区内进行连接。
+* Broadcast Join：将连接操作中的小表数据广播到每个节点，然后每个节点分别进行连接。
 
-The following is a typical execution plan for Shuffle Hash Join:
-
-{{< copyable "sql" >}}
+以下是 Shuffle Hash Join 的典型执行计划示例：
 
 ```sql
 SET tidb_broadcast_join_threshold_count=0;
@@ -106,15 +98,13 @@ EXPLAIN SELECT COUNT(*) FROM t1 a JOIN t1 b ON a.id = b.id;
 12 rows in set (0.00 sec)
 ```
 
-In the above execution plan:
+在上述执行计划中：
 
-* The query fragment `[TableFullScan_20, Selection_21, ExchangeSender_22]` reads data from table b and shuffles data to upstream MPP tasks.
-* The query fragment `[TableFullScan_16, Selection_17, ExchangeSender_18]` reads data from table a and shuffles data to upstream MPP tasks.
-* The query fragment `[ExchangeReceiver_19, ExchangeReceiver_23, HashJoin_44, ExchangeSender_47]` joins all data and returns it to TiDB.
+* 查询片段 `[TableFullScan_20, Selection_21, ExchangeSender_22]` 从表 b 读取数据并将数据洗牌到上游 MPP 任务。
+* 查询片段 `[TableFullScan_16, Selection_17, ExchangeSender_18]` 从表 a 读取数据并将数据洗牌到上游 MPP 任务。
+* 查询片段 `[ExchangeReceiver_19, ExchangeReceiver_23, HashJoin_44, ExchangeSender_47]` 将所有数据连接后返回给 TiDB。
 
-A typical execution plan for Broadcast Join is as follows:
-
-{{< copyable "sql" >}}
+一个典型的 Broadcast Join 执行计划如下：
 
 ```sql
 EXPLAIN SELECT COUNT(*) FROM t1 a JOIN t1 b ON a.id = b.id;
@@ -137,18 +127,16 @@ EXPLAIN SELECT COUNT(*) FROM t1 a JOIN t1 b ON a.id = b.id;
 +----------------------------------------+---------+--------------+---------------+------------------------------------------------+
 ```
 
-In the above execution plan:
+在上述执行计划中：
 
-* The query fragment `[TableFullScan_17, Selection_18, ExchangeSender_19]` reads data from the small table (table a) and broadcasts the data to each node that contains data from the large table (table b).
-* The query fragment `[TableFullScan_21, Selection_22, ExchangeReceiver_20, HashJoin_43, ExchangeSender_46]` joins all data and returns it to TiDB.
+* 查询片段 `[TableFullScan_17, Selection_18, ExchangeSender_19]` 从小表（表 a）读取数据，并将数据广播到每个包含大表（表 b）数据的节点。
+* 查询片段 `[TableFullScan_21, Selection_22, ExchangeReceiver_20, HashJoin_43, ExchangeSender_46]` 将所有数据连接后返回给 TiDB。
 
-## `EXPLAIN ANALYZE` statements in the MPP mode
+## `EXPLAIN ANALYZE` 在 MPP 模式下的 Statements
 
-The `EXPLAIN ANALYZE` statement is similar to `EXPLAIN`, but it also outputs some runtime information.
+`EXPLAIN ANALYZE` 语句类似于 `EXPLAIN`，但会输出一些运行时信息。
 
-The following is the output of a simple `EXPLAIN ANALYZE` example:
-
-{{< copyable "sql" >}}
+以下是一个简单的 `EXPLAIN ANALYZE` 示例的输出：
 
 ```sql
 EXPLAIN ANALYZE SELECT COUNT(*) FROM t1 GROUP BY id;
@@ -169,16 +157,16 @@ EXPLAIN ANALYZE SELECT COUNT(*) FROM t1 GROUP BY id;
 +------------------------------------+---------+---------+-------------------+---------------+---------------------------------------------------------------------------------------------------+----------------------------------------------------------------+--------+------+
 ```
 
-Compared to the output of `EXPLAIN`, the `operator info` column of the operator `ExchangeSender` also shows `tasks`, which records the id of the MPP task that the query fragment instantiates into. In addition, each MPP operator has a `threads` field in the `execution info` column, which records the concurrency of operations when TiDB executes this operator. If the cluster consists of multiple nodes, this concurrency is the result of adding up the concurrency of all nodes.
+与 `EXPLAIN` 的输出相比，`operator info` 列中的 `ExchangeSender` 还显示了 `tasks`，记录了查询片段实例化的 MPP 任务的编号。此外，每个 MPP 操作符在 `execution info` 列中还包含 `threads` 字段，记录了 TiDB 执行此操作符时的并发数。如果集群由多个节点组成，此并发数为所有节点并发数的总和。
 
-## MPP version and exchange data compression
+## MPP 版本与交换数据压缩
 
-Starting from v6.6.0, the new fields `MPPVersion` and `Compression` are added to the MPP execution plan.
+从 v6.6.0 版本开始，`MPP` 执行计划中新增字段 `MPPVersion` 和 `Compression`。
 
-- `MppVersion`: The version number of the MPP execution plan, which can be set through the system variable [`mpp_version`](/system-variables.md#mpp_version-new-in-v660).
-- `Compression`: The data compression mode of the `Exchange` operator, which can be set through the system variable [`mpp_exchange_compression_mode`](/system-variables.md#mpp_exchange_compression_mode-new-in-v660). If data compression is not enabled, this field is not displayed in the execution plan.
+- `MppVersion`：MPP 执行计划的版本号，可通过系统变量 [`mpp_version`](/system-variables.md#mpp_version-new-in-v660) 设置。
+- `Compression`：`Exchange` 操作符的数据压缩模式，可通过系统变量 [`mpp_exchange_compression_mode`](/system-variables.md#mpp_exchange_compression_mode-new-in-v660) 设置。如果未启用数据压缩，则在执行计划中不显示此字段。
 
-See the following example:
+示例如下：
 
 ```sql
 mysql > EXPLAIN SELECT COUNT(*) AS count_order FROM lineitem GROUP BY l_returnflag, l_linestatus ORDER BY l_returnflag, l_linestatus;
@@ -187,7 +175,7 @@ mysql > EXPLAIN SELECT COUNT(*) AS count_order FROM lineitem GROUP BY l_returnfl
 | id                                     | estRows      | task         | access object  | operator info                                                                                                                                                                                                                                                                        |
 +----------------------------------------+--------------+--------------+----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Projection_6                           | 3.00         | root         |                | Column#18                                                                                                                                                                                                                                                                            |
-| └─Sort_8                               | 3.00         | root         |                | tpch100.lineitem.l_returnflag, tpch100.lineitem.l_linestatus                                                                                                                                                                                                                         |
+| └─Sort_8                              | 3.00         | root         |                | tpch100.lineitem.l_returnflag, tpch100.lineitem.l_linestatus                                                                                                                                                                                                                         |
 |   └─TableReader_36                     | 3.00         | root         |                | MppVersion: 1, data:ExchangeSender_35                                                                                                                                                                                                                                                |
 |     └─ExchangeSender_35                | 3.00         | mpp[tiflash] |                | ExchangeType: PassThrough                                                                                                                                                                                                                                                            |
 |       └─Projection_31                  | 3.00         | mpp[tiflash] |                | Column#18, tpch100.lineitem.l_returnflag, tpch100.lineitem.l_linestatus                                                                                                                                                                                                              |
@@ -199,4 +187,4 @@ mysql > EXPLAIN SELECT COUNT(*) AS count_order FROM lineitem GROUP BY l_returnfl
 +----------------------------------------+--------------+--------------+----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-In the preceding execution plan result, TiDB uses an MPP execution plan of version `1` to build `TableReader`. The `ExchangeSender` operator of the `HashPartition` type uses the `FAST` data compression mode. Data compression is not enabled for the `ExchangeSender` operator of the `PassThrough` type.
+在上述执行计划结果中，TiDB 使用版本 `1` 的 MPP 执行计划构建 `TableReader`。`HashPartition` 类型的 `ExchangeSender` 操作符使用了 `FAST` 数据压缩模式，而 `PassThrough` 类型的 `ExchangeSender` 则未启用数据压缩。

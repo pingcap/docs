@@ -1,105 +1,105 @@
 ---
-title: Handle Transaction Errors
-summary: Learn about how to handle transaction errors, such as deadlocks and application retry errors.
+title: 处理事务错误
+summary: 了解如何处理事务错误，例如死锁和应用重试错误。
 ---
 
-# Handle Transaction Errors
+# 处理事务错误
 
-This document introduces how to handle transaction errors, such as deadlocks and application retry errors.
+本文介绍了如何处理事务错误，例如死锁和应用重试错误。
 
-## Deadlocks
+## 死锁
 
-The following error in your application indicates a deadlock issue:
+在你的应用中出现以下错误，表示存在死锁问题：
 
 ```sql
 ERROR 1213: Deadlock found when trying to get lock; try restarting transaction
 ```
 
-A deadlock occurs when two or more transactions are waiting for each other to release the lock they already hold, or the inconsistent lock order results in a loop waiting for the lock resources.
+死锁发生在两个或多个事务相互等待对方释放已持有的锁，或者由于锁的不一致顺序导致形成循环等待资源。
 
-The following is an example of a deadlock using the table `books` in the [`bookshop`](/develop/dev-guide-bookshop-schema-design.md) database:
+以下是使用 [`bookshop`](/develop/dev-guide-bookshop-schema-design.md) 数据库中的 `books` 表的死锁示例：
 
-First, insert 2 rows into the table `books`:
+首先，向 `books` 表插入 2 行数据：
 
 ```sql
 INSERT INTO books (id, title, stock, published_at) VALUES (1, 'book-1', 10, now()), (2, 'book-2', 10, now());
 ```
 
-In TiDB pessimistic transaction mode, if two clients execute the following statements respectively, a deadlock will occur:
+在 TiDB 悲观事务模式下，如果两个客户端分别执行以下语句，就会发生死锁：
 
-| Client-A                                                      | Client-B                                                            |
-| --------------------------------------------------------------| --------------------------------------------------------------------|
+| 客户端-A                                                    | 客户端-B                                                          |
+| --------------------------------------------------------------| -------------------------------------------------------------------|
 | BEGIN;                                                        |                                                                     |
 |                                                               | BEGIN;                                                              |
-| UPDATE books SET stock=stock-1 WHERE id=1;                    |                                                                     |
+| UPDATE books SET stock=stock-1 WHERE id=1;                     |                                                                     |
 |                                                               | UPDATE books SET stock=stock-1 WHERE id=2;                          |
-| UPDATE books SET stock=stock-1 WHERE id=2; -- execution will be blocked |                                                                     |
-|                                                               | UPDATE books SET stock=stock-1 WHERE id=1; -- a deadlock error occurs |
+| UPDATE books SET stock=stock-1 WHERE id=2; -- 执行将被阻塞        |                                                                     |
+|                                                               | UPDATE books SET stock=stock-1 WHERE id=1; -- 发生死锁错误             |
 
-After client-B encounters a deadlock error, TiDB automatically rolls back the transaction in client-B. Updating `id=2` in client-A will be executed successfully. You can then run `COMMIT` to finish the transaction.
+当客户端-B遇到死锁错误后，TiDB 会自动回滚客户端-B中的事务。客户端-A对 `id=2` 的更新将成功执行。你可以随后运行 `COMMIT` 完成事务。
 
-### Solution 1: avoid deadlocks
+### 解决方案 1：避免死锁
 
-To get better performance, you can avoid deadlocks at the application level by adjusting the business logic or schema design. In the example above, if client-B also uses the same update order as client-A, that is, they update books with `id=1` first, and then update books with `id=2`. The deadlock can then be avoided:
+为了获得更好的性能，你可以在应用层通过调整业务逻辑或模式设计来避免死锁。在上述示例中，如果客户端-B也采用与客户端-A相同的更新顺序，即先更新 `id=1` 的书，然后再更新 `id=2` 的书，就可以避免死锁：
 
-| Client-A                                                    | Client-B                                                         |
-| ---------------------------------------------------------- | ----------------------------------------------------------------|
-| BEGIN;                                                     |                                                                 |
-|                                                            | BEGIN;                                                          |
-| UPDATE books SET stock=stock-1 WHERE id=1;                 |                                                                 |
-|                                                            | UPDATE books SET stock=stock-1 WHERE id=1;  -- will be blocked  |
-| UPDATE books SET stock=stock-1 WHERE id=2;                 |                                                                 |
-| COMMIT;                                                    |                                                                 |
-|                                                            | UPDATE books SET stock=stock-1 WHERE id=2;                      |
-|                                                            | COMMIT;                                                         |
+| 客户端-A                                                    | 客户端-B                                                          |
+| --------------------------------------------------------------| -------------------------------------------------------------------|
+| BEGIN;                                                        |                                                                     |
+|                                                               | BEGIN;                                                              |
+| UPDATE books SET stock=stock-1 WHERE id=1;                     |                                                                     |
+|                                                               | UPDATE books SET stock=stock-1 WHERE id=1;  -- 将被阻塞                |
+| UPDATE books SET stock=stock-1 WHERE id=2;                     |                                                                     |
+| COMMIT;                                                       |                                                                     |
+|                                                               | UPDATE books SET stock=stock-1 WHERE id=2;                          |
+|                                                               | COMMIT;                                                            |
 
-Alternatively, you can update 2 books with 1 SQL statement, which can also avoid the deadlock and execute more efficiently:
+或者，你也可以用一条 SQL 语句同时更新两个书的库存，从而避免死锁并提高执行效率：
 
 ```sql
 UPDATE books SET stock=stock-1 WHERE id IN (1, 2);
 ```
 
-### Solution 2: reduce transaction granularity
+### 解决方案 2：降低事务粒度
 
-If you only update 1 book in each transaction, you can also avoid deadlocks. However, the trade-off is that too small transaction granularity may affect performance.
+如果你每次只更新一本书，也可以避免死锁。但需要注意，过小的事务粒度可能会影响性能。
 
-### Solution 3: use optimistic transactions
+### 解决方案 3：使用乐观事务
 
-There are no deadlocks in the optimistic transaction model. But in your application, you need to add the optimistic transaction retry logic in case of failure. For details, see [Application retry and error handling](#application-retry-and-error-handling).
+乐观事务模型中不存在死锁问题。但在你的应用中，需要添加乐观事务的重试逻辑，以应对失败情况。详情请参见 [Application retry and error handling](#application-retry-and-error-handling)。
 
-### Solution 4: retry
+### 解决方案 4：重试
 
-Add the retry logic in the application as suggested in the error message. For details, see [Application retry and error handling](#application-retry-and-error-handling).
+在应用中加入重试逻辑，按照错误信息中的建议进行处理。详情请参见 [Application retry and error handling](#application-retry-and-error-handling)。
 
-## Application retry and error handling
+## 应用重试和错误处理
 
-Although TiDB is as compatible as possible with MySQL, the nature of its distributed system leads to certain differences. One of them is the transaction model.
+虽然 TiDB 与 MySQL 兼容性很高，但其分布式系统的特性导致一些差异。其中之一是事务模型。
 
-The Adapters and ORMs that developers use to connect with databases are tailored for traditional databases such as MySQL and Oracle. In these databases, transactions rarely fail to commit at the default isolation level, so retry mechanisms are not required. When a transaction fails to commit, these clients abort due to an error, as it is treated as an exception in these databases.
+开发者用来连接数据库的适配器和 ORM 通常是为传统数据库（如 MySQL 和 Oracle）量身定制的。在这些数据库中，事务在默认隔离级别下很少无法提交，因此不需要重试机制。当事务提交失败时，这些客户端会因错误而中止，视为异常。
 
-Different from traditional databases such as MySQL, in TiDB, if you use the optimistic transaction model and want to avoid commit failure, you need to add a mechanism to handle related exceptions in your applications.
+不同于传统数据库（如 MySQL），在 TiDB 中，如果你使用乐观事务模型，为了避免提交失败，你需要在应用中添加处理相关异常的机制。
 
-The following Python pseudocode shows how to implement application-level retries. It does not require your driver or ORM to implement advanced retry logic. It can be used in any programming language or environment.
+以下是用 Python 伪代码演示如何实现应用层的重试逻辑。它不要求你的驱动或 ORM 实现复杂的重试机制，适用于任何编程语言或环境。
 
-Your retry logic must follow the following rules:
+你的重试逻辑必须遵循以下规则：
 
-- Throws an error if the number of failed retries reaches the `max_retries` limit.
-- Use `try ... catch ...` to catch SQL execution exceptions. Retry when encountering the following errors. Roll back when encountering other errors.
-    - `Error 8002: can not retry select for update statement`: SELECT FOR UPDATE write conflict error
-    - `Error 8022: Error: KV error safe to retry`: transaction commit failed error.
-    - `Error 8028: Information schema is changed during the execution of the statement`: Table schema has been changed by DDL operation, resulting in an error in the transaction commit.
-    - `Error 9007: Write conflict`: Write conflict error, usually caused by multiple transactions modifying the same row of data when the optimistic transaction mode is used.
-- `COMMIT` the transaction at the end of the try block.
+- 当失败重试次数达到 `max_retries` 限制时，抛出错误。
+- 使用 `try ... catch ...` 捕获 SQL 执行异常。遇到以下错误时重试，遇到其他错误则回滚。
+    - `Error 8002: can not retry select for update statement`：SELECT FOR UPDATE 写冲突错误
+    - `Error 8022: Error: KV error safe to retry`：事务提交失败错误
+    - `Error 8028: Information schema is changed during the execution of the statement`：DDL 操作导致的表结构变更错误，影响事务提交
+    - `Error 9007: Write conflict`：写冲突错误，通常由多个事务同时修改同一行数据引起（在乐观事务模式下）
+- 在 `try` 块结束时执行 `COMMIT`。
 
 <CustomContent platform="tidb">
 
-For more information about error codes, see [Error Codes and Troubleshooting](/error-codes.md).
+有关错误码的更多信息，请参见 [Error Codes and Troubleshooting](/error-codes.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-For more information about error codes, see [Error Codes and Troubleshooting](https://docs.pingcap.com/tidb/stable/error-codes).
+有关错误码的更多信息，请参见 [Error Codes and Troubleshooting](https://docs.pingcap.com/tidb/stable/error-codes)。
 
 </CustomContent>
 
@@ -118,30 +118,30 @@ while True:
         else:
             connection.exec('ROLLBACK')
 
-            # Capture the error types that require application-side retry,
-            # wait for a short period of time,
-            # and exponentially increase the wait time for each transaction failure
+            # 捕获需要在应用端重试的错误类型，
+            # 等待一段短时间，
+            # 并对每次事务失败的等待时间进行指数增长
             sleep_ms = int(((1.5 ** n) + rand) * 100)
-            sleep(sleep_ms) # make sure your sleep() takes milliseconds
+            sleep(sleep_ms) # 确保你的 sleep() 接受毫秒为单位
 ```
 
 > **Note:**
 >
-> If you frequently encounter `Error 9007: Write conflict`, you may need to check your schema design and the data access patterns of your workload to find the root cause of the conflict and try to avoid conflicts by a better design.
+> 如果你经常遇到 `Error 9007: Write conflict`，可能需要检查你的模式设计和工作负载的数据访问模式，找出冲突的根本原因，并通过更好的设计来避免冲突。
 
 <CustomContent platform="tidb">
 
-For information about how to troubleshoot and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
+有关如何排查和解决事务冲突的更多信息，请参见 [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-For information about how to troubleshoot and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts).
+有关如何排查和解决事务冲突的更多信息，请参见 [Troubleshoot Lock Conflicts](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts)。
 
 </CustomContent>
 
-## See also
+## 相关链接
 
 <CustomContent platform="tidb">
 
@@ -155,16 +155,16 @@ For information about how to troubleshoot and resolve transaction conflicts, see
 
 </CustomContent>
 
-## Need help?
+## 需要帮助？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 社区提问，或 [提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 社区提问，或 [提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

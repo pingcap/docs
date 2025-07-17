@@ -1,13 +1,13 @@
 ---
-title: DROP USER | TiDB SQL Statement Reference
-summary: An overview of the usage of DROP USER for the TiDB database.
+title: DROP USER | TiDB SQL 语句参考
+summary: 关于在 TiDB 数据库中使用 DROP USER 的概述。
 ---
 
 # DROP USER
 
-This statement removes a user from the TiDB system database. The optional keyword `IF EXISTS` can be used to silence an error if the user does not exist. This statement requires the `CREATE USER` privilege.
+此语句用于从 TiDB 系统数据库中删除一个用户。可选的关键字 `IF EXISTS` 可以用来避免在用户不存在时产生错误。执行此操作需要拥有 `CREATE USER` 权限。
 
-## Synopsis
+## 概述
 
 ```ebnf+diagram
 DropUserStmt ::=
@@ -17,7 +17,7 @@ Username ::=
     StringName ('@' StringName | singleAtIdentifier)? | 'CURRENT_USER' OptionalBraces
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> DROP USER idontexist;
@@ -59,11 +59,11 @@ mysql> SHOW GRANTS FOR 'newuser';
 ERROR 1141 (42000): There is no such grant defined for user 'newuser' on host '%'
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-* Dropping a user that does not exist with `IF EXISTS` will not create a warning in TiDB. [Issue #10196](https://github.com/pingcap/tidb/issues/10196).
+* 使用 `IF EXISTS` 删除不存在的用户在 TiDB 中不会产生警告。[Issue #10196](https://github.com/pingcap/tidb/issues/10196)。
 
-## See also
+## 相关链接
 
 * [CREATE USER](/sql-statements/sql-statement-create-user.md)
 * [ALTER USER](/sql-statements/sql-statement-alter-user.md)

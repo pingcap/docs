@@ -1,32 +1,30 @@
 ---
 title: LOAD STATS
-summary: An overview of the usage of LOAD STATS for the TiDB database.
+summary: 关于 TiDB 数据库中 LOAD STATS 使用情况的概述。
 ---
 
 # LOAD STATS
 
-The `LOAD STATS` statement is used to load the statistics into TiDB.
+`LOAD STATS` 语句用于将统计信息加载到 TiDB 中。
 
 > **Note:**
 >
-> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
 
-## Synopsis
+## 概述
 
 ```ebnf+diagram
 LoadStatsStmt ::=
     'LOAD' 'STATS' stringLit
 ```
 
-## Examples
+## 示例
 
-You can access the address `http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}` to download the TiDB instance's statistics.
+你可以访问地址 `http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}` 来下载 TiDB 实例的统计信息。
 
-You can also use `LOAD STATS ${stats_path}` to load the specific statistics file.
+你也可以使用 `LOAD STATS ${stats_path}` 来加载特定的统计信息文件。
 
-The `${stats_path}` can be an absolute path or a relative path. If you use a relative path, the corresponding file is found starting from the path where `tidb-server` is started. Here is an example:
-
-{{< copyable "sql" >}}
+`${stats_path}` 可以是绝对路径或相对路径。如果使用相对路径，则从 `tidb-server` 启动的路径开始查找对应的文件。示例如下：
 
 ```sql
 LOAD STATS '/tmp/stats.json';
@@ -36,10 +34,10 @@ LOAD STATS '/tmp/stats.json';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension to MySQL syntax.
+该语句是 TiDB 对 MySQL 语法的扩展。
 
-## See also
+## 相关链接
 
 * [Statistics](/statistics.md)

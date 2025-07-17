@@ -1,18 +1,18 @@
 ---
 title: REFERENTIAL_CONSTRAINTS
-summary: Learn the `REFERENTIAL_CONSTRAINTS` INFORMATION_SCHEMA table.
+summary: 了解 `REFERENTIAL_CONSTRAINTS` INFORMATION_SCHEMA 表。
 ---
 
 # REFERENTIAL_CONSTRAINTS
 
-The `REFERENTIAL_CONSTRAINTS` table provides information about [`FOREIGN KEY`](/foreign-key.md) relationships between tables.
+`REFERENTIAL_CONSTRAINTS` 表提供关于表之间 [`FOREIGN KEY`](/foreign-key.md) 关系的信息。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC REFERENTIAL_CONSTRAINTS;
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 +---------------------------+--------------+------+------+---------+-------+
@@ -50,7 +50,7 @@ CREATE TABLE test.child (
 SELECT * FROM REFERENTIAL_CONSTRAINTS\G
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 *************************** 1. row ***************************

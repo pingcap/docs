@@ -3,19 +3,17 @@ title: Optimizer Hints
 summary: Use Optimizer Hints to influence query execution plans
 ---
 
-# Optimizer Hints
+# Optimizer Hints {#optimizer-hints}
 
 TiDB supports optimizer hints, which are based on the comment-like syntax introduced in MySQL 5.7. For example, one of the common syntaxes is `/*+ HINT_NAME([t1_name [, t2_name] ...]) */`. Use of optimizer hints is recommended in cases where the TiDB optimizer selects a less optimal query plan.
 
 If you encounter a situation where hints do not take effect, see [Troubleshoot common issues that hints do not take effect](#troubleshoot-common-issues-that-hints-do-not-take-effect).
 
-## Syntax
+## Syntax {#syntax}
 
 Optimizer hints are case insensitive and specified within `/*+ ... */` comments following the `SELECT`, `INSERT`, `UPDATE` or `DELETE` keyword in a SQL statement.
 
 Multiple hints can be specified by separating with commas. For example, the following query uses three different hints:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT /*+ USE_INDEX(t1, idx1), HASH_AGG(), HASH_JOIN(t1) */ count(*) FROM t t1, t t2 WHERE t1.a = t2.b;
@@ -23,7 +21,7 @@ SELECT /*+ USE_INDEX(t1, idx1), HASH_AGG(), HASH_JOIN(t1) */ count(*) FROM t t1,
 
 How optimizer hints affect query execution plans can be observed in the output of [`EXPLAIN`](/sql-statements/sql-statement-explain.md) and [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md).
 
-An incorrect or incomplete hint will not result in a statement error. This is because hints are intended to have only a _hint_ (suggestion) semantic to query execution. Similarly, TiDB will at most return a warning if a hint is not applicable.
+An incorrect or incomplete hint will not result in a statement error. This is because hints are intended to have only a *hint* (suggestion) semantic to query execution. Similarly, TiDB will at most return a warning if a hint is not applicable.
 
 > **Note:**
 >
@@ -33,21 +31,17 @@ Currently, TiDB supports two categories of hints, which are different in scope. 
 
 Each query or sub-query in a statement corresponds to a different query block, and each query block has its own name. For example:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT * FROM (SELECT * FROM t) t1, (SELECT * FROM t) t2;
 ```
 
 The above query statement has three query blocks: the outermost `SELECT` corresponds to the first query block, whose name is `sel_1`; the two `SELECT` sub-queries correspond to the second and the third query block, whose names are `sel_2` and `sel_3`, respectively. The sequence of the numbers is based on the appearance of `SELECT` from left to right. If you replace the first `SELECT` with `DELETE` or `UPDATE`, then the corresponding query block names are `del_1` or `upd_1`.
 
-## Hints that take effect in query blocks
+## Hints that take effect in query blocks {#hints-that-take-effect-in-query-blocks}
 
 This category of hints can follow behind **any** `SELECT`, `UPDATE` or `DELETE` keywords. To control the effective scope of the hint, use the name of the query block in the hint. You can make the hint parameters clear by accurately identifying each table in the query (in case of duplicated table names or aliases). If no query block is specified in the hint, the hint takes effect in the current block by default.
 
 For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT /*+ HASH_JOIN(@sel_1 t1@sel_1, t3) */ * FROM (SELECT t1.a, t1.b FROM t t1, t t2 WHERE t1.a = t2.a) t1, t t3 WHERE t1.b = t3.b;
@@ -57,20 +51,18 @@ This hint takes effect in the `sel_1` query block, and its parameters are the `t
 
 As described above, you can specify the name of the query block in the hint in the following ways:
 
-- Set the query block name as the first parameter of the hint, and separate it from other parameters with a space. In addition to `QB_NAME`, all the hints listed in this section also have another optional hidden parameter `@QB_NAME`. By using this parameter, you can specify the effective scope of this hint.
-- Append `@QB_NAME` to a table name in the parameter to explicitly specify which query block this table belongs to.
+-   Set the query block name as the first parameter of the hint, and separate it from other parameters with a space. In addition to `QB_NAME`, all the hints listed in this section also have another optional hidden parameter `@QB_NAME`. By using this parameter, you can specify the effective scope of this hint.
+-   Append `@QB_NAME` to a table name in the parameter to explicitly specify which query block this table belongs to.
 
 > **Note:**
 >
 > You must put the hint in or before the query block where the hint takes effect. If the hint is put after the query block, it cannot take effect.
 
-### QB_NAME
+### QB_NAME {#qb-name}
 
 If the query statement is a complicated statement that includes multiple nested queries, the ID and name of a certain query block might be mistakenly identified. The hint `QB_NAME` can help us in this regard.
 
 `QB_NAME` means Query Block Name. You can specify a new name to a query block. The specified `QB_NAME` and the previous default name are both valid. For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT /*+ QB_NAME(QB1) */ * FROM (SELECT * FROM t) t1, (SELECT * FROM t) t2;
@@ -82,11 +74,9 @@ This hint specifies the outer `SELECT` query block's name to `QB1`, which makes 
 >
 > In the above example, if the hint specifies the `QB_NAME` to `sel_2` and does not specify a new `QB_NAME` for the original second `SELECT` query block, then `sel_2` becomes an invalid name for the second `SELECT` query block.
 
-### MERGE_JOIN(t1_name [, tl_name ...])
+### MERGE_JOIN(t1_name [, tl_name ...]) {#merge-join-t1-name-tl-name}
 
 The `MERGE_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the sort-merge join algorithm for the given table(s). Generally, this algorithm consumes less memory but takes longer processing time. If there is a very large data volume or insufficient system memory, it is recommended to use this hint. For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 select /*+ MERGE_JOIN(t1, t2) */ * from t1, t2 where t1.id = t2.id;
@@ -96,7 +86,7 @@ select /*+ MERGE_JOIN(t1, t2) */ * from t1, t2 where t1.id = t2.id;
 >
 > `TIDB_SMJ` is the alias for `MERGE_JOIN` in TiDB 3.0.x and earlier versions. If you are using any of these versions, you must apply the `TIDB_SMJ(t1_name [, tl_name ...])` syntax for the hint. For the later versions of TiDB, `TIDB_SMJ` and `MERGE_JOIN` are both valid names for the hint, but `MERGE_JOIN` is recommended.
 
-### NO_MERGE_JOIN(t1_name [, tl_name ...])
+### NO_MERGE_JOIN(t1_name [, tl_name ...]) {#no-merge-join-t1-name-tl-name}
 
 The `NO_MERGE_JOIN(t1_name [, tl_name ...])` hint tells the optimizer not to use the sort-merge join algorithm for the given table(s). For example:
 
@@ -104,15 +94,13 @@ The `NO_MERGE_JOIN(t1_name [, tl_name ...])` hint tells the optimizer not to use
 SELECT /*+ NO_MERGE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 ```
 
-### INL_JOIN(t1_name [, tl_name ...])
+### INL_JOIN(t1_name [, tl_name ...]) {#inl-join-t1-name-tl-name}
 
 > **Note:**
 >
 > In some cases, the `INL_JOIN` hint might not take effect. For more information, see [`INL_JOIN` hint does not take effect](#inl_join-hint-does-not-take-effect).
 
 The `INL_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the index nested loop join algorithm for the given table(s). This algorithm might consume less system resources and take shorter processing time in some scenarios and might produce an opposite result in other scenarios. If the result set is less than 10,000 rows after the outer table is filtered by the `WHERE` condition, it is recommended to use this hint. For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1, t2, t3 WHERE t1.id = t2.id AND t2.id = t3.id;
@@ -126,7 +114,7 @@ The parameter(s) given in `INL_JOIN()` is the candidate table for the inner tabl
 >
 > `TIDB_INLJ` is the alias for `INL_JOIN` in TiDB 3.0.x and earlier versions. If you are using any of these versions, you must apply the `TIDB_INLJ(t1_name [, tl_name ...])` syntax for the hint. For the later versions of TiDB, `TIDB_INLJ` and `INL_JOIN` are both valid names for the hint, but `INL_JOIN` is recommended.
 
-### NO_INDEX_JOIN(t1_name [, tl_name ...])
+### NO_INDEX_JOIN(t1_name [, tl_name ...]) {#no-index-join-t1-name-tl-name}
 
 The `NO_INDEX_JOIN(t1_name [, tl_name ...])` hint tells the optimizer not to use the index nested loop join algorithm for the given table(s). For example:
 
@@ -134,27 +122,25 @@ The `NO_INDEX_JOIN(t1_name [, tl_name ...])` hint tells the optimizer not to use
 SELECT /*+ NO_INDEX_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 ```
 
-### INL_HASH_JOIN
+### INL_HASH_JOIN {#inl-hash-join}
 
 The `INL_HASH_JOIN(t1_name [, tl_name])` hint tells the optimizer to use the index nested loop hash join algorithm. The conditions for using this algorithm are the same with the conditions for using the index nested loop join algorithm. The difference between the two algorithms is that `INL_JOIN` creates a hash table on the joined inner table, but `INL_HASH_JOIN` creates a hash table on the joined outer table. `INL_HASH_JOIN` has a fixed limit on memory usage, while the memory used by `INL_JOIN` depends on the number of rows matched in the inner table.
 
-### NO_INDEX_HASH_JOIN(t1_name [, tl_name ...])
+### NO_INDEX_HASH_JOIN(t1_name [, tl_name ...]) {#no-index-hash-join-t1-name-tl-name}
 
 The `NO_INDEX_HASH_JOIN(t1_name [, tl_name ...])` hint tells the optimizer not to use the index nested loop hash join algorithm for the given table(s).
 
-### INL_MERGE_JOIN
+### INL_MERGE_JOIN {#inl-merge-join}
 
 The `INL_MERGE_JOIN(t1_name [, tl_name])` hint tells the optimizer to use the index nested loop merge join algorithm. The conditions for using this algorithm are the same with the conditions for using the index nested loop join algorithm.
 
-### NO_INDEX_MERGE_JOIN(t1_name [, tl_name ...])
+### NO_INDEX_MERGE_JOIN(t1_name [, tl_name ...]) {#no-index-merge-join-t1-name-tl-name}
 
 The `NO_INDEX_MERGE_JOIN(t1_name [, tl_name ...])` hint tells the optimizer not to use the index nested loop merge join algorithm for the given table(s).
 
-### HASH_JOIN(t1_name [, tl_name ...])
+### HASH_JOIN(t1_name [, tl_name ...]) {#hash-join-t1-name-tl-name}
 
 The `HASH_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the hash join algorithm for the given table(s). This algorithm allows the query to be executed concurrently with multiple threads, which achieves a higher processing speed but consumes more memory. For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 select /*+ HASH_JOIN(t1, t2) */ * from t1, t2 where t1.id = t2.id;
@@ -164,7 +150,7 @@ select /*+ HASH_JOIN(t1, t2) */ * from t1, t2 where t1.id = t2.id;
 >
 > `TIDB_HJ` is the alias for `HASH_JOIN` in TiDB 3.0.x and earlier versions. If you are using any of these versions, you must apply the `TIDB_HJ(t1_name [, tl_name ...])` syntax for the hint. For the later versions of TiDB, `TIDB_HJ` and `HASH_JOIN` are both valid names for the hint, but `HASH_JOIN` is recommended.
 
-### NO_HASH_JOIN(t1_name [, tl_name ...])
+### NO_HASH_JOIN(t1_name [, tl_name ...]) {#no-hash-join-t1-name-tl-name}
 
 The `NO_HASH_JOIN(t1_name [, tl_name ...])` hint tells the optimizer not to use the hash join algorithm for the given table(s). For example:
 
@@ -172,7 +158,7 @@ The `NO_HASH_JOIN(t1_name [, tl_name ...])` hint tells the optimizer not to use 
 SELECT /*+ NO_HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 ```
 
-### HASH_JOIN_BUILD(t1_name [, tl_name ...])
+### HASH_JOIN_BUILD(t1_name [, tl_name ...]) {#hash-join-build-t1-name-tl-name}
 
 The `HASH_JOIN_BUILD(t1_name [, tl_name ...])` hint tells the optimizer to use the hash join algorithm on specified tables with these tables working as the build side. In this way, you can build hash tables using specific tables. For example:
 
@@ -180,7 +166,7 @@ The `HASH_JOIN_BUILD(t1_name [, tl_name ...])` hint tells the optimizer to use t
 SELECT /*+ HASH_JOIN_BUILD(t1) */ * FROM t1, t2 WHERE t1.id = t2.id;
 ```
 
-### HASH_JOIN_PROBE(t1_name [, tl_name ...])
+### HASH_JOIN_PROBE(t1_name [, tl_name ...]) {#hash-join-probe-t1-name-tl-name}
 
 The `HASH_JOIN_PROBE(t1_name [, tl_name ...])` hint tells the optimizer to use the hash join algorithm on specified tables with these tables working as the probe side. In this way, you can execute the hash join algorithm with specific tables as the probe side. For example:
 
@@ -188,7 +174,7 @@ The `HASH_JOIN_PROBE(t1_name [, tl_name ...])` hint tells the optimizer to use t
 SELECT /*+ HASH_JOIN_PROBE(t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 ```
 
-### SEMI_JOIN_REWRITE()
+### SEMI_JOIN_REWRITE() {#semi-join-rewrite}
 
 The `SEMI_JOIN_REWRITE()` hint tells the optimizer to rewrite the semi-join query to an ordinary join query. Currently, this hint only works for `EXISTS` subqueries.
 
@@ -197,8 +183,6 @@ If this hint is not used to rewrite the query, when the hash join is selected in
 Similarly, when the index join is selected in the execution plan, the semi-join query can only use the outer query as the driving table. In this case, when the result of the subquery is smaller than that of the outer query, the execution speed might be slower than expected.
 
 When `SEMI_JOIN_REWRITE()` is used to rewrite the query, the optimizer can extend the selection range to select a better execution plan.
-
-{{< copyable "sql" >}}
 
 ```sql
 -- Does not use SEMI_JOIN_REWRITE() to rewrite the query.
@@ -216,8 +200,6 @@ EXPLAIN SELECT * FROM t WHERE EXISTS (SELECT 1 FROM t1 WHERE t1.a = t.a);
 |   └─IndexFullScan_22        | 9990.00 | cop[tikv] | table:t, index:idx(a)  | keep order:true, stats:pseudo                     |
 +-----------------------------+---------+-----------+------------------------+---------------------------------------------------+
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 -- Uses SEMI_JOIN_REWRITE() to rewrite the query.
@@ -240,7 +222,7 @@ EXPLAIN SELECT * FROM t WHERE EXISTS (SELECT /*+ SEMI_JOIN_REWRITE() */ 1 FROM t
 
 From the preceding example, you can see that when using the `SEMI_JOIN_REWRITE()` hint, TiDB can select the execution method of IndexJoin based on the driving table `t1`.
 
-### SHUFFLE_JOIN(t1_name [, tl_name ...])
+### SHUFFLE_JOIN(t1_name [, tl_name ...]) {#shuffle-join-t1-name-tl-name}
 
 The `SHUFFLE_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the Shuffle Join algorithm on specified tables. This hint only takes effect in the MPP mode. For example:
 
@@ -250,10 +232,10 @@ SELECT /*+ SHUFFLE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 > **Note:**
 >
-> - Before using this hint, make sure that the current TiDB cluster can support using TiFlash MPP mode in the query. For details, refer to [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md).
-> - This hint can be used in combination with the [`HASH_JOIN_BUILD` hint](#hash_join_buildt1_name--tl_name-) and [`HASH_JOIN_PROBE` hint](#hash_join_probet1_name--tl_name-) to control the Build side and Probe side of the Shuffle Join algorithm.
+> -   Before using this hint, make sure that the current TiDB cluster can support using TiFlash MPP mode in the query. For details, refer to [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md).
+> -   This hint can be used in combination with the [`HASH_JOIN_BUILD` hint](#hash_join_buildt1_name--tl_name-) and [`HASH_JOIN_PROBE` hint](#hash_join_probet1_name--tl_name-) to control the Build side and Probe side of the Shuffle Join algorithm.
 
-### BROADCAST_JOIN(t1_name [, tl_name ...])
+### BROADCAST_JOIN(t1_name [, tl_name ...]) {#broadcast-join-t1-name-tl-name}
 
 `BROADCAST_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the Broadcast Join algorithm on specified tables. This hint only takes effect in the MPP mode. For example:
 
@@ -263,10 +245,10 @@ SELECT /*+ BROADCAST_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 > **Note:**
 >
-> - Before using this hint, make sure that the current TiDB cluster can support using TiFlash MPP mode in the query. For details, refer to [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md).
->- This hint can be used in combination with the [`HASH_JOIN_BUILD` hint](#hash_join_buildt1_name--tl_name-) and [`HASH_JOIN_PROBE` hint](#hash_join_probet1_name--tl_name-) to control the Build side and Probe side of the Broadcast Join algorithm.
+> -   Before using this hint, make sure that the current TiDB cluster can support using TiFlash MPP mode in the query. For details, refer to [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md).
+> -   This hint can be used in combination with the [`HASH_JOIN_BUILD` hint](#hash_join_buildt1_name--tl_name-) and [`HASH_JOIN_PROBE` hint](#hash_join_probet1_name--tl_name-) to control the Build side and Probe side of the Broadcast Join algorithm.
 
-### NO_DECORRELATE()
+### NO_DECORRELATE() {#no-decorrelate}
 
 The `NO_DECORRELATE()` hint tells the optimizer not to try to perform decorrelation for the correlated subquery in the specified query block. This hint is applicable to the `EXISTS`, `IN`, `ANY`, `ALL`, `SOME` subqueries and scalar subqueries that contain correlated columns (that is, correlated subqueries).
 
@@ -274,14 +256,10 @@ When this hint is used in a query block, the optimizer will not try to perform d
 
 By default, TiDB tries to [perform decorrelation](/correlated-subquery-optimization.md) for correlated subqueries to achieve higher execution efficiency. However, in [some scenarios](/correlated-subquery-optimization.md#restrictions), decorrelation might actually reduce the execution efficiency. In this case, you can use this hint to manually tell the optimizer not to perform decorrelation. For example:
 
-{{< copyable "sql" >}}
-
 ```sql
 create table t1(a int, b int);
 create table t2(a int, b int, index idx(b));
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 -- Not using NO_DECORRELATE().
@@ -305,8 +283,6 @@ explain select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.
 ```
 
 From the preceding execution plan, you can see that the optimizer has automatically performed decorrelation. The decorrelated execution plan does not have the Apply operator. Instead, the plan has join operations between the subquery and the outer query block. The original filter condition (`t2.b = t1.b`) with the correlated column becomes a regular join condition.
-
-{{< copyable "sql" >}}
 
 ```sql
 -- Using NO_DECORRELATE().
@@ -332,27 +308,23 @@ explain select * from t1 where t1.a < (select /*+ NO_DECORRELATE() */ sum(t2.a) 
 
 From the preceding execution plan, you can see that the optimizer does not perform decorrelation. The execution plan still contains the Apply operator. The filter condition (`t2.b = t1.b`) with the correlated column is still the filter condition when accessing the `t2` table.
 
-### HASH_AGG()
+### HASH_AGG() {#hash-agg}
 
 The `HASH_AGG()` hint tells the optimizer to use the hash aggregation algorithm in all the aggregate functions in the specified query block. This algorithm allows the query to be executed concurrently with multiple threads, which achieves a higher processing speed but consumes more memory. For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 select /*+ HASH_AGG() */ count(*) from t1, t2 where t1.a > 10 group by t1.id;
 ```
 
-### STREAM_AGG()
+### STREAM_AGG() {#stream-agg}
 
 The `STREAM_AGG()` hint tells the optimizer to use the stream aggregation algorithm in all the aggregate functions in the specified query block. Generally, this algorithm consumes less memory but takes longer processing time. If there is a very large data volume or insufficient system memory, it is recommended to use this hint. For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 select /*+ STREAM_AGG() */ count(*) from t1, t2 where t1.a > 10 group by t1.id;
 ```
 
-### MPP_1PHASE_AGG()
+### MPP_1PHASE_AGG() {#mpp-1phase-agg}
 
 `MPP_1PHASE_AGG()` tells the optimizer to use the one-phase aggregation algorithm for all aggregate functions in the specified query block. This hint only takes effect in the MPP mode. For example:
 
@@ -364,7 +336,7 @@ SELECT /*+ MPP_1PHASE_AGG() */ COUNT(*) FROM t1, t2 WHERE t1.a > 10 GROUP BY t1.
 >
 > Before using this hint, make sure that the current TiDB cluster can support using TiFlash MPP mode in the query. For details, refer to [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md).
 
-### MPP_2PHASE_AGG()
+### MPP_2PHASE_AGG() {#mpp-2phase-agg}
 
 `MPP_2PHASE_AGG()` tells the optimizer to use the two-phase aggregation algorithm for all aggregate functions in the specified query block. This hint only takes effect in the MPP mode. For example:
 
@@ -376,11 +348,9 @@ SELECT /*+ MPP_2PHASE_AGG() */ COUNT(*) FROM t1, t2 WHERE t1.a > 10 GROUP BY t1.
 >
 > Before using this hint, make sure that the current TiDB cluster can support using TiFlash MPP mode in the query. For details, refer to [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md).
 
-### USE_INDEX(t1_name, idx1_name [, idx2_name ...])
+### USE_INDEX(t1_name, idx1_name [, idx2_name ...]) {#use-index-t1-name-idx1-name-idx2-name}
 
 The `USE_INDEX(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to use only the given index(es) for a specified `t1_name` table. For example, applying the following hint has the same effect as executing the `select * from t t1 use index(idx1, idx2);` statement.
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT /*+ USE_INDEX(t1, idx1, idx2) */ * FROM t1;
@@ -390,15 +360,13 @@ SELECT /*+ USE_INDEX(t1, idx1, idx2) */ * FROM t1;
 >
 > If you specify only the table name but not index name in this hint, the execution does not consider any index but scan the entire table.
 
-### FORCE_INDEX(t1_name, idx1_name [, idx2_name ...])
+### FORCE_INDEX(t1_name, idx1_name [, idx2_name ...]) {#force-index-t1-name-idx1-name-idx2-name}
 
 The `FORCE_INDEX(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to use only the given index(es).
 
 The usage and effect of `FORCE_INDEX(t1_name, idx1_name [, idx2_name ...])` are the same as the usage and effect of `USE_INDEX(t1_name, idx1_name [, idx2_name ...])`.
 
 The following 4 queries have the same effect:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT /*+ USE_INDEX(t, idx1) */ * FROM t;
@@ -407,17 +375,15 @@ SELECT * FROM t use index(idx1);
 SELECT * FROM t force index(idx1);
 ```
 
-### IGNORE_INDEX(t1_name, idx1_name [, idx2_name ...])
+### IGNORE_INDEX(t1_name, idx1_name [, idx2_name ...]) {#ignore-index-t1-name-idx1-name-idx2-name}
 
 The `IGNORE_INDEX(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to ignore the given index(es) for a specified `t1_name` table. For example, applying the following hint has the same effect as executing the `select * from t t1 ignore index(idx1, idx2);` statement.
-
-{{< copyable "sql" >}}
 
 ```sql
 select /*+ IGNORE_INDEX(t1, idx1, idx2) */ * from t t1;
 ```
 
-### ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])
+### ORDER_INDEX(t1_name, idx1_name [, idx2_name ...]) {#order-index-t1-name-idx1-name-idx2-name}
 
 The `ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to use only the given index for a specified table and read the specified index in order.
 
@@ -447,10 +413,10 @@ The optimizer generates two types of plan for this query: `Limit + IndexScan(kee
 
 > **Note:**
 >
-> - If the query itself does not need to read the index in order (that is, without a hint, the optimizer does not generate a plan that reads the index in order in any situation), when the `ORDER_INDEX` hint is used, the error `Can't find a proper physical plan for this query` occurs. In this case, you need to remove the corresponding `ORDER_INDEX` hint.
-> - The index on a partitioned table cannot be read in order, so do not use the `ORDER_INDEX` hint on the partitioned table and its related indexes.
+> -   If the query itself does not need to read the index in order (that is, without a hint, the optimizer does not generate a plan that reads the index in order in any situation), when the `ORDER_INDEX` hint is used, the error `Can't find a proper physical plan for this query` occurs. In this case, you need to remove the corresponding `ORDER_INDEX` hint.
+> -   The index on a partitioned table cannot be read in order, so do not use the `ORDER_INDEX` hint on the partitioned table and its related indexes.
 
-### NO_ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])
+### NO_ORDER_INDEX(t1_name, idx1_name [, idx2_name ...]) {#no-order-index-t1-name-idx1-name-idx2-name}
 
 The `NO_ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to use only the given index for a specified table and not to read the specified index in order. This hint is usually applied in the following scenario.
 
@@ -474,45 +440,37 @@ EXPLAIN SELECT /*+ NO_ORDER_INDEX(t, a) */ a FROM t ORDER BY a LIMIT 10;
 
 The same as the example of `ORDER_INDEX` hint, the optimizer generates two types of plans for this query: `Limit + IndexScan(keep order: true)` and `TopN + IndexScan(keep order: false)`. When the `NO_ORDER_INDEX` hint is used, the optimizer will choose the latter plan to read the index out of order.
 
-### AGG_TO_COP()
+### AGG_TO_COP() {#agg-to-cop}
 
 The `AGG_TO_COP()` hint tells the optimizer to push down the aggregate operation in the specified query block to the coprocessor. If the optimizer does not push down some aggregate function that is suitable for pushdown, then it is recommended to use this hint. For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 select /*+ AGG_TO_COP() */ sum(t1.a) from t t1;
 ```
 
-### LIMIT_TO_COP()
+### LIMIT_TO_COP() {#limit-to-cop}
 
 The `LIMIT_TO_COP()` hint tells the optimizer to push down the `Limit` and `TopN` operators in the specified query block to the coprocessor. If the optimizer does not perform such an operation, it is recommended to use this hint. For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT /*+ LIMIT_TO_COP() */ * FROM t WHERE a = 1 AND b > 10 ORDER BY c LIMIT 1;
 ```
 
-### READ_FROM_STORAGE(TIFLASH[t1_name [, tl_name ...]], TIKV[t2_name [, tl_name ...]])
+### READ_FROM_STORAGE(TIFLASH[t1_name [, tl_name ...]], TIKV[t2_name [, tl_name ...]]) {#read-from-storage-tiflash-t1-name-tl-name-tikv-t2-name-tl-name}
 
 The `READ_FROM_STORAGE(TIFLASH[t1_name [, tl_name ...]], TIKV[t2_name [, tl_name ...]])` hint tells the optimizer to read specific table(s) from specific storage engine(s). Currently, this hint supports two storage engine parameters - `TIKV` and `TIFLASH`. If a table has an alias, use the alias as the parameter of `READ_FROM_STORAGE()`; if the table does not have an alias, use the table's original name as the parameter. For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 select /*+ READ_FROM_STORAGE(TIFLASH[t1], TIKV[t2]) */ t1.a from t t1, t t2 where t1.a = t2.a;
 ```
 
-### USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])
+### USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...]) {#use-index-merge-t1-name-idx1-name-idx2-name}
 
 The `USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to access a specific table with the index merge method. Index merge has two types: intersection type and union type. For details, see [Explain Statements Using Index Merge](/explain-index-merge.md).
 
 If you explicitly specify the list of indexes, TiDB selects indexes from the list to build index merge; if you do not specify the list of indexes, TiDB selects indexes from all available indexes to build index merge.
 
 For the intersection-type index merge, the given list of indexes is a required parameter in the hint. For the union-type index merge, the given list of indexes is an optional parameter in the hint. See the following example.
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT /*+ USE_INDEX_MERGE(t1, idx_a, idx_b, idx_c) */ * FROM t1 WHERE t1.a > 10 OR t1.b > 10;
@@ -524,11 +482,9 @@ When multiple `USE_INDEX_MERGE` hints are made to the same table, the optimizer 
 >
 > The parameters of `USE_INDEX_MERGE` refer to index names, rather than column names. The index name of the primary key is `primary`.
 
-### LEADING(t1_name [, tl_name ...])
+### LEADING(t1_name [, tl_name ...]) {#leading-t1-name-tl-name}
 
 The `LEADING(t1_name [, tl_name ...])` hint reminds the optimizer that, when generating the execution plan, to determine the order of multi-table joins according to the order of table names specified in the hint. For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT /*+ LEADING(t1, t2) */ * FROM t1, t2, t3 WHERE t1.id = t2.id and t2.id = t3.id;
@@ -538,12 +494,12 @@ In the above query with multi-table joins, the order of joins is determined by t
 
 The `LEADING` hint does not take effect in the following situations:
 
-+ Multiple `LEADING` hints are specified.
-+ The table name specified in the `LEADING` hint does not exist.
-+ A duplicated table name is specified in the `LEADING` hint.
-+ The optimizer cannot perform join operations according to the order as specified by the `LEADING` hint.
-+ The `straight_join()` hint already exists.
-+ The query contains an outer join together with the Cartesian product.
+-   Multiple `LEADING` hints are specified.
+-   The table name specified in the `LEADING` hint does not exist.
+-   A duplicated table name is specified in the `LEADING` hint.
+-   The optimizer cannot perform join operations according to the order as specified by the `LEADING` hint.
+-   The `straight_join()` hint already exists.
+-   The query contains an outer join together with the Cartesian product.
 
 In the preceding situations, a warning is generated.
 
@@ -567,7 +523,7 @@ SHOW WARNINGS;
 >
 > If the query statement includes an outer join, in the hint you can specify only the tables whose join order can be swapped. If there is a table in the hint whose join order cannot be swapped, the hint will be invalid. For example, in `SELECT * FROM t1 LEFT JOIN (t2 JOIN t3 JOIN t4) ON t1.a = t2.a;`, if you want to control the join order of `t2`, `t3`, and `t4` tables, you cannot specify `t1` in the `LEADING` hint.
 
-### MERGE()
+### MERGE() {#merge}
 
 Using the `MERGE()` hint in queries with common table expressions (CTE) can disable the materialization of the subqueries and expand the subquery inlines into CTE. This hint is only applicable to non-recursive CTE. In some scenarios, using `MERGE()` brings higher execution efficiency than the default behavior of allocating a temporary space. For example, pushing down query conditions or in nesting CTE queries:
 
@@ -583,16 +539,16 @@ WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * 
 >
 > `MERGE()` is only applicable to simple CTE queries. It is not applicable in the following situations:
 >
-> - [Recursive CTE](https://docs.pingcap.com/tidb/stable/dev-guide-use-common-table-expression#recursive-cte)
-> - Subqueries with inlines that cannot be expanded, such as aggregate operators, window functions, and `DISTINCT`.
+> -   [Recursive CTE](https://docs.pingcap.com/tidb/stable/dev-guide-use-common-table-expression#recursive-cte)
+> -   Subqueries with inlines that cannot be expanded, such as aggregate operators, window functions, and `DISTINCT`.
 >
 > When the number of CTE references is too high, the query performance might be lower than the default materialization behavior.
 
-## Hints that take effect globally
+## Hints that take effect globally {#hints-that-take-effect-globally}
 
 The global hint works in [views](/views.md). When specified as a global hint, the hint defined in a query can take effect inside the view. To specify a global hint, first use the `QB_NAME` hint to define a query block name, and then add the target hints in the form of `ViewName@QueryBlockName`.
 
-### Step 1: Define the query block name of the view using the `QB_NAME` hint
+### Step 1: Define the query block name of the view using the <code>QB_NAME</code> hint {#step-1-define-the-query-block-name-of-the-view-using-the-code-qb-name-code-hint}
 
 Use the [`QB_NAME` hint](#qb_name) to define a new name for each query block of the view. The definition of the `QB_NAME` hint for views is the same as that for [query blocks](#qb_name), but the syntax is extended from `QB_NAME(QB)` to `QB_NAME(QB, ViewName@QueryBlockName [.ViewName@QueryBlockName .ViewName@QueryBlockName ...])`.
 
@@ -600,7 +556,7 @@ Use the [`QB_NAME` hint](#qb_name) to define a new name for each query block of 
 >
 > There is a white space between `@QueryBlockName` and the immediately following `.ViewName@QueryBlockName`. Otherwise, the `.ViewName@QueryBlockName` will be treated as a part of the `QueryBlockName`. For example, `QB_NAME(v2_1, v2@SEL_1 .@SEL_1)` is valid, while `QB_NAME(v2_1, v2@SEL_1.@SEL_1)` cannot be parsed correctly.
 
-- For a simple statement with a single view and no subqueries, the following example specifies the first query block name of view `v`:
+-   For a simple statement with a single view and no subqueries, the following example specifies the first query block name of view `v`:
 
     ```sql
     SELECT /* Comment: The name of the current query block is the default @SEL_1 */ * FROM v;
@@ -615,7 +571,7 @@ Use the [`QB_NAME` hint](#qb_name) to define a new name for each query block of 
     SELECT /*+ QB_NAME(v_1, v) USE_INDEX(t@v_1, idx) */ * FROM v;
     ```
 
-- For a complex statement with nested views and subqueries, the following example specifies the names for each of two query blocks of the view `v1` and `v2`:
+-   For a complex statement with nested views and subqueries, the following example specifies the names for each of two query blocks of the view `v1` and `v2`:
 
     ```sql
     SELECT /* Comment: The name of the current query block is the default @SEL_1 */ * FROM v2 JOIN (
@@ -645,49 +601,49 @@ Use the [`QB_NAME` hint](#qb_name) to define a new name for each query block of 
 
 > **Note:**
 >
-> - To use global hints with views, you must define the corresponding `QB_NAME` hints in the view. Otherwise, the global hints will not take effect.
+> -   To use global hints with views, you must define the corresponding `QB_NAME` hints in the view. Otherwise, the global hints will not take effect.
 >
-> - When using a hint to specify multiple table names in a view, you need to ensure that the table names appearing in the same hint are in the same query block of the same view.
+> -   When using a hint to specify multiple table names in a view, you need to ensure that the table names appearing in the same hint are in the same query block of the same view.
 >
-> - When you define the `QB_NAME` hint in a view for the outermost query block:
+> -   When you define the `QB_NAME` hint in a view for the outermost query block:
 >
->     - For the first item of the view list in the `QB_NAME`, if the `@SEL_` is not explicitly declared, the default is consistent with the query block position where the `QB_NAME` is defined. That is, the query `SELECT /*+ QB_NAME(qb1, v2) */ * FROM v2 JOIN (SELECT /*+ QB_NAME(qb2, v2) */ * FROM v2) vv;` is equivalent to `SELECT /*+ QB_NAME(qb1, v2@SEL_1) */ * FROM v2 JOIN (SELECT /*+ QB_NAME(qb2, v2@SEL_2) */ * FROM v2) vv;`.
->     - For items other than the first item of the view list in the `QB_NAME`, only `@SEL_1` can be omitted. That is, if `@SEL_1` is declared in the first query block of the current view, `@SEL_1` can be omitted. Otherwise, `@SEL_` cannot be omitted. For the preceding example:
+>     -   For the first item of the view list in the `QB_NAME`, if the `@SEL_` is not explicitly declared, the default is consistent with the query block position where the `QB_NAME` is defined. That is, the query `SELECT /*+ QB_NAME(qb1, v2) */ * FROM v2 JOIN (SELECT /*+ QB_NAME(qb2, v2) */ * FROM v2) vv;` is equivalent to `SELECT /*+ QB_NAME(qb1, v2@SEL_1) */ * FROM v2 JOIN (SELECT /*+ QB_NAME(qb2, v2@SEL_2) */ * FROM v2) vv;`.
+>     -   For items other than the first item of the view list in the `QB_NAME`, only `@SEL_1` can be omitted. That is, if `@SEL_1` is declared in the first query block of the current view, `@SEL_1` can be omitted. Otherwise, `@SEL_` cannot be omitted. For the preceding example:
 >
->         - The first query block of the view `v2` can be declared as `QB_NAME(v2_1, v2)`.
->         - The second query block of the view `v2` can be declared as `QB_NAME(v2_2, v2.@SEL_2)`.
->         - The first query block of the view `v1` can be declared as `QB_NAME(v1_1, v2.v1@SEL_2)`.
->         - The second query block of the view `v1` can be declared as `QB_NAME(v1_2, v2.v1@SEL_2 .@SEL_2)`.
+>         -   The first query block of the view `v2` can be declared as `QB_NAME(v2_1, v2)`.
+>         -   The second query block of the view `v2` can be declared as `QB_NAME(v2_2, v2.@SEL_2)`.
+>         -   The first query block of the view `v1` can be declared as `QB_NAME(v1_1, v2.v1@SEL_2)`.
+>         -   The second query block of the view `v1` can be declared as `QB_NAME(v1_2, v2.v1@SEL_2 .@SEL_2)`.
 
-### Step 2: Add the target hints
+### Step 2: Add the target hints {#step-2-add-the-target-hints}
 
 After defining the `QB_NAME` hint for query blocks of the view, you can add required [hints that take effect in query blocks](#hints-that-take-effect-in-query-blocks) in the form of `ViewName@QueryBlockName` to make them effective inside the view. For example:
 
-- Specify the `MERGE_JOIN()` hint for the first query block of the view `v2`:
+-   Specify the `MERGE_JOIN()` hint for the first query block of the view `v2`:
 
     ```sql
     SELECT /*+ QB_NAME(v2_1, v2) merge_join(t@v2_1) */ * FROM v2;
     ```
 
-- Specify the `MERGE_JOIN()` and `STREAM_AGG()` hints for the second query block of the view `v2`:
+-   Specify the `MERGE_JOIN()` and `STREAM_AGG()` hints for the second query block of the view `v2`:
 
     ```sql
     SELECT /*+ QB_NAME(v2_2, v2.@SEL_2) merge_join(t1@v2_2) stream_agg(@v2_2) */ * FROM v2;
     ```
 
-- Specify the `HASH_JOIN()` hint for the first query block of the view `v1`:
+-   Specify the `HASH_JOIN()` hint for the first query block of the view `v1`:
 
     ```sql
     SELECT /*+ QB_NAME(v1_1, v2.v1@SEL_2) hash_join(t@v1_1) */ * FROM v2;
     ```
 
-- Specify the `HASH_JOIN()` and `HASH_AGG()` hints for the second query block of the view `v1`:
+-   Specify the `HASH_JOIN()` and `HASH_AGG()` hints for the second query block of the view `v1`:
 
     ```sql
     SELECT /*+ QB_NAME(v1_2, v2.v1@SEL_2 .@SEL_2) hash_join(t1@v1_2) hash_agg(@v1_2) */ * FROM v2;
     ```
 
-## Hints that take effect in the whole query
+## Hints that take effect in the whole query {#hints-that-take-effect-in-the-whole-query}
 
 This category of hints can only follow behind the **first** `SELECT`, `UPDATE` or `DELETE` keyword, which is equivalent to modifying the value of the specified system variable when this query is executed. The priority of the hint is higher than that of existing system variables.
 
@@ -695,13 +651,11 @@ This category of hints can only follow behind the **first** `SELECT`, `UPDATE` o
 >
 > This category of hints also has an optional hidden variable `@QB_NAME`, but the hint takes effect in the whole query even if you specify the variable.
 
-### NO_INDEX_MERGE()
+### NO_INDEX_MERGE() {#no-index-merge}
 
 The `NO_INDEX_MERGE()` hint disables the index merge feature of the optimizer.
 
 For example, the following query will not use index merge:
-
-{{< copyable "sql" >}}
 
 ```sql
 select /*+ NO_INDEX_MERGE() */ * from t where t.a > 0 or t.b > 0;
@@ -711,16 +665,14 @@ In addition to this hint, setting the `tidb_enable_index_merge` system variable 
 
 > **Note:**
 >
-> - `NO_INDEX_MERGE` has a higher priority over `USE_INDEX_MERGE`. When both hints are used, `USE_INDEX_MERGE` does not take effect.
-> - For a subquery, `NO_INDEX_MERGE` only takes effect when it is placed at the outermost level of the subquery.
+> -   `NO_INDEX_MERGE` has a higher priority over `USE_INDEX_MERGE`. When both hints are used, `USE_INDEX_MERGE` does not take effect.
+> -   For a subquery, `NO_INDEX_MERGE` only takes effect when it is placed at the outermost level of the subquery.
 
-### USE_TOJA(boolean_value)
+### USE_TOJA(boolean_value) {#use-toja-boolean-value}
 
 The `boolean_value` parameter can be `TRUE` or `FALSE`. The `USE_TOJA(TRUE)` hint enables the optimizer to convert an `in` condition (containing a sub-query) to join and aggregation operations. Comparatively, the `USE_TOJA(FALSE)` hint disables this feature.
 
 For example, the following query will convert `in (select t2.a from t2) subq` to corresponding join and aggregation operations:
-
-{{< copyable "sql" >}}
 
 ```sql
 select /*+ USE_TOJA(TRUE) */ t1.a, t1.b from t1 where t1.a in (select t2.a from t2) subq;
@@ -728,11 +680,9 @@ select /*+ USE_TOJA(TRUE) */ t1.a, t1.b from t1 where t1.a in (select t2.a from 
 
 In addition to this hint, setting the `tidb_opt_insubq_to_join_and_agg` system variable also controls whether to enable this feature.
 
-### MAX_EXECUTION_TIME(N)
+### MAX_EXECUTION_TIME(N) {#max-execution-time-n}
 
 The `MAX_EXECUTION_TIME(N)` hint places a limit `N` (a timeout value in milliseconds) on how long a statement is permitted to execute before the server terminates it. In the following hint, `MAX_EXECUTION_TIME(1000)` means that the timeout is 1000 milliseconds (that is, 1 second):
-
-{{< copyable "sql" >}}
 
 ```sql
 select /*+ MAX_EXECUTION_TIME(1000) */ * from t1 inner join t2 where t1.id = t2.id;
@@ -740,13 +690,11 @@ select /*+ MAX_EXECUTION_TIME(1000) */ * from t1 inner join t2 where t1.id = t2.
 
 In addition to this hint, the `global.max_execution_time` system variable can also limit the execution time of a statement.
 
-### MEMORY_QUOTA(N)
+### MEMORY_QUOTA(N) {#memory-quota-n}
 
 The `MEMORY_QUOTA(N)` hint places a limit `N` (a threshold value in MB or GB) on how much memory a statement is permitted to use. When a statement's memory usage exceeds this limit, TiDB produces a log message based on the statement's over-limit behavior or just terminates it.
 
 In the following hint, `MEMORY_QUOTA(1024 MB)` means that the memory usage is limited to 1024 MB:
-
-{{< copyable "sql" >}}
 
 ```sql
 select /*+ MEMORY_QUOTA(1024 MB) */ * from t;
@@ -754,11 +702,9 @@ select /*+ MEMORY_QUOTA(1024 MB) */ * from t;
 
 In addition to this hint, the [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) system variable can also limit the memory usage of a statement.
 
-### READ_CONSISTENT_REPLICA()
+### READ_CONSISTENT_REPLICA() {#read-consistent-replica}
 
 The `READ_CONSISTENT_REPLICA()` hint enables the feature of reading consistent data from the TiKV follower node. For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 select /*+ READ_CONSISTENT_REPLICA() */ * from t;
@@ -766,7 +712,7 @@ select /*+ READ_CONSISTENT_REPLICA() */ * from t;
 
 In addition to this hint, setting the `tidb_replica_read` environment variable to `'follower'` or `'leader'` also controls whether to enable this feature.
 
-### IGNORE_PLAN_CACHE()
+### IGNORE_PLAN_CACHE() {#ignore-plan-cache}
 
 The `IGNORE_PLAN_CACHE()` hint reminds the optimizer not to use the Plan Cache when handling the current `prepare` statement.
 
@@ -774,20 +720,18 @@ This hint is used to temporarily disable the Plan Cache for a certain type of qu
 
 In the following example, the Plan Cache is forcibly disabled when executing the `prepare` statement.
 
-{{< copyable "sql" >}}
-
 ```sql
 prepare stmt from 'select  /*+ IGNORE_PLAN_CACHE() */ * from t where t.id = ?';
 ```
 
-### SET_VAR(VAR_NAME=VAR_VALUE)
+### SET_VAR(VAR_NAME=VAR_VALUE) {#set-var-var-name-var-value}
 
 You can temporarily modify the value of system variables during statement execution by using the `SET_VAR(VAR_NAME=VAR_VALUE)` hint. After the statement is executed, the value of the system variable in the current session is automatically restored to the original value. This hint can be used to modify some system variables related to the optimizer and executor. For a list of system variables that can be modified using this hint, refer to [System Variables](/system-variables.md).
 
 > **Warning:**
 >
-> - It is strongly recommended not to modify variables that are not explicitly supported, as this might cause unpredictable behavior.
-> - Do not write `SET_VAR` in subqueries. Otherwise it might not take effect. For more information, see [`SET_VAR` does not take effect when written in subqueries](#set_var-does-not-take-effect-when-written-in-subqueries).
+> -   It is strongly recommended not to modify variables that are not explicitly supported, as this might cause unpredictable behavior.
+> -   Do not write `SET_VAR` in subqueries. Otherwise it might not take effect. For more information, see [`SET_VAR` does not take effect when written in subqueries](#set_var-does-not-take-effect-when-written-in-subqueries).
 
 The following is an example:
 
@@ -813,11 +757,9 @@ After executing the preceding SQL statements, the first query returns the value 
 1 row in set (0.00 sec)
 ```
 
-### STRAIGHT_JOIN()
+### STRAIGHT_JOIN() {#straight-join}
 
 The `STRAIGHT_JOIN()` hint reminds the optimizer to join tables in the order of table names in the `FROM` clause when generating the join plan.
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT /*+ STRAIGHT_JOIN() */ * FROM t t1, t t2 WHERE t1.a = t2.a;
@@ -825,10 +767,10 @@ SELECT /*+ STRAIGHT_JOIN() */ * FROM t t1, t t2 WHERE t1.a = t2.a;
 
 > **Note:**
 >
-> - `STRAIGHT_JOIN` has higher priority over `LEADING`. When both hints are used, `LEADING` does not take effect.
-> - It is recommended to use the `LEADING` hint, which is more general than the `STRAIGHT_JOIN` hint.
+> -   `STRAIGHT_JOIN` has higher priority over `LEADING`. When both hints are used, `LEADING` does not take effect.
+> -   It is recommended to use the `LEADING` hint, which is more general than the `STRAIGHT_JOIN` hint.
 
-### NTH_PLAN(N)
+### NTH_PLAN(N) {#nth-plan-n}
 
 The `NTH_PLAN(N)` hint reminds the optimizer to select the `N`th physical plan found during the physical optimization. `N` must be a positive integer.
 
@@ -838,8 +780,6 @@ This hint does not take effect when the cascades planner is enabled.
 
 In the following example, the optimizer is forced to select the third physical plan found during the physical optimization:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT /*+ NTH_PLAN(3) */ count(*) from t where a > 5;
 ```
@@ -848,7 +788,7 @@ SELECT /*+ NTH_PLAN(3) */ count(*) from t where a > 5;
 >
 > `NTH_PLAN(N)` is mainly used for testing, and its compatibility is not guaranteed in later versions. Use this hint **with caution**.
 
-### RESOURCE_GROUP(resource_group_name)
+### RESOURCE_GROUP(resource_group_name) {#resource-group-resource-group-name}
 
 `RESOURCE_GROUP(resource_group_name)` is used for [Resource Control](/tidb-resource-control-ru-groups.md) to isolate resources. This hint temporarily executes the current statement using the specified resource group. If the specified resource group does not exist, this hint will be ignored.
 
@@ -862,13 +802,13 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 >
 > Starting from v8.2.0, TiDB introduces privilege control for this hint. When the system variable [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) is set to `ON`, you need to have the `SUPER` or `RESOURCE_GROUP_ADMIN` or `RESOURCE_GROUP_USER` privilege to use this hint. If you do not have the required privilege, this hint is ignored, and TiDB returns a warning. You can view the details by executing `SHOW WARNINGS;` after the query.
 
-## Troubleshoot common issues that hints do not take effect
+## Troubleshoot common issues that hints do not take effect {#troubleshoot-common-issues-that-hints-do-not-take-effect}
 
-### Hints do not take effect because your MySQL command-line client strips hints
+### Hints do not take effect because your MySQL command-line client strips hints {#hints-do-not-take-effect-because-your-mysql-command-line-client-strips-hints}
 
 MySQL command-line clients earlier than 5.7.7 strip optimizer hints by default. If you want to use the Hint syntax in these earlier versions, add the `--comments` option when starting the client. For example: `mysql -h 127.0.0.1 -P 4000 -uroot --comments`.
 
-### Hints do not take effect because the database name is not specified
+### Hints do not take effect because the database name is not specified {#hints-do-not-take-effect-because-the-database-name-is-not-specified}
 
 If you do not specify the database name when creating a connection, hints might not take effect. For example:
 
@@ -890,7 +830,7 @@ Because TiDB cannot identify the database for table `t`, the `use_index(t, a)` h
 1 row in set (0.00 sec)
 ```
 
-### Hints do not take effect because the database name is not explicitly specified in cross-table queries
+### Hints do not take effect because the database name is not explicitly specified in cross-table queries {#hints-do-not-take-effect-because-the-database-name-is-not-explicitly-specified-in-cross-table-queries}
 
 When executing cross-table queries, you need to explicitly specify database names. Otherwise, hints might not take effect. For example:
 
@@ -916,7 +856,7 @@ In the preceding statements, because table `t1` is not in the current `test2` da
 
 In this case, you need to specify the database name explicitly by using `use_index(test1.t1, a)` instead of `use_index(t1, a)`.
 
-### Hints do not take effect because they are placed in wrong locations
+### Hints do not take effect because they are placed in wrong locations {#hints-do-not-take-effect-because-they-are-placed-in-wrong-locations}
 
 Hints cannot take effect if they are not placed directly after the specific keywords. For example:
 
@@ -938,9 +878,9 @@ The warning is as follows:
 
 In this case, you need to place the hint directly after the `SELECT` keyword. For more details, see the [Syntax](#syntax) section.
 
-### `INL_JOIN` hint does not take effect
+### <code>INL_JOIN</code> hint does not take effect {#code-inl-join-code-hint-does-not-take-effect}
 
-#### `INL_JOIN` hint does not take effect when built-in functions are used on columns for joining tables
+#### <code>INL_JOIN</code> hint does not take effect when built-in functions are used on columns for joining tables {#code-inl-join-code-hint-does-not-take-effect-when-built-in-functions-are-used-on-columns-for-joining-tables}
 
 In some cases, if you use a built-in function on a column that joins tables, the optimizer might fail to choose the `IndexJoin` plan, resulting in the `INL_JOIN` hint not taking effect either.
 
@@ -973,14 +913,12 @@ The execution plan is as follows:
 SHOW WARNINGS;
 ```
 
-```
-+---------+------+------------------------------------------------------------------------------------+
-| Level   | Code | Message                                                                            |
-+---------+------+------------------------------------------------------------------------------------+
-| Warning | 1815 | Optimizer Hint /*+ INL_JOIN(t1, t2) */ or /*+ TIDB_INLJ(t1, t2) */ is inapplicable |
-+---------+------+------------------------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +---------+------+------------------------------------------------------------------------------------+
+    | Level   | Code | Message                                                                            |
+    +---------+------+------------------------------------------------------------------------------------+
+    | Warning | 1815 | Optimizer Hint /*+ INL_JOIN(t1, t2) */ or /*+ TIDB_INLJ(t1, t2) */ is inapplicable |
+    +---------+------+------------------------------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
 As you can see from the preceding example, the `INL_JOIN` hint does not take effect. This is due to a limitation of the optimizer that prevents using the `Projection` or `Selection` operator as the probe side of `IndexJoin`.
 
@@ -1005,7 +943,7 @@ EXPLAIN SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id=t2.id AND SUBST
 7 rows in set (0.00 sec)
 ```
 
-#### `INL_JOIN`, `INL_HASH_JOIN`, and `INL_MERGE_JOIN` hints do not take effect due to collation incompatibility
+#### <code>INL_JOIN</code>, <code>INL_HASH_JOIN</code>, and <code>INL_MERGE_JOIN</code> hints do not take effect due to collation incompatibility {#code-inl-join-code-code-inl-hash-join-code-and-code-inl-merge-join-code-hints-do-not-take-effect-due-to-collation-incompatibility}
 
 When the collation of the join key is incompatible between two tables, the `IndexJoin` operator cannot be utilized to execute the query. In this case, the [`INL_JOIN`](#inl_joint1_name--tl_name-), [`INL_HASH_JOIN`](#inl_hash_join), and [`INL_MERGE_JOIN`](#inl_merge_join) hints do not take effect. For example:
 
@@ -1042,7 +980,7 @@ SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-#### `INL_JOIN` hint does not take effect due to join order
+#### <code>INL_JOIN</code> hint does not take effect due to join order {#code-inl-join-code-hint-does-not-take-effect-due-to-join-order}
 
 The [`INL_JOIN(t1, t2)`](#inl_joint1_name--tl_name-) or `TIDB_INLJ(t1, t2)` hint semantically instructs `t1` and `t2` to act as inner tables in an `IndexJoin` operator to join with other tables, rather than directly joining them using an `IndexJoin` operator. For example:
 
@@ -1084,12 +1022,12 @@ EXPLAIN SELECT /*+ leading(t1, t3), inl_join(t3) */ * FROM t1, t2, t3 WHERE t1.i
 9 rows in set (0.01 sec)
 ```
 
-### Using hints causes the `Can't find a proper physical plan for this query` error
+### Using hints causes the <code>Can't find a proper physical plan for this query</code> error {#using-hints-causes-the-code-can-t-find-a-proper-physical-plan-for-this-query-code-error}
 
 The `Can't find a proper physical plan for this query` error might occur in the following scenarios:
 
-- A query itself does not require reading indexes in order. That is, for this query, the optimizer does not generate a plan to read indexes in order in any case without using hints. In this case, if the `ORDER_INDEX` hint is specified, this error occurs. To resolve this issue, remove the corresponding `ORDER_INDEX` hint.
-- A query excludes all possible join methods by using the `NO_JOIN` related hints.
+-   A query itself does not require reading indexes in order. That is, for this query, the optimizer does not generate a plan to read indexes in order in any case without using hints. In this case, if the `ORDER_INDEX` hint is specified, this error occurs. To resolve this issue, remove the corresponding `ORDER_INDEX` hint.
+-   A query excludes all possible join methods by using the `NO_JOIN` related hints.
 
 ```sql
 CREATE TABLE t1 (a INT);
@@ -1098,7 +1036,7 @@ EXPLAIN SELECT /*+ NO_HASH_JOIN(t1), NO_MERGE_JOIN(t1) */ * FROM t1, t2 WHERE t1
 ERROR 1815 (HY000): Internal : Can't find a proper physical plan for this query
 ```
 
-- The system variable [`tidb_opt_enable_hash_join`](/system-variables.md#tidb_opt_enable_hash_join-new-in-v656-v712-and-v740) is set to `OFF`, and all other join types are also excluded.
+-   The system variable [`tidb_opt_enable_hash_join`](/system-variables.md#tidb_opt_enable_hash_join-new-in-v656-v712-and-v740) is set to `OFF`, and all other join types are also excluded.
 
 ```sql
 CREATE TABLE t1 (a INT);
@@ -1108,7 +1046,7 @@ EXPLAIN SELECT /*+ NO_MERGE_JOIN(t1) */ * FROM t1, t2 WHERE t1.a=t2.a;
 ERROR 1815 (HY000): Internal : Can't find a proper physical plan for this query
 ```
 
-### `SET_VAR` does not take effect when written in subqueries
+### <code>SET_VAR</code> does not take effect when written in subqueries {#code-set-var-code-does-not-take-effect-when-written-in-subqueries}
 
 `SET_VAR` is used to modify the value of system variables for the current statement. Do not write it in subqueries. If you write it in a subquery, `SET_VAR` might not take effect due to the special handling of subqueries.
 

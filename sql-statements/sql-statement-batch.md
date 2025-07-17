@@ -1,25 +1,25 @@
 ---
 title: BATCH
-summary: An overview of the usage of BATCH for the TiDB database.
+summary: 关于在 TiDB 数据库中使用 BATCH 的概述。
 ---
 
 # BATCH
 
-The `BATCH` syntax splits a DML statement into multiple statements in TiDB for execution. This means that there are **no guarantees** of transactional atomicity and isolation. Therefore, it is a "non-transactional" statement.
+`BATCH` 语法在 TiDB 中将一个 DML 语句拆分成多个语句以供执行。这意味着 **没有保证**事务的原子性和隔离性。因此，它是一个“非事务性”语句。
 
-Currently, `INSERT`, `REPLACE`, `UPDATE`, and `DELETE` are supported in `BATCH`.
+目前，`INSERT`、`REPLACE`、`UPDATE` 和 `DELETE` 支持在 `BATCH` 中使用。
 
-Based on a column, the `BATCH` syntax divides a DML statement into multiple ranges of scope for execution. In each range, a single SQL statement is executed.
+基于某一列，`BATCH` 语法将一个 DML 语句划分为多个范围进行执行。在每个范围内，执行单个 SQL 语句。
 
-For details about the usage and restrictions, see [Non-transactional DML statements](/non-transactional-dml.md).
+有关用法和限制的详细信息，请参见 [Non-transactional DML statements](/non-transactional-dml.md)。
 
-When you use multi-table join in a `BATCH` statement, you need to specify the full path of the column to avoid ambiguity:
+当你在 `BATCH` 语句中使用多表连接时，需要指定列的完整路径以避免歧义：
 
 ```sql
 BATCH ON test.t2.id LIMIT 1 INSERT INTO t SELECT t2.id, t2.v, t3.v FROM t2 JOIN t3 ON t2.k = t3.k;
 ```
 
-The preceding statement specifies the column to be split as `test.t2.id`, which is unambiguous. If you use the `id` as follows, an error is reported:
+上述语句将要拆分的列指定为 `test.t2.id`，这是明确的。如果你使用如下的 `id`，则会报错：
 
 ```sql
 BATCH ON id LIMIT 1 INSERT INTO t SELECT t2.id, t2.v, t3.v FROM t2 JOIN t3 ON t2.k = t3.k;
@@ -27,7 +27,7 @@ BATCH ON id LIMIT 1 INSERT INTO t SELECT t2.id, t2.v, t3.v FROM t2 JOIN t3 ON t2
 Non-transactional DML, shard column must be fully specified
 ```
 
-## Synopsis
+## 概要
 
 ```ebnf+diagram
 NonTransactionalDMLStmt ::=
@@ -43,10 +43,10 @@ ShardableStmt ::=
 |   ReplaceIntoStmt
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `BATCH` syntax is TiDB-specific and not compatible with MySQL.
+`BATCH` 语法是 TiDB 特有的，不兼容 MySQL。
 
-## See also
+## 另请参见
 
 * [Non-transactional DML statements](/non-transactional-dml.md)

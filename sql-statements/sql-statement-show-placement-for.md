@@ -1,23 +1,23 @@
 ---
 title: SHOW PLACEMENT FOR
-summary: The usage of SHOW PLACEMENT FOR in TiDB.
+summary: SHOW PLACEMENT FOR 在 TiDB 中的用法。
 ---
 
 # SHOW PLACEMENT FOR
 
-`SHOW PLACEMENT FOR` summarizes all placement options, and presents them in the canonical form for a specific table, database schema, or partition.
+`SHOW PLACEMENT FOR` 总结了所有的放置选项，并以规范的形式展示特定表、数据库模式或分区的放置信息。
 
 > **Note:**
 >
-> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
 
-The statement returns a result set in which the `Scheduling_State` field indicates the current progress that the Placement Driver (PD) has made in scheduling the placement:
+该语句返回一个结果集，其中 `Scheduling_State` 字段表示放置调度程序（PD）在调度放置方面的当前进展：
 
-* `PENDING`: The PD has not yet started scheduling the placement. This might indicate that the placement rules are semantically correct, but cannot currently be satisfied by the cluster. For example, if `FOLLOWERS=4` but there are only 3 TiKV stores that are candidates for followers.
-* `INPROGRESS`: The PD is currently scheduling the placement.
-* `SCHEDULED`: The PD has successfully scheduled the placement.
+* `PENDING`：PD 尚未开始调度放置。这可能表示放置规则在语义上是正确的，但目前无法被集群满足。例如，如果 `FOLLOWERS=4`，但只有 3 个 TiKV 存储节点作为候选追随者。
+* `INPROGRESS`：PD 正在进行放置调度。
+* `SCHEDULED`：PD 已成功完成放置调度。
 
-## Synopsis
+## 概要
 
 ```ebnf+diagram
 ShowStmt ::=
@@ -26,10 +26,10 @@ ShowStmt ::=
 ShowPlacementTarget ::=
     DatabaseSym DBName
 |   "TABLE" TableName
-|   "TABLE" TableName "PARTITION" Identifier
+|   "TABLE" "TableName" "PARTITION" Identifier
 ```
 
-## Examples
+## 示例
 
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4;
@@ -77,11 +77,11 @@ Scheduling_State | PENDING
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension to MySQL syntax.
+该语句是 TiDB 对 MySQL 语法的扩展。
 
-## See also
+## 相关链接
 
 * [Placement Rules in SQL](/placement-rules-in-sql.md)
 * [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)

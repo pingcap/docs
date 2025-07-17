@@ -3,7 +3,7 @@ title: String Functions
 summary: Learn about the string functions in TiDB.
 ---
 
-# String Functions
+# String Functions {#string-functions}
 
 TiDB supports most of the [string functions](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html) available in MySQL 8.0, and some of the [functions](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlqr/SQL-Functions.html#GUID-93EC62F8-415D-4A7E-B050-5D5B2C127009) available in Oracle 21.
 
@@ -13,15 +13,15 @@ For comparisons between functions and syntax of Oracle and TiDB, see [Comparison
 
 </CustomContent>
 
-## Supported functions
+## Supported functions {#supported-functions}
 
-### [`ASCII()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ascii)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ascii"><code>ASCII()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-ascii-code-ascii-code-a}
 
 The `ASCII(str)` function is used to get the ASCII value of the leftmost character in the given argument. The argument can be either a string or a number.
 
-- If the argument is not empty, the function returns the ASCII value of the leftmost character.
-- If the argument is an empty string, the function returns `0`.
-- If the argument is `NULL`, the function returns `NULL`.
+-   If the argument is not empty, the function returns the ASCII value of the leftmost character.
+-   If the argument is an empty string, the function returns `0`.
+-   If the argument is `NULL`, the function returns `NULL`.
 
 > **Note:**
 >
@@ -43,16 +43,16 @@ Output:
 +------------+---------------+-----------+
 ```
 
-### [`BIN()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bin)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bin"><code>BIN()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-bin-code-bin-code-a}
 
 The `BIN()` function is used to convert the given argument into a string representation of its binary value. The argument can be either a string or a number.
 
-- If the argument is a positive number, the function returns a string representation of its binary value.
-- If the argument is a negative number, the function converts the absolute value of the argument to its binary representation, inverts each bit of the binary value (changing `0` to `1` and `1` to `0`), and then adds `1` to the inverted value.
-- If the argument is a string containing only digits, the function returns the result according to those digits. For example, the results for `"123"` and `123` are the same.
-- If the argument is a string and its first character is not a digit (such as `"q123"`), the function returns `0`.
-- If the argument is a string that consists of digits and non-digits, the function returns the result according to the consecutive digits at the beginning of the argument. For example, the results for `"123q123"` and `123` are the same, but `BIN('123q123')` generates a warning like `Truncated incorrect INTEGER value: '123q123'`.
-- If the argument is `NULL`, the function returns `NULL`.
+-   If the argument is a positive number, the function returns a string representation of its binary value.
+-   If the argument is a negative number, the function converts the absolute value of the argument to its binary representation, inverts each bit of the binary value (changing `0` to `1` and `1` to `0`), and then adds `1` to the inverted value.
+-   If the argument is a string containing only digits, the function returns the result according to those digits. For example, the results for `"123"` and `123` are the same.
+-   If the argument is a string and its first character is not a digit (such as `"q123"`), the function returns `0`.
+-   If the argument is a string that consists of digits and non-digits, the function returns the result according to the consecutive digits at the beginning of the argument. For example, the results for `"123q123"` and `123` are the same, but `BIN('123q123')` generates a warning like `Truncated incorrect INTEGER value: '123q123'`.
+-   If the argument is `NULL`, the function returns `NULL`.
 
 Example 1:
 
@@ -86,7 +86,7 @@ Output 2:
 +------------------------------------------------------------------+
 ```
 
-### [`BIT_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bit-length)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bit-length"><code>BIT_LENGTH()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-bit-length-code-bit-length-code-a}
 
 The `BIT_LENGTH()` function is used to return the length of a given argument in bits.
 
@@ -131,7 +131,7 @@ SELECT CustomerName, BIT_LENGTH(CustomerName) AS BitLengthOfName FROM Customers;
 >
 > The preceding example operates under the assumption that there is a database with a table named `Customers` and a column inside the table named `CustomerName`.
 
-### [`CHAR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char"><code>CHAR()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-char-code-char-code-a}
 
 The `CHAR()` function is used to get the corresponding character of a specific ASCII value. It performs the opposite operation of `ASCII()`, which returns the ASCII value of a specific character. If multiple arguments are supplied, the function works on all arguments and are then concatenated together.
 
@@ -191,16 +191,14 @@ SELECT CHAR(50089);
 SELECT CHAR(65,66,67);
 ```
 
-```
-+----------------+
-| CHAR(65,66,67) |
-+----------------+
-| ABC            |
-+----------------+
-1 row in set (0.00 sec)
-```
+    +----------------+
+    | CHAR(65,66,67) |
+    +----------------+
+    | ABC            |
+    +----------------+
+    1 row in set (0.00 sec)
 
-### [`CHAR_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char-length)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char-length"><code>CHAR_LENGTH()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-char-length-code-char-length-code-a}
 
 The `CHAR_LENGTH()` function is used to get the total number of characters in a given argument as an integer.
 
@@ -231,11 +229,11 @@ SELECT CustomerName, CHAR_LENGTH(CustomerName) AS LengthOfName FROM Customers;
 >
 > The preceding example operates under the assumption that there is a database with a table named `Customers` and a column inside the table named `CustomerName`.
 
-### [`CHARACTER_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_character-length)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_character-length"><code>CHARACTER_LENGTH()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-character-length-code-character-length-code-a}
 
 The `CHARACTER_LENGTH()` function is the same as the `CHAR_LENGTH()` function. Both functions can be used synonymously because they generate the same output.
 
-### [`CONCAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat"><code>CONCAT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-concat-code-concat-code-a}
 
 The `CONCAT()` function concatenates one or more arguments into a single string.
 
@@ -297,7 +295,7 @@ Output:
 +-------------+
 ```
 
-### [`CONCAT_WS()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat-ws)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat-ws"><code>CONCAT_WS()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-concat-ws-code-concat-ws-code-a}
 
 The `CONCAT_WS()` function is a form of [`CONCAT()`](#concat) with a separator, which returns a string concatenated by the specified separator.
 
@@ -307,8 +305,8 @@ Syntax:
 CONCAT_WS(separator,str1,str2,...)
 ```
 
-- `separator`: the first argument is the separator, which concatenates the remaining arguments that are not `NULL`.
-- `str1, str2, ...`: a list of arguments to be concatenated. Each argument can be a string or a number.
+-   `separator`: the first argument is the separator, which concatenates the remaining arguments that are not `NULL`.
+-   `str1, str2, ...`: a list of arguments to be concatenated. Each argument can be a string or a number.
 
 Example:
 
@@ -326,7 +324,7 @@ Output:
 +---------------------------------------------+
 ```
 
-- If the separator is an empty string, `CONCAT_WS()` is equivalent to `CONCAT()` and returns the concatenated string of the remaining arguments.
+-   If the separator is an empty string, `CONCAT_WS()` is equivalent to `CONCAT()` and returns the concatenated string of the remaining arguments.
 
     Example:
 
@@ -344,7 +342,7 @@ Output:
     +--------------------------------------------+
     ```
 
-- If the separator is `NULL`, `CONCAT_WS()` returns `NULL`.
+-   If the separator is `NULL`, `CONCAT_WS()` returns `NULL`.
 
     Example:
 
@@ -362,7 +360,7 @@ Output:
     +----------------------------------------------+
     ```
 
-- If only one of the arguments to be concatenated is not `NULL`, `CONCAT_WS()` returns that argument.
+-   If only one of the arguments to be concatenated is not `NULL`, `CONCAT_WS()` returns that argument.
 
     Example:
 
@@ -380,7 +378,7 @@ Output:
     +-------------------------------------+
     ```
 
-- If there are `NULL` arguments to be concatenated, `CONCAT_WS()` skips these `NULL` arguments.
+-   If there are `NULL` arguments to be concatenated, `CONCAT_WS()` skips these `NULL` arguments.
 
     Example:
 
@@ -398,7 +396,7 @@ Output:
     +-------------------------------------------+
     ```
 
-- If there are empty strings to be concatenated, `CONCAT_WS()` does not skip empty strings.
+-   If there are empty strings to be concatenated, `CONCAT_WS()` does not skip empty strings.
 
     Example:
 
@@ -416,7 +414,7 @@ Output:
     +-----------------------------------------+
     ```
 
-### [`ELT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_elt)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_elt"><code>ELT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-elt-code-elt-code-a}
 
 The `ELT()` function returns the element at the index number.
 
@@ -435,7 +433,7 @@ SELECT ELT(3, 'This', 'is', 'TiDB');
 
 The preceding example returns the third element, which is `'TiDB'`.
 
-### [`EXPORT_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_export-set)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_export-set"><code>EXPORT_SET()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-export-set-code-export-set-code-a}
 
 The `EXPORT_SET()` function returns a string that consists of a specified number (`number_of_bits`) of `on`/`off` values, optionally separated by `separator`. These values are based on whether the corresponding bit in the `bits` argument is `1`, where the first value corresponds to the rightmost (lowest) bit of `bits`.
 
@@ -445,11 +443,11 @@ Syntax:
 EXPORT_SET(bits, on, off, [separator[, number_of_bits]])
 ```
 
-- `bits`: an integer representing the bit value.
-- `on`: the string to be returned if the corresponding bit is `1`.
-- `off`: the string to be returned if the corresponding bit is `0`.
-- `separator` (optional): the separator character in the result string.
-- `number_of_bits` (optional): the number of bits to be processed. If it is not set, `64` (the max size of bits) is used by default, which means that `bits` is treated as an unsigned 64-bit integer.
+-   `bits`: an integer representing the bit value.
+-   `on`: the string to be returned if the corresponding bit is `1`.
+-   `off`: the string to be returned if the corresponding bit is `0`.
+-   `separator` (optional): the separator character in the result string.
+-   `number_of_bits` (optional): the number of bits to be processed. If it is not set, `64` (the max size of bits) is used by default, which means that `bits` is treated as an unsigned 64-bit integer.
 
 Examples:
 
@@ -498,7 +496,7 @@ SELECT EXPORT_SET(b'01010101', 'x', '_', '', 8);
 1 row in set (0.00 sec)
 ```
 
-### [`FIELD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_field)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_field"><code>FIELD()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-field-code-field-code-a}
 
 Return the index (position) of the first argument in the subsequent arguments.
 
@@ -514,7 +512,7 @@ SELECT FIELD('needle', 'A', 'needle', 'in', 'a', 'haystack');
 1 row in set (0.00 sec)
 ```
 
-### [`FIND_IN_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_find-in-set)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_find-in-set"><code>FIND_IN_SET()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-find-in-set-code-find-in-set-code-a}
 
 Return the index position of the first argument within the second argument.
 
@@ -532,24 +530,24 @@ SELECT FIND_IN_SET('Go', 'COBOL,BASIC,Rust,Go,Java,Fortran');
 1 row in set (0.00 sec)
 ```
 
-### [`FORMAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_format)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_format"><code>FORMAT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-format-code-format-code-a}
 
 The `FORMAT(X,D[,locale])` function is used to format the number `X` to a format similar to `"#,###,###. ##"`, rounded to `D` decimal places, and return the result as a string.
 
 Arguments:
 
-- `X`: the number to be formatted. It can be a direct numeric value, a numeric string, or a number in scientific notation.
-- `D`: the number of decimal places for the returned value. The function rounds the number `X` to `D` decimal places. If `D` is greater than the actual number of decimal places in `X`, the result is padded with zeros to the corresponding length.
-- `[locale]`: specifies a locale setting to be used for grouping between decimal points, thousands separators, and separators for resultant numbers. A valid locale value is the same as the valid value of the [`lc_time_names`](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_lc_time_names) system variable. If not specified or the region setting is `NULL`, the `'en_US'` region setting is used by default. This argument is optional.
+-   `X`: the number to be formatted. It can be a direct numeric value, a numeric string, or a number in scientific notation.
+-   `D`: the number of decimal places for the returned value. The function rounds the number `X` to `D` decimal places. If `D` is greater than the actual number of decimal places in `X`, the result is padded with zeros to the corresponding length.
+-   `[locale]`: specifies a locale setting to be used for grouping between decimal points, thousands separators, and separators for resultant numbers. A valid locale value is the same as the valid value of the [`lc_time_names`](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_lc_time_names) system variable. If not specified or the region setting is `NULL`, the `'en_US'` region setting is used by default. This argument is optional.
 
 Behaviors:
 
-- If the first argument is a string and contains only numbers, the function returns a result based on that numeric value. For example, `FORMAT('12.34', 1)` and `FORMAT(12.34, 1)` return the same result.
-- If the first argument is a number represented in scientific notation (using `E/e`), the function returns the result based on that number. For example, `FORMAT('1E2', 3)` returns `100.000`.
-- If the first argument is a string starting with non-numeric characters, the function returns zero and a warning `(Code 1292)`. For example, `FORMAT('q12.36', 5)` returns `0.00000`, but also includes a warning `Warning (Code 1292): Truncated incorrect DOUBLE value: 'q12.36'`.
-- If the first argument is a string mixing numbers and non-numbers, the function returns a result based on the consecutive numeric part at the beginning of the argument, and also includes a warning `(Code 1292)`. For example, `FORMAT('12.36q56.78', 1)` returns the same numeric result as `FORMAT('12.36', 1)`, but includes a warning `Warning (Code 1292): Truncated incorrect DOUBLE value: '12.36q56.78'`.
-- If the second argument is zero or a negative number, the function truncates the decimal part and returns an integer.
-- If any of the arguments is `NULL`, the function returns `NULL`.
+-   If the first argument is a string and contains only numbers, the function returns a result based on that numeric value. For example, `FORMAT('12.34', 1)` and `FORMAT(12.34, 1)` return the same result.
+-   If the first argument is a number represented in scientific notation (using `E/e`), the function returns the result based on that number. For example, `FORMAT('1E2', 3)` returns `100.000`.
+-   If the first argument is a string starting with non-numeric characters, the function returns zero and a warning `(Code 1292)`. For example, `FORMAT('q12.36', 5)` returns `0.00000`, but also includes a warning `Warning (Code 1292): Truncated incorrect DOUBLE value: 'q12.36'`.
+-   If the first argument is a string mixing numbers and non-numbers, the function returns a result based on the consecutive numeric part at the beginning of the argument, and also includes a warning `(Code 1292)`. For example, `FORMAT('12.36q56.78', 1)` returns the same numeric result as `FORMAT('12.36', 1)`, but includes a warning `Warning (Code 1292): Truncated incorrect DOUBLE value: '12.36q56.78'`.
+-   If the second argument is zero or a negative number, the function truncates the decimal part and returns an integer.
+-   If any of the arguments is `NULL`, the function returns `NULL`.
 
 Examples:
 
@@ -582,12 +580,12 @@ mysql> SELECT FORMAT(12.36, 2);
 +------------------+
 ```
 
-### [`FROM_BASE64()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_from-base64)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_from-base64"><code>FROM_BASE64()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-from-base64-code-from-base64-code-a}
 
 The `FROM_BASE64()` function is used to decode a [Base64](https://datatracker.ietf.org/doc/html/rfc4648) encoded string and return the decoded result in its hexadecimal form.
 
-- This function accepts a single argument, that is, the Base64 encoded string to be decoded.
-- If the argument is `NULL` or not a valid Base64 encoded string, the `FROM_BASE64()` function returns `NULL`.
+-   This function accepts a single argument, that is, the Base64 encoded string to be decoded.
+-   If the argument is `NULL` or not a valid Base64 encoded string, the `FROM_BASE64()` function returns `NULL`.
 
 Examples:
 
@@ -629,13 +627,13 @@ mysql> SELECT FROM_BASE64('MTIzNDU2');
 +--------------------------------------------------+
 ```
 
-### [`HEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_hex)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_hex"><code>HEX()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-hex-code-hex-code-a}
 
 The `HEX()` function is used to convert the given argument into a string representation of its hexadecimal value. The argument can be either a string or a number.
 
-- If the argument is a string, `HEX(str)` returns a hexadecimal string representation of `str`. The function converts each byte of each character in `str` into two hexadecimal digits. For example, the character `a` in a UTF-8 or ASCII character set is represented as a binary value of `00111101`, or `61` in hexadecimal notation.
-- If the argument is a number, `HEX(n)` returns a hexadecimal string representation of `n`. The function treats the argument `n` as a `BIGINT` number, equivalent to using `CONV(n, 10, 16)`.
-- If the argument is `NULL`, the function returns `NULL`.
+-   If the argument is a string, `HEX(str)` returns a hexadecimal string representation of `str`. The function converts each byte of each character in `str` into two hexadecimal digits. For example, the character `a` in a UTF-8 or ASCII character set is represented as a binary value of `00111101`, or `61` in hexadecimal notation.
+-   If the argument is a number, `HEX(n)` returns a hexadecimal string representation of `n`. The function treats the argument `n` as a `BIGINT` number, equivalent to using `CONV(n, 10, 16)`.
+-   If the argument is `NULL`, the function returns `NULL`.
 
 > **Note:**
 >
@@ -679,13 +677,13 @@ SELECT HEX(NULL);
 +-----------+
 ```
 
-### [`INSERT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_insert)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_insert"><code>INSERT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-insert-code-insert-code-a}
 
 The `INSERT(str, pos, len, newstr)` function is used to replace a substring in `str` (that starts at position `pos` and is `len` characters long) with the string `newstr`. This function is multibyte safe.
 
-- If `pos` exceeds the length of `str`, the function returns the original string `str` without modification.
-- If `len` exceeds the remaining length of `str` from position `pos`, the function replaces the rest of the string from position `pos`.
-- If any argument is `NULL`, the function returns `NULL`.
+-   If `pos` exceeds the length of `str`, the function returns the original string `str` without modification.
+-   If `len` exceeds the remaining length of `str` from position `pos`, the function replaces the rest of the string from position `pos`.
+-   If any argument is `NULL`, the function returns `NULL`.
 
 Examples:
 
@@ -743,7 +741,7 @@ SELECT INSERT('あああああああ', 2, 3, 'xx');
 +---------------------------------------------+
 ```
 
-### [`INSTR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_instr)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_instr"><code>INSTR()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-instr-code-instr-code-a}
 
 The `INSTR(str, substr)` function is used to get the position of the first occurrence of `substr` in `str`. Each argument can be either a string or a number. This function is the same as the two-argument version of [`LOCATE(substr, str)`](#locate), but with the order of the arguments reversed.
 
@@ -751,9 +749,9 @@ The `INSTR(str, substr)` function is used to get the position of the first occur
 >
 > The case sensitivity of `INSTR(str, substr)` is determined by the [collations](/character-set-and-collation.md) used in TiDB. Binary collations (with the suffix `_bin`) are case-sensitive, while general collations (with the suffix `_general_ci` or `_ai_ci`, and) are case-insensitive.
 
-- If either argument is a number, the function treats the number as a string.
-- If `substr` is not in `str`, the function returns `0`. Otherwise, it returns the position of the first occurrence of `substr` in `str`.
-- If either argument is `NULL`, the function returns `NULL`.
+-   If either argument is a number, the function treats the number as a string.
+-   If `substr` is not in `str`, the function returns `0`. Otherwise, it returns the position of the first occurrence of `substr` in `str`.
+-   If either argument is `NULL`, the function returns `NULL`.
 
 Examples:
 
@@ -807,11 +805,11 @@ SELECT INSTR(0123, "12");
 +-------------------+
 ```
 
-### [`LCASE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lcase)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lcase"><code>LCASE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-lcase-code-lcase-code-a}
 
 The `LCASE(str)` function is a synonym for [`LOWER(str)`](#lower), which returns the lowercase of the given argument.
 
-### [`LEFT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_left)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_left"><code>LEFT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-left-code-left-code-a}
 
 The `LEFT()` function returns a specified number of characters from the left side of a string.
 
@@ -821,11 +819,11 @@ Syntax:
 LEFT(`str`, `len`)
 ```
 
-- `str`: the original string to extract characters. If `str` contains a multibyte character, the function counts it as a single code point.
-- `len`: the length of characters to be returned.
-    - If `len` is equal to or less than 0, the function returns an empty string.
-    - If `len` is equal to or greater than the length of `str`, the function returns the original `str`.
-- If any argument is `NULL`, the function returns `NULL`.
+-   `str`: the original string to extract characters. If `str` contains a multibyte character, the function counts it as a single code point.
+-   `len`: the length of characters to be returned.
+    -   If `len` is equal to or less than 0, the function returns an empty string.
+    -   If `len` is equal to or greater than the length of `str`, the function returns the original `str`.
+-   If any argument is `NULL`, the function returns `NULL`.
 
 Examples:
 
@@ -886,7 +884,7 @@ SELECT LEFT(NULL, 3);
 +------------------------------+
 ```
 
-### [`LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_length)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_length"><code>LENGTH()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-length-code-length-code-a}
 
 The `LENGTH()` function returns the length of a string in bytes.
 
@@ -928,14 +926,14 @@ SELECT LENGTH(NULL);
 +--------------+
 ```
 
-### [`LIKE`](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_like)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_like"><code>LIKE</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-comparison-functions-html-operator-like-code-like-code-a}
 
 The `LIKE` operator is used for simple string matching. The expression `expr LIKE pat [ESCAPE 'escape_char']` returns `1` (`TRUE`) or `0` (`FALSE`). If either `expr` or `pat` is `NULL`, the result is `NULL`.
 
 You can use the following two wildcard parameters with `LIKE`:
 
-- `%` matches any number of characters, including zero characters.
-- `_` matches exactly one character.
+-   `%` matches any number of characters, including zero characters.
+-   `_` matches exactly one character.
 
 The following examples use the `utf8mb4_bin` collation:
 
@@ -1065,13 +1063,13 @@ SELECT '🍣🍺Sushi🍣🍺' COLLATE utf8mb4_unicode_ci LIKE '%SUSHI%' AS resu
 +--------+
 ```
 
-### [`LOCATE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_locate)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_locate"><code>LOCATE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-locate-code-locate-code-a}
 
 The `LOCATE(substr, str[, pos])` function is used to get the position of the first occurrence of a specified substring `substr` in a string `str`. The `pos` argument is optional and specifies the starting position for the search.
 
-- If the substring `substr` is not present in `str`, the function returns `0`.
-- If any argument is `NULL`, the function returns `NULL`.
-- This function is multibyte safe and performs a case-sensitive search only if at least one argument is a binary string.
+-   If the substring `substr` is not present in `str`, the function returns `0`.
+-   If any argument is `NULL`, the function returns `NULL`.
+-   This function is multibyte safe and performs a case-sensitive search only if at least one argument is a binary string.
 
 The following examples use the `utf8mb4_bin` collation:
 
@@ -1244,13 +1242,13 @@ SELECT LOCATE(_binary'B', 'aBcde');
 +-----------------------------+
 ```
 
-### [`LOWER()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lower)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lower"><code>LOWER()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-lower-code-lower-code-a}
 
 The `LOWER(str)` function is used to convert all characters in the given argument `str` to lowercase. The argument can be either a string or a number.
 
-- If the argument is a string, the function returns the string in lowercase.
-- If the argument is a number, the function returns the number without leading zeros.
-- If the argument is `NULL`, the function returns `NULL`.
+-   If the argument is a string, the function returns the string in lowercase.
+-   If the argument is a number, the function returns the number without leading zeros.
+-   If the argument is `NULL`, the function returns `NULL`.
 
 Examples:
 
@@ -1274,13 +1272,13 @@ SELECT LOWER(-012);
 +-------------+
 ```
 
-### [`LPAD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lpad)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lpad"><code>LPAD()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-lpad-code-lpad-code-a}
 
 The `LPAD(str, len, padstr)` function returns the string argument, left-padded with the specified string `padstr` to a length of `len` characters.
 
-- If `len` is less than the length of the string `str`, the function truncates the string `str` to the length of `len`.
-- If `len` is a negative number, the function returns `NULL`.
-- If any argument is `NULL`, the function returns `NULL`.
+-   If `len` is less than the length of the string `str`, the function truncates the string `str` to the length of `len`.
+-   If `len` is a negative number, the function returns `NULL`.
+-   If any argument is `NULL`, the function returns `NULL`.
 
 Examples:
 
@@ -1314,7 +1312,7 @@ SELECT LPAD('TiDB',-2,'>');
 1 row in set (0.00 sec)
 ```
 
-### [`LTRIM()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ltrim)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ltrim"><code>LTRIM()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-ltrim-code-ltrim-code-a}
 
 The `LTRIM()` function removes leading spaces from a given string.
 
@@ -1332,14 +1330,12 @@ In the following example, the `LTRIM()` function removes the leading spaces from
 SELECT LTRIM('    hello');
 ```
 
-```
-+--------------------+
-| LTRIM('    hello') |
-+--------------------+
-| hello              |
-+--------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------+
+    | LTRIM('    hello') |
+    +--------------------+
+    | hello              |
+    +--------------------+
+    1 row in set (0.00 sec)
 
 In the following example, [`CONCAT()`](#concat) is used to enclose the result of `LTRIM('    hello')` with `«` and `»`. This formatting makes it a bit easier to see that all leading spaces are removed.
 
@@ -1347,16 +1343,14 @@ In the following example, [`CONCAT()`](#concat) is used to enclose the result of
 SELECT CONCAT('«',LTRIM('    hello'),'»');
 ```
 
-```
-+------------------------------------+
-| CONCAT('«',LTRIM('    hello'),'»') |
-+------------------------------------+
-| «hello»                            |
-+------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------+
+    | CONCAT('«',LTRIM('    hello'),'»') |
+    +------------------------------------+
+    | «hello»                            |
+    +------------------------------------+
+    1 row in set (0.00 sec)
 
-### [`MAKE_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_make-set)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_make-set"><code>MAKE_SET()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-make-set-code-make-set-code-a}
 
 The `MAKE_SET()` function returns a set of comma-separated strings based on whether a corresponding bit in the `bits` argument is set to `1`.
 
@@ -1366,8 +1360,8 @@ Syntax:
 MAKE_SET(bits, str1, str2, ...)
 ```
 
-- `bits`: controls which subsequent string arguments to include in the result set. If `bits` is set to `NULL`, the function returns `NULL`.
-- `str1, str2, ...`: a list of strings. Each string corresponds to a bit in the `bits` argument from right to left. `str1` corresponds to the first bit from the right, `str2` corresponds to the second bit from the right, and so on. If the corresponding bit is `1`, the string is included in the result; otherwise, it is not included.
+-   `bits`: controls which subsequent string arguments to include in the result set. If `bits` is set to `NULL`, the function returns `NULL`.
+-   `str1, str2, ...`: a list of strings. Each string corresponds to a bit in the `bits` argument from right to left. `str1` corresponds to the first bit from the right, `str2` corresponds to the second bit from the right, and so on. If the corresponding bit is `1`, the string is included in the result; otherwise, it is not included.
 
 Examples:
 
@@ -1377,14 +1371,12 @@ In the following example, because all bits are set to `0` in the `bits` argument
 SELECT MAKE_SET(b'000','foo','bar','baz');
 ```
 
-```
-+------------------------------------+
-| MAKE_SET(b'000','foo','bar','baz') |
-+------------------------------------+
-|                                    |
-+------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------+
+    | MAKE_SET(b'000','foo','bar','baz') |
+    +------------------------------------+
+    |                                    |
+    +------------------------------------+
+    1 row in set (0.00 sec)
 
 In the following example, because only the first bit from the right is `1`, the function only returns the first string `foo`.
 
@@ -1392,14 +1384,12 @@ In the following example, because only the first bit from the right is `1`, the 
 SELECT MAKE_SET(b'001','foo','bar','baz');
 ```
 
-```
-+------------------------------------+
-| MAKE_SET(b'001','foo','bar','baz') |
-+------------------------------------+
-| foo                                |
-+------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------+
+    | MAKE_SET(b'001','foo','bar','baz') |
+    +------------------------------------+
+    | foo                                |
+    +------------------------------------+
+    1 row in set (0.00 sec)
 
 In the following example, because only the second bit from the right is `1`, the function only returns the second string `bar`.
 
@@ -1407,14 +1397,12 @@ In the following example, because only the second bit from the right is `1`, the
 SELECT MAKE_SET(b'010','foo','bar','baz');
 ```
 
-```
-+------------------------------------+
-| MAKE_SET(b'010','foo','bar','baz') |
-+------------------------------------+
-| bar                                |
-+------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------+
+    | MAKE_SET(b'010','foo','bar','baz') |
+    +------------------------------------+
+    | bar                                |
+    +------------------------------------+
+    1 row in set (0.00 sec)
 
 In the following example, because only the third bit from the right is `1`, the function only returns the third string `baz`.
 
@@ -1422,14 +1410,12 @@ In the following example, because only the third bit from the right is `1`, the 
 SELECT MAKE_SET(b'100','foo','bar','baz');
 ```
 
-```
-+------------------------------------+
-| MAKE_SET(b'100','foo','bar','baz') |
-+------------------------------------+
-| baz                                |
-+------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------+
+    | MAKE_SET(b'100','foo','bar','baz') |
+    +------------------------------------+
+    | baz                                |
+    +------------------------------------+
+    1 row in set (0.00 sec)
 
 In the following example, because all bits are `1`, the function returns all three strings in a comma-separated result set.
 
@@ -1437,16 +1423,14 @@ In the following example, because all bits are `1`, the function returns all thr
 SELECT MAKE_SET(b'111','foo','bar','baz');
 ```
 
-```
-+------------------------------------+
-| MAKE_SET(b'111','foo','bar','baz') |
-+------------------------------------+
-| foo,bar,baz                        |
-+------------------------------------+
-1 row in set (0.0002 sec)
-```
+    +------------------------------------+
+    | MAKE_SET(b'111','foo','bar','baz') |
+    +------------------------------------+
+    | foo,bar,baz                        |
+    +------------------------------------+
+    1 row in set (0.0002 sec)
 
-### [`MID()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_mid)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_mid"><code>MID()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-mid-code-mid-code-a}
 
 The `MID(str, pos[, len])` function returns a substring starting from the specified `pos` position with the `len` length.
 
@@ -1462,14 +1446,12 @@ In the following example, `MID()` returns the substring of the input string star
 SELECT MID('abcdef',2,3);
 ```
 
-```
-+-------------------+
-| MID('abcdef',2,3) |
-+-------------------+
-| bcd               |
-+-------------------+
-1 row in set (0.00 sec)
-```
+    +-------------------+
+    | MID('abcdef',2,3) |
+    +-------------------+
+    | bcd               |
+    +-------------------+
+    1 row in set (0.00 sec)
 
 In the following example, `MID()` returns the substring of the input string starting from the second character (`b`) to the end of the string.
 
@@ -1477,16 +1459,14 @@ In the following example, `MID()` returns the substring of the input string star
 SELECT MID('abcdef',2);
 ```
 
-```
-+-------------------+
-| MID('abcdef',2)   |
-+-------------------+
-| bcdef             |
-+-------------------+
-1 row in set (0.00 sec)
-```
+    +-------------------+
+    | MID('abcdef',2)   |
+    +-------------------+
+    | bcdef             |
+    +-------------------+
+    1 row in set (0.00 sec)
 
-### [`NOT LIKE`](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_not-like)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_not-like"><code>NOT LIKE</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-comparison-functions-html-operator-not-like-code-not-like-code-a}
 
 Negation of simple pattern matching.
 
@@ -1500,14 +1480,12 @@ In the following example, `NOT LIKE` returns `0` (False) because `aaa` matches t
 SELECT 'aaa' LIKE 'a%', 'aaa' NOT LIKE 'a%';
 ```
 
-```
-+-----------------+---------------------+
-| 'aaa' LIKE 'a%' | 'aaa' NOT LIKE 'a%' |
-+-----------------+---------------------+
-|               1 |                   0 |
-+-----------------+---------------------+
-1 row in set (0.00 sec)
-```
+    +-----------------+---------------------+
+    | 'aaa' LIKE 'a%' | 'aaa' NOT LIKE 'a%' |
+    +-----------------+---------------------+
+    |               1 |                   0 |
+    +-----------------+---------------------+
+    1 row in set (0.00 sec)
 
 In the following example, `NOT LIKE` returns `1` (True) because `aaa` does not match the `b%` pattern.
 
@@ -1515,20 +1493,18 @@ In the following example, `NOT LIKE` returns `1` (True) because `aaa` does not m
 SELECT 'aaa' LIKE 'b%', 'aaa' NOT LIKE 'b%';
 ```
 
-```
-+-----------------+---------------------+
-| 'aaa' LIKE 'b%' | 'aaa' NOT LIKE 'b%' |
-+-----------------+---------------------+
-|               0 |                   1 |
-+-----------------+---------------------+
-1 row in set (0.00 sec)
-```
+    +-----------------+---------------------+
+    | 'aaa' LIKE 'b%' | 'aaa' NOT LIKE 'b%' |
+    +-----------------+---------------------+
+    |               0 |                   1 |
+    +-----------------+---------------------+
+    1 row in set (0.00 sec)
 
-### [`NOT REGEXP`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_not-regexp)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_not-regexp"><code>NOT REGEXP</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-regexp-html-operator-not-regexp-code-not-regexp-code-a}
 
 Negation of [`REGEXP`](#regexp).
 
-### [`OCT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_oct)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_oct"><code>OCT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-oct-code-oct-code-a}
 
 Return a string containing [octal](https://en.wikipedia.org/wiki/Octal) (base 8) representation of a number.
 
@@ -1545,40 +1521,38 @@ WITH RECURSIVE nr(n) AS (
 SELECT n, OCT(n) FROM nr;
 ```
 
-```
-+------+--------+
-| n    | OCT(n) |
-+------+--------+
-|    0 | 0      |
-|    1 | 1      |
-|    2 | 2      |
-|    3 | 3      |
-|    4 | 4      |
-|    5 | 5      |
-|    6 | 6      |
-|    7 | 7      |
-|    8 | 10     |
-|    9 | 11     |
-|   10 | 12     |
-|   11 | 13     |
-|   12 | 14     |
-|   13 | 15     |
-|   14 | 16     |
-|   15 | 17     |
-|   16 | 20     |
-|   17 | 21     |
-|   18 | 22     |
-|   19 | 23     |
-|   20 | 24     |
-+------+--------+
-20 rows in set (0.00 sec)
-```
+    +------+--------+
+    | n    | OCT(n) |
+    +------+--------+
+    |    0 | 0      |
+    |    1 | 1      |
+    |    2 | 2      |
+    |    3 | 3      |
+    |    4 | 4      |
+    |    5 | 5      |
+    |    6 | 6      |
+    |    7 | 7      |
+    |    8 | 10     |
+    |    9 | 11     |
+    |   10 | 12     |
+    |   11 | 13     |
+    |   12 | 14     |
+    |   13 | 15     |
+    |   14 | 16     |
+    |   15 | 17     |
+    |   16 | 20     |
+    |   17 | 21     |
+    |   18 | 22     |
+    |   19 | 23     |
+    |   20 | 24     |
+    +------+--------+
+    20 rows in set (0.00 sec)
 
-### [`OCTET_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_octet-length)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_octet-length"><code>OCTET_LENGTH()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-octet-length-code-octet-length-code-a}
 
 Synonym for [`LENGTH()`](#length).
 
-### [`ORD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ord)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ord"><code>ORD()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-ord-code-ord-code-a}
 
 Return the character code for the leftmost character of the given argument.
 
@@ -1592,14 +1566,12 @@ Taking `a` and `A` as an example, `ORD()` returns `97` for `a` and `65` for `A`.
 SELECT ORD('a'), ORD('A');
 ```
 
-```
-+----------+----------+
-| ORD('a') | ORD('A') |
-+----------+----------+
-|       97 |       65 |
-+----------+----------+
-1 row in set (0.00 sec)
-```
+    +----------+----------+
+    | ORD('a') | ORD('A') |
+    +----------+----------+
+    |       97 |       65 |
+    +----------+----------+
+    1 row in set (0.00 sec)
 
 If you take the character code obtained from `ORD()` as input, you can get the original characters back using the `CHAR()` function. Note that the output format might vary depending on whether the `binary-as-hex` option is enabled in your MySQL client.
 
@@ -1607,14 +1579,12 @@ If you take the character code obtained from `ORD()` as input, you can get the o
 SELECT CHAR(97), CHAR(65);
 ```
 
-```
-+----------+----------+
-| CHAR(97) | CHAR(65) |
-+----------+----------+
-| a        | A        |
-+----------+----------+
-1 row in set (0.01 sec)
-```
+    +----------+----------+
+    | CHAR(97) | CHAR(65) |
+    +----------+----------+
+    | a        | A        |
+    +----------+----------+
+    1 row in set (0.01 sec)
 
 The following example shows how `ORD()` handles multibyte characters. Here, both `101` and `0x65` are the UTF-8 encoded values for the `e` character, but in different formats. And both `50091` and `0xC3AB` represent the same values, but for the `ë` character.
 
@@ -1622,20 +1592,18 @@ The following example shows how `ORD()` handles multibyte characters. Here, both
 SELECT ORD('e'), ORD('ë'), HEX('e'), HEX('ë');
 ```
 
-```
-+----------+-----------+----------+-----------+
-| ORD('e') | ORD('ë')  | HEX('e') | HEX('ë')  |
-+----------+-----------+----------+-----------+
-|      101 |     50091 | 65       | C3AB      |
-+----------+-----------+----------+-----------+
-1 row in set (0.00 sec)
-```
+    +----------+-----------+----------+-----------+
+    | ORD('e') | ORD('ë')  | HEX('e') | HEX('ë')  |
+    +----------+-----------+----------+-----------+
+    |      101 |     50091 | 65       | C3AB      |
+    +----------+-----------+----------+-----------+
+    1 row in set (0.00 sec)
 
-### [`POSITION()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_position)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_position"><code>POSITION()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-position-code-position-code-a}
 
 Synonym for [`LOCATE()`](#locate).
 
-### [`QUOTE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_quote)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_quote"><code>QUOTE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-quote-code-quote-code-a}
 
 Escape the argument for use in an SQL statement.
 
@@ -1651,16 +1619,14 @@ The following example shows that the ASCII NULL character is escaped as `\0` and
 SELECT QUOTE(0x002774657374);
 ```
 
-```
-+-----------------------+
-| QUOTE(0x002774657374) |
-+-----------------------+
-| '\0\'test'            |
-+-----------------------+
-1 row in set (0.00 sec)
-```
+    +-----------------------+
+    | QUOTE(0x002774657374) |
+    +-----------------------+
+    | '\0\'test'            |
+    +-----------------------+
+    1 row in set (0.00 sec)
 
-### [`REGEXP`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp"><code>REGEXP</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-regexp-html-operator-regexp-code-regexp-code-a}
 
 Pattern matching using regular expressions.
 
@@ -1686,17 +1652,15 @@ FROM
     vals;
 ```
 
-```
-+----------+------------------+------------------------+
-| v        | starts with "Ti" | Length is 4 characters |
-+----------+------------------+------------------------+
-| TiDB     |                1 |                      1 |
-| Titanium |                1 |                      0 |
-| Tungsten |                0 |                      0 |
-| Rust     |                0 |                      1 |
-+----------+------------------+------------------------+
-4 rows in set (0.00 sec)
-```
+    +----------+------------------+------------------------+
+    | v        | starts with "Ti" | Length is 4 characters |
+    +----------+------------------+------------------------+
+    | TiDB     |                1 |                      1 |
+    | Titanium |                1 |                      0 |
+    | Tungsten |                0 |                      0 |
+    | Rust     |                0 |                      1 |
+    +----------+------------------+------------------------+
+    4 rows in set (0.00 sec)
 
 The following example demonstrates that `REGEXP` is not limited to the `SELECT` clause. For example, you can also use it in the `WHERE` clause of the query.
 
@@ -1710,16 +1674,14 @@ WHERE
     v REGEXP 'DB$';
 ```
 
-```
-+------+
-| v    |
-+------+
-| TiDB |
-+------+
-1 row in set (0.01 sec)
-```
+    +------+
+    | v    |
+    +------+
+    | TiDB |
+    +------+
+    1 row in set (0.01 sec)
 
-### [`REGEXP_INSTR()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-instr)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-instr"><code>REGEXP_INSTR()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-regexp-html-function-regexp-instr-code-regexp-instr-code-a}
 
 Return the starting index of the substring that matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
 
@@ -1735,14 +1697,12 @@ In the example below you can see that the `^.b.$` matches `abc`.
 SELECT REGEXP_INSTR('abc','^.b.$');
 ```
 
-```
-+-----------------------------+
-| REGEXP_INSTR('abc','^.b.$') |
-+-----------------------------+
-|                           1 |
-+-----------------------------+
-1 row in set (0.00 sec)
-```
+    +-----------------------------+
+    | REGEXP_INSTR('abc','^.b.$') |
+    +-----------------------------+
+    |                           1 |
+    +-----------------------------+
+    1 row in set (0.00 sec)
 
 The following example uses the third argument to look for a match with a different start position in the string.
 
@@ -1750,27 +1710,23 @@ The following example uses the third argument to look for a match with a differe
 SELECT REGEXP_INSTR('abcabc','a');
 ```
 
-```
-+----------------------------+
-| REGEXP_INSTR('abcabc','a') |
-+----------------------------+
-|                          1 |
-+----------------------------+
-1 row in set (0.00 sec)
-```
+    +----------------------------+
+    | REGEXP_INSTR('abcabc','a') |
+    +----------------------------+
+    |                          1 |
+    +----------------------------+
+    1 row in set (0.00 sec)
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','a',2);
 ```
 
-```
-+------------------------------+
-| REGEXP_INSTR('abcabc','a',2) |
-+------------------------------+
-|                            4 |
-+------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------+
+    | REGEXP_INSTR('abcabc','a',2) |
+    +------------------------------+
+    |                            4 |
+    +------------------------------+
+    1 row in set (0.00 sec)
 
 The following example uses the 4th argument to look for the second match.
 
@@ -1778,29 +1734,25 @@ The following example uses the 4th argument to look for the second match.
 SELECT REGEXP_INSTR('abcabc','a',1,2);
 ```
 
-```
-+--------------------------------+
-| REGEXP_INSTR('abcabc','a',1,2) |
-+--------------------------------+
-|                              4 |
-+--------------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------------+
+    | REGEXP_INSTR('abcabc','a',1,2) |
+    +--------------------------------+
+    |                              4 |
+    +--------------------------------+
+    1 row in set (0.00 sec)
 
-The following example uses the 5th argument to return the value _after_ the mach, instead of the value of the match.
+The following example uses the 5th argument to return the value *after* the mach, instead of the value of the match.
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','a',1,1,1);
 ```
 
-```
-+----------------------------------+
-| REGEXP_INSTR('abcabc','a',1,1,1) |
-+----------------------------------+
-|                                2 |
-+----------------------------------+
-1 row in set (0.00 sec)
-```
+    +----------------------------------+
+    | REGEXP_INSTR('abcabc','a',1,1,1) |
+    +----------------------------------+
+    |                                2 |
+    +----------------------------------+
+    1 row in set (0.00 sec)
 
 The following example uses the 6th argument to add the `i` flag to get a case insensitive match. For more details about regular expression `match_type`, see [`match_type` compatibility](#match_type-compatibility).
 
@@ -1808,27 +1760,23 @@ The following example uses the 6th argument to add the `i` flag to get a case in
 SELECT REGEXP_INSTR('abcabc','A',1,1,0,'');
 ```
 
-```
-+-------------------------------------+
-| REGEXP_INSTR('abcabc','A',1,1,0,'') |
-+-------------------------------------+
-|                                   0 |
-+-------------------------------------+
-1 row in set (0.00 sec)
-```
+    +-------------------------------------+
+    | REGEXP_INSTR('abcabc','A',1,1,0,'') |
+    +-------------------------------------+
+    |                                   0 |
+    +-------------------------------------+
+    1 row in set (0.00 sec)
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','A',1,1,0,'i');
 ```
 
-```
-+--------------------------------------+
-| REGEXP_INSTR('abcabc','A',1,1,0,'i') |
-+--------------------------------------+
-|                                    1 |
-+--------------------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------------------+
+    | REGEXP_INSTR('abcabc','A',1,1,0,'i') |
+    +--------------------------------------+
+    |                                    1 |
+    +--------------------------------------+
+    1 row in set (0.00 sec)
 
 Besides `match_type`, the [collation](/character-set-and-collation.md) also influences the matching. The following example uses a case-sensitive and a case-insensitive collation to demonstrate this.
 
@@ -1836,29 +1784,25 @@ Besides `match_type`, the [collation](/character-set-and-collation.md) also infl
 SELECT REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_general_ci);
 ```
 
-```
-+-------------------------------------------------------+
-| REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_general_ci) |
-+-------------------------------------------------------+
-|                                                     1 |
-+-------------------------------------------------------+
-1 row in set (0.01 sec)
-```
+    +-------------------------------------------------------+
+    | REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_general_ci) |
+    +-------------------------------------------------------+
+    |                                                     1 |
+    +-------------------------------------------------------+
+    1 row in set (0.01 sec)
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_bin);
 ```
 
-```
-+------------------------------------------------+
-| REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_bin) |
-+------------------------------------------------+
-|                                              0 |
-+------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------------------+
+    | REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_bin) |
+    +------------------------------------------------+
+    |                                              0 |
+    +------------------------------------------------+
+    1 row in set (0.00 sec)
 
-### [`REGEXP_LIKE()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-like)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-like"><code>REGEXP_LIKE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-regexp-html-function-regexp-like-code-regexp-like-code-a}
 
 Whether the string matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
 
@@ -1872,14 +1816,12 @@ The following example shows that `^a` matches `abc`.
 SELECT REGEXP_LIKE('abc','^a');
 ```
 
-```
-+-------------------------+
-| REGEXP_LIKE('abc','^a') |
-+-------------------------+
-|                       1 |
-+-------------------------+
-1 row in set (0.00 sec)
-```
+    +-------------------------+
+    | REGEXP_LIKE('abc','^a') |
+    +-------------------------+
+    |                       1 |
+    +-------------------------+
+    1 row in set (0.00 sec)
 
 This following example shows that `^A` does not match `abc`.
 
@@ -1887,14 +1829,12 @@ This following example shows that `^A` does not match `abc`.
 SELECT REGEXP_LIKE('abc','^A');
 ```
 
-```
-+-------------------------+
-| REGEXP_LIKE('abc','^A') |
-+-------------------------+
-|                       0 |
-+-------------------------+
-1 row in set (0.00 sec)
-```
+    +-------------------------+
+    | REGEXP_LIKE('abc','^A') |
+    +-------------------------+
+    |                       0 |
+    +-------------------------+
+    1 row in set (0.00 sec)
 
 This example matches `^A` against `abc`, which now matches because of the `i` flag which enabled case insensitive matching. For more details about the regular expression `match_type`, see [`match_type` compatibility](#match_type-compatibility).
 
@@ -1902,16 +1842,14 @@ This example matches `^A` against `abc`, which now matches because of the `i` fl
 SELECT REGEXP_LIKE('abc','^A','i');
 ```
 
-```
-+-----------------------------+
-| REGEXP_LIKE('abc','^A','i') |
-+-----------------------------+
-|                           1 |
-+-----------------------------+
-1 row in set (0.00 sec)
-```
+    +-----------------------------+
+    | REGEXP_LIKE('abc','^A','i') |
+    +-----------------------------+
+    |                           1 |
+    +-----------------------------+
+    1 row in set (0.00 sec)
 
-### [`REGEXP_REPLACE()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-replace)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-replace"><code>REGEXP_REPLACE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-regexp-html-function-regexp-replace-code-regexp-replace-code-a}
 
 Replace substrings that match the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
 
@@ -1925,14 +1863,12 @@ In the following example, two o's are replaced by `i`.
 SELECT REGEXP_REPLACE('TooDB', 'o{2}', 'i');
 ```
 
-```
-+--------------------------------------+
-| REGEXP_REPLACE('TooDB', 'o{2}', 'i') |
-+--------------------------------------+
-| TiDB                                 |
-+--------------------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------------------+
+    | REGEXP_REPLACE('TooDB', 'o{2}', 'i') |
+    +--------------------------------------+
+    | TiDB                                 |
+    +--------------------------------------+
+    1 row in set (0.00 sec)
 
 The following example starts the match at the third character, causing the regular expression not to match and not do any replacement.
 
@@ -1940,14 +1876,12 @@ The following example starts the match at the third character, causing the regul
 SELECT REGEXP_REPLACE('TooDB', 'o{2}', 'i',3);
 ```
 
-```
-+----------------------------------------+
-| REGEXP_REPLACE('TooDB', 'o{2}', 'i',3) |
-+----------------------------------------+
-| TooDB                                  |
-+----------------------------------------+
-1 row in set (0.00 sec)
-```
+    +----------------------------------------+
+    | REGEXP_REPLACE('TooDB', 'o{2}', 'i',3) |
+    +----------------------------------------+
+    | TooDB                                  |
+    +----------------------------------------+
+    1 row in set (0.00 sec)
 
 In the following example, the 5th argument is used to set if the first or the second match is used for the replacement.
 
@@ -1955,27 +1889,23 @@ In the following example, the 5th argument is used to set if the first or the se
 SELECT REGEXP_REPLACE('TooDB', 'o', 'i',1,1);
 ```
 
-```
-+---------------------------------------+
-| REGEXP_REPLACE('TooDB', 'o', 'i',1,1) |
-+---------------------------------------+
-| TioDB                                 |
-+---------------------------------------+
-1 row in set (0.00 sec)
-```
+    +---------------------------------------+
+    | REGEXP_REPLACE('TooDB', 'o', 'i',1,1) |
+    +---------------------------------------+
+    | TioDB                                 |
+    +---------------------------------------+
+    1 row in set (0.00 sec)
 
 ```sql
 SELECT REGEXP_REPLACE('TooDB', 'o', 'i',1,2);
 ```
 
-```
-+---------------------------------------+
-| REGEXP_REPLACE('TooDB', 'o', 'i',1,2) |
-+---------------------------------------+
-| ToiDB                                 |
-+---------------------------------------+
-1 row in set (0.00 sec)
-```
+    +---------------------------------------+
+    | REGEXP_REPLACE('TooDB', 'o', 'i',1,2) |
+    +---------------------------------------+
+    | ToiDB                                 |
+    +---------------------------------------+
+    1 row in set (0.00 sec)
 
 The following example uses the 6th argument to set the `match_type` for case insensitive matching. For more details about the regular expression `match_type`, see [`match_type` compatibility](#match_type-compatibility).
 
@@ -1983,29 +1913,25 @@ The following example uses the 6th argument to set the `match_type` for case ins
 SELECT REGEXP_REPLACE('TooDB', 'O{2}','i',1,1);
 ```
 
-```
-+-----------------------------------------+
-| REGEXP_REPLACE('TooDB', 'O{2}','i',1,1) |
-+-----------------------------------------+
-| TooDB                                   |
-+-----------------------------------------+
-1 row in set (0.00 sec)
-```
+    +-----------------------------------------+
+    | REGEXP_REPLACE('TooDB', 'O{2}','i',1,1) |
+    +-----------------------------------------+
+    | TooDB                                   |
+    +-----------------------------------------+
+    1 row in set (0.00 sec)
 
 ```sql
 SELECT REGEXP_REPLACE('TooDB', 'O{2}','i',1,1,'i');
 ```
 
-```
-+---------------------------------------------+
-| REGEXP_REPLACE('TooDB', 'O{2}','i',1,1,'i') |
-+---------------------------------------------+
-| TiDB                                        |
-+---------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +---------------------------------------------+
+    | REGEXP_REPLACE('TooDB', 'O{2}','i',1,1,'i') |
+    +---------------------------------------------+
+    | TiDB                                        |
+    +---------------------------------------------+
+    1 row in set (0.00 sec)
 
-### [`REGEXP_SUBSTR()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-substr)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-substr"><code>REGEXP_SUBSTR()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-regexp-html-function-regexp-substr-code-regexp-substr-code-a}
 
 Return the substring that matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
 
@@ -2017,16 +1943,14 @@ The following example uses the `Ti.{2}` regular expression to get the `TiDB` sub
 SELECT REGEXP_SUBSTR('This is TiDB','Ti.{2}');
 ```
 
-```
-+----------------------------------------+
-| REGEXP_SUBSTR('This is TiDB','Ti.{2}') |
-+----------------------------------------+
-| TiDB                                   |
-+----------------------------------------+
-1 row in set (0.00 sec)
-```
+    +----------------------------------------+
+    | REGEXP_SUBSTR('This is TiDB','Ti.{2}') |
+    +----------------------------------------+
+    | TiDB                                   |
+    +----------------------------------------+
+    1 row in set (0.00 sec)
 
-### [`REPEAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_repeat)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_repeat"><code>REPEAT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-repeat-code-repeat-code-a}
 
 Repeat a string the specified number of times.
 
@@ -2043,33 +1967,31 @@ WITH RECURSIVE nr(n) AS (
 SELECT n, REPEAT('x',n) FROM nr;
 ```
 
-```
-+------+----------------------+
-| n    | REPEAT('x',n)        |
-+------+----------------------+
-|    1 | x                    |
-|    2 | xx                   |
-|    3 | xxx                  |
-|    4 | xxxx                 |
-|    5 | xxxxx                |
-|    6 | xxxxxx               |
-|    7 | xxxxxxx              |
-|    8 | xxxxxxxx             |
-|    9 | xxxxxxxxx            |
-|   10 | xxxxxxxxxx           |
-|   11 | xxxxxxxxxxx          |
-|   12 | xxxxxxxxxxxx         |
-|   13 | xxxxxxxxxxxxx        |
-|   14 | xxxxxxxxxxxxxx       |
-|   15 | xxxxxxxxxxxxxxx      |
-|   16 | xxxxxxxxxxxxxxxx     |
-|   17 | xxxxxxxxxxxxxxxxx    |
-|   18 | xxxxxxxxxxxxxxxxxx   |
-|   19 | xxxxxxxxxxxxxxxxxxx  |
-|   20 | xxxxxxxxxxxxxxxxxxxx |
-+------+----------------------+
-20 rows in set (0.01 sec)
-```
+    +------+----------------------+
+    | n    | REPEAT('x',n)        |
+    +------+----------------------+
+    |    1 | x                    |
+    |    2 | xx                   |
+    |    3 | xxx                  |
+    |    4 | xxxx                 |
+    |    5 | xxxxx                |
+    |    6 | xxxxxx               |
+    |    7 | xxxxxxx              |
+    |    8 | xxxxxxxx             |
+    |    9 | xxxxxxxxx            |
+    |   10 | xxxxxxxxxx           |
+    |   11 | xxxxxxxxxxx          |
+    |   12 | xxxxxxxxxxxx         |
+    |   13 | xxxxxxxxxxxxx        |
+    |   14 | xxxxxxxxxxxxxx       |
+    |   15 | xxxxxxxxxxxxxxx      |
+    |   16 | xxxxxxxxxxxxxxxx     |
+    |   17 | xxxxxxxxxxxxxxxxx    |
+    |   18 | xxxxxxxxxxxxxxxxxx   |
+    |   19 | xxxxxxxxxxxxxxxxxxx  |
+    |   20 | xxxxxxxxxxxxxxxxxxxx |
+    +------+----------------------+
+    20 rows in set (0.01 sec)
 
 The following example demonstrates that `REPEAT()` can operate on strings consisting of multiple characters.
 
@@ -2077,56 +1999,54 @@ The following example demonstrates that `REPEAT()` can operate on strings consis
 SELECT REPEAT('ha',3);
 ```
 
-```
-+----------------+
-| REPEAT('ha',3) |
-+----------------+
-| hahaha         |
-+----------------+
-1 row in set (0.00 sec)
-```
+    +----------------+
+    | REPEAT('ha',3) |
+    +----------------+
+    | hahaha         |
+    +----------------+
+    1 row in set (0.00 sec)
 
-### [`REPLACE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_replace)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_replace"><code>REPLACE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-replace-code-replace-code-a}
 
 Replace occurrences of a specified string.
 
-### [`REVERSE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_reverse)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_reverse"><code>REVERSE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-reverse-code-reverse-code-a}
 
 Reverse the characters in a string.
 
-### [`RIGHT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_right)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_right"><code>RIGHT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-right-code-right-code-a}
 
 Return the specified rightmost number of characters.
 
-### [`RLIKE`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp"><code>RLIKE</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-regexp-html-operator-regexp-code-rlike-code-a}
 
 Synonym for [`REGEXP`](#regexp).
 
-### [`RPAD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_rpad)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_rpad"><code>RPAD()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-rpad-code-rpad-code-a}
 
 Append string the specified number of times.
 
-### [`RTRIM()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_rtrim)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_rtrim"><code>RTRIM()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-rtrim-code-rtrim-code-a}
 
 Remove trailing spaces.
 
-### [`SPACE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_space)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_space"><code>SPACE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-space-code-space-code-a}
 
 Return a string of the specified number of spaces.
 
-### [`STRCMP()`](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#function_strcmp)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#function_strcmp"><code>STRCMP()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-comparison-functions-html-function-strcmp-code-strcmp-code-a}
 
 Compare two strings.
 
-### [`SUBSTR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substr)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substr"><code>SUBSTR()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-substr-code-substr-code-a}
 
 Return the substring as specified.
 
-### [`SUBSTRING()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substring)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substring"><code>SUBSTRING()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-substring-code-substring-code-a}
 
 Return the substring as specified.
 
-### [`SUBSTRING_INDEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substring-index)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substring-index"><code>SUBSTRING_INDEX()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-substring-index-code-substring-index-code-a}
 
 The `SUBSTRING_INDEX()` function is used to extract a substring from a string based on a specified delimiter and count. This function is particularly useful when dealing with data separated by a specific delimiter, such as parsing CSV data or processing log files.
 
@@ -2136,12 +2056,12 @@ Syntax:
 SUBSTRING_INDEX(str, delim, count)
 ```
 
-- `str`: specifies the string to be processed.
-- `delim`: specifies the delimiter in the string, which is case-sensitive.
-- `count`: specifies the number of occurrences of the delimiter.
-    - If `count` is a positive number, the function returns the substring before the `count` occurrences (counting from the left of the string) of the delimiter.
-    - If `count` is a negative number, the function returns the substring after the `count` occurrences (counting from the right of the string) of the delimiter.
-    - If `count` is `0`, the function returns an empty string.
+-   `str`: specifies the string to be processed.
+-   `delim`: specifies the delimiter in the string, which is case-sensitive.
+-   `count`: specifies the number of occurrences of the delimiter.
+    -   If `count` is a positive number, the function returns the substring before the `count` occurrences (counting from the left of the string) of the delimiter.
+    -   If `count` is a negative number, the function returns the substring after the `count` occurrences (counting from the right of the string) of the delimiter.
+    -   If `count` is `0`, the function returns an empty string.
 
 Example 1:
 
@@ -2175,7 +2095,7 @@ Output 2:
 +------------------------------------------+
 ```
 
-### [`TO_BASE64()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_to-base64)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_to-base64"><code>TO_BASE64()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-to-base64-code-to-base64-code-a}
 
 The `TO_BASE64()` function is used to convert the given argument to a string in the base-64 encoded form and return the result according to the character set and collation of the current connection. A base-64 encoded string can be decoded using the [`FROM_BASE64()`](#from_base64) function.
 
@@ -2185,8 +2105,8 @@ Syntax:
 TO_BASE64(str)
 ```
 
-- If the argument is not a string, the function converts it to a string before base-64 encoding.
-- If the argument is `NULL`, the function returns `NULL`.
+-   If the argument is not a string, the function converts it to a string before base-64 encoding.
+-   If the argument is `NULL`, the function returns `NULL`.
 
 Example 1:
 
@@ -2220,15 +2140,15 @@ Output 2:
 +--------------+
 ```
 
-### [`TRANSLATE()`](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/TRANSLATE.html#GUID-80F85ACB-092C-4CC7-91F6-B3A585E3A690)
+### <a href="https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/TRANSLATE.html#GUID-80F85ACB-092C-4CC7-91F6-B3A585E3A690"><code>TRANSLATE()</code></a> {#a-href-https-docs-oracle-com-en-database-oracle-oracle-database-21-sqlrf-translate-html-guid-80f85acb-092c-4cc7-91f6-b3a585e3a690-code-translate-code-a}
 
 Replace all occurrences of characters by other characters in a string. It does not treat empty strings as `NULL` as Oracle does.
 
-### [`TRIM()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_trim)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_trim"><code>TRIM()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-trim-code-trim-code-a}
 
 Remove leading and trailing spaces.
 
-### [`UCASE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ucase)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ucase"><code>UCASE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-ucase-code-ucase-code-a}
 
 The `UCASE()` function is used to convert a string to uppercase letters. This function is equivalent to the `UPPER()` function.
 
@@ -2252,14 +2172,14 @@ Output:
 +--------------+-------------+
 ```
 
-### [`UNHEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_unhex)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_unhex"><code>UNHEX()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-unhex-code-unhex-code-a}
 
 The `UNHEX()` function performs the reverse operation of the `HEX()` function. It treats each pair of characters in the argument as a hexadecimal number and converts it to the character represented by that number, returning the result as a binary string.
 
 > **Note:**
 >
-> - The argument must be a valid hexadecimal value that contains `0`–`9`, `A`–`F`, or `a`–`f`. If the argument is `NULL` or falls outside this range, the function returns `NULL`.
-> - In the MySQL client, the [`--binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex) option is enabled by default in interactive mode, causing the client to display data with an unknown character set as a [hexadecimal literal](https://dev.mysql.com/doc/refman/8.0/en/hexadecimal-literals.html). You can use the `--skip-binary-as-hex` option to disable this behavior.
+> -   The argument must be a valid hexadecimal value that contains `0`–`9`, `A`–`F`, or `a`–`f`. If the argument is `NULL` or falls outside this range, the function returns `NULL`.
+> -   In the MySQL client, the [`--binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex) option is enabled by default in interactive mode, causing the client to display data with an unknown character set as a [hexadecimal literal](https://dev.mysql.com/doc/refman/8.0/en/hexadecimal-literals.html). You can use the `--skip-binary-as-hex` option to disable this behavior.
 
 Example:
 
@@ -2277,7 +2197,7 @@ Output:
 +--------------------------------------+
 ```
 
-### [`UPPER()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_upper)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_upper"><code>UPPER()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-upper-code-upper-code-a}
 
 The `UPPER()` function is used to convert a string to uppercase letters. This function is equivalent to the `UCASE()` function.
 
@@ -2301,7 +2221,7 @@ Output:
 +--------------+-------------+
 ```
 
-### [`WEIGHT_STRING()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_weight-string)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_weight-string"><code>WEIGHT_STRING()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-weight-string-code-weight-string-code-a}
 
 The `WEIGHT_STRING()` function returns the weight string (binary characters) for the input string, primarily used for sorting and comparison operations in multi-character set scenarios. If the argument is `NULL`, it returns `NULL`. The syntax is as follows:
 
@@ -2309,9 +2229,9 @@ The `WEIGHT_STRING()` function returns the weight string (binary characters) for
 WEIGHT_STRING(str [AS {CHAR|BINARY}(N)])
 ```
 
-- `str`: the input string expression. If it is a non-binary string, such as a `CHAR`, `VARCHAR`, or `TEXT` value, the return value contains the collation weights for the string. If it is a binary string, such as a `BINARY`, `VARBINARY`, or `BLOB` value, the return value is the same as the input.
+-   `str`: the input string expression. If it is a non-binary string, such as a `CHAR`, `VARCHAR`, or `TEXT` value, the return value contains the collation weights for the string. If it is a binary string, such as a `BINARY`, `VARBINARY`, or `BLOB` value, the return value is the same as the input.
 
-- `AS {CHAR|BINARY}(N)`: optional parameters used to specify the type and length of the output. `CHAR` represents the character data type, and `BINARY` represents the binary data type. `N` specifies the output length, which is an integer greater than or equal to 1.
+-   `AS {CHAR|BINARY}(N)`: optional parameters used to specify the type and length of the output. `CHAR` represents the character data type, and `BINARY` represents the binary data type. `N` specifies the output length, which is an integer greater than or equal to 1.
 
 > **Note:**
 >
@@ -2334,55 +2254,56 @@ Output:
 +-------------+---------------+
 ```
 
-## Unsupported functions
+## Unsupported functions {#unsupported-functions}
 
-* `LOAD_FILE()`
-* `MATCH()`
-* `SOUNDEX()`
+-   `LOAD_FILE()`
+-   `MATCH()`
+-   `SOUNDEX()`
 
-## Regular expression compatibility with MySQL
+## Regular expression compatibility with MySQL {#regular-expression-compatibility-with-mysql}
 
 The following sections describe the regular expression compatibility with MySQL, including `REGEXP_INSTR()`, `REGEXP_LIKE()`, `REGEXP_REPLACE()`, and `REGEXP_SUBSTR()`.
 
-### Syntax compatibility
+### Syntax compatibility {#syntax-compatibility}
 
 MySQL implements regular expression using International Components for Unicode (ICU), and TiDB uses RE2. To learn the syntax differences between the two libraries, you can refer to the [ICU documentation](https://unicode-org.github.io/icu/userguide/) and [RE2 Syntax](https://github.com/google/re2/wiki/Syntax).
 
-### `match_type` compatibility
+### <code>match_type</code> compatibility {#code-match-type-code-compatibility}
 
 The value options of `match_type` between TiDB and MySQL are:
 
-- Value options in TiDB are `"c"`, `"i"`, `"m"`, and `"s"`, and value options in MySQL are `"c"`, `"i"`, `"m"`, `"n"`, and `"u"`.
-- The `"s"` in TiDB corresponds to `"n"` in MySQL. When `"s"` is set in TiDB, the `.` character also matches line terminators (`\n`).
+-   Value options in TiDB are `"c"`, `"i"`, `"m"`, and `"s"`, and value options in MySQL are `"c"`, `"i"`, `"m"`, `"n"`, and `"u"`.
+
+-   The `"s"` in TiDB corresponds to `"n"` in MySQL. When `"s"` is set in TiDB, the `.` character also matches line terminators (`\n`).
 
     For example, the `SELECT REGEXP_LIKE(a, b, "n") FROM t1` in MySQL is the same as the `SELECT REGEXP_LIKE(a, b, "s") FROM t1` in TiDB.
 
-- TiDB does not support `"u"`, which means Unix-only line endings in MySQL.
+-   TiDB does not support `"u"`, which means Unix-only line endings in MySQL.
 
 | `match_type` | MySQL | TiDB | Description                            |
-|:------------:|-------|------|----------------------------------------|
-| c            | Yes   | Yes  | Case-sensitive matching                |
-| i            | Yes   | Yes  | Case-insensitive matching              |
-| m            | Yes   | Yes  | Multi-line mode                        |
-| s            | No    | Yes  | Matches newlines, same as `n` in MySQL |
-| n            | Yes   | No   | Matches newlines, same as `s` in TiDB  |
-| u            | Yes   | No   | UNIX&trade; line endings               |
+| :----------: | ----- | ---- | -------------------------------------- |
+|       c      | Yes   | Yes  | Case-sensitive matching                |
+|       i      | Yes   | Yes  | Case-insensitive matching              |
+|       m      | Yes   | Yes  | Multi-line mode                        |
+|       s      | No    | Yes  | Matches newlines, same as `n` in MySQL |
+|       n      | Yes   | No   | Matches newlines, same as `s` in TiDB  |
+|       u      | Yes   | No   | UNIX™ line endings                     |
 
-### Data type compatibility
+### Data type compatibility {#data-type-compatibility}
 
 The difference between TiDB and MySQL support for the binary string type:
 
-- MySQL does not support binary strings in regular expression functions since 8.0.22. For more details, refer to [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/regexp.html). But in practice, regular functions can work in MySQL when all parameters or return types are binary strings. Otherwise, an error will be reported.
-- Currently, TiDB prohibits using binary strings and an error will be reported under any circumstances.
+-   MySQL does not support binary strings in regular expression functions since 8.0.22. For more details, refer to [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/regexp.html). But in practice, regular functions can work in MySQL when all parameters or return types are binary strings. Otherwise, an error will be reported.
+-   Currently, TiDB prohibits using binary strings and an error will be reported under any circumstances.
 
-### Other compatibility
+### Other compatibility {#other-compatibility}
 
-- The behavior of replacing empty strings in TiDB is different from MySQL. Taking `REGEXP_REPLACE("", "^$", "123")` as an example:
+-   The behavior of replacing empty strings in TiDB is different from MySQL. Taking `REGEXP_REPLACE("", "^$", "123")` as an example:
 
-    - MySQL does not replace the empty string and returns `""` as the result.
-    - TiDB replaces the empty string and returns `"123"` as the result.
+    -   MySQL does not replace the empty string and returns `""` as the result.
+    -   TiDB replaces the empty string and returns `"123"` as the result.
 
-- The keyword used for capturing groups in TiDB is different from MySQL. MySQL uses `$` as the keyword, while TiDB uses `\\` as the keyword. In addition, TiDB only supports capturing groups numbered from `0` to `9`.
+-   The keyword used for capturing groups in TiDB is different from MySQL. MySQL uses `$` as the keyword, while TiDB uses `\\` as the keyword. In addition, TiDB only supports capturing groups numbered from `0` to `9`.
 
     For example, the following SQL statement returns `ab` in TiDB:
 
@@ -2390,6 +2311,6 @@ The difference between TiDB and MySQL support for the binary string type:
     SELECT REGEXP_REPLACE('abcd','(.*)(.{2})$','\\1') AS s;
     ```
 
-### Known issues
+### Known issues {#known-issues}
 
-- [GitHub Issue #37981](https://github.com/pingcap/tidb/issues/37981)
+-   [GitHub Issue #37981](https://github.com/pingcap/tidb/issues/37981)

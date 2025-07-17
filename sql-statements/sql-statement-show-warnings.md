@@ -1,20 +1,20 @@
 ---
-title: SHOW WARNINGS | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW WARNINGS for the TiDB database.
+title: SHOW WARNINGS | TiDB SQL 语句参考
+summary: 关于 TiDB 数据库中 SHOW WARNINGS 的用法概述。
 ---
 
 # SHOW WARNINGS
 
-This statement shows a list of warnings that occurred for previously executed statements in the current client connection. As in MySQL, the `sql_mode` impacts which statements will cause errors vs. warnings considerably.
+该语句显示在当前客户端连接中之前执行的语句所发生的警告列表。与 MySQL 一样，`sql_mode` 会显著影响哪些语句会引发错误与警告。
 
-## Synopsis
+## 概述
 
 ```ebnf+diagram
 ShowWarningsStmt ::=
     "SHOW" "WARNINGS"
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> CREATE TABLE t1 (a INT UNSIGNED);
@@ -74,10 +74,10 @@ mysql> SELECT * FROM t1;
 
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `SHOW WARNINGS` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中的 `SHOW WARNINGS` 语句与 MySQL 完全兼容。如果你发现任何兼容性差异，[请报告一个 bug](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 相关链接
 
 * [SHOW ERRORS](/sql-statements/sql-statement-show-errors.md)

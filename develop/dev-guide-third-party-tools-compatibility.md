@@ -1,247 +1,247 @@
 ---
-title: Known Incompatibility Issues with Third-Party Tools
-summary: Describes TiDB compatibility issues with third-party tools found during testing.
+title: 与第三方工具的已知不兼容问题
+summary: 描述在测试过程中发现的 TiDB 与第三方工具的兼容性问题。
 ---
 
-# Known Incompatibility Issues with Third-Party Tools
+# 与第三方工具的已知不兼容问题
 
 > **Note:**
 >
-> The [Unsupported features](/mysql-compatibility.md#unsupported-features) section lists the unsupported features in TiDB, including:
+> [Unsupported features](/mysql-compatibility.md#unsupported-features) 部分列出了 TiDB 不支持的功能，包括：
 >
-> - Stored procedures and functions
-> - Triggers
-> - Events
-> - User-defined functions
-> - `SPATIAL` functions, data types and indexes
-> - `XA` syntax
+> - 存储过程和函数
+> - 触发器
+> - 事件
+> - 用户定义函数
+> - `SPATIAL` 函数、数据类型和索引
+> - `XA` 语法
 >
-> The preceding unsupported features are expected behavior and are not listed in this document. For more details, see [MySQL Compatibility](/mysql-compatibility.md).
+> 以上不支持的功能属于预期行为，不在本文档列出。更多详情请参见 [MySQL Compatibility](/mysql-compatibility.md)。
 
-The incompatibility issues listed in this document are found in some [third-party tools supported by TiDB](/develop/dev-guide-third-party-tools-compatibility.md).
+本文档中列出的不兼容问题是在某些 [TiDB 支持的第三方工具](/develop/dev-guide-third-party-tools-compatibility.md) 中发现的。
 
-## General incompatibility
+## 一般不兼容问题
 
-### `SELECT CONNECTION_ID()` returns a 64-bit integer in TiDB
+### `SELECT CONNECTION_ID()` 在 TiDB 中返回 64 位整数
 
-**Description**
+**描述**
 
-The `SELECT CONNECTION_ID()` function returns a 64-bit integer in TiDB, such as `2199023260887`, while it returns a 32-bit integer in MySQL, such as `391650`.
+在 TiDB 中，`SELECT CONNECTION_ID()` 返回一个 64 位整数，例如 `2199023260887`，而在 MySQL 中返回一个 32 位整数，例如 `391650`。
 
-**Way to avoid**
+**避免方式**
 
-In a TiDB application, to avoid data overflow, you should use a 64-bit integer or string type to store the result of `SELECT CONNECTION_ID()`. For example, you can use `Long` or `String` in Java and use `string` in JavaScript or TypeScript.
+在 TiDB 应用中，为避免数据溢出，应使用 64 位整数或字符串类型存储 `SELECT CONNECTION_ID()` 的结果。例如，在 Java 中可以使用 `Long` 或 `String`，在 JavaScript 或 TypeScript 中可以使用 `string`。
 
-### TiDB does not maintain `Com_*` counters
+### TiDB 不维护 `Com_*` 计数器
 
-**Description**
+**描述**
 
-MySQL maintains a series of [server status variables starting with `Com_`](https://dev.mysql.com/doc/refman/8.0/en/server-status-variables.html#statvar_Com_xxx) to keep track of the total number of operations you have performed on the database. For example, `Com_select` records the total number of `SELECT` statements initiated by MySQL since it was last started (even if the statements were not queried successfully). TiDB does not maintain these variables. You can use the statement [<code>SHOW GLOBAL STATUS LIKE 'Com_%'</code>](/sql-statements/sql-statement-show-status.md) to see the difference between TiDB and MySQL.
+MySQL 维护一系列以 `Com_` 开头的 [服务器状态变量](https://dev.mysql.com/doc/refman/8.0/en/server-status-variables.html#statvar_Com_xxx)，用于统计自上次启动以来执行的操作总数。例如，`Com_select` 记录自上次启动后由 MySQL 发起的 `SELECT` 语句总数（即使这些语句未成功查询）。TiDB 不维护这些变量。你可以使用语句 [<code>SHOW GLOBAL STATUS LIKE 'Com_%'</code>](/sql-statements/sql-statement-show-status.md) 查看 TiDB 和 MySQL 之间的差异。
 
-**Way to avoid**
+**避免方式**
 
 <CustomContent platform="tidb">
 
-Do not use these variables. One common scenario is monitoring. TiDB is well observable and does not require querying from server status variables. For custom monitoring tools, refer to [TiDB Monitoring Framework Overview](/tidb-monitoring-framework.md).
+不要使用这些变量。常见场景之一是监控。TiDB 具有良好的可观察性，无需通过查询服务器状态变量进行监控。对于自定义监控工具，参考 [TiDB 监控框架概述](/tidb-monitoring-framework.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Do not use these variables. One common scenario is monitoring. TiDB Cloud is well observable and does not require querying from server status variables. For more information about TiDB Cloud monitoring services, refer to [Monitor a TiDB Cluster](/tidb-cloud/monitor-tidb-cluster.md).
+不要使用这些变量。常见场景之一是监控。TiDB Cloud 具有良好的可观察性，无需通过查询服务器状态变量进行监控。关于 TiDB Cloud 监控服务的更多信息，参考 [监控 TiDB 集群](/tidb-cloud/monitor-tidb-cluster.md)。
 
 </CustomContent>
 
-### TiDB distinguishes between `TIMESTAMP` and `DATETIME` in error messages
+### TiDB 在错误信息中区分 `TIMESTAMP` 和 `DATETIME`
 
-**Description**
+**描述**
 
-TiDB error messages distinguish between `TIMESTAMP` and `DATETIME`, while MySQL does not, and returns them all as `DATETIME`. That is, MySQL incorrectly converts `TIMESTAMP` type error messages to `DATETIME` type.
+TiDB 的错误信息会区分 `TIMESTAMP` 和 `DATETIME`，而 MySQL 不会，所有类型都返回为 `DATETIME`。也就是说，MySQL 错误信息会错误地将 `TIMESTAMP` 类型的错误转换为 `DATETIME`。
 
-**Way to avoid**
+**避免方式**
 
 <CustomContent platform="tidb">
 
-Do not use the error messages for string matching. Instead, use [Error Codes](/error-codes.md) for troubleshooting.
+不要使用错误信息进行字符串匹配。建议使用 [Error Codes](/error-codes.md) 进行故障排查。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Do not use the error messages for string matching. Instead, use [Error Codes](https://docs.pingcap.com/tidb/stable/error-codes) for troubleshooting.
+不要使用错误信息进行字符串匹配。建议使用 [Error Codes](https://docs.pingcap.com/tidb/stable/error-codes) 进行故障排查。
 
 </CustomContent>
 
-### TiDB does not support the `CHECK TABLE` statement
+### TiDB 不支持 `CHECK TABLE` 语句
 
-**Description**
+**描述**
 
-The `CHECK TABLE` statement is not supported in TiDB.
+TiDB 不支持 `CHECK TABLE` 语句。
 
-**Way to avoid**
+**避免方式**
 
-To check the consistency of data and corresponding indexes, you can use the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) statement in TiDB.
+可以使用 TiDB 中的 [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) 语句来检查数据和索引的一致性。
 
-## Compatibility with MySQL JDBC
+## 与 MySQL JDBC 的兼容性
 
-The test version is MySQL Connector/J 8.0.29.
+测试版本为 MySQL Connector/J 8.0.29。
 
-### The default collation is inconsistent
+### 默认字符集排序规则不一致
 
-**Description**
+**描述**
 
-The collations of MySQL Connector/J are stored on the client side and distinguished by the server version.
+MySQL Connector/J 的字符集排序规则存储在客户端，由服务器版本区分。
 
-The following table lists known client-side and server-side collation inconsistencies in character sets:
+下表列出了已知的客户端和服务器端字符集排序规则不一致情况：
 
-| Character | Client-side default collation | Server-side default collation |
+| 字符集 | 客户端默认排序规则 | 服务器端默认排序规则 |
 | --------- | -------------------- | ------------- |
 | `ascii`   | `ascii_general_ci`   | `ascii_bin`   |
 | `latin1`  | `latin1_swedish_ci`  | `latin1_bin`  |
 | `utf8mb4` | `utf8mb4_0900_ai_ci` | `utf8mb4_bin` |
 
-**Way to avoid**
+**避免方式**
 
-Set the collation manually, and do not rely on the client-side default collation. The client-side default collation is stored by the MySQL Connector/J configuration file.
+手动设置排序规则，不依赖客户端的默认排序规则。客户端默认排序规则存储在 MySQL Connector/J 的配置文件中。
 
-### The `NO_BACKSLASH_ESCAPES` parameter does not take effect
+### `NO_BACKSLASH_ESCAPES` 参数不生效
 
-**Description**
+**描述**
 
-In TiDB, you cannot use the `NO_BACKSLASH_ESCAPES` parameter without escaping the `\` character. For more details, track this [issue](https://github.com/pingcap/tidb/issues/35302).
+在 TiDB 中，不能在不转义 `\` 字符的情况下使用 `NO_BACKSLASH_ESCAPES` 参数。更多详情请跟踪 [此问题](https://github.com/pingcap/tidb/issues/35302)。
 
-**Way to avoid**
+**避免方式**
 
-Do not use `NO_BACKSLASH_ESCAPES` with `\` in TiDB, but use `\\` in SQL statements.
+在 TiDB 中不要使用 `NO_BACKSLASH_ESCAPES` 和 `\`，而应在 SQL 语句中使用 `\\`。
 
-### The `INDEX_USED` related parameters are not supported
+### `INDEX_USED` 相关参数不支持
 
-**Description**
+**描述**
 
-TiDB does not set the `SERVER_QUERY_NO_GOOD_INDEX_USED` and `SERVER_QUERY_NO_INDEX_USED` parameters in the protocol. This will cause the following parameters to be returned inconsistently with the actual situation:
+TiDB 不在协议中设置 `SERVER_QUERY_NO_GOOD_INDEX_USED` 和 `SERVER_QUERY_NO_INDEX_USED` 参数。这会导致以下参数返回的结果与实际情况不一致：
 
 - `com.mysql.cj.protocol.ServerSession.noIndexUsed()`
 - `com.mysql.cj.protocol.ServerSession.noGoodIndexUsed()`
 
-**Way to avoid**
+**避免方式**
 
-Do not use the `noIndexUsed()` and `noGoodIndexUsed()` functions in TiDB.
+不要在 TiDB 中使用 `noIndexUsed()` 和 `noGoodIndexUsed()` 函数。
 
-### The `enablePacketDebug` parameter is not supported
+### `enablePacketDebug` 参数不支持
 
-**Description**
+**描述**
 
-TiDB does not support the [enablePacketDebug](https://dev.mysql.com/doc/connector-j/en/connector-j-connp-props-debugging-profiling.html) parameter. It is a MySQL Connector/J parameter used for debugging that will keep the buffer of the data packet. This might cause the connection to close unexpectedly. **DO NOT** turn it on.
+TiDB 不支持 [enablePacketDebug](https://dev.mysql.com/doc/connector-j/en/connector-j-connp-props-debugging-profiling.html) 参数。该参数是 MySQL Connector/J 用于调试的参数，会保持数据包缓冲区，可能导致连接意外关闭。**切勿**开启。
 
-**Way to avoid**
+**避免方式**
 
-Do not set the `enablePacketDebug` parameter in TiDB.
+不要在 TiDB 中设置 `enablePacketDebug` 参数。
 
-### The UpdatableResultSet is not supported
+### UpdatableResultSet 不支持
 
-**Description**
+**描述**
 
-TiDB does not support `UpdatableResultSet`. **DO NOT** specify the `ResultSet.CONCUR_UPDATABLE` parameter and **DO NOT** update data inside the `ResultSet`.
+TiDB 不支持 `UpdatableResultSet`。**切勿**在连接中指定 `ResultSet.CONCUR_UPDATABLE`，也不要在 `ResultSet` 内部更新数据。
 
-**Way to avoid**
+**避免方式**
 
-To ensure data consistency by transaction, you can use `UPDATE` statements to update data.
+为了保证数据一致性，可以使用 `UPDATE` 语句进行数据更新。
 
-## MySQL JDBC bugs
+## MySQL JDBC 的 Bug
 
-### `useLocalTransactionState` and `rewriteBatchedStatements` are true at the same time will cause the transaction to fail to commit or roll back
+### `useLocalTransactionState` 和 `rewriteBatchedStatements` 同时为 true 会导致事务无法提交或回滚
 
-**Description**
+**描述**
 
-When using MySQL Connector/J 8.0.32 or an earlier version, if the `useLocalTransactionState` and `rewriteBatchedStatements` parameters are set to `true` at the same time, the transaction might fail to commit. You can reproduce with [this code](https://github.com/Icemap/tidb-java-gitpod/tree/reproduction-local-transaction-state-txn-error).
+在使用 MySQL Connector/J 8.0.32 或更早版本时，如果同时设置 `useLocalTransactionState` 和 `rewriteBatchedStatements` 为 `true`，事务可能无法提交。可复现代码请参考 [此代码](https://github.com/Icemap/tidb-java-gitpod/tree/reproduction-local-transaction-state-txn-error)。
 
-**Way to avoid**
+**避免方式**
 
 > **Note:**
 >
-> `useConfigs=maxPerformance` includes a group of configurations. For detailed configurations in MySQL Connector/J 8.0 and MySQL Connector/J 5.1, see [mysql-connector-j 8.0](https://github.com/mysql/mysql-connector-j/blob/release/8.0/src/main/resources/com/mysql/cj/configurations/maxPerformance.properties) and [mysql-connector-j 5.1](https://github.com/mysql/mysql-connector-j/blob/release/5.1/src/com/mysql/jdbc/configs/maxPerformance.properties) respectively. You need to disable `useLocalTransactionState` when using `maxPerformance`. That is, use `useConfigs=maxPerformance&useLocalTransactionState=false`.
+> `useConfigs=maxPerformance` 包含一组配置。关于 MySQL Connector/J 8.0 和 5.1 版本的详细配置，请参见 [mysql-connector-j 8.0](https://github.com/mysql/mysql-connector-j/blob/release/8.0/src/main/resources/com/mysql/cj/configurations/maxPerformance.properties) 和 [mysql-connector-j 5.1](https://github.com/mysql/mysql-connector-j/blob/release/5.1/src/com/mysql/jdbc/configs/maxPerformance.properties)。在使用 `maxPerformance` 时，需禁用 `useLocalTransactionState`，即使用 `useConfigs=maxPerformance&useLocalTransactionState=false`。
 
-This bug has been fixed in MySQL Connector/J 8.0.33. Considering updates for the 8.0.x series have ceased, it is strongly recommended to upgrade your MySQL Connector/J to [the latest General Availability (GA) version](https://dev.mysql.com/downloads/connector/j/) for improved stability and performance.
+该问题已在 MySQL Connector/J 8.0.33 中修复。考虑到 8.0.x 系列的更新已停止，强烈建议升级你的 MySQL Connector/J 至 [最新的正式版 (GA)](https://dev.mysql.com/downloads/connector/j/) 以获得更好的稳定性和性能。
 
-### Connector is incompatible with the server version earlier than 5.7.5
+### 连接器与早于 5.7.5 版本的服务器不兼容
 
-**Description**
+**描述**
 
-The database connection might hang under certain conditions when using MySQL Connector/J 8.0.31 or an earlier version with a MySQL server < 5.7.5 or a database using the MySQL server < 5.7.5 protocol (such as TiDB earlier than v6.3.0). For more details, see the [Bug Report](https://bugs.mysql.com/bug.php?id=106252).
+在使用 MySQL Connector/J 8.0.31 或更早版本连接 MySQL 服务器 < 5.7.5 或使用 MySQL 服务器 < 5.7.5 协议的数据库（如 TiDB 早于 v6.3.0）时，可能会导致连接挂起。更多详情请参见 [Bug Report](https://bugs.mysql.com/bug.php?id=106252)。
 
-**Way to avoid**
+**避免方式**
 
-This bug has been fixed in MySQL Connector/J 8.0.32. Considering updates for the 8.0.x series have ceased, it is strongly recommended to upgrade your MySQL Connector/J to [the latest General Availability (GA) version](https://dev.mysql.com/downloads/connector/j/) for improved stability and performance.
+该问题已在 MySQL Connector/J 8.0.32 中修复。考虑到 8.0.x 系列的更新已停止，强烈建议升级你的 MySQL Connector/J 至 [最新的正式版 (GA)](https://dev.mysql.com/downloads/connector/j/) 以获得更好的稳定性和性能。
 
-TiDB also fixes it in the following ways:
+TiDB 也通过以下方式修复了此问题：
 
-- Client side: This bug has been fixed in **pingcap/mysql-connector-j** and you can use the [pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j) instead of the official MySQL Connector/J.
-- Server side: This compatibility issue has been fixed since TiDB v6.3.0 and you can upgrade the server to v6.3.0 or later versions.
+- 客户端：此问题已在 **pingcap/mysql-connector-j** 中修复，你可以使用 [pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j) 代替官方的 MySQL Connector/J。
+- 服务器端：此兼容性问题自 TiDB v6.3.0 起已修复，你可以将服务器升级到 v6.3.0 或更高版本。
 
-## Compatibility with Sequelize
+## 与 Sequelize 的兼容性
 
-The compatibility information described in this section is based on [Sequelize v6.32.1](https://www.npmjs.com/package/sequelize/v/6.32.1).
+本节描述的兼容性信息基于 [Sequelize v6.32.1](https://www.npmjs.com/package/sequelize/v/6.32.1)。
 
-According to the test results, TiDB supports most of the Sequelize features ([using `MySQL` as the dialect](https://sequelize.org/docs/v6/other-topics/dialect-specific-things/#mysql)).
+根据测试结果，TiDB 支持大部分 Sequelize 功能（[使用 `MySQL` 作为方言](https://sequelize.org/docs/v6/other-topics/dialect-specific-things/#mysql)）。
 
-Unsupported features are:
+不支持的功能包括：
 
-- [`GEOMETRY`](https://github.com/pingcap/tidb/issues/6347) is not supported.
-- Modification of integer primary key is not supported.
-- `PROCEDURE` is not supported.
-- The `READ-UNCOMMITTED` and `SERIALIZABLE` [isolation levels](/system-variables.md#transaction_isolation) are not supported.
-- Modification of a column's `AUTO_INCREMENT` attribute is not allowed by default.
-- `FULLTEXT`, `HASH`, and `SPATIAL` indexes are not supported.
-- `sequelize.queryInterface.showIndex(Model.tableName);` is not supported.
-- `sequelize.options.databaseVersion` is not supported.
-- Adding a foreign key reference using [`queryInterface.addColumn`](https://sequelize.org/api/v6/class/src/dialects/abstract/query-interface.js~queryinterface#instance-method-addColumn) is not supported.
+- [`GEOMETRY`](https://github.com/pingcap/tidb/issues/6347) 不支持。
+- 不支持修改整数主键。
+- `PROCEDURE` 不支持。
+- 不支持 [READ-UNCOMMITTED]( /system-variables.md#transaction_isolation) 和 [SERIALIZABLE]( /system-variables.md#transaction_isolation) 隔离级别。
+- 默认不允许修改列的 `AUTO_INCREMENT` 属性。
+- 不支持 `FULLTEXT`、`HASH` 和 `SPATIAL` 索引。
+- 不支持 `sequelize.queryInterface.showIndex(Model.tableName);`。
+- 不支持 `sequelize.options.databaseVersion`。
+- 不支持使用 [`queryInterface.addColumn`](https://sequelize.org/api/v6/class/src/dialects/abstract/query-interface.js~queryinterface#instance-method-addColumn) 添加外键引用。
 
-### Modification of integer primary key is not supported
+### 不支持修改整数主键
 
-**Description**
+**描述**
 
-Modification of integer primary key is not supported. TiDB uses primary key as an index for data organization if the primary key is integer type. Refer to [Issue #18090](https://github.com/pingcap/tidb/issues/18090) and [Clustered Indexes](/clustered-indexes.md) for more details.
+不支持修改整数主键。TiDB 在主键为整数类型时，将主键用作数据组织的索引。详细信息请参见 [Issue #18090](https://github.com/pingcap/tidb/issues/18090) 和 [Clustered Indexes](/clustered-indexes.md)。
 
-### The `READ-UNCOMMITTED` and `SERIALIZABLE` isolation levels are not supported
+### 不支持 `READ-UNCOMMITTED` 和 `SERIALIZABLE` 隔离级别
 
-**Description**
+**描述**
 
-TiDB does not support the `READ-UNCOMMITTED` and `SERIALIZABLE` isolation levels. If the isolation level is set to `READ-UNCOMMITTED` or `SERIALIZABLE`, TiDB throws an error.
+TiDB 不支持 `READ-UNCOMMITTED` 和 `SERIALIZABLE` 隔离级别。如果设置为这两个级别，TiDB 会抛出错误。
 
-**Way to avoid**
+**避免方式**
 
-Use only the isolation level that TiDB supports: `REPEATABLE-READ` or `READ-COMMITTED`.
+仅使用 TiDB 支持的隔离级别：`REPEATABLE-READ` 或 `READ-COMMITTED`。
 
-If you want TiDB to be compatible with other applications that set the `SERIALIZABLE` isolation level but not depend on `SERIALIZABLE`, you can set [`tidb_skip_isolation_level_check`](/system-variables.md#tidb_skip_isolation_level_check) to `1`. In such case, TiDB ignores the unsupported isolation level error.
+如果希望 TiDB 兼容其他应用设置的 `SERIALIZABLE` 隔离级别，但不依赖 `SERIALIZABLE`，可以设置 [`tidb_skip_isolation_level_check`](/system-variables.md#tidb_skip_isolation_level_check) 为 `1`。在这种情况下，TiDB 会忽略不支持的隔离级别错误。
 
-### Modification of a column's `AUTO_INCREMENT` attribute is not allowed by default
+### 不允许修改列的 `AUTO_INCREMENT` 属性（默认）
 
-**Description**
+**描述**
 
-Adding or removing the `AUTO_INCREMENT` attribute of a column via `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` command is not allowed by default.
+通过 `ALTER TABLE MODIFY` 或 `ALTER TABLE CHANGE` 命令添加或删除列的 `AUTO_INCREMENT` 属性，默认不允许。
 
-**Way to avoid**
+**避免方式**
 
-Refer to the [restrictions of `AUTO_INCREMENT`](/auto-increment.md#restrictions).
+参考 [AUTO_INCREMENT 的限制]( /auto-increment.md#restrictions)。
 
-To allow the removal of the `AUTO_INCREMENT` attribute, set `@@tidb_allow_remove_auto_inc` to `true`.
+如果要允许删除 `AUTO_INCREMENT` 属性，可以将 `@@tidb_allow_remove_auto_inc` 设置为 `true`。
 
-### `FULLTEXT`, `HASH`, and `SPATIAL` indexes are not supported
+### 不支持 `FULLTEXT`、`HASH` 和 `SPATIAL` 索引
 
-**Description**
+**描述**
 
-`FULLTEXT`, `HASH`, and `SPATIAL` indexes are not supported.
+`FULLTEXT`、`HASH` 和 `SPATIAL` 索引不被支持。
 
-## Need help?
+## 需要帮助？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或 [提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或 [提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

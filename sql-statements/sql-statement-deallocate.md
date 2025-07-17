@@ -1,13 +1,13 @@
 ---
 title: DEALLOCATE | TiDB SQL Statement Reference
-summary: An overview of the usage of DEALLOCATE for the TiDB database.
+summary: 关于 TiDB 数据库中 DEALLOCATE 的用法概述。
 ---
 
 # DEALLOCATE
 
-The `DEALLOCATE` statement provides an SQL interface to server-side prepared statements.
+`DEALLOCATE` 语句提供了一个用于服务器端预处理语句的 SQL 接口。
 
-## Synopsis
+## 语法概述
 
 ```ebnf+diagram
 DeallocateStmt ::=
@@ -24,7 +24,7 @@ Identifier ::=
 |   TiDBKeyword
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> PREPARE mystmt FROM 'SELECT ? as num FROM DUAL';
@@ -45,11 +45,11 @@ mysql> DEALLOCATE PREPARE mystmt;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `DEALLOCATE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中的 `DEALLOCATE` 语句与 MySQL 完全兼容。如果你发现任何兼容性差异，[请报告一个 bug](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 相关链接
 
 * [PREPARE](/sql-statements/sql-statement-prepare.md)
 * [EXECUTE](/sql-statements/sql-statement-execute.md)

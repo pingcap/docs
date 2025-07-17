@@ -1,38 +1,38 @@
 ---
-title: SQL or Transaction Issues
-summary: Learn how to troubleshoot SQL or transaction issues that might occur during application development.
+title: SQL 或事务问题
+summary: 了解在应用开发过程中可能出现的 SQL 或事务问题的排查方法。
 ---
 
-# SQL or Transaction Issues
+# SQL 或事务问题
 
-This document introduces problems that may occur during application development and related documents.
+本文介绍在应用开发过程中可能出现的问题及相关文档。
 
-## Troubleshoot SQL query problems
+## 排查 SQL 查询问题
 
-If you want to improve SQL query performance, follow the instructions in [SQL Performance Tuning](/develop/dev-guide-optimize-sql-overview.md) to solve performance problems such as full table scans and missing indexes.
+如果你想提升 SQL 查询性能，请按照 [SQL Performance Tuning](/develop/dev-guide-optimize-sql-overview.md) 中的指引，解决全表扫描、缺少索引等性能问题。
 
 <CustomContent platform="tidb">
 
-If you still have performance issues, see the following documents:
+如果你仍然遇到性能问题，请参考以下文档：
 
 - [Analyze Slow Queries](/analyze-slow-queries.md)
 - [Identify Expensive Queries Using Top SQL](/dashboard/top-sql.md)
 
-If you have questions about SQL operations, see [SQL FAQs](/faq/sql-faq.md).
+如果你对 SQL 操作有疑问，请参阅 [SQL FAQs](/faq/sql-faq.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-If you have questions about SQL operations, see [SQL FAQs](https://docs.pingcap.com/tidb/stable/sql-faq).
+如果你对 SQL 操作有疑问，请参阅 [SQL FAQs](https://docs.pingcap.com/tidb/stable/sql-faq)。
 
 </CustomContent>
 
-## Troubleshoot transaction issues
+## 排查事务问题
 
-See [Handle transaction errors](/develop/dev-guide-transaction-troubleshoot.md).
+请参阅 [Handle transaction errors](/develop/dev-guide-transaction-troubleshoot.md)。
 
-## See also
+## 相关内容
 
 - [Unsupported features](/mysql-compatibility.md#unsupported-features)
 
@@ -43,16 +43,16 @@ See [Handle transaction errors](/develop/dev-guide-transaction-troubleshoot.md).
 
 </CustomContent>
 
-## Need help?
+## 需要帮助？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+可以在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 社区提问，或 [提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+可以在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 社区提问，或 [提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

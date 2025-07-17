@@ -1,43 +1,43 @@
 ---
-title: Overview of Optimizing SQL Performance
-summary: Provides an overview of SQL performance tuning for TiDB application developers.
+title: 优化 SQL 性能概述
+summary: 提供 TiDB 应用开发者关于 SQL 性能调优的概述。
 ---
 
-# Overview of Optimizing SQL Performance
+# 优化 SQL 性能概述
 
-This document introduces how to optimize the performance of SQL statements in TiDB. To get good performance, you can start with the following aspects:
+本文介绍了如何优化 TiDB 中 SQL 语句的性能。为了获得良好的性能，你可以从以下几个方面入手：
 
-* SQL performance tuning
-* Schema design: Based on your application workload patterns, you might need to change the table schema to avoid transaction contention or hot spots.
+* SQL 性能调优
+* 架构设计：根据你的应用负载模式，可能需要调整表结构以避免事务冲突或热点问题。
 
-## SQL performance tuning
+## SQL 性能调优
 
-To get good SQL statement performance, you can follow these guidelines:
+为了获得良好的 SQL 语句性能，你可以遵循以下指南：
 
-* Scan as few rows as possible. It is recommended to scan only the data you need and avoid scanning excess data.
-* Use the right index. Ensure that there is a corresponding index for the column in the `WHERE` clause in SQL. If not, the statement entails a full table scan and thus causes poor performance.
-* Use the right join type. It is important to choose the right join type based on the relative size of the tables involved in the query. In general, TiDB's cost-based optimizer picks the best-performing join type. However, in a few cases, you might need to manually specify a better join type.
-* Use the right storage engine. For hybrid OLTP and OLAP workloads, the TiFlash engine is recommended. For details, see [HTAP Query](/develop/dev-guide-hybrid-oltp-and-olap-queries.md).
+* 扫描尽可能少的行。建议只扫描你需要的数据，避免扫描多余的数据。
+* 使用合适的索引。确保在 SQL 的 `WHERE` 子句中的列上有对应的索引。如果没有，语句将涉及全表扫描，从而导致性能下降。
+* 使用合适的连接类型。根据查询中涉及的表的相对大小，选择合适的连接类型。一般来说，TiDB 的基于成本的优化器会选择性能最优的连接类型。但在少数情况下，你可能需要手动指定更优的连接类型。
+* 使用合适的存储引擎。对于混合 OLTP 和 OLAP 负载，推荐使用 TiFlash 引擎。详情请参见 [HTAP Query](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)。
 
-## Schema design
+## 架构设计
 
-After [tuning SQL performance](#sql-performance-tuning), if your application still cannot get good performance, you might need to check your schema design and data access patterns to avoid the following issues:
+在 [调优 SQL 性能](#sql-performance-tuning) 后，如果你的应用仍然无法获得良好的性能，可能需要检查你的架构设计和数据访问模式，以避免以下问题：
 
 <CustomContent platform="tidb">
 
-* Transaction contention. For how to diagnose and resolve transaction contention, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
-* Hot spots. For how to diagnose and resolve hot spots, see [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
+* Transaction contention. 有关如何诊断和解决事务冲突，参见 [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)。
+* Hot spots. 有关如何诊断和解决热点问题，参见 [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-* Transaction contention. For how to diagnose and resolve transaction contention, see [Troubleshoot Lock Conflicts](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts).
-* Hot spots. For how to diagnose and resolve hot spots, see [Troubleshoot Hotspot Issues](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues).
+* Transaction contention. 有关如何诊断和解决事务冲突，参见 [Troubleshoot Lock Conflicts](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts)。
+* Hot spots. 有关如何诊断和解决热点问题，参见 [Troubleshoot Hotspot Issues](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues)。
 
 </CustomContent>
 
-### See also
+### 另请参见
 
 <CustomContent platform="tidb">
 
@@ -51,16 +51,16 @@ After [tuning SQL performance](#sql-performance-tuning), if your application sti
 
 </CustomContent>
 
-## Need help?
+## 需要帮助？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或 [提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或 [提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

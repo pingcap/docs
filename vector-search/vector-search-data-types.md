@@ -1,17 +1,17 @@
 ---
 title: Vector Data Types
-summary: Learn about the Vector data types in TiDB.
+summary: 了解 TiDB 中的 Vector 数据类型。
 ---
 
 # Vector Data Types
 
-A vector is a sequence of floating-point numbers, such as `[0.3, 0.5, -0.1, ...]`. TiDB offers Vector data types, specifically optimized for efficiently storing and querying vector embeddings widely used in AI applications.
+向量是浮点数的序列，例如 `[0.3, 0.5, -0.1, ...]`。TiDB 提供了专门优化的 Vector 数据类型，旨在高效存储和查询广泛应用于 AI 领域的向量嵌入。
 
 <CustomContent platform="tidb">
 
 > **Warning:**
 >
-> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> 该功能处于实验阶段。不建议在生产环境中使用。此功能可能会在不提前通知的情况下进行更改。如发现 bug，可以在 [issue](https://github.com/pingcap/tidb/issues) 上向 GitHub 报告。
 
 </CustomContent>
 
@@ -19,34 +19,34 @@ A vector is a sequence of floating-point numbers, such as `[0.3, 0.5, -0.1, ...]
 
 > **Note:**
 >
-> This feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> 该功能处于测试版，可能会在不提前通知的情况下进行更改。如发现 bug，可以在 [issue](https://github.com/pingcap/tidb/issues) 上向 GitHub 报告。
 
 </CustomContent>
 
 > **Note:**
 >
-> Vector data types are available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> Vector 数据类型在 TiDB Self-Managed、[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) 上均可使用。对于 TiDB Self-Managed 和 TiDB Cloud Dedicated，TiDB 版本必须为 v8.4.0 及以上（建议使用 v8.5.0 及以上）。
 
-The following Vector data types are currently available:
+目前可用的 Vector 数据类型如下：
 
-- `VECTOR`: A sequence of single-precision floating-point numbers with any dimension.
-- `VECTOR(D)`: A sequence of single-precision floating-point numbers with a fixed dimension `D`.
+- `VECTOR`：任意维度的单精度浮点数序列。
+- `VECTOR(D)`：固定维度 `D` 的单精度浮点数序列。
 
-Using vector data types provides the following advantages over using the [`JSON`](/data-type-json.md) type:
+使用向量数据类型相较于 [`JSON`](/data-type-json.md) 类型具有以下优势：
 
-- Vector index support: You can build a [vector search index](/vector-search/vector-search-index.md) to speed up vector searching.
-- Dimension enforcement: You can specify a dimension to forbid inserting vectors with different dimensions.
-- Optimized storage format: Vector data types are optimized for handling vector data, offering better space efficiency and performance compared to `JSON` types.
+- 向量索引支持：可以构建 [向量搜索索引](/vector-search/vector-search-index.md) 来加快向量搜索速度。
+- 维度强制：可以指定维度，禁止插入不同维度的向量。
+- 优化存储格式：向量数据类型针对向量数据进行了优化，提供比 `JSON` 类型更好的空间效率和性能。
 
-## Syntax
+## 语法
 
-You can use a string in the following syntax to represent a Vector value:
+你可以使用以下语法的字符串来表示一个 Vector 值：
 
 ```sql
 '[<float>, <float>, ...]'
 ```
 
-Example:
+示例：
 
 ```sql
 CREATE TABLE vector_table (
@@ -59,27 +59,27 @@ INSERT INTO vector_table VALUES (1, '[0.3, 0.5, -0.1]');
 INSERT INTO vector_table VALUES (2, NULL);
 ```
 
-Inserting vector values with invalid syntax will result in an error:
+插入格式不正确的向量值会导致错误：
 
 ```sql
 [tidb]> INSERT INTO vector_table VALUES (3, '[5, ]');
 ERROR 1105 (HY000): Invalid vector text: [5, ]
 ```
 
-In the following example, because dimension `3` is enforced for the `embedding` column when the table is created, inserting a vector with a different dimension will result in an error:
+在以下示例中，由于在创建表时对 `embedding` 列强制维度为 `3`，插入不同维度的向量会导致错误：
 
 ```sql
 [tidb]> INSERT INTO vector_table VALUES (4, '[0.3, 0.5]');
 ERROR 1105 (HY000): vector has 2 dimensions, does not fit VECTOR(3)
 ```
 
-For available functions and operators over the vector data types, see [Vector Functions and Operators](/vector-search/vector-search-functions-and-operators.md).
+关于向量数据类型的函数和操作符，请参见 [Vector Functions and Operators](/vector-search/vector-search-functions-and-operators.md)。
 
-For more information about building and using a vector search index, see [Vector Search Index](/vector-search/vector-search-index.md).
+关于构建和使用向量搜索索引的更多信息，请参见 [Vector Search Index](/vector-search/vector-search-index.md)。
 
-## Store vectors with different dimensions
+## 存储不同维度的向量
 
-You can store vectors with different dimensions in the same column by omitting the dimension parameter in the `VECTOR` type:
+你可以通过省略 `VECTOR` 类型中的维度参数，在同一列中存储不同维度的向量：
 
 ```sql
 CREATE TABLE vector_table (
@@ -87,36 +87,36 @@ CREATE TABLE vector_table (
     embedding VECTOR
 );
 
-INSERT INTO vector_table VALUES (1, '[0.3, 0.5, -0.1]'); -- 3 dimensions vector, OK
-INSERT INTO vector_table VALUES (2, '[0.3, 0.5]');       -- 2 dimensions vector, OK
+INSERT INTO vector_table VALUES (1, '[0.3, 0.5, -0.1]'); -- 3 维向量，OK
+INSERT INTO vector_table VALUES (2, '[0.3, 0.5]');       -- 2 维向量，OK
 ```
 
-However, note that you cannot build a [vector search index](/vector-search/vector-search-index.md) for this column, as vector distances can be only calculated between vectors with the same dimensions.
+但请注意，不能为此列构建 [向量搜索索引](/vector-search/vector-search-index.md)，因为只能在维度相同的向量之间计算距离。
 
-## Comparison
+## 比较
 
-You can compare vector data types using [comparison operators](/functions-and-operators/operators.md) such as `=`, `!=`, `<`, `>`, `<=`, and `>=`. For a complete list of comparison operators and functions for vector data types, see [Vector Functions and Operators](/vector-search/vector-search-functions-and-operators.md).
+你可以使用 [comparison operators](/functions-and-operators/operators.md)（如 `=`, `!=`, `<`, `>`, `<=`, 和 `>=`）对向量数据类型进行比较。关于向量数据类型的完整比较操作符和函数列表，请参见 [Vector Functions and Operators](/vector-search/vector-search-functions-and-operators.md)。
 
-Vector data types are compared element-wise numerically. For example:
+向量数据类型的比较是逐元素数值比较。例如：
 
 - `[1] < [12]`
 - `[1,2,3] < [1,2,5]`
 - `[1,2,3] = [1,2,3]`
 - `[2,2,3] > [1,2,3]`
 
-Two vectors with different dimensions are compared using lexicographical comparison, with the following rules:
+不同维度的两个向量采用字典序比较，规则如下：
 
-- Two vectors are compared element by element from the start, and each element is compared numerically.
-- The first mismatching element determines which vector is lexicographically _less_ or _greater_ than the other.
-- If one vector is a prefix of another, the shorter vector is lexicographically _less_ than the other. For example, `[1,2,3] < [1,2,3,0]`.
-- Vectors of the same length with identical elements are lexicographically _equal_.
-- An empty vector is lexicographically _less_ than any non-empty vector. For example, `[] < [1]`.
-- Two empty vectors are lexicographically _equal_.
+- 从第一个元素开始逐个元素比较，每个元素按数值比较。
+- 第一个不匹配的元素决定哪个向量在字典序上 _更小_ 或 _更大_。
+- 如果一个向量是另一个向量的前缀，则较短的向量在字典序上 _更小_。例如，`[1,2,3] < [1,2,3,0]`。
+- 长度相同且元素相同的两个向量在字典序上 _相等_。
+- 空向量在字典序上 _小于_ 任何非空向量。例如，`[] < [1]`。
+- 两个空向量在字典序上 _相等_。
 
-When comparing vector constants, consider performing an [explicit cast](#cast) from string to vector to avoid comparisons based on string values:
+在比较向量常量时，建议先进行 [显式类型转换](#cast)，避免基于字符串值的比较：
 
 ```sql
--- Because string is given, TiDB is comparing strings:
+-- 由于给定的是字符串，TiDB 会比较字符串：
 [tidb]> SELECT '[12.0]' < '[4.0]';
 +--------------------+
 | '[12.0]' < '[4.0]' |
@@ -125,7 +125,7 @@ When comparing vector constants, consider performing an [explicit cast](#cast) f
 +--------------------+
 1 row in set (0.01 sec)
 
--- Cast to vector explicitly to compare by vectors:
+-- 显式转换为向量后按向量比较：
 [tidb]> SELECT VEC_FROM_TEXT('[12.0]') < VEC_FROM_TEXT('[4.0]');
 +--------------------------------------------------+
 | VEC_FROM_TEXT('[12.0]') < VEC_FROM_TEXT('[4.0]') |
@@ -135,11 +135,11 @@ When comparing vector constants, consider performing an [explicit cast](#cast) f
 1 row in set (0.01 sec)
 ```
 
-## Arithmetic
+## 算术操作
 
-Vector data types support arithmetic operations `+` (addition) and `-` (subtraction). However, arithmetic operations between vectors with different dimensions are not supported and will result in an error.
+向量数据类型支持 `+`（加法）和 `-`（减法）算术操作。但不同维度的向量之间的算术运算不支持，执行会报错。
 
-Examples:
+示例：
 
 ```sql
 [tidb]> SELECT VEC_FROM_TEXT('[4]') + VEC_FROM_TEXT('[5]');
@@ -162,21 +162,21 @@ Examples:
 ERROR 1105 (HY000): vectors have different dimensions: 1 and 3
 ```
 
-## Cast
+## 类型转换
 
-### Cast between Vector ⇔ String
+### Vector ⇔ String 之间的转换
 
-To cast between Vector and String, use the following functions:
+使用以下函数可以在 Vector 和 String 之间进行转换：
 
-- `CAST(... AS VECTOR)`: String ⇒ Vector
-- `CAST(... AS CHAR)`: Vector ⇒ String
-- `VEC_FROM_TEXT`: String ⇒ Vector
-- `VEC_AS_TEXT`: Vector ⇒ String
+- `CAST(... AS VECTOR)`：字符串 ⇒ 向量
+- `CAST(... AS CHAR)`：向量 ⇒ 字符串
+- `VEC_FROM_TEXT`：字符串 ⇒ 向量
+- `VEC_AS_TEXT`：向量 ⇒ 字符串
 
-To improve usability, if you call a function that only supports vector data types, such as a vector correlation distance function, you can also just pass in a format-compliant string. TiDB automatically performs an implicit cast in this case.
+为了提升易用性，如果调用只支持向量数据类型的函数（如向量相关的距离函数），你也可以直接传入符合格式的字符串，TiDB 会自动进行隐式类型转换。
 
 ```sql
--- The VEC_DIMS function only accepts VECTOR arguments, so you can directly pass in a string for an implicit cast.
+-- VEC_DIMS 函数只接受 VECTOR 参数，因此可以直接传入字符串进行隐式转换。
 [tidb]> SELECT VEC_DIMS('[0.3, 0.5, -0.1]');
 +------------------------------+
 | VEC_DIMS('[0.3, 0.5, -0.1]') |
@@ -185,7 +185,7 @@ To improve usability, if you call a function that only supports vector data type
 +------------------------------+
 1 row in set (0.01 sec)
 
--- You can also explicitly cast a string to a vector using VEC_FROM_TEXT and then pass the vector to the VEC_DIMS function.
+-- 也可以显式将字符串转换为向量，再传入 VEC_DIMS：
 [tidb]> SELECT VEC_DIMS(VEC_FROM_TEXT('[0.3, 0.5, -0.1]'));
 +---------------------------------------------+
 | VEC_DIMS(VEC_FROM_TEXT('[0.3, 0.5, -0.1]')) |
@@ -194,7 +194,7 @@ To improve usability, if you call a function that only supports vector data type
 +---------------------------------------------+
 1 row in set (0.01 sec)
 
--- You can also cast explicitly using CAST(... AS VECTOR):
+-- 也可以使用 CAST(... AS VECTOR) 进行显式转换：
 [tidb]> SELECT VEC_DIMS(CAST('[0.3, 0.5, -0.1]' AS VECTOR));
 +----------------------------------------------+
 | VEC_DIMS(CAST('[0.3, 0.5, -0.1]' AS VECTOR)) |
@@ -204,10 +204,10 @@ To improve usability, if you call a function that only supports vector data type
 1 row in set (0.01 sec)
 ```
 
-When using an operator or function that accepts multiple data types, you need to explicitly cast the string type to the vector type before passing the string to that operator or function, because TiDB does not perform implicit casts in this case. For example, before performing comparison operations, you need to explicitly cast strings to vectors; otherwise, TiDB compares them as string values rather than as vector numeric values:
+在使用支持多类型的操作符或函数时，必须先显式将字符串类型转换为向量类型，然后再传入字符串，否则 TiDB 不会进行隐式转换。例如，在进行比较操作前，必须显式将字符串转换为向量，否则会按字符串值进行比较，而非数值向量。
 
 ```sql
--- Because string is given, TiDB is comparing strings:
+-- 由于给定的是字符串，TiDB 会比较字符串：
 [tidb]> SELECT '[12.0]' < '[4.0]';
 +--------------------+
 | '[12.0]' < '[4.0]' |
@@ -216,7 +216,7 @@ When using an operator or function that accepts multiple data types, you need to
 +--------------------+
 1 row in set (0.01 sec)
 
--- Cast to vector explicitly to compare by vectors:
+-- 显式转换为向量后按向量比较：
 [tidb]> SELECT VEC_FROM_TEXT('[12.0]') < VEC_FROM_TEXT('[4.0]');
 +--------------------------------------------------+
 | VEC_FROM_TEXT('[12.0]') < VEC_FROM_TEXT('[4.0]') |
@@ -226,10 +226,10 @@ When using an operator or function that accepts multiple data types, you need to
 1 row in set (0.01 sec)
 ```
 
-You can also explicitly cast a vector to its string representation. Take using the `VEC_AS_TEXT()` function as an example:
+你也可以显式将向量转换为字符串，例如使用 `VEC_AS_TEXT()` 函数：
 
 ```sql
--- The string is first implicitly cast to a vector, and then the vector is explicitly cast to a string, thus returning a string in the normalized format:
+-- 字符串先隐式转换为向量，然后再显式转换为字符串，返回标准格式的字符串：
 [tidb]> SELECT VEC_AS_TEXT('[0.3,     0.5,  -0.1]');
 +--------------------------------------+
 | VEC_AS_TEXT('[0.3,     0.5,  -0.1]') |
@@ -239,23 +239,23 @@ You can also explicitly cast a vector to its string representation. Take using t
 1 row in set (0.01 sec)
 ```
 
-For additional cast functions, see [Vector Functions and Operators](/vector-search/vector-search-functions-and-operators.md).
+关于其他的类型转换函数，请参见 [Vector Functions and Operators](/vector-search/vector-search-functions-and-operators.md)。
 
-### Cast between Vector ⇔ other data types
+### Vector ⇔ 其他数据类型之间的转换
 
-Currently, direct casting between Vector and other data types (such as `JSON`) is not supported. To work around this limitation, use String as an intermediate data type for casting in your SQL statement.
+目前，不支持直接在 Vector 和其他数据类型（如 `JSON`）之间进行转换。可以在 SQL 语句中使用 String 作为中间类型进行转换。
 
-Note that vector data type columns stored in a table cannot be converted to other data types using `ALTER TABLE ... MODIFY COLUMN ...`.
+注意，存储在表中的向量数据类型列不能通过 `ALTER TABLE ... MODIFY COLUMN ...` 转换为其他数据类型。
 
-## Restrictions
+## 限制
 
-For restrictions on vector data types, see [Vector search limitations](/vector-search/vector-search-limitations.md) and [Vector index restrictions](/vector-search/vector-search-index.md#restrictions).
+关于向量数据类型的限制，请参见 [Vector search limitations](/vector-search/vector-search-limitations.md) 和 [Vector index restrictions](/vector-search/vector-search-index.md#restrictions)。
 
-## MySQL compatibility
+## MySQL 兼容性
 
-Vector data types are TiDB specific, and are not supported in MySQL.
+向量数据类型为 TiDB 特有，不支持在 MySQL 中使用。
 
-## See also
+## 相关链接
 
 - [Vector Functions and Operators](/vector-search/vector-search-functions-and-operators.md)
 - [Vector Search Index](/vector-search/vector-search-index.md)

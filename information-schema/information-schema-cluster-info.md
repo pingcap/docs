@@ -1,17 +1,15 @@
 ---
 title: CLUSTER_INFO
-summary: Learn the `CLUSTER_INFO` cluster topology information table.
+summary: 了解 `CLUSTER_INFO` 集群拓扑信息表。
 ---
 
 # CLUSTER_INFO
 
-The `CLUSTER_INFO` cluster topology table provides the current topology information of the cluster, the version information of each instance, the Git Hash corresponding to the instance version, the starting time of each instance, and the running time of each instance.
+`CLUSTER_INFO` 集群拓扑表提供了当前集群的拓扑信息、每个实例的版本信息、对应实例版本的 Git Hash、每个实例的启动时间以及运行时间。
 
 > **Note:**
 >
-> This table is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
-
-{{< copyable "sql" >}}
+> 该表在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
 
 ```sql
 USE information_schema;
@@ -34,18 +32,16 @@ desc cluster_info;
 8 rows in set (0.01 sec)
 ```
 
-Field description:
+字段说明：
 
-* `TYPE`: The instance type. The optional values are `tidb`, `pd`, and `tikv`.
-* `INSTANCE`: The instance address, which is a string in the format of `IP:PORT`.
-* `STATUS_ADDRESS`: The service address of HTTP API. Some commands in tikv-ctl, pd-ctl, or tidb-ctl might use this API and this address. You can also get more cluster information via this address. Refer to [TiDB HTTP API document](https://github.com/pingcap/tidb/blob/release-8.5/docs/tidb_http_api.md) for details.
-* `VERSION`: The semantic version number of the corresponding instance. To be compatible with the MySQL version number, the TiDB version is displayed in the format of `${mysql-version}-${tidb-version}`.
-* `GIT_HASH`: The Git Commit Hash when compiling the instance version, which is used to identify whether two instances are of the absolutely consistent version.
-* `START_TIME`: The starting time of the corresponding instance.
-* `UPTIME`: The uptime of the corresponding instance.
-* `SERVER_ID`: The server ID of the corresponding instance.
-
-{{< copyable "sql" >}}
+* `TYPE`: 实例类型。可选值为 `tidb`、`pd` 和 `tikv`。
+* `INSTANCE`: 实例地址，格式为 `IP:PORT` 的字符串。
+* `STATUS_ADDRESS`: HTTP API 的服务地址。部分在 tikv-ctl、pd-ctl 或 tidb-ctl 中的命令可能会使用此 API 和地址。你也可以通过此地址获取更多集群信息。详情请参考 [TiDB HTTP API document](https://github.com/pingcap/tidb/blob/release-8.5/docs/tidb_http_api.md)。
+* `VERSION`: 对应实例的语义版本号。为了兼容 MySQL 版本号，TiDB 版本以 `${mysql-version}-${tidb-version}` 格式显示。
+* `GIT_HASH`: 编译实例版本时的 Git Commit Hash，用于识别两个实例是否为绝对一致的版本。
+* `START_TIME`: 对应实例的启动时间。
+* `UPTIME`: 对应实例的运行时间。
+* `SERVER_ID`: 对应实例的服务器 ID。
 
 ```sql
 SELECT * FROM cluster_info;

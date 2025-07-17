@@ -1,11 +1,11 @@
 ---
 title: Vector Search Integration Overview
-summary: An overview of TiDB vector search integration, including supported AI frameworks, embedding models, and ORM libraries.
+summary: 关于 TiDB 向量搜索集成的概述，包括支持的 AI 框架、嵌入模型和 ORM 库。
 ---
 
 # Vector Search Integration Overview
 
-This document provides an overview of TiDB vector search integration, including supported AI frameworks, embedding models, and Object Relational Mapping (ORM) libraries.
+本文档提供了 TiDB 向量搜索集成的概述，包括支持的 AI 框架、嵌入模型和对象关系映射（ORM）库。
 
 <CustomContent platform="tidb">
 
@@ -25,63 +25,63 @@ This document provides an overview of TiDB vector search integration, including 
 
 > **Note:**
 >
-> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB 版本必须是 v8.4.0 或更高（建议 v8.5.0 或更高）。
 
-## AI frameworks
+## AI 框架
 
-TiDB provides official support for the following AI frameworks, enabling you to easily integrate AI applications developed based on these frameworks with TiDB Vector Search.
+TiDB 提供对以下 AI 框架的官方支持，方便你将基于这些框架开发的 AI 应用与 TiDB 向量搜索进行集成。
 
-| AI frameworks | Tutorial                                                                                          |
-|---------------|---------------------------------------------------------------------------------------------------|
-| Langchain     | [Integrate Vector Search with LangChain](/vector-search/vector-search-integrate-with-langchain.md)   |
-| LlamaIndex    | [Integrate Vector Search with LlamaIndex](/vector-search/vector-search-integrate-with-llamaindex.md) |
+| AI 框架 | 教程 |
+|---------|---------------------------------------------------------------------------------------------------|
+| Langchain | [将向量搜索与 LangChain 集成](/vector-search/vector-search-integrate-with-langchain.md) |
+| LlamaIndex | [将向量搜索与 LlamaIndex 集成](/vector-search/vector-search-integrate-with-llamaindex.md) |
 
-Moreover, you can also use TiDB for various purposes, such as document storage and knowledge graph storage for AI applications.
+此外，你还可以使用 TiDB 进行多种用途，例如文档存储和知识图谱存储，以支持 AI 应用。
 
-## Embedding models and services
+## 嵌入模型和服务
 
-TiDB Vector Search supports storing vectors of up to 16383 dimensions, which accommodates most embedding models.
+TiDB 向量搜索支持存储最多 16383 维的向量，满足大部分嵌入模型的需求。
 
-You can either use self-deployed open-source embedding models or third-party embedding APIs provided by third-party embedding providers to generate vectors.
+你可以使用自行部署的开源嵌入模型，或第三方嵌入提供商提供的 API 来生成向量。
 
-The following table lists some mainstream embedding service providers and the corresponding integration tutorials.
+下表列出一些主流的嵌入服务提供商及对应的集成教程。
 
-| Embedding service providers | Tutorial                                                                                                            |
-|-----------------------------|---------------------------------------------------------------------------------------------------------------------|
-| Jina AI                     | [Integrate Vector Search with Jina AI Embeddings API](/vector-search/vector-search-integrate-with-jinaai-embedding.md) |
+| 嵌入服务提供商 | 教程 |
+|----------------|--------------------------------------------------------------------------------------------------------------|
+| Jina AI | [将向量搜索与 Jina AI Embeddings API 集成](/vector-search/vector-search-integrate-with-jinaai-embedding.md) |
 
-## Object Relational Mapping (ORM) libraries
+## 对象关系映射（ORM）库
 
-You can integrate TiDB Vector Search with your ORM library to interact with the TiDB database.
+你可以将 TiDB 向量搜索与 ORM 库集成，以便与 TiDB 数据库交互。
 
-The following table lists the supported ORM libraries and the corresponding integration tutorials:
+下表列出支持的 ORM 库及对应的集成教程：
 
 <table>
   <tr>
-    <th>Language</th>
-    <th>ORM/Client</th>
-    <th>How to install</th>
-    <th>Tutorial</th>
+    <th>语言</th>
+    <th>ORM/客户端</th>
+    <th>安装方式</th>
+    <th>教程</th>
   </tr>
   <tr>
     <td rowspan="4">Python</td>
     <td>TiDB Vector Client</td>
     <td><code>pip install tidb-vector[client]</code></td>
-    <td><a href="/tidb/v8.5/vector-search-get-started-using-python">Get Started with Vector Search Using Python</a></td>
+    <td><a href="/tidb/v8.5/vector-search-get-started-using-python">使用 Python 开始向量搜索</a></td>
   </tr>
   <tr>
     <td>SQLAlchemy</td>
     <td><code>pip install tidb-vector</code></td>
-    <td><a href="/tidb/v8.5/vector-search-integrate-with-sqlalchemy">Integrate TiDB Vector Search with SQLAlchemy</a></td>
+    <td><a href="/tidb/v8.5/vector-search-integrate-with-sqlalchemy">将 TiDB 向量搜索与 SQLAlchemy 集成</a></td>
   </tr>
   <tr>
     <td>peewee</td>
     <td><code>pip install tidb-vector</code></td>
-    <td><a href="/tidb/v8.5/vector-search-integrate-with-peewee">Integrate TiDB Vector Search with peewee</a></td>
+    <td><a href="/tidb/v8.5/vector-search-integrate-with-peewee">将 TiDB 向量搜索与 peewee 集成</a></td>
   </tr>
   <tr>
     <td>Django</td>
     <td><code>pip install django-tidb[vector]</code></td>
-    <td><a href="/tidb/v8.5/vector-search-integrate-with-django-orm">Integrate TiDB Vector Search with Django</a></td>
+    <td><a href="/tidb/v8.5/vector-search-integrate-with-django-orm">将 TiDB 向量搜索与 Django 集成</a></td>
   </tr>
 </table>

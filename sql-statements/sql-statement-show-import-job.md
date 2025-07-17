@@ -1,18 +1,18 @@
 ---
 title: SHOW IMPORT
-summary: An overview of the usage of SHOW IMPORT in TiDB.
+summary: 关于在 TiDB 中使用 SHOW IMPORT 的概述。
 ---
 
 # SHOW IMPORT
 
-The `SHOW IMPORT` statement is used to show the IMPORT jobs created in TiDB. This statement can only show jobs created by the current user.
+`SHOW IMPORT` 语句用于显示在 TiDB 中创建的导入任务。该语句只能显示由当前用户创建的任务。
 
-## Required privileges
+## 所需权限
 
-- `SHOW IMPORT JOBS`: if a user has the `SUPER` privilege, this statement shows all import jobs in TiDB. Otherwise, this statement only shows jobs created by the current user.
-- `SHOW IMPORT JOB <job-id>`: only the creator of an import job or users with the `SUPER` privilege can use this statement to view a specific job.
+- `SHOW IMPORT JOBS`：如果用户具有 `SUPER` 权限，则此语句显示 TiDB 中所有的导入任务。否则，只显示由当前用户创建的任务。
+- `SHOW IMPORT JOB <job-id>`：只有导入任务的创建者或具有 `SUPER` 权限的用户才能使用此语句查看特定任务。
 
-## Synopsis
+## 语法
 
 ```ebnf+diagram
 ShowImportJobsStmt ::=
@@ -22,24 +22,24 @@ ShowImportJobStmt ::=
     'SHOW' 'IMPORT' 'JOB' JobID
 ```
 
-The output fields of the `SHOW IMPORT` statement are described as follows:
+`SHOW IMPORT` 语句的输出字段说明如下：
 
-| Column           | Description             |
-|------------------|-------------------------|
-| Job_ID           | The ID of the task                  |
-| Data_Source      | Information about the data source                  |
-| Target_Table     | The name of the target table                     |
-| Phase            | The current phase of the job, including `importing`, `validating`, and `add-index` |
-| Status           | The current status of the job, including `pending` (means created but not started yet), `running`, `canceled`, `failed`, and `finished` |
-| Source_File_Size | The size of the source file  |
-| Imported_Rows | The number of data rows that have been read and written to the target table  |
-| Result_Message   | If the import fails, this field returns the error message. Otherwise, it is empty.|
-| Create_Time      | The time when the task is created                 |
-| Start_Time       | The time when the task is started                     |
-| End_Time         | The time when the task is ended            |
-| Created_By       | The name of the database user who creates the task         |
+| 列名             | 描述                                              |
+|------------------|---------------------------------------------------|
+| Job_ID           | 任务的ID                                          |
+| Data_Source      | 数据源信息                                        |
+| Target_Table     | 目标表的名称                                      |
+| Phase            | 任务当前阶段，包括 `importing`、`validating` 和 `add-index` |
+| Status           | 任务当前状态，包括 `pending`（表示已创建但未开始）、`running`、`canceled`、`failed` 和 `finished` |
+| Source_File_Size | 源文件的大小                                      |
+| Imported_Rows    | 已读取并写入目标表的数据行数                        |
+| Result_Message   | 如果导入失败，此字段返回错误信息，否则为空             |
+| Create_Time      | 任务创建时间                                      |
+| Start_Time       | 任务开始时间                                      |
+| End_Time         | 任务结束时间                                      |
+| Created_By       | 创建该任务的数据库用户名称                          |
 
-## Example
+## 示例
 
 ```sql
 SHOW IMPORT JOBS;
@@ -68,11 +68,11 @@ SHOW IMPORT JOB 60001;
 1 row in set (0.01 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension to MySQL syntax.
+此语句为 TiDB 对 MySQL 语法的扩展。
 
-## See also
+## 相关链接
 
 * [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)
 * [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)

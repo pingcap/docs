@@ -1,44 +1,44 @@
 ---
 title: Aggregate (GROUP BY) Functions
-summary: Learn about the supported aggregate functions in TiDB.
+summary: 了解 TiDB 支持的聚合函数。
 ---
 
 # Aggregate (GROUP BY) Functions
 
-This document describes details about the supported aggregate functions in TiDB.
+本文档描述了 TiDB 支持的聚合函数的详细信息。
 
-## Supported aggregate functions
+## 支持的聚合函数
 
-This section describes the supported MySQL `GROUP BY` aggregate functions in TiDB.
+本节介绍 TiDB 中支持的 MySQL `GROUP BY` 聚合函数。
 
-| Name                                                                                                           | Description                                       |
-|:---------------------------------------------------------------------------------------------------------------|:--------------------------------------------------|
-| [`COUNT()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_count)                   | Return a count of the number of rows returned     |
-| [`COUNT(DISTINCT)`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_count-distinct)  | Return the count of a number of different values  |
-| [`SUM()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_sum)                       | Return the sum                                    |
-| [`AVG()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_avg)                       | Return the average value of the argument          |
-| [`MAX()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_max)                       | Return the maximum value                          |
-| [`MIN()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_min)                       | Return the minimum value                          |
-| [`GROUP_CONCAT()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_group-concat)     | Return a concatenated string                      |
-| [`VARIANCE()`, `VAR_POP()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_var-pop) | Return the population standard variance           |
-| [`STD()`, `STDDEV()`, `STDDEV_POP`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_std) | Return the population standard deviation      |
-| [`VAR_SAMP()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_var-samp)             | Return the sample variance                        |
-| [`STDDEV_SAMP()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_stddev-samp)       | Return the sample standard deviation              |
-| [`JSON_ARRAYAGG()`](/functions-and-operators/json-functions/json-functions-aggregate.md#json_arrayagg)         | Return the result set as a single JSON array      |
-| [`JSON_OBJECTAGG()`](/functions-and-operators/json-functions/json-functions-aggregate.md#json_objectagg)       | Return the result set as a single JSON object containing key-value pairs |
+| 名称                                                                                                           | 描述                                       |
+|:--------------------------------------------------------------------------------------------------------------|:------------------------------------------|
+| [`COUNT()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_count)                   | 返回满足条件的行数                        |
+| [`COUNT(DISTINCT)`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_count-distinct)  | 返回不同值的个数                         |
+| [`SUM()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_sum)                       | 返回总和                                |
+| [`AVG()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_avg)                       | 返回参数的平均值                        |
+| [`MAX()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_max)                       | 返回最大值                            |
+| [`MIN()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_min)                       | 返回最小值                            |
+| [`GROUP_CONCAT()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_group-concat)     | 返回连接后的字符串                      |
+| [`VARIANCE()`, `VAR_POP()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_var-pop) | 返回总体标准差方差                     |
+| [`STD()`, `STDDEV()`, `STDDEV_POP`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_std) | 返回总体标准差                        |
+| [`VAR_SAMP()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_var-samp)             | 返回样本方差                          |
+| [`STDDEV_SAMP()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_stddev-samp)       | 返回样本标准差                        |
+| [`JSON_ARRAYAGG()`](/functions-and-operators/json-functions/json-functions-aggregate.md#json_arrayagg)         | 以单个 JSON 数组形式返回结果集        |
+| [`JSON_OBJECTAGG()`](/functions-and-operators/json-functions/json-functions-aggregate.md#json_objectagg)       | 以包含键值对的单个 JSON 对象形式返回结果集 |
 
-- Unless otherwise stated, group functions ignore `NULL` values.
-- If you use a group function in a statement containing no `GROUP BY` clause, it is equivalent to grouping on all rows.
+- 除非另有说明，否则组函数会忽略 `NULL` 值。
+- 如果在不包含 `GROUP BY` 子句的语句中使用组函数，则等同于对所有行进行分组。
 
-In addition, TiDB also provides the following aggregate functions:
+此外，TiDB 还提供以下聚合函数：
 
 + `APPROX_PERCENTILE(expr, constant_integer_expr)`
 
-    This function returns the percentile of `expr`. The `constant_integer_expr` argument indicates the percentage value which is a constant integer in the range of `[1,100]`. A percentile P<sub>k</sub> (`k` represents percentage) indicates that there are at least `k%` values in the data set that are less than or equal to P<sub>k</sub>.
+    该函数返回 `expr` 的百分位数。`constant_integer_expr` 参数表示百分比值，是范围在 `[1,100]` 的常数整数。百分位 P<sub>k</sub>（`k` 代表百分比）表示数据集中至少有 `k%` 的值小于或等于 P<sub>k</sub>。
 
-    This function only supports the [numeric type](/data-type-numeric.md) and the [date and time type](/data-type-date-and-time.md) as the returned type of `expr`. For other returned types, `APPROX_PERCENTILE` only returns `NULL`.
+    该函数仅支持 [数值类型](/data-type-numeric.md) 和 [日期时间类型](/data-type-date-and-time.md) 作为 `expr` 的返回类型。对于其他返回类型，`APPROX_PERCENTILE` 仅返回 `NULL`。
 
-    The following example shows how to calculate the fiftieth percentile of a `INT` column:
+    以下示例演示如何计算 `INT` 列的第50百分位数：
 
     ```sql
     DROP TABLE IF EXISTS t;
@@ -56,14 +56,14 @@ In addition, TiDB also provides the following aggregate functions:
     +--------------------------+
     |                        2 |
     +--------------------------+
-    1 row in set (0.00 sec)
+    1 行结果（0.00 秒）
     ```
 
 + `APPROX_COUNT_DISTINCT(expr, [expr...])`
 
-    This function is similar to `COUNT(DISTINCT)` in counting the number of distinct values but returns an approximate result. It uses the `BJKST` algorithm, significantly reducing memory consumption when processing large datasets with a power-law distribution. Moreover, for low-cardinality data, this function provides high accuracy while maintaining efficient CPU utilization.
+    该函数类似于 `COUNT(DISTINCT)`，用于统计不同值的个数，但返回近似结果。它采用 `BJKST` 算法，在处理具有幂律分布的大型数据集时显著减少内存消耗。此外，对于低基数数据，该函数提供高精度，同时保持高效的 CPU 利用率。
 
-    The following example shows how to use this function:
+    以下示例演示如何使用该函数：
 
     ```sql
     DROP TABLE IF EXISTS t;
@@ -82,25 +82,25 @@ In addition, TiDB also provides the following aggregate functions:
     |                           3 |
     |                           4 |
     +-----------------------------+
-    2 rows in set (0.00 sec)
+    2 行结果（0.00 秒）
     ```
 
-Except for the `GROUP_CONCAT()`, `APPROX_PERCENTILE()`, and `APPROX_COUNT_DISTINCT` functions, all the preceding functions can serve as [Window functions](/functions-and-operators/window-functions.md).
+除了 `GROUP_CONCAT()`、`APPROX_PERCENTILE()` 和 `APPROX_COUNT_DISTINCT` 函数外，以上所有函数都可以作为 [Window functions](/functions-and-operators/window-functions.md) 使用。
 
-## GROUP BY modifiers
+## GROUP BY 修饰符
 
-Starting from v7.4.0, the `GROUP BY` clause of TiDB supports the `WITH ROLLUP` modifier. For more information, see [GROUP BY modifiers](/functions-and-operators/group-by-modifier.md).
+从 v7.4.0 版本开始，TiDB 的 `GROUP BY` 子句支持 `WITH ROLLUP` 修饰符。更多信息请参见 [GROUP BY modifiers](/functions-and-operators/group-by-modifier.md)。
 
-## SQL mode support
+## SQL 模式支持
 
-TiDB supports the SQL Mode `ONLY_FULL_GROUP_BY`, and when enabled TiDB will refuse queries with ambiguous non-aggregated columns. For example, this query is illegal with `ONLY_FULL_GROUP_BY` enabled because the non-aggregated column "b" in the `SELECT` list does not appear in the `GROUP BY` statement:
+TiDB 支持 SQL 模式 `ONLY_FULL_GROUP_BY`，启用后 TiDB 会拒绝存在歧义的非聚合列的查询。例如，启用 `ONLY_FULL_GROUP_BY` 后，以下查询是非法的，因为 `SELECT` 列表中的非聚合列 "b" 没有出现在 `GROUP BY` 子句中：
 
 ```sql
-drop table if exists t;
-create table t(a bigint, b bigint, c bigint);
-insert into t values(1, 2, 3), (2, 2, 3), (3, 2, 3);
+DROP TABLE IF EXISTS t;
+CREATE TABLE t(a BIGINT, b BIGINT, c BIGINT);
+INSERT INTO t VALUES(1, 2, 3), (2, 2, 3), (3, 2, 3);
 
-mysql> select a, b, sum(c) from t group by a;
+mysql> SELECT a, b, SUM(c) FROM t GROUP BY a;
 +------+------+--------+
 | a    | b    | sum(c) |
 +------+------+--------+
@@ -108,38 +108,38 @@ mysql> select a, b, sum(c) from t group by a;
 |    2 |    2 |      3 |
 |    3 |    2 |      3 |
 +------+------+--------+
-3 rows in set (0.01 sec)
+3 行结果（0.01 秒）
 
-mysql> set sql_mode = 'ONLY_FULL_GROUP_BY';
-Query OK, 0 rows affected (0.00 sec)
+mysql> SET sql_mode = 'ONLY_FULL_GROUP_BY';
+Query OK, 0 行受影响（0.00 秒）
 
-mysql> select a, b, sum(c) from t group by a;
+mysql> SELECT a, b, SUM(c) FROM t GROUP BY a;
 ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'b' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
 ```
 
-TiDB currently enables the [`ONLY_FULL_GROUP_BY`](/mysql-compatibility.md#default-differences) mode by default.
+TiDB 当前默认启用 [`ONLY_FULL_GROUP_BY`](/mysql-compatibility.md#default-differences) 模式。
 
-### Differences from MySQL
+### 与 MySQL 的差异
 
-The current implementation of `ONLY_FULL_GROUP_BY` is less strict than that in MySQL 5.7. For example, suppose that we execute the following query, expecting the results to be ordered by "c":
+`ONLY_FULL_GROUP_BY` 的当前实现比 MySQL 5.7 中的要求宽松。例如，假设执行以下查询，期望结果按 "c" 排序：
 
 ```sql
-drop table if exists t;
-create table t(a bigint, b bigint, c bigint);
-insert into t values(1, 2, 1), (1, 2, 2), (1, 3, 1), (1, 3, 2);
-select distinct a, b from t order by c;
+DROP TABLE IF EXISTS t;
+CREATE TABLE t(a BIGINT, b BIGINT, c BIGINT);
+INSERT INTO t VALUES(1, 2, 1), (1, 2, 2), (1, 3, 1), (1, 3, 2);
+SELECT DISTINCT a, b FROM t ORDER BY c;
 ```
 
-To order the result, duplicates must be eliminated first. But to do so, which row should we keep? This choice influences the retained value of "c", which in turn influences ordering and makes it arbitrary as well.
+为了排序，必须先去重。但去重后，应保留哪一行？这个选择会影响 "c" 的值，从而影响排序，变得任意。
 
-In MySQL, a query that has `DISTINCT` and `ORDER BY` is rejected as invalid if any `ORDER BY` expression does not satisfy at least one of these conditions:
+在 MySQL 中，如果 `DISTINCT` 和 `ORDER BY` 一起使用，只要 `ORDER BY` 的表达式不满足以下条件之一，查询就会被拒绝：
 
-- The expression is equal to one in the `SELECT` list
-- All columns referenced by the expression and belonging to the query's selected tables are elements of the `SELECT` list
+- 表达式等于 `SELECT` 列表中的某一项
+- 表达式引用的所有列都属于查询的 `SELECT` 列表中的元素
 
-But in TiDB, the above query is legal, for more information see [#4254](https://github.com/pingcap/tidb/issues/4254).
+但在 TiDB 中，上述查询是合法的，更多信息请参见 [#4254](https://github.com/pingcap/tidb/issues/4254)。
 
-Another TiDB extension to standard SQL permits references in the `HAVING` clause to aliased expressions in the `SELECT` list. For example, the following query returns "name" values that occur only once in table "orders":
+TiDB 还扩展了标准 SQL，允许在 `HAVING` 子句中引用 `SELECT` 列表中的别名表达式。例如，以下查询返回在 `orders` 表中只出现一次的 "name" 值：
 
 ```sql
 select name, count(name) from orders
@@ -147,7 +147,7 @@ group by name
 having count(name) = 1;
 ```
 
-The TiDB extension permits the use of an alias in the `HAVING` clause for the aggregated column:
+TiDB 扩展允许在 `HAVING` 子句中使用别名来引用聚合列：
 
 ```sql
 select name, count(name) as c from orders
@@ -155,7 +155,7 @@ group by name
 having c = 1;
 ```
 
-Standard SQL permits only column expressions in `GROUP BY` clauses, so a statement such as this is invalid because "FLOOR(value/100)" is a noncolumn expression:
+标准 SQL 只允许在 `GROUP BY` 子句中使用列表达式，因此如下语句是无效的，因为 "FLOOR(value/100)" 是非列表达式：
 
 ```sql
 select id, floor(value/100)
@@ -163,16 +163,12 @@ from tbl_name
 group by id, floor(value/100);
 ```
 
-TiDB extends standard SQL to permit noncolumn expressions in `GROUP BY` clauses and considers the preceding statement valid.
+TiDB 扩展了标准 SQL，允许在 `GROUP BY` 子句中使用非列表达式，并认为上述语句是合法的。
 
-Standard SQL also does not permit aliases in `GROUP BY` clauses. TiDB extends standard SQL to permit aliases, so another way to write the query is as follows:
+标准 SQL 也不允许在 `GROUP BY` 中使用别名。TiDB 扩展了标准 SQL，允许使用别名，因此另一种写法如下：
 
 ```sql
 select id, floor(value/100) as val
 from tbl_name
 group by id, val;
 ```
-
-## Related system variables
-
-The [`group_concat_max_len`](/system-variables.md#group_concat_max_len) variable sets the maximum number of items for the `GROUP_CONCAT()` function.

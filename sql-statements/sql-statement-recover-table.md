@@ -1,27 +1,23 @@
 ---
 title: RECOVER TABLE
-summary: An overview of the usage of RECOVER TABLE for the TiDB database.
+summary: 关于在 TiDB 数据库中使用 RECOVER TABLE 的概述。
 ---
 
 # RECOVER TABLE
 
-`RECOVER TABLE` is used to recover a deleted table and the data on it within the GC (Garbage Collection) life time after the `DROP TABLE` statement is executed.
+`RECOVER TABLE` 用于在执行 `DROP TABLE` 语句后，在 GC（垃圾回收）存活期内恢复被删除的表及其数据。
 
-## Syntax
-
-{{< copyable "sql" >}}
+## 语法
 
 ```sql
 RECOVER TABLE table_name;
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 RECOVER TABLE BY JOB JOB_ID;
 ```
 
-## Synopsis
+## 概要
 
 ```ebnf+diagram
 RecoverTableStmt ::=
@@ -35,45 +31,41 @@ Int64Num ::= NUM
 NUM ::= intLit
 ```
 
-> **Note:**
+> **注意：**
 >
-> If a table is deleted and the GC lifetime is out, the table cannot be recovered with `RECOVER TABLE`. Execution of `RECOVER TABLE` in this scenario returns an error like: `snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST`.
+> 如果一个表被删除且超出 GC 存活期，则无法使用 `RECOVER TABLE` 进行恢复。在这种情况下执行 `RECOVER TABLE` 会返回类似的错误：`snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST`。
 
-## Examples
+## 示例
 
-+ Recover the deleted table according to the table name.
++ 根据表名恢复被删除的表。
 
-    {{< copyable "sql" >}}
-
+    
     ```sql
     DROP TABLE t;
     ```
 
-    {{< copyable "sql" >}}
-
+    
     ```sql
     RECOVER TABLE t;
     ```
 
-    This method searches the recent DDL job history and locates the first DDL operation of the `DROP TABLE` type, and then recovers the deleted table with the name identical to the one table name specified in the `RECOVER TABLE` statement.
+    该方法会搜索最近的 DDL 任务历史，定位第一个类型为 `DROP TABLE` 的 DDL 操作，然后恢复与 `RECOVER TABLE` 语句中指定的表名相同的被删除表。
 
-+ Recover the deleted table according to the table's `DDL JOB ID` used.
++ 根据表的 `DDL JOB ID` 使用方法恢复被删除的表。
 
-    Suppose that you had deleted the table `t` and created another `t`, and again you deleted the newly created `t`. Then, if you want to recover the `t` deleted in the first place, you must use the method that specifies the `DDL JOB ID`.
+    假设你删除了表 `t`，又创建了另一个 `t`，之后再次删除了新创建的 `t`。如果你想恢复最初删除的 `t`，必须使用指定 `DDL JOB ID` 的方法。
 
-    {{< copyable "sql" >}}
-
+    
     ```sql
     DROP TABLE t;
     ```
 
-    {{< copyable "sql" >}}
-
+    
     ```sql
     ADMIN SHOW DDL JOBS 1;
     ```
 
-    The second statement above is used to search for the table's `DDL JOB ID` to delete `t`. In the following example, the ID is `53`.
+    上述第二条语句用于查找删除 `t` 的 `DDL JOB ID`。以下示例中，ID 为 `53`。
 
     ```
     +--------+---------+------------+------------+--------------+-----------+----------+-----------+-----------------------------------+--------+
@@ -83,22 +75,21 @@ NUM ::= intLit
     +--------+---------+------------+------------+--------------+-----------+----------+-----------+-----------------------------------+--------+
     ```
 
-    {{< copyable "sql" >}}
-
+    
     ```sql
     RECOVER TABLE BY JOB 53;
     ```
 
-    This method recovers the deleted table via the `DDL JOB ID`. If the corresponding DDL job is not of the `DROP TABLE` type, an error occurs.
+    该方法通过 `DDL JOB ID` 恢复被删除的表。如果对应的 DDL 任务不是 `DROP TABLE` 类型，则会发生错误。
 
-## Implementation principle
+## 实现原理
 
-When deleting a table, TiDB only deletes the table metadata, and writes the table data (row data and index data) to be deleted to the `mysql.gc_delete_range` table. The GC Worker in the TiDB background periodically removes from the `mysql.gc_delete_range` table the keys that exceed the GC life time.
+在删除表时，TiDB 只会删除表的元数据，并将待删除的表数据（行数据和索引数据）写入 `mysql.gc_delete_range` 表。TiDB 后台的 GC Worker 会定期从 `mysql.gc_delete_range` 表中删除超出 GC 存活期的键。
 
-Therefore, to recover a table, you only need to recover the table metadata and delete the corresponding row record in the `mysql.gc_delete_range` table before the GC Worker deletes the table data. You can use a snapshot read of TiDB to recover the table metadata. Refer to [Read Historical Data](/read-historical-data.md) for details.
+因此，要恢复一张表，只需恢复表的元数据，并在 GC Worker 删除表数据之前，删除 `mysql.gc_delete_range` 表中对应的行记录。你可以使用 TiDB 的快照读来恢复表的元数据。详细内容请参考 [Read Historical Data](/read-historical-data.md)。
 
-Table recovery is done by TiDB obtaining the table metadata through snapshot read, and then going through the process of table creation similar to `CREATE TABLE`. Therefore, `RECOVER TABLE` itself is, in essence, a kind of DDL operation.
+表的恢复是通过 TiDB 通过快照读取获取表的元数据，然后进行类似 `CREATE TABLE` 的表创建过程完成的。因此，`RECOVER TABLE` 本质上也是一种 DDL 操作。
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension to MySQL syntax.
+该语句是 TiDB 对 MySQL 语法的扩展。

@@ -1,94 +1,94 @@
 ---
 title: JSON Functions
-summary: Learn about JSON functions.
+summary: 了解 JSON 函数。
 ---
 
-# JSON Functions
+# JSON 函数
 
-You can use JSON functions to work with data in the [JSON data type](/data-type-json.md).
+你可以使用 JSON 函数来操作 [JSON 数据类型](/data-type-json.md) 中的数据。
 
-## Functions that create JSON values
+## 创建 JSON 值的函数
 
-| Function Name                     | Description |
-| --------------------------------- | ----------- |
-| [JSON_ARRAY()](/functions-and-operators/json-functions/json-functions-create.md#json_array) | Evaluates a (possibly empty) list of values and returns a JSON array containing those values |
-| [JSON_OBJECT()](/functions-and-operators/json-functions/json-functions-create.md#json_object) | Evaluates a (possibly empty) list of key-value pairs and returns a JSON object containing those pairs  |
-| [JSON_QUOTE()](/functions-and-operators/json-functions/json-functions-create.md#json_quote) | Returns a string as a JSON value with quotes |
+| 函数名 | 描述 |
+| --------- | ----------- |
+| [JSON_ARRAY()](/functions-and-operators/json-functions/json-functions-create.md#json_array) | 评估一组（可能为空）值，并返回包含这些值的 JSON 数组 |
+| [JSON_OBJECT()](/functions-and-operators/json-functions/json-functions-create.md#json_object) | 评估一组（可能为空）键值对，并返回包含这些键值对的 JSON 对象 |
+| [JSON_QUOTE()](/functions-and-operators/json-functions/json-functions-create.md#json_quote) | 将字符串作为带引号的 JSON 值返回 |
 
-## Functions that search JSON values
+## 搜索 JSON 值的函数
 
-| Function Name                     | Description |
-| --------------------------------- | ----------- |
-| [JSON_CONTAINS()](/functions-and-operators/json-functions/json-functions-search.md#json_contains) | Indicates by returning 1 or 0 whether a given candidate JSON document is contained within a target JSON document |
-| [JSON_CONTAINS_PATH()](/functions-and-operators/json-functions/json-functions-search.md#json_contains_path) | Returns 0 or 1 to indicate whether a JSON document contains data at a given path or paths |
-| [JSON_EXTRACT()](/functions-and-operators/json-functions/json-functions-search.md#json_extract) | Returns data from a JSON document, selected from the parts of the document matched by the `path` arguments |
-| [->](/functions-and-operators/json-functions/json-functions-search.md#-)  | Returns the value from a JSON column after the evaluating path; an alias for `JSON_EXTRACT(doc, path_literal)`   |
-| [->>](/functions-and-operators/json-functions/json-functions-search.md#--1)  | Returns the value from a JSON column after the evaluating path and unquoting the result; an alias for `JSON_UNQUOTE(JSON_EXTRACT(doc, path_literal))` |
-| [JSON_KEYS()](/functions-and-operators/json-functions/json-functions-search.md#json_keys) | Returns the keys from the top-level value of a JSON object as a JSON array, or, if a path argument is given, the top-level keys from the selected path |
-| [JSON_SEARCH()](/functions-and-operators/json-functions/json-functions-search.md#json_search) | Search a JSON document for one or all matches of a string |
-| [MEMBER OF()](/functions-and-operators/json-functions/json-functions-search.md#member-of) | If the passed value is an element of the JSON array, returns 1. Otherwise, returns 0. |
-| [JSON_OVERLAPS()](/functions-and-operators/json-functions/json-functions-search.md#json_overlaps) | Indicates whether two JSON documents have overlapping part. If yes, returns 1. If not, returns 0. |
+| 函数名 | 描述 |
+| --------- | ----------- |
+| [JSON_CONTAINS()](/functions-and-operators/json-functions/json-functions-search.md#json_contains) | 通过返回 1 或 0 表示给定候选 JSON 文档是否包含在目标 JSON 文档中 |
+| [JSON_CONTAINS_PATH()](/functions-and-operators/json-functions/json-functions-search.md#json_contains_path) | 返回 0 或 1，指示 JSON 文档是否在给定路径或路径集合中包含数据 |
+| [JSON_EXTRACT()](/functions-and-operators/json-functions/json-functions-search.md#json_extract) | 从 JSON 文档中返回数据，数据由 `path` 参数匹配的部分选取 |
+| [->](/functions-and-operators/json-functions/json-functions-search.md#-) | 在评估路径后，从 JSON 列中返回对应的值；是 `JSON_EXTRACT(doc, path_literal)` 的别名 |
+| [->>](/functions-and-operators/json-functions/json-functions-search.md#--1) | 在评估路径后，从 JSON 列中返回值并取消引号；是 `JSON_UNQUOTE(JSON_EXTRACT(doc, path_literal))` 的别名 |
+| [JSON_KEYS()](/functions-and-operators/json-functions/json-functions-search.md#json_keys) | 返回 JSON 对象顶层值的键，作为 JSON 数组；如果提供路径参数，则返回所选路径的顶层键 |
+| [JSON_SEARCH()](/functions-and-operators/json-functions/json-functions-search.md#json_search) | 在 JSON 文档中搜索字符串的一个或所有匹配项 |
+| [MEMBER OF()](/functions-and-operators/json-functions/json-functions-search.md#member-of) | 如果传入的值是 JSON 数组的元素，则返回 1，否则返回 0 |
+| [JSON_OVERLAPS()](/functions-and-operators/json-functions/json-functions-search.md#json_overlaps) | 指示两个 JSON 文档是否有重叠部分；如果有，返回 1，否则返回 0 |
 
-## Functions that modify JSON values
+## 修改 JSON 值的函数
 
-| Function Name                     | Description |
-| --------------------------------- | ----------- |
-| [JSON_APPEND()](/functions-and-operators/json-functions/json-functions-modify.md#json_append) | An alias to `JSON_ARRAY_APPEND()` |
-| [JSON_ARRAY_APPEND()](/functions-and-operators/json-functions/json-functions-modify.md#json_array_append) | Appends values to the end of the indicated arrays within a JSON document and returns the result |
-| [JSON_ARRAY_INSERT()](/functions-and-operators/json-functions/json-functions-modify.md#json_array_insert) | Insert values into the specified locations of a JSON document and returns the result |
-| [JSON_INSERT()](/functions-and-operators/json-functions/json-functions-modify.md#json_insert) | Inserts data into a JSON document and returns the result |
-| [JSON_MERGE_PATCH()](/functions-and-operators/json-functions/json-functions-modify.md#json_merge_patch)  | Merges two or more JSON documents, without preserving values of duplicate keys |
-| [JSON_MERGE_PRESERVE()](/functions-and-operators/json-functions/json-functions-modify.md#json_merge_preserve)  | Merges two or more JSON documents by preserving all values |
-| [JSON_MERGE()](/functions-and-operators/json-functions/json-functions-modify.md#json_merge)  | A deprecated alias for `JSON_MERGE_PRESERVE()` |
-| [JSON_REMOVE()](/functions-and-operators/json-functions/json-functions-modify.md#json_remove)    | Removes data from a JSON document and returns the result |
-| [JSON_REPLACE()](/functions-and-operators/json-functions/json-functions-modify.md#json_replace) | Replaces existing values in a JSON document and returns the result |
-| [JSON_SET()](/functions-and-operators/json-functions/json-functions-modify.md#json_set)  | Inserts or updates data in a JSON document and returns the result |
-| [JSON_UNQUOTE()](/functions-and-operators/json-functions/json-functions-modify.md#json_unquote) |  Unquotes a JSON value and returns the result as a string |
+| 函数名 | 描述 |
+| --------- | ----------- |
+| [JSON_APPEND()](/functions-and-operators/json-functions/json-functions-modify.md#json_append) | `JSON_ARRAY_APPEND()` 的别名 |
+| [JSON_ARRAY_APPEND()](/functions-and-operators/json-functions/json-functions-modify.md#json_array_append) | 在 JSON 文档中指定数组的末尾追加值，并返回结果 |
+| [JSON_ARRAY_INSERT()](/functions-and-operators/json-functions/json-functions-modify.md#json_array_insert) | 在 JSON 文档的指定位置插入值，并返回结果 |
+| [JSON_INSERT()](/functions-and-operators/json-functions/json-functions-modify.md#json_insert) | 在 JSON 文档中插入数据并返回结果 |
+| [JSON_MERGE_PATCH()](/functions-and-operators/json-functions/json-functions-modify.md#json_merge_patch) | 合并两个或多个 JSON 文档，不保留重复键的值 |
+| [JSON_MERGE_PRESERVE()](/functions-and-operators/json-functions/json-functions-modify.md#json_merge_preserve) | 通过保留所有值合并两个或多个 JSON 文档 |
+| [JSON_MERGE()](/functions-and-operators/json-functions/json-functions-modify.md#json_merge) | `JSON_MERGE_PRESERVE()` 的已废弃别名 |
+| [JSON_REMOVE()](/functions-and-operators/json-functions/json-functions-modify.md#json_remove) | 从 JSON 文档中删除数据并返回结果 |
+| [JSON_REPLACE()](/functions-and-operators/json-functions/json-functions-modify.md#json_replace) | 替换 JSON 文档中的已有值并返回结果 |
+| [JSON_SET()](/functions-and-operators/json-functions/json-functions-modify.md#json_set) | 在 JSON 文档中插入或更新数据并返回结果 |
+| [JSON_UNQUOTE()](/functions-and-operators/json-functions/json-functions-modify.md#json_unquote) | 取消 JSON 值的引号并返回结果作为字符串 |
 
-## Functions that return JSON value attributes
+## 返回 JSON 值属性的函数
 
-| Function Name                     | Description |
-| --------------------------------- | ----------- |
-| [JSON_DEPTH()](/functions-and-operators/json-functions/json-functions-return.md#json_depth) | Returns the maximum depth of a JSON document |
-| [JSON_LENGTH()](/functions-and-operators/json-functions/json-functions-return.md#json_length) | Returns the length of a JSON document, or, if a path argument is given, the length of the value within the path |
-| [JSON_TYPE()](/functions-and-operators/json-functions/json-functions-return.md#json_type) | Returns a string indicating the type of a JSON value |
-| [JSON_VALID()](/functions-and-operators/json-functions/json-functions-return.md#json_valid) | Checks if a json\_doc is valid JSON. |
+| 函数名 | 描述 |
+| --------- | ----------- |
+| [JSON_DEPTH()](/functions-and-operators/json-functions/json-functions-return.md#json_depth) | 返回 JSON 文档的最大深度 |
+| [JSON_LENGTH()](/functions-and-operators/json-functions/json-functions-return.md#json_length) | 返回 JSON 文档的长度，或如果提供路径参数，则返回路径内值的长度 |
+| [JSON_TYPE()](/functions-and-operators/json-functions/json-functions-return.md#json_type) | 返回指示 JSON 值类型的字符串 |
+| [JSON_VALID()](/functions-and-operators/json-functions/json-functions-return.md#json_valid) | 检查 json\_doc 是否为有效的 JSON |
 
-## Utility functions
+## 工具函数
 
-| Function Name                     | Description |
-| --------------------------------- | ----------- |
-| [JSON_PRETTY()](/functions-and-operators/json-functions/json-functions-utility.md#json_pretty) | Pretty formatting of a JSON document |
-| [JSON_STORAGE_FREE()](/functions-and-operators/json-functions/json-functions-utility.md#json_storage_free) | Returns how much storage space was freed in the binary representation of the JSON value after it was updated in place. |
-| [JSON_STORAGE_SIZE()](/functions-and-operators/json-functions/json-functions-utility.md#json_storage_size) | Returns an approximate size of bytes required to store the json value. As the size does not account for TiKV using compression, the output of this function is not strictly compatible with MySQL. |
+| 函数名 | 描述 |
+| --------- | ----------- |
+| [JSON_PRETTY()](/functions-and-operators/json-functions/json-functions-utility.md#json_pretty) | 美化格式化 JSON 文档 |
+| [JSON_STORAGE_FREE()](/functions-and-operators/json-functions/json-functions-utility.md#json_storage_free) | 返回在就地更新后，二进制表示的 JSON 值释放的存储空间大小 |
+| [JSON_STORAGE_SIZE()](/functions-and-operators/json-functions/json-functions-utility.md#json_storage_size) | 返回存储 JSON 值所需的近似字节数。由于此值未考虑 TiKV 使用压缩，输出结果与 MySQL 不完全兼容 |
 
-## Aggregate functions
+## 聚合函数
 
-| Function Name                     | Description |
-| --------------------------------- | ----------- |
-| [JSON_ARRAYAGG()](/functions-and-operators/json-functions/json-functions-aggregate.md#json_arrayagg) | Provides an aggregation of keys. |
-| [JSON_OBJECTAGG()](/functions-and-operators/json-functions/json-functions-aggregate.md#json_objectagg) | Provides an aggregation of values for a given key. |
+| 函数名 | 描述 |
+| --------- | ----------- |
+| [JSON_ARRAYAGG()](/functions-and-operators/json-functions/json-functions-aggregate.md#json_arrayagg) | 提供键的聚合 |
+| [JSON_OBJECTAGG()](/functions-and-operators/json-functions/json-functions-aggregate.md#json_objectagg) | 提供给定键的值的聚合 |
 
-## Validation functions
-    
-| Function Name                     | Description |
-| --------------------------------- | ----------- |
-| [JSON_SCHEMA_VALID()](/functions-and-operators/json-functions/json-functions-validate.md#json_schema_valid) | Validates a JSON document against a schema to ensure data integrity and consistency. |
+## 校验函数
+
+| 函数名 | 描述 |
+| --------- | ----------- |
+| [JSON_SCHEMA_VALID()](/functions-and-operators/json-functions/json-functions-validate.md#json_schema_valid) | 根据模式验证 JSON 文档，以确保数据的完整性和一致性 |
 
 ## JSONPath
 
-Many of JSON functions use [JSONPath](https://www.rfc-editor.org/rfc/rfc9535.html) to select parts of a JSON document.
+许多 JSON 函数使用 [JSONPath](https://www.rfc-editor.org/rfc/rfc9535.html) 来选择 JSON 文档的部分内容。
 
-| Symbol         | Description                  |
-| -------------- | ---------------------------- |
-| `$`            | Document root                |
-| `.`            | Member selection             |
-| `[]`           | Array selection              |
-| `*`            | Wildcard                     |
-| `**`           | Path wildcard                |
-| `[<n> to <n>]` | Array range selection        |
+| 符号 | 描述 |
+| ------ | ----------- |
+| `$` | 文档根节点 |
+| `.` | 成员选择 |
+| `[]` | 数组选择 |
+| `*` | 通配符 |
+| `**` | 路径通配符 |
+| `[<n> to <n>]` | 数组范围选择 |
 
-The subsequent content takes the following JSON document as an example to demonstrate how to use JSONPath:
+以下内容以示例 JSON 文档为例，演示如何使用 JSONPath：
 
 ```json
 {
@@ -125,34 +125,34 @@ The subsequent content takes the following JSON document as an example to demons
 }
 ```
 
-| JSONPath                              | Description                             | Example with [`JSON_EXTRACT()`](/functions-and-operators/json-functions/json-functions-search.md#json_extract) | 
-|-------------------------------------- |-----------------------------------------|-------------------------------|
-| `$`                                   | The root of the document                | Returns the full document                              |
-| `$.database`                          | The `database` object                  |  Returns the full structure starting with `"database"`. It does not include `"migration_tool"` and the structure below that.                             |
-| `$.database.name`                     | The name of the database.               | `"TiDB"`                      |
-| `$.database.features`                 | All database features                   | `["distributed", "scalable", "relational", "cloud native"]`                              |
-| `$.database.features[0]`              | The first database feature.             | `"distributed"`               |
-| `$.database.features[2]`              | The third database feature.             | `"relational"`                |
-| `$.database.versions[0].type`         | The type of the first database version. | `"lts"`                       |
-| `$.database.versions[*].release_date` | The release date for all versions.      | `["2024-05-24","2024-03-29"]` |
-| `$.*.features`                        | Two array's of features                 | `[["distributed", "scalable", "relational", "cloud native"], ["MySQL compatible", "Shard merging"]]`                              |
-| `$**.version`                         | All versions, with path wildcard        | `["v8.1.0","v8.0.0"]`         |
-| `$.database.features[0 to 2]`         | Range of database features from the first to the third.             | `["scalable","relational"]`   |
+| JSONPath | 描述 | 以 [`JSON_EXTRACT()`](/functions-and-operators/json-functions/json-functions-search.md#json_extract) 举例 |
+| -------- | -------- | -------- |
+| `$` | 文档的根节点 | 返回完整文档 |
+| `$.database` | `database` 对象 | 返回以 `"database"` 开头的完整结构，不包括 `"migration_tool"` 和其下的结构 |
+| `$.database.name` | 数据库的名称 | `"TiDB"` |
+| `$.database.features` | 所有数据库特性 | `["distributed", "scalable", "relational", "cloud native"]` |
+| `$.database.features[0]` | 第一个数据库特性 | `"distributed"` |
+| `$.database.features[2]` | 第三个数据库特性 | `"relational"` |
+| `$.database.versions[0].type` | 第一个版本的类型 | `"lts"` |
+| `$.database.versions[*].release_date` | 所有版本的发布日期 | `["2024-05-24","2024-03-29"]` |
+| `$.*.features` | 两个数组的特性 | `[["distributed", "scalable", "relational", "cloud native"], ["MySQL compatible", "Shard merging"]]` |
+| `$**.version` | 所有版本，路径通配符 | `["v8.1.0","v8.0.0"]` |
+| `$.database.features[0 to 2]` | 从第一个到第三个的特性范围 | `["scalable","relational"]` |
 
-For more information, see [the IETF draft for JSONPath](https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html).
+更多信息请参见 [the IETF draft for JSONPath](https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html)。
 
-## See also
+## 相关链接
 
 * [JSON Data Type](/data-type-json.md)
 
-## Unsupported functions
+## 不支持的函数
 
 - `JSON_SCHEMA_VALIDATION_REPORT()`
 - `JSON_TABLE()`
 - `JSON_VALUE()`
 
-For more information, see [#14486](https://github.com/pingcap/tidb/issues/14486).
+更多信息请参见 [#14486](https://github.com/pingcap/tidb/issues/14486)。
 
-## MySQL compatibility
+## MySQL 兼容性
 
-- TiDB supports most of the [JSON functions](https://dev.mysql.com/doc/refman/8.0/en/json-functions.html) available in MySQL 8.0.
+- TiDB 支持大部分 MySQL 8.0 中的 [JSON 函数](https://dev.mysql.com/doc/refman/8.0/en/json-functions.html)。

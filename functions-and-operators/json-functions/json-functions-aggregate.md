@@ -1,19 +1,19 @@
 ---
 title: JSON Functions That Aggregate JSON Values
-summary: Learn about JSON functions that aggregate JSON values.
+summary: 了解用于聚合 JSON 值的 JSON 函数。
 ---
 
 # JSON Functions That Aggregate JSON Values
 
-The functions listed on this page are part of the [aggregate functions](/functions-and-operators/aggregate-group-by-functions.md) that TiDB supports, but are specific to working with JSON.
+本页面列出的函数是 TiDB 支持的 [aggregate functions](/functions-and-operators/aggregate-group-by-functions.md) 的一部分，但专门用于处理 JSON。
 
 ## [JSON_ARRAYAGG()](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_json-arrayagg)
 
-The `JSON_ARRAYAGG(key)` function aggregates values of keys into a JSON array according to the given `key`. `key` is typically an expression or a column name.
+`JSON_ARRAYAGG(key)` 函数根据给定的 `key` 将值聚合成一个 JSON 数组。`key` 通常是一个表达式或列名。
 
-Example:
+示例：
 
-Here the two rows in one column of a table get aggregated into a JSON array.
+这里将表中一列的两个行聚合成一个 JSON 数组。
 
 ```sql
 SELECT JSON_ARRAYAGG(v) FROM (SELECT 1 'v' UNION SELECT 2);
@@ -25,16 +25,16 @@ SELECT JSON_ARRAYAGG(v) FROM (SELECT 1 'v' UNION SELECT 2);
 +------------------+
 | [2, 1]           |
 +------------------+
-1 row in set (0.00 sec)
+1 行结果（0.00 秒）
 ```
 
 ## [JSON_OBJECTAGG()](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_json-objectagg)
 
-The `JSON_OBJECTAGG(key,value)` function aggregates keys and values of keys into a JSON object according to the given `key` and `value`. Both `key` or `value` are typically an expression or a column name.
+`JSON_OBJECTAGG(key,value)` 函数根据给定的 `key` 和 `value` 将键值对聚合成一个 JSON 对象。`key` 和 `value` 通常是表达式或列名。
 
-Example:
+示例：
 
-First, create two tables and add a few rows to them.
+首先，创建两个表并插入一些行。
 
 ```sql
 CREATE TABLE plants (
@@ -66,7 +66,7 @@ VALUES
 (3, "thorns","no");
 ```
 
-Now you can check what the created tables look like.
+然后可以查看创建的表内容。
 
 ```sql
 TABLE plants;
@@ -80,7 +80,7 @@ TABLE plants;
 |  2 | tulip  |
 |  3 | orchid |
 +----+--------+
-3 rows in set (0.00 sec)
+3 行结果（0.00 秒）
 ```
 
 ```sql
@@ -99,10 +99,10 @@ TABLE plant_attributes;
 |  6 |        3 | color      | white  |
 |  7 |        3 | thorns     | no     |
 +----+----------+------------+--------+
-7 rows in set (0.00 sec)
+7 行结果（0.00 秒）
 ```
 
-You can use the `JSON_OBJECTAGG()` function with this data. Here you can see that for every group multiple key/value pairs are aggregated into a JSON object.
+你可以使用 `JSON_OBJECTAGG()` 函数结合这些数据。这里可以看到，对于每个分组，多个键/值对被聚合成一个 JSON 对象。
 
 ```sql
 SELECT
@@ -123,7 +123,7 @@ GROUP BY
 | orchid | {"color": "white", "thorns": "no"}                        |
 | tulip  | {"color": "orange", "grows_from": "bulb", "thorns": "no"} |
 +--------+-----------------------------------------------------------+
-3 rows in set (0.00 sec)
+3 行结果（0.00 秒）
 ```
 
 ## See also

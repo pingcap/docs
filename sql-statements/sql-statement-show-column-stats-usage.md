@@ -1,24 +1,24 @@
 ---
 title: SHOW COLUMN_STATS_USAGE
-summary: An overview of the usage of SHOW COLUMN_STATS_USAGE for TiDB database.
+summary: 关于 TiDB 数据库中 SHOW COLUMN_STATS_USAGE 的使用概述。
 ---
 
 # SHOW COLUMN_STATS_USAGE
 
-The `SHOW COLUMN_STATS_USAGE` statement shows the last usage time and collection time of column statistics. You can also use it to locate `PREDICATE COLUMNS` and columns on which statistics have been collected.
+`SHOW COLUMN_STATS_USAGE` 语句显示列统计信息的上次使用时间和采集时间。你还可以用它来定位 `PREDICATE COLUMNS` 以及已采集统计信息的列。
 
-Currently, the `SHOW COLUMN_STATS_USAGE` statement returns the following columns:
+目前，`SHOW COLUMN_STATS_USAGE` 语句返回以下列：
 
-| Column name | Description            |
+| 列名 | 描述 |
 | -------- | ------------- |
-| `Db_name`  |  The database name    |
-| `Table_name` | The table name |
-| `Partition_name` | The partition name |
-| `Column_name` | The column name |
-| `Last_used_at` | The last time when the column statistics were used in the query optimization |
-| `Last_analyzed_at` | The last time when the column statistics were collected |
+| `Db_name`  |  数据库名称 |
+| `Table_name` | 表名称 |
+| `Partition_name` | 分区名称 |
+| `Column_name` | 列名称 |
+| `Last_used_at` | 列统计信息在查询优化中最后一次被使用的时间 |
+| `Last_analyzed_at` | 列统计信息最后一次被采集的时间 |
 
-## Synopsis
+## 语法
 
 ```ebnf+diagram
 ShowColumnStatsUsageStmt ::=
@@ -29,7 +29,7 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## Examples
+## 示例
 
 ```sql
 SHOW COLUMN_STATS_USAGE;
@@ -45,14 +45,14 @@ SHOW COLUMN_STATS_USAGE;
 | test    | t          |                | a           | NULL         | 2024-05-10 11:37:06 |
 | test    | t          |                | b           | NULL         | 2024-05-10 11:37:06 |
 +---------+------------+----------------+-------------+--------------+---------------------+
-5 rows in set (0.00 sec)
+5 行，耗时 0.00 秒
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension to MySQL syntax.
+该语句是 TiDB 对 MySQL 语法的扩展。
 
-## See also
+## 相关链接
 
 * [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)
-* [Introduction to Statistics](/statistics.md)
+* [统计信息简介](/statistics.md)

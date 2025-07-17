@@ -1,13 +1,13 @@
 ---
 title: RENAME TABLE | TiDB SQL Statement Reference
-summary: An overview of the usage of RENAME TABLE for the TiDB database.
+summary: 关于在 TiDB 数据库中使用 RENAME TABLE 的概述。
 ---
 
 # RENAME TABLE
 
-This statement is used to rename existing tables and views, supporting renaming multiple tables at once and renaming across databases.
+此语句用于重命名现有的表和视图，支持一次重命名多个表以及跨数据库重命名。
 
-## Synopsis
+## 语法概要
 
 ```ebnf+diagram
 RenameTableStmt ::=
@@ -17,7 +17,7 @@ TableToTable ::=
     TableName 'TO' TableName
 ```
 
-## Examples
+## 示例
 
 ```sql
 CREATE TABLE t1 (a int);
@@ -61,7 +61,7 @@ SHOW TABLES;
 1 row in set (0.00 sec)
 ```
 
-The following example demonstrates how to rename multiple tables across databases, assuming that the databases `db1`, `db2`, `db3`, and `db4` already exist, and that the tables `db1.t1` and `db3.t3` already exist:
+以下示例演示如何在跨数据库的情况下重命名多个表，假设数据库 `db1`、`db2`、`db3` 和 `db4` 已经存在，且表 `db1.t1` 和 `db3.t3` 已存在：
 
 ```sql
 RENAME TABLE db1.t1 To db2.t2, db3.t3 To db4.t4;
@@ -117,7 +117,7 @@ Database changed
 1 row in set (0.00 sec)
 ```
 
-The atomic rename can be used to swap out a table without having any moment in which the table does not exist.
+原子重命名可以用来交换表，确保在操作过程中表不会出现不存在的瞬间。
 
 ```sql
 CREATE TABLE t1(id int PRIMARY KEY);
@@ -129,7 +129,7 @@ Query OK, 0 rows affected (0.04 sec)
 
 ```sql
 CREATE TABLE t1_new(id int PRIMARY KEY, n CHAR(0));
-````
+```
 
 ```
 Query OK, 0 rows affected (0.04 sec)
@@ -158,11 +158,11 @@ Create Table: CREATE TABLE `t1` (
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `RENAME TABLE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中的 `RENAME TABLE` 语句与 MySQL 完全兼容。如果你发现任何兼容性差异，请 [报告一个 bug](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 相关链接
 
 * [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 * [SHOW TABLES](/sql-statements/sql-statement-show-tables.md)

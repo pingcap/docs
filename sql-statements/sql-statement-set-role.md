@@ -1,22 +1,22 @@
 ---
-title: SET ROLE | TiDB SQL Statement Reference
-summary: An overview of the usage of SET ROLE for the TiDB database.
+title: SET ROLE | TiDB SQL 语句参考
+summary: 关于在 TiDB 数据库中使用 SET ROLE 的概述。
 ---
 
 # SET ROLE
 
-The `SET ROLE` statement is used to enable roles in the current session. After enabling roles, users can use the privileges of the role(s).
+`SET ROLE` 语句用于在当前会话中启用角色。启用角色后，用户可以使用该角色的权限。
 
-## Synopsis
+## 语法概述
 
 ```ebnf+diagram
 SetRoleStmt ::=
     "SET" "ROLE" ( "DEFAULT" | "ALL" ( "EXCEPT" Rolename ("," Rolename)* )? | "NONE" | Rolename ("," Rolename)* )?
 ```
 
-## Examples
+## 示例
 
-Create a user `'u1'@'%'` and three roles: `'r1'@'%'`, `'r2'@'%'` and `'r3'@'%'`. Grant these roles to `'u1'@'%'` and set `'r1'@'%'` as the default role of `'u1'@'%'`.
+创建一个用户 `'u1'@'%'` 和三个角色：`'r1'@'%'`、`'r2'@'%'` 和 `'r3'@'%'`。将这些角色授予 `'u1'@'%'`，并将 `'r1'@'%'` 设置为 `'u1'@'%'` 的默认角色。
 
 ```sql
 CREATE USER 'u1'@'%';
@@ -25,7 +25,7 @@ GRANT 'r1', 'r2', 'r3' TO 'u1'@'%';
 SET DEFAULT ROLE 'r1' TO 'u1'@'%';
 ```
 
-Log in as `'u1'@'%'` and execute the following `SET ROLE` statement to enable all roles.
+以 `'u1'@'%'` 登录，并执行以下 `SET ROLE` 语句以启用所有角色。
 
 ```sql
 SET ROLE ALL;
@@ -41,7 +41,7 @@ SELECT CURRENT_ROLE();
 1 row in set (0.000 sec)
 ```
 
-Execute the following `SET ROLE` statement to enable `'r2'` and `'r3'`.
+执行以下 `SET ROLE` 语句以启用 `'r2'` 和 `'r3'`。
 
 ```sql
 SET ROLE 'r2', 'r3';
@@ -57,7 +57,7 @@ SELECT CURRENT_ROLE();
 1 row in set (0.000 sec)
 ```
 
-Execute the following `SET ROLE` statement to enable the default role(s).
+执行以下 `SET ROLE` 语句以启用默认角色。
 
 ```sql
 SET ROLE DEFAULT;
@@ -73,7 +73,7 @@ SELECT CURRENT_ROLE();
 1 row in set (0.000 sec)
 ```
 
-Execute the following `SET ROLE` statement to cancel all enabled role(s).
+执行以下 `SET ROLE` 语句以取消所有已启用的角色。
 
 ```sql
 SET ROLE NONE;
@@ -89,11 +89,11 @@ SELECT CURRENT_ROLE();
 1 row in set (0.000 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `SET ROLE` statement in TiDB is fully compatible with the roles feature in MySQL 8.0. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中的 `SET ROLE` 语句与 MySQL 8.0 中的角色功能完全兼容。如果你发现任何兼容性差异，[请报告一个 bug](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 相关链接
 
 * [CREATE ROLE](/sql-statements/sql-statement-create-role.md)
 * [DROP ROLE](/sql-statements/sql-statement-drop-role.md)

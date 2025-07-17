@@ -1,13 +1,11 @@
 ---
 title: STATISTICS
-summary: Learn the `STATISTICS` information_schema table.
+summary: 了解 `STATISTICS` information_schema 表。
 ---
 
 # STATISTICS
 
-The `STATISTICS` table provides information about table indexes.
-
-{{< copyable "sql" >}}
+`STATISTICS` 表提供关于表索引的信息。
 
 ```sql
 USE information_schema;
@@ -37,31 +35,31 @@ DESC statistics;
 | IS_VISIBLE    | varchar(3)    | YES  |      | NULL    |       |
 | Expression    | varchar(64)   | YES  |      | NULL    |       |
 +---------------+---------------+------+------+---------+-------+
-18 rows in set (0.00 sec)
+18 行结果（0.00 秒）
 ```
 
-Fields in the `STATISTICS` table are described as follows:
+`STATISTICS` 表中的字段说明如下：
 
-* `TABLE_CATALOG`: The name of the catalog to which the table containing the index belongs. This value is always `def`.
-* `TABLE_SCHEMA`: The name of the database to which the table containing the index belongs.
-* `TABLE_NAME`: The name of the table containing the index.
-* `NON_UNIQUE`: If the index must not contain duplicate values, the value is `0`; if duplicate values are allowed in the index, the value is `1`.
-* `INDEX_SCHEMA`: The name of the database to which the index belongs.
-* `INDEX_NAME`: The name of the index. If the index is the primary key, then the value is always `PRIMARY`.
-* `SEQ_IN_INDEX`: The column number in the index, starting from `1`.
-* `COLUMN_NAME`: The column name. See the description of the `Expression` column.
-* `COLLATION`: The sorting method of the columns in the index. The value can be `A` (ascending order), `D` (descending order) or `NULL` (unsorted).
-* `CARDINALITY`: TiDB does not use this field. The field value is always `0`.
-* `SUB_PART`: The prefix of the index. If only part of the prefix of the column is indexed, the value is the number of indexed characters; if the entire column is indexed, the value is `NULL`.
-* `PACKED`: TiDB does not use this field. This value is always `NULL`.
-* `NULLABLE`: If the column might contain a `NULL` value, the value is `YES`; if not, the value is `''`.
-* `INDEX_TYPE`: The type of the index.
-* `COMMENT`: Other information related to the index.
-* `INDEX_COMMENT`: Any comment with comment attribute provided for the index when creating the index.
-* `IS_VISIBLE`: Whether this index is visible or not. See also [Invisible index](/sql-statements/sql-statement-create-index.md#invisible-index).
-* `Expression` For the index key of the non-expression part, this value is `NULL`; for the index key of the expression part, this value is the expression itself. Refer to [Expression Index](/sql-statements/sql-statement-create-index.md#expression-index).
+* `TABLE_CATALOG`：包含索引的表所属的目录名称。该值始终为 `def`。
+* `TABLE_SCHEMA`：包含索引的表所属的数据库名称。
+* `TABLE_NAME`：包含索引的表的名称。
+* `NON_UNIQUE`：如果索引不允许重复值，则值为 `0`；如果索引允许重复值，则值为 `1`。
+* `INDEX_SCHEMA`：索引所属的数据库名称。
+* `INDEX_NAME`：索引的名称。如果是主键，则该值始终为 `PRIMARY`。
+* `SEQ_IN_INDEX`：索引中的列序号，从 `1` 开始。
+* `COLUMN_NAME`：列名。请参阅 `Expression` 列的描述。
+* `COLLATION`：索引中列的排序方式。值可以是 `A`（升序）、`D`（降序）或 `NULL`（未排序）。
+* `CARDINALITY`：TiDB 不使用此字段。该字段的值始终为 `0`。
+* `SUB_PART`：索引的前缀。如果只对列的部分前缀建立索引，则该值为索引字符数；如果对整个列建立索引，则该值为 `NULL`。
+* `PACKED`：TiDB 不使用此字段。该值始终为 `NULL`。
+* `NULLABLE`：如果该列可能包含 `NULL` 值，则值为 `YES`；否则为空字符串 `''`。
+* `INDEX_TYPE`：索引的类型。
+* `COMMENT`：与索引相关的其他信息。
+* `INDEX_COMMENT`：创建索引时提供的带有注释属性的任何备注。
+* `IS_VISIBLE`：该索引是否可见。详见 [Invisible index](/sql-statements/sql-statement-create-index.md#invisible-index)。
+* `Expression`：非表达式部分的索引键，该值为 `NULL`；表达式部分的索引键，该值为表达式本身。详见 [Expression Index](/sql-statements/sql-statement-create-index.md#expression-index)。
 
-The following statements are equivalent:
+以下语句等价：
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.STATISTICS

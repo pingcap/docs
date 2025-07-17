@@ -1,38 +1,37 @@
 ---
-title: Read Historical Data Using the `tidb_read_staleness` System Variable
-summary: Learn how to read historical data using the `tidb_read_staleness` system variable.
+title: 使用 `tidb_read_staleness` 系统变量读取历史数据
+summary: 了解如何通过 `tidb_read_staleness` 系统变量读取历史数据。
 ---
 
-# Read Historical Data Using the `tidb_read_staleness` System Variable
+# 使用 `tidb_read_staleness` 系统变量读取历史数据
 
-To support reading the historical data, in v5.4, TiDB introduces a new system variable `tidb_read_staleness`. This document describes how to read historical data through this system variable, including detailed operating procedures.
+为了支持读取历史数据，在 v5.4 版本中，TiDB 引入了一个新的系统变量 `tidb_read_staleness`。本文档描述了如何通过该系统变量读取历史数据，包括详细的操作流程。
 
-## Feature description
+## 功能描述
 
-The `tidb_read_staleness` system variable is used to set the time range of historical data that TiDB can read in the current session. The data type of this variable is int type, and the scope of it is `SESSION`. After setting the value, TiDB selects a timestamp as new as possible from the range allowed by this variable, and all subsequent read operations are performed against this timestamp. For example, if the value of this variable is set to `-5`, on the condition that TiKV has the corresponding historical version's data, TiDB selects a timestamp as new as possible within a 5-second time range.
+`tidb_read_staleness` 系统变量用于设置 TiDB 在当前会话中可以读取的历史数据的时间范围。该变量的数据类型为 int 类型，作用域为 `SESSION`。设置值后，TiDB 会在允许范围内选择一个尽可能新的时间戳，并以此时间戳进行后续的读取操作。例如，如果该变量的值设置为 `-5`，在 TiKV 存在对应历史版本数据的前提下，TiDB 会在 5 秒的时间范围内选择一个尽可能新的时间戳。
 
-After enabling `tidb_read_staleness`, you still can perform the following operations:
+启用 `tidb_read_staleness` 后，你仍然可以执行以下操作：
 
-- Insert, modify, delete data or perform DML operations in the current session. These statements are not affected by `tidb_read_staleness`.
-- Start an interactive transaction in the current session. Queries within this transaction still read the latest data.
+- 在当前会话中插入、修改、删除数据或执行 DML 操作。这些操作不受 `tidb_read_staleness` 的影响。
+- 在当前会话中开启交互式事务。事务中的查询仍然读取最新的数据。
 
-After reading the historical data, you can read the latest data in the following two ways:
+在读取历史数据后，你可以通过以下两种方式读取最新数据：
 
-- Start a new session.
-- Set the value of the `tidb_read_staleness` variable to `""` using the `SET` statement.
+- 开启一个新的会话。
+- 使用 `SET` 语句将 `tidb_read_staleness` 变量的值设置为 `""`。
 
 > **Note:**
 >
-> To reduce the latency and improve the timeliness of the Stale Read data, you can modify the TiKV `advance-ts-interval` configuration item. See [Reduce Stale Read latency](/stale-read.md#reduce-stale-read-latency) for details.
+> 为了减少延迟并提高 Stale Read 数据的时效性，你可以修改 TiKV 的 `advance-ts-interval` 配置项。详细信息请参见 [Reduce Stale Read latency](/stale-read.md#reduce-stale-read-latency)。
 
-## Usage examples
+## 使用示例
 
-This section describes how to use `tidb_read_staleness` with examples.
+本节通过示例介绍如何使用 `tidb_read_staleness`。
 
-1. Create a table, and insert a few rows of data into the table:
+1. 创建一张表，并插入几行数据：
 
-    {{< copyable "sql" >}}
-
+    
     ```sql
     create table t (c int);
     ```
@@ -41,8 +40,7 @@ This section describes how to use `tidb_read_staleness` with examples.
     Query OK, 0 rows affected (0.01 sec)
     ```
 
-    {{< copyable "sql" >}}
-
+    
     ```sql
     insert into t values (1), (2), (3);
     ```
@@ -51,10 +49,9 @@ This section describes how to use `tidb_read_staleness` with examples.
     Query OK, 3 rows affected (0.00 sec)
     ```
 
-2. Check out the data in the table:
+2. 查询表中的数据：
 
-    {{< copyable "sql" >}}
-
+    
     ```sql
     select * from t;
     ```
@@ -70,10 +67,9 @@ This section describes how to use `tidb_read_staleness` with examples.
     3 rows in set (0.00 sec)
     ```
 
-3. Update the data in a row:
+3. 更新某一行的数据：
 
-    {{< copyable "sql" >}}
-
+    
     ```sql
     update t set c=22 where c=2;
     ```
@@ -82,10 +78,9 @@ This section describes how to use `tidb_read_staleness` with examples.
     Query OK, 1 row affected (0.00 sec)
     ```
 
-4. Confirm that the data has been updated:
+4. 确认数据已被更新：
 
-    {{< copyable "sql" >}}
-
+    
     ```sql
     select * from t;
     ```
@@ -101,14 +96,13 @@ This section describes how to use `tidb_read_staleness` with examples.
     3 rows in set (0.00 sec)
     ```
 
-5. Set the `tidb_read_staleness` system variable.
+5. 设置 `tidb_read_staleness` 系统变量。
 
-    The scope of this variable is `SESSION`. After setting its value, TiDB reads the latest version data before the time set by the value.
+    该变量的作用域为 `SESSION`。设置后，TiDB 会在设置的时间范围内选择一个尽可能新的时间戳，并以此时间戳读取历史数据。
 
-    The following setting indicates that TiDB selects a timestamp as new as possible within the time range from 5 seconds ago to now and uses it as the timestamp for reading historical data:
+    以下设置表示 TiDB 会在从 5 秒前到现在的时间范围内选择一个尽可能新的时间戳作为读取历史数据的时间点：
 
-    {{< copyable "sql" >}}
-
+    
     ```sql
     set @@tidb_read_staleness="-5";
     ```
@@ -119,13 +113,12 @@ This section describes how to use `tidb_read_staleness` with examples.
 
     > **Note:**
     >
-    >  - Use `@@` instead of `@` before `tidb_read_staleness`. `@@` means system variables, and `@` means user variables.
-    >  - You need to set the historical time range (the value of `tidb_read_staleness`) according to the total time that you spent in step 3 and step 4. Otherwise, the latest data will be displayed in the query results, not the historical data. Therefore, you need to adjust this time range according to the time you spent on operations. For example, in this example, since the set time range is 5 seconds, you need to complete step 3 and step 4 within 5 seconds.
+    >  - 在 `tidb_read_staleness` 前使用 `@@`，而不是 `@`。`@@` 表示系统变量，`@` 表示用户变量。
+    >  - 你需要根据第 3 步和第 4 步所花费的总时间，设置合适的历史时间范围（`tidb_read_staleness` 的值）。否则，查询结果会显示最新的数据，而不是历史数据。因此，你需要根据操作所花费的时间调整时间范围。例如，在此示例中，由于设置的时间范围为 5 秒，你需要在 5 秒内完成第 3 步和第 4 步。
 
-    The data read here is the data before the update, that is, the historical data:
+    这里读取到的数据是更新之前的数据，即历史数据：
 
-    {{< copyable "sql" >}}
-
+    
     ```sql
     select * from t;
     ```
@@ -141,10 +134,9 @@ This section describes how to use `tidb_read_staleness` with examples.
     3 rows in set (0.00 sec)
     ```
 
-6. After un-setting this variable as follows, TiDB can read the latest data:
+6. 取消设置该变量后，TiDB 可以读取最新的数据：
 
-    {{< copyable "sql" >}}
-
+    
     ```sql
     set @@tidb_read_staleness="";
     ```
@@ -153,8 +145,7 @@ This section describes how to use `tidb_read_staleness` with examples.
     Query OK, 0 rows affected (0.00 sec)
     ```
 
-    {{< copyable "sql" >}}
-
+    
     ```sql
     select * from t;
     ```

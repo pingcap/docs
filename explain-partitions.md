@@ -1,15 +1,14 @@
 ---
-title: Explain Statements Using Partitions
-summary: Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
+title: 使用分区解释语句
+summary: 了解 TiDB 中 EXPLAIN 语句返回的执行计划信息。
 ---
 
-# Explain Statements Using Partitions
+# 使用分区解释语句
 
-The `EXPLAIN` statement displays the partitions that TiDB needs to access in order to execute a query. Because of [partition pruning](/partition-pruning.md), the displayed partitions are often only a subset of the overall partitions. This document describes some of the optimizations for common partitioned tables, and how to interpret the output of `EXPLAIN`.
+`EXPLAIN` 语句显示 TiDB 在执行查询时需要访问的分区。由于 [partition pruning](/partition-pruning.md)，显示的分区通常只是全部分区的一个子集。本文档描述了一些针对常见分区表的优化方法，以及如何解读 `EXPLAIN` 的输出。
 
-The sample data used in this document:
+本文档中使用的示例数据：
 
-{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE t1 (
@@ -53,9 +52,8 @@ SELECT SLEEP(1);
 ANALYZE TABLE t1;
 ```
 
-The following example shows a statement against the newly created partitioned table:
+以下示例展示了对新建分区表的查询语句：
 
-{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN SELECT COUNT(*) FROM t1 WHERE d = '2017-06-01';
@@ -74,16 +72,15 @@ EXPLAIN SELECT COUNT(*) FROM t1 WHERE d = '2017-06-01';
 5 rows in set (0.01 sec)
 ```
 
-Starting from the inner-most (`└─TableFullScan_19`) operator and working back towards the root operator (`StreamAgg_21`):
+从最内层（`└─TableFullScan_19`）操作符开始，逐步向根操作符（`StreamAgg_21`）回溯：
 
-* TiDB successfully identified that only one partition (`p2017`) needed to be accessed. This is noted under `access object`.
-* The partition itself was scanned in the operator `└─TableFullScan_19` and then `└─Selection_20` was applied to filter for rows that have a start date of `2017-06-01 00:00:00.000000`.
-* The rows that match `└─Selection_20` are then stream aggregated in the coprocessor, which natively understands the `count` function.
-* Each coprocessor request then sends back one row to `└─TableReader_22` inside TiDB, which is then stream aggregated under `StreamAgg_21` and one row is returned to the client.
+* TiDB 成功识别出只需要访问一个分区（`p2017`）。这在 `access object` 中有所体现。
+* 该分区在操作符 `└─TableFullScan_19` 中被扫描，然后 `└─Selection_20` 被应用，用于筛选出开始日期为 `2017-06-01 00:00:00.000000` 的行。
+* 匹配 `└─Selection_20` 的行随后在协处理器中进行流式聚合，协处理器原生支持 `count` 函数。
+* 每个协处理请求返回一行数据到 TiDB 内部的 `└─TableReader_22`，然后在 `StreamAgg_21` 中进行流式聚合，最后将一行结果返回给客户端。
 
-In the following example, partition pruning does not eliminate any partitions:
+在以下示例中，分区修剪未能排除任何分区：
 
-{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN SELECT COUNT(*) FROM t1 WHERE YEAR(d) = 2017;
@@ -124,9 +121,9 @@ EXPLAIN SELECT COUNT(*) FROM t1 WHERE YEAR(d) = 2017;
 27 rows in set (0.00 sec)
 ```
 
-From the output above:
+从上述输出可以看出：
 
-* TiDB believes that it needs to access all of the partitions `(p2016..pMax)`. This is because the predicate `YEAR(d) = 2017` is considered [non-sargable](https://en.wikipedia.org/wiki/Sargable). This issue is not specific to TiDB.
-* As each partition is scanned, a `Selection` operator filters out rows that do not match the year of 2017.
-* A stream aggregation on each partition is performed to count the number of rows that match.
-* The operator `└─PartitionUnion_21` unions the results from accessing each partition.
+* TiDB 认为需要访问所有分区（`p2016..pMax`）。这是因为谓词 `YEAR(d) = 2017` 被认为是 [non-sargable](https://en.wikipedia.org/wiki/Sargable)。这个问题并非 TiDB 独有。
+* 每个分区在扫描时，`Selection` 操作符会筛选出年份不为 2017 的行。
+* 对每个分区进行流式聚合，统计匹配的行数。
+* 操作符 `└─PartitionUnion_21` 将访问每个分区的结果合并。

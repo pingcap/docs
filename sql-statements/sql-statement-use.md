@@ -1,13 +1,13 @@
 ---
-title: USE | TiDB SQL Statement Reference
-summary: An overview of the usage of USE for the TiDB database.
+title: USE | TiDB SQL 语句参考
+summary: 关于在 TiDB 中使用 USE 的概述。
 ---
 
 # USE
 
-The `USE` statement selects a current database for the user session.
+`USE` 语句用于选择当前会话的数据库。
 
-## Synopsis
+## 概要
 
 ```ebnf+diagram
 UseStmt ::=
@@ -17,7 +17,7 @@ DBName ::=
     Identifier
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> USE mysql;
@@ -72,11 +72,11 @@ mysql> SHOW TABLES;
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `USE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中的 `USE` 语句与 MySQL 完全兼容。如果你发现任何兼容性差异，[请报告一个 bug](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 相关链接
 
 * [CREATE DATABASE](/sql-statements/sql-statement-create-database.md)
 * [SHOW TABLES](/sql-statements/sql-statement-show-tables.md)

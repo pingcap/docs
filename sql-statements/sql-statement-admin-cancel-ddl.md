@@ -1,16 +1,16 @@
 ---
-title: ADMIN CANCEL DDL | TiDB SQL Statement Reference
-summary: An overview of the usage of ADMIN CANCEL DDL for the TiDB database.
+title: ADMIN CANCEL DDL | TiDB SQL 语句参考
+summary: 关于 TiDB 数据库中使用 ADMIN CANCEL DDL 的概述。
 category: reference
 ---
 
 # ADMIN CANCEL DDL
 
-The `ADMIN CANCEL DDL` statement allows you to cancel a running DDL job. The `job_id` can be found by running [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md).
+`ADMIN CANCEL DDL` 语句允许你取消正在执行的 DDL 任务。可以通过运行 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md) 获取 `job_id`。
 
-The `ADMIN CANCEL DDL` statement also allows you to cancel a DDL job that is committed but not yet completed executing. After the cancellation, the SQL statement that executes the DDL job returns the `ERROR 8214 (HY000): Cancelled DDL job` error. If you cancel a DDL job that has already been completed, you will see the `DDL Job:90 not found` error in the `RESULT` column, which indicates that the job has been removed from the DDL waiting queue.
+`ADMIN CANCEL DDL` 语句还允许你取消已提交但尚未完成执行的 DDL 任务。取消后，执行该 DDL 任务的 SQL 语句会返回 `ERROR 8214 (HY000): Cancelled DDL job` 错误。如果你取消的 DDL 任务已经完成，则在 `RESULT` 列中会显示 `DDL Job:90 not found` 错误，表示该任务已从 DDL 等待队列中移除。
 
-## Synopsis
+## 语法概要
 
 ```ebnf+diagram
 AdminCancelDDLStmt ::=
@@ -20,26 +20,26 @@ NumList ::=
     Int64Num ( ',' Int64Num )*
 ```
 
-## Examples
+## 示例
 
-To cancel the currently running DDL jobs and return whether the corresponding jobs are successfully cancelled, use `ADMIN CANCEL DDL JOBS`:
+若要取消当前正在运行的 DDL 任务，并返回对应任务是否成功取消的结果，可以使用 `ADMIN CANCEL DDL JOBS`：
 
 ```sql
 ADMIN CANCEL DDL JOBS job_id [, job_id] ...;
 ```
 
-If the operation fails to cancel the jobs, specific reasons are displayed.
+如果操作未能成功取消任务，会显示具体原因。
 
-> **Note:**
+> **注意：**
 >
-> - Before v6.2.0, only this operation can cancel DDL jobs, and all other operations and environment changes (such as machine restart and cluster restart) cannot cancel these jobs. Starting from v6.2.0, [`KILL`](/sql-statements/sql-statement-kill.md) statements can also be used to cancel ongoing DDL jobs by killing them. 
-> - This operation can cancel multiple DDL jobs at the same time. You can get the ID of DDL jobs using the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md) statement.
-> - If the jobs you want to cancel are finished, the cancellation operation fails.
+> - 在 v6.2.0 之前，只有此操作可以取消 DDL 任务，所有其他操作和环境变更（如机器重启和集群重启）都不能取消这些任务。从 v6.2.0 开始，可以通过 [`KILL`](/sql-statements/sql-statement-kill.md) 语句杀死正在进行的 DDL 任务以实现取消。
+> - 此操作可以同时取消多个 DDL 任务。你可以通过 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md) 获取 DDL 任务的 ID。
+> - 如果你要取消的任务已经完成，取消操作会失败。
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension to MySQL syntax.
+此语句是 TiDB 对 MySQL 语法的扩展。
 
-## See also
+## 相关链接
 
 * [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)

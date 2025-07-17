@@ -1,19 +1,17 @@
 ---
-title: Use TiDB to Read TiFlash Replicas
-summary: Learn how to use TiDB to read TiFlash replicas.
+title: 使用 TiDB 读取 TiFlash 副本
+summary: 了解如何使用 TiDB 读取 TiFlash 副本。
 ---
 
-# Use TiDB to Read TiFlash Replicas
+# 使用 TiDB 读取 TiFlash 副本
 
-This document introduces how to use TiDB to read TiFlash replicas.
+本文介绍了如何使用 TiDB 读取 TiFlash 副本。
 
-TiDB provides three ways to read TiFlash replicas. If you have added a TiFlash replica without any engine configuration, the CBO (cost-based optimization) mode is used by default.
+TiDB 提供了三种方式来读取 TiFlash 副本。如果你添加了 TiFlash 副本且没有进行引擎配置，默认使用的是 CBO（基于成本的优化）模式。
 
-## Smart selection
+## 智能选择
 
-For tables with TiFlash replicas, the TiDB optimizer automatically determines whether to use TiFlash replicas based on the cost estimation. You can use the `desc` or `explain analyze` statement to check whether or not a TiFlash replica is selected. For example:
-
-{{< copyable "sql" >}}
+对于具有 TiFlash 副本的表，TiDB 优化器会根据成本估算自动判断是否使用 TiFlash 副本。你可以使用 `desc` 或 `explain analyze` 语句来检查是否选择了 TiFlash 副本。例如：
 
 ```sql
 desc select count(*) from test.t;
@@ -30,8 +28,6 @@ desc select count(*) from test.t;
 3 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 explain analyze select count(*) from test.t;
 ```
@@ -46,62 +42,58 @@ explain analyze select count(*) from test.t;
 +--------------------------+---------+---------+--------------+---------------+----------------------------------------------------------------------+--------------------------------+-----------+------+
 ```
 
-`cop[tiflash]` means that the task will be sent to TiFlash for processing. If you have not selected a TiFlash replica, you can try to update the statistics using the `analyze table` statement, and then check the result using the `explain analyze` statement.
+`cop[tiflash]` 表示该任务会被发送到 TiFlash 进行处理。如果你没有选择 TiFlash 副本，可以尝试使用 `analyze table` 语句更新统计信息，然后再用 `explain analyze` 查看结果。
 
-Note that if a table has only a single TiFlash replica and the related node cannot provide service, queries in the CBO mode will repeatedly retry. In this situation, you need to specify the engine or use the manual hint to read data from the TiKV replica.
+注意，如果一个表只有单个 TiFlash 副本且相关节点无法提供服务，在 CBO 模式下的查询会反复重试。在这种情况下，你需要指定引擎或使用手动提示从 TiKV 副本读取数据。
 
-## Engine isolation
+## 引擎隔离
 
-Engine isolation is to specify that all queries use a replica of the specified engine by configuring the corresponding variable. The optional engines are "tikv", "tidb" (indicates the internal memory table area of TiDB, which stores some TiDB system tables and cannot be actively used by users), and "tiflash".
+引擎隔离是通过配置相应变量，指定所有查询都使用指定引擎的副本。可选的引擎有 "tikv"、"tidb"（表示 TiDB 的内部内存表区域，存储一些 TiDB 系统表，用户不能主动使用）和 "tiflash"。
 
 <CustomContent platform="tidb">
 
-You can specify the engines at the following two configuration levels:
+你可以在以下两个配置层级指定引擎：
 
-* TiDB instance-level, namely, INSTANCE level. Add the following configuration item in the TiDB configuration file:
+* TiDB 实例级别，即 INSTANCE 层级。在 TiDB 配置文件中添加以下配置项：
 
     ```
     [isolation-read]
     engines = ["tikv", "tidb", "tiflash"]
     ```
 
-    **The INSTANCE-level default configuration is `["tikv", "tidb", "tiflash"]`.**
+    **默认配置为 `["tikv", "tidb", "tiflash"]`。**
 
-* SESSION level. Use the following statement to configure:
+* SESSION 层级。使用以下语句进行配置：
 
-    {{< copyable "sql" >}}
-
+    
     ```sql
     set @@session.tidb_isolation_read_engines = "engine list separated by commas";
     ```
 
-    or
-
-    {{< copyable "sql" >}}
-
+    
     ```sql
     set SESSION tidb_isolation_read_engines = "engine list separated by commas";
     ```
 
-    The default configuration of the SESSION level inherits from the configuration of the TiDB INSTANCE level.
+    SESSION 层的默认配置继承自 TiDB 实例层的配置。
 
-The final engine configuration is the session-level configuration, that is, the session-level configuration overrides the instance-level configuration. For example, if you have configured "tikv" in the INSTANCE level and "tiflash" in the SESSION level, then the TiFlash replicas are read. If the final engine configuration is "tikv" and "tiflash", then the TiKV and TiFlash replicas are both read, and the optimizer automatically selects a better engine to execute.
+最终的引擎配置以会话层配置为准，即会话层配置会覆盖实例层配置。例如，你在实例层配置了 "tikv"，在会话层配置了 "tiflash"，则会读取 TiFlash 副本；如果最终配置为 "tikv" 和 "tiflash"，则会同时读取 TiKV 和 TiFlash 副本，优化器会自动选择更优的引擎执行。
 
 > **Note:**
 >
-> Because [TiDB Dashboard](/dashboard/dashboard-intro.md) and other components need to read some system tables stored in the TiDB memory table area, it is recommended to always add the "tidb" engine to the instance-level engine configuration.
+> 因为 [TiDB Dashboard](/dashboard/dashboard-intro.md) 和其他组件需要读取存储在 TiDB 内存表区域的系统表，建议始终在实例层引擎配置中添加 "tidb"。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-You can specify the engines using the following statement:
+你可以使用以下语句指定引擎：
 
 ```sql
 set @@session.tidb_isolation_read_engines = "engine list separated by commas";
 ```
 
-or
+或者
 
 ```sql
 set SESSION tidb_isolation_read_engines = "engine list separated by commas";
@@ -109,41 +101,37 @@ set SESSION tidb_isolation_read_engines = "engine list separated by commas";
 
 </CustomContent>
 
-If the queried table does not have a replica of the specified engine (for example, the engine is configured as "tiflash" but the table does not have a TiFlash replica), the query returns an error.
+如果查询的表没有指定引擎的副本（例如，配置为 "tiflash" 但该表没有 TiFlash 副本），查询会返回错误。
 
-## Manual hint
+## 手动提示
 
-Manual hint can force TiDB to use specified replicas for specific table(s) on the premise of satisfying engine isolation. Here is an example of using the manual hint:
-
-{{< copyable "sql" >}}
+手动提示可以在满足引擎隔离的前提下，强制 TiDB 对特定表或语句使用指定的副本。以下是使用手动提示的示例：
 
 ```sql
 select /*+ read_from_storage(tiflash[table_name]) */ ... from table_name;
 ```
 
-If you set an alias to a table in a query statement, you must use the alias in the statement that includes a hint for the hint to take effect. For example:
-
-{{< copyable "sql" >}}
+如果在查询语句中为表设置了别名，必须在包含提示的语句中使用别名，提示才会生效。例如：
 
 ```sql
 select /*+ read_from_storage(tiflash[alias_a,alias_b]) */ ... from table_name_1 as alias_a, table_name_2 as alias_b where alias_a.column_1 = alias_b.column_2;
 ```
 
-In the above statements, `tiflash[]` prompts the optimizer to read the TiFlash replicas. You can also use `tikv[]` to prompt the optimizer to read the TiKV replicas as needed. For hint syntax details, refer to [READ_FROM_STORAGE](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-).
+上述语句中，`tiflash[]` 提示优化器读取 TiFlash 副本。你也可以使用 `tikv[]` 提示优化器读取 TiKV 副本。关于提示语法的详细信息，请参考 [READ_FROM_STORAGE](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)。
 
-If the table specified by a hint does not have a replica of the specified engine, the hint is ignored and a warning is reported. In addition, a hint only takes effect on the premise of engine isolation. If the engine specified in a hint is not in the engine isolation list, the hint is also ignored and a warning is reported.
-
-> **Note:**
->
-> The MySQL client of 5.7.7 or earlier versions clears optimizer hints by default. To use the hint syntax in these early versions, start the client with the `--comments` option, for example, `mysql -h 127.0.0.1 -P 4000 -uroot --comments`.
-
-## The relationship of smart selection, engine isolation, and manual hint
-
-In the above three ways of reading TiFlash replicas, engine isolation specifies the overall range of available replicas of engines; within this range, manual hint provides statement-level and table-level engine selection that is more fine-grained; finally, CBO makes the decision and selects a replica of an engine based on cost estimation within the specified engine list.
+如果提示指定的表没有对应引擎的副本，提示会被忽略并报告警告。此外，提示仅在引擎隔离的前提下生效。如果提示中指定的引擎不在引擎隔离列表中，也会被忽略并报告警告。
 
 > **Note:**
 >
-> - Before v4.0.3, the behavior of reading from TiFlash replica in a non-read-only SQL statement (for example, `INSERT INTO ... SELECT`, `SELECT ... FOR UPDATE`, `UPDATE ...`, `DELETE ...`) is undefined.
-> - For versions from v4.0.3 to v6.2.0, internally TiDB ignores the TiFlash replica for a non-read-only SQL statement to guarantee the data correctness. That is, for [smart selection](#smart-selection), TiDB automatically selects the non-TiFlash replica; for [engine isolation](#engine-isolation) that specifies TiFlash replica **only**, TiDB reports an error; and for [manual hint](#manual-hint), TiDB ignores the hint.
-> - For versions from v6.3.0 to v7.0.0, if the TiFlash replica is enabled, you can use the [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630) variable to control whether TiDB uses the TiFlash replica for a non-read-only SQL statement.
-> - Starting from v7.1.0, if the TiFlash replica is enabled and the [SQL Mode](/sql-mode.md) of the current session is not strict (which means the `sql_mode` value does not contain `STRICT_TRANS_TABLES` or `STRICT_ALL_TABLES`), TiDB automatically decides whether to use the TiFlash replica for a non-read-only SQL statement based on cost estimation.
+> 5.7.7 及之前版本的 MySQL 客户端默认会清除优化器提示。若要在这些早期版本中使用提示语法，需要以 `--comments` 选项启动客户端，例如：`mysql -h 127.0.0.1 -P 4000 -uroot --comments`。
+
+## 智能选择、引擎隔离和手动提示的关系
+
+在上述三种读取 TiFlash 副本的方式中，引擎隔离定义了引擎副本的整体范围；在此范围内，手动提示提供了更细粒度的语句级和表级引擎选择；最终，优化器会在指定的引擎列表中，根据成本估算自动选择更优的引擎副本。
+
+> **Note:**
+>
+> - 在 v4.0.3 之前，非只读 SQL 语句（例如 `INSERT INTO ... SELECT`、`SELECT ... FOR UPDATE`、`UPDATE ...`、`DELETE ...`）读取 TiFlash 副本的行为未定义。
+> - 从 v4.0.3 到 v6.2.0 版本，TiDB 内部会忽略非只读 SQL 语句的 TiFlash 副本，以保证数据正确性。也就是说，对于 [smart selection](#smart-selection)，TiDB 会自动选择非 TiFlash 副本；对于 [engine isolation](#engine-isolation) 只指定 TiFlash 副本，TiDB 会报错；对于 [manual hint](#manual-hint)，TiDB 会忽略提示。
+> - 从 v6.3.0 到 v7.0.0 版本，如果启用了 TiFlash 副本，可以使用 [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630) 变量控制 TiDB 是否对非只读 SQL 语句使用 TiFlash 副本。
+> - 从 v7.1.0 开始，如果启用了 TiFlash 副本，且当前会话的 [SQL Mode](/sql-mode.md) 不是严格模式（即 `sql_mode` 不包含 `STRICT_TRANS_TABLES` 或 `STRICT_ALL_TABLES`），TiDB 会根据成本估算自动决定是否对非只读 SQL 语句使用 TiFlash 副本。

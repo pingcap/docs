@@ -1,71 +1,71 @@
 ---
-title: Update Data
-summary: Learn about how to update data and batch update data.
+title: 更新数据
+summary: 了解如何更新数据和批量更新数据。
 ---
 
-# Update Data
+# 更新数据
 
-This document describes how to use the following SQL statements to update the data in TiDB with various programming languages:
+本文档介绍如何使用以下 SQL 语句结合各种编程语言在 TiDB 中更新数据：
 
-- [UPDATE](/sql-statements/sql-statement-update.md): Used to modify the data in the specified table.
-- [INSERT ON DUPLICATE KEY UPDATE](/sql-statements/sql-statement-insert.md): Used to insert data and update this data if there is a primary key or unique key conflict. It is **not recommended** to use this statement if there are multiple unique keys (including primary keys). This is because this statement updates the data once it detects any unique key (including primary key) conflict. When there are more than one row conflicts, it updates only one row.
+- [UPDATE](/sql-statements/sql-statement-update.md)：用于修改指定表中的数据。
+- [INSERT ON DUPLICATE KEY UPDATE](/sql-statements/sql-statement-insert.md)：用于插入数据，如果存在主键或唯一键冲突，则更新该数据。如果表中有多个唯一键（包括主键），**不推荐**使用此语句。因为该语句在检测到任何唯一键（包括主键）冲突时会更新数据。当存在多个冲突行时，只会更新其中一行。
 
-## Before you start
+## 开始之前
 
-Before reading this document, you need to prepare the following:
+在阅读本文档之前，你需要准备以下内容：
 
-- [Build a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
-- Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md), [Create a Database](/develop/dev-guide-create-database.md), [Create a Table](/develop/dev-guide-create-table.md), and [Create Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md).
-- If you want to `UPDATE` data, you need to [insert data](/develop/dev-guide-insert-data.md) first.
+- [搭建 {{{ .starter }}} 集群](/develop/dev-guide-build-cluster-in-cloud.md)。
+- 阅读 [Schema Design Overview](/develop/dev-guide-schema-design-overview.md)、[创建数据库](/develop/dev-guide-create-database.md)、[创建表](/develop/dev-guide-create-table.md) 和 [创建二级索引](/develop/dev-guide-create-secondary-indexes.md)。
+- 如果你想要 `UPDATE` 数据，首先需要 [插入数据](/develop/dev-guide-insert-data.md)。
 
-## Use `UPDATE`
+## 使用 `UPDATE`
 
-To update an existing row in a table, you need to use an [`UPDATE` statement](/sql-statements/sql-statement-update.md) with a `WHERE` clause to filter the columns for updating.
+要更新表中的现有行，你需要使用带有 `WHERE` 子句的 [`UPDATE` 语句](/sql-statements/sql-statement-update.md)，以筛选需要更新的列。
 
-> **Note:**
+> **注意：**
 >
-> If you need to update a large number of rows, for example, more than ten thousand, it is recommended that you do **_NOT_** doing a complete update at once, but rather updating a portion at a time iteratively until all rows are updated. You can write scripts or programs to loop this operation.
-> See [Bulk-update](#bulk-update) for details.
+> 如果你需要更新大量行，例如超过一万行，建议不要一次性全部更新，而应逐步分批次迭代更新，直到所有行都更新完毕。你可以编写脚本或程序循环执行此操作。
+> 详见 [Bulk-update](#bulk-update)。
 
-### `UPDATE` SQL syntax
+### `UPDATE` SQL 语法
 
-In SQL, the `UPDATE` statement is generally in the following form:
+在 SQL 中，`UPDATE` 语句通常如下所示：
 
 ```sql
 UPDATE {table} SET {update_column} = {update_value} WHERE {filter_column} = {filter_value}
 ```
 
-| Parameter Name | Description |
-| :---------------: | :------------------: |
-|     `{table}`     |         Table Name         |
-| `{update_column}` |     Column names to be updated     |
-| `{update_value}`  |   Column values to be updated   |
-| `{filter_column}` | Column names matching filters |
-| `{filter_value}`  | Column values matching filters |
+| 参数名称 | 描述 |
+| :--------------: | :------------------: |
+| `{table}` | 表名 |
+| `{update_column}` | 需要更新的列名 |
+| `{update_value}` | 需要更新的列值 |
+| `{filter_column}` | 用于筛选的列名 |
+| `{filter_value}` | 用于筛选的列值 |
 
-For detailed information, see [UPDATE syntax](/sql-statements/sql-statement-update.md).
+详细信息请参见 [UPDATE syntax](/sql-statements/sql-statement-update.md)。
 
-### `UPDATE` best practices
+### `UPDATE` 最佳实践
 
-The following are some best practices for updating data:
+以下是一些更新数据的最佳实践：
 
-- Always specify the `WHERE` clause in the `UPDATE` statement. If the `UPDATE` statement does not have a `WHERE` clause, TiDB will update **_ALL ROWS_** in the table.
+- 始终在 `UPDATE` 语句中指定 `WHERE` 子句。如果没有 `WHERE` 子句，TiDB 将会更新 **_所有行_**。
 
 <CustomContent platform="tidb">
 
-- Use [bulk-update](#bulk-update) when you need to update a large number of rows (for example, more than ten thousand). Because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default), too many data updates at once will result in holding locks for too long ([pessimistic transactions](/pessimistic-transaction.md)) or cause conflicts ([optimistic transactions](/optimistic-transaction.md)).
+- 当你需要更新大量行（例如超过一万行）时，建议使用 [bulk-update](#bulk-update)。因为 TiDB 限制单个事务的大小（[txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit)，默认 100 MB），一次性更新过多数据会导致持锁时间过长（[pessimistic transactions](/pessimistic-transaction.md)）或引发冲突（[optimistic transactions](/optimistic-transaction.md)）。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- Use [bulk-update](#bulk-update) when you need to update a large number of rows (for example, more than ten thousand). Because TiDB limits the size of a single transaction to 100 MB by default, too many data updates at once will result in holding locks for too long ([pessimistic transactions](/pessimistic-transaction.md)) or cause conflicts ([optimistic transactions](/optimistic-transaction.md)).
+- 当你需要更新大量行（例如超过一万行）时，建议使用 [bulk-update](#bulk-update)。因为 TiDB 限制单个事务的大小为 100 MB，过多的数据一次性更新会导致持锁时间过长（[pessimistic transactions](/pessimistic-transaction.md)）或引发冲突（[optimistic transactions](/optimistic-transaction.md)）。
 
 </CustomContent>
 
-### `UPDATE` example
+### `UPDATE` 示例
 
-Suppose an author changes her name to **Helen Haruki**. You need to change the [authors](/develop/dev-guide-bookshop-schema-design.md#authors-table) table. Assume that her unique `id` is **1**, and the filter should be: `id = 1`.
+假设一位作者将她的名字改为 **Helen Haruki**，你需要更新 [authors](/develop/dev-guide-bookshop-schema-design.md#authors-table) 表。假设她的唯一 `id` 为 **1**，筛选条件为：`id = 1`。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
@@ -79,7 +79,7 @@ UPDATE `authors` SET `name` = "Helen Haruki" WHERE `id` = 1;
 <div label="Java" value="java">
 
 ```java
-// ds is an entity of com.mysql.cj.jdbc.MysqlDataSource
+// ds 是一个 com.mysql.cj.jdbc.MysqlDataSource 的实体
 try (Connection connection = ds.getConnection()) {
     PreparedStatement pstmt = connection.prepareStatement("UPDATE `authors` SET `name` = ? WHERE `id` = ?");
     pstmt.setString(1, "Helen Haruki");
@@ -93,37 +93,37 @@ try (Connection connection = ds.getConnection()) {
 </div>
 </SimpleTab>
 
-## Use `INSERT ON DUPLICATE KEY UPDATE`
+## 使用 `INSERT ON DUPLICATE KEY UPDATE`
 
-If you need to insert new data into a table, but if there are unique key (a primary key is also a unique key) conflicts, the first conflicted record will be updated. You can use `INSERT ... ON DUPLICATE KEY UPDATE ...` statement to insert or update.
+如果你需要向表中插入新数据，但如果存在唯一键（包括主键）冲突，则会更新冲突的那条记录。你可以使用 `INSERT ... ON DUPLICATE KEY UPDATE ...` 语句实现插入或更新。
 
-### `INSERT ON DUPLICATE KEY UPDATE` SQL Syntax
+### `INSERT ON DUPLICATE KEY UPDATE` SQL 语法
 
-In SQL, the `INSERT ... ON DUPLICATE KEY UPDATE ...` statement is generally in the following form:
+在 SQL 中，`INSERT ... ON DUPLICATE KEY UPDATE ...` 语句通常如下所示：
 
 ```sql
 INSERT INTO {table} ({columns}) VALUES ({values})
     ON DUPLICATE KEY UPDATE {update_column} = {update_value};
 ```
 
-| Parameter Name | Description |
-| :---------------: | :--------------: |
-|     `{table}`     |       Table name       |
-|    `{columns}`    |   Column names to be inserted   |
-|    `{values}`     | Column values to be inserted |
-| `{update_column}` |   Column names to be updated   |
-| `{update_value}`  | Column values to be updated |
+| 参数名称 | 描述 |
+| :--------------: | :--------------: |
+| `{table}` | 表名 |
+| `{columns}` | 要插入的列名 |
+| `{values}` | 要插入的列值 |
+| `{update_column}` | 要更新的列名 |
+| `{update_value}` | 要更新的列值 |
 
-### `INSERT ON DUPLICATE KEY UPDATE` best practices
+### `INSERT ON DUPLICATE KEY UPDATE` 最佳实践
 
-- Use `INSERT ON DUPLICATE KEY UPDATE` only for a table with one unique key. This statement updates the data if any **_UNIQUE KEY_** (including the primary key) conflicts are detected. If there are more than one row of conflicts, only one row will be updated. Therefore, it is not recommended to use the `INSERT ON DUPLICATE KEY UPDATE` statement in tables with multiple unique keys unless you can guarantee that there is only one row of conflict.
-- Use this statement when you create data or update data.
+- 仅在表中只有一个唯一键时使用 `INSERT ON DUPLICATE KEY UPDATE`。该语句在检测到任何 **_UNIQUE KEY_**（包括主键）冲突时会更新数据。如果存在多行冲突，只会更新其中一行。因此，除非你能保证冲突只有一行，否则不建议在具有多个唯一键的表中使用此语句。
+- 在创建数据或更新数据时使用此语句。
 
-### `INSERT ON DUPLICATE KEY UPDATE` example
+### `INSERT ON DUPLICATE KEY UPDATE` 示例
 
-For example, you need to update the [ratings](/develop/dev-guide-bookshop-schema-design.md#ratings-table) table to include the user's ratings for the book. If the user has not yet rated the book, a new rating will be created. If the user has already rated it, his previous rating will be updated.
+例如，你需要更新 [ratings](/develop/dev-guide-bookshop-schema-design.md#ratings-table) 表，以包含用户对书的评分。如果用户尚未评分，则会创建新评分；如果已评分，则会更新之前的评分。
 
-In the following example, the primary key is the joint primary keys of `book_id` and `user_id`. A user `user_id = 1` gives a rating of `5` to a book `book_id = 1000`.
+在下面的示例中，主键是 `book_id` 和 `user_id` 的联合主键。用户 `user_id = 1` 给一本书 `book_id = 1000` 评分为 `5`。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
@@ -141,7 +141,7 @@ ON DUPLICATE KEY UPDATE `score` = 5, `rated_at` = NOW();
 <div label="Java" value="java">
 
 ```java
-// ds is an entity of com.mysql.cj.jdbc.MysqlDataSource
+// ds 是一个 com.mysql.cj.jdbc.MysqlDataSource 的实体
 
 try (Connection connection = ds.getConnection()) {
     PreparedStatement p = connection.prepareStatement("INSERT INTO `ratings` (`book_id`, `user_id`, `score`, `rated_at`)
@@ -159,48 +159,48 @@ VALUES (?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE `score` = ?, `rated_at` = NOW()"
 </div>
 </SimpleTab>
 
-## Bulk-update
+## 批量更新
 
-When you need to update multiple rows of data in a table, you can [use `INSERT ON DUPLICATE KEY UPDATE`](#use-insert-on-duplicate-key-update) with the `WHERE` clause to filter the data that needs to be updated.
+当你需要在表中更新多行数据时，可以 [使用 `INSERT ON DUPLICATE KEY UPDATE`](#use-insert-on-duplicate-key-update) 搭配 `WHERE` 子句筛选需要更新的数据。
 
 <CustomContent platform="tidb">
 
-However, if you need to update a large number of rows (for example, more than ten thousand), it is recommended that you update the data iteratively, that is, updating only a portion of the data at each iteration until the update is complete. This is because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default). Too many data updates at once will result in holding locks for too long ([pessimistic transactions](/pessimistic-transaction.md), or causing conflicts ([optimistic transactions](/optimistic-transaction.md)). You can use a loop in your program or script to complete the operation.
+然而，如果你需要更新大量行（例如超过一万行），建议逐步迭代更新，即每次只更新部分数据，直到全部完成。这是因为 TiDB 限制单个事务的大小（[txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit)，默认 100 MB）。一次性更新过多数据会导致持锁时间过长（[pessimistic transactions](/pessimistic-transaction.md)）或引发冲突（[optimistic transactions](/optimistic-transaction.md)）。你可以在程序或脚本中使用循环完成此操作。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-However, if you need to update a large number of rows (for example, more than ten thousand), it is recommended that you update the data iteratively, that is, updating only a portion of the data at each iteration until the update is complete. This is because TiDB limits the size of a single transaction to 100 MB by default. Too many data updates at once will result in holding locks for too long ([pessimistic transactions](/pessimistic-transaction.md), or causing conflicts ([optimistic transactions](/optimistic-transaction.md)). You can use a loop in your program or script to complete the operation.
+然而，如果你需要更新大量行（例如超过一万行），建议逐步迭代更新，即每次只更新部分数据，直到全部完成。这是因为 TiDB 限制单个事务的大小为 100 MB。一次性更新过多数据会导致持锁时间过长（[pessimistic transactions](/pessimistic-transaction.md)）或引发冲突（[optimistic transactions](/optimistic-transaction.md)）。你可以在程序或脚本中使用循环完成此操作。
 
 </CustomContent>
 
-This section provides examples of writing scripts to handle iterative updates. This example shows how a combination of `SELECT` and `UPDATE` should be done to complete a bulk-update.
+本节提供了编写脚本以实现迭代更新的示例。此示例展示了如何结合 `SELECT` 和 `UPDATE` 完成批量更新。
 
-### Write bulk-update loop
+### 编写批量更新循环
 
-First, you should write a `SELECT` query in a loop of your application or script. The return value of this query can be used as the primary key for the rows that need to be updated. Note that when defining this `SELECT` query, you need to use the `WHERE` clause to filter the rows that need to be updated.
+首先，你应在你的应用或脚本中编写一个 `SELECT` 查询。该查询的返回值可以作为需要更新行的主键。注意在定义此 `SELECT` 查询时，必须使用 `WHERE` 子句筛选需要更新的行。
 
-### Example
+### 示例
 
-Suppose that you have had a lot of book ratings from users on your `bookshop` website over the past year, but the original design of a 5-point scale has resulted in a lack of differentiation in book ratings. Most books are rated `3`. You decide to switch from a 5-point scale to a 10-point scale to differentiate ratings.
+假设你在 `bookshop` 网站上过去一年收集了大量用户对书的评分，但原有的 5 分制设计导致评分缺乏差异化，大部分书的评分都为 `3`。你决定将评分从 5 分制切换到 10 分制，以实现差异化。
 
-You need to multiply by `2` the data in the `ratings` table from the previous 5-point scale, and add a new column to the ratings table to indicate whether the rows have been updated. Using this column, you can filter out rows that have been updated in `SELECT`, which will prevent the script from crashing and updating the rows multiple times, resulting in unreasonable data.
+你需要将 `ratings` 表中的数据乘以 `2`，并新增一列用以标识是否已更新。利用此列，你可以在 `SELECT` 时筛选出已更新的行，避免脚本崩溃或多次更新同一行导致数据异常。
 
-For example, you create a column named `ten_point` with the data type [BOOL](/data-type-numeric.md#boolean-type) as an identifier of whether it is a 10-point scale:
+例如，你创建一个名为 `ten_point` 的列，数据类型为 [BOOL](/data-type-numeric.md#boolean-type)，用作是否为 10 分制的标识：
 
 ```sql
 ALTER TABLE `bookshop`.`ratings` ADD COLUMN `ten_point` BOOL NOT NULL DEFAULT FALSE;
 ```
 
-> **Note:**
+> **注意：**
 >
-> This bulk-update application uses the **DDL** statements to make schema changes to the data tables. All DDL change operations for TiDB are executed online. For more information, see [ADD COLUMN](/sql-statements/sql-statement-add-column.md).
+> 此批量更新应用使用了 **DDL** 语句对数据表进行模式变更。所有 TiDB 的 DDL 变更操作都在线上执行。更多信息请参见 [ADD COLUMN](/sql-statements/sql-statement-add-column.md)。
 
 <SimpleTab groupId="language">
 <div label="Golang" value="golang">
 
-In Golang, a bulk-update application is similar to the following:
+在 Golang 中，批量更新的示例类似如下：
 
 ```go
 package main
@@ -221,17 +221,17 @@ func main() {
     defer db.Close()
 
     bookID, userID := updateBatch(db, true, 0, 0)
-    fmt.Println("first time batch update success")
+    fmt.Println("第一次批量更新成功")
     for {
         time.Sleep(time.Second)
         bookID, userID = updateBatch(db, false, bookID, userID)
-        fmt.Printf("batch update success, [bookID] %d, [userID] %d\n", bookID, userID)
+        fmt.Printf("批量更新成功，[bookID] %d，[userID] %d\n", bookID, userID)
     }
 }
 
-// updateBatch select at most 1000 lines data to update score
+// updateBatch 在最多 1000 行数据中选择，更新评分
 func updateBatch(db *sql.DB, firstTime bool, lastBookID, lastUserID int64) (bookID, userID int64) {
-    // select at most 1000 primary keys in five-point scale data
+    // 选择最多 1000 条未更新到 10 分制的数据的主键
     var err error
     var rows *sql.Rows
 
@@ -245,10 +245,10 @@ func updateBatch(db *sql.DB, firstTime bool, lastBookID, lastUserID int64) (book
     }
 
     if err != nil || rows == nil {
-        panic(fmt.Errorf("error occurred or rows nil: %+v", err))
+        panic(fmt.Errorf("发生错误或行为空： %+v", err))
     }
 
-    // joint all id with a list
+    // 将所有ID合并成列表
     var idList []interface{}
     for rows.Next() {
         var tempBookID, tempUserID int64
@@ -266,7 +266,7 @@ func updateBatch(db *sql.DB, firstTime bool, lastBookID, lastUserID int64) (book
     return bookID, userID
 }
 
-// placeHolder format SQL place holder
+// placeHolder 格式化SQL占位符
 func placeHolder(n int) string {
     holderList := make([]string, n/2, n/2)
     for i := range holderList {
@@ -276,15 +276,15 @@ func placeHolder(n int) string {
 }
 ```
 
-In each iteration, `SELECT` queries in order of the primary key. It selects primary key values for up to `1000` rows that have not been updated to the 10-point scale (`ten_point` is `false`). Each `SELECT` statement selects primary keys larger than the largest of the previous `SELECT` results to prevent duplication. Then, it uses bulk-update, multiples its `score` column by `2`, and sets `ten_point` to `true`. The purpose of updating `ten_point` is to prevent the update application from repeatedly updating the same row in case of restart after crashing, which can cause data corruption. `time.Sleep(time.Second)` in each loop makes the update application pause for 1 second to prevent the update application from consuming too many hardware resources.
+每次循环中，`SELECT` 按主键顺序查询，最多选择 1000 行未更新到 10 分制（`ten_point` 为 `false`）的主键。每个 `SELECT` 语句会选择比上一次最大主键更大的主键，以避免重复。然后，利用批量更新，将 `score` 列乘以 `2`，并将 `ten_point` 设置为 `true`。更新 `ten_point` 的目的是为了防止在崩溃重启后，更新程序反复更新同一行，导致数据损坏。每个循环中的 `time.Sleep(time.Second)` 让更新暂停 1 秒，以减少硬件资源消耗。
 
 </div>
 
 <div label="Java (JDBC)" value="jdbc">
 
-In Java (JDBC), a bulk-update application might be similar to the following:
+在 Java (JDBC) 中，批量更新的示例可能如下：
 
-**Code:**
+**代码：**
 
 ```java
 package com.pingcap.bulkUpdate;
@@ -329,12 +329,12 @@ public class BatchUpdateExample {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        // Configure the example database connection.
+        // 配置示例数据库连接。
 
-        // Create a mysql data source instance.
+        // 创建 Mysql 数据源实例。
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
 
-        // Set server name, port, database name, username and password.
+        // 设置服务器名、端口、数据库名、用户名和密码。
         mysqlDataSource.setServerName("localhost");
         mysqlDataSource.setPortNumber(4000);
         mysqlDataSource.setDatabaseName("bookshop");
@@ -343,11 +343,11 @@ public class BatchUpdateExample {
 
         UpdateID lastID = batchUpdate(mysqlDataSource, null);
 
-        System.out.println("first time batch update success");
+        System.out.println("第一次批量更新成功");
         while (true) {
             TimeUnit.SECONDS.sleep(1);
             lastID = batchUpdate(mysqlDataSource, lastID);
-            System.out.println("batch update success, [lastID] " + lastID);
+            System.out.println("批量更新成功，[lastID] " + lastID);
         }
     }
 
@@ -383,7 +383,7 @@ public class BatchUpdateExample {
             }
 
             if (idList.isEmpty()) {
-                System.out.println("no data should update");
+                System.out.println("没有数据需要更新");
                 return null;
             }
 
@@ -395,7 +395,7 @@ public class BatchUpdateExample {
                 updatePs.setLong(i + 1, idList.get(i));
             }
             int count = updatePs.executeUpdate();
-            System.out.println("update " + count + " data");
+            System.out.println("更新了 " + count + " 条数据");
 
             return updateID;
         } catch (SQLException e) {
@@ -416,7 +416,7 @@ public class BatchUpdateExample {
 }
 ```
 
-- `hibernate.cfg.xml` configuration:
+- `hibernate.cfg.xml` 配置：
 
 ```xml
 <?xml version='1.0' encoding='utf-8'?>
@@ -426,7 +426,7 @@ public class BatchUpdateExample {
 <hibernate-configuration>
     <session-factory>
 
-        <!-- Database connection settings -->
+        <!-- 数据库连接设置 -->
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="hibernate.dialect">org.hibernate.dialect.TiDBDialect</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:4000/movie</property>
@@ -435,29 +435,29 @@ public class BatchUpdateExample {
         <property name="hibernate.connection.autocommit">false</property>
         <property name="hibernate.jdbc.batch_size">20</property>
 
-        <!-- Optional: Show SQL output for debugging -->
+        <!-- 可选：显示 SQL 输出以便调试 -->
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
     </session-factory>
 </hibernate-configuration>
 ```
 
-In each iteration, `SELECT` queries in order of the primary key. It selects primary key values for up to `1000` rows that have not been updated to the 10-point scale (`ten_point` is `false`). Each `SELECT` statement selects primary keys larger than the largest of the previous `SELECT` results to prevent duplication. Then, it uses bulk-update, multiples its `score` column by `2`, and sets `ten_point` to `true`. The purpose of updating `ten_point` is to prevent the update application from repeatedly updating the same row in case of restart after crashing, which can cause data corruption. `TimeUnit.SECONDS.sleep(1);` in each loop makes the update application pause for 1 second to prevent the update application from consuming too many hardware resources.
+每次循环中，`SELECT` 按主键顺序查询，最多选择 1000 行未更新到 10 分制（`ten_point` 为 `false`）的主键。每个 `SELECT` 语句会选择比上一次最大主键更大的主键，以避免重复。然后，利用批量更新，将 `score` 列乘以 `2`，并将 `ten_point` 设置为 `true`。更新 `ten_point` 的目的是为了防止在崩溃重启后，更新程序反复更新同一行，导致数据损坏。每个循环中的 `TimeUnit.SECONDS.sleep(1);` 让更新暂停 1 秒，以减少硬件资源消耗。
 
 </div>
 
 </SimpleTab>
 
-## Need help?
+## 需要帮助？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或 [提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或 [提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

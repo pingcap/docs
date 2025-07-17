@@ -1,65 +1,65 @@
 ---
-title: Create a Table
-summary: Learn the definitions, rules, and guidelines in table creation.
+title: 创建表
+summary: 了解表创建中的定义、规则和指南。
 ---
 
-# Create a Table
+# 创建表
 
-This document introduces how to create tables using the SQL statement and the related best practices. An example of the TiDB-based [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application is provided to illustrate the best practices.
+本文档介绍如何使用 SQL 语句创建表以及相关的最佳实践。提供一个基于 TiDB 的 [Bookshop](/develop/dev-guide-bookshop-schema-design.md) 应用示例，以说明最佳实践。
 
-## Before you start
+## 在开始之前
 
-Before reading this document, make sure that the following tasks are completed:
+在阅读本文档之前，请确保已完成以下任务：
 
-- [Build a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
-- Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md).
-- [Create a Database](/develop/dev-guide-create-database.md).
+- [构建 {{{ .starter }}} 集群](/develop/dev-guide-build-cluster-in-cloud.md)。
+- 阅读 [Schema 设计概述](/develop/dev-guide-schema-design-overview.md)。
+- [创建数据库](/develop/dev-guide-create-database.md)。
 
-## What is a table
+## 什么是表
 
-A [table](/develop/dev-guide-schema-design-overview.md#table) is a logical object in TiDB cluster that is subordinate to the [database](/develop/dev-guide-schema-design-overview.md#database). It is used to store the data sent from SQL statements. Tables save data records in the form of rows and columns. A table has at least one column. If you have defined `n` columns, each row of data has exactly the same fields as the `n` columns.
+[表](/develop/dev-guide-schema-design-overview.md#table) 是 TiDB 集群中的一个逻辑对象，属于 [数据库](/develop/dev-guide-schema-design-overview.md#database) 的子集。它用于存储由 SQL 语句传送的数据。表以行和列的形式保存数据记录。一个表至少有一列。如果定义了 `n` 列，则每一行数据的字段与这 `n` 列完全相同。
 
-## Name a table
+## 给表命名
 
-The first step for creating a table is to give your table a name. Do not use meaningless names that will cause great distress to yourself or your colleagues in the future. It is recommended that you follow your company or organization's table naming convention.
+创建表的第一步是为你的表命名。不要使用无意义的名字，否则将来会给自己或同事带来极大的困扰。建议遵循你所在公司或组织的表命名规范。
 
-The `CREATE TABLE` statement usually takes the following form:
+`CREATE TABLE` 语句通常采用以下形式：
 
 ```sql
 CREATE TABLE {table_name} ( {elements} );
 ```
 
-**Parameter description**
+**参数说明**
 
-- `{table_name}`: The name of the table to be created.
-- `{elements}`: A comma-separated list of table elements, such as column definitions and primary key definitions.
+- `{table_name}`：要创建的表名。
+- `{elements}`：用逗号分隔的表元素列表，例如列定义和主键定义。
 
-Suppose you need to create a table to store the user information in the `bookshop` database.
+假设你需要在 `bookshop` 数据库中创建一个存储用户信息的表。
 
-Note that you cannot execute the following SQL statement yet because not a single column has been added.
+注意，尚不能执行以下 SQL 语句，因为还没有添加任何列。
 
 ```sql
 CREATE TABLE `bookshop`.`users` (
 );
 ```
 
-## Define columns
+## 定义列
 
-A **column** is subordinate to a table. Each table has at least one column. Columns provide a structure to a table by dividing the values in each row into small cells of a single data type.
+**列**是属于表的子集。每个表至少有一列。列为表提供结构，将每一行中的值划分为单个数据类型的小单元。
 
-Column definitions typically take the following form.
+列定义通常采用以下格式。
 
 ```
 {column_name} {data_type} {column_qualification}
 ```
 
-**Parameter description**
+**参数说明**
 
-- `{column_name}`: The column name.
-- `{data_type}`: The column [data type](/data-type-overview.md).
-- `{column_qualification}`: Column qualifications, such as **column-level constraints** or [generated column](/generated-columns.md) clauses.
+- `{column_name}`：列名。
+- `{data_type}`：列的 [数据类型](/data-type-overview.md)。
+- `{column_qualification}`：列的限定条件，例如 **列级约束** 或 [生成列](/generated-columns.md) 子句。
 
-You can add some columns to the `users` table, such as the unique identifier `id`, `balance` and `nickname`.
+你可以为 `users` 表添加一些列，例如唯一标识符 `id`、`balance` 和 `nickname`。
 
 ```sql
 CREATE TABLE `bookshop`.`users` (
@@ -69,15 +69,15 @@ CREATE TABLE `bookshop`.`users` (
 );
 ```
 
-In the above statement, a field is defined with the name `id` and the type [bigint](/data-type-numeric.md#bigint-type). This is used to represent a unique user identifier. This means that all user identifiers should be of the `bigint` type.
+在上述语句中，定义了一个名为 `id` 的字段，类型为 [bigint](/data-type-numeric.md#bigint-type)，用于表示唯一的用户标识符。这意味着所有用户标识符都应为 `bigint` 类型。
 
-Then, a field named `nickname` is defined, which is the [varchar](/data-type-string.md#varchar-type) type, with a length limit of 100 characters. This means that the `nicknames` of the users use the `varchar` type and are not longer than 100 characters.
+然后，定义了一个名为 `nickname` 的字段，类型为 [varchar](/data-type-string.md#varchar-type)，长度限制为 100 个字符。这意味着用户的昵称使用 `varchar` 类型，且不超过 100 个字符。
 
-Finally, a field named `balance` is added, which is the [decimal](/data-type-numeric.md#decimal-type) type, with a **precision** of `15` and a **scale** of `2`. **Precision** represents the total number of digits in the field, and **scale** represents the number of decimal places. For example, `decimal(5,2)` means a precision of `5` and a scale of `2`, with the range from `-999.99` to `999.99`. `decimal(6,1)` means a precision of `6` and a scale of `1`, with the range from `-99999.9` to `99999.9`. **decimal** is a [fixed-point types](/data-type-numeric.md#fixed-point-types), which can be used to store numbers accurately. In scenarios where accurate numbers are needed (for example, user property-related), make sure that you use the **decimal** type.
+最后，添加了一个名为 `balance` 的字段，类型为 [decimal](/data-type-numeric.md#decimal-type)，精度为 `15`，小数位数为 `2`。**Precision** 表示字段中的总位数，**scale** 表示小数点后的位数。例如，`decimal(5,2)` 表示精度为 `5`，小数位为 `2`，范围从 `-999.99` 到 `999.99`。`decimal(6,1)` 表示精度为 `6`，小数位为 `1`，范围从 `-99999.9` 到 `99999.9`。**decimal** 是一种 [定点类型](/data-type-numeric.md#fixed-point-types)，可以用来存储精确的数字。在需要精确数字的场景（例如用户属性相关）中，务必使用 **decimal** 类型。
 
-TiDB supports many other column data types, including the [integer types](/data-type-numeric.md#integer-types), [floating-point types](/data-type-numeric.md#floating-point-types), [fixed-point types](/data-type-numeric.md#fixed-point-types), [date and time types](/data-type-date-and-time.md), and the [enum type](/data-type-string.md#enum-type). You can refer to the supported column [data types](/data-type-overview.md) and use the **data types** that match the data you want to save in the database.
+TiDB 支持多种其他列数据类型，包括 [整数类型](/data-type-numeric.md#integer-types)、[浮点类型](/data-type-numeric.md#floating-point-types)、[定点类型](/data-type-numeric.md#fixed-point-types)、[日期和时间类型](/data-type-date-and-time.md) 以及 [enum 类型](/data-type-string.md#enum-type)。你可以参考支持的列 [数据类型](/data-type-overview.md)，选择符合你存储需求的 **数据类型**。
 
-To make it a bit more complex, you can define a `books` table which will be the core of the `bookshop` data. The `books` table contains fields for the book's ids, titles, types (for example, magazine, novel, life, arts), stock, prices, and publication dates.
+为了让表结构更复杂一些，可以定义一个 `books` 表，作为 `bookshop` 数据的核心。`books` 表包含书籍的 ID、标题、类型（例如，杂志、小说、生活、艺术）、库存、价格和出版日期等字段。
 
 ```sql
 CREATE TABLE `bookshop`.`books` (
@@ -90,37 +90,37 @@ CREATE TABLE `bookshop`.`books` (
 );
 ```
 
-This table contains more data types than the `users` table.
+此表包含比 `users` 表更多的数据类型。
 
-- [int](/data-type-numeric.md#integer-types): It is recommended to use the type of right size to avoid using too much disk or even affecting performance (too large a type range) or data overflow (too small a data type range).
-- [datetime](/data-type-date-and-time.md): The **datetime** type can be used to store time values.
-- [enum](/data-type-string.md#enum-type): The enum type can be used to store a limited selection of values.
+- [int](/data-type-numeric.md#integer-types)：建议使用合适大小的类型，避免占用过多磁盘空间，或影响性能（类型范围过大）或数据溢出（类型范围过小）。
+- [datetime](/data-type-date-and-time.md)：**datetime** 类型可用于存储时间值。
+- [enum](/data-type-string.md#enum-type)：enum 类型可用于存储有限的值集。
 
-## Select primary key
+## 选择主键
 
-A [primary key](/constraints.md#primary-key) is a column or a set of columns in a table whose values uniquely identify a row in the table.
+[主键](/constraints.md#primary-key) 是表中的一列或一组列，其值唯一标识表中的一行。
 
-> **Note:**
+> **注意：**
 >
-> The default definition of **primary key** in TiDB is different from that in [InnoDB](https://dev.mysql.com/doc/refman/8.0/en/innodb-storage-engine.html)(the common storage engine of MySQL).
+> TiDB 中的 **primary key** 默认定义与 [InnoDB](https://dev.mysql.com/doc/refman/8.0/en/innodb-storage-engine.html)（MySQL 的常用存储引擎）不同。
 >
-> - In **InnoDB**: A **primary key** is unique, not null, and **index clustered**.
+> - 在 **InnoDB** 中：**primary key** 是唯一的、非空的，并且是 **索引簇**。
 >
-> - In TiDB: A **primary key** is unique and is not null. But the primary key is not guaranteed to be a **clustered index**. Instead, another set of keywords `CLUSTERED` / `NONCLUSTERED` additionally controls whether the **primary key** is a **clustered index**. If the keyword is not specified, it is controlled by the system variable `@@global.tidb_enable_clustered_index`, as described in [clustered indexes](https://docs.pingcap.com/tidb/stable/clustered-indexes).
+> - 在 TiDB 中：**primary key** 是唯一的且非空的，但不保证是 **簇索引**。相反，`CLUSTERED` / `NONCLUSTERED` 这两个关键词额外控制 **primary key** 是否为 **簇索引**。如果未指定关键词，则由系统变量 `@@global.tidb_enable_clustered_index` 控制，如 [簇索引](https://docs.pingcap.com/tidb/stable/clustered-indexes) 所述。
 
-The **primary key** is defined in the `CREATE TABLE` statement. The [primary key constraint](/constraints.md#primary-key) requires that all constrained columns contain only non-NULL values.
+**主键** 在 `CREATE TABLE` 语句中定义。 [主键约束](/constraints.md#primary-key) 要求所有受约束的列都不能为 NULL。
 
-A table can be created without a **primary key** or with a non-integer **primary key**. In this case, TiDB creates a `_tidb_rowid` as an **implicit primary key**. The implicit primary key `_tidb_rowid`, because of its monotonically increasing nature, might cause write hotspots in write-intensive scenarios. Therefore, if your application is write-intensive, consider sharding data using the [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) and [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) parameters. However, this might lead to read amplification, so you need to make your own trade-off.
+可以创建没有 **主键** 或使用非整数 **主键** 的表。在这种情况下，TiDB 会自动创建一个 `_tidb_rowid` 作为 **隐式主键**。由于 `_tidb_rowid` 是单调递增的，可能在写入密集场景中引发写入热点。因此，如果你的应用写入密集，建议使用 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) 和 [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) 参数进行数据分片。但这可能会导致读取放大，因此需要权衡。
 
-When the **primary key** of a table is an [integer type](/data-type-numeric.md#integer-types) and `AUTO_INCREMENT` is used, hotspots cannot be avoided by using `SHARD_ROW_ID_BITS`. If you need to avoid hotspots and do not need a continuous and incremental primary key, you can use [`AUTO_RANDOM`](/auto-random.md) instead of `AUTO_INCREMENT` to eliminate row ID continuity.
+当表的 **主键**是 [整数类型](/data-type-numeric.md#integer-types) 且使用 `AUTO_INCREMENT` 时，无法通过 `SHARD_ROW_ID_BITS` 避免热点。如果需要避免热点且不需要连续递增的主键，可以使用 [`AUTO_RANDOM`](/auto-random.md) 替代 `AUTO_INCREMENT`，以消除行 ID 的连续性。
 
 <CustomContent platform="tidb">
 
-For more information on how to handle hotspot issues, refer to [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
+关于如何处理热点问题的更多信息，请参考 [排查热点问题](/troubleshoot-hot-spot-issues.md)。
 
 </CustomContent>
 
-Following the [guidelines for selecting primary key](#guidelines-to-follow-when-selecting-primary-key), the following example shows how an `AUTO_RANDOM` primary key is defined in the `users` table.
+遵循 [选择主键的指南](#guidelines-to-follow-when-selecting-primary-key)，以下示例展示了在 `users` 表中定义 `AUTO_RANDOM` 主键。
 
 ```sql
 CREATE TABLE `bookshop`.`users` (
@@ -131,27 +131,27 @@ CREATE TABLE `bookshop`.`users` (
 );
 ```
 
-## Clustered or not
+## 是否为簇索引
 
-TiDB supports the [clustered index](/clustered-indexes.md) feature since v5.0. This feature controls how data is stored in tables containing primary keys. It provides TiDB the ability to organize tables in a way that can improve the performance of certain queries.
+TiDB 从 v5.0 开始支持 [簇索引](/clustered-indexes.md)。此功能控制含有主键的表中数据的存储方式。它使 TiDB 能够以某种方式组织表，从而提升某些查询的性能。
 
-The term clustered in this context refers to the organization of how data is stored and not a group of database servers working together. Some database management systems refer to clustered index tables as index-organized tables (IOT).
+“簇”在此上下文中指数据的存储组织方式，而不是一组协作的数据库服务器。一些数据库管理系统将簇索引表称为索引组织表（IOT）。
 
-Currently, tables **_containing primary_** keys in TiDB are divided into the following two categories:
+目前，TiDB 中 **_含有主键_** 的表分为以下两类：
 
-- `NONCLUSTERED`: The primary key of the table is non-clustered index. In tables with non-clustered indexes, the keys for row data consist of internal `_tidb_rowid` implicitly assigned by TiDB. Because primary keys are essentially unique indexes, tables with non-clustered indexes need at least two key-value pairs to store a row, which are:
-    - `_tidb_rowid` (key) - row data (value)
-    - Primary key data (key) - `_tidb_rowid` (value)
-- `CLUSTERED`: The primary key of the table is clustered index. In tables with clustered indexes, the keys for row data consist of primary key data given by the user. Therefore, tables with clustered indexes need only one key-value pair to store a row, which is:
-    - Primary key data (key) - row data (value)
+- `NONCLUSTERED`：表的主键为非簇索引。在非簇索引的表中，行数据的键由 TiDB 内部隐式分配的 `_tidb_rowid` 组成。由于主键本质上是唯一索引，非簇索引的表需要至少两个键值对来存储一行：
+    - `_tidb_rowid`（键） - 行数据（值）
+    - 主键数据（键） - `_tidb_rowid`（值）
+- `CLUSTERED`：表的主键为簇索引。在簇索引的表中，行数据的键由用户提供的主键数据组成。因此，簇索引的表只需要一个键值对来存储一行：
+    - 主键数据（键） - 行数据（值）
 
-As described in [select primary key](#select-primary-key), **clustered indexes** are controlled in TiDB using the keywords `CLUSTERED` and `NONCLUSTERED`.
+如 [选择主键](#select-primary-key) 所述，**簇索引** 在 TiDB 中通过关键词 `CLUSTERED` 和 `NONCLUSTERED` 控制。
 
-> **Note:**
+> **注意：**
 >
-> TiDB supports clustering only by a table's `PRIMARY KEY`. With clustered indexes enabled, the terms _the_ `PRIMARY KEY` and _the clustered index_ might be used interchangeably. `PRIMARY KEY` refers to the constraint (a logical property), and clustered index describes the physical implementation of how the data is stored.
+> TiDB 仅支持通过表的 `PRIMARY KEY` 进行簇索引。启用簇索引后，术语 _the_ `PRIMARY KEY` 和 _the clustered index_ 可能会互换使用。`PRIMARY KEY` 指约束（逻辑属性），而簇索引描述数据存储的物理实现。
 
-Following the [guidelines for selecting clustered index](#guidelines-to-follow-when-selecting-clustered-index), the following example creates a table with an association between `books` and `users`, which represents the `ratings` of a `book` by `users`. The example creates the table and constructs a composite primary key using `book_id` and `user_id`, and creates a **clustered index** on that **primary key**.
+遵循 [选择簇索引的指南](#guidelines-to-follow-when-selecting-clustered-index)，以下示例创建了一个 `ratings` 表，表示 `book` 被 `users` 评分的关系，使用 `book_id` 和 `user_id` 组成复合主键，并在该 **主键** 上建立 **簇索引**。
 
 ```sql
 CREATE TABLE `bookshop`.`ratings` (
@@ -163,15 +163,15 @@ CREATE TABLE `bookshop`.`ratings` (
 );
 ```
 
-## Add column constraints
+## 添加列约束
 
-In addition to [primary key constraints](#select-primary-key), TiDB also supports other **column constraints** such as [NOT NULL](/constraints.md#not-null) constraint, [UNIQUE KEY](/constraints.md#unique-key) constraint, and `DEFAULT`. For complete constraints, refer to the [TiDB constraints](/constraints.md) document.
+除了 [主键约束](#select-primary-key)，TiDB 还支持其他 **列约束**，如 [NOT NULL](/constraints.md#not-null) 约束、[UNIQUE KEY](/constraints.md#unique-key) 约束，以及 `DEFAULT`。完整的约束请参考 [TiDB 约束](/constraints.md) 文档。
 
-### Set default value
+### 设置默认值
 
-To set a default value on a column, use the `DEFAULT` constraint. The default value allows you to insert data without specifying a value for each column.
+若要为列设置默认值，可使用 `DEFAULT` 约束。默认值允许你在插入数据时不必为每个列指定值。
 
-You can use `DEFAULT` together with [supported SQL functions](/functions-and-operators/functions-and-operators-overview.md) to move the calculation of defaults out of the application layer, thus saving resources of the application layer. The resources consumed by the calculation do not disappear and are moved to the TiDB cluster. Commonly, you can insert data with the default time. The following exemplifies setting the default value in the `ratings` table:
+可以结合 [支持的 SQL 函数](/functions-and-operators/functions-and-operators-overview.md) 使用 `DEFAULT`，将默认值的计算从应用层转移到数据库层，从而节省应用资源。计算所消耗的资源不会消失，而是转移到 TiDB 集群中。常见的用法是插入当前时间。以下示例在 `ratings` 表中设置默认值：
 
 ```sql
 CREATE TABLE `bookshop`.`ratings` (
@@ -183,7 +183,7 @@ CREATE TABLE `bookshop`.`ratings` (
 );
 ```
 
-In addition, if the current time is also filled in by default when the data is being updated, the following statements can be used (but only the current-time related expressions can be filled in after `ON UPDATE`):
+此外，如果在数据更新时也用默认值填充当前时间，可以使用以下语句（但只有与当前时间相关的表达式可以在 `ON UPDATE` 后填写）：
 
 ```sql
 CREATE TABLE `bookshop`.`ratings` (
@@ -195,13 +195,13 @@ CREATE TABLE `bookshop`.`ratings` (
 );
 ```
 
-For more information on default values of different data types, see [default values](/data-type-default-values.md).
+关于不同数据类型的默认值的更多信息，请参见 [默认值](/data-type-default-values.md)。
 
-### Prevent duplicate values
+### 防止重复值
 
-If you need to prevent duplicate values in a column, you can use the `UNIQUE` constraint.
+如果需要防止列中出现重复值，可以使用 `UNIQUE` 约束。
 
-For example, to make sure that users' nicknames are unique, you can rewrite the table creation SQL statement for the `users` table like this:
+例如，为确保用户的昵称唯一，可以将 `users` 表的创建 SQL 改写为：
 
 ```sql
 CREATE TABLE `bookshop`.`users` (
@@ -212,13 +212,13 @@ CREATE TABLE `bookshop`.`users` (
 );
 ```
 
-If you try to insert the same `nickname` in the `users` table, an error is returned.
+如果尝试在 `users` 表中插入相同的 `nickname`，会返回错误。
 
-### Prevent null values
+### 防止空值
 
-If you need to prevent null values in a column, you can use the `NOT NULL` constraint.
+如果需要防止列中出现空值，可以使用 `NOT NULL` 约束。
 
-Take user nicknames as an example. To ensure that a nickname is not only unique but is also not null, you can rewrite the SQL statement for creating the `users` table as follows:
+以用户昵称为例。为了确保昵称不仅唯一，而且非空，可以将创建 `users` 表的 SQL 改写为：
 
 ```sql
 CREATE TABLE `bookshop`.`users` (
@@ -229,13 +229,13 @@ CREATE TABLE `bookshop`.`users` (
 );
 ```
 
-## Use HTAP capabilities
+## 使用 HTAP 功能
 
 <CustomContent platform="tidb">
 
 > **Note:**
 >
-> The steps provided in this guide is **_ONLY_** for quick start in the test environment. For production environments, refer to [explore HTAP](/explore-htap.md).
+> 本指南提供的步骤 **_仅_** 适用于测试环境的快速启动。生产环境请参考 [探索 HTAP](/explore-htap.md)。
 
 </CustomContent>
 
@@ -243,48 +243,48 @@ CREATE TABLE `bookshop`.`users` (
 
 > **Note:**
 >
-> The steps provided in this guide is **_ONLY_** for quick start. For more instructions, refer to [Use an HTAP Cluster with TiFlash](/tiflash/tiflash-overview.md).
+> 本指南提供的步骤 **_仅_** 适用于快速入门。更多指引请参考 [使用 TiFlash 构建 HTAP 集群](/tiflash/tiflash-overview.md)。
 
 </CustomContent>
 
-Suppose that you want to perform OLAP analysis on the `ratings` table using the `bookshop` application, for example, to query **whether the rating of a book has a significant correlation with the time of the rating**, which is to analyze whether the user's rating of the book is objective or not. Then you need to query the `score` and `rated_at` fields of the entire `ratings` table. This operation is resource-intensive for an OLTP-only database. Or you can use some ETL or other data synchronization tools to export the data from the OLTP database to a dedicated OLAP database for analysis.
+假设你希望对 `ratings` 表进行 OLAP 分析，例如，查询 **某本书的评分是否与评分时间有显著相关性**，以分析用户对书的评分是否客观。这就需要查询整个 `ratings` 表中的 `score` 和 `rated_at` 字段。这对于纯 OLTP 数据库来说是资源密集型操作。或者，你可以使用一些 ETL 或其他数据同步工具，将 OLTP 数据库中的数据导出到专门的 OLAP 数据库进行分析。
 
-In this scenario, TiDB, an **HTAP (Hybrid Transactional and Analytical Processing)** database that supports both OLTP and OLAP scenarios, is an ideal one-stop database solution.
+在这种场景下，TiDB 作为支持 OLTP 和 OLAP 的 **HTAP（Hybrid Transactional and Analytical Processing）** 数据库，是理想的一站式解决方案。
 
-### Replicate column-based data
+### 复制列数据
 
 <CustomContent platform="tidb">
 
-Currently, TiDB supports two data analysis engines, **TiFlash** and **TiSpark**. For the large data scenarios (100 T), **TiFlash MPP** is recommended as the primary solution for HTAP, and **TiSpark** as a complementary solution.
+目前，TiDB 支持两种数据分析引擎，**TiFlash** 和 **TiSpark**。对于大数据场景（100 T 及以上），推荐使用 **TiFlash MPP** 作为 HTAP 的主要方案，**TiSpark** 作为补充方案。
 
-To learn more about TiDB HTAP capabilities, refer to the following documents: [Quick Start with TiDB HTAP](/quick-start-with-htap.md) and [Explore HTAP](/explore-htap.md).
+想了解更多 TiDB HTAP 功能，请参考以下文档：[TiDB HTAP 快速入门](/quick-start-with-htap.md) 和 [探索 HTAP](/explore-htap.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-To learn more about TiDB HTAP capabilities, see [TiDB Cloud HTAP Quick Start](/tidb-cloud/tidb-cloud-htap-quickstart.md) and [Use an HTAP Cluster with TiFlash](/tiflash/tiflash-overview.md).
+想了解更多 TiDB HTAP 功能，请参考 [TiDB Cloud HTAP 快速入门](/tidb-cloud/tidb-cloud-htap-quickstart.md) 和 [使用 TiFlash 构建 HTAP 集群](/tiflash/tiflash-overview.md)。
 
 </CustomContent>
 
-In this example, [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview) has been chosen as the data analysis engine for the `bookshop` database.
+在此示例中，已选择 [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview) 作为 `bookshop` 数据库的数据分析引擎。
 
-TiFlash does not automatically replicate data after deployment. Therefore, you need to manually specify the tables to be replicated:
+TiFlash 部署后不会自动复制数据，因此需要手动指定需要复制的表：
 
 ```sql
 ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
 ```
 
-**Parameter description**
+**参数说明**
 
-- `{table_name}`: The table name.
-- `{count}`: The number of replicated replicas. If it is 0, replicated replicas are deleted.
+- `{table_name}`：表名。
+- `{count}`：复制的副本数。如果为 0，则删除复制的副本。
 
-**TiFlash** will then replicate the table. When a query is performed, TiDB automatically selects TiKV (row-based) or TiFlash (column-based) for the query based on cost optimization. Alternatively, you can manually specify whether the query uses a **TiFlash** replica. To learn how to specify it, refer to [Use TiDB to read TiFlash replicas](/tiflash/use-tidb-to-read-tiflash.md).
+**TiFlash** 会随后复制表。当执行查询时，TiDB 会根据成本优化自动选择 TiKV（行存储）或 TiFlash（列存储）进行查询。也可以手动指定查询是否使用 **TiFlash** 副本。详细操作请参考 [使用 TiDB 读取 TiFlash 副本](/tiflash/use-tidb-to-read-tiflash.md)。
 
-### An example of using HTAP capabilities
+### 使用 HTAP 功能的示例
 
-The `ratings` table opens `1` replica of TiFlash:
+将 `ratings` 表开启 1 个 TiFlash 副本：
 
 ```sql
 ALTER TABLE `bookshop`.`ratings` SET TIFLASH REPLICA 1;
@@ -292,23 +292,23 @@ ALTER TABLE `bookshop`.`ratings` SET TIFLASH REPLICA 1;
 
 > **Note:**
 >
-> If your cluster does not contain **TiFlash** nodes, this SQL statement will report an error: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0`. You can use [Build a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-cluster) to create a {{{ .starter }}} cluster that includes **TiFlash**.
+> 如果你的集群中没有 **TiFlash** 节点，此 SQL 语句会报错：`1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0`。你可以使用 [构建 {{{ .starter }}} 集群](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-cluster) 来创建包含 **TiFlash** 的 {{{ .starter }}} 集群。
 
-Then you can go on to perform the following query:
+然后，你可以执行以下查询：
 
 ```sql
 SELECT HOUR(`rated_at`), AVG(`score`) FROM `bookshop`.`ratings` GROUP BY HOUR(`rated_at`);
 ```
 
-You can also execute the [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) statement to see whether this statement is using the **TiFlash**:
+你也可以执行 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) 来查看此语句是否使用了 **TiFlash**：
 
 ```sql
 EXPLAIN ANALYZE SELECT HOUR(`rated_at`), AVG(`score`) FROM `bookshop`.`ratings` GROUP BY HOUR(`rated_at`);
 ```
 
-Running results:
+运行结果示例：
 
-```sql
+```plaintext
 +-----------------------------+-----------+---------+--------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+----------+------+
 | id                          | estRows   | actRows | task         | access object | execution info                                                                                                                                                                                                                                                                                                                                                       | operator info                                                                                                                                  | memory   | disk |
 +-----------------------------+-----------+---------+--------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+----------+------+
@@ -320,13 +320,13 @@ Running results:
 +-----------------------------+-----------+---------+--------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+----------+------+
 ```
 
-When the field `cop[tiflash]` appears, it means that the task is sent to **TiFlash** for processing.
+当字段 `cop[tiflash]` 出现时，表示任务由 **TiFlash** 处理。
 
-## Execute the `CREATE TABLE` statement
+## 执行 `CREATE TABLE` 语句
 
-After creating all the tables as above rules, our [database initialization](/develop/dev-guide-bookshop-schema-design.md#database-initialization-script-dbinitsql) script should look like this. If you need to see the table information in detail, please refer to [Description of the Tables](/develop/dev-guide-bookshop-schema-design.md#description-of-the-tables).
+按照上述规则创建完所有表后，我们的 [数据库初始化](/develop/dev-guide-bookshop-schema-design.md#database-initialization-script-dbinitsql) 脚本应如下所示。如需详细查看表信息，请参考 [表的描述](/develop/dev-guide-bookshop-schema-design.md#description-of-the-tables)。
 
-To name the database initialization script `init.sql` and save it, you can execute the following statement to initialize the database.
+将数据库初始化脚本命名为 `init.sql` 并保存，可以执行以下命令初始化数据库。
 
 ```shell
 mysql
@@ -337,13 +337,13 @@ mysql
     < init.sql
 ```
 
-To view all tables under the `bookshop` database, use the [`SHOW TABLES`](/sql-statements/sql-statement-show-tables.md#show-full-tables) statement.
+使用 [`SHOW TABLES`](/sql-statements/sql-statement-show-tables.md#show-full-tables) 查看 `bookshop` 数据库下的所有表。
 
 ```sql
 SHOW TABLES IN `bookshop`;
 ```
 
-Running results:
+运行结果示例：
 
 ```
 +--------------------+
@@ -358,68 +358,68 @@ Running results:
 +--------------------+
 ```
 
-## Guidelines to follow when creating a table
+## 创建表时的指南
 
-This section provides guidelines you need to follow when creating a table.
+本节提供创建表时需要遵循的指南。
 
-### Guidelines to follow when naming a table
+### 命名表的指南
 
-- Use a **fully-qualified** table name (for example, `CREATE TABLE {database_name}. {table_name}`). If you do not specify the database name, TiDB uses the current database in your **SQL session**. If you do not use `USE {databasename};` to specify the database in your SQL session, TiDB returns an error.
-- Use meaningful table names. For example, if you need to create a user table, you can use names: `user`, `t_user`,`users`, or follow your company or organization's naming convention. If your company or organization does not have a naming convention, you can refer to the [table naming convention](/develop/dev-guide-object-naming-guidelines.md#table-naming-convention). Do not use such table names as: `t1`, `table1`.
-- Multiple words are separated by an underscore, and it is recommended that the name is no more than 32 characters.
-- Create a separate `DATABASE` for tables of different business modules and add comments accordingly.
+- 使用**完全限定**的表名（例如，`CREATE TABLE {database_name}. {table_name}`）。如果不指定数据库名，TiDB 会使用你在 **SQL 会话**中的当前数据库。如果不使用 `USE {databasename};` 指定数据库，TiDB 会返回错误。
+- 使用有意义的表名。例如，若需要创建用户表，可以用 `user`、`t_user`、`users`，或遵循你所在公司或组织的命名规范。如果没有命名规范，可以参考 [表命名规范](/develop/dev-guide-object-naming-guidelines.md#table-naming-convention)。不要使用诸如 `t1`、`table1` 这样的名字。
+- 多个单词用下划线分隔，建议名字长度不超过 32 个字符。
+- 为不同业务模块的表创建单独的 `DATABASE`，并添加相应注释。
 
-### Guidelines to follow when defining columns
+### 定义列的指南
 
-- Check the [data types](/data-type-overview.md) supported by columns and organize your data according to the data type restrictions. Select the appropriate type for the data you plan to store in the column.
-- Check the [guidelines to follow](#guidelines-to-follow-when-selecting-primary-key) for selecting primary keys and decide whether to use primary key columns.
-- Check the [guidelines to follow](#guidelines-to-follow-when-selecting-clustered-index) for selecting clustered indexes and decide whether to specify **clustered indexes**.
-- Check [adding column constraints](#add-column-constraints) and decide whether to add constraints to the columns.
-- Use meaningful column names. It is recommended that you follow your company or organization's table naming convention. If your company or organization does not have a corresponding naming convention, refer to the [column naming convention](/develop/dev-guide-object-naming-guidelines.md#column-naming-convention).
+- 查看 [数据类型](/data-type-overview.md) 支持情况，并根据数据类型限制组织数据。为列选择合适的数据类型。
+- 查看 [选择主键的指南](#guidelines-to-follow-when-selecting-primary-key)，决定是否使用主键列。
+- 查看 [选择簇索引的指南](#guidelines-to-follow-when-selecting-clustered-index)，决定是否指定 **簇索引**。
+- 查看 [添加列约束](#add-column-constraints)，决定是否为列添加约束。
+- 使用有意义的列名。建议遵循你所在公司或组织的表命名规范。如果没有，可以参考 [列命名规范](/develop/dev-guide-object-naming-guidelines.md#column-naming-convention)。
 
-### Guidelines to follow when selecting primary key
+### 选择主键的指南
 
-- Define a **primary key** or **unique index** within the table.
-- Try to select meaningful **columns** as **primary keys**.
-- For performance reasons, try to avoid storing extra-wide tables. It is not recommended that the number of table fields is over `60` and that the total data size of a single row is over `64K`. It is recommended to split fields with too much data length to another table.
-- It is not recommended to use complex data types.
-- For the fields to be joined, ensure that the data types are consistent and avoid implicit conversion.
-- Avoid defining **primary keys** on a single monotonic data column. If you use a single monotonic data column (for example, a column with the `AUTO_INCREMENT` attribute) to define the **primary key**, it might impact the write performance. If possible, use `AUTO_RANDOM` instead of `AUTO_INCREMENT`, which discards the continuous and incremental attribute of the primary key.
-- If you really need to create an index on a single monotonic data column at write-intensive scenarios, instead of defining this monotonic data column as the **primary key**, you can use `AUTO_RANDOM` to create the **primary key** for that table, or use [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) and [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) to shard `_tidb_rowid`.
+- 在表中定义 **主键** 或 **唯一索引**。
+- 尽量选择有意义的 **列** 作为 **主键**。
+- 出于性能考虑，避免存储过宽的表。建议表字段数不超过 `60`，单行数据总大小不超过 `64K`。过多的数据长度应拆分到其他表。
+- 不建议使用复杂的数据类型。
+- 对于需要连接的字段，确保数据类型一致，避免隐式转换。
+- 避免在单一单调数据列上定义 **主键**。如果使用单调数据列（如带 `AUTO_INCREMENT` 属性的列）作为 **主键**，可能影响写入性能。建议使用 `AUTO_RANDOM` 替代 `AUTO_INCREMENT`，以放弃主键的连续递增特性。
+- 如果在写入密集场景中确实需要在单调数据列上建立索引，不要将其作为 **主键**，而是使用 `AUTO_RANDOM` 创建 **主键**，或结合 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) 和 [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) 进行数据分片。
 
-### Guidelines to follow when selecting clustered index
+### 选择簇索引的指南
 
-- Follow [guidelines for selecting primary key](#guidelines-to-follow-when-selecting-primary-key) to build **clustered indexes**.
-- Compared to tables with non-clustered indexes, tables with clustered indexes offer greater performance and throughput advantages in the following scenarios:
-    - When data is inserted, the clustered index reduces one write of the index data from the network.
-    - When a query with an equivalent condition only involves the primary key, the clustered index reduces one read of index data from the network.
-    - When a query with a range condition only involves the primary key, the clustered index reduces multiple reads of index data from the network.
-    - When a query with an equivalent or range condition only involves the primary key prefix, the clustered index reduces multiple reads of index data from the network.
-- On the other hand, tables with clustered indexes might have the following issues:
-    - There might be write hotspot issues when you insert a large number of primary keys with close values. Follow the [guidelines to follow when selecting primary key](#guidelines-to-follow-when-selecting-primary-key).
-    - The table data takes up more storage space if the data type of the primary key is larger than 64 bits, especially when there are multiple secondary indexes.
+- 遵循 [选择主键的指南](#guidelines-to-follow-when-selecting-primary-key) 来构建 **簇索引**。
+- 相较于非簇索引的表，簇索引表在以下场景中具有更高的性能和吞吐量优势：
+    - 插入数据时，簇索引减少了网络中一次写入索引数据的操作。
+    - 查询条件只涉及主键时，簇索引减少了一次网络读取。
+    - 范围查询只涉及主键时，簇索引减少多次网络读取。
+    - 仅涉及主键前缀的等值或范围条件查询，也能减少多次网络读取。
+- 另一方面，簇索引表可能存在以下问题：
+    - 当插入大量值接近的主键时，可能出现写入热点。请遵循 [选择主键的指南](#guidelines-to-follow-when-selecting-primary-key)。
+    - 如果主键数据类型大于 64 位，且存在多个二级索引，可能占用更多存储空间。
 
-- To control the [default behavior of whether to use clustered indexes](/clustered-indexes.md#create-a-table-with-clustered-indexes), you can explicitly specify whether to use clustered indexes instead of using the system variable `@@global.tidb_enable_clustered_index` and the configuration `alter-primary-key`.
+- 关于 [控制是否使用簇索引的默认行为](/clustered-indexes.md#create-a-table-with-clustered-indexes)，可以显式指定是否使用簇索引，而不是依赖系统变量 `@@global.tidb_enable_clustered_index` 和配置 `alter-primary-key`。
 
-### Guidelines to follow when executing the `CREATE TABLE` statement
+### 执行 `CREATE TABLE` 语句的指南
 
-- It is not recommended to use a client-side Driver or ORM to perform database schema changes. It is recommended to use a [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or use a GUI client to perform database schema changes. In this document, the **MySQL client** is used to pass in SQL files to perform database schema changes in most scenarios.
-- Follow the SQL development [specification for creating and deleting tables](/develop/dev-guide-sql-development-specification.md#create-and-delete-tables). It is recommended to wrap the build and delete statements inside the business application to add judgment logic.
+- 不建议使用客户端驱动或 ORM 进行数据库 schema 变更。建议使用 [MySQL 客户端](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) 或图形界面客户端进行 schema 变更。在本文档中，大多数场景采用 MySQL 客户端传入 SQL 文件的方式。
+- 遵循 SQL 开发 [创建和删除表的规范](/develop/dev-guide-sql-development-specification.md#create-and-delete-tables)。建议将建表和删除语句封装在业务应用中，加入判断逻辑。
 
-## One more step
+## 额外步骤
 
-Note that all the tables that have been created in this document do not contain secondary indexes. For a guide to add secondary indexes, refer to [Creating Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md).
+注意，本文中创建的所有表都没有包含二级索引。如需添加二级索引的指南，请参考 [创建二级索引](/develop/dev-guide-create-secondary-indexes.md)。
 
-## Need help?
+## 需要帮助？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 社区提问，或 [提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 社区提问，或 [提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

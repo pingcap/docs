@@ -3,27 +3,27 @@ title: Tune TiFlash Performance
 summary: Learn how to tune the performance of TiFlash by planning machine resources and tuning TiDB parameters.
 ---
 
-# Tune TiFlash Performance
+# Tune TiFlash Performance {#tune-tiflash-performance}
 
 This document introduces how to tune the performance of TiFlash by properly planning machine resources and tuning TiDB parameters. By following these methods, your TiFlash cluster can achieve optimal performance.
 
-## Plan resources
+## Plan resources {#plan-resources}
 
 If you want to save machine resources and have no requirement on isolation, you can use the method that combines the deployment of both TiKV and TiFlash. It is recommended that you save enough resources for TiKV and TiFlash respectively, and do not share disks.
 
-## Tune TiDB parameters
+## Tune TiDB parameters {#tune-tidb-parameters}
 
 This section describes how to improve TiFlash performance by tuning TiDB parameters, including:
 
-- [Forcibly enable the MPP mode](#forcibly-enable-the-mpp-mode)
-- [Push down aggregate functions to a position before `Join` or `Union`](#push-down-aggregate-functions-to-a-position-before-join-or-union)
-- [Enable `Distinct` optimization](#enable-distinct-optimization)
-- [Compact data using the `ALTER TABLE ... COMPACT` statement](#compact-data-using-the-alter-table--compact-statement)
-- [Replace Shuffled Hash Join with Broadcast Hash Join](#replace-shuffled-hash-join-with-broadcast-hash-join)
-- [Set a greater execution concurrency](#set-a-greater-execution-concurrency)
-- [Configure `tiflash_fine_grained_shuffle_stream_count`](#configure-tiflash_fine_grained_shuffle_stream_count)
+-   [Forcibly enable the MPP mode](#forcibly-enable-the-mpp-mode)
+-   [Push down aggregate functions to a position before `Join` or `Union`](#push-down-aggregate-functions-to-a-position-before-join-or-union)
+-   [Enable `Distinct` optimization](#enable-distinct-optimization)
+-   [Compact data using the `ALTER TABLE ... COMPACT` statement](#compact-data-using-the-alter-table--compact-statement)
+-   [Replace Shuffled Hash Join with Broadcast Hash Join](#replace-shuffled-hash-join-with-broadcast-hash-join)
+-   [Set a greater execution concurrency](#set-a-greater-execution-concurrency)
+-   [Configure `tiflash_fine_grained_shuffle_stream_count`](#configure-tiflash_fine_grained_shuffle_stream_count)
 
-### Forcibly enable the MPP mode
+### Forcibly enable the MPP mode {#forcibly-enable-the-mpp-mode}
 
 MPP execution plans can fully utilize distributed computing resources, thereby significantly improving the efficiency of batch data queries. When the optimizer does not generate an MPP execution plan for a query, you can forcibly enable the MPP mode:
 
@@ -93,7 +93,7 @@ mysql> explain analyze select o_orderpriority, count(*) as order_count from orde
 18 rows in set (6.00 sec)
 ```
 
-### Push down aggregate functions to a position before `Join` or `Union`
+### Push down aggregate functions to a position before <code>Join</code> or <code>Union</code> {#push-down-aggregate-functions-to-a-position-before-code-join-code-or-code-union-code}
 
 By pushing down aggregate operations to the position before `Join` or `Union`, you can reduce the data to be processed in the `Join` or `Union` operation, thereby improving performance.
 
@@ -165,7 +165,7 @@ mysql> explain analyze select count(*) from t1 join t2 where t1.a = t2.b group b
 18 rows in set (0.46 sec)
 ```
 
-### Enable `Distinct` optimization
+### Enable <code>Distinct</code> optimization {#enable-code-distinct-code-optimization}
 
 TiFlash does not support some aggregate functions that accept the `Distinct` column, such as `Sum`. By default, the entire aggregate function is calculated in TiDB. By enabling the `Distinct` optimization, some operations can be pushed down to TiFlash, thereby improving query performance.
 
@@ -215,7 +215,7 @@ mysql> explain analyze select count(distinct a) from test.t;
 5 rows in set, 2 warnings (0.24 sec)
 ```
 
-### Compact data using the `ALTER TABLE ... COMPACT` statement
+### Compact data using the <code>ALTER TABLE ... COMPACT</code> statement {#compact-data-using-the-code-alter-table-compact-code-statement}
 
 Executing the [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) statement can initiate compaction for a specific table or partition on a TiFlash node. During the compaction, the physical data on the node is rewritten, including cleaning up deleted rows and merging multiple versions of data caused by updates. This helps enhance access performance and reduce disk usage. The following are examples:
 
@@ -227,17 +227,17 @@ ALTER TABLE employees COMPACT TIFLASH REPLICA;
 ALTER TABLE employees COMPACT PARTITION pNorth, pEast TIFLASH REPLICA;
 ```
 
-### Replace Shuffled Hash Join with Broadcast Hash Join
+### Replace Shuffled Hash Join with Broadcast Hash Join {#replace-shuffled-hash-join-with-broadcast-hash-join}
 
 For `Join` operations with small tables, the Broadcast Hash Join algorithm can avoid transferring large tables, thereby improving the computing performance.
 
-- The [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50) variable controls whether to use the Broadcast Hash Join algorithm. If the table size (unit: byte) is smaller than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
+-   The [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50) variable controls whether to use the Broadcast Hash Join algorithm. If the table size (unit: byte) is smaller than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
 
     ```sql
     set @@tidb_broadcast_join_threshold_size = 2000000;
     ```
 
-- The [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50) variable also controls whether to use the Broadcast Hash Join algorithm. If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set. In this situation, the size is determined by the number of rows in the result set. If the estimated number of rows for the subquery is fewer than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
+-   The [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50) variable also controls whether to use the Broadcast Hash Join algorithm. If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set. In this situation, the size is determined by the number of rows in the result set. If the estimated number of rows for the subquery is fewer than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
 
     ```sql
     set @@tidb_broadcast_join_threshold_count = 100000;
@@ -294,7 +294,7 @@ mysql> explain analyze select max(l_shipdate), max(l_commitdate), max(l_receiptd
 9 rows in set (2.76 sec)
 ```
 
-### Set a greater execution concurrency
+### Set a greater execution concurrency {#set-a-greater-execution-concurrency}
 
 A greater execution concurrency allows TiFlash to occupy more CPU resources of the system, thereby improving query performance.
 
@@ -353,7 +353,7 @@ mysql> explain analyze select a, count(*) from t group by a;
 9 rows in set (0.37 sec)
 ```
 
-### Configure `tiflash_fine_grained_shuffle_stream_count`
+### Configure <code>tiflash_fine_grained_shuffle_stream_count</code> {#configure-code-tiflash-fine-grained-shuffle-stream-count-code}
 
 You can increase the concurrency for executing window functions by configuring [`tiflash_fine_grained_shuffle_stream_count`](/system-variables.md#tiflash_fine_grained_shuffle_stream_count-new-in-v620) of the Fine Grained Shuffle feature. In this way, the execution of window functions can occupy more system resources, which improves query performance.
 

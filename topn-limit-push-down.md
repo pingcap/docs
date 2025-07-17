@@ -1,25 +1,24 @@
 ---
 title: TopN and Limit Operator Push Down
-summary: Learn the implementation of TopN and Limit operator pushdown.
+summary: 了解 TopN 和 Limit 操作符下推的实现方式。
 ---
 
-# TopN and Limit Operator Push Down
+# TopN 和 Limit 操作符下推
 
-This document describes the implementation of TopN and Limit operator pushdown.
+本文档描述了 TopN 和 Limit 操作符下推的实现。
 
-In the TiDB execution plan tree, the `LIMIT` clause in SQL corresponds to the Limit operator node, and the `ORDER BY` clause corresponds to the Sort operator node. The adjacent Limit operator and Sort operator are combined as the TopN operator node, which means that the top N records are returned according to a certain sorting rule. That is to say, a Limit operator is equivalent to a TopN operator node with a null sorting rule.
+在 TiDB 执行计划树中，SQL 中的 `LIMIT` 子句对应 Limit 操作符节点，`ORDER BY` 子句对应 Sort 操作符节点。相邻的 Limit 操作符和 Sort 操作符会合并为 TopN 操作符节点，表示根据某种排序规则返回前 N 条记录。也就是说，Limit 操作符等同于一个排序规则为空的 TopN 操作符节点。
 
-Similar to predicate pushdown, TopN and Limit are pushed down in the execution plan tree to a position as close to the data source as possible so that the required data is filtered at an early stage. In this way, the pushdown significantly reduces the overhead of data transmission and calculation.
+类似于谓词下推，TopN 和 Limit 会被下推到执行计划树中尽可能靠近数据源的位置，以便在早期对所需数据进行过滤。这样，推下可以显著减少数据传输和计算的开销。
 
-To disable this rule, refer to [Optimization Rules and Blocklist for Expression Pushdown](/blocklist-control-plan.md).
+若要禁用此规则，请参考 [Expression Pushdown 的优化规则和黑名单](/blocklist-control-plan.md)。
 
-## Examples
+## 示例
 
-This section illustrates TopN pushdown through some examples.
+本节通过一些示例说明 TopN 下推的过程。
 
-### Example 1: Push down to the Coprocessors in the storage layer
+### 示例 1：下推到存储层的协处理器（Coprocessors）
 
-{{< copyable "sql" >}}
 
 ```sql
 create table t(id int primary key, a int not null);
@@ -35,14 +34,12 @@ explain select * from t order by a limit 10;
 |   └─TopN_14                | 10.00    | cop[tikv] |               | test.t.a, offset:0, count:10   |
 |     └─TableFullScan_13     | 10000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo |
 +----------------------------+----------+-----------+---------------+--------------------------------+
-4 rows in set (0.00 sec)
 ```
 
-In this query, the TopN operator node is pushed down to TiKV for data filtering, and each Coprocessor returns only 10 records to TiDB. After TiDB aggregates the data, the final filtering is performed.
+在此查询中，TopN 操作符节点被下推到 TiKV 进行数据过滤，每个协处理器（Coprocessor）只返回 10 条记录到 TiDB。TiDB 汇总数据后，进行最终过滤。
 
-### Example 2: TopN can be pushed down into Join (the sorting rule only depends on the columns in the outer table)
+### 示例 2：TopN 可以下推到 Join（排序规则仅依赖外表中的列）
 
-{{< copyable "sql" >}}
 
 ```sql
 create table t(id int primary key, a int not null);
@@ -63,14 +60,12 @@ explain select * from t left join s on t.a = s.a order by t.a limit 10;
 |   └─TableReader_30(Probe)        | 10000.00 | root      |               | data:TableFullScan_29                           |
 |     └─TableFullScan_29           | 10000.00 | cop[tikv] | table:s       | keep order:false, stats:pseudo                  |
 +----------------------------------+----------+-----------+---------------+-------------------------------------------------+
-8 rows in set (0.01 sec)
 ```
 
-In this query, the sorting rule of the TopN operator only depends on the columns in the outer table `t`, so a calculation can be performed before pushing down TopN to Join, to reduce the calculation cost of the Join operation. Besides, TiDB also pushes TopN down to the storage layer.
+在此查询中，TopN 操作符的排序规则仅依赖于外表 `t` 中的列，因此可以在下推 TopN 之前先进行计算，以减少 Join 操作的计算成本。此外，TiDB 也会将 TopN 下推到存储层。
 
-### Example 3: TopN cannot be pushed down before Join
+### 示例 3：TopN 不能在 Join 之前下推
 
-{{< copyable "sql" >}}
 
 ```sql
 create table t(id int primary key, a int not null);
@@ -89,16 +84,14 @@ explain select * from t join s on t.a = s.a order by t.id limit 10;
 |   └─TableReader_19(Probe)     | 10000.00 | root      |               | data:TableFullScan_18                      |
 |     └─TableFullScan_18        | 10000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo             |
 +-------------------------------+----------+-----------+---------------+--------------------------------------------+
-6 rows in set (0.00 sec)
 ```
 
-TopN cannot be pushed down before `Inner Join`. Taking the query above as an example, if you get 100 records after Join, then you can have 10 records left after TopN. However, if TopN is performed first to get 10 records, only 5 records are left after Join. In such cases, the pushdown results in different results. 
+TopN 不能在 `Inner Join` 之前下推。以上述查询为例，如果 Join 后得到 100 条记录，TopN 后剩 10 条；但如果先执行 TopN 获取 10 条，再进行 Join，最后只剩 5 条。在这种情况下，下推会导致结果不同。
 
-Similarly, TopN can neither be pushed down to the inner table of Outer Join, nor can it be pushed down when its sorting rule is related to columns on multiple tables, such as `t.a+s.a`. Only when the sorting rule of TopN exclusively depends on columns on the outer table, can TopN be pushed down. 
+类似地，TopN 既不能下推到外连接（Outer Join）的内表，也不能在排序规则涉及多表列（如 `t.a + s.a`）时下推。只有当 TopN 的排序规则完全依赖于外表的列时，才能进行下推。
 
-### Example 4: Convert TopN to Limit
+### 示例 4：将 TopN 转换为 Limit
 
-{{< copyable "sql" >}}
 
 ```sql
 create table t(id int primary key, a int not null);
@@ -119,8 +112,6 @@ explain select * from t left join s on t.a = s.a order by t.id limit 10;
 |   └─TableReader_35(Probe)        | 10000.00 | root      |               | data:TableFullScan_34                           |
 |     └─TableFullScan_34           | 10000.00 | cop[tikv] | table:s       | keep order:false, stats:pseudo                  |
 +----------------------------------+----------+-----------+---------------+-------------------------------------------------+
-8 rows in set (0.00 sec)
-
 ```
 
-In the query above, TopN is first pushed to the outer table `t`. TopN needs to sort by `t.id`, which is the primary key and can be directly read in order  (`keep order: true`) without extra sorting in TopN. Therefore, TopN is simplified as Limit.
+在上述查询中，TopN 首先被下推到外表 `t`。由于 TopN 需要根据 `t.id` 排序，而 `t.id` 是主键，可以直接按顺序读取（`keep order: true`），无需在 TopN 中额外排序。因此，TopN 被简化为 Limit。

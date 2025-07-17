@@ -1,35 +1,35 @@
 ---
 title: ALTER INSTANCE
-summary: Learn the overview of the `ALTER INSTANCE` usage in TiDB.
+summary: 了解 TiDB 中 `ALTER INSTANCE` 的用法概述。
 ---
 
 # ALTER INSTANCE
 
-The `ALTER INSTANCE` statement is used to make changes to a single TiDB instance. Currently, TiDB only supports the `RELOAD TLS` clause.
+`ALTER INSTANCE` 语句用于对单个 TiDB 实例进行更改。目前，TiDB 仅支持 `RELOAD TLS` 子句。
 
 > **Note:**
 >
-> [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) can automatically refresh the TLS certificate, so this feature is not applicable to [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 可以自动刷新 TLS 证书，因此此功能不适用于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群。
 
 ## RELOAD TLS
 
 <CustomContent platform="tidb">
 
-You can execute the `ALTER INSTANCE RELOAD TLS` statement to reload the certificate ([`ssl-cert`](/tidb-configuration-file.md#ssl-cert)), the key ([`ssl-key`](/tidb-configuration-file.md#ssl-key)), and the CA ([`ssl-ca`](/tidb-configuration-file.md#ssl-ca)) from the original configuration path.
+你可以执行 `ALTER INSTANCE RELOAD TLS` 语句，从原始配置路径重新加载证书 ([`ssl-cert`](/tidb-configuration-file.md#ssl-cert))、密钥 ([`ssl-key`](/tidb-configuration-file.md#ssl-key)) 和 CA ([`ssl-ca`](/tidb-configuration-file.md#ssl-ca))。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-You can execute the `ALTER INSTANCE RELOAD TLS` statement to reload the certificate ([`ssl-cert`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-cert)), the key ([`ssl-key`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-key)), and the CA ([`ssl-ca`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-ca)) from the original configuration path.
+你可以执行 `ALTER INSTANCE RELOAD TLS` 语句，从原始配置路径重新加载证书 ([`ssl-cert`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-cert))、密钥 ([`ssl-key`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-key)) 和 CA ([`ssl-ca`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-ca))。
 
 </CustomContent>
 
-The newly loaded certificate, key, and CA take effect on the connection that is established after the statement is successfully executed. The connection established before this statement execution is not affected.
+新加载的证书、密钥和 CA 在成功执行该语句后建立的连接中生效。执行该语句之前建立的连接不受影响。
 
-When an error occurs during reloading, by default, this error message is returned and the previous key and certificate continue to be used. However, if you have added the optional `NO ROLLBACK ON ERROR`, when an error occurs during reloading, the error is not returned, and the subsequent requests are handled with the TLS security connection disabled.
+当重新加载过程中发生错误时，默认会返回该错误信息，之前的密钥和证书仍然继续使用。但是，如果你添加了可选的 `NO ROLLBACK ON ERROR`，在重新加载过程中发生错误时，错误不会被返回，后续请求将以禁用 TLS 安全连接的方式处理。
 
-## Syntax diagram
+## 语法示意图
 
 **AlterInstanceStmt:**
 
@@ -41,19 +41,17 @@ InstanceOption ::=
     'RELOAD' 'TLS' ('NO' 'ROLLBACK' 'ON' 'ERROR')?
 ```
 
-## Example
-
-{{< copyable "sql" >}}
+## 示例
 
 ```sql
 ALTER INSTANCE RELOAD TLS;
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `ALTER INSTANCE RELOAD TLS` statement only supports reloading from the original configuration path. It does not support dynamically modifying the loading path or dynamically enabling the TLS encrypted connection feature when TiDB is started. This feature is disabled by default when you restart TiDB.
+`ALTER INSTANCE RELOAD TLS` 语句仅支持从原始配置路径重新加载。它不支持在 TiDB 启动时动态修改加载路径或动态启用 TLS 加密连接功能。此功能在重启 TiDB 时默认是禁用的。
 
-## See also
+## 相关链接
 
 <CustomContent platform="tidb">
 

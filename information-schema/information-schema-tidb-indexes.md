@@ -1,13 +1,11 @@
 ---
 title: TIDB_INDEXES
-summary: Learn the `TIDB_INDEXES` information_schema table.
+summary: 了解 `TIDB_INDEXES` information_schema 表。
 ---
 
 # TIDB_INDEXES
 
-The `TIDB_INDEXES` table provides the INDEX information of all tables.
-
-{{< copyable "sql" >}}
+`TIDB_INDEXES` 表提供所有表的索引信息。
 
 ```sql
 USE information_schema;
@@ -34,9 +32,9 @@ DESC tidb_indexes;
 12 rows in set (0.00 sec)
 ```
 
-`INDEX_ID` is the unique ID that TiDB allocates for each index. It can be used to do a join operation with `INDEX_ID` obtained from another table or API.
+`INDEX_ID` 是 TiDB 为每个索引分配的唯一 ID。它可以用来与从其他表或 API 获取的 `INDEX_ID` 进行连接操作。
 
-For example, you can obtain `TABLE_ID` and `INDEX_ID` that are involved in some slow query in the [`SLOW_QUERY` table](/information-schema/information-schema-slow-query.md) and then obtain the specific index information using the following SQL statements:
+例如，你可以在 [`SLOW_QUERY` table](/information-schema/information-schema-slow-query.md) 中获取涉及某些慢查询的 `TABLE_ID` 和 `INDEX_ID`，然后使用以下 SQL 语句获取具体的索引信息：
 
 ```sql
 SELECT
@@ -46,21 +44,21 @@ FROM
  tables
 WHERE
   tidb_indexes.table_schema = tables.table_schema
- AND tidb_indexes.table_name = tidb_indexes.table_name
+ AND tidb_indexes.table_name = tables.table_name
  AND tables.tidb_table_id = ?
  AND index_id = ?
 ```
 
-Fields in the `TIDB_INDEXES` table are described as follows:
+`TIDB_INDEXES` 表中的字段说明如下：
 
-* `TABLE_SCHEMA`: The name of the schema to which the index belongs.
-* `TABLE_NAME`: The name of the table to which the index belongs.
-* `NON_UNIQUE`: If the index is unique, the value is `0`; otherwise, the value is `1`.
-* `KEY_NAME`: The index name. If the index is the primary key, the name is `PRIMARY`.
-* `SEQ_IN_INDEX`: The sequential number of columns in the index, which starts from `1`.
-* `COLUMN_NAME`: The name of the column where the index is located.
-* `SUB_PART`: The prefix length of the index. If the column is partly indexed, the `SUB_PART` value is the count of the indexed characters; otherwise, the value is `NULL`.
-* `INDEX_COMMENT`: The comment of the index, which is made when the index is created.
-* `INDEX_ID`: The index ID.
-* `IS_VISIBLE`: Whether the index is visible.
-* `CLUSTERED`: Whether it is a [clustered index](/clustered-indexes.md).
+* `TABLE_SCHEMA`: 索引所属的 schema 名称。
+* `TABLE_NAME`: 索引所属的表名。
+* `NON_UNIQUE`: 如果索引是唯一的，值为 `0`；否则，值为 `1`。
+* `KEY_NAME`: 索引名称。如果是主键，名称为 `PRIMARY`。
+* `SEQ_IN_INDEX`: 索引中列的顺序编号，从 `1` 开始。
+* `COLUMN_NAME`: 索引所在列的名称。
+* `SUB_PART`: 索引的前缀长度。如果列部分索引，`SUB_PART` 表示索引字符的数量；否则，值为 `NULL`。
+* `INDEX_COMMENT`: 索引的备注信息，在创建索引时添加。
+* `INDEX_ID`: 索引 ID。
+* `IS_VISIBLE`: 索引是否可见。
+* `CLUSTERED`: 是否为 [clustered index](/clustered-indexes.md)。

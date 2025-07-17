@@ -1,32 +1,32 @@
 ---
-title: RESTORE | TiDB SQL Statement Reference
-summary: An overview of the usage of RESTORE for the TiDB database.
+title: RESTORE | TiDB SQL 语句参考
+summary: 关于 TiDB 数据库中 RESTORE 的用法概述。
 ---
 
 # RESTORE
 
-This statement performs a distributed restore from a backup archive previously produced by a [`BACKUP` statement](/sql-statements/sql-statement-backup.md).
+此语句执行从之前由 [`BACKUP` 语句](/sql-statements/sql-statement-backup.md) 生成的备份归档的分布式还原。
 
 > **Warning:**
 >
-> - This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> - This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> - 此功能为实验性功能。不建议在生产环境中使用。此功能可能在未提前通知的情况下被更改或移除。如发现 bug，可以在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues)。
+> - 此功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群中不可用。
 
-The `RESTORE` statement uses the same engine as the [BR tool](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview), except that the restore process is driven by TiDB itself rather than a separate BR tool. All benefits and caveats of BR also apply here. In particular, **`RESTORE` is currently not ACID-compliant**. Before running `RESTORE`, ensure that the following requirements are met:
+`RESTORE` 语句使用与 [BR 工具](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview) 相同的引擎，但还原过程由 TiDB 自身驱动，而非单独的 BR 工具。BR 的所有优点和注意事项也适用于此。在此特别强调，**`RESTORE` 目前不符合 ACID**。在运行 `RESTORE` 之前，请确保满足以下条件：
 
-* The cluster is "offline", and the current TiDB session is the only active SQL connection to access all tables being restored.
-* When a full restore is being performed, the tables being restored should not already exist, because existing data might be overridden and causes inconsistency between the data and indices.
-* When an incremental restore is being performed, the tables should be at the exact same state as the `LAST_BACKUP` timestamp when the backup is created.
+* 集群处于“离线”状态，当前 TiDB 会话是唯一访问所有待还原表的活跃 SQL 连接。
+* 执行全量还原时，待还原的表不应已存在，因为可能会覆盖已有数据，导致数据与索引不一致。
+* 执行增量还原时，表应处于创建备份时的 `LAST_BACKUP` 时间戳的完全相同状态。
 
-Running `RESTORE` requires either the `RESTORE_ADMIN` or `SUPER` privilege. Additionally, both the TiDB node executing the restore and all TiKV nodes in the cluster must have read permission from the destination.
+运行 `RESTORE` 需要具有 `RESTORE_ADMIN` 或 `SUPER` 权限。此外，执行还原的 TiDB 节点和集群中的所有 TiKV 节点都必须对目标具有读取权限。
 
-The `RESTORE` statement is blocking, and will finish only after the entire restore task is finished, failed, or canceled. A long-lasting connection should be prepared for running `RESTORE`. The task can be canceled using the [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md) statement.
+`RESTORE` 是阻塞操作，只有在整个还原任务完成、失败或取消后才会结束。建议准备长连接以执行 `RESTORE`。可以使用 [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md) 语句取消任务。
 
-Only one `BACKUP` and `RESTORE` task can be executed at a time. If a `BACKUP` or `RESTORE` task is already running on the same TiDB server, the new `RESTORE` execution will wait until all previous tasks are done.
+每次只能执行一个 `BACKUP` 和 `RESTORE` 任务。如果在同一 TiDB 服务器上已有 `BACKUP` 或 `RESTORE` 任务在运行，新发起的 `RESTORE` 将等待所有之前的任务完成。
 
-`RESTORE` can only be used with "tikv" storage engine. Using `RESTORE` with the "unistore" engine will fail.
+`RESTORE` 仅支持 "tikv" 存储引擎。使用 "unistore" 引擎执行 `RESTORE` 将失败。
 
-## Synopsis
+## 概要语法
 
 ```ebnf+diagram
 RestoreStmt ::=
@@ -50,11 +50,9 @@ Boolean ::=
     NUM | "TRUE" | "FALSE"
 ```
 
-## Examples
+## 示例
 
-### Restore from backup archive
-
-{{< copyable "sql" >}}
+### 从备份归档还原
 
 ```sql
 RESTORE DATABASE * FROM 'local:///mnt/backup/2020/04/';
@@ -69,78 +67,68 @@ RESTORE DATABASE * FROM 'local:///mnt/backup/2020/04/';
 1 row in set (28.961 sec)
 ```
 
-In the example above, all data is restored from a backup archive at the local filesystem. The data is read as SST files from the `/mnt/backup/2020/04/` directories distributed among all TiDB and TiKV nodes.
+上述示例中，所有数据从本地文件系统的备份归档中还原。数据以 SST 文件的形式，从 `/mnt/backup/2020/04/` 目录中读取，目录分布在所有 TiDB 和 TiKV 节点上。
 
-The first row of the result above is described as follows:
+第一行结果的描述如下：
 
-| Column | Description |
+| 列名 | 描述 |
 | :-------- | :--------- |
-| `Destination` | The destination URL to read from |
-| `Size` |  The total size of the backup archive, in bytes |
-| `BackupTS` | (not used) |
-| `Queue Time` | The timestamp (in current time zone) when the `RESTORE` task was queued. |
-| `Execution Time` | The timestamp (in current time zone) when the `RESTORE` task starts to run. |
+| `Destination` | 读取的目标 URL |
+| `Size` |  备份归档的总大小（字节） |
+| `BackupTS` | （未使用） |
+| `Queue Time` | 以当前时区为准，`RESTORE` 任务排队的时间戳 |
+| `Execution Time` | 以当前时区为准，`RESTORE` 任务开始执行的时间戳 |
 
-### Partial restore
+### 部分还原
 
-You can specify which databases or tables to restore. If some databases or tables are missing from the backup archive, they will be ignored, and thus `RESTORE` would complete without doing anything.
-
-{{< copyable "sql" >}}
+你可以指定要还原的数据库或表。如果备份归档中缺少某些数据库或表，它们将被忽略，`RESTORE` 将不执行任何操作而完成。
 
 ```sql
 RESTORE DATABASE `test` FROM 'local:///mnt/backup/2020/04/';
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 RESTORE TABLE `test`.`sbtest01`, `test`.`sbtest02` FROM 'local:///mnt/backup/2020/04/';
 ```
 
-### External storages
+### 外部存储
 
-BR supports restoring data from S3 or GCS:
-
-{{< copyable "sql" >}}
+BR 支持从 S3 或 GCS 还原数据：
 
 ```sql
 RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/';
 ```
 
-The URL syntax is further explained in [URI Formats of External Storage Services](/external-storage-uri.md).
+URL 语法详见 [URI Formats of External Storage Services](/external-storage-uri.md)。
 
-When running on cloud environment where credentials should not be distributed, set the `SEND_CREDENTIALS_TO_TIKV` option to `FALSE`:
-
-{{< copyable "sql" >}}
+在云环境中，如果不希望分发凭证，可以将 `SEND_CREDENTIALS_TO_TIKV` 选项设置为 `FALSE`：
 
 ```sql
 RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/'
     SEND_CREDENTIALS_TO_TIKV = FALSE;
 ```
 
-### Performance fine-tuning
+### 性能调优
 
-Use `RATE_LIMIT` to limit the average download speed per TiKV node to reduce network bandwidth.
+使用 `RATE_LIMIT` 限制每个 TiKV 节点的平均下载速度，以减少网络带宽压力。
 
-Before the restore is completed, `RESTORE` would perform a checksum against the data in the backup files to verify correctness by default. The default concurrency for checksum tasks on a single table is 4, which you can adjust using the `CHECKSUM_CONCURRENCY` parameter. If you are confident that the data verification is unnecessary, you can disable the check by setting the `CHECKSUM` parameter to `FALSE`.
+在还原完成之前，`RESTORE` 默认会对备份文件中的数据进行校验和验证，以确保正确性。单个表的校验和任务默认并发数为 4，可以通过 `CHECKSUM_CONCURRENCY` 参数调整。如果你确信数据验证不必要，可以将 `CHECKSUM` 参数设置为 `FALSE` 来禁用校验。
 
-If statistics have been backed up, they are restored by default during the restore. If you do not need to restore the statistics, you can set the `LOAD_STATS` parameter to `FALSE`.
+如果已备份统计信息，默认会在还原过程中一并还原统计信息。如果不需要还原统计信息，可以将 `LOAD_STATS` 参数设置为 `FALSE`。
 
 <CustomContent platform="tidb">
 
-System [privilege tables](/privilege-management.md#privilege-table) are restored by default. If you do not need to restore system privilege tables, you can set the `WITH_SYS_TABLE` parameter to `FALSE`.
+系统 [privilege tables](/privilege-management.md#privilege-table) 默认会被还原。如果不需要还原系统权限表，可以将 `WITH_SYS_TABLE` 参数设置为 `FALSE`。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-System [privilege tables](https://docs.pingcap.com/tidb/stable/privilege-management#privilege-table) are restored by default. If you do not need to restore system privilege tables, you can set the `WITH_SYS_TABLE` parameter to `FALSE`.
+系统 [privilege tables](https://docs.pingcap.com/tidb/stable/privilege-management#privilege-table) 默认会被还原。如果不需要还原系统权限表，可以将 `WITH_SYS_TABLE` 参数设置为 `FALSE`。
 
 </CustomContent>
 
-By default, the restore task does not wait for TiFlash replicas to be fully created before completing. If you need the restore task to wait, you can set the `WAIT_TIFLASH_READY` parameter to `TRUE`.
-
-{{< copyable "sql" >}}
+默认情况下，还原任务在完成前不会等待 TiFlash 副本完全创建。如果需要等待，可以将 `WAIT_TIFLASH_READY` 参数设置为 `TRUE`。
 
 ```sql
 RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-06/'
@@ -149,13 +137,11 @@ RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-06/'
     CHECKSUM = FALSE;
 ```
 
-### Incremental restore
+### 增量还原
 
-There is no special syntax to perform incremental restore. TiDB will recognize whether the backup archive is full or incremental and take appropriate action. You only need to apply each incremental restore in correct order.
+没有专门的语法用于执行增量还原。TiDB 会自动识别备份归档是全量还是增量，并采取相应措施。你只需按正确的顺序应用每个增量还原。
 
-For instance, if a backup task is created as follows:
-
-{{< copyable "sql" >}}
+例如，如果备份任务如下创建：
 
 ```sql
 BACKUP DATABASE `test` TO 's3://example-bucket/full-backup'  SNAPSHOT = 413612900352000;
@@ -163,9 +149,7 @@ BACKUP DATABASE `test` TO 's3://example-bucket/inc-backup-1' SNAPSHOT = 41497185
 BACKUP DATABASE `test` TO 's3://example-bucket/inc-backup-2' SNAPSHOT = 416353458585600 LAST_BACKUP = 414971854848000;
 ```
 
-then the same order should be applied in the restore:
-
-{{< copyable "sql" >}}
+那么在还原时也应按相同顺序执行：
 
 ```sql
 RESTORE DATABASE * FROM 's3://example-bucket/full-backup';
@@ -173,11 +157,11 @@ RESTORE DATABASE * FROM 's3://example-bucket/inc-backup-1';
 RESTORE DATABASE * FROM 's3://example-bucket/inc-backup-2';
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension to MySQL syntax.
+此语句是 TiDB 对 MySQL 语法的扩展。
 
-## See also
+## 相关链接
 
 * [BACKUP](/sql-statements/sql-statement-backup.md)
 * [SHOW RESTORES](/sql-statements/sql-statement-show-backups.md)

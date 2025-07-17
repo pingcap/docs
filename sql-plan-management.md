@@ -3,11 +3,11 @@ title: SQL Plan Management (SPM)
 summary: Learn about SQL Plan Management in TiDB.
 ---
 
-# SQL Plan Management (SPM)
+# SQL Plan Management (SPM) {#sql-plan-management-spm}
 
 SQL Plan Management is a set of functions that execute SQL bindings to manually interfere with SQL execution plans. These functions include SQL binding, baseline capturing, and baseline evolution.
 
-## SQL binding
+## SQL binding {#sql-binding}
 
 An SQL binding is the basis of SPM. The [Optimizer Hints](/optimizer-hints.md) document introduces how to select a specific execution plan using hints. However, sometimes you need to interfere with execution selection without modifying SQL statements. With SQL bindings, you can select a specified execution plan without modifying SQL statements.
 
@@ -27,13 +27,11 @@ An SQL binding is the basis of SPM. The [Optimizer Hints](/optimizer-hints.md) d
 
 </CustomContent>
 
-### Create a binding
+### Create a binding {#create-a-binding}
 
 You can create a binding for a SQL statement according to a SQL statement or a historical execution plan.
 
-#### Create a binding according to a SQL statement
-
-{{< copyable "sql" >}}
+#### Create a binding according to a SQL statement {#create-a-binding-according-to-a-sql-statement}
 
 ```sql
 CREATE [GLOBAL | SESSION] BINDING [FOR BindableStmt] USING BindableStmt;
@@ -133,7 +131,7 @@ SELECT * FROM bookshop . users WHERE balance > ?
 > ```sql
 > CREATE TABLE t (a INT, KEY(a));
 > CREATE BINDING FOR SELECT * FROM t WHERE a IN (?) USING SELECT /*+ use_index(t, idx_a) */ * FROM t WHERE a in (?);
-> 
+>
 > SELECT * FROM t WHERE a IN (1);
 > SELECT @@LAST_PLAN_FROM_BINDING;
 > +--------------------------+
@@ -206,13 +204,13 @@ In addition, when you create a binding, TiDB requires that the session is in a d
 
 The original SQL statement and the bound statement must have the same text after normalization and hint removal, or the binding will fail. Take the following examples:
 
-- This binding can be created successfully because the texts before and after parameterization and hint removal are the same: `SELECT * FROM test . t WHERE a > ?`
+-   This binding can be created successfully because the texts before and after parameterization and hint removal are the same: `SELECT * FROM test . t WHERE a > ?`
 
     ```sql
     CREATE BINDING FOR SELECT * FROM t WHERE a > 1 USING SELECT * FROM t use index  (idx) WHERE a > 2
     ```
 
-- This binding will fail because the original SQL statement is processed as `SELECT * FROM test . t WHERE a > ?`, while the bound SQL statement is processed differently as `SELECT * FROM test . t WHERE b > ?`.
+-   This binding will fail because the original SQL statement is processed as `SELECT * FROM test . t WHERE a > ?`, while the bound SQL statement is processed differently as `SELECT * FROM test . t WHERE b > ?`.
 
     ```sql
     CREATE BINDING FOR SELECT * FROM t WHERE a > 1 USING SELECT * FROM t use index(idx) WHERE b > 2
@@ -222,15 +220,15 @@ The original SQL statement and the bound statement must have the same text after
 >
 > For `PREPARE` / `EXECUTE` statements and for queries executed with binary protocols, you need to create execution plan bindings for the real query statements, not for the `PREPARE` / `EXECUTE` statements.
 
-#### Create a binding according to a historical execution plan
+#### Create a binding according to a historical execution plan {#create-a-binding-according-to-a-historical-execution-plan}
 
 To make the execution plan of a SQL statement fixed to a historical execution plan, you can use Plan Digest to bind that historical execution plan to the SQL statement, which is more convenient than binding it according to a SQL statement. In addition, you can bind the execution plan for multiple SQL statements at once. For more details and examples, see [`CREATE [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md).
 
 When using this feature, note the following:
 
-- The feature generates hints according to historical execution plans and uses the generated hints for binding. Because historical execution plans are stored in [Statement Summary Tables](/statement-summary-tables.md), before using this feature, you need to enable the [`tidb_enable_stmt_summary`](/system-variables.md#tidb_enable_stmt_summary-new-in-v304) system variable first.
-- For TiFlash queries, Join queries with three or more tables, and queries that contain subqueries, the auto-generated hints are not adequate, which might result in the plan not being fully bound. In such cases, a warning will occur when creating a binding.
-- If a historical execution plan is for a SQL statement with hints, the hints will be added to the binding. For example, after executing `SELECT /*+ max_execution_time(1000) */ * FROM t`, the binding created with its Plan Digest will include `max_execution_time(1000)`.
+-   The feature generates hints according to historical execution plans and uses the generated hints for binding. Because historical execution plans are stored in [Statement Summary Tables](/statement-summary-tables.md), before using this feature, you need to enable the [`tidb_enable_stmt_summary`](/system-variables.md#tidb_enable_stmt_summary-new-in-v304) system variable first.
+-   For TiFlash queries, Join queries with three or more tables, and queries that contain subqueries, the auto-generated hints are not adequate, which might result in the plan not being fully bound. In such cases, a warning will occur when creating a binding.
+-   If a historical execution plan is for a SQL statement with hints, the hints will be added to the binding. For example, after executing `SELECT /*+ max_execution_time(1000) */ * FROM t`, the binding created with its Plan Digest will include `max_execution_time(1000)`.
 
 The SQL statement of this binding method is as follows:
 
@@ -242,7 +240,7 @@ The preceding statement binds an execution plan to a SQL statement using Plan Di
 
 To use this binding method, you need to first get the Plan Digest corresponding to the target historical execution plan in `statements_summary`, and then create a binding using the Plan Digest. The detailed steps are as follows:
 
-1. Get the Plan Digest corresponding to the target execution plan in `statements_summary`.
+1.  Get the Plan Digest corresponding to the target execution plan in `statements_summary`.
 
     For example:
 
@@ -254,22 +252,20 @@ To use this binding method, you need to first get the Plan Digest corresponding 
 
     The following is a part of the example query result of `statements_summary`:
 
-    ```
-    SUMMARY_BEGIN_TIME: 2022-12-01 19:00:00
-    ...........
-          DIGEST_TEXT: select * from `t` where `a` = ?
-    ...........
-          PLAN_DIGEST: 4e3159169cc63c14b139a4e7d72eae1759875c9a9581f94bb2079aae961189cb
-                 PLAN:  id                  task        estRows operator info                           actRows execution info                                                                                                                                             memory      disk
-                        TableReader_7       root        10      data:Selection_6                        0       time:4.05ms, loops:1, cop_task: {num: 1, max: 598.6µs, proc_keys: 0, rpc_num: 2, rpc_time: 609.8µs, copr_cache_hit_ratio: 0.00, distsql_concurrency: 15}   176 Bytes   N/A
-                        └─Selection_6       cop[tikv]   10      eq(test.t.a, 1)                         0       tikv_task:{time:560.8µs, loops:0}                                                                                                                          N/A         N/A
-                          └─TableFullScan_5 cop[tikv]   10000   table:t, keep order:false, stats:pseudo 0       tikv_task:{time:560.8µs, loops:0}                                                                                                                          N/A         N/A
-          BINARY_PLAN: 6QOYCuQDCg1UYWJsZVJlYWRlcl83Ev8BCgtTZWxlY3Rpb25fNhKOAQoPBSJQRnVsbFNjYW5fNSEBAAAAOA0/QSkAAQHwW4jDQDgCQAJKCwoJCgR0ZXN0EgF0Uh5rZWVwIG9yZGVyOmZhbHNlLCBzdGF0czpwc2V1ZG9qInRpa3ZfdGFzazp7dGltZTo1NjAuOMK1cywgbG9vcHM6MH1w////CQMEAXgJCBD///8BIQFzCDhVQw19BAAkBX0QUg9lcSgBfCAudC5hLCAxKWrmYQAYHOi0gc6hBB1hJAFAAVIQZGF0YTo9GgRaFAW4HDQuMDVtcywgCbYcMWKEAWNvcF8F2agge251bTogMSwgbWF4OiA1OTguNsK1cywgcHJvY19rZXlzOiAwLCBycGNfBSkAMgkMBVcQIDYwOS4pEPBDY29wcl9jYWNoZV9oaXRfcmF0aW86IDAuMDAsIGRpc3RzcWxfY29uY3VycmVuY3k6IDE1fXCwAXj///////////8BGAE=
-    ```
+        SUMMARY_BEGIN_TIME: 2022-12-01 19:00:00
+        ...........
+              DIGEST_TEXT: select * from `t` where `a` = ?
+        ...........
+              PLAN_DIGEST: 4e3159169cc63c14b139a4e7d72eae1759875c9a9581f94bb2079aae961189cb
+                     PLAN:  id                  task        estRows operator info                           actRows execution info                                                                                                                                             memory      disk
+                            TableReader_7       root        10      data:Selection_6                        0       time:4.05ms, loops:1, cop_task: {num: 1, max: 598.6µs, proc_keys: 0, rpc_num: 2, rpc_time: 609.8µs, copr_cache_hit_ratio: 0.00, distsql_concurrency: 15}   176 Bytes   N/A
+                            └─Selection_6       cop[tikv]   10      eq(test.t.a, 1)                         0       tikv_task:{time:560.8µs, loops:0}                                                                                                                          N/A         N/A
+                              └─TableFullScan_5 cop[tikv]   10000   table:t, keep order:false, stats:pseudo 0       tikv_task:{time:560.8µs, loops:0}                                                                                                                          N/A         N/A
+              BINARY_PLAN: 6QOYCuQDCg1UYWJsZVJlYWRlcl83Ev8BCgtTZWxlY3Rpb25fNhKOAQoPBSJQRnVsbFNjYW5fNSEBAAAAOA0/QSkAAQHwW4jDQDgCQAJKCwoJCgR0ZXN0EgF0Uh5rZWVwIG9yZGVyOmZhbHNlLCBzdGF0czpwc2V1ZG9qInRpa3ZfdGFzazp7dGltZTo1NjAuOMK1cywgbG9vcHM6MH1w////CQMEAXgJCBD///8BIQFzCDhVQw19BAAkBX0QUg9lcSgBfCAudC5hLCAxKWrmYQAYHOi0gc6hBB1hJAFAAVIQZGF0YTo9GgRaFAW4HDQuMDVtcywgCbYcMWKEAWNvcF8F2agge251bTogMSwgbWF4OiA1OTguNsK1cywgcHJvY19rZXlzOiAwLCBycGNfBSkAMgkMBVcQIDYwOS4pEPBDY29wcl9jYWNoZV9oaXRfcmF0aW86IDAuMDAsIGRpc3RzcWxfY29uY3VycmVuY3k6IDE1fXCwAXj///////////8BGAE=
 
     In this example, you can see that the execution plan corresponding to Plan Digest is `4e3159169cc63c14b139a4e7d72eae1759875c9a9581f94bb2079aae961189cb`.
 
-2. Use Plan Digest to create a binding:
+2.  Use Plan Digest to create a binding:
 
     ```sql
     CREATE BINDING FROM HISTORY USING PLAN DIGEST '4e3159169cc63c14b139a4e7d72eae1759875c9a9581f94bb2079aae961189cb';
@@ -281,40 +277,34 @@ To verify whether the created binding takes effect, you can [view bindings](#vie
 SHOW BINDINGS\G
 ```
 
-```
-*************************** 1. row ***************************
-Original_sql: select * from `test` . `t` where `a` = ?
-    Bind_sql: SELECT /*+ use_index(@`sel_1` `test`.`t` ) ignore_index(`t` `idx_a`)*/ * FROM `test`.`t` WHERE `a` = 1
-       ...........
-  Sql_digest: 6909a1bbce5f64ade0a532d7058dd77b6ad5d5068aee22a531304280de48349f
- Plan_digest:
-1 row in set (0.01 sec)
+    *************************** 1. row ***************************
+    Original_sql: select * from `test` . `t` where `a` = ?
+        Bind_sql: SELECT /*+ use_index(@`sel_1` `test`.`t` ) ignore_index(`t` `idx_a`)*/ * FROM `test`.`t` WHERE `a` = 1
+           ...........
+      Sql_digest: 6909a1bbce5f64ade0a532d7058dd77b6ad5d5068aee22a531304280de48349f
+     Plan_digest:
+    1 row in set (0.01 sec)
 
-ERROR:
-No query specified
-```
+    ERROR:
+    No query specified
 
 ```sql
 SELECT * FROM t WHERE a = 1;
 SELECT @@LAST_PLAN_FROM_BINDING;
 ```
 
-```
-+--------------------------+
-| @@LAST_PLAN_FROM_BINDING |
-+--------------------------+
-|                        1 |
-+--------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------+
+    | @@LAST_PLAN_FROM_BINDING |
+    +--------------------------+
+    |                        1 |
+    +--------------------------+
+    1 row in set (0.00 sec)
 
-### Remove a binding
+### Remove a binding {#remove-a-binding}
 
 You can remove a binding according to a SQL statement or SQL Digest.
 
-#### Remove a binding according to a SQL statement
-
-{{< copyable "sql" >}}
+#### Remove a binding according to a SQL statement {#remove-a-binding-according-to-a-sql-statement}
 
 ```sql
 DROP [GLOBAL | SESSION] BINDING FOR BindableStmt;
@@ -336,7 +326,7 @@ explain SELECT * FROM t1,t2 WHERE t1.id = t2.id;
 
 In the example above, the dropped binding in the SESSION scope shields the corresponding binding in the GLOBAL scope. The optimizer does not add the `sm_join(t1, t2)` hint to the statement. The top node of the execution plan in the `explain` result is not fixed to MergeJoin by this hint. Instead, the top node is independently selected by the optimizer according to the cost estimation.
 
-#### Remove a binding according to SQL Digest
+#### Remove a binding according to SQL Digest {#remove-a-binding-according-to-sql-digest}
 
 In addition to removing a binding according to a SQL statement, you can also remove a binding according to SQL Digest. For more details and examples, see [`DROP [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-drop-binding.md).
 
@@ -350,11 +340,9 @@ This statement removes an execution plan binding corresponding to SQL Digest at 
 >
 > Executing `DROP GLOBAL BINDING` drops the binding in the current tidb-server instance cache and changes the status of the corresponding row in the system table to 'deleted'. This statement does not directly delete the records in the system table, because other tidb-server instances need to read the 'deleted' status to drop the corresponding binding in their cache. For the records in these system tables with the status of 'deleted', at every 100 `bind-info-lease` (the default value is `3s`, and `300s` in total) interval, the background thread triggers an operation of reclaiming and clearing on the bindings of `update_time` before 10 `bind-info-lease` (to ensure that all tidb-server instances have read the 'deleted' status and updated the cache).
 
-### Change binding status
+### Change binding status {#change-binding-status}
 
-#### Change binding status according to a SQL statement
-
-{{< copyable "sql" >}}
+#### Change binding status according to a SQL statement {#change-binding-status-according-to-a-sql-statement}
 
 ```sql
 SET BINDING [ENABLED | DISABLED] FOR BindableStmt;
@@ -364,7 +352,7 @@ You can execute this statement to change the status of a binding. The default st
 
 When executing this statement, you can only change the status of a binding from `Disabled` to `Enabled` or from `Enabled` to `Disabled`. If no binding is available for status changes, a warning message is returned, saying `There are no bindings can be set the status. Please check the SQL text`. Note that a binding in `Disabled` status is not used by any query.
 
-#### Change binding status according to `sql_digest`
+#### Change binding status according to <code>sql_digest</code> {#change-binding-status-according-to-code-sql-digest-code}
 
 In addition to changing the binding status according to a SQL statement, you can also change the binding status according to `sql_digest`:
 
@@ -374,9 +362,7 @@ SET BINDING [ENABLED | DISABLED] FOR SQL DIGEST 'sql_digest';
 
 The binding status that can be changed by `sql_digest` and the effect is the same as those changed [according to a SQL statement](#change-binding-status-according-to-a-sql-statement). If no binding is available for status changes, a warning message `can't find any binding for 'sql_digest'` is returned.
 
-### View bindings
-
-{{< copyable "sql" >}}
+### View bindings {#view-bindings}
 
 ```sql
 SHOW [GLOBAL | SESSION] BINDINGS [ShowLikeOrWhere]
@@ -384,27 +370,25 @@ SHOW [GLOBAL | SESSION] BINDINGS [ShowLikeOrWhere]
 
 This statement outputs the execution plan bindings at the GLOBAL or SESSION level according to the order of binding update time from the latest to earliest. The default scope is SESSION. Currently `SHOW BINDINGS` outputs 11 columns, as shown below:
 
-| Column Name | Note |
-| :-------- | :------------- |
-| original_sql  |  Original SQL statement after parameterization |
-| bind_sql | Bound SQL statement with hints |
-| default_db | Default database |
-| status | Status including `enabled` (replacing the `using` status from v6.0), `disabled`, `deleted`, `invalid`, `rejected`, and `pending verify`|
-| create_time | Creating time |
-| update_time | Updating time |
-| charset | Character set |
-| collation | Ordering rule |
-| source | The way in which a binding is created, including `manual` (created according to a SQL statement), `history` (created according to a historical execution plan), `capture` (captured automatically by TiDB), and `evolve` (evolved automatically by TiDB) |
-| sql_digest | Digest of a normalized SQL statement |
-| plan_digest | Digest of an execution plan |
+| Column Name  | Note                                                                                                                                                                                                                                                     |
+| :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| original_sql | Original SQL statement after parameterization                                                                                                                                                                                                            |
+| bind_sql     | Bound SQL statement with hints                                                                                                                                                                                                                           |
+| default_db   | Default database                                                                                                                                                                                                                                         |
+| status       | Status including `enabled` (replacing the `using` status from v6.0), `disabled`, `deleted`, `invalid`, `rejected`, and `pending verify`                                                                                                                  |
+| create_time  | Creating time                                                                                                                                                                                                                                            |
+| update_time  | Updating time                                                                                                                                                                                                                                            |
+| charset      | Character set                                                                                                                                                                                                                                            |
+| collation    | Ordering rule                                                                                                                                                                                                                                            |
+| source       | The way in which a binding is created, including `manual` (created according to a SQL statement), `history` (created according to a historical execution plan), `capture` (captured automatically by TiDB), and `evolve` (evolved automatically by TiDB) |
+| sql_digest   | Digest of a normalized SQL statement                                                                                                                                                                                                                     |
+| plan_digest  | Digest of an execution plan                                                                                                                                                                                                                              |
 
-### Troubleshoot a binding
+### Troubleshoot a binding {#troubleshoot-a-binding}
 
 You can use either of the following methods to troubleshoot a binding:
 
-- Use the system variable [`last_plan_from_binding`](/system-variables.md#last_plan_from_binding-new-in-v40) to show whether the execution plan used by the last executed statement is from the binding.
-
-     {{< copyable "sql" >}}
+-   Use the system variable [`last_plan_from_binding`](/system-variables.md#last_plan_from_binding-new-in-v40) to show whether the execution plan used by the last executed statement is from the binding.
 
     ```sql
     -- Create a global binding
@@ -426,7 +410,7 @@ You can use either of the following methods to troubleshoot a binding:
     1 row in set (0.00 sec)
     ```
 
-- Use the `explain format = 'verbose'` statement to view the query plan of a SQL statement. If the SQL statement uses a binding, you can run `show warnings` to check which binding is used in the SQL statement.
+-   Use the `explain format = 'verbose'` statement to view the query plan of a SQL statement. If the SQL statement uses a binding, you can run `show warnings` to check which binding is used in the SQL statement.
 
     ```sql
     -- Create a global binding
@@ -455,13 +439,11 @@ You can use either of the following methods to troubleshoot a binding:
 
     ```
 
-### Cache bindings
+### Cache bindings {#cache-bindings}
 
 Each TiDB instance has a least recently used (LRU) cache for bindings. The cache capacity is controlled by the system variable [`tidb_mem_quota_binding_cache`](/system-variables.md#tidb_mem_quota_binding_cache-new-in-v600). You can view bindings that are cached in the TiDB instance.
 
 To view the cache status of bindings, run the `SHOW binding_cache status` statement. In this statement, the effective scope is GLOBAL by default and cannot be modified. This statement returns the number of available bindings in the cache, the total number of available bindings in the system, memory usage of all cached bindings, and the total memory for the cache.
-
-{{< copyable "sql" >}}
 
 ```sql
 
@@ -477,7 +459,7 @@ SHOW binding_cache status;
 1 row in set (0.00 sec)
 ```
 
-## Utilize the statement summary table to obtain queries that need to be bound
+## Utilize the statement summary table to obtain queries that need to be bound {#utilize-the-statement-summary-table-to-obtain-queries-that-need-to-be-bound}
 
 [Statement summary](/statement-summary-tables.md) records recent SQL execution information, such as latency, execution times, and corresponding query plans. You can query statement summary tables to get qualified `plan_digest`, and then [create bindings according to these historical execution plans](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan).
 
@@ -514,23 +496,21 @@ ORDER BY SUM(exec_count) DESC LIMIT 100;                       -- Top 100 high-f
 
 By applying certain filtering conditions to obtain queries that meet the criteria, you can then directly execute the statements in the corresponding `binding_stmt` column to create bindings.
 
-```
-+---------------------------------------------+------------+-----------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
-| query                                       | exec_count | plan_hint                                                                   | binding_stmt                                                                                                            |
-+---------------------------------------------+------------+-----------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
-| select * from `t` where `a` = ? and `b` = ? |        401 | use_index(@`sel_1` `test`.`t` `a`), no_order_index(@`sel_1` `test`.`t` `a`) | create global binding from history using plan digest "0d6e97fb1191bbd08dddefa7bd007ec0c422b1416b152662768f43e64a9958a6" |
-| select * from `t` where `b` = ? and `c` = ? |        104 | use_index(@`sel_1` `test`.`t` `b`), no_order_index(@`sel_1` `test`.`t` `b`) | create global binding from history using plan digest "80c2aa0aa7e6d3205755823aa8c6165092c8521fb74c06a9204b8d35fc037dd9" |
-+---------------------------------------------+------------+-----------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
-```
+    +---------------------------------------------+------------+-----------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
+    | query                                       | exec_count | plan_hint                                                                   | binding_stmt                                                                                                            |
+    +---------------------------------------------+------------+-----------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
+    | select * from `t` where `a` = ? and `b` = ? |        401 | use_index(@`sel_1` `test`.`t` `a`), no_order_index(@`sel_1` `test`.`t` `a`) | create global binding from history using plan digest "0d6e97fb1191bbd08dddefa7bd007ec0c422b1416b152662768f43e64a9958a6" |
+    | select * from `t` where `b` = ? and `c` = ? |        104 | use_index(@`sel_1` `test`.`t` `b`), no_order_index(@`sel_1` `test`.`t` `b`) | create global binding from history using plan digest "80c2aa0aa7e6d3205755823aa8c6165092c8521fb74c06a9204b8d35fc037dd9" |
+    +---------------------------------------------+------------+-----------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
 
-## Cross-database binding
+## Cross-database binding {#cross-database-binding}
 
 Starting from v7.6.0, you can create cross-database bindings in TiDB by using the wildcard `*` to represent a database name in the binding creation syntax. Before creating cross-database bindings, you need to first enable the [`tidb_opt_enable_fuzzy_binding`](/system-variables.md#tidb_opt_enable_fuzzy_binding-new-in-v760) system variable.
 
 You can use cross-database bindings to simplify the process of fixing execution plans in scenarios where data is categorized and stored across different databases, and each database maintains identical object definitions and executes similar application logic. The following are some common use cases:
 
-* When you run SaaS or PaaS services on TiDB, where the data of each tenant is stored in separate databases for easier data maintenance and management
-* When you performed database sharding in a single instance and retained the original database schema after migrating to TiDB, that is, the data in the original instance is categorized and stored by database
+-   When you run SaaS or PaaS services on TiDB, where the data of each tenant is stored in separate databases for easier data maintenance and management
+-   When you performed database sharding in a single instance and retained the original database schema after migrating to TiDB, that is, the data in the original instance is categorized and stored by database
 
 In these scenarios, cross-database binding can effectively mitigate SQL performance issues caused by uneven distribution and rapid changes in user data and workload. SaaS providers can use cross-database bindings to fix execution plans validated by applications with large data volumes, thereby avoiding potential performance issues due to the rapid growth of applications with small data volumes.
 
@@ -559,7 +539,7 @@ For the same query, both cross-database and standard bindings can coexist. TiDB 
 
 Apart from the creation syntax, cross-database bindings share the same deletion and status change syntax as standard bindings. The following is a detailed usage example.
 
-1. Create databases `db1` and `db2`, and create two tables in each database:
+1.  Create databases `db1` and `db2`, and create two tables in each database:
 
     ```sql
     CREATE DATABASE db1;
@@ -570,19 +550,19 @@ Apart from the creation syntax, cross-database bindings share the same deletion 
     CREATE TABLE db2.t2 (a INT, KEY(a));
     ```
 
-2. Enable the cross-database binding feature:
+2.  Enable the cross-database binding feature:
 
     ```sql
     SET tidb_opt_enable_fuzzy_binding=1;
     ```
 
-3. Create a cross-database binding:
+3.  Create a cross-database binding:
 
     ```sql
     CREATE GLOBAL BINDING USING SELECT /*+ use_index(t1, idx_a), use_index(t2, idx_a) */ * FROM *.t1, *.t2;
     ```
 
-4. Execute queries and verify whether the binding is used:
+4.  Execute queries and verify whether the binding is used:
 
     ```sql
     SELECT * FROM db1.t1, db1.t2;
@@ -592,7 +572,7 @@ Apart from the creation syntax, cross-database bindings share the same deletion 
     +--------------------------+
     |                        1 |
     +--------------------------+
-    
+
     SELECT * FROM db2.t1, db2.t2;
     SELECT @@LAST_PLAN_FROM_BINDING;
     +--------------------------+
@@ -600,7 +580,7 @@ Apart from the creation syntax, cross-database bindings share the same deletion 
     +--------------------------+
     |                        1 |
     +--------------------------+
-    
+
     SELECT * FROM db1.t1, db2.t2;
     SELECT @@LAST_PLAN_FROM_BINDING;
     +--------------------------+
@@ -619,7 +599,7 @@ Apart from the creation syntax, cross-database bindings share the same deletion 
     +--------------------------+
     ```
 
-5. View the binding:
+5.  View the binding:
 
     ```sql
     SHOW GLOBAL BINDINGS;
@@ -630,7 +610,7 @@ Apart from the creation syntax, cross-database bindings share the same deletion 
     +----------------------------------------------+------------------------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
     ```
 
-6. Delete the cross-database binding:
+6.  Delete the cross-database binding:
 
     ```sql
     DROP GLOBAL BINDING FOR SQL DIGEST 'ea8720583e80644b58877663eafb3579700e5f918a748be222c5b741a696daf4';
@@ -638,13 +618,13 @@ Apart from the creation syntax, cross-database bindings share the same deletion 
     Empty set (0.00 sec)
     ```
 
-## Baseline capturing
+## Baseline capturing {#baseline-capturing}
 
 Used for [preventing regression of execution plans during an upgrade](#prevent-regression-of-execution-plans-during-an-upgrade), this feature captures queries that meet capturing conditions and creates bindings for these queries.
 
 A plan baseline refers to a collection of accepted plans that the optimizer can use for executing a SQL statement. Generally, TiDB adds a plan into the plan baseline only after confirming that the plan performs well. A plan in this context encompasses all the necessary plan-related details (such as SQL plan identifier, hint set, bind values, and optimizer environment) that the optimizer requires to reproduce an execution plan.
 
-### Enable capturing
+### Enable capturing {#enable-capturing}
 
 To enable baseline capturing, set `tidb_capture_plan_baselines` to `on`. The default value is `off`.
 
@@ -656,10 +636,10 @@ After automatic binding creation is enabled, the historical SQL statements in th
 
 However, TiDB does not automatically capture bindings for the following types of SQL statements:
 
-- `EXPLAIN` and `EXPLAIN ANALYZE` statements.
-- SQL statements executed internally in TiDB, such as `SELECT` queries used for automatically loading statistical information.
-- Statements that contain `Enabled` or `Disabled` bindings.
-- Statements that are filtered out by capturing conditions.
+-   `EXPLAIN` and `EXPLAIN ANALYZE` statements.
+-   SQL statements executed internally in TiDB, such as `SELECT` queries used for automatically loading statistical information.
+-   Statements that contain `Enabled` or `Disabled` bindings.
+-   Statements that are filtered out by capturing conditions.
 
 > **Note:**
 >
@@ -671,11 +651,11 @@ For `PREPARE` / `EXECUTE` statements and for queries executed with binary protoc
 >
 > Because TiDB has some embedded SQL statements to ensure the correctness of some features, baseline capturing by default automatically shields these SQL statements.
 
-### Filter out bindings
+### Filter out bindings {#filter-out-bindings}
 
 This feature allows you to configure a blocklist to filter out queries whose bindings you do not want to capture. A blocklist has three dimensions, table name, frequency, and user name.
 
-#### Usage
+#### Usage {#usage}
 
 Insert filtering conditions into the system table `mysql.capture_plan_baselines_blacklist`. Then the filtering conditions take effect in the entire cluster immediately.
 
@@ -694,53 +674,51 @@ INSERT INTO mysql.capture_plan_baselines_blacklist(filter_type, filter_value) VA
 INSERT INTO mysql.capture_plan_baselines_blacklist(filter_type, filter_value) VALUES('user', 'user1');
 ```
 
-| **Dimension name** | **Description**                                                     | Remarks                                                     |
-| :----------- | :----------------------------------------------------------- | ------------------------------------------------------------ |
-| table        | Filter by table name. Each filtering rule is in the `db.table` format. The supported filtering syntax includes [Plain table names](/table-filter.md#plain-table-names) and [Wildcards](/table-filter.md#wildcards). | Case insensitive. If a table name contains illegal characters, the log returns a warning message `[sql-bind] failed to load mysql.capture_plan_baselines_blacklist`. |
-| frequency    | Filter by frequency. SQL statements executed more than once are captured by default. You can set a high frequency to capture statements that are frequently executed. | Setting frequency to a value smaller than 1 is considered illegal, and the log returns a warning message `[sql-bind] frequency threshold is less than 1, ignore it`. If multiple frequency filter rules are inserted, the value with the highest frequency prevails. |
-| user         | Filter by user name. Statements executed by blocklisted users are not captured.                           | If multiple users execute the same statement and their user names are all in the blocklist, this statement is not captured. |
+| **Dimension name** | **Description**                                                                                                                                                                                                     | Remarks                                                                                                                                                                                                                                                              |
+| :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| table              | Filter by table name. Each filtering rule is in the `db.table` format. The supported filtering syntax includes [Plain table names](/table-filter.md#plain-table-names) and [Wildcards](/table-filter.md#wildcards). | Case insensitive. If a table name contains illegal characters, the log returns a warning message `[sql-bind] failed to load mysql.capture_plan_baselines_blacklist`.                                                                                                 |
+| frequency          | Filter by frequency. SQL statements executed more than once are captured by default. You can set a high frequency to capture statements that are frequently executed.                                               | Setting frequency to a value smaller than 1 is considered illegal, and the log returns a warning message `[sql-bind] frequency threshold is less than 1, ignore it`. If multiple frequency filter rules are inserted, the value with the highest frequency prevails. |
+| user               | Filter by user name. Statements executed by blocklisted users are not captured.                                                                                                                                     | If multiple users execute the same statement and their user names are all in the blocklist, this statement is not captured.                                                                                                                                          |
 
 > **Note:**
 >
-> - Modifying a blocklist requires the super privilege.
+> -   Modifying a blocklist requires the super privilege.
 >
-> - If a blocklist contains illegal filters, TiDB returns the warning message `[sql-bind] unknown capture filter type, ignore it` in the log.
+> -   If a blocklist contains illegal filters, TiDB returns the warning message `[sql-bind] unknown capture filter type, ignore it` in the log.
 
-### Prevent regression of execution plans during an upgrade
+### Prevent regression of execution plans during an upgrade {#prevent-regression-of-execution-plans-during-an-upgrade}
 
- Before upgrading a TiDB cluster, you can use baseline capturing to prevent regression of execution plans by performing the following steps:
+Before upgrading a TiDB cluster, you can use baseline capturing to prevent regression of execution plans by performing the following steps:
 
-1. Enable baseline capturing and keep it working.
+1.  Enable baseline capturing and keep it working.
 
     > **Note:**
     >
     > Test data shows that long-term working of baseline capturing has a slight impact on the performance of the cluster load. Therefore, it is recommended to enable baseline capturing as long as possible so that important plans (appear twice or above) are captured.
 
-2. Upgrade the TiDB cluster. After the upgrade, TiDB uses those captured bindings to ensure execution plan consistency.
+2.  Upgrade the TiDB cluster. After the upgrade, TiDB uses those captured bindings to ensure execution plan consistency.
 
-3. After the upgrade, delete bindings as required.
+3.  After the upgrade, delete bindings as required.
 
-    - Check the binding source by running the [`SHOW GLOBAL BINDINGS`](#view-bindings) statement.
+    -   Check the binding source by running the [`SHOW GLOBAL BINDINGS`](#view-bindings) statement.
 
         In the output, check the `Source` field to see whether a binding is captured (`capture`) or manually created (`manual`).
 
-    - Determine whether to retain the captured bindings:
+    -   Determine whether to retain the captured bindings:
 
-        ```
-        -- View the plan with the binding enabled
-        SET @@SESSION.TIDB_USE_PLAN_BASELINES = true;
-        EXPLAIN FORMAT='VERBOSE' SELECT * FROM t1 WHERE ...;
+            -- View the plan with the binding enabled
+            SET @@SESSION.TIDB_USE_PLAN_BASELINES = true;
+            EXPLAIN FORMAT='VERBOSE' SELECT * FROM t1 WHERE ...;
 
-        -- View the plan with the binding disabled
-        SET @@SESSION.TIDB_USE_PLAN_BASELINES = false;
-        EXPLAIN FORMAT='VERBOSE' SELECT * FROM t1 WHERE ...;
-        ```
+            -- View the plan with the binding disabled
+            SET @@SESSION.TIDB_USE_PLAN_BASELINES = false;
+            EXPLAIN FORMAT='VERBOSE' SELECT * FROM t1 WHERE ...;
 
-        - If the execution plan is consistent, you can delete the binding safely.
+        -   If the execution plan is consistent, you can delete the binding safely.
 
-        - If the execution plan is inconsistent, you need to identify the cause, for example, by checking statistics. In this case, you need to retain the binding to ensure plan consistency.
+        -   If the execution plan is inconsistent, you need to identify the cause, for example, by checking statistics. In this case, you need to retain the binding to ensure plan consistency.
 
-## Baseline evolution
+## Baseline evolution {#baseline-evolution}
 
 Baseline evolution is an important feature of SPM introduced in TiDB v4.0.
 
@@ -748,11 +726,9 @@ As data updates, the previously bound execution plan might no longer be optimal.
 
 In addition, baseline evolution, to a certain extent, can also avoid the jitter brought to the execution plan caused by the change of statistical information.
 
-### Usage
+### Usage {#usage}
 
 Use the following statement to enable automatic binding evolution:
-
-{{< copyable "sql" >}}
 
 ```sql
 SET GLOBAL tidb_evolve_plan_baselines = ON;
@@ -764,8 +740,8 @@ The default value of `tidb_evolve_plan_baselines` is `off`.
 
 > **Warning:**
 >
-> + Baseline evolution is an experimental feature. Unknown risks might exist. It is **NOT** recommended that you use it in the production environment.
-> + This variable is forcibly set to `off` until the baseline evolution feature becomes generally available (GA). If you try to enable this feature, an error is returned. If you have already used this feature in a production environment, disable it as soon as possible. If you find that the binding status is not as expected, [get support](/support.md) from PingCAP or the community.
+> -   Baseline evolution is an experimental feature. Unknown risks might exist. It is **NOT** recommended that you use it in the production environment.
+> -   This variable is forcibly set to `off` until the baseline evolution feature becomes generally available (GA). If you try to enable this feature, an error is returned. If you have already used this feature in a production environment, disable it as soon as possible. If you find that the binding status is not as expected, [get support](/support.md) from PingCAP or the community.
 
 </CustomContent>
 
@@ -773,8 +749,8 @@ The default value of `tidb_evolve_plan_baselines` is `off`.
 
 > **Warning:**
 >
-> + Baseline evolution is an experimental feature. Unknown risks might exist. It is **NOT** recommended that you use it in the production environment.
-> + This variable is forcibly set to `off` until the baseline evolution feature becomes generally available (GA). If you try to enable this feature, an error is returned. If you have already used this feature in a production environment, disable it as soon as possible. If you find that the binding status is not as expected, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> -   Baseline evolution is an experimental feature. Unknown risks might exist. It is **NOT** recommended that you use it in the production environment.
+> -   This variable is forcibly set to `off` until the baseline evolution feature becomes generally available (GA). If you try to enable this feature, an error is returned. If you have already used this feature in a production environment, disable it as soon as possible. If you find that the binding status is not as expected, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 
@@ -782,23 +758,17 @@ After the automatic binding evolution feature is enabled, if the optimal executi
 
 Assume that table `t` is defined as follows:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE TABLE t(a INT, b INT, KEY(a), KEY(b));
 ```
 
 Perform the following query on table `t`:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT * FROM t WHERE a < 100 AND b < 100;
 ```
 
 In the table defined above, few rows meet the `a < 100` condition. But for some reason, the optimizer mistakenly selects the full table scan instead of the optimal execution plan that uses index `a`. You can first use the following statement to create a binding:
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE GLOBAL BINDING for SELECT * FROM t WHERE a < 100 AND b < 100 USING SELECT * FROM t use index(a) WHERE a < 100 AND b < 100;
@@ -812,37 +782,35 @@ The binding evolution can address this kind of issues. When the optimizer recogn
 
 To reduce the impact that the automatic evolution has on clusters, use the following configurations:
 
-- Set `tidb_evolve_plan_task_max_time` to limit the maximum execution time of each execution plan. The default value is `600s`. In the actual verification process, the maximum execution time is also limited to no more than twice the time of the verified execution plan.
-- Set `tidb_evolve_plan_task_start_time` (`00:00 +0000` by default) and `tidb_evolve_plan_task_end_time` (`23:59 +0000` by default) to limit the time window.
+-   Set `tidb_evolve_plan_task_max_time` to limit the maximum execution time of each execution plan. The default value is `600s`. In the actual verification process, the maximum execution time is also limited to no more than twice the time of the verified execution plan.
+-   Set `tidb_evolve_plan_task_start_time` (`00:00 +0000` by default) and `tidb_evolve_plan_task_end_time` (`23:59 +0000` by default) to limit the time window.
 
-### Notes
+### Notes {#notes}
 
 Because the baseline evolution automatically creates a new binding, when the query environment changes, the automatically created binding might have multiple behavior choices. Pay attention to the following notes:
 
-+ Baseline evolution only evolves standardized SQL statements that have at least one global binding.
+-   Baseline evolution only evolves standardized SQL statements that have at least one global binding.
 
-+ Because creating a new binding deletes all previous bindings (for a standardized SQL statement), the automatically evolved binding will be deleted after manually creating a new binding.
+-   Because creating a new binding deletes all previous bindings (for a standardized SQL statement), the automatically evolved binding will be deleted after manually creating a new binding.
 
-+ All hints related to the calculation process are retained during the evolution. These hints are as follows:
+-   All hints related to the calculation process are retained during the evolution. These hints are as follows:
 
-    | Hint | Description            |
-    | :-------- | :------------- |
-    | `memory_quota` | The maximum memory that can be used for a query. |
-    | `use_toja` | Whether the optimizer transforms sub-queries to Join. |
-    | `use_cascades` | Whether to use the cascades optimizer. |
-    | `no_index_merge` | Whether the optimizer uses Index Merge as an option for reading tables. |
-    | `read_consistent_replica` | Whether to forcibly enable Follower Read when reading tables. |
-    | `max_execution_time` | The longest duration for a query. |
+    | Hint                      | Description                                                             |
+    | :------------------------ | :---------------------------------------------------------------------- |
+    | `memory_quota`            | The maximum memory that can be used for a query.                        |
+    | `use_toja`                | Whether the optimizer transforms sub-queries to Join.                   |
+    | `use_cascades`            | Whether to use the cascades optimizer.                                  |
+    | `no_index_merge`          | Whether the optimizer uses Index Merge as an option for reading tables. |
+    | `read_consistent_replica` | Whether to forcibly enable Follower Read when reading tables.           |
+    | `max_execution_time`      | The longest duration for a query.                                       |
 
-+ `read_from_storage` is a special hint in that it specifies whether to read data from TiKV or from TiFlash when reading tables. Because TiDB provides isolation reads, when the isolation condition changes, this hint has a great influence on the evolved execution plan. Therefore, when this hint exists in the initially created binding, TiDB ignores all its evolved bindings.
+-   `read_from_storage` is a special hint in that it specifies whether to read data from TiKV or from TiFlash when reading tables. Because TiDB provides isolation reads, when the isolation condition changes, this hint has a great influence on the evolved execution plan. Therefore, when this hint exists in the initially created binding, TiDB ignores all its evolved bindings.
 
-## Upgrade checklist
+## Upgrade checklist {#upgrade-checklist}
 
 During cluster upgrade, SQL Plan Management (SPM) might cause compatibility issues and make the upgrade fail. To ensure a successful upgrade, you need to include the following list for upgrade precheck:
 
-* When you upgrade from a version earlier than v5.2.0 (that is, v4.0, v5.0, and v5.1) to the current version, make sure that `tidb_evolve_plan_baselines` is disabled before the upgrade. To disable this variable, perform the following steps.
-
-    {{< copyable "sql" >}}
+-   When you upgrade from a version earlier than v5.2.0 (that is, v4.0, v5.0, and v5.1) to the current version, make sure that `tidb_evolve_plan_baselines` is disabled before the upgrade. To disable this variable, perform the following steps.
 
     ```sql
     -- Check whether `tidb_evolve_plan_baselines` is disabled in the earlier version.
@@ -854,9 +822,7 @@ During cluster upgrade, SQL Plan Management (SPM) might cause compatibility issu
     SET GLOBAL tidb_evolve_plan_baselines = OFF;
     ```
 
-* Before you upgrade from v4.0 to the current version, you need to check whether the syntax of all queries corresponding to the available SQL bindings is correct in the new version. If any syntax errors exist, delete the corresponding SQL binding. To do that, perform the following steps.
-
-    {{< copyable "sql" >}}
+-   Before you upgrade from v4.0 to the current version, you need to check whether the syntax of all queries corresponding to the available SQL bindings is correct in the new version. If any syntax errors exist, delete the corresponding SQL binding. To do that, perform the following steps.
 
     ```sql
     -- Check the query corresponding to the available SQL binding in the version to be upgraded.

@@ -1,49 +1,49 @@
 ---
 title: Object Naming Convention
-summary: Learn the object naming convention in TiDB.
+summary: 了解 TiDB 中的对象命名规范。
 ---
 
 # Object Naming Convention
 
-This document introduces the rules to name database objects, such as database, table, index, and user.
+本文档介绍了数据库对象的命名规则，包括数据库、表、索引和用户。
 
 ## General rules
 
-- It is recommended to use meaningful English words separated by underscores.
-- Use only letters, numbers, and underscores in a name.
-- Avoid using TiDB reserved words, such as `group` and `order`, as column names.
-- It is recommended to use lowercase letters for all database objects.
+- 建议使用有意义的英文单词，单词之间用下划线分隔。
+- 名称中只使用字母、数字和下划线。
+- 避免使用 TiDB 的保留字，例如 `group` 和 `order`，作为列名。
+- 建议所有数据库对象均使用小写字母。
 
 ## Database naming convention
 
-It is recommended to differentiate database names by business, product, or other metrics and use no more than 20 characters in a database name. For example, you can name a temporary library as `tmp_crm` or a test library as `test_crm`.
+建议根据业务、产品或其他指标区分数据库名称，数据库名长度不超过 20 个字符。例如，可以将临时库命名为 `tmp_crm`，测试库命名为 `test_crm`。
 
 ## Table naming convention
 
-- Use the same prefix for tables of the same business or module, and make sure that the table name is self-explanatory as much as possible.
-- Separate words in a name by underscores. It is recommended to use no more than 32 characters in a table name.
-- It is recommended to annotate the purpose of the table for a better understanding. For example:
-    - Temporary table: `tmp_t_crm_relation_0425`
-    - Backup table: `bak_t_crm_relation_20170425`
-    - Temporary table of business operations: `tmp_st_{business code}_{creator abbreviation}_{date}`
-    - Record table of accounts period: `t_crm_ec_record_YYYY{MM}{dd}`
-- Create separate databases for tables of different business modules and add annotations accordingly.
+- 对于同一业务或模块的表，使用相同的前缀，并尽可能使表名具有自解释性。
+- 单词之间用下划线分隔。建议表名不超过 32 个字符。
+- 建议为表的用途添加注释，以便更好理解。例如：
+    - 临时表：`tmp_t_crm_relation_0425`
+    - 备份表：`bak_t_crm_relation_20170425`
+    - 业务操作的临时表：`tmp_st_{business code}_{creator abbreviation}_{date}`
+    - 账户期间的记录表：`t_crm_ec_record_YYYY{MM}{dd}`
+- 对不同业务模块的表创建单独的数据库，并相应添加注释。
 
 ## Column naming convention
 
-- The column naming is the actual meaning or abbreviation of the column.
-- It is recommended to use the same column name between tables with the same meaning.
-- It is recommended to add annotations to columns and specify named values for enumerated types, such as "0: offline, 1: online".
-- It is recommended to name the boolean column as `is_{description}`. For example, the column of a `member` table that indicates whether the member is enabled, can be named as `is_enabled`.
-- It is not recommended to name a column with more than 30 characters, and the number of columns should be less than 60.
-- Avoid using TiDB reserved words as column names, such as `order`, `from`, and `desc`. To check whether a keyword is reserved, see [TiDB keywords](/keywords.md).
+- 列名应反映列的实际含义或其缩写。
+- 建议在具有相同含义的表之间使用相同的列名。
+- 建议为列添加注释，并为枚举类型指定命名值，例如 "0: offline, 1: online"。
+- 建议将布尔类型的列命名为 `is_{description}`。例如，表示会员是否启用的列可以命名为 `is_enabled`。
+- 不建议列名超过 30 个字符，列数应少于 60 个。
+- 避免使用 TiDB 的保留字作为列名，例如 `order`、`from` 和 `desc`。要检查某个关键词是否为保留字，请参见 [TiDB keywords](/keywords.md)。
 
 ## Index naming convention
 
-- Primary key index: `pk_{table_name_abbreviation}_{field_name_abbreviation}`
-- Unique index: `uk_{table_name_abbreviation}_{field_name_abbreviation}`
-- Common index: `idx_{table_name_abbreviation}_{field_name_abbreviation}`
-- Column name with multiple words: use meaningful abbreviations
+- 主键索引：`pk_{table_name_abbreviation}_{field_name_abbreviation}`
+- 唯一索引：`uk_{table_name_abbreviation}_{field_name_abbreviation}`
+- 普通索引：`idx_{table_name_abbreviation}_{field_name_abbreviation}`
+- 多词列名：使用有意义的缩写
 
 ## Need help?
 

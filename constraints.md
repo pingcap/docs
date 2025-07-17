@@ -1,17 +1,17 @@
 ---
 title: Constraints
-summary: Learn how SQL Constraints apply to TiDB.
+summary: 了解 SQL Constraints 在 TiDB 中的应用。
 ---
 
 # Constraints
 
-TiDB supports almost the same constraints as MySQL.
+TiDB 支持几乎与 MySQL 相同的约束。
 
 ## NOT NULL
 
-NOT NULL constraints supported by TiDB are the same as those supported by MySQL.
+TiDB 支持的 NOT NULL 约束与 MySQL 支持的相同。
 
-For example:
+例如：
 
 ```sql
 CREATE TABLE users (
@@ -45,54 +45,54 @@ INSERT INTO users (id,age,last_login) VALUES (NULL,123,NULL);
 Query OK, 1 row affected (0.03 sec)
 ```
 
-* The first `INSERT` statement succeeds because it is possible to assign `NULL` to the `AUTO_INCREMENT` column. TiDB generates sequence numbers automatically.
-* The second `INSERT` statement fails because the `age` column is defined as `NOT NULL`.
-* The third `INSERT` statement succeeds because the `last_login` column is not explicitly defined as `NOT NULL`. NULL values ​​are allowed by default.
+* 第一个 `INSERT` 语句成功，因为可以为 `AUTO_INCREMENT` 列赋值 `NULL`。 TiDB 会自动生成序列号。
+* 第二个 `INSERT` 语句失败，因为 `age` 列被定义为 `NOT NULL`。
+* 第三个 `INSERT` 语句成功，因为 `last_login` 列没有被显式定义为 `NOT NULL`。默认允许 NULL 值。
 
 ## CHECK
 
 > **Note:**
 >
-> The `CHECK` constraint feature is disabled by default. To enable it, you need to set the [`tidb_enable_check_constraint`](/system-variables.md#tidb_enable_check_constraint-new-in-v720) variable to `ON`.
+> `CHECK` 约束功能默认是禁用的。要启用它，需要将 [`tidb_enable_check_constraint`](/system-variables.md#tidb_enable_check_constraint-new-in-v720) 变量设置为 `ON`。
 
-A `CHECK` constraint restricts the values of a column in a table to meet your specified conditions. When the `CHECK` constraint is added to a table, TiDB checks whether the constraint is satisfied during the insertion or updates of data into the table. If the constraint is not met, an error is returned.
+`CHECK` 约束限制表中某列的值必须满足你指定的条件。当在表中添加 `CHECK` 约束时，TiDB 会在插入或更新数据时检查是否满足该约束。如果不满足，则返回错误。
 
-The syntax for the `CHECK` constraint in TiDB is the same as that in MySQL:
+TiDB 中 `CHECK` 约束的语法与 MySQL 相同：
 
 ```sql
 [CONSTRAINT [symbol]] CHECK (expr) [[NOT] ENFORCED]
 ```
 
-Syntax explanation:
+语法说明：
 
-- `[]`: the content within `[]` is optional.
-- `CONSTRAINT [symbol]`: specifies the name of the `CHECK` constraint.
-- `CHECK (expr)`: specifies the constraint condition, where `expr` needs to be a boolean expression. For each row in the table, the calculation result of this expression must be one of `TRUE`, `FALSE`, or `UNKNOWN` (for `NULL` values). If the calculation result is `FALSE` for a row, it indicates that the constraint is violated.
-- `[NOT] ENFORCED`: specifies whether to implement the constraint check. You can use it to enable or disable a `CHECK` constraint.
+- `[]`：中括号内的内容为可选。
+- `CONSTRAINT [symbol]`：指定 `CHECK` 约束的名称。
+- `CHECK (expr)`：指定约束条件，其中 `expr` 需要是布尔表达式。对于表中的每一行，该表达式的计算结果必须是 `TRUE`、`FALSE` 或 `UNKNOWN`（对于 `NULL` 值）。如果某行的计算结果为 `FALSE`，表示违反了约束。
+- `[NOT] ENFORCED`：指定是否强制执行该约束。可以用来启用或禁用 `CHECK` 约束。
 
-### Add `CHECK` constraints
+### 添加 `CHECK` 约束
 
-In TiDB, you can add a `CHECK` constraint to a table using either the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) or the [`ALTER TABLE`](/sql-statements/sql-statement-modify-column.md) statement.
+在 TiDB 中，可以使用 [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) 或 [`ALTER TABLE`](/sql-statements/sql-statement-modify-column.md) 语句添加 `CHECK` 约束。
 
-- Example of adding a `CHECK` constraint using the `CREATE TABLE` statement:
+- 使用 `CREATE TABLE` 语句添加 `CHECK` 约束的示例：
 
     ```sql
     CREATE TABLE t(a INT CHECK(a > 10) NOT ENFORCED, b INT, c INT, CONSTRAINT c1 CHECK (b > c));
     ```
 
-- Example of adding a `CHECK` constraint using the `ALTER TABLE` statement:
+- 使用 `ALTER TABLE` 语句添加 `CHECK` 约束的示例：
 
     ```sql
     ALTER TABLE t ADD CONSTRAINT CHECK (1 < c);
     ```
 
-When adding or enabling a `CHECK` constraint, TiDB checks the existing data in the table. If any data violates the constraint, the operation of adding the `CHECK` constraint will fail and return an error.
+在添加或启用 `CHECK` 约束时，TiDB 会检查表中已有的数据。如果存在违反约束的数据，添加 `CHECK` 约束的操作会失败并返回错误。
 
-When adding a `CHECK` constraint, you can either specify a constraint name or leave the name unspecified. If no constraint name is specified, TiDB automatically generates a constraint name in the `<tableName>_chk_<1, 2, 3...>` format.
+在添加 `CHECK` 约束时，可以指定约束名，也可以不指定。若未指定约束名，TiDB 会自动生成一个格式为 `<tableName>_chk_<1, 2, 3...>` 的约束名。
 
-### View `CHECK` constraints
+### 查看 `CHECK` 约束
 
-You can view the constraint information in a table using the [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md) statement. For example:
+可以使用 [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md) 查看表中的约束信息。例如：
 
 ```sql
 SHOW CREATE TABLE t;
@@ -111,41 +111,41 @@ CONSTRAINT `t_chk_2` CHECK ((1 < `c`))
 1 row in set (0.00 sec)
 ```
 
-### Delete `CHECK` constraints
+### 删除 `CHECK` 约束
 
-When deleting a `CHECK` constraint, you need to specify the name of the constraint to be deleted. For example:
+删除 `CHECK` 约束时，需要指定要删除的约束名。例如：
 
 ```sql
 ALTER TABLE t DROP CONSTRAINT t_chk_1;
 ```
 
-### Enable or disable `CHECK` constraints
+### 启用或禁用 `CHECK` 约束
 
-When [adding a `CHECK` constraint](#add-check-constraints) to a table, you can specify whether TiDB needs to implement the constraint check during data insertion or updates.
+在 [添加 `CHECK` 约束](#add-check-constraints) 时，可以指定 TiDB 是否在数据插入或更新时执行约束检查。
 
-- If `NOT ENFORCED` is specified, TiDB does not check the constraint conditions during data insertion or updates.
-- If `NOT ENFORCED` is not specified or `ENFORCED` is specified, TiDB checks the constraint conditions during data insertion or updates.
+- 如果指定 `NOT ENFORCED`，则 TiDB 不会在数据插入或更新时检查约束条件。
+- 如果未指定 `NOT ENFORCED` 或指定 `ENFORCED`，则 TiDB 会在数据插入或更新时检查约束条件。
 
-In addition to specifying `[NOT] ENFORCED` when adding the constraint, you can also enable or disable a `CHECK` constraint using the `ALTER TABLE` statement. For example:
+除了在添加约束时指定 `[NOT] ENFORCED`，还可以使用 `ALTER TABLE` 语句启用或禁用 `CHECK` 约束。例如：
 
 ```sql
 ALTER TABLE t ALTER CONSTRAINT c1 NOT ENFORCED;
 ```
 
-### MySQL compatibility
+### MySQL 兼容性
 
-- It is not supported to add a `CHECK` constraint while adding a column (for example, `ALTER TABLE t ADD COLUMN a CHECK(a > 0)`). In this case, only the column is added successfully, and TiDB ignores the `CHECK` constraint without reporting any error.
-- It is not supported to use `ALTER TABLE t CHANGE a b int CHECK(b > 0)` to add a `CHECK` constraint. When this statement is executed, TiDB reports an error.
+- 不支持在添加列时同时添加 `CHECK` 约束（例如，`ALTER TABLE t ADD COLUMN a CHECK(a > 0)`）。此时，只会成功添加列，TiDB 会忽略 `CHECK` 约束，不会报错。
+- 不支持使用 `ALTER TABLE t CHANGE a b int CHECK(b > 0)` 来添加 `CHECK` 约束。执行此语句时，TiDB 会报错。
 
 ## UNIQUE KEY
 
-Unique constraints mean that all non-null values in a unique index and a primary key column are unique.
+唯一约束意味着在唯一索引和主键列中，所有非空值都必须是唯一的。
 
-### Optimistic transactions
+### 乐观事务
 
-By default, for optimistic transactions, TiDB checks unique constraints [lazily](/transaction-overview.md#lazy-check-of-constraints) in the execution phase and strictly in the commit phase, which helps reduce network overhead and improve performance.
+默认情况下，对于乐观事务，TiDB 在执行阶段会【懒惰】(/transaction-overview.md#lazy-check-of-constraints) 地检查唯一约束，在提交阶段会严格检查，这有助于减少网络开销并提升性能。
 
-For example:
+例如：
 
 ```sql
 DROP TABLE IF EXISTS users;
@@ -157,7 +157,7 @@ CREATE TABLE users (
 INSERT INTO users (username) VALUES ('dave'), ('sarah'), ('bill');
 ```
 
-With optimistic locking and `tidb_constraint_check_in_place=OFF`:
+在乐观锁和 `tidb_constraint_check_in_place=OFF` 时：
 
 ```sql
 BEGIN OPTIMISTIC;
@@ -186,11 +186,11 @@ COMMIT;
 ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
 ```
 
-In the preceding optimistic example, the unique check was deferred until the transaction is committed. This resulted in a duplicate key error, because the value `bill` was already present.
+在上述乐观示例中，唯一性检查推迟到事务提交时进行，导致出现重复键错误，因为值 `bill` 已经存在。
 
-You can disable this behavior by setting [`tidb_constraint_check_in_place`](/system-variables.md#tidb_constraint_check_in_place) to `ON`. When `tidb_constraint_check_in_place=ON`, the unique constraint is checked when a statement is executed. Note that this variable is only applicable to optimistic transactions. For pessimistic transactions, you can control this behavior using the [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) variable.
+你可以通过设置 [`tidb_constraint_check_in_place`](/system-variables.md#tidb_constraint_check_in_place) 为 `ON` 来禁用此行为。当 `tidb_constraint_check_in_place=ON` 时，执行语句时会检查唯一约束。注意，此变量只对乐观事务生效。对于悲观事务，可以使用 [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) 变量控制。
 
-For example:
+例如：
 
 ```sql
 DROP TABLE IF EXISTS users;
@@ -226,11 +226,11 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
 ```
 
-The first `INSERT` statement caused a duplicate key error. This causes additional network communication overhead and may reduce the throughput of insert operations.
+第一个 `INSERT` 语句引发了重复键错误。这会带来额外的网络通信开销，可能降低插入操作的吞吐量。
 
-### Pessimistic transactions
+### 悲观事务
 
-In pessimistic transactions, by default, TiDB checks `UNIQUE` constraints when a SQL statement that requires inserting or updating unique indexes is executed.
+在悲观事务中，默认情况下，TiDB 在执行需要插入或更新唯一索引的 SQL 语句时会检查 `UNIQUE` 约束。
 
 ```sql
 DROP TABLE IF EXISTS users;
@@ -249,105 +249,105 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
 ```
 
-To achieve better performance of pessimistic transactions, you can set the [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) variable to `OFF`, which allows TiDB to defer the unique constraint check of a unique index (to the next time when this index requires a lock or to the time when the transaction is committed) and skip the corresponding pessimistic lock. When using this variable, pay attention to the following:
+为了提升悲观事务的性能，可以将 [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) 变量设置为 `OFF`，这样 TiDB 会将唯一索引的唯一性检查延后（到下一次需要锁定索引时或事务提交时），并跳过相应的悲观锁。在使用此变量时，请注意：
 
-- Due to the deferred unique constraint check, TiDB might read results that do not meet the unique constraints and return a `Duplicate entry` error when you commit a pessimistic transaction. When this error occurs, TiDB rolls back the current transaction.
+- 由于延迟了唯一性约束检查，TiDB 可能会读取不满足唯一性约束的结果，并在提交悲观事务时返回 `Duplicate entry` 错误。当出现此错误时，TiDB 会回滚当前事务。
 
-    The following example skips the lock to `bill`, so TiDB might get results that do not satisfy the uniqueness constraints.
+  以下示例跳过了对 `bill` 的锁定，因此 TiDB 可能会得到不满足唯一性约束的结果。
 
-    ```sql
-    SET tidb_constraint_check_in_place_pessimistic = OFF;
-    BEGIN PESSIMISTIC;
-    INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill'); -- Query OK, 3 rows affected
-    SELECT * FROM users FOR UPDATE;
-    ```
+  ```sql
+  SET tidb_constraint_check_in_place_pessimistic = OFF;
+  BEGIN PESSIMISTIC;
+  INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill'); -- Query OK, 3 rows affected
+  SELECT * FROM users FOR UPDATE;
+  ```
 
-   As in the following example output, the query results of TiDB contain two `bills`, which does not satisfy the uniqueness constraints.
+  如以下输出示例，TiDB 的查询结果中包含两个 `bill`，不满足唯一性约束。
 
-    ```sql
-    +----+----------+
-    | id | username |
-    +----+----------+
-    | 1  | dave     |
-    | 2  | sarah    |
-    | 3  | bill     |
-    | 7  | jane     |
-    | 8  | chris    |
-    | 9  | bill     |
-    +----+----------+
-    ```
+  ```sql
+  +----+----------+
+  | id | username |
+  +----+----------+
+  | 1  | dave     |
+  | 2  | sarah    |
+  | 3  | bill     |
+  | 7  | jane     |
+  | 8  | chris    |
+  | 9  | bill     |
+  +----+----------+
+  ```
 
-    At this time, if the transaction is committed, TiDB will perform a unique constraint check, report a `Duplicate entry` error, and roll back the transaction.
+  此时，如果提交事务，TiDB 会进行唯一性约束检查，报告 `Duplicate entry` 错误，并回滚事务。
 
-    ```sql
-    COMMIT;
-    ```
+  ```sql
+  COMMIT;
+  ```
 
-    ```
-    ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
-    ```
+  ```
+  ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
+  ```
 
-- When this variable is disabled, committing a pessimistic transaction that needs to write data might return a `Write conflict` error. When this error occurs, TiDB rolls back the current transaction.
+- 当此变量被禁用时，提交需要写入数据的悲观事务可能会返回 `Write conflict` 错误。当出现此错误时，TiDB 会回滚当前事务。
 
-    As in the following example, if two concurrent transactions need to insert data to the same table, skipping the pessimistic lock causes TiDB to return a `Write conflict` error when you commit a transaction. And the transaction will be rolled back.
+  例如，两个并发事务需要向同一表插入数据，跳过悲观锁会导致 TiDB 在提交事务时返回 `Write conflict` 错误，事务也会被回滚。
 
-    ```sql
-    DROP TABLE IF EXISTS users;
-    CREATE TABLE users (
-    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(60) NOT NULL,
-    UNIQUE KEY (username)
-    );
+  ```sql
+  DROP TABLE IF EXISTS users;
+  CREATE TABLE users (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  username VARCHAR(60) NOT NULL,
+  UNIQUE KEY (username)
+  );
 
-    SET tidb_constraint_check_in_place_pessimistic = OFF;
-    BEGIN PESSIMISTIC;
-    INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill'); -- Query OK, 3 rows affected
-    ```
+  SET tidb_constraint_check_in_place_pessimistic = OFF;
+  BEGIN PESSIMISTIC;
+  INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill'); -- Query OK, 3 rows affected
+  ```
 
-    At the same time, another session inserts `bill` to the same table.
+  另一会话同时向同一表插入 `bill`：
 
-    ```sql
-    INSERT INTO users (username) VALUES ('bill'); -- Query OK, 1 row affected
-    ```
+  ```sql
+  INSERT INTO users (username) VALUES ('bill'); -- Query OK, 1 row affected
+  ```
 
-    Then, when you commit the transaction in the first session, TiDB reports a `Write conflict` error.
+  然后，在第一个会话中提交事务时，TiDB 会报告 `Write conflict` 错误。
 
-    ```sql
-    COMMIT;
-    ```
+  ```sql
+  COMMIT;
+  ```
 
-    ```
-    ERROR 9007 (HY000): Write conflict, txnStartTS=435688780611190794, conflictStartTS=435688783311536129, conflictCommitTS=435688783311536130, key={tableID=74, indexID=1, indexValues={bill, }} primary={tableID=74, indexID=1, indexValues={bill, }}, reason=LazyUniquenessCheck [try again later]
-    ```
+  ```
+  ERROR 9007 (HY000): Write conflict, txnStartTS=435688780611190794, conflictStartTS=435688783311536129, conflictCommitTS=435688783311536130, key={tableID=74, indexID=1, indexValues={bill, }} primary={tableID=74, indexID=1, indexValues={bill, }}, reason=LazyUniquenessCheck [try again later]
+  ```
 
-- When this variable is disabled, if there is a write conflict among multiple pessimistic transactions, the pessimistic lock might be forced to roll back when other pessimistic transactions are committed, thus resulting in a `Pessimistic lock not found` error. When this error occurs, it means that deferring the unique constraint check of the pessimistic transaction is not suitable for your application scenario. In this case, consider adjusting the application logic to avoid the conflict or retrying the transaction after an error occurs.
+- 当此变量被禁用时，如果多个悲观事务之间存在写冲突，悲观锁可能在其他悲观事务提交时被强制回滚，从而导致 `Pessimistic lock not found` 错误。当出现此错误时，意味着延迟了悲观事务的唯一性约束检查，不适合你的应用场景。此时可以考虑调整应用逻辑以避免冲突，或在发生错误后重试事务。
 
-- When this variable is disabled, executing a DML statement in a pessimistic transaction might return an error `8147: LazyUniquenessCheckFailure`.
+- 当此变量被禁用时，在悲观事务中执行 DML 语句可能返回错误 `8147: LazyUniquenessCheckFailure`。
 
-    > **Note:**
-    >
-    > When the `8147` error occurs, TiDB rolls back the current transaction.
+  > **Note:**
+  >
+  > 当发生 `8147` 错误时，TiDB 会回滚当前事务。
 
-    As in the following example, at the execution of the `INSERT` statement, TiDB skips a lock. Then, at the execution of the `DELETE` statement, TiDB locks the unique index and checks the unique constraints, so you will see an error is reported at the `DELETE` statement.
+  例如，在执行 `INSERT` 语句时，TiDB 会跳过锁定；在执行 `DELETE` 语句时，TiDB 会锁定唯一索引并检查唯一性约束，因此会在 `DELETE` 时报告错误。
 
-    ```sql
-    SET tidb_constraint_check_in_place_pessimistic = OFF;
-    BEGIN PESSIMISTIC;
-    INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill'); -- Query OK, 3 rows affected
-    DELETE FROM users where username = 'bill';
-    ```
+  ```sql
+  SET tidb_constraint_check_in_place_pessimistic = OFF;
+  BEGIN PESSIMISTIC;
+  INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill'); -- Query OK, 3 rows affected
+  DELETE FROM users where username = 'bill';
+  ```
 
-    ```
-    ERROR 8147 (23000): transaction aborted because lazy uniqueness check is enabled and an error occurred: [kv:1062]Duplicate entry 'bill' for key 'users.username'
-    ```
+  ```
+  ERROR 8147 (23000): transaction aborted because lazy uniqueness check is enabled and an error occurred: [kv:1062]Duplicate entry 'bill' for key 'users.username'
+  ```
 
-- When this variable is disabled, the `1062 Duplicate entry` error might be not from the current SQL statement. Therefore, when a transaction operates on multiple tables that have indexes with the same name, you need to check the `1062` error message to find which index the error is actually from.
+- 当此变量被禁用时，`1062 Duplicate entry` 错误可能不是来自当前 SQL 语句。因此，当事务操作多个具有相同索引名的表时，需要检查 `1062` 错误信息，确认错误实际来源的索引。
 
 ## PRIMARY KEY
 
-Like MySQL, primary key constraints contain unique constraints, that is, creating a primary key constraint is equivalent to having a unique constraint. In addition, other primary key constraints of TiDB are also similar to those of MySQL.
+与 MySQL 一样，主键约束包含唯一约束，即创建主键约束等同于拥有唯一约束。此外，TiDB 的其他主键约束也与 MySQL 类似。
 
-For example:
+例如：
 
 ```sql
 CREATE TABLE t1 (a INT NOT NULL PRIMARY KEY);
@@ -381,11 +381,11 @@ CREATE TABLE t4 (a INT NOT NULL, b INT NOT NULL, PRIMARY KEY (a,b));
 Query OK, 0 rows affected (0.10 sec)
 ```
 
-* Table `t2` failed to be created, because column `a` is defined as the primary key and does not allow NULL values.
-* Table `t3` failed to be created, because a table can only have one primary key.
-* Table `t4` was created successfully, because even though there can be only one primary key, TiDB supports defining multiple columns as the composite primary key.
+* 表 `t2` 创建失败，因为列 `a` 被定义为主键且不允许 NULL。
+* 表 `t3` 创建失败，因为一个表只能有一个主键。
+* 表 `t4` 创建成功，因为虽然只能有一个主键，但 TiDB 支持定义多个列作为复合主键。
 
-In addition to the rules above, TiDB currently only supports adding and deleting the primary keys of the `NONCLUSTERED` type. For example:
+除了上述规则外，TiDB 目前只支持添加和删除 `NONCLUSTERED` 类型的主键。例如：
 
 ```sql
 CREATE TABLE t5 (a INT NOT NULL, b INT NOT NULL, PRIMARY KEY (a,b) CLUSTERED);
@@ -405,17 +405,17 @@ ALTER TABLE t5 DROP PRIMARY KEY;
 Query OK, 0 rows affected (0.10 sec)
 ```
 
-For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
+关于 `CLUSTERED` 类型主键的更多细节，请参考 [clustered index](/clustered-indexes.md)。
 
 ## FOREIGN KEY
 
 > **Note:**
 >
-> Starting from v6.6.0, TiDB supports the [FOREIGN KEY constraints](/foreign-key.md). Before v6.6.0, TiDB supports creating and deleting foreign key constraints, but the constraints are not actually effective. After upgrading TiDB to v6.6.0 or later, you can delete the invalid foreign key and create a new one to make the foreign key constraints effective. This feature becomes generally available in v8.5.0.
+> 从 v6.6.0 版本开始，TiDB 支持 [FOREIGN KEY constraints](/foreign-key.md)。在 v6.6.0 之前，TiDB 支持创建和删除外键约束，但这些约束实际上并不生效。升级到 v6.6.0 或更高版本后，可以删除无效的外键并创建新的外键，以使外键约束生效。该功能在 v8.5.0 版本中正式可用。
 
-TiDB supports creating `FOREIGN KEY` constraints in DDL commands.
+TiDB 支持在 DDL 命令中创建 `FOREIGN KEY` 约束。
 
-For example:
+例如：
 
 ```sql
 CREATE TABLE users (
@@ -446,7 +446,7 @@ FROM information_schema.key_column_usage WHERE table_name IN ('users', 'orders')
 3 rows in set (0.00 sec)
 ```
 
-TiDB also supports the syntax to `DROP FOREIGN KEY` and `ADD FOREIGN KEY` via the `ALTER TABLE` command.
+TiDB 也支持通过 `ALTER TABLE` 命令 `DROP FOREIGN KEY` 和 `ADD FOREIGN KEY`。
 
 ```sql
 ALTER TABLE orders DROP FOREIGN KEY fk_user_id;

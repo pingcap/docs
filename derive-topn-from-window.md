@@ -1,45 +1,45 @@
 ---
-title: Derive TopN or Limit from Window Functions
-summary: Introduce the optimization rule of deriving TopN or Limit from window functions and how to enable this rule.
+title: 从 Window Functions 派生 TopN 或 Limit
+summary: 介绍从 window functions 派生 TopN 或 Limit 的优化规则以及如何启用该规则。
 ---
 
-# Derive TopN or Limit from Window Functions
+# 从 Window Functions 派生 TopN 或 Limit
 
-[Window Functions](/functions-and-operators/window-functions.md) are a common type of SQL function. When you use a window function for row numbering, such as `ROW_NUMBER()` or `RANK()`, it is common to filter the results after the window function is evaluated. For example:
+[Window Functions](/functions-and-operators/window-functions.md) 是一种常见的 SQL 函数类型。当你使用 window function 进行行编号，例如 `ROW_NUMBER()` 或 `RANK()` 时，通常会在 window function 计算完成后对结果进行过滤。例如：
 
 ```sql
 SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY a) AS rownumber FROM t) dt WHERE rownumber <= 3
 ```
 
-In a typical SQL execution process, TiDB first sorts all data in the table `t`, then calculates the `ROW_NUMBER()` result for each row, and finally filters with `rownumber <= 3`.
+在典型的 SQL 执行过程中，TiDB 首先对表 `t` 中的所有数据进行排序，然后为每一行计算 `ROW_NUMBER()` 结果，最后再进行 `rownumber <= 3` 的过滤。
 
-Starting from v7.0.0, TiDB supports deriving the TopN or Limit operator from window functions. With this optimization rule, TiDB can rewrite the original SQL into an equivalent form as follows:
+从 v7.0.0 版本开始，TiDB 支持将从 window functions 派生的 TopN 或 Limit 操作符进行优化。借助此规则，TiDB 可以将原始 SQL 重写为等价的形式，例如：
 
 ```sql
 WITH t_topN AS (SELECT a FROM t1 ORDER BY a LIMIT 3) SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY a) AS rownumber FROM t_topN) dt WHERE rownumber <= 3
 ```
 
-After rewriting, TiDB can derive a TopN operator from the window function and the subsequent filter condition. Compared with the Sort operator in the original SQL (`ORDER BY`), the TopN operator has a much higher execution efficiency. In addition, both TiKV and TiFlash support pushing down the TopN operator, which further improves the performance of the rewritten SQL.
+重写后，TiDB 可以从 window function 和后续的过滤条件中推导出 TopN 操作符。与原始 SQL 中的 Sort 操作（`ORDER BY`）相比，TopN 操作符具有更高的执行效率。此外，TiKV 和 TiFlash 也支持将 TopN 操作下推，从而进一步提升重写 SQL 的性能。
 
-Deriving TopN or Limit from window functions is disabled by default. To enable this feature, you can set the session variable [tidb_opt_derive_topn](/system-variables.md#tidb_opt_derive_topn-new-in-v700) to `ON`.
+从 window functions 派生 TopN 或 Limit 默认是关闭的。你可以通过将会话变量 [tidb_opt_derive_topn](/system-variables.md#tidb_opt_derive_topn-new-in-v700) 设置为 `ON` 来启用此功能。
 
-After enabling this feature, you can disable it by performing one of the following operations:
+启用后，你可以通过以下操作之一禁用该功能：
 
-* Set the session variable [tidb_opt_derive_topn](/system-variables.md#tidb_opt_derive_topn-new-in-v700) to `OFF`.
-* Follow the steps described in [The blocklist of optimization rules and expression pushdown](/blocklist-control-plan.md).
+* 将会话变量 [tidb_opt_derive_topn](/system-variables.md#tidb_opt_derive_topn-new-in-v700) 设置为 `OFF`。
+* 按照 [The blocklist of optimization rules and expression pushdown](/blocklist-control-plan.md) 中的步骤操作。
 
-## Limitations
+## 限制条件
 
-* Only the `ROW_NUMBER()` window function is supported for SQL rewriting.
-* TiDB can only rewrite SQL when filtering on the `ROW_NUMBER()` results and the filter condition is `<` or `<=`.
+* 目前仅支持对 `ROW_NUMBER()` window function 进行 SQL 重写。
+* TiDB 仅在过滤条件为 `<` 或 `<=` 时，才能将 SQL 重写为包含推导的 TopN。
 
-## Usage examples
+## 使用示例
 
-The following examples demonstrate how to use the optimization rule.
+以下示例演示如何使用该优化规则。
 
-### Window functions without PARTITION BY
+### 不含 PARTITION BY 的 window functions
 
-#### Example 1: window functions without ORDER BY
+#### 示例 1：不含 ORDER BY 的 window functions
 
 ```sql
 CREATE TABLE t(id int, value int);
@@ -47,7 +47,7 @@ SET tidb_opt_derive_topn=on;
 EXPLAIN SELECT * FROM (SELECT ROW_NUMBER() OVER () AS rownumber FROM t) dt WHERE rownumber <= 3;
 ```
 
-The result is as follows:
+结果如下：
 
 ```
 +----------------------------------+---------+-----------+---------------+-----------------------------------------------------------------------+
@@ -63,9 +63,9 @@ The result is as follows:
 +----------------------------------+---------+-----------+---------------+-----------------------------------------------------------------------+
 ```
 
-In this query, the optimizer derives the Limit operator from the window function and pushes it down to TiKV.
+在此查询中，优化器从 window function 派生出 Limit 操作符，并将其下推到 TiKV。
 
-#### Example 2: window functions with ORDER BY
+#### 示例 2：含 ORDER BY 的 window functions
 
 ```sql
 CREATE TABLE t(id int, value int);
@@ -73,7 +73,7 @@ SET tidb_opt_derive_topn=on;
 EXPLAIN SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY value) AS rownumber FROM t) dt WHERE rownumber <= 3;
 ```
 
-The result is as follows:
+结果如下：
 
 ```
 +----------------------------------+----------+-----------+---------------+---------------------------------------------------------------------------------------------+
@@ -89,15 +89,15 @@ The result is as follows:
 +----------------------------------+----------+-----------+---------------+---------------------------------------------------------------------------------------------+
 ```
 
-In this query, the optimizer derives the TopN operator from the window function and pushes it down to TiKV.
+在此查询中，优化器从 window function 派生出 TopN 操作符，并将其下推到 TiKV。
 
-### Window functions with PARTITION BY
+### 含 PARTITION BY 的 window functions
 
-> **Note:**
+> **注意：**
 >
-> For a window function containing `PARTITION BY`, the optimization rule only takes effect when the partition column is a prefix of the primary key and the primary key is a clustered index.
+> 对于包含 `PARTITION BY` 的 window function，只有当分区列是主键的前缀且主键为聚簇索引时，此优化规则才生效。
 
-#### Example 3: window functions without ORDER BY
+#### 示例 3：不含 ORDER BY 的 window functions
 
 ```sql
 CREATE TABLE t(id1 int, id2 int, value1 int, value2 int, primary key(id1,id2) clustered);
@@ -105,7 +105,7 @@ SET tidb_opt_derive_topn=on;
 EXPLAIN SELECT * FROM (SELECT ROW_NUMBER() OVER (PARTITION BY id1) AS rownumber FROM t) dt WHERE rownumber <= 3;
 ```
 
-The result is as follows:
+结果如下：
 
 ```
 +------------------------------------+---------+-----------+---------------+-----------------------------------------------------------------------------------------------+
@@ -122,9 +122,9 @@ The result is as follows:
 +------------------------------------+---------+-----------+---------------+-----------------------------------------------------------------------------------------------+
 ```
 
-In this query, the optimizer derives the Limit operator from the window function and pushes it down to TiKV. Note that this Limit is actually a partition Limit, which means that the Limit will be applied to each group of data with the same `id1` value.
+在此查询中，优化器从 window function 派生出 Limit 操作符，并将其下推到 TiKV。注意，此 Limit 实际上是分区 Limit，即对每个具有相同 `id1` 值的分组应用 Limit。
 
-#### Example 4: window functions with ORDER BY
+#### 示例 4：含 ORDER BY 的 window functions
 
 ```sql
 CREATE TABLE t(id1 int, id2 int, value1 int, value2 int, primary key(id1,id2) clustered);
@@ -132,7 +132,7 @@ SET tidb_opt_derive_topn=on;
 EXPLAIN SELECT * FROM (SELECT ROW_NUMBER() OVER (PARTITION BY id1 ORDER BY value1) AS rownumber FROM t) dt WHERE rownumber <= 3;
 ```
 
-The result is as follows:
+结果如下：
 
 ```
 +------------------------------------+----------+-----------+---------------+----------------------------------------------------------------------------------------------------------------------+
@@ -149,9 +149,9 @@ The result is as follows:
 +------------------------------------+----------+-----------+---------------+----------------------------------------------------------------------------------------------------------------------+
 ```
 
-In this query, the optimizer derives the TopN operator from the window function and pushes it down to TiKV. Note that this TopN is actually a partition TopN, which means that the TopN will be applied to each group of data with the same `id1` value.
+在此查询中，优化器从 window function 派生出 TopN 操作符，并将其下推到 TiKV。注意，此 TopN 实际上是分区 TopN，即对每个具有相同 `id1` 值的分组应用。
 
-#### Example 5: PARTITION BY column is not a prefix of the primary key
+#### 示例 5：PARTITION BY 列不是主键的前缀
 
 ```sql
 CREATE TABLE t(id1 int, id2 int, value1 int, value2 int, primary key(id1,id2) clustered);
@@ -159,7 +159,7 @@ SET tidb_opt_derive_topn=on;
 EXPLAIN SELECT * FROM (SELECT ROW_NUMBER() OVER (PARTITION BY value1) AS rownumber FROM t) dt WHERE rownumber <= 3;
 ```
 
-The result is as follows:
+结果如下：
 
 ```
 +----------------------------------+----------+-----------+---------------+--------------------------------------------------------------------------------------------------+
@@ -175,9 +175,9 @@ The result is as follows:
 +----------------------------------+----------+-----------+---------------+--------------------------------------------------------------------------------------------------+
 ```
 
-In this query, the SQL is not rewritten because the `PARTITION BY` column is not a prefix of the primary key.
+在此查询中，由于 `PARTITION BY` 列不是主键的前缀，SQL 不会被重写。
 
-#### Example 6: PARTITION BY column is a prefix of the primary key but not a clustered index
+#### 示例 6：PARTITION BY 列是主键的前缀但不是聚簇索引
 
 ```sql
 CREATE TABLE t(id1 int, id2 int, value1 int, value2 int, primary key(id1,id2) nonclustered);
@@ -185,7 +185,7 @@ SET tidb_opt_derive_topn=on;
 EXPLAIN SELECT * FROM (SELECT ROW_NUMBER() OVER (PARTITION BY id1) AS rownumber FROM t use index()) dt WHERE rownumber <= 3;
 ```
 
-The result is as follows:
+结果如下：
 
 ```
 +----------------------------------+----------+-----------+---------------+-----------------------------------------------------------------------------------------------+
@@ -201,4 +201,4 @@ The result is as follows:
 +----------------------------------+----------+-----------+---------------+-----------------------------------------------------------------------------------------------+
 ```
 
-In this query, although the `PARTITION BY` column is a prefix of the primary key, the SQL is not rewritten because the primary key is not a clustered index.
+在此查询中，虽然 `PARTITION BY` 列是主键的前缀，但由于主键不是聚簇索引，SQL 不会被重写。

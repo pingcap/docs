@@ -1,17 +1,17 @@
 ---
-title: Integrate Vector Search with LlamaIndex
-summary: Learn how to integrate TiDB Vector Search with LlamaIndex.
+title: 将向量搜索集成到 LlamaIndex
+summary: 学习如何将 TiDB 向量搜索与 LlamaIndex 集成。
 ---
 
-# Integrate Vector Search with LlamaIndex
+# 将向量搜索集成到 LlamaIndex
 
-This tutorial demonstrates how to integrate the [vector search](/vector-search/vector-search-overview.md) feature of TiDB with [LlamaIndex](https://www.llamaindex.ai).
+本教程演示如何将 TiDB 的 [vector search](/vector-search/vector-search-overview.md) 功能与 [LlamaIndex](https://www.llamaindex.ai) 集成。
 
 <CustomContent platform="tidb">
 
 > **Warning:**
 >
-> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> 向量搜索功能处于实验阶段。不建议在生产环境中使用此功能。此功能可能在未通知的情况下进行更改。如果你发现 bug，可以在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues)。
 
 </CustomContent>
 
@@ -19,66 +19,66 @@ This tutorial demonstrates how to integrate the [vector search](/vector-search/v
 
 > **Note:**
 >
-> The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> 向量搜索功能处于测试版，可能会在未通知的情况下进行更改。如果你发现 bug，可以在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues)。
 
 </CustomContent>
 
 > **Note:**
 >
-> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> 向量搜索功能在 TiDB Self-Managed、[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) 上均可用。对于 TiDB Self-Managed 和 TiDB Cloud Dedicated，TiDB 版本必须为 v8.4.0 或更高（推荐 v8.5.0 及以上）。
 
 > **Tip**
 >
-> You can view the complete [sample code](https://github.com/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb) on Jupyter Notebook, or run the sample code directly in the [Colab](https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb) online environment.
+> 你可以在 Jupyter Notebook 上查看完整的 [示例代码](https://github.com/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb)，也可以直接在 [Colab](https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb) 在线环境中运行示例代码。
 
-## Prerequisites
+## 前提条件
 
-To complete this tutorial, you need:
+完成本教程，你需要：
 
-- [Python 3.8 or higher](https://www.python.org/downloads/) installed.
-- [Jupyter Notebook](https://jupyter.org/install) installed.
-- [Git](https://git-scm.com/downloads) installed.
-- A TiDB cluster.
+- 安装 [Python 3.8 或更高版本](https://www.python.org/downloads/)
+- 安装 [Jupyter Notebook](https://jupyter.org/install)
+- 安装 [Git](https://git-scm.com/downloads)
+- 一个 TiDB 集群
 
 <CustomContent platform="tidb">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**如果你还没有 TiDB 集群，可以按照以下步骤创建：**
 
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
-- Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- 参考 [部署本地测试 TiDB 集群](/quick-start-with-tidb.md#deploy-a-local-test-cluster) 或 [部署生产环境 TiDB 集群](/production-deployment-using-tiup.md) 来创建本地集群。
+- 参考 [创建 {{{ .starter }}} 集群](/develop/dev-guide-build-cluster-in-cloud.md) 来创建你自己的 TiDB Cloud 集群。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**如果你还没有 TiDB 集群，可以按照以下步骤创建：**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster of v8.4.0 or a later version.
+- （推荐）参考 [创建 {{{ .starter }}} 集群](/develop/dev-guide-build-cluster-in-cloud.md) 来创建你自己的 TiDB Cloud 集群。
+- 参考 [部署本地测试 TiDB 集群](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) 或 [部署生产环境 TiDB 集群](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) 来创建版本为 v8.4.0 或更高的本地集群。
 
 </CustomContent>
 
-## Get started
+## 开始使用
 
-This section provides step-by-step instructions for integrating TiDB Vector Search with LlamaIndex to perform semantic searches.
+本节提供逐步指导，帮助你将 TiDB 向量搜索与 LlamaIndex 集成，实现语义搜索。
 
-### Step 1. Create a new Jupyter Notebook file
+### 步骤 1. 创建新的 Jupyter Notebook 文件
 
-In the root directory, create a new Jupyter Notebook file named `integrate_with_llamaindex.ipynb`:
+在根目录下，创建一个名为 `integrate_with_llamaindex.ipynb` 的 Jupyter Notebook 文件：
 
 ```shell
 touch integrate_with_llamaindex.ipynb
 ```
 
-### Step 2. Install required dependencies
+### 步骤 2. 安装所需依赖
 
-In your project directory, run the following command to install the required packages:
+在你的项目目录下，运行以下命令安装所需的包：
 
 ```shell
 pip install llama-index-vector-stores-tidbvector
 pip install llama-index
 ```
 
-Open the `integrate_with_llamaindex.ipynb` file in Jupyter Notebook and add the following code to import the required packages:
+在 Jupyter Notebook 中打开 `integrate_with_llamaindex.ipynb` 文件，并添加以下代码导入所需包：
 
 ```python
 import textwrap
@@ -88,45 +88,45 @@ from llama_index.core import VectorStoreIndex
 from llama_index.vector_stores.tidbvector import TiDBVectorStore
 ```
 
-### Step 3. Configure environment variables
+### 步骤 3. 配置环境变量
 
-Configure the environment variables depending on the TiDB deployment option you've selected.
+根据你选择的 TiDB 部署方式，配置环境变量。
 
 <SimpleTab>
 <div label="{{{ .starter }}}">
 
-For a {{{ .starter }}} cluster, take the following steps to obtain the cluster connection string and configure environment variables:
+对于 {{{ .starter }}} 集群，按照以下步骤获取集群连接字符串并配置环境变量：
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. 进入 [**Clusters**](https://tidbcloud.com/console/clusters) 页面，然后点击目标集群的名称，进入其概览页面。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2. 点击右上角的 **Connect**，弹出连接对话框。
 
-3. Ensure the configurations in the connection dialog match your operating environment.
+3. 确认连接对话框中的配置与操作环境匹配。
 
-    - **Connection Type** is set to `Public`.
-    - **Branch** is set to `main`.
-    - **Connect With** is set to `SQLAlchemy`.
-    - **Operating System** matches your environment.
+    - **Connection Type** 设置为 `Public`。
+    - **Branch** 设置为 `main`。
+    - **Connect With** 设置为 `SQLAlchemy`。
+    - **Operating System** 与你的环境一致。
 
-4. Click the **PyMySQL** tab and copy the connection string.
+4. 点击 **PyMySQL** 标签，复制连接字符串。
 
     > **Tip:**
     >
-    > If you have not set a password yet, click **Generate Password** to generate a random password.
+    > 如果还未设置密码，可以点击 **Generate Password** 生成随机密码。
 
-5. Configure environment variables.
+5. 配置环境变量。
 
-    This document uses [OpenAI](https://platform.openai.com/docs/introduction) as the embedding model provider. In this step, you need to provide the connection string obtained from the previous step and your [OpenAI API key](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key).
+    本文档使用 [OpenAI](https://platform.openai.com/docs/introduction) 作为嵌入模型提供商。在此步骤中，你需要提供上一步获取的连接字符串和你的 [OpenAI API 密钥](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key)。
 
-    To configure the environment variables, run the following code. You will be prompted to enter your connection string and OpenAI API key:
+    运行以下代码配置环境变量。系统会提示你输入连接字符串和 OpenAI API 密钥：
 
     ```python
-    # Use getpass to securely prompt for environment variables in your terminal.
+    # 使用 getpass 在终端中安全提示输入环境变量。
     import getpass
     import os
 
-    # Copy your connection string from the TiDB Cloud console.
-    # Connection string format: "mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
+    # 从 TiDB Cloud 控制台复制你的连接字符串。
+    # 连接字符串格式："mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
     tidb_connection_string = getpass.getpass("TiDB Connection String:")
     os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
     ```
@@ -134,55 +134,55 @@ For a {{{ .starter }}} cluster, take the following steps to obtain the cluster c
 </div>
 <div label="TiDB Self-Managed">
 
-This document uses [OpenAI](https://platform.openai.com/docs/introduction) as the embedding model provider. In this step, you need to provide the connection string of your TiDB cluster and your [OpenAI API key](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key).
+本文档使用 [OpenAI](https://platform.openai.com/docs/introduction) 作为嵌入模型提供商。在此步骤中，你需要提供你的 TiDB 集群连接字符串和你的 [OpenAI API 密钥](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key)。
 
-To configure the environment variables, run the following code. You will be prompted to enter your connection string and OpenAI API key:
+运行以下代码配置环境变量。系统会提示你输入连接字符串和 OpenAI API 密钥：
 
 ```python
-# Use getpass to securely prompt for environment variables in your terminal.
+# 使用 getpass 在终端中安全提示输入环境变量。
 import getpass
 import os
 
-# Connection string format: "mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
+# 连接字符串格式："mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
 tidb_connection_string = getpass.getpass("TiDB Connection String:")
 os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
 ```
 
-Taking macOS as an example, the cluster connection string is as follows:
+以 macOS 为例，集群连接字符串如下：
 
 ```dotenv
 TIDB_DATABASE_URL="mysql+pymysql://<USERNAME>:<PASSWORD>@<HOST>:<PORT>/<DATABASE_NAME>"
-# For example: TIDB_DATABASE_URL="mysql+pymysql://root@127.0.0.1:4000/test"
+# 例如：TIDB_DATABASE_URL="mysql+pymysql://root@127.0.0.1:4000/test"
 ```
 
-You need to modify the parameters in the connection string according to your TiDB cluster. If you are running TiDB on your local machine, `<HOST>` is `127.0.0.1` by default. The initial `<PASSWORD>` is empty, so if you are starting the cluster for the first time, you can omit this field.
+你需要根据你的 TiDB 集群修改连接字符串中的参数。如果你在本地运行 TiDB，`<HOST>` 默认为 `127.0.0.1`。初始的 `<PASSWORD>` 为空，如果首次启动集群，可以省略此字段。
 
-The following are descriptions for each parameter:
+以下是各参数的说明：
 
-- `<USERNAME>`: The username to connect to the TiDB cluster.
-- `<PASSWORD>`: The password to connect to the TiDB cluster.
-- `<HOST>`: The host of the TiDB cluster.
-- `<PORT>`: The port of the TiDB cluster.
-- `<DATABASE>`: The name of the database you want to connect to.
+- `<USERNAME>`：连接 TiDB 集群的用户名。
+- `<PASSWORD>`：连接 TiDB 集群的密码。
+- `<HOST>`：TiDB 集群的主机地址。
+- `<PORT>`：TiDB 集群的端口。
+- `<DATABASE>`：你要连接的数据库名称。
 
 </div>
 
 </SimpleTab>
 
-### Step 4. Load the sample document
+### 步骤 4. 加载示例文档
 
-#### Step 4.1 Download the sample document
+#### 步骤 4.1 下载示例文档
 
-In your project directory, create a directory named `data/paul_graham/` and download the sample document [`paul_graham_essay.txt`](https://github.com/run-llama/llama_index/blob/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt) from the [run-llama/llama_index](https://github.com/run-llama/llama_index) GitHub repository.
+在你的项目目录下，创建一个名为 `data/paul_graham/` 的目录，并从 [run-llama/llama_index](https://github.com/run-llama/llama_index) GitHub 仓库下载示例文档 [`paul_graham_essay.txt`](https://github.com/run-llama/llama_index/blob/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt)。
 
 ```shell
 !mkdir -p 'data/paul_graham/'
 !wget 'https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt' -O 'data/paul_graham/paul_graham_essay.txt'
 ```
 
-#### Step 4.2 Load the document
+#### 步骤 4.2 加载文档
 
-Load the sample document from `data/paul_graham/paul_graham_essay.txt` using the `SimpleDirectoryReader` class.
+使用 `SimpleDirectoryReader` 类加载 `data/paul_graham/paul_graham_essay.txt` 中的示例文档。
 
 ```python
 documents = SimpleDirectoryReader("./data/paul_graham").load_data()
@@ -192,11 +192,11 @@ for index, document in enumerate(documents):
    document.metadata = {"book": "paul_graham"}
 ```
 
-### Step 5. Embed and store document vectors
+### 步骤 5. 嵌入并存储文档向量
 
-#### Step 5.1 Initialize the TiDB vector store
+#### 步骤 5.1 初始化 TiDB 向量存储
 
-The following code creates a table named `paul_graham_test` in TiDB, which is optimized for vector search.
+以下代码在 TiDB 中创建一个名为 `paul_graham_test` 的表，用于优化向量搜索。
 
 ```python
 tidbvec = TiDBVectorStore(
@@ -208,11 +208,11 @@ tidbvec = TiDBVectorStore(
 )
 ```
 
-Upon successful execution, you can directly view and access the `paul_graham_test` table in your TiDB database.
+成功执行后，你可以直接在 TiDB 数据库中查看并访问 `paul_graham_test` 表。
 
-#### Step 5.2 Generate and store embeddings
+#### 步骤 5.2 生成并存储嵌入
 
-The following code parses the documents, generates embeddings, and stores them in the TiDB vector store.
+以下代码解析文档，生成嵌入，并存入 TiDB 向量存储中。
 
 ```python
 storage_context = StorageContext.from_defaults(vector_store=tidbvec)
@@ -221,16 +221,16 @@ index = VectorStoreIndex.from_documents(
 )
 ```
 
-The expected output is as follows:
+预期输出如下：
 
 ```plain
 Parsing nodes: 100%|██████████| 1/1 [00:00<00:00,  8.76it/s]
 Generating embeddings: 100%|██████████| 21/21 [00:02<00:00,  8.22it/s]
 ```
 
-### Step 6. Perform a vector search
+### 步骤 6. 执行向量搜索
 
-The following creates a query engine based on the TiDB vector store and performs a semantic similarity search.
+以下代码基于 TiDB 向量存储创建查询引擎，并执行语义相似度搜索。
 
 ```python
 query_engine = index.as_query_engine()
@@ -240,9 +240,9 @@ print(textwrap.fill(str(response), 100))
 
 > **Note**
 >
-> `TiDBVectorStore` only supports the [`default`](https://docs.llamaindex.ai/en/stable/api_reference/storage/vector_store/?h=vectorstorequerymode#llama_index.core.vector_stores.types.VectorStoreQueryMode) query mode.
+> `TiDBVectorStore` 仅支持 [`default`](https://docs.llamaindex.ai/en/stable/api_reference/storage/vector_store/?h=vectorstorequerymode#llama_index.core.vector_stores.types.VectorStoreQueryMode) 查询模式。
 
-The expected output is as follows:
+预期输出如下：
 
 ```plain
 The author worked on writing, programming, building microcomputers, giving talks at conferences,
@@ -250,13 +250,13 @@ publishing essays online, developing spam filters, painting, hosting dinner part
 a building for office use.
 ```
 
-### Step 7. Search with metadata filters
+### 步骤 7. 使用元数据过滤器进行搜索
 
-To refine your searches, you can use metadata filters to retrieve specific nearest-neighbor results that match the applied filters.
+你可以使用元数据过滤器，细化搜索结果，获取符合过滤条件的最近邻结果。
 
-#### Query with `book != "paul_graham"` filter
+#### 使用 `book != "paul_graham"` 过滤器进行查询
 
-The following example excludes results where the `book` metadata field is `"paul_graham"`:
+以下示例排除 `book` 元数据字段为 `"paul_graham"` 的结果：
 
 ```python
 from llama_index.core.vector_stores.types import (
@@ -276,15 +276,15 @@ response = query_engine.query("What did the author learn?")
 print(textwrap.fill(str(response), 100))
 ```
 
-The expected output is as follows:
+预期输出如下：
 
 ```plain
 Empty Response
 ```
 
-#### Query with `book == "paul_graham"` filter
+#### 使用 `book == "paul_graham"` 过滤器进行查询
 
-The following example filters results to include only documents where the `book` metadata field is `"paul_graham"`:
+以下示例过滤结果，只包含 `book` 元数据字段为 `"paul_graham"` 的文档：
 
 ```python
 from llama_index.core.vector_stores.types import (
@@ -304,7 +304,7 @@ response = query_engine.query("What did the author learn?")
 print(textwrap.fill(str(response), 100))
 ```
 
-The expected output is as follows:
+预期输出如下：
 
 ```plain
 The author learned programming on an IBM 1401 using an early version of Fortran in 9th grade, then
@@ -314,15 +314,15 @@ Later on, the author attended art school in both the US and Italy, where they ob
 substantial teaching in the painting department.
 ```
 
-### Step 8. Delete documents
+### 步骤 8. 删除文档
 
-Delete the first document from the index:
+删除索引中的第一个文档：
 
 ```python
 tidbvec.delete(documents[0].doc_id)
 ```
 
-Check whether the documents had been deleted:
+检查文档是否已被删除：
 
 ```python
 query_engine = index.as_query_engine()
@@ -330,13 +330,13 @@ response = query_engine.query("What did the author learn?")
 print(textwrap.fill(str(response), 100))
 ```
 
-The expected output is as follows:
+预期输出如下：
 
 ```plain
 Empty Response
 ```
 
-## See also
+## 相关链接
 
 - [Vector Data Types](/vector-search/vector-search-data-types.md)
 - [Vector Search Index](/vector-search/vector-search-index.md)

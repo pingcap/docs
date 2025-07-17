@@ -1,151 +1,151 @@
 ---
-title: TiDB Scheduling
-summary: Introduces the PD scheduling component in a TiDB cluster.
+title: TiDB 调度
+summary: 介绍 TiDB 集群中的 PD 调度组件。
 ---
 
-# TiDB Scheduling
+# TiDB 调度
 
-The Placement Driver ([PD](https://github.com/tikv/pd)) works as the manager in a TiDB cluster, and it also schedules Regions in the cluster. This article introduces the design and core concepts of the PD scheduling component.
+Placement Driver ([PD](https://github.com/tikv/pd)) 在 TiDB 集群中充当管理者角色，同时负责调度集群中的 Regions。本文介绍 PD 调度组件的设计和核心概念。
 
-## Scheduling situations
+## 调度场景
 
-TiKV is the distributed key-value storage engine used by TiDB. In TiKV, data is organized as Regions, which are replicated on several stores. In all replicas, a leader is responsible for reading and writing, and followers are responsible for replicating Raft logs from the leader.
+TiKV 是 TiDB 使用的分布式键值存储引擎。在 TiKV 中，数据被组织为 Regions，这些 Regions 会在多个存储节点上进行复制。在所有副本中，Leader 负责读写操作，Follower 负责复制 Leader 的 Raft 日志。
 
-Now consider about the following situations:
+现在考虑以下场景：
 
-* To utilize storage space in a high-efficient way, multiple Replicas of the same Region need to be properly distributed on different nodes according to the Region size;
-* For multiple data center topologies, one data center failure only causes one replica to fail for all Regions;
-* When a new TiKV store is added, data can be rebalanced to it;
-* When a TiKV store fails, PD needs to consider:
-    * Recovery time of the failed store.
-        * If it's short (for example, the service is restarted), whether scheduling is necessary or not.
-        * If it's long (for example, disk fault and data is lost), how to do scheduling.
-    * Replicas of all Regions.
-        * If the number of replicas is not enough for some Regions, PD needs to complete them.
-        * If the number of replicas is more than expected (for example, the failed store re-joins into the cluster after recovery), PD needs to delete them.
-* Read/Write operations are performed on leaders, which cannot be distributed only on a few individual stores;
-* Not all Regions are hot, so loads of all TiKV stores need to be balanced;
-* When Regions are in balancing, data transferring utilizes much network/disk traffic and CPU time, which can influence online services.
+* 为了高效利用存储空间，同一 Region 的多个副本需要根据 Region 大小合理分布在不同节点上；
+* 对于多数据中心拓扑结构，一次数据中心故障只会导致所有 Regions 的一个副本失效；
+* 当新增 TiKV 存储节点时，可以对数据进行重新平衡；
+* 当 TiKV 存储节点发生故障时，PD 需要考虑：
+    * 失效存储的恢复时间。
+        * 如果时间短（例如，服务重启），是否需要调度。
+        * 如果时间长（例如，磁盘故障导致数据丢失），应如何调度。
+    * 所有 Regions 的副本。
+        * 如果某些 Regions 的副本数不足，PD 需要补充。
+        * 如果副本数超过预期（例如，故障存储恢复后重新加入集群），PD 需要删除多余的副本。
+* 读写操作在 Leader 上进行，不能只在少数几个存储节点上分布；
+* 不是所有的 Regions 都是热点，因此需要平衡所有 TiKV 存储节点的负载；
+* 在 Regions 进行平衡时，数据传输会消耗大量网络/磁盘流量和 CPU 时间，可能影响线上服务。
 
-These situations can occur at the same time, which makes it harder to resolve. Also, the whole system is changing dynamically, so a scheduler is needed to collect all information about the cluster, and then adjust the cluster. So, PD is introduced into the TiDB cluster.
+这些场景可能同时发生，增加了解决的难度。同时，整个系统在动态变化，因此需要调度器收集关于集群的所有信息，然后进行调整。因此，引入 PD 到 TiDB 集群中。
 
-## Scheduling requirements
+## 调度需求
 
-The above situations can be classified into two types:
+上述场景可以归类为两类：
 
-1. A distributed and highly available storage system must meet the following requirements:
+1. 一个分布式且高可用的存储系统必须满足以下要求：
 
-    * The right number of replicas.
-    * Replicas need to be distributed on different machines according to different topologies.
-    * The cluster can perform automatic disaster recovery from TiKV peers' failure.
+    * 适当的副本数量。
+    * 副本需要根据不同的拓扑结构分布在不同的机器上。
+    * 集群能够自动从 TiKV 节点故障中进行灾难恢复。
 
-2. A good distributed system needs to have the following optimizations:
+2. 一个良好的分布式系统需要具备以下优化：
 
-    * All Region leaders are distributed evenly on stores;
-    * Storage capacity of all TiKV peers are balanced;
-    * Hot spots are balanced;
-    * Speed of load balancing for the Regions needs to be limited to ensure that online services are stable;
-    * Maintainers are able to take peers online/offline manually.
+    * 所有 Region Leader 在存储节点上均匀分布；
+    * 所有 TiKV 节点的存储容量平衡；
+    * 热点负载平衡；
+    * 负载均衡的速度需要有限制，以确保线上服务的稳定；
+    * 维护人员可以手动将 Peer 上线/下线。
 
-After the first type of requirements is satisfied, the system will be failure tolerable. After the second type of requirements is satisfied, resources will be utilized more efficiently and the system will have better scalability.
+在满足第一类需求后，系统将具备容错能力；而满足第二类需求后，资源利用会更高效，系统的扩展性也会更好。
 
-To achieve the goals, PD needs to collect information firstly, such as state of peers, information about Raft groups and the statistics of accessing the peers. Then we need to specify some strategies for PD, so that PD can make scheduling plans from these information and strategies. Finally, PD distributes some operators to TiKV peers to complete scheduling plans.
+为了实现这些目标，PD 需要首先收集信息，例如 Peer 状态、Raft 组信息以及访问 Peer 的统计数据。然后需要为 PD 制定一些策略，使其能根据这些信息和策略制定调度计划。最后，PD 会向 TiKV Peer 分发操作指令，完成调度计划。
 
-## Basic scheduling operators
+## 基本调度操作
 
-All scheduling plans contain three basic operators:
+所有调度计划包含三种基本操作：
 
-* Add a new replica
-* Remove a replica
-* Transfer a Region leader between replicas in a Raft group
+* 添加新副本
+* 删除副本
+* 在 Raft 组中的副本之间转移 Region Leader
 
-They are implemented by the Raft commands `AddReplica`, `RemoveReplica`, and `TransferLeader`.
+它们由 Raft 命令 `AddReplica`、`RemoveReplica` 和 `TransferLeader` 实现。
 
-## Information collection
+## 信息收集
 
-Scheduling is based on information collection. In short, the PD scheduling component needs to know the states of all TiKV peers and all Regions. TiKV peers report the following information to PD:
+调度依赖于信息的收集。简而言之，PD 调度组件需要了解所有 TiKV Peer 和所有 Regions 的状态。TiKV Peer 会向 PD 上报以下信息：
 
-- State information reported by each TiKV peer:
+- 每个 TiKV Peer 上报的状态信息：
 
-    Each TiKV peer sends heartbeats to PD periodically. PD not only checks whether the store is alive, but also collects [`StoreState`](https://github.com/pingcap/kvproto/blob/release-8.5/proto/pdpb.proto#L473) in the heartbeat message. `StoreState` includes:
+    每个 TiKV Peer 定期向 PD 发送心跳。PD 不仅检查存储是否存活，还会在心跳消息中收集 [`StoreState`](https://github.com/pingcap/kvproto/blob/release-8.5/proto/pdpb.proto#L473)。`StoreState` 包含：
 
-    * Total disk space
-    * Available disk space
-    * The number of Regions
-    * Data read/write speed
-    * The number of snapshots that are sent/received (The data might be replicated between replicas through snapshots)
-    * Whether the store is overloaded
-    * Labels (See [Perception of Topology](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels))
+    * 总磁盘空间
+    * 可用磁盘空间
+    * Regions 数量
+    * 读写速度
+    * 发送/接收快照的数量（快照可能在副本之间复制）
+    * 是否超载
+    * 标签（详见 [Perception of Topology](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels)）
 
-    You can use PD control to check the status of a TiKV store, which can be Up, Disconnect, Offline, Down, or Tombstone. The following is a description of all statuses and their relationship.
+    你可以使用 PD 控制命令检查 TiKV 存储的状态，状态可能为 Up、Disconnect、Offline、Down 或 Tombstone。以下是所有状态的描述及其关系。
 
-    + **Up**: The TiKV store is in service.
-    + **Disconnect**: Heartbeat messages between the PD and the TiKV store are lost for more than 20 seconds. If the lost period exceeds the time specified by `max-store-down-time`, the status "Disconnect" changes to "Down".
-    + **Down**: Heartbeat messages between the PD and the TiKV store are lost for a time longer than `max-store-down-time` (30 minutes by default). In this status, the TiKV store starts replenishing replicas of each Region on the surviving store.
-    + **Offline**: A TiKV store is manually taken offline through PD Control. This is only an intermediate status for the store to go offline. The store in this status moves all its Regions to other "Up" stores that meet the relocation conditions. When `leader_count` and `region_count` (obtained through PD Control) both show `0`, the store status changes to "Tombstone" from "Offline". In the "Offline" status, **do not** disable the store service or the physical server where the store is located. During the process that the store goes offline, if the cluster does not have target stores to relocate the Regions (for example, inadequate stores to hold replicas in the cluster), the store is always in the "Offline" status.
-    + **Tombstone**: The TiKV store is completely offline. You can use the `remove-tombstone` interface to safely clean up TiKV in this status. Starting from v6.5.0, if not manually handled, PD will automatically delete the Tombstone records stored internally one month after the node is converted to Tombstone.
+    + **Up**：TiKV 存储正常服务中。
+    + **Disconnect**：PD 与 TiKV 存储之间的心跳超过 20 秒未收到。如果超过 `max-store-down-time` 指定的时间，状态由 "Disconnect" 变为 "Down"。
+    + **Down**：PD 与 TiKV 存储之间的心跳超过 `max-store-down-time`（默认 30 分钟）。在此状态下，TiKV 存储会开始补充存活存储上的各个 Region 的副本。
+    + **Offline**：通过 PD 控制手动将 TiKV 存储下线。此状态仅为中间状态，存储在此状态下会将所有 Region 转移到符合迁移条件的其他 "Up" 存储。当 `leader_count` 和 `region_count`（通过 PD 控制获取）都显示为 `0` 时，存储状态变为 "Tombstone"。在 "Offline" 状态下，不要禁用存储服务或存储所在的物理服务器。在存储下线的过程中，如果集群没有目标存储进行 Region 迁移（例如，存储不足以容纳副本），存储会一直处于 "Offline" 状态。
+    + **Tombstone**：TiKV 存储完全离线。可以使用 `remove-tombstone` 接口安全清理处于此状态的 TiKV。从 v6.5.0 开始，如果不手动处理，PD 会在节点变为 Tombstone 一个月后自动删除内部存储的 Tombstone 记录。
 
     ![TiKV store status relationship](/media/tikv-store-status-relationship.png)
 
-- Information reported by Region leaders:
+- Region Leader 上报的信息：
 
-    Each Region leader sends heartbeats to PD periodically to report [`RegionState`](https://github.com/pingcap/kvproto/blob/release-8.5/proto/pdpb.proto#L312), including:
+    每个 Region Leader 定期向 PD 发送心跳，报告 [`RegionState`](https://github.com/pingcap/kvproto/blob/release-8.5/proto/pdpb.proto#L312)，包括：
 
-    * Position of the leader itself
-    * Positions of other replicas
-    * The number of offline replicas
-    * data read/write speed
+    * Leader 自身位置
+    * 其他副本位置
+    * 离线副本数量
+    * 读写速度
 
-PD collects cluster information by the two types of heartbeats and then makes decision based on it.
+PD 通过这两类心跳收集集群信息，然后据此做出决策。
 
-Besides, PD can get more information from an expanded interface to make a more precise decision. For example, if a store's heartbeats are broken, PD can't know whether the peer steps down temporarily or forever. It just waits a while (by default 30min) and then treats the store as offline if there are still no heartbeats received. Then PD balances all regions on the store to other stores.
+此外，PD 还可以通过扩展接口获取更多信息，以做出更精准的决策。例如，如果存储的心跳中断，PD 无法判断 Peer 是暂时下线还是永久下线。它会等待一段时间（默认 30 分钟），如果仍未收到心跳，则视为存储离线，然后将该存储上的所有 Region 在其他存储上进行平衡。
 
-But sometimes stores are manually set offline by a maintainer, so the maintainer can tell PD this by the PD control interface. Then PD can balance all regions immediately.
+但有时存储是由维护人员手动设置为离线状态，维护人员可以通过 PD 控制接口告知 PD。这样，PD 可以立即进行所有 Region 的平衡。
 
-## Scheduling strategies
+## 调度策略
 
-After collecting the information, PD needs some strategies to make scheduling plans.
+收集完信息后，PD 需要一些策略来制定调度计划。
 
-**Strategy 1: The number of replicas of a Region needs to be correct**
+**Strategy 1: Region 的副本数需要正确**
 
-PD can know that the replica count of a Region is incorrect from the Region leader's heartbeat. If it happens, PD can adjust the replica count by adding/removing replica(s). The reason for incorrect replica count can be:
+PD 可以通过 Region Leader 的心跳知道某个 Region 的副本数是否正确。如果不正确，PD 可以通过添加/删除副本来调整。副本数不正确的原因可能包括：
 
-* Store failure, so some Region's replica count is less than expected;
-* Store recovery after failure, so some Region's replica count could be more than expected;
-* [`max-replicas`](https://github.com/pingcap/pd/blob/v4.0.0-beta/conf/config.toml#L95) is changed.
+* 存储故障，导致某些 Region 的副本数少于预期；
+* 故障后存储恢复，导致某些 Region 的副本数多于预期；
+* [`max-replicas`](https://github.com/pingcap/pd/blob/v4.0.0-beta/conf/config.toml#L95) 被修改。
 
-**Strategy 2: Replicas of a Region need to be at different positions**
+**Strategy 2: Region 的副本需要在不同位置**
 
-Note that here "position" is different from "machine". Generally PD can only ensure that replicas of a Region are not at a same peer to avoid that the peer's failure causes more than one replicas to become lost. However in production, you might have the following requirements:
+注意这里的“位置”不同于“机器”。一般 PD 只能确保 Region 的副本不在同一 Peer 上，以避免 Peer 故障导致多个副本丢失。然而在生产环境中，可能有以下需求：
 
-* Multiple TiKV peers are on one machine;
-* TiKV peers are on multiple racks, and the system is expected to be available even if a rack fails;
-* TiKV peers are in multiple data centers, and the system is expected to be available even if a data center fails;
+* 多个 TiKV Peer 在同一台机器上；
+* TiKV Peer 分布在多个机架上，即使某个机架故障，系统仍应可用；
+* TiKV Peer 分布在多个数据中心，即使某个数据中心故障，系统仍应可用；
 
-The key to these requirements is that peers can have the same "position", which is the smallest unit for failure toleration. Replicas of a Region must not be in one unit. So, we can configure [labels](https://github.com/tikv/tikv/blob/v4.0.0-beta/etc/config-template.toml#L140) for the TiKV peers, and set [location-labels](https://github.com/pingcap/pd/blob/v4.0.0-beta/conf/config.toml#L100) on PD to specify which labels are used for marking positions.
+这些需求的关键在于 Peer 可以具有相同的“位置”，这是容错的最小单元。Region 的副本不能全部在同一单元内。因此，可以为 TiKV Peer 配置 [labels](https://github.com/tikv/tikv/blob/v4.0.0-beta/etc/config-template.toml#L140)，并在 PD 上设置 [location-labels](https://github.com/pingcap/pd/blob/v4.0.0-beta/conf/config.toml#L100)，以指定哪些标签用于标记位置。
 
-**Strategy 3: Replicas need to be balanced between stores**
+**Strategy 3: 副本需要在存储节点之间平衡**
 
-The size limit of a Region replica is fixed, so keeping the replicas balanced between stores is helpful for data size balance.
+Region 副本的大小是固定的，因此保持副本在存储节点之间的平衡有助于数据大小的均衡。
 
-**Strategy 4: Leaders need to be balanced between stores**
+**Strategy 4: Leader 需要在存储节点之间平衡**
 
-Read and write operations are performed on leaders according to the Raft protocol, so that PD needs to distribute leaders into the whole cluster instead of several peers.
+读写操作在 Leader 上进行，按照 Raft 协议，PD 需要将 Leader 分布到整个集群中，而不是只在少数几个 Peer 上。
 
-**Strategy 5: Hot spots need to be balanced between stores**
+**Strategy 5: 热点需要在存储节点之间平衡**
 
-PD can detect hot spots from store heartbeats and Region heartbeats, so that PD can distribute hot spots.
+PD 可以通过存储节点和 Region 的心跳检测热点，从而实现热点的分布。
 
-**Strategy 6: Storage size needs to be balanced between stores**
+**Strategy 6: 存储容量需要在存储节点之间平衡**
 
-When started up, a TiKV store reports `capacity` of storage, which indicates the store's space limit. PD will consider this when scheduling.
+启动时，TiKV 存储会报告 `capacity`，表示存储空间的限制。PD 在调度时会考虑这一点。
 
-**Strategy 7: Adjust scheduling speed to stabilize online services**
+**Strategy 7: 调整调度速度以稳定线上服务**
 
-Scheduling utilizes CPU, memory, network and I/O traffic. Too much resource utilization will influence online services. Therefore, PD needs to limit the number of the concurrent scheduling tasks. By default this strategy is conservative, while it can be changed if quicker scheduling is required.
+调度会消耗 CPU、内存、网络和 I/O 流量。资源利用过度会影响线上服务，因此 PD 需要限制同时进行的调度任务数。默认此策略较为保守，但如果需要更快的调度速度，可以进行调整。
 
-## Scheduling implementation
+## 调度实现
 
-PD collects cluster information from store heartbeats and Region heartbeats, and then makes scheduling plans from the information and strategies. Scheduling plans are a sequence of basic operators. Every time PD receives a Region heartbeat from a Region leader, it checks whether there is a pending operator on the Region or not. If PD needs to dispatch a new operator to a Region, it puts the operator into heartbeat responses, and monitors the operator by checking follow-up Region heartbeats.
+PD 通过存储节点和 Region 的心跳收集集群信息，然后根据这些信息和策略制定调度计划。调度计划是一系列基本操作的组合。每次 PD 收到 Region Leader 的 Region 心跳时，会检查该 Region 是否已有待执行的操作。如果需要调度新的操作，PD 会将操作放入心跳响应中，并通过后续的 Region 心跳监控操作的执行情况。
 
-Note that here "operators" are only suggestions to the Region leader, which can be skipped by Regions. Leader of Regions can decide whether to skip a scheduling operator or not based on its current status.
+注意，这里的“操作”仅是对 Region Leader 的建议，Region 可以选择跳过。Region 的 Leader 会根据当前状态决定是否跳过调度操作。

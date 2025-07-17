@@ -1,31 +1,31 @@
 ---
-title: LOCK TABLES and UNLOCK TABLES
-summary: An overview of the usage of LOCK TABLES and UNLOCK TABLES for the TiDB database.
+title: LOCK TABLES 和 UNLOCK TABLES
+summary: 关于 TiDB 数据库中 LOCK TABLES 和 UNLOCK TABLES 的使用概述。
 ---
 
-# LOCK TABLES and UNLOCK TABLES
+# LOCK TABLES 和 UNLOCK TABLES
 
 > **Warning:**
 >
-> `LOCK TABLES` and `UNLOCK TABLES` are experimental features for the current version. It is not recommended to use it in the production environment.
+> `LOCK TABLES` 和 `UNLOCK TABLES` 是当前版本的实验性功能。不建议在生产环境中使用。
 
-TiDB enables client sessions to acquire table locks for the purpose of cooperating with other sessions for access to tables, or to prevent other sessions from modifying tables. A session can acquire or release locks only for itself. One session cannot acquire locks for another session or release locks held by another session.
+TiDB 允许客户端会话获取表锁，以配合其他会话访问表，或防止其他会话修改表。一个会话只能为自己获取或释放锁。一个会话不能为其他会话获取锁或释放其他会话持有的锁。
 
-`LOCK TABLES` acquires table locks for the current client session. If you have the `LOCK TABLES` and `SELECT` privileges for each object to be locked, you can acquire table locks for common tables.
+`LOCK TABLES` 为当前客户端会话获取表锁。如果你对每个要锁定的对象拥有 `LOCK TABLES` 和 `SELECT` 权限，则可以为普通表获取表锁。
 
-`UNLOCK TABLES` explicitly releases any table locks held by the current session. `LOCK TABLES` implicitly releases all table locks held by the current session before acquiring new locks.
+`UNLOCK TABLES` 明确释放当前会话持有的所有表锁。`LOCK TABLES` 在获取新锁之前会隐式释放当前会话持有的所有表锁。
 
-A table lock protects against reads or writes by other sessions. A session that holds a `WRITE` lock can perform table-level operations such as `DROP TABLE` or `TRUNCATE TABLE`.
+表锁可以防止其他会话进行读取或写入。持有 `WRITE` 锁的会话可以执行诸如 `DROP TABLE` 或 `TRUNCATE TABLE` 等表级操作。
 
 > **Note:**
 >
-> The table locks feature is disabled by default.
+> 表锁功能默认未开启。
 >
-> - For TiDB Self-Managed, to enable the table locks feature, you need to set [`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400) to `true` in the configuration files of all TiDB instances.
-> - For TiDB Cloud Dedicated, to enable the table locks feature, you need to contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) to set [`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400) to `true`.
-> - For {{{ .starter }}}, setting [`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400) to `true` is not supported.
+> - 对于 TiDB 自托管版本，要启用表锁功能，需要在所有 TiDB 实例的配置文件中将 [`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400) 设置为 `true`。
+> - 对于 TiDB Cloud Dedicated，要启用表锁功能，需要联系 [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) 设置 [`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400) 为 `true`。
+> - 对于 {{{ .starter }}}，不支持将 [`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400) 设置为 `true`。
 
-## Synopsis
+## 概要
 
 ```ebnf+diagram
 LockTablesDef
@@ -40,72 +40,72 @@ LockType
            | 'WRITE' ('LOCAL')?
 ```
 
-## Acquire table locks
+## 获取表锁
 
-You can acquire table locks within the current session by using the `LOCK TABLES` statement. The following lock types are available:
+你可以在当前会话中使用 `LOCK TABLES` 语句获取表锁。可用的锁类型包括：
 
-`READ` lock:
+`READ` 锁：
 
-- The session that holds this lock can read the table, but cannot write it.
-- Multiple sessions can acquire a `READ` lock from the same table at the same time.
-- Other sessions can read the table without explicitly acquiring a `READ` lock.
+- 持有此锁的会话可以读取表，但不能写入。
+- 多个会话可以同时对同一表获取 `READ` 锁。
+- 其他会话可以在没有显式获取 `READ` 锁的情况下读取表。
 
-The `READ LOCAL` lock is only for syntax compatibility with MySQL and is not supported.
+`READ LOCAL` 锁 仅用于与 MySQL 的语法兼容，不支持。
 
-`WRITE` lock:
+`WRITE` 锁：
 
-- The session that holds this lock can read and write the table.
-- Only the session that holds this lock can access the table. No other sessions can access it until the lock is released.
+- 持有此锁的会话可以读取和写入表。
+- 只有持有此锁的会话可以访问该表。在锁释放之前，其他会话不能访问。
 
-`WRITE LOCAL` lock:
+`WRITE LOCAL` 锁：
 
-- The session that holds this lock can read and write the table.
-- Only the session that holds this lock can access the table. Other sessions can read the table, but cannot write it.
+- 持有此锁的会话可以读取和写入表。
+- 只有持有此锁的会话可以访问该表。其他会话可以读取，但不能写入。
 
-If the lock that the `LOCK TABLES` statement needs is held by another session, the `LOCK TABLES` statement must wait, and an error is returned upon the execution of this statement, for example:
+如果 `LOCK TABLES` 语句需要的锁被其他会话持有，则该语句必须等待，执行时会返回错误，例如：
 
 ```sql
 > LOCK TABLES t1 READ;
 ERROR 8020 (HY000): Table 't1' was locked in WRITE by server: f4799bcb-cad7-4285-8a6d-23d3555173f1_session: 2199023255959
 ```
 
-The preceding error message indicates that the session with ID `2199023255959` in TiDB `f4799bcb-cad7-4285-8a6d-23d3555173f1` already holds a `WRITE` lock on table `t1`. Therefore, the current session cannot acquire a `READ` lock on table `t1`.
+上述错误信息表示，TiDB 中 ID 为 `2199023255959` 的会话在 `f4799bcb-cad7-4285-8a6d-23d3555173f1` 实例中已对表 `t1` 持有 `WRITE` 锁。因此，当前会话无法对 `t1` 获取 `READ` 锁。
 
-You cannot acquire the same table lock multiple times in a single `LOCK TABLES` statement.
+在单个 `LOCK TABLES` 语句中，不能对同一表多次获取锁。
 
 ```sql
 > LOCK TABLES t WRITE, t READ;
 ERROR 1066 (42000): Not unique table/alias: 't'
 ```
 
-## Release table locks
+## 释放表锁
 
-When the table locks held by a session are released, they are all released at the same time. A session can release its locks explicitly or implicitly.
+当会话持有的表锁被释放时，全部同时释放。会话可以显式或隐式释放其锁。
 
-- A session can release its locks explicitly with `UNLOCK TABLES`.
-- If a session issues a `LOCK TABLES` statement to acquire a lock while already holding locks, its existing locks are released implicitly before the new locks are acquired.
+- 会话可以通过 `UNLOCK TABLES` 显式释放锁。
+- 如果会话在已持有锁的情况下再次执行 `LOCK TABLES`，其现有的锁会在获取新锁之前被隐式释放。
 
-If the connection for a client session terminates, whether normally or abnormally, TiDB implicitly releases all table locks held by the session. If the client reconnects, the locks are no longer in effect. For this reason, it is not recommended to enable auto-reconnection on the client. If you enable auto-reconnection, the client is not notified when reconnection occurs, and all table locks or current transactions are lost. By contrast, with auto-reconnection disabled, if the connection drops, an error occurs when the next statement is issued. The client can detect the error and take appropriate action such as reacquiring the locks or redoing the transaction.
+如果客户端会话的连接正常或异常终止，TiDB 会隐式释放该会话持有的所有表锁。如果客户端重新连接，之前的锁将不再生效。因此，不建议开启客户端的自动重连功能。如果开启自动重连，重连时客户端不会收到通知，所有表锁或当前事务将丢失。相反，禁用自动重连后，如果连接断开，下一条语句执行时会出现错误。客户端可以检测到错误并采取相应措施，例如重新获取锁或重做事务。
 
-## Table-locking restrictions and conditions
+## 表锁限制与条件
 
-You can safely use `KILL` to terminate a session that holds a table lock.
+你可以安全地使用 `KILL` 来终止持有表锁的会话。
 
-You cannot acquire table locks on tables in the following databases:
+不能对以下数据库中的表获取表锁：
 
 - `INFORMATION_SCHEMA`
 - `PERFORMANCE_SCHEMA`
 - `METRICS_SCHEMA`
 - `mysql`
 
-## MySQL compatibility
+## MySQL 兼容性
 
-### Table lock acquisition
+### 表锁获取
 
-- In TiDB, if session A has already held a table lock, an error is returned if session B attempts to write to the table. In MySQL, the write request of session B is blocked until session A releases the table lock, and requests for locking the table from other sessions are blocked until the current session releases the `WRITE` lock.
-- In TiDB, if the lock that the `LOCK TABLES` statement needs is held by another session, the `LOCK TABLES` statement must wait, and an error is returned upon the execution of this statement. In MySQL, this statement is blocked until the lock is acquired.
-- In TiDB, the `LOCK TABLES` statement is effective in the whole cluster. In MySQL, this statement is effective only in the current MySQL server, and is not compatible with the NDB cluster.
+- 在 TiDB 中，如果会话 A 已经持有表锁，则当会话 B 尝试对该表写入时，会返回错误。在 MySQL 中，会话 B 的写请求会被阻塞，直到会话 A 释放表锁；其他会话请求锁定该表也会被阻塞，直到当前会话释放 `WRITE` 锁。
+- 在 TiDB 中，如果 `LOCK TABLES` 语句需要的锁被其他会话持有，则该语句必须等待，执行时会返回错误。在 MySQL 中，该语句会被阻塞，直到锁被获取。
+- 在 TiDB 中，`LOCK TABLES` 语句在整个集群中生效。在 MySQL 中，该语句仅在当前 MySQL 服务器中生效，不兼容 NDB 集群。
 
-### Table lock release
+### 表锁释放
 
-When a transaction is explicitly started in a TiDB session (for example, with the `BEGIN` statement), TiDB does not implicitly release the table locks held by the session; but MySQL does.
+当在 TiDB 会话中显式启动事务（例如使用 `BEGIN` 语句）时，TiDB 不会隐式释放会话持有的表锁；而 MySQL 会。

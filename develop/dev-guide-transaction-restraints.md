@@ -1,37 +1,37 @@
 ---
 title: Transaction Restraints
-summary: Learn about transaction restraints in TiDB.
+summary: 了解 TiDB 中的事务限制。
 ---
 
 # Transaction Restraints
 
-This document briefly introduces the transaction restraints in TiDB.
+本文简要介绍了 TiDB 中的事务限制。
 
 ## Isolation levels
 
-The isolation levels supported by TiDB are **RC (Read Committed)** and **SI (Snapshot Isolation)**, where **SI** is basically equivalent to the **RR (Repeatable Read)** isolation level.
+TiDB 支持的隔离级别为 **RC (Read Committed)** 和 **SI (Snapshot Isolation)**，其中 **SI** 基本等同于 **RR (Repeatable Read)** 隔离级别。
 
 ![isolation level](/media/develop/transaction_isolation_level.png)
 
 ## Snapshot Isolation can avoid phantom reads
 
-The `SI` isolation level of TiDB can avoid **Phantom Reads**, but the `RR` in ANSI/ISO SQL standard cannot.
+TiDB 的 `SI` 隔离级别可以避免 **Phantom Reads**，但在 ANSI/ISO SQL 标准中，`RR` 不能。
 
-The following two examples show what **phantom reads** is.
+以下两个示例说明了什么是 **phantom reads**。
 
-- Example 1: **Transaction A** first gets `n` rows according to the query, and then **Transaction B** changes `m` rows other than these `n` rows or adds `m` rows that match the query of **Transaction A**. When **Transaction A** runs the query again, it finds that there are `n+m` rows that match the condition. It is like a phantom, so it is called a **phantom read**.
+- 示例 1：**事务 A** 首先根据查询获取 `n` 行，然后 **事务 B** 改变除了这 `n` 行之外的 `m` 行，或添加与 **事务 A** 查询条件匹配的 `m` 行。当 **事务 A** 再次运行查询时，会发现有 `n+m` 行符合条件。这就像一个幻影，所以称为 **phantom read**。
 
-- Example 2: **Admin A** changes the grades of all students in the database from specific scores to ABCDE grades, but **Admin B** inserts a record with a specific score at this time. When **Admin A** finishes changing and finds that there is still a record (the one inserted by **Admin B**) that has not been changed yet. That is a **phantom read**.
+- 示例 2：**管理员 A** 将数据库中所有学生的成绩从特定分数改为 ABCDE 等级，但此时 **管理员 B** 插入了一条具有特定分数的记录。当 **管理员 A** 完成修改后，发现仍有一条（由 **管理员 B** 插入的）未被修改的记录。这也是一种 **phantom read**。
 
 ## SI cannot avoid write skew
 
-TiDB's SI isolation level cannot avoid **write skew** exceptions. You can use the `SELECT FOR UPDATE` syntax to avoid **write skew** exceptions.
+TiDB 的 `SI` 隔离级别不能避免 **write skew** 异常。你可以使用 `SELECT FOR UPDATE` 语法来避免 **write skew**。
 
-A **write skew** exception occurs when two concurrent transactions read different but related records, and then each transaction updates the data it reads and eventually commits the transaction. If there is a constraint between these related records that cannot be modified concurrently by multiple transactions, then the end result will violate the constraint.
+**write skew** 异常发生在两个并发事务读取不同但相关的记录，然后各自更新自己读取的数据并最终提交事务时。如果这些相关记录之间存在不能被多个事务同时修改的约束，最终可能导致违反约束。
 
-For example, suppose you are writing a doctor shift management program for a hospital. Hospitals typically require several doctors to be on call at the same time, but the minimum requirement is that at least one doctor is on call. Doctors can drop their shifts (for example, if they are feeling sick) as long as at least one doctor is on call during that shift.
+例如，假设你在为医院编写医生值班管理程序。医院通常要求多名医生同时值班，但最少要求至少一名医生值班。医生可以请假（例如，感觉不适），只要在该班次期间至少有一名医生在值班。
 
-Now there is a situation where doctors `Alice` and `Bob` are on call. Both are feeling sick, so they decide to take sick leave. They happen to click the button at the same time. Let's simulate this process with the following program:
+现在有一种情况，医生 `Alice` 和 `Bob` 都在值班。两人都感觉不适，决定请病假。恰巧他们同时点击了请假按钮。以下用程序模拟此过程：
 
 <SimpleTab groupId="language">
 
@@ -57,7 +57,7 @@ public class EffectWriteSkew {
         ds.setJdbcUrl("jdbc:mysql://localhost:4000/test?useServerPrepStmts=true&cachePrepStmts=true");
         ds.setUsername("root");
 
-        // prepare data
+        // 准备数据
         Connection connection = ds.getConnection();
         createDoctorTable(connection);
         createDoctor(connection, 1, "Alice", true, 123);
@@ -110,7 +110,7 @@ public class EffectWriteSkew {
                 String comment = txnID == 2 ? "    " : "" + "/* txn #{txn_id} */ ";
                 connection.createStatement().executeUpdate(comment + "BEGIN");
 
-                // Txn 1 should be waiting for txn 2 done
+                // 事务 1 应等待事务 2 完成
                 if (txnID == 1) {
                     txn1Pass.acquire();
                 }
@@ -122,11 +122,11 @@ public class EffectWriteSkew {
                 ResultSet res = currentOnCallQuery.executeQuery();
 
                 if (!res.next()) {
-                    throw new RuntimeException("error query");
+                    throw new RuntimeException("查询出错");
                 } else {
                     int count = res.getInt("count");
                     if (count >= 2) {
-                        // If current on-call doctor has 2 or more, this doctor can leave
+                        // 如果当前值班医生人数 >= 2，则该医生可以请假
                         PreparedStatement insert = connection.prepareStatement( comment +
                                 "UPDATE `doctors` SET `on_call` = ? WHERE `id` = ? AND `shift_id` = ?");
                         insert.setBoolean(1, false);
@@ -136,343 +136,16 @@ public class EffectWriteSkew {
 
                         connection.commit();
                     } else {
-                        throw new RuntimeException("At least one doctor is on call");
+                        throw new RuntimeException("至少有一名医生在值班");
                     }
                 }
 
-                // Txn 2 done, let txn 1 run again
+                // 事务 2 完成，允许事务 1 继续
                 if (txnID == 2) {
                     txn1Pass.release();
                 }
             } catch (Exception e) {
-                // If got any error, you should roll back, data is priceless
-                connection.rollback();
-                e.printStackTrace();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-}
-```
-
-</div>
-
-<div label="Golang" value="golang">
-
-To adapt TiDB transactions, write a [util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util) according to the following code:
-
-```go
-package main
-
-import (
-    "database/sql"
-    "fmt"
-    "sync"
-
-    "github.com/pingcap-inc/tidb-example-golang/util"
-
-    _ "github.com/go-sql-driver/mysql"
-)
-
-func main() {
-    openDB("mysql", "root:@tcp(127.0.0.1:4000)/test", func(db *sql.DB) {
-        writeSkew(db)
-    })
-}
-
-func openDB(driverName, dataSourceName string, runnable func(db *sql.DB)) {
-    db, err := sql.Open(driverName, dataSourceName)
-    if err != nil {
-        panic(err)
-    }
-    defer db.Close()
-
-    runnable(db)
-}
-
-func writeSkew(db *sql.DB) {
-    err := prepareData(db)
-    if err != nil {
-        panic(err)
-    }
-
-    waitingChan, waitGroup := make(chan bool), sync.WaitGroup{}
-
-    waitGroup.Add(1)
-    go func() {
-        defer waitGroup.Done()
-        err = askForLeave(db, waitingChan, 1, 1)
-        if err != nil {
-            panic(err)
-        }
-    }()
-
-    waitGroup.Add(1)
-    go func() {
-        defer waitGroup.Done()
-        err = askForLeave(db, waitingChan, 2, 2)
-        if err != nil {
-            panic(err)
-        }
-    }()
-
-    waitGroup.Wait()
-}
-
-func askForLeave(db *sql.DB, waitingChan chan bool, goroutineID, doctorID int) error {
-    txnComment := fmt.Sprintf("/* txn %d */ ", goroutineID)
-    if goroutineID != 1 {
-        txnComment = "\t" + txnComment
-    }
-
-    txn, err := util.TiDBSqlBegin(db, true)
-    if err != nil {
-        return err
-    }
-    fmt.Println(txnComment + "start txn")
-
-    // Txn 1 should be waiting until txn 2 is done.
-    if goroutineID == 1 {
-        <-waitingChan
-    }
-
-    txnFunc := func() error {
-        queryCurrentOnCall := "SELECT COUNT(*) AS `count` FROM `doctors` WHERE `on_call` = ? AND `shift_id` = ?"
-        rows, err := txn.Query(queryCurrentOnCall, true, 123)
-        if err != nil {
-            return err
-        }
-        defer rows.Close()
-        fmt.Println(txnComment + queryCurrentOnCall + " successful")
-
-        count := 0
-        if rows.Next() {
-            err = rows.Scan(&count)
-            if err != nil {
-                return err
-            }
-        }
-        rows.Close()
-
-        if count < 2 {
-            return fmt.Errorf("at least one doctor is on call")
-        }
-
-        shift := "UPDATE `doctors` SET `on_call` = ? WHERE `id` = ? AND `shift_id` = ?"
-        _, err = txn.Exec(shift, false, doctorID, 123)
-        if err == nil {
-            fmt.Println(txnComment + shift + " successful")
-        }
-        return err
-    }
-
-    err = txnFunc()
-    if err == nil {
-        txn.Commit()
-        fmt.Println("[runTxn] commit success")
-    } else {
-        txn.Rollback()
-        fmt.Printf("[runTxn] got an error, rollback: %+v\n", err)
-    }
-
-    // Txn 2 is done. Let txn 1 run again.
-    if goroutineID == 2 {
-        waitingChan <- true
-    }
-
-    return nil
-}
-
-func prepareData(db *sql.DB) error {
-    err := createDoctorTable(db)
-    if err != nil {
-        return err
-    }
-
-    err = createDoctor(db, 1, "Alice", true, 123)
-    if err != nil {
-        return err
-    }
-    err = createDoctor(db, 2, "Bob", true, 123)
-    if err != nil {
-        return err
-    }
-    err = createDoctor(db, 3, "Carol", false, 123)
-    if err != nil {
-        return err
-    }
-    return nil
-}
-
-func createDoctorTable(db *sql.DB) error {
-    _, err := db.Exec("CREATE TABLE IF NOT EXISTS `doctors` (" +
-        "    `id` int NOT NULL," +
-        "    `name` varchar(255) DEFAULT NULL," +
-        "    `on_call` tinyint DEFAULT NULL," +
-        "    `shift_id` int DEFAULT NULL," +
-        "    PRIMARY KEY (`id`)," +
-        "    KEY `idx_shift_id` (`shift_id`)" +
-        "  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin")
-    return err
-}
-
-func createDoctor(db *sql.DB, id int, name string, onCall bool, shiftID int) error {
-    _, err := db.Exec("INSERT INTO `doctors` (`id`, `name`, `on_call`, `shift_id`) VALUES (?, ?, ?, ?)",
-        id, name, onCall, shiftID)
-    return err
-}
-```
-
-</div>
-
-</SimpleTab>
-
-SQL log:
-
-```sql
-/* txn 1 */ BEGIN
-    /* txn 2 */ BEGIN
-    /* txn 2 */ SELECT COUNT(*) as `count` FROM `doctors` WHERE `on_call` = 1 AND `shift_id` = 123
-    /* txn 2 */ UPDATE `doctors` SET `on_call` = 0 WHERE `id` = 2 AND `shift_id` = 123
-    /* txn 2 */ COMMIT
-/* txn 1 */ SELECT COUNT(*) AS `count` FROM `doctors` WHERE `on_call` = 1 and `shift_id` = 123
-/* txn 1 */ UPDATE `doctors` SET `on_call` = 0 WHERE `id` = 1 AND `shift_id` = 123
-/* txn 1 */ COMMIT
-```
-
-Running result:
-
-```sql
-mysql> SELECT * FROM doctors;
-+----+-------+---------+----------+
-| id | name  | on_call | shift_id |
-+----+-------+---------+----------+
-|  1 | Alice |       0 |      123 |
-|  2 | Bob   |       0 |      123 |
-|  3 | Carol |       0 |      123 |
-+----+-------+---------+----------+
-```
-
-In both transactions, the application first checks if two or more doctors are on call; if so, it assumes that one doctor can safely take leave. Since the database uses the snapshot isolation, both checks return `2`, so both transactions move on to the next stage. `Alice` updates her record to be off duty, and so does `Bob`. Both transactions are successfully committed. Now there are no doctors on duty which violates the requirement that at least one doctor should be on call. The following diagram (quoted from **_Designing Data-Intensive Applications_**) illustrates what actually happens.
-
-![Write Skew](/media/develop/write-skew.png)
-
-Now let's change the sample program to use `SELECT FOR UPDATE` to avoid the write skew problem:
-
-<SimpleTab groupId="language">
-
-<div label="Java" value="java">
-
-```java
-package com.pingcap.txn.write.skew;
-
-import com.zaxxer.hikari.HikariDataSource;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Semaphore;
-
-public class EffectWriteSkew {
-    public static void main(String[] args) throws SQLException, InterruptedException {
-        HikariDataSource ds = new HikariDataSource();
-        ds.setJdbcUrl("jdbc:mysql://localhost:4000/test?useServerPrepStmts=true&cachePrepStmts=true");
-        ds.setUsername("root");
-
-        // prepare data
-        Connection connection = ds.getConnection();
-        createDoctorTable(connection);
-        createDoctor(connection, 1, "Alice", true, 123);
-        createDoctor(connection, 2, "Bob", true, 123);
-        createDoctor(connection, 3, "Carol", false, 123);
-
-        Semaphore txn1Pass = new Semaphore(0);
-        CountDownLatch countDownLatch = new CountDownLatch(2);
-        ExecutorService threadPool = Executors.newFixedThreadPool(2);
-
-        threadPool.execute(() -> {
-            askForLeave(ds, txn1Pass, 1, 1);
-            countDownLatch.countDown();
-        });
-
-        threadPool.execute(() -> {
-            askForLeave(ds, txn1Pass, 2, 2);
-            countDownLatch.countDown();
-        });
-
-        countDownLatch.await();
-    }
-
-    public static void createDoctorTable(Connection connection) throws SQLException {
-        connection.createStatement().executeUpdate("CREATE TABLE `doctors` (" +
-                "    `id` int NOT NULL," +
-                "    `name` varchar(255) DEFAULT NULL," +
-                "    `on_call` tinyint DEFAULT NULL," +
-                "    `shift_id` int DEFAULT NULL," +
-                "    PRIMARY KEY (`id`)," +
-                "    KEY `idx_shift_id` (`shift_id`)" +
-                "  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin");
-    }
-
-    public static void createDoctor(Connection connection, Integer id, String name, Boolean onCall, Integer shiftID) throws SQLException {
-        PreparedStatement insert = connection.prepareStatement(
-                "INSERT INTO `doctors` (`id`, `name`, `on_call`, `shift_id`) VALUES (?, ?, ?, ?)");
-        insert.setInt(1, id);
-        insert.setString(2, name);
-        insert.setBoolean(3, onCall);
-        insert.setInt(4, shiftID);
-        insert.executeUpdate();
-    }
-
-    public static void askForLeave(HikariDataSource ds, Semaphore txn1Pass, Integer txnID, Integer doctorID) {
-        try(Connection connection = ds.getConnection()) {
-            try {
-                connection.setAutoCommit(false);
-
-                String comment = txnID == 2 ? "    " : "" + "/* txn #{txn_id} */ ";
-                connection.createStatement().executeUpdate(comment + "BEGIN");
-
-                // Txn 1 should be waiting for txn 2 done
-                if (txnID == 1) {
-                    txn1Pass.acquire();
-                }
-
-                PreparedStatement currentOnCallQuery = connection.prepareStatement(comment +
-                        "SELECT COUNT(*) AS `count` FROM `doctors` WHERE `on_call` = ? AND `shift_id` = ? FOR UPDATE");
-                currentOnCallQuery.setBoolean(1, true);
-                currentOnCallQuery.setInt(2, 123);
-                ResultSet res = currentOnCallQuery.executeQuery();
-
-                if (!res.next()) {
-                    throw new RuntimeException("error query");
-                } else {
-                    int count = res.getInt("count");
-                    if (count >= 2) {
-                        // If current on-call doctor has 2 or more, this doctor can leave
-                        PreparedStatement insert = connection.prepareStatement( comment +
-                                "UPDATE `doctors` SET `on_call` = ? WHERE `id` = ? AND `shift_id` = ?");
-                        insert.setBoolean(1, false);
-                        insert.setInt(2, doctorID);
-                        insert.setInt(3, 123);
-                        insert.executeUpdate();
-
-                        connection.commit();
-                    } else {
-                        throw new RuntimeException("At least one doctor is on call");
-                    }
-                }
-
-                // Txn 2 done, let txn 1 run again
-                if (txnID == 2) {
-                    txn1Pass.release();
-                }
-            } catch (Exception e) {
-                // If got any error, you should roll back, data is priceless
+                // 出错时回滚，数据无价
                 connection.rollback();
                 e.printStackTrace();
             }
@@ -557,7 +230,7 @@ func askForLeave(db *sql.DB, waitingChan chan bool, goroutineID, doctorID int) e
     }
     fmt.Println(txnComment + "start txn")
 
-    // Txn 1 should be waiting until txn 2 is done.
+    // 事务 1 应等待事务 2 完成
     if goroutineID == 1 {
         <-waitingChan
     }
@@ -581,7 +254,7 @@ func askForLeave(db *sql.DB, waitingChan chan bool, goroutineID, doctorID int) e
         rows.Close()
 
         if count < 2 {
-            return fmt.Errorf("at least one doctor is on call")
+            return fmt.Errorf("至少有一名医生在值班")
         }
 
         shift := "UPDATE `doctors` SET `on_call` = ? WHERE `id` = ? AND `shift_id` = ?"
@@ -595,13 +268,13 @@ func askForLeave(db *sql.DB, waitingChan chan bool, goroutineID, doctorID int) e
     err = txnFunc()
     if err == nil {
         txn.Commit()
-        fmt.Println("[runTxn] commit success")
+        fmt.Println("[runTxn] 提交成功")
     } else {
         txn.Rollback()
-        fmt.Printf("[runTxn] got an error, rollback: %+v\n", err)
+        fmt.Printf("[runTxn] 出错，回滚： %+v\n", err)
     }
 
-    // Txn 2 is done. Let txn 1 run again.
+    // 事务 2 完成，允许事务 1 继续
     if goroutineID == 2 {
         waitingChan <- true
     }
@@ -666,7 +339,7 @@ At least one doctor is on call
 /* txn 1 */ ROLLBACK
 ```
 
-Running result:
+运行结果：
 
 ```sql
 mysql> SELECT * FROM doctors;
@@ -683,11 +356,11 @@ mysql> SELECT * FROM doctors;
 
 > **Note:**
 >
-> Starting from v6.2.0, TiDB supports the [`savepoint`](/sql-statements/sql-statement-savepoint.md) feature. If your TiDB cluster is earlier than v6.2.0, your TiDB cluster does not support the `PROPAGATION_NESTED` behavior. It is recommended to upgrade to v6.2.0 or a later version. If upgrading TiDB is not possible, and your applications are based on the **Java Spring** framework that uses the `PROPAGATION_NESTED` propagation behavior, you need to adapt it on the application side to remove the logic for nested transactions.
+> 从 v6.2.0 版本开始，TiDB 支持 [`savepoint`](/sql-statements/sql-statement-savepoint.md) 功能。如果你的 TiDB 集群早于 v6.2.0，则不支持 `PROPAGATION_NESTED` 行为。建议升级到 v6.2.0 或更高版本。如果无法升级 TiDB，且你的应用基于使用 `PROPAGATION_NESTED` 传播行为的 **Java Spring** 框架，则需要在应用端进行适配，移除嵌套事务的相关逻辑。
 
-The `PROPAGATION_NESTED` propagation behavior supported by **Spring** triggers a nested transaction, which is a child transaction that is started independently of the current transaction. A `savepoint` is recorded when the nested transaction starts. If the nested transaction fails, the transaction will roll back to the `savepoint` state. The nested transaction is part of the outer transaction and will be committed together with the outer transaction.
+**Spring** 支持的 `PROPAGATION_NESTED` 传播行为会触发嵌套事务，即一个独立于当前事务启动的子事务。子事务开始时会记录一个 `savepoint`。如果子事务失败，事务会回滚到该 `savepoint` 状态。嵌套事务是外层事务的一部分，会与外层事务一同提交。
 
-The following example demonstrates the `savepoint` mechanism:
+以下示例演示了 `savepoint` 机制：
 
 ```sql
 mysql> BEGIN;
@@ -707,38 +380,38 @@ mysql> SELECT * FROM T2;
 
 ## Large transaction restrictions
 
-The basic principle is to limit the size of the transaction. At the KV level, TiDB has a restriction on the size of a single transaction. At the SQL level, one row of data is mapped to one KV entry, and each additional index will add one KV entry. The restriction is as follows at the SQL level:
+基本原则是限制事务的大小。在 KV 层，TiDB 对单个事务的大小有限制。在 SQL 层，一行数据映射为一个 KV 条目，每增加一个索引会增加一个 KV 条目。SQL 层的限制如下：
 
-- The maximum single row record size is 120 MiB.
+- 单行最大记录大小为 120 MiB。
 
-    - You can adjust it by using the [`performance.txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500) configuration parameter of tidb-server for TiDB v4.0.10 and later v4.0.x versions, TiDB v5.0.0 and later versions. The value is `6 MB` for versions earlier than v4.0.10.
-    - Starting from v7.6.0, you can use the [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760) system variable to dynamically modify the value of this configuration item.
+    - 你可以通过调整 [`performance.txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500) 配置参数（适用于 TiDB v4.0.10 及以上的 v4.0.x 版本，以及 v5.0.0 及以上版本）来调整。早期版本（低于 v4.0.10）默认值为 `6 MB`。
+    - 从 v7.6.0 开始，可以使用 [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760) 系统变量动态修改此配置项的值。
 
-- The maximum single transaction size supported is 1 TiB. 
+- 支持的最大单个事务大小为 1 TiB。
 
-    - For TiDB v4.0 and later versions, You can configure it by [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)). The value is `100 MB` for earlier versions.
-    - For TiDB v6.5.0 and later versions, this configuration is no longer recommended. For more information, see [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)).
+    - 对于 TiDB v4.0 及以上版本，可以通过 [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) 配置，早期版本的默认值为 `100 MB`。
+    - 对于 v6.5.0 及以上版本，不再推荐使用此配置。更多信息请参见 [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)。
 
-Note that for both the size restrictions and row restrictions, you should also consider the overhead of encoding and additional keys for the transaction during the transaction execution. To achieve optimal performance, it is recommended to write one transaction every 100 ~ 500 rows.
+注意，在考虑大小限制和行数限制时，还应考虑在事务执行过程中编码开销和额外键的影响。为了获得最佳性能，建议每 100 ~ 500 行写入一次事务。
 
 ## Auto-committed `SELECT FOR UPDATE` statements do NOT wait for locks
 
-Currently locks are not added to auto-committed `SELECT FOR UPDATE` statements. The effect is shown in the following figure:
+目前，自动提交的 `SELECT FOR UPDATE` 语句不会加锁。效果如下图所示：
 
 ![The situation in TiDB](/media/develop/autocommit_selectforupdate_nowaitlock.png)
 
-This is a known incompatibility issue with MySQL. You can solve this issue by using the explicit `BEGIN;COMMIT;` statements.
+这是 MySQL 的已知不兼容问题。你可以通过使用显式的 `BEGIN; COMMIT;` 语句解决此问题。
 
 ## Need help?
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 社区提问，或 [提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 社区提问，或 [提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

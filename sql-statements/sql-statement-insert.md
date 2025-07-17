@@ -1,13 +1,13 @@
 ---
-title: INSERT | TiDB SQL Statement Reference
-summary: An overview of the usage of INSERT for the TiDB database.
+title: INSERT | TiDB SQL 语句参考
+summary: TiDB 数据库中 INSERT 的用法概述。
 ---
 
 # INSERT
 
-This statement inserts new rows into a table.
+该语句用于向表中插入新行。
 
-## Synopsis
+## 概要
 
 ```ebnf+diagram
 InsertIntoStmt ::=
@@ -43,9 +43,9 @@ OnDuplicateKeyUpdate ::=
 
 > **Note:**
 >
-> Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control-ru-groups.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority (`PriorityOpt`) will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control-ru-groups.md) to manage resource usage for different SQL statements.
+> 从 v6.6.0 版本开始，TiDB 支持 [Resource Control](/tidb-resource-control-ru-groups.md)。你可以使用此功能在不同的资源组中以不同的优先级执行 SQL 语句。通过为这些资源组配置合适的配额和优先级，可以获得更好的 SQL 调度控制。当启用资源控制时，语句优先级（`PriorityOpt`）将不再生效。建议你使用 [Resource Control](/tidb-resource-control-ru-groups.md) 来管理不同 SQL 语句的资源使用。
 
-## Examples
+## 示例
 
 ```sql
 mysql> CREATE TABLE t1 (a INT);
@@ -99,11 +99,11 @@ mysql> SELECT * FROM t2;
 5 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `INSERT` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中的 `INSERT` 语句与 MySQL 完全兼容。如果你发现任何兼容性差异，[请报告一个 bug](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 相关链接
 
 * [DELETE](/sql-statements/sql-statement-delete.md)
 * [SELECT](/sql-statements/sql-statement-select.md)

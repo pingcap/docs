@@ -1,15 +1,15 @@
 ---
 title: TIFLASH_TABLES
-summary: Learn the `TIFLASH_TABLES` information_schema table.
+summary: 了解 `TIFLASH_TABLES` information_schema 表格的信息。
 ---
 
 # TIFLASH_TABLES
 
 > **Warning:**
 >
-> Do not use this table in production environments, as the fields of the table are unstable, and subject to change in new releases of TiDB, without prior notice.
+> 不要在生产环境中使用此表，因为表中的字段不稳定，可能在 TiDB 的新版本中发生变化，且不会提前通知。
 
-The `TIFLASH_TABLES` table provides statistical information about data tables in TiFlash.
+`TIFLASH_TABLES` 表提供关于 TiFlash 中数据表的统计信息。
 
 ```sql
 USE information_schema;
@@ -78,59 +78,59 @@ DESC tiflash_tables;
 54 rows in set (0.00 sec)
 ```
 
-Fields in the `TIFLASH_TABLES` table are described as follows:
+`TIFLASH_TABLES` 表中的字段说明如下：
 
-- `DATABASE`: The name of the database that the table belongs to in TiFlash.
-- `TABLE`: The name of the table in TiFlash.
-- `TIDB_DATABASE`: The name of the database that the table belongs to in TiDB.
-- `TIDB_TABLE`: The name of the table in TiDB.
-- `TABLE_ID`: The internal ID of the table, which is unique within a TiDB cluster.
-- `IS_TOMBSTONE`: Indicates whether the table can be recycled. `1` indicates that the table can be recycled, and `0` indicates that the table is in a normal state.
-- `SEGMENT_COUNT`: The number of segments in the table. A segment is a data management unit in TiFlash.
-- `TOTAL_ROWS`: The total number of rows in the table.
-- `TOTAL_SIZE`: The total size of the table (in bytes).
-- `TOTAL_DELETE_RANGES`: The total number of Delete Ranges in the table.
-- `DELTA_RATE_ROWS`: The ratio of the total rows of the table in the Delta layer to the total rows of that table.
-- `DELTA_RATE_SEGMENTS`: The proportion of segments that contain a non-empty Delta layer in the table.
-- `DELTA_PLACED_RATE`: The proportion of rows that have completed index construction of the table in the Delta layer.
-- `DELTA_CACHE_SIZE`: The size of the cache of the table in the Delta layer (in bytes).
-- `DELTA_CACHE_RATE`: The proportion of cache data of the table in the Delta layer.
-- `DELTA_CACHE_WASTED_RATE`: The proportion of invalid cache data of the table in the Delta layer.
-- `DELTA_INDEX_SIZE`: The size of the memory occupied by indexes in the Delta layer (in bytes).
-- `AVG_SEGMENT_ROWS`: The average number of rows in all segments of the table.
-- `AVG_SEGMENT_SIZE`: The average size of all segments of the table (in bytes).
-- `DELTA_COUNT`: The number of segments that contain a non-empty Delta layer in the table.
-- `TOTAL_DELTA_ROWS`: The total number of rows in the Delta layer.
-- `TOTAL_DELTA_SIZE`: The total size of the data in the Delta layer (in bytes).
-- `AVG_DELTA_ROWS`: The average number of rows of data in all Delta layers.
-- `AVG_DELTA_SIZE`: The average size of data in all Delta layers (in bytes).
-- `AVG_DELTA_DELETE_RANGES`: The average number of Delete Range operations in all Delta layers.
-- `STABLE_COUNT`: The number of segments that contain a non-empty Stable layer in the table.
-- `TOTAL_STABLE_ROWS`: The total number of rows in all Stable layers.
-- `TOTAL_STABLE_SIZE`: The total size of the data in all Stable layers (in bytes).
-- `TOTAL_STABLE_SIZE_ON_DISK`: The disk space occupied by the data in all Stable layers (in bytes).
-- `AVG_STABLE_ROWS`: The average number of rows of data in all Stable layers.
-- `AVG_STABLE_SIZE`: The average size of data in all Stable layers (in bytes).
-- `TOTAL_PACK_COUNT_IN_DELTA`: The total number of Column Files in all Delta layers.
-- `MAX_PACK_COUNT_IN_DELTA`: The maximum number of Column Files in a single Delta layer.
-- `AVG_PACK_COUNT_IN_DELTA`: The average number of Column Files in all Delta layers.
-- `AVG_PACK_ROWS_IN_DELTA`: The average number of rows in all Column Files in all Delta layers.
-- `AVG_PACK_SIZE_IN_DELTA`: The average size of data in all Column Files in all Delta layers (in bytes).
-- `TOTAL_PACK_COUNT_IN_STABLE`: The total number of Packs in all Stable layers.
-- `AVG_PACK_COUNT_IN_STABLE`: The average number of Packs in all Stable layers.
-- `AVG_PACK_ROWS_IN_STABLE`: The average number of rows in all Packs in all Stable layers.
-- `AVG_PACK_SIZE_IN_STABLE`: The average size of data in all Packs in the Stable layer (in bytes).
-- `STORAGE_STABLE_NUM_SNAPSHOTS`: The number of snapshots in the Stable layer.
-- `STORAGE_STABLE_OLDEST_SNAPSHOT_LIFETIME`: The duration of the earliest snapshot in the Stable layer (in seconds).
-- `STORAGE_STABLE_OLDEST_SNAPSHOT_THREAD_ID`: The thread ID of the earliest snapshot in the Stable layer.
-- `STORAGE_STABLE_OLDEST_SNAPSHOT_TRACING_ID`: The tracing ID of the earliest snapshot in the Stable layer.
-- `STORAGE_DELTA_NUM_SNAPSHOTS`: The number of snapshots in the Delta layer.
-- `STORAGE_DELTA_OLDEST_SNAPSHOT_LIFETIME`: The duration of the earliest snapshot in the Delta layer (in seconds).
-- `STORAGE_DELTA_OLDEST_SNAPSHOT_THREAD_ID`: The thread ID of the earliest snapshot in the Delta layer.
-- `STORAGE_DELTA_OLDEST_SNAPSHOT_TRACING_ID`: The tracing ID of the earliest snapshot in the Delta layer.
-- `STORAGE_META_NUM_SNAPSHOTS`: The number of snapshots in the meta information.
-- `STORAGE_META_OLDEST_SNAPSHOT_LIFETIME`: The duration of the earliest snapshot in the meta information (in seconds).
-- `STORAGE_META_OLDEST_SNAPSHOT_THREAD_ID`: The thread ID of the earliest snapshot in the meta information.
-- `STORAGE_META_OLDEST_SNAPSHOT_TRACING_ID`: The tracing ID of the earliest snapshot in the meta information.
-- `BACKGROUND_TASKS_LENGTH`: The length of the task queue in the background.
-- `TIFLASH_INSTANCE`: The address of the TiFlash instance.
+- `DATABASE`: TiFlash 中所属表的数据库名。
+- `TABLE`: TiFlash 中的表名。
+- `TIDB_DATABASE`: TiDB 中所属表的数据库名。
+- `TIDB_TABLE`: TiDB 中的表名。
+- `TABLE_ID`: 表的内部 ID，在 TiDB 集群中唯一。
+- `IS_TOMBSTONE`: 表示该表是否可以回收。`1` 表示可以回收，`0` 表示处于正常状态。
+- `SEGMENT_COUNT`: 表中的段数。段是 TiFlash 中的数据管理单元。
+- `TOTAL_ROWS`: 表中的总行数。
+- `TOTAL_SIZE`: 表的总大小（字节数）。
+- `TOTAL_DELETE_RANGES`: 表中的删除范围总数。
+- `DELTA_RATE_ROWS`: Delta 层中表的总行数占比。
+- `DELTA_RATE_SEGMENTS`: 表中包含非空 Delta 层的段的比例。
+- `DELTA_PLACED_RATE`: 在 Delta 层中已完成索引构建的行的比例。
+- `DELTA_CACHE_SIZE`: 表在 Delta 层中的缓存大小（字节）。
+- `DELTA_CACHE_RATE`: Delta 层中缓存数据的占比。
+- `DELTA_CACHE_WASTED_RATE`: Delta 层中无效缓存数据的占比。
+- `DELTA_INDEX_SIZE`: Delta 层中索引占用的内存大小（字节）。
+- `AVG_SEGMENT_ROWS`: 表所有段的平均行数。
+- `AVG_SEGMENT_SIZE`: 表所有段的平均大小（字节）。
+- `DELTA_COUNT`: 表中包含非空 Delta 层的段数。
+- `TOTAL_DELTA_ROWS`: Delta 层中的总行数。
+- `TOTAL_DELTA_SIZE`: Delta 层中数据的总大小（字节）。
+- `AVG_DELTA_ROWS`: 所有 Delta 层中数据的平均行数。
+- `AVG_DELTA_SIZE`: 所有 Delta 层中数据的平均大小（字节）。
+- `AVG_DELTA_DELETE_RANGES`: 所有 Delta 层中删除范围操作的平均数。
+- `STABLE_COUNT`: 表中包含非空 Stable 层的段数。
+- `TOTAL_STABLE_ROWS`: 所有 Stable 层中的总行数。
+- `TOTAL_STABLE_SIZE`: 所有 Stable 层中数据的总大小（字节）。
+- `TOTAL_STABLE_SIZE_ON_DISK`: 所有 Stable 层中数据在磁盘上的占用空间（字节）。
+- `AVG_STABLE_ROWS`: 所有 Stable 层中数据的平均行数。
+- `AVG_STABLE_SIZE`: 所有 Stable 层中数据的平均大小（字节）。
+- `TOTAL_PACK_COUNT_IN_DELTA`: 所有 Delta 层中列文件（Column Files）总数。
+- `MAX_PACK_COUNT_IN_DELTA`: 单个 Delta 层中的最大列文件数。
+- `AVG_PACK_COUNT_IN_DELTA`: 所有 Delta 层中列文件的平均数。
+- `AVG_PACK_ROWS_IN_DELTA`: 所有 Delta 层中列文件的平均行数。
+- `AVG_PACK_SIZE_IN_DELTA`: 所有 Delta 层中列文件的平均大小（字节）。
+- `TOTAL_PACK_COUNT_IN_STABLE`: 所有 Stable 层中的 Pack 数量。
+- `AVG_PACK_COUNT_IN_STABLE`: 所有 Stable 层中 Pack 的平均数。
+- `AVG_PACK_ROWS_IN_STABLE`: 所有 Stable 层中 Pack 的平均行数。
+- `AVG_PACK_SIZE_IN_STABLE`: Stable 层中 Pack 的平均大小（字节）。
+- `STORAGE_STABLE_NUM_SNAPSHOTS`: Stable 层中的快照数。
+- `STORAGE_STABLE_OLDEST_SNAPSHOT_LIFETIME`: Stable 层中最早快照的存活时间（秒）。
+- `STORAGE_STABLE_OLDEST_SNAPSHOT_THREAD_ID`: 最早快照的线程 ID。
+- `STORAGE_STABLE_OLDEST_SNAPSHOT_TRACING_ID`: 最早快照的追踪 ID。
+- `STORAGE_DELTA_NUM_SNAPSHOTS`: Delta 层中的快照数。
+- `STORAGE_DELTA_OLDEST_SNAPSHOT_LIFETIME`: Delta 层中最早快照的存活时间（秒）。
+- `STORAGE_DELTA_OLDEST_SNAPSHOT_THREAD_ID`: 最早快照的线程 ID。
+- `STORAGE_DELTA_OLDEST_SNAPSHOT_TRACING_ID`: 最早快照的追踪 ID。
+- `STORAGE_META_NUM_SNAPSHOTS`: 元信息中的快照数。
+- `STORAGE_META_OLDEST_SNAPSHOT_LIFETIME`: 元信息中最早快照的存活时间（秒）。
+- `STORAGE_META_OLDEST_SNAPSHOT_THREAD_ID`: 元信息中最早快照的线程 ID。
+- `STORAGE_META_OLDEST_SNAPSHOT_TRACING_ID`: 元信息中最早快照的追踪 ID。
+- `BACKGROUND_TASKS_LENGTH`: 后台任务队列长度。
+- `TIFLASH_INSTANCE`: TiFlash 实例的地址。

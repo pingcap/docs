@@ -1,11 +1,11 @@
 ---
 title: Control Flow Functions
-summary: Learn about the Control Flow functions.
+summary: 了解控制流函数。
 ---
 
 # Control Flow Functions
 
-TiDB supports all of the [control flow functions](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html) available in MySQL 8.0.
+TiDB 支持所有在 MySQL 8.0 中可用的 [control flow functions](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html)。
 
 | Name                                                                                            | Description                       |
 |:--------------------------------------------------------------------------------------------------|:----------------------------------|
@@ -16,9 +16,9 @@ TiDB supports all of the [control flow functions](https://dev.mysql.com/doc/refm
 
 ## CASE
 
-The [`CASE`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#operator_case) operator enables you to perform conditional logic and customize query results based on specified conditions.
+[`CASE`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#operator_case) 运算符使你能够执行条件逻辑，并根据指定条件自定义查询结果。
 
-Syntax:
+语法：
 
 ```sql
 CASE
@@ -29,7 +29,7 @@ CASE
 END
 ```
 
-Example:
+示例：
 
 ```sql
 WITH RECURSIVE d AS (SELECT 1 AS n UNION ALL SELECT n+1 FROM d WHERE n<10)
@@ -56,15 +56,15 @@ SELECT n, CASE WHEN n MOD 2 THEN "odd" ELSE "even" END FROM d;
 
 ## IF()
 
-The [`IF()`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_if) function enables you to perform different actions based on whether a value or expression is true or not.
+[`IF()`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_if) 函数使你能够根据一个值或表达式是否为真执行不同的操作。
 
-Syntax:
+语法：
 
 ```sql
 IF(condition, value_if_true, value_if_false)
 ```
 
-Example:
+示例：
 
 ```sql
 WITH RECURSIVE d AS (SELECT 1 AS n UNION ALL SELECT n+1 FROM d WHERE n<10)
@@ -91,9 +91,9 @@ SELECT n, IF(n MOD 2, "odd", "even") FROM d;
 
 ## IFNULL()
 
-The [`IFNULL(expr1,expr2)`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_ifnull) function is used to handle NULL values in queries. If `expr1` is not `NULL`, it returns `expr1`; otherwise, it returns `expr2`.
+[`IFNULL(expr1,expr2)`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_ifnull) 函数用于处理查询中的 NULL 值。如果 `expr1` 不为 `NULL`，则返回 `expr1`；否则返回 `expr2`。
 
-Example:
+示例：
 
 ```sql
 WITH data AS (SELECT NULL AS x UNION ALL SELECT 1 )
@@ -112,9 +112,9 @@ SELECT x, IFNULL(x,'x has no value') FROM data;
 
 ## NULLIF()
 
-The [`NULLIF(expr1,expr2)`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_nullif) function returns `NULL` if both arguments are the same or if the first argument is `NULL`. Otherwise, it returns the first argument.
+[`NULLIF(expr1,expr2)`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_nullif) 函数在两个参数相同时或第一个参数为 `NULL` 时返回 `NULL`。否则返回第一个参数。
 
-Example:
+示例：
 
 ```sql
 WITH RECURSIVE d AS (SELECT 1 AS n UNION ALL SELECT n+1 FROM d WHERE n<10)
@@ -139,4 +139,4 @@ SELECT n, NULLIF(n+n, n+2) FROM d;
 10 rows in set (0.00 sec)
 ```
 
-In this example, when `n` equals `2`, both `n+n` and `n+2` equal `4`, making both arguments the same and causing the function to return `NULL`.
+在这个示例中，当 `n` 等于 `2` 时，`n+n` 和 `n+2` 都等于 `4`，两个参数相同，导致函数返回 `NULL`。

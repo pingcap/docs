@@ -1,17 +1,17 @@
 ---
 title: Cost Model
-summary: Learn how the cost model used by TiDB works during physical optimization.
+summary: 了解 TiDB 在物理优化过程中使用的成本模型的工作原理。
 ---
 
 # Cost Model
 
-TiDB uses a cost model to choose an index and operator during [physical optimization](/sql-physical-optimization.md). The process is illustrated in the following diagram:
+TiDB 使用成本模型在 [物理优化](/sql-physical-optimization.md) 过程中选择索引和操作符。该过程在下图中进行了示意：
 
 ![CostModel](/media/cost-model.png)
 
-TiDB calculates the access cost of each index and the execution cost of each physical operator in plans (such as HashJoin and IndexJoin) and chooses the minimum cost plan.
+TiDB 计算计划中每个索引的访问成本和每个物理操作符（如 HashJoin 和 IndexJoin）的执行成本，并选择成本最低的计划。
 
-The following is a simplified example to explain how the cost model works. Suppose that there is a table `t`:
+以下是一个简化的示例，用于说明成本模型的工作原理。假设有一张表 `t`：
 
 ```sql
 mysql> SHOW CREATE TABLE t;
@@ -29,23 +29,23 @@ mysql> SHOW CREATE TABLE t;
 1 row in set (0.00 sec)
 ```
 
-When executing the `SELECT * FROM t WHERE b < 100 and c < 100` statement, suppose that TiDB estimates 20 rows meet the `b < 100` condition and 500 rows meet `c < 100`, and the length of `INT` type indexes is 8. Then TiDB calculates the cost for two indexes:
+在执行 `SELECT * FROM t WHERE b < 100 and c < 100` 语句时，假设 TiDB 估算满足 `b < 100` 条件的行数为 20 行，满足 `c < 100` 条件的行数为 500 行，且 `INT` 类型索引的长度为 8。然后，TiDB 计算两个索引的成本：
 
-+ The cost of index `b` = row count of `b < 100` \* length of index `b` = 20 * 8 = 160
-+ The cost of index `c` = row count of `c < 100` \* length of index `c` = 500 * 8 = 4000
++ 索引 `b` 的成本 = 行数 `b < 100` \* 索引 `b` 的长度 = 20 \* 8 = 160
++ 索引 `c` 的成本 = 行数 `c < 100` \* 索引 `c` 的长度 = 500 \* 8 = 4000
 
-Because the cost of index `b` is lower, TiDB chooses `b` as the index.
+由于索引 `b` 的成本较低，TiDB 选择 `b` 作为索引。
 
-The preceding example is simplified and only used to explain the basic principle. In real SQL executions, the TiDB cost model is more complex.
+上述示例为简化示意，仅用以说明基本原理。在实际 SQL 执行中，TiDB 的成本模型会更加复杂。
 
 ## Cost Model Version 2
 
-TiDB v6.2.0 introduces Cost Model Version 2, a new cost model.
+TiDB v6.2.0 引入了 Cost Model Version 2，这是一个新的成本模型。
 
-Cost Model Version 2 provides a more accurate regression calibration of the cost formula, adjusts some of the cost formulas, and is more accurate than the previous version of the cost formula.
+Cost Model Version 2 提供了更为准确的成本公式回归校准，调整了部分成本公式，优于之前版本的成本公式的准确性。
 
-To switch the version of cost model, you can set the [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-new-in-v620) variable.
+要切换成本模型的版本，可以设置 [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-new-in-v620) 变量。
 
 > **Note:**
 >
-> Switching the version of the cost model might cause changes to query plans.
+> 切换成本模型的版本可能会导致查询计划的变化。

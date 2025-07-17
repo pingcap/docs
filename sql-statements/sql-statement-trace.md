@@ -1,13 +1,13 @@
 ---
-title: TRACE | TiDB SQL Statement Reference
-summary: An overview of the usage of TRACE for the TiDB database.
+title: TRACE | TiDB SQL 语句参考
+summary: 关于在 TiDB 数据库中使用 TRACE 的概述。
 ---
 
 # TRACE
 
-The `TRACE` statement provides detailed information about query execution. It is intended to be viewed through a Graphical interface exposed by the TiDB server's status port.
+`TRACE` 语句提供了关于查询执行的详细信息。它旨在通过 TiDB 服务器的状态端口暴露的图形界面进行查看。
 
-## Synopsis
+## 概述
 
 ```ebnf+diagram
 TraceStmt ::=
@@ -17,13 +17,13 @@ TracableStmt ::=
     ( SelectStmt | DeleteFromStmt | UpdateStmt | InsertIntoStmt | ReplaceIntoStmt | UnionStmt | LoadDataStmt | BeginTransactionStmt | CommitStmt | RollbackStmt | SetStmt )
 ```
 
-| Format | Description                        |
-|--------|------------------------------------|
-| row    | Output in a tree format            |
-| json   | Structured output in JSON format   |
-| log    | Log based output                   |
+| 格式 | 描述                         |
+|--------|------------------------------|
+| row    | 以树状结构输出               |
+| json   | 以 JSON 格式的结构化输出      |
+| log    | 基于日志的输出               |
 
-## Examples
+## 示例
 
 ### Row
 
@@ -58,7 +58,7 @@ TRACE FORMAT='row' SELECT * FROM mysql.user;
 TRACE FORMAT='json' SELECT * FROM mysql.user;
 ```
 
-The JSON formatted trace can be pasted into the trace viewer, which is accessed via the TiDB status port:
+可以将 JSON 格式的追踪信息粘贴到追踪查看器中，访问方式为通过 TiDB 状态端口：
 
 ![TiDB Trace Viewer-1](/media/trace-paste.png)
 
@@ -92,10 +92,10 @@ TRACE FORMAT='log' SELECT * FROM mysql.user;
 14 rows in set (0.0008 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension to MySQL syntax.
+该语句是 TiDB 对 MySQL 语法的扩展。
 
-## See also
+## 相关链接
 
 * [EXPLAIN ANALYZE](/sql-statements/sql-statement-explain-analyze.md)

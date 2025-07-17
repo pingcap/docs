@@ -1,28 +1,28 @@
 ---
-title: Third-Party Tools Supported by TiDB
-summary: Learn about third-party tools supported by TiDB.
+title: TiDB 支持的第三方工具
+summary: 了解 TiDB 支持的第三方工具。
 ---
 
-# Third-Party Tools Supported by TiDB
+# TiDB 支持的第三方工具
 
 > **Note:**
 >
-> This document only lists common [third-party tools](https://en.wikipedia.org/wiki/Third-party_source) supported by TiDB. Some other third-party tools are not listed, not because they are not supported, but because PingCAP is not sure whether they use features that are incompatible with TiDB.
+> 本文档仅列出 TiDB 支持的常用 [第三方工具](https://en.wikipedia.org/wiki/Third-party_source)。其他一些第三方工具未列出，并非因为不支持，而是 PingCAP 不确定它们是否使用了与 TiDB 不兼容的功能。
 
-TiDB is [highly compatible with the MySQL protocol](/mysql-compatibility.md), so most of the MySQL drivers, ORM frameworks, and other tools that adapt to MySQL are compatible with TiDB. This document focuses on these tools and their support levels for TiDB.
+TiDB 与 [MySQL 协议具有高度兼容性](/mysql-compatibility.md)，因此大部分适配 MySQL 的驱动程序、ORM 框架以及其他工具都可以与 TiDB 兼容。本文档重点介绍这些工具及其对 TiDB 的支持程度。
 
-## Support Level
+## 支持级别
 
-PingCAP works with the community and provides the following support levels for third-party tools:
+PingCAP 与社区合作，为第三方工具提供以下支持级别：
 
-- **_Full_**: Indicates that TiDB is already compatible with most functionalities of the corresponding third-party tool, and maintains compatibility with its newer versions. PingCAP will periodically conduct compatibility tests with the latest version of the tool.
-- **_Compatible_**: Indicates that because the corresponding third-party tool is adapted to MySQL and TiDB is highly compatible with the MySQL protocol, so TiDB can use most features of the tool. However, PingCAP has not completed a full test on all features of the tool, which might lead to some unexpected behaviors.
+- **_Full_**：表示 TiDB 已经与对应第三方工具的大部分功能兼容，并会维护其新版本的兼容性。PingCAP 会定期对最新版本的工具进行兼容性测试。
+- **_Compatible_**：表示由于对应第三方工具是为 MySQL 设计，且 TiDB 与 MySQL 协议高度兼容，因此 TiDB 可以使用该工具的大部分功能。但 PingCAP 尚未对该工具的所有功能进行全面测试，可能会出现一些意料之外的行为。
 
 > **Note:**
 >
-> Unless specified, support for [Application retry and error handling](/develop/dev-guide-transaction-troubleshoot.md#application-retry-and-error-handling) is not included for **Driver** or **ORM frameworks**.
+> 除非特别说明，否则对 [Application retry and error handling](/develop/dev-guide-transaction-troubleshoot.md#application-retry-and-error-handling) 的支持不包括在 **Driver** 或 **ORM 框架** 中。
 
-If you encounter problems when connecting to TiDB using the tools listed in this document, please submit an [issue](https://github.com/pingcap/tidb/issues/new?assignees=&labels=type%2Fquestion&template=general-question.md) on GitHub with details to promote support on this tool.
+如果在使用本文档列出的工具连接 TiDB 时遇到问题，请在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues/new?assignees=&labels=type%2Fquestion&template=general-question.md)，提供详细信息以促进对该工具的支持。
 
 ## Driver
 
@@ -190,18 +190,18 @@ If you encounter problems when connecting to TiDB using the tools listed in this
 | [JetBrains DataGrip](https://www.jetbrains.com/datagrip/) | 2023.2.1              | Full          | [Connect to TiDB with JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)        |
 | [DBeaver](https://dbeaver.io/)                            | 23.0.3                | Full          | [Connect to TiDB with DBeaver](/develop/dev-guide-gui-dbeaver.md)                    |
 | [Visual Studio Code](https://code.visualstudio.com/)      | 1.72.0                | Full          | [Connect to TiDB with Visual Studio Code](/develop/dev-guide-gui-vscode-sqltools.md) |
-| [Navicat](https://www.navicat.com)                        | 17.1.6                | Full          | [Connect to TiDB with Navicat](/develop/dev-guide-gui-navicat.md) |
+| [Navicat](https://www.navicat.com)                        | 17.1.6                | Full          | [Connect to TiDB with Navicat](/develop/dev-guide-gui-navicat.md)                   |
 
 ## Need help?
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或 [提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或 [提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

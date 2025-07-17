@@ -1,11 +1,11 @@
 ---
 title: DATA_LOCK_WAITS
-summary: Learn the `DATA_LOCK_WAITS` information_schema table.
+summary: 了解 `DATA_LOCK_WAITS` information_schema 表。
 ---
 
 # DATA_LOCK_WAITS
 
-The `DATA_LOCK_WAITS` table shows the ongoing lock-wait information on all TiKV nodes in a cluster, including the lock-wait information of pessimistic transactions and the information of optimistic transactions being blocked.
+`DATA_LOCK_WAITS` 表显示集群中所有 TiKV 节点的进行中的锁等待信息，包括悲观事务的锁等待信息以及被阻塞的乐观事务信息。
 
 ```sql
 USE information_schema;
@@ -25,47 +25,47 @@ DESC data_lock_waits;
 +------------------------+---------------------+------+------+---------+-------+
 ```
 
-The meaning of each column field in the `DATA_LOCK_WAITS` table is as follows:
+`DATA_LOCK_WAITS` 表中每个字段的含义如下：
 
-* `KEY`: The key that is waiting for the lock and in the hexadecimal form.
-* `KEY_INFO`: The detailed information of `KEY`. See the [KEY_INFO](#key_info) section.
-* `TRX_ID`: The ID of the transaction that is waiting for the lock. This ID is also the `start_ts` of the transaction.
-* `CURRENT_HOLDING_TRX_ID`: The ID of the transaction that currently holds the lock. This ID is also the `start_ts` of the transaction.
-* `SQL_DIGEST`: The digest of the SQL statement that is currently blocked in the lock-waiting transaction.
-* `SQL_DIGEST_TEXT`: The normalized SQL statement (the SQL statement without arguments and formats) that is currently blocked in the lock-waiting transaction. It corresponds to `SQL_DIGEST`.
+* `KEY`：等待锁的键，十六进制形式。
+* `KEY_INFO`：`KEY` 的详细信息。详见 [KEY_INFO](#key_info) 部分。
+* `TRX_ID`：等待锁的事务的 ID。该 ID 也是事务的 `start_ts`。
+* `CURRENT_HOLDING_TRX_ID`：当前持有锁的事务的 ID。该 ID 也是事务的 `start_ts`。
+* `SQL_DIGEST`：当前阻塞在锁等待事务中的 SQL 语句的摘要。
+* `SQL_DIGEST_TEXT`：当前阻塞在锁等待事务中的标准化 SQL 语句（不包含参数和格式化），对应 `SQL_DIGEST`。
 
 > **Warning:**
 >
-> * Only the users with the [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process) privilege can query this table.
-> * Currently, the `SQL_DIGEST` and `SQL_DIGEST_TEXT` fields are `null` (which means unavailable) for optimistic transactions. As a workaround, to find out the SQL statement that causes the blocking, you can join this table with [`CLUSTER_TIDB_TRX`](/information-schema/information-schema-tidb-trx.md) to get all the SQL statements of the optimistic transaction.
-> * The information in the `DATA_LOCK_WAITS` table is obtained in real time from all TiKV nodes during the query. Currently, even if a query has the `WHERE` condition, the information collection is still performed on all TiKV nodes. If your cluster is large and the load is high, querying this table might cause potential risk of performance jitter. Therefore, use it according to your actual situation.
-> * Information from different TiKV nodes is NOT guaranteed to be snapshots of the same time.
-> * The information (SQL digest) in the `SQL_DIGEST` column is the hash value calculated from the normalized SQL statement. The information in the `SQL_DIGEST_TEXT` column is internally queried from statements summary tables, so it is possible that the corresponding statement cannot be found internally. For the detailed description of SQL digests and the statements summary tables, see [Statement Summary Tables](/statement-summary-tables.md).
+> * 只有具有 [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process) 权限的用户才能查询此表。
+> * 目前，乐观事务的 `SQL_DIGEST` 和 `SQL_DIGEST_TEXT` 字段为 `null`（表示不可用）。作为变通方案，为了查明引起阻塞的 SQL 语句，可以将此表与 [`CLUSTER_TIDB_TRX`](/information-schema/information-schema-tidb-trx.md) 连接，以获取所有乐观事务的 SQL 语句。
+> * 在查询过程中，`DATA_LOCK_WAITS` 表中的信息是实时从所有 TiKV 节点获取的。目前，即使查询带有 `WHERE` 条件，信息采集仍会在所有 TiKV 节点上进行。如果你的集群规模较大且负载较高，查询此表可能会带来潜在的性能抖动风险。因此，请根据实际情况谨慎使用。
+> * 不同 TiKV 节点中的信息不保证是同一时间的快照。
+> * `SQL_DIGEST` 列中的信息（SQL 摘要）是由标准化 SQL 语句计算得出的哈希值。`SQL_DIGEST_TEXT` 列中的信息是从语句摘要表内部查询得到的，因此可能无法在内部找到对应的语句。关于 SQL 摘要和语句摘要表的详细说明，参见 [Statement Summary Tables](/statement-summary-tables.md)。
 
 ## `KEY_INFO`
 
-The `KEY_INFO` column shows the detailed information of the `KEY` column. The information is shown in the JSON format. The description of each field is as follows:
+`KEY_INFO` 列显示 `KEY` 列的详细信息，信息以 JSON 格式展示。每个字段的说明如下：
 
-* `"db_id"`: The ID of the schema to which the key belongs.
-* `"db_name"`: The name of the schema to which the key belongs.
-* `"table_id"`: The ID of the table to which the key belongs.
-* `"table_name"`: The name of the table to which the key belongs.
-* `"partition_id"`: The ID of the partition where the key is located.
-* `"partition_name"`: The name of the partition where the key is located.
-* `"handle_type"`: The handle type of the row key (that is, the key that stores a row of data). The possible values ​​are as follows:
-    * `"int"`: The handle type is int, which means that the handle is the row ID.
-    * `"common"`: The handle type is not int64. This type is shown in the non-int primary key when clustered index is enabled.
-    * `"unknown"`: The handle type is currently not supported.
-* `"handle_value"`: The handle value.
-* `"index_id"`: The index ID to which the index key (the key that stores the index) belongs.
-* `"index_name"`: The name of the index to which the index key belongs.
-* `"index_values"`: The index value in the index key.
+* `"db_id"`：键所属的 schema 的 ID。
+* `"db_name"`：键所属的 schema 的名称。
+* `"table_id"`：键所属的表的 ID。
+* `"table_name"`：键所属的表的名称。
+* `"partition_id"`：键所在的分区的 ID。
+* `"partition_name"`：键所在的分区的名称。
+* `"handle_type"`：行键（存储一行数据的键）的句柄类型。可能的值如下：
+    * `"int"`：句柄类型为整数，表示句柄是行 ID。
+    * `"common"`：句柄类型非 int64。当启用聚簇索引且主键非整数时显示此类型。
+    * `"unknown"`：当前不支持此句柄类型。
+* `"handle_value"`：句柄值。
+* `"index_id"`：索引键（存储索引的键）所属的索引 ID。
+* `"index_name"`：索引键所属的索引名称。
+* `"index_values"`：索引键中的索引值。
 
-In the above fields, if the information of a field is not applicable or currently unavailable, the field is omitted in the query result. For example, the row key information does not contain `index_id`, `index_name`, and `index_values`; the index key does not contain `handle_type` and `handle_value`; non-partitioned tables do not display `partition_id` and `partition_name`; the key information in the deleted table cannot obtain schema information such as `table_name`, `db_id`, `db_name`, and `index_name`, and it is unable to distinguish whether the table is a partitioned table.
+在上述字段中，如果某个字段的信息不适用或当前不可用，查询结果中将省略该字段。例如，行键信息不包含 `index_id`、`index_name` 和 `index_values`；索引键不包含 `handle_type` 和 `handle_value`；非分区表不显示 `partition_id` 和 `partition_name`；已删除表中的键信息无法获取 schema 相关信息（如 `table_name`、`db_id`、`db_name` 和 `index_name`），也无法判断该表是否为分区表。
 
 > **Note:**
 >
-> If a key comes from a table with partitioning enabled, and the information of the schema to which the key belongs cannot be queried due to some reasons (for example, the table to which the key belongs has been deleted) during the query, the ID of the partition to which the key belongs might be appear in the `table_id` field. This is because TiDB encodes the keys of different partitions in the same way as it encodes the keys of several independent tables. Therefore, when the schema information is missing, TiDB cannot confirm whether the key belongs to an unpartitioned table or to one partition of a table.
+> 如果一个键来自启用了分区的表，并且在查询过程中由于某些原因（例如，键所属的表已被删除）无法查询到该键所属的 schema 信息，`table_id` 字段中可能会出现该键所属的分区的 ID。这是因为 TiDB 将不同分区的键编码方式与多个独立表的键编码方式相同。因此，当 schema 信息缺失时，TiDB 无法确认该键是属于未分区表还是某个分区。
 
 ## Example
 
@@ -84,7 +84,7 @@ CURRENT_HOLDING_TRX_ID: 426790590082449409
 1 row in set (0.01 sec)
 ```
 
-The above query result shows that the transaction of the ID `426790594290122753` is trying to obtain the pessimistic lock on the key `"7480000000000000355F728000000000000001"` when executing a statement that has digest `"38b03afa5debbdf0326a014dbe5012a62c51957f1982b3093e748460f8b00821"` and is in the form of ``update `t` set `v` = `v` + ? where `id` = ?``, but the lock on this key was held by the transaction of the ID `426790590082449409`.
+上述查询结果显示，ID 为 `426790594290122753` 的事务在执行一条摘要为 `38b03afa5debbdf0326a014dbe5012a62c51957f1982b3093e748460f8b00821` 的 ``update `t` set `v` = `v` + ? where `id` = ?`` 语句时，试图对键 `"7480000000000000355F728000000000000001"` 获取悲观锁，但该键的锁被 ID 为 `426790590082449409` 的事务持有。
 
 ## See also
 

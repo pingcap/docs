@@ -1,13 +1,13 @@
 ---
-title: SHOW TABLE STATUS | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW TABLE STATUS for the TiDB database.
+title: SHOW TABLE STATUS | TiDB SQL 语句参考
+summary: 关于 TiDB 数据库中使用 SHOW TABLE STATUS 的概述。
 ---
 
 # SHOW TABLE STATUS
 
-This statement shows various statistics about tables in TiDB. If the statistics appear out of date, it is recommended to run [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md).
+此语句显示 TiDB 中表的各种统计信息。如果统计信息看起来过时，建议运行 [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)。
 
-## Synopsis
+## 概要
 
 ```ebnf+diagram
 ShowTableStatusStmt ::=
@@ -18,7 +18,7 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -76,11 +76,11 @@ Max_data_length: 0
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `SHOW TABLE STATUS` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中的 `SHOW TABLE STATUS` 语句与 MySQL 完全兼容。如果你发现任何兼容性差异，[请报告一个 bug](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 相关链接
 
 * [SHOW TABLES](/sql-statements/sql-statement-show-tables.md)
 * [CREATE TABLE](/sql-statements/sql-statement-create-table.md)

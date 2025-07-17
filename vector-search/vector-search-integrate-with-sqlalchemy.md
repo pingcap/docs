@@ -1,17 +1,17 @@
 ---
-title: Integrate TiDB Vector Search with SQLAlchemy
-summary: Learn how to integrate TiDB Vector Search with SQLAlchemy to store embeddings and perform semantic searches.
+title: 将 TiDB Vector Search 与 SQLAlchemy 集成
+summary: 学习如何将 TiDB Vector Search 与 SQLAlchemy 集成，用于存储嵌入向量和执行语义搜索。
 ---
 
-# Integrate TiDB Vector Search with SQLAlchemy
+# 将 TiDB Vector Search 与 SQLAlchemy 集成
 
-This tutorial walks you through how to use [SQLAlchemy](https://www.sqlalchemy.org/) to interact with [TiDB Vector Search](/vector-search/vector-search-overview.md), store embeddings, and perform vector search queries.
+本教程将引导你如何使用 [SQLAlchemy](https://www.sqlalchemy.org/) 与 [TiDB Vector Search](/vector-search/vector-search-overview.md) 交互，存储嵌入向量，并执行向量搜索查询。
 
 <CustomContent platform="tidb">
 
 > **Warning:**
 >
-> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> 该向量搜索功能处于实验阶段。不建议在生产环境中使用。此功能可能会在不提前通知的情况下进行更改。如果你发现 bug，可以在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues)。
 
 </CustomContent>
 
@@ -19,54 +19,54 @@ This tutorial walks you through how to use [SQLAlchemy](https://www.sqlalchemy.o
 
 > **Note:**
 >
-> The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> 该向量搜索功能处于测试版，可能会在不提前通知的情况下进行更改。如果你发现 bug，可以在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues)。
 
 </CustomContent>
 
 > **Note:**
 >
-> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> 该向量搜索功能在 TiDB Self-Managed、[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) 上均可使用。对于 TiDB Self-Managed 和 TiDB Cloud Dedicated，TiDB 版本必须为 v8.4.0 及以上（建议使用 v8.5.0 及以上版本）。
 
-## Prerequisites
+## 前提条件
 
-To complete this tutorial, you need:
+完成本教程，你需要：
 
-- [Python 3.8 or higher](https://www.python.org/downloads/) installed.
-- [Git](https://git-scm.com/downloads) installed.
-- A TiDB cluster.
+- 安装 [Python 3.8 或更高版本](https://www.python.org/downloads/)
+- 安装 [Git](https://git-scm.com/downloads)
+- 一个 TiDB 集群
 
 <CustomContent platform="tidb">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**如果你还没有 TiDB 集群，可以按照以下步骤创建：**
 
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
-- Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- 参考 [部署本地测试 TiDB 集群](/quick-start-with-tidb.md#deploy-a-local-test-cluster) 或 [部署生产环境 TiDB 集群](/production-deployment-using-tiup.md) 来创建本地集群。
+- 参考 [创建 {{{ .starter }}} 集群](/develop/dev-guide-build-cluster-in-cloud.md) 来创建你自己的 TiDB Cloud 集群。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**如果你还没有 TiDB 集群，可以按照以下步骤创建：**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster of v8.4.0 or a later version.
+- （推荐）参考 [创建 {{{ .starter }}} 集群](/develop/dev-guide-build-cluster-in-cloud.md) 来创建你自己的 TiDB Cloud 集群。
+- 参考 [部署本地测试 TiDB 集群](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) 或 [部署生产环境 TiDB 集群](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) 来创建版本为 v8.4.0 或更高版本的本地集群。
 
 </CustomContent>
 
-## Run the sample app
+## 运行示例应用
 
-You can quickly learn about how to integrate TiDB Vector Search with SQLAlchemy by following the steps below.
+你可以通过以下步骤快速了解如何将 TiDB Vector Search 与 SQLAlchemy 集成。
 
-### Step 1. Clone the repository
+### 第 1 步：克隆仓库
 
-Clone the `tidb-vector-python` repository to your local machine:
+将 `tidb-vector-python` 仓库克隆到你的本地机器：
 
 ```shell
 git clone https://github.com/pingcap/tidb-vector-python.git
 ```
 
-### Step 2. Create a virtual environment
+### 第 2 步：创建虚拟环境
 
-Create a virtual environment for your project:
+为你的项目创建一个虚拟环境：
 
 ```bash
 cd tidb-vector-python/examples/orm-sqlalchemy-quickstart
@@ -74,53 +74,53 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-### Step 3. Install the required dependencies
+### 第 3 步：安装所需依赖
 
-Install the required dependencies for the demo project:
+安装示例项目所需的依赖：
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Alternatively, you can install the following packages for your project:
+或者，你也可以单独安装以下包：
 
 ```bash
 pip install pymysql python-dotenv sqlalchemy tidb-vector
 ```
 
-### Step 4. Configure the environment variables
+### 第 4 步：配置环境变量
 
-Configure the environment variables depending on the TiDB deployment option you've selected.
+根据你选择的 TiDB 部署方式，配置环境变量。
 
 <SimpleTab>
 <div label="{{{ .starter }}}">
 
-For a {{{ .starter }}} cluster, take the following steps to obtain the cluster connection string and configure environment variables:
+对于 {{{ .starter }}} 集群，按照以下步骤获取集群连接字符串并配置环境变量：
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. 进入 [**Clusters**](https://tidbcloud.com/console/clusters) 页面，然后点击目标集群的名称，进入其概览页面。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2. 点击右上角的 **Connect**，弹出连接对话框。
 
-3. Ensure the configurations in the connection dialog match your environment.
+3. 确认连接对话框中的配置与环境一致。
 
-    - **Connection Type** is set to `Public`.
-    - **Branch** is set to `main`.
-    - **Connect With** is set to `SQLAlchemy`.
-    - **Operating System** matches your environment.
-
-    > **Tip:**
-    >
-    > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
-
-4. Click the **PyMySQL** tab and copy the connection string.
+    - **Connection Type** 设置为 `Public`。
+    - **Branch** 设置为 `main`。
+    - **Connect With** 设置为 `SQLAlchemy`。
+    - **Operating System** 与你的环境匹配。
 
     > **Tip:**
     >
-    > If you have not set a password yet, click **Generate Password** to generate a random password.
+    > 如果你的程序在 Windows Subsystem for Linux (WSL) 中运行，切换到对应的 Linux 发行版。
 
-5. In the root directory of your Python project, create a `.env` file and paste the connection string into it.
+4. 点击 **PyMySQL** 标签页，复制连接字符串。
 
-    The following is an example for macOS:
+    > **Tip:**
+    >
+    > 如果还没有设置密码，可以点击 **Generate Password** 生成随机密码。
+
+5. 在你的 Python 项目的根目录下，创建 `.env` 文件，并将连接字符串粘贴进去。
+
+    下面是 macOS 的示例：
 
     ```dotenv
     TIDB_DATABASE_URL="mysql+pymysql://<prefix>.root:<password>@gateway01.<region>.prod.aws.tidbcloud.com:4000/test?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
@@ -129,34 +129,34 @@ For a {{{ .starter }}} cluster, take the following steps to obtain the cluster c
 </div>
 <div label="TiDB Self-Managed">
 
-For a TiDB Self-Managed cluster, create a `.env` file in the root directory of your Python project. Copy the following content into the `.env` file, and modify the environment variable values according to the connection parameters of your TiDB cluster:
+对于 TiDB Self-Managed 集群，在你的 Python 项目的根目录下创建 `.env` 文件。将以下内容复制到 `.env` 文件中，并根据你的 TiDB 集群连接参数修改环境变量值：
 
 ```dotenv
 TIDB_DATABASE_URL="mysql+pymysql://<USER>:<PASSWORD>@<HOST>:<PORT>/<DATABASE>"
-# For example: TIDB_DATABASE_URL="mysql+pymysql://root@127.0.0.1:4000/test"
+# 例如：TIDB_DATABASE_URL="mysql+pymysql://root@127.0.0.1:4000/test"
 ```
 
-If you are running TiDB on your local machine, `<HOST>` is `127.0.0.1` by default. The initial `<PASSWORD>` is empty, so if you are starting the cluster for the first time, you can omit this field.
+如果你在本地运行 TiDB，`<HOST>` 默认为 `127.0.0.1`。初次启动集群时，`<PASSWORD>` 默认为空，可以省略。
 
-The following are descriptions for each parameter:
+以下是各参数的说明：
 
-- `<USER>`: The username to connect to the TiDB cluster.
-- `<PASSWORD>`: The password to connect to the TiDB cluster.
-- `<HOST>`: The host of the TiDB cluster.
-- `<PORT>`: The port of the TiDB cluster.
-- `<DATABASE>`: The name of the database you want to connect to.
+- `<USER>`：连接 TiDB 集群的用户名。
+- `<PASSWORD>`：连接 TiDB 集群的密码。
+- `<HOST>`：TiDB 集群的主机地址。
+- `<PORT>`：TiDB 集群的端口。
+- `<DATABASE>`：你要连接的数据库名称。
 
 </div>
 
 </SimpleTab>
 
-### Step 5. Run the demo
+### 第 5 步：运行示例
 
 ```bash
 python sqlalchemy-quickstart.py
 ```
 
-Example output:
+示例输出：
 
 ```text
 Get 3-nearest neighbor documents:
@@ -173,13 +173,13 @@ Get documents within a certain distance:
     document: dog
 ```
 
-## Sample code snippets
+## 示例代码片段
 
-You can refer to the following sample code snippets to develop your application.
+你可以参考以下示例代码片段，开发你的应用。
 
-### Create vector tables
+### 创建向量表
 
-#### Connect to TiDB cluster
+#### 连接到 TiDB 集群
 
 ```python
 import os
@@ -195,9 +195,9 @@ tidb_connection_string = os.environ['TIDB_DATABASE_URL']
 engine = create_engine(tidb_connection_string)
 ```
 
-#### Define a vector column
+#### 定义向量列
 
-Create a table with a column named `embedding` that stores a 3-dimensional vector.
+创建一个表，包含名为 `embedding` 的列，用于存储 3 维向量。
 
 ```python
 Base = declarative_base()
@@ -209,7 +209,7 @@ class Document(Base):
     embedding = Column(VectorType(3))
 ```
 
-### Store documents with embeddings
+### 存储带有嵌入向量的文档
 
 ```python
 with Session(engine) as session:
@@ -219,9 +219,9 @@ with Session(engine) as session:
    session.commit()
 ```
 
-### Search the nearest neighbor documents
+### 搜索最近邻文档
 
-Search for the top-3 documents that are semantically closest to the query vector `[1, 2, 3]` based on the cosine distance function.
+根据余弦距离函数，搜索与查询向量 `[1, 2, 3]` 语义最接近的前 3 个文档。
 
 ```python
 with Session(engine) as session:
@@ -231,9 +231,9 @@ with Session(engine) as session:
    ).order_by(distance).limit(3).all()
 ```
 
-### Search documents within a certain distance
+### 搜索距离在一定范围内的文档
 
-Search for documents whose cosine distance from the query vector `[1, 2, 3]` is less than 0.2.
+搜索与查询向量 `[1, 2, 3]` 的余弦距离小于 0.2 的文档。
 
 ```python
 with Session(engine) as session:
@@ -243,7 +243,7 @@ with Session(engine) as session:
     ).filter(distance < 0.2).order_by(distance).limit(3).all()
 ```
 
-## See also
+## 相关链接
 
 - [Vector Data Types](/vector-search/vector-search-data-types.md)
 - [Vector Search Index](/vector-search/vector-search-index.md)

@@ -1,13 +1,13 @@
 ---
-title: DROP COLUMN | TiDB SQL Statement Reference
-summary: An overview of the usage of DROP COLUMN for the TiDB database.
+title: DROP COLUMN | TiDB SQL 语句参考
+summary: 关于在 TiDB 数据库中使用 DROP COLUMN 的概述。
 ---
 
 # DROP COLUMN
 
-This statement drops a column from a specified table. `DROP COLUMN` is online in TiDB, which means that it does not block read or write operations.
+此语句用于从指定的表中删除列。TiDB 中的 `DROP COLUMN` 支持在线操作，意味着它不会阻塞读写操作。
 
-## Synopsis
+## 概要
 
 ```ebnf+diagram
 AlterTableStmt
@@ -20,7 +20,7 @@ ColumnName
          ::= Identifier ( '.' Identifier ( '.' Identifier )? )?
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, col1 INT NOT NULL, col2 INT NOT NULL);
@@ -72,11 +72,11 @@ mysql> SELECT * FROM t1;
 5 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-* Dropping primary key columns or columns covered by the composite index is not supported.
+* 不支持删除主键列或被复合索引覆盖的列。
 
-## See also
+## 相关链接
 
 * [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
 * [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)

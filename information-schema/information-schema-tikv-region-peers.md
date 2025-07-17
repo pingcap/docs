@@ -1,22 +1,22 @@
 ---
 title: TIKV_REGION_PEERS
-summary: Learn the `TIKV_REGION_PEERS` INFORMATION_SCHEMA table.
+summary: 了解 `TIKV_REGION_PEERS` INFORMATION_SCHEMA 表。
 ---
 
 # TIKV_REGION_PEERS
 
-The `TIKV_REGION_PEERS` table shows detailed information of a single Region node in TiKV, such as whether it is a learner or leader.
+`TIKV_REGION_PEERS` 表显示 TiKV 中单个 Region 节点的详细信息，例如它是否是 learner 或 leader。
 
 > **Note:**
 >
-> This table is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> 该表在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC TIKV_REGION_PEERS;
 ```
 
-The output is as follows:
+输出如下：
 
 ```sql
 +--------------+-------------+------+------+---------+-------+
@@ -33,7 +33,7 @@ The output is as follows:
 7 rows in set (0.01 sec)
 ```
 
-For example, you can query the specific TiKV addresses for the top 3 Regions with the maximum value of `WRITTEN_BYTES` using the following SQL statement:
+例如，你可以使用以下 SQL 语句查询 `WRITTEN_BYTES` 取值最大的前 3 个 Region 的具体 TiKV 地址：
 
 ```sql
 SELECT
@@ -50,7 +50,7 @@ WHERE
   AND peer.store_id = tikv.store_id;
 ```
 
-Fields in the `TIKV_REGION_PEERS` table are described as follows:
+`TIKV_REGION_PEERS` 表中的字段说明如下：
 
 * REGION_ID: The Region ID.
 * PEER_ID: The ID of the Region peer.
@@ -58,7 +58,7 @@ Fields in the `TIKV_REGION_PEERS` table are described as follows:
 * IS_LEARNER: Whether the peer is learner.
 * IS_LEADER: Whether the peer is leader.
 * STATUS: The statuses of a peer:
-    * PENDING: Temporarily unavailable.
-    * DOWN: Offline and converted. This peer no longer provides service.
-    * NORMAL: Running normally.
-* DOWN_SECONDS: The duration of being offline, in seconds.
+    * PENDING: 暂时不可用。
+    * DOWN: 离线并已转换。该 peer 不再提供服务。
+    * NORMAL: 正常运行。
+* DOWN_SECONDS: 离线时长，单位为秒。

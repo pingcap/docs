@@ -1,25 +1,25 @@
 ---
 title: Locking Functions
-summary: Learn about user-level locking functions in TiDB.
+summary: 了解 TiDB 中的用户级锁定函数。
 ---
 
 # Locking Functions
 
-TiDB supports most of the user-level [locking functions](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html) available in MySQL 8.0.
+TiDB 支持大部分在 MySQL 8.0 中可用的 [locking functions](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html)。
 
-## Supported functions
+## 支持的函数
 
 | Name                                                                                                                 | Description                                                           |
 |:---------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------|
-| [`GET_LOCK(lockName, timeout)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_get-lock)    | Acquires an advisory lock. The `lockName` parameter must be NO longer than 64 characters. Waits maximum `timeout` seconds before timing out and returns a failure.         |
-| [`IS_FREE_LOCK(lockName)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_is-free-lock) | Checks if a lock is free. |
-| [`IS_USED_LOCK(lockName)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_is-used-lock) | Checks if a lock is in use. If true, it returns the corresponding connection ID. |
-| [`RELEASE_ALL_LOCKS()`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_release-all-locks)   | Releases all locks held by the current session.                        |
-| [`RELEASE_LOCK(lockName)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_release-lock)     | Releases a previously acquired lock. The `lockName` parameter must be NO longer than 64 characters. |
+| [`GET_LOCK(lockName, timeout)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_get-lock)    | 获取一个建议锁。`lockName` 参数的长度不能超过 64 个字符。等待最多 `timeout` 秒后超时并返回失败。         |
+| [`IS_FREE_LOCK(lockName)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_is-free-lock) | 检查锁是否为空闲。 |
+| [`IS_USED_LOCK(lockName)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_is-used-lock) | 检查锁是否被使用。如果为 true，则返回对应的连接 ID。 |
+| [`RELEASE_ALL_LOCKS()`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_release-all-locks)   | 释放当前会话持有的所有锁。                        |
+| [`RELEASE_LOCK(lockName)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_release-lock)     | 释放之前获取的锁。`lockName` 参数的长度不能超过 64 个字符。 |
 
-## MySQL compatibility
+## MySQL 兼容性
 
-* The minimum timeout permitted by TiDB is 1 second, and the maximum timeout is 1 hour (3600 seconds). This differs from MySQL, where both 0 second and unlimited timeouts (`timeout=-1`) are permitted. TiDB will automatically convert out-of-range values to the nearest permitted value and convert `timeout=-1` to 3600 seconds.
-* TiDB does not automatically detect deadlocks caused by user-level locks. Deadlocked sessions will time out after a maximum of 1 hour, but can also be manually resolved by using [`KILL`](/sql-statements/sql-statement-kill.md) on one of the affected sessions. You can also prevent deadlocks by always acquiring user-level locks in the same order.
-* Locks take effect on all TiDB servers in the cluster. This differs from MySQL Cluster and Group Replication where locks are local to a single server.
-* `IS_USED_LOCK()` returns `1` if it is called from another session and is unable to return the ID of the process that is holding the lock.
+* TiDB 允许的最小超时时间为 1 秒，最大超时时间为 1 小时（3600 秒）。这与 MySQL 不同，MySQL 允许超时时间为 0 秒或无限（`timeout=-1`）。TiDB 会自动将超出范围的值转换为最接近的允许值，并将 `timeout=-1` 转换为 3600 秒。
+* TiDB 不会自动检测由用户级锁引起的死锁。死锁会在最多 1 小时后超时，但也可以通过对受影响的会话使用 [`KILL`](/sql-statements/sql-statement-kill.md) 来手动解决。你还可以通过始终以相同顺序获取用户级锁来防止死锁。
+* 锁在集群中的所有 TiDB 服务器上生效。这与 MySQL Cluster 和 Group Replication 不同，后者的锁是局部于单个服务器的。
+* `IS_USED_LOCK()` 如果在另一个会话中调用，则返回 `1`，但无法返回持有锁的进程的 ID。

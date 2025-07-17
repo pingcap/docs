@@ -1,15 +1,15 @@
 ---
-title: START TRANSACTION | TiDB SQL Statement Reference
-summary: An overview of the usage of START TRANSACTION for the TiDB database.
+title: START TRANSACTION | TiDB SQL 语句参考
+summary: 关于在 TiDB 数据库中使用 START TRANSACTION 的概述。
 ---
 
 # START TRANSACTION
 
-This statement starts a new transaction inside of TiDB. It is similar to the statement `BEGIN`.
+此语句在 TiDB 中启动一个新的事务。它类似于 `BEGIN` 语句。
 
-In the absence of a `START TRANSACTION` statement, every statement will by default autocommit in its own transaction. This behavior ensures MySQL compatibility.
+在没有使用 `START TRANSACTION` 语句的情况下，每个语句默认会在自己的事务中自动提交。这一行为确保了与 MySQL 的兼容性。
 
-## Synopsis
+## 概要
 
 **BeginTransactionStmt:**
 
@@ -22,7 +22,7 @@ AsOfClause ::=
     ( 'AS' 'OF' 'TIMESTAMP' Expression)
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> CREATE TABLE t1 (a int NOT NULL PRIMARY KEY);
@@ -38,13 +38,13 @@ mysql> COMMIT;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-* `START TRANSACTION` immediately starts a transaction inside TiDB. This differs from MySQL, where `START TRANSACTION` lazily creates a transaction. But `START TRANSACTION` in TiDB is equivalent to MySQL's `START TRANSACTION WITH CONSISTENT SNAPSHOT`.
+* `START TRANSACTION` 立即在 TiDB 中启动一个事务。这与 MySQL 不同，MySQL 中的 `START TRANSACTION` 是惰性创建事务的。但在 TiDB 中，`START TRANSACTION` 等同于 MySQL 的 `START TRANSACTION WITH CONSISTENT SNAPSHOT`。
 
-* The statement `START TRANSACTION READ ONLY` is parsed for compatibility with MySQL, but still allows write operations.
+* 语句 `START TRANSACTION READ ONLY` 被解析以实现与 MySQL 的兼容，但仍然允许写操作。
 
-## See also
+## 相关链接
 
 * [COMMIT](/sql-statements/sql-statement-commit.md)
 * [ROLLBACK](/sql-statements/sql-statement-rollback.md)

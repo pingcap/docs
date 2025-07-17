@@ -1,11 +1,11 @@
 ---
-title: Vector Search Overview
-summary: Learn about Vector Search in TiDB. This feature provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video.
+title: Vector Search 概览
+summary: 了解 TiDB 中的 Vector Search。该功能提供了一种先进的搜索解决方案，用于在各种数据类型（包括文档、图片、音频和视频）中执行语义相似性搜索。
 ---
 
-# Vector Search Overview
+# Vector Search 概览
 
-Vector search offers a powerful solution for semantic similarity searches across diverse data types, such as documents, images, audio, and video. It allows developers to leverage their MySQL expertise to build scalable applications enriched with generative AI capabilities, simplifying the integration of advanced search functionality.
+Vector search 为跨多种数据类型（如文档、图片、音频和视频）提供了一种强大的语义相似性搜索解决方案。它允许开发者利用他们的 MySQL 专业知识，构建具有生成式 AI 功能的可扩展应用，简化了高级搜索功能的集成。
 
 <CustomContent platform="tidb">
 
@@ -25,64 +25,64 @@ Vector search offers a powerful solution for semantic similarity searches across
 
 > **Note:**
 >
-> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). 对于 TiDB Self-Managed 和 TiDB Cloud Dedicated，TiDB 版本必须为 v8.4.0 或更高（建议 v8.5.0 或更高）。
 
-## Concepts
+## 概念
 
-Vector search is a search method that prioritizes the meaning of your data to deliver relevant results.
+Vector search 是一种以数据的语义为优先的搜索方法，旨在提供相关性更高的结果。
 
-Unlike traditional full-text search, which relies on exact keyword matching and word frequency, vector search converts various data types (such as text, images, or audio) into high-dimensional vectors and queries based on the similarity between these vectors. This search method captures the semantic meaning and contextual information of the data, leading to a more precise understanding of user intent.
+不同于依赖精确关键词匹配和词频的传统全文搜索，vector search 将各种数据类型（如文本、图片或音频）转换为高维向量，并基于这些向量之间的相似性进行查询。这种搜索方式捕捉了数据的语义含义和上下文信息，从而实现对用户意图的更精准理解。
 
-Even when the search terms do not exactly match the content in the database, vector search can still provide results that align with the user's intent by analyzing the semantics of the data.
+即使搜索词与数据库中的内容不完全匹配，vector search 仍能通过分析数据的语义，提供符合用户意图的结果。
 
-For example, a full-text search for "a swimming animal" only returns results containing these exact keywords. In contrast, vector search can return results for other swimming animals, such as fish or ducks, even if these results do not contain the exact keywords.
+例如，全文搜索“a swimming animal” 只会返回包含这些关键词的结果。而 vector search 可以返回其他会游泳的动物，比如鱼或鸭子，即使这些结果不包含完全相同的关键词。
 
 ### Vector embedding
 
-A vector embedding, also known as an embedding, is a sequence of numbers that represents real-world objects in a high-dimensional space. It captures the meaning and context of unstructured data, such as documents, images, audio, and videos.
+Vector embedding，也称为 embedding，是一组用以表示现实世界对象的数字序列，存在于高维空间中。它捕捉非结构化数据（如文档、图片、音频和视频）的含义和上下文。
 
-Vector embeddings are essential in machine learning and serve as the foundation for semantic similarity searches.
+Vector embedding 在机器学习中至关重要，是实现语义相似性搜索的基础。
 
-TiDB introduces [Vector data types](/vector-search/vector-search-data-types.md) and [Vector search index](/vector-search/vector-search-index.md) designed to optimize the storage and retrieval of vector embeddings, enhancing their use in AI applications. You can store vector embeddings in TiDB and perform vector search queries to find the most relevant data using these data types.
+TiDB 引入了 [Vector data types](/vector-search/vector-search-data-types.md) 和 [Vector search index](/vector-search/vector-search-index.md)，旨在优化向量 embedding 的存储与检索，增强其在 AI 应用中的使用效果。你可以在 TiDB 中存储 vector embedding，并通过这些数据类型执行 vector search 查询，以找到最相关的数据。
 
 ### Embedding model
 
-Embedding models are algorithms that transform data into [vector embeddings](#vector-embedding).
+Embedding model 是将数据转换为 [vector embedding](#vector-embedding) 的算法。
 
-Choosing an appropriate embedding model is crucial for ensuring the accuracy and relevance of semantic search results. For unstructured text data, you can find top-performing text embedding models on the [Massive Text Embedding Benchmark (MTEB) Leaderboard](https://huggingface.co/spaces/mteb/leaderboard).
+选择合适的 embedding model 对确保语义搜索结果的准确性和相关性至关重要。对于非结构化文本数据，你可以在 [Massive Text Embedding Benchmark (MTEB) Leaderboard](https://huggingface.co/spaces/mteb/leaderboard) 上找到表现优异的文本 embedding 模型。
 
-To learn how to generate vector embeddings for your specific data types, refer to integration tutorials or examples of embedding models.
+若要了解如何为你的特定数据类型生成 vector embedding，请参考集成教程或 embedding 模型的示例。
 
-## How vector search works
+## Vector search 的工作原理
 
-After converting raw data into vector embeddings and storing them in TiDB, your application can execute vector search queries to find the data most semantically or contextually relevant to a user's query.
+将原始数据转换为 vector embedding 并存储在 TiDB 后，你的应用可以执行 vector search 查询，以找到与用户查询在语义或上下文上最相关的数据。
 
-TiDB vector search identifies the top-k nearest neighbor (KNN) vectors by using a [distance function](/vector-search/vector-search-functions-and-operators.md) to calculate the distance between the given vector and vectors stored in the database. The vectors closest to the given vector in the query represent the most similar data in meaning.
+TiDB 的 vector search 通过使用 [distance function](/vector-search/vector-search-functions-and-operators.md) 计算给定向量与数据库中存储的向量之间的距离，从而识别前 k 个最近邻（KNN）向量。距离最接近的向量代表在意义上最相似的数据。
 
 ![The Schematic TiDB Vector Search](/media/vector-search/embedding-search.png)
 
-As a relational database with integrated vector search capabilities, TiDB enables you to store data and their corresponding vector representations (that is, vector embeddings) together in one database. You can choose any of the following ways for storage:
+作为具有集成 vector search 功能的关系型数据库，TiDB 允许你将数据及其对应的向量表示（即 vector embedding）存储在同一数据库中。你可以选择以下存储方式：
 
-- Store data and their corresponding vector representations in different columns of the same table.
-- Store data and their corresponding vector representation in different tables. In this way, you need to use `JOIN` queries to combine the tables when retrieving data.
+- 将数据及其对应的 vector 表示存储在同一表的不同列中。
+- 将数据及其对应的 vector 表示存储在不同的表中。在这种情况下，检索数据时需要使用 `JOIN` 查询将表连接起来。
 
-## Use cases
+## 应用场景
 
 ### Retrieval-Augmented Generation (RAG)
 
-Retrieval-Augmented Generation (RAG) is an architecture designed to optimize the output of Large Language Models (LLMs). By using vector search, RAG applications can store vector embeddings in the database and retrieve relevant documents as additional context when the LLM generates responses, thereby improving the quality and relevance of the answers.
+Retrieval-Augmented Generation（RAG）是一种旨在优化大型语言模型（LLMs）输出的架构。通过使用 vector search，RAG 应用可以在数据库中存储 vector embedding，并在 LLM 生成响应时检索相关文档作为额外上下文，从而提升答案的质量和相关性。
 
 ### Semantic search
 
-Semantic search is a search technology that returns results based on the meaning of a query, rather than simply matching keywords. It interprets the meaning across different languages and various types of data (such as text, images, and audio) using embeddings. Vector search algorithms then use these embeddings to find the most relevant data that satisfies the user's query.
+语义搜索是一种基于查询含义返回结果的搜索技术，而非仅仅匹配关键词。它利用 embedding 解释不同语言和各种数据类型（如文本、图片和音频）中的含义。然后，vector search 算法使用这些 embedding 来找到最符合用户查询的相关数据。
 
 ### Recommendation engine
 
-A recommendation engine is a system that proactively suggests content, products, or services that are relevant and personalized to users. It accomplishes this by creating embeddings that represent user behavior and preferences. These embeddings help the system identify similar items that other users have interacted with or shown interest in. This increases the likelihood that the recommendations will be both relevant and appealing to the user.
+推荐引擎是一种主动向用户推荐内容、产品或服务的系统。它通过创建代表用户行为和偏好的 embedding，帮助系统识别其他用户互动或感兴趣的类似项目。这增加了推荐的相关性和吸引力。
 
-## See also
+## 相关链接
 
-To get started with TiDB Vector Search, see the following documents:
+若要开始使用 TiDB Vector Search，请参考以下文档：
 
 - [Get started with vector search using Python](/vector-search/vector-search-get-started-using-python.md)
 - [Get started with vector search using SQL](/vector-search/vector-search-get-started-using-sql.md)

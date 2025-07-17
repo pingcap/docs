@@ -1,63 +1,63 @@
 ---
 title: Wrong Index Solution
-summary: Learn how to solve the wrong index issue.
+summary: 学习如何解决错误索引问题。
 ---
 
 # Wrong Index Solution
 
-If you find that the execution speed of some query does not reach the expectation, the optimizer might choose the wrong index to run the query.
+如果你发现某些查询的执行速度未达到预期，优化器可能选择了错误的索引来执行该查询。
 
-There are multiple reasons why the optimizer might choose an unexpected index:
+导致优化器选择意外索引的原因可能有多种：
 
-- **Outdated statistics**: the optimizer relies on statistics to estimate query costs. If the statistics are outdated, the optimizer might make suboptimal choices.
-- **Statistics mismatch**: even if statistics are current, they might not accurately reflect the data distribution, leading to incorrect cost estimations.
-- **Incorrect cost calculation**: the optimizer might miscalculate the cost of using an index due to complex query structures or data distribution.
-- **Inappropriate engine selection**: in some cases, the optimizer might select a storage engine that is not optimal for the query.
-- **Function pushdown limitations**: certain functions or operations might not be pushed down to storage engines, potentially affecting query performance.
+- **Outdated statistics**：优化器依赖统计信息来估算查询成本。如果统计信息过时，优化器可能会做出次优的选择。
+- **Statistics mismatch**：即使统计信息是最新的，它们可能也不能准确反映数据分布，从而导致错误的成本估算。
+- **Incorrect cost calculation**：由于复杂的查询结构或数据分布，优化器可能会误算使用索引的成本。
+- **Inappropriate engine selection**：在某些情况下，优化器可能会选择不适合该查询的存储引擎。
+- **Function pushdown limitations**：某些函数或操作可能无法被下推到存储引擎，可能会影响查询性能。
 
 ## Statistics health
 
-You can first view the [health state of tables](/statistics.md#health-state-of-tables) in the statistics, and then solve this issue according to the different health states.
+你可以先查看 [statistics 中的 [health state of tables](/statistics.md#health-state-of-tables)]，然后根据不同的健康状态解决此问题。
 
 ### Low health state
 
-The low health state means TiDB has not performed the`ANALYZE` statement for a long time. You can update the statistics by running the `ANALYZE` command. After the update, if the optimizer still uses the wrong index, refer to the next section.
+低健康状态意味着 TiDB 长时间未执行 `ANALYZE` 语句。你可以通过运行 `ANALYZE` 命令来更新统计信息。更新后，如果优化器仍然使用错误的索引，请参考下一节。
 
 ### Near 100% health state
 
-The near 100% health state suggests that the `ANALYZE` statement is just completed or was completed a short time ago. In this case, the wrong index issue might be related to TiDB's estimation logic for the number of rows.
+接近 100% 健康状态表明 `ANALYZE` 语句刚刚完成或不久前完成。在这种情况下，错误索引问题可能与 TiDB 对行数的估算逻辑有关。
 
-For equivalence queries, the cause might be [Count-Min Sketch](/statistics.md#count-min-sketch). You can check whether Count-Min Sketch is the cause and take corresponding solutions.
+对于等价查询，原因可能是 [Count-Min Sketch](/statistics.md#count-min-sketch)。你可以检查 Count-Min Sketch 是否是原因，并采取相应的解决方案。
 
-If the cause above does not apply to your problem, you can force-select indexes by using the `USE_INDEX` or `use index` optimizer hint (see [USE_INDEX](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-) for details). Also, you can change the query behavior by using [SQL Plan Management](/sql-plan-management.md) in a non-intrusive way.
+如果上述原因不适用你的问题，你可以通过使用 `USE_INDEX` 或 `use index` 优化器提示强制选择索引（详见 [USE_INDEX](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-)）。此外，你还可以通过非侵入式的方式，使用 [SQL Plan Management](/sql-plan-management.md) 改变查询行为。
 
 ### Other situations
 
-Apart from the aforementioned situations, the wrong index issue might also be caused by data updates which renders all the indexes no longer applicable. In such cases, you need to perform analysis on the conditions and data distribution to see whether new indexes can speed up the query. If so, you can add new indexes by running the [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) command.
+除了上述情况外，错误索引问题还可能由数据更新引起，这会导致所有索引不再适用。在这种情况下，你需要分析条件和数据分布，判断是否可以通过新增索引来加快查询速度。如果可以，可以通过运行 [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) 命令添加新索引。
 
 ## Statistics mismatch
 
-When data distribution is highly skewed, the statistics might not accurately reflect the actual data. In such cases, try configuring the options of the [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) statement. It might help improve the accuracy of statistics and better match the index.
+当数据分布高度偏斜时，统计信息可能无法准确反映实际数据。在这种情况下，可以尝试配置 [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) 语句的参数，可能有助于提高统计信息的准确性，更好地匹配索引。
 
-For example, suppose you have an `orders` table with an index on the `customer_id` column, and more than 50% of the orders share the same `customer_id`. In this case, the statistics might not represent the data distribution well, affecting query performance.
+例如，假设你有一个 `orders` 表，并在 `customer_id` 列上建立了索引，而超过 50% 的订单具有相同的 `customer_id`。在这种情况下，统计信息可能无法很好地反映数据分布，从而影响查询性能。
 
 ## Cost information
 
-To view detailed information on execution costs, you can execute the [`EXPLAIN`](/sql-statements/sql-statement-explain.md) and [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) statements with the `FORMAT=verbose` option. According to the information, you can see cost differences between different execution paths.
+要查看详细的执行成本信息，可以执行 [`EXPLAIN`](/sql-statements/sql-statement-explain.md) 和 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) 语句，并加上 `FORMAT=verbose` 选项。根据这些信息，你可以看到不同执行路径之间的成本差异。
 
 ## Engine selection
 
-By default, TiDB chooses TiKV or TiFlash for table access based on cost estimation. You can experiment with different engines for the same query by applying engine isolation.
+默认情况下，TiDB 会根据成本估算选择 TiKV 或 TiFlash 作为表的访问引擎。你可以通过应用引擎隔离，尝试不同的引擎以测试相同查询的性能。
 
-For more information, see [Engine isolation](/tiflash/use-tidb-to-read-tiflash.md#engine-isolation).
+更多信息请参见 [Engine isolation](/tiflash/use-tidb-to-read-tiflash.md#engine-isolation)。
 
 ## Function pushdown
 
-To enhance query performance, TiDB can push down certain functions to the TiKV or TiFlash storage engine for execution. However, some functions do not support pushdown, which might limit available execution plans and potentially affect query performance.
+为了提升查询性能，TiDB 可以将某些函数下推到 TiKV 或 TiFlash 存储引擎中执行。然而，部分函数不支持下推，这可能限制可用的执行计划，并潜在影响查询性能。
 
-For expressions that support pushdown, see [TiKV supported pushdown calculations](/functions-and-operators/expressions-pushed-down.md) and [TiFlash supported pushdown calculations](/tiflash/tiflash-supported-pushdown-calculations.md). 
+支持下推的表达式请参见 [TiKV supported pushdown calculations](/functions-and-operators/expressions-pushed-down.md) 和 [TiFlash supported pushdown calculations](/tiflash/tiflash-supported-pushdown-calculations.md)。
 
-Note that you can also disable the pushdown of specific expressions. For more information, see [Blocklist of optimization rules and expression pushdown](/blocklist-control-plan.md).
+注意，你也可以禁用特定表达式的下推。更多信息请参见 [Blocklist of optimization rules and expression pushdown](/blocklist-control-plan.md)。
 
 ## See also
 

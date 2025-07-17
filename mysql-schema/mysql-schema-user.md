@@ -1,19 +1,19 @@
 ---
 title: mysql.user
-summary: Learn about the `user` table in the `mysql` schema.
+summary: 了解 `mysql` 模式中的 `user` 表。
 ---
 
 # `mysql.user`
 
-The `mysql.user` table provides information about user accounts and their privileges.
+`mysql.user` 表提供关于用户账户及其权限的信息。
 
-To view the structure of `mysql.user`, use the following SQL statement:
+若要查看 `mysql.user` 的结构，可以使用以下 SQL 语句：
 
 ```sql
 DESC mysql.user;
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```
 +------------------------+-------------------+------+------+-------------------+-------+
@@ -64,47 +64,47 @@ The output is as follows:
 | Password_last_changed  | timestamp         | YES  |      | CURRENT_TIMESTAMP |       |
 | Password_lifetime      | smallint unsigned | YES  |      | NULL              |       |
 +------------------------+-------------------+------+------+-------------------+-------+
-44 rows in set (0.00 sec)
+44 行，耗时 0.00 秒
 ```
 
-The `mysql.user` table contains several fields that can be categorized into three groups:
+`mysql.user` 表包含多个字段，可以归为以下三类：
 
 <CustomContent platform="tidb">
 
 * Scope:
-    * `Host`: specifies the hostname of a TiDB account.
-    * `User`: specifies the username of a TiDB account.
+    * `Host`: 指定 TiDB 账户的主机名。
+    * `User`: 指定 TiDB 账户的用户名。
 * Privilege:
 
-    The fields ending with `_priv` or `_Priv` define the permissions granted to a user account. For example, `Select_priv` means that the user has global `Select` privilege. For more information, see [Privileges required for TiDB operations](/privilege-management.md#privileges-required-for-tidb-operations).
+    以 `_priv` 或 `_Priv` 结尾的字段定义了授予用户账户的权限。例如，`Select_priv` 表示用户具有全局的 `Select` 权限。更多信息请参见 [Privileges required for TiDB operations](/privilege-management.md#privileges-required-for-tidb-operations)。
 
 * Security:
-    * `authentication_string` and `plugin`: `authentication_string` stores the credentials for the user account. The credentials are interpreted based on the authentication plugin specified in the `plugin` field.
-    * `Account_locked`: indicates whether the user account is locked.
-    * `Password_reuse_history` and `Password_reuse_time`: used for [Password reuse policy](/password-management.md#password-reuse-policy).
-    * `User_attributes`: provides information about user comments and user attributes.
-    * `Token_issuer`: used for the [`tidb_auth_token`](/security-compatibility-with-mysql.md#tidb_auth_token) authentication plugin.
-    * `Password_expired`, `Password_last_changed`, and `Password_lifetime`: used for [Password expiration policy](/password-management.md#password-expiration-policy).
+    * `authentication_string` 和 `plugin`: `authentication_string` 存储用户账户的凭据。凭据的解释依据 `plugin` 字段中指定的认证插件。
+    * `Account_locked`: 表示用户账户是否被锁定。
+    * `Password_reuse_history` 和 `Password_reuse_time`: 用于 [Password reuse policy](/password-management.md#password-reuse-policy)。
+    * `User_attributes`: 提供关于用户评论和用户属性的信息。
+    * `Token_issuer`: 用于 [`tidb_auth_token`](/security-compatibility-with-mysql.md#tidb_auth_token) 认证插件。
+    * `Password_expired`、`Password_last_changed` 和 `Password_lifetime`: 用于 [Password expiration policy](/password-management.md#password-expiration-policy)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
 * Scope:
-    * `Host`: specifies the hostname of a TiDB account.
-    * `User`: specifies the username of a TiDB account.
+    * `Host`: 指定 TiDB 账户的主机名。
+    * `User`: 指定 TiDB 账户的用户名。
 * Privilege:
 
-    The fields ending with `_priv` or `_Priv` define the permissions granted to a user account. For example, `Select_priv` means that the user has global `Select` privilege. For more information, see [Privileges required for TiDB operations](https://docs.pingcap.com/tidb/stable/privilege-management#privileges-required-for-tidb-operations).
+    以 `_priv` 或 `_Priv` 结尾的字段定义了授予用户账户的权限。例如，`Select_priv` 表示用户具有全局的 `Select` 权限。更多信息请参见 [Privileges required for TiDB operations](https://docs.pingcap.com/tidb/stable/privilege-management#privileges-required-for-tidb-operations)。
 
 * Security:
-    * `authentication_string` and `plugin`: `authentication_string` stores the credentials for the user account. The credentials are interpreted based on the authentication plugin specified in the `plugin` field.
-    * `Account_locked`: indicates whether the user account is locked.
-    * `Password_reuse_history` and `Password_reuse_time`: used for [Password reuse policy](https://docs.pingcap.com/tidb/stable/password-management#password-reuse-policy).
-    * `User_attributes`: provides information about user comments and user attributes.
-    * `Token_issuer`: used for the [`tidb_auth_token`](https://docs.pingcap.com/tidb/stable/security-compatibility-with-mysql#tidb_auth_token) authentication plugin.
-    * `Password_expired`, `Password_last_changed`, and `Password_lifetime`: used for [Password expiration policy](https://docs.pingcap.com/tidb/stable/password-management#password-expiration-policy).
+    * `authentication_string` 和 `plugin`: `authentication_string` 存储用户账户的凭据。凭据的解释依据 `plugin` 字段中指定的认证插件。
+    * `Account_locked`: 表示用户账户是否被锁定。
+    * `Password_reuse_history` 和 `Password_reuse_time`: 用于 [Password reuse policy](https://docs.pingcap.com/tidb/stable/password-management#password-reuse-policy)。
+    * `User_attributes`: 提供关于用户评论和用户属性的信息。
+    * `Token_issuer`: 用于 [`tidb_auth_token`](https://docs.pingcap.com/tidb/stable/security-compatibility-with-mysql#tidb_auth_token) 认证插件。
+    * `Password_expired`、`Password_last_changed` 和 `Password_lifetime`: 用于 [Password expiration policy](https://docs.pingcap.com/tidb/stable/password-management#password-expiration-policy)。
 
 </CustomContent>
 
-Although most of the fields in the TiDB `mysql.user` table also exist in the MySQL `mysql.user` table, the `Token_issuer` field is specific to TiDB.
+虽然 TiDB `mysql.user` 表中的大部分字段也存在于 MySQL `mysql.user` 表中，但 `Token_issuer` 字段是 TiDB 特有的。

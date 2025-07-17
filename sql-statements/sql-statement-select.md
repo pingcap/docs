@@ -1,13 +1,13 @@
 ---
-title: SELECT | TiDB SQL Statement Reference
-summary: An overview of the usage of SELECT for the TiDB database.
+title: SELECT | TiDB SQL 语句参考
+summary: 关于在 TiDB 数据库中使用 SELECT 的概述。
 ---
 
 # SELECT
 
-The `SELECT` statement is used to read data from TiDB.
+`SELECT` 语句用于从 TiDB 读取数据。
 
-## Synopsis
+## 概述
 
 ```ebnf+diagram
 SelectStmt ::=
@@ -82,33 +82,33 @@ TableSample ::=
     'TABLESAMPLE' 'REGIONS' '(' ')'
 ```
 
-## Description of the syntax elements
+## 语法元素说明
 
-|Syntax Element|Description|
+| 语法元素 | 描述 |
 |:--------------------- | :-------------------------------------------------- |
-|`TableOptimizerHints`| This is the hint to control the behavior of TiDB's optimizer. For more information, refer to [Optimizer Hints](/optimizer-hints.md). |
-|`ALL`, `DISTINCT`, `DISTINCTROW` | The `ALL`, `DISTINCT`/`DISTINCTROW` modifiers specify whether duplicate rows should be returned. ALL (the default) specifies that all matching rows should be returned.|
-|`HIGH_PRIORITY` | `HIGH_PRIORITY` gives the current statement higher priority than other statements. |
-|`SQL_CALC_FOUND_ROWS`| TiDB does not support this feature, and will return an error unless [`tidb_enable_noop_functions=1`](/system-variables.md#tidb_enable_noop_functions-new-in-v40) is set. |
-|`SQL_CACHE`, `SQL_NO_CACHE` | `SQL_CACHE` and `SQL_NO_CACHE` are used to control whether to cache the request results to the `BlockCache` of TiKV (RocksDB). For a one-time query on a large amount of data, such as the `count(*)` query, it is recommended to fill in `SQL_NO_CACHE` to avoid flushing the hot user data in `BlockCache`. |
-|`STRAIGHT_JOIN`| `STRAIGHT_JOIN` forces the optimizer to do a union query in the order of the tables used in the `FROM` clause. When the optimizer chooses a join order that is not good, you can use this syntax to speed up the execution of the query. |
-|`select_expr` | Each `select_expr` indicates a column to retrieve. including the column names and expressions. `\*` represents all the columns.|
-|`FROM table_references` | The `FROM table_references` clause indicates the table (such as `select * from t;`), or tables (such as `select * from t1 join t2;`) or even 0 tables (such as `select 1+1 from dual;` which is equivalent to `select 1+1;`) from which to retrieve rows.|
-|`WHERE where_condition` | The `WHERE` clause, if given, indicates the condition or conditions that rows must satisfy to be selected. The result contains only the data that meets the condition(s).|
-|`GROUP BY` | The `GROUP BY` statement is used to group the result-set.|
-|`HAVING where_condition` | The `HAVING` clause and the `WHERE` clause are both used to filter the results. The `HAVING` clause filters the results of `GROUP BY`, while the `WHERE` clause filter the results before aggregation. |
-|`ORDER BY` | The `ORDER BY` clause is used to sort the data in ascending or descending order, based on columns, expressions or items in the `select_expr` list.|
-|`LIMIT` | The `LIMIT` clause can be used to constrain the number of rows. `LIMIT` takes one or two numeric arguments. With one argument, the argument specifies the maximum number of rows to return, the first row to return is the first row of the table by default; with two arguments, the first argument specifies the offset of the first row to return, and the second specifies the maximum number of rows to return. TiDB also supports the `FETCH FIRST/NEXT n ROW/ROWS ONLY` syntax, which has the same effect as `LIMIT n`. You can omit `n` in this syntax and its effect is the same as `LIMIT 1`. |
-|`Window window_definition`| This is the syntax for window function, which is usually used to do some analytical computation. For more information, refer to [Window Function](/functions-and-operators/window-functions.md). |
-| `FOR UPDATE`  | The `SELECT FOR UPDATE` clause locks all the data in the result sets to detect concurrent updates from other transactions. Data that match the query conditions but do not exist in the result sets are not read-locked, such as the row data written by other transactions after the current transaction is started. When TiDB uses the [Optimistic Transaction Mode](/optimistic-transaction.md), the transaction conflicts are not detected in the statement execution phase. Therefore, the current transaction does not block other transactions from executing `UPDATE`, `DELETE` or `SELECT FOR UPDATE` like other databases such as PostgreSQL. In the committing phase, the rows read by `SELECT FOR UPDATE` are committed in two phases, which means they can also join the conflict detection. If write conflicts occur, the commit fails for all transactions that include the `SELECT FOR UPDATE` clause. If no conflict is detected, the commit succeeds. And a new version is generated for the locked rows, so that write conflicts can be detected when other uncommitted transactions are being committed later. When TiDB uses the [Pessimistic Transaction Mode](/pessimistic-transaction.md), the behavior is basically the same as other databases. Refer to [Differences from MySQL InnoDB](/pessimistic-transaction.md#differences-from-mysql-innodb) to see the details. TiDB supports the `NOWAIT` modifier for `FOR UPDATE`. See [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md#behaviors) for details. |
-|`LOCK IN SHARE MODE` | To guarantee compatibility, TiDB parses these three modifiers, but will ignore them. |
-| `TABLESAMPLE` | To get a sample of rows from the table. |
+| `TableOptimizerHints` | 这是控制 TiDB 优化器行为的提示。更多信息请参考 [Optimizer Hints](/optimizer-hints.md)。 |
+| `ALL`, `DISTINCT`, `DISTINCTROW` | `ALL`（默认）、`DISTINCT`/`DISTINCTROW` 修饰符指定是否返回重复行。`ALL` 表示返回所有匹配的行。 |
+| `HIGH_PRIORITY` | `HIGH_PRIORITY` 赋予当前语句比其他语句更高的优先级。 |
+| `SQL_CALC_FOUND_ROWS` | TiDB 不支持此功能，除非设置 [`tidb_enable_noop_functions=1`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)，否则会返回错误。 |
+| `SQL_CACHE`, `SQL_NO_CACHE` | `SQL_CACHE` 和 `SQL_NO_CACHE` 用于控制是否将请求结果缓存到 TiKV（RocksDB）的 BlockCache 中。对于一次性查询大量数据（如 `count(*)` 查询），建议填写 `SQL_NO_CACHE`，以避免冲刷热点用户数据到 BlockCache。 |
+| `STRAIGHT_JOIN` | `STRAIGHT_JOIN` 强制优化器按照 `FROM` 子句中表的顺序进行联合查询。当优化器选择的连接顺序不佳时，可以使用此语法加快查询执行速度。 |
+| `select_expr` | 每个 `select_expr` 表示要检索的列，包括列名和表达式。`*` 表示所有列。 |
+| `FROM table_references` | `FROM table_references` 子句指示要从中检索行的表（如 `select * from t;`）、表的组合（如 `select * from t1 join t2;`）或甚至没有表（如 `select 1+1 from dual;`，等同于 `select 1+1;`）。 |
+| `WHERE where_condition` | `WHERE` 子句（如果存在）指示行必须满足的条件。结果只包含满足条件的行。 |
+| `GROUP BY` | `GROUP BY` 语句用于对结果集进行分组。 |
+| `HAVING where_condition` | `HAVING` 子句和 `WHERE` 子句都用于过滤结果。`HAVING` 过滤 `GROUP BY` 的结果，而 `WHERE` 在聚合前过滤数据。 |
+| `ORDER BY` | `ORDER BY` 子句用于根据列、表达式或 `select_expr` 列表中的项对数据进行升序或降序排序。 |
+| `LIMIT` | `LIMIT` 子句用于限制返回的行数。`LIMIT` 接受一个或两个数字参数。一个参数时，表示最大返回行数，默认从第一行开始；两个参数时，第一个表示偏移量，第二表示最大返回行数。TiDB 还支持 `FETCH FIRST/NEXT n ROW/ROWS ONLY` 语法，效果与 `LIMIT n` 相同。可以省略 `n`，效果等同于 `LIMIT 1`。 |
+| `Window window_definition` | 这是窗口函数的语法，通常用于进行一些分析性计算。更多信息请参考 [Window Function](/functions-and-operators/window-functions.md)。 |
+| `FOR UPDATE` | `SELECT FOR UPDATE` 子句锁定结果集中的所有数据，以检测其他事务的并发更新。匹配查询条件但不存在于结果集中的数据（如其他事务在当前事务开始后写入的行）不会被读锁定。当 TiDB 使用 [Optimistic Transaction Mode](/optimistic-transaction.md) 时，事务冲突不会在语句执行阶段检测，因此当前事务不会像其他数据库（如 PostgreSQL）那样阻塞执行 `UPDATE`、`DELETE` 或 `SELECT FOR UPDATE`。在提交阶段，`SELECT FOR UPDATE` 所读行会在两阶段中提交，也就是说它们也会加入冲突检测。如果发生写冲突，所有包含 `SELECT FOR UPDATE` 的事务提交失败；如果没有冲突，提交成功。被锁定的行会生成新版本，以便在其他未提交事务提交时检测写冲突。当 TiDB 使用 [Pessimistic Transaction Mode](/pessimistic-transaction.md) 时，行为基本与其他数据库相同。详情请参见 [Differences from MySQL InnoDB](/pessimistic-transaction.md#differences-from-mysql-innodb)。TiDB 支持 `NOWAIT` 修饰符，详见 [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md#behaviors)。 |
+| `LOCK IN SHARE MODE` | 为了保证兼容性，TiDB 解析这三个修饰符，但会忽略它们。 |
+| `TABLESAMPLE` | 用于从表中抽取样本行。 |
 
-> **Note:**
+> **注意：**
 >
-> Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control-ru-groups.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority (`HIGH_PRIORITY`) will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control-ru-groups.md) to manage resource usage for different SQL statements.
+> 从 v6.6.0 版本开始，TiDB 支持 [Resource Control](/tidb-resource-control-ru-groups.md)。你可以利用此功能在不同资源组中以不同优先级执行 SQL 语句。通过为这些资源组配置合适的配额和优先级，可以获得更好的调度控制。当启用资源控制时，语句优先级（`HIGH_PRIORITY`）将不再生效。建议使用 [Resource Control](/tidb-resource-control-ru-groups.md) 来管理不同 SQL 语句的资源使用。
 
-## Examples
+## 示例
 
 ### SELECT
 
@@ -151,24 +151,24 @@ mysql> SELECT AVG(s_quantity), COUNT(s_quantity) FROM stock;
 1 row in set (0.52 sec)
 ```
 
-The above example uses data generated with `tiup bench tpcc prepare`. The first query shows the use of `TABLESAMPLE`.
+以上示例使用 `tiup bench tpcc prepare` 生成的数据。第一个查询展示了 `TABLESAMPLE` 的用法。
 
 ### SELECT ... INTO OUTFILE
 
-The `SELECT ... INTO OUTFILE` statement is used to write the result of a query to a file.
+`SELECT ... INTO OUTFILE` 语句用于将查询结果写入文件。
 
-> **Note:**
+> **注意：**
 >
-> - This statement is only applicable to TiDB Self-Managed and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
-> - This statement does not support writing query results to any [external storages](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages) such as Amazon S3 or GCS.
+> - 该语句仅适用于 TiDB 自托管版本，不支持 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)。
+> - 该语句不支持将查询结果写入任何 [外部存储](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)，如 Amazon S3 或 GCS。
 
-In the statement, you can specify the format of the output file by using the following clauses:
+在语句中，可以通过以下子句指定输出文件的格式：
 
-- `FIELDS TERMINATED BY`: specifies the field delimiter in the file. For example, you can specify it as `','` to output comma-separated values (CSV) or `'\t'` to output tab-separated values (TSV).
-- `FIELDS ENCLOSED BY`: specifies the enclosing character that wraps around each field in the file.
-- `LINES TERMINATED BY`: specifies the line terminator in the file, if you want to end a line with a certain character.
+- `FIELDS TERMINATED BY`：指定字段分隔符。例如，可以设置为 `','` 输出逗号分隔值（CSV），或 `'\t'` 输出制表符分隔值（TSV）。
+- `FIELDS ENCLOSED BY`：指定包裹每个字段的字符。
+- `LINES TERMINATED BY`：指定行终止符，如果希望以特定字符结束一行。
 
-Assume that there is a table `t` with three columns as follows:
+假设有一个表 `t`，包含三列，定义如下：
 
 ```sql
 mysql> CREATE TABLE t (a INT, b VARCHAR(10), c DECIMAL(10,2));
@@ -178,16 +178,16 @@ mysql> INSERT INTO t VALUES (1, 'a', 1.1), (2, 'b', 2.2), (3, 'c', 3.3);
 Query OK, 3 rows affected (0.01 sec)
 ```
 
-The following examples show how to use the `SELECT ... INTO OUTFILE` statement to write the query result to a file.
+以下示例展示如何使用 `SELECT ... INTO OUTFILE` 将查询结果写入文件。
 
-**Example 1:**
+**示例 1：**
 
 ```sql
 mysql> SELECT * FROM t INTO OUTFILE '/tmp/tmp_file1';
 Query OK, 3 rows affected (0.00 sec)
 ```
 
-In this example, you can find the query result in `/tmp/tmp_file1` as follows:
+此时，查询结果存放在 `/tmp/tmp_file1`，内容如下：
 
 ```
 1       a       1.10
@@ -195,14 +195,14 @@ In this example, you can find the query result in `/tmp/tmp_file1` as follows:
 3       c       3.30
 ```
 
-**Example 2:**
+**示例 2：**
 
 ```sql
 mysql> SELECT * FROM t INTO OUTFILE '/tmp/tmp_file2' FIELDS TERMINATED BY ',' ENCLOSED BY '"';
 Query OK, 3 rows affected (0.00 sec)
 ```
 
-In this example, you can find the query result in `/tmp/tmp_file2` as follows:
+此时，查询结果存放在 `/tmp/tmp_file2`，内容如下：
 
 ```
 "1","a","1.10"
@@ -210,7 +210,7 @@ In this example, you can find the query result in `/tmp/tmp_file2` as follows:
 "3","c","3.30"
 ```
 
-**Example 3:**
+**示例 3：**
 
 ```sql
 mysql> SELECT * FROM t INTO OUTFILE '/tmp/tmp_file3'
@@ -218,7 +218,7 @@ mysql> SELECT * FROM t INTO OUTFILE '/tmp/tmp_file3'
 Query OK, 3 rows affected (0.00 sec)
 ```
 
-In this example, you can find the query result in `/tmp/tmp_file3` as follows:
+此时，查询结果存放在 `/tmp/tmp_file3`，内容如下：
 
 ```
 '1','a','1.10'<<<
@@ -226,14 +226,14 @@ In this example, you can find the query result in `/tmp/tmp_file3` as follows:
 '3','c','3.30'<<<
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-- The syntax `SELECT ... INTO @variable` is not supported.
-- The syntax `SELECT ... INTO DUMPFILE` is not supported.
-- The syntax `SELECT .. GROUP BY expr` does not imply `GROUP BY expr ORDER BY expr` as it does in MySQL 5.7. TiDB instead matches the behavior of MySQL 8.0 and does not imply a default order.
-- The syntax `SELECT ... TABLESAMPLE ...` is a TiDB extension designed for compatibility with other database systems and the [ISO/IEC 9075-2](https://standards.iso.org/iso-iec/9075/-2/ed-6/en/) standard, but currently it is not supported by MySQL.
+- 不支持 `SELECT ... INTO @variable` 语法。
+- 不支持 `SELECT ... INTO DUMPFILE` 语法。
+- `SELECT .. GROUP BY expr` 不会像 MySQL 5.7 那样隐含 `GROUP BY expr ORDER BY expr`，而是遵循 MySQL 8.0 的行为，不隐含默认排序。
+- `SELECT ... TABLESAMPLE ...` 是 TiDB 的扩展，旨在兼容其他数据库系统和 [ISO/IEC 9075-2](https://standards.iso.org/iso-iec/9075/-2/ed-6/en/) 标准，但目前不被 MySQL 支持。
 
-## See also
+## 相关链接
 
 * [INSERT](/sql-statements/sql-statement-insert.md)
 * [DELETE](/sql-statements/sql-statement-delete.md)

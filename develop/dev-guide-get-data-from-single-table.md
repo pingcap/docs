@@ -1,60 +1,60 @@
 ---
-title: Query Data from a Single Table
-summary: This document describes how to query data from a single table in a database.
+title: 查询单个表的数据
+summary: 本文档介绍如何在数据库中查询单个表的数据。
 ---
 
 <!-- markdownlint-disable MD029 -->
 
-# Query Data from a Single Table
+# 查询单个表的数据
 
-This document describes how to use SQL and various programming languages to query data from a single table in a database.
+本文档介绍如何使用 SQL 以及各种编程语言从数据库中的单个表查询数据。
 
-## Before you begin
+## 在开始之前
 
-The following content takes the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application as an example to show how to query data from a single table in TiDB.
+以下内容以 [Bookshop](/develop/dev-guide-bookshop-schema-design.md) 应用为例，展示如何在 TiDB 中查询单个表的数据。
 
-Before querying data, make sure that you have completed the following steps:
+在查询数据之前，请确保已完成以下步骤：
 
 <CustomContent platform="tidb">
 
-1. Build a TiDB cluster (using [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md) or [TiUP](/production-deployment-using-tiup.md) is recommended).
+1. 建立 TiDB 集群（建议使用 [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md) 或 [TiUP](/production-deployment-using-tiup.md)）。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-1. Build a TiDB cluster using [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md).
+1. 使用 [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md) 建立 TiDB 集群。
 
 </CustomContent>
 
-2. [Import table schema and sample data of the Bookshop application](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data).
+2. [导入 Bookshop 应用的表结构和示例数据](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data)。
 
 <CustomContent platform="tidb">
 
-3. [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md).
+3. [连接到 TiDB](/develop/dev-guide-connect-to-tidb.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-3. [Connect to TiDB](/tidb-cloud/connect-to-tidb-cluster.md).
+3. [连接到 TiDB 集群](/tidb-cloud/connect-to-tidb-cluster.md)。
 
 </CustomContent>
 
-## Execute a simple query
+## 执行简单查询
 
-In the database of the Bookshop application, the `authors` table stores the basic information of authors. You can use the `SELECT ... FROM ...` statement to query data from the database.
+在 Bookshop 应用的数据库中，`authors` 表存储作者的基本信息。你可以使用 `SELECT ... FROM ...` 语句从数据库中查询数据。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-Execute the following SQL statement in a MySQL client:
+在 MySQL 客户端中执行以下 SQL 语句：
 
 ```sql
 SELECT id, name FROM authors;
 ```
 
-The output is as follows:
+输出如下：
 
 ```
 +------------+--------------------------+
@@ -78,12 +78,12 @@ The output is as follows:
 </div>
 <div label="Java" value="java">
 
-In Java, to store the basic information of authors, you can declare a class `Author`. You should choose appropriate Java data types according to the [Data types](/data-type-overview.md) and [Value range](/data-type-numeric.md) in the database. For example:
+在 Java 中，为了存储作者的基本信息，你可以声明一个 `Author` 类。应根据数据库中的 [Data types](/data-type-overview.md) 和 [Value range](/data-type-numeric.md) 选择合适的 Java 数据类型。例如：
 
-- Use a variable of type `Int` to store data of type `int`.
-- Use a variable of type `Long` to store data of type `bigint`.
-- Use a variable of type `Short` to store data of type `tinyint`.
-- Use a variable of type `String` to store data of type `varchar`.
+- 使用 `Int` 类型变量存储 `int` 类型数据。
+- 使用 `Long` 类型变量存储 `bigint` 类型数据。
+- 使用 `Short` 类型变量存储 `tinyint` 类型数据。
+- 使用 `String` 类型变量存储 `varchar` 类型数据。
 
 ```java
 public class Author {
@@ -95,14 +95,14 @@ public class Author {
 
     public Author() {}
 
-     // Skip the getters and setters.
+     // 省略 getter 和 setter 方法。
 }
 ```
 
 ```java
 public class AuthorDAO {
 
-    // Omit initialization of instance variables.
+    // 省略实例变量的初始化。
 
     public List<Author> getAuthors() throws SQLException {
         List<Author> authors = new ArrayList<>();
@@ -124,32 +124,32 @@ public class AuthorDAO {
 
 <CustomContent platform="tidb">
 
-- After [connecting to TiDB using the JDBC driver](/develop/dev-guide-connect-to-tidb.md#jdbc), you can create a `Statement` object with `conn.createStatus()`.
+- 在 [使用 JDBC 驱动连接到 TiDB](/develop/dev-guide-connect-to-tidb.md#jdbc) 后，可以通过 `conn.createStatement()` 创建 `Statement` 对象。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- After [connecting to TiDB using the JDBC driver](/develop/dev-guide-choose-driver-or-orm.md#java-drivers), you can create a `Statement` object with `conn.createStatus()`.
+- 在 [使用 JDBC 驱动连接到 TiDB](/develop/dev-guide-choose-driver-or-orm.md#java-drivers) 后，可以通过 `conn.createStatement()` 创建 `Statement` 对象。
 
 </CustomContent>
 
-- Then call `stmt.executeQuery("query_sql")` to initiate a database query request to TiDB.
-- The query results are stored in a `ResultSet` object. By traversing `ResultSet`, the returned results can be mapped to the `Author` object.
+- 然后调用 `stmt.executeQuery("query_sql")` 来发起对 TiDB 的数据库查询请求。
+- 查询结果存储在 `ResultSet` 对象中。通过遍历 `ResultSet`，可以将返回的结果映射到 `Author` 对象中。
 
 </div>
 </SimpleTab>
 
-## Filter results
+## 过滤查询结果
 
-To filter query results, you can use the `WHERE` statement.
+你可以使用 `WHERE` 语句对查询结果进行过滤。
 
-For example, the following command queries authors who were born in 1998 among all authors:
+例如，以下命令查询所有出生于 1998 年的作者：
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-Add filter conditions in the `WHERE` statement:
+在 `WHERE` 语句中添加过滤条件：
 
 ```sql
 SELECT * FROM authors WHERE birth_year = 1998;
@@ -158,11 +158,11 @@ SELECT * FROM authors WHERE birth_year = 1998;
 </div>
 <div label="Java" value="java">
 
-In Java, you can use the same SQL to handle data query requests with dynamic parameters.
+在 Java 中，你可以用相同的 SQL 来处理带有动态参数的数据查询请求。
 
-This can be done by concatenating parameters into a SQL statement. However, this method poses a potential [SQL Injection](https://en.wikipedia.org/wiki/SQL_injection) risk to the security of the application.
+这可以通过将参数拼接到 SQL 语句中实现，但这种方式存在潜在的 [SQL 注入](https://en.wikipedia.org/wiki/SQL_injection) 风险，影响应用的安全性。
 
-To deal with such queries, use a [Prepared statement](/develop/dev-guide-prepared-statement.md) instead of a normal statement.
+为避免此类风险，应使用 [Prepared statement](/develop/dev-guide-prepared-statement.md) 代替普通的 Statement。
 
 ```java
 public List<Author> getAuthorsByBirthYear(Short birthYear) throws SQLException {
@@ -187,11 +187,11 @@ public List<Author> getAuthorsByBirthYear(Short birthYear) throws SQLException {
 </div>
 </SimpleTab>
 
-## Sort results
+## 排序查询结果
 
-To sort query results, you can use the `ORDER BY` statement.
+你可以使用 `ORDER BY` 语句对查询结果进行排序。
 
-For example, the following SQL statement is to get a list of the youngest authors by sorting the `authors` table in descending order (`DESC`) according to the `birth_year` column.
+例如，以下 SQL 语句根据 `birth_year` 列以降序（`DESC`）排序，获取最年轻的作者列表：
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
@@ -232,7 +232,7 @@ public List<Author> getAuthorsSortByBirthYear() throws SQLException {
 </div>
 </SimpleTab>
 
-The result is as follows:
+查询结果如下：
 
 ```
 +-----------+------------------------+------------+
@@ -252,9 +252,9 @@ The result is as follows:
 300000 rows in set (0.23 sec)
 ```
 
-## Limit the number of query results
+## 限制查询结果的数量
 
-To limit the number of query results, you can use the `LIMIT` statement.
+你可以使用 `LIMIT` 语句限制查询结果的数量。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
@@ -297,7 +297,7 @@ public List<Author> getAuthorsWithLimit(Integer limit) throws SQLException {
 </div>
 </SimpleTab>
 
-The result is as follows:
+查询结果如下：
 
 ```
 +-----------+------------------------+------------+
@@ -317,13 +317,13 @@ The result is as follows:
 10 rows in set (0.11 sec)
 ```
 
-With the `LIMIT` statement, the query time is significantly reduced from `0.23 sec` to `0.11 sec` in this example. For more information, see [TopN and Limit](/topn-limit-push-down.md).
+使用 `LIMIT` 语句后，查询时间从例子中的 `0.23 sec` 大幅缩短到 `0.11 sec`。更多信息请参见 [TopN and Limit](/topn-limit-push-down.md)。
 
-## Aggregate queries
+## 聚合查询
 
-To have a better understanding of the overall data situation, you can use the `GROUP BY` statement to aggregate query results.
+为了更好地了解整体数据情况，可以使用 `GROUP BY` 语句对查询结果进行聚合。
 
-For example, if you want to know which years there are more authors born, you can group the `authors` table by the `birth_year` column, and then count for each year:
+例如，如果你想知道在哪些年份出生的作者较多，可以按 `birth_year` 列分组，然后统计每个年份的作者数量：
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
@@ -346,7 +346,7 @@ public class AuthorCount {
 
     public AuthorCount() {}
 
-     // Skip the getters and setters.
+     // 省略 getter 和 setter 方法。
 }
 
 public List<AuthorCount> getAuthorCountsByBirthYear() throws SQLException {
@@ -367,14 +367,14 @@ public List<AuthorCount> getAuthorCountsByBirthYear() throws SQLException {
             authorCounts.add(authorCount);
         }
     }
-    return authorCount;
+    return authorCounts;
 }
 ```
 
 </div>
 </SimpleTab>
 
-The result is as follows:
+查询结果如下：
 
 ```
 +------------+--------------+
@@ -395,18 +395,18 @@ The result is as follows:
 71 rows in set (0.00 sec)
 ```
 
-In addition to the `COUNT` function, TiDB also supports other aggregate functions. For more information, see [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md).
+除了 `COUNT` 函数外，TiDB 还支持其他聚合函数。更多信息请参见 [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md)。
 
-## Need help?
+## 需要帮助吗？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或 [提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或 [提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

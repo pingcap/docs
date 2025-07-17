@@ -1,26 +1,26 @@
 ---
 title: SHOW STATS_META
-summary: An overview of the usage of SHOW STATS_META for TiDB database.
+summary: 关于 TiDB 数据库中 SHOW STATS_META 使用情况的概述。
 ---
 
 # SHOW STATS_META
 
-You can use `SHOW STATS_META` to view how many rows are in a table and how many rows are changed in that table. When using this statement, you can filter the needed information by the `ShowLikeOrWhere` clause.
+你可以使用 `SHOW STATS_META` 来查看一个表中的行数以及该表中被修改的行数。在使用此语句时，可以通过 `ShowLikeOrWhere` 子句过滤所需的信息。
 
-Currently, the `SHOW STATS_META` statement outputs 6 columns:
+目前，`SHOW STATS_META` 语句输出 6 列：
 
 | Column name | Description            |
 | -------- | ------------- |
-| db_name  |  Database name    |
-| table_name | Table name |
-| partition_name| Partition name |
-| update_time | Last updated time |
-| modify_count | The number of rows modified |
-| row_count | The total row count |
+| db_name  |  数据库名称    |
+| table_name | 表名称 |
+| partition_name| 分区名称 |
+| update_time | 最后更新时间 |
+| modify_count | 被修改的行数 |
+| row_count | 总行数 |
 
 > **Note:**
 >
-> The `update_time` is updated when TiDB updates the `modify_count` and `row_count` fields according to DML statements. So `update_time` is not the last execution time of the `ANALYZE` statement.
+> `update_time` 在 TiDB 根据 DML 语句更新 `modify_count` 和 `row_count` 字段时会被更新。因此，`update_time` 并不代表 `ANALYZE` 语句的最后执行时间。
 
 ## Synopsis
 
@@ -67,7 +67,7 @@ SHOW STATS_META WHERE table_name = 't2';
 
 ## MySQL compatibility
 
-This statement is a TiDB extension to MySQL syntax.
+此语句是 TiDB 对 MySQL 语法的扩展。
 
 ## See also
 

@@ -1,52 +1,52 @@
 ---
-title: Read Historical Data Using the `AS OF TIMESTAMP` Clause
-summary: Learn how to read historical data using the `AS OF TIMESTAMP` statement clause.
+title: 使用 `AS OF TIMESTAMP` 子句读取历史数据
+summary: 学习如何使用 `AS OF TIMESTAMP` 语句子句读取历史数据。
 ---
 
-# Read Historical Data Using the `AS OF TIMESTAMP` Clause
+# 使用 `AS OF TIMESTAMP` 子句读取历史数据
 
-This document describes how to perform the [Stale Read](/stale-read.md) feature using the `AS OF TIMESTAMP` clause to read historical data in TiDB, including specific usage examples and strategies for saving historical data.
+本文档介绍了如何在 TiDB 中使用 [`Stale Read`](/stale-read.md) 功能，通过 `AS OF TIMESTAMP` 子句读取历史数据，包括具体的使用示例和保存历史数据的策略。
 
-TiDB supports reading historical data through a standard SQL interface, which is the `AS OF TIMESTAMP` SQL clause, without the need for special clients or drivers. After data is updated or deleted, you can read the historical data before the update or deletion using this SQL interface.
+TiDB 支持通过标准的 SQL 接口读取历史数据，即 `AS OF TIMESTAMP` SQL 子句，无需特殊的客户端或驱动程序。在数据被更新或删除后，可以使用此 SQL 接口读取更新或删除之前的历史数据。
 
 > **Note:**
 >
-> When reading historical data, TiDB returns the data with the old table structure even if the current table structure is different.
+> 在读取历史数据时，即使当前表结构不同，TiDB 也会返回具有旧表结构的数据。
 
-## Syntax
+## 语法
 
-You can use the `AS OF TIMESTAMP` clause in the following three ways:
+你可以通过以下三种方式在 SQL 中使用 `AS OF TIMESTAMP` 子句：
 
 - [`SELECT ... FROM ... AS OF TIMESTAMP`](/sql-statements/sql-statement-select.md)
 - [`START TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-start-transaction.md)
 - [`SET TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-set-transaction.md)
 
-If you want to specify an exact point of time, you can set a datetime value or use a time function in the `AS OF TIMESTAMP` clause. The format of datetime is like "2016-10-08 16:45:26.999", with millisecond as the minimum time unit, but for most of the time, the time unit of second is enough for specifying a datetime, such as "2016-10-08 16:45:26". You can also get the current time to the millisecond using the `NOW(3)` function. If you want to read the data of several seconds ago, it is **recommended** to use an expression such as `NOW() - INTERVAL 10 SECOND`.
+如果你想指定一个精确的时间点，可以在 `AS OF TIMESTAMP` 子句中设置一个日期时间值或使用时间函数。日期时间的格式类似于 "2016-10-08 16:45:26.999"，毫秒为最小时间单位，但大多数情况下，秒级的时间单位足以指定日期时间，例如 "2016-10-08 16:45:26"。你也可以使用 `NOW(3)` 函数获取到毫秒级的当前时间。如果你想读取几秒前的数据，**建议**使用类似 `NOW() - INTERVAL 10 SECOND` 的表达式。
 
-If you want to specify a time range, you can use the [`TIDB_BOUNDED_STALENESS()`](/functions-and-operators/tidb-functions.md#tidb_bounded_staleness) function in the clause. When this function is used, TiDB selects a suitable timestamp within the specified time range. "Suitable" means there are no transactions that start before this timestamp and have not been committed on the accessed replica, that is, TiDB can perform read operations on the accessed replica and the read operations are not blocked. You need to use `TIDB_BOUNDED_STALENESS(t1, t2)` to call this function. `t1` and `t2` are the two ends of the time range, which can be specified using either datetime values or time functions.
+如果你想指定一个时间范围，可以在子句中使用 [`TIDB_BOUNDED_STALENESS()`](/functions-and-operators/tidb-functions.md#tidb_bounded_staleness) 函数。使用此函数时，TiDB 会在指定的时间范围内选择一个合适的时间戳。"合适"意味着在此时间戳之前没有开始但尚未提交的事务，也就是说，TiDB 可以在访问的副本上执行读操作，且读操作不会被阻塞。你需要用 `TIDB_BOUNDED_STALENESS(t1, t2)` 来调用此函数，`t1` 和 `t2` 是时间范围的两个端点，可以用日期时间值或时间函数来指定。
 
-Here are some examples of the `AS OF TIMESTAMP` clause:
+以下是一些 `AS OF TIMESTAMP` 子句的示例：
 
-- `AS OF TIMESTAMP '2016-10-08 16:45:26'`: Tells TiDB to read the latest data stored at 16:45:26 on October 8, 2016.
-- `AS OF TIMESTAMP NOW() - INTERVAL 10 SECOND`: Tells TiDB to read the latest data stored 10 seconds ago.
-- `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS('2016-10-08 16:45:26', '2016-10-08 16:45:29')`: Tells TiDB to read the data as new as possible within the time range of 16:45:26 to 16:45:29 on October 8, 2016.
-- `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS(NOW() - INTERVAL 20 SECOND, NOW())`: Tells TiDB to read the data as new as possible within the time range of 20 seconds ago to the present.
+- `AS OF TIMESTAMP '2016-10-08 16:45:26'`：告诉 TiDB 读取 2016 年 10 月 8 日 16:45:26 时存储的最新数据。
+- `AS OF TIMESTAMP NOW() - INTERVAL 10 SECOND`：告诉 TiDB 读取 10 秒前存储的最新数据。
+- `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS('2016-10-08 16:45:26', '2016-10-08 16:45:29')`：告诉 TiDB 在 2016 年 10 月 8 日 16:45:26 到 16:45:29 的时间范围内，读取尽可能新的数据。
+- `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS(NOW() - INTERVAL 20 SECOND, NOW())`：告诉 TiDB 在 20 秒前到现在的时间范围内，读取尽可能新的数据。
 
 > **Note:**
 >
-> In addition to specifying a timestamp, the most common use of the `AS OF TIMESTAMP` clause is to read data that is several seconds old. If this approach is used, it is recommended to read historical data older than 5 seconds.
+> 除了指定时间戳外，`AS OF TIMESTAMP` 子句最常用的场景是读取几秒前的数据。如果采用此方式，建议读取时间超过 5 秒的历史数据。
 >
-> You need to deploy the NTP service for your TiDB and PD nodes when you use Stale Read. This avoids the situation where the specified timestamp used by TiDB goes ahead of the latest TSO allocating progress (such as a timestamp several seconds ahead), or is later than the GC safe point timestamp. When the specified timestamp goes beyond the service scope, TiDB returns an error.
+> 当你使用 Stale Read 时，需要为你的 TiDB 和 PD 节点部署 NTP 服务，以避免 TiDB 使用的指定时间戳超前于最新的 TSO 分配进度（例如，超前几秒的时间戳）或晚于 GC 安全点时间戳。当指定的时间戳超出服务范围时，TiDB 会返回错误。
 >
-> To reduce the latency and improve the timeliness of the Stale Read data, you can modify the TiKV `advance-ts-interval` configuration item. See [Reduce Stale Read latency](/stale-read.md#reduce-stale-read-latency) for details.
+> 为了减少延迟并提高 Stale Read 数据的时效性，你可以修改 TiKV 的 `advance-ts-interval` 配置项。详情请参见 [Reduce Stale Read latency](/stale-read.md#reduce-stale-read-latency)。
 
-## Usage examples
+## 使用示例
 
-This section describes different ways to use the `AS OF TIMESTAMP` clause with several examples. It first introduces how to prepare the data for recovery, and then shows how to use `AS OF TIMESTAMP` in `SELECT`, `START TRANSACTION READ ONLY AS OF TIMESTAMP`, and `SET TRANSACTION READ ONLY AS OF TIMESTAMP` respectively.
+本节介绍了不同的使用 `AS OF TIMESTAMP` 子句的方法，并配有多个示例。首先介绍如何准备恢复用的数据，然后展示如何在 `SELECT`、`START TRANSACTION READ ONLY AS OF TIMESTAMP` 和 `SET TRANSACTION READ ONLY AS OF TIMESTAMP` 中使用。
 
-### Prepare data sample
+### 准备数据示例
 
-To prepare data for recovery, create a table first and insert several rows of data:
+为了准备恢复用的数据，首先创建一张表并插入几行数据：
 
 ```sql
 create table t (c int);
@@ -64,7 +64,7 @@ insert into t values (1), (2), (3);
 Query OK, 3 rows affected (0.00 sec)
 ```
 
-View the data in the table:
+查看表中的数据：
 
 ```sql
 select * from t;
@@ -81,7 +81,7 @@ select * from t;
 3 rows in set (0.00 sec)
 ```
 
-View the current time:
+查看当前时间：
 
 ```sql
 select now();
@@ -96,7 +96,7 @@ select now();
 1 row in set (0.00 sec)
 ```
 
-Update the data in a row:
+更新某一行的数据：
 
 ```sql
 update t set c=22 where c=2;
@@ -106,7 +106,7 @@ update t set c=22 where c=2;
 Query OK, 1 row affected (0.00 sec)
 ```
 
-Confirm that the data of the row is updated:
+确认该行数据已更新：
 
 ```sql
 select * from t;
@@ -123,9 +123,9 @@ select * from t;
 3 rows in set (0.00 sec)
 ```
 
-### Read historical data using the `SELECT` statement
+### 使用 `SELECT` 语句读取历史数据
 
-You can use the [`SELECT ... FROM ... AS OF TIMESTAMP`](/sql-statements/sql-statement-select.md) statement to read data from a time point in the past.
+你可以使用 [`SELECT ... FROM ... AS OF TIMESTAMP`](/sql-statements/sql-statement-select.md) 语句，从过去的某个时间点读取数据。
 
 ```sql
 select * from t as of timestamp '2021-05-26 16:45:26';
@@ -144,11 +144,11 @@ select * from t as of timestamp '2021-05-26 16:45:26';
 
 > **Note:**
 >
-> When reading multiple tables using one `SELECT` statement, you need to make sure that the format of TIMESTAMP EXPRESSIONs is consistent. For example, `select * from t as of timestamp NOW() - INTERVAL 2 SECOND, c as of timestamp NOW() - INTERVAL 2 SECOND;`. In addition, you must specify the `AS OF` information for the relevant table in the `SELECT` statement; otherwise, the `SELECT` statement reads the latest data by default.
+> 当用一个 `SELECT` 语句读取多个表时，需要确保 TIMESTAMP EXPRESSION 的格式一致。例如，`select * from t as of timestamp NOW() - INTERVAL 2 SECOND, c as of timestamp NOW() - INTERVAL 2 SECOND;`。此外，必须在 `SELECT` 语句中为相关表指定 `AS OF` 信息，否则 `SELECT` 默认读取最新数据。
 
-### Read historical data using the `START TRANSACTION READ ONLY AS OF TIMESTAMP` statement
+### 使用 `START TRANSACTION READ ONLY AS OF TIMESTAMP` 语句读取历史数据
 
-You can use the [`START TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-start-transaction.md) statement to start a read-only transaction based on a time point in the past. The transaction reads historical data of the given time.
+你可以使用 [`START TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-start-transaction.md) 语句，开启一个基于过去某个时间点的只读事务。该事务会读取该时间点的历史数据。
 
 ```sql
 start transaction read only as of timestamp '2021-05-26 16:45:26';
@@ -181,7 +181,7 @@ commit;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-After the transaction is committed, you can read the latest data.
+事务提交后，可以读取最新的数据。
 
 ```sql
 select * from t;
@@ -200,11 +200,11 @@ select * from t;
 
 > **Note:**
 >
-> If you start a transaction with the statement `START TRANSACTION READ ONLY AS OF TIMESTAMP`, it is a read-only transaction. Write operations are rejected in this transaction.
+> 如果你用 `START TRANSACTION READ ONLY AS OF TIMESTAMP` 语句开启事务，它是一个只读事务。在此事务中，写操作会被拒绝。
 
-### Read historical data using the `SET TRANSACTION READ ONLY AS OF TIMESTAMP` statement
+### 使用 `SET TRANSACTION READ ONLY AS OF TIMESTAMP` 语句读取历史数据
 
-You can use the [`SET TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-set-transaction.md) statement to set the next transaction as a read-only transaction based on a specified time point in the past. The transaction reads historical data of the given time.
+你可以使用 [`SET TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-set-transaction.md) 语句，将下一次事务设置为基于指定时间点的只读事务。该事务会读取该时间点的历史数据。
 
 ```sql
 set transaction read only as of timestamp '2021-05-26 16:45:26';
@@ -245,7 +245,7 @@ commit;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-After the transaction is committed, you can read the latest data.
+事务提交后，可以读取最新的数据。
 
 ```sql
 select * from t;
@@ -264,4 +264,4 @@ select * from t;
 
 > **Note:**
 >
-> If you start a transaction with the statement `SET TRANSACTION READ ONLY AS OF TIMESTAMP`, it is a read-only transaction. Write operations are rejected in this transaction.
+> 如果你用 `SET TRANSACTION READ ONLY AS OF TIMESTAMP` 语句开启事务，它是一个只读事务。在此事务中，写操作会被拒绝。

@@ -1,13 +1,13 @@
 ---
-title: DROP DATABASE | TiDB SQL Statement Reference
-summary: An overview of the usage of DROP DATABASE for the TiDB database.
+title: DROP DATABASE | TiDB SQL 语句参考
+summary: 关于 TiDB 数据库中 DROP DATABASE 的用法概述。
 ---
 
 # DROP DATABASE
 
-The `DROP DATABASE` statement permanently removes a specified database schema, and all of the tables and views that were created inside. User privileges that are associated with the dropped database remain unaffected.
+`DROP DATABASE` 语句会永久删除指定的数据库架构，以及在其中创建的所有表和视图。与被删除数据库相关联的用户权限不会受到影响。
 
-## Synopsis
+## 概要
 
 ```ebnf+diagram
 DropDatabaseStmt ::=
@@ -16,7 +16,7 @@ DropDatabaseStmt ::=
 IfExists ::= ( 'IF' 'EXISTS' )?
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> SHOW DATABASES;
@@ -44,11 +44,11 @@ mysql> SHOW DATABASES;
 3 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `DROP DATABASE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中的 `DROP DATABASE` 语句与 MySQL 完全兼容。如果你发现任何兼容性差异，[请报告一个 bug](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 相关链接
 
 * [CREATE DATABASE](/sql-statements/sql-statement-create-database.md)
 * [ALTER DATABASE](/sql-statements/sql-statement-alter-database.md)

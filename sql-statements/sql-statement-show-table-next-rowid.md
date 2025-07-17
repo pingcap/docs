@@ -1,27 +1,27 @@
 ---
 title: SHOW TABLE NEXT_ROW_ID
-summary: Learn the usage of `SHOW TABLE NEXT_ROW_ID` in TiDB.
+summary: 了解 TiDB 中 `SHOW TABLE NEXT_ROW_ID` 的用法。
 ---
 
 # SHOW TABLE NEXT_ROW_ID
 
-`SHOW TABLE NEXT_ROW_ID` is used to show the details of some special columns of a table, including:
+`SHOW TABLE NEXT_ROW_ID` 用于显示表的某些特殊列的详细信息，包括：
 
-* [`AUTO_INCREMENT`](/auto-increment.md) column automatically created by TiDB, namely, `_tidb_rowid` column.
-* `AUTO_INCREMENT` column created by users.
-* [`AUTO_RANDOM`](/auto-random.md) column created by users.
-* [`SEQUENCE`](/sql-statements/sql-statement-create-sequence.md) created by users.
+* [`AUTO_INCREMENT`](/auto-increment.md) 列，由 TiDB 自动创建，即 `_tidb_rowid` 列。
+* 用户创建的 `AUTO_INCREMENT` 列。
+* [`AUTO_RANDOM`](/auto-random.md) 列，由用户创建。
+* [`SEQUENCE`](/sql-statements/sql-statement-create-sequence.md) 由用户创建。
 
-## Synopsis
+## 语法
 
 ```ebnf+diagram
 ShowTableNextRowIDStmt ::=
     "SHOW" "TABLE" (SchemaName ".")? TableName "NEXT_ROW_ID"
 ```
 
-## Examples
+## 示例
 
-For newly created tables, `NEXT_GLOBAL_ROW_ID` is `1` because no Row ID is allocated.
+对于新创建的表，`NEXT_GLOBAL_ROW_ID` 为 `1`，因为尚未分配任何行 ID。
 
 ```sql
 CREATE TABLE t(a int);
@@ -38,7 +38,7 @@ SHOW TABLE t NEXT_ROW_ID;
 1 row in set (0.00 sec)
 ```
 
-Data have been written to the table. The TiDB server that inserts the data allocates and caches 30000 IDs at once. Thus, NEXT_GLOBAL_ROW_ID is 30001 now. The number of IDs is controlled by [`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache).
+数据已写入表中。插入数据的 TiDB 服务器会一次性分配并缓存 30000 个 ID。因此，现在 `NEXT_GLOBAL_ROW_ID` 为 30001。ID 数量由 [`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache) 控制。
 
 ```sql
 INSERT INTO t VALUES (), (), ();
@@ -56,11 +56,11 @@ SHOW TABLE t NEXT_ROW_ID;
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension to MySQL syntax.
+该语句是 TiDB 对 MySQL 语法的扩展。
 
-## See also
+## 相关链接
 
 * [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 * [AUTO_RANDOM](/auto-random.md)

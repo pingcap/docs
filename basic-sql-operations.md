@@ -1,101 +1,85 @@
 ---
-title: Explore SQL with TiDB
-summary: Learn about the basic SQL statements for the TiDB database.
+title: 使用 TiDB 探索 SQL
+summary: 了解 TiDB 数据库的基本 SQL 语句。
 ---
 
-# Explore SQL with TiDB
+# 使用 TiDB 探索 SQL
 
-TiDB is compatible with MySQL, you can use MySQL statements directly in most of the cases. For unsupported features, see [Compatibility with MySQL](/mysql-compatibility.md#unsupported-features).
+TiDB 兼容 MySQL，在大多数情况下，你可以直接使用 MySQL 语句。对于不支持的功能，请参见 [Compatibility with MySQL](/mysql-compatibility.md#unsupported-features)。
 
 <CustomContent platform="tidb">
 
-To experiment with SQL and test out TiDB compatibility with MySQL queries, you can try [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=basic-sql-operations). You can also first deploy a TiDB cluster and then run SQL statements in it.
+为了试验 SQL 并测试 TiDB 与 MySQL 查询的兼容性，你可以尝试 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=basic-sql-operations)。你也可以先部署一个 TiDB 集群，然后在其中运行 SQL 语句。
 
 </CustomContent>
 
-This page walks you through the basic TiDB SQL statements such as DDL, DML and CRUD operations. For a complete list of TiDB statements, see [SQL Statement Overview](/sql-statements/sql-statement-overview.md).
+本页面将引导你了解基本的 TiDB SQL 语句，如 DDL、DML 和 CRUD 操作。有关 TiDB 语句的完整列表，请参见 [SQL Statement Overview](/sql-statements/sql-statement-overview.md)。
 
-## Category
+## 分类
 
-SQL is divided into the following 4 types according to their functions:
+根据功能，SQL 被划分为以下 4 种类型：
 
-- DDL (Data Definition Language): It is used to define database objects, including databases, tables, views, and indexes.
+- DDL（Data Definition Language，数据定义语言）：用于定义数据库对象，包括数据库、表、视图和索引。
 
-- DML (Data Manipulation Language): It is used to manipulate application related records.
+- DML（Data Manipulation Language，数据操作语言）：用于操作应用相关的记录。
 
-- DQL (Data Query Language): It is used to query the records after conditional filtering.
+- DQL（Data Query Language，数据查询语言）：用于在条件过滤后查询记录。
 
-- DCL (Data Control Language): It is used to define access privileges and security levels.
+- DCL（Data Control Language，数据控制语言）：用于定义访问权限和安全级别。
 
-Common DDL features are creating, modifying, and deleting objects (such as tables and indexes). The corresponding commands are `CREATE`, `ALTER`, and `DROP`.
+常见的 DDL 功能包括创建、修改和删除对象（如表和索引）。对应的命令是 `CREATE`、`ALTER` 和 `DROP`。
 
-## Show, create and drop a database
+## 显示、创建和删除数据库
 
-A database in TiDB can be considered as a collection of objects such as tables and indexes.
+在 TiDB 中，数据库可以被视为一组对象的集合，例如表和索引。
 
-To show the list of databases, use the `SHOW DATABASES` statement:
-
-{{< copyable "sql" >}}
+要显示数据库列表，使用 `SHOW DATABASES` 语句：
 
 ```sql
 SHOW DATABASES;
 ```
 
-To use the database named `mysql`, use the following statement:
-
-{{< copyable "sql" >}}
+要使用名为 `mysql` 的数据库，使用以下语句：
 
 ```sql
 USE mysql;
 ```
 
-To show all the tables in a database, use the `SHOW TABLES` statement:
-
-{{< copyable "sql" >}}
+要显示某个数据库中的所有表，使用 `SHOW TABLES` 语句：
 
 ```sql
 SHOW TABLES FROM mysql;
 ```
 
-To create a database, use the `CREATE DATABASE` statement:
-
-{{< copyable "sql" >}}
+要创建数据库，使用 `CREATE DATABASE` 语句：
 
 ```sql
 CREATE DATABASE db_name [options];
 ```
 
-To create a database named `samp_db`, use the following statement:
-
-{{< copyable "sql" >}}
+要创建名为 `samp_db` 的数据库，使用以下语句：
 
 ```sql
 CREATE DATABASE IF NOT EXISTS samp_db;
 ```
 
-Add `IF NOT EXISTS` to prevent an error if the database exists.
+添加 `IF NOT EXISTS` 以防止数据库已存在时出现错误。
 
-To delete a database, use the `DROP DATABASE` statement:
-
-{{< copyable "sql" >}}
+要删除数据库，使用 `DROP DATABASE` 语句：
 
 ```sql
 DROP DATABASE samp_db;
 ```
 
-## Create, show, and drop a table
+## 创建、显示和删除表
 
-To create a table, use the `CREATE TABLE` statement:
-
-{{< copyable "sql" >}}
+要创建表，使用 `CREATE TABLE` 语句：
 
 ```sql
 CREATE TABLE table_name column_name data_type constraint;
 ```
 
-For example, to create a table named `person` which includes fields such as number, name, and birthday, use the following statement:
-
-{{< copyable "sql" >}}
+例如，要创建一个名为 `person` 的表，包含编号、姓名和生日等字段，使用以下语句：
 
 ```sql
 CREATE TABLE person (
@@ -105,73 +89,55 @@ CREATE TABLE person (
     );
 ```
 
-To view the statement that creates the table (DDL), use the `SHOW CREATE` statement:
-
-{{< copyable "sql" >}}
+要查看创建该表的语句（DDL），使用 `SHOW CREATE` 语句：
 
 ```sql
 SHOW CREATE table person;
 ```
 
-To delete a table, use the `DROP TABLE` statement:
-
-{{< copyable "sql" >}}
+要删除表，使用 `DROP TABLE` 语句：
 
 ```sql
 DROP TABLE person;
 ```
 
-## Create, show, and drop an index
+## 创建、显示和删除索引
 
-Indexes are used to speed up queries on indexed columns. To create an index for the column whose value is not unique, use the `CREATE INDEX` statement:
-
-{{< copyable "sql" >}}
+索引用于加快对索引列的查询。对于值非唯一的列，创建索引使用 `CREATE INDEX` 语句：
 
 ```sql
 CREATE INDEX person_id ON person (id);
 ```
 
-Or use the `ALTER TABLE` statement:
-
-{{< copyable "sql" >}}
+也可以使用 `ALTER TABLE` 语句：
 
 ```sql
 ALTER TABLE person ADD INDEX person_id (id);
 ```
 
-To create a unique index for the column whose value is unique, use the `CREATE UNIQUE INDEX` statement:
-
-{{< copyable "sql" >}}
+对于值唯一的列，创建唯一索引使用 `CREATE UNIQUE INDEX` 语句：
 
 ```sql
 CREATE UNIQUE INDEX person_unique_id ON person (id);
 ```
 
-Or use the `ALTER TABLE` statement:
-
-{{< copyable "sql" >}}
+或者使用 `ALTER TABLE` 语句：
 
 ```sql
 ALTER TABLE person ADD UNIQUE person_unique_id (id);
 ```
 
-To show all the indexes in a table, use the `SHOW INDEX` statement:
-
-{{< copyable "sql" >}}
+要显示表中的所有索引，使用 `SHOW INDEX` 语句：
 
 ```sql
 SHOW INDEX FROM person;
 ```
 
-To delete an index, use the `DROP INDEX` or `ALTER TABLE` statement. `DROP INDEX` can be nested in `ALTER TABLE`:
-
-{{< copyable "sql" >}}
+要删除索引，可以使用 `DROP INDEX` 或 `ALTER TABLE` 语句。`DROP INDEX` 可以嵌套在 `ALTER TABLE` 中：
 
 ```sql
 DROP INDEX person_id ON person;
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 ALTER TABLE person DROP INDEX person_unique_id;
@@ -179,39 +145,31 @@ ALTER TABLE person DROP INDEX person_unique_id;
 
 > **Note:**
 > 
-> DDL operations are not transactions. You don't need to run a `COMMIT` statement when executing DDL operations.
+> DDL 操作不是事务性操作。执行 DDL 时，无需运行 `COMMIT` 语句。
 
-## Insert, update, and delete data
+## 插入、更新和删除数据
 
-Common DML features are adding, modifying, and deleting table records. The corresponding commands are `INSERT`, `UPDATE`, and `DELETE`.
+常见的 DML 功能包括添加、修改和删除表中的记录。对应的命令是 `INSERT`、`UPDATE` 和 `DELETE`。
 
-To insert data into a table, use the `INSERT` statement:
-
-{{< copyable "sql" >}}
+向表中插入数据，使用 `INSERT` 语句：
 
 ```sql
 INSERT INTO person VALUES(1,'tom','20170912');
 ```
 
-To insert a record containing data of some fields into a table, use the `INSERT` statement:
-
-{{< copyable "sql" >}}
+向表中插入部分字段的数据，使用 `INSERT` 语句：
 
 ```sql
 INSERT INTO person(id,name) VALUES('2','bob');
 ```
 
-To update some fields of a record in a table, use the `UPDATE` statement:
-
-{{< copyable "sql" >}}
+更新表中某条记录的部分字段，使用 `UPDATE` 语句：
 
 ```sql
 UPDATE person SET birthday='20180808' WHERE id=2;
 ```
 
-To delete the data in a table, use the `DELETE` statement:
-
-{{< copyable "sql" >}}
+删除表中的数据，使用 `DELETE` 语句：
 
 ```sql
 DELETE FROM person WHERE id=2;
@@ -219,23 +177,19 @@ DELETE FROM person WHERE id=2;
 
 > **Note:**
 > 
-> The `UPDATE` and `DELETE` statements without the `WHERE` clause as a filter operate on the entire table.
+> 不带 `WHERE` 条件的 `UPDATE` 和 `DELETE` 语句会操作整个表。
 
-## Query data
+## 查询数据
 
-DQL is used to retrieve the desired data rows from a table or multiple tables.
+DQL 用于从表或多个表中检索所需的数据行。
 
-To view the data in a table, use the `SELECT` statement:
-
-{{< copyable "sql" >}}
+要查看表中的数据，使用 `SELECT` 语句：
 
 ```sql
 SELECT * FROM person;
 ```
 
-To query a specific column, add the column name after the `SELECT` keyword:
-
-{{< copyable "sql" >}}
+要查询特定列，添加列名到 `SELECT` 关键字后：
 
 ```sql
 SELECT name FROM person;
@@ -250,45 +204,35 @@ SELECT name FROM person;
 1 rows in set (0.00 sec)
 ```
 
-Use the `WHERE` clause to filter all records that match the conditions and then return the result:
-
-{{< copyable "sql" >}}
+使用 `WHERE` 子句过滤所有符合条件的记录，然后返回结果：
 
 ```sql
 SELECT * FROM person where id<5;
 ```
 
-## Create, authorize, and delete a user
+## 创建、授权和删除用户
 
-DCL are usually used to create or delete users, and manage user privileges.
+DCL 通常用于创建或删除用户，以及管理用户权限。
 
-To create a user, use the `CREATE USER` statement. The following example creates a user named `tiuser` with the password `123456`:
-
-{{< copyable "sql" >}}
+要创建用户，使用 `CREATE USER` 语句。以下示例创建一个名为 `tiuser`，密码为 `123456` 的用户：
 
 ```sql
 CREATE USER 'tiuser'@'localhost' IDENTIFIED BY '123456';
 ```
 
-To grant `tiuser` the privilege to retrieve the tables in the `samp_db` database:
-
-{{< copyable "sql" >}}
+授予 `tiuser` 访问 `samp_db` 数据库中表的权限：
 
 ```sql
 GRANT SELECT ON samp_db.* TO 'tiuser'@'localhost';
 ```
 
-To check the privileges of `tiuser`:
-
-{{< copyable "sql" >}}
+查看 `tiuser` 的权限：
 
 ```sql
 SHOW GRANTS for tiuser@localhost;
 ```
 
-To delete `tiuser`:
-
-{{< copyable "sql" >}}
+删除 `tiuser`：
 
 ```sql
 DROP USER 'tiuser'@'localhost';

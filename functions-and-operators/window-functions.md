@@ -1,39 +1,39 @@
 ---
 title: Window Functions
-summary: This document introduces window functions supported in TiDB.
+summary: 本文档介绍了 TiDB 支持的窗口函数。
 ---
 
 # Window Functions
 
-The usage of window functions in TiDB is similar to that in MySQL 8.0. For details, see [MySQL Window Functions](https://dev.mysql.com/doc/refman/8.0/en/window-functions.html).
+TiDB 中窗口函数的用法与 MySQL 8.0 类似。详情请参见 [MySQL Window Functions](https://dev.mysql.com/doc/refman/8.0/en/window-functions.html)。
 
-In TiDB, you can control window functions using the following system variables:
+在 TiDB 中，你可以通过以下系统变量控制窗口函数的行为：
 
-- [`tidb_enable_window_function`](/system-variables.md#tidb_enable_window_function): because window functions reserve additional [keywords](/keywords.md) in the parser, TiDB provides this variable to disable window functions. If you receive errors parsing SQL statements after upgrading TiDB, try setting this variable to `OFF`.
-- [`tidb_enable_pipelined_window_function`](/system-variables.md#tidb_enable_pipelined_window_function): you can use this variable to disable pipeline execution algorithm for window functions.
-- [`windowing_use_high_precision`](/system-variables.md#windowing_use_high_precision): you can use this variable to disable high precision mode for window functions.
+- [`tidb_enable_window_function`](/system-variables.md#tidb_enable_window_function)：由于窗口函数在解析器中会保留额外的 [keywords](/keywords.md)，TiDB 提供此变量以禁用窗口函数。如果在升级 TiDB 后解析 SQL 语句时遇到错误，可以尝试将此变量设置为 `OFF`。
+- [`tidb_enable_pipelined_window_function`](/system-variables.md#tidb_enable_pipelined_window_function)：你可以使用此变量禁用窗口函数的流水线执行算法。
+- [`windowing_use_high_precision`](/system-variables.md#windowing_use_high_precision)：你可以使用此变量禁用窗口函数的高精度模式。
 
-The window functions [listed here](/tiflash/tiflash-supported-pushdown-calculations.md) can be pushed down to TiFlash.
+支持下述 [列出在此处](/tiflash/tiflash-supported-pushdown-calculations.md) 的窗口函数可以下推到 TiFlash。
 
-Except for `GROUP_CONCAT()` and `APPROX_PERCENTILE()`, TiDB supports using all [`GROUP BY` aggregate functions](/functions-and-operators/aggregate-group-by-functions.md) as window functions. In addition, TiDB supports the following window functions:
+除了 `GROUP_CONCAT()` 和 `APPROX_PERCENTILE()` 之外，TiDB 支持所有 [`GROUP BY` 聚合函数](/functions-and-operators/aggregate-group-by-functions.md) 作为窗口函数使用。此外，TiDB 还支持以下窗口函数：
 
-| Function name                     | Feature description |
-| :-------------------------------- | :------------------------------------- |
-| [`CUME_DIST()`](#cume_dist)       | Returns the cumulative distribution of a value within a group of values. |
-| [`DENSE_RANK()`](#dense_rank)     | Returns the rank of the current row within the partition, and the rank is without gaps. |
-| [`FIRST_VALUE()`](#first_value)   | Returns the expression value of the first row in the current window. |
-| [`LAG()`](#lag)                   | Returns the expression value from the row that precedes the current row by N rows within the partition. |
-| [`LAST_VALUE()`](#last_value)     | Returns the expression value of the last row in the current window. |
-| [`LEAD()`](#lead)                 | Returns the expression value from the row that follows the current row by N rows within the partition. |
-| [`NTH_VALUE()`](#nth_value)       | Returns the expression value from the N-th row of the current window. |
-| [`NTILE()`](#ntile)               | Divides a partition into N buckets, assigns the bucket number to each row in the partition, and returns the bucket number of the current row within the partition. |
-| [`PERCENT_RANK()`](#percent_rank) | Returns the percentage of partition values that are less than the value in the current row. |
-| [`RANK()`](#rank)                 | Returns the rank of the current row within the partition. The rank might have gaps. |
-| [`ROW_NUMBER()`](#row_number)     | Returns the number of the current row in the partition. |
+| 函数名 | 功能描述 |
+| :------------------------------ | :------------------------------------------------- |
+| [`CUME_DIST()`](#cume_dist) | 计算值在组内的累积分布。注意，使用 `CUME_DIST()` 时需要配合 `ORDER BY` 子句对组内值进行排序，否则不会返回预期的值。 |
+| [`DENSE_RANK()`](#dense_rank) | 返回当前行在分区中的排名，排名中没有空缺（并列的行排名相同，后续排名连续递增）。 |
+| [`FIRST_VALUE()`](#first_value) | 返回当前窗口中第一行的表达式值。 |
+| [`LAG()`](#lag) | 返回在分区中，当前行之前第 N 行的表达式值。如果不存在，则返回 `default`，默认情况下 `num` 为 1，`default` 为 `NULL`。 |
+| [`LAST_VALUE()`](#last_value) | 返回当前窗口中的最后一行的表达式值。 |
+| [`LEAD()`](#lead) | 返回在分区中，当前行之后第 N 行的表达式值。如果不存在，则返回 `default`，默认情况下 `num` 为 1，`default` 为 `NULL`。 |
+| [`NTH_VALUE()`](#nth_value) | 返回当前窗口中的第 N 行的表达式值。 |
+| [`NTILE()`](#ntile) | 将分区划分为 N 个桶，为每行分配桶编号，并返回当前行所在的桶编号。 |
+| [`PERCENT_RANK()`](#percent_rank) | 返回分区中，值小于当前行值的比例（百分比）。 |
+| [`RANK()`](#rank) | 返回当前行在分区中的排名，排名可能存在空缺（并列的行排名相同，后续排名跳跃）。 |
+| [`ROW_NUMBER()`](#row_number) | 返回当前行在分区中的行号。 |
 
 ## [`CUME_DIST()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_cume-dist)
 
-`CUME_DIST()` calculates the cumulative distribution of a value within a group of values. Note that you need to use the `ORDER BY` clause with `CUME_DIST()` to sort the group of values. Otherwise, this function will not return the expected values.
+`CUME_DIST()` 计算值在组内的累积分布。注意，使用 `CUME_DIST()` 时需要配合 `ORDER BY` 子句对组内值进行排序，否则不会返回预期的值。
 
 ```sql
 WITH RECURSIVE cte(n) AS (
@@ -67,7 +67,7 @@ FROM
 
 ## [`DENSE_RANK()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_dense-rank)
 
-The `DENSE_RANK()` function returns the rank of the current row. It is similar to [`RANK()`](#rank) but does not leave any gaps in case of ties (rows that share the same values and order conditions).
+`DENSE_RANK()` 返回当前行的排名。它类似于 [`RANK()`](#rank)，但在并列（值相同且排序条件相同）时不会出现空缺。
 
 ```sql
 SELECT
@@ -103,12 +103,12 @@ FROM (
 
 ## [`FIRST_VALUE()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_first-value)
 
-The `FIRST_VALUE(expr)` returns the first value in a window.
+`FIRST_VALUE(expr)` 返回窗口中的第一行的表达式值。
 
-The following example uses two different window definitions:
+以下示例使用了两种不同的窗口定义：
 
-- `PARTITION BY n MOD 2 ORDER BY n` partitions the data in table `a` into two groups: `1, 3` and `2, 4`. So it returns either `1` or `2` as those are the first values of those groups.
-- `PARTITION BY n <= 2 ORDER BY n` partitions the data in table `a` into two groups: `1, 2` and `3, 4` So it returns either `1` or `3` depending on which group `n` belongs to.
+- `PARTITION BY n MOD 2 ORDER BY n` 将表 `a` 中的数据划分为两个组：`1, 3` 和 `2, 4`，因此返回这两个组的第一个值，即 `1` 或 `2`。
+- `PARTITION BY n <= 2 ORDER BY n` 将表 `a` 中的数据划分为两个组：`1, 2` 和 `3, 4`，因此返回 `1` 或 `3`，取决于 `n` 所属的组。
 
 ```sql
 SELECT
@@ -142,9 +142,9 @@ ORDER BY
 
 ## [`LAG()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_lag)
 
-The `LAG(expr [, num [, default]])` function returns the value of `expr` from the row that is `num` rows preceding the current row. If such row does not exist, `default` is returned. By default, `num` is `1` and `default` is `NULL` when they are not specified.
+`LAG(expr [, num [, default]])` 返回在分区中，当前行之前第 `num` 行的表达式值。如果不存在，则返回 `default`，默认情况下 `num` 为 1，`default` 为 `NULL`。
 
-In the following example, because `num` is not specified, `LAG(n)` returns the value of `n` in the previous row. When `n` is 1, because the previous row does not exist and `default` is not specified, `LAG(1)` returns `NULL`.
+在以下示例中，由于未指定 `num`，`LAG(n)` 返回前一行的 `n` 值。当 `n` 为 1 时，因为前一行不存在且未指定 `default`，所以 `LAG(1)` 返回 `NULL`。
 
 ```sql
 WITH RECURSIVE cte(n) AS (
@@ -184,7 +184,7 @@ FROM
 
 ## [`LAST_VALUE()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_last-value)
 
-The `LAST_VALUE()` function returns the last value in the window.
+`LAST_VALUE()` 返回窗口中的最后一行的值。
 
 ```sql
 WITH RECURSIVE cte(n) AS (
@@ -227,9 +227,9 @@ ORDER BY
 
 ## [`LEAD()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_lead)
 
-The `LEAD(expr [, num [,default]])` function returns the value of `expr` from the row that is `num` rows following the current row. If such row does not exist, `default` is returned. By default, `num` is `1` and `default` is `NULL` when they are not specified.
+`LEAD(expr [, num [,default]])` 返回在分区中，当前行之后第 `num` 行的表达式值。如果不存在，则返回 `default`，默认情况下 `num` 为 1，`default` 为 `NULL`。
 
-In the following example, because `num` is not specified, `LEAD(n)` returns the value of `n` in the next row following the current row. When `n` is 10, because the next row does not exist and `default` is not specified, `LEAD(10)` returns `NULL`.
+在以下示例中，由于未指定 `num`，`LEAD(n)` 返回下一行的 `n` 值。当 `n` 为 10 时，因为下一行不存在且未指定 `default`，所以 `LEAD(10)` 返回 `NULL`。
 
 ```sql
 WITH RECURSIVE cte(n) AS (
@@ -270,7 +270,7 @@ FROM
 
 ## [`NTH_VALUE()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_nth-value)
 
-The `NTH_VALUE(expr, n)` function returns the `n`-th value of the window.
+`NTH_VALUE(expr, n)` 返回窗口中的第 `n` 个值。
 
 ```sql
 WITH RECURSIVE cte(n) AS (
@@ -318,7 +318,7 @@ ORDER BY
 
 ## [`NTILE()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_ntile)
 
-The `NTILE(n)` function divides the window into `n` groups and returns the group number of each row.
+`NTILE(n)` 将窗口划分为 `n` 个组，并返回每行所属的组编号。
 
 ```sql
 WITH RECURSIVE cte(n) AS (
@@ -356,12 +356,11 @@ FROM
 |   10 |                5 |                2 |
 +------+------------------+------------------+
 10 rows in set (0.00 sec)
-
 ```
 
 ## [`PERCENT_RANK()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_percent-rank)
 
-The `PERCENT_RANK()` function returns a number between 0 and 1 indicating the percentage of rows with a value less than the value of the current row.
+`PERCENT_RANK()` 返回一个 0 到 1 之间的数字，表示值小于当前行值的行所占的比例。
 
 ```sql
 SELECT
@@ -398,7 +397,7 @@ FROM (
 
 ## [`RANK()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_rank)
 
-The `RANK()` function is similar to [`DENSE_RANK()`](#dense_rank) but will leave gaps in case of ties (rows that share the same values and order conditions). This means it provides an absolute ranking. For example, a rank of 7 means that there are 6 rows with lower ranks.
+`RANK()` 类似于 [`DENSE_RANK()`](#dense_rank)，但在存在并列（值相同且排序条件相同时）时会出现空缺。这意味着它提供绝对排名。例如，排名为 7 表示有 6 行的排名低于它。
 
 ```sql
 SELECT
@@ -435,7 +434,7 @@ FROM (
 
 ## [`ROW_NUMBER()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_row-number)
 
-The `ROW_NUMBER()` returns the row number of the current row in the result set.
+`ROW_NUMBER()` 返回当前行在结果集中的行号。
 
 ```sql
 WITH RECURSIVE cte(n) AS (

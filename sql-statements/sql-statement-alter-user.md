@@ -1,13 +1,13 @@
 ---
-title: ALTER USER | TiDB SQL Statement Reference
-summary: An overview of the usage of ALTER USER for the TiDB database.
+title: ALTER USER | TiDB SQL 语句参考
+summary: 关于在 TiDB 数据库中使用 ALTER USER 的概述。
 ---
 
 # ALTER USER
 
-This statement changes an existing user inside the TiDB privilege system. In the MySQL privilege system, a user is the combination of a username and the host from which they are connecting from. Thus, it is possible to create a user `'newuser2'@'192.168.1.1'` who is only able to connect from the IP address `192.168.1.1`. It is also possible to have two users have the same user-portion, and different permissions as they login from different hosts.
+此语句用于修改 TiDB 权限系统中的现有用户。在 MySQL 权限系统中，用户是用户名和连接来源主机的组合。因此，可以创建一个 `'newuser2'@'192.168.1.1'` 用户，该用户只能从 IP 地址 `192.168.1.1` 连接。也可以让两个用户具有相同的用户部分，但登录自不同的主机时拥有不同的权限。
 
-## Synopsis
+## 概述
 
 ```ebnf+diagram
 AlterUserStmt ::=
@@ -44,7 +44,7 @@ RequireClauseOpt ::= ('REQUIRE' ('NONE' | 'SSL' | 'X509' | RequireListElement ('
 RequireListElement ::= 'ISSUER' Issuer | 'SUBJECT' Subject | 'CIPHER' Cipher | 'SAN' SAN | 'TOKEN_ISSUER' TokenIssuer
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> CREATE USER 'newuser' IDENTIFIED BY 'newuserpassword';
@@ -59,9 +59,9 @@ mysql> SHOW CREATE USER 'newuser';
 1 row in set (0.00 sec)
 ```
 
-### Modify basic user information
+### 修改基本用户信息
 
-Change the password for user `newuser`:
+更改用户 `newuser` 的密码：
 
 ```
 mysql> ALTER USER 'newuser' IDENTIFIED BY 'newnewpassword';
@@ -76,7 +76,7 @@ mysql> SHOW CREATE USER 'newuser';
 1 row in set (0.00 sec)
 ```
 
-Lock the user `newuser`:
+锁定用户 `newuser`：
 
 ```sql
 ALTER USER 'newuser' ACCOUNT LOCK;
@@ -86,7 +86,7 @@ ALTER USER 'newuser' ACCOUNT LOCK;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-Modify the attributes of `newuser`:
+修改 `newuser` 的属性：
 
 ```sql
 ALTER USER 'newuser' ATTRIBUTE '{"newAttr": "value", "deprecatedAttr": null}';
@@ -102,7 +102,7 @@ SELECT * FROM information_schema.user_attributes;
 1 rows in set (0.00 sec)
 ```
 
-Modify the comment of `newuser` using `ALTER USER ... COMMENT`:
+使用 `ALTER USER ... COMMENT` 修改 `newuser` 的备注：
 
 ```sql
 ALTER USER 'newuser' COMMENT 'Here is the comment';
@@ -118,7 +118,7 @@ SELECT * FROM information_schema.user_attributes;
 1 rows in set (0.00 sec)
 ```
 
-Remove the comment of `newuser` using `ALTER USER ... ATTRIBUTE`:
+使用 `ALTER USER ... ATTRIBUTE` 移除 `newuser` 的备注：
 
 ```sql
 ALTER USER 'newuser' ATTRIBUTE '{"comment": null}';
@@ -134,7 +134,7 @@ SELECT * FROM information_schema.user_attributes;
 1 rows in set (0.00 sec)
 ```
 
-Change the automatic password expiration policy for `newuser` to never expire via `ALTER USER ... PASSWORD EXPIRE NEVER`:
+通过 `ALTER USER ... PASSWORD EXPIRE NEVER` 改变 `newuser` 的密码自动过期策略为永不过期：
 
 ```sql
 ALTER USER 'newuser' PASSWORD EXPIRE NEVER;
@@ -144,7 +144,7 @@ ALTER USER 'newuser' PASSWORD EXPIRE NEVER;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-Modify the password reuse policy for `newuser` to disallow the reuse of any password used within the last 90 days using `ALTER USER ... PASSWORD REUSE INTERVAL ... DAY`:
+通过 `ALTER USER ... PASSWORD REUSE INTERVAL ... DAY` 设置 `newuser` 的密码重用策略，不允许在过去 90 天内使用相同密码：
 
 ```sql
 ALTER USER 'newuser' PASSWORD REUSE INTERVAL 90 DAY;
@@ -154,9 +154,9 @@ ALTER USER 'newuser' PASSWORD REUSE INTERVAL 90 DAY;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-### Modify the resource group bound to the user
+### 修改用户绑定的资源组
 
-Use `ALTER USER ... RESOURCE GROUP` to modify the resource group of the user `newuser` to `rg1`.
+使用 `ALTER USER ... RESOURCE GROUP` 将用户 `newuser` 的资源组修改为 `rg1`。
 
 ```sql
 ALTER USER 'newuser' RESOURCE GROUP rg1;
@@ -166,7 +166,7 @@ ALTER USER 'newuser' RESOURCE GROUP rg1;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-View the resource group bound to the current user:
+查看当前用户绑定的资源组：
 
 ```sql
 SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user WHERE user = "newuser";
@@ -181,7 +181,7 @@ SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user W
 1 row in set (0.02 sec)
 ```
 
-Unbind the user to a resource group, that is, bind the user to the `default` resource group.
+取消用户的资源组绑定，即将用户绑定到 `default` 资源组。
 
 ```sql
 ALTER USER 'newuser' RESOURCE GROUP `default`;
@@ -197,12 +197,12 @@ SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user W
 1 row in set (0.02 sec)
 ```
 
-## See also
+## 相关链接
 
 <CustomContent platform="tidb">
 
-* [TiDB User Account Management](/user-account-management.md)
-* [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
+* [TiDB 用户账户管理](/user-account-management.md)
+* [与 MySQL 的安全兼容性](/security-compatibility-with-mysql.md)
 
 </CustomContent>
 

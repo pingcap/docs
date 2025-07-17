@@ -1,38 +1,38 @@
 ---
 title: Miscellaneous Functions
-summary: Learn about miscellaneous functions in TiDB.
+summary: 了解 TiDB 中的 miscellaneous functions。
 ---
 
 # Miscellaneous Functions
 
-TiDB supports most of the [miscellaneous functions](https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html) available in MySQL 8.0.
+TiDB 支持大部分在 MySQL 8.0 中可用的 [miscellaneous functions](https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html)。
 
-## Supported functions
+## 支持的函数
 
-| Name | Description  |
+| 名称 | 描述  |
 |:------------|:-----------------------------------------------------------------------------------------------|
-| [`ANY_VALUE()`](#any_value)              | Suppress `ONLY_FULL_GROUP_BY` value rejection     |
-| [`BIN_TO_UUID()`](#bin_to_uuid)          | Convert UUID from binary format to text format    |
-| [`DEFAULT()`](#default)                  | Returns the default value for a table column      |
-| [`GROUPING()`](#grouping)                | Modifier for `GROUP BY` operations                |
-| [`INET_ATON()`](#inet_aton)              | Return the numeric value of an IP address         |
-| [`INET_NTOA()`](#inet_ntoa)              | Return the IP address from a numeric value        |
-| [`INET6_ATON()`](#inet6_aton)            | Return the numeric value of an IPv6 address       |
-| [`INET6_NTOA()`](#inet6_ntoa)            | Return the IPv6 address from a numeric value      |
-| [`IS_IPV4()`](#is_ipv4)                  | Whether argument is an IPv4 address               |
-| [`IS_IPV4_COMPAT()`](#is_ipv4_compat)    | Whether argument is an IPv4-compatible address    |
-| [`IS_IPV4_MAPPED()`](#is_ipv4_mapped)    | Whether argument is an IPv4-mapped address        |
-| [`IS_IPV6()`](#is_ipv6)                  | Whether argument is an IPv6 address               |
-| [`IS_UUID()`](#is_uuid)                  | Whether argument is an UUID                       |
-| [`NAME_CONST()`](#name_const)            | Can be used to rename a column name               |
-| [`SLEEP()`](#sleep)                      | Sleep for a number of seconds. Note that for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters, the `SLEEP()` function has a limitation wherein it can only support a maximum sleep time of 300 seconds.       |
-| [`UUID()`](#uuid)                        | Return a Universal Unique Identifier (UUID)       |
-| [`UUID_TO_BIN()`](#uuid_to_bin)          | Convert UUID from text format to binary format    |
-| [`VALUES()`](#values)                    | Defines the values to be used during an INSERT    |
+| [`ANY_VALUE()`](#any_value)              | 抑制 `ONLY_FULL_GROUP_BY` 模式下的值拒绝  |
+| [`BIN_TO_UUID()`](#bin_to_uuid)          | 将 UUID 从二进制格式转换为文本格式  |
+| [`DEFAULT()`](#default)                  | 返回表列的默认值  |
+| [`GROUPING()`](#grouping)                | `GROUP BY` 操作的修饰符  |
+| [`INET_ATON()`](#inet_aton)              | 返回 IP 地址的数值表示  |
+| [`INET_NTOA()`](#inet_ntoa)              | 从数值返回 IP 地址  |
+| [`INET6_ATON()`](#inet6_aton)            | 返回 IPv6 地址的数值表示  |
+| [`INET6_NTOA()`](#inet6_ntoa)            | 从数值返回 IPv6 地址  |
+| [`IS_IPV4()`](#is_ipv4)                  | 判断参数是否为 IPv4 地址  |
+| [`IS_IPV4_COMPAT()`](#is_ipv4_compat)    | 判断参数是否为 IPv4 兼容地址  |
+| [`IS_IPV4_MAPPED()`](#is_ipv4_mapped)    | 判断参数是否为 IPv4 映射地址  |
+| [`IS_IPV6()`](#is_ipv6)                  | 判断参数是否为 IPv6 地址  |
+| [`IS_UUID()`](#is_uuid)                  | 判断参数是否为 UUID  |
+| [`NAME_CONST()`](#name_const)            | 用于重命名列名  |
+| [`SLEEP()`](#sleep)                      | 暂停指定秒数。注意对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群，`SLEEP()` 函数有最大支持时间限制，为 300 秒。  |
+| [`UUID()`](#uuid)                        | 返回一个通用唯一识别码（UUID）  |
+| [`UUID_TO_BIN()`](#uuid_to_bin)          | 将 UUID 从文本格式转换为二进制格式  |
+| [`VALUES()`](#values)                    | 定义在 `INSERT` 时使用的值  |
 
 ### ANY_VALUE()
 
-The `ANY_VALUE()` function returns any value from a group of values. Typically, it is used in scenarios where you need to include non-aggregated columns in your `SELECT` statement along with a `GROUP BY` clause.
+`ANY_VALUE()` 函数返回一组值中的任意一个值。通常在需要在 `SELECT` 语句中包含非聚合列且配合 `GROUP BY` 子句时使用。
 
 ```sql
 CREATE TABLE fruits (id INT PRIMARY KEY, name VARCHAR(255));
@@ -54,17 +54,17 @@ SELECT ANY_VALUE(id),GROUP_CONCAT(id),name FROM fruits GROUP BY name;
 |             4 | 4                | banana    |
 |             5 | 5                | pineapple |
 +---------------+------------------+-----------+
-4 rows in set (0.00 sec)
+4 行，耗时 (0.00 sec)
 ```
 
-In the preceding example, TiDB returns an error for the first `SELECT` statement because the `id` column is non-aggregated and not included in the `GROUP BY` clause. To address the issue, the second `SELECT` query uses `ANY_VALUE()` to get any value from each group and uses `GROUP_CONCAT()` to concatenate all values of the `id` column within each group into a single string. This approach enables you to get one value from each group and all values of the group without changing the SQL mode for non-aggregated columns.
+在上述示例中，TiDB 对第一个 `SELECT` 语句返回错误，因为 `id` 列是非聚合列且未包含在 `GROUP BY` 中。为解决此问题，第二个 `SELECT` 查询使用 `ANY_VALUE()` 获取每个分组中的任意值，并用 `GROUP_CONCAT()` 将每个分组中的所有 `id` 值连接成一个字符串。这种方式可以在不改变 SQL 模式的情况下，获取每个分组的一个值和所有值。
 
 ### BIN_TO_UUID()
 
-`BIN_TO_UUID()` and `UUID_TO_BIN()` can be used to convert between a textual format UUID and a binary format. Both functions accept two arguments.
+`BIN_TO_UUID()` 和 `UUID_TO_BIN()` 用于在文本格式 UUID 和二进制格式之间转换。这两个函数都接受两个参数。
 
-- The first argument specifies the value to be converted.
-- The second argument (optional) controls the ordering of the fields in the binary format.
+- 第一个参数指定要转换的值。
+- 第二个参数（可选）控制二进制格式中字段的排序。
 
 ```sql
 SET @a := UUID();
@@ -76,15 +76,15 @@ SELECT @a;
 +--------------------------------------+
 | 9a17b457-eb6d-11ee-bacf-5405db7aad56 |
 +--------------------------------------+
-1 row in set (0.00 sec)
+1 行，耗时 (0.00 sec)
 
 SELECT UUID_TO_BIN(@a);
 +------------------------------------+
 | UUID_TO_BIN(@a)                    |
 +------------------------------------+
-| 0x9A17B457EB6D11EEBACF5405DB7AAD56 |
+| 0x9A17B457EB6D-11EE-BACF-5405DB7AAD56 |
 +------------------------------------+
-1 row in set (0.00 sec)
+1 行，耗时 (0.00 sec)
 
 SELECT BIN_TO_UUID(0x9A17B457EB6D11EEBACF5405DB7AAD56);
 +-------------------------------------------------+
@@ -92,7 +92,7 @@ SELECT BIN_TO_UUID(0x9A17B457EB6D11EEBACF5405DB7AAD56);
 +-------------------------------------------------+
 | 9a17b457-eb6d-11ee-bacf-5405db7aad56            |
 +-------------------------------------------------+
-1 row in set (0.00 sec)
+1 行，耗时 (0.00 sec)
 
 SELECT UUID_TO_BIN(@a, 1);
 +----------------------------------------+
@@ -100,7 +100,7 @@ SELECT UUID_TO_BIN(@a, 1);
 +----------------------------------------+
 | 0x11EEEB6D9A17B457BACF5405DB7AAD56     |
 +----------------------------------------+
-1 row in set (0.00 sec)
+1 行，耗时 (0.00 sec)
 
 SELECT BIN_TO_UUID(0x11EEEB6D9A17B457BACF5405DB7AAD56, 1);
 +----------------------------------------------------+
@@ -108,25 +108,25 @@ SELECT BIN_TO_UUID(0x11EEEB6D9A17B457BACF5405DB7AAD56, 1);
 +----------------------------------------------------+
 | 9a17b457-eb6d-11ee-bacf-5405db7aad56               |
 +----------------------------------------------------+
-1 row in set (0.00 sec)
+1 行，耗时 (0.00 sec)
 ```
 
-See also [UUID()](#uuid) and [Best practices for UUID](/best-practices/uuid.md).
+另请参见 [UUID()](#uuid) 和 [UUID 的最佳实践](/best-practices/uuid.md)。
 
 ### DEFAULT()
 
-The `DEFAULT()` function is used to get the default value of a column.
+`DEFAULT()` 函数用于获取列的默认值。
 
 ```sql
 CREATE TABLE t1 (id INT PRIMARY KEY, c1 INT DEFAULT 5);
 Query OK, 0 rows affected (0.15 sec)
 
 INSERT INTO t1 VALUES (1, 1);
-Query OK, 1 row affected (0.01 sec)
+Query OK, 1 行，耗时 (0.01 sec)
 
 UPDATE t1 SET c1=DEFAULT(c1)+3;
-Query OK, 1 row affected (0.02 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
+Query OK, 1 行，耗时 (0.02 sec)
+匹配的行数：1  改变的行数：1  警告数：0
 
 TABLE t1;
 +----+------+
@@ -134,18 +134,18 @@ TABLE t1;
 +----+------+
 |  1 |    8 |
 +----+------+
-1 row in set (0.00 sec)
+1 行，耗时 (0.00 sec)
 ```
 
-In the preceding example, the `UPDATE` statement sets the value of the `c1` column to the default value of the column (which is `5`) plus `3`, resulting in a new value of `8`.
+在上述示例中，`UPDATE` 语句将 `c1` 列的值设置为列的默认值（为 `5`）加上 `3`，得到新值 `8`。
 
 ### GROUPING()
 
-See [`GROUP BY` modifiers](/functions-and-operators/group-by-modifier.md).
+请参见 [`GROUP BY` 修饰符](/functions-and-operators/group-by-modifier.md)。
 
 ### INET_ATON()
 
-The `INET_ATON()` function converts an IPv4 address in dotted-quad notation into a binary version that can be stored efficiently.
+`INET_ATON()` 函数将点分十进制的 IPv4 地址转换为二进制版本，以便高效存储。
 
 ```sql
 SELECT INET_ATON('127.0.0.1');
@@ -157,12 +157,12 @@ SELECT INET_ATON('127.0.0.1');
 +------------------------+
 |             2130706433 |
 +------------------------+
-1 row in set (0.00 sec)
+1 行，耗时 (0.00 sec)
 ```
 
 ### INET_NTOA()
 
-The `INET_NTOA()` function converts a binary IPv4 address into a dotted-quad notation.
+`INET_NTOA()` 函数将二进制 IPv4 地址转换为点分十进制表示。
 
 ```sql
 SELECT INET_NTOA(2130706433);
@@ -174,12 +174,12 @@ SELECT INET_NTOA(2130706433);
 +-----------------------+
 | 127.0.0.1             |
 +-----------------------+
-1 row in set (0.00 sec)
+1 行，耗时 (0.00 sec)
 ```
 
 ### INET6_ATON()
 
-The `INET6_ATON()` function is similar to [`INET_ATON()`](#inet_aton), but `INET6_ATON()` can also handle IPv6 addresses.
+`INET6_ATON()` 类似于 [`INET_ATON()`](#inet_aton)，但支持 IPv6 地址。
 
 ```sql
 SELECT INET6_ATON('::1');
@@ -191,12 +191,12 @@ SELECT INET6_ATON('::1');
 +--------------------------------------+
 | 0x00000000000000000000000000000001   |
 +--------------------------------------+
-1 row in set (0.00 sec)
+1 行，耗时 (0.00 sec)
 ```
 
 ### INET6_NTOA()
 
-The `INET6_NTOA()` function is similar to [`INET_NTOA()`](#inet_ntoa), but `INET6_NTOA()` can also handle IPv6 addresses.
+`INET6_NTOA()` 类似于 [`INET_NTOA()`](#inet_ntoa)，但支持 IPv6 地址。
 
 ```sql
 SELECT INET6_NTOA(0x00000000000000000000000000000001);
@@ -208,12 +208,12 @@ SELECT INET6_NTOA(0x00000000000000000000000000000001);
 +------------------------------------------------+
 | ::1                                            |
 +------------------------------------------------+
-1 row in set (0.00 sec)
+1 行，耗时 (0.00 sec)
 ```
 
 ### IS_IPV4()
 
-The `IS_IPV4()` function tests whether the given argument is an IPv4 address or not.
+`IS_IPV4()` 测试参数是否为 IPv4 地址。
 
 ```sql
 SELECT IS_IPV4('127.0.0.1');
@@ -225,7 +225,7 @@ SELECT IS_IPV4('127.0.0.1');
 +----------------------+
 |                    1 |
 +----------------------+
-1 row in set (0.00 sec)
+1 行，耗时 (0.00 sec)
 ```
 
 ```sql
@@ -238,12 +238,12 @@ SELECT IS_IPV4('300.0.0.1');
 +----------------------+
 |                    0 |
 +----------------------+
-1 row in set (0.00 sec)
+1 行，耗时 (0.00 sec)
 ```
 
 ### IS_IPV4_COMPAT()
 
-The `IS_IPV4_COMPAT()` function tests whether the given argument is an IPv4-compatible address.
+`IS_IPV4_COMPAT()` 测试参数是否为 IPv4 兼容地址。
 
 ```sql
 SELECT IS_IPV4_COMPAT(INET6_ATON('::127.0.0.1'));
@@ -255,12 +255,12 @@ SELECT IS_IPV4_COMPAT(INET6_ATON('::127.0.0.1'));
 +-------------------------------------------+
 |                                         1 |
 +-------------------------------------------+
-1 row in set (0.00 sec)
+1 行，耗时 (0.00 sec)
 ```
 
 ### IS_IPV4_MAPPED()
 
-The `IS_IPV4_MAPPED()` function tests whether the given argument is an IPv4-mapped address.
+`IS_IPV4_MAPPED()` 测试参数是否为 IPv4 映射地址。
 
 ```sql
 SELECT IS_IPV4_MAPPED(INET6_ATON('::ffff:127.0.0.1'));
@@ -272,12 +272,12 @@ SELECT IS_IPV4_MAPPED(INET6_ATON('::ffff:127.0.0.1'));
 +------------------------------------------------+
 |                                              1 |
 +------------------------------------------------+
-1 row in set (0.00 sec)
+1 行，耗时 (0.00 sec)
 ```
 
 ### IS_IPV6()
 
-The `IS_IPV6()` function tests whether the given argument is an IPv6 address.
+`IS_IPV6()` 测试参数是否为 IPv6 地址。
 
 ```sql
 SELECT IS_IPV6('::1');
@@ -289,12 +289,12 @@ SELECT IS_IPV6('::1');
 +----------------+
 |              1 |
 +----------------+
-1 row in set (0.00 sec)
+1 行，耗时 (0.00 sec)
 ```
 
 ### IS_UUID()
 
-The `IS_UUID()` function tests whether the given argument is a [UUID](/best-practices/uuid.md).
+`IS_UUID()` 测试参数是否为 [UUID](/best-practices/uuid.md)。
 
 ```sql
 SELECT IS_UUID('eb48c08c-eb71-11ee-bacf-5405db7aad56');
@@ -306,12 +306,12 @@ SELECT IS_UUID('eb48c08c-eb71-11ee-bacf-5405db7aad56');
 +-------------------------------------------------+
 |                                               1 |
 +-------------------------------------------------+
-1 row in set (0.00 sec)
+1 行，耗时 (0.00 sec)
 ```
 
 ### NAME_CONST()
 
-The `NAME_CONST()` function is used to name columns. It is recommended to use column aliases instead.
+`NAME_CONST()` 用于命名列。建议使用列别名。
 
 ```sql
 SELECT NAME_CONST('column name', 'value') UNION ALL SELECT 'another value';
@@ -324,10 +324,10 @@ SELECT NAME_CONST('column name', 'value') UNION ALL SELECT 'another value';
 | another value |
 | value         |
 +---------------+
-2 rows in set (0.00 sec)
+2 行，耗时 (0.00 sec)
 ```
 
-The preceding statement uses `NAME_CONST()` and the following statement uses the recommended way of aliasing columns.
+上述语句使用 `NAME_CONST()`，而推荐的列别名写法如下。
 
 ```sql
 SELECT 'value' AS 'column name' UNION ALL SELECT 'another value';
@@ -340,12 +340,12 @@ SELECT 'value' AS 'column name' UNION ALL SELECT 'another value';
 | value         |
 | another value |
 +---------------+
-2 rows in set (0.00 sec)
+2 行，耗时 (0.00 sec)
 ```
 
 ### SLEEP()
 
-The `SLEEP()` function is used to pause the execution of queries for a specified number of seconds.
+`SLEEP()` 函数用于暂停查询执行指定的秒数。
 
 ```sql
 SELECT SLEEP(1.5);
@@ -357,12 +357,12 @@ SELECT SLEEP(1.5);
 +------------+
 |          0 |
 +------------+
-1 row in set (1.50 sec)
+1 行，耗时 (1.50 sec)
 ```
 
 ### UUID()
 
-The `UUID()` function returns a universally unique identifier (UUID) version 1 as defined in [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122).
+`UUID()` 函数返回一个符合 [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122) 定义的版本 1 的通用唯一识别码（UUID）。
 
 ```sql
 SELECT UUID();
@@ -374,18 +374,18 @@ SELECT UUID();
 +--------------------------------------+
 | cb4d5ae6-eb6b-11ee-bacf-5405db7aad56 |
 +--------------------------------------+
-1 row in set (0.00 sec)
+1 行，耗时 (0.00 sec)
 ```
 
-See also [Best practices for UUID](/best-practices/uuid.md).
+另请参见 [UUID 的最佳实践](/best-practices/uuid.md)。
 
 ### UUID_TO_BIN
 
-See [BIN_TO_UUID()](#bin_to_uuid).
+参见 [BIN_TO_UUID()](#bin_to_uuid)。
 
 ### VALUES()
 
-The `VALUES(col_name)` function is used to reference the value of a specific column in the `ON DUPLICATE KEY UPDATE` clause of an [`INSERT`](/sql-statements/sql-statement-insert.md) statement.
+`VALUES(col_name)` 函数用于在 [`INSERT`](/sql-statements/sql-statement-insert.md) 语句的 `ON DUPLICATE KEY UPDATE` 子句中引用某列的值。
 
 ```sql
 CREATE TABLE t1 (id INT PRIMARY KEY, c1 INT);
@@ -409,11 +409,11 @@ TABLE t1;
 |  4 |  104 |
 |  5 |   55 |
 +----+------+
-5 rows in set (0.00 sec)
+5 行，耗时 (0.00 sec)
 ```
 
-## Unsupported functions
+## 不支持的函数
 
-| Name | Description  |
+| 名称 | 描述  |
 |:------------|:-----------------------------------------------------------------------------------------------|
-| [`UUID_SHORT()`](https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html#function_uuid-short)            | Provides a UUID that is unique given certain assumptions not present in TiDB [TiDB #4620](https://github.com/pingcap/tidb/issues/4620) |
+| [`UUID_SHORT()`](https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html#function_uuid-short)            | 提供一个在特定假设下唯一的 UUID，但在 TiDB 中不支持 [TiDB #4620](https://github.com/pingcap/tidb/issues/4620) |

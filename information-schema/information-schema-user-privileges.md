@@ -1,18 +1,18 @@
 ---
 title: USER_PRIVILEGES
-summary: Learn the `USER_PRIVILEGES` information_schema table.
+summary: 了解 `USER_PRIVILEGES` information_schema 表。
 ---
 
 # USER_PRIVILEGES
 
-The `USER_PRIVILEGES` table provides information about global privileges. This information comes from the `mysql.user` system table:
+`USER_PRIVILEGES` 表提供关于全局权限的信息。这些信息来自 `mysql.user` 系统表：
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC USER_PRIVILEGES;
 ```
 
-The output is as follows:
+输出如下：
 
 ```sql
 +----------------+--------------+------+------+---------+-------+
@@ -26,13 +26,13 @@ The output is as follows:
 4 rows in set (0.00 sec)
 ```
 
-View the information in the `USER_PRIVILEGES` table:
+查看 `USER_PRIVILEGES` 表中的信息：
 
 ```sql
 SELECT * FROM USER_PRIVILEGES;
 ```
 
-The output is as follows:
+输出如下：
 
 <CustomContent platform="tidb">
 
@@ -120,13 +120,13 @@ The output is as follows:
 
 </CustomContent>
 
-Fields in the `USER_PRIVILEGES` table are described as follows:
+`USER_PRIVILEGES` 表中的字段说明如下：
 
-* `GRANTEE`: The name of the granted user, which is in the format of `'user_name'@'host_name'`.
-* `TABLE_CATALOG`: The name of the catalog to which the table belongs. This value is always `def`.
-* `PRIVILEGE_TYPE`: The privilege type to be granted. Only one privilege type is shown in each row.
-* `IS_GRANTABLE`: If you have the `GRANT OPTION` privilege, the value is `YES`; otherwise, the value is `NO`.
+* `GRANTEE`：被授权用户的名称，格式为 `'user_name'@'host_name'`。
+* `TABLE_CATALOG`：所属表的目录名称，该值始终为 `def`。
+* `PRIVILEGE_TYPE`：被授予的权限类型，每行只显示一种权限类型。
+* `IS_GRANTABLE`：如果你拥有 `GRANT OPTION` 权限，值为 `YES`；否则，值为 `NO`。
 
-## See also
+## 相关链接
 
 - [`SHOW GRANTS`](/sql-statements/sql-statement-show-grants.md)

@@ -1,13 +1,13 @@
 ---
-title: GRANT <privileges> | TiDB SQL Statement Reference
-summary: An overview of the usage of GRANT <privileges> for the TiDB database.
+title: GRANT <privileges> | TiDB SQL 语句参考
+summary: 关于在 TiDB 数据库中使用 GRANT <privileges> 的概述。
 ---
 
 # `GRANT <privileges>`
 
-This statement allocates privileges to a pre-existing user in TiDB. The privilege system in TiDB follows MySQL, where credentials are assigned based on a database/table pattern. Executing this statement requires the `GRANT OPTION` privilege and all privileges you allocate.
+此语句用于为 TiDB 中已存在的用户分配权限。TiDB 的权限系统遵循 MySQL 的设计，其中凭据是基于数据库/表的模式进行分配。执行此语句需要拥有 `GRANT OPTION` 权限以及你所分配的所有权限。
 
-## Synopsis
+## 概述
 
 ```ebnf+diagram
 GrantStmt ::=
@@ -60,7 +60,7 @@ RequireClauseOpt ::= ('REQUIRE' ('NONE' | 'SSL' | 'X509' | RequireListElement ('
 RequireListElement ::= 'ISSUER' Issuer | 'SUBJECT' Subject | 'CIPHER' Cipher | 'SAN' SAN | 'TOKEN_ISSUER' TokenIssuer
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> CREATE USER 'newuser' IDENTIFIED BY 'mypassword';
@@ -79,14 +79,14 @@ mysql> SHOW GRANTS FOR 'newuser';
 2 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-* Similar to MySQL, the `USAGE` privilege denotes the ability to log into a TiDB server.
-* Column level privileges are not currently supported.
-* Similar to MySQL, when the `NO_AUTO_CREATE_USER` sql mode is not present, the `GRANT` statement will automatically create a new user with an empty password when a user does not exist. Removing this sql-mode (it is enabled by default) presents a security risk.
-* In TiDB, after the `GRANT <privileges>` statement is executed successfully, the execution result takes effect immediately on the current connection. Whereas [in MySQL, for some privileges, the execution results take effect only on subsequent connections](https://dev.mysql.com/doc/refman/8.0/en/privilege-changes.html). See [TiDB #39356](https://github.com/pingcap/tidb/issues/39356) for details.
+* 类似于 MySQL，`USAGE` 权限表示登录 TiDB 服务器的能力。
+* 目前不支持列级权限。
+* 类似于 MySQL，当 sql mode 中没有 `NO_AUTO_CREATE_USER` 时，如果用户不存在，`GRANT` 语句会自动创建一个空密码的新用户。移除此 sql mode（它默认启用）存在安全风险。
+* 在 TiDB 中，成功执行 `GRANT <privileges>` 语句后，执行结果会立即在当前连接生效。而 [在 MySQL 中，对于某些权限，执行结果只在后续连接中生效](https://dev.mysql.com/doc/refman/8.0/en/privilege-changes.html)。详情请参见 [TiDB #39356](https://github.com/pingcap/tidb/issues/39356)。
 
-## See also
+## 相关链接
 
 * [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
 * [`REVOKE <privileges>`](/sql-statements/sql-statement-revoke-privileges.md)

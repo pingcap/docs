@@ -1,190 +1,190 @@
 ---
-title: Connect to TiDB with JetBrains DataGrip
-summary: Learn how to connect to TiDB using JetBrains DataGrip. This tutorial also applies to the Database Tools and SQL plugin available in other JetBrains IDEs, such as IntelliJ, PhpStorm, and PyCharm.
+title: 使用 JetBrains DataGrip 连接 TiDB
+summary: 了解如何使用 JetBrains DataGrip 连接 TiDB。本教程同样适用于其他 JetBrains IDE 中的 Database Tools 和 SQL 插件，例如 IntelliJ、PhpStorm 和 PyCharm。
 ---
 
-# Connect to TiDB with JetBrains DataGrip
+# 使用 JetBrains DataGrip 连接 TiDB
 
-TiDB is a MySQL-compatible database, and [JetBrains DataGrip](https://www.jetbrains.com/help/datagrip/getting-started.html) is a powerful integrated development environment (IDE) for database and SQL. This tutorial walks you through the process of connecting to your TiDB cluster using DataGrip.
+TiDB 是一个与 MySQL 兼容的数据库，[JetBrains DataGrip](https://www.jetbrains.com/help/datagrip/getting-started.html) 是一款功能强大的数据库和 SQL 集成开发环境（IDE）。本教程将引导你完成使用 DataGrip 连接你的 TiDB 集群的流程。
 
-> **Note:**
+> **注意：**
 >
-> This tutorial is compatible with {{{ .starter }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> 本教程兼容 {{{ .starter }}}、TiDB Cloud Dedicated 和 TiDB 自托管（Self-Managed）版本。
 
-You can use DataGrip in two ways:
+你可以通过两种方式使用 DataGrip：
 
-- As the [DataGrip IDE](https://www.jetbrains.com/datagrip/download) standalone tool.
-- As the [Database Tools and SQL plugin](https://www.jetbrains.com/help/idea/relational-databases.html) in JetBrains IDEs, such as IntelliJ, PhpStorm, and PyCharm.
+- 作为 [DataGrip IDE](https://www.jetbrains.com/datagrip/download) 独立工具。
+- 作为 JetBrains IDE（如 IntelliJ、PhpStorm 和 PyCharm）中的 [Database Tools and SQL 插件](https://www.jetbrains.com/help/idea/relational-databases.html)。
 
-This tutorial mainly focuses on the standalone DataGrip IDE. The steps of connecting to TiDB using the JetBrains Database Tools and SQL plugin in JetBrains IDEs are similar. You can also follow the steps in this document for reference when connecting to TiDB from any JetBrains IDE.
+本教程主要聚焦于独立的 DataGrip IDE。使用 JetBrains IDE 中的 Database Tools 和 SQL 插件连接 TiDB 的步骤类似。在连接 TiDB 时，你也可以参考本文的步骤。
 
-## Prerequisites
+## 前提条件
 
-To complete this tutorial, you need:
+完成本教程，你需要：
 
-- [DataGrip **2023.2.1** or later](https://www.jetbrains.com/datagrip/download/) or a non-community edition [JetBrains](https://www.jetbrains.com/) IDE.
-- A TiDB cluster.
+- [DataGrip **2023.2.1** 或更高版本](https://www.jetbrains.com/datagrip/download/) 或其他非社区版的 [JetBrains](https://www.jetbrains.com/) IDE。
+- 一个 TiDB 集群。
 
 <CustomContent platform="tidb">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**如果你还没有 TiDB 集群，可以按照以下方式创建：**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+- （推荐）参考 [创建 {{{ .starter }}} 集群](/develop/dev-guide-build-cluster-in-cloud.md) 来创建你自己的 TiDB Cloud 集群。
+- 参考 [部署本地测试 TiDB 集群](/quick-start-with-tidb.md#deploy-a-local-test-cluster) 或 [部署生产环境 TiDB 集群](/production-deployment-using-tiup.md) 来创建本地集群。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**如果你还没有 TiDB 集群，可以按照以下方式创建：**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
+- （推荐）参考 [创建 {{{ .starter }}} 集群](/develop/dev-guide-build-cluster-in-cloud.md) 来创建你自己的 TiDB Cloud 集群。
+- 参考 [部署本地测试 TiDB 集群](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) 或 [部署生产环境 TiDB 集群](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) 来创建本地集群。
 
 </CustomContent>
 
-## Connect to TiDB
+## 连接 TiDB
 
-Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
+根据你选择的 TiDB 部署方式，连接到你的 TiDB 集群。
 
 <SimpleTab>
 <div label="{{{ .starter }}}">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. 进入 [**Clusters**](https://tidbcloud.com/console/clusters) 页面，然后点击目标集群的名称，进入其概览页面。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2. 点击右上角的 **Connect**。会显示连接对话框。
 
-3. Ensure the configurations in the connection dialog match your operating environment.
+3. 确认连接对话框中的配置与操作环境匹配。
 
-    - **Connection Type** is set to `Public`
-    - **Branch** is set to `main`
-    - **Connect With** is set to `DataGrip`
-    - **Operating System** matches your environment.
+    - **Connection Type** 设置为 `Public`
+    - **Branch** 设置为 `main`
+    - **Connect With** 设置为 `DataGrip`
+    - **Operating System** 与你的环境一致。
 
-4. Click **Generate Password** to create a random password.
+4. 点击 **Generate Password** 以生成随机密码。
 
     > **Tip:**
     >
-    > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
+    > 如果之前已创建密码，可以使用原密码，或点击 **Reset Password** 生成新密码。
 
-5. Launch DataGrip and create a project to manage your connections.
+5. 启动 DataGrip 并创建一个项目以管理你的连接。
 
     ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
 
-6. In the newly created project, click **+** in the upper-left corner of the **Database Explorer** panel, and select **Data Source** > **Other** > **TiDB**.
+6. 在新建的项目中，点击 **Database Explorer** 面板左上角的 **+**，选择 **Data Source** > **Other** > **TiDB**。
 
     ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
-7. Copy the connection string from the TiDB Cloud connection dialog. Then, paste it into the **URL** field, and the remaining parameters will be auto-populated. An example result is as follows:
+7. 从 TiDB Cloud 连接对话框中复制连接字符串，然后粘贴到 **URL** 字段中，其他参数会自动填充。示例如下：
 
     ![Configure the URL field for {{{ .starter }}}](/media/develop/datagrip-url-paste.jpg)
 
-    If a **Download missing driver files** warning displays, click **Download** to acquire the driver files.
+    如果出现 **Download missing driver files** 警告，点击 **Download** 以下载驱动文件。
 
-8. Click **Test Connection** to validate the connection to the {{{ .starter }}} cluster.
+8. 点击 **Test Connection**，验证是否成功连接到 {{{ .starter }}} 集群。
 
     ![Test the connection to a {{{ .starter }}} cluster](/media/develop/datagrip-test-connection.jpg)
 
-9. Click **OK** to save the connection configuration.
+9. 点击 **OK** 保存连接配置。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. 进入 [**Clusters**](https://tidbcloud.com/console/clusters) 页面，然后点击目标集群的名称，进入其概览页面。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2. 点击右上角的 **Connect**。会显示连接对话框。
 
-3. In the connection dialog, select **Public** from the **Connection Type** drop-down list, and then click **CA cert** to download the CA certificate.
+3. 在连接对话框中，从 **Connection Type** 下拉列表选择 **Public**，然后点击 **CA cert** 下载 CA 证书。
 
-    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) to configure it before your first connection.
+    如果尚未配置 IP 访问列表，请点击 **Configure IP Access List** 或按照 [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) 的步骤进行配置，然后再进行首次连接。
 
-    In addition to the **Public** connection type, TiDB Cloud Dedicated supports **Private Endpoint** and **VPC Peering** connection types. For more information, see [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
+    除了 **Public** 连接类型外，TiDB Cloud Dedicated 还支持 **Private Endpoint** 和 **VPC Peering** 连接类型。更多信息请参见 [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)。
 
-4. Launch DataGrip and create a project to manage your connections.
+4. 启动 DataGrip 并创建一个项目以管理你的连接。
 
     ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
 
-5. In the newly created project, click **+** in the upper-left corner of the **Database Explorer** panel, and select **Data Source** > **Other** > **TiDB**.
+5. 在新建的项目中，点击 **Database Explorer** 面板左上角的 **+**，选择 **Data Source** > **Other** > **TiDB**。
 
     ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
-6. Copy and paste the appropriate connection string into the **Data Source and Drivers** window in DataGrip. The mappings between DataGrip fields and TiDB Cloud Dedicated connection string are as follows:
+6. 将适用的连接字符串复制粘贴到 DataGrip 中的 **Data Source and Drivers** 窗口。DataGrip 字段与 TiDB Cloud Dedicated 连接字符串的映射关系如下：
 
-    | DataGrip field | TiDB Cloud Dedicated connection string |
-    | -------------- | ------------------------------- |
-    | Host           | `{host}`                        |
-    | Port           | `{port}`                        |
-    | User           | `{user}`                        |
-    | Password       | `{password}`                    |
+    | DataGrip 字段 | TiDB Cloud Dedicated 连接字符串 |
+    | -------------- | ------------------------------ |
+    | Host           | `{host}`                       |
+    | Port           | `{port}`                       |
+    | User           | `{user}`                       |
+    | Password       | `{password}`                   |
 
-    An example is as follows:
+    示例如下：
 
     ![Configure the connection parameters for TiDB Cloud Dedicated](/media/develop/datagrip-dedicated-connect.jpg)
 
-7. Click the **SSH/SSL** tab, select the **Use SSL** checkbox, and input the CA certificate path into the **CA file** field.
+7. 点击 **SSH/SSL** 标签，勾选 **Use SSL**，并在 **CA file** 字段中输入 CA 证书路径。
 
     ![Configure the CA for TiDB Cloud Dedicated](/media/develop/datagrip-dedicated-ssl.jpg)
 
-    If a **Download missing driver files** warning displays, click **Download** to acquire the driver files.
+    如果出现 **Download missing driver files** 警告，点击 **Download** 以下载驱动文件。
 
-8. Click the **Advanced** tab, scroll to find the **enabledTLSProtocols** parameter, and set its value to `TLSv1.2,TLSv1.3`.
+8. 点击 **Advanced** 标签，滚动查找 **enabledTLSProtocols** 参数，并将其值设置为 `TLSv1.2,TLSv1.3`。
 
     ![Configure the TLS for TiDB Cloud Dedicated](/media/develop/datagrip-dedicated-advanced.jpg)
 
-9. Click **Test Connection** to validate the connection to the TiDB Cloud Dedicated cluster.
+9. 点击 **Test Connection**，验证是否成功连接到 TiDB Cloud Dedicated 集群。
 
     ![Test the connection to a TiDB Cloud Dedicated cluster](/media/develop/datagrip-dedicated-test-connection.jpg)
 
-10. Click **OK** to save the connection configuration.
+10. 点击 **OK**，保存连接配置。
 
 </div>
 <div label="TiDB Self-Managed">
 
-1. Launch DataGrip and create a project to manage your connections.
+1. 启动 DataGrip 并创建一个项目以管理你的连接。
 
     ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
 
-2. In the newly created project, click **+** in the upper-left corner of the **Database Explorer** panel, and select **Data Source** > **Other** > **TiDB**.
+2. 在新建的项目中，点击 **Database Explorer** 面板左上角的 **+**，选择 **Data Source** > **Other** > **TiDB**。
 
     ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
-3. Configure the following connection parameters:
+3. 配置以下连接参数：
 
-    - **Host**: The IP address or domain name of your TiDB Self-Managed cluster.
-    - **Port**: The port number of your TiDB Self-Managed cluster.
-    - **User**: The username to use to connect to your TiDB Self-Managed cluster.
-    - **Password**: The password of the username.
+    - **Host**：你的 TiDB 自托管（Self-Managed）集群的 IP 地址或域名。
+    - **Port**：你的 TiDB 自托管集群的端口号。
+    - **User**：用于连接的用户名。
+    - **Password**：用户名对应的密码。
 
-    An example is as follows:
+    示例如下：
 
     ![Configure the connection parameters for TiDB Self-Managed](/media/develop/datagrip-self-hosted-connect.jpg)
 
-    If a **Download missing driver files** warning displays, click **Download** to acquire the driver files.
+    如果出现 **Download missing driver files** 警告，点击 **Download** 以下载驱动文件。
 
-4. Click **Test Connection** to validate the connection to the TiDB Self-Managed cluster.
+4. 点击 **Test Connection**，验证是否成功连接到 TiDB 自托管集群。
 
     ![Test the connection to a TiDB Self-Managed cluster](/media/develop/datagrip-self-hosted-test-connection.jpg)
 
-5. Click **OK** to save the connection configuration.
+5. 点击 **OK**，保存连接配置。
 
 </div>
 </SimpleTab>
 
-## Next steps
+## 后续步骤
 
-- Learn more usage of DataGrip from [the documentation of DataGrip](https://www.jetbrains.com/help/datagrip/getting-started.html).
-- Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
-- Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
+- 通过 [DataGrip 的文档](https://www.jetbrains.com/help/datagrip/getting-started.html) 了解更多 DataGrip 的用法。
+- 参考 [开发者指南]( /develop/dev-guide-overview.md) 中的章节，学习 TiDB 应用开发的最佳实践，例如 [插入数据](/develop/dev-guide-insert-data.md)、[更新数据](/develop/dev-guide-update-data.md)、[删除数据](/develop/dev-guide-delete-data.md)、[单表读取](/develop/dev-guide-get-data-from-single-table.md)、[事务](/develop/dev-guide-transaction-overview.md) 和 [SQL 性能优化](/develop/dev-guide-optimize-sql-overview.md)。
+- 通过专业的 [TiDB 开发者课程](https://www.pingcap.com/education/) 学习，并在考试通过后获得 [TiDB 认证](https://www.pingcap.com/education/certification/)。
 
-## Need help?
+## 需要帮助？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 社区提问，或 [提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 社区提问，或 [提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

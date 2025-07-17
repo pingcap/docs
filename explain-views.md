@@ -1,25 +1,24 @@
 ---
 title: EXPLAIN Statements Using Views
-summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
+summary: 了解 TiDB 中 `EXPLAIN` 语句返回的执行计划信息。
 ---
 
 # EXPLAIN Statements Using Views
 
-`EXPLAIN` displays the tables and indexes that a [view](/views.md) references, not the name of the view itself. This is because views are only virtual tables and do not store any data themselves. The definition of the view and the rest of the statement are merged together during SQL optimization.
+`EXPLAIN` 显示的是 [view](/views.md) 所引用的表和索引，而不是视图本身的名称。这是因为视图只是虚拟表，并不存储任何数据。视图的定义和语句的其余部分在 SQL 优化过程中会合并在一起。
 
 <CustomContent platform="tidb">
 
-From the [bikeshare example database](/import-example-data.md), you can see that the following two queries are executed in a similar manner:
+从 [bikeshare example database](/import-example-data.md) 可以看到，以下两个查询的执行方式类似：
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-From the [bikeshare example database](/tidb-cloud/import-sample-data.md), you can see that the following two queries are executed in a similar manner:
+从 [bikeshare example database](/tidb-cloud/import-sample-data.md) 可以看到，以下两个查询的执行方式类似：
 
 </CustomContent>
 
-{{< copyable "sql" >}}
 
 ```sql
 ALTER TABLE trips ADD INDEX (duration);
@@ -52,9 +51,8 @@ Query OK, 0 rows affected (0.13 sec)
 3 rows in set (0.00 sec)
 ```
 
-Similarly, predicates from the view are pushed down to the base table:
+同样，视图中的谓词会被下推到基础表中：
 
-{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN SELECT * FROM long_trips WHERE bike_number = 'W00950';
@@ -82,11 +80,10 @@ EXPLAIN SELECT * FROM trips WHERE bike_number = 'W00950';
 3 rows in set (0.00 sec)
 ```
 
-In the first statement above, you can see that the index is used to satisfy the view definition, and then the `bike_number = 'W00950'` is applied when TiDB reads the table row. In the second statement, there are no indexes to satisfy the statement, and a `TableFullScan` is used.
+在上面第一个语句中，你可以看到索引被用来满足视图定义，然后在 TiDB 读取表行时应用了 `bike_number = 'W00950'`。在第二个语句中，没有索引满足语句，因此使用了 `TableFullScan`。
 
-TiDB makes use of indexes that satisfy both the view definition and the statement itself. Consider the following composite index:
+TiDB 会利用既满足视图定义又满足语句的索引。考虑以下复合索引：
 
-{{< copyable "sql" >}}
 
 ```sql
 ALTER TABLE trips ADD INDEX (bike_number, duration);
@@ -116,4 +113,4 @@ Query OK, 0 rows affected (2 min 31.20 sec)
 3 rows in set (0.00 sec)
 ```
 
-In the first statement, TiDB is able to use both parts of the composite index `(bike_number, duration)`. In the second statement, only the first part which is `bike_number` of the index `(bike_number, duration)` is used.
+在第一个语句中，TiDB 能够同时利用 `(bike_number, duration)` 这两个部分的复合索引。而在第二个语句中，只使用了索引 `(bike_number, duration)` 的第一个部分 `bike_number`。

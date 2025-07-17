@@ -1,13 +1,13 @@
 ---
-title: CREATE TABLE LIKE | TiDB SQL Statement Reference
-summary: An overview of the usage of CREATE TABLE LIKE for the TiDB database.
+title: CREATE TABLE LIKE | TiDB SQL 语句参考
+summary: 关于在 TiDB 数据库中使用 CREATE TABLE LIKE 的概述。
 ---
 
 # CREATE TABLE LIKE
 
-This statement copies the definition of an existing table, without copying any data.
+此语句复制现有表的定义，但不复制任何数据。
 
-## Synopsis
+## 概述
 
 ```ebnf+diagram
 CreateTableLikeStmt ::=
@@ -24,7 +24,7 @@ OnCommitOpt ::=
     ('ON' 'COMMIT' 'DELETE' 'ROWS')?
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> CREATE TABLE t1 (a INT NOT NULL);
@@ -53,15 +53,15 @@ mysql> SELECT * FROM t2;
 Empty set (0.00 sec)
 ```
 
-## Pre-split region
+## 预分割区域
 
-If the table to be copied is defined with the `PRE_SPLIT_REGIONS` attribute, the table created using the `CREATE TABLE LIKE` statement inherits this attribute, and the Region on the new table will be split. For details of `PRE_SPLIT_REGIONS`, see [`CREATE TABLE` Statement](/sql-statements/sql-statement-create-table.md).
+如果被复制的表定义了 `PRE_SPLIT_REGIONS` 属性，使用 `CREATE TABLE LIKE` 语句创建的表会继承此属性，并且新表上的 Region 将会被分割。关于 `PRE_SPLIT_REGIONS` 的详细信息，请参见 [`CREATE TABLE` 语句](/sql-statements/sql-statement-create-table.md)。
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `CREATE TABLE LIKE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中的 `CREATE TABLE LIKE` 语句与 MySQL 完全兼容。如果你发现任何兼容性差异，[请报告一个 bug](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 相关链接
 
 * [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 * [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)

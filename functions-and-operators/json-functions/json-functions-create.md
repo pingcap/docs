@@ -1,15 +1,15 @@
 ---
 title: JSON Functions That Create JSON Values
-summary: Learn about JSON functions that create JSON values.
+summary: 了解用于创建 JSON 值的 JSON 函数。
 ---
 
 # JSON Functions That Create JSON Values
 
-This document describes JSON functions that create JSON values.
+本文档描述了用于创建 JSON 值的 JSON 函数。
 
 ## [JSON_ARRAY()](https://dev.mysql.com/doc/refman/8.0/en/json-creation-functions.html#function_json-array)
 
-The `JSON_ARRAY([val[, val] ...])` function evaluates a (possibly empty) list of values and returns a JSON array containing those values.
+`JSON_ARRAY([val[, val] ...])` 函数会评估一个（可能为空的）值列表，并返回包含这些值的 JSON 数组。
 
 ```sql
 SELECT JSON_ARRAY(1,2,3,4,5), JSON_ARRAY("foo", "bar");
@@ -26,7 +26,7 @@ SELECT JSON_ARRAY(1,2,3,4,5), JSON_ARRAY("foo", "bar");
 
 ## [JSON_OBJECT()](https://dev.mysql.com/doc/refman/8.0/en/json-creation-functions.html#function_json-object)
 
-The `JSON_OBJECT([key, val[, key, val] ...])` function evaluates a (possibly empty) list of key-value pairs and returns a JSON object containing those pairs.
+`JSON_OBJECT([key, val[, key, val] ...])` 函数会评估一个（可能为空的）键值对列表，并返回包含这些键值对的 JSON 对象。
 
 ```sql
 SELECT JSON_OBJECT("database", "TiDB", "distributed", TRUE);
@@ -43,7 +43,7 @@ SELECT JSON_OBJECT("database", "TiDB", "distributed", TRUE);
 
 ## [JSON_QUOTE()](https://dev.mysql.com/doc/refman/8.0/en/json-creation-functions.html#function_json-quote)
 
-The `JSON_QUOTE(str)` function returns a string as a JSON value with quotes.
+`JSON_QUOTE(str)` 函数会将字符串作为带引号的 JSON 值返回。
 
 ```sql
 SELECT JSON_QUOTE('The name is "O\'Neil"');
