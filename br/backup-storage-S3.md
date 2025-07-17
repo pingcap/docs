@@ -7,6 +7,10 @@ summary: Learn how to use BR to back up data to and restore data from Amazon S3 
 
 The Backup & Restore (BR) tool supports using Amazon S3 or other Amazon S3-compatible file storages as the external storage for backing up and restoring data.
 
+> **Tip:**
+>
+> Starting from v6.5, the content of this document has been incorporated into [TiDB Backup and Restore Use Cases](https://docs.pingcap.com/tidb/v6.5/backup-and-restore-use-cases/#configure-backup-storage-amazon-s3). To view the v6.5 or later version of this document, click [TiDB Backup and Restore Use Cases](https://docs.pingcap.com/tidb/v6.5/backup-and-restore-use-cases/), and switch to the desired version using the version selector in the upper-left corner.
+
 ## Application scenarios
 
 By using Amazon S3, you can quickly back up the data of a TiDB cluster deployed on Amazon EC2 to Amazon S3, or quickly restore a TiDB cluster from the backup data in Amazon S3.
