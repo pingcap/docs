@@ -1,63 +1,63 @@
 ---
 title: ticloud serverless branch shell
-summary: "`ticloud serverless branch shell` 命令的参考。"
+summary: The reference of `ticloud serverless branch shell`.
 aliases: ['/tidbcloud/ticloud-connect']
 ---
 
 # ticloud serverless branch shell
 
-连接到 TiDB Cloud Serverless 集群的分支：
+Connect to a branch of a TiDB Cloud Serverless cluster:
 
 ```shell
 ticloud serverless branch shell [flags]
 ```
 
-## 示例
+## Examples
 
-在交互模式下连接到 TiDB Cloud Serverless 分支：
+Connect to a TiDB Cloud Serverless branch in interactive mode:
 
 ```shell
 ticloud serverless branch shell
 ```
 
-在非交互模式下使用默认用户连接到 TiDB Cloud Serverless 分支：
+Connect to a TiDB Cloud Serverless branch with the default user in non-interactive mode:
 
 ```shell
 ticloud serverless branch shell -c <cluster-id> -b <branch-id>
 ```
 
-在非交互模式下使用默认用户和密码连接到 TiDB Cloud Serverless 分支：
+Connect to a TiDB Cloud Serverless branch with the default user and password in non-interactive mode:
 
 ```shell
 ticloud serverless branch shell -c <cluster-id> -b <branch-id> --password <password>
 ```
 
-在非交互模式下使用指定用户和密码连接到 TiDB Cloud Serverless 分支：
+Connect to a TiDB Cloud Serverless branch with a specific user and password in non-interactive mode:
 
 ```shell
 ticloud serverless branch shell -c <cluster-id> -b <branch-id> -u <user-name> --password <password>
 ```
 
-## 参数标志
+## Flags
 
-在非交互模式下，你需要手动输入必需的参数标志。在交互模式下，你可以按照 CLI 提示填写它们。
+In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
-| 参数标志               | 描述                                | 是否必需 | 说明                                                 |
-|------------------------|-------------------------------------|----------|------------------------------------------------------|
-| -b, --branch-id string | 指定分支的 ID。                     | 是       | 仅在非交互模式下有效。                               |
-| -c, --cluster-id string | 指定集群的 ID。                     | 是       | 仅在非交互模式下有效。                               |
-| -h, --help             | 显示此命令的帮助信息。              | 否       | 在非交互和交互模式下均有效。                         |
-| --password             | 指定用户的密码。                    | 否       | 仅在非交互模式下有效。                               |
-| -u, --user string      | 指定登录用户。                      | 否       | 仅在非交互模式下有效。                               |
+| Flag                    | Description                       | Required | Note                                                 |
+|-------------------------|-----------------------------------|----------|------------------------------------------------------|
+| -b, --branch-id string  | Specifies the ID of the branch.                         | Yes      | Only works in non-interactive mode.                  |
+| -c, --cluster-id string | Specifies the ID of the cluster.                        | Yes      | Only works in non-interactive mode.                  |
+| -h, --help              | Shows help information for this command. | No       | Works in both non-interactive and interactive modes. |
+| --password              | Specifies the password of the user.          | No       | Only works in non-interactive mode.                  |
+| -u, --user string       | Specifies the user for login.         | No       | Only works in non-interactive mode.                  |
 
-## 继承的参数标志
+## Inherited flags
 
-| 参数标志              | 描述                                                                                                | 是否必需 | 说明                                                                                                   |
-|----------------------|-----------------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------------------|
-| --no-color           | 禁用输出中的颜色。                                                                                   | 否       | 仅在非交互模式下有效。在交互模式下，禁用颜色可能对某些 UI 组件不起作用。                              |
-| -P, --profile string | 指定此命令中使用的活动[用户配置文件](/tidb-cloud/cli-reference.md#user-profile)。                   | 否       | 在非交互和交互模式下均有效。                                                                           |
-| -D, --debug          | 启用调试模式。                                                                                       | 否       | 在非交互和交互模式下均有效。                                                                           |
+| Flag                 | Description                                                                                          | Required | Note                                                                                                             |
+|----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
+| --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
+| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
+| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both non-interactive and interactive modes.                                                             |
 
-## 反馈
+## Feedback
 
-如果你对 TiDB Cloud CLI 有任何问题或建议，欢迎创建 [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)。同时，我们也欢迎任何贡献。
+If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.

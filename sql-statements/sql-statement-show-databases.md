@@ -1,15 +1,15 @@
 ---
-title: SHOW DATABASES | TiDB SQL 语句参考
-summary: TiDB 数据库中 SHOW DATABASES 的使用概览。
+title: SHOW DATABASES | TiDB SQL Statement Reference
+summary: An overview of the usage of SHOW DATABASES for the TiDB database.
 ---
 
 # SHOW DATABASES
 
-该语句显示当前用户具有权限的数据库列表。当前用户无权访问的数据库将在列表中隐藏。`information_schema` 数据库始终在数据库列表中首先显示。
+This statement shows a list of databases that the current user has privileges to. Databases which the current user does not have access to will appear hidden from the list. The `information_schema` database always appears first in the list of databases.
 
-`SHOW SCHEMAS` 是该语句的别名。
+`SHOW SCHEMAS` is an alias of this statement.
 
-## 语法图
+## Synopsis
 
 ```ebnf+diagram
 ShowDatabasesStmt ::=
@@ -20,7 +20,7 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## 示例
+## Examples
 
 ```sql
 mysql> SHOW DATABASES;
@@ -50,11 +50,11 @@ mysql> SHOW DATABASES;
 5 rows in set (0.00 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-TiDB 中的 `SHOW DATABASES` 语句与 MySQL 完全兼容。如果发现任何兼容性差异，请[报告问题](https://docs.pingcap.com/tidb/stable/support)。
+The `SHOW DATABASES` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
-## 另请参阅
+## See also
 
 * [SHOW SCHEMAS](/sql-statements/sql-statement-show-schemas.md)
 * [DROP DATABASE](/sql-statements/sql-statement-drop-database.md)

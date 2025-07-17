@@ -1,226 +1,226 @@
 ---
-title: 数据服务入门
-summary: 了解如何使用 TiDB Cloud 数据服务通过 HTTPS 请求访问数据。
+title: Get Started with Data Service
+summary: Learn how to use TiDB Cloud Data Service to access your data with HTTPS requests.
 ---
 
-# 数据服务入门
+# Get Started with Data Service
 
-数据服务（beta）使你能够通过自定义 API 端点使用 HTTPS 请求访问 TiDB Cloud 数据，让你可以无缝集成任何支持 HTTPS 的应用程序或服务。
+Data Service (beta) enables you to access TiDB Cloud data via an HTTPS request using a custom API endpoint and allows you to seamlessly integrate with any application or service that is compatible with HTTPS.
 
-> **提示：**
+> **Tip:**
 >
-> TiDB Cloud 为 TiDB 集群提供 Chat2Query API。启用后，TiDB Cloud 将自动在数据服务中创建一个名为 **Chat2Query** 的系统数据应用和一个 Chat2Data 端点。你可以调用此端点，通过提供指令让 AI 生成并执行 SQL 语句。
+> TiDB Cloud provides a Chat2Query API for TiDB clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions.
 >
-> 更多信息，请参阅[Chat2Query API 入门](/tidb-cloud/use-chat2query-api.md)。
+> For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
 
-本文介绍如何通过创建数据应用、开发、测试、部署和调用端点，快速开始使用 TiDB Cloud 数据服务（beta）。数据应用是一组端点的集合，你可以使用这些端点访问特定应用程序的数据。
+This document introduces how to quickly get started with TiDB Cloud Data Service (beta) by creating a Data App, developing, testing, deploying, and calling an endpoint. A Data App is a collection of endpoints that you can use to access data for a specific application.
 
-## 开始之前
+## Before you begin
 
-在创建数据应用之前，请确保你已创建了一个 [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 集群。如果你还没有，请按照[创建 TiDB Cloud Serverless 集群](/tidb-cloud/create-tidb-cluster-serverless.md)中的步骤创建一个。
+Before creating a Data App, make sure that you have created a [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster. If you do not have one, follow the steps in [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create one.
 
-## 从示例数据应用开始
+## Get started with a sample Data App
 
-创建示例数据应用是开始使用数据服务的最佳方式。如果你的项目还没有任何数据应用，可以按照**数据服务**页面上的屏幕说明创建一个示例数据应用，并使用此应用探索数据服务功能。
+Creating a sample Data App is the best way to get started with Data Service. If your project does not have any Data App yet, you can follow the on-screen instructions on the **Data Service** page to create a sample Data App and use this App to explore Data Service features.
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，点击左侧导航栏中的 <MDSvgIcon name="icon-left-data-service" /> **数据服务**。
+1. In the [TiDB Cloud console](https://tidbcloud.com), click <MDSvgIcon name="icon-left-data-service" /> **Data Service** in the left navigation pane.
 
-2. 在**数据服务**页面，点击**创建示例数据应用**。将显示一个对话框。
+2. On the **Data Service** page, click **Create Sample Data App**. A dialog is displayed.
 
-3. 在对话框中，根据需要更新应用名称，选择你希望数据应用访问的集群，然后点击**创建**。
+3. In the dialog, update the App name if necessary, select clusters that you want the Data App to access, and then click **Create**.
 
-    创建过程需要几秒钟。
+    The creation process takes a few seconds.
 
-    > **注意：**
+    > **Note:**
     >
-    > 如果你当前的项目中没有集群，可以在**链接数据源**下拉列表中点击**创建新集群**先创建一个。
+    > If there is no cluster in your current project, you can click **Create New Cluster** in the **Link Data Sources** drop-down list to create one first.
 
-4. 示例数据应用自动创建后，你可以在左侧窗格中看到应用名称和端点列表，中间窗格中显示端点的 SQL 语句，右侧显示使用示例数据应用的说明。
+4. After the sample Data App is automatically created, you can find the App name, a list of endpoints in the left pane, the SQL statements of an endpoint in the middle pane, and instructions about using the sample Data App on the right side.
 
-5. 按照右侧的说明选择一个端点并使用 curl 命令调用该端点。
+5. Follow the instructions on the right side to choose an endpoint and use the curl command to call the endpoint.
 
-## 从你自己的数据应用开始
+## Get started with your own Data App
 
-要开始使用数据服务，你也可以创建自己的数据应用，然后按照以下步骤开发、测试、部署和调用端点。
+To get started with Data Service, you can also create your own Data App, and then develop, test, deploy, and call endpoints according to the following steps.
 
-### 步骤 1. 创建数据应用
+### Step 1. Create a Data App
 
-要创建数据应用，请执行以下步骤：
+ To create a Data App, perform the following steps:
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，点击左侧导航栏中的 <MDSvgIcon name="icon-left-data-service" /> **数据服务**。
+1. In the [TiDB Cloud console](https://tidbcloud.com), click <MDSvgIcon name="icon-left-data-service" /> **Data Service** in the left navigation pane.
 
-2. 在项目的[**数据服务**](https://tidbcloud.com/project/data-service)页面，点击左侧窗格中的 <MDSvgIcon name="icon-create-data-app" /> **创建数据应用**。
+2. On the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project, click <MDSvgIcon name="icon-create-data-app" /> **Create DataApp** in the left pane.
 
-    > **提示：**
+    > **Tip:**
     >
-    > 如果这是你项目中的第一个数据应用，请点击页面中间的**创建数据应用**。
+    > If this is the first Data App in your project, click **Create Data App** in the middle of the page.
 
-3. 在**创建数据应用**对话框中，输入名称、描述，并选择你希望数据应用访问的集群。
+3. In the **Create Data App** dialog, enter a name, a description, and select clusters that you want the Data App to access.
 
-    > **注意：**
+    > **Note:**
     >
-    > 默认情况下，数据应用类型为**标准数据应用**。如果你想创建 **Chat2Query 数据应用**，请参考 [Chat2Query API 入门](/tidb-cloud/use-chat2query-api.md)而不是本文档。
+    > By default, the Data App type is **Standard Data App**. If you want to create a **Chat2Query Data App**, refer to [Get Started with Chat2Query API](/tidb-cloud/use-chat2query-api.md) instead of this document.
 
-4. （可选）要自动将数据应用的端点部署到你首选的 GitHub 仓库和分支，请启用**连接到 GitHub**，然后执行以下操作：
+4. (Optional) To automatically deploy endpoints of the Data App to your preferred GitHub repository and branch, enable **Connect to GitHub**, and then do the following:
 
-    1. 点击**在 GitHub 上安装**，然后按照屏幕说明在目标仓库上安装 **TiDB Cloud Data Service** 应用。
-    2. 返回 TiDB Cloud 控制台，然后点击**授权**以授权访问 GitHub 上的应用。
-    3. 指定要保存数据应用配置文件的目标仓库、分支和目录。
+    1. Click **Install on GitHub**, and then follow the on-screen instructions to install **TiDB Cloud Data Service** as an application on your target repository.
+    2. Go back to the TiDB Cloud console, and then click **Authorize** to authorize access to the application on GitHub.
+    3. Specify the target repository, branch, and directory where you want to save the configuration files of your Data App.
 
-    > **注意：**
+    > **Note:**
     >
-    > - 目录必须以斜杠 (`/`) 开头。例如，`/mydata`。如果你指定的目录在目标仓库和分支中不存在，将自动创建。
-    > - 仓库、分支和目录的组合标识了配置文件的路径，在数据应用中必须是唯一的。如果你指定的路径已被另一个数据应用使用，你需要指定一个新路径。否则，当前数据应用在 TiDB Cloud 控制台中配置的端点将覆盖你指定路径中的文件。
+    > - The directory must start with a slash (`/`). For example, `/mydata`. If the directory you specified does not exist in the target repository and branch, it will be created automatically.
+    > - The combination of repository, branch, and directory identifies the path of the configuration files, which must be unique among Data Apps. If your specified path is already used by another Data App, you need to specify a new path instead. Otherwise, the endpoints configured in the TiDB Cloud console for the current Data App will overwrite the files in your specified path.
 
-5. 点击**创建数据应用**。将显示[**数据服务**](https://tidbcloud.com/project/data-service)详情页面。
+5. Click **Create Data App**. The [**Data Service**](https://tidbcloud.com/project/data-service) details page is displayed.
 
-6. 如果你已配置将数据应用连接到 GitHub，请检查你指定的 GitHub 目录。你会发现[数据应用配置文件](/tidb-cloud/data-service-app-config-files.md)已由 `tidb-cloud-data-service` 提交到该目录，这意味着你的数据应用已成功连接到 GitHub。
+6. If you have configured to connect your Data App to GitHub, check your specified GitHub directory. You will find that the [Data App configuration files](/tidb-cloud/data-service-app-config-files.md) have been committed to the directory by `tidb-cloud-data-service`, which means that your Data App is connected to GitHub successfully.
 
-    对于你的新数据应用，默认启用了**自动同步和部署**和**审核草稿**，这样你就可以轻松地在 TiDB Cloud 控制台和 GitHub 之间同步数据应用更改，并在部署前审核更改。有关 GitHub 集成的更多信息，请参阅[使用 GitHub 自动部署数据应用更改](/tidb-cloud/data-service-manage-github-connection.md)。
+    For your new Data App, **Auto Sync & Deployment** and **Review Draft** are enabled by default so you can easily synchronize Data App changes between TiDB Cloud console and GitHub and review changes before the deployment. For more information about the GitHub integration, see [Deploy your Data App changes with GitHub automatically](/tidb-cloud/data-service-manage-github-connection.md).
 
-### 步骤 2. 开发端点
+### Step 2. Develop an endpoint
 
-端点是一个可以自定义执行 SQL 语句的 Web API。
+An endpoint is a web API that you can customize to execute SQL statements.
 
-要创建新端点，找到新创建的数据应用，然后点击应用名称右侧的 **+** **创建端点**。
+To create a new endpoint, locate the newly created Data App and click **+** **Create Endpoint** to the right of the App name.
 
-#### 配置属性
+#### Configure properties
 
-在右侧窗格中，点击**属性**选项卡并为端点设置属性，例如：
+On the right pane, click the **Properties** tab and set properties for the endpoint, such as:
 
-- **路径**：用户访问端点的路径。请求方法和路径的组合在数据应用中必须是唯一的。
+- **Path**: the path that users use to access the endpoint. The combination of the request method and the path must be unique within a Data App.
 
-- **端点 URL**：（只读）URL 根据相应集群所在的区域、数据应用的服务 URL 和端点的路径自动生成。例如，如果端点的路径是 `/my_endpoint/get_id`，则端点 URL 为 `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`。
+- **Endpoint URL**: (read-only) the URL is automatically generated based on the region where the corresponding cluster is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
 
-- **请求方法**：端点的 HTTP 方法。你可以使用 `GET` 检索数据，使用 `POST` 创建或插入数据，使用 `PUT` 更新或修改数据，使用 `DELETE` 删除数据。
+- **Request Method**: the HTTP method of the endpoint. You can use `GET` to retrieve data, use `POST` to create or insert data, use `PUT` to update or modify data, and use `DELETE` to delete data.
 
-有关端点属性的更多信息，请参阅[配置属性](/tidb-cloud/data-service-manage-endpoint.md#configure-properties)。
+For more information about endpoint properties, see [Configure properties](/tidb-cloud/data-service-manage-endpoint.md#configure-properties).
 
-#### 编写 SQL 语句
+#### Write SQL statements
 
-你可以在 SQL 编辑器（即页面中间的窗格）中为端点自定义 SQL 语句。
+You can customize SQL statements for the endpoint in the SQL editor, which is the middle pane on the **Data Service** page.
 
-1. 选择集群。
+1. Select a cluster.
 
-    > **注意：**
+    > **Note:**
     >
-    > 下拉列表中只显示链接到数据应用的集群。要管理链接的集群，请参阅[管理链接的集群](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)。
+    > Only clusters that are linked to the Data App are displayed in the drop-down list. To manage the linked clusters, see [Manage linked clusters](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources).
 
-    在 SQL 编辑器的上部，从下拉列表中选择要执行 SQL 语句的集群。然后，你可以在右侧窗格的**架构**选项卡中查看此集群的所有数据库。
+    On the upper part of the SQL editor, select a cluster on which you want to execute SQL statements from the drop-down list. Then, you can view all databases of this cluster in the **Schema** tab on the right pane.
 
-2. 编写 SQL 语句。
+2. Write SQL statements.
 
-    在查询或修改数据之前，你需要先在 SQL 语句中指定数据库。例如，`USE database_name;`。
+    Before querying or modifying data, you need to first specify the database in the SQL statements. For example, `USE database_name;`.
 
-    在 SQL 编辑器中，你可以编写表连接查询、复杂查询和聚合函数等语句。你也可以简单地输入 `--` 后跟你的指令，让 AI 自动生成 SQL 语句。
+    In the SQL editor, you can write statements such as table join queries, complex queries, and aggregate functions. You can also simply type `--` followed by your instructions to let AI generate SQL statements automatically.
 
-    > **注意：**
+    > **Note:**
     >
-    > 要尝试 TiDB Cloud 的 AI 功能，你需要允许 PingCAP 和 Amazon Bedrock 使用你的代码片段进行研究和服务改进。更多信息，请参阅[启用或禁用 AI 生成 SQL 查询](/tidb-cloud/explore-data-with-chat2query.md#enable-or-disable-ai-to-generate-sql-queries)。
+    > To try the AI capacity of TiDB Cloud, you need to allow PingCAP and Amazon Bedrock to use your code snippets for research and service improvement. For more information, see [Enable or disable AI to generate SQL queries](/tidb-cloud/explore-data-with-chat2query.md#enable-or-disable-ai-to-generate-sql-queries).
 
-    要定义参数，你可以在 SQL 语句中插入变量占位符，如 `${ID}`。例如，`SELECT * FROM table_name WHERE id = ${ID}`。然后，你可以点击右侧窗格的**参数**选项卡来更改参数定义和测试值。
+    To define a parameter, you can insert it as a variable placeholder like `${ID}` in the SQL statement. For example, `SELECT * FROM table_name WHERE id = ${ID}`. Then, you can click the **Params** tab on the right pane to change the parameter definition and test values.
 
-    > **注意：**
+    > **Note:**
     >
-    > - 参数名称区分大小写。
-    > - 参数不能用作表名或列名。
+    > - The parameter name is case-sensitive.
+    > - The parameter cannot be used as a table name or column name.
 
-    - 在**定义**部分，你可以指定客户端调用端点时是否需要参数、数据类型和参数的默认值。
-    - 在**测试值**部分，你可以为参数设置测试值。测试值在运行 SQL 语句或测试端点时使用。如果你没有设置测试值，将使用默认值。
-    - 更多信息，请参阅[配置参数](/tidb-cloud/data-service-manage-endpoint.md#configure-parameters)。
+    - In the **Definition** section, you can specify whether the parameter is required when a client calls the endpoint, the data type, and the default value of the parameter.
+    - In the **Test Values** section, you can set the test value for a parameter. The test values are used when you run the SQL statements or test the endpoint. If you do not set the test values, the default values are used.
+    - For more information, see [Configure parameters](/tidb-cloud/data-service-manage-endpoint.md#configure-parameters).
 
-3. 运行 SQL 语句。
+3. Run SQL statements.
 
-    如果你在 SQL 语句中插入了参数，请确保你已在右侧窗格的**参数**选项卡中设置了测试值或默认值。否则，将返回错误。
+    If you have inserted parameters in the SQL statements, make sure that you have set test values or default values for the parameters in the **Params** tab on the right pane. Otherwise, an error is returned.
 
     <SimpleTab>
     <div label="macOS">
 
-    对于 macOS：
+    For macOS:
 
-    - 如果编辑器中只有一条语句，要运行它，请按 **⌘ + Enter** 或点击 <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**运行**。
+    - If you have only one statement in the editor, to run it, press **⌘ + Enter** or click <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**Run**.
 
-    - 如果编辑器中有多条语句，要按顺序运行其中一条或几条语句，请将光标放在目标语句上或用光标选择目标语句的行，然后按 **⌘ + Enter** 或点击**运行**。
+    - If you have multiple statements in the editor, to run one or several of them sequentially, place your cursor on your target statement or select the lines of the target statements with your cursor, and then press **⌘ + Enter** or click **Run**.
 
-    - 要按顺序运行编辑器中的所有语句，请按 **⇧ + ⌘ + Enter**，或用光标选择所有语句的行并点击**运行**。
+    - To run all statements in the editor sequentially, press **⇧ + ⌘ + Enter**, or select the lines of all statements with your cursor and click **Run**.
 
     </div>
 
     <div label="Windows/Linux">
 
-    对于 Windows 或 Linux：
+    For Windows or Linux:
 
-    - 如果编辑器中只有一条语句，要运行它，请按 **Ctrl + Enter** 或点击 <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**运行**。
+    - If you have only one statement in the editor, to run it, press **Ctrl + Enter** or click <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**Run**.
 
-    - 如果编辑器中有多条语句，要按顺序运行其中一条或几条语句，请将光标放在目标语句上或用光标选择目标语句的行，然后按 **Ctrl + Enter** 或点击**运行**。
+    - If you have multiple statements in the editor, to run one or several of them sequentially, place your cursor on your target statement or select the lines of the target statements with your cursor, and then press **Ctrl + Enter** or click **Run**.
 
-    - 要按顺序运行编辑器中的所有语句，请按 **Shift + Ctrl + Enter**，或用光标选择所有语句的行并点击**运行**。
+    - To run all statements in the editor sequentially, press **Shift + Ctrl + Enter**, or select the lines of all statements with your cursor and click **Run**.
 
     </div>
     </SimpleTab>
 
-    运行语句后，你可以在页面底部的**结果**选项卡中立即看到查询结果。
+    After running the statements, you can see the query results immediately in the **Result** tab at the bottom of the page.
 
-### 步骤 3. 测试端点（可选）
+### Step 3. Test the endpoint (optional)
 
-配置端点后，你可以在部署之前测试端点，以验证它是否按预期工作。
+After configuring an endpoint, you can test the endpoint to verify whether it works as expected before deploying.
 
-要测试端点，请点击右上角的**测试**或按 **F5**。
+To test the endpoint, click **Test** in the upper-right corner or press **F5**.
 
-然后，你可以在页面底部的 **HTTP 响应**选项卡中看到响应。有关响应的更多信息，请参阅[端点的响应](/tidb-cloud/data-service-manage-endpoint.md#response)。
+Then, you can see the response in the **HTTP Response** tab at the bottom of the page. For more information about the response, see [Response of an endpoint](/tidb-cloud/data-service-manage-endpoint.md#response).
 
-### 步骤 4. 部署端点
+### Step 4. Deploy the endpoint
 
-要部署端点，请执行以下步骤：
+To deploy the endpoint, perform the following steps:
 
-1. 在端点详情页面，点击右上角的**部署**。
+1. On the endpoint details page, click **Deploy** in the upper-right corner.
 
-2. 点击**部署**确认部署。如果端点成功部署，你将看到**端点已部署**的提示。
+2. Click **Deploy** to confirm the deployment. You will get the **Endpoint has been deployed** prompt if the endpoint is successfully deployed.
 
-    要查看部署历史记录，你可以点击左侧窗格中的数据应用名称，然后点击右侧窗格中的**部署**选项卡。
+    To view the deployment history, you can click the name of your Data App in the left pane, and then click the **Deployments** tab in the right pane.
 
-### 步骤 5. 调用端点
+### Step 5. Call the endpoint
 
-你可以通过发送 HTTPS 请求来调用端点。在调用端点之前，你需要先获取数据应用的 API 密钥。
+You can call the endpoint by sending an HTTPS request. Before calling an endpoint, you need to first obtain an API key for the Data App.
 
-#### 1. 创建 API 密钥
+#### 1. Create an API key
 
-1. 在[**数据服务**](https://tidbcloud.com/project/data-service)页面的左侧窗格中，点击数据应用的名称以查看其详情。
-2. 在**身份验证**区域，点击**创建 API 密钥**。
-3. 在**创建 API 密钥**对话框中，执行以下操作：
+1. In the left pane of the [**Data Service**](https://tidbcloud.com/project/data-service) page, click the name of your Data App to view its details.
+2. In the **Authentication** area, click **Create API Key**.
+3. In the **Create API Key** dialog box, do the following:
 
-    1. （可选）为你的 API 密钥输入描述。
-    2. 为你的 API 密钥选择角色。
+    1. (Optional) Enter a description for your API key.
+    2. Select a role for your API key.
 
-        角色用于控制 API 密钥是否可以读取或写入链接到数据应用的集群数据。你可以选择 `ReadOnly` 或 `ReadAndWrite` 角色：
+        The role is used to control whether the API key can read or write data to the clusters linked to the Data App. You can select the `ReadOnly` or `ReadAndWrite` role:
 
-        - `ReadOnly`：仅允许 API 密钥读取数据，如 `SELECT`、`SHOW`、`USE`、`DESC` 和 `EXPLAIN` 语句。
-        - `ReadAndWrite`：允许 API 密钥读取和写入数据。你可以使用此 API 密钥执行所有 SQL 语句，如 DML 和 DDL 语句。
+        - `ReadOnly`: only allows the API key to read data, such as `SELECT`, `SHOW`, `USE`, `DESC`, and `EXPLAIN` statements.
+        - `ReadAndWrite`: allows the API key to read and write data. You can use this API key to execute all SQL statements, such as DML and DDL statements.
 
-    3. （可选）为你的 API 密钥设置所需的速率限制。
+    3. (Optional) Set a desired rate limit for your API key.
 
-4. 点击**下一步**。将显示公钥和私钥。
+4. Click **Next**. The public key and private key are displayed.
 
-    确保你已将私钥复制并保存在安全的位置。离开此页面后，你将无法再次获取完整的私钥。
+    Make sure that you have copied and saved the private key in a secure location. After leaving this page, you will not be able to get the full private key again.
 
-5. 点击**完成**。
+5. Click **Done**.
 
-有关 API 密钥的更多信息，请参阅[数据服务中的 API 密钥](/tidb-cloud/data-service-api-key.md)。
+For more information about API keys, see [API Keys in Data Service](/tidb-cloud/data-service-api-key.md).
 
-#### 2. 获取代码示例
+#### 2. Get the code example
 
-TiDB Cloud 生成代码示例以帮助你调用端点。要获取代码示例，请执行以下步骤：
+TiDB Cloud generates code examples to help you call an endpoint. To get the code example, perform the following steps:
 
-1. 在[**数据服务**](https://tidbcloud.com/project/data-service)页面的左侧窗格中，点击端点的名称，然后点击右上角的 **...** > **代码示例**。将显示**代码示例**对话框。
+1. In the left pane of the [**Data Service**](https://tidbcloud.com/project/data-service) page, click the name of your endpoint, and then click **...** > **Code Example** in the upper-right corner. The **Code Example** dialog box is displayed.
 
-2. 在对话框中，选择要用于调用端点的集群和数据库，然后复制代码示例。
+2. In the dialog box, select the cluster and database that you want to use to call the endpoint, and then copy the code example.
 
-    以下是 curl 代码示例：
+    An example of the curl code example is as follows:
 
     <SimpleTab>
-    <div label="测试环境">
+    <div label="Test Environment">
 
-    要调用端点的草稿版本，你需要添加 `endpoint-type: draft` 头：
+    To call a draft version of the endpoint, you need to add the `endpoint-type: draft` header:
 
     ```bash
     curl --digest --user '<Public Key>:<Private Key>' \
@@ -230,11 +230,11 @@ TiDB Cloud 生成代码示例以帮助你调用端点。要获取代码示例，
 
     </div>
 
-    <div label="线上环境">
+    <div label="Online Environment">
 
-    在检查线上环境的代码示例之前，你必须先部署端点。
+    You must deploy your endpoint first before checking the code example in the online environment.
 
-    要调用端点的当前线上版本，请使用以下命令：
+    To call the current online version of the endpoint, use the following command:
 
     ```bash
     curl --digest --user '<Public Key>:<Private Key>' \
@@ -244,19 +244,19 @@ TiDB Cloud 生成代码示例以帮助你调用端点。要获取代码示例，
     </div>
     </SimpleTab>
 
-    > **注意：**
+    > **Note:**
     >
-    > - 通过请求区域域名 `<region>.data.tidbcloud.com`，你可以直接访问 TiDB 集群所在区域的端点。
-    > - 或者，你也可以请求全局域名 `data.tidbcloud.com` 而不指定区域。这样，TiDB Cloud 将在内部将请求重定向到目标区域，但这可能会导致额外的延迟。如果你选择这种方式，请确保在调用端点时在 curl 命令中添加 `--location-trusted` 选项。
+    > - By requesting the regional domain `<region>.data.tidbcloud.com`, you can directly access the endpoint in the region where the TiDB cluster is located.
+    > - Alternatively, you can also request the global domain `data.tidbcloud.com` without specifying a region. In this way, TiDB Cloud will internally redirect the request to the target region, but this might result in additional latency. If you choose this way, make sure to add the `--location-trusted` option to your curl command when calling an endpoint.
 
-#### 3. 使用代码示例
+#### 3. Use the code example
 
-将代码示例粘贴到你的应用程序中并运行。然后，你可以获取端点的响应。
+Paste the code example in your application and run it. Then, you can get the response of the endpoint.
 
-- 你需要将 `<Public Key>` 和 `<Private Key>` 占位符替换为你的 API 密钥。
-- 如果端点包含参数，请在调用端点时指定参数值。
+- You need to replace the `<Public Key>` and `<Private Key>` placeholders with your API key.
+- If the endpoint contains parameters, specify the parameter values when calling the endpoint.
 
-调用端点后，你可以看到 JSON 格式的响应。以下是一个示例：
+After calling an endpoint, you can see the response in JSON format. The following is an example:
 
 ```json
 {
@@ -294,11 +294,11 @@ TiDB Cloud 生成代码示例以帮助你调用端点。要获取代码示例，
 }
 ```
 
-有关响应的更多信息，请参阅[端点的响应](/tidb-cloud/data-service-manage-endpoint.md#response)。
+For more information about the response, see [Response of an endpoint](/tidb-cloud/data-service-manage-endpoint.md#response).
 
-## 了解更多
+## Learn more
 
-- [数据服务概述](/tidb-cloud/data-service-overview.md)
-- [Chat2Query API 入门](/tidb-cloud/use-chat2query-api.md)
-- [管理数据应用](/tidb-cloud/data-service-manage-data-app.md)
-- [管理端点](/tidb-cloud/data-service-manage-endpoint.md)
+- [Data Service Overview](/tidb-cloud/data-service-overview.md)
+- [Get Started with Chat2Query API](/tidb-cloud/use-chat2query-api.md)
+- [Manage a Data App](/tidb-cloud/data-service-manage-data-app.md)
+- [Manage an Endpoint](/tidb-cloud/data-service-manage-endpoint.md)

@@ -1,13 +1,13 @@
 ---
-title: SHOW INDEXES [FROM|IN] | TiDB SQL 语句参考
-summary: TiDB 数据库中 SHOW INDEXES [FROM|IN] 的使用概览。
+title: SHOW INDEXES [FROM|IN] | TiDB SQL Statement Reference
+summary: An overview of the usage of SHOW INDEXES [FROM|IN] for the TiDB database.
 ---
 
 # SHOW INDEXES [FROM|IN]
 
-`SHOW INDEXES [FROM|IN]` 语句列出指定表上的索引。语句 `SHOW INDEX [FROM|IN]`、`SHOW KEYS [FROM|IN]` 是此语句的别名，为了与 MySQL 兼容而包含。
+The statement `SHOW INDEXES [FROM|IN]` lists the indexes on a specified table. The statements `SHOW INDEX [FROM|IN]`, `SHOW KEYS [FROM|IN]` are aliases of this statement, and included for compatibility with MySQL.
 
-## 语法
+## Synopsis
 
 ```ebnf+diagram
 ShowIndexStmt ::=
@@ -18,7 +18,7 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## 示例
+## Examples
 
 ```sql
 mysql> CREATE TABLE t1 (id int not null primary key AUTO_INCREMENT, col1 INT, INDEX(col1));
@@ -52,13 +52,13 @@ mysql> SHOW KEYS FROM t1;
 2 rows in set (0.00 sec)
 ```
 
-注意，TiDB 在语法上接受 `HASH`、`BTREE` 和 `RTREE` 等索引类型以与 MySQL 兼容，但会忽略它们。
+Note that TiDB accepts index types such as `HASH`, `BTREE` and `RTREE` in syntax for compatibility with MySQL, but ignores them.
 
-## MySQL 兼容性
+## MySQL compatibility
 
-TiDB 中的 `SHOW INDEXES [FROM|IN]` 语句与 MySQL 完全兼容。如果发现任何兼容性差异，请[报告问题](https://docs.pingcap.com/tidb/stable/support)。
+The `SHOW INDEXES [FROM|IN]` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
-## 另请参阅
+## See also
 
 * [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
 * [DROP INDEX](/sql-statements/sql-statement-drop-index.md)

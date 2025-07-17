@@ -1,18 +1,18 @@
 ---
 title: CHECK_CONSTRAINTS
-summary: "了解 INFORMATION_SCHEMA 中的 `CHECK_CONSTRAINTS` 表。"
+summary: Learn the `CHECK_CONSTRAINTS` INFORMATION_SCHEMA table.
 ---
 
 # CHECK\_CONSTRAINTS
 
-`CHECK_CONSTRAINTS` 表提供了表上 [`CHECK` 约束](/constraints.md#check)的相关信息。
+The `CHECK_CONSTRAINTS` table provides information about [`CHECK` constraints](/constraints.md#check) on tables.
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC CHECK_CONSTRAINTS;
 ```
 
-输出如下：
+The output is as follows:
 
 ```sql
 +--------------------+-------------+------+-----+---------+-------+
@@ -26,7 +26,7 @@ DESC CHECK_CONSTRAINTS;
 4 rows in set (0.00 sec)
 ```
 
-以下示例使用 `CREATE TABLE` 语句添加一个 `CHECK` 约束：
+The following example adds a `CHECK` constraint using the `CREATE TABLE` statement:
 
 ```sql
 SET GLOBAL tidb_enable_check_constraint = ON;
@@ -34,7 +34,7 @@ CREATE TABLE test.t1 (id INT PRIMARY KEY, CHECK (id%2 = 0));
 SELECT * FROM CHECK_CONSTRAINTS\G
 ```
 
-输出如下：
+The output is as follows:
 
 ```sql
 *************************** 1. row ***************************
@@ -45,9 +45,9 @@ CONSTRAINT_CATALOG: def
 1 row in set (0.00 sec)
 ```
 
-`CHECK_CONSTRAINTS` 表中的字段说明如下：
+Fields in the `CHECK_CONSTRAINTS` table are described as follows:
 
-* `CONSTRAINT_CATALOG`：约束的目录，始终为 `def`。
-* `CONSTRAINT_SCHEMA`：约束所属的数据库架构。
-* `CONSTRAINT_NAME`：约束的名称。
-* `CHECK_CLAUSE`：检查约束的条件子句。
+* `CONSTRAINT_CATALOG`: The catalog of the constraint, which is always `def`.
+* `CONSTRAINT_SCHEMA`: The schema of the constraint.
+* `CONSTRAINT_NAME`: The name of the constraint.
+* `CHECK_CLAUSE`: The clause of the check constraint.

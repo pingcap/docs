@@ -1,49 +1,49 @@
 ---
-title: 2024-04-11 TiDB Cloud 数据迁移（DM）功能维护通知
-summary: 了解 2024 年 4 月 11 日 TiDB Cloud 数据迁移（DM）功能维护的详细信息，如维护时间窗口和影响。
+title: 2024-04-11 TiDB Cloud Data Migration (DM) Feature Maintenance Notification
+summary: Learn about the details of TiDB Cloud Data Migration (DM) feature maintenance on April 11, 2024, such as the maintenance window and impact.
 ---
 
-# [2024-04-11] TiDB Cloud 数据迁移（DM）功能维护通知
+# [2024-04-11] TiDB Cloud Data Migration (DM) Feature Maintenance Notification
 
-本通知描述了你需要了解的关于 2024 年 4 月 11 日 TiDB Cloud Dedicated [数据迁移（DM）功能](/tidb-cloud/migrate-from-mysql-using-data-migration.md)维护的详细信息。
+This notification describes the details that you need to know about the maintenance for [Data Migration (DM) feature](/tidb-cloud/migrate-from-mysql-using-data-migration.md) of TiDB Cloud Dedicated on April 11, 2024.
 
-## 维护时间窗口
+## Maintenance window
 
-- 开始时间：2024-04-11 08:00 (UTC+0)
-- 结束时间：2024-04-11 09:00 (UTC+0)
-- 持续时间：1 小时
+- Start time: 2024-04-11 08:00 (UTC+0)
+- End time: 2024-04-11 09:00 (UTC+0)
+- Duration: 1 hour
 
-## 影响
+## Impact
 
-在维护时间窗口期间，以下区域的 TiDB Cloud Dedicated 集群的 DM 功能将受到影响：
+During the maintenance window, the DM feature for TiDB Cloud Dedicated clusters in the following regions will be affected:
 
-- 云服务提供商：AWS，区域：俄勒冈（us-west-2）
-- 云服务提供商：AWS，区域：弗吉尼亚北部（us-east-1）
-- 云服务提供商：AWS，区域：新加坡（ap-southeast-1）
-- 云服务提供商：AWS，区域：首尔（ap-northeast-2）
-- 云服务提供商：AWS，区域：法兰克福（eu-central-1）
-- 云服务提供商：AWS，区域：圣保罗（sa-east-1）
-- 云服务提供商：AWS，区域：俄勒冈（us-west-2）
-- 云服务提供商：Google Cloud，区域：俄勒冈（us-west1）
-- 云服务提供商：Google Cloud，区域：东京（asia-northeast1）
-- 云服务提供商：Google Cloud，区域：新加坡（asia-southeast1）
+- Cloud provider: AWS, region: Oregon (us-west-2)
+- Cloud provider: AWS, region: N. Virginia (us-east-1)
+- Cloud provider: AWS, region: Singapore (ap-southeast-1)
+- Cloud provider: AWS, region: Seoul (ap-northeast-2)
+- Cloud provider: AWS, region: Frankfurt (eu-central-1)
+- Cloud provider: AWS, region: São Paulo (sa-east-1)
+- Cloud provider: AWS, region: Oregon (us-west-2)
+- Cloud provider: Google Cloud, region: Oregon (us-west1)
+- Cloud provider: Google Cloud, region: Tokyo (asia-northeast1)
+- Cloud provider: Google Cloud, region: Singapore (asia-southeast1)
 
-维护仅影响 TiDB 集群中的 DM 功能。所有其他功能保持不受影响。你可以继续管理 TiDB 集群并照常执行读/写操作或其他操作。
+The maintenance only affects the DM feature in the TiDB cluster. All the other functionalities remain unaffected. You can continue to manage the TiDB cluster and perform read/write operations or other operations as usual.
 
-对于部署在 AWS 上的集群：
+For clusters deployed on AWS:
 
-- 在升级期间，DM 任务可以继续运行而不会中断。DM 控制台可以正常使用。
+- During the upgrade, the DM tasks can keep running without disruption. The DM console can be used normally.
 
-对于部署在 Google Cloud 上的集群：
+For clusters deployed on Google Cloud:
 
-- DM 控制台将不可用长达 30 分钟。在此期间，你无法创建或管理 DM 任务。
-- 如果 DM 任务处于增量迁移阶段，它将中断长达 30 分钟。在此期间，请勿清除 MySQL 数据库的二进制日志。升级完成后，DM 任务将自动恢复。
-- 如果 DM 任务处于导出和导入全量数据的阶段，它将在升级期间失败，并且在升级后无法恢复。建议在执行升级的当天不要创建任何 DM 任务，以确保在升级开始时没有 DM 任务处于导出和导入全量数据的阶段。
+- The DM console will be unavailable for up to 30 minutes. During this period, you cannot create or manage DM tasks.
+- If a DM task is in the incremental migration stage, it will be interrupted for up to 30 minutes. During this period, do not purge the binary log of the MySQL database. The DM task will automatically resume after the upgrade is completed.
+- If a DM task is in the stage of exporting and importing full data, it will fail during the upgrade, and cannot be resumed after the upgrade. It is recommended not to create any DM task on the day when the upgrade is performed, to ensure that no DM tasks are in the stage of exporting and importing full data when the upgrade starts.
 
-## 完成和恢复
+## Completion and resumption
 
-一旦维护成功完成，受影响的功能将被恢复，为你提供更好的体验。
+Once the maintenance is successfully completed, the affected functionalities will be reinstated, offering you a better experience.
 
-## 获取支持
+## Get support
 
-如果你有任何问题或需要帮助，请联系我们的[支持团队](/tidb-cloud/tidb-cloud-support.md)。我们随时为你解答疑虑并提供必要的指导。
+If you have any questions or need assistance, contact our [support team](/tidb-cloud/tidb-cloud-support.md). We are here to address your concerns and provide any necessary guidance.

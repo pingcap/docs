@@ -7,19 +7,27 @@ summary: Learn about the TiDB release timeline.
 
 <EmailSubscriptionWrapper />
 
-This document shows all the released TiDB versions in reverse chronological order.
+This document lists all released TiDB versions in reverse chronological order.
+
+To learn about the support timelines for Long-Term Support (LTS) versions of TiDB, see the [TiDB Release Support Policy](https://pingcap.com/tidb-release-support-policy/).
 
 | Version | Release Date |
 | :--- | :--- |
+| [8.5.2](/releases/release-8.5.2.md) | 2025-06-12 |
 | [7.5.6](/releases/release-7.5.6.md) | 2025-03-14 |
 | [6.5.12](/releases/release-6.5.12.md) | 2025-02-27 |
+| [8.5.1](/releases/release-8.5.1.md) | 2025-01-17 |
 | [7.5.5](/releases/release-7.5.5.md) | 2024-12-31 |
 | [8.1.2](/releases/release-8.1.2.md) | 2024-12-26 |
+| [8.5.0](/releases/release-8.5.0.md) | 2024-12-19 |
 | [7.1.6](/releases/release-7.1.6.md) | 2024-11-21 |
+| [8.4.0-DMR](/releases/release-8.4.0.md) | 2024-11-11 |
 | [7.5.4](/releases/release-7.5.4.md) | 2024-10-15 |
 | [6.5.11](/releases/release-6.5.11.md) | 2024-09-20 |
 | [8.1.1](/releases/release-8.1.1.md) | 2024-08-27 |
+| [8.3.0-DMR](/releases/release-8.3.0.md) | 2024-08-22 |
 | [7.5.3](/releases/release-7.5.3.md) | 2024-08-05 |
+| [8.2.0-DMR](/releases/release-8.2.0.md) | 2024-07-11 |
 | [6.5.10](/releases/release-6.5.10.md) | 2024-06-20 |
 | [7.5.2](/releases/release-7.5.2.md) | 2024-06-13 |
 | [8.1.0](/releases/release-8.1.0.md) | 2024-05-24 |

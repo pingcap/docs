@@ -1,21 +1,21 @@
 ---
-title: 使用数据迁移功能从 MySQL 兼容数据库仅迁移增量数据到 TiDB Cloud
-summary: 了解如何使用数据迁移功能将 Amazon Aurora MySQL、Amazon Relational Database Service (RDS)、Google Cloud SQL for MySQL、Azure Database for MySQL 或本地 MySQL 实例中的增量数据迁移到 TiDB Cloud。
+title: Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration
+summary: Learn how to migrate incremental data from MySQL-compatible databases hosted in Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, Azure Database for MySQL, or a local MySQL instance to TiDB Cloud using Data Migration.
 ---
 
-# 使用数据迁移功能从 MySQL 兼容数据库仅迁移增量数据到 TiDB Cloud
+# Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration
 
-本文档介绍如何使用 TiDB Cloud 控制台的数据迁移功能，将云服务商（Amazon Aurora MySQL、Amazon Relational Database Service (RDS)、Google Cloud SQL for MySQL 或 Azure Database for MySQL）或自托管源数据库中的增量数据迁移到 TiDB Cloud。
+This document describes how to migrate incremental data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, or Azure Database for MySQL) or self-hosted source database to TiDB Cloud using the Data Migration feature of the TiDB Cloud console.
 
-关于如何迁移现有数据或同时迁移现有数据和增量数据的说明，请参见[使用数据迁移功能将 MySQL 兼容数据库迁移到 TiDB Cloud](/tidb-cloud/migrate-from-mysql-using-data-migration.md)。
+For instructions about how to migrate existing data or both existing data and incremental data, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
 
-## 限制
+## Limitations
 
-> **注意：**
+> **Note**:
 >
-> 本节仅包含增量数据迁移的限制。建议你同时阅读通用限制。参见[限制](/tidb-cloud/migrate-from-mysql-using-data-migration.md#limitations)。
+> This section only includes limitations about incremental data migration. It is recommended that you also read the general limitations. See [Limitations](/tidb-cloud/migrate-from-mysql-using-data-migration.md#limitations).
 
-- 如果目标数据库中尚未创建目标表，迁移任务将报告以下错误并失败。在这种情况下，你需要手动创建目标表，然后重试迁移任务。
+- If the target table is not yet created in the target database, the migration job will report an error as follows and fail. In this case, you need to manually create the target table and then retry the migration job.
 
     ```sql
     startLocation: [position: (mysql_bin.000016, 5122), gtid-set:
@@ -26,217 +26,217 @@ summary: 了解如何使用数据迁移功能将 Amazon Aurora MySQL、Amazon Re
     tracker Raw Cause: Error 1146: Table 'zm.table1' doesn't exist
     ```
 
-- 如果上游删除或更新了某些行，而下游没有相应的行，迁移任务在从上游复制 `DELETE` 和 `UPDATE` DML 操作时会检测到没有可供删除或更新的行。
+- If some rows are deleted or updated in the upstream and there are no corresponding rows in the downstream, the migration job will detect that there are no rows available for deletion or update when replicating the `DELETE` and `UPDATE` DML operations from the upstream.
 
-如果你指定 GTID 作为迁移增量数据的起始位置，请注意以下限制：
+If you specify GTID as the start position to migrate incremental data, note the following limitations:
 
-- 确保源数据库已启用 GTID 模式。
-- 如果源数据库是 MySQL，MySQL 版本必须是 5.6 或更高版本，存储引擎必须是 InnoDB。
-- 如果迁移任务连接到上游的从库，则无法迁移 `REPLICATE CREATE TABLE ... SELECT` 事件。这是因为该语句会被拆分为两个事务（`CREATE TABLE` 和 `INSERT`），它们被分配了相同的 GTID。因此，从库会忽略 `INSERT` 语句。
+- Make sure that the GTID mode is enabled in the source database.
+- If the source database is MySQL, the MySQL version must be 5.6 or later, and the storage engine must be InnoDB.
+- If the migration job connects to a secondary database in the upstream, the `REPLICATE CREATE TABLE ... SELECT` events cannot be migrated. This is because the statement will be split into two transactions (`CREATE TABLE` and `INSERT`) that are assigned the same GTID. As a result, the `INSERT` statement will be ignored by the secondary database.
 
-## 前提条件
+## Prerequisites
 
-> **注意：**
+> **Note**:
 >
-> 本节仅包含增量数据迁移的前提条件。建议你同时阅读[通用前提条件](/tidb-cloud/migrate-from-mysql-using-data-migration.md#prerequisites)。
+> This section only includes prerequisites about incremental data migration. It is recommended that you also read the [general prerequisites](/tidb-cloud/migrate-from-mysql-using-data-migration.md#prerequisites).
 
-如果你想使用 GTID 指定起始位置，请确保源数据库已启用 GTID。操作因数据库类型而异。
+If you want to use GTID to specify the start position, make sure that the GTID is enabled in the source database. The operations vary depending on the database type.
 
-### 对于 Amazon RDS 和 Amazon Aurora MySQL
+### For Amazon RDS and Amazon Aurora MySQL
 
-对于 Amazon RDS 和 Amazon Aurora MySQL，你需要创建一个新的可修改参数组（即非默认参数组），然后修改参数组中的以下参数并重启实例应用。
+For Amazon RDS and Amazon Aurora MySQL, you need to create a new modifiable parameter group (that is, not the default parameter group) and then modify the following parameters in the parameter group and restart the instance application.
 
 - `gtid_mode`
 - `enforce_gtid_consistency`
 
-你可以通过执行以下 SQL 语句来检查 GTID 模式是否已成功启用：
+You can check if the GTID mode has been successfully enabled by executing the following SQL statement:
 
 ```sql
 SHOW VARIABLES LIKE 'gtid_mode';
 ```
 
-如果结果是 `ON` 或 `ON_PERMISSIVE`，则 GTID 模式已成功启用。
+If the result is `ON` or `ON_PERMISSIVE`, the GTID mode is successfully enabled.
 
-更多信息，请参见 [Parameters for GTID-based replication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-replication-gtid.html#mysql-replication-gtid.parameters)。
+For more information, see [Parameters for GTID-based replication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-replication-gtid.html#mysql-replication-gtid.parameters).
 
-### 对于 Google Cloud SQL for MySQL
+### For Google Cloud SQL for MySQL
 
-Google Cloud SQL for MySQL 默认启用 GTID 模式。你可以通过执行以下 SQL 语句来检查 GTID 模式是否已成功启用：
-
-```sql
-SHOW VARIABLES LIKE 'gtid_mode';
-```
-
-如果结果是 `ON` 或 `ON_PERMISSIVE`，则 GTID 模式已成功启用。
-
-### 对于 Azure Database for MySQL
-
-Azure Database for MySQL（5.7 及更高版本）默认启用 GTID 模式。你可以通过执行以下 SQL 语句来检查 GTID 模式是否已成功启用：
+The GTID mode is enabled for Google Cloud SQL for MySQL by default. You can check if the GTID mode has been successfully enabled by executing the following SQL statement:
 
 ```sql
 SHOW VARIABLES LIKE 'gtid_mode';
 ```
 
-如果结果是 `ON` 或 `ON_PERMISSIVE`，则 GTID 模式已成功启用。
+If the result is `ON` or `ON_PERMISSIVE`, the GTID mode is successfully enabled.
 
-此外，确保 `binlog_row_image` 服务器参数设置为 `FULL`。你可以通过执行以下 SQL 语句来检查：
+### For Azure Database for MySQL
+
+The GTID mode is enabled by default for Azure Database for MySQL (versions 5.7 and later). You can check if the GTID mode has been successfully enabled by executing the following SQL statement:
+
+```sql
+SHOW VARIABLES LIKE 'gtid_mode';
+```
+
+If the result is `ON` or `ON_PERMISSIVE`, the GTID mode is successfully enabled.
+
+In addition, ensure that the `binlog_row_image` server parameter is set to `FULL`. You can check this by executing the following SQL statement:
 
 ```sql
 SHOW VARIABLES LIKE 'binlog_row_image';
 ```
 
-如果结果不是 `FULL`，你需要使用 [Azure 门户](https://portal.azure.com/)或 [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/) 为你的 Azure Database for MySQL 实例配置此参数。
+If the result is not `FULL`, you need to configure this parameter for your Azure Database for MySQL instance using the [Azure portal](https://portal.azure.com/) or [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/).
 
-### 对于自托管 MySQL 实例
+### For a self-hosted MySQL instance
 
-> **注意：**
+> **Note**:
 >
-> 具体步骤和命令可能因 MySQL 版本和配置而异。确保你了解启用 GTID 的影响，并在执行此操作之前在非生产环境中进行适当的测试和验证。
+> The exact steps and commands might vary depending on the MySQL version and configuration. Make sure that you understand the impact of enabling GTID and that you have properly tested and verified it in a non-production environment before performing this action.
 
-要为自托管 MySQL 实例启用 GTID 模式，请按照以下步骤操作：
+To enable the GTID mode for a self-hosted MySQL instance, follow these steps:
 
-1. 使用具有适当权限的 MySQL 客户端连接到 MySQL 服务器。
+1. Connect to the MySQL server using a MySQL client with the appropriate privileges.
 
-2. 执行以下 SQL 语句以启用 GTID 模式：
+2. Execute the following SQL statements to enable the GTID mode:
 
     ```sql
-    -- 启用 GTID 模式
+    -- Enable the GTID mode
     SET GLOBAL gtid_mode = ON;
 
-    -- 启用 `enforce_gtid_consistency`
+    -- Enable `enforce_gtid_consistency`
     SET GLOBAL enforce_gtid_consistency = ON;
 
-    -- 重新加载 GTID 配置
+    -- Reload the GTID configuration
     RESET MASTER;
     ```
 
-3. 重启 MySQL 服务器以确保配置更改生效。
+3. Restart the MySQL server to ensure that the configuration changes take effect.
 
-4. 通过执行以下 SQL 语句检查 GTID 模式是否已成功启用：
+4. Check if the GTID mode has been successfully enabled by executing the following SQL statement:
 
     ```sql
     SHOW VARIABLES LIKE 'gtid_mode';
     ```
 
-    如果结果是 `ON` 或 `ON_PERMISSIVE`，则 GTID 模式已成功启用。
+    If the result is `ON` or `ON_PERMISSIVE`, the GTID mode is successfully enabled.
 
-## 步骤 1：进入数据迁移页面
+## Step 1: Go to the Data Migration page
 
-1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面。
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
-    > **提示：**
+    > **Tip:**
     >
-    > 你可以使用左上角的组合框在组织、项目和集群之间切换。
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. 点击目标集群的名称进入其概览页面，然后在左侧导航栏中点击**数据** > **迁移**。
+2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Migration** in the left navigation pane.
 
-3. 在**数据迁移**页面，点击右上角的**创建迁移任务**。此时会显示**创建迁移任务**页面。
+3. On the **Data Migration** page, click **Create Migration Job** in the upper-right corner. The **Create Migration Job** page is displayed.
 
-## 步骤 2：配置源和目标连接
+## Step 2: Configure the source and target connection
 
-在**创建迁移任务**页面，配置源和目标连接。
+On the **Create Migration Job** page, configure the source and target connection.
 
-1. 输入任务名称，必须以字母开头，且长度不超过 60 个字符。可以使用字母（A-Z、a-z）、数字（0-9）、下划线（_）和连字符（-）。
+1. Enter a job name, which must start with a letter and must be less than 60 characters. Letters (A-Z, a-z), numbers (0-9), underscores (_), and hyphens (-) are acceptable.
 
-2. 填写源连接配置。
+2. Fill in the source connection profile.
 
-   - **数据源**：数据源类型。
-   - **区域**：数据源的区域，仅云数据库需要。
-   - **连接方式**：数据源的连接方式。目前，你可以根据你的连接方式选择公共 IP、VPC 对等连接或 Private Link。
-   - **主机名或 IP 地址**（适用于公共 IP 和 VPC 对等连接）：数据源的主机名或 IP 地址。
-   - **服务名称**（适用于 Private Link）：端点服务名称。
-   - **端口**：数据源的端口。
-   - **用户名**：数据源的用户名。
-   - **密码**：用户名的密码。
-   - **SSL/TLS**：如果启用 SSL/TLS，你需要上传数据源的证书，包括以下任意一项：
-        - 仅 CA 证书
-        - 客户端证书和客户端密钥
-        - CA 证书、客户端证书和客户端密钥
+   - **Data source**: the data source type.
+   - **Region**: the region of the data source, which is required for cloud databases only.
+   - **Connectivity method**: the connection method for the data source. Currently, you can choose public IP, VPC Peering, or Private Link according to your connection method.
+   - **Hostname or IP address** (for public IP and VPC Peering): the hostname or IP address of the data source.
+   - **Service Name** (for Private Link): the endpoint service name.
+   - **Port**: the port of the data source.
+   - **Username**: the username of the data source.
+   - **Password**: the password of the username.
+   - **SSL/TLS**: if you enable SSL/TLS, you need to upload the certificates of the data source, including any of the following:
+        - only the CA certificate
+        - the client certificate and client key
+        - the CA certificate, client certificate and client key
 
-3. 填写目标连接配置。
+3. Fill in the target connection profile.
 
-   - **用户名**：输入 TiDB Cloud 中目标集群的用户名。
-   - **密码**：输入 TiDB Cloud 用户名的密码。
+   - **Username**: enter the username of the target cluster in TiDB Cloud.
+   - **Password**: enter the password of the TiDB Cloud username.
 
-4. 点击**验证连接并继续**以验证你输入的信息。
+4. Click **Validate Connection and Next** to validate the information you have entered.
 
-5. 根据你看到的消息采取行动：
+5. Take action according to the message you see:
 
-    - 如果使用公共 IP 或 VPC 对等连接，你需要将数据迁移服务的 IP 地址添加到源数据库的 IP 访问列表和防火墙（如果有）中。
-    - 如果使用 AWS Private Link，系统会提示你接受端点请求。转到 [AWS VPC 控制台](https://us-west-2.console.aws.amazon.com/vpc/home)，点击**端点服务**以接受端点请求。
+    - If you use Public IP or VPC Peering, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
+    - If you use AWS Private Link, you are prompted to accept the endpoint request. Go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), and click **Endpoint services** to accept the endpoint request.
 
-## 步骤 3：选择迁移任务类型
+## Step 3: Choose migration job type
 
-要仅将源数据库的增量数据迁移到 TiDB Cloud，请选择**增量数据迁移**，不要选择**现有数据迁移**。这样，迁移任务只会将源数据库的持续变更迁移到 TiDB Cloud。
+To migrate only the incremental data of the source database to TiDB Cloud, select **Incremental data migration** and do not select **Existing data migration**. In this way, the migration job only migrates ongoing changes of the source database to TiDB Cloud.
 
-在**起始位置**区域，你可以为增量数据迁移指定以下类型的起始位置之一：
+In the **Start Position** area, you can specify one of the following types of start positions for incremental data migration:
 
-- 增量迁移任务开始的时间
+- The time when the incremental migration job starts
 - GTID
-- Binlog 文件名和位置
+- Binlog file name and position
 
-迁移任务开始后，你无法更改起始位置。
+Once a migration job starts, you cannot change the start position.
 
-### 增量迁移任务开始的时间
+### The time when the incremental migration job starts
 
-如果选择此选项，迁移任务将只迁移迁移任务开始后在源数据库中生成的增量数据。
+If you select this option, the migration job will only migrate the incremental data that is generated in the source database after the migration job starts.
 
-### 指定 GTID
+### Specify GTID
 
-选择此选项以指定源数据库的 GTID，例如 `3E11FA47-71CA-11E1-9E33-C80AA9429562:1-23`。迁移任务将复制不包含指定 GTID 集的事务，以将源数据库的持续变更迁移到 TiDB Cloud。
+Select this option to specify the GTID of the source database, for example, `3E11FA47-71CA-11E1-9E33-C80AA9429562:1-23`. The migration job will replicate the transactions excluding the specified GTID set to migrate ongoing changes of the source database to TiDB Cloud.
 
-你可以运行以下命令来检查源数据库的 GTID：
-
-```sql
-SHOW MASTER STATUS;
-```
-
-有关如何启用 GTID 的信息，请参见[前提条件](#前提条件)。
-
-### 指定 binlog 文件名和位置
-
-选择此选项以指定源数据库的 binlog 文件名（例如 `binlog.000001`）和 binlog 位置（例如 `1307`）。迁移任务将从指定的 binlog 文件名和位置开始，将源数据库的持续变更迁移到 TiDB Cloud。
-
-你可以运行以下命令来检查源数据库的 binlog 文件名和位置：
+You can run the following command to check the GTID of the source database:
 
 ```sql
 SHOW MASTER STATUS;
 ```
 
-如果目标数据库中有数据，请确保 binlog 位置正确。否则，现有数据和增量数据之间可能会发生冲突。如果发生冲突，迁移任务将失败。如果你想用源数据库中的数据替换冲突的记录，可以恢复迁移任务。
+For information about how to enable GTID, see [Prerequisites](#prerequisites).
 
-## 步骤 4：选择要迁移的对象
+### Specify binlog file name and position
 
-1. 在**选择要迁移的对象**页面，选择要迁移的对象。你可以点击**全部**选择所有对象，或点击**自定义**，然后点击对象名称旁边的复选框选择对象。
+Select this option to specify the binlog file name (for example, `binlog.000001`) and binlog position (for example, `1307`) of the source database. The migration job will start from the specified binlog file name and position to migrate ongoing changes of the source database to TiDB Cloud.
 
-2. 点击**下一步**。
+You can run the following command to check the binlog file name and position of the source database:
 
-## 步骤 5：预检查
+```sql
+SHOW MASTER STATUS;
+```
 
-在**预检查**页面，你可以查看预检查结果。如果预检查失败，你需要根据**失败**或**警告**详情进行操作，然后点击**重新检查**以重新检查。
+If there is data in the target database, make sure the binlog position is correct. Otherwise, there might be conflicts between the existing data and the incremental data. If conflicts occur, the migration job will fail. If you want to replace the conflicted records with data from the source database, you can resume the migration job.
 
-如果某些检查项只有警告，你可以评估风险并考虑是否忽略警告。如果所有警告都被忽略，迁移任务将自动进入下一步。
+## Step 4: Choose the objects to be migrated
 
-有关错误和解决方案的更多信息，请参见[预检查错误和解决方案](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#precheck-errors-and-solutions)。
+1. On the **Choose Objects to Migrate** page, select the objects to be migrated. You can click **All** to select all objects, or click **Customize** and then click the checkbox next to the object name to select the object.
 
-有关预检查项的更多信息，请参见[迁移任务预检查](https://docs.pingcap.com/tidb/stable/dm-precheck)。
+2. Click **Next**.
 
-如果所有检查项都显示**通过**，点击**下一步**。
+## Step 5: Precheck
 
-## 步骤 6：选择规格并开始迁移
+On the **Precheck** page, you can view the precheck results. If the precheck fails, you need to operate according to **Failed** or **Warning** details, and then click **Check again** to recheck.
 
-在**选择规格并开始迁移**页面，根据你的性能要求选择适当的迁移规格。有关规格的更多信息，请参见[数据迁移的规格](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)。
+If there are only warnings on some check items, you can evaluate the risk and consider whether to ignore the warnings. If all warnings are ignored, the migration job will automatically go on to the next step.
 
-选择规格后，点击**创建任务并开始**以开始迁移。
+For more information about errors and solutions, see [Precheck errors and solutions](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#precheck-errors-and-solutions).
 
-## 步骤 7：查看迁移进度
+For more information about precheck items, see [Migration Task Precheck](https://docs.pingcap.com/tidb/stable/dm-precheck).
 
-创建迁移任务后，你可以在**迁移任务详情**页面查看迁移进度。迁移进度显示在**阶段和状态**区域。
+If all check items show **Pass**, click **Next**.
 
-你可以在迁移任务运行时暂停或删除它。
+## Step 6: Choose a spec and start migration
 
-如果迁移任务失败，你可以在解决问题后恢复它。
+On the **Choose a Spec and Start Migration** page, select an appropriate migration specification according to your performance requirements. For more information about the specifications, see [Specifications for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration).
 
-你可以在任何状态下删除迁移任务。
+After selecting the spec, click **Create Job and Start** to start the migration.
 
-如果在迁移过程中遇到任何问题，请参见[迁移错误和解决方案](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)。
+## Step 7: View the migration progress
+
+After the migration job is created, you can view the migration progress on the **Migration Job Details** page. The migration progress is displayed in the **Stage and Status** area.
+
+You can pause or delete a migration job when it is running.
+
+If a migration job has failed, you can resume it after solving the problem.
+
+You can delete a migration job in any status.
+
+If you encounter any problems during the migration, see [Migration errors and solutions](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions).

@@ -1,90 +1,90 @@
 ---
-title: TiDB 乐观事务模型
-summary: 了解 TiDB 中的乐观事务模型。
+title: TiDB Optimistic Transaction Model
+summary: Learn the optimistic transaction model in TiDB.
 ---
 
-# TiDB 乐观事务模型
+# TiDB Optimistic Transaction Model
 
-在乐观事务中，冲突检测是在事务提交时进行的。当并发事务不经常修改相同行时，这有助于提高性能，因为可以跳过获取行锁的过程。但在并发事务频繁修改相同行（发生冲突）的情况下，乐观事务的性能可能比[悲观事务](/pessimistic-transaction.md)差。
+With optimistic transactions, conflicting changes are detected as part of a transaction commit. This helps improve the performance when concurrent transactions are infrequently modifying the same rows, because the process of acquiring row locks can be skipped. In the case that concurrent transactions frequently modify the same rows (a conflict), optimistic transactions may perform worse than [Pessimistic Transactions](/pessimistic-transaction.md).
 
-在启用乐观事务之前，请确保你的应用程序能够正确处理 `COMMIT` 语句可能返回错误的情况。如果你不确定应用程序如何处理这种情况，建议改用悲观事务。
+Before enabling optimistic transactions, make sure that your application correctly handles that a `COMMIT` statement could return errors. If you are unsure of how your application handles this, it is recommended to instead use Pessimistic Transactions.
 
-> **注意：**
+> **Note:**
 >
-> 从 v3.0.8 开始，TiDB 默认使用[悲观事务模式](/pessimistic-transaction.md)。但是，如果你将集群从 v3.0.7 或更早版本升级到 v3.0.8 或更高版本，这不会影响你现有的集群。换句话说，**只有新创建的集群默认使用悲观事务模式**。
+> Starting from v3.0.8, TiDB uses the [pessimistic transaction mode](/pessimistic-transaction.md) by default. However, this does not affect your existing cluster if you upgrade it from v3.0.7 or earlier to v3.0.8 or later. In other words, **only newly created clusters default to using the pessimistic transaction mode**.
 
-## 乐观事务原理
+## Principles of optimistic transactions
 
-为了支持分布式事务，TiDB 在乐观事务中采用两阶段提交（2PC）。具体过程如下：
+To support distributed transactions, TiDB adopts two-phase commit (2PC) in optimistic transactions. The procedure is as follows:
 
-![TiDB 中的 2PC](/media/2pc-in-tidb.png)
+![2PC in TiDB](/media/2pc-in-tidb.png)
 
-1. 客户端开始一个事务。
+1. The client begins a transaction.
 
-    TiDB 从 PD 获取一个时间戳（单调递增且全局唯一）作为当前事务的唯一事务 ID，称为 `start_ts`。TiDB 实现了多版本并发控制，因此 `start_ts` 也作为此事务获取的数据库快照的版本。这意味着该事务只能读取数据库在 `start_ts` 时刻的数据。
+    TiDB gets a timestamp (monotonically increasing in time and globally unique) from PD as the unique transaction ID of the current transaction, which is called `start_ts`. TiDB implements multi-version concurrency control, so `start_ts` also serves as the version of the database snapshot obtained by this transaction. This means that the transaction can only read the data from the database at `start_ts`.
 
-2. 客户端发出读取请求。
+2. The client issues a read request.
 
-    1. TiDB 从 PD 接收路由信息（数据在 TiKV 节点间的分布情况）。
-    2. TiDB 从 TiKV 接收 `start_ts` 版本的数据。
+    1. TiDB receives routing information (how data is distributed among TiKV nodes) from PD.
+    2. TiDB receives the data of the `start_ts` version from TiKV.
 
-3. 客户端发出写入请求。
+3. The client issues a write request.
 
-    TiDB 检查写入的数据是否满足约束（确保数据类型正确，满足 NOT NULL 约束）。**有效数据存储在 TiDB 中该事务的私有内存中**。
+    TiDB checks whether the written data satisfies constraints (to ensure the data types are correct, the NOT NULL constraint is met). **Valid data is stored in the private memory of this transaction in TiDB**.
 
-4. 客户端发出提交请求。
+4. The client issues a commit request.
 
-5. TiDB 开始 2PC，并在保证事务原子性的同时将数据持久化到存储中。
+5. TiDB begins 2PC, and persists data in store while guaranteeing the atomicity of transactions.
 
-    1. TiDB 从要写入的数据中选择一个主键（Primary Key）。
-    2. TiDB 从 PD 接收 Region 分布信息，并相应地按 Region 对所有键进行分组。
-    3. TiDB 向所有涉及的 TiKV 节点发送预写请求。然后，TiKV 检查是否存在冲突或过期版本。有效数据被锁定。
-    4. TiDB 接收预写阶段的所有响应，预写成功。
-    5. TiDB 从 PD 接收提交版本号并标记为 `commit_ts`。
-    6. TiDB 向主键（Primary Key）所在的 TiKV 节点发起第二次提交。TiKV 检查数据，并清理预写阶段遗留的锁。
-    7. TiDB 接收到报告第二阶段成功完成的消息。
+    1. TiDB selects a Primary Key from the data to be written.
+    2. TiDB receives the information of Region distribution from PD, and groups all keys by Region accordingly.
+    3. TiDB sends prewrite requests to all TiKV nodes involved. Then, TiKV checks whether there are conflict or expired versions. Valid data is locked.
+    4. TiDB receives all responses in the prewrite phase and the prewrite is successful.
+    5. TiDB receives a commit version number from PD and marks it as `commit_ts`.
+    6. TiDB initiates the second commit to the TiKV node where Primary Key is located. TiKV checks the data, and cleans the locks left in the prewrite phase.
+    7. TiDB receives the message that reports the second phase is successfully finished.
 
-6. TiDB 向客户端返回消息，通知事务成功提交。
+6. TiDB returns a message to inform the client that the transaction is successfully committed.
 
-7. TiDB 异步清理此事务中遗留的锁。
+7. TiDB asynchronously cleans the locks left in this transaction.
 
-## 优点和缺点
+## Advantages and disadvantages
 
-从上述 TiDB 事务过程可以看出，TiDB 事务具有以下优点：
+From the process of transactions in TiDB above, it is clear that TiDB transactions have the following advantages:
 
-* 易于理解
-* 基于单行事务实现跨节点事务
-* 去中心化的锁管理
+* Simple to understand
+* Implement cross-node transaction based on single-row transaction
+* Decentralized lock management
 
-然而，TiDB 事务也有以下缺点：
+However, TiDB transactions also have the following disadvantages:
 
-* 由于 2PC 导致的事务延迟
-* 需要中心化的时间戳分配服务
-* 当大量数据写入内存时可能发生 OOM（内存溢出）
+* Transaction latency due to 2PC
+* In need of a centralized timestamp allocation service
+* OOM (out of memory) when extensive data is written in the memory
 
-## 事务重试
+## Transaction retries
 
-> **注意：**
+> **Note:**
 >
-> 从 v8.0.0 开始，[`tidb_disable_txn_auto_retry`](/system-variables.md#tidb_disable_txn_auto_retry) 系统变量已弃用，TiDB 不再支持乐观事务的自动重试。建议使用[悲观事务模式](/pessimistic-transaction.md)。如果遇到乐观事务冲突，你可以在应用程序中捕获错误并重试事务。
+> Starting from v8.0.0, the [`tidb_disable_txn_auto_retry`](/system-variables.md#tidb_disable_txn_auto_retry) system variable is deprecated, and TiDB no longer supports automatic retries of optimistic transactions. It is recommended to use the [Pessimistic transaction mode](/pessimistic-transaction.md). If you encounter optimistic transaction conflicts, you can capture the error and retry transactions in your application.
 
-在乐观事务模型中，在高竞争场景下，事务可能因写-写冲突而提交失败。TiDB 默认使用乐观并发控制，而 MySQL 采用悲观并发控制。这意味着 MySQL 在执行写类型的 SQL 语句时添加锁，并且其可重复读隔离级别允许当前读，因此提交通常不会遇到异常。为了降低应用程序适配的难度，TiDB 提供了内部重试机制。
+In the optimistic transaction model, transactions might fail to be committed because of write–write conflict in heavy contention scenarios. TiDB uses optimistic concurrency control by default, whereas MySQL applies pessimistic concurrency control. This means that MySQL adds locks during the execution of write-type SQL statements, and its Repeatable Read isolation level allows for current reads, so commits generally do not encounter exceptions. To lower the difficulty of adapting applications, TiDB provides an internal retry mechanism.
 
-### 自动重试
+### Automatic retry
 
-如果在事务提交时发生写-写冲突，TiDB 会自动重试包含写操作的 SQL 语句。你可以通过将 `tidb_disable_txn_auto_retry` 设置为 `OFF` 来启用自动重试，并通过配置 `tidb_retry_limit` 设置重试限制：
+If a write-write conflict occurs during the transaction commit, TiDB automatically retries the SQL statement that includes write operations. You can enable the automatic retry by setting `tidb_disable_txn_auto_retry` to `OFF` and set the retry limit by configuring `tidb_retry_limit`:
 
 ```toml
-# 是否禁用自动重试（默认为 "on"）
+# Whether to disable automatic retry. ("on" by default)
 tidb_disable_txn_auto_retry = OFF
-# 设置最大重试次数（默认为 "10"）
-# 当 "tidb_retry_limit = 0" 时，自动重试完全禁用
+# Set the maximum number of the retires. ("10" by default)
+# When "tidb_retry_limit = 0", automatic retry is completely disabled.
 tidb_retry_limit = 10
 ```
 
-你可以在会话级别或全局级别启用自动重试：
+You can enable the automatic retry in either session level or global level:
 
-1. 会话级别：
+1. Session level:
 
     {{< copyable "sql" >}}
 
@@ -98,7 +98,7 @@ tidb_retry_limit = 10
     SET tidb_retry_limit = 10;
     ```
 
-2. 全局级别：
+2. Global level:
 
     {{< copyable "sql" >}}
 
@@ -112,37 +112,37 @@ tidb_retry_limit = 10
     SET GLOBAL tidb_retry_limit = 10;
     ```
 
-> **注意：**
+> **Note:**
 >
-> `tidb_retry_limit` 变量决定最大重试次数。当此变量设置为 `0` 时，所有事务都不会自动重试，包括自动提交的隐式单语句事务。这是在 TiDB 中完全禁用自动重试机制的方法。禁用自动重试后，所有冲突的事务都会以最快的方式向应用层报告失败（包括 `try again later` 消息）。
+> The `tidb_retry_limit` variable decides the maximum number of retries. When this variable is set to `0`, none of the transactions automatically retries, including the implicit single statement transactions that are automatically committed. This is the way to completely disable the automatic retry mechanism in TiDB. After the automatic retry is disabled, all conflicting transactions report failures (including the `try again later` message) to the application layer in the fastest way.
 
-### 重试的限制
+### Limits of retry
 
-默认情况下，TiDB 不会重试事务，因为这可能导致更新丢失和破坏 [`REPEATABLE READ` 隔离](/transaction-isolation-levels.md)。
+By default, TiDB will not retry transactions because this might lead to lost updates and damaged [`REPEATABLE READ` isolation](/transaction-isolation-levels.md).
 
-原因可以从重试的过程中观察到：
+The reason can be observed from the procedures of retry:
 
-1. 分配新的时间戳并标记为 `start_ts`。
-2. 重试包含写操作的 SQL 语句。
-3. 执行两阶段提交。
+1. Allocate a new timestamp and mark it as `start_ts`.
+2. Retry the SQL statements that contain write operations.
+3. Implement the two-phase commit.
 
-在步骤 2 中，TiDB 只重试包含写操作的 SQL 语句。但是，在重试期间，TiDB 接收新的版本号来标记事务的开始。这意味着 TiDB 使用新的 `start_ts` 版本的数据重试 SQL 语句。在这种情况下，如果事务使用其他查询结果更新数据，结果可能不一致，因为违反了 `REPEATABLE READ` 隔离。
+In Step 2, TiDB only retries SQL statements that contain write operations. However, during retrying, TiDB receives a new version number to mark the beginning of the transaction. This means that TiDB retries SQL statements with the data in the new `start_ts` version. In this case, if the transaction updates data using other query results, the results might be inconsistent because the `REPEATABLE READ` isolation is violated.
 
-如果你的应用程序可以容忍更新丢失，并且不需要 `REPEATABLE READ` 隔离一致性，你可以通过设置 `tidb_disable_txn_auto_retry = OFF` 来启用此功能。
+If your application can tolerate lost updates, and does not require `REPEATABLE READ` isolation consistency, you can enable this feature by setting `tidb_disable_txn_auto_retry = OFF`.
 
-## 冲突检测
+## Conflict detection
 
-作为分布式数据库，TiDB 在 TiKV 层执行内存中的冲突检测，主要在预写阶段进行。TiDB 实例是无状态的，彼此不知道对方的存在，这意味着它们无法知道它们的写入是否在整个集群中产生冲突。因此，冲突检测在 TiKV 层执行。
+As a distributed database, TiDB performs in-memory conflict detection in the TiKV layer, mainly in the prewrite phase. TiDB instances are stateless and unaware of each other, which means they cannot know whether their writes result in conflicts across the cluster. Therefore, conflict detection is performed in the TiKV layer.
 
-配置如下：
+The configuration is as follows:
 
 ```toml
-# 控制槽位数量（默认为 "2048000"）
+# Controls the number of slots. ("2048000" by default）
 scheduler-concurrency = 2048000
 ```
 
-此外，TiKV 支持监控调度器中等待锁存器的时间。
+In addition, TiKV supports monitoring the time spent on waiting latches in the scheduler.
 
-![调度器锁存器等待时间](/media/optimistic-transaction-metric.png)
+![Scheduler latch wait duration](/media/optimistic-transaction-metric.png)
 
-当 `Scheduler latch wait duration` 较高且没有慢写入时，可以安全地得出结论，此时存在许多写冲突。
+When `Scheduler latch wait duration` is high and there are no slow writes, it can be safely concluded that there are many write conflicts at this time.

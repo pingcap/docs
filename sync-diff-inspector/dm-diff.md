@@ -1,6 +1,6 @@
 ---
 title: Data Check in the DM Replication Scenario
-summary: "Learn about how to set a specific `task-name` configuration from `DM-master` to perform a data check."
+summary: Learn about how to set a specific `task-name` configuration from `DM-master` to perform a data check.
 ---
 
 # Data Check in the DM Replication Scenario

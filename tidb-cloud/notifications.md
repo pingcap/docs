@@ -1,56 +1,56 @@
 ---
-title: TiDB Cloud 控制台中的通知
-summary: 了解 TiDB Cloud 控制台中的通知，包括通知类型、用途以及如何查看它们。
+title: Notifications in the TiDB Cloud Console
+summary: Learn about notifications in the TiDB Cloud console, including notification types, purposes, and how to view them.
 ---
 
-# TiDB Cloud 控制台中的通知
+# Notifications in the TiDB Cloud Console
 
-[TiDB Cloud 控制台](https://tidbcloud.com/)提供通知功能，让你了解重要更新、系统消息、产品变更、账单提醒和其他相关信息。这些通知帮助你在不离开控制台的情况下及时了解最新情况并采取必要的操作。
+The [TiDB Cloud console](https://tidbcloud.com/) provides notifications to keep you informed about important updates, system messages, product changes, billing reminders, and other relevant information. These notifications help you stay up-to-date and take necessary actions without leaving the console.
 
-## 通知类型
+## Notification types
 
-你可能会在 TiDB Cloud 控制台中收到不同类型的通知，例如：
+You might receive different types of notifications in the TiDB Cloud console, such as:
 
-- **信息通知**
+- **Informational notifications**
 
-    提供有用的更新信息，如功能使用提示、应用变更或即将发生的事件提醒。
+    Provide helpful updates, such as feature usage tips, application changes, or reminders for upcoming events.
 
-- **操作通知**
+- **Actionable notifications**
 
-   提示你执行特定操作，如添加信用卡。
+   Prompt you to perform specific actions, such as adding a credit card.
 
-- **警报通知**
+- **Alert notifications**
 
-    通知你需要立即关注的重要问题或紧急事件，如系统错误、安全警告或重要更新。
+    Notify you of critical issues or urgent events requiring immediate attention, such as system errors, security warnings, or important updates.
 
-- **账单通知**
+- **Billing notifications**
 
-    提供有关账单相关活动的更新，如信用额度和折扣更新。
+    Deliver updates about billing-related activities, such as credit and discount updates.
 
-- **反馈通知**
+- **Feedback notifications**
 
-    请求你对某个功能的使用体验提供反馈，如对最近的交互进行评分或完成调查。
+    Request feedback on your experience with a feature, such as rating a recent interaction or completing a survey.
 
-## 通知列表
+## Notifications list
 
-下表列出了 TiDB Cloud 中可用的通知，以及它们的触发事件和接收者：
+The following table lists the notifications available in TiDB Cloud, along with their trigger events and recipients:
 
-| 通知 | 触发事件 | 通知接收者 |
+| Notification | Trigger event | Notification recipient |
 | --- | --- | --- |
-| TiDB Cloud Serverless 集群创建 | 创建了一个 [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 集群。 | 所有项目成员 |
-| TiDB Cloud Serverless 集群删除 | 删除了一个 TiDB Cloud Serverless 集群。 | 所有项目成员 |
-| TiDB Cloud Dedicated 集群创建 | 创建了一个 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。 | 所有项目成员 |
-| TiDB Cloud Dedicated 集群删除 | 删除了一个 TiDB Cloud Dedicated 集群。 | 所有项目成员 |
-| 组织预算阈值警报 | 达到组织[预算阈值](/tidb-cloud/tidb-cloud-budget.md)。 | `组织所有者`、`组织账单管理员`和`组织账单查看者` |
-| 项目预算阈值警报 | 达到项目[预算阈值](/tidb-cloud/tidb-cloud-budget.md)。 | `组织所有者`、`组织账单管理员`、`组织账单查看者`和`项目所有者` |
-| Serverless 集群支出限额阈值警报 | 达到组织中 TiDB Cloud Serverless 集群的[支出限额阈值](/tidb-cloud/manage-serverless-spend-limit.md)。 | `组织所有者`、`组织账单管理员`、`组织账单查看者`和`项目所有者` |
-| 信用额度更新 | 组织的[信用额度](/tidb-cloud/tidb-cloud-billing.md#credits)被应用、完全使用、收回或过期。 | `组织所有者`、`组织账单管理员`和`组织账单查看者` |
-| 折扣更新 | 组织的[折扣](/tidb-cloud/tidb-cloud-billing.md#discounts)被应用、收回或过期。 | `组织所有者`、`组织账单管理员`和`组织账单查看者` |
-| 云市场更新 | 组织通过云服务提供商市场进行订阅或取消订阅。 | 所有组织成员 |
-| 支持计划更新 | 组织的支持计划订阅发生变更。 | 所有组织成员 |
+| TiDB Cloud Serverless cluster creation | A [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster is created. | All project members |
+| TiDB Cloud Serverless cluster deletion | A TiDB Cloud Serverless cluster is deleted. | All project members |
+| TiDB Cloud Dedicated cluster creation | A [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster is created. | All project members |
+| TiDB Cloud Dedicated cluster deletion | A TiDB Cloud Dedicated cluster is deleted. | All project members |
+| Organization Budget threshold alert | The organization [budget threshold](/tidb-cloud/tidb-cloud-budget.md) is reached. | `Organization Owner`, `Organization Billing Manager`, and `Organization Billing Viewer` |
+| Project Budget threshold alert | The project [budget threshold](/tidb-cloud/tidb-cloud-budget.md) is reached. | `Organization Owner`, `Organization Billing Manager`, `Organization Billing Viewer`, and `Project Owner` |
+| Serverless cluster spending limit threshold alert | The [spending limit threshold](/tidb-cloud/manage-serverless-spend-limit.md) for TiDB Cloud Serverless clusters in the organization is reached. | `Organization Owner`, `Organization Billing Manager`, `Organization Billing Viewer`, and `Project Owner` |
+| Credits update | [Credits](/tidb-cloud/tidb-cloud-billing.md#credits) for the organization are applied, fully used, reclaimed, or expired. | `Organization Owner`, `Organization Billing Manager`, and `Organization Billing Viewer` |
+| Discount update | [Discounts](/tidb-cloud/tidb-cloud-billing.md#discounts) for the organization are applied, reclaimed, or expired. | `Organization Owner`, `Organization Billing Manager`, and `Organization Billing Viewer` |
+| Marketplace update | The organization has a subscription or unsubscription through a cloud provider marketplace. | All organization members |
+| Support plan update | The support plan subscription for the organization is changed. | All organization members |
 
-## 查看通知
+## View notifications
 
-要查看通知，请点击 [TiDB Cloud 控制台](https://tidbcloud.com/)左下角的**通知**。
+To view notifications, click **Notification** in the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com/).
 
-当有新通知时，**通知**旁边会显示一个数字，表示有多少条未读通知。
+When new notifications are available, a number is displayed next to **Notification** indicating how many notifications are unread.

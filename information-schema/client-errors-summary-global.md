@@ -1,28 +1,28 @@
 ---
 title: CLIENT_ERRORS_SUMMARY_GLOBAL
-summary: "了解 `CLIENT_ERRORS_SUMMARY_GLOBAL` INFORMATION_SCHEMA 表。"
+summary: Learn about the `CLIENT_ERRORS_SUMMARY_GLOBAL` INFORMATION_SCHEMA table.
 ---
 
 # CLIENT_ERRORS_SUMMARY_GLOBAL
 
-`CLIENT_ERRORS_SUMMARY_GLOBAL` 表提供了连接到 TiDB 服务器的客户端收到的所有 SQL 错误和警告的全局汇总。这些包括：
+The table `CLIENT_ERRORS_SUMMARY_GLOBAL` provides a global summary of all SQL errors and warnings that have been returned to clients that connect to a TiDB server. These include:
 
-* 格式错误的 SQL 语句。
-* 除零错误。
-* 尝试插入超出范围或重复的键值。
-* 权限错误。
-* 表不存在。
+* Malformed SQL statements.
+* Division by zero errors.
+* The attempt to insert out-of-range of duplicate key values.
+* Permission errors.
+* A table does not exist.
 
-客户端错误通过 MySQL 服务器协议返回给客户端，应用程序需要采取适当的操作。`INFORMATION_SCHEMA.CLIENT_ERRORS_SUMMARY_GLOBAL` 表提供了一个高层次的概览，在应用程序没有正确处理（或记录）TiDB 服务器返回的错误的情况下特别有用。
+Client errors are returned to the client via the MySQL server protocol, where applications are expected to take appropriate action. The `INFORMATION_SCHEMA.CLIENT_ERRORS_SUMMARY_GLOBAL` table provides a high-level overview, and is useful in the scenario where applications are not correctly handling (or logging) errors returned by the TiDB server.
 
-可以使用 `FLUSH CLIENT_ERRORS_SUMMARY` 语句重置汇总计数。该汇总信息对每个 TiDB 服务器都是本地的，并且仅保存在内存中。如果 TiDB 服务器重启，汇总信息将会丢失。
+The summarized counts can be reset with the statement `FLUSH CLIENT_ERRORS_SUMMARY`. The summary is local to each TiDB server and is only retained in memory. Summaries will be lost if the TiDB server restarts.
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC CLIENT_ERRORS_SUMMARY_GLOBAL;
 ```
 
-输出如下：
+The output is as follows:
 
 ```sql
 +---------------+---------------+------+------+---------+-------+
@@ -38,16 +38,16 @@ DESC CLIENT_ERRORS_SUMMARY_GLOBAL;
 6 rows in set (0.00 sec)
 ```
 
-字段说明：
+Field description:
 
-* `ERROR_NUMBER`：返回的 MySQL 兼容错误号。
-* `ERROR_MESSAGE`：与错误号匹配的错误消息（以预处理语句形式）。
-* `ERROR_COUNT`：此错误返回的次数。
-* `WARNING_COUNT`：此警告返回的次数。
-* `FIRST_SEEN`：首次发送此错误（或警告）的时间。
-* `LAST_SEEN`：最近一次发送此错误（或警告）的时间。
+* `ERROR_NUMBER`: The MySQL-compatible error number that was returned.
+* `ERROR_MESSAGE`: The error message which matches the error number (in prepared statement form).
+* `ERROR_COUNT`: The number of times this error was returned.
+* `WARNING_COUNT`: The number of times this warning was returned.
+* `FIRST_SEEN`: The first time this error (or warning) was sent.
+* `LAST_SEEN`: The most recent time this error (or warning) was sent.
 
-以下示例展示了连接到本地 TiDB 服务器时生成的警告。执行 `FLUSH CLIENT_ERRORS_SUMMARY` 后重置汇总信息：
+The following example shows a warning being generated when connecting to a local TiDB server. The summary is reset after executing `FLUSH CLIENT_ERRORS_SUMMARY`:
 
 ```sql
 SELECT 0/0;
@@ -56,7 +56,7 @@ FLUSH CLIENT_ERRORS_SUMMARY;
 SELECT * FROM CLIENT_ERRORS_SUMMARY_GLOBAL;
 ```
 
-输出如下：
+The output is as follows:
 
 ```sql
 +-----+

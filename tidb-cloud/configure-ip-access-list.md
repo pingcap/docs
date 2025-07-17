@@ -1,30 +1,30 @@
 ---
-title: 配置 IP 访问列表
-summary: 了解如何配置允许访问 TiDB Cloud Dedicated 集群的 IP 地址。
+title: Configure an IP Access List
+summary: Learn how to configure IP addresses that are allowed to access your TiDB Cloud Dedicated cluster.
 ---
 
-# 配置 IP 访问列表
+# Configure an IP Access List
 
-对于 TiDB Cloud 中的每个 TiDB Cloud Dedicated 集群，你可以配置 IP 访问列表来过滤尝试访问集群的互联网流量，其工作方式类似于防火墙访问控制列表。配置完成后，只有 IP 地址在 IP 访问列表中的客户端和应用程序才能连接到你的 TiDB Cloud Dedicated 集群。
+For each TiDB Cloud Dedicated cluster in TiDB Cloud, you can configure an IP access list to filter internet traffic trying to access the cluster, which works similarly to a firewall access control list. After the configuration, only the clients and applications whose IP addresses are in the IP access list can connect to your TiDB Cloud Dedicated cluster.
 
-> **注意：**
+> **Note:**
 >
-> 本文适用于 [**TiDB Cloud Dedicated**](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)。有关配置 **TiDB Cloud Serverless** IP 访问列表的说明，请参见[为公共端点配置 TiDB Cloud Serverless 防火墙规则](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)。
+> This document applies to [**TiDB Cloud Dedicated**](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For instructions on configuring an IP access list for **TiDB Cloud Serverless**, see [Configure TiDB Cloud Serverless Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md).
 
-要为 TiDB Cloud Dedicated 集群配置 IP 访问列表，请执行以下步骤：
+To configure an IP access list for your TiDB Cloud Dedicated cluster, take the following steps:
 
-1. 导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称以进入其概览页面。
+1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
 
-    > **提示：**
+    > **Tip:**
     >
-    > 你可以使用左上角的组合框在组织、项目和集群之间切换。
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. 在左侧导航栏中，点击**设置** > **网络**。
-3. 在**网络**页面上，点击**添加 IP 地址**。
-4. 在显示的对话框中，选择以下选项之一：
+2. In the left navigation pane, click **Settings** > **Networking**.
+3. On the **Networking** page, click **Add IP Address**.
+4. In the displayed dialog, choose one of the following options:
 
-    - **允许来自任何地方的访问**：允许所有 IP 地址访问 TiDB Cloud。此选项将你的集群完全暴露在互联网上，风险很高。
-    - **使用 IP 地址**（推荐）：你可以添加允许通过 SQL 客户端访问 TiDB Cloud 的 IP 和 CIDR 地址列表。
+    - **Allow access from anywhere**: allows all IP addresses to access TiDB Cloud. This option exposes your cluster to the internet completely and is highly risky.
+    - **Use IP addresses** (recommended): you can add a list of IPs and CIDR addresses that are allowed to access TiDB Cloud via a SQL client.
 
-5. 如果你选择**使用 IP 地址**，请添加 IP 地址或 CIDR 范围，并可选择添加描述。对于每个 TiDB Cloud Dedicated 集群，你最多可以添加 100 个 IP 地址。
-6. 点击**确认**以保存更改。
+5. If you choose **Use IP addresses**, add IP addresses or CIDR range with an optional description. For each TiDB Cloud Dedicated cluster, you can add up to 100 IP addresses.
+6. Click **Confirm** to save your changes.

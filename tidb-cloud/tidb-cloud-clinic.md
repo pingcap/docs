@@ -1,50 +1,50 @@
 ---
-title: TiDB Cloud 诊所
-summary: 了解如何使用 TiDB Cloud 诊所进行高级监控和诊断。
+title: TiDB Cloud Clinic
+summary: Learn how to use TiDB Cloud Clinic for advanced monitoring and diagnostics.
 ---
 
-# TiDB Cloud 诊所
+# TiDB Cloud Clinic
 
-TiDB Cloud 诊所在 TiDB Cloud 上提供高级监控和诊断功能，旨在帮助你通过详细分析和可操作的见解，快速识别性能问题、优化数据库并提升整体性能。
+TiDB Cloud Clinic offers advanced monitoring and diagnostic capabilities on the TiDB Cloud, designed to help you quickly identify performance issues, optimize your database, and enhance overall performance with detailed analysis and actionable insights.
 
 ![tidb-cloud-clinic](/media/tidb-cloud/tidb-cloud-clinic.png)
 
-> **注意：**
+> **Note:**
 >
-> 目前，TiDB Cloud 诊所仅适用于 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。
+> Currently, TiDB Cloud Clinic is only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
-## 前提条件
+## Prerequisites
 
-TiDB Cloud 诊所仅适用于订阅了**企业版**或**高级版**支持计划的组织。
+TiDB Cloud Clinic is only available for organizations that subscribe to the **Enterprise** or **Premium** support plan.
 
-## 查看集群页面
+## View the Cluster page
 
-要查看**集群**页面，请按照以下步骤操作：
+To view the **Cluster** page, take the following steps:
 
-1. 登录 [TiDB Cloud 诊所控制台](https://clinic.pingcap.com/)，选择**使用 TiDB 账号继续**进入 TiDB Cloud 登录页面。
+1. Log in to the [TiDB Cloud Clinic console](https://clinic.pingcap.com/) and select **Continue with TiDB Account** to enter the TiDB Cloud login page.
 
-2. 从组织列表中选择目标组织。将显示所选项目中的集群。
+2. From the organization list, select your target organization. The clusters in the selected project are displayed.
 
-3. 点击目标集群的名称。将显示集群概览页面，你可以在此查看集群的详细信息，包括：
+3. Click the name of your target cluster. The cluster overview page is displayed, where you can view detailed information about your cluster, including:
 
-    - 高级指标
-    - 慢查询排行（仅支持 TiDB 版本为 v8.1.1 或更高版本，v7.5.4 或更高版本的集群）
-    - TopSQL（仅支持 TiDB 版本为 v8.1.1 或更高版本，v7.5.4 或更高版本的集群）
-    - 基准测试报告
+    - Advanced Metrics
+    - Top Slow Queries (only supported when the TiDB version of the cluster is v8.1.1 or later, v7.5.4 or later)
+    - TopSQL (only supported when the TiDB version of the cluster is v8.1.1 or later, v7.5.4 or later)
+    - Benchmark Report
 
-## 监控高级指标
+## Monitor advanced metrics
 
-TiDB Cloud 诊所使用 Grafana 为 TiDB 集群提供全面的指标集。高级指标的保留策略为 90 天。
+TiDB Cloud Clinic uses Grafana to provide a comprehensive set of metrics for TiDB clusters. The retention policy for advanced metrics is 90 days.
 
-要查看指标仪表板，请按照以下步骤操作：
+To view the metrics dashboard, take the following steps:
 
-1. 在 [TiDB Cloud 诊所控制台](https://clinic.pingcap.com/)中，导航到集群的**集群**页面。
+1. In the [TiDB Cloud Clinic console](https://clinic.pingcap.com/), navigate to the **Cluster** page of a cluster.
 
-2. 点击**指标**。
+2. Click **Metrics**.
 
-3. 点击你想要查看的仪表板名称。将显示该仪表板。
+3. Click the name of the dashboard you want to view. The dashboard is displayed.
 
-仪表板及其内容可能会发生变化。目前提供以下仪表板：
+The dashboards and their content are subject to change. Currently, the following dashboards are available:
 
 - Backup & Import
 - DM-Professional
@@ -58,66 +58,66 @@ TiDB Cloud 诊所使用 Grafana 为 TiDB 集群提供全面的指标集。高级
 - TiKV-Details
 - User-Node-Info
 
-## 分析慢查询排行
+## Analyze top slow queries
 
-默认情况下，执行时间超过 300 毫秒的 SQL 查询被视为慢查询。
+By default, SQL queries that take longer than 300 milliseconds are considered slow queries.
 
-在 TiDB Cloud 控制台的默认[**慢查询**](/tidb-cloud/tune-performance.md#slow-query)页面上，特别是在具有大量慢查询的集群中，识别影响性能的查询可能比较困难。TiDB Cloud 诊所中的**慢查询排行**功能基于慢查询日志提供聚合分析。通过此功能，你可以轻松定位存在性能问题的查询，将整体性能调优时间至少减少一半。
+On the default [**Slow Queries**](/tidb-cloud/tune-performance.md#slow-query) page in the TiDB Cloud console, identifying performance-impacting queries can be difficult, especially in clusters with a large number of slow queries. The **Top Slow Queries** feature in TiDB Cloud Clinic provides aggregated analysis based on slow query logs. With this feature, you can easily pinpoint queries with performance issues, reducing overall performance tuning time by at least half.
 
-慢查询排行按 SQL 指纹聚合显示前 10 个查询，并按以下维度排序：
+Top Slow Queries displays the top 10 queries aggregated by SQL digest, sorted by the following dimensions:
 
-- 总延迟
-- 最大延迟
-- 平均延迟
-- 总内存
-- 最大内存
-- 平均内存
-- 总次数
+- Total latency 
+- Maximum latency
+- Average latency
+- Total memory
+- Maximum memory
+- Average memory
+- Total count
 
-要查看集群中的慢查询，请按照以下步骤操作：
+To view slow queries in a cluster, take the following steps:
 
-1. 在 [TiDB Cloud 诊所控制台](https://clinic.pingcap.com/)中，导航到集群的**集群**页面。
+1. In the [TiDB Cloud Clinic console](https://clinic.pingcap.com/), navigate to the **Cluster** page of a cluster.
 
-2. 点击**慢查询**。
+2. Click **Slow Query**.
 
-3. 慢查询排行将以表格形式显示。你可以按不同列进行排序。
+3. The top slow queries are displayed in a table. You can sort the results by different columns.
 
-4. （可选）点击列表中的任何慢查询以查看其详细执行信息。
+4. (Optional) Click any slow query in the list to view its detailed execution information.
 
-5. （可选）按时间范围、数据库或语句类型筛选慢查询。
+5. (Optional) Filter slow queries by time range, database, or statement type.
 
-慢查询的保留策略为 7 天。
+The retention policy for slow queries is 7 days.
 
-更多信息，请参阅 [TiDB Dashboard 中的慢查询](https://docs.pingcap.com/tidb/stable/dashboard-slow-query)。
+For more information, see [Slow Queries in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-slow-query).
 
-## 监控 TopSQL
+## Monitor TopSQL
 
-TiDB Cloud 诊所提供 TopSQL 信息，使你能够实时监控和可视化探索数据库中每个 SQL 语句的 CPU 开销。这有助于你优化和解决数据库性能问题。
+TiDB Cloud Clinic provides TopSQL information, enabling you to monitor and visually explore the CPU overhead of each SQL statement in your database in real time. This helps you optimize and resolve database performance issues.
 
-要查看 TopSQL，请按照以下步骤操作：
+To view TopSQL, take the following steps:
 
-1. 在 [TiDB Cloud 诊所控制台](https://clinic.pingcap.com/)中，导航到集群的**集群**页面。
+1. In the [TiDB Cloud Clinic console](https://clinic.pingcap.com/), navigate to the **Cluster** page of a cluster.
 
-2. 点击 **TopSQL**。
+2. Click **TopSQL**.
 
-3. 选择特定的 TiDB 或 TiKV 实例以观察其负载。你可以使用时间选择器或在图表中选择时间范围来细化分析。
+3. Select a specific TiDB or TiKV instance to observe its load. You can use the time picker or select a time range in the chart to refine your analysis.
 
-4. 分析 TopSQL 显示的图表和表格。
+4. Analyze the charts and tables displayed by TopSQL.
 
-更多信息，请参阅 [TiDB Dashboard 中的 TopSQL](https://docs.pingcap.com/tidb/stable/top-sql)。
+For more information, see [TopSQL in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/top-sql). 
 
-## 生成基准测试报告
+## Generate benchmark reports
 
-**基准测试报告**功能帮助你在性能测试期间识别 TiDB 集群中的性能问题。完成压力测试后，你可以生成基准测试报告来分析集群的性能。该报告突出显示已识别的瓶颈并提供优化建议。应用这些建议后，你可以运行另一轮压力测试并生成新的基准测试报告以比较性能改进。
+The **Benchmark Report** feature helps you identify performance issues in a TiDB cluster during performance testing. After completing a stress test, you can generate a benchmark report to analyze the cluster's performance. The report highlights identified bottlenecks and provides optimization suggestions. After applying these suggestions, you can run another round of stress testing and generate a new benchmark report to compare performance improvements.
 
-要生成基准测试报告，请按照以下步骤操作：
+To generate a benchmark report, take the following steps:
 
-1. 在 [TiDB Cloud 诊所控制台](https://clinic.pingcap.com/)中，导航到集群的**集群**页面。
+1. In the [TiDB Cloud Clinic console](https://clinic.pingcap.com/), navigate to the **Cluster** page of a cluster.
 
-2. 点击**基准测试报告**。
+2. Click **Benchmark Report**.
 
-3. 选择要在基准测试报告中分析的时间范围。
+3. Select the time range to be analyzed in the benchmark report.
 
-4. 点击**创建报告**以生成基准测试报告。
+4. Click **Create Report** to generate the benchmark report.
 
-5. 等待报告生成完成。报告准备就绪后，点击**查看**以打开报告。
+5. Wait for report generation to complete. When the report is ready, click **View** to open it.

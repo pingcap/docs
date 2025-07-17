@@ -1,11 +1,11 @@
 ---
 title: SCHEMATA
-summary: "了解 `SCHEMATA` information_schema 表。"
+summary: Learn the `SCHEMATA` information_schema table.
 ---
 
 # SCHEMATA
 
-`SCHEMATA` 表提供了数据库的相关信息。该表的数据等同于 [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md) 语句的结果。
+The `SCHEMATA` table provides information about databases. The table data is equivalent to the result of the [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md) statement.
 
 ```sql
 USE information_schema;
@@ -42,10 +42,10 @@ SELECT * FROM SCHEMATA;
 5 rows in set (0.00 sec)
 ```
 
-`SCHEMATA` 表中的字段说明如下：
+Fields in the `SCHEMATA` table are described as follows:
 
-* `CATALOG_NAME`：数据库所属的目录。
-* `SCHEMA_NAME`：数据库名称。
-* `DEFAULT_CHARACTER_SET_NAME`：数据库的默认字符集。
-* `DEFAULT_COLLATION_NAME`：数据库的默认排序规则。
-* `SQL_PATH`：该项的值始终为 `NULL`。
+* `CATALOG_NAME`: The catalog to which the database belongs.
+* `SCHEMA_NAME`: The database name.
+* `DEFAULT_CHARACTER_SET_NAME`: The default character set of the database.
+* `DEFAULT_COLLATION_NAME`: The default collation of the database.
+* `SQL_PATH`: The value of this item is always `NULL`.

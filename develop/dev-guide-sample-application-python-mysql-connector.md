@@ -1,161 +1,161 @@
 ---
-title: 使用 MySQL Connector/Python 连接 TiDB
-summary: 了解如何使用 MySQL Connector/Python 连接 TiDB。本教程提供使用 MySQL Connector/Python 操作 TiDB 的 Python 示例代码片段。
+title: Connect to TiDB with MySQL Connector/Python
+summary: Learn how to connect to TiDB using MySQL Connector/Python. This tutorial gives Python sample code snippets that work with TiDB using MySQL Connector/Python.
 ---
 
-# 使用 MySQL Connector/Python 连接 TiDB
+# Connect to TiDB with MySQL Connector/Python
 
-TiDB 是一个兼容 MySQL 的数据库，而 [MySQL Connector/Python](https://dev.mysql.com/doc/connector-python/en/) 是 Python 的官方 MySQL 驱动程序。
+TiDB is a MySQL-compatible database, and [MySQL Connector/Python](https://dev.mysql.com/doc/connector-python/en/) is the official MySQL driver for Python.
 
-在本教程中，你可以学习如何使用 TiDB 和 MySQL Connector/Python 完成以下任务：
+In this tutorial, you can learn how to use TiDB and MySQL Connector/Python to accomplish the following tasks:
 
-- 设置环境。
-- 使用 MySQL Connector/Python 连接到 TiDB 集群。
-- 构建并运行应用程序。你也可以查看基本 CRUD 操作的示例代码片段。
+- Set up your environment.
+- Connect to your TiDB cluster using MySQL Connector/Python.
+- Build and run your application. Optionally, you can find sample code snippets for basic CRUD operations.
 
-> **注意：**
+> **Note:**
 >
-> 本教程适用于 TiDB Cloud Serverless、TiDB Cloud Dedicated 和 TiDB Self-Managed 集群。
+> This tutorial works with {{{ .starter }}}, TiDB Cloud Dedicated, and TiDB Self-Managed clusters.
 
-## 前提条件
+## Prerequisites
 
-要完成本教程，你需要：
+To complete this tutorial, you need:
 
-- [Python 3.8 或更高版本](https://www.python.org/downloads/)。
-- [Git](https://git-scm.com/downloads)。
-- 一个 TiDB 集群。
+- [Python 3.8 or higher](https://www.python.org/downloads/).
+- [Git](https://git-scm.com/downloads).
+- A TiDB cluster.
 
 <CustomContent platform="tidb">
 
-**如果你还没有 TiDB 集群，可以按照以下方式创建：**
+**If you don't have a TiDB cluster, you can create one as follows:**
 
-- （推荐）按照[创建 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md)创建你自己的 TiDB Cloud 集群。
-- 按照[部署本地测试 TiDB 集群](/quick-start-with-tidb.md#deploy-a-local-test-cluster)或[部署生产 TiDB 集群](/production-deployment-using-tiup.md)创建本地集群。
+- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-**如果你还没有 TiDB 集群，可以按照以下方式创建：**
+**If you don't have a TiDB cluster, you can create one as follows:**
 
-- （推荐）按照[创建 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md)创建你自己的 TiDB Cloud 集群。
-- 按照[部署本地测试 TiDB 集群](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)或[部署生产 TiDB 集群](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)创建本地集群。
+- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
 
 </CustomContent>
 
-## 运行示例应用程序连接到 TiDB
+## Run the sample app to connect to TiDB
 
-本节演示如何运行示例应用程序代码并连接到 TiDB。
+This section demonstrates how to run the sample application code and connect to TiDB.
 
-### 步骤 1：克隆示例应用程序仓库
+### Step 1: Clone the sample app repository
 
-在终端窗口中运行以下命令来克隆示例代码仓库：
+Run the following commands in your terminal window to clone the sample code repository:
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-python-mysqlconnector-quickstart.git
 cd tidb-python-mysqlconnector-quickstart
 ```
 
-### 步骤 2：安装依赖
+### Step 2: Install dependencies
 
-运行以下命令安装示例应用程序所需的包（包括 mysql-connector-python）：
+Run the following command to install the required packages (including mysql-connector-python) for the sample app:
 
 ```shell
 pip install -r requirements.txt
 ```
 
-### 步骤 3：配置连接信息
+### Step 3: Configure connection information
 
-根据你选择的 TiDB 部署选项连接到你的 TiDB 集群。
+Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
 <SimpleTab>
-<div label="TiDB Cloud Serverless">
+<div label="{{{ .starter }}}">
 
-1. 导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称进入其概览页面。
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
-2. 点击右上角的**连接**。将显示连接对话框。
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. 确保连接对话框中的配置与你的操作环境匹配。
+3. Ensure the configurations in the connection dialog match your operating environment.
 
-    - **连接类型**设置为 `Public`
-    - **分支**设置为 `main`
-    - **连接工具**设置为 `General`
-    - **操作系统**与你的环境匹配。
+    - **Connection Type** is set to `Public`
+    - **Branch** is set to `main`
+    - **Connect With** is set to `General`
+    - **Operating System** matches your environment.
 
-    > **提示：**
+    > **Tip:**
     >
-    > 如果你的程序在 Windows Subsystem for Linux (WSL) 中运行，请切换到相应的 Linux 发行版。
+    > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
 
-4. 点击**生成密码**创建随机密码。
+4. Click **Generate Password** to create a random password.
 
-    > **提示：**
-    >
-    > 如果你之前已经创建了密码，你可以使用原始密码或点击**重置密码**生成新密码。
+    > **Tip:**
+    > 
+    > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
 
-5. 运行以下命令复制 `.env.example` 并将其重命名为 `.env`：
+5. Run the following command to copy `.env.example` and rename it to `.env`:
 
     ```shell
     cp .env.example .env
     ```
 
-6. 将相应的连接字符串复制并粘贴到 `.env` 文件中。示例结果如下：
+6. Copy and paste the corresponding connection string into the `.env` file. The example result is as follows:
 
     ```dotenv
-    TIDB_HOST='{host}'  # 例如 gateway01.ap-northeast-1.prod.aws.tidbcloud.com
+    TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
     TIDB_PORT='4000'
-    TIDB_USER='{user}'  # 例如 xxxxxx.root
+    TIDB_USER='{user}'  # e.g. xxxxxx.root
     TIDB_PASSWORD='{password}'
     TIDB_DB_NAME='test'
-    CA_PATH='{ssl_ca}'  # 例如 /etc/ssl/certs/ca-certificates.crt (Debian / Ubuntu / Arch)
+    CA_PATH='{ssl_ca}'  # e.g. /etc/ssl/certs/ca-certificates.crt (Debian / Ubuntu / Arch)
     ```
 
-    请确保将占位符 `{}` 替换为从连接对话框获得的连接参数。
+    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog.
 
-7. 保存 `.env` 文件。
+7. Save the `.env` file.
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1. 导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称进入其概览页面。
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
-2. 点击右上角的**连接**。将显示连接对话框。
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. 在连接对话框中，从**连接类型**下拉列表中选择**公共**，然后点击 **CA 证书**下载 CA 证书。
+3. In the connection dialog, select **Public** from the **Connection Type** drop-down list, and then click **CA cert** to download the CA certificate.
 
-    如果你尚未配置 IP 访问列表，请在首次连接之前点击**配置 IP 访问列表**或按照[配置 IP 访问列表](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)中的步骤进行配置。
+    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) to configure it before your first connection.
 
-    除了**公共**连接类型外，TiDB Cloud Dedicated 还支持**私有端点**和 **VPC 对等连接**类型。更多信息，请参见[连接到你的 TiDB Cloud Dedicated 集群](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)。
+    In addition to the **Public** connection type, TiDB Cloud Dedicated supports **Private Endpoint** and **VPC Peering** connection types. For more information, see [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
 
-4. 运行以下命令复制 `.env.example` 并将其重命名为 `.env`：
+4. Run the following command to copy `.env.example` and rename it to `.env`:
 
     ```shell
     cp .env.example .env
     ```
 
-5. 将相应的连接字符串复制并粘贴到 `.env` 文件中。示例结果如下：
+5. Copy and paste the corresponding connection string into the `.env` file. The example result is as follows:
 
     ```dotenv
-    TIDB_HOST='{host}'  # 例如 tidb.xxxx.clusters.tidb-cloud.com
+    TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
     TIDB_PORT='4000'
-    TIDB_USER='{user}'  # 例如 root
+    TIDB_USER='{user}'  # e.g. root
     TIDB_PASSWORD='{password}'
     TIDB_DB_NAME='test'
     CA_PATH='{your-downloaded-ca-path}'
     ```
 
-    请确保将占位符 `{}` 替换为从连接对话框获得的连接参数，并将 `CA_PATH` 配置为之前下载的证书路径。
+    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog, and configure `CA_PATH` with the certificate path downloaded in the previous step.
 
-6. 保存 `.env` 文件。
+6. Save the `.env` file.
 
 </div>
 <div label="TiDB Self-Managed">
 
-1. 运行以下命令复制 `.env.example` 并将其重命名为 `.env`：
+1. Run the following command to copy `.env.example` and rename it to `.env`:
 
     ```shell
     cp .env.example .env
     ```
 
-2. 将相应的连接字符串复制并粘贴到 `.env` 文件中。示例结果如下：
+2. Copy and paste the corresponding connection string into the `.env` file. The example result is as follows:
 
     ```dotenv
     TIDB_HOST='{tidb_server_host}'
@@ -165,30 +165,30 @@ pip install -r requirements.txt
     TIDB_DB_NAME='test'
     ```
 
-    请确保将占位符 `{}` 替换为连接参数，并删除 `CA_PATH` 行。如果你在本地运行 TiDB，默认主机地址为 `127.0.0.1`，密码为空。
+    Be sure to replace the placeholders `{}` with the connection parameters, and remove the `CA_PATH` line. If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
 
-3. 保存 `.env` 文件。
+3. Save the `.env` file.
 
 </div>
 </SimpleTab>
 
-### 步骤 4：运行代码并检查结果
+### Step 4: Run the code and check the result
 
-1. 执行以下命令运行示例代码：
+1. Execute the following command to run the sample code:
 
     ```shell
     python mysql_connector_example.py
     ```
 
-2. 查看 [Expected-Output.txt](https://github.com/tidb-samples/tidb-python-mysqlconnector-quickstart/blob/main/Expected-Output.txt) 以检查输出是否匹配。
+2. Check the [Expected-Output.txt](https://github.com/tidb-samples/tidb-python-mysqlconnector-quickstart/blob/main/Expected-Output.txt) to see if the output matches.
 
-## 示例代码片段
+## Sample code snippets
 
-你可以参考以下示例代码片段来完成自己的应用程序开发。
+You can refer to the following sample code snippets to complete your own application development.
 
-有关完整的示例代码和如何运行它，请查看 [tidb-samples/tidb-python-mysqlconnector-quickstart](https://github.com/tidb-samples/tidb-python-mysqlconnector-quickstart) 仓库。
+For complete sample code and how to run it, check out the [tidb-samples/tidb-python-mysqlconnector-quickstart](https://github.com/tidb-samples/tidb-python-mysqlconnector-quickstart) repository.
 
-### 连接到 TiDB
+### Connect to TiDB
 
 ```python
 def get_connection(autocommit: bool = True) -> MySQLConnection:
@@ -210,9 +210,9 @@ def get_connection(autocommit: bool = True) -> MySQLConnection:
     return mysql.connector.connect(**db_conf)
 ```
 
-使用此函数时，你需要将 `${tidb_host}`、`${tidb_port}`、`${tidb_user}`、`${tidb_password}`、`${tidb_db_name}` 和 `${ca_path}` 替换为你的 TiDB 集群的实际值。
+When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, `${tidb_db_name}` and `${ca_path}` with the actual values of your TiDB cluster.
 
-### 插入数据
+### Insert data
 
 ```python
 with get_connection(autocommit=True) as conn:
@@ -221,9 +221,9 @@ with get_connection(autocommit=True) as conn:
         cursor.execute("INSERT INTO players (id, coins, goods) VALUES (%s, %s, %s)", player)
 ```
 
-更多信息，请参见[插入数据](/develop/dev-guide-insert-data.md)。
+For more information, refer to [Insert data](/develop/dev-guide-insert-data.md).
 
-### 查询数据
+### Query data
 
 ```python
 with get_connection(autocommit=True) as conn:
@@ -232,9 +232,9 @@ with get_connection(autocommit=True) as conn:
         print(cur.fetchone()[0])
 ```
 
-更多信息，请参见[查询数据](/develop/dev-guide-get-data-from-single-table.md)。
+For more information, refer to [Query data](/develop/dev-guide-get-data-from-single-table.md).
 
-### 更新数据
+### Update data
 
 ```python
 with get_connection(autocommit=True) as conn:
@@ -246,9 +246,9 @@ with get_connection(autocommit=True) as conn:
         )
 ```
 
-更多信息，请参见[更新数据](/develop/dev-guide-update-data.md)。
+For more information, refer to [Update data](/develop/dev-guide-update-data.md).
 
-### 删除数据
+### Delete data
 
 ```python
 with get_connection(autocommit=True) as conn:
@@ -257,39 +257,39 @@ with get_connection(autocommit=True) as conn:
         cursor.execute("DELETE FROM players WHERE id = %s", (player_id,))
 ```
 
-更多信息，请参见[删除数据](/develop/dev-guide-delete-data.md)。
+For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
-## 实用说明
+## Useful notes
 
-### 使用驱动程序还是 ORM 框架？
+### Using driver or ORM framework?
 
-Python 驱动程序提供对数据库的低级访问，但它要求开发人员：
+The Python driver provides low-level access to the database, but it requires the developers to:
 
-- 手动建立和释放数据库连接。
-- 手动管理数据库事务。
-- 手动将数据行（在 `mysql-connector-python` 中表示为元组或字典）映射到数据对象。
+- Manually establish and release database connections.
+- Manually manage database transactions.
+- Manually map data rows (represented as a tuple or dict in `mysql-connector-python`) to data objects.
 
-除非你需要编写复杂的 SQL 语句，否则建议使用 [ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping) 框架进行开发，例如 [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)、[Peewee](/develop/dev-guide-sample-application-python-peewee.md) 和 Django ORM。它可以帮助你：
+Unless you need to write complex SQL statements, it is recommended to use [ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping) framework for development, such as [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md), [Peewee](/develop/dev-guide-sample-application-python-peewee.md), and Django ORM. It can help you:
 
-- 减少管理连接和事务的[样板代码](https://en.wikipedia.org/wiki/Boilerplate_code)。
-- 使用数据对象而不是大量 SQL 语句来操作数据。
+- Reduce [boilerplate code](https://en.wikipedia.org/wiki/Boilerplate_code) for managing connections and transactions.
+- Manipulate data with data objects instead of a number of SQL statements.
 
-## 下一步
+## Next steps
 
-- 从 [MySQL Connector/Python 文档](https://dev.mysql.com/doc/connector-python/en/)了解更多 mysql-connector-python 的用法。
-- 通过[开发者指南](/develop/dev-guide-overview.md)中的章节学习 TiDB 应用程序开发的最佳实践，如[插入数据](/develop/dev-guide-insert-data.md)、[更新数据](/develop/dev-guide-update-data.md)、[删除数据](/develop/dev-guide-delete-data.md)、[单表读取](/develop/dev-guide-get-data-from-single-table.md)、[事务](/develop/dev-guide-transaction-overview.md)和 [SQL 性能优化](/develop/dev-guide-optimize-sql-overview.md)。
-- 学习专业的 [TiDB 开发者课程](https://www.pingcap.com/education/)，通过考试后获得 [TiDB 认证](https://www.pingcap.com/education/certification/)。
+- Learn more usage of mysql-connector-python from [the documentation of MySQL Connector/Python](https://dev.mysql.com/doc/connector-python/en/).
+- Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
+- Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
 
-## 需要帮助？
+## Need help?
 
 <CustomContent platform="tidb">
 
-在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](/support.md)。
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](https://tidb.support.pingcap.com/)。
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
 
 </CustomContent>

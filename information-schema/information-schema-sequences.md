@@ -1,18 +1,18 @@
 ---
 title: SEQUENCES
-summary: "了解 `SEQUENCES` INFORMATION_SCHEMA 表。"
+summary: Learn the `SEQUENCES` INFORMATION_SCHEMA table.
 ---
 
 # SEQUENCES
 
-`SEQUENCES` 表提供了关于序列的信息。[序列功能](/sql-statements/sql-statement-create-sequence.md)是基于 MariaDB 中类似功能建模的。
+The `SEQUENCES` table provides information about sequences. The [sequences feature](/sql-statements/sql-statement-create-sequence.md) is modeled on a similar feature in MariaDB.
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC SEQUENCES;
 ```
 
-输出结果如下：
+The output is as follows:
 
 ```sql
 +-----------------+--------------+------+------+---------+-------+
@@ -33,7 +33,7 @@ DESC SEQUENCES;
 11 rows in set (0.00 sec)
 ```
 
-创建序列 `test.seq` 并查询序列的下一个值：
+Create a sequence `test.seq` and query the next value of the sequence:
 
 ```sql
 CREATE SEQUENCE test.seq;
@@ -41,7 +41,7 @@ SELECT NEXTVAL(test.seq);
 SELECT * FROM sequences\G
 ```
 
-输出结果如下：
+The output is as follows:
 
 ```sql
 +-------------------+
@@ -52,13 +52,13 @@ SELECT * FROM sequences\G
 1 row in set (0.01 sec)
 ```
 
-查看所有序列：
+View all sequences:
 
 ```sql
 SELECT * FROM SEQUENCES\G
 ```
 
-输出结果如下：
+The output is as follows:
 
 ```sql
 *************************** 1. row ***************************
@@ -76,10 +76,10 @@ SEQUENCE_SCHEMA: test
 1 row in set (0.00 sec)
 ```
 
-## 另请参阅
+## See also
 
 - [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)
 - [`SHOW CREATE SEQUENCE`](/sql-statements/sql-statement-show-create-sequence.md)
 - [`ALTER SEQUENCE`](/sql-statements/sql-statement-alter-sequence.md)
 - [`DROP SEQUENCE`](/sql-statements/sql-statement-drop-sequence.md)
-- [序列函数](/functions-and-operators/sequence-functions.md)
+- [Sequence functions](/functions-and-operators/sequence-functions.md)

@@ -1,81 +1,81 @@
 ---
-title: 2023-09-26 TiDB Cloud 控制台维护通知
-summary: 了解 2023 年 9 月 26 日 TiDB Cloud 控制台维护的详细信息，如维护时间窗口、原因和影响。
+title: 2023-09-26 TiDB Cloud Console Maintenance Notification
+summary: Learn about the details of the TiDB Cloud Console maintenance on Sep 26, 2023, such as the maintenance window, reason, and impact.
 ---
 
-# [2023-09-26] TiDB Cloud 控制台维护通知
+# [2023-09-26] TiDB Cloud Console Maintenance Notification
 
-本通知描述了你需要了解的 2023 年 9 月 26 日 [TiDB Cloud 控制台](https://tidbcloud.com/)维护的详细信息。
+This notification describes the details that you need to know about the [TiDB Cloud console](https://tidbcloud.com/) maintenance on September 26, 2023.
 
-## 维护时间窗口
+## Maintenance window
 
-- 日期：2023-09-26
-- 开始时间：8:00 (UTC+0)
-- 结束时间：8:30 (UTC+0)
-- 持续时间：约 30 分钟
+- Date: 2023-09-26
+- Start time: 8:00 (UTC+0)
+- End time: 8:30 (UTC+0)
+- Duration: Approximately 30 minutes
 
-> **注意：**
+> **Note:**
 >
-> 目前，TiDB Cloud 控制台的整体维护计划不支持用户修改维护时间。
+> Currently, the overall maintenance schedule for the TiDB Cloud Console does not support user modifications to the maintenance timing.
 
-## 维护原因
+## Reason for maintenance
 
-我们正在升级 TiDB Cloud Serverless 的管理基础设施，以提升性能和效率，为所有用户提供更好的体验。这是我们持续提供高质量服务承诺的一部分。
+We're upgrading the management infrastructure of the TiDB Cloud Serverless to enhance performance and efficiency, delivering a better experience for all users. This is part of our ongoing commitment to providing high-quality services.
 
-## 影响
+## Impact
 
-在维护时间窗口期间，你可能会遇到 TiDB Cloud 控制台 UI 和 API 中与创建和更新相关功能的间歇性中断。但是，你的 TiDB 集群将保持正常的数据读写操作，确保不会对你的在线业务产生不利影响。
+During the maintenance window, you might experience intermittent disruptions in functionalities related to creating and updating within the TiDB Cloud console UI and API. However, your TiDB cluster will maintain its regular operations for data read and write, ensuring no adverse effects on your online business.
 
-### 受影响的 TiDB Cloud 控制台 UI 功能
+### Affected features of TiDB Cloud console UI
 
-- 集群级别
-    - 集群管理
-        - 创建集群
-        - 删除集群
-        - 扩展集群
-        - 查看集群
-        - 暂停或恢复集群
-        - 更改集群密码
-        - 更改集群流量过滤器
-    - 导入
-        - 创建导入任务
-    - 数据迁移
-        - 创建迁移任务
-    - 变更数据捕获
-        - 创建变更数据捕获任务
-    - 备份
-        - 创建手动备份任务
-        - 自动备份任务
-    - 恢复
-        - 创建恢复任务
-    - 数据库审计日志
-        - 测试连接性
-        - 添加或删除访问记录
-        - 启用或禁用数据库审计日志
-        - 重启数据库审计日志
-- 项目级别
-    - 网络访问
-        - 创建私有端点
-        - 删除私有端点
-        - 添加 VPC 对等连接
-        - 删除 VPC 对等连接
-    - 维护
-        - 更改维护时间窗口
-        - 延迟任务
-    - 回收站
-        - 删除集群
-        - 删除备份
-        - 恢复集群
+- Cluster level
+    - Cluster management
+        - Create clusters
+        - Delete clusters
+        - Scale clusters
+        - View clusters
+        - Pause or Resume clusters
+        - Change cluster password
+        - Change cluster traffic filter
+    - Import
+        - Create an import job
+    - Data Migration
+        - Create a migration job
+    - Changefeed
+        - Create a changefeed job
+    - Backup
+        - Create a manual backup job
+        - Auto backup job
+    - Restore
+        - Create a restore Job
+    - Database audit log
+        - Test connectivity
+        - Add or delete access record
+        - Enable or disable Database audit logging
+        - Restart database audit logging
+- Project level
+    - Network access
+        - Create a private endpoint
+        - Delete a private endpoint
+        - Add VPC Peering
+        - Delete VPC Peering
+    - Maintenance
+        - Change maintenance window
+        - Defer task
+    - Recycle Bin
+        - Delete clusters
+        - Delete backups
+        - Restore clusters        
 
-### 受影响的 TiDB Cloud API 功能
+### Affected features of TiDB Cloud API
 
-- 所有 [API 请求](https://docs.pingcap.com/tidbcloud/api/v1beta)将返回 500 响应。
-- [数据服务 API](https://docs.pingcap.com/tidbcloud/data-service-overview) 不会受到影响。
+- All [API requests](https://docs.pingcap.com/tidbcloud/api/v1beta) will be responded with 500.
+- [Data Service API](https://docs.pingcap.com/tidbcloud/data-service-overview) will not be affected.
 
-## 完成和恢复
+## Completion and resumption
 
-一旦维护成功完成，受影响的功能将恢复，为你提供更好的体验。
+Once the maintenance is successfully completed, the affected functionalities will be reinstated, offering you an even better experience.
 
-## 获取支持
+## Get support
 
-如果你有任何问题或需要帮助，请联系我们的[支持团队](/tidb-cloud/tidb-cloud-support.md)。我们随时为你解答疑虑并提供必要的指导。
+If you have any questions or need assistance, contact our [support team](/tidb-cloud/tidb-cloud-support.md). We are here to address your concerns and provide any necessary guidance.

@@ -1,23 +1,23 @@
 ---
-title: 表达式语法
-summary: 了解 TiDB 中的表达式语法。
+title: Expression Syntax
+summary: Learn about the expression syntax in TiDB.
 ---
 
-# 表达式语法
+# Expression Syntax
 
-表达式是一个或多个值、运算符或函数的组合。在 TiDB 中，表达式主要用于 `SELECT` 语句的各个子句中，包括 Group by 子句、Where 子句、Having 子句、Join 条件和窗口函数。此外，一些 DDL 语句也使用表达式，例如在创建表时设置默认值、列和分区规则。
+An expression is a combination of one or more values, operators, or functions. In TiDB, expressions are mainly used in various clauses of the `SELECT` statement, including Group by clause, Where clause, Having clause, Join condition and window function. In addition, some DDL statements also use expressions, such as the setting of the default values, columns, and partition rules when creating tables.
 
-表达式可以分为以下类型：
+The expressions can be divided into the following types:
 
-- 标识符。参考[架构对象名称](/schema-object-names.md)。
+- Identifier. For reference, see [Schema object names](/schema-object-names.md).
 
-- 谓词、数值、字符串、日期表达式。这些类型的[字面值](/literal-values.md)也是表达式。
+- Predicates, numeric values, strings, date expressions. The [Literal values](/literal-values.md) of these types are also expressions.
 
-- 函数调用和窗口函数。参考[函数和操作符概览](/functions-and-operators/functions-and-operators-overview.md)和[窗口函数](/functions-and-operators/window-functions.md)。
+- Function calls and window functions. For reference, see [Functions and operators overview](/functions-and-operators/functions-and-operators-overview.md) and [Window functions](/functions-and-operators/window-functions.md)
 
-- 参数标记（`?`）、系统变量、用户变量和 CASE 表达式。
+- ParamMarker (`?`), system variables, user variables and CASE expressions.
 
-以下规则是表达式语法，基于 TiDB 解析器的 [`parser.y`](https://github.com/pingcap/tidb/blob/release-8.1/pkg/parser/parser.y) 规则。
+The following rules are the expression syntax, which is based on the [`parser.y`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/parser/parser.y) rules of TiDB parser.
 
 ```ebnf+diagram
 Expression ::=

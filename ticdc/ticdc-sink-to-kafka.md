@@ -73,7 +73,7 @@ The following are descriptions of sink URI parameters and values that can be con
 | `host`          | The IP address of the downstream Kafka services.                                 |
 | `port`               | The port for the downstream Kafka.                                          |
 | `topic-name` | Variable. The name of the Kafka topic. |
-| `protocol` | The protocol with which messages are output to Kafka. The value options are [`canal-json`](/ticdc/ticdc-canal-json.md)、[`open-protocol`](/ticdc/ticdc-open-protocol.md)、[`avro`](/ticdc/ticdc-avro-protocol.md)、[`debezium`](/ticdc/ticdc-debezium.md) and [`simple`](/ticdc/ticdc-simple-protocol.md).   |
+| `protocol` | The protocol with which messages are output to Kafka. The value options are [`canal-json`](/ticdc/ticdc-canal-json.md), [`open-protocol`](/ticdc/ticdc-open-protocol.md), [`avro`](/ticdc/ticdc-avro-protocol.md), [`debezium`](/ticdc/ticdc-debezium.md) and [`simple`](/ticdc/ticdc-simple-protocol.md). |
 | `kafka-version`      | The version of the downstream Kafka. This value needs to be consistent with the actual version of the downstream Kafka.                      |
 | `kafka-client-id`    | Specifies the Kafka client ID of the replication task (optional. `TiCDC_sarama_producer_replication ID` by default). |
 | `partition-num`      | The number of the downstream Kafka partitions (optional. The value must be **no greater than** the actual number of partitions; otherwise, the replication task cannot be created successfully. `3` by default). |
@@ -543,4 +543,25 @@ If the message contains the `claimCheckLocation` field, the Kafka consumer reads
 }
 ```
 
-The `key` and `value` fields contain the encoded large message, which should have been sent to the corresponding field in the Kafka message. Consumers can parse the data in these two parts to restore the content of the large message.
+The `key` and `value` fields correspond to the same-named fields in the Kafka message. Consumers can get the original large message by parsing the data in these two fields. Only Kafka messages encoded with the Open Protocol contain valid content in the `key` field. TiCDC encodes both `key` and `value` into a single JSON object to deliver the complete message at once. For other protocols, the `key` field is always empty.
+
+#### Send the `value` field to external storage only
+
+Starting from v8.4.0, TiCDC supports sending only the `value` field of Kafka messages to external storage. This feature is only applicable to non-Open Protocol scenarios. You can control this feature by setting the `claim-check-raw-value` parameter, which defaults to `false`.
+
+> **Note:**
+>
+> When using the Open Protocol, if you set `claim-check-raw-value` to `true`, an error will occur.
+
+When `claim-check-raw-value` is set to `true`, the changefeed sends the `value` field of Kafka messages directly to external storage without additional JSON serialization of `key` and `value`. This reduces CPU overhead. Additionally, consumers can read directly consumable data from external storage, reducing deserialization overhead.
+
+An example configuration is as follows:
+
+```toml
+protocol = "simple"
+
+[sink.kafka-config.large-message-handle]
+large-message-handle-option = "claim-check"
+claim-check-storage-uri = "s3://claim-check-bucket"
+claim-check-raw-value = true
+```

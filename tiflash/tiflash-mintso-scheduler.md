@@ -5,7 +5,7 @@ summary: Learn the implementation principles of the TiFlash MinTSO Scheduler.
 
 # TiFlash MinTSO Scheduler
 
-The TiFlash MinTSO scheduler is a distributed scheduler for [MPP](/glossary.md#mpp) tasks in TiFlash. This document describes the implementation principles of the TiFlash MinTSO scheduler.
+The TiFlash MinTSO scheduler is a distributed scheduler for [MPP](/glossary.md#massively-parallel-processing-mpp) tasks in TiFlash. This document describes the implementation principles of the TiFlash MinTSO scheduler.
 
 ## Background
 

@@ -1,29 +1,29 @@
 ---
-title: 开始多轮 Chat2Query 对话
-summary: 了解如何使用 Chat2Query 会话相关的 API 开始多轮对话。
+title: Start Multi-round Chat2Query
+summary: Learn how to start multi-round chat by using Chat2Query session-related APIs.
 ---
 
-# 开始多轮 Chat2Query 对话
+# Start Multi-round Chat2Query
 
-从 v3 版本开始，Chat2Query API 支持通过调用会话相关的端点来进行多轮对话。你可以使用 `/v3/chat2data` 端点返回的 `session_id` 在下一轮对话中继续会话。
+Starting from v3, the Chat2Query API enables you to start multi-round chats by calling session related endpoints. You can use the `session_id` returned by the `/v3/chat2data` endpoint to continue your conversation in the next round.
 
-## 开始之前
+## Before you begin
 
-在开始多轮 Chat2Query 对话之前，请确保你已经具备以下条件：
+Before starting multi-round Chat2Query, make sure that you have the following:
 
-- 一个 [Chat2Query Data App](/tidb-cloud/use-chat2query-api.md#create-a-chat2query-data-app)。
-- 一个 [Chat2Query Data App 的 API 密钥](/tidb-cloud/use-chat2query-api.md#create-an-api-key)。
-- 一个[目标数据库的数据摘要](/tidb-cloud/use-chat2query-api.md#1-generate-a-data-summary-by-calling-v3datasummaries)。
+- A [Chat2Query Data App](/tidb-cloud/use-chat2query-api.md#create-a-chat2query-data-app).
+- An [API key for the Chat2Query Data App](/tidb-cloud/use-chat2query-api.md#create-an-api-key).
+- A [data summary for your target database](/tidb-cloud/use-chat2query-api.md#1-generate-a-data-summary-by-calling-v3datasummaries).
 
-## 步骤 1. 开始会话
+## Step 1. Start a session
 
-要开始会话，你可以调用 Chat2Query Data App 的 `/v3/sessions` 端点。
+To start a session, you can call the `/v3/sessions` endpoint of your Chat2Query Data App.
 
-以下是调用此端点的通用代码示例。
+The following is a general code example for calling this endpoint.
 
-> **提示：**
+> **Tip:**
 >
-> 要获取特定端点的代码示例，请在 Data App 左侧窗格中点击端点名称，然后点击 **Show Code Example**。更多信息，请参见[获取端点的示例代码](/tidb-cloud/use-chat2query-api.md#get-the-code-example-of-an-endpoint)。
+> To get a specific code example for your endpoint, click the endpoint name in the left pane of your Data App, and then click **Show Code Example**. For more information, see [Get the example code of an endpoint](/tidb-cloud/use-chat2query-api.md#get-the-code-example-of-an-endpoint).
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/sessions'\
@@ -35,13 +35,13 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 }'
 ```
 
-在上述代码中，请求体是一个具有以下属性的 JSON 对象：
+In the preceding code, the request body is a JSON object with the following properties:
 
-- `cluster_id`：_string_。TiDB 集群的唯一标识符。
-- `database`：_string_。数据库名称。
-- `name`：_string_。会话名称。
+- `cluster_id`: _string_. A unique identifier of the TiDB cluster.
+- `database`: _string_. The name of the database.
+- `name`: _string_. The name of the session.
 
-以下是一个响应示例：
+An example response is as follows:
 
 ```json
 {
@@ -50,22 +50,22 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
     "result": {
     "messages": [],
     "meta": {
-        "created_at": 1718948875, // 表示会话创建时间的 UNIX 时间戳
-        "creator": "<Your email>", // 会话创建者
-        "name": "<Your session name>", // 会话名称
-        "org_id": "1", // 组织 ID
-        "updated_at": 1718948875 // 表示会话更新时间的 UNIX 时间戳
+        "created_at": 1718948875, // A UNIX timestamp indicating when the session is created
+        "creator": "<Your email>", // The creator of the session
+        "name": "<Your session name>", // The name of the session
+        "org_id": "1", // The organization ID
+        "updated_at": 1718948875 // A UNIX timestamp indicating when the session is updated
     },
-    "session_id": 305685 // 会话 ID
+    "session_id": 305685 // The session ID
     }
 }
 ```
 
-## 步骤 2. 使用会话调用 Chat2Data 端点
+## Step 2. Call Chat2Data endpoints with the session
 
-开始会话后，你可以调用 `/v3/sessions/{session_id}/chat2data` 在下一轮对话中继续会话。
+After starting a session, you can call `/v3/sessions/{session_id}/chat2data` to continue your conversation in the next round.
 
-以下是通用代码示例：
+The following is a general code example:
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://eu-central-1.data.tidbcloud.com/api/v1beta/app/chat2query-YqAvnlRj/endpoint/v3/sessions/{session_id}/chat2data'\
@@ -78,14 +78,14 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://eu-cen
 }'
 ```
 
-在上述代码中，请求体是一个具有以下属性的 JSON 对象：
+In the preceding code, the request body is a JSON object with the following properties:
 
-- `question`：_string_。用自然语言描述你想要的查询的问题。
-- `feedback_answer_id`：_string_。反馈答案 ID。此字段是可选的，仅用于反馈。
-- `feedback_task_id`：_string_。反馈任务 ID。此字段是可选的，仅用于反馈。
-- `sql_generate_mode`：_string_。生成 SQL 语句的模式。值可以是 `direct` 或 `auto_breakdown`。如果设置为 `direct`，API 将直接根据你提供的 `question` 生成 SQL 语句。如果设置为 `auto_breakdown`，API 将把 `question` 分解为多个任务，并为每个任务生成 SQL 语句。
+- `question`: _string_. A question in natural language describing the query you want.
+- `feedback_answer_id`: _string_. The feedback answer ID. This field is optional and is only used for feedback.
+- `feedback_task_id`: _string_. The feedback task ID. This field is optional and is only used for feedback.
+- `sql_generate_mode`: _string_. The mode to generate SQL statements. The value can be `direct` or `auto_breakdown`. If you set it to `direct`, the API will generate SQL statements directly based on the `question` you provided. If you set it to `auto_breakdown`, the API will break down the `question` into multiple tasks and generate SQL statements for each task.
 
-以下是一个响应示例：
+An example response is as follows:
 
 ```json
 {
@@ -98,4 +98,4 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://eu-cen
 }
 ```
 
-此响应与 `/v3/chat2data` 端点的响应类似。你可以通过调用 `/v2/jobs/{job_id}` 端点来检查作业状态。更多信息，请参见[通过调用 `/v2/jobs/{job_id}` 检查分析状态](/tidb-cloud/use-chat2query-api.md#2-check-the-analysis-status-by-calling-v2jobsjob_id)。
+The response is similar to the response of the `/v3/chat2data` endpoint. You can check the job status by calling the `/v2/jobs/{job_id}` endpoint. For more information, see [Check the analysis status by calling `/v2/jobs/{job_id}`](/tidb-cloud/use-chat2query-api.md#2-check-the-analysis-status-by-calling-v2jobsjob_id).

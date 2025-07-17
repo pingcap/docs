@@ -1,20 +1,20 @@
 ---
-title: SET [NAMES|CHARACTER SET] |  TiDB SQL 语句参考
-summary: TiDB 数据库中 SET [NAMES|CHARACTER SET] 的使用概览。
+title: SET [NAMES|CHARACTER SET] |  TiDB SQL Statement Reference
+summary: An overview of the usage of SET [NAMES|CHARACTER SET] for the TiDB database.
 ---
 
 # SET [NAMES|CHARACTER SET]
 
-`SET NAMES`、`SET CHARACTER SET` 和 `SET CHARSET` 语句修改当前连接的 `character_set_client`、`character_set_results` 和 `character_set_connection` 变量。
+The statements `SET NAMES`, `SET CHARACTER SET` and `SET CHARSET` modify the variables `character_set_client`, `character_set_results` and `character_set_connection` for the current connection.
 
-## 语法图
+## Synopsis
 
 ```ebnf+diagram
 SetNamesStmt ::=
     "SET" ("NAMES" ("DEFAULT" | CharsetName ("COLLATE" ("DEFAULT" | CollationName))?) | ("CHARSET" | ("CHAR" | "CHARACTER") "SET") ("DEFAULT" | CharsetName))
 ```
 
-## 示例
+## Examples
 
 ```sql
 mysql> SHOW VARIABLES LIKE 'character_set%';
@@ -69,12 +69,12 @@ mysql> SHOW VARIABLES LIKE 'character_set%';
 8 rows in set (0.00 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-TiDB 中的 `SET [NAMES|CHARACTER SET]` 语句与 MySQL 完全兼容。如果发现任何兼容性差异，请[报告问题](https://docs.pingcap.com/tidb/stable/support)。
+The `SET [NAMES|CHARACTER SET]` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
-## 另请参阅
+## See also
 
 * [SHOW \[GLOBAL|SESSION\] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 * [`SET <variable>`](/sql-statements/sql-statement-set-variable.md)
-* [字符集和排序规则支持](/character-set-and-collation.md)
+* [Character Set and Collation Support](/character-set-and-collation.md)

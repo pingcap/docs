@@ -1,13 +1,13 @@
 ---
-title: 分区裁剪
-summary: 了解 TiDB 分区裁剪的使用场景。
+title: Partition Pruning
+summary: Learn about the usage scenarios of TiDB partition pruning.
 ---
 
-# 分区裁剪
+# Partition Pruning
 
-分区裁剪是一种应用于分区表的性能优化。它分析查询语句中的过滤条件，并消除（_裁剪_）不包含任何所需数据的分区。通过消除不需要的分区，TiDB 能够减少需要访问的数据量，从而可能显著提高查询执行时间。
+Partition pruning is a performance optimization that applies to partitioned tables. It analyzes the filter conditions in query statements, and eliminates (_prunes_) partitions from consideration when they do not contain any data that will be required. By eliminating the non-required partitions, TiDB is able to reduce the amount of data that needs to be accessed and potentially significantly improving query execution times.
 
-以下是一个示例：
+The following is an example:
 
 {{< copyable "sql" >}}
 
@@ -39,17 +39,17 @@ EXPLAIN SELECT * FROM t1 WHERE id BETWEEN 80 AND 120;
 5 rows in set (0.00 sec)
 ```
 
-## 分区裁剪的使用场景
+## Usage scenarios of partition pruning
 
-分区裁剪的使用场景因分区表的类型不同而不同：范围分区表和哈希分区表。
+The usage scenarios of partition pruning are different for the two types of partitioned tables: Range partitioned tables and Hash partitioned tables.
 
-### 在哈希分区表中使用分区裁剪
+### Use partition pruning in Hash partitioned tables
 
-本节描述分区裁剪在哈希分区表中的适用和不适用场景。
+This section describes the applicable and inapplicable usage scenarios of partition pruning in Hash partitioned tables.
 
-#### 哈希分区表中的适用场景
+#### Applicable scenario in Hash partitioned tables
 
-分区裁剪仅适用于哈希分区表中的等值比较查询条件。
+Partition pruning applies only to the query condition of equality comparison in Hash partitioned tables.
 
 {{< copyable "sql" >}}
 
@@ -68,15 +68,15 @@ explain select * from t where x = 1;
 +-------------------------+----------+-----------+-----------------------+--------------------------------+
 ```
 
-在上面的 SQL 语句中，可以从条件 `x = 1` 知道所有结果都落在一个分区中。值 `1` 经过哈希分区后可以确定在 `p1` 分区中。因此，只需要扫描 `p1` 分区，不需要访问不会有匹配结果的 `p2`、`p3` 和 `p4` 分区。从执行计划中可以看到，只出现了一个 `TableFullScan` 算子，并且在 `access object` 中指定了 `p1` 分区，因此可以确认 `partition pruning` 生效。
+In the SQL statement above, it can be known from the condition `x = 1` that all results fall in one partition. The value `1` can be confirmed to be in the `p1` partition after passing through the Hash partition. Therefore, only the `p1` partition needs to be scanned, and there is no need to access the `p2`, `p3`, and `p4` partitions that will not have matching results. From the execution plan, only one `TableFullScan` operator appears and the `p1` partition is specified in `access object`, so it can be confirmed that `partition pruning` takes effect.
 
-#### 哈希分区表中的不适用场景
+#### Inapplicable scenarios in Hash partitioned tables
 
-本节描述分区裁剪在哈希分区表中的两个不适用场景。
+This section describes two inapplicable usage scenarios of partition pruning in Hash partitioned tables.
 
-##### 场景一
+##### Scenario one
 
-如果无法确定查询结果只落在一个分区中的条件（如 `in`、`between`、`>`、`<`、`>=`、`<=`），则无法使用分区裁剪优化。例如：
+If you cannot confirm the condition that the query result falls in only one partition (such as `in`, `between`, `>`, `<`, `>=`, `<=`), you cannot use the partition pruning optimization. For example:
 
 {{< copyable "sql" >}}
 
@@ -105,11 +105,11 @@ explain select * from t where x > 2;
 +------------------------------+----------+-----------+-----------------------+--------------------------------+
 ```
 
-在这种情况下，分区裁剪不适用，因为无法通过 `x > 2` 条件确定对应的哈希分区。
+In this case, partition pruning is inapplicable because the corresponding Hash partition cannot be confirmed by the `x > 2` condition.
 
-##### 场景二
+##### Scenario two
 
-因为分区裁剪的规则优化是在查询计划生成阶段进行的，所以分区裁剪不适用于只能在执行阶段获得过滤条件的场景。例如：
+Because the rule optimization of partition pruning is performed during the generation phase of the query plan, partition pruning is not suitable for scenarios where the filter conditions can be obtained only during the execution phase. For example:
 
 {{< copyable "sql" >}}
 
@@ -139,19 +139,19 @@ explain select * from t2 where x = (select * from t1 where t2.x = t1.x and t2.x 
 +--------------------------------------+----------+-----------+------------------------+----------------------------------------------+
 ```
 
-这个查询每次从 `t2` 读取一行时，都会在分区表 `t1` 上进行查询。理论上，此时满足 `t1.x = val` 的过滤条件，但实际上分区裁剪只在查询计划生成阶段生效，而不是在执行阶段。
+Each time this query reads a row from `t2`, it will query on the `t1` partitioned table. Theoretically, the filter condition of `t1.x = val` is met at this time, but in fact, partition pruning takes effect only in the generation phase of the query plan, not the execution phase.
 
-### 在范围分区表中使用分区裁剪
+### Use partition pruning in Range partitioned tables
 
-本节描述分区裁剪在范围分区表中的适用和不适用场景。
+This section describes the applicable and inapplicable usage scenarios of partition pruning in Range partitioned tables.
 
-#### 范围分区表中的适用场景
+#### Applicable scenarios in Range partitioned tables
 
-本节描述分区裁剪在范围分区表中的三个适用场景。
+This section describes three applicable usage scenarios of partition pruning in Range partitioned tables.
 
-##### 场景一
+##### Scenario one
 
-分区裁剪适用于范围分区表中的等值比较查询条件。例如：
+Partition pruning applies to the query condition of equality comparison in Range partitioned tables. For example:
 
 {{< copyable "sql" >}}
 
@@ -174,7 +174,7 @@ explain select * from t where x = 3;
 +-------------------------+----------+-----------+-----------------------+--------------------------------+
 ```
 
-分区裁剪也适用于使用 `in` 查询条件的等值比较。例如：
+Partition pruning also applies to the equality comparison that uses the `in` query condition. For example:
 
 {{< copyable "sql" >}}
 
@@ -201,11 +201,11 @@ explain select * from t where x in(1,13);
 +-----------------------------+----------+-----------+-----------------------+--------------------------------+
 ```
 
-在上面的 SQL 语句中，可以从 `x in(1,13)` 条件知道所有结果都落在几个分区中。经过分析，发现 `x = 1` 的所有记录都在 `p0` 分区中，`x = 13` 的所有记录都在 `p2` 分区中，所以只需要访问 `p0` 和 `p2` 分区。
+In the SQL statement above, it can be known from the `x in(1,13)` condition that all results fall in a few partitions. After analysis, it is found that all records of `x = 1` are in the `p0` partition, and all records of `x = 13` are in the `p2` partition, so only `p0` and `p2` partitions need to be accessed.
 
-##### 场景二
+##### Scenario two
 
-分区裁剪适用于区间比较的查询条件，如 `between`、`>`、`<`、`=`、`>=`、`<=`。例如：
+Partition pruning applies to the query condition of interval comparison, such as `between`, `>`, `<`, `=`, `>=`, `<=`. For example:
 
 {{< copyable "sql" >}}
 
@@ -232,16 +232,17 @@ explain select * from t where x between 7 and 14;
 +-----------------------------+----------+-----------+-----------------------+-----------------------------------+
 ```
 
-##### 场景三
+##### Scenario three
 
-分区裁剪适用于分区表达式为简单形式 `fn(col)` 的场景，其中查询条件是 `>`、`<`、`=`、`>=` 和 `<=` 之一，且 `fn` 函数是单调的。
+Partition pruning applies to the scenario where the partition expression is in the simple form of `fn(col)`, the query condition is one of `>`, `<`, `=`, `>=`, and `<=`, and the `fn` function is monotonous.
 
-如果 `fn` 函数是单调的，对于任何 `x` 和 `y`，如果 `x > y`，则 `fn(x) > fn(y)`。这种 `fn` 函数可以称为严格单调的。对于任何 `x` 和 `y`，如果 `x > y`，则 `fn(x) >= fn(y)`。在这种情况下，`fn` 也可以称为"单调的"。理论上，分区裁剪支持所有单调函数，无论是严格单调还是非严格单调。目前，TiDB 仅支持以下单调函数：
+If the `fn` function is monotonous, for any `x` and `y`, if `x > y`, then `fn(x) > fn(y)`. Then this `fn` function can be called strictly monotonous. For any `x` and `y`, if `x > y`, then `fn(x) >= fn(y)`. In this case, `fn` could also be called "monotonous". Theoretically, all monotonous functions, strictly or not, are supported by partition pruning. Currently, TiDB only supports the following monotonous functions:
 
 * [`UNIX_TIMESTAMP()`](/functions-and-operators/date-and-time-functions.md)
 * [`TO_DAYS()`](/functions-and-operators/date-and-time-functions.md)
+* [`EXTRACT(<time unit> FROM <DATETIME/DATE/TIME column>)`](/functions-and-operators/date-and-time-functions.md). For `DATE` and `DATETIME` columns, `YEAR` and `YEAR_MONTH` time units are considered monotonous functions. For the `TIME` column, `HOUR`, `HOUR_MINUTE`, `HOUR_SECOND` and `HOUR_MICROSECOND` are considered monotonous functions. Note that `WEEK` is not supported as time unit in `EXTRACT` for partition pruning.
 
-例如，当分区表达式为 `fn(col)` 形式，其中 `fn` 是单调函数 `to_days` 时，分区裁剪生效：
+For example, partition pruning takes effect when the partition expression is in the form of `fn(col)`, where the `fn` is monotonous function `to_days`:
 
 {{< copyable "sql" >}}
 
@@ -262,9 +263,9 @@ explain select * from t where id > '2020-04-18';
 +-------------------------+----------+-----------+-----------------------+-------------------------------------------+
 ```
 
-#### 范围分区表中的不适用场景
+#### Inapplicable scenario in Range partitioned tables
 
-因为分区裁剪的规则优化是在查询计划生成阶段进行的，所以分区裁剪不适用于只能在执行阶段获得过滤条件的场景。例如：
+Because the rule optimization of partition pruning is performed during the generation phase of the query plan, partition pruning is not suitable for scenarios where the filter conditions can be obtained only during the execution phase. For example:
 
 {{< copyable "sql" >}}
 
@@ -298,4 +299,4 @@ explain select * from t2 where x < (select * from t1 where t2.x < t1.x and t2.x 
 14 rows in set (0.00 sec)
 ```
 
-这个查询每次从 `t2` 读取一行时，都会在分区表 `t1` 上进行查询。理论上，此时满足 `t1.x > val` 的过滤条件，但实际上分区裁剪只在查询计划生成阶段生效，而不是在执行阶段。
+Each time this query reads a row from `t2`, it will query on the `t1` partitioned table. Theoretically, the `t1.x> val` filter condition is met at this time, but in fact, partition pruning takes effect only in the generation phase of the query plan, not the execution phase.

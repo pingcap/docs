@@ -1,353 +1,395 @@
 ---
-title: 管理端点
-summary: 了解如何在 TiDB Cloud 控制台中创建、开发、测试、部署和删除 Data App 中的端点。
+title: Manage an Endpoint
+summary: Learn how to create, develop, test, deploy, and delete an endpoint in a Data App in the TiDB Cloud console.
 ---
 
-# 管理端点
+# Manage an Endpoint
 
-Data Service（测试版）中的端点是一个可以自定义执行 SQL 语句的 Web API。你可以为 SQL 语句指定参数，例如在 `WHERE` 子句中使用的值。当客户端调用端点并在请求 URL 中提供参数值时，端点会使用提供的参数执行 SQL 语句，并将结果作为 HTTP 响应的一部分返回。
+An endpoint in Data Service (beta) is a web API that you can customize to execute SQL statements. You can specify parameters for the SQL statements, such as the value used in the `WHERE` clause. When a client calls an endpoint and provides values for the parameters in a request URL, the endpoint executes the SQL statement with the provided parameters and returns the results as part of the HTTP response.
 
-本文介绍如何在 TiDB Cloud 控制台中管理 Data App 中的端点。
+This document describes how to manage your endpoints in a Data App in the TiDB Cloud console.
 
-## 开始之前
+## Before you begin
 
-- 在创建端点之前，请确保以下内容：
+- Before you create an endpoint, make sure the following:
 
-    - 你已创建集群和 Data App。更多信息，请参见[创建 Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app)。
-    - 端点将要操作的数据库、表和列已经存在于目标集群中。
+    - You have created a cluster and a Data App. For more information, see [Create a Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app).
+    - The databases, tables, and columns that the endpoint will operate on already exist in the target cluster.
 
-- 在调用端点之前，请确保你已在 Data App 中创建了 API 密钥。更多信息，请参见[创建 API 密钥](/tidb-cloud/data-service-api-key.md#create-an-api-key)。
+- Before you call an endpoint, make sure that you have created an API key in the Data App. For more information, see [Create an API key](/tidb-cloud/data-service-api-key.md#create-an-api-key).
 
-## 创建端点
+## Create an endpoint
 
-在 Data Service 中，你可以自动生成端点、手动创建端点或添加预定义的系统端点。
+In Data Service, you can automatically generate endpoints, manually create endpoints, or add predefined system endpoints.
 
-> **提示：**
+> **Tip:**
 >
-> 你也可以从 SQL Editor 中的 SQL 文件创建端点。更多信息，请参见[从 SQL 文件生成端点](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file)。
+> You can also create an endpoint from a SQL file in SQL Editor. For more information, see [Generate an endpoint from a SQL file](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file).
 
-### 自动生成端点
+### Generate an endpoint automatically
 
-在 TiDB Cloud Data Service 中，你可以按以下方式一次性自动生成一个或多个端点：
+In TiDB Cloud Data Service, you can generate one or multiple endpoints automatically in one go as follows:
 
-1. 导航到项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。
-2. 在左侧窗格中，找到目标 Data App，点击 App 名称右侧的 **+**，然后点击**自动生成端点**。此时会显示端点生成对话框。
-3. 在对话框中，执行以下操作：
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
+2. In the left pane, locate your target Data App, click **+** to the right of the App name, and then click **Autogenerate Endpoint**. The dialog for endpoint generation is displayed.
+3. In the dialog, do the following:
 
-    1. 为要生成的端点选择目标集群、数据库和表。
+    1. Select the target cluster, database, and table for the endpoint to be generated.
 
-        > **注意：**
+        > **Note:**
         >
-        > **表**下拉列表仅包含至少有一列的用户定义表，不包括系统表和没有列定义的表。
+        > The **Table** drop-down list includes only user-defined tables with at least one column, excluding system tables and any tables without a column definition.
 
-    2. 为要生成的端点选择至少一个 HTTP 操作（如 `GET（检索）`、`POST（创建）`和 `PUT（更新）`）。
+    2. Select at least one HTTP operation (such as `GET (Retrieve)`, `POST (Create)`, and `PUT (Update)`) for the endpoint to be generated.
 
-        对于你选择的每个操作，TiDB Cloud Data Service 将生成一个相应的端点。如果你选择批量操作（如 `POST（批量创建）`），生成的端点允许你在单个请求中操作多行数据。
+        For each operation you select, TiDB Cloud Data Service will generate a corresponding endpoint. If you select a batch operation (such as `POST (Batch Create)`), the generated endpoint lets you operate on multiple rows in a single request.
 
-        如果你选择的表包含[向量数据类型](/tidb-cloud/vector-search-data-types.md)，你可以启用**向量搜索操作**选项并选择向量距离函数，以生成一个向量搜索端点，该端点会根据你选择的距离函数自动计算向量距离。支持的[向量距离函数](/tidb-cloud/vector-search-functions-and-operators.md)包括：
+        If the table you selected contains [vector data types](/vector-search/vector-search-data-types.md), you can enable the **Vector Search Operations** option and select a vector distance function to generate a vector search endpoint that automatically calculates vector distances based on your selected distance function. The supported [vector distance functions](/vector-search/vector-search-functions-and-operators.md) include the following:
 
-        - `VEC_L2_DISTANCE`（默认）：计算两个向量之间的 L2 距离（欧几里得距离）。
-        - `VEC_COSINE_DISTANCE`：计算两个向量之间的余弦距离。
-        - `VEC_NEGATIVE_INNER_PRODUCT`：使用两个向量之间内积的负值计算距离。
-        - `VEC_L1_DISTANCE`：计算两个向量之间的 L1 距离（曼哈顿距离）。
+        - `VEC_L2_DISTANCE` (default): calculates the L2 distance (Euclidean distance) between two vectors.
+        - `VEC_COSINE_DISTANCE`: calculates the cosine distance between two vectors.
+        - `VEC_NEGATIVE_INNER_PRODUCT`: calculates the distance by using the negative of the inner product between two vectors.
+        - `VEC_L1_DISTANCE`: calculates the L1 distance (Manhattan distance) between two vectors.
        
-    3. （可选）为操作配置超时时间和标签。所有生成的端点将自动继承配置的属性，可以根据需要稍后修改。
-    4. （可选）**自动部署端点**选项（默认禁用）控制是否启用生成端点的直接部署。启用时，将跳过草稿审查过程，生成的端点将立即部署，无需进一步手动审查或批准。
+    3. (Optional) Configure a timeout and tag for the operations. All the generated endpoints will automatically inherit the configured properties, which can be modified later as needed.
+    4. (Optional) The **Auto-Deploy Endpoint** option (disabled by default) controls whether to enable the direct deployment of the generated endpoints. When it is enabled, the draft review process is skipped, and the generated endpoints are deployed immediately without further manual review or approval.
 
-4. 点击**生成**。
+4. Click **Generate**.
 
-    生成的端点显示在端点列表的顶部。
+    The generated endpoint is displayed at the top of the endpoint list.
 
-5. 检查新端点的生成端点名称、SQL 语句、属性和参数。
+5. Check the generated endpoint name, SQL statements, properties, and parameters of the new endpoint.
 
-    - 端点名称：生成的端点名称采用 `/<选择的表名>` 格式，请求方法（如 `GET`、`POST` 和 `PUT`）显示在端点名称之前。例如，如果选择的表名是 `sample_table` 且选择的操作是 `POST（创建）`，生成的端点显示为 `POST /sample_table`。
+    - Endpoint name: the generated endpoint name is in the `/<name of the selected table>` format, and the request method (such as `GET`, `POST`, and `PUT`) is displayed before the endpoint name. For example, if the selected table name is `sample_table` and the selected operation is `POST (Create)`, the generated endpoint is displayed as `POST /sample_table`.
 
-        - 如果选择了批量操作，TiDB Cloud Data Service 会在生成的端点名称后附加 `/bulk`。例如，如果选择的表名是 `/sample_table` 且选择的操作是 `POST（批量创建）`，生成的端点显示为 `POST /sample_table/bulk`。
-        - 如果选择了 `POST（向量相似度搜索）`，TiDB Cloud Data Service 会在生成的端点名称后附加 `/vector_search`。例如，如果选择的表名是 `/sample_table` 且选择的操作是 `POST（向量相似度搜索）`，生成的端点显示为 `POST /sample_table/vector_search`。
-        - 如果已经存在具有相同请求方法和端点名称的端点，TiDB Cloud Data Service 会在生成的端点名称后附加 `_dump_<随机字母>`。例如，`/sample_table_dump_EUKRfl`。
+        - If a batch operation is selected, TiDB Cloud Data Service appends `/bulk` to the name of the generated endpoint. For example, if the selected table name is `/sample_table` and the selected operation is `POST (Batch Create)`, the generated endpoint is displayed as `POST /sample_table/bulk`.
+        - If `POST (Vector Similarity Search)` is selected, TiDB Cloud Data Service appends `/vector_search` to the name of the generated endpoint. For example, if the selected table name is `/sample_table` and the selected operation is `POST (Vector Similarity Search)`, the generated endpoint is displayed as `POST /sample_table/vector_search`.
+        - If there has been already an endpoint with the same request method and endpoint name, TiDB Cloud Data Service appends `_dump_<random letters>` to the name of the generated endpoint. For example, `/sample_table_dump_EUKRfl`.
 
-    - SQL 语句：TiDB Cloud Data Service 根据表列规范和选择的端点操作自动编写生成端点的 SQL 语句。你可以点击端点名称在页面中间部分查看其 SQL 语句。
-    - 端点属性：TiDB Cloud Data Service 根据你的选择自动配置端点路径、请求方法、超时时间和标签。你可以在页面右侧窗格中找到这些属性。
-    - 端点参数：TiDB Cloud Data Service 自动为生成的端点配置参数。你可以在页面右侧窗格中找到这些参数。
+    - SQL statements: TiDB Cloud Data Service automatically writes SQL statements for the generated endpoints according to the table column specifications and the selected endpoint operations. You can click the endpoint name to view its SQL statements in the middle section of the page.
+    - Endpoint properties: TiDB Cloud Data Service automatically configures the endpoint path, request method, timeout, and tag according to your selection. You can find the properties in the right pane of the page.
+    - Endpoint parameters: TiDB Cloud Data Service automatically configures parameters for the generated endpoints. You can find the parameters in the right pane of the page.
 
-6. 如果你想修改生成端点的详细信息，如名称、SQL 语句、属性或参数，请参考[开发端点](#开发端点)中提供的说明。
+6. If you want to modify the details of the generated endpoint, such as its name, SQL statements, properties, or parameters, refer to the instructions provided in [Develop an endpoint](#deploy-an-endpoint).
 
-### 手动创建端点
+### Create an endpoint manually
 
-要手动创建端点，请执行以下步骤：
+To create an endpoint manually, perform the following steps:
 
-1. 导航到项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。
-2. 在左侧窗格中，找到目标 Data App，点击 App 名称右侧的 **+**，然后点击**创建端点**。
-3. 如有必要，更新默认名称。新创建的端点将添加到端点列表的顶部。
-4. 根据[开发端点](#开发端点)中的说明配置新端点。
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
+2. In the left pane, locate your target Data App, click **+** to the right of the App name, and then click **Create Endpoint**.
+3. Update the default name if necessary. The newly created endpoint is added to the top of the endpoint list.
+4. Configure the new endpoint according to the instructions in [Develop an endpoint](#develop-an-endpoint).
 
-### 添加预定义系统端点
+### Add a predefined system endpoint
 
-Data Service 提供了一个包含预定义系统端点的端点库，你可以直接将这些端点添加到你的 Data App 中，从而减少端点开发的工作量。目前，该库仅包含 `/system/query` 端点，该端点允许你通过简单地在预定义的 `sql` 参数中传递语句来执行任何 SQL 语句。
+Data Service provides an endpoint library with predefined system endpoints that you can directly add to your Data App, reducing the effort in your endpoint development. Currently, the library only includes the `/system/query` endpoint, which enables you to execute any SQL statement by simply passing the statement in the predefined `sql` parameter.
 
-要将预定义系统端点添加到你的 Data App 中，请执行以下步骤：
+To add a predefined system endpoint to your Data App, perform the following steps:
 
-1. 导航到项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
 
-2. 在左侧窗格中，找到目标 Data App，点击 App 名称右侧的 **+**，然后点击**管理端点库**。
+2. In the left pane, locate your target Data App, click **+** to the right of the App name, and then click **Manage Endpoint Library**.
 
-    此时会显示端点库管理对话框。目前，对话框中仅提供**执行查询**（即 `/system/query` 端点）。
+    A dialog for endpoint library management is displayed. Currently, only **Execute Query** (that is, the `/system/query` endpoint) is provided in the dialog.
 
-3. 要将 `/system/query` 端点添加到你的 Data App 中，将**执行查询**开关切换到**已添加**。
+3. To add the `/system/query` endpoint to your Data App, toggle the **Execute Query** switch to **Added**.
 
-    > **提示：**
+    > **Tip:**
     >
-    > 要从你的 Data App 中删除已添加的预定义端点，将**执行查询**开关切换到**已删除**。
+    > To remove an added predefined endpoint from your Data App, toggle the **Execute Query** switch to **Removed**.
 
-4. 点击**保存**。
+4. Click **Save**.
 
-    > **注意：**
+    > **Note:**
     >
-    > - 点击**保存**后，添加或删除的端点会立即部署到生产环境，这使得添加的端点立即可访问，删除的端点立即不可访问。
-    > - 如果当前 App 中已存在具有相同路径和方法的非预定义端点，系统端点的创建将失败。
+    > - After you click **Save**, the added or removed endpoint is deployed to production immediately, which makes the added endpoint accessible and the removed endpoint inaccessible immediately.
+    > - If a non-predefined endpoint with the same path and method already exists in the current App, the creation of the system endpoint will fail.
 
-    添加的系统提供的端点将显示在端点列表的顶部。
+    The added system-provided endpoint is displayed at the top of the endpoint list.
 
-5. 检查新端点的端点名称、SQL 语句、属性和参数。
+5. Check the endpoint name, SQL statements, properties, and parameters of the new endpoint.
 
-    > **注意：**
+    > **Note:**
     >
-    > `/system/query` 端点功能强大且通用，但可能具有破坏性。请谨慎使用，并确保查询是安全的且经过充分考虑，以防止意外后果。
+    > The `/system/query` endpoint is powerful and versatile but can be potentially destructive. Use it with discretion and ensure the queries are secure and well-considered to prevent unintended consequences.
 
-    - 端点名称：端点名称和路径为 `/system/query`，请求方法为 `POST`。
-    - SQL 语句：`/system/query` 端点不附带任何 SQL 语句。你可以在页面中间部分找到 SQL 编辑器，并在其中编写所需的 SQL 语句。请注意，为 `/system/query` 端点编写的 SQL 语句将保存在 SQL 编辑器中，以便你下次可以进一步开发和测试，但不会保存在端点配置中。
-    - 端点属性：在页面右侧窗格的**属性**标签页中，你可以找到端点属性。与其他自定义端点不同，系统端点只能自定义 `timeout` 和 `max rows` 属性。
-    - 端点参数：在页面右侧窗格的**参数**标签页中，你可以找到端点参数。`/system/query` 端点的参数是自动配置的，不能修改。
+    - Endpoint name: the endpoint name and path is `/system/query`, and the request method `POST`.
+    - SQL statements: the `/system/query` endpoint does not come with any SQL statement. You can find the SQL editor in the middle section of the page and write your desired SQL statements in the SQL editor. Note that the SQL statements written in the SQL editor for the `/system/query` endpoint will be saved in the SQL editor so you can further develop and test them next time but they will not be saved in the endpoint configuration.
+    - Endpoint properties: in the right pane of the page, you can find the endpoint properties on the **Properties** tab. Unlike other custom endpoints, only the `timeout` and `max rows` properties can be customized for system endpoints.
+    - Endpoint parameters: in the right pane of the page, you can find the endpoint parameters on the **Params** tab. The parameters of the `/system/query` endpoint are configured automatically and cannot be modified.
 
-## 开发端点
+## Develop an endpoint
 
-对于每个端点，你可以编写要在 TiDB 集群上执行的 SQL 语句，为 SQL 语句定义参数，或管理名称和版本。
+For each endpoint, you can write SQL statements to execute on a TiDB cluster, define parameters for the SQL statements, or manage the name and version.
 
-> **注意：**
+> **Note:**
 >
-> 如果你已将 Data App 连接到 GitHub 并启用了**自动同步和部署**，你也可以使用 GitHub 更新端点配置。你在 GitHub 中所做的任何更改都将自动部署在 TiDB Cloud Data Service 中。更多信息，请参见[使用 GitHub 自动部署](/tidb-cloud/data-service-manage-github-connection.md)。
+> If you have connected your Data App to GitHub with **Auto Sync & Deployment** enabled, you can also update the endpoint configurations using GitHub. Any changes you made in GitHub will be deployed in TiDB Cloud Data Service automatically. For more information, see [Deploy automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
 
-### 配置属性
+### Configure properties
 
-在端点详情页面的右侧窗格中，你可以点击**属性**标签页来查看和配置端点的属性。
+On the right pane of the endpoint details page, you can click the **Properties** tab to view and configure properties of the endpoint.
 
-#### 基本属性
+#### Basic properties
 
-- **路径**：用户用来访问端点的路径。
+- **Path**: the path that users use to access the endpoint.
 
-#### 高级属性
+    - The length of the path must be less than 64 characters.
+    - The combination of the request method and the path must be unique within a Data App.
+    - Only letters, numbers, underscores (`_`), slashes (`/`), and parameters enclosed in curly braces (such as `{var}`) are allowed in a path. Each path must start with a slash (`/`) and end with a letter, number, or underscore (`_`). For example, `/my_endpoint/get_id`.
+    - For parameters enclosed in `{ }`, only letters, numbers, and underscores (`_`) are allowed. Each parameter enclosed in `{ }` must start with a letter or underscore (`_`).
 
-- **超时时间（毫秒）**：端点的超时时间，以毫秒为单位。
-- **最大行数**：端点可以操作或返回的最大行数。
-- **标签**：用于标识一组端点的标签。
-- **分页**：此属性仅在请求方法为 `GET` 且端点的最后一个 SQL 语句是 `SELECT` 操作时可用。当启用**分页**时，你可以在调用端点时通过指定 `page` 和 `page_size` 作为查询参数来对结果进行分页，例如 `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id?page=<页码>&page_size=<每页大小>`。更多信息，请参见[调用端点](#调用端点)。
-
-    > **注意：**
+    > **Note:**
     >
-    > - 如果你在请求中不包含 `page` 和 `page_size` 参数，默认行为是在单个页面上返回**最大行数**属性中指定的最大行数。
-    > - `page_size` 必须小于或等于**最大行数**属性。否则，将返回错误。
-
-- **缓存响应**：此属性仅在请求方法为 `GET` 时可用。当启用**缓存响应**时，TiDB Cloud Data Service 可以在指定的生存时间（TTL）期间内缓存你的 `GET` 请求返回的响应。
-- **生存时间（秒）**：此属性仅在启用**缓存响应**时可用。你可以使用它来指定缓存响应的生存时间（TTL）期间，以秒为单位。在 TTL 期间内，如果你再次发出相同的 `GET` 请求，Data Service 会直接返回缓存的响应，而不是再次从目标数据库获取数据，这提高了你的查询性能。
-- **批量操作**：此属性仅在请求方法为 `POST` 或 `PUT` 时可见。当启用**批量操作**时，你可以在单个请求中操作多行数据。例如，在[调用端点](#调用端点)时，你可以通过在 curl 命令的 `--data-raw` 选项中将数据对象数组放入对象的 `items` 字段来在单个 `POST` 请求中插入多行数据。
-
-    > **注意：**
+    > - In a path, each parameter must be at a separate level and does not support prefixes or suffixes.
     >
-    > 启用**批量操作**的端点支持请求体的数组和对象格式：`[{dataObject1}, {dataObject2}]` 和 `{items: [{dataObject1}, {dataObject2}]}`。为了更好地与其他系统兼容，建议使用对象格式 `{items: [{dataObject1}, {dataObject2}]}`。
-
-### 编写 SQL 语句
-
-在端点详情页面的 SQL 编辑器中，你可以编写和运行端点的 SQL 语句。你也可以简单地输入 `--` 后跟你的指令，让 AI 自动生成 SQL 语句。
-
-1. 选择集群。
-
-    > **注意：**
+    >    Valid path: ```/var/{var}``` and  ```/{var}```
     >
-    > 下拉列表中只显示链接到 Data App 的集群。要管理链接的集群，请参见[管理链接的数据源](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)。
-
-    在 SQL 编辑器的上部，从下拉列表中选择你想要执行 SQL 语句的集群。然后，你可以在右侧窗格的**架构**标签页中查看此集群的所有数据库。
-
-2. 根据你的端点类型，执行以下操作之一来选择数据库：
-
-    - 预定义系统端点：在 SQL 编辑器的上部，从下拉列表中选择目标数据库。
-    - 其他端点：在 SQL 编辑器中编写 SQL 语句来指定目标数据库。例如，`USE database_name;`。
-
-3. 编写 SQL 语句。
-
-    在 SQL 编辑器中，你可以编写诸如表连接查询、复杂查询和聚合函数等语句。你也可以简单地输入 `--` 后跟你的指令，让 AI 自动生成 SQL 语句。
-
-    要定义参数，你可以在 SQL 语句中将其作为变量占位符插入，如 `${ID}`。例如，`SELECT * FROM table_name WHERE id = ${ID}`。然后，你可以点击右侧窗格的**参数**标签页来更改参数定义和测试值。更多信息，请参见[参数](#配置参数)。
-
-    在定义数组参数时，参数会自动转换为 SQL 语句中的多个逗号分隔值。为确保 SQL 语句有效，你需要在某些 SQL 语句（如 `IN`）中在参数周围添加括号（`()`）。例如，如果你定义一个测试值为 `1,2,3` 的数组参数 `ID`，使用 `SELECT * FROM table_name WHERE id IN (${ID})` 来查询数据。
-
-    > **注意：**
+    >    Invalid path: ```/var{var}``` and ```/{var}var```
     >
-    > - 参数名称区分大小写。
-    > - 参数不能用作表名或列名。
+    > - Paths with the same method and prefix might conflict, as in the following example:
+    >
+    >    ```GET /var/{var1}```
+    >
+    >    ```GET /var/{var2}```
+    >
+    >   These two paths will conflict with each other because `GET /var/123` matches both.
+    >
+    > - Paths with parameters have lower priority than paths without parameters. For example:
+    >
+    >    ```GET /var/{var1}```
+    >
+    >    ```GET /var/123```
+    >
+    >   These two paths will not conflict because `GET /var/123` takes precedence.
+    >
+    > - Path parameters can be used directly in SQL. For more information, see [Configure parameters](#configure-parameters).
 
-4. 运行 SQL 语句。
+- **Endpoint URL**: (read-only) the default URL is automatically generated based on the region where the corresponding cluster is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`. To configure a custom domain for the Data App, see [Custom Domain in Data Service](/tidb-cloud/data-service-custom-domain.md).
 
-    如果你在 SQL 语句中插入了参数，请确保你已在右侧窗格的**参数**标签页中为参数设置了测试值或默认值。否则，将返回错误。
+- **Request Method**: the HTTP method of the endpoint. The following methods are supported:
+
+    - `GET`: use this method to query or retrieve data, such as a `SELECT` statement.
+    - `POST`: use this method to insert or create data, such as an `INSERT` statement.
+    - `PUT`: use this method to update or modify data, such as an `UPDATE` statement.
+    - `DELETE`: use this method to delete data, such as a `DELETE` statement.
+
+- **Description** (Optional): the description of the endpoint.
+
+#### Advanced properties
+
+- **Timeout(ms)**: the timeout for the endpoint, in milliseconds.
+- **Max Rows**: the maximum number of rows that the endpoint can operate or return.
+- **Tag**: the tag used for identifying a group of endpoints.
+- **Pagination**: this property is available only when the request method is `GET` and the last SQL statement of the endpoint is a `SELECT` operation. When **Pagination** is enabled, you can paginate the results by specifying `page` and `page_size` as query parameters when calling the endpoint, such as `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id?page=<Page Number>&page_size=<Page Size>`. For more information, see [Call an endpoint](#call-an-endpoint).
+
+    > **Note:**
+    >
+    > - If you do not include the `page` and `page_size` parameters in the request, the default behavior is to return the maximum number of rows specified in the **Max Rows** property on a single page.
+    > - The `page_size` must be less than or equal to the **Max Rows** property. Otherwise, an error is returned.
+
+- **Cache Response**: this property is available only when the request method is `GET`. When **Cache Response** is enabled, TiDB Cloud Data Service can cache the response returned by your `GET` requests within a specified time-to-live (TTL) period.
+- **Time-to-live(s)**: this property is available only when **Cache Response** is enabled. You can use it to specify the time-to-live (TTL) period in seconds for cached response. During the TTL period, if you make the same `GET` requests again, Data Service returns the cached response directly instead of fetching data from the target database again, which improves your query performance.
+- **Batch Operation**: this property is visible only when the request method is `POST` or `PUT`. When **Batch Operation** is enabled, you can operate on multiple rows in a single request. For example, you can insert multiple rows of data in a single `POST` request by putting an array of data objects to the `items` field of an object in the `--data-raw` option of your curl command when [calling the endpoint](#call-an-endpoint).
+
+    > **Note:**
+    >
+    > The endpoint with **Batch Operation** enabled supports both array and object formats for the request body: `[{dataObject1}, {dataObject2}]` and `{items: [{dataObject1}, {dataObject2}]}`. For better compatibility with other systems, it is recommended that you use the object format `{items: [{dataObject1}, {dataObject2}]}`.
+
+### Write SQL statements
+
+On the SQL editor of the endpoint details page, you can write and run the SQL statements for an endpoint. You can also simply type `--` followed by your instructions to let AI generate SQL statements automatically.
+
+1. Select a cluster.
+
+    > **Note:**
+    >
+    > Only clusters that are linked to the Data App are displayed in the drop-down list. To manage the linked clusters, see [Manage linked clusters](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources).
+
+    On the upper part of the SQL editor, select a cluster on which you want to execute SQL statements from the drop-down list. Then, you can view all databases of this cluster in the **Schema** tab on the right pane.
+
+2. Depending on your endpoint type, do one of the following to select a database:
+
+    - Predefined system endpoints: on the upper part of the SQL editor, select the target database from the drop-down list.
+    - Other endpoints: write a SQL statement to specify the target database in the SQL editor. For example, `USE database_name;`.
+
+3. Write SQL statements.
+
+    In the SQL editor, you can write statements such as table join queries, complex queries, and aggregate functions. You can also simply type `--` followed by your instructions to let AI generate SQL statements automatically.
+
+    To define a parameter, you can insert it as a variable placeholder like `${ID}` in the SQL statement. For example, `SELECT * FROM table_name WHERE id = ${ID}`. Then, you can click the **Params** tab on the right pane to change the parameter definition and test values. For more information, see [Parameters](#configure-parameters).
+
+    When defining an array parameter, the parameter is automatically converted to multiple comma-separated values in the SQL statement. To make sure that the SQL statement is valid, you need to add parentheses (`()`) around the parameter in some SQL statements (such as `IN`). For example, if you define an array parameter `ID` with test value `1,2,3`, use `SELECT * FROM table_name WHERE id IN (${ID})` to query the data.
+
+    > **Note:**
+    >
+    > - The parameter name is case-sensitive.
+    > - The parameter cannot be used as a table name or column name.
+
+4. Run SQL statements.
+
+    If you have inserted parameters in the SQL statements, make sure that you have set test values or default values for the parameters in the **Params** tab on the right pane. Otherwise, an error is returned.
 
     <SimpleTab>
     <div label="macOS">
 
-    对于 macOS：
+    For macOS:
 
-    - 如果编辑器中只有一个语句，要运行它，请按 **⌘ + Enter** 或点击 <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**运行**。
+    - If you have only one statement in the editor, to run it, press **⌘ + Enter** or click <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**Run**.
 
-    - 如果编辑器中有多个语句，要按顺序运行其中一个或多个语句，请将光标放在目标语句上或用光标选择目标语句的行，然后按 **⌘ + Enter** 或点击**运行**。
+    - If you have multiple statements in the editor, to run one or several of them sequentially, place your cursor on your target statement or select the lines of the target statements with your cursor, and then press **⌘ + Enter** or click **Run**.
 
-    - 要按顺序运行编辑器中的所有语句，请按 **⇧ + ⌘ + Enter**，或用光标选择所有语句的行并点击**运行**。
+    - To run all statements in the editor sequentially, press **⇧ + ⌘ + Enter**, or select the lines of all statements with your cursor and click **Run**.
 
     </div>
 
     <div label="Windows/Linux">
 
-    对于 Windows 或 Linux：
+    For Windows or Linux:
 
-    - 如果编辑器中只有一个语句，要运行它，请按 **Ctrl + Enter** 或点击 <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**运行**。
+    - If you have only one statement in the editor, to run it, press **Ctrl + Enter** or click <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**Run**.
 
-    - 如果编辑器中有多个语句，要按顺序运行其中一个或多个语句，请将光标放在目标语句上或用光标选择目标语句的行，然后按 **Ctrl + Enter** 或点击**运行**。
+    - If you have multiple statements in the editor, to run one or several of them sequentially, place your cursor on your target statement or select the lines of the target statements with your cursor, and then press **Ctrl + Enter** or click **Run**.
 
-    - 要按顺序运行编辑器中的所有语句，请按 **Shift + Ctrl + Enter**，或用光标选择所有语句的行并点击**运行**。
+    - To run all statements in the editor sequentially, press **Shift + Ctrl + Enter**, or select the lines of all statements with your cursor and click **Run**.
 
     </div>
     </SimpleTab>
 
-    运行语句后，你可以在页面底部的**结果**标签页中立即看到查询结果。
+    After running the statements, you can see the query results immediately in the **Result** tab at the bottom of the page.
 
-    > **注意：**
+    > **Note:**
     >
-    > 返回的结果大小限制为 8 MiB。
+    > The returned result has a size limit of 8 MiB.
 
-### 配置参数
+### Configure parameters
 
-在端点详情页面的右侧窗格中，你可以点击**参数**标签页来查看和管理端点中使用的参数。
+On the right pane of the endpoint details page, you can click the **Params** tab to view and manage the parameters used in the endpoint.
 
-在**定义**部分，你可以查看和管理参数的以下属性：
+In the **Definition** section, you can view and manage the following properties for a parameter:
 
-- 参数名称：名称只能包含字母、数字和下划线（`_`），并且必须以字母或下划线（`_`）开头。**不要**使用 `page` 和 `page_size` 作为参数名称，这些是为请求结果分页保留的。
-- **必需**：指定参数在请求中是否是必需的。对于路径参数，配置是必需的且不能修改。对于其他参数，默认配置是不必需的。
-- **类型**：指定参数的数据类型。对于路径参数，只支持 `STRING` 和 `INTEGER`。对于其他参数，支持 `STRING`、`NUMBER`、`INTEGER`、`BOOLEAN` 和 `ARRAY`。
+- The parameter name: the name can only include letters, digits, and underscores (`_`) and must start with a letter or an underscore (`_`). **DO NOT** use `page` and `page_size` as parameter names, which are reserved for pagination of request results.
+- **Required**: specifies whether the parameter is required in the request. For path parameters, the configuration is required and cannot be modified. For other parameters, the default configuration is not required.
+- **Type**: specifies the data type of the parameter. For path parameters, only `STRING` and `INTEGER` are supported. For other parameters, `STRING`, `NUMBER`, `INTEGER`, `BOOLEAN`, and `ARRAY` are supported.
 
-    使用 `STRING` 类型参数时，不需要添加引号（`'` 或 `"`）。例如，`foo` 对于 `STRING` 类型是有效的，并被处理为 `"foo"`，而 `"foo"` 被处理为 `"\"foo\""`。
+    When using a `STRING` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `STRING` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.
 
-- **枚举值**：（可选）指定参数的有效值，仅在参数类型为 `STRING`、`INTEGER` 或 `NUMBER` 时可用。
+- **Enum Value**: (optional) specifies the valid values for the parameter and is available only when the parameter type is `STRING`, `INTEGER`, or `NUMBER`.
 
-    - 如果将此字段留空，参数可以是指定类型的任何值。
-    - 要指定多个有效值，可以用逗号（`,`）分隔它们。例如，如果你将参数类型设置为 `STRING` 并将此字段指定为 `foo, bar`，则参数值只能是 `foo` 或 `bar`。
+    - If you leave this field empty, the parameter can be any value of the specified type.
+    - To specify multiple valid values, you can separate them with a comma (`,`). For example, if you set the parameter type to `STRING` and specify this field as `foo, bar`, the parameter value can only be `foo` or `bar`.
 
-- **项目类型**：指定 `ARRAY` 类型参数的项目类型。
-- **默认值**：指定参数的默认值。
+- **ItemType**: specifies the item type of an `ARRAY` type parameter.
+- **Default Value**: specifies the default value of the parameter.
 
-    - 对于 `ARRAY` 类型，你需要用逗号（`,`）分隔多个值。
-    - 确保值可以转换为参数的类型。否则，端点将返回错误。
-    - 如果你没有为参数设置测试值，在测试端点时将使用默认值。
-- **位置**：指示参数的位置。此属性不能修改。
-    - 对于路径参数，此属性为 `Path`。
-    - 对于其他参数，如果请求方法为 `GET` 或 `DELETE`，此属性为 `Query`。如果请求方法为 `POST` 或 `PUT`，此属性为 `Body`。
+    - For `ARRAY` type, you need to separate multiple values with a comma (`,`).
+    - Make sure that the value can be converted to the type of parameter. Otherwise, the endpoint returns an error.
+    - If you do not set a test value for a parameter, the default value is used when testing the endpoint.
+- **Location**: indicates the location of the parameter. This property cannot be modified.
+    - For path parameters, this property is `Path`.
+    - For other parameters, if the request method is `GET` or `DELETE`, this property is `Query`. If the request method is `POST` or `PUT`, this property is `Body`.
 
-在**测试值**部分，你可以查看和设置测试参数。这些值在你测试端点时用作参数值。确保值可以转换为参数的类型。否则，端点将返回错误。
+In the **Test Values** section, you can view and set test parameters. These values are used as the parameter values when you test the endpoint. Make sure that the value can be converted to the type of parameter. Otherwise, the endpoint returns an error.
 
-### 重命名
+### Rename
 
-要重命名端点，请执行以下步骤：
+To rename an endpoint, perform the following steps:
 
-1. 导航到项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。
-2. 在左侧窗格中，点击目标 Data App 的名称以查看其端点。
-3. 找到要重命名的端点，点击 **...** > **重命名**，然后为端点输入新名称。
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
+2. In the left pane, click the name of your target Data App to view its endpoints.
+3. Locate the endpoint you want to rename, click **...** > **Rename**., and enter a new name for the endpoint.
 
-> **注意：**
+> **Note:**
 >
-> 预定义系统端点不支持重命名。
+> Predefined system endpoints do not support renaming.
 
-## 测试端点
+## Test an endpoint
 
-要测试端点，请执行以下步骤：
+To test an endpoint, perform the following steps:
 
-> **提示：**
+> **Tip:**
 >
-> 如果你已将 Data App 导入到 Postman，你也可以在 Postman 中测试 Data App 的端点。更多信息，请参见[在 Postman 中运行 Data App](/tidb-cloud/data-service-postman-integration.md)。
+> If you have imported your Data App to Postman, you can also test endpoints of the Data App in Postman. For more information, see [Run Data App in Postman](/tidb-cloud/data-service-postman-integration.md).
 
-1. 导航到项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。
-2. 在左侧窗格中，点击目标 Data App 的名称以查看其端点。
-3. 点击要测试的端点的名称以查看其详细信息。
-4. （可选）如果端点包含参数，你需要在测试之前设置测试值。
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
+2. In the left pane, click the name of your target Data App to view its endpoints.
+3. Click the name of the endpoint you want to test to view its details.
+4. (Optional) If the endpoint contains parameters, you need to set test values before testing.
 
-    1. 在端点详情页面的右侧窗格中，点击**参数**标签页。
-    2. 展开**测试值**部分并为参数设置测试值。
+    1. On the right pane of the endpoint details page, click the **Params** tab.
+    2. Expand the **Test Values** section and set test values for the parameters.
 
-        如果你没有为参数设置测试值，将使用默认值。
+        If you do not set a test value for a parameter, the default value is used.
 
-5. 点击右上角的**测试**。
+5. Click **Test** in the upper-right corner.
 
-    > **提示：**
+    > **Tip:**
     >
-    > 或者，你也可以按 <kbd>F5</kbd> 来测试端点。
+    > Alternatively, you can also press <kbd>F5</kbd> to test the endpoint.
 
-测试端点后，你可以在页面底部看到 JSON 格式的响应。有关 JSON 响应的更多信息，请参考[端点的响应](#响应)。
+After testing the endpoint, you can see the response as JSON at the bottom of the page. For more information about the JSON response, refer to [Response of an endpoint](#response).
 
-## 部署端点
+## Deploy an endpoint
 
-> **注意：**
+> **Note:**
 >
-> 如果你已将 Data App 连接到 GitHub 并启用了**自动同步和部署**，你在 GitHub 中所做的任何 Data App 更改都将自动部署在 TiDB Cloud Data Service 中。更多信息，请参见[使用 GitHub 自动部署](/tidb-cloud/data-service-manage-github-connection.md)。
+> If you have connected your Data App to GitHub with **Auto Sync & Deployment** enabled, any Data App changes you made in GitHub will be deployed in TiDB Cloud Data Service automatically. For more information, see [Deploy automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
 
-要部署端点，请执行以下步骤：
+To deploy an endpoint, perform the following steps:
 
-1. 导航到项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。
-2. 在左侧窗格中，点击目标 Data App 的名称以查看其端点。
-3. 找到要部署的端点，点击端点名称以查看其详细信息，然后点击右上角的**部署**。
-4. 如果为你的 Data App 启用了**审查草稿**，将显示一个对话框供你审查所做的更改。你可以根据审查决定是否放弃更改。
-5. 点击**部署**确认部署。如果端点成功部署，你将收到**端点已部署**提示。
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
+2. In the left pane, click the name of your target Data App to view its endpoints.
+3. Locate the endpoint you want to deploy, click the endpoint name to view its details, and then click **Deploy** in the upper-right corner.
+4. If **Review Draft** is enabled for your Data App, a dialog is displayed for you to review the changes you made. You can choose whether to discard the changes based on the review.
+5. Click **Deploy** to confirm the deployment. You will get the **Endpoint has been deployed** prompt if the endpoint is successfully deployed.
 
-    在端点详情页面的右侧窗格中，你可以点击**部署**标签页查看部署历史。
+    On the right pane of the endpoint details page, you can click the **Deployments** tab to view the deployed history.
 
-## 调用端点
+## Call an endpoint
 
-要调用端点，你可以向端点的未部署草稿版本或已部署在线版本发送 HTTPS 请求。
+To call an endpoint, you can send an HTTPS request to either an undeployed draft version or a deployed online version of the endpoint.
 
-> **提示：**
+> **Tip:**
 >
-> 如果你已将 Data App 导入到 Postman，你也可以在 Postman 中调用 Data App 的端点。更多信息，请参见[在 Postman 中运行 Data App](/tidb-cloud/data-service-postman-integration.md)。
+> If you have imported your Data App to Postman, you can also call endpoints of the Data App in Postman. For more information, see [Run Data App in Postman](/tidb-cloud/data-service-postman-integration.md).
 
-### 前提条件
+### Prerequisites
 
-在调用端点之前，你需要创建 API 密钥。更多信息，请参考[创建 API 密钥](/tidb-cloud/data-service-api-key.md#create-an-api-key)。
+Before calling an endpoint, you need to create an API key. For more information, refer to [Create an API key](/tidb-cloud/data-service-api-key.md#create-an-api-key).
 
-### 请求
+### Request
 
-TiDB Cloud Data Service 生成代码示例来帮助你调用端点。要获取代码示例，请执行以下步骤：
+TiDB Cloud Data Service generates code examples to help you call an endpoint. To get the code example, perform the following steps:
 
-1. 导航到项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。
-2. 在左侧窗格中，点击目标 Data App 的名称以查看其端点。
-3. 找到要调用的端点并点击 **...** > **代码示例**。此时会显示**代码示例**对话框。
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
+2. In the left pane, click the name of your target Data App to view its endpoints.
+3. Locate the endpoint you want to call and click **...** > **Code Example**. The **Code Example** dialog box is displayed.
 
-    > **提示：**
+    > **Tip:**
     >
-    > 或者，你也可以点击端点名称以查看其详细信息，然后点击右上角的 **...** > **代码示例**。
+    > Alternatively, you can also click the endpoint name to view its details and click **...** > **Code Example** in the upper-right corner.
 
-4. 在对话框中，选择你要用来调用端点的环境和认证方法，然后复制代码示例。
+4. In the dialog box, select the environment and authentication method that you want to use to call the endpoint, and then copy the code example.
 
-    > **注意：**
+    > **Note:**
     >
-    > - 代码示例是根据端点的属性和参数生成的。
-    > - 目前，TiDB Cloud Data Service 仅提供 curl 代码示例。
+    > - The code examples are generated based on the properties and parameters of the endpoint.
+    > - Currently, TiDB Cloud Data Service only provides the curl code example.
 
-    - 环境：根据你的需要选择**测试环境**或**在线环境**。**在线环境**仅在你部署端点后可用。
-    - 认证方法：选择**基本认证**或**摘要认证**。
-        - **基本认证**以 base64 编码文本的形式传输你的 API 密钥。
-        - **摘要认证**以加密形式传输你的 API 密钥，这更安全。
+    - Environment: choose **Test Environment** or **Online Environment** depending on your need. **Online Environment** is available only after you deploy the endpoint.
+    - Authentication method: choose **Basic Authentication** or **Digest Authentication**.
+        - **Basic Authentication** transmits your API key as based64 encoded text.
+        - **Digest Authentication** transmits your API key in an encrypted form, which is more secure.
 
-      与**基本认证**相比，**摘要认证**的 curl 代码包含一个额外的 `--digest` 选项。
+      Compared with **Basic Authentication**, the curl code of **Digest Authentication** includes an additional `--digest` option.
 
-    以下是启用**批量操作**并使用**摘要认证**的 `POST` 请求的 curl 代码片段示例：
+    Here is an example of a curl code snippet for a `POST` request that enables **Batch Operation** and uses **Digest Authentication**:
 
     <SimpleTab>
-    <div label="测试环境">
+    <div label="Test Environment">
 
-    要调用端点的草稿版本，你需要添加 `endpoint-type: draft` 头：
+    To call a draft version of the endpoint, you need to add the `endpoint-type: draft` header:
 
     ```bash
     curl --digest --user '<Public Key>:<Private Key>' \
@@ -366,11 +408,11 @@ TiDB Cloud Data Service 生成代码示例来帮助你调用端点。要获取�
 
     </div>
 
-    <div label="在线环境">
+    <div label="Online Environment">
 
-    你必须先部署端点，然后才能在在线环境中查看代码示例。
+    You must deploy your endpoint first before checking the code example in the online environment.
 
-    要调用端点的当前在线版本，使用以下命令：
+    To call the current online version of the endpoint, use the following command:
 
     ```bash
     curl --digest --user '<Public Key>:<Private Key>' \
@@ -389,159 +431,48 @@ TiDB Cloud Data Service 生成代码示例来帮助你调用端点。要获取�
     </div>
     </SimpleTab>
 
-    > **注意：**
+    > **Note:**
     >
-    > - 通过请求区域域名 `<region>.data.tidbcloud.com`，你可以直接访问 TiDB 集群所在区域的端点。
-    > - 或者，你也可以请求全局域名 `data.tidbcloud.com` 而不指定区域。这样，TiDB Cloud Data Service 将在内部将请求重定向到目标区域，但这可能会导致额外的延迟。如果你选择这种方式，请确保在调用端点时在 curl 命令中添加 `--location-trusted` 选项。
+    > - By requesting the regional domain `<region>.data.tidbcloud.com`, you can directly access the endpoint in the region where the TiDB cluster is located.
+    > - Alternatively, you can also request the global domain `data.tidbcloud.com` without specifying a region. In this way, TiDB Cloud Data Service will internally redirect the request to the target region, but this might result in additional latency. If you choose this way, make sure to add the `--location-trusted` option to your curl command when calling an endpoint.
 
-5. 将代码示例粘贴到你的应用程序中，根据需要编辑示例，然后运行它。
+5. Paste the code example in your application, edit the example according to your need, and then run it.
 
-    - 你需要将 `<Public Key>` 和 `<Private Key>` 占位符替换为你的 API 密钥。更多信息，请参考[管理 API 密钥](/tidb-cloud/data-service-api-key.md)。
-    - 如果你的端点的请求方法为 `GET` 且为端点启用了**分页**，你可以通过用所需的值更新 `page=<页码>` 和 `page_size=<每页大小>` 的值来对结果进行分页。例如，要获取每页 10 项的第二页，使用 `page=2` 和 `page_size=10`。
-    - 如果你的端点的请求方法为 `POST` 或 `PUT`，根据你要操作的数据行填写 `--data-raw` 选项。
+    - You need to replace the `<Public Key>` and `<Private Key>` placeholders with your API key. For more information, refer to [Manage an API key](/tidb-cloud/data-service-api-key.md).
+    - If the request method of your endpoint is `GET` and **Pagination** is enabled for the endpoint, you can paginate the results by updating the values of `page=<Page Number>` and `page_size=<Page Size>` with your desired values. For example, to get the second page with 10 items per page, use `page=2` and `page_size=10`.
+    - If the request method of your endpoint is `POST` or `PUT`, fill in the `--data-raw` option according to the rows of data that you want to operate on.
 
-        - 对于启用了**批量操作**的端点，`--data-raw` 选项接受一个包含数据对象数组的 `items` 字段的对象，这样你可以使用一个端点操作多行数据。
-        - 对于未启用**批量操作**的端点，`--data-raw` 选项只接受一个数据对象。
+        - For endpoints with **Batch Operation** enabled, the `--data-raw` option accepts an object with an `items` field containing an array of data objects so you can operate on multiple rows of data using one endpoint.
+        - For endpoints with **Batch Operation** not enabled, the `--data-raw` option only accepts one data object.
 
-    - 如果端点包含参数，在调用端点时指定参数值。
+    - If the endpoint contains parameters, specify the parameter values when calling the endpoint.
 
-### 响应
+### Response
 
-调用端点后，你可以看到 JSON 格式的响应。更多信息，请参见 [Data Service 的响应和状态码](/tidb-cloud/data-service-response-and-status-code.md)。
+After calling an endpoint, you can see the response in JSON format. For more information, see [Response and Status Codes of Data Service](/tidb-cloud/data-service-response-and-status-code.md).
 
-## 取消部署端点
+## Undeploy an endpoint
 
-> **注意：**
+> **Note:**
 >
-> 如果你已[将 Data App 连接到 GitHub](/tidb-cloud/data-service-manage-github-connection.md) 并启用了**自动同步和部署**，取消部署此 Data App 的端点也会删除 GitHub 上此端点的配置。
+> If you have [connected your Data App to GitHub](/tidb-cloud/data-service-manage-github-connection.md) with **Auto Sync & Deployment** enabled, undeploying an endpoint of this Data App will also delete the configuration of this endpoint on GitHub.
 
-要取消部署端点，请执行以下步骤：
+To undeploy an endpoint, perform the following steps:
 
-1. 导航到项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。
-2. 在左侧窗格中，点击目标 Data App 的名称以查看其端点。
-3. 找到要取消部署的端点，点击 **...** > **取消部署**。
-4. 点击**取消部署**确认取消部署。
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
+2. In the left pane, click the name of your target Data App to view its endpoints.
+3. Locate the endpoint you want to undeploy, click **...** > **Undeploy**.
+4. Click **Undeploy** to confirm the undeployment.
 
-## 删除端点
+## Delete an endpoint
 
-> **注意：**
+> **Note:**
 >
-> 在删除端点之前，请确保端点不在线。否则，无法删除端点。要取消部署端点，请参考[取消部署端点](#取消部署端点)。
+> Before you delete an endpoint, make sure that the endpoint is not online. Otherwise, the endpoint cannot be deleted. To undeploy an endpoint, refer to [Undeploy an endpoint](#undeploy-an-endpoint).
 
-要删除端点，请执行以下步骤：
+To delete an endpoint, perform the following steps:
 
-1. 导航到项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。
-2. 在左侧窗格中，点击目标 Data App 的名称以查看其端点。
-3. 点击要删除的端点的名称，然后点击右上角的 **...** > **删除**。
-4. 点击**删除**确认删除。
-
-    - 路径长度必须小于 64 个字符。
-    - 请求方法和路径的组合在 Data App 内必须是唯一的。
-    - 路径中只允许使用字母、数字、下划线（`_`）、斜杠（`/`）和用大括号括起来的参数（如 `{var}`）。每个路径必须以斜杠（`/`）开头，以字母、数字或下划线（`_`）结尾。例如，`/my_endpoint/get_id`。
-    - 对于用 `{ }` 括起来的参数，只允许使用字母、数字和下划线（`_`）。每个用 `{ }` 括起来的参数必须以字母或下划线（`_`）开头。
-
-    > **注意：**
-    >
-    > - 在路径中，每个参数必须在单独的层级中，不支持前缀或后缀。
-    >
-    >    有效路径：```/var/{var}``` 和 ```/{var}```
-    >
-    >    无效路径：```/var{var}``` 和 ```/{var}var```
-    >
-    > - 具有相同方法和前缀的路径可能会冲突，如以下示例：
-    >
-    >    ```GET /var/{var1}```
-    >
-    >    ```GET /var/{var2}```
-    >
-    >   这两个路径会相互冲突，因为 `GET /var/123` 与两者都匹配。
-    >
-    > - 带参数的路径优先级低于不带参数的路径。例如：
-    >
-    >    ```GET /var/{var1}```
-    >
-    >    ```GET /var/123```
-    >
-    >   这两个路径不会冲突，因为 `GET /var/123` 优先。
-    >
-    > - 路径参数可以直接在 SQL 中使用。更多信息，请参见[配置参数](#配置参数)。
-
-- **端点 URL**：（只读）默认 URL 根据相应集群所在的区域、Data App 的服务 URL 和端点的路径自动生成。例如，如果端点的路径是 `/my_endpoint/get_id`，则端点 URL 是 `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`。要为 Data App 配置自定义域名，请参见 [Data Service 中的自定义域名](/tidb-cloud/data-service-custom-domain.md)。
-
-- **请求方法**：端点的 HTTP 方法。支持以下方法：
-
-    - `GET`：用于查询或检索数据，如 `SELECT` 语句。
-    - `POST`：用于插入或创建数据，如 `INSERT` 语句。
-    - `PUT`：用于更新或修改数据，如 `UPDATE` 语句。
-    - `DELETE`：用于删除数据，如 `DELETE` 语句。
-
-- **描述**（可选）：端点的描述。
-
-# 管理端点
-
-Data Service（测试版）中的端点是一个可以自定义执行 SQL 语句的 Web API。你可以为 SQL 语句指定参数，例如在 `WHERE` 子句中使用的值。当客户端调用端点并在请求 URL 中提供参数值时，端点会使用提供的参数执行 SQL 语句，并将结果作为 HTTP 响应的一部分返回。
-
-本文介绍如何在 TiDB Cloud 控制台中管理 Data App 中的端点。
-
-## 开始之前
-
-- 在创建端点之前，请确保以下内容：
-
-    - 你已创建集群和 Data App。更多信息，请参见[创建 Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app)。
-    - 端点将要操作的数据库、表和列已经存在于目标集群中。
-
-- 在调用端点之前，请确保你已在 Data App 中创建了 API 密钥。更多信息，请参见[创建 API 密钥](/tidb-cloud/data-service-api-key.md#create-an-api-key)。
-
-## 创建端点
-
-在 Data Service 中，你可以自动生成端点、手动创建端点或添加预定义的系统端点。
-
-> **提示：**
->
-> 你也可以从 SQL Editor 中的 SQL 文件创建端点。更多信息，请参见[从 SQL 文件生成端点](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file)。
-
-### 自动生成端点
-
-在 TiDB Cloud Data Service 中，你可以按以下方式一次性自动生成一个或多个端点：
-
-1. 导航到项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。
-2. 在左侧窗格中，找到目标 Data App，点击 App 名称右侧的 **+**，然后点击**自动生成端点**。此时会显示端点生成对话框。
-3. 在对话框中，执行以下操作：
-
-    1. 为要生成的端点选择目标集群、数据库和表。
-
-        > **注意：**
-        >
-        > **表**下拉列表仅包含至少有一列的用户定义表，不包括系统表和没有列定义的表。
-
-    2. 为要生成的端点选择至少一个 HTTP 操作（如 `GET（检索）`、`POST（创建）`和 `PUT（更新）`）。
-
-        对于你选择的每个操作，TiDB Cloud Data Service 将生成一个相应的端点。如果你选择批量操作（如 `POST（批量创建）`），生成的端点允许你在单个请求中操作多行数据。
-
-        如果你选择的表包含[向量数据类型](/tidb-cloud/vector-search-data-types.md)，你可以启用**向量搜索操作**选项并选择向量距离函数，以生成一个向量搜索端点，该端点会根据你选择的距离函数自动计算向量距离。支持的[向量距离函数](/tidb-cloud/vector-search-functions-and-operators.md)包括：
-
-        - `VEC_L2_DISTANCE`（默认）：计算两个向量之间的 L2 距离（欧几里得距离）。
-        - `VEC_COSINE_DISTANCE`：计算两个向量之间的余弦距离。
-        - `VEC_NEGATIVE_INNER_PRODUCT`：使用两个向量之间内积的负值计算距离。
-        - `VEC_L1_DISTANCE`：计算两个向量之间的 L1 距离（曼哈顿距离）。
-       
-    3. （可选）为操作配置超时时间和标签。所有生成的端点将自动继承配置的属性，可以根据需要稍后修改。
-    4. （可选）**自动部署端点**选项（默认禁用）控制是否启用生成端点的直接部署。启用时，将跳过草稿审查过程，生成的端点将立即部署，无需进一步手动审查或批准。
-
-4. 点击**生成**。
-
-    生成的端点显示在端点列表的顶部。
-
-5. 检查新端点的生成端点名称、SQL 语句、属性和参数。
-
-    - 端点名称：生成的端点名称采用 `/<选择的表名>` 格式，请求方法（如 `GET`、`POST` 和 `PUT`）显示在端点名称之前。例如，如果选择的表名是 `sample_table` 且选择的操作是 `POST（创建）`，生成的端点显示为 `POST /sample_table`。
-
-        - 如果选择了批量操作，TiDB Cloud Data Service 会在生成的端点名称后附加 `/bulk`。例如，如果选择的表名是 `/sample_table` 且选择的操作是 `POST（批量创建）`，生成的端点显示为 `POST /sample_table/bulk`。
-        - 如果选择了 `POST（向量相似度搜索）`，TiDB Cloud Data Service 会在生成的端点名称后附加 `/vector_search`。例如，如果选择的表名是 `/sample_table` 且选择的操作是 `POST（向量相似度搜索）`，生成的端点显示为 `POST /sample_table/vector_search`。
-        - 如果已经存在具有相同请求方法和端点名称的端点，TiDB Cloud Data Service 会在生成的端点名称后附加 `_dump_<随机字母>`。例如，`/sample_table_dump_EUKRfl`。
-
-    - SQL 语句：TiDB Cloud Data Service 根据表列规范和选择的端点操作自动编写生成端点的 SQL 语句。你可以点击端点名称在页面中间部分查看其 SQL 语句。
-    - 端点属性：TiDB Cloud Data Service 根据你的选择自动配置端点路径、请求方法、超时时间和标签。你可以在页面右侧窗格中找到这些属性。
-    - 端点参数：TiDB Cloud Data Service 自动为生成的端点配置参数。你可以在页面右侧窗格中找到这些参数。
-
-6. 如果你想修改生成端点的详细信息，如名称、SQL 语句、属性或参数，请参考[开发端点](#开发端点)中提供的说明。
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
+2. In the left pane, click the name of your target Data App to view its endpoints.
+3. Click the name of the endpoint you want to delete, and then click **...** > **Delete** in the upper-right corner.
+4. Click **Delete** to confirm the deletion.

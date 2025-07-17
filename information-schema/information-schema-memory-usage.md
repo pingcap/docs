@@ -1,11 +1,11 @@
 ---
 title: MEMORY_USAGE
-summary: "了解 `MEMORY_USAGE` information_schema 系统表。"
+summary: Learn the `MEMORY_USAGE` information_schema system table.
 ---
 
 # MEMORY_USAGE
 
-`MEMORY_USAGE` 表描述了当前 TiDB 实例的内存使用情况。
+The `MEMORY_USAGE` table describes the current memory usage of the current TiDB instance.
 
 ```sql
 USE information_schema;
@@ -46,32 +46,32 @@ SELECT * FROM information_schema.memory_usage;
 2 rows in set (0.002 sec)
 ```
 
-`MEMORY_USAGE` 表中各列的描述如下：
+The columns in the `MEMORY_USAGE` table are described as follows:
 
-* MEMORY_TOTAL：TiDB 可用的总内存，单位为字节。
-* MEMORY_LIMIT：TiDB 的内存使用限制，单位为字节。该值与系统变量 [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) 的值相同。
-* MEMORY_CURRENT：TiDB 当前的内存使用量，单位为字节。
-* MEMORY_MAX_USED：从 TiDB 启动到当前时间的最大内存使用量，单位为字节。
-* CURRENT_OPS："shrinking" | null。"shrinking" 表示 TiDB 正在执行收缩内存使用的操作。
-* SESSION_KILL_LAST：最后一次终止会话的时间戳。
-* SESSION_KILL_TOTAL：从 TiDB 启动到当前时间，终止会话的总次数。
-* GC_LAST：最后一次由内存使用触发 Golang GC 的时间戳。
-* GC_TOTAL：从 TiDB 启动到当前时间，由内存使用触发 Golang GC 的总次数。
-* DISK_USAGE：当前数据溢出操作的磁盘使用量，单位为字节。
-* QUERY_FORCE_DISK：从 TiDB 启动到当前时间，数据溢出到磁盘的总次数。
+* MEMORY_TOTAL: The total available memory of TiDB, in bytes.
+* MEMORY_LIMIT: The memory usage limit of TiDB, in bytes. The value is the same as that of the system variable [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640).
+* MEMORY_CURRENT: The current memory usage of TiDB, in bytes.
+* MEMORY_MAX_USED: The maximum memory usage of TiDB from the time it is started to the current time, in bytes.
+* CURRENT_OPS: "shrinking" | null. "shrinking" means that TiDB is performing operations that shrink memory usage.
+* SESSION_KILL_LAST: The timestamp of the last time a session is terminated.
+* SESSION_KILL_TOTAL: The number of times sessions are terminated, from the time TiDB is started to the current time.
+* GC_LAST: The timestamp of the last time Golang GC is triggered by memory usage.
+* GC_TOTAL: The number of times Golang GC is triggered by memory usage, from the time TiDB is started to the current time.
+* DISK_USAGE: The disk usage for the current data spill operation, in bytes.
+* QUERY_FORCE_DISK: The number of times data is spilled to disk, from the time TiDB is started to the current time.
 
-## 另请参阅
+## See also
 
 <CustomContent platform="tidb">
 
-- [TiDB 内存控制](/configure-memory-usage.md)
-- [调优 TiKV 内存参数性能](/tune-tikv-memory-performance.md)
+- [TiDB memory control](/configure-memory-usage.md)
+- [Tune TiKV memory parameter performance](/tune-tikv-memory-performance.md)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- [TiDB 内存控制](https://docs.pingcap.com/tidb/stable/configure-memory-usage)
-- [调优 TiKV 内存参数性能](https://docs.pingcap.com/tidb/stable/tune-tikv-memory-performance)
+- [TiDB memory control](https://docs.pingcap.com/tidb/stable/configure-memory-usage)
+- [Tune TiKV memory parameter performance](https://docs.pingcap.com/tidb/stable/tune-tikv-memory-performance)
 
 </CustomContent>

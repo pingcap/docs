@@ -1,13 +1,13 @@
 ---
-title: CREATE DATABASE | TiDB SQL 语句参考
-summary: TiDB 数据库中 CREATE DATABASE 的使用概览。
+title: CREATE DATABASE | TiDB SQL Statement Reference
+summary: An overview of the usage of CREATE DATABASE for the TiDB database.
 ---
 
 # CREATE DATABASE
 
-此语句在 TiDB 中创建一个新的数据库。MySQL 中的"数据库"术语最接近于 SQL 标准中的 schema。
+This statement creates a new database in TiDB. The MySQL terminology for 'database' most closely maps to a schema in the SQL standard.
 
-## 语法图
+## Synopsis
 
 ```ebnf+diagram
 CreateDatabaseStmt ::=
@@ -34,9 +34,9 @@ PlacementPolicyOption ::=
 |   "PLACEMENT" "POLICY" (EqOpt | "SET") "DEFAULT"
 ```
 
-## 语法说明
+## Syntax
 
-`CREATE DATABASE` 语句用于创建数据库，并指定数据库的默认属性，如默认字符集和排序规则。`CREATE SCHEMA` 是 `CREATE DATABASE` 的同义词。
+The `CREATE DATABASE` statement is used to create a database, and to specify the default properties of the database, such as the default character set and collation. `CREATE SCHEMA` is a synonym for `CREATE DATABASE`.
 
 ```sql
 CREATE {DATABASE | SCHEMA} [IF NOT EXISTS] db_name
@@ -47,11 +47,11 @@ create_specification:
   | [DEFAULT] COLLATE [=] collation_name
 ```
 
-如果你创建一个已存在的数据库且未指定 `IF NOT EXISTS`，将显示错误。
+If you create an existing database and does not specify `IF NOT EXISTS`, an error is displayed.
 
-`create_specification` 选项用于指定数据库中的特定 `CHARACTER SET` 和 `COLLATE`。目前，TiDB 仅支持部分字符集和排序规则。详情请参见[字符集和排序规则支持](/character-set-and-collation.md)。
+The `create_specification` option is used to specify the specific `CHARACTER SET` and `COLLATE` in the database. Currently, TiDB only supports some of the character sets and collations. For details, see [Character Set and Collation Support](/character-set-and-collation.md).
 
-## 示例
+## Examples
 
 ```sql
 mysql> CREATE DATABASE mynewdatabase;
@@ -71,11 +71,11 @@ mysql> SHOW TABLES;
 1 row in set (0.00 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-TiDB 中的 `CREATE DATABASE` 语句与 MySQL 完全兼容。如果发现任何兼容性差异，请[报告问题](https://docs.pingcap.com/tidb/stable/support)。
+The `CREATE DATABASE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
-## 另请参阅
+## See also
 
 * [USE](/sql-statements/sql-statement-use.md)
 * [ALTER DATABASE](/sql-statements/sql-statement-alter-database.md)

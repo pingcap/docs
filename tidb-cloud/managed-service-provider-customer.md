@@ -1,43 +1,43 @@
 ---
-title: 托管服务提供商客户
-summary: 了解如何成为托管服务提供商 (MSP) 客户。
+title: Managed Service Provider Customer
+summary: Learn how to become a Managed Service Provider (MSP) customer.
 ---
 
-# 托管服务提供商客户
+# Managed Service Provider Customer
 
-托管服务提供商（Managed Service Provider，MSP）客户是使用托管服务提供商提供的 TiDB Cloud 服务的客户。
+A Managed Service Provider (MSP) customer is a customer who uses the TiDB Cloud Services provided by the Managed Service Provider. 
 
-与直接的 TiDB Cloud 客户相比，MSP 客户在注册和发票支付方面有几点不同：
+Compared to the direct TiDB Cloud customer, there are several differences for sign-up and invoice payment:
 
-- MSP 客户需要通过 MSP 提供的专用注册页面注册 TiDB Cloud 账户。
-- MSP 客户通过 MSP 渠道支付发票，而不是直接向 PingCAP 支付。
+- The MSP customer needs to sign up for a TiDB Cloud account from the dedicated sign-up page provided by the MSP.
+- The MSP customer pays invoices through the MSP channel, instead of paying directly to PingCAP.
 
-在 TiDB Cloud 控制台上的其他日常操作对直接 TiDB Cloud 客户和 MSP 客户来说都是相同的。
+Other daily operations on the TiDB Cloud console are the same for both direct TiDB Cloud customers and MSP customers.
 
-本文档描述了如何成为 MSP 客户以及 MSP 客户如何查看历史和未来账单。
+This document describes how to become an MSP customer and how to check history and future bills for MSP customers.
 
-## 创建新的 MSP 客户账户
+## Create a new MSP customer account
 
-要创建新的 MSP 客户账户，请访问 MSP 专用注册页面。每个 MSP 都有一个唯一的专用注册页面。请联系你的 MSP 获取注册页面的 URL。
+To create a new MSP customer account, visit the MSP dedicated sign-up page. Each MSP has a unique dedicated sign-up page. Contact your MSP to get the URL of the sign-up page.
 
-## 从直接 TiDB Cloud 账户迁移到 MSP 客户账户
+## Migrate from a direct TiDB Cloud account to an MSP customer account
 
-> **提示：**
+> **Tip:**
 >
-> 直接客户是直接从 PingCAP 购买 TiDB Cloud 并支付发票的最终客户。
+> Direct customers are the end customers who purchase TiDB Cloud and pay invoices directly from PingCAP.
 
-如果你目前是拥有 TiDB Cloud 账户的直接客户，你可以请求你的 MSP 将你的账户迁移到 MSP 客户账户。
+If you are currently a direct customer with a TiDB Cloud account, you can ask your MSP to migrate your account to an MSP customer account.
 
-迁移将在未来某个月的第一天生效。请与你的 MSP 讨论确定具体的生效日期。
+The migration will take effect on the first day of a future month. Discuss with your MSP to determine the specific effective date.
 
-在迁移生效当天，你将收到一封电子邮件通知。
+On the effective day of migration, you will receive an email notification.
 
-## 查看未来账单
+## Check your future bills
 
-一旦你成功成为 MSP 客户，你将通过 MSP 支付发票。请询问你的 MSP 在哪里可以查看你的账单和发票。
+Once you successfully become an MSP customer, you will pay invoices through your MSP. Ask your MSP where you can check your bills and invoices.
 
-PingCAP 不会向 MSP 客户发送任何账单和发票。
+PingCAP does not send any bills and invoices to MSP customers.
 
-## 查看历史账单
+## Check your history bills
 
-如果你已经从直接 TiDB Cloud 账户迁移到 MSP 客户账户，你可以通过访问 TiDB Cloud 控制台中的 **Billing** > **Bills** > **History** 查看迁移之前的历史账单。
+If you have migrated from a direct TiDB Cloud account to an MSP customer account, you can view your history bills prior to the migration by visiting **Billing** > **Bills** > **History** in the TiDB Cloud console.

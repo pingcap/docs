@@ -1,13 +1,13 @@
 ---
-title: ADD COLUMN | TiDB SQL 语句参考
-summary: TiDB 数据库中 ADD COLUMN 的使用概述。
+title: ADD COLUMN | TiDB SQL Statement Reference
+summary: An overview of the usage of ADD COLUMN for the TiDB database.
 ---
 
 # ADD COLUMN
 
-`ALTER TABLE.. ADD COLUMN` 语句用于向现有表添加列。在 TiDB 中，这是一个在线操作，这意味着添加列时不会阻塞对表的读取或写入操作。
+The `ALTER TABLE.. ADD COLUMN` statement adds a column to an existing table. This operation is online in TiDB, which means that neither reads or writes to the table are blocked by adding a column.
 
-## 语法
+## Synopsis
 
 ```ebnf+diagram
 AlterTableStmt
@@ -28,8 +28,8 @@ ColumnType
 ColumnOption
          ::= 'NOT'? 'NULL'
            | 'AUTO_INCREMENT'
-           | 'PRIMARY'? 'KEY' ( 'CLUSTERED' | 'NONCLUSTERED' )?
-           | 'UNIQUE' 'KEY'?
+           | 'PRIMARY'? 'KEY' ( 'CLUSTERED' | 'NONCLUSTERED' )? ( 'GLOBAL' | 'LOCAL' )?
+           | 'UNIQUE' 'KEY'? ( 'GLOBAL' | 'LOCAL' )?
            | 'DEFAULT' ( NowSymOptionFraction | SignedLiteral | NextValueForSequence )
            | 'SERIAL' 'DEFAULT' 'VALUE'
            | 'ON' 'UPDATE' NowSymOptionFraction
@@ -43,7 +43,7 @@ ColumnOption
            | 'AUTO_RANDOM' ( '(' LengthNum ')' )?
 ```
 
-## 示例
+## Examples
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT);
@@ -83,13 +83,14 @@ mysql> SELECT * FROM t1;
 1 row in set (0.00 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-* 不支持添加新列并将其设置为 `PRIMARY KEY`。
-* 不支持添加新列并将其设置为 `AUTO_INCREMENT`。
-* 添加生成列有一些限制，请参考：[生成列的限制](/generated-columns.md#limitations)。
+* Adding a new column and setting it to the `PRIMARY KEY` is not supported.
+* Adding a new column and setting it to `AUTO_INCREMENT` is not supported.
+* There are limitations on adding generated columns, refer to: [generated column limitations](/generated-columns.md#limitations).
+* Setting a [global index](/partitioned-table.md#global-indexes) by specifying `PRIMARY KEY` or `UNIQUE INDEX` as `GLOBAL` when you add a new column is a TiDB extension for [partitioned tables](/partitioned-table.md) and is not compatible with MySQL.
 
-## 另请参阅
+## See also
 
 * [ADD INDEX](/sql-statements/sql-statement-add-index.md)
 * [CREATE TABLE](/sql-statements/sql-statement-create-table.md)

@@ -16,7 +16,7 @@ With PITR, you can satisfy the preceding requirements.
 
 ## Deploy the TiDB cluster and BR
 
-To use PITR, you need to deploy a TiDB cluster >= v6.2.0 and update BR to the same version as the TiDB cluster. This document uses v8.1.2 as an example.
+To use PITR, you need to deploy a TiDB cluster >= v6.2.0 and update BR to the same version as the TiDB cluster. This document uses {{{ .tidb-version }}} as an example.
 
 The following table shows the recommended hardware resources for using PITR in a TiDB cluster.
 
@@ -43,13 +43,13 @@ Install or upgrade BR using TiUP:
 - Install:
 
     ```shell
-    tiup install br:v8.1.2
+    tiup install br:{{{ .tidb-version }}}
     ```
 
 - Upgrade:
 
     ```shell
-    tiup update br:v8.1.2
+    tiup update br:{{{ .tidb-version }}}
     ```
 
 ## Configure backup storage (Amazon S3)
@@ -70,7 +70,7 @@ The detailed steps are as follows:
 2. Configure permissions for BR and TiKV to access the S3 directory. It is recommended to grant permissions using the IAM method, which is the most secure way to access the S3 bucket. For detailed steps, refer to [AWS documentation: Controlling access to a bucket with user policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html). The required permissions are as follows:
 
     - TiKV and BR in the backup cluster need `s3:ListBucket`, `s3:GetObject`, `s3:DeleteObject`, `s3:PutObject`, and `s3:AbortMultipartUpload` permissions of the `s3://tidb-pitr-bucket/backup-data` directory.
-    - TiKV and BR in the restore cluster need `s3:ListBucket`, `s3:GetObject`, `s3:DeleteObject`, and `s3:PutObject` permissions of the `s3://tidb-pitr-bucket/backup-data` directory.
+    - TiKV and BR in the restore cluster need `s3:ListBucket` and `s3:GetObject` permissions of the `s3://tidb-pitr-bucket/backup-data` directory.
 
 3. Plan the directory structure that stores the backup data, including the snapshot (full) backup and the log backup.
 

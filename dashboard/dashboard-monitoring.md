@@ -21,31 +21,31 @@ If the TiDB cluster is deployed using TiUP, you can also view the Performance Ov
 
 The Performance Overview dashboard orchestrates the metrics of TiDB, PD, and TiKV, and presents each of them in the following sections:
 
-- Overview: Database time and SQL execution time summary. By checking different colors in the overview, you can quickly identify the database workload profile and the performance bottleneck.
+- **Overview**: Database time and SQL execution time summary. By checking different colors in the overview, you can quickly identify the database workload profile and the performance bottleneck.
 
-- Load profile: Key metrics and resource usage, including database QPS, connection information, the MySQL command types the application interacts with TiDB, database internal TSO and KV request OPS, and resource usage of the TiKV and TiDB.
+- **Load profile**: Key metrics and resource usage, including database QPS, connection information, the MySQL command types the application interacts with TiDB, database internal TSO and KV request OPS, and resource usage of the TiKV and TiDB.
 
-- Top-down latency breakdown: Query latency versus connection idle time ratio, query latency breakdown, TSO/KV request latency during execution, breakdown of write latency within TiKV.
+- **Top-down latency breakdown**: Query latency versus connection idle time ratio, query latency breakdown, TSO/KV request latency during execution, breakdown of write latency within TiKV.
 
 The following sections illustrate the metrics on the Performance Overview dashboard.
 
 ### Database Time by SQL Type
 
-- database time: Total database time per second
-- sql_type: Database time consumed by each type of SQL statements per second
+- `database time`: Total database time per second
+- `sql_type`: Database time consumed by each type of SQL statements per second
 
 ### Database Time by SQL Phase
 
-- database time: Total database time per second
-- get token/parse/compile/execute: Database time consumed in four SQL processing phases
+- `database time`: Total database time per second
+- `get token/parse/compile/execute`: Database time consumed in four SQL processing phases
 
 The SQL execution phase is in green and other phases are in red on general. If non-green areas are large, it means much database time is consumed in other phases than the execution phase and further cause analysis is required.
 
 ### SQL Execute Time Overview
 
-- execute time: Database time consumed during SQL execution per second
-- tso_wait: Concurrent TSO waiting time per second during SQL execution
-- kv request type: Time waiting for each KV request type per second during SQL execution. The total KV request wait time might exceed SQL execution time, because KV requests are concurrent.
+- `execute time`: Database time consumed during SQL execution per second
+- `tso_wait`: Concurrent TSO waiting time per second during SQL execution
+- `kv request type`: Time waiting for each KV request type per second during SQL execution. The total KV request wait time might exceed SQL execution time, because KV requests are concurrent.
 
 Green metrics stand for common KV write requests (such as prewrite and commit), blue metrics stand for common read requests, and metrics in other colors stand for unexpected situations which you need to pay attention to. For example, pessimistic lock KV requests are marked red and TSO waiting is marked dark brown.
 
@@ -77,50 +77,70 @@ Generally, `tso - request` divided by `tso - cmd` is the average size of TSO req
 
 ### Connection Count
 
-- total: Number of connections to all TiDB instances
-- active connections: Number of active connections to all TiDB instances
+- `total`: Number of connections to all TiDB instances
+- `active connections`: Number of active connections to all TiDB instances
 - Number of connections to each TiDB instance
 
-### TiDB CPU
+### TiDB CPU/Memory
 
-- avg: Average CPU utilization across all TiDB instances
-- delta: Maximum CPU utilization of all TiDB instances minus minimum CPU utilization of all TiDB instances
-- max: Maximum CPU utilization across all TiDB instances
+- `CPU-Avg`: Average CPU utilization across all TiDB instances
+- `CPU-Delta`: Maximum CPU utilization of all TiDB instances minus minimum CPU utilization of all TiDB instances
+- `CPU-Max`: Maximum CPU utilization across all TiDB instances
+- `CPU-Quota`: Number of CPU cores that can be used by TiDB
+- `Mem-Max`: Maximum memory utilization across all TiDB instances
 
-### TiKV CPU/IO MBps
+### TiKV CPU/Memory
 
-- CPU-Avg: Average CPU utilization of all TiKV instances
-- CPU-Delta: Maximum CPU utilization of all TiKV instances minus minimum CPU utilization of all TiKV instances
-- CPU-MAX: Maximum CPU utilization among all TiKV instances
-- IO-Avg: Average MBps of all TiKV instances
-- IO-Delt: Maximum MBps of all TiKV instances minus minimum MBps of all TiKV instances
-- IO-MAX: Maximum MBps of all TiKV instances
+- `CPU-Avg`: Average CPU utilization across all TiKV instances
+- `CPU-Delta`: Maximum CPU utilization of all TiKV instances minus minimum CPU utilization of all TiKV instances
+- `CPU-Max`: Maximum CPU utilization across all TiKV instances
+- `CPU-Quota`: Number of CPU cores that can be used by TiKV
+- `Mem-Max`: Maximum memory utilization across all TiKV instances
+
+### PD CPU/Memory
+
+- `CPU-Max`: Maximum CPU utilization across all PD instances
+- `CPU-Quota`: Number of CPU cores that can be used by PD
+- `Mem-Max`: Maximum memory utilization across all PD instances
+
+### Read Traffic
+
+- `TiDB -> Client`: The outbound traffic statistics from TiDB to the client
+- `Rocksdb -> TiKV`: The data flow that TiKV retrieves from RocksDB during read operations within the storage layer
+
+### Write Traffic
+
+- `Client -> TiDB`: The inbound traffic statistics from the client to TiDB
+- `TiDB -> TiKV: general`: The rate at which foreground transactions are written from TiDB to TiKV
+- `TiDB -> TiKV: internal`: The rate at which internal transactions are written from TiDB to TiKV
+- `TiKV -> Rocksdb`: The flow of write operations from TiKV to RocksDB
+- `RocksDB Compaction`: The total read and write I/O flow generated by RocksDB compaction operations
 
 ### Duration
 
-- Duration: Execution time
+- `Duration`: Execution time
 
     - The duration from receiving a request from the client to TiDB till TiDB executing the request and returning the result to the client. In general, client requests are sent in the form of SQL statements; however, this duration can include the execution time of commands such as `COM_PING`, `COM_SLEEP`, `COM_STMT_FETCH`, and `COM_SEND_LONG_DATA`.
     - TiDB supports Multi-Query, which means the client can send multiple SQL statements at one time, such as `select 1; select 1; select 1;`. In this case, the total execution time of this query includes the execution time of all SQL statements.
 
-- avg: Average time to execute all requests
-- 99: P99 duration to execute all requests
-- avg by type: Average time to execute all requests in all TiDB instances, collected by type: `SELECT`, `INSERT`, and `UPDATE`
+- `avg`: Average time to execute all requests
+- `99`: P99 duration to execute all requests
+- `avg by type`: Average time to execute all requests in all TiDB instances, collected by type: `SELECT`, `INSERT`, and `UPDATE`
 
 ### Connection Idle Duration
 
 Connection Idle Duration indicates the duration of a connection being idle.
 
-- avg-in-txn: Average connection idle duration when the connection is within a transaction
-- avg-not-in-txn: Average connection idle duration when the connection is not within a transaction
-- 99-in-txn: P99 connection idle duration when the connection is within a transaction
-- 99-not-in-txn: P99 connection idle duration when the connection is not within a transaction
+- `avg-in-txn`: Average connection idle duration when the connection is within a transaction
+- `avg-not-in-txn`: Average connection idle duration when the connection is not within a transaction
+- `99-in-txn`: P99 connection idle duration when the connection is within a transaction
+- `99-not-in-txn`: P99 connection idle duration when the connection is not within a transaction
 
 ### Parse Duration, Compile Duration, and Execute Duration
 
-- Parse Duration: Time consumed in parsing SQL statements
-- Compile Duration: Time consumed in compiling the parsed SQL AST to execution plans
-- Execution Duration: Time consumed in executing execution plans of SQL statements
+- `Parse Duration`: Time consumed in parsing SQL statements
+- `Compile Duration`: Time consumed in compiling the parsed SQL AST to execution plans
+- `Execution Duration`: Time consumed in executing execution plans of SQL statements
 
 All these three metrics include the average duration and the 99th percentile duration in all TiDB instances.
 
@@ -134,16 +154,16 @@ Average time consumed in executing gRPC requests in all TiKV instances based on 
 
 ### PD TSO Wait/RPC Duration
 
-- wait - avg: Average time in waiting for PD to return TSO in all TiDB instances
-- rpc - avg: Average time from sending TSO requests to PD to receiving TSO in all TiDB instances
-- wait - 99: P99 time in waiting for PD to return TSO in all TiDB instances
-- rpc - 99: P99 time from sending TSO requests to PD to receiving TSO in all TiDB instances
+- `wait - avg`: Average time in waiting for PD to return TSO in all TiDB instances
+- `rpc - avg`: Average time from sending TSO requests to PD to receiving TSO in all TiDB instances
+- `wait - 99`: P99 time in waiting for PD to return TSO in all TiDB instances
+- `rpc - 99`: P99 time from sending TSO requests to PD to receiving TSO in all TiDB instances
 
 ### Storage Async Write Duration, Store Duration, and Apply Duration
 
-- Storage Async Write Duration: Time consumed in asynchronous write
-- Store Duration: Time consumed in store loop during asynchronously write
-- Apply Duration: Time consumed in apply loop during asynchronously write
+- `Storage Async Write Duration`: Time consumed in asynchronous write
+- `Store Duration`: Time consumed in store loop during asynchronously write
+- `Apply Duration`: Time consumed in apply loop during asynchronously write
 
 All these three metrics include the average duration and P99 duration in all TiKV instances.
 
@@ -151,8 +171,8 @@ Average storage async write duration = Average store duration + Average apply du
 
 ### Append Log Duration, Commit Log Duration, and Apply Log Duration
 
-- Append Log Duration: Time consumed by Raft to append logs
-- Commit Log Duration: Time consumed by Raft to commit logs
-- Apply Log Duration: Time consumed by Raft to apply logs
+- `Append Log Duration`: Time consumed by Raft to append logs
+- `Commit Log Duration`: Time consumed by Raft to commit logs
+- `Apply Log Duration`: Time consumed by Raft to apply logs
 
 All these three metrics include the average duration and P99 duration in all TiKV instances.

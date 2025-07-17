@@ -94,7 +94,12 @@ Here is a configuration example of the `Datasource config` section:
 
 ## Notes
 
-- Before TiCDC creates a changefeed, make sure that the value of the TiCDC configuration item `enable-sync-point` is set to `true`. Only in this way, Syncpoint is enabled and the `ts-map` is saved in the downstream. For the complete configuration, see [TiCDC task configuration file](/ticdc/ticdc-changefeed-config.md).
+- Before TiCDC creates a changefeed, make sure that the value of the TiCDC configuration item `enable-sync-point` is set to `true`. Only in this way, Syncpoint is enabled and the `ts-map` is saved in the downstream. The default format of the configuration item `sync-point-interval` is `"h m s"`, for example `"1h30m30s"`, and the minimum value is `"30s"`. For the complete configuration information, see [TiCDC task configuration file](/ticdc/ticdc-changefeed-config.md).
 - When you perform data validation using Syncpoint, you need to modify the Garbage Collection (GC) time of TiKV to ensure that the historical data corresponding to snapshot is not collected by GC during the data check. It is recommended that you modify the GC time to 1 hour and recover the setting after the check.
 - The above example only shows the section of `Datasource config`. For complete configuration, refer to [sync-diff-inspector User Guide](/sync-diff-inspector/sync-diff-inspector-overview.md).
-- Since v6.4.0, only the changefeed with the `SYSTEM_VARIABLES_ADMIN` or `SUPER` privilege can use the TiCDC Syncpoint feature.
+- Starting from v6.4.0, only the changefeed with the `SYSTEM_VARIABLES_ADMIN` or `SUPER` privilege can use the TiCDC Syncpoint feature.
+- Starting from v8.2.0, TiCDC makes the following adjustments to the generation rules of `primary_ts` values:
+    - Whenever TiCDC generates a new `primary_ts`, its value must be an integer multiple of `sync-point-interval`.
+    - For each new changefeed, TiCDC calculates an initial `primary_ts`. This initial value is greater than or equal to the changefeed start time (`startTs`), and is the smallest integer multiple of `sync-point-interval`.
+
+  This setting is used to align the Syncpoints of different changefeeds during data replication. For example, multiple downstream clusters can restore to the `secondary_ts` of a Syncpoint with the same `primary_ts` by executing the [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md) statement, achieving data consistency across downstream clusters.

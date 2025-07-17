@@ -1,179 +1,179 @@
 ---
-title: 使用 DBeaver 连接 TiDB
-summary: 了解如何使用 DBeaver Community 连接 TiDB。
+title: Connect to TiDB with DBeaver
+summary: Learn how to connect to TiDB using DBeaver Community.
 ---
 
-# 使用 DBeaver 连接 TiDB
+# Connect to TiDB with DBeaver
 
-TiDB 是一个兼容 MySQL 的数据库，而 [DBeaver Community](https://dbeaver.io/download/) 是一个免费的跨平台数据库工具，适用于开发人员、数据库管理员、分析师以及所有处理数据的人员。
+TiDB is a MySQL-compatible database, and [DBeaver Community](https://dbeaver.io/download/) is a free cross-platform database tool for developers, database administrators, analysts, and everyone working with data.
 
-在本教程中，你将学习如何使用 DBeaver Community 连接到你的 TiDB 集群。
+In this tutorial, you can learn how to connect to your TiDB cluster using DBeaver Community.
 
-> **注意：**
+> **Note:**
 >
-> 本教程适用于 TiDB Cloud Serverless、TiDB Cloud Dedicated 和 TiDB Self-Managed。
+> This tutorial is compatible with {{{ .starter }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
 
-## 前提条件
+## Prerequisites
 
-要完成本教程，你需要：
+To complete this tutorial, you need:
 
-- [DBeaver Community **23.0.3** 或更高版本](https://dbeaver.io/download/)。
-- 一个 TiDB 集群。
+- [DBeaver Community **23.0.3** or higher](https://dbeaver.io/download/).
+- A TiDB cluster.
 
 <CustomContent platform="tidb">
 
-**如果你还没有 TiDB 集群，可以按照以下方式创建：**
+**If you don't have a TiDB cluster, you can create one as follows:**
 
-- （推荐）按照[创建 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md)的说明创建你自己的 TiDB Cloud 集群。
-- 按照[部署本地测试 TiDB 集群](/quick-start-with-tidb.md#deploy-a-local-test-cluster)或[部署生产 TiDB 集群](/production-deployment-using-tiup.md)的说明创建本地集群。
+- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-**如果你还没有 TiDB 集群，可以按照以下方式创建：**
+**If you don't have a TiDB cluster, you can create one as follows:**
 
-- （推荐）按照[创建 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md)的说明创建你自己的 TiDB Cloud 集群。
-- 按照[部署本地测试 TiDB 集群](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)或[部署生产 TiDB 集群](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)的说明创建本地集群。
+- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
 
 </CustomContent>
 
-## 连接到 TiDB
+## Connect to TiDB
 
-根据你选择的 TiDB 部署选项连接到你的 TiDB 集群。
+Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
 <SimpleTab>
-<div label="TiDB Cloud Serverless">
+<div label="{{{ .starter }}}">
 
-1. 导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称进入其概览页面。
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
-2. 点击右上角的**连接**。此时会显示一个连接对话框。
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. 确保连接对话框中的配置与你的操作环境相匹配。
+3. Ensure the configurations in the connection dialog match your operating environment.
 
-    - **连接类型**设置为 `Public`
-    - **分支**设置为 `main`
-    - **连接方式**设置为 `DBeaver`
-    - **操作系统**与你的环境匹配。
+    - **Connection Type** is set to `Public`
+    - **Branch** is set to `main`
+    - **Connect With** is set to `DBeaver`
+    - **Operating System** matches your environment.
 
-4. 点击**生成密码**创建一个随机密码。
+4. Click **Generate Password** to create a random password.
 
-    > **提示：**
+    > **Tip:**
     >
-    > 如果你之前已经创建了密码，你可以使用原始密码，也可以点击**重置密码**生成一个新密码。
+    > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
 
-5. 启动 DBeaver 并点击左上角的**新建数据库连接**。在**连接到数据库**对话框中，从列表中选择 **TiDB**，然后点击**下一步**。
+5. Launch DBeaver and click **New Database Connection** in the upper-left corner. In the **Connect to a database** dialog, select **TiDB** from the list, and then click **Next**.
 
-    ![在 DBeaver 中选择 TiDB 作为数据库](/media/develop/dbeaver-select-database.jpg)
+    ![Select TiDB as the database in DBeaver](/media/develop/dbeaver-select-database.jpg)
 
-6. 从 TiDB Cloud 连接对话框中复制连接字符串。在 DBeaver 中，选择 **URL** 作为**连接方式**，并将连接字符串粘贴到 **URL** 字段中。
+6. Copy the connection string from the TiDB Cloud connection dialog. In DBeaver, select **URL** for **Connect by** and paste the connection string into the **URL** field.
 
-7. 在**身份验证（数据库原生）**部分，输入你的**用户名**和**密码**。示例如下：
+7. In the **Authentication (Database Native)** section, enter your **Username** and **Password**. An example is as follows:
 
-    ![配置 TiDB Cloud Serverless 的连接设置](/media/develop/dbeaver-connection-settings-serverless.jpg)
+    ![Configure connection settings for {{{ .starter }}}](/media/develop/dbeaver-connection-settings-serverless.jpg)
 
-8. 点击**测试连接**以验证与 TiDB Cloud Serverless 集群的连接。
+8. Click **Test Connection** to validate the connection to the {{{ .starter }}} cluster.
 
-    如果显示**下载驱动程序文件**对话框，点击**下载**获取驱动程序文件。
+    If the **Download driver files** dialog is displayed, click **Download** to get the driver files.
 
-    ![下载驱动程序文件](/media/develop/dbeaver-download-driver.jpg)
+    ![Download driver files](/media/develop/dbeaver-download-driver.jpg)
 
-    如果连接测试成功，将显示如下的**连接测试**对话框。点击**确定**关闭它。
+    If the connection test is successful, the **Connection test** dialog is displayed as follows. Click **OK** to close it.
 
-    ![连接测试结果](/media/develop/dbeaver-connection-test.jpg)
+    ![Connection test result](/media/develop/dbeaver-connection-test.jpg)
 
-9. 点击**完成**保存连接配置。
+9. Click **Finish** to save the connection configuration.
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1. 导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称进入其概览页面。
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
-2. 点击右上角的**连接**。此时会显示一个连接对话框。
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. 在连接对话框中，从**连接类型**下拉列表中选择**公共**，然后点击 **CA 证书**下载 CA 证书。
+3. In the connection dialog, select **Public** from the **Connection Type** drop-down list, and then click **CA cert** to download the CA certificate.
 
-    如果你尚未配置 IP 访问列表，请点击**配置 IP 访问列表**或按照[配置 IP 访问列表](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)中的步骤在首次连接之前进行配置。
+    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) to configure it before your first connection.
 
-    除了**公共**连接类型外，TiDB Cloud Dedicated 还支持**私有端点**和 **VPC 对等连接**连接类型。更多信息，请参见[连接到你的 TiDB Cloud Dedicated 集群](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)。
+    In addition to the **Public** connection type, TiDB Cloud Dedicated supports **Private Endpoint** and **VPC Peering** connection types. For more information, see [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
 
-4. 启动 DBeaver 并点击左上角的**新建数据库连接**。在**连接到数据库**对话框中，从列表中选择 **TiDB**，然后点击**下一步**。
+4. Launch DBeaver and click **New Database Connection** in the upper-left corner. In the **Connect to a database** dialog, select **TiDB** from the list, and then click **Next**.
 
-    ![在 DBeaver 中选择 TiDB 作为数据库](/media/develop/dbeaver-select-database.jpg)
+    ![Select TiDB as the database in DBeaver](/media/develop/dbeaver-select-database.jpg)
 
-5. 将适当的连接字符串复制并粘贴到 DBeaver 连接面板中。DBeaver 字段与 TiDB Cloud Dedicated 连接字符串的映射关系如下：
+5. Copy and paste the appropriate connection string into the DBeaver connection panel. The mappings between DBeaver fields and TiDB Cloud Dedicated connection string are as follows:
 
-    | DBeaver 字段 | TiDB Cloud Dedicated 连接字符串 |
+    | DBeaver field | TiDB Cloud Dedicated connection string |
     |---------------| ------------------------------- |
-    | 服务器主机    | `{host}`                        |
-    | 端口         | `{port}`                        |
-    | 用户名       | `{user}`                        |
-    | 密码         | `{password}`                    |
+    | Server Host   | `{host}`                        |
+    | Port          | `{port}`                        |
+    | Username      | `{user}`                        |
+    | Password      | `{password}`                    |
 
-    示例如下：
+    An example is as follows:
 
-    ![配置 TiDB Cloud Dedicated 的连接设置](/media/develop/dbeaver-connection-settings-dedicated.jpg)
+    ![Configure connection settings for TiDB Cloud Dedicated](/media/develop/dbeaver-connection-settings-dedicated.jpg)
 
-6. 点击**测试连接**以验证与 TiDB Cloud Dedicated 集群的连接。
+6. Click **Test Connection** to validate the connection to the TiDB Cloud Dedicated cluster.
 
-    如果显示**下载驱动程序文件**对话框，点击**下载**获取驱动程序文件。
+    If the **Download driver files** dialog is displayed, click **Download** to get the driver files.
 
-    ![下载驱动程序文件](/media/develop/dbeaver-download-driver.jpg)
+    ![Download driver files](/media/develop/dbeaver-download-driver.jpg)
 
-    如果连接测试成功，将显示如下的**连接测试**对话框。点击**确定**关闭它。
+    If the connection test is successful, the **Connection test** dialog is displayed as follows. Click **OK** to close it.
 
-    ![连接测试结果](/media/develop/dbeaver-connection-test.jpg)
+    ![Connection test result](/media/develop/dbeaver-connection-test.jpg)
 
-7. 点击**完成**保存连接配置。
+7. Click **Finish** to save the connection configuration.
 
 </div>
 <div label="TiDB Self-Managed">
 
-1. 启动 DBeaver 并点击左上角的**新建数据库连接**。在**连接到数据库**对话框中，从列表中选择 **TiDB**，然后点击**下一步**。
+1. Launch DBeaver and click **New Database Connection** in the upper-left corner. In the **Connect to a database** dialog, select **TiDB** from the list, and then click **Next**.
 
-    ![在 DBeaver 中选择 TiDB 作为数据库](/media/develop/dbeaver-select-database.jpg)
+    ![Select TiDB as the database in DBeaver](/media/develop/dbeaver-select-database.jpg)
 
-2. 配置以下连接参数：
+2. Configure the following connection parameters:
 
-    - **服务器主机**：你的 TiDB Self-Managed 集群的 IP 地址或域名。
-    - **端口**：你的 TiDB Self-Managed 集群的端口号。
-    - **用户名**：用于连接到你的 TiDB Self-Managed 集群的用户名。
-    - **密码**：该用户名的密码。
+    - **Server Host**: The IP address or domain name of your TiDB Self-Managed cluster.
+    - **Port**: The port number of your TiDB Self-Managed cluster.
+    - **Username**: The username to use to connect to your TiDB Self-Managed cluster.
+    - **Password**: The password of the username.
 
-    示例如下：
+    An example is as follows:
 
-    ![配置 TiDB Self-Managed 的连接设置](/media/develop/dbeaver-connection-settings-self-hosted.jpg)
+    ![Configure connection settings for TiDB Self-Managed](/media/develop/dbeaver-connection-settings-self-hosted.jpg)
 
-3. 点击**测试连接**以验证与 TiDB Self-Managed 集群的连接。
+3. Click **Test Connection** to validate the connection to the TiDB Self-Managed cluster.
 
-    如果显示**下载驱动程序文件**对话框，点击**下载**获取驱动程序文件。
+    If the **Download driver files** dialog is displayed, click **Download** to get the driver files.
 
-    ![下载驱动程序文件](/media/develop/dbeaver-download-driver.jpg)
+    ![Download driver files](/media/develop/dbeaver-download-driver.jpg)
 
-    如果连接测试成功，将显示如下的**连接测试**对话框。点击**确定**关闭它。
+    If the connection test is successful, the **Connection test** dialog is displayed as follows. Click **OK** to close it.
 
-    ![连接测试结果](/media/develop/dbeaver-connection-test.jpg)
+    ![Connection test result](/media/develop/dbeaver-connection-test.jpg)
 
-4. 点击**完成**保存连接配置。
+4. Click **Finish** to save the connection configuration.
 
 </div>
 </SimpleTab>
 
-## 下一步
+## Next steps
 
-- 从 [DBeaver 的文档](https://github.com/dbeaver/dbeaver/wiki)了解更多 DBeaver 的用法。
-- 通过[开发者指南](/develop/dev-guide-overview.md)中的章节学习 TiDB 应用程序开发的最佳实践，例如[插入数据](/develop/dev-guide-insert-data.md)、[更新数据](/develop/dev-guide-update-data.md)、[删除数据](/develop/dev-guide-delete-data.md)、[单表读取](/develop/dev-guide-get-data-from-single-table.md)、[事务](/develop/dev-guide-transaction-overview.md)和 [SQL 性能优化](/develop/dev-guide-optimize-sql-overview.md)。
-- 学习专业的 [TiDB 开发者课程](https://www.pingcap.com/education/)，并在通过考试后获得 [TiDB 认证](https://www.pingcap.com/education/certification/)。
+- Learn more usage of DBeaver from [the documentation of DBeaver](https://github.com/dbeaver/dbeaver/wiki).
+- Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
+- Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
 
-## 需要帮助？
+## Need help?
 
 <CustomContent platform="tidb">
 
-在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](/support.md)。
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](https://tidb.support.pingcap.com/)。
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
 
 </CustomContent>

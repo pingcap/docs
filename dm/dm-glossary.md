@@ -7,6 +7,8 @@ summary: Learn the terms used in TiDB Data Migration.
 
 This document lists the terms used in the logs, monitoring, configurations, and documentation of TiDB Data Migration (DM).
 
+For TiDB-related terms and definitions, see [TiDB glossary](/glossary.md).
+
 ## B
 
 ### Binlog

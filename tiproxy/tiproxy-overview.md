@@ -15,7 +15,7 @@ The following figure shows the architecture of TiProxy:
 
 ## Main features
 
-TiProxy provides connection migration, service discovery, and quick deployment.
+TiProxy provides connection migration, failover, service discovery, and quick deployment.
 
 ### Connection migration
 
@@ -30,13 +30,17 @@ Connection migration usually occurs in the following scenarios:
 - When a TiDB server performs scaling in, rolling upgrade, or rolling restart, TiProxy can migrate connections from the TiDB server that is about to be offline to other TiDB servers to keep the client connection alive.
 - When a TiDB server performs scaling out, TiProxy can migrate existing connections to the new TiDB server to achieve real-time load balancing without resetting the client connection pool.
 
+### Failover
+
+When a TiDB server is at risk of running out of memory (OOM) or fails to connect to PD or TiKV, TiProxy detects the issue automatically and migrates the connections to another TiDB server, thus ensuring continuous client connectivity.
+
 ### Service discovery
 
 When a TiDB server performs scaling in or scaling out, if you use a common load balancer, you need to manually update the TiDB server list. However, TiProxy can automatically discover the TiDB server list without manual intervention.
 
 ### Quick deployment
 
-TiProxy is integrated into [TiUP](https://github.com/pingcap/tiup), [TiDB Operator](https://github.com/pingcap/tidb-operator), [TiDB Dashboard](/dashboard/dashboard-intro.md), and [Grafana](/tiproxy/tiproxy-grafana.md), which reduces the deployment, operation, and management costs.
+TiProxy is integrated into [TiUP](https://github.com/pingcap/tiup), [TiDB Operator](https://github.com/pingcap/tidb-operator), [TiDB Dashboard](/dashboard/dashboard-intro.md), and [Grafana](/tiproxy/tiproxy-grafana.md), and supports built-in virtual IP management, reducing the deployment, operation, and management costs.
 
 ## User scenarios
 
@@ -44,77 +48,145 @@ TiProxy is suitable for the following scenarios:
 
 - Connection persistence: When a TiDB server performs scaling in, rolling upgrade, or rolling restart, the client connection is broken, resulting in an error. If the client does not have an idempotent error retry mechanism, you need to manually check and fix the error, which greatly increases the labor cost. TiProxy can keep the client connection, so that the client does not report an error.
 - Frequent scaling in and scaling out: The workload of an application might change periodically. To save costs, you can deploy TiDB on the cloud and automatically scale in and scale out TiDB servers according to the workload. However, scaling in might cause the client to disconnect, and scaling out might result in unbalanced load. TiProxy can keep the client connection and achieve load balancing.
+- CPU load imbalance: When background tasks consume a significant amount of CPU resources or workloads across connections vary significantly, leading to an imbalanced CPU load, TiProxy can migrate connections based on CPU usage to achieve load balancing. For more details, see [CPU-based load balancing](/tiproxy/tiproxy-load-balance.md#cpu-based-load-balancing).
+- TiDB server OOM: When a runaway query causes a TiDB server to run out of memory, TiProxy can proactively detect the OOM risk and migrate other healthy connections to a different TiDB server, thus ensuring continuous client connectivity. For more details, see [Memory-based load balancing](/tiproxy/tiproxy-load-balance.md#memory-based-load-balancing).
 
 TiProxy is not suitable for the following scenarios:
 
 - Sensitive to performance: The performance of TiProxy is lower than that of HAProxy and other load balancers, so using TiProxy requires reserving more CPU resources to maintain similar performance levels. For details, refer to [TiProxy Performance Test Report](/tiproxy/tiproxy-performance-test.md).
 - Sensitive to cost: If the TiDB cluster uses hardware load balancers, virtual IP, or the load balancer provided by Kubernetes, adding TiProxy will increase the cost. In addition, if you deploy the TiDB cluster across availability zones on the cloud, adding TiProxy will also increase the traffic cost across availability zones.
-- TiDB server failover: TiProxy can keep the client connection only when the TiDB server is offline or restarted as planned. If the TiDB server is offline unexpectedly, the connection is still broken.
+- Failover for unexpected TiDB server downtime: TiProxy can keep the client connection only when the TiDB server is offline or restarted as planned. If the TiDB server is offline unexpectedly, the connection is still broken.
 
 It is recommended that you use TiProxy for the scenarios that TiProxy is suitable for and use HAProxy or other proxies when your application is sensitive to performance.
 
 ## Installation and usage
 
-This section describes how to deploy and change TiProxy using TiUP. For how to deploy TiProxy using TiDB Operator in Kubernetes, see [TiDB Operator documentation](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tiproxy).
+This section describes how to deploy and change TiProxy using TiUP. You can either [create a new cluster with TiProxy](#create-a-cluster-with-tiproxy) or [enable TiProxy for an existing cluster](#enable-tiproxy-for-an-existing-cluster) by scaling out TiProxy.
 
-### Deploy TiProxy
+> **Note:**
+>
+> Make sure that TiUP is v1.16.1 or later.
 
-1. Before TiUP v1.15.0, you need to manually generate a self-signed certificate.
+For other deployment methods, refer to the following documents:
 
-    Generate a self-signed certificate for the TiDB instance and place the certificate on all TiDB instances to ensure that all TiDB instances have the same certificate. For detailed steps, see [Generate self-signed certificates](/generate-self-signed-certificates.md).
+- To deploy TiProxy using TiDB Operator, see the [TiDB Operator](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-tiproxy) documentation.
+- To quickly deploy TiProxy locally using TiUP, see [Deploy TiProxy](/tiup/tiup-playground.md#deploy-tiproxy).
 
-2. Configure the TiDB instances.
+### Create a cluster with TiProxy
 
-    When using TiProxy, you also need to configure the following items for the TiDB instances:
+The following steps describe how to deploy TiProxy when creating a new cluster.
 
-    - Before TiUP v1.15.0, configure the [`security.session-token-signing-cert`](/tidb-configuration-file.md#session-token-signing-cert-new-in-v640) and [`security.session-token-signing-key`](/tidb-configuration-file.md#session-token-signing-key-new-in-v640) of TiDB instances to the path of the certificate. Otherwise, the connection cannot be migrated.
-    - Configure the [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) of TiDB instances to a value greater than the longest transaction duration of the application. Otherwise, the client might disconnect when the TiDB server is offline. You can view the transaction duration through the [Transaction metrics on the TiDB monitoring dashboard](/grafana-tidb-dashboard.md#transaction). For details, see [TiProxy usage limitations](#limitations).
+1. Configure the TiDB instances.
+
+    When using TiProxy, you need to configure [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) for TiDB. This value must be at least 10 seconds greater than the duration of the longest transaction of your application, which avoids client connection interruption when the TiDB server goes offline. You can view the transaction duration through the [Transaction metrics on the TiDB monitoring dashboard](/grafana-tidb-dashboard.md#transaction). For more information, see [Limitations](#limitations).
 
     A configuration example is as follows:
 
     ```yaml
     server_configs:
       tidb:
-        security.session-token-signing-cert: "/var/sess/cert.pem"
-        security.session-token-signing-key: "/var/sess/key.pem"
-        security.ssl-ca: "/var/ssl/ca.pem"
-        security.ssl-cert: "/var/ssl/cert.pem"
-        security.ssl-key: "/var/ssl/key.pem"
-        graceful-wait-before-shutdown: 15
+        graceful-wait-before-shutdown: 30
     ```
 
-3. Configure the TiProxy instances.
+2. Configure the TiProxy instances.
 
-    To ensure the high availability of TiProxy, it is recommended to deploy at least two TiProxy instances. You can use hardware load balancers to distribute traffic to each TiProxy instance, or configure virtual IP to route the traffic to the available TiProxy instance.
+    To ensure the high availability of TiProxy, it is recommended to deploy at least two TiProxy instances and configure a virtual IP by setting [`ha.virtual-ip`](/tiproxy/tiproxy-configuration.md#virtual-ip) and [`ha.interface`](/tiproxy/tiproxy-configuration.md#interface) to route the traffic to the available TiProxy instance.
 
-    When selecting the model and number of TiProxy instances, consider the following factors:
+    Note the following:
 
-    - For the workload type and maximum QPS, see [TiProxy Performance Test Report](/tiproxy/tiproxy-performance-test.md).
-    - Because the number of TiProxy instances is less than that of TiDB servers, the network bandwidth of TiProxy is more likely to become a bottleneck than that of TiDB servers. Therefore, you also need to consider the network bandwidth. For example, in AWS, the baseline network bandwidth of the same series of EC2 is not proportional to the number of CPU cores. For details, see [Network performance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/compute-optimized-instances.html#compute-network-performance). In such cases, when the network bandwidth becomes a bottleneck, splitting the TiProxy instance into more and smaller instances can improve QPS.
+    - Select the model and number of TiProxy instances based on the workload type and maximum QPS. For details, see [TiProxy Performance Test Report](/tiproxy/tiproxy-performance-test.md).
+    - Because there are usually fewer TiProxy instances than TiDB server instances, the network bandwidth of TiProxy is more likely to become a bottleneck. For example, on AWS, the baseline network bandwidth EC2 instances in the same series is not proportional to the number of CPU cores. When network bandwidth becomes a bottleneck, you can split the TiProxy instance into more and smaller instances to increase QPS. For details, see [Network specifications](https://docs.aws.amazon.com/ec2/latest/instancetypes/co.html#co_network).
+    - It is recommended to specify the TiProxy version in the topology configuration file. This will prevent TiProxy from being upgraded automatically when you execute [`tiup cluster upgrade`](/tiup/tiup-component-cluster-upgrade.md) to upgrade the TiDB cluster, thus preventing client connections from being disconnected due to the TiProxy upgrade.
 
-    It is recommended to specify the version number of TiProxy in the topology configuration so that TiProxy will not be upgraded when you upgrade the TiDB cluster through [`tiup cluster upgrade`](/tiup/tiup-component-cluster-upgrade.md). Otherwise, the client connection might be disconnected during TiProxy upgrade.
+    For more information about the template for TiProxy, see [A simple template for the TiProxy topology](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiproxy.yaml).
 
-    To configure TiProxy configuration items, see [TiProxy configuration](/tiproxy/tiproxy-configuration.md).
+    For detailed descriptions of the configuration items in the TiDB cluster topology file, see [Topology Configuration File for TiDB Deployment Using TiUP](/tiup/tiup-cluster-topology-reference.md).
 
     A configuration example is as follows:
 
     ```yaml
     component_versions:
-      tiproxy: "v1.0.0"
+      tiproxy: "v1.2.0"
     server_configs:
       tiproxy:
-        security.server-tls.ca: "/var/ssl/ca.pem"
-        security.server-tls.cert: "/var/ssl/cert.pem"
-        security.server-tls.key: "/var/ssl/key.pem"
+        ha.virtual-ip: "10.0.1.10/24"
+        ha.interface: "eth0"
+    tiproxy_servers:
+      - host: 10.0.1.11
+        port: 6000
+        status_port: 3080
+      - host: 10.0.1.12
+        port: 6000
+        status_port: 3080
     ```
 
-4. Start the cluster.
+3. Start the cluster.
 
     To start the cluster using TiUP, see [TiUP documentation](/tiup/tiup-documentation-guide.md).
 
+4. Connect to TiProxy.
+
+    After the cluster is deployed, the TiDB server port and TiProxy port will be exposed at the same time. The client should connect to the TiProxy port instead of directly connecting to the TiDB server.
+
+### Enable TiProxy for an existing cluster
+
+For clusters that do not have TiProxy deployed, you can enable TiProxy by scaling out TiProxy instances.
+
+1. Configure the TiProxy instance.
+
+    Configure TiProxy in a separate topology file, such as `tiproxy.toml`:
+
+    ```yaml
+    component_versions:
+      tiproxy: "v1.2.0"
+    server_configs:
+      tiproxy:
+        ha.virtual-ip: "10.0.1.10/24"
+        ha.interface: "eth0"
+    tiproxy_servers:
+      - host: 10.0.1.11
+        deploy_dir: "/tiproxy-deploy"
+        port: 6000
+        status_port: 3080
+      - host: 10.0.1.12
+        deploy_dir: "/tiproxy-deploy"
+        port: 6000
+        status_port: 3080
+    ```
+
+2. Scale out TiProxy.
+
+    Use the [`tiup cluster scale-out`](/tiup/tiup-component-cluster-scale-out.md) command to scale out the TiProxy instances. For example:
+
+    ```shell
+    tiup cluster scale-out <cluster-name> tiproxy.toml
+    ```
+
+    When you scale out TiProxy, TiUP automatically configures a self-signed certificate [`security.session-token-signing-cert`](/tidb-configuration-file.md#session-token-signing-cert-new-in-v640) and [`security.session-token-signing-key`](/tidb-configuration-file.md#session-token-signing-key-new-in-v640) for TiDB. The certificate is used for connection migration.
+
+3. Modify the TiDB configuration.
+
+   When using TiProxy, you need to configure [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) for TiDB. This value must be at least 10 seconds greater than the duration of the longest transaction of your application to avoid client connection interruption when the TiDB server goes offline. You can view the transaction duration through the [Transaction metrics on the TiDB monitoring dashboard](/grafana-tidb-dashboard.md#transaction). For more information, see [Limitations](#limitations).
+
+   A configuration example is as follows:
+
+    ```yaml
+    server_configs:
+      tidb:
+        graceful-wait-before-shutdown: 30
+    ```
+
+4. Reload TiDB configuration.
+
+    Because TiDB is configured with a self-signed certificate and `graceful-wait-before-shutdown`, you need to use the [`tiup cluster reload`](/tiup/tiup-component-cluster-reload.md) command to reload the configuration for them to take effect. Note that after reloading the configuration, TiDB will perform a rolling restart, and the client connection will be disconnected.
+
+    ```shell
+    tiup cluster reload <cluster-name> -R tidb
+    ```
+
 5. Connect to TiProxy.
 
-    After the cluster is deployed, the cluster exposes the ports of TiDB server and TiProxy at the same time. The client should connect to the port of TiProxy instead of the port of TiDB server.
+    After you enable TiProxy, the client should connect to the TiProxy port instead of the TiDB server port.
 
 ### Modify TiProxy configuration
 
@@ -131,6 +203,10 @@ If you need to upgrade TiProxy, add [`--tiproxy-version`](/tiup/tiup-component-c
 ```shell
 tiup cluster upgrade <cluster-name> <version> --tiproxy-version <tiproxy-version>
 ```
+
+> **Note:**
+>
+> This command also upgrades and restarts the TiDB cluster, even if the cluster version does not change.
 
 ### Restart the TiDB cluster
 
@@ -172,10 +248,10 @@ TiProxy cannot keep the client connection in the following scenarios:
 - TiProxy performs scaling in, upgrade, or restart. Once TiProxy is offline, the client connection is broken.
 - TiDB actively disconnects the connection. For example, when a session does not send a request for a period of time longer than `wait_timeout`, TiDB actively disconnects the connection, and TiProxy also disconnects the client connection.
 
-TiProxy cannot migrate connections in the following scenarios, and thus cannot keep the client connection or achieve load balancing:
+TiProxy cannot migrate connections in the following scenarios, and thus cause the client connection to be interrupted or the load balancing to fail:
 
-- The duration of a single statement or a single transaction exceeds the [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) configured on the TiDB server.
-- The session uses the cursor to read data, and the cursor is not closed or the data is not read within the [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) configured on the TiDB server.
+- A long-running single statement or single transaction: the execution time exceeds the value of the [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) configured in the TiDB server minus 10 seconds.
+- Using cursors and not completing in time: the session uses a cursor to read data, but does not complete data reading or close the cursor after the value of [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) configured in TiDB server minus 10 seconds.
 - The session creates a [local temporary table](/temporary-tables.md#local-temporary-tables).
 - The session holds a [user-level lock](/functions-and-operators/locking-functions.md).
 - The session holds a [table lock](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md).

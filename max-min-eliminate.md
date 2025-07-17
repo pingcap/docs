@@ -1,25 +1,25 @@
 ---
-title: 消除 Max/Min
-summary: 介绍消除 Max/Min 函数的规则。
+title: Eliminate Max/Min
+summary: Introduce the rules for eliminating Max/Min functions.
 ---
 
-# 消除 Max/Min
+# Eliminate Max/Min
 
-当 SQL 语句中包含 `max`/`min` 函数时，查询优化器会尝试通过应用 `max`/`min` 优化规则将 `max`/`min` 聚合函数转换为 TopN 算子。通过这种方式，TiDB 可以通过索引更高效地执行查询。
+When a SQL statement contains `max`/`min` functions, the query optimizer tries to convert the `max`/`min` aggregate functions to the TopN operator by applying the `max`/`min` optimization rule. In this way, TiDB can perform the query more efficiently through indexes.
 
-根据 `select` 语句中 `max`/`min` 函数的数量，这个优化规则分为以下两种类型：
+This optimization rule is divided into the following two types according to the number of `max`/`min` functions in the `select` statement:
 
-- [只有一个 `max`/`min` 函数的语句](#one-maxmin-function)
-- [有多个 `max`/`min` 函数的语句](#multiple-maxmin-functions)
+- [The statement with only one `max`/`min` function](#one-maxmin-function)
+- [The statement with multiple `max`/`min` functions](#multiple-maxmin-functions)
 
-## 一个 `max`/`min` 函数
+## One `max`/`min` function
 
-当 SQL 语句满足以下条件时，会应用此规则：
+When a SQL statement meets the following conditions, this rule is applied:
 
-- 语句只包含一个聚合函数，该函数是 `max` 或 `min`。
-- 该聚合函数没有相关的 `group by` 子句。
+- The statement contains only one aggregate function, which is `max` or `min`.
+- The aggregate function has no related `group by` clause.
 
-例如：
+For example:
 
 {{< copyable "sql" >}}
 
@@ -27,7 +27,7 @@ summary: 介绍消除 Max/Min 函数的规则。
 select max(a) from t
 ```
 
-优化规则将语句重写如下：
+The optimization rule rewrites the statement as follows:
 
 {{< copyable "sql" >}}
 
@@ -35,9 +35,9 @@ select max(a) from t
 select max(a) from (select a from t where a is not null order by a desc limit 1) t
 ```
 
-当列 `a` 有索引，或者列 `a` 是某个复合索引的前缀时，在索引的帮助下，新的 SQL 语句只需扫描一行数据就能找到最大值或最小值。这种优化避免了全表扫描。
+When column `a` has an index, or when column `a` is the prefix of some composite index, with the help of index, the new SQL statement can find the maximum or minimum value by scanning only one row of data. This optimization avoids full table scan.
 
-示例语句的执行计划如下：
+The example statement has the following execution plan:
 
 ```sql
 mysql> explain select max(a) from t;
@@ -53,15 +53,15 @@ mysql> explain select max(a) from t;
 5 rows in set (0.00 sec)
 ```
 
-## 多个 `max`/`min` 函数
+## Multiple `max`/`min` functions
 
-当 SQL 语句满足以下条件时，会应用此规则：
+When a SQL statement meets the following conditions, this rule is applied:
 
-- 语句包含多个聚合函数，这些函数都是 `max` 或 `min` 函数。
-- 所有聚合函数都没有相关的 `group by` 子句。
-- 每个 `max`/`min` 函数中的列都有保序的索引。
+- The statement contains multiple aggregate functions, which are all `max` or `min` functions.
+- None of the aggregate functions has a related `group by` clause.
+- The columns in each `max`/`min` function has indexes to preserve the order.
 
-例如：
+For example:
 
 {{< copyable "sql" >}}
 
@@ -69,7 +69,7 @@ mysql> explain select max(a) from t;
 select max(a) - min(a) from t
 ```
 
-优化规则首先检查列 `a` 是否有保序的索引。如果有，SQL 语句会被重写为两个子查询的笛卡尔积：
+The optimization rule first checks whether column `a` has an index to preserve its order. If yes, the SQL statement is rewritten as the Cartesian product of two subqueries:
 
 {{< copyable "sql" >}}
 
@@ -80,7 +80,7 @@ from
     (select min(a) as min_a from t) t2
 ```
 
-通过重写，优化器可以分别对两个子查询应用只有一个 `max`/`min` 函数的语句规则。然后语句被重写如下：
+Through the rewrite, the optimizer can apply the rule for statements with only one `max`/`min` function to the two subqueries respectively. The statement is then rewritten as follows:
 
 {{< copyable "sql" >}}
 
@@ -91,9 +91,9 @@ from
     (select min(a) as min_a from (select a from t where a is not null order by a asc limit 1) t) t2
 ```
 
-同样，如果列 `a` 有保序的索引，优化后的执行只需扫描两行数据而不是整个表。但是，如果列 `a` 没有保序的索引，这个规则会导致两次全表扫描，而不重写的话只需要一次全表扫描。因此，在这种情况下不会应用此规则。
+Similarly, if column `a` has an index to preserve its order, the optimized execution only scans two rows of data instead of the whole table. However, if column `a` does not have an index to preserve its order, this rule results in two full table scans, but the execution only needs one full table scan if it is not rewritten. Therefore, in such cases, this rule is not applied.
 
-最终的执行计划如下：
+The final execution plan is as follows:
 
 ```sql
 mysql> explain select max(a)-min(a) from t;

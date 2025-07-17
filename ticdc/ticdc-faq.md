@@ -57,7 +57,7 @@ The expected output is as follows:
 
 ## How to verify if TiCDC has replicated all updates after upstream stops updating?
 
-After the upstream TiDB cluster stops updating, you can verify if replication is complete by comparing the latest [TSO](/glossary.md#tso) timestamp of the upstream TiDB cluster with the replication progress in TiCDC. If the TiCDC replication progress timestamp is greater than or equal to the upstream TiDB cluster's TSO, then all updates have been replicated. To verify replication completeness, perform the following steps:
+After the upstream TiDB cluster stops updating, you can verify if replication is complete by comparing the latest [TSO](/glossary.md#timestamp-oracle-tso) timestamp of the upstream TiDB cluster with the replication progress in TiCDC. If the TiCDC replication progress timestamp is greater than or equal to the upstream TiDB cluster's TSO, then all updates have been replicated. To verify replication completeness, perform the following steps:
 
 1. Get the latest TSO timestamp from the upstream TiDB cluster.
 
@@ -345,7 +345,7 @@ mysql root@127.0.0.1:test> show create table test;
 | Table | Create Table                                                                     |
 +-------+----------------------------------------------------------------------------------+
 | test  | CREATE TABLE `test` (                                                            |
-|       |   `id` int(11) NOT NULL,                                                         |
+|       |   `id` int NOT NULL,                                                         |
 |       |   `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, |
 |       |   PRIMARY KEY (`id`)                                                             |
 |       | ) ENGINE=InnoDB DEFAULT CHARSET=latin1                                           |

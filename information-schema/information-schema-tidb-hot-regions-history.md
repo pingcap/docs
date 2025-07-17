@@ -1,25 +1,25 @@
 ---
 title: TIDB_HOT_REGIONS_HISTORY
-summary: "了解 `TIDB_HOT_REGIONS_HISTORY` information_schema 表。"
+summary: Learn the `TIDB_HOT_REGIONS_HISTORY` information_schema table.
 ---
 
 # TIDB_HOT_REGIONS_HISTORY
 
-`TIDB_HOT_REGIONS_HISTORY` 表提供了由 PD 定期在本地记录的热点 Region 历史信息。
+The `TIDB_HOT_REGIONS_HISTORY` table provides information about history hot Regions that are periodically recorded locally by PD.
 
-> **注意：**
+> **Note:**
 >
-> 此表在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群中不可用。
+> This table is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 <CustomContent platform="tidb">
 
-你可以通过配置 [`hot-regions-write-interval`](/pd-configuration-file.md#hot-regions-write-interval-new-in-v540) 来指定记录间隔。默认值为 10 分钟。你可以通过配置 [`hot-regions-reserved-days`](/pd-configuration-file.md#hot-regions-reserved-days-new-in-v540) 来指定保留热点 Region 历史信息的时间。默认值为 7 天。详情请参见 [PD 配置文件描述](/pd-configuration-file.md#hot-regions-write-interval-new-in-v540)。
+You can specify the record interval by configuring [`hot-regions-write-interval`](/pd-configuration-file.md#hot-regions-write-interval-new-in-v540). The default value is 10 minutes. You can specify the period for reserving history information about hot Regions by configuring [`hot-regions-reserved-days`](/pd-configuration-file.md#hot-regions-reserved-days-new-in-v540). The default value is 7 days. See [PD configuration file description](/pd-configuration-file.md#hot-regions-write-interval-new-in-v540) for details.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-默认情况下，记录间隔为 10 分钟，保留热点 Region 历史信息的时间为 7 天。
+By default, the record interval is 10 minutes, and the period for reserving history information about hot Regions is 7 days.
 
 </CustomContent>
 
@@ -54,32 +54,32 @@ DESC tidb_hot_regions_history;
 16 rows in set (0.00 sec)
 ```
 
-`TIDB_HOT_REGIONS_HISTORY` 表中的字段说明如下：
+The fields in the `TIDB_HOT_REGIONS_HISTORY` table are described as follows:
 
-* UPDATE_TIME：热点 Region 的更新时间。
-* DB_NAME：热点 Region 所在对象的数据库名称。
-* TABLE_ID：热点 Region 所在表的 ID。
-* TABLE_NAME：热点 Region 所在表的名称。
-* INDEX_NAME：热点 Region 所在索引的名称。
-* INDEX_ID：热点 Region 所在索引的 ID。
-* REGION_ID：热点 Region 的 ID。
-* STORE_ID：热点 Region 所在 store 的 ID。
-* PEER_ID：热点 Region 对应的 Peer ID。
-* IS_LEARNER：该 PEER 是否为 LEARNER。
-* IS_LEADER：该 PEER 是否为 LEADER。
-* TYPE：热点 Region 的类型。
-* HOT_DEGREE：热点 Region 的热度。
-* FLOW_BYTES：Region 中写入和读取的字节数。
-* KEY_RATE：Region 中写入和读取的键数量。
-* QUERY_RATE：Region 中写入和读取的查询数量。
+* UPDATE_TIME: The update time of the hot Region.
+* DB_NAME: The database name of the object in which the hot Region is located.
+* TABLE_ID: The ID of the table in which the hot Region is located.
+* TABLE_NAME: The name of the table in which the hot Region is located.
+* INDEX_NAME: The name of the index in which the hot Region is located.
+* INDEX_ID: The ID of the index in which the hot Region is located.
+* REGION_ID: The ID of the hot Region.
+* STORE_ID: The ID of the store in which the hot Region is located.
+* PEER_ID: The ID of the Peer corresponding to the hot Region.
+* IS_LEARNER: Whether the PEER is the LEARNER.
+* IS_LEADER: Whether the PEER is the LEADER.
+* TYPE: The type of the hot Region.
+* HOT_DEGREE: The hot degree of the hot Region.
+* FLOW_BYTES: The number of bytes written and read in the Region.
+* KEY_RATE: The number of keys written and read in the Region.
+* QUERY_RATE: The number of queries written and read in the Region.
 
-> **注意：**
+> **Note:**
 >
-> `UPDATE_TIME`、`REGION_ID`、`STORE_ID`、`PEER_ID`、`IS_LEARNER`、`IS_LEADER` 和 `TYPE` 字段会下推到 PD 服务器执行。为了减少使用该表的开销，必须指定搜索的时间范围，并尽可能多地指定条件。例如，`select * from tidb_hot_regions_history where store_id = 11 and update_time > '2020-05-18 20:40:00' and update_time < '2020-05-18 21:40:00' and type='write'`。
+> `UPDATE_TIME`, `REGION_ID`, `STORE_ID`, `PEER_ID`, `IS_LEARNER`, `IS_LEADER` and `TYPE` fields are pushed down to the PD servers for execution. To reduce the overhead of using the table, you must specify the time range for the search, and specify as many conditions as possible. For example, `select * from tidb_hot_regions_history where store_id = 11 and update_time > '2020-05-18 20:40:00' and update_time < '2020-05-18 21:40:00' and type='write'`.
 
-## 常见使用场景
+## Common user scenarios
 
-* 查询特定时间段内的热点 Region。将 `update_time` 替换为你的实际时间。
+* Query hot Regions within a specific period of time. Replace `update_time` with your actual time.
 
     {{< copyable "sql" >}}
 
@@ -87,11 +87,11 @@ DESC tidb_hot_regions_history;
     SELECT * FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00';
     ```
 
-    > **注意：**
+    > **Note:**
     >
-    > `UPDATE_TIME` 也支持 Unix 时间戳。例如，`update_time >TIMESTAMP('2021-08-18 21:40:00')` 或 `update_time > FROM_UNIXTIME(1629294000.000)`。
+    > `UPDATE_TIME` also supports Unix timestamps. For example, `update_time >TIMESTAMP('2021-08-18 21:40:00')` or `update_time > FROM_UNIXTIME(1629294000.000)`.
 
-* 查询特定时间段内某个表的热点 Region。将 `update_time` 和 `table_name` 替换为你的实际值。
+* Query hot Regions in a table within a specific period of time. Replace `update_time` and `table_name` with your actual values.
 
     {{< copyable "sql" >}}
 
@@ -99,7 +99,7 @@ DESC tidb_hot_regions_history;
     SELECT * FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00' and TABLE_NAME = 'table_name';
     ```
 
-* 查询特定时间段内热点 Region 的分布情况。将 `update_time` 和 `table_name` 替换为你的实际值。
+* Query the distribution of hot Regions within a specific period of time. Replace `update_time` and `table_name` with your actual values.
 
     {{< copyable "sql" >}}
 
@@ -107,7 +107,7 @@ DESC tidb_hot_regions_history;
     SELECT count(region_id) cnt, store_id FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00' and table_name = 'table_name' GROUP BY STORE_ID ORDER BY cnt DESC;
     ```
 
-* 查询特定时间段内热点 Leader Region 的分布情况。将 `update_time` 和 `table_name` 替换为你的实际值。
+* Query the distribution of hot Leader Regions within a specific period of time. Replace `update_time` and `table_name` with your actual values.
 
     {{< copyable "sql" >}}
 
@@ -115,7 +115,7 @@ DESC tidb_hot_regions_history;
     SELECT count(region_id) cnt, store_id FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00' and table_name = 'table_name' and is_leader=1 GROUP BY STORE_ID ORDER BY cnt DESC;
     ```
 
-* 查询特定时间段内热点 Index Region 的分布情况。将 `update_time` 和 `table_name` 替换为你的实际值。
+* Query the distribution of hot Index Regions within a specific period of time. Replace `update_time` and `table_name` with your actual values.
 
     {{< copyable "sql" >}}
 
@@ -123,7 +123,7 @@ DESC tidb_hot_regions_history;
     SELECT count(region_id) cnt, index_name, store_id FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00' and table_name = 'table_name' group by index_name, store_id order by index_name,cnt desc;
     ```
 
-* 查询特定时间段内热点 Index Leader Region 的分布情况。将 `update_time` 和 `table_name` 替换为你的实际值。
+* Query the distribution of hot Index Leader Regions within a specific period of time. Replace `update_time` and `table_name` with your actual values.
 
     {{< copyable "sql" >}}
 

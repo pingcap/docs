@@ -78,7 +78,7 @@ If you do not enable [dynamic pruning mode](/partitioned-table.md#dynamic-prunin
 
 - TiDB v6.0 and earlier: Dynamic pruning is disabled by default. The setting of dynamic pruning after an upgrade inherits that of the previous version. That is, dynamic pruning will not be enabled (or disabled) automatically after an upgrade.
 
-    After an upgrade, to enable dynamic pruning, set `tidb_partition_prune_mode` to `dynamic` and manually update GlobalStats of partitioned tables. For details, see [Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode).
+    After an upgrade, to enable dynamic pruning, set `tidb_partition_prune_mode` to `dynamic` and manually update global statistics of partitioned tables. For details, see [Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode).
 
 ## From v5.x or v6.0 to v6.2
 
@@ -121,7 +121,11 @@ After upgrading TiFlash to v7.3 and configuring TiFlash to use V3 DTFiles, if yo
 
 ## From v6.x or v7.x to v7.4 or a later version
 
-Starting from v7.4, to reduce the read and write amplification generated during data compaction, TiFlash optimizes the data compaction logic of PageStorage V3, which leads to changes to some of the underlying storage file names. Therefore, after the upgrade to v7.4 or a later version, in-place downgrading to the original version is not supported.
+Starting from v7.4, to reduce the read and write amplification generated during data compaction, TiFlash optimizes the data compaction logic of PageStorage V3, which leads to changes to some of the underlying storage file names. Therefore, after TiFlash is upgraded to v7.4 or a later version, in-place downgrading to the original version is not supported.
+
+## From v7.x to v8.4 or a later version
+
+Starting from v8.4, the underlying storage format of TiFlash is updated to support [vector search](/vector-search/vector-search-overview.md). Therefore, after TiFlash is upgraded to v8.4 or a later version, in-place downgrading to the original version is not supported.
 
 **Workaround for downgrading TiFlash in testing or other special scenarios**
 

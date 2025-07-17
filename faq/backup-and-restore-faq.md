@@ -109,13 +109,13 @@ To address this problem, delete the current task using `br log stop`, and then c
 
 ## Feature compatibility issues
 
-### Why does data restored using br command-line tool cannot be replicated to the upstream cluster of TiCDC or Drainer?
+### Why does data restored using br command-line tool cannot be replicated to the upstream cluster of TiCDC?
 
 + **The data restored using BR cannot be replicated to the downstream**. This is because BR directly imports SST files but the downstream cluster currently cannot obtain these files from the upstream.
 
-+ Before v4.0.3, DDL jobs generated during the restore might cause unexpected DDL executions in TiCDC/Drainer. Therefore, if you need to perform restore on the upstream cluster of TiCDC/Drainer, add all tables restored using br command-line tool to the TiCDC/Drainer block list.
++ Before v4.0.3, DDL jobs generated during the restore might cause unexpected DDL executions in TiCDC. Therefore, if you need to perform restore on the upstream cluster of TiCDC, add all tables restored using br command-line tool to the TiCDC block list.
 
-You can use [`filter.rules`](https://github.com/pingcap/tiflow/blob/7c3c2336f98153326912f3cf6ea2fbb7bcc4a20c/cmd/changefeed.toml#L16) to configure the block list for TiCDC and use [`syncer.ignore-table`](/tidb-binlog/tidb-binlog-configuration-file.md#ignore-table) to configure the block list for Drainer.
+You can use [`filter.rules`](https://github.com/pingcap/tiflow/blob/7c3c2336f98153326912f3cf6ea2fbb7bcc4a20c/cmd/changefeed.toml#L16) to configure the block list for TiCDC.
 
 ### Why is `new_collation_enabled` mismatch reported during restore?
 
@@ -144,7 +144,7 @@ For example, you might encounter the `Code: 22(invalid argument)` error when bac
 
 This error might occur when the capacity of the cluster to restore is insufficient. You can further confirm the cause by checking the monitoring metrics of this cluster or the TiKV log.
 
-To handle this issue, you can try to scale out the cluster resources, reduce the concurrency during restore, and enable the `RATE_LIMIT` option.
+To handle this issue, you can try to scale out the cluster resources, reduce the value of `tikv-max-restore-concurrency` for the restore, and enable the `ratelimit` option.
 
 ### What should I do if the restore fails with the error message `the entry too large, the max entry size is 6291456, the size of data is 7690800`?
 
@@ -275,7 +275,7 @@ Note that even if you configures [table filter](/table-filter.md#syntax), **BR d
 
 - Statistics tables (`mysql.stat_*`). But statistics can be restored. See [Back up statistics](/br/br-snapshot-manual.md#back-up-statistics).
 - System variable tables (`mysql.tidb`, `mysql.global_variables`)
-- [Other system tables](https://github.com/pingcap/tidb/blob/release-8.1/br/pkg/restore/systable_restore.go#L31)
+- [Other system tables](https://github.com/pingcap/tidb/blob/release-8.5/br/pkg/restore/snap_client/systable_restore.go#L31)
 
 ### How to deal with the error of `cannot find rewrite rule` during restoration?
 

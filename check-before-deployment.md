@@ -23,8 +23,6 @@ Take the `/dev/nvme0n1` data disk as an example:
 
 1. View the data disk.
 
-    {{< copyable "shell-root" >}}
-
     ```bash
     fdisk -l
     ```
@@ -34,8 +32,6 @@ Take the `/dev/nvme0n1` data disk as an example:
     ```
 
 2. Create the partition.
-
-    {{< copyable "shell-root" >}}
 
     ```bash
     parted -s -a optimal /dev/nvme0n1 mklabel gpt -- mkpart primary ext4 1 -1
@@ -54,8 +50,6 @@ Take the `/dev/nvme0n1` data disk as an example:
 
 3. Format the data disk to the ext4 filesystem.
 
-    {{< copyable "shell-root" >}}
-
     ```bash
     mkfs.ext4 /dev/nvme0n1p1
     ```
@@ -63,8 +57,6 @@ Take the `/dev/nvme0n1` data disk as an example:
 4. View the partition UUID of the data disk.
 
     In this example, the UUID of nvme0n1p1 is `c51eb23b-195c-4061-92a9-3fad812cc12f`.
-
-    {{< copyable "shell-root" >}}
 
     ```bash
     lsblk -f
@@ -83,8 +75,6 @@ Take the `/dev/nvme0n1` data disk as an example:
 
 5. Edit the `/etc/fstab` file and add the `nodelalloc` mount options.
 
-    {{< copyable "shell-root" >}}
-
     ```bash
     vi /etc/fstab
     ```
@@ -95,8 +85,6 @@ Take the `/dev/nvme0n1` data disk as an example:
 
 6. Mount the data disk.
 
-    {{< copyable "shell-root" >}}
-
     ```bash
     mkdir /data1 && \
     systemctl daemon-reload && \
@@ -104,8 +92,6 @@ Take the `/dev/nvme0n1` data disk as an example:
     ```
 
 7. Check using the following command.
-
-    {{< copyable "shell-root" >}}
 
     ```bash
     mount -t ext4
@@ -152,7 +138,7 @@ Some operations in TiDB require writing temporary files to the server, so it is 
     When the variable [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is set to `ON` (the default value in v6.5.0 and later versions), `Fast Online DDL` is enabled, and some DDL operations need to read and write temporary files in filesystems. The location is defined by the configuration item [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630). You need to ensure that the user that runs TiDB has read and write permissions for that directory of the operating system. The default directory `/tmp/tidb` uses tmpfs (temporary file system). It is recommended to explicitly specify a disk directory. The following uses `/data/tidb-deploy/tempdir` as an example:
 
     > **Note:**
-    > 
+    >
     > If DDL operations on large objects exist in your application, it is highly recommended to configure an independent large file system for [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630).
 
     ```shell
@@ -179,8 +165,6 @@ This section describes how to stop and disable the firewall service of a target 
 
 1. Check the firewall status. The following example uses CentOS Linux release 7.7.1908 (Core):
 
-    {{< copyable "shell-regular" >}}
-
     ```shell
     sudo firewall-cmd --state
     sudo systemctl status firewalld.service
@@ -188,23 +172,17 @@ This section describes how to stop and disable the firewall service of a target 
 
 2. Stop the firewall service:
 
-    {{< copyable "shell-regular" >}}
-
     ```bash
     sudo systemctl stop firewalld.service
     ```
 
 3. Disable automatic startup of the firewall service:
 
-    {{< copyable "shell-regular" >}}
-
     ```bash
     sudo systemctl disable firewalld.service
     ```
 
 4. Check the firewall status:
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     sudo systemctl status firewalld.service
@@ -307,8 +285,6 @@ To check whether the NTP service is installed and whether it synchronizes with t
 
 1. Run the following command. If it returns `running`, then the NTP service is running.
 
-    {{< copyable "shell-regular" >}}
-
     ```bash
     sudo systemctl status ntpd.service
     ```
@@ -320,8 +296,6 @@ To check whether the NTP service is installed and whether it synchronizes with t
     ```
 
     - If it returns `Unit ntpd.service could not be found.`, then try the following command to see whether your system is configured to use `chronyd` instead of `ntpd` to perform clock synchronization with NTP:
-
-        {{< copyable "shell-regular" >}}
 
         ```bash
         sudo systemctl status chronyd.service
@@ -342,8 +316,6 @@ To check whether the NTP service is installed and whether it synchronizes with t
     > **Note:**
     >
     > For the Ubuntu system, you need to install the `ntpstat` package.
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     ntpstat
@@ -374,8 +346,6 @@ To check whether the NTP service is installed and whether it synchronizes with t
     > **Note:**
     >
     > This only applies to systems that use Chrony instead of NTPd.
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     chronyc tracking
@@ -415,8 +385,6 @@ To check whether the NTP service is installed and whether it synchronizes with t
 
 To make the NTP service start synchronizing as soon as possible, run the following command. Replace `pool.ntp.org` with your NTP server.
 
-{{< copyable "shell-regular" >}}
-
 ```bash
 sudo systemctl stop ntpd.service && \
 sudo ntpdate pool.ntp.org && \
@@ -424,8 +392,6 @@ sudo systemctl start ntpd.service
 ```
 
 To install the NTP service manually on the CentOS 7 system, run the following command:
-
-{{< copyable "shell-regular" >}}
 
 ```bash
 sudo yum install ntp ntpdate && \
@@ -448,8 +414,6 @@ For TiDB in the production environment, it is recommended to optimize the operat
 Take the following steps to check the current operating system configuration and configure optimal parameters:
 
 1. Execute the following command to see whether THP is enabled or disabled:
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     cat /sys/kernel/mm/transparent_hugepage/enabled
@@ -497,8 +461,6 @@ Take the following steps to check the current operating system configuration and
 
 3. Execute the following command to see the `ID_SERIAL` of the disk:
 
-    {{< copyable "shell-regular" >}}
-
     ```bash
     udevadm info --name=/dev/sdb | grep ID_SERIAL
     ```
@@ -514,8 +476,6 @@ Take the following steps to check the current operating system configuration and
     > - If your device uses the `noop` or `none` Scheduler, you do not need to record the `ID_SERIAL` or configure udev rules or the tuned profile.
 
 4. Execute the following command to see the power policy of the cpufreq module:
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     cpupower frequency-info --policy
@@ -536,8 +496,6 @@ Take the following steps to check the current operating system configuration and
     + Method one: Use tuned (Recommended)
 
         1. Execute the `tuned-adm list` command to see the tuned profile of the current operating system:
-
-            {{< copyable "shell-regular" >}}
 
             ```bash
             tuned-adm list
@@ -561,8 +519,6 @@ Take the following steps to check the current operating system configuration and
             The output `Current active profile: balanced` means that the tuned profile of the current operating system is `balanced`. It is recommended to optimize the configuration of the operating system based on the current profile.
 
         2. Create a new tuned profile:
-
-            {{< copyable "shell-regular" >}}
 
             ```bash
             mkdir /etc/tuned/balanced-tidb-optimal/
@@ -592,8 +548,6 @@ Take the following steps to check the current operating system configuration and
             >
             > If your device uses the `noop` or `none` I/O Scheduler, skip this step. No Scheduler configuration is needed in the tuned profile.
 
-            {{< copyable "shell-regular" >}}
-
             ```bash
             tuned-adm profile balanced-tidb-optimal
             ```
@@ -606,8 +560,6 @@ Take the following steps to check the current operating system configuration and
             >
             > Install the `grubby` package first before you execute `grubby`.
 
-            {{< copyable "shell-regular" >}}
-
             ```bash
             grubby --default-kernel
             ```
@@ -618,19 +570,15 @@ Take the following steps to check the current operating system configuration and
 
         2. Execute `grubby --update-kernel` to modify the kernel configuration:
 
-            {{< copyable "shell-regular" >}}
-
             ```bash
             grubby --args="transparent_hugepage=never" --update-kernel `grubby --default-kernel`
             ```
 
             > **Note:**
             >
-            > You can also specify the actual version number after `--update-kernel`, for example, `--update-kernel /boot/vmlinuz-3.10.0-957.el7.x86_64`.
+            > You can also specify the actual version number after `--update-kernel`, for example, `--update-kernel /boot/vmlinuz-3.10.0-957.el7.x86_64` or `ALL`.
 
         3. Execute `grubby --info` to see the modified default kernel configuration:
-
-            {{< copyable "shell-regular" >}}
 
             ```bash
             grubby --info /boot/vmlinuz-3.10.0-957.el7.x86_64
@@ -651,16 +599,12 @@ Take the following steps to check the current operating system configuration and
 
         4. Modify the current kernel configuration to immediately disable THP:
 
-            {{< copyable "shell-regular" >}}
-
             ```bash
             echo never > /sys/kernel/mm/transparent_hugepage/enabled
             echo never > /sys/kernel/mm/transparent_hugepage/defrag
             ```
 
         5. Configure the I/O Scheduler in the udev script:
-
-            {{< copyable "shell-regular" >}}
 
             ```bash
             vi /etc/udev/rules.d/60-tidb-schedulers.rules
@@ -678,16 +622,12 @@ Take the following steps to check the current operating system configuration and
             >
             > If your device uses the `noop` or `none` I/O Scheduler, skip this step. No udev rules configuration is needed.
 
-            {{< copyable "shell-regular" >}}
-
             ```bash
             udevadm control --reload-rules
             udevadm trigger --type=devices --action=change
             ```
 
         7. Create a service to configure the CPU power policy:
-
-            {{< copyable "shell-regular" >}}
 
             ```bash
             cat  >> /etc/systemd/system/cpupower.service << EOF
@@ -703,8 +643,6 @@ Take the following steps to check the current operating system configuration and
 
         8. Apply the CPU power policy configuration service:
 
-            {{< copyable "shell-regular" >}}
-
             ```bash
             systemctl daemon-reload
             systemctl enable cpupower.service
@@ -712,8 +650,6 @@ Take the following steps to check the current operating system configuration and
             ```
 
 6. Execute the following command to verify the THP status:
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     cat /sys/kernel/mm/transparent_hugepage/enabled
@@ -724,8 +660,6 @@ Take the following steps to check the current operating system configuration and
     ```
 
 7. Execute the following command to verify the I/O Scheduler of the disk where the data directory is located:
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     cat /sys/block/sd[bc]/queue/scheduler
@@ -738,8 +672,6 @@ Take the following steps to check the current operating system configuration and
 
 8. Execute the following command to see the power policy of the cpufreq module:
 
-    {{< copyable "shell-regular" >}}
-
     ```bash
     cpupower frequency-info --policy
       ```
@@ -751,8 +683,6 @@ Take the following steps to check the current operating system configuration and
     ```
 
 9. Execute the following commands to modify the `sysctl` parameters:
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     echo "fs.file-max = 1000000">> /etc/sysctl.conf
@@ -776,14 +706,14 @@ Take the following steps to check the current operating system configuration and
 
 10. Execute the following command to configure the user's `limits.conf` file:
 
-    {{< copyable "shell-regular" >}}
-
     ```bash
     cat << EOF >>/etc/security/limits.conf
-    tidb           soft    nofile          1000000
-    tidb           hard    nofile          1000000
+    tidb           soft    nofile         1000000
+    tidb           hard    nofile         1000000
     tidb           soft    stack          32768
     tidb           hard    stack          32768
+    tidb           soft    core           unlimited
+    tidb           hard    core           unlimited
     EOF
     ```
 
@@ -793,16 +723,12 @@ This section describes how to manually configure the SSH mutual trust and sudo w
 
 1. Log in to the target machine respectively using the `root` user account, create the `tidb` user and set the login password.
 
-    {{< copyable "shell-root" >}}
-
     ```bash
     useradd tidb && \
     passwd tidb
     ```
 
 2. To configure sudo without password, run the following command, and add `tidb ALL=(ALL) NOPASSWD: ALL` to the end of the file:
-
-    {{< copyable "shell-root" >}}
 
     ```bash
     visudo
@@ -814,16 +740,12 @@ This section describes how to manually configure the SSH mutual trust and sudo w
 
 3. Use the `tidb` user to log in to the control machine, and run the following command. Replace `10.0.1.1` with the IP of your target machine, and enter the `tidb` user password of the target machine as prompted. After the command is executed, SSH mutual trust is already created. This applies to other machines as well. Newly created `tidb` users do not have the `.ssh` directory. To create such a directory, execute the command that generates the RSA key. To deploy TiDB components on the control machine, configure mutual trust for the control machine and the control machine itself.
 
-    {{< copyable "shell-regular" >}}
-
     ```bash
     ssh-keygen -t rsa
     ssh-copy-id -i ~/.ssh/id_rsa.pub 10.0.1.1
     ```
 
 4. Log in to the control machine using the `tidb` user account, and log in to the IP of the target machine using `ssh`. If you do not need to enter the password and can successfully log in, then the SSH mutual trust is successfully configured.
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     ssh 10.0.1.1
@@ -834,8 +756,6 @@ This section describes how to manually configure the SSH mutual trust and sudo w
     ```
 
 5. After you log in to the target machine using the `tidb` user, run the following command. If you do not need to enter the password and can switch to the `root` user, then sudo without password of the `tidb` user is successfully configured.
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     sudo -su root

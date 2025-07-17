@@ -1,21 +1,21 @@
 ---
-title: 返回 JSON 值的 JSON 函数
-summary: 了解返回 JSON 值的 JSON 函数。
+title: JSON Functions That Return JSON Values
+summary: Learn about JSON functions that return JSON values.
 ---
 
-# 返回 JSON 值的 JSON 函数
+# JSON Functions That Return JSON Values
 
-本文档描述了返回 JSON 值的 JSON 函数。
+This document describes JSON functions that return JSON values.
 
 ## [JSON_DEPTH()](https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-depth)
 
-`JSON_DEPTH(json_doc)` 函数返回 JSON 文档的最大深度。
+The `JSON_DEPTH(json_doc)` function returns the maximum depth of a JSON document.
 
-示例：
+Examples:
 
-在以下示例中，`JSON_DEPTH()` 返回 `3`，因为有三个层级：
+In the following example, `JSON_DEPTH()` returns `3` because there are three levels:
 
-- 根级别 (`$`)
+- root (`$`)
 - weather (`$.weather`)
 - weather current (`$.weather.sunny`)
 
@@ -34,11 +34,11 @@ SELECT JSON_DEPTH('{"weather": {"current": "sunny"}}');
 
 ## [JSON_LENGTH()](https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-length)
 
-`JSON_LENGTH(json_doc [,path])` 函数返回 JSON 文档的长度。如果提供了 `path` 参数，则返回该路径下值的长度。
+The `JSON_LENGTH(json_doc [,path])` function returns the length of a JSON document. If a `path` argument is given, it returns the length of the value within the path.
 
-示例：
+Examples:
 
-在以下示例中，返回值为 `1`，因为文档根级别只有一个项目 `weather`。
+In the following example, the returned value is `1` because the only item at the root of the document is `weather`.
 
 ```sql
 SELECT JSON_LENGTH('{"weather": {"current": "sunny", "tomorrow": "cloudy"}}','$');
@@ -53,7 +53,7 @@ SELECT JSON_LENGTH('{"weather": {"current": "sunny", "tomorrow": "cloudy"}}','$'
 1 row in set (0.00 sec)
 ```
 
-在以下示例中，返回值为 `2`，因为在 `$.weather` 路径下有两个项目：`current` 和 `tomorrow`。
+In the following example, the returned value is `2` because there are two items at `$.weather`: `current` and `tomorrow`.
 
 ```sql
 SELECT JSON_LENGTH('{"weather": {"current": "sunny", "tomorrow": "cloudy"}}','$.weather');
@@ -70,9 +70,9 @@ SELECT JSON_LENGTH('{"weather": {"current": "sunny", "tomorrow": "cloudy"}}','$.
 
 ## [JSON_TYPE()](https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-type)
 
-`JSON_TYPE(json_val)` 函数返回一个字符串，表示 [JSON 值的类型](/data-type-json.md#json-value-types)。
+The `JSON_TYPE(json_val)` function returns a string indicating [the type of a JSON value](/data-type-json.md#json-value-types).
 
-示例：
+Example:
 
 ```sql
 WITH demo AS (
@@ -104,7 +104,7 @@ SELECT v, JSON_TYPE(v) FROM demo ORDER BY 2;
 8 rows in set (0.00 sec)
 ```
 
-请注意，看起来相同的值可能具有不同的类型，如以下示例所示。
+Note that values that look the same might not have the same type, as demonstrated in the following example.
 
 ```sql
 SELECT '"2025-06-14"',CAST(CAST('2025-06-14' AS date) AS json);
@@ -134,7 +134,7 @@ SELECT JSON_TYPE('"2025-06-14"'),JSON_TYPE(CAST(CAST('2025-06-14' AS date) AS js
 
 ## [JSON_VALID()](https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-valid)
 
-`JSON_VALID(str)` 函数检查参数是否为有效的 JSON。这在将列转换为 `JSON` 类型之前进行检查时很有用。
+The `JSON_VALID(str)` function checks if the argument is valid JSON. This can be useful for checking a column before converting it to the `JSON` type.
 
 ```sql
 SELECT JSON_VALID('{"foo"="bar"}');
@@ -162,7 +162,7 @@ SELECT JSON_VALID('{"foo": "bar"}');
 1 row in set (0.01 sec)
 ```
 
-## 另请参阅
+## See also
 
-- [JSON 函数概览](/functions-and-operators/json-functions.md)
-- [JSON 数据类型](/data-type-json.md)
+- [JSON Functions Overview](/functions-and-operators/json-functions.md)
+- [JSON Data Type](/data-type-json.md)

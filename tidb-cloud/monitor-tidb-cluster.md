@@ -1,90 +1,90 @@
 ---
-title: 监控 TiDB 集群
-summary: 了解如何监控 TiDB 集群。
+title: Monitor a TiDB Cluster
+summary: Learn how to monitor your TiDB cluster.
 ---
 
-# 监控 TiDB 集群
+# Monitor a TiDB Cluster
 
-本文档介绍如何在 TiDB Cloud 上监控 TiDB 集群。
+This document describes how to monitor a TiDB cluster on TiDB Cloud.
 
-## 集群状态和节点状态
+## Cluster status and node status
 
-你可以在集群页面上查看每个运行中集群的当前状态。
+You can see the current status of each running cluster on the cluster page.
 
-### 集群状态
+### Cluster status
 
-| 集群状态 | 描述 |
+| Cluster status | Description |
 |:--|:--|
-| **Available** | 集群运行正常且可用。 |
-| **Creating** | 集群正在创建中。在创建过程中集群不可访问。 |
-| **Importing** | 正在向集群导入数据。 |
-| **Maintaining** | 集群正在维护中。 |
-| **Modifying** | 集群正在修改中。 |
-| **Unavailable** | 集群发生故障且 TiDB 无法恢复。 |
-| **Pausing** | 集群正在暂停中。 |
-| **Paused** | 集群已暂停。 |
-| **Resuming** | 集群正在从暂停状态恢复。 |
-| **Restoring** | 集群当前正在从备份中恢复。 |
+| **Available** | The cluster is healthy and available. |
+| **Creating** | The cluster is being created. The cluster is inaccessible while it is being created. |
+| **Importing** | Importing data into the cluster. |
+| **Maintaining** | The cluster is in maintenance. |
+| **Modifying** | The cluster is being modified. |
+| **Unavailable** | The cluster has failed and TiDB cannot recover it. |
+| **Pausing** | The cluster is being paused. |
+| **Paused** | The cluster is paused. |
+| **Resuming** | The cluster is being resumed from a pause. |
+| **Restoring** | The cluster is currently being restored from a backup. |
 
-### TiDB 节点状态
+### TiDB node status
 
-> **注意：**
+> **Note:**
 >
-> TiDB 节点状态仅适用于 TiDB Cloud Dedicated 集群。
+> The TiDB node status is only available for TiDB Cloud Dedicated clusters.
 
-| TiDB 节点状态 | 描述 |
+| TiDB node status | Description |
 |:--|:--|
-| **Available** | TiDB 节点运行正常且可用。 |
-| **Creating** | TiDB 节点正在创建中。 |
-| **Unavailable** | TiDB 节点不可用。 |
-| **Deleting** | TiDB 节点正在删除中。 |
+| **Available** | The TiDB node is healthy and available. |
+| **Creating** | The TiDB node is being created. |
+| **Unavailable** | The TiDB node is not available. |
+| **Deleting** | The TiDB node is being deleted. |
 
-### TiKV 节点状态
+### TiKV node status
 
-> **注意：**
+> **Note:**
 >
-> TiKV 节点状态仅适用于 TiDB Cloud Dedicated 集群。
+> The TiKV node status is only available for TiDB Cloud Dedicated clusters.
 
-| TiKV 节点状态 | 描述 |
+| TiKV node status | Description |
 |:--|:--|
-| **Available** | TiKV 节点运行正常且可用。 |
-| **Creating** | TiKV 节点正在创建中。 |
-| **Unavailable** | TiKV 节点不可用。 |
-| **Deleting** | TiKV 节点正在删除中。 |
+| **Available** | The TiKV node is healthy and available. |
+| **Creating** | The TiKV node is being created. |
+| **Unavailable** | The TiKV node is not available. |
+| **Deleting** | The TiKV node is being deleted. |
 
-## 监控指标
+## Monitoring metrics
 
-在 TiDB Cloud 中，你可以从以下页面查看集群的常用指标：
+In TiDB Cloud, you can view the commonly used metrics of a cluster from the following pages:
 
-- **概览**页面
-- **指标**页面
+- **Overview** page
+- **Metrics** page
 
-### 概览页面
+### Overview page
 
-**概览**页面提供集群的常规指标。
+The **Overview** page provides general metrics of a cluster.
 
-要在集群概览页面查看指标，请执行以下步骤：
+To view metrics on the cluster overview page, take the following steps:
 
-1. 在项目的[**集群**](https://tidbcloud.com/project/clusters)页面，点击目标集群的名称以进入其概览页面。
+1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
 
-    > **提示：**
+    > **Tip:**
     >
-    > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. 查看**核心指标**部分。
+2. Check the **Core Metrics** section.
 
-### 指标页面
+### Metrics page
 
-**指标**页面提供集群的完整指标集。通过查看这些指标，你可以轻松识别性能问题并确定当前的数据库部署是否满足你的需求。
+The **Metrics** page provides a full set of metrics of a cluster. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
 
-要在**指标**页面查看指标，请执行以下步骤：
+To view metrics on the **Metrics** page, take the following steps:
 
-1. 在项目的[**集群**](https://tidbcloud.com/project/clusters)页面，点击目标集群的名称以进入其概览页面。
+1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
 
-    > **提示：**
+    > **Tip:**
     >
-    > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. 在左侧导航栏中，点击**监控** > **指标**。
+2. In the left navigation pane, click **Monitoring** > **Metrics**.
 
-更多信息，请参见 [TiDB Cloud 内置指标](/tidb-cloud/built-in-monitoring.md)。
+For more information, see [TiDB Cloud Built-in Metrics](/tidb-cloud/built-in-monitoring.md).

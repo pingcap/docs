@@ -1,6 +1,6 @@
 ---
 title: CLUSTER_CONFIG
-summary: "Learn the `CLUSTER_CONFIG` information_schema table."
+summary: Learn the `CLUSTER_CONFIG` information_schema table.
 ---
 
 # CLUSTER_CONFIG
@@ -49,10 +49,10 @@ SELECT * FROM cluster_config WHERE type='tikv' AND `key` LIKE 'coprocessor%';
 | TYPE | INSTANCE        | KEY                               | VALUE   |
 +------+-----------------+-----------------------------------+---------+
 | tikv | 127.0.0.1:20165 | coprocessor.batch-split-limit     | 10      |
-| tikv | 127.0.0.1:20165 | coprocessor.region-max-keys       | 1440000 |
-| tikv | 127.0.0.1:20165 | coprocessor.region-max-size       | 144MiB  |
-| tikv | 127.0.0.1:20165 | coprocessor.region-split-keys     | 960000  |
-| tikv | 127.0.0.1:20165 | coprocessor.region-split-size     | 96MiB   |
+| tikv | 127.0.0.1:20165 | coprocessor.region-max-keys       | 3840000 |
+| tikv | 127.0.0.1:20165 | coprocessor.region-max-size       | 384MiB  |
+| tikv | 127.0.0.1:20165 | coprocessor.region-split-keys     | 2560000  |
+| tikv | 127.0.0.1:20165 | coprocessor.region-split-size     | 256MiB   |
 | tikv | 127.0.0.1:20165 | coprocessor.split-region-on-table | false   |
 +------+-----------------+-----------------------------------+---------+
 6 rows in set (0.00 sec)

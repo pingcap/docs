@@ -1,15 +1,15 @@
 ---
 title: TIFLASH_SEGMENTS
-summary: "了解 `TIFLASH_SEGMENTS` information_schema 表。"
+summary: Learn the `TIFLASH_SEGMENTS` information_schema table.
 ---
 
 # TIFLASH_SEGMENTS
 
-> **警告：**
+> **Warning:**
 >
-> 请勿在生产环境中使用此表，因为表中的字段不稳定，可能会在新版本的 TiDB 中发生变更，且不会提前通知。
+> Do not use this table in production environments, as the fields of the table are unstable, and subject to change in new releases of TiDB, without prior notice.
 
-`TIFLASH_SEGMENTS` 表提供了 TiFlash 中数据表的统计信息。
+The `TIFLASH_SEGMENTS` table provides statistical information about data tables in TiFlash.
 
 ```sql
 USE information_schema;
@@ -57,38 +57,38 @@ DESC tiflash_segments;
 33 rows in set (0.00 sec)
 ```
 
-`TIFLASH_SEGMENTS` 表中的字段说明如下：
+Fields in the `TIFLASH_SEGMENTS` table are described as follows:
 
-- `DATABASE`：TiFlash 中的数据库名称。该段所属的表在此数据库中。
-- `TABLE`：TiFlash 中的表名。该段属于此表。
-- `TIDB_DATABASE`：TiDB 中的数据库名称。该段所属的表在此数据库中。
-- `TIDB_TABLE`：TiDB 中的表名。该段属于此表。
-- `TABLE_ID`：该段所属表的内部 ID。此 ID 在 TiDB 集群内唯一。
-- `IS_TOMBSTONE`：表示该段所属的表是否可以被回收。`1` 表示表可以被回收，`0` 表示表处于正常状态。
-- `SEGMENT_ID`：段 ID，在表内唯一。
-- `RANGE`：该段包含的数据范围。
-- `EPOCH`：该段的更新版本。每个段的版本号单调递增。
-- `ROWS`：该段中的总行数。
-- `SIZE`：该段数据的总大小（以字节为单位）。
-- `DELTA_RATE`：Delta 层中的总行数与该段中总行数的比率。
-- `DELTA_MEMTABLE_ROWS`：Delta 层中缓存的总行数。
-- `DELTA_MEMTABLE_SIZE`：Delta 层中缓存的数据总大小（以字节为单位）。
-- `DELTA_MEMTABLE_COLUMN_FILES`：Delta 层中缓存的 Column Files 数量。
-- `DELTA_MEMTABLE_DELETE_RANGES`：Delta 层中缓存的 Delete Ranges 数量。
-- `DELTA_PERSISTED_PAGE_ID`：Delta 层中存储在磁盘上的数据的 ID。
-- `DELTA_PERSISTED_ROWS`：Delta 层中持久化数据的总行数。
-- `DELTA_PERSISTED_SIZE`：Delta 层中持久化数据的总大小（以字节为单位）。
-- `DELTA_PERSISTED_COLUMN_FILES`：Delta 层中持久化的 Column Files 数量。
-- `DELTA_PERSISTED_DELETE_RANGES`：Delta 层中持久化的 Delete Ranges 数量。
-- `DELTA_CACHE_SIZE`：Delta 层中缓存的大小（以字节为单位）。
-- `DELTA_INDEX_SIZE`：Delta 层中索引的大小（以字节为单位）。
-- `STABLE_PAGE_ID`：Stable 层中数据的磁盘存储 ID。
-- `STABLE_ROWS`：Stable 层中的总行数。
-- `STABLE_SIZE`：Stable 层中数据的总大小（以字节为单位）。
-- `STABLE_DMFILES`：Stable 层中的 DMFiles 数量。
-- `STABLE_DMFILES_ID_0`：Stable 层中第一个 DMFile 的磁盘存储 ID。
-- `STABLE_DMFILES_ROWS`：Stable 层中 DMFile 的总行数。
-- `STABLE_DMFILES_SIZE`：Stable 层中 DMFile 数据的总大小（以字节为单位）。
-- `STABLE_DMFILES_SIZE_ON_DISK`：Stable 层中 DMFile 占用的磁盘空间（以字节为单位）。
-- `STABLE_DMFILES_PACKS`：Stable 层中 DMFile 的 Packs 数量。
-- `TIFLASH_INSTANCE`：TiFlash 实例的地址。
+- `DATABASE`: Database name in TiFlash. The segment belongs to a table in this database.
+- `TABLE`: Table name in TiFlash. The segment belongs to this table.
+- `TIDB_DATABASE`: Database name in TiDB. The segment belongs to a table in this database.
+- `TIDB_TABLE`: Table name in TiDB. The segment belongs to this table.
+- `TABLE_ID`: The internal ID of the table to which the segment belongs. This ID is unique within a TiDB cluster.
+- `IS_TOMBSTONE`: Indicates whether the table the segment belongs to can be recycled. `1` indicates that the table can be recycled. `0` indicates that the table is in a normal state.
+- `SEGMENT_ID`: Segment ID, which is unique within a table.
+- `RANGE`: The range of data that the segment contains.
+- `EPOCH`: The updated version of the segment. The version number of each segment increases monotonically.
+- `ROWS`: The total number of rows in the segment.
+- `SIZE`: The total size of the segment data (in bytes).
+- `DELTA_RATE`: The ratio of the total number of rows in the Delta layer to that in the segment.
+- `DELTA_MEMTABLE_ROWS`: The total number of cached rows in the Delta layer.
+- `DELTA_MEMTABLE_SIZE`: The total size of the data cached in the Delta layer (in bytes).
+- `DELTA_MEMTABLE_COLUMN_FILES`: The number of Column Files cached in the Delta layer.
+- `DELTA_MEMTABLE_DELETE_RANGES`: The number of Delete Ranges cached in the Delta layer.
+- `DELTA_PERSISTED_PAGE_ID`: The ID of the data stored on a disk in the Delta layer.
+- `DELTA_PERSISTED_ROWS`: The total number of rows of persisted data in the Delta layer.
+- `DELTA_PERSISTED_SIZE`: The total size of the persisted data in the Delta layer (in bytes).
+- `DELTA_PERSISTED_COLUMN_FILES`: The number of persisted Column Files in the Delta layer.
+- `DELTA_PERSISTED_DELETE_RANGES`: The number of persisted Delete Ranges in the Delta layer.
+- `DELTA_CACHE_SIZE`: The size of the cache in the Delta layer (in bytes).
+- `DELTA_INDEX_SIZE`: The size of the indexes in the Delta layer (in bytes).
+- `STABLE_PAGE_ID`: The disk storage ID of the data in the Stable layer.
+- `STABLE_ROWS`: The total number of rows in the Stable layer.
+- `STABLE_SIZE`: The total size of the data in the Stable layer (in bytes).
+- `STABLE_DMFILES`: The number of DMFiles in the Stable layer.
+- `STABLE_DMFILES_ID_0`: The disk storage ID of the first DMFile in the Stable layer.
+- `STABLE_DMFILES_ROWS`: The total number of rows in the DMFile in the Stable layer.
+- `STABLE_DMFILES_SIZE`: The total size of the data in the DMFile in the Stable layer (in bytes).
+- `STABLE_DMFILES_SIZE_ON_DISK`: The disk space occupied by the DMFile in the Stable layer (in bytes).
+- `STABLE_DMFILES_PACKS`: The number of Packs in the DMFile in the Stable layer.
+- `TIFLASH_INSTANCE`: The address of the TiFlash instance.

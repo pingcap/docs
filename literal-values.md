@@ -1,24 +1,24 @@
 ---
-title: 字面值
-summary: 本文介绍 TiDB SQL 语句中的字面值。
+title: Literal Values
+summary: This article introduces the literal values ​​of TiDB SQL statements.
 ---
 
-# 字面值
+# Literal Values
 
-TiDB 字面值包括字符字面值、数值字面值、时间和日期字面值、十六进制字面值、二进制字面值和 NULL 字面值。本文介绍这些字面值。
+TiDB literal values include character literals, numeric literals, time and date literals, hexadecimal, binary literals, and NULL literals. This document introduces each of these literal values.
 
-本文描述了字符串字面值、数值字面值、NULL 值、十六进制字面值、日期和时间字面值、布尔字面值以及位值字面值。
+This document describes String literals, Numeric literals, NULL values, Hexadecimal literals, Date and time literals, Boolean literals, and Bit-value literals.
 
-## 字符串字面值
+## String literals
 
-字符串是一个字节或字符序列，由单引号 `'` 或双引号 `"` 包围。例如：
+A string is a sequence of bytes or characters, enclosed within either single quote `'` or double quote `"` characters. For example:
 
 ```
 'example string'
 "example string"
 ```
 
-相邻的带引号字符串会被连接成一个单独的字符串。以下几行是等价的：
+Quoted strings placed next to each other are concatenated to a single string. The following lines are equivalent:
 
 ```
 'a string'
@@ -26,20 +26,20 @@ TiDB 字面值包括字符字面值、数值字面值、时间和日期字面值
 "a" ' ' "string"
 ```
 
-如果启用了 `ANSI_QUOTES` SQL 模式，字符串字面值只能用单引号引起来，因为双引号引起来的字符串会被解释为标识符。
+If the `ANSI_QUOTES` SQL MODE is enabled, string literals can be quoted only within single quotation marks because a string quoted within double quotation marks is interpreted as an identifier.
 
-字符串分为以下两种类型：
+The string is divided into the following two types:
 
-+ 二进制字符串：由一个字节序列组成，其字符集和排序规则都是 `binary`，在相互比较时使用**字节**作为单位。
-+ 非二进制字符串：由一个字符序列组成，具有除 `binary` 之外的各种字符集和排序规则。在相互比较时使用**字符**作为单位。一个字符可能包含多个字节，这取决于字符集。
++ Binary string: It consists of a sequence of bytes, whose charset and collation are both `binary`, and uses **byte** as the unit when compared with each other.
++ Non-binary string: It consists of a sequence of characters and has various charsets and collations other than `binary`. When compared with each other, non-binary strings use **characters** as the unit. A character might contain multiple bytes, depending on the charset.
 
-字符串字面值可以有一个可选的 `字符集引入器` 和 `COLLATE 子句`，用于指定使用特定的字符集和排序规则。
+A string literal may have an optional `character set introducer` and `COLLATE clause`, to designate it as a string that uses a specific character set and collation.
 
 ```
 [_charset_name]'string' [COLLATE collation_name]
 ```
 
-例如：
+For example:
 
 ```
 SELECT _latin1'string';
@@ -47,7 +47,7 @@ SELECT _binary'string';
 SELECT _utf8'string' COLLATE utf8_bin;
 ```
 
-你可以使用 N'literal'（或 n'literal'）来创建国家字符集中的字符串。以下语句是等价的：
+You can use N'literal' (or n'literal') to create a string in the national character set. The following statements are equivalent:
 
 ```
 SELECT N'some text';
@@ -55,77 +55,77 @@ SELECT n'some text';
 SELECT _utf8'some text';
 ```
 
-要在字符串中表示一些特殊字符，你可以使用转义字符进行转义：
+To represent some special characters in a string, you can use escape characters to escape:
 
-| 转义字符 | 含义 |
+| Escape Characters | Meaning |
 | :---------------- | :------ |
-| \\0 | ASCII NUL (X'00') 字符 |
-| \\' | 单引号 `'` 字符 |
-| \\" | 双引号 `"` 字符 |
-| \\b | 退格字符 |
-| \\n | 换行符 |
-| \\r | 回车符 |
-| \\t | 制表符 |
+| \\0 | An ASCII NUL (X'00') character |
+| \\' | A single quote `'` character |
+| \\" | A double quote `"` character |
+| \\b | A backspace character |
+| \\n | A line break (newline) character |
+| \\r | A carriage return character |
+| \\t | A tab character |
 | \\z | ASCII 26 (Ctrl + Z) |
-| \\\\ | 反斜杠 `\` 字符 |
-| \\% | `%` 字符 |
-| \\_ | `_` 字符 |
+| \\\\ | A backslash `\` character |
+| \\% | A `%` character |
+| \\_ | A `_` character |
 
-如果你想在由 `'` 包围的字符串中表示 `"`，或在由 `"` 包围的字符串中表示 `'`，则不需要使用转义字符。
+If you want to represent `"` in the string surrounded by `'`, or `'` in the string surrounded by `"`, you do not need to use escape characters.
 
-更多信息，请参见 [MySQL 中的字符串字面值](https://dev.mysql.com/doc/refman/8.0/en/string-literals.html)。
+For more information, see [String Literals in MySQL](https://dev.mysql.com/doc/refman/8.0/en/string-literals.html).
 
-## 数值字面值
+## Numeric literals
 
-数值字面值包括整数和 DECIMAL 字面值以及浮点字面值。
+Numeric literals include integer and DECIMAL literals and floating-point literals.
 
-整数可以包含 `.` 作为小数分隔符。数字前面可以有 `-` 或 `+` 来表示负值或正值。
+Integer may include `.` as a decimal separator. Numbers may be preceded by `-` or `+` to indicate a negative or positive value respectively.
 
-精确值数值字面值可以表示为 `1, .2, 3.4, -5, -6.78, +9.10`。
+Exact-value numeric literals can be represented as `1, .2, 3.4, -5, -6.78, +9.10`.
 
-数值字面值也可以用科学记数法表示，如 `1.2E3, 1.2E-3, -1.2E3, -1.2E-3`。
+Numeric literals can also be represented in scientific notation, such as `1.2E3, 1.2E-3, -1.2E3, -1.2E-3`.
 
-更多信息，请参见 [MySQL 中的数值字面值](https://dev.mysql.com/doc/refman/8.0/en/number-literals.html)。
+For more information, see [Numeric Literals in MySQL](https://dev.mysql.com/doc/refman/8.0/en/number-literals.html).
 
-## 日期和时间字面值
+## Date and time literals
 
-日期和时间字面值可以用多种格式表示，如带引号的字符串或数字。当 TiDB 期望一个日期时，它会将 `'2017-08-24'`、`'20170824'` 和 `20170824` 都解释为日期。
+Date and time literal values can be represented in several formats, such as quoted strings or as numbers. When TiDB expects a date, it interprets any of `'2017-08-24'`, `'20170824'` and `20170824` as a date.
 
-TiDB 支持以下日期格式：
+TiDB supports the following date formats:
 
-* `'YYYY-MM-DD'` 或 `'YY-MM-DD'`：这里的 `-` 分隔符不是严格的。它可以是任何标点符号。例如，`'2017-08-24'`、`'2017&08&24'`、`'2012@12^31'` 都是有效的日期格式。唯一的特殊标点是 '.'，它被视为小数点来分隔整数部分和小数部分。日期和时间可以用 `T` 或空格分隔。例如，`2017-8-24 10:42:00` 和 `2017-8-24T10:42:00` 表示相同的日期和时间。
-* `'YYYYMMDDHHMMSS'` 或 `'YYMMDDHHMMSS'`：例如，`'20170824104520'` 和 `'170824104520'` 被视为 `'2017-08-24 10:45:20'`。但是，如果你提供的值超出范围，如 `'170824304520'`，则不会被视为有效日期。注意，不正确的格式如 `YYYYMMDD HHMMSS`、`YYYYMMDD HH:MM:DD` 或 `YYYY-MM-DD HHMMSS` 将无法插入。
-* `YYYYMMDDHHMMSS` 或 `YYMMDDHHMMSS`：注意这些格式没有单引号或双引号，而是一个数字。例如，`20170824104520` 被解释为 `'2017-08-24 10:45:20'`。
+* `'YYYY-MM-DD'` or `'YY-MM-DD'`: The `-` delimiter here is not strict. It can be any punctuation. For example, `'2017-08-24'`, `'2017&08&24'`, `'2012@12^31'` are all valid date formats. The only special punctuation is '.', which is treated as a decimal point to separate the integer and fractional parts. Date and time can be separated by `T` or a white space. For example, `2017-8-24 10:42:00` and `2017-8-24T10:42:00` represents the same date and time.
+* `'YYYYMMDDHHMMSS'` or `'YYMMDDHHMMSS'`: For example, `'20170824104520'` and `'170824104520'` are regarded as `'2017-08-24 10:45:20'`. However, if you provide a value out of range, such as `'170824304520'`, it is not treated as a valid date. Note that incorrect formats such as `YYYYMMDD HHMMSS`, `YYYYMMDD HH:MM:DD`, or `YYYY-MM-DD HHMMSS` will fail to insert.
+* `YYYYMMDDHHMMSS` or `YYMMDDHHMMSS`: Note that these formats have no single or double quotes, but a number. For example, `20170824104520` is interpreted as `'2017-08-24 10:45:20'`.
 
-DATETIME 或 TIMESTAMP 值后面可以跟一个小数部分，用于表示微秒精度（6 位数字）。小数部分应始终用小数点 `.` 与时间的其余部分分隔。
+DATETIME or TIMESTAMP values can be followed by a fractional part, used to represent microseconds precision (6 digits). The fractional part should always be separated from the rest of the time by a decimal point `.`.
 
-只包含两位数字的年份值是模糊的。建议使用四位数字的年份格式。TiDB 根据以下规则解释两位数字的年份值：
+The year value containing only two digits is ambiguous. It is recommended to use the four-digit year format. TiDB interprets the two-digit year value according to the following rules:
 
-* 如果年份值在 `70-99` 范围内，它被转换为 `1970-1999`。
-* 如果年份值在 `00-69` 范围内，它被转换为 `2000-2069`。
+* If the year value is in the range of `70-99`, it is converted to `1970-1999`.
+* If the year value is in the range of `00-69`, it is converted to `2000-2069`.
 
-对于小于 10 的月份或日期值，`'2017-8-4'` 与 `'2017-08-04'` 相同。时间也是如此。例如，`'2017-08-24 1:2:3'` 与 `'2017-08-24 01:02:03'` 相同。
+For month or day values ​​less than 10, `'2017-8-4'` is the same as `'2017-08-04'`. The same is true for Time. For example, `'2017-08-24 1:2:3'` is the same as `'2017-08-24 01:02:03'`.
 
-当需要日期或时间值时，TiDB 根据值的长度选择指定的格式：
+When the date or time value is required, TiDB selects the specified format according to the length of the value:
 
-* 6 位数字：`YYMMDD`。
-* 12 位数字：`YYMMDDHHMMSS`。
-* 8 位数字：`YYYYMMDD`。
-* 14 位数字：`YYYYMMDDHHMMSS`。
+* 6 digits: `YYMMDD`.
+* 12 digits: `YYMMDDHHMMSS`.
+* 8 digits: `YYYYMMDD`.
+* 14 digits: `YYYYMMDDHHMMSS`.
 
-TiDB 支持以下时间值格式：
+TiDB supports the following formats for time values:
 
-* `'D HH:MM:SS'`，或 `'HH:MM:SS'`、`'HH:MM'`、`'D HH:MM'`、`'D HH'`、`'SS'`：`D` 表示天数，有效值范围是 `0-34`。
-* `HHMMSS` 格式的数字：例如，`231010` 被解释为 `'23:10:10'`。
-* `SS`、`MMSS` 和 `HHMMSS` 格式的数字都可以被视为时间。
+* `'D HH:MM:SS'`, or `'HH:MM:SS'`, `'HH:MM'`, `'D HH:MM'`, `'D HH'`, `'SS'`: `D` means days and the valid value range is `0-34`.
+* A number in `HHMMSS` format: For example, `231010` is interpreted as `'23:10:10'`.
+* A number in any of `SS`, `MMSS`, and `HHMMSS`formats can be regarded as time.
 
-Time 类型的小数点也是 `.`，小数点后最多可以有 6 位数字。
+The decimal point of the Time type is also `.`, with a precision of up to 6 digits after the decimal point.
 
-更多详情请参见 [MySQL 日期和时间字面值](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-literals.html)。
+See [MySQL date and time literals](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-literals.html) for more details.
 
-## 布尔字面值
+## Boolean Literals
 
-常量 `TRUE` 和 `FALSE` 分别等于 1 和 0，不区分大小写。
+The constants `TRUE` and `FALSE` are equal to 1 and 0 respectively, which are not case sensitive.
 
 {{< copyable "sql" >}}
 
@@ -142,11 +142,11 @@ SELECT TRUE, true, tRuE, FALSE, FaLsE, false;
 1 row in set (0.00 sec)
 ```
 
-## 十六进制字面值
+## Hexadecimal literals
 
-十六进制字面值使用 `X'val'` 或 `0xval` 表示法编写，其中 `val` 包含十六进制数字。前导 `0x` 区分大小写，不能写成 `0X`。
+Hexadecimal literal values are written using `X'val'` or `0xval` notation, where `val` contains hexadecimal digits. A leading `0x` is case sensitive and cannot be written as `0X`.
 
-合法的十六进制字面值：
+Legal hexadecimal literals:
 
 ```
 X'ac12'
@@ -157,14 +157,14 @@ x'12AC'
 0x12AC
 ```
 
-非法的十六进制字面值：
+Illegal hexadecimal literals:
 
 ```
-X'1z' (z 不是合法的十六进制数字)
-0X12AC (0X 必须写成 0x)
+X'1z' (z is not a hexadecimal legal digit)
+0X12AC (0X must be written as 0x)
 ```
 
-使用 `X'val'` 表示法编写的十六进制字面值必须包含偶数个数字。如果 `val` 的长度是奇数（例如，`X'A'` 或 `X'11A'`），为避免语法错误，请在值前面补零：
+Hexadecimal literals written using `X'val'` notation must contain an even number of digits. If the length of `val` is an odd number (for example, `X'A'` or `X'11A'`), to avoid the syntax error, pad the value with a leading zero:
 
 ```sql
 mysql> select X'aff';
@@ -178,9 +178,9 @@ mysql> select X'0aff';
 1 row in set (0.00 sec)
 ```
 
-默认情况下，十六进制字面值是二进制字符串。
+By default, a hexadecimal literal is a binary string.
 
-要将字符串或数字转换为十六进制格式的字符串，请使用 `HEX()` 函数：
+To convert a string or a number to a string in hexadecimal format, use the `HEX()` function:
 
 ```sql
 mysql> SELECT HEX('TiDB');
@@ -200,11 +200,11 @@ mysql> SELECT X'54694442';
 1 row in set (0.00 sec)
 ```
 
-## 位值字面值
+## Bit-value literals
 
-位值字面值使用 `b'val'` 或 `0bval` 表示法编写。`val` 是使用零和一编写的二进制值。前导 `0b` 区分大小写，不能写成 `0B`。
+Bit-value literals are written using `b'val'` or `0bval` notation. The `val` is a binary value written using zeros and ones. A leading `0b` is case sensitive and cannot be written as `0B`.
 
-合法的位值字面值：
+Legal bit-value literals:
 
 ```
 b'01'
@@ -212,16 +212,16 @@ B'01'
 0b01
 ```
 
-非法的位值字面值：
+Illegal bit-value literals:
 
 ```
-b'2' (2 不是二进制数字；它必须是 0 或 1)
-0B01 (0B 必须写成 0b)
+b'2' (2 is not a binary digit; it must be 0 or 1)
+0B01 (0B must be written as 0b)
 ```
 
-默认情况下，位值字面值是二进制字符串。
+By default, a bit-value literal is a binary string.
 
-位值以二进制值形式返回，在 MySQL 客户端中可能显示不好。要将位值转换为可打印形式，你可以使用转换函数，如 `BIN()` 或 `HEX()`。
+Bit values are returned as binary values, which may not display well in the MySQL client. To convert a bit value to printable form, you can use a conversion function such as `BIN()` or `HEX()`.
 
 ```sql
 CREATE TABLE t (b BIT(8));
@@ -240,10 +240,10 @@ mysql> SELECT b+0, BIN(b), HEX(b) FROM t;
 3 rows in set (0.00 sec)
 ```
 
-## NULL 值
+## NULL Values
 
-`NULL` 表示数据为空，不区分大小写，与 `\N`（区分大小写）同义。
+`NULL` means the data is empty, which is case-insensitive, and is synonymous with `\N` (case-sensitive).
 
-> **注意：**
+> **Note:**
 >
-> `NULL` 不同于 `0`，也不同于空字符串 `''`。
+> `NULL` is not the same as `0`, nor the empty string `''`.

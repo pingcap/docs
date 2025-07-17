@@ -1,29 +1,29 @@
 ---
 title: SLOW_QUERY
-summary: "了解 `SLOW_QUERY` INFORMATION_SCHEMA 表。"
+summary: Learn the `SLOW_QUERY` INFORMATION_SCHEMA table.
 ---
 
 # SLOW_QUERY
 
 <CustomContent platform="tidb">
 
-`SLOW_QUERY` 表提供当前节点的慢查询信息，这些信息是 TiDB [慢日志文件](/tidb-configuration-file.md#slow-query-file)的解析结果。表中的列名与慢日志中的字段名相对应。
+The `SLOW_QUERY` table provides the slow query information of the current node, which is the parsing result of the TiDB [slow log file](/tidb-configuration-file.md#slow-query-file). The column names in the table are corresponding to the field names in the slow log.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-`SLOW_QUERY` 表提供当前节点的慢查询信息，这些信息是 TiDB [慢日志文件](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#slow-query-file)的解析结果。表中的列名与慢日志中的字段名相对应。
+The `SLOW_QUERY` table provides the slow query information of the current node, which is the parsing result of the TiDB [slow log file](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#slow-query-file). The column names in the table are corresponding to the field names in the slow log.
 
 </CustomContent>
 
-> **注意：**
+> **Note:**
 >
-> 此表在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群中不可用。
+> This table is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 <CustomContent platform="tidb">
 
-关于如何使用此表来识别有问题的语句并改进查询性能，请参见[慢查询日志文档](/identify-slow-queries.md)。
+For how to use this table to identify problematic statements and improve query performance, see [Slow Query Log Document](/identify-slow-queries.md).
 
 </CustomContent>
 
@@ -32,9 +32,9 @@ USE INFORMATION_SCHEMA;
 DESC SLOW_QUERY;
 ```
 
-输出结果如下：
+The output is as follows:
 
-```
+```sql
 +-------------------------------+---------------------+------+------+---------+-------+
 | Field                         | Type                | Null | Key  | Default | Extra |
 +-------------------------------+---------------------+------+------+---------+-------+
@@ -112,28 +112,30 @@ DESC SLOW_QUERY;
 | Request_unit_read             | double              | YES  |      | NULL    |       |
 | Request_unit_write            | double              | YES  |      | NULL    |       |
 | Time_queued_by_rc             | double              | YES  |      | NULL    |       |
+| Tidb_cpu_time                 | double              | YES  |      | NULL    |       |
+| Tikv_cpu_time                 | double              | YES  |      | NULL    |       |
 | Plan                          | longtext            | YES  |      | NULL    |       |
 | Plan_digest                   | varchar(128)        | YES  |      | NULL    |       |
 | Binary_plan                   | longtext            | YES  |      | NULL    |       |
 | Prev_stmt                     | longtext            | YES  |      | NULL    |       |
 | Query                         | longtext            | YES  |      | NULL    |       |
 +-------------------------------+---------------------+------+------+---------+-------+
-79 rows in set (0.00 sec)
+81 rows in set (0.00 sec)
 ```
 
-`Query` 列的最大语句长度受系统变量 [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40) 限制。
+The maximum statement length of the `Query` column is limited by the [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40) system variable.
 
-## CLUSTER_SLOW_QUERY 表
+## CLUSTER_SLOW_QUERY table
 
-`CLUSTER_SLOW_QUERY` 表提供集群中所有节点的慢查询信息，这些信息是 TiDB 慢日志文件的解析结果。你可以像使用 `SLOW_QUERY` 表一样使用 `CLUSTER_SLOW_QUERY` 表。`CLUSTER_SLOW_QUERY` 表的表结构与 `SLOW_QUERY` 表的区别在于前者多了一个 `INSTANCE` 列。`INSTANCE` 列表示该行慢查询信息所在的 TiDB 节点地址。
+The `CLUSTER_SLOW_QUERY` table provides the slow query information of all nodes in the cluster, which is the parsing result of the TiDB slow log files. You can use the `CLUSTER_SLOW_QUERY` table the way you do with `SLOW_QUERY`. The table schema of the `CLUSTER_SLOW_QUERY` table differs from that of the `SLOW_QUERY` table in that an `INSTANCE` column is added to `CLUSTER_SLOW_QUERY`. The `INSTANCE` column represents the TiDB node address of the row information on the slow query.
 
-> **注意：**
+> **Note:**
 >
-> 此表在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群中不可用。
+> This table is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 <CustomContent platform="tidb">
 
-关于如何使用此表来识别有问题的语句并改进查询性能，请参见[慢查询日志文档](/identify-slow-queries.md)。
+For how to use this table to identify problematic statements and improve query performance, see [Slow Query Log Document](/identify-slow-queries.md).
 
 </CustomContent>
 
@@ -141,7 +143,7 @@ DESC SLOW_QUERY;
 DESC CLUSTER_SLOW_QUERY;
 ```
 
-输出结果如下：
+The output is as follows:
 
 ```sql
 +-------------------------------+---------------------+------+------+---------+-------+
@@ -222,22 +224,24 @@ DESC CLUSTER_SLOW_QUERY;
 | Request_unit_read             | double              | YES  |      | NULL    |       |
 | Request_unit_write            | double              | YES  |      | NULL    |       |
 | Time_queued_by_rc             | double              | YES  |      | NULL    |       |
+| Tidb_cpu_time                 | double              | YES  |      | NULL    |       |
+| Tikv_cpu_time                 | double              | YES  |      | NULL    |       |
 | Plan                          | longtext            | YES  |      | NULL    |       |
 | Plan_digest                   | varchar(128)        | YES  |      | NULL    |       |
 | Binary_plan                   | longtext            | YES  |      | NULL    |       |
 | Prev_stmt                     | longtext            | YES  |      | NULL    |       |
 | Query                         | longtext            | YES  |      | NULL    |       |
 +-------------------------------+---------------------+------+------+---------+-------+
-80 rows in set (0.00 sec)
+82 rows in set (0.00 sec)
 ```
 
-当查询集群系统表时，TiDB 不会从所有节点获取数据，而是将相关计算下推到其他节点。执行计划如下：
+When the cluster system table is queried, TiDB does not obtain data from all nodes, but pushes down the related calculation to other nodes. The execution plan is as follows:
 
 ```sql
 DESC SELECT COUNT(*) FROM CLUSTER_SLOW_QUERY WHERE user = 'u1';
 ```
 
-输出结果如下：
+The output is as follows:
 
 ```sql
 +----------------------------+----------+-----------+--------------------------+------------------------------------------------------+
@@ -251,10 +255,68 @@ DESC SELECT COUNT(*) FROM CLUSTER_SLOW_QUERY WHERE user = 'u1';
 4 rows in set (0.00 sec)
 ```
 
-在上述执行计划中，`user = u1` 条件被下推到其他（`cop`）TiDB 节点，聚合运算符也被下推（图中的 `StreamAgg` 运算符）。
+In the preceding execution plan, the `user = u1` condition is pushed down to other (`cop`) TiDB nodes, and the aggregate operator is also pushed down (the `StreamAgg` operator in the graph).
 
-目前，由于系统表的统计信息未被收集，有时一些聚合运算符无法下推，导致执行较慢。在这种情况下，你可以手动指定 SQL HINT 来下推聚合运算符。例如：
+Currently, because statistics of the system tables are not collected, sometimes some aggregation operators cannot be pushed down, which results in slow execution. In this case, you can manually specify the SQL HINT to push down the aggregation operators. For example:
 
 ```sql
 SELECT /*+ AGG_TO_COP() */ COUNT(*) FROM CLUSTER_SLOW_QUERY GROUP BY user;
 ```
+
+## View execution information
+
+By running an [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) query on the `SLOW_QUERY` table, you can get detailed information about how the database fetches the slow query information. However, this information is **not** available when you run `EXPLAIN ANALYZE` on the `CLUSTER_SLOW_QUERY` table.
+
+Example:
+
+```sql
+EXPLAIN ANALYZE SELECT * FROM INFORMATION_SCHEMA.SLOW_QUERY LIMIT 1\G
+```
+
+```
+*************************** 1. row ***************************
+            id: Limit_7
+       estRows: 1.00
+       actRows: 1
+          task: root
+ access object: 
+execution info: time:3.46ms, loops:2, RU:0.000000
+ operator info: offset:0, count:1
+        memory: N/A
+          disk: N/A
+*************************** 2. row ***************************
+            id: └─MemTableScan_10
+       estRows: 10000.00
+       actRows: 64
+          task: root
+ access object: table:SLOW_QUERY
+execution info: time:3.45ms, loops:1, initialize: 55.5µs, read_file: 1.21ms, parse_log: {time:4.11ms, concurrency:15}, total_file: 1, read_file: 1, read_size: 4.06 MB
+ operator info: only search in the current 'tidb-slow.log' file
+        memory: 1.26 MB
+          disk: N/A
+2 rows in set (0.01 sec)
+```
+
+In the output, check the following fields (formatted for readability) in the `execution info` section:
+
+```
+initialize: 55.5µs,
+read_file: 1.21ms,
+parse_log: {
+  time:4.11ms,
+  concurrency:15
+},
+total_file: 1,
+read_file: 1,
+read_size: 4.06 MB
+```
+
+| Field | Description |
+|---|---|
+| `initialize` | Time spent initializing |
+| `read_file` | Time spent reading the slow log file |
+| `parse_log.time` | Time spent parsing the slow log file |
+| `parse_log.concurrency` | Concurrency for parsing the slow log file (set by [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)) |
+| `total_file` | Total number of slow log files |
+| `read_file` | Number of slow log files that are read |
+| `read_size` | Bytes read from the log file |

@@ -1,155 +1,155 @@
 ---
-title: 使用 GORM 连接 TiDB
-summary: 了解如何使用 GORM 连接 TiDB。本教程提供使用 GORM 操作 TiDB 的 Golang 示例代码片段。
+title: Connect to TiDB with GORM
+summary: Learn how to connect to TiDB using GORM. This tutorial gives Golang sample code snippets that work with TiDB using GORM.
 ---
 
-# 使用 GORM 连接 TiDB
+# Connect to TiDB with GORM
 
-TiDB 是一个兼容 MySQL 的数据库，而 [GORM](https://gorm.io/index.html) 是一个流行的 Golang ORM 框架。GORM 适配了 TiDB 的特性，如 `AUTO_RANDOM`，并[将 TiDB 作为默认数据库选项支持](https://gorm.io/docs/connecting_to_the_database.html#TiDB)。
+TiDB is a MySQL-compatible database, and [GORM](https://gorm.io/index.html) is a popular open-source ORM framework for Golang. GORM adapts to TiDB features such as `AUTO_RANDOM` and [supports TiDB as a default database option](https://gorm.io/docs/connecting_to_the_database.html#TiDB).
 
-在本教程中，你可以学习如何使用 TiDB 和 GORM 完成以下任务：
+In this tutorial, you can learn how to use TiDB and GORM to accomplish the following tasks:
 
-- 设置环境。
-- 使用 GORM 连接到 TiDB 集群。
-- 构建并运行应用程序。你也可以查看[示例代码片段](#示例代码片段)，了解基本的 CRUD 操作。
+- Set up your environment.
+- Connect to your TiDB cluster using GORM.
+- Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
 
-> **注意：**
+> **Note:**
 >
-> 本教程适用于 TiDB Cloud Serverless、TiDB Cloud Dedicated 和 TiDB Self-Managed。
+> This tutorial works with {{{ .starter }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
 
-## 前提条件
+## Prerequisites
 
-要完成本教程，你需要：
+To complete this tutorial, you need:
 
-- [Go](https://go.dev/) **1.20** 或更高版本。
-- [Git](https://git-scm.com/downloads)。
-- 一个 TiDB 集群。
+- [Go](https://go.dev/) **1.20** or higher.
+- [Git](https://git-scm.com/downloads).
+- A TiDB cluster.
 
 <CustomContent platform="tidb">
 
-**如果你还没有 TiDB 集群，可以按照以下方式创建：**
+**If you don't have a TiDB cluster, you can create one as follows:**
 
-- （推荐）按照[创建 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md)创建你自己的 TiDB Cloud 集群。
-- 按照[部署本地测试 TiDB 集群](/quick-start-with-tidb.md#deploy-a-local-test-cluster)或[部署生产 TiDB 集群](/production-deployment-using-tiup.md)创建本地集群。
+- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-**如果你还没有 TiDB 集群，可以按照以下方式创建：**
+**If you don't have a TiDB cluster, you can create one as follows:**
 
-- （推荐）按照[创建 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md)创建你自己的 TiDB Cloud 集群。
-- 按照[部署本地测试 TiDB 集群](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)或[部署生产 TiDB 集群](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)创建本地集群。
+- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
 
 </CustomContent>
 
-## 运行示例程序连接 TiDB
+## Run the sample app to connect to TiDB
 
-本节演示如何运行示例应用程序代码并连接到 TiDB。
+This section demonstrates how to run the sample application code and connect to TiDB.
 
-### 步骤 1：克隆示例程序仓库
+### Step 1: Clone the sample app repository
 
-在终端窗口中运行以下命令来克隆示例代码仓库：
+Run the following commands in your terminal window to clone the sample code repository:
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-golang-gorm-quickstart.git
 cd tidb-golang-gorm-quickstart
 ```
 
-### 步骤 2：配置连接信息
+### Step 2: Configure connection information
 
-根据你选择的 TiDB 部署选项连接到 TiDB 集群。
+Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
 <SimpleTab>
-<div label="TiDB Cloud Serverless">
+<div label="{{{ .starter }}}">
 
-1. 导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称进入其概览页面。
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
-2. 点击右上角的**连接**。将显示连接对话框。
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. 确保连接对话框中的配置与你的操作环境匹配。
+3. Ensure the configurations in the connection dialog match your operating environment.
 
-    - **连接类型**设置为 `Public`
-    - **分支**设置为 `main`
-    - **连接方式**设置为 `General`
-    - **操作系统**与你的环境匹配。
+    - **Connection Type** is set to `Public`
+    - **Branch** is set to `main`
+    - **Connect With** is set to `General`
+    - **Operating System** matches your environment.
 
-    > **提示：**
+    > **Tip:**
     >
-    > 如果你的程序在 Windows Subsystem for Linux (WSL) 中运行，请切换到相应的 Linux 发行版。
+    > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
 
-4. 点击**生成密码**创建随机密码。
+4. Click **Generate Password** to create a random password.
 
-    > **提示：**
-    >
-    > 如果你之前已经创建了密码，可以使用原始密码或点击**重置密码**生成新密码。
+    > **Tip:**
+    > 
+    > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
 
-5. 运行以下命令复制 `.env.example` 并将其重命名为 `.env`：
+5. Run the following command to copy `.env.example` and rename it to `.env`:
 
     ```shell
     cp .env.example .env
     ```
 
-6. 将相应的连接字符串复制并粘贴到 `.env` 文件中。示例结果如下：
+6. Copy and paste the corresponding connection string into the `.env` file. The example result is as follows:
 
     ```dotenv
-    TIDB_HOST='{host}'  # 例如 gateway01.ap-northeast-1.prod.aws.tidbcloud.com
+    TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
     TIDB_PORT='4000'
-    TIDB_USER='{user}'  # 例如 xxxxxx.root
+    TIDB_USER='{user}'  # e.g. xxxxxx.root
     TIDB_PASSWORD='{password}'
     TIDB_DB_NAME='test'
     USE_SSL='true'
     ```
 
-    请确保将占位符 `{}` 替换为从连接对话框获得的连接参数。
+    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog.
 
-    TiDB Cloud Serverless 需要安全连接。因此，你需要将 `USE_SSL` 的值设置为 `true`。
+    {{{ .starter }}} requires a secure connection. Therefore, you need to set the value of `USE_SSL` to `true`.
 
-7. 保存 `.env` 文件。
+7. Save the `.env` file.
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1. 导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称进入其概览页面。
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
-2. 点击右上角的**连接**。将显示连接对话框。
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. 在连接对话框中，从**连接类型**下拉列表中选择 **Public**，然后点击 **CA 证书**下载 CA 证书。
+3. In the connection dialog, select **Public** from the **Connection Type** drop-down list, and then click **CA cert** to download the CA certificate.
 
-    如果你尚未配置 IP 访问列表，请点击**配置 IP 访问列表**或按照[配置 IP 访问列表](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)中的步骤在首次连接之前进行配置。
+    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) to configure it before your first connection.
 
-    除了 **Public** 连接类型外，TiDB Cloud Dedicated 还支持**私有端点**和 **VPC 对等连接**连接类型。更多信息，请参见[连接到你的 TiDB Cloud Dedicated 集群](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)。
+    In addition to the **Public** connection type, TiDB Cloud Dedicated supports **Private Endpoint** and **VPC Peering** connection types. For more information, see [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
 
-4. 运行以下命令复制 `.env.example` 并将其重命名为 `.env`：
+4. Run the following command to copy `.env.example` and rename it to `.env`:
 
     ```shell
     cp .env.example .env
     ```
 
-5. 将相应的连接字符串复制并粘贴到 `.env` 文件中。示例结果如下：
+5. Copy and paste the corresponding connection string into the `.env` file. The example result is as follows:
 
     ```dotenv
-    TIDB_HOST='{host}'  # 例如 tidb.xxxx.clusters.tidb-cloud.com
+    TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
     TIDB_PORT='4000'
-    TIDB_USER='{user}'  # 例如 root
+    TIDB_USER='{user}'  # e.g. root
     TIDB_PASSWORD='{password}'
     TIDB_DB_NAME='test'
     USE_SSL='false'
     ```
 
-    请确保将占位符 `{}` 替换为从连接对话框获得的连接参数。
+    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog.
 
-6. 保存 `.env` 文件。
+6. Save the `.env` file.
 
 </div>
 <div label="TiDB Self-Managed">
 
-1. 运行以下命令复制 `.env.example` 并将其重命名为 `.env`：
+1. Run the following command to copy `.env.example` and rename it to `.env`:
 
     ```shell
     cp .env.example .env
     ```
 
-2. 将相应的连接字符串复制并粘贴到 `.env` 文件中。示例结果如下：
+2. Copy and paste the corresponding connection string into the `.env` file. The example result is as follows:
 
     ```dotenv
     TIDB_HOST='{host}'
@@ -160,30 +160,30 @@ cd tidb-golang-gorm-quickstart
     USE_SSL='false'
     ```
 
-    请确保将占位符 `{}` 替换为连接参数，并将 `USE_SSL` 设置为 `false`。如果你在本地运行 TiDB，默认主机地址为 `127.0.0.1`，密码为空。
+    Be sure to replace the placeholders `{}` with the connection parameters, and set `USE_SSL` to `false`. If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
 
-3. 保存 `.env` 文件。
+3. Save the `.env` file.
 
 </div>
 </SimpleTab>
 
-### 步骤 3：运行代码并检查结果
+### Step 3: Run the code and check the result
 
-1. 执行以下命令运行示例代码：
+1. Execute the following command to run the sample code:
 
     ```shell
     make
     ```
 
-2. 查看 [Expected-Output.txt](https://github.com/tidb-samples/tidb-golang-gorm-quickstart/blob/main/Expected-Output.txt) 以检查输出是否匹配。
+2. Check the [Expected-Output.txt](https://github.com/tidb-samples/tidb-golang-gorm-quickstart/blob/main/Expected-Output.txt) to see if the output matches.
 
-## 示例代码片段
+## Sample code snippets
 
-你可以参考以下示例代码片段来完成自己的应用程序开发。
+You can refer to the following sample code snippets to complete your own application development.
 
-有关完整的示例代码和运行方法，请查看 [tidb-samples/tidb-golang-gorm-quickstart](https://github.com/tidb-samples/tidb-golang-gorm-quickstart) 仓库。
+For complete sample code and how to run it, check out the [tidb-samples/tidb-golang-gorm-quickstart](https://github.com/tidb-samples/tidb-golang-gorm-quickstart) repository.
 
-### 连接到 TiDB
+### Connect to TiDB
 
 ```golang
 func createDB() *gorm.DB {
@@ -201,57 +201,57 @@ func createDB() *gorm.DB {
 }
 ```
 
-使用此函数时，你需要将 `${tidb_host}`、`${tidb_port}`、`${tidb_user}`、`${tidb_password}` 和 `${tidb_db_name}` 替换为 TiDB 集群的实际值。TiDB Cloud Serverless 需要安全连接。因此，你需要将 `${use_ssl}` 的值设置为 `true`。
+When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, and `${tidb_db_name}` with the actual values of your TiDB cluster. {{{ .starter }}} requires a secure connection. Therefore, you need to set the value of `${use_ssl}` to `true`.
 
-### 插入数据
+### Insert data
 
 ```golang
 db.Create(&Player{ID: "id", Coins: 1, Goods: 1})
 ```
 
-更多信息，请参考[插入数据](/develop/dev-guide-insert-data.md)。
+For more information, refer to [Insert data](/develop/dev-guide-insert-data.md).
 
-### 查询数据
+### Query data
 
 ```golang
 var queryPlayer Player
 db.Find(&queryPlayer, "id = ?", "id")
 ```
 
-更多信息，请参考[查询数据](/develop/dev-guide-get-data-from-single-table.md)。
+For more information, refer to [Query data](/develop/dev-guide-get-data-from-single-table.md).
 
-### 更新数据
+### Update data
 
 ```golang
 db.Save(&Player{ID: "id", Coins: 100, Goods: 1})
 ```
 
-更多信息，请参考[更新数据](/develop/dev-guide-update-data.md)。
+For more information, refer to [Update data](/develop/dev-guide-update-data.md).
 
-### 删除数据
+### Delete data
 
 ```golang
 db.Delete(&Player{ID: "id"})
 ```
 
-更多信息，请参考[删除数据](/develop/dev-guide-delete-data.md)。
+For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
-## 下一步
+## Next steps
 
-- 从 [GORM 文档](https://gorm.io/docs/index.html)和 [GORM 文档中的 TiDB 部分](https://gorm.io/docs/connecting_to_the_database.html#TiDB)了解更多 GORM 的用法。
-- 通过[开发者指南](/develop/dev-guide-overview.md)中的章节了解 TiDB 应用程序开发的最佳实践，例如[插入数据](/develop/dev-guide-insert-data.md)、[更新数据](/develop/dev-guide-update-data.md)、[删除数据](/develop/dev-guide-delete-data.md)、[单表读取](/develop/dev-guide-get-data-from-single-table.md)、[事务](/develop/dev-guide-transaction-overview.md)和 [SQL 性能优化](/develop/dev-guide-optimize-sql-overview.md)。
-- 通过专业的 [TiDB 开发者课程](https://www.pingcap.com/education/)学习，并在通过考试后获得 [TiDB 认证](https://www.pingcap.com/education/certification/)。
+- Learn more usage of GORM from [the documentation of GORM](https://gorm.io/docs/index.html) and the [TiDB section in the documentation of GORM](https://gorm.io/docs/connecting_to_the_database.html#TiDB).
+- Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
+- Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
 
-## 需要帮助？
+## Need help?
 
 <CustomContent platform="tidb">
 
-在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](/support.md)。
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](https://tidb.support.pingcap.com/)。
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
 
 </CustomContent>

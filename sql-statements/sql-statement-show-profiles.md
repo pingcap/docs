@@ -1,13 +1,13 @@
 ---
 title: SHOW PROFILES
-summary: TiDB 数据库中 SHOW PROFILES 的使用概览。
+summary: An overview of the usage of SHOW PROFILES for the TiDB database.
 ---
 
 # SHOW PROFILES
 
-`SHOW PROFILES` 语句目前仅返回空结果。
+The `SHOW PROFILES` statement currently only returns an empty result.
 
-## 语法图
+## Synopsis
 
 ```ebnf+diagram
 ShowProfilesStmt ::=
@@ -18,7 +18,7 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## 示例
+## Examples
 
 ```sql
 SHOW PROFILES;
@@ -28,8 +28,8 @@ SHOW PROFILES;
 Empty set (0.00 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-此语句仅为与 MySQL 兼容而包含。执行 `SHOW PROFILES` 始终返回空结果。
+This statement is included only for compatibility with MySQL. Executing `SHOW PROFILES` always returns an empty result.
 
-作为替代方案，TiDB 提供了[语句概要表](/statement-summary-tables.md)来帮助理解 SQL 性能问题。
+As an alternative, TiDB provides [statement summary tables](/statement-summary-tables.md) to help understand SQL performance issues.

@@ -5,7 +5,7 @@ summary: Use the Dumpling tool to export data from TiDB.
 
 # Use Dumpling to Export Data
 
-This document introduces the data export tool - [Dumpling](https://github.com/pingcap/tidb/tree/release-8.1/dumpling). Dumpling exports data stored in TiDB/MySQL as SQL or CSV data files and can be used to make a logical full backup or export. Dumpling also supports exporting data to Amazon S3.
+This document introduces the data export tool - [Dumpling](https://github.com/pingcap/tidb/tree/release-8.5/dumpling). Dumpling exports data stored in TiDB/MySQL as SQL or CSV data files and can be used to make a logical full backup or export. Dumpling also supports exporting data to Amazon S3.
 
 <CustomContent platform="tidb">
 
@@ -45,7 +45,7 @@ TiDB also provides other tools that you can choose to use as needed.
 
 > **Note:**
 >
-> PingCAP previously maintained a fork of the [mydumper project](https://github.com/maxbube/mydumper) with enhancements specific to TiDB. Starting from v7.5.0, [Mydumper](https://docs.pingcap.com/tidb/v4.0/mydumper-overview) is deprecated and most of its features have been replaced by [Dumpling](/dumpling-overview.md). It is strongly recommended that you use Dumpling instead of mydumper.
+> PingCAP previously maintained a fork of the [mydumper project](https://github.com/maxbube/mydumper) with enhancements specific to TiDB. Starting from v7.5.0, [Mydumper](https://docs-archive.pingcap.com/tidb/v4.0/mydumper-overview) is deprecated and most of its features have been replaced by [Dumpling](/dumpling-overview.md). It is strongly recommended that you use Dumpling instead of mydumper.
 
 Dumpling has the following advantages:
 
@@ -73,8 +73,8 @@ Dumpling has the following advantages:
 
 - PROCESS: Required to query the cluster information to obtain the PD address and then control GC via the PD.
 - SELECT: Required when exporting tables.
-- RELOAD: Required when using `consistency flush`. Note that only TiDB supports this privilege. When the upstream is an RDS database or a managed service, you can ignore this privilege.
-- LOCK TABLES: Required when using `consistency lock`. This privilege must be granted for all the databases and tables to be exported.
+- RELOAD: Required when the level of `consistency` is `flush`. When the upstream is an RDS database or a managed service, you can ignore this privilege.
+- LOCK TABLES: Required when the level of `consistency` is `lock`. This privilege must be granted for all the databases and tables to be exported.
 - REPLICATION CLIENT: Required when exporting metadata to record data snapshot. This privilege is optional and you can ignore it if you do not need to export metadata.
 
 ### Export to SQL files
@@ -197,7 +197,7 @@ You can use the `--compress <format>` option to compress the CSV and SQL data an
 
     ```shell
     CREATE TABLE `t1` (
-      `id` int(11) DEFAULT NULL
+      `id` int DEFAULT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
     ```
 
@@ -294,7 +294,7 @@ With the above options specified, Dumpling can have a quicker speed of data expo
 
 Dumpling uses the `--consistency <consistency level>` option to control the way in which data is exported for "consistency assurance". When using snapshot for consistency, you can use the `--snapshot` option to specify the timestamp to be backed up. You can also use the following levels of consistency:
 
-- `flush`: Use [`FLUSH TABLES WITH READ LOCK`](https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-tables-with-read-lock) to temporarily interrupt the DML and DDL operations of the replica database, to ensure the global consistency of the backup connection, and to record the binlog position (POS) information. The lock is released after all backup connections start transactions. It is recommended to perform full backups during off-peak hours or on the MySQL replica database.
+- `flush`: Use [`FLUSH TABLES WITH READ LOCK`](https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-tables-with-read-lock) to temporarily interrupt the DML and DDL operations of the replica database, to ensure the global consistency of the backup connection, and to record the binlog position (POS) information. The lock is released after all backup connections start transactions. It is recommended to perform full backups during off-peak hours or on the MySQL replica database. Note that TiDB does not support this value.
 - `snapshot`: Get a consistent snapshot of the specified timestamp and export it.
 - `lock`: Add read locks on all tables to be exported.
 - `none`: No guarantee for consistency.
@@ -410,3 +410,38 @@ SET GLOBAL tidb_gc_life_time = '10m';
 | `--tidb-mem-quota-query`     | The memory limit of exporting SQL statements by a single line of Dumpling command, and the unit is byte. For v4.0.10 or later versions, if you do not set this parameter, TiDB uses the value of the `mem-quota-query` configuration item as the memory limit value by default. For versions earlier than v4.0.10, the parameter value defaults to 32 GB.  | 34359738368 |
 | `--params`                   | Specifies the session variable for the connection of the database to be exported. The required format is `"character_set_client=latin1,character_set_connection=latin1"`                                                                                                                                                           |
 |  `-c` or `--compress` |  Compresses the CSV and SQL data and table structure files exported by Dumpling. It supports the following compression algorithms: `gzip`, `snappy`, and `zstd`.  | "" |
+
+## Output filename template
+
+The `--output-filename-template` argument defines the naming convention for output files, excluding the file extensions. It accepts strings in the [Go `text/template` syntax](https://golang.org/pkg/text/template/).
+
+The following fields are available for the template:
+
+* `.DB`: the database name
+* `.Table`: the table name or the object name
+* `.Index`: the 0-based sequence number of the file when a table is split into multiple files, indicating which part is being dumped. For example, `{{printf "%09d" .Index}}` means formatting `.Index` as a 9-digit number with leading zeros.
+
+Database and table names might contain special characters (such as `/`) that are not allowed in file systems. To handle this issue, Dumpling provides the `fn` function to percent-encode these special characters:
+
+* U+0000 to U+001F (control characters)
+* `/`, `\`, `<`, `>`, `:`, `"`, `*`, `?` (invalid Windows path characters)
+* `.` (database or table name separator)
+* `-`, if used as part of `-schema`
+
+For example, using `--output-filename-template '{{fn .Table}}.{{printf "%09d" .Index}}'`, Dumpling will write the table `db.tbl:normal` into files named `tbl%3Anormal.000000000.sql`, `tbl%3Anormal.000000001.sql`, and so on.
+
+In addition to output data files, you can define `--output-filename-template` to replace file names of the schema files. The following table shows the default configurations.
+
+| Name | Content |
+|------|---------|
+| data | `{{fn .DB}}.{{fn .Table}}.{{.Index}}` |
+| schema | `{{fn .DB}}-schema-create` |
+| table | `{{fn .DB}}.{{fn .Table}}-schema` |
+| event | `{{fn .DB}}.{{fn .Table}}-schema-post` |
+| function | `{{fn .DB}}.{{fn .Table}}-schema-post` |
+| procedure | `{{fn .DB}}.{{fn .Table}}-schema-post` |
+| sequence | `{{fn .DB}}.{{fn .Table}}-schema-sequence` |
+| trigger | `{{fn .DB}}.{{fn .Table}}-schema-triggers` |
+| view | `{{fn .DB}}.{{fn .Table}}-schema-view` |
+
+For example, using `--output-filename-template '{{define "table"}}{{fn .Table}}.$schema{{end}}{{define "data"}}{{fn .Table}}.{{printf "%09d" .Index}}{{end}}'`, Dumpling will write the schema of the table `db.tbl:normal` into a file named `tbl%3Anormal.$schema.sql`, and write the data into files `tbl%3Anormal.000000000.sql`, `tbl%3Anormal.000000001.sql`, and so on.

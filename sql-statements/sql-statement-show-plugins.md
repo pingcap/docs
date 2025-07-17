@@ -1,24 +1,24 @@
 ---
 title: SHOW PLUGINS
-summary: TiDB 数据库中 SHOW PLUGINS 的使用概述。
+summary: An overview of the usage of SHOW PLUGINS for the TiDB database.
 ---
 
 # SHOW PLUGINS
 
-`SHOW PLUGINS` 显示在 TiDB 中安装的所有插件，包括每个插件的状态和版本信息。
+`SHOW PLUGINS` shows all plugins installed in TiDB, including each plugin's status and version information.
 
-> **注意：**
+> **Note:**
 >
-> 此功能在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
-## 语法
+## Synopsis
 
 ```ebnf+diagram
 ShowPluginsStmt ::=
     "SHOW" "PLUGINS" ShowLikeOrWhere?
 ```
 
-## 示例
+## Examples
 
 ```sql
 SHOW PLUGINS;
@@ -46,10 +46,10 @@ SHOW PLUGINS LIKE 'a%';
 1 row in set (0.000 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-TiDB 中的 `SHOW PLUGINS` 语句与 MySQL 完全兼容。如果发现任何兼容性差异，请[报告问题](https://docs.pingcap.com/tidb/stable/support)。
+The `SHOW PLUGINS` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
-## 另请参阅
+## See also
 
 - [`ADMIN PLUGINS`](/sql-statements/sql-statement-admin.md#admin-plugins-related-statement)

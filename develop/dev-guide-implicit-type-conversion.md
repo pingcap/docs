@@ -1,36 +1,36 @@
 ---
-title: 避免隐式类型转换
-summary: 介绍 TiDB 中隐式类型转换可能带来的后果以及避免方法。
+title: Avoid Implicit Type Conversions
+summary: Introduces the possible consequences of implicit type conversions in TiDB and ways to avoid them.
 ---
 
-# 避免隐式类型转换
+# Avoid Implicit Type Conversions
 
-本文档介绍 TiDB 中隐式类型转换的规则和可能带来的后果，以及如何避免隐式类型转换。
+This document introduces the rules and possible consequences of implicit type conversions in TiDB and how to avoid implicit type conversions.
 
-## 转换规则
+## Conversion rules
 
-当 SQL 语句中谓词两侧的数据类型不匹配时，TiDB 会隐式地将一侧或双侧的数据类型转换为兼容的数据类型以进行谓词运算。
+When the data types on the two sides of the predicate in a SQL statement do not match, TiDB implicitly convert the data types on one or both sides to a compatible data type for predicate operations.
 
-TiDB 中隐式类型转换的规则如下：
+The rules for implicit type conversion in TiDB are as follows:
 
-- 如果一个或两个参数为 `NULL`，比较的结果为 `NULL`。NULL 安全的 `<=>` 等价比较运算符不需要转换，因为 NULL `<=>` NULL 的结果为 `true`。
-- 如果比较操作中的两个参数都是字符串，则按字符串进行比较。
-- 如果两个参数都是整数，则按整数进行比较。
-- 如果没有与数字进行比较，则十六进制值被视为二进制字符串。
-- 如果其中一个参数是小数值，比较取决于另一个参数。如果另一个参数是小数值或整数值，则与小数值进行比较。如果另一个参数是浮点值，则与浮点值进行比较。
-- 如果其中一个参数是 `TIMESTAMP` 或 `DATETIME` 列，另一个参数是常量，则在执行比较之前将常量转换为时间戳。
-- 在所有其他情况下，参数都作为浮点数（`DOUBLE` 类型）进行比较。
+- If one or both arguments are `NULL`, the result of the comparison is `NULL`. The NULL-safe `<=>` equivalent comparison operator does not require conversion, because NULL `<=>` NULL results in `true`.
+- If both arguments in the comparison operation are strings, they are compared as strings.
+- If both arguments are integers, they are compared as integers.
+- If no comparison is made with numbers, the hexadecimal value is treated as a binary string.
+- If one of the arguments is a decimal value, the comparison depends on the other argument. If the other argument is a decimal or integer value, the argument is compared with the decimal value. If the other argument is a floating-point value, the argument is compared with the floating-point value.
+- If one of the arguments is a `TIMESTAMP` or `DATETIME` column and the other argument is a constant, the constant is converted to a timestamp before the comparison is performed.
+- In all other cases, the arguments are compared as floating-point numbers (the `DOUBLE` type).
 
-## 隐式类型转换带来的后果
+## Consequences caused by implicit type conversion
 
-隐式类型转换增加了人机交互的可用性。但是，应避免在应用程序代码中使用隐式类型转换，因为它们可能会导致以下问题：
+Implicit type conversions increase the usability of human-computer interaction. However, avoid using implicit type conversions in application code, because they might lead to the following issues:
 
-- 索引失效
-- 精度损失
+- Index invalidity
+- Loss of precision
 
-### 索引失效
+### Index invalidity
 
-在以下情况中，`account_id` 是主键，其数据类型为 `varchar`。在执行计划中，这条 SQL 语句存在隐式类型转换，无法使用索引。
+In the following case, `account_id` is the primary key and its data type is `varchar`. In the execution plan, this SQL statement has an implicit type conversion and cannot use the index.
 
 ```sql
 DESC SELECT * FROM `account` WHERE `account_id`=6010000000009801;
@@ -44,11 +44,11 @@ DESC SELECT * FROM `account` WHERE `account_id`=6010000000009801;
 3 rows in set (0.00 sec)
 ```
 
-**运行结果简述**：从上述执行计划中，可以看到 `Cast` 运算符。
+**Brief description of run results**: From the above execution plan, the `Cast` operator is visible.
 
-### 精度损失
+### Loss of precision
 
-在以下情况中，`a` 字段的数据类型为 `decimal(32,0)`。在执行计划中，发生了隐式类型转换，小数字段和字符串常量都被转换为 double 类型。由于 double 类型的精度不如 decimal，会出现精度损失。在这种情况下，SQL 语句错误地过滤了超出范围的结果集。
+In the following case, the data type of the `a` field is `decimal(32,0)`. In the execution plan, an implicit type conversion occurs, and both the decimal field and the string constant are converted to the double type. Because the precision of the double type is not as high as decimal, there is a loss of precision. In this case, the SQL statement incorrectly filters the result set out of range.
 
 ```sql
 DESC SELECT * FROM `t1` WHERE `a` BETWEEN '12123123' AND '1111222211111111200000';
@@ -62,7 +62,7 @@ DESC SELECT * FROM `t1` WHERE `a` BETWEEN '12123123' AND '1111222211111111200000
 3 rows in set (0.00 sec)
 ```
 
-**运行结果简述**：从上述执行计划中，可以看到 `Cast` 运算符。
+**Brief description of run results**: From the above execution plan, the `Cast` operator is visible.
 
 ```sql
 SELECT * FROM `t1` WHERE `a` BETWEEN '12123123' AND '1111222211111111200000';
@@ -75,18 +75,18 @@ SELECT * FROM `t1` WHERE `a` BETWEEN '12123123' AND '1111222211111111200000';
 
 ```
 
-**运行结果简述**：上述执行给出了错误的结果。
+**Brief description of run results**: The above execution gives a wrong result.
 
-## 需要帮助？
+## Need help?
 
 <CustomContent platform="tidb">
 
-在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](/support.md)。
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](https://tidb.support.pingcap.com/)。
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
 
 </CustomContent>

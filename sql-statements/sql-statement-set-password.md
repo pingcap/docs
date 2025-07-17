@@ -1,23 +1,23 @@
 ---
-title: SET PASSWORD | TiDB SQL 语句参考
-summary: TiDB 数据库中 SET PASSWORD 的使用概述。
+title: SET PASSWORD | TiDB SQL Statement Reference
+summary: An overview of the usage of SET PASSWORD for the TiDB database.
 ---
 
 # SET PASSWORD
 
-此语句用于更改 TiDB 系统数据库中用户账户的密码。
+This statement changes the user password for a user account in the TiDB system database.
 
-## 语法
+## Synopsis
 
 ```ebnf+diagram
 SetPasswordStmt ::=
     "SET" "PASSWORD" ( "FOR" Username )? "=" ( stringLit | "PASSWORD" "(" stringLit ")" )
 ```
 
-## 示例
+## Examples
 
 ```sql
-mysql> SET PASSWORD='test'; -- 更改我的密码
+mysql> SET PASSWORD='test'; -- change my password
 Query OK, 0 rows affected (0.01 sec)
 
 mysql> CREATE USER 'newuser' IDENTIFIED BY 'test';
@@ -42,7 +42,7 @@ mysql> SHOW CREATE USER 'newuser';
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 1 row in set (0.00 sec)
 
-mysql> SET PASSWORD FOR newuser = PASSWORD('test'); -- 早期 MySQL 版本中已弃用的语法
+mysql> SET PASSWORD FOR newuser = PASSWORD('test'); -- deprecated syntax from earlier MySQL releases
 Query OK, 0 rows affected (0.00 sec)
 
 mysql> SHOW CREATE USER 'newuser';
@@ -54,16 +54,16 @@ mysql> SHOW CREATE USER 'newuser';
 1 row in set (0.00 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-TiDB 中的 `SET PASSWORD` 语句与 MySQL 完全兼容。如果发现任何兼容性差异，请[报告问题](https://docs.pingcap.com/tidb/stable/support)。
+The `SET PASSWORD` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
-## 另请参阅
+## See also
 
 * [CREATE USER](/sql-statements/sql-statement-create-user.md)
 
 <CustomContent platform="tidb">
 
-* [权限管理](/privilege-management.md)
+* [Privilege Management](/privilege-management.md)
 
 </CustomContent>

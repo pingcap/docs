@@ -1,81 +1,81 @@
 ---
-title: TiDB Cloud 2020 年发布说明
-summary: 了解 TiDB Cloud 在 2020 年的发布说明。
+title: TiDB Cloud Release Notes in 2020
+summary: Learn about the release notes of TiDB Cloud in 2020.
 ---
 
-# TiDB Cloud 2020 年发布说明
+# TiDB Cloud Release Notes in 2020
 
-本页列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2020 年的发布说明。
+This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2020.
 
-## 2020 年 12 月 30 日
+## December 30, 2020
 
-* 将默认 TiDB 版本升级到 v4.0.9
-* 支持优雅地升级和扩展 TiDB，实现零客户端故障
-* 从备份恢复新集群后恢复集群配置
+* Upgrade the default TiDB version to v4.0.9
+* Support upgrading and scaling in TiDB gracefully to achieve zero client failures
+* Recover cluster configuration after restoring a new cluster from backup
 
-## 2020 年 12 月 16 日
+## December 16, 2020
 
-* 调整所有集群层级的 TiDB 节点最小数量为一个
-* 禁止在 SQL Web Shell 上执行系统命令
-* 默认为 TiDB 集群启用 redact-log
+* Adjust the minimum number of TiDB nodes to one for all cluster tiers
+* Prohibit executing system command on the SQL web shell
+* Enable redact-log for TiDB clusters by default
 
-## 2020 年 11 月 24 日
+## November 24, 2020
 
-* 允许 TiDB 集群公共端点的流量过滤 IP 列表为空以禁用公共访问
-* 提高发送给使用 Outlook 或 Hotmail 的客户的邀请邮件的送达率
-* 优化注册的错误通知消息
-* 新集群将在 CentOS VM 而不是 Ubuntu 上运行
-* 修复当相应的备份仍然存在时集群不显示在回收站中的问题
+* Allow the traffic filter IP list of a TiDB cluster's public endpoint to be empty to disable public access
+* Improve the delivery rate of invitation emails sent to customers with Outlook or Hotmail
+* Polish the error notification message for sign-up
+* New clusters will run on CentOS VM instead of Ubuntu
+* Fix the issue that the cluster does not show in the recycle bin when the corresponding backup still exists
 
-## 2020 年 11 月 4 日
+## November 4, 2020
 
-* 实现更改组织名称的功能
-* 在数据恢复期间防止用户访问 TiDB
-* 更新注册页面中的服务条款和隐私政策位置
-* 添加反馈表单入口小部件
-* 防止成员在偏好设置标签中删除所有者
-* 更改 TiFlash 和 TiKV 存储图表指标
-* 将默认 TiDB 集群版本升级到 4.0.8
+* Implement the function of changing the organization name
+* Prevent users from accessing TiDB during data restoring
+* Update Terms of Service and Privacy location in the Sign Up page
+* Add a feedback form entrance widget
+* Prevent Members from deleting owner(s) in the Preference tab
+* Change TiFlash and TiKV storage chart metrics
+* Upgrade the default TiDB cluster version to 4.0.8
 
-## 2020 年 10 月 12 日
+## October 12, 2020
 
-* 将 SQL Web Shell 客户端从 Oracle MySQL 客户端更改为 `usql` 客户端
-* 将默认 TiDB 版本升级到 4.0.7
-* 将手动备份保留期从 7 天延长到 30 天
+* Change the SQL webshell client from Oracle MySQL client to `usql` client
+* Upgrade the default TiDB version to 4.0.7
+* Extend the manual backup retention period from 7 days to 30 days
 
-## 2020 年 10 月 2 日
+## October 2, 2020
 
-* 修复 TiFlash 磁盘存储配置
+* Fix TiFlash disk storage configuration
 
-## 2020 年 9 月 14 日
+## September 14, 2020
 
-* 通过添加 `region` 标签修复监控指标
-* 修复非 HTAP 集群无法扩展的问题
+* Fix monitoring metrics by adding the `region` label
+* Fix the issue that non-HTAP clusters cannot be scaled
 
-## 2020 年 9 月 11 日
+## September 11, 2020
 
-* 客户现在可以使用带有流量过滤器的公共端点访问 TiDB
-* 在自动备份设置对话框中添加时区指示器
-* 修复注册未完成时邀请链接失效的问题
+* Customers now can access TiDB using a public endpoint with traffic filters
+* Add the time zone indicator at the auto backup settings dialog
+* Fix the broken invitation link when registration is not finished
 
-## 2020 年 9 月 4 日
+## September 4, 2020
 
-* 修复邀请邮件中的错误 URL
+* Fix an incorrect URL in invitation Email
 
-## 2020 年 8 月 6 日
+## August 6, 2020
 
-* 将电子邮件支持更改为访问 TiDB Cloud 客户支持
-* 为自定义电子邮件登录添加简单的双因素认证功能
-* 添加设置 VPC 对等连接的功能
-* 为注册/登录添加自定义电子邮件支持
+* Change email support to visiting TiDB Cloud Customer Support
+* Add the simple 2fa feature for custom email login
+* Add the feature of setting up VPC peering
+* Add custom email support for signup/login
 
-## 2020 年 7 月 17 日
+## July 17, 2020
 
-* 将自动每日备份的默认保留期调整为 7 天
-* 在工具提示中添加集群不健康状态的原因
-* 修复初始信用额度为 0 时用户仍然可以创建集群的问题
-* 优化 Dashboard 的集成
-* 为客户添加信用额度时发送邮件
-* 在租户偏好设置页面中添加租户 ID
-* 优化用户配额限制的合理通知消息
-* 修复备份/恢复指标
+* Adjust the default retention of automated daily backup to 7 days
+* Add reasons at tooltip for clusters in unhealthy status
+* Fix the issue that when the initial credit is 0, users can still create a cluster
+* Optimize the integration of Dashboard
+* Send emails when adding credits for customers
+* Add the tenant ID in the tenant preference page
+* Optimize the reasonable notice message for user's quota limit
+* Fix backup/restore metrics

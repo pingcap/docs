@@ -122,7 +122,7 @@ In this example, TiDB contains five replicas and three regions. Region 1 is the 
 
     > **Note:**
     >
-    > The greater the priority number, the higher the probability that this node becomes the leader.
+    > In all available PD nodes, the node with the highest priority number becomes the leader.
 
 3. Create placement rules and fix the primary replica of the test table to region 1:
 

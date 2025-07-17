@@ -1,22 +1,22 @@
 ---
 title: TIKV_REGION_PEERS
-summary: "了解 `TIKV_REGION_PEERS` INFORMATION_SCHEMA 表。"
+summary: Learn the `TIKV_REGION_PEERS` INFORMATION_SCHEMA table.
 ---
 
 # TIKV_REGION_PEERS
 
-`TIKV_REGION_PEERS` 表显示了 TiKV 中单个 Region 节点的详细信息，例如它是否是 learner 或 leader。
+The `TIKV_REGION_PEERS` table shows detailed information of a single Region node in TiKV, such as whether it is a learner or leader.
 
-> **注意：**
+> **Note:**
 >
-> 此表在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> This table is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC TIKV_REGION_PEERS;
 ```
 
-输出如下：
+The output is as follows:
 
 ```sql
 +--------------+-------------+------+------+---------+-------+
@@ -33,7 +33,7 @@ DESC TIKV_REGION_PEERS;
 7 rows in set (0.01 sec)
 ```
 
-例如，你可以使用以下 SQL 语句查询 `WRITTEN_BYTES` 值最大的前 3 个 Region 对应的具体 TiKV 地址：
+For example, you can query the specific TiKV addresses for the top 3 Regions with the maximum value of `WRITTEN_BYTES` using the following SQL statement:
 
 ```sql
 SELECT
@@ -50,15 +50,15 @@ WHERE
   AND peer.store_id = tikv.store_id;
 ```
 
-`TIKV_REGION_PEERS` 表中的字段说明如下：
+Fields in the `TIKV_REGION_PEERS` table are described as follows:
 
-* REGION_ID：Region 的 ID。
-* PEER_ID：Region peer 的 ID。
-* STORE_ID：Region 所在 TiKV store 的 ID。
-* IS_LEARNER：peer 是否为 learner。
-* IS_LEADER：peer 是否为 leader。
-* STATUS：peer 的状态：
-    * PENDING：暂时不可用。
-    * DOWN：离线且已转换。该 peer 不再提供服务。
-    * NORMAL：正常运行。
-* DOWN_SECONDS：离线持续时间，单位为秒。
+* REGION_ID: The Region ID.
+* PEER_ID: The ID of the Region peer.
+* STORE_ID: The ID of the TiKV store where the Region is located.
+* IS_LEARNER: Whether the peer is learner.
+* IS_LEADER: Whether the peer is leader.
+* STATUS: The statuses of a peer:
+    * PENDING: Temporarily unavailable.
+    * DOWN: Offline and converted. This peer no longer provides service.
+    * NORMAL: Running normally.
+* DOWN_SECONDS: The duration of being offline, in seconds.

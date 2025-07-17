@@ -1,34 +1,34 @@
 ---
-title: 使用导入资源
-summary: 了解如何使用导入资源管理导入任务。
+title: Use Import Resource
+summary: Learn how to manage the import task using the import resource.
 ---
 
-# 使用导入资源
+# Use Import Resource
 
-本文档介绍如何使用 `tidbcloud_import` 资源将数据导入到 TiDB Cloud 集群。
+You can learn how to import data to a TiDB Cloud cluster with the `tidbcloud_import` resource in this document.
 
-`tidbcloud_import` 资源的功能包括以下内容：
+The features of the `tidbcloud_import` resource include the following:
 
-- 为 TiDB Cloud Serverless 和 TiDB Cloud Dedicated 集群创建导入任务。
-- 从本地磁盘或 Amazon S3 存储桶导入数据。
-- 取消正在进行的导入任务。
+- Create import tasks for TiDB Cloud Serverless and TiDB Cloud Dedicated clusters.
+- Import data either from local disks or from Amazon S3 buckets.
+- Cancel ongoing import tasks.
 
-## 前提条件
+## Prerequisites
 
-- [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)。
-- [创建 TiDB Cloud Serverless 集群](/tidb-cloud/create-tidb-cluster-serverless.md)或[创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)。
+- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
+- [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) or [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
 
-## 创建并运行导入任务
+## Create and run an import task
 
-你可以使用导入资源管理本地导入任务或 Amazon S3 导入任务。
+You can manage either a local import task or an Amazon S3 import task using the import resource.
 
-### 创建并运行本地导入任务
+### Create and run a local import task
 
-> **注意：**
+> **Note:**
 >
-> 导入本地文件仅支持 TiDB Cloud Serverless 集群，不支持 TiDB Cloud Dedicated 集群。
+> Importing local files is supported only for TiDB Cloud Serverless clusters, not for TiDB Cloud Dedicated clusters.
 
-1. 创建用于导入的 CSV 文件。例如：
+1. Create a CSV file for import. For example:
 
    ```
    id;name;age
@@ -36,7 +36,7 @@ summary: 了解如何使用导入资源管理导入任务。
    2;Bob;30
    ```
 
-2. 创建一个 `import` 目录，然后在其中创建一个 `main.tf`。例如：
+2. Create an `import` directory, and then create a `main.tf` inside it. For example:
 
     ```
     terraform {
@@ -68,9 +68,9 @@ summary: 了解如何使用导入资源管理导入任务。
     }
     ```
 
-   用你自己的值替换文件中的资源值（如项目 ID、集群 ID 和 CSV 路径）。你可以在[配置页面](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format)上找到 `csv_format` 的详细信息。
+   Replace resource values (such as project ID, cluster ID, and CSV path) in the file with your own. And you can find details of `csv_format` on the [configuration page](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format).
 
-3. 运行 `terraform apply` 命令创建导入任务，然后输入 `yes` 确认创建并开始导入：
+3. Run the `terraform apply` command to create an import task, and then type `yes` to confirm the creation and start the import:
 
    ```
    $ terraform apply
@@ -87,7 +87,7 @@ summary: 了解如何使用导入资源管理导入任务。
    tidbcloud_import.example_local: Creation complete after 6s [id=781074]
    ```
 
-4. 使用 `terraform state show tidbcloud_import.${resource-name}` 检查导入任务的状态：
+4. Use `terraform state show tidbcloud_import.${resource-name}` to check the status of the import task:
 
    ```
    $ terraform state show tidbcloud_import.example_local
@@ -128,7 +128,7 @@ summary: 了解如何使用导入资源管理导入任务。
    }
    ```
 
-5. 几分钟后使用 `terraform refresh` 更新状态：
+5. Use `terraform refresh` to update the status after several minutes:
 
    ```
    $ terraform refresh && terraform state show tidbcloud_import.example_local
@@ -170,9 +170,9 @@ summary: 了解如何使用导入资源管理导入任务。
    }
    ```
 
-   当状态变为 `COMPLETED` 时，表示导入任务已完成。
+   When the status turns to `COMPLETED`, it indicates that the import task is finished.
 
-6. 使用 MySQL CLI 检查导入的数据：
+6. Check the imported data with MySQL CLI:
 
    ```
    mysql> SELECT * FROM test.import_test;
@@ -185,13 +185,13 @@ summary: 了解如何使用导入资源管理导入任务。
    2 rows in set (0.24 sec)
    ```
 
-### 创建并运行 Amazon S3 导入任务
+### Create and run an Amazon S3 import task
 
-> **注意：**
+> **Note:**
 >
-> 要允许 TiDB Cloud 访问你 Amazon S3 存储桶中的文件，你需要先[配置 Amazon S3 访问权限](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)。
+> To allow TiDB Cloud to access your files in the Amazon S3 bucket, you need to [configure Amazon S3 access](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access) first.
 
-1. 创建一个 `import` 目录，然后在其中创建一个 `main.tf`。例如：
+1. Create an `import` directory, and then create a `main.tf` inside it. For example:
 
    ```
    terraform {
@@ -226,7 +226,7 @@ summary: 了解如何使用导入资源管理导入任务。
    }
    ```
 
-2. 运行 `terraform apply` 命令创建导入任务，然后输入 `yes` 确认创建并开始导入：
+2. Run the `terraform apply` command to create an import task, and then type `yes` to confirm the creation and start the import:
 
    ```
    $ terraform apply
@@ -245,17 +245,17 @@ summary: 了解如何使用导入资源管理导入任务。
    tidbcloud_import.example_s3_parquet: Creation complete after 4s [id=781076]
    ```
 
-3. 使用 `terraform refresh` 和 `terraform state show tidbcloud_import.${resource-name}` 更新和检查导入任务的状态。
+3. Use `terraform refresh` and `terraform state show tidbcloud_import.${resource-name}` to update and check the status of the import task.
 
-## 更新导入任务
+## Update an import task
 
-导入任务无法更新。
+Import tasks cannot be updated.
 
-## 删除导入任务
+## Delete an import task
 
-对于 Terraform，删除导入任务意味着取消相应的导入资源。
+For Terraform, deleting an import task means canceling the corresponding import resource.
 
-你无法取消 `COMPLETED` 状态的导入任务。否则，你将收到如下示例中的 `Delete Error`：
+You cannot cancel a `COMPLETED` import task. Otherwise, you will get a `Delete Error` as in the following example:
 
 ```
 $ terraform destroy
@@ -277,7 +277,7 @@ tidbcloud_import.example_local: Destroying... [id=781074]
 ╵
 ```
 
-你可以取消状态为 `IMPORTING` 的导入任务。例如：
+You can cancel an import task whose status is `IMPORTING`. For example:
 
 ```
 $ terraform destroy
@@ -296,6 +296,6 @@ tidbcloud_import.example_local: Destruction complete after 0s
 Destroy complete! Resources: 1 destroyed.
 ```
 
-## 配置
+## Configurations
 
-请参阅[配置文档](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import)获取导入资源的所有可用配置。
+See [configuration documentation](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import) to get all the available configurations for the import resource.

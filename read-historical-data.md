@@ -1,55 +1,55 @@
 ---
-title: 使用系统变量 `tidb_snapshot` 读取历史数据
-summary: "了解如何使用系统变量 `tidb_snapshot` 从历史版本读取数据。"
+title: Read Historical Data Using the System Variable `tidb_snapshot`
+summary: Learn about how TiDB reads data from history versions using the system variable `tidb_snapshot`.
 ---
 
-# 使用系统变量 `tidb_snapshot` 读取历史数据
+# Read Historical Data Using the System Variable `tidb_snapshot`
 
-本文档介绍如何使用系统变量 `tidb_snapshot` 从历史版本读取数据，包括具体的使用示例和保存历史数据的策略。
+This document describes how to read data from the history versions using the system variable `tidb_snapshot`, including specific usage examples and strategies for saving historical data.
 
-> **注意：**
+> **Note:**
 >
-> 你也可以使用 [Stale Read](/stale-read.md) 功能来读取历史数据，这是更推荐的方式。
+> You can also use the [Stale Read](/stale-read.md) feature to read historical data, which is more recommended.
 
-## 功能说明
+## Feature description
 
-TiDB 实现了通过标准 SQL 接口直接读取历史数据的功能，无需特殊的客户端或驱动程序。
+TiDB implements a feature to read history data using the standard SQL interface directly without special clients or drivers.
 
-> **注意：**
+> **Note:**
 >
-> - 即使数据被更新或删除，也可以通过 SQL 接口读取其历史版本。
-> - 在读取历史数据时，即使当前表结构已经改变，TiDB 也会返回带有旧表结构的数据。
+> - Even when data is updated or removed, its history versions can be read using the SQL interface.
+> - When reading historical data, TiDB returns the data with the old table structure even if the current table structure is different.
 
-## TiDB 如何读取历史版本数据
+## How TiDB reads data from history versions
 
-TiDB 引入了 [`tidb_snapshot`](/system-variables.md#tidb_snapshot) 系统变量来支持读取历史数据。关于 `tidb_snapshot` 变量：
+The [`tidb_snapshot`](/system-variables.md#tidb_snapshot) system variable is introduced to support reading history data. About the `tidb_snapshot` variable:
 
-- 该变量在 `SESSION` 作用域内有效。
-- 可以使用 `SET` 语句修改其值。
-- 变量的数据类型为文本。
-- 变量接受 TSO（时间戳预言机）和日期时间格式。TSO 是从 PD 获取的全局唯一时间服务。可接受的日期时间格式为 "2016-10-08 16:45:26.999"。通常，日期时间可以使用秒级精度设置，例如 "2016-10-08 16:45:26"。
-- 当设置该变量时，TiDB 会使用其值作为时间戳创建一个快照，这只涉及数据结构且没有任何开销。之后，所有的 `SELECT` 操作都将从该快照中读取数据。
+- The variable is valid in the `SESSION` scope.
+- Its value can be modified using the `SET` statement.
+- The data type for the variable is text.
+- The variable accepts TSO (Timestamp Oracle) and datetime. TSO is a globally unique time service, which is obtained from PD. The acceptable datetime format is "2016-10-08 16:45:26.999". Generally, the datetime can be set using second precision, for example "2016-10-08 16:45:26".
+- When the variable is set, TiDB creates a Snapshot using its value as the timestamp, just for the data structure and there is no any overhead. After that, all the `SELECT` operations will read data from this Snapshot.
 
-> **注意：**
+> **Note:**
 >
-> 由于 TiDB 事务中的时间戳是由 Placement Driver (PD) 分配的，存储的数据版本也是基于 PD 分配的时间戳进行标记的。当创建快照时，版本号是基于 `tidb_snapshot` 变量的值。如果 TiDB 服务器的本地时间与 PD 服务器时间存在较大差异，请使用 PD 服务器的时间。
+> Because the timestamp in TiDB transactions is allocated by Placement Driver (PD), the version of the stored data is also marked based on the timestamp allocated by PD. When a Snapshot is created, the version number is based on the value of the `tidb_snapshot` variable. If there is a large difference between the local time of the TiDB server and the PD server, use the time of the PD server.
 
-从历史版本读取数据后，你可以通过结束当前会话或使用 `SET` 语句将 `tidb_snapshot` 变量的值设置为 ""（空字符串）来读取最新版本的数据。
+After reading data from history versions, you can read data from the latest version by ending the current Session or using the `SET` statement to set the value of the `tidb_snapshot` variable to "" (empty string).
 
-## TiDB 如何管理数据版本
+## How TiDB manages the data versions
 
-TiDB 实现了多版本并发控制（MVCC）来管理数据版本。之所以保留数据的历史版本，是因为每次更新/删除都会创建数据对象的新版本，而不是直接在原地更新/删除数据对象。但并非所有版本都会被保留。如果版本早于特定时间，它们将被完全删除，以减少存储占用和过多历史版本导致的性能开销。
+TiDB implements Multi-Version Concurrency Control (MVCC) to manage data versions. The history versions of data are kept because each update/removal creates a new version of the data object instead of updating/removing the data object in-place. But not all the versions are kept. If the versions are older than a specific time, they will be removed completely to reduce the storage occupancy and the performance overhead caused by too many history versions.
 
-在 TiDB 中，垃圾回收（GC）会定期运行以删除过时的数据版本。有关 GC 的详细信息，请参见 [TiDB 垃圾回收（GC）](/garbage-collection-overview.md)
+In TiDB, Garbage Collection (GC) runs periodically to remove the obsolete data versions. For GC details, see [TiDB Garbage Collection (GC)](/garbage-collection-overview.md)
 
-请特别注意以下几点：
+Pay special attention to the following:
 
-- [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)：此系统变量用于配置早期修改的保留时间（默认值：`10m0s`）。
-- `SELECT * FROM mysql.tidb WHERE variable_name = 'tikv_gc_safe_point'` 的输出。这是当前可以读取历史数据的 `safePoint`。每次运行垃圾回收进程时都会更新此值。
+- [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50): This system variable is used to configure the retention time of earlier modifications (default: `10m0s`).
+- The output of `SELECT * FROM mysql.tidb WHERE variable_name = 'tikv_gc_safe_point'`. This is the current `safePoint` where you can read historical data up to. It is updated every time the garbage collection process is run.
 
-## 示例
+## Example
 
-1. 在初始阶段，创建一个表并插入几行数据：
+1. At the initial stage, create a table and insert several rows of data:
 
     ```sql
     mysql> create table t (c int);
@@ -59,7 +59,7 @@ TiDB 实现了多版本并发控制（MVCC）来管理数据版本。之所以�
     Query OK, 3 rows affected (0.00 sec)
     ```
 
-2. 查看表中的数据：
+2. View the data in the table:
 
     ```sql
     mysql> select * from t;
@@ -73,7 +73,7 @@ TiDB 实现了多版本并发控制（MVCC）来管理数据版本。之所以�
     3 rows in set (0.00 sec)
     ```
 
-3. 查看表的时间戳：
+3. View the timestamp of the table:
 
     ```sql
     mysql> select now();
@@ -85,14 +85,14 @@ TiDB 实现了多版本并发控制（MVCC）来管理数据版本。之所以�
     1 row in set (0.00 sec)
     ```
 
-4. 更新其中一行的数据：
+4. Update the data in one row:
 
     ```sql
     mysql> update t set c=22 where c=2;
     Query OK, 1 row affected (0.00 sec)
     ```
 
-5. 确认数据已更新：
+5. Make sure the data is updated:
 
     ```sql
     mysql> select * from t;
@@ -106,22 +106,22 @@ TiDB 实现了多版本并发控制（MVCC）来管理数据版本。之所以�
     3 rows in set (0.00 sec)
     ```
 
-6. 设置作用域为 Session 的 `tidb_snapshot` 变量。设置该变量后，可以读取该值之前的最新版本。
+6. Set the `tidb_snapshot` variable whose scope is Session. The variable is set so that the latest version before the value can be read.
 
-    > **注意：**
+    > **Note:**
     >
-    > 在本例中，该值被设置为更新操作之前的时间。
+    > In this example, the value is set to be the time before the update operation.
 
     ```sql
     mysql> set @@tidb_snapshot="2016-10-08 16:45:26";
     Query OK, 0 rows affected (0.00 sec)
     ```
 
-    > **注意：**
+    > **Note:**
     >
-    > 你应该在 `tidb_snapshot` 前使用 `@@` 而不是 `@`，因为 `@@` 用于表示系统变量，而 `@` 用于表示用户变量。
+    > You should use `@@` instead of `@` before `tidb_snapshot` because `@@` is used to denote the system variable while `@` is used to denote the user variable.
 
-    **结果：** 以下语句读取的是更新操作之前的数据，即历史数据。
+    **Result:** The read from the following statement is the data before the update operation, which is the history data.
 
     ```sql
     mysql> select * from t;
@@ -135,7 +135,7 @@ TiDB 实现了多版本并发控制（MVCC）来管理数据版本。之所以�
     3 rows in set (0.00 sec)
     ```
 
-7. 将 `tidb_snapshot` 变量设置为 ""（空字符串），你就可以读取最新版本的数据：
+7. Set the `tidb_snapshot` variable to be "" (empty string) and you can read the data from the latest version:
 
     ```sql
     mysql> set @@tidb_snapshot="";
@@ -154,24 +154,24 @@ TiDB 实现了多版本并发控制（MVCC）来管理数据版本。之所以�
     3 rows in set (0.00 sec)
     ```
 
-    > **注意：**
+    > **Note:**
     >
-    > 你应该在 `tidb_snapshot` 前使用 `@@` 而不是 `@`，因为 `@@` 用于表示系统变量，而 `@` 用于表示用户变量。
+    > You should use `@@` instead of `@` before `tidb_snapshot` because `@@` is used to denote the system variable while `@` is used to denote the user variable.
 
-## 如何恢复历史数据
+## How to restore historical data
 
-在从旧版本恢复数据之前，请确保在你处理数据时垃圾回收（GC）不会清除历史数据。这可以通过设置 `tidb_gc_life_time` 变量来实现，如下例所示。恢复完成后，不要忘记将变量设置回之前的值。
+Before you restore data from an older version, make sure that Garbage Collection (GC) does not clear the history data while you are working on it. This can be done by setting the `tidb_gc_life_time` variable as the following example shows. Do not forget to set the variable back to the previous value after the restore.
 
 ```sql
 SET GLOBAL tidb_gc_life_time="60m";
 ```
 
-> **注意：**
+> **Note:**
 >
-> 将 GC 生命周期从默认的 10 分钟增加到半小时或更长时间将导致保留更多的行版本，这可能需要更多的磁盘空间。这也可能影响某些操作的性能，例如在数据读取过程中，TiDB 需要跳过同一行的这些额外版本时的扫描操作。
+> Increasing the GC life time from the default 10 minutes to half an hour or more will result in additional versions of rows being retained, which might require more disk space. This might also affect the performance of certain operations such as scans when TiDB needs to skip these additional versions of the same rows during data reads.
 
-要从旧版本恢复数据，你可以使用以下方法之一：
+To restore data from an older version, you can use one of the following methods:
 
-- 对于简单的情况，在设置 `tidb_snapshot` 变量后使用 [`SELECT`](/sql-statements/sql-statement-select.md) 并复制粘贴输出，或使用 `SELECT ... INTO OUTFILE` 然后使用 [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) 稍后导入数据。
+- For simple cases, use [`SELECT`](/sql-statements/sql-statement-select.md) after setting the `tidb_snapshot` variable and copy-paste the output, or use `SELECT ... INTO OUTFILE` and then use [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) to import the data later on.
 
-- 使用 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-historical-data-snapshots-of-tidb) 导出历史快照。Dumpling 在导出较大数据集时表现良好。
+- Use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-historical-data-snapshots-of-tidb) to export a historical snapshot. Dumpling performs well in exporting larger sets of data.

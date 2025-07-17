@@ -1,27 +1,27 @@
 ---
-title: 位函数和运算符
-summary: 了解位函数和运算符。
+title: Bit Functions and Operators
+summary: Learn about the bit functions and operators.
 ---
 
-# 位函数和运算符
+# Bit Functions and Operators
 
-TiDB 支持 MySQL 8.0 中提供的所有[位函数和运算符](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html)。
+TiDB supports all of the [bit functions and operators](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html) available in MySQL 8.0.
 
-**位函数和运算符：**
+**Bit functions and operators:**
 
-| 名称 | 描述 |
+| Name | Description |
 | :------| :------------- |
-| [`BIT_COUNT()`](#bit_count) | 返回值为 1 的位数 |
-| [<code>&</code>](#-bitwise-and) | 按位与 |
-| [<code>~</code>](#-bitwise-inversion) | 按位取反 |
-| [<code>\|</code>](#-bitwise-or) | 按位或 |
-| [`^`](#-bitwise-xor) | 按位异或 |
-| [`<<`](#-left-shift) | 左移 |
-| [`>>`](#-right-shift) | 右移 |
+| [`BIT_COUNT()`](#bit_count) | Return the number of bits that are set as 1 |
+| [<code>&</code>](#-bitwise-and) | Bitwise AND |
+| [<code>~</code>](#-bitwise-inversion) | Bitwise inversion |
+| [<code>\|</code>](#-bitwise-or) | Bitwise OR |
+| [`^`](#-bitwise-xor) | Bitwise XOR |
+| [`<<`](#-left-shift) | Left shift |
+| [`>>`](#-right-shift) | Right shift |
 
 ## [`BIT_COUNT()`](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#function_bit-count)
 
-`BIT_COUNT(expr)` 函数返回 `expr` 中值为 1 的位数。
+The `BIT_COUNT(expr)` function returns the number of bits that are set as 1 in `expr`.
 
 ```sql
 SELECT BIT_COUNT(b'00101001');
@@ -36,11 +36,11 @@ SELECT BIT_COUNT(b'00101001');
 1 row in set (0.00 sec)
 ```
 
-> **注意：**
+> **Note:**
 >
-> 如果参数 `expr` 是二进制数，你需要在数字前明确指定 `b`，例如 `b'00101001'`。否则，此函数会将其视为字符串并返回不同的结果。例如，`BIT_COUNT('00101001')` 返回 `7`，因为它将字符串 `'00101001'` 转换为十进制数 `101001`，并计算其二进制格式 `11000100001010001` 中 `1` 的位数。
+> If the argument `expr` is a binary number, you need to specify `b` explicitly before the number, such as `b'00101001'`. Otherwise, this function treats it as a string and returns a different result. For example, `BIT_COUNT('00101001')` returns `7` because it converts the string `'00101001'` as the decimal number `101001` and counts the number of `1` bits in its binary format `11000100001010001`.
 
-以下示例与前面的类似，但使用十六进制字面量而不是位字面量作为参数。`CONV()` 函数将 `0x29` 从十六进制（基数 16）转换为二进制（基数 2），显示其二进制表示为 `00101001`。
+The following example is similar to the preceding one, but it uses a hex-literal instead of a bit-literal as the argument. The `CONV()` function converts `0x29` from hexadecimal (base 16) to binary (base 2), showing that it equals `00101001` in binary.
 
 ```sql
 SELECT BIT_COUNT(0x29), CONV(0x29,16,2);
@@ -55,7 +55,7 @@ SELECT BIT_COUNT(0x29), CONV(0x29,16,2);
 1 row in set (0.01 sec)
 ```
 
-`BIT_COUNT(expr)` 函数的一个实际用途是将网络掩码转换为 [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) 表示法。在以下示例中，网络掩码 `255.255.255.0` 被转换为其 CIDR 表示 `24`。
+A practical use of the `BIT_COUNT(expr)` function is to convert a netmask to a [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) notation. In the following example, the netmask `255.255.255.0` is converted to its CIDR representation `24`.
 
 ```sql
 SELECT BIT_COUNT(INET_ATON('255.255.255.0'));
@@ -70,11 +70,11 @@ SELECT BIT_COUNT(INET_ATON('255.255.255.0'));
 1 row in set (0.00 sec)
 ```
 
-## [`&`（按位与）](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-and)
+## [`&` (bitwise AND)](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-and)
 
-`&` 运算符执行按位与运算。它比较两个数字的对应位：如果两个对应位都为 1，则结果的对应位为 1；否则为 0。
+The `&` operator performs a bitwise AND operation. It compares the corresponding bits of two numbers: if both corresponding bits are 1, the corresponding bit of the result is 1; otherwise, it is 0.
 
-例如，`1010` 和 `1100` 之间的按位与运算返回 `1000`，因为只有最左边的位在两个数字中都设置为 1。
+For example, a bitwise AND operation between `1010` and `1100` returns `1000`, because only the leftmost bit is set as 1 in both numbers.
 
 ```
   1010
@@ -83,7 +83,7 @@ SELECT BIT_COUNT(INET_ATON('255.255.255.0'));
   1000
 ```
 
-在 SQL 中，你可以如下使用 `&` 运算符：
+In SQL, you can use the `&` operator as follows:
 
 ```sql
 SELECT CONV(b'1010' & b'1000',10,2);
@@ -98,9 +98,9 @@ SELECT CONV(b'1010' & b'1000',10,2);
 1 row in set (0.00 sec)
 ```
 
-你可以将 `&` 运算符与 `INET_NTOA()` 和 `INET_ATON()` 函数一起使用，对 IP 地址和网络掩码执行按位与运算以获取网络地址。这对于确定多个 IP 地址是否属于同一网络非常有用。
+You can use the `&` operator with `INET_NTOA()` and `INET_ATON()` functions to perform a bitwise AND operation on an IP address and a network mask to get the network address. This is useful to determine whether multiple IP addresses belong to the same network or not.
 
-在以下两个示例中，IP 地址 `192.168.1.1` 和 `192.168.1.2` 在与 `255.255.255.0` 掩码后都属于同一网络 `192.168.1.0/24`。
+In the following two examples, the IP addresses `192.168.1.1` and `192.168.1.2` are in the same network `192.168.1.0/24` when masked with `255.255.255.0`.
 
 ```sql
 SELECT INET_NTOA(INET_ATON('192.168.1.1') & INET_ATON('255.255.255.0'));
@@ -128,20 +128,20 @@ SELECT INET_NTOA(INET_ATON('192.168.1.2') & INET_ATON('255.255.255.0'));
 1 row in set (0.00 sec)
 ```
 
-## [`~`（按位取反）](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-invert)
+## [`~` (bitwise inversion)](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-invert)
 
-`~` 运算符对给定值执行按位取反（或按位非）运算。它对给定值的每一位进行取反：0 变为 1，1 变为 0。
+The `~` operator performs a bitwise inversion (or bitwise NOT) operation on a given value. It inverts each bit of the given value: bits that are 0 become 1, and bits that are 1 become 0.
 
-在运算之前，该值会被扩展为 64 位。
+Before the operation, the value is expanded to 64 bits.
 
-以二进制数 `1111000011110000` 为例。当扩展到 64 位并取反时，它看起来是这样的：
+Take the binary number `1111000011110000` as an example. When expanded to 64 bits and inverted, it looks like this:
 
 ```
-原始（16 位）：                                                                    1111000011110000
-扩展并取反（64 位）：    1111111111111111111111111111111111111111111111110000111100001111
+Original (16 bits):                                                                 1111000011110000
+Expanded and inverted (64 bits):    1111111111111111111111111111111111111111111111110000111100001111
 ```
 
-在 SQL 中，你可以如下使用 `~` 运算符：
+In SQL, you can use the `~` operator as follows:
 
 ```sql
 SELECT CONV(~ b'1111000011110000',10,2);
@@ -153,7 +153,7 @@ SELECT CONV(~ b'1111000011110000',10,2);
 1 row in set (0.00 sec)
 ```
 
-你可以通过对结果再次应用 `~` 运算符来反转取反操作：
+You can reverse the inversion by applying the `~` operator again to the result:
 
 ```sql
 SELECT CONV(~ b'1111111111111111111111111111111111111111111111110000111100001111',10,2);
@@ -168,11 +168,11 @@ SELECT CONV(~ b'1111111111111111111111111111111111111111111111110000111100001111
 1 row in set (0.00 sec)
 ```
 
-## [`|`（按位或）](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-or)
+## [`|` (bitwise OR)](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-or)
 
-`|` 运算符执行按位或运算。它比较两个数字的对应位：如果至少一个对应位为 1，则结果中的对应位为 1。
+The `|` operator performs a bitwise OR operation. It compares the corresponding bits of two numbers: if at least one of the corresponding bits is 1, the corresponding bit in the result is 1.
 
-例如，`1010` 和 `1100` 之间的按位或运算返回 `1110`，因为在两个数字的前三位中，至少有一个对应位设置为 1。
+For example, a bitwise OR operation between `1010` and `1100` returns `1110`, because among the first three bits of the two numbers, at least one of the corresponding bits is set as 1.
 
 ```
   1010
@@ -181,7 +181,7 @@ SELECT CONV(~ b'1111111111111111111111111111111111111111111111110000111100001111
   1110
 ```
 
-在 SQL 中，你可以如下使用 `|` 运算符：
+In SQL, you can use the `|` operator as follows:
 
 ```sql
 SELECT CONV(b'1010' | b'1100',10,2);
@@ -196,11 +196,11 @@ SELECT CONV(b'1010' | b'1100',10,2);
 1 row in set (0.00 sec)
 ```
 
-## [`^`（按位异或）](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-xor)
+## [`^` (bitwise XOR)](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-xor)
 
-`^` 运算符执行按位异或（XOR）运算。它比较两个数字的对应位：如果对应位不同，则结果中的对应位为 1。
+The `^` operator performs a bitwise XOR (exclusive OR) operation. It compares the corresponding bits of two numbers: if the corresponding bits are different, the corresponding bit in the result is 1.
 
-例如，`1010` 和 `1100` 之间的按位异或运算返回 `0110`，因为两个数字的第二位和第三位是不同的。
+For example, a bitwise XOR operation between `1010` and `1100` returns `0110`, because the second and the third bits of the two numbers are different.
 
 ```
   1010
@@ -209,7 +209,7 @@ SELECT CONV(b'1010' | b'1100',10,2);
   0110
 ```
 
-在 SQL 中，你可以如下使用 `^` 运算符：
+In SQL, you can use the `^` operator as follows:
 
 ```sql
 SELECT CONV(b'1010' ^ b'1100',10,2);
@@ -224,13 +224,13 @@ SELECT CONV(b'1010' ^ b'1100',10,2);
 1 row in set (0.00 sec)
 ```
 
-注意结果显示为 `110` 而不是 `0110`，因为前导零被删除了。
+Note that the result is shown as `110` instead of `0110` because the leading zero is removed.
 
-## [`<<`（左移）](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_left-shift)
+## [`<<` (left shift)](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_left-shift)
 
-`<<` 运算符执行左移运算，将数字的位向左移动指定的位数，在右侧用零填充空出的位。
+The `<<` operator performs a left shift operation, which shifts the bits of a number to the left by a specified number of positions, filling the vacated bits with zeros on the right.
 
-例如，以下语句使用 `1<<n` 将二进制值 `1` 向左移动 `n` 个位置：
+For example, the following statement uses `1<<n` to shift the binary value `1` to the left by `n` positions:
 
 ```sql
 WITH RECURSIVE cte(n) AS (
@@ -260,11 +260,11 @@ SELECT n,1<<n,LPAD(CONV(1<<n,10,2),11,0) FROM cte;
 11 rows in set (0.00 sec)
 ```
 
-## [`>>`（右移）](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_right-shift)
+## [`>>` (right shift)](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_right-shift)
 
-`>>` 运算符执行右移运算，将数字的位向右移动指定的位数，在左侧用零填充空出的位。
+The `>>` operator performs a right shift operation, which shifts the bits of a number to the right by a specified number of positions, filling the vacated bits with zeros on the left.
 
-例如，以下语句使用 `1024>>n` 将值 `1024`（二进制为 `10000000000`）向右移动 `n` 个位置：
+For example, the following statement uses `1024>>n` to shift a value of `1024` (`10000000000` in binary) to the right by `n` positions:
 
 ```sql
 WITH RECURSIVE cte(n) AS (
@@ -295,15 +295,15 @@ SELECT n,1024>>n,LPAD(CONV(1024>>n,10,2),11,0) FROM cte;
 12 rows in set (0.00 sec)
 ```
 
-`>>` 运算符还可用于从较大的数字中提取特定部分，例如从 TiDB [TSO](/tso.md) 时间戳中提取 UNIX 时间戳。
+The `>>` operator can also be useful for extracting specific parts of a larger number, such as extracting a UNIX timestamp from a TiDB [TSO](/tso.md) timestamp.
 
-## MySQL 兼容性
+## MySQL compatibility
 
-MySQL 8.0 和早期版本的 MySQL 在处理位函数和运算符方面存在一些差异。TiDB 旨在遵循 MySQL 8.0 的行为。
+There are some differences between MySQL 8.0 and earlier versions of MySQL in handling bit functions and operators. TiDB aims to follow the behavior of MySQL 8.0.
 
-## 已知问题
+## Known issues
 
-在以下情况下，TiDB 中的查询结果与 MySQL 5.7 相同，但与 MySQL 8.0 不同。
+In the following cases, the query results in TiDB are the same as MySQL 5.7 but different from MySQL 8.0.
 
-- 带有二进制参数的位运算。更多信息，请参见 [#30637](https://github.com/pingcap/tidb/issues/30637)。
-- `BIT_COUNT()` 函数的结果。更多信息，请参见 [#44621](https://github.com/pingcap/tidb/issues/44621)。
+- Bitwise operations with binary arguments. For more information, see [#30637](https://github.com/pingcap/tidb/issues/30637).
+- The result of the `BIT_COUNT()` function. For more information, see [#44621](https://github.com/pingcap/tidb/issues/44621).

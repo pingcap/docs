@@ -1,6 +1,6 @@
 ---
 title: INSPECTION_SUMMARY
-summary: "Learn the `INSPECTION_SUMMARY` inspection summary table."
+summary: Learn the `INSPECTION_SUMMARY` inspection summary table.
 ---
 
 # INSPECTION_SUMMARY

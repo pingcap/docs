@@ -1,53 +1,57 @@
 ---
-title: UUID 最佳实践
-summary: "UUID 作为主键时具有以下优势：减少网络往返、支持大多数编程语言和数据库、防止枚举攻击。建议将 UUID 以二进制形式存储在 `BINARY(16)` 列中。同时建议在 TiDB 中不要设置 `swap_flag` 以防止热点。MySQL 也支持 UUID。"
+title: Best Practices for Using UUIDs as Primary Keys
+summary: UUIDs, when used as primary keys, offer benefits such as reduced network trips, support in most programming languages and databases, and protection against enumeration attacks. Storing UUIDs as binary in a `BINARY(16)` column is recommended. It's also advised to avoid setting the `swap_flag` with TiDB to prevent hotspots. MySQL compatibility is available for UUIDs.
 ---
 
-# UUID 最佳实践
+# Best Practices for Using UUIDs as Primary Keys
 
-## UUID 概述
+UUIDs (Universally Unique Identifiers) are a popular alternative to auto-incrementing integers for primary keys in distributed databases. This document outlines the benefits of using UUIDs in TiDB, and offers best practices for storing and indexing them efficiently.
 
-与使用 [`AUTO_INCREMENT`](/auto-increment.md) 整数值相比，使用通用唯一标识符（UUID）作为主键具有以下优势：
+## Overview of UUIDs
 
-- UUID 可以在多个系统上生成而不会发生冲突。在某些情况下，这意味着可以减少与 TiDB 的网络往返次数，从而提高性能。
-- 大多数编程语言和数据库系统都支持 UUID。
-- 当作为 URL 的一部分使用时，UUID 不容易受到枚举攻击。相比之下，使用 `AUTO_INCREMENT` 数字时，可能会被猜测到发票 ID 或用户 ID。
+When used as a primary key, a UUID offers the following advantages compared with an [`AUTO_INCREMENT`](/auto-increment.md) integer:
 
-## 最佳实践
+- UUIDs can be generated on multiple systems without risking conflicts. In some cases, this means that the number of network trips to TiDB can be reduced, leading to improved performance.
+- UUIDs are supported by most programming languages and database systems.
+- When used as a part of a URL, a UUID is not vulnerable to enumeration attacks. In comparison, with an `AUTO_INCREMENT` number, it is possible to guess the invoice IDs or user IDs.
 
-### 以二进制形式存储
+## Best practices
 
-文本形式的 UUID 格式如下：`ab06f63e-8fe7-11ec-a514-5405db7aad56`，这是一个 36 个字符的字符串。通过使用 [`UUID_TO_BIN()`](/functions-and-operators/miscellaneous-functions.md#uuid_to_bin)，可以将文本格式转换为 16 字节的二进制格式。这样你就可以将文本存储在 [`BINARY(16)`](/data-type-string.md#binary-type) 列中。在检索 UUID 时，你可以使用 [`BIN_TO_UUID()`](/functions-and-operators/miscellaneous-functions.md#bin_to_uuid) 函数将其转换回文本格式。
+This section describes best practices for storing and indexing UUIDs in TiDB.
 
-### UUID 格式二进制顺序和聚簇主键
+### Store as binary
 
-`UUID_TO_BIN()` 函数可以使用一个参数（UUID）或两个参数（第二个参数是 `swap_flag`）。
+The textual UUID format looks like this: `ab06f63e-8fe7-11ec-a514-5405db7aad56`, which is a string of 36 characters. By using [`UUID_TO_BIN()`](/functions-and-operators/miscellaneous-functions.md#uuid_to_bin), the textual format can be converted into a binary format of 16 bytes. This allows you to store the text in a [`BINARY(16)`](/data-type-string.md#binary-type) column. When retrieving the UUID, you can use the [`BIN_TO_UUID()`](/functions-and-operators/miscellaneous-functions.md#bin_to_uuid) function to get back to the textual format.
+
+### UUID format binary order and clustered primary keys
+
+The `UUID_TO_BIN()` function can be used with one argument, the UUID or with two arguments where the second argument is a `swap_flag`.
 
 <CustomContent platform="tidb">
 
-建议在 TiDB 中不要设置 `swap_flag`，以避免[热点问题](/best-practices/high-concurrency-best-practices.md)。
+It is recommended to not set the `swap_flag` with TiDB to avoid [hotspots](/best-practices/high-concurrency-best-practices.md).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-建议在 TiDB 中不要设置 `swap_flag`，以避免热点问题。
+It is recommended to not set the `swap_flag` with TiDB to avoid hotspots.
 
 </CustomContent>
 
-你还可以为基于 UUID 的主键显式设置 [`CLUSTERED` 选项](/clustered-indexes.md)，以避免热点。
+You can also explicitly set the [`CLUSTERED` option](/clustered-indexes.md) for UUID based primary keys to avoid hotspots.
 
-为了演示 `swap_flag` 的效果，这里有两个结构相同的表。区别在于插入到 `uuid_demo_1` 的数据使用 `UUID_TO_BIN(?, 0)`，而 `uuid_demo_2` 使用 `UUID_TO_BIN(?, 1)`。
+To demonstrate the effect of the `swap_flag`, here are two tables with an identical structure. The difference is that the data inserted into `uuid_demo_1` uses `UUID_TO_BIN(?, 0)` and `uuid_demo_2` uses `UUID_TO_BIN(?, 1)`.
 
 <CustomContent platform="tidb">
 
-在下面的 [Key Visualizer](/dashboard/dashboard-key-visualizer.md) 截图中，你可以看到写入集中在 `uuid_demo_2` 表的单个区域，这个表在二进制格式中交换了字段的顺序。
+In the screenshot of the [Key Visualizer](/dashboard/dashboard-key-visualizer.md) below, you can see that writes are concentrated in a single region of the `uuid_demo_2` table that has the order of the fields swapped in the binary format.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-在下面的 [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer) 截图中，你可以看到写入集中在 `uuid_demo_2` 表的单个区域，这个表在二进制格式中交换了字段的顺序。
+In the screenshot of the [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer) below, you can see that writes are concentrated in a single region of the `uuid_demo_2` table that has the order of the fields swapped in the binary format.
 
 </CustomContent>
 
@@ -69,6 +73,6 @@ CREATE TABLE `uuid_demo_2` (
 )
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-MySQL 也可以使用 UUID。`BIN_TO_UUID()` 和 `UUID_TO_BIN()` 函数是在 MySQL 8.0 中引入的。`UUID()` 函数在早期的 MySQL 版本中也可用。
+UUIDs can be used in MySQL as well. The `BIN_TO_UUID()` and `UUID_TO_BIN()` functions were introduced in MySQL 8.0. The `UUID()` function is available in earlier MySQL versions as well.

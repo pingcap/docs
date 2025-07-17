@@ -1,21 +1,21 @@
 ---
 title: Split Region
-summary: TiDB 数据库中 Split Region 的使用概览。
+summary: An overview of the usage of Split Region for the TiDB database.
 ---
 
 # Split Region
 
-在 TiDB 中创建的每个新表默认会分配一个 [Region](/tidb-storage.md#region) 来存储该表的数据。这个默认行为由 TiDB 配置文件中的 `split-table` 控制。当该 Region 中的数据超过默认的 Region 大小限制时，该 Region 会开始分裂成两个。
+For each new table created in TiDB, one [Region](/tidb-storage.md#region) is segmented by default to store the data of this table. This default behavior is controlled by `split-table` in the TiDB configuration file. When the data in this Region exceeds the default Region size limit, the Region starts to split into two.
 
-在上述情况下，由于开始时只有一个 Region，所有写请求都会发生在该 Region 所在的 TiKV 上。如果对新创建的表有大量写入，就会造成热点问题。
+In the above case, because there is only one Region at the beginning, all write requests occur on the TiKV where the Region is located. If there are a large number of writes for the newly created table, hotspots are caused.
 
-为了解决上述场景中的热点问题，TiDB 引入了预分裂功能，可以根据指定的参数为某个表预先分裂多个 Region，并将这些 Region 分散到各个 TiKV 节点上。
+To solve the hotspot problem in the above scenario, TiDB introduces the pre-split function, which can pre-split multiple Regions for a certain table according to the specified parameters and scatter them to each TiKV node.
 
-> **注意：**
+> **Note:**
 >
-> 此功能在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
-## 语法图
+## Synopsis
 
 ```ebnf+diagram
 SplitRegionStmt ::=
@@ -38,27 +38,27 @@ RowValue ::=
     "(" ValuesOpt ")"
 ```
 
-## Split Region 的使用
+## Usage of Split Region
 
-Split Region 语法有两种类型：
+There are two types of Split Region syntax:
 
-- 均匀切分的语法：
+- The syntax of even split:
 
     ```sql
     SPLIT TABLE table_name [INDEX index_name] BETWEEN (lower_value) AND (upper_value) REGIONS region_num
     ```
 
-    `BETWEEN lower_value AND upper_value REGIONS region_num` 定义了上界、下界和 Region 数量。然后当前的 Region 会在上下界之间被均匀地分裂成指定数量（由 `region_num` 指定）的 Region。
+    `BETWEEN lower_value AND upper_value REGIONS region_num` defines the upper boundary, the lower boundary, and the Region amount. Then the current region will be evenly spilt into the number of regions (as specified in `region_num`) between the upper and lower boundaries.
 
-- 不均匀切分的语法：
+- The syntax of uneven split:
 
     ```sql
     SPLIT TABLE table_name [INDEX index_name] BY (value_list) [, (value_list)] ...
     ```
 
-    `BY value_list…` 手动指定一系列点，基于这些点对当前 Region 进行分裂。这适用于数据分布不均匀的场景。
+    `BY value_list…` specifies a series of points manually, based on which the current Region is spilt. It is suitable for scenarios with unevenly distributed data.
 
-以下示例显示了 `SPLIT` 语句的结果：
+The following example shows the result of the `SPLIT` statement:
 
 ```sql
 +--------------------+----------------------+
@@ -68,153 +68,153 @@ Split Region 语法有两种类型：
 +--------------------+----------------------+
 ```
 
-* `TOTAL_SPLIT_REGION`：新分裂的 Region 数量。
-* `SCATTER_FINISH_RATIO`：新分裂 Region 的分散完成率。`1.0` 表示所有 Region 都已分散。`0.5` 表示只有一半的 Region 已分散，其余正在分散中。
+* `TOTAL_SPLIT_REGION`: the number of newly split Regions.
+* `SCATTER_FINISH_RATIO`: the completion rate of scattering for newly split Regions. `1.0` means that all Regions are scattered. `0.5` means that only half of the Regions are scattered and the rest are being scattered.
 
-> **注意：**
+> **Note:**
 >
-> 以下两个会话变量可能会影响 `SPLIT` 语句的行为：
+> The following two session variables might affect the behavior of the `SPLIT` statement:
 >
-> - `tidb_wait_split_region_finish`：分散 Region 可能需要一段时间。这个时间取决于 PD 调度和 TiKV 负载。此变量用于控制执行 `SPLIT REGION` 语句时是否等待所有 Region 分散完成后才向客户端返回结果。如果其值设置为 `1`（默认值），TiDB 仅在分散完成后返回结果。如果其值设置为 `0`，TiDB 会不考虑分散状态直接返回结果。
-> - `tidb_wait_split_region_timeout`：此变量用于设置 `SPLIT REGION` 语句的执行超时时间，单位为秒。默认值为 300s。如果 `split` 操作在此时间内未完成，TiDB 会返回超时错误。
+> - `tidb_wait_split_region_finish`: It might take a while to scatter the Regions. This duration depends on PD scheduling and TiKV loads. This variable is used to control when executing the `SPLIT REGION` statement whether to return the results to the client until all Regions are scattered. If its value is set to `1` (by default), TiDB returns the results only after the scattering is completed. If its value is set to `0`, TiDB returns the results regardless of the scattering status.
+> - `tidb_wait_split_region_timeout`: This variable is to set the execution timeout of the `SPLIT REGION` statement, in seconds. The default value is 300s. If the `split` operation is not completed within the duration, TiDB returns a timeout error.
 
-### 切分表 Region
+### Split Table Region
 
-每个表中行数据的 key 由 `table_id` 和 `row_id` 编码而成。格式如下：
+The key of row data in each table is encoded by `table_id` and `row_id`. The format is as follows:
 
 ```go
 t[table_id]_r[row_id]
 ```
 
-例如，当 `table_id` 为 22，`row_id` 为 11 时：
+For example, when `table_id` is 22 and `row_id` is 11:
 
 ```go
 t22_r11
 ```
 
-同一个表中的行数据具有相同的 `table_id`，但每一行都有其唯一的 `row_id`，可以用于 Region 切分。
+Row data in the same table have the same `table_id`, but each row has its unique `row_id` that can be used for Region split.
 
-#### 均匀切分
+#### Even Split
 
-因为 `row_id` 是整数，可以根据指定的 `lower_value`、`upper_value` 和 `region_num` 计算出要切分的 key 的值。TiDB 首先计算步长值（`step = (upper_value - lower_value)/region_num`）。然后在 `lower_value` 和 `upper_value` 之间按每个"步长"均匀切分，生成 `region_num` 指定数量的 Region。
+Because `row_id` is an integer, the value of the key to be split can be calculated according to the specified `lower_value`, `upper_value`, and `region_num`. TiDB first calculates the step value (`step = (upper_value - lower_value)/region_num`). Then split will be done evenly per each "step" between `lower_value` and `upper_value` to generate the number of Regions as specified by `region_num`.
 
-例如，如果你想为表 t 在 key 范围 `minInt64`~`maxInt64` 之间均匀切分出 16 个 Region，可以使用以下语句：
+For example, if you want 16 evenly split Regions split from key range`minInt64`~`maxInt64` for table t, you can use this statement:
 
 ```sql
 SPLIT TABLE t BETWEEN (-9223372036854775808) AND (9223372036854775807) REGIONS 16;
 ```
 
-此语句将表 t 在 minInt64 和 maxInt64 之间切分成 16 个 Region。如果给定的主键范围小于指定范围，例如 0~1000000000，你可以使用 0 和 1000000000 分别代替 minInt64 和 maxInt64 来切分 Region。
+This statement splits table t into 16 Regions between minInt64 and maxInt64. If the given primary key range is smaller than the specified one, for example, 0~1000000000, you can use 0 and 1000000000 take place of minInt64 and maxInt64 respectively to split Regions.
 
 ```sql
 SPLIT TABLE t BETWEEN (0) AND (1000000000) REGIONS 16;
 ```
 
-#### 不均匀切分
+#### Uneven split
 
-如果已知数据分布不均匀，想要在 key 范围 -inf ~ 10000、10000 ~ 90000 和 90000 ~ +inf 分别切分一个 Region，可以通过设置固定点来实现，如下所示：
+If the known data is unevenly distributed, and you want a Region to be split respectively in key ranges -inf ~ 10000, 10000 ~ 90000, and 90000 ~ +inf, you can achieve this by setting fixed points, as shown below:
 
 ```sql
 SPLIT TABLE t BY (10000), (90000);
 ```
 
-### 切分索引 Region
+### Split index Region
 
-表中索引数据的 key 由 `table_id`、`index_id` 和索引列的值编码而成。格式如下：
+The key of the index data in the table is encoded by `table_id`, `index_id`, and the value of the index column. The format is as follows:
 
 ```go
 t[table_id]_i[index_id][index_value]
 ```
 
-例如，当 `table_id` 为 22，`index_id` 为 5，`index_value` 为 abc 时：
+For example, when `table_id` is 22, `index_id` is 5, and `index_value` is abc:
 
 ```go
 t22_i5abc
 ```
 
-同一个表中同一个索引的数据具有相同的 `table_id` 和 `index_id`。要切分索引 Region，需要根据 `index_value` 进行切分。
+The `table_id` and `index_id` of the same index data in one table is the same. To split index Regions, you need to split Regions based on `index_value`.
 
-#### 均匀切分
+#### Even Spilt
 
-索引的均匀切分方式与数据的均匀切分方式相同。但是计算步长值更复杂，因为 `index_value` 可能不是整数。
+The way to split index evenly works the same as splitting data evenly. However, calculating the value of step is more complicated, because `index_value` might not be an integer.
 
-首先将 `upper` 和 `lower` 的值编码成字节数组。在移除 `lower` 和 `upper` 字节数组的最长公共前缀后，将 `lower` 和 `upper` 的前 8 个字节转换为 uint64 格式。然后计算 `step = (upper - lower)/num`。之后，将计算出的步长编码成字节数组，并将其附加到 `lower` 和 `upper` 字节数组的最长公共前缀后面用于索引切分。以下是一个示例：
+The values of `upper` and `lower` are encoded into a byte array firstly. After removing the longest common prefix of `lower` and `upper` byte array, the first 8 bytes of `lower` and `upper` are converted into the uint64 format. Then `step = (upper - lower)/num` is calculated. After that, the calculated step is encoded into a byte array, which is appended to the longest common prefix of the `lower` and `upper` byte array for index split. Here is an example:
 
-如果 `idx` 索引的列是整数类型，你可以使用以下 SQL 语句切分索引数据：
+If the column of the `idx` index is of the integer type, you can use the following SQL statement to split index data:
 
 ```sql
 SPLIT TABLE t INDEX idx BETWEEN (-9223372036854775808) AND (9223372036854775807) REGIONS 16;
 ```
 
-此语句将表 t 中的索引 idx 从 `minInt64` 到 `maxInt64` 切分成 16 个 Region。
+This statement splits the Region of index idx in table t into 16 Regions from `minInt64` to `maxInt64`.
 
-如果索引 idx1 的列是 varchar 类型，你想按前缀字母切分索引数据：
+If the column of index idx1 is of varchar type, and you want to split index data by prefix letters.
 
 ```sql
 SPLIT TABLE t INDEX idx1 BETWEEN ("a") AND ("z") REGIONS 25;
 ```
 
-此语句将索引 idx1 从 a~z 切分成 25 个 Region。Region 1 的范围是 `[minIndexValue, b)`；Region 2 的范围是 `[b, c)`；... Region 25 的范围是 `[y, minIndexValue]`。对于 `idx` 索引，前缀为 `a` 的数据写入 Region 1，前缀为 `b` 的数据写入 Region 2。
+This statement splits index idx1 into 25 Regions from a~z. The range of Region 1 is `[minIndexValue, b)`; the range of Region 2 is `[b, c)`; … the range of Region 25 is `[y, minIndexValue]`. For the `idx` index, data with the `a` prefix is written into Region 1, and data with the `b` prefix is written into Region 2.
 
-在上述切分方法中，前缀为 `y` 和 `z` 的数据都会写入 Region 25，因为上界不是 `z`，而是 `{`（ASCII 中 `z` 的下一个字符）。因此，更准确的切分方法如下：
+In the split method above, both data with the `y` and `z` prefixes are written into Region 25, because the upper bound is not `z`, but `{` (the character next to `z` in ASCII). Therefore, a more accurate split method is as follows:
 
 ```sql
 SPLIT TABLE t INDEX idx1 BETWEEN ("a") AND ("{") REGIONS 26;
 ```
 
-此语句将表 `t` 的索引 idx1 从 a~`{` 切分成 26 个 Region。Region 1 的范围是 `[minIndexValue, b)`；Region 2 的范围是 `[b, c)`；... Region 25 的范围是 `[y, z)`，Region 26 的范围是 `[z, maxIndexValue)`。
+This statement splits index idx1 of the table `t` into 26 Regions from a~`{`. The range of Region 1 is `[minIndexValue, b)`; the range of Region 2 is `[b, c)`; … the range of Region 25 is `[y, z)`, and the range of Region 26 is `[z, maxIndexValue)`. 
 
-如果索引 `idx2` 的列是时间类型（如 timestamp/datetime），你想按年份切分索引 Region：
+If the column of index `idx2` is of time type like timestamp/datetime, and you want to split index Region by year:
 
 ```sql
 SPLIT TABLE t INDEX idx2 BETWEEN ("2010-01-01 00:00:00") AND ("2020-01-01 00:00:00") REGIONS 10;
 ```
 
-此语句将表 `t` 中的索引 `idx2` 从 `2010-01-01 00:00:00` 到 `2020-01-01 00:00:00` 切分成 10 个 Region。Region 1 的范围是 `[minIndexValue, 2011-01-01 00:00:00)`；Region 2 的范围是 `[2011-01-01 00:00:00, 2012-01-01 00:00:00)`。
+This statement splits the Region of index `idx2` in table `t` into 10 Regions from `2010-01-01 00:00:00` to `2020-01-01 00:00:00`. The range of Region 1 is `[minIndexValue, 2011-01-01 00:00:00)`; the range of Region 2 is `[2011-01-01 00:00:00, 2012-01-01 00:00:00)`.
 
-如果你想按天切分索引 Region，参考以下示例：
+If you want to split the index Region by day, see the following example:
 
 ```sql
 SPLIT TABLE t INDEX idx2 BETWEEN ("2020-06-01 00:00:00") AND ("2020-07-01 00:00:00") REGIONS 30;
 ```
 
-此语句将表 `t` 中索引 `idx2` 的 2020 年 6 月的数据切分成 30 个 Region，每个 Region 代表 1 天。
+This statement splits the data of June 2020 of index `idex2` in table `t` into 30 Regions, each Region representing 1 day.
 
-其他类型索引列的 Region 切分方法类似。
+Region split methods for other types of index columns are similar.
 
-对于联合索引的数据 Region 切分，唯一的区别是你可以指定多个列值。
+For data Region split of joint indexes, the only difference is that you can specify multiple columns values.
 
-例如，索引 `idx3 (a, b)` 包含 2 列，列 `a` 是 timestamp 类型，列 `b` 是 int 类型。如果你只想根据列 `a` 进行时间范围切分，可以使用单列时间索引的 SQL 语句。在这种情况下，不要在 `lower_value` 和 `upper_velue` 中指定列 `b` 的值。
+For example, index `idx3 (a, b)` contains 2 columns, with column `a` of timestamp type and column `b` int. If you just want to do a time range split according to column `a`, you can use the SQL statement for splitting time index of a single column. In this case, do not specify the value of column `b` in `lower_value` and `upper_velue`.
 
 ```sql
 SPLIT TABLE t INDEX idx3 BETWEEN ("2010-01-01 00:00:00") AND ("2020-01-01 00:00:00") REGIONS 10;
 ```
 
-在相同的时间范围内，如果你想根据列 b 再进行一次切分。只需在切分时指定列 b 的值即可。
+Within the same range of time, if you want to do one more split according to column b column. Just specify the value for column b when splitting.
 
 ```sql
 SPLIT TABLE t INDEX idx3 BETWEEN ("2010-01-01 00:00:00", "a") AND ("2010-01-01 00:00:00", "z") REGIONS 10;
 ```
 
-此语句根据列 b 的值在 a~z 范围内切分 10 个 Region，列 a 的时间前缀相同。如果为列 a 指定的值不同，则可能不会使用列 b 的值。
+This statement splits 10 Regions in the range of a~z according to the value of column b, with the same time prefix as column a. If the value specified for column a is different, the value of column b might not be used in this case.
 
-如果表的主键是[非聚簇索引](/clustered-indexes.md)，在切分 Region 时需要使用反引号 ``` ` ``` 来转义 `PRIMARY` 关键字。例如：
+If the primary key of the table is a [non-clustered index](/clustered-indexes.md), you need to use backticks ``` ` ``` to escape the `PRIMARY` keyword when splitting Regions. For example:
 
 ```sql
 SPLIT TABLE t INDEX `PRIMARY` BETWEEN (-9223372036854775808) AND (9223372036854775807) REGIONS 16;
 ```
 
-#### 不均匀切分
+#### Uneven Split
 
-索引数据也可以通过指定索引值来切分。
+Index data can also be split by specified index values.
 
-例如，有 `idx4 (a,b)`，列 `a` 是 varchar 类型，列 `b` 是 timestamp 类型。
+For example, there is `idx4 (a,b)`, with column `a` of the varchar type and column `b` of the timestamp type.
 
 ```sql
 SPLIT TABLE t1 INDEX idx4 BY ("a", "2000-01-01 00:00:01"), ("b", "2019-04-17 14:26:19"), ("c", "");
 ```
 
-此语句指定 3 个值来切分 4 个 Region。每个 Region 的范围如下：
+This statement specifies 3 values to split 4 Regions. The range of each Region is as follows:
 
 ```
 region1  [ minIndexValue               , ("a", "2000-01-01 00:00:01"))
@@ -223,31 +223,31 @@ region3  [("b", "2019-04-17 14:26:19") , ("c", "")                   )
 region4  [("c", "")                    , maxIndexValue               )
 ```
 
-### 切分分区表的 Region
+### Split Regions for partitioned tables
 
-切分分区表的 Region 与切分普通表的 Region 相同。唯一的区别是对每个分区执行相同的切分操作。
+Splitting Regions for partitioned tables is the same as splitting Regions for ordinary tables. The only difference is that the same split operation is performed for every partition.
 
-+ 均匀切分的语法：
++ The syntax of even split:
 
     ```sql
     SPLIT [PARTITION] TABLE t [PARTITION] [(partition_name_list...)] [INDEX index_name] BETWEEN (lower_value) AND (upper_value) REGIONS region_num
     ```
 
-+ 不均匀切分的语法：
++ The syntax of uneven split:
 
     ```sql
     SPLIT [PARTITION] TABLE table_name [PARTITION (partition_name_list...)] [INDEX index_name] BY (value_list) [, (value_list)] ...
     ```
 
-#### 切分分区表 Region 的示例
+#### Examples of Split Regions for partitioned tables
 
-1. 创建一个分区表 `t`。假设你想创建一个分成两个分区的 Hash 表。示例语句如下：
+1. Create a partitioned table `t`. Suppose that you want to create a Hash table divided into two partitions. The example statement is as follows:
 
     ```sql
     CREATE TABLE t (a INT, b INT, INDEX idx(a)) PARTITION BY HASH(a) PARTITIONS 2;
     ```
 
-    创建表 `t` 后，为每个分区切分一个 Region。使用 [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md) 语法查看此表的 Region：
+    After creating the table `t`, a Region is split for each partition. Use the [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md) syntax to view the Regions of this table:
 
     ```sql
     SHOW TABLE t REGIONS;
@@ -262,19 +262,19 @@ region4  [("c", "")                    , maxIndexValue               )
     +-----------+-----------+---------+-----------+-----------------+------------------+------------+---------------+------------+----------------------+------------------+
     ```
 
-2. 使用 `SPLIT` 语法为每个分区切分一个 Region。假设你想将每个分区中 `[0,10000]` 范围内的数据切分成四个 Region。示例语句如下：
+2. Use the `SPLIT` syntax to split a Region for each partition. Suppose that you want to split the data in the `[0,10000]` range of each partition into four Regions. The example statement is as follows:
 
     ```sql
     split partition table t between (0) and (10000) regions 4;
     ```
 
-    在上述语句中，`0` 和 `10000` 分别表示你想要分散的热点数据对应的上下界 `row_id`。
+    In the above statement, `0` and `10000` respectively represent the `row_id` of the upper and lower boundaries corresponding to the hotspot data you want to scatter.
 
-    > **注意：**
+    > **Note:**
     >
-    > 此示例仅适用于热点数据均匀分布的场景。如果热点数据在指定数据范围内分布不均匀，请参考[切分分区表的 Region](#切分分区表的-region) 中的不均匀切分语法。
+    > This example only applies to scenarios where hotspot data is evenly distributed. If the hotspot data is unevenly distributed in a specified data range, refer to the syntax of uneven split in [Split Regions for partitioned tables](#split-regions-for-partitioned-tables).
 
-3. 再次使用 `SHOW TABLE REGIONS` 语法查看此表的 Region。你可以看到此表现在有十个 Region，每个分区有五个 Region，其中四个是行数据，一个是索引数据。
+3. Use the `SHOW TABLE REGIONS` syntax to view the Regions of this table again. You can see that this table now has ten Regions, each partition with five Regions, four of which are the row data and one is the index data.
 
     ```sql
     SHOW TABLE t REGIONS;
@@ -297,17 +297,17 @@ region4  [("c", "")                    , maxIndexValue               )
     +-----------+---------------+---------------+-----------+-----------------+------------------+------------+---------------+------------+----------------------+------------------+
     ```
 
-4. 你也可以为每个分区的索引切分 Region。例如，你可以将 `idx` 索引的 `[1000,10000]` 范围切分成两个 Region。示例语句如下：
+4. You can also split Regions for the index of each partition. For example, you can split the `[1000,10000]` range of the `idx` index into two Regions. The example statement is as follows:
 
     ```sql
     SPLIT PARTITION TABLE t INDEX idx BETWEEN (1000) AND (10000) REGIONS 2;
     ```
 
-#### 切分单个分区的示例
+#### Examples of Split Region for a single partition
 
-你可以指定要切分的分区。
+You can specify the partition to be split.
 
-1. 创建一个分区表。假设你想创建一个分成三个分区的 Range 分区表。示例语句如下：
+1. Create a partitioned table. Suppose that you want to create a Range partitioned table split into three partitions. The example statement is as follows:
 
     ```sql
     CREATE TABLE t ( a INT, b INT, INDEX idx(b)) PARTITION BY RANGE( a ) (
@@ -316,19 +316,19 @@ region4  [("c", "")                    , maxIndexValue               )
         PARTITION p3 VALUES LESS THAN (MAXVALUE) );
     ```
 
-2. 假设你想将 `p1` 分区中 `[0,10000]` 范围的数据切分成两个 Region。示例语句如下：
+2. Suppose that you want to split the data in the `[0,10000]` range of the `p1` partition into two Regions. The example statement is as follows:
 
     ```sql
     SPLIT PARTITION TABLE t PARTITION (p1) BETWEEN (0) AND (10000) REGIONS 2;
     ```
 
-3. 假设你想将 `p2` 分区中 `[10000,20000]` 范围的数据切分成两个 Region。示例语句如下：
+3. Suppose that you want to split the data in the `[10000,20000]` range of the `p2` partition into two Regions. The example statement is as follows:
 
     ```sql
     SPLIT PARTITION TABLE t PARTITION (p2) BETWEEN (10000) AND (20000) REGIONS 2;
     ```
 
-4. 你可以使用 `SHOW TABLE REGIONS` 语法查看此表的 Region：
+4. You can use the `SHOW TABLE REGIONS` syntax to view the Regions of this table:
 
     ```sql
     SHOW TABLE t REGIONS;
@@ -346,7 +346,7 @@ region4  [("c", "")                    , maxIndexValue               )
     +-----------+----------------+----------------+-----------+-----------------+------------------+------------+---------------+------------+----------------------+------------------+
     ```
 
-5. 假设你想将 `p1` 和 `p2` 分区的 `idx` 索引的 `[0,20000]` 范围切分成两个 Region。示例语句如下：
+5. Suppose that you want to split the `[0,20000]` range of the `idx` index of the `p1` and `p2` partitions into two Regions. The example statement is as follows:
 
     ```sql
     SPLIT PARTITION TABLE t PARTITION (p1,p2) INDEX idx BETWEEN (0) AND (20000) REGIONS 2;
@@ -354,23 +354,23 @@ region4  [("c", "")                    , maxIndexValue               )
 
 ## pre_split_regions
 
-在创建具有 `AUTO_RANDOM` 或 `SHARD_ROW_ID_BITS` 属性的表时，如果你希望在表创建后立即将表均匀预分裂成多个 Region，也可以指定 `PRE_SPLIT_REGIONS` 选项。表的预分裂 Region 数量为 `2^(PRE_SPLIT_REGIONS)`。
+When creating a table with the `AUTO_RANDOM` or `SHARD_ROW_ID_BITS` attribute, you can also specify the `PRE_SPLIT_REGIONS` option if you want to evenly pre-split the table into Regions immediately after the table is created. The number of pre-split Regions for a table is `2^(PRE_SPLIT_REGIONS)`.
 
-> **注意：**
+> **Note:**
 >
-> `PRE_SPLIT_REGIONS` 的值必须小于或等于 `SHARD_ROW_ID_BITS` 或 `AUTO_RANDOM` 的值。
+> The value of `PRE_SPLIT_REGIONS` must be less than or equal to that of `SHARD_ROW_ID_BITS` or `AUTO_RANDOM`.
 
-`tidb_scatter_region` 全局变量会影响 `PRE_SPLIT_REGIONS` 的行为。此变量控制在表创建后是否等待 Region 预分裂和分散完成后再返回结果。如果在创建表后有密集写入，你需要将此变量的值设置为 `1`，这样 TiDB 会等到所有 Region 分裂和分散完成后才向客户端返回结果。否则，TiDB 会在分散完成之前写入数据，这会对写入性能产生显著影响。
+The [`tidb_scatter_region`](/system-variables.md#tidb_scatter_region) global variable affects the behavior of `PRE_SPLIT_REGIONS`. This variable controls whether to wait for Regions to be pre-split and scattered before returning results after the table creation. If there are intensive writes after creating the table, you need to set the value of this variable to `global`, then TiDB scatters the Regions of newly created tables according to the data distribution of the entire cluster. Otherwise, TiDB writes the data before the scattering is completed, which will have a significant impact on write performance.
 
-### pre_split_regions 示例
+### Examples of pre_split_regions
 
 ```sql
 CREATE TABLE t (a INT, b INT, INDEX idx1(a)) SHARD_ROW_ID_BITS = 4 PRE_SPLIT_REGIONS=2;
 ```
 
-创建表后，此语句为表 t 分裂 `4 + 1` 个 Region。`4 (2^2)` 个 Region 用于保存表行数据，1 个 Region 用于保存 `idx1` 的索引数据。
+After building the table, this statement splits `4 + 1` Regions for table t. `4 (2^2)` Regions are used to save table row data, and 1 Region is for saving the index data of `idx1`.
 
-这 4 个表 Region 的范围如下：
+The ranges of the 4 table Regions are as follows:
 
 ```
 region1:   [ -inf      ,  1<<61 )
@@ -381,17 +381,17 @@ region4:   [ 3<<61     ,  +inf  )
 
 <CustomContent platform="tidb">
 
-> **注意：**
+> **Note:**
 >
-> Split Region 语句分裂的 Region 受 PD 中的 [Region 合并](/best-practices/pd-scheduling-best-practices.md#region-merge)调度器控制。为了避免 PD 在新分裂的 Region 后很快就重新合并，你需要使用[表属性](/table-attributes.md)或[动态修改](/pd-control.md)与 Region 合并功能相关的配置项。
+> The Region split by the Split Region statement is controlled by the [Region merge](/best-practices/pd-scheduling-best-practices.md#region-merge) scheduler in PD. To avoid PD re-merging the newly split Region soon after, you need to use [table attributes](/table-attributes.md) or [dynamically modify](/pd-control.md) configuration items related to the Region merge feature.
 
 </CustomContent>
 
-## MySQL 兼容性
+## MySQL compatibility
 
-该语句是 TiDB 对 MySQL 语法的扩展。
+This statement is a TiDB extension to MySQL syntax.
 
-## 另请参阅
+## See also
 
 * [SHOW TABLE REGIONS](/sql-statements/sql-statement-show-table-regions.md)
-* 会话变量：[`tidb_scatter_region`](/system-variables.md#tidb_scatter_region)、[`tidb_wait_split_region_finish`](/system-variables.md#tidb_wait_split_region_finish) 和 [`tidb_wait_split_region_timeout`](/system-variables.md#tidb_wait_split_region_timeout)。
+* Session variables: [`tidb_scatter_region`](/system-variables.md#tidb_scatter_region), [`tidb_wait_split_region_finish`](/system-variables.md#tidb_wait_split_region_finish) and [`tidb_wait_split_region_timeout`](/system-variables.md#tidb_wait_split_region_timeout).

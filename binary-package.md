@@ -59,9 +59,6 @@ The `TiDB-community-toolkit` package contains the following contents.
 | errdoc-{version}-linux-{arch}.tar.gz |  |
 | dba-{version}-linux-{arch}.tar.gz |  |
 | PCC-{version}-linux-{arch}.tar.gz |  |
-| pump-{version}-linux-{arch}.tar.gz |  |
-| drainer-{version}-linux-{arch}.tar.gz |  |
-| binlogctl | New in v6.0.0 |
 | sync_diff_inspector |  |
 | reparo |  |
 | server-{version}-linux-{arch}.tar.gz | New in v6.2.0 |

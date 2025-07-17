@@ -1,6 +1,6 @@
 ---
 title: tiup cluster check
-summary: "TiUP Cluster provides a `check` command to ensure hardware and software environments meet production requirements. It checks OS version, CPU support, time synchronization, system limits, and more. Options include automatic repair and enabling checks for CPU core number, memory size, and disk performance. Use `tiup cluster check <topology.yml | cluster-name> [flags]` command to perform checks. Use `--apply` to attempt automatic repair. Use `-N, --node` and `-R, --role` to specify nodes and roles to check. Use `--enable-cpu`, `--enable-disk`, and `--enable-mem` to enable specific checks."
+summary: TiUP Cluster provides a `check` command to ensure hardware and software environments meet production requirements. It checks OS version, CPU support, time synchronization, system limits, and more. Options include automatic repair and enabling checks for CPU core number, memory size, and disk performance. Use `tiup cluster check <topology.yml | cluster-name> [flags]` command to perform checks. Use `--apply` to attempt automatic repair. Use `-N, --node` and `-R, --role` to specify nodes and roles to check. Use `--enable-cpu`, `--enable-disk`, and `--enable-mem` to enable specific checks.
 ---
 
 # tiup cluster check
@@ -51,6 +51,16 @@ Check the values of the following kernel parameters:
 ### Transparent Huge Pages (THP)
 
 Check whether THP is enabled on the target machine. It is recommended to disable THP.
+
+To check if THP is enabled you can run this:
+
+```
+cat /sys/kernel/mm/transparent_hugepage/enabled
+```
+
+If it is not set to `never`, you can change it with `grubby --update-kernel=ALL --args="transparent_hugepage=never"`.
+
+To change the running configuration, either reboot or run `echo never > /sys/kernel/mm/transparent_hugepage/enabled`.
 
 ### System limits
 

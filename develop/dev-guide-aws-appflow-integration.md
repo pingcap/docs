@@ -1,139 +1,139 @@
 ---
-title: 将 TiDB 与 Amazon AppFlow 集成
-summary: 介绍如何逐步将 TiDB 与 Amazon AppFlow 集成。
+title: Integrate TiDB with Amazon AppFlow
+summary: Introduce how to integrate TiDB with Amazon AppFlow step by step.
 ---
 
-# 将 TiDB 与 Amazon AppFlow 集成
+# Integrate TiDB with Amazon AppFlow
 
-[Amazon AppFlow](https://aws.amazon.com/appflow/) 是一个完全托管的 API 集成服务，你可以使用它将软件即服务（SaaS）应用程序连接到 AWS 服务，并安全地传输数据。使用 Amazon AppFlow，你可以在 TiDB 和许多类型的数据提供商之间导入和导出数据，例如 Salesforce、Amazon S3、LinkedIn 和 GitHub。有关更多信息，请参见 AWS 文档中的[支持的源和目标应用程序](https://docs.aws.amazon.com/appflow/latest/userguide/app-specific.html)。
+[Amazon AppFlow](https://aws.amazon.com/appflow/) is a fully managed API integration service that you use to connect your software as a service (SaaS) applications to AWS services, and securely transfer data. With Amazon AppFlow, you can import and export data from and to TiDB into many types of data providers, such as Salesforce, Amazon S3, LinkedIn, and GitHub. For more information, see [Supported source and destination applications](https://docs.aws.amazon.com/appflow/latest/userguide/app-specific.html) in AWS documentation.
 
-本文介绍如何将 TiDB 与 Amazon AppFlow 集成，并以集成 TiDB Cloud Serverless 集群为例。
+This document describes how to integrate TiDB with Amazon AppFlow and takes integrating a {{{ .starter }}} cluster as an example.
 
-如果你没有 TiDB 集群，可以[创建一个 TiDB Cloud Serverless 集群](https://docs.pingcap.com/tidbcloud/create-tidb-cluster-serverless)，这是免费的，大约 30 秒即可创建完成。
+If you do not have a TiDB cluster, you can create a [{{{ .starter }}}](https://tidbcloud.com/console/clusters) cluster, which is free and can be created in approximately 30 seconds.
 
-## 前提条件
+## Prerequisites
 
 - [Git](https://git-scm.com/)
-- [JDK](https://openjdk.org/install/) 11 或更高版本
-- [Maven](https://maven.apache.org/install.html) 3.8 或更高版本
-- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) 版本 2
-- [AWS Serverless Application Model Command Line Interface (AWS SAM CLI)](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) 1.58.0 或更高版本
-- 一个具有以下要求的 AWS [Identity and Access Management (IAM) 用户](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html)：
+- [JDK](https://openjdk.org/install/) 11 or above
+- [Maven](https://maven.apache.org/install.html) 3.8 or above
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) version 2
+- [AWS Serverless Application Model Command Line Interface (AWS SAM CLI)](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) 1.58.0 or above
+- An AWS [Identity and Access Management (IAM) user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) with the following requirements:
 
-    - 用户可以使用[访问密钥](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)访问 AWS。
-    - 用户具有以下权限：
+    - The user can access AWS using an [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
+    - The user has the following permissions:
 
-        - `AWSCertificateManagerFullAccess`：用于读写 [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/)。
-        - `AWSCloudFormationFullAccess`：SAM CLI 使用 [AWS CloudFormation](https://aws.amazon.com/cloudformation/) 声明 AWS 资源。
-        - `AmazonS3FullAccess`：AWS CloudFormation 使用 [Amazon S3](https://aws.amazon.com/s3/?nc2=h_ql_prod_fs_s3) 进行发布。
-        - `AWSLambda_FullAccess`：目前，[AWS Lambda](https://aws.amazon.com/lambda/?nc2=h_ql_prod_fs_lbd) 是为 Amazon AppFlow 实现新连接器的唯一方式。
-        - `IAMFullAccess`：SAM CLI 需要为连接器创建 `ConnectorFunctionRole`。
+        - `AWSCertificateManagerFullAccess`: used for reading and writing the [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/).
+        - `AWSCloudFormationFullAccess`: SAM CLI uses [AWS CloudFormation](https://aws.amazon.com/cloudformation/) to proclaim the AWS resources.
+        - `AmazonS3FullAccess`: AWS CloudFormation uses [Amazon S3](https://aws.amazon.com/s3/?nc2=h_ql_prod_fs_s3) to publish.
+        - `AWSLambda_FullAccess`: currently, [AWS Lambda](https://aws.amazon.com/lambda/?nc2=h_ql_prod_fs_lbd) is the only way to implement a new connector for Amazon AppFlow.
+        - `IAMFullAccess`: SAM CLI needs to create a `ConnectorFunctionRole` for the connector.
 
-- 一个 [SalesForce](https://developer.salesforce.com) 账户。
+- A [SalesForce](https://developer.salesforce.com) account.
 
-## 步骤 1. 注册 TiDB 连接器
+## Step 1. Register a TiDB connector
 
-### 克隆代码
+### Clone the code
 
-克隆 TiDB 和 Amazon AppFlow 的[集成示例代码仓库](https://github.com/pingcap-inc/tidb-appflow-integration)：
+Clone the [integration example code repository](https://github.com/pingcap-inc/tidb-appflow-integration) for TiDB and Amazon AppFlow:
 
 ```bash
 git clone https://github.com/pingcap-inc/tidb-appflow-integration
 ```
 
-### 构建和上传 Lambda
+### Build and upload a Lambda
 
-1. 构建包：
+1. Build the package:
 
     ```bash
     cd tidb-appflow-integration
     mvn clean package
     ```
 
-2. （可选）如果你尚未配置 AWS 访问密钥 ID 和密钥，请进行配置。
+2. (Optional) Configure your AWS access key ID and secret access key if you have not.
 
     ```bash
     aws configure
     ```
 
-3. 将你的 JAR 包作为 Lambda 上传：
+3. Upload your JAR package as a Lambda:
 
     ```bash
     sam deploy --guided
     ```
 
-    > **注意：**
+    > **Note:**
     >
-    > - `--guided` 选项使用提示来引导你完成部署。你的输入将存储在配置文件中，默认为 `samconfig.toml`。
-    > - `stack_name` 指定你正在部署的 AWS Lambda 的名称。
-    > - 此提示指南使用 AWS 作为 TiDB Cloud Serverless 的云提供商。要使用 Amazon S3 作为源或目标，你需要将 AWS Lambda 的 `region` 设置为与 Amazon S3 相同的区域。
-    > - 如果你之前已经运行过 `sam deploy --guided`，你可以直接运行 `sam deploy`，SAM CLI 将使用配置文件 `samconfig.toml` 来简化交互。
+    > - The `--guided` option uses prompts to guide you through the deployment. Your input will be stored in a configuration file, which is `samconfig.toml` by default.
+    > - `stack_name` specifies the name of AWS Lambda that you are deploying.
+    > - This prompted guide uses AWS as the cloud provider of {{{ .starter }}}. To use Amazon S3 as the source or destination, you need to set the `region` of AWS Lambda as the same as that of Amazon S3.
+    > - If you have already run `sam deploy --guided` before, you can just run `sam deploy` instead, and SAM CLI will use the configuration file `samconfig.toml` to simplify the interaction.
 
-    如果你看到类似以下的输出，则说明此 Lambda 已成功部署。
+    If you see a similar output as follows, this Lambda is successfully deployed.
 
     ```
     Successfully created/updated stack - <stack_name> in <region>
     ```
 
-4. 转到 [AWS Lambda 控制台](https://console.aws.amazon.com/lambda/home)，你可以看到刚刚上传的 Lambda。请注意，你需要在窗口右上角选择正确的区域。
+4. Go to the [AWS Lambda console](https://console.aws.amazon.com/lambda/home), and you can see the Lambda that you just uploaded. Note that you need to select the correct region in the upper-right corner of the window.
 
-    ![lambda 仪表板](/media/develop/aws-appflow-step-lambda-dashboard.png)
+    ![lambda dashboard](/media/develop/aws-appflow-step-lambda-dashboard.png)
 
-### 使用 Lambda 注册连接器
+### Use Lambda to register a connector
 
-1. 在 [AWS 管理控制台](https://console.aws.amazon.com)中，导航到 [Amazon AppFlow > 连接器](https://console.aws.amazon.com/appflow/home#/gallery)，然后点击**注册新连接器**。
+1. In the [AWS Management Console](https://console.aws.amazon.com), navigate to [Amazon AppFlow > Connectors](https://console.aws.amazon.com/appflow/home#/gallery) and click **Register new connector**.
 
-    ![注册连接器](/media/develop/aws-appflow-step-register-connector.png)
+    ![register connector](/media/develop/aws-appflow-step-register-connector.png)
 
-2. 在**注册新连接器**对话框中，选择你上传的 Lambda 函数，并使用连接器名称指定连接器标签。
+2. In the **Register a new connector** dialog, choose the Lambda function you uploaded and specify the connector label using the connector name.
 
-    ![注册连接器对话框](/media/develop/aws-appflow-step-register-connector-dialog.png)
+    ![register connector dialog](/media/develop/aws-appflow-step-register-connector-dialog.png)
 
-3. 点击**注册**。然后，TiDB 连接器就注册成功了。
+3. Click **Register**. Then, a TiDB connector is registered successfully.
 
-## 步骤 2. 创建流
+## Step 2. Create a flow
 
-导航到 [Amazon AppFlow > 流](https://console.aws.amazon.com/appflow/home#/list)，然后点击**创建流**。
+Navigate to [Amazon AppFlow > Flows](https://console.aws.amazon.com/appflow/home#/list) and click **Create flow**.
 
-![创建流](/media/develop/aws-appflow-step-create-flow.png)
+![create flow](/media/develop/aws-appflow-step-create-flow.png)
 
-### 设置流名称
+### Set the flow name
 
-输入流名称，然后点击**下一步**。
+Enter the flow name, and then click **Next**.
 
-![命名流](/media/develop/aws-appflow-step-name-flow.png)
+![name flow](/media/develop/aws-appflow-step-name-flow.png)
 
-### 设置源和目标表
+### Set the source and destination tables
 
-选择**源详情**和**目标详情**。TiDB 连接器可以在两者中使用。
+Choose the **Source details** and **Destination details**. TiDB connector can be used in both of them.
 
-1. 选择源名称。本文以 **Salesforce** 作为示例源。
+1. Choose the source name. This document uses **Salesforce** as an example source.
 
-    ![salesforce 源](/media/develop/aws-appflow-step-salesforce-source.png)
+    ![salesforce source](/media/develop/aws-appflow-step-salesforce-source.png)
 
-    注册到 Salesforce 后，Salesforce 会向你的平台添加一些示例数据。以下步骤将使用 **Account** 对象作为示例源对象。
+    After you register to Salesforce, Salesforce will add some example data to your platform. The following steps will use the **Account** object as an example source object.
 
-    ![salesforce 数据](/media/develop/aws-appflow-step-salesforce-data.png)
+    ![salesforce data](/media/develop/aws-appflow-step-salesforce-data.png)
 
-2. 点击**连接**。
+2. Click **Connect**.
 
-    1. 在**连接到 Salesforce** 对话框中，指定此连接的名称，然后点击**继续**。
+    1. In the **Connect to Salesforce** dialog, specify the name of this connection, and then click **Continue**.
 
-        ![连接到 salesforce](/media/develop/aws-appflow-step-connect-to-salesforce.png)
+        ![connect to salesforce](/media/develop/aws-appflow-step-connect-to-salesforce.png)
 
-    2. 点击**允许**以确认 AWS 可以读取你的 Salesforce 数据。
+    2. Click **Allow** to confirm that AWS can read your Salesforce data.
 
-        ![允许 salesforce](/media/develop/aws-appflow-step-allow-salesforce.png)
+        ![allow salesforce](/media/develop/aws-appflow-step-allow-salesforce.png)
 
-    > **注意：**
+    > **Note:**
     >
-    > 如果你的公司已经使用了 Salesforce 专业版，REST API 默认是禁用的。你可能需要注册一个新的开发者版本来使用 REST API。有关更多信息，请参见 [Salesforce 论坛主题](https://developer.salesforce.com/forums/?id=906F0000000D9Y2IAK)。
+    > If your company has already used the Professional Edition of Salesforce, the REST API is not enabled by default. You might need to register a new Developer Edition to use the REST API. For more information, refer to [Salesforce Forum Topic](https://developer.salesforce.com/forums/?id=906F0000000D9Y2IAK).
 
-3. 在**目标详情**区域，选择 **TiDB-Connector** 作为目标。此时会显示**连接**按钮。
+3. In the **Destination details** area, choose **TiDB-Connector** as the destination. The **Connect** button is displayed.
 
-    ![tidb 目标](/media/develop/aws-appflow-step-tidb-dest.png)
+    ![tidb dest](/media/develop/aws-appflow-step-tidb-dest.png)
 
-4. 在点击**连接**之前，你需要在 TiDB 中为 Salesforce **Account** 对象创建一个 `sf_account` 表。请注意，此表架构与 [Amazon AppFlow 教程](https://docs.aws.amazon.com/appflow/latest/userguide/flow-tutorial-set-up-source.html)中的示例数据不同。
+4. Before clicking **Connect**, you need to create a `sf_account` table in TiDB for the Salesforce **Account** object. Note that this table schema is different from the sample data in [Tutorial of Amazon AppFlow](https://docs.aws.amazon.com/appflow/latest/userguide/flow-tutorial-set-up-source.html).
 
     ```sql
     CREATE TABLE `sf_account` (
@@ -147,28 +147,28 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
     );
     ```
 
-5. 创建 `sf_account` 表后，点击**连接**。此时会显示一个连接对话框。
-6. 在**连接到 TiDB-Connector** 对话框中，输入 TiDB 集群的连接属性。如果你使用 TiDB Cloud Serverless 集群，需要将 **TLS** 选项设置为 `Yes`，这样 TiDB 连接器就会使用 TLS 连接。然后，点击**连接**。
+5. After the `sf_account` table is created, click **Connect**. A connection dialog is displayed.
+6. In the **Connect to TiDB-Connector** dialog, enter the connection properties of the TiDB cluster. If you use a {{{ .starter }}} cluster, you need to set the **TLS** option to `Yes`, which lets the TiDB connector use the TLS connection. Then, click **Connect**.
 
-    ![tidb 连接消息](/media/develop/aws-appflow-step-tidb-connection-message.png)
+    ![tidb connection message](/media/develop/aws-appflow-step-tidb-connection-message.png)
 
-7. 现在你可以获取为连接指定的数据库中的所有表。从下拉列表中选择 **sf_account** 表。
+7. Now you can get all tables in the database that you specified for connection. Choose the **sf_account** table from the drop-down list.
 
-    ![数据库](/media/develop/aws-appflow-step-database.png)
+    ![database](/media/develop/aws-appflow-step-database.png)
 
-    以下截图显示了将数据从 Salesforce **Account** 对象传输到 TiDB 中的 `sf_account` 表的配置：
+    The following screenshot shows the configurations to transfer data from the Salesforce **Account** object to the `sf_account` table in TiDB:
 
-    ![完成流](/media/develop/aws-appflow-step-complete-flow.png)
+    ![complete flow](/media/develop/aws-appflow-step-complete-flow.png)
 
-8. 在**错误处理**区域，选择**停止当前流运行**。在**流触发器**区域，选择**按需运行**触发器类型，这意味着你需要手动运行流。然后，点击**下一步**。
+8. In the **Error handling** area, choose **Stop the current flow run**. In the **Flow trigger** area, choose the **Run on demand** trigger type, which means you need to run the flow manually. Then, click **Next**.
 
-    ![完成步骤 1](/media/develop/aws-appflow-step-complete-step1.png)
+    ![complete step1](/media/develop/aws-appflow-step-complete-step1.png)
 
-### 设置映射规则
+### Set mapping rules
 
-将 Salesforce 中 **Account** 对象的字段映射到 TiDB 中的 `sf_account` 表，然后点击**下一步**。
+Map the fields of the **Account** object in Salesforce to the `sf_account` table in TiDB, and then click **Next**.
 
-- `sf_account` 表是在 TiDB 中新创建的，它是空的。
+- The `sf_account` table is newly created in TiDB and it is empty.
 
     ```sql
     test> SELECT * FROM sf_account;
@@ -178,11 +178,11 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
     +----+------+------+---------------+--------+----------+
     ```
 
-- 要设置映射规则，你可以在左侧选择源字段名称，在右侧选择目标字段名称。然后，点击**映射字段**，规则就设置好了。
+- To set a mapping rule, you can select a source field name on the left, and select a destination field name on the right. Then, click **Map fields**, and a rule is set.
 
-    ![添加映射规则](/media/develop/aws-appflow-step-add-mapping-rule.png)
+    ![add mapping rule](/media/develop/aws-appflow-step-add-mapping-rule.png)
 
-- 本文需要以下映射规则（源字段名称 -> 目标字段名称）：
+- The following mapping rules (Source field name -> Destination field name) are needed in this document:
 
     - Account ID -> id
     - Account Name -> name
@@ -191,33 +191,33 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
     - Account Rating -> rating
     - Industry -> industry
 
-    ![映射规则](/media/develop/aws-appflow-step-mapping-a-rule.png)
+    ![mapping a rule](/media/develop/aws-appflow-step-mapping-a-rule.png)
 
-    ![显示所有映射规则](/media/develop/aws-appflow-step-show-all-mapping-rules.png)
+    ![show all mapping rules](/media/develop/aws-appflow-step-show-all-mapping-rules.png)
 
-### （可选）设置过滤器
+### (Optional) Set filters
 
-如果你想为数据字段添加一些过滤器，可以在此处设置。否则，跳过此步骤并点击**下一步**。
+If you want to add some filters to your data fields, you can set them here. Otherwise, skip this step and click **Next**.
 
-![过滤器](/media/develop/aws-appflow-step-filters.png)
+![filters](/media/develop/aws-appflow-step-filters.png)
 
-### 确认并创建流
+### Confirm and create the flow
 
-确认要创建的流的信息。如果一切看起来都没问题，点击**创建流**。
+Confirm the information of the flow to be created. If everything looks fine, click **Create flow**.
 
-![审查](/media/develop/aws-appflow-step-review.png)
+![review](/media/develop/aws-appflow-step-review.png)
 
-## 步骤 3. 运行流
+## Step 3. Run the flow
 
-在新创建的流的页面上，点击右上角的**运行流**。
+On the page of the newly created flow, click **Run flow** in the upper-right corner.
 
-![运行流](/media/develop/aws-appflow-step-run-flow.png)
+![run flow](/media/develop/aws-appflow-step-run-flow.png)
 
-以下截图显示了流运行成功的示例：
+The following screenshot shows an example that the flow runs successfully:
 
-![运行成功](/media/develop/aws-appflow-step-run-success.png)
+![run success](/media/develop/aws-appflow-step-run-success.png)
 
-查询 `sf_account` 表，你可以看到来自 Salesforce **Account** 对象的记录已经写入其中：
+Query the `sf_account` table, and you can see that the records from the Salesforce **Account** object have been written to it:
 
 ```sql
 test> SELECT * FROM sf_account;
@@ -240,23 +240,23 @@ test> SELECT * FROM sf_account;
 +--------------------+-------------------------------------+--------------------+---------------+--------+----------------+
 ```
 
-## 注意事项
+## Noteworthy things
 
-- 如果出现任何问题，你可以导航到 AWS 管理控制台上的 [CloudWatch](https://console.aws.amazon.com/cloudwatch/home) 页面获取日志。
-- 本文中的步骤基于[使用 Amazon AppFlow Custom Connector SDK 构建自定义连接器](https://aws.amazon.com/blogs/compute/building-custom-connectors-using-the-amazon-appflow-custom-connector-sdk/)。
-- [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) **不是**生产环境。
-- 为了防止篇幅过长，本文中的示例仅显示了 `Insert` 策略，但 `Update` 和 `Upsert` 策略也经过测试并可以使用。
+- If anything goes wrong, you can navigate to the [CloudWatch](https://console.aws.amazon.com/cloudwatch/home) page on the AWS Management Console to get logs.
+- The steps in this document are based on [Building custom connectors using the Amazon AppFlow Custom Connector SDK](https://aws.amazon.com/blogs/compute/building-custom-connectors-using-the-amazon-appflow-custom-connector-sdk/).
+- [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) is **NOT** a production environment.
+- To prevent excessive length, the examples in this document only show the `Insert` strategy, but `Update` and `Upsert` strategies are also tested and can be used.
 
-## 需要帮助？
+## Need help?
 
 <CustomContent platform="tidb">
 
-在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或[提交支持工单](/support.md)。
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或[提交支持工单](https://tidb.support.pingcap.com/)。
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
 
 </CustomContent>

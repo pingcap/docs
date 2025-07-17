@@ -1,25 +1,25 @@
 ---
-title: 相关子查询去关联化
-summary: 了解如何对相关子查询进行去关联化。
+title: Decorrelation of Correlated Subquery
+summary: Understand how to decorrelate correlated subqueries.
 ---
 
-# 相关子查询去关联化
+# Decorrelation of Correlated Subquery
 
-[子查询相关优化](/subquery-optimization.md)描述了 TiDB 如何处理没有相关列的子查询。由于相关子查询的去关联化比较复杂，本文介绍一些简单的场景以及优化规则的适用范围。
+[Subquery related optimizations](/subquery-optimization.md) describes how TiDB handles subqueries when there are no correlated columns. Because decorrelation of correlated subquery is complex, this article introduces some simple scenarios and the scope to which the optimization rule applies.
 
-## 简介
+## Introduction
 
-以 `select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.b)` 为例。这里的子查询 `t1.a < (select sum(t2.a) from t2 where t2.b = t1.b)` 在查询条件 `t2.b=t1.b` 中引用了相关列，这个条件恰好是一个等价条件，所以可以将查询重写为 `select t1.* from t1, (select b, sum(a) sum_a from t2 group by b) t2 where t1.b = t2.b and t1.a < t2.sum_a;`。通过这种方式，相关子查询被重写为 `JOIN`。
+Take `select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.b)` as an example. The subquery `t1.a < (select sum(t2.a) from t2 where t2.b = t1.b)` here refers to the correlated column in the query condition `t2.b=t1.b`, this condition happens to be an equivalent condition, so the query can be rewritten as `select t1.* from t1, (select b, sum(a) sum_a from t2 group by b) t2 where t1.b = t2.b and t1.a < t2.sum_a;`. In this way, a correlated subquery is rewritten into `JOIN`.
 
-TiDB 需要进行这种重写的原因是，相关子查询每次执行时都会绑定到其外部查询结果。在上面的例子中，如果 `t1.a` 有 1000 万个值，这个子查询就会重复 1000 万次，因为条件 `t2.b=t1.b` 会随着 `t1.a` 的值而变化。当以某种方式去除关联后，这个子查询只需执行一次。
+The reason why TiDB needs to do this rewriting is that the correlated subquery is bound to its external query result every time the subquery is executed. In the above example, if `t1.a` has 10 million values, this subquery would repeat 10 million times, because the condition `t2.b=t1.b` varies with the value of `t1.a`. When the correlation is lifted somehow, this subquery would execute only once.
 
-## 限制
+## Restrictions
 
-这种重写的缺点是，当关联没有被去除时，优化器可以使用相关列上的索引。也就是说，虽然这个子查询可能重复多次，但每次都可以使用索引来过滤数据。使用重写规则后，相关列的位置通常会发生变化。虽然子查询只执行一次，但单次执行时间可能会比不去关联化时更长。
+The disadvantage of this rewriting is that when the correlation is not lifted, the optimizer can use the index on the correlated column. That is, although this subquery may repeat many times, the index can be used to filter data each time. After using the rewriting rule, the position of the correlated column usually changes. Although the subquery is only executed once, the single execution time would be longer than that without decorrelation.
 
-因此，当外部值较少时，不执行去关联化可能会带来更好的执行性能。在这种情况下，你可以使用 [`NO_DECORRELATE`](/optimizer-hints.md#no_decorrelate) 优化器提示或在[优化规则和表达式下推的黑名单](/blocklist-control-plan.md)中禁用"子查询去关联化"优化规则。在大多数情况下，建议将优化器提示与 [SQL 计划管理](/sql-plan-management.md)结合使用来禁用去关联化。
+Therefore, when there are few external values, do not perform decorrelation, which might bring better execution performance. In this case, you can disable this optimization by using the [`NO_DECORRELATE`](/optimizer-hints.md#no_decorrelate) optimizer hint or by disabling the "subquery decorrelation" optimization rule in the [blocklist of optimization rules and expression pushdown](/blocklist-control-plan.md). In most cases, it is recommended to use the optimizer hint along with [SQL Plan Management](/sql-plan-management.md) to disable the decorrelation.
 
-## 示例
+## Example
 
 {{< copyable "sql" >}}
 
@@ -46,9 +46,9 @@ explain select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.
 
 ```
 
-上面是优化生效的示例。`HashJoin_11` 是一个普通的 `inner join`。
+The above is an example where the optimization takes effect. `HashJoin_11` is a normal `inner join`.
 
-然后，你可以使用 `NO_DECORRELATE` 优化器提示来告诉优化器不要对子查询进行去关联化：
+Then, you can use the `NO_DECORRELATE` optimizer hint to tell the optimizer not to perform decorrelation for the subquery:
 
 {{< copyable "sql" >}}
 
@@ -73,7 +73,7 @@ explain select * from t1 where t1.a < (select /*+ NO_DECORRELATE() */ sum(t2.a) 
 +------------------------------------------+-----------+-----------+------------------------+--------------------------------------------------------------------------------------+
 ```
 
-禁用去关联化规则也可以达到相同的效果：
+Disabling the decorrelation rule can also achieve the same effect:
 
 {{< copyable "sql" >}}
 
@@ -100,4 +100,4 @@ explain select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.
 +------------------------------------------+-----------+-----------+------------------------+--------------------------------------------------------------------------------------+
 ```
 
-禁用子查询去关联化规则后，你可以在 `IndexRangeScan_42(Build)` 的 `operator info` 中看到 `range: decided by [eq(test.t2.b, test.t1.b)]`。这意味着没有执行相关子查询的去关联化，TiDB 使用了索引范围查询。
+After disabling the subquery decorrelation rule, you can see `range: decided by [eq(test.t2.b, test.t1.b)]` in `operator info` of `IndexRangeScan_42(Build)`. It means that the decorrelation of correlated subquery is not performed and TiDB uses the index range query.

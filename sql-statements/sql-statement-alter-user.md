@@ -1,13 +1,13 @@
 ---
-title: ALTER USER | TiDB SQL 语句参考
-summary: TiDB 数据库中 ALTER USER 的使用概述。
+title: ALTER USER | TiDB SQL Statement Reference
+summary: An overview of the usage of ALTER USER for the TiDB database.
 ---
 
 # ALTER USER
 
-此语句用于在 TiDB 权限系统中修改现有用户。在 MySQL 权限系统中，用户是用户名和连接来源主机的组合。因此，可以创建一个只能从 IP 地址 `192.168.1.1` 连接的用户 `'newuser2'@'192.168.1.1'`。同时也可以让两个用户具有相同的用户部分，但由于从不同主机登录而具有不同的权限。
+This statement changes an existing user inside the TiDB privilege system. In the MySQL privilege system, a user is the combination of a username and the host from which they are connecting from. Thus, it is possible to create a user `'newuser2'@'192.168.1.1'` who is only able to connect from the IP address `192.168.1.1`. It is also possible to have two users have the same user-portion, and different permissions as they login from different hosts.
 
-## 语法概要
+## Synopsis
 
 ```ebnf+diagram
 AlterUserStmt ::=
@@ -20,8 +20,8 @@ UserSpec ::=
     Username AuthOption
 
 RequireClauseOpt ::=
-    ( 'REQUIRE' 'NONE' | 'REQUIRE' 'SSL' | 'REQUIRE' 'X509' | 'REQUIRE' RequireList )?  
-    
+    ( 'REQUIRE' 'NONE' | 'REQUIRE' 'SSL' | 'REQUIRE' 'X509' | 'REQUIRE' RequireList )?
+
 RequireList ::=
     ( "ISSUER" stringLit | "SUBJECT" stringLit | "CIPHER" stringLit | "SAN" stringLit | "TOKEN_ISSUER" stringLit )*
 
@@ -44,7 +44,7 @@ RequireClauseOpt ::= ('REQUIRE' ('NONE' | 'SSL' | 'X509' | RequireListElement ('
 RequireListElement ::= 'ISSUER' Issuer | 'SUBJECT' Subject | 'CIPHER' Cipher | 'SAN' SAN | 'TOKEN_ISSUER' TokenIssuer
 ```
 
-## 示例
+## Examples
 
 ```sql
 mysql> CREATE USER 'newuser' IDENTIFIED BY 'newuserpassword';
@@ -59,11 +59,11 @@ mysql> SHOW CREATE USER 'newuser';
 1 row in set (0.00 sec)
 ```
 
-### 修改基本用户信息
+### Modify basic user information
 
-更改用户 `newuser` 的密码：
+Change the password for user `newuser`:
 
-```sql
+```
 mysql> ALTER USER 'newuser' IDENTIFIED BY 'newnewpassword';
 Query OK, 0 rows affected (0.02 sec)
 
@@ -76,7 +76,7 @@ mysql> SHOW CREATE USER 'newuser';
 1 row in set (0.00 sec)
 ```
 
-锁定用户 `newuser`：
+Lock the user `newuser`:
 
 ```sql
 ALTER USER 'newuser' ACCOUNT LOCK;
@@ -86,7 +86,7 @@ ALTER USER 'newuser' ACCOUNT LOCK;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-修改 `newuser` 的属性：
+Modify the attributes of `newuser`:
 
 ```sql
 ALTER USER 'newuser' ATTRIBUTE '{"newAttr": "value", "deprecatedAttr": null}';
@@ -102,7 +102,7 @@ SELECT * FROM information_schema.user_attributes;
 1 rows in set (0.00 sec)
 ```
 
-使用 `ALTER USER ... COMMENT` 修改 `newuser` 的注释：
+Modify the comment of `newuser` using `ALTER USER ... COMMENT`:
 
 ```sql
 ALTER USER 'newuser' COMMENT 'Here is the comment';
@@ -118,7 +118,7 @@ SELECT * FROM information_schema.user_attributes;
 1 rows in set (0.00 sec)
 ```
 
-使用 `ALTER USER ... ATTRIBUTE` 删除 `newuser` 的注释：
+Remove the comment of `newuser` using `ALTER USER ... ATTRIBUTE`:
 
 ```sql
 ALTER USER 'newuser' ATTRIBUTE '{"comment": null}';
@@ -134,7 +134,7 @@ SELECT * FROM information_schema.user_attributes;
 1 rows in set (0.00 sec)
 ```
 
-通过 `ALTER USER ... PASSWORD EXPIRE NEVER` 将 `newuser` 的自动密码过期策略更改为永不过期：
+Change the automatic password expiration policy for `newuser` to never expire via `ALTER USER ... PASSWORD EXPIRE NEVER`:
 
 ```sql
 ALTER USER 'newuser' PASSWORD EXPIRE NEVER;
@@ -144,7 +144,7 @@ ALTER USER 'newuser' PASSWORD EXPIRE NEVER;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-使用 `ALTER USER ... PASSWORD REUSE INTERVAL ... DAY` 修改 `newuser` 的密码重用策略，禁止重用最近 90 天内使用过的任何密码：
+Modify the password reuse policy for `newuser` to disallow the reuse of any password used within the last 90 days using `ALTER USER ... PASSWORD REUSE INTERVAL ... DAY`:
 
 ```sql
 ALTER USER 'newuser' PASSWORD REUSE INTERVAL 90 DAY;
@@ -154,9 +154,9 @@ ALTER USER 'newuser' PASSWORD REUSE INTERVAL 90 DAY;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-### 修改用户绑定的资源组
+### Modify the resource group bound to the user
 
-使用 `ALTER USER ... RESOURCE GROUP` 将用户 `newuser` 的资源组修改为 `rg1`。
+Use `ALTER USER ... RESOURCE GROUP` to modify the resource group of the user `newuser` to `rg1`.
 
 ```sql
 ALTER USER 'newuser' RESOURCE GROUP rg1;
@@ -166,7 +166,7 @@ ALTER USER 'newuser' RESOURCE GROUP rg1;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-查看当前用户绑定的资源组：
+View the resource group bound to the current user:
 
 ```sql
 SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user WHERE user = "newuser";
@@ -181,7 +181,7 @@ SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user W
 1 row in set (0.02 sec)
 ```
 
-解除用户与资源组的绑定，即绑定用户到 `default` 资源组。
+Unbind the user to a resource group, that is, bind the user to the `default` resource group.
 
 ```sql
 ALTER USER 'newuser' RESOURCE GROUP `default`;
@@ -197,11 +197,12 @@ SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user W
 1 row in set (0.02 sec)
 ```
 
-## 另请参阅
+## See also
 
 <CustomContent platform="tidb">
 
-* [与 MySQL 的安全特性兼容性](/security-compatibility-with-mysql.md)
+* [TiDB User Account Management](/user-account-management.md)
+* [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
 
 </CustomContent>
 

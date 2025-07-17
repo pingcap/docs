@@ -1,92 +1,92 @@
 ---
-title: 管理 TiDB Cloud 预算
-summary: 了解如何使用 TiDB Cloud 的预算功能来监控成本。
+title: Manage Budgets for TiDB Cloud
+summary: Learn about how to use the budget feature of TiDB Cloud to monitor your costs.
 ---
 
-# 管理 TiDB Cloud 预算
+# Manage Budgets for TiDB Cloud
 
-在 TiDB Cloud 中，你可以使用预算功能来监控成本并控制支出。
+In TiDB Cloud, you can use the budget feature to monitor your costs and keep your spending under control.
 
-当你的月度实际成本超过指定预算的百分比阈值时，系统会向你组织的所有者和计费管理员发送警报邮件。这些通知可以帮助你及时了解情况并采取积极措施来管理支出，使支出与预算保持一致。
+When your monthly actual costs exceed the percentage thresholds of your specified budget, alert emails are sent to your organization owners and billing administrators. These notifications help you stay informed and take proactive measures to manage your spending, aligning your expenses with your budget.
 
-TiDB Cloud 提供两种类型的预算来帮助你跟踪支出：
+TiDB Cloud provides two types of budgets to help you track your spending:
 
-- **Serverless 支出限额**预算：对于每个 TiDB Cloud Serverless 可扩展集群，TiDB Cloud 会自动创建一个 **Serverless 支出限额**预算。此预算帮助你跟踪实际成本是否超过该集群配置的[支出限额](/tidb-cloud/manage-serverless-spend-limit.md)。它包含三个不可编辑的阈值规则：预算的 75%、90% 和 100%。
+- **Serverless Spending Limit** budget: for each TiDB Cloud Serverless scalable cluster, TiDB Cloud automatically creates a **Serverless Spending Limit** budget. This budget helps you track the actual cost against the [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) configured on that cluster. It includes three threshold rules: 75%, 90%, and 100% of the budget, which are not editable.
 
-- **自定义**预算：你可以创建自定义预算来跟踪整个组织或特定项目的实际成本。对于每个预算，你可以指定预算范围、设置目标支出金额和配置警报阈值。创建自定义预算后，你可以将月度实际成本与计划成本进行比较，以确保支出不超出预算。
+- **Custom** budget: you can create custom budgets to track actual costs for an entire organization or specific projects. For each budget, you can specify a budget scope, set a target spending amount, and configure alert thresholds. After creating a custom budget, you can compare your monthly actual costs with your planned costs to ensure you stay within budget.
 
-## 前提条件
+## Prerequisites
 
-要查看、创建、编辑或删除组织或项目的预算，你必须具有组织的`组织所有者`或`组织计费管理员`角色。
+To view, create, edit, or delete budgets of your organization or projects, you must be in the `Organization Owner` or `Organization Billing Manager` role of your organization.
 
-## 查看预算信息
+## View the budget information
 
-要查看组织的预算页面，请执行以下步骤：
+To view the budget page of your organization, take the following steps:
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，使用左上角的组合框切换到目标组织。
-2. 在左侧导航栏中，点击**计费**。
-3. 在**计费**页面上，点击**预算**选项卡。
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Billing**.
+3. On the **Billing** page, click the **Budgets** tab.
 
-对于每个预算，你可以查看其名称、类型、状态、已使用金额、预算金额、周期和范围。
+For each budget, you can view its name, type, status, amount used, budget amount, period, and scope.
 
-## 创建自定义预算
+## Create a custom budget
 
-要创建自定义预算以监控组织或特定项目的支出，请执行以下步骤：
+To create a custom budget to monitor the spending of your organization or specific projects, take the following steps:
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，使用左上角的组合框切换到目标组织。
-2. 在左侧导航栏中，点击**计费**。
-3. 在**计费**页面上，点击**预算**选项卡，然后点击**创建自定义预算**。你最多可以创建五个自定义预算。
-4. 提供预算基本设置。
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Billing**.
+3. On the **Billing** page, click the **Budgets** tab, and then click **Create Custom Budget**. You can create up to five custom budgets.
+4. Provide the budget basic settings.
 
-    - **名称**：输入预算的名称。
-    - **周期**：选择跟踪成本的时间范围。目前，你只能选择**每月**，从每月第一天开始，并在每月初重置。TiDB Cloud 会在此时间范围内跟踪你的实际支出，并与你的预算金额（计划支出）进行比较。
-    - **预算范围**：根据需要将范围应用于所有项目（即整个 TiDB Cloud 组织）或特定项目。
+    - **Name**: enter a name for the budget.
+    - **Period**: select a time range for tracking costs. Currently, you can only select **Monthly**, which starts on the first day of each month and resets at the beginning of each month. TiDB Cloud tracks your actual spending during the time range against your budget amount (your planned spending).
+    - **Budget scope**: apply the scope to all projects (which means the entire TiDB Cloud organization) or a specific project as needed.
 
-5. 设置预算金额。
+5. Set the budget amount.
 
-    - **预算金额**：输入所选周期的计划支出金额。
-    - **应用信用额度**：选择是否将信用额度应用于运行总成本。信用额度用于减少你的 TiDB Cloud 使用成本。启用此选项后，预算将跟踪运行总成本减去信用额度。
-    - **应用折扣**：选择是否将折扣应用于运行总成本。折扣是 TiDB Cloud 服务常规价格的降价。启用此选项后，预算将跟踪运行总成本减去折扣。
+    - **Budget Amount**: enter a planned spending amount for the selected period.
+    - **Apply credits**: choose whether to apply credits to the running total cost. Credits are used to reduce the cost of your TiDB Cloud usage. When this option is enabled, the budget tracks the running total cost minus credits.
+    - **Apply discounts**: choose whether to apply discounts to the running total cost. Discounts are reductions in the regular price of TiDB Cloud service. When this option is enabled, the budget tracks the running total cost minus discounts.
 
-6. 为预算配置警报阈值。如果你在所选周期内的实际支出超过指定阈值，TiDB Cloud 会向你组织的所有者和计费管理员发送预算通知邮件。
+6. Configure alert thresholds for the budget. If your actual spending exceeds specified thresholds during the selected period, TiDB Cloud sends a budget notification email to your organization owners and billing administrators.
 
-    - 默认情况下，TiDB Cloud 提供三个警报阈值：预算金额的 75%、90% 和 100%。你可以根据需要修改这些百分比。
-    - 要添加新的警报阈值，请点击**添加警报阈值**。
-    - 要删除阈值，请点击阈值旁边的删除图标。
+    - By default, TiDB Cloud provides three alert thresholds: 75%, 90%, and 100% of the budget amount. You can modify these percentages as needed.
+    - To add a new alert threshold, click **Add alert threshold.**
+    - To remove a threshold, click the delete icon next to the threshold.
 
-7. 点击**创建**。
+7. Click **Create**.
 
-## 编辑自定义预算
+## Edit a custom budget
 
-> **注意：**
+> **Note:**
 >
-> **Serverless 支出限额**预算无法编辑，因为它是由 TiDB Cloud 自动创建的，用于帮助你跟踪 TiDB Cloud Serverless 可扩展集群的成本是否超过其[支出限额](/tidb-cloud/manage-serverless-spend-limit.md)。
+> The **Serverless Spending Limit** budget cannot be edited because it is automatically created by TiDB Cloud to help you track the cost of a TiDB Cloud Serverless scalable cluster against its [spending limit](/tidb-cloud/manage-serverless-spend-limit.md).
 
-要编辑自定义预算，请执行以下步骤：
+To edit a custom budget, take the following steps:
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，使用左上角的组合框切换到目标组织。
-2. 在左侧导航栏中，点击**计费**。
-3. 在**计费**页面上，点击**预算**选项卡。
-4. 找到目标预算所在的行，点击该行中的 **...**，然后点击**编辑**。
-5. 根据需要编辑预算名称、预算范围、预算金额和警报阈值。
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Billing**.
+3. On the **Billing** page, click the **Budgets** tab.
+4. Locate the row of your target budget, click **...** in that row, and then click **Edit**.
+5. Edit the budget name, budget scope, budget amount, and alert thresholds as needed.
 
-    > **注意：**
+    > **Note:**
     >
-    > 不支持编辑预算周期以及是否应用信用额度和折扣。
+    > Editing the budget period and whether to apply credits and discounts is not supported.
 
-6. 点击**更新**。
+6. Click **Update**.
 
-## 删除自定义预算
+## Delete a custom budget
 
-> **注意：**
+> **Note:**
 >
-> - 自定义预算删除后，你将不再收到与之相关的任何警报邮件。
-> - **Serverless 支出限额**预算无法删除，因为它是由 TiDB Cloud 自动创建的，用于帮助你跟踪 TiDB Cloud Serverless 可扩展集群的成本是否超过其[支出限额](/tidb-cloud/manage-serverless-spend-limit.md)。
+> - Once a custom budget is deleted, you will no longer receive any alert emails related to it.
+> - The **Serverless Spending Limit** budget cannot be deleted because it is automatically created by TiDB Cloud to help you track the cost of a TiDB Cloud Serverless scalable cluster against its [spending limit](/tidb-cloud/manage-serverless-spend-limit.md).
 
-要删除自定义预算，请执行以下步骤：
+To delete a custom budget, take the following steps:
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，使用左上角的组合框切换到目标组织。
-2. 在左侧导航栏中，点击**计费**。
-3. 在**计费**页面上，点击**预算**选项卡。
-4. 找到目标预算所在的行，点击该行中的 **...**，然后点击**删除**。
-5. 确认删除。
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Billing**.
+3. On the **Billing** page, click the **Budgets** tab.
+4. Locate the row of your target budget, click **...** in that row, and then click **Delete**.
+5. Confirm the deletion.

@@ -1,293 +1,293 @@
 ---
-title: TiDB Cloud 计费
-summary: 了解 TiDB Cloud 计费。
+title: TiDB Cloud Billing
+summary: Learn about TiDB Cloud billing.
 ---
 
-# TiDB Cloud 计费
+# TiDB Cloud Billing
 
-> **注意：**
+> **Note:**
 >
-> [TiDB Cloud Serverless 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 在 2023 年 5 月 31 日之前免费，享受 100% 折扣。之后，超出[免费配额](/tidb-cloud/select-cluster-tier.md#usage-quota)的使用量将被收费。
+> [TiDB Cloud Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) are free until May 31, 2023, with a 100% discount off. After that, usage beyond the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota) will be charged.
 
-TiDB Cloud 根据你消耗的资源进行收费。你可以访问以下页面获取更多关于定价的信息。
+TiDB Cloud charges according to the resources that you consume. You can visit the following pages to get more information about the pricing.
 
-- [TiDB Cloud Serverless 定价详情](https://www.pingcap.com/tidb-serverless-pricing-details/)
-- [TiDB Cloud Dedicated 定价详情](https://www.pingcap.com/tidb-dedicated-pricing-details/)
+- [TiDB Cloud Serverless Pricing Details](https://www.pingcap.com/tidb-serverless-pricing-details/)
+- [TiDB Cloud Dedicated Pricing Details](https://www.pingcap.com/tidb-dedicated-pricing-details/)
 
-## 发票
+## Invoices
 
-如果你是组织的 `Organization Owner` 或 `Organization Billing Manager` 角色，你可以管理 TiDB Cloud 的发票信息。否则，请跳过此部分。
+If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can manage the invoice information of TiDB Cloud. Otherwise, skip this section.
 
-设置支付方式后，TiDB Cloud 会在你的费用达到配额时生成发票，默认配额为 500 美元。如果你想提高配额或每月收到一张发票，可以[联系我们的销售团队](https://www.pingcap.com/contact-us/)。
+After you set up the payment method, TiDB Cloud will generate an invoice once your cost reaches a quota, which is $500 by default. If you want to raise the quota or receive one invoice per month, you can [contact our sales](https://www.pingcap.com/contact-us/).
 
-> **注意：**
+> **Note:**
 >
-> 如果你通过 [AWS Marketplace](https://aws.amazon.com/marketplace)、[Azure Marketplace](https://azuremarketplace.microsoft.com/) 或 [Google Cloud Marketplace](https://console.cloud.google.com/marketplace) 注册 TiDB Cloud，你可以直接通过你的 AWS 账户、Azure 账户或 Google Cloud 账户付款，但无法在 TiDB Cloud 控制台中添加支付方式或下载发票。
+> If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), [Azure Marketplace](https://azuremarketplace.microsoft.com/), or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), you can pay through your AWS account, Azure account, or Google Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud console.
 
-联系我们的销售团队要求每月收到发票后，TiDB Cloud 将在每月初为上个月生成发票。
+After you contact our sales for receiving an invoice on a monthly basis, TiDB Cloud will generate the invoice for the previous month at the beginning of each month.
 
-发票费用包括你组织中的 TiDB 集群使用消耗、折扣、备份存储成本、支持服务成本、信用消费和数据传输成本。
+Invoice costs include TiDB cluster usage consumption, discounts, backup storage costs, support service cost, credit consumption, and data transmission costs in your organization.
 
-对于每月的发票：
+For each monthly invoice:
 
-- TiDB Cloud 在每月 9 日向你提供发票。从 1 日到 9 日，你无法查看上个月的费用详情，但可以通过计费控制台获取本月的集群使用信息。
-- 支付发票的默认方式是信用卡扣款。如果你想使用其他支付方式，请发送工单请求告知我们。
-- 你可以查看当月和上月的费用摘要和详情。
+- TiDB Cloud provides the invoice to you on the ninth of each month. From the first to the ninth day, you cannot view the last month's cost details, but can obtain the cluster usage information of this month via the billing console.
+- The default method for paying invoices is credit card deduction. If you want to use other payment methods, please send a ticket request to let us know.
+- You can view the summary and details of charges for the current month and the previous month.
 
-> **注意：**
+> **Note:**
 >
-> 所有计费扣款都将通过第三方平台 Stripe 完成。
+> All billing deductions will be completed through the third-party platform Stripe.
 
-要查看发票列表，请执行以下步骤：
+To view the list of invoices, perform the following steps:
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，使用左上角的下拉框切换到你的目标组织。
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 
-2. 在左侧导航窗格中，点击 **Billing**。
+2. In the left navigation pane, click **Billing**.
 
-3. 在 **Billing** 页面上，点击 **Invoices** 标签页。
+3. On the **Billing** page, click the **Invoices** tab.
 
-## 计费详情
+## Billing details
 
-如果你是组织的 `Organization Owner` 或 `Organization Billing Manager` 角色，你可以查看和导出 TiDB Cloud 的计费详情。否则，请跳过此部分。
+If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can view and export the billing details of TiDB Cloud. Otherwise, skip this section.
 
-设置支付方式后，TiDB Cloud 将生成历史月份的发票和计费详情，并在每月初生成当月的账单详情。计费详情包括你组织的 TiDB 集群使用消耗、折扣、备份存储成本、数据传输成本、支持服务成本、信用消费和项目拆分信息。
+After setting the payment method, TiDB Cloud will generate the invoice and billing details of the historical months, and generate the bill details of the current month at the beginning of each month. The billing details include your organization's TiDB cluster usage consumption, discounts, backup storage costs, data transmission costs, support service cost, credit consumption, and project splitting information.
 
-> **注意：**
+> **Note:**
 >
-> 由于延迟和其他原因，当月的计费详情仅供参考，不保证准确。TiDB Cloud 确保历史账单的准确性，以便你进行成本核算和满足其他需求。
+> Due to delays and other reasons, the billing details of the current month are for reference only, not guaranteed to be accurate. TiDB Cloud ensures the accuracy of historical bills so that you can perform cost accounting and meet other needs.
 
-要查看计费详情，请执行以下步骤：
+To view the billing details, perform the following steps:
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，使用左上角的下拉框切换到你的目标组织。
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 
-2. 在左侧导航窗格中，点击 **Billing**。
+2. In the left navigation pane, click **Billing**.
 
-在 **Billing** 页面上，**Bills** 标签页默认显示。
+On the **Billing** page, the **Bills** tab is displayed by default.
 
-**Bills** 标签页按项目和服务显示计费摘要。你还可以查看使用详情并以 CSV 格式下载数据。
+The **Bills** tab shows the billing summary by project and by service. You can also see the usage details and download the data in CSV format.
 
-> **注意：**
+> **Note:**
 >
-> 由于精度差异，月度账单中的总金额可能与每日使用详情中的总金额不同：
+> The total amount in the monthly bill might differ from that in the daily usage details due to differences in precision:
 >
-> - 月度账单中的总金额四舍五入到小数点后第 2 位。
-> - 每日使用详情中的总金额精确到小数点后第 6 位。
+> - The total amount in the monthly bill is rounded off to the 2nd decimal place.
+> - The total amount in the daily usage details is accurate to the 6th decimal place.
 
-## 成本资源管理器
+## Cost explorer
 
-如果你是组织的 `Organization Owner` 或 `Organization Billing Manager` 角色，你可以查看和分析 TiDB Cloud 的使用成本。否则，请跳过此部分。
+If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can view and analyze the usage costs of TiDB Cloud. Otherwise, skip this section.
 
-要分析和自定义你组织的成本报告，请执行以下步骤：
+To analyze and customize your cost reports of your organization, perform the following steps:
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，使用左上角的下拉框切换到你的目标组织。
-2. 在左侧导航窗格中，点击 **Billing**。
-3. 在 **Billing** 页面上，点击 **Cost Explorer** 标签页。
-4. 在 **Cost Explorer** 标签页上，展开右上角的 **Filter** 部分以自定义你的报告。你可以设置时间范围，选择分组选项（如按服务、项目、集群、区域、产品类型和收费类型），并通过选择特定服务、项目、集群或区域来应用过滤器。成本资源管理器将向你显示以下信息：
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Billing**.
+3. On the **Billing** page, click the **Cost Explorer** tab.
+4. On the **Cost Explorer** tab, expand the **Filter** section in the upper-right corner to customize your report. You can set the time range, select a grouping option (such as by service, project, cluster, region, product type, and charge type), and apply filters by selecting specific services, projects, clusters, or regions. The cost explorer will display you with the following information:
 
-    - **成本图表**：可视化选定时间范围内的成本趋势。你可以在 **Monthly**、**Daily** 和 **Total** 视图之间切换。
-    - **成本明细**：根据选定的分组选项显示你的成本的详细明细。为了进一步分析，你可以以 CSV 格式下载数据。
+    - **Cost Graph**: visualizes the cost trends over the selected time range. You can switch between **Monthly**, **Daily**, and **Total** views.
+    - **Cost Breakdown**: displays a detailed breakdown of your costs according to the selected grouping option. For further analysis, you can download the data in CSV format.
 
-## 计费档案
+## Billing profile
 
-付费组织可以创建计费档案。此档案中的信息将用于确定税费计算。
+Paid organizations can create a billing profile. Information in this profile will be used to determine the tax calculation.
 
-要查看或更新你组织的计费档案，请执行以下步骤：
+To view or update the billing profile of your organization, perform the following steps:
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，使用左上角的下拉框切换到你的目标组织。
-2. 在左侧导航窗格中，点击 **Billing**。
-3. 在 **Billing** 页面上，点击 **Billing Profile** 标签页。
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Billing**.
+3. On the **Billing** page, click the **Billing Profile** tab.
 
-计费档案中有四个字段。
+There are four fields in the billing profile.
 
-### 公司名称（可选）
+### Company name (optional)
 
-如果指定此字段，此名称将出现在发票上而不是你的组织名称。
+If this field is specified, this name will appear on invoices instead of your organization name.
 
-### 计费邮箱（可选）
+### Billing email (optional)
 
-如果指定此字段，发票和其他计费相关通知将发送到此邮箱地址。
+If this field is specified, invoices and other billing-related notifications will be sent to this email address.
 
-### 主要营业地址
+### Primary business address
 
-这是购买 TiDB Cloud 服务的公司地址。它用于计算任何适用的税费。
+This is the address of the company that purchases TiDB Cloud services. It is used to calculate any applicable taxes.
 
-### 商业税号（可选）
+### Business tax ID (optional)
 
-如果你的企业已注册增值税/商品及服务税，请填写有效的增值税/商品及服务税号。通过提供此信息，如果适用，我们将免除你的增值税/商品及服务税。这对于在增值税/商品及服务税注册允许某些税收豁免或退款的地区运营的企业很重要。
+If your business is registered for VAT/GST, fill in a valid VAT/GST ID. By providing this information, we will exempt you from charging VAT/GST if applicable. This is important for businesses operating in regions where VAT/GST registration allows for certain tax exemptions or refunds.
 
-## 信用额度
+## Credits
 
-TiDB Cloud 为概念验证 (PoC) 用户提供一定数量的信用额度。一个信用额度相当于一美元。你可以在信用额度过期之前使用信用额度支付 TiDB 集群费用。
+TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. One credit is equivalent to one U.S. dollar. You can use credits to pay TiDB cluster fees before the credits become expired.
 
-> **提示：**
+> **Tip:**
 >
-> 要申请 PoC，请参阅[使用 TiDB Cloud 进行概念验证 (PoC)](/tidb-cloud/tidb-cloud-poc.md)。
+> To apply for a PoC, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
 
-你的信用额度的详细信息在 **Credits** 标签页上可用，包括你的总信用额度、可用信用额度、当前使用情况和状态。
+The detailed information of your credits is available on the **Credits** tab, including your total credits, available credits, current usage, and the status.
 
-要查看信用额度信息，请执行以下步骤：
+To view the credit information, perform the following steps:
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，使用左上角的下拉框切换到你的目标组织。
-2. 在左侧导航窗格中，点击 **Billing**。
-3. 在 **Billing** 页面上，点击 **Credits** 标签页。
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Billing**.
+3. On the **Billing** page, click the **Credits** tab.
 
-> **注意：**
+> **Note:**
 >
-> - 设置支付方式后，集群费用首先从你的未使用信用额度中扣除，然后从你的支付方式中扣除。
-> - 信用额度不能用于支付支持计划费用。
+> - After you set up your payment method, the cluster fees are first deducted from your unused credits, then from your payment method.
+> - Credits cannot be used to pay the support plan fees.
 
-> **警告：**
+> **Warning:**
 >
-> 在 PoC 过程中：
+> During a PoC process:
 >
-> - 如果你在添加支付方式之前所有信用额度都过期，你将无法创建新集群。3 天后，你现有的所有集群将被回收。7 天后，你的所有备份将被回收。要恢复过程，你可以添加支付方式。
-> - 如果你在添加支付方式后所有信用额度都过期，你的 PoC 过程将继续，费用将从你的支付方式中扣除。
+> - If all your credits become expired before you add a payment method, you cannot create a new cluster. After 3 days, all your existing clusters will be recycled. After 7 days, all your backups will be recycled. To resume the process, you can add a payment method.
+> - If all your credits become expired after you add a payment method, your PoC process goes on, and fees are deducted from your payment method.
 
-## 折扣
+## Discounts
 
-如果你是组织的 `Organization Owner` 或 `Organization Billing Manager` 角色，你可以在 **Discounts** 标签页上查看 TiDB Cloud 的折扣信息。否则，请跳过此部分。
+If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can view the discount information of TiDB Cloud on the **Discounts** tab. Otherwise, skip this section.
 
-折扣信息包括你收到的所有折扣、状态、折扣百分比以及折扣开始和结束日期。
+The discount information includes all discounts that you have received, the status, the discount percentage, and the discount start and end date.
 
-要查看折扣信息，请执行以下步骤：
+To view the discount information, perform the following steps:
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，使用左上角的下拉框切换到你的目标组织。
-2. 在左侧导航窗格中，点击 **Billing**。
-3. 在 **Billing** 页面上，点击 **Discounts** 标签页。
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Billing**.
+3. On the **Billing** page, click the **Discounts** tab.
 
-## 支付方式
+## Payment method
 
-如果你是组织的 `Organization Owner` 或 `Organization Billing Manager` 角色，你可以管理 TiDB Cloud 的支付信息。否则，请跳过此部分。
+If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can manage the payment information of TiDB Cloud. Otherwise, skip this section.
 
-> **注意：**
+> **Note:**
 >
-> 如果你通过 [AWS Marketplace](https://aws.amazon.com/marketplace)、[Azure Marketplace](https://azuremarketplace.microsoft.com/) 或 [Google Cloud Marketplace](https://console.cloud.google.com/marketplace) 注册 TiDB Cloud，你可以直接通过你的 AWS 账户、Azure 账户或 Google Cloud 账户付款，但无法在 TiDB Cloud 控制台中添加支付方式或下载发票。
+> If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), [Azure Marketplace](https://azuremarketplace.microsoft.com/), or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), you can pay through your AWS account, Azure account, or Google Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud console.
 
-费用根据你的集群使用情况从绑定的信用卡中扣除。要添加有效的信用卡，你可以使用以下任一方法：
+The fee is deducted from a bound credit card according to your cluster usage. To add a valid credit card, you can use either of the following methods:
 
-- 当你创建 TiDB Cloud Dedicated 集群时：
+- When you are creating a TiDB Cloud Dedicated cluster:
 
-    1. 在 **Create Cluster** 页面上，点击 **Add Credit Card**。
-    2. 在 **Add a Card** 对话框中，填写卡片信息和账单地址。
-    3. 点击 **Save Card**。
+    1. On the **Create Cluster** page, click **Add Credit Card**.
+    2. In the **Add a Card** dialog, fill in the card information and billing address.
+    3. Click **Save Card**.
 
-- 在计费控制台中的任何时候：
+- Anytime in the billing console:
 
-    1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，使用左上角的下拉框切换到你的目标组织。
-    2. 在左侧导航窗格中，点击 **Billing**。
-    3. 在 **Billing** 页面上，点击 **Payment Method** 标签页，然后点击 **Add a New Card**。
-    4. 填写信用卡信息和信用卡地址，然后点击 **Save Card**。
+    1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
+    2. In the left navigation pane, click **Billing**.
+    3. On the **Billing** page, click the **Payment Method** tab, and then click **Add a New Card**.
+    4. Fill in the credit card information and credit card address, and then click **Save Card**.
 
-        如果你在[**Billing profile**](#billing-profile) 中没有指定主要营业地址，信用卡地址将用作你的主要营业地址进行税费计算。你可以随时在 **Billing profile** 中更新你的主要营业地址。
+        If you do not specify a primary business address in [**Billing profile**](#billing-profile), the credit card address will be used as your primary business address for tax calculation. You can update your primary business address in **Billing profile** anytime.
 
-> **注意：**
+> **Note:**
 >
-> 为确保信用卡敏感数据的安全，TiDB Cloud 不保存任何客户信用卡信息，并将它们保存在第三方支付平台 Stripe 中。所有计费扣款都通过 Stripe 完成。
+> To ensure the security of credit card sensitive data, TiDB Cloud does not save any customer credit card information and saves them in the third-party payment platform Stripe. All billing deductions are completed through Stripe.
 
-你可以绑定多张信用卡，并在计费控制台的支付方式中将其中一张设置为默认信用卡。设置后，后续计费将自动从默认信用卡中扣除。
+You can bind multiple credit cards, and set one of them as the default credit card in the payment method of the billing console. After setting, subsequent billings will be automatically deducted from the default credit card.
 
-要设置默认信用卡，请执行以下步骤：
+To set the default credit card, perform the following steps:
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，使用左上角的下拉框切换到你的目标组织。
-2. 在左侧导航窗格中，点击 **Billing**。
-3. 在 **Billing** 页面上，点击 **Payment Method** 标签页。
-4. 在信用卡列表中选择一张信用卡，然后在提示将其设置为默认信用卡时点击 **Yes**。
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Billing**.
+3. On the **Billing** page, click the **Payment Method** tab.
+4. Select a credit card in the credit card list, and then click **Yes** when you are prompted to set it as the default credit card.
 
-## 合同
+## Contract
 
-如果你是组织的 `Organization Owner` 或 `Organization Billing Manager` 角色，你可以在 TiDB Cloud 控制台中管理你的自定义 TiDB Cloud 订阅以满足合规要求。否则，请跳过此部分。
+If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can manage your customized TiDB Cloud subscriptions in the TiDB Cloud console to meet compliance requirements. Otherwise, skip this section.
 
-如果你已与我们的销售团队就合同达成一致并收到一封电子邮件要求在线审查和接受合同，你可以执行以下操作：
+If you have agreed with our sales on a contract and received an email to review and accept the contract online, you can do the following:
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，使用左上角的下拉框切换到你的目标组织。
-2. 在左侧导航窗格中，点击 **Billing**。
-3. 在 **Billing** 页面上，点击 **Contract** 标签页。
-4. 在 **Contract** 标签页上，找到你想要审查的合同，然后点击合同行中的 **...**。
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Billing**.
+3. On the **Billing** page, click the **Contract** tab.
+4. On the **Contract** tab, locate the contract you want to review, and then click **...** in the row of the contract.
 
-要了解有关合同的更多信息，请随时[联系我们的销售团队](https://www.pingcap.com/contact-us/)。
+To learn more about contracts, feel free to [contact our sales](https://www.pingcap.com/contact-us/).
 
-## 来自 AWS Marketplace、Azure Marketplace 或 Google Cloud Marketplace 的计费
+## Billing from AWS Marketplace, Azure Marketplace, or Google Cloud Marketplace
 
-如果你是组织的 `Organization Owner` 或 `Organization Billing Manager` 角色，你可以将你的 TiDB Cloud 账户链接到 AWS 计费账户、Azure 计费账户或 Google Cloud 计费账户。否则，请跳过此部分。
+If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can link your TiDB Cloud account to an AWS billing account, an Azure billing account, or a Google Cloud billing account. Otherwise, skip this section.
 
-如果你是 TiDB Cloud 的新用户且没有 TiDB Cloud 账户，你可以通过 [AWS Marketplace](https://aws.amazon.com/marketplace)、[Azure Marketplace](https://azuremarketplace.microsoft.com/) 或 [Google Cloud Marketplace](https://console.cloud.google.com/marketplace) 注册 TiDB Cloud 账户，并通过 AWS、Azure 或 Google Cloud 计费账户支付使用费用。
+If you are new to TiDB Cloud and do not have a TiDB Cloud account, you can sign up for a TiDB Cloud account through [AWS Marketplace](https://aws.amazon.com/marketplace), [Azure Marketplace](https://azuremarketplace.microsoft.com/), or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), and pay for the usage via the AWS, Azure, or Google Cloud billing account.
 
-- 要通过 AWS Marketplace 注册，在 [AWS Marketplace](https://aws.amazon.com/marketplace) 中搜索 `TiDB Cloud`，订阅 TiDB Cloud，然后按照屏幕上的说明设置你的 TiDB Cloud 账户。
-- 要通过 Azure Marketplace 注册，在 [Azure Marketplace](https://azuremarketplace.microsoft.com) 中搜索 `TiDB Cloud`，订阅 TiDB Cloud，然后按照屏幕上的说明设置你的 TiDB Cloud 账户。
-- 要通过 Google Cloud Marketplace 注册，在 [Google Cloud Marketplace](https://console.cloud.google.com/marketplace) 中搜索 `TiDB Cloud`，订阅 TiDB Cloud，然后按照屏幕上的说明设置你的 TiDB Cloud 账户。
+- To sign up through AWS Marketplace, search for `TiDB Cloud` in [AWS Marketplace](https://aws.amazon.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+- To sign up through Azure Marketplace, search for `TiDB Cloud` in [Azure Marketplace](https://azuremarketplace.microsoft.com), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+- To sign up through Google Cloud Marketplace, search for `TiDB Cloud` in [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
 
-如果你已有 TiDB Cloud 账户并想通过你的 AWS 或 Google Cloud 计费账户支付使用费用，你可以将你的 TiDB Cloud 账户链接到你的 AWS 或 Google Cloud 计费账户。
+If you already have a TiDB Cloud account and you want to pay for the usage via your AWS or Google Cloud billing account, you can link your TiDB Cloud account to your AWS or Google Cloud billing account.
 
 <SimpleTab>
 <div label="AWS Marketplace">
 
-要将你的 TiDB Cloud 账户链接到 AWS 计费账户，请执行以下步骤：
+To link your TiDB Cloud account to an AWS billing account, take the following steps:
 
-1. 打开 [AWS Marketplace 页面](https://aws.amazon.com/marketplace)，搜索 `TiDB Cloud` 并在搜索结果中选择 **TiDB Cloud**。显示 TiDB Cloud 产品页面。
+1. Open the [AWS Marketplace page](https://aws.amazon.com/marketplace), search for `TiDB Cloud` and select **TiDB Cloud** in the search results. The TiDB Cloud product page is displayed.
 
-2. 在 TiDB Cloud 产品页面上，点击 **Continue to Subscribe**。显示订单页面。
+2. On the TiDB Cloud product page, click **Continue to Subscribe**. An order page is displayed.
 
-3. 在订单页面上，点击 **Subscribe**，然后点击 **Set Up your Account**。你将被重定向到 TiDB Cloud 注册页面。
+3. On the order page, click **Subscribe**, and then click **Set Up your Account**. You are directed to the TiDB Cloud sign-up page.
 
-4. 检查注册页面上方的通知并点击 **Sign in**。
+4. Check the notification in the upper part of the sign-up page and click **Sign in**.
 
-5. 使用你的 TiDB Cloud 账户登录。显示 **Link to Your AWS Billing Account** 页面。
+5. Sign in with your TiDB Cloud account. The **Link to Your AWS Billing Account** page is displayed.
 
-6. 在 **Link to Your AWS Billing Account** 页面上，选择你的目标组织并点击 **Link** 链接到你的 AWS 计费账户。
+6. On the **Link to Your AWS Billing Account** page, select your target organization and click **Link** to link to your AWS billing account.
 
-    > **注意：**
+    > **Note:**
     >
-    > 如果你的组织在 TiDB Cloud 中已有支付方式，此组织的现有支付方式将被新添加的 AWS 计费账户替换。
+    > If your organization already has a payment method in TiDB Cloud, the existing payment method for this organization will be replaced by the newly added AWS billing account.
 
 </div>
 
 <div label="Azure Marketplace">
 
-要将你的 TiDB Cloud 账户链接到 Azure 计费账户，请执行以下步骤：
+To link your TiDB Cloud account to an Azure billing account, take the following steps:
 
-1. 打开 [Azure Marketplace 页面](https://azuremarketplace.microsoft.com)，搜索 `TiDB Cloud` 并在搜索结果中选择 **TiDB Cloud on Azure (Preview)**。显示 TiDB Cloud 产品页面。
+1. Open the [Azure Marketplace page](https://azuremarketplace.microsoft.com), search for `TiDB Cloud` and select **TiDB Cloud on Azure (Preview)** in the search results. The TiDB Cloud product page is displayed.
 
-2. 在 TiDB Cloud 产品页面上，点击 **Get It Now**，接受使用条款，然后点击 **Continue** 进入订单页面。
+2. On the TiDB Cloud product page, click **Get It Now**, accept the terms of use, and then click **Continue** to go to the order page.
 
-    > **注意：**
+    > **Note:**
     >
-    > 如果你尚未为你的 Microsoft 账户添加国家和地区信息，你还需要在点击 **Continue** 之前输入该信息。
+    > If you have not added your country and region information for your Microsoft account, you also need to enter that information before clicking **Continue**.
 
-3. 在订单页面上，点击 **Subscribe**，在 **Basics** 标签页上填写所需信息，然后点击 **Review + subscribe**。如果一切看起来都很好，点击 **Subscribe**，然后等待几秒钟完成订阅。
+3. On the order page, click **Subscribe**, fill in the required information on the **Basics** tab, and then click **Review + subscribe**. If everything looks good, click **Subscribe**, and then wait for a few seconds for the subscription to complete.
 
-4. 订阅完成后，点击 **Configure account now**。你将被重定向到 TiDB Cloud 注册页面。
+4. When the subscription is done, click **Configure account now**. You will be directed to the TiDB Cloud sign-up page.
 
-5. 检查注册页面上方的通知并点击 **Sign in**。
+5. Check the notification in the upper part of the sign-up page and click **Sign in**.
 
-6. 使用你的 TiDB Cloud 账户登录。显示 **Link to Your Azure Billing Account** 页面。
+6. Sign in with your TiDB Cloud account. The **Link to Your Azure Billing Account** page is displayed.
 
-7. 在 **Link to Your Azure Billing Account** 页面上，选择你的目标组织并点击 **Link** 链接到你的 AWS 计费账户。
+7. On the **Link to Your Azure Billing Account** page, select your target organization and click **Link** to link to your AWS billing account.
 
-    > **注意：**
+    > **Note:**
     >
-    > 如果你的组织在 TiDB Cloud 中已有支付方式，此组织的现有支付方式将被新添加的 Azure 计费账户替换。
+    > If your organization already has a payment method in TiDB Cloud, the existing payment method for this organization will be replaced by the newly added Azure billing account.
 
 </div>
 
 <div label="Google Cloud Marketplace">
 
-要将你的 TiDB Cloud 账户链接到 Google Cloud 计费账户，请执行以下步骤：
+To link your TiDB Cloud account to a Google Cloud billing account, take the following steps:
 
-1. 打开 [Google Cloud Marketplace 页面](https://console.cloud.google.com/marketplace)，搜索 `TiDB Cloud` 并在搜索结果中选择 **TiDB Cloud**。显示 TiDB Cloud 产品页面。
+1. Open the [Google Cloud Marketplace page](https://console.cloud.google.com/marketplace), search for `TiDB Cloud` and select **TiDB Cloud** in the search results. The TiDB Cloud product page is displayed.
 
-2. 在 TiDB Cloud 产品页面上，点击 **SUBSCRIBE**。显示订阅页面。
+2. On the TiDB Cloud product page, click **SUBSCRIBE**. A subscription page is displayed.
 
-3. 在订阅页面上，点击 **Subscribe**，然后点击 **Go to product page**。你将被重定向到 TiDB Cloud 注册页面。
+3. On the subscription page, click **Subscribe**, and then click **Go to product page**. You are directed to the TiDB Cloud sign-up page.
 
-4. 检查注册页面上方的通知并点击 **Sign in**。
+4. Check the notification in the upper part of the sign-up page and click **Sign in**.
 
-5. 使用你的 TiDB Cloud 账户登录。显示链接到你的 Google Cloud 计费账户的页面。
+5. Sign in with your TiDB Cloud account. The page for linking to your Google Cloud billing account is displayed.
 
-6. 在页面上，选择目标组织并点击 **Link** 链接到你的 Google Cloud 计费账户。
+6. On the page, select the target organization and click **Link** to link to your Google Cloud billing account.
 
-    > **注意：**
+    > **Note:**
     >
-    > 如果你的组织在 TiDB Cloud 中已有支付方式，此组织的现有支付方式将被新添加的 Google Cloud 计费账户替换。
+    > If your organization already has a payment method in TiDB Cloud, the existing payment method for this organization will be replaced by the newly added Google Cloud billing account.
 
 </div>
 </SimpleTab>

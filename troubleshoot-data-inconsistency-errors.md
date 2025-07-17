@@ -1,114 +1,114 @@
 ---
-title: 排查数据和索引之间的不一致问题
-summary: 了解如何处理数据和索引之间一致性检查报告的错误。
+title: Troubleshoot Inconsistency Between Data and Indexes
+summary: Learn how to deal with errors reported by the consistency check between data and indexes.
 ---
 
-# 排查数据和索引之间的不一致问题
+# Troubleshoot Inconsistency Between Data and Indexes
 
-TiDB 在执行事务或 [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) 语句时会检查数据和索引之间的一致性。如果检查发现记录键值对和相应的索引键值对不一致，即存储行数据的键值对和存储其索引的键值对不一致（例如，多出索引或缺少索引），TiDB 会报告数据不一致错误，并在错误日志中打印相关错误。
+TiDB checks consistency between data and indexes when it executes transactions or the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) statement. If the check finds that a record key-value and the corresponding index key-value are inconsistent, that is, a key-value pair storing row data and the corresponding key-value pair storing its index are inconsistent (for example, more indexes or missing indexes), TiDB reports a data inconsistency error and prints the related errors in error logs.
 
 <CustomContent platform="tidb">
 
-本文描述了数据不一致错误的含义，并提供了一些绕过一致性检查的方法。如果发生数据一致性错误，你可以从 PingCAP 或社区[获取支持](/support.md)。
+This document describes the meanings of data inconsistency errors and provides some methods to bypass the consistency check. If a data consistency error occurs, you can [get support](/support.md) from PingCAP or the community.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-本文描述了数据不一致错误的含义，并提供了一些绕过一致性检查的方法。如果发生数据一致性错误，你可以[联系 TiDB Cloud 支持团队](/tidb-cloud/tidb-cloud-support.md)。
+This document describes the meanings of data inconsistency errors and provides some methods to bypass the consistency check. If a data consistency error occurs, you can [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 
-## 错误说明
+## Error explanation
 
-当数据和索引之间出现不一致时，你可以查看 TiDB 错误消息以了解行数据和索引数据之间哪些项目不一致，或查看相关错误日志以进行进一步调查。
+When inconsistency between data and indexes occurs, you can check TiDB error messages to know which item is inconsistent between row data and index data, or check the related error logs for further investigation.
 
-### 事务执行期间报告的错误
+### Errors reported during transaction execution
 
-本节列出了 TiDB 执行事务时报告的数据不一致错误，并通过示例解释这些错误的含义。
+This section lists the data inconsistency errors reported when TiDB executes transactions and explains the meanings of these errors with examples.
 
-#### 错误 8133
+#### Error 8133
 
 `ERROR 8133 (HY000): data inconsistency in table: t, index: k2, index-count:1 != record-count:0`
 
-此错误表示对于表 `t` 中的 `k2` 索引，表中的索引数量为 1，而行记录数量为 0。数量不一致。
+This error indicates that for the `k2` index in table `t`, the number of indexes in the table is 1 and the number of row records is 0. The number is inconsistent.
 
-#### 错误 8138
+#### Error 8138
 
 `ERROR 8138 (HY000): writing inconsistent data in table: t, expected-values:{KindString green} != record-values:{KindString GREEN}`
 
-此错误表示事务试图写入不正确的行值。对于要写入的数据，编码后的行数据与编码前的原始数据不匹配。
+This error indicates that the transaction was attempting to write an incorrect row value. For the data to be written, the encoded row data does not match the original data before encoding.
 
-#### 错误 8139
+#### Error 8139
 
 `ERROR 8139 (HY000): writing inconsistent data in table: t, index: i1, index-handle:4 != record-handle:3, index: tables.mutation{key:kv.Key{0x74, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x49, 0x5f, 0x69, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0x1, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x0, 0x0, 0x0, 0xfc, 0x1, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x0, 0x0, 0x0, 0xfc, 0x3, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x4}, flags:0x0, value:[]uint8{0x30}, indexID:1}, record: tables.mutation{key:kv.Key{0x74, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x49, 0x5f, 0x72, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3}, flags:0xd, value:[]uint8{0x80, 0x0, 0x2, 0x0, 0x0, 0x0, 0x1, 0x2, 0x5, 0x0, 0xa, 0x0, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x68, 0x65, 0x6c, 0x6c, 0x6f}, indexID:0}`
 
-此错误表示要写入的数据的 handle（即行数据的键）不一致。对于表 `t` 中的索引 `i1`，事务要写入的行在索引键值对中的 handle 为 4，而在行记录键值对中的 handle 为 3。此行的数据将不会被写入。
+This error indicates that the handle (that is, the key of the row data) of the data to be written is inconsistent. For index `i1` in table `t`, the row to be written by the transaction has a handle of 4 in the index key-value pair and a handle of 3 in the row record key-value pair. The data of this row will not be written.
 
-#### 错误 8140
+#### Error 8140
 
 `ERROR 8140 (HY000): writing inconsistent data in table: t, index: i2, col: c1, indexed-value:{KindString hellp} != record-value:{KindString hello}`
 
-此错误表示事务要写入的行中的数据与索引中的数据不匹配。对于表 `t` 中的索引 `i2`，事务要写入的一行在索引键值对中的数据为 `hellp`，而在记录键值对中的数据为 `hello`。此行的数据将不会被写入。
+This error indicates that the data in a row to be written by the transaction does not match the data in the index. For index `i2` in table `t`, a row to be written by the transaction has data `hellp` in the index key-value pair and data `hello` in the record key-value pair. The data of this row will not be written.
 
-#### 错误 8141
+#### Error 8141
 
 `ERROR 8141 (HY000): assertion failed: key: 7480000000000000405f72013300000000000000f8, assertion: NotExist, start_ts: 430590532931813377, existing start ts: 430590532931551233, existing commit ts: 430590532931551234`
 
-此错误表示事务提交时断言失败。假设数据和索引是一致的，TiDB 断言键 `7480000000000000405f720133000000000000000000f8` 不存在。当事务提交时，TiDB 发现该键确实存在，由 `start ts` 为 `430590532931551233` 的事务写入。TiDB 会将此键的多版本并发控制（MVCC）历史记录打印到日志中。
+This error indicates that the assertion failed when a transaction was being committed. Assuming that data and indexes are consistent, TiDB asserted that the key `7480000000000000405f720133000000000000000000f8` did not exist. When the transaction was being committed, TiDB found the key did exist, written by the transaction with the `start ts` `430590532931551233`. TiDB will print the Multi-Version Concurrency Control (MVCC) history of this key to logs.
 
-### admin check 中报告的错误
+### Errors reported in admin check
 
-本节列出了在执行 [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) 语句时 TiDB 可能出现的数据不一致错误，并通过示例解释这些错误的含义。
+This section lists the data inconsistency errors that might occur in TiDB when you execute the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) statement, and explains the meanings of these errors with examples.
 
-#### 错误 8003
+#### Error 8003
 
 `ERROR 8003 (HY000): table count 3 != index(idx) count 2`
 
-此错误表示执行 [`ADMIN CHECK`](/sql-statements/sql-statement-admin-check-table-index.md) 语句的表有 3 个行键值对，但只有 2 个索引键值对。
+This error indicates that the table on which the [`ADMIN CHECK`](/sql-statements/sql-statement-admin-check-table-index.md) statement is executed has 3 row key-value pairs but only 2 index key-value pairs.
 
-#### 错误 8134
+#### Error 8134
 
 `ERROR 8134 (HY000): data inconsistency in table: t, index: c2, col: c2, handle: "2", index-values:"KindInt64 13" != record-values:"KindInt64 12", compare err:<nil>`
 
-此错误表示对于表 `t` 中的索引 `c2`，列 `c2` 的值有以下不一致：
+This error indicates that for index `c2` in table `t`, the value of column `c2` has the following inconsistency:
 
-- 在 handle 为 `2` 的行的索引键值对中，列 `c2` 的值为 `13`。
-- 在行记录键值对中，列 `c2` 的值为 `12`。
+- In the index key-value pair of the row whose handle is `2`, the value of column `c2` is `13`.
+- In the row record key-value pair, the value of column `c2` is `12`.
 
-#### 错误 8223
+#### Error 8223
 
 `ERROR 8223 (HY000): data inconsistency in table: t2, index: i1, handle: {hello, hello}, index-values:"" != record-values:"handle: {hello, hello}, values: [KindString hello KindString hello]"`
 
-此错误表示 `index-values` 为空而 `record-values` 不为空，意味着该行没有对应的索引。
+This error indicates that `index-values` are null and `record-values` are not null, meaning that there is no corresponding index for the row.
 
-## 解决方案
+## Solutions
 
 <CustomContent platform="tidb">
 
-如果遇到数据不一致错误，请立即从 PingCAP [获取支持](/support.md)进行故障排查，而不是自行处理错误。如果你的应用程序需要紧急跳过此类错误，你可以使用以下方法绕过检查。
+If you encounter a data inconsistency error, [get support](/support.md) from PingCAP for troubleshooting immediately instead of dealing with the error by yourself. If your application needs to skip such errors urgently, you can use the following methods to bypass the check.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-如果遇到数据不一致错误，请立即[联系 TiDB Cloud 支持团队](/tidb-cloud/tidb-cloud-support.md)进行故障排查，而不是自行处理错误。如果你的应用程序需要紧急跳过此类错误，你可以使用以下方法绕过检查。
+If you encounter a data inconsistency error, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for troubleshooting immediately instead of dealing with the error by yourself. If your application needs to skip such errors urgently, you can use the following methods to bypass the check.
 
 </CustomContent>
 
-### 重写 SQL
+### Rewrite SQL
 
-如果数据不一致错误仅在特定 SQL 语句中出现，你可以通过使用不同执行运算符将 SQL 语句重写为另一种等效形式来绕过此错误。
+If the data inconsistency error occurs in a particular SQL statement only, you can bypass this error by rewriting the SQL statement to another equivalent form using different execution operators.
 
-### 禁用错误检查
+### Disable error checks
 
-对于事务执行中报告的以下错误，你可以绕过相应的检查：
+For the following errors reported in transaction execution, you can bypass the corresponding checks:
 
-- 要绕过错误 8138、8139 和 8140 的检查，配置 `set @@tidb_enable_mutation_checker=0`。
-- 要绕过错误 8141 的检查，配置 `set @@tidb_txn_assertion_level=OFF`。
+- To bypass the checks of errors 8138, 8139, and 8140, configure `set @@tidb_enable_mutation_checker=0`.
+- To bypass the checks of error 8141, configure `set @@tidb_txn_assertion_level=OFF`.
 
-> **注意：**
+> **Note:**
 >
-> 禁用 `tidb_enable_mutation_checker` 和 `tidb_txn_assertion_level` 将绕过所有 SQL 语句的相应检查。
+> Disabling `tidb_enable_mutation_checker` and `tidb_txn_assertion_level` will bypass the corresponding checks of all SQL statements.
 
-对于事务执行中报告的其他错误以及在执行 [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) 语句期间报告的所有错误，你无法绕过相应的检查，因为数据已经不一致。
+For other errors reported in transaction execution and all errors reported during the execution of the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) statement, you cannot bypass the corresponding check, because the data is already inconsistent.

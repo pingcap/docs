@@ -1,15 +1,15 @@
 ---
 title: Performance Schema
-summary: TiDB 实现了用于查看系统元数据的 performance_schema。
+summary: TiDB implements the performance_schema for viewing system metadata.
 ---
 
 # Performance Schema
 
-TiDB 实现了 performance schema 表以保持与 MySQL 的兼容性。
+TiDB implements performance schema tables for MySQL compatibility.
 
-## MySQL 兼容性表
+## Tables for MySQL compatibility
 
-| 表名                                                                                       | 描述                                               |
+| Table name                                                                                       | Description                                               |
 |--------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
 | `events_stages_current`                                                                          |                                                           |
 | `events_stages_history`                                                                          |                                                           |
@@ -23,7 +23,7 @@ TiDB 实现了 performance schema 表以保持与 MySQL 的兼容性。
 | `events_transactions_history_long`                                                               |                                                           |
 | `global_status`                                                                                  |                                                           |
 | `prepared_statements_instances`                                                                  |                                                           |
-| [`session_connect_attrs`](/performance-schema/performance-schema-session-connect-attrs.md)       | 提供会话的连接属性。              |
+| [`session_connect_attrs`](/performance-schema/performance-schema-session-connect-attrs.md)       | Provides connection attributes for sessions.              |
 | `session_status`                                                                                 |                                                           |
 | `session_variables`                                                                              |                                                           |
 | `setup_actors`                                                                                   |                                                           |
@@ -31,9 +31,9 @@ TiDB 实现了 performance schema 表以保持与 MySQL 的兼容性。
 | `setup_instruments`                                                                              |                                                           |
 | `setup_objects`                                                                                  |                                                           |
 
-## TiDB 扩展表
+## Tables that are TiDB extensions
 
-| 表名                                                                                       | 描述                                               |
+| Table name                                                                                       | Description                                               |
 |--------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
 | `pd_profile_allocs`                                                                              |                                                           |
 | `pd_profile_block`                                                                               |                                                           |

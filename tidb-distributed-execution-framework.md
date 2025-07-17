@@ -1,131 +1,131 @@
 ---
-title: TiDB 分布式执行框架 (DXF)
-summary: 了解 TiDB 分布式执行框架 (DXF) 的使用场景、限制、使用方法和实现原理。
+title: TiDB Distributed eXecution Framework (DXF)
+summary: Learn the use cases, limitations, usage, and implementation principles of the TiDB Distributed eXecution Framework (DXF).
 ---
 
-# TiDB 分布式执行框架 (DXF)
+# TiDB Distributed eXecution Framework (DXF)
 
-> **注意：**
+> **Note:**
 >
-> 此功能在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
-TiDB 采用计算存储分离架构，具有出色的可扩展性和弹性。从 v7.1.0 开始，TiDB 引入了**分布式执行框架（Distributed eXecution Framework，DXF）**，以进一步利用分布式架构的资源优势。DXF 的目标是实现任务的统一调度和分布式执行，并为整体和单个任务提供统一的资源管理能力，更好地满足用户对资源使用的期望。
+TiDB adopts a computing-storage separation architecture with excellent scalability and elasticity. Starting from v7.1.0, TiDB introduces a **Distributed eXecution Framework (DXF)** to further leverage the resource advantages of the distributed architecture. The goal of the DXF is to implement unified scheduling and distributed execution of tasks, and to provide unified resource management capabilities for both overall and individual tasks, which better meets users' expectations for resource usage.
 
-本文档描述了 DXF 的使用场景、限制、使用方法和实现原理。
+This document describes the use cases, limitations, usage, and implementation principles of the DXF.
 
-## 使用场景
+## Use cases
 
-在数据库管理系统中，除了核心的事务处理（TP）和分析处理（AP）工作负载外，还有其他重要任务，如 DDL 操作、[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)、[TTL](/time-to-live.md)、[`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) 和备份/恢复。这些任务需要处理数据库对象（表）中的大量数据，因此通常具有以下特点：
+In a database management system, in addition to the core transactional processing (TP) and analytical processing (AP) workloads, there are other important tasks, such as DDL operations, [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md), [TTL](/time-to-live.md), [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md), and Backup/Restore. These tasks need to process a large amount of data in database objects (tables), so they typically have the following characteristics:
 
-- 需要处理 schema 或数据库对象（表）中的所有数据。
-- 可能需要定期执行，但频率较低。
-- 如果资源控制不当，容易影响 TP 和 AP 任务，降低数据库服务质量。
+- Need to process all data in a schema or a database object (table).
+- Might need to be executed periodically, but at a low frequency.
+- If the resources are not properly controlled, they are prone to affect TP and AP tasks, lowering the database service quality.
 
-启用 DXF 可以解决上述问题，并具有以下三个优势：
+Enabling the DXF can solve the above problems and has the following three advantages:
 
-- 框架提供统一的高可扩展性、高可用性和高性能能力。
-- DXF 支持任务的分布式执行，可以灵活调度整个 TiDB 集群的可用计算资源，从而更好地利用 TiDB 集群中的计算资源。
-- DXF 为整体和单个任务提供统一的资源使用和管理能力。
+- The framework provides unified capabilities for high scalability, high availability, and high performance.
+- The DXF supports distributed execution of tasks, which can flexibly schedule the available computing resources of the entire TiDB cluster, thereby better utilizing the computing resources in a TiDB cluster.
+- The DXF provides unified resource usage and management capabilities for both overall and individual tasks.
 
-目前，DXF 支持 [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) 和 [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) 语句的分布式执行。
+Currently, the DXF supports the distributed execution of the [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) statements.
 
-- [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) 是用于创建索引的 DDL 语句。例如：
+- [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) is a DDL statement used to create indexes. For example:
 
     ```sql
     ALTER TABLE t1 ADD INDEX idx1(c1);
     CREATE INDEX idx1 ON table t1(c1);
     ```
 
-- [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) 用于将 CSV、SQL 和 Parquet 等格式的数据导入空表。
+- [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) is used to import data in formats such as CSV, SQL, and Parquet into an empty table.
 
-## 限制
+## Limitation
 
-DXF 最多只能同时调度 16 个任务（包括 [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) 任务和 [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) 任务）。
+The DXF can only schedule up to 16 tasks (including [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) tasks and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) tasks) simultaneously.
 
-## 前提条件
+## Prerequisites
 
-在使用 DXF 执行 [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) 任务之前，你需要启用[快速在线 DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) 模式。
+Before using the DXF to execute [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) tasks, you need to enable the [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) mode.
 
 <CustomContent platform="tidb">
 
-1. 调整以下与快速在线 DDL 相关的系统变量：
+1. Adjust the following system variables related to Fast Online DDL:
 
-    * [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)：用于启用快速在线 DDL 模式。从 TiDB v6.5.0 开始默认启用。
-    * [`tidb_ddl_disk_quota`](/system-variables.md#tidb_ddl_disk_quota-new-in-v630)：用于控制快速在线 DDL 模式下可以使用的本地磁盘最大配额。
+    * [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630): used to enable Fast Online DDL mode. It is enabled by default starting from TiDB v6.5.0.
+    * [`tidb_ddl_disk_quota`](/system-variables.md#tidb_ddl_disk_quota-new-in-v630): used to control the maximum quota of local disks that can be used in Fast Online DDL mode.
 
-2. 调整以下与快速在线 DDL 相关的配置项：
+2. Adjust the following configuration item related to Fast Online DDL:
 
-    * [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630)：指定快速在线 DDL 模式下可以使用的本地磁盘路径。
+    * [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630): specifies the local disk path that can be used in Fast Online DDL mode.
 
-> **注意：**
+> **Note:**
 >
-> 建议为 TiDB `temp-dir` 目录准备至少 100 GiB 的可用空间。
+> It is recommended that you prepare at least 100 GiB of free space for the TiDB `temp-dir` directory.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-调整以下与快速在线 DDL 相关的系统变量：
+Adjust the following system variables related to Fast Online DDL:
 
-* [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)：用于启用快速在线 DDL 模式。从 TiDB v6.5.0 开始默认启用。
-* [`tidb_ddl_disk_quota`](/system-variables.md#tidb_ddl_disk_quota-new-in-v630)：用于控制快速在线 DDL 模式下可以使用的本地磁盘最大配额。
+* [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630): used to enable Fast Online DDL mode. It is enabled by default starting from TiDB v6.5.0.
+* [`tidb_ddl_disk_quota`](/system-variables.md#tidb_ddl_disk_quota-new-in-v630): used to control the maximum quota of local disks that can be used in Fast Online DDL mode.
 
 </CustomContent>
 
-## 使用方法
+## Usage
 
-1. 要启用 DXF，请将 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) 的值设置为 `ON`。从 v8.1.0 开始，此变量默认启用。对于 v8.1.0 或更高版本的新创建集群，你可以跳过此步骤。
+1. To enable the DXF, set the value of [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) to `ON`. Starting from v8.1.0, this variable is enabled by default. For newly created clusters of v8.1.0 or later versions, you can skip this step.
 
     ```sql
     SET GLOBAL tidb_enable_dist_task = ON;
     ```
 
-    当 DXF 任务运行时，框架支持的语句（如 [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) 和 [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)）以分布式方式执行。默认情况下，所有 TiDB 节点都运行 DXF 任务。
+    When the DXF tasks are running, the statements supported by the framework (such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)) are executed in a distributed manner. All TiDB nodes run DXF tasks by default.
 
-2. 通常，对于可能影响 DDL 任务分布式执行的以下系统变量，建议使用其默认值：
+2. In general, for the following system variables that might affect the distributed execution of DDL tasks, it is recommended that you use their default values:
 
-    * [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)：使用默认值 `4`。建议的最大值是 `16`。
+    * [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt): use the default value `4`. The recommended maximum value is `16`.
     * [`tidb_ddl_reorg_priority`](/system-variables.md#tidb_ddl_reorg_priority)
     * [`tidb_ddl_error_count_limit`](/system-variables.md#tidb_ddl_error_count_limit)
-    * [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)：使用默认值。建议的最大值是 `1024`。
+    * [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size): use the default value. The recommended maximum value is `1024`.
 
-## 任务调度
+## Task scheduling
 
-默认情况下，DXF 调度所有 TiDB 节点执行分布式任务。从 v7.4.0 开始，对于 TiDB 自管理集群，你可以通过配置 [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) 来控制哪些 TiDB 节点可以被 DXF 调度执行分布式任务。
+By default, the DXF schedules all TiDB nodes to execute distributed tasks. Starting from v7.4.0, for TiDB Self-Managed clusters, you can control which TiDB nodes can be scheduled by the DXF to execute distributed tasks by configuring [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740).
 
-- 对于 v7.4.0 到 v8.0.0 的版本，[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) 的可选值为 `''` 或 `background`。如果当前集群有 `tidb_service_scope = 'background'` 的 TiDB 节点，DXF 会将任务调度到这些节点执行。如果当前集群没有 `tidb_service_scope = 'background'` 的 TiDB 节点（无论是由于故障还是正常缩容），DXF 会将任务调度到 `tidb_service_scope = ''` 的节点执行。
+- For versions from v7.4.0 to v8.0.0, the optional values of [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) are `''` or `background`. If the current cluster has TiDB nodes with `tidb_service_scope = 'background'`, the DXF schedules tasks to these nodes for execution. If the current cluster does not have TiDB nodes with `tidb_service_scope = 'background'`, whether due to faults or normal scaling in, the DXF schedules tasks to nodes with `tidb_service_scope = ''` for execution.
 
-- 从 v8.1.0 开始，你可以将 [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) 设置为任何有效值。当提交分布式任务时，任务会绑定到当前连接的 TiDB 节点的 [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) 值，DXF 只会将任务调度到具有相同 [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) 值的 TiDB 节点执行。但是，为了与早期版本的配置兼容，如果在 `tidb_service_scope = ''` 的节点上提交分布式任务，且当前集群有 `tidb_service_scope = 'background'` 的 TiDB 节点，DXF 会将任务调度到 `tidb_service_scope = 'background'` 的 TiDB 节点执行。
+- Starting from v8.1.0, you can set [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) to any valid value. When a distributed task is submitted, the task binds to the [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) value of the currently connected TiDB node, and the DXF only schedules the task to the TiDB nodes with the same [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) value for execution. However, for configuration compatibility with earlier versions, if a distributed task is submitted on a node with `tidb_service_scope = ''` and the current cluster has TiDB nodes with `tidb_service_scope = 'background'`, the DXF schedules the task to TiDB nodes with `tidb_service_scope = 'background'` for execution.
 
-从 v8.1.0 开始，如果在任务执行期间添加了新节点，DXF 会根据上述规则决定是否将任务调度到新节点执行。如果你不希望新添加的节点执行任务，建议提前为这些新添加的节点设置不同的 [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)。
+Starting from v8.1.0, if new nodes are added during task execution, the DXF determines whether to schedule tasks to the new nodes for execution based on the preceding rules. If you do not want newly added nodes to execute tasks, it is recommended to set a different [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) for those newly added nodes in advance.
 
-> **注意：**
+> **Note:**
 >
-> - 对于 v7.4.0 到 v8.0.0 的版本，在具有多个 TiDB 节点的集群中，强烈建议在两个或更多 TiDB 节点上将 [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) 设置为 `background`。如果此变量仅在单个 TiDB 节点上设置，当该节点重启或故障时，任务将被重新调度到 `tidb_service_scope = ''` 的 TiDB 节点，这会影响在这些 TiDB 节点上运行的应用程序。
-> - 在分布式任务执行期间，对 [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) 配置的更改不会对当前任务生效，但会从下一个任务开始生效。
+> - For versions from v7.4.0 to v8.0.0, in clusters with multiple TiDB nodes, it is strongly recommended to set [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) to `background` on two or more TiDB nodes. If this variable is set only on a single TiDB node, when that node restarts or fails, tasks will be rescheduled to TiDB nodes with `tidb_service_scope = ''`, which affects applications running on these TiDB nodes.
+> - During the execution of a distributed task, changes to the [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) configuration do not take effect for the current task, but take effect from the next task.
 
-## 实现原理
+## Implementation principles
 
-DXF 的架构如下：
+The architecture of the DXF is as follows:
 
-![DXF 的架构](/media/dist-task/dist-task-architect.jpg)
+![Architecture of the DXF](/media/dist-task/dist-task-architect.jpg)
 
-如上图所示，DXF 中的任务执行主要由以下模块处理：
+As shown in the preceding diagram, the execution of tasks in the DXF is mainly handled by the following modules:
 
-- Dispatcher：为每个任务生成分布式执行计划，管理执行过程，转换任务状态，收集和反馈运行时任务信息。
-- Scheduler：在 TiDB 节点之间复制分布式任务的执行，以提高任务执行效率。
-- Subtask Executor：分布式子任务的实际执行器。此外，Subtask Executor 将子任务的执行状态返回给 Scheduler，Scheduler 统一更新子任务的执行状态。
-- 资源池：通过池化上述模块的计算资源，为资源使用和管理的量化提供基础。
+- Dispatcher: generates the distributed execution plan for each task, manages the execution process, converts the task status, and collects and feeds back the runtime task information.
+- Scheduler: replicates the execution of distributed tasks among TiDB nodes to improve the efficiency of task execution.
+- Subtask Executor: the actual executor of distributed subtasks. In addition, the Subtask Executor returns the execution status of subtasks to the Scheduler, and the Scheduler updates the execution status of subtasks in a unified manner.
+- Resource pool: provides the basis for quantifying resource usage and management by pooling computing resources of the above modules.
 
-## 另请参阅
+## See also
 
 <CustomContent platform="tidb">
 
-* [DDL 语句的执行原理和最佳实践](/ddl-introduction.md)
+* [Execution Principles and Best Practices of DDL Statements](/ddl-introduction.md)
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-* [DDL 语句的执行原理和最佳实践](https://docs.pingcap.com/tidb/stable/ddl-introduction)
+* [Execution Principles and Best Practices of DDL Statements](https://docs.pingcap.com/tidb/stable/ddl-introduction)
 
 </CustomContent>

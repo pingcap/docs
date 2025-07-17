@@ -1,21 +1,21 @@
 ---
-title: 升级 TiDB 集群
-summary: 了解如何升级 TiDB 集群。
+title: Upgrade a TiDB Cluster
+summary: Learn how to upgrade a TiDB cluster.
 ---
 
-# 升级 TiDB 集群
+# Upgrade a TiDB Cluster
 
-本文档描述了如何在 TiDB Cloud 上升级 TiDB 集群。TiDB Cloud 提供两种升级机制来升级你的 TiDB 版本。
+This document describes how to upgrade a TiDB cluster on TiDB Cloud. TiDB Cloud provides two upgrade mechanisms for upgrading your TiDB version.
 
-## 定期升级
+## Regularly upgrade
 
-对于版本过低的 TiDB，TiDB Cloud 会统一进行定期升级，并在升级前后通过电子邮件通知用户。
+For the TiDB version that is too low, TiDB Cloud will regularly upgrade it uniformly, and notify users via email before and after the upgrade.
 
-## 联系支持进行升级
+## Contact support to upgrade
 
-要提交升级请求，请按照 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)中的步骤联系我们的支持团队。注意在**描述**框中提供以下信息：
+To submit an upgrade request, perform the steps in [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to contact our support team. Note to provide the following information in the **Description** box:
 
-- 云服务提供商：AWS、Azure 或 Google Cloud
-- 集群名称：xxx
+- Cloud Provider: AWS, Azure, or Google Cloud
+- Cluster Name: xxx
 
-TiDB Cloud 技术支持将与你确认升级时间段。在你确认升级时间后，TiDB Cloud 技术支持将在确认的时间段内进行升级。
+TiDB Cloud technical support will confirm with you the time period for the upgrade. After you have confirmed the upgrade time, TiDB Cloud technical support will do the upgrade in the confirmed time period.

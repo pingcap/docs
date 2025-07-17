@@ -1,112 +1,112 @@
 ---
-title: 暂停或恢复 TiDB Cloud Dedicated 集群
-summary: 了解如何暂停或恢复 TiDB Cloud Dedicated 集群。
+title: Pause or Resume a TiDB Cloud Dedicated Cluster
+summary: Learn how to pause or resume a TiDB Cloud Dedicated cluster.
 ---
 
-# 暂停或恢复 TiDB Cloud Dedicated 集群
+# Pause or Resume a TiDB Cloud Dedicated Cluster
 
-在 TiDB Cloud 中，你可以轻松地暂停和恢复不需要持续运行的 TiDB Cloud Dedicated 集群。
+You can easily pause and resume a TiDB Cloud Dedicated cluster that is not in operation at all times in TiDB Cloud.
 
-暂停操作不会影响集群中存储的数据，仅会停止收集监控信息和计算资源的消耗。暂停后，你可以随时恢复集群。
+The pause does not affect your data stored in the cluster but only stops the collection of monitoring information and the consumption of computing resources. After the pause, you can resume your cluster at any time.
 
-与备份和恢复相比，暂停和恢复集群所需时间更短，并且可以保留集群信息（包括集群版本、集群配置和 TiDB 用户账户）。
+Comparing with backup and restore, pausing and resuming a cluster takes less time and keeps your cluster information (including cluster version, cluster configurations, and TiDB user accounts).
 
-> **注意：**
+> **Note:**
 >
-> 你不能暂停 [TiDB Cloud Serverless 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)。
+> You cannot pause a [TiDB Cloud Serverless cluster](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless).
 
-## 限制条件
+## Limitations
 
-- 只有当集群处于 **Available**（可用）状态时，你才能暂停集群。如果集群处于其他状态（如 **Modifying**），你必须等待当前操作完成后才能暂停集群。
-- 当数据导入任务正在进行时，你不能暂停集群。你可以等待导入任务完成或取消导入任务。
-- 当备份任务正在进行时，你不能暂停集群。你可以等待当前备份任务完成或[删除正在运行的备份任务](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job)。
-- 如果集群有任何 [changefeeds](/tidb-cloud/changefeed-overview.md)，你不能暂停集群。你需要在暂停集群之前[删除现有的 changefeeds](/tidb-cloud/changefeed-overview.md#delete-a-changefeed)。
+- You can pause your cluster only when it is in the **Available** status. If your cluster is in other status such as **Modifying**, you must wait for the current operation to be completed before pausing the cluster.
+- You cannot pause your cluster when a data import task is going on. You can either wait for the import task to be completed or cancel the import task.
+- You cannot pause your cluster when a backup job is going on. You can either wait for the current backup job to be completed or [delete the running backup job](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job).
+- You cannot pause your cluster if it has any [changefeeds](/tidb-cloud/changefeed-overview.md). You need to [delete the existing changefeeds](/tidb-cloud/changefeed-overview.md#delete-a-changefeed) before pausing the cluster.
 
-## 暂停 TiDB 集群
+## Pause a TiDB cluster
 
-暂停时长和行为取决于你的组织创建日期：
+The pause duration and behavior depend on your organization's creation date:
 
-- 2024 年 11 月 12 日之后创建的组织遵循标准暂停行为，最长暂停时间为 7 天。
-- 2024 年 11 月 12 日或之前创建的组织遵循兼容暂停行为，允许更长的暂停时间。这些组织将逐步过渡到标准的 7 天限制。
+- Organizations created after November 12, 2024 follow the standard pause behavior with a maximum pause duration of 7 days.
+- Organizations created on or before November 12, 2024 follow the compatible pause behavior, which allows a longer pause duration. These organizations will gradually transition to the standard 7-day limit.
 
 <SimpleTab>
-<div label="标准暂停行为">
+<div label="Standard pause behavior">
 
-当集群被暂停时，请注意以下几点：
+When a cluster is paused, note the following:
 
-- TiDB Cloud 停止收集集群的监控信息。
-- 你无法从集群读取或写入数据。
-- 你无法导入或备份数据。
-- 仅收取以下费用：
+- TiDB Cloud stops collecting monitoring information of the cluster.
+- You cannot read data from or write data to the cluster.
+- You cannot import or back up data.
+- Only the following costs will be charged:
 
-    - 节点存储费用
-    - 数据备份费用
+    - Node Storage Cost
+    - Data Backup Cost
 
-- TiDB Cloud 停止集群的[自动备份](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)。
-- 最长暂停时间为 7 天。如果你在 7 天内没有手动恢复集群，TiDB Cloud 将自动恢复它。
-- 你可以在集群概览页面查看自动恢复计划。TiDB Cloud 将在集群自动恢复前 24 小时向组织所有者和项目所有者发送通知邮件。
+- TiDB Cloud stops [automatic backup](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) of the cluster.
+- The maximum pause duration is 7 days. If you do not manually resume the cluster within 7 days, TiDB Cloud will automatically resume it.
+- You can view the auto-resume schedule from the cluster overview page. TiDB Cloud will send a notification email to the organization owner and project owner 24 hours before the cluster is automatically resumed.
 
 </div>
-<div label="兼容暂停行为">
+<div label="Compatible pause behavior">
 
-> **注意：**
+> **Note:**
 >
-> 如果你的组织是在 2024 年 11 月 12 日之前创建的，你的集群仍然遵循兼容暂停行为。TiDB Cloud 将在过渡到新的标准暂停行为之前通知你。
+> If your organization was created before November 12, 2024, your cluster still follows the compatible pause behavior. TiDB Cloud will notify you before transitioning to the new standard pause behavior.
 
-当集群被暂停时，请注意以下几点：
+When a cluster is paused, note the following:
 
-- TiDB Cloud 停止收集集群的监控信息。
-- 你无法从集群读取或写入数据。
-- 你无法导入或备份数据。
-- TiDB Cloud 不会自动恢复已暂停的集群。
-- 仅收取以下费用：
+- TiDB Cloud stops collecting monitoring information of the cluster.
+- You cannot read data from or write data to the cluster.
+- You cannot import or back up data.
+- TiDB Cloud does not automatically resume the paused cluster.
+- Only the following costs will be charged:
 
-    - 节点存储费用
-    - 数据备份费用
+    - Node Storage Cost
+    - Data Backup Cost
 
-- TiDB Cloud 停止集群的[自动备份](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)。
+- TiDB Cloud stops [automatic backup](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) of the cluster.
 
 </div>
 </SimpleTab>
 
-要暂停集群，请按照以下步骤操作：
+To pause a cluster, take the following steps:
 
-1. 在 TiDB Cloud 控制台中，导航到项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
-2. 在要暂停的集群所在行，点击 **...**。
+1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+2. In the row of the cluster that you want to pause, click **...**.
 
-    > **提示：**
+    > **Tip:**
     >
-    > 或者，你可以在 **Clusters** 页面上点击要暂停的集群名称，然后点击右上角的 **...**。
+    > Alternatively, you can click the name of the cluster that you want to pause on the **Clusters** page, and then click **...** in the upper-right corner.
 
-3. 在下拉菜单中点击 **Pause**。
+3. Click **Pause** in the drop-down menu.
 
-    此时会显示 **Pause your cluster** 对话框。
+    The **Pause your cluster** dialog is displayed.
 
-4. 在对话框中，点击 **Pause** 确认你的选择。
+4. In the dialog, click **Pause** to confirm your choice.
 
-    点击 **Pause** 后，集群将首先进入 **Pausing** 状态。一旦暂停操作完成，集群将转换为 **Paused** 状态。
+    After you click **Pause**, the cluster will enter the **Pausing** status first. Once the pause operation is done, the cluster will transition to the **Paused** status.
 
-你也可以使用 TiDB Cloud API 暂停集群。目前，TiDB Cloud API 仍处于测试阶段。更多信息，请参见 [TiDB Cloud API 文档](https://docs.pingcap.com/tidbcloud/api/v1beta)。
+You can also pause a cluster using TiDB Cloud API. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
 
-## 恢复 TiDB 集群
+## Resume a TiDB cluster
 
-暂停的集群恢复后，请注意以下几点：
+After a paused cluster is resumed, note the following:
 
-- TiDB Cloud 恢复收集集群的监控信息，你可以从集群读取或写入数据。
-- TiDB Cloud 恢复收取计算和存储费用。
-- TiDB Cloud 恢复集群的[自动备份](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)。
+- TiDB Cloud resumes collecting the monitoring information of the cluster, and you can read data from or write data to the cluster.
+- TiDB Cloud resumes charging both compute and storage costs.
+- TiDB Cloud resumes [automatic backup](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) of the cluster.
 
-要恢复已暂停的集群，请按照以下步骤操作：
+To resume a paused cluster, take the following steps:
 
-1. 在 TiDB Cloud 控制台中，导航到项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
-2. 对于要恢复的集群，点击 **Resume**。此时会显示 **Resume your cluster** 对话框。
+1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+2. For the cluster that you want to resume, click **Resume**. The **Resume your cluster** dialog is displayed.
 
-    > **注意：**
+    > **Note:**
     >
-    > 你不能恢复处于 **Pausing** 状态的集群。
+    > You cannot resume a cluster in the **Pausing** status.
 
-3. 在对话框中，点击 **Resume** 确认你的选择。集群状态将变为 **Resuming**。
+3. In the dialog, click **Resume** to confirm your choice. The cluster status becomes **Resuming**.
 
-根据集群大小，恢复集群可能需要几分钟时间。集群恢复后，集群状态将从 **Resuming** 变为 **Available**。
+Depending on your cluster size, it can take several minutes to resume the cluster. After the cluster is resumed, the cluster status changes from **Resuming** to **Available**.
 
-你也可以使用 TiDB Cloud API 恢复集群。目前，TiDB Cloud API 仍处于测试阶段。更多信息，请参见 [TiDB Cloud API 文档](https://docs.pingcap.com/tidbcloud/api/v1beta)。
+You can also resume a cluster using TiDB Cloud API. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).

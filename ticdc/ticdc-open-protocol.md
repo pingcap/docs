@@ -274,8 +274,8 @@ COMMIT;
 
 Currently, TiCDC does not provide the standard parsing library for TiCDC Open Protocol, but the Golang version and Java version of parsing examples are provided. You can refer to the data format provided in this document and the following examples to implement the protocol parsing for consumers.
 
-- [Golang examples](https://github.com/pingcap/tiflow/tree/release-8.1/cmd/kafka-consumer)
-- [Java examples](https://github.com/pingcap/tiflow/tree/release-8.1/examples/java)
+- [Golang examples](https://github.com/pingcap/tiflow/tree/release-8.5/cmd/kafka-consumer)
+- [Java examples](https://github.com/pingcap/tiflow/tree/release-8.5/examples/java)
 
 ## Column type code
 
@@ -307,6 +307,7 @@ Currently, TiCDC does not provide the standard parsing library for TiCDC Open Pr
 | LONGTEXT/LONGBLOB     | 251  | {"t":251,"v":"5rWL6K+VdGV4dA=="} | The value is encoded in Base64. |
 | TEXT/BLOB             | 252  | {"t":252,"v":"5rWL6K+VdGV4dA=="} | The value is encoded in Base64. |
 | CHAR/BINARY           | 254  | {"t":254,"v":"test"} / {"t":254,"v":"\\\\x89PNG\\\\r\\\\n\\\\x1a\\\\n"} | The value is encoded in UTF-8. When the upstream type is BINARY, invisible characters are escaped. |
+| TiDBVectorFloat32              | 225  | {"t":225,"v":"[1.23, -0.4]"} |  |
 | GEOMETRY              | 255  |  | Unsupported |
 
 ## DDL Type Code

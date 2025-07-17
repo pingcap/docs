@@ -136,14 +136,6 @@ Deploying TiDB across multiple availability zones (AZs) can lead to increased co
 
 To reduce cross-AZ read traffic, you can enable the [Follower Read feature](/follower-read.md), which allows TiDB to prioritize selecting replicas in the same availability zone. To enable this feature, set the [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40) variable to `closest-replicas` or `closest-adaptive`.
 
-To reduce cross-AZ write traffic in TiKV instances, you can enable the gRPC compression feature, which compresses data before transmitting it over the network. The following configuration example shows how to enable gzip gRPC compression for TiKV.
-
-```
-server_configs:
-  tikv:
-    server.grpc-compression-type: gzip
-```
-
 To reduce network traffic caused by the data shuffle of TiFlash MPP tasks, it is recommended to deploy multiple TiFlash instances in the same availability zones (AZs). Starting from v6.6.0, [compression exchange](/explain-mpp.md#mpp-version-and-exchange-data-compression) is enabled by default, which reduces the network traffic caused by MPP data shuffle.
 
 ## Mitigate live migration maintenance events on Google Cloud
@@ -193,14 +185,14 @@ set global tidb_tso_client_batch_max_wait_time = 2; # default: 0
 
 #### Adjust TiKV configuration
 
-To reduce the number of Regions and alleviate the heartbeat overhead on the system, it is recommended to increase the Region size in the TiKV configuration from `96MB` to `256MB`.
+To reduce the number of Regions and alleviate the heartbeat overhead on the system, you can refer to [Adjust Region size](/best-practices/massive-regions-best-practices.md#method-6-adjust-region-size) to moderately increase the size of the Region in TiKV configuration.
 
 ```
 [coprocessor]
-  region-split-size = "256MB"
+  region-split-size = "288MiB"
 ```
 
-## After tuning
+### After tuning
 
 After the tuning, the following effects can be observed:
 

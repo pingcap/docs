@@ -23,13 +23,10 @@ Top SQL is suitable for analyzing performance issues. The following are some typ
 * The CPU usage of the cluster has drastically changed and you want to know the major cause.
 * Analyze the most resource-intensive SQL statements in the cluster and optimize them to reduce hardware costs.
 
-Top SQL cannot be used to pinpoint non-performance issues, such as incorrect data or abnormal crashes.
+Top SQL cannot be used in the following scenarios:
 
-The Top SQL feature is still in an early stage and is being continuously enhanced. Here are some scenarios that are **not supported** at the moment:
-
-* Analyzing the overhead of SQL statements outside of Top 5 (for example, when multiple business workloads are mixed).
-* Analyzing the overhead of Top N SQL statements by various dimensions such as users and databases.
-* Analyzing database performance issues that are not caused by high CPU load, such as transaction lock conflicts.
+- Top SQL cannot be used to pinpoint non-performance issues, such as incorrect data or abnormal crashes.
+- Top SQL does not support analyzing database performance issues that are not caused by high CPU load, such as transaction lock conflicts.
 
 ## Access the page
 
@@ -71,31 +68,39 @@ The following are the common steps to use Top SQL.
 
 2. Select a particular TiDB or TiKV instance that you want to observe the load.
 
-   ![Select Instance](/media/dashboard/top-sql-usage-select-instance.png)
+    ![Select Instance](/media/dashboard/top-sql-usage-select-instance.png)
 
-   If you are unsure of which TiDB or TiKV instance to observe, you can select an arbitrary instance. Also, when the cluster CPU load is extremely unbalanced, you can first use Grafana charts to determine the specific instance you want to observe.
+    If you are unsure of which TiDB or TiKV instance to observe, you can select an arbitrary instance. Also, when the cluster CPU load is extremely unbalanced, you can first use Grafana charts to determine the specific instance you want to observe.
 
 3. Observe the charts and tables presented by Top SQL.
 
-   ![Chart and Table](/media/dashboard/top-sql-usage-chart.png)
+    ![Chart and Table](/media/dashboard/top-sql-usage-chart.png)
 
-   The size of the bars in the bar chart represents the size of CPU resources consumed by the SQL statement at that moment. Different colors distinguish different types of SQL statements. In most cases, you only need to focus on the SQL statements that have a higher CPU resource overhead in the corresponding time range in the chart.
+    The size of the bars in the bar chart represents the size of CPU resources consumed by the SQL statement at that moment. Different colors distinguish different types of SQL statements. In most cases, you only need to focus on the SQL statements that have a higher CPU resource overhead in the corresponding time range in the chart.
 
 4. Click a SQL statement in the table to show more information. You can see detailed execution metrics of different plans of that statement, such as Call/sec (average queries per second) and Scan Indexes/sec (average number of index rows scanned per second).
 
-   ![Details](/media/dashboard/top-sql-details.png)
+    ![Details](/media/dashboard/top-sql-details.png)
 
 5. Based on these initial clues, you can further explore the [SQL Statement](/dashboard/dashboard-statement-list.md) or [Slow Queries](/dashboard/dashboard-slow-query.md) page to find the root cause of high CPU consumption or large data scans of the SQL statement.
 
-Additionally, you can configure Top SQL as follows:
+    You can adjust the time range in the time picker or select a time range in the chart to get a more precise and detailed look at the problem. A smaller time range can provide more detailed data, with precision of up to 1 second.
 
-* You can adjust the time range in the time picker or select a time range in the chart to get a more precise and detailed look at the problem. A smaller time range can provide more detailed data, with precision of up to 1 second.
+    ![Change time range](/media/dashboard/top-sql-usage-change-timerange.png)
 
-  ![Change time range](/media/dashboard/top-sql-usage-change-timerange.png)
+    If the chart is out of date, you can click the **Refresh** button or select Auto Refresh options from the **Refresh** drop-down list.
 
-* If the chart is out of date, you can click the **Refresh** button or select Auto Refresh options from the **Refresh** drop-down list.
+    ![Refresh](/media/dashboard/top-sql-usage-refresh.png)
 
-  ![Refresh](/media/dashboard/top-sql-usage-refresh.png)
+6. View the CPU resource usage by table or database level to quickly identify resource usage at a higher level. Currently, only TiKV instances are supported.
+
+    Select a TiKV instance, and then select **By TABLE** or **By DB**:
+
+    ![Select aggregation dimension](/media/dashboard/top-sql-usage-select-agg-by.png)
+
+    View the aggregated results at a higher level:
+
+    ![Aggregated results at DB level](/media/dashboard/top-sql-usage-agg-by-db-detail.png)
 
 ## Disable Top SQL
 

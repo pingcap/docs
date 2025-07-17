@@ -1,154 +1,154 @@
 ---
-title: 通过 Google Cloud Private Service Connect 连接到 TiDB Cloud Dedicated 集群
-summary: 了解如何通过 Google Cloud Private Service Connect 连接到 TiDB Cloud 集群。
+title: Connect to a TiDB Cloud Dedicated Cluster via Google Cloud Private Service Connect
+summary: Learn how to connect to your TiDB Cloud cluster via Google Cloud Private Service Connect.
 ---
 
-# 通过 Google Cloud Private Service Connect 连接到 TiDB Cloud Dedicated 集群
+# Connect to a TiDB Cloud Dedicated Cluster via Google Cloud Private Service Connect
 
-本文介绍如何通过 [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect) 连接到 TiDB Cloud Dedicated 集群。Google Cloud Private Service Connect 是 Google Cloud 提供的私有端点服务。
+This document describes how to connect to your TiDB Cloud Dedicated cluster via [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect). Google Cloud Private Service Connect is a private endpoint service provided by Google Cloud.
 
-> **提示：**
+> **Tip:**
 >
-> - 要了解如何通过 AWS 私有端点连接到 TiDB Cloud Dedicated 集群，请参阅[通过 AWS PrivateLink 连接到 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-private-endpoint-connections.md)。
-> - 要了解如何通过 Azure 私有端点连接到 TiDB Cloud Dedicated 集群，请参阅[通过 Azure Private Link 连接到 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)。
-> - 要了解如何通过私有端点连接到 TiDB Cloud Serverless 集群，请参阅[通过私有端点连接到 TiDB Cloud Serverless](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)。
+> - To learn how to connect to a TiDB Cloud Dedicated cluster via private endpoint with AWS, see [Connect to a TiDB Cloud Dedicated Cluster via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections.md).
+> - To learn how to connect to a TiDB Cloud Dedicated cluster via private endpoint with Azure, see [Connect to a TiDB Cloud Dedicated Cluster via Azure Private Link](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md).
+> - To learn how to connect to a TiDB Cloud Serverless cluster via private endpoint, see [Connect to TiDB Cloud Serverless via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
 
-TiDB Cloud 支持通过 [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect) 安全地单向访问托管在 Google Cloud VPC 中的 TiDB Cloud 服务。你可以创建一个端点并使用它连接到 TiDB Cloud 服务。
+TiDB Cloud supports highly secure and one-way access to the TiDB Cloud service hosted in a Google Cloud VPC via [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect). You can create an endpoint and use it to connect to the TiDB Cloud service .
 
-在 Google Cloud Private Service Connect 的支持下，端点连接是安全和私密的，不会将你的数据暴露给公共互联网。此外，端点连接支持 CIDR 重叠，更易于网络管理。
+Powered by Google Cloud Private Service Connect, the endpoint connection is secure and private, and does not expose your data to the public internet. In addition, the endpoint connection supports CIDR overlap and is easier for network management.
 
-Google Cloud Private Service Connect 的架构如下：[^1]
+The architecture of Google Cloud Private Service Connect is as follows: [^1]
 
-![Private Service Connect 架构](/media/tidb-cloud/google-cloud-psc-endpoint-overview.png)
+![Private Service Connect architecture](/media/tidb-cloud/google-cloud-psc-endpoint-overview.png)
 
-有关私有端点和端点服务的更详细定义，请参阅以下 Google Cloud 文档：
+For more detailed definitions of the private endpoint and endpoint service, see the following Google Cloud documents:
 
 - [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect)
-- [通过端点访问已发布的服务](https://cloud.google.com/vpc/docs/configure-private-service-connect-services)
+- [Access published services through endpoints](https://cloud.google.com/vpc/docs/configure-private-service-connect-services)
 
-## 限制
+## Restrictions
 
-- 此功能适用于 2023 年 4 月 13 日之后创建的 TiDB Cloud Dedicated 集群。对于较旧的集群，请联系 [TiDB Cloud 支持团队](/tidb-cloud/tidb-cloud-support.md)寻求帮助。
-- 只有 `Organization Owner` 和 `Project Owner` 角色可以创建 Google Cloud Private Service Connect 端点。
-- 每个 TiDB 集群最多可以处理来自 10 个端点的连接。
-- 每个 Google Cloud 项目最多可以有 10 个端点连接到一个 TiDB 集群。
-- 在配置了端点服务的项目中，你最多可以创建 8 个托管在 Google Cloud 上的 TiDB Cloud Dedicated 集群。
-- 私有端点和要连接的 TiDB 集群必须位于同一区域。
-- 出站防火墙规则必须允许流量到达端点的内部 IP 地址。[默认允许出站防火墙规则](https://cloud.google.com/firewall/docs/firewalls#default_firewall_rules)允许出站流量到达任何目标 IP 地址。
-- 如果你在 VPC 网络中创建了出站拒绝防火墙规则，或者创建了修改默认允许出站行为的分层防火墙策略，可能会影响对端点的访问。在这种情况下，你需要创建特定的出站允许防火墙规则或策略，以允许流量到达端点的内部目标 IP 地址。
+- This feature is applicable to TiDB Cloud Dedicated clusters created after April 13, 2023. For older clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance.
+- Only the `Organization Owner` and `Project Owner` roles can create Google Cloud Private Service Connect endpoints.
+- Each TiDB cluster can handle connections from up to 10 endpoints.
+- Each Google Cloud project can have up to 10 endpoints connecting to a TiDB Cluster.
+- You can create up to 8 TiDB Cloud Dedicated clusters hosted on Google Cloud in a project with the endpoint service configured.
+- The private endpoint and the TiDB cluster to be connected must be located in the same region.
+- Egress firewall rules must permit traffic to the internal IP address of the endpoint. The [implied allow egress firewall rule](https://cloud.google.com/firewall/docs/firewalls#default_firewall_rules) permits egress to any destination IP address.
+- If you have created egress deny firewall rules in your VPC network, or if you have created hierarchical firewall policies that modify the implied allowed egress behavior, access to the endpoint might be affected. In this case, you need to create a specific egress allow firewall rule or policy to permit traffic to the internal destination IP address of the endpoint.
 
-在大多数情况下，建议使用私有端点连接而不是 VPC 对等连接。但是，在以下情况下，你应该使用 VPC 对等连接而不是私有端点连接：
+In most scenarios, it is recommended that you use private endpoint connection over VPC peering. However, in the following scenarios, you should use VPC peering instead of private endpoint connection:
 
-- 你正在使用 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) 集群跨区域将数据从源 TiDB 集群复制到目标 TiDB 集群，以获得高可用性。目前，私有端点不支持跨区域连接。
-- 你正在使用 TiCDC 集群将数据复制到下游集群（如 Amazon Aurora、MySQL 和 Kafka），但你无法自行维护下游的端点服务。
+- You are using a [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) cluster to replicate data from a source TiDB cluster to a target TiDB cluster across regions, to get high availability. Currently, private endpoint does not support cross-region connection.
+- You are using a TiCDC cluster to replicate data to a downstream cluster (such as Amazon Aurora, MySQL, and Kafka) but you cannot maintain the endpoint service of the downstream on your own.
 
-## 使用 Google Cloud Private Service Connect 设置私有端点
+## Set up a private endpoint with Google Cloud Private Service Connect
 
-要通过私有端点连接到 TiDB Cloud Dedicated 集群，请完成[前提条件](#前提条件)并按照以下步骤操作：
+To connect to your TiDB Cloud Dedicated cluster via a private endpoint, complete the [prerequisites](#prerequisites) and follow these steps:
 
-1. [选择 TiDB 集群](#步骤-1-选择-tidb-集群)
-2. [创建 Google Cloud 私有端点](#步骤-2-创建-google-cloud-私有端点)
-3. [接受端点访问](#步骤-3-接受端点访问)
-4. [连接到 TiDB 集群](#步骤-4-连接到-tidb-集群)
+1. [Select a TiDB cluster](#step-1-select-a-tidb-cluster)
+2. [Create a Google Cloud private endpoint](#step-2-create-a-google-cloud-private-endpoint)
+3. [Accept endpoint access](#step-3-accept-endpoint-access)
+4. [Connect to your TiDB cluster](#step-4-connect-to-your-tidb-cluster)
 
-如果你有多个集群，需要对每个要使用 Google Cloud Private Service Connect 连接的集群重复这些步骤。
+If you have multiple clusters, you need to repeat these steps for each cluster that you want to connect to using Google Cloud Private Service Connect.
 
-### 前提条件
+### Prerequisites
 
-在开始创建端点之前：
+Before you begin to create an endpoint:
 
-- 在你的 Google Cloud 项目中[启用](https://console.cloud.google.com/apis/library/compute.googleapis.com)以下 API：
+- [Enable](https://console.cloud.google.com/apis/library/compute.googleapis.com) the following APIs in your Google Cloud project:
     - [Compute Engine API](https://cloud.google.com/compute/docs/reference/rest/v1)
     - [Service Directory API](https://cloud.google.com/service-directory/docs/reference/rest)
     - [Cloud DNS API](https://cloud.google.com/dns/docs/reference/v1)
 
-- 准备以下具有创建端点所需权限的 [IAM 角色](https://cloud.google.com/iam/docs/understanding-roles)。
+- Prepare the following [IAM roles](https://cloud.google.com/iam/docs/understanding-roles) with the permissions needed to create an endpoint.
 
-    - 任务：
-        - 创建端点
-        - 自动或手动配置端点的 [DNS 条目](https://cloud.google.com/vpc/docs/configure-private-service-connect-services#dns-endpoint)
-    - 所需的 IAM 角色：
+    - Tasks:
+        - Create an endpoint
+        - Automatically or manually configure [DNS entries](https://cloud.google.com/vpc/docs/configure-private-service-connect-services#dns-endpoint) for an endpoint
+    - Required IAM roles:
         - [Compute Network Admin](https://cloud.google.com/iam/docs/understanding-roles#compute.networkAdmin) (roles/compute.networkAdmin)
         - [Service Directory Editor](https://cloud.google.com/iam/docs/understanding-roles#servicedirectory.editor) (roles/servicedirectory.editor)
 
-### 步骤 1：选择 TiDB 集群
+### Step 1. Select a TiDB cluster
 
-1. 在项目的[**集群**](https://tidbcloud.com/project/clusters)页面，点击目标 TiDB 集群的名称进入其概览页面。你可以选择具有以下任一状态的集群：
+1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target TiDB cluster to go to its overview page. You can select a cluster with any of the following statuses:
 
-    - **可用**
-    - **恢复中**
-    - **修改中**
-    - **导入中**
+    - **Available**
+    - **Restoring**
+    - **Modifying**
+    - **Importing**
 
-2. 点击右上角的**连接**。此时会显示一个连接对话框。
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. 在**连接类型**下拉列表中，选择**私有端点**，然后点击**创建私有端点连接**。
+3. In the **Connection Type** drop-down list, select **Private Endpoint**, and then click **Create Private Endpoint Connection**.
 
-    > **注意：**
+    > **Note:**
     >
-    > 如果你已经创建了私有端点连接，活动端点将显示在连接对话框中。要创建其他私有端点连接，请点击左侧导航栏中的**设置** > **网络**导航到**网络**页面。
+    > If you have already created a private endpoint connection, the active endpoint will appear in the connection dialog. To create additional private endpoint connections, navigate to the **Networking** page by clicking **Settings** > **Networking** in the left navigation pane.
 
-### 步骤 2：创建 Google Cloud 私有端点
+### Step 2. Create a Google Cloud private endpoint
 
-1. 提供以下信息以生成私有端点创建命令：
-    - **Google Cloud 项目 ID**：与你的 Google Cloud 账户关联的项目 ID。你可以在 [Google Cloud **仪表板**页面](https://console.cloud.google.com/home/dashboard)找到该 ID。
-    - **Google Cloud VPC 名称**：指定项目中的 VPC 名称。你可以在 [Google Cloud **VPC 网络**页面](https://console.cloud.google.com/networking/networks/list)找到它。
-    - **Google Cloud 子网名称**：指定 VPC 中的子网名称。你可以在 **VPC 网络详情**页面找到它。
-    - **Private Service Connect 端点名称**：为要创建的私有端点输入一个唯一名称。
-2. 输入信息后，点击**生成命令**。
-3. 复制生成的命令。
-4. 打开 [Google Cloud Shell](https://console.cloud.google.com/home/dashboard) 并执行命令以创建私有端点。
+1. Provide the following information to generate the command for private endpoint creation:
+    - **Google Cloud Project ID**: the Project ID associated with your Google Cloud account. You can find the ID on the [Google Cloud **Dashboard** page](https://console.cloud.google.com/home/dashboard).
+    - **Google Cloud VPC Name**: the name of the VPC in your specified project. You can find it on the [Google Cloud **VPC networks** page](https://console.cloud.google.com/networking/networks/list).
+    - **Google Cloud Subnet Name**: the name of the subnet in the specified VPC. You can find it on the **VPC network details** page.
+    - **Private Service Connect Endpoint Name**: enter a unique name for the private endpoint that will be created.
+2. After entering the information, click **Generate Command**.
+3. Copy the generated command.
+4. Open [Google Cloud Shell](https://console.cloud.google.com/home/dashboard) and execute the command to create the private endpoint.
 
-### 步骤 3：接受端点访问
+### Step 3. Accept endpoint access
 
-在 Google Cloud Shell 中成功执行命令后，返回 TiDB Cloud 控制台，然后点击**接受端点访问**。
+After executing the command in Google Cloud Shell successfully, go back to the TiDB Cloud console and then click **Accept Endpoint Access**.
 
-如果你看到错误 `not received connection request from endpoint`，请确保你已正确复制命令并在 Google Cloud Shell 中成功执行。
+If you see an error `not received connection request from endpoint`, make sure that you have copied the command correctly and successfully executed it in your Google Cloud Shell.
 
-### 步骤 4：连接到 TiDB 集群
+### Step 4. Connect to your TiDB cluster
 
-接受私有端点连接后，你将被重定向回连接对话框。
+After you have accepted the private endpoint connection, you are redirected back to the connection dialog.
 
-1. 等待私有端点连接状态从**系统检查中**变为**活动**（大约 5 分钟）。
-2. 在**连接方式**下拉列表中，选择你偏好的连接方法。对话框底部将显示相应的连接字符串。
-3. 使用连接字符串连接到你的集群。
+1. Wait for the private endpoint connection status to change from **System Checking** to **Active** (approximately 5 minutes).
+2. In the **Connect With** drop-down list, select your preferred connection method. The corresponding connection string is displayed at the bottom of the dialog.
+3. Connect to your cluster with the connection string.
 
-### 私有端点状态参考
+### Private endpoint status reference
 
-使用私有端点连接时，私有端点或私有端点服务的状态会显示在[**私有端点**页面](#前提条件)上。
+When you use private endpoint connections, the statuses of private endpoints or private endpoint services are displayed on the [**Private Endpoint** page](#prerequisites).
 
-私有端点的可能状态说明如下：
+The possible statuses of a private endpoint are explained as follows:
 
-- **等待中**：等待处理。
-- **活动**：你的私有端点已准备就绪可以使用。你无法编辑此状态的私有端点。
-- **删除中**：正在删除私有端点。
-- **失败**：私有端点创建失败。你可以点击该行的**编辑**重试创建。
+- **Pending**: waiting for processing.
+- **Active**: your private endpoint is ready to use. You cannot edit the private endpoint of this status.
+- **Deleting**: the private endpoint is being deleted.
+- **Failed**: the private endpoint creation fails. You can click **Edit** of that row to retry the creation.
 
-私有端点服务的可能状态说明如下：
+The possible statuses of a private endpoint service are explained as follows:
 
-- **创建中**：正在创建端点服务，需要 3 到 5 分钟。
-- **活动**：端点服务已创建，无论私有端点是否创建。
+- **Creating**: the endpoint service is being created, which takes 3 to 5 minutes.
+- **Active**: the endpoint service is created, no matter whether the private endpoint is created or not.
 
-## 故障排除
+## Troubleshooting
 
-### TiDB Cloud 无法创建端点服务。我该怎么办？
+### TiDB Cloud fails to create an endpoint service. What should I do?
 
-在你打开**创建 Google Cloud 私有端点连接**页面并选择 TiDB 集群后，端点服务会自动创建。如果显示失败或长时间保持在**创建中**状态，请[提交支持工单](/tidb-cloud/tidb-cloud-support.md)寻求帮助。
+The endpoint service is created automatically after you open the **Create Google Cloud Private Endpoint Connection** page and choose the TiDB cluster. If it shows as failed or remains in the **Creating** state for a long time, submit a [support ticket](/tidb-cloud/tidb-cloud-support.md) for assistance.
 
-### 在 Google Cloud 中创建端点失败。我该怎么办？
+### Fail to create an endpoint in Google Cloud. What should I do?
 
-要排查问题，你需要查看在 Google Cloud Shell 中执行私有端点创建命令后返回的错误消息。如果是权限相关的错误，你必须在重试之前授予必要的权限。
+To troubleshoot the issue, you need to review the error message returned by Google Cloud Shell after you execute the private endpoint creation command. If it is a permission-related error, you must grant the necessary permissions before retrying.
 
-### 我取消了一些操作。在接受端点访问之前，如何处理取消？
+### I cancelled some actions. What should I do to handle cancellation before accepting endpoint access?
 
-已取消操作的未保存草稿不会被保留或显示。下次在 TiDB Cloud 控制台创建新的私有端点时，你需要重复每个步骤。
+Unsaved drafts of cancelled actions will not be retained or displayed. You need to repeat each step when creating a new private endpoint in the TiDB Cloud console next time.
 
-如果你已经在 Google Cloud Shell 中执行了创建私有端点的命令，你需要在 Google Cloud 控制台中手动[删除相应的端点](https://cloud.google.com/vpc/docs/configure-private-service-connect-services#delete-endpoint)。
+If you have already executed the command to create a private endpoint in Google Cloud Shell, you need to manually [delete the corresponding endpoint](https://cloud.google.com/vpc/docs/configure-private-service-connect-services#delete-endpoint) in the Google Cloud console.
 
-### 为什么我在 TiDB Cloud 控制台中看不到通过直接复制服务附件生成的端点？
+### Why can't I see the endpoints generated by directly copying the service attachment in the TiDB Cloud console?
 
-在 TiDB Cloud 控制台中，你只能查看通过**创建 Google Cloud 私有端点连接**页面生成的命令创建的端点。
+In the TiDB Cloud console, you can only view endpoints that are created through the command generated on the **Create Google Cloud Private Endpoint Connection** page.
 
-但是，通过直接复制服务附件生成的端点（即不是通过 TiDB Cloud 控制台生成的命令创建的）不会显示在 TiDB Cloud 控制台中。
+However, endpoints generated by directly copying the service attachment (that is, not created through the command generated in the TiDB Cloud console) are not displayed in the TiDB Cloud console.
 
-[^1]: Google Cloud Private Service Connect 架构图来自 Google Cloud 文档中的 [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect) 文档，根据 Creative Commons Attribution 4.0 International 许可。
+[^1]: The diagram of the Google Cloud Private Service Connect architecture is from the [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect) document in Google Cloud documentation, licensed under the Creative Commons Attribution 4.0 International.

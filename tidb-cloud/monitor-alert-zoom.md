@@ -1,75 +1,75 @@
 ---
-title: 通过 Zoom 订阅
-summary: 了解如何通过 Zoom 获取告警通知来监控你的 TiDB 集群。
+title: Subscribe via Zoom
+summary: Learn how to monitor your TiDB cluster by getting alert notifications via Zoom.
 ---
 
-# 通过 Zoom 订阅
+# Subscribe via Zoom
 
-TiDB Cloud 为你提供了一种通过 [Zoom](https://www.zoom.com/)、[Slack](/tidb-cloud/monitor-alert-slack.md) 和[电子邮件](/tidb-cloud/monitor-alert-email.md)订阅告警通知的简便方法。本文介绍如何通过 Zoom 订阅告警通知。
+TiDB Cloud provides you with an easy way to subscribe to alert notifications via [Zoom](https://www.zoom.com/), [Slack](/tidb-cloud/monitor-alert-slack.md), and [email](/tidb-cloud/monitor-alert-email.md). This document describes how to subscribe to alert notifications via Zoom.
 
-> **注意：**
+> **Note:**
 >
-> 目前，告警订阅仅适用于 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。
+> Currently, alert subscription is only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
-## 前提条件
+## Prerequisites
 
-- 通过 Zoom 订阅功能仅适用于订阅了**企业版**或**高级版**支持计划的组织。
+- The subscribing via Zoom feature is only available for organizations that subscribe to the **Enterprise** or **Premium** support plan.
 
-- 要订阅 TiDB Cloud 的告警通知，你必须在 TiDB Cloud 中拥有组织的 `Organization Owner` 访问权限或目标项目的 `Project Owner` 访问权限。
+- To subscribe to alert notifications of TiDB Cloud, you must have the `Organization Owner` access to your organization or `Project Owner` access to the target project in TiDB Cloud.
 
-- 要在 Zoom 中添加和配置传入 Webhook 聊天机器人，你需要在 Zoom 账户上拥有管理员权限。
+- To add and configure the Incoming Webhook Chatbot in Zoom, you need to have admin permissions on your Zoom account.
 
-## 订阅告警通知
+## Subscribe to alert notifications
 
-### 步骤 1. 添加 Zoom 传入 Webhook 应用
+### Step 1. Add the Zoom Incoming Webhook app
 
-1. 以账户管理员身份登录 [Zoom App Marketplace](https://marketplace.zoom.us/)。
-2. 在 Zoom App Marketplace 中转到 [Incoming Webhook App](https://marketplace.zoom.us/apps/eH_dLuquRd-VYcOsNGy-hQ) 页面，然后点击**添加**以添加此应用。如果应用未预先批准，请联系你的 Zoom 管理员为你的账户批准此应用。更多信息，请参见[批准应用和管理应用请求](https://support.zoom.us/hc/en-us/articles/360027829671)。
-3. 确认应用所需的权限，然后点击**授权**以添加传入 Webhook 应用。
+1. Sign in to the [Zoom App Marketplace](https://marketplace.zoom.us/) as the account administrator.
+2. Go to the [Incoming Webhook App](https://marketplace.zoom.us/apps/eH_dLuquRd-VYcOsNGy-hQ) page in the Zoom App Marketplace, and then click **Add** to add this app. If the app is not pre-approved, contact your Zoom admin to approve this app for your account. For more information, see [Approving apps and managing app requests](https://support.zoom.us/hc/en-us/articles/360027829671). 
+3. Confirm the permissions the app requires, then click **Authorize** to add the Incoming Webhook app.
 
-### 步骤 2. 生成 Zoom webhook URL
+### Step 2. Generate a Zoom webhook URL
 
-1. 登录 Zoom 桌面客户端。
-2. 点击**团队聊天**标签。
-3. 在**应用**下，找到并选择**传入 Webhook**，或从上方选择你想要接收消息的聊天频道。
-4. 输入以下命令以创建新连接。你需要将 `${connectionName}` 替换为你想要的连接名称，例如 `tidbcloud-alerts`：
+1. Sign in to the Zoom desktop client.
+2. Click the **Team Chat** tab.
+3. Under **Apps**, find and select **Incoming Webhook**, or select a chat channel from above that you would like to receive messages in.
+4. Enter the following command to make a new connection. You need to replace `${connectionName}` with your desired connection name, for example, `tidbcloud-alerts`:
 
     ```shell
     /inc connect ${connectionName}
     ```
 
-5. 命令将返回以下详细信息：
+5. The command will return the following details:
 
-   - **端点**。它将提供格式为 `https://integrations.zoom.us/chat/webhooks/incomingwebhook/XXXXXXXXXXXXXXXXXXXXXXXX` 的 webhook URL。
-   - **验证令牌**
+   - **Endpoint**. It will provide a webhook URL in the format: `https://integrations.zoom.us/chat/webhooks/incomingwebhook/XXXXXXXXXXXXXXXXXXXXXXXX`.
+   - **Verification Token**
 
-### 步骤 3. 从 TiDB Cloud 订阅
+### Step 3. Subscribe from TiDB Cloud
 
-> **提示：**
+> **Tip:**
 >
-> 告警订阅适用于当前项目中的所有告警。如果你在项目中有多个集群，你只需订阅一次。
+> The alert subscription is for all alerts in the current project. If you have multiple clusters in the project, you just need to subscribe once.
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，使用左上角的组合框切换到你的目标项目。
-2. 在左侧导航栏中，点击**项目设置** > **告警订阅**。
-3. 在**告警订阅**页面上，点击右上角的**添加订阅者**。
-4. 从**订阅者类型**下拉列表中选择 **Zoom**。
-5. 在**名称**字段中输入名称，在 **URL** 字段中输入你的 Zoom webhook URL，在**令牌**字段中输入验证令牌。
-6. 点击**测试连接**。
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
+3. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
+4. Select **Zoom** from the **Subscriber Type** drop-down list.
+5. Enter a name in the **Name** field, your Zoom webhook URL in the **URL** field, and the verification token in the **Token** field.
+6. Click **Test Connection**.
 
-    - 如果测试成功，将显示**保存**按钮。
-    - 如果测试失败，将显示错误消息。按照消息进行故障排除并重试连接。
+    - If the test succeeds, the **Save** button is displayed.
+    - If the test fails, an error message is displayed. Follow the message for troubleshooting and retry the connection.
 
-7. 点击**保存**完成订阅。
+7. Click **Save** to complete the subscription.
 
-或者，你也可以点击集群**告警**页面右上角的**订阅**。你将被引导至**告警订阅者**页面。
+Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the cluster. You will be directed to the **Alert Subscriber** page.
 
-如果告警条件保持不变，告警每三小时发送一次通知。
+If an alert condition remains unchanged, the alert sends notifications every three hours.
 
-## 取消订阅告警通知
+## Unsubscribe from alert notifications
 
-如果你不再想接收项目中集群的告警通知，请执行以下步骤：
+If you no longer want to receive alert notifications of clusters in your project, take the following steps:
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，使用左上角的组合框切换到你的目标项目。
-2. 在左侧导航栏中，点击**项目设置** > **告警订阅**。
-3. 在**告警订阅**页面上，找到要删除的目标订阅者所在的行，然后点击 **...** > **取消订阅**。
-4. 点击**取消订阅**确认取消订阅。
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
+3. On the **Alert Subscription** page, locate the row of your target subscriber to be deleted, and then click **...** > **Unsubscribe**.
+4. Click **Unsubscribe** to confirm the unsubscription.

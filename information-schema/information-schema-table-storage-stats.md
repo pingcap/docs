@@ -1,18 +1,18 @@
 ---
 title: TABLE_STORAGE_STATS
-summary: "了解 `TABLE_STORAGE_STATS` INFORMATION_SCHEMA 表。"
+summary: Learn the `TABLE_STORAGE_STATS` INFORMATION_SCHEMA table.
 ---
 
 # TABLE_STORAGE_STATS
 
-`TABLE_STORAGE_STATS` 表提供了存储引擎（TiKV）中表大小的相关信息。
+The `TABLE_STORAGE_STATS` table provides information about table sizes as stored by the storage engine (TiKV).
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC TABLE_STORAGE_STATS;
 ```
 
-输出结果如下：
+The output is as follows:
 
 ```sql
 +--------------------+-------------+------+------+---------+-------+
@@ -36,7 +36,7 @@ INSERT INTO test.t1 VALUES (1);
 SELECT * FROM TABLE_STORAGE_STATS WHERE table_schema = 'test' AND table_name = 't1'\G
 ```
 
-输出结果如下：
+The output is as follows:
 
 ```sql
 *************************** 1. row ***************************
@@ -51,13 +51,13 @@ EMPTY_REGION_COUNT: 1
 1 row in set (0.00 sec)
 ```
 
-`TABLE_STORAGE_STATS` 表中的字段说明如下：
+Fields in the `TABLE_STORAGE_STATS` table are described as follows:
 
-* `TABLE_SCHEMA`：表所属的 schema 名称。
-* `TABLE_NAME`：表名。
-* `TABLE_ID`：表的 ID。
-* `PEER_COUNT`：表的副本数量。
-* `REGION_COUNT`：Region 的数量。
-* `EMPTY_REGION_COUNT`：此表中不包含数据的 Region 数量。
-* `TABLE_SIZE`：表的总大小，单位为 MiB。
-* `TABLE_KEYS`：表中的总记录数。
+* `TABLE_SCHEMA`: The name of the schema to which the table belongs.
+* `TABLE_NAME`: The name of the table.
+* `TABLE_ID`: The ID of the table.
+* `PEER_COUNT`: The number of replicas of the table.
+* `REGION_COUNT`: The number of Regions.
+* `EMPTY_REGION_COUNT`: The number of Regions that do not contain data in this table.
+* `TABLE_SIZE`: The total size of the table, in the unit of MiB.
+* `TABLE_KEYS`: The total number of records in the table.

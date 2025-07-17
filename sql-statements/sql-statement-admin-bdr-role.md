@@ -9,10 +9,6 @@ summary: An overview of the usage of ADMIN [SET|SHOW|UNSET] BDR ROLE for the TiD
 - Use `ADMIN SHOW BDR ROLE` to show the BDR role of the cluster.
 - Use `ADMIN UNSET BDR ROLE` to unset the BDR role of the cluster.
 
-> **Warning:**
->
-> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 ## Synopsis
 
 ```ebnf+diagram

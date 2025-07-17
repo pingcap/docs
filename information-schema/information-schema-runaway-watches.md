@@ -1,15 +1,15 @@
 ---
 title: RUNAWAY_WATCHES
-summary: "了解 `RUNAWAY_WATCHES` INFORMATION_SCHEMA 表。"
+summary: Learn the `RUNAWAY_WATCHES` INFORMATION_SCHEMA table.
 ---
 
 # RUNAWAY_WATCHES
 
-`RUNAWAY_WATCHES` 表显示了消耗资源超出预期的失控查询的监视列表。更多信息，请参见[失控查询](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries)。
+The `RUNAWAY_WATCHES` table shows the watch list of runaway queries that consume more resources than expected. For more information, see [Runaway Queries](/tidb-resource-control-runaway-queries.md).
 
-> **注意：**
+> **Note:**
 >
-> 此表在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> This table is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -28,96 +28,123 @@ DESC RUNAWAY_WATCHES;
 | WATCH_TEXT          | text         | NO   |      | NULL    |       |
 | SOURCE              | varchar(128) | NO   |      | NULL    |       |
 | ACTION              | varchar(12)  | NO   |      | NULL    |       |
+| RULE                | varchar(128) | NO   |      | NULL    |       |
 +---------------------+--------------+------+------+---------+-------+
-8 rows in set (0.00 sec)
+9 rows in set (0.00 sec)
 ```
 
-## 示例
+## Examples
 
-查询失控查询的监视列表：
+Query the watch list of runaway queries:
 
 ```sql
-SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES\G
+SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES ORDER BY id\G
 ```
 
-输出结果如下：
+The output is as follows:
 
 ```sql
 *************************** 1. row ***************************
-                 ID: 20003
-RESOURCE_GROUP_NAME: rg2
-         START_TIME: 2023-07-28 13:06:08
-           END_TIME: UNLIMITED
-              WATCH: Similar
-         WATCH_TEXT: 5b7fd445c5756a16f910192ad449c02348656a5e9d2aa61615e6049afbc4a82e
+                 ID: 1
+RESOURCE_GROUP_NAME: default
+         START_TIME: 2024-09-11 07:20:48
+           END_TIME: 2024-09-11 07:30:48
+              WATCH: Exact
+         WATCH_TEXT: select count(*) from `tpch1`.`supplier`
              SOURCE: 127.0.0.1:4000
              ACTION: Kill
+               RULE: ProcessedKeys = 10000(100)
 *************************** 2. row ***************************
-                 ID: 16004
-RESOURCE_GROUP_NAME: rg2
-         START_TIME: 2023-07-28 01:45:30
-           END_TIME: UNLIMITED
-              WATCH: Similar
-         WATCH_TEXT: 3d48fca401d8cbb31a9f29adc9c0f9d4be967ca80a34f59c15f73af94e000c84
+                 ID: 2
+RESOURCE_GROUP_NAME: default
+         START_TIME: 2024-09-11 07:20:51
+           END_TIME: 2024-09-11 07:30:51
+              WATCH: Exact
+         WATCH_TEXT: select count(*) from `tpch1`.`partsupp`
              SOURCE: 127.0.0.1:4000
              ACTION: Kill
-2 rows in set (0.00 sec)
+               RULE: RequestUnit = RRU:143.369959, WRU:0.000000, WaitDuration:0s(10)
+*************************** 3. row ***************************
+                 ID: 3
+RESOURCE_GROUP_NAME: default
+         START_TIME: 2024-09-11 07:21:16
+           END_TIME: 2024-09-11 07:31:16
+              WATCH: Exact
+         WATCH_TEXT: select sleep(2) from t
+             SOURCE: 127.0.0.1:4000
+             ACTION: Kill
+               RULE: ElapsedTime = 2024-09-11T15:21:16+08:00(2024-09-11T15:21:16+08:00)
+3 rows in set (0.00 sec)
 ```
 
-向资源组 `rg1` 的列表中添加一个监视项：
+Add a watch item into list to the resource group `rg1`:
 
 ```sql
 QUERY WATCH ADD RESOURCE GROUP rg1 SQL TEXT EXACT TO 'select * from sbtest.sbtest1';
 ```
 
-再次查询失控查询的监视列表：
+Query the watch list of runaway queries again:
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES\G
 ```
 
-输出结果如下：
+The output is as follows:
 
 ```sql
 *************************** 1. row ***************************
-                 ID: 20003
-RESOURCE_GROUP_NAME: rg2
-         START_TIME: 2023-07-28 13:06:08
-           END_TIME: UNLIMITED
-              WATCH: Similar
-         WATCH_TEXT: 5b7fd445c5756a16f910192ad449c02348656a5e9d2aa61615e6049afbc4a82e
+                 ID: 1
+RESOURCE_GROUP_NAME: default
+         START_TIME: 2024-09-11 07:20:48
+           END_TIME: 2024-09-11 07:30:48
+              WATCH: Exact
+         WATCH_TEXT: select count(*) from `tpch1`.`supplier`
              SOURCE: 127.0.0.1:4000
              ACTION: Kill
+               RULE: ProcessedKeys = 10000(100)
 *************************** 2. row ***************************
-                 ID: 16004
-RESOURCE_GROUP_NAME: rg2
-         START_TIME: 2023-07-28 01:45:30
-           END_TIME: UNLIMITED
-              WATCH: Similar
-         WATCH_TEXT: 3d48fca401d8cbb31a9f29adc9c0f9d4be967ca80a34f59c15f73af94e000c84
+                 ID: 2
+RESOURCE_GROUP_NAME: default
+         START_TIME: 2024-09-11 07:20:51
+           END_TIME: 2024-09-11 07:30:51
+              WATCH: Exact
+         WATCH_TEXT: select count(*) from `tpch1`.`partsupp`
              SOURCE: 127.0.0.1:4000
              ACTION: Kill
+               RULE: RequestUnit = RRU:143.369959, WRU:0.000000, WaitDuration:0s(10)
 *************************** 3. row ***************************
-                 ID: 20004
-RESOURCE_GROUP_NAME: rg1
-         START_TIME: 2023-07-28 14:23:04
+                 ID: 3
+RESOURCE_GROUP_NAME: default
+         START_TIME: 2024-09-11 07:21:16
+           END_TIME: 2024-09-11 07:31:16
+              WATCH: Exact
+         WATCH_TEXT: select sleep(2) from t
+             SOURCE: 127.0.0.1:4000
+             ACTION: Kill
+               RULE: ElapsedTime = 2024-09-11T15:21:16+08:00(2024-09-11T15:21:16+08:00)
+*************************** 4. row ***************************
+                 ID: 4
+RESOURCE_GROUP_NAME: default
+         START_TIME: 2024-09-11 07:23:10
            END_TIME: UNLIMITED
               WATCH: Exact
          WATCH_TEXT: select * from sbtest.sbtest1
              SOURCE: manual
-             ACTION: NoneAction
+             ACTION: Kill
+               RULE: None
 3 row in set (0.00 sec)
 ```
 
-`RUNAWAY_WATCHES` 表中各列字段的含义如下：
+The meaning of each column field in the `RUNAWAY_WATCHES` table is as follows:
 
-- `ID`：监视项的 ID。
-- `RESOURCE_GROUP_NAME`：资源组的名称。
-- `START_TIME`：开始时间。
-- `END_TIME`：结束时间。`UNLIMITED` 表示该监视项具有无限期的有效期。
-- `WATCH`：快速识别的匹配类型。取值如下：
-    - `Plan` 表示匹配 Plan Digest，此时 `WATCH_TEXT` 列显示 Plan Digest。
-    - `Similar` 表示匹配 SQL Digest，此时 `WATCH_TEXT` 列显示 SQL Digest。
-    - `Exact` 表示匹配 SQL 文本，此时 `WATCH_TEXT` 列显示 SQL 文本。
-- `SOURCE`：监视项的来源。如果是由 `QUERY_LIMIT` 规则识别的，则显示识别的 TiDB IP 地址；如果是手动添加的，则显示 `manual`。
-- `ACTION`：识别后的对应操作。
+- `ID`: the ID of the watch item.
+- `RESOURCE_GROUP_NAME`: the name of the resource group.
+- `START_TIME`: the start time.
+- `END_TIME`: the end time. `UNLIMITED` means that the watch item has an unlimited validity period.
+- `WATCH`: the match type of the quick identification. The values are as follows:
+    - `Plan` indicates that the Plan Digest is matched. In this case, the `WATCH_TEXT` column shows the Plan Digest.
+    - `Similar` indicates that the SQL Digest is matched. In this case, the `WATCH_TEXT` column shows the SQL Digest.
+    - `Exact` indicates that the SQL text is matched. In this case, the `WATCH_TEXT` column shows the SQL text.
+- `SOURCE`: the source of the watch item. If it is identified by the `QUERY_LIMIT` rule, the identified TiDB IP address is displayed. If it is manually added, `manual` is displayed.
+- `ACTION`: the corresponding operation after the identification.
+- `RULE`: the identification rule. The current three rules are `ElapsedTime`, `ProcessedKeys`, and `RequestUnit`. The format is `ProcessedKeys = 666(10)`, where `666` is the actual value and `10` is the threshold.

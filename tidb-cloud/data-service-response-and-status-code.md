@@ -1,41 +1,41 @@
 ---
-title: Data Service 的响应和 HTTP 状态码
-summary: 本文档描述了 TiDB Cloud 中 Data Service 的响应和 HTTP 状态码。
+title: Response and HTTP Status Codes of Data Service
+summary: This document describes the response and HTTP status codes of Data Service in TiDB Cloud.
 ---
 
-# Data Service 的响应和 HTTP 状态码
+# Response and HTTP Status Codes of Data Service
 
-当你调用 [Data Service](/tidb-cloud/data-service-overview.md) 中定义的 API 端点时，Data Service 会返回一个 HTTP 响应。理解这个响应的结构和状态码的含义对于解释 Data Service 端点返回的数据至关重要。
+When you call an API endpoint defined in [Data Service](/tidb-cloud/data-service-overview.md), Data Service returns an HTTP response. Understanding the structure of this response and the meaning of status codes is essential for interpreting data returned by a Data Service endpoint.
 
-本文档描述了 TiDB Cloud 中 Data Service 的响应和状态码。
+This document describes the response and status codes of Data Service in TiDB Cloud.
 
-## 响应
+## Response
 
-Data Service 返回带有 JSON 主体的 HTTP 响应。
+Data Service returns an HTTP response with a JSON body.
 
-> **注意：**
+> **Note:**
 >
-> 当你调用包含多个 SQL 语句的端点时，Data Service 会逐个执行这些语句，但在 HTTP 响应中只返回最后一个语句的执行结果。
+> When you call an endpoint with multiple SQL statements, Data Service executes the statements one by one, but it only returns the execution result of the last statement in the HTTP response.
 
-响应主体包含以下字段：
+The response body contains the following fields:
 
-- `type`：_string_。此端点的类型。值可能是 `"sql_endpoint"` 或 `"chat2data_endpoint"`。不同的端点返回不同类型的响应。
-- `data`：_object_。执行结果，包括三个部分：
+- `type`: _string_. The type of this endpoint. The value might be `"sql_endpoint"` or `"chat2data_endpoint"`. Different endpoints return different types of responses.
+- `data`: _object_. The execution results, which include three parts:
 
-    - `columns`：_array_。返回字段的架构信息。
-    - `rows`：_array_。以 `key:value` 格式返回的结果。
+    - `columns`: _array_. Schema information for the returned fields.
+    - `rows`: _array_. The returned results in `key:value` format.
 
-        当为端点启用**批处理操作**且端点的最后一个 SQL 语句是 `INSERT` 或 `UPDATE` 操作时，请注意以下事项：
+        When **Batch Operation** is enabled for an endpoint and the last SQL statement of the endpoint is an `INSERT` or `UPDATE` operation, note the following:
 
-        - 端点的返回结果还将包括每行的 `"message"` 和 `"success"` 字段，以指示其响应和状态。
-        - 如果目标表的主键列配置为 `auto_increment`，端点的返回结果还将包括每行的 `"auto_increment_id"` 字段。对于 `INSERT` 操作，此字段的值是自增 ID，对于其他操作（如 `UPDATE`），此字段的值是 `null`。
+        - The returned results of the endpoint will also include the `"message"` and `"success"` fields for each row to indicate their response and status.
+        - If the primary key column of the target table is configured as `auto_increment`, the returned results of the endpoint will also include the `"auto_increment_id"` field for each row. The value of this field is the auto increment ID for an `INSERT` operation and is `null` for other operations such as `UPDATE`.
 
-    - `result`：_object_。SQL 语句的执行相关信息，包括成功/失败状态、执行时间、返回的行数和用户配置。
+    - `result`: _object_. The execution-related information of the SQL statement, including success/failure status, execution time, number of rows returned, and user configuration.
 
-以下是一个示例响应：
+An example response is as follows:
 
 <SimpleTab>
-<div label="SQL 端点">
+<div label="SQL Endpoint">
 
 ```json
 {
@@ -72,7 +72,7 @@ Data Service 返回带有 JSON 主体的 HTTP 响应。
 
 </div>
 
-<div label="Chat2Data 端点">
+<div label="Chat2Data Endpoint">
 
 ```json
 {
@@ -115,13 +115,13 @@ Data Service 返回带有 JSON 主体的 HTTP 响应。
 </div>
 </SimpleTab>
 
-## 状态码
+## Status code
 
 ### 200
 
-如果 HTTP 状态码为 `200` 且 `data.result.code` 字段也显示 `200`，这表示 SQL 语句执行成功。否则，TiDB Cloud 无法执行你的端点中定义的 SQL 语句。你可以查看 `code` 和 `message` 字段以获取详细信息。
+If the HTTP status code is `200` and the `data.result.code` field also shows `200`, this indicated that the SQL statement is executed successfully. Otherwise, TiDB Cloud fails to execute the SQL statement defined in your endpoint. You can check the `code` and `message` fields for detailed information.
 
-以下是一个示例响应：
+An example response is as follows:
 
 ```json
 {
@@ -145,9 +145,9 @@ Data Service 返回带有 JSON 主体的 HTTP 响应。
 
 ### 400
 
-此状态码表示参数检查失败。
+This status code indicates that the parameter check failed.
 
-以下是一个示例响应：
+An example response is as follows:
 
 ```json
 {
@@ -171,9 +171,9 @@ Data Service 返回带有 JSON 主体的 HTTP 响应。
 
 ### 401
 
-此状态码表示由于缺少权限导致认证失败。
+This status code indicates that the authentication failed due to lack of permission.
 
-以下是一个示例响应：
+An example response is as follows:
 
 ```json
 {
@@ -197,9 +197,9 @@ Data Service 返回带有 JSON 主体的 HTTP 响应。
 
 ### 404
 
-此状态码表示由于无法找到指定的端点导致认证失败。
+This status code indicates that the authentication failed due to the inability to find the specified endpoint.
 
-以下是一个示例响应：
+An example response is as follows:
 
 ```json
 {
@@ -223,9 +223,9 @@ Data Service 返回带有 JSON 主体的 HTTP 响应。
 
 ### 405
 
-此状态码表示请求使用了不允许的方法。请注意，Data Service 仅支持 `GET` 和 `POST`。
+This status code indicates that the request used a method that is not allowed. Note that Data Service only supports `GET` and `POST`.
 
-以下是一个示例响应：
+An example response is as follows:
 
 ```json
 {
@@ -249,9 +249,9 @@ Data Service 返回带有 JSON 主体的 HTTP 响应。
 
 ### 408
 
-此状态码表示请求超过了端点的超时时间。要修改端点的超时时间，请参见[配置属性](/tidb-cloud/data-service-manage-endpoint.md#配置属性)。
+This status code indicates that the request exceeds the timeout duration of the endpoint. To modify the timeout of an endpoint, refer to [Configure properties](/tidb-cloud/data-service-manage-endpoint.md#configure-properties).
 
-以下是一个示例响应：
+An example response is as follows:
 
 ```json
 {
@@ -275,12 +275,12 @@ Data Service 返回带有 JSON 主体的 HTTP 响应。
 
 ### 429
 
-此状态码表示请求超过了 API 密钥的速率限制。要获取更多配额，你可以向我们的支持团队[提交请求](https://tidb.support.pingcap.com/)。
+This status code indicates that the request exceeds the rate limit of the API key. For more quota, you can [submit a request](https://tidb.support.pingcap.com/) to our support team.
 
-以下是一个示例响应：
+An example response is as follows:
 
 <SimpleTab>
-<div label="SQL 端点">
+<div label="SQL Endpoint">
 
 ```json
 {
@@ -304,7 +304,7 @@ Data Service 返回带有 JSON 主体的 HTTP 响应。
 
 </div>
 
-<div label="Chat2Data 端点">
+<div label="Chat2Data Endpoint">
 
 ```json
 {
@@ -331,11 +331,11 @@ Data Service 返回带有 JSON 主体的 HTTP 响应。
 
 ### 500
 
-此状态码表示请求遇到了内部错误。这个错误可能有多种原因。
+This status code indicates that the request met an internal error. There might be various causes for this error.
 
-一个可能的原因是由于无法连接到认证服务器导致认证失败。
+One possible cause is that the authentication failed due to the inability to connect to the authentication server.
 
-以下是一个示例响应：
+An example response is as follows:
 
 ```json
 {
@@ -357,7 +357,7 @@ Data Service 返回带有 JSON 主体的 HTTP 响应。
 }
 ```
 
-这也可能与无法连接 TiDB Cloud 集群有关。你需要参考 `message` 进行故障排除。
+This might also be related to the inability to connect the TiDB Cloud cluster. You need to refer to the `message` for troubleshooting.
 
 ```json
 {

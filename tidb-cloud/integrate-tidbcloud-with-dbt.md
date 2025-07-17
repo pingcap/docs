@@ -1,34 +1,34 @@
 ---
-title: 将 TiDB Cloud 与 dbt 集成
-summary: 了解 dbt 在 TiDB Cloud 中的使用场景。
+title: Integrate TiDB Cloud with dbt
+summary: Learn the use cases of dbt in TiDB Cloud.
 ---
 
-# 将 TiDB Cloud 与 dbt 集成
+# Integrate TiDB Cloud with dbt
 
-[数据构建工具 (dbt)](https://www.getdbt.com/) 是一个流行的开源数据转换工具，可帮助分析工程师通过 SQL 语句转换其数据仓库中的数据。通过 [dbt-tidb](https://github.com/pingcap/dbt-tidb) 插件，使用 TiDB Cloud 的分析工程师可以直接通过 SQL 创建表单和匹配数据，而无需考虑创建表或视图的过程。
+[Data build tool (dbt)](https://www.getdbt.com/) is a popular open-source data transformation tool that helps analytics engineers transform data in their warehouses through SQL statements. Through the [dbt-tidb](https://github.com/pingcap/dbt-tidb) plugin, analytics engineers working with TiDB Cloud can directly create forms and match data through SQL without having to think about the process of creating tables or views.
 
-本文档介绍如何将 dbt 与 TiDB Cloud 一起使用，以一个 dbt 项目为例。
+This document introduces how to use dbt with TiDB Cloud, taking a dbt project as an example.
 
-## 步骤 1：安装 dbt 和 dbt-tidb
+## Step 1: Install dbt and dbt-tidb
 
-你可以使用一个命令安装 dbt 和 dbt-tidb。在以下命令中，当你安装 dbt-tidb 时，dbt 会作为依赖项安装。
+You can install dbt and dbt-tidb using only one command. In the following command, dbt is installed as a dependency when you install dbt-tidb.
 
 ```shell
 pip install dbt-tidb
 ```
 
-你也可以单独安装 dbt。请参阅 dbt 文档中的[如何安装 dbt](https://docs.getdbt.com/docs/get-started/installation)。
+You can also install dbt separately. See [How to install dbt](https://docs.getdbt.com/docs/get-started/installation) in the dbt documentation.
 
-## 步骤 2：创建演示项目
+## Step 2: Create a demo project
 
-要试用 dbt 功能，你可以使用 dbt-lab 提供的演示项目 [jaffle_shop](https://github.com/dbt-labs/jaffle_shop)。你可以直接从 GitHub 克隆该项目：
+To try out the dbt function, you can use [jaffle_shop](https://github.com/dbt-labs/jaffle_shop), a demo project provided by dbt-lab. You can clone the project directly from GitHub:
 
 ```shell
 git clone https://github.com/dbt-labs/jaffle_shop && \
 cd jaffle_shop
 ```
 
-`jaffle_shop` 目录中的所有文件结构如下：
+All files in the `jaffle_shop` directory are structured as follows:
 
 ```shell
 .
@@ -55,52 +55,52 @@ cd jaffle_shop
     └── raw_payments.csv
 ```
 
-在此目录中：
+In this directory:
 
-- `dbt_project.yml` 是 dbt 项目配置文件，其中包含项目名称和数据库配置文件信息。
+- `dbt_project.yml` is the dbt project configuration file, which holds the project name and database configuration file information.
 
-- `models` 目录包含项目的 SQL 模型和表结构。请注意，这部分由数据分析师编写。有关模型的更多信息，请参阅 [SQL 模型](https://docs.getdbt.com/docs/build/sql-models)。
+- The `models` directory contains the project’s SQL models and table schemas. Note that the data analyst writes this section. For more information about models, see [SQL models](https://docs.getdbt.com/docs/build/sql-models).
 
-- `seeds` 目录存储由数据库导出工具导出的 CSV 文件。例如，你可以通过 Dumpling [导出 TiDB Cloud 数据](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud)到 CSV 文件。在 `jaffle_shop` 项目中，这些 CSV 文件用作要处理的原始数据。
+- The `seeds` directory stores the CSV files that are dumped by the database export tools. For example, you can [export the TiDB Cloud data](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud) into CSV files through Dumpling. In the `jaffle_shop` project, these CSV files are used as raw data to be processed.
 
-## 步骤 3：配置项目
+## Step 3: Configure the project
 
-要配置项目，请执行以下步骤：
+To configure the project, take the following steps:
 
-1. 完成全局配置。
+1. Complete the global configuration.
 
-    你可以参考[配置字段说明](#配置字段说明)并编辑默认的全局配置文件 `~/.dbt/profiles.yml` 来配置与 TiDB Cloud 的连接：
+    You can refer to [Description of profile fields](#description-of-profile-fields) and edit the default global profile, `~/.dbt/profiles.yml`, to configure the connection with TiDB Cloud:
 
     ```shell
     sudo vi ~/.dbt/profiles.yml
     ```
 
-    在编辑器中，添加以下配置：
+    In the editor, add the following configuration:
 
    ```yaml
-    jaffle_shop_tidb:                                                 # 项目名称
-      target: dev                                                     # 目标
+    jaffle_shop_tidb:                                                 # Project name
+      target: dev                                                     # Target
       outputs:
         dev:
-          type: tidb                                                  # 要使用的特定适配器
-          server: gateway01.ap-southeast-1.prod.aws.tidbcloud.com     # 要连接的 TiDB Cloud 集群的端点
-          port: 4000                                                  # 要使用的端口
-          schema: analytics                                           # 指定要将数据规范化到的架构（数据库）
-          username: xxxxxxxxxxx.root                                  # 用于连接 TiDB Cloud 集群的用户名
-          password: "your_password"                                   # 用于向 TiDB Cloud 集群进行身份验证的密码
+          type: tidb                                                  # The specific adapter to use
+          server: gateway01.ap-southeast-1.prod.aws.tidbcloud.com     # The TiDB Cloud clusters' endpoint to connect to
+          port: 4000                                                  # The port to use
+          schema: analytics                                           # Specify the schema (database) to normalize data into
+          username: xxxxxxxxxxx.root                                  # The username to use to connect to the TiDB Cloud clusters
+          password: "your_password"                                   # The password to use for authenticating to the TiDB Cloud clusters
     ```
 
-    你可以从集群的连接对话框中获取 `server`、`port` 和 `username` 的值。要打开此对话框，请转到项目的[**集群**](https://tidbcloud.com/project/clusters)页面，点击目标集群的名称以进入其概览页面，然后点击右上角的**连接**。
+    You can get the values of `server`, `port`, and `username` from the connection dialog of your cluster. To open this dialog, go to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner.
 
-2. 完成项目配置。
+2. Complete the project configuration.
 
-    在 jaffle_shop 项目目录中，编辑项目配置文件 `dbt_project.yml` 并将 `profile` 字段更改为 `jaffle_shop_tidb`。此配置允许项目从 `~/.dbt/profiles.yml` 文件中指定的数据库进行查询。
+    In the jaffle_shop project directory, edit the project configuration file `dbt_project.yml` and change the `profile` field to `jaffle_shop_tidb`. This configuration allows the project to query from the database as specified in the `~/.dbt/profiles.yml` file.
 
     ```shell
     vi dbt_project.yml
     ```
 
-    在编辑器中，更新配置如下：
+    In the editor, update the configuration as follows:
 
     ```yaml
     name: 'jaffle_shop'
@@ -108,10 +108,10 @@ cd jaffle_shop
     config-version: 2
     version: '0.1'
 
-    profile: 'jaffle_shop_tidb'                   # 注意此处的修改
+    profile: 'jaffle_shop_tidb'                   # note the modification here
 
-    model-paths: ["models"]                       # 模型路径
-    seed-paths: ["seeds"]                         # seed 路径
+    model-paths: ["models"]                       # model path
+    seed-paths: ["seeds"]                         # seed path
     test-paths: ["tests"]
     analysis-paths: ["analysis"]
     macro-paths: ["macros"]
@@ -126,34 +126,34 @@ cd jaffle_shop
 
     models:
       jaffle_shop:
-          materialized: table            # models/ 中的 *.sql 将实体化为表
+          materialized: table            # *.sql which in models/ would be materialized to table
           staging:
-            materialized: view           # models/staging/ 中的 *.sql 将实体化为视图
+            materialized: view           # *.sql which in models/staging/ would bt materialized to view
     ```
 
-3. 验证配置。
+3. Verify the configuration.
 
-    运行以下命令以检查数据库和项目配置是否正确。
+    Run the following command to check whether the database and project configuration is correct.
 
     ```shell
     dbt debug
     ```
 
-## 步骤 4：（可选）加载 CSV 文件
+## Step 4: (optional) Load CSV files
 
-> **注意：**
+> **Note:**
 >
-> 此步骤是可选的。如果要处理的数据已经在目标数据库中，你可以跳过此步骤。
+> This step is optional. If the data for processing is already in the target database, you can skip this step.
 
-现在你已成功创建并配置了项目，是时候加载 CSV 数据并将 CSV 实体化为目标数据库中的表了。
+Now that you have successfully created and configured the project, it’s time to load the CSV data and materialize the CSV as a table in the target database.
 
-1. 加载 CSV 数据并将 CSV 实体化为目标数据库中的表。
+1. Load the CSV data and materialize the CSV as a table in the target database.
 
     ```shell
     dbt seed
     ```
 
-    以下是示例输出：
+    The following is an example output:
 
     ```shell
     Running with dbt=1.0.1
@@ -170,11 +170,11 @@ cd jaffle_shop
     3 of 3 OK loaded seed file analytics.raw_payments............................... [INSERT 113 in 0.24s]
     ```
 
-    从结果中可以看到，seed 文件已启动并加载到三个表中：`analytics.raw_customers`、`analytics.raw_orders` 和 `analytics.raw_payments`。
+    As you can see in the results, the seed file was started and loaded into three tables: `analytics.raw_customers`, `analytics.raw_orders`, and `analytics.raw_payments`.
 
-2. 在 TiDB Cloud 中验证结果。
+2. Verify the results in TiDB Cloud.
 
-    `show databases` 命令列出了 dbt 创建的新 `analytics` 数据库。`show tables` 命令表明 `analytics` 数据库中有三个表，对应于你创建的表。
+    The `show databases` command lists the new `analytics` database that dbt has created. The `show tables` command indicates that there are three tables in the `analytics` database, corresponding to the ones you have created.
 
     ```sql
     mysql> SHOW DATABASES;
@@ -220,17 +220,17 @@ cd jaffle_shop
     10 rows in set (0.10 sec)
     ```
 
-## 步骤 5：转换数据
+## Step 5: Transform data
 
-现在你已准备好运行配置的项目并完成数据转换。
+Now you are ready to run the configured project and finish the data transformation.
 
-1. 运行 dbt 项目以完成数据转换：
+1. Run the dbt project to finish the data transformation:
 
     ```shell
     dbt run
     ```
 
-    以下是示例输出：
+    The following is an example output:
 
     ```shell
     Running with dbt=1.0.1
@@ -256,9 +256,9 @@ cd jaffle_shop
     Done. PASS=5 WARN=0 ERROR=0 SKIP=0 TOTAL=5
     ```
 
-    结果显示已成功创建两个表（`analytics.customers` 和 `analytics.orders`）和三个视图（`analytics.stg_customers`、`analytics.stg_orders` 和 `analytics.stg_payments`）。
+    The result shows that two tables (`analytics.customers` and `analytics.orders`), and three views (`analytics.stg_customers`, `analytics.stg_orders`, and `analytics.stg_payments`) are created successfully.
 
-2. 转到 TiDB Cloud 验证转换是否成功。
+2. Go to TiDB Cloud to verify that the transformation is successful.
 
     ```sql
     mysql> USE ANALYTICS;
@@ -295,50 +295,50 @@ cd jaffle_shop
     10 rows in set (0.00 sec)
     ```
 
-    输出显示已添加了五个表或视图，并且表或视图中的数据已转换。本示例中仅显示了客户表中的部分数据。
+    The output shows that five more tables or views have been added, and the data in the tables or views has been transformed. Only part of the data from the customer table is shown in this example.
 
-## 步骤 6：生成文档
+## Step 6: Generate the document
 
-dbt 允许你生成显示项目整体结构并描述所有表和视图的可视化文档。
+dbt lets you generate visual documents that display the overall structure of the project and describe all the tables and views.
 
-要生成可视化文档，请执行以下步骤：
+To generate visual documents, take the following steps:
 
-1. 生成文档：
+1. Generate the document:
 
     ```shell
     dbt docs generate
     ```
 
-2. 启动服务器：
+2. Start the server:
 
     ```shell
     dbt docs serve
     ```
 
-3. 要从浏览器访问文档，请转到 [http://localhost:8080](http://localhost:8080)。
+3. To access the document from your browser, go to [http://localhost:8080](http://localhost:8080).
 
-## 配置字段说明
+## Description of profile fields
 
-| 选项             | 说明                                                             | 是否必需？ | 示例                                              |
+| Option           | Description                                                             | Required? | Example                                           |
 |------------------|-------------------------------------------------------------------------|-----------|---------------------------------------------------|
-| `type`             | 要使用的特定适配器                                             | 必需      | `tidb`                                            |
-| `server`           | 要连接的 TiDB Cloud 集群的端点                         | 必需      | `gateway01.ap-southeast-1.prod.aws.tidbcloud.com` |
-| `port`             | 要使用的端口                                                         | 必需      | `4000`                                            |
-| `schema`           | 要将数据规范化到的架构（数据库）                      | 必需      | `analytics`                                       |
-| `username`         | 用于连接 TiDB Cloud 集群的用户名               | 必需      | `xxxxxxxxxxx.root`                                |
-| `password`         | 用于向 TiDB Cloud 集群进行身份验证的密码       | 必需      | `"your_password"`                                 |
-| `retries`          | 连接 TiDB Cloud 集群的重试次数（默认为 1）    | 可选      | `2`                                               |
+| `type`             | The specific adapter to use                                             | Required  | `tidb`                                            |
+| `server`           | The TiDB Cloud clusters' endpoint to connect to                         | Required  | `gateway01.ap-southeast-1.prod.aws.tidbcloud.com` |
+| `port`             | The port to use                                                         | Required  | `4000`                                            |
+| `schema`           | The schema (database) to normalize data into                      | Required  | `analytics`                                       |
+| `username`         | The username to use to connect to the TiDB Cloud clusters               | Required  | `xxxxxxxxxxx.root`                                |
+| `password`         | The password to use for authenticating to the TiDB Cloud clusters       | Required  | `"your_password"`                                 |
+| `retries`          | The retry times for connection to TiDB Cloud clusters (1 by default)    | Optional  | `2`                                               |
 
-## 支持的函数
+## Supported functions
 
-你可以在 dbt-tidb 中直接使用以下函数。有关如何使用它们的信息，请参阅 [dbt-util](https://github.com/dbt-labs/dbt-utils)。
+You can use the following functions directly in dbt-tidb. For information about how to use them, see [dbt-util](https://github.com/dbt-labs/dbt-utils).
 
-支持以下函数：
+The following functions are supported:
 
 - `bool_or`
 - `cast_bool_to_text`
 - `dateadd`
-- `datediff`。注意，`datediff` 与 dbt-util 略有不同。它向下取整而不是向上取整。
+- `datediff`. Note that `datediff` is a little different from dbt-util. It rounds down rather than rounds up.
 - `date_trunc`
 - `hash`
 - `safe_cast`

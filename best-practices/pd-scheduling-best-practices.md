@@ -1,9 +1,9 @@
 ---
-title: PD Scheduling Best Practices
+title: Best Practices for PD Scheduling
 summary: This document summarizes PD scheduling best practices, including scheduling process, load balancing, hot regions scheduling, cluster topology awareness, scale-down and failure recovery, region merge, query scheduling status, and control scheduling strategy. It also covers common scenarios such as uneven distribution of leaders/regions, slow node recovery, and troubleshooting TiKV nodes.
 ---
 
-# PD Scheduling Best Practices
+# Best Practices for PD Scheduling
 
 This document details the principles and strategies of PD scheduling through common scenarios to facilitate your application. This document assumes that you have a basic understanding of TiDB, TiKV and PD with the following core concepts:
 
@@ -103,9 +103,9 @@ Region merge refers to the process of merging adjacent small regions. It serves 
 
 Specifically, when a newly split Region exists for more than the value of [`split-merge-interval`](/pd-configuration-file.md#split-merge-interval) (`1h` by default), if the following conditions occur at the same time, this Region triggers the Region merge scheduling:
 
-- The size of this Region is smaller than the value of the [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size) (20 MiB by default)
+- The size of this Region is smaller than the value of the [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size). Starting from v8.4.0, the default value is changed from 20 MiB to 54 MiB. The new default value is automatically applied only to newly created clusters. Existing clusters are not affected.
 
-- The number of keys in this Region is smaller than the value of [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys) (200,000 by default).
+- The number of keys in this Region is smaller than the value of [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys). Starting from v8.4.0, the default value is changed from 200000 to 540000. The new default value is automatically applied only to newly created clusters. Existing clusters are not affected.
 
 ## Query scheduling status
 
@@ -253,7 +253,7 @@ Hot regions scheduling issues generally fall into the following categories:
 
 - The load of some nodes is significantly higher than that of other nodes from TiKV-related metrics, which becomes the bottleneck of the whole system. Currently, PD counts hotspots through traffic analysis only, so it is possible that PD fails to identify hotspots in certain scenarios. For example, when there are intensive point lookup requests for some regions, it might not be obvious to detect in traffic, but still the high QPS might lead to bottlenecks in key modules.
 
-    **Solutions**: Firstly, locate the table where hot regions are formed based on the specific business. Then add a `scatter-range-scheduler` scheduler to make all regions of this table evenly distributed. TiDB also provides an interface in its HTTP API to simplify this operation. Refer to [TiDB HTTP API](https://github.com/pingcap/tidb/blob/release-8.1/docs/tidb_http_api.md) for more details.
+    **Solutions**: Firstly, locate the table where hot regions are formed based on the specific business. Then add a `scatter-range-scheduler` scheduler to make all regions of this table evenly distributed. TiDB also provides an interface in its HTTP API to simplify this operation. Refer to [TiDB HTTP API](https://github.com/pingcap/tidb/blob/release-8.5/docs/tidb_http_api.md) for more details.
 
 ### Region merge is slow
 

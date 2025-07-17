@@ -17,8 +17,5 @@
     "micromark-extension-mdxjs": "^1.0.0",
     "octokit": "^3.1.0",
     "unist-util-visit": "^4.1.0"
-  },
-  "devDependencies": {
-    "prettier": "3.3.3"
   }
 }

@@ -1,25 +1,25 @@
 ---
-title: 锁定函数
-summary: 了解 TiDB 中的用户级锁定函数。
+title: Locking Functions
+summary: Learn about user-level locking functions in TiDB.
 ---
 
-# 锁定函数
+# Locking Functions
 
-TiDB 支持 MySQL 8.0 中提供的大多数用户级[锁定函数](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html)。
+TiDB supports most of the user-level [locking functions](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html) available in MySQL 8.0.
 
-## 支持的函数
+## Supported functions
 
-| 名称                                                                                                                 | 描述                                                           |
+| Name                                                                                                                 | Description                                                           |
 |:---------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------|
-| [`GET_LOCK(lockName, timeout)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_get-lock)    | 获取一个建议性锁。`lockName` 参数不能超过 64 个字符。在超时并返回失败之前最多等待 `timeout` 秒。         |
-| [`IS_FREE_LOCK(lockName)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_is-free-lock) | 检查锁是否空闲。 |
-| [`IS_USED_LOCK(lockName)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_is-used-lock) | 检查锁是否正在使用。如果是，则返回相应的连接 ID。 |
-| [`RELEASE_ALL_LOCKS()`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_release-all-locks)   | 释放当前会话持有的所有锁。                        |
-| [`RELEASE_LOCK(lockName)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_release-lock)     | 释放先前获取的锁。`lockName` 参数不能超过 64 个字符。 |
+| [`GET_LOCK(lockName, timeout)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_get-lock)    | Acquires an advisory lock. The `lockName` parameter must be NO longer than 64 characters. Waits maximum `timeout` seconds before timing out and returns a failure.         |
+| [`IS_FREE_LOCK(lockName)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_is-free-lock) | Checks if a lock is free. |
+| [`IS_USED_LOCK(lockName)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_is-used-lock) | Checks if a lock is in use. If true, it returns the corresponding connection ID. |
+| [`RELEASE_ALL_LOCKS()`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_release-all-locks)   | Releases all locks held by the current session.                        |
+| [`RELEASE_LOCK(lockName)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_release-lock)     | Releases a previously acquired lock. The `lockName` parameter must be NO longer than 64 characters. |
 
-## MySQL 兼容性
+## MySQL compatibility
 
-* TiDB 允许的最小超时时间是 1 秒，最大超时时间是 1 小时（3600 秒）。这与 MySQL 不同，MySQL 允许 0 秒和无限超时（`timeout=-1`）。TiDB 会自动将超出范围的值转换为最接近的允许值，并将 `timeout=-1` 转换为 3600 秒。
-* TiDB 不会自动检测用户级锁导致的死锁。死锁的会话将在最多 1 小时后超时，但也可以通过对受影响的会话之一使用 [`KILL`](/sql-statements/sql-statement-kill.md) 来手动解决。你也可以通过始终按相同顺序获取用户级锁来防止死锁。
-* 锁在集群中的所有 TiDB 服务器上生效。这与 MySQL Cluster 和 Group Replication 不同，后者的锁仅在单个服务器上本地生效。
-* 如果从另一个会话调用 `IS_USED_LOCK()`，且无法返回持有锁的进程 ID，则返回 `1`。
+* The minimum timeout permitted by TiDB is 1 second, and the maximum timeout is 1 hour (3600 seconds). This differs from MySQL, where both 0 second and unlimited timeouts (`timeout=-1`) are permitted. TiDB will automatically convert out-of-range values to the nearest permitted value and convert `timeout=-1` to 3600 seconds.
+* TiDB does not automatically detect deadlocks caused by user-level locks. Deadlocked sessions will time out after a maximum of 1 hour, but can also be manually resolved by using [`KILL`](/sql-statements/sql-statement-kill.md) on one of the affected sessions. You can also prevent deadlocks by always acquiring user-level locks in the same order.
+* Locks take effect on all TiDB servers in the cluster. This differs from MySQL Cluster and Group Replication where locks are local to a single server.
+* `IS_USED_LOCK()` returns `1` if it is called from another session and is unable to return the ID of the process that is holding the lock.

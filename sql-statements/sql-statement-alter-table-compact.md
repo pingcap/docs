@@ -1,32 +1,32 @@
 ---
 title: ALTER TABLE ... COMPACT
-summary: TiDB 数据库中 ALTER TABLE ... COMPACT 的使用概述。
+summary: An overview of the usage of ALTER TABLE ... COMPACT for the TiDB database.
 ---
 
 # ALTER TABLE ... COMPACT
 
-为了提高读取性能并减少磁盘使用，TiDB 会在后台自动调度存储节点上的数据压缩。在压缩过程中，存储节点会重写物理数据，包括清理已删除的行和合并由更新引起的多个数据版本。`ALTER TABLE ... COMPACT` 语句允许你立即对特定表启动压缩，而无需等待后台触发压缩。
+To enhance read performance and reduce disk usage, TiDB automatically schedules data compaction on storage nodes in the background. During the compaction, storage nodes rewrite physical data, including cleaning up deleted rows and merging multiple versions of data caused by updates. The `ALTER TABLE ... COMPACT` statement allows you to initiate compaction for a specific table immediately, without waiting until compaction is triggered in the background.
 
-执行此语句不会阻塞现有的 SQL 语句或影响任何 TiDB 功能，如事务、DDL 和 GC。通过 SQL 语句可以选择的数据也不会改变。执行此语句会消耗一些 IO 和 CPU 资源。请注意选择合适的执行时机，例如在资源充足时执行，以避免对业务产生负面影响。
+The execution of this statement does not block existing SQL statements or affect any TiDB features, such as transactions, DDL, and GC. Data that can be selected via SQL statements will not be changed either. Executing this statement consumes some IO and CPU resources. Be careful to choose an appropriate timing for execution, such as when resources are available, to avoid negative impact on the business.
 
-当表的所有副本都压缩完成时，压缩语句将完成并返回。在执行过程中，你可以通过执行 [`KILL`](/sql-statements/sql-statement-kill.md) 语句安全地中断压缩。中断压缩不会破坏数据一致性或导致数据丢失，也不会影响后续的手动或后台压缩。
+The compaction statement will be finished and returned when all replicas of a table are compacted. During the execution process, you can safely interrupt the compaction by executing the [`KILL`](/sql-statements/sql-statement-kill.md) statement. Interrupting a compaction does not break data consistency or lead to data loss, nor does it affect subsequent manual or background compactions.
 
-此数据压缩语句目前仅支持 TiFlash 副本，不支持 TiKV 副本。
+This data compaction statement is currently supported only for TiFlash replicas, not for TiKV replicas.
 
-## 语法概要
+## Synopsis
 
 ```ebnf+diagram
 AlterTableCompactStmt ::=
     'ALTER' 'TABLE' TableName 'COMPACT' ( 'PARTITION' PartitionNameList )? ( 'TIFLASH' 'REPLICA' )?
 ```
 
-从 v6.2.0 开始，语法中的 `TIFLASH REPLICA` 部分可以省略。省略时，语句的语义保持不变，仅对 TiFlash 生效。
+Since v6.2.0, the `TIFLASH REPLICA` part of the syntax can be omitted. When omitted, the semantic of the statement remains unchanged, and takes effect only for TiFlash.
 
-## 示例
+## Examples
 
-### 压缩表中的 TiFlash 副本
+### Compact TiFlash replicas in a table
 
-以下以一个具有 4 个分区和 2 个 TiFlash 副本的 `employees` 表为例：
+The following takes an `employees` table as an example, which has 4 partitions with 2 TiFlash replicas:
 
 ```sql
 CREATE TABLE employees (
@@ -43,7 +43,7 @@ PARTITION BY LIST (store_id) (
 ALTER TABLE employees SET TIFLASH REPLICA 2;
 ```
 
-你可以执行以下语句立即对 `employees` 表中所有分区的 2 个 TiFlash 副本启动压缩：
+You can execute the following statement to immediately initiate the compaction for the 2 TiFlash replicas for all partitions in the `employees` table:
 
 {{< copyable "sql" >}}
 
@@ -51,9 +51,9 @@ ALTER TABLE employees SET TIFLASH REPLICA 2;
 ALTER TABLE employees COMPACT TIFLASH REPLICA;
 ```
 
-### 压缩表中指定分区的 TiFlash 副本
+### Compact TiFlash replicas of specified partitions in a table
 
-以下以一个具有 4 个分区和 2 个 TiFlash 副本的 `employees` 表为例：
+The following takes an `employees` table as an example, which has 4 partitions with 2 TiFlash replicas:
 
 ```sql
 CREATE TABLE employees (
@@ -71,30 +71,30 @@ PARTITION BY LIST (store_id) (
 ALTER TABLE employees SET TIFLASH REPLICA 2;
 ```
 
-你可以执行以下语句立即对 `employees` 表中 `pNorth` 和 `pEast` 分区的 2 个 TiFlash 副本启动压缩：
+You can execute the following statement to immediately initiate the compaction for the 2 TiFlash replicas of the `pNorth` and `pEast` partitions in the `employees` table:
 
 ```sql
 ALTER TABLE employees COMPACT PARTITION pNorth, pEast TIFLASH REPLICA;
 ```
 
-## 并发性
+## Concurrency
 
-`ALTER TABLE ... COMPACT` 语句同时压缩表中的所有副本。
+The `ALTER TABLE ... COMPACT` statement compacts all replicas in a table simultaneously.
 
-为了避免对在线业务产生重大影响，默认情况下每个 TiFlash 实例一次只压缩一个表的数据（后台触发的压缩除外）。这意味着如果你同时对多个表执行 `ALTER TABLE ... COMPACT` 语句，它们的执行将在同一个 TiFlash 实例上排队，而不是同时执行。
+To avoid a significant impact on online business, each TiFlash instance only compacts data in one table at a time by default (except for the compaction triggered in the background). This means that if you execute the `ALTER TABLE ... COMPACT` statement on multiple tables at the same time, their executions will be queued on the same TiFlash instance, rather than being executed simultaneously.
 
 <CustomContent platform="tidb">
 
-要获得更高的表级并发性和更高的资源使用率，你可以修改 TiFlash 配置 [`manual_compact_pool_size`](/tiflash/tiflash-configuration.md)。例如，当 `manual_compact_pool_size` 设置为 2 时，可以同时处理 2 个表的压缩。
+To obtain greater table-level concurrency with higher resource usage, you can modify the TiFlash configuration [`manual_compact_pool_size`](/tiflash/tiflash-configuration.md). For example, when `manual_compact_pool_size` is set to 2, compaction for 2 tables can be processed simultaneously.
 
 </CustomContent>
 
-## 观察数据压缩进度
+## Observe data compaction progress
 
-你可以通过检查 `INFORMATION_SCHEMA.TIFLASH_TABLES` 表中的 `TOTAL_DELTA_ROWS` 列来观察数据压缩的进度或确定是否需要对表启动压缩。`TOTAL_DELTA_ROWS` 的值越大，可以压缩的数据就越多。如果 `TOTAL_DELTA_ROWS` 为 `0`，则表中的所有数据都处于最佳状态，不需要压缩。
+You can observe the progress of data compaction or determine whether to initiate compaction for a table by checking the `TOTAL_DELTA_ROWS` column in the `INFORMATION_SCHEMA.TIFLASH_TABLES` table. The larger the value of `TOTAL_DELTA_ROWS`, the more data that can be compacted. If `TOTAL_DELTA_ROWS` is `0`, all data in the table is in the best state and does not need to be compacted.
 
 <details>
-  <summary>示例：检查非分区表的压缩状态</summary>
+  <summary>Example: Check the compaction state of a non-partitioned table</summary>
 
 ```sql
 USE test;
@@ -122,7 +122,7 @@ SELECT TOTAL_DELTA_ROWS, TOTAL_STABLE_ROWS FROM INFORMATION_SCHEMA.TIFLASH_TABLE
 +------------------+-------------------+
 |                3 |                 0 |
 +------------------+-------------------+
--- 新写入的数据可以压缩
+-- Newly written data can be compacted
 
 ALTER TABLE foo COMPACT TIFLASH REPLICA;
 
@@ -134,13 +134,13 @@ SELECT TOTAL_DELTA_ROWS, TOTAL_STABLE_ROWS FROM INFORMATION_SCHEMA.TIFLASH_TABLE
 +------------------+-------------------+
 |                0 |                 3 |
 +------------------+-------------------+
--- 所有数据都处于最佳状态，不需要压缩
+-- All data is in the best state and no compaction is needed
 ```
 
 </details>
 
 <details>
-  <summary>示例：检查分区表的压缩状态</summary>
+  <summary>Example: Check the compaction state of a partitioned table</summary>
 
 ```sql
 USE test;
@@ -170,7 +170,7 @@ SELECT PARTITION_NAME, TOTAL_DELTA_ROWS, TOTAL_STABLE_ROWS
 | pWest          |                0 |                 0 |
 | pCentral       |                0 |                 0 |
 +----------------+------------------+-------------------+
--- 某些分区可以压缩
+-- Some partitions can be compacted
 
 ALTER TABLE employees COMPACT TIFLASH REPLICA;
 
@@ -186,28 +186,28 @@ SELECT PARTITION_NAME, TOTAL_DELTA_ROWS, TOTAL_STABLE_ROWS
 | pWest          |                0 |                 0 |
 | pCentral       |                0 |                 0 |
 +----------------+------------------+-------------------+
--- 所有分区中的数据都处于最佳状态，不需要压缩
+-- Data in all partitions is in the best state and no compaction is needed
 ```
 
 </details>
 
-> **注意：**
+> **Note:**
 >
-> - 如果在压缩过程中更新了数据，压缩完成后 `TOTAL_DELTA_ROWS` 可能仍然是非零值。这是正常的，表示这些更新尚未被压缩。要压缩这些更新，请再次执行 `ALTER TABLE ... COMPACT` 语句。
+> - If data is updated during compaction, `TOTAL_DELTA_ROWS` might still be a non-zero value after compaction is done. This is normal and indicates that these updates have not been compacted. To compact these updates, execute the `ALTER TABLE ... COMPACT` statement again.
 >
-> - `TOTAL_DELTA_ROWS` 表示数据版本，而不是行数。例如，如果你插入一行然后删除它，`TOTAL_DELTA_ROWS` 将增加 2。
+> - `TOTAL_DELTA_ROWS` indicates the data version, not the number of rows. For example, if you insert a row and then delete it, `TOTAL_DELTA_ROWS` will increase by 2.
 
-## 兼容性
+## Compatibility
 
-### MySQL 兼容性
+### MySQL compatibility
 
-`ALTER TABLE ... COMPACT` 语法是 TiDB 特有的，是对标准 SQL 语法的扩展。虽然没有等效的 MySQL 语法，但你仍然可以使用符合 MySQL 协议的 MySQL 客户端或各种数据库驱动程序执行此语句。
+The `ALTER TABLE ... COMPACT` syntax is TiDB specific, which is an extension to the standard SQL syntax. Although there is no equivalent MySQL syntax, you can still execute this statement by using MySQL clients or various database drivers that comply with the MySQL protocol.
 
-### TiDB Binlog 和 TiCDC 兼容性
+### TiCDC compatibility
 
-`ALTER TABLE ... COMPACT` 语句不会导致逻辑数据更改，因此不会被 TiDB Binlog 或 TiCDC 复制到下游。
+The `ALTER TABLE ... COMPACT` statement does not result in logical data changes and are therefore not replicated to downstream by TiCDC.
 
-## 另请参阅
+## See also
 
 - [ALTER TABLE](/sql-statements/sql-statement-alter-table.md)
 - [KILL TIDB](/sql-statements/sql-statement-kill.md)

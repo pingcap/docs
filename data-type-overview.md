@@ -1,15 +1,32 @@
 ---
-title: 数据类型
-summary: 了解 TiDB 支持的数据类型。
+title: Data Types
+summary: Learn about the data types supported in TiDB.
 ---
 
-# 数据类型
+# Data Types
 
-TiDB 支持除 `SPATIAL` 类型外的所有 MySQL 数据类型。这包括所有[数值类型](/data-type-numeric.md)、[字符串类型](/data-type-string.md)、[日期和时间类型](/data-type-date-and-time.md)以及 [JSON 类型](/data-type-json.md)。
+TiDB supports all the data types in MySQL except the `SPATIAL` type. This includes all the [numeric types](/data-type-numeric.md), [string types](/data-type-string.md), [date & time types](/data-type-date-and-time.md), and [the JSON type](/data-type-json.md).
 
-数据类型的定义使用 `T(M[, D])` 格式指定。其中：
+The definitions used for datatypes are specified as `T(M[, D])`. Where by:
 
-- `T` 表示具体的数据类型。
-- `M` 表示整数类型的最大显示宽度。对于浮点数和定点数类型，`M` 是可以存储的总位数（精度）。对于字符串类型，`M` 是最大长度。`M` 的最大允许值取决于数据类型。
-- `D` 适用于浮点数和定点数类型，表示小数点后的位数（标度）。
-- `fsp` 适用于 `TIME`、`DATETIME` 和 `TIMESTAMP` 类型，表示小数秒的精度。如果指定了 `fsp` 值，必须在 0 到 6 的范围内。值为 0 表示没有小数部分。如果省略，默认精度为 0。
+- `T` indicates the specific data type.
+- `M` indicates the maximum display width for integer types. For floating-point and fixed-point types, `M` is the total number of digits that can be stored (the precision). For string types, `M` is the maximum length. The maximum permissible value of M depends on the data type.
+
+<CustomContent platform="tidb">
+
+> **Warning:**
+>
+> Starting from v8.5.0, integer display width is deprecated ([`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length) is `true` by default). Specifying display width for integer types is NOT recommended.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Warning:**
+>
+> Starting from v8.5.0, integer display width is deprecated. Specifying display width for integer types is NOT recommended.
+
+</CustomContent>
+
+- `D` applies to floating-point and fixed-point types and indicates the number of digits following the decimal point (the scale).
+- `fsp` applies to the `TIME`, `DATETIME`, and `TIMESTAMP` types and represents the fractional seconds precision. The `fsp` value, if given, must be in the range 0 to 6. A value of 0 signifies that there is no fractional part. If omitted, the default precision is 0.

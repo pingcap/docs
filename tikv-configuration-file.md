@@ -7,7 +7,7 @@ summary: Learn the TiKV configuration file.
 
 <!-- markdownlint-disable MD001 -->
 
-The TiKV configuration file supports more options than command-line parameters. You can find the default configuration file in [etc/config-template.toml](https://github.com/tikv/tikv/blob/release-8.1/etc/config-template.toml) and rename it to `config.toml`.
+The TiKV configuration file supports more options than command-line parameters. You can find the default configuration file in [etc/config-template.toml](https://github.com/tikv/tikv/blob/release-8.5/etc/config-template.toml) and rename it to `config.toml`.
 
 This document only describes the parameters that are not included in command-line parameters. For more details, see [command-line parameter](/command-line-flags-for-tikv-configuration.md).
 
@@ -138,7 +138,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `grpc-compression-type`
 
-+ The compression algorithm for gRPC messages. It affects gRPC messages between TiKV nodes. Starting from v6.5.11, v7.1.6, v7.5.3, and v8.1.1, it also affects gRPC response messages sent from TiKV to TiDB.
++ The compression algorithm for gRPC messages. It affects gRPC messages between TiKV nodes. Starting from v6.5.11, v7.1.6, v7.5.3, v8.1.1, and v8.2.0, it also affects gRPC response messages sent from TiKV to TiDB.
 + Optional values: `"none"`, `"deflate"`, `"gzip"`
 
     > **Note:**
@@ -221,6 +221,11 @@ This document only describes the parameters that are not included in command-lin
 + Default value: `"60s"`
 + Minimum value: `"1s"`
 
+### `end-point-memory-quota` <span class="version-mark">New in v8.2.0</span>
+
+* The maximum amount of memory that TiKV Coprocessor requests can use. If this limit is exceeded, subsequent Coprocessor requests are rejected with the error "server is busy."
+* Default value: 45% of the total system memory. If 45% of the total system memory exceeds 500 MiB, the default value is 500 MiB.
+
 ### `snap-io-max-bytes-per-sec`
 
 + The maximum allowable disk bandwidth when processing snapshots
@@ -263,7 +268,7 @@ This document only describes the parameters that are not included in command-lin
 ### `raft-client-queue-size`
 
 + Specifies the queue size of the Raft messages in TiKV. If too many messages not sent in time result in a full buffer, or messages discarded, you can specify a greater value to improve system stability.
-+ Default value: `8192`
++ Default value: `16384`
 
 ### `simplify-metrics` <span class="version-mark">New in v6.2.0</span>
 
@@ -757,16 +762,12 @@ Configuration items related to Raftstore.
 
 ### `max-apply-unpersisted-log-limit` <span class="version-mark">New in v8.1.0</span>
 
-> **Warning:**
->
-> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
-
 + The maximum number of committed but not persisted Raft logs that can be applied.
 
     + Setting this configuration item to a value greater than `0` enables the TiKV node to apply committed but not persisted Raft logs in advance, effectively reducing long-tail latency caused by IO jitter on that node. However, it might also increase the memory usage of TiKV and the disk space occupied by Raft logs.
-    + Setting this configuration item to `0` disables this feature, meaning that TiKV must wait until Raft logs are both committed and persisted before applying them. This default behavior is consistent with the behavior before v8.1.0.
+    + Setting this configuration item to `0` disables this feature, meaning that TiKV must wait until Raft logs are both committed and persisted before applying them. This behavior is consistent with the behavior before v8.2.0.
 
-+ Default value: `0`
++ Default value: `1024`
 + Minimum value: `0`
 
 ### `hibernate-regions`
@@ -1143,7 +1144,7 @@ Configuration items related to Coprocessor.
 ### `region-split-size`
 
 + The size of the newly split Region. This value is an estimate.
-+ Default value: `"96MiB"`
++ Default value: `"256MiB"`. Before v8.4.0, the default value is `"96MiB"`.
 + Unit: KiB|MiB|GiB
 
 ### `region-max-keys`
@@ -1154,7 +1155,7 @@ Configuration items related to Coprocessor.
 ### `region-split-keys`
 
 + The number of keys in the newly split Region. This value is an estimate.
-+ Default value: `960000`
++ Default value: `2560000`. Before v8.4.0, the default value is `960000`.
 
 ### `consistency-check-method`
 
@@ -1168,12 +1169,12 @@ Configuration items related to Coprocessor.
 
 + The path of the directory where compiled coprocessor plugins are located. Plugins in this directory are automatically loaded by TiKV.
 + If this configuration item is not set, the coprocessor plugin is disabled.
-+ Default value: `"./coprocessors"`
++ Default value: None
 
 ### `enable-region-bucket` <span class="version-mark">New in v6.1.0</span>
 
 + Determines whether to divide a Region into smaller ranges called buckets. The bucket is used as the unit of the concurrent query to improve the scan concurrency. For more about the design of the bucket, refer to [Dynamic size Region](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md).
-+ Default value: false
++ Default value: None, which means disabled by default.
 
 > **Warning:**
 >
@@ -1408,7 +1409,7 @@ Configuration items related to RocksDB
 + Specifies the total memory limit of `memtable` for all RocksDB instances in a single TiKV. `0` means no limit.
 + Default value:
 
-    + When `storage.engine="raft-kv"`, the default value is `0`, which means no limit.
+    + When `storage.engine="raft-kv"`, the default value is none, which means no limit.
     + When `storage.engine="partitioned-raft-kv"`, the default value is 20% of the size of total system memory.
 
 + Unit: KiB|MiB|GiB
@@ -1535,7 +1536,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 + Determines whether to use Ribbon filters for levels greater than or equal to this value and use non-block-based bloom filters for levels less than this value. When this configuration item is set, [`block-based-bloom-filter`](#block-based-bloom-filter) will be ignored.
 + Note that this configuration item takes effect only when [`format-version`](#format-version-new-in-v620) >= 5.
-+ Default value: `false`
++ Default value: None, which means disabled by default.
 
 ### `read-amp-bytes-per-bit`
 
@@ -1592,7 +1593,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `target-file-size-base`
 
 + The size of the target file at base level. This value is overridden by `compaction-guard-max-output-file-size` when the `enable-compaction-guard` value is `true`.
-+ Default value: `"8MiB"`
++ Default value: None, which means `"8MiB"` by default.
 + Minimum value: `0`
 + Unit: KiB|MiB|GiB
 
@@ -1675,7 +1676,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 + Enables or disables the compaction guard, which is an optimization to split SST files at TiKV Region boundaries. This optimization can help reduce compaction I/O and allows TiKV to use larger SST file size (thus less SST files overall) and at the time efficiently clean up stale data when migrating Regions.
 + Default value for `defaultcf` and `writecf`: `true`
-+ Default value for `lockcf`: `false`
++ Default value for `lockcf`: None, which means disabled by default.
 
 ### `compaction-guard-min-output-file-size`
 
@@ -1707,13 +1708,13 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `ttl` <span class="version-mark">New in v7.2.0</span>
 
 + SST files with updates older than the TTL will be automatically selected for compaction. These SST files will go through the compaction in a cascading way so that they can be compacted to the bottommost level or file.
-+ Default value: `"0s"`, meaning that no SST file is selected by default.
++ Default value: None, meaning that no SST file is selected by default.
 + Unit: s(second)|h(hour)|d(day)
 
 ### `periodic-compaction-seconds` <span class="version-mark">New in v7.2.0</span>
 
 + The time interval for periodic compaction. SST files with updates older than this value will be selected for compaction and rewritten to the same level where these SST files originally reside.
-+ Default value: `"0s"`, meaning that periodic compaction is disabled by default.
++ Default value: None, meaning that periodic compaction is disabled by default.
 + Unit: s(second)|h(hour)|d(day)
 
 ### `max-compactions` <span class="version-mark">New in v6.6.0</span>
@@ -1738,7 +1739,7 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 > - A value smaller than `32KiB` might affect the performance of range scans. However, if the workload primarily involves heavy writes and point queries, you can consider decreasing the value of `min-blob-size` for better performance.
 
 + The smallest value stored in a Blob file. Values smaller than the specified size are stored in the LSM-Tree.
-+ Default value: `"32KiB"`
++ Default value: None, which means `"32KiB"` by default.
 + Minimum value: `0`
 + Unit: KiB|MiB|GiB
 
@@ -1767,7 +1768,7 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 + Recommended value: `0`. Starting from v8.0.0, TiKV introduces the `shared-blob-cache` configuration item and enables it by default, so there is no need to set `blob-cache-size` separately. The configuration of `blob-cache-size` only takes effect when `shared-blob-cache` is set to `false`.
 + Unit: KiB|MiB|GiB
 
-### `shared-blob-cache` (New in v8.0.0)
+### `shared-blob-cache` <span class="version-mark">New in v8.0.0</span>
 
 + Controls whether to enable the shared cache for Titan blob files and RocksDB block files.
 + Default value: `true`. When the shared cache is enabled, block files have higher priority. This means that TiKV prioritizes meeting the cache needs of block files and then uses the remaining cache for blob files.
@@ -2004,6 +2005,20 @@ Configuration items related to Raft Engine.
 + If there are multiple disks on your machine, it is recommended to store the data of Raft Engine on a different disk to improve TiKV performance.
 + Default value: `""`
 
+### `spill-dir` <span class="version-mark">New in v8.4.0</span>
+
++ The auxiliary directory for storing Raft log files. When the disk for the `dir` directory is full, new Raft logs will be stored under this directory. If this auxiliary directory does not exist after configuration, it will be automatically created when TiKV is started.
++ If this configuration is not set, the auxiliary directory is not enabled.
+
+> **Note:**
+>
+> - This configuration takes effect only when the `dir` and `spill-dir` of the Raft Engine are set to different disk drives.
+> - After enabling this feature, if you want to disable it, you need to perform the following operations before restarting TiKV. Otherwise, TiKV will fail to start.
+>     1. Stop TiKV.
+>     2. Copy all the Raft Logs from the `spill-dir` directory to the [`dir`](/tikv-configuration-file.md#dir) directory.
+>     3. Remove this configuration from the TiKV configuration file.
+>     4. Restart TiKV.
+
 ### `batch-compression-threshold`
 
 + Specifies the threshold size of a log batch. A log batch larger than this configuration is compressed. If you set this configuration item to `0`, compression is disabled.
@@ -2065,7 +2080,7 @@ Configuration items related to Raft Engine.
 > 3. Enable Raft Engine by setting `enable` to `true` and restart TiKV to make the configuration take effect.
 
 + Specifies the version of log files in Raft Engine.
-+ Value Options:
++ Value options:
     + `1`: Default log file version for TiKV earlier than v6.3.0. Can be read by TiKV >= v6.1.0.
     + `2`: Supports log recycling. Can be read by TiKV >= v6.3.0.
 + Default value:
@@ -2122,8 +2137,12 @@ Configuration items related to security.
 
 ### `redact-info-log` <span class="version-mark">New in v4.0.8</span>
 
-+ This configuration item enables or disables log redaction. If the configuration value is set to `true`, all user data in the log will be replaced by `?`.
++ This configuration item enables or disables log redaction. Value options: `true`, `false`, `"on"`, `"off"`, and `"marker"`. The `"on"`, `"off"`, and `"marker"` options are introduced in v8.3.0.
++ If the configuration item is set to `false` or `"off"`, log redaction is disabled.
++ If the configuration item is set to `true` or `"on"`, all user data in the log is replaced by `?`.
++ If the configuration item is set to `"marker"`, all user data in the log is wrapped in `‹ ›`. If user data contains `‹` or `›`, `‹` is escaped as `‹‹`, and `›` is escaped as `››`. Based on the marked logs, you can decide whether to desensitize the marked information when the logs are displayed.
 + Default value: `false`
++ For details on how to use it, see [Log redaction in TiKV side](/log-redaction.md#log-redaction-in-tikv-side).
 
 ## security.encryption
 
@@ -2228,7 +2247,7 @@ Configuration items related to BR backup.
 
 + The threshold of the backup SST file size. If the size of a backup file in a TiKV Region exceeds this threshold, the file is backed up to several files with the TiKV Region split into multiple Region ranges. Each of the files in the split Regions is the same size as `sst-max-size` (or slightly larger).
 + For example, when the size of a backup file in the Region of `[a,e)` is larger than `sst-max-size`, the file is backed up to several files with regions `[a,b)`, `[b,c)`, `[c,d)` and `[d,e)`, and the size of `[a,b)`, `[b,c)`, `[c,d)` is the same as that of `sst-max-size` (or slightly larger).
-+ Default value: `"144MiB"`
++ Default value: `"384MiB"`. Before v8.4.0, the default value is `"144MiB"`.
 
 ### `enable-auto-tune` <span class="version-mark">New in v5.4.0</span>
 
@@ -2390,6 +2409,18 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 + Default value: `true`
 + Note that `in-memory` takes effect only when the value of `pipelined` is `true`.
 
+### `in-memory-peer-size-limit` <span class="version-mark">New in v8.4.0</span>
+
++ Controls the memory usage limit for [in-memory pessimistic locks](/pessimistic-transaction.md#in-memory-pessimistic-lock) in a Region. When this limit is exceeded, TiKV writes pessimistic locks persistently.
++ Default value: `512KiB`
++ Unit: KiB|MiB|GiB
+
+### `in-memory-instance-size-limit` <span class="version-mark">New in v8.4.0</span>
+
++ Controls the memory usage limit for [in-memory pessimistic locks](/pessimistic-transaction.md#in-memory-pessimistic-lock) in a TiKV instance. When this limit is exceeded, TiKV writes pessimistic locks persistently.
++ Default value: `100MiB`
++ Unit: KiB|MiB|GiB
+
 ## quota
 
 Configuration items related to Quota Limiter.
@@ -2501,9 +2532,19 @@ Configuration items related to resource control of the TiKV storage layer.
 
 ### `enabled` <span class="version-mark">New in v6.6.0</span>
 
-+ Controls whether to enable scheduling for user foreground read/write requests according to [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) of the corresponding resource groups. For information about TiDB resource groups and resource control, see [TiDB resource control](/tidb-resource-control.md).
++ Controls whether to enable scheduling for user foreground read/write requests according to [Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) of the corresponding resource groups. For information about TiDB resource groups and resource control, see [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md).
 + Enabling this configuration item only works when [`tidb_enable_resource_control](/system-variables.md#tidb_enable_resource_control-new-in-v660) is enabled on TiDB. When this configuration item is enabled, TiKV will use the priority queue to schedule the queued read/write requests from foreground users. The scheduling priority of a request is inversely related to the amount of resources already consumed by the resource group that receives this request, and positively related to the quota of the corresponding resource group.
 + Default value: `true`, which means scheduling based on the RU of the resource group is enabled.
+
+### `priority-ctl-strategy` <span class="version-mark">New in v8.4.0</span>
+
+Specifies the flow control strategy for low-priority tasks. TiKV ensures that higher priority tasks are prioritized for execution by applying flow control to low-priority tasks.
+
++ Value options:
+    + `aggressive`: this policy prioritizes the performance of high-priority tasks, ensuring that the throughput and latency of high-priority tasks are largely unaffected, but low-priority tasks will run slower.
+    + `moderate`: this policy imposes a balanced flow control on low-priority tasks and has a lower impact on high-priority tasks.
+    + `conservative`: this policy prioritizes ensuring that system resources are fully utilized, allowing low-priority tasks to fully utilize system available resources as needed, and therefore has a greater performance impact on high-priority tasks.
++ Default value: `moderate`.
 
 ## split
 
@@ -2549,3 +2590,38 @@ Configuration items related to [Load Base Split](/configure-load-base-split.md).
 
 + Controls whether to display the memory allocation status at the TiKV thread level to track the memory usage of each TiKV thread.
 + Default value: `true`
+
+## in-memory-engine <span class="version-mark">New in v8.5.0</span>
+
+TiKV MVCC in-memory engine (IME) configuration items related to the storage layer.
+
+### `enable` <span class="version-mark">New in v8.5.0</span>
+
+> **Note:**
+>
+> You can configure this configuration item in the configuration file, but cannot query it via SQL statements.
+
++ Whether to enable the in-memory engine to accelerate multi-version queries. For more information about the in-memory engine, see [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md)
++ Default value: `false` (in-memory engine is disabled)
++ It is recommended to configure at least 8 GiB of memory for the TiKV node, with 32 GiB or more for optimal performance.
++ If the available memory for the TiKV node is insufficient, the in-memory engine will not be enabled even if this configuration item is set to `true`. In such cases, check the TiKV log file for messages containing `"in-memory engine is disabled because"` to learn why the in-memory engine is not enabled.
+
+### `capacity` <span class="version-mark">New in v8.5.0</span>
+
+> **Note:**
+>
+> + After the in-memory engine is enabled, `block-cache.capacity` automatically decreases by 10%.
+> + If you manually configure `capacity`, `block-cache.capacity` does not automatically decrease. In this case, you need to manually adjust its value to avoid OOM.
+
++ Controls the maximum memory size that the in-memory engine can use. The maximum value is 5 GiB. You can manually configure it to use more memory.
++ Default value: 10% of the system memory.
+
+### `gc-run-interval` <span class="version-mark">New in v8.5.0</span>
+
++ Controls the time interval that the in-memory engine GC caches MVCC versions. Reducing this parameter can increase the GC frequency, and decrease the number of MVCC versions, but will increase CPU consumption for GC and increase the probability of in-memory engine cache miss.
++ Default value: `"3m"`
+
+### `mvcc-amplification-threshold` <span class="version-mark">New in v8.5.0</span>
+
++ Controls the threshold for MVCC read amplification when the in-memory engine selects and loads Regions. The default value is `10`, indicating that if reading a single row in a Region requires processing more than 10 MVCC versions, this Region might be loaded into the in-memory engine.
++ Default value: `10`

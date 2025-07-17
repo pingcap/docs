@@ -1,37 +1,48 @@
 ---
 title: CREATE [GLOBAL|SESSION] BINDING
-summary: TiDB 数据库中 CREATE BINDING 的使用。
+summary: Use of CREATE BINDING in TiDB database.
 ---
 
 # CREATE [GLOBAL|SESSION] BINDING
 
-此语句在 TiDB 中创建一个新的执行计划绑定。绑定可用于在不需要更改底层查询的情况下注入提示（hint）。
+This statement creates a new execution plan binding in TiDB. Binding can be used to inject a hint into a statement without requiring changes to the underlying query.
 
-`BINDING` 可以是 `GLOBAL` 或 `SESSION` 级别。默认为 `SESSION`。
+A `BINDING` can be on either a `GLOBAL` or `SESSION` basis. The default is `SESSION`.
 
-绑定的 SQL 语句会被参数化并存储在系统表中。当处理 SQL 查询时，只要参数化的 SQL 语句与系统表中的绑定语句一致，且系统变量 `tidb_use_plan_baselines` 设置为 `ON`（默认值），相应的优化器提示就可用。如果有多个可用的执行计划，优化器会选择成本最低的计划进行绑定。更多信息，请参见[创建绑定](/sql-plan-management.md#create-a-binding)。
+The bound SQL statement is parameterized and stored in the system table. When a SQL query is processed, as long as the parameterized SQL statement and a bound one in the system table are consistent and the system variable `tidb_use_plan_baselines` is set to `ON` (default), the corresponding optimizer hint is available. If multiple execution plans are available, the optimizer chooses to bind the plan with the least cost. For more information, see [Create a binding](/sql-plan-management.md#create-a-binding).
 
-## 语法
+## Synopsis
 
 ```ebnf+diagram
 CreateBindingStmt ::=
     'CREATE' GlobalScope 'BINDING' ( 'FOR' BindableStmt 'USING' BindableStmt
-|   'FROM' 'HISTORY' 'USING' 'PLAN' 'DIGEST' PlanDigest )
+|   'FROM' 'HISTORY' 'USING' 'PLAN' 'DIGEST' StringLiteralOrUserVariableList )
 
 GlobalScope ::=
     ( 'GLOBAL' | 'SESSION' )?
 
 BindableStmt ::=
     ( SelectStmt | UpdateStmt | InsertIntoStmt | ReplaceIntoStmt | DeleteStmt )
+
+StringLiteralOrUserVariableList ::=
+    ( StringLitOrUserVariable | StringLiteralOrUserVariableList ',' StringLitOrUserVariable )
+
+StringLiteralOrUserVariable ::=
+    ( stringLiteral | UserVariable )
 ```
 
 ****
 
-## 示例
+## Examples
 
-你可以根据 SQL 语句或历史执行计划创建绑定。
+You can create a binding according to a SQL statement or a historical execution plan.
 
-以下示例展示如何根据 SQL 语句创建绑定。
+When you create a binding according to a historical execution plan, you need to specify the corresponding Plan Digest:
+
+- You can use either the string literal or user variable of the string type to specify the Plan Digest.
+- You can specify multiple Plan Digests to create bindings for multiple statements at the same time. In this case, you can specify multiple strings, and include multiple digests in each string. Note that the strings or digests need to be separated by commas.
+
+The following example shows how to create a binding according to a SQL statement.
 
 {{< copyable "sql" >}}
 
@@ -135,46 +146,178 @@ mysql> EXPLAIN ANALYZE SELECT * FROM t1 WHERE b = 123;
 3 rows in set (0.01 sec)
 ```
 
-以下示例展示如何根据历史执行计划创建绑定。
+The following example shows how to create a binding according to a historical execution plan.
 
 ```sql
-mysql> CREATE TABLE t(id INT PRIMARY KEY , a INT, KEY(a));
-Query OK, 0 rows affected (0.06 sec)
+USE test;
+CREATE TABLE t1(a INT, b INT, c INT, INDEX ia(a));
+CREATE TABLE t2(a INT, b INT, c INT, INDEX ia(a));
+INSERT INTO t1 SELECT * FROM t2 WHERE a = 1;
+SELECT @@LAST_PLAN_FROM_BINDING;
+UPDATE /*+ INL_JOIN(t2) */ t1, t2 SET t1.a = 1 WHERE t1.b = t2.a;
+SELECT @@LAST_PLAN_FROM_BINDING;
+DELETE /*+ HASH_JOIN(t1) */ t1 FROM t1 JOIN t2 WHERE t1.b = t2.a;
+SELECT @@LAST_PLAN_FROM_BINDING;
+SELECT * FROM t1 WHERE t1.a IN (SELECT a FROM t2);
+SELECT @@LAST_PLAN_FROM_BINDING;
+```
 
-mysql> SELECT /*+ IGNORE_INDEX(t, a) */ * FROM t WHERE a = 1;
-Empty set (0.01 sec)
+Method 1:
 
-mysql> SELECT plan_digest FROM INFORMATION_SCHEMA.STATEMENTS_SUMMARY WHERE QUERY_SAMPLE_TEXT = 'SELECT /*+ IGNORE_INDEX(t, a) */ * FROM t WHERE a = 1';
-+------------------------------------------------------------------+
-| plan_digest                                                      |
-+------------------------------------------------------------------+
-| 4e3159169cc63c14b139a4e7d72eae1759875c9a9581f94bb2079aae961189cb |
-+------------------------------------------------------------------+
-1 row in set (0.01 sec)
+```sql
+SELECT query_sample_text, stmt_type, table_names, plan_digest FROM information_schema.statements_summary_history WHERE table_names LIKE '%test.t1%' AND stmt_type != 'CreateTable';
+CREATE GLOBAL BINDING FROM HISTORY USING PLAN DIGEST 'e72819cf99932f63a548156dbf433adda60e10337e89dcaa8638b4caf16f64d8,c291edc36b2482738d3389d335f37efc76290be2930330fe5034c5f4c42eeb36,8dc146249484f4a6ab219bfe9effa6b7a18aeed3764d49b610da61ac347ab914,73b2dec866595688ea416675f88ccb3456eb8e7443a79cd816695b688e07ac6b';
+```
 
-mysql> CREATE BINDING FROM HISTORY USING PLAN DIGEST '4e3159169cc63c14b139a4e7d72eae1759875c9a9581f94bb2079aae961189cb';
-Query OK, 0 rows affected (0.02 sec)
+Method 2:
 
-mysql> SELECT * FROM t WHERE a = 1;
-Empty set (0.01 sec)
+```sql
+SELECT @digests:=GROUP_CONCAT(plan_digest) FROM information_schema.statements_summary_history WHERE table_names LIKE '%test.t1%' AND stmt_type != 'CreateTable';
+CREATE GLOBAL BINDING FROM HISTORY USING PLAN DIGEST @digests;
+```
 
-mysql> SELECT @@LAST_PLAN_FROM_BINDING;
+```sql
+SHOW GLOBAL BINDINGS;
+INSERT INTO t1 SELECT * FROM t2 WHERE a = 1;
+SELECT @@LAST_PLAN_FROM_BINDING;
+UPDATE t1, t2 SET t1.a = 1 WHERE t1.b = t2.a;
+SELECT @@LAST_PLAN_FROM_BINDING;
+DELETE t1 FROM t1 JOIN t2 WHERE t1.b = t2.a;
+SELECT @@LAST_PLAN_FROM_BINDING;
+SELECT * FROM t1 WHERE t1.a IN (SELECT a FROM t2);
+SELECT @@LAST_PLAN_FROM_BINDING;
+```
+
+```sql
+> CREATE TABLE t1(a INT, b INT, c INT, INDEX ia(a));
+Query OK, 0 rows affected (0.048 sec)
+
+> CREATE TABLE t2(a INT, b INT, c INT, INDEX ia(a));
+Query OK, 0 rows affected (0.035 sec)
+
+> INSERT INTO t1 SELECT * FROM t2 WHERE a = 1;
+Query OK, 0 rows affected (0.002 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+> SELECT @@LAST_PLAN_FROM_BINDING;
++--------------------------+
+| @@LAST_PLAN_FROM_BINDING |
++--------------------------+
+|                        0 |
++--------------------------+
+1 row in set (0.001 sec)
+
+> UPDATE /*+ INL_JOIN(t2) */ t1, t2 SET t1.a = 1 WHERE t1.b = t2.a;
+Query OK, 0 rows affected (0.005 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+> SELECT @@LAST_PLAN_FROM_BINDING;
++--------------------------+
+| @@LAST_PLAN_FROM_BINDING |
++--------------------------+
+|                        0 |
++--------------------------+
+1 row in set (0.000 sec)
+
+> DELETE /*+ HASH_JOIN(t1) */ t1 FROM t1 JOIN t2 WHERE t1.b = t2.a;
+Query OK, 0 rows affected (0.003 sec)
+
+> SELECT @@LAST_PLAN_FROM_BINDING;
++--------------------------+
+| @@LAST_PLAN_FROM_BINDING |
++--------------------------+
+|                        0 |
++--------------------------+
+1 row in set (0.000 sec)
+
+> SELECT * FROM t1 WHERE t1.a IN (SELECT a FROM t2);
+Empty set (0.002 sec)
+
+> SELECT @@LAST_PLAN_FROM_BINDING;
++--------------------------+
+| @@LAST_PLAN_FROM_BINDING |
++--------------------------+
+|                        0 |
++--------------------------+
+1 row in set (0.001 sec)
+
+> SELECT @digests:=GROUP_CONCAT(plan_digest) FROM information_schema.statements_summary_history WHERE table_names LIKE '%test.t1%' AND stmt_type != 'CreateTable';
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| @digests:=GROUP_CONCAT(plan_digest)                                                                                                                                                                                                                                 |
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 73b2dec866595688ea416675f88ccb3456eb8e7443a79cd816695b688e07ac6b,8dc146249484f4a6ab219bfe9effa6b7a18aeed3764d49b610da61ac347ab914,c291edc36b2482738d3389d335f37efc76290be2930330fe5034c5f4c42eeb36,e72819cf99932f63a548156dbf433adda60e10337e89dcaa8638b4caf16f64d8 |
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.001 sec)
+
+> CREATE GLOBAL BINDING FROM HISTORY USING PLAN DIGEST @digests;
+Query OK, 0 rows affected (0.060 sec)
+
+> SHOW GLOBAL BINDINGS;
++----------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+-----------------+---------+------------------------------------------------------------------+------------------------------------------------------------------+
+| Original_sql                                                                                 | Bind_sql                                                                                                                                                                                                                               | Default_db | Status  | Create_time             | Update_time             | Charset | Collation       | Source  | Sql_digest                                                       | Plan_digest                                                      |
++----------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+-----------------+---------+------------------------------------------------------------------+------------------------------------------------------------------+
+| insert into `test` . `t1` select * from `test` . `t2` where `a` = ?                          | INSERT INTO `test`.`t1` SELECT /*+ use_index(@`sel_1` `test`.`t2` `ia`) no_order_index(@`sel_1` `test`.`t2` `ia`)*/ * FROM `test`.`t2` WHERE `a` = 1                                                                                   | test       | enabled | 2024-08-11 05:27:19.669 | 2024-08-11 05:27:19.669 | utf8    | utf8_general_ci | history | bd23e6af17e7b77b25383e50e258f0dece18583d19772f08caacb2021945a300 | e72819cf99932f63a548156dbf433adda60e10337e89dcaa8638b4caf16f64d8 |
+| update ( `test` . `t1` ) join `test` . `t2` set `t1` . `a` = ? where `t1` . `b` = `t2` . `a` | UPDATE /*+ inl_join(`test`.`t2`) use_index(@`upd_1` `test`.`t1` ) use_index(@`upd_1` `test`.`t2` `ia`) no_order_index(@`upd_1` `test`.`t2` `ia`)*/ (`test`.`t1`) JOIN `test`.`t2` SET `t1`.`a`=1 WHERE `t1`.`b` = `t2`.`a`             | test       | enabled | 2024-08-11 05:27:19.667 | 2024-08-11 05:27:19.667 | utf8    | utf8_general_ci | history | 987e91af17eb40e36fecfc0634cce0b6a736de02bb009091810f932804fc02e9 | c291edc36b2482738d3389d335f37efc76290be2930330fe5034c5f4c42eeb36 |
+| delete `test` . `t1` from `test` . `t1` join `test` . `t2` where `t1` . `b` = `t2` . `a`     | DELETE /*+ hash_join_build(`test`.`t2`) use_index(@`del_1` `test`.`t1` ) use_index(@`del_1` `test`.`t2` )*/ `test`.`t1` FROM `test`.`t1` JOIN `test`.`t2` WHERE `t1`.`b` = `t2`.`a`                                                    | test       | enabled | 2024-08-11 05:27:19.664 | 2024-08-11 05:27:19.664 | utf8    | utf8_general_ci | history | 70ef3d442d95c51020a76c7c86a3ab674258606d4dd24bbd16ac6f69d87a4316 | 8dc146249484f4a6ab219bfe9effa6b7a18aeed3764d49b610da61ac347ab914 |
+| select * from `test` . `t1` where `t1` . `a` in ( select `a` from `test` . `t2` )            | SELECT /*+ use_index(@`sel_1` `test`.`t1` ) stream_agg(@`sel_2`) use_index(@`sel_2` `test`.`t2` `ia`) order_index(@`sel_2` `test`.`t2` `ia`) agg_to_cop(@`sel_2`)*/ * FROM `test`.`t1` WHERE `t1`.`a` IN (SELECT `a` FROM `test`.`t2`) | test       | enabled | 2024-08-11 05:27:19.649 | 2024-08-11 05:27:19.649 | utf8    | utf8_general_ci | history | b58508a5e29d7889adf98cad50343d7a575fd32ad55dbdaa88e14ecde54f3d93 | 73b2dec866595688ea416675f88ccb3456eb8e7443a79cd816695b688e07ac6b |
++----------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+-----------------+---------+------------------------------------------------------------------+------------------------------------------------------------------+
+4 rows in set (0.001 sec)
+
+> INSERT INTO t1 SELECT * FROM t2 WHERE a = 1;
+Query OK, 0 rows affected (0.002 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+> SELECT @@LAST_PLAN_FROM_BINDING;
 +--------------------------+
 | @@LAST_PLAN_FROM_BINDING |
 +--------------------------+
 |                        1 |
 +--------------------------+
-1 row in set (0.01 sec)
+1 row in set (0.000 sec)
+
+> UPDATE t1, t2 SET t1.a = 1 WHERE t1.b = t2.a;
+Query OK, 0 rows affected (0.002 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+> SELECT @@LAST_PLAN_FROM_BINDING;
++--------------------------+
+| @@LAST_PLAN_FROM_BINDING |
++--------------------------+
+|                        1 |
++--------------------------+
+1 row in set (0.000 sec)
+
+> DELETE t1 FROM t1 JOIN t2 WHERE t1.b = t2.a;
+Query OK, 0 rows affected (0.002 sec)
+
+> SELECT @@LAST_PLAN_FROM_BINDING;
++--------------------------+
+| @@LAST_PLAN_FROM_BINDING |
++--------------------------+
+|                        1 |
++--------------------------+
+1 row in set (0.000 sec)
+
+> SELECT * FROM t1 WHERE t1.a IN (SELECT a FROM t2);
+Empty set (0.002 sec)
+
+> SELECT @@LAST_PLAN_FROM_BINDING;
++--------------------------+
+| @@LAST_PLAN_FROM_BINDING |
++--------------------------+
+|                        1 |
++--------------------------+
+1 row in set (0.002 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-该语句是 TiDB 对 MySQL 语法的扩展。
+This statement is a TiDB extension to MySQL syntax.
 
-## 另请参阅
+## See also
 
 * [DROP [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-drop-binding.md)
 * [SHOW [GLOBAL|SESSION] BINDINGS](/sql-statements/sql-statement-show-bindings.md)
 * [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
-* [优化器提示](/optimizer-hints.md)
-* [SQL 计划管理](/sql-plan-management.md)
+* [Optimizer Hints](/optimizer-hints.md)
+* [SQL Plan Management](/sql-plan-management.md)

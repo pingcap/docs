@@ -1,6 +1,6 @@
 ---
 title: TIDB_HOT_REGIONS
-summary: "Learn the `TIDB_HOT_REGIONS` information_schema table."
+summary: Learn the `TIDB_HOT_REGIONS` information_schema table.
 ---
 
 # TIDB_HOT_REGIONS
@@ -46,5 +46,5 @@ The description of columns in the `TIDB_HOT_REGIONS` table is as follows:
 * `REGION_ID`: The ID of the hot Region.
 * `TYPE`: The type of the hot Region.
 * `MAX_HOT_DEGREE`: The maximum hot degree of the Region.
-* `REGION_COUNT`: The number of hot Regions in the instance.
+* `REGION_COUNT`: The number of hot Regions in the instance. 
 * `FLOW_BYTES`: The number of bytes written and read in the Region.

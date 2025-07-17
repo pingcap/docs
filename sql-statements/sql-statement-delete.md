@@ -1,20 +1,20 @@
 ---
-title: DELETE | TiDB SQL 语句参考
-summary: TiDB 数据库中 DELETE 的使用概述。
+title: DELETE | TiDB SQL Statement Reference
+summary: An overview of the usage of DELETE for the TiDB database.
 ---
 
 # DELETE
 
-`DELETE` 语句用于从指定表中删除行。
+The `DELETE` statement removes rows from a specified table.
 
-## 语法图
+## Synopsis
 
 ```ebnf+diagram
 DeleteFromStmt ::=
     'DELETE' TableOptimizerHints PriorityOpt QuickOptional IgnoreOptional ( 'FROM' ( TableName TableAsNameOpt IndexHintListOpt WhereClauseOptional OrderByOptional LimitClause | TableAliasRefList 'USING' TableRefs WhereClauseOptional ) | TableAliasRefList 'FROM' TableRefs WhereClauseOptional )
 ```
 
-## 示例
+## Examples
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -51,11 +51,11 @@ mysql> SELECT * FROM t1;
 4 rows in set (0.00 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-TiDB 中的 `DELETE` 语句与 MySQL 完全兼容。如果发现任何兼容性差异，请[报告问题](https://docs.pingcap.com/tidb/stable/support)。
+The `DELETE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
-## 另请参阅
+## See also
 
 * [INSERT](/sql-statements/sql-statement-insert.md)
 * [SELECT](/sql-statements/sql-statement-select.md)

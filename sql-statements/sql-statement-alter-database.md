@@ -1,13 +1,13 @@
 ---
-title: ALTER DATABASE | TiDB SQL 语句参考
-summary: TiDB 数据库中 ALTER DATABASE 的使用概览。
+title: ALTER DATABASE | TiDB SQL Statement Reference
+summary: An overview of the usage of ALTER DATABASE for the TiDB database.
 ---
 
 # ALTER DATABASE
 
-`ALTER DATABASE` 用于指定或修改当前数据库的默认字符集和排序规则。`ALTER SCHEMA` 与 `ALTER DATABASE` 具有相同的效果。
+`ALTER DATABASE` is used to specify or modify the default character set and collation of the current database. `ALTER SCHEMA` has the same effect as `ALTER DATABASE`.
 
-## 语法
+## Synopsis
 
 ```ebnf+diagram
 AlterDatabaseStmt ::=
@@ -17,9 +17,9 @@ DatabaseOption ::=
     DefaultKwdOpt ( CharsetKw '='? CharsetName | 'COLLATE' '='? CollationName | 'ENCRYPTION' '='? EncryptionOpt )
 ```
 
-## 示例
+## Examples
 
-修改 test 数据库架构以使用 utf8mb4 字符集：
+Modify the test database schema to use the utf8mb4 character set:
 
 {{< copyable "sql" >}}
 
@@ -31,13 +31,13 @@ ALTER DATABASE test DEFAULT CHARACTER SET = utf8mb4;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-目前，TiDB 仅支持部分字符集和排序规则。详情请参见[字符集和排序规则支持](/character-set-and-collation.md)。
+Currently, TiDB only supports some character sets and collations. See [Character Set and Collation Support](/character-set-and-collation.md) for details.
 
-## MySQL 兼容性
+## MySQL compatibility
 
-TiDB 中的 `ALTER DATABASE` 语句与 MySQL 完全兼容。如果你发现任何兼容性差异，请[报告问题](https://docs.pingcap.com/tidb/stable/support)。
+The `ALTER DATABASE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
-## 另请参见
+## See also
 
 * [CREATE DATABASE](/sql-statements/sql-statement-create-database.md)
 * [SHOW DATABASES](/sql-statements/sql-statement-show-databases.md)

@@ -1,22 +1,22 @@
 ---
-title: TiFlash 延迟物化
-summary: 介绍如何使用 TiFlash 延迟物化功能加速 OLAP 场景下的查询。
+title: TiFlash Late Materialization
+summary: Describe how to use the TiFlash late materialization feature to accelerate queries in OLAP scenarios.
 ---
 
-# TiFlash 延迟物化
+# TiFlash Late Materialization
 
-> **注意：**
+> **Note:**
 >
-> TiFlash 延迟物化在[快速扫描模式](/tiflash/use-fastscan.md)下不生效。
+> TiFlash late materialization does not take effect in the [fast scan mode](/tiflash/use-fastscan.md).
 
-TiFlash 延迟物化是一种用于加速 OLAP 场景查询的优化方法。你可以使用 [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700) 系统变量来控制是否启用或禁用 TiFlash 延迟物化。
+TiFlash late materialization is an optimization method to accelerate queries in OLAP scenarios. You can use the [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700) system variable to control whether to enable or disable TiFlash late materialization.
 
-- 当禁用时，为了处理带有过滤条件（`WHERE` 子句）的 `SELECT` 语句，TiFlash 会读取查询所需的所有列的数据，然后根据查询条件进行过滤和聚合。
-- 当启用时，TiFlash 支持将部分过滤条件下推到 TableScan 算子。也就是说，TiFlash 首先扫描与下推到 TableScan 算子的过滤条件相关的列数据，过滤出满足条件的行，然后再扫描这些行的其他列数据进行进一步计算，从而减少数据处理的 IO 扫描和计算。
+- When it is disabled, to process a `SELECT` statement with filter conditions (`WHERE` clause), TiFlash reads all the data from the columns required by the query, and then filters and aggregates the data based on the query conditions.
+- When it is enabled, TiFlash supports pushing down part of the filter conditions to the TableScan operator. That is, TiFlash first scans the column data related to the filter conditions that are pushed down to the TableScan operator, filters the rows that meet the condition, and then scans the other column data of these rows for further calculation, thereby reducing IO scans and computations of data processing.
 
-为了提高 OLAP 场景下某些查询的性能，从 v7.1.0 开始，TiFlash 延迟物化功能默认启用。TiDB 优化器可以根据统计信息和过滤条件决定下推哪些过滤条件，并优先下推过滤率高的过滤条件。有关详细算法，请参见 [RFC 文档](https://github.com/pingcap/tidb/tree/release-8.1/docs/design/2022-12-06-support-late-materialization.md)。
+To improve the performance of certain queries in OLAP scenarios, starting from v7.1.0, the TiFlash late materialization feature is enabled by default. The TiDB optimizer can determine which filter conditions to be pushed down based on statistics and filter conditions, and prioritize pushing down the filter conditions with high filtration rates. For detailed algorithms, see the [RFC document](https://github.com/pingcap/tidb/tree/release-8.5/docs/design/2022-12-06-support-late-materialization.md).
 
-例如：
+For example:
 
 ```sql
 EXPLAIN SELECT a, b, c FROM t1 WHERE a < 1;
@@ -32,11 +32,11 @@ EXPLAIN SELECT a, b, c FROM t1 WHERE a < 1;
 +-------------------------+----------+--------------+---------------+-------------------------------------------------------+
 ```
 
-在这个例子中，过滤条件 `a < 1` 被下推到 TableScan 算子。TiFlash 首先读取列 `a` 的所有数据，然后过滤出满足 `a < 1` 条件的行。接下来，TiFlash 从这些过滤后的行中读取列 `b` 和 `c`。
+In this example, the filter condition `a < 1` is pushed down to the TableScan operator. TiFlash first reads all data from column `a`, and then filters the rows that meet the `a < 1` condition. Next, TiFlash reads columns `b` and `c` from these filtered rows.
 
-## 启用或禁用 TiFlash 延迟物化
+## Enable or disable TiFlash late materialization
 
-默认情况下，`tidb_opt_enable_late_materialization` 系统变量在会话和全局级别都为 `ON`，这意味着 TiFlash 延迟物化功能已启用。你可以使用以下语句查看相应的变量信息：
+By default, the `tidb_opt_enable_late_materialization` system variable is `ON` at both the session and global levels, which means that the TiFlash late materialization feature is enabled. You can use the following statement to view the corresponding variable information:
 
 ```sql
 SHOW VARIABLES LIKE 'tidb_opt_enable_late_materialization';
@@ -62,23 +62,23 @@ SHOW GLOBAL VARIABLES LIKE 'tidb_opt_enable_late_materialization';
 +--------------------------------------+-------+
 ```
 
-你可以在会话级别或全局级别修改 `tidb_opt_enable_late_materialization` 变量。
+You can modify the `tidb_opt_enable_late_materialization` variable at the session level or at the global level.
 
-- 要在当前会话中禁用 TiFlash 延迟物化，使用以下语句：
+- To disable TiFlash late materialization in the current session, use the following statement:
 
     ```sql
     SET SESSION tidb_opt_enable_late_materialization=OFF;
     ```
 
-- 要在全局级别禁用 TiFlash 延迟物化，使用以下语句：
+- To disable TiFlash late materialization at the global level, use the following statement:
 
     ```sql
     SET GLOBAL tidb_opt_enable_late_materialization=OFF;
     ```
 
-    设置后，在新会话中 `tidb_opt_enable_late_materialization` 变量在会话和全局级别都将默认禁用。
+    After this setting, the `tidb_opt_enable_late_materialization` variable will be enabled by default for both session and global levels in new sessions.
 
-要启用 TiFlash 延迟物化，使用以下语句：
+To enable TiFlash late materialization, use the following statements:
 
 ```sql
 SET SESSION tidb_opt_enable_late_materialization=ON;
@@ -88,12 +88,12 @@ SET SESSION tidb_opt_enable_late_materialization=ON;
 SET GLOBAL tidb_opt_enable_late_materialization=ON;
 ```
 
-## 实现机制
+## Implementation mechanism
 
-当过滤条件下推到 TableScan 算子时，TableScan 算子的执行过程主要包括以下步骤：
+When filter conditions are pushed down to the TableScan operator, the execution process of the TableScan operator mainly includes the following steps:
 
-1. 读取 `<handle, del_mark, version>` 三列，执行多版本并发控制（MVCC）过滤，然后生成 MVCC Bitmap。
-2. 读取与过滤条件相关的列，过滤出满足条件的行，然后生成 Filter Bitmap。
-3. 对 MVCC Bitmap 和 Filter Bitmap 执行 `AND` 操作，生成 Final Bitmap。
-4. 根据 Final Bitmap 读取剩余列的对应行。
-5. 合并步骤 2 和步骤 4 中读取的数据，然后返回结果。
+1. Reads the three columns `<handle, del_mark, version>`, performs multi-version concurrency control (MVCC) filtering, and then generates the MVCC Bitmap.
+2. Reads the columns related to the filter conditions, filters the rows that meet the conditions, and then generates the Filter Bitmap.
+3. Performs an `AND` operation between the MVCC Bitmap and Filter Bitmap to generate the Final Bitmap.
+4. Reads the corresponding rows of the remaining columns according to the Final Bitmap.
+5. Merges the data read in steps 2 and 4, and then returns the results.

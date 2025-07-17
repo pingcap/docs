@@ -1,11 +1,11 @@
 ---
 title: MEMORY_USAGE_OPS_HISTORY
-summary: "了解 `MEMORY_USAGE_OPS_HISTORY` information_schema 系统表。"
+summary: Learn the `MEMORY_USAGE_OPS_HISTORY` information_schema system table.
 ---
 
 # MEMORY_USAGE_OPS_HISTORY
 
-`MEMORY_USAGE_OPS_HISTORY` 表描述了当前 TiDB 实例的内存相关操作历史记录和执行依据。
+The `MEMORY_USAGE_OPS_HISTORY` table describes the history of memory-related operations and the execution basis of the current TiDB instance.
 
 ```sql
 USE information_schema;
@@ -47,17 +47,17 @@ SELECT * FROM information_schema.memory_usage_ops_history;
 2 rows in set (0.002 sec)
 ```
 
-`MEMORY_USAGE_OPS_HISTORY` 表中的列说明如下：
+The columns in the `MEMORY_USAGE_OPS_HISTORY` table are described as follows:
 
-* `TIME`：会话终止的时间戳。
-* `OPS`："SessionKill"
-* `MEMORY_LIMIT`：终止时 TiDB 的内存使用限制，单位为字节。其值与系统变量 `tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) 的值相同。
-* `MEMORY_CURRENT`：TiDB 当前的内存使用量，单位为字节。
-* `PROCESSID`：被终止会话的连接 ID。
-* `MEM`：被终止会话的内存使用量，单位为字节。
-* `DISK`：被终止会话的磁盘使用量，单位为字节。
-* `CLIENT`：被终止会话的客户端连接地址。
-* `DB`：被终止会话连接的数据库名称。
-* `USER`：被终止会话的用户名。
-* `SQL_DIGEST`：被终止会话中正在执行的 SQL 语句的摘要。
-* `SQL_TEXT`：被终止会话中正在执行的 SQL 语句。
+* `TIME`: The timestamp when the session is terminated.
+* `OPS`: "SessionKill"
+* `MEMORY_LIMIT`: The memory usage limit of TiDB at the time of termination, in bytes. Its value is the same as that of the system variable `tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640).
+* `MEMORY_CURRENT`: The current memory usage of TiDB, in bytes.
+* `PROCESSID`: The connection ID of the terminated session.
+* `MEM`: The memory usage of the terminated session, in bytes.
+* `DISK`: The disk usage of the terminated session, in bytes.
+* `CLIENT`: The client connection address of the terminated session.
+* `DB`: The name of the database connected to the terminated session.
+* `USER`: The user name of the terminated session.
+* `SQL_DIGEST`: The digest of the SQL statement being executed in the terminated session.
+* `SQL_TEXT`: The SQL statement being executed in the terminated session.

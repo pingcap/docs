@@ -1,7 +1,6 @@
 ---
 title: Data Migration Overview
 summary: Learn the overview of data migration scenarios and the solutions.
-aliases: ['/tidb/stable/migrate-full-data-from-mysql']
 ---
 
 # Data Migration Overview
@@ -44,6 +43,12 @@ Suppose that your application uses MySQL shards for data storage, and you need t
 If the data size of the sharded tables is large (for example, larger than 1 TiB), and you do not allow other applications to write to TiDB during the migration period, you can use TiDB Lightning to quickly merge and import the sharded tables. Then, you can use DM to replicate incremental sharding data (binlog) based on your application needs.
 
 - [Migrate and Merge MySQL Shards of Large Datasets to TiDB](/migrate-large-mysql-shards-to-tidb.md)
+
+## Migrate data from Vitess to TiDB
+
+To migrate data from Vitess to TiDB, the following guide is available:
+
+- [Migrate Data from Vitess to TiDB](/migrate-from-vitess.md)
 
 ## Migrate data from files to TiDB
 

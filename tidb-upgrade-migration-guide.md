@@ -31,13 +31,13 @@ Before migrating and upgrading, evaluate the compatibility of relevant component
 
 - Verify TiCDC compatibility:
 
-    - **Table schema requirements**: ensure that tables to be replicated contain valid indexes. For more information, see [TiCDC valid index](/ticdc/ticdc-overview.md#best-practices).
+    - **Table schema requirements**: ensure that tables to be replicated contain valid indexes. For more information, see [TiCDC valid index](/ticdc/ticdc-overview.md#valid-index).
     - **Feature limitations**: TiCDC does not support Sequence or TiFlash DDL replication. For more information, see [TiCDC unsupported scenarios](/ticdc/ticdc-overview.md#unsupported-scenarios).
     - **Best practices**: avoid executing DDL operations on the upstream cluster of TiCDC during switchover.
 
 - Verify BR compatibility:
 
-    - Review the compatibility matrix of BR full backup. For more information, see [BR version compatibility matrix](/br/backup-and-restore-overview.md#version-compatibility).
+    - Review the compatibility matrix of BR full backup. For more information, see [BR version compatibility matrix](/br/backup-and-restore-overview.md#br-version-compatibility-matrix-between-tidb-v650-and-v850).
     - Check the known limitations of BR backup and restore. For more information, see [BR usage restrictions](/br/backup-and-restore-overview.md#restrictions).
 
 - Check the health status of the cluster, such as [Region](/glossary.md#regionpeerraft-group) health and node resource utilization.
@@ -156,7 +156,7 @@ During incremental data replication, continuously monitor the replication channe
 - Throughput health: ensure that `Sink flush rows/s` consistently exceeds the business write rate.
 - Errors and alerts: regularly check TiCDC logs and alert information.
 - (Optional) Test data replication: update test data and verify that Changefeed correctly replicates it to the new cluster.
-- (Optional) Adjust the TiCDC configuration item [`gc-ttl`](/ticdc/ticdc-server-config.md) (defaults to 24 hours).
+- (Optional) Adjust the TiCDC configuration item [`gc-ttl`](/ticdc/ticdc-server-config.md#gc-ttl) (defaults to 24 hours).
 
     If a replication task is unavailable or interrupted and cannot be resolved in time, `gc-ttl` ensures that data needed by TiCDC is retained in TiKV without being cleaned by garbage collection (GC). If this duration is exceeded, the replication task enters a `failed` state and cannot recover. In this case, PD's GC safe point continues advancing, requiring a new backup to restart the process.
 

@@ -1,19 +1,19 @@
 ---
-title: 性能调优最佳实践
-summary: 介绍 TiDB 性能调优的最佳实践。
+title: Performance Tuning Best Practices
+summary: Introduces the best practices for tuning TiDB performance.
 ---
 
-# 性能调优最佳实践
+# Performance Tuning Best Practices
 
-本文介绍使用 TiDB 数据库的一些最佳实践。
+This document introduces some best practices for using TiDB databases.
 
-## DML 最佳实践
+## DML best practices
 
-本节介绍在使用 TiDB 的 DML 时涉及的最佳实践。
+This section describes the best practices involved when you use DML with TiDB.
 
-### 使用多行语句
+### Use multi-row statements
 
-当你需要修改表的多行数据时，建议使用多行语句：
+When you need to modify multiple rows of table, it is recommended to use multi-row statements:
 
 ```sql
 INSERT INTO t VALUES (1, 'a'), (2, 'b'), (3, 'c');
@@ -21,7 +21,7 @@ INSERT INTO t VALUES (1, 'a'), (2, 'b'), (3, 'c');
 DELETE FROM t WHERE id IN (1, 2, 3);
 ```
 
-不建议使用多个单行语句：
+It is not recommended to use multiple single-row statements:
 
 ```sql
 INSERT INTO t VALUES (1, 'a');
@@ -33,9 +33,9 @@ DELETE FROM t WHERE id = 2;
 DELETE FROM t WHERE id = 3;
 ```
 
-### 使用 `PREPARE`
+### Use `PREPARE`
 
-当你需要多次执行同一个 SQL 语句时，建议使用 `PREPARE` 语句以避免重复解析 SQL 语法的开销。
+When you need to execute a SQL statement for multiple times, it is recommended to use the `PREPARE` statement to avoid the overhead of repeatedly parsing the SQL syntax.
 
 <SimpleTab>
 <div label="Golang">
@@ -78,129 +78,129 @@ public void batchInsert(Connection connection) throws SQLException {
 </div>
 </SimpleTab>
 
-不要重复执行 `PREPARE` 语句。否则，执行效率无法得到提升。
+Do not execute the `PREPARE` statement repeatedly. Otherwise, the execution efficiency cannot be improved.
 
-### 只查询需要的列
+### Only query the columns you need
 
-如果你不需要所有列的数据，不要使用 `SELECT *` 返回所有列数据。以下查询效率不高：
+If you do not need data from all columns, do not use `SELECT *` to return all columns data. The following query is inefficient:
 
 ```sql
 SELECT * FROM books WHERE title = 'Marian Yost';
 ```
 
-你应该只查询需要的列。例如：
+You should only query the columns you need. For example:
 
 ```sql
 SELECT title, price FROM books WHERE title = 'Marian Yost';
 ```
 
-### 使用批量删除
+### Use bulk delete
 
-当你删除大量数据时，建议使用[批量删除](/develop/dev-guide-delete-data.md#bulk-delete)。
+When you delete a large amount of data, it is recommended to use [bulk delete](/develop/dev-guide-delete-data.md#bulk-delete).
 
-### 使用批量更新
+### Use bulk update
 
-当你更新大量数据时，建议使用[批量更新](/develop/dev-guide-update-data.md#bulk-update)。
+When you update a large amount of data, it is recommended to use [bulk update](/develop/dev-guide-update-data.md#bulk-update).
 
-### 使用 `TRUNCATE` 而不是 `DELETE` 删除全表数据
+### Use `TRUNCATE` instead of `DELETE` for full table data
 
-当你需要删除表中的所有数据时，建议使用 `TRUNCATE` 语句：
+When you need to delete all data from a table, it is recommended to use the `TRUNCATE` statement:
 
 ```sql
 TRUNCATE TABLE t;
 ```
 
-不建议使用 `DELETE` 删除全表数据：
+It is not recommended to use `DELETE` for full table data:
 
 ```sql
 DELETE FROM t;
 ```
 
-## DDL 最佳实践
+## DDL best practices
 
-本节介绍使用 TiDB 的 DDL 时涉及的最佳实践。
+This section describes the best practices involved when using TiDB's DDL.
 
-### 主键最佳实践
+### Primary key best practices
 
-请参阅[选择主键时需要遵循的规则](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key)。
+See the [rules to follow when selecting the primary key](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key).
 
-## 索引最佳实践
+## Index best practices
 
-请参阅[索引的最佳实践](/develop/dev-guide-index-best-practice.md)。
+See [Index Best Practices](/develop/dev-guide-index-best-practice.md).
 
-### 添加索引最佳实践
+### Add index best practices
 
-TiDB 支持在线添加索引操作。你可以使用 [ADD INDEX](/sql-statements/sql-statement-add-index.md) 或 [CREATE INDEX](/sql-statements/sql-statement-create-index.md) 语句添加索引。这不会阻塞表中的数据读写。你可以通过修改以下系统变量来调整索引添加操作的 `re-organize` 阶段的并发度和批量大小：
+TiDB supports the online index add operation. You can use [ADD INDEX](/sql-statements/sql-statement-add-index.md) or [CREATE INDEX](/sql-statements/sql-statement-create-index.md) statement to add an index. It does not block data reads and writes in the table. You can adjust the concurrency and the batch size during the `re-organize` phase of the index add operation by modifying the following system variables:
 
 * [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)
 * [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)
 
-为了减少对在线应用的影响，添加索引操作的默认速度较慢。当添加索引操作的目标列只涉及读取负载或与在线工作负载没有直接关系时，你可以适当增加上述变量的值来加快添加索引操作：
+To reduce the impact on the online application, the default speed of add index operation is slow. When the target column of add index operation only involves read load or is not directly related to online workload, you can appropriately increase the value of the above variables to speed up the add index operation:
 
 ```sql
 SET @@global.tidb_ddl_reorg_worker_cnt = 16;
 SET @@global.tidb_ddl_reorg_batch_size = 4096;
 ```
 
-当添加索引操作的目标列经常被更新（包括 `UPDATE`、`INSERT` 和 `DELETE`）时，增加上述变量会导致更多的写入冲突，这会影响在线工作负载。相应地，由于不断重试，添加索引操作可能需要很长时间才能完成。在这种情况下，建议减小上述变量的值以避免与在线应用发生写入冲突：
+When the target column of the add index operation is updated frequently (including `UPDATE`, `INSERT` and `DELETE`), increasing the above variables causes more write conflicts, which impacts the online workload. Accordingly, the add index operation might take a long time to complete due to constant retries. In this case, it is recommended to decrease the value of the above variables to avoid write conflicts with the online application:
 
 ```sql
 SET @@global.tidb_ddl_reorg_worker_cnt = 4;
 SET @@global.tidb_ddl_reorg_batch_size = 128;
 ```
 
-## 事务冲突
+## Transaction conflicts
 
 <CustomContent platform="tidb">
 
-关于如何定位和解决事务冲突，请参阅[故障诊断：锁冲突](/troubleshoot-lock-conflicts.md)。
+For how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-关于如何定位和解决事务冲突，请参阅[故障诊断：锁冲突](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts)。
+For how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts).
 
 </CustomContent>
 
-## 使用 TiDB 开发 Java 应用程序的最佳实践
+## Best practices for developing Java applications with TiDB
 
 <CustomContent platform="tidb">
 
-请参阅[使用 TiDB 开发 Java 应用程序的最佳实践](/best-practices/java-app-best-practices.md)。
+See [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-请参阅[使用 TiDB 开发 Java 应用程序的最佳实践](https://docs.pingcap.com/tidb/stable/java-app-best-practices)。
+See [Best Practices for Developing Java Applications with TiDB](https://docs.pingcap.com/tidb/stable/java-app-best-practices).
 
 </CustomContent>
 
-### 另请参阅
+### See also
 
 <CustomContent platform="tidb">
 
-- [高并发写入最佳实践](/best-practices/high-concurrency-best-practices.md)
+- [Best Practices for High-Concurrency Writes](/best-practices/high-concurrency-best-practices.md)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- [高并发写入最佳实践](https://docs.pingcap.com/tidb/stable/high-concurrency-best-practices)
+- [Best Practices for High-Concurrency Writes](https://docs.pingcap.com/tidb/stable/high-concurrency-best-practices)
 
 </CustomContent>
 
-## 需要帮助？
+## Need help?
 
 <CustomContent platform="tidb">
 
-在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](/support.md)。
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](https://tidb.support.pingcap.com/)。
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
 
 </CustomContent>

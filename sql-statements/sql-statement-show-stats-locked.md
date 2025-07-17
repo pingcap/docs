@@ -1,22 +1,22 @@
 ---
 title: SHOW STATS_LOCKED
-summary: TiDB 数据库中 SHOW STATS_LOCKED 的使用概览。
+summary: An overview of the usage of SHOW STATS_LOCKED for the TiDB database.
 ---
 
 # SHOW STATS_LOCKED
 
-`SHOW STATS_LOCKED` 显示统计信息被锁定的表。
+`SHOW STATS_LOCKED` shows the tables whose statistics are locked.
 
-目前，`SHOW STATS_LOCKED` 语句返回以下列：
+Currently, the `SHOW STATS_LOCKED` statement returns the following columns:
 
-| 列名 | 描述            |
+| Column name | Description            |
 | -------- | ------------- |
-| `Db_name` | 数据库名称 |
-| `Table_name` | 表名称 |
-| `Partition_name` | 分区名称 |
-| `Status` | 统计信息状态，如 `locked` |
+| `Db_name` | The database name |
+| `Table_name` | The table name |
+| `Partition_name` | The partition name |
+| `Status` | The statistics status, such as `locked` |
 
-## 语法图
+## Synopsis
 
 ```ebnf+diagram
 ShowStatsLockedStmt ::= 'SHOW' 'STATS_LOCKED' ShowLikeOrWhereOpt
@@ -24,9 +24,9 @@ ShowStatsLockedStmt ::= 'SHOW' 'STATS_LOCKED' ShowLikeOrWhereOpt
 ShowLikeOrWhereOpt ::= 'LIKE' SimpleExpr | 'WHERE' Expression
 ```
 
-## 示例
+## Examples
 
-创建表 `t` 并向其中插入数据。当表 `t` 的统计信息未被锁定时，可以成功执行 `ANALYZE` 语句。
+Create table `t`, and insert data into it. When the statistics of table `t` are not locked, the `ANALYZE` statement can be successfully executed.
 
 ```sql
 mysql> CREATE TABLE t(a INT, b INT);
@@ -48,7 +48,7 @@ mysql> SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-锁定表 `t` 的统计信息并执行 `SHOW STATS_LOCKED`。输出显示表 `t` 的统计信息已被锁定。
+Lock the statistics of table `t` and execute `SHOW STATS_LOCKED`. The output shows that the statistics of table `t` have been locked.
 
 ```sql
 mysql> LOCK STATS t;
@@ -63,12 +63,12 @@ mysql> SHOW STATS_LOCKED;
 1 row in set (0.01 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-该语句是 TiDB 对 MySQL 语法的扩展。
+This statement is a TiDB extension to MySQL syntax.
 
-## 另请参阅
+## See also
 
-* [统计信息](/statistics.md#lock-statistics)
+* [Statistics](/statistics.md#lock-statistics)
 * [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
 * [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)

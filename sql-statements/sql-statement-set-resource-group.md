@@ -1,17 +1,17 @@
 ---
 title: SET RESOURCE GROUP
-summary: TiDB 数据库中 SET RESOURCE GROUP 的使用概述。
+summary: An overview of the usage of SET RESOURCE GROUP in the TiDB database.
 ---
 
 # SET RESOURCE GROUP
 
-`SET RESOURCE GROUP` 用于设置当前会话的资源组。
+`SET RESOURCE GROUP` is used to set the resource group for the current session.
 
-> **注意：**
+> **Note:**
 >
-> 此功能在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
-## 语法图
+## Synopsis
 
 **SetResourceGroupStmt:**
 
@@ -24,9 +24,16 @@ ResourceGroupName ::=
 |   "DEFAULT"
 ```
 
-## 示例
+## Privilege
 
-创建用户 `user1`，创建两个资源组 `rg1` 和 `rg2`，并将用户 `user1` 绑定到资源组 `rg1`。
+Executing this statement requires the following configuration and privilege:
+
+1. The system variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) is set to `ON`.
+2. When the system variable [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) is set to `ON`, you need to have the `SUPER` or `RESOURCE_GROUP_ADMIN` or `RESOURCE_GROUP_USER` privilege; when it is set to `OFF`, none of these privileges are required.
+
+## Examples
+
+Create a user `user1`, create two resource groups `rg1` and `rg2`, and bind the user `user1` to the resource group `rg1`.
 
 ```sql
 CREATE USER 'user1';
@@ -34,7 +41,7 @@ CREATE RESOURCE GROUP 'rg1' RU_PER_SEC = 1000;
 ALTER USER 'user1' RESOURCE GROUP `rg1`;
 ```
 
-使用 `user1` 登录并查看当前用户绑定的资源组。
+Use `user1` to log in and view the resource group bound to the current user.
 
 ```sql
 SELECT CURRENT_RESOURCE_GROUP();
@@ -49,7 +56,7 @@ SELECT CURRENT_RESOURCE_GROUP();
 1 row in set (0.00 sec)
 ```
 
-执行 `SET RESOURCE GROUP` 将当前会话的资源组设置为 `rg2`。
+Execute `SET RESOURCE GROUP` to set the resource group for the current session to `rg2`.
 
 ```sql
 SET RESOURCE GROUP `rg2`;
@@ -65,7 +72,7 @@ SELECT CURRENT_RESOURCE_GROUP();
 1 row in set (0.00 sec)
 ```
 
-执行 `SET RESOURCE GROUP` 指定当前会话使用默认资源组。
+Execute `SET RESOURCE GROUP` to specify the current session to use the default resource group.
 
 ```sql
 SET RESOURCE GROUP `default`;
@@ -81,13 +88,13 @@ SELECT CURRENT_RESOURCE_GROUP();
 1 row in set (0.00 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-MySQL 也支持 [SET RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/set-resource-group.html)。但是可接受的参数与 TiDB 的不同，它们不兼容。
+MySQL also supports [SET RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/set-resource-group.html). But the accepted parameters are different from that of TiDB. They are not compatible.
 
-## 另请参阅
+## See also
 
 * [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
 * [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
 * [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
-* [资源控制](/tidb-resource-control.md)
+* [Resource Control](/tidb-resource-control-ru-groups.md)

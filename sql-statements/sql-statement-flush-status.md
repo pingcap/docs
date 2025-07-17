@@ -1,13 +1,13 @@
 ---
-title: FLUSH STATUS | TiDB SQL 语句参考
-summary: TiDB 数据库中 FLUSH STATUS 的使用概述。
+title: FLUSH STATUS | TiDB SQL Statement Reference
+summary: An overview of the usage of FLUSH STATUS for the TiDB database.
 ---
 
 # FLUSH STATUS
 
-此语句是为了与 MySQL 兼容而包含的。它对 TiDB 没有任何影响，因为 TiDB 使用 Prometheus 和 Grafana 进行集中式指标收集，而不是使用 `SHOW STATUS`。
+This statement is included for compatibility with MySQL. It has no effect on TiDB, which uses Prometheus and Grafana for centralized metrics collection instead of `SHOW STATUS`.
 
-## 语法概要
+## Synopsis
 
 ```ebnf+diagram
 FlushStmt ::=
@@ -25,7 +25,7 @@ FlushOption ::=
 |   TableOrTables TableNameListOpt WithReadLockOpt
 ```
 
-## 示例
+## Examples
 
 ```sql
 mysql> show status;
@@ -71,11 +71,11 @@ mysql> show status;
 6 rows in set (0.00 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-* 此语句与 MySQL 兼容。
+* This statement is compatible with MySQL.
 
-## 另请参阅
+## See also
 
 * [SHOW \[GLOBAL|SESSION\] STATUS](/sql-statements/sql-statement-show-status.md)
-* [服务器状态变量](/status-variables.md)
+* [Server Status Variables](/status-variables.md)

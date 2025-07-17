@@ -1,9 +1,9 @@
 ---
-title: Best Practices for TiKV Performance Tuning with Massive Regions
+title: Best Practices for Tuning TiKV Performance with Massive Regions
 summary: TiKV performance tuning involves reducing the number of Regions and messages, increasing Raftstore concurrency, enabling Hibernate Region and Region Merge, adjusting Raft base tick interval, increasing TiKV instances, and adjusting Region size. Other issues include slow PD leader switching and outdated PD routing information.
 ---
 
-# Best Practices for TiKV Performance Tuning with Massive Regions
+# Best Practices for Tuning TiKV Performance with Massive Regions
 
 In TiDB, data is split into Regions, each storing data for a specific key range. These Regions are distributed among multiple TiKV instances. As data is written into a cluster, millions of Regions might be created. Too many Regions on a single TiKV instance can bring a heavy burden to the cluster and affect its performance.
 
@@ -94,8 +94,8 @@ Enable `Region Merge` by configuring the following parameters:
 {{< copyable "" >}}
 
 ```
-config set max-merge-region-size 20
-config set max-merge-region-keys 200000
+config set max-merge-region-size 54
+config set max-merge-region-keys 540000
 config set merge-schedule-limit 8
 ```
 
@@ -137,7 +137,11 @@ If Region followers have not received the heartbeat from the leader within the `
 
 ### Method 6: Adjust Region size
 
-The default size of a Region is 96 MiB, and you can reduce the number of Regions by setting Regions to a larger size. For more information, see [Tune Region Performance](/tune-region-performance.md).
+The default size of a Region is 256 MiB, and you can reduce the number of Regions by setting Regions to a larger size. For more information, see [Tune Region Performance](/tune-region-performance.md).
+
+> **Note:**
+>
+> Starting from v8.4.0, the default Region size is increased from 96 MiB to 256 MiB. If you have not modified the Region size manually, when you upgrade a TiKV cluster to v8.4.0 or later,  the TiKV cluster's default Region size will automatically be updated to 256 MiB.
 
 > **Note:**
 >

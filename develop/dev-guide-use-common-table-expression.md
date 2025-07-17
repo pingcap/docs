@@ -1,27 +1,27 @@
 ---
-title: 公共表表达式
-summary: 了解 TiDB 的 CTE 功能，它可以帮助你更高效地编写 SQL 语句。
+title: Common Table Expression
+summary: Learn the CTE feature of TiDB, which help you write SQL statements more efficiently.
 ---
 
-# 公共表表达式
+# Common Table Expression
 
-在某些事务场景中，由于应用程序的复杂性，你可能需要编写长达 2,000 行的单个 SQL 语句。该语句可能包含大量聚合和多层子查询嵌套。维护这样一个长 SQL 语句可能会成为开发人员的噩梦。
+In some transaction scenarios, due to application complexity, you might need to write a single SQL statement of up to 2,000 lines. The statement probably contains a lot of aggregations and multi-level subquery nesting. Maintaining such a long SQL statement can be a developer's nightmare.
 
-为了避免这样的长 SQL 语句，你可以使用[视图](/develop/dev-guide-use-views.md)来简化查询，或使用[临时表](/develop/dev-guide-use-temporary-tables.md)来缓存中间查询结果。
+To avoid such a long SQL statement, you can simplify queries by using [Views](/develop/dev-guide-use-views.md) or cache intermediate query results by using [Temporary tables](/develop/dev-guide-use-temporary-tables.md).
 
-本文介绍 TiDB 中的公共表表达式（Common Table Expression，CTE）语法，这是重用查询结果的一种更便捷的方式。
+This document introduces the Common Table Expression (CTE) syntax in TiDB, which is a more convenient way to reuse query results.
 
-自 TiDB v5.1 起，TiDB 支持 ANSI SQL99 标准的 CTE 和递归。使用 CTE，你可以更高效地编写复杂应用逻辑的 SQL 语句，并且更容易维护代码。
+Since TiDB v5.1, TiDB supports the CTE of the ANSI SQL99 standard and recursion. With CTE, you can write SQL statements for complex application logic more efficiently and maintain the code much easier.
 
-## 基本用法
+## Basic use
 
-公共表表达式（CTE）是一个临时结果集，可以在 SQL 语句中多次引用，以提高语句的可读性和执行效率。你可以使用 [`WITH`](/sql-statements/sql-statement-with.md) 语句来使用 CTE。
+A Common Table Expression (CTE) is a temporary result set that can be referred to multiple times within a SQL statement to improve the statement readability and execution efficiency. You can apply the [`WITH`](/sql-statements/sql-statement-with.md) statement to use CTE.
 
-公共表表达式可以分为两种类型：非递归 CTE 和递归 CTE。
+Common Table Expressions can be classified into two types: non-recursive CTE and recursive CTE.
 
-### 非递归 CTE
+### Non-recursive CTE
 
-非递归 CTE 可以使用以下语法定义：
+Non-recursive CTE can be defined using the following syntax:
 
 ```sql
 WITH <query_name> AS (
@@ -30,12 +30,12 @@ WITH <query_name> AS (
 SELECT ... FROM <query_name>;
 ```
 
-例如，如果你想知道 50 位最年长的作者各自写了多少本书，请按照以下步骤操作：
+For example, if you want to know how many books each of the 50 oldest authors have written, take the following steps:
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-将[临时表](/develop/dev-guide-use-temporary-tables.md)中的语句更改为以下内容：
+Change the statement in [temporary tables](/develop/dev-guide-use-temporary-tables.md) to the following:
 
 ```sql
 WITH top_50_eldest_authors_cte AS (
@@ -54,7 +54,7 @@ LEFT JOIN book_authors ba ON ta.id = ba.author_id
 GROUP BY ta.id;
 ```
 
-结果如下：
+The result is as follows:
 
 ```
 +------------+------------+---------------------+-------+
@@ -109,7 +109,7 @@ public List<Author> getTop50EldestAuthorInfoByCTE() throws SQLException {
 </div>
 </SimpleTab>
 
-可以发现作者 "Ray Macejkovic" 写了 4 本书。通过 CTE 查询，你可以进一步获取这 4 本书的订单和评分信息，如下所示：
+It can be found that the author "Ray Macejkovic" wrote 4 books. With the CTE query, you can further get the order and rating information of these 4 books as follows:
 
 ```sql
 WITH books_authored_by_rm AS (
@@ -144,7 +144,7 @@ FROM
 ;
 ```
 
-结果如下：
+The result is as follows:
 
 ```
 +------------+-------------------------+----------------+--------+
@@ -158,19 +158,19 @@ FROM
 4 rows in set (0.06 sec)
 ```
 
-这个 SQL 语句中定义了三个 CTE 块，它们用 `,` 分隔。
+Three CTE blocks, which are separated by `,`, are defined in this SQL statement.
 
-首先，在 CTE 块 `books_authored_by_rm` 中查找该作者（ID 为 `2299112019`）写的书。然后在 `books_with_average_ratings` 和 `books_with_orders` 中分别找到这些书的平均评分和订单。最后，通过 `JOIN` 语句聚合结果。
+First, check out the books written by the author (ID is `2299112019`) in the CTE block `books_authored_by_rm`. Then find the average rating and order for these books respectively in `books_with_average_ratings` and `books_with_orders`. Finally, aggregate the results by the `JOIN` statement.
 
-注意，`books_authored_by_rm` 中的查询只执行一次，然后 TiDB 创建一个临时空间来缓存其结果。当 `books_with_average_ratings` 和 `books_with_orders` 中的查询引用 `books_authored_by_rm` 时，TiDB 直接从这个临时空间获取其结果。
+Note that the query in `books_authored_by_rm` executes only once, and then TiDB creates a temporary space to cache its result. When the queries in `books_with_average_ratings` and `books_with_orders` refer to `books_authored_by_rm`, TiDB gets its result directly from this temporary space.
 
-> **提示：**
+> **Tip:**
 >
-> 如果默认 CTE 查询的效率不好，你可以使用 [`MERGE()`](/optimizer-hints.md#merge) 提示将 CTE 子查询展开到外部查询中以提高效率。
+> If the efficiency of the default CTE queries is not good, you can use the [`MERGE()`](/optimizer-hints.md#merge) hint to expand the CTE subquery to the outer query to improve the efficiency.
 
-### 递归 CTE
+### Recursive CTE
 
-递归 CTE 可以使用以下语法定义：
+Recursive CTE can be defined using the following syntax:
 
 ```sql
 WITH RECURSIVE <query_name> AS (
@@ -179,7 +179,7 @@ WITH RECURSIVE <query_name> AS (
 SELECT ... FROM <query_name>;
 ```
 
-一个经典的例子是使用递归 CTE 生成一组[斐波那契数](https://en.wikipedia.org/wiki/Fibonacci_number)：
+A classic example is to generate a set of [Fibonacci numbers](https://en.wikipedia.org/wiki/Fibonacci_number) with recursive CTE:
 
 ```sql
 WITH RECURSIVE fibonacci (n, fib_n, next_fib_n) AS
@@ -191,7 +191,7 @@ WITH RECURSIVE fibonacci (n, fib_n, next_fib_n) AS
 SELECT * FROM fibonacci;
 ```
 
-结果如下：
+The result is as follows:
 
 ```
 +------+-------+------------+
@@ -211,20 +211,20 @@ SELECT * FROM fibonacci;
 10 rows in set (0.00 sec)
 ```
 
-## 阅读更多
+## Read more
 
 - [WITH](/sql-statements/sql-statement-with.md)
 
-## 需要帮助？
+## Need help?
 
 <CustomContent platform="tidb">
 
-在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](/support.md)。
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](https://tidb.support.pingcap.com/)。
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
 
 </CustomContent>

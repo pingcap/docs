@@ -1,24 +1,24 @@
 ---
 title: SHOW STATS_HEALTHY
-summary: TiDB 数据库中 SHOW STATS_HEALTHY 的使用概述。
+summary: An overview of the usage of SHOW STATS_HEALTHY for TiDB database.
 ---
 
 # SHOW STATS_HEALTHY
 
-`SHOW STATS_HEALTHY` 语句显示统计信息被认为准确程度的估计值。健康度百分比较低的表可能会生成次优的查询执行计划。
+The `SHOW STATS_HEALTHY` statement shows an estimation of how accurate statistics are believed to be. Tables with a low percentage health may generate sub-optimal query execution plans.
 
-可以通过运行 [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) 语句来提高表的健康度。当健康度低于 [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio) 阈值时，`ANALYZE` 会自动运行。
+The health of a table can be improved by running the [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) statement. `ANALYZE` runs automatically when the health drops below the [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio) threshold.
 
-目前，`SHOW STATS_HEALTHY` 语句返回以下列：
+Currently, the `SHOW STATS_HEALTHY` statement returns the following columns:
 
-| 列名 | 描述 |
+| Column name | Description            |
 | -------- | ------------- |
-| `Db_name` | 数据库名称 |
-| `Table_name` | 表名 |
-| `Partition_name` | 分区名称 |
-| `Healthy` | 介于 0 和 100 之间的健康度百分比 |
+| `Db_name` | The database name |
+| `Table_name` | The table name |
+| `Partition_name` | The partition name |
+| `Healthy` | The healthy percentage between 0 and 100 |
 
-## 语法
+## Synopsis
 
 ```ebnf+diagram
 ShowStatsHealthyStmt ::=
@@ -29,9 +29,9 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## 示例
+## Examples
 
-加载示例数据并运行 `ANALYZE`：
+Load example data and run `ANALYZE`:
 
 ```sql
 CREATE TABLE t1 (
@@ -50,7 +50,7 @@ INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN
 INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 100000;
 SELECT SLEEP(1);
 ANALYZE TABLE t1;
-SHOW STATS_HEALTHY; # 应该是 100% 健康
+SHOW STATS_HEALTHY; # should be 100% healthy
 ```
 
 ```sql
@@ -64,10 +64,10 @@ mysql> SHOW STATS_HEALTHY;
 1 row in set (0.00 sec)
 ```
 
-执行批量更新，删除大约 30% 的记录。检查统计信息的健康度：
+Perform a bulk update deleting approximately 30% of the records. Check the health of the statistics:
 
 ```sql
-DELETE FROM t1 WHERE id BETWEEN 101010 AND 201010; # 删除大约 30% 的记录
+DELETE FROM t1 WHERE id BETWEEN 101010 AND 201010; # delete about 30% of records
 SHOW STATS_HEALTHY; 
 ```
 
@@ -81,11 +81,11 @@ mysql> SHOW STATS_HEALTHY;
 1 row in set (0.00 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-此语句是 TiDB 对 MySQL 语法的扩展。
+This statement is a TiDB extension to MySQL syntax.
 
-## 另请参阅
+## See also
 
 * [ANALYZE](/sql-statements/sql-statement-analyze-table.md)
-* [统计信息简介](/statistics.md)
+* [Introduction to Statistics](/statistics.md)

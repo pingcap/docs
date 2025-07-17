@@ -1,66 +1,66 @@
 ---
 title: ticloud config set
-summary: "`ticloud config set` 命令的参考。"
+summary: The reference of `ticloud config set`.
 ---
 
 # ticloud config set
 
-配置活动[用户配置文件](/tidb-cloud/cli-reference.md#user-profile)的属性：
+Configure the properties for the active [user profile](/tidb-cloud/cli-reference.md#user-profile):
 
 ```shell
 ticloud config set <property-name> <value> [flags]
 ```
 
-可以配置的属性包括 `public-key`、`private-key` 和 `api-url`。
+The properties that can be configured include `public-key`, `private-key`, and `api-url`.
 
-| 属性        | 描述                                                              | 是否必需 |
-|-------------|------------------------------------------------------------------|----------|
-| public-key  | 指定 TiDB Cloud API 的公钥。                                      | 是       |
-| private-key | 指定 TiDB Cloud API 的私钥。                                      | 是       |
-| api-url     | 指定 TiDB Cloud 的基础 API URL（默认为 `https://api.tidbcloud.com`）。| 否       |
+| Properties  | Description                                                        | Required |
+|-------------|--------------------------------------------------------------------|----------|
+| public-key  | Specifies the public key of the TiDB Cloud API.                               | Yes      |
+| private-key | Specifies the private key of the TiDB Cloud API.                              | Yes      |
+| api-url     | Specifies the base API URL of TiDB Cloud (`https://api.tidbcloud.com` by default). | No       |
 
-> **注意：**
+> **Note:**
 >
-> 如果你想为特定用户配置文件配置属性，可以在命令中添加 `-P` 标志并指定目标用户配置文件名称。
+> If you want to configure properties for a specific user profile, you can add the `-P` flag and specify the target user profile name in the command.
 
-## 示例
+## Examples
 
-为活动配置文件设置 public-key 的值：
+Set the value of the public-key for the active profile:
 
 ```shell
 ticloud config set public-key <public-key>
 ```
 
-为特定配置文件 `test` 设置 public-key 的值：
+Set the value of the public-key for a specific profile `test`:
 
 ```shell
 ticloud config set public-key <public-key> -P test
 ```
 
-设置 API 主机：
+Set the API host:
 
 ```shell
 ticloud config set api-url https://api.tidbcloud.com
 ```
 
-> **注意：**
+> **Note:**
 >
-> TiDB Cloud API URL 默认为 `https://api.tidbcloud.com`。通常情况下，你不需要设置它。
+> The TiDB Cloud API URL is `https://api.tidbcloud.com` by default. Usually, you do not need to set up it.
 
-## 标志
+## Flags
 
-| 标志       | 描述                     |
+| Flag       | Description              |
 |------------|--------------------------|
-| -h, --help | 显示此命令的帮助信息。   |
+| -h, --help | Shows help information for this command. |
 
-## 继承的标志
+## Inherited flags
 
-| 标志                  | 描述                                                                                     | 是否必需 | 说明                                                                                                |
-|----------------------|------------------------------------------------------------------------------------------|----------|-----------------------------------------------------------------------------------------------------|
-| --no-color           | 禁用输出中的颜色。                                                                        | 否       | 仅在非交互模式下生效。在交互模式下，对某些 UI 组件禁用颜色可能不起作用。                              |
-| -P, --profile string | 指定此命令中使用的活动[用户配置文件](/tidb-cloud/cli-reference.md#user-profile)。         | 否       | 在非交互模式和交互模式下都有效。                                                                      |
-| -D, --debug          | 启用调试模式。                                                                            | 否       | 在非交互模式和交互模式下都有效。                                                                      |
+| Flag                 | Description                                   | Required | Note                                                                                                                    |
+|----------------------|-----------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
+| --no-color           | Disables color in output.                      | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
+| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                                      |
+| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both non-interactive and interactive modes.                                                             |
 
-## 反馈
+## Feedback
 
-如果你对 TiDB Cloud CLI 有任何问题或建议，欢迎创建 [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)。同时，我们也欢迎任何贡献。
+If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.

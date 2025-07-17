@@ -1,13 +1,13 @@
 ---
 title: RECOVER TABLE
-summary: TiDB 数据库中 RECOVER TABLE 的使用概述。
+summary: An overview of the usage of RECOVER TABLE for the TiDB database.
 ---
 
 # RECOVER TABLE
 
-`RECOVER TABLE` 用于在执行 `DROP TABLE` 语句后的 GC（垃圾回收）生命周期内恢复已删除的表及其数据。
+`RECOVER TABLE` is used to recover a deleted table and the data on it within the GC (Garbage Collection) life time after the `DROP TABLE` statement is executed.
 
-## 语法
+## Syntax
 
 {{< copyable "sql" >}}
 
@@ -21,7 +21,7 @@ RECOVER TABLE table_name;
 RECOVER TABLE BY JOB JOB_ID;
 ```
 
-## 语法图
+## Synopsis
 
 ```ebnf+diagram
 RecoverTableStmt ::=
@@ -35,37 +35,13 @@ Int64Num ::= NUM
 NUM ::= intLit
 ```
 
-> **注意：**
+> **Note:**
 >
-> + 如果表被删除且超出了 GC 生命周期，则无法使用 `RECOVER TABLE` 恢复该表。在这种情况下执行 `RECOVER TABLE` 会返回类似以下的错误：`snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST`。
->
-> + 如果 TiDB 版本是 3.0.0 或更高版本，不建议在使用 TiDB Binlog 时使用 `RECOVER TABLE`。
->
-> + `RECOVER TABLE` 在 Binlog 3.0.1 版本中得到支持，因此你可以在以下三种情况下使用 `RECOVER TABLE`：
->
->     - Binlog 版本为 3.0.1 或更高版本。
->     - 上游集群和下游集群都使用 TiDB 3.0。
->     - 从集群的 GC 生命周期必须长于主集群。但是，由于上下游数据库之间的数据复制存在延迟，下游的数据恢复可能会失败。
+> If a table is deleted and the GC lifetime is out, the table cannot be recovered with `RECOVER TABLE`. Execution of `RECOVER TABLE` in this scenario returns an error like: `snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST`.
 
-<CustomContent platform="tidb">
+## Examples
 
-**TiDB Binlog 复制期间的错误排查**
-
-当你在 TiDB Binlog 复制期间在上游 TiDB 中使用 `RECOVER TABLE` 时，TiDB Binlog 可能会在以下三种情况下中断：
-
-+ 下游数据库不支持 `RECOVER TABLE` 语句。错误示例：`check the manual that corresponds to your MySQL server version for the right syntax to use near 'RECOVER TABLE table_name'`。
-
-+ 上游数据库和下游数据库之间的 GC 生命周期不一致。错误示例：`snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST`。
-
-+ 上游和下游数据库之间的复制存在延迟。错误示例：`snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST`。
-
-对于上述三种情况，你可以通过[对已删除表进行完整导入](/ecosystem-tool-user-guide.md#backup-and-restore---backup--restore-br)来恢复 TiDB Binlog 的数据复制。
-
-</CustomContent>
-
-## 示例
-
-+ 根据表名恢复已删除的表。
++ Recover the deleted table according to the table name.
 
     {{< copyable "sql" >}}
 
@@ -79,11 +55,11 @@ NUM ::= intLit
     RECOVER TABLE t;
     ```
 
-    此方法会搜索最近的 DDL 作业历史记录，并定位第一个 `DROP TABLE` 类型的 DDL 操作，然后恢复与 `RECOVER TABLE` 语句中指定的表名相同的已删除表。
+    This method searches the recent DDL job history and locates the first DDL operation of the `DROP TABLE` type, and then recovers the deleted table with the name identical to the one table name specified in the `RECOVER TABLE` statement.
 
-+ 根据表的 `DDL JOB ID` 恢复已删除的表。
++ Recover the deleted table according to the table's `DDL JOB ID` used.
 
-    假设你删除了表 `t` 并创建了另一个 `t`，然后又删除了新创建的 `t`。如果你想恢复第一次删除的 `t`，则必须使用指定 `DDL JOB ID` 的方法。
+    Suppose that you had deleted the table `t` and created another `t`, and again you deleted the newly created `t`. Then, if you want to recover the `t` deleted in the first place, you must use the method that specifies the `DDL JOB ID`.
 
     {{< copyable "sql" >}}
 
@@ -97,7 +73,7 @@ NUM ::= intLit
     ADMIN SHOW DDL JOBS 1;
     ```
 
-    上面的第二条语句用于搜索删除 `t` 的表的 `DDL JOB ID`。在下面的示例中，ID 为 `53`。
+    The second statement above is used to search for the table's `DDL JOB ID` to delete `t`. In the following example, the ID is `53`.
 
     ```
     +--------+---------+------------+------------+--------------+-----------+----------+-----------+-----------------------------------+--------+
@@ -113,16 +89,16 @@ NUM ::= intLit
     RECOVER TABLE BY JOB 53;
     ```
 
-    此方法通过 `DDL JOB ID` 恢复已删除的表。如果相应的 DDL 作业不是 `DROP TABLE` 类型，则会发生错误。
+    This method recovers the deleted table via the `DDL JOB ID`. If the corresponding DDL job is not of the `DROP TABLE` type, an error occurs.
 
-## 实现原理
+## Implementation principle
 
-当删除表时，TiDB 只删除表元数据，并将要删除的表数据（行数据和索引数据）写入 `mysql.gc_delete_range` 表。TiDB 后台的 GC Worker 会定期从 `mysql.gc_delete_range` 表中删除超过 GC 生命周期的键。
+When deleting a table, TiDB only deletes the table metadata, and writes the table data (row data and index data) to be deleted to the `mysql.gc_delete_range` table. The GC Worker in the TiDB background periodically removes from the `mysql.gc_delete_range` table the keys that exceed the GC life time.
 
-因此，要恢复表，你只需要在 GC Worker 删除表数据之前恢复表元数据并删除 `mysql.gc_delete_range` 表中的相应行记录。你可以使用 TiDB 的快照读取来恢复表元数据。详情请参考[读取历史数据](/read-historical-data.md)。
+Therefore, to recover a table, you only need to recover the table metadata and delete the corresponding row record in the `mysql.gc_delete_range` table before the GC Worker deletes the table data. You can use a snapshot read of TiDB to recover the table metadata. Refer to [Read Historical Data](/read-historical-data.md) for details.
 
-表恢复是通过 TiDB 通过快照读取获取表元数据，然后经过类似于 `CREATE TABLE` 的表创建过程来完成的。因此，`RECOVER TABLE` 本质上是一种 DDL 操作。
+Table recovery is done by TiDB obtaining the table metadata through snapshot read, and then going through the process of table creation similar to `CREATE TABLE`. Therefore, `RECOVER TABLE` itself is, in essence, a kind of DDL operation.
 
-## MySQL 兼容性
+## MySQL compatibility
 
-该语句是 TiDB 对 MySQL 语法的扩展。
+This statement is a TiDB extension to MySQL syntax.

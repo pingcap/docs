@@ -1,29 +1,29 @@
 ---
 title: SHOW STATS_BUCKETS
-summary: TiDB 数据库中 SHOW STATS_BUCKETS 的使用概述。
+summary: An overview of the usage of SHOW STATS_BUCKETS for TiDB database.
 ---
 
 # SHOW STATS_BUCKETS
 
-`SHOW STATS_BUCKETS` 语句显示[统计信息](/statistics.md)中的桶信息。
+The `SHOW STATS_BUCKETS` statement shows the bucket information in [statistics](/statistics.md).
 
-目前，`SHOW STATS_BUCKETS` 语句返回以下列：
+Currently, the `SHOW STATS_BUCKETS` statement returns the following columns:
 
-| 列名 | 描述 |
+| Column name | Description   |
 | :-------- | :------------- |
-| `Db_name` | 数据库名称 |
-| `Table_name` | 表名 |
-| `Partition_name` | 分区名称 |
-| `Column_name` | 当 `is_index` 为 `0` 时表示列名，当 `is_index` 为 `1` 时表示索引名 |
-| `Is_index` | 是否为索引列 |
-| `Bucket_id` | 桶的 ID |
-| `Count` | 落在该桶及之前所有桶中的值的数量 |
-| `Repeats` | 最大值的出现次数 |
-| `Lower_bound` | 最小值 |
-| `Upper_bound` | 最大值 |
-| `Ndv` | 桶中不同值的数量。由于该字段的值不准确，已被弃用且始终显示为 `0`。 |
+| `Db_name`  |  The database name    |
+| `Table_name` | The table name |
+| `Partition_name` | The partition name |
+| `Column_name` | The column name (when `is_index` is `0`) or the index name (when `is_index` is `1`) |
+| `Is_index` | Whether it is an index column or not |
+| `Bucket_id` | The ID of a bucket |
+| `Count` | The number of all the values that falls on the bucket and the previous buckets |
+| `Repeats` | The occurrence number of the maximum value |
+| `Lower_bound` | The minimum value |
+| `Upper_bound` | The maximum value |
+| `Ndv` | The number of distinct values in the bucket. This field is deprecated and always shows `0` due to its inaccurate value. |
 
-## 语法
+## Synopsis
 
 ```ebnf+diagram
 ShowStatsBucketsStmt ::=
@@ -34,7 +34,7 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## 示例
+## Examples
 
 ```sql
 SHOW STATS_BUCKETS WHERE Table_name='t';
@@ -54,11 +54,11 @@ SHOW STATS_BUCKETS WHERE Table_name='t';
 6 rows in set (0.00 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-此语句是 TiDB 对 MySQL 语法的扩展。
+This statement is a TiDB extension to MySQL syntax.
 
-## 另请参阅
+## See also
 
 * [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)
-* [统计信息简介](/statistics.md)
+* [Introduction to Statistics](/statistics.md)

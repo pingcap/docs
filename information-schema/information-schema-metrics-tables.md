@@ -1,6 +1,6 @@
 ---
 title: METRICS_TABLES
-summary: "Learn the `METRICS_TABLES` system table."
+summary: Learn the `METRICS_TABLES` system table.
 ---
 
 # METRICS_TABLES

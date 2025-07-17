@@ -1,34 +1,34 @@
 ---
-title: 使用恢复资源
-summary: 了解如何使用恢复资源。
+title: Use Restore Resource
+summary: Learn how to use restore resource.
 ---
 
-# 使用恢复资源
+# Use Restore Resource
 
-你可以在本文档中了解如何使用 `tidbcloud_restore` 资源管理恢复任务。
+You can learn how to manage a restore task with the `tidbcloud_restore` resource in this document.
 
-`tidbcloud_restore` 资源的功能包括以下内容：
+The features of the `tidbcloud_restore` resource include the following:
 
-- 根据你的备份为 TiDB Cloud Dedicated 集群创建恢复任务。
+- Create restore tasks for TiDB Cloud Dedicated clusters according to your backup.
 
-## 前提条件
+## Prerequisites
 
-- [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)。
-- 备份和恢复功能不适用于 TiDB Cloud Serverless 集群。要使用恢复资源，请确保你已创建了 TiDB Cloud Dedicated 集群。
+- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
+- The backup and restore feature is unavailable for TiDB Cloud Serverless clusters. To use restore resources, make sure that you have created a TiDB Cloud Dedicated cluster.
 
-## 创建恢复任务
+## Create a restore task
 
-创建集群备份后，你可以通过使用 `tidbcloud_restore` 资源创建恢复任务来恢复集群。
+After creating a backup of a cluster, you can restore the cluster by creating a restore task with the `tidbcloud_restore` resource.
 
-> **注意：**
+> **Note:**
 >
-> 你只能从较小的节点规格恢复数据到相同或更大的节点规格。
+> You can only restore data from a smaller node size to the same or larger node size.
 
-1. 创建一个恢复目录并进入该目录。
+1. Create a directory for the restore and enter it.
 
-2. 创建一个 `restore.tf` 文件。
+2. Create a `restore.tf` file.
 
-    例如：
+    For example:
 
     ```
     terraform {
@@ -70,7 +70,7 @@ summary: 了解如何使用恢复资源。
     }
     ```
 
-3. 运行 `terraform apply` 命令并输入 `yes` 确认：
+3. Run the `terraform apply` command and type `yes` for confirmation:
 
     ```
     $ terraform apply
@@ -133,7 +133,7 @@ summary: 了解如何使用恢复资源。
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-4. 使用 `terraform state show tidbcloud_restore.${resource-name}` 命令检查恢复任务的状态：
+4. Use the `terraform state show tidbcloud_restore.${resource-name}` command to check the status of the restore task:
 
     ```
     $ terraform state show tidbcloud_restore.example_restore
@@ -175,18 +175,18 @@ summary: 了解如何使用恢复资源。
     }
     ```
 
-    你可以看到恢复任务的状态是 `PENDING`，集群的状态是 `INITIALIZING`。
+    You can see the restore task's status is `PENDING` and the cluster's status is `INITIALIZING`.
 
-5. 等待几分钟。然后使用 `terraform refersh` 更新状态。
+5. Wait for some minutes. Then use `terraform refersh` to update the status.
 
-6. 在集群状态变为 `AVAILABLE` 后，恢复任务将变为 `RUNNING`，最后变为 `SUCCESS`。
+6. After the cluster status changes to `AVAILABLE`, the restore task will be `RUNNING` and turn to `SUCCESS` at last.
 
-注意，恢复的集群不由 Terraform 管理。你可以通过[导入集群](/tidb-cloud/terraform-use-cluster-resource.md#import-a-cluster)来管理恢复的集群。
+Note that the restored cluster is not managed by Terraform. You can manage the restored cluster by [importing it](/tidb-cloud/terraform-use-cluster-resource.md#import-a-cluster).
 
-## 更新恢复任务
+## Update a restore task
 
-恢复任务无法更新。
+Restore tasks cannot be updated.
 
-## 删除恢复任务
+## Delete a restore task
 
-恢复任务无法删除。
+Restore tasks cannot be deleted.

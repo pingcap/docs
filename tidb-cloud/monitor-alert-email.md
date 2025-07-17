@@ -1,49 +1,49 @@
 ---
-title: 通过电子邮件订阅
-summary: 了解如何通过电子邮件接收告警通知来监控你的 TiDB 集群。
+title: Subscribe via Email
+summary: Learn how to monitor your TiDB cluster by getting alert notifications via Email.
 ---
 
-# 通过电子邮件订阅
+# Subscribe via Email
 
-TiDB Cloud 为你提供了一种简单的方式来通过电子邮件、[Slack](/tidb-cloud/monitor-alert-slack.md) 和 [Zoom](/tidb-cloud/monitor-alert-zoom.md) 订阅告警通知。本文档介绍如何通过电子邮件订阅告警通知。
+TiDB Cloud provides you with an easy way to subscribe to alert notifications via email, [Slack](/tidb-cloud/monitor-alert-slack.md), and [Zoom](/tidb-cloud/monitor-alert-zoom.md). This document describes how to subscribe to alert notifications via email.
 
-> **注意：**
+> **Note:**
 >
-> 目前，告警订阅功能仅适用于 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。
+> Currently, alert subscription is only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
-## 前提条件
+## Prerequisites
 
-- 要订阅 TiDB Cloud 的告警通知，你必须拥有组织的 `Organization Owner` 访问权限或目标项目的 `Project Owner` 访问权限。
+- To subscribe to alert notifications of TiDB Cloud, you must have the `Organization Owner` access to your organization or `Project Owner` access to the target project in TiDB Cloud.
 
-## 订阅告警通知
+## Subscribe to alert notifications
 
-> **提示：**
+> **Tip:**
 >
-> 告警订阅适用于当前项目中的所有告警。如果你在项目中有多个集群，你只需订阅一次。
+> The alert subscription is for all alerts in the current project. If you have multiple clusters in the project, you just need to subscribe once.
 
-要获取项目中集群的告警通知，请按照以下步骤操作：
+To get alert notifications of clusters in your project, take the following steps:
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，使用左上角的下拉框切换到目标项目。
-2. 在左侧导航栏中，点击 **Project Settings** > **Alert Subscription**。
-3. 在 **Alert Subscription** 页面，点击右上角的 **Add Subscriber**。
-4. 从 **Subscriber Type** 下拉列表中选择 **Email**。
-5. 输入你的电子邮件地址。
-6. 点击 **Test Connection**。
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
+3. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
+4. Select **Email** from the **Subscriber Type** drop-down list.
+5. Enter your email address.
+6. Click **Test Connection**.
 
-    - 如果测试成功，将显示 **Save** 按钮。
-    - 如果测试失败，将显示错误消息。请按照消息提示排除问题，然后重试连接。
+    - If the test succeeds, the **Save** button is displayed.
+    - If the test fails, an error message is displayed. Follow the message to troubleshoot the issue and then retry the connection.
 
-7. 点击 **Save** 完成订阅。
+7. Click **Save** to complete the subscription.
 
-另外，你也可以在集群的 [**Alert**](/tidb-cloud/monitor-built-in-alerting.md#view-alerts) 页面右上角点击 **Subscribe**。你将被引导至 **Alert Subscriber** 页面。
+Alternatively, you can also click **Subscribe** in the upper-right corner of the [**Alert**](/tidb-cloud/monitor-built-in-alerting.md#view-alerts) page of the cluster. You will be directed to the **Alert Subscriber** page.
 
-如果告警条件保持不变，告警将每三小时发送一次电子邮件通知。
+If an alert condition remains unchanged, the alert sends email notifications every three hours.
 
-## 取消告警通知订阅
+## Unsubscribe from alert notifications
 
-如果你不再希望接收项目中集群的告警通知，请按照以下步骤操作：
+If you no longer want to receive alert notifications of clusters in your project, take the following steps:
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，使用左上角的下拉框切换到目标项目。
-2. 在左侧导航栏中，点击 **Project Settings** > **Alert Subscription**。
-3. 在 **Alert Subscription** 页面，找到要删除的目标订阅者所在行，然后点击 **...** > **Unsubscribe**。
-4. 点击 **Unsubscribe** 确认取消订阅。
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
+3. On the **Alert Subscription** page, locate the row of your target subscriber to be deleted, and then click **...** > **Unsubscribe**.
+4. Click **Unsubscribe** to confirm the unsubscription.

@@ -28,11 +28,11 @@ To obtain `pd-ctl` of the latest version, download the TiDB server installation 
 
 > **Note:**
 >
-> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v8.1.2` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-v8.1.2-linux-amd64.tar.gz`.
+> `{version}` in the link indicates the version number of TiDB. For example, the download link for `{{{ .tidb-version }}}` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-{{{ .tidb-version }}}-linux-amd64.tar.gz`.
 
 ### Compile from source code
 
-1. [Go](https://golang.org/) 1.21 or later is required because the Go modules are used.
+1. [Go](https://golang.org/) 1.23 or later is required because the Go modules are used.
 2. In the root directory of the [PD project](https://github.com/pingcap/pd), use the `make` or `make pd-ctl` command to compile and generate `bin/pd-ctl`.
 
 ## Usage
@@ -145,8 +145,8 @@ Usage:
     "leader-schedule-limit": 4,
     "leader-schedule-policy": "count",
     "low-space-ratio": 0.8,
-    "max-merge-region-keys": 200000,
-    "max-merge-region-size": 20,
+    "max-merge-region-keys": 540000,
+    "max-merge-region-size": 54,
     "max-pending-peer-count": 64,
     "max-snapshot-count": 64,
     "max-store-down-time": "30m0s",
@@ -171,7 +171,7 @@ Usage:
 }
 
 >> config show cluster-version                // Display the current version of the cluster, which is the current minimum version of TiKV nodes in the cluster and does not correspond to the binary version.
-"5.2.2"
+"8.5.1"
 ```
 
 - `max-snapshot-count` controls the maximum number of snapshots that a single store receives or sends out at the same time. The scheduler is restricted by this configuration to avoid taking up normal application resources. When you need to improve the speed of adding replicas or balancing, increase this value.
@@ -226,16 +226,20 @@ Usage:
 
 - `region-score-formula-version` controls the version of the Region score formula. The value options are `v1` and `v2`. The version 2 of the formula helps to reduce redundant balance Region scheduling in some scenarios, such as taking TiKV nodes online or offline.
 
-    {{< copyable "" >}}
-
     ```bash
     config set region-score-formula-version v2
     ```
 
-- `patrol-region-interval` controls the execution frequency that `replicaChecker` checks the health status of Regions. A shorter interval indicates a higher execution frequency. Generally, you do not need to adjust it.
+- `patrol-region-interval` controls the execution frequency that the checker inspects the health status of Regions. A shorter interval indicates a higher execution frequency. Generally, you do not need to adjust it.
 
     ```bash
-    config set patrol-region-interval 10ms // Set the execution frequency of replicaChecker to 10ms
+    config set patrol-region-interval 10ms // Set the execution frequency of the checker to 10ms
+    ```
+
+- `patrol-region-worker-count` controls the number of concurrent [operators](/glossary.md#operator) created by the checker when inspecting the health state of a Region. Normally, you do not need to adjust this configuration. Setting this configuration item to a value greater than 1 enables concurrent checks. Currently, this feature is experimental, and it is not recommended that you use it in the production environment.
+
+    ```bash
+    config set patrol-region-worker-count 2 // Set the checker concurrency to 2
     ```
 
 - `max-store-down-time` controls the time that PD decides the disconnected store cannot be restored if exceeded. If PD does not receive heartbeats from a store within the specified period of time, PD adds replicas in other nodes.
@@ -247,8 +251,6 @@ Usage:
 - `max-store-preparing-time` controls the maximum waiting time for the store to go online. During the online stage of a store, PD can query the online progress of the store. When the specified time is exceeded, PD assumes that the store has been online and cannot query the online progress of the store again. But this does not prevent Regions from transferring to the new online store. In most scenarios, you do not need to adjust this parameter.
 
     The following command specifies that the maximum waiting time for the store to go online is 4 hours.
-
-    {{< copyable "" >}}
 
     ```bash
     config set max-store-preparing-time 4h
@@ -307,7 +309,7 @@ Usage:
 - `cluster-version` is the version of the cluster, which is used to enable or disable some features and to deal with the compatibility issues. By default, it is the minimum version of all normally running TiKV nodes in the cluster. You can set it manually only when you need to roll it back to an earlier version.
 
     ```bash
-    config set cluster-version 1.0.8              // Set the version of the cluster to 1.0.8
+    config set cluster-version 8.5.1              // Set the version of the cluster to 8.5.1
     ```
 
 - `replication-mode` controls the replication mode of Regions in the dual data center scenario. See [Enable the DR Auto-Sync mode](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode) for details.
@@ -332,7 +334,7 @@ Usage:
 
 - `store-limit-mode` is used to control the mode of limiting the store speed. The optional modes are `auto` and `manual`. In `auto` mode, the stores are automatically balanced according to the load (deprecated).
 
-- `store-limit-version` controls the version of the store limit formula. In v1 mode, you can manually modify the `store limit` to limit the scheduling speed of a single TiKV. The v2 mode is an experimental feature. It is not recommended that you use it in the production environment. In v2 mode, you do not need to manually set the `store limit` value, as PD dynamically adjusts it based on the capability of TiKV snapshots. For more details, refer to [Principles of store limit v2](/configure-store-limit.md#principles-of-store-limit-v2).
+- `store-limit-version` controls the version of the store limit formula. In v1 mode, you can manually modify the `store limit` to limit the scheduling speed of a single TiKV. In v2 mode, you do not need to manually set the `store limit` value, as PD dynamically adjusts it based on the capability of TiKV snapshots. For more details, refer to [Principles of store limit v2](/configure-store-limit.md#principles-of-store-limit-v2).
 
     ```bash
     config set store-limit-version v2       // using store limit v2
@@ -342,13 +344,128 @@ Usage:
 
 - For example, set the value of `flow-round-by-digit` to `4`:
 
-    {{< copyable "" >}}
-
     ```bash
     config set flow-round-by-digit 4
     ```
 
-#### `config placement-rules [disable | enable | load | save | show | rule-group]`
+### `config [show | set service-middleware <option> [<key> <value> | <label> <qps|concurrency> <value>]]`
+
+`service-middleware` is a configuration module in PD, mainly used to manage and control middleware functions of PD services, such as audit logging, request rate limiting, and concurrency limiting. Starting from v8.5.0, you can modify the following configurations of `service-middleware` using `pd-ctl`:
+
+- `audit`: controls whether to enable audit logging for HTTP requests processed by PD (enabled by default). When enabled, `service-middleware` logs information about HTTP requests in PD logs.
+- `rate-limit`: limits the maximum rate and concurrency of HTTP API requests processed by PD.
+- `grpc-rate-limit`: limits the maximum rate and concurrency of gRPC API requests processed by PD.
+
+> **Note:**
+>
+> To avoid the impact of request rate limiting and concurrency limiting on PD performance, it is not recommended to modify configurations in `service-middleware`.
+
+Display the configuration information of `service-middleware`:
+
+```bash
+config show service-middleware
+```
+
+```bash
+{
+  "audit": {
+    "enable-audit": "true"
+  },
+  "rate-limit": {
+    "enable-rate-limit": "true",
+    "limiter-config": {}
+  },
+  "grpc-rate-limit": {
+    "enable-grpc-rate-limit": "true",
+    "grpc-limiter-config": {}
+  }
+}
+```
+
+`service-middleware audit` enables or disables the audit logging function for HTTP requests. For example, to disable this function, run the following command:
+
+```bash
+config set service-middleware audit enable-audit false
+```
+
+`service-middleware grpc-rate-limit` controls the maximum rate and concurrency of the following gRPC API requests:
+
+- `GetRegion`: get information about a specified Region
+- `GetStore`: get information about a specified store
+- `GetMembers`: get information about PD cluster members
+
+To control the maximum rate of gRPC API requests, such as `GetRegion` API requests, run the following command:
+
+```bash
+config set service-middleware grpc-rate-limit GetRegion qps 100
+```
+
+To control the maximum concurrency of gRPC API requests, such as `GetRegion` API requests, run the following command:
+
+```bash
+config set service-middleware grpc-rate-limit GetRegion concurrency 10
+```
+
+View the modified configuration:
+
+```bash
+config show service-middleware
+```
+
+```bash
+{
+  "audit": {
+    "enable-audit": "true"
+  },
+  "rate-limit": {
+    "enable-rate-limit": "true",
+    "limiter-config": {}
+  },
+  "grpc-rate-limit": {
+    "enable-grpc-rate-limit": "true",
+    "grpc-limiter-config": {
+      "GetRegion": {
+        "QPS": 100,
+        "QPSBurst": 100, // Automatically adjusted based on QPS, for display only
+        "ConcurrencyLimit": 10
+      }
+    }
+  }
+}
+```
+
+Reset the preceding settings:
+
+```bash
+config set service-middleware grpc-rate-limit GetRegion qps 0
+config set service-middleware grpc-rate-limit GetRegion concurrency 0
+```
+
+`service-middleware rate-limit` controls the maximum rate and concurrency of the following HTTP API requests:
+
+- `GetRegion`: get information about a specified Region
+- `GetStore`: get information about a specified store
+
+To control the maximum rate of HTTP API requests, such as `GetRegion` API requests, run the following command:
+
+```bash
+config set service-middleware rate-limit GetRegion qps 100
+```
+
+To control the maximum concurrency of HTTP API requests, such as `GetRegion` API requests, run the following command:
+
+```bash
+config set service-middleware rate-limit GetRegion concurrency 10
+```
+
+Reset the preceding settings:
+
+```bash
+config set service-middleware rate-limit GetRegion qps 0
+config set service-middleware rate-limit GetRegion concurrency 0
+```
+
+### `config placement-rules [disable | enable | load | save | show | rule-group]`
 
 For the usage of `config placement-rules [disable | enable | load | save | show | rule-group]`, see [Configure placement rules](/configure-placement-rules.md#configure-rules).
 
@@ -441,6 +558,10 @@ Usage:
 
 ### `member [delete | leader_priority | leader [show | resign | transfer <member_name>]]`
 
+> **Note:**
+>
+> **DO NOT** use the `member delete` command to remove PD nodes in a production environment. To remove a PD node, see [Scale in a TiDB/PD/TiKV cluster](/scale-tidb-using-tiup.md#scale-in-a-tidbpdtikv-cluster) and [Manually Scale TiDB on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster/).
+
 Use this command to view the PD members, remove a specified member, or configure the priority of leader.
 
 Usage:
@@ -455,7 +576,7 @@ Usage:
 }
 >> member delete name pd2               // Delete "pd2"
 Success!
->> member delete id 1319539429105371180 // Delete a node using id
+>> member delete id 1319539429105371180 // Delete a node using ID
 Success!
 >> member leader show                   // Display the leader information
 {
@@ -469,6 +590,20 @@ Success!
 >> member leader transfer pd3 // Migrate leader to a specified member
 ......
 ```
+
+Specify the priority of PD leader:
+
+```bash
+member leader_priority  pd-1 4
+member leader_priority  pd-2 3
+member leader_priority  pd-3 2
+member leader_priority  pd-4 1
+member leader_priority  pd-5 0
+```
+
+> **Note:**
+>
+> In all available PD nodes, the node with the highest priority number becomes the leader.
 
 ### `operator [check | show | add | remove]`
 
@@ -666,7 +801,7 @@ Usage:
 
 ### `region topread [limit]`
 
-Use this command to list Regions with top read flow. The default value of the limit is 16.
+Use this command to list Regions with top read flow. The default value of the limit is `16`.
 
 Usage:
 
@@ -680,7 +815,7 @@ Usage:
 
 ### `region topwrite [limit]`
 
-Use this command to list Regions with top write flow. The default value of the limit is 16.
+Use this command to list Regions with top write flow. The default value of the limit is `16`.
 
 Usage:
 
@@ -694,7 +829,7 @@ Usage:
 
 ### `region topconfver [limit]`
 
-Use this command to list Regions with top conf version. The default value of the limit is 16.
+Use this command to list Regions with top conf version. The default value of the limit is `16`.
 
 Usage:
 
@@ -708,7 +843,7 @@ Usage:
 
 ### `region topversion [limit]`
 
-Use this command to list Regions with top version. The default value of the limit is 16.
+Use this command to list Regions with top version. The default value of the limit is `16`.
 
 Usage:
 
@@ -722,7 +857,7 @@ Usage:
 
 ### `region topsize [limit]`
 
-Use this command to list Regions with top approximate size. The default value of the limit is 16.
+Use this command to list Regions with top approximate size. The default value of the limit is `16`.
 
 Usage:
 
@@ -781,7 +916,7 @@ resource-manager config controller show
 }
 ```
 
-- `ltb-max-wait-duration`: the maximum waiting time of Local Token Bucket (LTB). The default value is `30s`, and the value range is `[0, 24h]`. If the estimated [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) consumption of the SQL request exceeds the current accumulated RU of LTB, the request needs to wait for a certain period of time. If the estimated waiting time exceeds this maximum value, an error message [`ERROR 8252 (HY000) : Exceeded resource group quota limitation`](/error-codes.md) is returned to the application in advance. Increasing this value can reduce the occurrence of encountering `ERROR 8252` in cases of sudden concurrency increase, large transactions, and large queries.
+- `ltb-max-wait-duration`: the maximum waiting time of Local Token Bucket (LTB). The default value is `30s`, and the value range is `[0, 24h]`. If the estimated [Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) consumption of the SQL request exceeds the current accumulated RU of LTB, the request needs to wait for a certain period of time. If the estimated waiting time exceeds this maximum value, an error message [`ERROR 8252 (HY000) : Exceeded resource group quota limitation`](/error-codes.md) is returned to the application in advance. Increasing this value can reduce the occurrence of encountering `ERROR 8252` in cases of sudden concurrency increase, large transactions, and large queries.
 - `enable-controller-trace-log`: control whether to enable the controller diagnostic log.
 
 #### Modify the controller configuration of Resource Control
@@ -976,6 +1111,12 @@ Use this command to view and manage the configuration of the `evict-leader-sched
 
     If all store configurations of an `evict-leader-scheduler` are removed, the scheduler itself is automatically removed.
 
+- When an `evict-leader-scheduler` already exists, use the `set batch` subcommand to modify the `batch` value. `batch` controls the number of Operators generated during a single scheduling process. The default value is `3`, and the range is `[1, 10]`. The larger the `batch` value, the faster the scheduling speed.
+
+    ```bash
+    scheduler config evict-leader-scheduler set batch 10 // Set the batch value to 10
+    ```
+
 ### `service-gc-safepoint`
 
 Use this command to query the current GC safepoint and service GC safepoint. The output is as follows:
@@ -1012,7 +1153,7 @@ store
 }
 ```
 
-To get the store with id of 1, run the following command:
+To get the store with ID of 1, run the following command:
 
 ```bash
 store 1
@@ -1024,7 +1165,7 @@ store 1
 
 #### Delete a store
 
-To delete the store with id of 1, run the following command:
+To delete the store with ID of 1, run the following command:
 
 ```bash
 store delete 1
@@ -1032,7 +1173,7 @@ store delete 1
 
 To cancel deleting `Offline` state stores which are deleted using `store delete`, run the `store cancel-delete` command. After canceling, the store changes from `Offline` to `Up`. Note that the `store cancel-delete` command cannot change a `Tombstone` state store to the `Up` state.
 
-To cancel deleting the store with id of 1, run the following command:
+To cancel deleting the store with ID of 1, run the following command:
 
 ```bash
 store cancel-delete 1
@@ -1052,25 +1193,25 @@ store remove-tombstone
 
 To manage the labels of a store, run the `store label` command.
 
-- To set a label with the key being `"zone"` and value being `"cn"` to the store with id of 1, run the following command:
+- To set a label with the key being `"zone"` and value being `"cn"` to the store with ID of 1, run the following command:
 
     ```bash
     store label 1 zone=cn
     ```
 
-- To update the label of a store, for example, changing the value of the key `"zone"` from `"cn"` to `"us"` for the store with id of 1, run the following command:
+- To update the label of a store, for example, changing the value of the key `"zone"` from `"cn"` to `"us"` for the store with ID of 1, run the following command:
 
     ```bash
     store label 1 zone=us
     ```
 
-- To rewrite all labels of a store with id of 1, use the `--rewrite` option. Note that this option overwrites all existing labels:
+- To rewrite all labels of a store with ID of 1, use the `--rewrite` option. Note that this option overwrites all existing labels:
 
     ```bash
     store label 1 region=us-est-1 disk=ssd --rewrite
     ```
 
-- To delete the `"disk"` label for the store with id of 1, use the `--delete` option:
+- To delete the `"disk"` label for the store with ID 1, use the `--delete` option:
 
     ```bash
     store label 1 disk --delete
@@ -1078,12 +1219,12 @@ To manage the labels of a store, run the `store label` command.
 
 > **Note:**
 >
-> - The label of a store is updated by merging the label in TiKV and that in PD. Specifically, after you modify a store label in the TiKV configuration file and restart the cluster, PD merges its own store label with the TiKV store label, updates the label, and persists the merged result.
+> - The label of a store is updated by a merge strategy. After a TiKV process is restarted, the store labels in its configuration file will be merged with the store labels stored by PD, and the merged result will be persisted. During the merging process, if there are duplicate store labels between the PD side and the TiKV configuration file, the TiKV store label configuration will overwrite the PD label. For example, if the store label for store 1 is set to `"zone=cn"` through `store label 1 zone=cn`, but TiKV’s configuration file has `zone = "us"`, after TiKV restarts, the `"zone"` will be updated to `"us"`.
 > - To manage labels of a store using TiUP, you can run the `store label <id> --force` command to empty the labels stored in PD before restarting the cluster.
 
 #### Configure store weight
 
-To set the leader weight to 5 and Region weight to 10 for the store with id of 1, run the following command:
+To set the leader weight to `5` and Region weight to `10` for the store with ID of 1, run the following command:
 
 ```bash
 store weight 1 5 10
@@ -1107,7 +1248,7 @@ You can set the scheduling speed of stores by using `store limit`. For more deta
 
 > **Note:**
 >
-> You can use `pd-ctl` to check the state (`Up`, `Disconnect`, `Offline`, `Down`, or `Tombstone`) of a TiKV store. For the relationship between each state, refer to [Relationship between each state of a TiKV store](/tidb-scheduling.md#information-collection).
+> You can use `pd-ctl` to check the state (`Up`, `Disconnect`, `Offline`, `Down`, or `Tombstone`) of a TiKV store. For the relationship between each state, see [Relationship between each state of a TiKV store](/tidb-scheduling.md#information-collection).
 
 ### `log [fatal | error | warn | info | debug]`
 
@@ -1169,7 +1310,7 @@ unsafe remove-failed-stores show
 ### Simplify the output of `store`
 
 ```bash
->> store --jq=".stores[].store | { id, address, state_name}"
+>> store --jq=".stores[].store | {id, address, state_name}"
 {"id":1,"address":"127.0.0.1:20161","state_name":"Up"}
 {"id":30,"address":"127.0.0.1:20162","state_name":"Up"}
 ...
@@ -1186,10 +1327,8 @@ unsafe remove-failed-stores show
 
 ### Query all nodes whose status is not `Up`
 
-{{< copyable "" >}}
-
 ```bash
-store --jq='.stores[].store | select(.state_name!="Up") | { id, address, state_name}'
+store --jq='.stores[].store | select(.state_name!="Up") | {id, address, state_name}'
 ```
 
 ```
@@ -1203,7 +1342,7 @@ store --jq='.stores[].store | select(.state_name!="Up") | { id, address, state_n
 {{< copyable "" >}}
 
 ```bash
-store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"engine","value":"tiflash"}])) | { id, address, state_name}'
+store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"engine","value":"tiflash"}])) | {id, address, state_name}'
 ```
 
 ```
@@ -1254,7 +1393,7 @@ You can also find out all Regions that have a replica on store30 or store31 in t
 
 ### Look for relevant Regions when restoring data
 
-For example, when [store1, store30, store31] is unavailable at its downtime, you can find all Regions whose Down replicas are more than normal replicas:
+For example, when `[store1, store30, store31]` is unavailable at its downtime, you can find all Regions whose Down replicas are more than normal replicas:
 
 ```bash
 >> region --jq=".regions[] | {id: .id, peer_stores: [.peers[].store_id] | select(length as $total | map(if .==(1,30,31) then . else empty end) | length>=$total-length) }"
@@ -1264,14 +1403,14 @@ For example, when [store1, store30, store31] is unavailable at its downtime, you
 ...
 ```
 
-Or when [store1, store30, store31] fails to start, you can find Regions where the data can be manually removed safely on store1. In this way, you can filter out all Regions that have a replica on store1 but don't have other DownPeers:
+Or when `[store1, store30, store31]` fails to start, you can find Regions where the data can be manually removed safely on store1. In this way, you can filter out all Regions that have a replica on store1 but don't have other DownPeers:
 
 ```bash
 >> region --jq=".regions[] | {id: .id, peer_stores: [.peers[].store_id] | select(length>1 and any(.==1) and all(.!=(30,31)))}"
 {"id":24,"peer_stores":[1,32,33]}
 ```
 
-When [store30, store31] is down, find out all Regions that can be safely processed by creating the `remove-peer` Operator, that is, Regions with one and only DownPeer:
+When `[store30, store31]` is down, find out all Regions that can be safely processed by creating the `remove-peer` Operator, that is, Regions with one and only DownPeer:
 
 ```bash
 >> region --jq=".regions[] | {id: .id, remove_peer: [.peers[].store_id] | select(length>1) | map(if .==(30,31) then . else empty end) | select(length==1)}"

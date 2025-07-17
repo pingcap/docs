@@ -1,6 +1,6 @@
 ---
 title: br Command-line Manual
-summary: "The `br` command-line tool is used for snapshot backup, log backup, and point-in-time recovery (PITR) in TiDB clusters. It consists of sub-commands, options, and parameters, with common options like `--pd` for PD service address and `-s` for storage path. Sub-commands include `tiup br backup`, `tiup br log`, and `tiup br restore`, each with specific functionalities. Backup commands include `full`, `db`, and `table` options, while log backup and restore commands have various tasks for managing backup operations."
+summary: The `br` command-line tool is used for snapshot backup, log backup, and point-in-time recovery (PITR) in TiDB clusters. It consists of sub-commands, options, and parameters, with common options like `--pd` for PD service address and `-s` for storage path. Sub-commands include `tiup br backup`, `tiup br log`, and `tiup br restore`, each with specific functionalities. Backup commands include `full`, `db`, and `table` options, while log backup and restore commands have various tasks for managing backup operations.
 ---
 
 # br Command-line Manual
@@ -57,7 +57,9 @@ A `tiup br` command consists of multiple layers of sub-commands. Currently, br c
 * `--cert`: specifies the path to the SSL certificate in the PEM format.
 * `--key`: specifies the path to the SSL certificate key in the PEM format.
 * `--status-addr`: specifies the listening address through which `br` provides statistics to Prometheus.
-* `--concurrency`: the number of concurrent tasks during the backup or restore.
+* `--concurrency`: controls how backup tasks are split into multiple requests and sent concurrently to the same TiKV node. This parameter primarily affects the granularity of request splitting from BR to TiKV, and no longer directly determines overall backup throughput. In most cases, you do not need to change this value. To improve backup performance, you should tune [`tikv.backup.num-threads`](/tikv-configuration-file.md#num-threads-1) instead.
+* `--pitr-concurrency`: the number of concurrent tasks during log restore.
+* `--tikv-max-restore-concurrency`: the maximum number of concurrent tasks per TiKV node during snapshot restore.
 * `--compression`: determines the compression algorithm used for generating backup files. It supports `lz4`, `snappy`, and `zstd`, with the default being `zstd` (usually no need to modify). For guidance on choosing different compression algorithms, refer to [this document](https://github.com/EighteenZi/rocksdb_wiki/blob/master/Compression.md).
 * `--compression-level`: sets the compression level corresponding to the chosen compression algorithm for backup. The default compression level for `zstd` is 3. In most cases there is no need to set this option.
 
@@ -75,12 +77,12 @@ To back up cluster data, run the `tiup br backup` command. You can add the `full
 
 To start log backup and manage log backup tasks, run the `tiup br log` command.
 
-- [Start a log backup task](/br/br-pitr-manual.md#start-a-backup-task)
-- [Query the backup status](/br/br-pitr-manual.md#query-the-backup-status)
-- [Pause and resume a log backup task](/br/br-pitr-manual.md#pause-and-resume-a-backup-task)
-- [Stop and restart a log backup task](/br/br-pitr-manual.md#stop-and-restart-a-backup-task)
-- [Clean up the backup data](/br/br-pitr-manual.md#clean-up-backup-data)
-- [View the backup metadata](/br/br-pitr-manual.md#view-the-backup-metadata)
+- [Start a log backup task](/br/br-pitr-manual.md#start-a-log-backup-task)
+- [Query the log backup status](/br/br-pitr-manual.md#query-the-log-backup-status)
+- [Pause and resume a log backup task](/br/br-pitr-manual.md#pause-and-resume-a-log-backup-task)
+- [Stop and restart a log backup task](/br/br-pitr-manual.md#stop-and-restart-a-log-backup-task)
+- [Clean up the backup data](/br/br-pitr-manual.md#clean-up-log-backup-data)
+- [View the backup metadata](/br/br-pitr-manual.md#view-the-log-backup-metadata)
 
 ## Commands of restoring backup data
 

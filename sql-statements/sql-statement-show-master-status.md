@@ -1,13 +1,13 @@
 ---
 title: SHOW MASTER STATUS
-summary: TiDB 数据库中 SHOW MASTER STATUS 的使用概述。
+summary: An overview of the usage of SHOW MASTER STATUS for the TiDB database.
 ---
 
 # SHOW MASTER STATUS
 
-`SHOW MASTER STATUS` 语句显示集群中的最新 TSO。
+The `SHOW MASTER STATUS` statement displays the latest TSO in the cluster.
 
-## 示例
+## Examples
 
 {{< copyable "sql" >}}
 
@@ -24,25 +24,8 @@ SHOW MASTER STATUS;
 1 row in set (0.00 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-`SHOW MASTER STATUS` 的输出格式设计为与 MySQL 匹配。但是，执行结果不同，MySQL 的结果是 binlog 位置信息，而 TiDB 的结果是最新的 TSO 信息。
+The output of `SHOW MASTER STATUS` is designed to match MySQL. However, the execution results are different in that the MySQL result is the binlog location information and the TiDB result is the latest TSO information.
 
-`SHOW BINARY LOG STATUS` 语句作为 `SHOW MASTER STATUS` 的别名被添加到 TiDB 中，而 `SHOW MASTER STATUS` 在 MySQL 8.2.0 及更新版本中已被弃用。
-
-## 另请参阅
-
-<CustomContent platform="tidb">
-
-* [SHOW PUMP STATUS](/sql-statements/sql-statement-show-pump-status.md)
-* [SHOW DRAINER STATUS](/sql-statements/sql-statement-show-drainer-status.md)
-* [CHANGE PUMP STATUS](/sql-statements/sql-statement-change-pump.md)
-* [CHANGE DRAINER STATUS](/sql-statements/sql-statement-change-drainer.md)
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-* [`SHOW TABLE STATUS`](/sql-statements/sql-statement-show-table-status.md)
-
-</CustomContent>
+The `SHOW BINARY LOG STATUS` statement was added in TiDB as an alias for `SHOW MASTER STATUS`, which has been deprecated in MySQL 8.2.0 and newer versions.

@@ -1,92 +1,92 @@
 ---
-title: 2024-09-15 TiDB Cloud 控制台维护通知
-summary: 了解 2024 年 9 月 15 日 TiDB Cloud 控制台维护的详细信息，如维护时间窗口、原因和影响。
+title: 2024-09-15 TiDB Cloud Console Maintenance Notification
+summary: Learn about the details of the TiDB Cloud Console maintenance on September 15, 2024, such as the maintenance window, reason, and impact.
 ---
 
-# [2024-09-15] TiDB Cloud 控制台维护通知
+# [2024-09-15] TiDB Cloud Console Maintenance Notification
 
-本通知描述了你需要了解的 2024 年 9 月 15 日 [TiDB Cloud 控制台](https://tidbcloud.com/)维护的详细信息。
+This notification describes the details that you need to know about the [TiDB Cloud console](https://tidbcloud.com/) maintenance on September 15, 2024.
 
-## 维护时间窗口
+## Maintenance window
 
-- 日期：2024-09-15
-- 开始时间：8:00 (UTC+0)
-- 结束时间：8:10 (UTC+0)
-- 持续时间：约 10 分钟
+- Date: 2024-09-15
+- Start time: 8:00 (UTC+0)
+- End time: 8:10 (UTC+0)
+- Duration: Approximately 10 minutes
 
-> **注意：**
+> **Note:**
 >
-> - 目前，用户无法修改 TiDB Cloud 控制台的维护时间，因此你需要提前做好相应计划。
-> - 在接下来的 3 个月内，部分用户可能会遇到额外的 20 分钟维护时间窗口。受影响的用户将提前收到电子邮件通知。
+> - Currently, users cannot modify the maintenance timing for the TiDB Cloud console, so you need to plan accordingly in advance.
+> - During the next 3 months, some users might experience an additional 20-minute maintenance window. Affected users will receive an email notification in advance.
 
-## 维护原因
+## Reason for maintenance
 
-我们正在升级 TiDB Cloud 控制台的元数据库服务，以提升性能和效率。这项改进旨在为所有用户提供更好的体验，这是我们持续提供高质量服务承诺的一部分。
+We are upgrading the meta database services of the TiDB Cloud console to enhance performance and efficiency. This improvement aims to provide a better experience for all users as part of our ongoing commitment to delivering high-quality services.
 
-## 影响
+## Impact
 
-在维护时间窗口期间，你可能会遇到 TiDB Cloud 控制台 UI 和 API 中与创建和更新相关的功能的间歇性中断。但是，你的 TiDB 集群将保持正常的数据读写操作，确保不会对你的在线业务产生不利影响。
+During the maintenance window, you might experience intermittent disruptions in functionalities related to creating and updating within the TiDB Cloud console UI and API. However, your TiDB cluster will maintain its regular operations for data read and write, ensuring no adverse effects on your online business.
 
-### 受影响的 TiDB Cloud 控制台 UI 功能
+### Affected features of TiDB Cloud console UI
 
-- 集群级别
-    - 集群管理
-        - 创建集群
-        - 删除集群
-        - 扩展集群
-        - 暂停或恢复集群
-        - 更改集群密码
-        - 更改集群流量过滤器
-    - 导入
-        - 创建导入任务
-    - 数据迁移
-        - 创建迁移任务
+- Cluster level
+    - Cluster management
+        - Create clusters
+        - Delete clusters
+        - Scale clusters
+        - Pause or Resume clusters
+        - Change cluster password
+        - Change cluster traffic filter
+    - Import
+        - Create an import job
+    - Data Migration
+        - Create a migration job
     - Changefeed
-        - 创建 changefeed 任务
-    - 备份
-        - 创建手动备份任务
-        - 自动备份任务
-    - 恢复
-        - 创建恢复任务
-    - 数据库审计日志
-        - 测试连接性
-        - 添加或删除访问记录
-        - 启用或禁用数据库审计日志
-        - 重启数据库审计日志
-- 项目级别
-    - 网络访问
-        - 创建私有端点
-        - 删除私有端点
-        - 添加 VPC 对等连接
-        - 删除 VPC 对等连接
-    - 维护
-        - 更改维护时间窗口
-        - 延迟任务
-    - 回收站
-        - 删除集群
-        - 删除备份
-        - 恢复集群
+        - Create a changefeed job
+    - Backup
+        - Create a manual backup job
+        - Auto backup job
+    - Restore
+        - Create a restore Job
+    - Database audit log
+        - Test connectivity
+        - Add or delete access record
+        - Enable or disable Database audit logging
+        - Restart database audit logging
+- Project level
+    - Network access
+        - Create a private endpoint
+        - Delete a private endpoint
+        - Add VPC Peering
+        - Delete VPC Peering
+    - Maintenance
+        - Change maintenance window
+        - Defer task
+    - Recycle Bin
+        - Delete clusters
+        - Delete backups
+        - Restore clusters
 
-### 受影响的 TiDB Cloud API 功能
+### Affected features of TiDB Cloud API
 
-- 集群管理
+- Cluster management
     - [CreateCluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/CreateCluster)
     - [DeleteCluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/DeleteCluster)
     - [UpdateCluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)
     - [CreateAwsCmek](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/CreateAwsCmek)
-- 备份
+- Backup
     - [CreateBackup](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Backup/operation/CreateBackup)
     - [DeleteBackup](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Backup/operation/DeleteBackup)
-- 恢复
+- Restore
     - [CreateRestoreTask](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Restore/operation/CreateRestoreTask)
-- 导入
+- Import
     - [CreateImportTask](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Import/operation/CreateImportTask)
     - [UpdateImportTask](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Import/operation/UpdateImportTask)
 
-## 完成和恢复
+## Completion and resumption
 
-一旦维护成功完成，受影响的功能将恢复正常，为你提供更好的体验。
+Once the maintenance is successfully completed, the affected functionalities will be reinstated, offering you an even better experience.
 
-## 获取支持
+## Get support
 
-如果你有任何问题或需要帮助，请联系我们的[支持团队](/tidb-cloud/tidb-cloud-support.md)。我们随时为你解答疑虑并提供必要的指导。
+If you have any questions or need assistance, contact our [support team](/tidb-cloud/tidb-cloud-support.md). We are here to address your concerns and provide any necessary guidance.

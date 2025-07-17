@@ -60,7 +60,7 @@ SQL tuning focuses on finding more efficient ways to process the same workload w
 1. Improving execution plans:
     - Analyze and modify query structures for more efficient processing.
     - Use appropriate indexes to reduce data access and processing time.
-    - Enable TiFlash for analytical queries on large datasets and leverage the Massively Parallel Processing (MPP) engine for complex aggregations and joins.
+    - Enable TiFlash for analytical queries on large datasets and leverage the [Massively Parallel Processing (MPP)](/glossary.md#massively-parallel-processing-mpp) engine for complex aggregations and joins.
 
 2. Enhancing data access methods:
     - Use covering indexes to satisfy queries directly from the index, avoiding full table scans.

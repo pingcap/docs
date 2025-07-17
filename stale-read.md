@@ -1,91 +1,91 @@
 ---
-title: Stale Read 的使用场景
-summary: 了解 Stale Read 及其使用场景。
+title: Usage Scenarios of Stale Read
+summary: Learn about Stale Read and its usage scenarios.
 ---
 
-# Stale Read 的使用场景
+# Usage Scenarios of Stale Read
 
-本文介绍 Stale Read 的使用场景。Stale Read 是 TiDB 用于读取存储在 TiDB 中的历史版本数据的机制。使用此机制，你可以读取特定时间点或指定时间范围内的相应历史数据，从而节省存储节点之间数据复制带来的延迟。
+This document describes the usage scenarios of Stale Read. Stale Read is a mechanism that TiDB applies to read historical versions of data stored in TiDB. Using this mechanism, you can read the corresponding historical data of a specific point in time or within a specified time range, and thus save the latency brought by data replication between storage nodes.
 
-当你使用 Stale Read 时，TiDB 会随机选择一个副本进行数据读取，这意味着所有副本都可用于数据读取。如果你的应用程序无法容忍读取非实时数据，请不要使用 Stale Read；否则，从副本读取的数据可能不是写入 TiDB 的最新数据。
+When you are using Stale Read, TiDB will randomly select a replica for data reading, which means that all replicas are available for data reading. If your application cannot tolerate reading non-real-time data, do not use Stale Read; otherwise, the data read from the replica might not be the latest data written into TiDB.
 
-## 场景示例
+## Scenario examples
 
 <CustomContent platform="tidb">
 
-+ 场景一：如果一个事务只涉及读操作，并且在一定程度上可以容忍数据不是最新的，你可以使用 Stale Read 来获取历史数据。使用 Stale Read 时，TiDB 以牺牲一定实时性能为代价，将查询请求发送到任意副本，从而提高查询执行的吞吐量。特别是在一些小表查询的场景中，如果使用强一致性读取，leader 可能会集中在某个存储节点上，导致查询压力也集中在该节点上。因此，该节点可能成为整个查询的瓶颈。而 Stale Read 可以提高整体查询吞吐量，显著提升查询性能。
++ Scenario one: If a transaction only involves read operations and is tolerant of data staleness to some extent, you can use Stale Read to get historical data. Using Stale Read, TiDB makes the query requests sent to any replica at the expense of some real-time performance, and thus increases the throughput of query executions. Especially in some scenarios where small tables are queried, if strongly consistent reads are used, leader might be concentrated on a certain storage node, causing the query pressure to be concentrated on that node as well. Therefore, that node might become a bottleneck for the whole query. Stale Read, however, can improve the overall query throughput and significantly improve the query performance.
 
-+ 场景二：在一些地理分布式部署的场景中，如果使用强一致性的 follower 读取，为了确保从 Follower 读取的数据与存储在 Leader 中的数据一致，TiDB 需要从不同数据中心请求 `Readindex` 进行验证，这增加了整个查询过程的访问延迟。使用 Stale Read，TiDB 以牺牲一定实时性能为代价，访问当前数据中心的副本来读取相应数据，避免了跨中心连接带来的网络延迟，减少了整个查询的访问延迟。更多信息，请参见[三中心部署下的本地读取](/best-practices/three-dc-local-read.md)。
++ Scenario two: In some scenarios of geo-distributed deployment, if strongly consistent follower reads are used, to make sure that the data read from the Followers is consistent with that stored in the Leader, TiDB requests `Readindex` from different data centers for verification, which increases the access latency for the whole query process. With Stale Read, TiDB accesses the replica in the current data center to read the corresponding data at the expense of some real-time performance, which avoids network latency brought by cross-center connection and reduces the access latency for the entire query. For more information, see [Best Practices for Local Reads in Three-Data-Center Deployments](/best-practices/three-dc-local-read.md).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-如果一个事务只涉及读操作，并且在一定程度上可以容忍数据不是最新的，你可以使用 Stale Read 来获取历史数据。使用 Stale Read 时，TiDB 以牺牲一定实时性能为代价，将查询请求发送到任意副本，从而提高查询执行的吞吐量。特别是在一些小表查询的场景中，如果使用强一致性读取，leader 可能会集中在某个存储节点上，导致查询压力也集中在该节点上。因此，该节点可能成为整个查询的瓶颈。而 Stale Read 可以提高整体查询吞吐量，显著提升查询性能。
+If a transaction only involves read operations and is tolerant of data staleness to some extent, you can use Stale Read to get historical data. Using Stale Read, TiDB makes the query requests sent to any replica at the expense of some real-time performance, and thus increases the throughput of query executions. Especially in some scenarios where small tables are queried, if strongly consistent reads are used, leader might be concentrated on a certain storage node, causing the query pressure to be concentrated on that node as well. Therefore, that node might become a bottleneck for the whole query. Stale Read, however, can improve the overall query throughput and significantly improve the query performance.
 
 </CustomContent>
 
-## 使用方法
+## Usages
 
-TiDB 提供以下语句级别、会话级别和全局级别的 Stale Read 方法：
+TiDB provides the methods of performing Stale Read at the statement level, the session level and the global level as follows:
 
-- 语句级别
-    - 指定精确时间点（**推荐**）：如果你需要 TiDB 读取特定时间点的全局一致数据，且不违反隔离级别，可以在查询语句中指定该时间点的对应时间戳。详细用法请参见 [`AS OF TIMESTAMP` 子句](/as-of-timestamp.md#语法)。
-    - 指定时间范围：如果你需要 TiDB 在指定时间范围内读取尽可能新的数据，且不违反隔离级别，可以在查询语句中指定时间范围。在指定的时间范围内，TiDB 选择一个合适的时间戳来读取相应的数据。"合适"意味着在访问的副本上没有在此时间戳之前开始且尚未提交的事务，即 TiDB 可以在访问的副本上执行读取操作，且读取操作不会被阻塞。详细用法请参见 [`AS OF TIMESTAMP` 子句](/as-of-timestamp.md#语法)和 [`TIDB_BOUNDED_STALENESS` 函数](/as-of-timestamp.md#语法)的介绍。
-- 会话级别
-    - 指定时间范围：在会话中，如果你需要 TiDB 在后续查询中读取指定时间范围内尽可能新的数据，且不违反隔离级别，可以通过设置 `tidb_read_staleness` 系统变量来指定时间范围。详细用法请参见 [`tidb_read_staleness`](/tidb-read-staleness.md)。
+- Statement level
+    - Specifying an exact point in time (**recommended**): If you need TiDB to read data that is globally consistent from a specific point in time without violating the isolation level, you can specify the corresponding timestamp of that point in time in the query statement. For detailed usage, see [`AS OF TIMESTAMP` clause](/as-of-timestamp.md#syntax).
+    - Specifying a time range: If you need TiDB to read the data as new as possible within a time range without violating the isolation level, you can specify the time range in the query statement. Within the specified time range, TiDB selects a suitable timestamp to read the corresponding data. "Suitable" means there are no transactions that start before this timestamp and have not been committed on the accessed replica, that is, TiDB can perform read operations on the accessed replica and the read operations are not blocked. For detailed usage, refer to the introduction of the [`AS OF TIMESTAMP` Clause](/as-of-timestamp.md#syntax) and the [`TIDB_BOUNDED_STALENESS` function](/as-of-timestamp.md#syntax).
+- Session level
+    - Specifying a time range: In a session, if you need TiDB to read the data as new as possible within a time range in subsequent queries without violating the isolation level, you can specify the time range by setting the `tidb_read_staleness` system variable. For detailed usage, refer to [`tidb_read_staleness`](/tidb-read-staleness.md).
 
-此外，TiDB 还提供了通过设置 [`tidb_external_ts`](/system-variables.md#tidb_external_ts-new-in-v640) 和 [`tidb_enable_external_ts_read`](/system-variables.md#tidb_enable_external_ts_read-new-in-v640) 系统变量在会话或全局级别指定精确时间点的方式。详细用法请参见[使用 `tidb_external_ts` 进行 Stale Read](/tidb-external-ts.md)。
+Besides, TiDB provides a way to specify an exact point in time at the session or global level by setting the [`tidb_external_ts`](/system-variables.md#tidb_external_ts-new-in-v640) and [`tidb_enable_external_ts_read`](/system-variables.md#tidb_enable_external_ts_read-new-in-v640) system variables. For detailed usage, refer to [Perform Stale Read Using `tidb_external_ts`](/tidb-external-ts.md).
 
-### 降低 Stale Read 延迟
+### Reduce Stale Read latency
 
-Stale Read 功能会定期推进 TiDB 集群的 Resolved TS 时间戳，以确保 TiDB 读取满足事务一致性的数据。如果 Stale Read 使用的时间戳（例如 `AS OF TIMESTAMP '2016-10-08 16:45:26'`）大于 Resolved TS，Stale Read 会先触发 TiDB 推进 Resolved TS，并等待推进完成后再读取数据，导致延迟增加。
+The Stale Read feature periodically advances the Resolved TS timestamp of the TiDB cluster, which ensures that TiDB reads data that meets transaction consistency. If the timestamp used by Stale Read (for example, `AS OF TIMESTAMP '2016-10-08 16:45:26'`) is greater than the Resolved TS, Stale Read will trigger TiDB to advance the Resolved TS first and wait for the advance to complete before reading the data, leading to an increase in latency.
 
-为了降低 Stale Read 延迟，你可以修改以下 TiKV 配置项，使 TiDB 更频繁地推进 Resolved TS 时间戳：
+To reduce the Stale Read latency, you can modify the following TiKV configuration item to make TiDB advance the Resolved TS timestamp more frequently:
 
 ```toml
 [resolved-ts]
-advance-ts-interval = "20s" # 默认值为 "20s"。你可以设置为更小的值，如 "1s"，以更频繁地推进 Resolved TS 时间戳。
+advance-ts-interval = "20s" # The default value is "20s". You can set it to a smaller value such as "1s" to advance the Resolved TS timestamp more frequently.
 ```
 
-> **注意：**
+> **Note:**
 >
-> 减小上述 TiKV 配置项会导致 TiKV CPU 使用率和节点间流量增加。
+> Decreasing the preceding TiKV configuration item will lead to an increase in TiKV CPU usage and traffic between nodes.
 
 <CustomContent platform="tidb">
 
-关于 Resolved TS 的内部原理和诊断技术的更多信息，请参见[理解 TiKV 中的 Stale Read 和 safe-ts](/troubleshoot-stale-read.md)。
+For more information about the internals of Resolved TS and diagnostic techniques, see [Understanding Stale Read and safe-ts in TiKV](/troubleshoot-stale-read.md).
 
 </CustomContent>
 
-## 限制
+## Restrictions
 
-当对表的 Stale Read 查询下推到 TiFlash 时，如果该表在查询指定的读取时间戳之后执行了较新的 DDL 操作，查询将返回错误。这是因为 TiFlash 仅支持读取具有最新 schema 的表的数据。
+When a Stale Read query for a table is pushed down to TiFlash, the query will return an error if this table has newer DDL operations executed after the read timestamp specified by the query. This is because TiFlash only supports reading data from the tables with the latest schemas.
 
-以下面的表为例：
+Take the following table as an example:
 
 ```sql
 create table t1(id int);
 alter table t1 set tiflash replica 1;
 ```
 
-一分钟后执行以下 DDL 操作：
+Execute the following DDL operation after one minute:
 
 ```sql
 alter table t1 add column c1 int not null;
 ```
 
-然后，使用 Stale Read 查询一分钟前的数据：
+Then, use Stale Read to query the data from one minute ago:
 
 ```sql
 set @@session.tidb_enforce_mpp=1;
 select * from t1 as of timestamp NOW() - INTERVAL 1 minute;
 ```
 
-TiFlash 将报告如下错误：
+TiFlash will report an error as follows:
 
 ```
 ERROR 1105 (HY000): other error for mpp stream: From MPP<query:<query_ts:1673950975508472943, local_query_id:18, server_id:111947, start_ts:438816196526080000>,task_id:1>: Code: 0, e.displayText() = DB::TiFlashException: Table 323 schema version 104 newer than query schema version 100, e.what() = DB::TiFlashException,
 ```
 
-为避免此错误，你可以将 Stale Read 指定的读取时间戳更改为 DDL 操作之后的时间。
+To avoid this error, you can change the read timestamp specified by Stale Read to the time after the DDL operation.

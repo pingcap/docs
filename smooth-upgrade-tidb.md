@@ -18,7 +18,7 @@ Depending on whether the feature needs to be controlled by a switch, there are t
     - Upgrade from v7.1.1 to v7.2.0 or v7.3.0
     - Upgrade from v7.2.0 to v7.3.0
 
-- The feature is disabled by default, and can be enabled by sending the `/upgrade/start` request. For details, see [TiDB HTTP API](https://github.com/pingcap/tidb/blob/release-8.1/docs/tidb_http_api.md). The supported versions are as follows:
+- The feature is disabled by default, and can be enabled by sending the `/upgrade/start` request. For details, see [TiDB HTTP API](https://github.com/pingcap/tidb/blob/release-8.5/docs/tidb_http_api.md). The supported versions are as follows:
     - Upgrade from v7.1.2 and later v7.1 versions (that is, v7.1.x, where x >= 2) to v7.4.0 and later versions
     - Upgrade from v7.4.0 to later versions
 
@@ -27,7 +27,7 @@ Refer to the following table for the upgrade methods supported by specific versi
 | Original version | Upgraded version | Upgrade methods | Note |
 |------|--------|-------------|-------------|
 | < v7.1.0  | Any version                 | Does not support smooth upgrade. | |
-| v7.1.0    | v7.1.1、v7.2.0, or v7.3.0   | Smooth upgrade is automatically supported. No additional operations are required. | Experimental feature. It might encounter the issue [#44760](https://github.com/pingcap/tidb/pull/44760). |
+| v7.1.0    | v7.1.1, v7.2.0, or v7.3.0   | Smooth upgrade is automatically supported. No additional operations are required. | Experimental feature. It might encounter the issue [#44760](https://github.com/pingcap/tidb/pull/44760). |
 | v7.1.1    | v7.2.0 or v7.3.0         | Smooth upgrade is automatically supported. No additional operations are required. | Experimental feature.  |
 | v7.2.0    | v7.3.0                   | Smooth upgrade is automatically supported. No additional operations are required. | Experimental feature.  |
 | [v7.1.2, v7.2.0)                     | [v7.1.2, v7.2.0) | Enable smooth upgrade by sending the `/upgrade/start` HTTP request. There are two methods: [Use TiUP](#use-tiup-to-upgrade) and [Other upgrade methods](#other-upgrade-methods) | When smooth upgrade is not enabled, ensure that no DDL operations are performed during the upgrade. |

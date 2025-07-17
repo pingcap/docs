@@ -1,89 +1,89 @@
 ---
-title: 恢复组入门
-summary: 了解如何在 TiDB Cloud 中创建恢复组并查看其详细信息。
+title: Get Started with Recovery Groups
+summary: Learn how to create a recovery group in TiDB Cloud and view its details.
 ---
 
-# 恢复组入门
+# Get Started with Recovery Groups
 
-本文档介绍如何使用 [TiDB Cloud 控制台](https://tidbcloud.com/) 创建恢复组来保护运行在 TiDB Cloud Dedicated 集群上的数据库。同时还介绍如何查看恢复组的详细信息。
+This document describes how to create a recovery group to protect your databases running on TiDB Cloud Dedicated clusters using the [TiDB Cloud console](https://tidbcloud.com/). It also shows how to view details of a recovery group.
 
-## 前提条件
+## Prerequisites
 
-- 恢复组将你的数据库复制到另一个集群，以保护你的数据库免受区域性灾难的影响。在创建恢复组之前，你需要有两个 TiDB Cloud Dedicated 集群。一个集群托管主数据库，第二个集群托管主数据库的副本。如果你尚未创建这些集群，请按照[创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)中的步骤创建所需的集群。
-- 要创建恢复组，你必须具有组织的 `Organization Owner` 角色或目标项目的 `Project Owner` 角色。
+- A recovery group replicates your databases to another cluster to protect your databases from regional disasters. Before creating a recovery group, you need to have two TiDB Cloud Dedicated clusters. One cluster hosts the primary databases, and a second cluster hosts the replicas of the primary databases. If you have not done so already, follow the steps in [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md) to create the necessary clusters.
+- To create a recovery group, you must be in the `Organization Owner` role of your organization or the `Project Owner` role of the target project.
 
-> **注意**
+> **Note**
 >
-> 目前，只有在 AWS 上托管的 TiDB Cloud Dedicated 集群支持恢复组。
+> Currently, only TiDB Cloud Dedicated clusters hosted on AWS support recovery groups.
 
-## 创建新的恢复组
+## Create a new recovery group
 
-要创建恢复组，请执行以下步骤：
+To create a recovery group, perform the following steps:
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，使用左上角的组合框切换到目标项目。
+1. In the [TiDB Cloud console](https://tidbcloud.com/), switch to your target project using the combo box in the upper-left corner.
 
-2. 在左侧导航栏中，点击 **Recovery Group**。
+2. In the left navigation pane, click **Recovery Group**.
 
-3. 在 **Recovery Group** 页面，点击 **Create Recovery Group**。
+3. On the **Recovery Group** page, click **Create Recovery Group**.
 
-4. 在 **Create Recovery Group** 页面，为恢复组输入名称。
+4. On the **Create Recovery Group** page, enter a name for the recovery group.
 
-    > **注意**
+    > **Note**
     >
-    > 目前仅支持一种弹性级别。有关更多信息，请参见[关于弹性级别](#关于弹性级别)。
+    > Currently only one resiliency level is supported. For more information, see [About resiliency levels](#about-resiliency-levels).
 
-5. 选择将作为该组主集群的 TiDB Cloud Dedicated 集群。
+5. Select the TiDB Cloud Dedicated cluster that will be the primary cluster for this group.
 
-6. 选择将作为该组数据库复制目标的备用 TiDB Cloud Dedicated 集群。
+6. Select the TiDB Cloud Dedicated cluster that will be the secondary cluster where databases will be replicated for this group.
 
-7. 选择你希望作为此恢复组一部分进行复制的数据库。
+7. Select which databases you wish to replicate as part of this recovery group.
 
-    > **注意**
+    > **Note**
     >
-    > 在将数据库分配给组时，你可以选择特定数据库，或选择主集群上的所有（非系统）数据库（当前和未来）。
+    > When assigning databases to the group, you can select specific databases, or select all (non-system) databases on the primary cluster (current and future).
     >
-    > - 如果你**分配所有数据库（当前和未来）**，将来添加到集群的任何数据库都将自动包含在此恢复组中，并复制到备用集群。
-    > - 如果你**分配特定数据库**，选择你想要复制到备用集群的主集群上的特定数据库。如果将来向主集群添加任何数据库，这些新数据库不会自动作为此恢复组的一部分进行复制。
-    >
-    > 在初始复制期间，由于传输的数据量较大，可能会影响主集群或备用集群的在线查询性能。请在较不繁忙的时期安排数据库的初始保护。
+    > - If you **Assign all databases (current and future)**, any future databases added to the cluster will be automatically included in this recovery group and replicated to the secondary cluster.
+    > - If you **Assign specific databases**, select the specific databases on the primary cluster that you want to replicate to the secondary cluster. If any databases are added to the primary cluster in the future, these new databases will not be automatically replicated as part of this recovery group.
+   >
+    > During the initial replication, due to the volume of data transferred, the online query performance at the primary or secondary clusters might be affected. Schedule the initial protection of databases for a less busy period.
 
-    > **警告**
+    > **Warning**
     > 
-    > 在初始复制期间，主集群上所选数据库的内容将替换备用集群上的数据库内容。如果你希望保留备用集群上的唯一内容，请在设置恢复组之前完成备份。
+    > During the initial replication, the content of the selected databases at the primary cluster will replace the content of the databases at the secondary cluster. If you wish to preserve the unique content at the secondary cluster, complete a backup before setting up the recovery group.
 
-8. 查看摘要信息，然后点击 **Create** 开始将数据库作为新恢复组的一部分进行保护。
+8. Review the summary information, and then click **Create** to begin protecting the databases as part of the new recovery group.
 
-## 查看恢复组详细信息
+## View recovery group details
 
-创建恢复组后，你可以在 **Recovery Group Detail** 页面上查看其状态信息：
+After creating a recovery group, you can view its status information on the **Recovery Group Detail** page:
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，使用左上角的组合框切换到目标项目。
+1. In the [TiDB Cloud console](https://tidbcloud.com/), switch to your target project using the combo box in the upper-left corner.
 
-2. 在左侧导航栏中，点击 **Recovery Group**。
+2. In the left navigation pane, click **Recovery Group**.
 
-3. 在 **Recovery Group** 页面，点击你想要查看的恢复组的名称。
+3. On the **Recovery Group** page, click the name of the recovery group that you wish to view.
 
-    **Recovery Group Detail** 页面提供了有关恢复组的信息，包括其配置详细信息、状态以及复制吞吐量和延迟的指标。
+    The **Recovery Group Detail** page provides information about a recovery group, including its configuration details, status, and metrics on the replication throughput and latency. 
 
-4. 当复制关系完全建立并正常运行时，状态显示为 **Available**。
+4. When a replication relationship is fully established and functioning, the status is displayed as **Available**.
 
-    > **警告**
+    > **Warning**
     >
-    > 在设置恢复组期间，将在备用集群上创建一个遵循 `cloud-rg-*` 模式命名的账户，用于复制过程。删除或修改此账户将中断复制。
+    > During the setup of a recovery group, an account named following the pattern `cloud-rg-*` will be created on the secondary cluster for the replication process. Deleting or modifying this account will interrupt the replication.
 
-## 关于弹性级别
+## About resiliency levels
 
-弹性级别定义了恢复组在不同场景下数据读取的一致性特征。目前，TiDB Cloud 仅提供以下弹性级别：
+A resiliency level defines the consistency characteristics of data reading in different scenarios of a recovery group. Currently, TiDB Cloud only provides the following resiliency level:
 
-- 不保证一致性。在恢复组的复制过程中，下游集群不保证事务一致性读取。当上游集群不可用时，你无法将下游集群中的数据恢复到事务一致性状态。
+- No consistency guaranteed. During the replication of a recovery group, the downstream cluster does not guarantee transaction consistency read. When the upstream cluster becomes unavailable, you can not restore the data in the downstream cluster to a transaction consistency state.
 
-TiDB Cloud 将在不久的将来提供两个额外的弹性级别：
+TiDB Cloud will provide two additional resiliency levels in the near future:
 
-- 最终一致性。在恢复组的复制过程中，下游集群不保证事务一致性读取。但是，当上游集群不可用时，你可以将下游集群中的数据恢复到事务一致性状态。
-- 近实时一致性。在恢复组的复制过程中，下游集群提供近实时的事务一致性读取。当上游集群不可用时，你可以将下游集群中的数据恢复到事务一致性状态。
+- Eventual consistency. During the replication of a recovery group, the downstream cluster does not guarantee transaction consistency read. However, when the upstream cluster becomes unavailable, you can restore the data in the downstream cluster to a transaction consistency state.
+- Near real-time consistency. During the replication of a recovery group, the downstream cluster provides approximately real-time transaction consistency read. When the upstream cluster becomes unavailable, you can restore the data in the downstream cluster to a transaction consistency state.
 
-## 下一步
+## What's next
 
-创建恢复组后，你可能想要熟悉故障转移和重新保护操作。这些操作用于将复制数据库的主集群从一个集群**故障转移**到另一个集群，然后在相反方向重新建立复制以**重新保护**已故障转移的数据库。
+After creating the recovery group, you might want to familiarize yourself with the failover and reprotect operations. These operations are used to **Failover** the primary cluster for the replicated databases from one cluster to the other, and then to later re-establish replication in the opposite direction to **Reprotect** the failed over databases.
 
-- [数据库故障转移和重新保护](/tidb-cloud/recovery-group-failover.md)
+- [Failover and Reprotect Databases](/tidb-cloud/recovery-group-failover.md)

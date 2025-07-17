@@ -1,13 +1,13 @@
 ---
-title: CREATE TABLE | TiDB SQL 语句参考
-summary: TiDB 数据库中 CREATE TABLE 的使用概览。
+title: CREATE TABLE | TiDB SQL Statement Reference
+summary: An overview of the usage of CREATE TABLE for the TiDB database.
 ---
 
 # CREATE TABLE
 
-此语句在当前选择的数据库中创建一个新表。它的行为类似于 MySQL 中的 `CREATE TABLE` 语句。
+This statement creates a new table in the currently selected database. It behaves similarly to the `CREATE TABLE` statement in MySQL.
 
-## 语法
+## Synopsis
 
 ```ebnf+diagram
 CreateTableStmt ::=
@@ -44,8 +44,8 @@ ColumnOptionList ::=
 ColumnOption ::=
     'NOT'? 'NULL'
 |   'AUTO_INCREMENT'
-|   PrimaryOpt 'KEY'
-|   'UNIQUE' 'KEY'?
+|   PrimaryOpt 'KEY' ( 'GLOBAL' | 'LOCAL' )?
+|   'UNIQUE' 'KEY'? ( 'GLOBAL' | 'LOCAL' )?
 |   'DEFAULT' DefaultValueExpr
 |   'SERIAL' 'DEFAULT' 'VALUE'
 |   'ON' 'UPDATE' NowSymOptionFraction
@@ -76,6 +76,7 @@ IndexOption ::=
     'COMMENT' String
 |   ( 'VISIBLE' | 'INVISIBLE' )
 |   ('USING' | 'TYPE') ('BTREE' | 'RTREE' | 'HASH')
+|   ( 'GLOBAL' | 'LOCAL' )
 
 ForeignKeyDef
          ::= ( 'CONSTRAINT' Identifier )? 'FOREIGN' 'KEY'
@@ -157,37 +158,37 @@ NextValueForSequence ::=
 |   "NEXTVAL" '(' TableName ')'
 ```
 
-支持以下 *table_options*。其他选项如 `AVG_ROW_LENGTH`、`CHECKSUM`、`COMPRESSION`、`CONNECTION`、`DELAY_KEY_WRITE`、`ENGINE`、`KEY_BLOCK_SIZE`、`MAX_ROWS`、`MIN_ROWS`、`ROW_FORMAT` 和 `STATS_PERSISTENT` 会被解析但忽略。
+The following *table_options* are supported. Other options such as `AVG_ROW_LENGTH`, `CHECKSUM`, `COMPRESSION`, `CONNECTION`, `DELAY_KEY_WRITE`, `ENGINE`, `KEY_BLOCK_SIZE`, `MAX_ROWS`, `MIN_ROWS`, `ROW_FORMAT` and `STATS_PERSISTENT` are parsed but ignored.
 
-| 选项 | 描述 | 示例 |
+| Options | Description | Example |
 | ---------- | ---------- | ------- |
-| `AUTO_INCREMENT` | 自增字段的初始值 | `AUTO_INCREMENT` = 5 |
-| [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)| 设置隐式 `_tidb_rowid` 分片的位数 |`SHARD_ROW_ID_BITS` = 4|
-|`PRE_SPLIT_REGIONS`| 在创建表时预先切分 `2^(PRE_SPLIT_REGIONS)` 个 Region |`PRE_SPLIT_REGIONS` = 4|
-|`AUTO_ID_CACHE`| 设置 TiDB 实例中的自动 ID 缓存大小。默认情况下，TiDB 会根据自动 ID 的分配速度自动调整此大小 |`AUTO_ID_CACHE` = 200 |
-|`AUTO_RANDOM_BASE`| 设置 auto_random 的初始增量部分值。此选项可以被视为内部接口的一部分。用户可以忽略此参数 |`AUTO_RANDOM_BASE` = 0|
-| `CHARACTER SET` | 指定表的[字符集](/character-set-and-collation.md) | `CHARACTER SET` =  'utf8mb4' |
-| `COMMENT` | 注释信息 | `COMMENT` = 'comment info' |
+| `AUTO_INCREMENT` | The initial value of the increment field | `AUTO_INCREMENT` = 5 |
+| [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)| To set the number of bits for the implicit `_tidb_rowid` shards |`SHARD_ROW_ID_BITS` = 4|
+|`PRE_SPLIT_REGIONS`| To pre-split `2^(PRE_SPLIT_REGIONS)` Regions when creating a table |`PRE_SPLIT_REGIONS` = 4|
+|`AUTO_ID_CACHE`| To set the auto ID cache size in a TiDB instance. By default, TiDB automatically changes this size according to allocation speed of auto ID |`AUTO_ID_CACHE` = 200 |
+|`AUTO_RANDOM_BASE`| To set the initial incremental part value of auto_random. This option can be considered as a part of the internal interface. Users can ignore this parameter |`AUTO_RANDOM_BASE` = 0|
+| `CHARACTER SET` | To specify the [character set](/character-set-and-collation.md) for the table | `CHARACTER SET` =  'utf8mb4' |
+| `COMMENT` | The comment information | `COMMENT` = 'comment info' |
 
 <CustomContent platform="tidb">
 
-> **注意：**
+> **Note:**
 >
-> `split-table` 配置选项默认启用。启用时，为每个新创建的表创建单独的 Region。详情请参见 [TiDB 配置文件](/tidb-configuration-file.md)。
+> The `split-table` configuration option is enabled by default. When it is enabled, a separate Region is created for each newly created table. For details, see [TiDB configuration file](/tidb-configuration-file.md).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-> **注意：**
+> **Note:**
 >
-> TiDB 为每个新创建的表创建单独的 Region。
+> TiDB creates a separate Region for each newly created table.
 
 </CustomContent>
 
-## 示例
+## Examples
 
-创建一个简单的表并插入一行：
+Creating a simple table and inserting one row:
 
 {{< copyable "sql" >}}
 
@@ -207,18 +208,18 @@ mysql> CREATE TABLE t1 (a int);
 Query OK, 0 rows affected (0.09 sec)
 
 mysql> DESC t1;
-+-------+---------+------+------+---------+-------+
-| Field | Type    | Null | Key  | Default | Extra |
-+-------+---------+------+------+---------+-------+
-| a     | int(11) | YES  |      | NULL    |       |
-+-------+---------+------+------+---------+-------+
++-------+------+------+------+---------+-------+
+| Field | Type | Null | Key  | Default | Extra |
++-------+------+------+------+---------+-------+
+| a     | int  | YES  |      | NULL    |       |
++-------+------+------+------+---------+-------+
 1 row in set (0.00 sec)
 
 mysql> SHOW CREATE TABLE t1\G
 *************************** 1. row ***************************
        Table: t1
 Create Table: CREATE TABLE `t1` (
-  `a` int(11) DEFAULT NULL
+  `a` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 1 row in set (0.00 sec)
 
@@ -234,7 +235,7 @@ mysql> SELECT * FROM t1;
 1 row in set (0.00 sec)
 ```
 
-如果表存在则删除，如果表不存在则有条件地创建表：
+Dropping a table if it exists, and conditionally creating a table if it does not exist:
 
 {{< copyable "sql" >}}
 
@@ -261,38 +262,39 @@ mysql> DESC t1;
 +-------+--------------+------+------+---------+----------------+
 | Field | Type         | Null | Key  | Default | Extra          |
 +-------+--------------+------+------+---------+----------------+
-| id    | bigint(20)   | NO   | PRI  | NULL    | auto_increment |
+| id    | bigint       | NO   | PRI  | NULL    | auto_increment |
 | b     | varchar(200) | NO   |      | NULL    |                |
 +-------+--------------+------+------+---------+----------------+
 2 rows in set (0.00 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-* 支持除空间类型外的所有数据类型。
-* TiDB 在语法上接受 `HASH`、`BTREE` 和 `RTREE` 等索引类型以与 MySQL 兼容，但会忽略它们。
-* TiDB 支持解析 `FULLTEXT` 语法，但不支持使用 `FULLTEXT` 索引。
+* All of the data types except spatial types are supported.
+* TiDB accepts index types such as `HASH`, `BTREE` and `RTREE` in syntax for compatibility with MySQL, but ignores them.
+* TiDB supports parsing the `FULLTEXT` syntax but does not support using the `FULLTEXT` indexes.
+* Setting a `PRIMARY KEY` or `UNIQUE INDEX` as a [global index](/partitioned-table.md#global-indexes) with the `GLOBAL` index option is a TiDB extension for [partitioned tables](/partitioned-table.md) and is not compatible with MySQL.
 
 <CustomContent platform="tidb">
 
-* 为了兼容性，`index_col_name` 属性支持长度选项，默认最大长度限制为 3072 字节。可以通过 `max-index-length` 配置选项更改长度限制。详情请参见 [TiDB 配置文件](/tidb-configuration-file.md#max-index-length)。
+* For compatibility, the `index_col_name` attribute supports the length option with a maximum length limit of 3072 bytes by default. The length limit can be changed through the `max-index-length` configuration option. For details, see [TiDB configuration file](/tidb-configuration-file.md#max-index-length).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-* 为了兼容性，`index_col_name` 属性支持长度选项，最大长度限制为 3072 字节。
+* For compatibility, the `index_col_name` attribute supports the length option with a maximum length limit of 3072 bytes.
 
 </CustomContent>
 
-* `index_col_name` 中的 `[ASC | DESC]` 目前会被解析但忽略（与 MySQL 5.7 兼容的行为）。
-* `COMMENT` 属性不支持 `WITH PARSER` 选项。
-* TiDB 默认支持单个表中的 1017 列，最多支持 4096 列。InnoDB 中对应的限制是 1017 列，MySQL 的硬限制是 4096 列。详情请参见 [TiDB 限制](/tidb-limitations.md)。
-* TiDB 支持 `HASH`、`RANGE`、`LIST` 和 `KEY` [分区类型](/partitioned-table.md#分区类型)。对于不支持的分区类型，TiDB 返回 `Warning: Unsupported partition type %s, treat as normal table`，其中 `%s` 是具体的不支持的分区类型。
+* The `[ASC | DESC]` in `index_col_name` is currently parsed but ignored (MySQL 5.7 compatible behavior).
+* The `COMMENT` attribute does not support the `WITH PARSER` option.
+* TiDB supports 1017 columns in a single table by default and 4096 columns at most. The corresponding number limit in InnoDB is 1017 columns, and the hard limit in MySQL is 4096 columns. For details, see [TiDB Limitations](/tidb-limitations.md).
+* TiDB supports `HASH`, `RANGE`, `LIST`, and `KEY` [partitioning types](/partitioned-table.md#partitioning-types). For an unsupported partition type, TiDB returns `Warning: Unsupported partition type %s, treat as normal table`, where `%s` is the specific unsupported partition type.
 
-## 另请参阅
+## See also
 
-* [数据类型](/data-type-overview.md)
+* [Data Types](/data-type-overview.md)
 * [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
 * [CREATE TABLE LIKE](/sql-statements/sql-statement-create-table-like.md)
 * [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)

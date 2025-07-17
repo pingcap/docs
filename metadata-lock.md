@@ -1,21 +1,21 @@
 ---
-title: 元数据锁
-summary: 介绍 TiDB 中元数据锁的概念、原理和实现细节。
+title: Metadata Lock
+summary: Introduce the concept, principles, and implementation details of metadata lock in TiDB.
 ---
 
-# 元数据锁
+# Metadata Lock
 
-本文介绍 TiDB 中的元数据锁。
+This document introduces the metadata lock in TiDB.
 
-## 概念
+## Concept
 
-TiDB 使用在线异步 schema 变更算法来支持元数据对象的变更。当执行事务时，事务会在开始时获取相应的元数据快照。如果在事务执行期间元数据发生变更，为了保证数据一致性，TiDB 会返回 `Information schema is changed` 错误，事务提交失败。
+TiDB uses the online asynchronous schema change algorithm to support changing metadata objects. When a transaction is executed, it obtains the corresponding metadata snapshot at the transaction start. If the metadata is changed during a transaction, to ensure data consistency, TiDB returns an `Information schema is changed` error and the transaction fails to commit.
 
-为了解决这个问题，TiDB v6.3.0 在在线 DDL 算法中引入了元数据锁。为了避免大多数 DML 错误，TiDB 在表元数据变更期间协调 DML 和 DDL 的优先级，使执行 DDL 等待使用旧元数据的 DML 提交。
+To solve the problem, TiDB v6.3.0 introduces metadata lock into the online DDL algorithm. To avoid most DML errors, TiDB coordinates the priority of DMLs and DDLs during table metadata change and makes executing DDLs wait for the DMLs with old metadata to commit.
 
-## 应用场景
+## Scenarios
 
-TiDB 中的元数据锁适用于所有 DDL 语句，例如：
+The metadata lock in TiDB applies to all DDL statements, such as:
 
 - [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
 - [`ADD COLUMN`](/sql-statements/sql-statement-add-column.md)
@@ -27,21 +27,21 @@ TiDB 中的元数据锁适用于所有 DDL 语句，例如：
 - [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
 - [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)
 
-启用元数据锁可能会对 TiDB 中 DDL 任务的执行性能产生一些影响。为了减少影响，以下列出了一些不需要元数据锁的场景：
+Enabling metadata lock might have some performance impact on the execution of the DDL task in TiDB. To reduce the impact, the following lists some scenarios that do not require metadata lock:
 
-+ 启用自动提交的 `SELECT` 查询
-+ 启用 Stale Read
-+ 访问临时表
++ `SELECT` queries with auto-commit enabled
++ Stale Read is enabled
++ Access temporary tables
 
-## 使用方法
+## Usage
 
-从 v6.5.0 开始，TiDB 默认启用元数据锁。当你将现有集群从 v6.4.0 或更早版本升级到 v6.5.0 或更高版本时，TiDB 会自动启用元数据锁。要禁用元数据锁，你可以将系统变量 [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630) 设置为 `OFF`。
+Starting from v6.5.0, TiDB enables metadata lock by default. When you upgrade your existing cluster from v6.4.0 or earlier to v6.5.0 or later, TiDB automatically enables metadata lock. To disable metadata lock, you can set the system variable [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630) to `OFF`.
 
-## 影响
+## Impact
 
-- 对于 DML，元数据锁不会阻塞其执行，也不会造成任何死锁。
-- 当启用元数据锁时，事务中元数据对象的信息在首次访问时确定，之后不会改变。
-- 对于 DDL，在更改元数据状态时，DDL 可能会被旧事务阻塞。以下是一个示例：
+- For DMLs, metadata lock does not block its execution, nor causes any deadlock.
+- When metadata lock is enabled, the information of a metadata object in a transaction is determined on the first access and does not change after that.
+- For DDLs, when changing metadata state, DDLs might be blocked by old transactions. The following is an example:
 
     | Session 1 | Session 2 |
     |:---------------------------|:----------|
@@ -49,10 +49,10 @@ TiDB 中的元数据锁适用于所有 DDL 语句，例如：
     | `INSERT INTO t VALUES(1);` |           |
     | `BEGIN;`                   |           |
     |                            | `ALTER TABLE t ADD COLUMN b INT;` |
-    | `SELECT * FROM t;`<br/>（使用表 `t` 的当前元数据版本。返回 `(a=1, b=NULL)` 并锁定表 `t`。）         |           |
-    |                            | `ALTER TABLE t ADD COLUMN c INT;`（被 Session 1 阻塞） |
+    | `SELECT * FROM t;`<br/>(Uses the current metadata version of table `t`. Returns `(a=1, b=NULL)` and locks table `t`.)         |           |
+    |                            | `ALTER TABLE t ADD COLUMN c INT;` (blocked by Session 1) |
 
-    在可重复读隔离级别下，从事务开始到确定表元数据的时间点之间，如果执行了需要数据变更的 DDL，例如添加索引或更改列类型，DDL 会返回如下错误：
+    At the repeatable read isolation level, from the transaction start to the timepoint of determining the metadata of a table, if a DDL that requires data changes is performed, such as adding an index, or changing column types, the DDL returns an error as follows:
 
     | Session 1                  | Session 2                                 |
     |:---------------------------|:------------------------------------------|
@@ -60,60 +60,64 @@ TiDB 中的元数据锁适用于所有 DDL 语句，例如：
     | `INSERT INTO t VALUES(1);` |                                           |
     | `BEGIN;`                   |                                           |
     |                            | `ALTER TABLE t ADD INDEX idx(a);`         |
-    | `SELECT * FROM t;`（索引 `idx` 不可用） |                    |
+    | `SELECT * FROM t;` (index `idx` is not available) |                    |
     | `COMMIT;`                  |                                           |
     | `BEGIN;`                   |                                           |
     |                            | `ALTER TABLE t MODIFY COLUMN a CHAR(10);` |
-    | `SELECT * FROM t;`（返回 `ERROR 8028 (HY000): public column a has changed`） | |
+    | `SELECT * FROM t;` (returns `ERROR 8028 (HY000): public column a has changed`) | |
 
-## 可观察性
+## Observability
 
-TiDB v6.3.0 引入了 `mysql.tidb_mdl_view` 视图，帮助你获取当前被阻塞的 DDL 信息。
+TiDB v6.3.0 introduces the `mysql.tidb_mdl_view` view to help you obtain the information of the current blocked DDL.
 
-> **注意：**
+> **Note:**
 >
-> 查询 `mysql.tidb_mdl_view` 视图需要 [`PROCESS` 权限](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)。
+> To select the `mysql.tidb_mdl_view` view, the [`PROCESS` privilege](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process) is required.
 
-以下以为表 `t` 添加索引为例。假设有一个 DDL 语句 `ALTER TABLE t ADD INDEX idx(a)`：
+The following takes adding an index for table `t` as an example. Assume that there is a DDL statement `ALTER TABLE t ADD INDEX idx(a)`:
 
 ```sql
-SELECT * FROM mysql.tidb_mdl_view\G
-*************************** 1. row ***************************
-    JOB_ID: 141
-   DB_NAME: test
-TABLE_NAME: t
-     QUERY: ALTER TABLE t ADD INDEX idx(a)
-SESSION ID: 2199023255957
-  TxnStart: 08-30 16:35:41.313(435643624013955072)
-SQL_DIGESTS: ["begin","select * from `t`"]
-1 row in set (0.02 sec)
+TABLE mysql.tidb_mdl_view\G
 ```
 
-从上述输出中可以看到，`SESSION ID` 为 `2199023255957` 的事务阻塞了 `ADD INDEX` DDL。`SQL_DIGEST` 显示了该事务执行的 SQL 语句，即 ``["begin","select * from `t`"]``。要使被阻塞的 DDL 继续执行，你可以使用以下全局 `KILL` 语句来终止 `2199023255957` 事务：
+```
+*************************** 1. row ***************************
+     job_id: 118
+    db_name: test
+ table_name: t
+      query: ALTER TABLE t ADD COLUMN c INT
+ session_id: 1547698182
+ start_time: 2025-03-19 09:52:36.509000
+SQL_DIGESTS: ["begin","select * from `t`"]
+1 row in set (0.00 sec)
+
+```
+
+From the preceding output, you can see that the transaction whose `SESSION ID` is `1547698182` blocks the `ADD COLUMN` DDL. `SQL_DIGEST` shows the SQL statements executed by this transaction, which is ``["begin","select * from `t`"]``. To make the blocked DDL continue to execute, you can use the following global `KILL` statement to kill the `1547698182` transaction:
 
 ```sql
-mysql> KILL 2199023255957;
+mysql> KILL 1547698182;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-终止事务后，你可以再次查询 `mysql.tidb_mdl_view` 视图。此时，上述事务不会出现在输出中，这意味着 DDL 不再被阻塞。
+After killing the transaction, you can select the `mysql.tidb_mdl_view` view again. At this time, the preceding transaction is not shown in the output, which means the DDL is not blocked.
 
 ```sql
-SELECT * FROM mysql.tidb_mdl_view\G
+TABLE mysql.tidb_mdl_view\G
 Empty set (0.01 sec)
 ```
 
-## 原理
+## Principles
 
-### 问题描述
+### Description of the issue
 
-TiDB 中的 DDL 操作是在线 DDL 模式。当执行 DDL 语句时，要修改的定义对象的元数据版本可能会经历多个小版本变更。在线异步元数据变更算法只建立了相邻两个小版本之间的兼容性，即两个版本之间的操作不会破坏 DDL 变更对象的数据一致性。
+DDL operations in TiDB are the online DDL mode. When a DDL statement is being executed, the metadata version of the defined object to be modified might go through multiple minor version changes. The online asynchronous metadata change algorithm only establishes that two adjacent minor versions are compatible, that is, operations between two versions do not break data consistency of the object that DDL changes.
 
-在为表添加索引时，DDL 语句的状态变更如下：None -> Delete Only, Delete Only -> Write Only, Write Only -> Write Reorg, Write Reorg -> Public。
+When adding an index to a table, the state of the DDL statement changes as follows: None -> Delete Only, Delete Only -> Write Only, Write Only -> Write Reorg, Write Reorg -> Public.
 
-以下事务的提交过程违反了上述约束：
+The following commit process of transactions violates the preceding constraint:
 
-| 事务  | 事务使用的版本  | 集群中的最新版本 | 版本差异 |
+| Transaction  | Version used by transaction  | Latest version in the cluster | Version difference |
 |:-----|:-----------|:-----------|:----|
 | txn1 | None       | None       | 0   |
 | txn2 | DeleteOnly | DeleteOnly | 0   |
@@ -123,11 +127,11 @@ TiDB 中的 DDL 操作是在线 DDL 模式。当执行 DDL 语句时，要修改
 | txn6 | WriteOnly  | WriteReorg | 1   |
 | txn7 | Public     | Public     | 0   |
 
-在上表中，`txn4` 提交时使用的元数据版本与集群中的最新版本相差两个版本。这可能会导致数据不一致。
+In the preceding table, the metadata version used when `txn4` is committed is two versions different from the latest version in the cluster. This might cause data inconsistency.
 
-### 实现细节
+### Implementation details
 
-元数据锁可以确保 TiDB 集群中所有事务使用的元数据版本最多相差一个版本。为了实现这个目标，TiDB 实现了以下两个规则：
+Metadata lock can ensure that the metadata versions used by all transactions in a TiDB cluster differ by one version at most. To achieve this goal, TiDB implements the following two rules:
 
-- 执行 DML 时，TiDB 在事务上下文中记录 DML 访问的元数据对象，如表、视图和相应的元数据版本。这些记录在事务提交时被清理。
-- 当 DDL 语句改变状态时，最新版本的元数据被推送到所有 TiDB 节点。如果 TiDB 节点上与此状态变更相关的所有事务使用的元数据版本与当前元数据版本的差异小于两个，则认为该 TiDB 节点获得了元数据对象的元数据锁。只有在集群中所有 TiDB 节点都获得元数据对象的元数据锁后，才能执行下一个状态变更。
+- When executing a DML, TiDB records metadata objects accessed by the DML in the transaction context, such as tables, views, and corresponding metadata versions. These records are cleaned up when the transaction is committed.
+- When a DDL statement changes state, the latest version of metadata is pushed to all TiDB nodes. If the difference between the metadata version used by all transactions related to this state change on a TiDB node and the current metadata version is less than two, the TiDB node is considered to acquire the metadata lock of the metadata object. The next state change can only be executed after all TiDB nodes in the cluster have obtained the metadata lock of the metadata object.

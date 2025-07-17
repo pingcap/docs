@@ -1,104 +1,104 @@
 ---
-title: 架构
-summary: 了解 TiDB Cloud 的架构概念。
+title: Architecture
+summary: Learn about architecture concepts for TiDB Cloud.
 ---
 
-# 架构
+# Architecture
 
-TiDB Cloud 是一个全托管的数据库即服务（DBaaS），它将开源 HTAP（混合事务和分析处理）数据库 [TiDB](https://docs.pingcap.com/tidb/stable/overview) 的灵活性和强大功能带到了 AWS、Azure 和 Google Cloud 平台。
+TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings the flexibility and power of [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source HTAP (Hybrid Transactional and Analytical Processing) database, to AWS, Azure, and Google Cloud.
 
-TiDB 兼容 MySQL，这使得迁移和使用现有应用程序变得容易，同时提供无缝扩展能力，可以处理从小型工作负载到大规模高性能集群的各种场景。它在一个系统中同时支持事务处理（OLTP）和分析处理（OLAP）工作负载，简化了运维并实现了实时数据洞察。
+TiDB is MySQL-compatible, making it easy to migrate and work with existing applications, while offering seamless scalability to handle everything from small workloads to massive, high-performance clusters. It supports both transactional (OLTP) and analytical (OLAP) workloads in one system, simplifying operations and enabling real-time insights.
 
-TiDB Cloud 提供两种部署选项：**TiDB Cloud Serverless**，用于自动扩展、成本效益高的工作负载，以及 **TiDB Cloud Dedicated**，用于具有专用资源和高级功能的企业级应用。TiDB Cloud 让你能够轻松扩展数据库、处理复杂的管理任务，并专注于开发可靠、高性能的应用程序。
+TiDB Cloud provides two deployment options: **TiDB Cloud** **Serverless**, for auto-scaling, cost-efficient workloads, and **TiDB Cloud Dedicated**, for enterprise-grade applications with dedicated resources and advanced capabilities. TiDB Cloud makes it easy to scale your database, handle complex management tasks, and stay focused on developing reliable, high-performing applications.
 
 ## TiDB Cloud Serverless
 
-TiDB Cloud Serverless 是一个全托管的无服务器解决方案，提供与传统 TiDB 类似的 HTAP 功能，同时提供自动扩展功能，以减轻用户在容量规划和管理复杂性方面的负担。它包含一个基础使用的免费层级，对超出免费限制的使用采用基于消费的计费方式。TiDB Cloud Serverless 提供两种高可用性选项以满足不同的运维需求。
+TiDB Cloud Serverless is a fully managed serverless solution that provides HTAP capabilities similar to traditional TiDB, while offering auto-scaling to alleviate users' burdens related to capacity planning and management complexities. It includes a free tier for basic usage, with consumption-based billing for any usage that exceeds the free limits. TiDB Cloud Serverless offers two types of high availability to address varying operational requirements.
 
-默认情况下，使用可用区高可用性选项的集群将所有组件都部署在同一个可用区内，这样可以降低网络延迟。
+By default, clusters utilizing the Zonal High Availability option have all components located within the same availability zone, which results in lower network latency.
 
-![TiDB Cloud Serverless 可用区高可用性](/media/tidb-cloud/serverless-zonal-high-avaliability-aws.png)
+![TiDB Cloud Serverless zonal high availability](/media/tidb-cloud/serverless-zonal-high-avaliability-aws.png)
 
-对于需要最大基础设施隔离和冗余的应用，区域高可用性选项会将节点分布在多个可用区中。
+For applications that require maximum infrastructure isolation and redundancy, the Regional High Availability option distributes nodes across multiple availability zones.
 
-![TiDB Cloud Serverless 区域高可用性](/media/tidb-cloud/serverless-regional-high-avaliability-aws.png)
+![TiDB Cloud Serverless regional high availability](/media/tidb-cloud/serverless-regional-high-avaliability-aws.png)
 
 ## TiDB Cloud Dedicated
 
-TiDB Cloud Dedicated 专为关键业务而设计，提供跨多个可用区的高可用性、水平扩展和完整的 HTAP 功能。
+TiDB Cloud Dedicated is designed for mission-critical businesses, offering high availability across multiple availability zones, horizontal scaling, and full HTAP capabilities.
 
-它基于隔离的云资源构建，如 VPC、虚拟机、托管 Kubernetes 服务和云存储，充分利用主要云服务提供商的基础设施。TiDB Cloud Dedicated 集群支持完整的 TiDB 功能集，支持快速扩展、可靠备份、在特定 VPC 中部署以及地理级别的灾难恢复。
+Built on isolated cloud resources such as VPCs, VMs, managed Kubernetes services, and cloud storage, it leverages the infrastructure of major cloud providers. TiDB Cloud Dedicated clusters support the complete TiDB feature set, enabling rapid scaling, reliable backups, deployment within specific VPCs, and geographic-level disaster recovery.
 
-![TiDB Cloud Dedicated 架构](/media/tidb-cloud/tidb-cloud-dedicated-architecture.png)
+![TiDB Cloud Dedicated Architecture](/media/tidb-cloud/tidb-cloud-dedicated-architecture.png)
 
-## TiDB Cloud 控制台
+## TiDB Cloud console
 
-[TiDB Cloud 控制台](https://tidbcloud.com/)是 TiDB Cloud Serverless 和 TiDB Cloud Dedicated 的基于 Web 的管理界面。它提供了管理集群、导入或迁移数据、监控性能指标、配置备份、设置安全控制以及与其他云服务集成的工具，所有这些都可以在一个用户友好的平台上完成。
+The [TiDB Cloud console](https://tidbcloud.com/) is the web-based management interface for both TiDB Cloud Serverless and TiDB Cloud Dedicated. It provides tools to manage clusters, import or migrate data, monitor performance metrics, configure backups, set up security controls, and integrate with other cloud services, all from a single, user-friendly platform.
 
-## TiDB Cloud CLI（Beta）
+## TiDB Cloud CLI (Beta)
 
-TiDB Cloud CLI（`ticloud`）允许你通过简单的命令直接从终端管理 TiDB Cloud Serverless 和 TiDB Cloud Dedicated。你可以执行以下任务：
+The TiDB Cloud CLI, `ticloud`, allows you to manage TiDB Cloud Serverless and TiDB Cloud Dedicated directly from your terminal with simple commands. You can perform tasks such as:
 
-- 创建、删除和列出集群。
-- 向集群导入数据。
-- 从集群导出数据。
+- Creating, deleting, and listing clusters.
+- Importing data into clusters.
+- Exporting data from clusters.
 
-更多信息，请参见 [TiDB Cloud CLI 参考](/tidb-cloud/cli-reference.md)。
+For more information, see [TiDB Cloud CLI Reference](/tidb-cloud/cli-reference.md).
 
-## TiDB Cloud API（Beta）
+## TiDB Cloud API (Beta)
 
-TiDB Cloud API 是一个基于 REST 的接口，提供了对 TiDB Cloud Serverless 和 TiDB Cloud Dedicated 资源进行编程访问的能力。它支持自动化和高效处理任务，如管理项目、集群、备份、恢复、数据导入、计费以及 [TiDB Cloud 数据服务](/tidb-cloud/data-service-overview.md)中的其他资源。
+The TiDB Cloud API is a REST-based interface that provides programmatic access to manage resources across TiDB Cloud Serverless and TiDB Cloud Dedicated. It enables automated and efficient handling of tasks such as managing projects, clusters, backups, restores, data imports, billing, and other resources in [TiDB Cloud Data Service](/tidb-cloud/data-service-overview.md).
 
-更多信息，请参见 [TiDB Cloud API 概述](/tidb-cloud/api-overview.md)。
+For more information, see [TiDB Cloud API Overview](/tidb-cloud/api-overview.md).
 
-## 节点
+## Nodes
 
-在 TiDB Cloud 中，每个集群由 TiDB、TiKV 和 TiFlash 节点组成。
+In TiDB Cloud, each cluster consists of TiDB, TiKV, and TiFlash nodes.
 
-- 在 TiDB Cloud Dedicated 集群中，你可以根据性能需求完全管理专用 TiDB、TiKV 和 TiFlash 节点的数量和大小。更多信息，请参见[可扩展性](/tidb-cloud/scalability-concepts.md)。
-- 在 TiDB Cloud Serverless 集群中，TiDB、TiKV 和 TiFlash 节点的数量和大小是自动管理的。这确保了无缝扩展，无需用户处理节点配置或管理任务。
+- In a TiDB Cloud Dedicated cluster, you can fully manage the number and size of your dedicated TiDB, TiKV, and TiFlash nodes according to your performance requirements. For more information, see [Scalability](/tidb-cloud/scalability-concepts.md).
+- In a TiDB Cloud Serverless cluster, the number and size of TiDB, TiKV, and TiFlash nodes are automatically managed. This ensures seamless scaling, eliminating the need for users to handle node configuration or management tasks.
 
-### TiDB 节点
+### TiDB node
 
-[TiDB 节点](/tidb-computing.md)是一个无状态的 SQL 层，使用 MySQL 兼容的端点连接应用程序。它处理 SQL 查询的解析、优化和创建分布式执行计划等任务。
+A [TiDB node](/tidb-computing.md) is a stateless SQL layer that connects to applications using a MySQL-compatible endpoint. It handles tasks like parsing, optimizing, and creating distributed execution plans for SQL queries.
 
-你可以部署多个 TiDB 节点以实现水平扩展并管理更高的工作负载。这些节点与负载均衡器（如 TiProxy 或 HAProxy）配合使用，提供无缝接口。TiDB 节点本身不存储数据——它们将数据请求转发到 TiKV 节点进行行式存储或 TiFlash 节点进行列式存储。
+You can deploy multiple TiDB nodes to scale horizontally and manage higher workloads. These nodes work with load balancers, such as TiProxy or HAProxy, to provide a seamless interface. TiDB nodes do not store data themselves---they forward data requests to TiKV nodes for row-based storage or TiFlash nodes for columnar storage.
 
-### TiKV 节点
+### TiKV node
 
-[TiKV 节点](/tikv-overview.md)是 TiDB 架构中数据存储的核心，作为分布式事务性键值存储引擎，提供可靠性、可扩展性和高可用性。
+A [TiKV node](/tikv-overview.md) is the backbone of data storage in the TiDB architecture, serving as a distributed transactional key-value storage engine that delivers reliability, scalability, and high availability.
 
-**主要特性：**
+**Key features:**
 
-- **基于 Region 的数据存储**
+- **Region-based data storage**
 
-    - 数据被划分为多个 [Region](https://docs.pingcap.com/tidb/dev/glossary#regionpeerraft-group)，每个 Region 覆盖特定的键范围（左闭右开区间：从 `StartKey` 到 `EndKey`）。
-    - 每个 TiKV 节点中共存多个 Region，确保高效的数据分布。
+    - Data is divided into [Regions](https://docs.pingcap.com/tidb/dev/glossary#regionpeerraft-group), each covering a specific Key Range (left-closed, right-open interval: `StartKey` to `EndKey`).
+    - Multiple Regions coexist within each TiKV node to ensure efficient data distribution.
 
-- **事务支持**
+- **Transactional support**
 
-    - TiKV 节点在键值层面提供原生分布式事务支持，默认隔离级别为快照隔离。
-    - TiDB 节点将 SQL 执行计划转换为对 TiKV 节点 API 的调用，实现无缝的 SQL 级事务支持。
+    - TiKV nodes provide native distributed transaction support at the key-value level, ensuring Snapshot Isolation as the default isolation level.
+    - The TiDB node translates SQL execution plans into calls to the TiKV node API, enabling seamless SQL-level transaction support.
 
-- **高可用性**
+- **High availability**
 
-    - TiKV 节点中的所有数据都会被复制（默认三副本）以确保持久性。
-    - TiKV 确保原生高可用性并支持自动故障转移，防止节点故障。
+    - All data in TiKV nodes is replicated (default: three replicas) for durability.
+    - TiKV ensures native high availability and supports automatic failover, safeguarding against node failures.
 
-- **可扩展性和可靠性**
+- **Scalability and reliability**
 
-    - TiKV 节点设计用于处理不断扩大的数据集，同时保持分布式一致性和容错性。
+    - TiKV nodes are designed to handle expanding datasets while maintaining distributed consistency and fault tolerance.
 
-### TiFlash 节点
+### TiFlash node
 
-[TiFlash 节点](/tiflash/tiflash-overview.md)是 TiDB 架构中的一种专门存储节点。与普通的 TiKV 节点不同，TiFlash 采用列式存储模型，专为分析加速而设计。
+A [TiFlash node](/tiflash/tiflash-overview.md) is a specialized type of storage node within the TiDB architecture. Unlike ordinary TiKV nodes, TiFlash is designed for analytical acceleration with a columnar storage model.
 
-**主要特性：**
+**Key features:**
 
-- **列式存储**
+- **Columnar storage**
 
-    TiFlash 节点以列式格式存储数据，这使其针对分析查询进行了优化，显著提高了读密集型工作负载的性能。
+    TiFlash nodes store data in a columnar format, making them optimized for analytical queries and significantly improving performance for read-intensive workloads.
 
-- **向量搜索索引支持**
+- **Vector search index support**
 
-    向量搜索索引功能使用表的 TiFlash 副本，支持高级搜索功能，提高复杂分析场景的效率。
+    The vector search index feature uses TiFlash replicas for tables, enabling advanced search capabilities and improving efficiency in complex analytical scenarios.

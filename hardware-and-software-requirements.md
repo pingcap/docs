@@ -1,9 +1,9 @@
 ---
-title: Software and Hardware Recommendations
+title: TiDB Software and Hardware Requirements
 summary: Learn the software and hardware recommendations for deploying and running TiDB.
 ---
 
-# Software and Hardware Recommendations
+# TiDB Software and Hardware Requirements
 
 <!-- Localization note for TiDB:
 
@@ -13,11 +13,11 @@ summary: Learn the software and hardware recommendations for deploying and runni
 
 -->
 
-As an open-source distributed SQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
+This document describes the software and hardware requirements for deploying and running the TiDB database. As an open-source distributed SQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
 
 ## OS and platform requirements
 
-In v8.1 LTS, TiDB ensures multi-level quality standards for various combinations of operating systems and CPU architectures.
+In v8.5 LTS, TiDB ensures multi-level quality standards for various combinations of operating systems and CPU architectures.
 
 + For the following combinations of operating systems and CPU architectures, TiDB **provides enterprise-level production quality**, and the product features have been comprehensively and systematically verified:
 
@@ -31,10 +31,6 @@ In v8.1 LTS, TiDB ensures multi-level quality standards for various combinations
     <tbody>
       <tr>
         <td>Red Hat Enterprise Linux 8.4 or a later 8.x version</td>
-        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-      </tr>
-      <tr>
-        <td><ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version (TiDB ends support for it starting from 8.4 DMR)</li><li>CentOS 7.3 or a later 7.x version (TiDB ends support for it starting from 8.4 DMR)</li></ul></td>
         <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
       </tr>
       <tr>
@@ -64,10 +60,12 @@ In v8.1 LTS, TiDB ensures multi-level quality standards for various combinations
     </tbody>
     </table>
 
-    > **Note:**
+    > **Warning:**
     >
-    > - According to [CentOS Linux EOL](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/), the upstream support for CentOS Linux 7 ends on June 30, 2024. TiDB ends the support for CentOS 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version.
-    > - According to [Red Hat Enterprise Linux Life Cycle](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates), the maintenance support for Red Hat Enterprise Linux 7 ends on June 30, 2024. TiDB ends the support for Red Hat Enterprise Linux 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version.
+    > - According to [CentOS Linux EOL](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/), the upstream support for CentOS Linux 7 ended on June 30, 2024.
+    >     - Before upgrading TiDB, make sure to check your operating system version. TiDB v8.4.0 DMR and v8.5.0 removed the support of glibc 2.17, and dropped support and testing with CentOS Linux 7. It is recommended to use Rocky Linux 9.1 or a later version. Upgrading a TiDB cluster on CentOS 7 to v8.4.0 or v8.5.0 will cause the risk of cluster unavailability.
+    >     - Starting from v8.5.1, to assist users still using CentOS Linux 7, TiDB resumes the support of glibc 2.17, resumes testing of CentOS Linux 7, and is now compatible with CentOS Linux 7. However, due to the EOL status of CentOS Linux, it is strongly recommended that you review the [official announcements and security guidance](https://www.redhat.com/en/blog/centos-linux-has-reached-its-end-life-eol) for CentOS Linux 7 and migrate to an operating system supported by TiDB for production use, such as Rocky Linux 9.1 or later.
+    > - According to [Red Hat Enterprise Linux Life Cycle](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates), the maintenance support for Red Hat Enterprise Linux 7 ended on June 30, 2024. TiDB ends the support for Red Hat Enterprise Linux 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version. Upgrading a TiDB cluster on Red Hat Enterprise Linux 7 to v8.4.0 or later will cause the cluster to become unavailable. Before upgrading TiDB, make sure to check your operating system version.
 
 + For the following combinations of operating systems and CPU architectures, you can compile, build, and deploy TiDB. In addition, you can also use the basic features of OLTP, OLAP, and the data tools. However, TiDB **does not guarantee enterprise-level production quality**:
 
@@ -128,10 +126,10 @@ In v8.1 LTS, TiDB ensures multi-level quality standards for various combinations
 
 |  Libraries required for compiling and running TiDB |  Version   |
 |   :---   |   :---   |
-|   Golang  |  1.21 or later |
+|   Golang  |  1.23 or later |
 |   Rust    |   nightly-2023-12-28 or later  |
 |  GCC      |   7.x      |
-|  LLVM     |  13.0 or later  |
+|  LLVM     |  17.0 or later  |
 
 Library required for running TiDB: glibc (2.28-151.el8 version)
 
@@ -142,7 +140,7 @@ The following CPU architectures are supported:
 - x86_64. Starting from TiDB v6.6.0, the [x86-64-v2 instruction set](https://developers.redhat.com/blog/2021/01/05/building-red-hat-enterprise-linux-9-for-the-x86-64-v2-microarchitecture-level) is required.
 - ARM 64
 
-## Software recommendations
+## Software requirements
 
 ### Control machine
 
@@ -163,7 +161,7 @@ The following CPU architectures are supported:
 | numa | 2.0.12 or later |
 | tar | any |
 
-## Server recommendations
+## Server requirements
 
 You can deploy and run TiDB on the 64-bit generic hardware server platform in the Intel x86-64 architecture or on the hardware server platform in the ARM architecture. The requirements and recommendations about server hardware configuration (ignoring the resources occupied by the operating system itself) for development, test, and production environments are as follows:
 
@@ -171,7 +169,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 
 | Component | CPU     | Memory | Local Storage  | Network  | Number of Instances (Minimum Requirement) |
 | :------: | :-----: | :-----: | :----------: | :------: | :----------------: |
-| TiDB    | 8 core+   | 16 GB+  | [Disk space requirements](#disk-space-requirements) | Gigabit network card | 1 (can be deployed on the same machine with PD)      |
+| TiDB    | 8 core+   | 16 GB+  | [Storage requirements](#storage-requirements) | Gigabit network card | 1 (can be deployed on the same machine with PD)      |
 | PD      | 4 core+   | 8 GB+  | SAS, 200 GB+ | Gigabit network card | 1 (can be deployed on the same machine with TiDB)       |
 | TiKV    | 8 core+   | 32 GB+  | SAS, 200 GB+ | Gigabit network card | 3       |
 | TiFlash | 32 core+  | 64 GB+  | SSD, 200 GB+ | Gigabit network card | 1     |
@@ -183,7 +181,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 > - For performance-related test, do not use low-performance storage and network hardware configuration, in order to guarantee the correctness of the test result.
 > - For the TiKV server, it is recommended to use NVMe SSDs to ensure faster reads and writes.
 > - If you only want to test and verify the features, follow [Quick Start Guide for TiDB](/quick-start-with-tidb.md) to deploy TiDB on a single machine.
-> - Starting from v6.3.0, to deploy TiFlash under the Linux AMD64 architecture, the CPU must support the AVX2 instruction set. Ensure that `cat /proc/cpuinfo | grep avx2` has output. To deploy TiFlash under the Linux ARM64 architecture, the CPU must support the ARMv8 instruction set architecture. Ensure that `cat /proc/cpuinfo | grep 'crc32' | grep 'asimd'` has output. By using the instruction set extensions, TiFlash's vectorization engine can deliver better performance.
+> - Starting from v6.3.0, to deploy TiFlash under the Linux AMD64 architecture, the CPU must support the AVX2 instruction set. Ensure that `grep avx2 /proc/cpuinfo` has output. To deploy TiFlash under the Linux ARM64 architecture, the CPU must support the ARMv8 instruction set architecture. Ensure that `grep 'crc32' /proc/cpuinfo | grep 'asimd'` has output. By using the instruction set extensions, TiFlash's vectorization engine can deliver better performance.
 
 ### Production environment
 
@@ -237,8 +235,6 @@ As an open-source distributed SQL database, TiDB requires the following network 
 | TiFlash | 20170 |the TiFlash Proxy service port |
 | TiFlash | 20292 | the port for Prometheus to pull TiFlash Proxy metrics |
 | TiFlash | 8234 | the port for Prometheus to pull TiFlash metrics |
-| Pump | 8250 | the Pump communication port |
-| Drainer | 8249 | the Drainer communication port |
 | TiCDC | 8300 | the TiCDC communication port |
 | Monitoring | 9090 | the communication port for the Prometheus service|
 | Monitoring | 12020 | the communication port for the NgMonitoring service|
@@ -248,7 +244,7 @@ As an open-source distributed SQL database, TiDB requires the following network 
 | Alertmanager | 9093 | the port for the alert web service |
 | Alertmanager | 9094 | the alert communication port |
 
-## Disk space requirements
+## Storage requirements
 
 <table>
 <thead>
@@ -261,7 +257,7 @@ As an open-source distributed SQL database, TiDB requires the following network 
 <tbody>
   <tr>
     <td>TiDB</td>
-    <td><ul><li>At least 30 GB for the log disk</li><li>Starting from v6.5.0, Fast Online DDL (controlled by the <a href="https://docs.pingcap.com/tidb/v8.1/system-variables#tidb_ddl_enable_fast_reorg-new-in-v630">tidb_ddl_enable_fast_reorg</a> variable) is enabled by default to accelerate DDL operations, such as adding indexes. If DDL operations involving large objects exist in your application, or you want to use <a href="https://docs.pingcap.com/tidb/v8.1/sql-statement-import-into">IMPORT INTO</a> to import data, it is highly recommended to prepare additional SSD disk space for TiDB (100 GB or more). For detailed configuration instructions, see <a href="https://docs.pingcap.com/tidb/v8.1/check-before-deployment#set-temporary-spaces-for-tidb-instances-recommended">Set a temporary space for a TiDB instance</a></li></ul></td>
+    <td><ul><li>At least 30 GB for the log disk</li><li>Starting from v6.5.0, Fast Online DDL (controlled by the <a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_ddl_enable_fast_reorg-new-in-v630">tidb_ddl_enable_fast_reorg</a> variable) is enabled by default to accelerate DDL operations, such as adding indexes. If DDL operations involving large objects exist in your application, or you want to use <a href="https://docs.pingcap.com/tidb/dev/sql-statement-import-into">IMPORT INTO</a> to import data, it is highly recommended to prepare additional SSD disk space for TiDB (100 GB or more). For detailed configuration instructions, see <a href="https://docs.pingcap.com/tidb/dev/check-before-deployment#set-temporary-spaces-for-tidb-instances-recommended">Set a temporary space for a TiDB instance</a></li></ul></td>
     <td>Lower than 90%</td>
   </tr>
   <tr>
@@ -291,6 +287,8 @@ As an open-source distributed SQL database, TiDB requires the following network 
   </tr>
 </tbody>
 </table>
+
+TiDB supports the XFS and Ext4 file systems. Other file systems are not recommended for production environments.  
 
 ## Web browser requirements
 

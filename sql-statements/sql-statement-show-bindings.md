@@ -1,13 +1,13 @@
 ---
 title: SHOW [GLOBAL|SESSION] BINDINGS
-summary: TiDB 数据库中 SHOW BINDINGS 绑定的使用。
+summary: Use of SHOW BINDINGS binding in TiDB database.
 ---
 
 # SHOW [GLOBAL|SESSION] BINDINGS
 
-`SHOW BINDINGS` 语句用于显示已创建的 SQL 绑定信息。`BINDING` 可以是 `GLOBAL` 或 `SESSION` 级别。默认是 `SESSION`。
+The `SHOW BINDINGS` statement is used to display information about created SQL bindings. A `BINDING` can be on either a `GLOBAL` or `SESSION` basis. The default is `SESSION`.
 
-## 语法图
+## Synopsis
 
 ```ebnf+diagram
 ShowBindingsStmt ::=
@@ -18,23 +18,23 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## 语法说明
+## Syntax description
 
-该语句输出 GLOBAL 或 SESSION 级别的执行计划绑定。默认范围是 SESSION。目前 `SHOW BINDINGS` 输出八列，如下所示：
+This statement outputs the execution plan bindings at the GLOBAL or SESSION level. The default scope is SESSION. Currently `SHOW BINDINGS` outputs eight columns, as shown below:
 
-| 列名 | 描述 |
+| Column Name | Description |
 | :---------- | :------------- |
-| original_sql  | 参数化后的原始 SQL 语句 |
-| bind_sql | 带有提示的绑定 SQL 语句 |
-| default_db | 默认数据库 |
-| status | 状态，包括 'Using'、'Deleted'、'Invalid'、'Rejected' 和 'Pending verification' |
-| create_time | 创建时间 |
-| update_time | 更新时间 |
-| charset | 字符集 |
-| collation | 排序规则 |
-| source | 绑定创建的方式，包括 `manual`（通过 `create [global] binding` SQL 语句创建）、`capture`（由 TiDB 自动捕获）和 `evolve`（由 TiDB 自动演进） |
+| original_sql  |  Original SQL statement after parameterization |
+| bind_sql | Bound SQL statement with hints |
+| default_db | Default database |
+| status | Status including 'Using', 'Deleted', 'Invalid', 'Rejected', and 'Pending verification'|
+| create_time | Created time |
+| update_time | Updated time |
+| charset | Character set |
+| collation | Sorting rule |
+| source | The way in which a binding is created, including `manual` (created by the `create [global] binding` SQL statement), `capture` (captured automatically by TiDB), and `evolve` (evolved automatically by TiDB) |
 
-## 示例
+## Examples
 
 ```sql
 mysql> CREATE TABLE t1 (
@@ -123,14 +123,14 @@ Original_sql: select * from t1 where b = ?
 1 row in set (0.00 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-该语句是 TiDB 对 MySQL 语法的扩展。
+This statement is a TiDB extension to MySQL syntax.
 
-## 另请参阅
+## See also
 
 * [CREATE [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-create-binding.md)
 * [DROP [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-drop-binding.md)
 * [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
-* [优化器提示](/optimizer-hints.md)
-* [SQL 计划管理](/sql-plan-management.md)
+* [Optimizer Hints](/optimizer-hints.md)
+* [SQL Plan Management](/sql-plan-management.md)

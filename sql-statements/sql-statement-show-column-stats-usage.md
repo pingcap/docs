@@ -1,24 +1,24 @@
 ---
 title: SHOW COLUMN_STATS_USAGE
-summary: TiDB 数据库中 SHOW COLUMN_STATS_USAGE 的使用概览。
+summary: An overview of the usage of SHOW COLUMN_STATS_USAGE for TiDB database.
 ---
 
 # SHOW COLUMN_STATS_USAGE
 
-`SHOW COLUMN_STATS_USAGE` 语句显示列统计信息的最后使用时间和收集时间。你还可以使用它来定位 `PREDICATE COLUMNS` 和已收集统计信息的列。
+The `SHOW COLUMN_STATS_USAGE` statement shows the last usage time and collection time of column statistics. You can also use it to locate `PREDICATE COLUMNS` and columns on which statistics have been collected.
 
-目前，`SHOW COLUMN_STATS_USAGE` 语句返回以下列：
+Currently, the `SHOW COLUMN_STATS_USAGE` statement returns the following columns:
 
-| 列名 | 描述            |
+| Column name | Description            |
 | -------- | ------------- |
-| `Db_name`  | 数据库名称    |
-| `Table_name` | 表名 |
-| `Partition_name` | 分区名称 |
-| `Column_name` | 列名 |
-| `Last_used_at` | 列统计信息在查询优化中最后一次使用的时间 |
-| `Last_analyzed_at` | 列统计信息最后一次收集的时间 |
+| `Db_name`  |  The database name    |
+| `Table_name` | The table name |
+| `Partition_name` | The partition name |
+| `Column_name` | The column name |
+| `Last_used_at` | The last time when the column statistics were used in the query optimization |
+| `Last_analyzed_at` | The last time when the column statistics were collected |
 
-## 语法
+## Synopsis
 
 ```ebnf+diagram
 ShowColumnStatsUsageStmt ::=
@@ -29,7 +29,7 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## 示例
+## Examples
 
 ```sql
 SHOW COLUMN_STATS_USAGE;
@@ -48,11 +48,11 @@ SHOW COLUMN_STATS_USAGE;
 5 rows in set (0.00 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-此语句是 TiDB 对 MySQL 语法的扩展。
+This statement is a TiDB extension to MySQL syntax.
 
-## 另请参阅
+## See also
 
 * [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)
-* [统计信息简介](/statistics.md)
+* [Introduction to Statistics](/statistics.md)

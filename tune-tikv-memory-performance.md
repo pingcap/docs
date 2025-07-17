@@ -5,7 +5,7 @@ summary: Learn how to tune the TiKV parameters for optimal performance.
 
 # Tune TiKV Memory Parameter Performance
 
-This document describes how to tune the TiKV parameters for optimal performance. You can find the default configuration file in [etc/config-template.toml](https://github.com/tikv/tikv/blob/release-8.1/etc/config-template.toml). To modify the configuration, you can [use TiUP](/maintain-tidb-using-tiup.md#modify-the-configuration) or [modify TiKV dynamically](/dynamic-config.md#modify-tikv-configuration-dynamically) for a limited set of configuration items. For the complete configuration, see [TiKV configuration file](/tikv-configuration-file.md).
+This document describes how to tune the TiKV parameters for optimal performance. You can find the default configuration file in [etc/config-template.toml](https://github.com/tikv/tikv/blob/release-8.5/etc/config-template.toml). To modify the configuration, you can [use TiUP](/maintain-tidb-using-tiup.md#modify-the-configuration) or [modify TiKV dynamically](/dynamic-config.md#modify-tikv-configuration-dynamically) for a limited set of configuration items. For the complete configuration, see [TiKV configuration file](/tikv-configuration-file.md).
 
 TiKV uses RocksDB for persistent storage at the bottom level of the TiKV architecture. Therefore, many of the performance parameters are related to RocksDB. TiKV uses two RocksDB instances: the default RocksDB instance stores KV data, the Raft RocksDB instance (RaftDB) stores Raft logs.
 
@@ -85,7 +85,7 @@ log-level = "info"
 ##
 ## To deploy multiple TiKV nodes on a single physical machine, configure this parameter explicitly.
 ## Otherwise, the OOM problem might occur in TiKV.
-# capacity = "1GB"
+# capacity = "1GiB"
 
 [pd]
 # PD address
@@ -104,14 +104,14 @@ job = "tikv"
 # raftdb-path = "/tmp/tikv/store/raft"
 
 # When the data size change in a Region is larger than the threshold value, TiKV checks whether this Region needs split.
-# To reduce the costs of scanning data in the checking process, set the value to 32 MB during the data import process. In the normal operation status, set it to the default value.
-region-split-check-diff = "32MB"
+# To reduce the costs of scanning data in the checking process, set the value to 32 MiB during the data import process. In the normal operation status, set it to the default value.
+region-split-check-diff = "32MiB"
 
 [coprocessor]
 ## If the size of a Region with the range of [a,e) is larger than the value of `region_max_size`, TiKV tries to split the Region to several Regions, for example, the Regions with the ranges of [a,b), [b,c), [c,d), and [d,e).
 ## After the Region split, the size of the split Regions is equal to the value of `region_split_size` (or slightly larger than the value of `region_split_size`).
-# region-max-size = "144MB"
-# region-split-size = "96MB"
+# region-max-size = "144MiB"
+# region-split-size = "96MiB"
 
 [rocksdb]
 # The maximum number of threads of RocksDB background tasks. The background tasks include compaction and flush.
@@ -125,7 +125,7 @@ region-split-check-diff = "32MB"
 # max-open-files = 40960
 
 # The file size limit of RocksDB MANIFEST. For more details, see https://github.com/facebook/rocksdb/wiki/MANIFEST
-max-manifest-file-size = "20MB"
+max-manifest-file-size = "20MiB"
 
 # The directory of RocksDB write-ahead logs. If there are two disks on the machine, store the RocksDB data and WAL logs
 # on different disks to improve TiKV performance.
@@ -137,10 +137,10 @@ max-manifest-file-size = "20MB"
 # wal-size-limit = 0
 
 # In most cases, set the maximum total size of RocksDB WAL logs to the default value.
-# max-total-wal-size = "4GB"
+# max-total-wal-size = "4GiB"
 
-# Use this parameter to enable the readahead feature during RocksDB compaction. If you are using mechanical disks, it is recommended to set the value to 2MB at least.
-# compaction-readahead-size = "2MB"
+# Use this parameter to enable the readahead feature during RocksDB compaction. If you are using mechanical disks, it is recommended to set the value to 2MiB at least.
+# compaction-readahead-size = "2MiB"
 
 [rocksdb.defaultcf]
 # The data block size. RocksDB compresses data based on the unit of block.
@@ -166,7 +166,7 @@ block-size = "64KB"
 compression-per-level = ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
 
 # The RocksDB memtable size
-write-buffer-size = "128MB"
+write-buffer-size = "128MiB"
 
 # The maximum number of the memtables. The data written into RocksDB is first recorded in the WAL log, and then inserted
 # into memtables. When the memtable reaches the size limit of `write-buffer-size`, it turns into read only and generates
@@ -197,25 +197,25 @@ level0-stop-writes-trigger = 36
 # compaction of level0 and level1 and the trigger condition of compaction for level0 is that the number of the
 # sst files reaches 4 (the default value). When both level0 and level1 adopt compaction, it is necessary to analyze
 # RocksDB logs to know the size of an sst file compressed from an mentable. For example, if the file size is 32MB,
-# the proposed value of `max-bytes-for-level-base` is 32MB * 4 = 128MB.
-max-bytes-for-level-base = "512MB"
+# the proposed value of `max-bytes-for-level-base` is 32MiB * 4 = 128MiB.
+max-bytes-for-level-base = "512MiB"
 
 # The sst file size. The sst file size of level0 is influenced by the compaction algorithm of `write-buffer-size`
 # and level0. `target-file-size-base` is used to control the size of a single sst file of level1-level6.
-target-file-size-base = "32MB"
+target-file-size-base = "32MiB"
 
 [rocksdb.writecf]
 # Set it the same as `rocksdb.defaultcf.compression-per-level`.
 compression-per-level = ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
 
 # Set it the same as `rocksdb.defaultcf.write-buffer-size`.
-write-buffer-size = "128MB"
+write-buffer-size = "128MiB"
 max-write-buffer-number = 5
 min-write-buffer-number-to-merge = 1
 
 # Set it the same as `rocksdb.defaultcf.max-bytes-for-level-base`.
-max-bytes-for-level-base = "512MB"
-target-file-size-base = "32MB"
+max-bytes-for-level-base = "512MiB"
+target-file-size-base = "32MiB"
 
 [raftdb]
 # The maximum number of the file handles RaftDB can open
@@ -223,20 +223,20 @@ target-file-size-base = "32MB"
 
 # Enable the readahead feature in RaftDB compaction. If you are using mechanical disks, it is recommended to set
 # this value to 2MB at least.
-# compaction-readahead-size = "2MB"
+# compaction-readahead-size = "2MiB"
 
 [raftdb.defaultcf]
 # Set it the same as `rocksdb.defaultcf.compression-per-level`.
 compression-per-level = ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
 
 # Set it the same as `rocksdb.defaultcf.write-buffer-size`.
-write-buffer-size = "128MB"
+write-buffer-size = "128MiB"
 max-write-buffer-number = 5
 min-write-buffer-number-to-merge = 1
 
 # Set it the same as `rocksdb.defaultcf.max-bytes-for-level-base`.
-max-bytes-for-level-base = "512MB"
-target-file-size-base = "32MB"
+max-bytes-for-level-base = "512MiB"
+target-file-size-base = "32MiB"
 ```
 
 ## TiKV memory usage
@@ -249,7 +249,7 @@ Besides `block cache` and `write buffer` which occupy the system memory, the sys
 
 ## Recommended configuration of TiKV
 
-+ In production environments, it is not recommended to deploy TiKV on the machine whose CPU cores are less than 8 or the memory is less than 32GB.
++ In production environments, it is not recommended to deploy TiKV on the machine whose CPU cores are less than 8 or the memory is less than 32GiB.
 
 + If you demand a high write throughput, it is recommended to use a disk with good throughput capacity.
 

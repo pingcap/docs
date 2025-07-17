@@ -1,35 +1,35 @@
 ---
 title: SHARD_ROW_ID_BITS
-summary: 了解 SHARD_ROW_ID_BITS 属性。
+summary: Learn the SHARD_ROW_ID_BITS attribute.
 ---
 
 # SHARD_ROW_ID_BITS
 
-本文档介绍 `SHARD_ROW_ID_BITS` 表属性，该属性用于设置隐式 `_tidb_rowid` 分片后的分片位数。
+This document introduces the `SHARD_ROW_ID_BITS` table attribute, which is used to set the number of bits of the shards after the implicit `_tidb_rowid` is sharded.
 
-## 概念
+## Concept
 
-对于非聚簇主键或没有主键的表，TiDB 使用隐式自增行 ID。当执行大量 `INSERT` 操作时，数据会写入单个 Region，导致写入热点。
+For the tables with a non-clustered primary key or no primary key, TiDB uses an implicit auto-increment row ID. When a large number of `INSERT` operations are performed, the data is written into a single Region, causing a write hot spot.
 
-为了缓解热点问题，你可以配置 `SHARD_ROW_ID_BITS`。行 ID 会被打散，数据会写入多个不同的 Region。
+To mitigate the hot spot issue, you can configure `SHARD_ROW_ID_BITS`. The row IDs are scattered and the data are written into multiple different Regions.
 
-- `SHARD_ROW_ID_BITS = 4` 表示 16 个分片
-- `SHARD_ROW_ID_BITS = 6` 表示 64 个分片
-- `SHARD_ROW_ID_BITS = 0` 表示默认 1 个分片
+- `SHARD_ROW_ID_BITS = 4` indicates 16 shards
+- `SHARD_ROW_ID_BITS = 6` indicates 64 shards
+- `SHARD_ROW_ID_BITS = 0` indicates the default 1 shard
 
 <CustomContent platform="tidb">
 
-有关使用详情，请参阅[热点问题处理指南](/troubleshoot-hot-spot-issues.md#use-shard_row_id_bits-to-process-hotspots)。
+For details on the usage, see [the Troubleshoot Hotspot Issues guide](/troubleshoot-hot-spot-issues.md#use-shard_row_id_bits-to-process-hotspots).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-有关使用详情，请参阅[热点问题处理指南](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#use-shard_row_id_bits-to-process-hotspots)。
+For details on the usage, see [the Troubleshoot Hotspot Issues guide](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#use-shard_row_id_bits-to-process-hotspots).
 
 </CustomContent>
 
-## 示例
+## Examples
 
 ```sql
 CREATE TABLE t (

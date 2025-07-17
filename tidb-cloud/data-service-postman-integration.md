@@ -1,89 +1,89 @@
 ---
-title: 在 Postman 中运行数据应用
-summary: 了解如何在 Postman 中运行数据应用。
+title: Run Data App in Postman
+summary: Learn how to run your Data App in Postman.
 ---
 
-# 在 Postman 中运行数据应用
+# Run Data App in Postman
 
-[Postman](https://www.postman.com/) 是一个 API 平台，它简化了 API 生命周期并增强了协作，以实现更快更好的 API 开发。
+[Postman](https://www.postman.com/) is an API platform that simplifies the API lifecycle and enhances collaboration for faster and better API development.
 
-在 TiDB Cloud [数据服务](https://tidbcloud.com/project/data-service)中，你可以轻松地将数据应用导入到 Postman，并利用 Postman 的丰富工具来增强你的 API 开发体验。
+In TiDB Cloud [Data Service](https://tidbcloud.com/project/data-service), you can easily import your Data App to Postman and leverage Postman's extensive tools to enhance your API development experience.
 
-本文档描述如何将数据应用导入到 Postman 以及如何在 Postman 中运行数据应用。
+This document describes how to import your Data App to Postman and how to run your Data App in Postman.
 
-## 开始之前
+## Before you begin
 
-在将数据应用导入到 Postman 之前，请确保你具有以下条件：
+Before importing a Data App to Postman, make sure that you have the following:
 
-- 一个 [Postman](https://www.postman.com/) 账户
-- 一个 [Postman 桌面应用](https://www.postman.com/downloads)（可选）。或者，你可以使用 Postman 网页版而无需下载应用。
-- 一个至少具有一个定义完善的[端点](/tidb-cloud/data-service-manage-endpoint.md)的[数据应用](/tidb-cloud/data-service-manage-data-app.md)。只有满足以下要求的端点才能导入到 Postman：
+- A [Postman](https://www.postman.com/) account
+- A [Postman desktop app](https://www.postman.com/downloads) (optional). Alternatively, you can use the Postman web version without downloading the app.
+- A [Data App](/tidb-cloud/data-service-manage-data-app.md) with at least one well-defined [endpoint](/tidb-cloud/data-service-manage-endpoint.md). Only endpoints that meet the following requirements can be imported to Postman:
 
-    - 已选择目标集群。
-    - 已配置端点路径和请求方法。
-    - 已编写 SQL 语句。
+    - The target cluster is selected.
+    - The endpoint path and request method are configured.
+    - The SQL statements are written.
 
-- 数据应用的 [API 密钥](/tidb-cloud/data-service-api-key.md#创建-api-密钥)。
+- An [API key](/tidb-cloud/data-service-api-key.md#create-an-api-key) for the Data App.
 
-## 步骤 1. 将数据应用导入到 Postman
+## Step 1. Import your Data App to Postman
 
-要将数据应用导入到 Postman，请执行以下步骤：
+To import your Data App to Postman, take the following steps:
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，导航到项目的[**数据服务**](https://tidbcloud.com/project/data-service)页面。
-2. 在左侧窗格中，点击目标数据应用的名称以查看其详细信息。
-3. 在页面右上角，点击**在 Postman 中运行**。此时会显示一个包含导入说明的对话框。
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
+2. In the left pane, click the name of your target Data App to view its details.
+3. In the upper-right corner of the page, click **Run in Postman**. A dialog with import instructions is displayed.
 
-    > **注意：**
+    > **Note:**
     >
-    > - 如果数据应用缺少定义完善的端点（已配置目标集群、路径、请求方法和 SQL 语句），则该数据应用的**在 Postman 中运行**按钮将保持禁用状态。
-    > - Chat2Query 数据应用不提供**在 Postman 中运行**功能。
+    > - If a Data App lacks a well-defined endpoint (the target cluster, path, request method, and SQL statements are configured), **Run in Postman** remains disabled for the Data App.
+    > - For a Chat2Query Data App, **Run in Postman** is not available.
 
-4. 按照对话框中提供的步骤导入数据应用：
+4. Follow the steps provided in the dialog for the Data App import:
 
-    1. 根据你的偏好，选择**在 Postman 网页版中运行**或**在 Postman 桌面版中运行**以打开你的 Postman 工作区，然后选择目标工作区。
+    1. Depending on your preference, choose either **Run in Postman for Web** or **Run in Postman Desktop** to open your Postman workspaces, and then select your target workspace.
 
-        - 如果你尚未登录 Postman，请按照屏幕上的说明先登录 Postman。
-        - 如果你点击了**在 Postman 桌面版中运行**，请按照屏幕上的说明启动 Postman 桌面应用。
+        - If you have not logged into Postman, follow the on-screen instructions to log into Postman first.
+        - If you clicked **Run in Postman Desktop**, follow the on-screen instructions to launch the Postman desktop app.
 
-    2. 在 Postman 中的目标工作区页面上，点击左侧导航菜单中的**导入**。
-    3. 从 TiDB Cloud 对话框中复制数据应用 URL，然后将 URL 粘贴到 Postman 中进行导入。
+    2. On the page of your target workspace in Postman, click **Import** in the left navigation menu.
+    3. Copy the Data App URL from the TiDB Cloud dialog, and then paste the URL to Postman for the import.
 
-5. 粘贴 URL 后，Postman 会自动将数据应用作为新的[集合](https://learning.postman.com/docs/collections/collections-overview)导入。集合的名称格式为 `TiDB Data Service - <你的应用名称>`。
+5. After you paste the URL, Postman imports the Data App automatically as a new [collection](https://learning.postman.com/docs/collections/collections-overview). The name of the collection is in the `TiDB Data Service - <Your App Name>` format.
 
-    在集合中，已部署的端点被分组在 **Deployed** 文件夹下，未部署的端点被分组在 **Draft** 文件夹下。
+    In the collection, the deployed endpoints are grouped under the **Deployed** folder and the un-deployed endpoints are grouped under the **Draft** folder.
 
-## 步骤 2. 在 Postman 中配置数据应用的 API 密钥
+## Step 2. Configure your Data App API key in Postman
 
-在 Postman 中运行导入的数据应用之前，你需要在 Postman 中配置数据应用的 API 密钥，步骤如下：
+Before running the imported Data App in Postman, you need to configure the API key for the Data App in Postman as follows:
 
-1. 在 Postman 的左侧导航菜单中，点击 `TiDB Data Service - <你的应用名称>` 以在右侧打开一个标签页。
-2. 在 `TiDB Data Service - <你的应用名称>` 标签页下，点击 **Variables** 标签。
-3. 在变量表中，在 **Current value** 列中输入数据应用的公钥和私钥。
-4. 在 `TiDB Data Service - <你的应用名称>` 标签页的右上角，点击**保存**。
+1. In the left navigation menu of Postman, click `TiDB Data Service - <Your App Name>` to open a tab for it on the right side.
+2. Under the `TiDB Data Service - <Your App Name>` tab, click the **Variables** tab.
+3. In the variable table, enter the public key and private key for your Data App in the **Current value** column.
+4. In the upper-right corner of the `TiDB Data Service - <Your App Name>` tab, click **Save**.
 
-## 步骤 3. 在 Postman 中运行数据应用
+## Step 3. Run Data App in Postman
 
-要在 Postman 中运行数据应用，请执行以下步骤：
+To run your Data App in Postman, take the following steps:
 
-1. 在 Postman 的左侧导航窗格中，展开 **Deployed** 或 **Draft** 文件夹，然后点击你的端点名称以在右侧打开一个标签页。
-2. 在 `<你的端点名称>` 标签页下，你可以按以下方式调用端点：
+1. In the left navigation pane of Postman, expand the **Deployed** or **Draft** folder, and then click your endpoint name to open a tab for it on the right side.
+2. Under the `<Your Endpoint Name>` tab, you can call your endpoint as follows:
 
-    - 对于没有参数的端点，你可以直接点击**发送**来调用它。
-    - 对于有参数的端点，你需要先填写参数值，然后点击**发送**。
+    - For an endpoint without parameters, you can click **Send** to call it directly.
+    - For an endpoint with parameters, you need to fill in the parameter values first, and then click **Send**.
 
-        - 对于 `GET` 或 `DELETE` 请求，在 **Query Params** 表中填写参数值。
-        - 对于 `POST` 或 `PUT` 请求，点击 **Body** 标签，然后将参数值作为 JSON 对象填写。如果在 TiDB Cloud 数据服务中为端点启用了**批量操作**，则将参数值作为 JSON 对象数组填写到 `items` 字段中。
+        - For a `GET` or `DELETE` request, fill in the parameter values in the **Query Params** table.
+        - For a `POST` or `PUT` request, click the **Body** tab, and then fill in the parameter values as a JSON object. If **Batch Operation** is enabled for the endpoint in TiDB Cloud Data Service, fill in the parameter values to the `items` field as an array of JSON objects.
 
-3. 在下方窗格中查看响应。
+3. Check the response in the lower pane.
 
-4. 如果你想使用不同的参数值再次调用端点，可以相应地编辑参数值，然后再次点击**发送**。
+4. If you want to call the endpoint again with different parameter values, you can edit the parameter values accordingly, and then click **Send** again.
 
-要了解更多关于 Postman 的使用方法，请参见 [Postman 文档](https://learning.postman.com/docs)。
+To learn more about the Postman usage, see [Postman documentation](https://learning.postman.com/docs).
 
-## 处理数据应用中的新变更
+## Deal with new changes in Data App
 
-将数据应用导入到 Postman 后，TiDB Cloud 数据服务不会自动将数据应用的新变更同步到 Postman。
+After a Data App is imported to Postman, TiDB Cloud Data Service will not automatically synchronize new changes of the Data App to Postman.
 
-如果你想让任何新变更在 Postman 中反映出来，你必须再次[按照导入流程](#步骤-1-将数据应用导入到-postman)操作。由于集合名称在 Postman 工作区中是唯一的，你可以使用最新的数据应用替换之前导入的应用，或者将最新的数据应用作为新集合导入。
+If you want any new changes to reflect in Postman, you have to [follow the import process](#step-1-import-your-data-app-to-postman) once again. Because the collection name is unique in a Postman workspace, you can either use the latest Data App to replace the previously imported one or import the latest Data App as a new collection.
 
-此外，重新导入数据应用后，你还需要在 Postman 中再次[为新导入的应用配置 API 密钥](#步骤-2-在-postman-中配置数据应用的-api-密钥)。
+Also, after re-importing the Data App, you will have to [configure the API key for the newly imported App](#step-2-configure-your-data-app-api-key-in-postman) in Postman again.

@@ -1,274 +1,274 @@
 ---
-title: 备份和恢复 TiDB Cloud Dedicated 数据
-summary: 了解如何备份和恢复 TiDB Cloud Dedicated 集群。
+title: Back Up and Restore TiDB Cloud Dedicated Data
+summary: Learn how to back up and restore your TiDB Cloud Dedicated cluster.
 aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
-# 备份和恢复 TiDB Cloud Dedicated 数据
+# Back Up and Restore TiDB Cloud Dedicated Data
 
-本文档介绍如何在 TiDB Cloud 上备份和恢复 TiDB Cloud Dedicated 集群数据。TiDB Cloud Dedicated 支持自动备份和手动备份。你还可以将备份数据恢复到新集群，或从回收站恢复已删除的集群。
+This document describes how to back up and restore your TiDB Cloud Dedicated cluster data on TiDB Cloud. TiDB Cloud Dedicated supports automatic backup and manual backup. You can also restore backup data to a new cluster or restore a deleted cluster from the recycle bin.
 
-> **提示**
+> **Tip**
 >
-> 要了解如何备份和恢复 TiDB Cloud Serverless 集群数据，请参阅[备份和恢复 TiDB Cloud Serverless 数据](/tidb-cloud/backup-and-restore-serverless.md)。
+> To learn how to back up and restore TiDB Cloud Serverless cluster data, see [Back Up and Restore TiDB Cloud Serverless Data](/tidb-cloud/backup-and-restore-serverless.md).
 
-## 限制
+## Limitations
 
-- 对于 v6.2.0 或更高版本的集群，TiDB Cloud Dedicated 默认支持从备份中恢复用户账号和 SQL 绑定。
-- TiDB Cloud Dedicated 不支持恢复存储在 `mysql` 架构中的系统变量。
-- 建议你先导入数据，然后执行**手动**快照备份，最后启用时间点恢复。因为通过 TiDB Cloud 控制台导入的数据**不会**生成变更日志，无法自动检测和备份。更多信息，请参阅[从云存储将 CSV 文件导入到 TiDB Cloud Dedicated](/tidb-cloud/import-csv-files.md)。
-- 如果多次开启和关闭时间点恢复，你只能选择最近一次启用时间点恢复后的可恢复范围内的时间点。早期的可恢复范围将无法访问。
-- 请勿同时修改**时间点恢复**和**双区域备份**的开关。
+- For clusters of v6.2.0 or later versions, TiDB Cloud Dedicated supports restoring user accounts and SQL bindings from backups by default.
+- TiDB Cloud Dedicated does not support restoring system variables stored in the `mysql` schema. 
+- It is recommended that you import data first, then perform a **manual** snapshot backup, and finally enable Point-in-time Restore. Because the data imported through the TiDB Cloud console **does not** generate change logs, it cannot be automatically detected and backed up. For more information, see [Import CSV Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-csv-files.md). 
+- If you turn on and off Point-in-time Restore multiple times, you can only choose a time point within the recoverable range after the most recent Point-in-time Restore is enabled. The earlier recoverable range is not accessible.
+- DO NOT modify the switches of **Point-in-time Restore** and **Dual Region Backup** at the same time.
 
-## 备份
+## Backup
 
-### 查看备份页面
+### View the Backup page
 
-1. 在项目的[**集群**](https://tidbcloud.com/project/clusters)页面上，点击目标集群的名称以进入其概览页面。
+1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
 
-    > **提示：**
+    > **Tip:**
     >
-    > 你可以使用左上角的组合框在组织、项目和集群之间切换。
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. 在左侧导航栏中，点击**数据** > **备份**。
+2. In the left navigation pane, click **Data** > **Backup**.
 
-### 开启自动备份
+### Turn on auto backup
 
-TiDB Cloud Dedicated 支持[快照备份](https://docs.pingcap.com/tidb/stable/br-snapshot-guide)和[日志备份](https://docs.pingcap.com/tidb/stable/br-pitr-guide)。快照备份使你能够将数据恢复到备份点。默认情况下，快照备份会根据你的备份保留策略自动进行并存储。你可以随时禁用自动备份。
+TiDB Cloud Dedicated supports both [snapshot backup](https://docs.pingcap.com/tidb/stable/br-snapshot-guide) and [log backup](https://docs.pingcap.com/tidb/stable/br-pitr-guide). Snapshot backup enables you to restore data to the backup point. By default, snapshot backups are taken automatically and stored according to your backup retention policy. You can disable auto backup at any time.
 
-#### 开启时间点恢复
+#### Turn on Point-in-time Restore
 
-> **注意**
+> **Note**
 >
-> 时间点恢复功能支持 v6.4.0 或更高版本的 TiDB Cloud Dedicated 集群。
+> The Point-in-time Restore feature is supported for TiDB Cloud Dedicated clusters that are v6.4.0 or later.
 
-此功能支持将任意时间点的数据恢复到新集群。你可以使用它来：
+This feature supports restoring data of any point in time to a new cluster. You can use it to:
 
-- 降低灾难恢复的 RPO。
-- 通过恢复到错误事件发生前的时间点来解决数据写入错误的情况。
-- 审计业务的历史数据。
+- Reduce RPO in disaster recovery.
+- Resolve cases of data write errors by restoring point-in-time that is before the error event.
+- Audit the historical data of the business.
 
-强烈建议开启此功能。成本与快照备份相同。更多信息，请参阅[数据备份成本](https://www.pingcap.com/tidb-dedicated-pricing-details#backup-storage-cost)。
+It is strongly recommended to turn on this feature. The cost is the same as snapshot backup. For more information, refer to [Data Backup Cost](https://www.pingcap.com/tidb-dedicated-pricing-details#backup-storage-cost).
 
-要为 TiDB Cloud Dedicated 集群开启此功能，请执行以下步骤：
+To turn on this feature for your TiDB Cloud Dedicated cluster, perform the following steps:
 
-1. 导航到集群的[**备份**](#查看备份页面)页面。
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
-2. 点击**备份设置**。
+2. Click **Backup Setting**.
 
-3. 将**自动备份**开关切换为**开启**。
+3. Toggle the **Auto Backup** switch to **On**.
 
-4. 将**时间点恢复**开关切换为**开启**。
+4. Toggle the **Point-in-time Restore** switch to **On**.
 
-    > **警告**
+    > **Warning**
     >
-    > 时间点恢复仅在下一次备份任务完成后生效。要使其更早生效，你可以在启用后[手动执行备份](#执行手动备份)。
+    > Point-in-Time Restore only takes effect after the next backup task is completed. To make it take effect earlier, you can [manually perform a backup](#perform-a-manual-backup) after enabling it.
 
-5. 点击**保存**以保存更改。
+5. Click **Save** to save changes.
 
-#### 配置备份计划
+#### Configure backup schedule
 
-TiDB Cloud Dedicated 支持每日和每周备份计划。默认情况下，备份计划设置为每日。你可以选择一天或一周中的特定时间开始快照备份。
+TiDB Cloud Dedicated supports daily and weekly backup schedules. By default, the backup schedule is set to daily. You can choose a specific time of the day or week to start snapshot backup.
 
-要为 TiDB Cloud Dedicated 集群配置备份计划，请执行以下步骤：
+To configure the backup schedule for your TiDB Cloud Dedicated cluster, perform the following steps:
 
-1. 导航到集群的[**备份**](#查看备份页面)页面。
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
-2. 点击**备份设置**。
+2. Click **Backup Setting**.
 
-3. 将**自动备份**开关切换为**开启**。
+3. Toggle the **Auto Backup** switch to **On**.
 
-4. 按如下配置备份计划：
+4. Configure the backup schedule as follows:
 
-    - 在**备份周期**中，点击**每日备份**或**每周备份**选项卡。对于**每周备份**，你需要指定备份的星期几。
+    - In **Backup Cycle**, click either the **Daily Backup** or **Weekly Backup** tab. For **Weekly Backup**, you need to specify the days of the week for the backup.
 
-        > **警告**
+        > **Warning**
         >
-        > - 启用每周备份时，时间点恢复功能默认开启且无法禁用。
-        > - 如果你将备份周期从每周更改为每日，时间点恢复功能将保持其原始设置。如果需要，你可以手动禁用它。
+        > - When weekly backup is enabled, the Point-in-time Restore feature is enabled by default and cannot be disabled.
+        > - If you change the backup cycle from weekly to daily, the Point-in-time Restore feature remains its original setting. You can manually disable it if needed.
 
-    - 在**备份时间**中，为每日或每周集群备份安排开始时间。
+    - In **Backup Time**, schedule a start time for the daily or weekly cluster backup.
 
-        如果你未指定首选备份时间，TiDB Cloud 会分配默认备份时间，即集群所在区域时区的凌晨 2:00。
+        If you do not specify a preferred backup time, TiDB Cloud assigns a default backup time, which is 2:00 AM in the time zone of the region where the cluster is located.
 
-        > **注意**
+        > **Note**
         >
-        > - 当数据导入作业正在进行时，备份作业会自动延迟。在数据导入或集群扩展期间**请勿**运行手动备份。
+        > - Backup jobs are automatically delayed when data import jobs are in progress. **DO NOT** run manual backups during data import or cluster scaling.
 
-    - 在**备份保留**中，配置最短备份数据保留期。默认期限为 7 天。为了最大限度地减少对业务的影响，建议在工作负载较低的时段安排自动备份。
+    - In **Backup Retention**, configure the minimum backup data retention period. The default period is 7 days. To minimize the impact on business, it is recommended to schedule automatic backup during periods of low workloads.
 
-        > **注意**
+        > **Note**
         >
-        > - 除最新的自动备份外，所有超过保留期的自动备份都将被删除。最新的自动备份不会被删除，除非你手动删除它。这确保了在发生意外删除时，你可以恢复集群数据。
-        > - 删除集群后，保留期内的自动备份将移至回收站。
+        > - All auto-backups, except the latest one, will be deleted if their lifetime exceeds the retention period. The latest auto-backup will not be deleted unless you delete it manually. This ensures that you can restore cluster data if accidental deletion occurs.
+        > - After you delete a cluster, auto-backups with a lifetime within the retention period will be moved to the recycle bin.
 
-### 开启双区域备份
+### Turn on dual region backup
 
-> **注意：**
+> **Note:**
 >
-> - 目前，双区域备份功能仅适用于托管在 AWS 和 Google Cloud 上的集群。
-> - 托管在 Google Cloud 上的 TiDB Cloud Dedicated 集群与 Google Cloud Storage 无缝协作。与 Google Cloud Storage 类似，**TiDB Cloud Dedicated 仅支持在相同的多区域代码内进行双区域配对，就像 Google 双区域存储一样**。例如，在亚洲，目前你必须将东京和大阪配对在一起以进行双区域存储。更多信息，请参阅[双区域](https://cloud.google.com/storage/docs/locations#location-dr)。
+> - Currently, the dual region backup feature is only available for clusters hosted on AWS and Google Cloud.
+> - TiDB Cloud Dedicated clusters hosted on Google Cloud work seamlessly with Google Cloud Storage. Similar to Google Cloud Storage, **TiDB Cloud Dedicated supports dual-region pairing only within the same multi-region code as Google dual-region storage**. For example, in Asia, currently you must pair Tokyo and Osaka together for dual-region storage. For more information, refer to [Dual-regions](https://cloud.google.com/storage/docs/locations#location-dr).
 
-TiDB Cloud Dedicated 支持通过将备份从集群区域复制到另一个不同区域来实现双区域备份。启用此功能后，所有备份都会自动复制到指定区域。这提供了跨区域数据保护和灾难恢复能力。估计约 99% 的数据可以在一小时内复制到次要区域。
+TiDB Cloud Dedicated supports dual region backup by replicating backups from your cluster region to another different region. After you enable this feature, all backups are automatically replicated to the specified region. This provides cross-region data protection and disaster recovery capabilities. It is estimated that approximately 99% of the data can be replicated to the secondary region within an hour.
 
-双区域备份成本包括备份存储使用费和跨区域数据传输费。更多信息，请参阅[数据备份成本](https://www.pingcap.com/tidb-dedicated-pricing-details#backup-storage-cost)。
+Dual region backup costs include both backup storage usage and cross-region data transfer fees. For more information, refer to [Data Backup Cost](https://www.pingcap.com/tidb-dedicated-pricing-details#backup-storage-cost).
 
-要为 TiDB Cloud Dedicated 集群开启双区域备份，请执行以下步骤：
+To turn on dual region backup for your TiDB Cloud Dedicated cluster, perform the following steps:
 
-1. 导航到集群的[**备份**](#查看备份页面)页面。
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
-2. 点击**备份设置**。
+2. Click **Backup Setting**.
 
-3. 将**双区域备份**开关切换为**开启**。
+3. Toggle the **Dual Region Backup** switch to **On**.
 
-4. 从**次要区域**下拉列表中，选择一个区域来存储备份文件。
+4. From the **Secondary Region** drop-down list, select a region to store the backup files.
 
-5. 点击**保存**以保存更改。
+5. Click **Save** to save changes.
 
-### 关闭自动备份
+### Turn off auto backup
 
-> **注意**
+> **Note**
 >
-> 关闭自动备份也会默认关闭时间点恢复。
+> Turning off auto backup will also turn off point-in-time restore by default.
 
-要关闭 TiDB Cloud Dedicated 集群的自动备份，请执行以下步骤：
+To turn off auto backup for your TiDB Cloud Dedicated cluster, perform the following steps:
 
-1. 导航到集群的[**备份**](#查看备份页面)页面。
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
-2. 点击**备份设置**。
+2. Click **Backup Setting**.
 
-3. 将**自动备份**开关切换为**关闭**。
+3. Toggle the **Auto Backup** switch to **Off**.
 
-4. 点击**保存**以保存更改。
+4. Click **Save** to save changes.
 
-### 关闭双区域备份
+### Turn off dual region backup
 
-> **提示**
+> **Tip**
 >
-> 禁用双区域备份不会立即删除次要区域中的备份。这些备份将根据备份保留计划稍后清理。要立即删除它们，你可以手动[删除备份](#删除备份)。
+> Disabling dual region backup does not immediately delete the backups in the secondary region. These backups will be cleaned up later according to the backup retention schedule. To remove them immediately, you can manually [delete the backups](#delete-backups).
 
-要关闭 TiDB Cloud Dedicated 集群的双区域备份，请执行以下步骤：
+To turn off dual region backup for your TiDB Cloud Dedicated cluster, perform the following steps:
 
-1. 导航到集群的[**备份**](#查看备份页面)页面。
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
-2. 点击**备份设置**。
+2. Click **Backup Setting**.
 
-3. 将**双区域备份**开关切换为**关闭**。
+3. Toggle the **Dual Region Backup** switch to **Off**.
 
-4. 点击**保存**以保存更改。
+4. Click **Save** to save changes.
 
-### 执行手动备份
+### Perform a manual backup
 
-手动备份是用户发起的备份，使你能够根据需要将数据备份到已知状态，然后随时恢复到该状态。
+Manual backups are user-initiated backups that enable you to back up your data to a known state as needed, and then restore to that state at any time.
 
-> **注意**
+> **Note**
 >
-> - 手动备份将无限期保留，直到你选择手动删除它们或你的账户关闭。
-> - TiDB Cloud Dedicated 集群删除后，其现有的手动备份将移至回收站，并保留在那里直到手动删除或你的账户关闭。
+> - Manual backups are retained indefinitely until you choose to delete them manually or your account is closed.
+> - After a TiDB Cloud Dedicated cluster is deleted, its existing manual backups will be moved to the recycle bin and kept there until manually deleted or your account is closed.
 
-要对 TiDB Cloud Dedicated 集群应用手动备份，请执行以下步骤：
+To apply a manual backup to your TiDB Cloud Dedicated cluster, perform the following steps:
 
-1. 导航到集群的[**备份**](#查看备份页面)页面。
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
-2. 在右上角，点击 **...** > **手动备份**。
+2. In the upper-right corner, click **...** > **Manual Backup**. 
 
-3. 在显示的对话框中，输入**名称**。
+3. In the displayed dialog, enter a **Name**.
 
-4. 点击**确认**。然后你的集群数据将被备份。
+4. Click **Confirm**. Then your cluster data is backed up.
 
-### 删除备份
+### Delete backups
 
-#### 删除备份文件
+#### Delete backup files
 
-要删除 TiDB Cloud Dedicated 集群的现有备份文件，请执行以下步骤：
+To delete an existing backup file for your TiDB Cloud Dedicated cluster, perform the following steps:
 
-1. 导航到集群的[**备份**](#查看备份页面)页面。
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
-2. 找到要删除的相应备份文件，在**操作**列中点击 **...** > **删除**。
+2. Locate the corresponding backup file you want to delete, and click **...** > **Delete** in the **Action** column.
 
-#### 删除正在运行的备份作业
+#### Delete a running backup job
 
-要删除 TiDB Cloud Dedicated 集群的正在运行的备份作业，请按照与[**删除备份文件**](#删除备份文件)类似的过程操作。
+To delete a running backup job for your TiDB Cloud Dedicated cluster, follow a process similar to [**Delete backup files**](#delete-backup-files).
 
-1. 导航到集群的[**备份**](#查看备份页面)页面。
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
-2. 找到处于**等待中**或**运行中**状态的正在运行的备份作业，在**操作**列中点击 **...** > **删除**。
+2. Locate the running backup job that is in the **Pending** or **Running** state, and click **...** > **Delete** in the **Action** column.
 
-## 恢复
+## Restore
 
-### 将数据恢复到新集群
+### Restore data to a new cluster
 
-> **注意**
+> **Note**
 >
-> 从备份恢复 TiDB 集群时，恢复过程会保留原始时区设置而不覆盖它。
+> When you restore a TiDB cluster from backups, the restore process retains the original time zone setting without overwriting it.
 
-要从备份将 TiDB Cloud Dedicated 集群数据恢复到新集群，请执行以下步骤：
+To restore your TiDB Cloud Dedicated cluster data from a backup to a new cluster, take the following steps:
 
-1. 导航到集群的[**备份**](#查看备份页面)页面。
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
-2. 点击**恢复**。设置窗口显示。
+2. Click **Restore**. The setting window displays.
 
-3. 在**恢复模式**中，选择**从区域恢复**，表示备份存储的区域。
+3. In **Restore Mode**, choose **Restore From Region**, indicating the region of backup stores.
 
-    > **注意**
+    > **Note**
     >
-    > - **从区域恢复**的默认值与备份集群相同。
+    > - The default value of the **Restore From Region** is the same as the backup cluster.
 
-4. 在**恢复模式**中，选择将任意时间点的数据或选定的备份恢复到新集群。
+4. In **Restore Mode**, choose to restore data of any point in time or a selected backup to a new cluster.
 
     <SimpleTab>
-    <div label="选择时间点">
+    <div label="Select Time Point">
 
-    要将备份保留期内任意时间点的数据恢复到新集群，请确保**备份设置**中的**时间点恢复**已开启，然后执行以下步骤：
+    To restore data of any point in time within the backup retention to a new cluster, make sure that **Point-in-time Restore** in **Backup Setting** is on and then take the following steps:
 
-    - 点击**选择时间点**。
-    - 选择要恢复到的**日期**和**时间**。
+    - Click **Select Time Point**.
+    - Select **Date** and **Time** you want to restore to.
 
     </div>
 
-    <div label="选择备份名称">
+    <div label="Select Backup Name">
 
-    要将选定的备份恢复到新集群，请执行以下步骤：
+    To restore a selected backup to the new cluster, take the following steps:
 
-    - 点击**选择备份名称**。
-    - 选择要恢复到的备份。
+    - Click **Select Backup Name**.
+    - Select a backup you want to restore to.
 
     </div>
     </SimpleTab>
 
-5. 在**恢复到区域**中，选择与**备份设置**中配置的**主要区域**相同的区域。
+5. In **Restore to Region**, select the same region as the **Primary Region** configured in the **Backup Setting**.
 
-6. 在**恢复**窗口中，你还可以根据需要进行以下更改：
+6. In the **Restore** window, you can also make the following changes if necessary:
 
-    - 设置集群名称。
-    - 更新集群的端口号。
-    - 增加集群的节点数量、vCPU 和 RAM，以及存储。
+    - Set the cluster name.
+    - Update the port number of the cluster.
+    - Increase node number, vCPU and RAM, and storage for the cluster.
 
-7. 点击**恢复**。
+7. Click **Restore**.
 
-   集群恢复过程开始，并显示**密码设置**对话框。
+   The cluster restore process starts and the **Password Settings** dialog box is displayed.
 
-8. 在**密码设置**对话框中，设置连接集群的 root 密码，然后点击**保存**。
+8. In the **Password Settings** dialog box, set the root password to connect to your cluster, and then click **Save**.
 
-### 恢复已删除的集群
+### Restore a deleted cluster
 
-> **注意：**
+> **Note:**
 >
-> 你无法将已删除的集群恢复到任意时间点。你只能选择自动或手动备份进行恢复。
+> You cannot restore a deleted cluster to any point in time. You can only select an automatic or manual backup to restore.
 
-要从回收站恢复已删除的集群，请执行以下步骤：
+To restore a deleted cluster from recycle bin, take the following steps:
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，使用左上角的组合框切换到目标项目。
-2. 在左侧导航栏中，点击**项目设置** > **回收站**。
-3. 在**回收站**页面上，找到要恢复的集群，在**操作**列中点击 **...**，然后点击**备份**。
-4. 在**备份**页面上，找到所需的备份时间，在**操作**列中点击 **...**，然后点击**恢复**。
-5. 在**恢复**页面上，为新集群指定一个名称，然后根据需要进行以下更改：
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Project Settings** > **Recycle Bin**.
+3. On the **Recycle Bin** page, locate the cluster you want to restore, click **...** in the **Action** column, and then click **Backups**.
+4. On the **Backups** page, locate your desired backup time, click **...** in the **Action** column, and then click **Restore**.
+5. On the **Restore** page, specify a name for the new cluster, and then make the following changes if necessary:
 
-    - 更新集群的端口号。
-    - 增加集群的节点数量、vCPU 和 RAM，以及存储。
+    - Update the port number of the cluster.
+    - Increase the node number, vCPU and RAM, and storage for the cluster.
 
-6. 在**摘要**部分，检查恢复信息，然后点击**恢复**。
+6. In the **Summary** section, check the restore information, and then click **Restore**.
 
-   集群恢复过程开始，并显示**密码设置**对话框。
+   The cluster restore process starts and the **Password Settings** dialog box is displayed.
 
-7. 在**密码设置**对话框中，设置连接集群的 root 密码，然后点击**保存**。
+7. In the **Password Settings** dialog box, set the root password to connect to your cluster, and then click **Save**.

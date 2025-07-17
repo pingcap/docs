@@ -1,63 +1,63 @@
 ---
-title: RocksDB 概述
-summary: 了解 RocksDB 的基本概念和工作原理。
+title: RocksDB Overview
+summary: Learn the basic concepts and working principles of RocksDB.
 category: reference
 ---
 
-# RocksDB 概述
+# RocksDB Overview
 
-[RocksDB](https://github.com/facebook/rocksdb) 是一个提供键值存储和读写功能的 LSM-tree 存储引擎。它由 Facebook 开发，基于 LevelDB。用户写入的键值对首先被插入到预写日志（Write Ahead Log，WAL）中，然后写入内存中的跳表（SkipList，一种称为 MemTable 的数据结构）。LSM-tree 引擎将随机修改（插入）转换为对 WAL 文件的顺序写入，因此它们提供比 B-tree 引擎更好的写入吞吐量。
+[RocksDB](https://github.com/facebook/rocksdb) is an LSM-tree storage engine that provides key-value store and read-write functions. It is developed by Facebook and based on LevelDB. Key-value pairs written by the user are firstly inserted into Write Ahead Log (WAL) and then written to the SkipList in memory (a data structure called MemTable). LSM-tree engines convert the random modification (insertion) to sequential writes to the WAL file, so they provide better write throughput than B-tree engines.
 
-一旦内存中的数据达到一定大小，RocksDB 就会将内容刷新到磁盘上的排序字符串表（Sorted String Table，SST）文件中。SST 文件组织在多个层级中（默认最多 6 层）。当某一层的总大小达到阈值时，RocksDB 会选择部分 SST 文件并将它们合并到下一层。每个后续层的大小是前一层的 10 倍，因此 90% 的数据存储在最后一层。
+Once the data in memory reaches a certain size, RocksDB flushes the content into a Sorted String Table (SST) file in the disk. SST files are organized in multiple levels (the default is up to 6 levels). When the total size of a level reaches the threshold, RocksDB chooses part of the SST files and merges them into the next level. Each subsequent level is 10 times larger than the previous one, so 90% of the data is stored in the last layer.
 
-RocksDB 允许用户创建多个列族（Column Families，CFs）。CFs 有自己的 SkipList 和 SST 文件，并且它们共享同一个 WAL 文件。这样，不同的 CFs 可以根据应用特性有不同的设置。同时它不会增加对 WAL 的写入次数。
+RocksDB allows users to create multiple Column Families (CFs). CFs have their own SkipList and SST files, and they share the same WAL file. In this way, different CFs can have different settings according to the application characteristics. It does not increase the number of writes to WAL at the same time.
 
-## TiKV 架构
+## TiKV architecture
 
-TiKV 的架构如下图所示：
+The architecture of TiKV is illustrated as follows:
 
 ![TiKV RocksDB](/media/tikv-rocksdb.png)
 
-作为 TiKV 的存储引擎，RocksDB 用于存储 Raft 日志和用户数据。TiKV 节点中的所有数据共享两个 RocksDB 实例。一个用于 Raft 日志（通常称为 raftdb），另一个用于用户数据和 MVCC 元数据（通常称为 kvdb）。kvdb 中有四个 CFs：raft、lock、default 和 write：
+As the storage engine of TiKV, RocksDB is used to store Raft logs and user data. All data in a TiKV node shares two RocksDB instances. One is for Raft log (often called raftdb), and the other is for user data and MVCC metadata (often called kvdb). There are four CFs in kvdb: raft, lock, default, and write:
 
-* raft CF：存储每个 Region 的元数据。它只占用很少的空间，用户不需要关心。
-* lock CF：存储悲观事务的悲观锁和分布式事务的预写锁。事务提交后，lock CF 中的相应数据会被快速删除。因此，lock CF 中的数据大小通常很小（小于 1 GB）。如果 lock CF 中的数据大量增加，这意味着大量事务正在等待提交，系统可能遇到了 bug 或故障。
-* write CF：存储用户的实际写入数据和 MVCC 元数据（数据所属事务的开始时间戳和提交时间戳）。当用户写入一行数据时，如果数据长度小于或等于 255 字节，则存储在 write CF 中。否则，存储在 default CF 中。在 TiDB 中，二级索引只占用 write CF 的空间，因为非唯一索引存储的值为空，而唯一索引存储的值是主键索引。
-* default CF：存储长度超过 255 字节的数据。
+* raft CF: Store metadata of each Region. It occupies only a very small amount of space, and users do not need to care.
+* lock CF: Store the pessimistic lock of pessimistic transactions and the Prewrite lock for distributed transactions. After the transaction is committed, the corresponding data in lock CF is deleted quickly. Therefore, the size of data in lock CF is usually very small (less than 1 GB). If the data in lock CF increases a lot, it means that a large number of transactions are waiting to be committed, and that the system meets a bug or failure.
+* write CF: Store the user's real written data and MVCC metadata (the start timestamp and commit timestamp of the transaction to which the data belongs). When the user writes a row of data, it is stored in the write CF if the data length is less than or equal to 255 bytes. Otherwise, it is stored in the default CF. In TiDB, the secondary index only occupies the space of write CF, since the value stored in the non-unique index is empty and the value stored in the unique index is the primary key index.
+* default CF: Store data longer than 255 bytes.
 
-## RocksDB 内存使用
+## RocksDB memory usage
 
-为了提高读取性能并减少对磁盘的读取操作，RocksDB 根据一定大小（默认为 64 KB）将存储在磁盘上的文件分成块。读取块时，首先检查数据是否已存在于内存中的 BlockCache 中。如果是，则可以直接从内存中读取数据，而无需访问磁盘。
+To improve the reading performance and reduce the reading operations to the disk, RocksDB divides the files stored on the disk into blocks based on a certain size (the default is 64 KB). When reading a block, it first checks if the data already exists in BlockCache in memory. If true, it can read the data directly from memory without accessing the disk.
 
-BlockCache 根据 LRU 算法丢弃最近最少使用的数据。默认情况下，TiKV 将系统内存的 45% 用于 BlockCache。用户也可以自行修改 `storage.block-cache.capacity` 配置为适当的值。但不建议超过系统总内存的 60%。
+BlockCache discards the least recently used data according to the LRU algorithm. By default, TiKV devotes 45% of the system memory to BlockCache. Users can also modify the `storage.block-cache.capacity` configuration to an appropriate value by themselves. However, it is not recommended to exceed 60% of the total system memory.
 
-写入 RocksDB 的数据首先写入 MemTable。当 MemTable 的大小超过 128 MB 时，它会切换到一个新的 MemTable。TiKV 中有 2 个 RocksDB 实例，共 4 个 CFs。每个 CF 的单个 MemTable 大小限制为 128 MB。同时最多可以存在 5 个 MemTable，否则前台写入会被阻塞。这部分占用的内存最多为 2.5 GB（4 x 5 x 128 MB）。由于内存消耗较少，不建议更改此限制。
+The data written to RocksDB is written to MemTable firstly. When the size of a MemTable exceeds 128 MB, it switches to a new MemTable. There are 2 RocksDB instances in TiKV, a total of 4 CFs. The size limit of a single MemTable for each CF is 128 MB. A maximum of 5 MemTables can exist at the same time; otherwise, the foreground writes is blocked. The memory occupied by this part is at most 2.5 GB (4 x 5 x 128 MB). It is not recommended to change this limit since it costs less memory.
 
-## RocksDB 空间使用
+## RocksDB space usage
 
-* 多版本：由于 RocksDB 是具有 LSM-tree 结构的键值存储引擎，MemTable 中的数据首先刷新到 L0。由于文件按生成顺序排列，L0 中的 SST 范围可能会重叠。因此，同一个键在 L0 中可能有多个版本。当文件从 L0 合并到 L1 时，它会被切割成特定大小的多个文件（默认为 8 MB）。同一层上每个文件的键范围不会相互重叠，因此在 L1 和后续层级中每个键只有一个版本。
-* 空间放大：每一层文件的总大小是前一层的 x 倍（默认为 10），因此 90% 的数据存储在最后一层。这也意味着 RocksDB 的空间放大不超过 1.11（L0 数据较少，可以忽略）。
-* TiKV 的空间放大：TiKV 有自己的 MVCC 策略。当用户写入一个键时，实际写入 RocksDB 的是 key + commit_ts，也就是说，更新和删除也会向 RocksDB 写入一个新键。TiKV 会定期删除旧版本的数据（通过 RocksDB 的 Delete 接口），因此可以认为用户在 TiKV 上存储的数据实际空间被放大到 1.11 加上最近 10 分钟写入的数据（假设 TiKV 及时清理旧数据）。
+* Multi-version: As RocksDB is a key-value storage engine with LSM-tree structure, the data in MemTable is flushed to L0 first. Because the file is arranged in the order of which they are generated, there might be overlap between the ranges of SSTs at the L0. As a result, the same key might have multiple versions in L0. When a file is merged from L0 to L1, it is cut into multiple files in a certain size (the default is 8 MB). The key range of each file on the same level does not overlap with each other, so there is only one version for each key on L1 and subsequent levels.
+* Space amplification: The total size of files on each level is x (the default is 10) times that of the previous level, so 90% of the data is stored in the last level. It also means that the space amplification of RocksDB does not exceed 1.11 (L0 has fewer data and can be ignored).
+* Space amplification of TiKV: TiKV has it's own MVCC strategy. When a user writes a key, the real data written to RocksDB is key + commit_ts, that is to say, the update and deletion also write a new key to RocksDB. TiKV deletes the old version of the data (through the Delete interface of RocksDB) at intervals, so it can be considered that the actual space of the data stored by the user on TiKV is enlarged to 1.11 plus the data written in the last 10 minutes (assuming that TiKV cleans up the old data promptly).
 
-## RocksDB 后台线程和压缩
+## RocksDB background threads and compaction
 
-在 RocksDB 中，将 MemTable 转换为 SST 文件以及合并各层 SST 文件等操作都在后台线程池中执行。后台线程池的默认大小为 8。当机器的 CPU 数量小于或等于 8 时，后台线程池的默认大小为 CPU 数量减一。
+In RocksDB, operations such as converting the MemTable into SST files and merging SST files at various levels are performed in the background thread pool. The default size of the background thread pool is 8. When the number of CPUs in the machine is less than or equal to 8, the default size of the background thread pool is the number of CPUs minus one.
 
-通常情况下，用户不需要更改此配置。如果用户在一台机器上部署多个 TiKV 实例，或者机器的读取负载相对较高而写入负载较低，可以适当将 `rocksdb/max-background-jobs` 调整为 3 或 4。
+Generally speaking, users do not need to change this configuration. If the user deploys multiple TiKV instances on a machine, or the machine has a relatively high read load and a low write load, you can adjust the `rocksdb/max-background-jobs` to 3 or 4 as appropriate.
 
 ## WriteStall
 
 <CustomContent platform="tidb-cloud">
 
-> **注意：**
+> **Note:**
 >
-> 本节适用于 TiDB，不适用于 TiDB Cloud。
+> This section is for TiDB and not applicable to TiDB Cloud.
 
 </CustomContent>
 
-RocksDB 的 L0 与其他层不同。L0 的 SST 按生成顺序排列，SST 之间的键范围可能重叠。因此，执行查询时必须依次查询 L0 中的每个 SST。为了不影响查询性能，当 L0 中的文件过多时，会触发 WriteStall 来阻塞写入。
+The L0 of RocksDB is different from other levels. The SSTs of L0 are arranged in the order of generation. The key ranges between the SSTs can overlap. Therefore, each SST in L0 must be queried in turn when a query is performed. In order not to affect query performance, WriteStall is triggered to block writing when there are too many files in L0.
 
-当遇到写入延迟突然大幅增加时，可以首先查看 Grafana RocksDB KV 面板上的 **WriteStall Reason** 指标。如果是由于 L0 文件过多导致的 WriteStall，可以将以下配置调整为 64。
+When encountering a sudden sharp increase in write delay, you can first check the **WriteStall Reason** metric on the Grafana RocksDB KV panel. If it is a WriteStall caused by too many L0 files, you can adjust the following configurations to 64.
 
 ```
 rocksdb.defaultcf.level0-slowdown-writes-trigger

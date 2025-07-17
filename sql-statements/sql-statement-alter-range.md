@@ -1,29 +1,29 @@
 ---
 title: ALTER RANGE
-summary: TiDB 中 ALTER RANGE 的使用概述。
+summary: An overview of the usage of ALTER RANGE for TiDB.
 ---
 
 # ALTER RANGE
 
-目前，`ALTER RANGE` 语句只能用于修改 TiDB 中特定放置策略的范围。
+Currently, the `ALTER RANGE` statement can only be used to modify the range of a specific placement policy in TiDB.
 
-> **注意：**
+> **Note:**
 >
-> 此功能在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
-## 语法图
+## Synopsis
 
 ```ebnf+diagram
 AlterRangeStmt ::=
     'ALTER' 'RANGE' Identifier PlacementPolicyOption
 ```
 
-`ALTER RANGE` 支持以下两个参数：
+`ALTER RANGE` supports the following two parameters:
 
-- `global`：表示集群中所有数据的范围。
-- `meta`：表示存储在 TiDB 中的内部元数据的范围。
+- `global`: indicates the range of all data in a cluster.
+- `meta`: indicates the range of internal metadata stored in TiDB.
 
-## 示例
+## Examples
 
 ```sql
 CREATE PLACEMENT POLICY `deploy111` CONSTRAINTS='{"+region=us-east-1":1, "+region=us-east-2": 1, "+region=us-west-1": 1}';
@@ -33,4 +33,4 @@ ALTER RANGE global PLACEMENT POLICY = "deploy111";
 ALTER RANGE meta PLACEMENT POLICY = "five_replicas";
 ```
 
-上述示例创建了两个放置策略（`deploy111` 和 `five_replicas`），为不同区域指定了约束条件，然后将 `deploy111` 放置策略应用于集群范围内的所有数据，将 `five_replicas` 放置策略应用于元数据范围。
+The preceding example creates two placement policies (`deploy111` and `five_replicas`), specifies constraints for different regions, and then applies the `deploy111` placement policy to all data in the cluster range and the `five_replicas` placement policy to the metadata range.

@@ -1,23 +1,23 @@
 ---
-title: SHOW [BACKUPS|RESTORES] | TiDB SQL 语句参考
-summary: TiDB 数据库中 SHOW [BACKUPS|RESTORES] 的使用概览。
+title: SHOW [BACKUPS|RESTORES] | TiDB SQL Statement Reference
+summary: An overview of the usage of SHOW [BACKUPS|RESTORES] for the TiDB database.
 ---
 
 # SHOW [BACKUPS|RESTORES]
 
-这些语句显示在 TiDB 实例上执行的所有排队、正在运行和最近完成的 [`BACKUP`](/sql-statements/sql-statement-backup.md) 和 [`RESTORE`](/sql-statements/sql-statement-restore.md) 任务的列表。
+These statements show a list of all queued, running and recently finished [`BACKUP`](/sql-statements/sql-statement-backup.md) and [`RESTORE`](/sql-statements/sql-statement-restore.md) tasks that were executed on a TiDB instance.
 
-这两个语句都需要 `SUPER` 权限才能运行。
+Both statements require `SUPER` privilege to run.
 
-使用 `SHOW BACKUPS` 查询 `BACKUP` 任务，使用 `SHOW RESTORES` 查询 `RESTORE` 任务。
+Use `SHOW BACKUPS` to query `BACKUP` tasks and use `SHOW RESTORES` to query `RESTORE` tasks.
 
-> **注意：**
+> **Note:**
 >
-> 此功能在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
-使用 `br` 命令行工具启动的备份和恢复不会显示在结果中。
+Backups and restores that were started with the `br` commandline tool are not shown.
 
-## 语法
+## Synopsis
 
 ```ebnf+diagram
 ShowBRIEStmt ::=
@@ -28,9 +28,9 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## 示例
+## Examples
 
-在一个连接中执行以下语句：
+In one connection, execute the following statement:
 
 {{< copyable "sql" >}}
 
@@ -38,7 +38,7 @@ ShowLikeOrWhere ::=
 BACKUP DATABASE `test` TO 's3://example-bucket/backup-01';
 ```
 
-在备份完成之前，在新连接中运行 `SHOW BACKUPS`：
+Before the backup completes, run `SHOW BACKUPS` in a new connection:
 
 {{< copyable "sql" >}}
 
@@ -55,28 +55,28 @@ SHOW BACKUPS;
 1 row in set (0.00 sec)
 ```
 
-上述结果的第一行描述如下：
+The first row of the result above is described as follows:
 
-| 列名 | 描述 |
+| Column | Description |
 | :-------- | :--------- |
-| `Destination` | 目标 URL（已去除所有参数以避免泄露密钥） |
-| `State` | 任务状态 |
-| `Progress` | 当前状态下的估计进度百分比 |
-| `Queue_time` | 任务排队的时间 |
-| `Execution_time` | 任务开始执行的时间；对于排队中的任务，值为 `0000-00-00 00:00:00` |
-| `Finish_time` | 任务完成的时间戳；对于排队中和正在运行的任务，值为 `0000-00-00 00:00:00` |
-| `Connection` | 运行此任务的连接 ID |
-| `Message` | 包含详细信息的消息 |
+| `Destination` | The destination URL (with all parameters stripped to avoid leaking secret keys) |
+| `State` | State of the task |
+| `Progress` | Estimated progress in the current state as a percentage |
+| `Queue_time` | When the task was queued |
+| `Execution_time` | When the task was started; the value is `0000-00-00 00:00:00` for queueing tasks |
+| `Finish_time` | The timestamp when the task finished; the value is `0000-00-00 00:00:00` for queueing and running tasks |
+| `Connection` | Connection ID running this task |
+| `Message` | Message with details |
 
-可能的状态有：
+The possible states are:
 
-| 状态 | 描述 |
+| State | Description |
 | :-----|:------------|
-| Backup | 正在进行备份 |
-| Wait | 等待执行 |
-| Checksum | 正在运行校验和操作 |
+| Backup | Making a backup |
+| Wait | Waiting for execution |
+| Checksum | Running a checksum operation |
 
-连接 ID 可以通过 [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md) 语句用来取消备份/恢复任务。
+The connection ID can be used to cancel a backup/restore task via the [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md) statement.
 
 {{< copyable "sql" >}}
 
@@ -88,9 +88,9 @@ KILL TIDB QUERY 4;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-### 过滤
+### Filtering
 
-使用 `LIKE` 子句通过将目标 URL 与通配符表达式匹配来过滤任务。
+Use the `LIKE` clause to filter out tasks by matching the destination URL against a wildcard expression.
 
 {{< copyable "sql" >}}
 
@@ -98,7 +98,7 @@ Query OK, 0 rows affected (0.00 sec)
 SHOW BACKUPS LIKE 's3://%';
 ```
 
-使用 `WHERE` 子句按列进行过滤。
+Use the `WHERE` clause to filter by columns.
 
 {{< copyable "sql" >}}
 
@@ -106,11 +106,11 @@ SHOW BACKUPS LIKE 's3://%';
 SHOW BACKUPS WHERE `Progress` < 25.0;
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-此语句是 TiDB 对 MySQL 语法的扩展。
+This statement is a TiDB extension to MySQL syntax.
 
-## 另请参阅
+## See also
 
 * [BACKUP](/sql-statements/sql-statement-backup.md)
 * [RESTORE](/sql-statements/sql-statement-restore.md)

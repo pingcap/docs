@@ -1,56 +1,56 @@
 ---
 title: ticloud serverless update
-summary: "`ticloud serverless update` 命令的参考文档。"
+summary: The reference of `ticloud serverless update`.
 ---
 
 # ticloud serverless update
 
-更新 TiDB Cloud Serverless 集群：
+Update a TiDB Cloud Serverless cluster:
 
 ```shell
 ticloud serverless update [flags]
 ```
 
-## 示例
+## Examples
 
-在交互模式下更新 TiDB Cloud Serverless 集群：
+Update a TiDB Cloud Serverless cluster in interactive mode:
 
 ```shell
 ticloud serverless update
 ```
 
-在非交互模式下更新 TiDB Cloud Serverless 集群的名称：
+Update the name of a TiDB Cloud Serverless cluster in non-interactive mode:
 
 ```shell
 ticloud serverless update -c <cluster-id> --display-name <new-display-mame>
 ```
 
-在非交互模式下更新 TiDB Cloud Serverless 集群的标签：
+Update labels of a TiDB Cloud Serverless cluster in non-interactive mode
 
 ```shell
 ticloud serverless update -c <cluster-id> --labels "{\"label1\":\"value1\"}"
 ```
 
-## 参数标志
+## Flags
 
-在非交互模式下，你需要手动输入必需的参数标志。在交互模式下，你可以按照 CLI 提示填写这些信息。
+In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
-| 参数标志                   | 描述                           | 是否必需 | 说明                                 |
-|---------------------------|--------------------------------|----------|-------------------------------------|
-| -c, --cluster-id string   | 指定集群的 ID。                 | 是       | 仅在非交互模式下有效。                |
-| -n --display-name string  | 指定集群的新名称。               | 否       | 仅在非交互模式下有效。                |
-| --labels string           | 指定集群的新标签。               | 否       | 仅在非交互模式下有效。                |
-| --disable-public-endpoint | 禁用集群的公共端点。             | 否       | 仅在非交互模式下有效。                |
-| -h, --help                | 显示此命令的帮助信息。           | 否       | 在非交互和交互模式下均可使用。         |
+| Flag                      | Description                                 | Required | Note                                                 |
+|---------------------------|---------------------------------------------|----------|------------------------------------------------------|
+| -c, --cluster-id string   | Specifies the ID of the cluster.            | Yes      | Only works in non-interactive mode.                  |
+| -n --display-name string  | Specifies a new name for the cluster.       | No       | Only works in non-interactive mode.                  |.
+| --labels string           | Specifies new labels for the cluster.       | No       | Only works in non-interactive mode.                  |
+| --disable-public-endpoint | Disables the public endpoint of the cluster. | No       | Only works in non-interactive mode.                  |
+| -h, --help                | Shows help information for this command.    | No       | Works in both non-interactive and interactive modes. |
 
-## 继承的参数标志
+## Inherited flags
 
-| 参数标志              | 描述                                                                                    | 是否必需 | 说明                                                                                      |
-|----------------------|----------------------------------------------------------------------------------------|----------|-------------------------------------------------------------------------------------------|
-| --no-color          | 禁用输出中的颜色。                                                                      | 否       | 仅在非交互模式下有效。在交互模式下，禁用颜色可能对某些 UI 组件不起作用。                      |
-| -P, --profile string | 指定此命令使用的活动[用户配置文件](/tidb-cloud/cli-reference.md#user-profile)。          | 否       | 在非交互和交互模式下均可使用。                                                              |
-| -D, --debug         | 启用调试模式。                                                                          | 否       | 在非交互和交互模式下均可使用。                                                              |
+| Flag                 | Description                                                                                          | Required | Note                                                                                                             |
+|----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
+| --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
+| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
+| -D, --debug          | Enables debug mode.                                                                                    | No       | Works in both non-interactive and interactive modes.                                                             |
 
-## 反馈
+## Feedback
 
-如果你对 TiDB Cloud CLI 有任何问题或建议，欢迎创建 [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)。同时，我们也欢迎任何形式的贡献。
+If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.

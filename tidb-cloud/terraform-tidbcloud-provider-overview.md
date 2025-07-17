@@ -1,42 +1,42 @@
 ---
-title: Terraform 集成概览
-summary: 通过 Terraform 创建、管理和更新你的 TiDB Cloud 资源。
+title: Terraform Integration Overview
+summary: Create, manage, and update your TiDB Cloud resources through Terraform.
 ---
 
-# Terraform 集成概览
+# Terraform Integration Overview
 
-[Terraform](https://www.terraform.io/) 是一个基础设施即代码工具，让你可以在可版本控制、可重用和可共享的人类可读配置文件中定义云端和自托管资源。
+[Terraform](https://www.terraform.io/) is an infrastructure as code tool that lets you define both cloud and self-hosted resources in human-readable configuration files that you can version, reuse, and share.
 
-[TiDB Cloud Terraform Provider](https://registry.terraform.io/providers/tidbcloud/tidbcloud) 是一个插件，允许你使用 Terraform 管理 TiDB Cloud 资源，如集群、备份和恢复。
+[TiDB Cloud Terraform Provider](https://registry.terraform.io/providers/tidbcloud/tidbcloud) is a plugin that allows you to use Terraform to manage TiDB Cloud resources, such as clusters, backups, and restores.
 
-如果你正在寻找一种简单的方式来自动化资源配置和基础设施工作流，可以尝试 TiDB Cloud Terraform Provider，它为你提供以下功能：
+If you are looking for a simple way to automate resource provisioning and your infrastructure workflow, you can try out TiDB Cloud Terraform Provider, which provides you with the following capacities:
 
-- 获取项目信息。
-- 获取集群规格信息，如支持的云服务提供商、区域和节点大小。
-- 管理 TiDB 集群，包括创建、扩缩容、暂停和恢复集群。
-- 为集群创建和删除备份。
-- 为集群创建恢复任务。
+- Get your project information.
+- Get cluster specification information, such as supported cloud providers, regions, and node sizes.
+- Manage your TiDB cluster, including creating, scaling, pausing, and resuming a cluster.
+- Create and delete a backup for your cluster.
+- Create a restore task for your cluster.
 
-## 要求
+## Requirements
 
-- [TiDB Cloud 账户](https://tidbcloud.com/free-trial)
-- [Terraform 版本](https://www.terraform.io/downloads.html) >= 1.0
-- [Go 版本](https://golang.org/doc/install) >= 1.18（仅当你想在本地构建 [TiDB Cloud Terraform Provider](https://github.com/tidbcloud/terraform-provider-tidbcloud) 时需要）
+- [A TiDB Cloud account](https://tidbcloud.com/free-trial)
+- [Terraform version](https://www.terraform.io/downloads.html) >= 1.0
+- [Go version](https://golang.org/doc/install) >= 1.18 (required only if you want to build [TiDB Cloud Terraform Provider](https://github.com/tidbcloud/terraform-provider-tidbcloud) locally)
 
-## 支持的资源和数据源
+## Supported resources and data sources
 
-[资源](https://www.terraform.io/language/resources)和[数据源](https://www.terraform.io/language/data-sources)是 Terraform 语言中最重要的两个元素。
+[Resources](https://www.terraform.io/language/resources) and [Data sources](https://www.terraform.io/language/data-sources) are the two most important elements in the Terraform language.
 
-TiDB Cloud 支持以下资源和数据源：
+TiDB Cloud supports the following resources and data sources:
 
-- 资源
+- Resources
 
     - `tidbcloud_cluster`
     - `tidbcloud_backup`
     - `tidbcloud_restore`
     - `tidbcloud_import`
 
-- 数据源
+- Data sources
 
     - `tidbcloud_projects`
     - `tidbcloud_cluster_specs`
@@ -44,12 +44,12 @@ TiDB Cloud 支持以下资源和数据源：
     - `tidbcloud_restores`
     - `tidbcloud_backups`
 
-要获取资源和数据源的所有可用配置，请参阅此[配置文档](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)。
+To get all the available configurations for the resources and data sources, see this [configuration documentation](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs).
 
-## 下一步
+## Next step
 
-- [了解更多关于 Terraform 的信息](https://www.terraform.io/docs)
-- [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
-- [使用集群资源](/tidb-cloud/terraform-use-cluster-resource.md)
-- [使用备份资源](/tidb-cloud/terraform-use-backup-resource.md)
-- [使用恢复资源](/tidb-cloud/terraform-use-restore-resource.md)
+- [Learn more about Terraform](https://www.terraform.io/docs)
+- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
+- [Use Cluster Resource](/tidb-cloud/terraform-use-cluster-resource.md)
+- [Use Backup Resource](/tidb-cloud/terraform-use-backup-resource.md)
+- [Use Restore Resource](/tidb-cloud/terraform-use-restore-resource.md)

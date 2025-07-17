@@ -1,28 +1,28 @@
 ---
-title: 运行时过滤器
-summary: 了解运行时过滤器的工作原理及其使用方法。
+title: Runtime Filter
+summary: Learn the working principles of Runtime Filter and how to use it.
 ---
 
-# 运行时过滤器
+# Runtime Filter
 
-运行时过滤器（Runtime Filter）是 TiDB v7.3 中引入的新特性，旨在提高 MPP 场景下哈希连接的性能。通过动态生成过滤器来预先过滤哈希连接的数据，TiDB 可以减少运行时的数据扫描量和哈希连接的计算量，最终提升查询性能。
+Runtime Filter is a new feature introduced in TiDB v7.3, which aims to improve the performance of hash join in MPP scenarios. By generating filters dynamically to filter the data of hash join in advance, TiDB can reduce the amount of data scanning and the amount of calculation of hash join at runtime, ultimately improving the query performance.
 
-## 概念
+## Concepts
 
-- 哈希连接（Hash join）：实现连接关系代数的一种方式。通过在一侧建立哈希表，另一侧持续匹配哈希表来获得连接结果。
-- 构建侧（Build side）：哈希连接中用于构建哈希表的一侧。在本文档中，默认哈希连接的右表称为构建侧。
-- 探测侧（Probe side）：哈希连接中用于持续匹配哈希表的一侧。在本文档中，默认哈希连接的左表称为探测侧。
-- 过滤器（Filter）：也称为谓词（predicate），在本文档中指过滤条件。
+- Hash join: a way to implement the join relational algebra. It gets the result of Join by building a hash table on one side and continuously matching the hash table on the other side.
+- Build side: one side of hash join used to build a hash table. In this document, the right table of hash join is called the build side by default.
+- Probe side: one side of hash join used to continuously match the hash table. In this document, the left table of hash join is called the probe side by default.
+- Filter: also known as predicate, which refers to the filter condition in this document.
 
-## 运行时过滤器的工作原理
+## Working principles of Runtime Filter
 
-哈希连接通过基于右表构建哈希表并使用左表持续探测哈希表来执行连接操作。如果在探测过程中某些连接键值无法命中哈希表，这意味着该数据在右表中不存在，也不会出现在最终的连接结果中。因此，如果 TiDB 能够在扫描过程中**预先过滤掉连接键数据**，就会减少扫描时间和网络开销，从而大大提高连接效率。
+Hash join performs the join operation by building a hash table based on the right table and continuously probing the hash table using the left table. If some join key values cannot hit the hash table during the probing process, it means that the data does not exist in the right table and will not appear in the final join result. Therefore, if TiDB can **filter out the join key data in advance** during scanning, it will reduce the scanning time and network overhead, thereby greatly improving the join efficiency.
 
-运行时过滤器是在查询规划阶段生成的**动态谓词**。这个谓词与 TiDB Selection 算子中的其他谓词具有相同的功能。这些谓词都应用于 Table Scan 操作以过滤掉不符合谓词的行。唯一的区别是运行时过滤器中的参数值来自哈希连接构建过程中生成的结果。
+Runtime Filter is a **dynamic predicate** generated during the query planning phase. This predicate has the same function as other predicates in the TiDB Selection operator. These predicates are all applied to the Table Scan operation to filter out rows that do not match the predicate. The only difference is that the parameter values in Runtime Filter come from the results generated during the hash join build process.
 
-### 示例
+### Example
 
-假设在 `store_sales` 表和 `date_dim` 表之间有一个连接查询，连接方式是哈希连接。`store_sales` 是一个事实表，主要存储商店的销售数据，行数为 100 万。`date_dim` 是一个时间维度表，主要存储日期信息。你想查询 2001 年的销售数据，因此 `date_dim` 表中有 365 行参与连接操作。
+Assume that there is a join query between the `store_sales` table and the `date_dim` table, and the join method is hash join. `store_sales` is a fact table that mainly stores the sales data of stores, and the number of rows is 1 million. `date_dim` is a time dimension table that mainly stores date information. You want to query the sales data of the year 2001, so 365 rows of the `date_dim` table are involved in the join operation.
 
 ```sql
 SELECT * FROM store_sales, date_dim
@@ -30,7 +30,7 @@ WHERE ss_date_sk = d_date_sk
     AND d_year = 2001;
 ```
 
-哈希连接的执行计划通常如下：
+The execution plan of hash join is usually as follows:
 
 ```
                  +-------------------+
@@ -48,14 +48,14 @@ WHERE ss_date_sk = d_date_sk
 +---------------+                   +----------------+
 ```
 
-*（上图省略了 exchange 节点和其他节点。）*
+*(The above figure omits the exchange node and other nodes.)*
 
-运行时过滤器的执行过程如下：
+The execution process of Runtime Filter is as follows:
 
-1. 扫描 `date_dim` 表的数据。
-2. `PhysicalHashJoin` 根据构建侧的数据计算出一个过滤条件，如 `date_dim in (2001/01/01~2001/12/31)`。
-3. 将过滤条件发送给正在等待扫描 `store_sales` 的 `TableFullScan` 算子。
-4. 过滤条件应用于 `store_sales`，过滤后的数据传递给 `PhysicalHashJoin`，从而减少探测侧扫描的数据量和匹配哈希表的计算量。
+1. Scan the data of the `date_dim` table.
+2. `PhysicalHashJoin` calculates a filter condition based on the data of the build side, such as `date_dim in (2001/01/01~2001/12/31)`.
+3. Send the filter condition to the `TableFullScan` operator that is waiting to scan `store_sales`.
+4. The filter condition is applied to `store_sales`, and the filtered data is passed to `PhysicalHashJoin`, thereby reducing the amount of data scanned by the probe side and the amount of calculation of matching the hash table.
 
 ```
                          2. Build RF values
@@ -72,25 +72,26 @@ WHERE ss_date_sk = d_date_sk
       +-----------------+                +----------------+
 ```
 
-*（RF 是 Runtime Filter 的缩写）*
+*(RF is short for Runtime Filter)*
 
-从上面两个图中可以看到，`store_sales` 扫描的数据量从 100 万减少到了 5000。通过减少 `TableFullScan` 扫描的数据量，运行时过滤器可以减少匹配哈希表的次数，避免不必要的 I/O 和网络传输，从而显著提高连接操作的效率。
-## 使用运行时过滤器
+From the above two figures, you can see that the amount of data scanned by `store_sales` is reduced from 1 million to 5000. By reducing the amount of data scanned by `TableFullScan`, Runtime Filter can reduce the number of times to match the hash table, avoiding unnecessary I/O and network transmission, thus significantly improving the efficiency of the join operation.
 
-要使用运行时过滤器，你需要创建带有 TiFlash 副本的表，并将 [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720) 设置为 `LOCAL`。
+## Use Runtime Filter
 
-以 TPC-DS 数据集为例，本节使用 `catalog_sales` 表和 `date_dim` 表进行连接操作，说明运行时过滤器如何提高查询效率。
+To use Runtime Filter, you need to create a table with TiFlash replicas and set [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720) to `LOCAL`.
 
-### 步骤 1. 为要连接的表创建 TiFlash 副本
+Taking the TPC-DS dataset as an example, this section uses the `catalog_sales` table and the `date_dim` table for join operations to illustrate how Runtime Filter improves query efficiency.
 
-为 `catalog_sales` 表和 `date_dim` 表各添加一个 TiFlash 副本。
+### Step 1. Create TiFlash replicas for tables to be joined
+
+Add a TiFlash replica to each of the `catalog_sales` table and the `date_dim` table.
 
 ```sql
 ALTER TABLE catalog_sales SET tiflash REPLICA 1;
 ALTER TABLE date_dim SET tiflash REPLICA 1;
 ```
 
-等待两个表的 TiFlash 副本就绪，即副本的 `AVAILABLE` 和 `PROGRESS` 字段都为 `1`。
+Wait until the TiFlash replicas of the two tables are ready, that is, the `AVAILABLE` and `PROGRESS` fields of the replicas are both `1`.
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.TIFLASH_REPLICA WHERE TABLE_NAME='catalog_sales';
@@ -108,15 +109,15 @@ SELECT * FROM INFORMATION_SCHEMA.TIFLASH_REPLICA WHERE TABLE_NAME='date_dim';
 +--------------+------------+----------+---------------+-----------------+-----------+----------+
 ```
 
-### 步骤 2. 启用运行时过滤器
+### Step 2. Enable Runtime Filter
 
-要启用运行时过滤器，需要将系统变量 [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720) 的值设置为 `LOCAL`。
+To enable Runtime Filter, set the value of the system variable [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720  ) to `LOCAL`.
 
 ```sql
 SET tidb_runtime_filter_mode="LOCAL";
 ```
 
-检查更改是否成功：
+Check whether the change is successful:
 
 ```sql
 SHOW VARIABLES LIKE "tidb_runtime_filter_mode";
@@ -127,10 +128,11 @@ SHOW VARIABLES LIKE "tidb_runtime_filter_mode";
 +--------------------------+-------+
 ```
 
-如果系统变量的值为 `LOCAL`，则运行时过滤器已启用。
-### 步骤 3. 执行查询
+If the value of the system variable is `LOCAL`, Runtime Filter is enabled.
 
-在执行查询之前，使用 [`EXPLAIN` 语句](/sql-statements/sql-statement-explain.md)显示执行计划并检查运行时过滤器是否已生效。
+### Step 3. Execute the query
+
+Before executing the query, use the [`EXPLAIN` statement](/sql-statements/sql-statement-explain.md) to show the execution plan and check whether Runtime Filter has taken effect.
 
 ```sql
 EXPLAIN SELECT cs_ship_date_sk FROM catalog_sales, date_dim
@@ -138,14 +140,14 @@ WHERE d_date = '2002-2-01' AND
      cs_ship_date_sk = d_date_sk;
 ```
 
-当运行时过滤器生效时，相应的运行时过滤器会挂载在 `HashJoin` 节点和 `TableScan` 节点上，表示运行时过滤器已成功应用。
+When Runtime Filter takes effect, the corresponding Runtime Filter is mounted on the `HashJoin` node and the `TableScan` node, indicating that Runtime Filter is applied successfully.
 
 ```
 TableFullScan: runtime filter:0[IN] -> tpcds50.catalog_sales.cs_ship_date_sk
 HashJoin: runtime filter:0[IN] <- tpcds50.date_dim.d_date_sk |
 ```
 
-完整的查询执行计划如下：
+The complete query execution plan is as follows:
 
 ```
 +----------------------------------------+-------------+--------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
@@ -164,18 +166,19 @@ HashJoin: runtime filter:0[IN] <- tpcds50.date_dim.d_date_sk |
 9 rows in set (0.01 sec)
 ```
 
-现在，执行 SQL 查询，运行时过滤器将被应用。
+Now, execute the SQL query, and Runtime Filter is applied.
 
 ```sql
 SELECT cs_ship_date_sk FROM catalog_sales, date_dim
 WHERE d_date = '2002-2-01' AND
      cs_ship_date_sk = d_date_sk;
 ```
-### 步骤 4. 性能对比
 
-本示例使用 50 GB 的 TPC-DS 数据。启用运行时过滤器后，查询时间从 0.38 秒减少到 0.17 秒，效率提升了 50%。你可以使用 `ANALYZE` 语句查看运行时过滤器生效后各个算子的执行时间。
+### Step 4. Performance comparison
 
-以下是未启用运行时过滤器时查询的执行信息：
+This example uses the 50 GB TPC-DS data. After Runtime Filter is enabled, the query time is reduced from 0.38 seconds to 0.17 seconds, and efficiency is improved by 50%. You can use the `ANALYZE` statement to view the execution time of each operator after Runtime Filter takes effect.
+
+The following is the execution information of the query when Runtime Filter is not enabled:
 
 ```sql
 EXPLAIN ANALYZE SELECT cs_ship_date_sk FROM catalog_sales, date_dim WHERE d_date = '2002-2-01' AND cs_ship_date_sk = d_date_sk;
@@ -195,7 +198,7 @@ EXPLAIN ANALYZE SELECT cs_ship_date_sk FROM catalog_sales, date_dim WHERE d_date
 9 rows in set (0.38 sec)
 ```
 
-以下是启用运行时过滤器时查询的执行信息：
+The following is the execution information of the query when Runtime Filter is enabled:
 
 ```sql
 EXPLAIN ANALYZE SELECT cs_ship_date_sk FROM catalog_sales, date_dim
@@ -217,38 +220,39 @@ EXPLAIN ANALYZE SELECT cs_ship_date_sk FROM catalog_sales, date_dim
 9 rows in set (0.17 sec)
 ```
 
-通过比较两个查询的执行信息，你可以发现以下改进：
+By comparing the execution information of the two queries, you can find the following improvements:
 
-* IO 减少：通过比较 TableFullScan 算子的 `total_scanned_rows`，可以看到启用运行时过滤器后 `TableFullScan` 的扫描量减少了 2/3。
-* 哈希连接性能提升：`HashJoin` 算子的执行时长从 376.1 ms 减少到 157.6 ms。
+* IO reduction: by comparing the `total_scanned_rows` of the TableFullScan operator, you can see that the scan volume of `TableFullScan` is reduced by 2/3 after Runtime Filter is enabled.
+* Hash join performance improvement: the execution duration of the `HashJoin` operator is reduced from 376.1 ms to 157.6 ms.
 
-### 最佳实践
+### Best practices
 
-运行时过滤器适用于大表和小表连接的场景，例如事实表和维度表的连接查询。当维度表的命中数据量较小时，意味着过滤器的值较少，因此可以更有效地过滤掉事实表中不满足条件的数据。与默认扫描整个事实表的场景相比，这显著提高了查询性能。
+Runtime Filter is applicable to the scenario where a large table and a small table are joined, such as a join query of a fact table and a dimension table. When the dimension table has a small amount of hit data, it means that the filter has fewer values, so the fact table can filter out the data that does not meet the conditions more effectively. Compared with the default scenario where the entire fact table is scanned, this significantly improves the query performance.
 
-TPC-DS 中 `Sales` 表和 `date_dim` 表的连接操作就是一个典型的例子。
-## 配置运行时过滤器
+The join operation of the `Sales` table and the `date_dim` table in TPC-DS is a typical example.
 
-在使用运行时过滤器时，你可以配置运行时过滤器的模式和谓词类型。
+## Configure Runtime Filter
 
-### 运行时过滤器模式
+When using Runtime Filter, you can configure the mode and predicate type of Runtime Filter.
 
-运行时过滤器的模式是**过滤器发送算子**和**过滤器接收算子**之间的关系。有三种模式：`OFF`、`LOCAL` 和 `GLOBAL`。在 v7.3.0 中，仅支持 `OFF` 和 `LOCAL` 模式。运行时过滤器模式由系统变量 [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720) 控制。
+### Runtime Filter mode
 
-- `OFF`：运行时过滤器被禁用。禁用后，查询行为与之前版本相同。
-- `LOCAL`：运行时过滤器以本地模式启用。在本地模式下，**过滤器发送算子**和**过滤器接收算子**在同一个 MPP 任务中。换句话说，运行时过滤器可以应用于 HashJoin 算子和 TableScan 算子在同一任务中的场景。目前，运行时过滤器仅支持本地模式。要启用此模式，请将其设置为 `LOCAL`。
-- `GLOBAL`：目前不支持全局模式。你不能将运行时过滤器设置为此模式。
+The mode of Runtime Filter is the relationship between the **Filter Sender operator** and **Filter Receiver operator**. There are three modes: `OFF`, `LOCAL`, and `GLOBAL`. In v7.3.0, only `OFF` and `LOCAL` modes are supported. The Runtime Filter mode is controlled by the system variable [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720).
 
-### 运行时过滤器类型
+- `OFF`: Runtime Filter is disabled. After it is disabled, the query behavior is the same as in previous versions.
+- `LOCAL`: Runtime Filter is enabled in the local mode. In the local mode, the **Filter Sender operator** and **Filter Receiver operator** are in the same MPP task. In other words, Runtime Filter can be applied to the scenario where the HashJoin operator and TableScan operator are in the same task. Currently, Runtime Filter only supports the local mode. To enable this mode, set it to `LOCAL`.
+- `GLOBAL`: currently, the global mode is not supported. You cannot set Runtime Filter to this mode.
 
-运行时过滤器的类型是生成的过滤器算子使用的谓词类型。目前仅支持一种类型：`IN`，这意味着生成的谓词类似于 `k1 in (xxx)`。运行时过滤器类型由系统变量 [`tidb_runtime_filter_type`](/system-variables.md#tidb_runtime_filter_type-new-in-v720) 控制。
+### Runtime Filter type
 
-- `IN`：默认类型。表示生成的运行时过滤器使用 `IN` 类型谓词。
+The type of Runtime Filter is the type of the predicate used by the generated Filter operator. Currently, only one type is supported: `IN`, which means that the generated predicated is similar to `k1 in (xxx)`. The Runtime Filter type is controlled by the system variable [`tidb_runtime_filter_type`](/system-variables.md#tidb_runtime_filter_type-new-in-v720).
 
-## 限制
+- `IN`: the default type. It means that the generated Runtime Filter uses the `IN` type predicate.
 
-- 运行时过滤器是 MPP 架构中的优化，只能应用于下推到 TiFlash 的查询。
-- 连接类型：Left outer、Full outer 和 Anti join（当左表是探测侧时）不支持运行时过滤器。因为运行时过滤器会预先过滤参与连接的数据，而上述连接类型不会丢弃不匹配的数据，所以不能使用运行时过滤器。
-- 等值连接表达式：当等值连接表达式中的探测列是复杂表达式时，或者当探测列类型是 JSON、Blob、Array 或其他复杂数据类型时，不会生成运行时过滤器。主要原因是上述类型的列很少用作连接列。即使生成了过滤器，过滤率通常也很低。
+## Limitations
 
-对于上述限制，如果你需要确认运行时过滤器是否正确生成，可以使用 [`EXPLAIN` 语句](/sql-statements/sql-statement-explain.md)验证执行计划。
+- Runtime Filter is an optimization in the MPP architecture and can only be applied to queries pushed down to TiFlash.
+- Join type: Left outer, Full outer, and Anti join (when the left table is the probe side) do not support Runtime Filter. Because Runtime Filter filters the data involved in the join in advance, the preceding types of join do not discard the unmatched data, so Runtime Filter cannot be used.
+- Equal join expression: When the probe column in the equal join expression is a complex expression, or when the probe column type is JSON, Blob, Array, or other complex data types, Runtime Filter is not generated. The main reason is that the preceding types of columns are rarely used as the join column. Even if the Filter is generated, the filtering rate is usually low.
+
+For the preceding limitations, if you need to confirm whether Runtime Filter is generated correctly, you can use the [`EXPLAIN` statement](/sql-statements/sql-statement-explain.md) to verify the execution plan.

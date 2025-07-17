@@ -1,178 +1,178 @@
 ---
-title: 管理 Data App
-summary: 了解如何在 TiDB Cloud 控制台中创建、查看、修改和删除 Data App。
+title: Manage a Data App
+summary: Learn how to create, view, modify, and delete a Data App in the TiDB Cloud console.
 ---
 
-# 管理 Data App
+# Manage a Data App
 
-Data Service (beta) 中的 Data App 是一组用于访问特定应用程序数据的端点集合。你可以使用 API 密钥配置授权设置，以限制对 Data App 中端点的访问。
+A Data App in Data Service (beta) is a collection of endpoints that you can use to access data for a specific application. You can configure authorization settings using API keys to restrict access to endpoints in a Data App.
 
-本文档介绍如何在 TiDB Cloud 控制台中管理你的 Data Apps。在 [**Data Service**](https://tidbcloud.com/project/data-service) 页面，你可以管理所有 Data Apps、端点和 API 密钥。
+This document describes how to manage your Data Apps in the TiDB Cloud console. On the [**Data Service**](https://tidbcloud.com/project/data-service) page, you can manage all Data Apps, endpoints, and API keys.
 
-## 创建 Data App
+## Create a Data App
 
-要为你的项目创建 Data App，请执行以下步骤：
+To create a Data App for your project, perform the following steps:
 
-1. 在项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面，点击左侧窗格中的 <MDSvgIcon name="icon-create-data-app" /> **Create DataApp**。
+1. On the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project, click <MDSvgIcon name="icon-create-data-app" /> **Create DataApp** in the left pane.
 
-    > **提示：**
+    > **Tip:**
     >
-    > 如果这是你项目中的第一个 Data App，请点击页面中间的 **Create Data App**。
+    > If this is the first Data App in your project, click **Create Data App** in the middle of the page.
 
-2. 输入名称、描述，并选择你希望 Data App 访问的集群。
+2. Enter a name, a description, and select clusters that you want the Data App to access.
 
-    > **注意：**
+    > **Note:**
     >
-    > 默认情况下，Data App 类型为 **Standard Data App**。如果你想创建 **Chat2Query Data App**，请参考 [Chat2Query API 入门](/tidb-cloud/use-chat2query-api.md)，而不是本文档。
+    > By default, the Data App type is **Standard Data App**. If you want to create a **Chat2Query Data App**, refer to [Get Started with Chat2Query API](/tidb-cloud/use-chat2query-api.md) instead of this document.
 
-3. （可选）要将 Data App 的端点自动部署到你首选的 GitHub 仓库和分支，请启用 **Connect to GitHub**，然后执行以下操作：
+3. (Optional) To automatically deploy endpoints of the Data App to your preferred GitHub repository and branch, enable **Connect to GitHub**, and then do the following:
 
-    1. 点击 **Install on GitHub**，然后按照屏幕上的说明将 **TiDB Cloud Data Service** 作为应用程序安装到你的目标仓库。
-    2. 点击 **Authorize** 以授权访问 GitHub 上的应用程序。
-    3. 指定要保存 Data App 配置文件的目标仓库、分支和目录。
+    1. Click **Install on GitHub**, and then follow the on-screen instructions to install **TiDB Cloud Data Service** as an application on your target repository.
+    2. Click **Authorize** to authorize access to the application on GitHub.
+    3. Specify the target repository, branch, and directory where you want to save the configuration files of your Data App.
 
-        > **注意：**
+        > **Note:**
         >
-        > - 目录必须以斜杠（`/`）开头。例如，`/mydata`。如果你指定的目录在目标仓库和分支中不存在，它将自动创建。
-        > - 仓库、分支和目录的组合标识了配置文件的路径，该路径在 Data Apps 中必须是唯一的。如果你指定的路径已被另一个 Data App 使用，你需要指定一个新路径。否则，当前 Data App 在 TiDB Cloud 控制台中配置的端点将覆盖你指定路径中的文件。
-        > - 如果你指定的路径包含从另一个 Data App 复制的配置文件，并且你想将这些文件导入到当前 Data App，请参阅[导入现有 Data App 的配置](/tidb-cloud/data-service-manage-github-connection.md#import-configurations-of-an-existing-data-app)。
+        > - The directory must start with a slash (`/`). For example, `/mydata`. If the directory you specified does not exist in the target repository and branch, it will be created automatically.
+        > - The combination of repository, branch, and directory identifies the path of the configuration files, which must be unique among Data Apps. If your specified path is already used by another Data App, you need to specify a new path instead. Otherwise, the endpoints configured in the TiDB Cloud console for the current Data App will overwrite the files in your specified path.
+        > - If your specified path contains configuration files copied from another Data App and you want to import these files to the current Data App, see [Import configurations of an existing Data App](/tidb-cloud/data-service-manage-github-connection.md#import-configurations-of-an-existing-data-app).
 
-4. 点击 **Create Data App**。
+4. Click **Create Data App**.
 
-    新创建的 Data App 将添加到列表顶部。系统会为新的 Data App 创建一个默认的 `untitled endpoint`。
+    The newly created Data App is added to the top of the list. A default `untitled endpoint` is created for the new Data App.
 
-5. 如果你已配置将 Data App 连接到 GitHub，请检查你指定的 GitHub 目录。你会发现 [Data App 配置文件](/tidb-cloud/data-service-app-config-files.md)已由 `tidb-cloud-data-service` 提交到该目录，这表示你的 Data App 已成功连接到 GitHub。
+5. If you have configured to connect your Data App to GitHub, check your specified GitHub directory. You will find that the [Data App configuration files](/tidb-cloud/data-service-app-config-files.md) have been committed to the directory by `tidb-cloud-data-service`, which means that your Data App is connected to GitHub successfully.
 
-    对于你的新 Data App，默认启用 **Auto Sync & Deployment** 和 **Review Draft**，以便你可以轻松地在 TiDB Cloud 控制台和 GitHub 之间同步 Data App 更改，并在部署前审查更改。有关 GitHub 集成的更多信息，请参阅[使用 GitHub 自动部署 Data App 更改](/tidb-cloud/data-service-manage-github-connection.md)。
+    For your new Data App, **Auto Sync & Deployment** and **Review Draft** are enabled by default so you can easily synchronize Data App changes between TiDB Cloud console and GitHub and review changes before the deployment. For more information about the GitHub integration, see [Deploy your Data App changes with GitHub automatically](/tidb-cloud/data-service-manage-github-connection.md).
 
-## 配置 Data App
+## Configure a Data App
 
-你可以编辑 Data App 的名称、版本或描述，并管理其 GitHub 连接、链接的数据源、API 密钥、端点和部署。
+You can edit the name, version, or description of a Data App, and manage its GitHub connection, linked data sources, API keys, endpoints, and deployments.
 
-### 编辑 Data App 属性
+### Edit Data App properties
 
-你可以编辑 Data App 的名称、版本和描述。要编辑 Data App 属性，请执行以下步骤：
+You can edit the name, version, and description of a Data App. To edit Data App properties, perform the following steps:
 
-1. 导航到项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。
-2. 在左侧窗格中，点击目标 Data App 的名称以查看其详细信息。
-3. 在 **Data App Properties** 区域，点击 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="gray.1"><path d="M11 3.99998H6.8C5.11984 3.99998 4.27976 3.99998 3.63803 4.32696C3.07354 4.61458 2.6146 5.07353 2.32698 5.63801C2 6.27975 2 7.11983 2 8.79998V17.2C2 18.8801 2 19.7202 2.32698 20.362C2.6146 20.9264 3.07354 21.3854 3.63803 21.673C4.27976 22 5.11984 22 6.8 22H15.2C16.8802 22 17.7202 22 18.362 21.673C18.9265 21.3854 19.3854 20.9264 19.673 20.362C20 19.7202 20 18.8801 20 17.2V13M7.99997 16H9.67452C10.1637 16 10.4083 16 10.6385 15.9447C10.8425 15.8957 11.0376 15.8149 11.2166 15.7053C11.4184 15.5816 11.5914 15.4086 11.9373 15.0627L21.5 5.49998C22.3284 4.67156 22.3284 3.32841 21.5 2.49998C20.6716 1.67156 19.3284 1.67155 18.5 2.49998L8.93723 12.0627C8.59133 12.4086 8.41838 12.5816 8.29469 12.7834C8.18504 12.9624 8.10423 13.1574 8.05523 13.3615C7.99997 13.5917 7.99997 13.8363 7.99997 14.3255V16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>，修改 App 名称、版本或描述，然后点击 **Confirm**。
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
+2. In the left pane, click the name of your target Data App to view its details.
+3. In the **Data App Properties** area, click <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="gray.1"><path d="M11 3.99998H6.8C5.11984 3.99998 4.27976 3.99998 3.63803 4.32696C3.07354 4.61458 2.6146 5.07353 2.32698 5.63801C2 6.27975 2 7.11983 2 8.79998V17.2C2 18.8801 2 19.7202 2.32698 20.362C2.6146 20.9264 3.07354 21.3854 3.63803 21.673C4.27976 22 5.11984 22 6.8 22H15.2C16.8802 22 17.7202 22 18.362 21.673C18.9265 21.3854 19.3854 20.9264 19.673 20.362C20 19.7202 20 18.8801 20 17.2V13M7.99997 16H9.67452C10.1637 16 10.4083 16 10.6385 15.9447C10.8425 15.8957 11.0376 15.8149 11.2166 15.7053C11.4184 15.5816 11.5914 15.4086 11.9373 15.0627L21.5 5.49998C22.3284 4.67156 22.3284 3.32841 21.5 2.49998C20.6716 1.67156 19.3284 1.67155 18.5 2.49998L8.93723 12.0627C8.59133 12.4086 8.41838 12.5816 8.29469 12.7834C8.18504 12.9624 8.10423 13.1574 8.05523 13.3615C7.99997 13.5917 7.99997 13.8363 7.99997 14.3255V16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>, modify the App name, version, or description, and then click **Confirm**.
 
-### 管理 GitHub 连接
+### Manage GitHub connection
 
-有关更多信息，请参阅[使用 GitHub 自动部署](/tidb-cloud/data-service-manage-github-connection.md)。
+For more information, see [Deploy automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
 
-### 管理链接的数据源
+### Manage linked data sources
 
-你可以为 Data App 添加或删除链接的集群。
+You can add or remove linked clusters for a Data App.
 
-要将集群链接到 Data App，请执行以下步骤：
+To link a cluster to a Data App, perform the following steps:
 
-1. 导航到项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。
-2. 在左侧窗格中，找到目标 Data App 并点击其名称以查看详细信息。
-3. 在 **Linked Data Sources** 区域，点击 **Add Cluster**。
-4. 在显示的对话框中，从列表中选择一个集群，然后点击 **Add**。
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
+2. In the left pane, locate your target Data App and click the name of your target Data App to view its details.
+3. In the **Linked Data Sources** area, click **Add Cluster**.
+4. In the displayed dialog box, select a cluster from the list and click **Add**.
 
-要从 Data App 中删除链接的集群，请执行以下步骤：
+To remove a linked cluster from a Data App, perform the following steps:
 
-1. 导航到项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。
-2. 在左侧窗格中，找到目标 Data App 并点击其名称以查看详细信息。
-3. 在 **Linked Data Sources** 区域，找到要从 Data App 中删除的目标链接集群，然后在 **Action** 列中点击 **Delete**。
-4. 在显示的对话框中确认删除。
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
+2. In the left pane, locate your target Data App and click the name of your target Data App to view its details.
+3. In the **Linked Data Sources** area, locate the target linked cluster you want to remove from the Data App, and click **Delete** in the **Action** column.
+4. In the displayed dialog box, confirm the removal.
 
-    删除链接的集群后，该集群不会被删除，但 Data App 中的现有端点将无法访问它。
+    After you remove a linked cluster, the cluster is not deleted, but the existing endpoints in the Data App cannot access it.
 
-### 管理 API 密钥
+### Manage an API key
 
-有关更多信息，请参阅[管理 API 密钥](/tidb-cloud/data-service-api-key.md)。
+For more information, see [Manage an API key](/tidb-cloud/data-service-api-key.md).
 
-### 管理端点
+### Manage an endpoint
 
-有关更多信息，请参阅[管理端点](/tidb-cloud/data-service-manage-endpoint.md)。
+For more information, see [Manage an endpoint](/tidb-cloud/data-service-manage-endpoint.md).
 
-### 管理自定义域名
+### Manage a custom domain
 
-有关更多信息，请参阅[管理自定义域名](/tidb-cloud/data-service-custom-domain.md)。
+For more information, see [Manage a custom domain](/tidb-cloud/data-service-custom-domain.md).
 
-### 管理部署
+### Manage deployments
 
-要管理部署，请执行以下步骤：
+To manage deployments, perform the following steps:
 
-1. 导航到项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。
-2. 在左侧窗格中，找到目标 Data App 并点击其名称以查看详细信息。
-3. 在 **Deployment Configuration** 区域，点击 **Config**。将显示部署配置对话框。
-4. 在对话框中，选择你想要的 **Auto Sync & Deployment** 和 **Review Draft** 设置。
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
+2. In the left pane, locate your target Data App and click the name of your target Data App to view its details.
+3. In the **Deployment Configuration** area, click **Config**. The dialog for deployment configuration is displayed.
+4. In the dialog, choose your desired setting of **Auto Sync & Deployment** and **Review Draft**.
 
     - **Auto Sync & Deployment**
 
-        - 此选项仅在你的 Data App 连接到 GitHub 时才能启用。有关更多信息，请参阅[使用 GitHub 自动部署](/tidb-cloud/data-service-manage-github-connection.md)。
-        - 启用后，在你指定的 GitHub 目录中所做的更改可以自动部署到 TiDB Cloud，在 TiDB Cloud 控制台中所做的更改也可以推送到 GitHub。你可以在 Data App 部署历史记录中找到相应的部署和提交信息。
-        - 禁用后，在你指定的 GitHub 目录中所做的更改将**不会**部署到 TiDB Cloud，在 TiDB Cloud 控制台中所做的更改也将**不会**推送到 GitHub。
+        - This option can be enabled only when your Data App is connected to GitHub. For more information, see [Deploy automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
+        - When it is enabled, the changes made in your specified GitHub directory can be automatically deployed in TiDB Cloud, and the changes made in the TiDB Cloud console can be pushed to GitHub as well. You can find the corresponding deployment and commit information in the Data App deployment history.
+        - When it is disabled, the changes made in your specified GitHub directory will **NOT** be deployed in TiDB Cloud, and the changes made in the TiDB Cloud console will **NOT** be pushed to GitHub either.
 
     - **Review Draft**
 
-        - 启用后，你可以在部署前审查在 TiDB Cloud 控制台中所做的 Data App 更改。根据审查结果，你可以选择部署或放弃更改。
-        - 禁用后，在 TiDB Cloud 控制台中所做的 Data App 更改将直接部署。
+        - When it is enabled, you can review the Data App changes you made in the TiDB Cloud console before the deployment. Based on the review, you can either deploy or discard the changes.
+        - When it is disabled, the Data App changes you made in the TiDB Cloud console are deployed directly.
 
-5. 在 **Action** 列中，你可以根据需要编辑或重新部署更改。
+5. In the **Action** column, you can edit or re-deploy your changes according to your needs.
 
-## 使用 OpenAPI 规范
+## Use the OpenAPI Specification
 
-Data Service (beta) 支持为每个 Data App 生成 OpenAPI 规范 3.0，使你能够以标准化格式与端点交互。你可以使用此规范生成标准化的 OpenAPI 文档、客户端 SDK 和服务器存根。
+Data Service (beta) supports generating the OpenAPI Specification 3.0 for each Data App, which enables you to interact with your endpoints in a standardized format. You can use this specification to generate standardized OpenAPI documentation, client SDKs, and server stubs.
 
-### 下载 OpenAPI 规范
+### Download the OpenAPI Specification
 
-要以 JSON 或 YAML 格式下载 Data App 的 OpenAPI 规范，请执行以下步骤：
+To download the OpenAPI Specification in JSON or YAML format for a Data App, perform the following steps:
 
-1. 导航到项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。
-2. 在左侧窗格中，点击目标 Data App 的名称以查看其详细信息。
-3. 在 **API Specification** 区域，点击 **Download** 并选择 **JSON** 或 **YAML**。
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
+2. In the left pane, click the name of your target Data App to view its details.
+3. In the **API Specification** area, click **Download** and select **JSON** or **YAML**.
 
-    如果这是你第一次下载 OpenAPI 规范，系统会提示你授权请求。
+    If this is your first time downloading the OpenAPI Specification, you need to authorize the request when prompted.
 
-4. 然后，OpenAPI 规范将下载到你的本地计算机。
+4. Then, the OpenAPI Specification is downloaded to your local machine.
 
-### 查看 OpenAPI 文档
+### View the OpenAPI documentation
 
-Data Service (beta) 为每个 Data App 提供自动生成的 OpenAPI 文档。在文档中，你可以查看端点、参数和响应，并试用端点。
+Data Service (beta) provides autogenerated OpenAPI documentation for each Data App. In the documentation, you can view the endpoints, parameters, and responses, and try out the endpoints.
 
-要访问 OpenAPI 文档，请执行以下步骤：
+To access the OpenAPI documentation, perform the following steps:
 
-1. 导航到项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。
-2. 在左侧窗格中，点击目标 Data App 的名称以查看其详细信息。
-3. 在页面右上角，点击 **View API Docs**。
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
+2. In the left pane, click the name of your target Data App to view its details.
+3. In the upper-right corner of the page, click **View API Docs**.
 
-    如果这是你第一次使用 OpenAPI 规范，系统会提示你授权请求。
+    If this is your first time using the OpenAPI Specification, you need to authorize the request when prompted.
 
-4. 然后，OpenAPI 文档将在新标签页中打开。在文档中，你可以查看以下信息：
+4. Then, the OpenAPI documentation is opened in a new tab. In the documentation, you can view the following information:
 
-    - Data App 名称、版本和描述。
-    - 按标签分组的端点。
+    - Data App name, version, and description.
+    - Endpoints grouped by tags.
 
-5. （可选）要试用端点，请执行以下步骤：
+5. (Optional) To try out an endpoint, take the following steps:
 
-    1. 点击 **Authorize** 并在显示的对话框中输入你的 Data App 公钥作为 **Username** 和私钥作为 **Password**。
+    1. Click **Authorize** and enter your Data App public key as **Username** and private key as **Password** in the displayed dialog box.
 
-        有关更多信息，请参阅[管理 API 密钥](/tidb-cloud/data-service-api-key.md)。
+        For more information, see [Manage an API key](/tidb-cloud/data-service-api-key.md).
 
-    2. 找到目标端点，提供所需参数，然后点击 **Try it out**。你可以在 **Response body** 区域查看响应。
+    2. Locate your target endpoint, provide the required parameters, and then click **Try it out**. You can view the response in the **Response body** area.
 
-  有关如何使用 OpenAPI 文档的更多信息，请参阅 [Swagger UI](https://swagger.io/tools/swagger-ui/)。
+  For more information about how to use the OpenAPI documentation, see [Swagger UI](https://swagger.io/tools/swagger-ui/).
 
-## 删除 Data App
+## Delete a Data App
 
-> **注意：**
+> **Note:**
 >
-> 在删除 Data App 之前，请确保所有端点都未上线。否则，你将无法删除 Data App。要取消部署端点，请参考[取消部署端点](/tidb-cloud/data-service-manage-endpoint.md#undeploy-an-endpoint)。
+> Before you delete a Data App, make sure that all endpoints are not online. Otherwise, you cannot delete the Data App. To undeploy an endpoint, refer to [Undeploy an endpoint](/tidb-cloud/data-service-manage-endpoint.md#undeploy-an-endpoint).
 
-要删除 Data App，请执行以下步骤：
+To delete a Data App, perform the following steps:
 
-1. 导航到项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。
-2. 在左侧窗格中，找到目标 Data App 并点击其名称以查看详细信息。
-3. 在 **Danger Zone** 区域，点击 **Delete Data App**。将显示确认对话框。
-4. 输入你的 `<organization name>/<project name>/<data app name>`，然后点击 **I understand, delete**。
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
+2. In the left pane, locate your target Data App and click the name of your target Data App to view its details.
+3. In the **Danger Zone** area, click **Delete Data App**. A dialog box for confirmation is displayed.
+4. Type your `<organization name>/<project name>/<data app name>`, and then click **I understand, delete**.
 
-    一旦 Data App 被删除，Data App 中的现有端点和 API 密钥也将被删除。如果此 Data App 已连接到 GitHub，删除 App 不会删除相应 GitHub 仓库中的文件。
+    Once a Data App is deleted, the existing endpoints and API keys in the Data App are also deleted. If this Data App is connected to GitHub, deleting the App does not delete the files in the corresponding GitHub repository.
 
-## 了解更多
+## Learn more
 
-- [在 Postman 中运行 Data App](/tidb-cloud/data-service-postman-integration.md)
+- [Run Data App in Postman](/tidb-cloud/data-service-postman-integration.md)

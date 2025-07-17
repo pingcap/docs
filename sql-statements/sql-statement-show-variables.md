@@ -1,13 +1,13 @@
 ---
-title: SHOW [GLOBAL|SESSION] VARIABLES | TiDB SQL 语句参考
-summary: TiDB 数据库中 SHOW [GLOBAL|SESSION] VARIABLES 的使用概述。
+title: SHOW [GLOBAL|SESSION] VARIABLES | TiDB SQL Statement Reference
+summary: An overview of the usage of SHOW [GLOBAL|SESSION] VARIABLES for the TiDB database.
 ---
 
 # SHOW [GLOBAL|SESSION] VARIABLES
 
-此语句显示 `GLOBAL` 或 `SESSION` 作用域的变量列表。如果未指定作用域，则默认使用 `SESSION` 作用域。
+This statement shows a list of variables for the scope of either `GLOBAL` or `SESSION`. If no scope is specified, the default scope of `SESSION` will apply.
 
-## 语法图
+## Synopsis
 
 ```ebnf+diagram
 ShowVariablesStmt ::=
@@ -18,9 +18,9 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## 示例
+## Examples
 
-列出所有 TiDB 特定的变量。有关详细说明，请参考[系统变量](/system-variables.md)。
+List all TiDB specific variables. For detailed description, refer to [System Variables](/system-variables.md).
 
 ```sql
 mysql> SHOW GLOBAL VARIABLES LIKE 'tidb%';
@@ -115,7 +115,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'tidb%';
 | tidb_replica_read                   | leader              |
 | tidb_retry_limit                    | 10                  |
 | tidb_row_format_version             | 2                   |
-| tidb_scatter_region                 | 0                   |
+| tidb_scatter_region                 |                     |
 | tidb_skip_isolation_level_check     | 0                   |
 | tidb_skip_utf8_check                | 0                   |
 | tidb_slow_log_threshold             | 300                 |
@@ -166,10 +166,10 @@ mysql> SHOW VARIABLES WHERE Value=300;
 7 rows in set (0.00 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-TiDB 中的 `SHOW [GLOBAL|SESSION] VARIABLES` 语句与 MySQL 完全兼容。如果发现任何兼容性差异，请[报告问题](https://docs.pingcap.com/tidb/stable/support)。
+The `SHOW [GLOBAL|SESSION] VARIABLES` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
-## 另请参阅
+## See also
 
 * [`SET [GLOBAL|SESSION]`](/sql-statements/sql-statement-set-variable.md)

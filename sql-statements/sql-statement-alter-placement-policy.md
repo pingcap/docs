@@ -1,24 +1,24 @@
 ---
 title: ALTER PLACEMENT POLICY
-summary: TiDB 中 ALTER PLACEMENT POLICY 的使用方法。
+summary: The usage of ALTER PLACEMENT POLICY in TiDB.
 ---
 
 # ALTER PLACEMENT POLICY
 
-`ALTER PLACEMENT POLICY` 用于修改先前创建的放置策略。使用该放置策略的所有表和分区都将自动更新。
+`ALTER PLACEMENT POLICY` is used to modify existing placement policies that have previously been created. All the tables and partitions which use the placement policy will automatically be updated.
 
-> **注意：**
+> **Note:**
 >
-> 此功能在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
-`ALTER PLACEMENT POLICY` 用新定义_替换_之前的策略。它不会将旧策略与新策略_合并_。在以下示例中，执行 `ALTER PLACEMENT POLICY` 时，`FOLLOWERS=4` 会丢失：
+`ALTER PLACEMENT POLICY` _replaces_ the previous policy with the new definition. It does not _merge_ the old policy with the new one. In the following example, `FOLLOWERS=4` is lost when the `ALTER PLACEMENT POLICY` is executed:
 
 ```sql
 CREATE PLACEMENT POLICY p1 FOLLOWERS=4;
 ALTER PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
 ```
 
-## 语法
+## Synopsis
 
 ```ebnf+diagram
 AlterPolicyStmt ::=
@@ -54,20 +54,20 @@ AdvancedPlacementOption ::=
 |   "SURVIVAL_PREFERENCES" EqOpt stringLit
 ```
 
-## 示例
+## Examples
 
-> **注意：**
+> **Note:**
 >
-> 要了解集群中有哪些可用区域，请参见 [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)。
+> To know which regions are available in your cluster, see [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md).
 >
-> 如果你没有看到任何可用区域，你的 TiKV 安装可能没有正确设置标签。
+> If you do not see any available regions, your TiKV installation might not have labels set correctly.
 
 {{< copyable "sql" >}}
 
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
-CREATE TABLE t1 (i INT) PLACEMENT POLICY=p1; -- 将策略 p1 分配给表 t1
-ALTER PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1,us-west-2" FOLLOWERS=4; -- t1 的规则将自动更新。
+CREATE TABLE t1 (i INT) PLACEMENT POLICY=p1; -- Assign policy p1 to table t1
+ALTER PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1,us-west-2" FOLLOWERS=4; -- The rules of t1 will be updated automatically.
 SHOW CREATE PLACEMENT POLICY p1\G
 ```
 
@@ -82,13 +82,13 @@ Create Policy | CREATE PLACEMENT POLICY `p1` PRIMARY_REGION="us-east-1" REGIONS=
 1 row in set (0.00 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-该语句是 TiDB 对 MySQL 语法的扩展。
+This statement is a TiDB extension to MySQL syntax.
 
-## 另请参阅
+## See also
 
-* [SQL 中的放置规则](/placement-rules-in-sql.md)
+* [Placement Rules in SQL](/placement-rules-in-sql.md)
 * [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)
 * [CREATE PLACEMENT POLICY](/sql-statements/sql-statement-create-placement-policy.md)
 * [DROP PLACEMENT POLICY](/sql-statements/sql-statement-drop-placement-policy.md)

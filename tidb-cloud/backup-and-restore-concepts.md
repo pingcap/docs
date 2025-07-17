@@ -1,42 +1,42 @@
 ---
-title: 备份和恢复
-summary: 了解 TiDB Cloud 的备份和恢复概念。
+title: Backup & Restore
+summary: Learn about backup & restore concepts for TiDB Cloud.
 ---
 
-# 备份和恢复
+# Backup & Restore
 
-TiDB Cloud 备份和恢复功能旨在通过使你能够备份和恢复集群数据来保护你的数据并确保业务连续性。
+TiDB Cloud Backup & Restore features are designed to safeguard your data and ensure business continuity by enabling you to back up and recover cluster data.
 
-## 自动备份
+## Automatic backup
 
-对于 TiDB Cloud Serverless 和 TiDB Cloud Dedicated 集群，默认情况下会自动进行快照备份，并根据你的备份保留策略进行存储。
+For both TiDB Cloud Serverless and TiDB Cloud Dedicated clusters, snapshot backups are taken automatically by default and stored according to your backup retention policy.
 
-更多信息，请参见以下内容：
+For more information, see the following:
 
-- [TiDB Cloud Serverless 集群的自动备份](/tidb-cloud/backup-and-restore-serverless.md#automatic-backups)
-- [TiDB Cloud Dedicated 集群的自动备份](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)
+- [Automatic backups for TiDB Cloud Serverless clusters](/tidb-cloud/backup-and-restore-serverless.md#automatic-backups)
+- [Automatic backups for TiDB Cloud Dedicated clusters](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)
 
-## 手动备份
+## Manual backup
 
-手动备份是 TiDB Cloud Dedicated 的一项功能，使你能够根据需要将数据备份到已知状态，然后随时恢复到该状态。
+Manual backup is a feature of TiDB Cloud Dedicated that enables you to back up your data to a known state as needed, and then restore to that state at any time.
 
-更多信息，请参见[执行手动备份](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup)。
+For more information, see [Perform a manual backup](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup).
 
-## 双区域备份
+## Dual region backup
 
-双区域备份是 TiDB Cloud Dedicated 的一项功能，使你能够将备份从集群所在区域复制到另一个不同的区域。启用后，所有备份都会自动复制到指定区域。这提供了跨区域数据保护和灾难恢复能力。估计约 99% 的数据可以在一小时内复制到次要区域。
+Dual region backup is a feature of TiDB Cloud Dedicated that enables you to replicate backups from your cluster region to another different region. After it is enabled, all backups are automatically replicated to the specified region. This provides cross-region data protection and disaster recovery capabilities. It is estimated that approximately 99% of the data can be replicated to the secondary region within an hour.
 
-更多信息，请参见[开启双区域备份](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup)。
+For more information, see [Turn on dual region backup](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup).
 
-## 时间点恢复
+## Point-in-time Restore
 
-时间点恢复是一项功能，使你能够将任意时间点的数据恢复到新集群。你可以使用它来：
+Point-in-time Restore is a feature that enables you to restore data of any point in time to a new cluster. You can use it to:
 
-- 降低灾难恢复中的 RPO。
-- 通过恢复到错误事件发生之前的时间点来解决数据写入错误的情况。
-- 审计业务的历史数据。
+- Reduce RPO in disaster recovery.
+- Resolve cases of data write errors by restoring point-in-time that is before the error event.
+- Audit the historical data of the business.
 
-如果你想执行时间点恢复，请注意以下事项：
+If you want to perform Point-in-time Restore, note the following:
 
-- 对于 TiDB Cloud Serverless 集群，时间点恢复仅适用于可扩展集群，不适用于免费集群。更多信息，请参见[恢复模式](/tidb-cloud/backup-and-restore-serverless.md#restore-mode)。
-- 对于 TiDB Cloud Dedicated 集群，你需要提前[启用 PITR](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore)。
+- For TiDB Cloud Serverless clusters, Point-in-time Restore is available only for scalable clusters and not available for free clusters. For more information, see [Restore mode](/tidb-cloud/backup-and-restore-serverless.md#restore-mode).
+- For TiDB Cloud Dedicated clusters, you need to [enable PITR](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore) in advance.

@@ -1,61 +1,61 @@
 ---
-title: TiFlash 流水线执行模型
-summary: 了解 TiFlash 流水线执行模型。
+title: TiFlash Pipeline Execution Model
+summary: Learn about the TiFlash Pipeline Execution Model.
 ---
 
-# TiFlash 流水线执行模型
+# TiFlash Pipeline Execution Model
 
-本文介绍 TiFlash 流水线执行模型。
+This document introduces the TiFlash pipeline execution model.
 
-从 v7.2.0 版本开始，TiFlash 支持新的执行模型——流水线执行模型。
+Starting from v7.2.0, TiFlash supports a new execution model, the pipeline execution model.
 
-- 对于 v7.2.0 和 v7.3.0 版本：流水线执行模型处于实验阶段，由系统变量 [`tidb_enable_tiflash_pipeline_model`](https://docs.pingcap.com/tidb/v7.2/system-variables#tidb_enable_tiflash_pipeline_model-introduced-since-v720) 控制。
-- 对于 v7.4.0 及更高版本：流水线执行模型已正式发布。它是 TiFlash 的内部功能，与 TiFlash 资源控制紧密集成。当启用 TiFlash 资源控制时，流水线执行模型会自动启用。关于如何使用 TiFlash 资源控制的更多信息，请参考[使用资源控制实现资源隔离](/tidb-resource-control.md#parameters-for-resource-control)。此外，从 v7.4.0 版本开始，系统变量 `tidb_enable_tiflash_pipeline_model` 已被废弃。
+- For v7.2.0 and v7.3.0: The pipeline execution model is experimental and is controlled by [`tidb_enable_tiflash_pipeline_model`](https://docs.pingcap.com/tidb/v7.2/system-variables#tidb_enable_tiflash_pipeline_model-introduced-since-v720).
+- For v7.4.0 and later versions: The pipeline execution model becomes generally available. It is an internal feature of TiFlash and is tightly integrated with TiFlash resource control. When you enable TiFlash resource control, the pipeline execution model is automatically enabled. For more information about how to use TiFlash resource control, refer to [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md#parameters-for-resource-control). Additionally, starting from v7.4.0, the system variable `tidb_enable_tiflash_pipeline_model` is deprecated.
 
-受论文 [Morsel-Driven Parallelism: A NUMA-Aware Query Evaluation Framework for the Many-Core Age](https://dl.acm.org/doi/10.1145/2588555.2610507) 的启发，TiFlash 流水线执行模型提供了一个细粒度的任务调度模型，这与传统的线程调度模型不同。它减少了操作系统线程应用和调度的开销，并提供了细粒度的调度机制。
+Inspired by the paper [Morsel-Driven Parallelism: A NUMA-Aware Query Evaluation Framework for the Many-Core Age](https://dl.acm.org/doi/10.1145/2588555.2610507), the TiFlash pipeline execution model provides a fine-grained task scheduling model, which is different from the traditional thread scheduling model. It reduces the overhead of operating system thread application and scheduling and provides a fine-grained scheduling mechanism.
 
-## 设计与实现
+## Design and implementation
 
-原始的 TiFlash 流模型是一个线程调度执行模型。每个查询独立申请若干线程进行协同执行。
+The original TiFlash stream model is a thread scheduling execution model. Each query independently applies for several threads to execute in coordination.
 
-线程调度模型有以下两个缺陷：
+The thread scheduling model has the following two defects:
 
-- 在高并发场景下，过多的线程会导致大量的上下文切换，造成较高的线程调度成本。
-- 线程调度模型无法准确衡量查询的资源使用情况，也无法进行细粒度的资源控制。
+- In high-concurrency scenarios, too many threads cause a large number of context switches, resulting in high thread scheduling costs.
+- The thread scheduling model cannot accurately measure the resource usage of queries or do fine-grained resource control.
 
-新的流水线执行模型做了以下优化：
+The new pipeline execution model makes the following optimizations:
 
-- 将查询划分为多个流水线并按顺序执行。在每个流水线中，尽可能将数据块保持在缓存中，以实现更好的时间局部性，提高整个执行过程的效率。
-- 为摆脱操作系统原生的线程调度模型，实现更细粒度的调度机制，每个流水线被实例化为若干任务，采用任务调度模型。同时使用固定的线程池，减少操作系统线程调度的开销。
+- The queries are divided into multiple pipelines and executed in sequence. In each pipeline, the data blocks are kept in the cache as much as possible to achieve better temporal locality and improve the efficiency of the entire execution process.
+- To get rid of the native thread scheduling model of the operating system and implement a more fine-grained scheduling mechanism, each pipeline is instantiated into several tasks and uses the task scheduling model. At the same time, a fixed thread pool is used to reduce the overhead of operating system thread scheduling.
 
-流水线执行模型的架构如下：
+The architecture of the pipeline execution model is as follows:
 
-![TiFlash 流水线执行模型设计](/media/tiflash/tiflash-pipeline-model.png)
+![TiFlash pipeline execution model design](/media/tiflash/tiflash-pipeline-model.png)
 
-如上图所示，流水线执行模型主要由两个组件组成：流水线查询执行器和任务调度器。
+As shown in the preceding figure, the pipeline execution model consists of two main components: the pipeline query executor and the task scheduler.
 
-- 流水线查询执行器
+- The pipeline query executor
 
-    流水线查询执行器将从 TiDB 节点发送的查询请求转换为流水线有向无环图（DAG）。
+    The pipeline query executor converts the query request sent from the TiDB node into a pipeline directed acyclic graph (DAG).
 
-    它会在查询中找到流水线断点算子，根据流水线断点将查询拆分为若干个流水线。然后根据流水线之间的依赖关系，将流水线组装成 DAG。
+    It will find the pipeline breaker operators in the query and split the query into several pipelines according to the pipeline breakers. Then, it assembles the pipelines into a DAG according to the dependency relationship between the pipelines.
 
-    流水线断点是具有暂停/阻塞逻辑的算子。这类算子会持续接收上游算子的数据块，直到接收完所有数据块后，才向下游算子返回处理结果。这类算子打断了数据处理的流水线，所以称为流水线断点。其中一个流水线断点是聚合算子，它会将上游算子的所有数据写入哈希表，然后计算哈希表中的数据并将结果返回给下游算子。
+    A pipeline breaker is an operator that has a pause/blocking logic. This type of operator continuously receives data blocks from the upstream operator until all data blocks are received, and then return the processing result to the downstream operator. This type of operator breaks the data processing pipeline, so it is called a pipeline breaker. One of the pipeline breakers is the Aggregation operator, which writes all the data of the upstream operator into a hash table before calculating the data in the hash table and returning the result to the downstream operator.
 
-    查询被转换为流水线 DAG 后，流水线查询执行器会根据依赖关系按顺序执行每个流水线。流水线根据查询并发度被实例化为若干任务，提交给任务调度器执行。
+    After the query is converted into a pipeline DAG, the pipeline query executor executes each pipeline in sequence according to the dependency relationship. The pipeline is instantiated into several tasks according to the query concurrency and submitted to the task scheduler for execution.
 
-- 任务调度器
+- Task scheduler
 
-    任务调度器执行流水线查询执行器提交的任务。任务根据不同的执行逻辑在任务调度器的不同组件之间动态切换。
+    The task scheduler executes the tasks submitted by the pipeline query executor. The tasks are dynamically switched between different components in the task scheduler according to the different execution logic.
 
-    - CPU 任务线程池
+    - CPU task thread pool
 
-        执行任务中的 CPU 密集型计算逻辑，如数据过滤和函数计算。
+        Executes the CPU-intensive calculation logic in the task, such as data filtering and function calculation.
 
-    - IO 任务线程池
+    - IO task thread pool
 
-        执行任务中的 IO 密集型计算逻辑，如将中间结果写入磁盘。
+        Executes the IO-intensive calculation logic in the task, such as writing intermediate results to disk.
 
-    - 等待反应器
+    - Wait reactor
 
-        执行任务中的等待逻辑，如等待网络层将数据包传输到计算层。
+        Executes the wait logic in the task, such as waiting for the network layer to transfer the data packet to the calculation layer.

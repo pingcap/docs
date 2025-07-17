@@ -1,159 +1,160 @@
 ---
-title: 在 Google Cloud 中设置自托管 Kafka Private Service Connect
-summary: 本文介绍如何在 Google Cloud 中为自托管 Kafka 设置 Private Service Connect，以及如何使其与 TiDB Cloud 配合使用。
+title: Set Up Self-Hosted Kafka Private Service Connect in Google Cloud
+summary: This document explains how to set up Private Service Connect for self-hosted Kafka in Google Cloud and how to make it work with TiDB Cloud.
 ---
 
-# 在 Google Cloud 中设置自托管 Kafka Private Service Connect
+# Set Up Self-Hosted Kafka Private Service Connect in Google Cloud
 
-本文介绍如何在 Google Cloud 中为自托管 Kafka 设置 Private Service Connect，以及如何使其与 TiDB Cloud 配合使用。
+This document explains how to set up Private Service Connect for self-hosted Kafka in Google Cloud, and how to make it work with TiDB Cloud.
 
-工作机制如下：
+The mechanism works as follows:
 
-1. TiDB Cloud VPC 通过私有端点连接到 Kafka VPC。
-2. Kafka 客户端需要直接与所有 Kafka broker 通信。
-3. 每个 Kafka broker 在 TiDB Cloud VPC 中映射到一个唯一的端口。
-4. 利用 Kafka 引导机制和 Google Cloud 资源实现映射。
+1. The TiDB Cloud VPC connects to the Kafka VPC through private endpoints.
+2. Kafka clients need to communicate directly to all Kafka brokers.
+3. Each Kafka broker is mapped to a unique port within the TiDB Cloud VPC.
+4. Leverage the Kafka bootstrap mechanism and Google Cloud resources to achieve the mapping.
 
-在 Google Cloud 中为自托管 Kafka 设置 Private Service Connect 有两种方式：
+There are two ways to set up Private Service Connect for self-hosted Kafka in Google Cloud:
 
-- 使用 Private Service Connect (PSC) 端口映射机制。此方法需要静态的端口-broker 映射配置。你需要重新配置现有的 Kafka 集群，添加一组 EXTERNAL 监听器和广播监听器。参见[通过 PSC 端口映射设置自托管 Kafka Private Service Connect 服务](#通过-psc-端口映射设置自托管-kafka-private-service-connect-服务)。
+- Use the Private Service Connect (PSC) port mapping mechanism. This method requires static port-broker mapping configuration. You need to reconfigure the existing Kafka cluster to add a group of EXTERNAL listeners and advertised listeners. See [Set up self-hosted Kafka Private Service Connect service by PSC port mapping](#set-up-self-hosted-kafka-private-service-connect-service-by-psc-port-mapping).
 
-- 使用 [Kafka-proxy](https://github.com/grepplabs/kafka-proxy)。此方法在 Kafka 客户端和 Kafka broker 之间引入一个额外的运行进程作为代理。代理动态配置端口-broker 映射并转发请求。你无需重新配置现有的 Kafka 集群。参见[通过 Kafka-proxy 设置自托管 Kafka Private Service Connect](#通过-kafka-proxy-设置自托管-kafka-private-service-connect)。
+- Use [Kafka-proxy](https://github.com/grepplabs/kafka-proxy). This method introduces an extra running process as the proxy between Kafka clients and Kafka brokers. The proxy dynamically configures the port-broker mapping and forwards requests. You do not need to reconfigure the existing Kafka cluster. See [Set up self-hosted Kafka Private Service Connect by Kafka-proxy](#set-up-self-hosted-kafka-private-service-connect-by-kafka-proxy).
 
-本文提供了一个在 Google Cloud 中跨三个可用区（AZ）部署的 Kafka Private Service Connect 服务的连接示例。虽然可以基于类似的端口映射原理进行其他配置，但本文主要介绍 Kafka Private Service Connect 服务的基本设置过程。对于生产环境，建议使用具有增强运维可维护性和可观测性的更具弹性的 Kafka Private Service Connect 服务。
+The document provides an example of connecting to a Kafka Private Service Connect service deployed across three availability zones (AZ) in Google Cloud. While other configurations are possible based on similar port-mapping principles, this document covers the fundamental setup process of the Kafka Private Service Connect service. For production environments, a more resilient Kafka Private Service Connect service with enhanced operational maintainability and observability is recommended.
 
-## 前提条件
+## Prerequisites
 
-1. 确保你有以下授权来在自己的 Google Cloud 账户中设置 Kafka Private Service Connect。
+1. Ensure that you have the following authorization to set up Kafka Private Service Connect in your own Google Cloud account. 
 
-    - 管理虚拟机节点
-    - 管理 VPC
-    - 管理子网
-    - 管理负载均衡器
-    - 管理 Private Service Connect
-    - 连接到虚拟机节点以配置 Kafka 节点
+    - Manage VM nodes
+    - Manage VPC
+    - Manage subnets
+    - Manage load balancer
+    - Manage Private Service Connect
+    - Connect to VM nodes to configure Kafka nodes
 
-2. 如果你还没有 TiDB Cloud Dedicated 集群，请[创建一个](/tidb-cloud/create-tidb-cluster.md)。
+2. [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md) if you do not have one.
 
-3. 从 TiDB Cloud Dedicated 集群获取 Kafka 部署信息。
+3. Get the Kafka deployment information from your TiDB Cloud Dedicated cluster.
 
-    1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称以进入其概览页面。
-    2. 在概览页面上，找到 TiDB 集群的区域。确保你的 Kafka 集群将部署在相同的区域。
-    3. 在左侧导航栏中点击**数据** > **变更数据捕获**，在右上角点击**创建 Changefeed**，然后提供以下信息：
-        1. 在**目标**中，选择 **Kafka**。
-        2. 在**连接方式**中，选择 **Private Service Connect**。
-    4. 记下**继续前的提醒**中的 Google Cloud 项目。你将使用它来授权来自 TiDB Cloud 的自动接受端点创建请求。
-    5. 记下 **TiDB 集群的可用区**。你将在这些可用区中部署 TiDB 集群。建议你在这些可用区中部署 Kafka 以减少跨区流量。
-    6. 为你的 Kafka Private Service Connect 服务选择一个唯一的 **Kafka 广播监听器模式**。
-        1. 输入一个唯一的随机字符串。它只能包含数字或小写字母。你稍后将使用它来生成 **Kafka 广播监听器模式**。
-        2. 点击**检查使用情况并生成**以检查随机字符串是否唯一，并生成 **Kafka 广播监听器模式**，该模式将用于组装 Kafka broker 的 EXTERNAL 广播监听器，或配置 Kafka-proxy。
+    1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+    2. On the overview page, find the region of the TiDB cluster. Ensure that your Kafka cluster will be deployed to the same region.
+    3. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed** in the upper-right corner, and then provide the following information:
+        1. In **Destination**, select **Kafka**.
+        2. In **Connectivity Method**, select **Private Service Connect**.
+    4. Note down the Google Cloud project in **Reminders before proceeding**. You will use it to authorize the auto-accept endpoint creation request from TiDB Cloud.
+    5. Note down the **Zones of TiDB Cluster**. You will deploy your TiDB cluster in these zones. It is recommended that you deploy Kafka in these zones to reduce cross-zone traffic.
+    6. Pick a unique **Kafka Advertised Listener Pattern** for your Kafka Private Service Connect service.
+        1. Input a unique random string. It can only include numbers or lowercase letters. You will use it to generate **Kafka Advertised Listener Pattern** later.
+        2. Click **Check usage and generate** to check if the random string is unique and generate **Kafka Advertised Listener Pattern** that will be used to assemble the EXTERNAL advertised listener for Kafka brokers, or configure Kafka-proxy. 
 
-记下所有部署信息。你稍后需要使用它来配置 Kafka Private Service Connect 服务。
+Note down all the deployment information. You need to use it to configure your Kafka Private Service Connect service later.
 
-下表显示了部署信息的示例。
+The following table shows an example of the deployment information.
 
-| 信息                        | 值                           |
+| Information                        | Value                           |
 |------------------------------------|---------------------------------|
-| 区域                             | Oregon (`us-west1`)               |
-| TiDB Cloud 的 Google Cloud 项目 | `tidbcloud-prod-000`              |
-| 可用区                              | <ul><li> `us-west1-a` </li><li> `us-west1-b` </li><li> `us-west1-c` </li></ul>   |
-| Kafka 广播监听器模式  | 唯一随机字符串：`abc` <br/> 生成的模式：&lt;broker_id&gt;.abc.us-west1.gcp.3199745.tidbcloud.com:&lt;port&gt; |
+| Region                             | Oregon (`us-west1`)               |
+| Google Cloud project of TiDB Cloud | `tidbcloud-prod-000`              |
+| Zones                              | <ul><li> `us-west1-a` </li><li> `us-west1-b` </li><li> `us-west1-c` </li></ul>   |
+| Kafka Advertised Listener Pattern  | The unique random string: `abc` <br/> Generated pattern: &lt;broker_id&gt;.abc.us-west1.gcp.3199745.tidbcloud.com:&lt;port&gt; |
 
-## 通过 PSC 端口映射设置自托管 Kafka Private Service Connect 服务
+## Set up self-hosted Kafka Private Service Connect service by PSC port mapping
 
-通过使用 PSC 端口映射机制，将每个 Kafka broker 暴露给 TiDB Cloud VPC，并使用唯一的端口。下图展示了其工作原理。
+Expose each Kafka broker to TiDB Cloud VPC with a unique port by using the PSC port mapping mechanism. The following diagram shows how it works.
 
-![通过端口映射连接到 Google Cloud 自托管 Kafka Private Service Connect](/media/tidb-cloud/changefeed/connect-to-google-cloud-self-hosted-kafka-private-service-connect-by-portmapping.jpeg)
+![Connect to Google Cloud self-hosted Kafka Private Service Connect by port mapping](/media/tidb-cloud/changefeed/connect-to-google-cloud-self-hosted-kafka-private-service-connect-by-portmapping.jpeg)
 
-### 步骤 1. 设置 Kafka 集群
+### Step 1. Set up the Kafka cluster
 
-如果你需要部署新集群，请按照[部署新的 Kafka 集群](#部署新的-kafka-集群)中的说明进行操作。
+If you need to deploy a new cluster, follow the instructions in [Deploy a new Kafka cluster](#deploy-a-new-kafka-cluster).
 
-如果你需要暴露现有集群，请按照[重新配置运行中的 Kafka 集群](#重新配置运行中的-kafka-集群)中的说明进行操作。
-#### 部署新的 Kafka 集群
+If you need to expose an existing cluster, follow the instructions in [Reconfigure a running Kafka cluster](#reconfigure-a-running-kafka-cluster). 
 
-**1. 设置 Kafka VPC**
+#### Deploy a new Kafka cluster
 
-你需要为 Kafka VPC 创建两个子网，一个用于 Kafka broker，另一个用于堡垒节点，以便于配置 Kafka 集群。
+**1. Set up the Kafka VPC**
 
-转到 [Google Cloud 控制台](https://cloud.google.com/cloud-console)，导航到 [VPC 网络](https://console.cloud.google.com/networking/networks/list)页面，使用以下属性创建 Kafka VPC：
+You need to create two subnets for Kafka VPC, one for Kafka brokers, and the other for the bastion node to make it easy to configure the Kafka cluster.
 
-- **名称**：`kafka-vpc`
-- 子网
-    - **名称**：`bastion-subnet`；**区域**：`us-west1`；**IPv4 范围**：`10.0.0.0/18`
-    - **名称**：`brokers-subnet`；**区域**：`us-west1`；**IPv4 范围**：`10.64.0.0/18`
-- 防火墙规则
+Go to the [Google Cloud console](https://cloud.google.com/cloud-console), and navigate to the [VPC networks](https://console.cloud.google.com/networking/networks/list) page to create the Kafka VPC with the following attributes:
+
+- **Name**: `kafka-vpc`
+- Subnets
+    - **Name**: `bastion-subnet`; **Region**: `us-west1`; **IPv4 range**: `10.0.0.0/18`
+    - **Name**: `brokers-subnet`; **Region**: `us-west1`; **IPv4 range**: `10.64.0.0/18`
+- Firewall rules
     - `kafka-vpc-allow-custom`
     - `kafka-vpc-allow-ssh`
 
-**2. 配置虚拟机**
+**2. Provisioning VMs**
 
-转到[虚拟机实例](https://console.cloud.google.com/compute/instances)页面配置虚拟机：
+Go to the [VM instances](https://console.cloud.google.com/compute/instances) page to provision VMs:
 
-1. 堡垒节点
+1. Bastion node
 
-    - **名称**：`bastion-node`
-    - **区域**：`us-west1`
-    - **可用区**：`任意`
-    - **机器类型**：`e2-medium`
-    - **镜像**：`Debian GNU/Linux 12`
-    - **网络**：`kafka-vpc`
-    - **子网**：`bastion-subnet`
-    - **外部 IPv4 地址**：`临时`
+    - **Name**: `bastion-node`
+    - **Region**: `us-west1`
+    - **Zone**: `Any`
+    - **Machine Type**: `e2-medium`
+    - **Image**: `Debian GNU/Linux 12`
+    - **Network**: `kafka-vpc`
+    - **Subnetwork**: `bastion-subnet`
+    - **External IPv4 address**: `Ephemeral`
 
-2. Broker 节点 1
+2. Broker node 1
 
-    - **名称**：`broker-node1`
-    - **区域**：`us-west1`
-    - **可用区**：`us-west1-a`
-    - **机器类型**：`e2-medium`
-    - **镜像**：`Debian GNU/Linux 12`
-    - **网络**：`kafka-vpc`
-    - **子网**：`brokers-subnet`
-    - **外部 IPv4 地址**：`无`
+    - **Name**: `broker-node1`
+    - **Region**: `us-west1`
+    - **Zone**: `us-west1-a`
+    - **Machine Type**: `e2-medium`
+    - **Image**: `Debian GNU/Linux 12`
+    - **Network**: `kafka-vpc`
+    - **Subnetwork**: `brokers-subnet`
+    - **External IPv4 address**: `None`
 
-3. Broker 节点 2
+3. Broker node 2
 
-    - **名称**：`broker-node2`
-    - **区域**：`us-west1`
-    - **可用区**：`us-west1-b`
-    - **机器类型**：`e2-medium`
-    - **镜像**：`Debian GNU/Linux 12`
-    - **网络**：`kafka-vpc`
-    - **子网**：`brokers-subnet`
-    - **外部 IPv4 地址**：`无`
+    - **Name**: `broker-node2`
+    - **Region**: `us-west1`
+    - **Zone**: `us-west1-b`
+    - **Machine Type**: `e2-medium`
+    - **Image**: `Debian GNU/Linux 12`
+    - **Network**: `kafka-vpc`
+    - **Subnetwork**: `brokers-subnet`
+    - **External IPv4 address**: `None`
 
-4. Broker 节点 3
+4. Broker node 3
 
-    - **名称**：`broker-node3`
-    - **区域**：`us-west1`
-    - **可用区**：`us-west1-c`
-    - **机器类型**：`e2-medium`
-    - **镜像**：`Debian GNU/Linux 12`
-    - **网络**：`kafka-vpc`
-    - **子网**：`brokers-subnet`
-    - **外部 IPv4 地址**：`无`
+    - **Name**: `broker-node3`
+    - **Region**: `us-west1`
+    - **Zone**: `us-west1-c`
+    - **Machine Type**: `e2-medium`
+    - **Image**: `Debian GNU/Linux 12`
+    - **Network**: `kafka-vpc`
+    - **Subnetwork**: `brokers-subnet`
+    - **External IPv4 address**: `None`
 
-**3. 准备 Kafka 运行时二进制文件**
+**3. Prepare Kafka runtime binaries**
 
-1. 转到堡垒节点的详情页面。点击 **SSH** 登录到堡垒节点。下载二进制文件。
+1. Go to the detail page of the bastion node. Click **SSH** to log in to the bastion node. Download binaries.
 
     ```shell
-    # 下载 Kafka 和 OpenJDK，然后解压文件。你可以根据自己的偏好选择二进制版本。
+    # Download Kafka and OpenJDK, and then extract the files. You can choose the binary version based on your preference.
     wget https://archive.apache.org/dist/kafka/3.7.1/kafka_2.13-3.7.1.tgz
     tar -zxf kafka_2.13-3.7.1.tgz
     wget https://download.java.net/java/GA/jdk22.0.2/c9ecb94cd31b495da20a27d4581645e8/9/GPL/openjdk-22.0.2_linux-x64_bin.tar.gz
     tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz
     ```
 
-2. 将二进制文件复制到每个 broker 节点。
+2. Copy binaries to each broker node.
 
     ```shell
-    # 运行此命令以使用 Google 用户凭据授权 gcloud 访问 Cloud Platform
-    # 按照输出中的说明完成登录
+    # Run this command to authorize gcloud to access the Cloud Platform with Google user credentials
+    # Follow the instruction in output to finish the login
     gcloud auth login
 
-    # 将二进制文件复制到 broker 节点
+    # Copy binaries to broker nodes
     gcloud compute scp kafka_2.13-3.7.1.tgz openjdk-22.0.2_linux-x64_bin.tar.gz broker-node1:~ --zone=us-west1-a
     gcloud compute ssh broker-node1 --zone=us-west1-a --command="tar -zxf kafka_2.13-3.7.1.tgz && tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz"
     gcloud compute scp kafka_2.13-3.7.1.tgz openjdk-22.0.2_linux-x64_bin.tar.gz broker-node2:~ --zone=us-west1-b
@@ -162,34 +163,34 @@ summary: 本文介绍如何在 Google Cloud 中为自托管 Kafka 设置 Private
     gcloud compute ssh broker-node3 --zone=us-west1-c --command="tar -zxf kafka_2.13-3.7.1.tgz && tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz"
     ```
 
-**4. 配置 Kafka broker**
+**4. Configure Kafka brokers**
 
-1. 设置一个包含三个节点的 KRaft Kafka 集群。每个节点同时作为 broker 和 controller 角色。对于每个 broker：
+1. Set up a KRaft Kafka cluster with three nodes. Each node acts as a broker and controller roles. For every broker:
 
-    1. 对于 `listeners`，所有三个 broker 都相同，并作为 broker 和 controller 角色：
-        1. 为所有 **controller** 角色节点配置相同的 CONTROLLER 监听器。如果你只想添加 **broker** 角色节点，则不需要在 `server.properties` 中配置 CONTROLLER 监听器。
-        2. 配置两个 **broker** 监听器。INTERNAL 用于内部访问；EXTERNAL 用于来自 TiDB Cloud 的外部访问。
+    1. For `listeners`, all three brokers are the same and act as brokers and controller roles:
+        1. Configure the same CONTROLLER listener for all **controller** role nodes. If you only want to add the **broker** role nodes, you do not need the CONTROLLER listener in `server.properties`.
+        2. Configure two **broker** listeners. INTERNAL for internal access; EXTERNAL for external access from TiDB Cloud.
     
-    2. 对于 `advertised.listeners`，执行以下操作：
-        1. 为每个 broker 配置一个使用 broker 节点内部 IP 地址的 INTERNAL 广播监听器，这允许内部 Kafka 客户端通过广播地址连接到 broker。
-        2. 基于你从 TiDB Cloud 获取的 **Kafka 广播监听器模式**，为每个 broker 节点配置一个 EXTERNAL 广播监听器，以帮助 TiDB Cloud 区分不同的 broker。不同的 EXTERNAL 广播监听器帮助 TiDB Cloud 端的 Kafka 客户端将请求路由到正确的 broker。
-            - `<port>` 用于区分 Kafka Private Service Connect 访问点的 broker。为所有 broker 的 EXTERNAL 广播监听器规划一个端口范围。这些端口不必是 broker 实际监听的端口。它们是 Private Service Connect 的负载均衡器监听的端口，负载均衡器会将请求转发到不同的 broker。
-            - 建议为不同的 broker 配置不同的 broker ID，以便于故障排除。
+    2. For `advertised.listeners`, do the following:
+        1. Configure an INTERNAL advertised listener for each broker using the internal IP address of the broker node, which allows internal Kafka clients to connect to the broker via the advertised address.
+        2. Configure an EXTERNAL advertised listener based on **Kafka Advertised Listener Pattern** you get from TiDB Cloud for every broker node to help TiDB Cloud differentiate between different brokers. Different EXTERNAL advertised listeners help Kafka clients from TiDB Cloud side route requests to the right broker.
+            - `<port>` differentiates brokers from Kafka Private Service Connect access points. Plan a port range for EXTERNAL advertised listeners of all brokers. These ports do not have to be actual ports listened to by brokers. They are ports listened to by the load balancer for Private Service Connect that will forward requests to different brokers.
+            - It is recommended to configure different broker IDs for different brokers to make it easy for troubleshooting.
     
-    3. 规划的值：
-        - CONTROLLER 端口：`29092`
-        - INTERNAL 端口：`9092`
-        - EXTERNAL：`39092`
-        - EXTERNAL 广播监听器端口范围：`9093~9095`
+    3. The planning values:
+        - CONTROLLER port: `29092`
+        - INTERNAL port: `9092`
+        - EXTERNAL: `39092`
+        - EXTERNAL advertised listener ports range: `9093~9095`
 
-2. 使用 SSH 登录到每个 broker 节点。为每个 broker 节点分别创建配置文件 `~/config/server.properties`，内容如下：
+2. Use SSH to log in to every broker node. Create a configuration file `~/config/server.properties` with the following content for each broker node respectively.
 
     ```properties
     # broker-node1 ~/config/server.properties
-    # 1. 将 {broker-node1-ip}、{broker-node2-ip}、{broker-node3-ip} 替换为实际的 IP 地址。
-    # 2. 根据"前提条件"部分中的"Kafka 广播监听器模式"配置 "advertised.listeners" 中的 EXTERNAL。
-    # 2.1 模式为 "<broker_id>.abc.us-west1.gcp.3199745.tidbcloud.com:<port>"。
-    # 2.2 因此 EXTERNAL 可以是 "b1.abc.us-west1.gcp.3199745.tidbcloud.com:9093"。将 <broker_id> 替换为 "b" 前缀加上 "node.id" 属性，将 <port> 替换为 EXTERNAL 广播监听器端口范围内的唯一端口（9093）。
+    # 1. Replace {broker-node1-ip}, {broker-node2-ip}, {broker-node3-ip} with the actual IP addresses.
+    # 2. Configure EXTERNAL in "advertised.listeners" based on the "Kafka Advertised Listener Pattern" in the "Prerequisites" section.
+    # 2.1 The pattern is "<broker_id>.abc.us-west1.gcp.3199745.tidbcloud.com:<port>".
+    # 2.2 So the EXTERNAL can be "b1.abc.us-west1.gcp.3199745.tidbcloud.com:9093". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port (9093) in the port range of the EXTERNAL advertised listener.
     process.roles=broker,controller
     node.id=1
     controller.quorum.voters=1@{broker-node1-ip}:29092,2@{broker-node2-ip}:29092,3@{broker-node3-ip}:29092
@@ -203,10 +204,10 @@ summary: 本文介绍如何在 Google Cloud 中为自托管 Kafka 设置 Private
 
     ```properties
     # broker-node2 ~/config/server.properties
-    # 1. 将 {broker-node1-ip}、{broker-node2-ip}、{broker-node3-ip} 替换为实际的 IP 地址。
-    # 2. 根据"前提条件"部分中的"Kafka 广播监听器模式"配置 "advertised.listeners" 中的 EXTERNAL。
-    # 2.1 模式为 "<broker_id>.abc.us-west1.gcp.3199745.tidbcloud.com:<port>"。
-    # 2.2 因此 EXTERNAL 可以是 "b2.abc.us-west1.gcp.3199745.tidbcloud.com:9094"。将 <broker_id> 替换为 "b" 前缀加上 "node.id" 属性，将 <port> 替换为 EXTERNAL 广播监听器端口范围内的唯一端口（9094）。
+    # 1. Replace {broker-node1-ip}, {broker-node2-ip}, {broker-node3-ip} with the actual IP addresses.
+    # 2. Configure EXTERNAL in "advertised.listeners" based on the "Kafka Advertised Listener Pattern" in the "Prerequisites" section.
+    # 2.1 The pattern is "<broker_id>.abc.us-west1.gcp.3199745.tidbcloud.com:<port>".
+    # 2.2 So the EXTERNAL can be "b2.abc.us-west1.gcp.3199745.tidbcloud.com:9094". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port (9094) in the port range of the EXTERNAL advertised listener.
     process.roles=broker,controller
     node.id=2
     controller.quorum.voters=1@{broker-node1-ip}:29092,2@{broker-node2-ip}:29092,3@{broker-node3-ip}:29092
@@ -220,10 +221,10 @@ summary: 本文介绍如何在 Google Cloud 中为自托管 Kafka 设置 Private
 
     ```properties
     # broker-node3 ~/config/server.properties
-    # 1. 将 {broker-node1-ip}、{broker-node2-ip}、{broker-node3-ip} 替换为实际的 IP 地址。
-    # 2. 根据"前提条件"部分中的"Kafka 广播监听器模式"配置 "advertised.listeners" 中的 EXTERNAL。
-    # 2.1 模式为 "<broker_id>.abc.us-west1.gcp.3199745.tidbcloud.com:<port>"。
-    # 2.2 因此 EXTERNAL 可以是 "b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095"。将 <broker_id> 替换为 "b" 前缀加上 "node.id" 属性，将 <port> 替换为 EXTERNAL 广播监听器端口范围内的唯一端口（9095）。
+    # 1. Replace {broker-node1-ip}, {broker-node2-ip}, {broker-node3-ip} with the actual IP addresses.
+    # 2. Configure EXTERNAL in "advertised.listeners" based on the "Kafka Advertised Listener Pattern" in the "Prerequisites" section.
+    # 2.1 The pattern is "<broker_id>.abc.us-west1.gcp.3199745.tidbcloud.com:<port>".
+    # 2.2 So the EXTERNAL can be "b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port (9095) in the port range of the EXTERNAL advertised listener.
     process.roles=broker,controller
     node.id=3
     controller.quorum.voters=1@{broker-node1-ip}:29092,2@{broker-node2-ip}:29092,3@{broker-node3-ip}:29092
@@ -234,16 +235,17 @@ summary: 本文介绍如何在 Google Cloud 中为自托管 Kafka 设置 Private
     listener.security.protocol.map=INTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
     log.dirs=./data
     ```
-3. 创建脚本，然后在每个 broker 节点中执行该脚本以启动 Kafka broker。
+
+3. Create a script, and then execute it to start the Kafka broker in each broker node.
 
     ```shell
     #!/bin/bash
 
-    # 获取当前脚本的目录
+    # Get the directory of the current script
     SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-    # 将 JAVA_HOME 设置为脚本目录中的 Java 安装路径
+    # Set JAVA_HOME to the Java installation within the script directory
     export JAVA_HOME="$SCRIPT_DIR/jdk-22.0.2"
-    # 定义变量
+    # Define the vars
     KAFKA_DIR="$SCRIPT_DIR/kafka_2.13-3.7.1/bin"
     KAFKA_STORAGE_CMD=$KAFKA_DIR/kafka-storage.sh
     KAFKA_START_CMD=$KAFKA_DIR/kafka-server-start.sh
@@ -251,19 +253,19 @@ summary: 本文介绍如何在 Google Cloud 中为自托管 Kafka 设置 Private
     KAFKA_LOG_DIR=$SCRIPT_DIR/log
     KAFKA_CONFIG_DIR=$SCRIPT_DIR/config
 
-    # 清理步骤，便于多次实验
-    # 查找所有 Kafka 进程 ID
+    # Cleanup step, which makes it easy for multiple experiments
+    # Find all Kafka process IDs
     KAFKA_PIDS=$(ps aux | grep 'kafka.Kafka' | grep -v grep | awk '{print $2}')
     if [ -z "$KAFKA_PIDS" ]; then
-    echo "没有运行中的 Kafka 进程。"
+    echo "No Kafka processes are running."
     else
-    # 终止每个 Kafka 进程
-    echo "正在终止 PID 为 $KAFKA_PIDS 的 Kafka 进程"
+    # Kill each Kafka process
+    echo "Killing Kafka processes with PIDs: $KAFKA_PIDS"
     for PID in $KAFKA_PIDS; do
         kill -9 $PID
-        echo "已终止 PID 为 $PID 的 Kafka 进程"
+        echo "Killed Kafka process with PID: $PID"
     done
-    echo "所有 Kafka 进程已终止。"
+    echo "All Kafka processes have been killed."
     fi
 
     rm -rf $KAFKA_DATA_DIR
@@ -271,61 +273,61 @@ summary: 本文介绍如何在 Google Cloud 中为自托管 Kafka 设置 Private
     rm -rf $KAFKA_LOG_DIR
     mkdir -p $KAFKA_LOG_DIR
 
-    # Magic id: BRl69zcmTFmiPaoaANybiw。你可以使用自己的 magic ID。
+    # Magic id: BRl69zcmTFmiPaoaANybiw. You can use your own magic ID.
     $KAFKA_STORAGE_CMD format -t "BRl69zcmTFmiPaoaANybiw" -c "$KAFKA_CONFIG_DIR/server.properties" > $KAFKA_LOG_DIR/server_format.log   
     LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properties" &
     ```
 
-**5. 在堡垒节点中测试 Kafka 集群**
+**5. Test the Kafka cluster in the bastion node**
 
-1. 测试 Kafka 引导。
+1. Test the Kafka bootstrap.
 
     ```shell
     export JAVA_HOME=~/jdk-22.0.2
 
-    # 从 INTERNAL 监听器引导
+    # Bootstrap from INTERNAL listener
     ./kafka_2.13-3.7.1/bin/kafka-broker-api-versions.sh --bootstrap-server {one_of_broker_ip}:9092 | grep 9092
-    # 预期输出（实际顺序可能不同）
+    # Expected output (the actual order might be different)
     {broker-node1-ip}:9092 (id: 1 rack: null) -> (
     {broker-node2-ip}:9092 (id: 2 rack: null) -> (
     {broker-node3-ip}:9092 (id: 3 rack: null) -> (
 
-    # 从 EXTERNAL 监听器引导
+    # Bootstrap from EXTERNAL listener
     ./kafka_2.13-3.7.1/bin/kafka-broker-api-versions.sh --bootstrap-server {one_of_broker_ip}:39092
-    # 最后 3 行的预期输出（实际顺序可能不同）
-    # 与"从 INTERNAL 监听器引导"的输出不同之处在于，可能会出现异常或错误，因为广播监听器在 Kafka VPC 中无法解析。
-    # 当你通过 Private Service Connect 创建 changefeed 连接到此 Kafka 集群时，我们将在 TiDB Cloud 端使其可解析并将其路由到正确的 broker。
+    # Expected output for the last 3 lines (the actual order might be different)
+    # The difference in the output from "bootstrap from INTERNAL listener" is that exceptions or errors might occur because advertised listeners cannot be resolved in Kafka VPC.
+    # We will make them resolvable in TiDB Cloud side and make it route to the right broker when you create a changefeed connect to this Kafka cluster by Private Service Connect. 
     b1.abc.us-west1.gcp.3199745.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     b2.abc.us-west1.gcp.3199745.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     ```
 
-2. 在堡垒节点中创建生产者脚本 `produce.sh`。
+2. Create a producer script `produce.sh` in the bastion node.
 
     ```shell
     #!/bin/bash
     BROKER_LIST=$1 # "{broker_address1},{broker_address2}..."
 
-    # 获取当前脚本的目录
+    # Get the directory of the current script
     SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-    # 将 JAVA_HOME 设置为脚本目录中的 Java 安装路径
+    # Set JAVA_HOME to the Java installation within the script directory
     export JAVA_HOME="$SCRIPT_DIR/jdk-22.0.2"
-    # 定义 Kafka 目录
+    # Define the Kafka directory
     KAFKA_DIR="$SCRIPT_DIR/kafka_2.13-3.7.1/bin"
     TOPIC="test-topic"
 
-    # 如果主题不存在则创建
+    # Create a topic if it does not exist
     create_topic() {
-        echo "如果主题不存在则创建..."
+        echo "Creating topic if it does not exist..."
         $KAFKA_DIR/kafka-topics.sh --create --topic $TOPIC --bootstrap-server $BROKER_LIST --if-not-exists --partitions 3 --replication-factor 3
     }
 
-    # 向主题发送消息
+    # Produce messages to the topic
     produce_messages() {
-        echo "正在向主题发送消息..."
+        echo "Producing messages to the topic..."
         for ((chrono=1; chrono <= 10; chrono++)); do
             message="Test message "$chrono
-            echo "创建 "$message
+            echo "Create "$message
             echo $message | $KAFKA_DIR/kafka-console-producer.sh --broker-list $BROKER_LIST --topic $TOPIC
         done
     }
@@ -333,61 +335,61 @@ summary: 本文介绍如何在 Google Cloud 中为自托管 Kafka 设置 Private
     produce_messages 
     ```
 
-3. 在堡垒节点中创建消费者脚本 `consume.sh`。
+3. Create a consumer script `consume.sh` in the bastion node.
 
     ```shell
     #!/bin/bash
 
     BROKER_LIST=$1 # "{broker_address1},{broker_address2}..."
 
-    # 获取当前脚本的目录
+    # Get the directory of the current script
     SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-    # 将 JAVA_HOME 设置为脚本目录中的 Java 安装路径
+    # Set JAVA_HOME to the Java installation within the script directory
     export JAVA_HOME="$SCRIPT_DIR/jdk-22.0.2"
-    # 定义 Kafka 目录
+    # Define the Kafka directory
     KAFKA_DIR="$SCRIPT_DIR/kafka_2.13-3.7.1/bin"
     TOPIC="test-topic"
     CONSUMER_GROUP="test-group"
-    # 从主题消费消息
+    # Consume messages from the topic
     consume_messages() {
-        echo "正在从主题消费消息..."
+        echo "Consuming messages from the topic..."
         $KAFKA_DIR/kafka-console-consumer.sh --bootstrap-server $BROKER_LIST --topic $TOPIC --from-beginning --timeout-ms 5000 --consumer-property group.id=$CONSUMER_GROUP
     }
     consume_messages
     ```
 
-4. 执行 `produce.sh` 和 `consume.sh` 以验证 Kafka 集群是否正在运行。这些脚本稍后也将用于网络连接测试。该脚本将创建一个具有 `--partitions 3 --replication-factor 3` 的主题。确保所有三个 broker 都包含数据。确保脚本将连接到所有三个 broker，以保证网络连接将被测试。
+4. Execute `produce.sh` and `consume.sh` to verify that the Kafka cluster is running. These scripts will also be reused for later network connection testing. The script will create a topic with `--partitions 3 --replication-factor 3`. Ensure that all three brokers contain data. Ensure that the scripts will connect to all three brokers to guarantee that network connection will be tested.
 
     ```shell
-    # 测试写入消息
+    # Test write message. 
     ./produce.sh {one_of_broker_ip}:9092
     ```
 
     ```text
-    # 预期输出
-    如果主题不存在则创建...
+    # Expected output
+    Creating topic if it does not exist...
 
-    正在向主题发送消息...
-    创建 Test message 1
-    >>创建 Test message 2
-    >>创建 Test message 3
-    >>创建 Test message 4
-    >>创建 Test message 5
-    >>创建 Test message 6
-    >>创建 Test message 7
-    >>创建 Test message 8
-    >>创建 Test message 9
-    >>创建 Test message 10
+    Producing messages to the topic...
+    Create Test message 1
+    >>Create Test message 2
+    >>Create Test message 3
+    >>Create Test message 4
+    >>Create Test message 5
+    >>Create Test message 6
+    >>Create Test message 7
+    >>Create Test message 8
+    >>Create Test message 9
+    >>Create Test message 10
     ```
 
     ```shell
-    # 测试读取消息
+    # Test read message
     ./consume.sh {one_of_broker_ip}:9092
     ```
 
     ```text
-    # 预期示例输出（实际消息顺序可能不同）
-    正在从主题消费消息...
+    # Expected example output (the actual message order might be different)
+    Consuming messages from the topic...
     Test message 3
     Test message 4
     Test message 5
@@ -400,194 +402,197 @@ summary: 本文介绍如何在 Google Cloud 中为自托管 Kafka 设置 Private
     Test message 7
     [2024-11-01 08:54:27,547] ERROR Error processing message, terminating consumer process:  (kafka.tools.ConsoleConsumer$)
     org.apache.kafka.common.errors.TimeoutException
-    共处理了 10 条消息
+    Processed a total of 10 messages
     ```
-#### 重新配置运行中的 Kafka 集群
 
-确保你的 Kafka 集群部署在与 TiDB 集群相同的区域。建议可用区也在相同的区域，以减少跨区流量。
+#### Reconfigure a running Kafka cluster
 
-**1. 为 broker 配置 EXTERNAL 监听器**
+Ensure that your Kafka cluster is deployed in the same region as the TiDB cluster. It is recommended that the zones are also in the same region to reduce cross-zone traffic.
 
-以下配置适用于 Kafka KRaft 集群。ZK 模式配置类似。
+**1. Configure the EXTERNAL listener for brokers**
 
-1. 规划配置更改。
+The following configuration applies to a Kafka KRaft cluster. The ZK mode configuration is similar.
 
-    1. 为每个 broker 配置一个用于来自 TiDB Cloud 的外部访问的 EXTERNAL **监听器**。选择一个唯一的端口作为 EXTERNAL 端口，例如 `39092`。
-    2. 基于你从 TiDB Cloud 获取的 **Kafka 广播监听器模式**，为每个 broker 节点配置一个 EXTERNAL **广播监听器**，以帮助 TiDB Cloud 区分不同的 broker。不同的 EXTERNAL 广播监听器帮助 TiDB Cloud 端的 Kafka 客户端将请求路由到正确的 broker。
-       - `<port>` 用于区分 Kafka Private Service Connect 访问点的 broker。为所有 broker 的 EXTERNAL 广播监听器规划一个端口范围，例如 `从 9093 开始的范围`。这些端口不必是 broker 实际监听的端口。它们是 Private Service Connect 的负载均衡器监听的端口，负载均衡器会将请求转发到不同的 broker。
-        - 建议为不同的 broker 配置不同的 broker ID，以便于故障排除。
+1. Plan configuration changes.
 
-2. 使用 SSH 登录到每个 broker 节点。使用以下内容修改每个 broker 的配置文件：
+    1. Configure an EXTERNAL **listener** for every broker for external access from TiDB Cloud. Select a unique port as the EXTERNAL port, for example, `39092`.
+    2. Configure an EXTERNAL **advertised listener** based on **Kafka Advertised Listener Pattern** you get from TiDB Cloud for every broker node to help TiDB Cloud differentiate between different brokers. Different EXTERNAL advertised listeners help Kafka clients from TiDB Cloud side route requests to the right broker.
+       - `<port>` differentiates brokers from Kafka Private Service Connect access points. Plan a port range for EXTERNAL advertised listeners of all brokers, for example, `range from 9093`. These ports do not have to be actual ports listened to by brokers. They are ports listened to by the load balancer for Private Service Connect that will forward requests to different brokers.
+        - It is recommended to configure different broker IDs for different brokers to make it easy for troubleshooting.
+
+2. Use SSH to log in to each broker node. Modify the configuration file of each broker with the following content:
 
      ```properties
-     # 添加 EXTERNAL 监听器
+     # Add EXTERNAL listener
      listeners=INTERNAL:...,EXTERNAL://0.0.0.0:39092
 
-     # 根据"前提条件"部分中的"Kafka 广播监听器模式"添加 EXTERNAL 广播监听器
-     # 1. 模式为 "<broker_id>.abc.us-west1.gcp.3199745.tidbcloud.com:<port>"。
-     # 2. 因此 EXTERNAL 可以是 "bx.abc.us-west1.gcp.3199745.tidbcloud.com:xxxx"。将 <broker_id> 替换为 "b" 前缀加上 "node.id" 属性，将 <port> 替换为 EXTERNAL 广播监听器端口范围内的唯一端口。
-     # 例如
+     # Add EXTERNAL advertised listeners based on the "Kafka Advertised Listener Pattern" in the "Prerequisites" section
+     # 1. The pattern is "<broker_id>.abc.us-west1.gcp.3199745.tidbcloud.com:<port>".
+     # 2. So the EXTERNAL can be "bx.abc.us-west1.gcp.3199745.tidbcloud.com:xxxx". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port in the port range of the EXTERNAL advertised listener.
+     # For example
      advertised.listeners=...,EXTERNAL://b1.abc.us-west1.gcp.3199745.tidbcloud.com:9093
 
-     # 配置 EXTERNAL 映射
+     # Configure EXTERNAL map
     listener.security.protocol.map=...,EXTERNAL:PLAINTEXT
      ```
 
-3. 重新配置所有 broker 后，逐个重启你的 Kafka broker。
+3. After you reconfigure all the brokers, restart your Kafka brokers one by one.
 
-**2. 在你的内部网络中测试 EXTERNAL 监听器设置**
+**2. Test EXTERNAL listener settings in your internal network**
 
-你可以在 Kafka 客户端节点中下载 Kafka 和 OpenJDK。
+You can download Kafka and OpenJDK in your Kafka client node.
 
 ```shell
-# 下载 Kafka 和 OpenJDK，然后解压文件。你可以根据自己的偏好选择二进制版本。
+# Download Kafka and OpenJDK, and then extract the files. You can choose the binary version based on your preference.
 wget https://archive.apache.org/dist/kafka/3.7.1/kafka_2.13-3.7.1.tgz
 tar -zxf kafka_2.13-3.7.1.tgz
 wget https://download.java.net/java/GA/jdk22.0.2/c9ecb94cd31b495da20a27d4581645e8/9/GPL/openjdk-22.0.2_linux-x64_bin.tar.gz
 tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz
 ```
 
-执行以下脚本以测试引导是否按预期工作。
+Execute the following script to test if the bootstrap works as expected.
 
 ```shell
 export JAVA_HOME=~/jdk-22.0.2
 
-# 从 EXTERNAL 监听器引导
+# Bootstrap from the EXTERNAL listener
 ./kafka_2.13-3.7.1/bin/kafka-broker-api-versions.sh --bootstrap-server {one_of_broker_ip}:39092
 
-# 最后 3 行的预期输出（实际顺序可能不同）
-# 会出现一些异常或错误，因为广播监听器在你的 Kafka 网络中无法解析。
-# 当你通过 Private Service Connect 创建 changefeed 连接到此 Kafka 集群时，我们将在 TiDB Cloud 端使其可解析并将其路由到正确的 broker。
+# Expected output for the last 3 lines (the actual order might be different)
+# There will be some exceptions or errors because advertised listeners cannot be resolved in your Kafka network. 
+# We will make them resolvable in TiDB Cloud side and make it route to the right broker when you create a changefeed connect to this Kafka cluster by Private Service Connect. 
 b1.abc.us-west1.gcp.3199745.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 b2.abc.us-west1.gcp.3199745.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 ```
-### 步骤 2. 将 Kafka 集群暴露为 Private Service Connect
 
-1. 转到[网络端点组](https://console.cloud.google.com/compute/networkendpointgroups/list)页面。创建一个网络端点组，如下所示：
+### Step 2. Expose the Kafka cluster as Private Service Connect
 
-    - **名称**：`kafka-neg`
-    - **网络端点组类型**：`端口映射 NEG（区域性）`
-        - **区域**：`us-west1`
-        - **网络**：`kafka-vpc`
-        - **子网**：`brokers-subnet`
+1. Go to the [Network endpoint group](https://console.cloud.google.com/compute/networkendpointgroups/list) page. Create a network endpoint group as follows:
 
-2. 转到网络端点组的详情页面，添加网络端点以配置到 broker 节点的端口映射。
+    - **Name**: `kafka-neg`
+    - **Network endpoint group type**: `Port Mapping NEG(Regional)`
+        - **Region**: `us-west1`
+        - **Network**: `kafka-vpc`
+        - **Subnet**: `brokers-subnet`
 
-    1. 网络端点 1
-        - **实例**：`broker-node1`
-        - **VM 端口**：`39092`
-        - **客户端端口**：`9093`
-    2. 网络端点 2
-        - **实例**：`broker-node2`
-        - **VM 端口**：`39092`
-        - **客户端端口**：`9094`
-    3. 网络端点 3
-        - **实例**：`broker-node3`
-        - **VM 端口**：`39092`
-        - **客户端端口**：`9095`
+2. Go to the detail page of the network endpoint group, and add the network endpoints to configure the port mapping to broker nodes.
 
-3. 转到[负载均衡](https://console.cloud.google.com/net-services/loadbalancing/list/loadBalancers)页面。创建一个负载均衡器，如下所示：
+    1. Network endpoint 1
+        - **Instance**: `broker-node1`
+        - **VM Port**: `39092`
+        - **Client Port**: `9093`
+    2. Network endpoint 2
+        - **Instance**: `broker-node2`
+        - **VM Port**: `39092`
+        - **Client Port**: `9094`
+    3. Network endpoint 3
+        - **Instance**: `broker-node3`
+        - **VM Port**: `39092`
+        - **Client Port**: `9095`
 
-    - **负载均衡器类型**：`网络负载均衡器`
-    - **代理或直通**：`直通`
-    - **面向公网或内部**：`内部`
-    - **负载均衡器名称**：`kafka-lb`
-    - **区域**：`us-west1`
-    - **网络**：`kafka-vpc`
-    - 后端配置
-        - **后端类型**：`端口映射网络端点组`
-        - **协议**：`TCP`
-        - **端口映射网络端点组**：`kafka-neg`
-    - 前端配置
-        - **子网**：`brokers-subnet`
-        - **端口**：`全部`
+3. Go to the [Load balancing](https://console.cloud.google.com/net-services/loadbalancing/list/loadBalancers) page. Create a load balancer as follows:
 
-4. 转到[**Private Service Connect** > **发布服务**](https://console.cloud.google.com/net-services/psc/list/producers)。
+    - **Type of load balancer**: `Network Load Balancer`
+    - **Proxy or Passthrough**: `Passthrough`
+    - **Public facing or internal**: `Internal`
+    - **Load Balancer name**: `kafka-lb`
+    - **Region**: `us-west1`
+    - **Network**: `kafka-vpc`
+    - Backend configuration
+        - **Backend type**: `Port mapping network endpoint group`
+        - **Protocol**: `TCP`
+        - **Port mapping network endpoint group**: `kafka-neg`
+    - Frontend configuration
+        - **Subnetwork**: `brokers-subnet`
+        - **Ports**: `All`
 
-    - **负载均衡器类型**：`内部直通网络负载均衡器`
-    - **内部负载均衡器**：`kafka-lb`
-    - **服务名称**：`kafka-psc`
-    - **子网**：`保留新子网`
-        - **名称**：`psc-subnet`
-        - **VPC 网络**：`kafka-vpc`
-        - **区域**：`us-west1`
-        - **IPv4 范围**：`10.128.0.0/18`
-    - **接受的项目**：你在[前提条件](#前提条件)中获得的 TiDB Cloud 的 Google Cloud 项目，例如 `tidbcloud-prod-000`。
+4. Go to [**Private Service Connect** > **PUBLISH SERVICE**](https://console.cloud.google.com/net-services/psc/list/producers).
 
-5. 导航到 `kafka-psc` 的详情页面。记下**服务附件**，例如 `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-psc`。你将在 TiDB Cloud 中使用它来连接到此 PSC。
+    - **Load Balancer Type**: `Internal passthrough Network Load Balancer`
+    - **Internal load balancer**: `kafka-lb`
+    - **Service name**: `kafka-psc`
+    - **Subnets**: `RESERVE NEW SUBNET`
+        - **Name**: `psc-subnet`
+        - **VPC Network**: `kafka-vpc`
+        - **Region**: `us-west1`
+        - **IPv4 range**: `10.128.0.0/18`
+    - **Accepted projects**: the Google Cloud project of TiDB Cloud you got in [Prerequisites](#prerequisites), for example, `tidbcloud-prod-000`.
 
-6. 转到 VPC 网络 `kafka-vpc` 的详情页面。添加防火墙规则以允许 PSC 流量到达所有 broker。
+5. Navigate to the detail page of the `kafka-psc`. Note down the **Service attachment**, for example, `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-psc`. You will use it in TiDB Cloud to connect to this PSC.
 
-    - **名称**：`allow-psc-traffic`
-    - **流量方向**：`入站`
-    - **匹配时的操作**：`允许`
-    - **目标**：`网络中的所有实例`
-    - **源过滤器**：`IPv4 范围`
-    - **源 IPv4 范围**：`10.128.0.0/18`。psc-subnet 的范围。
-    - **协议和端口**：允许所有
+6. Go to the detail page of the VPC network `kafka-vpc`. Add a firewall rule to allow PSC traffic to all brokers.
 
-### 步骤 3. 从 TiDB Cloud 连接
+    - **Name**: `allow-psc-traffic`
+    - **Direction of traffic**: `Ingress`
+    - **Action on match**: `Allow`
+    - **Targets**: `All instances in the network`
+    - **Source filter**: `IPv4 ranges`
+    - **Source IPv4 ranges**: `10.128.0.0/18`. The range of psc-subnet.
+    - **Protocols and ports**: Allow all
 
-1. 返回 [TiDB Cloud 控制台](https://tidbcloud.com)，为集群创建一个通过 **Private Service Connect** 连接到 Kafka 集群的 changefeed。更多信息，请参阅[同步数据到 Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md)。
+### Step 3. Connect from TiDB Cloud
 
-2. 当你进入**配置 changefeed 目标** > **连接方式** > **Private Service Connect** 时，使用相应的值填写以下字段和其他所需字段。
+1. Go back to the [TiDB Cloud console](https://tidbcloud.com) to create a changefeed for the cluster to connect to the Kafka cluster by **Private Service Connect**. For more information, see [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
 
-    - **Kafka 广播监听器模式**：`abc`。与你在[前提条件](#前提条件)中用于生成 **Kafka 广播监听器模式** 的唯一随机字符串相同。
-    - **服务附件**：PSC 的 Kafka 服务附件，例如 `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-psc`。
-    - **引导端口**：`9092,9093,9094`
+2. When you proceed to **Configure the changefeed target > Connectivity Method > Private Service Connect**, fill in the following fields with corresponding values and other fields as needed.
 
-3. 按照[同步数据到 Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md)中的步骤继续操作。
-## 通过 Kafka-proxy 设置自托管 Kafka Private Service Connect
+    - **Kafka Advertised Listener Pattern**: `abc`. It is the same as the unique random string you use to generate **Kafka Advertised Listener Pattern** in [Prerequisites](#prerequisites).
+    - **Service Attachment**: the Kafka service attachment of PSC, for example, `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-psc`.
+    - **Bootstrap Ports**: `9092,9093,9094`
 
-通过使用 Kafka-proxy 动态端口映射机制，将每个 Kafka broker 暴露给 TiDB Cloud VPC，并使用唯一的端口。下图展示了其工作原理。
+3. Proceed with the steps in [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
 
-![通过 Kafka 代理连接到 Google Cloud 自托管 Kafka Private Service Connect](/media/tidb-cloud/changefeed/connect-to-google-cloud-self-hosted-kafka-private-service-connect-by-kafka-proxy.jpeg)
+## Set up self-hosted Kafka Private Service Connect by Kafka-proxy
 
-### 步骤 1. 设置 Kafka-proxy
+Expose each Kafka broker to TiDB Cloud VPC with a unique port by using the Kafka-proxy dynamic port mapping mechanism. The following diagram shows how it works.
 
-假设你已经在与 TiDB 集群相同的区域有一个正在运行的 Kafka 集群。你可以从你的 VPC 网络连接到 Kafka 集群。Kafka 集群可以是自托管的，也可以是由第三方提供商（如 Confluent）提供的。
+![Connect to Google Cloud self-hosted Kafka Private Service Connect by Kafka proxy](/media/tidb-cloud/changefeed/connect-to-google-cloud-self-hosted-kafka-private-service-connect-by-kafka-proxy.jpeg)
 
-1. 转到[实例组](https://console.cloud.google.com/compute/instanceGroups/list)页面，为 Kafka-proxy 创建一个实例组。
+### Step 1. Set up Kafka-proxy
 
-    - **名称**：`kafka-proxy-ig`
-    - 实例模板：
-        - **名称**：`kafka-proxy-tpl`
-        - **位置**：`区域`
-        - **区域**：`us-west1`
-        - **机器类型**：`e2-medium`。你可以根据工作负载选择自己的机器类型。
-        - **网络**：你的可以连接到 Kafka 集群的 VPC 网络。
-        - **子网**：你的可以连接到 Kafka 集群的子网。
-        - **外部 IPv4 地址**：`临时`。启用互联网访问以便于配置 Kafka-proxy。在生产环境中，你可以选择**无**，并以你自己的方式登录节点。
-    - **位置**：`单一区域`
-    - **区域**：`us-west1`
-    - **可用区**：选择你的 broker 所在的可用区之一。
-    - **自动扩缩模式**：`关闭`
-    - **最小实例数**：`1`
-    - **最大实例数**：`1`。Kafka-proxy 不支持集群模式，因此只能部署一个实例。每个 Kafka-proxy 随机将本地端口映射到 broker 的端口，导致不同代理之间的映射不同。在负载均衡器后部署多个 Kafka-proxy 可能会导致问题。如果 Kafka 客户端连接到一个代理，然后通过另一个代理访问 broker，请求可能会路由到错误的 broker。
+Assume that you already have a Kafka cluster running in the same region as the TiDB cluster. You can connect to the Kafka cluster from your VPC network. The Kafka cluster can be self-hosted or provided by third-party providers, such as Confluent.
 
-2. 转到 kafka-proxy-ig 中节点的详情页面。点击 **SSH** 登录到节点。下载二进制文件：
+1. Go to the [Instance groups](https://console.cloud.google.com/compute/instanceGroups/list) page, and create an instance group for Kafka-proxy.
+
+    - **Name**: `kafka-proxy-ig`
+    - Instance template:
+        - **Name**: `kafka-proxy-tpl`
+        - **Location**: `Regional`
+        - **Region**: `us-west1`
+        - **Machine type**: `e2-medium`. You can choose your own machine type based on your workload.
+        - **Network**: your VPC network that can connect to the Kafka cluster.
+        - **Subnetwork**: your subnet that can connect to the Kafka cluster.
+        - **External IPv4 address**: `Ephemeral`. Enable Internet access to make it easy to configure Kafka-proxy. You can select **None** in your production environment and log in to the node in your way.
+    - **Location**: `Single zone`
+    - **Region**: `us-west1`
+    - **Zone**: choose one of your broker's zones.
+    - **Autoscaling mode**: `Off`
+    - **Minimum number of instances**: `1`
+    - **Maximum number of instances**: `1`. Kafka-proxy does not support the cluster mode, so only one instance can be deployed. Each Kafka-proxy randomly maps local ports to the ports of the broker, resulting in different mappings across proxies. Deploying multiple Kafka-proxies behind a load balancer can cause issues. If a Kafka client connects to one proxy and then accesses a broker through another, the request might be routed to the wrong broker.
+
+2. Go to the detail page of the node in kafka-proxy-ig. Click **SSH** to log in to the node. Download the binaries:
 
     ```shell
-    # 你可以选择其他版本
+    # You can choose another version 
     wget https://github.com/grepplabs/kafka-proxy/releases/download/v0.3.11/kafka-proxy-v0.3.11-linux-amd64.tar.gz
     tar -zxf kafka-proxy-v0.3.11-linux-amd64.tar.gz
     ```
 
-3. 运行 Kafka-proxy 并连接到 Kafka broker。
+3. Run Kafka-proxy and connect to Kafka brokers.
 
     ```shell
-    # 需要向 Kafka-proxy 提供三种参数
-    # 1. --bootstrap-server-mapping 定义引导映射。建议配置三个映射，每个可用区一个，以提高弹性。
-    #   a) Kafka broker 地址；
-    #   b) Kafka-proxy 中 broker 的本地地址；
-    #   c) 如果 Kafka 客户端从 Kafka-proxy 引导，则为 broker 的广播监听器
-    # 2. --dynamic-sequential-min-port 定义其他 broker 的随机映射的起始端口
-    # 3. --dynamic-advertised-listener 根据从"前提条件"部分获得的模式定义其他 broker 的广播监听器地址
-    #   a) 模式：<broker_id>.abc.us-west1.gcp.3199745.tidbcloud.com:<port>
-    #   b) 确保将 <broker_id> 替换为固定的小写字符串，例如 "brokers"。你可以使用自己的字符串。此步骤将帮助 TiDB Cloud 正确路由请求。
-    #   c) 删除 ":<port>"
-    #   d) 广播监听器地址将是：brokers.abc.us-west1.gcp.3199745.tidbcloud.com
+    # There are three kinds of parameters that need to feed to the Kafka-proxy
+    # 1. --bootstrap-server-mapping defines the bootstrap mapping. Suggest that you configure three mappings, one for each zone for resilience.
+    #   a) Kafka broker address; 
+    #   b) Local address for the broker in Kafka-proxy; 
+    #   c) Advertised listener for the broker if Kafka clients bootstrap from Kafka-proxy
+    # 2. --dynamic-sequential-min-port defines the start port of the random mapping for other brokers
+    # 3. --dynamic-advertised-listener defines advertised listener address for other brokers based on the pattern obtained from the "Prerequisites" section
+    #   a) The pattern: <broker_id>.abc.us-west1.gcp.3199745.tidbcloud.com:<port>
+    #   b) Make sure to replace <broker_id> with a fixed lowercase string, for example, "brokers". You can use your own string. This step will help TiDB Cloud route requests properly.
+    #   c) Remove ":<port>"
+    #   d) The advertised listener address would be: brokers.abc.us-west1.gcp.3199745.tidbcloud.com
     ./kafka-proxy server \
             --bootstrap-server-mapping "{address_of_broker1},0.0.0.0:9092,b1.abc.us-west1.gcp.3199745.tidbcloud.com:9092" \
             --bootstrap-server-mapping "{address_of_broker2},0.0.0.0:9093,b2.abc.us-west1.gcp.3199745.tidbcloud.com:9093" \
@@ -596,10 +601,10 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
             --dynamic-advertised-listener=brokers.abc.us-west1.gcp.3199745.tidbcloud.com > ./kafka_proxy.log 2>&1 &
     ```
 
-4. 在 Kafka-proxy 节点中测试引导。
+4. Test bootstrap in the Kafka-proxy node.
 
     ```shell
-    # 下载 Kafka 和 OpenJDK，然后解压文件。你可以根据自己的偏好选择二进制版本。
+    # Download Kafka and OpenJDK, and then extract the files. You can choose the binary version based on your preference.
     wget https://archive.apache.org/dist/kafka/3.7.1/kafka_2.13-3.7.1.tgz
     tar -zxf kafka_2.13-3.7.1.tgz
     wget https://download.java.net/java/GA/jdk22.0.2/c9ecb94cd31b495da20a27d4581645e8/9/GPL/openjdk-22.0.2_linux-x64_bin.tar.gz
@@ -608,9 +613,9 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
     export JAVA_HOME=~/jdk-22.0.2
 
     ./kafka_2.13-3.7.1/bin/kafka-broker-api-versions.sh --bootstrap-server 0.0.0.0:9092
-    # 最后几行的预期输出（实际顺序可能不同）
-    # 可能会出现异常或错误，因为广播监听器在你的网络中无法解析。
-    # 当你通过 Private Service Connect 创建 changefeed 连接到此 Kafka 集群时，我们将在 TiDB Cloud 端使其可解析并将其路由到正确的 broker。
+    # Expected output of the last few lines (the actual order might be different)
+    # There might be exceptions or errors because advertised listeners cannot be resolved in your network.
+    # We will make them resolvable in TiDB Cloud side and make it route to the right broker when you create a changefeed connect to this Kafka cluster by Private Service Connect. 
     b1.abc.us-west1.gcp.3199745.tidbcloud.com:9092 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     b2.abc.us-west1.gcp.3199745.tidbcloud.com:9093 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     b3.abc.us-west1.gcp.3199745.tidbcloud.com:9094 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
@@ -618,81 +623,82 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
     brokers.abc.us-west1.gcp.3199745.tidbcloud.com:9096 (id: 5 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     ...
     ```
-### 步骤 2. 将 Kafka-proxy 暴露为 Private Service Connect 服务
 
-1. 转到[负载均衡](https://console.cloud.google.com/net-services/loadbalancing/list/loadBalancers)页面，创建一个负载均衡器。
+### Step 2. Expose Kafka-proxy as Private Service Connect Service
 
-    - **负载均衡器类型**：`网络负载均衡器`
-    - **代理或直通**：`直通`
-    - **面向公网或内部**：`内部`
-    - **负载均衡器名称**：`kafka-proxy-lb`
-    - **区域**：`us-west1`
-    - **网络**：你的网络
-    - 后端配置
-        - **后端类型**：`实例组`
-        - **协议**：`TCP`
-        - **实例组**：`kafka-proxy-ig`
-    - 前端配置
-        - **子网**：你的子网
-        - **端口**：`全部`
-        - 健康检查：
-            - **名称**：`kafka-proxy-hc`
-            - **范围**：`区域`
-            - **协议**：`TCP`
-            - **端口**：`9092`。你可以选择 Kafka-proxy 中的一个引导端口。
+1. Go to the [Load balancing](https://console.cloud.google.com/net-services/loadbalancing/list/loadBalancers) page, and create a load balancer.
 
-2. 转到[**Private Service Connect** > **发布服务**](https://console.cloud.google.com/net-services/psc/list/producers)。
+    - **Type of load balancer**: `Network Load Balancer`
+    - **Proxy or Passthrough**: `Passthrough`
+    - **Public facing or internal**: `Internal`
+    - **Load Balancer name**: `kafka-proxy-lb`
+    - **Region**: `us-west1`
+    - **Network**: your network
+    - Backend configuration
+        - **Backend type**: `Instance group`
+        - **Protocol**: `TCP`
+        - **Instance group**: `kafka-proxy-ig`
+    - Frontend configuration
+        - **Subnetwork**: your subnet
+        - **Ports**: `All`
+        - Heath check:
+            - **Name**: `kafka-proxy-hc`
+            - **Scope**: `Regional`
+            - **Protocol**: `TCP`
+            - **Port**: `9092`. You can select one of the bootstrap ports in Kafka-proxy.
 
-    - **负载均衡器类型**：`内部直通网络负载均衡器`
-    - **内部负载均衡器**：`kafka-proxy-lb`
-    - **服务名称**：`kafka-proxy-psc`
-    - **子网**：`保留新子网`
-        - **名称**：`proxy-psc-subnet`
-        - **VPC 网络**：你的网络
-        - **区域**：`us-west1`
-        - **IPv4 范围**：根据你的网络规划设置 CIDR
-    - **接受的项目**：你在[前提条件](#前提条件)中获得的 TiDB Cloud 的 Google Cloud 项目，例如 `tidbcloud-prod-000`。
+2. Go to [**Private Service Connect** > **PUBLISH SERVICE**](https://console.cloud.google.com/net-services/psc/list/producers).
 
-3. 导航到 **kafka-proxy-psc** 的详情页面。记下`服务附件`，例如 `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-proxy-psc`，你将在 TiDB Cloud 中使用它来连接到此 PSC。
+    - **Load Balancer Type**: `Internal passthrough Network Load Balancer`
+    - **Internal load balancer**: `kafka-proxy-lb`
+    - **Service name**: `kafka-proxy-psc`
+    - **Subnets**: `RESERVE NEW SUBNET`
+        - **Name**: `proxy-psc-subnet`
+        - **VPC Network**: your network
+        - **Region**: `us-west1`
+        - **IPv4 range**: set the CIDR based on your network planning
+    - **Accepted projects**: the Google Cloud project of TiDB Cloud you get in [Prerequisites](#prerequisites), for example, `tidbcloud-prod-000`.
 
-4. 转到你的 VPC 网络的详情页面。添加防火墙规则以允许所有 broker 的 PSC 流量。
+3. Navigate to the detail page of the **kafka-proxy-psc**. Note down the `Service attachment`, for example, `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-proxy-psc`, which will be used in TiDB Cloud to connect to this PSC.
 
-    - **名称**：`allow-proxy-psc-traffic`
-    - **流量方向**：`入站`
-    - **匹配时的操作**：`允许`
-    - **目标**：网络中的所有实例
-    - **源过滤器**：`IPv4 范围`
-    - **源 IPv4 范围**：proxy-psc-subnet 的 CIDR
-    - **协议和端口**：允许所有
+4. Go to the detail page of your VPC network. Add a firewall rule to allow the PSC traffic for all brokers.
 
-### 步骤 3. 从 TiDB Cloud 连接
+    - **Name**: `allow-proxy-psc-traffic`
+    - **Direction of traffic**: `Ingress`
+    - **Action on match**: `Allow`
+    - **Targets**: All instances in the network
+    - **Source filter**: `IPv4 ranges`
+    - **Source IPv4 ranges**: the CIDR of proxy-psc-subnet
+    - **Protocols and ports**: Allow all
 
-1. 返回 [TiDB Cloud 控制台](https://tidbcloud.com)，为集群创建一个通过 **Private Service Connect** 连接到 Kafka 集群的 changefeed。更多信息，请参阅[同步数据到 Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md)。
+### Step 3. Connect from TiDB Cloud
 
-2. 当你进入**配置 changefeed 目标** > **连接方式** > **Private Service Connect** 时，使用相应的值填写以下字段和其他所需字段。
+1. Return to the [TiDB Cloud console](https://tidbcloud.com) and create a changefeed for the cluster to connect to the Kafka cluster by **Private Service Connect**. For more information, see [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
 
-   - **Kafka 广播监听器模式**：`abc`。与你在[前提条件](#前提条件)中用于生成 **Kafka 广播监听器模式** 的唯一随机字符串相同。
-   - **服务附件**：kafka-proxy 的 PSC 服务附件，例如 `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-proxy-psc`。
-   - **引导端口**：`9092,9093,9094`
+2. After you proceed to the **Configure the changefeed target** > **Connectivity Method** > **Private Service Connect**, fill in the following fields with corresponding values and other fields as needed.
 
-3. 继续按照[同步数据到 Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md)中的指南操作。
+   - **Kafka Advertised Listener Pattern**: `abc`. The same as the unique random string you use to generate **Kafka Advertised Listener Pattern** in [Prerequisites](#prerequisites).
+   - **Service Attachment**: the kafka-proxy service attachment of PSC, for example, `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-proxy-psc`.
+   - **Bootstrap Ports**: `9092,9093,9094`
 
-## 常见问题
+3. Continue to follow the guideline in [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
 
-### 如何从两个不同的 TiDB Cloud 项目连接到同一个 Kafka Private Service Connect 服务？
+## FAQ
 
-如果你已经按照本文档中的步骤操作并成功从第一个项目建立了连接，现在想要从第二个项目建立第二个连接，你可以通过以下方式从两个不同的 TiDB Cloud 项目连接到同一个 Kafka Private Service Connect 服务：
+### How to connect to the same Kafka Private Service Connect service from two different TiDB Cloud projects?
 
-- 如果你通过 PSC 端口映射设置 Kafka PSC，请执行以下操作：
+If you have already followed the steps in this document and successfully set up the connection from the first project, and you want to set up a second connection from the second project, you can connect to the same Kafka Private Service Connect service from two different TiDB Cloud projects as follows:
 
-    1. 按照本文档从头开始操作。当你进行到[步骤 1. 设置 Kafka 集群](#步骤-1-设置-kafka-集群)时，按照[重新配置运行中的 Kafka 集群](#重新配置运行中的-kafka-集群)部分创建另一组 EXTERNAL 监听器和广播监听器。你可以将其命名为 `EXTERNAL2`。注意，`EXTERNAL2` 的端口范围不能与 EXTERNAL 重叠。
+- If you set up Kafka PSC by PSC port mapping, do the following:
 
-    2. 重新配置 broker 后，向网络端点组添加另一组网络端点，将端口范围映射到 `EXTERNAL2` 监听器。
+    1. Follow instructions from the beginning of this document. When you proceed to [Step 1. Set up Kafka Cluster](#step-1-set-up-the-kafka-cluster), follow the [Reconfigure a running Kafka cluster](#reconfigure-a-running-kafka-cluster) section to create another group of EXTERNAL listeners and advertised listeners. You can name it as `EXTERNAL2`. Note that the port range of `EXTERNAL2` cannot overlap with the EXTERNAL.
 
-    3. 使用以下输入配置 TiDB Cloud 连接以创建新的 changefeed：
+    2. After reconfiguring the brokers, add another group of Network endpoints to the Network endpoint group, which maps the ports range to the `EXTERNAL2` listener.
 
-        - 新的引导端口
-        - 新的 Kafka 广播监听器模式
-        - 相同的服务附件
+    3. Configure the TiDB Cloud connection with the following input to create the new changefeed:
 
-- 如果你[通过 Kafka-proxy 设置自托管 Kafka Private Service Connect](#通过-kafka-proxy-设置自托管-kafka-private-service-connect)，请使用新的 Kafka 广播监听器模式从头开始创建新的 Kafka-proxy PSC。
+        - New Bootstrap ports
+        - New Kafka Advertised Listener Pattern
+        - The same Service Attachment
+
+- If you [set up self-hosted Kafka Private Service Connect by Kafka-proxy](#set-up-self-hosted-kafka-private-service-connect-by-kafka-proxy), create a new Kafka-proxy PSC from the beginning with a new Kafka Advertised Listener Pattern.

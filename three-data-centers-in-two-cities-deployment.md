@@ -55,8 +55,6 @@ In the rac1 of AZ1, one server is deployed with TiDB and PD services, and the ot
 
 The TiDB server, the control machine, and the monitoring server are on rac3. The TiDB server is deployed for regular maintenance and backup. Prometheus, Grafana, and the restore tools are deployed on the control machine and monitoring machine.
 
-Another backup server can be added to deploy Drainer. Drainer saves binlog data to a specified location by outputting files, to achieve incremental backup.
-
 ## Configuration
 
 ### Example
@@ -198,7 +196,7 @@ In the deployment of three AZs in two regions, to optimize performance, you need
    >
    > Starting from TiDB v5.2, the `label-property` configuration is not supported by default. To set the replica policy, use the [placement rules](/configure-placement-rules.md).
 
-- Configure the priority of PD. To avoid the situation where the PD leader is in another region (AZ3), you can increase the priority of local PD (in Seattle) and decrease the priority of PD in another region (San Francisco). The larger the number, the higher the priority.
+- Configure the priority of PD. To avoid the situation where the PD leader is in another region (AZ3), you can increase the priority of local PD (in Seattle) and decrease the priority of PD in another region (San Francisco). The larger the number, the higher the priority. In all available PD nodes, the node with the highest priority number becomes the leader.
 
     ```bash
     member leader_priority PD-10 5

@@ -1,44 +1,44 @@
 ---
-title: 优化规则和表达式下推的黑名单
-summary: 了解如何使用黑名单来控制优化规则和表达式下推的行为。
+title: The Blocklist of Optimization Rules and Expression Pushdown
+summary: Learn about the blocklist to control the optimization rules and the behavior of expression pushdown.
 ---
 
-# 优化规则和表达式下推的黑名单
+# The Blocklist of Optimization Rules and Expression Pushdown
 
-本文档介绍如何使用优化规则黑名单和表达式下推黑名单来控制 TiDB 的行为。
+This document introduces how to use the blocklist of optimization rules and the blocklist of expression pushdown to control the behavior of TiDB.
 
-## 优化规则黑名单
+## The blocklist of optimization rules
 
-优化规则黑名单是调整优化规则的一种方式，主要用于手动禁用某些优化规则。
+The blocklist of optimization rules is one way to tune optimization rules, mainly used to manually disable some optimization rules.
 
-### 重要的优化规则
+### Important optimization rules
 
-|**优化规则**|**规则名称**|**描述**|
+|**Optimization Rule**|**Rule Name**|**Description**|
 | :--- | :--- | :--- |
-| 列剪裁 | column_prune | 如果上层执行器不需要某列，则该操作符会将其剪裁掉。 |
-| 子查询去相关 | decorrelate | 尝试将相关子查询重写为非相关连接或聚合。 |
-| 聚合消除 | aggregation_eliminate | 尝试从执行计划中移除不必要的聚合操作符。 |
-| 投影消除 | projection_eliminate | 从执行计划中移除不必要的投影操作符。 |
-| 最大/最小值消除 | max_min_eliminate | 将聚合中的某些 max/min 函数重写为 `order by` + `limit 1` 形式。 |
-| 谓词下推 | predicate_push_down | 尝试将谓词下推到更接近数据源的操作符。 |
-| 外连接消除 | outer_join_eliminate | 尝试从执行计划中移除不必要的左连接或右连接。 |
-| 分区裁剪 | partition_processor | 裁剪被谓词拒绝的分区，并将分区表查询重写为 `UnionAll + Partition Datasource` 形式。 |
-| 聚合下推 | aggregation_push_down | 尝试将聚合下推到其子节点。 |
-| TopN 下推 | topn_push_down | 尝试将 TopN 操作符下推到更接近数据源的位置。 |
-| 连接重排序 | join_reorder | 决定多表连接的顺序。 |
-| 从窗口函数推导 TopN 或 Limit | derive_topn_from_window | 从窗口函数推导出 TopN 或 Limit 操作符。 |
+| Column pruning | column_prune | One operator will prune the column if it is not needed by the upper executor. |
+| Decorrelate subquery | decorrelate | Tries to rewrite the correlated subquery to non-correlated join or aggregation. |
+| Aggregation elimination | aggregation_eliminate | Tries to remove unnecessary aggregation operators from the execution plan. |
+| Projection elimination | projection_eliminate | Removes unnecessary projection operators from the execution plan. |
+| Max/Min elimination | max_min_eliminate | Rewrites some max/min functions in aggregation to the `order by` + `limit 1` form. |
+| Predicate pushdown | predicate_push_down | Tries to push predicates down to the operator that is closer to the data source. |
+| Outer join elimination | outer_join_eliminate | Tries to remove the unnecessary left join or right join from the execution plan. |
+| Partition pruning | partition_processor | Prunes partitions which are rejected by the predicates and rewrite partitioned table query to the `UnionAll + Partition Datasource` form. |
+| Aggregation pushdown | aggregation_push_down | Tries to push aggregations down to their children. |
+| TopN pushdown | topn_push_down | Tries to push the TopN operator to the place closer to the data source. |
+| Join reorder | join_reorder | Decides the order of multi-table joins. |
+| Derive TopN or Limit from window functions | derive_topn_from_window | Derives the TopN or Limit operator from window functions. |
 
-### 禁用优化规则
+### Disable optimization rules
 
-如果某些规则导致特定查询的执行计划不够优化，你可以使用优化规则黑名单来禁用这些规则。
+You can use the blocklist of optimization rules to disable some of them if some rules lead to a sub-optimal execution plan for special queries.
 
-#### 使用方法
+#### Usage
 
-> **注意：**
+> **Note:**
 >
-> 以下所有操作都需要数据库的 `super privilege` 权限。每个优化规则都有一个名称。例如，列剪裁的名称是 `column_prune`。所有优化规则的名称可以在[重要的优化规则](#重要的优化规则)表的第二列中找到。
+> All the following operations need the `super privilege` privilege of the database. Each optimization rule has a name. For example, the name of column pruning is `column_prune`. The names of all optimization rules can be found in the second column of the table [Important Optimization Rules](#important-optimization-rules).
 
-- 如果你想禁用某些规则，将其名称写入 `mysql.opt_rule_blacklist` 表。例如：
+- If you want to disable some rules, write its name to the `mysql.opt_rule_blacklist` table. For example:
 
     {{< copyable "sql" >}}
 
@@ -46,7 +46,7 @@ summary: 了解如何使用黑名单来控制优化规则和表达式下推的�
     INSERT INTO mysql.opt_rule_blacklist VALUES("join_reorder"), ("topn_push_down");
     ```
 
-    执行以下 SQL 语句可以使上述操作立即生效。生效范围包括相应 TiDB 服务器的所有旧连接：
+    Executing the following SQL statement can make the above operation take effect immediately. The effective range includes all old connections of the corresponding TiDB server:
 
     {{< copyable "sql" >}}
 
@@ -54,11 +54,11 @@ summary: 了解如何使用黑名单来控制优化规则和表达式下推的�
     admin reload opt_rule_blacklist;
     ```
 
-    > **注意：**
+    > **Note:**
     >
-    > `admin reload opt_rule_blacklist` 只对运行该语句的 TiDB 服务器生效。如果你想让集群中的所有 TiDB 服务器都生效，需要在每个 TiDB 服务器上运行此命令。
+    > `admin reload opt_rule_blacklist` only takes effect on the TiDB server where the above statement has been run. If you want all TiDB servers of the cluster to take effect, run this command on each TiDB server.
 
-- 如果你想重新启用某个规则，删除表中相应的数据，然后运行 `admin reload` 语句：
+- If you want to re-enable a rule, delete the corresponding data in the table, and then run the `admin reload` statement:
 
     {{< copyable "sql" >}}
 
@@ -72,19 +72,19 @@ summary: 了解如何使用黑名单来控制优化规则和表达式下推的�
     admin reload opt_rule_blacklist;
     ```
 
-## 表达式下推黑名单
+## The blocklist of expression pushdown
 
-表达式下推黑名单是调整表达式下推的一种方式，主要用于手动禁用某些特定数据类型的表达式。
+The blocklist of expression pushdown is one way to tune the expression pushdown, mainly used to manually disable some expressions of some specific data types.
 
-### 支持下推的表达式
+### Expressions that are supported to be pushed down
 
-关于支持下推的表达式的更多信息，请参见[支持下推到 TiKV 的表达式](/functions-and-operators/expressions-pushed-down.md#支持下推到-tikv-的表达式)。
+For more information about the expressions that are supported to be pushed down, see [Supported expressions for pushdown to TiKV](/functions-and-operators/expressions-pushed-down.md#supported-expressions-for-pushdown-to-tikv).
 
-### 禁用特定表达式的下推
+### Disable the pushdown of specific expressions
 
-当由于表达式下推导致结果错误时，你可以使用黑名单来快速恢复应用程序。具体来说，你可以将一些支持的函数或运算符添加到 `mysql.expr_pushdown_blacklist` 表中，以禁用特定表达式的下推。
+When you get wrong results due to the expression pushdown, you can use the blocklist to make a quick recovery for the application. More specifically, you can add some of the supported functions or operators to the `mysql.expr_pushdown_blacklist` table to disable the pushdown of specific expressions.
 
-`mysql.expr_pushdown_blacklist` 的表结构如下：
+The schema of `mysql.expr_pushdown_blacklist` is shown as follows:
 
 {{< copyable "sql" >}}
 
@@ -103,46 +103,46 @@ DESC mysql.expr_pushdown_blacklist;
 3 rows in set (0.00 sec)
 ```
 
-以下是每个字段的说明：
+Here is the description of each field above:
 
-+ `name`：禁止下推的函数名称。
-+ `store_type`：指定要阻止函数下推到哪个组件进行计算。可用的组件有 `tidb`、`tikv` 和 `tiflash`。`store_type` 不区分大小写。如果需要指定多个组件，使用逗号分隔每个组件。
-    - 当 `store_type` 为 `tidb` 时，表示在读取 TiDB 内存表时该函数是否可以在其他 TiDB 服务器中执行。
-    - 当 `store_type` 为 `tikv` 时，表示该函数是否可以在 TiKV 服务器的 Coprocessor 组件中执行。
-    - 当 `store_type` 为 `tiflash` 时，表示该函数是否可以在 TiFlash 服务器的 Coprocessor 组件中执行。
-+ `reason`：记录将此函数添加到黑名单的原因。
++ `name`: The name of the function that is disabled to be pushed down.
++ `store_type`: To specify the component that you want to prevent the function from being pushed down to for computing. Available components are `tidb`, `tikv`, and `tiflash`. The `store_type` is case-insensitive. If you need to specify multiple components, use a comma to separate each component.
+    - When `store_type` is `tidb`, it indicates whether the function can be executed in other TiDB servers while the TiDB memory table is being read.
+    - When `store_type` is `tikv`, it indicates whether the function can be executed in TiKV server's Coprocessor component.
+    - When `store_type` is `tiflash`, it indicates whether the function can be executed in TiFlash Server's Coprocessor component.
++ `reason`: To record the reason why this function is added to the blocklist.
 
-### 使用方法
+### Usage
 
-本节描述如何使用表达式下推黑名单。
+This section describes how to use the blocklist of expression pushdown.
 
-#### 添加到黑名单
+#### Add to the blocklist
 
-要将一个或多个表达式（函数或运算符）添加到黑名单，请执行以下步骤：
+To add one or more expressions (functions or operators) to the blocklist, perform the following steps:
 
-1. 将相应的函数名称或运算符名称，以及你想禁用下推的组件集合，插入到 `mysql.expr_pushdown_blacklist` 表中。
+1. Insert the corresponding function name or operator name, and the set of components you want to disable the pushdown, to the `mysql.expr_pushdown_blacklist` table.
 
-2. 执行 `admin reload expr_pushdown_blacklist`。
+2. Execute `admin reload expr_pushdown_blacklist`.
 
-### 从黑名单中移除
+### Remove from the blocklist
 
-要从黑名单中移除一个或多个表达式，请执行以下步骤：
+To remove one or more expressions from the blocklist, perform the following steps:
 
-1. 从 `mysql.expr_pushdown_blacklist` 表中删除相应的函数名称或运算符名称，以及你想禁用下推的组件集合。
+1. Delete the corresponding function name or operator name, and the set of components you want to disable the pushdown, from the `mysql.expr_pushdown_blacklist` table.
 
-2. 执行 `admin reload expr_pushdown_blacklist`。
+2. Execute `admin reload expr_pushdown_blacklist`.
 
-> **注意：**
+> **Note:**
 >
-> `admin reload expr_pushdown_blacklist` 只对运行该语句的 TiDB 服务器生效。如果你想让集群中的所有 TiDB 服务器都生效，需要在每个 TiDB 服务器上运行此命令。
+> `admin reload expr_pushdown_blacklist` only takes effect on the TiDB server where this statement is run. If you want all TiDB servers of the cluster to take effect, run this command on each TiDB server.
 
-## 表达式黑名单使用示例
+## Expression blocklist usage example
 
-在以下示例中，将 `<` 和 `>` 运算符添加到黑名单，然后将 `>` 运算符从黑名单中移除。
+In the following example, the `<` and `>` operators are added to the blocklist, and then the `>` operator is removed from the blocklist.
 
-要判断黑名单是否生效，请观察 `EXPLAIN` 的结果（参见 [TiDB 执行计划概览](/explain-overview.md)）。
+To judge whether the blocklist takes effect, observe the results of `EXPLAIN` (See [TiDB Query Execution Plan Overview](/explain-overview.md)).
 
-1. 以下 SQL 语句中 `WHERE` 子句中的谓词 `a < 2` 和 `a > 2` 可以下推到 TiKV。
+1. The predicates `a < 2` and `a > 2` in the `WHERE` clause of the following SQL statement can be pushed down to TiKV.
 
     {{< copyable "sql" >}}
 
@@ -161,7 +161,7 @@ DESC mysql.expr_pushdown_blacklist;
     3 rows in set (0.00 sec)
     ```
 
-2. 将表达式插入到 `mysql.expr_pushdown_blacklist` 表并执行 `admin reload expr_pushdown_blacklist`。
+2. Insert the expression to the `mysql.expr_pushdown_blacklist` table and execute `admin reload expr_pushdown_blacklist`.
 
     {{< copyable "sql" >}}
 
@@ -184,7 +184,7 @@ DESC mysql.expr_pushdown_blacklist;
     Query OK, 0 rows affected (0.00 sec)
     ```
 
-3. 再次观察执行计划，你会发现 `<` 和 `>` 运算符都没有下推到 TiKV Coprocessor。
+3. Observe the execution plan again and you will find that both the `<` and `>` operators are not pushed down to TiKV Coprocessor.
 
     {{< copyable "sql" >}}
 
@@ -203,7 +203,7 @@ DESC mysql.expr_pushdown_blacklist;
     3 rows in set (0.00 sec)
     ```
 
-4. 从黑名单中移除一个表达式（这里是 `>`）并执行 `admin reload expr_pushdown_blacklist`。
+4. Remove one expression (here is `>`) from the blocklist and execute `admin reload expr_pushdown_blacklist`.
 
     {{< copyable "sql" >}}
 
@@ -225,7 +225,7 @@ DESC mysql.expr_pushdown_blacklist;
     Query OK, 0 rows affected (0.00 sec)
     ```
 
-5. 再次观察执行计划，你会发现 `<` 没有下推，而 `>` 下推到了 TiKV Coprocessor。
+5. Observe the execution plan again and you will find that `<` is not pushed down while `>` is pushed down to TiKV Coprocessor.
 
     {{< copyable "sql" >}}
 

@@ -1,75 +1,75 @@
 ---
-title: 将 TiDB Cloud 与 Netlify 集成
-summary: 了解如何将 TiDB Cloud 集群连接到 Netlify 项目。
+title: Integrate TiDB Cloud with Netlify
+summary: Learn how to connect your TiDB Cloud clusters to Netlify projects.
 ---
 
-# 将 TiDB Cloud 与 Netlify 集成
+# Integrate TiDB Cloud with Netlify
 
-[Netlify](https://netlify.com/) 是一个用于自动化现代 Web 项目的一体化平台。它用单一工作流替代了你的托管基础设施、持续集成和部署流程，并随着项目的增长集成了无服务器函数、用户认证和表单处理等动态功能。
+[Netlify](https://netlify.com/) is an all-in-one platform for automating modern web projects. It replaces your hosting infrastructure, continuous integration, and deployment pipeline with a single workflow and integrates dynamic functionality like serverless functions, user authentication, and form handling as your projects grow.
 
-本文档描述如何在 Netlify 上部署一个以 TiDB Cloud 作为数据库后端的全栈应用。你还可以了解如何将 Netlify 边缘函数与我们的 TiDB Cloud 无服务器驱动程序一起使用。
+This document describes how to deploy a fullstack app on Netlify with TiDB Cloud as the database backend. You can also learn how to use Netlify edge function with our TiDB Cloud serverless driver.
 
-## 前提条件
+## Prerequisites
 
-在部署之前，请确保满足以下前提条件。
+Before the deployment, make sure the following prerequisites are met.
 
-### Netlify 账号和 CLI
+### A Netlify account and CLI
 
-你需要有一个 Netlify 账号和 CLI。如果你没有，请参考以下链接创建：
+You are expected to have a Netlify account and CLI. If you do not have any, refer to the following links to create one:
 
-* [注册 Netlify 账号](https://app.netlify.com/signup)。
-* [获取 Netlify CLI](https://docs.netlify.com/cli/get-started/)。
+* [Sign up for a Netlify account](https://app.netlify.com/signup).
+* [Get Netlify CLI](https://docs.netlify.com/cli/get-started/).
 
-### TiDB Cloud 账号和 TiDB 集群
+### A TiDB Cloud account and a TiDB cluster
 
-你需要在 TiDB Cloud 中拥有一个账号和一个集群。如果你没有，请参考以下内容创建：
+You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to the following to create one:
 
-- [创建 TiDB Cloud Serverless 集群](/tidb-cloud/create-tidb-cluster-serverless.md)
-- [创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)
+- [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md)
 
-一个 TiDB Cloud 集群可以连接到多个 Netlify 站点。
+One TiDB Cloud cluster can connect to multiple Netlify sites.
 
-### TiDB Cloud 中允许所有 IP 地址的流量过滤器
+### All IP addresses allowed for traffic filter in TiDB Cloud
 
-对于 TiDB Cloud Dedicated 集群，确保集群的流量过滤器允许所有 IP 地址（设置为 `0.0.0.0/0`）进行连接。这是因为 Netlify 部署使用动态 IP 地址。
+For TiDB Cloud Dedicated clusters, make sure that the traffic filter of the cluster allows all IP addresses (set to `0.0.0.0/0`) for connection. This is because Netlify deployments use dynamic IP addresses.
 
-TiDB Cloud Serverless 集群默认允许所有 IP 地址连接，因此你不需要配置任何流量过滤器。
+TiDB Cloud Serverless clusters allow all IP addresses for connection by default, so you do not need to configure any traffic filter.
 
-## 步骤 1. 获取示例项目和连接字符串
+## Step 1. Get the example project and the connection string
 
-为了帮助你快速入门，TiDB Cloud 提供了一个使用 React 和 Prisma Client 的 Next.js TypeScript 全栈示例应用。这是一个简单的博客站点，你可以发布和删除自己的博客。所有内容都通过 Prisma 存储在 TiDB Cloud 中。
+To help you get started quickly, TiDB Cloud provides a fullstack example app in TypeScript with Next.js using React and Prisma Client. It is a simple blog site where you can post and delete your own blogs. All the content is stored in TiDB Cloud through Prisma.
 
-### Fork 示例项目并将其克隆到你自己的空间
+### Fork the example project and clone it to your own space
 
-1. 将 [Fullstack Example with Next.js and Prisma](https://github.com/tidbcloud/nextjs-prisma-example) 仓库 fork 到你自己的 GitHub 仓库。
+1. Fork the [Fullstack Example with Next.js and Prisma](https://github.com/tidbcloud/nextjs-prisma-example) repository to your own GitHub repository.
 
-2. 将 fork 的仓库克隆到你自己的空间：
+2. Clone the forked repository to your own space:
 
     ```shell
     git clone https://github.com/${your_username}/nextjs-prisma-example.git
     cd nextjs-prisma-example/
     ```
 
-### 获取 TiDB Cloud 连接字符串
+### Get the TiDB Cloud connection string
 
-对于 TiDB Cloud Serverless 集群，你可以从 [TiDB Cloud CLI](/tidb-cloud/cli-reference.md) 或 [TiDB Cloud 控制台](https://tidbcloud.com/) 获取连接字符串。
+For a TiDB Cloud Serverless cluster, you can get the connection string either from [TiDB Cloud CLI](/tidb-cloud/cli-reference.md) or from [TiDB Cloud console](https://tidbcloud.com/).
 
-对于 TiDB Cloud Dedicated 集群，你只能从 TiDB Cloud 控制台获取连接字符串。
+For a TiDB Cloud Dedicated cluster, you can get the connection string only from the TiDB Cloud console.
 
 <SimpleTab>
 <div label="TiDB Cloud CLI">
 
-> **提示：**
+> **Tip:**
 >
-> 如果你尚未安装 Cloud CLI，请在执行以下步骤之前参考 [TiDB Cloud CLI 快速入门](/tidb-cloud/get-started-with-cli.md) 进行快速安装。
+> If you have not installed Cloud CLI, refer to [TiDB Cloud CLI Quick Start](/tidb-cloud/get-started-with-cli.md) for quick installation before taking the following steps.
 
-1. 在交互模式下获取集群的连接字符串：
+1. Get the connection string of a cluster in interactive mode:
 
     ```shell
     ticloud cluster connect-info
     ```
 
-2. 按照提示选择你的集群、客户端和操作系统。注意，本文档使用的客户端是 `Prisma`。
+2. Follow the prompts to select your cluster, client, and operating system. Note that the client used in this document is `Prisma`.
 
     ```
     Choose the cluster
@@ -80,7 +80,7 @@ TiDB Cloud Serverless 集群默认允许所有 IP 地址连接，因此你不需
     > [x] macOS/Alpine (Detected)
     ```
 
-    输出如下，你可以在 `url` 值中找到 Prisma 的连接字符串。
+    The output is as follows, where you can find the connection string for Prisma in the `url` value.
 
     ```shell
     datasource db {
@@ -89,59 +89,59 @@ TiDB Cloud Serverless 集群默认允许所有 IP 地址连接，因此你不需
     }
     ```
 
-    > **注意：**
+    > **Note:**
     >
-    > 在稍后使用连接字符串时，请注意以下事项：
+    > When you use the connection string later, note the following:
     >
-    > - 将连接字符串中的参数替换为实际值。
-    > - 本文档中的示例应用需要一个新数据库，因此你需要将 `<Database>` 替换为一个唯一的新名称。
+    > - Replace the parameters in the connection string with actual values.
+    > - The example app in this document requires a new database, so you need to replace `<Database>` with a unique new name.
 
 </div>
-<div label="TiDB Cloud 控制台">
+<div label="TiDB Cloud console">
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，转到项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群的名称进入其概览页面，然后点击右上角的 **Connect**。在显示的对话框中，你可以从连接字符串中获取以下连接参数。
+1. In the [TiDB Cloud console](https://tidbcloud.com/), go to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner. In the displayed dialog, you can get the following connection parameters from the connection string.
 
     - `${host}`
     - `${port}`
     - `${user}`
     - `${password}`
 
-2. 在以下连接字符串中填入连接参数：
+2. Fill the connection parameters in the following connection string:
 
     ```shell
     mysql://<User>:<Password>@<Host>:<Port>/<Database>?sslaccept=strict
     ```
 
-    > **注意：**
+    > **Note:**
     >
-    > 在稍后使用连接字符串时，请注意以下事项：
+    > When you use the connection string later, note the following:
     >
-    > - 将连接字符串中的参数替换为实际值。
-    > - 本文档中的示例应用需要一个新数据库，因此你需要将 `<Database>` 替换为一个唯一的新名称。
+    > - Replace the parameters in the connection string with actual values.
+    > - The example app in this document requires a new database, so you need to replace `<Database>` with a unique new name.
 
 </div>
 </SimpleTab>
 
-## 步骤 2. 将示例应用部署到 Netlify
+## Step 2. Deploy the example app to Netlify
 
-1. 在 Netlify CLI 中，验证你的 Netlify 账号并获取访问令牌。
+1. In Netlify CLI, authenticate your Netlify account and obtain an access token.
 
     ```shell
     netlify login
     ```
 
-2. 启动自动设置。此步骤将你的仓库连接到持续部署，因此 Netlify CLI 需要访问权限来在仓库中创建部署密钥和 webhook。
+2. Start the automatic setup. This step connects your repository for continuous deployment, so Netlify CLI needs access to create a deploy key and a webhook on the repository.
 
     ```shell
     netlify init
     ```
 
-    当出现提示时，选择 **Create & configure a new site**，并授予 GitHub 访问权限。对于所有其他选项，使用默认值。
+    When you are prompted, choose **Create & configure a new site**, and grant GitHub access. Use the default values for all other options.
 
     ```shell
     Adding local .netlify folder to .gitignore file...
     ? What would you like to do? +  Create & configure a new site
-    ? Team: your_username's team
+    ? Team: your_username’s team
     ? Site name (leave blank for a random name; you can change it later):
 
     Site Created
@@ -177,62 +177,62 @@ TiDB Cloud Serverless 集群默认允许所有 IP 地址连接，因此你不需
     netlify open   Open the Netlify admin URL of your site
     ```
 
-3. 设置环境变量。要从你自己的空间和 Netlify 空间连接到你的 TiDB Cloud 集群，你需要将 `DATABASE_URL` 设置为从[步骤 1](#步骤-1-获取示例项目和连接字符串)获取的连接字符串。
+3. Set environment variables. To connect to your TiDB Cloud cluster from your own space and the Netlify space, you need to set the `DATABASE_URL` as the connection string obtained from [Step 1](#step-1-get-the-example-project-and-the-connection-string).
 
     ```shell
-    # 为你自己的空间设置环境变量
+    # set the environment variable for your own space
     export DATABASE_URL='mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict'
 
-    # 为 Netlify 空间设置环境变量
+    # set the environment variable for the Netlify space
     netlify env:set DATABASE_URL 'mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict'
     ```
 
-    检查你的环境变量。
+    Check your environment variables.
 
     ```shell
-    # 检查你自己空间的环境变量
+    # check the environment variable for your own space
     env | grep DATABASE_URL
 
-    # 检查 Netlify 空间的环境变量
+    # check the environment variable for the Netlify space
     netlify env:list
     ```
 
-4. 在本地构建应用并将架构迁移到你的 TiDB Cloud 集群。
+4. Build the app locally and migrate the schema to your TiDB Cloud cluster.
 
-    > **提示：**
+    > **Tips:**
     >
-    > 如果你想跳过本地部署直接将应用部署到 Netlify，只需转到步骤 6。
+    > If you want to skip the local deployment and directly deploy the app to Netlify, just go to step 6.
 
     ```shell
     npm install .
     npm run netlify-build
     ```
 
-5. 在本地运行应用。你可以启动本地开发服务器来预览你的站点。
+5. Run the application locally. You can start a local development server to preview your site.
 
     ```shell
     netlify dev
     ```
 
-    然后，在浏览器中访问 `http://localhost:3000/` 来探索其用户界面。
+    Then, go to `http://localhost:3000/` in your browser to explore its UI.
 
-6. 将应用部署到 Netlify。一旦你对本地预览满意，就可以使用以下命令将你的站点部署到 Netlify。`--trigger` 表示不上传本地文件进行部署。如果你进行了任何本地更改，请确保已将它们提交到你的 GitHub 仓库。
+6. Deploy the app to Netlify. Once you are satisfied with the local preview, you can deploy your site to Netlify using the following command. `--trigger` means deployment without uploading local files. If you made any local changes, make sure that you have committed them to your GitHub repository.
 
     ```shell
     netlify deploy --prod --trigger
     ```
 
-    转到你的 Netlify 控制台检查部署状态。部署完成后，应用的站点将有一个由 Netlify 提供的公共 IP 地址，以便所有人都可以访问它。
+    Go to your Netlify console to check the deployment state. After the deployment is done, the site for the app will have a public IP address provided by Netlify so that everyone can access it.
 
-## 使用边缘函数
+## Use the edge function
 
-上述部分提到的示例应用在 Netlify 无服务器函数上运行。本节向你展示如何将边缘函数与 [TiDB Cloud 无服务器驱动程序](/tidb-cloud/serverless-driver.md)一起使用。边缘函数是 Netlify 提供的一个功能，它允许你在 Netlify CDN 的边缘运行无服务器函数。
+The example app mentioned in the section above runs on the Netlify serverless function. This section shows you how to use the edge function with [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md). The edge function is a feature provided by Netlify, which allows you to run serverless functions on the edge of the Netlify CDN.
 
-要使用边缘函数，请执行以下步骤：
+To use the edge function, take the following steps:
 
-1. 在项目的根目录下创建一个名为 `netlify/edge-functions` 的目录。
+1. Create a directory named `netlify/edge-functions` in the root directory of your project. 
 
-2. 在该目录中创建一个名为 `hello.ts` 的文件，并添加以下代码：
+2. Create a file named `hello.ts` in the directory and add the following code:
 
     ```typescript
     import { connect } from 'https://esm.sh/@tidbcloud/serverless'
@@ -246,16 +246,16 @@ TiDB Cloud Serverless 集群默认允许所有 IP 地址连接，因此你不需
     export const config = { path: "/api/hello" };
     ```
 
-3. 设置 `DATABASE_URL` 环境变量。你可以从 [TiDB Cloud 控制台](https://tidbcloud.com/)获取连接信息。
+3. Set the `DATABASE_URL` environment variables. You can get the connection information from the [TiDB Cloud console](https://tidbcloud.com/).
 
     ```shell
     netlify env:set DATABASE_URL 'mysql://<username>:<password>@<host>/<database>'
     ```
 
-4. 将边缘函数部署到 Netlify。
+4. Deploy the edge function to Netlify.
 
     ```shell
     netlify deploy --prod --trigger
     ```
 
-然后你可以转到你的 Netlify 控制台检查部署状态。部署完成后，你可以通过 `https://<netlify-host>/api/hello` URL 访问边缘函数。
+Then you can go to your Netlify console to check the state of the deployment. After the deployment is done, you can access the edge function through the `https://<netlify-host>/api/hello` URL.

@@ -1,52 +1,52 @@
 ---
-title: 临时表
-summary: 了解 TiDB 中的临时表功能，以及如何使用临时表存储应用程序的中间数据，从而减少表管理开销并提高性能。
+title: Temporary Tables
+summary: Learn the temporary tables feature in TiDB, and learn how to use temporary tables to store intermediate data of an application, which helps reduce table management overhead and improve performance.
 ---
 
-# 临时表
+# Temporary Tables
 
-临时表功能在 TiDB v5.3.0 中引入。此功能解决了临时存储应用程序中间结果的问题，使你不必频繁创建和删除表。你可以将中间计算数据存储在临时表中。当不再需要中间数据时，TiDB 会自动清理和回收临时表。这避免了用户应用程序过于复杂，减少了表管理开销，并提高了性能。
+The temporary tables feature is introduced in TiDB v5.3.0. This feature solves the issue of temporarily storing the intermediate results of an application, which frees you from frequently creating and dropping tables. You can store the intermediate calculation data in temporary tables. When the intermediate data is no longer needed, TiDB automatically cleans up and recycles the temporary tables. This avoids user applications being too complicated, reduces table management overhead, and improves performance.
 
-本文介绍临时表的使用场景和类型，提供使用示例和如何限制临时表内存使用的说明，并解释与其他 TiDB 功能的兼容性限制。
+This document introduces the user scenarios and the types of temporary tables, provides usage examples and instruction on how to limit the memory usage of temporary tables, and explains compatibility restrictions with other TiDB features.
 
-## 使用场景
+## User scenarios
 
-你可以在以下场景中使用 TiDB 临时表：
+You can use TiDB temporary tables in the following scenarios:
 
-- 缓存应用程序的中间临时数据。计算完成后，数据被转储到普通表中，临时表自动释放。
-- 在短时间内对相同数据执行多个 DML 操作。例如，在电子商务购物车应用中，添加、修改和删除产品，完成支付，并删除购物车信息。
-- 快速批量导入中间临时数据以提高临时数据导入的性能。
-- 批量更新数据。将数据批量导入数据库中的临时表，修改数据后将数据导出到文件。
+- Cache the intermediate temporary data of an application. After the calculation is completed, the data is dumped to the ordinary table, and the temporary table is automatically released.
+- Perform multiple DML operations on the same data in a short period of time. For example, in an e-commerce shopping cart application, add, modify, and delete products, complete the payment, and remove the shopping cart information.
+- Quickly import intermediate temporary data in batches to improve the performance of importing temporary data.
+- Update data in batches. Import data into temporary tables in the database in batches, and export the data to files after finishing modify the data.
 
-## 临时表类型
+## Types of temporary tables
 
-TiDB 中的临时表分为两种类型：本地临时表和全局临时表。
+Temporary tables in TiDB are divided into two types: local temporary tables and global temporary tables.
 
-- 对于本地临时表，表定义和表中的数据仅对当前会话可见。这种类型适合临时存储会话中的中间数据。
-- 对于全局临时表，表定义对整个 TiDB 集群可见，而表中的数据仅对当前事务可见。这种类型适合临时存储事务中的中间数据。
+- For a local temporary table, the table definition and data in the table are visible only to the current session. This type is suitable for temporarily storing intermediate data in the session.
+- For a global temporary table, the table definition is visible to the entire TiDB cluster, and the data in the table is visible only to the current transaction. This type is suitable for temporarily storing intermediate data in the transaction.
 
-## 本地临时表
+## Local temporary tables
 
-TiDB 中本地临时表的语义与 MySQL 临时表一致。特点如下：
+The semantics of the local temporary table in TiDB is consistent with that of the MySQL temporary table. The characteristics are as follows:
 
-- 本地临时表的表定义不是持久的。本地临时表仅对创建该表的会话可见，其他会话无法访问该表。
-- 你可以在不同的会话中创建同名的本地临时表，每个会话只能读取和写入在该会话中创建的本地临时表。
-- 本地临时表的数据对会话中的所有事务可见。
-- 会话结束后，在该会话中创建的本地临时表会自动删除。
-- 本地临时表可以与普通表同名。在这种情况下，在 DDL 和 DML 语句中，普通表会被隐藏，直到本地临时表被删除。
+- The table definition of a local temporary table is not persistent. A local temporary table is visible only to the session in which the table is created, and other sessions cannot access the table.
+- You can create local temporary tables with the same name in different sessions, and each session reads only from and writes only to the local temporary table created in the session.
+- The data of a local temporary table is visible to all transactions in the session.
+- After a session ends, the local temporary table created in the session is automatically dropped.
+- A local temporary table can have the same name as an ordinary table. In this case, in the DDL and DML statements, the ordinary table is hidden until the local temporary table is dropped.
 
-要创建本地临时表，你可以使用 `CREATE TEMPORARY TABLE` 语句。要删除本地临时表，你可以使用 `DROP TABLE` 或 `DROP TEMPORARY TABLE` 语句。
+To create a local temporary table, you can use the `CREATE TEMPORARY TABLE` statement. To drop a local temporary table, you can use the `DROP TABLE` or `DROP TEMPORARY TABLE` statement.
 
-与 MySQL 不同，TiDB 中的本地临时表都是外部表，在执行 SQL 语句时不会自动创建内部临时表。
+Different from MySQL, the local temporary tables in TiDB are all external tables, and no internal temporary tables will be created automatically when SQL statements are executed.
 
-### 本地临时表使用示例
+### Usage examples of local temporary tables
 
-> **注意：**
+> **Note:**
 >
-> - 在 TiDB 中使用临时表之前，请注意[与其他 TiDB 功能的兼容性限制](#与其他-tidb-功能的兼容性限制)和[与 MySQL 临时表的兼容性](#与-mysql-临时表的兼容性)。
-> - 如果你在早于 TiDB v5.3.0 的集群上创建了本地临时表，这些表实际上是普通表，并且在集群升级到 TiDB v5.3.0 或更高版本后仍被视为普通表。
+> - Before you use the temporary table in TiDB, pay attention to the [compatibility restrictions with other TiDB features](#compatibility-restrictions-with-other-tidb-features) and the [compatibility with MySQL temporary tables](#compatibility-with-mysql-temporary-tables).
+> - If you have created local temporary tables on a cluster earlier than TiDB v5.3.0, these tables are actually ordinary tables, and treated as ordinary tables after the cluster is upgraded to TiDB v5.3.0 or a later version.
 
-假设有一个普通表 `users`：
+Assume that there is an ordinary table `users`:
 
 {{< copyable "sql" >}}
 
@@ -58,7 +58,7 @@ CREATE TABLE users (
 );
 ```
 
-在会话 A 中，创建本地临时表 `users` 不会与普通表 `users` 冲突。当会话 A 访问 `users` 表时，它访问的是本地临时表 `users`。
+In session A, creating a local temporary table `users` does not conflict with the ordinary table `users`. When session A accesses the `users` table, it accesses the local temporary table `users`.
 
 {{< copyable "sql" >}}
 
@@ -75,7 +75,7 @@ CREATE TEMPORARY TABLE users (
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-如果你向 `users` 插入数据，数据会插入到会话 A 中的本地临时表 `users`。
+If you insert data into `users`, data is inserted to the local temporary table `users` in session A.
 
 {{< copyable "sql" >}}
 
@@ -102,7 +102,7 @@ SELECT * FROM users;
 1 row in set (0.00 sec)
 ```
 
-在会话 B 中，创建本地临时表 `users` 不会与普通表 `users` 或会话 A 中的本地临时表 `users` 冲突。当会话 B 访问 `users` 表时，它访问的是会话 B 中的本地临时表 `users`。
+In session B, creating a local temporary table `users` does not conflict with the ordinary table `users` or the local temporary table `users` in session A. When session B accesses the `users` table, it accesses the local temporary table `users` in session B.
 
 {{< copyable "sql" >}}
 
@@ -119,7 +119,7 @@ CREATE TEMPORARY TABLE users (
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-如果你向 `users` 插入数据，数据会插入到会话 B 中的本地临时表 `users`。
+If you insert data into `users`, data is inserted to the local temporary table `users` in session B.
 
 {{< copyable "sql" >}}
 
@@ -146,45 +146,45 @@ SELECT * FROM users;
 1 row in set (0.00 sec)
 ```
 
-### 与 MySQL 临时表的兼容性
+### Compatibility with MySQL temporary tables
 
-TiDB 本地临时表与 MySQL 临时表具有以下相同的特性和限制：
+The following features and limitations of TiDB local temporary tables are the same with those of MySQL temporary tables:
 
-- 创建或删除本地临时表时，当前事务不会自动提交。
-- 删除本地临时表所在的 schema 后，临时表不会被删除，仍然可读可写。
-- 创建本地临时表需要 `CREATE TEMPORARY TABLES` 权限。对表的所有后续操作不需要任何权限。
-- 本地临时表不支持外键和分区表。
-- 不支持基于本地临时表创建视图。
-- `SHOW [FULL] TABLES` 不显示本地临时表。
+- When you create or drop local temporary tables, the current transaction is not automatically committed.
+- After dropping the schema where a local temporary table is located, the temporary table is not dropped and is still readable and writable.
+- Creating a local temporary table requires the `CREATE TEMPORARY TABLES` permission. All subsequent operations on the table do not require any permission.
+- Local temporary tables do not support foreign keys and partitioned tables.
+- Does not support creating views based on local temporary tables.
+- `SHOW [FULL] TABLES` does not show local temporary tables.
 
-TiDB 本地临时表与 MySQL 临时表在以下方面不兼容：
+Local temporary tables in TiDB are incompatible with MySQL temporary tables in the following aspects:
 
-- TiDB 本地临时表不支持 `ALTER TABLE`。
-- TiDB 本地临时表忽略 `ENGINE` 表选项，始终使用 TiDB 内存存储临时表数据，并有[内存限制](#限制临时表的内存使用)。
-- 当声明 `MEMORY` 作为存储引擎时，TiDB 本地临时表不受 `MEMORY` 存储引擎的限制。
-- 当声明 `INNODB` 或 `MYISAM` 作为存储引擎时，TiDB 本地临时表忽略 InnoDB 临时表特有的系统变量。
-- MySQL 不允许在同一个 SQL 语句中多次引用同一个临时表。TiDB 本地临时表没有这个限制。
-- MySQL 中显示临时表的系统表 `information_schema.INNODB_TEMP_TABLE_INFO` 在 TiDB 中不存在。目前，TiDB 没有显示本地临时表的系统表。
-- TiDB 没有内部临时表。MySQL 中用于内部临时表的系统变量对 TiDB 不起作用。
+- TiDB local temporary tables do not support `ALTER TABLE`.
+- TiDB local temporary tables ignore the `ENGINE` table option, and always store temporary table data in TiDB memory with a [memory limit](#limit-the-memory-usage-of-temporary-tables).
+- When `MEMORY` is declared as the storage engine, TiDB local temporary tables are not restricted by the `MEMORY` storage engine.
+- When `INNODB` or `MYISAM` is declared as the storage engine, TiDB local temporary tables ignore the system variables specific to the InnoDB temporary tables.
+- MySQL does not permit referencing to the same temporary table multiple times in the same SQL statement. TiDB local temporary tables do not have this restriction.
+- The system table `information_schema.INNODB_TEMP_TABLE_INFO` that shows temporary tables in MySQL does not exist in TiDB. Currently, TiDB does not have a system table that shows local temporary tables.
+- TiDB does not have internal temporary tables. The MySQL system variables for internal temporary tables do not take effect for TiDB.
 
-## 全局临时表
+## Global temporary tables
 
-全局临时表是 TiDB 的扩展功能。特点如下：
+The global temporary table is an extension of TiDB. The characteristics are as follows:
 
-- 全局临时表的表定义是持久的，对所有会话可见。
-- 全局临时表的数据仅在当前事务中可见。事务结束时，数据会自动清除。
-- 全局临时表不能与普通表同名。
+- The table definition of a global temporary table is persistent and visible to all sessions.
+- The data of a global temporary table is visible only in the current transaction. When the transaction ends, the data is automatically cleared.
+- A global temporary table cannot have the same name as an ordinary table.
 
-要创建全局临时表，你可以使用以 `ON COMMIT DELETE ROWS` 结尾的 `CREATE GLOBAL TEMPORARY TABLE` 语句。要删除全局临时表，你可以使用 `DROP TABLE` 或 `DROP GLOBAL TEMPORARY TABLE` 语句。
+To create a global temporary table, you can use the `CREATE GLOBAL TEMPORARY TABLE` statement ended with `ON COMMIT DELETE ROWS`. To drop a global temporary table, you can use the `DROP TABLE` or `DROP GLOBAL TEMPORARY TABLE` statement.
 
-### 全局临时表使用示例
+### Usage examples of global temporary tables
 
-> **注意：**
+> **Note:**
 >
-> - 在 TiDB 中使用临时表之前，请注意[与其他 TiDB 功能的兼容性限制](#与其他-tidb-功能的兼容性限制)。
-> - 如果你在 TiDB v5.3.0 或更高版本的集群上创建了全局临时表，当集群降级到早于 v5.3.0 的版本时，这些表会被作为普通表处理。在这种情况下，会发生数据错误。
+> - Before you use the temporary table in TiDB, pay attention to the [compatibility restrictions with other TiDB features](#compatibility-restrictions-with-other-tidb-features).
+> - If you have created global temporary tables on a TiDB cluster of v5.3.0 or later, when the cluster is downgraded to a version earlier than v5.3.0, these tables are handled as ordinary tables. In this case, a data error occurs.
 
-在会话 A 中创建全局临时表 `users`：
+Create a global temporary table `users` in session A:
 
 {{< copyable "sql" >}}
 
@@ -201,7 +201,7 @@ CREATE GLOBAL TEMPORARY TABLE users (
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-写入 `users` 的数据对当前事务可见：
+The data written to `users` is visible to the current transaction:
 
 {{< copyable "sql" >}}
 
@@ -238,7 +238,7 @@ SELECT * FROM users;
 1 row in set (0.00 sec)
 ```
 
-事务结束后，数据会自动清除：
+After the transaction ends, the data is automatically cleared:
 
 {{< copyable "sql" >}}
 
@@ -260,7 +260,7 @@ SELECT * FROM users;
 Empty set (0.00 sec)
 ```
 
-在会话 A 中创建 `users` 后，会话 B 也可以读取和写入 `users` 表：
+After `users` is created in session A, session B can also read from and write to the `users` table:
 
 {{< copyable "sql" >}}
 
@@ -272,17 +272,17 @@ SELECT * FROM users;
 Empty set (0.00 sec)
 ```
 
-> **注意：**
+> **Note:**
 >
-> 如果事务自动提交，SQL 语句执行后，插入的数据会自动清除，后续的 SQL 执行无法使用这些数据。因此，你应该使用非自动提交事务来读取和写入全局临时表。
+> If the transaction is automatically committed, after the SQL statement is executed, the inserted data is automatically cleared and unavailable to subsequent SQL executions. Therefore, you should use non-autocommit transactions to read from and write to global temporary tables.
 
-## 限制临时表的内存使用
+## Limit the memory usage of temporary tables
 
-无论在定义表时声明哪种存储引擎作为 `ENGINE`，本地临时表和全局临时表的数据都只存储在 TiDB 实例的内存中。这些数据不会持久化。
+No matter which storage engine is declared as `ENGINE` when you define a table, the data of local temporary tables and global temporary tables is only stored in the memory of TiDB instances. This data is not persisted.
 
-为了避免内存溢出，你可以使用 [`tidb_tmp_table_max_size`](/system-variables.md#tidb_tmp_table_max_size-new-in-v530) 系统变量来限制每个临时表的大小。一旦临时表大于 `tidb_tmp_table_max_size` 阈值，TiDB 就会报错。`tidb_tmp_table_max_size` 的默认值是 `64MB`。
+To avoid memory overflow, you can limit the size of each temporary table using the [`tidb_tmp_table_max_size`](/system-variables.md#tidb_tmp_table_max_size-new-in-v530) system variable. Once a temporary table is larger than the `tidb_tmp_table_max_size` threshold value, TiDB reports an error. The default value of `tidb_tmp_table_max_size` is `64MB`.
 
-例如，将临时表的最大大小设置为 `256MB`：
+For example, set the maximum size of a temporary table to `256MB`:
 
 {{< copyable "sql" >}}
 
@@ -290,42 +290,42 @@ Empty set (0.00 sec)
 SET GLOBAL tidb_tmp_table_max_size=268435456;
 ```
 
-## 与其他 TiDB 功能的兼容性限制
+## Compatibility restrictions with other TiDB features
 
-TiDB 中的本地临时表和全局临时表与以下 TiDB 功能**不**兼容：
+Local temporary tables and global temporary tables in TiDB are **NOT** compatible with the following TiDB features:
 
-- `AUTO_RANDOM` 列
-- `SHARD_ROW_ID_BITS` 和 `PRE_SPLIT_REGIONS` 表选项
-- 分区表
-- `SPLIT REGION` 语句
-- `ADMIN CHECK TABLE` 和 `ADMIN CHECKSUM TABLE` 语句
-- `FLASHBACK TABLE` 和 `RECOVER TABLE` 语句
-- 基于临时表执行 `CREATE TABLE LIKE` 语句
+- `AUTO_RANDOM` columns
+- `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` table options
+- Partitioned tables
+- `SPLIT REGION` statements
+- `ADMIN CHECK TABLE` and `ADMIN CHECKSUM TABLE` statements
+- `FLASHBACK TABLE` and `RECOVER TABLE` statements
+- Executing `CREATE TABLE LIKE` statements based on a temporary table
 - Stale Read
-- 外键
-- SQL 绑定
-- TiFlash 副本
-- 在临时表上创建视图
+- Foreign keys
+- SQL bindings
+- TiFlash replicas
+- Creating views on a temporary table
 - Placement Rules
-- 涉及临时表的执行计划不会被 `prepare plan cache` 缓存。
+- Execution plans involving a temporary table are not cached by `prepare plan cache`.
 
-TiDB 中的本地临时表**不**支持以下功能：
+Local temporary tables in TiDB do **NOT** support the following feature:
 
-- 使用 `tidb_snapshot` 系统变量读取历史数据。
+- Reading historical data using the `tidb_snapshot` system variable.
 
-## TiDB 迁移工具支持
+## TiDB migration tool support
 
-本地临时表不会被 TiDB 迁移工具导出、备份或复制，因为这些表仅对当前会话可见。
+Local temporary tables are not exported, backed up or replicated by TiDB migration tools, because these tables are visible only to the current session.
 
-全局临时表会被 TiDB 迁移工具导出、备份和复制，因为表定义是全局可见的。注意，表上的数据不会被导出。
+Global temporary tables are exported, backed up, and replicated by TiDB migration tools, because the table definition is globally visible. Note that the data on the tables are not exported.
 
-> **注意：**
+> **Note:**
 >
-> - 使用 TiCDC 复制临时表需要 TiCDC v5.3.0 或更高版本。否则，下游表的表定义会出错。
-> - 使用 BR 备份临时表需要 BR v5.3.0 或更高版本。否则，备份的临时表的表定义会出错。
-> - 导出集群、数据恢复后的集群和复制的下游集群都应该支持全局临时表。否则，会报错。
+> - Replicating temporary tables using TiCDC requires TiCDC v5.3.0 or later. Otherwise, the table definition of the downstream table is wrong.
+> - Backing up temporary tables using BR requires BR v5.3.0 or later. Otherwise, the table definitions of the backed temporary tables are wrong.
+> - The cluster to export, the cluster after data restore, and the downstream cluster of a replication should support global temporary tables. Otherwise, an error is reported.
 
-## 另请参阅
+## See also
 
 * [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 * [CREATE TABLE LIKE](/sql-statements/sql-statement-create-table-like.md)

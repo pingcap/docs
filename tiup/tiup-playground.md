@@ -21,7 +21,7 @@ This command actually performs the following operations:
 
 - Because this command does not specify the version of the playground component, TiUP first checks the latest version of the installed playground component. Assume that the latest version is v1.12.3, then this command works the same as `tiup playground:v1.12.3`.
 - If you have not used TiUP playground to install the TiDB, TiKV, and PD components, the playground component installs the latest stable version of these components, and then start these instances.
-- Because this command does not specify the version of the TiDB, PD, and TiKV component, TiUP playground uses the latest version of each component by default. Assume that the latest version is v8.1.2, then this command works the same as `tiup playground:v1.12.3 v8.1.2`.
+- Because this command does not specify the version of the TiDB, PD, and TiKV component, TiUP playground uses the latest version of each component by default. Assume that the latest version is {{{ .tidb-version }}}, then this command works the same as `tiup playground:v1.12.3 {{{ .tidb-version }}}`.
 - Because this command does not specify the number of each component, TiUP playground, by default, starts a smallest cluster that consists of one TiDB instance, one TiKV instance, one PD instance, and one TiFlash instance.
 - After starting each TiDB component, TiUP playground reminds you that the cluster is successfully started and provides you some useful information, such as how to connect to the TiDB cluster through the MySQL client and how to access the [TiDB Dashboard](/dashboard/dashboard-intro.md).
 
@@ -57,7 +57,7 @@ In the command above, `nightly` indicates the latest development version of TiDB
 
 ### Override PD's default configuration
 
-First, you need to copy the [PD configuration template](https://github.com/pingcap/pd/blob/release-8.1/conf/config.toml). Assume you place the copied file to `~/config/pd.toml` and make some changes according to your need, then you can execute the following command to override PD's default configuration:
+First, you need to copy the [PD configuration template](https://github.com/pingcap/pd/blob/master/conf/config.toml). Assume you place the copied file to `~/config/pd.toml` and make some changes according to your need, then you can execute the following command to override PD's default configuration:
 
 ```shell
 tiup playground --pd.config ~/config/pd.toml
@@ -112,10 +112,8 @@ Pid    Role     Uptime
 ---    ----     ------
 84518  pd       35m22.929404512s
 84519  tikv     35m22.927757153s
-84520  pump     35m22.92618275s
 86189  tidb     exited
 86526  tidb     34m28.293148663s
-86190  drainer  35m19.91349249s
 ```
 
 ## Scale out a cluster
@@ -151,7 +149,7 @@ Starting from TiUP v1.15.0, you can deploy TiProxy for your cluster using TiUP P
 2. Start the TiDB cluster:
 
     ```shell
-    tiup playground v8.1.2 --tiproxy 1 --db.config tidb.toml
+    tiup playground {{{ .tidb-version }}} --tiproxy 1 --db.config tidb.toml
     ```
 
     In the playground component, TiProxy-related command-line flags are as follows:
@@ -168,3 +166,18 @@ Starting from TiUP v1.15.0, you can deploy TiProxy for your cluster using TiUP P
     ```
 
 For more information about deploying and using TiProxy, see [TiProxy installation and usage](/tiproxy/tiproxy-overview.md#installation-and-usage).
+
+To use the TiProxy client program `tiproxyctl`, see [Install TiProxy Control](/tiproxy/tiproxy-command-line-flags.md#install-tiproxy-control).
+
+## Deploy PD microservices
+
+Starting from v8.2.0, [PD microservice mode](/pd-microservices.md) (experimental) can be deployed using TiUP. You can deploy the `tso` microservice and `scheduling` microservice for your cluster using TiUP Playground as follows:
+
+```shell
+tiup playground {{{ .tidb-version }}} --pd.mode ms --pd 3 --tso 2 --scheduling 2
+```
+
+- `--pd.mode`: setting it to `ms` means enabling the microservice mode for PD.
+- `--pd <num>`: specifies the number of APIs for PD microservices. It must be at least `1`.
+- `--tso <num>`: specifies the number of instances to be deployed for the `tso` microservice.
+- `--scheduling <num>`: specifies the number of instances to be deployed for the `scheduling` microservice.

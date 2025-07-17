@@ -1,17 +1,17 @@
 ---
-title: EXPLAIN ANALYZE | TiDB SQL 语句参考
-summary: TiDB 数据库中 EXPLAIN ANALYZE 的使用概述。
+title: EXPLAIN ANALYZE | TiDB SQL Statement Reference
+summary: An overview of the usage of EXPLAIN ANALYZE for the TiDB database.
 ---
 
 # EXPLAIN ANALYZE
 
-`EXPLAIN ANALYZE` 语句的工作方式类似于 `EXPLAIN`，主要区别在于它会实际执行该语句。这使你可以比较查询规划中使用的估计值与执行期间遇到的实际值。如果估计值与实际值有显著差异，你应该考虑对受影响的表运行 `ANALYZE TABLE`。
+The `EXPLAIN ANALYZE` statement works similar to `EXPLAIN`, with the major difference being that it will actually execute the statement. This allows you to compare the estimates used as part of query planning to actual values encountered during execution. If the estimates differ significantly from the actual values, you should consider running `ANALYZE TABLE` on the affected tables.
 
-> **注意：**
+> **Note:**
 >
-> 当你使用 `EXPLAIN ANALYZE` 执行 DML 语句时，数据修改通常会被执行。目前，DML 语句的执行计划**尚不能**显示。
+> When you use `EXPLAIN ANALYZE` to execute DML statements, modification to data is normally executed. Currently, the execution plan for DML statements **cannot** be shown yet.
 
-## 语法
+## Synopsis
 
 ```ebnf+diagram
 ExplainSym ::=
@@ -31,18 +31,18 @@ ExplainableStmt ::=
 |   UnionStmt
 ```
 
-## EXPLAIN ANALYZE 输出格式
+## EXPLAIN ANALYZE output format
 
-与 `EXPLAIN` 不同，`EXPLAIN ANALYZE` 执行相应的 SQL 语句，记录其运行时信息，并将这些信息与执行计划一起返回。因此，你可以将 `EXPLAIN ANALYZE` 视为 `EXPLAIN` 语句的扩展。与 `EXPLAIN`（用于调试查询执行）相比，`EXPLAIN ANALYZE` 的返回结果还包括 `actRows`、`execution info`、`memory` 和 `disk` 等信息列。这些列的详细信息如下：
+Different from `EXPLAIN`, `EXPLAIN ANALYZE` executes the corresponding SQL statement, records its runtime information, and returns the information together with the execution plan. Therefore, you can regard `EXPLAIN ANALYZE` as an extension of the `EXPLAIN` statement. Compared to `EXPLAIN` (for debugging query execution), the return results of `EXPLAIN ANALYZE` also include columns of information such as `actRows`, `execution info`, `memory`, and `disk`. The details of these columns are shown as follows:
 
-| 属性名          | 描述 |
+| attribute name          | description |
 |:----------------|:---------------------------------|
-| actRows       | 算子输出的行数。 |
-| execution info  | 算子的执行信息。`time` 表示从进入算子到离开算子的总 `wall time`，包括所有子算子的总执行时间。如果该算子被父算子多次调用（在循环中），则时间指累积时间。`loops` 是当前算子被父算子调用的次数。 |
-| memory  | 算子占用的内存空间。 |
-| disk  | 算子占用的磁盘空间。 |
+| actRows       | Number of rows output by the operator. |
+| execution info  | Execution information of the operator. `time` represents the total `wall time` from entering the operator to leaving the operator, including the total execution time of all sub-operators. If the operator is called many times by the parent operator (in loops), then the time refers to the accumulated time. `loops` is the number of times the current operator is called by the parent operator. |
+| memory  | Memory space occupied by the operator. |
+| disk  | Disk space occupied by the operator. |
 
-## 示例
+## Examples
 
 {{< copyable "sql" >}}
 
@@ -96,138 +96,138 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 2 rows in set (0.00 sec)
 ```
 
-## 算子的执行信息
+## Execution information of operators
 
-除了基本的 `time` 和 `loop` 执行信息外，`execution info` 还包含算子特定的执行信息，主要包括算子发送 RPC 请求所消耗的时间以及其他步骤的持续时间。
+In addition to the basic `time` and `loop` execution information, `execution info` also contains operator-specific execution information, which mainly includes the time consumed for the operator to send RPC requests and the duration of other steps.
 
 ### Point_Get
 
-`Point_Get` 算子的执行信息通常包含以下信息：
+The execution information from a `Point_Get` operator will typically contain the following information:
 
-- `Get:{num_rpc:1, total_time:697.051µs}`：发送到 TiKV 的 `Get` RPC 请求数量（`num_rpc`）和所有 RPC 请求的总持续时间（`total_time`）。
-- `ResolveLock:{num_rpc:1, total_time:12.117495ms}`：如果 TiDB 在读取数据时遇到锁，它必须先解决锁，这通常发生在读写冲突的场景中。此信息表示解决锁的持续时间。
-- `regionMiss_backoff:{num:11, total_time:2010 ms},tikvRPC_backoff:{num:11, total_time:10691 ms}`：当 RPC 请求失败时，TiDB 会等待回退时间后重试请求。回退统计信息包括回退类型（如 `regionMiss` 和 `tikvRPC`）、总等待时间（`total_time`）和总回退次数（`num`）。
+- `Get:{num_rpc:1, total_time:697.051µs}`: The number of the `Get` RPC requests (`num_rpc`) sent to TiKV and the total duration (`total_time`) of all RPC requests.
+- `ResolveLock:{num_rpc:1, total_time:12.117495ms}`: If TiDB encounters a lock when reading data, it has to resolve the lock first, which generally occurs in the scenario of read-write conflict. This information indicates the duration of resolving locks.
+- `regionMiss_backoff:{num:11, total_time:2010 ms},tikvRPC_backoff:{num:11, total_time:10691 ms}`: When an RPC request fails, TiDB will wait the backoff time before retrying the request. Backoff statistics include the type of backoff (such as `regionMiss` and `tikvRPC`), the total waiting time (`total_time`), and the total number of backoffs (`num`).
 
 ### Batch_Point_Get
 
-`Batch_Point_Get` 算子的执行信息与 `Point_Get` 算子类似，但 `Batch_Point_Get` 通常会发送 `BatchGet` RPC 请求到 TiKV 来读取数据。
+The execution information of the `Batch_Point_Get` operator is similar to that of the `Point_Get` operator, but `Batch_Point_Get` generally sends `BatchGet` RPC requests to TiKV to read data.
 
-`BatchGet:{num_rpc:2, total_time:83.13µs}`：发送到 TiKV 的 `BatchGet` 类型 RPC 请求数量（`num_rpc`）和所有 RPC 请求消耗的总时间（`total_time`）。
+`BatchGet:{num_rpc:2, total_time:83.13µs}`: The number of RPC requests (`num_rpc`) of the `BatchGet` type sent to TiKV and the total time consumed (`total_time`) for all RPC requests.
 
 ### TableReader
 
-`TableReader` 算子的执行信息通常如下：
+The execution information of a `TableReader` operator is typically as follows:
 
 ```
 cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.07587ms, max_proc_keys: 16, p95_proc_keys: 16, tot_proc: 1ms, tot_wait: 1ms, copr_cache_hit_ratio: 0.00}, rpc_info:{Cop:{num_rpc:6, total_time:5.313996ms}}
 ```
 
-- `cop_task`：包含 `cop` 任务的执行信息。例如：
-    - `num`：cop 任务的数量。
-    - `max`、`min`、`avg`、`p95`：执行 cop 任务消耗的执行时间的最大值、最小值、平均值和 P95 值。
-    - `max_proc_keys` 和 `p95_proc_keys`：所有 cop 任务中 TiKV 扫描的最大和 P95 键值数。如果最大值和 P95 值之间的差异很大，数据分布可能不均衡。
-    - `copr_cache_hit_ratio`：`cop` 任务请求的 Coprocessor Cache 命中率。
-- `rpc_info`：按请求类型聚合的发送到 TiKV 的 RPC 请求总数和总时间。
-- `backoff`：包含不同类型的回退和回退的总等待时间。
+- `cop_task`: Contains the execution information of `cop` tasks. For example:
+    - `num`: The number of cop tasks.
+    - `max`, `min`, `avg`, `p95`: The maximum, minimum, average, and P95 values of the execution time consumed for executing cop tasks.
+    - `max_proc_keys` and `p95_proc_keys`: The maximum and P95 key-values scanned by TiKV in all cop tasks. If the difference between the maximum value and the P95 value is large, the data distribution might be imbalanced.
+    - `copr_cache_hit_ratio`: The hit rate of Coprocessor Cache for `cop` task requests.
+- `rpc_info`: The total number and total time of RPC requests sent to TiKV aggregated by request type.
+- `backoff`: Contains different types of backoff and the total waiting time of backoff.
 
 ### Insert
 
-`Insert` 算子的执行信息通常如下：
+The execution information of an `Insert` operator is typically as follows:
 
 ```
 prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878µs, prefetch:763.8µs, rpc:{BatchGet:{num_rpc:1, total_time:699.166µs},Get:{num_rpc:1, total_time:378.276µs }}}
 ```
 
-- `prepare`：准备写入的时间消耗，包括表达式、默认值和自增值的计算。
-- `check_insert`：此信息通常出现在 `insert ignore` 和 `insert on duplicate` 语句中，包括冲突检查和将数据写入 TiDB 事务缓存的时间消耗。注意，这个时间消耗不包括事务提交的时间消耗。它包含以下信息：
-    - `total_time`：`check_insert` 步骤花费的总时间。
-    - `mem_insert_time`：将数据写入 TiDB 事务缓存的时间消耗。
-    - `prefetch`：从 TiKV 获取需要检查冲突的数据的持续时间。此步骤向 TiKV 发送 `Batch_Get` RPC 请求以获取数据。
-    - `rpc`：发送 RPC 请求到 TiKV 消耗的总时间，通常包括两种类型的 RPC 时间，`BatchGet` 和 `Get`，其中：
-        - `BatchGet` RPC 请求在 `prefetch` 步骤中发送。
-        - `Get` RPC 请求在 `insert on duplicate` 语句执行 `duplicate update` 时发送。
-- `backoff`：包含不同类型的回退和回退的总等待时间。
+- `prepare`: The time consumed for preparing to write, including expression, default value and auto-increment value calculations.
+- `check_insert`: This information generally appears in `insert ignore` and `insert on duplicate` statements, including conflict checking and the time consumed for writing data to TiDB transaction cache. Note that this time consumption does not include the time consumed for transaction commit. It contains the following information:
+    - `total_time`: The total time spent on the `check_insert` step.
+    - `mem_insert_time`: The time consumed for writing data to the TiDB transaction cache.
+    - `prefetch`: The duration of retrieving the data that needs to be checked for conflicts from TiKV. This step sends a `Batch_Get` RPC request to TiKV to retrieve data.
+    - `rpc`: The total time consumed for sending RPC requests to TiKV, which generally includes two types of RPC time, `BatchGet` and `Get`, among which:
+        - `BatchGet` RPC request is sent in the `prefetch` step.
+        - `Get` RPC request is sent when the `insert on duplicate` statement executes `duplicate update`.
+- `backoff`: Contains different types of backoff and the total waiting time of backoff.
 
 ### IndexJoin
 
-`IndexJoin` 算子有 1 个外部工作线程和 N 个内部工作线程用于并发执行。连接结果保持外表的顺序。详细的执行过程如下：
+The `IndexJoin` operator has 1 outer worker and N inner workers for concurrent execution. The join result preserves the order of the outer table. The detailed execution process is as follows:
 
-1. 外部工作线程读取 N 个外部行，然后将其包装成任务，并发送到结果通道和内部工作线程通道。
-2. 内部工作线程接收任务，从任务构建键范围，并根据键范围获取内部行。然后构建内部行哈希表。
-3. 主 `IndexJoin` 线程从结果通道接收任务，并等待内部工作线程完成处理任务。
-4. 主 `IndexJoin` 线程通过查找内部行哈希表来连接每个外部行。
+1. The outer worker reads N outer rows, then wraps it into a task, and sends it to the result channel and the inner worker channel.
+2. The inner worker receives the task, build key ranges from the task, and fetches inner rows according to the key ranges. It then builds the inner row hash table.
+3. The main `IndexJoin` thread receives the task from the result channel and waits for the inner worker to finish handling the task.
+4. The main `IndexJoin` thread joins each outer row by looking up to the inner rows' hash table.
 
-`IndexJoin` 算子包含以下执行信息：
+The `IndexJoin` operator contains the following execution information:
 
 ```
 inner:{total:4.297515932s, concurrency:5, task:17, construct:97.96291ms, fetch:4.164310088s, build:35.219574ms}, probe:53.574945ms
 ```
 
-- `Inner`：内部工作线程的执行信息：
-    - `total`：内部工作线程消耗的总时间。
-    - `concurrency`：并发内部工作线程的数量。
-    - `task`：内部工作线程处理的任务总数。
-    - `construct`：内部工作线程在读取任务对应的内部表行之前的准备时间。
-    - `fetch`：内部工作线程读取内部表行消耗的总时间。
-    - `Build`：内部工作线程构建对应内部表行哈希表消耗的总时间。
-- `probe`：主 `IndexJoin` 线程执行外表行与内部表行哈希表连接操作消耗的总时间。
+- `Inner`: The execution information of inner worker:
+    - `total`: The total time consumed by the inner worker.
+    - `concurrency`: The number of concurrent inner workers.
+    - `task`: The total number of tasks processed by the inner worker.
+    - `construct`: The preparation time before the inner worker reads the inner table rows corresponding to the task.
+    - `fetch`: The total time consumed for it takes for the inner worker to read inner table rows.
+    - `Build`: The total time consumed for it takes for the inner worker to construct the hash table of the corresponding inner table rows.
+- `probe`: The total time consumed by the main `IndexJoin` thread to perform join operations with the hash table of the outer table rows and the inner table rows.
 
 ### IndexHashJoin
 
-`IndexHashJoin` 算子的执行过程类似于 `IndexJoin` 算子。`IndexHashJoin` 算子也有 1 个外部工作线程和 N 个内部工作线程并行执行，但输出顺序不保证与外表一致。详细的执行过程如下：
+The execution process of the `IndexHashJoin` operator is similar to that of the `IndexJoin` operator. `IndexHashJoin` operator also has 1 outer worker and N inner workers to execute in parallel, but the output order is not guaranteed to be consistent with that of the outer table. The detailed execution process is as follows:
 
-1. 外部工作线程读取 N 个外部行，构建任务，并发送到内部工作线程通道。
-2. 内部工作线程从内部工作线程通道接收任务，并对每个任务按顺序执行以下三个操作：
-   a. 从外部行构建哈希表
-   b. 从外部行构建键范围并获取内部行
-   c. 探测哈希表并将连接结果发送到结果通道。注意：步骤 a 和步骤 b 并行运行。
-3. `IndexHashJoin` 的主线程从结果通道接收连接结果。
+1. The outer worker reads N outer rows, builds a task, and sends it to the inner worker channel.
+2. The inner worker receives the tasks from the inner worker channel and performs the following three operations in order for every task:
+   a. Build a hash table from the outer rows
+   b. Build key ranges from outer rows and fetches inner rows
+   c. Probe the hash table and sends the join result to the result channel. Note: step a and step b are running concurrently.
+3. The main thread of `IndexHashJoin` receives the join results from the result channel.
 
-`IndexHashJoin` 算子包含以下执行信息：
+The `IndexHashJoin` operator contains the following execution information:
 
 ```sql
 inner:{total:4.429220003s, concurrency:5, task:17, construct:96.207725ms, fetch:4.239324006s, build:24.567801ms, join:93.607362ms}
 ```
 
-- `Inner`：内部工作线程的执行信息：
-    - `total`：内部工作线程消耗的总时间。
-    - `concurrency`：内部工作线程的数量。
-    - `task`：内部工作线程处理的任务总数。
-    - `construct`：内部工作线程在读取内部表行之前的准备时间。
-    - `fetch`：内部工作线程读取内部表行消耗的总时间。
-    - `Build`：内部工作线程构建外表行哈希表消耗的总时间。
-    - `join`：内部工作线程执行内部表行与外表行哈希表连接操作消耗的总时间。
+- `Inner`: the execution information of inner worker:
+    - `total`: the total time consumed by the inner worker.
+    - `concurrency`: the number of inner workers.
+    - `task`: The total number of tasks processed by the inner worker.
+    - `construct`: The preparation time before the inner worker reads the inner table rows.
+    - `fetch`: The total time consumed for inner worker to read inner table rows.
+    - `Build`: The total time consumed for inner worker to construct the hash table of the outer table rows.
+    - `join`:  The total time consumed for inner worker to do join with the inner table rows and the hash table of outer table rows.
 
 ### HashJoin
 
-`HashJoin` 算子有一个内部工作线程、一个外部工作线程和 N 个连接工作线程。详细的执行过程如下：
+The `HashJoin` operator has an inner worker, an outer worker, and N join workers. The detailed execution process is as follows:
 
-1. 内部工作线程读取内部表行并构建哈希表。
-2. 外部工作线程读取外部表行，然后将其包装成任务并发送给连接工作线程。
-3. 连接工作线程等待步骤 1 中的哈希表构建完成。
-4. 连接工作线程使用任务中的外部表行和哈希表执行连接操作，然后将连接结果发送到结果通道。
-5. `HashJoin` 的主线程从结果通道接收连接结果。
+1. The inner worker reads inner table rows and constructs a hash table.
+2. The outer worker reads the outer table rows, then wraps it into a task and sends it to the join worker.
+3. The join worker waits for the hash table construction in step 1 to finish.
+4. The join worker uses the outer table rows and hash table in the task to perform join operations, and then sends the join result to the result channel.
+5. The main thread of `HashJoin` receives the join result from the result channel.
 
-`HashJoin` 算子包含以下执行信息：
+The `HashJoin` operator contains the following execution information:
 
 ```
 build_hash_table:{total:146.071334ms, fetch:110.338509ms, build:35.732825ms}, probe:{concurrency:5, total:857.162518ms, max:171.48271ms, probe:125.341665ms, fetch:731.820853ms}
 ```
 
-- `build_hash_table`：读取内部表数据并构建哈希表的执行信息：
-    - `total`：总时间消耗。
-    - `fetch`：读取内部表数据消耗的总时间。
-    - `build`：构建哈希表消耗的总时间。
-- `probe`：连接工作线程的执行信息：
-    - `concurrency`：连接工作线程的数量。
-    - `total`：所有连接工作线程消耗的总时间。
-    - `max`：单个连接工作线程执行的最长时间。
-    - `probe`：与外部表行和哈希表连接消耗的总时间。
-    - `fetch`：连接工作线程等待读取外部表行数据消耗的总时间。
+- `build_hash_table`: Reads the data of the inner table and constructs the execution information of the hash table:
+    - `total`: The total time consumption.
+    - `fetch`: The total time spent reading inner table data.
+    - `build`: The total time spent constructing a hash table.
+- `probe`: The execution information of join workers:
+    - `concurrency`: The number of join workers.
+    - `total`: The total time consumed by all join workers.
+    - `max`: The longest time for a single join worker to execute.
+    - `probe`: The total time consumed for joining with outer table rows and the hash table.
+    - `fetch`: The total time that the join worker waits to read the outer table rows data.
 
 ### TableFullScan (TiFlash)
 
-在 TiFlash 节点上执行的 `TableFullScan` 算子包含以下执行信息：
+The `TableFullScan` operator executed on a TiFlash node contains the following execution information:
 
 ```sql
 tiflash_scan: {
@@ -243,57 +243,57 @@ tiflash_scan: {
 }
 ```
 
-+ `dtfile`：表扫描期间的 DTFile（DeltaTree File）相关信息，反映了 TiFlash Stable 层的数据扫描状态。
-    - `total_scanned_packs`：DTFile 中已扫描的 pack 总数。pack 是 TiFlash DTFile 中可以读取的最小单位。默认情况下，每 8192 行构成一个 pack。
-    - `total_skipped_packs`：DTFile 中扫描时跳过的 pack 总数。当 `WHERE` 子句命中粗糙集索引或匹配主键的范围过滤时，会跳过不相关的 pack。
-    - `total_scanned_rows`：DTFile 中已扫描的行总数。如果由于 MVCC 存在多个版本的更新或删除，每个版本都会被独立计数。
-    - `total_skipped_rows`：DTFile 中扫描时跳过的行总数。
-    - `total_rs_index_load_time`：读取 DTFile 粗糙集索引使用的总时间。
-    - `total_read_time`：读取 DTFile 数据使用的总时间。
-+ `total_create_snapshot_time`：表扫描期间创建快照使用的总时间。
++ `dtfile`: the DTFile (DeltaTree File) related information during the table scan, which reflects the data scan status of the TiFlash Stable layer.
+    - `total_scanned_packs`: the total number of packs that have been scanned in the DTFile. A pack is the minimum unit that can be read in the TiFlash DTFile. By default, every 8192 rows constitute a pack.
+    - `total_skipped_packs`: the total number of packs that have been skipped by the scan in the DTFile. When a `WHERE` clause hits rough set indexes or matches the range filtering of a primary key, the irrelevant packs are skipped.
+    - `total_scanned_rows`: the total number of rows that have been scanned in the DTFile. If there are multiple versions of updates or deletions because of MVCC, each version is counted independently.
+    - `total_skipped_rows`: the total number of rows that are skipped by the scan in the DTFile.
+    - `total_rs_index_load_time`: the total time used to read DTFile rough set indexes.
+    - `total_read_time`:  the total time used to read DTFile data.
++ `total_create_snapshot_time`: the total time used to create snapshots during the table scan.
 
-### lock_keys 执行信息
+### lock_keys execution information
 
-当在悲观事务中执行 DML 语句时，算子的执行信息可能还包括 `lock_keys` 的执行信息。例如：
+When a DML statement is executed in a pessimistic transaction, the execution information of the operator might also include the execution information of `lock_keys`. For example:
 
 ```
 lock_keys: {time:94.096168ms, region:6, keys:8, lock_rpc:274.503214ms, rpc_count:6}
 ```
 
-- `time`：执行 `lock_keys` 操作的总持续时间。
-- `region`：执行 `lock_keys` 操作涉及的 Region 数量。
-- `keys`：需要 `Lock` 的 `Key` 数量。
-- `lock_rpc`：向 TiKV 发送 `Lock` 类型 RPC 请求消耗的总时间。因为多个 RPC 请求可以并行发送，所以总 RPC 时间消耗可能大于 `lock_keys` 操作的总时间消耗。
-- `rpc_count`：向 TiKV 发送的 `Lock` 类型 RPC 请求总数。
+- `time`: The total duration of executing the `lock_keys` operation.
+- `region`: The number of Regions involved in executing the `lock_keys` operation.
+- `keys`: The number of `Key`s that need `Lock`.
+- `lock_rpc`: The total time spent sending an RPC request of the `Lock` type to TiKV. Because multiple RPC requests can be sent in parallel, the total RPC time consumption might be greater than the total time consumption of the `lock_keys` operation.
+- `rpc_count`: The total number of RPC requests of the `Lock` type sent to TiKV.
 
-### commit_txn 执行信息
+### commit_txn execution information
 
-当在 `autocommit=1` 的事务中执行写类型的 DML 语句时，写算子的执行信息还将包括事务提交的持续时间信息。例如：
+When a write-type DML statement is executed in a transaction with `autocommit=1`, the execution information of the write operator will also include the duration information of the transaction commit. For example:
 
 ```
 commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts:4.277455ms, commit:50.431774ms, region_num:7, write_keys:16, write_byte:536}
 ```
 
-- `prewrite`：事务 2PC 提交的 `prewrite` 阶段消耗的时间。
-- `wait_prewrite_binlog`：等待写入 prewrite Binlog 消耗的时间。
-- `get_commit_ts`：获取事务提交时间戳消耗的时间。
-- `commit`：事务 2PC 提交的 `commit` 阶段消耗的时间。
-- `write_keys`：事务中写入的总 `keys`。
-- `write_byte`：事务中写入的 `key-value` 总字节数，单位为字节。
+- `prewrite`: The time consumed for the `prewrite` phase of the 2PC commit of the transaction.
+- `wait_prewrite_binlog:`: The time consumed for waiting to write the prewrite Binlog.
+- `get_commit_ts`: The time consumed for getting the transaction commit timestamp.
+- `commit`: The time consumed for the `commit` phase during the 2PC commit of the transaction.
+- `write_keys`: The total `keys` written in the transaction.
+- `write_byte`: The total bytes of `key-value` written in the transaction, and the unit is byte.
 
-### RU（请求单元）消耗
+### RU (Request Unit) consumption
 
-[请求单元（Request Unit，RU）](/tidb-resource-control.md#什么是请求单元-ru)是系统资源的统一抽象单位，在 TiDB 资源控制中定义。顶层算子的 `execution info` 显示了这个特定 SQL 语句的总体 RU 消耗。
+[Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) is a unified abstraction unit of system resources, which is defined in TiDB resource control. The `execution info` of the top-level operator shows the overall RU consumption of this particular SQL statement.
 
 ```
 RU:273.842670
 ```
 
-> **注意：**
+> **Note:**
 >
-> 这个值显示了此次执行实际消耗的 RU。由于缓存的影响（例如[协处理器缓存](/coprocessor-cache.md)），同一条 SQL 语句每次执行可能会消耗不同数量的 RU。
+> This value shows the actual RUs consumed by this execution. The same SQL statement might consume different amounts of RUs each time it is executed due to the effects of caching (for example, [coprocessor cache](/coprocessor-cache.md)).
 
-你可以从 `EXPLAIN ANALYZE` 中的其他值计算 RU，特别是 `execution info` 列。例如：
+You can calculate the RU from the other values in `EXPLAIN ANALYZE`, specifically the `execution info` column. For example:
 
 ```json
 'executeInfo':
@@ -323,32 +323,32 @@ RU:273.842670
   },
 ```
 
-基本成本在 [`tikv/pd` 源代码](https://github.com/tikv/pd/blob/aeb259335644d65a97285d7e62b38e7e43c6ddca/client/resource_group/controller/config.go#L58C19-L67)中定义，计算在 [`model.go`](https://github.com/tikv/pd/blob/54219d649fb4c8834cd94362a63988f3c074d33e/client/resource_group/controller/model.go#L107) 文件中执行。
+The base costs are defined in the [`tikv/pd` source code](https://github.com/tikv/pd/blob/aeb259335644d65a97285d7e62b38e7e43c6ddca/client/resource_group/controller/config.go#L58C19-L67) and the calculations are performed in the [`model.go`](https://github.com/tikv/pd/blob/54219d649fb4c8834cd94362a63988f3c074d33e/client/resource_group/controller/model.go#L107) file.
 
-如果你使用的是 TiDB v7.1，计算是 `pd/pd-client/model.go` 中 `BeforeKVRequest()` 和 `AfterKVRequest()` 的总和，即：
+If you are using TiDB v7.1, the calculation is the sum of `BeforeKVRequest()` and `AfterKVRequest()` in `pd/pd-client/model.go`, that is:
 
 ```
-在处理键/值请求之前：
+before key/value request is processed:
       consumption.RRU += float64(kc.ReadBaseCost) -> kv.ReadBaseCost * rpc_nums
 
-在处理键/值请求之后：
+after key/value request is processed:
       consumption.RRU += float64(kc.ReadBytesCost) * readBytes -> kc.ReadBytesCost * total_process_keys_size
       consumption.RRU += float64(kc.CPUMsCost) * kvCPUMs -> kc.CPUMsCost * total_process_time
 ```
 
-对于写入和批量获取，计算方式类似，但基本成本不同。
+For writes and batch gets, the calculation is similar with different base costs.
 
-### 其他常见执行信息
+### Other common execution information
 
-Coprocessor 算子通常包含两部分执行时间信息：`cop_task` 和 `tikv_task`。`cop_task` 是 TiDB 记录的时间，从发送请求到服务器到接收响应的时刻。`tikv_task` 是 TiKV Coprocessor 自身记录的时间。如果两者之间存在较大差异，可能表明等待响应的时间太长，或者 gRPC 或网络消耗的时间太长。
+The Coprocessor operators usually contain two parts of execution time information: `cop_task` and `tikv_task`. `cop_task` is the time recorded by TiDB, and it is from the moment that the request is sent to the server to the moment that the response is received. `tikv_task` is the time recorded by TiKV Coprocessor itself. If there is much difference between the two, it might indicate that the time spent waiting for the response is too long, or the time spent on gRPC or network is too long.
 
-## MySQL 兼容性
+## MySQL compatibility
 
-`EXPLAIN ANALYZE` 是 MySQL 8.0 的特性，但 TiDB 中的输出格式和潜在的执行计划与 MySQL 有很大不同。
+`EXPLAIN ANALYZE` is a feature of MySQL 8.0, but both the output format and the potential execution plans in TiDB differ substantially from MySQL.
 
-## 另请参阅
+## See also
 
-* [理解查询执行计划](/explain-overview.md)
+* [Understanding the Query Execution Plan](/explain-overview.md)
 * [EXPLAIN](/sql-statements/sql-statement-explain.md)
 * [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
 * [TRACE](/sql-statements/sql-statement-trace.md)

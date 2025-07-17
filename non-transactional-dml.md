@@ -1,59 +1,59 @@
 ---
-title: 非事务 DML 语句
-summary: 了解 TiDB 中的非事务 DML 语句。通过牺牲原子性和隔离性，将一个 DML 语句拆分为多个语句按顺序执行，从而提高批量数据处理场景下的稳定性和易用性。
+title: Non-Transactional DML Statements
+summary: Learn the non-transactional DML statements in TiDB. At the expense of atomicity and isolation, a DML statement is split into multiple statements to be executed in sequence, which improves the stability and ease of use in batch data processing scenarios.
 ---
 
-# 非事务 DML 语句
+# Non-Transactional DML Statements
 
-本文档介绍 TiDB 中非事务 DML 语句的使用场景、使用方法和限制。此外，还说明了实现原理和常见问题。
+This document describes the usage scenarios, usage methods, and restrictions of non-transactional DML statements in TiDB. In addition, the implementation principle and common issues are also explained.
 
-非事务 DML 语句是将一个 DML 语句拆分成多个 SQL 语句（即多个批次）按顺序执行。它以牺牲事务的原子性和隔离性为代价，提高了批量数据处理的性能和易用性。
+A non-transactional DML statement is a DML statement split into multiple SQL statements (which is, multiple batches) to be executed in sequence. It enhances the performance and ease of use in batch data processing at the expense of transactional atomicity and isolation.
 
-通常，内存消耗较大的事务需要拆分成多个 SQL 语句以绕过事务大小限制。非事务 DML 语句将这个过程集成到 TiDB 内核中以实现相同的效果。通过拆分 SQL 语句来理解非事务 DML 语句的效果会很有帮助。可以使用 `DRY RUN` 语法来预览拆分后的语句。
+Usually, memory-consuming transactions need to be split into multiple SQL statements to bypass the transaction size limit. Non-transactional DML statements integrate this process into the TiDB kernel to achieve the same effect. It is helpful to understand the effect of non-transactional DML statements by splitting SQL statements. The `DRY RUN` syntax can be used to preview the split statements.
 
-非事务 DML 语句包括：
+Non-transactional DML statements include:
 
 - `INSERT INTO ... SELECT`
 - `REPLACE INTO .. SELECT`
 - `UPDATE`
 - `DELETE`
 
-详细语法请参见 [`BATCH`](/sql-statements/sql-statement-batch.md)。
+For detailed syntax, see [`BATCH`](/sql-statements/sql-statement-batch.md).
 
-> **注意：**
+> **Note:**
 >
-> - 非事务 DML 语句不保证语句的原子性和隔离性，且与原始 DML 语句不等价。
-> - 将 DML 语句重写为非事务 DML 语句后，不能假设其行为与原始语句一致。
-> - 在使用非事务 DML 之前，需要分析拆分后的语句是否会相互影响。
+> - A non-transactional DML statement does not guarantee the atomicity and isolation of the statement, and is not equivalent to the original DML statement.
+> - After a DML statement is rewritten into a non-transactional DML statement, you cannot assume that its behavior is consistent with that of the original statement.
+> - Before using a non-transactional DML, you need to analyze whether the split statements will affect each other.
 
-## 使用场景
+## Usage scenarios
 
-在大数据处理场景中，你可能经常需要对大批量数据执行相同的操作。如果直接使用单个 SQL 语句执行操作，事务大小可能会超出限制并影响执行性能。
+In the scenarios of large data processing, you might often need to perform same operations on a large batch of data. If the operation is performed directly using a single SQL statement, the transaction size might exceed the limit and affect the execution performance.
 
-批量数据处理通常与在线应用操作在时间或数据上没有重叠。当不存在并发操作时，隔离性（ACID 中的 I）是不必要的。如果批量数据操作是幂等的或容易重试，原子性也是不必要的。如果你的应用程序既不需要数据隔离也不需要原子性，可以考虑使用非事务 DML 语句。
+Batch data processing often has no overlap of time or data with the online application operations. Isolation (I in ACID) is unnecessary when no concurrent operations exist. Atomicity is also unnecessary if bulk data operations are idempotent or easily retryable. If your application needs neither data isolation nor atomicity, you can consider using non-transactional DML statements.
 
-非事务 DML 语句用于在某些场景下绕过大事务的大小限制。使用一条语句完成原本需要手动拆分事务的任务，具有更高的执行效率和更少的资源消耗。
+Non-transactional DML statements are used to bypass the size limit on large transactions in certain scenarios. One statement is used to complete tasks that would otherwise require manually splitting of transactions, with higher execution efficiency and less resource consumption.
 
-例如，要删除过期数据，如果你确保没有应用程序会访问过期数据，可以使用非事务 DML 语句来提高 `DELETE` 性能。
+For example, to delete expired data, if you ensure that no application will access the expired data, you can use a non-transactional DML statement to improve the `DELETE` performance.
 
-## 前提条件
+## Prerequisites
 
-在使用非事务 DML 语句之前，请确保满足以下条件：
+Before using non-transactional DML statements, make sure that the following conditions are met:
 
-- 语句不需要原子性，允许在执行结果中有些行被修改而有些行保持不变。
-- 语句是幂等的，或者你准备根据错误消息对部分数据进行重试。如果系统变量设置为 `tidb_redact_log = 1` 和 `tidb_nontransactional_ignore_error = 1`，则此语句必须是幂等的。否则，当语句部分失败时，无法准确定位失败的部分。
-- 要操作的数据没有其他并发写入，即同时不会被其他语句更新。否则，可能会出现漏写、错写、多次修改同一行等意外结果。
-- 语句不修改语句本身要读取的数据。否则，后续批次将读取到前一批次写入的数据，容易造成意外结果。
+- The statement does not require atomicity, which permits some rows to be modified and some rows to remain unmodified in the execution result.
+- The statement is idempotent, or you are prepared to retry on a part of the data according to the error message. If the system variables are set to `tidb_redact_log = 1` and `tidb_nontransactional_ignore_error = 1`, this statement must be idempotent. Otherwise, when the statement partially fails, the failed part cannot be accurately located.
+- The data to be operated on has no other concurrent writes, which means it is not updated by other statements at the same time. Otherwise, unexpected results such as missing writes, wrong writes, and modifying the same line multiple times might occur.
+- The statement does not modify the data to be read by the statement itself. Otherwise, the following batch will read the data written by the previous batch and easily causes unexpected results.
 
-    - 在非事务 `INSERT INTO ... SELECT` 语句中从同一个表中选择并修改时，避免修改分片列。否则，多个批次可能会读取同一行并多次插入数据：
-        - 不建议使用 `BATCH ON test.t.id LIMIT 10000 INSERT INTO t SELECT id+1, value FROM t;`
-        - 建议使用 `BATCH ON test.t.id LIMIT 10000 INSERT INTO t SELECT id, value FROM t;`
-        - 如果分片列 `id` 具有 `AUTO_INCREMENT` 属性，建议使用 `BATCH ON test.t.id LIMIT 10000 INSERT INTO t(value) SELECT value FROM t;`
-    - 避免在非事务 `UPDATE`、`INSERT ... ON DUPLICATE KEY UPDATE` 或 `REPLACE INTO` 语句中更新分片列：
-        - 例如，对于非事务 `UPDATE` 语句，拆分的 SQL 语句按顺序执行。前一批次的修改在提交后被下一批次读取，导致同一行数据被多次修改。
-        - 这些语句不支持 `BATCH ON test.t.id LIMIT 10000 UPDATE t SET test.t.id = test.t.id-1;`
-        - 不建议使用 `BATCH ON test.t.id LIMIT 1 INSERT INTO t SELECT id+1, value FROM t ON DUPLICATE KEY UPDATE id = id + 1;`
-    - 分片列不应该用作 Join 键。例如，以下示例使用分片列 `test.t.id` 作为 Join 键，导致非事务 `UPDATE` 语句多次修改同一行：
+    - Avoid modifying the shard column when you select from and modify the same table within a non-transactional `INSERT INTO ... SELECT` statement. Otherwise, multiple batches might read the same row and insert data multiple times:
+        - It is not recommended to use `BATCH ON test.t.id LIMIT 10000 INSERT INTO t SELECT id+1, value FROM t;`.
+        - It is recommended to use `BATCH ON test.t.id LIMIT 10000 INSERT INTO t SELECT id, value FROM t;`.
+        - If the shard column `id` has the `AUTO_INCREMENT` attribute, it is recommended to use `BATCH ON test.t.id LIMIT 10000 INSERT INTO t(value) SELECT value FROM t;`.
+    - Avoid updating the shard column in the non-transactional `UPDATE`, `INSERT ... ON DUPLICATE KEY UPDATE`, or `REPLACE INTO` statement:
+        - For example, for a non-transactional `UPDATE` statement, the split SQL statements are executed in sequence. The modification of the previous batch is read by the next batch after the previous batch is committed, which causes the same line of data to be modified multiple times.
+        - These statements do not support `BATCH ON test.t.id LIMIT 10000 UPDATE t SET test.t.id = test.t.id-1;`.
+        - It is not recommended to use `BATCH ON test.t.id LIMIT 1 INSERT INTO t SELECT id+1, value FROM t ON DUPLICATE KEY UPDATE id = id + 1;`.
+    - The shard column should not be used as a Join key. For example, the following example uses the shard column `test.t.id` as a Join key, which causes a non-transactional `UPDATE` statement to modify the same line multiple times:
 
         ```sql
         CREATE TABLE t(id int, v int, key(id));
@@ -64,20 +64,20 @@ summary: 了解 TiDB 中的非事务 DML 语句。通过牺牲原子性和隔离
         SELECT * FROM t2; -- (4, 1) (4, 2) (4, 4)
         ```
 
-- 语句满足[限制条件](#限制条件)。
-- 不建议对该 DML 语句要读取或写入的表执行并发 DDL 操作。
+- The statement meets the [restrictions](#restrictions).
+- It is not recommended to perform concurrent DDL operations on the table to be read or written by this DML statement.
 
-> **警告：**
+> **Warning:**
 >
-> 如果同时启用 `tidb_redact_log` 和 `tidb_nontransactional_ignore_error`，你可能无法获得每个批次的完整错误信息，也无法仅重试失败的批次。因此，如果这两个系统变量都打开，非事务 DML 语句必须是幂等的。
+> If `tidb_redact_log` and `tidb_nontransactional_ignore_error` are enabled at the same time, you might not get the complete error information of each batch, and you cannot retry the failed batch only. Therefore, if both of the system variables are turned on, the non-transactional DML statement must be idempotent.
 
-## 使用示例
+## Usage examples
 
-### 使用非事务 DML 语句
+### Use a non-transactional DML statement
 
-以下各节通过示例说明非事务 DML 语句的使用：
+The following sections describe the use of non-transactional DML statements with examples:
 
-创建一个具有以下模式的表 `t`：
+Create a table `t` with the following schema:
 
 {{< copyable "sql" >}}
 
@@ -89,7 +89,7 @@ CREATE TABLE t (id INT, v INT, KEY(id));
 Query OK, 0 rows affected
 ```
 
-向表 `t` 中插入一些数据。
+Insert some data into table `t`.
 
 {{< copyable "sql" >}}
 
@@ -101,7 +101,7 @@ INSERT INTO t VALUES (1, 2), (2, 3), (3, 4), (4, 5), (5, 6);
 Query OK, 5 rows affected
 ```
 
-以下操作使用非事务 DML 语句删除表 `t` 的列 `v` 上小于整数 6 的行。此语句被拆分为两个 SQL 语句，批次大小为 2，按 `id` 列分片并执行。
+The following operation uses a non-transactional DML statement to delete rows with values less than the integer 6 on column `v` of table `t`. This statement is split into two SQL statements, with a batch size of 2, sharded by the `id` column and executed.
 
 {{< copyable "sql" >}}
 
@@ -118,7 +118,7 @@ BATCH ON id LIMIT 2 DELETE FROM t WHERE v < 6;
 1 row in set
 ```
 
-检查上述非事务 DML 语句的删除结果。
+Check the deletion results of the above non-transactional DML statement.
 
 {{< copyable "sql" >}}
 
@@ -135,20 +135,20 @@ SELECT * FROM t;
 1 row in set
 ```
 
-以下示例说明如何使用多表连接。首先，创建表 `t2` 并插入数据：
+The following example describes how to use multiple table joins. First, create table `t2` and insert data:
 
 ```sql
 CREATE TABLE t2(id int, v int, key(id));
 INSERT INTO t2 VALUES (1,1), (3,3), (5,5);
 ```
 
-然后，通过连接表 `t` 和 `t2` 更新表 `t2` 的数据。注意需要指定分片列的完整数据库名、表名和列名（`test.t.id`）：
+Then, update the data of table `t2` by joining table `t` and `t2`. Note that you need to specify the shard column along with the complete database name, table name, and column name (`test.t.id`):
 
 ```sql
 BATCH ON test.t._tidb_rowid LIMIT 1 UPDATE t JOIN t2 ON t.id = t2.id SET t2.id = t2.id+1;
 ```
 
-查询结果：
+Query the results:
 
 ```sql
 SELECT * FROM t2;
@@ -164,9 +164,9 @@ SELECT * FROM t2;
 +----+---+
 ```
 
-### 查看执行进度
+### Check the execution progress
 
-在非事务 DML 语句执行期间，可以使用 `SHOW PROCESSLIST` 查看进度。返回结果中的 `Time` 字段表示当前批次执行的时间消耗。日志和慢日志也会记录非事务 DML 执行过程中每个拆分语句的进度。例如：
+During the execution of a non-transactional DML statement, you can view the progress using `SHOW PROCESSLIST`. The `Time` field in the returned result indicates the time consumption of the current batch execution. Logs and slow logs also record the progress of each split statement throughout the non-transactional DML execution. For example:
 
 {{< copyable "sql" >}}
 
@@ -183,17 +183,17 @@ SHOW PROCESSLIST;
 +------+------+--------------------+--------+---------+------+------------+----------------------------------------------------------------------------------------------------+
 ```
 
-### 终止非事务 DML 语句
+### Terminate a non-transactional DML statement
 
-要终止非事务 DML 语句，可以使用 `KILL TIDB <processlist_id>`。然后 TiDB 将取消当前正在执行的批次之后的所有批次。你可以从日志中获取执行结果。
+To terminate a non-transactional DML statement, you can use `KILL TIDB <processlist_id>`. Then TiDB will cancel all batches after the batch that is currently being executed. You can get the execution result from the log.
 
-有关 `KILL TIDB` 的更多信息，请参见参考 [`KILL`](/sql-statements/sql-statement-kill.md)。
+For more information about `KILL TIDB`, see the reference [`KILL`](/sql-statements/sql-statement-kill.md).
 
-### 查询批次划分语句
+### Query the batch-dividing statement
 
-在非事务 DML 语句执行期间，内部使用一个语句将 DML 语句划分为多个批次。要查询此批次划分语句，可以在此非事务 DML 语句中添加 `DRY RUN QUERY`。然后 TiDB 将不执行此查询和后续的 DML 操作。
+During the execution of a non-transactional DML statement, a statement is internally used to divide the DML statement into multiple batches. To query this batch-dividing statement, you can add `DRY RUN QUERY` to this non-transactional DML statement. Then TiDB will not execute this query and the subsequent DML operations.
 
-以下语句查询执行 `BATCH ON id LIMIT 2 DELETE FROM t WHERE v < 6` 期间的批次划分语句：
+The following statement queries the batch-dividing statement during the execution of `BATCH ON id LIMIT 2 DELETE FROM t WHERE v < 6`:
 
 {{< copyable "sql" >}}
 
@@ -210,9 +210,9 @@ BATCH ON id LIMIT 2 DRY RUN QUERY DELETE FROM t WHERE v < 6;
 1 row in set
 ```
 
-### 查询第一个和最后一个批次对应的语句
+### Query the statements corresponding to the first and the last batches
 
-要查询非事务 DML 语句中第一个和最后一个批次对应的实际 DML 语句，可以在此非事务 DML 语句中添加 `DRY RUN`。然后，TiDB 只划分批次而不执行这些 SQL 语句。由于可能有很多批次，不显示所有批次，只显示第一个和最后一个。
+To query the actual DML statements corresponding to the first and the last batches in a non-transactional DML statement, you can add `DRY RUN` to this non-transactional DML statement. Then, TiDB only divides batches and does not execute these SQL statements. Because there might be many batches, not all batches are displayed, and only the first one and the last one are displayed.
 
 {{< copyable "sql" >}}
 
@@ -230,9 +230,9 @@ BATCH ON id LIMIT 2 DRY RUN DELETE FROM t WHERE v < 6;
 2 rows in set
 ```
 
-### 使用优化器提示
+### Use the optimizer hint
 
-如果 `DELETE` 语句中原本支持优化器提示，则非事务 `DELETE` 语句中也支持优化器提示。提示的位置与普通 `DELETE` 语句中的位置相同：
+If an optimizer hint is originally supported in the `DELETE` statement, the optimizer hint is also supported in the non-transactional `DELETE` statement. The position of the hint is the same as that in the ordinary `DELETE` statement:
 
 {{< copyable "sql" >}}
 
@@ -240,97 +240,97 @@ BATCH ON id LIMIT 2 DRY RUN DELETE FROM t WHERE v < 6;
 BATCH ON id LIMIT 2 DELETE /*+ USE_INDEX(t)*/ FROM t WHERE v < 6;
 ```
 
-## 最佳实践
+## Best practices
 
-要使用非事务 DML 语句，建议按以下步骤操作：
+To use a non-transactional DML statement, the following steps are recommended:
 
-1. 选择合适的[分片列](#参数说明)。建议使用整数或字符串类型。
-2. 在非事务 DML 语句中添加 `DRY RUN QUERY`，手动执行查询，并确认 DML 语句影响的数据范围大致正确。
-3. 在非事务 DML 语句中添加 `DRY RUN`，手动执行查询，并检查拆分语句和执行计划。需要注意以下几点：
+1. Select an appropriate [shard column](#parameter-description). Integer or string types are recommended.
+2. Add `DRY RUN QUERY` to the non-transactional DML statement, execute the query manually, and confirm whether the data range affected by the DML statement is roughly correct.
+3. Add `DRY RUN` to the non-transactional DML statement, execute the query manually, and check the split statements and the execution plans. You need to pay attention to the following points:
 
-    - 拆分语句是否能读取前一条语句写入的结果，这可能会导致异常。
-    - 索引选择性。
-    - TiDB 自动选择的分片列是否会被修改。
+    - Whether the split statement can read the result written by the previous statement, which might cause an anomaly.
+    - The index selectivity.
+    - Whether the shard column automatically selected by TiDB will be modified.
 
-4. 执行非事务 DML 语句。
-5. 如果报错，从错误消息或日志中获取具体失败的数据范围，重试或手动处理。
+4. Execute the non-transactional DML statement.
+5. If an error is reported, get the specific failed data range from the error message or log, and retry or handle it manually.
 
-## 参数说明
+## Parameter description
 
-| 参数 | 说明 | 默认值 | 是否必需 | 建议值 |
+| Parameter | Description | Default value | Required or not | Recommended value |
 | :-- | :-- | :-- | :-- | :-- |
-| 分片列 | 用于分片批次的列，例如上述非事务 DML 语句 `BATCH ON id LIMIT 2 DELETE FROM t WHERE v < 6` 中的 `id` 列。 | TiDB 尝试自动选择分片列（不推荐）。 | 否 | 选择能以最高效方式满足 `WHERE` 条件的列。 |
-| 批次大小 | 用于控制每个批次的大小。批次数是 DML 操作被拆分成的 SQL 语句数，例如上述非事务 DML 语句 `BATCH ON id LIMIT 2 DELETE FROM t WHERE v < 6` 中的 `LIMIT 2`。批次越多，批次大小越小。 | 不适用 | 是 | 1000-1000000。批次太小或太大都会导致性能下降。 |
+| Shard column | The column used to shard batches, such as the `id` column in the above non-transactional DML statement `BATCH ON id LIMIT 2 DELETE FROM t WHERE v < 6`. | TiDB tries to automatically select a shard column (not recommended). | No | Select a column that can meet the `WHERE` condition in the most efficient way. |
+| Batch size | Used to control the size of each batch. The number of batches is the number of SQL statements into which DML operations are split, such as `LIMIT 2` in the above non-transactional DML statement `BATCH ON id LIMIT 2 DELETE FROM t WHERE v < 6`. The more batches, the smaller the batch size. | N/A | Yes | 1000-1000000. Too small or too large a batch will lead to performance degradation. |
 
-### 如何选择分片列
+### How to select a shard column
 
-非事务 DML 语句使用一列作为数据分批的依据，即分片列。为了提高执行效率，分片列需要使用索引。不同索引和分片列带来的执行效率可能相差几十倍。选择分片列时，请考虑以下建议：
+A non-transactional DML statement uses a column as the basis for data batching, which is the shard column. For higher execution efficiency, a shard column is required to use index. The execution efficiency brought by different indexes and shard columns might vary by dozens of times. When choosing the shard column, consider the following suggestions:
 
-- 如果你了解应用程序的数据分布，根据 `WHERE` 条件，选择分批后数据范围较小的列。
-    - 理想情况下，`WHERE` 条件可以利用分片列的索引来减少每个批次需要扫描的数据量。例如，有一个记录每个事务开始和结束时间的事务表，你想删除所有结束时间在一个月之前的事务记录。如果事务的开始时间有索引，并且事务的开始和结束时间相对接近，那么可以选择开始时间列作为分片列。
-    - 不太理想的情况是，分片列的数据分布与 `WHERE` 条件完全独立，分片列的索引不能用于减少数据扫描范围。
-- 当存在聚簇索引时，建议使用主键（包括 `INT` 主键和 `_tidb_rowid`）作为分片列，这样执行效率更高。
-- 选择重复值较少的列。
+- If you know the application data distribution, according to the `WHERE` condition, choose the column that divides data with smaller ranges after the batching.
+    - Ideally, the `WHERE` condition can take advantage of the index of the shard column to reduce the amount of data to be scanned per batch. For example, there is a transaction table that records the start and end time of each transaction, and you want to delete all transaction records whose end time is before one month. If there is an index on the start time of the transaction, and the start and end times of the transaction are relatively close, then you can choose the start time column as the shard column.
+    - In a less-than-ideal case, the data distribution of the shard column is completely independent of the `WHERE` condition, and the index of the shard column cannot be used to reduce the scope of the data scan.
+- When a clustered index exists, it is recommended to use the primary key (including an `INT` primary key and `_tidb_rowid`) as the shard column, so that the execution efficiency is higher.
+- Choose the column with fewer duplicate values.
 
-你也可以选择不指定分片列。然后，TiDB 将默认使用 `handle` 的第一列作为分片列。但如果聚簇索引的第一列是非事务 DML 语句不支持的数据类型（即 `ENUM`、`BIT`、`SET`、`JSON`），TiDB 将报错。你可以根据应用程序需求选择合适的分片列。
+You can also choose not to specify a shard column. Then, TiDB will use the first column of `handle` as the shard column by default. But if the first column of the primary key of the clustered index is of a data type not supported by non-transactional DML statements (which is `ENUM`, `BIT`, `SET`, `JSON`), TiDB will report an error. You can choose an appropriate shard column according to your application needs.
 
-### 如何设置批次大小
+### How to set batch size
 
-在非事务 DML 语句中，批次大小越大，拆分的 SQL 语句越少，每个 SQL 语句的执行速度越慢。最佳批次大小取决于工作负载。建议从 50000 开始。批次大小太小或太大都会导致执行效率降低。
+In non-transactional DML statements, the larger the batch size, the fewer SQL statements are split and the slower each SQL statement is executed. The optimal batch size depends on the workload. It is recommended to start from 50000. Either too small or too large batch sizes will cause decreased execution efficiency.
 
-每个批次的信息存储在内存中，因此太多批次会显著增加内存消耗。这就解释了为什么批次大小不能太小。非事务语句存储批次信息消耗的内存上限与 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) 相同，超过此限制时触发的操作由配置项 [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610) 决定。
+The information of each batch is stored in memory, so too many batches can significantly increase memory consumption. This explains why the batch size cannot be too small. The upper limit of memory consumed by non-transactional statements for storing batch information is the same as [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), and the action triggered when this limit is exceeded is determined by the configuration item [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610).
 
-## 限制条件
+## Restrictions
 
-以下是非事务 DML 语句的硬性限制。如果不满足这些限制，TiDB 将报错。
+The following are hard restrictions on non-transactional DML statements. If these restrictions are not met, TiDB will report an error.
 
-- DML 语句不能包含 `ORDER BY` 或 `LIMIT` 子句。
-- 不支持子查询或集合操作。
-- 分片列必须有索引。索引可以是单列索引，也可以是联合索引的第一列。
-- 必须在 [`autocommit`](/system-variables.md#autocommit) 模式下使用。
-- 启用 batch-dml 时不能使用。
-- 设置 [`tidb_snapshot`](/read-historical-data.md) 时不能使用。
-- 不能与 `prepare` 语句一起使用。
-- 不支持将 `ENUM`、`BIT`、`SET`、`JSON` 类型作为分片列。
-- 不支持[临时表](/temporary-tables.md)。
-- 不支持[公用表表达式](/develop/dev-guide-use-common-table-expression.md)。
+- The DML statements cannot contain `ORDER BY` or `LIMIT` clauses.
+- Subqueries or set operations are not supported.
+- The shard column must be indexed. The index can be a single-column index, or the first column of a joint index.
+- Must be used in the [`autocommit`](/system-variables.md#autocommit) mode.
+- Cannot be used when batch-dml is enabled.
+- Cannot be used when [`tidb_snapshot`](/read-historical-data.md) is set.
+- Cannot be used with the `prepare` statement.
+- `ENUM`, `BIT`, `SET`, `JSON` types are not supported as the shard columns.
+- Not supported for [temporary tables](/temporary-tables.md).
+- [Common Table Expression](/develop/dev-guide-use-common-table-expression.md) is not supported.
 
-## 控制批次执行失败
+## Control batch execution failure
 
-非事务 DML 语句不满足原子性。有些批次可能成功，有些可能失败。系统变量 [`tidb_nontransactional_ignore_error`](/system-variables.md#tidb_nontransactional_ignore_error-new-in-v610) 控制非事务 DML 语句如何处理错误。
+Non-transactional DML statements do not satisfy atomicity. Some batches might succeed and some might fail. The system variable [`tidb_nontransactional_ignore_error`](/system-variables.md#tidb_nontransactional_ignore_error-new-in-v610) controls how the non-transactional DML statements handle errors.
 
-一个例外是，如果第一个批次失败，很可能是语句本身有错误。在这种情况下，整个非事务语句将直接返回错误。
+An exception is that if the first batch fails, there is a high probability that the statement itself is wrong. In this case, the entire non-transactional statement will directly return an error.
 
-## 工作原理
+## How it works
 
-非事务 DML 语句的工作原理是将 SQL 语句的自动拆分构建到 TiDB 中。如果没有非事务 DML 语句，你需要手动拆分 SQL 语句。要理解非事务 DML 语句的行为，可以将其视为执行以下任务的用户脚本：
+The working principle of non-transactional DML statements is to build into TiDB the automatic splitting of SQL statements. Without non-transactional DML statements, you will need to manually split the SQL statements. To understand the behavior of a non-transactional DML statement, think of it as a user script doing the following tasks:
 
-对于非事务 DML `BATCH ON $C$ LIMIT $N$ DELETE FROM ... WHERE $P$`，$C$ 是用于划分的列，$N$ 是批次大小，$P$ 是过滤条件。
+For the non-transactional DML `BATCH ON $C$ LIMIT $N$ DELETE FROM ... WHERE $P$`, $C$ is the column used for dividing, $N$ is the batch size, and $P$ is the filter condition.
 
-1. 根据原始语句的过滤条件 $P$ 和指定的划分列 $C$，TiDB 查询所有满足 $P$ 的 $C$。TiDB 根据 $N$ 将这些 $C$ 分组为 $B_1 \dots B_k$。对于所有 $B_i$，TiDB 保留其第一个和最后一个 $C$ 作为 $S_i$ 和 $E_i$。可以通过 [`DRY RUN QUERY`](/non-transactional-dml.md#查询批次划分语句) 查看此步骤执行的查询语句。
-2. $B_i$ 涉及的数据是满足 $P_i$ 的子集：$C$ BETWEEN $S_i$ AND $E_i$。你可以使用 $P_i$ 缩小每个批次需要处理的数据范围。
-3. 对于 $B_i$，TiDB 将上述条件嵌入原始语句的 `WHERE` 条件中，使其成为 WHERE ($P_i$) AND ($P$)。可以通过 [`DRY RUN`](/non-transactional-dml.md#查询第一个和最后一个批次对应的语句) 查看此步骤的执行结果。
-4. 对于所有批次，按顺序执行新语句。收集并组合每个分组的错误，在所有分组完成后作为整个非事务 DML 语句的结果返回。
+1. According to the filter condition $P$ of the original statement and the specified column $C$ for dividing, TiDB queries all $C$ that satisfy $P$. TiDB sorts these $C$ into groups $B_1 \dots B_k$ according to $N$. For each of all $B_i$, TiDB keeps its first and last $C$ as $S_i$ and $E_i$. The query statement executed in this step can be viewed through [`DRY RUN QUERY`](/non-transactional-dml.md#query-the-batch-dividing-statement).
+2. The data involved in $B_i$ is a subset that satisfies $P_i$: $C$ BETWEEN $S_i$ AND $E_i$. You can use $P_i$ to narrow down the range of data that each batch needs to process.
+3. For $B_i$, TiDB embeds the above condition into the `WHERE` condition of the original statement, which makes it WHERE ($P_i$) AND ($P$). The execution result of this step can be viewed through [`DRY RUN`](/non-transactional-dml.md#query-the-statements-corresponding-to-the-first-and-the-last-batches).
+4. For all batches, execute new statements in sequence. The errors for each grouping are collected and combined, and returned as the result of the entire non-transactional DML statement after all groupings are complete.
 
-## 与 batch-dml 的比较
+## Comparison with batch-dml
 
-batch-dml 是在执行 DML 语句期间将事务拆分为多个事务提交的机制。
+batch-dml is a mechanism for splitting a transaction into multiple transaction commits during the execution of a DML statement.
 
-> **注意：**
+> **Note:**
 >
-> 不建议使用已弃用的 batch-dml。当 batch-dml 功能使用不当时，存在数据索引不一致的风险。
+> It is not recommended to use batch-dml which has been deprecated. When the batch-dml feature is not properly used, there is a risk of data index inconsistency.
 
-非事务 DML 语句尚未替代所有 batch-dml 使用场景。它们的主要区别如下：
+Non-transactional DML statements are not yet a replacement for all batch-dml usage scenarios. Their main differences are as follows:
 
-- 性能：当[分片列](#如何选择分片列)高效时，非事务 DML 语句的性能接近 batch-dml。当分片列效率较低时，非事务 DML 语句的性能显著低于 batch-dml。
+- Performance: When the [shard column](#how-to-select-a-shard-column) is efficient, the performance of non-transactional DML statements is close to that of batch-dml. When the shard column is less efficient, the performance of non-transactional DML statements is significantly lower than that of batch-dml.
 
-- 稳定性：batch-dml 由于使用不当容易导致数据索引不一致。非事务 DML 语句不会导致数据索引不一致。但是，当使用不当时，非事务 DML 语句与原始语句不等价，应用程序可能会观察到意外行为。详见[常见问题部分](#非事务-delete-有不等价于普通-delete-的异常行为)。
+- Stability: batch-dml is prone to data index inconsistencies due to improper use. Non-transactional DML statements do not cause data index inconsistencies. However, when used improperly, non-transactional DML statements are not equivalent to the original statements, and the applications might observe unexpected behavior. See the [common issues section](#non-transactional-delete-has-exceptional-behavior-that-is-not-equivalent-to-ordinary-delete) for details.
 
-## 常见问题
+## Common issues
 
-### 执行多表连接语句时出现 `Unknown column xxx in 'where clause'` 错误
+### Executing a multiple table joins statement results in the `Unknown column xxx in 'where clause'` error
 
-当 `WHERE` 子句中连接的查询涉及除[分片列](#参数说明)定义表之外的其他表时，会出现此错误。例如，在以下 SQL 语句中，分片列是 `t2.id` 并在表 `t2` 中定义，但 `WHERE` 子句涉及表 `t2` 和 `t3`。
+This error occurs when the `WHERE` clause concatenated in a query involves tables other than the table in which the [shard column](#parameter-description) is defined. For example, in the following SQL statement, the shard column is `t2.id` and it is defined in table `t2`, but the `WHERE` clause involves table `t2` and `t3`.
 
 ```sql
 BATCH ON test.t2.id LIMIT 1 
@@ -342,7 +342,7 @@ SELECT t2.id, t2.v, t3.id FROM t2, t3 WHERE t2.id = t3.id
 (1054, "Unknown column 't3.id' in 'where clause'")
 ```
 
-如果出现错误，可以使用 `DRY RUN QUERY` 打印查询语句进行确认。例如：
+If the error occurs, you can print the query statement for confirmation by using `DRY RUN QUERY`. For example:
 
 ```sql
 BATCH ON test.t2.id LIMIT 1 
@@ -350,7 +350,7 @@ DRY RUN QUERY INSERT INTO t
 SELECT t2.id, t2.v, t3.id FROM t2, t3 WHERE t2.id = t3.id
 ```
 
-要避免错误，可以将 `WHERE` 子句中与其他表相关的条件移到 `JOIN` 子句的 `ON` 条件中。例如：
+To avoid the error, you can move the condition related to other tables in the `WHERE` clause to the `ON` condition in the `JOIN` clause. For example:
 
 ```sql
 BATCH ON test.t2.id LIMIT 1 
@@ -366,44 +366,44 @@ SELECT t2.id, t2.v, t3.id FROM t2 JOIN t3 ON t2.id = t3.id
 +----------------+---------------+
 ```
 
-### 实际批次大小与指定的批次大小不同
+### The actual batch size is not the same as the specified batch size
 
-在非事务 DML 语句执行期间，最后一个批次要处理的数据大小可能小于指定的批次大小。
+During the execution of a non-transactional DML statement, the size of data to be processed in the last batch might be smaller than the specified batch size.
 
-当**分片列中存在重复值**时，每个批次将包含该批次中分片列最后一个元素的所有重复值。因此，此批次中的行数可能大于指定的批次大小。
+When **duplicated values exist in the shard column**, each batch will contain all the duplicated values of the last element of the shard column in this batch. Therefore, the number of rows in this batch might be greater than the specified batch size.
 
-此外，当发生其他并发写入时，每个批次处理的行数可能与指定的批次大小不同。
+In addition, when other concurrent writes occur, the number of rows processed in each batch might be different from the specified batch size.
 
-### 执行时出现 `Failed to restore the delete statement, probably because of unsupported type of the shard column` 错误
+### The `Failed to restore the delete statement, probably because of unsupported type of the shard column` error occurs during execution
 
-分片列不支持 `ENUM`、`BIT`、`SET`、`JSON` 类型。尝试指定新的分片列。建议使用整数或字符串类型列。
+The shard column does not support `ENUM`, `BIT`, `SET`, `JSON` types. Try to specify a new shard column. It is recommended to use an integer or string type column.
 
 <CustomContent platform="tidb">
 
-如果在选择的分片列不是这些不支持的类型时出现错误，请从 PingCAP 或社区[获取支持](/support.md)。
+If the error occurs when the selected shard column is not one of these unsupported types, [get support](/support.md) from PingCAP or the community.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-如果在选择的分片列不是这些不支持的类型时出现错误，请[联系 TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。
+If the error occurs when the selected shard column is not one of these unsupported types, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 
-### 非事务 `DELETE` 有不等价于普通 `DELETE` 的异常行为
+### Non-transactional `DELETE` has "exceptional" behavior that is not equivalent to ordinary `DELETE`
 
-非事务 DML 语句与此 DML 语句的原始形式不等价，可能有以下原因：
+A non-transactional DML statement is not equivalent to the original form of this DML statement, which might have the following reasons:
 
-- 存在其他并发写入。
-- 非事务 DML 语句修改了语句本身将要读取的值。
-- 每个批次执行的 SQL 语句可能因为 `WHERE` 条件改变而导致不同的执行计划和表达式计算顺序。因此，执行结果可能与原始语句不同。
-- DML 语句包含非确定性操作。
+- There are other concurrent writes.
+- The non-transactional DML statement modifies a value that the statement itself will read.
+- The SQL statement executed in each batch might cause a different execution plan and expression calculation order because the `WHERE` condition is changed. Therefore, the execution result might be different from the original statement.
+- The DML statements contain non-deterministic operations.
 
-## MySQL 兼容性
+## MySQL compatibility
 
-非事务语句是 TiDB 特有的，与 MySQL 不兼容。
+Non-transactional statements are TiDB-specific and are not compatible with MySQL.
 
-## 另请参阅
+## See also
 
-* [`BATCH`](/sql-statements/sql-statement-batch.md) 语法
+* The [`BATCH`](/sql-statements/sql-statement-batch.md) syntax
 * [`tidb_nontransactional_ignore_error`](/system-variables.md#tidb_nontransactional_ignore_error-new-in-v610)

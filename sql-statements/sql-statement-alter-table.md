@@ -1,17 +1,17 @@
 ---
-title: ALTER TABLE | TiDB SQL 语句参考
-summary: TiDB 数据库中 ALTER TABLE 的使用概览。
+title: ALTER TABLE | TiDB SQL Statement Reference
+summary: An overview of the usage of ALTER TABLE for the TiDB database.
 ---
 
 # ALTER TABLE
 
-此语句修改现有表以符合新的表结构。`ALTER TABLE` 语句可用于：
+This statement modifies an existing table to conform to a new table structure. The statement `ALTER TABLE` can be used to:
 
-- [`ADD`](/sql-statements/sql-statement-add-index.md)、[`DROP`](/sql-statements/sql-statement-drop-index.md) 或 [`RENAME`](/sql-statements/sql-statement-rename-index.md) 索引
-- [`ADD`](/sql-statements/sql-statement-add-column.md)、[`DROP`](/sql-statements/sql-statement-drop-column.md)、[`MODIFY`](/sql-statements/sql-statement-modify-column.md) 或 [`CHANGE`](/sql-statements/sql-statement-change-column.md) 列
-- [`COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) 表数据
+- [`ADD`](/sql-statements/sql-statement-add-index.md), [`DROP`](/sql-statements/sql-statement-drop-index.md), or [`RENAME`](/sql-statements/sql-statement-rename-index.md) indexes
+- [`ADD`](/sql-statements/sql-statement-add-column.md), [`DROP`](/sql-statements/sql-statement-drop-column.md), [`MODIFY`](/sql-statements/sql-statement-modify-column.md) or [`CHANGE`](/sql-statements/sql-statement-change-column.md) columns
+- [`COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) table data
 
-## 语法
+## Synopsis
 
 ```ebnf+diagram
 AlterTableStmt ::=
@@ -31,7 +31,7 @@ AlterTableSpec ::=
 |   'ADD' ( ColumnKeywordOpt IfNotExists ( ColumnDef ColumnPosition | '(' TableElementList ')' ) | Constraint | 'PARTITION' IfNotExists NoWriteToBinLogAliasOpt ( PartitionDefinitionListOpt | 'PARTITIONS' NUM ) )
 |   ( ( 'CHECK' | 'TRUNCATE' ) 'PARTITION' | ( 'OPTIMIZE' | 'REPAIR' | 'REBUILD' ) 'PARTITION' NoWriteToBinLogAliasOpt ) AllOrPartitionNameList
 |   'COALESCE' 'PARTITION' NoWriteToBinLogAliasOpt NUM
-|   'DROP' ( ColumnKeywordOpt IfExists ColumnName RestrictOrCascadeOpt | 'PRIMARY' 'KEY' |  'PARTITION' IfExists PartitionNameList | ( KeyOrIndex IfExists | 'CHECK' ) Identifier | 'FOREIGN' 'KEY' IfExists Symbol )
+|   'DROP' ( ColumnKeywordOpt IfExists ColumnName RestrictOrCascadeOpt | 'PRIMARY' 'KEY' |  'PARTITION' IfExists PartitionNameList | ( KeyOrIndex IfExists | 'CHECK' ) Identifier | 'FOREIGN' 'KEY' Symbol )
 |   'EXCHANGE' 'PARTITION' Identifier 'WITH' 'TABLE' TableName WithValidationOpt
 |   ( 'IMPORT' | 'DISCARD' ) ( 'PARTITION' AllOrPartitionNameList )? 'TABLESPACE'
 |   'REORGANIZE' 'PARTITION' NoWriteToBinLogAliasOpt ReorganizePartitionRuleOpt
@@ -61,9 +61,9 @@ PlacementPolicyOption ::=
 |   "PLACEMENT" "POLICY" (EqOpt | "SET") "DEFAULT"
 ```
 
-## 示例
+## Examples
 
-创建一个包含一些初始数据的表：
+Create a table with some initial data:
 
 {{< copyable "sql" >}}
 
@@ -79,7 +79,7 @@ Query OK, 5 rows affected (0.03 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 ```
 
-由于列 c1 没有索引，以下查询需要进行全表扫描：
+The following query requires a full table scan because the column c1 is not indexed:
 
 {{< copyable "sql" >}}
 
@@ -98,7 +98,7 @@ EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 3 rows in set (0.00 sec)
 ```
 
-可以使用 [`ALTER TABLE .. ADD INDEX`](/sql-statements/sql-statement-add-index.md) 语句在表 t1 上添加索引。`EXPLAIN` 确认原始查询现在使用索引范围扫描，这更有效率：
+The statement [`ALTER TABLE .. ADD INDEX`](/sql-statements/sql-statement-add-index.md) can be used to add an index on the table t1. `EXPLAIN` confirms that the original query now uses an index range scan, which is more efficient:
 
 {{< copyable "sql" >}}
 
@@ -119,7 +119,7 @@ Query OK, 0 rows affected (0.30 sec)
 2 rows in set (0.00 sec)
 ```
 
-TiDB 支持断言 DDL 更改使用特定的 `ALTER` 算法。请注意，这只是一个断言，不会改变实际用于修改表的算法：
+TiDB supports the ability to assert that DDL changes use a particular `ALTER` algorithm. Note that this is only an assertion, and does not change the actual algorithm used to modify the table:
 
 {{< copyable "sql" >}}
 
@@ -131,7 +131,7 @@ ALTER TABLE t1 DROP INDEX c1, ALGORITHM=INSTANT;
 Query OK, 0 rows affected (0.24 sec)
 ```
 
-在需要 `INPLACE` 算法的操作上使用 `ALGORITHM=INSTANT` 断言会导致语句错误：
+Using the `ALGORITHM=INSTANT` assertion on an operation that requires the `INPLACE` algorithm results in a statement error:
 
 {{< copyable "sql" >}}
 
@@ -143,7 +143,7 @@ ALTER TABLE t1 ADD INDEX (c1), ALGORITHM=INSTANT;
 ERROR 1846 (0A000): ALGORITHM=INSTANT is not supported. Reason: Cannot alter table by INSTANT. Try ALGORITHM=INPLACE.
 ```
 
-但是，对于 `INPLACE` 操作使用 `ALGORITHM=COPY` 断言会生成警告而不是错误。这是因为 TiDB 将断言解释为_此算法或更好的算法_。这种行为差异对于 MySQL 兼容性很有用，因为 TiDB 使用的算法可能与 MySQL 不同：
+However, using the `ALGORITHM=COPY` assertion for an `INPLACE` operation generates a warning instead of an error. This is because TiDB interprets the assertion as _this algorithm or better_. This behavior difference is useful for MySQL compatibility because the algorithm TiDB uses might differ from MySQL:
 
 {{< copyable "sql" >}}
 
@@ -163,33 +163,33 @@ Query OK, 0 rows affected, 1 warning (0.25 sec)
 1 row in set (0.00 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-TiDB 中的 `ALTER TABLE` 有以下主要限制：
+The following major restrictions apply to `ALTER TABLE` in TiDB:
 
-- 在单个 `ALTER TABLE` 语句中修改多个 schema 对象时：
+- When altering multiple schema objects in a single `ALTER TABLE` statement:
 
-    - 不支持在多个更改中修改同一对象。
-    - TiDB 在**执行前**根据表 schema 验证语句。例如，执行 `ALTER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT AFTER c1;` 时会返回错误，因为表中不存在列 `c1`。
-    - 对于 `ALTER TABLE` 语句，TiDB 的执行顺序是从左到右一个接一个地执行更改，这在某些情况下与 MySQL 不兼容。
+    - Modifying the same object in multiple changes is not supported.
+    - TiDB validates statements according to the table schema **before execution**. For example, an error returns when `ALTER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT AFTER c1;` is executed because column `c1` does not exist in the table.
+    - For an `ALTER TABLE` statement, the order of execution in TiDB is one change after another from left to right, which is incompatible with MySQL in some cases.
 
-- 不支持对主键列进行 [Reorg-Data](/sql-statements/sql-statement-modify-column.md#reorg-data-change) 类型的更改。
+- Changes of the [Reorg-Data](/sql-statements/sql-statement-modify-column.md#reorg-data-change) types on primary key columns are not supported.
 
-- 不支持对分区表进行列类型更改。
+- Changes of column types on partitioned tables are not supported.
 
-- 不支持对生成列进行列类型更改。
+- Changes of column types on generated columns are not supported.
 
-- 由于 TiDB 和 MySQL 之间 `CAST` 函数行为的兼容性问题，不支持某些数据类型的更改（例如，某些 TIME、Bit、Set、Enum 和 JSON 类型）。
+- Changes of some data types (for example, some TIME, Bit, Set, Enum, and JSON types) are not supported due to the compatibility issues of the `CAST` function's behavior between TiDB and MySQL.
 
-- 不支持空间数据类型。
+- Spatial data types are not supported.
 
-- `ALTER TABLE t CACHE | NOCACHE` 是 TiDB 对 MySQL 语法的扩展。详情请参见[缓存表](/cached-tables.md)。
+- `ALTER TABLE t CACHE | NOCACHE` is a TiDB extension to MySQL syntax. For details, see [Cached Tables](/cached-tables.md).
 
-有关更多限制，请参见 [MySQL 兼容性](/mysql-compatibility.md#ddl-operations)。
+For further restrictions, see [MySQL Compatibility](/mysql-compatibility.md#ddl-operations).
 
-## 另请参阅
+## See also
 
-- [MySQL 兼容性](/mysql-compatibility.md#ddl-operations)
+- [MySQL Compatibility](/mysql-compatibility.md#ddl-operations)
 - [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
 - [DROP COLUMN](/sql-statements/sql-statement-drop-column.md)
 - [ADD INDEX](/sql-statements/sql-statement-add-index.md)

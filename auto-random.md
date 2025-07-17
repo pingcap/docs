@@ -1,27 +1,27 @@
 ---
 title: AUTO_RANDOM
-summary: 了解 AUTO_RANDOM 属性。
+summary: Learn the AUTO_RANDOM attribute.
 ---
 
-# AUTO_RANDOM <span class="version-mark">v3.1.0 新功能</span>
+# AUTO_RANDOM <span class="version-mark">New in v3.1.0</span>
 
-## 使用场景
+## User scenario
 
-由于 `AUTO_RANDOM` 的值是随机且唯一的，`AUTO_RANDOM` 通常用于替代 [`AUTO_INCREMENT`](/auto-increment.md)，以避免 TiDB 分配连续 ID 导致单个存储节点出现写入热点。如果当前 `AUTO_INCREMENT` 列是主键且类型为 `BIGINT`，你可以执行 `ALTER TABLE t MODIFY COLUMN id BIGINT AUTO_RANDOM(5);` 语句将其从 `AUTO_INCREMENT` 切换为 `AUTO_RANDOM`。
+Since the value of `AUTO_RANDOM` is random and unique, `AUTO_RANDOM` is often used in place of [`AUTO_INCREMENT`](/auto-increment.md) to avoid write hotspot in a single storage node caused by TiDB assigning consecutive IDs. If the current `AUTO_INCREMENT` column is a primary key and the type is `BIGINT`, you can execute the `ALTER TABLE t MODIFY COLUMN id BIGINT AUTO_RANDOM(5);` statement to switch from `AUTO_INCREMENT` to `AUTO_RANDOM`.
 
 <CustomContent platform="tidb">
 
-有关如何在 TiDB 中处理高并发写入工作负载的更多信息，请参见[高并发写入最佳实践](/best-practices/high-concurrency-best-practices.md)。
+For more information about how to handle highly concurrent write-heavy workloads in TiDB, see [Best Practices for High-Concurrency Writes](/best-practices/high-concurrency-best-practices.md).
 
 </CustomContent>
 
-[CREATE TABLE](/sql-statements/sql-statement-create-table.md) 语句中的 `AUTO_RANDOM_BASE` 参数用于设置 `auto_random` 的初始增量部分值。此选项可以视为内部接口的一部分。你可以忽略此参数。
+The `AUTO_RANDOM_BASE` parameter in the [CREATE TABLE](/sql-statements/sql-statement-create-table.md) statement is used to set the initial incremental part value of `auto_random`. This option can be considered as a part of the internal interface. You can ignore this parameter.
 
-## 基本概念
+## Basic concepts
 
-`AUTO_RANDOM` 是一个用于自动为 `BIGINT` 列分配值的列属性。自动分配的值是**随机**且**唯一**的。
+`AUTO_RANDOM` is a column attribute that is used to automatically assign values to a `BIGINT` column. Values assigned automatically are **random** and **unique**.
 
-要创建带有 `AUTO_RANDOM` 列的表，你可以使用以下语句。`AUTO_RANDOM` 列必须包含在主键中，且 `AUTO_RANDOM` 列是主键中的第一列。
+To create a table with an `AUTO_RANDOM` column, you can use the following statements. The `AUTO_RANDOM` column must be included in a primary key, and the `AUTO_RANDOM` column is the first column in the primary key.
 
 ```sql
 CREATE TABLE t (a BIGINT AUTO_RANDOM, b VARCHAR(255), PRIMARY KEY (a));
@@ -31,7 +31,7 @@ CREATE TABLE t (a BIGINT AUTO_RANDOM(5, 54), b VARCHAR(255), PRIMARY KEY (a));
 CREATE TABLE t (a BIGINT AUTO_RANDOM(5, 54), b VARCHAR(255), PRIMARY KEY (a, b));
 ```
 
-你可以将关键字 `AUTO_RANDOM` 包装在可执行注释中。有关更多详细信息，请参考 [TiDB 特定注释语法](/comment-syntax.md#tidb-specific-comment-syntax)。
+You can wrap the keyword `AUTO_RANDOM` in an executable comment. For more details, refer to [TiDB specific comment syntax](/comment-syntax.md#tidb-specific-comment-syntax).
 
 ```sql
 CREATE TABLE t (a bigint /*T![auto_rand] AUTO_RANDOM */, b VARCHAR(255), PRIMARY KEY (a));
@@ -40,10 +40,10 @@ CREATE TABLE t (a BIGINT /*T![auto_rand] AUTO_RANDOM(6) */, b VARCHAR(255), PRIM
 CREATE TABLE t (a BIGINT  /*T![auto_rand] AUTO_RANDOM(5, 54) */, b VARCHAR(255), PRIMARY KEY (a));
 ```
 
-当你执行 `INSERT` 语句时：
+When you execute an `INSERT` statement:
 
-- 如果你显式指定 `AUTO_RANDOM` 列的值，它将按原样插入表中。
-- 如果你未显式指定 `AUTO_RANDOM` 列的值，TiDB 将生成一个随机值并将其插入表中。
+- If you explicitly specify the value of the `AUTO_RANDOM` column, it is inserted into the table as is.
+- If you do not explicitly specify the value of the `AUTO_RANDOM` column, TiDB generates a random value and inserts it into the table.
 
 ```sql
 tidb> CREATE TABLE t (a BIGINT PRIMARY KEY AUTO_RANDOM, b VARCHAR(255)) /*T! PRE_SPLIT_REGIONS=2 */ ;
@@ -81,7 +81,7 @@ tidb> SHOW CREATE TABLE t;
 | Table | Create Table                                                                                                                                                                                                                                                    |
 +-------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | t     | CREATE TABLE `t` (
-  `a` bigint(20) NOT NULL /*T![auto_rand] AUTO_RANDOM(5) */,
+  `a` bigint NOT NULL /*T![auto_rand] AUTO_RANDOM(5) */,
   `b` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`a`) /*T![clustered_index] CLUSTERED */
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin /*T! PRE_SPLIT_REGIONS=2 */ |
@@ -100,55 +100,55 @@ tidb> SHOW TABLE t REGIONS;
 4 rows in set (0.00 sec)
 ```
 
-TiDB 自动分配的 `AUTO_RANDOM(S, R)` 列值总共有 64 位：
+The `AUTO_RANDOM(S, R)` column value automatically assigned by TiDB has a total of 64 bits:
 
-- `S` 是分片位数。值范围从 `1` 到 `15`。默认值为 `5`。
-- `R` 是自动分配范围的总长度。值范围从 `32` 到 `64`。默认值为 `64`。
+- `S` is the number of shard bits. The value ranges from `1` to `15`. The default value is `5`.
+- `R` is the total length of the automatic allocation range. The value ranges from `32` to `64`. The default value is `64`.
 
-带有符号位的 `AUTO_RANDOM` 值的结构如下：
+The structure of an `AUTO_RANDOM` value with a signed bit is as follows:
 
-| 符号位 | 保留位 | 分片位 | 自增位 |
+| Signed bit | Reserved bits | Shard bits | Auto-increment bits |
 |---------|-------------|--------|--------------|
-| 1 位 | `64-R` 位 | `S` 位 | `R-1-S` 位 |
+| 1 bit | `64-R` bits | `S` bits | `R-1-S` bits |
 
-不带符号位的 `AUTO_RANDOM` 值的结构如下：
+The structure of an `AUTO_RANDOM` value without a signed bit is as follows:
 
-| 保留位 | 分片位 | 自增位 |
+| Reserved bits | Shard bits | Auto-increment bits |
 |-------------|--------|--------------|
-| `64-R` 位 | `S` 位 | `R-S` 位 |
+| `64-R` bits | `S` bits | `R-S` bits |
 
-- 值是否有符号位取决于相应列是否有 `UNSIGNED` 属性。
-- 符号位的长度由是否存在 `UNSIGNED` 属性决定。如果有 `UNSIGNED` 属性，长度为 `0`。否则，长度为 `1`。
-- 保留位的长度为 `64-R`。保留位始终为 `0`。
-- 分片位的内容是通过计算当前事务开始时间的哈希值获得的。要使用不同长度的分片位（例如 10），可以在创建表时指定 `AUTO_RANDOM(10)`。
-- 自增位的值存储在存储引擎中并按顺序分配。每次分配新值时，该值增加 1。自增位确保 `AUTO_RANDOM` 的值在全局范围内是唯一的。当自增位用尽时，再次分配值时会报错 `Failed to read auto-increment value from storage engine`。
-- 值范围：最终生成值的最大位数 = 分片位 + 自增位。有符号列的范围是 `[-(2^(R-1))+1, (2^(R-1))-1]`，无符号列的范围是 `[0, (2^R)-1]`。
-- 你可以将 `AUTO_RANDOM` 与 `PRE_SPLIT_REGIONS` 一起使用。当表创建成功时，`PRE_SPLIT_REGIONS` 会将表中的数据预先分割为 `2^(PRE_SPLIT_REGIONS)` 个 Region。
+- Whether a value has a signed bit depends on whether the corresponding column has the `UNSIGNED` attribute.
+- The length of the sign bit is determined by the existence of an `UNSIGNED` attribute. If there is an `UNSIGNED` attribute, the length is `0`. Otherwise, the length is `1`.
+- The length of the reserved bits is `64-R`. The reserved bits are always `0`.
+- The content of the shard bits is obtained by calculating the hash value of the starting time of the current transaction. To use a different length of shard bits (such as 10), you can specify `AUTO_RANDOM(10)` when creating the table.
+- The value of the auto-increment bits is stored in the storage engine and allocated sequentially. Each time a new value is allocated, the value is incremented by 1. The auto-increment bits ensure that the values of `AUTO_RANDOM` are unique globally. When the auto-increment bits are exhausted, an error `Failed to read auto-increment value from storage engine` is reported when the value is allocated again.
+- Value range: the maximum number of bits for the final generated value = shard bits + auto-increment bits. The range of a signed column is `[-(2^(R-1))+1, (2^(R-1))-1]`, and the range of an unsigned column is `[0, (2^R)-1]`.
+- You can use `AUTO_RANDOM` with `PRE_SPLIT_REGIONS`. When a table is created successfully, `PRE_SPLIT_REGIONS` pre-splits data in the table into the number of Regions as specified by `2^(PRE_SPLIT_REGIONS)`.
 
-> **注意：**
+> **Note:**
 >
-> 分片位（`S`）的选择：
+> Selection of shard bits (`S`):
 >
-> - 由于总共有 64 个可用位，分片位长度会影响自增位长度。也就是说，随着分片位长度的增加，自增位长度会减少，反之亦然。因此，你需要平衡分配值的随机性和可用空间。
-> - 最佳实践是将分片位设置为 `log(2, x)`，其中 `x` 是当前存储引擎的数量。例如，如果 TiDB 集群中有 16 个 TiKV 节点，你可以将分片位设置为 `log(2, 16)`，即 `4`。在所有 Region 均匀调度到每个 TiKV 节点后，批量写入的负载可以均匀分布到不同的 TiKV 节点，以最大化资源利用率。
+> - Since there is a total of 64 available bits, the shard bits length affects the auto-increment bits length. That is, as the shard bits length increases, the length of auto-increment bits decreases, and vice versa. Therefore, you need to balance the randomness of allocated values and available space.
+> - The best practice is to set the shard bits as `log(2, x)`, in which `x` is the current number of storage engines. For example, if there are 16 TiKV nodes in a TiDB cluster, you can set the shard bits as `log(2, 16)`, that is `4`. After all regions are evenly scheduled to each TiKV node, the load of bulk writes can be uniformly distributed to different TiKV nodes to maximize resource utilization.
 >
-> 范围（`R`）的选择：
+> Selection of range (`R`):
 >
-> - 通常，当应用程序的数值类型无法表示完整的 64 位整数时，需要设置 `R` 参数。
-> - 例如，JSON 数字的范围是 `[-(2^53)+1, (2^53)-1]`。TiDB 可以轻松地为定义为 `AUTO_RANDOM(5)` 的列分配超出此范围的整数，导致应用程序读取该列时出现意外行为。在这种情况下，你可以将有符号列的 `AUTO_RANDOM(5)` 替换为 `AUTO_RANDOM(5, 54)`，将无符号列的 `AUTO_RANDOM(5)` 替换为 `AUTO_RANDOM(5, 53)`，确保 TiDB 不会为该列分配大于 `9007199254740991`（2^53-1）的整数。
+> - Typically, the `R` parameter needs to be set when the numeric type of the application cannot represent a full 64-bit integer.
+> - For example, the range of JSON number is `[-(2^53)+1, (2^53)-1]`. TiDB can easily assign an integer beyond this range to a column defined as `AUTO_RANDOM(5)`, causing unexpected behaviors when the application reads the column. In such cases, you can replace `AUTO_RANDOM(5)` with `AUTO_RANDOM(5, 54)` for signed columns, and replace `AUTO_RANDOM(5)` with `AUTO_RANDOM(5, 53)` for unsigned columns, ensuring that TiDB does not assign integers greater than `9007199254740991` (2^53-1) to the column.
 
-隐式分配给 `AUTO_RANDOM` 列的值会影响 `last_insert_id()`。要获取 TiDB 最后隐式分配的 ID，你可以使用 `SELECT last_insert_id ()` 语句。
+Values allocated implicitly to the `AUTO_RANDOM` column affect `last_insert_id()`. To get the ID that TiDB last implicitly allocates, you can use the `SELECT last_insert_id ()` statement.
 
-要查看带有 `AUTO_RANDOM` 列的表的分片位数，你可以执行 `SHOW CREATE TABLE` 语句。你还可以在 `information_schema.tables` 系统表的 `TIDB_ROW_ID_SHARDING_INFO` 列中看到 `PK_AUTO_RANDOM_BITS=x` 模式的值。`x` 是分片位数。
+To view the shard bits number of the table with an `AUTO_RANDOM` column, you can execute the `SHOW CREATE TABLE` statement. You can also see the value of the `PK_AUTO_RANDOM_BITS=x` mode in the `TIDB_ROW_ID_SHARDING_INFO` column in the `information_schema.tables` system table. `x` is the number of shard bits.
 
-创建带有 `AUTO_RANDOM` 列的表后，你可以使用 `SHOW WARNINGS` 查看最大隐式分配次数：
+After creating a table with an `AUTO_RANDOM` column, you can use `SHOW WARNINGS` to view the maximum implicit allocation times:
 
 ```sql
 CREATE TABLE t (a BIGINT AUTO_RANDOM, b VARCHAR(255), PRIMARY KEY (a));
 SHOW WARNINGS;
 ```
 
-输出如下：
+The output is as follows:
 
 ```sql
 +-------+------+---------------------------------------------------------+
@@ -159,19 +159,55 @@ SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-## ID 的隐式分配规则
+## Implicit allocation rules of IDs
 
-TiDB 对 `AUTO_RANDOM` 列的隐式分配值与 `AUTO_INCREMENT` 列类似。它们也受会话级系统变量 [`auto_increment_increment`](/system-variables.md#auto_increment_increment) 和 [`auto_increment_offset`](/system-variables.md#auto_increment_offset) 的控制。隐式分配值的自增位（ID）符合方程 `(ID - auto_increment_offset) % auto_increment_increment == 0`。
+TiDB implicitly allocates values to `AUTO_RANDOM` columns similarly to `AUTO_INCREMENT` columns. They are also controlled by the session-level system variables [`auto_increment_increment`](/system-variables.md#auto_increment_increment) and [`auto_increment_offset`](/system-variables.md#auto_increment_offset). The auto-increment bits (ID) of implicitly allocated values conform to the equation `(ID - auto_increment_offset) % auto_increment_increment == 0`.
 
-## 限制
+## Clear the auto-increment ID cache
 
-使用 `AUTO_RANDOM` 时请注意以下限制：
+When you insert data with explicit values into an `AUTO_RANDOM` column in a deployment with multiple TiDB server instances, potential ID collisions can occur, similar to an `AUTO_INCREMENT` column. If explicit inserts happen to use ID values that conflict with the internal counter TiDB uses for automatic generation, this can lead to errors. 
 
-- 要显式插入值，你需要将 `@@allow_auto_random_explicit_insert` 系统变量的值设置为 `1`（默认为 `0`）。**不建议**在插入数据时显式指定具有 `AUTO_RANDOM` 属性的列的值。否则，此表可自动分配的数值可能会提前用尽。
-- 仅为 `BIGINT` 类型的主键列指定此属性。否则，会出现错误。此外，当主键的属性为 `NONCLUSTERED` 时，即使在整数主键上也不支持 `AUTO_RANDOM`。有关 `CLUSTERED` 类型的主键的更多详细信息，请参考[聚簇索引](/clustered-indexes.md)。
-- 你不能使用 `ALTER TABLE` 修改 `AUTO_RANDOM` 属性，包括添加或删除此属性。
-- 如果最大值接近列类型的最大值，则不能使用 `ALTER TABLE` 从 `AUTO_INCREMENT` 更改为 `AUTO_RANDOM`。
-- 你不能更改指定了 `AUTO_RANDOM` 属性的主键列的列类型。
-- 你不能同时为同一列指定 `AUTO_RANDOM` 和 `AUTO_INCREMENT`。
-- 你不能同时为同一列指定 `AUTO_RANDOM` 和 `DEFAULT`（列的默认值）。
-- 当在列上使用 `AUTO_RANDOM` 时，很难将列属性改回 `AUTO_INCREMENT`，因为自动生成的值可能会很大。
+Here's how the collision can happen: each `AUTO_RANDOM` ID consists of random bits and an auto-incrementing part. TiDB uses an internal counter for this auto-incrementing part. If you explicitly insert an ID where the auto-incrementing part matches the counter's next value, a duplicate key error might occur when TiDB later attempts to generate the same ID automatically. For more details, see [AUTO_INCREMENT Uniqueness](/auto-increment.md#uniqueness).
+
+With a single TiDB instance, this issue doesn't occur because the node automatically adjusts its internal counter when processing explicit insertions, preventing any future collisions. In contrast, with multiple TiDB nodes, each node maintains its own cache of IDs, which needs to be cleared to prevent collisions after explicit insertions. To clear these unallocated cached IDs and avoid potential collisions, you have two options: 
+
+### Option 1: Automatically rebase (Recommended)
+
+```sql
+ALTER TABLE t AUTO_RANDOM_BASE=0;
+```
+
+This statement automatically determines an appropriate base value. Although it produces a warning message similar to `Can't reset AUTO_INCREMENT to 0 without FORCE option, using XXX instead`, the base value **will** change and you can safely ignore this warning.
+
+> **Note:**
+>
+> You cannot set `AUTO_RANDOM_BASE` to `0` with the `FORCE` keyword. Attempting this results in an error.
+
+### Option 2: Manually set a specific base value
+
+If you need to set a specific base value (for example, `1000`), use the `FORCE` keyword:
+
+```sql
+ALTER TABLE t FORCE AUTO_RANDOM_BASE = 1000;
+```
+
+This approach is less convenient because it requires you to determine an appropriate base value yourself.
+
+> **Note:**
+>
+> When using `FORCE`, you must specify a non-zero positive integer.
+
+Both commands modify the starting point for the auto-increment bits used in subsequent `AUTO_RANDOM` value generations across all TiDB nodes. They do not affect already allocated IDs.
+
+## Restrictions
+
+Pay attention to the following restrictions when you use `AUTO_RANDOM`:
+
+- To insert values explicitly, you need to set the value of the `@@allow_auto_random_explicit_insert` system variable to `1` (`0` by default). It is **not** recommended that you explicitly specify a value for the column with the `AUTO_RANDOM` attribute when you insert data. Otherwise, the numeral values that can be automatically allocated for this table might be used up in advance.
+- Specify this attribute for the primary key column **ONLY** as the `BIGINT` type. Otherwise, an error occurs. In addition, when the attribute of the primary key is `NONCLUSTERED`, `AUTO_RANDOM` is not supported even on the integer primary key. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
+- You cannot use `ALTER TABLE` to modify the `AUTO_RANDOM` attribute, including adding or removing this attribute.
+- You cannot use `ALTER TABLE` to change from `AUTO_INCREMENT` to `AUTO_RANDOM` if the maximum value is close to the maximum value of the column type.
+- You cannot change the column type of the primary key column that is specified with `AUTO_RANDOM` attribute.
+- You cannot specify `AUTO_RANDOM` and `AUTO_INCREMENT` for the same column at the same time.
+- You cannot specify `AUTO_RANDOM` and `DEFAULT` (the default value of a column) for the same column at the same time.
+- When`AUTO_RANDOM` is used on a column, it is difficult to change the column attribute back to `AUTO_INCREMENT` because the auto-generated values might be very large.

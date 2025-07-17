@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.3.0 Release Notes
-summary: "TiDB 6.3.0-DMR, released on September 30, 2022, introduces new features and improvements, including encryption at rest using the SM4 algorithm in TiKV, authentication using the SM3 algorithm in TiDB, and support for JSON data type and functions. It also provides execution time metrics at a finer granularity, enhances output for slow logs and `TRACE` statements, and supports deadlock history information in TiDB Dashboard. Additionally, TiDB v6.3.0 introduces new system variables and configuration file parameters, and fixes various bugs and issues. The release also includes improvements in TiKV, PD, TiFlash, Backup & Restore (BR), TiCDC, TiDB Binlog, TiDB Data Migration (DM), and TiDB Lightning."
+summary: TiDB 6.3.0-DMR, released on September 30, 2022, introduces new features and improvements, including encryption at rest using the SM4 algorithm in TiKV, authentication using the SM3 algorithm in TiDB, and support for JSON data type and functions. It also provides execution time metrics at a finer granularity, enhances output for slow logs and `TRACE` statements, and supports deadlock history information in TiDB Dashboard. Additionally, TiDB v6.3.0 introduces new system variables and configuration file parameters, and fixes various bugs and issues. The release also includes improvements in TiKV, PD, TiFlash, Backup & Restore (BR), TiCDC, TiDB Binlog, TiDB Data Migration (DM), and TiDB Lightning.
 ---
 
 # TiDB 6.3.0 Release Notes
@@ -145,9 +145,9 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     You can [disable Titan](/storage-engine/titan-configuration.md#disable-titan) for online TiKV nodes.
 
-* Use `static` partition pruning when GlobalStats are not ready [#37535](https://github.com/pingcap/tidb/issues/37535) @[Yisaer](https://github.com/Yisaer)
+* Use `static` partition pruning when global statistics are not ready [#37535](https://github.com/pingcap/tidb/issues/37535) @[Yisaer](https://github.com/Yisaer)
 
-    When [`dynamic pruning`](/partitioned-table.md#dynamic-pruning-mode) is enabled, the optimizer selects execution plans based on [GlobalStats](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode). Before GlobalStats are fully collected, using pseudo statistics might cause performance regression. In v6.3.0, this issue is addressed by maintaining the `static` mode if you enable dynamic pruning before GlobalStats are collected. TiDB remains in the `static` mode until GlobalStats are collected. This ensures performance stability when you change the partition pruning settings.
+    When [`dynamic pruning`](/partitioned-table.md#dynamic-pruning-mode) is enabled, the optimizer selects execution plans based on [global statistics](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode). Before global statistics are fully collected, using pseudo statistics might cause performance regression. In v6.3.0, if you enable the `dynamic` pruning mode before global statistics collection is completed, TiDB remains in the `static` mode until global statistics are fully collected. This ensures performance stability when you change the partition pruning settings.
 
 ### Ease of use
 
@@ -261,7 +261,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 * Log backup supports GCS and Azure Blob Storage as backup storage.
 * Log backup is now compatible with the `exchange partition` DDL.
 * The SQL statement `ALTER TABLE ...SET TiFLASH MODE ...` previously used for enabling [fastscan](/tiflash/use-fastscan.md) is deprecated, and replaced by the system variable [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630). When you upgrade from v6.2.0 to v6.3.0, all FastScan settings in v6.2.0 will become invalid, but will not affect the normal reading of data. In this case, you need to configure the variable [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630) to enable or disable FastScan. When you upgrade from an earlier version to v6.3.0, the FastScan feature is not enabled by default for all sessions to keep data consistent.
-* To deploy TiFlash under the Linux AMD64 architecture, the CPU must support the AVX2 instruction set. Ensure that `cat /proc/cpuinfo | grep avx2` has output. To deploy TiFlash under the Linux ARM64 architecture, the CPU must support the ARMv8 instruction set architecture. Ensure that `cat /proc/cpuinfo | grep 'crc32' | grep 'asimd'` has output. By using the instruction set extensions, TiFlash's vectorization engine can deliver better performance.
+* To deploy TiFlash under the Linux AMD64 architecture, the CPU must support the AVX2 instruction set. Ensure that `grep avx2 /proc/cpuinfo` has output. To deploy TiFlash under the Linux ARM64 architecture, the CPU must support the ARMv8 instruction set architecture. Ensure that `grep 'crc32' /proc/cpuinfo | grep 'asimd'` has output. By using the instruction set extensions, TiFlash's vectorization engine can deliver better performance.
 * The minimum version of HAProxy that works with TiDB is now v1.5. HAProxy versions between v1.5 and v2.1 now require the `post-41` configuration option to be set in `mysql-check`. It is recommended to use HAProxy v2.2 or newer.
 
 ## Removed feature

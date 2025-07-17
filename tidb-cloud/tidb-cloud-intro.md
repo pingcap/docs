@@ -1,91 +1,91 @@
 ---
-title: 什么是 TiDB Cloud
-summary: 了解 TiDB Cloud 及其架构。
+title: What is TiDB Cloud
+summary: Learn about TiDB Cloud and its architecture.
 category: intro
 ---
 
-# 什么是 TiDB Cloud
+# What is TiDB Cloud
 
-[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 是一个全托管的数据库即服务（DBaaS），它将开源的混合事务和分析处理（HTAP）数据库 [TiDB](https://docs.pingcap.com/tidb/stable/overview) 带入云端。TiDB Cloud 提供了一种简单的方式来部署和管理数据库，让你可以专注于应用程序开发，而不是数据库的复杂性。你可以创建 TiDB Cloud 集群，在 Amazon Web Services (AWS)、Google Cloud 和 Microsoft Azure 上快速构建关键任务应用。
+[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) is a fully-managed Database-as-a-Service (DBaaS) that brings [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source Hybrid Transactional and Analytical Processing (HTAP) database, to your cloud. TiDB Cloud offers an easy way to deploy and manage databases to let you focus on your applications, not the complexities of the databases. You can create TiDB Cloud clusters to quickly build mission-critical applications on Amazon Web Services (AWS), Google Cloud, and Microsoft Azure.
 
-![TiDB Cloud 概览](/media/tidb-cloud/tidb-cloud-overview.png)
+![TiDB Cloud Overview](/media/tidb-cloud/tidb-cloud-overview.png)
 
-## 为什么选择 TiDB Cloud
+## Why TiDB Cloud
 
-TiDB Cloud 使你无需或仅需少量培训就能轻松处理复杂的任务，如基础设施管理和集群部署。
+TiDB Cloud allows you with little or no training to handle complex tasks such as infrastructure management and cluster deployment easily.
 
-- 开发人员和数据库管理员（DBA）可以轻松处理大量在线流量，并快速分析跨多个数据集的大量数据。
+- Developers and database administrators (DBAs) can handle a large amount of online traffic effortlessly and rapidly analyze a large volume of data across multiple datasets.
 
-- 各种规模的企业都可以轻松部署和管理 TiDB Cloud，无需预付费用即可适应业务增长。
+- Enterprises of all sizes can easily deploy and manage TiDB Cloud to adapt to your business growth without prepayment.
 
-观看以下视频了解更多关于 TiDB Cloud 的信息：
+Watch the following video to learn more about TiDB Cloud:
 
 <iframe width="600" height="450" src="https://www.youtube.com/embed/skCV9BEmjbo?enablejsapi=1" title="Why TiDB Cloud?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-使用 TiDB Cloud，你可以获得以下关键特性：
+With TiDB Cloud, you can get the following key features:
 
-- **快速且可定制的扩展**
+- **Fast and Customized Scaling**
 
-    在保持 ACID 事务的同时，可以弹性且透明地扩展到数百个节点以支持关键工作负载。无需考虑分片。你可以根据业务需求分别扩展性能节点和存储节点。
+    Elastically and transparently scale to hundreds of nodes for critical workloads while maintaining ACID transactions. No need to bother with sharding. And you can scale your performance and storage nodes separately according to your business needs.
 
-- **MySQL 兼容性**
+- **MySQL Compatibility**
 
-    借助 TiDB 的 MySQL 兼容性，提高生产力并缩短应用程序的上市时间。无需重写代码即可轻松从现有 MySQL 实例迁移数据。
+    Increase productivity and shorten time-to-market for your applications with TiDB's MySQL compatibility. Easily migrate data from existing MySQL instances without the need to rewrite code.
 
-- **高可用性和可靠性**
+- **High Availability and Reliability**
 
-    设计上天然具备高可用性。跨多个可用区的数据复制、每日备份和自动故障转移确保业务连续性，无论是硬件故障、网络分区还是数据中心故障。
+    Naturally high availability by design. Data replication across multiple Availability Zones, daily backups, and auto-failover ensure business continuity, regardless of hardware failure, network partition, or data center loss.
 
-- **实时分析**
+- **Real-Time Analytics**
 
-    通过内置分析引擎获得实时分析查询结果。TiDB Cloud 可以在不影响关键任务应用的情况下，对当前数据运行一致的分析查询。
+    Get real-time analytical query results with a built-in analytics engine. TiDB Cloud runs consistent analytical queries on current data without disturbing mission-critical applications.
 
-- **企业级安全**
+- **Enterprise Grade Security**
 
-    在专用网络和机器中保护你的数据，支持传输中和静态数据加密。TiDB Cloud 已通过 SOC 2 Type 2、ISO 27001:2013、ISO 27701 认证，并完全符合 GDPR。
+    Secure your data in dedicated networks and machines, with support for encryption both in-flight and at-rest. TiDB Cloud is certified by SOC 2 Type 2, ISO 27001:2013, ISO 27701, and fully compliant with GDPR.
 
-- **全托管服务**
+- **Fully-Managed Service**
 
-    通过易于使用的基于 Web 的管理平台，只需点击几下即可部署、扩展、监控和管理 TiDB 集群。
+    Deploy, scale, monitor, and manage TiDB clusters with a few clicks, through an easy-to-use web-based management platform.
 
-- **多云支持**
+- **Multi-Cloud Support**
 
-    保持灵活性，避免云厂商锁定。TiDB Cloud 目前可在 AWS、Azure 和 Google Cloud 上使用。
+    Stay flexible without cloud vendor lock-in. TiDB Cloud is currently available on AWS, Azure, and Google Cloud.
 
-- **简单的定价方案**
+- **Simple Pricing Plans**
 
-    只需为你使用的部分付费，价格透明且无隐藏费用。
+    Pay only for what you use, with transparent and upfront pricing with no hidden fees.
 
-- **世界级支持**
+- **World-Class Support**
 
-    通过我们的支持门户、<a href="mailto:tidbcloud-support@pingcap.com">电子邮件</a>、聊天或视频会议获得世界级支持。
+    Get world-class support through our support portal, <a href="mailto:tidbcloud-support@pingcap.com">email</a>, chat, or video conferencing.
 
-## 部署选项
+## Deployment options
 
-TiDB Cloud 提供以下两种部署选项：
+TiDB Cloud provides the following two deployment options:
 
 - [TiDB Cloud Serverless](https://www.pingcap.com/tidb-cloud-serverless)
 
-    TiDB Cloud Serverless 是一个全托管的多租户 TiDB 产品。它提供即时、自动扩展的 MySQL 兼容数据库，并提供慷慨的免费额度，超出免费限制后按使用量计费。
+    TiDB Cloud Serverless is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free tier and consumption based billing once free limits are exceeded.
 
 - [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated)
 
-    TiDB Cloud Dedicated 适用于生产环境，具有跨可用区高可用性、水平扩展和 [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) 的优势。
+    TiDB Cloud Dedicated is for production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing).
 
-有关 TiDB Cloud Serverless 和 TiDB Cloud Dedicated 的功能比较，请参阅 [TiDB：先进的开源分布式 SQL 数据库](https://www.pingcap.com/get-started-tidb)。
+For feature comparison between TiDB Cloud Serverless and TiDB Cloud Dedicated, see [TiDB: An advanced, open source, distributed SQL database](https://www.pingcap.com/get-started-tidb).
 
-## 架构
+## Architecture
 
-![TiDB Cloud 架构](/media/tidb-cloud/tidb-cloud-architecture.png)
+![TiDB Cloud architecture](/media/tidb-cloud/tidb-cloud-architecture.png)
 
-- TiDB VPC（虚拟私有云）
+- TiDB VPC (Virtual Private Cloud)
 
-    对于每个 TiDB Cloud 集群，所有 TiDB 节点和辅助节点（包括 TiDB Operator 节点和日志节点）都部署在同一个 VPC 中。
+    For each TiDB Cloud cluster, all TiDB nodes and auxiliary nodes, including TiDB Operator nodes and logging nodes, are deployed in the same VPC.
 
-- TiDB Cloud 中央服务
+- TiDB Cloud Central Services
 
-    中央服务（包括计费、告警、元数据存储、仪表板 UI）是独立部署的。你可以通过互联网访问仪表板 UI 来操作 TiDB 集群。
+    Central Services, including billing, alerts, meta storage, dashboard UI, are deployed independently. You can access the dashboard UI to operate the TiDB cluster via the internet.
 
-- 你的 VPC
+- Your VPC
 
-    你可以通过私有端点连接或 VPC 对等连接来连接你的 TiDB 集群。详情请参阅[设置私有端点连接](/tidb-cloud/set-up-private-endpoint-connections.md)或[设置 VPC 对等连接](/tidb-cloud/set-up-vpc-peering-connections.md)。
+    You can connect to your TiDB cluster via private endpoint connection or VPC peering connection. Refer to [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md) or [Set up VPC Peering Connection](/tidb-cloud/set-up-vpc-peering-connections.md) for details.

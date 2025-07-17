@@ -113,12 +113,12 @@ scrape_configs:
 
 To enable alarm rules for components such as TiDB, PD, and TiKV, download the alarm rule files of the corresponding components separately, and then add the configurations of alarm rule files to the Prometheus configuration file.
 
-- TiDB: [`tidb.rules.yml`](https://github.com/pingcap/tidb/blob/master/pkg/metrics/alertmanager/tidb.rules.yml)
-- PD: [`pd.rules.yml`](https://github.com/tikv/pd/blob/master/metrics/alertmanager/pd.rules.yml)
-- TiKV: [`tikv.rules.yml`](https://github.com/tikv/tikv/blob/master/metrics/alertmanager/tikv.rules.yml)
-- TiFlash: [`tiflash.rules.yml`](https://github.com/pingcap/tiflash/blob/master/metrics/alertmanager/tiflash.rules.yml)
-- TiCDC: [`ticdc.rules.yml`](https://github.com/pingcap/tiflow/blob/master/metrics/alertmanager/ticdc.rules.yml)
-- TiDB Lightning: [`lightning.rules.yml`](https://github.com/pingcap/tidb/blob/master/br/metrics/alertmanager/lightning.rules.yml)
+- TiDB: [`tidb.rules.yml`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/metrics/alertmanager/tidb.rules.yml)
+- PD: [`pd.rules.yml`](https://github.com/tikv/pd/blob/release-8.5/metrics/alertmanager/pd.rules.yml)
+- TiKV: [`tikv.rules.yml`](https://github.com/tikv/tikv/blob/release-8.5/metrics/alertmanager/tikv.rules.yml)
+- TiFlash: [`tiflash.rules.yml`](https://github.com/pingcap/tiflash/blob/release-8.5/metrics/alertmanager/tiflash.rules.yml)
+- TiCDC: [`ticdc.rules.yml`](https://github.com/pingcap/tiflow/blob/release-8.5/metrics/alertmanager/ticdc.rules.yml)
+- TiDB Lightning: [`lightning.rules.yml`](https://github.com/pingcap/tidb/blob/release-8.5/br/metrics/alertmanager/lightning.rules.yml)
 
 ```ini
 rule_files:
@@ -241,7 +241,7 @@ To import a Grafana dashboard for the PD server, the TiKV server, and the TiDB s
 
 2. In the sidebar menu, click **Dashboards** -> **Import** to open the **Import Dashboard** window.
 
-3. Click **Upload .json File** to upload a JSON file (Download TiDB Grafana configuration files from [pingcap/tidb](https://github.com/pingcap/tidb/tree/release-8.1/pkg/metrics/grafana), [tikv/tikv](https://github.com/tikv/tikv/tree/release-8.1/metrics/grafana), and [tikv/pd](https://github.com/tikv/pd/tree/release-8.1/metrics/grafana)).
+3. Click **Upload .json File** to upload a JSON file (Download TiDB Grafana configuration files from [pingcap/tidb](https://github.com/pingcap/tidb/tree/release-8.5/pkg/metrics/grafana), [tikv/tikv](https://github.com/tikv/tikv/tree/release-8.5/metrics/grafana), and [tikv/pd](https://github.com/tikv/pd/tree/release-8.5/metrics/grafana)).
 
     > **Note:**
     >

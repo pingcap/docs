@@ -1,16 +1,16 @@
 ---
-title: Connected Care 详细信息
-summary: 介绍 TiDB Cloud 的 Connected Care 支持服务的详细信息。
+title: Connected Care Details
+summary: Introduces detailed information about the Connected Care support services for TiDB Cloud.
 ---
 
-# Connected Care 详细信息
+# Connected Care Details
 
-本文提供了 [Connected Care](/tidb-cloud/connected-care-overview.md) 支持服务的详细信息。
+This document provides detailed information about the [Connected Care](/tidb-cloud/connected-care-overview.md) support services.
 
 <table>
 <thead>
   <tr>
-    <th>支持计划</th>
+    <th>Support plan</th>
     <th>Basic</th>
     <th>Developer</th>
     <th>Enterprise</th>
@@ -19,110 +19,110 @@ summary: 介绍 TiDB Cloud 的 Connected Care 支持服务的详细信息。
 </thead>
 <tbody>
   <tr>
-    <td>功能和服务</td>
-    <td>适合个人入门项目，通过活跃的社区和 AI 支持为你提供基本支持需求。</td>
-    <td>适合开发和测试阶段，提供直接连接和无限技术支持访问，帮助你开启云端之旅。</td>
-    <td>专为生产工作负载设计，通过高级监控、及时警报和全天候快速响应，为你提供无缝体验。</td>
-    <td>为关键业务工作负载打造，通过指定的技术客户经理提供最快的响应时间、主动支持和专属连接。</td>
+    <td>Features and Services</td>
+    <td>Great for personal starter projects, connecting you with an active community and AI-powered assistance for essential support needs.</td>
+    <td>Ideal for development and testing phases, offering direct connections and unlimited access to tech support, to kickstart your cloud journey.</td>
+    <td>Designed for production workloads, connecting your operations with advanced monitoring, prompt alerts, and fast 7x24 response times for a seamless experience.</td>
+    <td>Built for enterprises with mission-critical workloads, offering the fastest response times, proactive support, and dedicated connections through named Technical Account Managers.</td>
   </tr>
   <tr>
-    <td rowspan="4">初始响应时间</td>
+    <td rowspan="4">Initial Response Time</td>
     <td>-</td>
-    <td>S1：4 个工作小时</td>
-    <td>S1：1 小时</td>
-    <td>S1：30 分钟</td>
-  </tr>
-  <tr>
-    <td>-</td>
-    <td>S2：8 个工作小时</td>
-    <td>S2：2 小时</td>
-    <td>S2：1 小时</td>
+    <td>S1: 4 business hours</td>
+    <td>S1: 1 hour</td>
+    <td>S1: 30 minutes</td>
   </tr>
   <tr>
     <td>-</td>
-    <td>S3：12 个工作小时</td>
-    <td>S3：8 个工作小时</td>
-    <td>S3：4 个工作小时</td>
+    <td>S2: 8 business hours</td>
+    <td>S2: 2 hours</td>
+    <td>S2: 1 hour</td>
   </tr>
   <tr>
     <td>-</td>
-    <td>S4：24 个工作小时</td>
-    <td>S4：24 个工作小时</td>
-    <td>S4：24 个工作小时</td>
-  </tr>
-  <tr>
-    <td rowspan="9">服务</td>
-    <td>账单和账户支持</td>
-    <td>账单和账户支持</td>
-    <td>账单和账户支持</td>
-    <td>账单和账户支持</td>
+    <td>S3: 12 business hours</td>
+    <td>S3: 8 business hours</td>
+    <td>S3: 4 business hours</td>
   </tr>
   <tr>
     <td>-</td>
-    <td>工单技术支持</td>
-    <td>工单技术支持</td>
-    <td>工单技术支持</td>
+    <td>S4: 24 business hours</td>
+    <td>S4: 24 business hours</td>
+    <td>S4: 24 business hours</td>
+  </tr>
+  <tr>
+    <td rowspan="9">Services</td>
+    <td>Billing and account support</td>
+    <td>Billing and account support</td>
+    <td>Billing and account support</td>
+    <td>Billing and account support</td>
   </tr>
   <tr>
     <td>-</td>
-    <td>端到端数据库指导</td>
-    <td>端到端数据库指导</td>
-    <td>端到端数据库指导</td>
+    <td>Ticket-based technical support</td>
+    <td>Ticket-based technical support</td>
+    <td>Ticket-based technical support</td>
   </tr>
   <tr>
     <td>-</td>
-    <td>-</td>
-    <td><a href="/tidbcloud/tidb-cloud-clinic">Connected：高级监控的诊所服务</a></td>
-    <td><a href="/tidbcloud/tidb-cloud-clinic">Connected：高级监控的诊所服务</a></td>
+    <td>End-to-end database guidance</td>
+    <td>End-to-end database guidance</td>
+    <td>End-to-end database guidance</td>
   </tr>
   <tr>
     <td>-</td>
     <td>-</td>
-    <td><a href="/tidbcloud/connected-ai-chat-in-im">Connected：即时通讯中的 AI 聊天</a></td>
-    <td><a href="/tidbcloud/connected-ai-chat-in-im">Connected：即时通讯中的 AI 聊天</a></td>
+    <td><a href="/tidbcloud/tidb-cloud-clinic">Connected: Clinic service for advanced monitoring</a></td>
+    <td><a href="/tidbcloud/tidb-cloud-clinic">Connected: Clinic service for advanced monitoring</a></td>
   </tr>
   <tr>
     <td>-</td>
     <td>-</td>
-    <td>Connected：TiDB Cloud 警报的即时通讯订阅（通过 <a href="/tidbcloud/monitor-alert-slack">Slack</a> 或 <a href="/tidbcloud/monitor-alert-zoom">Zoom</a>）</td>
-    <td>Connected：TiDB Cloud 警报的即时通讯订阅（通过 <a href="/tidbcloud/monitor-alert-slack">Slack</a> 或 <a href="/tidbcloud/monitor-alert-zoom">Zoom</a>）</td>
+    <td><a href="/tidbcloud/connected-ai-chat-in-im">Connected: AI chat in IM</a></td>
+    <td><a href="/tidbcloud/connected-ai-chat-in-im">Connected: AI chat in IM</a></td>
   </tr>
   <tr>
     <td>-</td>
     <td>-</td>
-    <td>Connected：即时通讯工单创建和更新订阅（通过 <a href="/tidbcloud/connected-slack-ticket-creation">Slack</a> 或 <a href="/tidbcloud/connected-lark-ticket-creation">Lark</a>）</td>
-    <td>Connected：即时通讯工单创建和更新订阅（通过 <a href="/tidbcloud/connected-slack-ticket-creation">Slack</a> 或 <a href="/tidbcloud/connected-lark-ticket-creation">Lark</a>）</td>
+    <td>Connected: IM subscription for TiDB Cloud alerts (via <a href="/tidbcloud/monitor-alert-slack">Slack</a> or <a href="/tidbcloud/monitor-alert-zoom">Zoom</a>)</td>
+    <td>Connected: IM subscription for TiDB Cloud alerts (via <a href="/tidbcloud/monitor-alert-slack">Slack</a> or <a href="/tidbcloud/monitor-alert-zoom">Zoom</a>)</td>
   </tr>
   <tr>
     <td>-</td>
     <td>-</td>
-    <td>-</td>
-    <td>Connected：支持工单的即时通讯交互（通过 <a href="/tidbcloud/connected-slack-ticket-interaction">Slack</a> 或 <a href="/tidbcloud/connected-lark-ticket-interaction">Lark</a>）</td>
+    <td>Connected: IM ticket creation and update subscription (via <a href="/tidbcloud/connected-slack-ticket-creation">Slack</a> or <a href="/tidbcloud/connected-lark-ticket-creation">Lark</a>)</td>
+    <td>Connected: IM ticket creation and update subscription (via <a href="/tidbcloud/connected-slack-ticket-creation">Slack</a> or <a href="/tidbcloud/connected-lark-ticket-creation">Lark</a>)</td>
   </tr>
   <tr>
     <td>-</td>
     <td>-</td>
     <td>-</td>
-    <td>技术客户经理</td>
+    <td>Connected: IM interaction for support tickets (via <a href="/tidbcloud/connected-slack-ticket-interaction">Slack</a> or <a href="/tidbcloud/connected-lark-ticket-interaction">Lark</a>)</td>
   </tr>
   <tr>
-    <td rowspan="5">客户资源</td>
-    <td>文档</td>
-    <td>文档</td>
-    <td>文档</td>
-    <td>文档</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td>Technical Account Manager</td>
   </tr>
   <tr>
-    <td>常见问题</td>
-    <td>常见问题</td>
-    <td>常见问题</td>
-    <td>常见问题</td>
+    <td rowspan="5">Customer Resources</td>
+    <td>Documentations</td>
+    <td>Documentations</td>
+    <td>Documentations</td>
+    <td>Documentations</td>
   </tr>
   <tr>
-    <td>社区工作空间</td>
-    <td>社区工作空间</td>
-    <td>社区工作空间</td>
-    <td>社区工作空间</td>
+    <td>FAQ</td>
+    <td>FAQ</td>
+    <td>FAQ</td>
+    <td>FAQ</td>
+  </tr>
+  <tr>
+    <td>Community Workspace</td>
+    <td>Community Workspace</td>
+    <td>Community Workspace</td>
+    <td>Community Workspace</td>
   </tr>
   <tr>
     <td><a href="https://tidb.ai/">TiDB.AI</a></td>
@@ -132,13 +132,13 @@ summary: 介绍 TiDB Cloud 的 Connected Care 支持服务的详细信息。
   </tr>
   <tr>
     <td>-</td>
-    <td>知识库</td>
-    <td>知识库</td>
-    <td>知识库</td>
+    <td>Knowledge Base</td>
+    <td>Knowledge Base</td>
+    <td>Knowledge Base</td>
   </tr>
 </tbody>
 </table>
 
-- 工作时间：当地时间周一至周五上午 9 点至下午 6 点
-- IM：即时通讯。目前支持 [Slack](https://slack.com/) 和 [Lark](https://www.larksuite.com/)。我们计划在未来支持 [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software)。
-- [Clinic](https://clinic.pingcap.com/)：一个现代化的监控服务，为你的 TiDB Cloud 集群提供高级监控和诊断功能。
+- Business hours: 9 AM - 6 PM local time, Monday to Friday
+- IM: Instant Message. Currently, [Slack](https://slack.com/) and [Lark](https://www.larksuite.com/) are supported. We are planning to support [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software) in the future.
+- [Clinic](https://clinic.pingcap.com/): a modern monitoring service that provides advanced monitoring and diagnostic capabilities for your TiDB Cloud clusters.

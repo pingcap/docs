@@ -1,13 +1,13 @@
 ---
-title: WITH | TiDB SQL 语句参考
-summary: TiDB 数据库中 WITH（公用表表达式）的使用概览。
+title: WITH | TiDB SQL Statement Reference
+summary: An overview of the usage of WITH (Common Table Expression) for the TiDB database.
 ---
 
 # WITH
 
-公用表表达式（Common Table Expression，CTE）是一个临时结果集，可以在 SQL 语句中多次引用，以提高语句的可读性和执行效率。你可以使用 `WITH` 语句来使用公用表表达式。
+A Common Table Expression (CTE) is a temporary result set that can be referred multiple times within a SQL statement to improve the statement's readability and execution efficiency. You can apply the `WITH` statement to use Common Table Expressions.
 
-## 语法
+## Synopsis
 
 **WithClause:**
 
@@ -39,9 +39,9 @@ IdentListWithParenOpt ::=
 ( '(' IdentList ')' )?
 ```
 
-## 示例
+## Examples
 
-非递归 CTE：
+Non-recursive CTE:
 
 ```sql
 WITH cte AS (SELECT 1, 2) SELECT * FROM cte t1, cte t2;
@@ -56,7 +56,7 @@ WITH cte AS (SELECT 1, 2) SELECT * FROM cte t1, cte t2;
 1 row in set (0.00 sec)
 ```
 
-递归 CTE：
+Recursive CTE:
 
 ```sql
 WITH RECURSIVE cte(a) AS (SELECT 1 UNION SELECT a+1 FROM cte WHERE a < 5) SELECT * FROM cte;
@@ -75,16 +75,16 @@ WITH RECURSIVE cte(a) AS (SELECT 1 UNION SELECT a+1 FROM cte WHERE a < 5) SELECT
 5 rows in set (0.00 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-* 在严格模式下，当递归计算的数据长度超过种子部分的数据长度时，TiDB 返回警告，而 MySQL 返回错误。在非严格模式下，TiDB 的行为与 MySQL 一致。
-* 递归 CTE 的数据类型由种子部分决定。在某些情况下（如函数），种子部分的数据类型与 MySQL 不完全一致。
-* 在有多个 `UNION` / `UNION ALL` 运算符的情况下，MySQL 不允许 `UNION` 后面跟 `UNION ALL`，但 TiDB 允许。
-* 如果 CTE 的定义有问题，TiDB 会报错，而 MySQL 在 CTE 未被引用时不会报错。
+* In strict mode, when the data length recursively calculated exceeds the data length of the seed part, TiDB returns a warning while MySQL returns an error. In non-strict mode, the behavior of TiDB is consistent with that of MySQL.
+* The data type for recursive CTE is determined by the seed part. The data type of the seed part is not completely consistent with MySQL in some cases (such as functions).
+* In the case of multiple `UNION` / `UNION ALL` operators, MySQL does not allow `UNION` to be followed by `UNION ALL`, but TiDB does.
+* If there is a problem with the definition of a CTE, TiDB will report an error, while MySQL will not if the CTE is not referred.
 
-## 另请参阅
+## See also
 
-* [开发者指南：公用表表达式](/develop/dev-guide-use-common-table-expression.md)
+* [Developer Guide: Common Table Expression](/develop/dev-guide-use-common-table-expression.md)
 * [SELECT](/sql-statements/sql-statement-select.md)
 * [INSERT](/sql-statements/sql-statement-insert.md)
 * [DELETE](/sql-statements/sql-statement-delete.md)

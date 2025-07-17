@@ -61,7 +61,7 @@ To deploy the cluster, run the `tiup cluster deploy` command. The usage of the c
 tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 ```
 
-This command requires you to provide the cluster name, the TiDB cluster version (such as `v8.1.2`), and a topology file of the cluster.
+This command requires you to provide the cluster name, the TiDB cluster version (such as `{{{ .tidb-version }}}`), and a topology file of the cluster.
 
 To write a topology file, refer to [the example](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml). The following file is an example of the simplest topology:
 
@@ -121,12 +121,12 @@ tidb_servers:
 ...
 ```
 
-Save the file as `/tmp/topology.yaml`. If you want to use TiDB v8.1.2 and your cluster name is `prod-cluster`, run the following command:
+Save the file as `/tmp/topology.yaml`. If you want to use TiDB {{{ .tidb-version }}} and your cluster name is `prod-cluster`, run the following command:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup cluster deploy -p prod-cluster v8.1.2 /tmp/topology.yaml
+tiup cluster deploy -p prod-cluster {{{ .tidb-version }}} /tmp/topology.yaml
 ```
 
 During the execution, TiUP asks you to confirm your topology again and requires the root password of the target machine (the `-p` flag means inputting password):
@@ -134,7 +134,7 @@ During the execution, TiUP asks you to confirm your topology again and requires 
 ```bash
 Please confirm your topology:
 TiDB Cluster: prod-cluster
-TiDB Version: v8.1.2
+TiDB Version: {{{ .tidb-version }}}
 Type        Host          Ports                            OS/Arch       Directories
 ----        ----          -----                            -------       -----------
 pd          172.16.5.134  2379/2380                        linux/x86_64  deploy/pd-2379,data/pd-2379
@@ -178,7 +178,7 @@ tiup cluster list
 Starting /root/.tiup/components/cluster/v1.12.3/cluster list
 Name          User  Version    Path                                               PrivateKey
 ----          ----  -------    ----                                               ----------
-prod-cluster  tidb  v8.1.2    /root/.tiup/storage/cluster/clusters/prod-cluster  /root/.tiup/storage/cluster/clusters/prod-cluster/ssh/id_rsa
+prod-cluster  tidb  {{{ .tidb-version }}}    /root/.tiup/storage/cluster/clusters/prod-cluster  /root/.tiup/storage/cluster/clusters/prod-cluster/ssh/id_rsa
 ```
 
 ## Start the cluster
@@ -208,7 +208,7 @@ tiup cluster display prod-cluster
 ```
 Starting /root/.tiup/components/cluster/v1.12.3/cluster display prod-cluster
 TiDB Cluster: prod-cluster
-TiDB Version: v8.1.2
+TiDB Version: {{{ .tidb-version }}}
 ID                  Role        Host          Ports                            OS/Arch       Status  Data Dir              Deploy Dir
 --                  ----        ----          -----                            -------       ------  --------              ----------
 172.16.5.134:3000   grafana     172.16.5.134  3000                             linux/x86_64  Up      -                     deploy/grafana-3000
@@ -240,12 +240,12 @@ For the PD component, `|L` or `|UI` might be appended to `Up` or `Down`. `|L` in
 
 Scaling in a cluster means making some node(s) offline. This operation removes the specific node(s) from the cluster and deletes the remaining files.
 
-Because the offline process of the TiKV, TiFlash, and TiDB Binlog components is asynchronous (which requires removing the node through API), and the process takes a long time (which requires continuous observation on whether the node is successfully taken offline), special treatment is given to the TiKV, TiFlash, and TiDB Binlog components.
+Because the offline process of the TiKV and TiFlash components is asynchronous (which requires removing the node through API), and the process takes a long time (which requires continuous observation on whether the node is successfully taken offline), special treatment is given to the TiKV and TiFlash components.
 
-- For TiKV, TiFlash, and Binlog:
+- For TiKV and TiFlash:
 
     - TiUP cluster takes the node offline through API and directly exits without waiting for the process to be completed.
-    - Afterwards, when a command related to the cluster operation is executed, TiUP cluster examines whether there is a TiKV, TiFlash, or Binlog node that has been taken offline. If not, TiUP cluster continues with the specified operation; If there is, TiUP cluster takes the following steps:
+    - Afterwards, when a command related to the cluster operation is executed, TiUP cluster examines whether there is a TiKV or TiFlash node that has been taken offline. If not, TiUP cluster continues with the specified operation; If there is, TiUP cluster takes the following steps:
 
         1. Stop the service of the node that has been taken offline.
         2. Clean up the data files related to the node.
@@ -283,7 +283,7 @@ tiup cluster display prod-cluster
 ```
 Starting /root/.tiup/components/cluster/v1.12.3/cluster display prod-cluster
 TiDB Cluster: prod-cluster
-TiDB Version: v8.1.2
+TiDB Version: {{{ .tidb-version }}}
 ID                  Role        Host          Ports                            OS/Arch       Status   Data Dir              Deploy Dir
 --                  ----        ----          -----                            -------       ------   --------              ----------
 172.16.5.134:3000   grafana     172.16.5.134  3000                             linux/x86_64  Up       -                     deploy/grafana-3000
@@ -395,12 +395,12 @@ Global Flags:
   -y, --yes               Skip all confirmations and assumes 'yes'
 ```
 
-For example, the following command upgrades the cluster to v8.1.2:
+For example, the following command upgrades the cluster to {{{ .tidb-version }}}:
 
 {{< copyable "shell-regular" >}}
 
 ```bash
-tiup cluster upgrade tidb-test v8.1.2
+tiup cluster upgrade tidb-test {{{ .tidb-version }}}
 ```
 
 ## Update configuration
@@ -585,11 +585,11 @@ tiup cluster audit
 Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.12.3/cluster audit
 ID      Time                       Command
 --      ----                       -------
-4BLhr0  2024-12-26T23:55:09+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster deploy test v8.1.2 /tmp/topology.yaml
-4BKWjF  2024-12-26T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster deploy test v8.1.2 /tmp/topology.yaml
-4BKVwH  2024-12-26T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster deploy test v8.1.2 /tmp/topology.yaml
-4BKKH1  2024-12-26T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster destroy test
-4BKKDx  2024-12-26T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster deploy test v8.1.2 /tmp/topology.yaml
+4BLhr0  {{{ .tidb-release-date }}}T23:55:09+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster deploy test {{{ .tidb-version }}} /tmp/topology.yaml
+4BKWjF  {{{ .tidb-release-date }}}T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster deploy test {{{ .tidb-version }}} /tmp/topology.yaml
+4BKVwH  {{{ .tidb-release-date }}}T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster deploy test {{{ .tidb-version }}} /tmp/topology.yaml
+4BKKH1  {{{ .tidb-release-date }}}T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster destroy test
+4BKKDx  {{{ .tidb-release-date }}}T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster deploy test {{{ .tidb-version }}} /tmp/topology.yaml
 ```
 
 The first column is `audit-id`. To view the execution log of a certain command, pass the `audit-id` of a command as the flag as follows:
@@ -634,7 +634,7 @@ Before TiUP is released, you can control the cluster using `tidb-ctl`, `tikv-ctl
 
 ```bash
 Usage:
-  tiup ctl:v<CLUSTER_VERSION> {tidb/pd/tikv/binlog/etcd} [flags]
+  tiup ctl:v<CLUSTER_VERSION> {tidb/pd/tikv/etcd} [flags]
 
 Flags:
   -h, --help   help for tiup
@@ -646,7 +646,6 @@ This command has a corresponding relationship with those of the previous tools:
 tidb-ctl [args] = tiup ctl tidb [args]
 pd-ctl [args] = tiup ctl pd [args]
 tikv-ctl [args] = tiup ctl tikv [args]
-binlogctl [args] = tiup ctl bindlog [args]
 etcdctl [args] = tiup ctl etcd [args]
 ```
 
@@ -705,7 +704,7 @@ All operations above performed on the cluster machine use the SSH client embedde
 
 Then you can use the `--ssh=system` command-line flag to enable the system-native command-line tool:
 
-- Deploy a cluster: `tiup cluster deploy <cluster-name> <version> <topo> --ssh=system`. Fill in the name of your cluster for `<cluster-name>`, the TiDB version to be deployed (such as `v8.1.2`) for `<version>`, and the topology file for `<topo>`.
+- Deploy a cluster: `tiup cluster deploy <cluster-name> <version> <topo> --ssh=system`. Fill in the name of your cluster for `<cluster-name>`, the TiDB version to be deployed (such as `{{{ .tidb-version }}}`) for `<version>`, and the topology file for `<topo>`.
 - Start a cluster: `tiup cluster start <cluster-name> --ssh=system`
 - Upgrade a cluster: `tiup cluster upgrade ... --ssh=system`
 

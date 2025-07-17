@@ -25,7 +25,7 @@ To enable OpenAPI, perform one of the following operations:
 
 > **Note:**
 >
-> - DM provides the [specification document](https://github.com/pingcap/tiflow/blob/release-8.1/dm/openapi/spec/dm.yaml) that meets the OpenAPI 3.0.0 standard. This document contains all the request parameters and returned values. You can copy the document yaml and preview it in [Swagger Editor](https://editor.swagger.io/).
+> - DM provides the [specification document](https://github.com/pingcap/tiflow/blob/release-8.5/dm/openapi/spec/dm.yaml) that meets the OpenAPI 3.0.0 standard. This document contains all the request parameters and returned values. You can copy the document yaml and preview it in [Swagger Editor](https://editor.swagger.io/).
 >
 > - After you deploy the DM-master nodes, you can access `http://{master-addr}/api/v1/docs` to preview the documentation online.
 >
@@ -1615,7 +1615,7 @@ curl -X 'GET' \
 {
   "schema_name": "db1",
   "table_name": "table1",
-  "schema_create_sql": "CREATE TABLE `t1` (`id` int(11) NOT NULL AUTO_INCREMENT,PRIMARY KEY (`id`) /*T![clustered_index] CLUSTERED */) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin"
+  "schema_create_sql": "CREATE TABLE `t1` (`id` int NOT NULL AUTO_INCREMENT,PRIMARY KEY (`id`) /*T![clustered_index] CLUSTERED */) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin"
 }
 ```
 
@@ -1637,7 +1637,7 @@ curl -X 'PUT' \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
   -d '{
-  "sql_content": "CREATE TABLE `t1` ( `c1` int(11) DEFAULT NULL, `c2` int(11) DEFAULT NULL, `c3` int(11) DEFAULT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;",
+  "sql_content": "CREATE TABLE `t1` ( `c1` int DEFAULT NULL, `c2` int DEFAULT NULL, `c3` int DEFAULT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;",
   "flush": true,
   "sync": true
 }'

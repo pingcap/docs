@@ -1,21 +1,21 @@
 ---
-title: SET [GLOBAL|SESSION] <variable> | TiDB SQL 语句参考
-summary: TiDB 数据库中 SET [GLOBAL|SESSION] <variable> 的使用概述。
+title: SET [GLOBAL|SESSION] <variable> | TiDB SQL Statement Reference
+summary: An overview of the usage of SET [GLOBAL|SESSION] <variable> for the TiDB database.
 ---
 
 # `SET [GLOBAL|SESSION] <variable>`
 
-`SET [GLOBAL|SESSION]` 语句用于修改 TiDB 的内置变量。这些变量可以是作用域为 `SESSION` 或 `GLOBAL` 的[系统变量](/system-variables.md)或[用户变量](/user-defined-variables.md)。
+The statement `SET [GLOBAL|SESSION]` modifies one of TiDB's built in variables. These variables can be [system variables](/system-variables.md) of either `SESSION` or `GLOBAL` scope or [user variables](/user-defined-variables.md).
 
-> **警告：**
+> **Warning:**
 >
-> 用户定义变量仍然是一个实验性功能。**不建议**在生产环境中使用它们。
+> User-defined variables are still an experimental feature. It is **NOT** recommended that you use them in the production environment.
 
-> **注意：**
+> **Note:**
 >
-> 与 MySQL 类似，对 `GLOBAL` 变量的更改不会应用于现有连接或本地连接。只有新会话才会反映值的更改。
+> Similar to MySQL, changes to `GLOBAL` variables do not apply to either existing connections, or the local connection. Only new sessions reflect the changes to the value.
 
-## 语法图
+## Synopsis
 
 ```ebnf+diagram
 SetVariableStmt ::=
@@ -26,9 +26,9 @@ Variable ::=
 |   UserVariable 
 ```
 
-## 示例
+## Examples
 
-获取 `sql_mode` 的值。
+Get the value of `sql_mode`.
 
 ```sql
 mysql> SHOW GLOBAL VARIABLES LIKE 'sql_mode';
@@ -48,7 +48,7 @@ mysql> SHOW SESSION VARIABLES LIKE 'sql_mode';
 1 row in set (0.00 sec)
 ```
 
-全局更新 `sql_mode` 的值。如果在更新后检查 `SQL_mode` 的值，你可以看到 `SESSION` 级别的值尚未更新：
+Update the value of `sql_mode` globally. If you check the value of `SQL_mode` after the update, you can see that the value of `SESSION` level has not been updated:
 
 ```sql
 mysql> SET GLOBAL sql_mode = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER';
@@ -71,7 +71,7 @@ mysql> SHOW SESSION VARIABLES LIKE 'sql_mode';
 1 row in set (0.00 sec)
 ```
 
-使用 `SET SESSION` 会立即生效：
+Using `SET SESSION` takes effect immediately:
 
 ```sql
 mysql> SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER';
@@ -86,7 +86,7 @@ mysql> SHOW SESSION VARIABLES LIKE 'sql_mode';
 1 row in set (0.00 sec)
 ```
 
-用户变量以 `@` 开头。
+User variables start with a `@`.
 
 ```sql
 SET @myvar := 5;
@@ -101,15 +101,15 @@ SELECT @myvar, @myvar + 1;
 1 row in set (0.00 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-存在以下行为差异：
+The following behavior differences apply:
 
-* 使用 `SET GLOBAL` 进行的更改将传播到集群中的所有 TiDB 实例。这与 MySQL 不同，在 MySQL 中更改不会传播到副本。
-* TiDB 将多个变量设置为既可读又可设置。这是 MySQL 兼容性所必需的，因为应用程序和连接器通常都会读取 MySQL 变量。例如：JDBC 连接器会读取和设置查询缓存设置，尽管不依赖该行为。
-* 使用 `SET GLOBAL` 进行的更改将在 TiDB 服务器重启后保持。这意味着 TiDB 中的 `SET GLOBAL` 的行为更类似于 MySQL 8.0 及以上版本中的 `SET PERSIST`。
-* TiDB 不支持 `SET PERSIST` 和 `SET PERSIST_ONLY`，因为 TiDB 会持久化全局变量。
+* Changes made with `SET GLOBAL` will be propagated to all TiDB instances in the cluster. This differs from MySQL, where changes do not propagate to replicas.
+* TiDB presents several variables as both readable and settable. This is required for MySQL compatibility, because it is common for both applications and connectors to read MySQL variables. For example: JDBC connectors both read and set query cache settings, despite not relying on the behavior.
+* Changes made with `SET GLOBAL` will persist through TiDB server restarts. This means that `SET GLOBAL` in TiDB behaves more similar to `SET PERSIST` as available in MySQL 8.0 and above.
+* TiDB does not support `SET PERSIST` and `SET PERSIST_ONLY`, because TiDB persists global variables.
 
-## 另请参阅
+## See also
 
 * [SHOW \[GLOBAL|SESSION\] VARIABLES](/sql-statements/sql-statement-show-variables.md)

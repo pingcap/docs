@@ -1,25 +1,25 @@
 ---
 title: SHOW STATS_TOPN
-summary: TiDB 数据库中 SHOW STATS_TOPN 的使用概览。
+summary: An overview of the usage of SHOW STATS_TOPN for TiDB database.
 ---
 
 # SHOW STATS_TOPN
 
-`SHOW STATS_TOPN` 语句显示[统计信息](/statistics.md)中的 Top-N 信息。
+The `SHOW STATS_TOPN` statement shows the Top-N information in [statistics](/statistics.md).
 
-目前，`SHOW STATS_TOPN` 语句返回以下列：
+Currently, the `SHOW STATS_TOPN` statement returns the following columns:
 
-| 列名 | 描述 |
+| Column name | Description |
 | ---- | ----|
-| `Db_name` | 数据库名称 |
-| `Table_name` | 表名 |
-| `Partition_name` | 分区名称 |
-| `Column_name` | 列名（当 `is_index` 为 `0` 时）或索引名（当 `is_index` 为 `1` 时） |
-| `Is_index` | 是否为索引列 |
-| `Value` | 该列的值 |
-| `Count` | 该值出现的次数 |
+| `Db_name` | The database name |
+| `Table_name` | The table name |
+| `Partition_name` | The partition name |
+| `Column_name` | The column name (when `is_index` is `0`) or the index name (when `is_index` is `1`) |
+| `Is_index` | Whether it is an index column or not |
+| `Value` | The value of this column |
+| `Count` | How many times the value appears |
 
-## 语法
+## Synopsis
 
 ```ebnf+diagram
 ShowStatsTopnStmt ::=
@@ -30,7 +30,7 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## 示例
+## Example
 
 ```sql
 SHOW STATS_TOPN WHERE Table_name='t';
@@ -50,11 +50,11 @@ SHOW STATS_TOPN WHERE Table_name='t';
 6 rows in set (0.00 sec)
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-此语句是 TiDB 对 MySQL 语法的扩展。
+This statement is a TiDB extension to MySQL syntax.
 
-## 另请参阅
+## See also
 
 * [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)
-* [统计信息简介](/statistics.md)
+* [Introduction to Statistics](/statistics.md)

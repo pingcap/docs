@@ -1,13 +1,13 @@
 ---
-title: 列剪裁
-summary: 了解 TiDB 中列剪裁的使用。
+title: Column Pruning
+summary: Learn about the usage of column pruning in TiDB.
 ---
 
-# 列剪裁
+# Column Pruning
 
-列剪裁的基本思想是，对于算子中未使用的列，优化器在优化过程中不需要保留它们。移除这些列可以减少 I/O 资源的使用，并有助于后续的优化。以下是列重复的示例：
+The basic idea of column pruning is that for columns not used in the operator, the optimizer does not need to retain them during optimization. Removing these columns reduces the use of I/O resources and facilitates the subsequent optimization. The following is an example of column repetition:
 
-假设表 t 中有四列（a、b、c 和 d）。你可以执行以下语句：
+Suppose there are four columns (a, b, c, and d) in table t. You can execute the following statement:
 
 {{< copyable "sql" >}}
 
@@ -15,6 +15,6 @@ summary: 了解 TiDB 中列剪裁的使用。
 select a from t where b> 5
 ```
 
-在这个查询中，只使用了列 a 和列 b，而列 c 和列 d 是冗余的。关于这个语句的查询计划，`Selection` 算子使用列 b，然后 `DataSource` 算子使用列 a 和列 b。由于 `DataSource` 算子不读取列 c 和列 d，所以可以对它们进行剪裁。
+In this query, only column a and column b are used, and column c and column d are redundant. Regarding the query plan of this statement, the `Selection` operator uses column b. Then the `DataSource` operator uses columns a and column b. Columns c and column d can be pruned because the `DataSource` operator does not read them.
 
-因此，当 TiDB 在逻辑优化阶段执行自上而下的扫描时，会剪裁冗余列以减少资源浪费。这个扫描过程称为"列剪裁"，对应于 `columnPruner` 规则。如果你想禁用这个规则，请参考[优化规则和表达式下推的黑名单](/blocklist-control-plan.md)。
+Therefore, when TiDB performs a top-down scanning during the logic optimization phase, redundant columns are pruned to reduce waste of resources. This scanning process is called "Column Pruning", corresponding to the `columnPruner` rule. If you want to disable this rule, refer to [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md).

@@ -1,24 +1,24 @@
 ---
-title: 删除恢复组
-summary: 了解如何在不再需要恢复组时删除它。
+title: Delete a Recovery Group
+summary: Learn how to delete a Recovery Group when it is no longer needed.
 ---
 
-# 删除恢复组
+# Delete a Recovery Group
 
-当不再需要恢复组时，你可以删除它。
+When a recovery group is no longer needed, you can delete it.
 
-## 删除恢复组
+## Delete a recovery group
 
-当不再需要恢复组来管理一组数据库的复制时，你可以从系统中删除它。
+When a recovery group is no longer needed to manage the replication of a set of databases, you can delete it from the system.
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，使用左上角的组合框切换到目标项目。
-2. 在左侧导航栏中，点击**恢复组**。
-3. 在**恢复组**页面上，找到你想要删除的恢复组的名称。
-4. 点击恢复组的**操作**菜单，然后点击**删除**。此时会显示删除对话框。
+1. In the [TiDB Cloud console](https://tidbcloud.com/), switch to your target project using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Recovery Group**.
+3. On the **Recovery Group** page, locate the name of the recovery group that you wish to delete.
+4. Click the **Action** menu for the recovery group, and then click **Delete**. The deletion dialog is displayed.
 
-    > **警告**
+    > **Warning**
     >
-    > - 删除恢复组也会删除与该恢复组关联的所有复制关系。
-    > - 与恢复组关联的数据库将不再受到灾难保护。
+    > - Deleting a recovery group also removes all associated replication relationships associated with that recovery group. 
+    > - The databases associated with the recovery group are no longer protected against disasters.
 
-5. 通过输入恢复组的名称并点击**我理解，删除它**来确认你了解删除的影响。
+5. Confirm that you understand the impact of the deletion by typing the name of the recovery group and clicking **I understand, delete it**.

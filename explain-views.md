@@ -1,21 +1,21 @@
 ---
-title: EXPLAIN 使用视图的语句
-summary: "了解 TiDB 中 `EXPLAIN` 语句返回的执行计划信息。"
+title: EXPLAIN Statements Using Views
+summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
 ---
 
-# EXPLAIN 使用视图的语句
+# EXPLAIN Statements Using Views
 
-`EXPLAIN` 显示[视图](/views.md)引用的表和索引，而不是视图本身的名称。这是因为视图只是虚拟表，本身不存储任何数据。视图的定义和语句的其余部分在 SQL 优化期间会合并在一起。
+`EXPLAIN` displays the tables and indexes that a [view](/views.md) references, not the name of the view itself. This is because views are only virtual tables and do not store any data themselves. The definition of the view and the rest of the statement are merged together during SQL optimization.
 
 <CustomContent platform="tidb">
 
-从 [bikeshare 示例数据库](/import-example-data.md)中，你可以看到以下两个查询的执行方式类似：
+From the [bikeshare example database](/import-example-data.md), you can see that the following two queries are executed in a similar manner:
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-从 [bikeshare 示例数据库](/tidb-cloud/import-sample-data.md)中，你可以看到以下两个查询的执行方式类似：
+From the [bikeshare example database](/tidb-cloud/import-sample-data.md), you can see that the following two queries are executed in a similar manner:
 
 </CustomContent>
 
@@ -52,7 +52,7 @@ Query OK, 0 rows affected (0.13 sec)
 3 rows in set (0.00 sec)
 ```
 
-类似地，视图中的谓词会下推到基表：
+Similarly, predicates from the view are pushed down to the base table:
 
 {{< copyable "sql" >}}
 
@@ -82,9 +82,9 @@ EXPLAIN SELECT * FROM trips WHERE bike_number = 'W00950';
 3 rows in set (0.00 sec)
 ```
 
-在上面的第一个语句中，你可以看到索引用于满足视图定义，然后在 TiDB 读取表行时应用 `bike_number = 'W00950'`。在第二个语句中，没有索引可以满足该语句，因此使用了 `TableFullScan`。
+In the first statement above, you can see that the index is used to satisfy the view definition, and then the `bike_number = 'W00950'` is applied when TiDB reads the table row. In the second statement, there are no indexes to satisfy the statement, and a `TableFullScan` is used.
 
-TiDB 会使用同时满足视图定义和语句本身的索引。考虑以下复合索引：
+TiDB makes use of indexes that satisfy both the view definition and the statement itself. Consider the following composite index:
 
 {{< copyable "sql" >}}
 
@@ -116,4 +116,4 @@ Query OK, 0 rows affected (2 min 31.20 sec)
 3 rows in set (0.00 sec)
 ```
 
-在第一个语句中，TiDB 能够使用复合索引 `(bike_number, duration)` 的两个部分。在第二个语句中，只使用了索引 `(bike_number, duration)` 的第一部分 `bike_number`。
+In the first statement, TiDB is able to use both parts of the composite index `(bike_number, duration)`. In the second statement, only the first part which is `bike_number` of the index `(bike_number, duration)` is used.

@@ -26,7 +26,7 @@ This guide describes the non-default settings, including their benefits and pote
 
 The following settings are commonly used to optimize TiDB performance:
 
-- Enhance execution plan cache, such as [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md) and [Non-prepared plan cache](/sql-non-prepared-plan-cache.md).
+- Enhance execution plan cache, such as [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md), [Non-prepared plan cache](/sql-non-prepared-plan-cache.md), and [Instance-level execution plan cache](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840).
 - Optimize the behavior of the TiDB optimizer by using [Optimizer Fix Controls](/optimizer-fix-controls.md).
 - Use the [Titan](/storage-engine/titan-overview.md) storage engine more aggressively.
 
@@ -37,11 +37,12 @@ These settings can significantly improve performance for many workloads. However
 Execute the following SQL commands to apply the recommended settings:
 
 ```sql
-SET GLOBAL tidb_session_plan_cache_size=200; 
+SET GLOBAL tidb_enable_instance_plan_cache=on;
+SET GLOBAL tidb_instance_plan_cache_max_size=2GiB;
 SET GLOBAL tidb_enable_non_prepared_plan_cache=on;
 SET GLOBAL tidb_ignore_prepared_cache_close_stmt=on;
+SET GLOBAL tidb_analyze_column_options='ALL';
 SET GLOBAL tidb_stats_load_sync_wait=2000;
-SET GLOBAL tidb_enable_inl_join_inner_multi_pattern=on;
 SET GLOBAL tidb_opt_derive_topn=on;
 SET GLOBAL tidb_runtime_filter_mode=LOCAL;
 SET GLOBAL tidb_opt_enable_mpp_shared_cte_execution=on;
@@ -55,11 +56,11 @@ The following table outlines the impact of specific system variable configuratio
 
 | System variable | Description | Note |
 | ---------| ---- | ----|
-| [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710) | Increase the maximum number of plans that can be cached from the default `100` to `200`. This improves performance for workloads with many prepared statement patterns. | Increasing this value can lead to higher memory usage for the session plan cache. |
+| [`tidb_enable_instance_plan_cache`](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840) and [`tidb_instance_plan_cache_max_size`](/system-variables.md#tidb_instance_plan_cache_max_size-new-in-v840)| Use instance-level plan cache instead of session-level caching. This significantly improves performance for workloads with high connection counts or frequent prepared statement usage. | This is an experimental feature. Test in non-production environments first and monitor memory usage as the plan cache size increases. |
 | [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)| Enable the [Non-prepared plan cache](/sql-non-prepared-plan-cache.md) feature to reduce compile costs for applications that do not use prepared statements. | N/A |
 | [`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600)| Cache plans for applications that use prepared statements but close the plan after each execution. | N/A |
+| [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)| Collect statistics for all columns to avoid suboptimal execution plans due to missing column statistics. By default, TiDB only collects statistics for [predicate columns](/statistics.md#collect-statistics-on-some-columns). | Setting this variable to `'ALL'` can cause more resource usage for the `ANALYZE TABLE` operation compared with the default value `'PREDICATE'`. |
 | [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)| Increase the timeout for synchronously loading statistics from the default 100 milliseconds to 2 seconds. This ensures TiDB loads the necessary statistics before query compilation. | Increasing this value leads to a longer synchronization wait time before query compilation. |
-| [`tidb_enable_inl_join_inner_multi_pattern`](/system-variables.md#tidb_enable_inl_join_inner_multi_pattern-new-in-v700) | Enable Index Join support when the inner table has `Selection` or `Projection` operators on it. | N/A | 
 | [`tidb_opt_derive_topn`](/system-variables.md#tidb_opt_derive_topn-new-in-v700)| Enable the optimization rule of [Deriving TopN or Limit from window functions](/derive-topn-from-window.md). | This is limited to the `ROW_NUMBER()` window function. | 
 | [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720)| Enable [Runtime Filter](/runtime-filter.md#runtime-filter-mode) in the local mode to improve hash join efficiency. | The variable is introduced in v7.2.0 and is disabled by default for safety. | 
 | [`tidb_opt_enable_mpp_shared_cte_execution`](/system-variables.md#tidb_opt_enable_mpp_shared_cte_execution-new-in-v720)| Enable non-recursive [Common Table Expressions (CTE)](/sql-statements/sql-statement-with.md) pushdown to TiFlash. | This is an experimental feature. | 
@@ -87,6 +88,10 @@ concurrent-send-snap-limit = 64
 concurrent-recv-snap-limit = 64
 snap-io-max-bytes-per-sec = "400MiB"
 
+[pessimistic-txn]
+in-memory-peer-size-limit = "32MiB"
+in-memory-instance-size-limit = "512MiB"
+
 [rocksdb.titan]
 enabled = true
 [rocksdb.defaultcf.titan]
@@ -100,6 +105,7 @@ l0-files-threshold = 60
 | Configuration item | Description | Note |
 | ---------| ---- | ----|
 | [`concurrent-send-snap-limit`](/tikv-configuration-file.md#concurrent-send-snap-limit), [`concurrent-recv-snap-limit`](/tikv-configuration-file.md#concurrent-recv-snap-limit), and [`snap-io-max-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec) | Set limits for concurrent snapshot transfer and I/O bandwidth during TiKV scaling operations. Higher limits reduce scaling time by allowing faster data migration. | Adjusting these limits affects the trade-off between scaling speed and online transaction performance. |
+| [`in-memory-peer-size-limit`](/tikv-configuration-file.md#in-memory-peer-size-limit-new-in-v840) and [`in-memory-instance-size-limit`](/tikv-configuration-file.md#in-memory-instance-size-limit-new-in-v840) | Control the memory allocation for pessimistic lock caching at the Region and TiKV instance levels. Storing locks in memory reduces disk I/O and improves transaction performance. | Monitor memory usage carefully. Higher limits improve performance but increase memory consumption. |
 | [`rocksdb.titan`](/tikv-configuration-file.md#rocksdbtitan), [`rocksdb.defaultcf.titan`](/tikv-configuration-file.md#rocksdbdefaultcftitan), [`min-blob-size`](/tikv-configuration-file.md#min-blob-size), and [`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression) | Enable the Titan storage engine to reduce write amplification and alleviate disk I/O bottlenecks. Particularly useful when RocksDB compaction cannot keep up with write workloads, resulting in accumulated pending compaction bytes. | Enable it when write amplification is the primary bottleneck. Trade-offs include: 1. Potential performance impact on primary key range scans. 2. Increased space amplification (up to 2x in the worst case). 3. Additional memory usage for blob cache. |
 | [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold) | Control when write flow control is triggered based on the number of kvDB L0 files. Increasing the threshold reduces write stalls during high write workloads. | Higher thresholds might lead to more aggressive compactions when many L0 files exist. |
 
@@ -120,6 +126,92 @@ snap-io-max-bytes-per-sec = "300MiB"
 
 This section compares performance between default settings (baseline) and optimized settings based on the preceding [key settings for common loads](#key-settings-for-common-workloads).
 
+### Sysbench workloads on 1000 tables
+
+#### Test environment
+
+The test environment is as follows:
+
+- 3 TiDB servers (16 cores, 64 GiB)
+- 3 TiKV servers (16 cores, 64 GiB)
+- TiDB version: v8.4.0
+- Workload: [sysbench oltp_read_only](https://github.com/akopytov/sysbench/blob/master/src/lua/oltp_read_only.lua)
+
+#### Performance comparison
+
+The following table compares throughput, latency, and plan cache hit ratio between baseline and optimized settings.
+
+| Metric | Baseline | Optimized | Improvement |
+| ---------| ---- | ----| ----|
+| QPS | 89,100 | 100,128 | +12.38% |
+| Average latency (ms)|35.87 | 31.92 | -11.01% |
+| P95 latency (ms)| 58.92 | 51.02 | -13.41% |
+| Plan cache hit ratio (%) | 56.89% | 87.51% | +53.82% |
+| Plan cache memory usage (MiB) | 95.3 | 70.2 | -26.34% |
+
+#### Key benefits
+
+The instance plan cache demonstrates significant performance improvements over the baseline configuration:
+
+- Higher hit ratio: increases by 53.82% (from 56.89% to 87.51%).
+- Lower memory usage: decreases by 26.34% (from 95.3 MiB to 70.2 MiB).
+- Better performance:
+
+    - QPS increases by 12.38%.
+    - Average latency decreases by 11.01%.
+    - P95 latency decreases by 13.41%.
+
+#### How it works
+
+Instance plan cache improves performance through these mechanisms:
+
+- Cache execution plans for `SELECT` statements in memory.
+- Share cached plans across all connections (up to 200) on the same TiDB instance.
+- Can effectively store plans for up to 5,000 `SELECT` statements across 1,000 tables.
+- Cache misses primarily occur only for `BEGIN` and `COMMIT` statements.
+
+#### Real-world benefits
+
+Although the benchmark using simple sysbench `oltp_read_only` queries (14 KB per plan) shows modest improvements, you can expect greater benefits in real-word applications:
+
+- Complex queries can run up to 20 times faster.
+- Memory usage is more efficient compared to session-level plan cache.
+
+Instance plan cache is particularly effective for systems with:
+
+- Large tables with many columns.
+- Complex SQL queries.
+- High concurrent connections.
+- Diverse query patterns.
+
+#### Memory efficiency
+
+Instance plan cache provides better memory efficiency than session-level plan cache because:
+
+- Plans are shared across all connections
+- No need to duplicate plans for each session
+- More efficient memory utilization while maintaining higher hit ratios
+
+In scenarios with multiple connections and complex queries, session-level plan cache would require significantly more memory to achieve similar hit ratios, making instance plan cache the more efficient choice.
+
+![Instance plan cache: Queries Using Plan Cache OPS](/media/performance/instance-plan-cache.png)
+
+#### Test workload
+
+The following `sysbench oltp_read_only prepare` command loads data:
+
+```bash
+sysbench oltp_read_only prepare --mysql-host={host} --mysql-port={port} --mysql-user=root --db-driver=mysql --mysql-db=test --threads=100 --time=900 --report-interval=10 --tables=1000 --table-size=10000
+```
+
+The following `sysbench oltp_read_only run` command runs workload:
+
+```bash
+sysbench oltp_read_only run --mysql-host={host} --mysql-port={port} --mysql-user=root --db-driver=mysql --mysql-db=test --threads=200 --time=900 --report-interval=10 --tables=1000 --table-size=10000
+```
+
+For more information, see [How to Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md).
+
 ### YCSB workloads on large record value
 
 #### Test environment
@@ -128,7 +220,7 @@ The test environment is as follows:
 
 - 3 TiDB servers (16 cores, 64 GiB)
 - 3 TiKV servers (16 cores, 64 GiB)
-- TiDB version: v8.1.0
+- TiDB version: v8.4.0
 - Workload: [go-ycsb workloada](https://github.com/pingcap/go-ycsb/blob/master/workloads/workloada)
 
 #### Performance comparison
@@ -142,7 +234,7 @@ The following table compares throughput (operations per second) between the base
 
 #### Performance analysis
 
-Titan is enabled by default starting from v7.6.0 and the default `min-blob-size` of Titan in TiDB v8.1.0 is `32KiB`. The baseline configuration uses a record size of `31KiB` to ensure data is stored in RocksDB. In contrast, for the key settings configuration, set `min-blob-size` to `1KiB`, causing data to be stored in Titan.
+Titan is enabled by default starting from v7.6.0 and the default `min-blob-size` of Titan in TiDB v8.4.0 is `32KiB`. The baseline configuration uses a record size of `31KiB` to ensure data is stored in RocksDB. In contrast, for the key settings configuration, set `min-blob-size` to `1KiB`, causing data to be stored in Titan.
 
 The performance improvement observed in the key settings is primarily attributed to Titan's ability to reduce RocksDB compactions. As shown in the following figures:
 
@@ -189,6 +281,7 @@ The following lists some common edge cases:
 - Optimize chunk size for workload characteristics
 - Optimize transaction mode and DML type for different workloads
 - Optimize `GROUP BY` and `DISTINCT` operations with TiKV pushdown
+- Mitigate MVCC version accumulation using in-memory engine
 - Optimize statistics collection during batch operations
 - Optimize thread pool settings for different instance types
 
@@ -202,10 +295,10 @@ The following sections explain how to handle each of these cases. You need to ad
 
 #### Troubleshooting
 
-If your workload involves frequent small transactions or queries that frequently request timestamps, TSO (Timestamp Oracle) can become a performance bottleneck. To check if TSO wait time is impacting your system, check the [**Performance Overview > SQL Execute Time Overview**](/grafana-performance-overview-dashboard.md#sql-execute-time-overview) panel. If TSO wait time constitutes a large portion of your SQL execution time, consider the following optimizations:
+If your workload involves frequent small transactions or queries that frequently request timestamps, [TSO (Timestamp Oracle)](/glossary.md#timestamp-oracle-tso) can become a performance bottleneck. To check if TSO wait time is impacting your system, check the [**Performance Overview > SQL Execute Time Overview**](/grafana-performance-overview-dashboard.md#sql-execute-time-overview) panel. If TSO wait time constitutes a large portion of your SQL execution time, consider the following optimizations:
 
 - Use low-precision TSO (enable [`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso)) for read operations that do not need strict consistency. For more information, see [Solution 1: use low-precision TSO](#solution-1-low-precision-tso).
-- Enable [`tidb_enable_batch_dml`](/system-variables.md#tidb_enable_batch_dml) to reduce TSO requests for batch operations.
+- Combine small transactions into larger ones where possible. For more information, see [Solution 2: parallel mode for TSO requests](#solution-2-parallel-mode-for-tso-requests).
 
 #### Solution 1: low-precision TSO
 
@@ -226,6 +319,28 @@ To enable this optimization:
 
 ```sql
 SET GLOBAL tidb_low_resolution_tso=ON;
+```
+
+#### Solution 2: parallel mode for TSO requests
+
+The [`tidb_tso_client_rpc_mode`](/system-variables.md#tidb_tso_client_rpc_mode-new-in-v840) system variable switches the mode in which TiDB sends TSO RPC requests to PD. The default value is `DEFAULT`. When the following conditions are met, you can consider switching this variable to `PARALLEL` or `PARALLEL-FAST` for potential performance improvements:
+
+- TSO waiting time constitutes a significant portion of the total execution time of SQL queries.
+- The TSO allocation in PD has not reached its bottleneck.
+- PD and TiDB nodes have sufficient CPU resources.
+- The network latency between TiDB and PD is significantly higher than the time PD takes to allocate TSO (that is, network latency accounts for the majority of TSO RPC duration).
+    - To get the duration of TSO RPC requests, check the **PD TSO RPC Duration** panel in the PD Client section of the Grafana TiDB dashboard.
+    - To get the duration of PD TSO allocation, check the **PD server TSO handle duration** panel in the TiDB section of the Grafana PD dashboard.
+- The additional network traffic resulting from more TSO RPC requests between TiDB and PD (twice for `PARALLEL` or four times for `PARALLEL-FAST`) is acceptable.
+
+To switch the parallel mode, execute the following command:
+
+```sql
+-- Use the PARALLEL mode
+SET GLOBAL tidb_tso_client_rpc_mode=PARALLEL;
+
+-- Use the PARALLEL-FAST mode
+SET GLOBAL tidb_tso_client_rpc_mode=PARALLEL-FAST;
 ```
 
 ### Tune coprocessor cache for read-heavy workloads
@@ -336,6 +451,19 @@ SET GLOBAL tidb_opt_agg_push_down = ON;
 
 -- Enable distinct aggregation pushdown
 SET GLOBAL tidb_opt_distinct_agg_push_down = ON;
+```
+
+### Mitigate MVCC version accumulation using in-memory engine
+
+Excessive MVCC versions can cause performance bottlenecks, particularly in high read/write areas or due to issues with garbage collection and compaction. You can use the in-memory engine introduced in v8.5.0 to mitigate this issue. To enable it, add the following configuration to your TiKV configuration file.
+
+> **Note:**
+>
+> The in-memory engine helps reduce the impact of excessive MVCC versions but might increase memory usage. Monitor your system after enabling this feature.
+
+```toml
+[in-memory-engine]
+enable = true
 ```
 
 ### Optimize statistics collection during batch operations

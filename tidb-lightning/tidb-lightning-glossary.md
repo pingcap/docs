@@ -7,6 +7,8 @@ summary: List of special terms used in TiDB Lightning.
 
 This page explains the special terms used in TiDB Lightning's logs, monitoring, configurations, and documentation.
 
+For TiDB-related terms and definitions, see [TiDB glossary](/glossary.md).
+
 <!-- A -->
 
 ## A

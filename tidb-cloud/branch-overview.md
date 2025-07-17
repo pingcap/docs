@@ -1,53 +1,53 @@
 ---
-title: TiDB Cloud Serverless 分支（Beta）概述
-summary: 了解 TiDB Cloud Serverless 分支的概念。
+title: TiDB Cloud Serverless Branching (Beta) Overview
+summary: Learn the concept of TiDB Cloud Serverless branches.
 ---
 
-# TiDB Cloud Serverless 分支（Beta）概述
+# TiDB Cloud Serverless Branching (Beta) Overview
 
-TiDB Cloud 允许你为 TiDB Cloud Serverless 集群创建分支。集群的分支是一个独立的实例，包含从原始集群分叉的数据副本。它提供了一个隔离的环境，让你可以自由实验而不用担心影响原始集群。
+TiDB Cloud lets you create branches for TiDB Cloud Serverless clusters. A branch for a cluster is a separate instance that contains a diverged copy of data from the original cluster. It provides an isolated environment, allowing you to experiment freely without worrying about affecting the original cluster.
 
-通过 TiDB Cloud Serverless 分支，开发人员可以并行工作，快速迭代新功能，在不影响生产数据库的情况下排查问题，并在需要时轻松回滚更改。此功能简化了开发和部署过程，同时确保生产数据库具有高度的稳定性和可靠性。
+With TiDB Cloud Serverless branches, developers can work in parallel, iterate rapidly on new features, troubleshoot issues without affecting the production database, and easily revert changes if needed. This feature streamlines the development and deployment process while ensuring a high level of stability and reliability for the production database.
 
-## 实现方式
+## Implementations
 
-创建集群的分支时，分支中的数据会在特定时间点从原始集群或其父分支分叉。这意味着之后在父分支或子分支中所做的更改不会相互同步。
+When a branch for a cluster is created, the data in the branch diverges from the original cluster or its parent branch at a specific point in time. This means that subsequent changes made in either the parent or the branch will not be synchronized with each other.
 
-为确保快速且无缝的分支创建，TiDB Cloud Serverless 使用写时复制技术在原始集群及其分支之间共享数据。此过程通常在几分钟内完成，用户无法察觉，确保不会影响原始集群的性能。
+To ensure fast and seamless branch creation, TiDB Cloud Serverless uses a copy-on-write technique for sharing data between the original cluster and its branches. This process usually completes within a few minutes and is imperceptible to users, ensuring that it does not affect the performance of your original cluster.
 
-## 使用场景
+## Scenarios
 
-你可以轻松快速地创建分支以获得隔离的数据环境。在以下场景中，当多个开发人员或团队需要独立工作、测试更改、修复错误、尝试新功能或推出更新而不影响生产数据库时，分支特别有用。
+You can create branches easily and quickly to get isolated data environments. Branches are beneficial in the following scenarios where multiple developers or teams need to work independently, test changes, fix bugs, experiment with new features, or roll out updates without disrupting the production database.
 
-- 功能开发：开发人员可以在隔离环境中开发新功能，而不会影响生产数据库。每个功能都可以有自己的分支，允许快速迭代和实验，而不会影响其他正在进行的工作。
+- Feature development: Developers can work on new features in isolation without affecting the production database. Each feature can have its own branch, allowing quick iteration and experimentation without affecting other ongoing work.
 
-- 错误修复：开发人员可以创建专门用于修复特定错误的分支，测试修复方案，然后在验证后合并回去，而不会给生产数据库带来新的问题。
+- Bug fixing: Developers can create a branch dedicated to fixing a specific bug, test the fix, and then merge it back once verified, without introducing new issues to the production database.
 
-- 实验：在开发新功能或进行更改时，开发人员可以创建分支来尝试不同的方法或配置。这使他们能够比较各种选项，收集数据，并在更改合并到生产数据库之前做出明智的决定。
+- Experimentation: While developing new features or making changes, developers can create branches to experiment with different approaches or configurations. This allows them to compare various options, gather data, and make informed decisions before the changes are merged into the production database.
 
-- 性能优化：有时会进行数据库更改以提高性能。通过分支，开发人员可以在隔离环境中实验和微调各种配置、索引或算法，以找到最有效的解决方案。
+- Performance optimization: Database changes are sometimes made to enhance performance. With branching, developers can experiment and fine-tune various configurations, indexes, or algorithms in isolated environments to identify the most efficient solution.
 
-- 测试和暂存：团队可以创建用于测试和暂存的分支。它为质量保证、用户验收测试或暂存定制提供了一个受控环境，然后再将更改合并到生产数据库中。
+- Testing and staging: Teams can create branches for testing and staging purposes. It provides a controlled environment for quality assurance, user acceptance testing, or staging customizations before the changes are merged into the production database.
 
-- 并行开发：不同的团队或开发人员可以同时处理不同的项目。每个项目都可以有自己的分支，实现独立开发和实验，同时仍然能够将更改合并回生产数据库。
+- Parallel development: Different teams or developers can work on separate projects simultaneously. Each project can have its own branch, enabling independent development and experimentation, while still being able to merge changes back into the production database.
 
-## 限制和配额
+## Limitations and quotas
 
-目前，TiDB Cloud Serverless 分支处于 beta 阶段，免费使用。
+Currently, TiDB Cloud Serverless branches are in beta and free of charge.
 
-- 对于 TiDB Cloud 中的每个组织，默认情况下你最多可以在所有集群中创建五个 TiDB Cloud Serverless 分支。集群的分支将在与集群相同的区域中创建，你不能为受限集群或大于 100 GiB 的集群创建分支。
+- For each organization in TiDB Cloud, you can create a maximum of five TiDB Cloud Serverless branches by default across all the clusters. The branches of a cluster will be created in the same region as the cluster, and you cannot create branches for a throttled cluster or a cluster larger than 100 GiB.
 
-- 对于免费集群的每个分支，允许 10 GiB 存储空间。对于可扩展集群的每个分支，允许 100 GiB 存储空间。一旦达到存储限制，此分支上的读写操作将被限制，直到你减少存储空间。
+- For each branch of a free cluster, 10 GiB storage is allowed. For each branch of a scalable cluster, 100 GiB storage is allowed. Once the storage is reached, the read and write operations on this branch will be throttled until you reduce the storage.
 
-- 如果你的集群有带 TiFlash 副本的表，这些副本在你创建新分支后将暂时不可用，因为 TiFlash 需要重建副本数据。
+- If your cluster has tables with TiFlash replicas, these replicas will be temporarily unavailable in the new branch after you create it, because TiFlash needs to rebuild the replica data.
 
-- 当从特定时间点[创建分支](/tidb-cloud/branch-manage.md#create-a-branch)时：
+- When [creating a branch](/tidb-cloud/branch-manage.md#create-a-branch) from a specific point in time:
 
-    - 对于免费集群的分支，你可以选择过去 24 小时内的任何时间。
-    - 对于可扩展集群的分支，你可以选择过去 14 天内的任何时间。
+    - For branches of a free cluster, you can select any time within the last 24 hours.
+    - For branches of a scalable cluster, you can select any time within the last 14 days.
 
-如果你需要更多配额，请[联系 TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。
+If you need more quotas, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
-## 下一步
+## What's next
 
-- [了解如何管理分支](/tidb-cloud/branch-manage.md)
+- [Learn how to manage branches](/tidb-cloud/branch-manage.md)

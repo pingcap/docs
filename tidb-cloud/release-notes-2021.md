@@ -1,128 +1,128 @@
 ---
-title: 2021 年 TiDB Cloud 发布说明
-summary: 了解 2021 年 TiDB Cloud 的发布说明。
+title: TiDB Cloud Release Notes in 2021
+summary: Learn about the release notes of TiDB Cloud in 2021.
 ---
 
-# 2021 年 TiDB Cloud 发布说明
+# TiDB Cloud Release Notes in 2021
 
-本页列出了 2021 年 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 的发布说明。
+This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2021.
 
-## 2021 年 12 月 28 日
+## December 28, 2021
 
-新功能：
+New feature:
 
-* 支持[将 Apache Parquet 文件从 Amazon S3 或 GCS 导入到 TiDB Cloud](/tidb-cloud/import-parquet-files.md)
+* Support [importing Apache Parquet files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-parquet-files.md)
 
-Bug 修复：
+Bug fixes:
 
-* 修复了向 TiDB Cloud 导入超过 1000 个文件时发生的导入错误
-* 修复了 TiDB Cloud 允许将数据导入到已有数据的现有表的问题
+* Fix the import error that occurs when importing more than 1000 files to TiDB Cloud
+* Fix the issue that TiDB Cloud allows to import data to existing tables that already have data
 
-## 2021 年 11 月 30 日
+## November 30, 2021
 
-通用变更：
+General change:
 
-* 将 TiDB Cloud 的开发者层级升级到 [TiDB v5.3.0](https://docs.pingcap.com/tidb/stable/release-5.3.0)
+* Upgrade TiDB Cloud to [TiDB v5.3.0](https://docs.pingcap.com/tidb/stable/release-5.3.0) for Developer Tier
 
-新功能：
+New feature:
 
-* 支持[为你的 TiDB Cloud 项目添加 VPC CIDR](/tidb-cloud/set-up-vpc-peering-connections.md)
+* Support [adding VPC CIDR for your TiDB cloud project](/tidb-cloud/set-up-vpc-peering-connections.md)
 
-改进：
+Improvements:
 
-* 提升开发者层级的监控能力
-* 支持将自动备份时间设置为与开发者层级集群的创建时间相同
+* Improve the monitoring ability for Developer Tier
+* Support setting the auto backup time the same as the creation time of a Developer Tier cluster
 
-Bug 修复：
+Bug fixes:
 
-* 修复开发者层级中由于磁盘满导致的 TiKV 崩溃问题
-* 修复 HTML 注入漏洞
+* Fix the TiKV crash issue due to full disk in Developer Tier
+* Fix the vulnerability of HTML injection
 
-## 2021 年 11 月 8 日
+## November 8, 2021
 
-* 发布 [开发者层级](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)，为你提供 TiDB Cloud 一年的免费试用
+* Launch [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless), which offers you a one-year free trial of TiDB Cloud
 
-    每个开发者层级集群都是一个功能齐全的 TiDB 集群，并包含以下内容：
+    Each Developer Tier cluster is a full-featured TiDB cluster and comes with the following:
 
-    * 一个 TiDB 共享节点
-    * 一个 TiKV 共享节点（具有 500 MiB 的 OLTP 存储）
-    * 一个 TiFlash 共享节点（具有 500 MiB 的 OLAP 存储）
+    * One TiDB shared node
+    * One TiKV shared node (with 500 MiB of OLTP storage)
+    * One TiFlash shared node (with 500 MiB of OLAP storage)
 
-  从[这里](/tidb-cloud/tidb-cloud-quickstart.md)开始。
+  Get started [here](/tidb-cloud/tidb-cloud-quickstart.md).
 
-## 2021 年 10 月 21 日
+## October 21, 2021
 
-* 开放个人邮箱账户的用户注册
-* 支持[从 Amazon S3 或 GCS 导入或迁移到 TiDB Cloud](/tidb-cloud/import-csv-files.md)
+* Open user registration to personal email accounts
+* Support [importing or migrating from Amazon S3 or GCS to TiDB Cloud](/tidb-cloud/import-csv-files.md)
 
-## 2021 年 10 月 11 日
+## October 11, 2021
 
-* 支持[查看和导出 TiDB Cloud 的账单明细](/tidb-cloud/tidb-cloud-billing.md#billing-details)，包括每个服务和每个项目的成本
-* 修复了 TiDB Cloud 内部功能的几个问题
+* Support [viewing and exporting billing details of TiDB Cloud](/tidb-cloud/tidb-cloud-billing.md#billing-details), including the cost of each service and each project
+* Fix several issues of TiDB Cloud internal features
 
-## 2021 年 9 月 16 日
+## September 16, 2021
 
-* 将新部署集群的默认 TiDB 版本从 5.2.0 升级到 5.2.1。 有关 5.2.1 的详细更改，请参阅 [5.2.1](https://docs.pingcap.com/tidb/stable/release-5.2.1) 发行说明。
+* Upgrade the default TiDB version from 5.2.0 to 5.2.1 for newly deployed clusters. See [5.2.1](https://docs.pingcap.com/tidb/stable/release-5.2.1) release notes for detailed changes in 5.2.1.
 
-## 2021 年 9 月 2 日
+## September 2, 2021
 
-* 将新部署集群的默认 TiDB 版本从 5.0.2 升级到 5.2.0。 有关 TiDB 5.1.0 和 5.2.0 功能的详细信息，请参阅 [5.2.0](https://docs.pingcap.com/tidb/stable/release-5.2.0) 和 [5.1.0](https://docs.pingcap.com/tidb/stable/release-5.1.0) 发行说明。
-* 修复了 TiDB Cloud 内部功能的几个问题。
+* Upgrade the default TiDB version from 5.0.2 to 5.2.0 for newly deployed clusters. See [5.2.0](https://docs.pingcap.com/tidb/stable/release-5.2.0) and [5.1.0](https://docs.pingcap.com/tidb/stable/release-5.1.0) release notes for details of TiDB 5.1.0 and 5.2.0 features.
+* Fix several issues of TiDB Cloud internal features.
 
-## 2021 年 8 月 19 日
+## August 19, 2021
 
-* 修复了 TiDB Cloud 内部功能的几个问题。此版本不带来任何用户行为的更改。
+* Fix several issues of TiDB Cloud internal features. This release does not bring any user behavior changes.
 
-## 2021 年 8 月 5 日
+## August 5, 2021
 
-* 支持组织角色管理。组织所有者可以根据需要配置组织成员的权限。
-* 支持组织内多个项目的隔离。组织所有者可以根据需要创建和管理项目，并且项目之间的成员和实例支持网络和权限隔离。
-* 优化账单，以显示当月和上个月的每个项目的账单明细。
+* Support organization role management. Organization owners can configure permissions of organization members as needed.
+* Support the isolation of multiple projects within an organization. Organization owners can create and manage projects as needed, and the members and instances between projects support network and authority isolation.
+* Optimize the bill to show the billing of each item in the current month and previous month.
 
-## 2021 年 7 月 22 日
+## July 22, 2021
 
-* 优化添加信用卡的用户体验
-* 加强信用卡的安全管理
-* 修复集群从备份恢复后无法正常计费的问题
+* Optimize the user experience of adding credit cards
+* Strengthen the security management of credit cards
+* Fix the issue that the cluster recovered from backup cannot be charged normally
 
-## 2021 年 7 月 6 日
+## July 6, 2021
 
-* 将新部署集群的默认 TiDB 版本从 4.0.11 升级到 5.0.2。此次升级带来了显著的性能和功能改进。详情请参见[此处](https://docs.pingcap.com/tidb/stable/release-5.0.0)。
+* Upgrade the default TiDB version from 4.0.11 to 5.0.2 for newly deployed clusters. The upgrade brings significant performance and functionality improvements. See [here](https://docs.pingcap.com/tidb/stable/release-5.0.0) for details.
 
-## 2021 年 6 月 25 日
+## June 25, 2021
 
-* 修复了 [TiDB Cloud 定价](https://www.pingcap.com/pricing/) 页面上 **选择区域** 功能无法使用的问题
+* Fix the **Select Region** not working issue on the [TiDB Cloud Pricing](https://www.pingcap.com/pricing/) page
 
-## 2021 年 6 月 24 日
+## June 24, 2021
 
-* 修复将 Aurora 快照导入 TiDB 实例时 Parquet 文件的解析错误
-* 修复 PoC 用户创建集群并更改集群配置时，预计工时未更新的问题
+* Fix the parse errors of the parquet files when importing the Aurora snapshot into a TiDB instance
+* Fix the Estimated Hours not being updated issue when PoC users create a cluster and change the cluster configuration
 
-## 2021 年 6 月 16 日
+## June 16, 2021
 
-* 在注册账户时，**中国**已添加到**国家/地区**下拉列表中
+* **China** is added to the **Country/Region** drop-down list when you sign up for an account
 
-## 2021 年 6 月 14 日
+## June 14, 2021
 
-* 修复将 Aurora 快照导入 TiDB 实例时挂载 EBS 错误的bug
+* Fix the mounting EBS error when importing the Aurora snapshot into a TiDB instance
 
-## 2021 年 5 月 10 日
+## May 10, 2021
 
-通用
+General
 
-* TiDB Cloud 现在处于公开预览阶段。你可以[注册](https://tidbcloud.com/signup)并选择以下试用选项之一：
+* TiDB Cloud is now in Public Preview. You can [sign up](https://tidbcloud.com/signup) and select one of the trial options:
 
-    * 48小时免费试用
-    * 2周 PoC 免费试用
-    * 预览按需
+    * 48-Hour Free Trial
+    * 2-Week PoC Free Trial
+    * Preview On-Demand
 
-管理控制台
+Management Console
 
-* 注册流程中增加了邮箱验证和反机器人 reCAPTCHA
-* [TiDB Cloud 服务协议](https://pingcap.com/legal/tidb-cloud-services-agreement) 和 [PingCAP 隐私政策](https://pingcap.com/legal/privacy-policy/) 已更新
-* 你可以通过在控制台中填写申请表来申请 [PoC](/tidb-cloud/tidb-cloud-poc.md)
-* 你可以通过 UI 将示例数据导入到 TiDB Cloud 集群中
-* 不允许使用相同名称的集群，以避免混淆
-* 你可以通过点击 **支持** 菜单中的 **提供反馈** 来提供反馈
-* 数据备份和恢复功能适用于 PoC 和按需试用选项
-* 为免费试用和 PoC 添加了积分计算器和积分使用情况仪表板。所有试用选项均免除数据存储和传输成本
+* Email verification and anti-robot reCAPTCHA have been added to the sign up process
+* [TiDB Cloud Service Agreement](https://pingcap.com/legal/tidb-cloud-services-agreement) and [PingCAP Privacy Policy](https://pingcap.com/legal/privacy-policy/) have been updated
+* You can apply for a [PoC](/tidb-cloud/tidb-cloud-poc.md) by filling out an application form in the console
+* You can import sample data into TiDB Cloud cluster through UI
+* Clusters with the same name are not allowed to avoid confusion
+* You can give feedback by clicking **Give Feedback** in the **Support** menu
+* Data backup and restore features are available for PoC and on-demand trial options
+* Points calculator and points usage dashboard have been added for Free Trial and PoC. Data storage and transfer costs are waived for all trial options

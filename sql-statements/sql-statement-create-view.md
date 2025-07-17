@@ -1,13 +1,13 @@
 ---
-title: CREATE VIEW | TiDB SQL 语句参考
-summary: TiDB 数据库中 CREATE VIEW 的使用概述。
+title: CREATE VIEW | TiDB SQL Statement Reference
+summary: An overview of the usage of CREATE VIEW for the TiDB database.
 ---
 
 # CREATE VIEW
 
-`CREATE VIEW` 语句将 `SELECT` 语句保存为可查询对象，类似于表。TiDB 中的视图是非物化的。这意味着在查询视图时，TiDB 会在内部重写查询，将视图定义与 SQL 查询组合在一起。
+The `CREATE VIEW` statement saves a `SELECT` statement as a queryable object, similar to a table. Views in TiDB are non-materialized. This means that as a view is queried, TiDB will internally rewrite the query to combine the view definition with the SQL query.
 
-## 语法概要
+## Synopsis
 
 ```ebnf+diagram
 CreateViewStmt ::=
@@ -34,7 +34,7 @@ ViewCheckOption ::=
     ( 'WITH' ( 'CASCADED' | 'LOCAL' ) 'CHECK' 'OPTION' )?
 ```
 
-## 示例
+## Examples
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -87,13 +87,13 @@ mysql> INSERT INTO v1 (c1) VALUES (7);
 ERROR 1105 (HY000): insert into view v1 is not supported now.
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-* 目前，TiDB 中的任何视图都不能进行插入或更新操作（即不支持 `INSERT VIEW` 和 `UPDATE VIEW`）。`WITH CHECK OPTION` 仅在语法上兼容但不生效。
-* 目前，TiDB 中的视图不支持 `ALTER VIEW`，但你可以使用 `CREATE OR REPLACE` 代替。
-* 目前，`ALGORITHM` 字段在 TiDB 中仅在语法上兼容但不生效。TiDB 目前仅支持 MERGE 算法。
+* Currently, any view in TiDB cannot be inserted or updated (that is, `INSERT VIEW` and `UPDATE VIEW` are not supported). `WITH CHECK OPTION` is only syntactically compatible but does not take effect.
+* Currently, the view in TiDB does not support `ALTER VIEW`, but you can use `CREATE OR REPLACE` instead.
+* Currently, the `ALGORITHM` field is only syntactically compatible in TiDB but does not take effect. TiDB currently only supports the MERGE algorithm.
 
-## 另请参阅
+## See also
 
 * [DROP VIEW](/sql-statements/sql-statement-drop-view.md)
 * [CREATE TABLE](/sql-statements/sql-statement-create-table.md)

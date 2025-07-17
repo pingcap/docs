@@ -1,15 +1,15 @@
 ---
-title: DISTINCT 优化
-summary: "介绍 TiDB 查询优化器中的 `distinct` 优化。"
+title: Distinct Optimization
+summary: Introduce the `distinct` optimization in the TiDB query optimizer.
 ---
 
-# DISTINCT 优化
+# Distinct Optimization
 
-本文档介绍 TiDB 查询优化器中的 `distinct` 优化，包括 `SELECT DISTINCT` 和聚合函数中的 `DISTINCT`。
+This document introduces the `distinct` optimization in the TiDB query optimizer, including `SELECT DISTINCT` and `DISTINCT` in the aggregate functions.
 
-## `SELECT` 语句中的 `DISTINCT` 修饰符
+## `DISTINCT` modifier in `SELECT` statements
 
-`DISTINCT` 修饰符用于从结果集中删除重复的行。`SELECT DISTINCT` 会被转换为 `GROUP BY`，例如：
+The `DISTINCT` modifier specifies removal of duplicate rows from the result set. `SELECT DISTINCT` is transformed to `GROUP BY`, for example:
 
 ```sql
 mysql> explain SELECT DISTINCT a from t;
@@ -23,23 +23,23 @@ mysql> explain SELECT DISTINCT a from t;
 3 rows in set (0.00 sec)
 ```
 
-## 聚合函数中的 `DISTINCT` 选项
+## `DISTINCT` option in aggregate functions
 
-通常，带有 `DISTINCT` 选项的聚合函数在 TiDB 层使用单线程执行模型执行。
+Usually, aggregate functions with the `DISTINCT` option is executed in the TiDB layer in a single-threaded execution model.
 
 <CustomContent platform="tidb">
 
-[`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down) 系统变量或 TiDB 中的 [`distinct-agg-push-down`](/tidb-configuration-file.md#distinct-agg-push-down) 配置项控制是否重写 distinct 聚合查询并将其下推到 TiKV 或 TiFlash Coprocessor。
+The [`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down) system variable or the [`distinct-agg-push-down`](/tidb-configuration-file.md#distinct-agg-push-down) configuration item in TiDB controls whether to rewrite the distinct aggregate queries and push them to the TiKV or TiFlash Coprocessor.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-TiDB 中的 [`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down) 系统变量控制是否重写 distinct 聚合查询并将其下推到 TiKV 或 TiFlash Coprocessor。
+The [`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down) system variable in TiDB controls whether to rewrite the distinct aggregate queries and push them to the TiKV or TiFlash Coprocessor.
 
 </CustomContent>
 
-以下面的查询为例说明这个优化。`tidb_opt_distinct_agg_push_down` 默认是禁用的，这意味着聚合函数在 TiDB 层执行。通过将其值设置为 `1` 启用此优化后，`count(distinct a)` 中的 `distinct a` 部分会被下推到 TiKV 或 TiFlash Coprocessor：在 TiKV Coprocessor 中有一个 HashAgg_5 用于删除列 a 上的重复值。这可能会减少 TiDB 层 `HashAgg_8` 的计算开销。
+Take the following queries as an example of this optimization. `tidb_opt_distinct_agg_push_down` is disabled by default, which means the aggregate functions are executed in the TiDB layer. After enabling this optimization by setting its value to `1`, the `distinct a` part of `count(distinct a)` is pushed to TiKV or TiFlash Coprocessor: there is a HashAgg_5 to remove the duplicated values on column a in the TiKV Coprocessor. It might reduce the computation overhead of `HashAgg_8` in the TiDB layer.
 
 ```sql
 mysql> desc select count(distinct a) from test.t;

@@ -483,7 +483,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8249
 
-    The resource group does not exist. This error is returned when you modify or bind a resource group that does not exist. See [Create a resource group](/tidb-resource-control.md#create-a-resource-group).
+    The resource group does not exist. This error is returned when you modify or bind a resource group that does not exist. See [Create a resource group](/tidb-resource-control-ru-groups.md#create-a-resource-group).
 
 * Error Number: 8250
 
@@ -507,11 +507,11 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8253
 
-    The query stops because it meets the condition of a runaway query. See [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries).
+    The query stops because it meets the condition of a runaway query. See [Runaway Queries](/tidb-resource-control-runaway-queries.md).
 
 * Error Number: 8254
 
-    The query stops because it meets the quarantined watch condition of a runaway query. See [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries).
+    The query stops because it meets the quarantined watch condition of a runaway query. See [Runaway Queries](/tidb-resource-control-runaway-queries.md).
 
 * Error Number: 8260
 

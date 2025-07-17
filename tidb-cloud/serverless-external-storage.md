@@ -1,88 +1,88 @@
 ---
-title: 配置 TiDB Cloud Serverless 外部存储访问
-summary: 了解如何配置 Amazon Simple Storage Service (Amazon S3) 访问。
+title: Configure TiDB Cloud Serverless External Storage Access
+summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access.
 ---
 
-# 配置 TiDB Cloud Serverless 的外部存储访问
+# Configure External Storage Access for TiDB Cloud Serverless
 
-如果你想在 TiDB Cloud Serverless 集群中从外部存储导入数据或将数据导出到外部存储，你需要配置跨账户访问。本文档描述了如何为 TiDB Cloud Serverless 集群配置外部存储访问。
+If you want to import data from or export data to an external storage in a TiDB Cloud Serverless cluster, you need to configure cross-account access. This document describes how to configure access to an external storage for TiDB Cloud Serverless clusters.
 
-如果你需要为 TiDB Cloud Dedicated 集群配置这些外部存储，请参见[配置 TiDB Cloud Dedicated 的外部存储访问](/tidb-cloud/dedicated-external-storage.md)。
+If you need to configure these external storages for a TiDB Cloud Dedicated cluster, see [Configure External Storage Access for TiDB Cloud Dedicated](/tidb-cloud/dedicated-external-storage.md).
 
-## 配置 Amazon S3 访问
+## Configure Amazon S3 access
 
-要允许 TiDB Cloud Serverless 集群访问你的 Amazon S3 存储桶中的源数据，请使用以下任一方法为集群配置存储桶访问：
+To allow a TiDB Cloud Serverless cluster to access the source data in your Amazon S3 bucket, configure the bucket access for the cluster using either of the following methods:
 
-- [使用角色 ARN](#使用角色-arn-配置-amazon-s3-访问)：使用角色 ARN 访问你的 Amazon S3 存储桶。
-- [使用 AWS 访问密钥](#使用-aws-访问密钥配置-amazon-s3-访问)：使用 IAM 用户的访问密钥访问你的 Amazon S3 存储桶。
+- [Use a Role ARN](#configure-amazon-s3-access-using-a-role-arn): use a Role ARN to access your Amazon S3 bucket.
+- [Use an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key): use the access key of an IAM user to access your Amazon S3 bucket.
 
-### 使用角色 ARN 配置 Amazon S3 访问
+### Configure Amazon S3 access using a Role ARN
 
-建议你使用 [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html) 创建角色 ARN。按照以下步骤创建：
+It is recommended that you use [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html) to create a role ARN. Take the following steps to create one:
 
-> **注意：**
+> **Note:**
 >
-> 角色 ARN 访问 Amazon S3 仅支持云提供商为 AWS 的集群。如果你使用其他云提供商，请改用 AWS 访问密钥。更多信息，请参见[使用 AWS 访问密钥配置 Amazon S3 访问](#使用-aws-访问密钥配置-amazon-s3-访问)。
+> Role ARN access to Amazon S3 is only supported for clusters with AWS as the cloud provider. If you use a different cloud provider, use an AWS access key instead. For more information, see [Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key).
 
-1. 打开目标集群的**导入**页面。
+1. Open the **Import** page for your target cluster.
 
-    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/) 并导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面。
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
-    2. 点击目标集群的名称以进入其概览页面，然后在左侧导航栏中点击 **Data** > **Import**。
+    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
-2. 打开**添加新 ARN**对话框。
+2. Open the **Add New ARN** dialog.
 
-    - 如果你想从 Amazon S3 导入数据，按以下步骤打开**添加新 ARN**对话框：
+    - If you want to import data from Amazon S3, open the **Add New ARN** dialog as follows:
 
-        1. 点击**从 S3 导入**。
-        2. 填写**文件 URI**字段。
-        3. 选择 **AWS Role ARN** 并点击**点击此处使用 AWS CloudFormation 创建新的**。
+        1. Click **Import from S3**.
+        2. Fill in the **File URI** field.
+        3. Choose **AWS Role ARN** and click **Click here to create new one with AWS CloudFormation**.
 
-    - 如果你想将数据导出到 Amazon S3，按以下步骤打开**添加新 ARN**对话框：
+    - If you want to export data to Amazon S3, open the **Add New ARN** dialog as follows:
 
-        1. 点击**导出数据到...** > **Amazon S3**。如果你的集群之前从未导入或导出过任何数据，请点击页面底部的**点击此处导出数据到...** > **Amazon S3**。
-        2. 填写**文件夹 URI**字段。
-        3. 选择 **AWS Role ARN** 并点击**点击此处使用 AWS CloudFormation 创建新的**。
+        1. Click **Export data to...**  > **Amazon S3**. If your cluster has neither imported nor exported any data before, click **Click here to export data to...** > **Amazon S3** at the bottom of the page.
+        2. Fill in the **Folder URI** field.
+        3. Choose **AWS Role ARN** and click **Click here to create new one with AWS CloudFormation**.
 
-3. 使用 AWS CloudFormation 模板创建角色 ARN。
+3. Create a role ARN with an AWS CloudFormation template.
 
-    1. 在**添加新 ARN**对话框中，点击 **AWS Console with CloudFormation Template**。
+    1. In the **Add New ARN** dialog, click **AWS Console with CloudFormation Template**.
 
-    2. 登录 [AWS 管理控制台](https://console.aws.amazon.com)，你将被重定向到 AWS CloudFormation **快速创建堆栈**页面。
+    2. Log in to the [AWS Management Console](https://console.aws.amazon.com) and you will be redirected to the AWS CloudFormation **Quick create stack** page.
 
-    3. 填写**角色名称**。
+    3. Fill in the **Role Name**.
 
-    4. 确认创建新角色并点击**创建堆栈**以创建角色 ARN。
+    4. Acknowledge to create a new role and click **Create stack** to create the role ARN.
 
-    5. CloudFormation 堆栈执行完成后，你可以点击**输出**选项卡，在**值**列中找到角色 ARN 值。
+    5. After the CloudFormation stack is executed, you can click the **Outputs** tab and find the Role ARN value in the **Value** column.
 
         ![img.png](/media/tidb-cloud/serverless-external-storage/serverless-role-arn.png)
 
-如果你在使用 AWS CloudFormation 创建角色 ARN 时遇到任何问题，可以按照以下步骤手动创建：
+If you have any trouble creating a role ARN with AWS CloudFormation, you can take the following steps to create one manually:
 
 <details>
-<summary>点击此处查看详细信息</summary>
+<summary>Click here to see details</summary>
 
-1. 在前面说明中描述的**添加新 ARN**对话框中，点击**遇到问题？手动创建角色 ARN**。你将获得 **TiDB Cloud 账户 ID** 和 **TiDB Cloud 外部 ID**。
+1. In the **Add New ARN** dialog described in previous instructions, click **Having trouble? Create Role ARN manually**. You will get the **TiDB Cloud Account ID** and **TiDB Cloud External ID**.
 
-2. 在 AWS 管理控制台中，为你的 Amazon S3 存储桶创建托管策略。
+2. In the AWS Management Console, create a managed policy for your Amazon S3 bucket.
 
-    1. 登录 [AWS 管理控制台](https://console.aws.amazon.com/) 并打开 [Amazon S3 控制台](https://console.aws.amazon.com/s3/)。
+    1. Sign in to the [AWS Management Console](https://console.aws.amazon.com/) and open the [Amazon S3 console](https://console.aws.amazon.com/s3/).
 
-    2. 在**存储桶**列表中，选择包含源数据的存储桶名称，然后点击**复制 ARN**以获取你的 S3 存储桶 ARN（例如，`arn:aws:s3:::tidb-cloud-source-data`）。记下存储桶 ARN 以供后续使用。
+    2. In the **Buckets** list, choose the name of your bucket with the source data, and then click **Copy ARN** to get your S3 bucket ARN (for example, `arn:aws:s3:::tidb-cloud-source-data`). Take a note of the bucket ARN for later use.
 
-        ![复制存储桶 ARN](/media/tidb-cloud/copy-bucket-arn.png)
+        ![Copy bucket ARN](/media/tidb-cloud/copy-bucket-arn.png)
 
-    3. 打开 [IAM 控制台](https://console.aws.amazon.com/iam/)，在左侧导航栏中点击**策略**，然后点击**创建策略**。
+    3. Open the [IAM console](https://console.aws.amazon.com/iam/), click **Policies** in the left navigation pane, and then click **Create Policy**.
 
-        ![创建策略](/media/tidb-cloud/aws-create-policy.png)
+        ![Create a policy](/media/tidb-cloud/aws-create-policy.png)
 
-    4. 在**创建策略**页面，点击 **JSON** 选项卡。
+    4. On the **Create policy** page, click the **JSON** tab.
 
-    5. 根据你的需求在策略文本字段中配置策略。以下是一个可用于从 TiDB Cloud Serverless 集群导出数据和导入数据的示例。
+    5. Configure the policy in the policy text field according to your needs. The following is an example that you can use to export data from and import data into a TiDB Cloud Serverless cluster.
 
-        - 从 TiDB Cloud Serverless 集群导出数据需要 **s3:PutObject** 和 **s3:ListBucket** 权限。
-        - 将数据导入 TiDB Cloud Serverless 集群需要 **s3:GetObject**、**s3:GetObjectVersion** 和 **s3:ListBucket** 权限。
+        - Exporting data from a TiDB Cloud Serverless cluster needs the **s3:PutObject** and **s3:ListBucket** permissions.
+        - Importing data into a TiDB Cloud Serverless cluster needs the **s3:GetObject**, **s3:GetObjectVersion**, and **s3:ListBucket** permissions.
 
         ```json
         {
@@ -110,18 +110,18 @@ summary: 了解如何配置 Amazon Simple Storage Service (Amazon S3) 访问。
         }
         ```
 
-        在策略文本字段中，将以下配置替换为你自己的值。
+        In the policy text field, replace the following configurations with your own values.
 
-        - `"Resource": "<Your S3 bucket ARN>/<Directory of the source data>/*"`。例如：
+        - `"Resource": "<Your S3 bucket ARN>/<Directory of the source data>/*"`. For example:
 
-            - 如果你的源数据存储在 `tidb-cloud-source-data` 存储桶的根目录中，使用 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`。
-            - 如果你的源数据存储在存储桶的 `mydata` 目录中，使用 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`。
+            - If your source data is stored in the root directory of the `tidb-cloud-source-data` bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`.
+            - If your source data is stored in the `mydata` directory of the bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`.
 
-          确保在目录末尾添加 `/*`，以便 TiDB Cloud 可以访问此目录中的所有文件。
+          Make sure that `/*` is added to the end of the directory so TiDB Cloud can access all files in this directory.
 
-        - `"Resource": "<Your S3 bucket ARN>"`，例如 `"Resource": "arn:aws:s3:::tidb-cloud-source-data"`。
+        - `"Resource": "<Your S3 bucket ARN>"`, for example, `"Resource": "arn:aws:s3:::tidb-cloud-source-data"`.
 
-        - 如果你已启用带有客户管理密钥加密的 AWS Key Management Service 密钥（SSE-KMS），请确保策略中包含以下配置。`"arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"` 是存储桶的示例 KMS 密钥。
+        - If you have enabled AWS Key Management Service key (SSE-KMS) with customer-managed key encryption, make sure the following configuration is included in the policy. `"arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"` is a sample KMS key of the bucket.
 
             ```
             {
@@ -134,161 +134,161 @@ summary: 了解如何配置 Amazon Simple Storage Service (Amazon S3) 访问。
             }
             ```
 
-        - 如果你的存储桶中的对象是从另一个加密存储桶复制的，KMS 密钥值需要包含两个存储桶的密钥。例如，`"Resource": ["arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f","arn:aws:kms:ap-northeast-1:495580073302:key/0d7926a7-6ecc-4bf7-a9c1-a38f0faec0cd"]`。
+        - If the objects in your bucket have been copied from another encrypted bucket, the KMS key value needs to include the keys of both buckets. For example, `"Resource": ["arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f","arn:aws:kms:ap-northeast-1:495580073302:key/0d7926a7-6ecc-4bf7-a9c1-a38f0faec0cd"]`.
 
-    6. 点击**下一步**。
+    6. Click **Next**.
 
-    7. 设置策略名称，添加策略标签（可选），然后点击**创建策略**。
+    7. Set a policy name, add a tag of the policy (optional), and then click **Create policy**.
 
-3. 在 AWS 管理控制台中，为 TiDB Cloud 创建访问角色并获取角色 ARN。
+3. In the AWS Management Console, create an access role for TiDB Cloud and get the role ARN.
 
-    1. 在 [IAM 控制台](https://console.aws.amazon.com/iam/)中，在左侧导航栏中点击**角色**，然后点击**创建角色**。
+    1. In the [IAM console](https://console.aws.amazon.com/iam/), click **Roles** in the left navigation pane, and then click **Create role**.
 
-        ![创建角色](/media/tidb-cloud/aws-create-role.png)
+        ![Create a role](/media/tidb-cloud/aws-create-role.png)
 
-    2. 要创建角色，填写以下信息：
+    2. To create a role, fill in the following information:
 
-        - 在**可信实体类型**中，选择 **AWS 账户**。
-        - 在 **AWS 账户**中，选择**其他 AWS 账户**，然后将 TiDB Cloud 账户 ID 粘贴到**账户 ID**字段中。
-        - 在**选项**中，点击**需要外部 ID（当第三方将承担此角色时的最佳实践）**，然后将 TiDB Cloud 外部 ID 粘贴到**外部 ID**字段中。如果创建角色时没有需要外部 ID，一旦为项目中的一个 TiDB 集群完成配置，该项目中的所有 TiDB 集群都可以使用相同的角色 ARN 访问你的 Amazon S3 存储桶。如果使用账户 ID 和外部 ID 创建角色，则只有相应的 TiDB 集群可以访问存储桶。
+        - In **Trusted entity type**, select **AWS account**.
+        - In **An AWS account**, select **Another AWS account**, and then paste the TiDB Cloud account ID to the **Account ID** field.
+        - In **Options**, click **Require external ID (Best practice when a third party will assume this role)**, and then paste the TiDB Cloud External ID to the **External ID** field. If the role is created without a Require external ID, once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project can use the same Role ARN to access your Amazon S3 bucket. If the role is created with the account ID and external ID, only the corresponding TiDB cluster can access the bucket.
 
-    3. 点击**下一步**打开策略列表，选择你刚刚创建的策略，然后点击**下一步**。
+    3. Click **Next** to open the policy list, choose the policy you just created, and then click **Next**.
 
-    4. 在**角色详细信息**中，为角色设置名称，然后点击右下角的**创建角色**。创建角色后，将显示角色列表。
+    4. In **Role details**, set a name for the role, and then click **Create role** in the lower-right corner. After the role is created, the list of roles is displayed.
 
-    5. 在角色列表中，点击你刚刚创建的角色名称以进入其摘要页面，然后你可以获取角色 ARN。
+    5. In the list of roles, click the name of the role that you just created to go to its summary page, and then you can get the role ARN.
 
-        ![复制 AWS 角色 ARN](/media/tidb-cloud/aws-role-arn.png)
+        ![Copy AWS role ARN](/media/tidb-cloud/aws-role-arn.png)
 
 </details>
 
-### 使用 AWS 访问密钥配置 Amazon S3 访问
+### Configure Amazon S3 access using an AWS access key
 
-建议你使用 IAM 用户（而不是 AWS 账户根用户）创建访问密钥。
+It is recommended that you use an IAM user (instead of the AWS account root user) to create an access key.
 
-按照以下步骤配置访问密钥：
+Take the following steps to configure an access key:
 
-1. 创建 IAM 用户。更多信息，请参见[创建 IAM 用户](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console)。
+1. Create an IAM user. For more information, see [creating an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console).
 
-2. 使用你的 AWS 账户 ID 或账户别名以及你的 IAM 用户名和密码登录 [IAM 控制台](https://console.aws.amazon.com/iam)。
+2. Use your AWS account ID or account alias, and your IAM user name and password to sign in to [the IAM console](https://console.aws.amazon.com/iam).
 
-3. 创建访问密钥。更多信息，请参见[为 IAM 用户创建访问密钥](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)。
+3. Create an access key. For more information, see [creating an access key for an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey).
 
-> **注意：**
+> **Note:**
 >
-> TiDB Cloud 不会存储你的访问密钥。建议你在导入或导出完成后[删除访问密钥](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)。
+> TiDB Cloud does not store your access keys. It is recommended that you [delete the access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) after the import or export is complete.
 
-## 配置 GCS 访问
+## Configure GCS access
 
-要允许 TiDB Cloud Serverless 集群访问你的 GCS 存储桶，你需要为存储桶配置 GCS 访问。你可以使用服务账号密钥配置存储桶访问：
+To allow a TiDB Cloud Serverless cluster to access your GCS bucket, you need to configure the GCS access for the bucket. You can use a service account key to configure the bucket access:
 
-按照以下步骤配置服务账号密钥：
+Take the following steps to configure a service account key:
 
-1. 在 Google Cloud [服务账号页面](https://console.cloud.google.com/iam-admin/serviceaccounts)，点击**创建服务账号**以创建服务账号。更多信息，请参见[创建服务账号](https://cloud.google.com/iam/docs/creating-managing-service-accounts)。
+1. On the Google Cloud [service account page](https://console.cloud.google.com/iam-admin/serviceaccounts), click **CREATE SERVICE ACCOUNT** to create a service account. For more information, see [Creating a service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts).
 
-    1. 输入服务账号名称。
-    2. 可选：输入服务账号的描述。
-    3. 点击**创建并继续**以创建服务账号。
-    4. 在`授予此服务账号对项目的访问权限`中，选择具有所需权限的 [IAM 角色](https://cloud.google.com/iam/docs/understanding-roles)。
+    1. Enter a service account name.
+    2. Optional: Enter a description of the service account.
+    3. Click **CREATE AND CONTINUE** to create the service account.
+    4. In the `Grant this service account access to project`, choose the [IAM roles](https://cloud.google.com/iam/docs/understanding-roles) with the needed permission.
 
-        - 从 TiDB Cloud Serverless 集群导出数据需要具有 `storage.objects.create` 权限的角色。
-        - 将数据导入 TiDB Cloud Serverless 集群需要具有 `storage.buckets.get`、`storage.objects.get` 和 `storage.objects.list` 权限的角色。
+        - Exporting data from a TiDB Cloud Serverless cluster needs a role with `storage.objects.create` permission.
+        - Importing data into a TiDB Cloud Serverless cluster needs a role with `storage.buckets.get`, `storage.objects.get`, and `storage.objects.list` permissions.
 
-    5. 点击**继续**进入下一步。
-    6. 可选：在`授予用户访问此服务账号的权限`中，选择需要[将服务账号附加到其他资源](https://cloud.google.com/iam/docs/attach-service-accounts)的成员。
-    7. 点击**完成**以完成服务账号创建。
+    5. Click **Continue** to go to the next step.
+    6. Optional: In the `Grant users access to this service account`, choose members that need to [attach the service account to other resources](https://cloud.google.com/iam/docs/attach-service-accounts).
+    7. Click **Done** to finish creating the service account.
 
    ![service-account](/media/tidb-cloud/serverless-external-storage/gcs-service-account.png)
 
-2. 点击服务账号，然后在`密钥`页面点击**添加密钥**以创建服务账号密钥。
+2. Click the service account, and then click **ADD KEY** on the `KEYS` page to create a service account key.
 
    ![service-account-key](/media/tidb-cloud/serverless-external-storage/gcs-service-account-key.png)
 
-3. 选择默认的 `JSON` 密钥类型，然后点击**创建**以下载 Google Cloud 凭证文件。该文件包含配置 TiDB Cloud Serverless 集群的 GCS 访问时需要使用的服务账号密钥。
+3. Choose the default `JSON` key type, and then click **CREATE** to download the Google Cloud credentials file. The file contains the service account key that you need to use when configuring the GCS access for the TiDB Cloud Serverless cluster.
 
-## 配置 Azure Blob Storage 访问
+## Configure Azure Blob Storage access
 
-要允许 TiDB Cloud Serverless 访问你的 Azure Blob 容器，你需要为容器创建服务 SAS 令牌。
+To allow TiDB Cloud Serverless to access your Azure Blob container, you need to create a service SAS token for the container.
 
-你可以使用 [Azure ARM 模板](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview)（推荐）或手动配置创建 SAS 令牌。
+You can create a SAS token either using an [Azure ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview) (recommended) or manual configuration. 
 
-要使用 Azure ARM 模板创建 SAS 令牌，请按照以下步骤操作：
+To create a SAS token using an Azure ARM template, take the following steps:
 
-1. 打开目标集群的**导入**页面。
+1. Open the **Import** page for your target cluster.
 
-    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/) 并导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面。
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
-    2. 点击目标集群的名称以进入其概览页面，然后在左侧导航栏中点击 **Data** > **Import**。
+    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
-2. 打开**通过 ARM 模板部署生成新的 SAS 令牌**对话框。
+2. Open the **Generate New SAS Token via ARM Template Deployment** dialog.
         
-    1. 点击**导出数据到...** > **Azure Blob Storage**。如果你的集群之前从未导入或导出过任何数据，请点击页面底部的**点击此处导出数据到...** > **Azure Blob Storage**。
+    1. Click **Export data to...**  > **Azure Blob Storage**. If your cluster has neither imported nor exported any data before, click **Click here to export data to...** > **Azure Blob Storage** at the bottom of the page.
    
-    2. 滚动到 **Azure Blob Storage 设置**区域，然后在 SAS 令牌字段下点击**点击此处使用 Azure ARM 模板创建新的**。
+    2. Scroll down to the **Azure Blob Storage Settings** area, and then click **Click here to create a new one with Azure ARM template** under the SAS Token field. 
    
-3. 使用 Azure ARM 模板创建 SAS 令牌。
+3. Create a SAS token with the Azure ARM template.
 
-    1. 在**通过 ARM 模板部署生成新的 SAS 令牌**对话框中，点击**点击打开预配置 ARM 模板的 Azure 门户**。
+    1. In the **Generate New SAS Token via ARM Template Deployment** dialog, click **Click to open the Azure Portal with the pre-configured ARM template**.
    
-    2. 登录 Azure 后，你将被重定向到 Azure **自定义部署**页面。
+    2. After logging in to Azure, you will be redirected to the Azure **Custom deployment** page.
 
-    3. 在**自定义部署**页面中填写**资源组**和**存储账号名称**。你可以从容器所在的存储账号概览页面获取所有信息。
+    3. Fill in the **Resource group** and **Storage Account Name** in the **Custom deployment** page. You can get all the information from the storage account overview page where the container is located.
 
         ![azure-storage-account-overview](/media/tidb-cloud/serverless-external-storage/azure-storage-account-overview.png)
 
-    4. 点击**查看 + 创建**或**下一步**以查看部署。点击**创建**开始部署。
+    4. Click **Review + create** or **Next** to review the deployment. Click **Create** to start the deployment.
    
-    5. 完成后，你将被重定向到部署概览页面。导航到**输出**部分以获取 SAS 令牌。
+    5. After it completes, you will be redirected to the deployment overview page. Navigate to the **Outputs** section to get the SAS token.
 
-如果你在使用 Azure ARM 模板创建 SAS 令牌时遇到任何问题，请按照以下步骤手动创建：
+If you have any trouble creating a SAS token with the Azure ARM template, take the following steps to create one manually:
 
 <details>
-<summary>点击此处查看详细信息</summary>
+<summary>Click here to see details</summary>
 
-1. 在 [Azure 存储账号](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts)页面，点击容器所属的存储账号。
+1. On the [Azure Storage account](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts) page, click your storage account to which the container belongs.
    
-2. 在你的**存储账号**页面，点击**安全性 + 网络**，然后点击**共享访问签名**。
+2. On your **Storage account** page, click the **Security+network**, and then click **Shared access signature**.
 
    ![sas-position](/media/tidb-cloud/serverless-external-storage/azure-sas-position.png)
 
-3. 在**共享访问签名**页面，按如下方式创建具有所需权限的服务 SAS 令牌。更多信息，请参见[创建服务 SAS 令牌](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)。
+3. On the **Shared access signature** page, create a service SAS token with needed permissions as follows. For more information, see [Create a service SAS token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview).
 
-    1. 在**允许的服务**部分，选择 **Blob** 服务。
-    2. 在**允许的资源类型**部分，选择**容器**和**对象**。
-    3. 在**允许的权限**部分，根据需要选择权限。
+    1. In the **Allowed services** section, choose the **Blob** service.
+    2. In the **Allowed Resource types** section, choose **Container** and **Object**.
+    3. In the **Allowed permissions** section, choose the permission as needed.
 
-        - 从 TiDB Cloud Serverless 集群导出数据需要**读取**和**写入**权限。
-        - 将数据导入 TiDB Cloud Serverless 集群需要**读取**和**列表**权限。
+        - Exporting data from a TiDB Cloud Serverless cluster needs the **Read** and **Write** permissions.
+        - Importing data into a TiDB Cloud Serverless cluster needs the **Read** and **List** permissions.
 
-    4. 根据需要调整**开始和到期日期/时间**。
-    5. 其他设置可以保持默认值。
+    4. Adjust **Start and expiry date/time** as needed.
+    5. You can keep the default values for other settings.
 
    ![sas-create](/media/tidb-cloud/serverless-external-storage/azure-sas-create.png)
 
-4. 点击**生成 SAS 和连接字符串**以生成 SAS 令牌。
+4. Click **Generate SAS and connection string** to generate the SAS token.
 
 </details>
 
-## 配置阿里云对象存储服务（OSS）访问
+## Configure Alibaba Cloud Object Storage Service (OSS) access
 
-要允许 TiDB Cloud Serverless 访问你的阿里云 OSS 存储桶，你需要为存储桶创建 AccessKey 对。
+To allow TiDB Cloud Serverless to access your Alibaba Cloud OSS bucket, you need to create an AccessKey pair for the bucket.
 
-按照以下步骤配置 AccessKey 对：
+Take the following steps to configure an AccessKey pair:
 
-1. 创建 RAM 用户并获取 AccessKey 对。更多信息，请参见[创建 RAM 用户](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-ram-user)。
+1. Create a RAM user and get the AccessKey pair. For more information, see [Create a RAM user](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-ram-user).
     
-    在**访问方式**部分，选择**使用永久 AccessKey 访问**。
+    In the **Access Mode** section, select **Using permanent AccessKey to access**.
 
-2. 创建具有所需权限的自定义策略。更多信息，请参见[创建自定义策略](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-custom-policy)。
+2. Create a custom policy with the required permissions. For more information, see [Create custom policies](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-custom-policy).
     
-    - 在**效果**部分，选择**允许**。
-    - 在**服务**部分，选择**对象存储服务**。
-    - 在**操作**部分，根据需要选择权限。
+    - In the **Effect** section, select **Allow**.
+    - In the **Service** section, select **Object Storage Service**.
+    - In the **Action** section, select the permissions as needed.
    
-        要将数据导入 TiDB Cloud Serverless 集群，授予 **oss:GetObject**、**oss:GetBucketInfo** 和 **oss:ListObjects** 权限。
+        To import data into a TiDB Cloud Serverless cluster, grant **oss:GetObject**, **oss:GetBucketInfo**, and **oss:ListObjects** permissions.
 
-        要从 TiDB Cloud Serverless 集群导出数据，授予 **oss:PutObject**、**oss:GetBucketInfo** 和 **oss:ListBuckets** 权限。
+        To export data from a TiDB Cloud Serverless cluster, grant **oss:PutObject**, **oss:GetBucketInfo**, and **oss:ListBuckets** permissions.
         
-    - 在**资源**部分，选择存储桶和存储桶中的对象。
+    - In the **Resource** section, select the bucket and the objects in the bucket.
 
-3. 将自定义策略附加到 RAM 用户。更多信息，请参见[为 RAM 用户授权](https://www.alibabacloud.com/help/en/ram/user-guide/grant-permissions-to-the-ram-user)。
+3. Attach the custom policies to the RAM user. For more information, see [Grant permissions to a RAM user](https://www.alibabacloud.com/help/en/ram/user-guide/grant-permissions-to-the-ram-user).

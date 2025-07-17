@@ -1,39 +1,39 @@
 ---
-title: TiFlash 数据落盘
-summary: 了解 TiFlash 如何将数据落盘以及如何自定义落盘行为。
+title: TiFlash Spill to Disk
+summary: Learn how TiFlash spills data to disk and how to customize the spill behavior.
 ---
 
-# TiFlash 数据落盘
+# TiFlash Spill to Disk
 
-本文介绍 TiFlash 在计算过程中如何将数据落盘。
+This document introduces how TiFlash spills data to disk during computation.
 
-从 v7.0.0 开始，TiFlash 支持将中间数据落盘以缓解内存压力。支持以下算子：
+Starting from v7.0.0, TiFlash supports spilling intermediate data to disk to relieve memory pressure. The following operators are supported:
 
-* 具有等值连接条件的 Hash Join 算子
-* 具有 `GROUP BY` 键的 Hash Aggregation 算子
-* TopN 算子和 Window 函数中的 Sort 算子
+* Hash Join operators with equi-join conditions
+* Hash Aggregation operators with `GROUP BY` keys
+* TopN operators, and Sort operators in Window functions
 
-## 触发落盘
+## Trigger the spilling
 
-TiFlash 提供了两种触发数据落盘的机制。
+TiFlash provides two triggering mechanisms for spilling data to disk.
 
-* 算子级别落盘：通过为每个算子指定数据落盘阈值，你可以控制 TiFlash 何时将该算子的数据落盘。
-* 查询级别落盘：通过指定 TiFlash 节点上查询的最大内存使用量和落盘的内存比例，你可以控制 TiFlash 何时根据需要将查询中支持的算子数据落盘。
+* Operator-level spilling: by specifying the data spilling threshold for each operator, you can control when TiFlash spills data of that operator to disk.
+* Query-level spilling: by specifying the maximum memory usage of a query on a TiFlash node and the memory ratio for spilling, you can control when TiFlash spills data of supported operators in a query to disk as needed.
 
-### 算子级别落盘
+### Operator-level spilling
 
-从 v7.0.0 开始，TiFlash 支持算子级别的自动落盘。你可以使用以下系统变量控制每个算子的数据落盘阈值。当算子的内存使用超过阈值时，TiFlash 会触发该算子的落盘。
+Starting from v7.0.0, TiFlash supports automatic spilling at the operator level. You can control the threshold of data spilling for each operator using the following system variables. When the memory usage of an operator exceeds the threshold, TiFlash triggers spilling for the operator.
 
 * [`tidb_max_bytes_before_tiflash_external_group_by`](/system-variables.md#tidb_max_bytes_before_tiflash_external_group_by-new-in-v700)
 * [`tidb_max_bytes_before_tiflash_external_join`](/system-variables.md#tidb_max_bytes_before_tiflash_external_join-new-in-v700)
 * [`tidb_max_bytes_before_tiflash_external_sort`](/system-variables.md#tidb_max_bytes_before_tiflash_external_sort-new-in-v700)
 
-#### 示例
+#### Example
 
-本示例构造一个消耗大量内存的 SQL 语句来演示 Hash Aggregation 算子的落盘。
+This example constructs a SQL statement that consumes a lot of memory to demonstrate the spilling of the Hash Aggregation operator.
 
-1. 准备环境。创建一个包含 2 个节点的 TiFlash 集群并导入 TPCH-100 数据。
-2. 执行以下语句。这些语句不限制具有 `GROUP BY` 键的 Hash Aggregation 算子的内存使用。
+1. Prepare the environment. Create a TiFlash cluster with 2 nodes and import the TPCH-100 data.
+2. Execute the following statements. These statements do not limit the memory usage of the Hash Aggregation operator with `GROUP BY` keys.
 
     ```sql
     SET tidb_max_bytes_before_tiflash_external_group_by = 0;
@@ -49,13 +49,13 @@ TiFlash 提供了两种触发数据落盘的机制。
     HAVING SUM(l_quantity) > 314;
     ```
 
-3. 从 TiFlash 的日志中可以看到，该查询在单个 TiFlash 节点上需要消耗 29.55 GiB 的内存：
+3. From the log of TiFlash, you can see that the query needs to consume 29.55 GiB of memory on a single TiFlash node:
 
     ```
     [DEBUG] [MemoryTracker.cpp:69] ["Peak memory usage (total): 29.55 GiB."] [source=MemoryTracker] [thread_id=468]
     ```
 
-4. 执行以下语句。此语句将具有 `GROUP BY` 键的 Hash Aggregation 算子的内存使用限制为 10737418240（10 GiB）。
+4. Execute the following statement. This statement limits the memory usage of the Hash Aggregation operator with `GROUP BY` keys to 10737418240 (10 GiB).
 
     ```sql
     SET tidb_max_bytes_before_tiflash_external_group_by = 10737418240;
@@ -71,28 +71,28 @@ TiFlash 提供了两种触发数据落盘的机制。
     HAVING SUM(l_quantity) > 314;
     ```
 
-5. 从 TiFlash 的日志中可以看到，通过配置 `tidb_max_bytes_before_tiflash_external_group_by`，TiFlash 触发了中间结果的落盘，显著降低了查询使用的内存。
+5. From the log of TiFlash, you can see that by configuring `tidb_max_bytes_before_tiflash_external_group_by`, TiFlash triggers the spilling of intermediate results, significantly reducing the memory used by the query.
 
     ```
     [DEBUG] [MemoryTracker.cpp:69] ["Peak memory usage (total): 12.80 GiB."] [source=MemoryTracker] [thread_id=110]
     ```
 
-### 查询级别落盘
+### Query-level spilling
 
-从 v7.4.0 开始，TiFlash 支持查询级别的自动落盘。你可以使用以下系统变量控制此功能：
+Starting from v7.4.0, TiFlash supports automatic spilling at the query level. You can control this feature using the following system variables:
 
-* [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740)：限制 TiFlash 节点上单个查询的最大内存使用量。
-* [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740)：控制触发数据落盘的内存比例。
+* [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740): limits the maximum memory usage for a query on a TiFlash node.
+* [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740): controls the memory ratio that triggers data spilling.
 
-如果 `tiflash_mem_quota_query_per_node` 和 `tiflash_query_spill_ratio` 都设置为大于 0 的值，当查询的内存使用超过 `tiflash_mem_quota_query_per_node * tiflash_query_spill_ratio` 时，TiFlash 会自动触发查询中支持的算子的落盘。
+If both `tiflash_mem_quota_query_per_node` and `tiflash_query_spill_ratio` are set to values greater than 0, TiFlash automatically triggers spilling for supported operators in a query when the memory usage of a query exceeds `tiflash_mem_quota_query_per_node * tiflash_query_spill_ratio`.
 
-#### 示例
+#### Example
 
-本示例构造一个消耗大量内存的 SQL 语句来演示查询级别的落盘。
+This example constructs a SQL statement that consumes a lot of memory to demonstrate the query-level spilling.
 
-1. 准备环境。创建一个包含 2 个节点的 TiFlash 集群并导入 TPCH-100 数据。
+1. Prepare the environment. Create a TiFlash cluster with 2 nodes and import the TPCH-100 data.
 
-2. 执行以下语句。这些语句不限制查询的内存使用或具有 `GROUP BY` 键的 Hash Aggregation 算子的内存使用。
+2. Execute the following statements. These statements do not limit the memory usage of the query or the memory usage of the Hash Aggregation operator with `GROUP BY` keys.
 
     ```sql
     SET tidb_max_bytes_before_tiflash_external_group_by = 0;
@@ -110,13 +110,13 @@ TiFlash 提供了两种触发数据落盘的机制。
     HAVING SUM(l_quantity) > 314;
     ```
 
-3. 从 TiFlash 的日志中可以看到，该查询在单个 TiFlash 节点上消耗了 29.55 GiB 的内存：
+3. From the log of TiFlash, you can see that the query consumes 29.55 GiB of memory on a single TiFlash node:
 
     ```
     [DEBUG] [MemoryTracker.cpp:69] ["Peak memory usage (total): 29.55 GiB."] [source=MemoryTracker] [thread_id=468]
     ```
 
-4. 执行以下语句。这些语句将 TiFlash 节点上查询的最大内存使用量限制为 5 GiB。
+4. Execute the following statements. These statements limit the maximum memory usage of the query on a TiFlash node to 5 GiB.
 
     ```sql
     SET tiflash_mem_quota_query_per_node = 5368709120;
@@ -133,22 +133,22 @@ TiFlash 提供了两种触发数据落盘的机制。
     HAVING SUM(l_quantity) > 314;
     ```
 
-5. 从 TiFlash 的日志中可以看到，通过配置查询级别落盘，TiFlash 触发了中间结果的落盘，显著降低了查询使用的内存。
+5. From the log of TiFlash, you can see that by configuring query-level spilling, TiFlash triggers the spilling of intermediate results, significantly reducing the memory used by the query.
 
     ```
     [DEBUG] [MemoryTracker.cpp:101] ["Peak memory usage (for query): 3.94 GiB."] [source=MemoryTracker] [thread_id=1547]
     ```
 
-## 注意事项
+## Notes
 
-* 当 Hash Aggregation 算子没有 `GROUP BY` 键时，不支持落盘。即使 Hash Aggregation 算子包含 distinct 聚合函数，也不支持落盘。
-* 目前，算子级别落盘的阈值是针对每个算子单独计算的。对于包含两个 Hash Aggregation 算子的查询，如果未配置查询级别落盘，且聚合算子的阈值设置为 10 GiB，则两个 Hash Aggregation 算子只有在各自的内存使用超过 10 GiB 时才会落盘。
-* 目前，Hash Aggregation 算子和 TopN/Sort 算子在恢复阶段使用归并聚合和归并排序算法。因此，这两个算子只触发一轮落盘。如果内存需求非常高，且恢复阶段的内存使用仍然超过阈值，则不会再次触发落盘。
-* 目前，Hash Join 算子使用基于分区的落盘策略。如果恢复阶段的内存使用仍然超过阈值，则会再次触发落盘。但是，为了控制落盘的规模，落盘轮数限制为三轮。如果在第三轮落盘后恢复阶段的内存使用仍然超过阈值，则不会再次触发落盘。
-* 当配置了查询级别落盘（即 [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740) 和 [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740) 都大于 0）时，TiFlash 会忽略单个算子的落盘阈值，并根据查询级别落盘阈值自动触发查询中相关算子的落盘。
-* 即使配置了查询级别落盘，如果查询中使用的算子都不支持落盘，该查询的中间计算结果仍然无法落盘。在这种情况下，当该查询的内存使用超过相关阈值时，TiFlash 会返回错误并终止查询。
-* 即使配置了查询级别落盘且查询包含支持落盘的算子，在以下任一情况下，查询仍可能因超过内存阈值而返回错误：
-    - 查询中其他不支持落盘的算子消耗了太多内存。
-    - 支持落盘的算子未及时落盘。
+* When the Hash Aggregation operator does not have a `GROUP BY` key, it does not support spilling. Even if the Hash Aggregation operator contains a distinct aggregation function, it does not support spilling.
+* Currently, the threshold for operator-level spilling is calculated for each operator separately. For a query containing two Hash Aggregation operators, if the query-level spilling is not configured and the threshold of the aggregation operator is set to 10 GiB, the two Hash Aggregation operators will only spill data when their respective memory usage exceeds 10 GiB.
+* Currently, the Hash Aggregation operators and TopN/Sort operators use the merge aggregation and merge sort algorithm during the restore phase. Therefore, these two operators only trigger a single round of spill. If the memory demand is very high and the memory usage during the restore phase still exceeds the threshold, the spill will not be triggered again.
+* Currently, the Hash Join operator uses the partition-based spill strategy. If the memory usage during the restore phase still exceeds the threshold, the spill will be triggered again. However, to control the scale of the spill, the number of rounds of spill is limited to three. If the memory usage during the restore phase still exceeds the threshold after the third round of spill, the spill will not be triggered again.
+* When query-level spilling is configured (that is, both [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740) and [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740) are greater than 0), TiFlash ignores spilling thresholds of individual operators and automatically triggers spilling for relevant operators in a query based on the query-level spilling thresholds.
+* Even when query-level spilling is configured, if none of the operators used in a query support spilling, the intermediate computation results of that query still cannot be spilled to disk. In this case, when the memory usage of that query exceeds the related threshold, TiFlash will return an error and terminate the query.
+* Even when query-level spilling is configured and a query contains operators that support spilling, the query might still return an error due to exceeding memory thresholds in either of the following scenarios:
+    - Other non-spilling operators in the query consume too much memory.
+    - The spilling operators do not spill to disk timely.
 
-  要解决支持落盘的算子未及时落盘的情况，你可以尝试降低 [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740) 以避免内存阈值错误。
+  To address situations where spilling operators do not spill to disk in time, you can try reducing [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740) to avoid memory threshold errors.

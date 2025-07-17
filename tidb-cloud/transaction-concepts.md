@@ -1,40 +1,40 @@
 ---
-title: 事务
-summary: 了解 TiDB Cloud 的事务概念。
+title: Transactions
+summary: Learn about transaction concepts for TiDB Cloud.
 ---
 
-# 事务
+# Transactions
 
-TiDB 提供完整的分布式事务支持，其模型在 [Google Percolator](https://research.google.com/pubs/pub36726.html) 的基础上进行了一些优化。
+TiDB provides complete distributed transactions, and the model has some optimizations on the basis of [Google Percolator](https://research.google.com/pubs/pub36726.html).
 
-## 乐观事务模式
+## Optimistic transaction mode
 
-TiDB 的乐观事务模型在提交阶段才检测冲突。如果存在冲突，事务需要重试。但是，如果冲突严重，这种模式的效率会很低，因为重试前的操作都是无效的，需要重新执行。
+TiDB's optimistic transaction model does not detect conflicts until the commit phase. If there are conflicts, the transaction needs a retry. But this model is inefficient if the conflict is severe, because operations before the retry are invalid and need to repeat.
 
-假设数据库被用作计数器。高并发访问可能会导致严重的冲突，从而导致多次重试甚至超时。因此，在冲突严重的场景下，建议使用悲观事务模式，或者在系统架构层面解决问题，比如将计数器放在 Redis 中。不过，如果访问冲突不是很严重，乐观事务模型的效率还是很高的。
+Assume that the database is used as a counter. High access concurrency might lead to severe conflicts, resulting in multiple retries or even timeouts. Therefore, in the scenario of severe conflicts, it is recommended to use the pessimistic transaction mode or to solve problems at the system architecture level, such as placing a counter in Redis. Nonetheless, the optimistic transaction model is efficient if the access conflict is not very severe.
 
-更多信息，请参阅 [TiDB 乐观事务模型](/optimistic-transaction.md)。
+For more information, see [TiDB Optimistic Transaction Model](/optimistic-transaction.md).
 
-## 悲观事务模式
+## Pessimistic transaction mode
 
-在 TiDB 中，悲观事务模式的行为与 MySQL 几乎相同。事务在执行阶段就会加锁，这样可以避免冲突情况下的重试，确保更高的成功率。通过使用悲观锁定，你还可以使用 `SELECT FOR UPDATE` 提前锁定数据。
+In TiDB, the pessimistic transaction mode has almost the same behavior as in MySQL. The transaction applies a lock during the execution phase, which avoids retries in conflict situations and ensures a higher success rate. By applying the pessimistic locking, you can also lock data in advance using `SELECT FOR UPDATE`.
 
-但是，如果应用场景的冲突较少，乐观事务模型会有更好的性能表现。
+However, if the application scenario has fewer conflicts, the optimistic transaction model has better performance.
 
-更多信息，请参阅 [TiDB 悲观事务模式](/pessimistic-transaction.md)。
+For more information, see [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md).
 
-## 事务隔离级别
+## Transaction isolation levels
 
-事务隔离是数据库事务处理的基础之一。隔离是事务的四个关键属性之一（通常称为 [ACID](/tidb-cloud/tidb-cloud-glossary.md#acid)）。
+Transaction isolation is one of the foundations of database transaction processing. Isolation is one of the four key properties of a transaction (commonly referred to as [ACID](/tidb-cloud/tidb-cloud-glossary.md#acid)).
 
-TiDB 实现了快照隔离（Snapshot Isolation，SI）一致性，为了与 MySQL 兼容，将其标识为 `REPEATABLE-READ`。这与 [ANSI 可重复读隔离级别](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read)和 [MySQL 可重复读级别](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)有所不同。
+TiDB implements Snapshot Isolation (SI) consistency, which it advertises as `REPEATABLE-READ` for compatibility with MySQL. This differs from the [ANSI Repeatable Read isolation level](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read) and the [MySQL Repeatable Read level](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read).
 
-更多信息，请参阅 [TiDB 事务隔离级别](/transaction-isolation-levels.md)。
+For more information, see [TiDB Transaction Isolation Levels](/transaction-isolation-levels.md).
 
-## 非事务性 DML 语句
+## Non-transactional DML statements
 
-非事务性 DML 语句是一个被拆分成多个 SQL 语句（即多个批次）按顺序执行的 DML 语句。它通过牺牲事务的原子性和隔离性来提高批量数据处理的性能和易用性。
+A non-transactional DML statement is a DML statement split into multiple SQL statements (which is, multiple batches) to be executed in sequence. It enhances the performance and ease of use in batch data processing at the expense of transactional atomicity and isolation.
 
-通常，内存消耗大的事务需要被拆分成多个 SQL 语句以绕过事务大小限制。非事务性 DML 语句将这个过程集成到 TiDB 内核中以实现相同的效果。通过拆分 SQL 语句来理解非事务性 DML 语句的效果会很有帮助。可以使用 `DRY RUN` 语法来预览拆分后的语句。
+Usually, memory-consuming transactions need to be split into multiple SQL statements to bypass the transaction size limit. Non-transactional DML statements integrate this process into the TiDB kernel to achieve the same effect. It is helpful to understand the effect of non-transactional DML statements by splitting SQL statements. The `DRY RUN` syntax can be used to preview the split statements.
 
-更多信息，请参阅[非事务性 DML 语句](/non-transactional-dml.md)。
+For more information, see [Non-Transactional DML Statements](/non-transactional-dml.md).

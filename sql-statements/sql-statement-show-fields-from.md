@@ -1,8 +1,8 @@
 ---
-title: SHOW [FULL] FIELDS FROM | TiDB SQL 语句参考
-summary: TiDB 数据库中 SHOW [FULL] FIELDS FROM 的使用概览。
+title: SHOW [FULL] FIELDS FROM | TiDB SQL Statement Reference
+summary: An overview of the usage of SHOW [FULL] FIELDS FROM for the TiDB database.
 ---
 
 # SHOW [FULL] FIELDS FROM
 
-此语句是 [`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md) 的别名。它是为了与 MySQL 兼容而包含的。
+This statement is an alias to [`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md). It is included for compatibility with MySQL.

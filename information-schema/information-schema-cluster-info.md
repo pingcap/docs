@@ -1,15 +1,15 @@
 ---
 title: CLUSTER_INFO
-summary: "了解 `CLUSTER_INFO` 集群拓扑信息表。"
+summary: Learn the `CLUSTER_INFO` cluster topology information table.
 ---
 
 # CLUSTER_INFO
 
-`CLUSTER_INFO` 集群拓扑表提供了集群的当前拓扑信息，包括每个实例的版本信息、实例版本对应的 Git Hash、每个实例的启动时间以及每个实例的运行时间。
+The `CLUSTER_INFO` cluster topology table provides the current topology information of the cluster, the version information of each instance, the Git Hash corresponding to the instance version, the starting time of each instance, and the running time of each instance.
 
-> **注意：**
+> **Note:**
 >
-> 此表在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群中不可用。
+> This table is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 {{< copyable "sql" >}}
 
@@ -34,16 +34,16 @@ desc cluster_info;
 8 rows in set (0.01 sec)
 ```
 
-字段说明：
+Field description:
 
-* `TYPE`：实例类型。可选值为 `tidb`、`pd` 和 `tikv`。
-* `INSTANCE`：实例地址，格式为 `IP:PORT` 的字符串。
-* `STATUS_ADDRESS`：HTTP API 的服务地址。tikv-ctl、pd-ctl 或 tidb-ctl 中的某些命令可能会使用此 API 和地址。你还可以通过此地址获取更多集群信息。详情请参考 [TiDB HTTP API 文档](https://github.com/pingcap/tidb/blob/release-8.1/docs/tidb_http_api.md)。
-* `VERSION`：对应实例的语义版本号。为了与 MySQL 版本号兼容，TiDB 版本以 `${mysql-version}-${tidb-version}` 的格式显示。
-* `GIT_HASH`：编译实例版本时的 Git Commit Hash，用于标识两个实例是否为完全一致的版本。
-* `START_TIME`：对应实例的启动时间。
-* `UPTIME`：对应实例的运行时间。
-* `SERVER_ID`：对应实例的服务器 ID。
+* `TYPE`: The instance type. The optional values are `tidb`, `pd`, and `tikv`.
+* `INSTANCE`: The instance address, which is a string in the format of `IP:PORT`.
+* `STATUS_ADDRESS`: The service address of HTTP API. Some commands in tikv-ctl, pd-ctl, or tidb-ctl might use this API and this address. You can also get more cluster information via this address. Refer to [TiDB HTTP API document](https://github.com/pingcap/tidb/blob/release-8.5/docs/tidb_http_api.md) for details.
+* `VERSION`: The semantic version number of the corresponding instance. To be compatible with the MySQL version number, the TiDB version is displayed in the format of `${mysql-version}-${tidb-version}`.
+* `GIT_HASH`: The Git Commit Hash when compiling the instance version, which is used to identify whether two instances are of the absolutely consistent version.
+* `START_TIME`: The starting time of the corresponding instance.
+* `UPTIME`: The uptime of the corresponding instance.
+* `SERVER_ID`: The server ID of the corresponding instance.
 
 {{< copyable "sql" >}}
 

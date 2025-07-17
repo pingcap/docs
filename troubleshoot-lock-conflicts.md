@@ -159,6 +159,12 @@ In the above query, the [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tid
 
 If the `start_ts` of the current transaction is unknown, you can try to find it out from the information in the `TIDB_TRX` / `CLUSTER_TIDB_TRX` table or in the [`PROCESSLIST` / `CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md) table.
 
+### Metadata locks
+
+If a session is waiting on a schema change, this can be because of a metadata lock.
+
+See [Metadata Lock](/metadata-lock.md) for more information.
+
 ## Troubleshoot optimistic lock conflicts
 
 This section provides the solutions of common lock conflict issues in the optimistic transaction mode.
@@ -326,7 +332,7 @@ Solutions:
 
 ### TTL manager has timed out
 
-The transaction execution time cannot exceed the GC time limit. In addition, the TTL time of pessimistic transactions has an upper limit, whose default value is 1 hour. Therefore, a pessimistic transaction executed for more than 1 hour will fail to commit. This timeout threshold is controlled by the TiDB parameter [`performance.max-txn-ttl`](https://github.com/pingcap/tidb/blob/release-8.1/pkg/config/config.toml.example).
+The transaction execution time cannot exceed the GC time limit. In addition, the TTL time of pessimistic transactions has an upper limit, whose default value is 1 hour. Therefore, a pessimistic transaction executed for more than 1 hour will fail to commit. This timeout threshold is controlled by the TiDB parameter [`performance.max-txn-ttl`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example).
 
 When the execution time of a pessimistic transaction exceeds the TTL time, the following error message occurs in the TiDB log:
 

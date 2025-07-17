@@ -1,75 +1,83 @@
 ---
-title: 将 TiDB 向量搜索与 Amazon Bedrock 集成
-summary: 了解如何将 TiDB 向量搜索与 Amazon Bedrock 集成以构建检索增强生成（RAG）问答机器人。
+title: Integrate TiDB Vector Search with Amazon Bedrock
+summary: Learn how to integrate TiDB Vector Search with Amazon Bedrock to build a Retrieval-Augmented Generation (RAG) Q&A bot.
 ---
 
-# 将 TiDB 向量搜索与 Amazon Bedrock 集成
+# Integrate TiDB Vector Search with Amazon Bedrock
 
-本教程演示如何将 TiDB 的[向量搜索](/tidb-cloud/vector-search-overview.md)功能与 [Amazon Bedrock](https://aws.amazon.com/bedrock/) 集成，以构建检索增强生成（RAG）问答机器人。
+This tutorial demonstrates how to integrate the [vector search](/vector-search/vector-search-overview.md) feature of TiDB with [Amazon Bedrock](https://aws.amazon.com/bedrock/) to build a Retrieval-Augmented Generation (RAG) Q&A bot.
 
-> **注意**
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
 >
-> TiDB 向量搜索仅适用于 TiDB Self-Managed（TiDB >= v8.4）和 [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)。它不适用于 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)。
+> The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
-> **提示**
+</CustomContent>
+
+> **Note**
 >
-> 你可以在 Notebook 格式中查看完整的[示例代码](https://github.com/aws-samples/aws-generativeai-partner-samples/blob/main/tidb/samples/tidb-bedrock-boto3-rag.ipynb)。
+> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
 
-## 前提条件
+> **Tip**
+>
+> You can view the complete [sample code](https://github.com/aws-samples/aws-generativeai-partner-samples/blob/main/tidb/samples/tidb-bedrock-boto3-rag.ipynb) in Notebook format.
 
-要完成本教程，你需要：
+## Prerequisites
 
-- 安装 [Python 3.11 或更高版本](https://www.python.org/downloads/)
-- 安装 [Pip](https://pypi.org/project/pip/)
-- 安装 [AWS CLI](https://aws.amazon.com/cli/)
+To complete this tutorial, you need:
 
-    确保你的 AWS CLI 配置文件配置为本教程支持的 [Amazon Bedrock](https://aws.amazon.com/bedrock/) 区域。你可以在 [Amazon Bedrock 区域](https://docs.aws.amazon.com/bedrock/latest/userguide/models-regions.html)找到支持的区域列表。要切换到支持的区域，请运行以下命令：
+- [Python 3.11 or later](https://www.python.org/downloads/) installed
+- [Pip](https://pypi.org/project/pip/) installed
+- [AWS CLI](https://aws.amazon.com/cli/) installed
+
+    Ensure your AWS CLI profile is configured to a supported [Amazon Bedrock](https://aws.amazon.com/bedrock/) region for this tutorial. You can find the list of supported regions at [Amazon Bedrock Regions](https://docs.aws.amazon.com/bedrock/latest/userguide/models-regions.html). To switch to a supported region, run the following command:
 
     ```shell
     aws configure set region <your-region>
     ```
 
-- 一个 TiDB Cloud Serverless 集群
+- A TiDB Cloud Serverless cluster
 
-    如果你没有集群，请按照[创建 TiDB Cloud Serverless 集群](/tidb-cloud/create-tidb-cluster-serverless.md)的说明创建自己的 TiDB Cloud 集群。
+    Follow [creating a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
 
-- 具有 [Amazon Bedrock 所需权限](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html)并可访问以下模型的 AWS 账户：
+- An AWS account with the [required permissions for Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html) and access to the following models:
 
-    - **Amazon Titan Embeddings**（`amazon.titan-embed-text-v2:0`），用于生成文本嵌入
-    - **Meta Llama 3**（`us.meta.llama3-2-3b-instruct-v1:0`），用于文本生成
+    - **Amazon Titan Embeddings** (`amazon.titan-embed-text-v2:0`), used for generating text embeddings
+    - **Meta Llama 3** (`us.meta.llama3-2-3b-instruct-v1:0`), used for text generation
 
-  如果你没有访问权限，请按照[请求访问 Amazon Bedrock 基础模型](https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html#getting-started-model-access)中的说明操作。
+  If you don't have access, follow the instructions in [Request access to an Amazon Bedrock foundation model](https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html#getting-started-model-access).
 
-## 开始使用
+## Get started
 
-本节提供将 TiDB 向量搜索与 Amazon Bedrock 集成以构建基于 RAG 的问答机器人的分步说明。
+This section provides step-by-step instructions for integrating TiDB Vector Search with Amazon Bedrock to build a RAG-based Q&A bot.
 
-### 步骤 1. 设置环境变量
+### Step 1. Set the environment variables
 
-从 [TiDB Cloud 控制台](https://tidbcloud.com/)获取 TiDB 连接信息，并在开发环境中设置环境变量，如下所示：
+Get the TiDB connection information from the [TiDB Cloud console](https://tidbcloud.com/) and set the environment variables in your development environment as follows:
 
-1. 导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称进入其概览页面。
+1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
 
-2. 点击右上角的**连接**。此时会显示连接对话框。
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. 确保连接对话框中的配置与你的操作环境匹配。
+3. Ensure the configurations in the connection dialog match your operating environment.
 
-    - **连接类型**设置为 `Public`
-    - **分支**设置为 `main`
-    - **连接方式**设置为 `General`
-    - **操作系统**与你的环境匹配。
+    - **Connection Type** is set to `Public`
+    - **Branch** is set to `main`
+    - **Connect With** is set to `General`
+    - **Operating System** matches your environment.
 
-    > **提示：**
+    > **Tip:**
     >
-    > 如果你的程序在 Windows Subsystem for Linux (WSL) 中运行，请切换到相应的 Linux 发行版。
+    > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
 
-4. 点击**生成密码**创建随机密码。
+4. Click **Generate Password** to create a random password.
 
-    > **提示：**
+    > **Tip:**
     >
-    > 如果你之前已经创建了密码，可以使用原始密码或点击**重置密码**生成新密码。
+    > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
 
-5. 在终端中运行以下命令来设置环境变量。你需要将命令中的占位符替换为从连接对话框获得的相应连接参数。
+5. Run the following commands in your terminal to set the environment variables. You need to replace the placeholders in the commands with the corresponding connection parameters obtained from the connection dialog.
 
     ```shell
     export TIDB_HOST=<your-tidb-host>
@@ -79,30 +87,30 @@ summary: 了解如何将 TiDB 向量搜索与 Amazon Bedrock 集成以构建检�
     export TIDB_DB_NAME=test
     ```
 
-### 步骤 2. 设置 Python 虚拟环境
+### Step 2. Set up the Python virtual environment
 
-1. 创建一个名为 `demo.py` 的 Python 文件：
+1. Create a Python file named `demo.py`:
 
     ```shell
     touch demo.py
     ```
 
-2. 创建并激活虚拟环境以管理依赖项：
+2. Create and activate a virtual environment to manage dependencies:
 
     ```shell
     python3 -m venv env
-    source env/bin/activate  # 在 Windows 上，使用 env\Scripts\activate
+    source env/bin/activate  # On Windows, use env\Scripts\activate
     ```
 
-3. 安装所需的依赖项：
+3. Install the required dependencies:
 
     ```shell
     pip install SQLAlchemy==2.0.30 PyMySQL==1.1.0 tidb-vector==0.0.9 pydantic==2.7.1 boto3
     ```
 
-### 步骤 3. 导入所需库
+### Step 3. Import required libraries
 
-在 `demo.py` 的开头添加以下代码以导入所需的库：
+Add the following code to the beginning of `demo.py` to import the required libraries:
 
 ```python
 import os
@@ -113,52 +121,52 @@ from sqlalchemy.orm import declarative_base, Session
 from tidb_vector.sqlalchemy import VectorType
 ```
 
-### 步骤 4. 配置数据库连接
+### Step 4. Configure the database connection
 
-在 `demo.py` 中，添加以下代码以配置数据库连接：
+In `demo.py`, add the following code to configure the database connection:
 
 ```python
-# ---- 配置设置 ----
-# 设置环境变量：TIDB_HOST, TIDB_PORT, TIDB_USER, TIDB_PASSWORD, TIDB_DB_NAME
+# ---- Configuration Setup ----
+# Set environment variables: TIDB_HOST, TIDB_PORT, TIDB_USER, TIDB_PASSWORD, TIDB_DB_NAME
 TIDB_HOST = os.environ.get("TIDB_HOST")
 TIDB_PORT = os.environ.get("TIDB_PORT")
 TIDB_USER = os.environ.get("TIDB_USER")
 TIDB_PASSWORD = os.environ.get("TIDB_PASSWORD")
 TIDB_DB_NAME = os.environ.get("TIDB_DB_NAME")
 
-# ---- 数据库设置 ----
+# ---- Database Setup ----
 def get_db_url():
-    """构建数据库连接 URL。"""
+    """Build the database connection URL."""
     return f"mysql+pymysql://{TIDB_USER}:{TIDB_PASSWORD}@{TIDB_HOST}:{TIDB_PORT}/{TIDB_DB_NAME}?ssl_verify_cert=True&ssl_verify_identity=True"
 
-# 创建引擎
+# Create engine
 engine = create_engine(get_db_url(), pool_recycle=300)
 Base = declarative_base()
 ```
 
-### 步骤 5. 使用 Bedrock 运行时客户端调用 Amazon Titan Text Embeddings V2 模型
+### Step 5. Invoke the Amazon Titan Text Embeddings V2 model using the Bedrock runtime client
 
-Amazon Bedrock 运行时客户端提供了一个 `invoke_model` API，它接受以下参数：
+The Amazon Bedrock runtime client provides you with an `invoke_model` API that accepts the following parameters:
 
-- `modelId`：Amazon Bedrock 中可用的基础模型的模型 ID。
-- `accept`：输入请求的类型。
-- `contentType`：输入的内容类型。
-- `body`：由提示和配置组成的 JSON 字符串负载。
+- `modelId`: the model ID of the foundation model available in Amazon Bedrock.
+- `accept`: the type of the input request.
+- `contentType`: the content type of the input.
+- `body`: a JSON string payload consisting of the prompt and the configurations.
 
-在 `demo.py` 中，添加以下代码以调用 `invoke_model` API，使用 Amazon Titan Text Embeddings 生成文本嵌入并从 Meta Llama 3 获取响应：
+In `demo.py`, add the following code to invoke the `invoke_model` API to generate text embeddings using Amazon Titan Text Embeddings and get responses from Meta Llama 3:
 
 ```python
-# Bedrock 运行时客户端设置
+# Bedrock Runtime Client Setup
 bedrock_runtime = boto3.client('bedrock-runtime')
 
-# ---- 模型调用 ----
+# ---- Model Invocation ----
 embedding_model_name = "amazon.titan-embed-text-v2:0"
 dim_of_embedding_model = 512
 llm_name = "us.meta.llama3-2-3b-instruct-v1:0"
 
 
 def embedding(content):
-    """调用 Amazon Bedrock 获取文本嵌入。"""
+    """Invoke Amazon Bedrock to get text embeddings."""
     payload = {
         "modelId": embedding_model_name,
         "contentType": "application/json",
@@ -184,13 +192,13 @@ def embedding(content):
 
 
 def generate_result(query: str, info_str: str):
-    """使用 Meta Llama 3 模型生成答案。"""
+    """Generate answer using Meta Llama 3 model."""
     prompt = f"""
-    仅使用以下内容生成答案：
+    ONLY use the content below to generate an answer:
     {info_str}
 
     ----
-    请仔细思考这个问题：{query}
+    Please carefully think about the question: {query}
     """
 
     payload = {
@@ -217,97 +225,97 @@ def generate_result(query: str, info_str: str):
     return completion
 ```
 
-### 步骤 6. 创建向量表
+### Step 6. Create a vector table
 
-在 `demo.py` 中，添加以下代码以创建一个用于存储文本和向量嵌入的向量表：
+In `demo.py`, add the following code to create a vector table to store text and vector embeddings:
 
 ```python
-# ---- TiDB 设置和向量索引创建 ----
+# ---- TiDB Setup and Vector Index Creation ----
 class Entity(Base):
-    """定义带有向量索引的 Entity 表。"""
+    """Define the Entity table with a vector index."""
     __tablename__ = "entity"
     id = Column(Integer, primary_key=True)
     content = Column(Text)
     content_vec = Column(VectorType(dim=dim_of_embedding_model), comment="hnsw(distance=l2)")
 
-# 在 TiDB 中创建表
+# Create the table in TiDB
 Base.metadata.create_all(engine)
 ```
 
-### 步骤 7. 将向量数据保存到 TiDB Cloud Serverless
+### Step 7. Save the vector data to TiDB Cloud Serverless
 
-在 `demo.py` 中，添加以下代码以将向量数据保存到你的 TiDB Cloud Serverless 集群：
+In `demo.py`, add the following code to save the vector data to your TiDB Cloud Serverless cluster:
 
 ```python
-# ---- 将向量保存到 TiDB ----
+# ---- Saving Vectors to TiDB ----
 def save_entities_with_embedding(session, contents):
-    """将多个实体及其嵌入保存到 TiDB Serverless 数据库。"""
+    """Save multiple entities with their embeddings to the TiDB Serverless database."""
     for content in contents:
         entity = Entity(content=content, content_vec=embedding(content))
         session.add(entity)
     session.commit()
 ```
 
-### 步骤 8. 运行应用程序
+### Step 8. Run the application
 
-1. 在 `demo.py` 中，添加以下代码以建立数据库会话，将嵌入保存到 TiDB，提出示例问题（如"什么是 TiDB？"），并从模型生成结果：
+1. In `demo.py`, add the following code to establish a database session, save embeddings to TiDB, ask an example question (such as "What is TiDB?"), and generate results from the model:
 
     ```python
     if __name__ == "__main__":
-        # 建立数据库会话
+        # Establish a database session
         with Session(engine) as session:
-            # 示例数据
+            # Example data
             contents = [
-                "TiDB 是一个与 MySQL 兼容的分布式 SQL 数据库。",
-                "TiDB 支持混合事务和分析处理（HTAP）。",
-                "TiDB 可以水平扩展并提供高可用性。",
-                "Amazon Bedrock 允许与基础模型无缝集成。",
-                "Meta Llama 3 是一个强大的文本生成模型。"
+                "TiDB is a distributed SQL database compatible with MySQL.",
+                "TiDB supports Hybrid Transactional and Analytical Processing (HTAP).",
+                "TiDB can scale horizontally and provides high availability.",
+                "Amazon Bedrock allows seamless integration with foundation models.",
+                "Meta Llama 3 is a powerful model for text generation."
             ]
 
-            # 将嵌入保存到 TiDB
+            # Save embeddings to TiDB
             save_entities_with_embedding(session, contents)
 
-            # 示例查询
-            query = "什么是 TiDB？"
+            # Example query
+            query = "What is TiDB?"
             info_str = " ".join(contents)
 
-            # 从 Meta Llama 3 生成结果
+            # Generate result from Meta Llama 3
             result = generate_result(query, info_str)
-            print(f"生成的答案：{result}")
+            print(f"Generated answer: {result}")
     ```
 
-2. 保存对 `demo.py` 的所有更改并运行脚本：
+2. Save all changes to `demo.py` and run the script:
 
     ```shell
     python3 demo.py
     ```
 
-    预期输出类似于以下内容：
+    The expected output is similar to the following:
 
     ```
-    生成的答案： 什么是 TiDB 的主要目的？
-         TiDB 的主要特性是什么？
-         TiDB 的主要优势是什么？
+    Generated answer:  What is the main purpose of TiDB?
+         What are the key features of TiDB?
+         What are the key benefits of TiDB?
 
         ----
-        根据提供的文本，以下是对问题的回答：
-        什么是 TiDB？
-        TiDB 是一个与 MySQL 兼容的分布式 SQL 数据库。
+        Based on the provided text, here is the answer to the question:
+        What is TiDB?
+        TiDB is a distributed SQL database compatible with MySQL.
 
-    ## 步骤 1：理解问题
-    问题询问 TiDB 的定义。
+    ## Step 1: Understand the question
+    The question asks for the definition of TiDB.
 
-    ## 步骤 2：识别关键信息
-    文本中提供的关键信息是 TiDB 是一个与 MySQL 兼容的分布式 SQL 数据库。
+    ## Step 2: Identify the key information
+    The key information provided in the text is that TiDB is a distributed SQL database compatible with MySQL.
 
-    ## 步骤 3：提供答案
-    根据提供的文本，TiDB 是一个与 MySQL 兼容的分布式 SQL 数据库。
+    ## Step 3: Provide the answer
+    Based on the provided text, TiDB is a distributed SQL database compatible with MySQL.
 
-    最终答案是：TiDB 是一个与 MySQL 兼容的分布式 SQL 数据库。
+    The final answer is: TiDB is a distributed SQL database compatible with MySQL.
     ```
 
-## 另请参阅
+## See also
 
-- [向量数据类型](/tidb-cloud/vector-search-data-types.md)
-- [向量搜索索引](/tidb-cloud/vector-search-index.md)
+- [Vector Data Types](/vector-search/vector-search-data-types.md)
+- [Vector Search Index](/vector-search/vector-search-index.md)

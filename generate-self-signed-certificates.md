@@ -1,6 +1,6 @@
 ---
 title: Generate Self-signed Certificates
-summary: "Use `openssl` to generate self-signed certificates."
+summary: Use `openssl` to generate self-signed certificates.
 ---
 
 # Generate Self-Signed Certificates

@@ -24,12 +24,12 @@ A topology configuration file for TiDB deployment using TiUP might contain the f
 - [tikv_servers](#tikv_servers): The configuration of the TiKV instance. This configuration specifies the machines to which the TiKV component is deployed.
 - [tiflash_servers](#tiflash_servers): The configuration of the TiFlash instance. This configuration specifies the machines to which the TiFlash component is deployed.
 - [tiproxy_servers](#tiproxy_servers): The configuration of the TiProxy instance. This configuration specifies the machines to which the TiProxy component is deployed.
-- [pump_servers](#pump_servers): The configuration of the Pump instance. This configuration specifies the machines to which the Pump component is deployed.
-- [drainer_servers](#drainer_servers): The configuration of the Drainer instance. This configuration specifies the machines to which the Drainer component is deployed.
 - [kvcdc_servers](#kvcdc_servers): The configuration of the [TiKV-CDC](https://tikv.org/docs/7.1/concepts/explore-tikv-features/cdc/cdc/) instance. This configuration specifies the machines to which the TiKV-CDC component is deployed.
 - [cdc_servers](#cdc_servers): The configuration of the TiCDC instance. This configuration specifies the machines to which the TiCDC component is deployed.
 - [tispark_masters](#tispark_masters): The configuration of the TiSpark master instance. This configuration specifies the machines to which the TiSpark master component is deployed. Only one node of TiSpark master can be deployed.
 - [tispark_workers](#tispark_workers): The configuration of the TiSpark worker instance. This configuration specifies the machines to which the TiSpark worker component is deployed.
+- [tso_servers](/tiup/tiup-cluster-topology-reference.md#tso_servers): The configuration of the TSO instance. This configuration specifies the machines to which the `tso` microservice is deployed (requires configuring `pd_mode: "ms"` in [`global`](#global) to enable [PD microservices](/pd-microservices.md)).
+- [scheduling_servers](/tiup/tiup-cluster-topology-reference.md#scheduling_servers): The configuration of the Scheduling instance. This configuration specifies the machines to which the `scheduling` microservice is deployed (requires configuring `pd_mode: "ms"` in [`global`](#global) to enable [PD microservices](/pd-microservices.md)).
 - [monitoring_servers](#monitoring_servers): Specifies the machines to which Prometheus and NGMonitoring are deployed. TiUP supports deploying multiple Prometheus instances but only the first instance is used.
 - [grafana_servers](#grafana_servers): The configuration of the Grafana instance. This configuration specifies the machines to which Grafana is deployed.
 - [alertmanager_servers](#alertmanager_servers): The configuration of the Alertmanager instance. This configuration specifies the machines to which Alertmanager is deployed.
@@ -79,6 +79,8 @@ The `global` section corresponds to the cluster's global configuration and has t
 - `os`: The operating system of the target machine. The field controls which operating system to adapt to for the components pushed to the target machine. The default value is "linux".
 
 - `arch`: The CPU architecture of the target machine. The field controls which platform to adapt to for the binary packages pushed to the target machine. The supported values are "amd64" and "arm64". The default value is "amd64".
+
+- `pd_mode`: The PD working mode. The field controls whether to enable [PD microservices](/pd-microservices.md). The supported value is "ms". Specifying this field means enabling PD microservices.
 
 - `resource_control`: Runtime resource control. All configurations in this field are written into the service file of systemd. There is no limit by default. The resources that can be controlled are as follows:
 
@@ -143,11 +145,11 @@ The above configuration specifies that `node_exporter` uses the `9100` port and 
 
 - `tiproxy`: TiProxy service-related configuration. For the complete configuration, see [TiProxy configuration file](/tiproxy/tiproxy-configuration.md).
 
-- `pump`: Pump service-related configuration. For the complete configuration, see [TiDB Binlog configuration file](/tidb-binlog/tidb-binlog-configuration-file.md#pump).
-
-- `drainer`: Drainer service-related configuration. For the complete configuration, see [TiDB Binlog configuration file](/tidb-binlog/tidb-binlog-configuration-file.md#drainer).
-
 - `cdc`: TiCDC service-related configuration. For the complete configuration, see [Deploy TiCDC](/ticdc/deploy-ticdc.md).
+
+- `tso`: `tso` microservice-related configuration. For the complete configuration, see [TSO configuration file](/tso-configuration-file.md).
+
+- `scheduling`: `scheduling` microservice-related configuration. For the complete configuration, see [Scheduling configuration file](/scheduling-configuration-file.md).
 
 A `server_configs` configuration example is as follows:
 
@@ -184,14 +186,14 @@ Make sure you only configure it when you need to use a specific version of a com
 - `tiflash`: The version of the TiFlash component
 - `pd`: The version of the PD component
 - `tidb_dashboard`: The version of the standalone TiDB Dashboard component
-- `pump`: The version of the Pump component
-- `drainer`: The version of the Drainer component
 - `cdc`: The version of the CDC component
 - `kvcdc`: The version of the TiKV-CDC component
 - `tiproxy`: The version of the TiProxy component
 - `prometheus`: The version of the Prometheus component
 - `grafana`: The version of the Grafana component
 - `alertmanager`: The version of the Alertmanager component
+- `tso`: The version of the TSO component
+- `scheduling`: The version of the Scheduling component
 
 The following is an example configuration for `component_versions`:
 
@@ -434,9 +436,9 @@ tiflash_servers:
 
 - `port`: The listening port of the TiProxy SQL services. The default value is `6000`.
 
-- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated based on the `deploy_dir` directory configured in `global`.
+- `status_port`: The listening port of the TiProxy status service. It is used to view the status of the TiProxy services from the external via HTTP requests. The default value is `3080`.
 
-- `data_dir`: Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated based on the `data_dir` directory configured in `global`.
+- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated based on the `deploy_dir` directory configured in `global`.
 
 - `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is of string type. The value is the ID of the NUMA node, such as `"0,1"`.
 
@@ -451,7 +453,6 @@ Among the above fields, you cannot modify the following configured fields after 
 - `host`
 - `port`
 - `deploy_dir`
-- `data_dir`
 - `arch`
 - `os`
 
@@ -460,113 +461,18 @@ A `tiproxy_servers` configuration example is as follows:
 ```yaml
 tiproxy_servers:
   - host: 10.0.1.21
-  - host: 10.0.1.22
-```
-
-### `pump_servers`
-
-`pump_servers` specifies the machines to which the Pump services of TiDB Binlog are deployed. It also specifies the service configuration on each machine. `pump_servers` is an array, and each element of the array contains the following fields:
-
-- `host`: Specifies the machine to which the Pump services are deployed. The field value is an IP address and is mandatory.
-
-- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
-
-- `port`: The listening port of the Pump services. The default value is `8250`.
-
-- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
-
-- `data_dir`: Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated according to the `data_dir` directory configured in `global`.
-
-- `log_dir`: Specifies the log directory. If it is not specified or specified as a relative directory, the log is generated according to the `log_dir` directory configured in `global`.
-
-- `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
-
-- `config`: The configuration rule of this field is the same as the `pump` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `pump` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Then, a configuration file is generated and sent to the machine specified in `host`.
-
-- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
-
-- `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
-
-- `resource_control`: Resource control for the service. If this field is configured, the field content is merged with the `resource_control` content in `global` (if the two fields overlap, the content of this field takes effect). Then, a systemd configuration file is generated and sent to the machine specified in `host`. The configuration rules of `resource_control` are the same as the `resource_control` content in `global`.
-
-For the above fields, you cannot modify these configured fields after the deployment:
-
-- `host`
-- `port`
-- `deploy_dir`
-- `data_dir`
-- `log_dir`
-- `arch`
-- `os`
-
-A `pump_servers` configuration example is as follows:
-
-```yaml
-pump_servers:
-  - host: 10.0.1.21
+    port: 6000
+    status_port: 3080
     config:
-      gc: 7
+      labels: { zone: "zone1" }
   - host: 10.0.1.22
-```
-
-### `drainer_servers`
-
-`drainer_servers` specifies the machines to which the Drainer services of TiDB Binlog are deployed. It also specifies the service configuration on each machine. `drainer_servers` is an array. Each array element contains the following fields:
-
-- `host`: Specifies the machine to which the Drainer services are deployed. The field value is an IP address and is mandatory.
-
-- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
-
-- `port`: The listening port of Drainer services. The default value is `8249`.
-
-- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
-
-- `data_dir`: Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated according to the `data_dir` directory configured in `global`.
-
-- `log_dir`: Specifies the log directory. If it is not specified or specified as a relative directory, the log is generated according to the `log_dir` directory configured in `global`.
-
-- `commit_ts` (deprecated): When Drainer starts, it reads the checkpoint. If Drainer gets no checkpoint, it uses this field as the replication time point for the initial startup. This field defaults to `-1` (Drainer always gets the latest timestamp from the PD as the commit_ts).
-
-- `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
-
-- `config`: The configuration rule of this field is the same as the `drainer` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `drainer` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Then, a configuration file is generated and sent to the machine specified in `host`.
-
-- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
-
-- `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
-
-- `resource_control`: Resource control for the service. If this field is configured, the field content is merged with the `resource_control` content in `global` (if the two fields overlap, the content of this field takes effect). Then, a systemd configuration file is generated and sent to the machine specified in `host`. The configuration rules of `resource_control` are the same as the `resource_control` content in `global`.
-
-For the above fields, you cannot modify these configured fields after the deployment:
-
-- `host`
-- `port`
-- `deploy_dir`
-- `data_dir`
-- `log_dir`
-- `arch`
-- `os`
-
-The `commit_ts` field is deprecated since TiUP v1.9.2 and is not recorded in the starting script of Drainer. If you still need to use this field, refer to the following example to configure the `initial-commit-ts` field in `config`.
-
-A `drainer_servers` configuration example is as follows:
-
-```yaml
-drainer_servers:
-  - host: 10.0.1.21
+    port: 6000
+    status_port: 3080
     config:
-      initial-commit-ts: -1
-      syncer.db-type: "mysql"
-      syncer.to.host: "127.0.0.1"
-      syncer.to.user: "root"
-      syncer.to.password: ""
-      syncer.to.port: 3306
-      syncer.ignore-table:
-        - db-name: test
-          tbl-name: log
-        - db-name: test
-          tbl-name: audit
+      labels: { zone: "zone2" }
 ```
+
+For more configuration examples, see [TiProxy Deployment Topology](/tiproxy/tiproxy-deployment-topology.md).
 
 ### `kvcdc_servers`
 
@@ -766,6 +672,66 @@ A `tispark_workers` configuration example is as follows:
 tispark_workers:
   - host: 10.0.1.22
   - host: 10.0.1.23
+```
+
+### `tso_servers`
+
+`tso_servers` specifies the machines to which the `tso` microservices are deployed. It also specifies the service configuration on each machine. `tso_servers` is an array, and each element of the array contains the following fields:
+
+- `host`: Specifies the IP address of the machine to which the `tso` microservices are deployed. The field value is mandatory.
+- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+- `port`: Specifies the listening port of the `tso` microservices. The default value is `3379`.
+- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
+- `data_dir`: Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated according to the `data_dir` directory configured in `global`.
+- `config`: The configuration rule of this field is the same as the `tso` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `tso` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Subsequently, a configuration file is generated and sent to the machine specified in `host`.
+- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
+- `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
+
+Among the preceding fields, you cannot modify these fields after the deployment:
+
+- `host`
+- `port`
+- `deploy_dir`
+- `data_dir`
+- `arch`
+- `os`
+
+A `tso_servers` configuration example is as follows:
+
+```yaml
+tso_servers:
+  - host: 10.0.1.21
+  - host: 10.0.1.22
+```
+
+### `scheduling_servers`
+
+`scheduling_servers` specifies the machines to which `scheduling` microservices are deployed. It also specifies the service configuration on each machine. `scheduling_servers` is an array, and each element of the array contains the following fields:
+
+- `host`: Specifies the IP address of the machine to which the `scheduling` microservices are deployed. The field is mandatory.
+- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+- `port`: Specifies the listening port of the `scheduling` microservices. The default value is `3379`.
+- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
+- `data_dir`: Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated according to the `data_dir` directory configured in `global`.
+- `config`: The configuration rule of this field is the same as the `scheduling` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `scheduling` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Subsequently, a configuration file is generated and sent to the machine specified in `host`.
+- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
+- `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
+
+Among the preceding fields, you cannot modify these fields after the deployment:
+
+- `host`
+- `port`
+- `deploy_dir`
+- `data_dir`
+- `arch`
+- `os`
+
+A `scheduling_servers` configuration example is as follows:
+
+```yaml
+scheduling_servers:
+  - host: 10.0.1.21
+  - host: 10.0.1.22
 ```
 
 ### `monitoring_servers`

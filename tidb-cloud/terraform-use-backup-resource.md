@@ -1,29 +1,29 @@
 ---
-title: 使用备份资源
-summary: 了解如何使用备份资源创建 TiDB Cloud 集群的备份。
+title: Use Backup Resource
+summary: Learn how to create a backup of a TiDB Cloud cluster using the backup resource.
 ---
 
-# 使用备份资源
+# Use Backup Resource
 
-你可以在本文档中了解如何使用 `tidbcloud_backup` 资源创建 TiDB Cloud 集群的备份。
+You can learn how to create a backup of a TiDB Cloud cluster with the `tidbcloud_backup` resource in this document.
 
-`tidbcloud_backup` 资源的功能包括以下内容：
+The features of the `tidbcloud_backup` resource include the following:
 
-- 为 TiDB Cloud Dedicated 集群创建备份。
-- 删除 TiDB Cloud Dedicated 集群的备份。
+- Create backups for TiDB Cloud Dedicated clusters.
+- Delete backups for TiDB Cloud Dedicated clusters.
 
-## 前提条件
+## Prerequisites
 
-- [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)。
-- 备份和恢复功能不适用于 TiDB Cloud Serverless 集群。要使用备份资源，请确保你已创建了 TiDB Cloud Dedicated 集群。
+- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
+- The backup and restore feature is unavailable to TiDB Cloud Serverless clusters. To use backup resources, make sure that you have created a TiDB Cloud Dedicated cluster.
 
-## 使用备份资源创建备份
+## Create a backup with the backup resource
 
-1. 创建一个备份目录并进入该目录。
+1. Create a directory for the backup and enter it.
 
-2. 创建一个 `backup.tf` 文件。
+2. Create a `backup.tf` file.
 
-    例如：
+    For example:
 
     ```
     terraform {
@@ -46,9 +46,9 @@ summary: 了解如何使用备份资源创建 TiDB Cloud 集群的备份。
     }
     ```
 
-    你需要将文件中的资源值（如项目 ID 和集群 ID）替换为你自己的值。
+    You need to replace resource values (such as project ID and cluster ID) in the file with your own.
 
-    如果你已经使用 Terraform 维护了一个集群资源（例如 `example_cluster`），你也可以按如下方式配置备份资源，而无需指定实际的项目 ID 和集群 ID。
+    If you have maintained a cluster resource (for example, `example_cluster`) using Terraform, you can also configure the backup resource as follows, without specifying the actual project ID and cluster ID.
 
     ```
     resource "tidbcloud_backup" "example_backup" {
@@ -59,7 +59,7 @@ summary: 了解如何使用备份资源创建 TiDB Cloud 集群的备份。
     }
     ```
 
-3. 运行 `terraform apply` 命令：
+3. Run the `terraform apply` command:
 
     ```
     $ terraform apply
@@ -93,7 +93,7 @@ summary: 了解如何使用备份资源创建 TiDB Cloud 集群的备份。
       Enter a value:
     ```
 
-4. 输入 `yes` 创建备份：
+4. Type `yes` to create a backup:
 
     ```
       Enter a value: yes
@@ -105,7 +105,7 @@ summary: 了解如何使用备份资源创建 TiDB Cloud 集群的备份。
 
     ```
 
-5. 使用 `terraform state show tidbcloud_backup.${resource-name}` 检查备份状态：
+5. Use `terraform state show tidbcloud_backup.${resource-name}` to check the status of the backup:
 
     ```
     $ terraform state show tidbcloud_backup.example_backup
@@ -124,7 +124,7 @@ summary: 了解如何使用备份资源创建 TiDB Cloud 集群的备份。
     }
     ```
 
-6. 等待几分钟。然后使用 `terraform refersh` 更新状态：
+6. Wait for some minutes. Then use `terraform refersh` to update the status:
 
     ```
     $ terraform refresh
@@ -145,17 +145,17 @@ summary: 了解如何使用备份资源创建 TiDB Cloud 集群的备份。
     }
     ```
 
-当状态变为 `SUCCESS` 时，表示你已经为集群创建了备份。请注意，备份在创建后无法更新。
+When the status turns to `SUCCESS`, it indicates that you have created a backup for your cluster. Pay attention that the backup cannot be updated after the creation.
 
-现在，你已经为集群创建了备份。如果你想使用备份来恢复集群，可以[使用恢复资源](/tidb-cloud/terraform-use-restore-resource.md)。
+Now, you have created a backup for the cluster. If you want to use the backup to restore the cluster, you can [use the restore resources](/tidb-cloud/terraform-use-restore-resource.md).
 
-## 更新备份
+## Update a backup
 
-备份无法更新。
+Backups cannot be updated.
 
-## 删除备份
+## Delete a backup
 
-要删除备份，请转到包含相应 `backup.tf` 文件的备份目录，然后运行 `terraform destroy` 命令来销毁备份资源。
+To delete a backup, go to the backup directory where the corresponding `backup.tf` file is located, and then run the `terraform destroy` command to destroy the backup resource.
 
 ```
 $ terraform destroy
@@ -169,7 +169,7 @@ There is no undo. Only 'yes' will be accepted to confirm.
 Enter a value: yes
 ```
 
-现在，如果你运行 `terraform show` 命令，你将得不到任何内容，因为资源已被清除：
+Now, if you run the `terraform show` command, you will get nothing because the resource has been cleared:
 
 ```
 $ terraform show

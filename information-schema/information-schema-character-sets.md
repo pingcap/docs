@@ -1,18 +1,18 @@
 ---
 title: CHARACTER_SETS
-summary: "了解 `CHARACTER_SETS` INFORMATION_SCHEMA 表。"
+summary: Learn the `CHARACTER_SETS` INFORMATION_SCHEMA table.
 ---
 
 # CHARACTER_SETS
 
-`CHARACTER_SETS` 表提供了关于[字符集](/character-set-and-collation.md)的信息。目前，TiDB 仅支持部分字符集。
+The `CHARACTER_SETS` table provides information about [character sets](/character-set-and-collation.md). Currently, TiDB only supports some of the character sets.
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC CHARACTER_SETS;
 ```
 
-输出结果如下：
+The output is as follows:
 
 ```
 +----------------------+-------------+------+------+---------+-------+
@@ -26,13 +26,13 @@ DESC CHARACTER_SETS;
 4 rows in set (0.00 sec)
 ```
 
-查看 `CHARACTER_SETS` 表：
+View the `CHARACTER_SETS` table:
 
 ```sql
 SELECT * FROM `CHARACTER_SETS`;
 ```
 
-输出结果如下：
+The output is as follows:
 
 ```sql
 +--------------------+----------------------+-------------------------------------+--------+
@@ -48,14 +48,14 @@ SELECT * FROM `CHARACTER_SETS`;
 6 rows in set (0.00 sec)
 ```
 
-`CHARACTER_SETS` 表中各列的描述如下：
+The description of columns in the `CHARACTER_SETS` table is as follows:
 
-* `CHARACTER_SET_NAME`：字符集的名称。
-* `DEFAULT_COLLATE_NAME`：字符集的默认排序规则名称。
-* `DESCRIPTION`：字符集的描述。
-* `MAXLEN`：在此字符集中存储一个字符所需的最大长度。
+* `CHARACTER_SET_NAME`: The name of the character set.
+* `DEFAULT_COLLATE_NAME` The default collation name of the character set.
+* `DESCRIPTION` The description of the character set.
+* `MAXLEN` The maximum length required to store a character in this character set.
 
-## 另请参阅
+## See also
 
 - [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
 - [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)

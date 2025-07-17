@@ -1,27 +1,27 @@
 ---
-title: 配置集群密码设置
-summary: 了解如何配置连接到集群的 root 密码。
+title: Configure Cluster Password Settings
+summary: Learn how to configure the root password to connect to your cluster.
 ---
 
-# 配置集群密码设置
+# Configure Cluster Password Settings
 
-对于 TiDB Cloud Dedicated 集群，你可以配置 root 密码和允许的 IP 地址来连接到你的集群。
+For TiDB Cloud Dedicated clusters, you can configure the root password and allowed IP addresses to connect to your cluster.
 
-> **注意：**
+> **Note:**
 >
-> 对于 TiDB Cloud Serverless 集群，本文档不适用，你可以参考 [TiDB Cloud Serverless 的 TLS 连接](/tidb-cloud/secure-connections-to-serverless-clusters.md)。
+> For TiDB Cloud Serverless clusters, this document is inapplicable and you can refer to [TLS Connection to TiDB Cloud Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md) instead.
 
-1. 在 TiDB Cloud 控制台中，导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面。
+1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
-    > **提示：**
+    > **Tip:**
     >
-    > 你可以使用左上角的组合框在组织、项目和集群之间切换。
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. 在目标集群所在行，点击 **...** 并选择**密码设置**。
-3. 设置连接到集群的 root 密码，然后点击**保存**。
+2. In the row of your target cluster, click **...** and select **Password Settings**.
+3. Set the root password to connect to your cluster, and then click **Save**.
 
-    你可以点击**自动生成密码**生成随机密码。生成的密码不会再次显示，因此请将密码保存在安全的位置。
+    You can click **Auto-generate Password** to generate a random password. The generated password will not show again, so save your password in a secure location.
 
-> **提示：**
+> **Tip:**
 >
-> 如果你正在查看集群的概览页面，也可以点击页面右上角的 **...**，选择**密码设置**，并配置这些设置。
+> If you are viewing the overview page of your cluster, you can click the **...** in the upper-right corner of the page, select **Password Settings**, and configure these settings, too.
