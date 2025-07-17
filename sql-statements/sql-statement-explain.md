@@ -1,21 +1,21 @@
 ---
-title: EXPLAIN | TiDB SQL Statement Reference
-summary: An overview of the usage of EXPLAIN for the TiDB database.
+title: EXPLAIN | TiDB SQL 语句参考
+summary: 关于在 TiDB 数据库中使用 EXPLAIN 的概述。
 ---
 
 # `EXPLAIN`
 
-The `EXPLAIN` statement shows the execution plan for a query without executing it. It complements the `EXPLAIN ANALYZE` statement, which executes the query. If the output of `EXPLAIN` does not match the expected result, consider executing `ANALYZE TABLE` on each table in the query to make sure the table statistics are up to date.
+`EXPLAIN` 语句显示查询的执行计划，而不执行该查询。它补充了 `EXPLAIN ANALYZE` 语句，后者会执行该查询。如果 `EXPLAIN` 的输出与预期结果不符，可以考虑对查询涉及的每个表执行 `ANALYZE TABLE`，以确保表统计信息是最新的。
 
-> **Note:**
+> **注意：**
 >
-> Certain subqueries are pre-executed during the optimization phase to generate optimal execution plans, even in the `EXPLAIN` statement. For more information on this behavior and how to disable it, see [`tidb_opt_enable_non_eval_scalar_subquery`](/system-variables.md#tidb_opt_enable_non_eval_scalar_subquery-new-in-v730) and [Disable the early execution of subqueries](/explain-walkthrough.md#disable-the-early-execution-of-subqueries).
+> 某些子查询在优化阶段会被预先执行，以生成最优的执行计划，即使在 `EXPLAIN` 语句中也是如此。关于此行为的更多信息以及如何禁用它，请参见 [`tidb_opt_enable_non_eval_scalar_subquery`](/system-variables.md#tidb_opt_enable_non_eval_scalar_subquery-new-in-v730) 和 [禁用子查询的提前执行](#disable-the-early-execution-of-subqueries)。
 
-The statements `DESC` and `DESCRIBE` are aliases of the `EXPLAIN` statement. The alternative usage of `EXPLAIN <tableName>` is documented in [`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md).
+`DESC` 和 `DESCRIBE` 语句是 `EXPLAIN` 语句的别名。`EXPLAIN <tableName>` 的替代用法详见 [`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)。
 
-TiDB supports the `EXPLAIN [options] FOR CONNECTION connection_id` statement. However, this statement is different from the `EXPLAIN FOR` statement in MySQL. For more details, see [`EXPLAIN FOR CONNECTION`](#explain-for-connection).
+TiDB 支持 `EXPLAIN [options] FOR CONNECTION connection_id` 语句，但此语句与 MySQL 中的 `EXPLAIN FOR` 不同。更多详情请参见 [`EXPLAIN FOR CONNECTION`](#explain-for-connection)。
 
-## Synopsis
+## 概要
 
 ```ebnf+diagram
 ExplainSym ::=
@@ -35,29 +35,27 @@ ExplainableStmt ::=
 |   UnionStmt
 ```
 
-## `EXPLAIN` output format
+## `EXPLAIN` 输出格式
 
-> **Note:**
+> **注意：**
 >
-> When you use the MySQL client to connect to TiDB, to read the output result in a clearer way without line wrapping, you can use the `pager less -S` command. Then, after the `EXPLAIN` result is output, you can press the right arrow <kbd>→</kbd> button on your keyboard to horizontally scroll through the output.
+> 当你使用 MySQL 客户端连接到 TiDB 时，为了更清晰地阅读输出结果且避免换行，可以使用 `pager less -S` 命令。然后，在输出 `EXPLAIN` 结果后，可以按键盘上的右箭头 <kbd>→</kbd> 向右滚动输出内容。
 
-> **Note:**
+> **注意：**
 >
-> In the returned execution plan, for all probe-side child nodes of `IndexJoin` and `Apply` operators, the meaning of `estRows` since v6.4.0 is different from that before v6.4.0. You can find details in [TiDB Query Execution Plan Overview](/explain-overview.md#understand-explain-output).
+> 在返回的执行计划中，从 v6.4.0 起，`IndexJoin` 和 `Apply` 操作符的所有 probe 端子节点的 `estRows` 含义与 v6.4.0 之前不同。详细信息请参见 [TiDB 查询执行计划概览](/explain-overview.md#understand-explain-output)。
 
-Currently, `EXPLAIN` in TiDB outputs 5 columns: `id`, `estRows`, `task`, `access object`, `operator info`. Each operator in the execution plan is described by these attributes, with each row in the `EXPLAIN` output describing an operator. The description of each attribute is as follows:
+目前，TiDB 中的 `EXPLAIN` 输出包含 5 列：`id`、`estRows`、`task`、`access object`、`operator info`。执行计划中的每个操作符由这些属性描述，`EXPLAIN` 输出中的每一行描述一个操作符。每个属性的说明如下：
 
-| Attribute name          | Description |
+| 属性名          | 描述 |
 |:----------------|:----------------------------------------------------------------------------------------------------------|
-| id            | The operator ID is the unique identifier of the operator in the entire execution plan. In TiDB 2.1, the ID is formatted to display the tree structure of the operator. Data flows from the child node to the parent node. One and only one parent node for each operator. |
-| estRows       | The number of rows that the operator is expected to output. This number is estimated according to the statistics and the operator's logic. `estRows` is called `count` in the earlier versions of TiDB 4.0. |
-| task          | The type of task the operator belongs to. Currently, the execution plans are divided into two tasks: **root** task, which is executed on tidb-server, and **cop** task, which is performed in parallel on TiKV or TiFlash. The topology of the execution plan at the task level is that a root task followed by many cop tasks. The root task uses the output of cop tasks as input. The cop tasks refer to tasks that TiDB pushes down to TiKV or TiFlash. Each cop task is distributed in the TiKV cluster or the TiFlash cluster, and is executed by multiple processes. |
-| access object | Data item information accessed by the operator. The information includes `table`, `partition`, and `index` (if any). Only operators that directly access the data have such information. |
-| operator info | Other information about the operator. `operator info` of each operator is different. You can refer to the following examples. |
+| id              | 操作符 ID 是整个执行计划中操作符的唯一标识。在 TiDB 2.1 中，ID 格式会显示操作符的树状结构。数据从子节点流向父节点。每个操作符只有一个父节点。 |
+| estRows         | 预估该操作符输出的行数。此数字根据统计信息和操作符逻辑估算得出。在 TiDB 4.0 的早期版本中，`estRows` 被称为 `count`。 |
+| task            | 操作符所属的任务类型。目前，执行计划分为两类任务：**root** 任务，在 tidb-server 上执行；以及 **cop** 任务，在 TiKV 或 TiFlash 上并行执行。任务层级的执行计划拓扑结构为：一个 root 任务后跟多个 cop 任务。root 任务使用 cop 任务的输出作为输入。cop 任务指 TiDB 下推到 TiKV 或 TiFlash 的任务。每个 cop 任务在 TiKV 集群或 TiFlash 集群中分布，由多个进程执行。 |
+| access object   | 操作符访问的数据项信息，包括 `table`、`partition` 和 `index`（如果有的话）。只有直接访问数据的操作符才会有此信息。 |
+| operator info   | 关于操作符的其他信息。每个操作符的 `operator info` 内容不同。可以参考以下示例。 |
 
-## Examples
-
-{{< copyable "sql" >}}
+## 示例
 
 ```sql
 EXPLAIN SELECT 1;
@@ -73,8 +71,6 @@ EXPLAIN SELECT 1;
 2 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
 ```
@@ -82,8 +78,6 @@ CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
 ```sql
 Query OK, 0 rows affected (0.10 sec)
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 INSERT INTO t1 (c1) VALUES (1), (2), (3);
@@ -93,8 +87,6 @@ INSERT INTO t1 (c1) VALUES (1), (2), (3);
 Query OK, 3 rows affected (0.02 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE id = 1;
@@ -109,8 +101,6 @@ EXPLAIN SELECT * FROM t1 WHERE id = 1;
 1 row in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 DESC SELECT * FROM t1 WHERE id = 1;
 ```
@@ -123,8 +113,6 @@ DESC SELECT * FROM t1 WHERE id = 1;
 +-------------+---------+------+---------------+---------------+
 1 row in set (0.00 sec)
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 DESCRIBE SELECT * FROM t1 WHERE id = 1;
@@ -139,8 +127,6 @@ DESCRIBE SELECT * FROM t1 WHERE id = 1;
 1 row in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 EXPLAIN INSERT INTO t1 (c1) VALUES (4);
 ```
@@ -153,8 +139,6 @@ EXPLAIN INSERT INTO t1 (c1) VALUES (4);
 +----------+---------+------+---------------+---------------+
 1 row in set (0.00 sec)
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN UPDATE t1 SET c1=5 WHERE c1=3;
@@ -172,8 +156,6 @@ EXPLAIN UPDATE t1 SET c1=5 WHERE c1=3;
 4 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 EXPLAIN DELETE FROM t1 WHERE c1=3;
 ```
@@ -190,25 +172,24 @@ EXPLAIN DELETE FROM t1 WHERE c1=3;
 4 rows in set (0.01 sec)
 ```
 
-To specify the format of the `EXPLAIN` output, you can use the `FORMAT = xxx` syntax. Currently, TiDB supports the following formats:
+要指定 `EXPLAIN` 输出的格式，可以使用 `FORMAT = xxx` 语法。目前，TiDB 支持以下格式：
 
-| FORMAT | Description |
+| FORMAT | 描述 |
 | ------ | ------ |
-| Not specified  | If the format is not specified, `EXPLAIN` uses the default format `row`. |
-| `brief`        | The operator IDs in the output of the `EXPLAIN` statement are simplified, compared with those when `FORMAT` is left unspecified. |
-| `dot`          | The `EXPLAIN` statement outputs DOT execution plans, which can be used to generate PNG files through a `dot` program (in the `graphviz` package). |
-| `row`          | The `EXPLAIN` statement outputs results in a tabular format. See [Understand the Query Execution Plan](/explain-overview.md) for more information. |
-| `tidb_json`    | The `EXPLAIN` statement outputs execution plans in JSON and stores the operator information in a JSON array. |
-| `verbose`      | The `EXPLAIN` statement outputs results in the `row` format, with an additional `estCost` column for the estimated cost of the query in the results. For more information about how to use this format, see [SQL Plan Management](/sql-plan-management.md). |
-| `plan_cache`   | The `EXPLAIN` statement outputs results in the `row` format, with the [Plan Cache](/sql-non-prepared-plan-cache.md#diagnostics) information as a warning. |
+| Not specified  | 如果未指定格式，`EXPLAIN` 使用默认格式 `row`。 |
+| `brief`        | `EXPLAIN` 输出中的操作符 ID 被简化，与未指定 `FORMAT` 时相比。 |
+| `dot`          | `EXPLAIN` 输出 DOT 执行计划，可通过 `dot` 程序（在 `graphviz` 包中）生成 PNG 文件。 |
+| `row`          | `EXPLAIN` 以表格格式输出结果。详细信息请参见 [理解查询执行计划](/explain-overview.md)。 |
+| `tidb_json`    | `EXPLAIN` 以 JSON 格式输出执行计划，并将操作符信息存储在 JSON 数组中。 |
+| `verbose`      | `EXPLAIN` 以 `row` 格式输出结果，增加 `estCost` 列，显示查询的预估成本。更多用法请参见 [SQL 计划管理](/sql-plan-management.md)。 |
+| `plan_cache`   | `EXPLAIN` 以 `row` 格式输出结果，附带 [Plan Cache](/sql-non-prepared-plan-cache.md#diagnostics) 信息作为警告。 |
 
 <SimpleTab>
 
 <div label="brief">
 
-The following is an example when `FORMAT` is `"brief"` in `EXPLAIN`:
+以下是 `EXPLAIN` 中 `FORMAT` 设置为 `"brief"` 时的示例：
 
-{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN FORMAT = "brief" DELETE FROM t1 WHERE c1 = 3;
@@ -230,9 +211,8 @@ EXPLAIN FORMAT = "brief" DELETE FROM t1 WHERE c1 = 3;
 
 <div label="DotGraph">
 
-In addition to the MySQL standard result format, TiDB also supports DotGraph and you need to specify `FORMAT = "dot"` as in the following example:
+除了 MySQL 标准结果格式外，TiDB 还支持 DotGraph 格式，你需要在 `FORMAT` 中指定 `"dot"`，示例如下：
 
-{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE t(a bigint, b bigint);
@@ -241,7 +221,7 @@ EXPLAIN format = "dot" SELECT A.a, B.b FROM t A JOIN t B ON A.a > B.b WHERE A.a 
 
 ```sql
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| dot contents                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| dot 内容                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |
 digraph Projection_8 {
@@ -271,18 +251,17 @@ label = "cop"
 }
  |
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-1 row in set (0.00 sec)
 ```
 
-If your computer has a `dot` program, you can generate a PNG file using the following method:
+如果你的电脑安装了 `dot` 程序，可以用以下方法生成 PNG 文件：
 
 ```bash
 dot xx.dot -T png -O
 
-The xx.dot is the result returned by the above statement.
+上述语句返回的 xx.dot 即为结果内容。
 ```
 
-If your computer has no `dot` program, copy the result to [this website](http://www.webgraphviz.com/) to get a tree diagram:
+如果你的电脑没有 `dot` 程序，可以将结果复制到 [此网站](http://www.webgraphviz.com/) 获取树状图：
 
 ![Explain Dot](/media/explain_dot.png)
 
@@ -290,7 +269,7 @@ If your computer has no `dot` program, copy the result to [this website](http://
 
 <div label="JSON">
 
-To get the output in JSON, specify `FORMAT = "tidb_json"` in the `EXPLAIN` statement. The following is an example:
+若要以 JSON 格式输出，在 `EXPLAIN` 语句中指定 `FORMAT = "tidb_json"`。示例如下：
 
 ```sql
 CREATE TABLE t(id int primary key, a int, b int, key(a));
@@ -326,34 +305,31 @@ EXPLAIN FORMAT = "tidb_json" SELECT id FROM t WHERE a = 1;
         ]
     }
 ]
- |
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-1 row in set (0.01 sec)
 ```
 
-In the output, `id`, `estRows`, `taskType`, `accessObject`, and `operatorInfo` have the same meaning as the columns in the default format. `subOperators` is an array that stores the sub-nodes. The fields and meanings of the sub-nodes are the same as the parent node. If a field is missing, it means that the field is empty.
+在输出中，`id`、`estRows`、`taskType`、`accessObject` 和 `operatorInfo` 的含义与默认格式中的列相同。`subOperators` 是存储子节点的数组。子节点的字段和含义与父节点相同。如果某个字段缺失，表示该字段为空。
 
 </div>
 
 </SimpleTab>
 
-## MySQL compatibility
+## MySQL 兼容性
 
-* Both the format of `EXPLAIN` and the potential execution plans in TiDB differ substantially from MySQL.
-* TiDB does not support the `FORMAT=JSON` or `FORMAT=TREE` options.
-* `FORMAT=tidb_json` in TiDB is the JSON format output of the default `EXPLAIN` result. The format and fields are different from the `FORMAT=JSON` output in MySQL.
+* TiDB 中 `EXPLAIN` 的格式和潜在的执行计划与 MySQL 有较大差异。
+* TiDB 不支持 `FORMAT=JSON` 或 `FORMAT=TREE` 选项。
+* TiDB 中 `FORMAT=tidb_json` 是默认 `EXPLAIN` 结果的 JSON 格式输出。其格式和字段与 MySQL 中的 `FORMAT=JSON` 输出不同。
 
 ### `EXPLAIN FOR CONNECTION`
 
-`EXPLAIN FOR CONNECTION` is used to get the execution plan of the currently executed SQL query or the last executed SQL query in a connection. The output format is the same as that of `EXPLAIN`. However, the implementation of `EXPLAIN FOR CONNECTION` in TiDB is different from that in MySQL. Their differences (apart from the output format) are listed as follows:
+`EXPLAIN FOR CONNECTION` 用于获取当前执行的 SQL 查询或连接中最后执行的 SQL 查询的执行计划。输出格式与 `EXPLAIN` 相同，但 TiDB 中的实现与 MySQL 不同。它们的差异（除输出格式外）如下：
 
-- If the connection is sleeping, MySQL returns an empty result, while TiDB returns the last executed query plan.
-- If you try to get the execution plan of the current session, MySQL returns an error, while TiDB returns the result normally.
-- MySQL requires the login user to be the same as the connection being queried, or the login user has the **`PROCESS`** privilege; while TiDB requires the login user to be the same as the connection being queried, or the login user has the **`SUPER`** privilege.
+- 如果连接处于空闲状态，MySQL 返回空结果，而 TiDB 返回最后执行的查询计划。
+- 如果尝试获取当前会话的执行计划，MySQL 返回错误，而 TiDB 正常返回结果。
+- MySQL 要求登录用户与被查询的连接相同，或登录用户具有 **`PROCESS`** 权限；而 TiDB 要求登录用户与被查询的连接相同，或登录用户具有 **`SUPER`** 权限。
 
-## See also
+## 相关链接
 
-* [Understanding the Query Execution Plan](/explain-overview.md)
+* [理解查询执行计划](/explain-overview.md)
 * [EXPLAIN ANALYZE](/sql-statements/sql-statement-explain-analyze.md)
 * [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
 * [TRACE](/sql-statements/sql-statement-trace.md)

@@ -1,17 +1,17 @@
 ---
-title: Integrate Vector Search with LangChain
-summary: Learn how to integrate TiDB Vector Search with LangChain.
+title: 将向量搜索集成到 LangChain
+summary: 学习如何将 TiDB 向量搜索与 LangChain 集成。
 ---
 
-# Integrate Vector Search with LangChain
+# 将向量搜索集成到 LangChain
 
-This tutorial demonstrates how to integrate the [vector search](/vector-search/vector-search-overview.md) feature of TiDB with [LangChain](https://python.langchain.com/).
+本教程演示如何将 [vector search](/vector-search/vector-search-overview.md) 功能的 TiDB 与 [LangChain](https://python.langchain.com/) 集成。
 
 <CustomContent platform="tidb">
 
 > **Warning:**
 >
-> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> 向量搜索功能处于实验阶段。不建议在生产环境中使用。此功能可能在未通知的情况下进行更改。如发现 bug，可以在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues)。
 
 </CustomContent>
 
@@ -19,59 +19,59 @@ This tutorial demonstrates how to integrate the [vector search](/vector-search/v
 
 > **Note:**
 >
-> The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> 向量搜索功能处于 beta 阶段，可能会在未通知的情况下进行更改。如发现 bug，可以在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues)。
 
 </CustomContent>
 
 > **Note:**
 >
-> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> 向量搜索功能在 TiDB Self-Managed、[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) 上均可使用。对于 TiDB Self-Managed 和 TiDB Cloud Dedicated，TiDB 版本必须为 v8.4.0 及以上（推荐 v8.5.0 及以上）。
 
 > **Tip**
 >
-> You can view the complete [sample code](https://github.com/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) on Jupyter Notebook, or run the sample code directly in the [Colab](https://colab.research.google.com/github/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) online environment.
+> 你可以在 Jupyter Notebook 上查看完整的 [示例代码](https://github.com/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb)，也可以直接在 [Colab](https://colab.research.google.com/github/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) 在线环境中运行示例代码。
 
-## Prerequisites
+## 前提条件
 
-To complete this tutorial, you need:
+完成本教程，你需要：
 
-- [Python 3.8 or higher](https://www.python.org/downloads/) installed.
-- [Jupyter Notebook](https://jupyter.org/install) installed.
-- [Git](https://git-scm.com/downloads) installed.
-- A TiDB cluster.
+- 安装 [Python 3.8 或更高版本](https://www.python.org/downloads/)
+- 安装 [Jupyter Notebook](https://jupyter.org/install)
+- 安装 [Git](https://git-scm.com/downloads)
+- 拥有一个 TiDB 集群
 
 <CustomContent platform="tidb">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**如果你还没有 TiDB 集群，可以按照以下方式创建：**
 
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
-- Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- 参考 [部署本地测试 TiDB 集群](/quick-start-with-tidb.md#deploy-a-local-test-cluster) 或 [部署生产环境 TiDB 集群](/production-deployment-using-tiup.md) 来创建本地集群。
+- 参考 [创建 {{{ .starter }}} 集群](/develop/dev-guide-build-cluster-in-cloud.md) 来创建你自己的 TiDB Cloud 集群。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**如果你还没有 TiDB 集群，可以按照以下方式创建：**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster of v8.4.0 or a later version.
+- （推荐）参考 [创建 {{{ .starter }}} 集群](/develop/dev-guide-build-cluster-in-cloud.md) 来创建你自己的 TiDB Cloud 集群。
+- 参考 [部署本地测试 TiDB 集群](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) 或 [部署生产环境 TiDB 集群](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) 来创建版本为 v8.4.0 或更高版本的本地集群。
 
 </CustomContent>
 
-## Get started
+## 开始使用
 
-This section provides step-by-step instructions for integrating TiDB Vector Search with LangChain to perform semantic searches.
+本节提供逐步指导，介绍如何将 TiDB 向量搜索与 LangChain 集成，实现语义搜索。
 
-### Step 1. Create a new Jupyter Notebook file
+### 步骤 1. 创建新的 Jupyter Notebook 文件
 
-In your preferred directory, create a new Jupyter Notebook file named `integrate_with_langchain.ipynb`:
+在你偏好的目录下，创建一个名为 `integrate_with_langchain.ipynb` 的 Jupyter Notebook 文件：
 
 ```shell
 touch integrate_with_langchain.ipynb
 ```
 
-### Step 2. Install required dependencies
+### 步骤 2. 安装所需依赖
 
-In your project directory, run the following command to install the required packages:
+在你的项目目录下，运行以下命令安装所需的包：
 
 ```shell
 !pip install langchain langchain-community
@@ -80,7 +80,7 @@ In your project directory, run the following command to install the required pac
 !pip install tidb-vector
 ```
 
-Open the `integrate_with_langchain.ipynb` file in Jupyter Notebook, and then add the following code to import the required packages:
+在 Jupyter Notebook 中打开 `integrate_with_langchain.ipynb` 文件，然后添加以下代码导入所需包：
 
 ```python
 from langchain_community.document_loaders import TextLoader
@@ -89,45 +89,45 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import CharacterTextSplitter
 ```
 
-### Step 3. Set up your environment
+### 步骤 3. 设置环境
 
-Configure the environment variables depending on the TiDB deployment option you've selected.
+根据你选择的 TiDB 部署方式，配置环境变量。
 
 <SimpleTab>
 <div label="{{{ .starter }}}">
 
-For a {{{ .starter }}} cluster, take the following steps to obtain the cluster connection string and configure environment variables:
+对于 {{{ .starter }}} 集群，按照以下步骤获取集群连接字符串并配置环境变量：
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. 进入 [**Clusters**](https://tidbcloud.com/console/clusters) 页面，点击目标集群名称，进入其概览页面。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2. 点击右上角的 **Connect**，弹出连接对话框。
 
-3. Ensure the configurations in the connection dialog match your operating environment.
+3. 确认连接对话框中的配置与操作环境匹配。
 
-    - **Connection Type** is set to `Public`.
-    - **Branch** is set to `main`.
-    - **Connect With** is set to `SQLAlchemy`.
-    - **Operating System** matches your environment.
+    - **Connection Type** 设置为 `Public`。
+    - **Branch** 设置为 `main`。
+    - **Connect With** 设置为 `SQLAlchemy`。
+    - **Operating System** 与你的环境一致。
 
-4. Click the **PyMySQL** tab and copy the connection string.
+4. 点击 **PyMySQL** 标签，复制连接字符串。
 
     > **Tip:**
     >
-    > If you have not set a password yet, click **Generate Password** to generate a random password.
+    > 如果还未设置密码，可以点击 **Generate Password** 生成随机密码。
 
-5. Configure environment variables.
+5. 配置环境变量。
 
-    This document uses [OpenAI](https://platform.openai.com/docs/introduction) as the embedding model provider. In this step, you need to provide the connection string obtained from the previous step and your [OpenAI API key](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key).
+    本文使用 [OpenAI](https://platform.openai.com/docs/introduction) 作为嵌入模型提供方。在此步骤中，你需要提供上一步获得的连接字符串和你的 [OpenAI API 密钥](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key)。
 
-    To configure the environment variables, run the following code. You will be prompted to enter your connection string and OpenAI API key:
+    运行以下代码配置环境变量。系统会提示你输入连接字符串和 OpenAI API 密钥：
 
     ```python
-    # Use getpass to securely prompt for environment variables in your terminal.
+    # 使用 getpass 在终端中安全提示输入环境变量。
     import getpass
     import os
 
-    # Copy your connection string from the TiDB Cloud console.
-    # Connection string format: "mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
+    # 从 TiDB Cloud 控制台复制你的连接字符串。
+    # 连接字符串格式："mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
     tidb_connection_string = getpass.getpass("TiDB Connection String:")
     os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
     ```
@@ -135,55 +135,55 @@ For a {{{ .starter }}} cluster, take the following steps to obtain the cluster c
 </div>
 <div label="TiDB Self-Managed">
 
-This document uses [OpenAI](https://platform.openai.com/docs/introduction) as the embedding model provider. In this step, you need to provide the connection string obtained from the previous step and your [OpenAI API key](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key).
+本文件使用 [OpenAI](https://platform.openai.com/docs/introduction) 作为嵌入模型提供方。在此步骤中，你需要提供上一步获得的连接字符串和你的 [OpenAI API 密钥](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key)。
 
-To configure the environment variables, run the following code. You will be prompted to enter your connection string and OpenAI API key:
+运行以下代码配置环境变量。系统会提示你输入连接字符串和 OpenAI API 密钥：
 
 ```python
-# Use getpass to securely prompt for environment variables in your terminal.
+# 使用 getpass 在终端中安全提示输入环境变量。
 import getpass
 import os
 
-# Connection string format: "mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
+# 连接字符串格式："mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
 tidb_connection_string = getpass.getpass("TiDB Connection String:")
 os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
 ```
 
-Taking macOS as an example, the cluster connection string is as follows:
+以 macOS 为例，集群连接字符串如下：
 
 ```dotenv
 TIDB_DATABASE_URL="mysql+pymysql://<USERNAME>:<PASSWORD>@<HOST>:<PORT>/<DATABASE_NAME>"
-# For example: TIDB_DATABASE_URL="mysql+pymysql://root@127.0.0.1:4000/test"
+# 例如：TIDB_DATABASE_URL="mysql+pymysql://root@127.0.0.1:4000/test"
 ```
 
-You need to modify the values of the connection parameters according to your TiDB cluster. If you are running TiDB on your local machine, `<HOST>` is `127.0.0.1` by default. The initial `<PASSWORD>` is empty, so if you are starting the cluster for the first time, you can omit this field.
+你需要根据你的 TiDB 集群修改连接参数的值。如果在本地运行 TiDB，`<HOST>` 默认为 `127.0.0.1`。初始的 `<PASSWORD>` 为空，如果首次启动集群，可以省略此字段。
 
-The following are descriptions for each parameter:
+以下是各参数的说明：
 
-- `<USERNAME>`: The username to connect to the TiDB cluster.
-- `<PASSWORD>`: The password to connect to the TiDB cluster.
-- `<HOST>`: The host of the TiDB cluster.
-- `<PORT>`: The port of the TiDB cluster.
-- `<DATABASE>`: The name of the database you want to connect to.
+- `<USERNAME>`：连接 TiDB 集群的用户名。
+- `<PASSWORD>`：连接 TiDB 集群的密码。
+- `<HOST>`：TiDB 集群的主机地址。
+- `<PORT>`：TiDB 集群的端口。
+- `<DATABASE>`：要连接的数据库名。
 
 </div>
 
 </SimpleTab>
 
-### Step 4. Load the sample document
+### 步骤 4. 加载示例文档
 
-#### Step 4.1 Download the sample document
+#### 步骤 4.1 下载示例文档
 
-In your project directory, create a directory named `data/how_to/` and download the sample document [`state_of_the_union.txt`](https://github.com/langchain-ai/langchain/blob/master/docs/docs/how_to/state_of_the_union.txt) from the [langchain-ai/langchain](https://github.com/langchain-ai/langchain) GitHub repository.
+在你的项目目录下，创建 `data/how_to/` 目录，并从 [langchain-ai/langchain](https://github.com/langchain-ai/langchain) GitHub 仓库下载示例文档 [`state_of_the_union.txt`](https://github.com/langchain-ai/langchain/blob/master/docs/docs/how_to/state_of_the_union.txt)：
 
 ```shell
 !mkdir -p 'data/how_to/'
 !wget 'https://raw.githubusercontent.com/langchain-ai/langchain/master/docs/docs/how_to/state_of_the_union.txt' -O 'data/how_to/state_of_the_union.txt'
 ```
 
-#### Step 4.2 Load and split the document
+#### 步骤 4.2 加载并拆分文档
 
-Load the sample document from `data/how_to/state_of_the_union.txt` and split it into chunks of approximately 1,000 characters each using a `CharacterTextSplitter`.
+从 `data/how_to/state_of_the_union.txt` 加载示例文档，使用 `CharacterTextSplitter` 将其拆分成大约每段 1000 字符的块：
 
 ```python
 loader = TextLoader("data/how_to/state_of_the_union.txt")
@@ -192,11 +192,11 @@ text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
 docs = text_splitter.split_documents(documents)
 ```
 
-### Step 5. Embed and store document vectors
+### 步骤 5. 嵌入并存储文档向量
 
-TiDB vector store supports both cosine distance (`consine`) and Euclidean distance (`l2`) for measuring similarity between vectors. The default strategy is cosine distance.
+TiDB 向量存储支持余弦距离（`cosine`）和欧几里得距离（`l2`）两种相似度度量策略。默认使用余弦距离。
 
-The following code creates a table named `embedded_documents` in TiDB, which is optimized for vector search.
+以下代码在 TiDB 中创建一个名为 `embedded_documents` 的表，优化为支持向量搜索：
 
 ```python
 embeddings = OpenAIEmbeddings()
@@ -205,23 +205,23 @@ vector_store = TiDBVectorStore.from_documents(
     embedding=embeddings,
     table_name="embedded_documents",
     connection_string=tidb_connection_string,
-    distance_strategy="cosine",  # default, another option is "l2"
+    distance_strategy="cosine",  # 默认，另一个选项是 "l2"
 )
 ```
 
-Upon successful execution, you can directly view and access the `embedded_documents` table in your TiDB database.
+成功执行后，可以直接在 TiDB 数据库中查看并访问 `embedded_documents` 表。
 
-### Step 6. Perform a vector search
+### 步骤 6. 执行向量搜索
 
-This step demonstrates how to query "What did the president say about Ketanji Brown Jackson" from the document `state_of_the_union.txt`.
+本步骤演示如何从 `state_of_the_union.txt` 文档中查询“总统关于 Ketanji Brown Jackson 说了什么”。
 
 ```python
 query = "What did the president say about Ketanji Brown Jackson"
 ```
 
-#### Option 1: Use `similarity_search_with_score()`
+#### 选项 1：使用 `similarity_search_with_score()`
 
-The `similarity_search_with_score()` method calculates the vector space distance between the documents and the query. This distance serves as a similarity score, determined by the chosen `distance_strategy`. The method returns the top `k` documents with the lowest scores. A lower score indicates a higher similarity between a document and your query.
+`similarity_search_with_score()` 方法计算文档与查询之间的向量空间距离。此距离作为相似度得分，由 `distance_strategy` 决定。该方法返回前 `k` 个得分最低的文档。得分越低，表示文档与查询越相似。
 
 ```python
 docs_with_score = vector_store.similarity_search_with_score(query, k=3)
@@ -233,7 +233,7 @@ for doc, score in docs_with_score:
 ```
 
 <details>
-   <summary><b>Expected output</b></summary>
+   <summary><b>预期输出</b></summary>
 
 ```plain
 --------------------------------------------------------------------------------
@@ -260,27 +260,13 @@ We’re putting in place dedicated immigration judges so families fleeing persec
 
 We’re securing commitments and supporting partners in South and Central America to host more refugees and secure their own borders.
 --------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-Score:  0.22676987253721725
-And for our LGBTQ+ Americans, let’s finally get the bipartisan Equality Act to my desk. The onslaught of state laws targeting transgender Americans and their families is wrong.
-
-As I said last year, especially to our younger transgender Americans, I will always have your back as your President, so you can be yourself and reach your God-given potential.
-
-While it often appears that we never agree, that isn’t true. I signed 80 bipartisan bills into law last year. From preventing government shutdowns to protecting Asian-Americans from still-too-common hate crimes to reforming military justice.
-
-And soon, we’ll strengthen the Violence Against Women Act that I first wrote three decades ago. It is important for us to show the nation that we can come together and do big things.
-
-So tonight I’m offering a Unity Agenda for the Nation. Four big things we can do together.
-
-First, beat the opioid epidemic.
---------------------------------------------------------------------------------
 ```
 
 </details>
 
-#### Option 2: Use `similarity_search_with_relevance_scores()`
+#### 选项 2：使用 `similarity_search_with_relevance_scores()`
 
-The `similarity_search_with_relevance_scores()` method returns the top `k` documents with the highest relevance scores. A higher score indicates a higher degree of similarity between a document and your query.
+`similarity_search_with_relevance_scores()` 方法返回相关性得分最高的前 `k` 个文档。得分越高，表示文档与查询的相似度越高。
 
 ```python
 docs_with_relevance_score = vector_store.similarity_search_with_relevance_scores(query, k=2)
@@ -292,7 +278,7 @@ for doc, score in docs_with_relevance_score:
 ```
 
 <details>
-   <summary><b>Expected output</b></summary>
+   <summary><b>预期输出</b></summary>
 
 ```plain
 --------------------------------------------------------------------------------
@@ -323,9 +309,9 @@ We’re securing commitments and supporting partners in South and Central Americ
 
 </details>
 
-### Use as a retriever
+### 作为检索器使用
 
-In Langchain, a [retriever](https://python.langchain.com/v0.2/docs/concepts/#retrievers) is an interface that retrieves documents in response to an unstructured query, providing more functionality than a vector store. The following code demonstrates how to use TiDB vector store as a retriever.
+在 Langchain 中，[retriever](https://python.langchain.com/v0.2/docs/concepts/#retrievers) 是一种在响应非结构化查询时检索文档的接口，提供比向量存储更丰富的功能。以下代码演示如何将 TiDB 向量存储作为检索器使用。
 
 ```python
 retriever = vector_store.as_retriever(
@@ -339,7 +325,7 @@ for doc in docs_retrieved:
    print("-" * 80)
 ```
 
-The expected output is as follows:
+预期输出如下：
 
 ```
 --------------------------------------------------------------------------------
@@ -353,51 +339,27 @@ And I did that 4 days ago, when I nominated Circuit Court of Appeals Judge Ketan
 --------------------------------------------------------------------------------
 ```
 
-### Remove the vector store
+### 删除向量存储
 
-To remove an existing TiDB vector store, use the `drop_vectorstore()` method:
+要删除已有的 TiDB 向量存储，可以使用 `drop_vectorstore()` 方法：
 
 ```python
 vector_store.drop_vectorstore()
 ```
 
-## Search with metadata filters
+## 使用元数据过滤器进行搜索
 
-To refine your searches, you can use metadata filters to retrieve specific nearest-neighbor results that match the applied filters.
+为了细化搜索，可以使用元数据过滤器，检索符合条件的最近邻结果。
 
-### Supported metadata types
+### 支持的元数据类型
 
-Each document in the TiDB vector store can be paired with metadata, structured as key-value pairs within a JSON object. Keys are always strings, while values can be any of the following types:
+TiDB 向量存储中的每个文档都可以配有元数据，结构为键值对的 JSON 对象。键始终为字符串，值可以是以下类型之一：
 
-- String
-- Number: integer or floating point
-- Boolean: `true` or `false`
+- 字符串
+- 数值：整数或浮点数
+- 布尔值：`true` 或 `false`
 
-For example, the following is a valid metadata payload:
-
-```json
-{
-  "page": 12,
-  "book_title": "Siddhartha"
-}
-```
-
-### Metadata filter syntax
-
-Available filters include the following:
-
-- `$or`: Selects vectors that match any one of the specified conditions.
-- `$and`: Selects vectors that match all the specified conditions.
-- `$eq`: Equal to the specified value.
-- `$ne`: Not equal to the specified value.
-- `$gt`: Greater than the specified value.
-- `$gte`: Greater than or equal to the specified value.
-- `$lt`: Less than the specified value.
-- `$lte`: Less than or equal to the specified value.
-- `$in`: In the specified array of values.
-- `$nin`: Not in the specified array of values.
-
-If the metadata of a document is as follows:
+例如，以下是有效的元数据负载：
 
 ```json
 {
@@ -406,7 +368,31 @@ If the metadata of a document is as follows:
 }
 ```
 
-The following metadata filters can match this document:
+### 元数据过滤语法
+
+支持的过滤器包括：
+
+- `$or`：匹配任意一个条件的向量
+- `$and`：匹配所有条件的向量
+- `$eq`：等于指定值
+- `$ne`：不等于指定值
+- `$gt`：大于指定值
+- `$gte`：大于等于指定值
+- `$lt`：小于指定值
+- `$lte`：小于等于指定值
+- `$in`：在指定数组中
+- `$nin`：不在指定数组中
+
+如果某个文档的元数据如下：
+
+```json
+{
+  "page": 12,
+  "book_title": "Siddhartha"
+}
+```
+
+则以下元数据过滤器可以匹配此文档：
 
 ```json
 { "page": 12 }
@@ -439,37 +425,37 @@ The following metadata filters can match this document:
 }
 ```
 
-In a metadata filter, TiDB treats each key-value pair as a separate filter clause and combines these clauses using the `AND` logical operator.
+在元数据过滤器中，TiDB 将每个键值对作为单独的过滤条件，并用 `AND` 逻辑操作符组合。
 
-### Example
+### 示例
 
-The following example adds two documents to `TiDBVectorStore` and adds a `title` field to each document as the metadata:
+以下示例向 `TiDBVectorStore` 添加两个文档，并为每个文档添加 `title` 字段作为元数据：
 
 ```python
 vector_store.add_texts(
     texts=[
-        "TiDB Vector offers advanced, high-speed vector processing capabilities, enhancing AI workflows with efficient data handling and analytics support.",
-        "TiDB Vector, starting as low as $10 per month for basic usage",
+        "TiDB Vector 提供先进的高速向量处理能力，提升 AI 工作流中的数据处理和分析效率。",
+        "TiDB Vector，基础用量低至每月 10 美元起",
     ],
     metadatas=[
-        {"title": "TiDB Vector functionality"},
-        {"title": "TiDB Vector Pricing"},
+        {"title": "TiDB Vector 功能"},
+        {"title": "TiDB Vector 价格"},
     ],
 )
 ```
 
-The expected output is as follows:
+预期输出如下：
 
 ```plain
 [UUID('c782cb02-8eec-45be-a31f-fdb78914f0a7'),
  UUID('08dcd2ba-9f16-4f29-a9b7-18141f8edae3')]
 ```
 
-Perform a similarity search with metadata filters:
+执行带有元数据过滤的相似度搜索：
 
 ```python
 docs_with_score = vector_store.similarity_search_with_score(
-    "Introduction to TiDB Vector", filter={"title": "TiDB Vector functionality"}, k=4
+    "Introduction to TiDB Vector", filter={"title": "TiDB Vector 功能"}, k=4
 )
 for doc, score in docs_with_score:
     print("-" * 80)
@@ -478,30 +464,30 @@ for doc, score in docs_with_score:
     print("-" * 80)
 ```
 
-The expected output is as follows:
+预期输出如下：
 
 ```plain
 --------------------------------------------------------------------------------
 Score:  0.12761409169211535
-TiDB Vector offers advanced, high-speed vector processing capabilities, enhancing AI workflows with efficient data handling and analytics support.
+TiDB Vector 提供先进的高速向量处理能力，提升 AI 工作流中的数据处理和分析效率。
 --------------------------------------------------------------------------------
 ```
 
-## Advanced usage example: travel agent
+## 高级用例示例：旅游代理
 
-This section demonstrates a use case of integrating vector search with Langchain for a travel agent. The goal is to create personalized travel reports for clients, helping them find airports with specific amenities, such as clean lounges and vegetarian options.
+本节演示如何将向量搜索与 Langchain 集成，用于旅游代理的场景。目标是为客户创建个性化的旅游报告，帮助他们找到具有特定设施的机场，例如干净的休息室和素食选择。
 
-The process involves two main steps:
+流程包括两个主要步骤：
 
-1. Perform a semantic search across airport reviews to identify airport codes that match the desired amenities.
-2. Execute a SQL query to merge these codes with route information, highlighting airlines and destinations that align with user's preferences.
+1. 在机场评论中进行语义搜索，识别符合需求的机场代码。
+2. 执行 SQL 查询，将这些代码与航线信息合并，突出显示符合用户偏好的航空公司和目的地。
 
-### Prepare data
+### 准备数据
 
-First, create a table to store airport route data:
+首先，创建存储机场航线数据的表：
 
 ```python
-# Create a table to store flight plan data.
+# 创建存储航班计划数据的表。
 vector_store.tidb_vector_client.execute(
     """CREATE TABLE airplan_routes (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -517,7 +503,7 @@ vector_store.tidb_vector_client.execute(
     );"""
 )
 
-# Insert some sample data into airplan_routes and the vector table.
+# 插入一些示例数据到 airplan_routes 和向量表。
 vector_store.tidb_vector_client.execute(
     """INSERT INTO airplan_routes (
         airport_code,
@@ -530,16 +516,16 @@ vector_store.tidb_vector_client.execute(
         price,
         layover
     ) VALUES
-    ('JFK', 'DL', 'LAX', 'Non-stop from JFK to LAX.', '06:00:00', 5, 'Boeing 777', 299.99, 'None'),
-    ('LAX', 'AA', 'ORD', 'Direct LAX to ORD route.', '04:00:00', 3, 'Airbus A320', 149.99, 'None'),
-    ('EFGH', 'UA', 'SEA', 'Daily flights from SFO to SEA.', '02:30:00', 7, 'Boeing 737', 129.99, 'None');
+    ('JFK', 'DL', 'LAX', '非直达 JFK 至 LAX。', '06:00:00', 5, 'Boeing 777', 299.99, '无'),
+    ('LAX', 'AA', 'ORD', '直达 LAX 至 ORD。', '04:00:00', 3, 'Airbus A320', 149.99, '无'),
+    ('EFGH', 'UA', 'SEA', '每日 SFO 至 SEA 航班。', '02:30:00', 7, 'Boeing 737', 129.99, '无');
     """
 )
 vector_store.add_texts(
     texts=[
-        "Clean lounges and excellent vegetarian dining options. Highly recommended.",
-        "Comfortable seating in lounge areas and diverse food selections, including vegetarian.",
-        "Small airport with basic facilities.",
+        "干净的休息室和优质的素食餐饮选择。强烈推荐。",
+        "休息区座椅舒适，食物多样，包括素食。",
+        "小型机场，设施基本。",
     ],
     metadatas=[
         {"airport_code": "JFK"},
@@ -549,7 +535,7 @@ vector_store.add_texts(
 )
 ```
 
-The expected output is as follows:
+预期输出如下：
 
 ```plain
 [UUID('6dab390f-acd9-4c7d-b252-616606fbc89b'),
@@ -557,16 +543,16 @@ The expected output is as follows:
  UUID('f426747c-0f7b-4c62-97ed-3eeb7c8dd76e')]
 ```
 
-### Perform a semantic search
+### 进行语义搜索
 
-The following code searches for airports with clean facilities and vegetarian options:
+以下代码搜索具有干净设施和素食选项的机场：
 
 ```python
 retriever = vector_store.as_retriever(
     search_type="similarity_score_threshold",
     search_kwargs={"k": 3, "score_threshold": 0.85},
 )
-semantic_query = "Could you recommend a US airport with clean lounges and good vegetarian dining options?"
+semantic_query = "你能推荐一个有干净休息室和良好素食餐饮的美国机场吗？"
 reviews = retriever.invoke(semantic_query)
 for r in reviews:
     print("-" * 80)
@@ -575,28 +561,28 @@ for r in reviews:
     print("-" * 80)
 ```
 
-The expected output is as follows:
+预期输出如下：
 
 ```plain
 --------------------------------------------------------------------------------
-Clean lounges and excellent vegetarian dining options. Highly recommended.
+干净的休息室和优质的素食餐饮选择。强烈推荐。
 {'airport_code': 'JFK'}
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-Comfortable seating in lounge areas and diverse food selections, including vegetarian.
+休息区座椅舒适，食物多样，包括素食。
 {'airport_code': 'LAX'}
 --------------------------------------------------------------------------------
 ```
 
-### Retrieve detailed airport information
+### 获取详细机场信息
 
-Extract airport codes from the search results and query the database for detailed route information:
+提取搜索结果中的机场代码，并查询数据库获取详细的航线信息：
 
 ```python
-# Extracting airport codes from the metadata
+# 提取元数据中的机场代码
 airport_codes = [review.metadata["airport_code"] for review in reviews]
 
-# Executing a query to get the airport details
+# 执行查询获取机场详细信息
 search_query = "SELECT * FROM airplan_routes WHERE airport_code IN :codes"
 params = {"codes": tuple(airport_codes)}
 
@@ -604,16 +590,16 @@ airport_details = vector_store.tidb_vector_client.execute(search_query, params)
 airport_details.get("result")
 ```
 
-The expected output is as follows:
+预期输出如下：
 
 ```plain
-[(1, 'JFK', 'DL', 'LAX', 'Non-stop from JFK to LAX.', datetime.timedelta(seconds=21600), 5, 'Boeing 777', Decimal('299.99'), 'None'),
- (2, 'LAX', 'AA', 'ORD', 'Direct LAX to ORD route.', datetime.timedelta(seconds=14400), 3, 'Airbus A320', Decimal('149.99'), 'None')]
+[(1, 'JFK', 'DL', 'LAX', '非直达 JFK 至 LAX。', datetime.timedelta(seconds=21600), 5, 'Boeing 777', Decimal('299.99'), '无'),
+ (2, 'LAX', 'AA', 'ORD', '直达 LAX 至 ORD。', datetime.timedelta(seconds=14400), 3, 'Airbus A320', Decimal('149.99'), '无')]
 ```
 
-### Streamline the process
+### 简化流程
 
-Alternatively, you can streamline the entire process using a single SQL query:
+或者，可以用一条 SQL 查询简化整个流程：
 
 ```python
 search_query = f"""
@@ -634,29 +620,29 @@ airport_details = vector_store.tidb_vector_client.execute(search_query, params)
 airport_details.get("result")
 ```
 
-The expected output is as follows:
+预期输出如下：
 
 ```plain
-[(0.1219207353407008, 1, 'JFK', 'DL', 'LAX', 'Non-stop from JFK to LAX.', datetime.timedelta(seconds=21600), 5, 'Boeing 777', Decimal('299.99'), 'None', 'Clean lounges and excellent vegetarian dining options. Highly recommended.'),
- (0.14613754359804654, 2, 'LAX', 'AA', 'ORD', 'Direct LAX to ORD route.', datetime.timedelta(seconds=14400), 3, 'Airbus A320', Decimal('149.99'), 'None', 'Comfortable seating in lounge areas and diverse food selections, including vegetarian.'),
- (0.19840519342700513, 3, 'EFGH', 'UA', 'SEA', 'Daily flights from SFO to SEA.', datetime.timedelta(seconds=9000), 7, 'Boeing 737', Decimal('129.99'), 'None', 'Small airport with basic facilities.')]
+[(0.1219207353407008, 1, 'JFK', 'DL', 'LAX', '非直达 JFK 至 LAX。', datetime.timedelta(seconds=21600), 5, 'Boeing 777', Decimal('299.99'), '无', '干净的休息室和优质的素食餐饮选择。强烈推荐。'),
+ (0.14613754359804654, 2, 'LAX', 'AA', 'ORD', '直达 LAX 至 ORD。', datetime.timedelta(seconds=14400), 3, 'Airbus A320', Decimal('149.99'), '无', '休息区座椅舒适，食物多样，包括素食。'),
+ (0.19840519342700513, 3, 'EFGH', 'UA', 'SEA', '每日 SFO 至 SEA 航班。', datetime.timedelta(seconds=9000), 7, 'Boeing 737', Decimal('129.99'), '无', '小型机场，设施基本。')]
 ```
 
-### Clean up data
+### 清理数据
 
-Finally, clean up the resources by dropping the created table:
+最后，删除创建的表：
 
 ```python
 vector_store.tidb_vector_client.execute("DROP TABLE airplan_routes")
 ```
 
-The expected output is as follows:
+预期输出如下：
 
-```plain
-{'success': True, 'result': 0, 'error': None}
+```json
+{"success": True, "result": 0, "error": null}
 ```
 
-## See also
+## 相关链接
 
 - [Vector Data Types](/vector-search/vector-search-data-types.md)
 - [Vector Search Index](/vector-search/vector-search-index.md)

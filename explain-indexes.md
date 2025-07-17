@@ -1,20 +1,19 @@
 ---
-title: Explain Statements That Use Indexes
-summary: Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
+title: 解释使用索引的语句
+summary: 了解 TiDB 中 EXPLAIN 语句返回的执行计划信息。
 ---
 
-# Explain Statements That Use Indexes
+# 解释使用索引的语句
 
-TiDB supports several operators which make use of indexes to speed up query execution:
+TiDB 支持多种操作符，这些操作符利用索引来加快查询执行速度：
 
 + [`IndexLookup`](#indexlookup)
 + [`IndexReader`](#indexreader)
-+ [`Point_Get` and `Batch_Point_Get`](#point_get-and-batch_point_get)
++ [`Point_Get` 和 `Batch_Point_Get`](#point_get-and-batch_point_get)
 + [`IndexFullScan`](#indexfullscan)
 
-The examples in this document are based on the following sample data:
+本文中的示例基于以下样例数据：
 
-{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE t1 (
@@ -32,9 +31,8 @@ INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1024), RANDOM_BYTES(1024) FROM t1 a JOI
 
 ## IndexLookup
 
-TiDB uses the `IndexLookup` operator when retrieving data from a secondary index. In this case, the following queries will all use the `IndexLookup` operator on the `intkey` index:
+当从二级索引中检索数据时，TiDB 使用 `IndexLookup` 操作符。在这种情况下，以下查询都将对 `intkey` 索引使用 `IndexLookup` 操作符：
 
-{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE intkey = 123;
@@ -91,14 +89,13 @@ EXPLAIN SELECT * FROM t1 WHERE intkey >= 99 AND intkey <= 103;
 3 rows in set (0.00 sec)
 ```
 
-The `IndexLookup` operator has two child nodes:
+`IndexLookup` 操作符有两个子节点：
 
-* The `├─IndexRangeScan_8(Build)` operator performs a range scan on the `intkey` index and retrieves the values of the internal `RowID` (for this table, the primary key).
-* The `└─TableRowIDScan_9(Probe)` operator then retrieves the full row from the table data.
+* `├─IndexRangeScan_8(Build)` 操作符对 `intkey` 索引执行范围扫描，并检索内部的 `RowID`（对于此表，即主键）。
+* `└─TableRowIDScan_9(Probe)` 操作符随后从表数据中检索完整行。
 
-Because an `IndexLookup` task requires two steps, the SQL Optimizer might choose the `TableFullScan` operator based on [statistics](/statistics.md) in scenarios where a large number of rows match. In the following example, a large number of rows match the condition of `intkey > 100`, and a `TableFullScan` is chosen:
+由于 `IndexLookup` 任务需要两个步骤，SQL 优化器可能会根据 [statistics](/statistics.md) 在匹配大量行的场景下选择 `TableFullScan` 操作符。在以下示例中，`intkey > 100` 条件匹配大量行，因此选择了 `TableFullScan`：
 
-{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE intkey > 100;
@@ -115,9 +112,8 @@ EXPLAIN SELECT * FROM t1 WHERE intkey > 100;
 3 rows in set (0.00 sec)
 ```
 
-The `IndexLookup` operator can also be used to efficiently optimize `LIMIT` on an indexed column:
+`IndexLookup` 操作符也可以用来高效优化对索引列的 `LIMIT`：
 
-{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN SELECT * FROM t1 ORDER BY intkey DESC LIMIT 10;
@@ -132,17 +128,14 @@ EXPLAIN SELECT * FROM t1 ORDER BY intkey DESC LIMIT 10;
 | │ └─IndexFullScan_18           | 10.00   | cop[tikv] | table:t1, index:intkey(intkey) | keep order:true, desc              |
 | └─TableRowIDScan_19(Probe)     | 10.00   | cop[tikv] | table:t1                       | keep order:false, stats:pseudo     |
 +--------------------------------+---------+-----------+--------------------------------+------------------------------------+
-4 rows in set (0.00 sec)
-
 ```
 
-In the above example, the last 10 rows are read from the index `intkey`. These `RowID` values are then retrieved from the table data.
+在上述示例中，从索引 `intkey` 读取最后 10 行。这些 `RowID` 值随后从表数据中检索。
 
 ## IndexReader
 
-TiDB supports the _covering index optimization_. If all rows can be retrieved from an index, TiDB will skip the second step that is usually required in an `IndexLookup`. Consider the following two examples:
+TiDB 支持 _covering index optimization_（覆盖索引优化）。如果所有行都能从索引中检索出来，TiDB 会跳过通常在 `IndexLookup` 中需要的第二步。考虑以下两个示例：
 
-{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE intkey = 123;
@@ -169,13 +162,12 @@ EXPLAIN SELECT id FROM t1 WHERE intkey = 123;
 3 rows in set (0.00 sec)
 ```
 
-Because `id` is also the internal `RowID`, it is stored in the `intkey` index. After using the `intkey` index as part of `└─IndexRangeScan_5`, the value of the `RowID` can be returned directly.
+因为 `id` 也是内部的 `RowID`，它存储在 `intkey` 索引中。使用 `└─IndexRangeScan_5` 后，可以直接返回 `RowID` 的值。
 
-## Point_Get and Batch_Point_Get
+## Point_Get 和 Batch_Point_Get
 
-TiDB uses the `Point_Get` or `Batch_Point_Get` operator when retrieving data directly from a primary key or unique key. These operators are more efficient than `IndexLookup`. For example:
+当直接从主键或唯一键检索数据时，TiDB 使用 `Point_Get` 或 `Batch_Point_Get` 操作符。这些操作符比 `IndexLookup` 更高效。例如：
 
-{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE id = 1234;
@@ -228,9 +220,8 @@ Query OK, 0 rows affected (0.37 sec)
 
 ## IndexFullScan
 
-Because indexes are ordered, the `IndexFullScan` operator can be used to optimize common queries such as the `MIN` or `MAX` values for an indexed value:
+由于索引是有序的，`IndexFullScan` 操作符可以用来优化常见的查询，例如索引值的 `MIN` 或 `MAX`：
 
-{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN SELECT MIN(intkey) FROM t1;
@@ -261,11 +252,10 @@ EXPLAIN SELECT MAX(intkey) FROM t1;
 5 rows in set (0.00 sec)
 ```
 
-In the above statements, an `IndexFullScan` task is performed on each TiKV Region. Despite the name `FullScan`, only the first row needs to be read (`└─Limit_28`). Each TiKV Region returns its `MIN` or `MAX` value to TiDB, which then performs Stream Aggregation to filter for a single row. Stream Aggregation with the aggregation function `MAX` or `MIN` also ensures that `NULL` is returned if the table is empty.
+在上述语句中，对每个 TiKV Region 执行 `IndexFullScan` 任务。尽管名字叫做 `FullScan`，但实际上只需要读取第一行（`└─Limit_28`）。每个 TiKV Region 会将其 `MIN` 或 `MAX` 值返回给 TiDB，之后执行流式聚合以筛选出单行。带有 `MAX` 或 `MIN` 聚合函数的流式聚合还确保在表为空时返回 `NULL`。
 
-By contrast, executing the `MIN` function on an unindexed value will result in `TableFullScan`. The query will require all rows to be scanned in TiKV, but a `TopN` calculation is performed to ensure each TiKV Region only returns one row to TiDB. Although `TopN` prevents excessive rows from being transferred between TiKV and TiDB, this statement is still considered far less efficient than the above example where `MIN` is able to make use of an index.
+相比之下，在未建立索引的值上执行 `MIN` 函数会导致 `TableFullScan`。此查询需要扫描 TiKV 中的所有行，但会执行 `TopN` 计算以确保每个 TiKV Region 只返回一行到 TiDB。虽然 `TopN` 避免了过多行在 TiKV 和 TiDB 之间传输，但此语句的效率远远低于上述利用索引的 `MIN` 示例。
 
-{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN SELECT MIN(pad1) FROM t1;
@@ -281,13 +271,12 @@ EXPLAIN SELECT MIN(pad1) FROM t1;
 |     └─TopN_22                  | 1.00    | cop[tikv] |               | test.t1.pad1, offset:0, count:1   |
 |       └─Selection_21           | 1008.99 | cop[tikv] |               | not(isnull(test.t1.pad1))         |
 |         └─TableFullScan_20     | 1010.00 | cop[tikv] | table:t1      | keep order:false                  |
-+--------------------------------+---------+-----------+---------------+-----------------------------------+
++------------------------------+---------+-----------+---------------+-----------------------------------+
 6 rows in set (0.00 sec)
 ```
 
-The following statements will use the `IndexFullScan` operator to scan every row in the index:
+以下语句会使用 `IndexFullScan` 操作符扫描索引中的每一行：
 
-{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN SELECT SUM(intkey) FROM t1;
@@ -316,11 +305,10 @@ EXPLAIN SELECT AVG(intkey) FROM t1;
 4 rows in set (0.00 sec)
 ```
 
-In the above examples, `IndexFullScan` is more efficient than `TableFullScan` because the width of the value in the `(intkey + RowID)` index is less than the width of the full row.
+在上述示例中，`IndexFullScan` 比 `TableFullScan` 更高效，因为 `(intkey + RowID)` 索引中的值宽度小于整行的宽度。
 
-The following statement does not support using an `IndexFullScan` operator because additional columns are required from the table:
+以下语句不支持使用 `IndexFullScan` 操作符，因为需要从表中获取额外的列：
 
-{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN SELECT AVG(intkey), ANY_VALUE(pad1) FROM t1;
@@ -336,5 +324,4 @@ EXPLAIN SELECT AVG(intkey), ANY_VALUE(pad1) FROM t1;
 |     └─StreamAgg_8            | 1.00    | cop[tikv] |               | funcs:count(test.t1.intkey)->Column#10, funcs:sum(test.t1.intkey)->Column#11, funcs:firstrow(test.t1.pad1)->Column#12 |
 |       └─TableFullScan_15     | 1010.00 | cop[tikv] | table:t1      | keep order:false                                                                                                      |
 +------------------------------+---------+-----------+---------------+-----------------------------------------------------------------------------------------------------------------------+
-5 rows in set (0.00 sec)
 ```

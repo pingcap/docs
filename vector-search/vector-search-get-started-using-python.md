@@ -1,19 +1,19 @@
 ---
-title: Get Started with TiDB + AI via Python
-summary: Learn how to quickly develop an AI application that performs semantic search using Python and TiDB Vector Search.
+title: 使用 Python 搭配 TiDB + AI 入门
+summary: 学习如何使用 Python 和 TiDB Vector Search 快速开发一个执行语义搜索的 AI 应用。
 ---
 
-# Get Started with TiDB + AI via Python
+# 使用 Python 搭配 TiDB + AI 入门
 
-This tutorial demonstrates how to develop a simple AI application that provides **semantic search** features. Unlike traditional keyword search, semantic search intelligently understands the meaning behind your query and returns the most relevant result. For example, if you have documents titled "dog", "fish", and "tree", and you search for "a swimming animal", the application would identify "fish" as the most relevant result.
+本教程演示如何开发一个提供 **semantic search** 功能的简单 AI 应用。与传统的关键词搜索不同，语义搜索能够智能理解你的查询背后的含义，并返回最相关的结果。例如，如果你有标题为 "dog"、"fish" 和 "tree" 的文档，当你搜索 "一只会游泳的动物" 时，应用会识别出 "fish" 是最相关的结果。
 
-Throughout this tutorial, you will develop this AI application using [TiDB Vector Search](/vector-search/vector-search-overview.md), Python, [TiDB Vector SDK for Python](https://github.com/pingcap/tidb-vector-python), and AI models.
+在整个教程中，你将使用 [TiDB Vector Search](/vector-search/vector-search-overview.md)、Python、[TiDB Vector SDK for Python](https://github.com/pingcap/tidb-vector-python) 和 AI 模型来开发此应用。
 
 <CustomContent platform="tidb">
 
 > **Warning:**
 >
-> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> 目前向量搜索功能处于实验阶段，不建议在生产环境中使用。此功能可能会在不提前通知的情况下进行更改。如发现 bug，可以在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues)。
 
 </CustomContent>
 
@@ -21,46 +21,46 @@ Throughout this tutorial, you will develop this AI application using [TiDB Vecto
 
 > **Note:**
 >
-> The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> 目前向量搜索功能处于测试版，可能会在不提前通知的情况下进行更改。如发现 bug，可以在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues)。
 
 </CustomContent>
 
 > **Note:**
 >
-> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> 向量搜索功能在 TiDB Self-Managed、[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) 上均可使用。对于 TiDB Self-Managed 和 TiDB Cloud Dedicated，TiDB 版本必须为 v8.4.0 及以上（建议使用 v8.5.0 及以上版本）。
 
-## Prerequisites
+## 前提条件
 
-To complete this tutorial, you need:
+完成本教程，你需要：
 
-- [Python 3.8 or higher](https://www.python.org/downloads/) installed.
-- [Git](https://git-scm.com/downloads) installed.
-- A TiDB cluster.
+- 安装 [Python 3.8 或更高版本](https://www.python.org/downloads/)
+- 安装 [Git](https://git-scm.com/downloads)
+- 拥有一个 TiDB 集群
 
 <CustomContent platform="tidb">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**如果你还没有 TiDB 集群，可以按照以下方式创建：**
 
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
-- Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- 参考 [部署本地测试用 TiDB 集群](/quick-start-with-tidb.md#deploy-a-local-test-cluster) 或 [部署生产用 TiDB 集群](/production-deployment-using-tiup.md) 来创建本地集群。
+- 参考 [创建 {{{ .starter }}} 集群](/develop/dev-guide-build-cluster-in-cloud.md) 来创建你自己的 TiDB Cloud 集群。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**如果你还没有 TiDB 集群，可以按照以下方式创建：**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster of v8.4.0 or a later version.
+- （推荐）参考 [创建 {{{ .starter }}} 集群](/develop/dev-guide-build-cluster-in-cloud.md) 来创建你自己的 TiDB Cloud 集群。
+- 参考 [部署本地测试用 TiDB 集群](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) 或 [部署生产用 TiDB 集群](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) 来创建版本为 v8.4.0 或更高版本的本地集群。
 
 </CustomContent>
 
-## Get started
+## 入门步骤
 
-The following steps show how to develop the application from scratch. To run the demo directly, you can check out the sample code in the [pingcap/tidb-vector-python](https://github.com/pingcap/tidb-vector-python/blob/main/examples/python-client-quickstart) repository.
+以下步骤演示如何从零开始开发应用。若想直接运行示例，可以在 [pingcap/tidb-vector-python](https://github.com/pingcap/tidb-vector-python/blob/main/examples/python-client-quickstart) 仓库中查看示例代码。
 
-### Step 1. Create a new Python project
+### 步骤 1. 创建一个新的 Python 项目
 
-In your preferred directory, create a new Python project and a file named `example.py`:
+在你偏好的目录下，创建一个新的 Python 项目和一个名为 `example.py` 的文件：
 
 ```shell
 mkdir python-client-quickstart
@@ -68,50 +68,50 @@ cd python-client-quickstart
 touch example.py
 ```
 
-### Step 2. Install required dependencies
+### 步骤 2. 安装所需依赖
 
-In your project directory, run the following command to install the required packages:
+在你的项目目录下，运行以下命令安装所需的包：
 
 ```shell
 pip install sqlalchemy pymysql sentence-transformers tidb-vector python-dotenv
 ```
 
-- `tidb-vector`: the Python client for interacting with TiDB vector search.
-- [`sentence-transformers`](https://sbert.net): a Python library that provides pre-trained models for generating [vector embeddings](/vector-search/vector-search-overview.md#vector-embedding) from text.
+- `tidb-vector`：用于与 TiDB 向量搜索交互的 Python 客户端。
+- [`sentence-transformers`](https://sbert.net)：提供预训练模型，用于从文本生成 [vector embeddings](/vector-search/vector-search-overview.md#vector-embedding)。
 
-### Step 3. Configure the connection string to the TiDB cluster
+### 步骤 3. 配置连接字符串到 TiDB 集群
 
-Configure the cluster connection string depending on the TiDB deployment option you've selected.
+根据你选择的 TiDB 部署方式，配置集群连接字符串。
 
 <SimpleTab>
 <div label="{{{ .starter }}}">
 
-For a {{{ .starter }}} cluster, take the following steps to obtain the cluster connection string and configure environment variables:
+对于 {{{ .starter }}} 集群，按照以下步骤获取集群连接字符串并配置环境变量：
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. 进入 [**Clusters**](https://tidbcloud.com/console/clusters) 页面，点击目标集群名称进入概览页面。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2. 点击右上角的 **Connect**，弹出连接对话框。
 
-3. Ensure the configurations in the connection dialog match your operating environment.
+3. 确认连接对话框中的配置与你的操作环境一致。
 
-    - **Connection Type** is set to `Public`.
-    - **Branch** is set to `main`.
-    - **Connect With** is set to `SQLAlchemy`.
-    - **Operating System** matches your environment.
-
-    > **Tip:**
-    >
-    > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
-
-4. Click the **PyMySQL** tab and copy the connection string.
+    - **Connection Type** 设为 `Public`。
+    - **Branch** 设为 `main`。
+    - **Connect With** 设为 `SQLAlchemy`。
+    - **Operating System** 与你的环境匹配。
 
     > **Tip:**
     >
-    > If you have not set a password yet, click **Generate Password** to generate a random password.
+    > 如果你的程序在 Windows Subsystem for Linux (WSL) 中运行，切换到对应的 Linux 发行版。
 
-5. In the root directory of your Python project, create a `.env` file and paste the connection string into it.
+4. 点击 **PyMySQL** 标签页，复制连接字符串。
 
-    The following is an example for macOS:
+    > **Tip:**
+    >
+    > 如果还未设置密码，可以点击 **Generate Password** 生成随机密码。
+
+5. 在你的 Python 项目的根目录下，创建 `.env` 文件，并将连接字符串粘贴进去。
+
+    下面是 macOS 的示例：
 
     ```dotenv
     TIDB_DATABASE_URL="mysql+pymysql://<prefix>.root:<password>@gateway01.<region>.prod.aws.tidbcloud.com:4000/test?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
@@ -120,32 +120,32 @@ For a {{{ .starter }}} cluster, take the following steps to obtain the cluster c
 </div>
 <div label="TiDB Self-Managed">
 
-For a TiDB Self-Managed cluster, create a `.env` file in the root directory of your Python project. Copy the following content into the `.env` file, and modify the environment variable values according to the connection parameters of your TiDB cluster:
+对于 TiDB Self-Managed 集群，在你的 Python 项目根目录下创建 `.env` 文件。将以下内容复制到 `.env` 文件中，并根据你的 TiDB 集群连接参数修改环境变量值：
 
 ```dotenv
 TIDB_DATABASE_URL="mysql+pymysql://<USER>:<PASSWORD>@<HOST>:<PORT>/<DATABASE>"
-# For example: TIDB_DATABASE_URL="mysql+pymysql://root@127.0.0.1:4000/test"
+# 例如：TIDB_DATABASE_URL="mysql+pymysql://root@127.0.0.1:4000/test"
 ```
 
-If you are running TiDB on your local machine, `<HOST>` is `127.0.0.1` by default. The initial `<PASSWORD>` is empty, so if you are starting the cluster for the first time, you can omit this field.
+如果你在本地运行 TiDB，`<HOST>` 默认为 `127.0.0.1`。初次启动集群时，`<PASSWORD>` 为空，可以省略此字段。
 
-The following are descriptions for each parameter:
+以下是各参数的说明：
 
-- `<USER>`: The username to connect to the TiDB cluster.
-- `<PASSWORD>`: The password to connect to the TiDB cluster.
-- `<HOST>`: The host of the TiDB cluster.
-- `<PORT>`: The port of the TiDB cluster.
-- `<DATABASE>`: The name of the database you want to connect to.
+- `<USER>`：连接 TiDB 集群的用户名。
+- `<PASSWORD>`：连接 TiDB 集群的密码。
+- `<HOST>`：TiDB 集群的主机地址。
+- `<PORT>`：TiDB 集群的端口。
+- `<DATABASE>`：你要连接的数据库名。
 
 </div>
 
 </SimpleTab>
 
-### Step 4. Initialize the embedding model
+### 步骤 4. 初始化嵌入模型
 
-An [embedding model](/vector-search/vector-search-overview.md#embedding-model) transforms data into [vector embeddings](/vector-search/vector-search-overview.md#vector-embedding). This example uses the pre-trained model [**msmarco-MiniLM-L12-cos-v5**](https://huggingface.co/sentence-transformers/msmarco-MiniLM-L12-cos-v5) for text embedding. This lightweight model, provided by the `sentence-transformers` library, transforms text data into 384-dimensional vector embeddings.
+[embedding model](/vector-search/vector-search-overview.md#embedding-model) 将数据转换为 [vector embeddings](/vector-search/vector-search-overview.md#vector-embedding)。本示例使用预训练模型 [**msmarco-MiniLM-L12-cos-v5**](https://huggingface.co/sentence-transformers/msmarco-MiniLM-L12-cos-v5) 进行文本嵌入。该轻量级模型由 `sentence-transformers` 库提供，将文本数据转换为 384 维的向量嵌入。
 
-To set up the model, copy the following code into the `example.py` file. This code initializes a `SentenceTransformer` instance and defines a `text_to_embedding()` function for later use.
+将以下代码复制到 `example.py` 文件中，用于初始化 `SentenceTransformer` 实例，并定义一个 `text_to_embedding()` 函数供后续使用。
 
 ```python
 from sentence_transformers import SentenceTransformer
@@ -155,42 +155,42 @@ embed_model = SentenceTransformer("sentence-transformers/msmarco-MiniLM-L12-cos-
 embed_model_dims = embed_model.get_sentence_embedding_dimension()
 
 def text_to_embedding(text):
-    """Generates vector embeddings for the given text."""
+    """为给定文本生成向量嵌入。"""
     embedding = embed_model.encode(text)
     return embedding.tolist()
 ```
 
-### Step 5. Connect to the TiDB cluster
+### 步骤 5. 连接到 TiDB 集群
 
-Use the `TiDBVectorClient` class to connect to your TiDB cluster and create a table `embedded_documents` with a vector column.
+使用 `TiDBVectorClient` 类连接到你的 TiDB 集群，并创建一个名为 `embedded_documents` 的表，包含一个向量列。
 
 > **Note**
 >
-> Make sure the dimension of your vector column in the table matches the dimension of the vectors generated by your embedding model. For example, the **msmarco-MiniLM-L12-cos-v5** model generates vectors with 384 dimensions, so the dimension of your vector columns in `embedded_documents` should be 384 as well.
+> 确保表中的向量列维度与嵌入模型生成的向量维度一致。例如，`msmarco-MiniLM-L12-cos-v5` 模型生成的向量维度为 384，因此 `embedded_documents` 表中的向量列维度也应为 384。
 
 ```python
 import os
 from tidb_vector.integrations import TiDBVectorClient
 from dotenv import load_dotenv
 
-# Load the connection string from the .env file
+# 从 .env 文件加载连接字符串
 load_dotenv()
 
 vector_store = TiDBVectorClient(
-   # The 'embedded_documents' table will store the vector data.
+   # `embedded_documents` 表将存储向量数据。
    table_name='embedded_documents',
-   # The connection string to the TiDB cluster.
+   # 连接 TiDB 集群的连接字符串。
    connection_string=os.environ.get('TIDB_DATABASE_URL'),
-   # The dimension of the vector generated by the embedding model.
+   # 嵌入模型生成的向量维度。
    vector_dimension=embed_model_dims,
-   # Recreate the table if it already exists.
+   # 如果表已存在，则重新创建。
    drop_existing_table=True,
 )
 ```
 
-### Step 6. Embed text data and store the vectors
+### 步骤 6. 嵌入文本数据并存储向量
 
-In this step, you will prepare sample documents containing single words, such as "dog", "fish", and "tree". The following code uses the `text_to_embedding()` function to transform these text documents into vector embeddings, and then inserts them into the vector store.
+在此步骤中，你将准备包含单词的示例文档，例如 "dog"、"fish" 和 "tree"。以下代码使用 `text_to_embedding()` 函数将这些文本转换为向量嵌入，然后插入到向量存储中。
 
 ```python
 documents = [
@@ -222,11 +222,11 @@ vector_store.insert(
 )
 ```
 
-### Step 7. Perform semantic search
+### 步骤 7. 执行语义搜索
 
-In this step, you will search for "a swimming animal", which doesn't directly match any words in existing documents.
+在此步骤中，你将搜索 "一只会游泳的动物"，该词组与现有文档中的词没有直接匹配。
 
-The following code uses the `text_to_embedding()` function again to convert the query text into a vector embedding, and then queries with the embedding to find the top three closest matches.
+以下代码再次使用 `text_to_embedding()` 函数，将查询文本转换为向量嵌入，然后用该嵌入进行查询，找到最接近的前三个匹配。
 
 ```python
 def print_result(query, result):
@@ -234,26 +234,26 @@ def print_result(query, result):
    for r in result:
       print(f"- text: \"{r.document}\", distance: {r.distance}")
 
-query = "a swimming animal"
+query = "一只会游泳的动物"
 query_embedding = text_to_embedding(query)
 search_result = vector_store.query(query_embedding, k=3)
 print_result(query, search_result)
 ```
 
-Run the `example.py` file and the output is as follows:
+运行 `example.py` 文件，输出如下：
 
 ```plain
-Search result ("a swimming animal"):
+Search result ("一只会游泳的动物"):
 - text: "fish", distance: 0.4562914811223072
 - text: "dog", distance: 0.6469335836410557
 - text: "tree", distance: 0.798545178640937
 ```
 
-The three terms in the search results are sorted by their respective distance from the queried vector: the smaller the distance, the more relevant the corresponding `document`.
+搜索结果中的三个词条按照它们与查询向量的距离排序：距离越小，相关性越高。
 
-Therefore, according to the output, the swimming animal is most likely a fish, or a dog with a gift for swimming.
+因此，根据输出，最可能的匹配对象是鱼，或者是擅长游泳的狗。
 
-## See also
+## 相关链接
 
 - [Vector Data Types](/vector-search/vector-search-data-types.md)
 - [Vector Search Index](/vector-search/vector-search-index.md)

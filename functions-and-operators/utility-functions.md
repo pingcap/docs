@@ -1,15 +1,15 @@
 ---
 title: Utility Functions
-summary: This document introduces utility functions supported in TiDB.
+summary: 本文档介绍了 TiDB 支持的实用函数。
 ---
 
 # Utility Functions
 
-This document introduces utility functions supported in TiDB, designed to simplify common data conversions for better readability.
+本文档介绍了 TiDB 支持的实用函数，旨在简化常见数据转换，以提升可读性。
 
 ## `FORMAT_BYTES()`
 
-The `FORMAT_BYTES()` function converts a number of bytes into a human-readable format.
+`FORMAT_BYTES()` 函数将字节数转换为易于阅读的格式。
 
 ```sql
 SELECT FORMAT_BYTES(10*1024*1024);
@@ -26,7 +26,7 @@ SELECT FORMAT_BYTES(10*1024*1024);
 
 ## `FORMAT_NANO_TIME()`
 
-The `FORMAT_NANO_TIME()` function converts a number of nanoseconds into a human-readable time format.
+`FORMAT_NANO_TIME()` 函数将纳秒数转换为易于阅读的时间格式。
 
 ```sql
 SELECT FORMAT_NANO_TIME(1000000);

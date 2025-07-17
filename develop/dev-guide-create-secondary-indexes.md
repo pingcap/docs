@@ -1,86 +1,86 @@
 ---
-title: Create a Secondary Index
-summary: Learn steps, rules, and examples to create a secondary index.
+title: 创建二级索引
+summary: 了解创建二级索引的步骤、规则和示例。
 ---
 
-# Create a Secondary Index
+# 创建二级索引
 
-This document describes how to create a secondary index using SQL and various programming languages and lists the rules of index creation. In this document, the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application is taken as an example to walk you through the steps of secondary index creation.
+本文档介绍了如何使用 SQL 及各种编程语言创建二级索引，并列出了索引创建的规则。以 [Bookshop](/develop/dev-guide-bookshop-schema-design.md) 应用为例，带你了解二级索引的创建步骤。
 
-## Before you start
+## 在开始之前
 
-Before creating a secondary index, do the following:
+在创建二级索引之前，请完成以下操作：
 
-- [Build a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
-- Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md).
-- [Create a Database](/develop/dev-guide-create-database.md).
-- [Create a Table](/develop/dev-guide-create-table.md).
+- [构建一个 {{{ .starter }}} 集群](/develop/dev-guide-build-cluster-in-cloud.md)。
+- 阅读 [Schema 设计概述](/develop/dev-guide-schema-design-overview.md)。
+- [创建数据库](/develop/dev-guide-create-database.md)。
+- [创建表](/develop/dev-guide-create-table.md)。
 
-## What is secondary index
+## 什么是二级索引
 
-A secondary index is a logical object in a TiDB cluster. You can simply regard it as a sorting type of data that TiDB uses to improve the query performance. In TiDB, creating a secondary index is an online operation, which does not block any data read and write operations on a table. For each index, TiDB creates references for each row in a table and sorts the references by selected columns instead of by data directly.
+二级索引是 TiDB 集群中的一个逻辑对象。你可以简单地将其视为 TiDB 用于提升查询性能的一种排序类型的数据。在 TiDB 中，创建二级索引是一个在线操作，不会阻塞对表的任何数据读写操作。对于每个索引，TiDB 会为表中的每一行创建引用，并按所选列进行排序，而不是直接对数据排序。
 
 <CustomContent platform="tidb">
 
-For more information about secondary indexes, see [Secondary Indexes](/best-practices/tidb-best-practices.md#secondary-index).
+关于二级索引的更多信息，参见 [Secondary Indexes](/best-practices/tidb-best-practices.md#secondary-index)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-For more information about secondary indexes, see [Secondary Indexes](https://docs.pingcap.com/tidb/stable/tidb-best-practices#secondary-index).
+关于二级索引的更多信息，参见 [Secondary Indexes](https://docs.pingcap.com/tidb/stable/tidb-best-practices#secondary-index)。
 
 </CustomContent>
 
-In TiDB, you can either [add a secondary index to an existing table](#add-a-secondary-index-to-an-existing-table) or [create a secondary index when creating a new table](#create-a-secondary-index-when-creating-a-new-table).
+在 TiDB 中，你可以选择 [为现有表添加二级索引](#add-a-secondary-index-to-an-existing-table)，或在 [创建新表时同时创建二级索引](#create-a-secondary-index-when-creating-a-new-table)。
 
-## Add a secondary index to an existing table
+## 为现有表添加二级索引
 
-To add a secondary index to an existing table, you can use the [CREATE INDEX](/sql-statements/sql-statement-create-index.md) statement as follows:
+要为现有表添加二级索引，可以使用 [CREATE INDEX](/sql-statements/sql-statement-create-index.md) 语句，示例如下：
 
 ```sql
 CREATE INDEX {index_name} ON {table_name} ({column_names});
 ```
 
-Parameter description:
+参数说明：
 
-- `{index_name}`: the name of a secondary index.
-- `{table_name}`: the table name.
-- `{column_names}`: the names of the columns to be indexed, separated by semi-colon commas.
+- `{index_name}`：二级索引的名称。
+- `{table_name}`：表名。
+- `{column_names}`：要索引的列名，多个列名用半角逗号分隔。
 
-## Create a secondary index when creating a new table
+## 在创建新表时同时创建二级索引
 
-To create a secondary index at the same time as table creation, you can add a clause containing the `KEY` keyword to the end of the [CREATE TABLE](/sql-statements/sql-statement-create-table.md) statement:
+在创建表的同时添加二级索引，可以在 [CREATE TABLE](/sql-statements/sql-statement-create-table.md) 语句的末尾添加包含 `KEY` 关键字的子句：
 
 ```sql
 KEY `{index_name}` (`{column_names}`)
 ```
 
-Parameter description:
+参数说明：
 
-- `{index_name}`: the name of a secondary index.
-- `{column_names}`: the names of the columns to be indexed, separated by semi-colon commas.
+- `{index_name}`：二级索引的名称。
+- `{column_names}`：要索引的列名，多个列名用半角逗号分隔。
 
-## Rules in secondary index creation
+## 二级索引创建规则
 
-See [Best Practices for Indexing](/develop/dev-guide-index-best-practice.md).
+请参见 [索引最佳实践](/develop/dev-guide-index-best-practice.md)。
 
-## Example
+## 示例
 
-Suppose you want the `bookshop` application to support **searching for all books published in a given year**.
+假设你希望 `bookshop` 应用支持 **根据某个年份搜索所有出版的书籍**。
 
-The fields in the `books` table are as follows:
+`books` 表中的字段如下：
 
-| Field name   | Type          | Field description                                                          |
-|--------------|---------------|------------------------------------------------------------------|
-| id           | bigint    | Unique ID of the book                                            |
-| title        | varchar(100)  | Book title                                                       |
-| type         | enum          | Types of books (for example, magazines, animations, and teaching aids) |
-| stock        | bigint    | Stock                                                            |
-| price        | decimal(15,2) | Price                                                            |
-| published_at | datetime      | Date of publishing                                                  |
+| 字段名       | 类型             | 字段描述                                                         |
+|--------------|------------------|------------------------------------------------------------------|
+| id           | bigint           | 书籍的唯一 ID                                                    |
+| title        | varchar(100)     | 书名                                                             |
+| type         | enum             | 书的类型（例如，杂志、动画、教学辅助等）                         |
+| stock        | bigint           | 库存                                                             |
+| price        | decimal(15,2)    | 价格                                                             |
+| published_at | datetime         | 出版日期                                                         |
 
-The `books` table is created using the following SQL statement:
+`books` 表的创建 SQL 语句如下：
 
 ```sql
 CREATE TABLE `bookshop`.`books` (
@@ -94,19 +94,19 @@ CREATE TABLE `bookshop`.`books` (
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 ```
 
-To support the searching by year feature, you need to write a SQL statement to **search for all books published in a given year**. Taking 2022 as an example, write a SQL statement as follows:
+为了支持按年份搜索的功能，你需要编写 SQL 语句 **搜索某个年份出版的所有书籍**。以 2022 年为例，SQL 语句如下：
 
 ```sql
 SELECT * FROM `bookshop`.`books` WHERE `published_at` >= '2022-01-01 00:00:00' AND `published_at` < '2023-01-01 00:00:00';
 ```
 
-To check the execution plan of the SQL statement, you can use the [`EXPLAIN`](/sql-statements/sql-statement-explain.md) statement.
+你可以使用 [`EXPLAIN`](/sql-statements/sql-statement-explain.md) 语句查看该 SQL 的执行计划。
 
 ```sql
 EXPLAIN SELECT * FROM `bookshop`.`books` WHERE `published_at` >= '2022-01-01 00:00:00' AND `published_at` < '2023-01-01 00:00:00';
 ```
 
-The following is an example output of the execution plan:
+以下是执行计划的示例输出：
 
 ```
 +-------------------------+----------+-----------+---------------+--------------------------------------------------------------------------------------------------------------------------+
@@ -119,17 +119,17 @@ The following is an example output of the execution plan:
 3 rows in set (0.61 sec)
 ```
 
-In the example output, **TableFullScan** is displayed in the `id` column, which means that TiDB is ready to do a full table scan on the `books` table in this query. In the case of a large amount of data, however, a full table scan might be quite slow and cause a fatal impact.
+在输出中，**TableFullScan** 出现在 `id` 列，表示 TiDB 准备对 `books` 表进行全表扫描。但在数据量较大的情况下，全表扫描可能会非常缓慢，带来严重影响。
 
-To avoid such impact, you can add an index for the `published_at` column to the `books` table as follows:
+为了避免这种影响，可以为 `published_at` 列添加索引，示例如下：
 
 ```sql
 CREATE INDEX `idx_book_published_at` ON `bookshop`.`books` (`bookshop`.`books`.`published_at`);
 ```
 
-After adding the index, execute the `EXPLAIN` statement again to check the execution plan.
+添加索引后，再次执行 `EXPLAIN` 语句以查看执行计划。
 
-The following is an example output.
+示例输出如下：
 
 ```
 +-------------------------------+---------+-----------+--------------------------------------------------------+-------------------------------------------------------------------+
@@ -142,33 +142,33 @@ The following is an example output.
 3 rows in set (0.18 sec)
 ```
 
-In the output, **IndexRangeScan** is displayed instead of **TableFullScan**, which means that TiDB is ready to use indexes to do this query.
+在输出中，显示 **IndexRangeScan** 而非 **TableFullScan**，表示 TiDB 已准备好使用索引执行此查询。
 
-The words such as **TableFullScan** and **IndexRangeScan** in the execution plan are [operators](/explain-overview.md#operator-overview) in TiDB. For more information about execution plans and operators, see [TiDB Query Execution Plan Overview](/explain-overview.md).
+执行计划中的 **TableFullScan** 和 **IndexRangeScan** 等词是 TiDB 中的 [operators](/explain-overview.md#operator-overview)。关于执行计划和操作符的更多信息，参见 [TiDB 查询执行计划概述](/explain-overview.md)。
 
 <CustomContent platform="tidb">
 
-The execution plan does not return the same operator every time. This is because TiDB uses a **Cost-Based Optimization (CBO)** approach, in which an execution plan depends on both rules and data distribution. For more information about TiDB SQL performance, see [SQL Tuning Overview](/sql-tuning-overview.md).
+执行计划每次返回的操作符可能不同。这是因为 TiDB 采用的是 **Cost-Based Optimization (CBO)** 方法，执行计划依赖于规则和数据分布。关于 TiDB SQL 性能的更多信息，参见 [SQL 调优概述](/sql-tuning-overview.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-The execution plan does not return the same operator every time. This is because TiDB uses a **Cost-Based Optimization (CBO)** approach, in which an execution plan depends on both rules and data distribution. For more information about TiDB SQL performance, see [SQL Tuning Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md).
+执行计划每次返回的操作符可能不同。这是因为 TiDB 采用的是 **Cost-Based Optimization (CBO)** 方法，执行计划依赖于规则和数据分布。关于 TiDB SQL 性能的更多信息，参见 [SQL 调优概述](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)。
 
 </CustomContent>
 
 > **Note:**
 >
-> TiDB also supports explicit use of indexes when querying, and you can use [Optimizer Hints](/optimizer-hints.md) or [SQL Plan Management (SPM)](/sql-plan-management.md) to artificially control the use of indexes. But if you do not know well about indexes, optimizer hints, or SPM, **DO NOT** use this feature to avoid any unexpected results.
+> TiDB 也支持在查询时显式使用索引，你可以使用 [Optimizer Hints](/optimizer-hints.md) 或 [SQL Plan Management (SPM)](/sql-plan-management.md) 来人为控制索引的使用。但如果你对索引、优化器提示或 SPM 不太了解，**不要**使用此功能，以避免出现意外结果。
 
-To query the indexes on a table, you can use the [SHOW INDEXES](/sql-statements/sql-statement-show-indexes.md) statement:
+你可以使用 [SHOW INDEXES](/sql-statements/sql-statement-show-indexes.md) 语句查询表上的索引，例如：
 
 ```sql
 SHOW INDEXES FROM `bookshop`.`books`;
 ```
 
-The following is an example output:
+示例输出如下：
 
 ```
 +-------+------------+-----------------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+-----------+
@@ -177,23 +177,4 @@ The following is an example output:
 | books |          0 | PRIMARY               |            1 | id           | A         |           0 |     NULL | NULL   |      | BTREE      |         |               | YES     | NULL       | YES       |
 | books |          1 | idx_book_published_at |            1 | published_at | A         |           0 |     NULL | NULL   |      | BTREE      |         |               | YES     | NULL       | NO        |
 +-------+------------+-----------------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+-----------+
-2 rows in set (1.63 sec)
 ```
-
-## Next step
-
-After creating a database and adding tables and secondary indexes to it, you can start adding the data [write](/develop/dev-guide-insert-data.md) and [read](/develop/dev-guide-get-data-from-single-table.md) features to your application.
-
-## Need help?
-
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>

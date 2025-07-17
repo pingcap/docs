@@ -1,22 +1,22 @@
 ---
 title: TIDB_SERVERS_INFO
-summary: Learn the `TIDB_SERVERS_INFO` INFORMATION_SCHEMA table.
+summary: 了解 `TIDB_SERVERS_INFO` INFORMATION_SCHEMA 表。
 ---
 
 # TIDB_SERVERS_INFO
 
-The `TIDB_SERVERS_INFO` table provides information about TiDB servers in the TiDB Cluster (namely, tidb-server processes).
+`TIDB_SERVERS_INFO` 表提供关于 TiDB 集群中 TiDB 服务器（即，tidb-server 进程）的信息。
 
 > **Note:**
 >
-> This table is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> 该表在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC tidb_servers_info;
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 +---------------+--------------+------+------+---------+-------+
@@ -35,13 +35,13 @@ The output is as follows:
 9 rows in set (0.00 sec)
 ```
 
-View the `TIDB_SERVERS_INFO` table:
+查看 `TIDB_SERVERS_INFO` 表：
 
 ```sql
 SELECT * FROM TIDB_SERVERS_INFO\G
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 *************************** 1. row ***************************

@@ -1,13 +1,13 @@
 ---
-title: PREPARE | TiDB SQL Statement Reference
-summary: An overview of the usage of PREPARE for the TiDB database.
+title: PREPARE | TiDB SQL 语句参考
+summary: 关于在 TiDB 数据库中使用 PREPARE 的概述。
 ---
 
 # PREPARE
 
-The `PREPARE` statement provides an SQL interface to server-side prepared statements.
+`PREPARE` 语句提供了一个服务器端预处理语句的 SQL 接口。
 
-## Synopsis
+## 语法概要
 
 ```ebnf+diagram
 PreparedStmt ::=
@@ -18,13 +18,13 @@ PrepareSQL ::=
 |   UserVariable
 ```
 
-> **Note:**
+> **注意：**
 >
-> For each `PREPARE` statement, the maximum number of placeholders is 65535.
+> 每个 `PREPARE` 语句的占位符最大数量为 65535。
 
-To limit the number of `PREPARE` statements in the current TiDB instance, you can use the [`max_prepared_stmt_count`](/system-variables.md#max_prepared_stmt_count) system variable.
+为了限制当前 TiDB 实例中的 `PREPARE` 语句数量，可以使用 [`max_prepared_stmt_count`](/system-variables.md#max_prepared_stmt_count) 系统变量。
 
-## Examples
+## 示例
 
 ```sql
 mysql> PREPARE mystmt FROM 'SELECT ? as num FROM DUAL';
@@ -45,11 +45,11 @@ mysql> DEALLOCATE PREPARE mystmt;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `PREPARE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中的 `PREPARE` 语句与 MySQL 完全兼容。如果你发现任何兼容性差异，[请报告一个 bug](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 相关链接
 
 * [EXECUTE](/sql-statements/sql-statement-execute.md)
 * [DEALLOCATE](/sql-statements/sql-statement-deallocate.md)

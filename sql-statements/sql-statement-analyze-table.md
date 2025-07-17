@@ -1,17 +1,17 @@
 ---
-title: ANALYZE | TiDB SQL Statement Reference
-summary: An overview of the usage of ANALYZE for the TiDB database.
+title: ANALYZE | TiDB SQL 语句参考
+summary: 关于在 TiDB 数据库中使用 ANALYZE 的概述。
 ---
 
 # ANALYZE
 
-This statement updates the statistics that TiDB builds on tables and indexes. It is recommended to run `ANALYZE` after performing a large batch update or import of records, or when you notice that query execution plans are sub-optimal.
+此语句用于更新 TiDB 在表和索引上构建的统计信息。建议在执行大量批量更新或导入记录后，或者当你发现查询执行计划不理想时，运行 `ANALYZE`。
 
-TiDB will also automatically update its statistics over time as it discovers that they are inconsistent with its own estimates.
+TiDB 也会随着时间的推移自动更新其统计信息，当它发现统计信息与自身的估算不一致时。
 
-Currently, TiDB collects statistical information as a full collection by using the `ANALYZE TABLE` statement. For more information, see [Introduction to statistics](/statistics.md).
+目前，TiDB 通过使用 `ANALYZE TABLE` 语句以完整采集的方式收集统计信息。更多信息请参见 [统计信息简介](/statistics.md)。
 
-## Synopsis
+## 语法概要
 
 ```ebnf+diagram
 AnalyzeTableStmt ::=
@@ -45,7 +45,7 @@ PartitionNameList ::=
     Identifier ( ',' Identifier )*
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -74,7 +74,7 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 2 rows in set (0.00 sec)
 ```
 
-The status of the current statistics is `pseudo`, which means the statistics is inaccurate.
+当前统计信息的状态为 `pseudo`，意味着统计信息不准确。
 
 ```sql
 mysql> ANALYZE TABLE t1;
@@ -90,16 +90,16 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 2 rows in set (0.00 sec)
 ```
 
-The statistics is now correctly updated and loaded.
+统计信息现已正确更新并加载。
 
-## MySQL compatibility
+## MySQL 兼容性
 
-TiDB differs from MySQL in **both** the statistics it collects and how it makes use of statistics during query execution. While this statement is syntactically similar to MySQL, the following differences apply:
+TiDB 在 **统计信息的收集** 和 **查询执行时统计信息的使用** 方面与 MySQL 存在差异。虽然此语句在语法上与 MySQL 类似，但存在以下不同点：
 
-+ TiDB might not include very recently committed changes when running `ANALYZE TABLE`. After a batch update of rows, you might need to `sleep(1)` before executing `ANALYZE TABLE` in order for the statistics update to reflect these changes. See [#16570](https://github.com/pingcap/tidb/issues/16570).
-+ `ANALYZE TABLE` takes significantly longer to execute in TiDB than MySQL.
++ 在运行 `ANALYZE TABLE` 时，TiDB 可能不会包含最近提交的变更。在批量更新行后，你可能需要 `sleep(1)`，然后再执行 `ANALYZE TABLE`，以使统计信息反映这些变更。详见 [#16570](https://github.com/pingcap/tidb/issues/16570)。
++ 在 TiDB 中，`ANALYZE TABLE` 的执行时间明显长于 MySQL。
 
-## See also
+## 相关链接
 
 * [EXPLAIN](/sql-statements/sql-statement-explain.md)
 * [EXPLAIN ANALYZE](/sql-statements/sql-statement-explain-analyze.md)

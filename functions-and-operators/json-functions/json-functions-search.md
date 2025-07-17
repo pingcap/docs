@@ -1,19 +1,19 @@
 ---
-title: JSON Functions That Search JSON Values
-summary: Learn about JSON functions that search JSON values.
+title: JSON 函数用于搜索 JSON 值
+summary: 了解用于搜索 JSON 值的 JSON 函数。
 ---
 
-# JSON Functions That Search JSON Values
+# JSON 函数用于搜索 JSON 值
 
-This document describes JSON functions that search JSON values.
+本文档描述了用于搜索 JSON 值的 JSON 函数。
 
 ## [JSON_CONTAINS()](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-contains)
 
-By returning `1` or `0`, the `JSON_CONTAINS(json_doc, candidate [,path])` function indicates whether a given `candidate` JSON document is contained within a target JSON document.
+通过返回 `1` 或 `0`，`JSON_CONTAINS(json_doc, candidate [,path])` 函数指示给定的 `candidate` JSON 文档是否包含在目标 JSON 文档中。
 
-Examples:
+示例：
 
-Here `a` is contained in the target document.
+这里 `a` 被包含在目标文档中。
 
 ```sql
 SELECT JSON_CONTAINS('["a","b","c"]','"a"');
@@ -25,10 +25,10 @@ SELECT JSON_CONTAINS('["a","b","c"]','"a"');
 +--------------------------------------+
 |                                    1 |
 +--------------------------------------+
-1 row in set (0.00 sec)
+1 行结果
 ```
 
-Here `e` is not contained in the target document.
+这里 `e` 不包含在目标文档中。
 
 ```sql
 SELECT JSON_CONTAINS('["a","b","c"]','"e"');
@@ -40,10 +40,10 @@ SELECT JSON_CONTAINS('["a","b","c"]','"e"');
 +--------------------------------------+
 |                                    0 |
 +--------------------------------------+
-1 row in set (0.00 sec)
+1 行结果
 ```
 
-Here `{"foo": "bar"}` is contained in the target document.
+这里 `{"foo": "bar"}` 被包含在目标文档中。
 
 ```sql
 SELECT JSON_CONTAINS('{"foo": "bar", "aaa": 5}','{"foo": "bar"}');
@@ -55,10 +55,10 @@ SELECT JSON_CONTAINS('{"foo": "bar", "aaa": 5}','{"foo": "bar"}');
 +------------------------------------------------------------+
 |                                                          1 |
 +------------------------------------------------------------+
-1 row in set (0.00 sec)
+1 行结果
 ```
 
-Here `"bar"` is not contained in the root of the target document.
+这里 `"bar"` 不在目标文档的根节点中。
 
 ```sql
 SELECT JSON_CONTAINS('{"foo": "bar", "aaa": 5}','"bar"');
@@ -70,10 +70,10 @@ SELECT JSON_CONTAINS('{"foo": "bar", "aaa": 5}','"bar"');
 +---------------------------------------------------+
 |                                                 0 |
 +---------------------------------------------------+
-1 row in set (0.00 sec)
+1 行结果
 ```
 
-Here `"bar"` is contained in the `$.foo` attribute of the target document.
+这里 `"bar"` 被包含在目标文档的 `$.foo` 属性中。
 
 ```sql
 SELECT JSON_CONTAINS('{"foo": "bar", "aaa": 5}','"bar"', '$.foo');
@@ -85,16 +85,16 @@ SELECT JSON_CONTAINS('{"foo": "bar", "aaa": 5}','"bar"', '$.foo');
 +------------------------------------------------------------+
 |                                                          1 |
 +------------------------------------------------------------+
-1 row in set (0.00 sec)
+1 行结果
 ```
 
 ## [JSON_CONTAINS_PATH()](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-contains-path)
 
-The `JSON_CONTAINS_PATH(json_doc, all_or_one, path [,path, ...])` function returns `0` or `1` to indicate whether a JSON document contains data at a given path or paths.
+`JSON_CONTAINS_PATH(json_doc, all_or_one, path [,path, ...])` 函数返回 `0` 或 `1`，指示 JSON 文档是否在给定路径或路径集合中包含数据。
 
-Examples:
+示例：
 
-Here the document contains `$.foo`.
+这里文档包含 `$.foo`。
 
 ```sql
 SELECT JSON_CONTAINS_PATH('{"foo": "bar", "aaa": 5}','all','$.foo');
@@ -106,10 +106,10 @@ SELECT JSON_CONTAINS_PATH('{"foo": "bar", "aaa": 5}','all','$.foo');
 +--------------------------------------------------------------+
 |                                                            1 |
 +--------------------------------------------------------------+
-1 row in set (0.00 sec)
+1 行结果
 ```
 
-Here the document does not contain `$.bar`.
+这里文档不包含 `$.bar`。
 
 ```sql
 SELECT JSON_CONTAINS_PATH('{"foo": "bar", "aaa": 5}','all','$.bar');
@@ -121,10 +121,10 @@ SELECT JSON_CONTAINS_PATH('{"foo": "bar", "aaa": 5}','all','$.bar');
 +--------------------------------------------------------------+
 |                                                            0 |
 +--------------------------------------------------------------+
-1 row in set (0.00 sec)
+1 行结果
 ```
 
-Here the document contains both `$.foo` and `$.aaa`.
+这里文档同时包含 `$.foo` 和 `$.aaa`。
 
 ```sql
 SELECT JSON_CONTAINS_PATH('{"foo": "bar", "aaa": 5}','all','$.foo', '$.aaa');
@@ -136,12 +136,12 @@ SELECT JSON_CONTAINS_PATH('{"foo": "bar", "aaa": 5}','all','$.foo', '$.aaa');
 +-----------------------------------------------------------------------+
 |                                                                     1 |
 +-----------------------------------------------------------------------+
-1 row in set (0.00 sec)
+1 行结果
 ```
 
 ## [JSON_EXTRACT()](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-extract)
 
-The `JSON_EXTRACT(json_doc, path[, path] ...)` function extracts data from a JSON document, selected from the parts of the document matched by the `path` arguments.
+`JSON_EXTRACT(json_doc, path[, path] ...)` 函数从 JSON 文档中提取数据，选择匹配 `path` 参数的部分。
 
 ```sql
 SELECT JSON_EXTRACT('{"foo": "bar", "aaa": 5}', '$.foo');
@@ -153,12 +153,12 @@ SELECT JSON_EXTRACT('{"foo": "bar", "aaa": 5}', '$.foo');
 +---------------------------------------------------+
 | "bar"                                             |
 +---------------------------------------------------+
-1 row in set (0.00 sec)
+1 行结果
 ```
 
 ## [->](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#operator_json-column-path)
 
-The `column->path` function returns the data in `column` that matches the `path` argument. It is an alias for [`JSON_EXTRACT()`](#json_extract).
+`column->path` 函数返回 `column` 中匹配 `path` 参数的数据。它是 [`JSON_EXTRACT()`](#json_extract) 的别名。
 
 ```sql
 SELECT
@@ -176,17 +176,17 @@ FROM (
 +------------+--------------------------+
 | "bar"      | "bar"                    |
 +------------+--------------------------+
-1 row in set (0.00 sec)
+1 行结果
 ```
 
 ## [->>](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#operator_json-inline-path)
 
-The `column->>path` function unquotes data in `column` that matches the `path` argument. It is an alias for `JSON_UNQUOTE(JSON_EXTRACT(doc, path_literal))`.
+`column->>path` 函数对匹配 `path` 参数的数据进行去引号处理。它是 `JSON_UNQUOTE(JSON_EXTRACT(doc, path_literal))` 的别名。
 
 ```sql
 SELECT
     j->'$.foo',
-    JSON_EXTRACT(j, '$.foo')
+    JSON_EXTRACT(j, '$.foo'),
     j->>'$.foo',
     JSON_UNQUOTE(JSON_EXTRACT(j, '$.foo'))
 FROM (
@@ -201,16 +201,16 @@ FROM (
 +------------+--------------------------+-------------+----------------------------------------+
 | "bar"      | "bar"                    | bar         | bar                                    |
 +------------+--------------------------+-------------+----------------------------------------+
-1 row in set (0.00 sec)
+1 行结果
 ```
 
 ## [JSON_KEYS()](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-keys)
 
-The `JSON_KEYS(json_doc [,path])` function returns the top-level keys of a JSON object as a JSON array. If a `path` argument is given, it returns the top-level keys from the selected path.
+`JSON_KEYS(json_doc [,path])` 函数返回 JSON 对象的顶层键，作为 JSON 数组。如果提供 `path` 参数，则返回所选路径的顶层键。
 
-Examples:
+示例：
 
-The following example returns the two top-level keys in the JSON document.
+以下示例返回 JSON 文档中的两个顶层键。
 
 ```sql
 SELECT JSON_KEYS('{"name": {"first": "John", "last": "Doe"}, "type": "Person"}');
@@ -222,10 +222,10 @@ SELECT JSON_KEYS('{"name": {"first": "John", "last": "Doe"}, "type": "Person"}')
 +---------------------------------------------------------------------------+
 | ["name", "type"]                                                          |
 +---------------------------------------------------------------------------+
-1 row in set (0.00 sec)
+1 行结果
 ```
 
-The following example returns the top-level keys that are in the `$.name` path of the JSON document.
+以下示例返回 JSON 文档中 `$.name` 路径下的顶层键。
 
 ```sql
 SELECT JSON_KEYS('{"name": {"first": "John", "last": "Doe"}, "type": "Person"}', '$.name');
@@ -237,16 +237,16 @@ SELECT JSON_KEYS('{"name": {"first": "John", "last": "Doe"}, "type": "Person"}',
 +-------------------------------------------------------------------------------------+
 | ["first", "last"]                                                                   |
 +-------------------------------------------------------------------------------------+
-1 row in set (0.00 sec)
+1 行结果
 ```
 
 ## [JSON_SEARCH()](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-search)
 
-The `JSON_SEARCH(json_doc, one_or_all, str)` function searches a JSON document for one or all matches of a string.
+`JSON_SEARCH(json_doc, one_or_all, str)` 函数在 JSON 文档中搜索字符串的一个或所有匹配。
 
-Examples:
+示例：
 
-In the following example, you can search for the first result for `cc`, which is at the position of index 2 in the `a` array.
+在以下示例中，你可以搜索 `cc` 的第一个结果，它在 `a` 数组中的索引位置为 2。
 
 ```sql
 SELECT JSON_SEARCH('{"a": ["aa", "bb", "cc"], "b": ["cc", "dd"]}','one','cc');
@@ -258,10 +258,10 @@ SELECT JSON_SEARCH('{"a": ["aa", "bb", "cc"], "b": ["cc", "dd"]}','one','cc');
 +------------------------------------------------------------------------+
 | "$.a[2]"                                                               |
 +------------------------------------------------------------------------+
-1 row in set (0.00 sec)
+1 行结果
 ```
 
-Now you do the same, but set `one_or_all` to `all` to get not just the first result, but all results.
+现在你可以将 `one_or_all` 设置为 `all`，以获取所有匹配结果，而不仅仅是第一个。
 
 ```sql
 SELECT JSON_SEARCH('{"a": ["aa", "bb", "cc"], "b": ["cc", "dd"]}','all','cc');
@@ -273,14 +273,14 @@ SELECT JSON_SEARCH('{"a": ["aa", "bb", "cc"], "b": ["cc", "dd"]}','all','cc');
 +------------------------------------------------------------------------+
 | ["$.a[2]", "$.b[0]"]                                                   |
 +------------------------------------------------------------------------+
-1 row in set (0.01 sec)
+1 行结果
 ```
 
 ## [MEMBER OF()](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#operator_member-of)
 
-The `str MEMBER OF (json_array)` function tests if the passed value `str` is an element of the `json_array`, it returns `1`. Otherwise, it returns `0`. It returns `NULL` if any of the arguments is `NULL`.
+`str MEMBER OF (json_array)` 函数测试 `str` 是否是 `json_array` 的元素，若是则返回 `1`，否则返回 `0`。如果任一参数为 `NULL`，则返回 `NULL`。
 
-```
+```sql
 SELECT '🍍' MEMBER OF ('["🍍","🥥","🥭"]') AS 'Contains pineapple';
 ```
 
@@ -290,17 +290,16 @@ SELECT '🍍' MEMBER OF ('["🍍","🥥","🥭"]') AS 'Contains pineapple';
 +--------------------+
 |                  1 |
 +--------------------+
-1 row in set (0.00 sec)
-
+1 行结果
 ```
 
 ## [JSON_OVERLAPS()](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-overlaps)
 
-The `JSON_OVERLAPS(json_doc, json_doc)` function indicates whether two JSON documents have overlapping part. If yes, it returns `1`. If not, it returns `0`. It returns `NULL` if any of the arguments is `NULL`.
+`JSON_OVERLAPS(json_doc, json_doc)` 函数指示两个 JSON 文档是否存在重叠部分。如果存在，返回 `1`；否则返回 `0`。如果任一参数为 `NULL`，则返回 `NULL`。
 
-Examples:
+示例：
 
-The following example shows that there is no overlap because the array value does not have the same number of elements.
+以下示例显示没有重叠，因为数组值的元素个数不同。
 
 ```sql
 SELECT JSON_OVERLAPS(
@@ -315,10 +314,10 @@ SELECT JSON_OVERLAPS(
 +----------+
 |        0 |
 +----------+
-1 row in set (0.00 sec)
+1 行结果
 ```
 
-The following example shows that both JSON documents overlap as they are identical.
+以下示例显示两个 JSON 文档存在重叠，因为它们完全相同。
 
 ```sql
 SELECT JSON_OVERLAPS(
@@ -333,10 +332,10 @@ SELECT JSON_OVERLAPS(
 +----------+
 |        1 |
 +----------+
-1 row in set (0.00 sec)
+1 行结果
 ```
 
-The following example shows that there is an overlap, while the second document has an extra attribute.
+以下示例显示存在重叠，第二个文档多了一个属性。
 
 ```sql
 SELECT JSON_OVERLAPS(
@@ -351,10 +350,10 @@ SELECT JSON_OVERLAPS(
 +----------+
 |        1 |
 +----------+
-1 row in set (0.00 sec)
+1 行结果
 ```
 
-## See also
+## 另请参见
 
 - [JSON Functions Overview](/functions-and-operators/json-functions.md)
 - [JSON Data Type](/data-type-json.md)

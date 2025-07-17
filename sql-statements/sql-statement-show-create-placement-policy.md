@@ -1,15 +1,15 @@
 ---
 title: SHOW CREATE PLACEMENT POLICY
-summary: The usage of SHOW CREATE PLACEMENT POLICY in TiDB.
+summary: 在 TiDB 中使用 SHOW CREATE PLACEMENT POLICY。
 ---
 
 # SHOW CREATE PLACEMENT POLICY
 
-`SHOW CREATE PLACEMENT POLICY` is used to show the definition of a placement policy. This can be used to see the current definition of a placement policy and recreate it in another TiDB cluster.
+`SHOW CREATE PLACEMENT POLICY` 用于显示一个放置策略的定义。可以用来查看当前放置策略的定义，并在另一个 TiDB 集群中重建它。
 
 > **Note:**
 >
-> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
 
 ## Synopsis
 
@@ -23,7 +23,6 @@ PolicyName ::=
 
 ## Examples
 
-{{< copyable "sql" >}}
 
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4;
@@ -44,7 +43,7 @@ Create Policy | CREATE PLACEMENT POLICY `p1` PRIMARY_REGION="us-east-1" REGIONS=
 
 ## MySQL compatibility
 
-This statement is a TiDB extension to MySQL syntax.
+该语句是 TiDB 对 MySQL 语法的扩展。
 
 ## See also
 

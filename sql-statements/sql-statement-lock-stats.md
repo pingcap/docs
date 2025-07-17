@@ -1,13 +1,13 @@
 ---
 title: LOCK STATS
-summary: An overview of the usage of LOCK STATS for the TiDB database.
+summary: 关于 TiDB 数据库中 LOCK STATS 使用情况的概述。
 ---
 
 # LOCK STATS
 
-`LOCK STATS` is used to lock the statistics of tables or partitions. When the statistics is locked, TiDB does not automatically update the statistics of the table or partition. For details on the behavior, see [Behaviors of locking statistics](/statistics.md#behaviors-of-locking-statistics).
+`LOCK STATS` 用于锁定表或分区的统计信息。当统计信息被锁定后，TiDB 不会自动更新该表或分区的统计信息。关于其行为的详细信息，请参见 [Behaviors of locking statistics](/statistics.md#behaviors-of-locking-statistics)。
 
-## Synopsis
+## 概述
 
 ```ebnf+diagram
 LockStatsStmt ::=
@@ -23,9 +23,9 @@ PartitionNameList ::=
     Identifier ( ',' Identifier )*
 ```
 
-## Examples
+## 示例
 
-Create table `t`, and insert data into it. When the statistics of table `t` are not locked, the `ANALYZE` statement can be successfully executed.
+创建表 `t`，并插入数据。当表 `t` 的统计信息未被锁定时，可以成功执行 `ANALYZE` 语句。
 
 ```sql
 mysql> CREATE TABLE t(a INT, b INT);
@@ -47,7 +47,7 @@ mysql> SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-Lock the statistics of table `t` and execute `ANALYZE`. From the output of `SHOW STATS_LOCKED`, you can see that the statistics of table `t` have been locked. The warning message shows that the `ANALYZE` statement has skipped table `t`.
+锁定表 `t` 的统计信息并执行 `ANALYZE`。从 `SHOW STATS_LOCKED` 的输出可以看到，表 `t` 的统计信息已被锁定。警告信息显示 `ANALYZE` 语句已跳过表 `t`。
 
 ```sql
 mysql> LOCK STATS t;
@@ -74,9 +74,9 @@ mysql> SHOW WARNINGS;
 2 rows in set (0.00 sec)
 ```
 
-In addition, you can also lock the statistics of a partition using `LOCK STATS`. For example:
+此外，你还可以使用 `LOCK STATS` 来锁定分区的统计信息。例如：
 
-Create a partition table `t`, and insert data into it. When the statistics of partition `p1` are not locked, the `ANALYZE` statement can be successfully executed.
+创建分区表 `t`，并插入数据。当分区 `p1` 的统计信息未被锁定时，可以成功执行 `ANALYZE`。
 
 ```sql
 mysql> CREATE TABLE t(a INT, b INT) PARTITION BY RANGE (a) (PARTITION p0 VALUES LESS THAN (10), PARTITION p1 VALUES LESS THAN (20), PARTITION p2 VALUES LESS THAN (30));
@@ -103,7 +103,7 @@ mysql> SHOW WARNINGS;
 6 rows in set (0.01 sec)
 ```
 
-Lock the statistics of partition `p1` and execute `ANALYZE`. The warning message shows that the `ANALYZE` statement has skipped partition `p1`.
+锁定分区 `p1` 的统计信息并执行 `ANALYZE`。警告信息显示 `ANALYZE` 语句已跳过分区 `p1`。
 
 ```sql
 mysql> LOCK STATS t PARTITION p1;
@@ -130,13 +130,13 @@ mysql> SHOW WARNINGS;
 2 rows in set (0.00 sec)
 ```
 
-For information on unlock statistics, see [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md).
+关于解锁统计信息的内容，请参见 [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)。
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension to MySQL syntax.
+此语句是 TiDB 对 MySQL 语法的扩展。
 
-## See also
+## 相关链接
 
 * [Statistics](/statistics.md#lock-statistics)
 * [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)

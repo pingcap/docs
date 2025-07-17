@@ -1,120 +1,120 @@
 ---
-title: Manage Queries That Consume More Resources Than Expected (Runaway Queries)
-summary: Introduces how to control and degrade queries with excessive resource consumption (Runaway Queries) through resource management capabilities.
+title: 管理消耗资源超出预期的查询（Runaway Queries）
+summary: 介绍如何通过资源管理能力控制和降级资源消耗过多的查询（Runaway Queries）。
 ---
 
-# Manage Queries That Consume More Resources Than Expected (Runaway Queries)
+# 管理消耗资源超出预期的查询（Runaway Queries）
 
 > **Note:**
 >
-> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
 
-A runaway query is a query that consumes more time or resources than expected. The term **runaway queries** is used in the following to describe the feature of managing the runaway query.
+Runaway query 指的是消耗时间或资源超出预期的查询。以下将使用 **runaway queries** 一词来描述管理 runaway query 的功能。
 
-- Starting from v7.2.0, the resource control feature introduces the management of runaway queries. You can set criteria for a resource group to identify runaway queries and automatically take actions to prevent them from exhausting resources and affecting other queries. You can manage runaway queries for a resource group by including the `QUERY_LIMIT` field in [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md) or [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md).
-- Starting from v7.3.0, the resource control feature introduces manual management of runaway watches, enabling quick identification of runaway queries for a given SQL statement or Digest. You can execute the statement [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md) to manually manage the runaway queries watch list in the resource group.
+- 从 v7.2.0 版本开始，资源控制功能引入了对 runaway queries 的管理。你可以为资源组设置条件，以识别 runaway queries，并自动采取措施防止其耗尽资源，影响其他查询。你可以在 [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md) 或 [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md) 中包含 `QUERY_LIMIT` 字段来管理 runaway queries。
+- 从 v7.3.0 版本开始，资源控制功能引入了手动管理 runaway watches，支持快速识别特定 SQL 语句或 Digest 的 runaway 查询。你可以执行 [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md) 语句，手动管理资源组中的 runaway 查询监控列表。
 
-For more information about the resource control feature, see [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md).
+关于资源控制功能的更多信息，请参见 [使用资源控制实现资源组限制和流控](/tidb-resource-control-ru-groups.md)。
 
-## `QUERY_LIMIT` parameters
+## `QUERY_LIMIT` 参数
 
-If a query exceeds any of the following limits, it is identified as a runaway query:
+如果查询超过以下任一限制，即被识别为 runaway 查询：
 
-- `EXEC_ELAPSED`: checks whether the query execution time exceeds the limit. This rule applies to read and write DML statements.
-- `PROCESSED_KEYS`: checks whether the number of keys processed by the Coprocessor exceeds the limit. This rule only applies to read statements.
-- `RU`: checks whether the total number of read and write RUs consumed by the statement exceeds the limit. This rule only applies to read statements.
+- `EXEC_ELAPSED`：检查查询执行时间是否超过限制。此规则适用于读写 DML 语句。
+- `PROCESSED_KEYS`：检查 Coprocessor 处理的键数量是否超过限制。此规则仅适用于读语句。
+- `RU`：检查查询消耗的总读写 RUs 是否超过限制。此规则仅适用于读语句。
 
-Supported operations (`ACTION`):
+支持的操作（`ACTION`）：
 
-- `DRYRUN`: no action is taken. The records are appended for the runaway queries. This is mainly used to observe whether the condition setting is reasonable.
-- `COOLDOWN`: the execution priority of the query is lowered to the lowest level. The query continues to execute with the lowest priority and does not occupy resources of other operations.
-- `KILL`: the identified query is automatically terminated and reports an error `Query execution was interrupted, identified as runaway query`.
-- `SWITCH_GROUP`: introduced in v8.4.0, this parameter switches the identified query to the specified resource group for continued execution. After this query completes, subsequent SQL statements are executed in the original resource group. If the specified resource group does not exist, the query remains in the original resource group.
+- `DRYRUN`：不采取任何操作。将记录追加到 runaway 查询的记录中，主要用于观察条件设置是否合理。
+- `COOLDOWN`：将查询的执行优先级降至最低。查询以最低优先级继续执行，不占用其他操作的资源。
+- `KILL`：自动终止识别出的查询，并报告错误 `Query execution was interrupted, identified as runaway query`。
+- `SWITCH_GROUP`：在 v8.4.0 版本引入，将识别出的查询切换到指定的资源组以继续执行。该查询完成后，后续 SQL 语句在原资源组中执行。如果指定的资源组不存在，查询将保持在原资源组。
 
-To avoid too many concurrent runaway queries that exhaust system resources, the resource control feature introduces a quick identification mechanism, which can quickly identify and isolate runaway queries. You can use this feature through the `WATCH` clause. When a query is identified as a runaway query, this mechanism extracts the matching feature (defined by the parameter after `WATCH`) of the query. In the next period of time (defined by `DURATION`), the matching feature of the runaway query is added to the watch list, and the TiDB instance matches queries with the watch list. The matching queries are directly marked as runaway queries and isolated according to the corresponding action, instead of waiting for them to be identified by conditions. The `KILL` operation terminates the query and reports an error `Quarantined and interrupted because of being in runaway watch list`.
+为了避免大量并发 runaway 查询耗尽系统资源，资源控制功能引入了快速识别机制，可以快速识别并隔离 runaway 查询。你可以通过 `WATCH` 子句使用此功能。当查询被识别为 runaway 查询时，该机制会提取匹配的特征（由 `WATCH` 后的参数定义）。在接下来的时间段（由 `DURATION` 定义）内，匹配的 runaway 查询特征会被加入监控列表，TiDB 实例会匹配监控列表中的查询。匹配的查询会被直接标记为 runaway 查询，并根据对应的操作进行隔离，而不是等待条件识别。`KILL` 操作会终止查询并报告错误 `Quarantined and interrupted because of being in runaway watch list`。
 
-There are three methods for `WATCH` to match for quick identification:
+`WATCH` 快速识别的三种匹配方式：
 
-- `EXACT` indicates that only SQL statements with exactly the same SQL text are quickly identified.
-- `SIMILAR` indicates all SQL statements with the same pattern are matched by SQL Digest, and the literal values are ignored.
-- `PLAN` indicates all SQL statements with the same pattern are matched by Plan Digest.
+- `EXACT` 表示只快速识别完全相同 SQL 文本的语句。
+- `SIMILAR` 表示匹配所有具有相同模式的 SQL Digest，忽略字面值。
+- `PLAN` 表示匹配所有具有相同模式的 Plan Digest。
 
-The `DURATION` option in `WATCH` indicates the duration of the identification item, which is infinite by default.
+`WATCH` 中的 `DURATION` 选项表示识别项的持续时间，默认为无限。
 
-After a watch item is added, neither the matching feature nor the `ACTION` is changed or deleted whenever the `QUERY_LIMIT` configuration is changed or deleted. You can use `QUERY WATCH REMOVE` to remove a watch item.
+添加监控项后，无论 `QUERY_LIMIT` 配置如何变更或删除，匹配特征和 `ACTION` 都不会被更改或删除。你可以使用 `QUERY WATCH REMOVE` 来移除监控项。
 
-The parameters of `QUERY_LIMIT` are as follows:
+`QUERY_LIMIT` 的参数如下：
 
-| Parameter          | Description            | Note                                  |
-|---------------|--------------|--------------------------------------|
-| `EXEC_ELAPSED`  | When the query execution time exceeds this value, it is identified as a runaway query | EXEC_ELAPSED =`60s` means the query is identified as a runaway query if it takes more than 60 seconds to execute. |
-| `PROCESSED_KEYS` | When the number of keys processed by the Coprocessor exceeds this value, the query is identified as a runaway query | `PROCESSED_KEYS = 1000` means the query is identified as a runaway query if the number of keys processed by the Coprocessor exceeds 1000. |
-| `RU`  | When the total number of read and write RUs consumed by the query exceeds this value, this query is identified as a runaway query | `RU = 1000` means the query is identified as a runaway query if the total number of read and write RUs consumed by the query exceeds 1000. |
-| `ACTION`    | Action taken when a runaway query is identified | The optional values are `DRYRUN`, `COOLDOWN`, `KILL`, and `SWITCH_GROUP`. |
-| `WATCH`   | Quickly match the identified runaway query. If the same or similar query is encountered again within a certain period of time, the corresponding action is performed immediately. | Optional. For example, `WATCH=SIMILAR DURATION '60s'`, `WATCH=EXACT DURATION '1m'`, and `WATCH=PLAN`. |
+| 参数             | 描述                                                         | 备注                                                         |
+|------------------|--------------------------------------------------------------|--------------------------------------------------------------|
+| `EXEC_ELAPSED`   | 当查询执行时间超过此值时，识别为 runaway 查询                     | `EXEC_ELAPSED = '60s'` 表示如果查询执行时间超过 60 秒，则识别为 runaway 查询。 |
+| `PROCESSED_KEYS` | 当 Coprocessor 处理的键数量超过此值时，识别为 runaway 查询             | `PROCESSED_KEYS = 1000` 表示如果 Coprocessor 处理的键数超过 1000，则识别为 runaway 查询。 |
+| `RU`             | 当查询消耗的总读写 RUs 超过此值时，识别为 runaway 查询                | `RU = 1000` 表示如果查询消耗的读写 RUs 总数超过 1000，则识别为 runaway 查询。 |
+| `ACTION`         | 识别为 runaway 查询后采取的操作                                    | 可选值为 `DRYRUN`、`COOLDOWN`、`KILL` 和 `SWITCH_GROUP`。 |
+| `WATCH`          | 快速匹配识别的 runaway 查询。如果在一定时间内再次遇到相同或相似的查询，则立即执行对应操作。 | 可选。例如，`WATCH=SIMILAR DURATION '60s'`、`WATCH=EXACT DURATION '1m'` 和 `WATCH=PLAN`。 |
 
 > **Note:**
 >
-> If you want to strictly limit runaway queries to a specific resource group, it is recommended to use `SWITCH_GROUP` together with the [`QUERY WATCH`](#query-watch-parameters) statement. Because `QUERY_LIMIT` only triggers the corresponding `ACTION` operation when the query meets the criteria, `SWITCH_GROUP` might not be able to switch the query to the target resource group in a timely manner in such scenarios.
+> 如果你希望严格限制 runaway 查询到某个特定资源组，建议结合 [`QUERY WATCH`](#query-watch-parameters) 语句使用 `SWITCH_GROUP`。因为 `QUERY_LIMIT` 仅在查询满足条件时触发对应的 `ACTION` 操作，在此类场景中，`SWITCH_GROUP` 可能无法及时将查询切换到目标资源组。
 
-## Examples
+## 示例
 
-1. Create a resource group `rg1` with a quota of 500 RUs per second, and define a runaway query as one that exceeds 60 seconds, and lower the priority of the runaway query.
+1. 创建一个资源组 `rg1`，配额为每秒 500 RUs，定义超时超过 60 秒的查询为 runaway 查询，并降低其优先级。
 
     ```sql
     CREATE RESOURCE GROUP IF NOT EXISTS rg1 RU_PER_SEC = 500 QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=COOLDOWN);
     ```
 
-2. Change the `rg1` resource group to terminate the runaway queries, and mark the queries with the same pattern as runaway queries immediately in the next 10 minutes.
+2. 将 `rg1` 资源组设置为终止 runaway 查询，并在接下来的 10 分钟内立即将匹配相同模式的查询标记为 runaway 查询。
 
     ```sql
     ALTER RESOURCE GROUP rg1 QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=SIMILAR DURATION='10m');
     ```
 
-3. Change the `rg1` resource group to cancel the runaway query check.
+3. 将 `rg1` 资源组设置为取消 runaway 查询检测。
 
     ```sql
     ALTER RESOURCE GROUP rg1 QUERY_LIMIT=NULL;
     ```
 
-## `QUERY WATCH` parameters
+## `QUERY WATCH` 参数
 
-For more information about the synopsis of `QUERY WATCH`, see [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md).
+关于 `QUERY WATCH` 的详细说明，请参见 [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)。
 
-The parameters are as follows:
+参数如下：
 
-- The `RESOURCE GROUP` specifies a resource group. The matching features of runaway queries added by this statement are added to the watch list of the resource group. This parameter can be omitted. If omitted, it applies to the `default` resource group.
-- The meaning of `ACTION` is the same as `QUERY LIMIT`. This parameter can be omitted. If omitted, the corresponding action after identification adopts the `ACTION` configured by `QUERY LIMIT` in the resource group, and the action does not change with the `QUERY LIMIT` configuration. If there is no `ACTION` configured in the resource group, an error is reported.
-- The `QueryWatchTextOption` parameter has three options: `SQL DIGEST`, `PLAN DIGEST`, and `SQL TEXT`.
-    - `SQL DIGEST` is the same as that of `SIMILAR`. The following parameters accept strings, user-defined variables, or other expressions that yield string result. The string length must be 64, which is the same as the Digest definition in TiDB.
-    - `PLAN DIGEST` is the same as `PLAN`. The following parameter is a Digest string.
-    - `SQL TEXT` matches the input SQL as a raw string (`EXACT`), or parses and compiles it into `SQL DIGEST` (`SIMILAR`) or `PLAN DIGEST` (`PLAN`), depending on the following parameter.
+- `RESOURCE GROUP` 指定一个资源组。由此语句添加的 runaway 查询匹配特征会加入到该资源组的监控列表中。此参数可省略，省略时适用于 `default` 资源组。
+- `ACTION` 的含义与 `QUERY LIMIT` 相同。此参数可省略，省略后识别后采取的操作会采用资源组中通过 `QUERY LIMIT` 配置的 `ACTION`，且不会随 `QUERY LIMIT` 配置变化而变化。如果资源组中未配置 `ACTION`，会报错。
+- `QueryWatchTextOption` 有三种选项：`SQL DIGEST`、`PLAN DIGEST` 和 `SQL TEXT`。
+    - `SQL DIGEST` 与 `SIMILAR` 相同。后续参数接受字符串、用户变量或其他表达式，结果为字符串。字符串长度必须为 64，与 TiDB 中的 Digest 定义相同。
+    - `PLAN DIGEST` 与 `PLAN` 相同。后续参数为 Digest 字符串。
+    - `SQL TEXT` 表示将输入的 SQL 作为原始字符串（`EXACT`）匹配，或解析并编译成 `SQL DIGEST`（`SIMILAR`）或 `PLAN DIGEST`（`PLAN`），具体取决于后续参数。
 
-- Add a matching feature to the runaway query watch list for the default resource group (you need to set `QUERY LIMIT` for the default resource group in advance).
+- 添加匹配特征到默认资源组的 runaway 查询监控列表（需要提前为默认资源组设置 `QUERY LIMIT`）。
 
     ```sql
     QUERY WATCH ADD ACTION KILL SQL TEXT EXACT TO 'select * from test.t2';
     ```
 
-- Add a matching feature to the runaway query watch list for the `rg1` resource group by parsing the SQL into SQL Digest. When `ACTION` is not specified, the `ACTION` option already configured for the `rg1` resource group is used.
+- 通过解析 SQL 为 SQL Digest，将匹配特征添加到 `rg1` 资源组的 runaway 查询监控列表。当未指定 `ACTION` 时，使用 `rg1` 资源组已配置的 `ACTION`。
 
     ```sql
     QUERY WATCH ADD RESOURCE GROUP rg1 SQL TEXT SIMILAR TO 'select * from test.t2';
     ```
 
-- Add a matching feature to the runaway query watch list for the `rg1` resource group by parsing the SQL into SQL Digest, and specify `ACTION` as `SWITCH_GROUP(rg2)`.
+- 通过解析 SQL 为 SQL Digest，将匹配特征添加到 `rg1` 资源组的 runaway 查询监控列表，并将 `ACTION` 指定为 `SWITCH_GROUP(rg2)`。
 
     ```sql
     QUERY WATCH ADD RESOURCE GROUP rg1 ACTION SWITCH_GROUP(rg2) SQL TEXT SIMILAR TO 'select * from test.t2';
     ```
 
-- Add a matching feature to the runaway query watch list for the `rg1` resource group using `PLAN DIGEST`, and specify `ACTION` as `KILL`.
+- 使用 `PLAN DIGEST` 将匹配特征添加到 `rg1` 资源组的 runaway 查询监控列表，并将 `ACTION` 指定为 `KILL`。
 
     ```sql
     QUERY WATCH ADD RESOURCE GROUP rg1 ACTION KILL PLAN DIGEST 'd08bc323a934c39dc41948b0a073725be3398479b6fa4f6dd1db2a9b115f7f57';
     ```
 
-- Get the watch item ID by querying `INFORMATION_SCHEMA.RUNAWAY_WATCHES` and delete the watch item.
+- 通过查询 `INFORMATION_SCHEMA.RUNAWAY_WATCHES` 获取监控项 ID，并删除监控项。
 
     ```sql
     SELECT * from information_schema.runaway_watches ORDER BY id\G
@@ -138,11 +138,11 @@ The parameters are as follows:
     QUERY WATCH REMOVE 1;
     ```
 
-## Observability
+## 可观察性
 
-You can get more information about runaway queries from the following system tables and `INFORMATION_SCHEMA`:
+你可以通过以下系统表和 `INFORMATION_SCHEMA` 获取关于 runaway 查询的更多信息：
 
-+ The `mysql.tidb_runaway_queries` table contains the history records of all runaway queries identified in the past 7 days. Take one of the rows as an example:
++ `mysql.tidb_runaway_queries` 表包含过去 7 天内所有识别的 runaway 查询的历史记录。以一行数据为例：
 
     ```sql
     MySQL [(none)]> SELECT * FROM mysql.tidb_runaway_queries LIMIT 1\G
@@ -158,12 +158,12 @@ You can get more information about runaway queries from the following system tab
         tidb_server: 127.0.0.1:4000
     ```
 
-    Field description:
+    字段说明：
 
-    - `start_time` indicates the time when the runaway query is identified.
-    - `repeats` indicates the number of times the runaway query has been identified since `start_time`.
-    - `match_type` indicates how the runaway query is identified. The value can be one of the following:
-        - `identify` means that it matches the condition of the runaway query.
-        - `watch` means that it matches the quick identification rule in the watch list.
+    - `start_time` 表示识别出 runaway 查询的时间。
+    - `repeats` 表示自 `start_time` 以来识别出的次数。
+    - `match_type` 表示识别方式。值可以是以下之一：
+        - `identify` 表示符合 runaway 查询条件。
+        - `watch` 表示符合监控列表中的快速识别规则。
 
-+ The `information_schema.runaway_watches` table contains records of quick identification rules for runaway queries. For more information, see [`RUNAWAY_WATCHES`](/information-schema/information-schema-runaway-watches.md).
++ `information_schema.runaway_watches` 表包含 runaway 查询的快速识别规则记录。更多信息请参见 [`RUNAWAY_WATCHES`](/information-schema/information-schema-runaway-watches.md)。

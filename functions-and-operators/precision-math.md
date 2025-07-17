@@ -1,42 +1,42 @@
 ---
 title: Precision Math
-summary: Learn about the precision math in TiDB.
+summary: 了解 TiDB 中的精确数学支持。
 ---
 
 # Precision Math
 
-The precision math support in TiDB is consistent with MySQL. For more information, see [Precision Math in MySQL](https://dev.mysql.com/doc/refman/8.0/en/precision-math.html).
+TiDB 中的精确数学支持与 MySQL 一致。更多信息请参见 [Precision Math in MySQL](https://dev.mysql.com/doc/refman/8.0/en/precision-math.html)。
 
 ## Numeric types
 
-The scope of precision math for exact-value operations includes the exact-value data types (integer and DECIMAL types) and exact-value numeric literals. Approximate-value data types and numeric literals are handled as floating-point numbers.
+用于精确值操作的精确数学范围包括精确值数据类型（整数和 DECIMAL 类型）以及精确值数字字面量。近似值数据类型和数字字面量作为浮点数处理。
 
-Exact-value numeric literals have an integer part or fractional part, or both. They may be signed. Examples: `1`, `.2`, `3.4`, `-5`, `-6.78`, `+9.10`.
+精确值数字字面量具有整数部分或小数部分，或两者皆有。它们可以带符号。示例：`1`、`.2`、`3.4`、`-5`、`-6.78`、`+9.10`。
 
-Approximate-value numeric literals are represented in scientific notation (power-of-10) with a mantissa and exponent. Either or both parts may be signed. Examples: `1.2E3`, `1.2E-3`, `-1.2E3`, `-1.2E-3`.
+近似值数字字面量以科学计数法（以 10 为底的幂）表示，包含尾数和指数。两部分或其中一部分可以带符号。示例：`1.2E3`、`1.2E-3`、`-1.2E3`、`-1.2E-3`。
 
-Two numbers that look similar might be treated differently. For example, `2.34` is an exact-value (fixed-point) number, whereas `2.34E0` is an approximate-value (floating-point) number.
+两个看似相似的数字可能会被不同处理。例如，`2.34` 是一个精确值（定点）数字，而 `2.34E0` 是一个近似值（浮点）数字。
 
-The DECIMAL data type is a fixed-point type and the calculations are exact. The FLOAT and DOUBLE data types are floating-point types and calculations are approximate.
+DECIMAL 数据类型是固定点类型，计算结果是精确的。FLOAT 和 DOUBLE 数据类型是浮点类型，计算结果是近似的。
 
 ## DECIMAL data type characteristics
 
-This section discusses the following topics of the characteristics of the DECIMAL data type (and its synonyms):
+本节讨论 DECIMAL 数据类型（及其同义词）的以下特性：
 
-- Maximum number of digits
-- Storage format
-- Storage requirements
+- 最大位数
+- 存储格式
+- 存储需求
 
-The declaration syntax for a DECIMAL column is `DECIMAL(M,D)`. The ranges of values for the arguments are as follows:
+DECIMAL 列的声明语法为 `DECIMAL(M,D)`。参数的取值范围如下：
 
-- M is the maximum number of digits (the precision). 1<= M <= 65.
-- D is the number of digits to the right of the decimal point (the scale). 1 <= D <= 30 and D must be no larger than M.
+- M 是最大位数（精度）。1 <= M <= 65。
+- D 是小数点右侧的位数（刻度）。1 <= D <= 30，且 D 不能大于 M。
 
-The maximum value of 65 for M means that calculations on DECIMAL values are accurate up to 65 digits. This limit of 65 digits of precision also applies to exact-value numeric literals.
+M 最大值为 65，意味着对 DECIMAL 值的计算精度最高为 65 位数字。这个 65 位的限制也适用于精确值数字字面量。
 
-Values for DECIMAL columns are stored using a binary format that packs 9 decimal digits into 4 bytes. The storage requirements for the integer and fractional parts of each value are determined separately. Each multiple of 9 digits requires 4 bytes, and any remaining digits left over require some fraction of 4 bytes. The storage required for remaining digits is given by the following table.
+DECIMAL 列的值采用二进制格式存储，将 9 个十进制数字打包成 4 字节。每个值的整数部分和小数部分的存储需求分别确定。每 9 位数字需要 4 字节，剩余的数字则根据下表所示占用部分字节。
 
-| Leftover Digits | Number of Bytes |
+| 剩余数字 | 字节数 |
 | --- | --- |
 | 0   | 0 |
 | 1–2 | 1 |
@@ -44,70 +44,70 @@ Values for DECIMAL columns are stored using a binary format that packs 9 decimal
 | 5–6 | 3 |
 | 7–9 | 4 |
 
-For example, a `DECIMAL(18,9)` column has 9 digits on each side of the decimal point, so the integer part and the fractional part each require 4 bytes. A `DECIMAL(20,6)` column has 14 integer digits and 6 fractional digits. The integer digits require 4 bytes for 9 of the digits and 3 bytes for the remaining 5 digits. The 6 fractional digits require 3 bytes.
+例如，`DECIMAL(18,9)` 列在小数点两边各有 9 位数字，因此整数部分和小数部分各需要 4 字节。`DECIMAL(20,6)` 列有 14 个整数位和 6 个小数位。整数部分的 9 位数字需要 4 字节，剩余的 5 位数字需要 3 字节。6 个小数位需要 3 字节。
 
-DECIMAL columns do not store a leading `+` character or `-` character or leading `0` digits. If you insert `+0003.1` into a `DECIMAL(5,1)` column, it is stored as `3.1`. For negative numbers, a literal `-` character is not stored.
+DECIMAL 列不存储前导 `+` 字符或 `-` 字符，也不存储前导的 `0` 数字。如果你在 `DECIMAL(5,1)` 列中插入 `+0003.1`，存储时会变成 `3.1`。对于负数，不会存储字面量中的 `-` 字符。
 
-DECIMAL columns do not permit values larger than the range implied by the column definition. For example, a `DECIMAL(3,0)` column supports a range of `-999` to `999`. A `DECIMAL(M,D)` column permits at most `M - D` digits to the left of the decimal point.
+DECIMAL 列不允许存储超出列定义范围的值。例如，`DECIMAL(3,0)` 列支持的范围是 `-999` 到 `999`。`DECIMAL(M,D)` 列最多允许在小数点左侧有 `M - D` 位数字。
 
-For more information about the internal format of the DECIMAL values, see [`mydecimal.go`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/types/mydecimal.go) in TiDB source code.
+关于 DECIMAL 值的内部格式的更多信息，请参见 TiDB 源码中的 [`mydecimal.go`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/types/mydecimal.go)。
 
 ## Expression handling
 
-For expressions with precision math, TiDB uses the exact-value numbers as given whenever possible. For example, numbers in comparisons are used exactly as given without a change in value. In strict SQL mode, if you add an exact data type into a column, a number is inserted with its exact value if it is within the column range. When retrieved, the value is the same as what is inserted. If strict SQL mode is not enabled, truncation for INSERT is permitted in TiDB.
+对于带有精确数学的表达式，TiDB 在可能的情况下使用原始的精确值数字。例如，在比较中使用的数字会原样使用，不会改变值。在严格 SQL 模式下，如果你将精确数据类型插入到列中，数字会以其精确值插入（如果在列范围内）。检索时，值与插入时相同。如果未启用严格 SQL 模式，TiDB 允许在 INSERT 时进行截断。
 
-How to handle a numeric expression depends on the values of the expression:
+如何处理数字表达式取决于表达式的值：
 
-- If the expression contains any approximate values, the result is approximate. TiDB evaluates the expression using floating-point arithmetic.
-- If the expression contains no approximate values are present, which means only exact values are contained, and if any exact value contains a fractional part, the expression is evaluated using DECIMAL exact arithmetic and has a precision of 65 digits.
-- Otherwise, the expression contains only integer values. The expression is exact. TiDB evaluates the expression using integer arithmetic and has a precision the same as BIGINT (64 bits).
+- 如果表达式包含任何近似值，结果为近似值。TiDB 使用浮点运算评估表达式。
+- 如果表达式不包含近似值（仅包含精确值），且任何精确值包含小数部分，则使用 DECIMAL 精确算术进行评估，精度为 65 位数字。
+- 否则，表达式仅包含整数值。该表达式是精确的。TiDB 使用整数运算评估，精度与 BIGINT（64 位）相同。
 
-If a numeric expression contains strings, the strings are converted to double-precision floating-point values and the result of the expression is approximate.
+如果数字表达式包含字符串，字符串会被转换为双精度浮点值，表达式的结果为近似值。
 
-Inserts into numeric columns are affected by the SQL mode. The following discussions mention strict mode and `ERROR_FOR_DIVISION_BY_ZERO`. To turn on all the restrictions, you can simply use the `TRADITIONAL` mode, which includes both strict mode values and `ERROR_FOR_DIVISION_BY_ZERO`:
+对数字列的插入受到 SQL 模式的影响。以下讨论提到严格模式和 `ERROR_FOR_DIVISION_BY_ZERO`。你可以通过使用 `TRADITIONAL` 模式开启所有限制，该模式包括严格模式值和 `ERROR_FOR_DIVISION_BY_ZERO`：
 
 ```sql
 SET sql_mode = 'TRADITIONAL`;
 ```
 
-If a number is inserted into an exact type column (DECIMAL or integer), it is inserted with its exact value if it is within the column range. For this number:
+如果将数字插入到精确类型列（DECIMAL 或整数）中，只要在列范围内，数字会以其精确值插入。对于该数字：
 
-- If the value has too many digits in the fractional part, rounding occurs and a warning is generated.
-- If the value has too many digits in the integer part, it is too large and is handled as follows:
-    - If strict mode is not enabled, the value is truncated to the nearest legal value and a warning is generated.
-    - If strict mode is enabled, an overflow error occurs.
+- 如果小数部分位数过多，会发生四舍五入并生成警告。
+- 如果整数部分位数过多，数值过大，处理方式如下：
+    - 如果未启用严格模式，数值会被截断到最接近的合法值，并生成警告。
+    - 如果启用严格模式，则会发生溢出错误。
 
-To insert strings into numeric columns, TiDB handles the conversion from string to number as follows if the string has nonnumeric contents:
+将字符串插入数字列时，如果字符串包含非数字内容，TiDB 的处理方式如下：
 
-- In strict mode, a string (including an empty string) that does not begin with a number cannot be used as a number. An error, or a warning occurs.
-- A string that begins with a number can be converted, but the trailing nonnumeric portion is truncated. In strict mode, if the truncated portion contains anything other than spaces, an error, or a warning occurs.
+- 在严格模式下，不以数字开头的字符串（包括空字符串）不能用作数字。会产生错误或警告。
+- 以数字开头的字符串可以转换，但尾部非数字部分会被截断。在严格模式下，如果截断部分包含除空格外的内容，会产生错误或警告。
 
-By default, the result of the division by 0 is NULL and no warning. By setting the SQL mode appropriately, division by 0 can be restricted. If you enable the `ERROR_FOR_DIVISION_BY_ZERO` SQL mode, TiDB handles division by 0 differently:
+默认情况下，除以 0 的结果为 NULL 且无警告。通过设置 SQL 模式，可以限制除以 0 的行为。如果启用 `ERROR_FOR_DIVISION_BY_ZERO` SQL 模式，TiDB 处理除以 0 的方式如下：
 
-- In strict mode, inserts and updates are prohibited, and an error occurs.
-- If it's not in the strict mode, a warning occurs.
+- 在严格模式下，插入和更新被禁止，发生错误。
+- 如果不在严格模式下，则会产生警告。
 
-In the following SQL statement:
+在以下 SQL 语句中：
 
 ```sql
 INSERT INTO t SET i = 1/0;
 ```
 
-The following results are returned in different SQL modes:
+不同 SQL 模式下返回的结果如下：
 
 | `sql_mode` Value | Result |
 | :--- | :--- |
-| '' | No warning, no error; i is set to NULL.|
-| strict | No warning, no error; i is set to NULL. |
-| `ERROR_FOR_DIVISION_BY_ZERO` | Warning, no error; i is set to NULL. |
-| strict, `ERROR_FOR_DIVISION_BY_ZERO` | Error; no row is inserted. |
+| '' | 无警告，无错误；i 被设置为 NULL。|
+| strict | 无警告，无错误；i 被设置为 NULL。 |
+| `ERROR_FOR_DIVISION_BY_ZERO` | 警告，无错误；i 被设置为 NULL。 |
+| strict, `ERROR_FOR_DIVISION_BY_ZERO` | 错误；不插入任何行。 |
 
 ## Rounding behavior
 
-The result of the `ROUND()` function depends on whether its argument is exact or approximate:
+`ROUND()` 函数的结果取决于其参数是精确值还是近似值：
 
-- For exact-value numbers, the `ROUND()` function uses the "round half up" rule.
-- For approximate-value numbers, the results in TiDB differs from that in MySQL:
+- 对于精确值数字，`ROUND()` 使用“五舍六入”规则。
+- 对于近似值数字，TiDB 中的结果与 MySQL 不同：
 
     ```sql
     TiDB > SELECT ROUND(2.5), ROUND(25E-1);
@@ -119,7 +119,7 @@ The result of the `ROUND()` function depends on whether its argument is exact or
     1 row in set (0.00 sec)
     ```
 
-For inserts into a DECIMAL or integer column, the rounding uses [round half away from zero](https://en.wikipedia.org/wiki/Rounding#Round_half_away_from_zero).
+对 DECIMAL 或整数列的插入，四舍五入采用 [round half away from zero](https://en.wikipedia.org/wiki/Rounding#Round_half_away_from_zero)。
 
 ```sql
 TiDB > CREATE TABLE t (d DECIMAL(10,0));

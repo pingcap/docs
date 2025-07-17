@@ -1,22 +1,22 @@
 ---
-title: Unstable Result Set
-summary: Learn how to handle the error of an unstable result set.
+title: 不稳定的结果集
+summary: 学习如何处理不稳定的结果集错误。
 ---
 
-# Unstable Result Set
+# 不稳定的结果集
 
-This document describes how to solve unstable result set errors.
+本文档描述了如何解决不稳定的结果集错误。
 
 ## GROUP BY
 
-For convenience, MySQL "extends" the `GROUP BY` syntax to allow the `SELECT` clause to refer to non-aggregated fields not declared in the `GROUP BY` clause, that is, the `NON-FULL GROUP BY` syntax. In other databases, this is considered a syntax **_ERROR_** because it causes unstable result sets.
+为了方便起见，MySQL “扩展” 了 `GROUP BY` 语法，允许 `SELECT` 子句引用未在 `GROUP BY` 子句中声明的非聚合字段，即所谓的 `NON-FULL GROUP BY` 语法。在其他数据库中，这被视为语法 **_错误_**，因为它会导致不稳定的结果集。
 
-For example, you have two tables:
+例如，你有两个表：
 
-- `stu_info` stores the student information
-- `stu_score` stores the student test scores.
+- `stu_info` 存储学生信息
+- `stu_score` 存储学生考试成绩。
 
-Then you can write a SQL query statement like this:
+然后你可以写出如下的 SQL 查询语句：
 
 ```sql
 SELECT
@@ -34,7 +34,7 @@ ORDER BY
     `a`.`stuname`;
 ```
 
-Result:
+结果：
 
 ```sql
 +------------+--------------+------------------+
@@ -47,9 +47,9 @@ Result:
 3 rows in set (0.00 sec)
 ```
 
-The `a`.`class` and `a`.`stuname` fields are specified in the `GROUP BY` statement, and the selected columns are `a`.`class`, `a`.`stuname` and `b`.`courscore`. The only column that is not in the `GROUP BY` condition, `b`.`courscore`, is also specified with a unique value using the `max()` function. There is **_ONLY ONE_** result that satisfies this SQL statement without any ambiguity, which is called the `FULL GROUP BY` syntax.
+`a`.`class` 和 `a`.`stuname` 字段在 `GROUP BY` 语句中已明确指定，所选择的列为 `a`.`class`、`a`.`stuname` 和 `b`.`courscore`。唯一未在 `GROUP BY` 条件中的列 `b`.`courscore`，通过 `max()` 函数指定了唯一值。满足此 SQL 语句的 **_ONLY ONE_** 结果没有歧义，这被称为 `FULL GROUP BY` 语法。
 
-A counterexample is the `NON-FULL GROUP BY` syntax. For example, in these two tables, write the following SQL query (delete `a`.`stuname` in `GROUP BY`).
+反例是 `NON-FULL GROUP BY` 语法。例如，在这两个表中，写出以下 SQL 查询（删除 `a`.`stuname` 在 `GROUP BY` 中）：
 
 ```sql
 SELECT
@@ -66,9 +66,9 @@ ORDER BY
     `a`.`stuname`;
 ```
 
-Then two values that match this SQL are returned.
+此时会返回两个符合此 SQL 的值。
 
-The first returned value:
+第一个返回值：
 
 ```sql
 +------------+--------------+------------------------+
@@ -79,7 +79,7 @@ The first returned value:
 +------------+--------------+------------------------+
 ```
 
-The second returned value:
+第二个返回值：
 
 ```sql
 +------------+--------------+------------------+
@@ -90,9 +90,9 @@ The second returned value:
 +------------+--------------+------------------+
 ```
 
-There are two results because you did **_NOT_** specify how to get the value of the `a`.`stuname` field in SQL, and two results are both satisfied by SQL semantics. It results in an unstable result set. Therefore, if you want to guarantee the stability of the result set of the `GROUP BY` statement, use the `FULL GROUP BY` syntax.
+出现两个结果的原因是你**_没有_** 指定如何获取 `a`.`stuname` 字段的值，两个结果都符合 SQL 语义，导致结果不稳定。因此，为了保证 `GROUP BY` 语句的结果稳定性，应使用 `FULL GROUP BY` 语法。
 
-MySQL provides a `sql_mode` switch `ONLY_FULL_GROUP_BY` to control whether to check the `FULL GROUP BY` syntax or not. TiDB is also compatible with this `sql_mode` switch.
+MySQL 提供了 `sql_mode` 开关 `ONLY_FULL_GROUP_BY` 来控制是否启用 `FULL GROUP BY` 语法。TiDB 也兼容此 `sql_mode` 开关。
 
 ```sql
 mysql> select a.class, a.stuname, max(b.courscore) from stu_info a join stu_score b on a.stuno=b.stuno group by a.class order by a.class, a.stuname;
@@ -111,15 +111,15 @@ mysql> select a.class, a.stuname, max(b.courscore) from stu_info a join stu_scor
 ERROR 1055 (42000): Expression #2 of ORDER BY is not in GROUP BY clause and contains nonaggregated column '' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
 ```
 
-**Run results**: The above example shows the effect when you set `ONLY_FULL_GROUP_BY` for `sql_mode`.
+**运行结果**：上述示例展示了在设置 `ONLY_FULL_GROUP_BY` 后的效果。
 
 ## ORDER BY
 
-In SQL semantics, the result set is output in order only if the `ORDER BY` syntax is used. For a single-instance database, since the data is stored on one server, the results of multiple executions are often stable without data reorganization. Some databases (especially the MySQL InnoDB storage engine) can even output the result sets in order of the primary key or index.
+在 SQL 语义中，只有使用 `ORDER BY` 语法，结果集才会按指定顺序输出。对于单实例数据库，由于数据存储在同一台服务器上，多次执行的结果通常是稳定的（没有数据重排）。一些数据库（尤其是 MySQL 的 InnoDB 存储引擎）甚至可以按照主键或索引的顺序输出结果集。
 
-As a distributed database, TiDB stores data on multiple servers. In addition, the TiDB layer does not cache data pages, so the result set order of SQL statements without `ORDER BY` is easily perceived as unstable. To output a sequential result set, you need to explicitly add the order field into the `ORDER BY` clause, which conforms to SQL semantics.
+作为分布式数据库，TiDB 将数据存储在多台服务器上。此外，TiDB 层不会缓存数据页，因此没有 `ORDER BY` 的 SQL 语句的结果集顺序很容易被感知为不稳定。为了输出有序的结果集，你需要显式在 `ORDER BY` 子句中添加排序字段，这符合 SQL 语义。
 
-In the following example, only one field is added to the `ORDER BY` clause, and TiDB only sorts the results by that one field.
+在以下示例中，只在 `ORDER BY` 中添加了一个字段，TiDB 仅按该字段排序结果。
 
 ```sql
 mysql> select a.class, a.stuname, b.course, b.courscore from stu_info a join stu_score b on a.stuno=b.stuno order by a.class;
@@ -164,23 +164,21 @@ mysql> select a.class, a.stuname, b.course, b.courscore from stu_info a join stu
 | 2018_CS_03 | PatrickStar  | Physics                 |       6.0 |
 +------------+--------------+-------------------------+-----------+
 36 rows in set (0.01 sec)
-
 ```
 
-Results are unstable when the `ORDER BY` values are the same. To reduce randomness, `ORDER BY` values should be unique. If you can't guarantee the uniqueness, you need to add more `ORDER BY` fields until the combination of the `ORDER BY` fields in `ORDER BY` is unique, then the result will be stable.
+当 `ORDER BY` 的值相同时，结果会不稳定。为了减少随机性，`ORDER BY` 的值应具有唯一性。如果不能保证唯一性，则需要添加更多的 `ORDER BY` 字段，直到 `ORDER BY` 字段的组合在排序中唯一，结果才会稳定。
 
-## The result set is unstable because order by is not used in `GROUP_CONCAT()`
+## `GROUP_CONCAT()` 中未使用 `ORDER BY` 导致结果不稳定
 
-The result set is unstable because TiDB reads data from the storage layer in parallel, so the result set order returned by `GROUP_CONCAT()` without `ORDER BY` is easily perceived as unstable.
+结果集不稳定的原因是 TiDB 从存储层并行读取数据，因此没有 `ORDER BY` 的 `GROUP_CONCAT()` 返回的结果集顺序很容易被感知为不稳定。
 
-To let `GROUP_CONCAT()` get the result set output in order, you need to add the sorting fields to the `ORDER BY` clause, which conforms to the SQL semantics. In the following example, `GROUP_CONCAT()` that splices `customer_id` without `ORDER BY` causes an unstable result set.
+为了让 `GROUP_CONCAT()` 按顺序输出结果集，你需要在 `ORDER BY` 子句中添加排序字段，这符合 SQL 语义。在以下示例中，`GROUP_CONCAT()` 拼接 `customer_id` 时未使用 `ORDER BY`，导致结果集不稳定。
 
-1. Excluded `ORDER BY`
+1. 不包含 `ORDER BY`
 
-    First query:
+    第一次查询：
 
-    {{< copyable "sql" >}}
-
+    
     ```sql
     mysql>  select GROUP_CONCAT( customer_id SEPARATOR ',' ) FROM customer where customer_id like '200002%';
     +-------------------------------------------------------------------------+
@@ -190,10 +188,9 @@ To let `GROUP_CONCAT()` get the result set output in order, you need to add the 
     +-------------------------------------------------------------------------+
     ```
 
-    Second query:
+    第二次查询：
 
-    {{< copyable "sql" >}}
-
+    
     ```sql
     mysql>  select GROUP_CONCAT( customer_id SEPARATOR ',' ) FROM customer where customer_id like '200002%';
     +-------------------------------------------------------------------------+
@@ -203,12 +200,11 @@ To let `GROUP_CONCAT()` get the result set output in order, you need to add the 
     +-------------------------------------------------------------------------+
     ```
 
-2. Include `ORDER BY`
+2. 包含 `ORDER BY`
 
-    First query:
+    第一次查询：
 
-    {{< copyable "sql" >}}
-
+    
     ```sql
     mysql>  select GROUP_CONCAT( customer_id order by customer_id SEPARATOR ',' ) FROM customer where customer_id like '200002%';
     +-------------------------------------------------------------------------+
@@ -218,10 +214,9 @@ To let `GROUP_CONCAT()` get the result set output in order, you need to add the 
     +-------------------------------------------------------------------------+
     ```
 
-    Second query:
+    第二次查询：
 
-    {{< copyable "sql" >}}
-
+    
     ```sql
     mysql>  select GROUP_CONCAT( customer_id order by customer_id SEPARATOR ',' ) FROM customer where customer_id like '200002%';
     +-------------------------------------------------------------------------+
@@ -231,20 +226,20 @@ To let `GROUP_CONCAT()` get the result set output in order, you need to add the 
     +-------------------------------------------------------------------------+
     ```
 
-## Unstable results in `SELECT * FROM T LIMIT N`
+## 在 `SELECT * FROM T LIMIT N` 中结果不稳定
 
-The returned result is related to the distribution of data on the storage node (TiKV). If multiple queries are performed, different storage units (Regions) of the storage nodes (TiKV) return results at different speeds, which can cause unstable results.
+返回的结果与存储节点（TiKV）上的数据分布有关。如果执行多次查询，不同存储单元（Region）返回结果的速度不同，可能导致结果不稳定。
 
-## Need help?
+## 需要帮助？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或[提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或[提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

@@ -1,15 +1,15 @@
 ---
 title: ANALYZE_STATUS
-summary: Learn the `ANALYZE_STATUS` information_schema table.
+summary: 了解 `ANALYZE_STATUS` information_schema 表。
 ---
 
 # ANALYZE_STATUS
 
-The `ANALYZE_STATUS` table provides information about the running tasks that collect statistics and a limited number of history tasks.
+`ANALYZE_STATUS` 表提供关于正在运行的统计信息采集任务以及有限数量历史任务的信息。
 
-Starting from TiDB v6.1.0, the `ANALYZE_STATUS` table supports showing cluster-level tasks. Even after a TiDB restart, you can still view task records before the restart using this table. Before TiDB v6.1.0, the `ANALYZE_STATUS` table can only show instance-level tasks, and task records are cleared after a TiDB restart.
+从 TiDB v6.1.0 开始，`ANALYZE_STATUS` 表支持显示集群级别的任务。即使在 TiDB 重启后，你仍然可以通过此表查看重启前的任务记录。在 TiDB v6.1.0 之前，`ANALYZE_STATUS` 表只能显示实例级别的任务，任务记录在重启后会被清除。
 
-Starting from TiDB v6.1.0, you can view the history tasks within the last 7 days through the system table `mysql.analyze_jobs`.
+从 TiDB v6.1.0 开始，你可以通过系统表 `mysql.analyze_jobs` 查看最近 7 天内的历史任务。
 
 ```sql
 USE information_schema;
@@ -35,10 +35,8 @@ DESC analyze_status;
 | PROGRESS             | varchar(20)         | YES  |      | NULL    |       |
 | ESTIMATED_TOTAL_ROWS | bigint(64) unsigned | YES  |      | NULL    |       |
 +----------------------+---------------------+------+------+---------+-------+
-14 rows in set (0.00 sec)
+14 行结果（0.00 秒）
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT * FROM information_schema.analyze_status;
@@ -56,27 +54,27 @@ SELECT * FROM information_schema.analyze_status;
 | test         | t          | p0             | analyze columns                                                    |              0 | 2022-05-27 11:29:46 | 2022-05-27 11:29:46 | finished |        NULL | 127.0.0.1:4000 | NULL       | NULL                 | NULL     |                  NULL |
 | test         | t          | p1             | analyze table all columns with 256 buckets, 500 topn, 1 samplerate |        1000000 | 2022-05-27 11:30:12 | 2022-05-27 11:40:12 | running  |        NULL | 127.0.0.1:4000 | 690208308  | 600s                 | 0.25     | 4000000               |
 +--------------+------------+----------------+--------------------------------------------------------------------+----------------+---------------------+---------------------+----------+-------------+----------------+------------+----------------------+----------+-----------------------+
-6 rows in set (0.00 sec)
+6 行结果（0.00 秒）
 ```
 
-Fields in the `ANALYZE_STATUS` table are described as follows:
+`ANALYZE_STATUS` 表中的字段说明如下：
 
-* `TABLE_SCHEMA`: The name of the database to which the table belongs.
-* `TABLE_NAME`: The name of the table.
-* `PARTITION_NAME`: The name of the partitioned table.
-* `JOB_INFO`: The information of the `ANALYZE` task. If an index is analyzed, this information will include the index name. When `tidb_analyze_version = 2`, this information will include configuration items such as sample rate.
-* `PROCESSED_ROWS`: The number of rows that have been processed.
-* `START_TIME`: The start time of the `ANALYZE` task.
-* `END_TIME`: The end time of the `ANALYZE` task.
-* `STATE`: The execution status of the `ANALYZE` task. Its value can be `pending`, `running`,`finished` or `failed`.
-* `FAIL_REASON`: The reason why the task fails. If the execution is successful, the value is `NULL`.
-* `INSTANCE`: The TiDB instance that executes the task.
-* `PROCESS_ID`: The process ID that executes the task.
-* `REMAINING_SECONDS`: The estimated time (in seconds) remaining for the task to complete.
-* `PROGRESS`: The progress of the task.
-* `ESTIMATED_TOTAL_ROWS`: The total rows that need to be analyzed by the task.
+* `TABLE_SCHEMA`：所属数据库的名称。
+* `TABLE_NAME`：表的名称。
+* `PARTITION_NAME`：分区表的名称。
+* `JOB_INFO`：`ANALYZE` 任务的信息。如果分析的是索引，则此信息会包含索引名。当 `tidb_analyze_version = 2` 时，此信息还会包括采样率等配置项。
+* `PROCESSED_ROWS`：已处理的行数。
+* `START_TIME`：`ANALYZE` 任务的开始时间。
+* `END_TIME`：`ANALYZE` 任务的结束时间。
+* `STATE`：`ANALYZE` 任务的执行状态，其值可以是 `pending`、`running`、`finished` 或 `failed`。
+* `FAIL_REASON`：任务失败的原因。如果执行成功，值为 `NULL`。
+* `INSTANCE`：执行任务的 TiDB 实例。
+* `PROCESS_ID`：执行任务的进程 ID。
+* `REMAINING_SECONDS`：任务预计剩余时间（秒）。
+* `PROGRESS`：任务的进度。
+* `ESTIMATED_TOTAL_ROWS`：任务需要分析的总行数。
 
-## See also
+## 相关链接
 
 - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
 - [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md)

@@ -1,208 +1,208 @@
 ---
-title: Connect to TiDB with Visual Studio Code
-summary: Learn how to connect to TiDB using Visual Studio Code or GitHub Codespaces.
+title: 使用 Visual Studio Code 连接 TiDB
+summary: 学习如何使用 Visual Studio Code 或 GitHub Codespaces 连接到 TiDB。
 ---
 
-# Connect to TiDB with Visual Studio Code
+# 使用 Visual Studio Code 连接 TiDB
 
-TiDB is a MySQL-compatible database, and [Visual Studio Code (VS Code)](https://code.visualstudio.com/) is a lightweight but powerful source code editor. This tutorial uses the [SQLTools](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools) extension which supports TiDB as an [official driver](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql).
+TiDB 是一个与 MySQL 兼容的数据库，[Visual Studio Code (VS Code)](https://code.visualstudio.com/) 是一个轻量但功能强大的源代码编辑器。本教程使用支持 TiDB 的 [SQLTools](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools) 扩展，该扩展作为 [官方驱动](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql) 支持 TiDB。
 
-In this tutorial, you can learn how to connect to your TiDB cluster using Visual Studio Code.
+在本教程中，你可以学习如何使用 Visual Studio Code 连接到你的 TiDB 集群。
 
-> **Note:**
+> **注意：**
 >
-> - This tutorial is compatible with {{{ .starter }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
-> - This tutorial also works with Visual Studio Code Remote Development environments, such as [GitHub Codespaces](https://github.com/features/codespaces), [Visual Studio Code Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers), and [Visual Studio Code WSL](https://code.visualstudio.com/docs/remote/wsl).
+> - 本教程兼容 {{{ .starter }}}、TiDB Cloud Dedicated 和 TiDB Self-Managed。
+> - 本教程也适用于 Visual Studio Code Remote Development 环境，例如 [GitHub Codespaces](https://github.com/features/codespaces)、[Visual Studio Code Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) 和 [Visual Studio Code WSL](https://code.visualstudio.com/docs/remote/wsl)。
 
-## Prerequisites
+## 前提条件
 
-To complete this tutorial, you need:
+完成本教程，你需要：
 
-- [Visual Studio Code](https://code.visualstudio.com/#alt-downloads) **1.72.0** or later versions.
-- [SQLTools MySQL/MariaDB/TiDB](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql) extension for Visual Studio Code. To install it, you can use one of the following methods:
-    - Click <a href="vscode:extension/mtxr.sqltools-driver-mysql">this link</a>  to launch VS Code and install the extension directly.
-    - Navigate to [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql) and click **Install**.
-    - On the **Extensions** tab of your VS Code, search for `mtxr.sqltools-driver-mysql` to get the **SQLTools MySQL/MariaDB/TiDB** extension, and then click **Install**.
-- A TiDB cluster.
+- [Visual Studio Code](https://code.visualstudio.com/#alt-downloads) **1.72.0** 或更高版本。
+- 为 Visual Studio Code 安装 [SQLTools MySQL/MariaDB/TiDB](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql) 扩展。你可以通过以下任一方法安装：
+    - 点击 <a href="vscode:extension/mtxr.sqltools-driver-mysql">此链接</a> 直接在 VS Code 中启动并安装扩展。
+    - 访问 [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql)，点击 **Install**。
+    - 在 VS Code 的 **Extensions** 选项卡中搜索 `mtxr.sqltools-driver-mysql`，找到后点击 **Install**。
+- 一个 TiDB 集群。
 
 <CustomContent platform="tidb">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**如果你还没有 TiDB 集群，可以按照以下方式创建：**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+- （推荐）参考 [创建 {{{ .starter }}} 集群](/develop/dev-guide-build-cluster-in-cloud.md) 来创建你自己的 TiDB Cloud 集群。
+- 参考 [部署本地测试 TiDB 集群](/quick-start-with-tidb.md#deploy-a-local-test-cluster) 或 [部署生产环境 TiDB 集群](/production-deployment-using-tiup.md) 来创建本地集群。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**如果你还没有 TiDB 集群，可以按照以下方式创建：**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
+- （推荐）参考 [创建 {{{ .starter }}} 集群](/develop/dev-guide-build-cluster-in-cloud.md) 来创建你自己的 TiDB Cloud 集群。
+- 参考 [部署本地测试 TiDB 集群](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) 或 [部署生产环境 TiDB 集群](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) 来创建本地集群。
 
 </CustomContent>
 
-## Connect to TiDB
+## 连接到 TiDB
 
-Connect to your TiDB cluster depending on the TiDB deployment option you have selected.
+根据你选择的 TiDB 部署方式，连接到你的 TiDB 集群。
 
 <SimpleTab>
 <div label="{{{ .starter }}}">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. 进入 [**Clusters**](https://tidbcloud.com/console/clusters) 页面，然后点击目标集群的名称，进入其概览页面。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2. 点击右上角的 **Connect**。会显示连接对话框。
 
-3. Ensure the configurations in the connection dialog match your operating environment.
+3. 确认连接对话框中的配置与操作环境匹配。
 
-    - **Connection Type** is set to `Public`.
-    - **Branch** is set to `main`.
-    - **Connect With** is set to `VS Code`.
-    - **Operating System** matches your environment.
-
-    > **Tip:**
-    >
-    > If your VS Code is running on a remote development environment, select the remote operating system from the list. For example, if you are using Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution. This is not necessary if you are using GitHub Codespaces.
-
-4. Click **Generate Password** to create a random password.
+    - **Connection Type** 设置为 `Public`。
+    - **Branch** 设置为 `main`。
+    - **Connect With** 设置为 `VS Code`。
+    - **Operating System** 与你的环境一致。
 
     > **Tip:**
     >
-    > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
+    > 如果你的 VS Code 在远程开发环境中运行，可以从列表中选择远程操作系统。例如，如果你使用 Windows Subsystem for Linux (WSL)，请切换到对应的 Linux 发行版。如果你使用 GitHub Codespaces，则不需要此操作。
 
-5. Launch VS Code and select the **SQLTools** extension on the navigation pane. Under the **CONNECTIONS** section, click **Add New Connection** and select **TiDB** as the database driver.
+4. 点击 **Generate Password** 生成随机密码。
+
+    > **Tip:**
+    >
+    > 如果之前已创建密码，可以继续使用原密码，或点击 **Reset Password** 生成新密码。
+
+5. 启动 VS Code，在导航栏中选择 **SQLTools** 扩展。在 **CONNECTIONS** 区域，点击 **Add New Connection**，选择 **TiDB** 作为数据库驱动。
 
     ![VS Code SQLTools: add new connection](/media/develop/vsc-sqltools-add-new-connection.jpg)
 
-6. In the setting pane, configure the following connection parameters:
+6. 在设置面板中，配置以下连接参数：
 
-    - **Connection name**: give this connection a meaningful name.
-    - **Connection group**: (optional) give this group of connections a meaningful name. Connections with the same group name will be grouped together.
-    - **Connect using**: select **Server and Port**.
-    - **Server Address**: enter the `HOST` parameter from the TiDB Cloud connection dialog.
-    - **Port**: enter the `PORT` parameter from the TiDB Cloud connection dialog.
-    - **Database**: enter the database that you want to connect to.
-    - **Username**: enter the `USERNAME` parameter from the TiDB Cloud connection dialog.
-    - **Password mode**: select **SQLTools Driver Credentials**.
-    - In the **MySQL driver specific options** area, configure the following parameters:
+    - **Connection name**：为此连接命名，便于识别。
+    - **Connection group**：可选，为此连接组命名。相同组名的连接会被归为一组。
+    - **Connect using**：选择 **Server and Port**。
+    - **Server Address**：输入 TiDB Cloud 连接对话框中的 `HOST` 参数。
+    - **Port**：输入 TiDB Cloud 连接对话框中的 `PORT` 参数。
+    - **Database**：输入你要连接的数据库名。
+    - **Username**：输入 TiDB Cloud 连接对话框中的 `USERNAME` 参数。
+    - **Password mode**：选择 **SQLTools Driver Credentials**。
+    - 在 **MySQL driver specific options** 区域，配置以下参数：
 
-        - **Authentication Protocol**: select **default**.
-        - **SSL**: select **Enabled**. {{{ .starter }}} requires a secure connection. In the **SSL Options (node.TLSSocket)** area, configure the **Certificate Authority (CA) Certificate File** field as the `CA` parameter from the TiDB Cloud connection dialog.
+        - **Authentication Protocol**：选择 **default**。
+        - **SSL**：选择 **Enabled**。 {{{ .starter }}} 需要安全连接。在 **SSL Options (node.TLSSocket)** 区域，配置 **Certificate Authority (CA) Certificate File** 字段为 TiDB Cloud 连接对话框中的 `CA` 参数。
 
             > **Note:**
             >
-            > If you are running on Windows or GitHub Codespaces, you can leave **SSL** blank. By default SQLTools trusts well-known CAs curated by Let's Encrypt. For more information, see [{{{ .starter }}} root certificate management](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters#root-certificate-management).
+            > 如果你在 Windows 或 GitHub Codespaces 上运行，可以将 **SSL** 留空。默认情况下，SQLTools 信任由 Let's Encrypt 认证的知名 CA。更多信息请参见 [{{{ .starter }}} root certificate management](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters#root-certificate-management)。
 
     ![VS Code SQLTools: configure connection settings for {{{ .starter }}}](/media/develop/vsc-sqltools-connection-config-serverless.jpg)
 
-7. Click **TEST CONNECTION** to validate the connection to the {{{ .starter }}} cluster.
+7. 点击 **TEST CONNECTION** 以验证与 {{{ .starter }}} 集群的连接。
 
-    1. In the pop-up window, click **Allow**.
-    2. In the **SQLTools Driver Credentials** dialog, enter the password you created in step 4.
+    1. 在弹出窗口中，点击 **Allow**。
+    2. 在 **SQLTools Driver Credentials** 对话框中，输入第 4 步创建的密码。
 
         ![VS Code SQLTools: enter password to connect to {{{ .starter }}}](/media/develop/vsc-sqltools-password.jpg)
 
-8. If the connection test is successful, you can see the **Successfully connected!** message. Click **SAVE CONNECTION** to save the connection configuration.
+8. 如果连接测试成功，你会看到 **Successfully connected!** 提示。点击 **SAVE CONNECTION** 保存连接配置。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. 进入 [**Clusters**](https://tidbcloud.com/console/clusters) 页面，然后点击目标集群的名称，进入其概览页面。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2. 点击右上角的 **Connect**。会显示连接对话框。
 
-3. In the connection dialog, select **Public** from the **Connection Type** drop-down list, and then click **CA cert** to download the CA certificate.
+3. 在连接对话框中，从 **Connection Type** 下拉列表选择 **Public**，然后点击 **CA cert** 下载 CA 证书。
 
-    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) to configure it before your first connection.
+    如果你还没有配置 IP 访问列表，请点击 **Configure IP Access List** 或按照 [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) 的步骤进行配置，然后再进行首次连接。
 
-    In addition to the **Public** connection type, TiDB Cloud Dedicated supports **Private Endpoint** and **VPC Peering** connection types. For more information, see [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
+    除了 **Public** 连接类型外，TiDB Cloud Dedicated 还支持 **Private Endpoint** 和 **VPC Peering** 连接类型。更多信息请参见 [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)。
 
-4. Launch VS Code and select the **SQLTools** extension on the navigation pane. Under the **CONNECTIONS** section, click **Add New Connection** and select **TiDB** as the database driver.
+4. 启动 VS Code，在导航栏中选择 **SQLTools** 扩展。在 **CONNECTIONS** 区域，点击 **Add New Connection**，选择 **TiDB** 作为数据库驱动。
 
     ![VS Code SQLTools: add new connection](/media/develop/vsc-sqltools-add-new-connection.jpg)
 
-5. In the setting pane, configure the following connection parameters:
+5. 在设置面板中，配置以下连接参数：
 
-    - **Connection name**: give this connection a meaningful name.
-    - **Connection group**: (optional) give this group of connections a meaningful name. Connections with the same group name will be grouped together.
-    - **Connect using**: select **Server and Port**.
-    - **Server Address**: enter the `host` parameter from the TiDB Cloud connection dialog.
-    - **Port**: enter the `port` parameter from the TiDB Cloud connection dialog.
-    - **Database**: enter the database that you want to connect to.
-    - **Username**: enter the `user` parameter from the TiDB Cloud connection dialog.
-    - **Password mode**: select **SQLTools Driver Credentials**.
-    - In the **MySQL driver specific options** area, configure the following parameters:
+    - **Connection name**：为此连接命名，便于识别。
+    - **Connection group**：可选，为此连接组命名。相同组名的连接会被归为一组。
+    - **Connect using**：选择 **Server and Port**。
+    - **Server Address**：输入 TiDB Cloud 连接对话框中的 `host` 参数。
+    - **Port**：输入 TiDB Cloud 连接对话框中的 `port` 参数。
+    - **Database**：输入你要连接的数据库名。
+    - **Username**：输入 TiDB Cloud 连接对话框中的 `user` 参数。
+    - **Password mode**：选择 **SQLTools Driver Credentials**。
+    - 在 **MySQL driver specific options** 区域，配置以下参数：
 
-        - **Authentication Protocol**: select **default**.
-        - **SSL**: select **Disabled**.
+        - **Authentication Protocol**：选择 **default**。
+        - **SSL**：选择 **Disabled**。
 
     ![VS Code SQLTools: configure connection settings for TiDB Cloud Dedicated](/media/develop/vsc-sqltools-connection-config-dedicated.jpg)
 
-6. Click **TEST CONNECTION** to validate the connection to the TiDB Cloud Dedicated cluster.
+6. 点击 **TEST CONNECTION** 以验证与 TiDB Cloud Dedicated 集群的连接。
 
-    1. In the pop-up window, click **Allow**.
-    2. In the **SQLTools Driver Credentials** dialog, enter the password of the TiDB Cloud Dedicated cluster.
+    1. 在弹出窗口中，点击 **Allow**。
+    2. 在 **SQLTools Driver Credentials** 对话框中，输入 TiDB Cloud Dedicated 集群的密码。
 
-    ![VS Code SQLTools: enter password to connect to TiDB Cloud Dedicated](/media/develop/vsc-sqltools-password.jpg)
+        ![VS Code SQLTools: enter password to connect to TiDB Cloud Dedicated](/media/develop/vsc-sqltools-password.jpg)
 
-7. If the connection test is successful, you can see the **Successfully connected!** message. Click **SAVE CONNECTION** to save the connection configuration.
+7. 如果连接测试成功，你会看到 **Successfully connected!** 提示。点击 **SAVE CONNECTION** 保存连接配置。
 
 </div>
 <div label="TiDB Self-Managed">
 
-1. Launch VS Code and select the **SQLTools** extension on the navigation pane. Under the **CONNECTIONS** section, click **Add New Connection** and select **TiDB** as the database driver.
+1. 启动 VS Code，在导航栏中选择 **SQLTools** 扩展。在 **CONNECTIONS** 区域，点击 **Add New Connection**，选择 **TiDB** 作为数据库驱动。
 
     ![VS Code SQLTools: add new connection](/media/develop/vsc-sqltools-add-new-connection.jpg)
 
-2. In the setting pane, configure the following connection parameters:
+2. 在设置面板中，配置以下连接参数：
 
-    - **Connection name**: give this connection a meaningful name.
-    - **Connection group**: (optional) give this group of connections a meaningful name. Connections with the same group name will be grouped together.
-    - **Connect using**: select **Server and Port**.
-    - **Server Address**: enter the IP address or domain name of your TiDB Self-Managed cluster.
-    - **Port**: enter the port number of your TiDB Self-Managed cluster.
-    - **Database**: enter the database that you want to connect to.
-    - **Username**: enter the username to use to connect to your TiDB Self-Managed cluster.
-    - **Password mode**:
+    - **Connection name**：为此连接命名，便于识别。
+    - **Connection group**：可选，为此连接组命名。相同组名的连接会被归为一组。
+    - **Connect using**：选择 **Server and Port**。
+    - **Server Address**：输入你的 TiDB Self-Managed 集群的 IP 地址或域名。
+    - **Port**：输入你的 TiDB Self-Managed 集群的端口号。
+    - **Database**：输入你要连接的数据库名。
+    - **Username**：输入用于连接你的 TiDB Self-Managed 集群的用户名。
+    - **Password mode**：
 
-        - If the password is empty, select **Use empty password**.
-        - Otherwise, select **SQLTools Driver Credentials**.
+        - 如果密码为空，选择 **Use empty password**。
+        - 否则，选择 **SQLTools Driver Credentials**。
 
-    - In the **MySQL driver specific options** area, configure the following parameters:
+    - 在 **MySQL driver specific options** 区域，配置以下参数：
 
-        - **Authentication Protocol**: select **default**.
-        - **SSL**: select **Disabled**.
+        - **Authentication Protocol**：选择 **default**。
+        - **SSL**：选择 **Disabled**。
 
     ![VS Code SQLTools: configure connection settings for TiDB Self-Managed](/media/develop/vsc-sqltools-connection-config-self-hosted.jpg)
 
-3. Click **TEST CONNECTION** to validate the connection to the TiDB Self-Managed cluster.
+3. 点击 **TEST CONNECTION** 以验证与 TiDB Self-Managed 集群的连接。
 
-    If the password is not empty, click **Allow** in the pop-up window, and then enter the password of the TiDB Self-Managed cluster.
+    如果密码不为空，点击弹出窗口中的 **Allow**，然后输入 TiDB Self-Managed 集群的密码。
 
     ![VS Code SQLTools: enter password to connect to TiDB Self-Managed](/media/develop/vsc-sqltools-password.jpg)
 
-4. If the connection test is successful, you can see the **Successfully connected!** message. Click **SAVE CONNECTION** to save the connection configuration.
+4. 如果连接测试成功，你会看到 **Successfully connected!** 提示。点击 **SAVE CONNECTION** 保存连接配置。
 
 </div>
 </SimpleTab>
 
-## Next steps
+## 后续步骤
 
-- Learn more usage of Visual Studio Code from [the documentation of Visual Studio Code](https://code.visualstudio.com/docs).
-- Learn more usage of VS Code SQLTools extension from [the documentation](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools) and [GitHub repository](https://github.com/mtxr/vscode-sqltools) of SQLTools.
-- Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
-- Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
+- 通过 [Visual Studio Code 的文档](https://code.visualstudio.com/docs) 了解更多使用方法。
+- 通过 [SQLTools 的文档](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools) 和 [GitHub 仓库](https://github.com/mtxr/vscode-sqltools) 了解更多关于 VS Code SQLTools 扩展的使用技巧。
+- 通过 [开发者指南](/develop/dev-guide-overview.md) 中的章节学习 TiDB 应用开发的最佳实践，例如 [插入数据](/develop/dev-guide-insert-data.md)、[更新数据](/develop/dev-guide-update-data.md)、[删除数据](/develop/dev-guide-delete-data.md)、[单表读取](/develop/dev-guide-get-data-from-single-table.md)、[事务](/develop/dev-guide-transaction-overview.md) 和 [SQL 性能优化](/develop/dev-guide-optimize-sql-overview.md)。
+- 通过 [TiDB 开发者课程](https://www.pingcap.com/education/) 学习专业课程，并在考试通过后获得 [TiDB 认证](https://www.pingcap.com/education/certification/)。
 
-## Need help?
+## 需要帮助？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 社区提问，或 [提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 社区提问，或 [提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

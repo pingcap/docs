@@ -1,19 +1,19 @@
 ---
 title: Table Filter
-summary: Usage of table filter feature in TiDB tools.
+summary: 在 TiDB 工具中使用表过滤功能。
 ---
 
 # Table Filter
 
-The TiDB migration tools operate on all the databases by default, but oftentimes only a subset is needed. For example, you only want to work with the schemas in the form of `foo*` and `bar*` and nothing else.
+TiDB 迁移工具默认对所有数据库进行操作，但 oftentimes 只需要其中的子集。例如，你可能只想处理以 `foo*` 和 `bar*` 形式的 schema，而不涉及其他。
 
-Since TiDB 4.0, all TiDB migration tools share a common filter syntax to define subsets. This document describes how to use the table filter feature.
+自 TiDB 4.0 版本起，所有 TiDB 迁移工具共享一种通用的过滤语法，用于定义子集。本文件描述如何使用表过滤功能。
 
 ## Usage
 
 ### CLI
 
-Table filters can be applied to the tools using multiple `-f` or `--filter` command line parameters. Each filter is in the form of `db.table`, where each part can be a wildcard (further explained in the [next section](#wildcards)). The following lists the example usage.
+可以通过多个 `-f` 或 `--filter` 命令行参数对工具应用表过滤。每个过滤规则的格式为 `db.table`，其中每一部分可以是通配符（在[下一节](#wildcards)中进一步说明）。以下列出示例用法。
 
 <CustomContent platform="tidb">
 
@@ -55,9 +55,9 @@ Table filters can be applied to the tools using multiple `-f` or `--filter` comm
 
 </CustomContent>
 
-### TOML configuration files
+### TOML 配置文件
 
-Table filters in TOML files are specified as [array of strings](https://toml.io/en/v1.0.0-rc.1#section-15). The following lists the example usage.
+TOML 文件中的表过滤规则以 [字符串数组](https://toml.io/en/v1.0.0-rc.1#section-15) 形式指定。以下列出示例用法。
 
 * TiDB Lightning:
 
@@ -81,11 +81,11 @@ Table filters in TOML files are specified as [array of strings](https://toml.io/
 
 </CustomContent>
 
-## Syntax
+## 语法
 
-### Plain table names
+### 普通表名
 
-Each table filter rule consists of a "schema pattern" and a "table pattern", separated by a dot (`.`). Tables whose fully-qualified name matches the rules are accepted.
+每个表过滤规则由“schema 模式”和“表 模式”组成，用点（`.`）分隔。完全限定名匹配规则的表将被接受。
 
 ```
 db1.tbl1
@@ -93,24 +93,24 @@ db2.tbl2
 db3.tbl3
 ```
 
-A plain name must only consist of valid [identifier characters](/schema-object-names.md), such as:
+普通名称必须仅由有效的 [标识符字符](/schema-object-names.md) 组成，例如：
 
-* digits (`0` to `9`)
-* letters (`a` to `z`, `A` to `Z`)
+* 数字（`0` 到 `9`）
+* 字母（`a` 到 `z`，`A` 到 `Z`）
 * `$`
 * `_`
-* non ASCII characters (U+0080 to U+10FFFF)
+* 非 ASCII 字符（U+0080 到 U+10FFFF）
 
-All other ASCII characters are reserved. Some punctuations have special meanings, as described in the next section.
+所有其他 ASCII 字符为保留字符。某些标点符号具有特殊含义，详见下一节。
 
-### Wildcards
+### 通配符
 
-Each part of the name can be a wildcard symbol described in [fnmatch(3)](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_13):
+名称的每一部分可以是 [fnmatch(3)] 中描述的通配符符号：
 
-* `*` — matches zero or more characters
-* `?` — matches one character
-* `[a-z]` — matches one character between "a" and "z" inclusively
-* `[!a-z]` — matches one character except "a" to "z".
+* `*` — 匹配零个或多个字符
+* `?` — 匹配一个字符
+* `[a-z]` — 匹配范围在 “a” 到 “z” 之间的一个字符
+* `[!a-z]` — 匹配除 “a” 到 “z” 之外的一个字符
 
 ```
 db[0-9].tbl[0-9a-f][0-9a-f]
@@ -118,46 +118,46 @@ data.*
 *.backup_*
 ```
 
-"Character" here means a Unicode code point, such as:
+这里的“字符”指的是 Unicode 码点，例如：
 
-* U+00E9 (é) is 1 character.
-* U+0065 U+0301 (é) are 2 characters.
-* U+1F926 U+1F3FF U+200D U+2640 U+FE0F (🤦🏿‍♀️) are 5 characters.
+* U+00E9（é）是 1 个字符。
+* U+0065 U+0301（é）是 2 个字符。
+* U+1F926 U+1F3FF U+200D U+2640 U+FE0F（🤦🏿‍♀️）是 5 个字符。
 
-### File import
+### 文件导入
 
-To import a file as the filter rule, include an `@` at the beginning of the rule to specify the file name. The table filter parser treats each line of the imported file as additional filter rules.
+若要将文件作为过滤规则导入，在规则前加上 `@` 来指定文件名。表过滤解析器会将导入文件的每一行视为额外的过滤规则。
 
-For example, if a file `config/filter.txt` has the following content:
+例如，文件 `config/filter.txt` 内容如下：
 
 ```
 employees.*
 *.WorkOrder
 ```
 
-the following two invocations are equivalent:
+以下两个调用等价：
 
 ```bash
 tiup dumpling -f '@config/filter.txt'
 tiup dumpling -f 'employees.*' -f '*.WorkOrder'
 ```
 
-A filter file cannot further import another file.
+一个过滤文件不能再导入其他文件。
 
-### Comments and blank lines
+### 注释与空行
 
-Inside a filter file, leading and trailing white-spaces of every line are trimmed. Furthermore, blank lines (empty strings) are ignored.
+在过滤文件中，每行的前后空白字符会被裁剪。空白行（空字符串）会被忽略。
 
-A leading `#` marks a comment and is ignored. `#` not at start of line is considered syntax error.
+以 `#` 开头的行为注释行，系统会忽略。`#` 不在行首则视为语法错误。
 
 ```
 # this line is a comment
 db.table   # but this part is not comment and may cause error
 ```
 
-### Exclusion
+### 排除规则
 
-An `!` at the beginning of the rule means the pattern after it is used to exclude tables from being processed. This effectively turns the filter into a block list.
+以 `!` 开头的规则表示其后模式用于排除不处理的表。这实际上将过滤器变成了一个阻止列表。
 
 ```
 *.*
@@ -166,104 +166,104 @@ An `!` at the beginning of the rule means the pattern after it is used to exclud
 !employees.salaries
 ```
 
-### Escape character
+### 转义字符
 
-To turn a special character into an identifier character, precede it with a backslash `\`.
+若要将特殊字符作为标识符字符使用，在其前面加上反斜杠 `\`。
 
 ```
 db\.with\.dots.*
 ```
 
-For simplicity and future compatibility, the following sequences are prohibited:
+为简便起见及未来兼容，禁止使用以下序列：
 
-* `\` at the end of the line after trimming whitespaces (use `[ ]` to match a literal whitespace at the end).
-* `\` followed by any ASCII alphanumeric character (`[0-9a-zA-Z]`). In particular, C-like escape sequences like `\0`, `\r`, `\n` and `\t` currently are meaningless.
+* 行尾的 `\`（在裁剪空白后）——请用 `[ ]` 来匹配字面空白字符
+* `\` 后跟任何 ASCII 字母数字字符（`[0-9a-zA-Z]`）。特别是，类似 C 语言的转义序列如 `\0`、`\r`、`\n` 和 `\t` 目前无意义。
 
-### Quoted identifier
+### 引号标识符
 
-Besides `\`, special characters can also be suppressed by quoting using `"` or `` ` ``.
+除了 `\`，还可以用 `"` 或 `` ` `` 引用特殊字符以抑制其特殊含义。
 
 ```
 "db.with.dots"."tbl\1"
 `db.with.dots`.`tbl\2`
 ```
 
-The quotation mark can be included within an identifier by doubling itself.
+引号可以在标识符中通过重复自身来包含。
 
 ```
 "foo""bar".`foo``bar`
-# equivalent to:
+# 等价于：
 foo\"bar.foo\`bar
 ```
 
-Quoted identifiers cannot span multiple lines.
+引号标识符不能跨多行。
 
-It is invalid to partially quote an identifier:
+部分引号的标识符是无效的，例如：
 
 ```
 "this is "invalid*.*
 ```
 
-### Regular expression
+### 正则表达式
 
-In case very complex rules are needed, each pattern can be written as a regular expression delimited with `/`:
+如果需要非常复杂的规则，可以用 `/` 包裹的正则表达式定义每个模式：
 
 ```
 /^db\d{2,}$/./^tbl\d{2,}$/
 ```
 
-These regular expressions use the [Go dialect](https://pkg.go.dev/regexp/syntax?tab=doc). The pattern is matched if the identifier contains a substring matching the regular expression. For instance, `/b/` matches `db01`.
+这些正则表达式使用 [Go 方言](https://pkg.go.dev/regexp/syntax?tab=doc)。如果标识符中包含匹配正则表达式的子串，则匹配。例如，`/b/` 会匹配 `db01`。
 
 > **Note:**
 >
-> Every `/` in the regular expression must be escaped as `\/`, including inside `[…]`. You cannot place an unescaped `/` between `\Q…\E`.
+> 每个 `/` 在正则表达式中都必须用 `\/` 转义，包括在 `[ ]` 内。不能在 `\Q…\E` 之间放置未转义的 `/`。
 
-## Multiple rules
+## 多个规则
 
 <CustomContent platform="tidb-cloud">
 
 > **Note:**
 >
-> This section is not applicable to TiDB Cloud. Currently, TiDB Cloud only supports one table filter rule.
+> 这部分内容不适用于 TiDB Cloud。目前，TiDB Cloud 仅支持一个表过滤规则。
 
 </CustomContent>
 
-When a table name matches none of the rules in the filter list, the default behavior is to ignore such unmatched tables.
+当表名未匹配过滤列表中的任何规则时，默认行为是忽略这些未匹配的表。
 
-To build a block list, an explicit `*.*` must be used as the first rule, otherwise all tables will be excluded.
+若要建立阻止列表，必须在第一个规则中明确使用 `*.*`，否则所有表都将被排除。
 
 ```bash
-# every table will be filtered out
+# 所有表都将被过滤
 tiup dumpling -f '!*.Password'
 
-# only the "Password" table is filtered out, the rest are included.
+# 仅过滤掉 “Password” 表，其余都包含
 tiup dumpling -f '*.*' -f '!*.Password'
 ```
 
-In a filter list, if a table name matches multiple patterns, the last match decides the outcome. For instance:
+在过滤列表中，如果一个表名匹配多个模式，最后匹配的规则决定结果。例如：
 
 ```
-# rule 1
+# 规则 1
 employees.*
-# rule 2
+# 规则 2
 !*.dep*
-# rule 3
+# 规则 3
 *.departments
 ```
 
-The filtered outcome is as follows:
+过滤结果如下：
 
-| Table name            | Rule 1 | Rule 2 | Rule 3 | Outcome          |
+| 表名                  | 规则 1 | 规则 2 | 规则 3 | 结果             |
 |-----------------------|--------|--------|--------|------------------|
-| irrelevant.table      |        |        |        | Default (reject) |
-| employees.employees   | ✓      |        |        | Rule 1 (accept)  |
-| employees.dept_emp    | ✓      | ✓      |        | Rule 2 (reject)  |
-| employees.departments | ✓      | ✓      | ✓      | Rule 3 (accept)  |
-| else.departments      |        | ✓      | ✓      | Rule 3 (accept)  |
+| irrelevant.table      |        |        |        | 默认（拒绝）     |
+| employees.employees   | ✓      |        |        | 规则 1（接受）   |
+| employees.dept_emp    | ✓      | ✓      |        | 规则 2（拒绝）   |
+| employees.departments | ✓      | ✓      | ✓      | 规则 3（接受）   |
+| else.departments      |        | ✓      | ✓      | 规则 3（接受）   |
 
 > **Note:**
 >
-> In TiDB tools, the system schemas are always excluded in the default configuration. The system schemas are:
+> 在 TiDB 工具中，系统 schema 默认不包含在过滤中。系统 schema 有：
 >
 > * `INFORMATION_SCHEMA`
 > * `PERFORMANCE_SCHEMA`

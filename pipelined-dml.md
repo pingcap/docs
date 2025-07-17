@@ -1,74 +1,74 @@
 ---
 title: Pipelined DML
-summary: Introduce the use cases, methods, limitations, and FAQs of Pipelined DML. Pipelined DML enhances TiDB's batch processing capabilities, allowing transaction sizes to bypass TiDB's memory limits.
+summary: 介绍 Pipelined DML 的使用场景、方法、限制以及常见问题。Pipelined DML 提升了 TiDB 的批量处理能力，允许事务大小绕过 TiDB 的内存限制。
 ---
 
 # Pipelined DML
 
 > **Warning:**
 >
-> Pipelined DML is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> Pipelined DML 是一个实验性功能。不建议在生产环境中使用此功能。该功能可能在未通知的情况下被更改或移除。如果你发现了 bug，可以在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues)。
 
-This document introduces the use cases, methods, limitations, and common issues related to Pipelined DML.
+本文档介绍了与 Pipelined DML 相关的使用场景、方法、限制以及常见问题。
 
-## Overview
+## 概述
 
-Pipelined DML is an experimental feature introduced in TiDB v8.0.0 to improve the performance of large-scale data write operations. When this feature is enabled, TiDB streams data directly to the storage layer during DML operations, instead of buffering it entirely in memory. This pipeline-like approach simultaneously reads data (input) and writes it to the storage layer (output), effectively resolving common challenges in large-scale DML operations as follows:
+Pipelined DML 是在 TiDB v8.0.0 中引入的一个实验性功能，旨在提升大规模数据写入操作的性能。当启用此功能时，TiDB 在执行 DML 操作时会将数据直接流式传输到存储层，而不是全部缓存在内存中。这种类似流水线的方式在读取数据（输入）和写入存储层（输出）时同时进行，有效解决了以下常见的在大规模 DML 操作中遇到的问题：
 
-- Memory limits: traditional DML operations might encounter out-of-memory (OOM) errors when handling large datasets.
-- Performance bottlenecks: large transactions are often inefficient and is prone to causing workload fluctuations.
+- 内存限制：传统的 DML 操作在处理大数据集时可能会遇到内存溢出（OOM）错误。
+- 性能瓶颈：大事务通常效率较低，容易引起工作负载波动。
 
-With pipelined DML enabled, you can achieve the following:
+启用 pipelined DML 后，你可以实现：
 
-- Perform large-scale data operations without being constrained by TiDB memory limits.
-- Maintain smoother workloads and lower operation latency.
-- Keep transaction memory usage predictable, typically within 1 GiB.
+- 执行大规模数据操作而不受 TiDB 内存限制的约束。
+- 保持工作负载的平稳，降低操作延迟。
+- 使事务的内存使用保持可控，通常在 1 GiB 以内。
 
-It is recommended to enable Pipelined DML in the following scenarios:
+建议在以下场景中启用 Pipelined DML：
 
-- Processing data writes involving millions of rows or more.
-- Encountering memory insufficient errors during DML operations.
-- Experiencing noticeable workload fluctuations during large-scale data operations.
+- 处理涉及数百万行或更多的数据写入。
+- 在 DML 操作中遇到内存不足的错误。
+- 在大规模数据操作中出现明显的工作负载波动。
 
-Note that although Pipelined DML significantly reduces memory usage during transaction processing, you still need to configure a [reasonable memory threshold](/system-variables.md#tidb_mem_quota_query) (at least 2 GiB recommended) to ensure other components (such as executors) function properly during large-scale data operations.
+注意，虽然 Pipelined DML 在事务处理过程中显著降低了内存使用，但你仍需配置一个[合理的内存阈值](/system-variables.md#tidb_mem_quota_query)（建议至少 2 GiB），以确保其他组件（如执行器）在大规模数据操作期间正常运行。
 
-## Limitations
+## 限制
 
-Currently, Pipelined DML has the following limitations:
+目前，Pipelined DML 存在以下限制：
 
-- Pipelined DML is currently incompatible with TiCDC, TiFlash, or BR. Avoid using Pipelined DML on tables associated with these components, as it might lead to issues such as blocking or OOM in these components.
-- Pipelined DML is not suitable for scenarios with write conflicts, because it might lead to significant performance degradation or operation failures that require rollback.
-- Make sure that the [metadata lock](/metadata-lock.md) is enabled during Pipelined DML operations.
-- When executing DML statements with Pipelined DML enabled, TiDB checks the following conditions. If any condition is not met, TiDB falls back to standard DML execution and generates a warning:
-    - Only [autocommit](/transaction-overview.md#autocommit) statements are supported.
-    - Only `INSERT`, `UPDATE`, `REPLACE`, and `DELETE` statements are supported.
-    - Target tables must not include [temporary tables](/temporary-tables.md) or [cached tables](/cached-tables.md).
-    - When [foreign key constraints](/foreign-key.md) are enabled (`foreign_key_checks = ON`), target tables must not include foreign key relationships.
-- When executing `INSERT IGNORE ... ON DUPLICATE KEY UPDATE` statements, conflicting updates might result in `Duplicate entry` errors.
+- Pipelined DML 目前与 TiCDC、TiFlash 或 BR 不兼容。避免在与这些组件相关的表上使用 Pipelined DML，否则可能导致这些组件出现阻塞或 OOM 等问题。
+- Pipelined DML 不适用于存在写冲突的场景，因为可能导致性能大幅下降或操作失败需要回滚。
+- 在进行 Pipelined DML 操作时，确保启用了[元数据锁](/metadata-lock.md)。
+- 在启用 Pipelined DML 执行 DML 语句时，TiDB 会检查以下条件。如果任何条件不满足，TiDB 会回退到标准 DML 执行，并生成警告：
+    - 仅支持 [autocommit](/transaction-overview.md#autocommit) 语句。
+    - 仅支持 `INSERT`、`UPDATE`、`REPLACE` 和 `DELETE` 语句。
+    - 目标表不能包含 [临时表](/temporary-tables.md) 或 [缓存表](/cached-tables.md)。
+    - 当启用 [外键约束](/foreign-key.md)（`foreign_key_checks = ON`）时，目标表不能包含外键关系。
+- 执行 `INSERT IGNORE ... ON DUPLICATE KEY UPDATE` 语句时，冲突的更新可能导致 `Duplicate entry` 错误。
 
-## Usage
+## 使用方法
 
-This section describes how to enable Pipelined DML and verify whether it takes effect.
+本节介绍如何启用 Pipelined DML 以及如何验证其是否生效。
 
-### Enable Pipelined DML
+### 启用 Pipelined DML
 
-You can enable Pipelined DML in one of the following methods:
+你可以通过以下方法之一启用 Pipelined DML：
 
-- To enable Pipelined DML for the current session, set the [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) variable to `"bulk"`:
+- 为当前会话启用 Pipelined DML，将 [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) 变量设置为 `"bulk"`：
 
     ```sql
     SET tidb_dml_type = "bulk";
     ```
 
-- To enable Pipelined DML for a specific statement, add the [`SET_VAR`](/optimizer-hints.md#set_varvar_namevar_value) hint in the statement.
+- 在特定语句中启用 Pipelined DML，添加 [`SET_VAR`](/optimizer-hints.md#set_varvar_namevar_value) 提示。
 
-    - Data archiving example:
+    - 数据归档示例：
 
         ```sql
         INSERT /*+ SET_VAR(tidb_dml_type='bulk') */ INTO target_table SELECT * FROM source_table;
         ```
 
-    - Bulk data update example:
+    - 批量数据更新示例：
 
         ```sql
         UPDATE /*+ SET_VAR(tidb_dml_type='bulk') */ products
@@ -76,87 +76,87 @@ You can enable Pipelined DML in one of the following methods:
         WHERE category = 'electronics';
         ```
 
-    - Bulk deletion example:
+    - 批量删除示例：
 
         ```sql
         DELETE /*+ SET_VAR(tidb_dml_type='bulk') */ FROM logs WHERE log_time < '2023-01-01';
         ```
 
-### Verify Pipelined DML
+### 验证 Pipelined DML
 
-After executing a DML statement, you can verify whether Pipelined DML is used for the statement execution by checking the [`tidb_last_txn_info`](/system-variables.md#tidb_last_txn_info-new-in-v409) variable:
+在执行完 DML 语句后，可以通过检查 [`tidb_last_txn_info`](/system-variables.md#tidb_last_txn_info-new-in-v409) 变量，验证是否启用了 Pipelined DML：
 
 ```sql
 SELECT @@tidb_last_txn_info;
 ```
 
-If the `pipelined` field in the output is `true`, it indicates that Pipelined DML is successfully used.
+如果输出中的 `pipelined` 字段为 `true`，表示成功使用 Pipelined DML。
 
-## Best practices
+## 最佳实践
 
-- Increase the value of [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) slightly to ensure that memory usage for components such as executors does not exceed the limit. A value of at least 2 GiB is recommended. For environments with sufficient TiDB memory, you can increase this value further.
-- In scenarios where data is inserted into new tables, the performance of Pipelined DML might be affected by hotspots. To achieve optimal performance, it is recommended to address hotspots in advance. For more information, see [Troubleshoot Hotspot Issues](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues).
+- 略微增加 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) 的值，以确保执行器等组件的内存使用不会超过限制。建议至少设置为 2 GiB。对于内存充足的环境，可以进一步提高此值。
+- 在向新表插入数据的场景中，Pipelined DML 的性能可能会受到热点的影响。为了获得最佳性能，建议提前解决热点问题。更多信息请参见 [Troubleshoot Hotspot Issues](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues)。
 
-## Related configurations
+## 相关配置
 
 <CustomContent platform="tidb">
 
-- The [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) system variable controls whether Pipelined DML is enabled at the session level.
-- When [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) is set to `"bulk"`, the [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600) configuration item behaves as if it is set to `false`.
-- Transactions executed using Pipelined DML are not subject to the size limit specified by the TiDB configuration item [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit).
-- For large transactions executed using Pipelined DML, transaction duration might increase. In such cases, the maximum TTL for the transaction lock is the larger value of [`max-txn-ttl`](/tidb-configuration-file.md#max-txn-ttl) or 24 hours.
-- If the execution time of a transaction exceeds the value set by [`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610), garbage collection (GC) might force the transaction to roll back, causing it to fail.
+- [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) 系统变量控制是否在会话层启用 Pipelined DML。
+- 当 [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) 设置为 `"bulk"` 时， [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600) 配置项表现为被设置为 `false`。
+- 使用 Pipelined DML 执行的事务不受 TiDB 配置项 [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) 指定的大小限制。
+- 对于使用 Pipelined DML 执行的大事务，事务持续时间可能会增加。在这种情况下，事务锁的最大 TTL 为 [`max-txn-ttl`](/tidb-configuration-file.md#max-txn-ttl) 和 24 小时中的较大值。
+- 如果事务的执行时间超过 [`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610) 设置的值，垃圾回收（GC）可能会强制回滚事务，导致事务失败。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- The [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) system variable controls whether Pipelined DML is enabled at the session level.
-- When [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) is set to `"bulk"`, the [`pessimistic-auto-commit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#pessimistic-auto-commit-new-in-v600) configuration item behaves as if it is set to `false`.
-- Transactions executed using Pipelined DML are not subject to the size limit specified by the TiDB configuration item [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit).
-- For large transactions executed using Pipelined DML, transaction duration might increase. In such cases, the maximum TTL for the transaction lock is the larger value of [`max-txn-ttl`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#max-txn-ttl) or 24 hours.
-- If the execution time of a transaction exceeds the value set by [`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610), garbage collection (GC) might force the transaction to roll back, causing it to fail.
+- [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) 系统变量控制是否在会话层启用 Pipelined DML。
+- 当 [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) 设置为 `"bulk"` 时， [`pessimistic-auto-commit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#pessimistic-auto-commit-new-in-v600) 配置项表现为被设置为 `false`。
+- 使用 Pipelined DML 执行的事务不受 TiDB 配置项 [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) 指定的大小限制。
+- 对于使用 Pipelined DML 执行的大事务，事务持续时间可能会增加。在这种情况下，事务锁的最大 TTL 为 [`max-txn-ttl`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#max-txn-ttl) 和 24 小时中的较大值。
+- 如果事务的执行时间超过 [`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610) 设置的值，垃圾回收（GC）可能会强制回滚事务，导致事务失败。
 
 </CustomContent>
 
-## Monitor Pipelined DML
+## 监控 Pipelined DML
 
-You can monitor the execution of Pipelined DML using the following methods:
+你可以通过以下方法监控 Pipelined DML 的执行情况：
 
-- Check the [`tidb_last_txn_info`](/system-variables.md#tidb_last_txn_info-new-in-v409) system variable to get information about the last transaction executed in the current session, including whether Pipelined DML was used.
-- Look for lines containing `"[pipelined dml]"` in TiDB logs to understand the execution process and progress of Pipelined DML, including the current stage and the amount of data written.
-- View the `affected rows` field in the [`expensive query`](https://docs.pingcap.com/tidb/stable/identify-expensive-queries#expensive-query-log-example) logs to track the progress of long-running statements.
-- Query the [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md) table to view transaction execution progress. Pipelined DML is typically used for large transactions, so you can use this table to monitor their execution progress.
+- 查看 [`tidb_last_txn_info`](/system-variables.md#tidb_last_txn_info-new-in-v409) 系统变量，获取当前会话中最后一次事务的相关信息，包括是否使用了 Pipelined DML。
+- 在 TiDB 日志中查找包含 `"[pipelined dml]"` 的行，以了解 Pipelined DML 的执行过程和进展，包括当前阶段和写入的数据量。
+- 查看 [`expensive query`](https://docs.pingcap.com/tidb/stable/identify-expensive-queries#expensive-query-log-example) 日志中的 `affected rows` 字段，以跟踪长时间运行语句的进展。
+- 查询 [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md) 表，查看事务执行进度。Pipelined DML 通常用于大事务，可以通过此表监控其执行情况。
 
-## FAQs
+## 常见问题解答
 
-### Why wasn't my query executed using Pipelined DML?
+### 为什么我的查询没有使用 Pipelined DML 执行？
 
-When TiDB rejects to execute a statement using Pipelined DML, it generates a warning message accordingly. You can execute `SHOW WARNINGS;` to check the warning and identify the cause.
+当 TiDB 拒绝使用 Pipelined DML 执行语句时，会生成相应的警告信息。你可以执行 `SHOW WARNINGS;` 来查看警告内容并确认原因。
 
-Common reasons:
+常见原因：
 
-- The DML statement is not autocommitted.
-- The statement involves unsupported table types, such as [temporary tables](/temporary-tables.md) or [cached tables](/cached-tables.md).
-- The operation involves foreign keys, and foreign key checks are enabled.
+- DML 语句未自动提交。
+- 语句涉及不支持的表类型，例如 [临时表](/temporary-tables.md) 或 [缓存表](/cached-tables.md)。
+- 操作涉及外键，并且启用了外键检查。
 
-### Does Pipelined DML affect the isolation level of transactions?
+### Pipelined DML 会影响事务的隔离级别吗？
 
-No. Pipelined DML only changes the data-writing mechanism during transactions and does not affect isolation guarantees of TiDB transactions.
+不会。Pipelined DML 只会改变事务中的数据写入机制，不会影响 TiDB 事务的隔离保证。
 
-### Why do I still encounter out-of-memory (OOM) errors after enabling Pipelined DML?
+### 为什么启用 Pipelined DML 后仍然遇到内存溢出（OOM）错误？
 
-Even with Pipelined DML enabled, you might still encounter query termination caused by memory limit issues:
+即使启用了 Pipelined DML，你仍可能遇到因内存限制导致的查询终止：
 
 ```
 The query has been canceled due to exceeding the memory limit allowed for a single SQL query. Please try to narrow the query scope or increase the tidb_mem_quota_query limit, and then try again.
 ```
 
-This error occurs because Pipelined DML only controls the memory usage by data during transaction execution. However, the total memory consumed during statement execution also includes memory used by other components, such as executors. If the total memory required exceeds the TiDB memory limit, out-of-memory (OOM) errors might still occur.
+此错误发生的原因是 Pipelined DML 仅控制事务执行期间数据的内存使用。而在语句执行过程中，其他组件（如执行器）也会占用内存。如果总的内存需求超过了 TiDB 的内存限制，就可能出现 OOM 错误。
 
-In most cases, you can increase the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) to a higher value to resolve this issue. A value of at least 2 GiB is recommended. For SQL statements with complex operators or involving large datasets, you might need to increase this value further.
+在大多数情况下，你可以通过将系统变量 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) 设置为更高的值来解决此问题。建议至少设置为 2 GiB。对于包含复杂操作符或涉及大数据集的 SQL 语句，可能需要进一步增加此值。
 
-## Learn more
+## 了解更多
 
 <CustomContent platform="tidb">
 

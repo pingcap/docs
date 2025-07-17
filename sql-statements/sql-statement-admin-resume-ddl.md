@@ -1,15 +1,15 @@
 ---
 title: ADMIN RESUME DDL JOBS
-summary: An overview of the usage of ADMIN RESUME DDL for the TiDB database.
+summary: 关于 TiDB 数据库中 ADMIN RESUME DDL 的使用概述。
 ---
 
 # ADMIN RESUME DDL JOBS
 
-`ADMIN RESUME DDL` allows you to resume a paused DDL job. You can find the `job_id` by running [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md).
+`ADMIN RESUME DDL` 允许你恢复已暂停的 DDL 任务。你可以通过运行 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md) 来查找 `job_id`。
 
-You can use this statement to resume a paused DDL job. After the resume is completed, the SQL statement that executes the DDL job continues to show as being executed. If you try to resume a DDL job that has already been completed, you will see the `DDL Job:90 not found` error in the `RESULT` column, which indicates that the job has been removed from the DDL waiting queue.
+你可以使用此语句来恢复已暂停的 DDL 任务。恢复完成后，执行该 DDL 任务的 SQL 语句仍会显示为正在执行状态。如果你尝试恢复已完成的 DDL 任务，在 `RESULT` 列中会显示 `DDL Job:90 not found` 错误，表示该任务已从 DDL 等待队列中被移除。
 
-## Synopsis
+## 语法概要
 
 ```ebnf+diagram
 AdminResumeDDLStmt ::=
@@ -19,42 +19,42 @@ NumList ::=
     Int64Num ( ',' Int64Num )*
 ```
 
-## Examples
+## 示例
 
-`ADMIN RESUME DDL JOBS` resumes the currently paused DDL job and returns whether the job is resumed successfully.
+`ADMIN RESUME DDL JOBS` 会恢复当前暂停的 DDL 任务，并返回任务是否成功恢复。
 
 ```sql
 ADMIN RESUME DDL JOBS job_id [, job_id] ...;
 ```
 
-If the resume fails, the specific reason for the failure is displayed.
+如果恢复失败，会显示具体的失败原因。
 
 <CustomContent platform="tidb">
 
-> **Note:**
+> **注意：**
 >
-> + During the cluster upgrade, the ongoing DDL jobs are paused, and the DDL jobs initiated during the upgrade are also paused. After the upgrade, all paused DDL jobs will resume. The pause and resume operations during the upgrade are taken automatically. For details, see [TiDB Smooth Upgrade](/smooth-upgrade-tidb.md).
-> + This statement can resume multiple DDL jobs. You can use the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md) statement to obtain the `job_id` of a DDL job.
-> + A DDL job in other status (other than `paused`) cannot be resumed and the resume operation will fail.
-> + If you try to resume a job more than once, TiDB reports an error `Error Number: 8261`.
+> + 在集群升级期间，正在进行的 DDL 任务会被暂停，升级过程中发起的 DDL 任务也会暂停。升级完成后，所有暂停的 DDL 任务将会恢复。升级期间的暂停和恢复操作由系统自动处理。详情请参见 [TiDB 平滑升级](/smooth-upgrade-tidb.md)。
+> + 此语句可以恢复多个 DDL 任务。你可以使用 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md) 来获取 DDL 任务的 `job_id`。
+> + 其他状态（非 `paused`）的 DDL 任务无法恢复，恢复操作会失败。
+> + 如果你尝试多次恢复同一任务，TiDB 会报告错误 `Error Number: 8261`。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注意：**
 >
-> + During the cluster upgrade, the ongoing DDL jobs are paused, and the DDL jobs initiated during the upgrade are also paused. After the upgrade, all paused DDL jobs will resume. The pause and resume operations during the upgrade are taken automatically. For details, see [TiDB Smooth Upgrade](https://docs.pingcap.com/tidb/stable/smooth-upgrade-tidb).
-> + This statement can resume multiple DDL jobs. You can use the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md) statement to obtain the `job_id` of a DDL job.
-> + A DDL job in other status (other than `paused`) cannot be resumed and the resume operation will fail.
-> + If you try to resume a job more than once, TiDB reports an error `Error Number: 8261`.
+> + 在集群升级期间，正在进行的 DDL 任务会被暂停，升级过程中发起的 DDL 任务也会暂停。升级完成后，所有暂停的 DDL 任务将会恢复。升级期间的暂停和恢复操作由系统自动处理。详情请参见 [TiDB 平滑升级](https://docs.pingcap.com/tidb/stable/smooth-upgrade-tidb)。
+> + 此语句可以恢复多个 DDL 任务。你可以使用 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md) 来获取 DDL 任务的 `job_id`。
+> + 其他状态（非 `paused`）的 DDL 任务无法恢复，恢复操作会失败。
+> + 如果你尝试多次恢复同一任务，TiDB 会报告错误 `Error Number: 8261`。
 
 </CustomContent>
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension to MySQL syntax.
+此语句是 TiDB 对 MySQL 语法的扩展。
 
-## See also
+## 相关链接
 
 * [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
 * [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)

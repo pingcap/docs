@@ -1,19 +1,19 @@
 ---
-title: URI Formats of External Storage Services
-summary: Learn about the storage URI formats of external storage services, including Amazon S3, GCS, and Azure Blob Storage.
+title: 外部存储服务的 URI 格式
+summary: 了解外部存储服务的存储 URI 格式，包括 Amazon S3、GCS 和 Azure Blob Storage。
 ---
 
-## URI Formats of External Storage Services
+## 外部存储服务的 URI 格式
 
-This document describes the URI formats of external storage services, including Amazon S3, GCS, and Azure Blob Storage.
+本文档描述了外部存储服务的 URI 格式，包括 Amazon S3、GCS 和 Azure Blob Storage。
 
-The basic format of the URI is as follows:
+URI 的基本格式如下：
 
 ```shell
 [scheme]://[host]/[path]?[parameters]
 ```
 
-## Amazon S3 URI format
+## Amazon S3 URI 格式
 
 <CustomContent platform="tidb">
 
@@ -21,26 +21,26 @@ The basic format of the URI is as follows:
 - `host`: `bucket name`
 - `parameters`:
 
-    - `access-key`: Specifies the access key.
-    - `secret-access-key`: Specifies the secret access key.
-    - `session-token`: Specifies the temporary session token. BR supports this parameter starting from v7.6.0.
-    - `use-accelerate-endpoint`: Specifies whether to use the accelerate endpoint on Amazon S3 (defaults to `false`).
-    - `endpoint`: Specifies the URL of custom endpoint for S3-compatible services (for example, `<https://s3.example.com/>`).
-    - `force-path-style`: Use path style access rather than virtual hosted style access (defaults to `true`).
-    - `storage-class`: Specifies the storage class of the uploaded objects (for example, `STANDARD` or `STANDARD_IA`).
-    - `sse`: Specifies the server-side encryption algorithm used to encrypt the uploaded objects (value options: empty, `AES256`, or `aws:kms`).
-    - `sse-kms-key-id`: Specifies the KMS ID if `sse` is set to `aws:kms`.
-    - `acl`: Specifies the canned ACL of the uploaded objects (for example, `private` or `authenticated-read`).
-    - `role-arn`: When you need to access Amazon S3 data from a third party using a specified [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html), you can specify the corresponding [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the IAM role with the `role-arn` URL query parameter, such as `arn:aws:iam::888888888888:role/my-role`. For more information about using an IAM role to access Amazon S3 data from a third party, see [AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html). BR supports this parameter starting from v7.6.0.
-    - `external-id`: When you access Amazon S3 data from a third party, you might need to specify a correct [external ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html) to assume [the IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html). In this case, you can use this `external-id` URL query parameter to specify the external ID and make sure that you can assume the IAM role. An external ID is an arbitrary string provided by the third party together with the IAM role ARN to access the Amazon S3 data. Providing an external ID is optional when assuming an IAM role, which means if the third party does not require an external ID for the IAM role, you can assume the IAM role and access the corresponding Amazon S3 data without providing this parameter.
+    - `access-key`: 指定访问密钥。
+    - `secret-access-key`: 指定秘密访问密钥。
+    - `session-token`: 指定临时会话令牌。BR 从 v7.6.0 版本开始支持此参数。
+    - `use-accelerate-endpoint`: 指定是否使用 Amazon S3 的加速终端节点（默认为 `false`）。
+    - `endpoint`: 指定 S3 兼容服务的自定义端点 URL（例如 `<https://s3.example.com/>`）。
+    - `force-path-style`: 使用路径样式访问而非虚拟托管样式（默认为 `true`）。
+    - `storage-class`: 指定上传对象的存储类别（例如 `STANDARD` 或 `STANDARD_IA`）。
+    - `sse`: 指定用于加密上传对象的服务器端加密算法（取值选项：空、`AES256` 或 `aws:kms`）。
+    - `sse-kms-key-id`: 如果 `sse` 设置为 `aws:kms`，则指定 KMS ID。
+    - `acl`: 指定上传对象的预定义访问控制列表（例如 `private` 或 `authenticated-read`）。
+    - `role-arn`: 当你需要通过指定的 [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) 从第三方访问 Amazon S3 数据时，可以在 `role-arn` URL 查询参数中指定对应的 [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)，例如 `arn:aws:iam::888888888888:role/my-role`。关于使用 IAM role 从第三方访问 Amazon S3 数据的更多信息，请参见 [AWS 文档](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html)。BR 从 v7.6.0 版本开始支持此参数。
+    - `external-id`: 当你从第三方访问 Amazon S3 数据时，可能需要指定正确的 [external ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html) 来假设 [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)。在这种情况下，可以使用此 `external-id` URL 查询参数来指定 external ID，并确保你可以假设该 IAM role。external ID 是第三方提供的一个任意字符串，连同 IAM role ARN 一起，用于访问 Amazon S3 数据。假设 IAM role 时提供 external ID 是可选的，也就是说，如果第三方不要求 external ID，你可以在不提供此参数的情况下假设 IAM role 并访问相应的 Amazon S3 数据。
 
-The following is an example of an Amazon S3 URI for TiDB Lightning and BR. In this example, you need to specify a specific file path `testfolder`.
+以下是 TiDB Lightning 和 BR 使用的 Amazon S3 URI 示例。在此示例中，你需要指定特定的文件路径 `testfolder`。
 
 ```shell
 s3://external/testfolder?access-key=${access-key}&secret-access-key=${secret-access-key}
 ```
 
-The following is an example of an Amazon S3 URI for TiCDC `sink-uri`.
+以下是 TiCDC `sink-uri` 的 Amazon S3 URI 示例。
 
 ```shell
 tiup cdc:v7.5.0 cli changefeed create \
@@ -58,27 +58,27 @@ tiup cdc:v7.5.0 cli changefeed create \
 - `host`: `bucket name`
 - `parameters`:
 
-    - `access-key`: Specifies the access key.
-    - `secret-access-key`: Specifies the secret access key.
-    - `session-token`: Specifies the temporary session token.
-    - `use-accelerate-endpoint`: Specifies whether to use the accelerate endpoint on Amazon S3 (defaults to `false`).
-    - `endpoint`: Specifies the URL of custom endpoint for S3-compatible services (for example, `<https://s3.example.com/>`).
-    - `force-path-style`: Use path style access rather than virtual hosted style access (defaults to `true`).
-    - `storage-class`: Specifies the storage class of the uploaded objects (for example, `STANDARD` or `STANDARD_IA`).
-    - `sse`: Specifies the server-side encryption algorithm used to encrypt the uploaded objects (value options: empty, `AES256`, or `aws:kms`).
-    - `sse-kms-key-id`: Specifies the KMS ID if `sse` is set to `aws:kms`.
-    - `acl`: Specifies the canned ACL of the uploaded objects (for example, `private` or `authenticated-read`).
-    - `role-arn`: To allow TiDB Cloud to access Amazon S3 data using a specific [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html), provide the role's [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the `role-arn` URL query parameter. For example: `arn:aws:iam::888888888888:role/my-role`. 
+    - `access-key`: 指定访问密钥。
+    - `secret-access-key`: 指定秘密访问密钥。
+    - `session-token`: 指定临时会话令牌。
+    - `use-accelerate-endpoint`: 指定是否使用 Amazon S3 的加速终端节点（默认为 `false`）。
+    - `endpoint`: 指定 S3 兼容服务的自定义端点 URL（例如 `<https://s3.example.com/>`）。
+    - `force-path-style`: 使用路径样式访问而非虚拟托管样式（默认为 `true`）。
+    - `storage-class`: 指定上传对象的存储类别（例如 `STANDARD` 或 `STANDARD_IA`）。
+    - `sse`: 指定用于加密上传对象的服务器端加密算法（取值选项：空、`AES256` 或 `aws:kms`）。
+    - `sse-kms-key-id`: 如果 `sse` 设置为 `aws:kms`，则指定 KMS ID。
+    - `acl`: 指定上传对象的预定义访问控制列表（例如 `private` 或 `authenticated-read`）。
+    - `role-arn`: 为了让 TiDB Cloud 使用特定的 [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) 访问 Amazon S3 数据，可以在 `role-arn` URL 查询参数中提供角色的 [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)。例如：`arn:aws:iam::888888888888:role/my-role`。
 
         > **Note:**
         >
-        > - To automatically create an IAM role, navigate to the **Import Data from Amazon S3** page of your cluster in the [TiDB Cloud console](https://tidbcloud.com/), fill in the **Folder URI** field, click **Click here to create new one with AWS CloudFormation** under the **Role ARN** field, and then follow the on-screen instructions in the **Add New Role ARN** dialog.
-        > - If you have any trouble creating the IAM role using AWS CloudFormation, click **click Having trouble? Create Role ARN manually** in the **Add New Role ARN** dialog to get the TiDB Cloud Account ID and TiDB Cloud External ID, and then follow the steps in [Configure Amazon S3 access using a Role ARN](https://docs.pingcap.com/tidbcloud/dedicated-external-storage#configure-amazon-s3-access-using-a-role-arn) to create the role manually. When configuring the IAM role, make sure to enter the TiDB Cloud account ID in the **Account ID** field and select **Require external ID** to protect against [confused deputy attacks](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html).
-        > - To enhance security, you can reduce the valid duration of the IAM role by configuring a shorter **Max session duration**. For more information, see [Update the maximum session duration for a role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_update-role-settings.html#id_roles_update-session-duration) in AWS documentation.
+        > - 若要自动创建 IAM role，可以在 [TiDB Cloud 控制台](https://tidbcloud.com/) 中的集群“导入数据自 Amazon S3”页面，填写 **Folder URI** 字段，在 **Role ARN** 字段下点击 **Click here to create new one with AWS CloudFormation**，然后按照弹出的 **Add New Role ARN** 对话框中的指示操作。
+        > - 如果在使用 AWS CloudFormation 创建 IAM role 时遇到困难，可以在 **Add New Role ARN** 对话框中点击 **click Having trouble? Create Role ARN manually**，获取 TiDB Cloud 账户 ID 和 TiDB Cloud External ID，然后按照 [Configure Amazon S3 access using a Role ARN](https://docs.pingcap.com/tidbcloud/dedicated-external-storage#configure-amazon-s3-access-using-a-role-arn) 中的步骤手动创建角色。在配置 IAM role 时，确保在 **Account ID** 字段中输入 TiDB Cloud 账户 ID，并选择 **Require external ID**，以防止 [confused deputy attacks](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html)。
+        > - 为了增强安全性，可以通过配置较短的 **Max session duration** 来缩短 IAM role 的有效期。更多信息请参见 AWS 文档中的 [Update the maximum session duration for a role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_update-role-settings.html#id_roles_update-session-duration)。
 
-    - `external-id`: Specifies the TiDB Cloud External ID, which is required for TiDB Cloud to access Amazon S3 data. You can obtain this ID from the **Add New Role ARN** dialog in the [TiDB Cloud console](https://tidbcloud.com/). For more information, see [Configure Amazon S3 access using a Role ARN](https://docs.pingcap.com/tidbcloud/dedicated-external-storage#configure-amazon-s3-access-using-a-role-arn).
+    - `external-id`: 指定 TiDB Cloud External ID，TiDB Cloud 访问 Amazon S3 数据时需要此 ID。你可以在 [TiDB Cloud 控制台](https://tidbcloud.com/) 的 **Add New Role ARN** 对话框中获取此 ID。更多信息请参见 [Configure Amazon S3 access using a Role ARN](https://docs.pingcap.com/tidbcloud/dedicated-external-storage#configure-amazon-s3-access-using-a-role-arn)。
 
-The following is an example of an Amazon S3 URI for [`BACKUP`](/sql-statements/sql-statement-backup.md) and [`RESTORE`](/sql-statements/sql-statement-restore.md). This example uses the file path `testfolder`.
+以下是 [`BACKUP`](/sql-statements/sql-statement-backup.md) 和 [`RESTORE`](/sql-statements/sql-statement-restore.md) 使用的 Amazon S3 URI 示例。此示例使用文件路径 `testfolder`。
 
 ```shell
 s3://external/testfolder?access-key=${access-key}&secret-access-key=${secret-access-key}
@@ -86,19 +86,19 @@ s3://external/testfolder?access-key=${access-key}&secret-access-key=${secret-acc
 
 </CustomContent>
 
-## GCS URI format
+## GCS URI 格式
 
-- `scheme`: `gcs` or `gs`
+- `scheme`: `gcs` 或 `gs`
 - `host`: `bucket name`
 - `parameters`:
 
-    - `credentials-file`: Specifies the path to the credentials JSON file on the migration tool node.
-    - `storage-class`: Specifies the storage class of the uploaded objects (for example, `STANDARD` or `COLDLINE`)
-    - `predefined-acl`: Specifies the predefined ACL of the uploaded objects (for example, `private` or `project-private`)
+    - `credentials-file`: 指定迁移工具节点上的凭证 JSON 文件路径。
+    - `storage-class`: 指定上传对象的存储类别（例如 `STANDARD` 或 `COLDLINE`）
+    - `predefined-acl`: 指定上传对象的预定义访问控制列表（例如 `private` 或 `project-private`）
 
 <CustomContent platform="tidb">
 
-The following is an example of a GCS URI for TiDB Lightning and BR. In this example, you need to specify a specific file path `testfolder`.
+以下是 TiDB Lightning 和 BR 使用的 GCS URI 示例。在此示例中，你需要指定特定的文件路径 `testfolder`。
 
 ```shell
 gcs://external/testfolder?credentials-file=${credentials-file-path}
@@ -106,27 +106,42 @@ gcs://external/testfolder?credentials-file=${credentials-file-path}
 
 </CustomContent>
 
-The following is an example of a GCS URI for [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md). In this example, you need to specify a specific filename `test.csv`.
+以下是 [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) 使用的 GCS URI 示例。在此示例中，你需要指定特定的文件名 `test.csv`。
 
 ```shell
 gcs://external/test.csv?credentials-file=${credentials-file-path}
 ```
 
-## Azure Blob Storage URI format
+## Azure Blob Storage URI 格式
 
-- `scheme`: `azure` or `azblob`
+- `scheme`: `azure` 或 `azblob`
 - `host`: `container name`
 - `parameters`:
 
-    - `account-name`: Specifies the account name of the storage.
-    - `account-key`: Specifies the access key.
-    - `sas-token`: Specifies the shared access signature (SAS) token.
-    - `access-tier`: Specifies the access tier of the uploaded objects, for example, `Hot`, `Cool`, or `Archive`. The default value is the default access tier of the storage account.
-    - `encryption-scope`: Specifies the [encryption scope](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-scope-manage?tabs=powershell#upload-a-blob-with-an-encryption-scope) for server-side encryption.
-    - `encryption-key`: Specifies the [encryption key](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-customer-provided-keys) for server-side encryption, which uses the AES256 encryption algorithm.
+    - `account-name`: 指定存储账户名。
+    - `account-key`: 指定访问密钥。
+    - `sas-token`: 指定共享访问签名（SAS）令牌。
+    - `access-tier`: 指定上传对象的访问层，例如 `Hot`、`Cool` 或 `Archive`。默认值为存储账户的默认访问层。
+    - `encryption-scope`: 指定服务器端加密的 [encryption scope](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-scope-manage?tabs=powershell#upload-a-blob-with-an-encryption-scope)。
+    - `encryption-key`: 指定用于服务器端加密的 [encryption key](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-customer-provided-keys)，使用 AES256 加密算法。
 
-The following is an example of an Azure Blob Storage URI for BR. In this example, you need to specify a specific file path `testfolder`.
+以下是 BR 使用的 Azure Blob Storage URI 示例。在此示例中，你需要指定特定的文件路径 `testfolder`。
 
 ```shell
 azure://external/testfolder?account-name=${account-name}&account-key=${account-key}
 ```
+
+
+请确保：
+1. 保持原有的Markdown格式（标题、列表、代码块、链接等）
+2. 使用专业、准确的中文术语
+3. 保持文档的逻辑结构和可读性
+4. 代码示例和文件名保持英文不变
+5. 链接地址保持不变
+6. 不要翻译 **包裹的加粗的文字**
+7. 你 翻译成 “你”，而不是 “您”
+8. 不要额外新增翻译内容，保证只翻译输入的内容
+9. 代码块内的内容不需要翻译
+10. 中文和英文之间需要加空格，中文和阿拉伯数字之间需要加空格
+11. 如果你在文中发现以下 key，不需要翻译，只要将匹配的 key 替换为对应的 value 就行:
+{}

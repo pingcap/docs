@@ -1,18 +1,18 @@
 ---
-title: TiFlash Compatibility Notes
-summary: Learn the TiDB features that are incompatible with TiFlash.
+title: TiFlash 兼容性注意事项
+summary: 了解与 TiFlash 不兼容的 TiDB 特性。
 ---
 
-# TiFlash Compatibility Notes
+# TiFlash 兼容性注意事项
 
-TiFlash is incompatible with TiDB in the following situations:
+TiFlash 在以下情况下与 TiDB 不兼容：
 
-* In the TiFlash computation layer:
-    * Checking overflowed [numerical values](/data-type-numeric.md) is not supported. For example, adding two maximum values of the `BIGINT` type `9223372036854775807 + 9223372036854775807`. The expected behavior of this calculation in TiDB is to return the `ERROR 1690 (22003): BIGINT value is out of range` error. However, if this calculation is performed in TiFlash, an overflow value of `-2` is returned without any error.
-    * Not all [window functions](/functions-and-operators/window-functions.md) are supported for [pushdown](/tiflash/tiflash-supported-pushdown-calculations.md).
-    * Reading data from TiKV is not supported.
-    * Currently, the [`SUM`](/functions-and-operators/aggregate-group-by-functions.md#supported-aggregate-functions) function in TiFlash does not support the string-type argument. But TiDB cannot identify whether any string-type argument has been passed into the `SUM` function during the compiling. Therefore, when you execute statements similar to `SELECT SUM(string_col) FROM t`, TiFlash returns the `[FLASH:Coprocessor:Unimplemented] CastStringAsReal is not supported.` error. To avoid such an error in this case, you need to modify this SQL statement to `SELECT SUM(CAST(string_col AS double)) FROM t`.
-    * Currently, TiFlash's decimal division calculation is incompatible with that of TiDB. For example, when dividing decimal, TiFlash performs the calculation always using the type inferred from the compiling. However, TiDB performs this calculation using a type that is more precise than that inferred from the compiling. Therefore, some SQL statements involving the decimal division return different execution results when executed in TiDB + TiKV and in TiDB + TiFlash. For example:
+* 在 TiFlash 计算层：
+    * 不支持检查 [numerical values](/data-type-numeric.md) 是否溢出。例如，将两个最大值 `BIGINT` 类型的值 `9223372036854775807 + 9223372036854775807` 相加。在 TiDB 中，此计算的预期行为是返回 `ERROR 1690 (22003): BIGINT value is out of range` 错误。然而，在 TiFlash 中执行此计算时，会返回溢出值 `-2`，且没有任何错误提示。
+    * 并非所有 [window functions](/functions-and-operators/window-functions.md) 都支持 [pushdown](/tiflash/tiflash-supported-pushdown-calculations.md)。
+    * 不支持从 TiKV 读取数据。
+    * 目前，TiFlash 中的 [`SUM`](/functions-and-operators/aggregate-group-by-functions.md#supported-aggregate-functions) 函数不支持字符串类型的参数。但在 TiDB 中，编译时无法判断是否传入字符串类型的参数到 `SUM` 函数中。因此，当你执行类似 `SELECT SUM(string_col) FROM t` 的语句时，TiFlash 会返回 `[FLASH:Coprocessor:Unimplemented] CastStringAsReal is not supported.` 错误。为了避免此类错误，你需要将 SQL 语句修改为 `SELECT SUM(CAST(string_col AS double)) FROM t`。
+    * 目前，TiFlash 的 decimal 除法计算方式与 TiDB 不兼容。例如，在进行 decimal 除法时，TiFlash 始终使用编译时推断的类型进行计算。而 TiDB 则使用比推断类型更高精度的类型进行计算。因此，涉及 decimal 除法的某些 SQL 语句在 TiDB + TiKV 和 TiDB + TiFlash 中执行时会返回不同的结果。例如：
 
         ```sql
         mysql> CREATE TABLE t (a DECIMAL(3,0), b DECIMAL(10, 0));
@@ -36,4 +36,4 @@ TiFlash is incompatible with TiDB in the following situations:
         Empty set (0.01 sec)
         ```
 
-        In the preceding example, `a/b`'s inferred type from the compiling is `DECIMAL(7,4)` both in TiDB and in TiFlash. Constrained by `DECIMAL(7,4)`, `a/b`'s returned type is `0.0000`. In TiDB, `a/b`'s runtime precision is higher than `DECIMAL(7,4)`, so the original table data is not filtered by the `WHERE a/b` condition. However, in TiFlash, the calculation of `a/b` uses `DECIMAL(7,4)` as the result type, so the original table data is filtered by the `WHERE a/b` condition.
+        在上述示例中，`a/b` 在编译时推断的类型在 TiDB 和 TiFlash 中都是 `DECIMAL(7,4)`。由于受限于 `DECIMAL(7,4)`，`a/b` 返回的类型为 `0.0000`。在 TiDB 中，`a/b` 的运行时精度高于 `DECIMAL(7,4)`，因此原始表中的数据不会被 `WHERE a/b` 条件过滤。而在 TiFlash 中，`a/b` 的计算结果类型使用 `DECIMAL(7,4)`，因此原始表中的数据会被 `WHERE a/b` 条件过滤。

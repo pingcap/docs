@@ -1,36 +1,36 @@
 ---
-title: TiKV Overview
-summary: An overview of the TiKV storage engine.
+title: TiKV 概述
+summary: TiKV 存储引擎的概述。
 ---
 
-# TiKV Overview
+# TiKV 概述
 
-TiKV is a distributed and transactional key-value database, which provides transactional APIs with ACID compliance. With the implementation of the [Raft consensus algorithm](https://raft.github.io/raft.pdf) and consensus state stored in RocksDB, TiKV guarantees data consistency between multiple replicas and high availability. As the storage layer of the TiDB distributed database, TiKV provides the read and write service, and persist the written data from applications. It also stores the statistics data of the TiDB cluster.
+TiKV 是一个分布式事务型键值数据库，提供符合 ACID 的事务 API。通过实现 [Raft 共识算法](https://raft.github.io/raft.pdf) 并将共识状态存储在 RocksDB 中，TiKV 保证了多个副本之间的数据一致性和高可用性。作为 TiDB 分布式数据库的存储层，TiKV 提供读写服务，并将应用程序写入的数据持久化。同时，它还存储 TiDB 集群的统计数据。
 
-## Architecture Overview
+## 架构概述
 
-TiKV implements the multi-raft-group replica mechanism based on the design of Google Spanner. A Region is a basic unit of the key-value data movement and refers to a data range in a Store. Each Region is replicated to multiple nodes. These multiple replicas form a Raft group. A replica of a Region is called a Peer. Typically there are 3 peers in a Region. One of them is the leader, which provides the read and write services. The PD component balances all the Regions automatically to guarantee that the read and write throughput is balanced among all the nodes in the TiKV cluster. With PD and carefully designed Raft groups, TiKV excels in horizontal scalability and can easily scale to store more than 100 TBs of data.
+TiKV 基于 Google Spanner 的设计实现了多 Raft 组副本机制。Region 是键值数据迁移的基本单元，指的是 Store 中的数据范围。每个 Region 会被复制到多个节点，这些副本组成一个 Raft 组。Region 的一个副本称为 Peer。通常一个 Region 有 3 个 Peer，其中一个为 Leader，负责提供读写服务。PD 组件会自动平衡所有的 Regions，以确保 TiKV 集群中所有节点的读写吞吐量均衡。在 PD 和精心设计的 Raft 组的配合下，TiKV 在水平扩展方面表现出色，能够轻松扩展存储超过 100 TB 的数据。
 
 ![TiKV Architecture](/media/tikv-arch.png)
 
-### Region and RocksDB
+### Region 和 RocksDB
 
-There is a RocksDB database within each Store and it stores data into the local disk. All the Region data are stored in the same RocksDB instance in each Store. All the logs used for the Raft consensus algorithm is stored in another RocksDB instance in each Store. This is because the performance of sequential I/O is better than random I/O. With different RocksDB instances storing raft logs and Region data, TiKV combines all the data write operations of raft logs and TiKV Regions into one I/O operation to improve the performance.
+每个 Store 内部都包含一个 RocksDB 数据库，用于将数据存储到本地磁盘。所有的 Region 数据都存储在每个 Store 中的同一个 RocksDB 实例中。用于 Raft 共识算法的所有日志存储在每个 Store 的另一个 RocksDB 实例中。这是因为顺序 I/O 的性能优于随机 I/O。通过不同的 RocksDB 实例存储 Raft 日志和 Region 数据，TiKV 将所有 Raft 日志的写入操作和 TiKV Region 的写入操作合并为一次 I/O 操作，从而提升性能。
 
-### Region and Raft Consensus Algorithm
+### Region 和 Raft 共识算法
 
-Data consistency between replicas of a Region is guaranteed by the Raft Consensus Algorithm. Only the leader of the Region can provide the writing service, and only when the data is written to the majority of replicas of a Region, the write operation succeeds.
+Region 副本之间的数据一致性由 Raft 共识算法保证。只有 Region 的 Leader 才能提供写入服务，且只有在数据写入到大多数副本后，写操作才算成功。
 
-TiKV tries to keep an appropriate size for each Region in the cluster. The Region size is currently 256 MiB by default. This mechanism helps the PD component to balance Regions among nodes in a TiKV cluster. When the size of a Region exceeds a threshold (384 MiB by default), TiKV splits it into two or more Regions. When the size of a Region is smaller than the threshold (54 MiB by default), TiKV merges the two smaller adjacent Regions into one Region.
+TiKV 试图保持集群中每个 Region 的合适大小。目前默认的 Region 大小为 256 MiB。这一机制帮助 PD 组件在 TiKV 集群中平衡 Regions。当某个 Region 的大小超过阈值（默认 384 MiB）时，TiKV 会将其拆分成两个或多个 Region。当 Region 的大小小于阈值（默认 54 MiB）时，TiKV 会将两个相邻的小 Region 合并成一个 Region。
 
-When PD moves a replica from one TiKV node to another, it firstly adds a Learner replica on the target node, after the data in the Learner replica is nearly the same as that in the Leader replica, PD changes it to a Follower replica and removes the Follower replica on the source node.
+当 PD 将某个副本从一个 TiKV 节点迁移到另一个节点时，首先会在目标节点添加一个 Learner 副本，当 Learner 副本中的数据几乎与 Leader 副本相同时，PD 会将其切换为 Follower 副本，并在源节点删除 Follower 副本。
 
-Moving Leader replica from one node to another has a similar mechanism. The difference is that after the Learner replica becomes the Follower replica, there is a "Leader Transfer" operation in which the Follower replica actively proposes an election to elect itself as the Leader. Finally, the new Leader removes the old Leader replica in the source node.
+将 Leader 副本从一个节点迁移到另一个节点的机制类似。不同之处在于，Learner 副本变为 Follower 后，会进行一次 “Leader Transfer” 操作，即 Follower 主动提出选举自己为 Leader。最终，新 Leader 会在源节点删除旧的 Leader 副本。
 
-## Distributed Transaction
+## 分布式事务
 
-TiKV supports distributed transactions. Users (or TiDB) can write multiple key-value pairs without worrying about whether they belong to the same Region. TiKV uses two-phase commit to achieve ACID constraints. See [TiDB Optimistic Transaction Model](/optimistic-transaction.md) for details.
+TiKV 支持分布式事务。用户（或 TiDB）可以在不考虑是否属于同一 Region 的情况下，写入多个键值对。TiKV 采用两阶段提交（2PC）实现 ACID 约束。详情请参见 [TiDB Optimistic Transaction Model](/optimistic-transaction.md)。
 
 ## TiKV Coprocessor
 
-TiDB pushes some data computation logic to TiKV Coprocessor. TiKV Coprocessor processes the computation for each Region. Each request sent to TiKV Coprocessor only involves the data of one Region.
+TiDB 将部分数据计算逻辑下推到 TiKV Coprocessor。TiKV Coprocessor 负责处理每个 Region 的计算请求。每个请求只涉及一个 Region 的数据。

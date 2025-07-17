@@ -1,46 +1,46 @@
 ---
-title: TiDB Transaction Isolation Levels
-summary: Learn about the transaction isolation levels in TiDB.
+title: TiDB 事务隔离级别
+summary: 了解 TiDB 中的事务隔离级别。
 ---
 
-# TiDB Transaction Isolation Levels
+# TiDB 事务隔离级别
 
 <CustomContent platform="tidb">
 
-Transaction isolation is one of the foundations of database transaction processing. Isolation is one of the four key properties of a transaction (commonly referred as [ACID](/glossary.md#acid)).
+事务隔离是数据库事务处理的基础之一。隔离性是事务的四个关键属性之一（通常称为 [ACID](/glossary.md#acid)）。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Transaction isolation is one of the foundations of database transaction processing. Isolation is one of the four key properties of a transaction (commonly referred as [ACID](/tidb-cloud/tidb-cloud-glossary.md#acid)).
+事务隔离是数据库事务处理的基础之一。隔离性是事务的四个关键属性之一（通常称为 [ACID](/tidb-cloud/tidb-cloud-glossary.md#acid)）。
 
 </CustomContent>
 
-The SQL-92 standard defines four levels of transaction isolation: Read Uncommitted, Read Committed, Repeatable Read, and Serializable. See the following table for details:
+SQL-92 标准定义了四个事务隔离级别：Read Uncommitted、Read Committed、Repeatable Read 和 Serializable。详见下表：
 
-| Isolation Level  | Dirty Write   | Dirty Read | Fuzzy Read     | Phantom |
+| 隔离级别 | 脏写 | 脏读 | 模糊读 | 幻读 |
 | :----------- | :------------ | :------------- | :----------| :-------- |
-| READ UNCOMMITTED | Not Possible | Possible     | Possible     | Possible     |
-| READ COMMITTED   | Not Possible | Not possible | Possible     | Possible     |
-| REPEATABLE READ  | Not Possible | Not possible | Not possible | Possible     |
-| SERIALIZABLE     | Not Possible | Not possible | Not possible | Not possible |
+| READ UNCOMMITTED | 不可能 | 可能 | 可能 | 可能 |
+| READ COMMITTED   | 不可能 | 不可能 | 可能 | 可能 |
+| REPEATABLE READ  | 不可能 | 不可能 | 不可能 | 可能 |
+| SERIALIZABLE     | 不可能 | 不可能 | 不可能 | 不可能 |
 
-TiDB implements Snapshot Isolation (SI) consistency, which it advertises as `REPEATABLE-READ` for compatibility with MySQL. This differs from the [ANSI Repeatable Read isolation level](#difference-between-tidb-and-ansi-repeatable-read) and the [MySQL Repeatable Read level](#difference-between-tidb-and-mysql-repeatable-read).
+TiDB 实现了 Snapshot Isolation (SI) 一致性，出于兼容 MySQL 的考虑，将其标记为 `REPEATABLE-READ`。这与 [ANSI Repeatable Read 隔离级别](#difference-between-tidb-and-ansi-repeatable-read) 和 [MySQL Repeatable Read 级别](#difference-between-tidb-and-mysql-repeatable-read) 存在差异。
 
-> **Note:**
+> **注意：**
 >
-> Starting from TiDB v3.0, the automatic retry of transactions is disabled by default. It is not recommended to enable the automatic retry because it might **break the transaction isolation level**. Refer to [Transaction Retry](/optimistic-transaction.md#automatic-retry) for details.
+> 从 TiDB v3.0 版本开始，事务的自动重试默认已禁用。不建议开启自动重试，因为可能会 **破坏事务的隔离级别**。详情请参阅 [Transaction Retry](/optimistic-transaction.md#automatic-retry)。
 >
-> Starting from TiDB v3.0.8, newly created TiDB clusters use the [pessimistic transaction mode](/pessimistic-transaction.md) by default. The current read (`for update` read) is **non-repeatable read**. Refer to [pessimistic transaction mode](/pessimistic-transaction.md) for details.
+> 从 TiDB v3.0.8 版本开始，新创建的 TiDB 集群默认使用 [悲观事务模式](/pessimistic-transaction.md)。当前的读（`for update` 读）是 **非可重复读**。详情请参阅 [悲观事务模式](/pessimistic-transaction.md)。
 
-## Repeatable Read isolation level
+## Repeatable Read 隔离级别
 
-The Repeatable Read isolation level only sees data committed before the transaction begins, and it never sees either uncommitted data or changes committed during transaction execution by concurrent transactions. However, the transaction statement does see the effects of previous updates executed within its own transaction, even though they are not yet committed.
+Repeatable Read 隔离级别只会看到事务开始之前已提交的数据，且永远不会看到未提交的数据或在事务执行期间由并发事务提交的变更。然而，事务中的语句会看到在其自身事务内执行的先前更新的效果，即使这些更新尚未提交。
 
-For transactions running on different nodes, the start and commit order depends on the order that the timestamp is obtained from PD.
+对于在不同节点上运行的事务，开始和提交的顺序取决于从 PD 获取时间戳的顺序。
 
-Transactions of the Repeatable Read isolation level cannot concurrently update a same row. When committing, if the transaction finds that the row has been updated by another transaction after it starts, then the transaction rolls back. For example:
+Repeatable Read 隔离级别的事务不能同时更新同一行。当提交时，如果发现该行在事务开始后被其他事务更新，则该事务会回滚。例如：
 
 ```sql
 create table t1(id int);
@@ -48,70 +48,70 @@ insert into t1 values(0);
 
 start transaction;              |               start transaction;
 select * from t1;               |               select * from t1;
-update t1 set id=id+1;          |               update t1 set id=id+1; -- In pessimistic transactions, the `update` statement executed later waits for the lock until the transaction holding the lock commits or rolls back and releases the row lock.
+update t1 set id=id+1;          |               update t1 set id=id+1; -- 在悲观事务中，后续执行的 `update` 语句会等待锁，直到持有锁的事务提交或回滚并释放行锁。
 commit;                         |
-                                |               commit; -- The transaction commit fails and rolls back. Pessimistic transactions can commit successfully.
+                                |               commit; -- 事务提交失败并回滚。悲观事务可以成功提交。
 ```
 
 ### Difference between TiDB and ANSI Repeatable Read
 
-The Repeatable Read isolation level in TiDB differs from ANSI Repeatable Read isolation level, though they sharing the same name. According to the standard described in the [A Critique of ANSI SQL Isolation Levels](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-95-51.pdf) paper, TiDB implements the Snapshot Isolation level. This isolation level does not allow strict phantoms (A3) but allows broad phantoms (P3) and write skews. In contrast, the ANSI Repeatable Read isolation level allows phantom reads but does not allow write skews.
+TiDB 的 Repeatable Read 隔离级别与 ANSI Repeatable Read 隔离级别不同，尽管它们共享相同的名称。根据 [A Critique of ANSI SQL Isolation Levels](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-95-51.pdf) 论文中的标准，TiDB 实现的是 Snapshot Isolation 级别。该隔离级别不允许严格的幻读（A3），但允许宽泛的幻读（P3）和写偏差。相比之下，ANSI Repeatable Read 允许幻读，但不允许写偏差。
 
 ### Difference between TiDB and MySQL Repeatable Read
 
-The Repeatable Read isolation level in TiDB differs from that in MySQL. The MySQL Repeatable Read isolation level does not check whether the current version is visible when updating, which means it can continue to update even if the row has been updated after the transaction starts. In contrast, if the row has been updated after the transaction starts, the TiDB optimistic transaction is rolled back and retried. Transaction retries in TiDB's optimistic concurrency control might fail, leading to a final failure of the transaction, while in TiDB's pessimistic concurrency control and MySQL, the updating transaction can be successful.
+TiDB 的 Repeatable Read 隔离级别与 MySQL 的不同。MySQL 的 Repeatable Read 在更新时不会检查当前版本是否可见，这意味着即使在事务开始后该行被更新，仍然可以继续更新。而 TiDB 的乐观事务在遇到事务开始后被更新的行时会回滚并重试。TiDB 的乐观并发控制中的事务重试可能会失败，导致事务最终失败；而在 TiDB 的悲观并发控制和 MySQL 中，更新事务可以成功。
 
-## Read Committed isolation level
+## Read Committed 隔离级别
 
-Starting from TiDB v4.0.0-beta, TiDB supports the Read Committed isolation level.
+从 TiDB v4.0.0-beta 版本开始，TiDB 支持 Read Committed 隔离级别。
 
-For historical reasons, the Read Committed isolation level of current mainstream databases is essentially the [Consistent Read isolation level defined by Oracle](https://docs.oracle.com/cd/B19306_01/server.102/b14220/consist.htm). In order to adapt to this situation, the Read Committed isolation level in TiDB pessimistic transactions is also a consistent read behavior in essence.
+出于历史原因，目前主流数据库的 Read Committed 隔离级别本质上是 [Oracle 定义的一致性读](https://docs.oracle.com/cd/B19306_01/server.102/b14220/consist.htm)。为了适应这一情况，TiDB 中悲观事务的 Read Committed 隔离级别本质上也是一种一致性读行为。
 
-> **Note:**
+> **注意：**
 >
-> The Read Committed isolation level only takes effect in the [pessimistic transaction mode](/pessimistic-transaction.md). In the [optimistic transaction mode](/optimistic-transaction.md), setting the transaction isolation level to `Read Committed` does not take effect and transactions still use the Repeatable Read isolation level.
+> Read Committed 隔离级别仅在 [悲观事务模式](/pessimistic-transaction.md) 中生效。在 [乐观事务模式](/optimistic-transaction.md) 中，将事务隔离级别设置为 `Read Committed` 不会生效，事务仍然使用 Repeatable Read。
 
-Starting from v6.0.0, TiDB supports using the [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600) system variable to optimize the timestamp acquisition in scenarios where read-write conflicts are rare. After enabling this variable, TiDB will try to use the previous valid timestamp to read data when `SELECT` is executed. The initial value of this variable is the `start_ts` of the transaction.
+从 v6.0.0 版本开始，TiDB 支持使用 [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600) 系统变量，在读写冲突较少的场景中优化时间戳获取。启用该变量后，TiDB 在执行 `SELECT` 时会尝试使用之前的有效时间戳读取数据。
 
-- If TiDB does not encounter any data update during the read process, it returns the result to the client and the `SELECT` statement is successfully executed.
-- If TiDB encounters data update during the read process:
-    - If TiDB has not yet sent the result to the client, TiDB tries to acquire a new timestamp and retry this statement.
-    - If TiDB has already sent partial data to the client, TiDB reports an error to the client. The amount of data sent to the client each time is controlled by [`tidb_init_chunk_size`](/system-variables.md#tidb_init_chunk_size) and [`tidb_max_chunk_size`](/system-variables.md#tidb_max_chunk_size).
+- 如果在读取过程中没有遇到数据更新，结果会返回给客户端，`SELECT` 语句成功执行。
+- 如果在读取过程中遇到数据更新：
+    - 如果 TiDB 还未将结果返回给客户端，TiDB 会尝试获取新时间戳并重试该语句。
+    - 如果 TiDB 已经向客户端发送了部分数据，TiDB 会向客户端报告错误。每次发送的数据量由 [`tidb_init_chunk_size`](/system-variables.md#tidb_init_chunk_size) 和 [`tidb_max_chunk_size`](/system-variables.md#tidb_max_chunk_size) 控制。
 
-In scenarios where the `READ-COMMITTED` isolation level is used, the `SELECT` statements are many, and read-write conflicts are rare, enabling this variable can avoid the latency and cost of getting the global timestamp.
+在使用 `READ-COMMITTED` 隔离级别、`SELECT` 语句较多且读写冲突较少的场景中，启用此变量可以避免获取全局时间戳的延迟和开销。
 
-Since v6.3.0, TiDB supports optimizing the acquisition of timestamps by enabling the system variable [`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630) in scenarios where point-write conflicts are few. After enabling this variable, during the execution of point-write statements, TiDB will try to use valid timestamps of the current transaction to read and lock data. TiDB will read data in the same way when [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600) is enabled.
+自 v6.3.0 版本起，TiDB 支持通过启用系统变量 [`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630) 来优化点写冲突较少的时间戳获取。启用后，在执行点写语句时，TiDB 会尝试使用当前事务的有效时间戳读取和锁定数据。TiDB 在 [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600) 启用时，读取数据的方式相同。
 
-Currently, the applicable types of point-write statements include `UPDATE`, `DELETE`, and `SELECT ...... FOR UPDATE`. A point-write statement refers to a write statement that uses the primary key or unique key as a filter condition and the final execution operator contains `POINT-GET`. Currently, the three types of point-write statements have these in common: they first perform a point query based on the key value. If the key exists, they lock the key. If the key does not exist, they return an empty set.
+目前，适用的点写语句类型包括 `UPDATE`、`DELETE` 和 `SELECT ...... FOR UPDATE`。点写语句指使用主键或唯一键作为过滤条件，最终执行操作符包含 `POINT-GET` 的写语句。目前，这三类点写语句的共同点是：先根据键值进行点查询。如果键存在，则锁定该键；如果不存在，则返回空集。
 
-- If the entire read process of a point-write statement does not encounter an updated data version, TiDB continues to use the timestamp of the current transaction to lock the data.
-    - If a write conflict occurs due to an old timestamp during the lock acquisition process, TiDB retries the lock acquisition process by obtaining the latest global timestamp.
-    - If no write conflicts or other errors occur during the lock acquisition process, the lock is acquired successfully.
-- If an updated data version is encountered during the read process, TiDB tries to acquire a new timestamp and retries this statement.
+- 如果点写语句的整个读取过程未遇到数据版本更新，TiDB 会继续使用当前事务的时间戳锁定数据。
+    - 如果在锁定过程中因旧时间戳发生写冲突，TiDB 会重试获取最新的全局时间戳。
+    - 如果在锁定过程中未发生写冲突或其他错误，锁定成功。
+- 如果在读取过程中遇到已更新的数据版本，TiDB 会尝试获取新时间戳并重试该语句。
 
-In transactions with many point-write statements but a few point-write conflicts in the `READ-COMMITTED` isolation level, enabling this variable can avoid the latency and overhead of getting the global timestamp.
+在 `READ-COMMITTED` 隔离级别下，事务中存在大量点写语句但点写冲突较少时，启用此变量可以避免获取全局时间戳的延迟和开销。
 
 ## Difference between TiDB and MySQL Read Committed
 
-The MySQL Read Committed isolation level is in line with the Consistent Read features in most cases. There are also exceptions, such as [semi-consistent read](https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-isolation-levels.html). This special behavior is not supported in TiDB.
+MySQL 的 Read Committed 隔离级别在大多数情况下与一致性读功能一致，也存在例外，例如 [semi-consistent read](https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-isolation-levels.html)。这种特殊行为在 TiDB 中不支持。
 
-## View and modify transaction isolation levels
+## 查看和修改事务隔离级别
 
-You can view and modify the transaction isolation level as follows.
+你可以通过以下方式查看和修改事务隔离级别。
 
-View the transaction isolation level of the current session:
+查看当前会话的事务隔离级别：
 
 ```sql
 SHOW VARIABLES LIKE 'transaction_isolation';
 ```
 
-Modify the transaction isolation level of the current session:
+修改当前会话的事务隔离级别：
 
 ```sql
 SET SESSION transaction_isolation = 'READ-COMMITTED';
 ```
 
-For more information on configuring and using transaction isolation levels, see the following documents:
+关于配置和使用事务隔离级别的更多信息，请参阅以下文档：
 
 - [The system variable `transaction_isolation`](/system-variables.md#transaction_isolation)
 - [Isolation level](/pessimistic-transaction.md#isolation-level)

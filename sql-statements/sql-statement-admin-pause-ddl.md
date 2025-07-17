@@ -1,15 +1,15 @@
 ---
 title: ADMIN PAUSE DDL JOBS
-summary: An overview of the usage of ADMIN PAUSE DDL JOBS for the TiDB database.
+summary: 关于在 TiDB 数据库中使用 ADMIN PAUSE DDL JOBS 的概述。
 ---
 
 # ADMIN PAUSE DDL JOBS
 
-`ADMIN PAUSE DDL` allows you to pause a running DDL job. The `job_id` can be found by running [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md).
+`ADMIN PAUSE DDL` 允许你暂停正在运行的 DDL 任务。可以通过运行 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md) 来获取 `job_id`。
 
-You can use this statement to pause a DDL job that is issued but not yet completed executing. After the pause, the SQL statement that executes the DDL job does not return immediately, but looks like it is still running. If you try to pause a DDL job that has already been completed, you will see the `DDL Job:90 not found` error in the `RESULT` column, which indicates that the job has been removed from the DDL waiting queue.
+你可以使用此语句暂停已发出但尚未完成执行的 DDL 任务。暂停后，执行 DDL 任务的 SQL 语句不会立即返回，而是看起来仍在运行。如果你尝试暂停已经完成的 DDL 任务，在 `RESULT` 列中会看到 `DDL Job:90 not found` 错误，表示该任务已从 DDL 等待队列中被移除。
 
-## Synopsis
+## 语法概要
 
 ```ebnf+diagram
 AdminPauseDDLStmt ::=
@@ -19,40 +19,40 @@ NumList ::=
     Int64Num ( ',' Int64Num )*
 ```
 
-## Examples
+## 示例
 
-`ADMIN PAUSE DDL JOBS` pauses the currently running DDL job and returns whether the job is paused successfully. The job can be resumed by `ADMIN RESUME DDL JOBS`.
+`ADMIN PAUSE DDL JOBS` 会暂停当前正在运行的 DDL 任务，并返回任务是否成功暂停。可以通过 `ADMIN RESUME DDL JOBS` 恢复该任务。
 
 ```sql
 ADMIN PAUSE DDL JOBS job_id [, job_id] ...;
 ```
 
-If the pause fails, the specific reason for the failure is displayed.
+如果暂停失败，会显示具体的失败原因。
 
 <CustomContent platform="tidb">
 
 > **Note:**
 >
-> + This statement can pause a DDL job, but other operations and environment changes (such as machine restarts and cluster restarts) do not pause DDL jobs except for cluster upgrades.
-> + During the cluster upgrade, the ongoing DDL jobs are paused, and the DDL jobs initiated during the upgrade are also paused. After the upgrade, all paused DDL jobs will resume. The pause and resume operations during the upgrade are taken automatically. For details, see [TiDB Smooth Upgrade](/smooth-upgrade-tidb.md).
-> + This statement can pause multiple DDL jobs. You can use the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md) statement to obtain the `job_id` of a DDL job.
+> + 这个语句可以暂停一个 DDL 任务，但其他操作和环境变更（如机器重启和集群重启）除集群升级外，不会暂停 DDL 任务。
+> + 在集群升级期间，正在进行的 DDL 任务会被暂停，升级期间发起的 DDL 任务也会被暂停。升级完成后，所有暂停的 DDL 任务将会恢复。升级期间的暂停和恢复操作是自动进行的。详情请参见 [TiDB Smooth Upgrade](/smooth-upgrade-tidb.md)。
+> + 这个语句可以暂停多个 DDL 任务。你可以使用 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md) 语句获取 DDL 任务的 `job_id`。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
 > **Note:**
 >
-> + This statement can pause a DDL job, but other operations and environment changes (such as machine restarts and cluster restarts) do not pause DDL jobs except for cluster upgrades.
-> + During the cluster upgrade, the ongoing DDL jobs are paused, and the DDL jobs initiated during the upgrade are also paused. After the upgrade, all paused DDL jobs will resume. The pause and resume operations during the upgrade are taken automatically. For details, see [TiDB Smooth Upgrade](https://docs.pingcap.com/tidb/stable/smooth-upgrade-tidb).
-> + This statement can pause multiple DDL jobs. You can use the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md) statement to obtain the `job_id` of a DDL job.
+> + 这个语句可以暂停一个 DDL 任务，但其他操作和环境变更（如机器重启和集群重启）除集群升级外，不会暂停 DDL 任务。
+> + 在集群升级期间，正在进行的 DDL 任务会被暂停，升级期间发起的 DDL 任务也会被暂停。升级完成后，所有暂停的 DDL 任务将会恢复。升级期间的暂停和恢复操作是自动进行的。详情请参见 [TiDB Smooth Upgrade](https://docs.pingcap.com/tidb/stable/smooth-upgrade-tidb)。
+> + 这个语句可以暂停多个 DDL 任务。你可以使用 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md) 语句获取 DDL 任务的 `job_id`。
 
 </CustomContent>
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension to MySQL syntax.
+此语句是 TiDB 对 MySQL 语法的扩展。
 
-## See also
+## 相关链接
 
 * [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
 * [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)

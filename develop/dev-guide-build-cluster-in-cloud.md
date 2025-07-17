@@ -1,51 +1,51 @@
 ---
-title: Build a {{{ .starter }}} Cluster
-summary: Learn how to build a {{{ .starter }}} cluster in TiDB Cloud and connect to it.
+title: 构建一个 {{{ .starter }}} 集群
+summary: 了解如何在 TiDB Cloud 中构建一个 {{{ .starter }}} 集群并连接到它。
 ---
 
 <!-- markdownlint-disable MD029 -->
 
-# Build a {{{ .starter }}} Cluster
+# 构建一个 {{{ .starter }}} 集群
 
 <CustomContent platform="tidb">
 
-This document walks you through the quickest way to get started with TiDB. You will use [TiDB Cloud](https://www.pingcap.com/tidb-cloud) to create a {{{ .starter }}} cluster, connect to it, and run a sample application on it.
+本文将引导你以最快的方式开始使用 TiDB。你将使用 [TiDB Cloud](https://www.pingcap.com/tidb-cloud) 创建一个 {{{ .starter }}} 集群，连接到它，并在其上运行示例应用。
 
-If you need to run TiDB on your local machine, see [Starting TiDB Locally](/quick-start-with-tidb.md).
+如果你需要在本地机器上运行 TiDB，请参阅 [本地启动 TiDB](/quick-start-with-tidb.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-This document walks you through the quickest way to get started with TiDB Cloud. You will create a TiDB cluster, connect to it, and run a sample application on it.
+本文将引导你以最快的方式开始使用 TiDB Cloud。你将创建一个 TiDB 集群，连接到它，并在其上运行示例应用。
 
 </CustomContent>
 
-## Step 1. Create a {{{ .starter }}} cluster {#step-1-create-a-tidb-cloud-cluster}
+## 第 1 步：创建一个 {{{ .starter }}} 集群 {#step-1-create-a-tidb-cloud-cluster}
 
-1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up for an account.
+1. 如果你还没有 TiDB Cloud 账号，请点击 [这里](https://tidbcloud.com/free-trial) 注册一个账号。
 
-2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
+2. [登录](https://tidbcloud.com/) 到你的 TiDB Cloud 账号。
 
-3. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click **Create Cluster**.
+3. 在 [**Clusters**](https://tidbcloud.com/console/clusters) 页面，点击 **Create Cluster**。
 
-4. On the **Create Cluster** page, **Serverless** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
+4. 在 **Create Cluster** 页面，默认已选择 **Serverless**。如有需要，更新默认的集群名称，然后选择你想要创建集群的区域。
 
-5. Click **Create** to create a {{{ .starter }}} cluster.
+5. 点击 **Create** 创建一个 {{{ .starter }}} 集群。
 
-    Your TiDB Cloud cluster will be created in approximately 30 seconds.
+    你的 TiDB Cloud 集群大约会在 30 秒内创建完成。
 
-6. After your TiDB Cloud cluster is created, click your cluster name to go to the cluster overview page, and then click **Connect** in the upper-right corner. A connection dialog box is displayed.
+6. 集群创建完成后，点击你的集群名称进入集群概览页面，然后在右上角点击 **Connect**。会显示一个连接对话框。
 
-7. In the dialog, select your preferred connection method and operating system to get the corresponding connection string. This document uses MySQL client as an example.
+7. 在对话框中，选择你偏好的连接方式和操作系统，以获取相应的连接字符串。本文以 MySQL 客户端为例。
 
-8. Click **Generate Password** to generate a random password. The generated password will not show again, so save your password in a secure location. If you do not set a root password, you cannot connect to the cluster.
+8. 点击 **Generate Password** 生成一个随机密码。生成的密码不会再次显示，请将密码保存到安全的位置。如果你没有设置 root 密码，将无法连接到集群。
 
 <CustomContent platform="tidb">
 
 > **Note:**
 >
-> For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters, when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix).
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群，在连接集群时，必须在用户名中包含你的集群前缀，并用引号括起来。更多信息请参见 [User name prefix](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix)。
 
 </CustomContent>
 
@@ -53,25 +53,25 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 > **Note:**
 >
-> For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters, when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群，在连接集群时，必须在用户名中包含你的集群前缀，并用引号括起来。更多信息请参见 [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix)。
 
 </CustomContent>
 
-## Step 2. Connect to a cluster
+## 第 2 步：连接到集群
 
-1. If the MySQL client is not installed, select your operating system and follow the steps below to install it.
+1. 如果未安装 MySQL 客户端，请选择你的操作系统，并按照以下步骤安装。
 
 <SimpleTab>
 
 <div label="macOS">
 
-For macOS, install [Homebrew](https://brew.sh/index) if you do not have it, and then run the following command to install the MySQL client:
+对于 macOS，如果还没有安装 [Homebrew](https://brew.sh/index)，请先安装，然后运行以下命令安装 MySQL 客户端：
 
 ```shell
 brew install mysql-client
 ```
 
-The output is as follows:
+输出示例如下：
 
 ```
 mysql-client is keg-only, which means it was not symlinked into /opt/homebrew,
@@ -85,20 +85,20 @@ For compilers to find mysql-client you may need to set:
   export CPPFLAGS="-I/opt/homebrew/opt/mysql-client/include"
 ```
 
-To add the MySQL client to your PATH, locate the following command in the above output (if your output is inconsistent with the above output in the document, use the corresponding command in your output instead) and run it:
+要将 MySQL 客户端添加到你的 PATH，请找到上述输出中的对应命令（如果你的输出与本文中的示例不一致，请使用你实际输出中的命令），并运行：
 
 ```shell
 echo 'export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"' >> ~/.zshrc
 ```
 
-Then, declare the global environment variable by the `source` command and verify that the MySQL client is installed successfully:
+然后，通过 `source` 命令声明全局环境变量，并验证 MySQL 客户端是否安装成功：
 
 ```shell
 source ~/.zshrc
 mysql --version
 ```
 
-An example of the expected output:
+预期输出示例：
 
 ```
 mysql  Ver 8.0.28 for macos12.0 on arm64 (Homebrew)
@@ -108,19 +108,19 @@ mysql  Ver 8.0.28 for macos12.0 on arm64 (Homebrew)
 
 <div label="Linux">
 
-For Linux, the following takes Ubuntu as an example:
+对于 Linux，以 Ubuntu 为例，运行：
 
 ```shell
 apt-get install mysql-client
 ```
 
-Then, verify that the MySQL client is installed successfully:
+然后，验证 MySQL 客户端是否安装成功：
 
 ```shell
 mysql --version
 ```
 
-An example of the expected output:
+预期输出示例：
 
 ```
 mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
@@ -130,10 +130,9 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 </SimpleTab>
 
-2. Run the connection string obtained in [Step 1](#step-1-create-a-tidb-cloud-cluster).
+2. 运行在 [第 1 步](#step-1-create-a-tidb-cloud-cluster) 中获取的连接字符串。
 
-    {{< copyable "shell-regular" >}}
-
+    
     ```shell
     mysql --connect-timeout 15 -u '<prefix>.root' -h <host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p
     ```
@@ -142,8 +141,8 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 > **Note:**
 >
-> - When you connect to a {{{ .starter }}} cluster, you must [use the TLS connection](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters).
-> - If you encounter problems when connecting to a {{{ .starter }}} cluster, you can read [Secure Connections to {{{ .starter }}} Clusters](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters) for more information.
+> - 当你连接一个 {{{ .starter }}} 集群时，必须 [使用 TLS 连接](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters)。
+> - 如果在连接 {{{ .starter }}} 集群时遇到问题，可以阅读 [Secure Connections to {{{ .starter }}} Clusters](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters) 获取更多信息。
 
 </CustomContent>
 
@@ -151,22 +150,22 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 > **Note:**
 >
-> - When you connect to a {{{ .starter }}} cluster, you must [use the TLS connection](/tidb-cloud/secure-connections-to-serverless-clusters.md).
-> - If you encounter problems when connecting to a {{{ .starter }}} cluster, you can read [Secure Connections to {{{ .starter }}} Clusters](/tidb-cloud/secure-connections-to-serverless-clusters.md) for more information.
+> - 当你连接一个 {{{ .starter }}} 集群时，必须 [使用 TLS 连接](/tidb-cloud/secure-connections-to-serverless-clusters.md)。
+> - 如果在连接 {{{ .starter }}} 集群时遇到问题，可以阅读 [Secure Connections to {{{ .starter }}} Clusters](/tidb-cloud/secure-connections-to-serverless-clusters.md) 获取更多信息。
 
 </CustomContent>
 
-3. Fill in the password to sign in.
+3. 输入密码以登录。
 
-## Step 3. Execute a SQL statement
+## 第 3 步：执行 SQL 语句
 
-Let's try to execute your first SQL statement on TiDB Cloud.
+让我们尝试在 TiDB Cloud 上执行你的第一个 SQL 语句。
 
 ```sql
 SELECT 'Hello TiDB Cloud!';
 ```
 
-Expected output:
+预期输出：
 
 ```sql
 +-------------------+
@@ -176,18 +175,18 @@ Expected output:
 +-------------------+
 ```
 
-If your actual output is similar to the expected output, congratulations, you have successfully executed a SQL statement on TiDB Cloud.
+如果你的实际输出与预期输出类似，恭喜你，你已成功在 TiDB Cloud 上执行了一条 SQL 语句。
 
-## Need help?
+## 需要帮助吗？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 社区提问，或 [提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 社区提问，或 [提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

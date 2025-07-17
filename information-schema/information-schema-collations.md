@@ -1,11 +1,11 @@
 ---
 title: COLLATIONS
-summary: Learn the `COLLATIONS` information_schema table.
+summary: 了解 `COLLATIONS` information_schema 表。
 ---
 
 # COLLATIONS
 
-The `COLLATIONS` table provides a list of collations that correspond to character sets in the `CHARACTER_SETS` table. Currently, this table is included only for compatibility with MySQL.
+`COLLATIONS` 表提供了与 `CHARACTER_SETS` 表中的字符集对应的排序规则列表。目前，该表仅用于与 MySQL 的兼容性。
 
 ```sql
 USE information_schema;
@@ -44,17 +44,17 @@ SELECT * FROM collations WHERE character_set_name='utf8mb4';
 5 rows in set (0.001 sec)
 ```
 
-The description of columns in the `COLLATIONS` table is as follows:
+`COLLATIONS` 表中各列的描述如下：
 
-* `COLLATION_NAME`: The name of the collation.
-* `CHARACTER_SET_NAME`: The name of the character set which the collation belongs to.
-* `ID`: The ID of the collation.
-* `IS_DEFAULT`: Whether this collation is the default collation of the character set it belongs to.
-* `IS_COMPILED`: Whether the character set is compiled into the server.
-* `SORTLEN`: The minimum length of memory allocated when the collation sorts characters.
-* `PAD_ATTRIBUTE`: Whether trailing spaces are ignored during string comparison. `PAD SPACE` means that trailing spaces are ignored (for example, `'abc'` equals `'abc   '`), while `NO PAD` means that trailing spaces are significant (for example, `'abc'` does not equal `'abc   '`).
+* `COLLATION_NAME`：排序规则的名称。
+* `CHARACTER_SET_NAME`：所属字符集的名称。
+* `ID`：排序规则的 ID。
+* `IS_DEFAULT`：该排序规则是否为所属字符集的默认排序规则。
+* `IS_COMPILED`：字符集是否已编译到服务器中。
+* `SORTLEN`：排序规则在排序字符时分配的最小内存长度。
+* `PAD_ATTRIBUTE`：在字符串比较时是否忽略尾部空格。`PAD SPACE` 表示忽略尾部空格（例如， `'abc'` 等于 `'abc   '`），而 `NO PAD` 表示尾部空格是有意义的（例如， `'abc'` 不等于 `'abc   '`）。
 
-## See also
+## 相关链接
 
 - [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
 - [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)

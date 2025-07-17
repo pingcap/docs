@@ -1,20 +1,20 @@
 ---
-title: SHOW [FULL] PROCESSLIST | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW [FULL] PROCESSLIST for the TiDB database.
+title: SHOW [FULL] PROCESSLIST | TiDB SQL 语句参考
+summary: 关于在 TiDB 数据库中使用 SHOW [FULL] PROCESSLIST 的概述。
 ---
 
 # SHOW [FULL] PROCESSLIST
 
-This statement lists the current sessions connected to the same TiDB server. The `Info` column contains the query text, which will be truncated unless the optional keyword `FULL` is specified.
+该语句列出当前连接到同一 TiDB 服务器的会话。`Info` 列包含查询文本，除非指定可选关键字 `FULL`，否则会被截断。
 
-## Synopsis
+## 概述
 
 ```ebnf+diagram
 ShowProcesslistStmt ::=
     "SHOW" "FULL"? "PROCESSLIST"
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> SHOW PROCESSLIST;
@@ -26,11 +26,11 @@ mysql> SHOW PROCESSLIST;
 1 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-* The `State` column in TiDB is non-descriptive. Representing state as a single value is more complex in TiDB, since queries are executed in parallel and each goroutine will have a different state at any one time.
+* TiDB 中的 `State` 列不具有描述性。在 TiDB 中用单一值表示状态更为复杂，因为查询是并行执行的，每个 goroutine 在任何时间点可能具有不同的状态。
 
-## See also
+## 相关链接
 
 * [KILL \[TIDB\]](/sql-statements/sql-statement-kill.md)
 * [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)
