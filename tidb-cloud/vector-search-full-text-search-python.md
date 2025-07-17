@@ -28,9 +28,9 @@ The full-text search feature in TiDB provides the following capabilities:
 
 Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-text search is only available for the following product option and regions:
 
-- TiDB Cloud Serverless: `Frankfurt (eu-central-1)` and `Singapore (ap-southeast-1)`
+- TiDB Cloud Starter: `Frankfurt (eu-central-1)` and `Singapore (ap-southeast-1)`
 
-To complete this tutorial, make sure you have a TiDB Cloud Serverless cluster in a supported region. If you don't have one, follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create it.
+To complete this tutorial, make sure you have a TiDB Cloud Starter cluster in a supported region. If you don't have one, follow [Creating a TiDB Cloud Starter cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create it.
 
 ## Get started
 
@@ -64,9 +64,9 @@ db = TiDBClient.connect(
 )
 ```
 
-You can get these connection parameters from the [TiDB Cloud console](https://tidbcloud.com):
+You can get these connection parameters from the [TiDB Cloud console](https://console.tidb.io/):
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**Clusters**](https://console.tidb.io/project/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with connection parameters listed.
 
@@ -81,7 +81,7 @@ You can get these connection parameters from the [TiDB Cloud console](https://ti
    CA:       /etc/ssl/cert.pem
    ```
 
-   The corresponding Python code to connect to the TiDB Cloud Serverless cluster would be as follows:
+   The corresponding Python code to connect to the TiDB Cloud Starter cluster would be as follows:
 
    ```python
    db = TiDBClient.connect(
