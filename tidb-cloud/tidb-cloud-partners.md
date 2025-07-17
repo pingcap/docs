@@ -1,72 +1,72 @@
 ---
-title: TiDB Cloud Partner Web Console
-summary: Learn how to use the TiDB Cloud Partner web console as a reseller and Managed Service Provider (MSP).
+title: TiDB Cloud 合作伙伴控制台
+summary: 了解作为经销商和托管服务提供商（MSP）如何使用 TiDB Cloud 合作伙伴控制台。
 aliases: ['/tidbcloud/managed-service-provider']
 ---
 
-# TiDB Cloud Partner Web Console
+# TiDB Cloud 合作伙伴控制台
 
-TiDB Cloud Partner Web Console is designed for partners focused on SaaS solutions, with the goal of building and nurturing a strong partnership between PingCAP and our partners to better serve our customers.
+TiDB Cloud 合作伙伴控制台专为专注于 SaaS 解决方案的合作伙伴设计，旨在建立和培养 PingCAP 与合作伙伴之间的强大合作关系，以更好地服务我们的客户。
 
-There are two types of TiDB Cloud partners:
+TiDB Cloud 合作伙伴分为两种类型：
 
-- Reseller: resells TiDB Cloud through AWS Marketplace Channel Partner Private Offer (CPPO)
-- Managed Service Provider (MSP): resells TiDB Cloud and provides value-added services
+- 经销商：通过 AWS Marketplace Channel Partner Private Offer (CPPO) 转售 TiDB Cloud
+- 托管服务提供商（MSP）：转售 TiDB Cloud 并提供增值服务
 
-## Reseller through AWS Channel Partner Private Offer (CPPO)
+## 通过 AWS Channel Partner Private Offer (CPPO) 进行经销
 
-The reseller through [AWS CPPO](https://aws.amazon.com/marketplace/features/cpprivateoffers) allows customers to purchase TiDB Cloud through the AWS Marketplace directly from a reseller. This enables customers to benefit from the partner's business knowledge, localized support, and expertise, while still enjoying the fast and seamless purchasing experience they expect from AWS Marketplace.
+通过 [AWS CPPO](https://aws.amazon.com/marketplace/features/cpprivateoffers) 的经销商允许客户直接从经销商通过 AWS Marketplace 购买 TiDB Cloud。这使客户能够受益于合作伙伴的业务知识、本地化支持和专业技能，同时仍然享受他们期望从 AWS Marketplace 获得的快速和无缝的购买体验。
 
-### Become a reseller of PingCAP
+### 成为 PingCAP 的经销商
 
-If you are interested in the reseller program and would like to join as a partner, [contact sales](https://www.pingcap.com/partners/become-a-partner/) to enroll.
+如果你对经销商计划感兴趣并希望成为合作伙伴，请[联系销售](https://www.pingcap.com/partners/become-a-partner/)进行注册。
 
-### Manage daily tasks for a reseller
+### 管理经销商的日常任务
 
-As a reseller, you have two ways to manage your daily management tasks:
+作为经销商，你有两种方式来管理日常管理任务：
 
-- [TiDB Cloud Partner console](https://partner-console.tidbcloud.com)
-- Partner Management API. You can find the open API documentation on the **Support** page of the TiDB Cloud Partner console.
+- [TiDB Cloud 合作伙伴控制台](https://partner-console.tidbcloud.com)
+- 合作伙伴管理 API。你可以在 TiDB Cloud 合作伙伴控制台的**支持**页面找到开放 API 文档。
 
-## Managed Service Provider (MSP)
+## 托管服务提供商（MSP）
 
-An MSP is a partner who resells TiDB Cloud and provides value-added services, including but not limited to TiDB Cloud organization management, billing services, and technical support.
+MSP 是转售 TiDB Cloud 并提供增值服务的合作伙伴，包括但不限于 TiDB Cloud 组织管理、计费服务和技术支持。
 
-Benefits of becoming a managed service provider include:
+成为托管服务提供商的好处包括：
 
-- Discounts and incentive programs
-- Enablement training
-- Increased visibility through certification
-- Joint marketing opportunities
+- 折扣和激励计划
+- 赋能培训
+- 通过认证提高知名度
+- 联合营销机会
 
-### Become an MSP of PingCAP
+### 成为 PingCAP 的 MSP
 
-If you are interested in the MSP program and would like to join as a partner, [contact sales](https://www.pingcap.com/partners/become-a-partner/) to enroll. Please provide the following information:
+如果你对 MSP 计划感兴趣并希望成为合作伙伴，请[联系销售](https://www.pingcap.com/partners/become-a-partner/)进行注册。请提供以下信息：
 
-- Company name
-- Company contact email
-- Company official website URL
-- Company logo (One SVG file for light mode and one SVG file for dark mode; a horizontal logo with 256 x 48 pixels is preferred)
+- 公司名称
+- 公司联系邮箱
+- 公司官方网站 URL
+- 公司标志（一个用于浅色模式的 SVG 文件和一个用于深色模式的 SVG 文件；建议使用 256 x 48 像素的横向标志）
 
-The preceding information is used to generate an exclusive sign-up URL and page with your company logo for your customers.
+上述信息用于为你的客户生成带有你公司标志的专属注册 URL 和页面。
 
-We will carefully evaluate your request and get back to you soon.
+我们将仔细评估你的请求并尽快回复。
 
-### Manage daily tasks for an MSP
+### 管理 MSP 的日常任务
 
-As a TiDB Cloud MSP partner, there are two methods for you to manage your daily management tasks:
+作为 TiDB Cloud MSP 合作伙伴，你有两种方法来管理日常管理任务：
 
-- [TiDB Cloud Partner console](https://partner-console.tidbcloud.com)
-- [MSP Management API (deprecated)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
+- [TiDB Cloud 合作伙伴控制台](https://partner-console.tidbcloud.com)
+- [MSP 管理 API（已弃用）](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
 
-After your complete the registration as a TiDB Cloud partner, you will receive an email notification to activate the account in the TiDB Cloud Partner console, and receive an API key for the MSP Management API.
+完成 TiDB Cloud 合作伙伴注册后，你将收到一封电子邮件通知，用于激活 TiDB Cloud 合作伙伴控制台中的账户，并收到用于 MSP 管理 API 的 API 密钥。
 
-You can use the MSP management API to manage the following daily tasks:
+你可以使用 MSP 管理 API 来管理以下日常任务：
 
-- Query the MSP monthly bill for a specific month
-- Query credits applied to an MSP
-- Query discounts applied to an MSP
-- Query the monthly bill for a specific MSP customer
-- Create a new sign-up URL for an MSP customer
-- List all MSP customers
-- Retrieve MSP customer information by the customer organization ID
+- 查询特定月份的 MSP 月度账单
+- 查询应用于 MSP 的积分
+- 查询应用于 MSP 的折扣
+- 查询特定 MSP 客户的月度账单
+- 为 MSP 客户创建新的注册 URL
+- 列出所有 MSP 客户
+- 通过客户组织 ID 检索 MSP 客户信息

@@ -1,42 +1,42 @@
 ---
-title: Create Tickets and Subscribe to Ticket Updates via Lark
-summary: Introduces detailed information about the Lark ticket creation and update subscription.
+title: 通过 Lark 创建工单和订阅工单更新
+summary: 介绍 Lark 工单创建和更新订阅的详细信息。
 ---
 
-# Create Tickets and Subscribe to Ticket Updates via Lark
+# 通过 Lark 创建工单和订阅工单更新
 
-For customers subscribed to the **Enterprise** [support plan](/tidb-cloud/connected-care-detail.md), TiDB Cloud provides a ticket bot called **PingCAP Support Bot** in [Lark](https://www.larksuite.com/), to manage ticket creation and updates from the support ticket system.
+对于订阅了 **Enterprise** [支持计划](/tidb-cloud/connected-care-detail.md)的客户，TiDB Cloud 在 [Lark](https://www.larksuite.com/) 中提供了一个名为 **PingCAP Support Bot** 的工单机器人，用于管理支持工单系统中的工单创建和更新。
 
-> **Note:**
+> **注意：**
 >
-> The ticket support feature for Lark is available upon request. If you are interested in trying this feature, contact TiDB Cloud support at <a href="mailto:support@pingcap.com">support@pingcap.com</a> or reach out to your Technical Account Manager (TAM).
+> Lark 的工单支持功能需要申请才能使用。如果你有兴趣尝试此功能，请通过 <a href="mailto:support@pingcap.com">support@pingcap.com</a> 联系 TiDB Cloud 支持团队，或联系你的技术客户经理（TAM）。
 
-## Create a support ticket
+## 创建支持工单
 
-In the **Customer Support Group** Lark group, type `@PingCAP Support Bot create ticket` in a message. Then, **PingCAP Support Bot** will reply with a Lark message card for ticket creation.
+在 **Customer Support Group** Lark 群组中，在消息中输入 `@PingCAP Support Bot create ticket`。然后，**PingCAP Support Bot** 将回复一个用于创建工单的 Lark 消息卡片。
 
 ![lark-ticket-creation-1](/media/tidb-cloud/connected-lark-ticket-creation-1.png)
 
-Fill in the required fields and click **Submit**. Once submitted, the card will be updated to **Ticket Submitted**, indicating that your request is being processed.
+填写必填字段并点击**提交**。提交后，卡片将更新为**工单已提交**，表示你的请求正在处理中。
 
 ![lark-ticket-creation-2](/media/tidb-cloud/connected-lark-ticket-creation-2.png)
 
-After the support ticket is created, the **Ticket Submitted** card will be updated to the **Support Ticket Created** card, providing the ticket name and a link to view the ticket.
+支持工单创建后，**工单已提交**卡片将更新为**支持工单已创建**卡片，提供工单名称和查看工单的链接。
 
 ![lark-ticket-creation-3](/media/tidb-cloud/connected-lark-ticket-creation-3.png)
 
-## Subscribe to ticket updates
+## 订阅工单更新
 
-Whenever a PingCAP support engineer comments on the ticket, **PingCAP Support Bot** will send a **New Comment on Your Ticket** card to the Lark group.
+每当 PingCAP 支持工程师在工单上发表评论时，**PingCAP Support Bot** 将向 Lark 群组发送一个**工单新评论**卡片。
 
 ![connected-lark-ticket-creation-4](/media/tidb-cloud/connected-lark-ticket-creation-4.png)
 
-## FAQs
+## 常见问题
 
-- How can I check the status of my ticket?
+- 如何查看我的工单状态？
 
-    Log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/user/requests) with the email address used to create the ticket. You can view all historical tickets and their status for the current account.
+    使用创建工单时使用的电子邮件地址登录 [PingCAP 帮助中心](https://tidb.support.pingcap.com/servicedesk/customer/user/requests)。你可以查看当前账户的所有历史工单及其状态。
 
-## Contact support
+## 联系支持
 
-For help or questions, please contact our support team at <a href="mailto:support@pingcap.com">support@pingcap.com</a>.
+如需帮助或有任何问题，请通过 <a href="mailto:support@pingcap.com">support@pingcap.com</a> 联系我们的支持团队。

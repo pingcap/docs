@@ -1,44 +1,44 @@
 ---
 title: ticloud config describe
-summary: The reference of `ticloud config describe`.
+summary: "`ticloud config describe` 命令的参考。"
 ---
 
 # ticloud config describe
 
-Get the property information of a specific [user profile](/tidb-cloud/cli-reference.md#user-profile):
+获取特定[用户配置文件](/tidb-cloud/cli-reference.md#user-profile)的属性信息：
 
 ```shell
 ticloud config describe <profile-name> [flags]
 ```
 
-Or use the following alias command:
+或使用以下别名命令：
 
 ```shell
 ticloud config get <profile-name> [flags]
 ```
 
-## Examples
+## 示例
 
-Describe a user profile:
+描述用户配置文件：
 
 ```shell
 ticloud config describe <profile-name>
 ```
 
-## Flags
+## 标志
 
-| Flag       | Description              |
+| 标志       | 描述              |
 |------------|--------------------------|
-| -h, --help | Shows help information for this command. |
+| -h, --help | 显示此命令的帮助信息。 |
 
-## Inherited flags
+## 继承的标志
 
-| Flag                 | Description                                   | Required | Note                                                                                                                    |
+| 标志                 | 描述                                   | 是否必需 | 注意                                                                                                                    |
 |----------------------|-----------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                      | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                                      |
-| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both non-interactive and interactive modes.                                                             |
+| --no-color           | 禁用输出中的颜色。                      | 否       | 仅在非交互模式下有效。在交互模式下，禁用颜色可能对某些 UI 组件不起作用。 |
+| -P, --profile string | 指定此命令中使用的活动[用户配置文件](/tidb-cloud/cli-reference.md#user-profile)。 | 否       | 在非交互和交互模式下都有效。                                                                      |
+| -D, --debug          | 启用调试模式。                                                                                   | 否       | 在非交互和交互模式下都有效。                                                             |
 
-## Feedback
+## 反馈
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+如果你对 TiDB Cloud CLI 有任何问题或建议，欢迎创建[议题](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)。同时，我们也欢迎任何贡献。

@@ -1,40 +1,40 @@
 ---
-title: API Keys in Data Service
-summary: Learn how to create, edit, and delete an API key for a Data App.
+title: Data Service 中的 API 密钥
+summary: 了解如何为 Data App 创建、编辑和删除 API 密钥。
 ---
 
-# API Keys in Data Service
+# Data Service 中的 API 密钥
 
-The TiDB Cloud Data API supports both [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) and [Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication).
+TiDB Cloud Data API 支持[基本认证](https://en.wikipedia.org/wiki/Basic_access_authentication)和[摘要认证](https://en.wikipedia.org/wiki/Digest_access_authentication)。
 
-- [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) uses non-encrypted base64 encoding to transmit your public key and private key. HTTPS ensures the transmission security. For more information, see [RFC 7617 - The 'Basic' HTTP Authentication Scheme](https://datatracker.ietf.org/doc/html/rfc7617).
-- [Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication) offers an additional security layer by hashing your public key, private key, a server-supplied nonce value, the HTTP method, and the requested URI before network transmission. This encrypts the private key to prevent it from being transmitted in plain text. For more information, see [RFC 7616 - HTTP Digest Access Authentication](https://datatracker.ietf.org/doc/html/rfc7616).
+- [基本认证](https://en.wikipedia.org/wiki/Basic_access_authentication)使用非加密的 base64 编码来传输你的公钥和私钥。HTTPS 确保传输安全。更多信息，请参见 [RFC 7617 - The 'Basic' HTTP Authentication Scheme](https://datatracker.ietf.org/doc/html/rfc7617)。
+- [摘要认证](https://en.wikipedia.org/wiki/Digest_access_authentication)通过在网络传输前对你的公钥、私钥、服务器提供的 nonce 值、HTTP 方法和请求的 URI 进行哈希处理，提供了额外的安全层。这样可以加密私钥，防止其以明文形式传输。更多信息，请参见 [RFC 7616 - HTTP Digest Access Authentication](https://datatracker.ietf.org/doc/html/rfc7616)。
 
-> **Note:**
+> **注意：**
 >
-> The Data API key in Data Service is different from the key used in the [TiDB Cloud API](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication). The Data API key is used to access data in the TiDB Cloud clusters, whereas the TiDB Cloud API key is used to manage resources such as projects, clusters, backups, restores, and imports.
+> Data Service 中的 Data API 密钥与 [TiDB Cloud API](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication) 中使用的密钥不同。Data API 密钥用于访问 TiDB Cloud 集群中的数据，而 TiDB Cloud API 密钥用于管理项目、集群、备份、恢复和导入等资源。
 
-## API key overview
+## API 密钥概述
 
-- An API key contains a public key and a private key, which act as the username and password required in the authentication. The private key is only displayed upon the key creation.
-- Each API key belongs to one Data App only and is used to access the data in the TiDB Cloud clusters.
-- You must provide the correct API key in every request. Otherwise, TiDB Cloud responds with a `401` error.
+- API 密钥包含一个公钥和一个私钥，它们作为认证所需的用户名和密码。私钥仅在密钥创建时显示。
+- 每个 API 密钥仅属于一个 Data App，用于访问 TiDB Cloud 集群中的数据。
+- 你必须在每个请求中提供正确的 API 密钥。否则，TiDB Cloud 将返回 `401` 错误。
 
-## Rate limiting
+## 速率限制
 
-Request quotas are subject to rate limits as follows:
+请求配额受以下速率限制：
 
-- TiDB Cloud Data Service allows up to 100 requests per minute (rpm) per API key by default.
+- TiDB Cloud Data Service 默认允许每个 API 密钥每分钟最多 100 个请求（rpm）。
 
-    You can edit the rate limit of an API key when you [create](#create-an-api-key) or [edit](#edit-an-api-key) the key. The supported value range is from `1` to `1000`. If your requests per minute exceed the rate limit, the API returns a `429` error. To get a quota of more than 1000 rpm per API key, you can [submit a request](https://tidb.support.pingcap.com/) to our support team.
+    你可以在[创建](#创建-api-密钥)或[编辑](#编辑-api-密钥) API 密钥时编辑其速率限制。支持的值范围是从 `1` 到 `1000`。如果你每分钟的请求超过速率限制，API 将返回 `429` 错误。要获得每个 API 密钥每分钟超过 1000 个请求的配额，你可以向我们的支持团队[提交请求](https://tidb.support.pingcap.com/)。
 
-    Each API request returns the following headers about the limit.
+    每个 API 请求都会返回以下有关限制的标头。
 
-    - `X-Ratelimit-Limit-Minute`: The number of requests allowed per minute.
-    - `X-Ratelimit-Remaining-Minute`: The number of remaining requests in the current minute. When it reaches `0`, the API returns a `429` error and indicates that you exceed the rate limit.
-    - `X-Ratelimit-Reset`: The time in seconds at which the current rate limit resets.
+    - `X-Ratelimit-Limit-Minute`：每分钟允许的请求数。
+    - `X-Ratelimit-Remaining-Minute`：当前分钟内剩余的请求数。当它达到 `0` 时，API 将返回 `429` 错误并指示你超过了速率限制。
+    - `X-Ratelimit-Reset`：当前速率限制重置的时间（以秒为单位）。
 
-  If you exceed the rate limit, an error response returns like this:
+  如果你超过速率限制，将返回如下错误响应：
 
     ```bash
     HTTP/2 429
@@ -51,13 +51,13 @@ Request quotas are subject to rate limits as follows:
     {"type":"","data":{"columns":[],"rows":[],"result":{"latency":"","row_affect":0,"code":49900007,"row_count":0,"end_ms":0,"limit":0,"message":"API key rate limit exceeded. The limit can be increased up to 1000 requests per minute per API key in TiDB Cloud console. For an increase in quota beyond 1000 rpm, please contact us: https://tidb.support.pingcap.com/","start_ms":0}}}
     ```
 
-- TiDB Cloud Data Service allows up to 100 requests per day for each Chat2Query Data App.
+- TiDB Cloud Data Service 允许每个 Chat2Query Data App 每天最多 100 个请求。
 
-## API key expiration
+## API 密钥过期
 
-By default, API keys never expire. However, for security considerations, you can specify an expiration time for your API key when you [create](#create-an-api-key) or [edit](#edit-an-api-key) the key. 
+默认情况下，API 密钥永不过期。但是，出于安全考虑，你可以在[创建](#创建-api-密钥)或[编辑](#编辑-api-密钥) API 密钥时为其指定过期时间。
 
-- An API key is valid only before its expiration time. Once expired, all requests using that key will fail with a `401` error, and the response is similar as follows:
+- API 密钥仅在其过期时间之前有效。一旦过期，使用该密钥的所有请求都将失败并返回 `401` 错误，响应类似如下：
 
     ```bash
     HTTP/2 401
@@ -71,92 +71,92 @@ By default, API keys never expire. However, for security considerations, you can
     {"data":{"result":{"start_ms":0,"end_ms":0,"latency":"","row_affect":0,"limit":0,"code":49900002,"message":"API Key is no longer valid","row_count":0},"columns":[],"rows":[]},"type":""}
     ```
 
-- You can also expire API keys manually. For detailed steps, see [Expire an API key](#expire-an-api-key) and [Expire all API keys](#expire-all-api-keys). Once you manually expire an API key, the expiration takes effect immediately.
+- 你也可以手动使 API 密钥过期。详细步骤，请参见[使单个 API 密钥过期](#使单个-api-密钥过期)和[使所有 API 密钥过期](#使所有-api-密钥过期)。一旦你手动使 API 密钥过期，过期将立即生效。
 
-- You can check the status and expiration time of your API keys in the **Authentication** area of your target Data App.
+- 你可以在目标 Data App 的**认证**区域查看 API 密钥的状态和过期时间。
 
-- Once expired, an API key cannot be activated or edited again.
+- 一旦过期，API 密钥就无法再次激活或编辑。
 
-## Manage API keys
+## 管理 API 密钥
 
-The following sections describe how to create, edit, delete, and expire API keys for a Data App.
+以下部分描述如何为 Data App 创建、编辑、删除和使 API 密钥过期。
 
-### Create an API key
+### 创建 API 密钥
 
-To create an API key for a Data App, perform the following steps:
+要为 Data App 创建 API 密钥，请执行以下步骤：
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
-2. In the left pane, click the name of your target Data App to view its details.
-3. In the **Authentication** area, click **Create API Key**.
-4. In the **Create API Key** dialog box, do the following:
+1. 导航到项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。
+2. 在左侧窗格中，点击目标 Data App 的名称以查看其详细信息。
+3. 在**认证**区域，点击**创建 API 密钥**。
+4. 在**创建 API 密钥**对话框中，执行以下操作：
 
-    1. (Optional) Enter a description for your API key.
-    2. Select a role for your API key.
+    1. （可选）为你的 API 密钥输入描述。
+    2. 为你的 API 密钥选择角色。
 
-        The role is used to control whether the API key can read or write data to the clusters linked to the Data App. You can select the `ReadOnly` or `ReadAndWrite` role:
+        角色用于控制 API 密钥是否可以读取或写入链接到 Data App 的集群数据。你可以选择 `ReadOnly` 或 `ReadAndWrite` 角色：
 
-        - `ReadOnly`: only allows the API key to read data, such as `SELECT`, `SHOW`, `USE`, `DESC`, and `EXPLAIN` statements.
-        - `ReadAndWrite`: allows the API key to read and write data. You can use this API key to execute all SQL statements, such as DML and DDL statements.
+        - `ReadOnly`：仅允许 API 密钥读取数据，如 `SELECT`、`SHOW`、`USE`、`DESC` 和 `EXPLAIN` 语句。
+        - `ReadAndWrite`：允许 API 密钥读取和写入数据。你可以使用此 API 密钥执行所有 SQL 语句，如 DML 和 DDL 语句。
 
-    3. (Optional) Set a desired rate limit for your API key.
+    3. （可选）为你的 API 密钥设置所需的速率限制。
 
-       If your requests per minute exceed the rate limit, the API returns a `429` error. To get a quota of more than 1000 requests per minute (rpm) per API key, you can [submit a request](https://tidb.support.pingcap.com/) to our support team.
+       如果你每分钟的请求超过速率限制，API 将返回 `429` 错误。要获得每个 API 密钥每分钟超过 1000 个请求（rpm）的配额，你可以向我们的支持团队[提交请求](https://tidb.support.pingcap.com/)。
 
-    4. (Optional) Set a desired expiration time for your API key.
+    4. （可选）为你的 API 密钥设置所需的过期时间。
 
-        By default, an API key never expires. If you prefer to specify an expiration time for the API key, click **Expires in**, select a time unit (`Minutes`, `Days`, or `Months`), and then fill in a desired number for the time unit. 
+        默认情况下，API 密钥永不过期。如果你想为 API 密钥指定过期时间，点击**在此时间后过期**，选择一个时间单位（`分钟`、`天`或`月`），然后填写该时间单位的所需数字。
 
-5. Click **Next**. The public key and private key are displayed.
+5. 点击**下一步**。将显示公钥和私钥。
 
-    Make sure that you have copied and saved the private key in a secure location. After leaving this page, you will not be able to get the full private key again.
+    确保你已将私钥复制并保存在安全的位置。离开此页面后，你将无法再次获取完整的私钥。
 
-6. Click **Done**.
+6. 点击**完成**。
 
-### Edit an API key
+### 编辑 API 密钥
 
-> **Note**:
+> **注意**：
 >
-> You cannot edit an expired key.
+> 你无法编辑已过期的密钥。
 
-To edit the description or rate limit of an API key, perform the following steps:
+要编辑 API 密钥的描述或速率限制，请执行以下步骤：
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
-2. In the left pane, click the name of your target Data App to view its details.
-3. In the **Authentication** area, locate the **Action** column, and then click **...** > **Edit** in the API key row that you want to change.
-4. Update the description, role, rate limit, or expiration time of the API key.
-5. Click **Update**.
+1. 导航到项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。
+2. 在左侧窗格中，点击目标 Data App 的名称以查看其详细信息。
+3. 在**认证**区域，找到**操作**列，然后在要更改的 API 密钥行中点击 **...** > **编辑**。
+4. 更新 API 密钥的描述、角色、速率限制或过期时间。
+5. 点击**更新**。
 
-### Delete an API key
+### 删除 API 密钥
 
-> **Note:**
+> **注意：**
 >
-> Before you delete an API key, make sure that the API key is not used by any Data App.
+> 在删除 API 密钥之前，请确保该 API 密钥未被任何 Data App 使用。
 
-To delete an API key for a Data App, perform the following steps:
+要删除 Data App 的 API 密钥，请执行以下步骤：
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
-2. In the left pane, click the name of your target Data App to view its details.
-3. In the **API Key** area, locate the **Action** column, and then click **...** > **Delete** in the API key row that you want to delete.
-4. In the displayed dialog box, confirm the deletion.
+1. 导航到项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。
+2. 在左侧窗格中，点击目标 Data App 的名称以查看其详细信息。
+3. 在 **API 密钥**区域，找到**操作**列，然后在要删除的 API 密钥行中点击 **...** > **删除**。
+4. 在显示的对话框中，确认删除。
 
-### Expire an API key
+### 使单个 API 密钥过期
 
-> **Note**:
+> **注意**：
 >
-> You cannot expire an expired key.
+> 你无法使已过期的密钥过期。
 
-To expire an API key for a Data App, perform the following steps:
+要使 Data App 的 API 密钥过期，请执行以下步骤：
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
-2. In the left pane, click the name of your target Data App to view its details.
-3. In the **Authentication** area, locate the **Action** column, and then click **...** > **Expire Now** in the API key row that you want to expire.
-4. In the displayed dialog box, confirm the expiration.
+1. 导航到项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。
+2. 在左侧窗格中，点击目标 Data App 的名称以查看其详细信息。
+3. 在**认证**区域，找到**操作**列，然后在要使其过期的 API 密钥行中点击 **...** > **立即过期**。
+4. 在显示的对话框中，确认过期。
 
-### Expire all API keys
+### 使所有 API 密钥过期
 
-To expire all API keys for a Data App, perform the following steps:
+要使 Data App 的所有 API 密钥过期，请执行以下步骤：
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
-2. In the left pane, click the name of your target Data App to view its details.
-3. In the **Authentication** area, click **Expire All**.
-4. In the displayed dialog box, confirm the expiration.
+1. 导航到项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。
+2. 在左侧窗格中，点击目标 Data App 的名称以查看其详细信息。
+3. 在**认证**区域，点击**全部过期**。
+4. 在显示的对话框中，确认过期。

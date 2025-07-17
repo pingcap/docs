@@ -1,30 +1,30 @@
 ---
-title: Migrate and Merge MySQL Shards of Large Datasets to TiDB Cloud
-summary: Learn how to migrate and merge MySQL shards of large datasets to TiDB Cloud.
+title: 将大规模 MySQL 分片数据迁移和合并到 TiDB Cloud
+summary: 了解如何将大规模 MySQL 分片数据迁移和合并到 TiDB Cloud。
 ---
 
-# Migrate and Merge MySQL Shards of Large Datasets to TiDB Cloud
+# 将大规模 MySQL 分片数据迁移和合并到 TiDB Cloud
 
-This document describes how to migrate and merge a large MySQL dataset (for example, more than 1 TiB) from different partitions into TiDB Cloud. After full data migration, you can use [TiDB Data Migration (DM)](https://docs.pingcap.com/tidb/stable/dm-overview) to perform incremental migration according to your business needs.
+本文档介绍如何将大规模 MySQL 数据集（例如，超过 1 TiB）从不同分区迁移到 TiDB Cloud。完成全量数据迁移后，你可以根据业务需求使用 [TiDB Data Migration (DM)](https://docs.pingcap.com/tidb/stable/dm-overview) 执行增量迁移。
 
-The example in this document uses a complex shard migration task across multiple MySQL instances, and involves handling conflicts in auto-increment primary keys. The scenario in this example is also applicable to merging data from different sharded tables within a single MySQL instance.
+本文档中的示例使用了跨多个 MySQL 实例的复杂分片迁移任务，并涉及处理自增主键的冲突。本示例中的场景也适用于合并单个 MySQL 实例中不同分片表的数据。
 
-## Environment information in the example
+## 示例环境信息
 
-This section describes the basic information of the upstream cluster, DM, and downstream cluster used in the example.
+本节描述示例中使用的上游集群、DM 和下游集群的基本信息。
 
-### Upstream cluster
+### 上游集群
 
-The environment information of the upstream cluster is as follows:
+上游集群的环境信息如下：
 
-- MySQL version: MySQL v5.7.18
-- MySQL instance1:
-    - schema `store_01` and table `[sale_01, sale_02]`
-    - schema `store_02` and table `[sale_01, sale_02]`
-- MySQL instance 2:
-    - schema `store_01`and table `[sale_01, sale_02]`
-    - schema `store_02`and table `[sale_01, sale_02]`
-- Table structure:
+- MySQL 版本：MySQL v5.7.18
+- MySQL 实例 1：
+    - schema `store_01` 和表 `[sale_01, sale_02]`
+    - schema `store_02` 和表 `[sale_01, sale_02]`
+- MySQL 实例 2：
+    - schema `store_01` 和表 `[sale_01, sale_02]`
+    - schema `store_02` 和表 `[sale_01, sale_02]`
+- 表结构：
 
   ```sql
   CREATE TABLE sale_01 (
@@ -38,81 +38,80 @@ The environment information of the upstream cluster is as follows:
 
 ### DM
 
-The version of DM is v5.3.0. You need to deploy TiDB DM manually. For detailed steps, see [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup).
+DM 的版本是 v5.3.0。你需要手动部署 TiDB DM。详细步骤，请参见[使用 TiUP 部署 DM 集群](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup)。
 
-### External storage
+### 外部存储
 
-This document uses the Amazon S3 as an example.
+本文档以 Amazon S3 为例。
 
-### Downstream cluster
+### 下游集群
 
-The sharded schemas and tables are merged into the table `store.sales`.
+分片的 schema 和表被合并到表 `store.sales` 中。
+## 从 MySQL 到 TiDB Cloud 执行全量数据迁移
 
-## Perform full data migration from MySQL to TiDB Cloud
+以下是将 MySQL 分片的全量数据迁移和合并到 TiDB Cloud 的步骤。
 
-The following is the procedure to migrate and merge full data of MySQL shards to TiDB Cloud.
+在以下示例中，你只需要将表中的数据导出为 **CSV** 格式。
 
-In the following example, you only need to export the data in tables to **CSV** format.
+### 步骤 1. 在 Amazon S3 存储桶中创建目录
 
-### Step 1. Create directories in the Amazon S3 bucket
+在 Amazon S3 存储桶中创建一个一级目录 `store`（对应数据库级别）和一个二级目录 `sales`（对应表级别）。在 `sales` 中，为每个 MySQL 实例创建一个三级目录（对应 MySQL 实例级别）。例如：
 
-Create a first-level directory `store` (corresponding to the level of databases) and a second-level directory `sales` (corresponding to the level of tables) in the Amazon S3 bucket. In `sales`, create a third-level directory for each MySQL instance (corresponding to the level of MySQL instances). For example:
+- 将 MySQL 实例 1 中的数据迁移到 `s3://dumpling-s3/store/sales/instance01/`
+- 将 MySQL 实例 2 中的数据迁移到 `s3://dumpling-s3/store/sales/instance02/`
 
-- Migrate the data in MySQL instance1 to `s3://dumpling-s3/store/sales/instance01/`
-- Migrate the data in MySQL instance2 to `s3://dumpling-s3/store/sales/instance02/`
-
-If there are shards across multiple instances, you can create one first-level directory for each database and create one second-level directory for each sharded table. Then create a third-level directory for each MySQL instance for easy management. For example, if you want to migrate and merge tables `stock_N.product_N` from MySQL instance1 and MySQL instance2 into the table `stock.products` in TiDB Cloud, you can create the following directories:
+如果有跨多个实例的分片，你可以为每个数据库创建一个一级目录，为每个分片表创建一个二级目录。然后为每个 MySQL 实例创建一个三级目录，以便于管理。例如，如果你想将 MySQL 实例 1 和 MySQL 实例 2 中的表 `stock_N.product_N` 迁移和合并到 TiDB Cloud 中的表 `stock.products`，你可以创建以下目录：
 
 - `s3://dumpling-s3/stock/products/instance01/`
 - `s3://dumpling-s3/stock/products/instance02/`
 
-### Step 2. Use Dumpling to export data to Amazon S3
+### 步骤 2. 使用 Dumpling 将数据导出到 Amazon S3
 
-For information about how to install Dumpling, see [Dumpling Introduction](https://docs.pingcap.com/tidb/stable/dumpling-overview).
+有关如何安装 Dumpling 的信息，请参见 [Dumpling 简介](https://docs.pingcap.com/tidb/stable/dumpling-overview)。
 
-When you use Dumpling to export data to Amazon S3, note the following:
+使用 Dumpling 将数据导出到 Amazon S3 时，请注意以下事项：
 
-- Enable binlog for upstream clusters.
-- Choose the correct Amazon S3 directory and region.
-- Choose the appropriate concurrency by configuring the `-t` option to minimize the impact on the upstream cluster, or export directly from the backup database. For more information about how to use this parameter, see [Option list of Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling).
-- Set appropriate values for `--filetype csv` and `--no-schemas`. For more information about how to use these parameters, see [Option list of Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling).
+- 为上游集群启用 binlog。
+- 选择正确的 Amazon S3 目录和区域。
+- 通过配置 `-t` 选项选择适当的并发度，以最小化对上游集群的影响，或直接从备份数据库导出。有关如何使用此参数的更多信息，请参见 [Dumpling 参数列表](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling)。
+- 为 `--filetype csv` 和 `--no-schemas` 设置适当的值。有关如何使用这些参数的更多信息，请参见 [Dumpling 参数列表](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling)。
 
-Name the CSV files as follows:
+CSV 文件的命名规则如下：
 
-- If the data of one table is separated into multiple CSV files, append a numeric suffix to these CSV files. For example, `${db_name}.${table_name}.000001.csv` and `${db_name}.${table_name}.000002.csv`. The numeric suffixes can be inconsecutive but must be in ascending order. You also need to add extra zeros before the number to ensure all the suffixes are in the same length.
+- 如果一个表的数据被分成多个 CSV 文件，在这些 CSV 文件后面添加数字后缀。例如，`${db_name}.${table_name}.000001.csv` 和 `${db_name}.${table_name}.000002.csv`。数字后缀可以不连续但必须按升序排列。你还需要在数字前添加额外的零，以确保所有后缀的长度相同。
 
-> **Note:**
+> **注意：**
 >
-> If you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **Mapping Settings** in [Step 5](#step-5-perform-the-data-import-task) to import your source data to a single target table.
+> 如果在某些情况下无法按照上述规则更新 CSV 文件名（例如，CSV 文件链接也被其他程序使用），你可以保持文件名不变，并在[步骤 5](#步骤-5-执行数据导入任务) 中使用**映射设置**将源数据导入到单个目标表。
 
-To export data to Amazon S3, do the following:
+要将数据导出到 Amazon S3，请执行以下操作：
 
-1. Get the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` of the Amazon S3 bucket.
+1. 获取 Amazon S3 存储桶的 `AWS_ACCESS_KEY_ID` 和 `AWS_SECRET_ACCESS_KEY`。
 
     ```shell
     [root@localhost ~]# export AWS_ACCESS_KEY_ID={your_aws_access_key_id}
     [root@localhost ~]# export AWS_SECRET_ACCESS_KEY= {your_aws_secret_access_key}
     ```
 
-2. Export data from MySQL instance1 to the `s3://dumpling-s3/store/sales/instance01/` directory in the Amazon S3 bucket.
+2. 将数据从 MySQL 实例 1 导出到 Amazon S3 存储桶中的 `s3://dumpling-s3/store/sales/instance01/` 目录。
 
     ```shell
     [root@localhost ~]# tiup dumpling -u {username} -p {password} -P {port} -h {mysql01-ip} -B store_01,store_02 -r 20000 --filetype csv --no-schemas -o "s3://dumpling-s3/store/sales/instance01/" --s3.region "ap-northeast-1"
     ```
 
-    For more information about the parameters, see [Option list of Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling).
+    有关参数的更多信息，请参见 [Dumpling 参数列表](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling)。
 
-3. Export data from MySQL instance2 to the `s3://dumpling-s3/store/sales/instance02/` directory in the Amazon S3 bucket.
+3. 将数据从 MySQL 实例 2 导出到 Amazon S3 存储桶中的 `s3://dumpling-s3/store/sales/instance02/` 目录。
 
     ```shell
     [root@localhost ~]# tiup dumpling -u {username} -p {password} -P {port} -h {mysql02-ip} -B store_01,store_02 -r 20000 --filetype csv --no-schemas -o "s3://dumpling-s3/store/sales/instance02/" --s3.region "ap-northeast-1"
     ```
 
-For detailed steps, see [Export data to Amazon S3 cloud storage](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-data-to-amazon-s3-cloud-storage).
+详细步骤，请参见[导出数据到 Amazon S3 云存储](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-data-to-amazon-s3-cloud-storage)。
 
-### Step 3. Create schemas in TiDB Cloud cluster
+### 步骤 3. 在 TiDB Cloud 集群中创建 schema
 
-Create schemas in the TiDB Cloud cluster as follows:
+按照以下步骤在 TiDB Cloud 集群中创建 schema：
 
 ```sql
 mysql> CREATE DATABASE store;
@@ -121,7 +120,7 @@ mysql> use store;
 Database changed
 ```
 
-In this example, the column IDs of the upstream tables `sale_01` and `sale_02` are auto-increment primary keys. Conflicts might occur when you merge sharded tables in the downstream database. Execute the following SQL statement to set the ID column as a normal index instead of a primary key:
+在本示例中，上游表 `sale_01` 和 `sale_02` 的列 ID 是自增主键。在下游数据库中合并分片表时可能会发生冲突。执行以下 SQL 语句将 ID 列设置为普通索引而不是主键：
 
 ```sql
 mysql> CREATE TABLE `sales` (
@@ -134,13 +133,12 @@ mysql> CREATE TABLE `sales` (
 Query OK, 0 rows affected (0.17 sec)
 ```
 
-For more information about the solutions to solve such conflicts, see [Remove the PRIMARY KEY attribute from the column](https://docs.pingcap.com/tidb/stable/shard-merge-best-practices#remove-the-primary-key-attribute-from-the-column).
+有关解决此类冲突的解决方案，请参见[移除列的 PRIMARY KEY 属性](https://docs.pingcap.com/tidb/stable/shard-merge-best-practices#remove-the-primary-key-attribute-from-the-column)。
+### 步骤 4. 配置 Amazon S3 访问
 
-### Step 4. Configure Amazon S3 access
+按照[配置 Amazon S3 访问](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)中的说明获取访问源数据的角色 ARN。
 
-Follow the instructions in [Configure Amazon S3 access](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access) to get the role ARN to access the source data.
-
-The following example only lists key policy configurations. Replace the Amazon S3 path with your own values.
+以下示例仅列出关键策略配置。请将 Amazon S3 路径替换为你自己的值。
 
 ```yaml
 {
@@ -171,102 +169,101 @@ The following example only lists key policy configurations. Replace the Amazon S
 }
 ```
 
-### Step 5. Perform the data import task
+### 步骤 5. 执行数据导入任务
 
-After configuring the Amazon S3 access, you can perform the data import task in the TiDB Cloud console as follows:
+配置 Amazon S3 访问后，你可以在 TiDB Cloud 控制台中执行数据导入任务，步骤如下：
 
-1. Open the **Import** page for your target cluster.
+1. 打开目标集群的**导入**页面。
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面。
 
-        > **Tip:**
+        > **提示：**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. 点击目标集群的名称进入其概览页面，然后在左侧导航栏中点击**数据** > **导入**。
 
-2. Select **Import data from Cloud Storage**, and then click **Amazon S3**.
+2. 选择**从云存储导入数据**，然后点击 **Amazon S3**。
 
-3. On the **Import Data from Amazon S3** page, fill in the following information:
+3. 在**从 Amazon S3 导入数据**页面，填写以下信息：
 
-    - **Import File Count**: for TiDB Cloud Serverless, select **Multiple files**. This field is not available in TiDB Cloud Dedicated.
-    - **Included Schema Files**: select **No**.
-    - **Data Format**: select **CSV**.
-    - **Folder URI**: fill in the bucket URI of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales/` in this example, so that TiDB Cloud can import and merge the data in all MySQL instances into `store.sales` in one go.
-    - **Bucket Access** > **AWS Role ARN**: enter the Role-ARN you obtained.
+    - **导入文件数量**：对于 TiDB Cloud Serverless，选择**多个文件**。TiDB Cloud Dedicated 中不提供此字段。
+    - **包含 Schema 文件**：选择**否**。
+    - **数据格式**：选择 **CSV**。
+    - **文件夹 URI**：填写源数据的存储桶 URI。你可以使用对应表的二级目录，本例中为 `s3://dumpling-s3/store/sales/`，这样 TiDB Cloud 可以一次性将所有 MySQL 实例中的数据导入并合并到 `store.sales` 中。
+    - **存储桶访问** > **AWS Role ARN**：输入你获取的 Role-ARN。
 
-    If the location of the bucket is different from your cluster, confirm the compliance of cross region.
+    如果存储桶的位置与你的集群不同，请确认跨区域合规性。
 
-    TiDB Cloud starts validating whether it can access your data in the specified bucket URI. After validation, TiDB Cloud tries to scan all the files in the data source using the default file naming pattern, and returns a scan summary result on the left side of the next page. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
+    TiDB Cloud 开始验证是否可以访问指定存储桶 URI 中的数据。验证后，TiDB Cloud 会使用默认的文件命名模式尝试扫描数据源中的所有文件，并在下一页的左侧返回扫描摘要结果。如果遇到 `AccessDenied` 错误，请参见[排查从 S3 导入数据时的访问被拒绝错误](/tidb-cloud/troubleshoot-import-access-denied-error.md)。
 
-4. Click **Connect**.
+4. 点击**连接**。
 
-5. In the **Destination** section, select the target database and table.
+5. 在**目标**部分，选择目标数据库和表。
 
-    When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding CSV file. After that, the data source files will be re-scanned using the provided custom mapping rule.
+    导入多个文件时，你可以使用**高级设置** > **映射设置**为每个目标表及其对应的 CSV 文件定义自定义映射规则。之后，数据源文件将使用提供的自定义映射规则重新扫描。
 
-    When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `s3://sampledata/ingest/TableName.01.csv`.
+    在**源文件 URI 和名称**中输入源文件 URI 和名称时，确保其格式为 `s3://[bucket_name]/[data_source_folder]/[file_name].csv`。例如，`s3://sampledata/ingest/TableName.01.csv`。
 
-    You can also use wildcards to match the source files. For example:
+    你也可以使用通配符来匹配源文件。例如：
 
-    - `s3://[bucket_name]/[data_source_folder]/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in that folder will be imported into the same target table.
+    - `s3://[bucket_name]/[data_source_folder]/my-data?.csv`：该文件夹中以 `my-data` 开头后跟一个字符的所有 CSV 文件（如 `my-data1.csv` 和 `my-data2.csv`）将被导入到同一个目标表中。
 
-    - `s3://[bucket_name]/[data_source_folder]/my-data*.csv`: all CSV files in the folder starting with `my-data` will be imported into the same target table.
+    - `s3://[bucket_name]/[data_source_folder]/my-data*.csv`：该文件夹中以 `my-data` 开头的所有 CSV 文件将被导入到同一个目标表中。
 
-    Note that only `?` and `*` are supported.
+    注意，仅支持 `?` 和 `*` 通配符。
 
-    > **Note:**
+    > **注意：**
     >
-    > The URI must contain the data source folder.
+    > URI 必须包含数据源文件夹。
 
-6. Edit the CSV configuration if needed.
+6. 如果需要，编辑 CSV 配置。
 
-    You can also click **Edit CSV configuration** to configure Backslash Escape, Separator, and Delimiter for more fine-grained control.
+    你也可以点击**编辑 CSV 配置**来配置反斜杠转义、分隔符和定界符，以实现更精细的控制。
 
-    > **Note:**
+    > **注意：**
     >
-    > For the configurations of separator, delimiter, and null, you can use both alphanumeric characters and certain special characters. The supported special characters include `\t`, `\b`, `\n`, `\r`, `\f`, and `\u0001`.
+    > 对于分隔符、定界符和空值的配置，你可以使用字母数字字符和某些特殊字符。支持的特殊字符包括 `\t`、`\b`、`\n`、`\r`、`\f` 和 `\u0001`。
 
-7. Click **Start Import**.
+7. 点击**开始导入**。
 
-8. When the import progress shows **Completed**, check the imported tables.
+8. 当导入进度显示**已完成**时，检查导入的表。
 
-After the data is imported, if you want to remove the Amazon S3 access of TiDB Cloud, simply delete the policy that you added.
+数据导入后，如果你想移除 TiDB Cloud 的 Amazon S3 访问权限，只需删除你添加的策略即可。
+## 从 MySQL 到 TiDB Cloud 执行增量数据复制
 
-## Perform incremental data replication from MySQL to TiDB Cloud
+要基于 binlog 从上游集群的指定位置复制数据变更到 TiDB Cloud，你可以使用 TiDB Data Migration (DM) 执行增量复制。
 
-To replicate the data changes based on binlog from a specified position in the upstream cluster to TiDB Cloud, you can use TiDB Data Migration (DM) to perform incremental replication.
+### 开始之前
 
-### Before you begin
+如果你想迁移增量数据并合并 MySQL 分片到 TiDB Cloud，你需要手动部署 TiDB DM，因为 TiDB Cloud 目前不支持迁移和合并 MySQL 分片。详细步骤，请参见[使用 TiUP 部署 DM 集群](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup)。
 
-If you want to migrate incremental data and merge MySQL shards to TiDB Cloud, you need to manually deploy TiDB DM, because TiDB Cloud does not support migrating and merging MySQL shards yet. For detailed steps, see [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup).
+### 步骤 1. 添加数据源
 
-### Step 1. Add the data source
-
-1. Create a new data source file `dm-source1.yaml` to configure an upstream data source into DM. Add the following content:
+1. 创建一个新的数据源文件 `dm-source1.yaml` 以将上游数据源配置到 DM 中。添加以下内容：
 
     ```yaml
-    # MySQL Configuration.
+    # MySQL 配置。
     source-id: "mysql-replica-01"
-    # Specifies whether DM-worker pulls binlogs with GTID (Global Transaction Identifier).
-    # The prerequisite is that you have already enabled GTID in the upstream MySQL.
-    # If you have configured the upstream database service to switch master between different nodes automatically, you must enable GTID.
+    # 指定 DM-worker 是否使用 GTID（全局事务标识符）拉取 binlog。
+    # 前提是你已经在上游 MySQL 中启用了 GTID。
+    # 如果你已经配置上游数据库服务在不同节点之间自动切换主节点，则必须启用 GTID。
     enable-gtid: true
     from:
-     host: "${host}"           # For example: 192.168.10.101
+     host: "${host}"           # 例如：192.168.10.101
      user: "user01"
-     password: "${password}"   # Plaintext passwords are supported but not recommended. It is recommended that you use dmctl encrypt to encrypt plaintext passwords.
-     port: ${port}             # For example: 3307
+     password: "${password}"   # 支持明文密码，但不推荐。建议使用 dmctl encrypt 加密明文密码。
+     port: ${port}             # 例如：3307
     ```
 
-2. Create another new data source file `dm-source2.yaml`, and add the following content:
+2. 创建另一个新的数据源文件 `dm-source2.yaml`，并添加以下内容：
 
     ```yaml
-    # MySQL Configuration.
+    # MySQL 配置。
     source-id: "mysql-replica-02"
-    # Specifies whether DM-worker pulls binlogs with GTID (Global Transaction Identifier).
-    # The prerequisite is that you have already enabled GTID in the upstream MySQL.
-    # If you have configured the upstream database service to switch master between different nodes automatically, you must enable GTID.
+    # 指定 DM-worker 是否使用 GTID（全局事务标识符）拉取 binlog。
+    # 前提是你已经在上游 MySQL 中启用了 GTID。
+    # 如果你已经配置上游数据库服务在不同节点之间自动切换主节点，则必须启用 GTID。
     enable-gtid: true
     from:
      host: "192.168.10.102"
@@ -275,20 +272,20 @@ If you want to migrate incremental data and merge MySQL shards to TiDB Cloud, yo
      port: 3308
     ```
 
-3. Run the following command in a terminal. Use `tiup dmctl` to load the first data source configuration into the DM cluster:
+3. 在终端中运行以下命令。使用 `tiup dmctl` 将第一个数据源配置加载到 DM 集群中：
 
     ```shell
     [root@localhost ~]# tiup dmctl --master-addr ${advertise-addr} operate-source create dm-source1.yaml
     ```
 
-    The parameters used in the command above are described as follows:
+    上述命令中使用的参数说明如下：
 
-    |Parameter              |Description    |
+    |参数              |说明    |
     |-                      |-              |
-    |`--master-addr`        |The `{advertise-addr}` of any DM-master node in the cluster where `dmctl` is to be connected. For example: 192.168.11.110:9261|
-    |`operate-source create`|Loads the data source to the DM cluster.|
+    |`--master-addr`        |要连接的 DM 集群中任一 DM-master 节点的 `{advertise-addr}`。例如：192.168.11.110:9261|
+    |`operate-source create`|将数据源加载到 DM 集群。|
 
-    The following is an example output:
+    以下是示例输出：
 
     ```shell
     tiup is checking updates for component dmctl ...
@@ -310,13 +307,13 @@ If you want to migrate incremental data and merge MySQL shards to TiDB Cloud, yo
 
     ```
 
-4. Run the following command in a terminal. Use `tiup dmctl` to load the second data source configuration into the DM cluster:
+4. 在终端中运行以下命令。使用 `tiup dmctl` 将第二个数据源配置加载到 DM 集群中：
 
     ```shell
     [root@localhost ~]# tiup dmctl --master-addr 192.168.11.110:9261 operate-source create dm-source2.yaml
     ```
 
-    The following is an example output:
+    以下是示例输出：
 
     ```shell
     tiup is checking updates for component dmctl ...
@@ -336,12 +333,11 @@ If you want to migrate incremental data and merge MySQL shards to TiDB Cloud, yo
        ]
     }
     ```
+### 步骤 2. 创建复制任务
 
-### Step 2. Create a replication task
+1. 为复制任务创建一个 `test-task1.yaml` 文件。
 
-1. Create a `test-task1.yaml` file for the replication task.
-
-2. Find the starting point in the metadata file of MySQL instance1 exported by Dumpling. For example:
+2. 在 Dumpling 导出的 MySQL 实例 1 的元数据文件中找到起始点。例如：
 
     ```toml
     Started dump at: 2022-05-25 10:16:26
@@ -352,7 +348,7 @@ If you want to migrate incremental data and merge MySQL shards to TiDB Cloud, yo
     Finished dump at: 2022-05-25 10:16:27
     ```
 
-3. Find the starting point in the metadata file of MySQL instance2 exported by Dumpling. For example:
+3. 在 Dumpling 导出的 MySQL 实例 2 的元数据文件中找到起始点。例如：
 
     ```toml
     Started dump at: 2022-05-25 10:20:32
@@ -363,25 +359,25 @@ If you want to migrate incremental data and merge MySQL shards to TiDB Cloud, yo
     Finished dump at: 2022-05-25 10:20:32
     ```
 
-4. Edit the task configuration file `test-task1`, to configure the incremental replication mode and replication starting point for each data source.
+4. 编辑任务配置文件 `test-task1`，为每个数据源配置增量复制模式和复制起始点。
 
     ```yaml
-    ## ********* Task Configuration *********
+    ## ********* 任务配置 *********
     name: test-task1
     shard-mode: "pessimistic"
-    # Task mode. The "incremental" mode only performs incremental data migration.
+    # 任务模式。"incremental" 模式仅执行增量数据迁移。
     task-mode: incremental
     # timezone: "UTC"
 
-    ## ******** Data Source Configuration **********
-    ## (Optional) If you need to incrementally replicate data that has already been migrated in the full data migration, you need to enable the safe mode to avoid the incremental data migration error.
-    ##  This scenario is common in the following case: the full migration data does not belong to the data source's consistency snapshot, and after that, DM starts to replicate incremental data from a position earlier than the full migration.
-    syncers:           # The running configurations of the sync processing unit.
-     global:           # Configuration name.
-       safe-mode: false # # If this field is set to true, DM changes INSERT of the data source to REPLACE for the target database,
-                        # # and changes UPDATE of the data source to DELETE and REPLACE for the target database.
-                        # # This is to ensure that when the table schema contains a primary key or unique index, DML statements can be imported repeatedly.
-                        # # In the first minute of starting or resuming an incremental migration task, DM automatically enables the safe mode.
+    ## ******** 数据源配置 **********
+    ## （可选）如果你需要增量复制已经在全量数据迁移中迁移的数据，则需要启用安全模式以避免增量数据迁移错误。
+    ##  这种情况在以下场景中很常见：全量迁移数据不属于数据源的一致性快照，之后 DM 从早于全量迁移的位置开始复制增量数据。
+    syncers:           # 同步处理单元的运行配置。
+     global:           # 配置名称。
+       safe-mode: false # # 如果此字段设置为 true，DM 会将数据源的 INSERT 更改为目标数据库的 REPLACE，
+                        # # 并将数据源的 UPDATE 更改为目标数据库的 DELETE 和 REPLACE。
+                        # # 这是为了确保当表结构包含主键或唯一索引时，DML 语句可以重复导入。
+                        # # 在启动或恢复增量迁移任务的第一分钟，DM 会自动启用安全模式。
     mysql-instances:
     - source-id: "mysql-replica-01"
        block-allow-list:  "bw-rule-1"
@@ -402,14 +398,14 @@ If you want to migrate incremental data and merge MySQL shards to TiDB Cloud, yo
          binlog-pos: 1312659
          binlog-gtid: "cd21245e-bb10-11ec-ae16-fec83cf2b903:1-4036"
 
-    ## ******** Configuration of the target TiDB cluster on TiDB Cloud **********
-    target-database:       # The target TiDB cluster on TiDB Cloud
+    ## ******** TiDB Cloud 上目标 TiDB 集群的配置 **********
+    target-database:       # TiDB Cloud 上的目标 TiDB 集群
      host: "tidb.xxxxxxx.xxxxxxxxx.ap-northeast-1.prod.aws.tidbcloud.com"
      port: 4000
      user: "root"
-     password: "${password}"  # If the password is not empty, it is recommended to use a dmctl-encrypted cipher.
+     password: "${password}"  # 如果密码不为空，建议使用 dmctl 加密的密文。
 
-    ## ******** Function Configuration **********
+    ## ******** 功能配置 **********
     routes:
      store-route-rule:
        schema-pattern: "store_*"
@@ -433,19 +429,19 @@ If you want to migrate incremental data and merge MySQL shards to TiDB Cloud, yo
      bw-rule-1:
        do-dbs: ["store_*"]
 
-    ## ******** Ignore check items **********
+    ## ******** 忽略检查项 **********
     ignore-checking-items: ["table_schema","auto_increment_ID"]
     ```
 
-For detailed task configurations, see [DM Task Configurations](https://docs.pingcap.com/tidb/stable/task-configuration-file-full).
+有关详细的任务配置，请参见 [DM 任务配置](https://docs.pingcap.com/tidb/stable/task-configuration-file-full)。
 
-To run a data replication task smoothly, DM triggers a precheck automatically at the start of the task and returns the check results. DM starts the replication only after the precheck is passed. To trigger a precheck manually, run the check-task command:
+为了使数据复制任务顺利运行，DM 会在任务开始时自动触发预检查并返回检查结果。DM 仅在预检查通过后才开始复制。要手动触发预检查，请运行 check-task 命令：
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr 192.168.11.110:9261 check-task dm-task.yaml
 ```
 
-The following is an example output:
+以下是示例输出：
 
 ```shell
 tiup is checking updates for component dmctl ...
@@ -458,22 +454,22 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/${tidb_version}/dmctl/d
 }
 ```
 
-### Step 3. Start the replication task
+### 步骤 3. 启动复制任务
 
-Use `tiup dmctl` to run the following command to start the data replication task:
+使用 `tiup dmctl` 运行以下命令来启动数据复制任务：
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr ${advertise-addr}  start-task dm-task.yaml
 ```
 
-The parameters used in the command above are described as follows:
+上述命令中使用的参数说明如下：
 
-|Parameter              |Description    |
+|参数              |说明    |
 |-                      |-              |
-|`--master-addr`        |The `{advertise-addr}` of any DM-master node in the cluster where `dmctl` is to be connected. For example: 192.168.11.110:9261|
-|`start-task`           |Starts the migration task.|
+|`--master-addr`        |要连接的 DM 集群中任一 DM-master 节点的 `{advertise-addr}`。例如：192.168.11.110:9261|
+|`start-task`           |启动迁移任务。|
 
-The following is an example output:
+以下是示例输出：
 
 ```shell
 tiup is checking updates for component dmctl ...
@@ -502,19 +498,19 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/${tidb_version}/dmctl/d
 }
 ```
 
-If the task fails to start, check the prompt message and fix the configuration. After that, you can re-run the command above to start the task.
+如果任务启动失败，请检查提示消息并修复配置。之后，你可以重新运行上述命令来启动任务。
 
-If you encounter any problem, refer to [DM error handling](https://docs.pingcap.com/tidb/stable/dm-error-handling) and [DM FAQ](https://docs.pingcap.com/tidb/stable/dm-faq).
+如果遇到任何问题，请参考 [DM 错误处理](https://docs.pingcap.com/tidb/stable/dm-error-handling) 和 [DM 常见问题](https://docs.pingcap.com/tidb/stable/dm-faq)。
 
-### Step 4. Check the replication task status
+### 步骤 4. 检查复制任务状态
 
-To learn whether the DM cluster has an ongoing replication task and view the task status, run the `query-status` command using `tiup dmctl`:
+要了解 DM 集群是否有正在进行的复制任务并查看任务状态，请使用 `tiup dmctl` 运行 `query-status` 命令：
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr 192.168.11.110:9261 query-status test-task1
 ```
 
-The following is an example output:
+以下是示例输出：
 
 ```shell
 {
@@ -600,4 +596,4 @@ The following is an example output:
 }
 ```
 
-For a detailed interpretation of the results, see [Query Status](https://docs.pingcap.com/tidb/stable/dm-query-status).
+有关结果的详细解释，请参见[查询状态](https://docs.pingcap.com/tidb/stable/dm-query-status)。

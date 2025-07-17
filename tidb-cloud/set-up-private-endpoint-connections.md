@@ -1,212 +1,212 @@
 ---
-title: Connect to a TiDB Cloud Dedicated Cluster via AWS PrivateLink
-summary: Learn how to connect to your TiDB Cloud cluster via private endpoint with AWS.
+title: 通过 AWS PrivateLink 连接到 TiDB Cloud Dedicated 集群
+summary: 了解如何通过 AWS 私有端点连接到 TiDB Cloud 集群。
 ---
 
-# Connect to a TiDB Cloud Dedicated Cluster via AWS PrivateLink
+# 通过 AWS PrivateLink 连接到 TiDB Cloud Dedicated 集群
 
-This document describes how to connect to your TiDB Cloud Dedicated cluster via [AWS PrivateLink](https://aws.amazon.com/privatelink).
+本文介绍如何通过 [AWS PrivateLink](https://aws.amazon.com/privatelink) 连接到 TiDB Cloud Dedicated 集群。
 
-> **Tip:**
+> **提示：**
 >
-> - To learn how to connect to a TiDB Cloud Serverless cluster via private endpoint, see [Connect to TiDB Cloud Serverless via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
-> - To learn how to connect to a TiDB Cloud Dedicated cluster via private endpoint with Azure, see [Connect to a TiDB Cloud Dedicated Cluster via Azure Private Link](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md).
-> - To learn how to connect to a TiDB Cloud Dedicated cluster via private endpoint with Google Cloud, see [Connect to a TiDB Cloud Dedicated Cluster via Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md).
+> - 要了解如何通过私有端点连接到 TiDB Cloud Serverless 集群，请参见[通过私有端点连接到 TiDB Cloud Serverless](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)。
+> - 要了解如何通过 Azure 私有端点连接到 TiDB Cloud Dedicated 集群，请参见[通过 Azure Private Link 连接到 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)。
+> - 要了解如何通过 Google Cloud 私有端点连接到 TiDB Cloud Dedicated 集群，请参见[通过 Google Cloud Private Service Connect 连接到 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)。
 
-TiDB Cloud supports highly secure and one-way access to the TiDB Cloud service hosted in an AWS VPC via [AWS PrivateLink](https://aws.amazon.com/privatelink), as if the service were in your own VPC. A private endpoint is exposed in your VPC and you can create a connection to the TiDB Cloud service via the endpoint with permission.
+TiDB Cloud 支持通过 [AWS PrivateLink](https://aws.amazon.com/privatelink) 安全地单向访问托管在 AWS VPC 中的 TiDB Cloud 服务，就像该服务在你自己的 VPC 中一样。私有端点会在你的 VPC 中公开，你可以通过具有权限的端点连接到 TiDB Cloud 服务。
 
-Powered by AWS PrivateLink, the endpoint connection is secure and private, and does not expose your data to the public internet. In addition, the endpoint connection supports CIDR overlap and is easier for network management.
+由 AWS PrivateLink 提供支持的端点连接是安全和私密的，不会将你的数据暴露在公共互联网上。此外，端点连接支持 CIDR 重叠，更易于网络管理。
 
-The architecture of the private endpoint is as follows:
+私有端点的架构如下：
 
-![Private endpoint architecture](/media/tidb-cloud/aws-private-endpoint-arch.png)
+![私有端点架构](/media/tidb-cloud/aws-private-endpoint-arch.png)
 
-For more detailed definitions of the private endpoint and endpoint service, see the following AWS documents:
+有关私有端点和端点服务的更详细定义，请参见以下 AWS 文档：
 
-- [What is AWS PrivateLink?](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html)
-- [AWS PrivateLink concepts](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html)
+- [什么是 AWS PrivateLink？](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html)
+- [AWS PrivateLink 概念](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html)
 
-## Restrictions
+## 限制
 
-- Only the `Organization Owner` and the `Project Owner` roles can create private endpoints.
-- The private endpoint and the TiDB cluster to be connected must be located in the same region.
+- 只有 `Organization Owner` 和 `Project Owner` 角色可以创建私有端点。
+- 私有端点和要连接的 TiDB 集群必须位于同一区域。
 
-In most scenarios, you are recommended to use private endpoint connection over VPC peering. However, in the following scenarios, you should use VPC peering instead of private endpoint connection:
+在大多数情况下，建议使用私有端点连接而不是 VPC 对等连接。但是，在以下情况下，你应该使用 VPC 对等连接而不是私有端点连接：
 
-- You are using a [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) cluster to replicate data from a source TiDB cluster to a target TiDB cluster across regions, to get high availability. Currently, private endpoint does not support cross-region connection.
-- You are using a TiCDC cluster to replicate data to a downstream cluster (such as Amazon Aurora, MySQL, and Kafka) but you cannot maintain the endpoint service on your own.
-- You are connecting to PD or TiKV nodes directly.
+- 你正在使用 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) 集群将数据从源 TiDB 集群复制到跨区域的目标 TiDB 集群，以获得高可用性。目前，私有端点不支持跨区域连接。
+- 你正在使用 TiCDC 集群将数据复制到下游集群（如 Amazon Aurora、MySQL 和 Kafka），但你无法自行维护端点服务。
+- 你正在直接连接到 PD 或 TiKV 节点。
 
-## Prerequisites
+## 前提条件
 
-Make sure that DNS hostnames and DNS resolution are both enabled in your AWS VPC settings. They are disabled by default when you create a VPC in the [AWS Management Console](https://console.aws.amazon.com/).
+确保在 AWS VPC 设置中启用了 DNS 主机名和 DNS 解析。在 [AWS 管理控制台](https://console.aws.amazon.com/) 中创建 VPC 时，这些功能默认是禁用的。
 
-## Set up a private endpoint connection and connect to your cluster
+## 设置私有端点连接并连接到集群
 
-To connect to your TiDB Cloud Dedicated cluster via a private endpoint, complete the follow these steps:
+要通过私有端点连接到 TiDB Cloud Dedicated 集群，请完成以下步骤：
 
-1. [Select a TiDB cluster](#step-1-select-a-tidb-cluster)
-2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
-3. [Create a private endpoint connection](#step-3-create-a-private-endpoint-connection)
-4. [Enable private DNS](#step-4-enable-private-dns)
-5. [Connect to your TiDB cluster](#step-5-connect-to-your-tidb-cluster)
+1. [选择 TiDB 集群](#步骤-1-选择-tidb-集群)
+2. [创建 AWS 接口端点](#步骤-2-创建-aws-接口端点)
+3. [创建私有端点连接](#步骤-3-创建私有端点连接)
+4. [启用私有 DNS](#步骤-4-启用私有-dns)
+5. [连接到 TiDB 集群](#步骤-5-连接到-tidb-集群)
 
-If you have multiple clusters, you need to repeat these steps for each cluster that you want to connect to using AWS PrivateLink.
+如果你有多个集群，则需要对要使用 AWS PrivateLink 连接的每个集群重复这些步骤。
 
-### Step 1. Select a TiDB cluster
+### 步骤 1. 选择 TiDB 集群
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target TiDB cluster to go to its overview page.
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
-3. In the **Connection Type** drop-down list, select **Private Endpoint**, and then click **Create Private Endpoint Connection**.
+1. 在项目的[**集群**](https://tidbcloud.com/project/clusters)页面上，点击目标 TiDB 集群的名称以进入其概览页面。
+2. 点击右上角的**连接**。此时会显示连接对话框。
+3. 在**连接类型**下拉列表中，选择**私有端点**，然后点击**创建私有端点连接**。
 
-> **Note:**
+> **注意：**
 >
-> If you have already created a private endpoint connection, the active endpoint will appear in the connection dialog. To create additional private endpoint connections, navigate to the **Networking** page by clicking **Settings** > **Networking** in the left navigation pane.
+> 如果你已经创建了私有端点连接，活动端点将显示在连接对话框中。要创建其他私有端点连接，请点击左侧导航栏中的**设置** > **网络**，导航到**网络**页面。
 
-### Step 2. Create an AWS interface endpoint
+### 步骤 2. 创建 AWS 接口端点
 
-> **Note:**
+> **注意：**
 >
-> For each TiDB Cloud Dedicated cluster created after March 28, 2023, the corresponding endpoint service is automatically created 3 to 4 minutes after the cluster creation.
+> 对于 2023 年 3 月 28 日之后创建的每个 TiDB Cloud Dedicated 集群，相应的端点服务会在集群创建后 3 到 4 分钟内自动创建。
 
-If you see the `TiDB Private Link Service is ready` message, the corresponding endpoint service is ready. You can provide the following information to create the endpoint.
+如果你看到 `TiDB Private Link Service is ready` 消息，则相应的端点服务已准备就绪。你可以提供以下信息来创建端点。
 
-1. Fill in the **Your VPC ID** and **Your Subnet IDs** fields. You can find these IDs from your [AWS Management Console](https://console.aws.amazon.com/). For multiple subnets, enter the IDs separated by spaces.
-2. Click **Generate Command** to get the following endpoint creation command.
+1. 填写**你的 VPC ID** 和**你的子网 ID** 字段。你可以从 [AWS 管理控制台](https://console.aws.amazon.com/) 找到这些 ID。对于多个子网，请输入以空格分隔的 ID。
+2. 点击**生成命令**以获取以下端点创建命令。
 
     ```bash
     aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${your_region} --service-name ${your_endpoint_service_name} --vpc-endpoint-type Interface --subnet-ids ${your_application_subnet_ids}
     ```
 
-Then, you can create an AWS interface endpoint either using the AWS CLI or using the [AWS Management Console](https://aws.amazon.com/console/).
+然后，你可以使用 AWS CLI 或 [AWS 管理控制台](https://aws.amazon.com/console/) 创建 AWS 接口端点。
 
 <SimpleTab>
-<div label="Use AWS CLI">
+<div label="使用 AWS CLI">
 
-To use the AWS CLI to create a VPC interface endpoint, perform the following steps:
+要使用 AWS CLI 创建 VPC 接口端点，请执行以下步骤：
 
-1. Copy the generated command and run it in your terminal.
-2. Record the VPC endpoint ID you just created.
+1. 复制生成的命令并在终端中运行。
+2. 记录你刚刚创建的 VPC 端点 ID。
 
-> **Tip:**
+> **提示：**
 >
-> - Before running the command, you need to have AWS CLI installed and configured. See [AWS CLI configuration basics](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html) for details.
+> - 运行命令之前，你需要安装并配置 AWS CLI。有关详细信息，请参见 [AWS CLI 配置基础知识](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)。
 >
-> - If your service is spanning across more than three availability zones (AZs), you will get an error message indicating that the VPC endpoint service does not support the AZ of the subnet. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your TiDB cluster is located. In this case, you can contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+> - 如果你的服务跨越超过三个可用区（AZ），你将收到一条错误消息，指示 VPC 端点服务不支持子网的可用区。当你选择的区域中除了 TiDB 集群所在的可用区外还有额外的可用区时，就会出现此问题。在这种情况下，你可以联系 [PingCAP 技术支持](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)。
 
 </div>
-<div label="Use AWS Console">
+<div label="使用 AWS 控制台">
 
-To use the AWS Management Console to create a VPC interface endpoint, perform the following steps:
+要使用 AWS 管理控制台创建 VPC 接口端点，请执行以下步骤：
 
-1. Sign in to the [AWS Management Console](https://aws.amazon.com/console/) and open the Amazon VPC console at [https://console.aws.amazon.com/vpc/](https://console.aws.amazon.com/vpc/).
-2. Click **Endpoints** in the navigation pane, and then click **Create Endpoint** in the upper-right corner.
+1. 登录 [AWS 管理控制台](https://aws.amazon.com/console/)，并在 [https://console.aws.amazon.com/vpc/](https://console.aws.amazon.com/vpc/) 打开 Amazon VPC 控制台。
+2. 在导航窗格中点击**端点**，然后点击右上角的**创建端点**。
 
-    The **Create endpoint** page is displayed.
+    此时会显示**创建端点**页面。
 
-    ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
+    ![验证端点服务](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
 
-3. In the **Endpoint settings** area, fill in a name tag if needed, and then select the **Endpoint services that use NLBs and GWLBs** option.
-4. In the **Service settings** area, enter the service name `${your_endpoint_service_name}` from the generated command (`--service-name ${your_endpoint_service_name}`).
-5. Click **Verify service**.
-6. In the **Network settings** area, select your VPC in the drop-down list.
-7. In the **Subnets** area, select the availability zones where your TiDB cluster is located.
+3. 在**端点设置**区域，如果需要，填写名称标签，然后选择**使用 NLB 和 GWLB 的端点服务**选项。
+4. 在**服务设置**区域，输入生成的命令中的服务名称 `${your_endpoint_service_name}`（`--service-name ${your_endpoint_service_name}`）。
+5. 点击**验证服务**。
+6. 在**网络设置**区域，从下拉列表中选择你的 VPC。
+7. 在**子网**区域，选择 TiDB 集群所在的可用区。
 
-    > **Tip:**
+    > **提示：**
     >
-    > If your service is spanning across more than three availability zones (AZs), you might not be able to select AZs in the **Subnets** area. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your TiDB cluster is located. In this case, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+    > 如果你的服务跨越超过三个可用区（AZ），你可能无法在**子网**区域中选择可用区。当你选择的区域中除了 TiDB 集群所在的可用区外还有额外的可用区时，就会出现此问题。在这种情况下，请联系 [PingCAP 技术支持](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)。
 
-8. In the **Security groups** area, select your security group properly.
+8. 在**安全组**区域，正确选择你的安全组。
 
-    > **Note:**
+    > **注意：**
     >
-    > Make sure the selected security group allows inbound access from your EC2 instances on Port 4000 or a customer-defined port.
+    > 确保所选安全组允许来自 EC2 实例的端口 4000 或客户定义端口的入站访问。
 
-9. Click **Create endpoint**.
+9. 点击**创建端点**。
 
 </div>
 </SimpleTab>
 
-### Step 3. Create a private endpoint connection
+### 步骤 3. 创建私有端点连接
 
-1. Go back to the TiDB Cloud console.
-2. On the **Create AWS Private Endpoint Connection** page, enter your VPC endpoint ID.
-3. Click **Create Private Endpoint Connection**.
+1. 返回 TiDB Cloud 控制台。
+2. 在**创建 AWS 私有端点连接**页面，输入你的 VPC 端点 ID。
+3. 点击**创建私有端点连接**。
 
-> **Tip:**
+> **提示：**
 >
-> You can view and manage private endpoint connections on two pages:
+> 你可以在以下两个页面查看和管理私有端点连接：
 >
-> - Cluster-level **Networking** page: switch to your target cluster using the combo box in the upper-left corner, and then click **Settings** > **Networking** in the left navigation pane.
-> - Project-level **Network Access** page: switch to your target project using the combo box in the upper-left corner, and then click **Project Settings** > **Network Access** in the left navigation pane.
+> - 集群级别的**网络**页面：使用左上角的组合框切换到目标集群，然后点击左侧导航栏中的**设置** > **网络**。
+> - 项目级别的**网络访问**页面：使用左上角的组合框切换到目标项目，然后点击左侧导航栏中的**项目设置** > **网络访问**。
 
-### Step 4. Enable private DNS
+### 步骤 4. 启用私有 DNS
 
-Enable private DNS in AWS. You can either use the AWS CLI or the AWS Management Console.
+在 AWS 中启用私有 DNS。你可以使用 AWS CLI 或 AWS 管理控制台。
 
 <SimpleTab>
-<div label="Use AWS CLI">
+<div label="使用 AWS CLI">
 
-To enable private DNS using your AWS CLI, copy the following `aws ec2 modify-vpc-endpoint` command from the **Create Private Endpoint Connection** page and run it in your AWS CLI.
+要使用 AWS CLI 启用私有 DNS，请从**创建私有端点连接**页面复制以下 `aws ec2 modify-vpc-endpoint` 命令并在 AWS CLI 中运行。
 
 ```bash
 aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --private-dns-enabled
 ```
 
-Alternatively, you can find the command on the **Networking** page of your cluster. Locate the private endpoint and click **...*** > **Enable DNS** in the **Action** column.
+或者，你可以在集群的**网络**页面上找到该命令。找到私有端点，然后在**操作**列中点击 **...*** > **启用 DNS**。
 
 </div>
-<div label="Use AWS Console">
+<div label="使用 AWS 控制台">
 
-To enable private DNS in your AWS Management Console:
+要在 AWS 管理控制台中启用私有 DNS：
 
-1. Go to **VPC** > **Endpoints**.
-2. Right-click your endpoint ID and select **Modify private DNS name**.
-3. Select the **Enable for this endpoint** check box.
-4. Click **Save changes**.
+1. 转到 **VPC** > **端点**。
+2. 右键点击你的端点 ID，然后选择**修改私有 DNS 名称**。
+3. 选中**为此端点启用**复选框。
+4. 点击**保存更改**。
 
-    ![Enable private DNS](/media/tidb-cloud/private-endpoint/enable-private-dns.png)
+    ![启用私有 DNS](/media/tidb-cloud/private-endpoint/enable-private-dns.png)
 
 </div>
 </SimpleTab>
 
-### Step 5. Connect to your TiDB cluster
+### 步骤 5. 连接到 TiDB 集群
 
-After you have accepted the private endpoint connection, you are redirected back to the connection dialog.
+接受私有端点连接后，你将被重定向回连接对话框。
 
-1. Wait for the private endpoint connection status to change from **System Checking** to **Active** (approximately 5 minutes).
-2. In the **Connect With** drop-down list, select your preferred connection method. The corresponding connection string is displayed at the bottom of the dialog.
-3. Connect to your cluster with the connection string.
+1. 等待私有端点连接状态从**系统检查中**变为**活动**（大约 5 分钟）。
+2. 在**连接方式**下拉列表中，选择你首选的连接方法。对话框底部将显示相应的连接字符串。
+3. 使用连接字符串连接到你的集群。
 
-> **Tip:**
+> **提示：**
 >
-> If you cannot connect to the cluster, the reason might be that the security group of your VPC endpoint in AWS is not properly set. See [this FAQ](#troubleshooting) for solutions.
+> 如果无法连接到集群，原因可能是 AWS 中 VPC 端点的安全组设置不正确。有关解决方案，请参见[此常见问题](#故障排除)。
 
-### Private endpoint status reference
+### 私有端点状态参考
 
-When you use private endpoint connections, the statuses of private endpoints or private endpoint services are displayed on the following pages:
+使用私有端点连接时，私有端点或私有端点服务的状态会显示在以下页面上：
 
-- Cluster-level **Networking** page: switch to your target cluster using the combo box in the upper-left corner, and then click **Settings** > **Networking** in the left navigation pane.
-- Project-level **Network Access** page: switch to your target project using the combo box in the upper-left corner, and then click **Project Settings** > **Network Access** in the left navigation pane.
+- 集群级别的**网络**页面：使用左上角的组合框切换到目标集群，然后点击左侧导航栏中的**设置** > **网络**。
+- 项目级别的**网络访问**页面：使用左上角的组合框切换到目标项目，然后点击左侧导航栏中的**项目设置** > **网络访问**。
 
-The possible statuses of a private endpoint are explained as follows:
+私有端点的可能状态说明如下：
 
-- **Not Configured**: The endpoint service is created but the private endpoint is not created yet.
-- **Pending**: Waiting for processing.
-- **Active**: Your private endpoint is ready to use. You cannot edit the private endpoint of this status.
-- **Deleting**: The private endpoint is being deleted.
-- **Failed**: The private endpoint creation fails. You can click **Edit** of that row to retry the creation.
+- **未配置**：已创建端点服务但尚未创建私有端点。
+- **等待中**：等待处理。
+- **活动**：你的私有端点已准备就绪。你无法编辑此状态的私有端点。
+- **删除中**：正在删除私有端点。
+- **失败**：私有端点创建失败。你可以点击该行的**编辑**重试创建。
 
-The possible statuses of a private endpoint service are explained as follows:
+私有端点服务的可能状态说明如下：
 
-- **Creating**: The endpoint service is being created, which takes 3 to 5 minutes.
-- **Active**: The endpoint service is created, no matter whether the private endpoint is created or not.
-- **Deleting**: The endpoint service or the cluster is being deleted, which takes 3 to 5 minutes.
+- **创建中**：正在创建端点服务，需要 3 到 5 分钟。
+- **活动**：已创建端点服务，无论是否创建了私有端点。
+- **删除中**：正在删除端点服务或集群，需要 3 到 5 分钟。
 
-## Troubleshooting
+## 故障排除
 
-### I cannot connect to a TiDB cluster via a private endpoint after enabling private DNS. Why?
+### 启用私有 DNS 后无法通过私有端点连接到 TiDB 集群。为什么？
 
-You might need to properly set the security group for your VPC endpoint in the AWS Management Console. Go to **VPC** > **Endpoints**. Right-click your VPC endpoint and select the proper **Manage security groups**. A proper security group within your VPC that allows inbound access from your EC2 instances on Port 4000 or a customer-defined port.
+你可能需要在 AWS 管理控制台中为 VPC 端点正确设置安全组。转到 **VPC** > **端点**。右键点击你的 VPC 端点，然后选择适当的**管理安全组**。适当的安全组应该是你 VPC 中允许来自 EC2 实例的端口 4000 或客户定义端口的入站访问的安全组。
 
-![Manage security groups](/media/tidb-cloud/private-endpoint/manage-security-groups.png)
+![管理安全组](/media/tidb-cloud/private-endpoint/manage-security-groups.png)

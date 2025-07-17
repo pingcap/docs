@@ -1,50 +1,50 @@
 ---
-title: AI Features
-summary: Learn about AI features for TiDB Cloud.
+title: AI 功能
+summary: 了解 TiDB Cloud 的 AI 功能。
 ---
 
-# AI Features
+# AI 功能
 
-The AI features in TiDB Cloud enable you to fully leverage advanced technologies for data exploration, search, and integration. From natural language-driven SQL query generation to high-performance vector search, TiDB combines database capabilities with modern AI features to power innovative applications. With support for popular AI frameworks, embedding models, and seamless integration with ORM libraries, TiDB offers a versatile platform for use cases such as semantic search and AI-powered analytics.
+TiDB Cloud 中的 AI 功能使你能够充分利用先进技术进行数据探索、搜索和集成。从自然语言驱动的 SQL 查询生成到高性能向量搜索，TiDB 将数据库功能与现代 AI 功能相结合，为创新应用提供动力。通过支持流行的 AI 框架、嵌入模型以及与 ORM 库的无缝集成，TiDB 为语义搜索和 AI 驱动的分析等用例提供了一个多功能平台。
 
-This document highlights these AI features and how they enhance the TiDB experience.
+本文档重点介绍这些 AI 功能以及它们如何增强 TiDB 体验。
 
-## Chat2Query (Beta)
+## Chat2Query（Beta）
 
-Chat2Query is an AI-powered feature integrated into SQL Editor that assists users in generating, debugging, or rewriting SQL queries using natural language instructions. For more information, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
+Chat2Query 是集成在 SQL 编辑器中的 AI 驱动功能，可帮助用户使用自然语言指令生成、调试或重写 SQL 查询。更多信息，请参见[使用 AI 辅助的 SQL 编辑器探索数据](/tidb-cloud/explore-data-with-chat2query.md)。
 
-In addition, TiDB Cloud provides a Chat2Query API for TiDB Cloud Serverless clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called Chat2Query and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
+此外，TiDB Cloud 为 TiDB Cloud Serverless 集群提供 Chat2Query API。启用后，TiDB Cloud 将自动在数据服务中创建一个名为 Chat2Query 的系统数据应用和一个 Chat2Data 端点。你可以调用此端点，通过提供指令让 AI 生成并执行 SQL 语句。更多信息，请参见[开始使用 Chat2Query API](/tidb-cloud/use-chat2query-api.md)。
 
-## Vector search (Beta)
+## 向量搜索（Beta）
 
-Vector search is a search method that prioritizes the meaning of your data to deliver relevant results.
+向量搜索是一种优先考虑数据含义以提供相关结果的搜索方法。
 
-Unlike traditional full-text search, which relies on exact keyword matching and word frequency, vector search converts various data types (such as text, images, or audio) into high-dimensional vectors and queries based on the similarity between these vectors. This search method captures the semantic meaning and contextual information of the data, leading to a more precise understanding of user intent.
+与依赖精确关键词匹配和词频的传统全文搜索不同，向量搜索将各种数据类型（如文本、图像或音频）转换为高维向量，并基于这些向量之间的相似度进行查询。这种搜索方法捕捉数据的语义含义和上下文信息，从而更准确地理解用户意图。
 
-Even when the search terms do not exactly match the content in the database, vector search can still provide results that align with the user's intent by analyzing the semantics of the data. For example, a full-text search for "a swimming animal" only returns results containing these exact keywords. In contrast, vector search can return results for other swimming animals, such as fish or ducks, even if these results do not contain the exact keywords.
+即使搜索词与数据库中的内容不完全匹配，向量搜索仍然可以通过分析数据的语义提供符合用户意图的结果。例如，对"会游泳的动物"进行全文搜索只会返回包含这些确切关键词的结果。相比之下，向量搜索可以返回其他会游泳的动物的结果，如鱼或鸭子，即使这些结果不包含确切的关键词。
 
-For more information, see [Vector Search (Beta) Overview](/vector-search/vector-search-overview.md).
+更多信息，请参见[向量搜索（Beta）概述](/tidb-cloud/vector-search-overview.md)。
 
-## AI integrations
+## AI 集成
 
-### AI frameworks
+### AI 框架
 
-TiDB provides official support for several popular AI frameworks, enabling you to easily integrate AI applications developed based on these frameworks with TiDB Vector Search.
+TiDB 官方支持多个流行的 AI 框架，使你能够轻松地将基于这些框架开发的 AI 应用程序与 TiDB 向量搜索集成。
 
-For a list of supported AI frameworks, see [Vector Search Integration Overview](/vector-search/vector-search-integration-overview.md#ai-frameworks).
+有关支持的 AI 框架列表，请参见[向量搜索集成概述](/tidb-cloud/vector-search-integration-overview.md#ai-frameworks)。
 
-### Embedding models and services
+### 嵌入模型和服务
 
-A vector embedding, also known as an embedding, is a sequence of numbers that represents real-world objects in a high-dimensional space. It captures the meaning and context of unstructured data, such as documents, images, audio, and videos.
+向量嵌入（也称为嵌入）是一个数字序列，用于在高维空间中表示现实世界的对象。它捕捉非结构化数据（如文档、图像、音频和视频）的含义和上下文。
 
-Embedding models are algorithms that transform data into [vector embeddings](/vector-search/vector-search-overview.md#vector-embedding). The choice of an appropriate embedding model is crucial for ensuring the accuracy and relevance of semantic search results.
+嵌入模型是将数据转换为[向量嵌入](/tidb-cloud/vector-search-overview.md#vector-embedding)的算法。选择合适的嵌入模型对于确保语义搜索结果的准确性和相关性至关重要。
 
-TiDB Vector Search supports storing vectors of up to 16383 dimensions, which accommodates most embedding models. For unstructured text data, you can find top-performing text embedding models on the [Massive Text Embedding Benchmark (MTEB) Leaderboard](https://huggingface.co/spaces/mteb/leaderboard).
+TiDB 向量搜索支持存储最多 16383 维的向量，可以适应大多数嵌入模型。对于非结构化文本数据，你可以在 [Massive Text Embedding Benchmark (MTEB) 排行榜](https://huggingface.co/spaces/mteb/leaderboard)上找到性能最佳的文本嵌入模型。
 
-### Object Relational Mapping (ORM) libraries
+### 对象关系映射（ORM）库
 
-Object Relational Mapping (ORM) libraries are tools that facilitate the interaction between applications and relational databases by allowing developers to work with database records as if they were objects in their programming language of choice.
+对象关系映射（ORM）库是一种工具，通过允许开发人员像处理编程语言中的对象一样处理数据库记录，从而促进应用程序和关系数据库之间的交互。
 
-TiDB lets you integrate vector search with ORM libraries to manage vector data alongside traditional relational data. This integration is particularly useful for applications that need to store and query vector embeddings generated by AI models. By using ORM libraries, developers can seamlessly interact with vector data stored in TiDB, leveraging the database's capabilities to perform complex vector operations like nearest neighbor search.
+TiDB 允许你将向量搜索与 ORM 库集成，以便与传统关系数据一起管理向量数据。这种集成对于需要存储和查询 AI 模型生成的向量嵌入的应用程序特别有用。通过使用 ORM 库，开发人员可以无缝地与存储在 TiDB 中的向量数据交互，利用数据库的功能执行最近邻搜索等复杂的向量操作。
 
-For a list of supported ORM libraries, see [Vector Search Integration Overview](/vector-search/vector-search-integration-overview.md#object-relational-mapping-orm-libraries).
+有关支持的 ORM 库列表，请参见[向量搜索集成概述](/tidb-cloud/vector-search-integration-overview.md#object-relational-mapping-orm-libraries)。

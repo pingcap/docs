@@ -1,35 +1,31 @@
 ---
-title: Use Cluster Resource (Deprecated)
-summary: Learn how to use the cluster resource to create and modify a TiDB Cloud cluster.
+title: 使用集群资源
+summary: 了解如何使用集群资源创建和修改 TiDB Cloud 集群。
 ---
 
-# Use Cluster Resource (Deprecated)
+# 使用集群资源
 
-> **Warning:**
->
-> Starting from [TiDB Cloud Terraform Provider](https://registry.terraform.io/providers/tidbcloud/tidbcloud) v0.4.0, the `tidbcloud_cluster` resource is deprecated. It is recommended to use the `tidbcloud_dedicated_cluster` or `tidbcloud_serverless_cluster` resource instead. For more information, see [Use TiDB Cloud Dedicated Cluster Resource](/tidb-cloud/terraform-use-dedicated-cluster-resource.md) or [Use TiDB Cloud Serverless Cluster Resource](/tidb-cloud/terraform-use-serverless-cluster-resource.md).
+本文档介绍如何使用 `tidbcloud_cluster` 资源管理 TiDB Cloud 集群。
 
-You can learn how to manage a TiDB Cloud cluster with the `tidbcloud_cluster` resource in this document.
+此外，你还将学习如何使用 `tidbcloud_projects` 和 `tidbcloud_cluster_specs` 数据源获取必要信息。
 
-In addition, you will also learn how to get the necessary information with the `tidbcloud_projects` and `tidbcloud_cluster_specs` data sources.
+`tidbcloud_cluster` 资源的功能包括以下内容：
 
-The features of the `tidbcloud_cluster` resource include the following:
+- 创建 TiDB Cloud Serverless 和 TiDB Cloud Dedicated 集群。
+- 修改 TiDB Cloud Dedicated 集群。
+- 删除 TiDB Cloud Serverless 和 TiDB Cloud Dedicated 集群。
 
-- Create TiDB Cloud Serverless and TiDB Cloud Dedicated clusters.
-- Modify TiDB Cloud Dedicated clusters.
-- Delete TiDB Cloud Serverless and TiDB Cloud Dedicated clusters.
+## 前提条件
 
-## Prerequisites
+- [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)。
 
-- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
+## 使用 `tidbcloud_projects` 数据源获取项目 ID
 
-## Get project IDs using the `tidbcloud_projects` data source
+每个 TiDB 集群都在一个项目中。在创建 TiDB 集群之前，你需要获取要在其中创建集群的项目 ID。
 
-Each TiDB cluster is in a project. Before you create a TiDB cluster, you need to get the ID of the project in which you want to create a cluster.
+要查看所有可用项目的信息，你可以按照以下方式使用 `tidbcloud_projects` 数据源：
 
-To view the information of all available projects, you can use the `tidbcloud_projects` data source as follows:
-
-1. In the `main.tf` file that is created when you [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md), add the `data` and `output` blocks as follows:
+1. 在[获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) 时创建的 `main.tf` 文件中，添加 `data` 和 `output` 块，如下所示：
 
    ```
    terraform {
@@ -56,21 +52,21 @@ To view the information of all available projects, you can use the `tidbcloud_pr
    }
    ```
 
-   - Use the `data` block to define the data source of TiDB Cloud, including the data source type and the data source name.
+   - 使用 `data` 块定义 TiDB Cloud 的数据源，包括数据源类型和数据源名称。
 
-      - To use the projects data source, set the data source type as `tidbcloud_projects`.
-      - For the data source name, you can define it according to your need. For example, "example_project".
-      - For the `tidbcloud_projects` data source, you can use the `page` and `page_size` attributes to limit the maximum number of projects you want to check.
+      - 要使用项目数据源，请将数据源类型设置为 `tidbcloud_projects`。
+      - 对于数据源名称，你可以根据需要定义它。例如，"example_project"。
+      - 对于 `tidbcloud_projects` 数据源，你可以使用 `page` 和 `page_size` 属性来限制要检查的最大项目数。
 
-   - Use the `output` block to define the data source information to be displayed in the output, and expose the information for other Terraform configurations to use.
+   - 使用 `output` 块定义要在输出中显示的数据源信息，并公开信息供其他 Terraform 配置使用。
 
-      The `output` block works similarly to returned values in programming languages. See [Terraform documentation](https://www.terraform.io/language/values/outputs) for more details.
+      `output` 块的工作方式类似于编程语言中的返回值。有关更多详细信息，请参阅 [Terraform 文档](https://www.terraform.io/language/values/outputs)。
 
-   To get all the available configurations for the resources and data sources, see this [configuration documentation](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs).
+   要获取资源和数据源的所有可用配置，请参阅此[配置文档](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)。
 
-2. Run the `terraform apply` command to apply the configurations. You need to type `yes` at the confirmation prompt to proceed.
+2. 运行 `terraform apply` 命令以应用配置。你需要在确认提示时输入 `yes` 才能继续。
 
-   To skip the prompt, use `terraform apply --auto-approve`:
+   要跳过提示，请使用 `terraform apply --auto-approve`：
 
    ```
    $ terraform apply --auto-approve
@@ -121,15 +117,14 @@ To view the information of all available projects, you can use the `tidbcloud_pr
    ])
    ```
 
-Now, you can get all the available projects from the output. Copy one of the project IDs that you need.
+现在，你可以从输出中获取所有可用的项目。复制你需要的项目 ID。
+## 使用 `tidbcloud_cluster_specs` 数据源获取集群规格信息
 
-## Get cluster specification information using the `tidbcloud_cluster_specs` data source
+在创建集群之前，你需要获取集群规格信息，其中包含所有可用的配置值（如支持的云服务提供商、区域和节点大小）。
 
-Before you create a cluster, you need to get the cluster specification information, which contains all available configuration values (such as supported cloud providers, regions, and node sizes).
+要获取集群规格信息，你可以按照以下方式使用 `tidbcloud_cluster_specs` 数据源：
 
-To get the cluster specification information, you can use the `tidbcloud_cluster_specs` data source as follows:
-
-1. Edit the `main.tf` file as follows:
+1. 编辑 `main.tf` 文件，如下所示：
 
     ```
     terraform {
@@ -151,12 +146,12 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
     }
     ```
 
-2. Run the `terraform apply --auto-approve` command and you will get the cluster specification information.
+2. 运行 `terraform apply --auto-approve` 命令，你将获得集群规格信息。
 
-    Click the following line to get a part of the example results for your reference.
+    点击以下行查看部分示例结果供参考。
 
     <details>
-      <summary>Cluster specification</summary>
+      <summary>集群规格</summary>
 
     ```
     {
@@ -261,27 +256,26 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
 
     </details>
 
-In the results:
+在结果中：
 
-- `cloud_provider` is the cloud provider on which a TiDB cluster can be hosted.
-- `region` is the region of `cloud_provider`.
-- `node_quantity_range` shows the minimum node number and the step to scale a node.
-- `node_size` is the size of a node.
-- `storage_size_gib_range` shows the minimum and maximum storage size you can set for a node.
+- `cloud_provider` 是可以托管 TiDB 集群的云服务提供商。
+- `region` 是 `cloud_provider` 的区域。
+- `node_quantity_range` 显示最小节点数和扩展节点的步长。
+- `node_size` 是节点的大小。
+- `storage_size_gib_range` 显示可以为节点设置的最小和最大存储大小。
+## 使用集群资源创建集群
 
-## Create a cluster using the cluster resource
-
-> **Note:**
+> **注意：**
 >
-> Before you begin, make sure that you have set a CIDR in the TiDB Cloud console. For more information, see [Set a CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region).
+> 在开始之前，请确保你已在 TiDB Cloud 控制台中设置了 CIDR。有关更多信息，请参阅[设置 CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)。
 
-You can create a cluster using the `tidbcloud_cluster` resource.
+你可以使用 `tidbcloud_cluster` 资源创建集群。
 
-The following example shows how to create a TiDB Cloud Dedicated cluster.
+以下示例展示如何创建 TiDB Cloud Dedicated 集群。
 
-1. Create a directory for the cluster and enter it.
+1. 为集群创建一个目录并进入该目录。
 
-2. Create a `cluster.tf` file:
+2. 创建一个 `cluster.tf` 文件：
 
     ```
    terraform {
@@ -322,13 +316,13 @@ The following example shows how to create a TiDB Cloud Dedicated cluster.
     }
     ```
 
-    Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
+    使用 `resource` 块定义 TiDB Cloud 的资源，包括资源类型、资源名称和资源详细信息。
 
-    - To use the cluster resource, set the resource type as `tidbcloud_cluster`.
-    - For the resource name, you can define it according to your need. For example, `example_cluster`.
-    - For the resource details, you can configure them according to the Project ID and the cluster specification information.
+    - 要使用集群资源，请将资源类型设置为 `tidbcloud_cluster`。
+    - 对于资源名称，你可以根据需要定义它。例如，`example_cluster`。
+    - 对于资源详细信息，你可以根据项目 ID 和集群规格信息进行配置。
 
-3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
+3. 运行 `terraform apply` 命令。不建议在应用资源时使用 `terraform apply --auto-approve`。
 
     ```shell
     $ terraform apply
@@ -376,13 +370,13 @@ The following example shows how to create a TiDB Cloud Dedicated cluster.
       Enter a value:
     ```
 
-   As in the above result, Terraform generates an execution plan for you, which describes the actions Terraform will take:
+   如上述结果所示，Terraform 为你生成了一个执行计划，描述了 Terraform 将采取的操作：
 
-   - You can check the difference between the configurations and the states.
-   - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
-   - The `known after apply` shows that you will get the value after `apply`.
+   - 你可以检查配置和状态之间的差异。
+   - 你还可以看到此 `apply` 的结果。它将添加一个新资源，不会更改或销毁任何资源。
+   - `known after apply` 表示你将在 `apply` 后获得该值。
 
-4. If everything in your plan looks fine, type `yes` to continue:
+4. 如果你的计划看起来没有问题，输入 `yes` 继续：
 
     ```
     Do you want to perform these actions?
@@ -398,7 +392,7 @@ The following example shows how to create a TiDB Cloud Dedicated cluster.
 
     ```
 
-5. Use the `terraform show` or `terraform state show tidbcloud_cluster.${resource-name}` command to inspect the state of your resource. The former will show the states of all resources and data sources.
+5. 使用 `terraform show` 或 `terraform state show tidbcloud_cluster.${resource-name}` 命令检查资源的状态。前者将显示所有资源和数据源的状态。
 
     ```shell
     $ terraform state show tidbcloud_cluster.example_cluster
@@ -433,9 +427,9 @@ The following example shows how to create a TiDB Cloud Dedicated cluster.
     }
     ```
 
-    The status of the cluster is `CREATING`. In this case, you need to wait until it changes to `AVAILABLE`, which usually takes 10 minutes at least.
+    集群的状态是 `CREATING`。在这种情况下，你需要等待它变为 `AVAILABLE`，这通常需要至少 10 分钟。
 
-6. If you want to check the latest status, run the `terraform refresh` command to update the state, and then run the `terraform state show tidbcloud_cluster.${resource-name}` command to display the state.
+6. 如果你想检查最新状态，运行 `terraform refresh` 命令更新状态，然后运行 `terraform state show tidbcloud_cluster.${resource-name}` 命令显示状态。
 
     ```
     $ terraform refresh
@@ -474,21 +468,20 @@ The following example shows how to create a TiDB Cloud Dedicated cluster.
     }
     ```
 
-When the status is `AVAILABLE`, it indicates that your TiDB cluster is created and ready for use.
+当状态为 `AVAILABLE` 时，表示你的 TiDB 集群已创建完成并可以使用。
+## 修改 TiDB Cloud Dedicated 集群
 
-## Modify a TiDB Cloud Dedicated cluster
+对于 TiDB Cloud Dedicated 集群，你可以使用 Terraform 管理集群资源，如下所示：
 
-For a TiDB Cloud Dedicated cluster, you can use Terraform to manage cluster resources as follows:
+- 向集群添加 TiFlash 组件。
+- 扩缩容集群。
+- 暂停或恢复集群。
 
-- Add a TiFlash component to the cluster.
-- Scale the cluster.
-- Pause or resume the cluster.
+### 添加 TiFlash 组件
 
-### Add a TiFlash component
+1. 在[创建集群](#使用集群资源创建集群)时使用的 `cluster.tf` 文件中，将 `tiflash` 配置添加到 `components` 字段。
 
-1. In the `cluster.tf` file that is used when you [create the cluster](#create-a-cluster-using-the-cluster-resource), add the `tiflash` configurations to the `components` field.
-
-    For example:
+    例如：
 
     ```
         components = {
@@ -509,7 +502,7 @@ For a TiDB Cloud Dedicated cluster, you can use Terraform to manage cluster reso
         }
     ```
 
-2. Run the `terraform apply` command:
+2. 运行 `terraform apply` 命令：
 
     ```
     $ terraform apply
@@ -550,9 +543,9 @@ For a TiDB Cloud Dedicated cluster, you can use Terraform to manage cluster reso
 
     ```
 
-    As in the above execution plan, TiFlash will be added, and one resource will be changed.
+    如上述执行计划所示，将添加 TiFlash，并且将更改一个资源。
 
-3. If everything in your plan looks fine, type `yes` to continue:
+3. 如果你的计划看起来没有问题，输入 `yes` 继续：
 
     ```
       Enter a value: yes
@@ -563,7 +556,7 @@ For a TiDB Cloud Dedicated cluster, you can use Terraform to manage cluster reso
     Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
     ```
 
-4. Use `terraform state show tidbcloud_cluster.${resource-name}` to see the status:
+4. 使用 `terraform state show tidbcloud_cluster.${resource-name}` 查看状态：
 
     ```
     $ terraform state show tidbcloud_cluster.example_cluster
@@ -603,15 +596,14 @@ For a TiDB Cloud Dedicated cluster, you can use Terraform to manage cluster reso
     }
     ```
 
-The `MODIFYING` status indicates that the cluster is changing now. Wait for a moment. The status will be changed to `AVAILABLE`.
+`MODIFYING` 状态表示集群正在更改中。等待一段时间后，状态将变为 `AVAILABLE`。
+### 扩缩容 TiDB 集群
 
-### Scale a TiDB cluster
+当集群状态为 `AVAILABLE` 时，你可以扩缩容集群。
 
-You can scale a TiDB cluster when its status is `AVAILABLE`.
+1. 在[创建集群](#使用集群资源创建集群)时使用的 `cluster.tf` 文件中，编辑 `components` 配置。
 
-1. In the `cluster.tf` file that is used when you [create the cluster](#create-a-cluster-using-the-cluster-resource), edit the `components` configurations.
-
-    For example, to add one more node for TiDB, 3 more nodes for TiKV (The number of TiKV nodes needs to be a multiple of 3 for its step is 3. You can [get this information from the cluster specification](#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source)), and one more node for TiFlash, you can edit the configurations as follows:
+    例如，要为 TiDB 增加一个节点，为 TiKV 增加 3 个节点（TiKV 节点数需要是 3 的倍数，因为其步长为 3。你可以[从集群规格中获取此信息](#使用-tidbcloud_cluster_specs-数据源获取集群规格信息)），为 TiFlash 增加一个节点，你可以按如下方式编辑配置：
 
    ```
        components = {
@@ -632,7 +624,7 @@ You can scale a TiDB cluster when its status is `AVAILABLE`.
        }
    ```
 
-2. Run the `terraform apply` command and type `yes` for confirmation:
+2. 运行 `terraform apply` 命令并输入 `yes` 确认：
 
    ```
    $ terraform apply
@@ -683,16 +675,15 @@ You can scale a TiDB cluster when its status is `AVAILABLE`.
    Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
    ```
 
-Wait for the status to turn from `MODIFYING` to `AVAILABLE`.
+等待状态从 `MODIFYING` 变为 `AVAILABLE`。
+### 暂停或恢复集群
 
-### Pause or resume a cluster
+当集群状态为 `AVAILABLE` 时，你可以暂停集群，或者当集群状态为 `PAUSED` 时，你可以恢复集群。
 
-You can pause a cluster when its status is `AVAILABLE` or resume a cluster when its status is `PAUSED`.
+- 设置 `paused = true` 暂停集群。
+- 设置 `paused = false` 恢复集群。
 
-- Set `paused = true` to pause a cluster.
-- Set `paused = false` to resume a cluster.
-
-1. In the `cluster.tf` file that is used when you [create the cluster](#create-a-cluster-using-the-cluster-resource), add `pause = true` to the `config` configurations:
+1. 在[创建集群](#使用集群资源创建集群)时使用的 `cluster.tf` 文件中，将 `pause = true` 添加到 `config` 配置中：
 
    ```
    config = {
@@ -703,7 +694,7 @@ You can pause a cluster when its status is `AVAILABLE` or resume a cluster when 
      }
    ```
 
-2. Run the `terraform apply` command and type `yes` after check:
+2. 运行 `terraform apply` 命令并在检查后输入 `yes`：
 
    ```
    $ terraform apply
@@ -741,7 +732,7 @@ You can pause a cluster when its status is `AVAILABLE` or resume a cluster when 
    Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
    ```
 
-3. Use the `terraform state show tidbcloud_cluster.${resource-name}` command to check the status:
+3. 使用 `terraform state show tidbcloud_cluster.${resource-name}` 命令检查状态：
 
    ```
    $ terraform state show tidbcloud_cluster.example_cluster
@@ -782,7 +773,7 @@ You can pause a cluster when its status is `AVAILABLE` or resume a cluster when 
    }
    ```
 
-4. When you need to resume the cluster, set `paused = false`:
+4. 当你需要恢复集群时，设置 `paused = false`：
 
    ```
    config = {
@@ -793,7 +784,7 @@ You can pause a cluster when its status is `AVAILABLE` or resume a cluster when 
      }
    ```
 
-5. Run the `terraform apply` command and type `yes` for confirmation. If you use the `terraform state show tidbcloud_cluster.${resource-name}` command to check the status, you will find it turns to `RESUMING`:
+5. 运行 `terraform apply` 命令并输入 `yes` 确认。如果你使用 `terraform state show tidbcloud_cluster.${resource-name}` 命令检查状态，你会发现它变为 `RESUMING`：
 
    ```
    # tidbcloud_cluster.example_cluster:
@@ -832,17 +823,16 @@ You can pause a cluster when its status is `AVAILABLE` or resume a cluster when 
    }
    ```
 
-6. Wait for a moment, then use the `terraform refersh` command to update the state. The status will be changed to `AVAILABLE` finally.
+6. 等待一段时间，然后使用 `terraform refersh` 命令更新状态。状态最终将变为 `AVAILABLE`。
 
-Now, you have created and managed a TiDB Cloud Dedicated cluster with Terraform. Next, you can try creating a backup of the cluster by our [backup resource](/tidb-cloud/terraform-use-backup-resource.md).
+现在，你已经使用 Terraform 创建和管理了一个 TiDB Cloud Dedicated 集群。接下来，你可以尝试使用我们的[备份资源](/tidb-cloud/terraform-use-backup-resource.md)创建集群的备份。
+## 导入集群
 
-## Import a cluster
+对于不是由 Terraform 管理的 TiDB 集群，你可以通过导入它来使用 Terraform 管理它。
 
-For a TiDB cluster that is not managed by Terraform, you can use Terraform to manage it just by importing it.
+例如，你可以导入不是由 Terraform 创建的集群，或导入[使用恢复资源创建](/tidb-cloud/terraform-use-restore-resource.md#create-a-restore-task)的集群。
 
-For example, you can import a cluster that is not created by Terraform or import a cluster that is [created with the restore resource](/tidb-cloud/terraform-use-restore-resource.md#create-a-restore-task).
-
-1. Create a `import_cluster.tf` file as follows:
+1. 创建一个 `import_cluster.tf` 文件，如下所示：
 
     ```
     terraform {
@@ -855,9 +845,9 @@ For example, you can import a cluster that is not created by Terraform or import
     resource "tidbcloud_cluster" "import_cluster" {}
     ```
 
-2. Import the cluster by `terraform import tidbcloud_cluster.import_cluster projectId,clusterId`:
+2. 通过 `terraform import tidbcloud_cluster.import_cluster projectId,clusterId` 导入集群：
 
-   For example:
+   例如：
 
     ```
     $ terraform import tidbcloud_cluster.import_cluster 1372813089189561287,1379661944630264072
@@ -873,7 +863,7 @@ For example, you can import a cluster that is not created by Terraform or import
     your Terraform state and will henceforth be managed by Terraform.
     ```
 
-3. Run the `terraform state show tidbcloud_cluster.import_cluster` command to check the status of the cluster:
+3. 运行 `terraform state show tidbcloud_cluster.import_cluster` 命令检查集群的状态：
 
     ```
     $ terraform state show tidbcloud_cluster.import_cluster
@@ -909,7 +899,7 @@ For example, you can import a cluster that is not created by Terraform or import
     }
     ```
 
-4. To manage the cluster using Terraform, you can copy the output of the previous step to your configuration file. Note that you need to delete the lines of `id` and `status`, because they will be controlled by Terraform instead:
+4. 要使用 Terraform 管理集群，你可以将上一步的输出复制到你的配置文件中。注意，你需要删除 `id` 和 `status` 行，因为它们将由 Terraform 控制：
 
     ```
     resource "tidbcloud_cluster" "import_cluster" {
@@ -940,13 +930,13 @@ For example, you can import a cluster that is not created by Terraform or import
     }
     ```
 
-5. You can use `terraform fmt` to format your configuration file:
+5. 你可以使用 `terraform fmt` 格式化你的配置文件：
 
     ```
     $ terraform fmt
     ```
 
-6. To ensure the consistency of the configuration and state, you can execute `terraform plan` or `terraform apply`. If you see `No changes`, the import is successful.
+6. 为确保配置和状态的一致性，你可以执行 `terraform plan` 或 `terraform apply`。如果你看到 `No changes`，则导入成功。
 
     ```
     $ terraform apply
@@ -960,11 +950,11 @@ For example, you can import a cluster that is not created by Terraform or import
     Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
     ```
 
-Now you can use Terraform to manage the cluster.
+现在你可以使用 Terraform 管理集群了。
 
-## Delete a cluster
+## 删除集群
 
-To delete a cluster, go to the cluster directory where the corresponding `cluster.tf` file is located, and then run the `terraform destroy` command to destroy the cluster resource:
+要删除集群，进入包含相应 `cluster.tf` 文件的集群目录，然后运行 `terraform destroy` 命令销毁集群资源：
 
 ```
 $ terraform destroy
@@ -978,7 +968,7 @@ There is no undo. Only 'yes' will be accepted to confirm.
 Enter a value: yes
 ```
 
-Now, if you run the `terraform show` command, you will get nothing because the resource has been cleared:
+现在，如果你运行 `terraform show` 命令，你将得到空输出，因为资源已被清除：
 
 ```
 $ terraform show

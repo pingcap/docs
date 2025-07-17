@@ -1,77 +1,77 @@
 ---
-title: Integrate TiDB Cloud Serverless Branching (Beta) with GitHub 
-summary: Learn how to integrate the TiDB Cloud Serverless branching feature with GitHub.
+title: 集成 TiDB Cloud Serverless 分支功能（Beta）与 GitHub
+summary: 了解如何将 TiDB Cloud Serverless 分支功能与 GitHub 集成。
 ---
 
-# Integrate TiDB Cloud Serverless Branching (Beta) with GitHub 
+# 集成 TiDB Cloud Serverless 分支功能（Beta）与 GitHub
 
-> **Note:**
+> **注意：**
 >
-> The integration is built upon [TiDB Cloud Serverless branching](/tidb-cloud/branch-overview.md). Make sure that you are familiar with TiDB Cloud Serverless branching before reading this document.
+> 此集成基于 [TiDB Cloud Serverless 分支功能](/tidb-cloud/branch-overview.md)构建。在阅读本文档之前，请确保你已熟悉 TiDB Cloud Serverless 分支功能。
 
-If you use GitHub for application development, you can integrate TiDB Cloud Serverless branching into your GitHub CI/CD pipeline, which lets you automatically test your pull requests with branches without affecting the production database.
+如果你使用 GitHub 进行应用程序开发，你可以将 TiDB Cloud Serverless 分支功能集成到 GitHub CI/CD 流程中，这样你就可以使用分支自动测试你的拉取请求，而不会影响生产数据库。
 
-In the integration process, you will be prompted to install the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) GitHub App. The app can automatically manage TiDB Cloud Serverless branches according to pull requests in your GitHub repository. For example, when you create a pull request, the app will create a corresponding branch for your TiDB Cloud Serverless cluster, in which you can work on new features or bug fixes in isolation without affecting the production database.
+在集成过程中，系统会提示你安装 [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) GitHub 应用程序。该应用程序可以根据 GitHub 仓库中的拉取请求自动管理 TiDB Cloud Serverless 分支。例如，当你创建拉取请求时，应用程序会为你的 TiDB Cloud Serverless 集群创建相应的分支，你可以在其中独立开发新功能或修复错误，而不会影响生产数据库。
 
-This document covers the following topics:
+本文档涵盖以下主题：
 
-1. How to integrate TiDB Cloud Serverless branching with GitHub
-2. How does the TiDB Cloud Branching app work
-3. How to build a branching-based CI workflow to test every pull request using branches rather than the production cluster
+1. 如何将 TiDB Cloud Serverless 分支功能与 GitHub 集成
+2. TiDB Cloud Branching 应用程序的工作原理
+3. 如何构建基于分支的 CI 工作流，使用分支而不是生产集群来测试每个拉取请求
 
-## Before you begin
+## 开始之前
 
-Before the integration, make sure that you have the following:
+在进行集成之前，请确保你具备以下条件：
 
-- A GitHub account
-- A GitHub repository for your application
-- A [TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+- GitHub 账号
+- 用于你应用程序的 GitHub 仓库
+- [TiDB Cloud Serverless 集群](/tidb-cloud/create-tidb-cluster-serverless.md)
 
-## Integrate TiDB Cloud Serverless branching with your GitHub repository
+## 将 TiDB Cloud Serverless 分支功能与 GitHub 仓库集成
 
-To integrate TiDB Cloud Serverless branching with your GitHub repository, take the following steps:
+要将 TiDB Cloud Serverless 分支功能与 GitHub 仓库集成，请按照以下步骤操作：
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target TiDB Cloud Serverless cluster to go to its overview page.
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标 TiDB Cloud Serverless 集群的名称以进入其概览页面。
 
-2. Click **Branches** in the left navigation pane.
+2. 在左侧导航栏中点击**分支**。
 
-3. In the upper-right corner of the **Branches** page, click **Connect to GitHub**.
+3. 在**分支**页面的右上角，点击**连接到 GitHub**。
 
-    - If you have not logged into GitHub, you will be asked to log into GitHub first.
-    - If it is the first time you use the integration, you will be asked to authorize the **TiDB Cloud Branching** app.
+    - 如果你尚未登录 GitHub，系统会要求你先登录 GitHub。
+    - 如果这是你第一次使用此集成，系统会要求你授权 **TiDB Cloud Branching** 应用程序。
 
    <img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/branch/github-authorize.png" width="80%" />
 
-4. In the **Connect to GitHub** dialog, select a GitHub account in the **GitHub Account** drop-down list.
+4. 在**连接到 GitHub**对话框中，从**GitHub 账号**下拉列表中选择一个 GitHub 账号。
 
-    If your account does not exist in the list, click **Install Other Account**, and then follow the on-screen instructions to install the account.
+    如果列表中没有你的账号，请点击**安装其他账号**，然后按照屏幕上的说明安装账号。
 
-5. Select your target repository in the **GitHub Repository** drop-down list. If the list is long, you can search the repository by typing the name.
+5. 从**GitHub 仓库**下拉列表中选择你的目标仓库。如果列表较长，你可以通过输入名称来搜索仓库。
 
-6. Click **Connect** to connect between your TiDB Cloud Serverless cluster and your GitHub repository.
+6. 点击**连接**以建立 TiDB Cloud Serverless 集群与 GitHub 仓库之间的连接。
 
    <img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/branch/github-connect.png" width="40%" />
 
-## TiDB Cloud Branching app behaviors
+## TiDB Cloud Branching 应用程序行为
 
-After you connect your TiDB Cloud Serverless cluster to your GitHub repository, for each pull request in this repository, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) GitHub App can automatically manage its corresponding TiDB Cloud Serverless branch. The following lists the default behaviors for pull request changes:
+将 TiDB Cloud Serverless 集群连接到 GitHub 仓库后，[TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) GitHub 应用程序可以自动管理该仓库中每个拉取请求对应的 TiDB Cloud Serverless 分支。以下列出了拉取请求变更的默认行为：
 
-| Pull request changes               | TiDB Cloud Branching app behaviors                                                                                                                                                                                                                                                                                                                                        |
+| 拉取请求变更 | TiDB Cloud Branching 应用程序行为 |
 |------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Create a pull request              | When you create a pull request in the repository, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app creates a branch for your TiDB Cloud Serverless cluster. When `branch.mode` is set to `reset`, the branch name follows the `${github_branch_name}_${pr_id}` format. When `branch.mode` is set to `reserve`, the branch name follows the `${github_branch_name}_${pr_id}_${commit_sha}` format. Note that the number of branches has a [limit](/tidb-cloud/branch-overview.md#limitations-and-quotas). |
-| Push new commits to a pull request | When `branch.mode` is set to `reset`, every time you push a new commit to a pull request in the repository, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app resets the TiDB Cloud Serverless branch. When `branch.mode` is set to `reserve`, the app creates a new branch for the latest commit.                                                                                                                            |
-| Close or merge a pull request      | When you close or merge a pull request, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app deletes the branch for this pull request.                                                                                                                                                                                                            |
-| Reopen a pull request              | When you reopen a pull request, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app creates a branch for the lasted commit of the pull request.                                                                                                                                                                                                  |
+| 创建拉取请求 | 当你在仓库中创建拉取请求时，[TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) 应用程序会为你的 TiDB Cloud Serverless 集群创建一个分支。当 `branch.mode` 设置为 `reset` 时，分支名称遵循 `${github_branch_name}_${pr_id}` 格式。当 `branch.mode` 设置为 `reserve` 时，分支名称遵循 `${github_branch_name}_${pr_id}_${commit_sha}` 格式。请注意，分支数量有[限制](/tidb-cloud/branch-overview.md#limitations-and-quotas)。 |
+| 向拉取请求推送新提交 | 当 `branch.mode` 设置为 `reset` 时，每次你向仓库的拉取请求推送新提交时，[TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) 应用程序都会重置 TiDB Cloud Serverless 分支。当 `branch.mode` 设置为 `reserve` 时，应用程序会为最新提交创建一个新分支。 |
+| 关闭或合并拉取请求 | 当你关闭或合并拉取请求时，[TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) 应用程序会删除该拉取请求的分支。 |
+| 重新打开拉取请求 | 当你重新打开拉取请求时，[TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) 应用程序会为该拉取请求的最新提交创建一个分支。 |
 
-## Configure TiDB Cloud Branching app
+## 配置 TiDB Cloud Branching 应用程序
 
-To configure the behaviors of [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app, you can add a `tidbcloud.yml` file to the root directory of your repository, and then add the desired configurations to this file according to the following instructions.
+要配置 [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) 应用程序的行为，你可以在仓库的根目录中添加一个 `tidbcloud.yml` 文件，然后根据以下说明将所需的配置添加到该文件中。
 
 ### branch.blockList
 
-**Type:** array of string. **Default:** `[]`.
+**类型：** 字符串数组。**默认值：** `[]`。
 
-Specify the GitHub branches that forbid the TiDB Cloud Branching app, even if they are in the `allowList`.
+指定禁止 TiDB Cloud Branching 应用程序使用的 GitHub 分支，即使它们在 `allowList` 中。
 
 ```yaml
 github:
@@ -83,9 +83,9 @@ github:
 
 ### branch.allowList
 
-**type:** array of string. **Default:** `[.*]`.
+**类型：** 字符串数组。**默认值：** `[.*]`。
 
-Specify the GitHub branches that allow the TiDB Cloud Branching app.
+指定允许 TiDB Cloud Branching 应用程序使用的 GitHub 分支。
 
 ```yaml
 github:
@@ -96,12 +96,12 @@ github:
 
 ### branch.mode
 
-**Type:** string. **Default:** `reset`.
+**类型：** 字符串。**默认值：** `reset`。
 
-Specify how the TiDB Cloud Branching app handles branch updates:
+指定 TiDB Cloud Branching 应用程序如何处理分支更新：
 
-- If it is set to `reset`, the TiDB Cloud Branching app will update the existing branch with the latest data.
-- If it is set to `reserve`, the TiDB Cloud Branching app will create a new branch for your latest commit.
+- 如果设置为 `reset`，TiDB Cloud Branching 应用程序将使用最新数据更新现有分支。
+- 如果设置为 `reserve`，TiDB Cloud Branching 应用程序将为你的最新提交创建一个新分支。
 
 ```yaml
 github:
@@ -111,9 +111,9 @@ github:
 
 ### branch.autoDestroy
 
-**Type:** boolean. **Default:** `true`.
+**类型：** 布尔值。**默认值：** `true`。
 
-If it is set to `false`, the TiDB Cloud Branching app will not delete the TiDB Cloud Serverless branch when a pull request is closed or merged.
+如果设置为 `false`，当拉取请求被关闭或合并时，TiDB Cloud Branching 应用程序将不会删除 TiDB Cloud Serverless 分支。
 
 ```yaml
 github:
@@ -121,19 +121,19 @@ github:
         autoDestroy: true
 ```
 
-## Create a branching CI workflow
+## 创建分支 CI 工作流
 
-One of the best practices for using branches is to create a branching CI workflow. With the workflow, you can test your code using a TiDB Cloud Serverless branch instead of using the production cluster before merging the pull request. You can find a live demo [here](https://github.com/shiyuhang0/tidbcloud-branch-gorm-example).
+使用分支的最佳实践之一是创建分支 CI 工作流。通过该工作流，你可以在合并拉取请求之前使用 TiDB Cloud Serverless 分支而不是生产集群来测试你的代码。你可以在[这里](https://github.com/shiyuhang0/tidbcloud-branch-gorm-example)找到一个实际示例。
 
-Here are the main steps to create the workflow:
+以下是创建工作流的主要步骤：
 
-1. [Integrate TiDB Cloud Serverless branching with your GitHub repository](#integrate-tidb-cloud-serverless-branching-with-your-github-repository).
+1. [将 TiDB Cloud Serverless 分支功能与你的 GitHub 仓库集成](#将-tidb-cloud-serverless-分支功能与-github-仓库集成)。
 
-2. Get the branch connection information.
+2. 获取分支连接信息。
 
-   You can use the [wait-for-tidbcloud-branch](https://github.com/tidbcloud/wait-for-tidbcloud-branch) action to wait for the readiness of the TiDB Cloud Serverless branch and get the connection information of the branch.
+   你可以使用 [wait-for-tidbcloud-branch](https://github.com/tidbcloud/wait-for-tidbcloud-branch) action 来等待 TiDB Cloud Serverless 分支就绪并获取分支的连接信息。
 
-    Example usage:
+    示例用法：
 
    ```yaml
    steps:
@@ -151,20 +151,20 @@ Here are the main steps to create the workflow:
            echo "The user is ${{ steps.wait-for-branch.outputs.user }}"
            echo "The password is ${{ steps.wait-for-branch.outputs.password }}"
    ```
-   
-   - `token`: GitHub will automatically create a [GITHUB_TOKEN](https://docs.github.com/en/actions/security-guides/automatic-token-authentication) secret. You can use it directly.
-   - `public-key` and `private-key`: The TiDB Cloud [API key](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
 
-3. Modify your test code.
+   - `token`：GitHub 会自动创建一个 [GITHUB_TOKEN](https://docs.github.com/en/actions/security-guides/automatic-token-authentication) 密钥。你可以直接使用它。
+   - `public-key` 和 `private-key`：TiDB Cloud [API 密钥](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)。
 
-   Modify your test code to accept the connection information from GitHub Actions. For example, you can accept the connection information through the environment, as demonstrated in the [live demo](https://github.com/shiyuhang0/tidbcloud-branch-gorm-example).
+3. 修改你的测试代码。
 
-## What's next
+   修改你的测试代码以接受来自 GitHub Actions 的连接信息。例如，你可以通过环境变量接受连接信息，如[实际示例](https://github.com/shiyuhang0/tidbcloud-branch-gorm-example)所示。
 
-Learn how to use the branching GitHub integration with the following examples:
+## 下一步
+
+通过以下示例了解如何使用分支 GitHub 集成：
 
 - [branching-gorm-example](https://github.com/tidbcloud/branching-gorm-example)
 - [branching-django-example](https://github.com/tidbcloud/branching-django-example)
 - [branching-rails-example](https://github.com/tidbcloud/branching-rails-example)
 
-You can also build your branching CI/CD workflow without the branching GitHub integration. For example, you can use [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli) and GitHub Actions to customize your CI/CD workflows.
+你也可以在不使用分支 GitHub 集成的情况下构建分支 CI/CD 工作流。例如，你可以使用 [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli) 和 GitHub Actions 来自定义你的 CI/CD 工作流。

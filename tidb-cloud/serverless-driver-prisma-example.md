@@ -1,31 +1,31 @@
 ---
-title: TiDB Cloud Serverless Driver Prisma Tutorial
-summary: Learn how to use TiDB Cloud serverless driver with Prisma ORM.
+title: TiDB Cloud Serverless 驱动程序 Prisma 教程
+summary: 学习如何将 TiDB Cloud serverless 驱动程序与 Prisma ORM 一起使用。
 ---
 
-# TiDB Cloud Serverless Driver Prisma Tutorial
+# TiDB Cloud Serverless 驱动程序 Prisma 教程
 
-[Prisma](https://www.prisma.io/docs) is an open source next-generation ORM (Object-Relational Mapping) that helps developers interact with their database in an intuitive, efficient, and safe way. TiDB Cloud offers [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter), enabling you to use [Prisma Client](https://www.prisma.io/docs/concepts/components/prisma-client) over HTTPS with [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md). Compared with the traditional TCP way, [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter) brings the following benefits:
+[Prisma](https://www.prisma.io/docs) 是一个开源的下一代 ORM（对象关系映射），帮助开发者以直观、高效和安全的方式与数据库交互。TiDB Cloud 提供了 [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter)，使你能够通过 HTTPS 使用 [TiDB Cloud serverless 驱动程序](/tidb-cloud/serverless-driver.md)来使用 [Prisma Client](https://www.prisma.io/docs/concepts/components/prisma-client)。与传统的 TCP 方式相比，[@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter) 带来以下好处：
 
-- Better performance of Prisma Client in serverless environments
-- Ability to use Prisma Client in edge environments
+- 在 serverless 环境中提供更好的 Prisma Client 性能
+- 能够在边缘环境中使用 Prisma Client
 
-This tutorial describes how to use [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter) in serverless environments and edge environments.
+本教程介绍如何在 serverless 环境和边缘环境中使用 [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter)。
 
-## Install
+## 安装
 
-You need to install both [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter) and [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md). You can install them using [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
+你需要同时安装 [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter) 和 [TiDB Cloud serverless 驱动程序](/tidb-cloud/serverless-driver.md)。你可以使用 [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) 或你喜欢的包管理器进行安装。
 
-Taking npm as an example, you can run the following commands for installation:
+以 npm 为例，你可以运行以下命令进行安装：
 
 ```shell
 npm install @tidbcloud/prisma-adapter
 npm install @tidbcloud/serverless
 ```
 
-## Enable `driverAdapters`
+## 启用 `driverAdapters`
 
-To use the Prisma adapter, you need to enable the `driverAdapters` feature in the `schema.prisma` file. For example:
+要使用 Prisma 适配器，你需要在 `schema.prisma` 文件中启用 `driverAdapters` 功能。例如：
 
 ```prisma
 generator client {
@@ -39,11 +39,11 @@ datasource db {
 }
 ```
 
-## Initialize Prisma Client
+## 初始化 Prisma Client
 
-Before using Prisma Client, you need to initialize it with `@tidbcloud/prisma-adapter`. 
+在使用 Prisma Client 之前，你需要使用 `@tidbcloud/prisma-adapter` 对其进行初始化。
 
-For `@tidbcloud/prisma-adapter` earlier than v6.6.0: 
+对于早于 v6.6.0 的 `@tidbcloud/prisma-adapter`：
 
 ```js
 import { connect } from '@tidbcloud/serverless';
@@ -56,7 +56,7 @@ const adapter = new PrismaTiDBCloud(connection);
 const prisma = new PrismaClient({ adapter });
 ```
 
-For `@tidbcloud/prisma-adapter` v6.6.0 or a later version: 
+对于 v6.6.0 或更高版本的 `@tidbcloud/prisma-adapter`：
 
 ```js
 import { PrismaTiDBCloud } from '@tidbcloud/prisma-adapter';
@@ -67,32 +67,32 @@ const adapter = new PrismaTiDBCloud({ url: ${DATABASE_URL} });
 const prisma = new PrismaClient({ adapter });
 ```
 
-Then, queries from Prisma Client can be sent to the TiDB Cloud serverless driver for processing.
+然后，来自 Prisma Client 的查询将被发送到 TiDB Cloud serverless 驱动程序进行处理。
 
-## Use the Prisma adapter in Node.js environments
+## 在 Node.js 环境中使用 Prisma 适配器
 
-This section provides an example of how to use `@tidbcloud/prisma-adapter` in Node.js environments.
+本节提供了在 Node.js 环境中使用 `@tidbcloud/prisma-adapter` 的示例。
 
-### Before you begin
+### 开始之前
 
-To complete this tutorial, you need the following:
+要完成本教程，你需要以下内容：
 
-- [Node.js](https://nodejs.org/en) >= 18.0.0.
-- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
-- A TiDB Cloud Serverless cluster. If you don't have any, you can [create a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Node.js](https://nodejs.org/en) >= 18.0.0。
+- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) 或你喜欢的包管理器。
+- 一个 TiDB Cloud Serverless 集群。如果你没有，可以[创建一个 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md)。
 
-### Step 1. Create a project
+### 第 1 步：创建项目
 
-1. Create a project named `prisma-example`:
+1. 创建一个名为 `prisma-example` 的项目：
 
     ```
     mkdir prisma-example
     cd prisma-example
     ```
 
-2. Install the `@tidbcloud/prisma-adapter` driver adapter, the `@tidbcloud/serverless` serverless driver, and the Prisma CLI.
+2. 安装 `@tidbcloud/prisma-adapter` 驱动适配器、`@tidbcloud/serverless` serverless 驱动程序和 Prisma CLI。
 
-   The following commands use npm as the package manager. Executing `npm install @tidbcloud/serverless` will create a `node_modules` directory and a `package.json` file in your project directory.
+   以下命令使用 npm 作为包管理器。执行 `npm install @tidbcloud/serverless` 将在你的项目目录中创建一个 `node_modules` 目录和一个 `package.json` 文件。
 
     ```
     npm install @tidbcloud/prisma-adapter
@@ -100,7 +100,7 @@ To complete this tutorial, you need the following:
     npm install prisma --save-dev
     ```
 
-3. In the `package.json` file, specify the ES module by adding `type: "module"`:
+3. 在 `package.json` 文件中，通过添加 `type: "module"` 来指定 ES 模块：
 
    ```json
    {
@@ -116,33 +116,33 @@ To complete this tutorial, you need the following:
    }
    ```
 
-### Step 2. Set the environment
+### 第 2 步：设置环境
 
-1. On the overview page of your TiDB Cloud Serverless cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
+1. 在你的 TiDB Cloud Serverless 集群的概览页面上，点击右上角的**连接**，然后从显示的对话框中获取数据库的连接字符串。连接字符串看起来像这样：
 
     ```
     mysql://[username]:[password]@[host]:4000/[database]?sslaccept=strict
     ```
 
-2. In the root directory of your project, create a file named `.env`, define an environment variable named `DATABASE_URL` as follows, and then replace the placeholders `[]` in this variable with the corresponding parameters in the connection string.
+2. 在项目的根目录中，创建一个名为 `.env` 的文件，定义一个名为 `DATABASE_URL` 的环境变量，如下所示，然后将此变量中的占位符 `[]` 替换为连接字符串中的相应参数。
 
     ```dotenv
     DATABASE_URL='mysql://[username]:[password]@[host]:4000/[database]?sslaccept=strict'
     ```
 
-   > **Note:**
+   > **注意：**
    >
-   > `@tidbcloud/prisma-adapter` only supports the use of Prisma Client over HTTPS. For [Prisma Migrate](https://www.prisma.io/docs/concepts/components/prisma-migrate) and [Prisma Introspection](https://www.prisma.io/docs/concepts/components/introspection), the traditional TCP connection is still used. If you only need to use Prisma Client, you can simplify `DATABASE_URL` to the `mysql://[username]:[password]@[host]/[database]` format.
+   > `@tidbcloud/prisma-adapter` 仅支持通过 HTTPS 使用 Prisma Client。对于 [Prisma Migrate](https://www.prisma.io/docs/concepts/components/prisma-migrate) 和 [Prisma Introspection](https://www.prisma.io/docs/concepts/components/introspection)，仍然使用传统的 TCP 连接。如果你只需要使用 Prisma Client，可以将 `DATABASE_URL` 简化为 `mysql://[username]:[password]@[host]/[database]` 格式。
 
-3. Install `dotenv` to load the environment variable from the `.env` file:
+3. 安装 `dotenv` 以从 `.env` 文件加载环境变量：
 
    ```
    npm install dotenv
    ```
 
-### Step 3. Define your schema
+### 第 3 步：定义你的架构
 
-1. Create a file named `schema.prisma`. In this file, include the `driverAdapters` preview feature and reference the `DATABASE_URL` environment variable. Here is an example file:
+1. 创建一个名为 `schema.prisma` 的文件。在此文件中，包含 `driverAdapters` 预览功能并引用 `DATABASE_URL` 环境变量。以下是示例文件：
 
    ```
    // schema.prisma
@@ -157,7 +157,7 @@ To complete this tutorial, you need the following:
    } 
    ```
 
-2. In the `schema.prisma` file, define a data model for your database table. In the following example, a data model named `user` is defined.
+2. 在 `schema.prisma` 文件中，为你的数据库表定义一个数据模型。在以下示例中，定义了一个名为 `user` 的数据模型。
 
    ```
    // schema.prisma
@@ -179,25 +179,25 @@ To complete this tutorial, you need the following:
    }
    ```
 
-3. Synchronize your database with the Prisma schema. You can either manually create the database tables in your TiDB Cloud Serverless cluster or use the Prisma CLI to create them automatically as follows:
+3. 将你的数据库与 Prisma 架构同步。你可以手动在 TiDB Cloud Serverless 集群中创建数据库表，或使用 Prisma CLI 自动创建它们，如下所示：
 
     ```
     npx prisma db push
     ```
 
-   This command will create the `user` table in your TiDB Cloud Serverless cluster through the traditional TCP connection, rather than through the HTTPS connection using `@tidbcloud/prisma-adapter`. This is because it uses the same engine as Prisma Migrate. For more information about this command, see [Prototype your schema](https://www.prisma.io/docs/concepts/components/prisma-migrate/db-push).
+   此命令将通过传统的 TCP 连接（而不是通过使用 `@tidbcloud/prisma-adapter` 的 HTTPS 连接）在你的 TiDB Cloud Serverless 集群中创建 `user` 表。这是因为它使用与 Prisma Migrate 相同的引擎。有关此命令的更多信息，请参阅[原型化你的架构](https://www.prisma.io/docs/concepts/components/prisma-migrate/db-push)。
 
-4. Generate Prisma Client:
+4. 生成 Prisma Client：
 
     ```
     npx prisma generate
     ```
 
-   This command will generate Prisma Client based on the Prisma schema.
+   此命令将基于 Prisma 架构生成 Prisma Client。
 
-### Step 4. Execute CRUD operations
+### 第 4 步：执行 CRUD 操作
 
-1. Create a file named `hello-word.js` and add the following code to initialize Prisma Client:
+1. 创建一个名为 `hello-word.js` 的文件，并添加以下代码来初始化 Prisma Client：
 
    ```js
    import { PrismaTiDBCloud } from '@tidbcloud/prisma-adapter';
@@ -213,7 +213,7 @@ To complete this tutorial, you need the following:
    const prisma = new PrismaClient({ adapter });
    ```
 
-2. Execute some CRUD operations with Prisma Client. For example:
+2. 使用 Prisma Client 执行一些 CRUD 操作。例如：
 
    ```js
    // Insert
@@ -236,7 +236,7 @@ To complete this tutorial, you need the following:
    })
    ```
 
-3. Execute some transaction operations with Prisma Client. For example:
+3. 使用 Prisma Client 执行一些事务操作。例如：
 
    ```js
    const createUser1 = prisma.user.create({
@@ -271,9 +271,9 @@ To complete this tutorial, you need the following:
    }
    ```
 
-## Use the Prisma adapter in edge environments
+## 在边缘环境中使用 Prisma 适配器
 
-You can use `@tidbcloud/prisma-adapter` v5.11.0 or a later version in edge environments such as Vercel Edge Functions and Cloudflare Workers.
+你可以在边缘环境（如 Vercel Edge Functions 和 Cloudflare Workers）中使用 v5.11.0 或更高版本的 `@tidbcloud/prisma-adapter`。
 
-- [Vercel Edge Function example](https://github.com/tidbcloud/serverless-driver-example/tree/main/prisma/prisma-vercel-example)
-- [Cloudflare Workers example](https://github.com/tidbcloud/serverless-driver-example/tree/main/prisma/prisma-cloudflare-worker-example)
+- [Vercel Edge Function 示例](https://github.com/tidbcloud/serverless-driver-example/tree/main/prisma/prisma-vercel-example)
+- [Cloudflare Workers 示例](https://github.com/tidbcloud/serverless-driver-example/tree/main/prisma/prisma-cloudflare-worker-example)

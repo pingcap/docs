@@ -1,32 +1,32 @@
 ---
-title: Reseller's Customer
-summary: Learn how to become a reseller's customer.
+title: 代理商的客户
+summary: 了解如何成为代理商的客户。
 ---
 
-# Reseller's Customer
+# 代理商的客户
 
-A reseller's customer subscribes to TiDB Cloud services through a reseller in the AWS Marketplace.
+代理商的客户通过 AWS Marketplace 中的代理商订阅 TiDB Cloud 服务。
 
-Unlike direct TiDB Cloud customers, a reseller's customers pay invoices via the AWS Marketplace rather than directly to PingCAP. However, all other daily operations in the TiDB Cloud console remain the same for both AWS Marketplace Channel Partner Private Offer (CPPO) and direct TiDB Cloud customers.
+与直接的 TiDB Cloud 客户不同，代理商的客户通过 AWS Marketplace 而不是直接向 PingCAP 支付账单。但是，对于 AWS Marketplace Channel Partner Private Offer (CPPO) 和直接 TiDB Cloud 客户来说，TiDB Cloud 控制台中的所有其他日常操作都是相同的。
 
-This document outlines how to check both future and historical bills.
+本文档概述了如何查看未来和历史账单。
 
-## Migrate from a direct TiDB Cloud account to a reseller's customer account
+## 从直接 TiDB Cloud 账户迁移到代理商的客户账户
 
-> **Tip:**
+> **提示：**
 >
-> Direct customers are the end customers who directly purchase TiDB Cloud from and pay invoices to PingCAP.
+> 直接客户是直接从 PingCAP 购买 TiDB Cloud 并向其支付账单的最终客户。
 
-If you are currently a direct customer with a TiDB Cloud account, you can ask your reseller to migrate your account to a reseller's customer account.
+如果你目前是拥有 TiDB Cloud 账户的直接客户，你可以请你的代理商将你的账户迁移到代理商的客户账户。
 
-The migration will take effect on the first day of a future month. Discuss with your reseller to determine the specific effective date.
+迁移将在未来某个月的第一天生效。请与你的代理商讨论确定具体的生效日期。
 
-On the effective day of migration, you will receive an email notification.
+在迁移生效当天，你将收到电子邮件通知。
 
-## View your future bills
+## 查看你的未来账单
 
-As a reseller's customer, you will have your invoices processed and paid through the AWS Marketplace.
+作为代理商的客户，你的账单将通过 AWS Marketplace 处理和支付。
 
-## View your historical bills
+## 查看你的历史账单
 
-If you have migrated from a direct TiDB Cloud account to a reseller's customer account, you can still access your billing history before the migration. To do so, go to **Billing** > **Bills** > **History** in the TiDB Cloud console.
+如果你已经从直接 TiDB Cloud 账户迁移到代理商的客户账户，你仍然可以访问迁移之前的账单历史记录。要查看这些记录，请在 TiDB Cloud 控制台中转到**计费** > **账单** > **历史记录**。

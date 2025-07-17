@@ -1,36 +1,36 @@
 ---
-title: TiDB Cloud Serverless Driver (Beta)
-summary: Learn how to connect to TiDB Cloud Serverless from serverless and edge environments.
+title: TiDB Cloud Serverless 驱动（Beta）
+summary: 了解如何从 serverless 和边缘环境连接到 TiDB Cloud Serverless。
 aliases: ['/tidbcloud/serverless-driver-config']
 ---
 
-# TiDB Cloud Serverless Driver (Beta)
+# TiDB Cloud Serverless 驱动（Beta）
 
-## Why use TiDB Cloud Serverless Driver (Beta)
+## 为什么使用 TiDB Cloud Serverless 驱动（Beta）
 
-Traditional TCP-based MySQL drivers are not suitable for serverless functions due to their expectation of long-lived, persistent TCP connections, which contradict the short-lived nature of serverless functions. Moreover, in edge environments such as [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/), where comprehensive TCP support and full Node.js compatibility may be lacking, these drivers may not work at all.
+传统的基于 TCP 的 MySQL 驱动程序不适合 serverless 函数，因为它们需要长期存在的持久 TCP 连接，这与 serverless 函数的短暂特性相矛盾。此外，在边缘环境中，如 [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions) 和 [Cloudflare Workers](https://workers.cloudflare.com/)，由于可能缺乏完整的 TCP 支持和完整的 Node.js 兼容性，这些驱动程序可能完全无法工作。
 
-[TiDB Cloud serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to your TiDB Cloud Serverless cluster over HTTP, which is generally supported by serverless environments. With it, it is now possible to connect to TiDB Cloud Serverless clusters from edge environments and reduce connection overhead with TCP while keeping the similar development experience of traditional TCP-based MySQL drivers. 
+JavaScript 版本的 [TiDB Cloud serverless 驱动（Beta）](https://github.com/tidbcloud/serverless-js) 允许你通过 HTTP 连接到 TiDB Cloud Serverless 集群，这通常在 serverless 环境中都支持。有了它，现在可以从边缘环境连接到 TiDB Cloud Serverless 集群，并减少 TCP 的连接开销，同时保持与传统基于 TCP 的 MySQL 驱动程序类似的开发体验。
 
-> **Note:**
+> **注意：**
 >
-> If you prefer programming with RESTful API rather than SQL or ORM, you can use [Data Service (beta)](/tidb-cloud/data-service-overview.md).
+> 如果你更喜欢使用 RESTful API 而不是 SQL 或 ORM 进行编程，可以使用 [Data Service (beta)](/tidb-cloud/data-service-overview.md)。
 
-## Install the serverless driver
+## 安装 serverless 驱动
 
-You can install the driver with npm:
+你可以使用 npm 安装驱动：
 
 ```bash
 npm install @tidbcloud/serverless
 ```
 
-## Use the serverless driver
+## 使用 serverless 驱动
 
-You can use the serverless driver to query data of a TiDB Cloud Serverless cluster or perform interactive transactions.
+你可以使用 serverless 驱动查询 TiDB Cloud Serverless 集群的数据或执行交互式事务。
 
-### Query
+### 查询
 
-To query data from a TiDB Cloud Serverless cluster, you need to create a connection first. Then you can use the connection to execute raw SQL queries. For example:
+要从 TiDB Cloud Serverless 集群查询数据，你需要先创建一个连接。然后你可以使用该连接执行原始 SQL 查询。例如：
 
 ```ts
 import { connect } from '@tidbcloud/serverless'
@@ -39,9 +39,9 @@ const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]'})
 const results = await conn.execute('select * from test where id = ?',[1])
 ```
 
-### Transaction (experimental)
+### 事务（实验性）
 
-You can also perform interactive transactions with the serverless driver. For example:
+你也可以使用 serverless 驱动执行交互式事务。例如：
 
 ```ts
 import { connect } from '@tidbcloud/serverless'
@@ -59,9 +59,9 @@ try {
 }
 ```
 
-## Edge examples
+## 边缘环境示例
 
-Here are some examples of using the serverless driver in edge environments. For a complete example, you can also try this [live demo](https://github.com/tidbcloud/car-sales-insight).
+以下是在边缘环境中使用 serverless 驱动的一些示例。完整示例可以尝试这个[在线演示](https://github.com/tidbcloud/car-sales-insight)。
 
 <SimpleTab>
 
@@ -80,7 +80,7 @@ export async function GET(request: NextRequest) {
 }
 ```
 
-Learn more about [using TiDB Cloud serverless driver in Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md).
+了解更多关于[在 Vercel 中使用 TiDB Cloud serverless 驱动](/tidb-cloud/integrate-tidbcloud-with-vercel.md)。
 
 </div>
 
@@ -100,7 +100,7 @@ export default {
 };
 ```
 
-Learn more about [using TiDB Cloud serverless driver in Cloudflare Workers](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md).
+了解更多关于[在 Cloudflare Workers 中使用 TiDB Cloud serverless 驱动](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)。
 
 </div>
 
@@ -116,7 +116,7 @@ export default async () => {
 }
 ```
 
-Learn more about [using TiDB Cloud serverless driver in Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md#use-the-edge-function).
+了解更多关于[在 Netlify 中使用 TiDB Cloud serverless 驱动](/tidb-cloud/integrate-tidbcloud-with-netlify.md#use-the-edge-function)。
 
 </div>
 
@@ -144,33 +144,33 @@ const result = await conn.execute('show tables')
 
 </SimpleTab>
 
-## Configure the serverless driver
+## 配置 serverless 驱动
 
-You can configure TiDB Cloud serverless driver at both the connection level and the SQL level.
+你可以在连接级别和 SQL 级别配置 TiDB Cloud serverless 驱动。
 
-### Connection level configurations
+### 连接级别配置
 
-At the connection level, you can make the following configurations:
+在连接级别，你可以进行以下配置：
 
-| Name         | Type     | Default value | Description                                                                                                                                                                                                                                                                                                                                                  |
-|--------------|----------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `username`   | string   | N/A           | Username of TiDB Cloud Serverless                                                                                                                                                                                                                                                                                                                                  |
-| `password`   | string   | N/A           | Password of TiDB Cloud Serverless                                                                                                                                                                                                                                                                                                                                  |
-| `host`       | string   | N/A           | Hostname of TiDB Cloud Serverless                                                                                                                                                                                                                                                                                                                                  |
-| `database`   | string   | `test`        | Database of TiDB Cloud Serverless                                                                                                                                                                                                                                                                                                                                  |
-| `url`        | string   | N/A           | The URL for the database, in the `mysql://[username]:[password]@[host]/[database]` format, where `database` can be skipped if you intend to connect to the default database.                                                                                                                                                                                 |
-| `fetch`      | function | global fetch  | Custom fetch function. For example, you can use the `undici` fetch in node.js.                                                                                                                                                                                                                                                                               |
-| `arrayMode`  | bool     | `false`       | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.                                                                                                                                                                                                                                                         |
-| `fullResult` | bool     | `false`       | Whether to return full result object instead of just rows. To get more detailed results, set it to `true`.                                                                                                                                                                                                                                                   |
-| `decoders`   | object   | `{}`          | A collection of key-value pairs, which enables you to customize the decoding process for different column types. In each pair, you can specify a column type as the key and specify a corresponding function as the value. This function takes the raw string value received from TiDB Cloud serverless driver as an argument and returns the decoded value. |
+| 名称         | 类型     | 默认值 | 描述                                                                                                                                                                                                                                                                                                                                                  |
+|--------------|----------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `username`   | string   | N/A     | TiDB Cloud Serverless 的用户名                                                                                                                                                                                                                                                                                                                                  |
+| `password`   | string   | N/A     | TiDB Cloud Serverless 的密码                                                                                                                                                                                                                                                                                                                                  |
+| `host`       | string   | N/A     | TiDB Cloud Serverless 的主机名                                                                                                                                                                                                                                                                                                                                  |
+| `database`   | string   | `test`  | TiDB Cloud Serverless 的数据库                                                                                                                                                                                                                                                                                                                                  |
+| `url`        | string   | N/A     | 数据库的 URL，格式为 `mysql://[username]:[password]@[host]/[database]`，如果你打算连接到默认数据库，可以省略 `database`。                                                                                                                                                                                                                                                                                 |
+| `fetch`      | function | global fetch | 自定义 fetch 函数。例如，你可以在 node.js 中使用 `undici` fetch。                                                                                                                                                                                                                                                                               |
+| `arrayMode`  | bool     | `false` | 是否将结果以数组而不是对象形式返回。要获得更好的性能，请设置为 `true`。                                                                                                                                                                                                                                                                         |
+| `fullResult` | bool     | `false` | 是否返回完整的结果对象而不是仅返回行。要获得更详细的结果，请设置为 `true`。                                                                                                                                                                                                                                                                   |
+| `decoders`   | object   | `{}`    | 一组键值对，使你能够自定义不同列类型的解码过程。在每个键值对中，你可以指定一个列类型作为键，并指定一个相应的函数作为值。这个函数接收从 TiDB Cloud serverless 驱动接收到的原始字符串值作为参数，并返回解码后的值。 |
 
-**Database URL**
+**数据库 URL**
 
-> **Note:**
+> **注意：**
 >
-> If your username, password, or database name contains special characters, you must [percentage-encode](https://en.wikipedia.org/wiki/Percent-encoding) these characters when passing them by the URL. For example, the password `password1@//?` needs to be encoded as `password1%40%2F%2F%3F` in the URL.
+> 如果你的用户名、密码或数据库名称包含特殊字符，在通过 URL 传递时必须对这些字符进行[百分比编码](https://en.wikipedia.org/wiki/Percent-encoding)。例如，密码 `password1@//?` 需要在 URL 中编码为 `password1%40%2F%2F%3F`。
 
-When `url` is configured, there is no need to configure `host`, `username`, `password`, and `database` separately. The following codes are equivalent:
+当配置了 `url` 时，就不需要单独配置 `host`、`username`、`password` 和 `database`。以下代码是等效的：
 
 ```ts
 const config = {
@@ -193,24 +193,24 @@ const config = {
 const conn = connect(config)
 ```
 
-### SQL level options
+### SQL 级别选项
 
-> **Note:**
+> **注意：**
 >
-> The SQL level options have a higher priority over connection level configurations.
+> SQL 级别选项的优先级高于连接级别配置。
 
-At the SQL level, you can configure the following options:
+在 SQL 级别，你可以配置以下选项：
 
-| Option       | Type   | Default value     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 选项         | 类型   | 默认值            | 描述                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 |--------------|--------|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `arrayMode`  | bool   | `false`           | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `fullResult` | bool   | `false`           | Whether to return the full result object instead of just rows. To get more detailed results, set it to `true`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `isolation`  | string | `REPEATABLE READ` | The transaction isolation level, which can be set to `READ COMMITTED` or `REPEATABLE READ`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `decoders`   | object | `{}`              | A collection of key-value pairs, which enables you to customize the decoding process for different column types. In each pair, you can specify a column type as the key and specify a corresponding function as the value. This function takes the raw string value received from TiDB Cloud serverless driver as an argument and returns the decoded value. If you have configured `decoders` at both the connection and SQL levels, the key-value pairs with different keys configured at the connection level will be merged to the SQL level to take effect. If the same key (this is, column type) is specified at both levels, the value at the SQL level takes precedence. |
+| `arrayMode`  | bool   | `false`          | 是否将结果以数组而不是对象形式返回。要获得更好的性能，请设置为 `true`。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `fullResult` | bool   | `false`          | 是否返回完整的结果对象而不是仅返回行。要获得更详细的结果，请设置为 `true`。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `isolation`  | string | `REPEATABLE READ`| 事务隔离级别，可以设置为 `READ COMMITTED` 或 `REPEATABLE READ`。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `decoders`   | object | `{}`             | 一组键值对，使你能够自定义不同列类型的解码过程。在每个键值对中，你可以指定一个列类型作为键，并指定一个相应的函数作为值。这个函数接收从 TiDB Cloud serverless 驱动接收到的原始字符串值作为参数，并返回解码后的值。如果你在连接级别和 SQL 级别都配置了 `decoders`，连接级别配置的具有不同键的键值对将合并到 SQL 级别生效。如果在两个级别都指定了相同的键（即列类型），SQL 级别的值优先。 |
 
-**arrayMode and fullResult**
+**arrayMode 和 fullResult**
 
-To return the full result object as arrays, you can configure the `arrayMode` and `fullResult` options as follows:
+要将完整的结果对象以数组形式返回，你可以按如下方式配置 `arrayMode` 和 `fullResult` 选项：
 
 ```ts
 const conn = connect({url: process.env['DATABASE_URL'] || 'mysql://[username]:[password]@[host]/[database]'})
@@ -219,7 +219,7 @@ const results = await conn.execute('select * from test',null,{arrayMode:true,ful
 
 **isolation**
 
-The `isolation` option can only be used in the `begin` function.
+`isolation` 选项只能在 `begin` 函数中使用。
 
 ```ts
 const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]'})
@@ -228,7 +228,7 @@ const tx = await conn.begin({isolation:"READ COMMITTED"})
 
 **decoders**
 
-To customize the format of returned column values, you can configure the `decoder` option in the `connect()` method as follows:
+要自定义返回的列值格式，你可以在 `connect()` 方法中按如下方式配置 `decoder` 选项：
 
 ```ts
 import { connect, ColumnType } from '@tidbcloud/serverless';
@@ -236,15 +236,15 @@ import { connect, ColumnType } from '@tidbcloud/serverless';
 const conn = connect({
   url: 'mysql://[username]:[password]@[host]/[database]',
   decoders: {
-    // By default, TiDB Cloud serverless driver returns the BIGINT type as text value. This decoder converts BIGINT to the JavaScript built-in BigInt type.
+    // 默认情况下，TiDB Cloud serverless 驱动将 BIGINT 类型作为文本值返回。这个解码器将 BIGINT 转换为 JavaScript 内置的 BigInt 类型。
     [ColumnType.BIGINT]: (rawValue: string) => BigInt(rawValue),
     
-    // By default, TiDB Cloud serverless driver returns the DATETIME type as the text value in the 'yyyy-MM-dd HH:mm:ss' format. This decoder converts the DATETIME text to the JavaScript native Date object.
+    // 默认情况下，TiDB Cloud serverless 驱动将 DATETIME 类型作为 'yyyy-MM-dd HH:mm:ss' 格式的文本值返回。这个解码器将 DATETIME 文本转换为 JavaScript 原生 Date 对象。
     [ColumnType.DATETIME]: (rawValue: string) => new Date(rawValue),
   }
 })
 
-// You can also configure the decoder option at the SQL level to override the decoders with the same keys at the connection level.
+// 你也可以在 SQL 级别配置 decoder 选项来覆盖连接级别具有相同键的解码器。
 conn.execute(`select ...`, [], {
   decoders: {
     // ...
@@ -252,24 +252,24 @@ conn.execute(`select ...`, [], {
 })
 ```
 
-> **Note:**
+> **注意：**
 >
-> TiDB Cloud serverless driver configuration changes:
+> TiDB Cloud serverless 驱动配置变更：
 > 
-> - v0.0.7: add the SQL level option `isolation`.
-> - v0.0.10: add the connection level configuration `decoders` and the SQL level option `decoders`.
+> - v0.0.7：添加 SQL 级别选项 `isolation`。
+> - v0.0.10：添加连接级别配置 `decoders` 和 SQL 级别选项 `decoders`。
 
-## Features
+## 功能特性
 
-### Supported SQL statements
+### 支持的 SQL 语句
 
-DDL is supported and the following SQL statements are supported:  `SELECT`, `SHOW`, `EXPLAIN`, `USE`, `INSERT`, `UPDATE`, `DELETE`, `BEGIN`, `COMMIT`, `ROLLBACK`, and `SET`.
+支持 DDL 和以下 SQL 语句：`SELECT`、`SHOW`、`EXPLAIN`、`USE`、`INSERT`、`UPDATE`、`DELETE`、`BEGIN`、`COMMIT`、`ROLLBACK` 和 `SET`。
 
-### Data type mapping
+### 数据类型映射
 
-The type mapping between TiDB Cloud Serverless and Javascript is as follows:
+TiDB Cloud Serverless 和 Javascript 之间的类型映射如下：
 
-| TiDB Cloud Serverless type | Javascript type |
+| TiDB Cloud Serverless 类型 | Javascript 类型 |
 |----------------------|-----------------|
 | TINYINT              | number          |
 | UNSIGNED TINYINT     | number          |
@@ -308,35 +308,35 @@ The type mapping between TiDB Cloud Serverless and Javascript is as follows:
 | NULL                 | null            |
 | Others               | string          |
 
-> **Note:**
+> **注意：**
 >
-> Make sure to use the default `utf8mb4` character set in TiDB Cloud Serverless for the type conversion to JavaScript strings, because TiDB Cloud serverless driver uses the UTF-8 encoding to decode them to strings. 
+> 确保在 TiDB Cloud Serverless 中使用默认的 `utf8mb4` 字符集进行 JavaScript 字符串的类型转换，因为 TiDB Cloud serverless 驱动使用 UTF-8 编码将它们解码为字符串。
 
-> **Note:**
+> **注意：**
 >
-> TiDB Cloud serverless driver data type mapping changes:
+> TiDB Cloud serverless 驱动数据类型映射变更：
 > 
-> - v0.1.0: the `BINARY`, `VARBINARY`, `TINYBLOB`, `BLOB`, `MEDIUMBLOB`, `LONGBLOB`, and `BIT` types are now returned as a `Uint8Array` instead of a `string`.
+> - v0.1.0：`BINARY`、`VARBINARY`、`TINYBLOB`、`BLOB`、`MEDIUMBLOB`、`LONGBLOB` 和 `BIT` 类型现在返回 `Uint8Array` 而不是 `string`。
 
-### ORM integrations
+### ORM 集成
 
-TiDB Cloud serverless driver has been integrated with the following ORMs:
+TiDB Cloud serverless 驱动已经与以下 ORM 集成：
 
-- [TiDB Cloud serverless driver Kysely dialect](https://github.com/tidbcloud/kysely).
-- [TiDB Cloud serverless driver Prisma adapter](https://github.com/tidbcloud/prisma-adapter).
+- [TiDB Cloud serverless 驱动 Kysely 方言](https://github.com/tidbcloud/kysely)。
+- [TiDB Cloud serverless 驱动 Prisma 适配器](https://github.com/tidbcloud/prisma-adapter)。
 
-## Pricing
+## 定价
 
-The serverless driver itself is free, but accessing data with the driver generates [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) and storage usage. The pricing follows the [TiDB Cloud Serverless pricing](https://www.pingcap.com/tidb-serverless-pricing-details/) model.
+serverless 驱动本身是免费的，但使用驱动访问数据会产生 [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) 和存储使用量。定价遵循 [TiDB Cloud Serverless 定价](https://www.pingcap.com/tidb-serverless-pricing-details/) 模型。
 
-## Limitations
+## 限制
 
-Currently, using serverless driver has the following limitations:
+目前，使用 serverless 驱动有以下限制：
 
-- Up to 10,000 rows can be fetched in a single query.
-- You can execute only a single SQL statement at a time. Multiple SQL statements in one query are not supported yet.
-- Connection with [private endpoints](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) is not supported yet.
+- 单个查询最多可以获取 10,000 行数据。
+- 一次只能执行一条 SQL 语句。目前不支持在一个查询中执行多条 SQL 语句。
+- 尚不支持通过[私有端点](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)连接。
 
-## What's next
+## 下一步
 
-- Learn how to [use TiDB Cloud serverless driver in a local Node.js project](/tidb-cloud/serverless-driver-node-example.md).
+- 了解如何[在本地 Node.js 项目中使用 TiDB Cloud serverless 驱动](/tidb-cloud/serverless-driver-node-example.md)。

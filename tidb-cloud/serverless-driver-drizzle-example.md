@@ -1,42 +1,42 @@
 ---
-title: TiDB Cloud Serverless Driver Drizzle Tutorial
-summary: Learn how to use TiDB Cloud serverless driver with Drizzle.
+title: TiDB Cloud Serverless 驱动程序 Drizzle 教程
+summary: 了解如何将 TiDB Cloud serverless 驱动程序与 Drizzle 配合使用。
 ---
 
-# TiDB Cloud Serverless Driver Drizzle Tutorial
+# TiDB Cloud Serverless 驱动程序 Drizzle 教程
 
-[Drizzle ORM](https://orm.drizzle.team/) is a lightweight and performant TypeScript ORM with developer experience in mind. Starting from `drizzle-orm@0.31.2`, it supports [drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless), enabling you to use Drizzle over HTTPS with [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md).
+[Drizzle ORM](https://orm.drizzle.team/) 是一个轻量级且高性能的 TypeScript ORM，专注于开发者体验。从 `drizzle-orm@0.31.2` 开始，它支持 [drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless)，使你能够通过 HTTPS 使用 [TiDB Cloud serverless 驱动程序](/tidb-cloud/serverless-driver.md)。
 
-This tutorial describes how to use TiDB Cloud serverless driver with Drizzle in Node.js environments and edge environments.
+本教程介绍如何在 Node.js 环境和边缘环境中将 TiDB Cloud serverless 驱动程序与 Drizzle 配合使用。
 
-## Use Drizzle and TiDB Cloud serverless driver in Node.js environments
+## 在 Node.js 环境中使用 Drizzle 和 TiDB Cloud serverless 驱动程序
 
-This section describes how to use TiDB Cloud serverless driver with Drizzle in Node.js environments.
+本节介绍如何在 Node.js 环境中将 TiDB Cloud serverless 驱动程序与 Drizzle 配合使用。
 
-### Before you begin
+### 开始之前
 
-To complete this tutorial, you need the following:
+要完成本教程，你需要：
 
-- [Node.js](https://nodejs.org/en) >= 18.0.0.
-- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
-- A TiDB Cloud Serverless cluster. If you don't have any, you can [create a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Node.js](https://nodejs.org/en) >= 18.0.0。
+- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) 或你首选的包管理器。
+- 一个 TiDB Cloud Serverless 集群。如果你还没有，可以[创建一个 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md)。
 
-### Step 1. Create a project
+### 步骤 1. 创建项目
 
-1. Create a project named `drizzle-node-example`:
+1. 创建一个名为 `drizzle-node-example` 的项目：
 
     ```shell
     mkdir drizzle-node-example
     cd drizzle-node-example
     ```
 
-2. Install the `drizzle-orm` and `@tidbcloud/serverless` packages:
+2. 安装 `drizzle-orm` 和 `@tidbcloud/serverless` 包：
 
    ```shell
    npm install drizzle-orm @tidbcloud/serverless
    ```
 
-3. In the root directory of your project, locate the `package.json` file, and then specify the ES module by adding `"type": "module"` to the file:
+3. 在项目的根目录中找到 `package.json` 文件，然后通过添加 `"type": "module"` 来指定 ES 模块：
 
    ```json
    {
@@ -48,7 +48,7 @@ To complete this tutorial, you need the following:
    }
    ```
 
-4. In the root directory of your project, add a `tsconfig.json` file to define the TypeScript compiler options. Here is an example file:
+4. 在项目的根目录中添加一个 `tsconfig.json` 文件来定义 TypeScript 编译器选项。以下是示例文件：
 
    ```json
    {
@@ -67,33 +67,33 @@ To complete this tutorial, you need the following:
    }
    ```
 
-### Step 2. Set the environment
+### 步骤 2. 设置环境
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target TiDB Cloud Serverless cluster to go to its overview page.
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标 TiDB Cloud Serverless 集群的名称进入其概览页面。
 
-2. On the overview page, click **Connect** in the upper-right corner, select `Serverless Driver` in the **Connect With** drop-down list, and then click **Generate Password** to create a random password.
+2. 在概览页面上，点击右上角的**连接**，在**连接方式**下拉列表中选择 `Serverless Driver`，然后点击**生成密码**创建一个随机密码。
 
-    > **Tip:**
+    > **提示：**
     >
-    > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
+    > 如果你之前已经创建了密码，你可以使用原始密码，也可以点击**重置密码**生成一个新密码。
 
-    The connection string looks like this:
+    连接字符串的格式如下：
 
     ```
     mysql://[username]:[password]@[host]/[database]
     ```
 
-3. Set the environment variable `DATABASE_URL` in your local environment. For example, in Linux or macOS, you can run the following command:
+3. 在本地环境中设置环境变量 `DATABASE_URL`。例如，在 Linux 或 macOS 中，你可以运行以下命令：
 
     ```shell
     export DATABASE_URL='mysql://[username]:[password]@[host]/[database]'
     ```
 
-### Step 3. Use Drizzle to query data
+### 步骤 3. 使用 Drizzle 查询数据
 
-1. Create a table in your TiDB Cloud Serverless cluster.
+1. 在你的 TiDB Cloud Serverless 集群中创建一个表。
 
-   You can use [SQL Editor in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
+   你可以使用 [TiDB Cloud 控制台中的 SQL 编辑器](/tidb-cloud/explore-data-with-chat2query.md)执行 SQL 语句。以下是示例：
 
    ```sql
    CREATE TABLE `test`.`users` (
@@ -103,107 +103,107 @@ To complete this tutorial, you need the following:
    );
    ```
 
-2. In the root directory of your project, create a file named `hello-world.ts` and add the following code:
+2. 在项目的根目录中创建一个名为 `hello-world.ts` 的文件，并添加以下代码：
 
    ```ts
    import { connect } from '@tidbcloud/serverless';
    import { drizzle } from 'drizzle-orm/tidb-serverless';
    import { mysqlTable, serial, text, varchar } from 'drizzle-orm/mysql-core';
 
-   // Initialize
+   // 初始化
    const client = connect({ url: process.env.DATABASE_URL });
    const db = drizzle(client);
 
-   // Define schema
+   // 定义模式
    export const users = mysqlTable('users', {
      id: serial("id").primaryKey(),
      fullName: text('full_name'),
      phone: varchar('phone', { length: 256 }),
    });
-   export type User = typeof users.$inferSelect; // return type when queried
-   export type NewUser = typeof users.$inferInsert; // insert type
+   export type User = typeof users.$inferSelect; // 查询时的返回类型
+   export type NewUser = typeof users.$inferInsert; // 插入类型
 
-   // Insert and select data
+   // 插入和选择数据
    const user: NewUser = { fullName: 'John Doe', phone: '123-456-7890' };
    await db.insert(users).values(user)
    const result: User[] = await db.select().from(users);
    console.log(result);
    ```
 
-### Step 4. Run the Typescript code
+### 步骤 4. 运行 TypeScript 代码
 
-1. Install `ts-node` to transform TypeScript into JavaScript, and then install `@types/node` to provide TypeScript type definitions for Node.js.
+1. 安装 `ts-node` 将 TypeScript 转换为 JavaScript，然后安装 `@types/node` 为 Node.js 提供 TypeScript 类型定义。
 
    ```shell
    npm install -g ts-node
    npm i --save-dev @types/node
    ```
 
-2. Run the Typescript code with the following command:
+2. 使用以下命令运行 TypeScript 代码：
 
    ```shell
    ts-node --esm hello-world.ts
    ```
 
-## Use Drizzle and TiDB Cloud serverless driver in edge environments
+## 在边缘环境中使用 Drizzle 和 TiDB Cloud serverless 驱动程序
 
-This section takes the Vercel Edge Function as an example.
+本节以 Vercel Edge Function 为例。
 
-### Before you begin
+### 开始之前
 
-To complete this tutorial, you need the following:
+要完成本教程，你需要：
 
-- A [Vercel](https://vercel.com/docs) account that provides edge environment.
-- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
-- A TiDB Cloud Serverless cluster. If you don't have any, you can [create a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- 一个提供边缘环境的 [Vercel](https://vercel.com/docs) 账户。
+- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) 或你首选的包管理器。
+- 一个 TiDB Cloud Serverless 集群。如果你还没有，可以[创建一个 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md)。
 
-### Step 1. Create a project
+### 步骤 1. 创建项目
 
-1. Install the Vercel CLI:
+1. 安装 Vercel CLI：
 
     ```shell
     npm i -g vercel@latest
     ```
 
-2. Create a [Next.js](https://nextjs.org/) project called `drizzle-example` using the following terminal command:
+2. 使用以下终端命令创建一个名为 `drizzle-example` 的 [Next.js](https://nextjs.org/) 项目：
 
    ```shell
    npx create-next-app@latest drizzle-example --ts --no-eslint --tailwind --no-src-dir --app --import-alias "@/*"
    ```
 
-3. Navigate to the `drizzle-example` directory:
+3. 导航到 `drizzle-example` 目录：
 
    ```shell
    cd drizzle-example
    ```
 
-4. Install the `drizzle-orm` and `@tidbcloud/serverless` packages:
+4. 安装 `drizzle-orm` 和 `@tidbcloud/serverless` 包：
 
    ```shell
    npm install drizzle-orm @tidbcloud/serverless --force
    ```
 
-### Step 2. Set the environment
+### 步骤 2. 设置环境
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target TiDB Cloud Serverless cluster to go to its overview page.
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标 TiDB Cloud Serverless 集群的名称进入其概览页面。
 
-2. On the overview page, click **Connect** in the upper-right corner, select `Serverless Driver` in the **Connect With** drop-down list, and then click **Generate Password** to create a random password.
+2. 在概览页面上，点击右上角的**连接**，在**连接方式**下拉列表中选择 `Serverless Driver`，然后点击**生成密码**创建一个随机密码。
 
-    > **Tip:**
+    > **提示：**
     >
-    > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
+    > 如果你之前已经创建了密码，你可以使用原始密码，也可以点击**重置密码**生成一个新密码。
 
-    The connection string looks like this:
+    连接字符串的格式如下：
 
     ```
     mysql://[username]:[password]@[host]/[database]
     ```
 
-### Step 3. Create an edge function
+### 步骤 3. 创建边缘函数
 
-1. Create a table in your TiDB Cloud Serverless cluster.
+1. 在你的 TiDB Cloud Serverless 集群中创建一个表。
 
-   You can use [SQL Editor in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
+   你可以使用 [TiDB Cloud 控制台中的 SQL 编辑器](/tidb-cloud/explore-data-with-chat2query.md)执行 SQL 语句。以下是示例：
 
    ```sql
    CREATE TABLE `test`.`users` (
@@ -213,7 +213,7 @@ To complete this tutorial, you need the following:
    );
    ```
 
-2. In the `app` directory of your project, create a file `/api/edge-function-example/route.ts` and add the following code:
+2. 在项目的 `app` 目录中创建一个文件 `/api/edge-function-example/route.ts`，并添加以下代码：
 
    ```ts
    import { NextResponse } from 'next/server';
@@ -223,21 +223,21 @@ To complete this tutorial, you need the following:
    import { mysqlTable, serial, text, varchar } from 'drizzle-orm/mysql-core';
    export const runtime = 'edge';
 
-   // Initialize
+   // 初始化
    const client = connect({ url: process.env.DATABASE_URL });
    const db = drizzle(client);
 
-   // Define schema
+   // 定义模式
    export const users = mysqlTable('users', {
      id: serial("id").primaryKey(),
      fullName: text('full_name'),
      phone: varchar('phone', { length: 256 }),
    });
-   export type User = typeof users.$inferSelect; // return type when queried
-   export type NewUser = typeof users.$inferInsert; // insert type
+   export type User = typeof users.$inferSelect; // 查询时的返回类型
+   export type NewUser = typeof users.$inferInsert; // 插入类型
 
    export async function GET(request: NextRequest) {
-     // Insert and select data
+     // 插入和选择数据
      const user: NewUser = { fullName: 'John Doe', phone: '123-456-7890' };
      await db.insert(users).values(user)
      const result: User[] = await db.select().from(users);
@@ -245,28 +245,28 @@ To complete this tutorial, you need the following:
    }
    ```
 
-3. Test your code locally:
+3. 在本地测试你的代码：
 
    ```shell
    export DATABASE_URL='mysql://[username]:[password]@[host]/[database]'
    next dev
    ```
 
-4. Navigate to `http://localhost:3000/api/edge-function-example` to get the response from your route.
+4. 导航到 `http://localhost:3000/api/edge-function-example` 以获取路由的响应。
 
-### Step 4. Deploy your code to Vercel
+### 步骤 4. 将代码部署到 Vercel
 
-1. Deploy your code to Vercel with the `DATABASE_URL` environment variable:
+1. 使用 `DATABASE_URL` 环境变量将代码部署到 Vercel：
 
    ```shell
    vercel -e DATABASE_URL='mysql://[username]:[password]@[host]/[database]' --prod
    ```
 
-   After the deployment is complete, you will get the URL of your project.
+   部署完成后，你将获得项目的 URL。
 
-2. Navigate to the `${Your-URL}/api/edge-function-example` page to get the response from your route.
+2. 导航到 `${Your-URL}/api/edge-function-example` 页面以获取路由的响应。
 
-## What's next
+## 下一步
 
-- Learn more about [Drizzle](https://orm.drizzle.team/docs/overview) and [drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless).
-- Learn how to [integrate TiDB Cloud with Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md).
+- 了解更多关于 [Drizzle](https://orm.drizzle.team/docs/overview) 和 [drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless) 的信息。
+- 了解如何[将 TiDB Cloud 与 Vercel 集成](/tidb-cloud/integrate-tidbcloud-with-vercel.md)。

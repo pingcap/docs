@@ -1,35 +1,35 @@
 ---
-title: TiDB Cloud Dedicated Limitations and Quotas
-summary: Learn the limitations and quotas in TiDB Cloud.
+title: TiDB Cloud Dedicated 限制和配额
+summary: 了解 TiDB Cloud 中的限制和配额。
 ---
 
-# TiDB Cloud Dedicated Limitations and Quotas
+# TiDB Cloud Dedicated 限制和配额
 
-TiDB Cloud limits how many of each kind of component you can create in a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster, and the common usage limitations of TiDB. In addition, there are some organization-level quotas to limit the amount of resources created by users to prevent from creating more resources than you actually need. These tables outline limits and quotas.
+TiDB Cloud 限制了你在 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群中可以创建的每种组件的数量，以及 TiDB 的常见使用限制。此外，还有一些组织级别的配额来限制用户创建的资源数量，以防创建超出实际需要的资源。这些表格概述了限制和配额。
 
-> **Note:**
+> **注意：**
 >
-> If any of these limits or quotas present a problem for your organization, please contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> 如果这些限制或配额中的任何一个对你的组织造成问题，请联系 [TiDB Cloud 支持团队](/tidb-cloud/tidb-cloud-support.md)。
 
-## Cluster Limits
+## 集群限制
 
-| Component | Limit |
+| 组件 | 限制 |
 |:-|:-|
-| Number of copies for each [data region](/tidb-cloud/tidb-cloud-glossary.md#region) | 3 |
-| Number of Availability Zones for a cross-zone deployment | 3 |
+| 每个[数据 region](/tidb-cloud/tidb-cloud-glossary.md#region) 的副本数量 | 3 |
+| 跨可用区部署的可用区数量 | 3 |
 
-> **Note:**
+> **注意：**
 >
-> If you want to learn more about common usage limitations of TiDB, please refer to [TiDB Limitations](https://docs.pingcap.com/tidb/stable/tidb-limitations).
+> 如果你想了解更多关于 TiDB 的常见使用限制，请参考 [TiDB 限制](https://docs.pingcap.com/tidb/stable/tidb-limitations)。
 
-## Cluster Quotas
+## 集群配额
 
-| Component | Quota (default) |
+| 组件 | 配额（默认） |
 |:-|:-|
-| Maximum number of total TiDB nodes for all clusters in your organization | 10 |
-| Maximum number of total TiKV nodes for all clusters in your organization | 15 |
-| Maximum number of total TiFlash nodes for all clusters in your organization | 5 |
+| 组织中所有集群的 TiDB 节点总数上限 | 10 |
+| 组织中所有集群的 TiKV 节点总数上限 | 15 |
+| 组织中所有集群的 TiFlash 节点总数上限 | 5 |
 
-> **Note:**
+> **注意：**
 >
-> If any of these limits or quotas present a problem for your organization, please contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> 如果这些限制或配额中的任何一个对你的组织造成问题，请联系 [TiDB Cloud 支持团队](/tidb-cloud/tidb-cloud-support.md)。

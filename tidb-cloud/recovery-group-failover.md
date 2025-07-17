@@ -1,69 +1,69 @@
 ---
-title: Failover and Reprotect Databases
-summary: Learn how to use a Recovery Group to failover and reprotect databases between TiDB Cloud clusters.
+title: 数据库故障转移和重新保护
+summary: 了解如何使用恢复组在 TiDB Cloud 集群之间进行数据库故障转移和重新保护。
 ---
 
-# Failover and Reprotect Databases
+# 数据库故障转移和重新保护
 
-Databases in a recovery group are replicated from one cluster to another, typically in a different region of the cloud service provider.
+恢复组中的数据库会从一个集群复制到另一个集群，通常是在云服务提供商的不同区域。
 
-The **Failover** action promotes the replicated databases in the secondary region to be the new primary copy, ensuring ongoing availability during a regional outage.
+**故障转移**操作会将次要区域中的复制数据库提升为新的主副本，确保在区域性中断期间持续可用。
 
-When the regional outage is resolved, the ability to reverse the replication from the recovery region back to the original region is done using the **Reprotect** action. This ensures that the databases are protected against future disasters impacting their new region, and prepares them for migration back to the original region if desired.
+当区域性中断解决后，可以使用**重新保护**操作将复制从恢复区域反向恢复到原始区域。这确保数据库能够防范影响其新区域的未来灾难，并为其需要时迁回原始区域做好准备。
 
-## Prerequisites
+## 前提条件
 
-Before performing a failover, a recovery group should have been created and be successfully replicating to the secondary cluster. For more information, see [Get Started with Recovery Groups](/tidb-cloud/recovery-group-get-started.md).
+在执行故障转移之前，应该已经创建了恢复组并成功地将数据复制到次要集群。更多信息，请参阅[恢复组入门](/tidb-cloud/recovery-group-get-started.md)。
 
-![Protected Recovery Group](/media/tidb-cloud/recovery-group/recovery-group-protected.png)
+![受保护的恢复组](/media/tidb-cloud/recovery-group/recovery-group-protected.png)
 
-## Failover databases using a recovery group
+## 使用恢复组进行数据库故障转移
 
-In the event of a disaster, you can use the recovery group to failover databases to the secondary cluster.
+在发生灾难时，你可以使用恢复组将数据库故障转移到次要集群。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), switch to your target project using the combo box in the upper-left corner.
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，使用左上角的组合框切换到目标项目。
 
-2. In the left navigation pane, click **Recovery Group**.
+2. 在左侧导航栏中，点击**恢复组**。
 
-3. On the **Recovery Group** page, locate the name of the recovery group that you wish to failover.
+3. 在**恢复组**页面上，找到你想要进行故障转移的恢复组名称。
 
-4. Click the **Action** menu for the recovery group, and then click **Failover**. The failover dialog is displayed.
+4. 点击恢复组的**操作**菜单，然后点击**故障转移**。此时会显示故障转移对话框。
 
-    > **Warning**
+    > **警告**
     >
-    > Performing a failover will sever the existing replication relationship.
+    > 执行故障转移将切断现有的复制关系。
 
-5. Select the secondary TiDB Cloud cluster to be promoted to the primary copy. Ensure that the selected cluster is in a healthy state.
+5. 选择要提升为主副本的次要 TiDB Cloud 集群。确保所选集群处于健康状态。
 
-6. Confirm that you understand the potentially disruptive nature of a failover by typing **Failover** into the confirmation entry and clicking **I understand, failover group** to begin the failover.
+6. 通过在确认输入框中输入 **Failover** 并点击**我理解，执行故障转移**来确认你理解故障转移可能造成的中断性影响，以开始故障转移。
 
-    ![Fail Over Recovery Group](/media/tidb-cloud/recovery-group/recovery-group-failover.png)
+    ![故障转移恢复组](/media/tidb-cloud/recovery-group/recovery-group-failover.png)
 
-## Reprotect databases using a recovery group
+## 使用恢复组重新保护数据库
 
-After a failover completes, the replica databases on the secondary cluster are now the primary copy. However, these databases are unprotected against future disasters as the replication relationship is stopped by the failover process.
+故障转移完成后，次要集群上的副本数据库现在成为主副本。但是，由于故障转移过程停止了复制关系，这些数据库无法防范未来的灾难。
 
-If the original primary cluster that was affected by the disaster can be brought online again, you can re-establish replication from the recovery region back to the original region using the **Reprotect** action.
+如果受灾难影响的原始主集群可以重新上线，你可以使用**重新保护**操作将复制从恢复区域重新建立回原始区域。
 
-![Unprotected Recovery Group](/media/tidb-cloud/recovery-group/recovery-group-unprotected.png)
+![未受保护的恢复组](/media/tidb-cloud/recovery-group/recovery-group-unprotected.png)
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), switch to your target project using the combo box in the upper-left corner.
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，使用左上角的组合框切换到目标项目。
 
-2. In the left navigation pane, click **Recovery Group**.
+2. 在左侧导航栏中，点击**恢复组**。
 
-3. On the **Recovery Group** page, locate the name of the recovery group that you wish to reprotect.
+3. 在**恢复组**页面上，找到你想要重新保护的恢复组名称。
 
-    > **Note**
+    > **注意**
     >
-    > The **Recovery Group Detail** page provides information about the recovery group, including current status and replication topology.
-    > During the reprotect synchronization, due to the volume of data transferred, the online query performance at the primary or secondary clusters might be affected. It is recommended that you schedule the reprotection of databases for a less busy period.
+    > **恢复组详情**页面提供了有关恢复组的信息，包括当前状态和复制拓扑。
+    > 在重新保护同步期间，由于传输的数据量较大，可能会影响主集群或次要集群的在线查询性能。建议你在较不繁忙的时段安排数据库的重新保护操作。
 
-    > **Warning**
+    > **警告**
     > 
-    > As part of the data replication necessary to perform the reprotect operation, the content of the selected databases will be replaced at the target cluster by the content of the databases from the (new) primary cluster. If you wish to preserve the unique content on the target cluster, complete a backup before performing the Reprotect operation.
+    > 作为执行重新保护操作所需的数据复制的一部分，目标集群中所选数据库的内容将被（新）主集群中数据库的内容替换。如果你希望保留目标集群上的唯一内容，请在执行重新保护操作之前完成备份。
 
-4. Click the **Action** menu for the recovery group, and then click **Reprotect**. The reprotect dialog is displayed.
+4. 点击恢复组的**操作**菜单，然后点击**重新保护**。此时会显示重新保护对话框。
 
-5. Confirm the reprotect operation by clicking **Reprotect** to begin the reprotect operation.
+5. 点击**重新保护**确认重新保护操作，以开始重新保护操作。
 
-    ![Reprotect Recovery Group](/media/tidb-cloud/recovery-group/recovery-group-reprotected.png)
+    ![重新保护恢复组](/media/tidb-cloud/recovery-group/recovery-group-reprotected.png)

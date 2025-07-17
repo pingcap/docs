@@ -1,21 +1,21 @@
 ---
-title: Database Schema
-summary: Learn about database schema concepts for TiDB Cloud.
+title: 数据库模式
+summary: 了解 TiDB Cloud 的数据库模式概念。
 ---
 
-# Database Schema
+# 数据库模式
 
-A database schema defines the structure and organization of data within databases, tables, columns, indexes, and other objects.
+数据库模式定义了数据库、表、列、索引和其他对象中数据的结构和组织方式。
 
-This document introduces the key concepts of database schemas, such as databases, tables, columns, data types, constraints, and indexes. It also introduces advanced features such as temporary tables for managing intermediate data seamlessly, vector indexes for efficient approximate nearest neighbor (ANN) searches, and cached tables to improve read performance.
+本文档介绍了数据库模式的关键概念，如数据库、表、列、数据类型、约束和索引。同时还介绍了高级功能，如用于无缝管理中间数据的临时表、用于高效近似最近邻（ANN）搜索的向量索引，以及用于提高读取性能的缓存表。
 
-## Databases
+## 数据库
 
-A database in TiDB is a collection of objects such as tables and indexes.
+TiDB 中的数据库是表和索引等对象的集合。
 
-### System databases
+### 系统数据库
 
-System databases are default databases created by TiDB to store system tables. TiDB provides the following system databases:
+系统数据库是 TiDB 创建的用于存储系统表的默认数据库。TiDB 提供以下系统数据库：
 
 - [`INFORMATION_SCHEMA`](/information-schema/information-schema.md)
 
@@ -25,150 +25,152 @@ System databases are default databases created by TiDB to store system tables. T
 
 - [`sys`](/sys-schema/sys-schema.md)
 
-### `test` database
+### `test` 数据库
 
-TiDB comes with a default database named `test`. However, it is recommended that you create your own database instead of using the `test` database.
+TiDB 自带一个名为 `test` 的默认数据库。但是，建议你创建自己的数据库，而不是使用 `test` 数据库。
 
-## Tables
+## 表
 
-A table is a collection of related data in a [database](/develop/dev-guide-schema-design-overview.md#database).
+表是[数据库](/develop/dev-guide-schema-design-overview.md#database)中相关数据的集合。
 
-Each table consists of rows and columns. Each value in a row belongs to a specific column. Each column allows only a single data type. To further qualify columns, you can add some [constraints](/constraints.md). To accelerate calculations, you can add [generated columns](/generated-columns.md).
+每个表由行和列组成。行中的每个值都属于特定的列。每列只允许单一数据类型。为了进一步限定列，你可以添加一些[约束](/constraints.md)。为了加速计算，你可以添加[生成列](/generated-columns.md)。
 
-### System table
+### 系统表
 
-- The `mysql` schema contains TiDB system tables. The design is similar to the `mysql` schema in MySQL, where tables such as `mysql.user` can be edited directly. It also contains a number of tables that are extensions to MySQL.
+- `mysql` 模式包含 TiDB 系统表。其设计类似于 MySQL 中的 `mysql` 模式，其中像 `mysql.user` 这样的表可以直接编辑。它还包含一些 MySQL 的扩展表。
 
-- Information Schema provides an ANSI-standard way of viewing system metadata. TiDB also provides a number of custom `INFORMATION_SCHEMA` tables, in addition to the tables included for MySQL compatibility. Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` command. The benefit of querying `INFORMATION_SCHEMA` is that it is possible to join between tables.
+- Information Schema 提供了一种查看系统元数据的 ANSI 标准方式。除了为 MySQL 兼容性包含的表外，TiDB 还提供了许多自定义的 `INFORMATION_SCHEMA` 表。许多 `INFORMATION_SCHEMA` 表都有相应的 `SHOW` 命令。查询 `INFORMATION_SCHEMA` 的好处是可以在表之间进行连接。
 
-- Performance Schema. TiDB implements performance schema tables for MySQL compatibility.
+- Performance Schema。TiDB 实现了性能模式表以实现 MySQL 兼容性。
 
-### Cached table
+### 缓存表
 
-TiDB introduces the [cached table](/cached-tables.md) feature for frequently accessed but rarely updated small hotspot tables. When this feature is used, the data of an entire table is loaded into the memory of the TiDB server, and TiDB directly gets the table data from the memory without accessing TiKV, which improves the read performance.
+TiDB 为经常访问但很少更新的小型热点表引入了[缓存表](/cached-tables.md)功能。使用此功能时，整个表的数据会加载到 TiDB 服务器的内存中，TiDB 直接从内存中获取表数据而无需访问 TiKV，从而提高读取性能。
 
-### Temporary table
+### 临时表
 
-The temporary tables feature solves the issue of temporarily storing the intermediate results of an application, which frees you from frequently creating and dropping tables. You can store the intermediate calculation data in temporary tables. When the intermediate data is no longer needed, TiDB automatically cleans up and recycles the temporary tables. This avoids user applications being too complicated, reduces table management overhead, and improves performance.
+临时表功能解决了应用程序临时存储中间结果的问题，使你无需频繁创建和删除表。你可以将中间计算数据存储在临时表中。当不再需要中间数据时，TiDB 会自动清理和回收临时表。这避免了用户应用程序过于复杂，减少了表管理开销，并提高了性能。
 
-### Partitioned table
+### 分区表
 
-In TiDB, [partitioning](/partitioned-table.md) enables you to divide a large table into one or more manageable pieces called partitions. Each partition is independent and can be managed individually.
+在 TiDB 中，[分区](/partitioned-table.md)使你能够将一个大表划分为一个或多个称为分区的可管理部分。每个分区都是独立的，可以单独管理。
 
-## Columns
+## 列
 
-A column is subordinate to a table. Each table has at least one column. Columns provide a structure to a table by dividing the values in each row into small cells of a single data type.
+列从属于表。每个表至少有一列。列通过将每行中的值划分为单一数据类型的小单元，为表提供结构。
 
-For more information, see [Define columns](/develop/dev-guide-create-table.md#define-columns).
+更多信息，请参见[定义列](/develop/dev-guide-create-table.md#define-columns)。
 
-## Generated columns
+## 生成列
 
-TiDB lets you extract data from the JSON data type as a [generated column](/generated-columns.md).
+TiDB 允许你将 JSON 数据类型中的数据提取为[生成列](/generated-columns.md)。
 
-Unlike general columns, the value of the generated column is calculated by the expression in the column definition. When inserting or updating a generated column, you cannot assign a value, but only use `DEFAULT`.
+与普通列不同，生成列的值是由列定义中的表达式计算得出的。在插入或更新生成列时，你不能分配值，只能使用 `DEFAULT`。
 
-There are two kinds of generated columns: virtual and stored. A virtual generated column occupies no storage and is computed when it is read. A stored generated column is computed when it is written (inserted or updated) and occupies storage. Compared with the virtual generated columns, the stored generated columns have better read performance, but take up more disk space.
+生成列有两种类型：虚拟列和存储列。虚拟生成列不占用存储空间，在读取时计算。存储生成列在写入（插入或更新）时计算，并占用存储空间。与虚拟生成列相比，存储生成列具有更好的读取性能，但占用更多磁盘空间。
 
-## Data types
+## 数据类型
 
-TiDB supports all the data types in MySQL except the `SPATIAL` type. This includes all the [numeric types](/data-type-numeric.md), [string types](/data-type-string.md), [date & time types](/data-type-date-and-time.md), and [the JSON type](/data-type-json.md).
+TiDB 支持除 `SPATIAL` 类型外的所有 MySQL 数据类型。这包括所有[数值类型](/data-type-numeric.md)、[字符串类型](/data-type-string.md)、[日期和时间类型](/data-type-date-and-time.md)以及 [JSON 类型](/data-type-json.md)。
 
-## Indexes
+## 索引
 
-An index is a copy of selected columns in a table. You can create an index using one or more columns of a [table](/develop/dev-guide-schema-design-overview.md#table). With indexes, TiDB can quickly locate data without having to search every row in a table every time, which greatly improves your query performance.
+索引是表中选定列的副本。你可以使用[表](/develop/dev-guide-schema-design-overview.md#table)的一个或多个列创建索引。通过索引，TiDB 可以快速定位数据，而无需每次都搜索表中的每一行，这大大提高了查询性能。
 
-There are two common types of indexes:
+有两种常见的索引类型：
 
-- Primary Key: indexes on the primary key column.
+- 主键：主键列上的索引。
 
-- Secondary Index: indexes on non-primary key column
+- 二级索引：非主键列上的索引
 
-### Unique indexes
+### 唯一索引
 
-A unique index in TiDB enforces uniqueness on one or more columns, ensuring that no two rows in a table can have the same values in the indexed column(s). This constraint provides a way to maintain data integrity by preventing duplicate values, making unique indexes ideal for fields that should naturally be unique, like email addresses, usernames, or product codes.
+TiDB 中的唯一索引在一个或多个列上强制实施唯一性，确保表中没有两行在索引列中具有相同的值。这种约束提供了一种维护数据完整性的方法，防止重复值，使唯一索引非常适合那些自然应该是唯一的字段，如电子邮件地址、用户名或产品代码。
 
-### Primary key index
+### 主键索引
 
-A primary key index is a unique index on one or more columns in a table, which serves as the primary identifier for each row. In TiDB, every table must have a primary key, and it can be defined explicitly by the user or implicitly by TiDB if no primary key is specified.
+主键索引是表中一个或多个列上的唯一索引，作为每行的主要标识符。在 TiDB 中，每个表必须有一个主键，可以由用户显式定义，如果未指定主键，则由 TiDB 隐式定义。
 
-### Composite index
+### 复合索引
 
-A composite index is an index built on two or more columns of a table, which is particularly useful for queries that filter or sort data by multiple fields. For example, creating a composite index on `last_name` and `first_name` in a person table allows TiDB to quickly locate records based on both names.
+复合索引是在表的两个或多个列上构建的索引，对于按多个字段过滤或排序数据的查询特别有用。例如，在人员表中创建一个包含 `last_name` 和 `first_name` 的复合索引，允许 TiDB 基于两个名字快速定位记录。
 
-### Invisible indexes
+### 不可见索引
 
-Invisible indexes are indexes that exist in the database but are hidden from the query optimizer, meaning they are ignored in query plans. In TiDB, invisible indexes are useful for testing and debugging, allowing you to assess the impact of an index on performance without fully dropping it.
+不可见索引是存在于数据库中但对查询优化器隐藏的索引，这意味着它们在查询计划中被忽略。在 TiDB 中，不可见索引对于测试和调试很有用，允许你评估索引对性能的影响而无需完全删除它。
 
-Starting from TiDB v8.0.0, you can make the optimizer select invisible indexes by modifying the [`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800) system variable.
+从 TiDB v8.0.0 开始，你可以通过修改 [`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800) 系统变量使优化器选择不可见索引。
 
-### Clustered indexes
+### 聚簇索引
 
-In clustered indexes, the term clustered refers to the organization of how data is stored and not a group of database servers working together. Some database management systems refer to clustered indexes as index-organized tables (IOT).
+在聚簇索引中，"聚簇"指的是数据存储的组织方式，而不是一组数据库服务器的协同工作。一些数据库管理系统将聚簇索引称为索引组织表（IOT）。
 
-This feature controls how data is stored in tables containing primary keys. It provides TiDB with the ability to organize tables in a way that can improve the performance of certain queries.
+此功能控制包含主键的表中数据的存储方式。它使 TiDB 能够以一种可以提高某些查询性能的方式组织表。
 
-For more information, see [Clustered Indexes](/clustered-indexes.md).
+更多信息，请参见[聚簇索引](/clustered-indexes.md)。
 
-### Secondary index
+### 二级索引
 
-A secondary index is a logical object in a TiDB cluster. You can simply regard it as a sorting type of data that TiDB uses to improve the query performance. In TiDB, creating a secondary index is an online operation, which does not block any data read and write operations on a table. For each index, TiDB creates references for each row in a table and sorts the references by selected columns instead of by data directly.
+二级索引是 TiDB 集群中的一个逻辑对象。你可以简单地将其视为 TiDB 用来提高查询性能的一种数据排序方式。在 TiDB 中，创建二级索引是一个在线操作，不会阻塞表上的任何数据读写操作。对于每个索引，TiDB 为表中的每一行创建引用，并按选定的列对引用进行排序，而不是直接对数据进行排序。
 
-For more information about secondary indexes, see [Secondary Indexes](https://docs.pingcap.com/tidb/stable/tidb-best-practices#secondary-index).
+有关二级索引的更多信息，请参见[二级索引](https://docs.pingcap.com/tidb/stable/tidb-best-practices#secondary-index)。
 
-In TiDB, you can either [add a secondary index to an existing table](/develop/dev-guide-create-secondary-indexes.md#add-a-secondary-index-to-an-existing-table) or [create a secondary index when creating a new table](/develop/dev-guide-create-secondary-indexes.md#create-a-secondary-index-when-creating-a-new-table).
+在 TiDB 中，你可以[向现有表添加二级索引](/develop/dev-guide-create-secondary-indexes.md#add-a-secondary-index-to-an-existing-table)或[在创建新表时创建二级索引](/develop/dev-guide-create-secondary-indexes.md#create-a-secondary-index-when-creating-a-new-table)。
 
-### Vector index
+### 向量索引
 
-> **Note:**
->
-> The vector index feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+对于以下 TiDB 部署选项，TiDB 支持向量数据类型和向量搜索索引。
 
-In TiDB, a vector index is a specialized index designed for efficient approximate nearest neighbor (ANN) searches over columns containing vector data. Vector indexes, particularly the HNSW (Hierarchical Navigable Small World) algorithm, allow K-nearest neighbors (KNN) searches to identify the closest data points in a vector space quickly. This significantly speeds up query performance, enabling results in milliseconds compared to brute-force methods.
+- TiDB Cloud Serverless
 
-Vector indexes rely on TiFlash replicas for data storage and search functionality. Before creating and using vector indexes, make sure that TiFlash nodes are available in your cluster.
+- TiDB Self-Managed v8.4.0 或更高版本
 
-## Constraints
+在 TiDB 中，向量索引是一种专门设计的索引，用于在包含向量数据的列上进行高效的近似最近邻（ANN）搜索。向量索引，特别是 HNSW（分层可导航小世界）算法，允许 K-最近邻（KNN）搜索快速识别向量空间中最接近的数据点。这显著提高了查询性能，使结果能够在毫秒级内返回，相比暴力搜索方法有很大提升。
 
-TiDB supports almost the same constraints as MySQL.
+向量索引依赖 TiFlash 副本进行数据存储和搜索功能。在创建和使用向量索引之前，请确保集群中有可用的 TiFlash 节点。
 
-### NOT NULL constraints
+## 约束
 
-A `NOT NULL` constraint ensures that a column cannot contain `NULL` values.
+TiDB 支持几乎与 MySQL 相同的约束。
 
-When a column is defined with the `NOT NULL` constraint, TiDB ensures that any attempt to insert or update a row with a `NULL` value in that column will result in an error. This behavior is consistent with MySQL's implementation of `NOT NULL` constraints.
+### NOT NULL 约束
 
-### CHECK constraints
+`NOT NULL` 约束确保列不能包含 `NULL` 值。
 
-A `CHECK` constraint restricts the values of a column in a table to meet your specified conditions. When the `CHECK` constraint is added to a table, TiDB checks whether the constraint is satisfied during the insertion or updates of data into the table. If the constraint is not met, an error is returned.
+当列被定义为 `NOT NULL` 约束时，TiDB 确保任何尝试在该列中插入或更新 `NULL` 值的行都会导致错误。这种行为与 MySQL 的 `NOT NULL` 约束实现一致。
 
-### Primary key constraints
+### CHECK 约束
 
-Like MySQL, primary key constraints in TiDB contain unique constraints, that is, creating a primary key constraint is equivalent to having a unique constraint. In addition, other primary key constraints of TiDB are also similar to those of MySQL.
+`CHECK` 约束限制表中列的值必须满足你指定的条件。当向表中添加 `CHECK` 约束时，TiDB 在插入或更新数据时检查是否满足约束。如果不满足约束，则返回错误。
 
-### Unique key constraints
+### 主键约束
 
-Unique constraints mean that all non-null values in a unique index and a primary key column are unique.
+与 MySQL 一样，TiDB 中的主键约束包含唯一约束，即创建主键约束等同于具有唯一约束。此外，TiDB 的其他主键约束也与 MySQL 类似。
 
-### FOREIGN KEY constraints
+### 唯一键约束
 
-A FOREIGN KEY is a database constraint that enforces referential integrity between two tables by linking a column in one table (the child table) to a column in another table (the parent table). This ensures that the values in the foreign key column of the child table match values in the primary or unique key column of the parent table. For example, a record in an `orders` table might have a foreign key linking to a customer in a `customers` table, which ensures that each order is associated with a valid customer.
+唯一约束意味着唯一索引和主键列中的所有非空值都是唯一的。
 
-Starting from v6.6.0, TiDB supports foreign key constraints as an experimental feature. This feature allows cross-table referencing of related data and helps maintain data consistency by enforcing referential integrity. However, it is important to note that this feature is experimental and not recommended for production environments due to potential performance issues, especially with large data volumes.
+### FOREIGN KEY 约束
 
-For more information, see [FOREIGN KEY constraints](/foreign-key.md).
+外键是一个数据库约束，通过将一个表（子表）中的列链接到另一个表（父表）中的列来强制两个表之间的引用完整性。这确保子表中外键列的值与父表中主键或唯一键列的值匹配。例如，`orders` 表中的记录可能有一个链接到 `customers` 表中客户的外键，这确保每个订单都与有效的客户关联。
 
-## Views
+从 v6.6.0 开始，TiDB 支持外键约束作为实验性功能。此功能允许相关数据的跨表引用，并通过强制引用完整性帮助维护数据一致性。但是，需要注意的是，由于可能存在性能问题，特别是在大数据量的情况下，此功能是实验性的，不建议在生产环境中使用。
 
-A view acts as a virtual table, whose schema is defined by the `SELECT` statement that creates the view. Using views has the following benefits:
+更多信息，请参见[外键约束](/foreign-key.md)。
 
-- Exposing only safe fields and data to users to ensure the security of sensitive fields and data stored in the underlying table.
+## 视图
 
-- Defining complex queries that frequently appear as views to make complex queries easier and more convenient.
+视图作为一个虚拟表，其模式由创建视图的 `SELECT` 语句定义。使用视图有以下好处：
 
-For more information, see [Views](/views.md).
+- 仅向用户公开安全的字段和数据，以确保底层表中存储的敏感字段和数据的安全性。
 
-## Sequence
+- 将经常出现的复杂查询定义为视图，使复杂查询更简单和方便。
 
-A sequence is a database object designed to generate a sequence of numbers according to a specified set of rules. This feature is especially useful in scenarios where unique identifiers are required, such as in the creation of primary keys for database tables.
+更多信息，请参见[视图](/views.md)。
 
-For more information, see [sequence](/sql-statements/sql-statement-create-sequence.md).
+## 序列
+
+序列是一个数据库对象，设计用于根据指定的规则集生成一系列数字。此功能在需要唯一标识符的场景中特别有用，例如在创建数据库表的主键时。
+
+更多信息，请参见[序列](/sql-statements/sql-statement-create-sequence.md)。

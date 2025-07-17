@@ -1,22 +1,22 @@
 ---
-title: Data Streaming
-summary: Learn about data streaming concepts for TiDB Cloud.
+title: 数据流
+summary: 了解 TiDB Cloud 的数据流概念。
 ---
 
-# Data Streaming
+# 数据流
 
-TiDB Cloud lets you stream data changes from your TiDB Cluster to other systems like Kafka, MySQL, and object storage.
+TiDB Cloud 允许你将数据变更从 TiDB 集群流式传输到其他系统，如 Kafka、MySQL 和对象存储。
 
-Currently, TiDB Cloud supports streaming data to Apache Kafka, MySQL, TiDB Cloud, and cloud storage.
+目前，TiDB Cloud 支持将数据流式传输到 Apache Kafka、MySQL、TiDB Cloud 和云存储。
 
 ## Changefeed
 
-TiDB Cloud changefeed is a continuous data stream that helps you replicate data changes from TiDB Cloud to other data services.
+TiDB Cloud changefeed 是一个持续的数据流，帮助你将数据变更从 TiDB Cloud 复制到其他数据服务。
 
-On the **Changefeed** page in the TiDB Cloud console, you can create a changefeed, view a list of existing changefeeds, and operate the existing changefeeds (such as scaling, pausing, resuming, editing, and deleting a changefeed).
+在 TiDB Cloud 控制台的 **Changefeed** 页面，你可以创建 changefeed、查看现有 changefeed 列表，以及操作现有的 changefeed（如扩展、暂停、恢复、编辑和删除 changefeed）。
 
-Replication includes only incremental data changes by default. If existing data must be replicated, it must be exported and loaded into the target system manually before starting the changefeed.
+默认情况下，复制仅包括增量数据变更。如果需要复制现有数据，必须在启动 changefeed 之前手动将其导出并加载到目标系统中。
 
-In TiDB Cloud, replication can be tailored by defining table filters (to specify which tables to replicate) and event filters (to include or exclude specific types of events like INSERT or DELETE).
+在 TiDB Cloud 中，可以通过定义表过滤器（指定要复制的表）和事件过滤器（包含或排除特定类型的事件，如 INSERT 或 DELETE）来定制复制。
 
-For more information, see [Changefeed](/tidb-cloud/changefeed-overview.md).
+更多信息，请参见 [Changefeed](/tidb-cloud/changefeed-overview.md)。

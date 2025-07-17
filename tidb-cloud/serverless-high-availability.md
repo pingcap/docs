@@ -1,114 +1,114 @@
 ---
-title: High Availability in TiDB Cloud Serverless
-summary: Learn about the high availability architecture of TiDB Cloud Serverless. Discover Zonal and Regional High Availability options, automated backups, failover processes, and how TiDB ensures data durability and business continuity.
+title: TiDB Cloud Serverless 的高可用性
+summary: 了解 TiDB Cloud Serverless 的高可用性架构。探索可用区和区域高可用性选项、自动备份、故障转移流程，以及 TiDB 如何确保数据持久性和业务连续性。
 ---
 
-# High Availability in TiDB Cloud Serverless
+# TiDB Cloud Serverless 的高可用性
 
-TiDB Cloud Serverless is designed with robust mechanisms to maintain high availability and data durability by default, preventing single points of failure and ensuring continuous service even in the face of disruptions. As a fully managed service based on the battle-tested TiDB Open Source product, it inherits TiDB's core high availability (HA) features and augments them with additional cloud-native capabilities.
+TiDB Cloud Serverless 在设计时就内置了强大的机制来默认维持高可用性和数据持久性，防止单点故障并确保在面对中断时能够持续提供服务。作为基于经过实战检验的 TiDB 开源产品的完全托管服务，它继承了 TiDB 的核心高可用性（HA）特性，并通过额外的云原生功能增强了这些特性。
 
-## Overview
+## 概述
 
-TiDB ensures high availability and data durability using the Raft consensus algorithm. This algorithm consistently replicates data changes across multiple nodes, allowing TiDB to handle read and write requests even in the event of node failures or network partitions. This approach provides both high data durability and fault tolerance.
+TiDB 使用 Raft 共识算法来确保高可用性和数据持久性。该算法在多个节点之间一致地复制数据变更，使 TiDB 即使在节点故障或网络分区的情况下也能处理读写请求。这种方法提供了高数据持久性和容错能力。
 
-TiDB Cloud Serverless extends these capabilities with two types of high availability to meet different operational requirements:
+TiDB Cloud Serverless 通过两种类型的高可用性来扩展这些功能，以满足不同的运营需求：
 
-- **Zonal high availability (default)**: This option places all nodes within a single availability zone, reducing network latency. It ensures high availability without requiring application-level redundancy across zones, making it suitable for applications that prioritize low latency within a single zone. Zonal high availability is available in all regions that support TiDB Cloud Serverless. For more information, see [Zonal high availability architecture](#zonal-high-availability-architecture).
+- **可用区高可用性（默认）**：此选项将所有节点放置在单个可用区内，减少网络延迟。它确保高可用性，无需跨区域的应用程序级冗余，适用于优先考虑单个区域内低延迟的应用程序。可用区高可用性在所有支持 TiDB Cloud Serverless 的区域中都可用。更多信息，请参见[可用区高可用性架构](#可用区高可用性架构)。
 
-- **Regional high availability (beta)**: This option distributes nodes across multiple availability zones, offering maximum infrastructure isolation and redundancy. It provides the highest level of availability but requires application-level redundancy across zones. It is recommended to choose this option if you need maximum availability protection against infrastructure failures within a zone. Note that it increases latency and might incur cross-zone data transfer fees. This feature is available in selected regions with multi-availability zone support and can only be enabled during cluster creation. For more information, see [Regional high availability architecture](#regional-high-availability-architecture).
+- **区域高可用性（测试版）**：此选项将节点分布在多个可用区中，提供最大程度的基础设施隔离和冗余。它提供最高级别的可用性，但需要跨区域的应用程序级冗余。如果你需要针对区域内基础设施故障的最大可用性保护，建议选择此选项。请注意，这会增加延迟并可能产生跨区域数据传输费用。此功能仅在支持多可用区的特定区域中可用，且只能在集群创建时启用。更多信息，请参见[区域高可用性架构](#区域高可用性架构)。
 
-## Zonal high availability architecture
+## 可用区高可用性架构
 
-> **Note:**
+> **注意：**
 >
-> Zonal high availability is the default option and is available in all AWS regions that support TiDB Cloud Serverless.
+> 可用区高可用性是默认选项，在所有支持 TiDB Cloud Serverless 的 AWS 区域中都可用。
 
-When you create a cluster with the default zonal high availability, all components, including Gateway, TiDB, TiKV, and TiFlash compute/write nodes, run in the same availability zone. The placement of these components in the data plane offer infrastructure redundancy with virtual machine pools, which minimizes failover time and network latency due to colocation.
+当你使用默认的可用区高可用性创建集群时，所有组件（包括 Gateway、TiDB、TiKV 和 TiFlash 计算/写入节点）都在同一可用区中运行。数据平面中这些组件的放置通过虚拟机池提供基础设施冗余，由于组件位置相近，最大限度地减少了故障转移时间和网络延迟。
 
-![TiDB Cloud Serverless zonal high availability](/media/tidb-cloud/serverless-zonal-high-avaliability-aws.png)
+![TiDB Cloud Serverless 可用区高可用性](/media/tidb-cloud/serverless-zonal-high-avaliability-aws.png)
 
-In zonal high availability architecture:
+在可用区高可用性架构中：
 
-- The Placement Driver (PD) is deployed across multiple availability zones, ensuring high availability by replicating data redundantly across zones.
-- Data is replicated across TiKV servers and TiFlash write nodes within the local availability zone.
-- TiDB servers and TiFlash compute nodes read from and write to TiKV and TiFlash write nodes, which are safeguarded by storage-level replication.
+- Placement Driver (PD) 部署在多个可用区中，通过跨区域冗余复制数据确保高可用性。
+- 数据在本地可用区内的 TiKV 服务器和 TiFlash 写入节点之间复制。
+- TiDB 服务器和 TiFlash 计算节点从 TiKV 和 TiFlash 写入节点读取和写入数据，这些节点通过存储级复制得到保护。
 
-### Failover process
+### 故障转移流程
 
-TiDB Cloud Serverless ensures a transparent failover process for your applications. During a failover:
+TiDB Cloud Serverless 为你的应用程序确保透明的故障转移流程。在故障转移期间：
 
-- A new replica is created to replace the failed one.
+- 创建新的副本来替换失败的副本。
 
-- Servers providing storage services recover local caches from persisted data on Amazon S3, restoring the system to a consistent state with the replicas.
+- 提供存储服务的服务器从 Amazon S3 上的持久化数据中恢复本地缓存，使系统与副本恢复到一致状态。
 
-In the storage layer, persisted data is regularly pushed to Amazon S3 for high durability. Moreover, immediate updates are not only replicated across multiple TiKV servers but also stored on the EBS of each server, which further replicates the data for additional durability. TiDB automatically resolves issues by backing off and retrying in milliseconds, ensuring the failover process remains seamless for client applications.
+在存储层，持久化数据会定期推送到 Amazon S3 以实现高持久性。此外，即时更新不仅在多个 TiKV 服务器之间复制，还存储在每个服务器的 EBS 上，这进一步复制了数据以提供额外的持久性。TiDB 通过在毫秒级别内回退和重试来自动解决问题，确保故障转移过程对客户端应用程序保持无缝。
 
-The gateway and computing layers are stateless, so failover involves restarting them elsewhere immediately. Applications should implement retry logic for their connections. While the zonal setup provides high availability, it cannot handle an entire zone failure. If the zone becomes unavailable, downtime will occur until the zone and its dependent services are restored.
+网关和计算层是无状态的，因此故障转移涉及立即在其他地方重启它们。应用程序应该实现连接重试逻辑。虽然可用区设置提供了高可用性，但它无法处理整个区域故障。如果区域变得不可用，将会出现停机，直到区域及其依赖的服务恢复。
 
-## Regional high availability architecture
+## 区域高可用性架构
 
-When you create a cluster with regional high availability, critical OLTP (Online Transactional Processing) workload components, such as PD and TiKV, are deployed across multiple availability zones to ensure redundant replication and maximizing availability. During normal operations, components like Gateway, TiDB, and TiFlash compute/write nodes are hosted in the primary availability zone. These components in data plane offer infrastructure redundancy through virtual machine pools, which minimizes failover time and network latency due to colocation.
+当你使用区域高可用性创建集群时，关键的 OLTP（在线事务处理）工作负载组件（如 PD 和 TiKV）部署在多个可用区中，以确保冗余复制并最大化可用性。在正常运行期间，Gateway、TiDB 和 TiFlash 计算/写入节点等组件托管在主要可用区中。数据平面中这些组件通过虚拟机池提供基础设施冗余，由于组件位置相近，最大限度地减少了故障转移时间和网络延迟。
 
-> **Note:**
+> **注意：**
 >
-> - Regional high availability is currently in beta and only available in the AWS Tokyo (`ap-northeast-1`) region.
-> - You can enable regional high availability only during cluster creation.
+> - 区域高可用性目前处于测试阶段，仅在 AWS 东京（`ap-northeast-1`）区域可用。
+> - 你只能在集群创建时启用区域高可用性。
 
-![TiDB Cloud Serverless regional high availability](/media/tidb-cloud/serverless-regional-high-avaliability-aws.png)
+![TiDB Cloud Serverless 区域高可用性](/media/tidb-cloud/serverless-regional-high-avaliability-aws.png)
 
-In regional high availability architecture:
+在区域高可用性架构中：
 
-- The Placement Driver (PD) and TiKV are deployed across multiple availability zones, and data is always replicated redundantly across zones to ensure the highest level of availability.
-- Data is replicated across TiFlash write nodes within the primary availability zone.
-- TiDB servers and TiFlash compute nodes read from and write to these TiKV and TiFlash write nodes, which are safeguarded by storage-level replication.
+- Placement Driver (PD) 和 TiKV 部署在多个可用区中，数据始终在区域之间冗余复制，以确保最高级别的可用性。
+- 数据在主要可用区内的 TiFlash 写入节点之间复制。
+- TiDB 服务器和 TiFlash 计算节点从这些 TiKV 和 TiFlash 写入节点读取和写入数据，这些节点通过存储级复制得到保护。
 
-### Failover process
+### 故障转移流程
 
-In the rare event of a primary zone failure scenario, which could be caused by a natural disaster, configuration change, software issue, or hardware failure, critical OLTP workload components, including Gateway and TiDB, are automatically launched in the standby availability zone. Traffic is automatically redirected to the standby zone to ensure swift recovery and maintain business continuity.
+在罕见的主要区域故障场景中（可能由自然灾害、配置更改、软件问题或硬件故障引起），关键的 OLTP 工作负载组件（包括 Gateway 和 TiDB）会自动在备用可用区中启动。流量会自动重定向到备用区域，以确保快速恢复和维持业务连续性。
 
-TiDB Cloud Serverless minimizes service disruption and ensures business continuity during a primary zone failure by performing the following actions:
+TiDB Cloud Serverless 通过执行以下操作，在主要区域故障期间最大限度地减少服务中断并确保业务连续性：
 
-- Automatically create new replicas of Gateway and TiDB in the standby availability zone.
-- Use the elastic load balancer to detect active gateway replicas in the standby availability zone and redirect OLTP traffic from the failed primary zone.
+- 在备用可用区中自动创建 Gateway 和 TiDB 的新副本。
+- 使用弹性负载均衡器检测备用可用区中的活动网关副本，并将来自失败主要区域的 OLTP 流量重定向。
 
-In addition to providing high availability through TiKV replication, TiKV instances are deployed and configured to place each data replica in a different availability zone. The system remains available as long as two availability zones are operating normally. For high durability, data persistence is ensured by regularly backing up data to S3. Even if two zones fail, data stored in S3 remains accessible and recoverable.
+除了通过 TiKV 复制提供高可用性外，TiKV 实例的部署和配置还确保每个数据副本放置在不同的可用区中。只要有两个可用区正常运行，系统就能保持可用。为了实现高持久性，通过定期将数据备份到 S3 来确保数据持久性。即使两个区域发生故障，存储在 S3 中的数据仍然可以访问和恢复。
 
-Applications are unaffected by failures in non-primary zones and remain unaware of such events. During a primary zone failure, Gateway and TiDB are launched in the standby availability zone to handle workloads. Ensure that your applications implement retry logic to redirect new requests to active servers in the standby availability zone.
+应用程序不受非主要区域故障的影响，并且不会察觉到此类事件。在主要区域故障期间，Gateway 和 TiDB 在备用可用区中启动以处理工作负载。确保你的应用程序实现重试逻辑，以将新请求重定向到备用可用区中的活动服务器。
 
-## Automatic backups and durability
+## 自动备份和持久性
 
-Database backups are essential for business continuity and disaster recovery, helping to protect your data from corruption or accidental deletion. With backups, you can restore your database to a specific point in time within the retention period, minimizing data loss and downtime.
+数据库备份对于业务连续性和灾难恢复至关重要，有助于保护你的数据免受损坏或意外删除。通过备份，你可以将数据库恢复到保留期内的特定时间点，最大限度地减少数据丢失和停机时间。
 
-TiDB Cloud Serverless provides robust automated backup mechanisms to ensure continuous data protection:
+TiDB Cloud Serverless 提供强大的自动备份机制，以确保持续的数据保护：
 
-- **Daily full backups**: A full backup of your database is created once a day, capturing the entire database state.
-- **Continuous transaction log backups**: Transaction logs are backed up continuously, approximately every 5 minutes, though the exact frequency depends on database activity.
+- **每日全量备份**：每天创建一次数据库的完整备份，捕获整个数据库状态。
+- **持续事务日志备份**：事务日志持续备份，大约每 5 分钟一次，具体频率取决于数据库活动。
 
-These automated backups enable you to restore your database either from a full backup or from a specific point in time by combining full backups with continuous transaction logs. This flexibility ensures that you can recover your database to a precise point just before an incident occurs.
+这些自动备份使你能够从全量备份恢复数据库，或通过结合全量备份和持续事务日志从特定时间点恢复。这种灵活性确保你可以将数据库恢复到事件发生前的精确时间点。
 
-> **Note:**
+> **注意：**
 >
-> Automatic backups, including snapshot-based and continuous backups for Point-in-Time Recovery (PITR), are performed on Amazon S3, which provides regional-level high durability.
+> 自动备份（包括基于快照的备份和用于时间点恢复（PITR）的持续备份）在 Amazon S3 上执行，提供区域级的高持久性。
 
-## Impact on sessions during failures
+## 故障期间对会话的影响
 
-During a failure, ongoing transactions on the failed server might be interrupted. Although failover is transparent to applications, you must implement logic to handle recoverable failures during active transactions. Different failure scenarios are handled as follows:
+在故障期间，失败服务器上的进行中事务可能会中断。虽然故障转移对应用程序是透明的，但你必须实现逻辑来处理活动事务期间的可恢复故障。不同的故障场景处理如下：
 
-- **TiDB failures**: If a TiDB instance fails, client connections are unaffected because TiDB Cloud Serverless automatically reroutes traffic through the gateway. While transactions on the failed TiDB instance might be interrupted, the system ensures that committed data is preserved, and new transactions are handled by another available TiDB instance.
-- **Gateway failures**: If the Gateway fails, client connections are disrupted. However, TiDB Cloud Serverless gateways are stateless and can restart immediately in a new zone or server. Traffic is automatically redirected to the new gateway, minimizing downtime.
+- **TiDB 故障**：如果 TiDB 实例发生故障，客户端连接不受影响，因为 TiDB Cloud Serverless 自动通过网关重新路由流量。虽然失败的 TiDB 实例上的事务可能会中断，但系统确保已提交的数据得到保留，新事务由另一个可用的 TiDB 实例处理。
+- **Gateway 故障**：如果 Gateway 发生故障，客户端连接会中断。但是，TiDB Cloud Serverless 网关是无状态的，可以立即在新的区域或服务器中重启。流量会自动重定向到新的网关，最大限度地减少停机时间。
 
-It is recommended to implement retry logic in your application to handle recoverable failures. For implementation details, refer to your driver or ORM documentation (for example, [JDBC](https://dev.mysql.com/doc/connector-j/en/connector-j-config-failover.html)).
+建议在你的应用程序中实现重试逻辑以处理可恢复的故障。有关实现详细信息，请参考你的驱动程序或 ORM 文档（例如，[JDBC](https://dev.mysql.com/doc/connector-j/en/connector-j-config-failover.html)）。
 
-## RTO and RPO
+## RTO 和 RPO
 
-When creating your business continuity plan, consider these two key metrics:
+在制定业务连续性计划时，请考虑以下两个关键指标：
 
-- Recovery Time Objective (RTO): The maximum acceptable time it takes for the application to fully recover after a disruptive event.
-- Recovery Point Objective (RPO): The maximum acceptable time interval of recent data updates that the application can tolerate losing during recovery from an unplanned disruptive event.
+- 恢复时间目标（RTO）：应用程序在中断事件后完全恢复所需的最大可接受时间。
+- 恢复点目标（RPO）：在从计划外中断事件恢复期间，应用程序可以容忍丢失的最近数据更新的最大可接受时间间隔。
 
-The following table compares the RTO and RPO for each high availability option:
+下表比较了每种高可用性选项的 RTO 和 RPO：
 
-| High availability architecture | RTO (downtime)                | RPO (data loss) |
+| 高可用性架构 | RTO（停机时间） | RPO（数据丢失） |
 |--------------------------------|-------------------------------|-----------------|
-| Zonal high availability                         | Near 0 seconds                      | 0               |
-| Regional high availability                      | Typically less than 600 seconds | 0               |
+| 可用区高可用性 | 接近 0 秒 | 0 |
+| 区域高可用性 | 通常少于 600 秒 | 0 |

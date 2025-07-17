@@ -1,99 +1,99 @@
 ---
-title: Manage TiDB Cloud Serverless Branches
-summary: Learn How to manage TiDB Cloud Serverless branches.
+title: 管理 TiDB Cloud Serverless 分支
+summary: 了解如何管理 TiDB Cloud Serverless 分支。
 ---
 
-# Manage TiDB Cloud Serverless Branches
+# 管理 TiDB Cloud Serverless 分支
 
-This document describes how to manage TiDB Cloud Serverless branches using the [TiDB Cloud console](https://tidbcloud.com). To manage it using the TiDB Cloud CLI, see [`ticloud branch`](/tidb-cloud/ticloud-branch-create.md).
+本文档介绍如何使用 [TiDB Cloud 控制台](https://tidbcloud.com) 管理 TiDB Cloud Serverless 分支。如需使用 TiDB Cloud CLI 进行管理，请参阅 [`ticloud branch`](/tidb-cloud/ticloud-branch-create.md)。
 
-## Required access
+## 所需权限
 
-- To [create a branch](#create-a-branch) or [connect to a branch](#connect-to-a-branch), you must be in the `Organization Owner` role of your organization or the `Project Owner` role of the target project.
-- To [view branches](#create-a-branch) for clusters in a project, you must belong to that project.
+- 要[创建分支](#创建分支)或[连接到分支](#连接到分支)，你必须具有组织的 `Organization Owner` 角色或目标项目的 `Project Owner` 角色。
+- 要[查看项目中集群的分支](#查看分支)，你必须属于该项目。
 
-For more information about permissions, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
+有关权限的更多信息，请参阅[用户角色](/tidb-cloud/manage-user-access.md#user-roles)。
 
-## Create a branch
+## 创建分支
 
-> **Note:**
+> **注意：**
 >
-> You can only create branches for TiDB Cloud Serverless clusters that are created after July 5, 2023. See [Limitations and quotas](/tidb-cloud/branch-overview.md#limitations-and-quotas) for more limitations.
+> 你只能为 2023 年 7 月 5 日之后创建的 TiDB Cloud Serverless 集群创建分支。更多限制请参阅[限制和配额](/tidb-cloud/branch-overview.md#limitations-and-quotas)。
 
-To create a branch, perform the following steps:
+要创建分支，请执行以下步骤：
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target TiDB Cloud Serverless cluster to go to its overview page.
-2. Click **Branches** in the left navigation pane.
-3. In the upper-right corner of the **Branches** page, click **Create Branch**. A dialog is displayed.
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标 TiDB Cloud Serverless 集群的名称以进入其概览页面。
+2. 在左侧导航栏中点击**分支**。
+3. 在**分支**页面的右上角，点击**创建分支**。此时会显示一个对话框。
 
-    Alternatively, to create a branch from an existing parent branch, locate the row of your target parent branch, and then click **...** > **Create Branch** in the **Action** column.
+    或者，要从现有父分支创建分支，找到目标父分支所在的行，然后在**操作**列中点击 **...** > **创建分支**。
 
-4. In the **Create Branch** dialog, configure the following options:
+4. 在**创建分支**对话框中，配置以下选项：
 
-    - **Name**: enter a name for the branch.
-    - **Parent branch**: select the original cluster or an existing branch. `main` represents the current cluster.
-    - **Include data up to**: choose one of the following:
-        - **Current point in time**: create a branch from the current state.
-        - **Specific date and time**: create a branch from a specified time.
+    - **名称**：输入分支的名称。
+    - **父分支**：选择原始集群或现有分支。`main` 代表当前集群。
+    - **包含数据截至**：选择以下其中一项：
+        - **当前时间点**：从当前状态创建分支。
+        - **指定日期和时间**：从指定时间创建分支。
 
-5. Click **Create**.
+5. 点击**创建**。
 
-Depending on the data size in your cluster, the branch creation will be completed in a few minutes.
+根据集群中的数据大小，分支创建将在几分钟内完成。
 
-## View branches
+## 查看分支
 
-To view branches for your cluster, perform the following steps:
+要查看集群的分支，请执行以下步骤：
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target TiDB Cloud Serverless cluster to go to its overview page.
-2. Click **Branches** in the left navigation pane.
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标 TiDB Cloud Serverless 集群的名称以进入其概览页面。
+2. 在左侧导航栏中点击**分支**。
 
-    The branch list of the cluster is displayed in the right pane.
+    集群的分支列表将显示在右侧窗格中。
 
-## Connect to a branch
+## 连接到分支
 
-To connect to a branch, perform the following steps:
+要连接到分支，请执行以下步骤：
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target TiDB Cloud Serverless cluster to go to its overview page.
-2. Click **Branches** in the left navigation pane.
-3. In the row of your target branch to be connected, click **...** in the **Action** column.
-4. Click **Connect** in the drop-down list. The dialog for the connection information is displayed.
-5. Click **Generate Password** or **Reset Password** to create or reset the root password.
-6. Connect to the branch using the connection information.
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标 TiDB Cloud Serverless 集群的名称以进入其概览页面。
+2. 在左侧导航栏中点击**分支**。
+3. 在要连接的目标分支所在行中，点击**操作**列中的 **...**。
+4. 在下拉列表中点击**连接**。此时会显示连接信息对话框。
+5. 点击**生成密码**或**重置密码**以创建或重置 root 密码。
+6. 使用连接信息连接到分支。
 
-Alternatively, you can get the connection string from the cluster overview page:
+或者，你也可以从集群概览页面获取连接字符串：
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target TiDB Cloud Serverless cluster to go to its overview page.
-2. Click **Connect** in the upper-right corner.
-3. Select the branch you want to connect to in the `Branch` drop-down list.
-4. Click **Generate Password** or **Reset Password** to create or reset the root password.
-5. Connect to the branch using the connection information.
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标 TiDB Cloud Serverless 集群的名称以进入其概览页面。
+2. 点击右上角的**连接**。
+3. 在`分支`下拉列表中选择要连接的分支。
+4. 点击**生成密码**或**重置密码**以创建或重置 root 密码。
+5. 使用连接信息连接到分支。
 
-## Delete a branch
+## 删除分支
 
-To delete a branch, perform the following steps:
+要删除分支，请执行以下步骤：
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target TiDB Cloud Serverless cluster to go to its overview page.
-2. Click **Branches** in the left navigation pane.
-3. In the row of your target branch to be deleted, click **...** in the **Action** column.
-4. Click **Delete** in the drop-down list.
-5. Confirm the deletion.
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标 TiDB Cloud Serverless 集群的名称以进入其概览页面。
+2. 在左侧导航栏中点击**分支**。
+3. 在要删除的目标分支所在行中，点击**操作**列中的 **...**。
+4. 在下拉列表中点击**删除**。
+5. 确认删除。
 
-## Reset a branch
+## 重置分支
 
-Resetting a branch synchronizes it with the latest data from its parent.
+重置分支会将其与父分支的最新数据同步。
 
-> **Note:**
+> **注意：**
 > 
-> This operation is irreversible. Before resetting a branch, make sure that you have backed up any important data.
+> 此操作不可逆。在重置分支之前，请确保已备份任何重要数据。
 
-To reset a branch, perform the following steps:
+要重置分支，请执行以下步骤：
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target TiDB Cloud Serverless cluster to go to its overview page.
-2. Click **Branches** in the left navigation pane.
-3. In the row of your target branch to be reset, click **...** in the **Action** column.
-4. Click **Reset** in the drop-down list.
-5. Confirm the reset.
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标 TiDB Cloud Serverless 集群的名称以进入其概览页面。
+2. 在左侧导航栏中点击**分支**。
+3. 在要重置的目标分支所在行中，点击**操作**列中的 **...**。
+4. 在下拉列表中点击**重置**。
+5. 确认重置。
 
-## What's next
+## 下一步
 
-- [Integrate TiDB Cloud Serverless branching into your GitHub CI/CD pipeline](/tidb-cloud/branch-github-integration.md)
+- [将 TiDB Cloud Serverless 分支集成到 GitHub CI/CD 流程中](/tidb-cloud/branch-github-integration.md)

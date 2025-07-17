@@ -1,121 +1,121 @@
 ---
-title: TiDB Cloud Support
-summary: Learn how to contact the support team of TiDB Cloud.
+title: TiDB Cloud 支持
+summary: 了解如何联系 TiDB Cloud 的支持团队。
 ---
 
-# TiDB Cloud Support
+# TiDB Cloud 支持
 
-TiDB Cloud offers tiered support plan offerings tailored to meet customers' needs. For more information, see [Connected Care Details](/tidb-cloud/connected-care-detail.md).
+TiDB Cloud 提供分级的支持计划，以满足客户的需求。更多信息，请参阅 [Connected Care 详情](/tidb-cloud/connected-care-detail.md)。
 
-> **Note:**
+> **注意：**
 >
-> To request a [Proof of Concept (PoC)](/tidb-cloud/tidb-cloud-poc.md), a demo, or free trial credits, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/), and click **Contact Sales**.
+> 要申请 [概念验证 (PoC)](/tidb-cloud/tidb-cloud-poc.md)、演示或免费试用额度，请点击 [TiDB Cloud 控制台](https://tidbcloud.com/) 右下角的 **?**，然后点击 **联系销售**。
 
-## Access PingCAP Help Center
+## 访问 PingCAP 帮助中心
 
-The [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals) is the central hub for TiDB Cloud users to access support services and manage support tickets.
+[PingCAP 帮助中心](https://tidb.support.pingcap.com/servicedesk/customer/portals) 是 TiDB Cloud 用户访问支持服务和管理支持工单的中心枢纽。
 
-You can access the PingCAP Help Center via <https://tidb.support.pingcap.com/servicedesk/customer/portals> directly, or through the [TiDB Cloud console](https://tidbcloud.com/) in the following ways:
+你可以通过 <https://tidb.support.pingcap.com/servicedesk/customer/portals> 直接访问 PingCAP 帮助中心，或者通过 [TiDB Cloud 控制台](https://tidbcloud.com/) 以下列方式访问：
 
-- Click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/), and then click **Request Support**.
-- Click **Support** in the lower-left corner of [TiDB Cloud console](https://tidbcloud.com/), and then click **Create Ticket**.
-- On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click **...** in the row of your cluster, and then select **Get Support**.
-- On your cluster overview page, click **...** in the upper-right corner, and then select **Get Support**.
+- 点击 [TiDB Cloud 控制台](https://tidbcloud.com/) 右下角的 **?**，然后点击 **Request Support**。
+- 点击 [TiDB Cloud 控制台](https://tidbcloud.com/) 左下角的 **Support**，然后点击 **Create Ticket**。
+- 在你项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击你的集群所在行的 **...**，然后选择 **Get Support**。
+- 在你的集群概览页面，点击右上角的 **...**，然后选择 **Get Support**。
 
-## Create an account or billing support ticket
+## 创建账户或账单支持工单
 
-To create a support ticket about account or billing issues, take the following steps:
+要创建关于账户或账单问题的支持工单，请按照以下步骤操作：
 
-1. Log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals), and then click [TiDB Cloud Account/Billing Support](https://tidb.support.pingcap.com/servicedesk/customer/portal/16).
-2. Click **Submit a request**.
-3. Fill in the following fields:
+1. 登录 [PingCAP 帮助中心](https://tidb.support.pingcap.com/servicedesk/customer/portals)，然后点击 [TiDB Cloud 账户/账单支持](https://tidb.support.pingcap.com/servicedesk/customer/portal/16)。
+2. 点击 **提交请求**。
+3. 填写以下字段：
 
-    - **Summary**: provide a brief summary of your question.
-    - **TiDB Cloud Org**: select the relevant TiDB Cloud organization, if applicable.
-    - **TiDB Cloud Cluster**: select the relevant TiDB Cloud cluster, if applicable.
-    - **Description**: provide the details about the issue.
-    - **Severity**: estimate the business impact of the issue and choose the proper severity for it. (S1 is not applicable to billing or account issues.)
+    - **概要**: 提供你问题的简要概述。
+    - **TiDB Cloud 组织**: 选择相关的 TiDB Cloud 组织（如果适用）。
+    - **TiDB Cloud 集群**: 选择相关的 TiDB Cloud 集群（如果适用）。
+    - **描述**: 提供关于问题的详细信息。
+    - **严重程度**: 评估问题对业务的影响，并选择适当的严重程度。（S1 不适用于账单或账户问题。）
 
-4. Click **Submit**.
+4. 点击 **提交**。
 
-## Create a technical support ticket
+## 创建技术支持工单
 
-To create a support ticket about technical issues, take the following steps:
+要创建关于技术问题的支持工单，请按照以下步骤操作：
 
-1. Log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals), and then click [TiDB Cloud Technical Support](https://tidb.support.pingcap.com/servicedesk/customer/portal/6).
+1. 登录 [PingCAP 帮助中心](https://tidb.support.pingcap.com/servicedesk/customer/portals)，然后点击 [TiDB Cloud 技术支持](https://tidb.support.pingcap.com/servicedesk/customer/portal/6)。
 
-    > **Note:**
+    > **注意：**
     >
-    > The [TiDB Cloud Technical Support](https://tidb.support.pingcap.com/servicedesk/customer/portal/6) entry is only available for customers subscribed to **Developer**, **Enterprise**, or **Premium** [support plans](/tidb-cloud/connected-care-detail.md).
+    > [TiDB Cloud 技术支持](https://tidb.support.pingcap.com/servicedesk/customer/portal/6) 入口仅适用于订阅了 **Developer**、**Enterprise** 或 **Premium** [支持计划](/tidb-cloud/connected-care-detail.md) 的客户。
 
-2. Click **Submit a request**.
+2. 点击 **提交请求**。
 
-3. Fill in the following fields:
+3. 填写以下字段：
 
-    - **Summary**: provide a brief summary of your question.
-    - **TiDB Cloud Org**: select the relevant TiDB Cloud organization for the issue.
-    - **TiDB Cloud Cluster**: select the relevant TiDB Cloud cluster, if applicable.
-    - **Environment**: select the corresponding environment in which you use the TiDB Cloud cluster.
-    - **Description**: describe the issue you encountered as detailed as possible. For example, share the exact timestamp when you encountered the issue, attach the detailed error messages and call stack of the issue, and add your troubleshooting or analysis of the issue.
-    - **Severity**: estimate the business impact of the issue and choose the proper severity for it.
+    - **概要 (Summary)**：提供你问题的简要概述。
+    - **TiDB Cloud 组织 (TiDB Cloud Org)**：选择与问题相关的 TiDB Cloud 组织。
+    - **TiDB Cloud 集群 (TiDB Cloud Cluster)**：选择相关的 TiDB Cloud 集群（如果适用）。
+    - **环境 (Environment)**：选择你使用 TiDB Cloud 集群的相应环境。
+    - **描述 (Description)**：尽可能详细地描述你遇到的问题。 例如，分享你遇到问题的确切时间戳，附上问题的详细错误消息和调用堆栈，并添加你对问题的故障排除或分析。
+    - **严重程度 (Severity)**：评估问题对业务的影响，并为其选择适当的严重程度。
 
-        | Severity | Description |
+        | 严重程度 | 描述 |
         | --- | --- |
-        | S1 | Complete loss of production environmental functionality |
-        | S2 | High impact on operations in production environments |
-        | S3 | Non-critical database usage issues in production or non-production environments |
-        | S4 | General question on how a particular feature or function performs or should be configured. An issue that has minimal impact on business and can be tolerated for a reasonable period. |
+        | S1 | 生产环境功能完全丧失 |
+        | S2 | 对生产环境中的运营产生重大影响 |
+        | S3 | 生产或非生产环境中的非关键数据库使用问题 |
+        | S4 | 关于特定特性或功能如何执行或应如何配置的一般性问题。 对业务影响极小，可以在合理的时间内容忍的问题。 |
 
-    - **Components**: select the relevant TiDB Cloud component to report the issue for, such as TiDB, TiKV, PD, or TiFlash.
-    - **Affects versions**: specify the TiDB Cloud cluster version related to the issue.
+    - **组件 (Components)**：选择要报告问题的相关 TiDB Cloud 组件，例如 TiDB、TiKV、PD 或 TiFlash。
+    - **影响版本 (Affects versions)**：指定与问题相关的 TiDB Cloud 集群版本。
 
-4. Click **Submit**.
+4. 点击 **提交 (Submit)**。
 
-## View support tickets
+## 查看支持工单
 
-To view all the historical support tickets, log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals), click your avatar in the upper-right corner, and then click **Requests**.
+要查看所有历史支持工单，请登录 [PingCAP 帮助中心](https://tidb.support.pingcap.com/servicedesk/customer/portals)，点击右上角的头像，然后点击 **Requests**。
 
-## Check or upgrade your support plan
+## 查看或升级你的支持计划
 
-TiDB Cloud offers a free basic support plan by default. For extended services, you can upgrade to a paid plan.
+TiDB Cloud 默认提供免费的基础支持计划。如需扩展服务，你可以升级到付费计划。
 
-To check or upgrade your support plan, perform the following steps:
+要查看或升级你的支持计划，请执行以下步骤：
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), click **Support** in the lower-left corner.
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/) 中，单击左下角的 **Support**（支持）。
 
-    On this page, you can find your current plan. By default, the **Basic** free plan is selected.
+    在此页面上，你可以找到你当前的计划。默认情况下，会选择 **Basic**（基础）免费计划。
 
-2. Choose your desired support plan.
+2. 选择你所需的支持计划。
 
     <SimpleTab>
-    <div label="Upgrade to Developer or Enterprise">
+    <div label="升级到 Developer 或 Enterprise">
 
-    To upgrade to **Developer** or **Enterprise**:
+    要升级到 **Developer**（开发者）或 **Enterprise**（企业）：
 
-    1. Click **Upgrade** in the **Developer** or **Enterprise** pane. An **Upgrade to Developer Plan** or **Upgrade to Enterprise Plan** page is displayed.
-    2. Check the corresponding support service information on the page. For a complete version of each support plan, see [Connected Care Details](/tidb-cloud/connected-care-detail.md).
-    3. Click **Add Credit Card and Upgrade**, and then fill in the **Credit Card** details.
+    1. 单击 **Developer**（开发者）或 **Enterprise**（企业）窗格中的 **Upgrade**（升级）。将显示 **Upgrade to Developer Plan**（升级到开发者计划）或 **Upgrade to Enterprise Plan**（升级到企业计划）页面。
+    2. 在页面上查看相应的支持服务信息。有关每个支持计划的完整版本，请参阅 [Connected Care Details](/tidb-cloud/connected-care-detail.md)。
+    3. 单击 **Add Credit Card and Upgrade**（添加信用卡并升级），然后填写 **Credit Card**（信用卡）详细信息。
 
-        For more information about billing, see [TiDB Cloud Payment Method](/tidb-cloud/tidb-cloud-billing.md#payment-method).
+        有关计费的更多信息，请参阅 [TiDB Cloud Payment Method](/tidb-cloud/tidb-cloud-billing.md#payment-method)。
 
-    4. Click **Save Card** in the lower-right corner of the page.
+    4. 单击页面右下角的 **Save Card**（保存卡片）。
 
-    After the payment is finished, you have upgraded your plan to **Standard** or **Enterprise**.
+    付款完成后，你已将你的计划升级到 **Standard**（标准）或 **Enterprise**（企业）。
 
     </div>
-    <div label="Upgrade to Premium">
+    <div label="升级到 Premium">
 
-    To upgrade your plan to **Premium**:
+    要将你的计划升级到 **Premium**（高级）：
 
-    1. Click **Contact Sales** in the **Premium** pane. A **Contact Us** page is displayed.
-    2. Fill in and submit your contact information on the page. Then, the support team will contact you and help you with your subscription.
+    1. 单击 **Premium**（高级）窗格中的 **Contact Sales**（联系销售）。将显示 **Contact Us**（联系我们）页面。
+    2. 在页面上填写并提交你的联系信息。然后，支持团队将与你联系并帮助你完成订阅。
 
     </div>
     </SimpleTab>
 
-## Downgrade your support plan
+## 降级你的支持计划
 
-To downgrade your support plan, perform the following steps:
+要降级你的支持计划，请执行以下步骤：
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), click **Support** in the lower-left corner.
-2. Choose the support plan you want to switch to, and then click **Downgrade**.
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/) 中，点击左下角的 **Support**（支持）。
+2. 选择你想要切换到的支持计划，然后点击 **Downgrade**（降级）。

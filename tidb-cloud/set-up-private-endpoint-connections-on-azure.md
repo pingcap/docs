@@ -1,123 +1,123 @@
 ---
-title: Connect to a TiDB Cloud Dedicated Cluster via Azure Private Link
-summary: Learn how to connect to TiDB Cloud Dedicated Cluster via Azure Private Link.
+title: 通过 Azure Private Link 连接到 TiDB Cloud Dedicated 集群
+summary: 了解如何通过 Azure Private Link 连接到 TiDB Cloud Dedicated 集群。
 ---
 
-# Connect to a TiDB Cloud Dedicated Cluster via Azure Private Link
+# 通过 Azure Private Link 连接到 TiDB Cloud Dedicated 集群
 
-This document describes how to connect to your TiDB Cloud Dedicated cluster via [Azure Private Link](https://learn.microsoft.com/en-us/azure/private-link/private-link-overview).
+本文档介绍如何通过 [Azure Private Link](https://learn.microsoft.com/en-us/azure/private-link/private-link-overview) 连接到 TiDB Cloud Dedicated 集群。
 
-> **Tip:**
+> **提示：**
 >
-> - To learn how to connect to a TiDB Cloud Dedicated cluster via private endpoint with AWS, see [Connect to a TiDB Cloud Dedicated Cluster via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections.md).
-> - To learn how to connect to a TiDB Cloud Dedicated cluster via private endpoint with Google Cloud, see [Connect to a TiDB Cloud Dedicated Cluster via Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
-> - To learn how to connect to a TiDB Cloud Serverless cluster via private endpoint, see [Connect to TiDB Cloud Serverless via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
+> - 要了解如何通过 AWS 私有端点连接到 TiDB Cloud Dedicated 集群，请参见[通过 AWS PrivateLink 连接到 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-private-endpoint-connections.md)。
+> - 要了解如何通过 Google Cloud 私有端点连接到 TiDB Cloud Dedicated 集群，请参见[通过 Google Cloud Private Service Connect 连接到 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)。
+> - 要了解如何通过私有端点连接到 TiDB Cloud Serverless 集群，请参见[通过私有端点连接到 TiDB Cloud Serverless](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)。
 
-TiDB Cloud supports highly secure and one-way access to the TiDB Cloud service hosted in an Azure virtual network via [Azure Private Link](https://learn.microsoft.com/en-us/azure/private-link/private-link-overview), as if the service were in your own virtual network. You can create a private endpoint in your virtual network, and then connect to the TiDB Cloud service via the endpoint with permission.
+TiDB Cloud 支持通过 [Azure Private Link](https://learn.microsoft.com/en-us/azure/private-link/private-link-overview) 对托管在 Azure 虚拟网络中的 TiDB Cloud 服务进行高度安全和单向访问，就像该服务在你自己的虚拟网络中一样。你可以在你的虚拟网络中创建私有端点，然后通过具有权限的端点连接到 TiDB Cloud 服务。
 
-Powered by Azure Private Link, the endpoint connection is secure and private, and does not expose your data to the public internet. In addition, the endpoint connection supports CIDR overlap and is easier for network management.
+在 Azure Private Link 的支持下，端点连接是安全和私密的，不会将你的数据暴露在公共互联网上。此外，端点连接支持 CIDR 重叠，并且更易于网络管理。
 
-The architecture of Azure Private Link is as follows: [^1]
+Azure Private Link 的架构如下：[^1]
 
-![Azure Private Link architecture](/media/tidb-cloud/azure-private-endpoint-arch.png)
+![Azure Private Link 架构](/media/tidb-cloud/azure-private-endpoint-arch.png)
 
-For more detailed definitions of the private endpoint and endpoint service, see the following Azure documents:
+有关私有端点和端点服务的更详细定义，请参见以下 Azure 文档：
 
-- [What is Azure Private Link](https://learn.microsoft.com/en-us/azure/private-link/private-link-overview)
-- [What is a private endpoint](https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview)
-- [Create a private endpoint](https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip)
+- [什么是 Azure Private Link](https://learn.microsoft.com/en-us/azure/private-link/private-link-overview)
+- [什么是私有端点](https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview)
+- [创建私有端点](https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip)
 
-## Restrictions
+## 限制
 
-- Only the `Organization Owner` and `Project Owner` roles can create private endpoints.
-- The private endpoint and the TiDB cluster to be connected must be located in the same region.
+- 只有 `Organization Owner` 和 `Project Owner` 角色可以创建私有端点。
+- 私有端点和要连接的 TiDB 集群必须位于同一区域。
 
-## Set up a private endpoint with Azure Private Link
+## 使用 Azure Private Link 设置私有端点
 
-To connect to your TiDB Cloud Dedicated cluster via a private endpoint, complete the following steps:
+要通过私有端点连接到 TiDB Cloud Dedicated 集群，请完成以下步骤：
 
-1. [Select a TiDB cluster](#step-1-select-a-tidb-cluster)
-2. [Create an Azure private endpoint](#step-2-create-an-azure-private-endpoint)
-3. [Accept the endpoint](#step-3-accept-the-endpoint)
-4. [Connect to your TiDB cluster](#step-4-connect-to-your-tidb-cluster)
+1. [选择 TiDB 集群](#步骤-1-选择-tidb-集群)
+2. [创建 Azure 私有端点](#步骤-2-创建-azure-私有端点)
+3. [接受端点](#步骤-3-接受端点)
+4. [连接到 TiDB 集群](#步骤-4-连接到-tidb-集群)
 
-If you have multiple clusters, you need to repeat these steps for each cluster that you want to connect to using Azure Private Link.
+如果你有多个集群，则需要对每个要使用 Azure Private Link 连接的集群重复这些步骤。
 
-### Step 1. Select a TiDB cluster
+### 步骤 1. 选择 TiDB 集群
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target TiDB cluster to go to its overview page.
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
-3. In the **Connection Type** drop-down list, select **Private Endpoint**, and then click **Create Private Endpoint Connection** to open the **Create Azure Private Endpoint Connection** dialog.
+1. 在项目的[**集群**](https://tidbcloud.com/project/clusters)页面，点击目标 TiDB 集群的名称进入其概览页面。
+2. 点击右上角的**连接**。将显示连接对话框。
+3. 在**连接类型**下拉列表中，选择**私有端点**，然后点击**创建私有端点连接**打开**创建 Azure 私有端点连接**对话框。
 
-> **Note:**
+> **注意：**
 >
-> If you have already created a private endpoint connection, the active endpoint will appear in the connection dialog. To create additional private endpoint connections, navigate to the **Networking** page by clicking **Settings** > **Networking** in the left navigation pane.
+> 如果你已经创建了私有端点连接，活动端点将显示在连接对话框中。要创建其他私有端点连接，请点击左侧导航栏中的**设置** > **网络**导航到**网络**页面。
 
-### Step 2. Create an Azure private endpoint
+### 步骤 2. 创建 Azure 私有端点
 
-1. In the **Create Azure Private Endpoint Connection** dialog, copy the TiDB Cloud resource ID of the private link service and leave the dialog open for later use.
+1. 在**创建 Azure 私有端点连接**对话框中，复制私有链接服务的 TiDB Cloud 资源 ID，并保持对话框打开以供后续使用。
 
-    > **Note:**
+    > **注意：**
     >
-    > For each TiDB Cloud Dedicated cluster, the corresponding endpoint service is automatically created 3 to 4 minutes after the cluster creation.
+    > 对于每个 TiDB Cloud Dedicated 集群，相应的端点服务会在集群创建后 3 到 4 分钟自动创建。
 
-2. Log in to the [Azure portal](https://portal.azure.com/), and then create a private endpoint for your cluster using the copied TiDB Cloud resource ID as follows:
+2. 登录 [Azure 门户](https://portal.azure.com/)，然后使用复制的 TiDB Cloud 资源 ID 为你的集群创建私有端点，具体步骤如下：
 
-    1. In the Azure portal, search for **Private endpoints**, and then select **Private endpoints** in the result.
-    2. On the **Private endpoint** page, click **+ Create**.
-    3. In the **Basics** tab, fill in the project and instance information, and then click **Next: Resource**.
-    4. In the **Resource** tab, choose **Connect to an Azure resource by resource ID or alias** as the **connection method**, and paste the TiDB Cloud resource ID to the **Resource ID or alias** field.
-    5. Continue clicking **Next** to go through the remaining configuration tabs and complete the required settings. Then, click **Create** to create and deploy the private endpoint. It might take a few seconds for Azure to complete the deployment. For more information, see [Create a private endpoint](https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip#create-a-private-endpoint) in Azure documentation.
+    1. 在 Azure 门户中，搜索**私有端点**，然后在结果中选择**私有端点**。
+    2. 在**私有端点**页面，点击**+ 创建**。
+    3. 在**基本信息**标签页中，填写项目和实例信息，然后点击**下一步：资源**。
+    4. 在**资源**标签页中，选择**通过资源 ID 或别名连接到 Azure 资源**作为**连接方法**，并将 TiDB Cloud 资源 ID 粘贴到**资源 ID 或别名**字段中。
+    5. 继续点击**下一步**浏览其余配置标签页并完成所需设置。然后，点击**创建**以创建和部署私有端点。Azure 可能需要几秒钟才能完成部署。更多信息，请参见 Azure 文档中的[创建私有端点](https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip#create-a-private-endpoint)。
 
-3. After the private endpoint is created and deployed, click **Go to resource**, and then do the following:
+3. 私有端点创建和部署后，点击**转到资源**，然后执行以下操作：
 
-     - Click **Settings** > **Properties** in the left navigation pane, and copy its **Resource ID** for later use.
+     - 点击左侧导航栏中的**设置** > **属性**，复制其**资源 ID**以供后续使用。
 
-         ![Azure private endpoint resource ID](/media/tidb-cloud/azure-private-endpoint-resource-id.png)
+         ![Azure 私有端点资源 ID](/media/tidb-cloud/azure-private-endpoint-resource-id.png)
 
-     - Click **Settings** > **DNS configuration** in the left navigation pane, and then copy its **IP address** for later use.
+     - 点击左侧导航栏中的**设置** > **DNS 配置**，然后复制其 **IP 地址**以供后续使用。
 
-         ![Azure private endpoint DNS IP](/media/tidb-cloud/azure-private-endpoint-dns-ip.png)
+         ![Azure 私有端点 DNS IP](/media/tidb-cloud/azure-private-endpoint-dns-ip.png)
 
-### Step 3. Accept the endpoint
+### 步骤 3. 接受端点
 
-1. Return to the **Create Azure Private Endpoint Connection** dialog in the TiDB Cloud console, and then paste the copied **Resource ID** and **IP address** into the corresponding fields.
-2. Click **Verify Endpoint** to validate the private endpoint access. If you encounter any error, follow the error message for troubleshooting, and then try again.
-3. Once verification is successful, click **Accept Endpoint** to approve the connection from your private endpoint.
+1. 返回 TiDB Cloud 控制台中的**创建 Azure 私有端点连接**对话框，然后将复制的**资源 ID** 和 **IP 地址**粘贴到相应字段中。
+2. 点击**验证端点**以验证私有端点访问。如果遇到任何错误，请按照错误消息进行故障排除，然后重试。
+3. 验证成功后，点击**接受端点**以批准来自私有端点的连接。
 
-### Step 4. Connect to your TiDB cluster
+### 步骤 4. 连接到 TiDB 集群
 
-After you have accepted the endpoint connection, you are redirected back to the connection dialog.
+接受端点连接后，你将被重定向回连接对话框。
 
-1. Wait for the private endpoint connection status to become **Active** (approximately 5 minutes). To check the status, navigate to the **Networking** page by clicking **Settings** > **Networking** in the left navigation pane.
-2. In the **Connect With** drop-down list, select your preferred connection method. The corresponding connection string is displayed at the bottom of the dialog.
-3. Connect to your cluster with the connection string.
+1. 等待私有端点连接状态变为**活动**（大约 5 分钟）。要检查状态，请点击左侧导航栏中的**设置** > **网络**导航到**网络**页面。
+2. 在**连接方式**下拉列表中，选择你首选的连接方法。对话框底部将显示相应的连接字符串。
+3. 使用连接字符串连接到你的集群。
 
-### Private endpoint status reference
+### 私有端点状态参考
 
-To view the statuses of private endpoints or private endpoint services, navigate to the **Networking** page by clicking **Settings** > **Networking** in the left navigation pane.
+要查看私有端点或私有端点服务的状态，请点击左侧导航栏中的**设置** > **网络**导航到**网络**页面。
 
-The possible statuses of a private endpoint are explained as follows:
+私有端点的可能状态说明如下：
 
-- **Discovered**: TiDB Cloud can automatically detect your private endpoint associated with the endpoint service before accepting the request to prevent the need for creating another one.
-- **Pending**: waiting for processing.
-- **Active**: your private endpoint is ready to use. You cannot edit the private endpoint of this status.
-- **Deleting**: the private endpoint is being deleted.
-- **Failed**: the private endpoint creation fails. You can click **Edit** of that row to retry the creation.
+- **已发现**：TiDB Cloud 可以在接受请求之前自动检测与端点服务关联的私有端点，以避免需要创建另一个端点。
+- **等待中**：等待处理。
+- **活动**：你的私有端点已准备就绪可以使用。你无法编辑此状态的私有端点。
+- **删除中**：正在删除私有端点。
+- **失败**：私有端点创建失败。你可以点击该行的**编辑**重试创建。
 
-The possible statuses of a private endpoint service are explained as follows:
+私有端点服务的可能状态说明如下：
 
-- **Creating**: the endpoint service is being created, which takes 3 to 5 minutes.
-- **Active**: the endpoint service is created, no matter whether the private endpoint is created or not.
+- **创建中**：正在创建端点服务，这需要 3 到 5 分钟。
+- **活动**：端点服务已创建，无论是否已创建私有端点。
 
-## Troubleshooting
+## 故障排除
 
-### TiDB Cloud fails to create an endpoint service. What should I do?
+### TiDB Cloud 无法创建端点服务。我该怎么办？
 
-The endpoint service is created automatically after you open the **Create Azure Private Endpoint** page and choose the TiDB cluster. If it shows as failed or remains in the **Creating** state for a long time, submit a [support ticket](/tidb-cloud/tidb-cloud-support.md) for assistance.
+端点服务在你打开**创建 Azure 私有端点**页面并选择 TiDB 集群后自动创建。如果显示失败或长时间保持在**创建中**状态，请[提交支持工单](/tidb-cloud/tidb-cloud-support.md)寻求帮助。
 
-### If I cancel the action during setup, what should I do before accepting the private endpoint?
+### 如果我在设置过程中取消操作，在接受私有端点之前应该怎么做？
 
-The Azure private endpoint connection feature can automatically detect your private endpoints. This means that after [creating an Azure private endpoint](#step-2-create-an-azure-private-endpoint) in the Azure portal, if you click **Cancel** in the **Create Azure Private Endpoint Connection** dialog in the TiDB Cloud console, you can still view the created endpoint on the **Networking** page. If the cancellation is unintentional, you can continue to configure the endpoint to complete the setup. If the cancellation is intentional, you can delete the endpoint directly in the TiDB Cloud console.
+Azure 私有端点连接功能可以自动检测你的私有端点。这意味着在 Azure 门户中[创建 Azure 私有端点](#步骤-2-创建-azure-私有端点)后，如果你在 TiDB Cloud 控制台的**创建 Azure 私有端点连接**对话框中点击**取消**，你仍然可以在**网络**页面上查看已创建的端点。如果取消是无意的，你可以继续配置端点以完成设置。如果取消是有意的，你可以直接在 TiDB Cloud 控制台中删除端点。
 
-[^1]: The diagram of the Azure Private Link architecture is from the [What is Azure Private Link service](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview) document ([source file on GitHub](https://github.com/MicrosoftDocs/azure-docs/blob/main/articles/private-link/private-link-service-overview.md)) in Azure documentation, licensed under the Creative Commons Attribution 4.0 International.
+[^1]: Azure Private Link 架构图来自 Azure 文档中的 [What is Azure Private Link service](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview) 文档（[GitHub 上的源文件](https://github.com/MicrosoftDocs/azure-docs/blob/main/articles/private-link/private-link-service-overview.md)），根据 Creative Commons Attribution 4.0 International 许可证授权。

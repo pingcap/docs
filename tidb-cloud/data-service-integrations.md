@@ -1,40 +1,40 @@
 ---
-title: Integrate a Data App with Third-Party Tools
-summary: Learn how to integrate a TiDB Cloud Data App with third-party tools, such as GPTs and Dify, in the TiDB Cloud console.
+title: 将 Data App 与第三方工具集成
+summary: 了解如何在 TiDB Cloud 控制台中将 TiDB Cloud Data App 与第三方工具（如 GPTs 和 Dify）集成。
 ---
 
-# Integrate a Data App with Third-Party Tools
+# 将 Data App 与第三方工具集成
 
-Integrating third-party tools with your Data App enhances your applications with advanced natural language processing and artificial intelligence (AI) capabilities provided by third-party tools. This integration enables your applications to perform more complex tasks and deliver intelligent solutions.
+将第三方工具与你的 Data App 集成可以通过第三方工具提供的高级自然语言处理和人工智能（AI）功能来增强你的应用程序。这种集成使你的应用程序能够执行更复杂的任务并提供智能解决方案。
 
-This document describes how to integrate a Data App with third-party tools, such as GPTs and Dify, in the TiDB Cloud console.
+本文档介绍如何在 TiDB Cloud 控制台中将 Data App 与第三方工具（如 GPTs 和 Dify）集成。
 
-## Integrate your Data App with GPTs
+## 将 Data App 与 GPTs 集成
 
-You can integrate your Data App with [GPTs](https://openai.com/blog/introducing-gpts) to enhance your applications with intelligent capabilities.
+你可以将 Data App 与 [GPTs](https://openai.com/blog/introducing-gpts) 集成，为你的应用程序增加智能功能。
 
-To integrate your Data App with GPTs, perform the following steps:
+要将 Data App 与 GPTs 集成，请执行以下步骤：
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
-2. In the left pane, locate your target Data App, click the name of your target Data App, and then click the **Integrations** tab.
-3. In the **Integrate with GPTs** area, click **Get Configuration**.
+1. 导航到项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。
+2. 在左侧窗格中，找到目标 Data App，点击目标 Data App 的名称，然后点击**集成**标签。
+3. 在**与 GPTs 集成**区域，点击**获取配置**。
 
-    ![Get Configuration](/media/tidb-cloud/data-service/GPTs1.png)
+    ![获取配置](/media/tidb-cloud/data-service/GPTs1.png)
 
-4. In the displayed dialog box, you can see the following fields:
+4. 在显示的对话框中，你可以看到以下字段：
 
-    a. **API Specification URL**: copy the URL of the OpenAPI Specification of your Data App. For more information, see [Use the OpenAPI Specification](/tidb-cloud/data-service-manage-data-app.md#use-the-openapi-specification).
+    a. **API 规范 URL**：复制 Data App 的 OpenAPI 规范的 URL。更多信息，请参见[使用 OpenAPI 规范](/tidb-cloud/data-service-manage-data-app.md#use-the-openapi-specification)。
 
-    b. **API Key**: enter the API key of your Data App. If you do not have an API key yet, click **Create API Key** to create one. For more information, see [Create an API key](/tidb-cloud/data-service-api-key.md#create-an-api-key).
+    b. **API 密钥**：输入 Data App 的 API 密钥。如果你还没有 API 密钥，点击**创建 API 密钥**来创建一个。更多信息，请参见[创建 API 密钥](/tidb-cloud/data-service-api-key.md#create-an-api-key)。
 
-    c. **API Key Encoded**: copy the base64 encoded string equivalent to the API key you have provided.
+    c. **API 密钥编码**：复制与你提供的 API 密钥等效的 base64 编码字符串。
 
-    ![GPTs Dialog Box](/media/tidb-cloud/data-service/GPTs2.png)
+    ![GPTs 对话框](/media/tidb-cloud/data-service/GPTs2.png)
 
-5. Use the copied API Specification URL and the encoded API key in your GPT configuration.
+5. 在你的 GPT 配置中使用复制的 API 规范 URL 和编码后的 API 密钥。
 
-## Integrate your Data App with Dify
+## 将 Data App 与 Dify 集成
 
-You can integrate your Data App with [Dify](https://docs.dify.ai/guides/tools) to enhance your applications with intelligent capabilities, such as vector distance calculations, advanced similarity searches, and vector analysis.
+你可以将 Data App 与 [Dify](https://docs.dify.ai/guides/tools) 集成，为你的应用程序增加智能功能，如向量距离计算、高级相似度搜索和向量分析。
 
-To integrate your Data App with Dify, follow the same steps as for [GPTs integration](#integrate-your-data-app-with-gpts). The only difference is that on the **Integrations** tab, you need to click **Get Configuration** in the **Integrate with Dify** area.
+要将 Data App 与 Dify 集成，请按照与 [GPTs 集成](#将-data-app-与-gpts-集成)相同的步骤操作。唯一的区别是在**集成**标签页上，你需要在**与 Dify 集成**区域点击**获取配置**。

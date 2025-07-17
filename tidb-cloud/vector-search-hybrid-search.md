@@ -1,45 +1,44 @@
 ---
-title: Hybrid Search
-summary: Use full-text search and vector search together to improve the retrieval quality.
-aliases: ['/tidb/stable/vector-search-hybrid-search']
+title: 混合搜索
+summary: 结合全文搜索和向量搜索来提升检索质量。
 ---
 
-# Hybrid Search
+# 混合搜索
 
-By using full-text search, you can retrieve documents based on exact keywords. By using vector search, you can retrieve documents based on semantic similarity. Can we combine these two search methods to improve the retrieval quality and handle more scenarios? Yes, this approach is known as hybrid search and is commonly used in AI applications.
+通过使用全文搜索，你可以基于精确关键词检索文档。通过使用向量搜索，你可以基于语义相似度检索文档。我们能否结合这两种搜索方法来提升检索质量并处理更多场景？是的，这种方法被称为混合搜索，在 AI 应用中被广泛使用。
 
-A general workflow of hybrid search in TiDB is as follows:
+TiDB 中混合搜索的一般工作流程如下：
 
-1. Use TiDB for **full-text search** and **vector search**.
-2. Use a **reranker** to combine the results from both searches.
+1. 使用 TiDB 进行**全文搜索**和**向量搜索**。
+2. 使用**重排序器**来组合两种搜索的结果。
 
-![Hybrid Search](/media/vector-search/hybrid-search-overview.svg)
+![混合搜索](/media/vector-search/hybrid-search-overview.svg)
 
-This tutorial demonstrates how to use hybrid search in TiDB with the [pytidb](https://github.com/pingcap/pytidb) Python SDK, which provides built-in support for embedding and reranking. Using pytidb is completely optional — you can perform a search using SQL directly and use your own reranking model as you like.
+本教程演示如何使用 [pytidb](https://github.com/pingcap/pytidb) Python SDK 在 TiDB 中使用混合搜索，该 SDK 内置支持嵌入和重排序功能。使用 pytidb 完全是可选的 — 你可以直接使用 SQL 执行搜索，并根据需要使用自己的重排序模型。
 
-## Prerequisites
+## 前提条件
 
-Hybrid search relies on both [full-text search](/tidb-cloud/vector-search-full-text-search-python.md) and vector search. Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-text search is only available for the following product option and regions:
+混合搜索依赖于[全文搜索](/tidb-cloud/vector-search-full-text-search-python.md)和向量搜索。全文搜索仍处于早期阶段，我们正在持续向更多客户推出。目前，全文搜索仅适用于以下产品选项和地区：
 
-- TiDB Cloud Serverless: `Frankfurt (eu-central-1)` and `Singapore (ap-southeast-1)`
+- TiDB Cloud Serverless：`法兰克福 (eu-central-1)` 和 `新加坡 (ap-southeast-1)`
 
-To complete this tutorial, make sure you have a TiDB Cloud Serverless cluster in a supported region. If you don't have one, follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create it.
+要完成本教程，请确保你在支持的地区有一个 TiDB Cloud Serverless 集群。如果你还没有，请按照[创建 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md)的说明创建一个。
 
-## Get started
+## 开始使用
 
-### Step 1. Install the [pytidb](https://github.com/pingcap/pytidb) Python SDK
+### 步骤 1. 安装 [pytidb](https://github.com/pingcap/pytidb) Python SDK
 
 ```shell
 pip install "pytidb[models]"
 
-# (Alternative) If you don't want to use built-in embedding functions and rerankers:
+# (替代方案) 如果你不想使用内置的嵌入函数和重排序器：
 # pip install pytidb
 
-# (Optional) To convert query results to pandas DataFrame:
+# (可选) 要将查询结果转换为 pandas DataFrame：
 # pip install pandas
 ```
 
-### Step 2. Connect to TiDB
+### 步骤 2. 连接到 TiDB
 
 ```python
 from pytidb import TiDBClient
@@ -53,13 +52,13 @@ db = TiDBClient.connect(
 )
 ```
 
-You can get these connection parameters from the [TiDB Cloud console](https://tidbcloud.com):
+你可以从 [TiDB Cloud 控制台](https://tidbcloud.com)获取这些连接参数：
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. 导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称进入其概览页面。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with connection parameters listed.
+2. 点击右上角的**连接**。将显示一个连接对话框，其中列出了连接参数。
 
-   For example, if the connection parameters are displayed as follows:
+   例如，如果连接参数显示如下：
 
    ```text
    HOST:     gateway01.us-east-1.prod.shared.aws.tidbcloud.com
@@ -70,7 +69,7 @@ You can get these connection parameters from the [TiDB Cloud console](https://ti
    CA:       /etc/ssl/cert.pem
    ```
 
-   The corresponding Python code to connect to the TiDB Cloud Serverless cluster would be as follows:
+   连接到 TiDB Cloud Serverless 集群的相应 Python 代码如下：
 
    ```python
    db = TiDBClient.connect(
@@ -82,16 +81,16 @@ You can get these connection parameters from the [TiDB Cloud console](https://ti
    )
    ```
 
-   Note that the preceding example is for demonstration purposes only. You need to fill in the parameters with your own values and keep them secure.
+   请注意，上述示例仅用于演示目的。你需要使用自己的值填充参数并确保它们的安全性。
 
-### Step 3. Create a table
+### 步骤 3. 创建表
 
-As an example, create a table named `chunks` with the following columns:
+作为示例，创建一个名为 `chunks` 的表，包含以下列：
 
-- `id` (int): the ID of the chunk.
-- `text` (text): the text content of the chunk.
-- `text_vec` (vector): the vector representation of the text, automatically generated by the embedding model in pytidb.
-- `user_id` (int): the ID of the user who created the chunk.
+- `id` (int)：块的 ID。
+- `text` (text)：块的文本内容。
+- `text_vec` (vector)：文本的向量表示，由 pytidb 中的嵌入模型自动生成。
+- `user_id` (int)：创建该块的用户 ID。
 
 ```python
 from pytidb.schema import TableModel, Field
@@ -106,27 +105,27 @@ class Chunk(TableModel, table=True):
     text: str = Field()
     text_vec: list[float] = text_embed.VectorField(
         source_field="text"
-    )  # 👈 Define the vector field.
+    )  # 👈 定义向量字段。
     user_id: int = Field()
 
 table = db.create_table(schema=Chunk)
 ```
 
-### Step 4. Insert data
+### 步骤 4. 插入数据
 
 ```python
 table.bulk_insert(
     [
-        Chunk(id=2, text="bar", user_id=2),   # 👈 The text field will be embedded to a
-        Chunk(id=3, text="baz", user_id=3),   # vector and stored in the "text_vec" field
-        Chunk(id=4, text="qux", user_id=4),   # automatically.
+        Chunk(id=2, text="bar", user_id=2),   # 👈 文本字段将被自动嵌入为向量
+        Chunk(id=3, text="baz", user_id=3),   # 并存储在 "text_vec" 字段中。
+        Chunk(id=4, text="qux", user_id=4),   #
     ]
 )
 ```
 
-### Step 5. Perform a hybrid search
+### 步骤 5. 执行混合搜索
 
-In this example, use the [jina-reranker](https://huggingface.co/jinaai/jina-reranker-m0) model to rerank the search results.
+在此示例中，使用 [jina-reranker](https://huggingface.co/jinaai/jina-reranker-m0) 模型对搜索结果进行重排序。
 
 ```python
 from pytidb.rerankers import Reranker
@@ -135,33 +134,33 @@ jinaai = Reranker(model_name="jina_ai/jina-reranker-m0")
 
 df = (
   table.search("<query>", search_type="hybrid")
-    .rerank(jinaai, "text")  # 👈 Rerank the query result using the jinaai model.
+    .rerank(jinaai, "text")  # 👈 使用 jinaai 模型对查询结果进行重排序。
     .limit(2)
     .to_pandas()
 )
 ```
 
-For a complete example, see [pytidb hybrid search demo](https://github.com/pingcap/pytidb/tree/main/examples/hybrid_search).
+完整示例请参见 [pytidb 混合搜索演示](https://github.com/pingcap/pytidb/tree/main/examples/hybrid_search)。
 
-## See also
+## 另请参阅
 
-- [pytidb Python SDK Documentation](https://github.com/pingcap/pytidb)
+- [pytidb Python SDK 文档](https://github.com/pingcap/pytidb)
 
-- [Full-Text Search with Python](/tidb-cloud/vector-search-full-text-search-python.md)
+- [使用 Python 进行全文搜索](/tidb-cloud/vector-search-full-text-search-python.md)
 
-## Feedback & help
+## 反馈与帮助
 
-Full-text search is still in the early stages with limited accessibility. If you would like to try full-text search in a region that is not yet available, or if you have feedback or need help, feel free to reach out to us:
+全文搜索仍处于早期阶段，可访问性有限。如果你想在尚未提供服务的地区尝试全文搜索，或者如果你有反馈或需要帮助，请随时联系我们：
 
 <CustomContent platform="tidb">
 
-- [Join our Discord](https://discord.gg/zcqexutz2R)
+- [加入我们的 Discord](https://discord.gg/zcqexutz2R)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- [Join our Discord](https://discord.gg/zcqexutz2R)
-- [Visit our Support Portal](https://tidb.support.pingcap.com/)
+- [加入我们的 Discord](https://discord.gg/zcqexutz2R)
+- [访问我们的支持门户](https://tidb.support.pingcap.com/)
 
 </CustomContent>

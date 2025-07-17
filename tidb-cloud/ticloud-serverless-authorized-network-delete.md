@@ -1,50 +1,50 @@
 ---
 title: ticloud serverless authorized-network delete
-summary: The reference of `ticloud serverless authorized-network delete`.
+summary: "`ticloud serverless authorized-network delete` 命令的参考。"
 ---
 
 # ticloud serverless authorized-network delete
 
-Delete an authorized network:
+删除授权网络：
 
 ```shell
 ticloud serverless authorized-network delete [flags]
 ```
 
-## Examples
+## 示例
 
-Delete an authorized network in interactive mode:
+在交互模式下删除授权网络：
 
 ```shell
 ticloud serverless authorized-network delete
 ```
 
-Delete an authorized network in non-interactive mode:
+在非交互模式下删除授权网络：
 
 ```shell
 ticloud serverless authorized-network delete -c <cluster-id> --start-ip-address <start-ip-address> --end-ip-address <end-ip-address>
 ```
 
-## Flags
+## 标志
 
-In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
+在非交互模式下，你需要手动输入必需的标志。在交互模式下，你只需按照 CLI 提示填写即可。
 
-| Flag                    | Description                              | Required | Note                                                 |
-|-------------------------|------------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | Specifies the ID of the cluster.         | Yes      | Only works in non-interactive mode.                  |
-| --force string       |  Delete an authorized network without confirmation.            | No       | Only works in non-interactive mode.                  |
-| --start-ip-address string          | Specifies the start IP address of the authorized network.             | Yes       | Only works in non-interactive mode.                  |
-| --end-ip-address string          | Specifies the end IP address of the authorized network.             | Yes       | Only works in non-interactive mode.   |
-| -h, --help              | Shows help information for this command. | No       | Works in both non-interactive and interactive modes. |
+| 标志                    | 描述                                | 是否必需 | 说明                                    |
+|-------------------------|-------------------------------------|----------|------------------------------------------|
+| -c, --cluster-id string | 指定集群的 ID。                     | 是       | 仅在非交互模式下生效。                  |
+| --force string          | 删除授权网络时不需要确认。          | 否       | 仅在非交互模式下生效。                  |
+| --start-ip-address string | 指定授权网络的起始 IP 地址。       | 是       | 仅在非交互模式下生效。                  |
+| --end-ip-address string  | 指定授权网络的结束 IP 地址。       | 是       | 仅在非交互模式下生效。                  |
+| -h, --help              | 显示此命令的帮助信息。              | 否       | 在非交互模式和交互模式下都有效。        |
 
-## Inherited flags
+## 继承的标志
 
-| Flag                 | Description                                                                                          | Required | Note                                                                                                             |
-|----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
-| -D, --debug          | Enables debug mode.                                                                                  | No       | Works in both non-interactive and interactive modes.                                                             |
+| 标志                  | 描述                                                                                     | 是否必需 | 说明                                                                                                |
+|----------------------|------------------------------------------------------------------------------------------|----------|-----------------------------------------------------------------------------------------------------|
+| --no-color           | 禁用输出中的颜色。                                                                        | 否       | 仅在非交互模式下生效。在交互模式下，对某些 UI 组件禁用颜色可能不起作用。                              |
+| -P, --profile string | 指定此命令中使用的活动[用户配置文件](/tidb-cloud/cli-reference.md#user-profile)。         | 否       | 在非交互模式和交互模式下都有效。                                                                      |
+| -D, --debug          | 启用调试模式。                                                                            | 否       | 在非交互模式和交互模式下都有效。                                                                      |
 
-## Feedback
+## 反馈
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+如果你对 TiDB Cloud CLI 有任何问题或建议，欢迎创建 [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)。同时，我们也欢迎任何贡献。

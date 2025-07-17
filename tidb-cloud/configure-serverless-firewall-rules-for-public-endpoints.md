@@ -1,58 +1,58 @@
 ---
-title: Configure TiDB Cloud Serverless Firewall Rules for Public Endpoints 
-summary: Learn how to configure and manage firewall rules with public access to your TiDB Cloud Serverless cluster securely.
+title: 为 TiDB Cloud Serverless 公共端点配置防火墙规则
+summary: 了解如何安全地配置和管理 TiDB Cloud Serverless 集群的公共访问防火墙规则。
 ---
 
-# Configure TiDB Cloud Serverless Firewall Rules for Public Endpoints
+# 为 TiDB Cloud Serverless 公共端点配置防火墙规则
 
-This document describes the public connectivity option for TiDB Cloud Serverless. You will learn key concepts for securely managing a TiDB Cloud Serverless cluster accessible via the internet.
+本文档介绍 TiDB Cloud Serverless 的公共连接选项。你将了解通过互联网安全管理 TiDB Cloud Serverless 集群访问的关键概念。
 
-> **Note:**
+> **注意：**
 >
-> This document applies to **TiDB Cloud Serverless**. For instructions on configuring an IP access list for **TiDB Cloud Dedicated**, see [Configure an IP Access List for TiDB Cloud Dedicated](/tidb-cloud/configure-ip-access-list.md).
+> 本文档适用于 **TiDB Cloud Serverless**。有关配置 **TiDB Cloud Dedicated** IP 访问列表的说明，请参阅[为 TiDB Cloud Dedicated 配置 IP 访问列表](/tidb-cloud/configure-ip-access-list.md)。
 
-## Public endpoints
+## 公共端点
 
-Configuring public access on your TiDB Cloud Serverless cluster allows the cluster access through a public endpoint. That is, the cluster is accessible through the internet. The public endpoint is a publicly resolvable DNS address. The term "authorized network" refers to a range of IP addresses you choose to permit access to your cluster. These permissions are enforced through **firewall rules**.
+在 TiDB Cloud Serverless 集群上配置公共访问允许通过公共端点访问集群。也就是说，可以通过互联网访问集群。公共端点是一个可公开解析的 DNS 地址。"授权网络"是指你选择允许访问集群的 IP 地址范围。这些权限通过**防火墙规则**强制执行。
 
-### Characteristics of public access
+### 公共访问的特点
 
-- Only specified IP addresses can access TiDB Cloud Serverless.  
-    - By default, all IP addresses (`0.0.0.0 - 255.255.255.255`) are allowed.  
-    - You can update allowed IP addresses after cluster creation.  
-- Your cluster has a publicly resolvable DNS name.  
-- Network traffic to and from your cluster is routed over the **public internet** rather than a private network.
+- 只有指定的 IP 地址可以访问 TiDB Cloud Serverless。
+    - 默认情况下，允许所有 IP 地址（`0.0.0.0 - 255.255.255.255`）。
+    - 你可以在集群创建后更新允许的 IP 地址。
+- 你的集群有一个可公开解析的 DNS 名称。
+- 进出集群的网络流量通过**公共互联网**而不是私有网络路由。
 
-### Firewall rules
+### 防火墙规则
 
-Granting access to an IP address is done via **firewall rules**. If a connection attempt originates from an unapproved IP address, the client will receive an error.
+通过**防火墙规则**授予对 IP 地址的访问权限。如果连接尝试来自未经批准的 IP 地址，客户端将收到错误。
 
-You can create a maximum of 200 IP firewall rules.
+你最多可以创建 200 条 IP 防火墙规则。
 
-### Allow AWS access
+### 允许 AWS 访问
 
-You can enable access from **all AWS IP addresses** by referring to the official [AWS IP address list](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html).  
+你可以通过参考官方 [AWS IP 地址列表](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html)启用来自**所有 AWS IP 地址**的访问。
 
-TiDB Cloud regularly updates this list and uses the reserved IP address **169.254.65.87** to represent all AWS IP addresses.
+TiDB Cloud 定期更新此列表，并使用保留的 IP 地址 **169.254.65.87** 代表所有 AWS IP 地址。
 
-## Create and manage a firewall rule
+## 创建和管理防火墙规则
 
-This section describes how to manage firewall rules for a TiDB Cloud Serverless cluster. With a public endpoint, the connections to the TiDB Cloud Serverless cluster are restricted to the IP addresses specified in the firewall rules.
+本节介绍如何管理 TiDB Cloud Serverless 集群的防火墙规则。使用公共端点时，对 TiDB Cloud Serverless 集群的连接仅限于防火墙规则中指定的 IP 地址。
 
-To add firewall rules to a TiDB Cloud Serverless cluster, take the following steps:
+要向 TiDB Cloud Serverless 集群添加防火墙规则，请执行以下步骤：
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. 导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称以进入其概览页面。
 
-2. In the left navigation pane, click **Settings** > **Networking**.
+2. 在左侧导航栏中，点击**设置** > **网络**。
 
-3. On the **Networking** page, enable **Public Endpoint** if it is disabled. In **Authorized Networks**, click **+ Add Current IP**. This automatically creates a firewall rule with the public IP address of your computer, as perceived by TiDB Cloud.
+3. 在**网络**页面上，如果**公共端点**已禁用，请启用它。在**授权网络**中，点击**+ 添加当前 IP**。这将自动创建一条包含你的计算机公共 IP 地址（由 TiDB Cloud 感知）的防火墙规则。
 
-    > **Note:**
+    > **注意：**
     >
-    > In some situations, the IP address observed by the TiDB Cloud console differs from the IP address used when accessing the internet. Therefore, you might need to change the start and end IP addresses to make the rule function as expected. You can use a search engine or other online tool to check your own IP address. For example, search for "what is my IP."
+    > 在某些情况下，TiDB Cloud 控制台观察到的 IP 地址与访问互联网时使用的 IP 地址不同。因此，你可能需要更改起始和结束 IP 地址，以使规则按预期运行。你可以使用搜索引擎或其他在线工具检查自己的 IP 地址。例如，搜索"我的 IP 是什么"。
 
-4. Click **Add rule** to add more address ranges. In the displayed window, you can specify a single IP address or a range of IP addresses. If you want to limit the rule to a single IP address, type the same IP address in the **Start IP Address** and **End IP Address** fields. Opening the firewall enables administrators, users, and applications to access any database on your TiDB Cloud Serverless cluster to which they have valid credentials. Click **Submit** to add the firewall rule.
+4. 点击**添加规则**以添加更多地址范围。在显示的窗口中，你可以指定单个 IP 地址或 IP 地址范围。如果要将规则限制为单个 IP 地址，请在**起始 IP 地址**和**结束 IP 地址**字段中输入相同的 IP 地址。打开防火墙后，管理员、用户和应用程序可以访问你的 TiDB Cloud Serverless 集群上拥有有效凭据的任何数据库。点击**提交**以添加防火墙规则。
 
-## What's next
+## 下一步
 
-- [Connect to TiDB Cloud Serverless via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
+- [通过公共端点连接到 TiDB Cloud Serverless](/tidb-cloud/connect-via-standard-connection-serverless.md)

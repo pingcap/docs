@@ -1,18 +1,14 @@
 ---
-title: Vector Search Changelogs
-summary: Learn about the new features, compatibility changes, improvements, and bug fixes for the TiDB vector search feature.
+title: 向量搜索更新日志
+summary: 了解 TiDB 向量搜索功能的新特性、兼容性变更、改进和错误修复。
 ---
 
-# Vector Search Changelogs
+# 向量搜索更新日志
 
-## July 15, 2025
+## 2024 年 6 月 25 日
 
-- TiDB Vector Search (beta) is now available for TiDB Cloud Dedicated (TiDB >= v8.4) clusters.
+- TiDB 向量搜索（测试版）现已在所有地区对所有 TiDB Cloud Serverless 集群用户开放。
 
-## June 25, 2024
+## 2024 年 4 月 1 日
 
-- TiDB Vector Search (beta) is now available for TiDB Cloud Serverless clusters in all regions for all users.
-
-## April 1, 2024
-
-- TiDB Vector Search (beta) is now available for TiDB Cloud Serverless clusters in EU regions for invited users.
+- TiDB 向量搜索（测试版）现已在欧盟地区对受邀的 TiDB Cloud Serverless 集群用户开放。

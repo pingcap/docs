@@ -1,40 +1,40 @@
 ---
-title: Index Insight (Beta)
-summary: Learn how to use the Index Insight feature in TiDB Cloud and obtain index recommendations for slow queries.
+title: 索引洞察（Beta）
+summary: 了解如何使用 TiDB Cloud 中的索引洞察功能并获取慢查询的索引建议。
 ---
 
-# Index Insight (Beta)
+# 索引洞察（Beta）
 
-The Index Insight (beta) feature in TiDB Cloud provides powerful capabilities to optimize query performance by offering index recommendations for slow queries that are not using indexes effectively. This document walks you through the steps to enable and utilize the Index Insight feature effectively.
+TiDB Cloud 中的索引洞察（beta）功能通过为未有效使用索引的慢查询提供索引建议，提供了强大的查询性能优化能力。本文档将指导你完成启用和有效使用索引洞察功能的步骤。
 
-> **Note:**
+> **注意：**
 >
-> Index Insight is currently in beta and only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+> 索引洞察目前处于 beta 阶段，仅适用于 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。
 
-## Introduction
+## 简介
 
-The Index Insight feature provides you with the following benefits:
+索引洞察功能为你提供以下好处：
 
-- Enhanced query performance: Index Insight identifies slow queries and suggests appropriate indexes for them, thereby speeding up query execution, reducing response time, and improving user experience.
-- Cost efficiency: By using Index Insight to optimize query performance, the need for extra computing resources is reduced, enabling you to use existing infrastructure more effectively. This can potentially lead to operational cost savings.
-- Simplified optimization process: Index Insight simplifies the identification and implementation of index improvements, eliminating the need for manual analysis and guesswork. As a result, you can save time and effort with accurate index recommendations.
-- Improved application efficiency: By using Index Insight to optimize database performance, applications running on TiDB Cloud can handle larger workloads and serve more users concurrently, which makes scaling operations of applications more efficient.
+- 增强查询性能：索引洞察识别慢查询并为其建议适当的索引，从而加快查询执行速度，减少响应时间，提升用户体验。
+- 成本效益：通过使用索引洞察优化查询性能，减少了对额外计算资源的需求，使你能够更有效地使用现有基础设施。这可能带来运营成本的节省。
+- 简化优化过程：索引洞察简化了索引改进的识别和实施过程，消除了手动分析和猜测的需要。因此，你可以通过准确的索引建议节省时间和精力。
+- 提高应用效率：通过使用索引洞察优化数据库性能，运行在 TiDB Cloud 上的应用程序可以处理更大的工作负载并同时服务更多用户，这使应用程序的扩展操作更加高效。
 
-## Usage
+## 使用方法
 
-This section introduces how to enable the Index Insight feature and obtain recommended indexes for slow queries.
+本节介绍如何启用索引洞察功能并获取慢查询的推荐索引。
 
-### Before you begin
+### 开始之前
 
-Before enabling the Index Insight feature, make sure that you have created a TiDB Cloud Dedicated cluster. If you do not have one, follow the steps in [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md) to create one.
+在启用索引洞察功能之前，请确保你已创建 TiDB Cloud Dedicated 集群。如果你还没有，请按照[创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)中的步骤创建一个。
 
-### Step 1: Enable Index Insight
+### 步骤 1：启用索引洞察
 
-1. Navigate to the [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) page of your TiDB Cloud Dedicated cluster.
+1. 导航到 TiDB Cloud Dedicated 集群的[**诊断**](/tidb-cloud/tune-performance.md#查看诊断页面)页面。
 
-2. Click the **Index Insight BETA** tab. The **Index Insight overview** page is displayed.
+2. 点击**索引洞察 BETA** 标签。将显示**索引洞察概览**页面。
 
-3. To use the Index Insight feature, you need to create a dedicated SQL user, which is used to trigger the feature and receive index recommendations. The following SQL statements create a new SQL user with required privileges, including read privilege for `information_schema` and `mysql`, and `PROCESS` and `REFERENCES` privileges for all databases. Replace `'index_insight_user'` and `'random_password'` with your values.
+3. 要使用索引洞察功能，你需要创建一个专用的 SQL 用户，该用户用于触发该功能并接收索引建议。以下 SQL 语句创建一个具有所需权限的新 SQL 用户，包括 `information_schema` 和 `mysql` 的读取权限，以及所有数据库的 `PROCESS` 和 `REFERENCES` 权限。将 `'index_insight_user'` 和 `'random_password'` 替换为你的值。
 
     ```sql
     CREATE user 'index_insight_user'@'%' IDENTIFIED by 'random_password';
@@ -44,102 +44,82 @@ Before enabling the Index Insight feature, make sure that you have created a TiD
     FLUSH PRIVILEGES;
     ```
 
-    > **Note:**
+    > **注意：**
     >
-    > To connect to your TiDB Cloud Dedicated cluster, see [Connect to a TiDB Cloud Dedicated cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+    > 要连接到你的 TiDB Cloud Dedicated 集群，请参见[连接到 TiDB Cloud Dedicated 集群](/tidb-cloud/connect-to-tidb-cluster.md)。
 
-4. Enter the username and password of the SQL user created in the preceding step. Then, click **Activate** to initiate the activation process.
+4. 输入在前面步骤中创建的 SQL 用户的用户名和密码。然后，点击**激活**开始激活过程。
 
-### Step 2: Manually trigger Index Insight
+### 步骤 2：手动触发索引洞察
 
-To obtain index recommendations for slow queries, you can manually trigger the Index Insight feature by clicking **Check Up** in the upper-right corner of the **Index Insight overview** page.
+要获取慢查询的索引建议，你可以通过点击**索引洞察概览**页面右上角的**检查**来手动触发索引洞察功能。
 
-Then, the feature begins scanning slow queries from the past three hours. After the scan finishes, it provides a list of index recommendations based on its analysis.
+然后，该功能开始扫描过去三小时的慢查询。扫描完成后，它会根据分析提供索引建议列表。
 
-### Step 3: View index recommendations
+### 步骤 3：查看索引建议
 
-To view the details of a specific index recommendation, click the insight from the list. The **Index Insight Details** page is displayed.
+要查看特定索引建议的详细信息，请从列表中点击洞察。将显示**索引洞察详情**页面。
 
-On this page, you can find the index recommendations, related slow queries, execution plans, and relevant metrics. This information helps you better understand the performance issues and evaluate the potential impact of implementing the index recommendations.
+在此页面上，你可以找到索引建议、相关慢查询、执行计划和相关指标。这些信息可帮助你更好地理解性能问题并评估实施索引建议的潜在影响。
 
-### Step 4: Implement index recommendations
+### 步骤 4：实施索引建议
 
-Before implementing the index recommendations, you need to first review and evaluate the recommendations from the **Index Insight Details** page.
+在实施索引建议之前，你需要先从**索引洞察详情**页面审查和评估建议。
 
-To implement the index recommendations, follow these steps:
+要实施索引建议，请按照以下步骤操作：
 
-1. Evaluate the impact of the proposed index on existing queries and workload.
-2. Consider the storage requirements and potential trade-offs associated with the index implementation.
-3. Use appropriate database management tools to create the index recommendations on the relevant tables.
-4. Monitor the performance after implementing the indexes to assess the improvements.
+1. 评估建议的索引对现有查询和工作负载的影响。
+2. 考虑与索引实施相关的存储需求和潜在权衡。
+3. 使用适当的数据库管理工具在相关表上创建索引建议。
+4. 实施索引后监控性能以评估改进情况。
 
-## Best practices
+## 最佳实践
 
-This section introduces some best practices for using the Index Insight feature.
+本节介绍使用索引洞察功能的一些最佳实践。
 
-### Regularly trigger Index Insight
+### 定期触发索引洞察
 
-To maintain optimized indexes, it is recommended to trigger the Index Insight feature periodically, such as every day, or whenever substantial changes occur in your queries or database schema.
+为了维护优化的索引，建议定期触发索引洞察功能，例如每天一次，或在查询或数据库架构发生重大变化时触发。
 
-### Analyze impact before implementing indexes
+### 实施索引前分析影响
 
-Before implementing the index recommendations, analyze the potential impact on query execution plans, disk space, and any trade-offs involved. Prioritize implementing indexes that provide the most significant performance improvements.
+在实施索引建议之前，分析对查询执行计划、磁盘空间和任何相关权衡的潜在影响。优先实施能提供最显著性能改进的索引。
 
-### Monitor performance
+### 监控性能
 
-Regularly monitor query performance after implementing the index recommendations. This helps you confirm the improvements and make further adjustments if necessary.
+实施索引建议后定期监控查询性能。这有助于你确认改进情况并在必要时进行进一步调整。
 
-## FAQ
+## 常见问题
 
-This section lists some frequently asked questions about the Index Insight feature.
+本节列出了有关索引洞察功能的一些常见问题。
 
-### How to deactivate Index Insight?
+### 如何停用索引洞察？
 
-To deactivate the Index Insight feature, perform the following steps:
+要停用索引洞察功能，请执行以下步骤：
 
-1. In the upper-right corner of the **Index Insight overview** page, click **Settings**. The **Index Insight settings** page is displayed.
-2. Click **Deactivate**. A confirmation dialog box is displayed.
-3. Click **OK** to confirm the deactivation.
+1. 在**索引洞察概览**页面的右上角，点击**设置**。将显示**索引洞察设置**页面。
+2. 点击**停用**。将显示确认对话框。
+3. 点击**确定**确认停用。
 
-    After you deactivate the Index Insight feature, all index recommendations are removed from the **Index Insight overview** page. However, the SQL user created for the feature is not deleted. You can delete the SQL user manually.
+    停用索引洞察功能后，所有索引建议都将从**索引洞察概览**页面中删除。但是，为该功能创建的 SQL 用户不会被删除。你可以手动删除该 SQL 用户。
 
-### How to delete the SQL user after deactivating Index Insight?
+### 停用索引洞察后如何删除 SQL 用户？
 
-After you deactivate the Index Insight feature, you can execute the `DROP USER` statement to delete the SQL user created for the feature. The following is an example. Replace `'username'` with your value.
+停用索引洞察功能后，你可以执行 `DROP USER` 语句删除为该功能创建的 SQL 用户。以下是一个示例。将 `'username'` 替换为你的值。
 
 ```sql
 DROP USER 'username';
 ```
 
-### Why does the `invalid user or password` message show up during activation or check-up?
+### 为什么在激活或检查期间显示 `invalid user or password` 消息？
 
-The `invalid user or password` message typically prompts when the system cannot authenticate the credentials you provided. This issue might occur due to various reasons, such as incorrect username or password, or an expired or locked user account.
+`invalid user or password` 消息通常在系统无法验证你提供的凭据时提示。此问题可能由各种原因引起，例如用户名或密码不正确，或用户账户已过期或被锁定。
 
-To resolve this issue, perform the following steps:
+要解决此问题，请执行以下步骤：
 
-1. Verify your credentials: Make sure that the username and password you provided are correct. Pay attention to case sensitivity.
-2. Check account status: Make sure that your user account is in active status and not expired or locked. You can confirm this by contacting the system administrator or the relevant support channel.
-3. Create a new SQL user: If this issue is not resolved by the preceding steps, you can create a new SQL user using the following statements. Replace `'index_insight_user'` and `'random_password'` with your values.
-
-    ```sql
-    CREATE user 'index_insight_user'@'%' IDENTIFIED by 'random_password';
-    GRANT SELECT ON information_schema.* TO 'index_insight_user'@'%';
-    GRANT SELECT ON mysql.* TO 'index_insight_user'@'%';
-    GRANT PROCESS, REFERENCES ON *.* TO 'index_insight_user'@'%';
-    FLUSH PRIVILEGES;
-    ```
-
-If you are still facing the issue after following the preceding steps, it is recommended to contact [PingCAP support team](/tidb-cloud/tidb-cloud-support.md).
-
-### Why does the `no sufficient privileges` message show up during activation or check-up?
-
-The `no sufficient privileges` message typically prompts when the SQL user you provided lacks the required privileges to request index recommendations from Index Insight.
-
-To resolve this issue, perform the following steps:
-
-1. Check the user privileges: Confirm if your user account has been granted the required privileges, including read privilege for `information_schema` and `mysql`, and `PROCESS` and `REFERENCES` privileges for all databases.
-
-2. Create a new SQL user: If this issue is not resolved by the preceding steps, you can create a new SQL user using the following statements. Replace `'index_insight_user'` and `'random_password'` with your values.
+1. 验证你的凭据：确保你提供的用户名和密码正确。注意区分大小写。
+2. 检查账户状态：确保你的用户账户处于活动状态，未过期或被锁定。你可以通过联系系统管理员或相关支持渠道确认这一点。
+3. 创建新的 SQL 用户：如果通过前面的步骤未解决此问题，你可以使用以下语句创建新的 SQL 用户。将 `'index_insight_user'` 和 `'random_password'` 替换为你的值。
 
     ```sql
     CREATE user 'index_insight_user'@'%' IDENTIFIED by 'random_password';
@@ -149,22 +129,42 @@ To resolve this issue, perform the following steps:
     FLUSH PRIVILEGES;
     ```
 
-If you are still facing the issue after following the preceding steps, it is recommended to contact [PingCAP support team](/tidb-cloud/tidb-cloud-support.md).
+如果在执行上述步骤后仍然遇到问题，建议联系 [PingCAP 支持团队](/tidb-cloud/tidb-cloud-support.md)。
 
-### Why does the `operations may be too frequent` message show up during using Index Insight?
+### 为什么在激活或检查期间显示 `no sufficient privileges` 消息？
 
-The `operations may be too frequent` message typically prompts when you have exceeded the rate or usage limit set by Index Insight.
+`no sufficient privileges` 消息通常在你提供的 SQL 用户缺少从索引洞察请求索引建议所需的权限时提示。
 
-To resolve this issue, perform the following steps:
+要解决此问题，请执行以下步骤：
 
-1. Slow down operations: If you receive this message, you need to decrease your operation frequency on Index Insight.
-2. Contact support: If the issue persists, contact [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) and provide details of the error message, your actions, and any other relevant information.
+1. 检查用户权限：确认你的用户账户是否已被授予所需权限，包括 `information_schema` 和 `mysql` 的读取权限，以及所有数据库的 `PROCESS` 和 `REFERENCES` 权限。
 
-### Why does the `internal error` message show up during using Index Insight?
+2. 创建新的 SQL 用户：如果通过前面的步骤未解决此问题，你可以使用以下语句创建新的 SQL 用户。将 `'index_insight_user'` 和 `'random_password'` 替换为你的值。
 
-The `internal error` message typically prompts when the system encounters an unexpected error or issue. This error message is general and does not provide details about the underlying cause.
+    ```sql
+    CREATE user 'index_insight_user'@'%' IDENTIFIED by 'random_password';
+    GRANT SELECT ON information_schema.* TO 'index_insight_user'@'%';
+    GRANT SELECT ON mysql.* TO 'index_insight_user'@'%';
+    GRANT PROCESS, REFERENCES ON *.* TO 'index_insight_user'@'%';
+    FLUSH PRIVILEGES;
+    ```
 
-To resolve this issue, perform the following steps:
+如果在执行上述步骤后仍然遇到问题，建议联系 [PingCAP 支持团队](/tidb-cloud/tidb-cloud-support.md)。
 
-1. Retry the operation: Refresh the page or try the operation again. The error might be temporary and can be resolved by a simple retry.
-2. Contact support: If the issue persists, contact [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) and provide details of the error message, your actions, and any other relevant information.
+### 为什么在使用索引洞察时显示 `operations may be too frequent` 消息？
+
+`operations may be too frequent` 消息通常在你超过索引洞察设置的速率或使用限制时提示。
+
+要解决此问题，请执行以下步骤：
+
+1. 降低操作频率：如果你收到此消息，你需要降低对索引洞察的操作频率。
+2. 联系支持：如果问题仍然存在，请联系 [PingCAP 支持团队](/tidb-cloud/tidb-cloud-support.md)并提供错误消息、你的操作以及任何其他相关信息的详细信息。
+
+### 为什么在使用索引洞察时显示 `internal error` 消息？
+
+`internal error` 消息通常在系统遇到意外错误或问题时提示。此错误消息是通用的，不提供有关根本原因的详细信息。
+
+要解决此问题，请执行以下步骤：
+
+1. 重试操作：刷新页面或重试操作。错误可能是临时的，可以通过简单的重试来解决。
+2. 联系支持：如果问题仍然存在，请联系 [PingCAP 支持团队](/tidb-cloud/tidb-cloud-support.md)并提供错误消息、你的操作以及任何其他相关信息的详细信息。
