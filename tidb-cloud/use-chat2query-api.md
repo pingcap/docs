@@ -11,7 +11,7 @@ Chat2Query API can only be accessed through HTTPS, ensuring that all data transm
 
 > **Note:**
 >
-> Chat2Query API is available for [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter) and [TiDB Cloud Essentials](/tidb-cloud/select-cluster-tier.md#tidb-cloud-essentials) clusters.
+> Chat2Query API is only available for [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter) clusters hosted on AWS.
 
 ## Before you begin
 

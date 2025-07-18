@@ -11,7 +11,7 @@ Starting from v3, the Chat2Query API enables you to add or modify knowledge base
 
 > **Note:**
 >
-> Knowledge base related endpoints are available for [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter) and [TiDB Cloud Essentials](/tidb-cloud/select-cluster-tier.md#tidb-cloud-essentials) clusters by default.
+> Knowledge base related endpoints are only available for [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter) clusters hosted on AWS by default.
 
 ## Before you begin
 
