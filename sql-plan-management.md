@@ -639,15 +639,17 @@ Apart from the creation syntax, cross-database bindings share the same deletion 
     Empty set (0.00 sec)
     ```
 
-## Explain Explore
+## Optimize query plans using `EXPLAIN EXPLORE` <span class="version-mark">New in v9.0.0</span>
 
-After v9.0.0, TiDB supports `Explain Explore` to allow you to explore new good plans for a certain SQL and then you can choose one plan to bind to optimize the plan of the SQL. The syntax is below:
+Starting from v9.0.0, TiDB supports the [`EXPLAIN EXPLORE`](/sql-statements/sql-statement-explain.md) statement, which lets you evaluate multiple alternative execution plans for a specific SQL statement. Based on the results, you can choose an optimal plan and create a SQL binding for it. The syntax of `EXPLAIN EXPLORE` is as follows:
 
 ```sql
 EXPLAIN EXPLORE [ANALYZE] Stmt;
 ```
 
-Below is a simple example:
+If you include `ANALYZE`, TiDB executes each plan and provides actual runtime statistics.
+
+The following is an example:
 
 ```sql
 mysql> create table t (a int, b int, key(a));
@@ -785,12 +787,15 @@ scan_rows_per_returned_row: 50000
                    binding: CREATE GLOBAL BINDING FROM HISTORY USING PLAN DIGEST 'fb7ba1191ca76f8d9a73c7180d7ba3cbb4043dec48ceb45752d0796006a190c7'
 ```
 
-In the case above, `Explain Explore` returns 6 possible plans of this query with their execution information. Then based on their execution information, you can choose one to bind:
+In the preceding example, `EXPLAIN EXPLORE` returns six alternative execution plans of this query, each with performance statistics such as latency, rows scanned, and plan digests. Based on this data, you can select the optimal plan and bind it. For example:
 
 ```sql
-mysql> CREATE GLOBAL BINDING FROM HISTORY USING PLAN DIGEST 'dea894bed528c15ffa45eb6755a129466f4b4a70a1667c0489e815fbe7d3a286';
-Query OK, 0 rows affected (0.026 sec)
+CREATE GLOBAL BINDING FROM HISTORY USING PLAN DIGEST 'dea894bed528c15ffa45eb6755a129466f4b4a70a1667c0489e815fbe7d3a286';
+```
 
+To verify that TiDB uses the binding:
+
+```sql
 mysql> explain select sum(b) from t where a=1;
 +------------------------------------+---------+-----------+---------------------+-------------------------------------------------+
 | id                                 | estRows | task      | access object       | operator info                                   |
@@ -812,9 +817,9 @@ mysql> select @@last_plan_from_binding;
 1 row in set (0.003 sec)
 ```
 
-You can omit `Analyze` to prevent the optimzer from executing these plans actually, but then you might not be able to get their actual execution information:
+If you omit `ANALYZE`, TiDB generates the execution plans but doesn't execute them. In this case, execution-related metrics (such as latency and row counts) are shown as `0`:
 
-```
+```sql
 mysql> explain explore select sum(b) from t where a=1\G
 ...
 *************************** 2. row ***************************
@@ -838,8 +843,6 @@ scan_rows_per_returned_row: 0
                    binding: CREATE GLOBAL BINDING FROM HISTORY USING PLAN DIGEST '0af9b6dd116e3ccfb2be2aaa966f79be9e30767486af66242364858978497434'
 ...
 ```
-
-All execution data is zero then.
 
 ## Baseline capturing
 
