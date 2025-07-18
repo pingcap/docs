@@ -78,7 +78,7 @@ Please perform the following steps to create your Pull Request to this repositor
 
 ### Step 0: Sign the CLA
 
-Your Pull Requests can only be merged after you sign the [Contributor License Agreement](https://cla-assistant.io/pingcap/docs) (CLA). Please make sure you sign the CLA before continuing.
+Your Pull Requests can only be merged after you sign the [Contributor License Agreement](https://cla.pingcap.net/pingcap/docs) (CLA). Please make sure you sign the CLA before continuing.
 
 ### Step 1: Fork the repository
 
