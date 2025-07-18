@@ -87,7 +87,7 @@ This section introduces the configuration parameters of TiFlash.
 
 - The path in which the TiFlash temporary files are stored.
 - By default, it is the first directory in [`path`](#path) or in [`storage.latest.dir`](#dir-1) appended with `"/tmp"`.
-- Starting from v9.0.0, using `tmp_path` is not recommended. It is recommended to use the [`storage.temp`](#storage.temp-new-in-v900) configuration instead, which supports capacity limits to control temporary file space usage.
+- Starting from v9.0.0, it is recommended that you use the [`storage.temp`](#storagetemp-new-in-v900) configuration instead of `tmp_path`, as it supports capacity limits to control temporary file space usage.
 - When the `storage.temp` configuration exists, the `tmp_path` configuration is ignored.
 
 <!-- Example: `"/tidb-data/tiflash-9000/tmp"` -->
