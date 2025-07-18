@@ -25,8 +25,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + TiKV
 
-    - note [#issue](https://github.com/tikv/tikv/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-    - note [#issue](https://github.com/tikv/tikv/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
+    - Support ingesting SST files without blocking foreground writes to reduce latency impact. [#18081](https://github.com/tikv/tikv/issues/18081) @[hhwyt](https://github.com/hhwyt)
+    - Reduce latency jitter caused by the flow controller. [#18625](https://github.com/tikv/tikv/issues/18625) @[hhwyt](https://github.com/hhwyt)
+    - Optimize tail request latency during TiDB `ADD INDEX` operations. [#18081](https://github.com/tikv/tikv/issues/18081) @[overvenus](https://github.com/overvenus)
+    - Stop in-progress manual compaction jobs during TiKV's graceful shutdown. [#18396](https://github.com/tikv/tikv/issues/18396) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Optimize the handling of `CompactedEvent` in raftstore by moving it to the `split-check` worker. [#18532](https://github.com/tikv/tikv/issues/18532) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Remove the log entry "sst ingest is too slow" to avoid latency jitters. [#18549](https://github.com/tikv/tikv/issues/18549) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Improve the detection of I/O jitters on kvdb disk when deployed with separate mount paths. [#18463](https://github.com/tikv/tikv/issues/18463) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Optimize `fetch_entries_to` in Raft-Engine to reduce contention and improve performance under mixed workloads. [#18605](https://github.com/tikv/tikv/issues/18605) @[LykxSassinator](https://github.com/LykxSassinator)
     - (dup): release-9.0.0.md > Improvements> TiKV - Optimize the cleanup mechanism of residual data to mitigate the impact on request latency [#18107](https://github.com/tikv/tikv/issues/18107) @[LykxSassinator](https://github.com/LykxSassinator)
 
 + PD
@@ -91,8 +97,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + TiKV
 
-    - note [#issue](https://github.com/tikv/tikv/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-    - note [#issue](https://github.com/tikv/tikv/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
+    - Ensure `region-size` configurations are inherited correctly to avoid unexpected changes to the default region size. [#18503](https://github.com/tikv/tikv/issues/18503) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Fix the issue that TiKV may use a compression algorithm that the client side cannot decode. [#18079](https://github.com/tikv/tikv/issues/18079) @[ekexium](https://github.com/ekexium)
+    - Fix the issue that Titan blob indices caused snapshot apply failures after Titan is turned off. [#18434](https://github.com/tikv/tikv/issues/18434) @[v01dstar](https://github.com/v01dstar)
+    - Fix incorrect and misleading index logging in StoreMsg of slowlog. [#18561](https://github.com/tikv/tikv/issues/18561) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Fix over-admission of SST ingest requests in highly concurrent scenarios. [#18452](https://github.com/tikv/tikv/issues/18452) @[hbisheng](https://github.com/hbisheng)
 
 + PD
 
