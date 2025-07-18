@@ -454,11 +454,11 @@ In certain SQL statements, comparisons might involve invalid UTF-8 characters. F
 SELECT * FROM `t` WHERE `id` > 'a" + string([]byte{0xff}) + "a';
 ```
 
-In the preceding statement, `0xff` is an invalid UTF-8 byte. When handling such characters, the behavior of TiDB depends on the collation:
+In the preceding statement, `0xff` is an invalid UTF-8 byte. When handling such characters, TiDB behaves differently depending on the collation:
 
 * Non-binary collations (such as `utf8mb4_general_ci`): TiDB truncates the string at the invalid byte. The truncated part is excluded from the comparison.
 
-* `gbk_bin` and `gb18030_bin`: TiDB replaces invalid bytes with the character `?` and continues with the comparison.
+* `gbk_bin` and `gb18030_bin` collations: TiDB replaces invalid bytes with the character `?` and continues with the comparison.
 
 * Other binary collations (such as `utf8_bin`): TiDB treats invalid bytes as ordinary bytes and compares them based on their original binary values.
 
