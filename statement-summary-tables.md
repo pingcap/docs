@@ -469,8 +469,8 @@ Fields related to network traffic:
 
 Fields related to storage engines:
 
-- `STORAGE_KV`: indicates whether the previous execution of SQL statements of this category read data from TiKV.
-- `STORAGE_MPP`: indicates whether the previous execution of SQL statements of this category read data from TiFlash.
+- `STORAGE_KV`: introduced in v9.0.0, indicates whether the previous execution of SQL statements of this category read data from TiKV.
+- `STORAGE_MPP`: introduced in v9.0.0, indicates whether the previous execution of SQL statements of this category read data from TiFlash.
 
 ### `statements_summary_evicted` fields description
 

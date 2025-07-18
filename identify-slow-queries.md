@@ -170,8 +170,8 @@ Fields related to Resource Control:
 
 Fields related to storage engines:
 
-- `Storage_from_kv`: whether this statement read data from TiKV.
-- `Storage_from_mpp`: whether this statement read data from TiFlash.
+- `Storage_from_kv`: introduced in v9.0.0, indicates whether this statement read data from TiKV.
+- `Storage_from_mpp`: introduced in v9.0.0, indicates whether this statement read data from TiFlash.
 
 ## Related system variables
 
