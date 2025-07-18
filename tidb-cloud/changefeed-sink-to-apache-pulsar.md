@@ -1,16 +1,16 @@
 ---
-title: Sink to Apache Pulsar
+title: Stream Data from TiDB Cloud Dedicated to Apache Pulsar
 summary: This document explains how to create a changefeed to stream data from TiDB Cloud to Apache Pulsar. It includes restrictions, prerequisites, and steps to configure the changefeed for Apache Pulsar. The process involves setting up network connections and configuring the changefeed specification.
 ---
 
-# Sink to Apache Pulsar
+# Stream Data from TiDB Cloud Dedicated to Apache Pulsar
 
-This document describes how to create a changefeed to stream data from TiDB Cloud to Apache Pulsar.
+This document describes how to create a changefeed to stream data from TiDB Cloud Dedicated to Apache Pulsar.
 
 > **Note:**
 >
 > - To replicate data to Apache Pulsar using the changefeed feature, make sure that your TiDB Cloud Dedicated cluster version is v7.5.1 or later.
-> - For [TiDB Cloud Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless), the changefeed feature is unavailable.
+> - For [TiDB Cloud Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless), streaming data to Apache Pulsar is currently not supported.
 
 ## Restrictions
 
