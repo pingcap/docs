@@ -48,7 +48,7 @@ One TiDB Cloud cluster can connect to multiple Vercel projects.
 
 ### A Data App and endpoints
 
-If you want to connect to your TiDB Cloud cluster via a [Data App](/tidb-cloud/data-service-manage-data-app.md), you are expected to have the target Data App and endpoints in TiDB Cloud in advance. If you do not have any, refer to the following to create one:
+If you want to connect to your TiDB Cloud cluster via a [Data App](/tidb-cloud/data-service-manage-data-app.md), you need to have the target Data App and its endpoints in TiDB Cloud first. If you do not have one, follow these steps to create it:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), go to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
 2. [Create a Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app) for your project.
