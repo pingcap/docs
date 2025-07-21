@@ -20,6 +20,7 @@
   - [Transactions](/tidb-cloud/transaction-concepts.md)
   - [SQL](/tidb-cloud/sql-concepts.md)
   - [AI Features](/tidb-cloud/ai-feature-concepts.md)
+  - [Data Service](/tidb-cloud/data-service-concepts.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Scalability](/tidb-cloud/scalability-concepts.md)
   - [High Availability](/tidb-cloud/serverless-high-availability.md)
   - [Monitoring](/tidb-cloud/monitoring-concepts.md)
@@ -229,6 +230,9 @@
     - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
     - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
+- Explore Data
+  - [Chat2Query in SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [SQL Proxy Account](/tidb-cloud/sql-proxy-account.md)
 - Vector Search ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Overview](/tidb-cloud/vector-search-overview.md)
   - Get Started
@@ -247,12 +251,33 @@
       - [SQLAlchemy](/tidb-cloud/vector-search-integrate-with-sqlalchemy.md)
       - [peewee](/tidb-cloud/vector-search-integrate-with-peewee.md)
       - [Django ORM](/tidb-cloud/vector-search-integrate-with-django-orm.md)
+  - Text Search
+    - [Full-Text Search with SQL](/tidb-cloud/vector-search-full-text-search-sql.md)
+    - [Full-Text Search with Python](/tidb-cloud/vector-search-full-text-search-python.md)
+    - [Hybrid Search](/tidb-cloud/vector-search-hybrid-search.md)
   - Reference
     - [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
     - [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md)
     - [Vector Index](/tidb-cloud/vector-search-index.md)
   - [Improve Performance](/tidb-cloud/vector-search-improve-performance.md)
   - [Limitations](/tidb-cloud/vector-search-limitations.md)
+- Data Service ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [Overview](/tidb-cloud/data-service-overview.md)
+  - [Get Started](/tidb-cloud/data-service-get-started.md)
+  - Chat2Query API
+    - [Get Started](/tidb-cloud/use-chat2query-api.md)
+    - [Start Multi-round Chat2Query](/tidb-cloud/use-chat2query-sessions.md)
+    - [Use Knowledge Bases](/tidb-cloud/use-chat2query-knowledge.md)
+  - [Manage Data App](/tidb-cloud/data-service-manage-data-app.md)
+  - [Manage Endpoint](/tidb-cloud/data-service-manage-endpoint.md)
+  - [API Key](/tidb-cloud/data-service-api-key.md)
+  - [Custom Domain](/tidb-cloud/data-service-custom-domain.md)
+  - [Integrations](/tidb-cloud/data-service-integrations.md)
+  - [Run in Postman](/tidb-cloud/data-service-postman-integration.md)
+  - [Deploy Automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md)
+  - [Use OpenAPI Specification with Next.js](/tidb-cloud/data-service-oas-with-nextjs.md)
+  - [Data App Configuration Files](/tidb-cloud/data-service-app-config-files.md)
+  - [Response and Status Code](/tidb-cloud/data-service-response-and-status-code.md)
 - Security
   - Identity Access Control
     - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
