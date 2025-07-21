@@ -109,7 +109,6 @@ At the project level, TiDB Cloud defines three roles, in which `Project Owner` c
 | Manage [Data Service](/tidb-cloud/data-service-overview.md) for data read and write operations. | ✅ | ✅ | ❌ | ❌ |
 | View cluster data using [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md). | ✅ | ✅ | ✅ | ❌ |
 | Modify and delete cluster data using [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md). | ✅ | ✅ | ❌ | ❌ |
-| Manage [changefeeds](/tidb-cloud/changefeed-overview.md). | ✅ | ✅ | ✅ | ❌ |
 | Review and reset cluster passwords. | ✅ | ❌ | ❌ | ❌ |
 | View cluster overview, backup records, metrics, events in the project. | ✅ | ✅ | ✅ | ✅ |
 
