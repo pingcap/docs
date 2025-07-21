@@ -13,7 +13,7 @@ Traditional TCP-based MySQL drivers are not suitable for serverless functions du
 
 > **Note:**
 >
-> If you prefer programming with RESTful API rather than SQL or ORM, you can use [Data Service (beta)](/tidb-cloud/data-service-overview.md).
+> If you prefer to use a RESTful API instead of SQL or an ORM, you can use [Data Service (beta)](/tidb-cloud/data-service-overview.md).
 
 ## Install the serverless driver
 
