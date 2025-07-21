@@ -5,7 +5,7 @@ summary: Learn how to use the OpenAPI Specification of a Data App to generate cl
 
 # Use the OpenAPI Specification of a Data App with Next.js
 
-This document introduces how to use the OpenAPI Specification of a Data App to generate client code and develop a Next.js application.
+This document introduces how to use the OpenAPI Specification of a [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) to generate client code and develop a Next.js application.
 
 ## Before you begin
 
