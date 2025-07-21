@@ -5,6 +5,8 @@ summary: An overview of the usage of SHOW DISTRIBUTION JOBS for the TiDB databas
 
 # SHOW DISTRIBUTION JOBS
 
+<!-- New in v9.0.0 -->
+
 The `SHOW DISTRIBUTION JOBS` statement shows all current Region distribution jobs.
 
 ## Syntax

@@ -5,6 +5,8 @@ summary: An overview of the usage of SHOW TABLE DISTRIBUTION for the TiDB databa
 
 # SHOW TABLE DISTRIBUTION
 
+<!-- New in v9.0.0 -->
+
 The `SHOW TABLE DISTRIBUTION` statement shows the Region distribution information for a specified table.
 
 ## Syntax
