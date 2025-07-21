@@ -15,6 +15,10 @@ After your TiDB Cloud cluster is created on TiDB Cloud, you can connect to it vi
 
   Direct connections mean the MySQL native connection system over TCP. You can connect to your TiDB Cloud Starter cluster using any tool that supports MySQL connection, such as [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html).
 
+- [Data Service (beta)](/tidb-cloud/data-service-overview.md)
+
+  TiDB Cloud provides a Data Service feature that enables you to connect to your TiDB Cloud Starter cluster via an HTTPS request using a custom API endpoint. Unlike direct connections, Data Service accesses TiDB Cloud Starter data via a RESTful API rather than raw SQL.
+
 - [Serverless Driver (beta)](/tidb-cloud/serverless-driver.md)
 
   TiDB Cloud provides a serverless driver for JavaScript, which allows you to connect to your TiDB Cloud Starter cluster in edge environments with the same experience as direct connections.
@@ -24,6 +28,7 @@ In the preceding connection methods, you can choose your desired one based on yo
 | Connection method  | User interface     | Scenario                                                                                                                                                       |
 |--------------------|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Direct connections | SQL/ORM            | Long-running environment, such as Java, Node.js, and Python.                                                                                                   |
+| Data Service | RESTful API | All browser and application interactions. |
 | Serverless Driver  | SQL/ORM            | Serverless and edge environments such as [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/). |
 
 ## Network
@@ -45,6 +50,7 @@ The following table shows the network you can use in different connection method
 | Connection method          | Network                      | Description                                                                                                       |
 |----------------------------|------------------------------|-------------------------------------------------------------------------------------------------------------------|
 | Direct connections         | Public or private endpoint   | Direct connections can be made via both public and private endpoints.                                             |
+| Data Service (beta) | / | Accessing TiDB Cloud Starter via Data Service (beta) does not need to specify the network type. |
 | Serverless Driver (beta)   | Public endpoint              | Serverless Driver only supports connections via public endpoint.                                                  |
 
 ## What's next
