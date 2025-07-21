@@ -1,157 +1,157 @@
 ---
-title: Introduction to Statistics
-summary: Learn how the statistics collect table-level and column-level information.
+title: 统计介绍
+summary: 了解统计信息如何收集表级和列级信息。
 ---
 
-# Introduction to Statistics {#introduction-to-statistics}
+# 统计介绍 {#introduction-to-statistics}
 
-TiDB uses statistics as input to the optimizer to estimate the number of rows processed in each plan step for a SQL statement. The optimizer estimates the cost of each available plan choice, including [index accesses](/choose-index.md) and the sequence of table joins, and produces a cost for each available plan. The optimizer then picks the execution plan with the lowest overall cost.
+TiDB 使用统计信息作为优化器的输入，用于估算 SQL 语句中每个执行计划步骤处理的行数。优化器会估算每个可用计划的成本，包括 [索引访问](/choose-index.md) 和表连接的序列，并为每个可用计划生成一个成本值。然后，优化器选择总成本最低的执行计划。
 
-## Collect statistics {#collect-statistics}
+## 收集统计信息 {#collect-statistics}
 
-This section describes two ways of collecting statistics: automatic update and manual collection.
+本节描述两种收集统计信息的方法：自动更新和手动收集。
 
-### Automatic update {#automatic-update}
+### 自动更新 {#automatic-update}
 
-For the [`INSERT`](/sql-statements/sql-statement-insert.md), [`DELETE`](/sql-statements/sql-statement-delete.md), or [`UPDATE`](/sql-statements/sql-statement-update.md) statements, TiDB automatically updates the number of rows and modified rows in statistics.
+对于 [`INSERT`](/sql-statements/sql-statement-insert.md)、[`DELETE`](/sql-statements/sql-statement-delete.md) 或 [`UPDATE`](/sql-statements/sql-statement-update.md) 语句，TiDB 会自动更新统计信息中的行数和修改行数。
 
 <CustomContent platform="tidb">
 
-TiDB persists the update information regularly and the update cycle is 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease). The default value of `stats-lease` is `3s`. If you specify the value as `0`, TiDB stops updating statistics automatically.
+TiDB 定期持久化更新信息，更新周期为 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease)。`stats-lease` 的默认值为 `3s`。如果你将其值设为 `0`，TiDB 将停止自动更新统计信息。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-TiDB persists the update information every 60 seconds.
+TiDB 每 60 秒持久化一次更新信息。
 
 </CustomContent>
 
-Based upon the number of changes to a table, TiDB will automatically schedule [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) to collect statistics on those tables. This is controlled by the following system variables.
+根据表的变更行数，TiDB 会自动调度 [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) 来收集这些表的统计信息。这由以下系统变量控制。
 
-| System Variable                                                                                                       | Default Value      | Description                                                                                                                                                                                                                                                                                                                                                                                                          |
-| --------------------------------------------------------------------------------------------------------------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`tidb_auto_analyze_concurrency`](/system-variables.md#tidb_auto_analyze_concurrency-new-in-v840)                     | `1`                | The concurrency for auto-analyze operations within a TiDB cluster.                                                                                                                                                                                                                                                                                                                                                   |
-| [`tidb_auto_analyze_end_time`](/system-variables.md#tidb_auto_analyze_end_time)                                       | `23:59 +0000`      | The end time in a day when TiDB can perform automatic updates.                                                                                                                                                                                                                                                                                                                                                       |
-| [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640)   | `8192`             | The number of partitions that TiDB automatically analyzes when analyzing a partitioned table (that is, when automatically updating statistics on a partitioned table).                                                                                                                                                                                                                                               |
-| [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio)                                             | `0.5`              | The threshold value of automatic update.                                                                                                                                                                                                                                                                                                                                                                             |
-| [`tidb_auto_analyze_start_time`](/system-variables.md#tidb_auto_analyze_start_time)                                   | `00:00 +0000`      | The start time in a day when TiDB can perform automatic update.                                                                                                                                                                                                                                                                                                                                                      |
-| [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610)                               | `ON`               | Controls whether TiDB automatically executes `ANALYZE`.                                                                                                                                                                                                                                                                                                                                                              |
-| [`tidb_enable_auto_analyze_priority_queue`](/system-variables.md#tidb_enable_auto_analyze_priority_queue-new-in-v800) | `ON`               | Controls whether to enable the priority queue to schedule the tasks of automatically collecting statistics. When this variable is enabled, TiDB prioritizes collecting statistics for tables that are more valuable to collect, such as newly created indexes and partitioned tables with partition changes. Additionally, TiDB prioritizes tables with lower health scores, placing them at the front of the queue. |
-| [`tidb_enable_stats_owner`](/system-variables.md#tidb_enable_stats_owner-new-in-v840)                                 | `ON`               | Controls whether the corresponding TiDB instance can run automatic statistics update tasks.                                                                                                                                                                                                                                                                                                                          |
-| [`tidb_max_auto_analyze_time`](/system-variables.md#tidb_max_auto_analyze_time-new-in-v610)                           | `43200` (12 hours) | The maximum execution time of automatic `ANALYZE` tasks. The unit is second.                                                                                                                                                                                                                                                                                                                                         |
+| 系统变量 | 默认值 | 描述 |
+| --- | --- | --- |
+| [`tidb_auto_analyze_concurrency`](/system-variables.md#tidb_auto_analyze_concurrency-new-in-v840) | `1` | TiDB 集群中自动分析操作的并发数。 |
+| [`tidb_auto_analyze_end_time`](/system-variables.md#tidb_auto_analyze_end_time) | `23:59 +0000` | 一天中 TiDB 可以执行自动更新的结束时间。 |
+| [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640) | `8192` | TiDB 在分析分区表（即自动更新分区表统计信息）时，自动分析的分区数量。 |
+| [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio) | `0.5` | 自动更新的阈值。 |
+| [`tidb_auto_analyze_start_time`](/system-variables.md#tidb_auto_analyze_start_time) | `00:00 +0000` | 一天中 TiDB 可以执行自动更新的开始时间。 |
+| [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) | `ON` | 控制 TiDB 是否自动执行 `ANALYZE`。 |
+| [`tidb_enable_auto_analyze_priority_queue`](/system-variables.md#tidb_enable_auto_analyze_priority_queue-new-in-v800) | `ON` | 控制是否启用优先队列调度自动统计任务。当启用时，TiDB 优先收集对性能影响较大的表的统计信息，例如新创建的索引和分区变更的分区表。此外，TiDB 会优先处理健康评分较低的表，将其排在队列前列。 |
+| [`tidb_enable_stats_owner`](/system-variables.md#tidb_enable_stats_owner-new-in-v840) | `ON` | 控制对应的 TiDB 实例是否可以运行自动统计更新任务。 |
+| [`tidb_max_auto_analyze_time`](/system-variables.md#tidb_max_auto_analyze_time-new-in-v610) | `43200`（12 小时） | 自动 `ANALYZE` 任务的最大执行时间，单位为秒。 |
 
-When the ratio of the number of modified rows to the total number of rows of `tbl` in a table is greater than `tidb_auto_analyze_ratio`, and the current time is between `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time`, TiDB executes the `ANALYZE TABLE tbl` statement in the background to automatically update the statistics on this table.
+当表中 `tbl` 的修改行数与总行数的比值大于 `tidb_auto_analyze_ratio`，且当前时间在 `tidb_auto_analyze_start_time` 和 `tidb_auto_analyze_end_time` 之间时，TiDB 会在后台执行 `ANALYZE TABLE tbl` 语句，自动更新该表的统计信息。
 
-To avoid the situation that modifying data on a small table frequently triggers the automatic update, when a table has less than 1000 rows, modifications do not trigger the automatic update in TiDB. You can use the `SHOW STATS_META` statement to view the number of rows in a table.
+为了避免频繁修改小表数据触发自动更新，当表的行数少于 1000 行时，修改不会触发自动更新。你可以使用 `SHOW STATS_META` 语句查看表中的行数。
 
-> **Note:**
+> **注意：**
 >
-> Currently, the automatic update does not record the configuration items input at manual `ANALYZE`. Therefore, when you use the [`WITH`](/sql-statements/sql-statement-analyze-table.md) syntax to control the collecting behavior of `ANALYZE`, you need to manually set scheduled tasks to collect statistics.
+> 目前，自动更新不会记录手动 `ANALYZE` 时输入的配置项。因此，当你使用 [`WITH`](/sql-statements/sql-statement-analyze-table.md) 语法控制 `ANALYZE` 的采集行为时，需要手动设置调度任务以收集统计信息。
 
-### Manual collection {#manual-collection}
+### 手动收集 {#manual-collection}
 
-Currently, TiDB collects statistics as a full collection. You can execute the `ANALYZE TABLE` statement to collect statistics.
+目前，TiDB 以全量收集的方式收集统计信息。你可以执行 `ANALYZE TABLE` 语句进行统计信息的收集。
 
-You can perform full collection using the following syntax.
+可以使用以下语法进行全量收集。
 
--   To collect statistics of all the tables in `TableNameList`:
+-   收集 `TableNameList` 中所有表的统计信息：
 
     ```sql
     ANALYZE TABLE TableNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
--   `WITH NUM BUCKETS` specifies the maximum number of buckets in the generated histogram.
+-   `WITH NUM BUCKETS` 指定生成的直方图的最大桶数。
 
--   `WITH NUM TOPN` specifies the maximum number of the generated `TOPN`s.
+-   `WITH NUM TOPN` 指定生成的 `TOPN` 的最大数量。
 
--   `WITH NUM CMSKETCH DEPTH` specifies the depth of the CM Sketch.
+-   `WITH NUM CMSKETCH DEPTH` 指定 CM Sketch 的深度。
 
--   `WITH NUM CMSKETCH WIDTH` specifies the width of the CM Sketch.
+-   `WITH NUM CMSKETCH WIDTH` 指定 CM Sketch 的宽度。
 
--   `WITH NUM SAMPLES` specifies the number of samples.
+-   `WITH NUM SAMPLES` 指定采样次数。
 
--   `WITH FLOAT_NUM SAMPLERATE` specifies the sampling rate.
+-   `WITH FLOAT_NUM SAMPLERATE` 指定采样率。
 
-`WITH NUM SAMPLES` and `WITH FLOAT_NUM SAMPLERATE` correspond to two different algorithms of collecting samples.
+`WITH NUM SAMPLES` 和 `WITH FLOAT_NUM SAMPLERATE` 分别对应两种不同的采样算法。
 
-See [Histograms](#histogram), [Top-N](#top-n) and [CMSketch](#count-min-sketch) (Count-Min Sketch) for detailed explanations. For `SAMPLES`/`SAMPLERATE`, see [Improve collection performance](#improve-collection-performance).
+详细说明请参见 [Histograms](#histogram)、[Top-N](#top-n) 和 [CMSketch](#count-min-sketch)（Count-Min Sketch）。关于 `SAMPLES`/`SAMPLERATE`，请参见 [Improve collection performance](#improve-collection-performance)。
 
-For information on persisting the options for easier reuse, see [Persist `ANALYZE` configurations](#persist-analyze-configurations).
+关于持久化配置以便重复使用的信息，参见 [Persist `ANALYZE` configurations](#persist-analyze-configurations)。
 
-## Types of statistics {#types-of-statistics}
+## 统计信息的类型 {#types-of-statistics}
 
-This section describes three types of statistics: histogram, Count-Min Sketch, and Top-N.
+本节介绍三种统计信息：直方图、Count-Min Sketch 和 Top-N。
 
-### Histogram {#histogram}
+### 直方图 {#histogram}
 
-Histogram statistics are used by the optimizer to estimate selectivity of an interval or range predicate, and might also be used to determine the number of distinct values within a column for estimation of equal/IN predicates in Version 2 of statistics (refer to [Versions of Statistics](#versions-of-statistics)).
+直方图统计信息被优化器用来估算区间或范围谓词的选择性，也可能用于估算某列中不同值的数量，以便在统计版本 2 中估算相等/IN 谓词（详见 [Versions of Statistics](#versions-of-statistics)）。
 
-A histogram is an approximate representation of the distribution of data. It divides the entire range of values into a series of buckets, and uses simple data to describe each bucket, such as the number of values ​​falling in the bucket. In TiDB, an equal-depth histogram is created for the specific columns of each table. The equal-depth histogram can be used to estimate the interval query.
+直方图是数据分布的近似表示。它将整个值域划分为一系列桶，并用简单的数据描述每个桶，例如落在该桶中的值的数量。在 TiDB 中，为每个表的特定列创建等深度直方图。等深度直方图可用于估算区间查询。
 
-Here "equal-depth" means that the number of values ​​falling into each bucket is as equal as possible. For example, for a given set {1.6, 1.9, 1.9, 2.0, 2.4, 2.6, 2.7, 2.7, 2.8, 2.9, 3.4, 3.5}, you want to generate 4 buckets. The equal-depth histogram is as follows. It contains four buckets [1.6, 1.9], [2.0, 2.6], [2.7, 2.8], [2.9, 3.5]. The bucket depth is 3.
+这里的“等深度”意味着每个桶中的值数量尽可能相等。例如，对于给定集合 {1.6, 1.9, 1.9, 2.0, 2.4, 2.6, 2.7, 2.7, 2.8, 2.9, 3.4, 3.5}，你希望生成 4 个桶。等深度直方图如下。它包含四个桶 [1.6, 1.9]、[2.0, 2.6]、[2.7, 2.8] 和 [2.9, 3.5]。桶深为 3。
 
 ![Equal-depth Histogram Example](/media/statistics-1.png)
 
-For details about the parameter that determines the upper limit to the number of histogram buckets, refer to [Manual Collection](#manual-collection). When the number of buckets is larger, the accuracy of the histogram is higher; however, higher accuracy is at the cost of the usage of memory resources. You can adjust this number appropriately according to the actual scenario.
+关于决定直方图桶数上限的参数的详细信息，参见 [Manual Collection](#manual-collection)。桶数越多，直方图的精度越高；但同时会占用更多内存资源。你可以根据实际场景适当调整。
 
 ### Count-Min Sketch {#count-min-sketch}
 
-> **Note:**
+> **注意：**
 >
-> Count-Min Sketch is used in statistics Version 1 only for equal/IN predicate selectivity estimation. In Version 2, Histogram statistics are used instead due to challenges in managing Count-Min sketch to avoid collisions as discussed below.
+> Count-Min Sketch 仅在统计版本 1 中用于相等/IN 谓词的选择性估算。在版本 2 中，改用直方图统计信息，原因在于管理 Count-Min Sketch 以避免碰撞存在挑战（详见下文讨论）。
 
-Count-Min Sketch is a hash structure. When processing an equivalence query such as `a = 1` or an `IN` query (for example, `a IN (1, 2, 3)`), TiDB uses this data structure for estimation.
+Count-Min Sketch 是一种哈希结构。当处理等值查询如 `a = 1` 或 `IN` 查询（例如，`a IN (1, 2, 3)`）时，TiDB 使用此数据结构进行估算。
 
-A hash collision might occur since Count-Min Sketch is a hash structure. In the [`EXPLAIN`](/sql-statements/sql-statement-explain.md) statement, if the estimate of the equivalent query deviates greatly from the actual value, it can be considered that a larger value and a smaller value have been hashed together. In this case, you can take one of the following ways to avoid the hash collision:
+由于 Count-Min Sketch 是哈希结构，可能会发生哈希碰撞。在 [`EXPLAIN`](/sql-statements/sql-statement-explain.md) 语句中，如果估算的等值查询结果与实际值偏差较大，可以认为较大的值和较小的值被哈希到了一起。此时，可以采取以下措施避免哈希碰撞：
 
--   Modify the `WITH NUM TOPN` parameter. TiDB stores the high-frequency (top x) data separately, with the other data stored in Count-Min Sketch. Therefore, to prevent a larger value and a smaller value from being hashed together, you can increase the value of `WITH NUM TOPN`. In TiDB, its default value is 20. The maximum value is 1024. For more information about this parameter, see [Manual collection](#manual-collection).
--   Modify two parameters `WITH NUM CMSKETCH DEPTH` and `WITH NUM CMSKETCH WIDTH`. Both affect the number of hash buckets and the collision probability. You can increase the values of the two parameters appropriately according to the actual scenario to reduce the probability of hash collision, but at the cost of higher memory usage of statistics. In TiDB, the default value of `WITH NUM CMSKETCH DEPTH` is 5, and the default value of `WITH NUM CMSKETCH WIDTH` is 2048. For more information about the two parameters, see [Manual collection](#manual-collection).
+-   修改 `WITH NUM TOPN` 参数。TiDB 将高频（Top x）数据单独存储，其他数据存储在 Count-Min Sketch 中。因此，为了防止较大的值和较小的值被哈希到一起，可以增加 `WITH NUM TOPN` 的值。TiDB 的默认值为 20，最大值为 1024。关于此参数的更多信息，参见 [Manual collection](#manual-collection)。
+-   修改两个参数 `WITH NUM CMSKETCH DEPTH` 和 `WITH NUM CMSKETCH WIDTH`。这两个参数影响哈希桶的数量和碰撞概率。可以根据实际场景适当增大这两个参数的值，以降低碰撞概率，但会增加统计信息的内存占用。TiDB 中，`WITH NUM CMSKETCH DEPTH` 的默认值为 5，`WITH NUM CMSKETCH WIDTH` 的默认值为 2048。关于这两个参数的详细信息，参见 [Manual collection](#manual-collection)。
 
 ### Top-N {#top-n}
 
-Top-N values are values with the top N occurrences in a column or index. Top-N statistics are often referred to as frequency statistics or data skew.
+Top-N 值是指在某列或索引中出现频次最高的前 N 个值。Top-N 统计信息通常被称为频率统计或数据偏斜。
 
-TiDB records the values and occurrences of Top-N values. Here `N` is controlled by the `WITH NUM TOPN` parameter. The default value is 20, meaning the top 20 most frequent values are collected. The maximum value is 1024. For details about the parameter, see [Manual collection](#manual-collection).
+TiDB 记录 Top-N 值及其出现次数。这里的 `N` 由 `WITH NUM TOPN` 参数控制。默认值为 20，表示收集最频繁的前 20 个值。最大值为 1024。关于此参数的详细信息，参见 [Manual collection](#manual-collection)。
 
-## Selective statistics collection {#selective-statistics-collection}
+## 选择性统计信息收集 {#selective-statistics-collection}
 
-This section describes how to collect statistics selectively.
+本节介绍如何有选择性地收集统计信息。
 
-### Collect statistics on indexes {#collect-statistics-on-indexes}
+### 收集索引的统计信息 {#collect-statistics-on-indexes}
 
-To collect statistics on all indexes in `IndexNameList` in `TableName`, use the following syntax:
+要收集 `TableName` 中所有索引的统计信息，使用以下语法：
 
 ```sql
 ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
 ```
 
-When `IndexNameList` is empty, this syntax collects statistics on all indexes in `TableName`.
+当 `IndexNameList` 为空时，此语法会收集 `TableName` 中所有索引的统计信息。
 
-> **Note:**
+> **注意：**
 >
-> To ensure that the statistical information before and after the collection is consistent, when `tidb_analyze_version` is `2`, this syntax collects statistics on the indexed columns and all indexes.
+> 为确保统计信息前后保持一致，当 `tidb_analyze_version` 为 `2` 时，此语法会收集索引列和所有索引的统计信息。
 
-### Collect statistics on some columns {#collect-statistics-on-some-columns}
+### 收集部分列的统计信息 {#collect-statistics-on-some-columns}
 
-When TiDB executes SQL statements, the optimizer uses statistics for only a subset of columns in most cases. For example, columns that appear in the `WHERE`, `JOIN`, `ORDER BY`, and `GROUP BY` clauses. These columns are referred to as predicate columns.
+在 TiDB 执行 SQL 语句时，优化器在大多数情况下只使用部分列的统计信息。例如，出现在 `WHERE`、`JOIN`、`ORDER BY` 和 `GROUP BY` 子句中的列。这些列被称为谓词列。
 
-If a table has many columns, collecting statistics on all the columns can cause a large overhead. To reduce the overhead, you can collect statistics for only specific columns (that you choose) or `PREDICATE COLUMNS` to be used by the optimizer. To persist the column list of any subset of columns for reuse in future, see [Persist column configurations](#persist-column-configurations).
+如果表有许多列，收集所有列的统计信息会带来较大开销。为减少开销，你可以只收集特定列（你选择的列）或供优化器使用的 `PREDICATE COLUMNS` 的统计信息。若要持久化任何列子集的列列表以便未来重复使用，参见 [Persist column configurations](#persist-column-configurations)。
 
-> **Note:**
+> **注意：**
 >
-> -   Collecting statistics on predicate columns is only applicable for [`tidb_analyze_version = 2`](/system-variables.md#tidb_analyze_version-new-in-v510).
-> -   Starting from TiDB v7.2.0, TiDB also introduces the [`tidb_analyze_skip_column_types`](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720) system variable, indicating which types of columns are skipped for statistics collection when executing the `ANALYZE` command to collect statistics. The system variable is only applicable for `tidb_analyze_version = 2`.
+> -   仅在 [`tidb_analyze_version = 2`](/system-variables.md#tidb_analyze_version-new-in-v510) 时，收集谓词列的统计信息才适用。
+> -   从 TiDB v7.2.0 开始，TiDB 还引入了 [`tidb_analyze_skip_column_types`](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720) 系统变量，指示在执行 `ANALYZE` 收集统计信息时跳过哪些类型的列。该系统变量仅在 `tidb_analyze_version = 2` 时适用。
 
--   To collect statistics on specific columns, use the following syntax:
+-   若要对特定列收集统计信息，使用以下语法：
 
     ```sql
     ANALYZE TABLE TableName COLUMNS ColumnNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
-    In the syntax, `ColumnNameList` specifies the name list of the target columns. If you need to specify more than one column, use comma `,` to separate the column names. For example, `ANALYZE table t columns a, b`. Besides collecting statistics on the specific columns in a specific table, this syntax collects statistics on the indexed columns and all indexes in that table at the same time.
+    语法中的 `ColumnNameList` 指定目标列的名称列表。如果需要指定多个列，用逗号 `,` 分隔。例如，`ANALYZE table t columns a, b`。除了对特定表的特定列收集统计信息外，此语法还会同时收集该表中索引列和所有索引的统计信息。
 
--   To collect statistics on `PREDICATE COLUMNS`, use the following syntax:
+-   若要对 `PREDICATE COLUMNS` 收集统计信息，使用以下语法：
 
     ```sql
     ANALYZE TABLE TableName PREDICATE COLUMNS [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
@@ -159,180 +159,180 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
     <CustomContent platform="tidb">
 
-    TiDB always writes the `PREDICATE COLUMNS` information to the [`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables) system table every 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease).
+    TiDB 会每 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease) 将 `PREDICATE COLUMNS` 信息写入 [`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables) 系统表。
 
     </CustomContent>
 
     <CustomContent platform="tidb-cloud">
 
-    TiDB always writes the `PREDICATE COLUMNS` information to the [`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables) system table every 300 seconds.
+    TiDB 会每 300 秒将 `PREDICATE COLUMNS` 信息写入 [`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables) 系统表。
 
     </CustomContent>
 
-    In addition to collecting statistics on `PREDICATE COLUMNS` in a specific table, this syntax collects statistics on indexed columns and all indexes in that table at the same time.
+    除了收集特定表中 `PREDICATE COLUMNS` 的统计信息外，此语法还会同时收集索引列和所有索引的统计信息。
 
-    > **Note:**
+    > **注意：**
     >
-    > -   If the [`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables) system table does not contain any `PREDICATE COLUMNS` recorded for that table, the preceding syntax collects statistics on indexed columns and all indexes in that table.
-    > -   Any columns excluded from collection (either by manually listing columns or using `PREDICATE COLUMNS`) will not have their statistics overwritten. When executing a new type of SQL query, the optimizer will use the old statistics for such columns if it exists, or pseudo column statistics if columns never had statistics collected. The next ANALYZE using `PREDICATE COLUMNS` will collect the statistics on those columns.
+    > -   如果 [`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables) 系统表中没有记录该表的任何 `PREDICATE COLUMNS`，则上述语法会收集索引列和所有索引的统计信息。
+    > -   被排除在收集之外的列（无论是手动列出还是使用 `PREDICATE COLUMNS`）不会被覆盖统计信息。当执行新类型的 SQL 查询时，优化器会使用旧的统计信息（如果存在），或者在列从未收集统计信息时使用伪列统计信息。下一次使用 `PREDICATE COLUMNS` 进行的 `ANALYZE` 会重新收集这些列的统计信息。
 
--   To collect statistics on all columns and indexes, use the following syntax:
+-   若要收集所有列和索引的统计信息，使用以下语法：
 
     ```sql
     ANALYZE TABLE TableName ALL COLUMNS [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
-### Collect statistics on partitions {#collect-statistics-on-partitions}
+### 收集分区的统计信息 {#collect-statistics-on-partitions}
 
--   To collect statistics on all partitions in `PartitionNameList` in `TableName`, use the following syntax:
+-   要收集 `TableName` 中所有分区 `PartitionNameList` 的统计信息，使用以下语法：
 
     ```sql
     ANALYZE TABLE TableName PARTITION PartitionNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
--   To collect index statistics on all partitions in `PartitionNameList` in `TableName`, use the following syntax:
+-   要收集 `TableName` 中所有分区 `PartitionNameList` 的索引统计信息，使用以下语法：
 
     ```sql
     ANALYZE TABLE TableName PARTITION PartitionNameList INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
--   If you only need to [collect statistics on some columns](/statistics.md#collect-statistics-on-some-columns) of some partitions in a table, use the following syntax:
+-   如果你只需要对某些分区的某些列进行 [收集统计信息](/statistics.md#collect-statistics-on-some-columns)，可以使用以下语法：
 
     ```sql
     ANALYZE TABLE TableName PARTITION PartitionNameList [COLUMNS ColumnNameList|PREDICATE COLUMNS|ALL COLUMNS] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
-#### Collect statistics of partitioned tables in dynamic pruning mode {#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode}
+#### 在动态修剪模式下收集分区表的统计信息 {#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode}
 
-When accessing partitioned tables in [dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode) (which is the default since v6.3.0), TiDB collects table-level statistics, meaning global statistics of partitioned tables. Currently, global statistics are aggregated from statistics of all partitions. In dynamic pruning mode, an update to the statistics in any partition of a table can trigger an update to the global statistics for that table.
+在 [动态修剪模式](/partitioned-table.md#dynamic-pruning-mode)（自 v6.3.0 起为默认模式）下访问分区表时，TiDB 会收集表级统计信息，即分区表的全局统计信息。目前，全球统计信息是由所有分区的统计信息聚合而成。在动态修剪模式下，任何分区的统计信息更新都可能触发该表的全局统计信息更新。
 
-If the statistics of some partitions are empty, or statistics of some columns are missing in some partitions, then the collection behavior is controlled by the [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730) variable:
+如果某些分区的统计信息为空，或某些列的统计信息在某些分区中缺失，则统计信息的收集行为由 [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730) 变量控制：
 
--   When an update to the global statistics is triggered and [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730) is `OFF`:
+-   当触发全局统计信息更新且 [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730) 为 `OFF` 时：
 
-    -   If some partitions have no statistics (such as a new partition that has never been analyzed), global statistics generation is interrupted and a warning message is displayed saying that no statistics are available on partitions.
+    -   如果某些分区没有统计信息（如新分区从未分析过），则会中断全局统计信息的生成，并显示警告信息，提示没有分区的统计信息。
 
-    -   If statistics of some columns are absent in specific partitions (different columns are specified for analyzing in these partitions), global statistics generation is interrupted when statistics of these columns are aggregated, and a warning message is displayed saying that statistics of some columns are absent in specific partitions.
+    -   如果某些分区中的某些列没有统计信息（在这些分区中分析的列不同），在聚合这些列的统计信息时会中断全局统计信息的生成，并显示警告信息，提示某些列在特定分区中缺失。
 
--   When an update to the global statistics is triggered and [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730) is `ON`:
+-   当触发全局统计信息更新且 [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730) 为 `ON` 时：
 
-    -   If statistics of all or some columns are missing for some partitions, TiDB skips these missing partition statistics when generating global statistics so the generation of global statistics is not affected.
+    -   如果某些分区的所有或部分列的统计信息缺失，TiDB 会在生成全局统计信息时跳过这些缺失的分区统计信息，从而不影响全局统计信息的生成。
 
-In dynamic pruning mode, the `ANALYZE` configurations of partitions and tables should be the same. Therefore, if you specify the `COLUMNS` configuration following the `ANALYZE TABLE TableName PARTITION PartitionNameList` statement or the `OPTIONS` configuration following `WITH`, TiDB will ignore them and return a warning.
+在动态修剪模式下，分区和表的 `ANALYZE` 配置应保持一致。因此，如果你在执行 `ANALYZE TABLE TableName PARTITION PartitionNameList` 语句时指定了 `COLUMNS` 配置，或在 `WITH` 后指定了 `OPTIONS` 配置，TiDB 会忽略它们并发出警告。
 
-## Improve collection performance {#improve-collection-performance}
+## 提升采集性能 {#improve-collection-performance}
 
-> **Note:**
+> **注意：**
 >
-> -   The execution time of `ANALYZE TABLE` in TiDB might be longer than that in MySQL or InnoDB. In InnoDB, only a small number of pages are sampled, while by default in TiDB a comprehensive set of statistics are completely rebuilt.
+> -   TiDB 中 `ANALYZE TABLE` 的执行时间可能比 MySQL 或 InnoDB 更长。在 InnoDB 中，只采样少量页面，而 TiDB 默认会完全重建一套全面的统计信息。
 
-TiDB provides two options to improve the performance of statistics collection:
+TiDB 提供两种方式提升统计信息采集的性能：
 
--   Collecting statistics on a subset of the columns. See [Collecting statistics on some columns](#collect-statistics-on-some-columns).
--   Sampling.
+-   只对部分列进行统计信息采集。详见 [Collecting statistics on some columns](#collect-statistics-on-some-columns)。
+-   采样。
 
-### Statistics sampling {#statistics-sampling}
+### 统计采样 {#statistics-sampling}
 
-Sampling is available via two separate options of the `ANALYZE` statement - with each corresponding to a different collection algorithm:
+采样通过 `ANALYZE` 语句的两个不同选项实现，每个对应一种不同的采集算法：
 
--   `WITH NUM SAMPLES` specifies the size of the sampling set, which is implemented in the reservoir sampling method in TiDB. When a table is large, it is not recommended to use this method to collect statistics. Because the intermediate result set of the reservoir sampling contains redundant results, it causes additional pressure on resources such as memory.
--   `WITH FLOAT_NUM SAMPLERATE` is a sampling method introduced in v5.3.0. With the value range `(0, 1]`, this parameter specifies the sampling rate. It is implemented in the way of Bernoulli sampling in TiDB, which is more suitable for sampling larger tables and performs better in collection efficiency and resource usage.
+-   `WITH NUM SAMPLES` 指定采样集的大小，在 TiDB 中采用蓄水池采样法（reservoir sampling）。当表很大时，不建议使用此方法收集统计信息，因为蓄水池采样的中间结果集包含冗余结果，会增加内存等资源压力。
+-   `WITH FLOAT_NUM SAMPLERATE` 是在 v5.3.0 引入的采样方法。其值范围为 `(0, 1]`，表示采样率。TiDB 采用伯努利采样（Bernoulli sampling）实现，更适合采样较大表，且在采集效率和资源使用方面表现更优。
 
-Before v5.3.0, TiDB uses the reservoir sampling method to collect statistics. Since v5.3.0, the TiDB Version 2 statistics uses the Bernoulli sampling method to collect statistics by default. To re-use the reservoir sampling method, you can use the `WITH NUM SAMPLES` statement.
+在 v5.3.0 之前，TiDB 使用蓄水池采样法收集统计信息。从 v5.3.0 起，TiDB 版本 2 的统计信息默认采用伯努利采样法。若要重新使用蓄水池采样法，可以使用 `WITH NUM SAMPLES` 语句。
 
-The current sampling rate is calculated based on an adaptive algorithm. When you can observe the number of rows in a table using [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md), you can use this number of rows to calculate the sampling rate corresponding to 100,000 rows. If you cannot observe this number, you can use the sum of all the values in the `APPROXIMATE_KEYS` column in the results of [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md) of the table as another reference to calculate the sampling rate.
+当前采样率基于自适应算法计算。当你可以通过 [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md) 观察到表中的行数时，可以用此行数计算对应 10 万行的采样率。如果无法观察到此数字，可以用 [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md) 结果中 `APPROXIMATE_KEYS` 列的所有值之和作为参考，计算采样率。
 
-> **Note:**
+> **注意：**
 >
-> Normally, `STATS_META` is more credible than `APPROXIMATE_KEYS`. However, when the result of `STATS_META` is much smaller than the result of `APPROXIMATE_KEYS`, it is recommended that you use `APPROXIMATE_KEYS` to calculate the sampling rate.
+> 通常，`STATS_META` 比 `APPROXIMATE_KEYS` 更可靠。但当 `STATS_META` 的结果远小于 `APPROXIMATE_KEYS` 时，建议使用 `APPROXIMATE_KEYS` 来计算采样率。
 
-### The memory quota for collecting statistics {#the-memory-quota-for-collecting-statistics}
+### 统计信息的内存配额 {#the-memory-quota-for-collecting-statistics}
 
-> **Warning:**
+> **警告：**
 >
-> Currently, the `ANALYZE` memory quota is an experimental feature, and the memory statistics might be inaccurate in production environments.
+> 目前，`ANALYZE` 的内存配额是实验性功能，生产环境中统计信息的内存统计可能不准确。
 
-Since TiDB v6.1.0, you can use the system variable [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610) to control the memory quota for collecting statistics in TiDB.
+自 TiDB v6.1.0 起，你可以使用系统变量 [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610) 来控制 TiDB 中收集统计信息的内存配额。
 
-To set a proper value of `tidb_mem_quota_analyze`, consider the data size of the cluster. When the default sampling rate is used, the main considerations are the number of columns, the size of column values, and the memory configuration of TiDB. Consider the following suggestions when you configure the maximum and minimum values:
+在配置 `tidb_mem_quota_analyze` 时，应考虑集群的数据规模。当使用默认采样率时，主要考虑列数、列值大小和 TiDB 的内存配置。配置最大值和最小值时，建议参考如下：
 
-> **Note:**
+> **注意：**
 >
-> The following suggestions are for reference only. You need to configure the values based on the real scenario.
+> 以下建议仅供参考，实际配置应根据具体场景调整。
 
--   Minimum value: should be greater than the maximum memory usage when TiDB collects statistics from the table with the most columns. An approximate reference: when TiDB collects statistics from a table with 20 columns using the default configuration, the maximum memory usage is about 800 MiB; when TiDB collects statistics from a table with 160 columns using the default configuration, the maximum memory usage is about 5 GiB.
--   Maximum value: should be less than the available memory when TiDB is not collecting statistics.
+-   最小值：应大于 TiDB 从行数最多的表收集统计信息时的最大内存使用量。大致参考：使用默认配置从 20 列的表收集统计信息时，最大内存约为 800 MiB；从 160 列的表收集时，最大内存约为 5 GiB。
+-   最大值：应小于 TiDB 不收集统计信息时的可用内存。
 
-## Persist ANALYZE configurations {#persist-analyze-configurations}
+## 持久化 `ANALYZE` 配置 {#persist-analyze-configurations}
 
-Since v5.4.0, TiDB supports persisting some `ANALYZE` configurations. With this feature, the existing configurations can be easily reused for future statistics collection.
+自 v5.4.0 起，TiDB 支持持久化部分 `ANALYZE` 配置。通过此功能，可以方便地在未来重复使用已有的配置。
 
-The following are the `ANALYZE` configurations that support persistence:
+支持持久化的 `ANALYZE` 配置如下表：
 
-| Configurations                  | Corresponding ANALYZE syntax                                                               |
-| ------------------------------- | ------------------------------------------------------------------------------------------ |
-| The number of histogram buckets | `WITH NUM BUCKETS`                                                                         |
-| The number of Top-N             | `WITH NUM TOPN`                                                                            |
-| The number of samples           | `WITH NUM SAMPLES`                                                                         |
-| The sampling rate               | `WITH FLOATNUM SAMPLERATE`                                                                 |
-| The `ANALYZE` column type       | AnalyzeColumnOption ::= ( 'ALL COLUMNS' | 'PREDICATE COLUMNS' | 'COLUMNS' ColumnNameList ) |
-| The `ANALYZE` column            | ColumnNameList ::= Identifier ( ',' Identifier )*                                          |
+| 配置项 | 对应的 `ANALYZE` 语法 |
+| --- | --- |
+| 直方图桶数 | `WITH NUM BUCKETS` |
+| Top-N 数量 | `WITH NUM TOPN` |
+| 采样次数 | `WITH NUM SAMPLES` |
+| 采样率 | `WITH FLOATNUM SAMPLERATE` |
+| `ANALYZE` 列类型 | AnalyzeColumnOption ::= ( 'ALL COLUMNS' | 'PREDICATE COLUMNS' | 'COLUMNS' ColumnNameList ) |
+| `ANALYZE` 列 | ColumnNameList ::= Identifier ( ',' Identifier )* |
 
-### Enable ANALYZE configuration persistence {#enable-analyze-configuration-persistence}
+### 启用 `ANALYZE` 配置持久化 {#enable-analyze-configuration-persistence}
 
 <CustomContent platform="tidb">
 
-The `ANALYZE` configuration persistence feature is enabled by default (the system variable `tidb_analyze_version` is `2` and `tidb_persist_analyze_options` is `ON` by default).
+`ANALYZE` 配置持久化功能默认启用（系统变量 `tidb_analyze_version` 为 `2`，`tidb_persist_analyze_options` 默认为 `ON`）。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-The `ANALYZE` configuration persistence feature is disabled by default. To enable the feature, ensure that the system variable `tidb_persist_analyze_options` is `ON` and set the system variable `tidb_analyze_version` to `2`.
+`ANALYZE` 配置持久化功能默认禁用。若要启用此功能，确保系统变量 `tidb_persist_analyze_options` 为 `ON`，并将 `tidb_analyze_version` 设置为 `2`。
 
 </CustomContent>
 
-You can use this feature to record the persistence configurations specified in the `ANALYZE` statement when executing the statement manually. Once recorded, the next time TiDB automatically updates statistics or you manually collect statistics without specifying these configuration, TiDB will collect statistics according to the recorded configurations.
+你可以在手动执行 `ANALYZE` 语句时，利用此功能记录所指定的持久化配置。一旦记录，TiDB 在自动更新统计信息或你手动收集统计信息（未指定配置）时，会按照已记录的配置进行。
 
-To query the configuration persisted on a specific table used for auto analyze operations, you can use the following SQL statement:
+若要查询某个表的持久化配置（用于自动分析操作），可以使用以下 SQL：
 
 ```sql
 SELECT sample_num, sample_rate, buckets, topn, column_choice, column_ids FROM mysql.analyze_options opt JOIN information_schema.tables tbl ON opt.table_id = tbl.tidb_table_id WHERE tbl.table_schema = '{db_name}' AND tbl.table_name = '{table_name}';
 ```
 
-TiDB will overwrite the previously recorded persistent configuration using the new configurations specified by the latest `ANALYZE` statement. For example, if you run `ANALYZE TABLE t WITH 200 TOPN;`, it will set the top 200 values in the `ANALYZE` statement. Subsequently, executing `ANALYZE TABLE t WITH 0.1 SAMPLERATE;` will set both the top 200 values and a sampling rate of 0.1 for auto `ANALYZE` statements, similar to `ANALYZE TABLE t WITH 200 TOPN, 0.1 SAMPLERATE;`.
+TiDB 会用最新 `ANALYZE` 语句指定的配置覆盖之前的持久化配置。例如，执行 `ANALYZE TABLE t WITH 200 TOPN;` 后，会将 Top-N 设置为 200。随后执行 `ANALYZE TABLE t WITH 0.1 SAMPLERATE;` 时，既会保持 Top-N 为 200，又会设置采样率为 0.1，效果类似于 `ANALYZE TABLE t WITH 200 TOPN, 0.1 SAMPLERATE;`。
 
-### Disable ANALYZE configuration persistence {#disable-analyze-configuration-persistence}
+### 禁用 `ANALYZE` 配置持久化 {#disable-analyze-configuration-persistence}
 
-To disable the `ANALYZE` configuration persistence feature, set the `tidb_persist_analyze_options` system variable to `OFF`. Because the `ANALYZE` configuration persistence feature is not applicable to `tidb_analyze_version = 1`, setting `tidb_analyze_version = 1` can also disable the feature.
+要禁用 `ANALYZE` 配置持久化功能，可以将系统变量 `tidb_persist_analyze_options` 设置为 `OFF`。由于此功能不适用于 `tidb_analyze_version = 1`，设置 `tidb_analyze_version = 1` 也会禁用此功能。
 
-After disabling the `ANALYZE` configuration persistence feature, TiDB does not clear the persisted configuration records. Therefore, if you enable this feature again, TiDB continues to collect statistics using the previously recorded persistent configurations.
+禁用后，TiDB 不会清除已持久化的配置记录。因此，如果你再次启用此功能，TiDB 仍会使用之前记录的配置进行统计信息收集。
 
-> **Note:**
+> **注意：**
 >
-> When you enable the `ANALYZE` configuration persistence feature again, if the previously recorded persistence configurations are no longer applicable to the latest data, you need to execute the `ANALYZE` statement manually and specify the new persistence configurations.
+> 重新启用 `ANALYZE` 配置持久化后，如果之前的持久化配置不再适用最新数据，你需要手动执行 `ANALYZE` 并指定新的持久化配置。
 
-### Persist column configurations {#persist-column-configurations}
+### 持久化列配置 {#persist-column-configurations}
 
-If you want to persist the column configuration in the `ANALYZE` statement (including `COLUMNS ColumnNameList`, `PREDICATE COLUMNS`, and `ALL COLUMNS`), set the value of the `tidb_persist_analyze_options` system variable to `ON` to enable the [ANALYZE configuration persistence](#persist-analyze-configurations) feature. After enabling the ANALYZE configuration persistence feature:
+如果你希望在 `ANALYZE` 语句中持久化列配置（包括 `COLUMNS ColumnNameList`、`PREDICATE COLUMNS` 和 `ALL COLUMNS`），请将系统变量 `tidb_persist_analyze_options` 设置为 `ON`，以启用 [ANALYZE 配置持久化](#persist-analyze-configurations) 功能。启用后：
 
--   When TiDB collects statistics automatically or when you manually collect statistics by executing the `ANALYZE` statement without specifying the column configuration, TiDB continues using the previously persisted configuration for statistics collection.
--   When you manually execute the `ANALYZE` statement multiple times with column configuration specified, TiDB overwrites the previously recorded persistent configuration using the new configuration specified by the latest `ANALYZE` statement.
+-   当 TiDB 自动收集统计信息或你手动执行 `ANALYZE` 时未指定列配置，TiDB 会继续使用之前持久化的配置。
+-   当你多次手动执行带列配置的 `ANALYZE` 时，TiDB 会用最新的配置覆盖之前的持久化配置。
 
-To locate `PREDICATE COLUMNS` and columns on which statistics have been collected, use the [`SHOW COLUMN_STATS_USAGE`](/sql-statements/sql-statement-show-column-stats-usage.md) statement.
+你可以使用 [`SHOW COLUMN_STATS_USAGE`](/sql-statements/sql-statement-show-column-stats-usage.md) 查看已收集统计信息的列。
 
-In the following example, after executing `ANALYZE TABLE t PREDICATE COLUMNS;`, TiDB collects statistics on columns `b`, `c`, and `d`, where column `b` is a `PREDICATE COLUMN` and columns `c` and `d` are index columns.
+以下示例中，执行 `ANALYZE TABLE t PREDICATE COLUMNS;` 后，TiDB 会对列 `b`、`c` 和 `d` 进行统计，其中列 `b` 为 `PREDICATE COLUMN`，列 `c` 和 `d` 为索引列。
 
 ```sql
 CREATE TABLE t (a INT, b INT, c INT, d INT, INDEX idx_c_d(c, d));
 Query OK, 0 rows affected (0.00 sec)
 
--- The optimizer uses the statistics on column b in this query.
+-- 优化器在此查询中使用列 b 的统计信息。
 SELECT * FROM t WHERE b > 1;
 Empty set (0.00 sec)
 
--- After waiting for a period of time (100 * stats-lease), TiDB writes the collected `PREDICATE COLUMNS` to mysql.column_stats_usage.
--- Specify `last_used_at IS NOT NULL` to show the `PREDICATE COLUMNS` collected by TiDB.
+-- 等待一段时间（100 * stats-lease），TiDB 会将收集到的 `PREDICATE COLUMNS` 写入 mysql.column_stats_usage。
+-- 指定 `last_used_at IS NOT NULL` 以显示 TiDB 收集的 `PREDICATE COLUMNS`。
 SHOW COLUMN_STATS_USAGE
 WHERE db_name = 'test' AND table_name = 't' AND last_used_at IS NOT NULL;
 +---------+------------+----------------+-------------+---------------------+------------------+
@@ -345,7 +345,7 @@ WHERE db_name = 'test' AND table_name = 't' AND last_used_at IS NOT NULL;
 ANALYZE TABLE t PREDICATE COLUMNS;
 Query OK, 0 rows affected, 1 warning (0.03 sec)
 
--- Specify `last_analyzed_at IS NOT NULL` to show the columns for which statistics have been collected.
+-- 指定 `last_analyzed_at IS NOT NULL` 以显示已收集统计信息的列。
 SHOW COLUMN_STATS_USAGE
 WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
 +---------+------------+----------------+-------------+---------------------+---------------------+
@@ -358,36 +358,36 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
 3 rows in set (0.00 sec)
 ```
 
-## Versions of statistics {#versions-of-statistics}
+## 统计信息的版本 {#versions-of-statistics}
 
-The [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510) variable controls the statistics collected by TiDB. Currently, two versions of statistics are supported: `tidb_analyze_version = 1` and `tidb_analyze_version = 2`.
+系统变量 [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510) 控制 TiDB 收集的统计信息。目前支持两个版本：`tidb_analyze_version = 1` 和 `tidb_analyze_version = 2`。
 
--   For TiDB Self-Managed, the default value of this variable changes from `1` to `2` starting from v5.3.0.
--   For TiDB Cloud, the default value of this variable changes from `1` to `2` starting from v6.5.0.
--   If your cluster is upgraded from an earlier version, the default value of `tidb_analyze_version` does not change after the upgrade.
+-   对于 TiDB 自托管版本，从 v5.3.0 起，默认值由 `1` 改为 `2`。
+-   对于 TiDB 云版本，从 v6.5.0 起，默认值由 `1` 改为 `2`。
+-   如果你的集群是从早期版本升级而来，升级后 `tidb_analyze_version` 的默认值不会改变。
 
-Version 2 is preferred, and will continue to be enhanced to ultimately replace Version 1 completely. Compared to Version 1, Version 2 improves the accuracy of many of the statistics collected for larger data volumes. Version 2 also improves collection performance by removing the need to collect Count-Min sketch statistics for predicate selectivity estimation, and also supporting automated collection only on selected columns (see [Collecting statistics on some columns](#collect-statistics-on-some-columns)).
+推荐使用版本 2，并会持续增强，最终完全取代版本 1。相比版本 1，版本 2 改善了对大数据量统计信息的准确性。版本 2 还通过去除对谓词选择性估算中 Count-Min Sketch 统计的需求，以及支持只对部分列自动采集，提升了采集性能（详见 [Collecting statistics on some columns](#collect-statistics-on-some-columns)）。
 
-The following table lists the information collected by each version for usage in the optimizer estimates:
+以下表列出每个版本收集的统计信息，用于优化器估算的对比：
 
-| Information                           | Version 1                                      | Version 2                               |
-| ------------------------------------- | ---------------------------------------------- | --------------------------------------- |
-| The total number of rows in the table | ⎷                                              | ⎷                                       |
-| Equal/IN predicate estimation         | ⎷ (Column/Index Top-N &#x26; Count-Min Sketch) | ⎷ (Column/Index Top-N &#x26; Histogram) |
-| Range predicate estimation            | ⎷ (Column/Index Top-N &#x26; Histogram)        | ⎷ (Column/Index Top-N &#x26; Histogram) |
-| `NULL` predicate estimation           | ⎷                                              | ⎷                                       |
-| The average length of columns         | ⎷                                              | ⎷                                       |
-| The average length of indexes         | ⎷                                              | ⎷                                       |
+| 信息 | 版本 1 | 版本 2 |
+| --- | --- | --- |
+| 表中的总行数 | ⎷ | ⎷ |
+| 相等/IN 谓词估算 | ⎷（列/索引 Top-N & Count-Min Sketch） | ⎷（列/索引 Top-N & Histogram） |
+| 区间谓词估算 | ⎷（列/索引 Top-N & Histogram） | ⎷（列/索引 Top-N & Histogram） |
+| `NULL` 谓词估算 | ⎷ | ⎷ |
+| 列的平均长度 | ⎷ | ⎷ |
+| 索引的平均长度 | ⎷ | ⎷ |
 
-### Switch between statistics versions {#switch-between-statistics-versions}
+### 在统计版本之间切换 {#switch-between-statistics-versions}
 
-It is recommended to ensure that all tables/indexes (and partitions) utilize statistics collection from the same version. Version 2 is recommended, however, it is not recommended to switch from one version to another without a justifiable reason such as an issue experienced with the version in use. A switch between versions might take a period of time when no statistics are available until all tables have been analyzed with the new version, which might negatively affect the optimizer plan choices if statistics are not available.
+建议确保所有表/索引（及分区）都使用相同版本的统计信息。推荐使用版本 2，但不建议在没有充分理由（如当前版本存在问题）时在两个版本之间切换。切换可能会导致一段时间内没有统计信息可用，影响优化器的执行计划选择。
 
-Examples of justifications to switch might include - with Version 1, there could be inaccuracies in equal/IN predicate estimation due to hash collisions when collecting Count-Min sketch statistics. Solutions are listed in the [Count-Min Sketch](#count-min-sketch) section. Alternatively, setting `tidb_analyze_version = 2` and rerunning `ANALYZE` on all objects is also a solution. In the early release of Version 2, there was a risk of memory overflow after `ANALYZE`. This issue is resolved, but initially, one solution was to set `tidb_analyze_version = 1` and rerun `ANALYZE` on all objects.
+切换的理由可能包括——在版本 1 中，由于哈希碰撞，可能导致相等/IN 谓词估算不准确（详见 [Count-Min Sketch](#count-min-sketch)）。解决方案列在该节中。或者，将 `tidb_analyze_version` 设置为 `2`，重新对所有对象执行 `ANALYZE` 也是一种方案。在版本 2 的早期版本中，`ANALYZE` 后存在内存溢出的风险。此问题已解决，但最初的解决方案是将 `tidb_analyze_version` 设为 `1`，然后重新对所有对象执行 `ANALYZE`。
 
-To prepare `ANALYZE` for switching between versions:
+准备在版本切换前的 `ANALYZE`：
 
--   If the `ANALYZE` statement is executed manually, manually analyze every table to be analyzed.
+-   如果手动执行 `ANALYZE`，请逐个分析所有需要分析的表。
 
     ```sql
     SELECT DISTINCT(CONCAT('ANALYZE TABLE ', table_schema, '.', table_name, ';'))
@@ -396,7 +396,7 @@ To prepare `ANALYZE` for switching between versions:
     WHERE stats_ver = 2;
     ```
 
--   If TiDB automatically executes the `ANALYZE` statement because the auto-analysis has been enabled, execute the following statement that generates the [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md) statement:
+-   如果 TiDB 自动执行 `ANALYZE`，因为开启了自动分析，请执行以下语句，生成 [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md) 语句：
 
     ```sql
     SELECT DISTINCT(CONCAT('DROP STATS ', table_schema, '.', table_name, ';'))
@@ -405,28 +405,28 @@ To prepare `ANALYZE` for switching between versions:
     WHERE stats_ver = 2;
     ```
 
--   If the result of the preceding statement is too long to copy and paste, you can export the result to a temporary text file and then perform execution from the file like this:
+-   如果上述语句的结果过长，无法复制粘贴，可以导出到临时文本文件，然后从文件执行：
 
     ```sql
     SELECT DISTINCT ... INTO OUTFILE '/tmp/sql.txt';
     mysql -h ${TiDB_IP} -u user -P ${TIDB_PORT} ... < '/tmp/sql.txt'
     ```
 
-## View statistics {#view-statistics}
+## 查看统计信息 {#view-statistics}
 
-You can view the `ANALYZE` status and statistics information using the following statements.
+你可以使用以下语句查看 `ANALYZE` 状态和统计信息。
 
-### <code>ANALYZE</code> state {#code-analyze-code-state}
+### <code>ANALYZE</code> 状态 {#code-analyze-code-state}
 
-When executing the `ANALYZE` statement, you can view the current state of `ANALYZE` using [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md).
+执行 `ANALYZE` 语句时，可以使用 [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md) 查看当前 `ANALYZE` 的状态。
 
-Starting from TiDB v6.1.0, the `SHOW ANALYZE STATUS` statement supports showing cluster-level tasks. Even after a TiDB restart, you can still view task records before the restart using this statement. Before TiDB v6.1.0, the `SHOW ANALYZE STATUS` statement can only show instance-level tasks, and task records are cleared after a TiDB restart.
+从 TiDB v6.1.0 起，`SHOW ANALYZE STATUS` 支持显示集群级任务。即使重启 TiDB，也可以通过此语句查看重启前的任务记录。v6.1.0 之前，`SHOW ANALYZE STATUS` 仅能显示实例级任务，任务记录在重启后会被清除。
 
-`SHOW ANALYZE STATUS` shows the most recent task records only. Starting from TiDB v6.1.0, you can view the history tasks within the last 7 days through the system table `mysql.analyze_jobs`.
+`SHOW ANALYZE STATUS` 只显示最新的任务记录。从 v6.1.0 起，可以通过系统表 `mysql.analyze_jobs` 查看最近 7 天内的历史任务。
 
-When [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610) is set and an automatic `ANALYZE` task running in the TiDB background uses more memory than this threshold, the task will be retried. You can see failed and retried tasks in the output of the `SHOW ANALYZE STATUS` statement.
+当 [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610) 被设置，且后台运行的自动 `ANALYZE` 任务占用的内存超过此阈值时，任务会被重试。你可以在 `SHOW ANALYZE STATUS` 的输出中看到失败和重试的任务。
 
-When [`tidb_max_auto_analyze_time`](/system-variables.md#tidb_max_auto_analyze_time-new-in-v610) is greater than 0 and an automatic `ANALYZE` task running in the TiDB background takes more time than this threshold, the task will be terminated.
+当 [`tidb_max_auto_analyze_time`](/system-variables.md#tidb_max_auto_analyze_time-new-in-v610) 大于 0，且后台运行的自动 `ANALYZE` 任务耗时超过此阈值时，任务会被终止。
 
 ```sql
 mysql> SHOW ANALYZE STATUS [ShowLikeOrWhere];
@@ -437,123 +437,123 @@ mysql> SHOW ANALYZE STATUS [ShowLikeOrWhere];
 | test         | sbtest1    |                | auto analyze table all columns with 100 topn, 0.5 samplerate                              |              0 | 2022-05-07 16:40:50 | 2022-05-07 16:41:09 | failed   | analyze panic due to memory quota exceeds, please try with smaller samplerate |
 ```
 
-### Metadata of tables {#metadata-of-tables}
+### 表的元数据 {#metadata-of-tables}
 
-You can use the [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md) statement to view the total number of rows and the number of updated rows.
+你可以使用 [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md) 查看表的总行数和已更新的行数。
 
-### Health state of tables {#health-state-of-tables}
+### 表的健康状态 {#health-state-of-tables}
 
-You can use the [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md) statement to check the health state of tables and roughly estimate the accuracy of the statistics. When `modify_count` >= `row_count`, the health state is 0; when `modify_count` &#x3C; `row_count`, the health state is (1 - `modify_count`/`row_count`) * 100.
+你可以使用 [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md) 查看表的健康状态，并大致估算统计信息的准确性。当 `modify_count` >= `row_count` 时，健康状态为 0；当 `modify_count` < `row_count` 时，健康状态为 (1 - `modify_count`/`row_count`) * 100。
 
-### Metadata of columns {#metadata-of-columns}
+### 列的元数据 {#metadata-of-columns}
 
-You can use the [`SHOW STATS_HISTOGRAMS`](/sql-statements/sql-statement-show-stats-histograms.md) statement to view the number of different values and the number of `NULL` in all the columns.
+你可以使用 [`SHOW STATS_HISTOGRAMS`](/sql-statements/sql-statement-show-stats-histograms.md) 查看所有列中不同值的数量和 `NULL` 的数量。
 
-### Buckets of histogram {#buckets-of-histogram}
+### 直方图的桶 {#buckets-of-histogram}
 
-You can use the [`SHOW STATS_BUCKETS`](/sql-statements/sql-statement-show-stats-buckets.md) statement to view each bucket of the histogram.
+你可以使用 [`SHOW STATS_BUCKETS`](/sql-statements/sql-statement-show-stats-buckets.md) 查看直方图的每个桶。
 
-### Top-N information {#top-n-information}
+### Top-N 信息 {#top-n-information}
 
-You can use the [`SHOW STATS_TOPN`](/sql-statements/sql-statement-show-stats-topn.md) statement to view the Top-N information currently collected by TiDB.
+你可以使用 [`SHOW STATS_TOPN`](/sql-statements/sql-statement-show-stats-topn.md) 查看 TiDB 当前收集的 Top-N 信息。
 
-## Delete statistics {#delete-statistics}
+## 删除统计信息 {#delete-statistics}
 
-You can run the [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md) statement to delete statistics.
+你可以运行 [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md) 语句删除统计信息。
 
-## Load statistics {#load-statistics}
+## 加载统计信息 {#load-statistics}
 
-> **Note:**
+> **注意：**
 >
-> Loading statistics is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> 目前，TiDB 不支持在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群中加载统计信息。
 
-By default, depending on the size of column statistics, TiDB loads statistics differently as follows:
+默认情况下，TiDB 根据列统计信息的大小采用不同的加载策略：
 
--   For statistics that consume small amounts of memory (such as count, distinctCount, and nullCount), as long as the column data is updated, TiDB automatically loads the corresponding statistics into memory for use in the SQL optimization stage.
--   For statistics that consume large amounts of memory (such as histograms, TopN, and Count-Min Sketch), to ensure the performance of SQL execution, TiDB loads the statistics asynchronously on demand. Take histograms as an example. TiDB loads histogram statistics on a column into memory only when the optimizer uses the histogram statistics on that column. On-demand asynchronous statistics loading does not affect the performance of SQL execution but might provide incomplete statistics for SQL optimization.
+-   对于占用内存较少的统计信息（如 count、distinctCount 和 nullCount），只要列数据更新，TiDB 会自动将对应的统计信息加载到内存中，用于 SQL 优化阶段。
+-   对于占用内存较大的统计信息（如直方图、TopN 和 Count-Min Sketch），为了保证 SQL 执行性能，TiDB 会按需异步加载统计信息。以直方图为例，只有在优化器使用某列的直方图统计信息时，才会将其加载到内存。按需异步加载不会影响 SQL 执行性能，但可能导致统计信息不完整，从而影响优化。
 
-Since v5.4.0, TiDB introduces the synchronously loading statistics feature. This feature allows TiDB to synchronously load large-sized statistics (such as histograms, TopN, and Count-Min Sketch statistics) into memory when you execute SQL statements, which improves the completeness of statistics for SQL optimization.
+自 v5.4.0 起，TiDB 引入了同步加载统计信息的功能。该功能允许 TiDB 在执行 SQL 语句时同步加载大尺寸统计信息（如直方图、TopN 和 Count-Min Sketch），以提升统计信息的完整性。
 
-To enable this feature, set the value of the [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540) system variable to a timeout (in milliseconds) that SQL optimization can wait for at most to synchronously load complete column statistics. The default value of this variable is `100`, indicating that the feature is enabled.
+要启用此功能，可以将系统变量 [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540) 设置为一个超时时间（毫秒），SQL 优化最多等待此时间以同步加载完整的列统计信息。该变量的默认值为 `100`，表示启用此功能。
 
 <CustomContent platform="tidb">
 
-After enabling the synchronously loading statistics feature, you can further configure the feature as follows:
+启用同步加载统计信息后，你还可以进一步配置此功能：
 
--   To control how TiDB behaves when the waiting time of SQL optimization reaches the timeout, modify the value of the [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) system variable. The default value of this variable is `ON`, indicating that after the timeout, the SQL optimization process does not use any histogram, TopN, or CMSketch statistics on any columns. If this variable is set to `OFF`, after the timeout, SQL execution fails.
--   To specify the maximum number of columns that the synchronously loading statistics feature can process concurrently, modify the value of the [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540) option in the TiDB configuration file. Starting from v8.2.0, the default value of this option is `0`, indicating that TiDB automatically adjusts concurrency based on the server configuration.
--   To specify the maximum number of column requests that the synchronously loading statistics feature can cache, modify the value of the [`stats-load-queue-size`](/tidb-configuration-file.md#stats-load-queue-size-new-in-v540) option in the TiDB configuration file. The default value is `1000`.
+-   若要控制 SQL 优化等待超时后的行为，修改系统变量 [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540)。默认值为 `ON`，表示超时后，SQL 优化不会使用任何列的直方图、TopN 或 CMSketch 统计信息。若设置为 `OFF`，超时后，SQL 执行会失败。
+-   若要限制同步加载统计信息的最大列数，修改 TiDB 配置文件中的 [`stats-load-concurrency`] 选项。自 v8.2.0 起，默认值为 `0`，表示 TiDB 会根据服务器配置自动调整并发数。
+-   若要限制同步加载统计信息的最大列请求缓存数，修改 TiDB 配置文件中的 [`stats-load-queue-size`] 选项。默认值为 `1000`。
 
-During TiDB startup, SQL statements executed before the initial statistics are fully loaded might have suboptimal execution plans, thus causing performance issues. To avoid such issues, TiDB v7.1.0 introduces the configuration parameter [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710). With this option, you can control whether TiDB provides services only after statistics initialization has been finished during startup. Starting from v7.2.0, this parameter is enabled by default.
+在 TiDB 启动过程中，统计信息未完全加载前执行的 SQL 语句可能会导致执行计划不理想，从而影响性能。为避免此类问题，TiDB v7.1.0 引入了 [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710) 配置参数。启用后，TiDB 在启动时会控制是否在统计信息初始化完成后才提供服务。自 v7.2.0 起，该参数默认启用。
 
-Starting from v7.1.0, TiDB introduces [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) for lightweight statistics initialization.
+自 v7.1.0 起，TiDB 还引入了 [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)，用于轻量级统计初始化。
 
--   When the value of `lite-init-stats` is `true`, statistics initialization does not load any histogram, TopN, or Count-Min Sketch of indexes or columns into memory.
--   When the value of `lite-init-stats` is `false`, statistics initialization loads histograms, TopN, and Count-Min Sketch of indexes and primary keys into memory but does not load any histogram, TopN, or Count-Min Sketch of non-primary key columns into memory. When the optimizer needs the histogram, TopN, and Count-Min Sketch of a specific index or column, the necessary statistics are loaded into memory synchronously or asynchronously.
+-   当 `lite-init-stats` 取值为 `true` 时，统计初始化不会将索引或列的直方图、TopN 和 Count-Min Sketch 加载到内存。
+-   当 `lite-init-stats` 取值为 `false` 时，统计初始化会将索引和主键的直方图、TopN 和 Count-Min Sketch 加载到内存，但不会加载非主键列的直方图、TopN 和 Count-Min Sketch。优化器在需要特定索引或列的直方图、TopN 和 Count-Min Sketch 时，会同步或异步加载所需的统计信息。
 
-The default value of `lite-init-stats` is `true`, which means to enable lightweight statistics initialization. Setting `lite-init-stats` to `true` speeds up statistics initialization and reduces TiDB memory usage by avoiding unnecessary statistics loading.
+`lite-init-stats` 的默认值为 `true`，表示启用轻量级统计初始化。设置为 `true` 可以加快统计初始化速度，减少 TiDB 的内存占用，避免不必要的统计信息加载。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-After enabling the synchronously loading statistics feature, you can control how TiDB behaves when the waiting time of SQL optimization reaches the timeout by modifying the value of the [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) system variable. The default value of this variable is `ON`, indicating that after the timeout, the SQL optimization process does not use any histogram, TopN, or CMSketch statistics on any columns. If this variable is set to `OFF`, after the timeout, SQL execution fails.
+启用同步加载统计信息后，你可以通过修改系统变量 [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) 来控制 TiDB 在等待超时时的行为。默认值为 `ON`，表示超时后，SQL 优化不会使用任何列的直方图、TopN 或 CMSketch 统计信息。
 
 </CustomContent>
 
-## Export and import statistics {#export-and-import-statistics}
+## 导出与导入统计信息 {#export-and-import-statistics}
 
-This section describes how to export and import statistics.
+本节介绍如何导出和导入统计信息。
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注意：**
 >
-> This section is not applicable to TiDB Cloud.
+> 本节内容不适用于 TiDB 云。
 
 </CustomContent>
 
-### Export statistics {#export-statistics}
+### 导出统计信息 {#export-statistics}
 
-The interface to export statistics is as follows:
+导出统计信息的接口如下：
 
--   To obtain the JSON format statistics of the `${table_name}` table in the `${db_name}` database:
+-   获取 `${db_name}` 数据库中 `${table_name}` 表的 JSON 格式统计信息：
 
         http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}
 
-    For example:
+    例如：
 
     ```shell
     curl -s http://127.0.0.1:10080/stats/dump/test/t1 -o /tmp/t1.json
     ```
 
--   To obtain the JSON format statistics of the `${table_name}` table in the `${db_name}` database at specific time:
+-   获取 `${db_name}` 数据库中 `${table_name}` 表在特定时间点的 JSON 格式统计信息：
 
         http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}/${yyyyMMddHHmmss}
 
-### Import statistics {#import-statistics}
+### 导入统计信息 {#import-statistics}
 
-> **Note:**
+> **注意：**
 >
-> When you start the MySQL client, use the `--local-infile=1` option.
+> 启动 MySQL 客户端时，请使用 `--local-infile=1` 选项。
 
-Generally, the imported statistics refer to the JSON file obtained using the export interface.
+导入的统计信息通常指通过导出接口获得的 JSON 文件。
 
-Loading statistics can be done with the [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md) statement.
+可以使用 [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md) 语句加载统计信息。
 
-For example:
+例如：
 
 ```sql
 LOAD STATS 'file_name';
 ```
 
-`file_name` is the file name of the statistics to be imported.
+`file_name` 为待导入的统计信息文件名。
 
-## Lock statistics {#lock-statistics}
+## 锁定统计信息 {#lock-statistics}
 
-Starting from v6.5.0, TiDB supports locking statistics. After the statistics of a table or a partition are locked, the statistics of the table cannot be modified and the `ANALYZE` statement cannot be executed on the table. For example:
+自 v6.5.0 起，TiDB 支持锁定统计信息。锁定某个表或分区的统计信息后，该表的统计信息将无法被修改，也不能对其执行 `ANALYZE`。例如：
 
-Create table `t`, and insert data into it. When the statistics of table `t` are not locked, the `ANALYZE` statement can be successfully executed.
+创建表 `t`，插入数据。当表 `t` 的统计信息未被锁定时，可以成功执行 `ANALYZE`。
 
 ```sql
 mysql> CREATE TABLE t(a INT, b INT);
@@ -575,7 +575,7 @@ mysql> SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-Lock the statistics of table `t` and execute `ANALYZE`. The warning message shows that the `ANALYZE` statement has skipped table `t`.
+锁定表 `t` 的统计信息并执行 `ANALYZE`，会显示警告，提示跳过了该表。
 
 ```sql
 mysql> LOCK STATS t;
@@ -602,7 +602,7 @@ mysql> SHOW WARNINGS;
 2 rows in set (0.00 sec)
 ```
 
-Unlock the statistics of table `t` and `ANALYZE` can be successfully executed again.
+解锁表 `t` 的统计信息后，可以再次成功执行 `ANALYZE`。
 
 ```sql
 mysql> UNLOCK STATS t;
@@ -620,9 +620,9 @@ mysql> SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-In addition, you can also lock the statistics of a partition using [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md). For example:
+此外，还可以使用 [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md) 来锁定分区的统计信息。例如：
 
-Create a partition table `t`, and insert data into it. When the statistics of partition `p1` are not locked, the `ANALYZE` statement can be successfully executed.
+创建分区表 `t`，插入数据。当分区 `p1` 的统计信息未被锁定时，可以成功执行 `ANALYZE`。
 
 ```sql
 mysql> CREATE TABLE t(a INT, b INT) PARTITION BY RANGE (a) (PARTITION p0 VALUES LESS THAN (10), PARTITION p1 VALUES LESS THAN (20), PARTITION p2 VALUES LESS THAN (30));
@@ -649,7 +649,7 @@ mysql> SHOW WARNINGS;
 6 rows in set (0.01 sec)
 ```
 
-Lock the statistics of partition `p1` and execute `ANALYZE`. The warning message shows that the `ANALYZE` statement has skipped partition `p1`.
+锁定分区 `p1` 的统计信息并执行 `ANALYZE`，会显示警告，提示跳过了分区 `p1`。
 
 ```sql
 mysql> LOCK STATS t PARTITION p1;
@@ -676,7 +676,7 @@ mysql> SHOW WARNINGS;
 2 rows in set (0.00 sec)
 ```
 
-Unlock the statistics of partition `p1` and `ANALYZE` can be successfully executed again.
+解锁分区 `p1` 的统计信息后，可以再次成功执行 `ANALYZE`。
 
 ```sql
 mysql> UNLOCK STATS t PARTITION p1;
@@ -693,100 +693,3 @@ mysql> SHOW WARNINGS;
 +-------+------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 1 row in set (0.00 sec)
 ```
-
-### Behaviors of locking statistics {#behaviors-of-locking-statistics}
-
--   If you lock the statistics on a partitioned table, the statistics of all partitions on the partitioned table are locked.
--   If you truncate a table or partition, the statistics lock on the table or partition will be released.
-
-The following table describes the behaviors of locking statistics:
-
-|                                                         | Delete the whole table | Truncate the whole table                                                                        | Truncate a partition                                                                            | Create a new partition                    | Delete a partition                                                                                                 | Reorganize a partition                                                                                  | Exchange a partition                                                                                      |
-| ------------------------------------------------------- | ---------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| A non-partitioned table is locked                       | The lock is invalid    | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | /                                                                                               | /                                         | /                                                                                                                  | /                                                                                                       | /                                                                                                         |
-| A partitioned table and the whole table is locked       | The lock is invalid    | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | The old partition lock information is invalid, and the new partition is automatically locked    | The new partition is automatically locked | The lock information of the deleted partition is cleared, and the lock of the whole table continues to take effect | The lock information of the deleted partition is cleared, and the new partition is automatically locked | The lock information is transferred to the exchanged table, and the new partition is automatically locked |
-| A partitioned table and only some partitions are locked | The lock is invalid    | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | /                                         | The deleted partition lock information is cleared                                                                  | The deleted partition lock information is cleared                                                       | The lock information is transferred to the exchanged table                                                |
-
-## Manage <code>ANALYZE</code> tasks and concurrency {#manage-code-analyze-code-tasks-and-concurrency}
-
-This section describes how to terminate background `ANALYZE` tasks and control the `ANALYZE` concurrency.
-
-### Terminate background <code>ANALYZE</code> tasks {#terminate-background-code-analyze-code-tasks}
-
-Since TiDB v6.0, TiDB supports using the `KILL` statement to terminate an `ANALYZE` task running in the background. If you find that an `ANALYZE` task running in the background consumes a lot of resources and affects your application, you can terminate the `ANALYZE` task by taking the following steps:
-
-1.  Execute the following SQL statement:
-
-    ```sql
-    SHOW ANALYZE STATUS
-    ```
-
-    By checking the `instance` column and the `process_id` column in the result, you can get the TiDB instance address and the task `ID` of the background `ANALYZE` task.
-
-2.  Terminate the `ANALYZE` task that is running in the background.
-
-    <CustomContent platform="tidb">
-
-    -   If [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610) is `true` (`true` by default), you can execute the `KILL TIDB ${id};` statement directly, where `${id}` is the `ID` of the background `ANALYZE` task obtained from the previous step.
-    -   If `enable-global-kill` is `false`, you need to use a client to connect to the TiDB instance that is executing the backend `ANALYZE` task, and then execute the `KILL TIDB ${id};` statement. If you use a client to connect to another TiDB instance, or if there is a proxy between the client and the TiDB cluster, the `KILL` statement cannot terminate the background `ANALYZE` task.
-
-    </CustomContent>
-
-    <CustomContent platform="tidb-cloud">
-
-    To terminate the `ANALYZE` task, you can execute the `KILL TIDB ${id};` statement, where `${id}` is the `ID` of the background `ANALYZE` task obtained from the previous step.
-
-    </CustomContent>
-
-For more information on the `KILL` statement, see [`KILL`](/sql-statements/sql-statement-kill.md).
-
-### Control <code>ANALYZE</code> concurrency {#control-code-analyze-code-concurrency}
-
-When you run the `ANALYZE` statement, you can adjust the concurrency using system variables, to control its effect on the system.
-
-The relationships of the relevant system variables are shown below:
-
-![analyze\_concurrency](/media/analyze_concurrency.png)
-
-`tidb_build_stats_concurrency`, `tidb_build_sampling_stats_concurrency`, and `tidb_analyze_partition_concurrency` are in an upstream-downstream relationship, as shown in the preceding diagram. The actual total concurrency is: `tidb_build_stats_concurrency` * (`tidb_build_sampling_stats_concurrency` + `tidb_analyze_partition_concurrency`). When modifying these variables, you need to consider their respective values at the same time. It is recommended to adjust them one by one in the order of `tidb_analyze_partition_concurrency`, `tidb_build_sampling_stats_concurrency`, `tidb_build_stats_concurrency`, and observe the impact on the system. The larger the values of these three variables, the greater the resource overhead on the system.
-
-#### <code>tidb_build_stats_concurrency</code> {#code-tidb-build-stats-concurrency-code}
-
-When you run the `ANALYZE` statement, the task is divided into multiple small tasks. Each task only works on statistics of one column or index. You can use the [`tidb_build_stats_concurrency`](/system-variables.md#tidb_build_stats_concurrency) variable to control the number of simultaneous small tasks. The default value is `2`. The default value is `4` for v7.4.0 and earlier versions.
-
-#### <code>tidb_build_sampling_stats_concurrency</code> {#code-tidb-build-sampling-stats-concurrency-code}
-
-When analyzing ordinary columns, you can use [`tidb_build_sampling_stats_concurrency`](/system-variables.md#tidb_build_sampling_stats_concurrency-new-in-v750) to control the concurrency of executing sampling tasks. The default value is `2`.
-
-#### <code>tidb_analyze_partition_concurrency</code> {#code-tidb-analyze-partition-concurrency-code}
-
-When running the `ANALYZE` statement, you can use [`tidb_analyze_partition_concurrency`](/system-variables.md#tidb_analyze_partition_concurrency) to control the concurrency of reading and writing statistics for a partitioned table. The default value is `2`. The default value is `1` for v7.4.0 and earlier versions.
-
-#### <code>tidb_distsql_scan_concurrency</code> {#code-tidb-distsql-scan-concurrency-code}
-
-When you analyze regular columns, you can use the [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) variable to control the number of Regions to be read at one time. The default value is `15`. Note that changing the value will affect query performance. Adjust the value carefully.
-
-#### <code>tidb_index_serial_scan_concurrency</code> {#code-tidb-index-serial-scan-concurrency-code}
-
-When you analyze index columns, you can use the [`tidb_index_serial_scan_concurrency`](/system-variables.md#tidb_index_serial_scan_concurrency) variable to control the number of Regions to be read at one time. The default value is `1`. Note that changing the value will affect query performance. Adjust the value carefully.
-
-## See also {#see-also}
-
-<CustomContent platform="tidb">
-
--   [LOAD STATS](/sql-statements/sql-statement-load-stats.md)
--   [DROP STATS](/sql-statements/sql-statement-drop-stats.md)
--   [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
--   [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
--   [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
--   [LOAD STATS](/sql-statements/sql-statement-load-stats.md)
--   [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
--   [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
--   [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)
-
-</CustomContent>
