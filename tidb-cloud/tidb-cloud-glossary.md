@@ -22,15 +22,41 @@ ACID refers to the four key properties of a transaction: atomicity, consistency,
 
 ## C
 
+### Chat2Query
+
+Chat2Query is an AI-powered feature integrated into SQL Editor that assists users in generating, debugging, or rewriting SQL queries using natural language instructions. For more information, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
+
+In addition, TiDB Cloud provides a Chat2Query API for [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter) clusters hosted on AWS. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
+
 ### Credit
 
 TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. One credit is equivalent to one U.S. dollar. You can use credits to pay TiDB cluster fees before the credits become expired.
 
 ## D
 
+### Data App
+
+A Data App in [Data Service (beta)](#data-service) is a collection of endpoints that you can use to access data for a specific application. You can configure authorization settings using API keys to restrict access to endpoints in a Data App.
+
+For more information, see [Manage a Data App](/tidb-cloud/data-service-manage-data-app.md).
+
+### Data Service
+
+Data Service (beta) enables you to access TiDB Cloud data via an HTTPS request using a custom API [endpoint](#endpoint). This feature uses a serverless architecture to handle computing resources and elastic scaling, so you can focus on the query logic in endpoints without worrying about infrastructure or maintenance costs.
+
+For more information, see [Data Service Overview](/tidb-cloud/data-service-overview.md).
+
 ### Direct Customer
 
 A direct customer is an end customer who purchases TiDB Cloud and pays invoices directly from PingCAP. This is distinguished from an [MSP customer](#msp-customer).
+
+## E
+
+### Endpoint
+
+An endpoint in Data Service is a web API that you can customize to execute SQL statements. You can specify parameters for your SQL statements, such as the value used in the `WHERE` clause. When a client calls an endpoint and provides values for the parameters in a request URL, the endpoint executes the corresponding SQL statement with the provided parameters and returns the results as part of the HTTP response.
+
+For more information, see [Manage an endpoint](/tidb-cloud/data-service-manage-endpoint.md).
 
 ## M
 

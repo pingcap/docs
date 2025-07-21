@@ -5,7 +5,7 @@ summary: This document describes the configuration files of Data App in TiDB Clo
 
 # Data App Configuration Files
 
-This document describes the configuration files of a Data App in TiDB Cloud.
+This document describes the configuration files of a [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) in TiDB Cloud.
 
 If you have [connected your Data App to GitHub](/tidb-cloud/data-service-manage-github-connection.md), you can find the configuration files of your Data App in your specified directory on GitHub as follows:
 
