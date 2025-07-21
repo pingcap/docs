@@ -1,24 +1,24 @@
 ---
 title: Partitioning
-summary: Learn how to use partitioning in TiDB.
+summary: 学习如何在 TiDB 中使用分区。
 ---
 
 # Partitioning {#partitioning}
 
-This document introduces TiDB's implementation of partitioning.
+本文介绍了 TiDB 的分区实现。
 
 ## Partitioning types {#partitioning-types}
 
-This section introduces the types of partitioning in TiDB. Currently, TiDB supports [Range partitioning](#range-partitioning), [Range COLUMNS partitioning](#range-columns-partitioning), [List partitioning](#list-partitioning), [List COLUMNS partitioning](#list-columns-partitioning), [Hash partitioning](#hash-partitioning), and [Key partitioning](#key-partitioning).
+本节介绍 TiDB 支持的分区类型。目前，TiDB 支持 [Range partitioning](#range-partitioning)、[Range COLUMNS partitioning](#range-columns-partitioning)、[List partitioning](#list-partitioning)、[List COLUMNS partitioning](#list-columns-partitioning)、[Hash partitioning](#hash-partitioning) 和 [Key partitioning](#key-partitioning)。
 
--   Range partitioning, Range COLUMNS partitioning, List partitioning, and List COLUMNS partitioning are used to resolve the performance issues caused by a large number of deletions in the application, and support dropping partitions quickly.
--   Hash partitioning and Key partitioning are used to distribute data in scenarios with a large number of writes. Compared with Hash partitioning, Key partitioning supports distributing data of multiple columns and partitioning by non-integer columns.
+-   Range partitioning、Range COLUMNS partitioning、List partitioning 和 List COLUMNS partitioning 用于解决应用中大量删除操作引起的性能问题，并支持快速删除分区。
+-   Hash partitioning 和 Key partitioning 用于在写入量大的场景中分散数据。与 Hash partitioning 相比，Key partitioning 支持多列分布和非整数列的分区。
 
 ### Range partitioning {#range-partitioning}
 
-When a table is partitioned by Range, each partition contains rows for which the partitioning expression value lies within a given Range. Ranges have to be contiguous but not overlapping. You can define it by using `VALUES LESS THAN`.
+当表按 Range 分区时，每个分区包含分区表达式值落在某个范围内的行。范围必须是连续且不重叠的。可以通过 `VALUES LESS THAN` 来定义。
 
-Assume you need to create a table that contains personnel records as follows:
+假设你需要创建一个包含人员记录的表，示例如下：
 
 ```sql
 CREATE TABLE employees (
@@ -32,7 +32,7 @@ CREATE TABLE employees (
 );
 ```
 
-You can partition a table by Range in various ways as needed. For example, you can partition it by using the `store_id` column:
+你可以根据需要用不同方式按 Range 分区。例如，可以用 `store_id` 列进行分区：
 
 ```sql
 CREATE TABLE employees (
@@ -53,9 +53,9 @@ PARTITION BY RANGE (store_id) (
 );
 ```
 
-In this partition scheme, all rows corresponding to employees whose `store_id` is 1 through 5 are stored in the `p0` partition while all employees whose `store_id` is 6 through 10 are stored in `p1`. Range partitioning requires the partitions to be ordered, from lowest to highest.
+在此分区方案中，`store_id` 为 1 到 5 的员工行存放在 `p0` 分区，`store_id` 为 6 到 10 的存放在 `p1`。Range 分区要求分区必须按顺序，从最低到最高。
 
-If you insert a row of data `(72, 'Tom', 'John', '2015-06-25', NULL, NULL, 15)`, it falls in the `p2` partition. But if you insert a record whose `store_id` is larger than 20, an error is reported because TiDB cannot know which partition this record should be inserted into. In this case, you can use `MAXVALUE` when creating a table:
+如果插入一行数据 `(72, 'Tom', 'John', '2015-06-25', NULL, NULL, 15)`，它会落在 `p2` 分区。但如果插入 `store_id` 大于 20 的记录，则会报错，因为 TiDB 无法知道该插入到哪个分区。这时可以在创建表时用 `MAXVALUE`：
 
 ```sql
 CREATE TABLE employees (
@@ -76,9 +76,9 @@ PARTITION BY RANGE (store_id) (
 );
 ```
 
-`MAXVALUE` represents an integer value that is larger than all other integer values. Now, all records whose `store_id` is equal to or larger than 16 (the highest value defined) are stored in the `p3` partition.
+`MAXVALUE` 表示比所有其他整数值都大的整数值。现在，`store_id` 大于等于 16（最高定义值）的所有记录都存放在 `p3` 分区。
 
-You can also partition a table by employees' job codes, which are the values of the `job_code` column. Assume that two-digit job codes stand for regular employees, three-digit codes stand for office and customer support personnel, and four-digit codes stand for managerial personnel. Then you can create a partitioned table like this:
+你也可以用 `job_code` 列的值进行分区，假设两位数的 `job_code` 表示普通员工，三位数表示办公室和客户支持人员，四位数表示管理人员。示例如下：
 
 ```sql
 CREATE TABLE employees (
@@ -98,9 +98,9 @@ PARTITION BY RANGE (job_code) (
 );
 ```
 
-In this example, all rows relating to regular employees are stored in the `p0` partition, all office and customer support personnel in the `p1` partition, and all managerial personnel in the `p2` partition.
+在此例中，普通员工的行存放在 `p0`，办公室和客户支持人员存放在 `p1`，管理人员存放在 `p2`。
 
-Besides splitting up the table by `store_id`, you can also partition a table by dates. For example, you can partition by employees' separation year:
+除了用 `store_id` 分区外，还可以用日期进行分区。例如，用员工的离职年份进行分区：
 
 ```sql
 CREATE TABLE employees (
@@ -121,7 +121,7 @@ PARTITION BY RANGE ( YEAR(separated) ) (
 );
 ```
 
-In Range partitioning, you can partition based on the values of the `timestamp` column and use the `unix_timestamp()` function, for example:
+在 Range 分区中，也可以基于 `timestamp` 列的值进行分区，例如用 `unix_timestamp()` 函数：
 
 ```sql
 CREATE TABLE quarterly_report_status (
@@ -144,19 +144,25 @@ PARTITION BY RANGE ( UNIX_TIMESTAMP(report_updated) ) (
 );
 ```
 
-It is not allowed to use any other partitioning expression that contains the timestamp column.
+不允许在分区表达式中使用其他包含时间戳列的表达式。
 
-Range partitioning is particularly useful when one or more of the following conditions are satisfied:
+Range 分区在满足以下条件时特别有用：
 
--   You want to delete the old data. If you use the `employees` table in the previous example, you can delete all records of employees who left this company before the year 1991 by simply using `ALTER TABLE employees DROP PARTITION p0;`. It is faster than executing the `DELETE FROM employees WHERE YEAR(separated) <= 1990;` operation.
--   You want to use a column that contains time or date values, or containing values arising from some other series.
--   You need to frequently run queries on the columns used for partitioning. For example, when executing a query like `EXPLAIN SELECT COUNT(*) FROM employees WHERE separated BETWEEN '2000-01-01' AND '2000-12-31' GROUP BY store_id;`, TiDB can quickly know that only the data in the `p2` partition needs to be scanned, because the other partitions do not match the `WHERE` condition.
+-   你想删除旧数据。例如，用前述的 `employees` 表，可以用 `ALTER TABLE employees DROP PARTITION p0;` 快速删除 1990 年之前离职的员工数据，比执行 `DELETE FROM employees WHERE YEAR(separated) <= 1990;` 更快。
+-   你想用包含时间或日期值的列，或由其他系列产生的值的列进行分区。
+-   你需要频繁对分区列进行查询。例如，执行如下查询时：
+
+```sql
+EXPLAIN SELECT COUNT(*) FROM employees WHERE separated BETWEEN '2000-01-01' AND '2000-12-31' GROUP BY store_id;
+```
+
+TiDB 可以快速知道只需要扫描 `p2` 分区中的数据，因为其他分区不符合 `WHERE` 条件。
 
 ### Range COLUMNS partitioning {#range-columns-partitioning}
 
-Range COLUMNS partitioning is a variant of Range partitioning. You can use one or more columns as partitioning keys. The data types of partition columns can be integer, string (`CHAR` or `VARCHAR`), `DATE`, and `DATETIME`. Any expressions, such as non-COLUMNS partitioning, are not supported.
+Range COLUMNS 分区是 Range 分区的变体。可以用一个或多个列作为分区键。分区列的数据类型可以是整数、字符串（`CHAR` 或 `VARCHAR`）、`DATE` 和 `DATETIME`。不支持任何表达式（如非列分区）。
 
-Like Range partitioning, Range COLUMNS partitioning also requires the partition ranges to be strictly increasing. The partition definition in the following example is not supported:
+与 Range 分区一样，Range COLUMNS 分区也要求分区范围严格递增。以下示例中的分区定义不被支持：
 
 ```sql
 CREATE TABLE t(
@@ -171,7 +177,7 @@ CREATE TABLE t(
 
     Error 1493 (HY000): VALUES LESS THAN value must be strictly increasing for each partition
 
-Suppose that you want to partition by name, and drop old and invalid data, then you can create a table as follows:
+假设你想用名字进行分区，删除旧的无效数据，可以如下创建表：
 
 ```sql
 CREATE TABLE t (
@@ -188,24 +194,24 @@ PARTITION BY RANGE COLUMNS(name, valid_until)
  PARTITION `p2023-s` VALUES LESS THAN ('S','2024-01-01 00:00:00'))
 ```
 
-The preceding SQL statement will partition the data by year and by name in the ranges `[ ('', ''), ('G', '2023-01-01 00:00:00') )`, `[ ('G', '2023-01-01 00:00:00'), ('G', '2024-01-01 00:00:00') )`, `[ ('G', '2024-01-01 00:00:00'), ('M', '2023-01-01 00:00:00') )`, `[ ('M', '2023-01-01 00:00:00'), ('M', '2024-01-01 00:00:00') )`, `[ ('M', '2024-01-01 00:00:00'), ('S', '2023-01-01 00:00:00') )`, and `[ ('S', '2023-01-01 00:00:00'), ('S', '2024-01-01 00:00:00') )`. It allows you to easily drop invalid data while still benefit from partition pruning on both `name` and `valid_until` columns. In this example, `[,)` indicates a left-closed, right-open range. For example, `[ ('G', '2023-01-01 00:00:00'), ('G', '2024-01-01 00:00:00') )` indicates a range of data whose name is `'G'`, the year contains `2023-01-01 00:00:00` and is greater than `2023-01-01 00:00:00` but less than `2024-01-01 00:00:00`. It does not include `(G, 2024-01-01 00:00:00)`.
+上述 SQL 语句会按年份和名字进行分区，范围为 `[ ('', ''), ('G', '2023-01-01 00:00:00') )`，`[ ('G', '2023-01-01 00:00:00'), ('G', '2024-01-01 00:00:00') )`，`[ ('G', '2024-01-01 00:00:00'), ('M', '2023-01-01 00:00:00') )`，`[ ('M', '2023-01-01 00:00:00'), ('M', '2024-01-01 00:00:00') )`，`[ ('M', '2024-01-01 00:00:00'), ('S', '2023-01-01 00:00:00') )` 和 `[ ('S', '2023-01-01 00:00:00'), ('S', '2024-01-01 00:00:00') )`。这样可以方便地删除无效数据，同时利用分区裁剪（partition pruning）对 `name` 和 `valid_until` 两列进行优化。在此例中，`[,)` 表示左闭右开区间。例如，`[ ('G', '2023-01-01 00:00:00'), ('G', '2024-01-01 00:00:00') )` 表示名字为 `'G'`，年份在 `2023-01-01 00:00:00`（包含）到 `2024-01-01 00:00:00`（不包含）之间的数据范围，不包括 `(G, 2024-01-01 00:00:00)`。
 
 ### Range INTERVAL partitioning {#range-interval-partitioning}
 
-Range INTERVAL partitioning is an extension of Range partitioning, which allows you to create partitions of a specified interval easily. Starting from v6.3.0, INTERVAL partitioning is introduced in TiDB as syntactic sugar.
+Range INTERVAL 分区是 Range 分区的扩展，允许你轻松创建指定间隔的分区。从 v6.3.0 版本开始，TiDB 引入了 INTERVAL 分区，作为语法糖。
 
-The syntax is as follows:
+语法如下：
 
 ```sql
-PARTITION BY RANGE [COLUMNS] (<partitioning expression>)
-INTERVAL (<interval expression>)
-FIRST PARTITION LESS THAN (<expression>)
-LAST PARTITION LESS THAN (<expression>)
+PARTITION BY RANGE [COLUMNS] (<分区表达式>)
+INTERVAL (<间隔表达式>)
+FIRST PARTITION LESS THAN (<表达式>)
+LAST PARTITION LESS THAN (<表达式>)
 [NULL PARTITION]
 [MAXVALUE PARTITION]
 ```
 
-For example:
+例如：
 
 ```sql
 CREATE TABLE employees (
@@ -220,7 +226,7 @@ CREATE TABLE employees (
 INTERVAL (100) FIRST PARTITION LESS THAN (100) LAST PARTITION LESS THAN (10000) MAXVALUE PARTITION
 ```
 
-It creates the following table:
+它会创建如下表：
 
 ```sql
 CREATE TABLE `employees` (
@@ -241,9 +247,9 @@ PARTITION BY RANGE (`id`)
  PARTITION `P_MAXVALUE` VALUES LESS THAN (MAXVALUE))
 ```
 
-Range INTERVAL partitioning also works with [Range COLUMNS](#range-columns-partitioning) partitioning.
+Range INTERVAL 分区也支持 [Range COLUMNS](#range-columns-partitioning)。
 
-For example:
+例如：
 
 ```sql
 CREATE TABLE monthly_report_status (
@@ -255,7 +261,7 @@ PARTITION BY RANGE COLUMNS (report_date)
 INTERVAL (1 MONTH) FIRST PARTITION LESS THAN ('2000-01-01') LAST PARTITION LESS THAN ('2025-01-01')
 ```
 
-It creates this table:
+它会创建此表：
 
     CREATE TABLE `monthly_report_status` (
       `report_id` int NOT NULL,
@@ -270,34 +276,38 @@ It creates this table:
      PARTITION `P_LT_2024-12-01` VALUES LESS THAN ('2024-12-01'),
      PARTITION `P_LT_2025-01-01` VALUES LESS THAN ('2025-01-01'))
 
-The optional parameter `NULL PARTITION` creates a partition with the definition as `PARTITION P_NULL VALUES LESS THAN (<minimum value of the column type>)`, only matching when the partitioning expression evaluates to `NULL`. See [Handling of NULL with Range partitioning](#handling-of-null-with-range-partitioning), which explains that `NULL` is considered to be less than any other value.
+可选参数 `NULL PARTITION` 会创建一个定义为 `PARTITION P_NULL VALUES LESS THAN (<列类型的最小值>)` 的分区，仅在分区表达式为 `NULL` 时匹配。详见 [Handling of NULL with Range partitioning](#handling-of-null-with-range-partitioning)，该部分说明 `NULL` 被视为小于任何其他值。
 
-The optional parameter `MAXVALUE PARTITION` creates the last partition as `PARTITION P_MAXVALUE VALUES LESS THAN (MAXVALUE)`.
+可选参数 `MAXVALUE PARTITION` 会创建最后一个分区，定义为 `PARTITION P_MAXVALUE VALUES LESS THAN (MAXVALUE)`。
 
 #### ALTER INTERVAL partitioned tables {#alter-interval-partitioned-tables}
 
-INTERVAL partitioning also adds simpler syntaxes for adding and dropping partitions.
+INTERVAL 分区还支持简化的添加和删除分区的语法。
 
-The following statement changes the first partition. It drops all partitions whose values are less than the given expression, and makes the matched partition the new first partition. It does not affect a NULL PARTITION.
+以下语句会更改第一个分区。它会删除所有值小于给定表达式的分区，并将匹配的分区设为新的第一个分区。不会影响 NULL 分区。
 
-    ALTER TABLE table_name FIRST PARTITION LESS THAN (<expression>)
+```sql
+ALTER TABLE table_name FIRST PARTITION LESS THAN (<expression>)
+```
 
-The following statement changes the last partition, meaning adding more partitions with higher ranges and room for new data. It will add new partitions with the current INTERVAL up to and including the given expression. It does not work if a `MAXVALUE PARTITION` exists, because it needs data reorganization.
+以下语句会更改最后一个分区，即增加范围更大的新分区，留出空间存放新数据。它会添加新的分区，范围由当前的 INTERVAL 决定，直到包含给定的表达式。如果存在 `MAXVALUE PARTITION`，则不支持此操作，因为需要重新组织数据。
 
-    ALTER TABLE table_name LAST PARTITION LESS THAN (<expression>)
+```sql
+ALTER TABLE table_name LAST PARTITION LESS THAN (<expression>)
+```
 
 #### INTERVAL partitioning details and limitations {#interval-partitioning-details-and-limitations}
 
--   The INTERVAL partitioning feature only involves the `CREATE/ALTER TABLE` syntax. There is no change in metadata, so tables created or altered with the new syntax are still MySQL-compatible.
--   There is no change in the output format of `SHOW CREATE TABLE` to keep MySQL compatibility.
--   The new `ALTER` syntax applies to existing tables conforming to INTERVAL. You do not need to create these tables with the `INTERVAL` syntax.
--   To use the `INTERVAL` syntax for `RANGE COLUMNS` partitioning, you can only specify a single column in the `INTEGER`, `DATE`, or `DATETIME` type as the partitioning key.
+-   INTERVAL 分区功能仅涉及 `CREATE/ALTER TABLE` 语法，不会改变元数据，因此用新语法创建或修改的表仍然兼容 MySQL。
+-   `SHOW CREATE TABLE` 的输出格式没有变化，以保持 MySQL 兼容。
+-   新的 `ALTER` 语法适用于符合 INTERVAL 的现有表，无需用 `INTERVAL` 语法创建这些表。
+-   要在 `RANGE COLUMNS` 分区中使用 `INTERVAL` 语法，只能指定单个整数、日期或日期时间类型的列作为分区键。
 
 ### List partitioning {#list-partitioning}
 
-List partitioning is similar to Range partitioning. Unlike Range partitioning, in List partitioning, the partitioning expression values for all rows in each partition are in a given value set. This value set defined for each partition can have any number of values but cannot have duplicate values. You can use the `PARTITION ... VALUES IN (...)` clause to define a value set.
+List 分区类似于 Range 分区。不同之处在于，List 分区中每个分区的所有行的分区表达式值都在某个值集内。每个分区定义的值集可以有任意多个值，但不能有重复值。可以用 `PARTITION ... VALUES IN (...)` 来定义值集。
 
-Suppose that you want to create a personnel record table. You can create a table as follows:
+假设你要创建一个人员记录表。示例如下：
 
 ```sql
 CREATE TABLE employees (
@@ -307,7 +317,7 @@ CREATE TABLE employees (
 );
 ```
 
-Suppose that there are 20 stores distributed in 4 districts, as shown in the table below:
+假设有 20 个门店，分布在 4 个区域，见下表：
 
     | Region  | Store ID Numbers     |
     | ------- | -------------------- |
@@ -316,7 +326,7 @@ Suppose that there are 20 stores distributed in 4 districts, as shown in the tab
     | West    | 11, 12, 13, 14, 15   |
     | Central | 16, 17, 18, 19, 20   |
 
-If you want to store the personnel data of employees of the same region in the same partition, you can create a List partitioned table based on `store_id`:
+如果你想把同一区域的员工数据存放在同一分区，可以用 `store_id` 进行 List 分区：
 
 ```sql
 CREATE TABLE employees (
@@ -332,19 +342,19 @@ PARTITION BY LIST (store_id) (
 );
 ```
 
-After creating the partitions as above, you can easily add or delete records related to a specific region in the table. For example, suppose that all stores in the East region (East) are sold to another company. Then all the row data related to the store employees of this region can be deleted by executing `ALTER TABLE employees TRUNCATE PARTITION pEast`, which is much more efficient than the equivalent statement `DELETE FROM employees WHERE store_id IN (6, 7, 8, 9, 10)`.
+创建分区后，可以方便地添加或删除某个区域的相关记录。例如，假设东区（East）所有门店都被卖给了另一家公司，可以用 `ALTER TABLE employees TRUNCATE PARTITION pEast` 快速删除该区域的所有数据，比用 `DELETE FROM employees WHERE store_id IN (6, 7, 8, 9, 10)` 更高效。
 
-You can also execute `ALTER TABLE employees DROP PARTITION pEast` to delete all related rows, but this statement also deletes the `pEast` partition from the table definition. In this situation, you must execute the `ALTER TABLE ... ADD PARTITION` statement to recover the original partitioning scheme of the table.
+也可以用 `ALTER TABLE employees DROP PARTITION pEast` 删除整个分区，但这会同时删除分区定义中的 `pEast`，需要用 `ALTER TABLE ... ADD PARTITION` 恢复原有分区方案。
 
 #### Default List partition {#default-list-partition}
 
-Starting from v7.3.0, you can add a default partition to a List or List COLUMNS partitioned table. The default partition acts as a fallback partition, where rows that do not match value sets of any partitions can be placed.
+从 v7.3.0 版本开始，可以为 List 或 List COLUMNS 分区表添加默认分区。默认分区作为备用分区，不匹配任何值集的行会存放在此分区。
 
 > **Note:**
 >
-> This feature is a TiDB extension to MySQL syntax. For a List or List COLUMNS partitioned table with a default partition, the data in the table cannot be directly replicated to MySQL.
+> 该功能是 TiDB 对 MySQL 语法的扩展。带有默认分区的 List 或 List COLUMNS 分区表，表中的数据不能直接复制到 MySQL。
 
-Take the following List partitioned table as an example:
+以如下 List 分区表为例：
 
 ```sql
 CREATE TABLE t (
@@ -358,26 +368,26 @@ PARTITION BY LIST (a) (
 Query OK, 0 rows affected (0.11 sec)
 ```
 
-You can add a default list partition named `pDef` to the table as follows:
+可以为表添加名为 `pDef` 的默认分区：
 
 ```sql
 ALTER TABLE t ADD PARTITION (PARTITION pDef DEFAULT);
 ```
 
-or
+或
 
 ```sql
 ALTER TABLE t ADD PARTITION (PARTITION pDef VALUES IN (DEFAULT));
 ```
 
-In this way, newly inserted values that do not match value sets of any partitions can automatically go into the default partition.
+这样，插入的值如果不在任何分区的值集内，就会自动放入默认分区。
 
 ```sql
 INSERT INTO t VALUES (7, 7);
 Query OK, 1 row affected (0.01 sec)
 ```
 
-You can also add a default partition when creating a List or List COLUMNS partitioned table. For example:
+也可以在创建 List 或 List COLUMNS 分区表时添加默认分区。例如：
 
 ```sql
 CREATE TABLE employees (
@@ -394,7 +404,7 @@ PARTITION BY LIST (store_id) (
 );
 ```
 
-For a List or List COLUMNS partitioned table without a default partition, the values to be inserted using an `INSERT` statement must match value sets defined in the `PARTITION ... VALUES IN (...)` clauses of the table. If the values to be inserted do not match value sets of any partitions, the statement will fail and an error is returned, as shown in the following example:
+如果没有定义默认分区，插入值必须在 `PARTITION ... VALUES IN (...)` 定义的值集内，否则会报错。例如：
 
 ```sql
 CREATE TABLE t (
@@ -411,7 +421,7 @@ INSERT INTO t VALUES (7, 7);
 ERROR 1525 (HY000): Table has no partition for value 7
 ```
 
-To ignore the preceding error, you can add the `IGNORE` keyword to the `INSERT` statement. After this keyword is added, the `INSERT` statement will only insert rows that match the partition value sets and will not insert unmatched rows, without returning an error:
+为避免此错误，可以在 `INSERT` 时加 `IGNORE` 关键字。加上后，`INSERT` 只会插入匹配分区值集的行，不匹配的行会被忽略，不会报错。例如：
 
 ```sql
 test> TRUNCATE t;
@@ -434,18 +444,20 @@ test> select * from t;
 
 ### List COLUMNS partitioning {#list-columns-partitioning}
 
-List COLUMNS partitioning is a variant of List partitioning. You can use multiple columns as partition keys. Besides the integer data type, you can also use the columns in the string, `DATE`, and `DATETIME` data types as partition columns.
+List COLUMNS 分区是 List 分区的变体。可以用多列作为分区键。除了整数类型外，还可以用字符串、`DATE` 和 `DATETIME` 类型的列作为分区列。
 
-Suppose that you want to divide the store employees from the following 12 cities into 4 regions, as shown in the following table:
+假设你要将以下 12 个城市的门店员工划分为 4 个区域，示例如下：
 
+```sql
     | Region | Cities                         |
     | :----- | ------------------------------ |
     | 1      | LosAngeles,Seattle, Houston    |
     | 2      | Chicago, Columbus, Boston      |
     | 3      | NewYork, LongIsland, Baltimore |
     | 4      | Atlanta, Raleigh, Cincinnati   |
+```
 
-You can use List COLUMNS partitioning to create a table and store each row in the partition that corresponds to the employee's city, as shown below:
+可以用 List COLUMNS 分区，将每行存放在对应城市的分区中，示例如下：
 
 ```sql
 CREATE TABLE employees_1 (
@@ -466,9 +478,9 @@ PARTITION BY LIST COLUMNS(city) (
 );
 ```
 
-Unlike List partitioning, in List COLUMNS partitioning, you do not need to use the expression in the `COLUMNS()` clause to convert column values to integers.
+与 List 分区不同，List COLUMNS 分区不需要在 `COLUMNS()` 中用表达式转换列值为整数。
 
-List COLUMNS partitioning can also be implemented using columns of the `DATE` and `DATETIME` types, as shown in the following example. This example uses the same names and columns as the previous `employees_1` table, but uses List COLUMNS partitioning based on the `hired` column:
+List COLUMNS 分区也可以用 `DATE` 和 `DATETIME` 类型的列实现，示例如下。此例用与前例相同的列名，但用 `hired` 列进行 List COLUMNS 分区：
 
 ```sql
 CREATE TABLE employees_2 (
@@ -493,7 +505,7 @@ PARTITION BY LIST COLUMNS(hired) (
 );
 ```
 
-In addition, you can also add multiple columns in the `COLUMNS()` clause. For example:
+此外，还可以在 `COLUMNS()` 中添加多个列。例如：
 
 ```sql
 CREATE TABLE t (
@@ -509,11 +521,11 @@ PARTITION BY LIST COLUMNS(id,name) (
 
 ### Hash partitioning {#hash-partitioning}
 
-Hash partitioning is used to make sure that data is evenly scattered into a certain number of partitions. With Range partitioning, you must specify the range of the column values for each partition when you use Range partitioning, while you just need to specify the number of partitions when you use Hash partitioning.
+Hash 分区用于确保数据均匀分散到若干分区中。使用 Range 分区时，必须在定义时指定每个分区的值范围；使用 Hash 分区时，只需指定分区数。
 
-To create a Hash partitioned table, you need to append a `PARTITION BY HASH (expr)` clause to the `CREATE TABLE` statement. `expr` is an expression that returns an integer. It can be a column name if the type of this column is integer. In addition, you might also need to append `PARTITIONS num`, where `num` is a positive integer indicating how many partitions a table is divided into.
+创建 Hash 分区表时，在 `CREATE TABLE` 语句后加上 `PARTITION BY HASH (expr)` 子句。`expr` 是返回整数的表达式。如果列类型为整数，可以直接用列名。还可能需要加 `PARTITIONS num`，其中 `num` 是正整数，表示分区数。
 
-The following operation creates a Hash partitioned table, which is divided into 4 partitions by `store_id`:
+示例：用 `store_id` 将表分成 4 个分区：
 
 ```sql
 CREATE TABLE employees (
@@ -530,9 +542,9 @@ PARTITION BY HASH(store_id)
 PARTITIONS 4;
 ```
 
-If `PARTITIONS num` is not specified, the default number of partitions is 1.
+如果不指定 `PARTITIONS num`，默认为 1。
 
-You can also use an SQL expression that returns an integer for `expr`. For example, you can partition a table by the hire year:
+也可以用返回整数的表达式进行分区，例如按入职年份分区：
 
 ```sql
 CREATE TABLE employees (
@@ -549,17 +561,17 @@ PARTITION BY HASH( YEAR(hired) )
 PARTITIONS 4;
 ```
 
-The most efficient Hash function is one which operates upon a single table column, and whose value increases or decreases consistently with the column value.
+最优的 Hash 函数是作用于单个表列，且值随列值变化而单调递增或递减的函数。
 
-For example, `date_col` is a column whose type is `DATE`, and the value of the `TO_DAYS(date_col)` expression varies with the value of `date_col`. `YEAR(date_col)` is different from `TO_DAYS(date_col)`, because not every possible change in `date_col` produces an equivalent change in `YEAR(date_col)`.
+例如，`date_col` 是 `DATE` 类型列，`TO_DAYS(date_col)` 的值会随 `date_col` 变化而变化。`YEAR(date_col)` 与 `TO_DAYS(date_col)` 不同，因为并非每个 `date_col` 的变化都导致 `YEAR(date_col)` 的变化。
 
-In contrast, assume that you have an `int_col` column whose type is `INT`. Now consider about the expression `POW(5-int_col,3) + 6`. It is not a good Hash function though, because as the value of `int_col` changes, the result of the expression does not change proportionally. A value change in `int_col` might result in a huge change in the expression result. For example, when `int_col` changes from 5 to 6, the change of the expression result is -1. But the result change might be -7 when `int_col` changes from 6 to 7.
+反之，假设有 `int_col` 列，类型为 `INT`。考虑表达式 `POW(5-int_col,3) + 6`，它不是一个好的 Hash 函数，因为 `int_col` 变化时，表达式的结果不成比例地变化。例如，从 5 变到 6 时，表达式结果变为 -1；从 6 变到 7 时，变化为 -7。
 
-In conclusion, when the expression has a form that is closer to `y = cx`, it is more suitable to be a Hash function. Because the more non-linear an expression is, the more unevenly scattered the data among the partitions tends to be.
+总结：当表达式形式更接近 `y = cx` 时，更适合作为 Hash 函数。因为非线性越强，数据在分区中的分散越不均。
 
-In theory, pruning is also possible for expressions involving more than one column value, but determining which of such expressions are suitable can be quite difficult and time-consuming. For this reason, the use of hashing expressions involving multiple columns is not particularly recommended.
+理论上，涉及多个列值的表达式也可以进行裁剪（pruning），但判断哪些表达式适用较为困难且耗时。因此，不建议使用涉及多个列的哈希表达式。
 
-When using `PARTITION BY HASH`, TiDB decides which partition the data should fall into based on the modulus of the result of the expression. In other words, if a partitioning expression is `expr` and the number of partitions is `num`, `MOD(expr, num)` decides the partition in which the data is stored. Assume that `t1` is defined as follows:
+TiDB 在使用 `PARTITION BY HASH` 时，会根据表达式的模数决定数据落在哪个分区。即：如果分区表达式为 `expr`，分区数为 `num`，则用 `MOD(expr, num)` 来决定数据存放的分区。假设定义如下：
 
 ```sql
 CREATE TABLE t1 (col1 INT, col2 CHAR(5), col3 DATE)
@@ -567,7 +579,7 @@ CREATE TABLE t1 (col1 INT, col2 CHAR(5), col3 DATE)
     PARTITIONS 4;
 ```
 
-When you insert a row of data into `t1` and the value of `col3` is '2005-09-15', then this row is inserted into partition 1:
+插入一行数据，`col3` 为 `'2005-09-15'`，则会落在分区 1：
 
     MOD(YEAR('2005-09-01'),4)
     =  MOD(2005,4)
@@ -575,13 +587,13 @@ When you insert a row of data into `t1` and the value of `col3` is '2005-09-15',
 
 ### Key partitioning {#key-partitioning}
 
-Starting from v7.0.0, TiDB supports Key partitioning. For TiDB versions earlier than v7.0.0, if you try creating a Key partitioned table, TiDB creates it as a non-partitioned table and returns a warning.
+从 v7.0.0 版本开始，TiDB 支持 Key 分区。对于早于 v7.0.0 的版本，如果尝试创建 Key 分区表，TiDB 会将其作为非分区表创建并发出警告。
 
-Both Key partitioning and Hash partitioning can evenly distribute data into a certain number of partitions. The difference is that Hash partitioning only supports distributing data based on a specified integer expression or an integer column, while Key partitioning supports distributing data based on a column list, and partitioning columns of Key partitioning are not limited to the integer type. The Hash algorithm of TiDB for Key partitioning is different from that of MySQL, so the table data distribution is also different.
+Key 分区和 Hash 分区都能将数据均匀分散到若干分区中。不同之处在于，Hash 分区只支持基于指定的整数表达式或整数列进行分散，而 Key 分区支持基于列列表进行分散，且分区列不限于整数类型。TiDB 的 Key 分区哈希算法与 MySQL 不同，导致数据分布也不同。
 
-To create a Key partitioned table, you need to append a `PARTITION BY KEY (columnList)` clause to the `CREATE TABLE` statement. `columnList` is a column list with one or more column names. The data type of each column in the list can be any type except `BLOB`, `JSON`, and `GEOMETRY` (Note that TiDB does not support `GEOMETRY`). In addition, you might also need to append `PARTITIONS num` (where `num` is a positive integer indicating how many partitions a table is divided into), or append the definition of the partition names. For example, adding `(PARTITION p0, PARTITION p1)` means dividing the table into two partitions named `p0` and `p1`.
+创建 Key 分区表时，在 `CREATE TABLE` 后加上 `PARTITION BY KEY (columnList)`。`columnList` 是一个或多个列名组成的列列表。每个列的类型可以是任何类型，除了 `BLOB`、`JSON` 和 `GEOMETRY`（注意 TiDB 不支持 `GEOMETRY`）。还可能需要加 `PARTITIONS num`（表示分区数的正整数）或定义分区名。例如，加入 `(PARTITION p0, PARTITION p1)` 表示将表划分为两个分区，名为 `p0` 和 `p1`。
 
-The following operation creates a Key partitioned table, which is divided into 4 partitions by `store_id`:
+示例：用 `store_id` 列进行 Key 分区，划分为 4 个分区：
 
 ```sql
 CREATE TABLE employees (
@@ -598,9 +610,9 @@ PARTITION BY KEY(store_id)
 PARTITIONS 4;
 ```
 
-If `PARTITIONS num` is not specified, the default number of partitions is 1.
+如果不指定 `PARTITIONS num`，默认为 1。
 
-You can also create a Key partitioned table based on non-integer columns such as VARCHAR. For example, you can partition a table by the `fname` column:
+也可以用非整数列（如 `VARCHAR`）进行 Key 分区。例如，用 `fname` 列进行分区：
 
 ```sql
 CREATE TABLE employees (
@@ -617,7 +629,7 @@ PARTITION BY KEY(fname)
 PARTITIONS 4;
 ```
 
-You can also create a Key partitioned table based on multiple columns. For example, you can divide a table into 4 partitions based on `fname` and `store_id`:
+还可以用多个列进行分区。例如，用 `fname` 和 `store_id` 组成列列表，划分为 4 个分区：
 
 ```sql
 CREATE TABLE employees (
@@ -634,11 +646,11 @@ PARTITION BY KEY(fname, store_id)
 PARTITIONS 4;
 ```
 
-Similar to MySQL, TiDB supports creating Key partitioned tables with an empty partition column list specified in `PARTITION BY KEY`. For example, the following statement creates a partitioned table using the primary key `id` as the partitioning key:
+与 MySQL 类似，TiDB 支持用空的分区列列表创建 Key 分区表，例如：
 
 ```sql
 CREATE TABLE employees (
-    id INT NOT NULL PRIMARY KEY,
+    id INT NOT NULL,
     fname VARCHAR(30),
     lname VARCHAR(30),
     hired DATE NOT NULL DEFAULT '1970-01-01',
@@ -651,7 +663,7 @@ PARTITION BY KEY()
 PARTITIONS 4;
 ```
 
-If the table lacks a primary key but contains a unique key, the unique key is used as the partitioning key:
+如果表没有主键但有唯一键，则用唯一键作为分区键：
 
 ```sql
 CREATE TABLE k1 (
@@ -663,35 +675,35 @@ PARTITION BY KEY()
 PARTITIONS 2;
 ```
 
-However, the previous statement will fail if the unique key column is not defined as `NOT NULL`.
+但如果唯一键列未定义为 `NOT NULL`，则会失败。
 
-#### How TiDB handles Linear Hash partitions {#how-tidb-handles-linear-hash-partitions}
+#### TiDB 如何处理线性 Hash 分区 {#how-tidb-handles-linear-hash-partitions}
 
-Before v6.4.0, if you execute DDL statements of [MySQL Linear Hash](https://dev.mysql.com/doc/refman/8.0/en/partitioning-linear-hash.html) partitions in TiDB, TiDB can only create non-partitioned tables. In this case, if you still want to use partitioned tables in TiDB, you need to modify the DDL statements.
+在 v6.4.0 之前，如果在 TiDB 执行 [MySQL Linear Hash](https://dev.mysql.com/doc/refman/8.0/en/partitioning-linear-hash.html) 分区的 DDL 语句，只会创建非分区表。如果仍想用分区表，需要修改 DDL。
 
-Since v6.4.0, TiDB supports parsing the MySQL `PARTITION BY LINEAR HASH` syntax but ignores the `LINEAR` keyword in it. If you have some existing DDL and DML statements of MySQL Linear Hash partitions, you can execute them in TiDB without modification:
+从 v6.4.0 开始，TiDB 支持解析 MySQL 的 `PARTITION BY LINEAR HASH` 语法，但会忽略其中的 `LINEAR` 关键字。已有的 MySQL Linear Hash 分区的 DDL 和 DML 语句可以直接在 TiDB 中执行，无需修改：
 
--   For a `CREATE` statement of MySQL Linear Hash partitions, TiDB will create a non-linear Hash partitioned table (note that there is no Linear Hash partitioned table in TiDB). If the number of partitions is a power of 2, the rows in the TiDB Hash partitioned table are distributed the same as that in the MySQL Linear Hash partitioned table. Otherwise, the distribution of these rows in TiDB is different from MySQL. This is because non-linear partitioned tables use a simple "modulus number of partition", while linear partitioned tables use "modulus next power of 2 and fold the values between the number of partitions and the next power of 2". For details, see [#38450](https://github.com/pingcap/tidb/issues/38450).
+-   对于 MySQL Linear Hash 分区的 `CREATE` 语句，TiDB 会创建非线性 Hash 分区表（注意，TiDB 中没有 Linear Hash 分区表）。如果分区数是 2 的幂，TiDB 中的行分布与 MySQL 相同；否则，分布不同。这是因为非线性分区表用简单的“模分区数”，而线性分区用“模下一幂次并折叠值”的方式。详见 [#38450](https://github.com/pingcap/tidb/issues/38450)。
 
--   For all other statements of MySQL Linear Hash partitions, they work in TiDB the same as that in MySQL, except that the rows are distributed differently if the number of partitions is not a power of 2, which will give different results for [partition selection](#partition-selection), `TRUNCATE PARTITION`, and `EXCHANGE PARTITION`.
+-   对于其他 MySQL Linear Hash 分区的语句，TiDB 也会按 MySQL 的方式执行，只是当分区数不是 2 的幂时，行的分布会不同，导致 [partition selection](#partition-selection)、`TRUNCATE PARTITION` 和 `EXCHANGE PARTITION` 的结果不同。
 
-### How TiDB handles Linear Key partitions {#how-tidb-handles-linear-key-partitions}
+### TiDB 如何处理线性 Key 分区 {#how-tidb-handles-linear-key-partitions}
 
-Starting from v7.0.0, TiDB supports parsing the MySQL `PARTITION BY LINEAR KEY` syntax for Key partitioning. However, TiDB ignores the `LINEAR` keyword and uses a non-linear hash algorithm instead.
+从 v7.0.0 开始，TiDB 支持解析 MySQL 的 `PARTITION BY LINEAR KEY` 语法，但会忽略 `LINEAR` 关键字，使用非线性哈希算法。
 
-Before v7.0.0, if you try creating a Key partitioned table, TiDB creates it as a non-partitioned table and returns a warning.
+在 v7.0.0 之前，尝试创建 Key 分区表会被作为非分区表创建并发出警告。
 
-### How TiDB partitioning handles NULL {#how-tidb-partitioning-handles-null}
+### TiDB 如何处理 NULL {#how-tidb-partitioning-handles-null}
 
-It is allowed in TiDB to use `NULL` as the calculation result of a partitioning expression.
+在 TiDB 中，允许用 `NULL` 作为分区表达式的计算结果。
 
 > **Note:**
 >
-> `NULL` is not an integer. TiDB's partitioning implementation treats `NULL` as being less than any other integer values, just as `ORDER BY` does.
+> `NULL` 不是整数。TiDB 的分区实现会将 `NULL` 视为比任何其他整数值都小，就像 `ORDER BY` 一样。
 
-#### Handling of NULL with Range partitioning {#handling-of-null-with-range-partitioning}
+#### Range 分区中 NULL 的处理 {#handling-of-null-with-range-partitioning}
 
-When you insert a row into a table partitioned by Range, and the column value used to determine the partition is `NULL`, then this row is inserted into the lowest partition.
+当向 Range 分区表插入一行，且用于确定分区的列值为 `NULL` 时，该行会存放在最小的分区中。
 
 ```sql
 CREATE TABLE t1 (
@@ -731,7 +743,7 @@ select * from t1 partition(p2);
 
     Empty set (0.00 sec)
 
-Drop the `p0` partition and verify the result:
+删除 `p0` 分区后验证结果：
 
 ```sql
 alter table t1 drop partition p0;
@@ -745,9 +757,9 @@ select * from t1;
 
     Empty set (0.00 sec)
 
-#### Handling of NULL with Hash partitioning {#handling-of-null-with-hash-partitioning}
+#### Hash 分区中 NULL 的处理 {#handling-of-null-with-hash-partitioning}
 
-When partitioning tables by Hash, there is a different way of handling `NULL` value - if the calculation result of the partitioning expression is `NULL`, it is considered as `0`.
+在 Hash 分区中，处理 `NULL` 的方式不同——如果分区表达式的结果为 `NULL`，则视为 `0`。
 
 ```sql
 CREATE TABLE th (
@@ -785,59 +797,57 @@ select * from th partition (p1);
 
     Empty set (0.00 sec)
 
-You can see that the inserted record `(NULL, 'mothra')` falls into the same partition as `(0, 'gigan')`.
+可以看到，插入的 `(NULL, 'mothra')` 和 `(0, 'gigan')` 落在同一分区。
 
 > **Note:**
 >
-> `NULL` values by Hash partitions in TiDB are handled in the same way as described in [How MySQL Partitioning Handles NULL](https://dev.mysql.com/doc/refman/8.0/en/partitioning-handling-nulls.html), which, however, is not consistent with the actual behavior of MySQL. In other words, MySQL's implementation in this case is not consistent with its documentation.
->
-> In this case, the actual behavior of TiDB is in line with the description of this document.
+> `NULL` 值在 TiDB 的 Hash 分区中处理方式与 [MySQL 分区中 NULL 的处理](https://dev.mysql.com/doc/refman/8.0/en/partitioning-handling-nulls.html) 一致，但实际行为与 MySQL 不完全相同。换句话说，MySQL 在此场景中的实现与其文档描述不一致。TiDB 的实际行为与本文描述一致。
 
-#### Handling of NULL with Key partitioning {#handling-of-null-with-key-partitioning}
+#### Key 分区中 NULL 的处理 {#handling-of-null-with-key-partitioning}
 
-For Key partitioning, the way of handling `NULL` value is consistent with that of Hash partitioning. If the value of a partitioning field is `NULL`, it is treated as `0`.
+Key 分区中，处理 `NULL` 的方式与 Hash 分区相同。若分区字段值为 `NULL`，视为 `0`。
 
 ## Partition management {#partition-management}
 
-For `RANGE`, `RANGE COLUMNS`, `LIST`, and `LIST COLUMNS` partitioned tables, you can manage the partitions as follows:
+对于 `RANGE`、`RANGE COLUMNS`、`LIST` 和 `LIST COLUMNS` 分区表，可以进行如下管理：
 
--   Add partitions using the `ALTER TABLE <table name> ADD PARTITION (<partition specification>)` statement.
--   Drop partitions using the `ALTER TABLE <table name> DROP PARTITION <list of partitions>` statement.
--   Remove all data from specified partitions using the `ALTER TABLE <table name> TRUNCATE PARTITION <list of partitions>` statement. The logic of `TRUNCATE PARTITION` is similar to [`TRUNCATE TABLE`](/sql-statements/sql-statement-truncate.md) but it is for partitions.
--   Merge, split, or make other changes to the partitions using the `ALTER TABLE <table name> REORGANIZE PARTITION <list of partitions> INTO (<new partition definitions>)` statement.
+-   使用 `ALTER TABLE <table name> ADD PARTITION (<partition specification>)` 添加分区。
+-   使用 `ALTER TABLE <table name> DROP PARTITION <list of partitions>` 删除分区。
+-   使用 `ALTER TABLE <table name> TRUNCATE PARTITION <list of partitions>` 清空指定分区中的所有数据。`TRUNCATE PARTITION` 的逻辑类似于 [`TRUNCATE TABLE`](/sql-statements/sql-statement-truncate.md)，但作用于分区。
+-   使用 `ALTER TABLE <table name> REORGANIZE PARTITION <list of partitions> INTO (<new partition definitions>)` 进行合并、拆分或其他变更。
 
-For `HASH` and `KEY` partitioned tables, you can manage the partitions as follows:
+对于 `HASH` 和 `KEY` 分区表，可以进行如下管理：
 
--   Decrease the number of partitions using the `ALTER TABLE <table name> COALESCE PARTITION <number of partitions to decrease by>` statement. This operation reorganizes the partitions by copying the whole table to the new number of partitions online.
--   Increase the number of partitions using the `ALTER TABLE <table name> ADD PARTITION <number of partitions to increase by | (additional partition definitions)>` statement. This operation reorganizes the partitions by copying the whole table to the new number of partitions online.
--   Remove all data from specified partitions using the `ALTER TABLE <table name> TRUNCATE PARTITION <list of partitions>` statement. The logic of `TRUNCATE PARTITION` is similar to [`TRUNCATE TABLE`](/sql-statements/sql-statement-truncate.md) but it is for partitions.
+-   使用 `ALTER TABLE <table name> COALESCE PARTITION <number of partitions to decrease by>` 减少分区数。此操作会在在线状态下将整个表复制到新的分区数中，重新组织分区。
+-   使用 `ALTER TABLE <table name> ADD PARTITION <number of partitions to increase by | (additional partition definitions)>` 增加分区数。此操作也会在在线状态下复制整个表。
+-   使用 `ALTER TABLE <table name> TRUNCATE PARTITION <list of partitions>` 清空指定分区中的数据，逻辑同 [`TRUNCATE TABLE`]。
 
-`EXCHANGE PARTITION` works by swapping a partition and a non-partitioned table, similar to how renaming a table like `RENAME TABLE t1 TO t1_tmp, t2 TO t1, t1_tmp TO t2` works.
+`EXCHANGE PARTITION` 通过交换一个分区和非分区表实现，类似于重命名表的操作 `RENAME TABLE t1 TO t1_tmp, t2 TO t1, t1_tmp TO t2`。
 
-For example, `ALTER TABLE partitioned_table EXCHANGE PARTITION p1 WITH TABLE non_partitioned_table` swaps the `partitioned_table` table `p1` partition with the `non_partitioned_table` table.
+例如，`ALTER TABLE partitioned_table EXCHANGE PARTITION p1 WITH TABLE non_partitioned_table` 会交换 `partitioned_table` 的 `p1` 分区和 `non_partitioned_table` 表。
 
-Ensure that all rows that you are exchanging into the partition match the partition definition; otherwise, the statement will fail.
+确保所有要交换的行都符合分区定义，否则操作会失败。
 
-Note that TiDB has some specific features that might affect `EXCHANGE PARTITION`. When the table structure contains such features, you need to ensure that `EXCHANGE PARTITION` meets the [MySQL's EXCHANGE PARTITION condition](https://dev.mysql.com/doc/refman/8.0/en/partitioning-management-exchange.html). Meanwhile, ensure that these specific features are defined the same for both partitioned and non-partitioned tables. These specific features include the following:
+注意，TiDB 有一些特定功能可能影响 `EXCHANGE PARTITION`，当表结构包含这些功能时，需要确保 `EXCHANGE PARTITION` 满足 [MySQL 的 EXCHANGE PARTITION 条件](https://dev.mysql.com/doc/refman/8.0/en/partitioning-management-exchange.html)。同时，确保这些特定功能在分区表和非分区表中定义一致。这些功能包括：
 
 <CustomContent platform="tidb">
 
--   [Placement Rules in SQL](/placement-rules-in-sql.md): placement policies are the same.
+-   [Placement Rules in SQL](/placement-rules-in-sql.md): placement policies 一致。
 
 </CustomContent>
 
--   [TiFlash](/tikv-overview.md): the numbers of TiFlash replicas are the same.
--   [Clustered Indexes](/clustered-indexes.md): partitioned and non-partitioned tables are both `CLUSTERED`, or both `NONCLUSTERED`.
+-   [TiFlash](/tikv-overview.md): TiFlash 副本数一致。
+-   [Clustered Indexes](/clustered-indexes.md): 分区表和非分区表都为 `CLUSTERED` 或都为 `NONCLUSTERED`。
 
-In addition, there are limitations on the compatibility of `EXCHANGE PARTITION` with other components. Both partitioned and non-partitioned tables must have the same definition.
+此外，`EXCHANGE PARTITION` 与其他组件的兼容性有限制。分区表和非分区表都必须定义相同。
 
--   TiFlash: when the TiFlash replica definitions in partitioned and non-partitioned tables are different, the `EXCHANGE PARTITION` operation cannot be performed.
--   TiCDC: TiCDC replicates the `EXCHANGE PARTITION` operation when both partitioned and non-partitioned tables have primary keys or unique keys. Otherwise, TiCDC will not replicate the operation.
--   TiDB Lightning and BR: do not perform the `EXCHANGE PARTITION` operation during import using TiDB Lightning or during restore using BR.
+-   TiFlash：当分区表和非分区表的 TiFlash 副本定义不同，不能执行 `EXCHANGE PARTITION`。
+-   TiCDC：当分区表和非分区表都含有主键或唯一键时，TiCDC 会复制 `EXCHANGE PARTITION` 操作，否则不会。
+-   TiDB Lightning 和 BR：在导入（TiDB Lightning）或恢复（BR）过程中不执行 `EXCHANGE PARTITION`。
 
-### Manage Range, Range COLUMNS, List, and List COLUMNS partitions {#manage-range-range-columns-list-and-list-columns-partitions}
+### 管理 Range、Range COLUMNS、List 和 List COLUMNS 分区 {#manage-range-range-columns-list-and-list-columns-partitions}
 
-This section uses the partitioned tables created by the following SQL statements as examples to show you how to manage Range and List partitions.
+本节以以下 SQL 创建的分区表为例，介绍如何管理 Range 和 List 分区。
 
 ```sql
 CREATE TABLE members (
@@ -892,7 +902,7 @@ ALTER TABLE members ADD PARTITION (PARTITION `p1990to2010` VALUES LESS THAN (201
 ALTER TABLE member_level ADD PARTITION (PARTITION l5_6 VALUES IN (5,6));
 ```
 
-For a Range partitioned table, `ADD PARTITION` will append new partitions after the last existing partition. Compared with the existing partitions, the value defined in `VALUES LESS THAN` for new partitions must be greater. Otherwise, an error is reported:
+对于 Range 分区表，`ADD PARTITION` 会在最后一个已有分区后追加新分区。新分区的 `VALUES LESS THAN` 定义的值必须大于已有分区，否则会报错：
 
 ```sql
 ALTER TABLE members ADD PARTITION (PARTITION p1990 VALUES LESS THAN (2000));
@@ -900,9 +910,9 @@ ALTER TABLE members ADD PARTITION (PARTITION p1990 VALUES LESS THAN (2000));
 
     ERROR 1493 (HY000): VALUES LESS THAN value must be strictly increasing for each partition
 
-#### Reorganize partitions {#reorganize-partitions}
+#### 重新组织分区 {#reorganize-partitions}
 
-Split a partition:
+拆分分区：
 
 ```sql
 ALTER TABLE members REORGANIZE PARTITION `p1990to2010` INTO
@@ -917,7 +927,7 @@ ALTER TABLE member_level REORGANIZE PARTITION l5_6 INTO
  PARTITION l6 VALUES IN (6));
 ```
 
-Merge partitions:
+合并分区：
 
 ```sql
 ALTER TABLE members REORGANIZE PARTITION pBefore1950,p1950 INTO (PARTITION pBefore1960 VALUES LESS THAN (1960));
@@ -925,7 +935,7 @@ ALTER TABLE members REORGANIZE PARTITION pBefore1950,p1950 INTO (PARTITION pBefo
 ALTER TABLE member_level REORGANIZE PARTITION l1,l2 INTO (PARTITION l1_2 VALUES IN (1,2));
 ```
 
-Change the partitioning scheme definition:
+修改分区方案定义：
 
 ```sql
 ALTER TABLE members REORGANIZE PARTITION pBefore1960,p1960,p1970,p1980,p1990,p2000,p2010,p2020,pMax INTO
@@ -938,51 +948,50 @@ ALTER TABLE member_level REORGANIZE PARTITION l1_2,l3,l4,l5,l6 INTO
  PARTITION lEven VALUES IN (2,4,6));
 ```
 
-When reorganizing partitions, you need to note the following key points:
+在重新组织分区时，需注意以下要点：
 
--   Reorganizing partitions (including merging or splitting partitions) can change the listed partitions into a new set of partition definitions but cannot change the type of partitioning (for example, change the List type to the Range type, or change the Range COLUMNS type to the Range type).
+-   重新组织（包括合并或拆分）会将原有分区变成一组新的定义，但不能改变分区类型（如由 List 改为 Range，或 Range COLUMNS 改为 Range）。
+-   对于 Range 分区，只能重新组织相邻的分区：
 
--   For a Range partition table, you can reorganize only adjacent partitions in it.
+```sql
+ALTER TABLE members REORGANIZE PARTITION p1800,p2000 INTO (PARTITION p2000 VALUES LESS THAN (2100));
+```
 
-    ```sql
-    ALTER TABLE members REORGANIZE PARTITION p1800,p2000 INTO (PARTITION p2000 VALUES LESS THAN (2100));
-    ```
+    ERROR 8200 (HY000): Unsupported REORGANIZE PARTITION of RANGE; not adjacent partitions
 
-        ERROR 8200 (HY000): Unsupported REORGANIZE PARTITION of RANGE; not adjacent partitions
+-   若要修改范围的终点，新的 `VALUES LESS THAN` 定义的值必须覆盖最后一个分区中的所有行，否则会报错：
 
--   For a Range partitioned table, to modify the end of the range, the new end defined in `VALUES LESS THAN` must cover the existing rows in the last partition. Otherwise, existing rows no longer fit and an error is reported:
+```sql
+INSERT INTO members VALUES (313, "John", "Doe", "2022-11-22", NULL);
+ALTER TABLE members REORGANIZE PARTITION p2000 INTO (PARTITION p2000 VALUES LESS THAN (2050)); -- 这会成功，因为 2050 覆盖了现有行
+ALTER TABLE members REORGANIZE PARTITION p2000 INTO (PARTITION p2000 VALUES LESS THAN (2020)); -- 这会失败，因为 2022 不在范围内
+```
 
-    ```sql
-    INSERT INTO members VALUES (313, "John", "Doe", "2022-11-22", NULL);
-    ALTER TABLE members REORGANIZE PARTITION p2000 INTO (PARTITION p2000 VALUES LESS THAN (2050)); -- This statement will work as expected, because 2050 covers the existing rows.
-    ALTER TABLE members REORGANIZE PARTITION p2000 INTO (PARTITION p2000 VALUES LESS THAN (2020)); -- This statement will fail with an error, because 2022 does not fit in the new range.
-    ```
+    ERROR 1526 (HY000): Table has no partition for value 2022
 
-        ERROR 1526 (HY000): Table has no partition for value 2022
+-   对于 List 分区，要修改某个分区的值集，新的定义必须覆盖该分区中的所有值，否则会报错：
 
--   For a List partitioned table, to modify the set of values defined for a partition, the new definition must cover the existing values in that partition. Otherwise, an error is reported:
+```sql
+INSERT INTO member_level (id, level) values (313, 6);
+ALTER TABLE member_level REORGANIZE PARTITION lEven INTO (PARTITION lEven VALUES IN (2,4));
+```
 
-    ```sql
-    INSERT INTO member_level (id, level) values (313, 6);
-    ALTER TABLE member_level REORGANIZE PARTITION lEven INTO (PARTITION lEven VALUES IN (2,4));
-    ```
+    ERROR 1526 (HY000): Table has no partition for value 6
 
-        ERROR 1526 (HY000): Table has no partition for value 6
+-   重新组织后，相关分区的统计信息会变得过时，系统会发出如下警告。此时可以用 [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) 语句更新统计信息。
 
--   After partitions are reorganized, the statistics of the corresponding partitions are outdated, so you will get the following warning. In this case, you can use the [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) statement to update the statistics.
+```sql
++---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Level   | Code | Message                                                                                                                                                |
++---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Warning | 1105 | The statistics of related partitions will be outdated after reorganizing partitions. Please use 'ANALYZE TABLE' statement if you want to update it now |
++---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
 
-    ```sql
-    +---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | Level   | Code | Message                                                                                                                                                |
-    +---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | Warning | 1105 | The statistics of related partitions will be outdated after reorganizing partitions. Please use 'ANALYZE TABLE' statement if you want to update it now |
-    +---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
-    1 row in set (0.00 sec)
-    ```
+### 管理 Hash 和 Key 分区 {#manage-hash-and-key-partitions}
 
-### Manage Hash and Key partitions {#manage-hash-and-key-partitions}
-
-This section uses the partitioned table created by the following SQL statement as examples to show you how to manage Hash partitions. For Key partitions, you can use the same management statements as well.
+本节以以下 SQL 创建的分区表为例，介绍如何管理 Hash 分区。对于 Key 分区，也可以用相同的管理语句。
 
 ```sql
 CREATE TABLE example (
@@ -993,15 +1002,15 @@ PARTITION BY HASH(id)
 PARTITIONS 2;
 ```
 
-#### Increase the number of partitions {#increase-the-number-of-partitions}
+#### 增加分区数 {#increase-the-number-of-partitions}
 
-Increase the number of partitions for the `example` table by 1 (from 2 to 3):
+将 `example` 表的分区数增加 1（从 2 增加到 3）：
 
 ```sql
 ALTER TABLE example ADD PARTITION PARTITIONS 1;
 ```
 
-You can also specify partition options by adding partition definitions. For example, you can use the following statement to increase the number of partitions from 3 to 5 and specify the names of the newly added partitions as `pExample4` and `pExample5`:
+也可以用定义分区的方式增加。例如，将分区数从 3 增加到 5，并指定新加入的分区名为 `pExample4` 和 `pExample5`：
 
 ```sql
 ALTER TABLE example ADD PARTITION
@@ -1009,11 +1018,11 @@ ALTER TABLE example ADD PARTITION
  PARTITION pExample5 COMMENT = 'not p4, but pExample5 instead');
 ```
 
-#### Decrease the number of partitions {#decrease-the-number-of-partitions}
+#### 减少分区数 {#decrease-the-number-of-partitions}
 
-Unlike Range and List partitioning, `DROP PARTITION` is not supported for Hash and Key partitioning, but you can decrease the number of partitions with `COALESCE PARTITION` or delete all data from specific partitions with `TRUNCATE PARTITION`.
+不同于 Range 和 List 分区，Hash 和 Key 分区不支持 `DROP PARTITION`，但可以用 `COALESCE PARTITION` 减少分区数，或用 `TRUNCATE PARTITION` 删除特定分区中的所有数据。
 
-Decrease the number of partitions for the `example` table by 1 (from 5 to 4):
+将 `example` 表的分区数减少 1（从 5 到 4）：
 
 ```sql
 ALTER TABLE example COALESCE PARTITION 1;
@@ -1021,7 +1030,7 @@ ALTER TABLE example COALESCE PARTITION 1;
 
 > **Note:**
 >
-> The process of changing the number of partitions for Hash or Key partitioned tables reorganizes the partitions by copying all data to the new number of partitions. Therefore, after changing the number of partitions for a Hash or Key partitioned table, you will get the following warning about the outdated statistics. In this case, you can use the [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) statement to update the statistics.
+> 改变 Hash 或 Key 分区表的分区数会将所有数据复制到新的分区数中，重新组织分区。因此，操作后会出现统计信息过时的警告。可以用 [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) 更新统计信息。
 >
 > ```sql
 > +---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1032,7 +1041,7 @@ ALTER TABLE example COALESCE PARTITION 1;
 > 1 row in set (0.00 sec)
 > ```
 
-To better understand how the `example` table is organized now, you can show the SQL statement that is used to recreate the `example` table as follows:
+可以用 `SHOW CREATE TABLE` 查看当前 `example` 表的定义：
 
 ```sql
 SHOW CREATE TABLE\G
@@ -1052,9 +1061,9 @@ SHOW CREATE TABLE\G
      PARTITION `pExample4` COMMENT 'not p3, but pExample4 instead')
     1 row in set (0.01 sec)
 
-#### Truncate partitions {#truncate-partitions}
+#### 清空分区 {#truncate-partitions}
 
-Delete all data from a partition:
+清空某个分区中的所有数据：
 
 ```sql
 ALTER TABLE example TRUNCATE PARTITION p0;
@@ -1062,47 +1071,45 @@ ALTER TABLE example TRUNCATE PARTITION p0;
 
     Query OK, 0 rows affected (0.03 sec)
 
-### Convert a partitioned table to a non-partitioned table {#convert-a-partitioned-table-to-a-non-partitioned-table}
+### 将分区表转换为非分区表 {#convert-a-partitioned-table-to-a-non-partitioned-table}
 
-To convert a partitioned table to a non-partitioned table, you can use the following statement, which removes the partitioning, copies all rows of the table, and recreates the indexes online for the table:
+将分区表转换为非分区表，可以用以下语句，去除分区，复制所有行，并在线重建索引：
 
 ```sql
 ALTER TABLE <table_name> REMOVE PARTITIONING
 ```
 
-For example, to convert the `members` partitioned table to the non-partitioned table, you can execute the following statement:
+例如，将 `members` 分区表转换为非分区表：
 
 ```sql
 ALTER TABLE members REMOVE PARTITIONING
 ```
 
-### Partition an existing table {#partition-an-existing-table}
+### 对已有表进行分区 {#partition-an-existing-table}
 
-To partition an existing non-partitioned table or modify the partition type of an existing partitioned table, you can use the following statement, which copies all rows and recreates the indexes online according to the new partition definitions:
+要对已有的非分区表进行分区，或修改已分区表的分区类型，可以用以下语句，复制所有行，在线重建索引，依据新的分区定义：
 
 ```sql
-ALTER TABLE <table_name> PARTITION BY <new partition type and definitions> [UPDATE INDEXES (<index name> {GLOBAL|LOCAL}[ , <index name> {GLOBAL|LOCAL}...])]
+ALTER TABLE <table_name> PARTITION BY <新分区类型和定义> [UPDATE INDEXES (<index name> {GLOBAL|LOCAL}[ , <index name> {GLOBAL|LOCAL}...])]
 ```
 
-Examples:
-
-To convert the existing `members` table to a HASH partitioned table with 10 partitions, you can execute the following statement:
+示例：将 `members` 表改为 Hash 分区，分 10 个分区：
 
 ```sql
 ALTER TABLE members PARTITION BY HASH(id) PARTITIONS 10;
 ```
 
-To convert the existing `member_level` table to a RANGE partitioned table, you can execute the following statement:
+将 `member_level` 表改为 Range 分区：
 
 ```sql
 ALTER TABLE member_level PARTITION BY RANGE(level)
 (PARTITION pLow VALUES LESS THAN (1),
  PARTITION pMid VALUES LESS THAN (3),
- PARTITION pHigh VALUES LESS THAN (7)
+ PARTITION pHigh VALUES LESS THAN (7),
  PARTITION pMax VALUES LESS THAN (MAXVALUE));
 ```
 
-When partitioning a non-partitioned table or repartitioning an already partitioned table, you can update the indexes to be global or local as needed:
+在对非分区表或已分区表重新分区时，可以根据需要更新索引为全局或本地：
 
 ```sql
 CREATE TABLE t1 (
@@ -1119,9 +1126,9 @@ ALTER TABLE t1 PARTITION BY HASH (col1) PARTITIONS 3 UPDATE INDEXES (uidx12 LOCA
 
 ## Partition pruning {#partition-pruning}
 
-[Partition pruning](/partition-pruning.md) is an optimization which is based on a very simple idea - do not scan the partitions that do not match.
+[Partition pruning](/partition-pruning.md) 是一种优化技术，思想简单——不要扫描不匹配的分区。
 
-Assume that you create a partitioned table `t1`:
+假设你创建了一个分区表 `t1`：
 
 ```sql
 CREATE TABLE t1 (
@@ -1139,7 +1146,7 @@ PARTITION BY RANGE( region_code ) (
 );
 ```
 
-If you want to get the result of this `SELECT` statement:
+如果你想得到以下 `SELECT` 语句的结果：
 
 ```sql
 SELECT fname, lname, region_code, dob
@@ -1147,20 +1154,20 @@ SELECT fname, lname, region_code, dob
     WHERE region_code > 125 AND region_code < 130;
 ```
 
-It is evident that the result falls in either the `p1` or the `p2` partition, that is, you just need to search for the matching rows in `p1` and `p2`. Excluding the unneeded partitions is so-called "pruning". If the optimizer is able to prune a part of partitions, the execution of the query in the partitioned table will be much faster than that in a non-partitioned table.
+显然，结果只在 `p1` 和 `p2` 分区中，即只需在 `p1` 和 `p2` 中搜索匹配的行。排除不需要的分区就是所谓的“裁剪（pruning）”。如果优化器能裁剪掉部分分区，分区表的查询会比非分区表快得多。
 
-The optimizer can prune partitions through `WHERE` conditions in the following two scenarios:
+优化器可以通过以下两种场景中的 `WHERE` 条件进行裁剪：
 
--   partition_column = constant
--   partition_column IN (constant1, constant2, ..., constantN)
+-   partition_column = 常量
+-   partition_column IN (常量1, 常量2, ..., 常量N)
 
-Currently, partition pruning does not work with `LIKE` conditions.
+目前，分区裁剪不支持 `LIKE` 条件。
 
-### Some cases for partition pruning to take effect {#some-cases-for-partition-pruning-to-take-effect}
+### 分区裁剪生效的某些情况 {#some-cases-for-partition-pruning-to-take-effect}
 
-1.  Partition pruning uses the query conditions on the partitioned table, so if the query conditions cannot be pushed down to the partitioned table according to the planner's optimization rules, partition pruning does not apply for this query.
+1.  分区裁剪使用了查询条件在分区表上，因此如果查询条件不能根据优化规则下推到分区表，裁剪不生效。
 
-    For example:
+    例如：
 
     ```sql
     create table t1 (x int) partition by range (x) (
@@ -1173,17 +1180,17 @@ Currently, partition pruning does not work with `LIKE` conditions.
     explain select * from t1 left join t2 on t1.x = t2.x where t2.x > 5;
     ```
 
-    In this query, the left out join is converted to the inner join, and then `t1.x > 5` is derived from `t1.x = t2.x` and `t2.x > 5`, so it could be used in partition pruning and only the partition `p1` remains.
+    在此查询中，左连接会转为内连接，然后 `t1.x > 5` 从 `t1.x = t2.x` 和 `t2.x > 5` 推导出来，因此可以用在裁剪中，只剩下 `p1` 分区。
 
     ```sql
     explain select * from t1 left join t2 on t1.x = t2.x and t2.x > 5;
     ```
 
-    In this query, `t2.x > 5` cannot be pushed down to the `t1` partitioned table, so partition pruning would not take effect for this query.
+    在此查询中，`t2.x > 5` 不能下推到 `t1` 的分区表，因此裁剪不会生效。
 
-2.  Since partition pruning is done during the plan optimizing phase, it does not apply for those cases that filter conditions are unknown until the execution phase.
+2.  由于裁剪在计划优化阶段完成，不适用于过滤条件在执行阶段才知道的情况。
 
-    For example:
+    例如：
 
     ```sql
     create table t1 (x int) partition by range (x) (
@@ -1195,27 +1202,27 @@ Currently, partition pruning does not work with `LIKE` conditions.
     explain select * from t2 where x < (select * from t1 where t2.x < t1.x and t2.x < 2);
     ```
 
-    This query reads a row from `t2` and uses the result for the subquery on `t1`. Theoretically, partition pruning could benefit from `t1.x > val` expression in the subquery, but it does not take effect there as that happens in the execution phase.
+    该查询从 `t2` 读取一行，用于 `t1` 的子查询。理论上，子查询中的 `t1.x > val` 表达式可以用来裁剪，但实际上在执行阶段才会生效。
 
-3.  As a result of a limitation from current implementation, if a query condition cannot be pushed down to TiKV, it cannot be used by the partition pruning.
+3.  由于当前实现的限制，如果查询条件不能下推到 TiKV，也不能用作裁剪。
 
-    Take the `fn(col)` expression as an example. If the TiKV coprocessor supports this `fn` function, `fn(col)` may be pushed down to the leaf node (that is, partitioned table) according to the predicate push-down rule during the plan optimizing phase, and partition pruning can use it.
+    以 `fn(col)` 表达式为例。如果 TiKV 的协处理器支持此 `fn` 函数，`fn(col)` 可能会在计划优化阶段根据谓词下推规则下推到叶子节点（即分区表），从而支持裁剪。
 
-    If the TiKV coprocessor does not support this `fn` function, `fn(col)` would not be pushed down to the leaf node. Instead, it becomes a `Selection` node above the leaf node. The current partition pruning implementation does not support this kind of plan tree.
+    如果不支持，则不会下推，`fn(col)` 会成为叶子节点上方的 `Selection` 节点。当前的裁剪实现不支持此类计划树。
 
-4.  For Hash and Key partition types, the only query supported by partition pruning is the equal condition.
+4.  仅支持等值条件的 Hash 和 Key 分区。
 
-5.  For Range partition, for partition pruning to take effect, the partition expression must be in those forms: `col` or `fn(col)`, and the query condition must be one of `>`, `<`, `=`, `>=`, and `<=`. If the partition expression is in the form of `fn(col)`, the `fn` function must be monotonous.
+5.  Range 分区中，裁剪生效的条件是分区表达式为 `col` 或 `fn(col)`，且查询条件为 `>`, `<`, `=`, `>=`, `<=` 之一。如果表达式为 `fn(col)`，则 `fn` 必须是单调递增或递减的。
 
-    If the `fn` function is monotonous, for any `x` and `y`, if `x > y`, then `fn(x) > fn(y)`. Then this `fn` function can be called strictly monotonous. For any `x` and `y`, if `x > y`, then `fn(x) >= fn(y)`. In this case, `fn` could also be called "monotonous". In theory, all monotonous functions are supported by partition pruning.
+    如果 `fn` 是单调的，对于任意 `x` 和 `y`，若 `x > y`，则 `fn(x) > fn(y)`，此时 `fn` 可以称为“严格单调”。又如，若 `x > y`，则 `fn(x) >= fn(y)`，此时 `fn` 也可以称为“单调”。理论上，所有单调函数都支持裁剪。
 
-    Currently, partition pruning in TiDB only support those monotonous functions:
+    目前，TiDB 只支持以下单调函数：
 
     -   [`UNIX_TIMESTAMP()`](/functions-and-operators/date-and-time-functions.md)
     -   [`TO_DAYS()`](/functions-and-operators/date-and-time-functions.md)
-    -   [`EXTRACT(&#x3C;time unit> FROM &#x3C;DATETIME/DATE/TIME column>)`](/functions-and-operators/date-and-time-functions.md). For `DATE` and `DATETIME` columns, `YEAR` and `YEAR_MONTH` time units are considered monotonous functions. For the `TIME` column, `HOUR`, `HOUR_MINUTE`, `HOUR_SECOND` and `HOUR_MICROSECOND` are considered monotonous functions. Note that `WEEK` is not supported as time unit in `EXTRACT` for partition pruning.
+    -   [`EXTRACT(<时间单位> FROM <DATETIME/DATE/TIME列>)`](/functions-and-operators/date-and-time-functions.md)。对于 `DATE` 和 `DATETIME` 列，`YEAR` 和 `YEAR_MONTH` 时间单位被视为单调函数。对于 `TIME` 列，`HOUR`、`HOUR_MINUTE`、`HOUR_SECOND` 和 `HOUR_MICROSECOND` 被视为单调函数。注意，`WEEK` 不支持作为 `EXTRACT` 的时间单位。
 
-    For example, the partition expression is a simple column:
+    例如，分区表达式为简单列：
 
     ```sql
     create table t (id int) partition by range (id) (
@@ -1224,7 +1231,7 @@ Currently, partition pruning does not work with `LIKE` conditions.
     select * from t where id > 6;
     ```
 
-    Or the partition expression is in the form of `fn(col)` where `fn` is `to_days`:
+    或表达式为 `fn(col)`，其中 `fn` 为 `to_days`：
 
     ```sql
     create table t (dt datetime) partition by range (to_days(id)) (
@@ -1233,7 +1240,7 @@ Currently, partition pruning does not work with `LIKE` conditions.
     select * from t where dt > '2020-04-18';
     ```
 
-    An exception is `floor(unix_timestamp())` as the partition expression. TiDB does some optimization for that case by case, so it is supported by partition pruning.
+    例外情况是 `floor(unix_timestamp())` 作为分区表达式。TiDB 会逐个优化此类情况，因此支持裁剪。
 
     ```sql
     create table t (ts timestamp(3) not null default current_timestamp(3))
@@ -1245,7 +1252,7 @@ Currently, partition pruning does not work with `LIKE` conditions.
 
 ## Partition selection {#partition-selection}
 
-`SELECT` statements support partition selection, which is implemented by using a `PARTITION` option.
+`SELECT` 语句支持分区选择，通过 `PARTITION` 选项实现。
 
 ```sql
 SET @@sql_mode = '';
@@ -1277,7 +1284,7 @@ INSERT INTO employees VALUES
     ('', 'Mark', 'Morgan', 3, 3), ('', 'Karen', 'Cole', 3, 2);
 ```
 
-You can view the rows stored in the `p1` partition:
+可以查看存放在 `p1` 分区的行：
 
 ```sql
 SELECT * FROM employees PARTITION (p1);
@@ -1294,21 +1301,21 @@ SELECT * FROM employees PARTITION (p1);
     +----|-------|--------|----------|---------------+
     5 rows in set (0.00 sec)
 
-If you want to get the rows in multiple partitions, you can use a list of partition names which are separated by commas. For example, `SELECT * FROM employees PARTITION (p1, p2)` returns all rows in the `p1` and `p2` partitions.
+如果想获取多个分区中的行，可以用用逗号分隔的分区名列表。例如，`SELECT * FROM employees PARTITION (p1, p2)` 会返回 `p1` 和 `p2` 分区中的所有行。
 
-When you use partition selection, you can still use `WHERE` conditions and options such as `ORDER BY` and `LIMIT`. It is also supported to use aggregation options such as `HAVING` and `GROUP BY`.
+使用分区选择时，仍然可以使用 `WHERE` 条件和 `ORDER BY`、`LIMIT` 等选项，也支持 `HAVING` 和 `GROUP BY` 等聚合操作。
 
 ```sql
 SELECT * FROM employees PARTITION (p0, p2)
     WHERE lname LIKE 'S%';
 ```
 
-    +----|-------|-------|----------|---------------+
+    +----|-------|--------|----------|---------------+
     | id | fname | lname | store_id | department_id |
-    +----|-------|-------|----------|---------------+
+    +----|-------|--------|----------|---------------+
     |  4 | Jim   | Smith |        2 |             4 |
     | 11 | Jill  | Stone |        1 |             4 |
-    +----|-------|-------|----------|---------------+
+    +----|-------|--------|----------|---------------+
     2 rows in set (0.00 sec)
 
 ```sql
@@ -1340,29 +1347,29 @@ SELECT store_id, COUNT(department_id) AS c
     +---|----------+
     2 rows in set (0.00 sec)
 
-Partition selection is supported for all types of table partitioning, including Range partitioning and Hash partitioning. For Hash partitions, if partition names are not specified, `p0`, `p1`, `p2`,..., or `pN-1` is automatically used as the partition name.
+分区选择支持所有类型的表分区，包括 Range 和 Hash。对于 Hash 分区，如果未指定分区名，则会自动使用 `p0`、`p1`、`p2`...或 `pN-1` 作为分区名。
 
-`SELECT` in `INSERT ... SELECT` can also use partition selection.
+`SELECT` 也可以在 `INSERT ... SELECT` 中使用分区选择。
 
-## Restrictions and limitations on partitions {#restrictions-and-limitations-on-partitions}
+## 分区限制和注意事项 {#restrictions-and-limitations-on-partitions}
 
-This section introduces some restrictions and limitations on partitioned tables in TiDB.
+本节介绍 TiDB 中分区表的一些限制和注意事项。
 
--   Using the [`ALTER TABLE ... CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md) statement to change column types of partitioned tables is not supported.
--   Using the [`ALTER TABLE ... CACHE`](/cached-tables.md) statement to set partitioned tables to cached tables is not supported.
--   [Temporary tables](/temporary-tables.md) in TiDB are **NOT** compatible with partitioned tables.
--   Creating a [foreign key](/foreign-key.md) on a partitioned table is not supported.
--   The [`ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])`](/optimizer-hints.md#order_indext1_name-idx1_name--idx2_name-) hint does not work for partitioned tables and their related indexes, because indexes on partitioned tables cannot be read in order.
+-   不支持用 [`ALTER TABLE ... CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md) 改变分区表的列类型。
+-   不支持用 [`ALTER TABLE ... CACHE`](/cached-tables.md) 设置分区表为缓存表。
+-   TiDB 中的 [临时表](/temporary-tables.md) **不**兼容分区表。
+-   不支持在分区表上创建 [外键](/foreign-key.md)。
+-   [`ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])`](/optimizer-hints.md#order_indext1_name-idx1_name--idx2_name-) 提示不适用于分区表及其相关索引，因为分区表上的索引不能按顺序读取。
 
-### Partitioning keys, primary keys and unique keys {#partitioning-keys-primary-keys-and-unique-keys}
+### 分区键、主键和唯一键 {#partitioning-keys-primary-keys-and-unique-keys}
 
-This section discusses the relationship of partitioning keys with primary keys and unique keys. The rule governing this relationship is as follows: every unique key on the partitioned table, including the primary key, must use every column in the table's partitioning expression, because the primary key is also a unique key by definition.
+本节讨论分区键与主键和唯一键的关系。其规则如下：分区表上的每个唯一键（包括主键）都必须用到分区表达式中的所有列，因为主键本身也是唯一键。
 
 > **Note:**
 >
-> You can ignore this rule when using [global indexes](#global-indexes).
+> 使用 [全局索引](#global-indexes) 时可以忽略此规则。
 
-For example, the following table creation statements are invalid:
+例如，以下建表语句无效：
 
 ```sql
 CREATE TABLE t1 (
@@ -1389,9 +1396,9 @@ PARTITION BY HASH(col1 + col3)
 PARTITIONS 4;
 ```
 
-In each case, the proposed table has at least one unique key that does not include all columns used in the partitioning expression.
+在每个例子中，至少有一个唯一键未包含所有用于分区的列。
 
-The valid statements are as follows:
+有效的示例如下：
 
 ```sql
 CREATE TABLE t1 (
@@ -1417,7 +1424,7 @@ PARTITION BY HASH(col1 + col3)
 PARTITIONS 4;
 ```
 
-The following example displays an error:
+以下会报错：
 
 ```sql
 CREATE TABLE t3 (
@@ -1435,7 +1442,7 @@ PARTITIONS 4;
 
     ERROR 8264 (HY000): Global Index is needed for index 'col1', since the unique index is not including all partitioning columns, and GLOBAL is not given as IndexOption
 
-The `CREATE TABLE` statement fails because both `col1` and `col3` are included in the proposed partitioning key, but neither of these columns is part of both of unique keys on the table. After the following modifications, the `CREATE TABLE` statement becomes valid:
+原因是，`col1` 和 `col3` 都在分区表达式中，但都未同时出现在两个唯一键中。修改后，语句变为有效：
 
 ```sql
 CREATE TABLE t3 (
@@ -1450,7 +1457,7 @@ PARTITION BY HASH(col1 + col3)
     PARTITIONS 4;
 ```
 
-The following table cannot be partitioned at all, because there is no way to include in a partitioning key any columns that belong to both unique keys:
+以下表无法进行分区，因为没有列能同时出现在两个唯一键中：
 
 ```sql
 CREATE TABLE t4 (
@@ -1463,7 +1470,7 @@ CREATE TABLE t4 (
 );
 ```
 
-Because every primary key is by definition a unique key, so the next two statements are invalid:
+因为每个主键本身就是唯一键，所以下述两条语句无效：
 
 ```sql
 CREATE TABLE t5 (
@@ -1490,7 +1497,7 @@ PARTITION BY HASH( YEAR(col2) )
 PARTITIONS 4;
 ```
 
-In the above examples, the primary key does not include all columns referenced in the partitioning expression. After adding the missing column in the primary key, the `CREATE TABLE` statement becomes valid:
+原因是，主键未包含所有分区表达式中的列。补充缺失列后，语句变为有效：
 
 ```sql
 CREATE TABLE t5 (
@@ -1514,9 +1521,9 @@ PARTITION BY HASH( YEAR(col2) )
 PARTITIONS 4;
 ```
 
-If a table has neither unique keys nor primary keys, then this restriction does not apply.
+如果表没有唯一键或主键，则此限制不适用。
 
-When you change tables using DDL statements, you also need to consider this restriction when adding a unique index. For example, when you create a partitioned table as shown below:
+在用 DDL 改表时，也要考虑此限制。例如，创建如下分区表：
 
 ```sql
 CREATE TABLE t_no_pk (c1 INT, c2 INT)
@@ -1530,9 +1537,9 @@ CREATE TABLE t_no_pk (c1 INT, c2 INT)
 
     Query OK, 0 rows affected (0.12 sec)
 
-You can add a non-unique index by using `ALTER TABLE` statements. But if you want to add a unique index, the `c1` column must be included in the unique index.
+可以用 `ALTER TABLE` 添加非唯一索引，但若要添加唯一索引，索引列必须包含所有分区列。
 
-When using a partitioned table, you cannot specify the prefix index as a unique attribute:
+在分区表中，不能定义前缀索引作为唯一索引，例如：
 
 ```sql
 CREATE TABLE t (a varchar(20), b blob,
@@ -1547,17 +1554,17 @@ CREATE TABLE t (a varchar(20), b blob,
 ERROR 8264 (HY000): Global Index is needed for index 'a', since the unique index is not including all partitioning columns, and GLOBAL is not given as IndexOption
 ```
 
-#### Global indexes {#global-indexes}
+#### 全局索引 {#global-indexes}
 
-Before the introduction of global indexes, TiDB created a local index for each partition, leading to [a limitation](#partitioning-keys-primary-keys-and-unique-keys) that primary keys and unique keys had to include the partition key to ensure data uniqueness. Additionally, when querying data across multiple partitions, TiDB needed to scan the data of each partition to return results.
+在引入全局索引之前，TiDB 为每个分区创建本地索引，导致 [限制](#partitioning-keys-primary-keys-and-unique-keys)：主键和唯一键必须包含分区键，以保证数据唯一性。此外，跨分区查询时，TiDB 需要扫描每个分区的索引数据。
 
-To address these issues, TiDB introduces the global indexes feature in v8.3.0. A global index covers the data of the entire table with a single index, allowing primary keys and unique keys to maintain global uniqueness without including all partition keys. Moreover, global indexes can access index data across multiple partitions in a single operation, significantly improving query performance for non-partitioned keys instead of looking up in one local index for each partition.
+为解决这些问题，TiDB 在 v8.3.0 引入全局索引。全局索引覆盖整个表的数据，只需一个索引即可保证主键和唯一键的全局唯一性，也可以跨多个分区访问索引数据，极大提升非分区键的查询性能，而不用逐个分区查找。
 
-To create a global index for a primary key or unique key, you can add the `GLOBAL` keyword in the index definition.
+创建主键或唯一键的全局索引时，在索引定义中加 `GLOBAL` 关键字。
 
 > **Note:**
 >
-> Global indexes affect partition management. `DROP`, `TRUNCATE`, and `REORGANIZE PARTITION` operations also trigger updates to table-level global indexes, meaning that these DDL operations will only return results after the global indexes of the corresponding tables are fully updated.
+> 全局索引会影响分区管理。`DROP`、`TRUNCATE` 和 `REORGANIZE PARTITION` 操作也会触发全局索引的更新，操作完成后才会返回结果，增加了执行时间。这在数据归档场景（如 `DROP PARTITION` 和 `TRUNCATE PARTITION`）尤为明显。没有全局索引时，这些操作通常可以立即完成，但有全局索引后，随着索引数量的增加，耗时也会增加。
 
 ```sql
 CREATE TABLE t1 (
@@ -1572,9 +1579,9 @@ PARTITION BY HASH(col3)
 PARTITIONS 4;
 ```
 
-In the preceding example, the unique index `uidx12` is a global index, while `uidx3` is a regular unique index.
+在上述例子中，`uidx12` 是全局索引，`uidx3` 是普通唯一索引。
 
-Note that a **clustered index** cannot be a global index, as shown in the following example:
+注意，**聚簇索引**不能是全局索引，如示例：
 
 ```sql
 CREATE TABLE t2 (
@@ -1586,9 +1593,9 @@ CREATE TABLE t2 (
 
     ERROR 1503 (HY000): A CLUSTERED INDEX must include all columns in the table's partitioning function
 
-The reason is that if the clustered index is a global index, the table will no longer be partitioned. This is because the key of the clustered index is also the record key at the partition level, but the global index is at the table level, which causes a conflict. If you need to set the primary key as a global index, you must explicitly define it as a non-clustered index, for example, `PRIMARY KEY(col1, col2) NONCLUSTERED GLOBAL`.
+原因是，如果聚簇索引为全局索引，表就不再是分区的。因为索引的键也是分区层级的记录键，但全局索引是表级的，会冲突。如果要将主键设为全局索引，必须显式定义为非聚簇索引，例如 `PRIMARY KEY(col1, col2) NONCLUSTERED GLOBAL`。
 
-You can identify a global index by the `GLOBAL` index option in the [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md) output.
+可以通过 [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md) 输出中的 `GLOBAL` 索引选项识别全局索引。
 
 ```sql
 SHOW CREATE TABLE t1\G
@@ -1606,7 +1613,7 @@ SHOW CREATE TABLE t1\G
     PARTITION BY HASH (`col3`) PARTITIONS 4
     1 row in set (0.00 sec)
 
-Alternatively, you can query the [`INFORMATION_SCHEMA.TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md) table and check the `IS_GLOBAL` column in the output.
+或者查询 [`INFORMATION_SCHEMA.TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md)，查看 `IS_GLOBAL` 列。
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.TIDB_INDEXES WHERE table_name='t1';
@@ -1621,35 +1628,35 @@ SELECT * FROM INFORMATION_SCHEMA.TIDB_INDEXES WHERE table_name='t1';
     +--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
     3 rows in set (0.00 sec)
 
-When partitioning a non-partitioned table or repartitioning an already partitioned table, you can update the indexes to be global indexes or revert them to local indexes as needed:
+在对非分区表或已分区表重新分区时，可以根据需要更新索引为全局索引或恢复为本地索引：
 
 ```sql
 ALTER TABLE t1 PARTITION BY HASH (col1) PARTITIONS 3 UPDATE INDEXES (uidx12 LOCAL, uidx3 GLOBAL);
 ```
 
-##### Limitations of global indexes {#limitations-of-global-indexes}
+##### 全局索引的限制 {#limitations-of-global-indexes}
 
--   If the `GLOBAL` keyword is not explicitly specified in the index definition, TiDB creates a local index by default.
+-   如果索引定义中未显式加 `GLOBAL`，则 TiDB 默认为本地索引。
 
--   The `GLOBAL` and `LOCAL` keywords only apply to partitioned tables and do not affect non-partitioned tables. In other words, there is no difference between a global index and a local index in non-partitioned tables.
+-   `GLOBAL` 和 `LOCAL` 关键字仅适用于分区表，不影响非分区表。换句话说，非分区表中，全局索引和本地索引没有区别。
 
--   Currently, TiDB only supports creating unique global indexes on unique columns. If you need to create a global index on a non-unique column, you can include a primary key in the global index to create a composite index. For example, if the non-unique column is `col3` and the primary key is `col1`, you can use the following statement to create a global index on the non-unique column `col3`:
+-   目前，TiDB 只支持在唯一列上创建唯一全局索引。如果要在非唯一列上创建全局索引，可以在索引中包含主键，形成复合索引。例如，非唯一列为 `col3`，主键为 `col1`，可以用如下语句创建全局索引：
 
     ```sql
     ALTER TABLE ... ADD UNIQUE INDEX(col3, col1) GLOBAL;
     ```
 
--   DDL operations such as `DROP PARTITION`, `TRUNCATE PARTITION`, and `REORGANIZE PARTITION` also trigger updates to global indexes. These DDL operations need to wait for the global index updates to complete before returning results, which increases the execution time accordingly. This is particularly evident in data archiving scenarios, such as `DROP PARTITION` and `TRUNCATE PARTITION`. Without global indexes, these operations can typically complete immediately. However, with global indexes, the execution time increases as the number of indexes that need to be updated grows.
+-   `DROP PARTITION`、`TRUNCATE PARTITION` 和 `REORGANIZE PARTITION` 等 DDL 操作也会触发全局索引的更新。这些操作需要等待全局索引更新完成后才返回，增加了执行时间。尤其在数据归档场景（如 `DROP PARTITION` 和 `TRUNCATE PARTITION`）中更明显。没有全局索引时，这些操作通常可以立即完成，但有全局索引后，随着索引数量的增加，耗时也会增加。
 
--   Tables with global indexes do not support the `EXCHANGE PARTITION` operation.
+-   带有全局索引的表不支持 `EXCHANGE PARTITION`。
 
--   By default, the primary key of a partitioned table is a clustered index and must include the partition key. If you require the primary key to exclude the partition key, you can explicitly specify the primary key as a non-clustered global index when creating the table, for example, `PRIMARY KEY(col1, col2) NONCLUSTERED GLOBAL`.
+-   默认情况下，分区表的主键为聚簇索引，必须包含分区键。如果希望主键不包含分区键，可以在建表时显式定义为非聚簇索引，例如 `PRIMARY KEY(col1, col2) NONCLUSTERED GLOBAL`。
 
--   If a global index is added to an expression column, or a global index is also a prefix index (for example `UNIQUE KEY idx_id_prefix (id(10)) GLOBAL`), you need to collect statistics manually for this global index.
+-   如果在表达式列上添加了全局索引，或全局索引也是前缀索引（如 `UNIQUE KEY idx_id_prefix (id(10)) GLOBAL`），需要手动收集此全局索引的统计信息。
 
-### Partitioning limitations relating to functions {#partitioning-limitations-relating-to-functions}
+### 与函数相关的分区限制 {#partitioning-limitations-relating-to-functions}
 
-Only the functions shown in the following list are allowed in partitioning expressions:
+只允许在分区表达式中使用以下列出的函数：
 
     ABS()
     CEILING()
@@ -1658,7 +1665,7 @@ Only the functions shown in the following list are allowed in partitioning expre
     DAYOFMONTH()
     DAYOFWEEK()
     DAYOFYEAR()
-    EXTRACT() (see EXTRACT() function with WEEK specifier)
+    EXTRACT() (详见 EXTRACT() 函数与 WEEK 说明)
     FLOOR()
     HOUR()
     MICROSECOND()
@@ -1670,36 +1677,36 @@ Only the functions shown in the following list are allowed in partitioning expre
     TIME_TO_SEC()
     TO_DAYS()
     TO_SECONDS()
-    UNIX_TIMESTAMP() (with TIMESTAMP columns)
+    UNIX_TIMESTAMP() (用于 TIMESTAMP 列)
     WEEKDAY()
     YEAR()
     YEARWEEK()
 
-### Compatibility with MySQL {#compatibility-with-mysql}
+### 与 MySQL 的兼容性 {#compatibility-with-mysql}
 
-Currently, TiDB supports Range partitioning, Range COLUMNS partitioning, List partitioning, List COLUMNS partitioning, Hash partitioning, and Key partitioning. Other partitioning types that are available in MySQL are not supported yet in TiDB.
+目前，TiDB 支持 Range 分区、Range COLUMNS 分区、List 分区、List COLUMNS 分区、Hash 分区和 Key 分区。MySQL 中的其他分区类型暂不支持。
 
-For the unsupported partitioning types, when you create a table in TiDB, the partitioning information is ignored and the table is created in the regular form with a warning reported.
+对于不支持的分区类型，在 TiDB 中创建表时，分区信息会被忽略，表以普通表形式创建，并报告警告。
 
-The `LOAD DATA` syntax does not support partition selection currently in TiDB.
+目前，TiDB 不支持 `LOAD DATA` 语法中的分区选择。
 
 ```sql
 create table t (id int, val int) partition by hash(id) partitions 4;
 ```
 
-The regular `LOAD DATA` operation is supported:
+支持普通的 `LOAD DATA` 操作：
 
 ```sql
 load local data infile "xxx" into t ...
 ```
 
-But `Load Data` does not support partition selection:
+但不支持 `Load Data` 的分区选择：
 
 ```sql
 load local data infile "xxx" into t partition (p1)...
 ```
 
-For a partitioned table, the result returned by `select * from t` is unordered between the partitions. This is different from the result in MySQL, which is ordered between the partitions but unordered inside the partitions.
+对于分区表，`select * from t` 返回的结果在分区之间无序。这与 MySQL 不同，MySQL 在分区之间有序，但分区内部无序。
 
 ```sql
 create table t (id int, val int) partition by range (id) (
@@ -1717,7 +1724,7 @@ insert into t values (1, 2), (3, 4),(5, 6),(7,8),(9,10);
     Query OK, 5 rows affected (0.01 sec)
     Records: 5  Duplicates: 0  Warnings: 0
 
-TiDB returns a different result every time, for example:
+TiDB 每次返回的结果都不同，例如：
 
 ```sql
 select * from t;
@@ -1734,7 +1741,7 @@ select * from t;
     +------|------+
     5 rows in set (0.00 sec)
 
-The result returned in MySQL:
+MySQL 返回的结果：
 
 ```sql
 select * from t;
@@ -1751,19 +1758,19 @@ select * from t;
     +------|------+
     5 rows in set (0.00 sec)
 
-### Dynamic pruning mode {#dynamic-pruning-mode}
+### 动态裁剪模式 {#dynamic-pruning-mode}
 
-TiDB accesses partitioned tables in either `dynamic` or `static` mode. `dynamic` mode is used by default since v6.3.0. However, dynamic partitioning is effective only after the full table-level statistics, or global statistics, are collected. If you enable the `dynamic` pruning mode before global statistics collection is completed, TiDB remains in the `static` mode until global statistics are fully collected. For detailed information about global statistics, see [Collect statistics of partitioned tables in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
+TiDB 以 `dynamic` 或 `static` 模式访问分区表。自 v6.3.0 起，默认使用 `dynamic` 模式。但动态分区只有在收集到完整的表级统计信息或全局统计信息后才有效。如果在全局统计信息收集完成前启用 `dynamic` 裁剪模式，TiDB 会保持在 `static` 模式，直到统计信息收集完毕。详见 [Collect statistics of partitioned tables in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)。
 
 ```sql
 set @@session.tidb_partition_prune_mode = 'dynamic'
 ```
 
-Manual ANALYZE and normal queries use the session-level `tidb_partition_prune_mode` setting. The `auto-analyze` operation in the background uses the global `tidb_partition_prune_mode` setting.
+手动 `ANALYZE` 和普通查询使用会话级的 `tidb_partition_prune_mode` 设置。后台的 `auto-analyze` 使用全局设置。
 
-In `static` mode, partitioned tables use partition-level statistics. In `dynamic` mode, partitioned tables use table-level global statistics.
+在 `static` 模式下，分区表使用分区级统计信息。在 `dynamic` 模式下，使用表级全局统计信息。
 
-When switching from `static` mode to `dynamic` mode, you need to check and collect statistics manually. This is because after the switch to `dynamic` mode, partitioned tables have only partition-level statistics but no table-level statistics. Global statistics are collected only upon the next `auto-analyze` operation.
+切换到 `dynamic` 模式后，需要手动检查和收集统计信息。因为切换后，分区表只有分区级统计信息，没有表级统计信息。全局统计信息只在下一次 `auto-analyze` 时收集。
 
 ```sql
 set session tidb_partition_prune_mode = 'dynamic';
@@ -1779,7 +1786,7 @@ show stats_meta where table_name like "t";
     +---------+------------+----------------+---------------------+--------------+-----------+
     3 rows in set (0.01 sec)
 
-To make sure that the statistics used by SQL statements are correct after you enable global `dynamic` pruning mode, you need to manually trigger `analyze` on the tables or on a partition of the table to obtain global statistics.
+为了确保启用全局 `dynamic` 裁剪后 SQL 使用的统计信息正确，可以手动触发 `analyze`，对表或分区进行统计信息收集。
 
 ```sql
 analyze table t partition p1;
@@ -1796,26 +1803,26 @@ show stats_meta where table_name like "t";
     +---------+------------+----------------+---------------------+--------------+-----------+
     4 rows in set (0.00 sec)
 
-If the following warning is displayed during the `analyze` process, partition statistics are inconsistent, and you need to collect statistics of these partitions or the entire table again.
+如果在 `analyze` 过程中出现以下警告，说明分区统计信息不一致，需要重新收集分区或整个表的统计信息。
 
     | Warning | 8244 | Build table: `t` column: `a` global-level stats failed due to missing partition-level column stats, please run analyze table to refresh columns of all partitions
 
-You can also use scripts to update statistics of all partitioned tables. For details, see [Update statistics of partitioned tables in dynamic pruning mode](#update-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
+你也可以用脚本批量更新所有分区表的统计信息。详见 [Update statistics of partitioned tables in dynamic pruning mode](#update-statistics-of-partitioned-tables-in-dynamic-pruning-mode)。
 
-After table-level statistics are ready, you can enable the global dynamic pruning mode, which is effective to all SQL statements and `auto-analyze` operations.
+表级统计信息准备好后，可以启用全局动态裁剪模式，影响所有 SQL 语句和 `auto-analyze` 操作。
 
 ```sql
 set global tidb_partition_prune_mode = dynamic
 ```
 
-In `static` mode, TiDB accesses each partition separately using multiple operators, and then merges the results using `Union`. The following example is a simple read operation where TiDB merges the results of two corresponding partitions using `Union`:
+在 `static` 模式下，TiDB 使用多个操作符逐个访问每个分区，然后用 `Union` 合并结果。示例如下，这是一个简单的读取操作，TiDB 通过 `Union` 合并两个分区的结果：
 
 ```sql
-mysql> create table t1(id int, age int, key(id)) partition by range(id) (
-        partition p0 values less than (100),
-        partition p1 values less than (200),
-        partition p2 values less than (300),
-        partition p3 values less than (400));
+mysql> create table t1(id int, age int, key(id)) partition by range(id)
+    (partition p0 values less than (100),
+     partition p1 values less than (200),
+     partition p2 values less than (300),
+     partition p3 values less than (400));
 Query OK, 0 rows affected (0.01 sec)
 
 mysql> explain select * from t1 where id < 150;
@@ -1834,7 +1841,7 @@ mysql> explain select * from t1 where id < 150;
     +------------------------------+----------+-----------+------------------------+--------------------------------+
     7 rows in set (0.00 sec)
 
-In `dynamic` mode, each operator supports direct access to multiple partitions, so TiDB no longer uses `Union`.
+在 `dynamic` 模式下，每个操作符支持直接访问多个分区，因此不再使用 `Union`。
 
 ```sql
 mysql> set @@session.tidb_partition_prune_mode = 'dynamic';
@@ -1851,11 +1858,11 @@ mysql> explain select * from t1 where id < 150;
 3 rows in set (0.00 sec)
 ```
 
-From the above query results, you can see that the `Union` operator in the execution plan disappears while the partition pruning still takes effect and the execution plan only accesses `p0` and `p1`.
+从上面结果可以看到，执行计划中的 `Union` 操作符消失了，裁剪仍然生效，且只访问了 `p0` 和 `p1`。
 
-`dynamic` mode makes execution plans simpler and clearer. Omitting the Union operation can improve the execution efficiency and avoid the problem of Union concurrent execution. In addition, `dynamic` mode also allows execution plans with IndexJoin which cannot be used in `static` mode. (See examples below)
+`dynamic` 模式使执行计划更简洁明了。省略 `Union` 可以提升执行效率，避免 `Union` 并发执行的问题。此外，`dynamic` 模式还支持带有 IndexJoin 的执行计划，而在 `static` 模式下不能使用（详见示例）。
 
-**Example 1**: In the following example, a query is performed in `static` mode using the execution plan with IndexJoin:
+**示例 1**：以下示例在 `static` 模式下，使用带 IndexJoin 的执行计划执行查询：
 
 ```sql
 mysql> create table t1 (id int, age int, key(id)) partition by range(id)
@@ -1904,9 +1911,9 @@ mysql> show warnings;
 1 row in set (0,00 sec)
 ```
 
-From example 1, you can see that even if the `TIDB_INLJ` hint is used, the query on the partitioned table cannot select the execution plan with IndexJoin.
+从示例 1 可以看到，即使使用了 `TIDB_INLJ` 提示，分区表的执行计划也不能选择 IndexJoin。
 
-**Example 2**: In the following example, the query is performed in `dynamic` mode using the execution plan with IndexJoin:
+**示例 2**：以下示例在 `dynamic` 模式下，使用带 IndexJoin 的执行计划：
 
 ```sql
 mysql> set @@tidb_partition_prune_mode = 'dynamic';
@@ -1928,13 +1935,13 @@ mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 
 8 rows in set (0.00 sec)
 ```
 
-From example 2, you can see that in `dynamic` mode, the execution plan with IndexJoin is selected when you execute the query.
+可以看到，在 `dynamic` 模式下，执行计划中支持 IndexJoin。
 
-Currently, `static` pruning mode does not support plan cache for both prepared and non-prepared statements.
+目前，`static` 裁剪模式不支持预处理语句和非预处理语句的计划缓存。
 
-#### Update statistics of partitioned tables in dynamic pruning mode {#update-statistics-of-partitioned-tables-in-dynamic-pruning-mode}
+#### 在动态裁剪模式下更新分区表的统计信息 {#update-statistics-of-partitioned-tables-in-dynamic-pruning-mode}
 
-1.  Locate all partitioned tables:
+1.  找出所有分区表：
 
     ```sql
     SELECT DISTINCT CONCAT(TABLE_SCHEMA,'.', TABLE_NAME)
@@ -1950,7 +1957,7 @@ Currently, `static` pruning mode does not support plan cache for both prepared a
         +-------------------------------------+
         1 row in set (0.02 sec)
 
-2.  Generate the statements for updating the statistics of all partitioned tables:
+2.  生成所有分区表的统计信息更新语句：
 
     ```sql
     SELECT DISTINCT CONCAT('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;')
@@ -1966,9 +1973,9 @@ Currently, `static` pruning mode does not support plan cache for both prepared a
         +----------------------------------------------------------------------+
         1 row in set (0.01 sec)
 
-    You can change `ALL COLUMNS` to the columns you need.
+    可以将 `ALL COLUMNS` 改为需要的列。
 
-3.  Export the batch update statements to a file:
+3.  导出批量更新语句到文件：
 
     ```shell
     mysql --host xxxx --port xxxx -u root -p -e "SELECT DISTINCT CONCAT('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;') \
@@ -1977,14 +1984,14 @@ Currently, `static` pruning mode does not support plan cache for both prepared a
         AND TABLE_SCHEMA NOT IN ('INFORMATION_SCHEMA','mysql','sys','PERFORMANCE_SCHEMA','METRICS_SCHEMA');" | tee gatherGlobalStats.sql
     ```
 
-4.  Execute a batch update:
+4.  执行批量更新：
 
-    Process SQL statements before executing the `source` command:
+    在执行 `source` 前处理 SQL 语句：
 
         sed -i "" '1d' gatherGlobalStats.sql --- mac
         sed -i '1d' gatherGlobalStats.sql --- linux
 
     ```sql
-    SET session tidb_partition_prune_mode = dynamic;
+    SET session tidb_partition_prune_mode = 'dynamic';
     source gatherGlobalStats.sql
     ```
