@@ -13,7 +13,7 @@ This document lists the most frequently asked questions about TiDB Cloud Starter
 
 ### What is TiDB Cloud Starter?
 
-TiDB Cloud Starter offers the TiDB database with full HTAP capabilities for you and your organization. It is a fully managed, auto-scaling deployment of TiDB that lets you start using your database immediately, develop and run your application without caring about the underlying nodes, and automatically scale based on your application's workload changes.
+TiDB Cloud Starter (formerly Serverless) offers the TiDB database with full HTAP capabilities for you and your organization. It is a fully managed, auto-scaling deployment of TiDB that lets you start using your database immediately, develop and run your application without caring about the underlying nodes, and automatically scale based on your application's workload changes.
 
 ### How do I get started with TiDB Cloud Starter?
 
