@@ -64,15 +64,17 @@ With TiDB Cloud, you can get the following key features:
 
 TiDB Cloud provides the following two deployment options:
 
-<!--TBD, ToDo: Not sure the URL for TiDB Cloud Starter-->
-
 - TiDB Cloud Starter
 
     TiDB Cloud Starter is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free tier and consumption based billing once free limits are exceeded.
 
+    Currently, TiDB Cloud Starter is generally available on AWS and in public preview on Alibaba Cloud.
+
 - TiDB Cloud Essential
 
     TiDB Cloud Essential is for production use with the benefits of cross-zone high availability, provisioned capacity with instant scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing).
+
+    Currently, TiDB Cloud Essential is in public preview on Alibaba Cloud.
 
 For feature comparison between TiDB Cloud Starter and TiDB Cloud Essential, see [TiDB on Alibaba Cloud](https://www.pingcap.com/partners/alibaba-cloud/).
 

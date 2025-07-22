@@ -88,11 +88,9 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
     ![Create AWS DMS Instance](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-8.png)
 
-<!--
 > **Note:**
 >
 > For detailed steps on creating an AWS DMS replication instance to work with TiDB Cloud Starter, see [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md).
--->
 
 ## Step 6. Create DMS endpoints
 
@@ -108,11 +106,9 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
     ![Create AWS DMS Target endpoint](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-10.png)
 
-<!--
 > **Note:**
 >
 > For detailed steps on creating a TiDB Cloud Starter DMS endpoint, see [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md).
--->
 
 ## Step 7. Migrate the schema
 
