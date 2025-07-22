@@ -11,7 +11,7 @@ summary: Learn how to manage spending limit for your TiDB Cloud Starter scalable
 
 Spending limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that allows you to set a budget for your TiDB Cloud Starter scalable clusters.
 
-For each organization in TiDB Cloud, you can create a maximum of five [free clusters](/tidb-cloud/select-cluster-tier.md#free-cluster-plan) by default. To create more TiDB Cloud Starter clusters, you need to add a credit card and create scalable clusters for the usage. But if you delete some of your previous clusters before creating more, the new cluster can still be created without a credit card.
+For each organization in TiDB Cloud, you can create a maximum of five [free Starter clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter) by default. To create more TiDB Cloud Starter clusters, you need to add a credit card and create scalable clusters for the usage. But if you delete some of your previous clusters before creating more, the new cluster can still be created without a credit card.
 
 ## Usage quota
 
