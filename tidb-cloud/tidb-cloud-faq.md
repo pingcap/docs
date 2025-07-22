@@ -33,7 +33,7 @@ While "serverless" accurately describes how the service works behind the scenes,
 
 We renamed this entry tier to Starter so its purpose is crystal clear: it is the quickest way to begin building with TiDB Cloud. Everything you enjoy with Serverless remains unchanged:
 
-- A fully-managed database with both row-based and columnar storage, ideal for mixed OLTP/OLAP workloads.
+- A fully managed database with both row-based and columnar storage, ideal for mixed OLTP/OLAP workloads.
 - Automatic and request-driven scaling, no capacity planning or manual tuning required.
 - Built-in vector search and full-text search to power GenAI retrieval, chatbots, and other AI applications.
 - Always-free monthly quota for up to five clusters per organization (5 GiB row data + 5 GiB columnar data + 50 million [RUs](/tidb-cloud/tidb-cloud-glossary.md#request-unit) per cluster).
