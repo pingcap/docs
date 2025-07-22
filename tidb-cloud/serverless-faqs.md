@@ -27,9 +27,9 @@ For each organization in TiDB Cloud, you can create a maximum of five [free clus
 
 Some of TiDB Cloud features are partially supported or not supported on TiDB Cloud Starter. For more information, see [TiDB Cloud Starter Limitations and Quotas](/tidb-cloud/serverless-limitations.md).
 
-### When will TiDB Cloud Starter be available on cloud platforms other than Alibaba Cloud, such as Google Cloud or AWS?
+### When will TiDB Cloud Starter be available on cloud platforms other than AWS and Alibaba Cloud, such as Google Cloud?
 
-We are actively working on expanding TiDB Cloud Starter to other cloud platforms, including Google Cloud and AWS. However, we do not have an exact timeline for now as we currently focus on filling gaps and ensuring seamless functionality across all environments. Rest assured, we are working hard to make TiDB Cloud Starter available on more cloud platforms, and we will keep our community updated as we progress.
+We are actively working on expanding TiDB Cloud Starter to other cloud platforms, such as Google Cloud. However, we do not have an exact timeline for now as we currently focus on filling gaps and ensuring seamless functionality across all environments. Rest assured, we are working hard to make TiDB Cloud Starter available on more cloud platforms, and we will keep our community updated as we progress.
 
 ### What is columnar storage in TiDB Cloud Starter?
 

@@ -5,7 +5,7 @@ summary: Learn about architecture concepts for TiDB Cloud.
 
 # Architecture
 
-TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings the flexibility and power of [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source HTAP (Hybrid Transactional and Analytical Processing) database, to Amazon Web Services (AWS), Google Cloud, and Alibaba Cloud.
+TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings the flexibility and power of [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source HTAP (Hybrid Transactional and Analytical Processing) database, to Amazon Web Services (AWS), Azure, Google Cloud, and Alibaba Cloud.
 
 TiDB is MySQL-compatible, making it easy to migrate and work with existing applications, while offering seamless scalability to handle everything from small workloads to massive, high-performance clusters. It supports both transactional (OLTP) and analytical (OLAP) workloads in one system, simplifying operations and enabling real-time insights.
 
@@ -39,7 +39,7 @@ For more information, see [TiDB Cloud CLI Reference](/tidb-cloud/cli-reference.m
 
 ## TiDB Cloud API (Beta)
 
-The TiDB Cloud API is a REST-based interface that provides programmatic access to manage resources across TiDB Cloud Starter clusters. It enables automated and efficient handling of tasks such as managing projects, clusters, backups, restores, data imports, and billing.
+The TiDB Cloud API is a REST-based interface that provides programmatic access to manage resources across TiDB Cloud Starter clusters. It enables automated and efficient handling of tasks such as managing projects, clusters, backups, restores, data imports, billing, and other resources in [TiDB Cloud Data Service](/tidb-cloud/data-service-overview.md).
 
 For more information, see [TiDB Cloud API Overview](/tidb-cloud/api-overview.md).
 

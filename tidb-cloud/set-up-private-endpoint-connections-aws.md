@@ -7,6 +7,10 @@ summary: Learn how to connect to your TiDB Cloud cluster via AWS PrivateLink.
 
 This document describes how to connect to your TiDB Cloud cluster via [AWS PrivateLink](https://aws.amazon.com/privatelink).
 
+> **Tip:**
+>
+> To learn how to connect to a TiDB Cloud cluster via Alibaba Cloud private endpoints, see [Connect to a TiDB Cloud Cluster via Alibaba Cloud Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
+
 TiDB Cloud supports highly secure and one-way access to the TiDB Cloud service hosted in an AWS VPC via the [AWS PrivateLink](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc), as if the service were in your own VPC. A private endpoint is exposed in your VPC and you can create a connection to the TiDB Cloud service via the endpoint with permission.
 
 Powered by AWS PrivateLink, the endpoint connection is secure and private, and does not expose your data to the public internet. In addition, the endpoint connection supports CIDR overlap and is easier for network management.
@@ -39,7 +43,7 @@ To connect to your TiDB Cloud cluster via a private endpoint, follow these steps
 
 ### Step 1. Choose a TiDB cluster
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page, click the name of your target TiDB Cloud cluster to go to its overview page.
+1. On the [**Clusters**](https://console.tidb.io/project/clusters) page, click the name of your target TiDB Cloud cluster to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 3. In the **Connection Type** drop-down list, select **Private Endpoint**.
 4. Take a note of **Service Name**, **Availability Zone ID**, and **Region ID**.
@@ -100,7 +104,7 @@ Then you can connect to the endpoint service with the private DNS name.
 
 After you have created the interface endpoint, go back to the TiDB Cloud console and take the following steps:
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page, click the name of your target cluster to go to its overview page.
+1. On the [**Clusters**](https://console.tidb.io/project/clusters) page, click the name of your target cluster to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 3. In the **Connection Type** drop-down list, select **Private Endpoint**.
 4. In the **Connect With** drop-down list, select your preferred connection method. The corresponding connection string is displayed at the bottom of the dialog.

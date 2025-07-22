@@ -1,15 +1,19 @@
 ---
-title: Connect to TiDB Cloud via Private Endpoint
-summary: Learn how to connect to your TiDB Cloud cluster via private endpoint.
+title: Connect to TiDB Cloud via Alibaba Cloud Private Endpoint
+summary: Learn how to connect to your TiDB Cloud cluster via Alibaba Cloud private endpoint.
 ---
 
-# Connect to TiDB Cloud via Private Endpoint
+# Connect to TiDB Cloud via Alibaba Cloud Private Endpoint
 
 This tutorial walks you through the steps to connect to your TiDB Cloud cluster via a private endpoint on Alibaba Cloud. Connecting through a private endpoint allows secure and private communication between your services and your TiDB Cloud cluster without using the public internet.
 
+> **Tip:**
+>
+> To learn how to connect to a TiDB Cloud cluster via AWS PrivateLink, see [Connect to TiDB Cloud via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-aws.md).
+
 ## Restrictions
 
-- Currently, TiDB Cloud Starter and TiDB Cloud Essential support private endpoint connections when the endpoint service is hosted on Alibaba Cloud. If the service is hosted on AWS, Google Cloud, or another cloud provider, the private endpoint is not applicable.
+- Currently, TiDB Cloud Starter and TiDB Cloud Essential support private endpoint connections when the endpoint service is hosted on AWS or Alibaba Cloud. If the service is hosted on another cloud provider, the private endpoint is not applicable.
 - Private endpoint connection across regions is not supported.
 
 ## Set up a private endpoint with Alibaba Cloud

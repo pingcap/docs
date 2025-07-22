@@ -12,6 +12,8 @@ This document describes how to create a TiDB Cloud cluster in the [TiDB Cloud co
 If you do not have a TiDB Cloud account, click [here](https://console.tidb.io/free-trial?provider_source=alicloud) to sign up for an account.
 
 - You can either sign up with email and password so that you can manage your password using TiDB Cloud, or sign up with your Google, GitHub, or Microsoft account.
+- For AWS Marketplace users, you can also sign up through AWS Marketplace. To do that, search for `TiDB Cloud` in [AWS Marketplace](https://aws.amazon.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+- For Alibaba Cloud Marketplace users, you can also sign up through Alibaba Cloud Marketplace. To do that, search for `TiDB Cloud` in [Alibaba Cloud Marketplace](https://marketplace.alibabacloud.com/), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
 
 ## Steps
 
@@ -23,7 +25,7 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
 3. Select a cluster plan. TiDB Cloud provides two [cluster plans](/tidb-cloud/select-cluster-tier.md#cluster-plans): **Starter** and **Essential**. You can start with a Starter cluster and later upgrade to an Essential cluster as your needs grow.
 
-4. The cloud provider is Alibaba Cloud. You can select an Alibaba Cloud region where you want to host your cluster.
+4. Choose a cloud provider and a region where you want to host your cluster.
 
 5. Update the default cluster name if necessary.
 
