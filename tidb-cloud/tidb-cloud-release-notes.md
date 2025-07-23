@@ -8,6 +8,33 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## July 22, 2025
+
+**General changes**
+
+- Provide a new node size for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on Google Cloud: `32 vCPU, 128 GiB`.
+
+    This new size is available for TiDB, TiKV, and TiFlash nodes.
+
+- Improve the TiKV scaling process in [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) to enhance cluster stability.
+
+    When you [change the vCPU and RAM size](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram) of TiKV nodes, TiDB Cloud automatically checks whether the cluster's internal service requires additional capacity to support the new configuration.
+
+    - If an expansion is required, TiDB Cloud prompts you for confirmation before proceeding.
+    - If the current internal service capacity is already larger than the required size after scaling, TiDB Cloud retains the existing configuration of the internal service to avoid unnecessary changes that might affect cluster stability.
+
+**Console changes**
+
+- Enhance the cloud storage data import experience for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+
+    The import process is now streamlined into a 3-step wizard with intelligent pre-checks. This new wizard guides you through connection setup, file mapping, and bucket scanning. With the scanning, TiDB Cloud shows you exactly which files will be imported and their target destinations before the import, significantly reducing configuration complexity and preventing import failures.
+
+    For more information, see the following documentation:
+
+    - [Import Sample Data into TiDB Cloud Serverless](/tidb-cloud/import-sample-data-serverless.md)
+    - [Import CSV Files from Cloud Storage into TiDB Cloud Serverless](/tidb-cloud/import-csv-files-serverless.md)
+    - [Import Apache Parquet Files from Cloud Storage into TiDB Cloud Serverless](/tidb-cloud/import-parquet-files-serverless.md)
+
 ## July 15, 2025
 
 **General changes**
