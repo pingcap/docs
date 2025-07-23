@@ -156,7 +156,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
 2. Select **Import data from Cloud Storage**.
 
-3. On the **Import Data from Google Cloud Storage** page, provide the following information for the source Parquet files:
+3. On the **Import Data from Cloud Storage** page, provide the following information for the source Parquet files:
 
     - **Included Schema Files**: if the source folder contains the target table schema files (such as `${db_name}-schema-create.sql`), select **Yes**. Otherwise, select **No**.
     - **Data Format**: select **Parquet**.
