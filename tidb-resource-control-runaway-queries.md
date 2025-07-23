@@ -39,7 +39,7 @@ The `DURATION` option in `WATCH` indicates the duration of the identification it
 
 After a watch item is added, neither the matching feature nor the `ACTION` is changed or deleted whenever the `QUERY_LIMIT` configuration is changed or deleted.
 
-You can use `QUERY WATCH REMOVE` to remove a watch item, or use `QUERY WATCH REMOVE RESOURCE GROUP` to remove all watch items of a specific resource group in a batch.
+You can use `QUERY WATCH REMOVE` to remove a watch item, or use `QUERY WATCH REMOVE RESOURCE GROUP` (New in v9.0.0) to remove all watch items of a specific resource group in a batch.
 
 The parameters of `QUERY_LIMIT` are as follows:
 
@@ -136,7 +136,7 @@ The parameters are as follows:
     QUERY WATCH REMOVE 1;
     ```
 
-- Remove all watch items of a specific resource group:
+- Remove all watch items of a specific resource group (New in v9.0.0):
 
     ```sql
     QUERY WATCH REMOVE RESOURCE GROUP rg1;
