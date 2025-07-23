@@ -14,7 +14,7 @@ This document describes how to back up and restore your TiDB Cloud Serverless cl
 
 ## View the Backup page
 
-1. On the [**Clusters**](<https://{{{ console-url }}}/project/clusters>) page, click the name of your target cluster to go to its overview page.
+1. On the [**Clusters**](https://{{{ console-url }}}/project/clusters) page, click the name of your target cluster to go to its overview page.
 
     > **Tip:**
     >
