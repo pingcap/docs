@@ -155,7 +155,7 @@ TiDB バージョン: 7.1.6
     -   特定の状況下でプランキャッシュを使用する際に、メタデータロックの不適切な使用によって異常なデータが書き込まれる可能性がある問題を修正[＃53634](https://github.com/pingcap/tidb/issues/53634) @ [ジムララ](https://github.com/zimulala)
     -   インデックス追加[＃55808](https://github.com/pingcap/tidb/issues/55808) @ [ランス6716](https://github.com/lance6716)中の再試行によって発生するデータ インデックスの不整合の問題を修正しました
     -   列の不安定な一意のIDにより、 `UPDATE`文がエラー[＃53236](https://github.com/pingcap/tidb/issues/53236) @ [ウィノロス](https://github.com/winoros)を返す可能性がある問題を修正しました。
-    -   トランザクション内のステートメントが OOM によって強制終了された後、TiDB が同じトランザクション内で次のステートメントの実行を継続すると、エラー`Trying to start aggressive locking while it's already started`発生し、panic[＃53540](https://github.com/pingcap/tidb/issues/53540) @ [ミョンケミンタ](https://github.com/MyonKeminta)が発生する可能性がある問題を修正しました。
+    -   トランザクション内のステートメントが OOM によって強制終了された後、TiDB が同じトランザクション内で次のステートメントの実行を継続すると、エラー`Trying to start aggressive locking while it's already started`が発生し、panic[＃53540](https://github.com/pingcap/tidb/issues/53540) @ [ミョンケミンタ](https://github.com/MyonKeminta)が発生する可能性がある問題を修正しました。
     -   `RECOVER TABLE BY JOB JOB_ID;`実行すると TiDB がpanicを起こす可能性がある問題を修正[＃55113](https://github.com/pingcap/tidb/issues/55113) @ [crazycs520](https://github.com/crazycs520)
     -   分散実行フレームワーク[＃48680](https://github.com/pingcap/tidb/issues/48680) @ [ランス6716](https://github.com/lance6716)の PD メンバーを変更した後に`ADD INDEX`実行が失敗する可能性がある問題を修正しました
     -   2人のDDL所有者が同時に存在する可能性がある問題を修正[＃54689](https://github.com/pingcap/tidb/issues/54689) @ [ジョッカウ](https://github.com/joccau)
@@ -192,7 +192,7 @@ TiDB バージョン: 7.1.6
     -   gRPC メッセージ圧縮方式を`grpc-compression-type`で設定しても、TiKV から TiDB [＃17176](https://github.com/tikv/tikv/issues/17176) @ [エキシウム](https://github.com/ekexium)に送信されるメッセージには反映されない問題を修正しました。
     -   不安定なテストケースの問題を修正し、各テストが独立した一時ディレクトリを使用するようにして、オンライン構成の変更が他のテストケース[＃16871](https://github.com/tikv/tikv/issues/16871) @ [栄光](https://github.com/glorv)に影響しないようにします。
     -   同じキーのロック解除のために多数のトランザクションがキューイングされ、キーが頻繁に更新される場合、デッドロック検出への過度の圧力によって TiKV OOM 問題[＃17394](https://github.com/tikv/tikv/issues/17394) @ [ミョンケミンタ](https://github.com/MyonKeminta)が発生する可能性がある問題を修正しました。
-    -   `DECIMAL`型の小数点部分が[＃16913](https://github.com/tikv/tikv/issues/16913) @ [ゲンリチ](https://github.com/gengliqi)場合に正しくない問題を修正しました
+    -   `DECIMAL`型の小数点部分が[＃16913](https://github.com/tikv/tikv/issues/16913) @ [ゲンリキ](https://github.com/gengliqi)場合に正しくない問題を修正しました
     -   クエリ内の`CONV()`関数が数値システム変換中にオーバーフローし、TiKVpanic[＃16969](https://github.com/tikv/tikv/issues/16969) @ [ゲンリチ](https://github.com/gengliqi)が発生する問題を修正しました。
     -   古いレプリカがRaftスナップショットを処理するときに、遅い分割操作と新しいレプリカ[＃17469](https://github.com/tikv/tikv/issues/17469) @ [ヒビシェン](https://github.com/hbisheng)の即時削除によってトリガーされ、TiKV がpanicになる可能性がある問題を修正しました。
     -   同時実行性の高いコプロセッサー要求により TiKV OOM [＃16653](https://github.com/tikv/tikv/issues/16653) @ [金星の上](https://github.com/overvenus)が発生する可能性がある問題を修正しました
@@ -245,7 +245,7 @@ TiDB バージョン: 7.1.6
     -   クラスタ内で長期間にわたって頻繁に`EXCHANGE PARTITION`と`DROP TABLE`操作を実行すると、 TiFlashテーブル メタデータのレプリケーションが遅くなり、クエリ パフォーマンスが低下する可能性がある問題を修正しました[＃9227](https://github.com/pingcap/tiflash/issues/9227) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)
     -   空のキー範囲を持つクエリがTiFlashで読み取りタスクを正しく生成できず、 TiFlashクエリ[＃9108](https://github.com/pingcap/tiflash/issues/9108) @ [ジンヘリン](https://github.com/JinheLin)がブロックされる可能性がある問題を修正しました。
     -   `CAST AS DECIMAL`関数の結果の符号が特定のケースで正しくない問題を修正[＃9301](https://github.com/pingcap/tiflash/issues/9301) @ [グオシャオゲ](https://github.com/guo-shaoge)
-    -   `SUBSTRING()`関数が特定の整数型に対して`pos`と`len`引数をサポートせず、クエリエラー[＃9473](https://github.com/pingcap/tiflash/issues/9473) @ [ゲンリキ](https://github.com/gengliqi)が発生する問題を修正しました
+    -   `SUBSTRING()`関数が特定の整数型に対して`pos`と`len`引数をサポートせず、クエリエラー[＃9473](https://github.com/pingcap/tiflash/issues/9473) @ [ゲンリチ](https://github.com/gengliqi)が発生する問題を修正しました
     -   大きなテーブルで`DROP TABLE`実行するとTiFlash OOM [＃9437](https://github.com/pingcap/tiflash/issues/9437) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)が発生する可能性がある問題を修正しました。
 
 -   ツール
@@ -272,9 +272,8 @@ TiDB バージョン: 7.1.6
 
         -   `TIMEZONE`種類のデフォルト値が正しいタイムゾーン[＃10931](https://github.com/pingcap/tiflow/issues/10931) @ [3エースショーハンド](https://github.com/3AceShowHand)に従って設定されない問題を修正
         -   ソーターモジュールがディスクデータ[＃10853](https://github.com/pingcap/tiflow/issues/10853) @ [ヒック](https://github.com/hicqu)を読み取るときにTiCDCがpanic可能性がある問題を修正しました
-        -   マルチノード環境で大量の`UPDATE`操作を実行する際にChangefeedを繰り返し再起動するとデータの不整合が発生する可能性がある問題を修正[＃11219](https://github.com/pingcap/tiflow/issues/11219) @ [リデズ](https://github.com/lidezhu)
+        -   マルチノード環境で大量の`UPDATE`操作を実行する際にChangefeedを繰り返し再起動するとデータの不整合が発生する可能性がある問題を修正[＃11219](https://github.com/pingcap/tiflow/issues/11219) @ [リデジュ](https://github.com/lidezhu)
         -   `ignore-event`で`add table partition`イベントをフィルタリングするように構成した後、TiCDC が関連パーティションの他のタイプの DML 変更をダウンストリーム[＃10524](https://github.com/pingcap/tiflow/issues/10524) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)に複製しない問題を修正しました。
-        -   Kafka [＃9855](https://github.com/pingcap/tiflow/issues/9855) @ [ヒック](https://github.com/hicqu)にデータを複製するときに TiCDC が停止する可能性がある問題を修正しました
         -   `DROP PRIMARY KEY`と`DROP UNIQUE KEY`ステートメントが正しく複製されない問題を修正[＃10890](https://github.com/pingcap/tiflow/issues/10890) @ [アズドンメン](https://github.com/asddongmen)
         -   下流の Kafka にアクセスできない場合にプロセッサモジュールがスタックする可能性がある問題を修正[＃11340](https://github.com/pingcap/tiflow/issues/11340) @ [アズドンメン](https://github.com/asddongmen)
 
