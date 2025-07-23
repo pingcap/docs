@@ -1,13 +1,13 @@
 ---
 title: DROP SEQUENCE
-summary: An overview of the usage of DROP SEQUENCE for the TiDB database.
+summary: 关于在 TiDB 数据库中使用 DROP SEQUENCE 的概述。
 ---
 
 # DROP SEQUENCE
 
-The `DROP SEQUENCE` statement drops the sequence object in TiDB.
+`DROP SEQUENCE` 语句用于删除 TiDB 中的序列对象。
 
-## Synopsis
+## 概述
 
 ```ebnf+diagram
 DropSequenceStmt ::=
@@ -22,9 +22,8 @@ TableName ::=
     Identifier ('.' Identifier)?
 ```
 
-## Examples
+## 示例
 
-{{< copyable "sql" >}}
 
 ```sql
 DROP SEQUENCE seq;
@@ -34,7 +33,6 @@ DROP SEQUENCE seq;
 Query OK, 0 rows affected (0.10 sec)
 ```
 
-{{< copyable "sql" >}}
 
 ```sql
 DROP SEQUENCE seq, seq2;
@@ -44,11 +42,11 @@ DROP SEQUENCE seq, seq2;
 Query OK, 0 rows affected (0.03 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension. The implementation is modeled on sequences available in MariaDB.
+该语句是 TiDB 的扩展功能。其实现借鉴了 MariaDB 中的序列机制。
 
-## See also
+## 相关链接
 
 * [CREATE SEQUENCE](/sql-statements/sql-statement-create-sequence.md)
 * [ALTER SEQUENCE](/sql-statements/sql-statement-alter-sequence.md)

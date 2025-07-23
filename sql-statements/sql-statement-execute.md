@@ -1,20 +1,20 @@
 ---
-title: EXECUTE | TiDB SQL Statement Reference
-summary: An overview of the usage of EXECUTE for the TiDB database.
+title: EXECUTE | TiDB SQL 语句参考
+summary: 关于在 TiDB 数据库中使用 EXECUTE 的概述。
 ---
 
 # EXECUTE
 
-The `EXECUTE` statement provides an SQL interface to server-side prepared statements.
+`EXECUTE` 语句提供了一个面向服务器端预处理语句的 SQL 接口。
 
-## Synopsis
+## 概述
 
 ```ebnf+diagram
 ExecuteStmt ::=
     'EXECUTE' Identifier ( 'USING' UserVariable ( ',' UserVariable )* )?
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> PREPARE mystmt FROM 'SELECT ? as num FROM DUAL';
@@ -35,11 +35,11 @@ mysql> DEALLOCATE PREPARE mystmt;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-## MySQL compatibility
+## 与 MySQL 的兼容性
 
-The `EXECUTE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中的 `EXECUTE` 语句与 MySQL 完全兼容。如果你发现任何兼容性差异，[请报告一个 bug](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 相关链接
 
 * [PREPARE](/sql-statements/sql-statement-prepare.md)
 * [DEALLOCATE](/sql-statements/sql-statement-deallocate.md)

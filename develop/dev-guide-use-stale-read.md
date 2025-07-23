@@ -1,25 +1,25 @@
 ---
 title: Stale Read
-summary: Learn how to use Stale Read to accelerate queries under certain conditions.
+summary: 了解如何在特定条件下使用 Stale Read 来加快查询速度。
 ---
 
 # Stale Read
 
-Stale Read is a mechanism that TiDB applies to read historical versions of data stored in TiDB. Using this mechanism, you can read the corresponding historical data at a specific time or within a specified time range, and thus save the latency caused by data replication between storage nodes. When you are using Stale Read, TiDB randomly selects a replica for data reading, which means that all replicas are available for data reading.
+Stale Read 是 TiDB 应用的一种机制，用于读取存储在 TiDB 中的历史版本数据。通过该机制，你可以在特定时间或指定时间范围内读取对应的历史数据，从而节省存储节点之间数据复制带来的延迟。当你使用 Stale Read 时，TiDB 会随机选择一个副本进行数据读取，这意味着所有副本都可以用于数据读取。
 
-In practice, consider carefully whether it is appropriate to enable Stale Read in TiDB based on the [usage scenarios](/stale-read.md#usage-scenarios-of-stale-read). Do not enable Stale Read if your application cannot tolerate reading non-real-time data.
+在实际应用中，应根据 [usage scenarios](/stale-read.md#usage-scenarios-of-stale-read) 小心考虑是否启用 Stale Read。若你的应用不能容忍读取非实时数据，则不应启用。
 
-TiDB provides three levels of Stale Read: statement level, transaction level, and session level.
+TiDB 提供三种级别的 Stale Read：语句级、事务级和会话级。
 
-## Introduction
+## 介绍
 
-In the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application, you can query the latest published books and their prices through the following SQL statement:
+在 [Bookshop](/develop/dev-guide-bookshop-schema-design.md) 应用中，你可以通过以下 SQL 语句查询最新发布的图书及其价格：
 
 ```sql
 SELECT id, title, type, price FROM books ORDER BY published_at DESC LIMIT 5;
 ```
 
-The result is as follows:
+查询结果如下：
 
 ```
 +------------+------------------------------+-----------------------+--------+
@@ -34,22 +34,22 @@ The result is as follows:
 5 rows in set (0.02 sec)
 ```
 
-In the list at this time (2022-04-20 15:20:00), the price of *The Story of Droolius Caesar* is 100.0.
+此时（2022-04-20 15:20:00），“The Story of Droolius Caesar”的价格为 100.0。
 
-At the same time, the seller found that the book was very popular and raised the price of the book to 150.0 through the following SQL statement:
+同时，卖家发现该书非常受欢迎，通过以下 SQL 语句将价格提升至 150.0：
 
 ```sql
 UPDATE books SET price = 150 WHERE id = 3181093216;
 ```
 
-The result is as follows:
+执行结果如下：
 
 ```
 Query OK, 1 row affected (0.00 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 ```
 
-By querying the latest books list, you can see that the price of this book has increased.
+通过查询最新图书列表，可以看到该书的价格已变为 150.00。
 
 ```
 +------------+------------------------------+-----------------------+--------+
@@ -64,22 +64,22 @@ By querying the latest books list, you can see that the price of this book has i
 5 rows in set (0.01 sec)
 ```
 
-If it is not necessary to use the latest data, you can query with Stale Read, which might return outdated data, to avoid the latency caused by data replication during a strongly consistent read.
+如果不需要使用最新数据，可以通过 Stale Read 查询，可能返回过时数据，以避免在强一致性读取期间由数据复制引起的延迟。
 
-Assuming that in the Bookshop application, the real-time price of a book is not required on the book lists page but only required on the book details and order pages. Stale Read can be used to improve throughout of the application.
+假设在 Bookshop 应用中，图书的实时价格在图书列表页并不必要，只在图书详情和订单页面需要。使用 Stale Read 可以提升应用的吞吐量。
 
 ## Statement level
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-To query the price of a book before a specific time, add an `AS OF TIMESTAMP <datetime>` clause in the above query statement.
+要在特定时间之前查询图书价格，在上述查询语句中添加 `AS OF TIMESTAMP <datetime>` 子句。
 
 ```sql
 SELECT id, title, type, price FROM books AS OF TIMESTAMP '2022-04-20 15:20:00' ORDER BY published_at DESC LIMIT 5;
 ```
 
-The result is as follows:
+查询结果如下：
 
 ```
 +------------+------------------------------+-----------------------+--------+
@@ -94,21 +94,21 @@ The result is as follows:
 5 rows in set (0.01 sec)
 ```
 
-In addition to specifying an exact time, you can also specify the following:
+除了指定具体时间外，还可以使用以下方式：
 
-- `AS OF TIMESTAMP NOW() - INTERVAL 10 SECOND` queries the latest data 10 seconds ago.
-- `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS('2016-10-08 16:45:26', '2016-10-08 16:45:29')` queries the latest data between `2016-10-08 16:45:26` and `2016-10-08 16:45:29`.
-- `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS(NOW() -INTERVAL 20 SECOND, NOW())` queries the latest data within 20 seconds.
+- `AS OF TIMESTAMP NOW() - INTERVAL 10 SECOND` 查询 10 秒前的最新数据。
+- `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS('2016-10-08 16:45:26', '2016-10-08 16:45:29')` 查询在 `2016-10-08 16:45:26` 和 `2016-10-08 16:45:29` 之间的最新数据。
+- `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS(NOW() -INTERVAL 20 SECOND, NOW())` 查询在 20 秒范围内的最新数据。
 
-Note that the specified timestamp or interval cannot be too early or later than the current time. Additionally, `NOW()` defaults to second precision. To achieve higher precision, you can add a parameter, such as using `NOW(3)` for millisecond precision. For more information, see [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_now).
+注意，指定的时间戳或时间间隔不能早于或晚于当前时间。此外，`NOW()` 默认为秒级精度。若需更高精度，可添加参数，例如 `NOW(3)` 表示毫秒级。更多信息请参见 [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_now)。
 
-Expired data will be recycled by [Garbage Collection](/garbage-collection-overview.md) in TiDB, and the data will be retained for a short period before being cleared. The period is called [GC Life Time (default 10 minutes)](/system-variables.md#tidb_gc_life_time-new-in-v50). When a GC starts, the current time minus the time period will be used as the **GC Safe Point**. If you try to read the data before GC Safe Point, TiDB will report the following error:
+过期数据会由 TiDB 中的 [Garbage Collection](/garbage-collection-overview.md) 回收，数据会在短时间内保留后被清除。该时间段称为 [GC Life Time (default 10 minutes)](/system-variables.md#tidb_gc_life_time-new-in-v50)。当 GC 开始时，当前时间减去该时间段即为 **GC Safe Point**。如果尝试读取 GC Safe Point 之前的数据，TiDB 会报错：
 
 ```
 ERROR 9006 (HY000): GC life time is shorter than transaction duration...
 ```
 
-If the given timestamp is a future time, TiDB will report the following error:
+如果指定的时间戳是未来时间，TiDB 会报错：
 
 ```
 ERROR 9006 (HY000): cannot set read timestamp to a future time.
@@ -120,40 +120,7 @@ ERROR 9006 (HY000): cannot set read timestamp to a future time.
 ```java
 public class BookDAO {
 
-    // Omit some code...
-
-    public List<Book> getTop5LatestBooks() throws SQLException {
-        List<Book> books = new ArrayList<>();
-        try (Connection conn = ds.getConnection()) {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("""
-            SELECT id, title, type, price FROM books ORDER BY published_at DESC LIMIT 5;
-            """);
-            while (rs.next()) {
-                Book book = new Book();
-                book.setId(rs.getLong("id"));
-                book.setTitle(rs.getString("title"));
-                book.setType(rs.getString("type"));
-                book.setPrice(rs.getDouble("price"));
-                books.add(book);
-            }
-        }
-        return books;
-    }
-
-    public void updateBookPriceByID(Long id, Double price) throws SQLException {
-        try (Connection conn = ds.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("""
-            UPDATE books SET price = ? WHERE id = ?;
-            """);
-            stmt.setDouble(1, price);
-            stmt.setLong(2, id);
-            int affects = stmt.executeUpdate();
-            if (affects == 0) {
-                throw new SQLException("Failed to update the book with id: " + id);
-            }
-        }
-    }
+    // 省略部分代码...
 
     public List<Book> getTop5LatestBooksWithStaleRead(Integer seconds) throws SQLException {
         List<Book> books = new ArrayList<>();
@@ -197,165 +164,17 @@ if (top5LatestBooks.size() > 0) {
     top5LatestBooks = bookDAO.getTop5LatestBooks();
     System.out.println("The latest book price (after update): " + top5LatestBooks.get(0).getPrice());
 
-    // Use the stale read.
+    // 使用过期数据读取（stale read）。
     top5LatestBooks = bookDAO.getTop5LatestBooksWithStaleRead(5);
     System.out.println("The latest book price (maybe stale): " + top5LatestBooks.get(0).getPrice());
 
-    // Try to stale read the data at the future time.
-    bookDAO.getTop5LatestBooksWithStaleRead(-5);
-
-    // Try to stale read the data before 20 minutes.
-    bookDAO.getTop5LatestBooksWithStaleRead(20 * 60);
-}
-```
-
-The following result shows that the price returned by Stale Read is 100.00, which is the value before the update.
-
-```
-The latest book price (before update): 100.00
-The latest book price (after update): 150.00
-The latest book price (maybe stale): 100.00
-WARN: cannot set read timestamp to a future time.
-WARN: GC life time is shorter than transaction duration.
-```
-
-</div>
-</SimpleTab>
-
-## Transaction level
-
-With the `START TRANSACTION READ ONLY AS OF TIMESTAMP` statement, you can start a read-only transaction based on historical time, which reads historical data from a specified historical timestamp.
-
-<SimpleTab groupId="language">
-<div label="SQL" value="sql">
-
-For example:
-
-```sql
-START TRANSACTION READ ONLY AS OF TIMESTAMP NOW() - INTERVAL 5 SECOND;
-```
-
-By querying the latest price of the book, you can see that the price of *The Story of Droolius Caesar* is still 100.0, which is the value before the update.
-
-```sql
-SELECT id, title, type, price FROM books ORDER BY published_at DESC LIMIT 5;
-```
-
-The result is as follows:
-
-```
-+------------+------------------------------+-----------------------+--------+
-| id         | title                        | type                  | price  |
-+------------+------------------------------+-----------------------+--------+
-| 3181093216 | The Story of Droolius Caesar | Novel                 | 100.00 |
-| 1064253862 | Collin Rolfson               | Education & Reference |  92.85 |
-| 1748583991 | The Documentary of cat       | Magazine              | 159.75 |
-|  893930596 | Myrl Hills                   | Education & Reference | 356.85 |
-| 3062833277 | Keven Wyman                  | Life                  | 477.91 |
-+------------+------------------------------+-----------------------+--------+
-5 rows in set (0.01 sec)
-```
-
-After the transaction with the `COMMIT;` statement is committed, you can read the latest data.
-
-```
-+------------+------------------------------+-----------------------+--------+
-| id         | title                        | type                  | price  |
-+------------+------------------------------+-----------------------+--------+
-| 3181093216 | The Story of Droolius Caesar | Novel                 | 150.00 |
-| 1064253862 | Collin Rolfson               | Education & Reference |  92.85 |
-| 1748583991 | The Documentary of cat       | Magazine              | 159.75 |
-|  893930596 | Myrl Hills                   | Education & Reference | 356.85 |
-| 3062833277 | Keven Wyman                  | Life                  | 477.91 |
-+------------+------------------------------+-----------------------+--------+
-5 rows in set (0.01 sec)
-```
-
-</div>
-<div label="Java" value="java">
-
-You can define a helper class for transactions, which encapsulates the command to enable Stale Read at the transaction level as a helper method.
-
-```java
-public static class StaleReadHelper {
-
-    public static void startTxnWithStaleRead(Connection conn, Integer seconds) throws SQLException {
-        conn.setAutoCommit(false);
-        PreparedStatement stmt = conn.prepareStatement(
-            "START TRANSACTION READ ONLY AS OF TIMESTAMP NOW() - INTERVAL ? SECOND;"
-        );
-        stmt.setInt(1, seconds);
-        stmt.execute();
-    }
-
-}
-```
-
-Then define a method to enable the Stale Read feature through a transaction in the `BookDAO` class. Use the method to query instead of adding `AS OF TIMESTAMP` to the query statement.
-
-```java
-public class BookDAO {
-
-    // Omit some code...
-
-    public List<Book> getTop5LatestBooksWithTxnStaleRead(Integer seconds) throws SQLException {
-        List<Book> books = new ArrayList<>();
-        try (Connection conn = ds.getConnection()) {
-            // Start a read only transaction.
-            TxnHelper.startTxnWithStaleRead(conn, seconds);
-
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("""
-            SELECT id, title, type, price FROM books ORDER BY published_at DESC LIMIT 5;
-            """);
-            while (rs.next()) {
-                Book book = new Book();
-                book.setId(rs.getLong("id"));
-                book.setTitle(rs.getString("title"));
-                book.setType(rs.getString("type"));
-                book.setPrice(rs.getDouble("price"));
-                books.add(book);
-            }
-
-            // Commit transaction.
-            conn.commit();
-        } catch (SQLException e) {
-            if ("HY000".equals(e.getSQLState()) && e.getErrorCode() == 1105) {
-                System.out.println("WARN: cannot set read timestamp to a future time.");
-            } else if ("HY000".equals(e.getSQLState()) && e.getErrorCode() == 9006) {
-                System.out.println("WARN: GC life time is shorter than transaction duration.");
-            } else {
-                throw e;
-            }
-        }
-        return books;
-    }
-}
-```
-
-```java
-List<Book> top5LatestBooks = bookDAO.getTop5LatestBooks();
-
-if (top5LatestBooks.size() > 0) {
-    System.out.println("The latest book price (before update): " + top5LatestBooks.get(0).getPrice());
-
-    Book book = top5LatestBooks.get(0);
-    bookDAO.updateBookPriceByID(book.getId(), book.price + 10);
-
-    top5LatestBooks = bookDAO.getTop5LatestBooks();
-    System.out.println("The latest book price (after update): " + top5LatestBooks.get(0).getPrice());
-
-    // Use the stale read.
-    top5LatestBooks = bookDAO.getTop5LatestBooksWithTxnStaleRead(5);
-    System.out.println("The latest book price (maybe stale): " + top5LatestBooks.get(0).getPrice());
-
-    // After the stale read transaction is committed.
+    // 在事务提交后，再次读取最新数据。
     top5LatestBooks = bookDAO.getTop5LatestBooks();
     System.out.println("The latest book price (after the transaction commit): " + top5LatestBooks.get(0).getPrice());
 }
 ```
 
-The result is as follows:
+输出结果如下：
 
 ```
 The latest book price (before update): 100.00
@@ -367,12 +186,12 @@ The latest book price (after the transaction commit): 150
 </div>
 </SimpleTab>
 
-With the `SET TRANSACTION READ ONLY AS OF TIMESTAMP` statement, you can set the opened transaction or the next transaction to be a read-only transaction based on a specified historical time. The transaction will read historical data based on the provided historical time.
+通过 `SET TRANSACTION READ ONLY AS OF TIMESTAMP` 语句，可以将开启的事务或下一次事务设置为基于指定历史时间的只读事务。事务将读取基于提供的历史时间的历史数据。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-For example, you can use the following `AS OF TIMESTAMP` statement to switch the ongoing transactions to the read-only mode and read historical data 5 seconds ago.
+例如，可以使用以下 `AS OF TIMESTAMP` 语句，将正在进行的事务切换为只读模式，并读取 5 秒前的历史数据。
 
 ```sql
 SET TRANSACTION READ ONLY AS OF TIMESTAMP NOW() - INTERVAL 5 SECOND;
@@ -381,7 +200,7 @@ SET TRANSACTION READ ONLY AS OF TIMESTAMP NOW() - INTERVAL 5 SECOND;
 </div>
 <div label="Java" value="java">
 
-You can define a helper class for transactions, which encapsulates the command to enable Stale Read at the transaction level as a helper method.
+你可以定义一个事务助手类，将启用事务级 Stale Read 的命令封装为辅助方法。
 
 ```java
 public static class TxnHelper {
@@ -397,19 +216,20 @@ public static class TxnHelper {
 }
 ```
 
-Then define a method to enable the Stale Read feature through a transaction in the `BookDAO` class. Use the method to query instead of adding `AS OF TIMESTAMP` to the query statement.
+然后在 `BookDAO` 类中定义一个方法，通过事务启用 Stale Read 功能。使用该方法进行查询，而不是在查询语句中添加 `AS OF TIMESTAMP`。
 
 ```java
 public class BookDAO {
 
-    // Omit some code...
+    // 省略部分代码...
 
-    public List<Book> getTop5LatestBooksWithTxnStaleRead2(Integer seconds) throws SQLException {
+    public List<Book> getTop5LatestBooksWithTxnStaleRead(Integer seconds) throws SQLException {
         List<Book> books = new ArrayList<>();
         try (Connection conn = ds.getConnection()) {
-            StaleReadHelper.setTxnWithStaleRead(conn, seconds);
+            // 开启只读事务。
+            TxnHelper.setTxnWithStaleRead(conn, seconds);
 
-            // Start a read only transaction.
+            // 设置事务为只读。
             conn.setAutoCommit(false);
 
             Statement stmt = conn.createStatement();
@@ -425,7 +245,7 @@ public class BookDAO {
                 books.add(book);
             }
 
-            // Commit transaction.
+            // 提交事务。
             conn.commit();
         } catch (SQLException e) {
             if ("HY000".equals(e.getSQLState()) && e.getErrorCode() == 1105) {
@@ -446,20 +266,20 @@ public class BookDAO {
 
 ## Session level
 
-To support reading historical data, TiDB has introduced a new system variable `tidb_read_staleness` since v5.4. you can use it to set the range of historical data that the current session is allowed to read. Its data type is `int` and its scope is `SESSION`.
+为了支持读取历史数据，TiDB 自 v5.4 版本起引入了新的系统变量 `tidb_read_staleness`，你可以用它设置当前会话允许读取的历史数据范围。其数据类型为 `int`，作用域为 `SESSION`。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-Enable Stale Read in a session:
+在会话中启用 Stale Read：
 
 ```sql
 SET @@tidb_read_staleness="-5";
 ```
 
-For example, if the value is set to `-5` and TiKV or TiFlash has the corresponding historical data, TiDB selects a timestamp as new as possible within a 5-second time range.
+例如，如果设置为 `-5`，且 TiKV 或 TiFlash 存在对应的历史数据，TiDB 会在 5 秒的时间范围内选择尽可能接近当前时间的时间戳。
 
-Disable Stale Read in the session:
+在会话中禁用 Stale Read：
 
 ```sql
 set @@tidb_read_staleness="";
@@ -492,22 +312,22 @@ public static class StaleReadHelper{
 </div>
 </SimpleTab>
 
-## Read more
+## 阅读更多
 
 - [Usage Scenarios of Stale Read](/stale-read.md)
 - [Read Historical Data Using the `AS OF TIMESTAMP` Clause](/as-of-timestamp.md)
 - [Read Historical Data Using the `tidb_read_staleness` System Variable](/tidb-read-staleness.md)
 
-## Need help?
+## 需要帮助？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或 [提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或 [提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

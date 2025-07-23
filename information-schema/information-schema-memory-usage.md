@@ -1,11 +1,11 @@
 ---
 title: MEMORY_USAGE
-summary: Learn the `MEMORY_USAGE` information_schema system table.
+summary: 了解 `MEMORY_USAGE` information_schema 系统表。
 ---
 
 # MEMORY_USAGE
 
-The `MEMORY_USAGE` table describes the current memory usage of the current TiDB instance.
+`MEMORY_USAGE` 表描述了当前 TiDB 实例的内存使用情况。
 
 ```sql
 USE information_schema;
@@ -28,10 +28,9 @@ DESC memory_usage;
 | DISK_USAGE         | bigint(21)  | NO   |      | NULL    |       |
 | QUERY_FORCE_DISK   | bigint(21)  | NO   |      | NULL    |       |
 +--------------------+-------------+------+------+---------+-------+
-11 rows in set (0.000 sec)
+11 行，耗时 0.000 秒
 ```
 
-{{< copyable "sql" >}}
 
 ```sql
 SELECT * FROM information_schema.memory_usage;
@@ -43,24 +42,24 @@ SELECT * FROM information_schema.memory_usage;
 +--------------+--------------+----------------+-----------------+-------------+---------------------+--------------------+---------------------+----------+------------+------------------+
 |  33674170368 |  10737418240 |     5097644032 |     10826604544 | NULL        | 2022-10-17 22:47:47 |                  1 | 2022-10-17 22:47:47 |       20 |          0 |                0 |
 +--------------+--------------+----------------+-----------------+-------------+---------------------+--------------------+---------------------+----------+------------+------------------+
-2 rows in set (0.002 sec)
+2 行，耗时 0.002 秒
 ```
 
-The columns in the `MEMORY_USAGE` table are described as follows:
+`MEMORY_USAGE` 表中的列说明如下：
 
-* MEMORY_TOTAL: The total available memory of TiDB, in bytes.
-* MEMORY_LIMIT: The memory usage limit of TiDB, in bytes. The value is the same as that of the system variable [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640).
-* MEMORY_CURRENT: The current memory usage of TiDB, in bytes.
-* MEMORY_MAX_USED: The maximum memory usage of TiDB from the time it is started to the current time, in bytes.
-* CURRENT_OPS: "shrinking" | null. "shrinking" means that TiDB is performing operations that shrink memory usage.
-* SESSION_KILL_LAST: The timestamp of the last time a session is terminated.
-* SESSION_KILL_TOTAL: The number of times sessions are terminated, from the time TiDB is started to the current time.
-* GC_LAST: The timestamp of the last time Golang GC is triggered by memory usage.
-* GC_TOTAL: The number of times Golang GC is triggered by memory usage, from the time TiDB is started to the current time.
-* DISK_USAGE: The disk usage for the current data spill operation, in bytes.
-* QUERY_FORCE_DISK: The number of times data is spilled to disk, from the time TiDB is started to the current time.
+* MEMORY_TOTAL：TiDB 的总可用内存，单位为字节。
+* MEMORY_LIMIT：TiDB 的内存使用限制，单位为字节。该值与系统变量 [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) 的值相同。
+* MEMORY_CURRENT：TiDB 当前的内存使用量，单位为字节。
+* MEMORY_MAX_USED：TiDB 从启动到当前的最大内存使用量，单位为字节。
+* CURRENT_OPS： "shrinking" | null。 "shrinking" 表示 TiDB 正在执行缩减内存的操作。
+* SESSION_KILL_LAST：上次终止会话的时间戳。
+* SESSION_KILL_TOTAL：自 TiDB 启动以来，终止会话的次数。
+* GC_LAST：上次由内存使用触发的 Golang 垃圾回收（GC）时间戳。
+* GC_TOTAL：自 TiDB 启动以来，由内存使用触发的 Golang 垃圾回收（GC）次数。
+* DISK_USAGE：当前数据溢出操作的磁盘使用量，单位为字节。
+* QUERY_FORCE_DISK：自 TiDB 启动以来，数据溢出到磁盘的次数。
 
-## See also
+## 相关链接
 
 <CustomContent platform="tidb">
 

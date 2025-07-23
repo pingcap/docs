@@ -1,13 +1,13 @@
 ---
-title: DROP TABLE | TiDB SQL Statement Reference
-summary: An overview of the usage of DROP TABLE for the TiDB database.
+title: DROP TABLE | TiDB SQL 语句参考
+summary: 关于 TiDB 数据库中 DROP TABLE 的用法概述。
 ---
 
 # DROP TABLE
 
-This statement drops a table from the currently selected database. An error is returned if the table does not exist, unless the `IF EXISTS` modifier is used.
+该语句用于从当前选择的数据库中删除一个表。如果表不存在，除非使用了 `IF EXISTS` 修饰符，否则会返回错误。
 
-## Synopsis
+## 概要
 
 ```ebnf+diagram
 DropTableStmt ::=
@@ -24,15 +24,15 @@ TableNameList ::=
     TableName ( ',' TableName )*
 ```
 
-## Drop temporary tables
+## 删除临时表
 
-You can use the following syntax to drop ordinary tables and temporary tables:
+你可以使用以下语法删除普通表和临时表：
 
-- Use `DROP TEMPORARY TABLE` to drop local temporary tables.
-- Use `DROP GLOBAL TEMPORARY TABLE` to drop global temporary tables.
-- Use `DROP TABLE` to drop ordinary tables or temporary tables.
+- 使用 `DROP TEMPORARY TABLE` 来删除本地临时表。
+- 使用 `DROP GLOBAL TEMPORARY TABLE` 来删除全局临时表。
+- 使用 `DROP TABLE` 来删除普通表或临时表。
 
-## Examples
+## 示例
 
 ```sql
 mysql> CREATE TABLE t1 (a INT);
@@ -62,11 +62,11 @@ mysql> DROP TABLE v1;
 Query OK, 0 rows affected (0.23 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-Currently, `RESTRICT` and `CASCADE` are only supported syntactically.
+目前，`RESTRICT` 和 `CASCADE` 仅在语法上支持。
 
-## See also
+## 相关链接
 
 * [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 * [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)

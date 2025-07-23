@@ -1,11 +1,11 @@
 ---
 title: ENGINES
-summary: Learn the `ENGINES` information_schema table.
+summary: 了解 `ENGINES` information_schema 表。
 ---
 
 # ENGINES
 
-The `ENGINES` table provides information about storage engines. For compatibility, TiDB will always describe InnoDB as the only supported engine. In addition, other column values in the `ENGINES` table are also fixed values.
+`ENGINES` 表提供关于存储引擎的信息。为了兼容性，TiDB 始终将 InnoDB 描述为唯一支持的引擎。此外，`ENGINES` 表中的其他列值也都是固定值。
 
 ```sql
 USE information_schema;
@@ -39,15 +39,15 @@ SELECT * FROM engines;
 1 row in set (0.01 sec)
 ```
 
-The description of columns in the `ENGINES` table is as follows:
+`ENGINES` 表中各列的描述如下：
 
-* `ENGINES`: The name of the storage engine.
-* `SUPPORT`: The level of support that the server has on the storage engine. In TiDB, the value is always `DEFAULT`.
-* `COMMENT`: The brief comment on the storage engine.
-* `TRANSACTIONS`: Whether the storage engine supports transactions.
-* `XA`: Whether the storage engine supports XA transactions.
-* `SAVEPOINTS`: Whether the storage engine supports `savepoints`.
+* `ENGINES`：存储引擎的名称。
+* `SUPPORT`：服务器对存储引擎的支持程度。在 TiDB 中，该值始终为 `DEFAULT`。
+* `COMMENT`：关于存储引擎的简要说明。
+* `TRANSACTIONS`：存储引擎是否支持事务。
+* `XA`：存储引擎是否支持 XA 事务。
+* `SAVEPOINTS`：存储引擎是否支持 `savepoints`。
 
-## See also
+## 相关链接
 
 - [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md)

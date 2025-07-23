@@ -1,59 +1,60 @@
 ---
 title: Schema Cache
-summary: TiDB adopts an LRU-based (Least Recently Used) caching mechanism for schema information, which significantly reduces memory usage and improves performance in scenarios with a large number of databases and tables.
+summary: TiDB 采用基于 LRU（最近最少使用）机制的 schema 缓存机制，在数据库和表数量较多的场景下，显著降低内存使用并提升性能。
 ---
 
 # Schema Cache
 
-In some multi-tenant scenarios, there might be hundreds of thousands or even millions of databases and tables. Loading the schema information of all these databases and tables into memory would not only consume a large amount of memory but also degrade access performance. To address this issue, TiDB introduces a schema caching mechanism similar to LRU (Least Recently Used). Only the schema information of the most recently accessed databases and tables is cached in memory.
+在一些多租户场景中，可能存在数十万甚至上百万个数据库和表。将所有这些数据库和表的 schema 信息加载到内存中，不仅会消耗大量内存，还会降低访问性能。为了解决这一问题，TiDB 引入了类似于 LRU（最近最少使用）的 schema 缓存机制。只有最近访问的数据库和表的 schema 信息会被缓存到内存中。
 
 > **Note:**
 >
-> Currently, this feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> 当前，该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
 
-## Configure schema cache
+## 配置 schema cache
 
-You can enable the schema caching feature by configuring the system variable [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800).
+你可以通过配置系统变量 [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800) 来启用 schema 缓存功能。
 
-## Best practices
+## 最佳实践
 
-- In scenarios with a large number of databases and tables (for example, more than 100,000 databases and tables) or when the number of databases and tables is large enough to affect system performance, it is recommended to enable the schema caching feature.
-- You can monitor the hit rate of the schema cache by observing the subpanel **Infoschema v2 Cache Operation** under the **Schema load** section in TiDB Dashboard. If the hit rate is low, you can increase the value of [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800).
-- You can monitor the current size of the schema cache being used by observing the subpanel **Infoschema v2 Cache Size** under the **Schema load** section in TiDB Dashboard.
+- 在数据库和表数量较多（例如超过 10 万个数据库和表）或数量足够大以影响系统性能的场景下，建议启用 schema 缓存功能。
+- 你可以通过观察 TiDB Dashboard 中 **Schema load** 部分下的 **Infoschema v2 Cache Operation** 子面板，监控 schema 缓存的命中率。如果命中率较低，可以增加 [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800) 的值。
+- 你可以通过观察 TiDB Dashboard 中 **Schema load** 部分下的 **Infoschema v2 Cache Size** 子面板，监控当前使用的 schema 缓存大小。
 
 <CustomContent platform="tidb">
 
-- It is recommended to disable [`performance.force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710) to reduce TiDB startup time.
-- If you need to create a large number of tables (for example, more than 100,000 tables), it is recommended to set the [`split-table`](/tidb-configuration-file.md#split-table) parameter to `false` to reduce the number of Regions and thus decrease TiKV's memory usage.
+- 建议禁用 [`performance.force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710)，以减少 TiDB 启动时间。
+- 如果需要创建大量表（例如超过 10 万个表），建议将 [`split-table`](/tidb-configuration-file.md#split-table) 参数设置为 `false`，以减少 Regions 数量，从而降低 TiKV 的内存使用。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- It is recommended to disable [`performance.force-init-stats`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file/#force-init-stats-new-in-v657-and-v710) to reduce TiDB startup time.
-- If you need to create a large number of tables (for example, more than 100,000 tables), it is recommended to set the [`split-table`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file/#split-table) parameter to `false` to reduce the number of Regions and thus decrease TiKV's memory usage.
+- 建议禁用 [`performance.force-init-stats`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file/#force-init-stats-new-in-v657-and-v710)，以减少 TiDB 启动时间。
+- 如果需要创建大量表（例如超过 10 万个表），建议将 [`split-table`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file/#split-table) 参数设置为 `false`，以减少 Regions 数量，从而降低 TiKV 的内存使用。
 
 </CustomContent>
 
-## Known limitations
+## 已知限制
 
-In scenarios with a large number of databases and tables, the following known issues exist:
+在数据库和表数量较多的场景下，存在以下已知问题：
 
-- The number of tables in a single cluster cannot exceed 3 million.
-- If the number of tables in a single cluster exceeds 300,000, do not set the value of [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800) to `0`, because it might cause TiDB to run out of memory (OOM).
-- Using foreign keys might increase the execution time of DDL operations in a cluster.
-- When the tables are irregularly accessed, such as one set of tables are accessed at time1 while another set are accessed at time2, and the value of `tidb_schema_cache_size` is small, the schema information might be frequently evicted and cached, leading to performance fluctuations. This feature is more suitable for scenarios where frequently accessed databases and tables are relatively fixed.
-- Statistics information might not be collected in a timely manner.
-- Access to some metadata information might become slower.
-- Switching the schema cache on or off requires a waiting period.
-- Operations that involve enumerating all metadata information might become slower, such as:
+- 单个集群中的表数量不能超过 300 万。
+- 如果单个集群中的表数量超过 30 万，不要将 [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800) 设置为 `0`，否则可能导致 TiDB 内存溢出（OOM）。
+- 使用外键可能会增加集群中 DDL 操作的执行时间。
+- 当表的访问不规律，例如一组表在 time1 被访问，另一组在 time2 被访问，且 `tidb_schema_cache_size` 的值较小时，schema 信息可能频繁被驱逐和缓存，导致性能波动。此功能更适合频繁访问且相对固定的数据库和表场景。
+- 统计信息可能无法及时采集。
+- 访问某些元数据信息可能变慢。
+- 开启或关闭 schema cache 需要等待一段时间。
+- 涉及枚举所有元数据信息的操作可能变慢，例如：
 
     - `SHOW FULL TABLES`
     - `FLASHBACK`
     - `ALTER TABLE ... SET TIFLASH MODE ...`
 
-- When you use tables with the [`AUTO_INCREMENT`](/auto-increment.md) or [`AUTO_RANDOM`](/auto-random.md) attribute, a small schema cache size might cause the meta data of these tables to frequently enter and leave the cache. This can result in the allocated ID range becoming invalid before being fully used, leading to ID jumps. In write-intensive scenarios, this might even exhaust the ID range. To minimize abnormal ID allocation behavior and improve system stability, it is recommended to take the following measures:
+- 当你使用带有 [`AUTO_INCREMENT`](/auto-increment.md) 或 [`AUTO_RANDOM`](/auto-random.md) 属性的表时，较小的 schema 缓存大小可能导致这些表的元数据频繁进入和退出缓存，从而使分配的 ID 范围在未用完之前变得无效，导致 ID 跳跃。在写入密集型场景下，甚至可能耗尽 ID 范围。为减少异常 ID 分配行为并提升系统稳定性，建议采取以下措施：
 
-    - View the hit rate and size of the schema cache on the monitoring panel to assess whether the cache settings are reasonable. Increase the schema cache size properly to reduce frequent evictions.
-    - Set [`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache) to `1` to prevent ID jumps.
-    - Properly configure the shard bits and reserved bits of `AUTO_RANDOM` to avoid a too small ID range.
+    - 查看监控面板上的命中率和 schema 缓存大小，评估缓存设置是否合理。适当增加 schema 缓存大小以减少频繁驱逐。
+    - 将 [`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache) 设置为 `1`，以防止 ID 跳跃。
+    - 合理配置 `AUTO_RANDOM` 的 shard bits 和 reserved bits，避免 ID 范围过小。
+

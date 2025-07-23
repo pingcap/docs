@@ -1,15 +1,15 @@
 ---
 title: JSON Utility Functions
-summary: Learn about JSON utility functions.
+summary: 了解 JSON 工具函数。
 ---
 
 # JSON Utility Functions
 
-This document describes JSON utility functions.
+本文档描述了 JSON 工具函数。
 
 ## [JSON_PRETTY()](https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html#function_json-pretty)
 
-The `JSON_PRETTY(json_doc)` function does pretty formatting of a JSON document.
+`JSON_PRETTY(json_doc)` 函数对 JSON 文档进行美化格式化。
 
 ```sql
 SELECT JSON_PRETTY('{"person":{"name":{"first":"John","last":"Doe"},"age":23}}')\G
@@ -31,11 +31,11 @@ JSON_PRETTY('{"person":{"name":{"first":"John","last":"Doe"},"age":23}}'): {
 
 ## [JSON_STORAGE_FREE()](https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html#function_json-storage-free)
 
-The `JSON_STORAGE_FREE(json_doc)` function returns how much storage space is freed in the binary representation of the JSON value after it is updated in place. 
+`JSON_STORAGE_FREE(json_doc)` 函数返回在就地更新后，二进制表示的 JSON 值释放的存储空间大小（以字节为单位）。
 
-> **Note:**
+> **注意：**
 >
-> Because TiDB has a different storage architecture from MySQL, this function always returns `0` for a valid JSON value, and it is implemented for [compatibility with MySQL 8.0](/mysql-compatibility.md). Note that TiDB does not do in-place updates. For more information, see [RocksDB space usage](/storage-engine/rocksdb-overview.md#rocksdb-space-usage).
+> 由于 TiDB 的存储架构与 MySQL 不同，此函数对于有效的 JSON 值总是返回 `0`，并且它是为了 [兼容 MySQL 8.0](/mysql-compatibility.md) 而实现的。请注意，TiDB 不进行就地更新。更多信息请参见 [RocksDB 空间使用情况](/storage-engine/rocksdb-overview.md#rocksdb-space-usage)。
 
 ```sql
 SELECT JSON_STORAGE_FREE('{}');
@@ -52,7 +52,7 @@ SELECT JSON_STORAGE_FREE('{}');
 
 ## [JSON_STORAGE_SIZE()](https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html#function_json-storage-size)
 
-The `JSON_STORAGE_SIZE(json_doc)` function returns an approximate size of bytes required to store the JSON value. Because the size does not account for TiKV using compression, the output of this function is not strictly compatible with MySQL.
+`JSON_STORAGE_SIZE(json_doc)` 函数返回存储 JSON 值所需的近似字节数。由于此大小未考虑 TiKV 使用压缩，故此函数的输出与 MySQL 不完全兼容。
 
 ```sql
 SELECT JSON_STORAGE_SIZE('{}');
@@ -67,7 +67,7 @@ SELECT JSON_STORAGE_SIZE('{}');
 1 row in set (0.00 sec)
 ```
 
-## See also
+## 相关链接
 
 - [JSON Functions Overview](/functions-and-operators/json-functions.md)
 - [JSON Data Type](/data-type-json.md)

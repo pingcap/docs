@@ -1,34 +1,32 @@
 ---
 title: Views
-summary: Learn how to use views in TiDB.
+summary: 学习如何在 TiDB 中使用视图。
 ---
 
 # Views
 
-TiDB supports views. A view acts as a virtual table, whose schema is defined by the `SELECT` statement that creates the view. Using views has the following benefits:
+TiDB 支持视图。视图充当虚拟表，其模式由创建该视图的 `SELECT` 语句定义。使用视图具有以下优点：
 
-- Exposing only safe fields and data to users to ensure security of sensitive fields and data stored in the underlying table.
-- Defining complex queries that frequently appear as views to make complex queries easier and more convenient.
+- 仅向用户暴露安全的字段和数据，以确保底层表中敏感字段和数据的安全。
+- 定义经常出现的复杂查询作为视图，使复杂查询更简便、更方便。
 
-## Query views
+## 查询视图
 
-Querying a view is similar to querying an ordinary table. However, when TiDB queries a view, it actually queries the `SELECT` statement associated with the view.
+查询视图类似于查询普通表。然而，当 TiDB 查询视图时，实际上是查询与该视图关联的 `SELECT` 语句。
 
-## Show metadata
+## 显示元数据
 
-To obtain the metadata of views, choose any of the following methods.
+获取视图的元数据，可以选择以下任意方法。
 
-### Use the `SHOW CREATE TABLE view_name` or `SHOW CREATE VIEW view_name` statement
+### 使用 `SHOW CREATE TABLE view_name` 或 `SHOW CREATE VIEW view_name` 语句
 
-Usage example:
-
-{{< copyable "sql" >}}
+用法示例：
 
 ```sql
 show create view v;
 ```
 
-This statement shows the `CREATE VIEW` statement corresponding to this view and the value of the `character_set_client` and `collation_connection` system variables when the view was created.
+此语句显示与该视图对应的 `CREATE VIEW` 语句，以及创建视图时的 `character_set_client` 和 `collation_connection` 系统变量的值。
 
 ```sql
 +------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------+----------------------+
@@ -39,17 +37,15 @@ This statement shows the `CREATE VIEW` statement corresponding to this view an
 1 row in set (0.00 sec)
 ```
 
-### Query the `INFORMATION_SCHEMA.VIEWS` table
+### 查询 `INFORMATION_SCHEMA.VIEWS` 表
 
-Usage example:
-
-{{< copyable "sql" >}}
+用法示例：
 
 ```sql
 select * from information_schema.views;
 ```
 
-You can view the relevant meta information of the view by querying this table, such as `TABLE_CATALOG`, `TABLE_SCHEMA`, `TABLE_NAME`, `VIEW_DEFINITION`, `CHECK_OPTION`, `IS_UPDATABLE`, `DEFINER`, `SECURITY_TYPE`, `CHARACTER_SET_CLIENT`, and `COLLATION_CONNECTION`.
+通过查询此表，可以查看视图的相关元信息，例如 `TABLE_CATALOG`、`TABLE_SCHEMA`、`TABLE_NAME`、`VIEW_DEFINITION`、`CHECK_OPTION`、`IS_UPDATABLE`、`DEFINER`、`SECURITY_TYPE`、`CHARACTER_SET_CLIENT` 和 `COLLATION_CONNECTION`。
 
 ```sql
 +---------------+--------------+------------+------------------------------------------------------------------------+--------------+--------------+----------------+---------------+----------------------+----------------------+
@@ -60,17 +56,15 @@ You can view the relevant meta information of the view by querying this table, s
 1 row in set (0.00 sec)
 ```
 
-### Use the HTTP APIs
+### 使用 HTTP API
 
-Usage example:
-
-{{< copyable "" >}}
+用法示例：
 
 ```sql
 curl http://127.0.0.1:10080/schema/test/v
 ```
 
-By visiting `http://{TiDBIP}:10080/schema/{db}/{view}`, you can get all the metadata for the view.
+通过访问 `http://{TiDBIP}:10080/schema/{db}/{view}`，你可以获取该视图的所有元数据。
 
 ```
 {
@@ -150,11 +144,9 @@ By visiting `http://{TiDBIP}:10080/schema/{db}/{view}`, you can get all the meta
 }
 ```
 
-## Example
+## 示例
 
-The following example creates a view, queries this view, and delete this view:
-
-{{< copyable "sql" >}}
+以下示例创建一个视图，查询该视图，并删除该视图：
 
 ```sql
 create table t(a int, b int);
@@ -163,8 +155,6 @@ create table t(a int, b int);
 ```
 Query OK, 0 rows affected (0.01 sec)
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 insert into t values(1, 1),(2,2),(3,3);
@@ -175,8 +165,6 @@ Query OK, 3 rows affected (0.00 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 create table s(a int);
 ```
@@ -184,8 +172,6 @@ create table s(a int);
 ```
 Query OK, 0 rows affected (0.01 sec)
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 insert into s values(2),(3);
@@ -196,8 +182,6 @@ Query OK, 2 rows affected (0.01 sec)
 Records: 2  Duplicates: 0  Warnings: 0
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 create view v as select s.a from t left join s on t.a = s.a;
 ```
@@ -205,8 +189,6 @@ create view v as select s.a from t left join s on t.a = s.a;
 ```
 Query OK, 0 rows affected (0.01 sec)
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 select * from v;
@@ -223,8 +205,6 @@ select * from v;
 3 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 drop view v;
 ```
@@ -233,15 +213,15 @@ drop view v;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-## Limitations
+## 限制
 
-Currently, views in TiDB are subject to the following limitations:
+目前，TiDB 中的视图受到以下限制：
 
-* Materialized views are not supported yet.
-* Views in TiDB are read-only and do not support write operations such as `UPDATE`, `INSERT`, `DELETE`, and `TRUNCATE`.
-* For created views, the only supported DDL operation is `DROP [VIEW | TABLE]`
+* 目前尚不支持物化视图。
+* TiDB 中的视图为只读，不支持 `UPDATE`、`INSERT`、`DELETE` 和 `TRUNCATE` 等写操作。
+* 对于已创建的视图，唯一支持的 DDL 操作是 `DROP [VIEW | TABLE]`
 
-## See also
+## 相关链接
 
 - [CREATE VIEW](/sql-statements/sql-statement-create-view.md)
 - [DROP VIEW](/sql-statements/sql-statement-drop-view.md)

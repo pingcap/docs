@@ -1,28 +1,28 @@
 ---
-title: Paginate Results
-summary: Introduce paginate result feature in TiDB.
+title: 分页结果
+summary: 介绍 TiDB 中的分页结果功能。
 ---
 
-# Paginate Results
+# 分页结果
 
-To page through a large query result, you can get your desired part in a "paginated" manner.
+为了对大量查询结果进行分页，你可以以“分页”的方式获取你想要的部分。
 
-## Paginate query results
+## 分页查询结果
 
-In TiDB, you can paginate query results using the `LIMIT` statement. For example:
+在 TiDB 中，你可以使用 `LIMIT` 语句对查询结果进行分页。例如：
 
 ```sql
 SELECT * FROM table_a t ORDER BY gmt_modified DESC LIMIT offset, row_count;
 ```
 
-`offset` indicates the beginning number of records and `row_count` indicates the number of records per page. TiDB also supports `LIMIT row_count OFFSET offset` syntax.
+其中，`offset` 表示起始记录数，`row_count` 表示每页的记录数。TiDB 也支持 `LIMIT row_count OFFSET offset` 语法。
 
-When pagination is used, it is recommended that you sort query results with the `ORDER BY` statement unless there is a need to display data randomly.
+在使用分页时，建议你使用 `ORDER BY` 语句对查询结果进行排序，除非需要以随机方式显示数据。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-For example, to let users of the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application view the latest published books in a paginated manner, you can use the `LIMIT 0, 10` statement, which returns the first page of the result list, with a maximum of 10 records per page. To get the second page, you can change the statement to `LIMIT 10, 10`.
+例如，为了让 [Bookshop](/develop/dev-guide-bookshop-schema-design.md) 应用的用户以分页方式查看最新发布的书籍，可以使用 `LIMIT 0, 10` 语句，返回结果列表的第一页，每页最多 10 条记录。若要获取第二页，可以将语句改为 `LIMIT 10, 10`。
 
 ```sql
 SELECT *
@@ -34,7 +34,7 @@ LIMIT 0, 10;
 </div>
 <div label="Java" value="java">
 
-In application development, the backend program receives the `page_number` parameter (which means the number of the page being requested) and the `page_size` parameter (which controls how many records per page) from the frontend instead of the `offset` parameter. Therefore, some conversions needed to be done before querying.
+在应用开发中，后端程序会从前端接收 `page_number`（请求的页码）和 `page_size`（每页的记录数）参数，而不是 `offset` 参数。因此，在查询之前需要进行一些转换。
 
 ```java
 public List<Book> getLatestBooksPage(Long pageNumber, Long pageSize) throws SQLException {
@@ -68,16 +68,16 @@ public List<Book> getLatestBooksPage(Long pageNumber, Long pageSize) throws SQLE
 </div>
 </SimpleTab>
 
-## Paging batches for single-field primary key tables
+## 单字段主键表的分页批次
 
-Usually, you can write a pagination SQL statement using a primary key or unique index to sort results and the `offset` keyword in the `LIMIT` clause to split pages by a specified row count. Then the pages are wrapped into independent transactions to achieve flexible paging updates. However, the disadvantage is also obvious. As the primary key or unique index needs to be sorted, a larger offset consumes more computing resources, especially in the case of a large volume of data.
+通常，你可以使用主键或唯一索引编写分页 SQL 语句，通过对结果排序和在 `LIMIT` 子句中使用 `offset` 关键字，将分页拆分为指定行数的多个页面，然后将每个页面封装成独立的事务，以实现灵活的分页更新。然而，这种方式的缺点也很明显。由于主键或唯一索引需要排序，较大的 offset 会消耗更多的计算资源，尤其是在数据量较大的情况下。
 
-The following introduces a more efficient paging batching method:
+以下介绍一种更高效的分页批次方法：
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-First, sort the data by primary key and call the window function `row_number()` to generate a row number for each row. Then, call the aggregation function to group row numbers by the specified page size and calculate the minimum and maximum values of each page.
+首先，按主键排序数据，调用窗口函数 `row_number()` 为每一行生成行号。然后，调用聚合函数，将行号按指定的页面大小分组，计算每组的最小值和最大值。
 
 ```sql
 SELECT
@@ -93,7 +93,7 @@ GROUP BY page_num
 ORDER BY page_num;
 ```
 
-The result is as follows:
+结果如下：
 
 ```
 +----------+------------+------------+-----------+
@@ -107,12 +107,11 @@ The result is as follows:
 ...
 |       20 | 4077418867 | 4294004213 |      1000 |
 +----------+------------+------------+-----------+
-20 rows in set (0.01 sec)
 ```
 
-Next, use the `WHERE id BETWEEN start_key AND end_key` statement to query the data of each slice. To update data more efficiently, you can use the above slice information when modifying the data.
+接下来，使用 `WHERE id BETWEEN start_key AND end_key` 语句查询每个切片的数据。为了更高效地更新数据，可以在修改数据时使用上述切片信息。
 
-To delete the basic information of all books on page 1, replace the `start_key` and `end_key` with values of page 1 in the above result:
+例如，要删除第 1 页的所有书籍基本信息，将 `start_key` 和 `end_key` 替换为上述结果中第 1 页的值：
 
 ```sql
 DELETE FROM books
@@ -124,7 +123,7 @@ ORDER BY id;
 </div>
 <div label="Java" value="java">
 
-In Java, define a `PageMeta` class to store page meta information.
+在 Java 中，定义一个 `PageMeta` 类用来存储分页元信息。
 
 ```java
 public class PageMeta<K> {
@@ -133,12 +132,11 @@ public class PageMeta<K> {
     private K endKey;
     private Long pageSize;
 
-    // Skip the getters and setters.
-
+    // 省略 getter 和 setter
 }
 ```
 
-Define a `getPageMetaList()` method to get the page meta information list, and then define a `deleteBooksByPageMeta()` method to delete data in batches according to the page meta information.
+定义一个 `getPageMetaList()` 方法获取分页元信息列表，然后定义一个 `deleteBooksByPageMeta()` 方法，根据分页元信息批量删除数据。
 
 ```java
 public class BookDAO {
@@ -182,7 +180,7 @@ public class BookDAO {
 }
 ```
 
-The following statement is to delete the data on page 1:
+以下语句用于删除第 1 页的数据：
 
 ```java
 List<PageMeta<Long>> pageMetaList = bookDAO.getPageMetaList();
@@ -191,7 +189,7 @@ if (pageMetaList.size() > 0) {
 }
 ```
 
-The following statement is to delete all book data in batches by paging:
+以下语句用于按分页批量删除所有书籍数据：
 
 ```java
 List<PageMeta<Long>> pageMetaList = bookDAO.getPageMetaList();
@@ -207,19 +205,19 @@ pageMetaList.forEach((pageMeta) -> {
 </div>
 </SimpleTab>
 
-This method significantly improves the efficiency of batch processing by avoiding wasting computing resources caused by frequent data sorting operations.
+该方法通过避免频繁排序操作，大大提升了批量处理的效率。
 
-## Paging batches for composite primary key tables
+## 复合主键表的分页批次
 
-### Non-clustered index table
+### 非聚簇索引表
 
-For non-clustered index tables (also known as "non-index-organized tables"), the internal field `_tidb_rowid` can be used as a pagination key, and the pagination method is the same as that of single-field primary key tables.
+对于非聚簇索引表（也称为“非索引组织表”），可以使用内部字段 `_tidb_rowid` 作为分页键，分页方法与单字段主键表相同。
 
 > **Tip:**
 >
-> You can use the `SHOW CREATE TABLE users;` statement to check whether the table primary key uses [clustered index](/clustered-indexes.md).
+> 你可以使用 `SHOW CREATE TABLE users;` 语句检查表的主键是否使用了 [clustered index](/clustered-indexes.md)。
 
-For example:
+例如：
 
 ```sql
 SELECT
@@ -228,14 +226,14 @@ SELECT
     max(t._tidb_rowid) AS end_key,
     count(*) AS page_size
 FROM (
-    SELECT _tidb_rowid, row_number () OVER (ORDER BY _tidb_rowid) AS row_num
+    SELECT _tidb_rowid, row_number() OVER (ORDER BY _tidb_rowid) AS row_num
     FROM users
 ) t
 GROUP BY page_num
 ORDER BY page_num;
 ```
 
-The result is as follows:
+结果如下：
 
 ```
 +----------+-----------+---------+-----------+
@@ -252,18 +250,17 @@ The result is as follows:
 |        9 |      8001 |    9000 |      1000 |
 |       10 |      9001 |    9990 |       990 |
 +----------+-----------+---------+-----------+
-10 rows in set (0.00 sec)
 ```
 
-### Clustered index table
+### 聚簇索引表
 
-For clustered index tables (also known as "index-organized tables"), you can use the `concat` function to concatenate values of multiple columns as a key, and then use a window function to query the paging information.
+对于聚簇索引表（也称为“索引组织表”），可以使用 `concat` 函数将多个列的值拼接为一个键，然后用窗口函数查询分页信息。
 
-It should be noted that the key is a string at this time, and you must ensure that the length of the string is always the same, to obtain the correct `start_key` and `end_key` in the slice through the `min` and `max` aggregation function. If the length of the field for string concatenation is not fixed, you can use the `LPAD` function to pad it.
+需要注意的是，此时的键是字符串，必须确保字符串长度始终相同，才能通过 `min` 和 `max` 聚合函数正确获取切片中的 `start_key` 和 `end_key`。如果拼接字段的长度不固定，可以使用 `LPAD` 函数进行补齐。
 
-For example, you can implement a paging batch for the data in the `ratings` table as follows:
+例如，可以如下实现 `ratings` 表数据的分页批次：
 
-Create the meta information table by using the following statement. As the key concatenated by `book_id` and `user_id`, which are `bigint` types, is unable to convert to the same length, the `LPAD` function is used to pad the length with `0` according to the maximum bits 19 of `bigint`.
+使用以下语句创建元信息表。由于由 `bigint` 类型的 `book_id` 和 `user_id` 拼接的键无法转换为相同长度，因此使用 `LPAD` 函数根据 `bigint` 的最大位数 19 进行补齐。
 
 ```sql
 SELECT
@@ -283,9 +280,9 @@ ORDER BY page_num;
 
 > **Note:**
 >
-> The preceding SQL statement is executed as `TableFullScan`. When the data volume is large, the query will be slow, and you can [use TiFlash](/tiflash/tiflash-overview.md#use-tiflash) to speed up it.
+> 上述 SQL 语句作为 `TableFullScan` 执行。当数据量较大时，查询会较慢，可以[使用 TiFlash](/tiflash/tiflash-overview.md#use-tiflash) 来加速。
 
-The result is as follows:
+结果如下：
 
 ```
 +----------+-------------------------------------------+-------------------------------------------+-----------+
@@ -300,10 +297,9 @@ The result is as follows:
 |       29 | (0000000004002523918,0000000000902930986) | (0000000004147203315,0000000004090920746) |     10000 |
 |       30 | (0000000004147421329,0000000000319181561) | (0000000004294004213,0000000003586311166) |      9972 |
 +----------+-------------------------------------------+-------------------------------------------+-----------+
-30 rows in set (0.28 sec)
 ```
 
-To delete all rating records on page 1, replace the `start_key` and `end_key` with values of page 1 in the above result:
+要删除第 1 页的所有评分记录，将 `start_key` 和 `end_key` 替换为上述结果中第 1 页的值：
 
 ```sql
 SELECT *
@@ -334,16 +330,16 @@ WHERE (
 ORDER BY book_id, user_id;
 ```
 
-## Need help?
+## 需要帮助？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或[提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或[提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

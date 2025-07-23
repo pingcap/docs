@@ -1,34 +1,34 @@
 ---
 title: SHOW ANALYZE STATUS
-summary: An overview of the usage of SHOW ANALYZE STATUS for the TiDB database.
+summary: 关于 TiDB 数据库中 SHOW ANALYZE STATUS 使用情况的概述。
 ---
 
 # SHOW ANALYZE STATUS
 
-The `SHOW ANALYZE STATUS` statement shows the statistics collection tasks being executed by TiDB and a limited number of historical task records.
+`SHOW ANALYZE STATUS` 语句显示 TiDB 正在执行的统计信息采集任务以及有限的历史任务记录。
 
-Starting from TiDB v6.1.0, the `SHOW ANALYZE STATUS` statement supports showing cluster-level tasks. Even after a TiDB restart, you can still view task records before the restart using this statement. Before TiDB v6.1.0, the `SHOW ANALYZE STATUS` statement can only show instance-level tasks, and task records are cleared after a TiDB restart.
+从 TiDB v6.1.0 开始，`SHOW ANALYZE STATUS` 语句支持显示集群级别的任务。即使在重启 TiDB 后，仍然可以通过此语句查看重启前的任务记录。在 TiDB v6.1.0 之前，`SHOW ANALYZE STATUS` 语句只能显示实例级别的任务，任务记录在重启后会被清除。
 
-Starting from TiDB v6.1.0, you can view the history tasks within the last 7 days through the system table `mysql.analyze_jobs`.
+从 TiDB v6.1.0 开始，可以通过系统表 `mysql.analyze_jobs` 查看最近 7 天内的历史任务。
 
-Starting from TiDB v7.3.0, you can view the progress of the current `ANALYZE` task through the system table `mysql.analyze_jobs` or `SHOW ANALYZE STATUS`.
+从 TiDB v7.3.0 开始，可以通过系统表 `mysql.analyze_jobs` 或 `SHOW ANALYZE STATUS` 查看当前 `ANALYZE` 任务的进度。
 
-Currently, the `SHOW ANALYZE STATUS` statement returns the following columns:
+目前，`SHOW ANALYZE STATUS` 语句返回以下列：
 
-| Column name      | Description |
+| 列名             | 描述 |
 | :--------------- | :------------- |
-| `Table_schema`   | The database name |
-| `Table_name`     | The table name |
-| `Partition_name` | The partition name |
-| `Job_info`       | The task information. If an index is analyzed, this information will include the index name. When `tidb_analyze_version =2`, this information will include configuration items such as sample rate. |
-| `Processed_rows` | The number of rows that have been analyzed |
-| `Start_time`     | The time at which the task starts |
-| `State`          | The state of a task, including `pending`, `running`, `finished`, and `failed` |
-| `Fail_reason`    | The reason why the task fails. If the execution is successful, the value is `NULL`. |
-| `Instance`       | The TiDB instance that executes the task |
-| `Process_id`     | The process ID that executes the task |
+| `Table_schema`   | 数据库名称 |
+| `Table_name`     | 表名 |
+| `Partition_name` | 分区名称 |
+| `Job_info`       | 任务信息。如果分析的是索引，此信息将包含索引名。当 `tidb_analyze_version =2` 时，此信息还会包括采样率等配置项。 |
+| `Processed_rows` | 已分析的行数 |
+| `Start_time`     | 任务开始时间 |
+| `State`          | 任务状态，包括 `pending`、`running`、`finished` 和 `failed` |
+| `Fail_reason`    | 任务失败原因。如果执行成功，值为 `NULL`。 |
+| `Instance`       | 执行任务的 TiDB 实例 |
+| `Process_id`     | 执行任务的进程 ID |
 
-## Synopsis
+## 概要
 
 ```ebnf+diagram
 ShowAnalyzeStatusStmt ::= 'SHOW' 'ANALYZE' 'STATUS' ShowLikeOrWhereOpt
@@ -36,7 +36,7 @@ ShowAnalyzeStatusStmt ::= 'SHOW' 'ANALYZE' 'STATUS' ShowLikeOrWhereOpt
 ShowLikeOrWhereOpt ::= 'LIKE' SimpleExpr | 'WHERE' Expression
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> create table t(x int, index idx(x)) partition by hash(x) partitions 2;
@@ -80,10 +80,10 @@ mysql> show analyze status;
 6 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension to MySQL syntax.
+此语句是 TiDB 对 MySQL 语法的扩展。
 
-## See also
+## 另请参见
 
 * [ANALYZE_STATUS table](/information-schema/information-schema-analyze-status.md)

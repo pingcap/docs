@@ -1,19 +1,19 @@
 ---
 title: Predicates Push Down
-summary: Introduce one of the TiDB's logic optimization rules—Predicate Push Down (PPD).
+summary: 介绍 TiDB 的一种逻辑优化规则——Predicate Push Down (PPD)。
 ---
 
 # Predicates Push Down (PPD)
 
-This document introduces one of the TiDB's logic optimization rules—Predicate Push Down (PPD). It aims to help you understand the predicate push down and know its applicable and inapplicable scenarios.
+本文介绍 TiDB 的一种逻辑优化规则——Predicate Push Down (PPD)。旨在帮助你理解谓词下推，并了解其适用和不适用的场景。
 
-PPD pushes down selection operators to data source as close as possible to complete data filtering as early as possible, which significantly reduces the cost of data transmission or computation.
+PPD 将筛选操作符尽可能下推到数据源，尽早完成数据过滤，从而显著降低数据传输或计算的开销。
 
-## Examples
+## 示例
 
-The following cases describe the optimization of PPD. Case 1, 2, and 3 are scenarios where PPD is applicable, and Case 4, 5, and 6 are scenarios where PPD is not applicable.
+以下案例描述了 PPD 的优化过程。案例 1、2 和 3 是 PPD 适用的场景，案例 4、5 和 6 是 PPD 不适用的场景。
 
-### Case 1: push predicates to storage layer
+### 案例 1：将谓词下推到存储层
 
 ```sql
 create table t(id int primary key, a int);
@@ -28,9 +28,9 @@ explain select * from t where a < 1;
 3 rows in set (0.00 sec)
 ```
 
-In this query, pushing down the predicate `a < 1` to the TiKV layer to filter the data can reduce the overhead of network transmission.
+在此查询中，将谓词 `a < 1` 下推到 TiKV 层进行数据过滤，可以减少网络传输的开销。
 
-### Case 2: push predicates to storage layer
+### 案例 2：将谓词下推到存储层
 
 ```sql
 create table t(id int primary key, a int not null);
@@ -44,9 +44,9 @@ explain select * from t where a < substring('123', 1, 1);
 +-------------------------+----------+-----------+---------------+--------------------------------+
 ```
 
-This query has the same execution plan as the query in case 1, because the input parameters of the `substring` of the predicate `a < substring('123', 1, 1)` are constants, so they can be calculated in advance. Then the predicate is simplified to the equivalent predicate `a < 1`. After that, TiDB can push `a < 1` down to TiKV.
+此查询的执行计划与案例 1 相同，因为谓词 `a < substring('123', 1, 1)` 的输入参数是常量，可以提前计算。计算后，谓词简化为等价的 `a < 1`，然后 TiDB 可以将其下推到 TiKV。
 
-### Case 3: push predicates below join operator
+### 案例 3：将谓词下推到连接操作符以下
 
 ```sql
 create table t(id int primary key, a int not null);
@@ -66,11 +66,11 @@ explain select * from t join s on t.a = s.a where t.a < 1;
 7 rows in set (0.00 sec)
 ```
 
-In this query, the predicate `t.a < 1` is pushed below join to filter in advance, which can reduce the calculation overhead of join.
+在此查询中，将谓词 `t.a < 1` 下推到连接操作符以下进行提前过滤，可以减少连接的计算开销。
 
-In addition, This SQL statement has an inner join executed, and the `ON` condition is `t.a = s.a`. The predicate `s.a <1` can be derived from `t.a < 1` and pushed down to `s` table below the join operator. Filtering the `s` table can further reduce the calculation overhead of join.
+此外，该 SQL 语句执行了内连接，`ON` 条件为 `t.a = s.a`。由 `t.a < 1` 推导出的谓词 `s.a < 1` 也可以下推到连接操作符下的 `s` 表，从而进一步减少连接的计算开销。
 
-### Case 4: predicates that are not supported by storage layers cannot be pushed down
+### 案例 4：存储层不支持的谓词不能下推
 
 ```sql
 create table t(id int primary key, a varchar(10) not null);
@@ -84,11 +84,11 @@ desc select * from t where truncate(a, " ") = '1';
 +-------------------------+----------+-----------+---------------+---------------------------------------------------+
 ```
 
-In this query, there is a predicate `truncate(a, " ") = '1'`.
+在此查询中，存在谓词 `truncate(a, " ") = '1'`。
 
-From the `explain` results, you can see that the predicate is not pushed down to TiKV for calculation. This is because the TiKV coprocessor does not support the built-in function `truncate`.
+从 `explain` 结果可以看出，该谓词未被下推到 TiKV 进行计算。这是因为 TiKV 的协处理器不支持内置函数 `truncate`。
 
-### Case 5: predicates of inner tables on the outer join can't be pushed down
+### 案例 5：内表在外连接中的谓词不能下推
 
 ```sql
 create table t(id int primary key, a int not null);
@@ -101,17 +101,17 @@ explain select * from t left join s on t.a = s.a where s.a is null;
 | └─HashJoin_8                  | 12500.00 | root      |               | left outer join, equal:[eq(test.t.a, test.s.a)] |
 |   ├─TableReader_13(Build)     | 10000.00 | root      |               | data:TableFullScan_12                           |
 |   │ └─TableFullScan_12        | 10000.00 | cop[tikv] | table:s       | keep order:false, stats:pseudo                  |
-|   └─TableReader_11(Probe)     | 10000.00 | root      |               | data:TableFullScan_10                           |
+|   └─TableReader_11(Probe)     | 10000.00 | root      |               | data:TableFullScan_10                          |
 |     └─TableFullScan_10        | 10000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo                  |
 +-------------------------------+----------+-----------+---------------+-------------------------------------------------+
 6 rows in set (0.00 sec)
 ```
 
-In this query, there is a predicate `s.a is null` on the inner table `s`.
+在此查询中，存在谓词 `s.a is null`，作用于内表 `s`。
 
-From the `explain` results, we can see that the predicate is not pushed below join operator. This is because the outer join fills the inner table with `NULL` values when the `on` condition isn't satisfied, and the predicate `s.a is null` is used to filter the results after the join. If it is pushed down to the inner table below join, the execution plan is not equivalent to the original one.
+从 `explain` 结果可以看出，该谓词未被下推到连接操作符以下。这是因为外连接在未满足 `on` 条件时，会用 `NULL` 填充内表的对应列，`s.a is null` 用于在连接后过滤结果。如果将其下推到内表以下，得到的执行计划将不等同于原始计划。
 
-### Case 6: the predicates which contain user variables cannot be pushed down
+### 案例 6：包含用户变量的谓词不能下推
 
 ```sql
 create table t(id int primary key, a char);
@@ -127,11 +127,11 @@ explain select * from t where a < @a;
 3 rows in set (0.00 sec)
 ```
 
-In this query, there is a predicate `a < @a` on table `t`. The `@a` of the predicate is a user variable.
+在此查询中，存在谓词 `a < @a`，其中 `@a` 为用户变量。
 
-As can be seen from `explain` results, the predicate is not like case 2, which is simplified to `a < 1` and pushed down to TiKV. This is because the value of the user variable `@a` may change during the computation, and TiKV is not aware of the changes. So TiDB does not replace `@a` with `1`, and does not push down it to TiKV.
+从 `explain` 结果可以看出，该谓词未像案例 2 那样被简化为 `a < 1` 并下推到 TiKV。这是因为用户变量 `@a` 的值在计算过程中可能会发生变化，TiKV 不会感知到这些变化。因此，TiDB 不会用具体值替换 `@a`，也不会将其下推到 TiKV。
 
-An example to help you understand is as follows:
+一个示例帮助理解如下：
 
 ```sql
 create table t(id int primary key, a int);
@@ -147,4 +147,4 @@ select id, a, @a:=@a+1 from t where a = @a;
 2 rows in set (0.00 sec)
 ```
 
-As you can see from this query, the value of `@a` will change during the query. So if you replace `a = @a` with `a = 1` and push it down to TiKV, it's not an equivalent execution plan.
+由此可见，`@a` 的值在查询过程中会发生变化。因此，如果将 `a = @a` 替换为 `a = 1` 并下推到 TiKV，得到的执行计划将不等同于原始计划。

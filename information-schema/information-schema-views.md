@@ -1,18 +1,18 @@
 ---
 title: VIEWS
-summary: Learn the `VIEWS` INFORMATION_SCHEMA table.
+summary: 了解 `VIEWS` INFORMATION_SCHEMA 表。
 ---
 
 # VIEWS
 
-The `VIEWS` table provides information about [SQL views](/views.md).
+`VIEWS` 表提供关于 [SQL 视图](/views.md) 的信息。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC VIEWS;
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 +----------------------+--------------+------+------+---------+-------+
@@ -32,14 +32,14 @@ The output is as follows:
 10 rows in set (0.00 sec)
 ```
 
-Create a view and query the `VIEWS` table:
+创建视图并查询 `VIEWS` 表：
 
 ```sql
 CREATE VIEW test.v1 AS SELECT 1;
 SELECT * FROM VIEWS\G
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 *************************** 1. row ***************************
@@ -56,20 +56,20 @@ COLLATION_CONNECTION: utf8mb4_0900_ai_ci
 1 row in set (0.00 sec)
 ```
 
-Fields in the `VIEWS` table are described as follows:
+`VIEWS` 表中的字段说明如下：
 
-* `TABLE_CATALOG`: The name of the catalog to which the view belongs. This value is always `def`.
-* `TABLE_SCHEMA`: The name of the schema to which the view belongs.
-* `TABLE_NAME`: The view name.
-* `VIEW_DEFINITION`: The definition of view, which is made by the `SELECT` statement when the view is created.
-* `CHECK_OPTION`: The `CHECK_OPTION` value. The value options are `NONE`, `CASCADE`, and `LOCAL`.
-* `IS_UPDATABLE`: Whether `UPDATE`/`INSERT`/`DELETE` is applicable to the view. In TiDB, the value is always `NO`.
-* `DEFINER`: The name of the user who creates the view, which is in the format of `'user_name'@'host_name'`.
-* `SECURITY_TYPE`: The value of `SQL SECURITY`. The value options are `DEFINER` and `INVOKER`.
-* `CHARACTER_SET_CLIENT`: The value of the `character_set_client` session variable when the view is created.
-* `COLLATION_CONNECTION`: The value of the `collation_connection` session variable when the view is created.
+* `TABLE_CATALOG`: 视图所属的目录名。该值始终为 `def`。
+* `TABLE_SCHEMA`: 视图所属的模式（schema）名。
+* `TABLE_NAME`: 视图名称。
+* `VIEW_DEFINITION`: 视图的定义，即创建视图时所用的 `SELECT` 语句。
+* `CHECK_OPTION`: `CHECK_OPTION` 的值。取值选项为 `NONE`、`CASCADE` 和 `LOCAL`。
+* `IS_UPDATABLE`: 是否允许对视图进行 `UPDATE`/`INSERT`/`DELETE` 操作。在 TiDB 中，该值始终为 `NO`。
+* `DEFINER`: 创建视图的用户名，格式为 `'user_name'@'host_name'`。
+* `SECURITY_TYPE`: `SQL SECURITY` 的值。取值选项为 `DEFINER` 和 `INVOKER`。
+* `CHARACTER_SET_CLIENT`: 创建视图时的 `character_set_client` 会话变量值。
+* `COLLATION_CONNECTION`: 创建视图时的 `collation_connection` 会话变量值。
 
-## See also
+## 相关链接
 
 - [`CREATE VIEW`](/sql-statements/sql-statement-create-view.md)
 - [`DROP VIEW`](/sql-statements/sql-statement-drop-view.md)

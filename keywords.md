@@ -1,15 +1,15 @@
 ---
-title: Keywords
-summary: Keywords and Reserved Words
+title: 关键词
+summary: 关键词和保留字
 ---
 
-# Keywords
+# 关键词
 
-This article introduces the keywords in TiDB, the differences between reserved words and non-reserved words and summarizes all keywords for the query.
+本文介绍了 TiDB 中的关键词，保留字与非保留字的区别，并总结了所有用于查询的关键词。
 
-Keywords are words that have special meanings in SQL statements, such as [`SELECT`](/sql-statements/sql-statement-select.md), [`UPDATE`](/sql-statements/sql-statement-update.md), and [`DELETE`](/sql-statements/sql-statement-delete.md). Some of them can be used as identifiers directly, which are called **non-reserved keywords**. Some of them require special treatment before being used as identifiers, which are called **reserved keywords**. 
+关键词是在 SQL 语句中具有特殊含义的词，例如 [`SELECT`](/sql-statements/sql-statement-select.md)、[`UPDATE`](/sql-statements/sql-statement-update.md) 和 [`DELETE`](/sql-statements/sql-statement-delete.md)。其中一些可以直接用作标识符，称为 **非保留关键词**。一些在用作标识符之前需要特殊处理，称为 **保留关键词**。
 
-To use the reserved keywords as identifiers, you must enclose them in backticks `` ` ``:
+要将保留关键词用作标识符，必须用反引号 `` ` `` 将其括起来：
 
 ```sql
 CREATE TABLE select (a INT);
@@ -27,7 +27,7 @@ CREATE TABLE `select` (a INT);
 Query OK, 0 rows affected (0.09 sec)
 ```
 
-The non-reserved keywords do not require backticks, such as `BEGIN` and `END`, which can be successfully used as identifiers in the following statement:
+非保留关键词不需要用反引号，例如 `BEGIN` 和 `END`，在以下语句中可以成功用作标识符：
 
 ```sql
 CREATE TABLE `select` (BEGIN int, END int);
@@ -37,7 +37,7 @@ CREATE TABLE `select` (BEGIN int, END int);
 Query OK, 0 rows affected (0.09 sec)
 ```
 
-In the special case, the reserved keywords do not need backticks if they are used with the `.` delimiter:
+在特殊情况下，如果保留关键词与 `.` 分隔符一起使用，则不需要用反引号：
 
 ```sql
 CREATE TABLE test.select (BEGIN int, END int);
@@ -47,13 +47,13 @@ CREATE TABLE test.select (BEGIN int, END int);
 Query OK, 0 rows affected (0.08 sec)
 ```
 
-Starting from v7.5.3 and v7.6.0, TiDB provides a full list of keywords in the [`INFORMATION_SCHEMA.KEYWORDS`](/information-schema/information-schema-keywords.md) table.
+从 v7.5.3 和 v7.6.0 版本开始，TiDB 在 [`INFORMATION_SCHEMA.KEYWORDS`](/information-schema/information-schema-keywords.md) 表中提供了完整的关键词列表。
 
-You can use the [`tidb_enable_window_function`](/system-variables.md#tidb_enable_window_function) system variable to control whether the keywords in the [window function](/functions-and-operators/window-functions.md) take effect in the syntax tree. If you set `tidb_enable_window_function` to `OFF`, the words in the window function will no longer be treated as keywords.
+你可以通过设置 [`tidb_enable_window_function`](/system-variables.md#tidb_enable_window_function) 系统变量，控制 [窗口函数](/functions-and-operators/window-functions.md) 中的关键词是否在语法树中生效。如果将 `tidb_enable_window_function` 设置为 `OFF`，窗口函数中的词将不再被视为关键词。
 
-## Keyword list
+## 关键词列表
 
-The following list shows the keywords in TiDB. Reserved keywords are marked with `(R)`. Reserved keywords for [Window Functions](/functions-and-operators/window-functions.md) are marked with `(R-Window)`.
+以下列出了 TiDB 中的关键词。保留关键词标记为 `(R)`。用于 [窗口函数](/functions-and-operators/window-functions.md) 的保留关键词标记为 `(R-Window)`。
 
 <TabsPanel letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ" />
 

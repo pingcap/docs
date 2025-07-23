@@ -1,20 +1,20 @@
 ---
-title: SHOW PRIVILEGES | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW PRIVILEGES for the TiDB database.
+title: SHOW PRIVILEGES | TiDB SQL 语句参考
+summary: 关于在 TiDB 数据库中使用 SHOW PRIVILEGES 的概述。
 ---
 
 # SHOW PRIVILEGES
 
-This statement shows a list of assignable privileges in TiDB. It is a static list, and does not reflect the privileges of the current user.
+此语句显示 TiDB 中可分配权限的列表。它是一个静态列表，不反映当前用户的权限。
 
-## Synopsis
+## 概要
 
 ```ebnf+diagram
 ShowPrivilegesStmt ::=
     "SHOW" "PRIVILEGES"
 ```
 
-## Examples
+## 示例
 
 ```sql
 SHOW PRIVILEGES;
@@ -78,11 +78,11 @@ SHOW PRIVILEGES;
 50 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `SHOW PRIVILEGES` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中的 `SHOW PRIVILEGES` 语句与 MySQL 完全兼容。如果你发现任何兼容性差异，请[报告一个 bug](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 相关链接
 
 <CustomContent platform="tidb">
 

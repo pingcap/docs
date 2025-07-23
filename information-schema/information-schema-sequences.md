@@ -1,18 +1,18 @@
 ---
 title: SEQUENCES
-summary: Learn the `SEQUENCES` INFORMATION_SCHEMA table.
+summary: 了解 `SEQUENCES` INFORMATION_SCHEMA 表。
 ---
 
 # SEQUENCES
 
-The `SEQUENCES` table provides information about sequences. The [sequences feature](/sql-statements/sql-statement-create-sequence.md) is modeled on a similar feature in MariaDB.
+`SEQUENCES` 表提供关于序列的信息。[sequences feature](/sql-statements/sql-statement-create-sequence.md) 模仿了 MariaDB 中的类似功能。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC SEQUENCES;
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 +-----------------+--------------+------+------+---------+-------+
@@ -30,10 +30,10 @@ The output is as follows:
 | START           | bigint(21)   | YES  |      | NULL    |       |
 | COMMENT         | varchar(64)  | YES  |      | NULL    |       |
 +-----------------+--------------+------+------+---------+-------+
-11 rows in set (0.00 sec)
+11 行，耗时 0.00 秒
 ```
 
-Create a sequence `test.seq` and query the next value of the sequence:
+创建一个序列 `test.seq` 并查询序列的下一个值：
 
 ```sql
 CREATE SEQUENCE test.seq;
@@ -41,7 +41,7 @@ SELECT NEXTVAL(test.seq);
 SELECT * FROM sequences\G
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 +-------------------+
@@ -49,16 +49,16 @@ The output is as follows:
 +-------------------+
 |                 1 |
 +-------------------+
-1 row in set (0.01 sec)
+1 行，耗时 0.01 秒
 ```
 
-View all sequences:
+查看所有序列：
 
 ```sql
 SELECT * FROM SEQUENCES\G
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 *************************** 1. row ***************************
@@ -73,7 +73,7 @@ SEQUENCE_SCHEMA: test
       MIN_VALUE: 1
           START: 1
         COMMENT:
-1 row in set (0.00 sec)
+1 行，耗时 0.00 秒
 ```
 
 ## See also

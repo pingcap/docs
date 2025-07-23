@@ -1,24 +1,24 @@
 ---
-title: Transaction overview
-summary: A brief introduction to transactions in TiDB.
+title: 事务概述
+summary: 对 TiDB 中事务的简要介绍。
 ---
 
-# Transaction overview
+# 事务概述
 
-TiDB supports complete distributed transactions, providing [optimistic transactions](/optimistic-transaction.md) and [pessimistic transactions](/pessimistic-transaction.md) (introduced in TiDB 3.0). This article mainly introduces transaction statements, optimistic transactions and pessimistic transactions, transaction isolation levels, and application-side retry and error handling in optimistic transactions.
+TiDB 支持完整的分布式事务，提供 [乐观事务](/optimistic-transaction.md) 和 [悲观事务](/pessimistic-transaction.md)（在 TiDB 3.0 中引入）。本文主要介绍事务语句、乐观事务和悲观事务、事务隔离级别，以及应用端的重试和乐观事务中的错误处理。
 
-## Common statements
+## 常用语句
 
-This chapter introduces how to use transactions in TiDB. The following example demonstrates the process of a simple transaction:
+本章介绍如何在 TiDB 中使用事务。以下示例演示了一个简单事务的流程：
 
-Bob wants to transfer $20 to Alice. This transaction includes two operations:
+Bob 想要向 Alice 转账 20 美元。该事务包括两个操作：
 
-- Bob's account is reduced by $20.
-- Alice's account is increased by $20.
+- Bob 的账户余额减少 20 美元。
+- Alice 的账户余额增加 20 美元。
 
-Transactions can ensure that both of the above operations are executed successfully or both fail.
+事务可以确保上述两个操作要么都成功执行，要么都失败。
 
-Insert some sample data into the table using the `users` table in the [bookshop](/develop/dev-guide-bookshop-schema-design.md) database:
+使用 [bookshop](/develop/dev-guide-bookshop-schema-design.md) 数据库中的 `users` 表插入一些示例数据：
 
 ```sql
 INSERT INTO users (id, nickname, balance)
@@ -27,7 +27,7 @@ INSERT INTO users (id, nickname, balance)
   VALUES (1, 'Alice', 100);
 ```
 
-Run the following transactions and explain what each statement means:
+运行以下事务，并说明每个语句的含义：
 
 ```sql
 BEGIN;
@@ -36,7 +36,7 @@ BEGIN;
 COMMIT;
 ```
 
-After the above transaction is executed successfully, the table should look like this:
+在上述事务成功执行后，表格应如下所示：
 
 ```
 +----+--------------+---------+
@@ -45,12 +45,11 @@ After the above transaction is executed successfully, the table should look like
 |  1 | Alice        |  120.00 |
 |  2 | Bob          |  180.00 |
 +----+--------------+---------+
-
 ```
 
-### Start a transaction
+### 开始事务
 
-To explicitly start a new transaction, you can use either `BEGIN` or `START TRANSACTION`.
+要显式开启一个新事务，可以使用 `BEGIN` 或 `START TRANSACTION`。
 
 ```sql
 BEGIN;
@@ -60,39 +59,39 @@ BEGIN;
 START TRANSACTION;
 ```
 
-The default transaction mode of TiDB is pessimistic. You can also explicitly specify the [optimistic transaction model](/develop/dev-guide-optimistic-and-pessimistic-transaction.md):
+TiDB 的默认事务模式为悲观。你也可以显式指定 [乐观事务模型](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)：
 
 ```sql
 BEGIN OPTIMISTIC;
 ```
 
-Enable the [pessimistic transaction mode](/develop/dev-guide-optimistic-and-pessimistic-transaction.md):
+启用 [悲观事务模式](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)：
 
 ```sql
 BEGIN PESSIMISTIC;
 ```
 
-If the current session is in the middle of a transaction when the above statement is executed, TiDB commits the current transaction first, and then starts a new transaction.
+如果在执行上述语句时，当前会话正处于事务中，TiDB 会先提交当前事务，然后再开启新事务。
 
-### Commit a transaction
+### 提交事务
 
-You can use the `COMMIT` statement to commit all modifications made by TiDB in the current transaction.
+你可以使用 `COMMIT` 语句提交当前事务中 TiDB 所做的所有修改。
 
 ```sql
 COMMIT;
 ```
 
-Before enabling optimistic transactions, make sure that your application can properly handle errors that may be returned by a `COMMIT` statement. If you are not sure how your application will handle it, it is recommended to use the pessimistic transaction mode instead.
+在启用乐观事务之前，确保你的应用能够正确处理 `COMMIT` 语句可能返回的错误。如果不确定你的应用如何处理，建议使用悲观事务模式。
 
-### Roll back a transaction
+### 回滚事务
 
-You can use the `ROLLBACK` statement to roll back modifications of the current transaction.
+你可以使用 `ROLLBACK` 语句回滚当前事务的修改。
 
 ```sql
 ROLLBACK;
 ```
 
-In the previous transfer example, if you roll back the entire transaction, Alice's and Bob's balances will remain unchanged, and all modifications of the current transaction are canceled.
+在前述转账示例中，如果你回滚整个事务，Alice 和 Bob 的余额将保持不变，当前事务的所有修改都将被取消。
 
 ```sql
 TRUNCATE TABLE `users`;
@@ -121,29 +120,29 @@ SELECT * FROM `users`;
 +----+--------------+---------+
 ```
 
-The transaction is also automatically rolled back if the client connection is stopped or closed.
+如果客户端连接中断或关闭，事务也会自动回滚。
 
-## Transaction isolation levels
+## 事务隔离级别
 
-The transaction isolation levels are the basis of database transaction processing. The "I" (Isolation) in **ACID** refers to the isolation of the transactions.
+事务隔离级别是数据库事务处理的基础。**ACID** 中的 "I"（Isolation）指的是事务的隔离性。
 
-The SQL-92 standard defines four isolation levels:
+SQL-92 标准定义了四个隔离级别：
 
 - read uncommitted (`READ UNCOMMITTED`)
 - read committed (`READ COMMITTED`)
 - repeatable read (`REPEATABLE READ`)
-- serializable (`SERIALIZABLE`).
+- serializable (`SERIALIZABLE`)
 
-See the table below for details:
+详见下表：
 
-| Isolation Level  | Dirty Write  | Dirty Read   | Fuzzy Read   | Phantom      |
-| ---------------- | ------------ | ------------ | ------------ | ------------ |
-| READ UNCOMMITTED | Not Possible | Possible     | Possible     | Possible     |
-| READ COMMITTED   | Not Possible | Not possible | Possible     | Possible     |
-| REPEATABLE READ  | Not Possible | Not possible | Not possible | Possible     |
-| SERIALIZABLE     | Not Possible | Not possible | Not possible | Not possible |
+| 隔离级别           | 脏写 | 脏读 | 模糊读 | 幻读 |
+| ------------------ | ------ | ------ | -------- | -------- |
+| READ UNCOMMITTED   | 不可能 | 可能   | 可能     | 可能     |
+| READ COMMITTED     | 不可能 | 不可能 | 可能     | 可能     |
+| REPEATABLE READ    | 不可能 | 不可能 | 不可能   | 可能     |
+| SERIALIZABLE       | 不可能 | 不可能 | 不可能   | 不可能   |
 
-TiDB supports the following isolation levels: `READ COMMITTED` and `REPEATABLE READ`:
+TiDB 支持以下隔离级别：`READ COMMITTED` 和 `REPEATABLE READ`：
 
 ```sql
 mysql> SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
@@ -158,18 +157,18 @@ mysql> SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 ERROR 8048 (HY000): The isolation level 'SERIALIZABLE' is not supported. Set tidb_skip_isolation_level_check=1 to skip this error
 ```
 
-TiDB implements Snapshot Isolation (SI) level consistency, also known as "repeatable read" for consistency with MySQL. This isolation level is different from [ANSI Repeatable Read Isolation Level](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read) and [MySQL Repeatable Read Isolation Level](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read). For more details, see [TiDB Transaction Isolation Levels](/transaction-isolation-levels.md).
+TiDB 实现了 Snapshot Isolation（SI）级别的一致性，也称为 "repeatable read" 以保持与 MySQL 的一致性。该隔离级别不同于 [ANSI Repeatable Read Isolation Level](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read) 和 [MySQL Repeatable Read Isolation Level](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)。更多详情请参见 [TiDB Transaction Isolation Levels](/transaction-isolation-levels.md)。
 
-## Need help?
+## 需要帮助？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或 [提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或 [提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

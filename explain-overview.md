@@ -1,19 +1,18 @@
 ---
-title: TiDB Query Execution Plan Overview
-summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
+title: TiDB 查询执行计划概述
+summary: 了解 TiDB 中 `EXPLAIN` 语句返回的执行计划信息。
 ---
 
-# TiDB Query Execution Plan Overview
+# TiDB 查询执行计划概述
 
 > **Note:**
 >
-> When you use the MySQL client to connect to TiDB, to read the output result in a clearer way without line wrapping, you can use the `pager less -S` command. Then, after the `EXPLAIN` result is output, you can press the right arrow <kbd>→</kbd> button on your keyboard to horizontally scroll through the output.
+> 当你使用 MySQL 客户端连接到 TiDB 时，为了更清晰地阅读输出结果且避免换行，可以使用 `pager less -S` 命令。然后，在输出 `EXPLAIN` 结果后，你可以按下键盘上的右箭头 <kbd>→</kbd> 按钮，水平滚动查看输出内容。
 
-SQL is a declarative language. It describes what the results of a query should look like, **not the methodology** to actually retrieve those results. TiDB considers all the possible ways in which a query could be executed, including using what order to join tables and whether any potential indexes can be used. The process of _considering query execution plans_ is known as SQL optimization.
+SQL 是一种声明式语言。它描述了查询结果应该是什么样子，**而不是获取这些结果的方法**。TiDB 会考虑所有可能的执行方式，包括使用什么顺序连接表以及是否可以利用潜在的索引。 _考虑查询执行计划_ 的过程被称为 SQL 优化。
 
-The `EXPLAIN` statement shows the selected execution plan for a given statement. That is, after considering hundreds or thousands of ways in which the query could be executed, TiDB believes that this _plan_ will consume the least resources and execute in the shortest amount of time:
+`EXPLAIN` 语句显示给定语句的所选执行计划。也就是说，在考虑了数百或数千种执行方式后，TiDB 认为这个 _计划_ 将会消耗最少的资源并在最短的时间内执行：
 
-{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE t (id INT NOT NULL PRIMARY KEY auto_increment, a INT NOT NULL, pad1 VARCHAR(255), INDEX(a));
@@ -37,7 +36,7 @@ Records: 2  Duplicates: 0  Warnings: 0
 3 rows in set (0.00 sec)
 ```
 
-`EXPLAIN` does not execute the actual query. [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) can be used to execute the query and show `EXPLAIN` information. This can be useful in diagnosing cases where the execution plan selected is suboptimal. For additional examples of using `EXPLAIN`, see the following documents:
+`EXPLAIN` 不会执行实际的查询。可以使用 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) 来执行查询并显示 `EXPLAIN` 信息。这在诊断所选执行计划是否子优化时非常有用。关于使用 `EXPLAIN` 的更多示例，请参见以下文档：
 
 * [Indexes](/explain-indexes.md)
 * [Joins](/explain-joins.md)
@@ -46,24 +45,24 @@ Records: 2  Duplicates: 0  Warnings: 0
 * [Views](/explain-views.md)
 * [Partitions](/explain-partitions.md)
 
-## Understand EXPLAIN output
+## 了解 EXPLAIN 输出
 
-The following describes the output of the `EXPLAIN` statement above:
+以下描述了上述 `EXPLAIN` 语句的输出内容：
 
-* `id` describes the name of an operator, or sub-task that is required to execute the SQL statement. See [Operator overview](#operator-overview) for additional details.
-* `estRows` shows an estimate of the number of rows TiDB expects to process. This number might be based on dictionary information, such as when the access method is based on a primary or unique key, or it could be based on statistics such as a CMSketch or histogram.
-* `task` shows where an operator is performing the work. See [Task overview](#task-overview) for additional details.
-* `access object` shows the table, partition and index that is being accessed. The parts of the index are also shown, as in the case above that the column `a` from the index was used. This can be useful in cases where you have composite indexes.
-* `operator info` shows additional details about the access. See [Operator info overview](#operator-info-overview) for additional details.
+* `id` 描述执行 SQL 语句所需的操作符或子任务的名称。有关更多细节，请参见 [Operator overview](#operator-overview)。
+* `estRows` 显示 TiDB 预估将要处理的行数。这个数字可能基于字典信息，例如访问方法基于主键或唯一键，或者基于统计信息，如 CMSketch 或直方图。
+* `task` 显示操作符执行工作的地点。有关更多细节，请参见 [Task overview](#task-overview)。
+* `access object` 显示被访问的表、分区和索引。索引的部分也会显示，例如上例中使用了索引中的列 `a`。这在你拥有复合索引时非常有用。
+* `operator info` 显示关于访问的附加细节。有关更多细节，请参见 [Operator info overview](#operator-info-overview)。
 
 > **Note:**
 >
-> In the returned execution plan, for all probe-side child nodes of `IndexJoin` and `Apply` operators, the meaning of `estRows` since v6.4.0 is different from that before v6.4.0.
+> 在返回的执行计划中，从 v6.4.0 版本开始，`IndexJoin` 和 `Apply` 操作符的所有 probe 端子节点的 `estRows` 含义与 v6.4.0 之前不同。
 >
-> Before v6.4.0, `estRows` means the number of estimated rows to be processed by the probe side operators for each row from the build side operators. Since v6.4.0, `estRows` means the **total number** of estimated rows to be processed by the probe side operators. The actual number of rows displayed (indicated by the `actRows` column) in the result of `EXPLAIN ANALYZE` means the total row count, so since v6.4.0 the meanings of `estRows` and `actRows` for the probe side child nodes of `IndexJoin` and `Apply` operators are consistent.
+> 在 v6.4.0 之前，`estRows` 表示每个来自构建端的行对应的探测端操作符预估要处理的行数。自 v6.4.0 起，`estRows` 表示 probe 端操作符预估要处理的**总行数**。在 `EXPLAIN ANALYZE` 的结果中显示的实际行数（由 `actRows` 列指示）代表总行数，因此自 v6.4.0 起，`estRows` 和 `actRows` 在 `IndexJoin` 和 `Apply` 操作符的 probe 端子节点中的含义保持一致。
 >
 >
-> For example:
+> 例如：
 >
 > ```sql
 > CREATE TABLE t1(a INT, b INT);
@@ -101,7 +100,7 @@ The following describes the output of the `EXPLAIN` statement above:
 > 
 > -- Since v6.4.0:
 >
-> -- You can find that the `estRows` column values for `IndexLookUp_11`, `Selection_10`, `IndexRangeScan_8`, and `TableRowIDScan_9` since v6.4.0 are different from that before v6.4.0.
+> -- 你可以看到 `IndexLookUp_11`、`Selection_10`、`IndexRangeScan_8` 和 `TableRowIDScan_9` 的 `estRows` 值自 v6.4.0 之后与之前不同。
 > +---------------------------------+----------+-----------+-----------------------+-----------------------------------------------------------------------------------------------------------------+
 > | id                              | estRows  | task      | access object         | operator info                                                                                                   |
 > +---------------------------------+----------+-----------+-----------------------+-----------------------------------------------------------------------------------------------------------------+
@@ -115,7 +114,7 @@ The following describes the output of the `EXPLAIN` statement above:
 > |   └─TableRowIDScan_9(Probe)     | 12487.50 | cop[tikv] | table:t2              | keep order:false, stats:pseudo                                                                                  |
 > +---------------------------------+----------+-----------+-----------------------+-----------------------------------------------------------------------------------------------------------------+
 >
-> -- You can find that the `estRows` column values for `Limit_17`, `IndexReader_21`, `Limit_20`, and `IndexRangeScan_19` since v6.4.0 are different from that before v6.4.0.
+> -- 你可以看到 `Limit_17`、`IndexReader_21`、`Limit_20` 和 `IndexRangeScan_19` 的 `estRows` 值自 v6.4.0 之后与之前不同。
 > +---------------------------------+----------+-----------+-----------------------+------------------------------------------------------------------------------+
 > | id                              | estRows  | task      | access object         | operator info                                                                |
 > +---------------------------------+----------+-----------+-----------------------+------------------------------------------------------------------------------+
@@ -130,51 +129,51 @@ The following describes the output of the `EXPLAIN` statement above:
 > +---------------------------------+----------+-----------+-----------------------+------------------------------------------------------------------------------+
 > ```
 
-### Operator overview
+### Operator 概述
 
-An operator is a particular step that is executed as part of returning query results. The operators that perform table scans (of the disk or the TiKV Block Cache) are listed as follows:
+操作符是执行查询结果返回过程中的特定步骤。执行表扫描（包括磁盘或 TiKV 块缓存）的操作符如下：
 
-- **TableFullScan**: Full table scan
-- **TableRangeScan**: Table scans with the specified range
-- **TableRowIDScan**: Scans the table data based on the RowID. Usually follows an index read operation to retrieve the matching data rows.
-- **IndexFullScan**: Similar to a "full table scan", except that an index is scanned, rather than the table data.
-- **IndexRangeScan**: Index scans with the specified range.
+- **TableFullScan**：全表扫描
+- **TableRangeScan**：指定范围的表扫描
+- **TableRowIDScan**：基于 RowID 扫描表数据，通常跟在索引读取操作之后，用于获取匹配的数据行
+- **IndexFullScan**：类似于“全表扫描”，但扫描的是索引而非表数据
+- **IndexRangeScan**：指定范围的索引扫描
 
-TiDB aggregates the data or calculation results scanned from TiKV/TiFlash. The data aggregation operators can be divided into the following categories:
+TiDB 会对从 TiKV/TiFlash 扫描的数据或计算结果进行聚合。数据聚合操作符可以分为以下几类：
 
-- **TableReader**: Aggregates the data obtained by the underlying operators like `TableFullScan` or `TableRangeScan` in TiKV.
-- **IndexReader**: Aggregates the data obtained by the underlying operators like `IndexFullScan` or `IndexRangeScan` in TiKV.
-- **IndexLookUp**: First aggregates the RowID (in TiKV) scanned by the `Build` side. Then at the `Probe` side, accurately reads the data from TiKV based on these RowIDs. At the `Build` side, there are operators like `IndexFullScan` or `IndexRangeScan`; at the `Probe` side, there is the `TableRowIDScan` operator.
-- **IndexMerge**: Similar to `IndexLookUp`. `IndexMerge` can be seen as an extension of `IndexLookupReader`. `IndexMerge` supports reading multiple indexes at the same time. There are many `Build`s and one `Probe`. The execution process of `IndexMerge` the same as that of `IndexLookUp`.
+- **TableReader**：聚合底层操作符（如 `TableFullScan` 或 `TableRangeScan`）在 TiKV 中获取的数据
+- **IndexReader**：聚合底层操作符（如 `IndexFullScan` 或 `IndexRangeScan`）在 TiKV 中获取的数据
+- **IndexLookUp**：先聚合 `Build` 端扫描到的 RowID（在 TiKV 中），然后在 `Probe` 端根据这些 RowID 精确读取 TiKV 中的数据。在 `Build` 端有 `IndexFullScan` 或 `IndexRangeScan` 操作符，在 `Probe` 端有 `TableRowIDScan` 操作符
+- **IndexMerge**：类似于 `IndexLookUp`。`IndexMerge` 可以同时读取多个索引。它包含多个 `Build` 和一个 `Probe`。`IndexMerge` 的执行过程与 `IndexLookUp` 相同。
 
-While the structure appears as a tree, executing the query does not strictly require the child nodes to be completed before the parent nodes. TiDB supports intra-query parallelism, so a more accurate way to describe the execution is that the child nodes _flow into_ their parent nodes. Parent, child and sibling operators _might_ potentially be executing parts of the query in parallel.
+虽然结构表现为树形，但执行查询时并不严格要求子节点在父节点之前完成。TiDB 支持查询内的并行执行，因此更准确的描述是子节点 _流入_ 父节点。父、子和兄弟操作符 _可能_ 会在执行查询的不同部分同时进行。
 
-In the previous example, the `├─IndexRangeScan_8(Build)` operator finds the internal `RowID` for rows that match the `a(a)` index. The `└─TableRowIDScan_9(Probe)` operator then retrieves these rows from the table.
+在前例中，`├─IndexRangeScan_8(Build)` 操作符找到匹配索引 `a(a)` 的行的内部 `RowID`，然后 `└─TableRowIDScan_9(Probe)` 操作符根据这些 RowID 从表中检索对应的行。
 
-#### Range query
+#### Range 查询
 
-In the `WHERE`/`HAVING`/`ON` conditions, the TiDB optimizer analyzes the result returned by the primary key query or the index key query. For example, these conditions might include comparison operators of the numeric and date type, such as `>`, `<`, `=`, `>=`, `<=`, and the character type such as `LIKE`.
+在 `WHERE` / `HAVING` / `ON` 条件中，TiDB 优化器会分析由主键查询或索引键查询返回的结果。例如，这些条件可能包括数字和日期类型的比较运算符，如 `>`, `<`, `=`, `>=`, `<=`，以及字符类型的 `LIKE`。
 
 > **Note:**
 >
-> - In order to use an index, the condition must be _sargable_. For example, the condition `YEAR(date_column) < 1992` cannot use an index, but `date_column < '1992-01-01` can.
-> - It is recommended to compare data of the same type and [character set and collation](/character-set-and-collation.md). Mixing types may require additional `cast` operations, or prevent indexes from being used.
-> - You can also use `AND` (intersection) and `OR` (union) to combine the range query conditions of one column. For a multi-dimensional composite index, you can use conditions in multiple columns. For example, regarding the composite index `(a, b, c)`:
->     - When `a` is an equivalent query, continue to figure out the query range of `b`; when `b` is also an equivalent query, continue to figure out the query range of `c`.
->     - Otherwise, if `a` is a non-equivalent query, you can only figure out the range of `a`.
+> - 为了使用索引，条件必须是 _sargable_。例如，条件 `YEAR(date_column) < 1992` 不能利用索引，但 `date_column < '1992-01-01` 可以。
+> - 建议比较相同类型和 [字符集与排序规则](/character-set-and-collation.md) 的数据。类型混用可能需要额外的 `cast` 操作，或导致索引无法使用。
+> - 你也可以使用 `AND`（交集）和 `OR`（并集）组合某一列的范围查询条件。对于多维复合索引，可以在多个列上使用条件。例如，关于复合索引 `(a, b, c)`：
+>     - 当 `a` 为等值查询时，继续确定 `b` 的查询范围；当 `b` 也为等值查询时，继续确定 `c` 的查询范围。
+>     - 否则，如果 `a` 为非等值查询，则只能确定 `a` 的范围。
 
-### Task overview
+### Task 概述
 
-Currently, calculation tasks of TiDB can be divided into two categories: cop tasks and root tasks. A `cop[tikv]` task indicates that the operator is performed inside the TiKV coprocessor. A `root` task indicates that it will be completed inside of TiDB.
+目前，TiDB 的计算任务可以分为两类：cop 任务和 root 任务。`cop[tikv]` 任务表示操作在 TiKV 的 coprocessor 内执行，`root` 任务表示在 TiDB 内完成。
 
-One of the goals of SQL optimization is to push the calculation down to TiKV as much as possible. The Coprocessor in TiKV supports most of the built-in SQL functions (including the aggregate functions and the scalar functions), SQL `LIMIT` operations, index scans, and table scans.
+SQL 优化的目标之一是尽可能将计算下推到 TiKV。TiKV 中的 Coprocessor 支持大部分内置的 SQL 函数（包括聚合函数和标量函数）、SQL `LIMIT` 操作、索引扫描和表扫描。
 
-### Operator info overview
+### Operator info 概述
 
-The `operator info` can show useful information such as which conditions were able to be pushed down:
+`operator info` 可以显示有用的信息，例如哪些条件被成功下推：
 
-* `range: [1,1]` shows that the predicate from the where clause of the query (`a = 1`) was pushed right down to TiKV (the task is of `cop[tikv]`).
-* `keep order:false` shows that the semantics of this query did not require TiKV to return the results in order. If the query were to be modified to require an order (such as `SELECT * FROM t WHERE a = 1 ORDER BY id`), then this condition would be `keep order:true`.
-* `stats:pseudo` shows that the estimates shown in `estRows` might not be accurate. TiDB periodically updates statistics as part of a background operation. A manual update can also be performed by running `ANALYZE TABLE t`.
+* `range: [1,1]` 表示查询的 where 子句中的谓词（`a = 1`）已被下推到 TiKV（任务类型为 `cop[tikv]`）。
+* `keep order:false` 表示该查询的语义不要求 TiKV 按顺序返回结果。如果查询被修改为需要排序（如 `SELECT * FROM t WHERE a = 1 ORDER BY id`），则此条件会变为 `keep order:true`。
+* `stats:pseudo` 表示 `estRows` 中显示的估算值可能不准确。TiDB 会定期更新统计信息作为后台操作的一部分，也可以通过运行 `ANALYZE TABLE t` 手动更新。
 
-Different operators output different information after the `EXPLAIN` statement is executed. You can use optimizer hints to control the behavior of the optimizer, and thereby controlling the selection of the physical operators. For example, `/*+ HASH_JOIN(t1, t2) */` means that the optimizer uses the `Hash Join` algorithm. For more details, see [Optimizer Hints](/optimizer-hints.md).
+不同的操作符在执行 `EXPLAIN` 后会输出不同的信息。你可以使用优化器提示（hints）来控制优化器的行为，从而控制物理操作符的选择。例如，`/*+ HASH_JOIN(t1, t2) */` 表示优化器使用 `Hash Join` 算法。更多详情请参见 [Optimizer Hints](/optimizer-hints.md)。

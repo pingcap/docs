@@ -1,11 +1,11 @@
 ---
 title: USER_ATTRIBUTES
-summary: Learn the `USER_ATTRIBUTES` INFORMATION_SCHEMA table.
+summary: 了解 `USER_ATTRIBUTES` INFORMATION_SCHEMA 表。
 ---
 
 # USER_ATTRIBUTES
 
-The `USER_PRIVILEGES` table provides information about user comments and user attributes. This information comes from the `mysql.user` system table.
+`USER_PRIVILEGES` 表提供关于用户注释和用户属性的信息。这些信息来自 `mysql.user` 系统表。
 
 ```sql
 USE information_schema;
@@ -23,13 +23,13 @@ DESC user_attributes;
 3 rows in set (0.00 sec)
 ```
 
-Fields in the `USER_ATTRIBUTES` table are described as follows:
+`USER_ATTRIBUTES` 表中的字段说明如下：
 
-* `USER`: The user name.
-* `HOST`: The host from which the user can connect to TiDB. If the value of this field is `％`, it means that the user can connect to TiDB from any host.
-* `ATTRIBUTE`: The comment and attribute of the user, which are set by the [`CREATE USER`](/sql-statements/sql-statement-create-user.md) or [`ALTER USER`](/sql-statements/sql-statement-alter-user.md) statement.
+* `USER`：用户名称。
+* `HOST`：用户可以连接到 TiDB 的主机。如果该字段的值为 `％`，表示用户可以从任何主机连接到 TiDB。
+* `ATTRIBUTE`：用户的注释和属性，由 [`CREATE USER`](/sql-statements/sql-statement-create-user.md) 或 [`ALTER USER`](/sql-statements/sql-statement-alter-user.md) 语句设置。
 
-The following is an example:
+以下是一个示例：
 
 ```sql
 CREATE USER testuser1 COMMENT 'This user is created only for test';

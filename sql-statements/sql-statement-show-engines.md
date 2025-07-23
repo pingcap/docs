@@ -1,13 +1,13 @@
 ---
-title: SHOW ENGINES | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW ENGINES for the TiDB database.
+title: SHOW ENGINES | TiDB SQL 语句参考
+summary: 关于 TiDB 数据库中使用 SHOW ENGINES 的概述。
 ---
 
 # SHOW ENGINES
 
-This statement is used to list all supported storage engines. The syntax is included only for compatibility with MySQL.
+此语句用于列出所有支持的存储引擎。其语法仅为与 MySQL 兼容而包含。
 
-## Synopsis
+## 语法简介
 
 ```ebnf+diagram
 ShowEnginesStmt ::=
@@ -18,7 +18,7 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> SHOW ENGINES;
@@ -30,6 +30,6 @@ mysql> SHOW ENGINES;
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-* This statement will always only return InnoDB as the supported engine. Internally, TiDB will typically use [TiKV](/tikv-overview.md) as the storage engine.
+* 这个语句将始终只返回 InnoDB 作为支持的引擎。在内部，TiDB 通常会使用 [TiKV](/tikv-overview.md) 作为存储引擎。

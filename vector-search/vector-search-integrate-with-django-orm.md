@@ -1,17 +1,17 @@
 ---
-title: Integrate TiDB Vector Search with Django ORM
-summary: Learn how to integrate TiDB Vector Search with Django ORM to store embeddings and perform semantic search.
+title: 将 TiDB 向量搜索集成到 Django ORM
+summary: 学习如何将 TiDB 向量搜索与 Django ORM 集成，用于存储嵌入向量和执行语义搜索。
 ---
 
-# Integrate TiDB Vector Search with Django ORM
+# 将 TiDB 向量搜索集成到 Django ORM
 
-This tutorial walks you through how to use [Django](https://www.djangoproject.com/) ORM to interact with the [TiDB Vector Search](/vector-search/vector-search-overview.md), store embeddings, and perform vector search queries.
+本教程将引导你如何使用 [Django](https://www.djangoproject.com/) ORM 与 [TiDB 向量搜索](/vector-search/vector-search-overview.md) 交互，存储嵌入向量，并执行向量搜索查询。
 
 <CustomContent platform="tidb">
 
 > **Warning:**
 >
-> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> 向量搜索功能处于实验阶段。不建议在生产环境中使用此功能。此功能可能在未提前通知的情况下进行更改。如发现 bug，可以在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues)。
 
 </CustomContent>
 
@@ -19,54 +19,54 @@ This tutorial walks you through how to use [Django](https://www.djangoproject.co
 
 > **Note:**
 >
-> The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> 向量搜索功能处于 beta 阶段。可能会在未提前通知的情况下进行更改。如发现 bug，可以在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues)。
 
 </CustomContent>
 
 > **Note:**
 >
-> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> 向量搜索功能在 TiDB Self-Managed、[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) 上均可用。对于 TiDB Self-Managed 和 TiDB Cloud Dedicated，TiDB 版本必须为 v8.4.0 及以上（推荐 v8.5.0 及以上）。
 
-## Prerequisites
+## 前提条件
 
-To complete this tutorial, you need:
+完成本教程，你需要：
 
-- [Python 3.8 or higher](https://www.python.org/downloads/) installed.
-- [Git](https://git-scm.com/downloads) installed.
-- A TiDB cluster.
+- 安装 [Python 3.8 或更高版本](https://www.python.org/downloads/)
+- 安装 [Git](https://git-scm.com/downloads)
+- 一个 TiDB 集群
 
 <CustomContent platform="tidb">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**如果你还没有 TiDB 集群，可以按照以下步骤创建：**
 
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
-- Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- 参考 [部署本地测试 TiDB 集群](/quick-start-with-tidb.md#deploy-a-local-test-cluster) 或 [部署生产环境 TiDB 集群](/production-deployment-using-tiup.md) 来创建本地集群。
+- 参考 [创建 {{{ .starter }}} 集群](/develop/dev-guide-build-cluster-in-cloud.md) 来创建你自己的 TiDB Cloud 集群。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**如果你还没有 TiDB 集群，可以按照以下步骤创建：**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster of v8.4.0 or a later version.
+- （推荐）参考 [创建 {{{ .starter }}} 集群](/develop/dev-guide-build-cluster-in-cloud.md) 来创建你自己的 TiDB Cloud 集群。
+- 参考 [部署本地测试 TiDB 集群](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) 或 [部署生产环境 TiDB 集群](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) 来创建版本为 v8.4.0 或更高版本的本地集群。
 
 </CustomContent>
 
-## Run the sample app
+## 运行示例应用
 
-You can quickly learn about how to integrate TiDB Vector Search with Django ORM by following the steps below.
+你可以通过以下步骤快速了解如何将 TiDB 向量搜索与 Django ORM 集成。
 
-### Step 1. Clone the repository
+### 步骤 1. 克隆仓库
 
-Clone the `tidb-vector-python` repository to your local machine:
+将 `tidb-vector-python` 仓库克隆到你的本地机器：
 
 ```shell
 git clone https://github.com/pingcap/tidb-vector-python.git
 ```
 
-### Step 2. Create a virtual environment
+### 步骤 2. 创建虚拟环境
 
-Create a virtual environment for your project:
+为你的项目创建虚拟环境：
 
 ```bash
 cd tidb-vector-python/examples/orm-django-quickstart
@@ -74,70 +74,70 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-### Step 3. Install required dependencies
+### 步骤 3. 安装依赖
 
-Install the required dependencies for the demo project:
+安装示例项目所需的依赖：
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Alternatively, you can install the following packages for your project:
+或者，你也可以单独安装以下包：
 
 ```bash
 pip install Django django-tidb mysqlclient numpy python-dotenv
 ```
 
-If you encounter installation issues with mysqlclient, refer to the mysqlclient official documentation.
+如果在安装 mysqlclient 时遇到问题，请参考 mysqlclient 官方文档。
 
-#### What is `django-tidb`
+#### 什么是 `django-tidb`
 
-`django-tidb` is a TiDB dialect for Django, which enhances the Django ORM to support TiDB-specific features (for example, Vector Search) and resolves compatibility issues between TiDB and Django.
+`django-tidb` 是 Django 的 TiDB 方言，增强了 Django ORM 对 TiDB 的支持（例如，向量搜索），并解决了 TiDB 与 Django 之间的兼容性问题。
 
-To install `django-tidb`, choose a version that matches your Django version. For example, if you are using `django==4.2.*`, install `django-tidb==4.2.*`. The minor version does not need to be the same. It is recommended to use the latest minor version.
+要安装 `django-tidb`，请选择与你的 Django 版本匹配的版本。例如，如果你使用 `django==4.2.*`，则安装 `django-tidb==4.2.*`。次版本号不必完全一致，建议使用最新的次版本。
 
-For more information, refer to [django-tidb repository](https://github.com/pingcap/django-tidb).
+更多信息请参考 [django-tidb 仓库](https://github.com/pingcap/django-tidb)。
 
-### Step 4. Configure the environment variables
+### 步骤 4. 配置环境变量
 
-Configure the environment variables depending on the TiDB deployment option you've selected.
+根据你选择的 TiDB 部署方式，配置环境变量。
 
 <SimpleTab>
 <div label="{{{ .starter }}}">
 
-For a {{{ .starter }}} cluster, take the following steps to obtain the cluster connection string and configure environment variables:
+对于 {{{ .starter }}} 集群，按照以下步骤获取集群连接字符串并配置环境变量：
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. 进入 [**Clusters**](https://tidbcloud.com/console/clusters) 页面，然后点击目标集群的名称，进入其概览页面。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2. 点击右上角的 **Connect**，弹出连接对话框。
 
-3. Ensure the configurations in the connection dialog match your operating environment.
+3. 确认连接对话框中的配置与操作环境匹配。
 
-    - **Connection Type** is set to `Public`
-    - **Branch** is set to `main`
-    - **Connect With** is set to `General`
-    - **Operating System** matches your environment.
-
-    > **Tip:**
-    >
-    > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
-
-4. Copy the connection parameters from the connection dialog.
+    - **Connection Type** 设置为 `Public`
+    - **Branch** 设置为 `main`
+    - **Connect With** 设置为 `General`
+    - **Operating System** 与你的环境一致。
 
     > **Tip:**
     >
-    > If you have not set a password yet, click **Generate Password** to generate a random password.
+    > 如果你的程序在 Windows 子系统 Linux（WSL）中运行，请切换到对应的 Linux 发行版。
 
-5. In the root directory of your Python project, create a `.env` file and paste the connection parameters to the corresponding environment variables.
+4. 从连接对话框复制连接参数。
 
-    - `TIDB_HOST`: The host of the TiDB cluster.
-    - `TIDB_PORT`: The port of the TiDB cluster.
-    - `TIDB_USERNAME`: The username to connect to the TiDB cluster.
-    - `TIDB_PASSWORD`: The password to connect to the TiDB cluster.
-    - `TIDB_DATABASE`: The database name to connect to.
-    - `TIDB_CA_PATH`: The path to the root certificate file.
+    > **Tip:**
+    >
+    > 如果还未设置密码，可以点击 **Generate Password** 生成随机密码。
 
-    The following is an example for macOS:
+5. 在你的 Python 项目的根目录下，创建一个 `.env` 文件，并将连接参数粘贴到对应的环境变量中。
+
+    - `TIDB_HOST`: TiDB 集群的主机地址
+    - `TIDB_PORT`: TiDB 集群的端口
+    - `TIDB_USERNAME`: 连接 TiDB 集群的用户名
+    - `TIDB_PASSWORD`: 连接 TiDB 集群的密码
+    - `TIDB_DATABASE`: 要连接的数据库名
+    - `TIDB_CA_PATH`: 根证书文件的路径
+
+    下面是 macOS 的示例：
 
     ```dotenv
     TIDB_HOST=gateway01.****.prod.aws.tidbcloud.com
@@ -151,7 +151,7 @@ For a {{{ .starter }}} cluster, take the following steps to obtain the cluster c
 </div>
 <div label="TiDB Self-Managed">
 
-For a TiDB Self-Managed cluster, create a `.env` file in the root directory of your Python project. Copy the following content into the `.env` file, and modify the environment variable values according to the connection parameters of your TiDB cluster:
+对于 TiDB Self-Managed 集群，在你的 Python 项目的根目录下创建 `.env` 文件。将以下内容复制到 `.env` 文件中，并根据你的 TiDB 集群连接参数修改环境变量值：
 
 ```dotenv
 TIDB_HOST=127.0.0.1
@@ -161,49 +161,49 @@ TIDB_PASSWORD=
 TIDB_DATABASE=test
 ```
 
-If you are running TiDB on your local machine, `TIDB_HOST` is `127.0.0.1` by default. The initial `TIDB_PASSWORD` is empty, so if you are starting the cluster for the first time, you can omit this field.
+如果你在本地运行 TiDB，`TIDB_HOST` 默认为 `127.0.0.1`。初次启动集群时，`TIDB_PASSWORD` 默认为空，可以省略此字段。
 
-The following are descriptions for each parameter:
+以下是各参数的说明：
 
-- `TIDB_HOST`: The host of the TiDB cluster.
-- `TIDB_PORT`: The port of the TiDB cluster.
-- `TIDB_USERNAME`: The username to connect to the TiDB cluster.
-- `TIDB_PASSWORD`: The password to connect to the TiDB cluster.
-- `TIDB_DATABASE`: The name of the database you want to connect to.
+- `TIDB_HOST`: TiDB 集群的主机地址
+- `TIDB_PORT`: TiDB 集群的端口
+- `TIDB_USERNAME`: 连接 TiDB 集群的用户名
+- `TIDB_PASSWORD`: 连接 TiDB 集群的密码
+- `TIDB_DATABASE`: 你要连接的数据库名称
 
 </div>
 
 </SimpleTab>
 
-### Step 5. Run the demo
+### 步骤 5. 运行示例
 
-Migrate the database schema:
+迁移数据库架构：
 
 ```bash
 python manage.py migrate
 ```
 
-Run the Django development server:
+启动 Django 开发服务器：
 
 ```bash
 python manage.py runserver
 ```
 
-Open your browser and visit `http://127.0.0.1:8000` to try the demo application. Here are the available API paths:
+打开浏览器，访问 `http://127.0.0.1:8000`，体验示例应用。以下是可用的 API 路径：
 
-| API Path                                | Description                              |
-| --------------------------------------- | ---------------------------------------- |
-| `POST: /insert_documents`               | Insert documents with embeddings.        |
-| `GET: /get_nearest_neighbors_documents` | Get the 3-nearest neighbor documents.    |
-| `GET: /get_documents_within_distance`   | Get documents within a certain distance. |
+| API 路径                                | 描述                              |
+| --------------------------------------- | -------------------------------- |
+| `POST: /insert_documents`               | 插入带有嵌入向量的文档。            |
+| `GET: /get_nearest_neighbors_documents` | 获取最接近的 3 个邻居文档。        |
+| `GET: /get_documents_within_distance`   | 获取在一定距离内的文档。            |
 
-## Sample code snippets
+## 示例代码片段
 
-You can refer to the following sample code snippets to complete your own application development.
+你可以参考以下示例代码片段，完成你自己的应用开发。
 
-### Connect to the TiDB cluster
+### 连接到 TiDB 集群
 
-In the file `sample_project/settings.py`, add the following configurations:
+在 `sample_project/settings.py` 文件中添加以下配置：
 
 ```python
 dotenv.load_dotenv()
@@ -231,15 +231,15 @@ if TIDB_CA_PATH:
     }
 ```
 
-You can create a `.env` file in the root directory of your project and set up the environment variables `TIDB_HOST`, `TIDB_PORT`, `TIDB_USERNAME`, `TIDB_PASSWORD`, `TIDB_DATABASE`, and `TIDB_CA_PATH` with the actual values of your TiDB cluster.
+你可以在项目根目录下创建 `.env` 文件，设置环境变量 `TIDB_HOST`、`TIDB_PORT`、`TIDB_USERNAME`、`TIDB_PASSWORD`、`TIDB_DATABASE` 和 `TIDB_CA_PATH`，填入你的 TiDB 集群的实际值。
 
-### Create vector tables
+### 创建向量表
 
-#### Define a vector column
+#### 定义向量列
 
-`tidb-django` provides a `VectorField` to store vector embeddings in a table.
+`tidb-django` 提供 `VectorField` 用于存储向量嵌入。
 
-Create a table with a column named `embedding` that stores a 3-dimensional vector.
+创建一个包含名为 `embedding` 的列的表，用于存储 3 维向量。
 
 ```python
 class Document(models.Model):
@@ -247,7 +247,7 @@ class Document(models.Model):
    embedding = VectorField(dimensions=3)
 ```
 
-### Store documents with embeddings
+### 存储带有嵌入的文档
 
 ```python
 Document.objects.create(content="dog", embedding=[1, 2, 1])
@@ -255,16 +255,16 @@ Document.objects.create(content="fish", embedding=[1, 2, 4])
 Document.objects.create(content="tree", embedding=[1, 0, 0])
 ```
 
-### Search the nearest neighbor documents
+### 搜索最邻近的文档
 
-TiDB Vector support the following distance functions:
+TiDB 向量支持以下距离函数：
 
 - `L1Distance`
 - `L2Distance`
 - `CosineDistance`
 - `NegativeInnerProduct`
 
-Search for the top-3 documents that are semantically closest to the query vector `[1, 2, 3]` based on the cosine distance function.
+根据余弦距离函数，搜索与查询向量 `[1, 2, 3]` 语义最接近的前 3 个文档。
 
 ```python
 results = Document.objects.annotate(
@@ -272,9 +272,9 @@ results = Document.objects.annotate(
 ).order_by('distance')[:3]
 ```
 
-### Search documents within a certain distance
+### 搜索距离在一定范围内的文档
 
-Search for the documents whose cosine distance from the query vector `[1, 2, 3]` is less than 0.2.
+搜索与查询向量 `[1, 2, 3]` 的余弦距离小于 0.2 的文档。
 
 ```python
 results = Document.objects.annotate(
@@ -282,7 +282,7 @@ results = Document.objects.annotate(
 ).filter(distance__lt=0.2).order_by('distance')[:3]
 ```
 
-## See also
+## 另请参阅
 
 - [Vector Data Types](/vector-search/vector-search-data-types.md)
 - [Vector Search Index](/vector-search/vector-search-index.md)

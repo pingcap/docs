@@ -1,49 +1,49 @@
 ---
-title: Best Practices for DDL Execution in TiDB
-summary: Learn about how DDL statements are implemented in TiDB, the online change process, and best practices.
+title: TiDB 中 DDL 执行的最佳实践
+summary: 了解 TiDB 中 DDL 语句的实现方式、在线变更流程以及最佳实践。
 ---
 
-# Best Practices for DDL Execution in TiDB
+# TiDB 中 DDL 执行的最佳实践
 
-This document provides an overview of the execution principles and best practices related to DDL statements in TiDB. The principles include the DDL Owner module and the online DDL change process.
+本文档概述了 TiDB 中与 DDL 语句相关的执行原理和最佳实践。原理包括 DDL Owner 模块和在线 DDL 变更流程。
 
-## DDL execution principles
+## DDL 执行原理
 
-TiDB uses an online and asynchronous approach to execute DDL statements. This means that DML statements in other sessions are not blocked while DDL statements are being executed. In other words, you can change the definitions of database objects using online and asynchronous DDL statements while your applications are running.
+TiDB 采用在线异步方式执行 DDL 语句。这意味着在执行 DDL 语句时，其他会话中的 DML 语句不会被阻塞。换句话说，你可以在应用程序运行时，使用在线异步的 DDL 语句修改数据库对象的定义。
 
-### Types of DDL statements
+### DDL 语句类型
 
-TiDB supports online DDL, which means that when a DDL statement is executed in the database, a specific method is used to ensure that the statement does not block the user application. You can submit data modifications during the execution of DDL, and the database guarantees data consistency and correctness.
+TiDB 支持在线 DDL，这意味着在数据库中执行 DDL 语句时，采用特定的方法确保该操作不会阻塞用户应用。你可以在 DDL 执行期间提交数据修改，数据库保证数据的一致性和正确性。
 
-By contrast, offline DDL locks database objects and blocks user modifications until the DDL operation is completed. TiDB does not support offline DDL.
+相比之下，离线 DDL 会锁定数据库对象，阻塞用户的修改，直到 DDL 操作完成。TiDB 不支持离线 DDL。
 
-Based on whether to operate the data included in the target DDL object, DDL statements can be divided into the following types:
+根据是否操作目标 DDL 对象中的数据，DDL 语句可以分为以下类型：
 
-- **Logical DDL statements**: Logical DDL statements usually only modify the metadata of the database object, without processing the data stored in the object, for example, changing the table name or changing the column name.
+- **Logical DDL 语句**：逻辑 DDL 语句通常只修改数据库对象的元数据，不处理存储在对象中的数据，例如更改表名或列名。
 
-    In TiDB, logical DDL statements are also referred to as "general DDL". These statements typically have a short execution time, often taking only a few tens of milliseconds or seconds to complete. As a result, they do not consume much system resource and do not affect the workload on the application.
+    在 TiDB 中，逻辑 DDL 也称为“通用 DDL”。这些语句的执行时间通常较短，常常只需几十毫秒或几秒即可完成。因此，它们消耗的系统资源较少，不会影响应用的工作负载。
 
-- **Physical DDL statements**: Physical DDL statements not only modify the metadata of the object to be changed, but also modify the user data stored in the object. For example, when TiDB creates an index for a table, it not only changes the definition of the table, but also performs a full table scan to build the newly added index.
+- **Physical DDL 语句**：物理 DDL 语句不仅修改被变更对象的元数据，还会修改存储在对象中的用户数据。例如，当 TiDB 为一张表创建索引时，不仅会改变表的定义，还会进行全表扫描以构建新添加的索引。
 
-    In TiDB, physical DDL statements are also referred to as "reorg DDL", which stands for reorganization. Currently, physical DDL statements only include `ADD INDEX` and lossy column type changes (such as changing from an `INT` type to a `CHAR` type). These statements take a long time to execute, and the execution time is affected by the amount of data in the table, the machine configuration, and the application workload.
+    在 TiDB 中，物理 DDL 也称为“reorg DDL”，代表重组。目前，物理 DDL 仅包括 `ADD INDEX` 和有损列类型变更（如从 `INT` 类型变更为 `CHAR` 类型）。这些操作的执行时间较长，受表中数据量、机器配置和应用负载的影响。
 
-    Executing physical DDL statements can have an impact on the workload of the application for two reasons. On the one hand, it consumes CPU and I/O resources from TiKV to read data and write new data. On the other hand, **the TiDB node serving as DDL Owners** or **those TiDB nodes scheduled by the TiDB Distributed eXecution Framework (DXF) to execute `ADD INDEX` tasks** consume CPU resources from TiDB to perform the corresponding computations.
+    执行物理 DDL 可能对应用的工作负载产生影响，原因有二：一方面，它会消耗 TiKV 的 CPU 和 I/O 资源，用于读取和写入数据；另一方面，**作为 DDL Owner 的 TiDB 节点** 或 **由 TiDB 分布式执行框架（DXF）调度执行 `ADD INDEX` 任务的 TiDB 节点**，会消耗 CPU 资源进行相应的计算。
 
     > **Note:**
     >
-    > The execution of a physical DDL task typically causes the greatest impact on the user application. Therefore, to minimize this impact, the key point is to optimize the design of physical DDL statements during execution. This helps to reduce the impact on the user application.
+    > 执行物理 DDL 任务通常对用户应用的影响最大。因此，为了最小化影响，关键在于在执行过程中优化物理 DDL 语句的设计。这有助于减少对用户应用的影响。
 
-### TiDB DDL module
+### TiDB DDL 模块
 
-The TiDB DDL module introduces the role of the DDL Owner (or Owner), which serves as a proxy for executing all DDL statements within the TiDB cluster. In the current implementation, only one TiDB node in the entire cluster can be elected as the Owner at any given time. Once a TiDB node is elected as Owner, the worker started in that TiDB node can handle the DDL tasks in the cluster.
+TiDB 的 DDL 模块引入了 DDL Owner（或 Owner）角色，作为在 TiDB 集群中执行所有 DDL 语句的代理。在当前实现中，整个集群中最多只有一个 TiDB 节点可以被选举为 Owner。一旦某个 TiDB 节点当选为 Owner，该节点启动的工作线程就可以处理集群中的 DDL 任务。
 
-TiDB uses the election mechanism of etcd to elect a node to host the Owner from multiple TiDB nodes. By default, each TiDB node can potentially be elected as the Owner (you can configure `run-ddl` to manage node participation in the election). The elected Owner node has a term, and it actively maintains the term by renewing it. When the Owner node is down, another node can be elected as the new Owner through etcd and continue executing DDL tasks in the cluster.
+TiDB 使用 etcd 的选举机制，从多个 TiDB 节点中选举出一个节点作为 Owner。默认情况下，每个 TiDB 节点都可能被选举为 Owner（你可以配置 `run-ddl` 来管理节点参与选举）。当选的 Owner 节点有一个任期（term），它会通过续期主动维护该任期。当 Owner 节点宕机时，其他节点可以通过 etcd 选举出新的 Owner，继续在集群中执行 DDL 任务。
 
-A simple illustration of the DDL Owner is as follows:
+一个简单的 DDL Owner 示意图如下：
 
 ![DDL Owner](/media/ddl-owner.png)
 
-You can use the `ADMIN SHOW DDL` statement to view the current DDL owner:
+你可以使用 `ADMIN SHOW DDL` 语句查看当前的 DDL Owner：
 
 ```sql
 ADMIN SHOW DDL;
@@ -55,140 +55,139 @@ ADMIN SHOW DDL;
 +------------+--------------------------------------+---------------+--------------+--------------------------------------+-------+
 |         26 | 2d1982af-fa63-43ad-a3d5-73710683cc63 | 0.0.0.0:4000  |              | 2d1982af-fa63-43ad-a3d5-73710683cc63 |       |
 +------------+--------------------------------------+---------------+--------------+--------------------------------------+-------+
-1 row in set (0.00 sec)
 ```
 
-### How the online DDL asynchronous change works in TiDB
+### TiDB 中在线 DDL 异步变更的工作原理
 
-From the beginning of its design, the TiDB DDL module has opted for an online asynchronous change mode, which lets you modify your applications without experiencing any downtime.
+从设计之初，TiDB 的 DDL 模块就采用了在线异步变更模式，允许你在不影响应用的情况下修改。
 
-DDL changes involve transitioning from one state to another, typically from a "before change" state to an "after change" state. With online DDL changes, this transition occurs by introducing multiple small version states that are mutually compatible. During the execution of a DDL statement, TiDB nodes in the same cluster are allowed to have different small version changes, as long as the difference between the small versions of the change objects is not more than two versions. This is possible because adjacent small versions can be mutually compatible.
+DDL 变更涉及状态的转换，通常从“变更前”状态到“变更后”状态。采用在线 DDL 时，这一转换通过引入多个相互兼容的小版本状态实现。在执行 DDL 语句期间，TiDB 集群中的节点可以拥有不同的小版本变更，只要相邻的小版本之间的差异不超过两个版本。这是因为相邻的小版本可以相互兼容。
 
-In this way, evolving through multiple small versions ensures that metadata can be correctly synchronized across multiple TiDB nodes. This helps maintain the correctness and consistency of user transactions that involve changing data during the process.
+这样，通过多个小版本的演进，确保元数据可以在多个 TiDB 节点间正确同步，有助于在变更过程中保持涉及数据变更的用户事务的正确性和一致性。
 
-Taking `ADD INDEX` as an example, the entire process of state change is as follows:
+以 `ADD INDEX` 为例，整个状态变更过程如下：
 
 ```
 absent -> delete only -> write only -> write reorg -> public
 ```
 
-For users, the newly created index is unavailable before the `public` state.
+对于用户而言，直到进入 `public` 状态之前，新创建的索引都是不可用的。
 
 <SimpleTab>
-<div label="Parallel DDL framework starting from v6.2.0">
+<div label="从 v6.2.0 开始的并行 DDL 框架">
 
-Before TiDB v6.2.0, because the Owner can only execute one DDL task of the same type (either logical or physical) at a time, which is relatively strict, and affects the user experience.
+在 TiDB v6.2.0 之前，由于 Owner 一次只能执行一种类型（逻辑或物理）的 DDL 任务，限制较为严格，影响用户体验。
 
-If there is no dependency between DDL tasks, parallel execution does not affect data correctness and consistency. For example, user A adds an index to the `T1` table, while user B deletes a column from the `T2` table. These two DDL statements can be executed in parallel.
+如果 DDL 任务之间没有依赖关系，并行执行不会影响数据的正确性和一致性。例如，用户 A 给 `T1` 表添加索引，而用户 B 删除 `T2` 表中的列，这两个 DDL 语句可以并行执行。
 
-To improve the user experience of DDL execution, starting from v6.2.0, TiDB enables the Owner to determine the relevance of DDL tasks. The logic is as follows:
+为了改善 DDL 执行的用户体验，从 v6.2.0 开始，TiDB 允许 Owner 根据 DDL 任务的相关性进行判断，逻辑如下：
 
-+ DDL statements to be performed on the same table are mutually blocked.
-+ `DROP DATABASE` and DDL statements that affect all objects in the database are mutually blocked.
-+ Adding indexes and column type changes on different tables can be executed concurrently.
-+ Starting from v8.2.0, [logical DDL statements](/ddl-introduction.md#types-of-ddl-statements) for different tables can be executed in parallel.
-+ In other cases, DDL can be executed based on the level of availability for concurrent DDL execution.
++ 对同一张表的 DDL 语句相互阻塞。
++ `DROP DATABASE` 和影响数据库中所有对象的 DDL 语句相互阻塞。
++ 在不同表上添加索引和列类型变更可以并发执行。
++ 从 v8.2.0 开始，不同表的 [逻辑 DDL 语句](/ddl-introduction.md#types-of-ddl-statements) 可以并行执行。
++ 在其他情况下，DDL 可以根据可用性等级进行并发执行。
 
-Specifically, TiDB 6.2.0 has enhanced the DDL execution framework in the following aspects:
+具体而言，TiDB 6.2.0 在以下方面增强了 DDL 执行框架：
 
-+ The DDL Owner can execute DDL tasks in parallel based on the preceding logic.
-+ The first-in-first-out issue in the DDL Job queue has been addressed. The DDL Owner no longer selects the first job in the queue, but instead selects the job that can be executed at the current time.
-+ The number of workers that handle physical DDL statements has been increased, enabling multiple physical DDL statements to be executed in parallel.
++ DDL Owner 可以根据上述逻辑并行执行 DDL 任务。
++ 解决 DDL 任务队列中的先进先出问题。DDL Owner 不再只选择队列中的第一个任务，而是选择当前可以执行的任务。
++ 增加处理物理 DDL 语句的工作线程数，支持多个物理 DDL 并行执行。
 
-    Because all DDL tasks in TiDB are implemented using an online change approach, TiDB can determine the relevance of new DDL jobs through the Owner, and schedule DDL tasks based on this information. This approach enables the distributed database to achieve the same level of DDL concurrency as traditional databases.
+    由于 TiDB 中所有 DDL 任务都采用在线变更方式实现，Owner 可以根据新 DDL 任务的相关性进行调度，从而实现与传统数据库相同的 DDL 并发水平。
 
-The concurrent DDL framework enhances the execution capability of DDL statements in TiDB, making it more compatible with the usage patterns of commercial databases.
+并发 DDL 框架提升了 TiDB 中 DDL 语句的执行能力，使其更好地适应商业数据库的使用场景。
 
 </div>
-<div label="Online DDL asynchronous change before TiDB v6.2.0">
+<div label="TiDB v6.2.0 之前的在线 DDL 异步变更流程">
 
-Before v6.2.0, the process of handling asynchronous schema changes in the TiDB SQL layer is as follows:
+在 v6.2.0 之前，TiDB SQL 层处理异步模式变更的流程如下：
 
-1. MySQL Client sends a DDL request to a TiDB server.
+1. MySQL 客户端向 TiDB 服务器发送 DDL 请求。
 
-2. After receiving the request, a TiDB server parses and optimizes the request at the MySQL Protocol layer, and then sends it to the TiDB SQL layer for execution.
+2. TiDB 服务器收到请求后，在 MySQL 协议层解析和优化请求，然后将其发送到 TiDB SQL 层执行。
 
-    Once the SQL layer of TiDB receives the DDL request, it starts the `start job` module to encapsulate the request into a specific DDL job (that is, a DDL task), and then stores this job in the corresponding DDL job queue in the KV layer based on the statement type. The corresponding worker is notified of the job that requires processing.
+    一旦 TiDB 的 SQL 层收到 DDL 请求，它会启动 `start job` 模块，将请求封装成特定的 DDL 任务（即 DDL Job），然后根据语句类型将其存入对应的 DDL 任务队列（在 KV 层）。相关工作线程会被通知处理该任务。
 
-3. When receiving the notification to process the job, the worker determines whether it has the role of the DDL Owner. If it does, it directly processes the job. Otherwise, it exits without any processing.
+3. 当工作线程收到处理任务的通知时，会判断自己是否为 DDL Owner。如果是，则直接处理任务；否则不进行任何处理。
 
-    If a TiDB server is not the Owner role, then another node must be the Owner. The worker of the node in the Owner role periodically checks whether there is an available job that can be executed. If such a job is identified, the worker will process the job.
+    如果 TiDB 服务器不是 Owner 角色，则必须由其他节点担任 Owner。Owner 角色的工作线程会定期检查是否有可执行的任务。如果发现有，则会处理该任务。
 
-4. After the worker processes the Job, it removes the job from the job queue in the KV layer and places it in the `job history queue`. The `start job` module that encapsulated the job periodically checks the ID of the job in the `job history queue` to see whether it has been processed. If so, the entire DDL operation corresponding to the job ends.
+4. 工作线程处理完 Job 后，会将任务从 KV 层的任务队列中移除，并放入 `job history queue`。封装 Job 的 `start job` 模块会定期检查 `job history queue` 中任务的 ID，确认是否已处理完毕。如果已完成，整个 DDL 操作也就结束了。
 
-5. TiDB server returns the DDL processing result to the MySQL Client.
+5. TiDB 服务器将 DDL 处理结果返回给 MySQL 客户端。
 
-Before TiDB v6.2.0, the DDL execution framework had the following limitations:
+在 v6.2.0 之前，TiDB 的 DDL 执行框架存在以下限制：
 
-- The TiKV cluster only has two queues: `general job queue` and `add index job queue`, which handle logical DDL and physical DDL, respectively.
-- The DDL Owner always processes DDL jobs in a first-in-first-out way.
-- The DDL Owner can only execute one DDL task of the same type (either logical or physical) at a time, which is relatively strict, and affects the user experience.
+- TiKV 集群只有两个队列：`general job queue` 和 `add index job queue`，分别处理逻辑 DDL 和物理 DDL。
+- DDL Owner 始终以先进先出方式处理 DDL 任务。
+- DDL Owner 一次只能执行一个相同类型（逻辑或物理）的 DDL 任务，限制较为严格，影响用户体验。
 
-These limitations might lead to some "unintended" DDL blocking behavior. For more details, see [SQL FAQ - DDL Execution](https://docs.pingcap.com/tidb/stable/sql-faq#ddl-execution).
+这些限制可能导致一些“非预期”的 DDL 阻塞行为。更多详情请参见 [SQL FAQ - DDL Execution](https://docs.pingcap.com/tidb/stable/sql-faq#ddl-execution)。
 
 </div>
 </SimpleTab>
 
-## Best practices
+## 最佳实践
 
-### Balance the physical DDL execution speed and the impact on application load through system variables
+### 通过系统变量平衡物理 DDL 执行速度与应用负载影响
 
-When executing physical DDL statements (including adding indexes or column type changes), you can adjust the values of the following system variables to balance the speed of DDL execution and the impact on application load:
+在执行物理 DDL 语句（包括添加索引或列类型变更）时，可以调整以下系统变量的值，以平衡 DDL 执行速度和对应用负载的影响：
 
-- [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt): This variable sets the number of reorg workers for a DDL operation, which controls the concurrency of backfilling.
+- [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)：设置 DDL 操作的重组织工作线程数，控制回填的并发度。
 
-- [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size): This variable sets the batch size for a DDL operation in the `re-organize` phase, which controls the amount of data to be backfilled.
+- [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)：设置 `re-organize` 阶段的批量大小，控制回填的数据量。
 
-    Recommended values:
+    推荐值：
 
-    - If there is no other load, you can increase the values of `tidb_ddl_reorg_worker_cnt` and `tidb_ddl_reorg_batch_size` to speed up the `ADD INDEX` operation. For example, you can set the values of the two variables to `20` and `2048`, respectively.
-    - If there is other load, you can decrease the values of `tidb_ddl_reorg_worker_cnt` and `tidb_ddl_reorg_batch_size` to minimize the impact on other application. For example, you can set the values of the these variables to `4` and `256`, respectively.
+    - 如果没有其他负载，可以增大 `tidb_ddl_reorg_worker_cnt` 和 `tidb_ddl_reorg_batch_size` 的值，加快 `ADD INDEX` 的速度。例如，将两个变量的值分别设置为 `20` 和 `2048`。
+    - 如果存在其他负载，可以减小这两个变量的值，以最小化对其他应用的影响。例如，将它们的值设置为 `4` 和 `256`。
 
 > **Tip:**
 >
-> - The preceding two variables can be dynamically adjusted during the execution of a DDL task, and take effect in the next transaction batch.
-> - Choose the appropriate time to execute the DDL operation based on the type of the operation and the application load pressure. For example, it is recommended to run the `ADD INDEX` operation when the application load is low.
-> - Because the duration of adding an index is relatively long, TiDB will execute the task in the background after the command is sent. If the TiDB server is down, the execution will not be affected.
+> - 以上两个变量可以在 DDL 任务执行过程中动态调整，并在下一批事务中生效。
+> - 根据操作类型和应用负载压力选择合适的时间执行 DDL 操作。例如，建议在应用负载较低时执行 `ADD INDEX`。
+> - 由于添加索引的时间较长，TiDB 会在命令发出后在后台执行任务。如果 TiDB 服务器宕机，执行不会受到影响。
 
-### Quickly create many tables by concurrently sending DDL requests
+### 通过并发发送 DDL 请求快速创建大量表
 
-A table creation operation takes about 50 milliseconds. The actual time taken to create a table might be longer because of the framework limitations.
+创建一张表大约需要 50 毫秒。实际耗时可能更长，原因在于框架限制。
 
-To create tables faster, it is recommended to send multiple DDL requests concurrently to achieve the fastest table creation speed. If you send DDL requests serially and do not send them to the Owner node, the table creation speed will be very slow.
+为了更快地创建表，建议同时发送多个 DDL 请求，以实现最快的创建速度。如果串行发送 DDL 请求且不在 Owner 节点，表创建速度会非常慢。
 
-### Make multiple changes in a single `ALTER` statement
+### 在单个 `ALTER` 语句中进行多项变更
 
-Starting from v6.2.0, TiDB supports modifying multiple schema objects (such as columns and indexes) of a table in a single `ALTER` statement while ensuring the atomicity of the entire statement. Therefore, it is recommended to make multiple changes in a single `ALTER` statement.
+从 v6.2.0 开始，TiDB 支持在单个 `ALTER` 语句中修改多个表结构对象（如列和索引），同时保证整个语句的原子性。因此，建议在单个 `ALTER` 语句中进行多项变更。
 
-### Check the read and write performance
+### 检查读写性能
 
-When TiDB is adding an index, the phase of backfilling data will cause read and write pressure on the cluster. After the `ADD INDEX` command is sent and the `write reorg` phase starts, it is recommended to check the read and write performance metrics of TiDB and TiKV on the Grafana dashboard and the application response time, to determine whether the `ADD INDEX` operation affects the cluster.
+当 TiDB 添加索引时，回填数据阶段会对集群造成读写压力。发出 `ADD INDEX` 命令并开始 `write reorg` 阶段后，建议通过 Grafana 仪表盘监控 TiDB 和 TiKV 的读写性能指标，以及应用响应时间，以判断 `ADD INDEX` 操作是否影响集群。
 
-## DDL-related commands
+## 与 DDL 相关的命令
 
-- `ADMIN SHOW DDL`: Used to view the status of TiDB DDL operations, including the current schema version number, the DDL ID and address of the DDL Owner, the DDL task and SQL being executed, and the DDL ID of the current TiDB instance. For details, see [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl).
+- `ADMIN SHOW DDL`：用于查看 TiDB DDL 操作的状态，包括当前的 schema 版本号、DDL Owner 的 ID 和地址、正在执行的 DDL 任务和 SQL，以及当前 TiDB 实例的 DDL ID。详情请参见 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl)。
 
-- `ADMIN SHOW DDL JOBS`: Used to view the detailed status of DDL tasks running in the cluster environment. For details, see [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-jobs).
+- `ADMIN SHOW DDL JOBS`：用于查看集群中正在运行的 DDL 任务的详细状态。详情请参见 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-jobs)。
 
-- `ADMIN SHOW DDL JOB QUERIES job_id [, job_id]`: Used to view the original SQL statement of the DDL task corresponding to the `job_id`. For details, see [`ADMIN SHOW DDL JOB QUERIES`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-job-queries).
+- `ADMIN SHOW DDL JOB QUERIES job_id [, job_id]`：用于查看对应 `job_id` 的 DDL 任务的原始 SQL 语句。详情请参见 [`ADMIN SHOW DDL JOB QUERIES`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-job-queries)。
 
-- `ADMIN CANCEL DDL JOBS job_id, [, job_id]`: Used to cancel DDL tasks that have been submitted but not completed. After the cancellation is completed, the SQL statement that executes the DDL task returns the `ERROR 8214 (HY000): Cancelled DDL job` error.
+- `ADMIN CANCEL DDL JOBS job_id [, job_id]`：用于取消已提交但未完成的 DDL 任务。取消完成后，执行 DDL 任务的 SQL 语句会返回 `ERROR 8214 (HY000): Cancelled DDL job` 错误。
 
-    If a completed DDL task is canceled, you can see the `DDL Job:90 not found` error in the `RESULT` column, which means that the task has been removed from the DDL waiting queue.
+    如果取消已完成的 DDL 任务，可以在 `RESULT` 列看到 `DDL Job:90 not found` 错误，表示该任务已从 DDL 等待队列中移除。
 
-- `ADMIN PAUSE DDL JOBS job_id [, job_id]`: Used to pause the DDL jobs that are being executed. After the command is executed, the SQL statement that executes the DDL job is displayed as being executed, while the background job has been paused. For details, refer to [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md).
+- `ADMIN PAUSE DDL JOBS job_id [, job_id]`：用于暂停正在执行的 DDL 任务。执行后，执行 DDL 任务的 SQL 语句显示为正在执行，而后台任务已暂停。详情请参见 [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md)。
 
-    You can only pause DDL tasks that are in progress or still in the queue. Otherwise, the `Job 3 can't be paused now` error is shown in the `RESULT` column.
+    只能暂停进行中或在队列中的 DDL 任务，否则在 `RESULT` 列会显示 `Job 3 can't be paused now` 错误。
 
-- `ADMIN RESUME DDL JOBS job_id [, job_id]`: Used to resume the DDL tasks that have been paused. After the command is executed, the SQL statement that executes the DDL task is displayed as being executed, and the background task is resumed. For details, refer to [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md).
+- `ADMIN RESUME DDL JOBS job_id [, job_id]`：用于恢复已暂停的 DDL 任务。执行后，执行 DDL 任务的 SQL 语句显示为正在执行，后台任务恢复。详情请参见 [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md)。
 
-    You can only resume a paused DDL task. Otherwise, the `Job 3 can't be resumed` error is shown in the `RESULT` column.
+    只能恢复已暂停的 DDL 任务，否则在 `RESULT` 列会显示 `Job 3 can't be resumed` 错误。
 
-## DDL-related tables
+## 与 DDL 相关的表
 
-- [`information_schema.DDL_JOBS`](/information-schema/information-schema-ddl-jobs.md): Information about currently running and finished DDL jobs.
-- [`mysql.tidb_mdl_view`](/mysql-schema/mysql-schema-tidb-mdl-view.md): Information about [metadata lock](/metadata-lock.md) views. It can help identify what query is blocking the DDL from making progress.
+- [`information_schema.DDL_JOBS`](/information-schema/information-schema-ddl-jobs.md)：当前正在运行和已完成的 DDL 任务信息。
+- [`mysql.tidb_mdl_view`](/mysql-schema/mysql-schema-tidb-mdl-view.md)：关于 [metadata lock](/metadata-lock.md) 视图的信息，可帮助识别阻塞 DDL 进展的查询。
 
-## Common questions
+## 常见问题
 
-For common questions about DDL execution, see [SQL FAQ - DDL execution](https://docs.pingcap.com/tidb/stable/sql-faq).
+关于 DDL 执行的常见问题，参见 [SQL FAQ - DDL execution](https://docs.pingcap.com/tidb/stable/sql-faq)。

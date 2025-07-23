@@ -1,54 +1,54 @@
 ---
-title: Index Selection
-summary: Choose the best indexes for TiDB query optimization.
+title: 索引选择
+summary: 为 TiDB 查询优化选择最佳索引。
 ---
 
-# Index Selection
+# 索引选择 {#index-selection}
 
-Reading data from storage engines is one of the most time-consuming steps during the SQL execution. Currently, TiDB supports reading data from different storage engines and different indexes. Query execution performance depends largely on whether you select a suitable index or not.
+从存储引擎读取数据是 SQL 执行过程中最耗时的步骤之一。目前，TiDB 支持从不同的存储引擎和不同的索引读取数据。查询执行性能在很大程度上取决于是否选择了合适的索引。
 
-This document introduces how to select an index to access a table, and some related ways to control index selection.
+本文档介绍了如何选择访问表的索引，以及一些控制索引选择的相关方法。
 
-## Access tables
+## 访问表 {#access-tables}
 
-Before introducing index selection, it is important to understand the ways TiDB accesses tables, what triggers each way, what differences each way makes, and what the pros and cons are.
+在介绍索引选择之前，首先需要了解 TiDB 访问表的方式、每种方式的触发条件、区别以及优缺点。
 
-### Operators for accessing tables
+### 访问表的算子 {#operators-for-accessing-tables}
 
-| Operator | Trigger Conditions | Applicable Scenarios | Explanations |
-| :------- | :------- | :------- | :---- |
-| PointGet / BatchPointGet | When accessing tables in one or more single point ranges. | Any scenario | If triggered, it is usually considered as the fastest operator, since it calls the kvget interface directly to perform the calculations rather than calls the coprocessor interface.  |
-| TableReader | None | Any scenario | This TableReader operator is for TiKV. It is generally considered as the least efficient operator that scans table data directly from the TiKV layer. It can be selected only if there is a range query on the `_tidb_rowid` column, or if there are no other operators for accessing tables to choose from. |
-| TableReader | A table has a replica on the TiFlash node. | There are fewer columns to read, but many rows to evaluate.  | This TableReader operator is for TiFlash. TiFlash is column-based storage. If you need to calculate a small number of columns and a large number of rows, it is recommended to choose this operator. |
-| IndexReader | A table has one or more indexes, and the columns needed for the calculation are included in the indexes. | When there is a smaller range query on the indexes, or when there is an order requirement for indexed columns. | When multiple indexes exist, a reasonable index is selected based on the cost estimation. |
-| IndexLookupReader | A table has one or more indexes, and the columns needed for calculation are not completely included in the indexes. | Same as IndexReader. |  Since the index does not completely cover calculated columns, TiDB needs to retrieve rows from a table after reading indexes. There is an extra cost compared to the IndexReader operator. |
-| IndexMerge | A table has multiple indexes or a multi-valued index. | When a multi-valued index or multiple indexes are used. | To use the operator, you can specify the [optimizer hints](/optimizer-hints.md), or let the optimizer to automatically select this operator based on cost estimation. For details, see [Explain Statements Using Index Merge](/explain-index-merge.md). |
+| 算子                      | 触发条件                                                                                                   | 适用场景                                                                                                   | 说明                                                                                                                                                                                                                                                                                                 |
+| :----------------------- | :-------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| PointGet / BatchPointGet | 访问表时为一个或多个单点范围。                                                                             | 任意场景                                                                                                   | 如果被触发，通常认为是最快的算子，因为它直接调用 kvget 接口进行计算，而不是调用 coprocessor 接口。                                                                                                                         |
+| TableReader              | 无                                                                                                        | 任意场景                                                                                                   | 该 TableReader 算子用于 TiKV。通常认为是效率最低的算子，直接从 TiKV 层扫描表数据。只有在对 `_tidb_rowid` 列进行范围查询，或没有其他可选的访问表算子时才会被选择。 |
+| TableReader              | 表在 TiFlash 节点上有副本。                                                                               | 需要读取的列较少，但需要评估的行数较多。                                                                   | 该 TableReader 算子用于 TiFlash。TiFlash 是列存储，如果只需计算少量列但行数较多，推荐选择此算子。                                                                                                         |
+| IndexReader              | 表有一个或多个索引，且计算所需的列都包含在索引中。                                                         | 对索引有较小范围查询，或对索引列有排序要求时。                                                             | 当存在多个索引时，会根据成本估算选择合理的索引。                                                                                                                                                                                                                    |
+| IndexLookupReader        | 表有一个或多个索引，但计算所需的列未完全包含在索引中。                                                     | 同 IndexReader。                                                                                           | 由于索引未完全覆盖计算列，TiDB 需要在读取索引后再回表取行。与 IndexReader 算子相比有额外的开销。                                                                                                                   |
+| IndexMerge               | 表有多个索引或多值索引。                                                                                   | 使用多值索引或多个索引时。                                                                                  | 可通过指定 [优化器提示](/optimizer-hints.md) 使用该算子，或让优化器根据成本估算自动选择。详情参见 [Explain Statements Using Index Merge](/explain-index-merge.md)。                                                      |
 
 > **Note:**
 >
-> The TableReader operator is based on the `_tidb_rowid` column index, and TiFlash uses a column storage index, so the selection of index is the selection of an operator for accessing tables.
+> TableReader 算子基于 `_tidb_rowid` 列索引，TiFlash 使用列存储索引，因此索引的选择即为访问表算子的选择。
 
-## Index selection rules
+## 索引选择规则 {#index-selection-rules}
 
-TiDB selects indexes based on rules or cost. The based rules include pre-rules and skyline-pruning. When selecting an index, TiDB tries the pre-rule first. If an index satisfies a pre-rule, TiDB directly selects this index. Otherwise, TiDB uses skyline-pruning to exclude unsuitable indexes, and then selects the index with the lowest cost based on the cost estimation of each operator that accesses tables.
+TiDB 会基于规则或成本选择索引。基础规则包括预规则（pre-rules）和 skyline-pruning。在选择索引时，TiDB 会优先尝试预规则。如果某个索引满足预规则，TiDB 会直接选择该索引。否则，TiDB 会使用 skyline-pruning 排除不合适的索引，然后根据每个访问表算子的成本估算，选择成本最低的索引。
 
-### Rule-based selection
+### 基于规则的选择 {#rule-based-selection}
 
-#### Pre-rules
+#### 预规则 {#pre-rules}
 
-TiDB uses the following heuristic pre-rules to select indexes:
+TiDB 使用以下启发式预规则选择索引：
 
-+ Rule 1: If an index satisfies "unique index with full match + no need to retrieve rows from a table (which means that the plan generated by the index is the IndexReader operator)", TiDB directly selects this index.
+-   规则 1：如果某个索引满足“唯一索引全匹配 + 不需要回表（即该索引生成的执行计划为 IndexReader 算子）”，TiDB 直接选择该索引。
 
-+ Rule 2: If an index satisfies "unique index with full match + the need to retrieve rows from a table (which means that the plan generated by the index is the IndexLookupReader operator)", TiDB selects the index with the smallest number of rows to be retrieved from a table as a candidate index.
+-   规则 2：如果某个索引满足“唯一索引全匹配 + 需要回表（即该索引生成的执行计划为 IndexLookupReader 算子）”，TiDB 选择回表行数最少的索引作为候选索引。
 
-+ Rule 3: If an index satisfies "ordinary index + no need to retrieve rows from a table + the number of rows to be read is less than the value of a certain threshold", TiDB selects the index with the smallest number of rows to be read as a candidate index.
+-   规则 3：如果某个索引满足“普通索引 + 不需要回表 + 读取行数小于某个阈值”，TiDB 选择读取行数最少的索引作为候选索引。
 
-+ Rule 4: If only one candidate index is selected based on rule 2 and 3, select this candidate index. If two candidate indexes are respectively selected based on rule 2 and 3, select the index with the smaller number of rows to be read (the number of rows with index + the number of rows to be retrieved from a table).
+-   规则 4：如果根据规则 2 和 3 只选出一个候选索引，则选择该候选索引；如果分别根据规则 2 和 3 各选出一个候选索引，则选择读取行数更少的索引（索引行数 + 回表行数）。
 
-The "index with full match" in the above rules means each indexed column has the equal condition. When executing the `EXPLAIN FORMAT = 'verbose' ...` statement, if the pre-rules match an index, TiDB outputs a NOTE-level warning indicating that the index matches the pre-rule.
+上述规则中的“全匹配索引”指每个索引列都有等值条件。执行 `EXPLAIN FORMAT = 'verbose' ...` 语句时，如果预规则匹配到某个索引，TiDB 会输出 NOTE 级别的警告，提示该索引匹配了预规则。
 
-In the following example, because the index `idx_b` meets the condition "unique index with full match + the need to retrieve rows from a table" in rule 2, TiDB selects the index `idx_b` as the access path, and `SHOW WARNING` returns a note indicating that the index `idx_b` matches the pre-rule.
+如下示例中，由于索引 `idx_b` 满足规则 2 中的“唯一索引全匹配 + 需要回表”条件，TiDB 选择 `idx_b` 作为访问路径，`SHOW WARNING` 返回 NOTE，提示索引 `idx_b` 匹配了预规则。
 
 ```sql
 mysql> CREATE TABLE t(a INT PRIMARY KEY, b INT, c INT, UNIQUE INDEX idx_b(b));
@@ -71,21 +71,21 @@ mysql> SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-### Skyline-pruning
+### Skyline-pruning {#skyline-pruning}
 
-Skyline-pruning is a heuristic filtering rule for indexes, which can reduce the probability of wrong index selection caused by wrong estimation. To judge an index, the following dimensions are needed:
+Skyline-pruning 是一种索引的启发式过滤规则，可以降低因估算错误导致选错索引的概率。判断一个索引时，需要考虑以下维度：
 
-- How many access conditions are covered by the indexed columns. An "access condition" is a where condition that can be converted to a column range. And the more access conditions an indexed column set covers, the better it is in this dimension.
+-   索引列覆盖了多少访问条件。访问条件是指可以转换为列范围的 where 条件，覆盖的访问条件越多，该维度越优。
 
-- Whether it needs to retrieve rows from a table when you select the index to access the table (that is, the plan generated by the index is IndexReader operator or IndexLookupReader operator). Indexes that do not retrieve rows from a table are better on this dimension than indexes that do. If both indexes need TiDB to retrieve rows from the table, compare how many filtering conditions are covered by the indexed columns. Filtering conditions mean the `where` condition that can be judged based on the index. If the column set of an index covers more access conditions, the smaller the number of retrieved rows from a table, and the better the index is in this dimension.
+-   选择该索引访问表时是否需要回表（即该索引生成的执行计划为 IndexReader 算子或 IndexLookupReader 算子）。不需要回表的索引在该维度上优于需要回表的索引。如果两个索引都需要回表，则比较索引列覆盖的过滤条件数量。过滤条件指可以基于索引判断的 where 条件。索引列集覆盖的访问条件越多，回表行数越少，该维度越优。
 
-- Select whether the index satisfies a certain order. Because index reading can guarantee the order of certain column sets, indexes that satisfy the query order are superior to indexes that do not satisfy on this dimension.
+-   是否满足某种排序。因为索引读取可以保证某些列集的顺序，满足查询排序的索引在该维度上优于不满足的索引。
 
-- Whether the index is a [global index](/partitioned-table.md#global-indexes). In partitioned tables, global indexes can effectively reduce the number of cop tasks for a SQL compared to normal indexes, thus improving overall performance.
+-   是否为 [全局索引](/partitioned-table.md#global-indexes)。在分区表中，全局索引相比普通索引可以有效减少 SQL 的 cop 任务数，从而提升整体性能。
 
-For these preceding dimensions, if the index `idx_a` performs no worse than the index `idx_b` in all three dimensions and performs better than `idx_b` in one dimension, then `idx_a` is preferred. When executing the `EXPLAIN FORMAT = 'verbose' ...` statement, if skyline-pruning excludes some indexes, TiDB outputs a NOTE-level warning listing the remaining indexes after the skyline-pruning exclusion.
+对于上述维度，如果索引 `idx_a` 在所有三个维度上都不劣于索引 `idx_b`，且在某一维度上优于 `idx_b`，则优先选择 `idx_a`。执行 `EXPLAIN FORMAT = 'verbose' ...` 语句时，如果 skyline-pruning 排除了一些索引，TiDB 会输出 NOTE 级别的警告，列出 skyline-pruning 排除后剩余的索引。
 
-In the following example, the indexes `idx_b` and `idx_e` are both inferior to `idx_b_c`, so they are excluded by skyline-pruning. The returned result of `SHOW WARNING` displays the remaining indexes after skyline-pruning.
+如下示例中，索引 `idx_b` 和 `idx_e` 都劣于 `idx_b_c`，因此被 skyline-pruning 排除。`SHOW WARNING` 的返回结果显示了 skyline-pruning 后剩余的索引。
 
 ```sql
 mysql> CREATE TABLE t(a INT PRIMARY KEY, b INT, c INT, d INT, e INT, INDEX idx_b(b), INDEX idx_b_c(b, c), INDEX idx_e(e));
@@ -110,48 +110,48 @@ mysql> SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-### Cost estimation-based selection
+### 基于成本估算的选择 {#cost-estimation-based-selection}
 
-After using the skyline-pruning rule to rule out inappropriate indexes, the selection of indexes is based entirely on the cost estimation. The cost estimation of accessing tables requires the following considerations:
+在使用 skyline-pruning 规则排除不合适的索引后，索引的选择完全基于成本估算。访问表的成本估算需要考虑以下因素：
 
-- The average length of each row of the indexed data in the storage engine.
-- The number of rows in the query range generated by the index.
-- The cost for retrieving rows from a table.
-- The number of ranges generated by index during the query execution.
+-   存储引擎中索引数据每行的平均长度。
+-   索引生成的查询范围内的行数。
+-   回表的成本。
+-   查询执行过程中索引生成的范围数。
 
-According to these factors and the cost model, the optimizer selects an index with the lowest cost to access the table.
+根据这些因素和成本模型，优化器会选择成本最低的索引访问表。
 
-#### Common tuning problems with cost estimation based selection
+#### 基于成本估算选择的常见调优问题 {#common-tuning-problems-with-cost-estimation-based-selection}
 
-1. The estimated number of rows is not accurate?
+1.  估算的行数不准确？
 
-    This is usually due to stale or inaccurate statistics. You can re-execute the `ANALYZE TABLE` statement or modify the parameters of the `ANALYZE TABLE` statement.
+    通常是由于统计信息过期或不准确。你可以重新执行 `ANALYZE TABLE` 语句，或修改 `ANALYZE TABLE` 语句的参数。
 
-2. Statistics are accurate, and reading from TiFlash is faster, but why does the optimizer choose to read from TiKV?
+2.  统计信息准确，且从 TiFlash 读取更快，但为什么优化器选择从 TiKV 读取？
 
-    At present, the cost model of distinguishing TiFlash from TiKV is still rough. You can decrease the value of [`tidb_opt_seek_factor`](/system-variables.md#tidb_opt_seek_factor) parameter, then the optimizer prefers to choose TiFlash.
+    目前区分 TiFlash 和 TiKV 的成本模型还比较粗糙。你可以降低 [`tidb_opt_seek_factor`](/system-variables.md#tidb_opt_seek_factor) 参数的值，使优化器更倾向于选择 TiFlash。
 
-3. The statistics are accurate. Index A needs to retrieve rows from tables, but it actually executes faster than Index B that does not retrieve rows from tables. Why does the optimizer choose Index B?
+3.  统计信息准确。索引 A 需要回表，但实际执行比不回表的索引 B 更快。为什么优化器选择了索引 B？
 
-    In this case, the cost estimation may be too large for retrieving rows from tables. You can decrease the value of [`tidb_opt_network_factor`](/system-variables.md#tidb_opt_network_factor) parameter to reduce the cost of retrieving rows from tables.
+    这种情况下，回表的成本估算可能过大。你可以降低 [`tidb_opt_network_factor`](/system-variables.md#tidb_opt_network_factor) 参数的值，以降低回表的成本。
 
-## Control index selection
+## 控制索引选择 {#control-index-selection}
 
-The index selection can be controlled by a single query through [Optimizer Hints](/optimizer-hints.md).
+可以通过 [优化器提示](/optimizer-hints.md) 在单条查询中控制索引选择。
 
-- `USE_INDEX` / `IGNORE_INDEX` can force the optimizer to use / not use certain indexes. `FORCE_INDEX` and `USE_INDEX` have the same effect.
+-   `USE_INDEX` / `IGNORE_INDEX` 可以强制优化器使用 / 不使用某些索引。`FORCE_INDEX` 和 `USE_INDEX` 效果相同。
 
-- `READ_FROM_STORAGE` can force the optimizer to choose the TiKV / TiFlash storage engine for certain tables to execute queries.
+-   `READ_FROM_STORAGE` 可以强制优化器为某些表选择 TiKV / TiFlash 存储引擎执行查询。
 
-## Use multi-valued indexes
+## 使用多值索引 {#use-multi-valued-indexes}
 
-[Multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes) are different from normal indexes. TiDB currently only uses [IndexMerge](/explain-index-merge.md) to access multi-valued indexes. Therefore, to use multi-valued indexes for data access, make sure that the value of the system variable [`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40) is set to `ON`.
+[多值索引](/sql-statements/sql-statement-create-index.md#multi-valued-indexes) 与普通索引不同。TiDB 目前仅通过 [IndexMerge](/explain-index-merge.md) 访问多值索引。因此，若要使用多值索引进行数据访问，请确保系统变量 [`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40) 的值为 `ON`。
 
-For the limitations of multi-valued indexes, refer to [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md#limitations).
+多值索引的限制请参见 [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md#limitations)。
 
-### Supported scenarios
+### 支持的场景 {#supported-scenarios}
 
-Currently, TiDB supports accessing multi-valued indexes using IndexMerge that is automatically converted from `json_member_of`, `json_contains`, and `json_overlaps` conditions. You can either rely on the optimizer to automatically select IndexMerge based on cost, or specify the selection of multi-valued indexes through the optimizer hint [`use_index_merge`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) or [`use_index`](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-). See the following examples:
+目前，TiDB 支持通过 IndexMerge 自动转换 `json_member_of`、`json_contains` 和 `json_overlaps` 条件访问多值索引。你可以依赖优化器根据成本自动选择 IndexMerge，也可以通过优化器提示 [`use_index_merge`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) 或 [`use_index`](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-) 指定选择多值索引。如下示例：
 
 ```sql
 mysql> CREATE TABLE t1 (j JSON, INDEX idx((CAST(j->'$.path' AS SIGNED ARRAY)))); -- Uses '$.path' as the path to create a multi-valued index
@@ -194,7 +194,7 @@ mysql> EXPLAIN SELECT /*+ use_index_merge(t1, idx) */ * FROM t1 WHERE JSON_OVERL
 6 rows in set, 1 warning (0.00 sec)
 ```
 
-The composite multi-valued index can also be accessed through IndexMerge:
+复合多值索引也可以通过 IndexMerge 访问：
 
 ```sql
 CREATE TABLE t2 (a INT, j JSON, b INT, k JSON, INDEX idx(a, (CAST(j->'$.path' AS SIGNED ARRAY)), b), INDEX idx2(b, (CAST(k->'$.path' AS SIGNED ARRAY))));
@@ -248,7 +248,7 @@ EXPLAIN SELECT /*+ use_index_merge(t2, idx, idx2) */ * FROM t2 WHERE (a=1 AND 1 
 +-------------------------------+---------+-----------+-----------------------------------------------------------------------------------+-----------------------------------------------------+
 ```
 
-TiDB can also use IndexMerge to access both multi-valued indexes and normal indexes. For example:
+TiDB 也可以通过 IndexMerge 同时访问多值索引和普通索引。例如：
 
 ```sql
 CREATE TABLE t3(j1 JSON, j2 JSON, a INT, INDEX k1((CAST(j1->'$.path' AS SIGNED ARRAY))), INDEX k2((CAST(j2->'$.path' AS SIGNED ARRAY))), INDEX ka(a));
@@ -279,13 +279,13 @@ EXPLAIN SELECT /*+ use_index_merge(t3, k1, k2, ka) */ * FROM t3 WHERE 1 member o
 +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+---------------------------------------------+
 ```
 
-If several `json_member_of`, `json_contains` or `json_overlaps` conditions are connected with `OR` or `AND`, they need to meet the following requirements to access multi-valued indexes with IndexMerge:
+如果多个 `json_member_of`、`json_contains` 或 `json_overlaps` 条件通过 `OR` 或 `AND` 连接，则需要满足以下要求才能通过 IndexMerge 访问多值索引：
 
 ```sql
 CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), INDEX mvi2((CAST(j->'$.b' AS UNSIGNED ARRAY))));
 ```
 
-- For conditions connected with `OR`, each of them needs to be able to be accessed with IndexMerge respectively. For example:
+-   对于通过 `OR` 连接的条件，每个条件都需要能分别通过 IndexMerge 访问。例如：
 
     ```sql
     EXPLAIN SELECT /*+ use_index_merge(t4, mvi1) */ * FROM t4 WHERE json_overlaps(j->'$.a', '[1, 2]') OR json_overlaps(j->'$.a', '[3, 4]');
@@ -306,8 +306,8 @@ CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), I
     |   ├─IndexRangeScan_9(Build)      | 10.00   | cop[tikv] | table:t4, index:mvi1(cast(json_extract(`j`, _utf8'$.a') as unsigned array)) | range:[4,4], keep order:false, stats:pseudo                                                                                                                |
     |   └─TableRowIDScan_10(Probe)     | 39.94   | cop[tikv] | table:t4                                                                    | keep order:false, stats:pseudo                                                                                                                             |
     +----------------------------------+---------+-----------+-----------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    
-    -- json_length(j->'$.a') = 3 cannot be accessed with IndexMerge directly, so TiDB cannot use IndexMerge for this SQL statement.
+
+    -- json_length(j->'$.a') = 3 不能直接通过 IndexMerge 访问，因此 TiDB 无法为该 SQL 使用 IndexMerge。
     > EXPLAIN SELECT /*+ use_index_merge(t4, mvi1) */ * FROM t4 WHERE json_overlaps(j->'$.a', '[1, 2]') OR json_length(j->'$.a') = 3;
     +-------------------------+----------+-----------+---------------+------------------------------------------------------------------------------------------------------------------------------------+
     | id                      | estRows  | task      | access object | operator info                                                                                                                      |
@@ -316,7 +316,7 @@ CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), I
     | └─TableReader_7         | 10000.00 | root      |               | data:TableFullScan_6                                                                                                               |
     |   └─TableFullScan_6     | 10000.00 | cop[tikv] | table:t4      | keep order:false, stats:pseudo                                                                                                     |
     +-------------------------+----------+-----------+---------------+------------------------------------------------------------------------------------------------------------------------------------+
-    
+
     > SHOW WARNINGS;
     +---------+------+----------------------------+
     | Level   | Code | Message                    |
@@ -325,7 +325,7 @@ CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), I
     +---------+------+----------------------------+
     ```
 
-- For conditions connected with `AND`, some of them need to be able to be accessed with IndexMerge respectively. TiDB can only use IndexMerge to access multi-valued indexes with these conditions. For example:
+-   对于通过 `AND` 连接的条件，只要部分条件能分别通过 IndexMerge 访问，TiDB 就可以用 IndexMerge 访问这些条件对应的多值索引。例如：
 
     ```sql
     EXPLAIN SELECT /*+ use_index_merge(t4, mvi1) */ * FROM t4 WHERE json_contains(j->'$.a', '[1, 2]') AND json_contains(j->'$.a', '[3, 4]');
@@ -344,8 +344,8 @@ CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), I
     | ├─IndexRangeScan_8(Build)     | 10.00   | cop[tikv] | table:t4, index:mvi1(cast(json_extract(`j`, _utf8'$.a') as unsigned array)) | range:[4,4], keep order:false, stats:pseudo |
     | └─TableRowIDScan_9(Probe)     | 0.00    | cop[tikv] | table:t4                                                                    | keep order:false, stats:pseudo              |
     +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+---------------------------------------------+
-    
-    -- json_length(j->'$.a') = 3 cannot be accessed with IndexMerge directly, so TiDB uses IndexMerge to access the other two json_contains conditions, and json_length(j->'$.a') = 3 becomes a Selection operator.
+
+    -- json_length(j->'$.a') = 3 不能直接通过 IndexMerge 访问，因此 TiDB 只对前两个 json_contains 条件使用 IndexMerge，json_length(j->'$.a') = 3 变为 Selection 算子。
     > EXPLAIN SELECT /*+ use_index_merge(t4, mvi1) */ * FROM t4 WHERE json_contains(j->'$.a', '[1, 2]') AND json_contains(j->'$.a', '[3, 4]') AND json_length(j->'$.a') = 2;
     +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+----------------------------------------------------+
     | id                            | estRows | task      | access object                                                               | operator info                                      |
@@ -360,9 +360,9 @@ CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), I
     +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+----------------------------------------------------+
     ```
 
-- All the conditions that are used for the IndexMerge must match the semantics of `OR` or `AND` that connects them.
+-   所有用于 IndexMerge 的条件必须与连接它们的 `OR` 或 `AND` 语义一致。
 
-    - If `json_contains` is connected with `AND`, it matches the semantics. For example:
+    -   如果 `json_contains` 通过 `AND` 连接，则语义一致。例如：
 
         ```sql
         EXPLAIN SELECT /*+ use_index_merge(t4, mvi1, mvi2) */ * FROM t4 WHERE json_contains(j->'$.a', '[1]') AND json_contains(j->'$.b', '[2, 3]');
@@ -381,7 +381,7 @@ CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), I
         | └─TableRowIDScan_8(Probe)     | 0.00    | cop[tikv] | table:t4                                                                    | keep order:false, stats:pseudo              |
         +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+---------------------------------------------+
 
-        -- The conditions do not match the semantics, so TiDB cannot use IndexMerge for this SQL statement as explained above.
+        -- 条件语义不一致，因此 TiDB 无法为该 SQL 使用 IndexMerge，如上所述。
         > EXPLAIN SELECT /*+ use_index_merge(t4, mvi1, mvi2) */ * FROM t4 WHERE json_contains(j->'$.a', '[1]') OR json_contains(j->'$.b', '[2, 3]');
         +-------------------------+----------+-----------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
         | id                      | estRows  | task      | access object | operator info                                                                                                                                           |
@@ -392,7 +392,7 @@ CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), I
         +-------------------------+----------+-----------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
         ```
 
-    - If `json_overlaps` is connected with `OR`, it matches the semantics. For example:
+    -   如果 `json_overlaps` 通过 `OR` 连接，则语义一致。例如：
 
         ```sql
         EXPLAIN SELECT /*+ use_index_merge(t4, mvi1, mvi2) */ * FROM t4 WHERE json_overlaps(j->'$.a', '[1]') OR json_overlaps(j->'$.b', '[2, 3]');
@@ -411,8 +411,8 @@ CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), I
         |   ├─IndexRangeScan_8(Build)     | 10.00   | cop[tikv] | table:t4, index:mvi2(cast(json_extract(`j`, _utf8'$.b') as unsigned array)) | range:[3,3], keep order:false, stats:pseudo                                                                                                             |
         |   └─TableRowIDScan_9(Probe)     | 29.97   | cop[tikv] | table:t4                                                                    | keep order:false, stats:pseudo                                                                                                                          |
         +---------------------------------+---------+-----------+-----------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-        
-        -- The conditions do not match the semantics, so TiDB can only use IndexMerge for part of the conditions of this SQL statement as explained above.
+
+        -- 条件语义不一致，因此 TiDB 只能对部分条件使用 IndexMerge，如上所述。
         > EXPLAIN SELECT /*+ use_index_merge(t4, mvi1, mvi2) */ * FROM t4 WHERE json_overlaps(j->'$.a', '[1]') AND json_overlaps(j->'$.b', '[2, 3]');
         +---------------------------------+---------+-----------+-----------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
         | id                              | estRows | task      | access object                                                               | operator info                                                                                                                                       |
@@ -424,8 +424,8 @@ CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), I
         +---------------------------------+---------+-----------+-----------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
         ```
 
-    - If `json_member_of` is connected with `OR` or `AND`, it matches the semantics. For example:
-        
+    -   如果 `json_member_of` 通过 `OR` 或 `AND` 连接，则语义一致。例如：
+
         ```sql
         EXPLAIN SELECT /*+ use_index_merge(t4, mvi1, mvi2) */ * FROM t4 WHERE 1 member of (j->'$.a') AND 2 member of (j->'$.b') AND 3 member of (j->'$.a');
         EXPLAIN SELECT /*+ use_index_merge(t4, mvi1, mvi2) */ * FROM t4 WHERE 1 member of (j->'$.a') OR 2 member of (j->'$.b') OR 3 member of (j->'$.a');
@@ -455,10 +455,10 @@ CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), I
         +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+---------------------------------------------+
         ```
 
-    - If `json_contains` conditions that contain multiple values are connected with `OR`, or `json_overlaps` conditions that contain multiple values are connected with `AND`, they do not match the semantics, but they match the semantics if they only contain one value. For example:
-        
+    -   如果包含多个值的 `json_contains` 条件通过 `OR` 连接，或包含多个值的 `json_overlaps` 条件通过 `AND` 连接，则语义不一致，但如果只包含一个值则语义一致。例如：
+
         ```sql
-        -- Refer to the preceding examples for conditions that do not match the semantics. The following only provides examples of conditions that match the semantics.
+        -- 语义不一致的情况见前述示例，以下仅给出语义一致的示例。
         EXPLAIN SELECT /*+ use_index_merge(t4, mvi1, mvi2) */ * FROM t4 WHERE json_overlaps(j->'$.a', '[1]') AND json_overlaps(j->'$.b', '[2]');
         EXPLAIN SELECT /*+ use_index_merge(t4, mvi1, mvi2) */ * FROM t4 WHERE json_contains(j->'$.a', '[1]') OR json_contains(j->'$.b', '[2]');
         ```
@@ -474,7 +474,7 @@ CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), I
         |   ├─IndexRangeScan_7(Build)     | 10.00   | cop[tikv] | table:t4, index:mvi2(cast(json_extract(`j`, _utf8'$.b') as unsigned array)) | range:[2,2], keep order:false, stats:pseudo                                                                                                      |
         |   └─TableRowIDScan_8(Probe)     | 0.01    | cop[tikv] | table:t4                                                                    | keep order:false, stats:pseudo                                                                                                                   |
         +---------------------------------+---------+-----------+-----------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
-        
+
         > EXPLAIN SELECT /*+ use_index_merge(t4, mvi1, mvi2) */ * FROM t4 WHERE json_contains(j->'$.a', '[1]') OR json_contains(j->'$.b', '[2]');
         +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+---------------------------------------------+
         | id                            | estRows | task      | access object                                                               | operator info                               |
@@ -486,15 +486,15 @@ CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), I
         +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+---------------------------------------------+
         ```
 
-    - When both `OR` and `AND` are used to connect conditions (essentially nested `OR` and `AND`), the conditions that constitute an IndexMerge must either all match the semantics of `OR` or all match the semantics of `AND`, not partially match the semantics of `OR` and partially match the semantics of `AND`. For example:
-        
+    -   当同时使用 `OR` 和 `AND` 连接条件（本质上是嵌套的 `OR` 和 `AND`）时，构成 IndexMerge 的条件必须要么全部匹配 `OR` 语义，要么全部匹配 `AND` 语义，不能部分匹配 `OR` 语义、部分匹配 `AND` 语义。例如：
+
         ```sql
         EXPLAIN SELECT /*+ use_index_merge(t4, mvi1, mvi2) */ * FROM t4 WHERE 1 member of (j->'$.a') AND (2 member of (j->'$.b') OR 3 member of (j->'$.a'));
         EXPLAIN SELECT /*+ use_index_merge(t4, mvi1, mvi2) */ * FROM t4 WHERE 1 member of (j->'$.a') OR (2 member of (j->'$.b') AND 3 member of (j->'$.a'));
         ```
 
         ```sql
-        -- Only 2 member of (j->'$.b') and 3 member of (j->'$.a') that match the semantics of OR constitute the IndexMerge. 1 member of (j->'$.a') that matches the semantics of AND is not included.
+        -- 只有 2 member of (j->'$.b') 和 3 member of (j->'$.a') 匹配 OR 语义，构成 IndexMerge。1 member of (j->'$.a') 匹配 AND 语义，不包含在内。
         > EXPLAIN SELECT /*+ use_index_merge(t4, mvi1, mvi2) */ * FROM t4 WHERE 1 member of (j->'$.a') AND (2 member of (j->'$.b') OR 3 member of (j->'$.a'));
         +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | id                            | estRows | task      | access object                                                               | operator info                                                                                                                                                                                                     |
@@ -506,7 +506,7 @@ CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), I
         |   └─TableRowIDScan_7          | 19.99   | cop[tikv] | table:t4                                                                    | keep order:false, stats:pseudo                                                                                                                                                                                    |
         +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-        -- Only 1 member of (j->'$.a') and 2 member of (j->'$.a') that match the semantics of OR constitute the IndexMerge. 2 member of (j->'$.b') that matches the semantics of AND is not included.
+        -- 只有 1 member of (j->'$.a') 和 2 member of (j->'$.a') 匹配 OR 语义，构成 IndexMerge。2 member of (j->'$.b') 匹配 AND 语义，不包含在内。
         > EXPLAIN SELECT /*+ use_index_merge(t4, mvi1, mvi2) */ * FROM t4 WHERE 1 member of (j->'$.a') OR (2 member of (j->'$.b') AND 3 member of (j->'$.a'));
         +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | id                            | estRows | task      | access object                                                               | operator info                                                                                                                                                                                                          |
@@ -519,16 +519,16 @@ CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), I
         +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         ```
 
-If conditions contain nested `OR`/`AND`, or if conditions correspond to only indexed columns after transformations, such as expansion, TiDB might not be able to use IndexMerge or make full use of all conditions. It is recommended to verify the behavior of each specific case.
+如果条件中包含嵌套的 `OR`/`AND`，或条件经过变换（如展开）后仅对应索引列，TiDB 可能无法使用 IndexMerge 或无法充分利用所有条件。建议对每个具体场景进行验证。
 
-The following are some examples:
+以下是一些示例：
 
 ```sql
 CREATE TABLE t5 (a INT, j JSON, b INT, k JSON, INDEX idx(a, (CAST(j AS SIGNED ARRAY))), INDEX idx2(b, (CAST(k as SIGNED ARRAY))));
 CREATE TABLE t6 (a INT, j JSON, b INT, k JSON, INDEX idx(a, (CAST(j AS SIGNED ARRAY)), b), INDEX idx2(a, (CAST(k as SIGNED ARRAY)), b));
 ```
 
-If `AND` is nested in conditions connected by `OR` and subconditions connected by `AND` correspond to the exact columns of a multi-column index, TiDB can usually make full use of the conditions. For example:
+如果 `AND` 嵌套在通过 `OR` 连接的条件中，且 `AND` 子条件正好对应多列索引的列，TiDB 通常可以充分利用这些条件。例如：
 
 ```sql
 EXPLAIN SELECT /*+ use_index_merge(t5, idx, idx2) */ * FROM t5 WHERE (a=1 AND 1 member of (j)) OR (b=2 AND 2 member of (k));
@@ -546,7 +546,7 @@ EXPLAIN SELECT /*+ use_index_merge(t5, idx, idx2) */ * FROM t5 WHERE (a=1 AND 1 
 +-------------------------------+---------+-----------+----------------------------------------------------+-------------------------------------------------+
 ```
 
-If a single `OR` is nested in conditions connected by `AND` and subconditions connected by `OR` correspond to the indexed columns after expansion, TiDB can usually make full use of the conditions. For example:
+如果单个 `OR` 嵌套在通过 `AND` 连接的条件中，且 `OR` 子条件经过展开后对应索引列，TiDB 通常可以充分利用这些条件。例如：
 
 ```sql
 EXPLAIN SELECT /*+ use_index_merge(t6, idx, idx2) */ * FROM t6 WHERE a=1 AND (1 member of (j) OR 2 member of (k));
@@ -564,7 +564,7 @@ EXPLAIN SELECT /*+ use_index_merge(t6, idx, idx2) */ * FROM t6 WHERE a=1 AND (1 
 +-------------------------------+---------+-----------+-------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
 ```
 
-If multiple `OR` are nested in conditions connected by `AND` and subconditions connected by `OR` need expansion to correspond to the index columns, TiDB might not be able to make full use of all conditions. For example:
+如果多个 `OR` 嵌套在通过 `AND` 连接的条件中，且 `OR` 子条件需要展开后才能对应索引列，TiDB 可能无法充分利用所有条件。例如：
 
 ```sql
 EXPLAIN SELECT /*+ use_index_merge(t6, idx, idx2) */ * FROM t6 WHERE a=1 AND (1 member of (j) OR 2 member of (k)) and (b = 1 OR b = 2);
@@ -572,7 +572,7 @@ EXPLAIN SELECT /*+ use_index_merge(t6, idx, idx2) */ * FROM t6 WHERE a=1 AND ((1
 ```
 
 ```sql
--- Due to current implementation limitations, (b = 1 or b = 2) does not constitute the IndexMerge, but becomes a Selection operator
+-- 由于当前实现限制，(b = 1 or b = 2) 不构成 IndexMerge，而是变为 Selection 算子
 > EXPLAIN SELECT /*+ use_index_merge(t6, idx, idx2) */ * FROM t6 WHERE a=1 AND (1 member of (j) OR 2 member of (k)) AND (b = 1 OR b = 2);
 +-------------------------------+---------+-----------+-------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | id                            | estRows | task      | access object                                         | operator info                                                                                                                                                |
@@ -584,7 +584,7 @@ EXPLAIN SELECT /*+ use_index_merge(t6, idx, idx2) */ * FROM t6 WHERE a=1 AND ((1
 |   └─TableRowIDScan_7          | 0.20    | cop[tikv] | table:t6                                              | keep order:false, stats:pseudo                                                                                                                               |
 +-------------------------------+---------+-----------+-------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
--- If you manually expand the two OR conditions connected with AND, TiDB can make full use of these conditions
+-- 如果手动展开通过 AND 连接的两个 OR 条件，TiDB 可以充分利用这些条件
 > EXPLAIN SELECT /*+ use_index_merge(t6, idx, idx2) */ * FROM t6 WHERE a=1 AND ((1 member of (j) AND b = 1) OR (1 member of (j) AND b = 2) OR (2 member of (k) AND b = 1) OR (2 member of (k) AND b = 2));
 +-------------------------------+---------+-----------+-------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | id                            | estRows | task      | access object                                         | operator info                                                                                                                                                                                                                                                                                                            |
@@ -599,7 +599,7 @@ EXPLAIN SELECT /*+ use_index_merge(t6, idx, idx2) */ * FROM t6 WHERE a=1 AND ((1
 +-------------------------------+---------+-----------+-------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-Limited by the current implementation of multi-valued indexes, using [`use_index`](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-) might return the `Can't find a proper physical plan for this query` error while using [`use_index_merge`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) will not return such an error. Therefore, it is recommended to use `use_index_merge` if you want to use multi-valued indexes.
+受当前多值索引实现限制，使用 [`use_index`](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-) 可能会返回 `Can't find a proper physical plan for this query` 错误，而使用 [`use_index_merge`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) 不会返回该错误。因此，如果你想使用多值索引，推荐使用 `use_index_merge`。
 
 ```sql
 mysql> EXPLAIN SELECT /*+ use_index(t3, idx) */ * FROM t3 WHERE ((1 member of (j)) AND (2 member of (j))) OR ((3 member of (j)) AND (4 member of (j)));
@@ -616,11 +616,11 @@ mysql> EXPLAIN SELECT /*+ use_index_merge(t3, idx) */ * FROM t3 WHERE ((1 member
 3 rows in set, 2 warnings (0.00 sec)
 ```
 
-### Multi-valued indexes and plan cache
+### 多值索引与执行计划缓存 {#multi-valued-indexes-and-plan-cache}
 
-A query plan that uses `member of` to choose multi-valued indexes can be cached. A query plan that uses the `JSON_CONTAINS()` or `JSON_OVERLAPS()` function to choose multi-valued indexes cannot be cached.
+使用 `member of` 选择多值索引的查询计划可以被缓存。使用 `JSON_CONTAINS()` 或 `JSON_OVERLAPS()` 选择多值索引的查询计划无法被缓存。
 
-The following are some examples that query plans can be cached:
+以下是可以缓存查询计划的示例：
 
 ```sql
 mysql> CREATE TABLE t5 (j1 JSON, j2 JSON, INDEX idx1((CAST(j1 AS SIGNED ARRAY))));
@@ -667,7 +667,7 @@ mysql> SELECT @@LAST_PLAN_FROM_CACHE; -- can hit plan cache if the JSON_CONTAINS
 1 row in set (0.00 sec)
 ```
 
-The following are some examples that query plans cannot be cached:
+以下是无法缓存查询计划的示例：
 
 ```sql
 mysql> PREPARE st2 FROM 'SELECT /*+ use_index(t5, idx1) */ * FROM t5 WHERE JSON_CONTAINS(j1, ?)';

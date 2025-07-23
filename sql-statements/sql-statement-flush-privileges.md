@@ -1,13 +1,13 @@
 ---
 title: FLUSH PRIVILEGES | TiDB SQL Statement Reference
-summary: An overview of the usage of FLUSH PRIVILEGES for the TiDB database.
+summary: 关于在 TiDB 数据库中使用 FLUSH PRIVILEGES 的概述。
 ---
 
 # FLUSH PRIVILEGES
 
-The statement `FLUSH PRIVILEGES` instructs TiDB to reload the in-memory copy of privileges from the privilege tables. You must execute this statement after manually editing tables such as `mysql.user`. However, executing this statement is not necessary after using privilege statements like `GRANT` or `REVOKE`. To execute this statement, the `RELOAD` privilege is required.
+语句 `FLUSH PRIVILEGES` 指示 TiDB 重新加载权限表中的权限到内存副本中。你必须在手动编辑诸如 `mysql.user` 之类的表后执行此语句。然而，在使用 `GRANT` 或 `REVOKE` 等权限语句后，执行此语句不是必需的。要执行此语句，需具备 `RELOAD` 权限。
 
-## Synopsis
+## 语法简介
 
 ```ebnf+diagram
 FlushStmt ::=
@@ -25,18 +25,18 @@ FlushOption ::=
 |   TableOrTables TableNameListOpt WithReadLockOpt
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> FLUSH PRIVILEGES;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-The `FLUSH PRIVILEGES` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB 中的 `FLUSH PRIVILEGES` 语句与 MySQL 完全兼容。如果你发现任何兼容性差异，[请报告一个 bug](https://docs.pingcap.com/tidb/stable/support)。
 
-## See also
+## 相关链接
 
 * [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
 

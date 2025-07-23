@@ -1,39 +1,39 @@
 ---
-title: String Functions
-summary: Learn about the string functions in TiDB.
+title: 字符串函数
+summary: 了解 TiDB 中的字符串函数。
 ---
 
-# String Functions
+# 字符串函数 {#string-functions}
 
-TiDB supports most of the [string functions](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html) available in MySQL 8.0, and some of the [functions](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlqr/SQL-Functions.html#GUID-93EC62F8-415D-4A7E-B050-5D5B2C127009) available in Oracle 21.
+TiDB 支持 MySQL 8.0 中大多数 [字符串函数](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html)，以及部分 Oracle 21 中的 [函数](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlqr/SQL-Functions.html#GUID-93EC62F8-415D-4A7E-B050-5D5B2C127009)。
 
 <CustomContent platform="tidb">
 
-For comparisons between functions and syntax of Oracle and TiDB, see [Comparisons between Functions and Syntax of Oracle and TiDB](/oracle-functions-to-tidb.md).
+关于 Oracle 与 TiDB 函数和语法的对比，参见 [Oracle 与 TiDB 函数和语法对比](/oracle-functions-to-tidb.md)。
 
 </CustomContent>
 
-## Supported functions
+## 支持的函数 {#supported-functions}
 
-### [`ASCII()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ascii)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ascii"><code>ASCII()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-ascii-code-ascii-code-a}
 
-The `ASCII(str)` function is used to get the ASCII value of the leftmost character in the given argument. The argument can be either a string or a number.
+`ASCII(str)` 函数用于获取给定参数最左侧字符的 ASCII 值。参数可以是字符串或数字。
 
-- If the argument is not empty, the function returns the ASCII value of the leftmost character.
-- If the argument is an empty string, the function returns `0`.
-- If the argument is `NULL`, the function returns `NULL`.
+-   如果参数非空，函数返回最左侧字符的 ASCII 值。
+-   如果参数为空字符串，函数返回 `0`。
+-   如果参数为 `NULL`，函数返回 `NULL`。
 
 > **Note:**
 >
-> `ASCII(str)` only works for characters represented using 8 bits of binary digits (one byte).
+> `ASCII(str)` 只适用于用 8 位二进制位（一个字节）表示的字符。
 
-Example:
+示例：
 
 ```sql
 SELECT ASCII('A'), ASCII('TiDB'), ASCII(23);
 ```
 
-Output:
+输出：
 
 ```sql
 +------------+---------------+-----------+
@@ -43,24 +43,24 @@ Output:
 +------------+---------------+-----------+
 ```
 
-### [`BIN()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bin)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bin"><code>BIN()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-bin-code-bin-code-a}
 
-The `BIN()` function is used to convert the given argument into a string representation of its binary value. The argument can be either a string or a number.
+`BIN()` 函数用于将给定参数转换为其二进制值的字符串表示。参数可以是字符串或数字。
 
-- If the argument is a positive number, the function returns a string representation of its binary value.
-- If the argument is a negative number, the function converts the absolute value of the argument to its binary representation, inverts each bit of the binary value (changing `0` to `1` and `1` to `0`), and then adds `1` to the inverted value.
-- If the argument is a string containing only digits, the function returns the result according to those digits. For example, the results for `"123"` and `123` are the same.
-- If the argument is a string and its first character is not a digit (such as `"q123"`), the function returns `0`.
-- If the argument is a string that consists of digits and non-digits, the function returns the result according to the consecutive digits at the beginning of the argument. For example, the results for `"123q123"` and `123` are the same, but `BIN('123q123')` generates a warning like `Truncated incorrect INTEGER value: '123q123'`.
-- If the argument is `NULL`, the function returns `NULL`.
+-   如果参数为正数，函数返回其二进制值的字符串表示。
+-   如果参数为负数，函数将参数的绝对值转换为二进制表示，对二进制值的每一位取反（`0` 变为 `1`，`1` 变为 `0`），然后加 `1`。
+-   如果参数为仅包含数字的字符串，函数根据这些数字返回结果。例如，`"123"` 和 `123` 的结果相同。
+-   如果参数为字符串且首字符不是数字（如 `"q123"`），函数返回 `0`。
+-   如果参数为包含数字和非数字的字符串，函数根据参数开头连续的数字部分返回结果。例如，`"123q123"` 和 `123` 的结果相同，但 `BIN('123q123')` 会产生类似 `Truncated incorrect INTEGER value: '123q123'` 的警告。
+-   如果参数为 `NULL`，函数返回 `NULL`。
 
-Example 1:
+示例 1：
 
 ```sql
 SELECT BIN(123), BIN('123q123');
 ```
 
-Output 1:
+输出 1：
 
 ```sql
 +----------+----------------+
@@ -70,13 +70,13 @@ Output 1:
 +----------+----------------+
 ```
 
-Example 2:
+示例 2：
 
 ```sql
 SELECT BIN(-7);
 ```
 
-Output 2:
+输出 2：
 
 ```sql
 +------------------------------------------------------------------+
@@ -86,11 +86,11 @@ Output 2:
 +------------------------------------------------------------------+
 ```
 
-### [`BIT_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bit-length)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bit-length"><code>BIT_LENGTH()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-bit-length-code-bit-length-code-a}
 
-The `BIT_LENGTH()` function is used to return the length of a given argument in bits.
+`BIT_LENGTH()` 函数用于返回给定参数的比特位长度。
 
-Examples:
+示例：
 
 ```sql
 SELECT BIT_LENGTH("TiDB");
@@ -102,7 +102,7 @@ SELECT BIT_LENGTH("TiDB");
 +--------------------+
 ```
 
-8 bits per character x 4 characters = 32 bits
+每个字符 8 位 × 4 个字符 = 32 位
 
 ```sql
 SELECT BIT_LENGTH("PingCAP 123");
@@ -114,7 +114,7 @@ SELECT BIT_LENGTH("PingCAP 123");
 +---------------------------+
 ```
 
-8 bits per character (space is counted because it is a non-alphanumeric character) x 11 characters = 88 bits
+每个字符 8 位（空格也计入，因为它是非字母数字字符）× 11 个字符 = 88 位
 
 ```sql
 SELECT CustomerName, BIT_LENGTH(CustomerName) AS BitLengthOfName FROM Customers;
@@ -129,13 +129,13 @@ SELECT CustomerName, BIT_LENGTH(CustomerName) AS BitLengthOfName FROM Customers;
 
 > **Note:**
 >
-> The preceding example operates under the assumption that there is a database with a table named `Customers` and a column inside the table named `CustomerName`.
+> 上述示例假设存在一个名为 `Customers` 的数据库表，并且表中有一个名为 `CustomerName` 的列。
 
-### [`CHAR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char"><code>CHAR()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-char-code-char-code-a}
 
-The `CHAR()` function is used to get the corresponding character of a specific ASCII value. It performs the opposite operation of `ASCII()`, which returns the ASCII value of a specific character. If multiple arguments are supplied, the function works on all arguments and are then concatenated together.
+`CHAR()` 函数用于获取指定 ASCII 值对应的字符。它与 `ASCII()` 的操作相反，`ASCII()` 返回指定字符的 ASCII 值。如果传入多个参数，函数会对所有参数分别操作并将结果拼接在一起。
 
-Examples:
+示例：
 
 ```sql
 SELECT CHAR(65);
@@ -157,7 +157,7 @@ SELECT CHAR(84);
 +------------+
 ```
 
-The `CHAR()` function can also be used to get the corresponding character of ASCII values that extend beyond the standard ASCII range (`0` - `127`).
+`CHAR()` 函数也可以获取超出标准 ASCII 范围（`0` - `127`）的 ASCII 值对应的字符。
 
 ```sql
 /*For extended ASCII: */
@@ -171,7 +171,7 @@ SELECT CHAR(128);
 +------------+
 ```
 
-The `CHAR()` function can also get the corresponding character value of a unicode value.
+`CHAR()` 函数还可以获取 Unicode 值对应的字符。
 
 ```sql
 /* For Unicode: */
@@ -191,20 +191,18 @@ SELECT CHAR(50089);
 SELECT CHAR(65,66,67);
 ```
 
-```
-+----------------+
-| CHAR(65,66,67) |
-+----------------+
-| ABC            |
-+----------------+
-1 row in set (0.00 sec)
-```
+    +----------------+
+    | CHAR(65,66,67) |
+    +----------------+
+    | ABC            |
+    +----------------+
+    1 row in set (0.00 sec)
 
-### [`CHAR_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char-length)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char-length"><code>CHAR_LENGTH()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-char-length-code-char-length-code-a}
 
-The `CHAR_LENGTH()` function is used to get the total number of characters in a given argument as an integer.
+`CHAR_LENGTH()` 函数用于获取给定参数的字符总数，返回整数。
 
-Examples:
+示例：
 
 ```sql
 SELECT CHAR_LENGTH("TiDB") AS LengthOfString;
@@ -229,31 +227,31 @@ SELECT CustomerName, CHAR_LENGTH(CustomerName) AS LengthOfName FROM Customers;
 
 > **Note:**
 >
-> The preceding example operates under the assumption that there is a database with a table named `Customers` and a column inside the table named `CustomerName`.
+> 上述示例假设存在一个名为 `Customers` 的数据库表，并且表中有一个名为 `CustomerName` 的列。
 
-### [`CHARACTER_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_character-length)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_character-length"><code>CHARACTER_LENGTH()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-character-length-code-character-length-code-a}
 
-The `CHARACTER_LENGTH()` function is the same as the `CHAR_LENGTH()` function. Both functions can be used synonymously because they generate the same output.
+`CHARACTER_LENGTH()` 函数与 `CHAR_LENGTH()` 函数等价。两者可以互换使用，输出结果相同。
 
-### [`CONCAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat"><code>CONCAT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-concat-code-concat-code-a}
 
-The `CONCAT()` function concatenates one or more arguments into a single string.
+`CONCAT()` 函数将一个或多个参数拼接为单个字符串。
 
-Syntax:
+语法：
 
 ```sql
 CONCAT(str1,str2,...)
 ```
 
-`str1, str2, ...` is a list of arguments to be concatenated. Each argument can be a string or a number.
+`str1, str2, ...` 是要拼接的参数列表。每个参数可以是字符串或数字。
 
-Example:
+示例：
 
 ```sql
 SELECT CONCAT('TiDB', ' ', 'Server', '-', 1, TRUE);
 ```
 
-Output:
+输出：
 
 ```sql
 +---------------------------------------------+
@@ -263,15 +261,15 @@ Output:
 +---------------------------------------------+
 ```
 
-If any of the arguments is `NULL`, `CONCAT()` returns `NULL`.
+如果任一参数为 `NULL`，`CONCAT()` 返回 `NULL`。
 
-Example:
+示例：
 
 ```sql
 SELECT CONCAT('TiDB', NULL, 'Server');
 ```
 
-Output:
+输出：
 
 ```sql
 +--------------------------------+
@@ -281,13 +279,13 @@ Output:
 +--------------------------------+
 ```
 
-In addition to the `CONCAT()` function, you can concatenate strings by placing them adjacent to each other as in the following example. Note that this method does not support numeric types.
+除了 `CONCAT()` 函数外，还可以通过将字符串直接相邻拼接的方式实现字符串拼接，如下例所示。注意该方法不支持数值类型。
 
 ```sql
 SELECT 'Ti' 'DB' ' ' 'Server';
 ```
 
-Output:
+输出：
 
 ```sql
 +-------------+
@@ -297,26 +295,26 @@ Output:
 +-------------+
 ```
 
-### [`CONCAT_WS()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat-ws)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat-ws"><code>CONCAT_WS()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-concat-ws-code-concat-ws-code-a}
 
-The `CONCAT_WS()` function is a form of [`CONCAT()`](#concat) with a separator, which returns a string concatenated by the specified separator.
+`CONCAT_WS()` 函数是带分隔符的 [`CONCAT()`](#concat) 变体，返回由指定分隔符拼接的字符串。
 
-Syntax:
+语法：
 
 ```sql
 CONCAT_WS(separator,str1,str2,...)
 ```
 
-- `separator`: the first argument is the separator, which concatenates the remaining arguments that are not `NULL`.
-- `str1, str2, ...`: a list of arguments to be concatenated. Each argument can be a string or a number.
+-   `separator`：第一个参数为分隔符，用于拼接剩余非 `NULL` 参数。
+-   `str1, str2, ...`：要拼接的参数列表。每个参数可以是字符串或数字。
 
-Example:
+示例：
 
 ```sql
 SELECT CONCAT_WS(',', 'TiDB Server', 'TiKV', 'PD');
 ```
 
-Output:
+输出：
 
 ```sql
 +---------------------------------------------+
@@ -326,15 +324,15 @@ Output:
 +---------------------------------------------+
 ```
 
-- If the separator is an empty string, `CONCAT_WS()` is equivalent to `CONCAT()` and returns the concatenated string of the remaining arguments.
+-   如果分隔符为空字符串，`CONCAT_WS()` 等价于 `CONCAT()`，返回剩余参数拼接后的字符串。
 
-    Example:
+    示例：
 
     ```sql
     SELECT CONCAT_WS('', 'TiDB Server', 'TiKV', 'PD');
     ```
 
-    Output:
+    输出：
 
     ```sql
     +--------------------------------------------+
@@ -344,15 +342,15 @@ Output:
     +--------------------------------------------+
     ```
 
-- If the separator is `NULL`, `CONCAT_WS()` returns `NULL`.
+-   如果分隔符为 `NULL`，`CONCAT_WS()` 返回 `NULL`。
 
-    Example:
+    示例：
 
     ```sql
     SELECT CONCAT_WS(NULL, 'TiDB Server', 'TiKV', 'PD');
     ```
 
-    Output:
+    输出：
 
     ```sql
     +----------------------------------------------+
@@ -362,15 +360,15 @@ Output:
     +----------------------------------------------+
     ```
 
-- If only one of the arguments to be concatenated is not `NULL`, `CONCAT_WS()` returns that argument.
+-   如果仅有一个待拼接参数非 `NULL`，`CONCAT_WS()` 返回该参数。
 
-    Example:
+    示例：
 
     ```sql
     SELECT CONCAT_WS(',', 'TiDB Server', NULL);
     ```
 
-    Output:
+    输出：
 
     ```sql
     +-------------------------------------+
@@ -380,15 +378,15 @@ Output:
     +-------------------------------------+
     ```
 
-- If there are `NULL` arguments to be concatenated, `CONCAT_WS()` skips these `NULL` arguments.
+-   如果待拼接参数中有 `NULL`，`CONCAT_WS()` 会跳过这些 `NULL` 参数。
 
-    Example:
+    示例：
 
     ```sql
     SELECT CONCAT_WS(',', 'TiDB Server', NULL, 'PD');
     ```
 
-    Output:
+    输出：
 
     ```sql
     +-------------------------------------------+
@@ -398,15 +396,15 @@ Output:
     +-------------------------------------------+
     ```
 
-- If there are empty strings to be concatenated, `CONCAT_WS()` does not skip empty strings.
+-   如果待拼接参数中有空字符串，`CONCAT_WS()` 不会跳过空字符串。
 
-    Example:
+    示例：
 
     ```sql
     SELECT CONCAT_WS(',', 'TiDB Server', '', 'PD');
     ```
 
-    Output:
+    输出：
 
     ```sql
     +-----------------------------------------+
@@ -416,9 +414,9 @@ Output:
     +-----------------------------------------+
     ```
 
-### [`ELT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_elt)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_elt"><code>ELT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-elt-code-elt-code-a}
 
-The `ELT()` function returns the element at the index number.
+`ELT()` 函数返回指定索引位置的元素。
 
 ```sql
 SELECT ELT(3, 'This', 'is', 'TiDB');
@@ -433,27 +431,27 @@ SELECT ELT(3, 'This', 'is', 'TiDB');
 1 row in set (0.00 sec)
 ```
 
-The preceding example returns the third element, which is `'TiDB'`.
+上述示例返回第三个元素，即 `'TiDB'`。
 
-### [`EXPORT_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_export-set)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_export-set"><code>EXPORT_SET()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-export-set-code-export-set-code-a}
 
-The `EXPORT_SET()` function returns a string that consists of a specified number (`number_of_bits`) of `on`/`off` values, optionally separated by `separator`. These values are based on whether the corresponding bit in the `bits` argument is `1`, where the first value corresponds to the rightmost (lowest) bit of `bits`.
+`EXPORT_SET()` 函数返回一个由指定数量（`number_of_bits`）的 `on`/`off` 值组成的字符串，值之间可选用 `separator` 分隔。这些值基于 `bits` 参数中对应位是否为 `1`，第一个值对应 `bits` 的最右侧（最低位）。
 
-Syntax:
+语法：
 
 ```sql
 EXPORT_SET(bits, on, off, [separator[, number_of_bits]])
 ```
 
-- `bits`: an integer representing the bit value.
-- `on`: the string to be returned if the corresponding bit is `1`.
-- `off`: the string to be returned if the corresponding bit is `0`.
-- `separator` (optional): the separator character in the result string.
-- `number_of_bits` (optional): the number of bits to be processed. If it is not set, `64` (the max size of bits) is used by default, which means that `bits` is treated as an unsigned 64-bit integer.
+-   `bits`：表示位值的整数。
+-   `on`：对应位为 `1` 时返回的字符串。
+-   `off`：对应位为 `0` 时返回的字符串。
+-   `separator`（可选）：结果字符串中的分隔符。
+-   `number_of_bits`（可选）：要处理的位数。如果未设置，默认使用 `64`（位最大长度），即将 `bits` 视为无符号 64 位整数。
 
-Examples:
+示例：
 
-In the following example, `number_of_bits` is set to `5`, resulting in 5 values, separated by `|`. Because only 3 bits are given, the other bits are considered unset. Therefore, setting `number_of_bits` to either `101` or `00101` results in the same output.
+下例中，`number_of_bits` 设置为 `5`，因此有 5 个值，用 `|` 分隔。由于只给了 3 位，其他位视为未设置。因此，`number_of_bits` 设置为 `101` 或 `00101`，输出相同。
 
 ```sql
 SELECT EXPORT_SET(b'101',"ON",'off','|',5);
@@ -468,7 +466,7 @@ SELECT EXPORT_SET(b'101',"ON",'off','|',5);
 1 row in set (0.00 sec)
 ```
 
-In the following example, `bits` is set to `00001111`, `on` is set to `x`, and `off` is set to `_`. This causes the function to return `____` for the `0` bits and `xxxx` for the `1` bits. Therefore, when processing with the bits in `00001111` from right to left, the function returns `xxxx____`.
+下例中，`bits` 为 `00001111`，`on` 为 `x`，`off` 为 `_`，函数对 `0` 位返回 `____`，对 `1` 位返回 `xxxx`。从右到左处理 `00001111`，返回 `xxxx____`。
 
 ```sql
 SELECT EXPORT_SET(b'00001111', 'x', '_', '', 8);
@@ -483,7 +481,7 @@ SELECT EXPORT_SET(b'00001111', 'x', '_', '', 8);
 1 row in set (0.00 sec)
 ```
 
-In the following example, `bits` is set to `00001111`, `on` is set to `x`, and `off` is set to `_`. This causes the function to return `x` for each `1` bit and `_` for each `0` bit. Therefore, when processing with the bits in `01010101` from right to left, the function returns `x_x_x_x_`.
+下例中，`bits` 为 `01010101`，`on` 为 `x`，`off` 为 `_`，从右到左处理，返回 `x_x_x_x_`。
 
 ```sql
 SELECT EXPORT_SET(b'01010101', 'x', '_', '', 8);
@@ -498,11 +496,11 @@ SELECT EXPORT_SET(b'01010101', 'x', '_', '', 8);
 1 row in set (0.00 sec)
 ```
 
-### [`FIELD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_field)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_field"><code>FIELD()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-field-code-field-code-a}
 
-Return the index (position) of the first argument in the subsequent arguments.
+返回第一个参数在后续参数中的索引（位置）。
 
-In the following example, the first argument of `FIELD()` is `needle`, and it matches the second argument in the following list, so the function returns `2`.
+下例中，`FIELD()` 的第一个参数为 `needle`，它与后续参数列表中的第二个参数匹配，因此函数返回 `2`。
 
 ```sql
 SELECT FIELD('needle', 'A', 'needle', 'in', 'a', 'haystack');
@@ -514,13 +512,13 @@ SELECT FIELD('needle', 'A', 'needle', 'in', 'a', 'haystack');
 1 row in set (0.00 sec)
 ```
 
-### [`FIND_IN_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_find-in-set)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_find-in-set"><code>FIND_IN_SET()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-find-in-set-code-find-in-set-code-a}
 
-Return the index position of the first argument within the second argument.
+返回第一个参数在第二个参数中的索引位置。
 
-This function is often used with the [`SET`](/data-type-string.md#set-type) data type.
+该函数常与 [`SET`](/data-type-string.md#set-type) 数据类型配合使用。
 
-In the following example, `Go` is the fourth element in the set `COBOL,BASIC,Rust,Go,Java,Fortran`, so the function returns `4`.
+下例中，`Go` 是集合 `COBOL,BASIC,Rust,Go,Java,Fortran` 中的第四个元素，因此函数返回 `4`。
 
 ```sql
 SELECT FIND_IN_SET('Go', 'COBOL,BASIC,Rust,Go,Java,Fortran');
@@ -532,28 +530,28 @@ SELECT FIND_IN_SET('Go', 'COBOL,BASIC,Rust,Go,Java,Fortran');
 1 row in set (0.00 sec)
 ```
 
-### [`FORMAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_format)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_format"><code>FORMAT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-format-code-format-code-a}
 
-The `FORMAT(X,D[,locale])` function is used to format the number `X` to a format similar to `"#,###,###. ##"`, rounded to `D` decimal places, and return the result as a string.
+`FORMAT(X,D[,locale])` 函数用于将数字 `X` 格式化为类似 `"#,###,###. ##"` 的格式，四舍五入到 `D` 位小数，并以字符串形式返回结果。
 
-Arguments:
+参数说明：
 
-- `X`: the number to be formatted. It can be a direct numeric value, a numeric string, or a number in scientific notation.
-- `D`: the number of decimal places for the returned value. The function rounds the number `X` to `D` decimal places. If `D` is greater than the actual number of decimal places in `X`, the result is padded with zeros to the corresponding length.
-- `[locale]`: specifies a locale setting to be used for grouping between decimal points, thousands separators, and separators for resultant numbers. A valid locale value is the same as the valid value of the [`lc_time_names`](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_lc_time_names) system variable. If not specified or the region setting is `NULL`, the `'en_US'` region setting is used by default. This argument is optional.
+-   `X`：要格式化的数字。可以是直接的数值、数字字符串或科学计数法表示的数字。
+-   `D`：返回值的小数位数。函数会将数字 `X` 四舍五入到 `D` 位小数。如果 `D` 大于 `X` 实际的小数位数，结果会补零到相应长度。
+-   `[locale]`：指定用于小数点、千位分隔符和结果数字分隔符的区域设置。有效的区域值与 [`lc_time_names`](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_lc_time_names) 系统变量的有效值相同。如果未指定或区域设置为 `NULL`，则默认使用 `'en_US'`。该参数为可选项。
 
-Behaviors:
+行为说明：
 
-- If the first argument is a string and contains only numbers, the function returns a result based on that numeric value. For example, `FORMAT('12.34', 1)` and `FORMAT(12.34, 1)` return the same result.
-- If the first argument is a number represented in scientific notation (using `E/e`), the function returns the result based on that number. For example, `FORMAT('1E2', 3)` returns `100.000`.
-- If the first argument is a string starting with non-numeric characters, the function returns zero and a warning `(Code 1292)`. For example, `FORMAT('q12.36', 5)` returns `0.00000`, but also includes a warning `Warning (Code 1292): Truncated incorrect DOUBLE value: 'q12.36'`.
-- If the first argument is a string mixing numbers and non-numbers, the function returns a result based on the consecutive numeric part at the beginning of the argument, and also includes a warning `(Code 1292)`. For example, `FORMAT('12.36q56.78', 1)` returns the same numeric result as `FORMAT('12.36', 1)`, but includes a warning `Warning (Code 1292): Truncated incorrect DOUBLE value: '12.36q56.78'`.
-- If the second argument is zero or a negative number, the function truncates the decimal part and returns an integer.
-- If any of the arguments is `NULL`, the function returns `NULL`.
+-   如果第一个参数为仅包含数字的字符串，函数根据该数值返回结果。例如，`FORMAT('12.34', 1)` 和 `FORMAT(12.34, 1)` 返回相同结果。
+-   如果第一个参数为科学计数法（带 `E/e`）表示的数字，函数根据该数值返回结果。例如，`FORMAT('1E2', 3)` 返回 `100.000`。
+-   如果第一个参数为以非数字字符开头的字符串，函数返回零并产生警告 `(Code 1292)`。例如，`FORMAT('q12.36', 5)` 返回 `0.00000`，同时有警告 `Warning (Code 1292): Truncated incorrect DOUBLE value: 'q12.36'`。
+-   如果第一个参数为数字和非数字混合的字符串，函数根据参数开头连续的数字部分返回结果，并产生警告 `(Code 1292)`。例如，`FORMAT('12.36q56.78', 1)` 返回与 `FORMAT('12.36', 1)` 相同的数值结果，但有警告 `Warning (Code 1292): Truncated incorrect DOUBLE value: '12.36q56.78'`。
+-   如果第二个参数为零或负数，函数会截断小数部分并返回整数。
+-   如果任一参数为 `NULL`，函数返回 `NULL`。
 
-Examples:
+示例：
 
-The following examples show how to format the number 12.36 to different decimal places:
+以下示例展示如何将数字 12.36 格式化为不同的小数位数：
 
 ```sql
 mysql> SELECT FORMAT(12.36, 1);
@@ -582,16 +580,16 @@ mysql> SELECT FORMAT(12.36, 2);
 +------------------+
 ```
 
-### [`FROM_BASE64()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_from-base64)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_from-base64"><code>FROM_BASE64()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-from-base64-code-from-base64-code-a}
 
-The `FROM_BASE64()` function is used to decode a [Base64](https://datatracker.ietf.org/doc/html/rfc4648) encoded string and return the decoded result in its hexadecimal form.
+`FROM_BASE64()` 函数用于解码 [Base64](https://datatracker.ietf.org/doc/html/rfc4648) 编码的字符串，并以十六进制形式返回解码结果。
 
-- This function accepts a single argument, that is, the Base64 encoded string to be decoded.
-- If the argument is `NULL` or not a valid Base64 encoded string, the `FROM_BASE64()` function returns `NULL`.
+-   该函数只接受一个参数，即要解码的 Base64 编码字符串。
+-   如果参数为 `NULL` 或不是有效的 Base64 编码字符串，`FROM_BASE64()` 返回 `NULL`。
 
-Examples:
+示例：
 
-The following example shows how to decode the Base64 encoded string `'SGVsbG8gVGlEQg=='`. This string is the result of encoding `'Hello TiDB'`, using the [`TO_BASE64()`](#to_base64) function.
+下例展示如何解码 Base64 编码字符串 `'SGVsbG8gVGlEQg=='`。该字符串是使用 [`TO_BASE64()`](#to_base64) 函数对 `'Hello TiDB'` 编码的结果。
 
 ```sql
 mysql> SELECT TO_BASE64('Hello TiDB');
@@ -618,7 +616,7 @@ mysql> SELECT CONVERT(FROM_BASE64('SGVsbG8gVGlEQg==') USING utf8mb4);
 +--------------------------------------------------------+
 ```
 
-The following example shows how to decode the Base64 encoded number `MTIzNDU2`. This string is the result of encoding `123456`, which can be done using the [`TO_BASE64()`](#to_base64) function.
+下例展示如何解码 Base64 编码数字 `MTIzNDU2`。该字符串是对 `123456` 使用 [`TO_BASE64()`](#to_base64) 编码的结果。
 
 ```sql
 mysql> SELECT FROM_BASE64('MTIzNDU2');
@@ -629,19 +627,19 @@ mysql> SELECT FROM_BASE64('MTIzNDU2');
 +--------------------------------------------------+
 ```
 
-### [`HEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_hex)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_hex"><code>HEX()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-hex-code-hex-code-a}
 
-The `HEX()` function is used to convert the given argument into a string representation of its hexadecimal value. The argument can be either a string or a number.
+`HEX()` 函数用于将给定参数转换为其十六进制值的字符串表示。参数可以是字符串或数字。
 
-- If the argument is a string, `HEX(str)` returns a hexadecimal string representation of `str`. The function converts each byte of each character in `str` into two hexadecimal digits. For example, the character `a` in a UTF-8 or ASCII character set is represented as a binary value of `00111101`, or `61` in hexadecimal notation.
-- If the argument is a number, `HEX(n)` returns a hexadecimal string representation of `n`. The function treats the argument `n` as a `BIGINT` number, equivalent to using `CONV(n, 10, 16)`.
-- If the argument is `NULL`, the function returns `NULL`.
+-   如果参数为字符串，`HEX(str)` 返回 `str` 的十六进制字符串表示。函数将 `str` 中每个字符的每个字节转换为两个十六进制数字。例如，字符 `a` 在 UTF-8 或 ASCII 字符集下的二进制值为 `00111101`，十六进制为 `61`。
+-   如果参数为数字，`HEX(n)` 返回 `n` 的十六进制字符串表示。函数将参数 `n` 视为 `BIGINT` 数字，等价于 `CONV(n, 10, 16)`。
+-   如果参数为 `NULL`，函数返回 `NULL`。
 
 > **Note:**
 >
-> In the MySQL client, the [`--binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex) option is enabled by default in interactive mode, causing the client to display data with an unknown character set as a [hexadecimal literal](https://dev.mysql.com/doc/refman/8.0/en/hexadecimal-literals.html). You can use the `--skip-binary-as-hex` option to disable this behavior.
+> 在 MySQL 客户端中，交互模式下默认启用 [`--binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex) 选项，会将未知字符集的数据以 [十六进制字面量](https://dev.mysql.com/doc/refman/8.0/en/hexadecimal-literals.html) 显示。你可以使用 `--skip-binary-as-hex` 选项关闭该行为。
 
-Examples (with `mysql --skip-binary-as-hex`):
+示例（使用 `mysql --skip-binary-as-hex`）：
 
 ```sql
 SELECT X'616263', HEX('abc'), UNHEX(HEX('abc')), 0x616263;
@@ -679,15 +677,15 @@ SELECT HEX(NULL);
 +-----------+
 ```
 
-### [`INSERT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_insert)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_insert"><code>INSERT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-insert-code-insert-code-a}
 
-The `INSERT(str, pos, len, newstr)` function is used to replace a substring in `str` (that starts at position `pos` and is `len` characters long) with the string `newstr`. This function is multibyte safe.
+`INSERT(str, pos, len, newstr)` 函数用于将 `str` 中从位置 `pos` 开始、长度为 `len` 的子串替换为字符串 `newstr`。该函数支持多字节字符。
 
-- If `pos` exceeds the length of `str`, the function returns the original string `str` without modification.
-- If `len` exceeds the remaining length of `str` from position `pos`, the function replaces the rest of the string from position `pos`.
-- If any argument is `NULL`, the function returns `NULL`.
+-   如果 `pos` 超过 `str` 的长度，函数返回原始字符串 `str`，不做修改。
+-   如果 `len` 超过从 `pos` 开始剩余的字符串长度，函数会替换从 `pos` 开始的剩余部分。
+-   如果任一参数为 `NULL`，函数返回 `NULL`。
 
-Examples:
+示例：
 
 ```sql
 SELECT INSERT('He likes tennis', 4, 5, 'plays');
@@ -743,19 +741,19 @@ SELECT INSERT('あああああああ', 2, 3, 'xx');
 +---------------------------------------------+
 ```
 
-### [`INSTR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_instr)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_instr"><code>INSTR()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-instr-code-instr-code-a}
 
-The `INSTR(str, substr)` function is used to get the position of the first occurrence of `substr` in `str`. Each argument can be either a string or a number. This function is the same as the two-argument version of [`LOCATE(substr, str)`](#locate), but with the order of the arguments reversed.
+`INSTR(str, substr)` 函数用于获取 `substr` 在 `str` 中首次出现的位置。每个参数可以是字符串或数字。该函数与 [`LOCATE(substr, str)`](#locate) 的双参数版本等价，但参数顺序相反。
 
 > **Note:**
 >
-> The case sensitivity of `INSTR(str, substr)` is determined by the [collations](/character-set-and-collation.md) used in TiDB. Binary collations (with the suffix `_bin`) are case-sensitive, while general collations (with the suffix `_general_ci` or `_ai_ci`, and) are case-insensitive.
+> `INSTR(str, substr)` 的大小写敏感性由 TiDB 所用的 [排序规则](/character-set-and-collation.md) 决定。二进制排序规则（后缀为 `_bin`）区分大小写，通用排序规则（后缀为 `_general_ci` 或 `_ai_ci`）不区分大小写。
 
-- If either argument is a number, the function treats the number as a string.
-- If `substr` is not in `str`, the function returns `0`. Otherwise, it returns the position of the first occurrence of `substr` in `str`.
-- If either argument is `NULL`, the function returns `NULL`.
+-   如果任一参数为数字，函数会将数字视为字符串处理。
+-   如果 `substr` 不在 `str` 中，函数返回 `0`。否则，返回 `substr` 在 `str` 中首次出现的位置。
+-   如果任一参数为 `NULL`，函数返回 `NULL`。
 
-Examples:
+示例：
 
 ```sql
 SELECT INSTR("pingcap.com", "tidb");
@@ -807,27 +805,27 @@ SELECT INSTR(0123, "12");
 +-------------------+
 ```
 
-### [`LCASE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lcase)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lcase"><code>LCASE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-lcase-code-lcase-code-a}
 
-The `LCASE(str)` function is a synonym for [`LOWER(str)`](#lower), which returns the lowercase of the given argument.
+`LCASE(str)` 函数是 [`LOWER(str)`](#lower) 的同义词，返回参数的小写形式。
 
-### [`LEFT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_left)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_left"><code>LEFT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-left-code-left-code-a}
 
-The `LEFT()` function returns a specified number of characters from the left side of a string.
+`LEFT()` 函数返回字符串左侧指定数量的字符。
 
-Syntax:
+语法：
 
 ```sql
 LEFT(`str`, `len`)
 ```
 
-- `str`: the original string to extract characters. If `str` contains a multibyte character, the function counts it as a single code point.
-- `len`: the length of characters to be returned.
-    - If `len` is equal to or less than 0, the function returns an empty string.
-    - If `len` is equal to or greater than the length of `str`, the function returns the original `str`.
-- If any argument is `NULL`, the function returns `NULL`.
+-   `str`：要提取字符的原始字符串。如果 `str` 包含多字节字符，函数将其视为单个码点。
+-   `len`：要返回的字符长度。
+    -   如果 `len` 小于等于 0，函数返回空字符串。
+    -   如果 `len` 大于等于 `str` 的长度，函数返回原始 `str`。
+-   如果任一参数为 `NULL`，函数返回 `NULL`。
 
-Examples:
+示例：
 
 ```sql
 SELECT LEFT('ABCED', 3);
@@ -886,15 +884,15 @@ SELECT LEFT(NULL, 3);
 +------------------------------+
 ```
 
-### [`LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_length)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_length"><code>LENGTH()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-length-code-length-code-a}
 
-The `LENGTH()` function returns the length of a string in bytes.
+`LENGTH()` 函数返回字符串的字节长度。
 
-`LENGTH()` counts a multibyte character as multiple bytes while `CHAR_LENGTH()` counts a multibyte character as a single code point.
+`LENGTH()` 会将多字节字符计为多个字节，而 `CHAR_LENGTH()` 会将多字节字符计为一个码点。
 
-If the argument is `NULL`, the function returns `NULL`.
+如果参数为 `NULL`，函数返回 `NULL`。
 
-Examples:
+示例：
 
 ```sql
 SELECT LENGTH('ABC');
@@ -928,16 +926,16 @@ SELECT LENGTH(NULL);
 +--------------+
 ```
 
-### [`LIKE`](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_like)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_like"><code>LIKE</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-comparison-functions-html-operator-like-code-like-code-a}
 
-The `LIKE` operator is used for simple string matching. The expression `expr LIKE pat [ESCAPE 'escape_char']` returns `1` (`TRUE`) or `0` (`FALSE`). If either `expr` or `pat` is `NULL`, the result is `NULL`.
+`LIKE` 运算符用于简单的字符串匹配。表达式 `expr LIKE pat [ESCAPE 'escape_char']` 返回 `1`（`TRUE`）或 `0`（`FALSE`）。如果 `expr` 或 `pat` 为 `NULL`，结果为 `NULL`。
 
-You can use the following two wildcard parameters with `LIKE`:
+你可以在 `LIKE` 中使用以下两个通配符：
 
-- `%` matches any number of characters, including zero characters.
-- `_` matches exactly one character.
+-   `%` 匹配任意数量的字符，包括零个字符。
+-   `_` 精确匹配一个字符。
 
-The following examples use the `utf8mb4_bin` collation:
+以下示例使用 `utf8mb4_bin` 排序规则：
 
 ```sql
 SET collation_connection='utf8mb4_bin';
@@ -994,7 +992,7 @@ SELECT '🍣🍺sushi🍣🍺' LIKE '%🍣%' AS result;
 +--------+
 ```
 
-The default escape character is `\`:
+默认转义字符为 `\`：
 
 ```sql
 SELECT 'sushi!!!' LIKE 'sushi\_' AS result;
@@ -1014,7 +1012,7 @@ SELECT 'sushi_' LIKE 'sushi\_' AS result;
 +--------+
 ```
 
-To specify a different escape character, such as `*`, you can use the `ESCAPE` clause:
+如需指定其他转义字符（如 `*`），可使用 `ESCAPE` 子句：
 
 ```sql
 SELECT 'sushi_' LIKE 'sushi*_' ESCAPE '*' AS result;
@@ -1034,7 +1032,7 @@ SELECT 'sushi!' LIKE 'sushi*_' ESCAPE '*' AS result;
 +--------+
 ```
 
-You can use the `LIKE` operator to match a numeric value:
+你可以使用 `LIKE` 运算符匹配数值：
 
 ```sql
 SELECT 10 LIKE '1%' AS result;
@@ -1054,7 +1052,7 @@ SELECT 10000 LIKE '12%' AS result;
 +--------+
 ```
 
-To specify a collation explicitly, such as `utf8mb4_unicode_ci`, you can use `COLLATE`:
+如需显式指定排序规则（如 `utf8mb4_unicode_ci`），可使用 `COLLATE`：
 
 ```sql
 SELECT '🍣🍺Sushi🍣🍺' COLLATE utf8mb4_unicode_ci LIKE '%SUSHI%' AS result;
@@ -1065,15 +1063,15 @@ SELECT '🍣🍺Sushi🍣🍺' COLLATE utf8mb4_unicode_ci LIKE '%SUSHI%' AS resu
 +--------+
 ```
 
-### [`LOCATE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_locate)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_locate"><code>LOCATE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-locate-code-locate-code-a}
 
-The `LOCATE(substr, str[, pos])` function is used to get the position of the first occurrence of a specified substring `substr` in a string `str`. The `pos` argument is optional and specifies the starting position for the search.
+`LOCATE(substr, str[, pos])` 函数用于获取字符串 `str` 中指定子串 `substr` 首次出现的位置。`pos` 参数为可选项，指定搜索的起始位置。
 
-- If the substring `substr` is not present in `str`, the function returns `0`.
-- If any argument is `NULL`, the function returns `NULL`.
-- This function is multibyte safe and performs a case-sensitive search only if at least one argument is a binary string.
+-   如果子串 `substr` 不在 `str` 中，函数返回 `0`。
+-   如果任一参数为 `NULL`，函数返回 `NULL`。
+-   该函数支持多字节字符，只有当至少一个参数为二进制字符串时才区分大小写。
 
-The following examples use the `utf8mb4_bin` collation:
+以下示例使用 `utf8mb4_bin` 排序规则：
 
 ```sql
 SET collation_connection='utf8mb4_bin';
@@ -1157,7 +1155,7 @@ SELECT LOCATE('い', 'たいでぃーびー', 3);
 +-------------------------------------------+
 ```
 
-The following examples use the `utf8mb4_unicode_ci` collation:
+以下示例使用 `utf8mb4_unicode_ci` 排序规则：
 
 ```sql
 SET collation_connection='utf8mb4_unicode_ci';
@@ -1187,7 +1185,7 @@ SELECT LOCATE('🍺', '🍣🍣🍣🍺🍺');
 +----------------------------------------+
 ```
 
-The following multibyte and binary string examples use the `utf8mb4_bin` collation:
+以下多字节和二进制字符串示例使用 `utf8mb4_bin` 排序规则：
 
 ```sql
 SET collation_connection='utf8mb4_bin';
@@ -1244,15 +1242,15 @@ SELECT LOCATE(_binary'B', 'aBcde');
 +-----------------------------+
 ```
 
-### [`LOWER()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lower)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lower"><code>LOWER()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-lower-code-lower-code-a}
 
-The `LOWER(str)` function is used to convert all characters in the given argument `str` to lowercase. The argument can be either a string or a number.
+`LOWER(str)` 函数用于将给定参数 `str` 的所有字符转换为小写。参数可以是字符串或数字。
 
-- If the argument is a string, the function returns the string in lowercase.
-- If the argument is a number, the function returns the number without leading zeros.
-- If the argument is `NULL`, the function returns `NULL`.
+-   如果参数为字符串，函数返回小写字符串。
+-   如果参数为数字，函数返回去除前导零的数字。
+-   如果参数为 `NULL`，函数返回 `NULL`。
 
-Examples:
+示例：
 
 ```sql
 SELECT LOWER("TiDB");
@@ -1274,15 +1272,15 @@ SELECT LOWER(-012);
 +-------------+
 ```
 
-### [`LPAD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lpad)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lpad"><code>LPAD()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-lpad-code-lpad-code-a}
 
-The `LPAD(str, len, padstr)` function returns the string argument, left-padded with the specified string `padstr` to a length of `len` characters.
+`LPAD(str, len, padstr)` 函数返回用指定字符串 `padstr` 在左侧填充到长度为 `len` 的字符串。
 
-- If `len` is less than the length of the string `str`, the function truncates the string `str` to the length of `len`.
-- If `len` is a negative number, the function returns `NULL`.
-- If any argument is `NULL`, the function returns `NULL`.
+-   如果 `len` 小于字符串 `str` 的长度，函数会将 `str` 截断为 `len` 长度。
+-   如果 `len` 为负数，函数返回 `NULL`。
+-   如果任一参数为 `NULL`，函数返回 `NULL`。
 
-Examples:
+示例：
 
 ```sql
 SELECT LPAD('TiDB',8,'>');
@@ -1314,227 +1312,205 @@ SELECT LPAD('TiDB',-2,'>');
 1 row in set (0.00 sec)
 ```
 
-### [`LTRIM()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ltrim)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ltrim"><code>LTRIM()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-ltrim-code-ltrim-code-a}
 
-The `LTRIM()` function removes leading spaces from a given string.
+`LTRIM()` 函数用于去除给定字符串的前导空格。
 
-If the argument is `NULL`, this function returns `NULL`.
+如果参数为 `NULL`，该函数返回 `NULL`。
 
 > **Note:**
 >
-> This function only removes the space character (U+0020) and does not remove other space-like characters such as tab (U+0009) or non-breaking space (U+00A0).
+> 该函数只会去除空格字符（U+0020），不会去除其他类似空格的字符，如制表符（U+0009）或不间断空格（U+00A0）。
 
-Examples:
+示例：
 
-In the following example, the `LTRIM()` function removes the leading spaces from `'    hello'` and returns `hello`.
+下例中，`LTRIM()` 函数去除了 `'    hello'` 的前导空格，返回 `hello`。
 
 ```sql
 SELECT LTRIM('    hello');
 ```
 
-```
-+--------------------+
-| LTRIM('    hello') |
-+--------------------+
-| hello              |
-+--------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------+
+    | LTRIM('    hello') |
+    +--------------------+
+    | hello              |
+    +--------------------+
+    1 row in set (0.00 sec)
 
-In the following example, [`CONCAT()`](#concat) is used to enclose the result of `LTRIM('    hello')` with `«` and `»`. This formatting makes it a bit easier to see that all leading spaces are removed.
+下例中，使用 [`CONCAT()`](#concat) 将 `LTRIM('    hello')` 的结果用 `«` 和 `»` 包裹，便于观察前导空格已被去除。
 
 ```sql
 SELECT CONCAT('«',LTRIM('    hello'),'»');
 ```
 
-```
-+------------------------------------+
-| CONCAT('«',LTRIM('    hello'),'»') |
-+------------------------------------+
-| «hello»                            |
-+------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------+
+    | CONCAT('«',LTRIM('    hello'),'»') |
+    +------------------------------------+
+    | «hello»                            |
+    +------------------------------------+
+    1 row in set (0.00 sec)
 
-### [`MAKE_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_make-set)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_make-set"><code>MAKE_SET()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-make-set-code-make-set-code-a}
 
-The `MAKE_SET()` function returns a set of comma-separated strings based on whether a corresponding bit in the `bits` argument is set to `1`.
+`MAKE_SET()` 函数根据 `bits` 参数中对应位是否为 `1`，返回由逗号分隔的字符串集合。
 
-Syntax:
+语法：
 
 ```sql
 MAKE_SET(bits, str1, str2, ...)
 ```
 
-- `bits`: controls which subsequent string arguments to include in the result set. If `bits` is set to `NULL`, the function returns `NULL`.
-- `str1, str2, ...`: a list of strings. Each string corresponds to a bit in the `bits` argument from right to left. `str1` corresponds to the first bit from the right, `str2` corresponds to the second bit from the right, and so on. If the corresponding bit is `1`, the string is included in the result; otherwise, it is not included.
+-   `bits`：控制结果集中包含哪些后续字符串参数。如果 `bits` 为 `NULL`，函数返回 `NULL`。
+-   `str1, str2, ...`：字符串列表。每个字符串从右到左分别对应 `bits` 的每一位。`str1` 对应最右侧第一位，`str2` 对应第二位，以此类推。对应位为 `1` 时，该字符串包含在结果中，否则不包含。
 
-Examples:
+示例：
 
-In the following example, because all bits are set to `0` in the `bits` argument, the function does not include any subsequent strings in the result and returns an empty string.
+下例中，`bits` 参数所有位均为 `0`，函数不包含任何后续字符串，返回空字符串。
 
 ```sql
 SELECT MAKE_SET(b'000','foo','bar','baz');
 ```
 
-```
-+------------------------------------+
-| MAKE_SET(b'000','foo','bar','baz') |
-+------------------------------------+
-|                                    |
-+------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------+
+    | MAKE_SET(b'000','foo','bar','baz') |
+    +------------------------------------+
+    |                                    |
+    +------------------------------------+
+    1 row in set (0.00 sec)
 
-In the following example, because only the first bit from the right is `1`, the function only returns the first string `foo`.
+下例中，只有最右侧第一位为 `1`，函数只返回第一个字符串 `foo`。
 
 ```sql
 SELECT MAKE_SET(b'001','foo','bar','baz');
 ```
 
-```
-+------------------------------------+
-| MAKE_SET(b'001','foo','bar','baz') |
-+------------------------------------+
-| foo                                |
-+------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------+
+    | MAKE_SET(b'001','foo','bar','baz') |
+    +------------------------------------+
+    | foo                                |
+    +------------------------------------+
+    1 row in set (0.00 sec)
 
-In the following example, because only the second bit from the right is `1`, the function only returns the second string `bar`.
+下例中，只有第二位为 `1`，函数只返回第二个字符串 `bar`。
 
 ```sql
 SELECT MAKE_SET(b'010','foo','bar','baz');
 ```
 
-```
-+------------------------------------+
-| MAKE_SET(b'010','foo','bar','baz') |
-+------------------------------------+
-| bar                                |
-+------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------+
+    | MAKE_SET(b'010','foo','bar','baz') |
+    +------------------------------------+
+    | bar                                |
+    +------------------------------------+
+    1 row in set (0.00 sec)
 
-In the following example, because only the third bit from the right is `1`, the function only returns the third string `baz`.
+下例中，只有第三位为 `1`，函数只返回第三个字符串 `baz`。
 
 ```sql
 SELECT MAKE_SET(b'100','foo','bar','baz');
 ```
 
-```
-+------------------------------------+
-| MAKE_SET(b'100','foo','bar','baz') |
-+------------------------------------+
-| baz                                |
-+------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------+
+    | MAKE_SET(b'100','foo','bar','baz') |
+    +------------------------------------+
+    | baz                                |
+    +------------------------------------+
+    1 row in set (0.00 sec)
 
-In the following example, because all bits are `1`, the function returns all three strings in a comma-separated result set.
+下例中，所有位均为 `1`，函数返回所有三个字符串，逗号分隔。
 
 ```sql
 SELECT MAKE_SET(b'111','foo','bar','baz');
 ```
 
-```
-+------------------------------------+
-| MAKE_SET(b'111','foo','bar','baz') |
-+------------------------------------+
-| foo,bar,baz                        |
-+------------------------------------+
-1 row in set (0.0002 sec)
-```
+    +------------------------------------+
+    | MAKE_SET(b'111','foo','bar','baz') |
+    +------------------------------------+
+    | foo,bar,baz                        |
+    +------------------------------------+
+    1 row in set (0.0002 sec)
 
-### [`MID()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_mid)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_mid"><code>MID()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-mid-code-mid-code-a}
 
-The `MID(str, pos[, len])` function returns a substring starting from the specified `pos` position with the `len` length.
+`MID(str, pos[, len])` 函数返回从指定 `pos` 位置开始、长度为 `len` 的子串。
 
-Starting from v8.4.0, TiDB supports the two-argument variant `MID(str, pos)`. If `len` is not specified, this function returns all remaining characters from the specified `pos` position to the end of the string.
+自 v8.4.0 起，TiDB 支持双参数变体 `MID(str, pos)`。如果未指定 `len`，该函数返回从指定 `pos` 位置到字符串末尾的所有字符。
 
-If any of the arguments are `NULL`, the function returns `NULL`.
+如果任一参数为 `NULL`，函数返回 `NULL`。
 
-Examples:
+示例：
 
-In the following example, `MID()` returns the substring of the input string starting from the second character (`b`) with a length of `3` characters.
+下例中，`MID()` 返回输入字符串从第二个字符（`b`）开始，长度为 `3` 的子串。
 
 ```sql
 SELECT MID('abcdef',2,3);
 ```
 
-```
-+-------------------+
-| MID('abcdef',2,3) |
-+-------------------+
-| bcd               |
-+-------------------+
-1 row in set (0.00 sec)
-```
+    +-------------------+
+    | MID('abcdef',2,3) |
+    +-------------------+
+    | bcd               |
+    +-------------------+
+    1 row in set (0.00 sec)
 
-In the following example, `MID()` returns the substring of the input string starting from the second character (`b`) to the end of the string.
+下例中，`MID()` 返回输入字符串从第二个字符（`b`）开始到字符串末尾的子串。
 
 ```sql
 SELECT MID('abcdef',2);
 ```
 
-```
-+-------------------+
-| MID('abcdef',2)   |
-+-------------------+
-| bcdef             |
-+-------------------+
-1 row in set (0.00 sec)
-```
+    +-------------------+
+    | MID('abcdef',2)   |
+    +-------------------+
+    | bcdef             |
+    +-------------------+
+    1 row in set (0.00 sec)
 
-### [`NOT LIKE`](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_not-like)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_not-like"><code>NOT LIKE</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-comparison-functions-html-operator-not-like-code-not-like-code-a}
 
-Negation of simple pattern matching.
+简单模式匹配的取反。
 
-This function performs the inverse operation of [`LIKE`](#like).
+该函数执行 [`LIKE`](#like) 的相反操作。
 
-Examples:
+示例：
 
-In the following example, `NOT LIKE` returns `0` (False) because `aaa` matches the `a%` pattern.
+下例中，`NOT LIKE` 返回 `0`（False），因为 `aaa` 匹配 `a%` 模式。
 
 ```sql
 SELECT 'aaa' LIKE 'a%', 'aaa' NOT LIKE 'a%';
 ```
 
-```
-+-----------------+---------------------+
-| 'aaa' LIKE 'a%' | 'aaa' NOT LIKE 'a%' |
-+-----------------+---------------------+
-|               1 |                   0 |
-+-----------------+---------------------+
-1 row in set (0.00 sec)
-```
+    +-----------------+---------------------+
+    | 'aaa' LIKE 'a%' | 'aaa' NOT LIKE 'a%' |
+    +-----------------+---------------------+
+    |               1 |                   0 |
+    +-----------------+---------------------+
+    1 row in set (0.00 sec)
 
-In the following example, `NOT LIKE` returns `1` (True) because `aaa` does not match the `b%` pattern.
+下例中，`NOT LIKE` 返回 `1`（True），因为 `aaa` 不匹配 `b%` 模式。
 
 ```sql
 SELECT 'aaa' LIKE 'b%', 'aaa' NOT LIKE 'b%';
 ```
 
-```
-+-----------------+---------------------+
-| 'aaa' LIKE 'b%' | 'aaa' NOT LIKE 'b%' |
-+-----------------+---------------------+
-|               0 |                   1 |
-+-----------------+---------------------+
-1 row in set (0.00 sec)
-```
+    +-----------------+---------------------+
+    | 'aaa' LIKE 'b%' | 'aaa' NOT LIKE 'b%' |
+    +-----------------+---------------------+
+    |               0 |                   1 |
+    +-----------------+---------------------+
+    1 row in set (0.00 sec)
 
-### [`NOT REGEXP`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_not-regexp)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_not-regexp"><code>NOT REGEXP</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-regexp-html-operator-not-regexp-code-not-regexp-code-a}
 
-Negation of [`REGEXP`](#regexp).
+[`REGEXP`](#regexp) 的取反。
 
-### [`OCT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_oct)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_oct"><code>OCT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-oct-code-oct-code-a}
 
-Return a string containing [octal](https://en.wikipedia.org/wiki/Octal) (base 8) representation of a number.
+返回数字的 [八进制](https://en.wikipedia.org/wiki/Octal)（基数 8）表示的字符串。
 
-Examples:
+示例：
 
-The following example generates a sequence of numbers from 0 to 20 using a [recursive common table expression (CTE)](/develop/dev-guide-use-common-table-expression.md#recursive-cte) and then uses the `OCT()` function to convert each number to its octal representation. Decimal values from 0 to 7 have identical representations in octal. Decimal numbers from 8 to 15 correspond to octal numbers from 10 to 17.
+下例使用 [递归公共表表达式（CTE）](/develop/dev-guide-use-common-table-expression.md#recursive-cte) 生成 0 到 20 的数字序列，然后用 `OCT()` 函数将每个数字转换为八进制表示。十进制 0 到 7 与八进制表示相同。十进制 8 到 15 分别对应八进制 10 到 17。
 
 ```sql
 WITH RECURSIVE nr(n) AS (
@@ -1545,128 +1521,118 @@ WITH RECURSIVE nr(n) AS (
 SELECT n, OCT(n) FROM nr;
 ```
 
-```
-+------+--------+
-| n    | OCT(n) |
-+------+--------+
-|    0 | 0      |
-|    1 | 1      |
-|    2 | 2      |
-|    3 | 3      |
-|    4 | 4      |
-|    5 | 5      |
-|    6 | 6      |
-|    7 | 7      |
-|    8 | 10     |
-|    9 | 11     |
-|   10 | 12     |
-|   11 | 13     |
-|   12 | 14     |
-|   13 | 15     |
-|   14 | 16     |
-|   15 | 17     |
-|   16 | 20     |
-|   17 | 21     |
-|   18 | 22     |
-|   19 | 23     |
-|   20 | 24     |
-+------+--------+
-20 rows in set (0.00 sec)
-```
+    +------+--------+
+    | n    | OCT(n) |
+    +------+--------+
+    |    0 | 0      |
+    |    1 | 1      |
+    |    2 | 2      |
+    |    3 | 3      |
+    |    4 | 4      |
+    |    5 | 5      |
+    |    6 | 6      |
+    |    7 | 7      |
+    |    8 | 10     |
+    |    9 | 11     |
+    |   10 | 12     |
+    |   11 | 13     |
+    |   12 | 14     |
+    |   13 | 15     |
+    |   14 | 16     |
+    |   15 | 17     |
+    |   16 | 20     |
+    |   17 | 21     |
+    |   18 | 22     |
+    |   19 | 23     |
+    |   20 | 24     |
+    +------+--------+
+    20 rows in set (0.00 sec)
 
-### [`OCTET_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_octet-length)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_octet-length"><code>OCTET_LENGTH()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-octet-length-code-octet-length-code-a}
 
-Synonym for [`LENGTH()`](#length).
+[`LENGTH()`](#length) 的同义词。
 
-### [`ORD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ord)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ord"><code>ORD()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-ord-code-ord-code-a}
 
-Return the character code for the leftmost character of the given argument.
+返回给定参数最左侧字符的字符编码。
 
-This function is similar to [`CHAR()`](#char) but works the other way around.
+该函数与 [`CHAR()`](#char) 类似，但方向相反。
 
-Examples:
+示例：
 
-Taking `a` and `A` as an example, `ORD()` returns `97` for `a` and `65` for `A`.
+以 `a` 和 `A` 为例，`ORD()` 对 `a` 返回 `97`，对 `A` 返回 `65`。
 
 ```sql
 SELECT ORD('a'), ORD('A');
 ```
 
-```
-+----------+----------+
-| ORD('a') | ORD('A') |
-+----------+----------+
-|       97 |       65 |
-+----------+----------+
-1 row in set (0.00 sec)
-```
+    +----------+----------+
+    | ORD('a') | ORD('A') |
+    +----------+----------+
+    |       97 |       65 |
+    +----------+----------+
+    1 row in set (0.00 sec)
 
-If you take the character code obtained from `ORD()` as input, you can get the original characters back using the `CHAR()` function. Note that the output format might vary depending on whether the `binary-as-hex` option is enabled in your MySQL client.
+如果将 `ORD()` 得到的字符编码作为输入，可以用 `CHAR()` 函数还原原始字符。注意输出格式可能因 MySQL 客户端是否启用 `binary-as-hex` 选项而异。
 
 ```sql
 SELECT CHAR(97), CHAR(65);
 ```
 
-```
-+----------+----------+
-| CHAR(97) | CHAR(65) |
-+----------+----------+
-| a        | A        |
-+----------+----------+
-1 row in set (0.01 sec)
-```
+    +----------+----------+
+    | CHAR(97) | CHAR(65) |
+    +----------+----------+
+    | a        | A        |
+    +----------+----------+
+    1 row in set (0.01 sec)
 
-The following example shows how `ORD()` handles multibyte characters. Here, both `101` and `0x65` are the UTF-8 encoded values for the `e` character, but in different formats. And both `50091` and `0xC3AB` represent the same values, but for the `ë` character.
+下例展示 `ORD()` 如何处理多字节字符。这里 `101` 和 `0x65` 都是 `e` 字符的 UTF-8 编码值，但格式不同。`50091` 和 `0xC3AB` 都表示 `ë` 字符的编码值。
 
 ```sql
 SELECT ORD('e'), ORD('ë'), HEX('e'), HEX('ë');
 ```
 
-```
-+----------+-----------+----------+-----------+
-| ORD('e') | ORD('ë')  | HEX('e') | HEX('ë')  |
-+----------+-----------+----------+-----------+
-|      101 |     50091 | 65       | C3AB      |
-+----------+-----------+----------+-----------+
-1 row in set (0.00 sec)
-```
+    +----------+-----------+----------+-----------+
+    | ORD('e') | ORD('ë')  | HEX('e') | HEX('ë')  |
+    +----------+-----------+----------+-----------+
+    |      101 |     50091 | 65       | C3AB      |
+    +----------+-----------+----------+-----------+
+    1 row in set (0.00 sec)
 
-### [`POSITION()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_position)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_position"><code>POSITION()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-position-code-position-code-a}
 
-Synonym for [`LOCATE()`](#locate).
+[`LOCATE()`](#locate) 的同义词。
 
-### [`QUOTE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_quote)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_quote"><code>QUOTE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-quote-code-quote-code-a}
 
-Escape the argument for use in an SQL statement.
+对参数进行转义，以便在 SQL 语句中使用。
 
-If the argument is `NULL`, the function returns `NULL`.
+如果参数为 `NULL`，函数返回 `NULL`。
 
-Example:
+示例：
 
-To display the result directly instead of showing a hexadecimal-encoded value, you need to start the MySQL client with the [`--skip-binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex) option.
+如需直接显示结果而不是十六进制编码值，需要以 [`--skip-binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex) 选项启动 MySQL 客户端。
 
-The following example shows that the ASCII NULL character is escaped as `\0` and the single quote character `'` is escaped as `\'`:
+下例显示 ASCII NULL 字符被转义为 `\0`，单引号字符 `'` 被转义为 `\'`：
 
 ```sql
 SELECT QUOTE(0x002774657374);
 ```
 
-```
-+-----------------------+
-| QUOTE(0x002774657374) |
-+-----------------------+
-| '\0\'test'            |
-+-----------------------+
-1 row in set (0.00 sec)
-```
+    +-----------------------+
+    | QUOTE(0x002774657374) |
+    +-----------------------+
+    | '\0\'test'            |
+    +-----------------------+
+    1 row in set (0.00 sec)
 
-### [`REGEXP`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp"><code>REGEXP</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-regexp-html-operator-regexp-code-regexp-code-a}
 
-Pattern matching using regular expressions.
+使用正则表达式进行模式匹配。
 
-Examples:
+示例：
 
-In this example a number of strings are matched against two regular expressions.
+下例将多个字符串与两个正则表达式进行匹配。
 
 ```sql
 WITH vals AS (
@@ -1686,19 +1652,17 @@ FROM
     vals;
 ```
 
-```
-+----------+------------------+------------------------+
-| v        | starts with "Ti" | Length is 4 characters |
-+----------+------------------+------------------------+
-| TiDB     |                1 |                      1 |
-| Titanium |                1 |                      0 |
-| Tungsten |                0 |                      0 |
-| Rust     |                0 |                      1 |
-+----------+------------------+------------------------+
-4 rows in set (0.00 sec)
-```
+    +----------+------------------+------------------------+
+    | v        | starts with "Ti" | Length is 4 characters |
+    +----------+------------------+------------------------+
+    | TiDB     |                1 |                      1 |
+    | Titanium |                1 |                      0 |
+    | Tungsten |                0 |                      0 |
+    | Rust     |                0 |                      1 |
+    +----------+------------------+------------------------+
+    4 rows in set (0.00 sec)
 
-The following example demonstrates that `REGEXP` is not limited to the `SELECT` clause. For example, you can also use it in the `WHERE` clause of the query.
+下例演示 `REGEXP` 不仅可用于 `SELECT` 子句，也可用于查询的 `WHERE` 子句。
 
 ```sql
 SELECT
@@ -1710,329 +1674,289 @@ WHERE
     v REGEXP 'DB$';
 ```
 
-```
-+------+
-| v    |
-+------+
-| TiDB |
-+------+
-1 row in set (0.01 sec)
-```
+    +------+
+    | v    |
+    +------+
+    | TiDB |
+    +------+
+    1 row in set (0.01 sec)
 
-### [`REGEXP_INSTR()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-instr)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-instr"><code>REGEXP_INSTR()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-regexp-html-function-regexp-instr-code-regexp-instr-code-a}
 
-Return the starting index of the substring that matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
+返回与正则表达式匹配的子串的起始索引（与 MySQL 部分兼容。详情参见 [正则表达式与 MySQL 的兼容性](#regular-expression-compatibility-with-mysql)）。
 
-The `REGEXP_INSTR(str, regexp, [start, [match, [ret, [match_type]]]])` function returns the position of the match if the regular expression (`regexp`) matches the string (`str`).
+`REGEXP_INSTR(str, regexp, [start, [match, [ret, [match_type]]]])` 函数在正则表达式（`regexp`）匹配字符串（`str`）时，返回匹配的位置。
 
-If either the `str` or `regexp` is `NULL`, then the function returns `NULL`.
+如果 `str` 或 `regexp` 为 `NULL`，则函数返回 `NULL`。
 
-Examples:
+示例：
 
-In the example below you can see that the `^.b.$` matches `abc`.
+下例中，`^.b.$` 匹配 `abc`。
 
 ```sql
 SELECT REGEXP_INSTR('abc','^.b.$');
 ```
 
-```
-+-----------------------------+
-| REGEXP_INSTR('abc','^.b.$') |
-+-----------------------------+
-|                           1 |
-+-----------------------------+
-1 row in set (0.00 sec)
-```
+    +-----------------------------+
+    | REGEXP_INSTR('abc','^.b.$') |
+    +-----------------------------+
+    |                           1 |
+    +-----------------------------+
+    1 row in set (0.00 sec)
 
-The following example uses the third argument to look for a match with a different start position in the string.
+下例使用第三个参数指定字符串中不同的起始位置查找匹配。
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','a');
 ```
 
-```
-+----------------------------+
-| REGEXP_INSTR('abcabc','a') |
-+----------------------------+
-|                          1 |
-+----------------------------+
-1 row in set (0.00 sec)
-```
+    +----------------------------+
+    | REGEXP_INSTR('abcabc','a') |
+    +----------------------------+
+    |                          1 |
+    +----------------------------+
+    1 row in set (0.00 sec)
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','a',2);
 ```
 
-```
-+------------------------------+
-| REGEXP_INSTR('abcabc','a',2) |
-+------------------------------+
-|                            4 |
-+------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------+
+    | REGEXP_INSTR('abcabc','a',2) |
+    +------------------------------+
+    |                            4 |
+    +------------------------------+
+    1 row in set (0.00 sec)
 
-The following example uses the 4th argument to look for the second match.
+下例使用第四个参数查找第二个匹配项。
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','a',1,2);
 ```
 
-```
-+--------------------------------+
-| REGEXP_INSTR('abcabc','a',1,2) |
-+--------------------------------+
-|                              4 |
-+--------------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------------+
+    | REGEXP_INSTR('abcabc','a',1,2) |
+    +--------------------------------+
+    |                              4 |
+    +--------------------------------+
+    1 row in set (0.00 sec)
 
-The following example uses the 5th argument to return the value _after_ the mach, instead of the value of the match.
+下例使用第五个参数返回匹配项之后的位置，而不是匹配项本身的位置。
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','a',1,1,1);
 ```
 
-```
-+----------------------------------+
-| REGEXP_INSTR('abcabc','a',1,1,1) |
-+----------------------------------+
-|                                2 |
-+----------------------------------+
-1 row in set (0.00 sec)
-```
+    +----------------------------------+
+    | REGEXP_INSTR('abcabc','a',1,1,1) |
+    +----------------------------------+
+    |                                2 |
+    +----------------------------------+
+    1 row in set (0.00 sec)
 
-The following example uses the 6th argument to add the `i` flag to get a case insensitive match. For more details about regular expression `match_type`, see [`match_type` compatibility](#match_type-compatibility).
+下例使用第六个参数添加 `i` 标志，实现不区分大小写匹配。关于正则表达式 `match_type` 的更多信息，参见 [`match_type` 兼容性](#match_type-compatibility)。
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','A',1,1,0,'');
 ```
 
-```
-+-------------------------------------+
-| REGEXP_INSTR('abcabc','A',1,1,0,'') |
-+-------------------------------------+
-|                                   0 |
-+-------------------------------------+
-1 row in set (0.00 sec)
-```
+    +-------------------------------------+
+    | REGEXP_INSTR('abcabc','A',1,1,0,'') |
+    +-------------------------------------+
+    |                                   0 |
+    +-------------------------------------+
+    1 row in set (0.00 sec)
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','A',1,1,0,'i');
 ```
 
-```
-+--------------------------------------+
-| REGEXP_INSTR('abcabc','A',1,1,0,'i') |
-+--------------------------------------+
-|                                    1 |
-+--------------------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------------------+
+    | REGEXP_INSTR('abcabc','A',1,1,0,'i') |
+    +--------------------------------------+
+    |                                    1 |
+    +--------------------------------------+
+    1 row in set (0.00 sec)
 
-Besides `match_type`, the [collation](/character-set-and-collation.md) also influences the matching. The following example uses a case-sensitive and a case-insensitive collation to demonstrate this.
+除了 `match_type`，[排序规则](/character-set-and-collation.md) 也会影响匹配。下例分别使用区分大小写和不区分大小写的排序规则进行演示。
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_general_ci);
 ```
 
-```
-+-------------------------------------------------------+
-| REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_general_ci) |
-+-------------------------------------------------------+
-|                                                     1 |
-+-------------------------------------------------------+
-1 row in set (0.01 sec)
-```
+    +-------------------------------------------------------+
+    | REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_general_ci) |
+    +-------------------------------------------------------+
+    |                                                     1 |
+    +-------------------------------------------------------+
+    1 row in set (0.01 sec)
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_bin);
 ```
 
-```
-+------------------------------------------------+
-| REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_bin) |
-+------------------------------------------------+
-|                                              0 |
-+------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------------------+
+    | REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_bin) |
+    +------------------------------------------------+
+    |                                              0 |
+    +------------------------------------------------+
+    1 row in set (0.00 sec)
 
-### [`REGEXP_LIKE()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-like)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-like"><code>REGEXP_LIKE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-regexp-html-function-regexp-like-code-regexp-like-code-a}
 
-Whether the string matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
+判断字符串是否匹配正则表达式（与 MySQL 部分兼容。详情参见 [正则表达式与 MySQL 的兼容性](#regular-expression-compatibility-with-mysql)）。
 
-The `REGEXP_LIKE(str, regex, [match_type])` function is used to test if a regular expression matches a string. Optionally the `match_type` can be used to change the matching behavior.
+`REGEXP_LIKE(str, regex, [match_type])` 函数用于测试正则表达式是否匹配字符串。可选的 `match_type` 用于改变匹配行为。
 
-Examples:
+示例：
 
-The following example shows that `^a` matches `abc`.
+下例显示 `^a` 匹配 `abc`。
 
 ```sql
 SELECT REGEXP_LIKE('abc','^a');
 ```
 
-```
-+-------------------------+
-| REGEXP_LIKE('abc','^a') |
-+-------------------------+
-|                       1 |
-+-------------------------+
-1 row in set (0.00 sec)
-```
+    +-------------------------+
+    | REGEXP_LIKE('abc','^a') |
+    +-------------------------+
+    |                       1 |
+    +-------------------------+
+    1 row in set (0.00 sec)
 
-This following example shows that `^A` does not match `abc`.
+下例显示 `^A` 不匹配 `abc`。
 
 ```sql
 SELECT REGEXP_LIKE('abc','^A');
 ```
 
-```
-+-------------------------+
-| REGEXP_LIKE('abc','^A') |
-+-------------------------+
-|                       0 |
-+-------------------------+
-1 row in set (0.00 sec)
-```
+    +-------------------------+
+    | REGEXP_LIKE('abc','^A') |
+    +-------------------------+
+    |                       0 |
+    +-------------------------+
+    1 row in set (0.00 sec)
 
-This example matches `^A` against `abc`, which now matches because of the `i` flag which enabled case insensitive matching. For more details about the regular expression `match_type`, see [`match_type` compatibility](#match_type-compatibility).
+下例将 `^A` 匹配 `abc`，由于加了 `i` 标志，实现了不区分大小写匹配。关于正则表达式 `match_type` 的更多信息，参见 [`match_type` 兼容性](#match_type-compatibility)。
 
 ```sql
 SELECT REGEXP_LIKE('abc','^A','i');
 ```
 
-```
-+-----------------------------+
-| REGEXP_LIKE('abc','^A','i') |
-+-----------------------------+
-|                           1 |
-+-----------------------------+
-1 row in set (0.00 sec)
-```
+    +-----------------------------+
+    | REGEXP_LIKE('abc','^A','i') |
+    +-----------------------------+
+    |                           1 |
+    +-----------------------------+
+    1 row in set (0.00 sec)
 
-### [`REGEXP_REPLACE()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-replace)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-replace"><code>REGEXP_REPLACE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-regexp-html-function-regexp-replace-code-regexp-replace-code-a}
 
-Replace substrings that match the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
+替换匹配正则表达式的子串（与 MySQL 部分兼容。详情参见 [正则表达式与 MySQL 的兼容性](#regular-expression-compatibility-with-mysql)）。
 
-The `REGEXP_REPLACE(str, regexp, replace, [start, [match, [match_type]]])` function can be used to replace strings based on regular expressions.
+`REGEXP_REPLACE(str, regexp, replace, [start, [match, [match_type]]])` 函数可用于基于正则表达式替换字符串。
 
-Examples:
+示例：
 
-In the following example, two o's are replaced by `i`.
+下例将两个 o 替换为 `i`。
 
 ```sql
 SELECT REGEXP_REPLACE('TooDB', 'o{2}', 'i');
 ```
 
-```
-+--------------------------------------+
-| REGEXP_REPLACE('TooDB', 'o{2}', 'i') |
-+--------------------------------------+
-| TiDB                                 |
-+--------------------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------------------+
+    | REGEXP_REPLACE('TooDB', 'o{2}', 'i') |
+    +--------------------------------------+
+    | TiDB                                 |
+    +--------------------------------------+
+    1 row in set (0.00 sec)
 
-The following example starts the match at the third character, causing the regular expression not to match and not do any replacement.
+下例从第三个字符开始匹配，导致正则表达式不匹配，不进行替换。
 
 ```sql
 SELECT REGEXP_REPLACE('TooDB', 'o{2}', 'i',3);
 ```
 
-```
-+----------------------------------------+
-| REGEXP_REPLACE('TooDB', 'o{2}', 'i',3) |
-+----------------------------------------+
-| TooDB                                  |
-+----------------------------------------+
-1 row in set (0.00 sec)
-```
+    +----------------------------------------+
+    | REGEXP_REPLACE('TooDB', 'o{2}', 'i',3) |
+    +----------------------------------------+
+    | TooDB                                  |
+    +----------------------------------------+
+    1 row in set (0.00 sec)
 
-In the following example, the 5th argument is used to set if the first or the second match is used for the replacement.
+下例用第五个参数设置替换第一个或第二个匹配项。
 
 ```sql
 SELECT REGEXP_REPLACE('TooDB', 'o', 'i',1,1);
 ```
 
-```
-+---------------------------------------+
-| REGEXP_REPLACE('TooDB', 'o', 'i',1,1) |
-+---------------------------------------+
-| TioDB                                 |
-+---------------------------------------+
-1 row in set (0.00 sec)
-```
+    +---------------------------------------+
+    | REGEXP_REPLACE('TooDB', 'o', 'i',1,1) |
+    +---------------------------------------+
+    | TioDB                                 |
+    +---------------------------------------+
+    1 row in set (0.00 sec)
 
 ```sql
 SELECT REGEXP_REPLACE('TooDB', 'o', 'i',1,2);
 ```
 
-```
-+---------------------------------------+
-| REGEXP_REPLACE('TooDB', 'o', 'i',1,2) |
-+---------------------------------------+
-| ToiDB                                 |
-+---------------------------------------+
-1 row in set (0.00 sec)
-```
+    +---------------------------------------+
+    | REGEXP_REPLACE('TooDB', 'o', 'i',1,2) |
+    +---------------------------------------+
+    | ToiDB                                 |
+    +---------------------------------------+
+    1 row in set (0.00 sec)
 
-The following example uses the 6th argument to set the `match_type` for case insensitive matching. For more details about the regular expression `match_type`, see [`match_type` compatibility](#match_type-compatibility).
+下例用第六个参数设置 `match_type`，实现不区分大小写匹配。关于正则表达式 `match_type` 的更多信息，参见 [`match_type` 兼容性](#match_type-compatibility)。
 
 ```sql
 SELECT REGEXP_REPLACE('TooDB', 'O{2}','i',1,1);
 ```
 
-```
-+-----------------------------------------+
-| REGEXP_REPLACE('TooDB', 'O{2}','i',1,1) |
-+-----------------------------------------+
-| TooDB                                   |
-+-----------------------------------------+
-1 row in set (0.00 sec)
-```
+    +-----------------------------------------+
+    | REGEXP_REPLACE('TooDB', 'O{2}','i',1,1) |
+    +-----------------------------------------+
+    | TooDB                                   |
+    +-----------------------------------------+
+    1 row in set (0.00 sec)
 
 ```sql
 SELECT REGEXP_REPLACE('TooDB', 'O{2}','i',1,1,'i');
 ```
 
-```
-+---------------------------------------------+
-| REGEXP_REPLACE('TooDB', 'O{2}','i',1,1,'i') |
-+---------------------------------------------+
-| TiDB                                        |
-+---------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +---------------------------------------------+
+    | REGEXP_REPLACE('TooDB', 'O{2}','i',1,1,'i') |
+    +---------------------------------------------+
+    | TiDB                                        |
+    +---------------------------------------------+
+    1 row in set (0.00 sec)
 
-### [`REGEXP_SUBSTR()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-substr)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-substr"><code>REGEXP_SUBSTR()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-regexp-html-function-regexp-substr-code-regexp-substr-code-a}
 
-Return the substring that matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
+返回匹配正则表达式的子串（与 MySQL 部分兼容。详情参见 [正则表达式与 MySQL 的兼容性](#regular-expression-compatibility-with-mysql)）。
 
-The `REGEXP_SUBSTR(str, regexp, [start, [match, [match_type]]])` function is used to get a substring based on a regular expression.
+`REGEXP_SUBSTR(str, regexp, [start, [match, [match_type]]])` 函数用于基于正则表达式获取子串。
 
-The following example uses the `Ti.{2}` regular expression to get the `TiDB` substring of the `This is TiDB` string.
+下例使用正则表达式 `Ti.{2}` 获取字符串 `This is TiDB` 中的 `TiDB` 子串。
 
 ```sql
 SELECT REGEXP_SUBSTR('This is TiDB','Ti.{2}');
 ```
 
-```
-+----------------------------------------+
-| REGEXP_SUBSTR('This is TiDB','Ti.{2}') |
-+----------------------------------------+
-| TiDB                                   |
-+----------------------------------------+
-1 row in set (0.00 sec)
-```
+    +----------------------------------------+
+    | REGEXP_SUBSTR('This is TiDB','Ti.{2}') |
+    +----------------------------------------+
+    | TiDB                                   |
+    +----------------------------------------+
+    1 row in set (0.00 sec)
 
-### [`REPEAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_repeat)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_repeat"><code>REPEAT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-repeat-code-repeat-code-a}
 
-Repeat a string the specified number of times.
+将字符串重复指定次数。
 
-Examples:
+示例：
 
-The following example generates a sequence of numbers from 1 to 20 using a [recursive common table expression (CTE)](/develop/dev-guide-use-common-table-expression.md#recursive-cte). For each number in the sequence, the character `x` is repeated the number of times equal to the number itself.
+下例使用 [递归公共表表达式（CTE）](/develop/dev-guide-use-common-table-expression.md#recursive-cte) 生成 1 到 20 的数字序列。对每个数字，将字符 `x` 重复该数字次数。
 
 ```sql
 WITH RECURSIVE nr(n) AS (
@@ -2043,113 +1967,109 @@ WITH RECURSIVE nr(n) AS (
 SELECT n, REPEAT('x',n) FROM nr;
 ```
 
-```
-+------+----------------------+
-| n    | REPEAT('x',n)        |
-+------+----------------------+
-|    1 | x                    |
-|    2 | xx                   |
-|    3 | xxx                  |
-|    4 | xxxx                 |
-|    5 | xxxxx                |
-|    6 | xxxxxx               |
-|    7 | xxxxxxx              |
-|    8 | xxxxxxxx             |
-|    9 | xxxxxxxxx            |
-|   10 | xxxxxxxxxx           |
-|   11 | xxxxxxxxxxx          |
-|   12 | xxxxxxxxxxxx         |
-|   13 | xxxxxxxxxxxxx        |
-|   14 | xxxxxxxxxxxxxx       |
-|   15 | xxxxxxxxxxxxxxx      |
-|   16 | xxxxxxxxxxxxxxxx     |
-|   17 | xxxxxxxxxxxxxxxxx    |
-|   18 | xxxxxxxxxxxxxxxxxx   |
-|   19 | xxxxxxxxxxxxxxxxxxx  |
-|   20 | xxxxxxxxxxxxxxxxxxxx |
-+------+----------------------+
-20 rows in set (0.01 sec)
-```
+    +------+----------------------+
+    | n    | REPEAT('x',n)        |
+    +------+----------------------+
+    |    1 | x                    |
+    |    2 | xx                   |
+    |    3 | xxx                  |
+    |    4 | xxxx                 |
+    |    5 | xxxxx                |
+    |    6 | xxxxxx               |
+    |    7 | xxxxxxx              |
+    |    8 | xxxxxxxx             |
+    |    9 | xxxxxxxxx            |
+    |   10 | xxxxxxxxxx           |
+    |   11 | xxxxxxxxxxx          |
+    |   12 | xxxxxxxxxxxx         |
+    |   13 | xxxxxxxxxxxxx        |
+    |   14 | xxxxxxxxxxxxxx       |
+    |   15 | xxxxxxxxxxxxxxx      |
+    |   16 | xxxxxxxxxxxxxxxx     |
+    |   17 | xxxxxxxxxxxxxxxxx    |
+    |   18 | xxxxxxxxxxxxxxxxxx   |
+    |   19 | xxxxxxxxxxxxxxxxxxx  |
+    |   20 | xxxxxxxxxxxxxxxxxxxx |
+    +------+----------------------+
+    20 rows in set (0.01 sec)
 
-The following example demonstrates that `REPEAT()` can operate on strings consisting of multiple characters.
+下例演示 `REPEAT()` 可对多字符字符串操作。
 
 ```sql
 SELECT REPEAT('ha',3);
 ```
 
-```
-+----------------+
-| REPEAT('ha',3) |
-+----------------+
-| hahaha         |
-+----------------+
-1 row in set (0.00 sec)
-```
+    +----------------+
+    | REPEAT('ha',3) |
+    +----------------+
+    | hahaha         |
+    +----------------+
+    1 row in set (0.00 sec)
 
-### [`REPLACE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_replace)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_replace"><code>REPLACE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-replace-code-replace-code-a}
 
-Replace occurrences of a specified string.
+替换指定字符串的所有出现。
 
-### [`REVERSE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_reverse)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_reverse"><code>REVERSE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-reverse-code-reverse-code-a}
 
-Reverse the characters in a string.
+反转字符串中的字符顺序。
 
-### [`RIGHT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_right)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_right"><code>RIGHT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-right-code-right-code-a}
 
-Return the specified rightmost number of characters.
+返回字符串最右侧指定数量的字符。
 
-### [`RLIKE`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp"><code>RLIKE</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-regexp-html-operator-regexp-code-rlike-code-a}
 
-Synonym for [`REGEXP`](#regexp).
+[`REGEXP`](#regexp) 的同义词。
 
-### [`RPAD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_rpad)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_rpad"><code>RPAD()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-rpad-code-rpad-code-a}
 
-Append string the specified number of times.
+在字符串右侧追加指定次数的字符串。
 
-### [`RTRIM()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_rtrim)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_rtrim"><code>RTRIM()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-rtrim-code-rtrim-code-a}
 
-Remove trailing spaces.
+去除字符串末尾的空格。
 
-### [`SPACE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_space)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_space"><code>SPACE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-space-code-space-code-a}
 
-Return a string of the specified number of spaces.
+返回指定数量空格组成的字符串。
 
-### [`STRCMP()`](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#function_strcmp)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#function_strcmp"><code>STRCMP()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-comparison-functions-html-function-strcmp-code-strcmp-code-a}
 
-Compare two strings.
+比较两个字符串。
 
-### [`SUBSTR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substr)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substr"><code>SUBSTR()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-substr-code-substr-code-a}
 
-Return the substring as specified.
+返回指定的子串。
 
-### [`SUBSTRING()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substring)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substring"><code>SUBSTRING()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-substring-code-substring-code-a}
 
-Return the substring as specified.
+返回指定的子串。
 
-### [`SUBSTRING_INDEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substring-index)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substring-index"><code>SUBSTRING_INDEX()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-substring-index-code-substring-index-code-a}
 
-The `SUBSTRING_INDEX()` function is used to extract a substring from a string based on a specified delimiter and count. This function is particularly useful when dealing with data separated by a specific delimiter, such as parsing CSV data or processing log files.
+`SUBSTRING_INDEX()` 函数用于根据指定分隔符和计数，从字符串中提取子串。该函数在处理以特定分隔符分隔的数据时非常有用，如解析 CSV 数据或处理日志文件。
 
-Syntax:
+语法：
 
 ```sql
 SUBSTRING_INDEX(str, delim, count)
 ```
 
-- `str`: specifies the string to be processed.
-- `delim`: specifies the delimiter in the string, which is case-sensitive.
-- `count`: specifies the number of occurrences of the delimiter.
-    - If `count` is a positive number, the function returns the substring before the `count` occurrences (counting from the left of the string) of the delimiter.
-    - If `count` is a negative number, the function returns the substring after the `count` occurrences (counting from the right of the string) of the delimiter.
-    - If `count` is `0`, the function returns an empty string.
+-   `str`：要处理的字符串。
+-   `delim`：字符串中的分隔符，区分大小写。
+-   `count`：分隔符出现的次数。
+    -   如果 `count` 为正数，函数返回从字符串左侧起分隔符出现 `count` 次之前的子串。
+    -   如果 `count` 为负数，函数返回从字符串右侧起分隔符出现 `count` 次之后的子串。
+    -   如果 `count` 为 `0`，函数返回空字符串。
 
-Example 1:
+示例 1：
 
 ```sql
 SELECT SUBSTRING_INDEX('www.tidbcloud.com', '.', 2);
 ```
 
-Output 1:
+输出 1：
 
 ```sql
 +-----------------------------------------+
@@ -2159,13 +2079,13 @@ Output 1:
 +-----------------------------------------+
 ```
 
-Example 2:
+示例 2：
 
 ```sql
 SELECT SUBSTRING_INDEX('www.tidbcloud.com', '.', -1);
 ```
 
-Output 2:
+输出 2：
 
 ```sql
 +------------------------------------------+
@@ -2175,26 +2095,26 @@ Output 2:
 +------------------------------------------+
 ```
 
-### [`TO_BASE64()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_to-base64)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_to-base64"><code>TO_BASE64()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-to-base64-code-to-base64-code-a}
 
-The `TO_BASE64()` function is used to convert the given argument to a string in the base-64 encoded form and return the result according to the character set and collation of the current connection. A base-64 encoded string can be decoded using the [`FROM_BASE64()`](#from_base64) function.
+`TO_BASE64()` 函数用于将给定参数转换为 base-64 编码形式的字符串，并根据当前连接的字符集和排序规则返回结果。base-64 编码字符串可通过 [`FROM_BASE64()`](#from_base64) 函数解码。
 
-Syntax:
+语法：
 
 ```sql
 TO_BASE64(str)
 ```
 
-- If the argument is not a string, the function converts it to a string before base-64 encoding.
-- If the argument is `NULL`, the function returns `NULL`.
+-   如果参数不是字符串，函数会先将其转换为字符串再进行 base-64 编码。
+-   如果参数为 `NULL`，函数返回 `NULL`。
 
-Example 1:
+示例 1：
 
 ```sql
 SELECT TO_BASE64('abc');
 ```
 
-Output 1:
+输出 1：
 
 ```sql
 +------------------+
@@ -2204,13 +2124,13 @@ Output 1:
 +------------------+
 ```
 
-Example 2:
+示例 2：
 
 ```sql
 SELECT TO_BASE64(6);
 ```
 
-Output 2:
+输出 2：
 
 ```sql
 +--------------+
@@ -2220,29 +2140,29 @@ Output 2:
 +--------------+
 ```
 
-### [`TRANSLATE()`](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/TRANSLATE.html#GUID-80F85ACB-092C-4CC7-91F6-B3A585E3A690)
+### <a href="https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/TRANSLATE.html#GUID-80F85ACB-092C-4CC7-91F6-B3A585E3A690"><code>TRANSLATE()</code></a> {#a-href-https-docs-oracle-com-en-database-oracle-oracle-database-21-sqlrf-translate-html-guid-80f85acb-092c-4cc7-91f6-b3a585e3a690-code-translate-code-a}
 
-Replace all occurrences of characters by other characters in a string. It does not treat empty strings as `NULL` as Oracle does.
+将字符串中所有出现的字符替换为其他字符。与 Oracle 不同，空字符串不会被视为 `NULL`。
 
-### [`TRIM()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_trim)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_trim"><code>TRIM()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-trim-code-trim-code-a}
 
-Remove leading and trailing spaces.
+去除字符串首尾的空格。
 
-### [`UCASE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ucase)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ucase"><code>UCASE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-ucase-code-ucase-code-a}
 
-The `UCASE()` function is used to convert a string to uppercase letters. This function is equivalent to the `UPPER()` function.
+`UCASE()` 函数用于将字符串转换为大写字母。该函数等价于 `UPPER()` 函数。
 
 > **Note:**
 >
-> When the string is null, the `UCASE()` function returns `NULL`.
+> 当字符串为 null 时，`UCASE()` 函数返回 `NULL`。
 
-Example:
+示例：
 
 ```sql
 SELECT UCASE('bigdata') AS result_upper, UCASE(null) AS result_null;
 ```
 
-Output:
+输出：
 
 ```sql
 +--------------+-------------+
@@ -2252,22 +2172,22 @@ Output:
 +--------------+-------------+
 ```
 
-### [`UNHEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_unhex)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_unhex"><code>UNHEX()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-unhex-code-unhex-code-a}
 
-The `UNHEX()` function performs the reverse operation of the `HEX()` function. It treats each pair of characters in the argument as a hexadecimal number and converts it to the character represented by that number, returning the result as a binary string.
+`UNHEX()` 函数执行 `HEX()` 函数的逆操作。它将参数中的每对字符视为一个十六进制数，并将其转换为该数值对应的字符，以二进制字符串形式返回结果。
 
 > **Note:**
 >
-> - The argument must be a valid hexadecimal value that contains `0`–`9`, `A`–`F`, or `a`–`f`. If the argument is `NULL` or falls outside this range, the function returns `NULL`.
-> - In the MySQL client, the [`--binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex) option is enabled by default in interactive mode, causing the client to display data with an unknown character set as a [hexadecimal literal](https://dev.mysql.com/doc/refman/8.0/en/hexadecimal-literals.html). You can use the `--skip-binary-as-hex` option to disable this behavior.
+> -   参数必须是有效的十六进制值，仅包含 `0`–`9`、`A`–`F` 或 `a`–`f`。如果参数为 `NULL` 或超出该范围，函数返回 `NULL`。
+> -   在 MySQL 客户端中，交互模式下默认启用 [`--binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex) 选项，会将未知字符集的数据以 [十六进制字面量](https://dev.mysql.com/doc/refman/8.0/en/hexadecimal-literals.html) 显示。你可以使用 `--skip-binary-as-hex` 选项关闭该行为。
 
-Example:
+示例：
 
 ```sql
 SELECT UNHEX('54694442');
 ```
 
-Output:
+输出：
 
 ```sql
 +--------------------------------------+
@@ -2277,21 +2197,21 @@ Output:
 +--------------------------------------+
 ```
 
-### [`UPPER()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_upper)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_upper"><code>UPPER()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-upper-code-upper-code-a}
 
-The `UPPER()` function is used to convert a string to uppercase letters. This function is equivalent to the `UCASE()` function.
+`UPPER()` 函数用于将字符串转换为大写字母。该函数等价于 `UCASE()` 函数。
 
 > **Note:**
 >
-> When the string is null, the `UPPER()` function returns `NULL`.
+> 当字符串为 null 时，`UPPER()` 函数返回 `NULL`。
 
-Example:
+示例：
 
 ```sql
 SELECT UPPER('bigdata') AS result_upper, UPPER(null) AS result_null;
 ```
 
-Output:
+输出：
 
 ```sql
 +--------------+-------------+
@@ -2301,30 +2221,30 @@ Output:
 +--------------+-------------+
 ```
 
-### [`WEIGHT_STRING()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_weight-string)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_weight-string"><code>WEIGHT_STRING()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-weight-string-code-weight-string-code-a}
 
-The `WEIGHT_STRING()` function returns the weight string (binary characters) for the input string, primarily used for sorting and comparison operations in multi-character set scenarios. If the argument is `NULL`, it returns `NULL`. The syntax is as follows:
+`WEIGHT_STRING()` 函数返回输入字符串的权重字符串（二进制字符），主要用于多字符集场景下的排序和比较操作。如果参数为 `NULL`，则返回 `NULL`。语法如下：
 
 ```sql
 WEIGHT_STRING(str [AS {CHAR|BINARY}(N)])
 ```
 
-- `str`: the input string expression. If it is a non-binary string, such as a `CHAR`, `VARCHAR`, or `TEXT` value, the return value contains the collation weights for the string. If it is a binary string, such as a `BINARY`, `VARBINARY`, or `BLOB` value, the return value is the same as the input.
+-   `str`：输入的字符串表达式。如果是非二进制字符串，如 `CHAR`、`VARCHAR` 或 `TEXT` 值，返回值包含字符串的排序权重。如果是二进制字符串，如 `BINARY`、`VARBINARY` 或 `BLOB` 值，返回值与输入相同。
 
-- `AS {CHAR|BINARY}(N)`: optional parameters used to specify the type and length of the output. `CHAR` represents the character data type, and `BINARY` represents the binary data type. `N` specifies the output length, which is an integer greater than or equal to 1.
+-   `AS {CHAR|BINARY}(N)`：可选参数，用于指定输出的类型和长度。`CHAR` 表示字符类型，`BINARY` 表示二进制类型。`N` 指定输出长度，需为大于等于 1 的整数。
 
 > **Note:**
 >
-> If `N` is less than the string length, the string is truncated. If `N` exceeds the string length, `AS CHAR(N)` pads the string with spaces to the specified length, and `AS BINARY(N)` pads the string with `0x00` to the specified length.
+> 如果 `N` 小于字符串长度，则字符串被截断。如果 `N` 大于字符串长度，`AS CHAR(N)` 会用空格补齐到指定长度，`AS BINARY(N)` 会用 `0x00` 补齐到指定长度。
 
-Example:
+示例：
 
 ```sql
 SET NAMES 'utf8mb4';
 SELECT HEX(WEIGHT_STRING('ab' AS CHAR(3))) AS char_result, HEX(WEIGHT_STRING('ab' AS BINARY(3))) AS binary_result;
 ```
 
-Output:
+输出：
 
 ```sql
 +-------------+---------------+
@@ -2334,62 +2254,63 @@ Output:
 +-------------+---------------+
 ```
 
-## Unsupported functions
+## 不支持的函数 {#unsupported-functions}
 
-* `LOAD_FILE()`
-* `MATCH()`
-* `SOUNDEX()`
+-   `LOAD_FILE()`
+-   `MATCH()`
+-   `SOUNDEX()`
 
-## Regular expression compatibility with MySQL
+## 正则表达式与 MySQL 的兼容性 {#regular-expression-compatibility-with-mysql}
 
-The following sections describe the regular expression compatibility with MySQL, including `REGEXP_INSTR()`, `REGEXP_LIKE()`, `REGEXP_REPLACE()`, and `REGEXP_SUBSTR()`.
+以下章节介绍 TiDB 与 MySQL 在正则表达式方面的兼容性，包括 `REGEXP_INSTR()`、`REGEXP_LIKE()`、`REGEXP_REPLACE()` 和 `REGEXP_SUBSTR()`。
 
-### Syntax compatibility
+### 语法兼容性 {#syntax-compatibility}
 
-MySQL implements regular expression using International Components for Unicode (ICU), and TiDB uses RE2. To learn the syntax differences between the two libraries, you can refer to the [ICU documentation](https://unicode-org.github.io/icu/userguide/) and [RE2 Syntax](https://github.com/google/re2/wiki/Syntax).
+MySQL 使用 International Components for Unicode (ICU) 实现正则表达式，TiDB 使用 RE2。你可以参考 [ICU 文档](https://unicode-org.github.io/icu/userguide/) 和 [RE2 语法](https://github.com/google/re2/wiki/Syntax) 了解两者的语法差异。
 
-### `match_type` compatibility
+### <code>match_type</code> 兼容性 {#code-match-type-code-compatibility}
 
-The value options of `match_type` between TiDB and MySQL are:
+TiDB 与 MySQL 的 `match_type` 取值选项如下：
 
-- Value options in TiDB are `"c"`, `"i"`, `"m"`, and `"s"`, and value options in MySQL are `"c"`, `"i"`, `"m"`, `"n"`, and `"u"`.
-- The `"s"` in TiDB corresponds to `"n"` in MySQL. When `"s"` is set in TiDB, the `.` character also matches line terminators (`\n`).
+-   TiDB 支持的取值为 `"c"`、`"i"`、`"m"` 和 `"s"`，MySQL 支持的取值为 `"c"`、`"i"`、`"m"`、`"n"` 和 `"u"`。
 
-    For example, the `SELECT REGEXP_LIKE(a, b, "n") FROM t1` in MySQL is the same as the `SELECT REGEXP_LIKE(a, b, "s") FROM t1` in TiDB.
+-   TiDB 中的 `"s"` 对应 MySQL 的 `"n"`。在 TiDB 中设置 `"s"` 时，`.` 字符也会匹配换行符（`\n`）。
 
-- TiDB does not support `"u"`, which means Unix-only line endings in MySQL.
+    例如，MySQL 中的 `SELECT REGEXP_LIKE(a, b, "n") FROM t1` 等价于 TiDB 中的 `SELECT REGEXP_LIKE(a, b, "s") FROM t1`。
 
-| `match_type` | MySQL | TiDB | Description                            |
-|:------------:|-------|------|----------------------------------------|
-| c            | Yes   | Yes  | Case-sensitive matching                |
-| i            | Yes   | Yes  | Case-insensitive matching              |
-| m            | Yes   | Yes  | Multi-line mode                        |
-| s            | No    | Yes  | Matches newlines, same as `n` in MySQL |
-| n            | Yes   | No   | Matches newlines, same as `s` in TiDB  |
-| u            | Yes   | No   | UNIX&trade; line endings               |
+-   TiDB 不支持 `"u"`，即 MySQL 中的 Unix-only 换行符。
 
-### Data type compatibility
+| `match_type` | MySQL | TiDB | 描述                                   |
+| :----------: | ----- | ---- | -------------------------------------- |
+|       c      | Yes   | Yes  | 区分大小写匹配                         |
+|       i      | Yes   | Yes  | 不区分大小写匹配                       |
+|       m      | Yes   | Yes  | 多行模式                               |
+|       s      | No    | Yes  | 匹配换行符，等价于 MySQL 的 `n`        |
+|       n      | Yes   | No   | 匹配换行符，等价于 TiDB 的 `s`         |
+|       u      | Yes   | No   | UNIX™ 换行符                           |
 
-The difference between TiDB and MySQL support for the binary string type:
+### 数据类型兼容性 {#data-type-compatibility}
 
-- MySQL does not support binary strings in regular expression functions since 8.0.22. For more details, refer to [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/regexp.html). But in practice, regular functions can work in MySQL when all parameters or return types are binary strings. Otherwise, an error will be reported.
-- Currently, TiDB prohibits using binary strings and an error will be reported under any circumstances.
+TiDB 与 MySQL 在二进制字符串类型支持上的差异：
 
-### Other compatibility
+-   MySQL 自 8.0.22 起不支持在正则表达式函数中使用二进制字符串。详情参见 [MySQL 文档](https://dev.mysql.com/doc/refman/8.0/en/regexp.html)。但实际上，当所有参数或返回类型均为二进制字符串时，MySQL 的正则函数可以工作，否则会报错。
+-   目前，TiDB 禁止在任何情况下使用二进制字符串，否则会报错。
 
-- The behavior of replacing empty strings in TiDB is different from MySQL. Taking `REGEXP_REPLACE("", "^$", "123")` as an example:
+### 其他兼容性 {#other-compatibility}
 
-    - MySQL does not replace the empty string and returns `""` as the result.
-    - TiDB replaces the empty string and returns `"123"` as the result.
+-   TiDB 在替换空字符串的行为与 MySQL 不同。以 `REGEXP_REPLACE("", "^$", "123")` 为例：
 
-- The keyword used for capturing groups in TiDB is different from MySQL. MySQL uses `$` as the keyword, while TiDB uses `\\` as the keyword. In addition, TiDB only supports capturing groups numbered from `0` to `9`.
+    -   MySQL 不会替换空字符串，结果为 `""`。
+    -   TiDB 会替换空字符串，结果为 `"123"`。
 
-    For example, the following SQL statement returns `ab` in TiDB:
+-   TiDB 捕获组的关键字与 MySQL 不同。MySQL 使用 `$` 作为关键字，TiDB 使用 `\\` 作为关键字。此外，TiDB 仅支持编号为 `0` 到 `9` 的捕获组。
+
+    例如，以下 SQL 语句在 TiDB 中返回 `ab`：
 
     ```sql
     SELECT REGEXP_REPLACE('abcd','(.*)(.{2})$','\\1') AS s;
     ```
 
-### Known issues
+### 已知问题 {#known-issues}
 
-- [GitHub Issue #37981](https://github.com/pingcap/tidb/issues/37981)
+-   [GitHub Issue #37981](https://github.com/pingcap/tidb/issues/37981)

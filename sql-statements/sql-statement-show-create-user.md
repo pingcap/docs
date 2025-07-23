@@ -1,20 +1,20 @@
 ---
-title: SHOW CREATE USER | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW CREATE USER for the TiDB database.
+title: SHOW CREATE USER | TiDB SQL 语句参考
+summary: 关于 TiDB 数据库中 SHOW CREATE USER 的用法概述。
 ---
 
 # SHOW CREATE USER
 
-This statement shows how to re-create a user using the `CREATE USER` syntax.
+此语句显示如何使用 `CREATE USER` 语法重新创建用户。
 
-## Synopsis
+## 概要
 
 ```ebnf+diagram
 ShowCreateUserStmt ::=
     "SHOW" "CREATE" "USER" (Username ("@" Hostname)? | "CURRENT_USER" ( "(" ")" )? )
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> SHOW CREATE USER 'root';
@@ -34,21 +34,21 @@ mysql> SHOW GRANTS FOR 'root';
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
 <CustomContent platform="tidb">
 
-* The output of `SHOW CREATE USER` is designed to match MySQL, but several of the `CREATE` options are not yet supported by TiDB. Not yet supported options will be parsed but ignored. See [Security compatibility](/security-compatibility-with-mysql.md) for more details.
+* `SHOW CREATE USER` 的输出旨在与 MySQL 保持一致，但 TiDB 目前尚不支持部分 `CREATE` 选项。不支持的选项会被解析但忽略。更多详情请参见 [Security compatibility](/security-compatibility-with-mysql.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-* The output of `SHOW CREATE USER` is designed to match MySQL, but several of the `CREATE` options are not yet supported by TiDB. Not yet supported options will be parsed but ignored. See [Security compatibility](https://docs.pingcap.com/tidb/stable/security-compatibility-with-mysql/) for more details.
+* `SHOW CREATE USER` 的输出旨在与 MySQL 保持一致，但 TiDB 目前尚不支持部分 `CREATE` 选项。不支持的选项会被解析但忽略。更多详情请参见 [Security compatibility](https://docs.pingcap.com/tidb/stable/security-compatibility-with-mysql/)。
 
 </CustomContent>
 
-## See also
+## 相关链接
 
 * [CREATE USER](/sql-statements/sql-statement-create-user.md)
 * [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)

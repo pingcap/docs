@@ -1,24 +1,24 @@
 ---
 title: SHOW PLACEMENT LABELS
-summary: The usage of SHOW PLACEMENT LABELS in TiDB.
+summary: 在 TiDB 中使用 SHOW PLACEMENT LABELS。
 ---
 
 # SHOW PLACEMENT LABELS
 
-`SHOW PLACEMENT LABELS` is used to summarize the labels and values that are available for Placement Rules.
+`SHOW PLACEMENT LABELS` 用于总结可用于 Placement Rules 的标签及其值。
 
 > **Note:**
 >
-> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
 
-## Synopsis
+## 概要
 
 ```ebnf+diagram
 ShowStmt ::=
     "SHOW" "PLACEMENT" "LABELS" ShowLikeOrWhere?
 ```
 
-## Examples
+## 示例
 
 ```sql
 SHOW PLACEMENT LABELS;
@@ -34,11 +34,11 @@ SHOW PLACEMENT LABELS;
 2 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension to MySQL syntax.
+该语句是 TiDB 对 MySQL 语法的扩展。
 
-## See also
+## 相关链接
 
 * [Placement Rules in SQL](/placement-rules-in-sql.md)
 * [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)

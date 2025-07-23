@@ -1,34 +1,34 @@
 ---
 title: CLIENT_ERRORS_SUMMARY_BY_USER
-summary: Learn about the `CLIENT_ERRORS_SUMMARY_BY_USER` INFORMATION_SCHEMA table.
+summary: 了解 `CLIENT_ERRORS_SUMMARY_BY_USER` INFORMATION_SCHEMA 表。
 ---
 
 # CLIENT_ERRORS_SUMMARY_BY_USER
 
-The table `CLIENT_ERRORS_SUMMARY_BY_USER` provides a summary of SQL errors and warnings that have been returned to clients that connect to a TiDB server. These include:
+表 `CLIENT_ERRORS_SUMMARY_BY_USER` 提供了连接到 TiDB 服务器的客户端返回的 SQL 错误和警告的摘要。这些包括：
 
-* Malformed SQL statements.
-* Division by zero errors.
-* The attempt to insert out-of-range or duplicate key values.
-* Permission errors.
-* A table that does not exist.
+* 格式错误的 SQL 语句。
+* 除零错误。
+* 尝试插入超出范围或重复键值。
+* 权限错误。
+* 不存在的表。
 
-Client errors are returned to the client via the MySQL server protocol, where applications are expected to take appropriate action. The `INFORMATION_SCHEMA.CLIENT_ERRORS_SUMMARY_BY_USER` table provides a useful method to inspect errors in the scenario where applications are not correctly handling (or logging) errors returned by the TiDB server.
+客户端错误通过 MySQL 服务器协议返回给客户端，应用程序应采取适当的措施。`INFORMATION_SCHEMA.CLIENT_ERRORS_SUMMARY_BY_USER` 表提供了一种有用的方法，用于在应用程序未正确处理（或记录） TiDB 服务器返回的错误的场景中检查错误。
 
-Because `CLIENT_ERRORS_SUMMARY_BY_USER` summarizes the errors on a per-user basis, it can be useful to diagnose scenarios where one user server is generating more errors than other servers. Possible scenarios include:
+由于 `CLIENT_ERRORS_SUMMARY_BY_USER` 按用户汇总错误，因此在诊断某个用户服务器产生的错误多于其他服务器的场景时非常有用。可能的场景包括：
 
-* Permission errors.
-* Missing tables, or relational objects.
-* Incorrect SQL syntax, or incompatibilities between the application and the version of TiDB.
+* 权限错误。
+* 缺少表或关系对象。
+* SQL 语法错误，或应用程序与 TiDB 版本之间的不兼容。
 
-The summarized counts can be reset with the statement `FLUSH CLIENT_ERRORS_SUMMARY`. The summary is local to each TiDB server and is only retained in memory. Summaries will be lost if the TiDB server restarts.
+可以使用语句 `FLUSH CLIENT_ERRORS_SUMMARY` 重置汇总的计数。该摘要仅在每个 TiDB 服务器本地内存中保留。重启 TiDB 服务器后，摘要将会丢失。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC CLIENT_ERRORS_SUMMARY_BY_USER;
 ```
 
-The output is as follows:
+输出如下：
 
 ```sql
 +---------------+---------------+------+------+---------+-------+
@@ -45,17 +45,17 @@ The output is as follows:
 7 rows in set (0.00 sec)
 ```
 
-Field description:
+字段说明：
 
-* `USER`: The authenticated user.
-* `ERROR_NUMBER`: The MySQL-compatible error number that was returned.
-* `ERROR_MESSAGE`: The error message which matches the error number (in prepared statement form).
-* `ERROR_COUNT`: The number of times this error was returned to the user.
-* `WARNING_COUNT`: The number of times this warning was returned to the user.
-* `FIRST_SEEN`: The first time this error (or warning) was sent to the user.
-* `LAST_SEEN`: The most recent time this error (or warning) was sent to the user.
+* `USER`：已验证的用户。
+* `ERROR_NUMBER`：返回的 MySQL 兼容错误编号。
+* `ERROR_MESSAGE`：与错误编号匹配的错误信息（在预处理语句形式中）。
+* `ERROR_COUNT`：该错误返回给用户的次数。
+* `WARNING_COUNT`：该警告返回给用户的次数。
+* `FIRST_SEEN`：首次向用户发送此错误（或警告）的时间。
+* `LAST_SEEN`：最近一次向用户发送此错误（或警告）的时间。
 
-The following example shows a warning being generated when the client connects to a local TiDB server. The summary is reset after executing `FLUSH CLIENT_ERRORS_SUMMARY`:
+以下示例显示在客户端连接到本地 TiDB 服务器时生成的警告。执行 `FLUSH CLIENT_ERRORS_SUMMARY` 后，摘要会被重置：
 
 ```sql
 SELECT 0/0;
@@ -64,7 +64,7 @@ FLUSH CLIENT_ERRORS_SUMMARY;
 SELECT * FROM CLIENT_ERRORS_SUMMARY_BY_USER;
 ```
 
-The output is as follows:
+输出如下：
 
 ```sql
 +-----+

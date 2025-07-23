@@ -1,22 +1,22 @@
 ---
 title: Data Types
-summary: Learn about the data types supported in TiDB.
+summary: 了解 TiDB 支持的数据类型。
 ---
 
 # Data Types
 
-TiDB supports all the data types in MySQL except the `SPATIAL` type. This includes all the [numeric types](/data-type-numeric.md), [string types](/data-type-string.md), [date & time types](/data-type-date-and-time.md), and [the JSON type](/data-type-json.md).
+TiDB 支持所有 MySQL 中的数据类型，除了 `SPATIAL` 类型。这包括所有的 [numeric types](/data-type-numeric.md)、[string types](/data-type-string.md)、[date & time types](/data-type-date-and-time.md) 和 [the JSON type](/data-type-json.md)。
 
-The definitions used for datatypes are specified as `T(M[, D])`. Where by:
+数据类型的定义格式为 `T(M[, D])`，其中：
 
-- `T` indicates the specific data type.
-- `M` indicates the maximum display width for integer types. For floating-point and fixed-point types, `M` is the total number of digits that can be stored (the precision). For string types, `M` is the maximum length. The maximum permissible value of M depends on the data type.
+- `T` 表示具体的数据类型。
+- `M` 表示整数类型的最大显示宽度。对于浮点型和定点型，`M` 表示可存储的总位数（精度）。对于字符串类型，`M` 表示最大长度。M 的最大允许值取决于数据类型。
 
 <CustomContent platform="tidb">
 
 > **Warning:**
 >
-> Starting from v8.5.0, integer display width is deprecated ([`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length) is `true` by default). Specifying display width for integer types is NOT recommended.
+> 从 v8.5.0 版本开始，整数显示宽度已被弃用（[`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length) 默认为 `true`）。不建议为整数类型指定显示宽度。
 
 </CustomContent>
 
@@ -24,9 +24,9 @@ The definitions used for datatypes are specified as `T(M[, D])`. Where by:
 
 > **Warning:**
 >
-> Starting from v8.5.0, integer display width is deprecated. Specifying display width for integer types is NOT recommended.
+> 从 v8.5.0 版本开始，整数显示宽度已被弃用。不建议为整数类型指定显示宽度。
 
 </CustomContent>
 
-- `D` applies to floating-point and fixed-point types and indicates the number of digits following the decimal point (the scale).
-- `fsp` applies to the `TIME`, `DATETIME`, and `TIMESTAMP` types and represents the fractional seconds precision. The `fsp` value, if given, must be in the range 0 to 6. A value of 0 signifies that there is no fractional part. If omitted, the default precision is 0.
+- `D` 适用于浮点型和定点型，表示小数点后面的位数（即小数位数）。
+- `fsp` 适用于 `TIME`、`DATETIME` 和 `TIMESTAMP` 类型，表示小数秒的精度。如果给定，`fsp` 的值必须在 0 到 6 之间。值为 0 表示没有小数部分。如果省略，默认精度为 0。

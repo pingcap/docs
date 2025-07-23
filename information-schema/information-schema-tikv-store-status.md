@@ -1,22 +1,22 @@
 ---
 title: TIKV_STORE_STATUS
-summary: Learn the `TIKV_STORE_STATUS` INFORMATION_SCHEMA table.
+summary: 了解 `TIKV_STORE_STATUS` INFORMATION_SCHEMA 表。
 ---
 
 # TIKV_STORE_STATUS
 
-The `TIKV_STORE_STATUS` table shows some basic information of TiKV nodes via PD's API, like the ID allocated in the cluster, address and port, and status, capacity, and the number of Region leaders of the current node.
+`TIKV_STORE_STATUS` 表通过 PD 的 API 展示了 TiKV 节点的一些基本信息，比如在集群中分配的 ID、地址和端口，以及当前节点的状态、容量和 Region 领导者的数量。
 
 > **Note:**
 >
-> This table is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> 该表在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群中不可用。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC TIKV_STORE_STATUS;
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 +-------------------+-------------+------+------+---------+-------+
@@ -45,24 +45,24 @@ The output is as follows:
 19 rows in set (0.00 sec)
 ```
 
-The descriptions of the columns in the `TIKV_STORE_STATUS` table are as follows:
+`TIKV_STORE_STATUS` 表中各列的描述如下：
 
-* `STORE_ID`: The ID of the Store.
-* `ADDRESS`: The address of the Store.
-* `STORE_STATE`: The identifier of the Store state, which corresponds to `STORE_STATE_NAME`.
-* `STORE_STATE_NAME`: The name of the Store state. The name is `Up`, `Offline`, or `Tombstone`.
-* `LABEL`: The label set for the Store.
-* `VERSION`: The version number of the Store.
-* `CAPACITY`: The storage capacity of the Store.
-* `AVAILABLE`: The remaining storage space of the Store.
-* `LEADER_COUNT`: The number of leaders on the Store.
-* `LEADER_WEIGHT`: The leader weight of the Store.
-* `LEADER_SCORE`: The leader score of the Store.
-* `LEADER_SIZE`: The approximate total data size (MB) of all leaders on the Store.
-* `REGION_COUNT`: The number of Regions on the Store.
-* `REGION_WEIGHT`: The Region weight of the Store.
-* `REGION_SCORE`: The Region score of the Store.
-* `REGION_SIZE`: The approximate total data size (MB) of all Regions on the Store.
-* `START_TS`: The timestamp when the Store is started.
-* `LAST_HEARTBEAT_TS`: The timestamp of the last heartbeat sent by the Store.
-* `UPTIME`: The total time since the Store starts.
+* `STORE_ID`: Store 的 ID。
+* `ADDRESS`: Store 的地址。
+* `STORE_STATE`: Store 状态的标识符，对应 `STORE_STATE_NAME`。
+* `STORE_STATE_NAME`: Store 状态的名称。名称可能为 `Up`、`Offline` 或 `Tombstone`。
+* `LABEL`: 设置在 Store 上的标签。
+* `VERSION`: Store 的版本号。
+* `CAPACITY`: Store 的存储容量。
+* `AVAILABLE`: Store 的剩余存储空间。
+* `LEADER_COUNT`: Store 上的领导者数量。
+* `LEADER_WEIGHT`: Store 的领导者权重。
+* `LEADER_SCORE`: Store 的领导者得分。
+* `LEADER_SIZE`: Store 上所有领导者的近似总数据大小（MB）。
+* `REGION_COUNT`: Store 上的 Region 数量。
+* `REGION_WEIGHT`: Store 的 Region 权重。
+* `REGION_SCORE`: Store 的 Region 得分。
+* `REGION_SIZE`: Store 上所有 Region 的近似总数据大小（MB）。
+* `START_TS`: Store 启动的时间戳。
+* `LAST_HEARTBEAT_TS`: Store 发送的最后一次心跳的时间戳。
+* `UPTIME`: Store 启动以来的总运行时间。

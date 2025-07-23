@@ -1,15 +1,15 @@
 ---
-title: Temporary Tables
-summary: Learn how to create, view, query, and delete temporary tables.
+title: 临时表
+summary: 学习如何创建、查看、查询和删除临时表。
 ---
 
-# Temporary Tables
+# 临时表
 
-Temporary tables can be thought of as a technique for reusing query results.
+临时表可以被看作是一种重用查询结果的技术。
 
-If you want to know something about the eldest authors in the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application, you might write multiple queries that use the list of eldest authors.
+如果你想了解 [Bookshop](/develop/dev-guide-bookshop-schema-design.md) 应用中最年长作者的相关信息，可能会编写多个使用最年长作者列表的查询。
 
-For example, you can use the following statement to get the top 50 eldest authors from the `authors` table:
+例如，你可以使用以下语句从 `authors` 表中获取前 50 位最年长的作者：
 
 ```sql
 SELECT a.id, a.name, (IFNULL(a.death_year, YEAR(NOW())) - a.birth_year) AS age
@@ -18,7 +18,7 @@ ORDER BY age DESC
 LIMIT 50;
 ```
 
-The result is as follows:
+结果如下：
 
 ```
 +------------+---------------------+------+
@@ -34,30 +34,30 @@ The result is as follows:
 ...
 | 4100546410 | Maida Walsh         |   80 |
 +------------+---------------------+------+
-50 rows in set (0.01 sec)
+50 行结果（0.01 秒）
 ```
 
-For the convenience of subsequent queries, you need to cache the result of this query. When using general tables for storage, you should pay attention to how to avoid the table name duplication problem between different sessions, and the need of cleaning up intermediate results in time, as these tables might not be used after a batch query.
+为了后续查询的便利，你需要缓存此查询的结果。在使用普通表存储时，应注意避免不同会话之间的表名重复问题，以及及时清理中间结果，因为这些表在批量查询后可能不再使用。
 
-## Create a temporary table
+## 创建临时表
 
-To cache intermediate results, the temporary tables feature is introduced in TiDB v5.3.0. TiDB automatically drops a local temporary table after a session ends, which frees you from worrying about the management trouble caused by increasing intermediate results.
+为了缓存中间结果，TiDB 在 v5.3.0 版本中引入了临时表功能。TiDB 会在会话结束后自动删除本地临时表，免除你管理因中间结果增加带来的麻烦。
 
-### Types of temporary tables
+### 临时表的类型
 
-Temporary tables in TiDB are divided into two types: local temporary tables and global temporary tables.
+TiDB 中的临时表分为两种：本地临时表和全局临时表。
 
-- For a local temporary table, the table definition and data in the table are visible only to the current session. This type is suitable for temporarily storing intermediate data in the session.
-- For a global temporary table, the table definition is visible to the entire TiDB cluster, and the data in the table is visible only to the current transaction. This type is suitable for temporarily storing intermediate data in a transaction.
+- 本地临时表：表定义和数据仅对当前会话可见。此类型适合在会话中临时存储中间数据。
+- 全局临时表：表定义对整个 TiDB 集群可见，表中的数据仅对当前事务可见。此类型适合在事务中临时存储中间数据。
 
-### Create a local temporary table
+### 创建本地临时表
 
-Before creating a local temporary table, you need to add `CREATE TEMPORARY TABLES` permission to the current database user.
+在创建本地临时表之前，你需要为当前数据库用户添加 `CREATE TEMPORARY TABLES` 权限。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-You can create a temporary table using the `CREATE TEMPORARY TABLE <table_name>` statement. The default type is a local temporary table, which is visible only to the current session.
+你可以使用 `CREATE TEMPORARY TABLE <table_name>` 语句创建临时表。默认类型为本地临时表，仅对当前会话可见。
 
 ```sql
 CREATE TEMPORARY TABLE top_50_eldest_authors (
@@ -68,7 +68,7 @@ CREATE TEMPORARY TABLE top_50_eldest_authors (
 );
 ```
 
-After creating the temporary table, you can use the `INSERT INTO table_name SELECT ...` statement to insert the results of the above query into the temporary table you just created.
+创建临时表后，可以使用 `INSERT INTO table_name SELECT ...` 语句将上述查询的结果插入到刚创建的临时表中。
 
 ```sql
 INSERT INTO top_50_eldest_authors
@@ -78,7 +78,7 @@ ORDER BY age DESC
 LIMIT 50;
 ```
 
-The result is as follows:
+结果如下：
 
 ```
 Query OK, 50 rows affected (0.03 sec)
@@ -128,12 +128,12 @@ public List<Author> getTop50EldestAuthorInfo() throws SQLException {
 </div>
 </SimpleTab>
 
-### Create a global temporary table
+### 创建全局临时表
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-To create a global temporary table, you can add the `GLOBAL` keyword and end with `ON COMMIT DELETE ROWS`, which means the table will be deleted after the current transaction ends.
+要创建全局临时表，可以添加 `GLOBAL` 关键字，并以 `ON COMMIT DELETE ROWS` 结尾，表示在当前事务结束后删除该表。
 
 ```sql
 CREATE GLOBAL TEMPORARY TABLE IF NOT EXISTS top_50_eldest_authors_global (
@@ -144,12 +144,12 @@ CREATE GLOBAL TEMPORARY TABLE IF NOT EXISTS top_50_eldest_authors_global (
 ) ON COMMIT DELETE ROWS;
 ```
 
-When inserting data to global temporary tables, you must explicitly declare the start of the transaction via `BEGIN`. Otherwise, the data will be cleared after the `INSERT INTO` statement is executed. Because in the Auto Commit mode, the transaction is automatically committed after the `INSERT INTO` statement is executed, and the global temporary table is cleared when the transaction ends.
+在向全局临时表插入数据时，必须显式声明事务的开始，使用 `BEGIN`。否则，数据在执行完 `INSERT INTO` 语句后会被清除。因为在自动提交模式下，`INSERT INTO` 语句执行完后事务会自动提交，事务结束时全局临时表会被清空。
 
 </div>
 <div label="Java" value="java">
 
-When using global temporary tables, you need to turn off Auto Commit mode first. In Java, you can do this with the `conn.setAutoCommit(false);` statement, and you can commit the transaction explicitly with `conn.commit();`. The data added to the global temporary table during the transaction will be cleared after the transaction is committed or canceled.
+在使用全局临时表时，你需要先关闭自动提交模式。在 Java 中，可以通过 `conn.setAutoCommit(false);` 来实现，并可以通过 `conn.commit();` 显式提交事务。在事务期间添加到全局临时表的数据，在事务提交或取消后会被清除。
 
 ```java
 public List<Author> getTop50EldestAuthorInfo() throws SQLException {
@@ -194,11 +194,11 @@ public List<Author> getTop50EldestAuthorInfo() throws SQLException {
 </div>
 </SimpleTab>
 
-## View temporary tables
+## 查看临时表
 
-With the `SHOW [FULL] TABLES` statement, you can view a list of existing global temporary tables, but you cannot see any local temporary tables in the list. For now, TiDB does not have a similar `information_schema.INNODB_TEMP_TABLE_INFO` system table for storing temporary table information.
+使用 `SHOW [FULL] TABLES` 语句可以查看现有的全局临时表列表，但不能看到任何本地临时表。目前，TiDB 还没有类似 `information_schema.INNODB_TEMP_TABLE_INFO` 的系统表用以存储临时表信息。
 
-For example, you can see the global temporary table `top_50_eldest_authors_global` in the table list, but not the `top_50_eldest_authors` table.
+例如，你可以在表列表中看到全局临时表 `top_50_eldest_authors_global`，但看不到 `top_50_eldest_authors` 表。
 
 ```
 +-------------------------------+------------+
@@ -212,18 +212,18 @@ For example, you can see the global temporary table `top_50_eldest_authors_globa
 | top_50_eldest_authors_global  | BASE TABLE |
 | users                         | BASE TABLE |
 +-------------------------------+------------+
-9 rows in set (0.00 sec)
+9 行结果（0.00 秒）
 ```
 
-## Query a temporary table
+## 查询临时表
 
-Once the temporary table is ready, you can query it as a normal data table:
+一旦临时表准备就绪，你可以像查询普通数据表一样查询它：
 
 ```sql
 SELECT * FROM top_50_eldest_authors;
 ```
 
-You can reference data from temporary tables to your query via [Multi-table join queries](/develop/dev-guide-join-tables.md):
+你也可以通过 [Multi-table join queries](/develop/dev-guide-join-tables.md) 引用临时表中的数据到你的查询中：
 
 ```sql
 EXPLAIN SELECT ANY_VALUE(ta.id) AS author_id, ANY_VALUE(ta.age), ANY_VALUE(ta.name), COUNT(*) AS books
@@ -232,42 +232,42 @@ LEFT JOIN book_authors ba ON ta.id = ba.author_id
 GROUP BY ta.id;
 ```
 
-Different from [view](/develop/dev-guide-use-views.md), querying a temporary table gets data directly from the temporary table instead of executing the original query used in the data insert. In some cases, this can improve the query performance.
+不同于 [view](/develop/dev-guide-use-views.md)，查询临时表会直接从临时表中获取数据，而不是执行插入时使用的原始查询。在某些情况下，这可以提升查询性能。
 
-## Drop a temporary table
+## 删除临时表
 
-A local temporary table in a session is automatically dropped after the **session** ends, along with both data and table schema. A global temporary table in a transaction is automatically cleared at the end of the **transaction**, but the table schema remains and needs to be deleted manually.
+会话中的本地临时表在 **会话** 结束后会自动删除，包括数据和表结构。事务中的全局临时表在 **事务** 结束时会自动清空，但表结构仍然存在，需要手动删除。
 
-To manually drop local temporary tables, use the `DROP TABLE` or `DROP TEMPORARY TABLE` syntax. For example:
+要手动删除本地临时表，可以使用 `DROP TABLE` 或 `DROP TEMPORARY TABLE` 语法。例如：
 
 ```sql
 DROP TEMPORARY TABLE top_50_eldest_authors;
 ```
 
-To manually drop global temporary tables, use the `DROP TABLE` or `DROP GLOBAL TEMPORARY TABLE` syntax. For example:
+要手动删除全局临时表，可以使用 `DROP TABLE` 或 `DROP GLOBAL TEMPORARY TABLE` 语法。例如：
 
 ```sql
 DROP GLOBAL TEMPORARY TABLE top_50_eldest_authors_global;
 ```
 
-## Limitation
+## 限制
 
-For limitations of temporary tables in TiDB, see [Compatibility restrictions with other TiDB features](/temporary-tables.md#compatibility-restrictions-with-other-tidb-features).
+关于 TiDB 中临时表的限制，请参见 [Compatibility restrictions with other TiDB features](/temporary-tables.md#compatibility-restrictions-with-other-tidb-features)。
 
-## Read more
+## 阅读更多
 
 - [Temporary Tables](/temporary-tables.md)
 
-## Need help?
+## 需要帮助？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或 [提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或 [提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

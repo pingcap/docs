@@ -1,16 +1,16 @@
 ---
 title: TiDB Data Type
-summary: Learn about the JSON data type in TiDB.
+summary: 了解 TiDB 中的 JSON 数据类型。
 ---
 
 # JSON Data Type
 
-TiDB supports the `JSON` (JavaScript Object Notation) data type, which is useful for storing semi-structured data. The `JSON` data type provides the following advantages over storing `JSON`-format strings in a string column:
+TiDB 支持 `JSON` (JavaScript Object Notation) 数据类型，适用于存储半结构化数据。与将 `JSON` 格式字符串存储在字符串列中相比，`JSON` 数据类型具有以下优势：
 
-- Use the Binary format for serialization. The internal format permits quick read access to `JSON` document elements.
-- Automatic validation of the JSON documents stored in `JSON` columns. Only valid documents can be stored.
+- 使用二进制格式进行序列化。内部格式允许快速访问 `JSON` 文档元素。
+- 自动验证存储在 `JSON` 列中的 JSON 文档。只有有效的文档才能被存储。
 
-`JSON` columns, like columns of other binary types, are not indexed directly, but you can index the fields in the `JSON` document in the form of generated column:
+`JSON` 列，像其他二进制类型的列一样，不会被直接索引，但你可以以生成列的形式对 `JSON` 文档中的字段建立索引：
 
 ```sql
 CREATE TABLE city (
@@ -23,44 +23,44 @@ INSERT INTO city (id,detail) VALUES (1, '{"name": "Beijing", "population": 100}'
 SELECT id FROM city WHERE population >= 100;
 ```
 
-For more information, see [JSON Functions](/functions-and-operators/json-functions.md) and [Generated Columns](/generated-columns.md).
+更多信息，请参见 [JSON Functions](/functions-and-operators/json-functions.md) 和 [Generated Columns](/generated-columns.md)。
 
-## JSON value types
+## JSON 值类型
 
-The values inside a JSON document have types. This is visible in the output of [`JSON_TYPE`()](/functions-and-operators/json-functions/json-functions-return.md#json_type).
+JSON 文档中的值具有类型。这在 [`JSON_TYPE`()](/functions-and-operators/json-functions/json-functions-return.md#json_type) 的输出中可以看到。
 
-| Type             | Example                        |
-|------------------|--------------------------------|
-| ARRAY            | `[]`                           |
-| BIT              |                                |
-| BLOB             | `0x616263`                     |
-| BOOLEAN          | `true`                         |
-| DATE             | `"2025-06-14"`                 |
+| 类型             | 示例                        |
+|------------------|------------------------------|
+| ARRAY            | `[]`                         |
+| BIT              |                              |
+| BLOB             | `0x616263`                   |
+| BOOLEAN          | `true`                       |
+| DATE             | `"2025-06-14"`               |
 | DATETIME         | `"2025-06-14 09:05:10.000000"` |
-| DOUBLE           | `1.14`                         |
-| INTEGER          | `5`                            |
-| NULL             | `null`                         |
-| OBJECT           | `{}`                           |
-| OPAQUE           |                                |
-| STRING           | `"foobar"`                     |
-| TIME             | `"09:10:00.000000"`            |
-| UNSIGNED INTEGER | `9223372036854776000`          |
+| DOUBLE           | `1.14`                       |
+| INTEGER          | `5`                          |
+| NULL             | `null`                       |
+| OBJECT           | `{}`                         |
+| OPAQUE           |                              |
+| STRING           | `"foobar"`                   |
+| TIME             | `"09:10:00.000000"`          |
+| UNSIGNED INTEGER | `9223372036854776000`        |
 
-## Restrictions
+## 限制
 
-- Currently, TiDB only supports pushing down limited `JSON` functions to TiFlash. For more information, see [Push-down expressions](/tiflash/tiflash-supported-pushdown-calculations.md#push-down-expressions).
-- TiDB Backup & Restore (BR) changes how JSON column data is encoded in v6.3.0. Therefore, it is not recommended to use BR to restore data containing JSON columns to a TiDB cluster earlier than v6.3.0.
-- Do not use any replication tool to replicate data containing non-standard `JSON` data types, such as `DATE`, `DATETIME`, and `TIME`.
+- 目前，TiDB 仅支持将有限的 `JSON` 函数下推到 TiFlash。更多信息，请参见 [Push-down expressions](/tiflash/tiflash-supported-pushdown-calculations.md#push-down-expressions)。
+- TiDB Backup & Restore (BR) 在 v6.3.0 版本中改变了 `JSON` 列数据的编码方式。因此，不建议使用 BR 将包含 `JSON` 列的数据还原到早于 v6.3.0 的 TiDB 集群。
+- 不要使用任何复制工具复制包含非标准 `JSON` 数据类型（如 `DATE`、`DATETIME` 和 `TIME`）的数据。
 
-## MySQL compatibility
+## MySQL 兼容性
 
-- When you create JSON columns with data in the `BINARY` type, MySQL mislabels the data as the `STRING` type currently, while TiDB processes it as the `BINARY` type correctly.
+- 当你用 `BINARY` 类型创建 `JSON` 列并存入数据时，MySQL 目前会误将数据标记为 `STRING` 类型，而 TiDB 会正确处理为 `BINARY` 类型。
 
     ```sql
     CREATE TABLE test(a json);
     INSERT INTO test SELECT json_objectagg('a', b'01010101');
 
-    -- In TiDB, executing the following SQL statement returns `0, 0`. In MySQL, executing the following SQL statement returns `0, 1`.
+    -- 在 TiDB 中，执行以下 SQL 语句会返回 `0, 0`。在 MySQL 中，执行相同 SQL 会返回 `0, 1`。
     mysql> SELECT JSON_EXTRACT(JSON_OBJECT('a', b'01010101'), '$.a') = "base64:type15:VQ==" AS r1, JSON_EXTRACT(a, '$.a') = "base64:type15:VQ==" AS r2 FROM test;
     +------+------+
     | r1   | r2   |
@@ -70,9 +70,9 @@ The values inside a JSON document have types. This is visible in the output of [
     1 row in set (0.01 sec)
     ```
 
-    For more information, see issue [#37443](https://github.com/pingcap/tidb/issues/37443).
+    更多信息，请参见 issue [#37443](https://github.com/pingcap/tidb/issues/37443)。
 
-- When converting the data type from `ENUM` or `SET` to `JSON`, TiDB checks the correctness of data format. For example, executing the following SQL statements in TiDB will return an error.
+- 当将数据类型从 `ENUM` 或 `SET` 转换为 `JSON` 时，TiDB 会检查数据格式的正确性。例如，在 TiDB 中执行以下 SQL 语句会返回错误。
 
     ```sql
     CREATE TABLE t(e ENUM('a'));
@@ -81,11 +81,11 @@ The values inside a JSON document have types. This is visible in the output of [
     ERROR 3140 (22032): Invalid JSON text: The document root must not be followed by other values.
     ```
 
-    For more information, see issue [#9999](https://github.com/pingcap/tidb/issues/9999).
+    更多信息，请参见 issue [#9999](https://github.com/pingcap/tidb/issues/9999)。
 
-- In TiDB, you can use `ORDER BY` to sort JSON arrays or JSON objects.
+- 在 TiDB 中，你可以使用 `ORDER BY` 对 JSON 数组或 JSON 对象进行排序。
 
-    In MySQL, if you use `ORDER BY` to sort JSON arrays or JSON objects, MySQL returns a warning and the sorting result does not match the result of the comparison operation:
+    在 MySQL 中，如果你用 `ORDER BY` 对 JSON 数组或 JSON 对象排序，MySQL 会返回警告，且排序结果与比较操作的结果不一致：
 
     ```sql
     CREATE TABLE t(j JSON);
@@ -100,7 +100,7 @@ The values inside a JSON document have types. This is visible in the output of [
     +--------------+
     1 row in set (0.00 sec)
 
-    -- In TiDB, executing the following SQL statement returns the correct sorting result. In MySQL, executing the following SQL statement returns the "This version of MySQL doesn't yet support 'sorting of non-scalar JSON values'." warning and the sorting result is inconsistent with the comparison result of `<`.
+    -- 在 TiDB 中，执行以下 SQL 语句会返回正确的排序结果。在 MySQL 中，执行会返回 "This version of MySQL doesn't yet support 'sorting of non-scalar JSON values'." 警告，且排序结果与 `<` 比较的结果不一致。
     mysql> SELECT j FROM t ORDER BY j;
     +--------------+
     | j            |
@@ -111,15 +111,15 @@ The values inside a JSON document have types. This is visible in the output of [
     2 rows in set (0.00 sec)
     ```
 
-    For more information, see issue [#37506](https://github.com/pingcap/tidb/issues/37506).
+    更多信息，请参见 issue [#37506](https://github.com/pingcap/tidb/issues/37506)。
 
-- When you insert data to a JSON column, TiDB implicitly converts the value of the data to the `JSON` type.
+- 当你向 `JSON` 列插入数据时，TiDB 会隐式将数据值转换为 `JSON` 类型。
 
     ```sql
     CREATE TABLE t(col JSON);
 
-    -- In TiDB, the following INSERT statement is executed successfully. In MySQL, executing the following INSERT statement returns the "Invalid JSON text" error.
+    -- 在 TiDB 中，以下 INSERT 语句执行成功。在 MySQL 中，执行会返回 "Invalid JSON text" 错误。
     INSERT INTO t VALUES (3);
     ```
 
-For more information about the `JSON` data type, see [JSON functions](/functions-and-operators/json-functions.md) and [Generated Columns](/generated-columns.md).
+关于 `JSON` 数据类型的更多信息，请参见 [JSON functions](/functions-and-operators/json-functions.md) 和 [Generated Columns](/generated-columns.md)。

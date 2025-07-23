@@ -1,54 +1,54 @@
 ---
 title: Cast Functions and Operators
-summary: Learn about the cast functions and operators.
+summary: 了解转换函数和操作符。
 ---
 
 # Cast Functions and Operators
 
-Cast functions and operators enable conversion of values from one data type to another. TiDB supports all of the [cast functions and operators](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html) available in MySQL 8.0.
+Cast 函数和操作符可以实现值从一种数据类型到另一种数据类型的转换。 TiDB 支持所有在 MySQL 8.0 中可用的 [cast 函数和操作符](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html)。
 
-| Name                                     | Description                      |
-| ---------------------------------------- | -------------------------------- |
-| [`BINARY`](#binary) | Cast a string to a binary string |
-| [`CAST()`](#cast) | Cast a value as a certain type   |
-| [`CONVERT()`](#convert) | Cast a value as a certain type   |
+| 名称                                     | 描述                      |
+| ---------------------------------------- | -------------------------- |
+| [`BINARY`](#binary) | 将字符串转换为二进制字符串 |
+| [`CAST()`](#cast) | 将值转换为特定类型   |
+| [`CONVERT()`](#convert) | 将值转换为特定类型   |
 
-> **Note:**
+> **注意：**
 >
-> TiDB and MySQL display inconsistent results for `SELECT CAST(MeN AS CHAR)` (or its equivalent form `SELECT CONVERT(MeM, CHAR)`), where `MeN` represents a double-precision floating-point number in scientific notation. MySQL displays the complete numeric value when `-15 <= N <= 14` and the scientific notation when `N < -15` or `N > 14`. However, TiDB always displays the complete numeric value. For example, MySQL displays the result of `SELECT CAST(3.1415e15 AS CHAR)` as `3.1415e15`, while TiDB displays the result as `3141500000000000`.
+> TiDB 和 MySQL 在执行 `SELECT CAST(MeN AS CHAR)`（或其等价形式 `SELECT CONVERT(MeM, CHAR)`）时显示的结果不一致，其中 `MeN` 表示以科学计数法表示的双精度浮点数。 MySQL 在 `-15 <= N <= 14` 时显示完整的数值，在 `N < -15` 或 `N > 14` 时显示科学计数法。而 TiDB 始终显示完整的数值。例如，MySQL 显示 `SELECT CAST(3.1415e15 AS CHAR)` 的结果为 `3.1415e15`，而 TiDB 显示的结果为 `3141500000000000`。
 
 ## BINARY
 
-The [`BINARY`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#operator_binary) operator has been deprecated since MySQL 8.0.27. It is recommended to use `CAST(... AS BINARY)` instead both in TiDB and MySQL.
+[`BINARY`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#operator_binary) 操作符自 MySQL 8.0.27 版本起已被弃用。建议在 TiDB 和 MySQL 中使用 `CAST(... AS BINARY)` 代替。
 
 ## CAST
 
-The [`CAST(<expression> AS <type> [ARRAY])`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast) function is used to cast an expression to a specific type.
+[`CAST(<expression> AS <type> [ARRAY])`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast) 函数用于将表达式转换为特定类型。
 
-This function is also used to create [Multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes).
+该函数也用于创建 [多值索引](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)。
 
-The following types are supported:
+支持的类型如下：
 
-| Type                 | Description      | Whether it can be used with multi-valued indexes                      |
-|----------------------|------------------|------------------------------------------------------------|
-| `BINARY(n)`          | Binary string    | No                                                         |
-| `CHAR(n)`            | Character string | Yes, but only if a length is specified                     |
-| `DATE`               | Date             | Yes                                                        |
-| `DATETIME(fsp)`      | Date/time, where `fsp` is optional | Yes                                              |
-| `DECIMAL(n, m)`      | Decimal number, where `n` and `m` are optional and are `10` and `0` if not specified | No   |
-| `DOUBLE`             | Double precision floating-point number | No                                   |
-| `FLOAT(n)`           | Floating-point number, where `n` is optional and should be between `0` and `53` | No |
-| `JSON`               | JSON             | No                                                         |
-| `REAL`               | Floating-point number | Yes                                                   |
-| `SIGNED [INTEGER]`   | Signed integer   | Yes                                                        |
-| `TIME(fsp)`          | Time             | Yes                                                        |
-| `UNSIGNED [INTEGER]` | Unsigned integer | Yes                                                        |
-| `VECTOR`             | Vector           | No                                                         |
-| `YEAR`               | Year             | No                                                         |
+| 类型                 | 描述      | 是否可用于多值索引                      |
+|----------------------|-----------|----------------------------------------|
+| `BINARY(n)`          | 二进制字符串 | 否                                     |
+| `CHAR(n)`            | 字符串     | 是，但仅在指定长度时有效               |
+| `DATE`               | 日期       | 是                                     |
+| `DATETIME(fsp)`      | 日期/时间，`fsp` 为可选 | 是                                |
+| `DECIMAL(n, m)`      | 十进制数，`n` 和 `m` 为可选，默认为 `10` 和 `0` | 否   |
+| `DOUBLE`             | 双精度浮点数 | 否                                    |
+| `FLOAT(n)`           | 浮点数，`n` 为可选，范围在 `0` 到 `53` 之间 | 否 |
+| `JSON`               | JSON       | 否                                     |
+| `REAL`               | 浮点数     | 是                                    |
+| `SIGNED [INTEGER]`   | 有符号整数 | 是                                    |
+| `TIME(fsp)`          | 时间       | 是                                     |
+| `UNSIGNED [INTEGER]` | 无符号整数 | 是                                    |
+| `VECTOR`             | 向量       | 否                                     |
+| `YEAR`               | 年份       | 否                                     |
 
-Examples:
+示例：
 
-The following statement converts a binary string from a HEX literal to a `CHAR`.
+以下语句将十六进制字面量的二进制字符串转换为 `CHAR`。
 
 ```sql
 SELECT CAST(0x54694442 AS CHAR);
@@ -60,10 +60,10 @@ SELECT CAST(0x54694442 AS CHAR);
 +--------------------------+
 | TiDB                     |
 +--------------------------+
-1 row in set (0.0002 sec)
+1 行，耗时 0.0002 秒
 ```
 
-The following statement casts the values of the `a` attribute extracted from the JSON column to an unsigned array. Note that casting to an array is only supported as part of an index definition for multi-valued indexes.
+以下语句将从 JSON 列中提取的 `a` 属性的值转换为无符号数组。注意，转换为数组仅作为多值索引定义的一部分被支持。
 
 ```sql
 CREATE TABLE t (
@@ -79,32 +79,32 @@ ANALYZE TABLE t;
 
 ```sql
  EXPLAIN SELECT * FROM t WHERE 1 MEMBER OF(j->'$.a')\G
-*************************** 1. row ***************************
+*************************** 1. 行 ***************************
            id: IndexMerge_10
       estRows: 2.00
          task: root
-access object: 
-operator info: type: union
-*************************** 2. row ***************************
+访问对象: 
+操作符信息: type: union
+*************************** 2. 行 ***************************
            id: ├─IndexRangeScan_8(Build)
       estRows: 2.00
          task: cop[tikv]
-access object: table:t, index:idx_a(cast(json_extract(`j`, _utf8mb4'$.a') as unsigned array))
-operator info: range:[1,1], keep order:false, stats:partial[j:unInitialized]
-*************************** 3. row ***************************
+访问对象: table:t, index:idx_a(cast(json_extract(`j`, _utf8mb4'$.a') as unsigned array))
+操作符信息: range:[1,1], keep order:false, stats:partial[j:unInitialized]
+*************************** 3. 行 ***************************
            id: └─TableRowIDScan_9(Probe)
       estRows: 2.00
          task: cop[tikv]
-access object: table:t
-operator info: keep order:false, stats:partial[j:unInitialized]
-3 rows in set (0.00 sec)
+访问对象: table:t
+操作符信息: keep order:false, stats:partial[j:unInitialized]
+3 行，耗时 0.00 秒
 ```
 
 ## CONVERT
 
-The [`CONVERT()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_convert) function is used to convert between [character sets](/character-set-and-collation.md).
+[`CONVERT()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_convert) 函数用于在 [字符集](/character-set-and-collation.md) 之间进行转换。
 
-Example:
+示例：
 
 ```sql
 SELECT CONVERT(0x616263 USING utf8mb4);
@@ -116,11 +116,11 @@ SELECT CONVERT(0x616263 USING utf8mb4);
 +---------------------------------+
 | abc                             |
 +---------------------------------+
-1 row in set (0.0004 sec)
+1 行，耗时 0.0004 秒
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-- TiDB does not support cast operations on `SPATIAL` types. For more information, see [#6347](https://github.com/pingcap/tidb/issues/6347).
-- TiDB does not support `AT TIME ZONE` for `CAST()`. For more information, see [#51742](https://github.com/pingcap/tidb/issues/51742).
-- `CAST(24 AS YEAR)` returns 2 digits in TiDB and 4 digits in MySQL. For more information, see [#29629](https://github.com/pingcap/tidb/issues/29629).
+- TiDB 不支持对 `SPATIAL` 类型的 cast 操作。更多信息请参见 [#6347](https://github.com/pingcap/tidb/issues/6347)。
+- TiDB 不支持 `CAST()` 中的 `AT TIME ZONE`。更多信息请参见 [#51742](https://github.com/pingcap/tidb/issues/51742)。
+- `CAST(24 AS YEAR)` 在 TiDB 中返回 2 位数字，在 MySQL 中返回 4 位数字。更多信息请参见 [#29629](https://github.com/pingcap/tidb/issues/29629)。

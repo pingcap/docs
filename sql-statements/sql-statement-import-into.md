@@ -1,70 +1,70 @@
 ---
 title: IMPORT INTO
-summary: An overview of the usage of IMPORT INTO in TiDB.
+summary: TiDB 中 IMPORT INTO 的用法概述。
 ---
 
-# IMPORT INTO
+# IMPORT INTO {#import-into}
 
-The `IMPORT INTO` statement lets you import data to TiDB via the [Physical Import Mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode) of TiDB Lightning. You can use `IMPORT INTO` in the following two ways:
+`IMPORT INTO` 语句允许你通过 TiDB Lightning 的 [物理导入模式](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode) 向 TiDB 导入数据。你可以通过以下两种方式使用 `IMPORT INTO`：
 
-- `IMPORT INTO ... FROM FILE`: imports data files in formats such as `CSV`, `SQL`, and `PARQUET` into an empty table in TiDB.
-- `IMPORT INTO ... FROM SELECT`: imports the query result of a `SELECT` statement into an empty table in TiDB. You can also use it to import historical data queried with [`AS OF TIMESTAMP`](/as-of-timestamp.md).
+-   `IMPORT INTO ... FROM FILE`：将 `CSV`、`SQL`、`PARQUET` 等格式的数据文件导入到 TiDB 的空表中。
+-   `IMPORT INTO ... FROM SELECT`：将 `SELECT` 语句的查询结果导入到 TiDB 的空表中。你也可以用它导入通过 [`AS OF TIMESTAMP`](/as-of-timestamp.md) 查询的历史数据。
 
 <CustomContent platform="tidb">
 
 > **Note:**
 >
-> Compared with [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md), `IMPORT INTO` can be directly executed on TiDB nodes, supports automated distributed task scheduling and [TiDB Global Sort](/tidb-global-sort.md), and offers significant improvements in deployment, resource utilization, task configuration convenience, ease of invocation and integration, high availability, and scalability. It is recommended that you consider using `IMPORT INTO` instead of TiDB Lightning in appropriate scenarios.
+> 与 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) 相比，`IMPORT INTO` 可以直接在 TiDB 节点上执行，支持自动化分布式任务调度和 [TiDB 全局排序](/tidb-global-sort.md)，在部署、资源利用率、任务配置便捷性、调用和集成的易用性、高可用性和可扩展性等方面有显著提升。建议你在合适的场景下优先考虑使用 `IMPORT INTO` 替代 TiDB Lightning。
 
 </CustomContent>
 
-## Restrictions
+## 限制 {#restrictions}
 
-- `IMPORT INTO` only supports importing data into existing empty tables in the database.
-- `IMPORT INTO` does not support importing data into an empty partition if other partitions of the same table already contain data. The target table must be completely empty for import operations.
-- `IMPORT INTO` does not support importing data into a [temporary table](/temporary-tables.md) or a [cached table](/cached-tables.md).
-- `IMPORT INTO` does not support transactions or rollback. Executing `IMPORT INTO` within an explicit transaction (`BEGIN`/`END`) will return an error.
-- `IMPORT INTO` does not support working simultaneously with features such as [Backup & Restore](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview), [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md), [acceleration of adding indexes](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630), data import using TiDB Lightning, data replication using TiCDC, or [Point-in-Time Recovery (PITR)](https://docs.pingcap.com/tidb/stable/br-log-architecture). For more compatibility information, see [Compatibility of TiDB Lightning and `IMPORT INTO` with TiCDC and Log Backup](https://docs.pingcap.com/tidb/stable/tidb-lightning-compatibility-and-scenarios).
-- During the data import process, do not perform DDL or DML operations on the target table, and do not execute [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) for the target database. These operations can lead to import failures or data inconsistencies. In addition, it is **NOT** recommended to perform read operations during the import process, as the data being read might be inconsistent. Perform read and write operations only after the import is completed.
-- The import process consumes system resources significantly. For TiDB Self-Managed, to get better performance, it is recommended to use TiDB nodes with at least 32 cores and 64 GiB of memory. TiDB writes sorted data to the TiDB [temporary directory](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) during import, so it is recommended to configure high-performance storage media for TiDB Self-Managed, such as flash memory. For more information, see [Physical Import Mode limitations](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode#requirements-and-restrictions).
-- For TiDB Self-Managed, the TiDB [temporary directory](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) is expected to have at least 90 GiB of available space. It is recommended to allocate storage space that is equal to or greater than the volume of data to be imported.
-- One import job supports importing data into one target table only.
-- `IMPORT INTO` is not supported during TiDB cluster upgrades.
-- Ensure that the data to be imported does not contain any records with primary key or non-null unique index conflicts. Otherwise, the conflicts can result in import task failures.
-- Known issue: the `IMPORT INTO` task might fail if the PD address in the TiDB node configuration file is inconsistent with the current PD topology of the cluster. This inconsistency can arise in situations such as that PD was scaled in previously, but the TiDB configuration file was not updated accordingly or the TiDB node was not restarted after the configuration file update.
+-   `IMPORT INTO` 只支持向数据库中已存在的空表导入数据。
+-   如果同一张表的其他分区已经有数据，`IMPORT INTO` 不支持只向空分区导入数据。目标表必须完全为空才能进行导入操作。
+-   `IMPORT INTO` 不支持向 [临时表](/temporary-tables.md) 或 [缓存表](/cached-tables.md) 导入数据。
+-   `IMPORT INTO` 不支持事务或回滚。在显式事务（`BEGIN`/`END`）中执行 `IMPORT INTO` 会返回错误。
+-   `IMPORT INTO` 不能与 [备份与恢复](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)、[`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)、[加速添加索引](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)、TiDB Lightning 数据导入、TiCDC 数据同步或 [时间点恢复（PITR）](https://docs.pingcap.com/tidb/stable/br-log-architecture) 等功能同时使用。更多兼容性信息，参见 [TiDB Lightning 和 `IMPORT INTO` 与 TiCDC 及日志备份的兼容性](https://docs.pingcap.com/tidb/stable/tidb-lightning-compatibility-and-scenarios)。
+-   在数据导入过程中，不要对目标表执行 DDL 或 DML 操作，也不要对目标数据库执行 [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)。这些操作可能导致导入失败或数据不一致。此外，**不**建议在导入过程中进行读操作，因为读取到的数据可能不一致。请在导入完成后再进行读写操作。
+-   导入过程会大量消耗系统资源。对于自托管 TiDB，为获得更好的性能，建议使用至少 32 核 CPU 和 64 GiB 内存的 TiDB 节点。TiDB 在导入时会将排序后的数据写入 TiDB 的 [临时目录](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630)，因此建议为自托管 TiDB 配置高性能存储介质，如闪存。更多信息参见 [物理导入模式限制](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode#requirements-and-restrictions)。
+-   对于自托管 TiDB，TiDB 的 [临时目录](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) 需至少有 90 GiB 可用空间。建议分配的存储空间不小于待导入数据的体积。
+-   一次导入任务只支持向一个目标表导入数据。
+-   TiDB 集群升级期间不支持 `IMPORT INTO`。
+-   确保待导入数据中没有主键或非空唯一索引冲突的记录，否则会导致导入任务失败。
+-   已知问题：如果 TiDB 节点配置文件中的 PD 地址与当前集群的 PD 拓扑不一致，`IMPORT INTO` 任务可能会失败。例如，PD 曾经缩容但 TiDB 配置文件未同步更新，或配置文件更新后 TiDB 节点未重启。
 
-### `IMPORT INTO ... FROM FILE` restrictions
+### <code>IMPORT INTO ... FROM FILE</code> 限制 {#code-import-into-from-file-code-restrictions}
 
-- For TiDB Self-Managed, each `IMPORT INTO` task supports importing data within 10 TiB. If you enable the [Global Sort](/tidb-global-sort.md) feature, each `IMPORT INTO` task supports importing data within 40 TiB.
-- For [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), if your data to be imported exceeds 500 GiB, it is recommended to use TiDB nodes with at least 16 cores and enable the [Global Sort](/tidb-global-sort.md) feature, then each `IMPORT INTO` task supports importing data within 40 TiB. If your data to be imported is within 500 GiB or if the cores of your TiDB nodes are less than 16, it is not recommended to enable the [Global Sort](/tidb-global-sort.md) feature.
-- The execution of `IMPORT INTO ... FROM FILE` blocks the current connection until the import is completed. To execute the statement asynchronously, you can add the `DETACHED` option.
-- Up to 16 `IMPORT INTO` tasks can run simultaneously on each cluster (see [TiDB Distributed eXecution Framework (DXF) usage limitations](/tidb-distributed-execution-framework.md#limitation)). When a cluster lacks sufficient resources or reaches the maximum number of tasks, newly submitted import tasks are queued for execution.
-- When the [Global Sort](/tidb-global-sort.md) feature is used for data import, the value of the `THREAD` option must be at least `8`.
-- When the [Global Sort](/tidb-global-sort.md) feature is used for data import, the data size of a single row after encoding must not exceed 32 MiB.
-- All `IMPORT INTO` tasks that are created when [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md) is not enabled run directly on the nodes where the tasks are submitted, and these tasks will not be scheduled for execution on other TiDB nodes even after DXF is enabled later. After DXF is enabled, only newly created `IMPORT INTO` tasks that import data from S3 or GCS are automatically scheduled or failed over to other TiDB nodes for execution.
+-   对于自托管 TiDB，每个 `IMPORT INTO` 任务支持导入不超过 10 TiB 的数据。如果启用 [全局排序](/tidb-global-sort.md) 功能，每个任务支持导入不超过 40 TiB 的数据。
+-   对于 [TiDB Cloud 专属集群](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)，如果待导入数据超过 500 GiB，建议使用至少 16 核的 TiDB 节点并启用 [全局排序](/tidb-global-sort.md) 功能，此时每个任务支持导入不超过 40 TiB 的数据。如果数据量在 500 GiB 以内或 TiDB 节点核数小于 16，则不建议启用 [全局排序](/tidb-global-sort.md)。
+-   执行 `IMPORT INTO ... FROM FILE` 时会阻塞当前连接，直到导入完成。若需异步执行，可添加 `DETACHED` 选项。
+-   每个集群最多可同时运行 16 个 `IMPORT INTO` 任务（参见 [TiDB 分布式执行框架（DXF）使用限制](/tidb-distributed-execution-framework.md#limitation)）。当集群资源不足或任务数已达上限时，新提交的导入任务会排队等待执行。
+-   使用 [全局排序](/tidb-global-sort.md) 功能导入数据时，`THREAD` 选项的值必须至少为 `8`。
+-   使用 [全局排序](/tidb-global-sort.md) 功能导入数据时，单行编码后的数据大小不得超过 32 MiB。
+-   在未启用 [TiDB 分布式执行框架（DXF）](/tidb-distributed-execution-framework.md) 时创建的所有 `IMPORT INTO` 任务，都会直接在提交任务的节点上运行，即使后续启用了 DXF，这些任务也不会被调度到其他 TiDB 节点。启用 DXF 后，只有新创建的、从 S3 或 GCS 导入数据的 `IMPORT INTO` 任务才会自动调度或故障转移到其他 TiDB 节点执行。
 
-### `IMPORT INTO ... FROM SELECT` restrictions
+### <code>IMPORT INTO ... FROM SELECT</code> 限制 {#code-import-into-from-select-code-restrictions}
 
-- `IMPORT INTO ... FROM SELECT` can only be executed on the TiDB node that the current user is connected to, and it blocks the current connection until the import is complete.
-- `IMPORT INTO ... FROM SELECT` only supports two [import options](#withoptions): `THREAD` and `DISABLE_PRECHECK`.
-- `IMPORT INTO ... FROM SELECT` does not support the task management statements such as `SHOW IMPORT JOB(s)` and `CANCEL IMPORT JOB <job-id>`.
-- The [temporary directory](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) of TiDB requires sufficient space to store the entire query result of the `SELECT` statement (configuring the `DISK_QUOTA` option is not supported currently).
-- Importing historical data using [`tidb_snapshot`](/read-historical-data.md) is not supported.
-- Because the syntax of the `SELECT` clause is complex, the `WITH` parameter in `IMPORT INTO` might conflict with it and cause parsing errors, such as `GROUP BY ... [WITH ROLLUP]`. It is recommended to create a view for complex `SELECT` statements and then use `IMPORT INTO ... FROM SELECT * FROM view_name` for importing. Alternatively, you can clarify the scope of the `SELECT` clause with parentheses, such as `IMPORT INTO ... FROM (SELECT ...) WITH ...`.
+-   `IMPORT INTO ... FROM SELECT` 只能在当前用户连接的 TiDB 节点上执行，并且会阻塞当前连接直到导入完成。
+-   `IMPORT INTO ... FROM SELECT` 仅支持两种 [导入选项](#withoptions)：`THREAD` 和 `DISABLE_PRECHECK`。
+-   `IMPORT INTO ... FROM SELECT` 不支持 `SHOW IMPORT JOB(s)`、`CANCEL IMPORT JOB <job-id>` 等任务管理语句。
+-   TiDB 的 [临时目录](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) 需要有足够空间存储 `SELECT` 语句的全部查询结果（目前不支持配置 `DISK_QUOTA` 选项）。
+-   不支持使用 [`tidb_snapshot`](/read-historical-data.md) 导入历史数据。
+-   由于 `SELECT` 子句语法复杂，`IMPORT INTO` 的 `WITH` 参数可能与其冲突并导致解析错误，如 `GROUP BY ... [WITH ROLLUP]`。建议对于复杂的 `SELECT` 语句，先创建视图，再通过 `IMPORT INTO ... FROM SELECT * FROM view_name` 导入。或者用括号明确 `SELECT` 子句的范围，如 `IMPORT INTO ... FROM (SELECT ...) WITH ...`。
 
-## Prerequisites for import
+## 导入前提条件 {#prerequisites-for-import}
 
-Before using `IMPORT INTO` to import data, make sure the following requirements are met:
+在使用 `IMPORT INTO` 导入数据前，请确保满足以下要求：
 
-- The target table to be imported is already created in TiDB and it is empty.
-- The target cluster has sufficient space to store the data to be imported.
-- For TiDB Self-Managed, the [temporary directory](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) of the TiDB node connected to the current session has at least 90 GiB of available space. If [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) is enabled and the data for import is from S3 or GCS, also make sure that the temporary directory of each TiDB node in the cluster has sufficient disk space.
+-   目标表已在 TiDB 中创建且为空表。
+-   目标集群有足够空间存储待导入数据。
+-   对于自托管 TiDB，当前会话连接的 TiDB 节点的 [临时目录](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) 至少有 90 GiB 可用空间。如果已启用 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) 且导入数据来源为 S3 或 GCS，还需确保集群内每个 TiDB 节点的临时目录磁盘空间充足。
 
-## Required privileges
+## 所需权限 {#required-privileges}
 
-Executing `IMPORT INTO` requires the `SELECT`, `UPDATE`, `INSERT`, `DELETE`, and `ALTER` privileges on the target table. To import files in TiDB local storage, the `FILE` privilege is also required.
+执行 `IMPORT INTO` 需要对目标表拥有 `SELECT`、`UPDATE`、`INSERT`、`DELETE` 和 `ALTER` 权限。若需导入 TiDB 本地存储的文件，还需拥有 `FILE` 权限。
 
-## Synopsis
+## 语法 {#synopsis}
 
 ```ebnf+diagram
 ImportIntoStmt ::=
@@ -94,114 +94,114 @@ OptionItem ::=
     optionName '=' optionVal | optionName
 ```
 
-## Parameter description
+## 参数说明 {#parameter-description}
 
-### ColumnNameOrUserVarList
+### ColumnNameOrUserVarList {#columnnameoruservarlist}
 
-It specifies how each field in the data file corresponds to the columns in the target table. You can also use it to map fields to variables to skip certain fields for the import, or use it in `SetClause`.
+用于指定数据文件中每个字段与目标表列的对应关系。你也可以用它将字段映射到变量，以跳过某些字段的导入，或在 `SetClause` 中使用。
 
-- If this parameter is not specified, the number of fields in each row of the data file must match the number of columns in the target table, and the fields will be imported to the corresponding columns in order.
-- If this parameter is specified, the number of specified columns or variables must match the number of fields in each row of the data file.
+-   如果未指定该参数，则数据文件每行的字段数必须与目标表的列数一致，字段会按顺序导入到对应列。
+-   如果指定了该参数，则指定的列或变量数量必须与数据文件每行的字段数一致。
 
-### SetClause
+### SetClause {#setclause}
 
-It specifies how the values of target columns are calculated. In the right side of the `SET` expression, you can reference the variables specified in `ColumnNameOrUserVarList`.
+用于指定目标列值的计算方式。在 `SET` 表达式右侧，可以引用 `ColumnNameOrUserVarList` 中指定的变量。
 
-In the left side of the `SET` expression, you can only reference a column name that is not included in `ColumnNameOrUserVarList`. If the target column name already exists in `ColumnNameOrUserVarList`, the `SET` expression is invalid.
+在 `SET` 表达式左侧，只能引用未包含在 `ColumnNameOrUserVarList` 中的列名。如果目标列名已在 `ColumnNameOrUserVarList` 中出现，则该 `SET` 表达式无效。
 
-### fileLocation
+### fileLocation {#filelocation}
 
-It specifies the storage location of the data file, which can be an Amazon S3 or GCS URI path, or a TiDB local file path.
+用于指定数据文件的存储位置，可以是 Amazon S3 或 GCS 的 URI 路径，也可以是 TiDB 本地文件路径。
 
-- Amazon S3 or GCS URI path: for URI configuration details, see [URI Formats of External Storage Services](/external-storage-uri.md).
+-   Amazon S3 或 GCS URI 路径：URI 配置详情参见 [外部存储服务的 URI 格式](/external-storage-uri.md)。
 
-- TiDB local file path: it must be an absolute path, and the file extension must be `.csv`, `.sql`, or `.parquet`. Make sure that the files corresponding to this path are stored on the TiDB node connected by the current user, and the user has the `FILE` privilege.
-
-> **Note:**
->
-> If [SEM](/system-variables.md#tidb_enable_enhanced_security) is enabled in the target cluster, the `fileLocation` cannot be specified as a local file path.
-
-In the `fileLocation` parameter, you can specify a single file, or use the `*` and `[]` wildcards to match multiple files for import. Note that the wildcard can only be used in the file name, because it does not match directories or recursively match files in subdirectories. Taking files stored on Amazon S3 as examples, you can configure the parameter as follows:
-
-- Import a single file: `s3://<bucket-name>/path/to/data/foo.csv`
-- Import all files in a specified path: `s3://<bucket-name>/path/to/data/*`
-- Import all files with the `.csv` suffix in a specified path: `s3://<bucket-name>/path/to/data/*.csv`
-- Import all files with the `foo` prefix in a specified path: `s3://<bucket-name>/path/to/data/foo*`
-- Import all files with the `foo` prefix and the `.csv` suffix in a specified path: `s3://<bucket-name>/path/to/data/foo*.csv`
-- Import `1.csv` and `2.csv` in a specified path: `s3://<bucket-name>/path/to/data/[12].csv`
-
-### Format
-
-The `IMPORT INTO` statement supports three data file formats: `CSV`, `SQL`, and `PARQUET`. If not specified, the default format is `CSV`.
-
-### WithOptions
-
-You can use `WithOptions` to specify import options and control the data import process. For example, to execute the import of data files asynchronously in the backend, you can enable the `DETACHED` mode for the import by adding the `WITH DETACHED` option to the `IMPORT INTO` statement.
-
-The supported options are described as follows:
-
-| Option name | Supported data sources and formats | Description |
-|:---|:---|:---|
-| `CHARACTER_SET='<string>'` | CSV | Specifies the character set of the data file. The default character set is `utf8mb4`. The supported character sets include `binary`, `utf8`, `utf8mb4`, `gb18030`, `gbk`, `latin1`, and `ascii`. |
-| `FIELDS_TERMINATED_BY='<string>'` | CSV | Specifies the field separator. The default separator is `,`. |
-| `FIELDS_ENCLOSED_BY='<char>'` | CSV | Specifies the field delimiter. The default delimiter is `"`. |
-| `FIELDS_ESCAPED_BY='<char>'` | CSV | Specifies the escape character for fields. The default escape character is `\`. |
-| `FIELDS_DEFINED_NULL_BY='<string>'` | CSV | Specifies the value that represents `NULL` in the fields. The default value is `\N`. |
-| `LINES_TERMINATED_BY='<string>'` | CSV | Specifies the line terminator. By default, `IMPORT INTO` automatically identifies `\n`, `\r`, or `\r\n` as line terminators. If the line terminator is one of these three, you do not need to explicitly specify this option. |
-| `SKIP_ROWS=<number>` | CSV | Specifies the number of rows to skip. The default value is `0`. You can use this option to skip the header in a CSV file. If you use a wildcard to specify the source files for import, this option applies to all source files that are matched by the wildcard in `fileLocation`. |
-| `SPLIT_FILE` | CSV | Splits a single CSV file into multiple smaller chunks of around 256 MiB for parallel processing to improve import efficiency. This parameter only works for **non-compressed** CSV files and has the same usage restrictions as that of TiDB Lightning [`strict-format`](https://docs.pingcap.com/tidb/stable/tidb-lightning-data-source#strict-format). Note that you need to explicitly specify `LINES_TERMINATED_BY` for this option. |
-| `DISK_QUOTA='<string>'` | All file formats | Specifies the disk space threshold that can be used during data sorting. The default value is 80% of the disk space in the TiDB [temporary directory](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630). If the total disk size cannot be obtained, the default value is 50 GiB. When specifying `DISK_QUOTA` explicitly, make sure that the value does not exceed 80% of the disk space in the TiDB temporary directory. |
-| `DISABLE_TIKV_IMPORT_MODE` | All file formats | Specifies whether to disable switching TiKV to import mode during the import process. By default, switching TiKV to import mode is not disabled. If there are ongoing read-write operations in the cluster, you can enable this option to avoid impact from the import process. |
-| `THREAD=<number>` | All file formats and query results of `SELECT` | Specifies the concurrency for import. For `IMPORT INTO ... FROM FILE`, the default value of `THREAD` is 50% of the number of CPU cores on the TiDB node, the minimum value is `1`, and the maximum value is the number of CPU cores. For `IMPORT INTO ... FROM SELECT`, the default value of `THREAD` is `2`, the minimum value is `1`, and the maximum value is two times the number of CPU cores on the TiDB node. To import data into a new cluster without any data, it is recommended to increase this concurrency appropriately to improve import performance. If the target cluster is already used in a production environment, it is recommended to adjust this concurrency according to your application requirements. |
-| `MAX_WRITE_SPEED='<string>'` | All file formats | Controls the write speed to a TiKV node. By default, there is no speed limit. For example, you can specify this option as `1MiB` to limit the write speed to 1 MiB/s. |
-| `CHECKSUM_TABLE='<string>'` | All file formats | Configures whether to perform a checksum check on the target table after the import to validate the import integrity. The supported values include `"required"` (default), `"optional"`, and `"off"`. `"required"` means performing a checksum check after the import. If the checksum check fails, TiDB will return an error and the import will exit. `"optional"` means performing a checksum check after the import. If an error occurs, TiDB will return a warning and ignore the error. `"off"` means not performing a checksum check after the import. |
-| `DETACHED` | All file formats | Controls whether to execute `IMPORT INTO` asynchronously. When this option is enabled, executing `IMPORT INTO` immediately returns the information of the import job (such as the `Job_ID`), and the job is executed asynchronously in the backend. |
-| `CLOUD_STORAGE_URI` | All file formats | Specifies the target address where encoded KV data for [Global Sort](/tidb-global-sort.md) is stored. When `CLOUD_STORAGE_URI` is not specified, `IMPORT INTO` determines whether to use Global Sort based on the value of the system variable [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740). If this system variable specifies a target storage address, `IMPORT INTO` uses this address for Global Sort. When `CLOUD_STORAGE_URI` is specified with a non-empty value, `IMPORT INTO` uses that value as the target storage address. When `CLOUD_STORAGE_URI` is specified with an empty value, local sorting is enforced. Currently, the target storage address only supports S3. For details about the URI configuration, see [Amazon S3 URI format](/external-storage-uri.md#amazon-s3-uri-format). When this feature is used, all TiDB nodes must have read and write access for the target S3 bucket, including at least these permissions: `s3:ListBucket`, `s3:GetObject`, `s3:DeleteObject`, `s3:PutObject`, `s3: AbortMultipartUpload`. |
-| `DISABLE_PRECHECK` | All file formats and query results of `SELECT` | Setting this option disables pre-checks of non-critical items, such as checking whether there are CDC or PITR tasks.  |
-
-## `IMPORT INTO ... FROM FILE` usage
-
-For TiDB Self-Managed, `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3, GCS, and the TiDB local storage. For [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3 and GCS. For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3 and Alibaba Cloud OSS.
-
-- For data files stored in Amazon S3 or GCS, `IMPORT INTO ... FROM FILE` supports running in the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md).
-
-    - When the DXF is enabled ([tidb_enable_dist_task](/system-variables.md#tidb_enable_dist_task-new-in-v710) is `ON`), `IMPORT INTO` splits a data import job into multiple sub-jobs and distributes these sub-jobs to different TiDB nodes for execution to improve the import efficiency.
-    - When the DXF is disabled, `IMPORT INTO ... FROM FILE` only supports running on the TiDB node where the current user is connected.
-
-- For data files stored locally in TiDB, `IMPORT INTO ... FROM FILE` only supports running on the TiDB node where the current user is connected. Therefore, the data files need to be placed on the TiDB node where the current user is connected. If you access TiDB through a proxy or load balancer, you cannot import data files stored locally in TiDB.
-
-### Compressed files
-
-`IMPORT INTO ... FROM FILE` supports importing compressed `CSV` and `SQL` files. It can automatically determine whether a file is compressed and the compression format based on the file extension:
-
-| Extension | Compression format |
-|:---|:---|
-| `.gz`, `.gzip` | gzip compression format |
-| `.zstd`, `.zst` | ZStd compression format |
-| `.snappy` | snappy compression format |
+-   TiDB 本地文件路径：必须为绝对路径，文件扩展名需为 `.csv`、`.sql` 或 `.parquet`。确保该路径对应的文件存储在当前用户连接的 TiDB 节点上，且用户拥有 `FILE` 权限。
 
 > **Note:**
 >
-> - The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
-> - Because TiDB Lightning cannot concurrently decompress a single large compressed file, the size of the compressed file affects the import speed. It is recommended that a source file is no greater than 256 MiB after decompression.
+> 如果目标集群启用了 [SEM](/system-variables.md#tidb_enable_enhanced_security)，则 `fileLocation` 不能指定为本地文件路径。
 
-### Global Sort
+在 `fileLocation` 参数中，你可以指定单个文件，也可以使用 `*` 和 `[]` 通配符匹配多个文件进行导入。注意，通配符只能用于文件名部分，不能匹配目录或递归匹配子目录下的文件。以存储在 Amazon S3 的文件为例，参数配置如下：
+
+-   导入单个文件：`s3://<bucket-name>/path/to/data/foo.csv`
+-   导入指定路径下所有文件：`s3://<bucket-name>/path/to/data/*`
+-   导入指定路径下所有 `.csv` 后缀文件：`s3://<bucket-name>/path/to/data/*.csv`
+-   导入指定路径下所有以 `foo` 为前缀的文件：`s3://<bucket-name>/path/to/data/foo*`
+-   导入指定路径下所有以 `foo` 为前缀且以 `.csv` 为后缀的文件：`s3://<bucket-name>/path/to/data/foo*.csv`
+-   导入指定路径下的 `1.csv` 和 `2.csv`：`s3://<bucket-name>/path/to/data/[12].csv`
+
+### Format {#format}
+
+`IMPORT INTO` 语句支持三种数据文件格式：`CSV`、`SQL` 和 `PARQUET`。如未指定，默认格式为 `CSV`。
+
+### WithOptions {#withoptions}
+
+你可以通过 `WithOptions` 指定导入选项，控制数据导入过程。例如，若需在后台异步执行数据文件导入，可在 `IMPORT INTO` 语句中添加 `WITH DETACHED` 选项启用 `DETACHED` 模式。
+
+支持的选项说明如下：
+
+| 选项名                              | 支持的数据源和格式                           | 说明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| :---------------------------------- | :------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CHARACTER_SET='<string>'`          | CSV                                          | 指定数据文件的字符集。默认字符集为 `utf8mb4`。支持的字符集包括 `binary`、`utf8`、`utf8mb4`、`gb18030`、`gbk`、`latin1` 和 `ascii`。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `FIELDS_TERMINATED_BY='<string>'`   | CSV                                          | 指定字段分隔符。默认分隔符为 `,`。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `FIELDS_ENCLOSED_BY='<char>'`       | CSV                                          | 指定字段定界符。默认定界符为 `"`。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `FIELDS_ESCAPED_BY='<char>'`        | CSV                                          | 指定字段的转义字符。默认转义字符为 `\`。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `FIELDS_DEFINED_NULL_BY='<string>'` | CSV                                          | 指定字段中表示 `NULL` 的值。默认值为 `\N`。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `LINES_TERMINATED_BY='<string>'`    | CSV                                          | 指定行分隔符。默认情况下，`IMPORT INTO` 会自动识别 `\n`、`\r` 或 `\r\n` 作为行分隔符。如果行分隔符为这三者之一，无需显式指定该选项。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `SKIP_ROWS=<number>`                | CSV                                          | 指定跳过的行数。默认值为 `0`。可用于跳过 CSV 文件的表头。如果使用通配符指定导入源文件，该选项会应用于 `fileLocation` 匹配到的所有源文件。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `SPLIT_FILE`                        | CSV                                          | 将单个 CSV 文件切分为多个约 256 MiB 的小块并并行处理，以提升导入效率。该参数仅对**非压缩**的 CSV 文件生效，且使用限制与 TiDB Lightning 的 [`strict-format`](https://docs.pingcap.com/tidb/stable/tidb-lightning-data-source#strict-format) 相同。注意需显式指定 `LINES_TERMINATED_BY`。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `DISK_QUOTA='<string>'`             | 所有文件格式                                 | 指定数据排序过程中可用的磁盘空间阈值。默认值为 TiDB [临时目录](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) 磁盘空间的 80%。若无法获取总磁盘大小，默认值为 50 GiB。显式指定 `DISK_QUOTA` 时，确保该值不超过 TiDB 临时目录磁盘空间的 80%。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `DISABLE_TIKV_IMPORT_MODE`          | 所有文件格式                                 | 指定是否在导入过程中禁用 TiKV 切换为导入模式。默认不禁用 TiKV 切换为导入模式。如果集群中有读写业务，可启用该选项以避免导入过程的影响。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `THREAD=<number>`                   | 所有文件格式及 `SELECT` 查询结果             | 指定导入并发度。对于 `IMPORT INTO ... FROM FILE`，`THREAD` 默认值为 TiDB 节点 CPU 核数的 50%，最小值为 `1`，最大值为 CPU 核数。对于 `IMPORT INTO ... FROM SELECT`，默认值为 `2`，最小值为 `1`，最大值为 TiDB 节点 CPU 核数的两倍。若向新集群导入数据，建议适当提高并发度以提升导入性能。若目标集群已在生产环境中使用，建议根据业务需求调整并发度。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `MAX_WRITE_SPEED='<string>'`        | 所有文件格式                                 | 控制写入 TiKV 节点的速度。默认无限速。例如，可指定为 `1MiB`，限制写入速度为 1 MiB/s。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `CHECKSUM_TABLE='<string>'`         | 所有文件格式                                 | 配置导入完成后是否对目标表进行校验以验证导入完整性。支持的值有 `"required"`（默认）、`"optional"` 和 `"off"`。`"required"` 表示导入后进行校验，校验失败则返回错误并退出导入；`"optional"` 表示导入后进行校验，若出错则返回警告并忽略错误；`"off"` 表示导入后不进行校验。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `DETACHED`                          | 所有文件格式                                 | 控制是否异步执行 `IMPORT INTO`。启用该选项后，执行 `IMPORT INTO` 会立即返回导入任务信息（如 `Job_ID`），任务在后台异步执行。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `CLOUD_STORAGE_URI`                 | 所有文件格式                                 | 指定 [全局排序](/tidb-global-sort.md) 编码 KV 数据的目标存储地址。未指定 `CLOUD_STORAGE_URI` 时，`IMPORT INTO` 会根据系统变量 [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740) 的值判断是否启用全局排序。如果该系统变量指定了目标存储地址，则使用该地址进行全局排序。若 `CLOUD_STORAGE_URI` 显式指定非空值，则使用该值作为目标存储地址。若 `CLOUD_STORAGE_URI` 显式指定为空值，则强制本地排序。目前目标存储地址仅支持 S3。URI 配置详情参见 [Amazon S3 URI 格式](/external-storage-uri.md#amazon-s3-uri-format)。使用该功能时，所有 TiDB 节点需具备目标 S3 bucket 的读写权限，包括至少：`s3:ListBucket`、`s3:GetObject`、`s3:DeleteObject`、`s3:PutObject`、`s3:AbortMultipartUpload`。 |
+| `DISABLE_PRECHECK`                  | 所有文件格式及 `SELECT` 查询结果             | 设置该选项可跳过非关键项的预检查，如检查是否存在 CDC 或 PITR 任务。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+
+## <code>IMPORT INTO ... FROM FILE</code> 用法 {#code-import-into-from-file-code-usage}
+
+对于自托管 TiDB，`IMPORT INTO ... FROM FILE` 支持从 Amazon S3、GCS 及 TiDB 本地存储的文件导入数据。对于 [TiDB Cloud 专属集群](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)，支持从 Amazon S3 和 GCS 导入。对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)，支持从 Amazon S3 和阿里云 OSS 导入。
+
+-   对于存储在 Amazon S3 或 GCS 的数据文件，`IMPORT INTO ... FROM FILE` 支持在 [TiDB 分布式执行框架（DXF）](/tidb-distributed-execution-framework.md) 下运行。
+
+    -   启用 DXF（[`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) 为 `ON`）时，`IMPORT INTO` 会将数据导入任务拆分为多个子任务，并分发到不同 TiDB 节点并行执行，以提升导入效率。
+    -   未启用 DXF 时，`IMPORT INTO ... FROM FILE` 仅支持在当前用户连接的 TiDB 节点上运行。
+
+-   对于 TiDB 本地存储的数据文件，`IMPORT INTO ... FROM FILE` 仅支持在当前用户连接的 TiDB 节点上运行。因此，数据文件需放置在当前用户连接的 TiDB 节点上。如果你通过代理或负载均衡访问 TiDB，则无法导入 TiDB 本地存储的文件。
+
+### 压缩文件 {#compressed-files}
+
+`IMPORT INTO ... FROM FILE` 支持导入压缩的 `CSV` 和 `SQL` 文件。可根据文件扩展名自动识别文件是否压缩及压缩格式：
+
+| 扩展名         | 压缩格式                |
+| :------------- | :---------------------- |
+| `.gz`, `.gzip` | gzip 压缩格式           |
+| `.zstd`, `.zst`| ZStd 压缩格式           |
+| `.snappy`      | snappy 压缩格式         |
 
 > **Note:**
 >
-> Global Sort is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> -   Snappy 压缩文件必须为 [官方 Snappy 格式](https://github.com/google/snappy)。不支持其他变种的 Snappy 压缩。
+> -   由于 TiDB Lightning 无法对单个大型压缩文件并发解压，压缩文件的大小会影响导入速度。建议单个源文件解压后不超过 256 MiB。
 
-`IMPORT INTO ... FROM FILE` splits the data import job of a source data file into multiple sub-jobs, each sub-job independently encoding and sorting data before importing. If the encoded KV ranges of these sub-jobs have significant overlap (to learn how TiDB encodes data to KV, see [TiDB computing](/tidb-computing.md)), TiKV needs to keep compaction during import, leading to a decrease in import performance and stability.
+### 全局排序 {#global-sort}
 
-In the following scenarios, there can be significant overlap in KV ranges:
+> **Note:**
+>
+> 全局排序不支持在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上使用。
 
-- If rows in the data file assigned to each sub-job have overlapping primary key ranges, the data KV generated by the encoding of each sub-job will also overlap.
-    - `IMPORT INTO` splits sub-jobs based on the traversal order of data files, usually sorted by file name in lexicographic order.
-- If the target table has many indexes, or the index column values are scattered in the data file, the index KV generated by the encoding of each sub-job will also overlap.
+`IMPORT INTO ... FROM FILE` 会将源数据文件的导入任务拆分为多个子任务，每个子任务独立编码和排序数据后导入。如果这些子任务编码后的 KV 范围有大量重叠（关于 TiDB 如何将数据编码为 KV，参见 [TiDB 计算](/tidb-computing.md)），则 TiKV 在导入期间需要持续进行 compaction，导致导入性能和稳定性下降。
 
-When the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md) is enabled, you can enable [Global Sort](/tidb-global-sort.md) by specifying the `CLOUD_STORAGE_URI` option in the `IMPORT INTO` statement or by specifying the target storage address for encoded KV data using the system variable [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740). Currently, Global Sort supports using Amazon S3 as the storage address. When Global Sort is enabled, `IMPORT INTO` writes encoded KV data to the cloud storage, performs Global Sort in the cloud storage, and then parallelly imports the globally sorted index and table data into TiKV. This prevents problems caused by KV overlap and enhances import stability and performance.
+在以下场景下，KV 范围可能有大量重叠：
 
-Global Sort consumes a significant amount of memory resources. Before the data import, it is recommended to configure the [`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640) and [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) variables, which avoids golang GC being frequently triggered and thus affecting the import efficiency.
+-   如果分配给各子任务的数据文件行的主键范围有重叠，则各子任务编码生成的数据 KV 也会重叠。
+    -   `IMPORT INTO` 按数据文件的遍历顺序拆分子任务，通常按文件名字典序排序。
+-   如果目标表有大量索引，或索引列值在数据文件中分布较散，则各子任务编码生成的索引 KV 也会重叠。
+
+启用 [TiDB 分布式执行框架（DXF）](/tidb-distributed-execution-framework.md) 后，你可以在 `IMPORT INTO` 语句中通过指定 `CLOUD_STORAGE_URI` 选项，或通过系统变量 [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740) 指定编码 KV 数据的目标存储地址来启用 [全局排序](/tidb-global-sort.md)。目前全局排序仅支持使用 Amazon S3 作为存储地址。启用全局排序后，`IMPORT INTO` 会将编码后的 KV 数据写入云存储，在云存储中进行全局排序，然后并行将全局排序后的索引和表数据导入 TiKV，从而避免 KV 重叠带来的问题，提升导入的稳定性和性能。
+
+全局排序会消耗大量内存资源。建议在数据导入前配置 [`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640) 和 [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) 变量，以避免频繁触发 golang GC 影响导入效率。
 
 ```sql
 SET GLOBAL tidb_server_memory_limit_gc_trigger=1;
@@ -210,14 +210,14 @@ SET GLOBAL tidb_server_memory_limit='75%';
 
 > **Note:**
 >
-> - If the KV range overlap in a source data file is low, enabling Global Sort might decrease import performance. This is because when Global Sort is enabled, TiDB needs to wait for the completion of local sorting in all sub-jobs before proceeding with the Global Sort operations and subsequent import.
-> - After an import job using Global Sort completes, the files stored in the cloud storage for Global Sort are cleaned up asynchronously in a background thread.
+> -   如果源数据文件的 KV 范围重叠较少，启用全局排序可能会降低导入性能。因为启用全局排序后，TiDB 需要等待所有子任务本地排序完成后，才能进行全局排序及后续导入操作。
+> -   使用全局排序的导入任务完成后，云存储中用于全局排序的文件会在后台线程中异步清理。
 
-### Output
+### 输出 {#output}
 
-When `IMPORT INTO ... FROM FILE` completes the import or when the `DETACHED` mode is enabled, TiDB returns the current job information in the output, as shown in the following examples. For the description of each field, see [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md).
+当 `IMPORT INTO ... FROM FILE` 导入完成或启用 `DETACHED` 模式时，TiDB 会在输出中返回当前任务信息，示例如下。各字段说明参见 [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md)。
 
-When `IMPORT INTO ... FROM FILE` completes the import, the example output is as follows:
+`IMPORT INTO ... FROM FILE` 导入完成时，输出示例：
 
 ```sql
 IMPORT INTO t FROM '/path/to/small.csv';
@@ -228,7 +228,7 @@ IMPORT INTO t FROM '/path/to/small.csv';
 +--------+--------------------+--------------+----------+-------+----------+------------------+---------------+----------------+----------------------------+----------------------------+----------------------------+------------+
 ```
 
-When the `DETACHED` mode is enabled, executing the `IMPORT INTO ... FROM FILE` statement will immediately return the job information in the output. From the output, you can see that the status of the job is `pending`, which means waiting for execution.
+启用 `DETACHED` 模式时，执行 `IMPORT INTO ... FROM FILE` 语句会立即返回任务信息。从输出中可以看到任务状态为 `pending`，表示等待执行。
 
 ```sql
 IMPORT INTO t FROM '/path/to/small.csv' WITH DETACHED;
@@ -239,129 +239,125 @@ IMPORT INTO t FROM '/path/to/small.csv' WITH DETACHED;
 +--------+--------------------+--------------+----------+-------+---------+------------------+---------------+----------------+----------------------------+------------+----------+------------+
 ```
 
-### View and manage import jobs
+### 查看和管理导入任务 {#view-and-manage-import-jobs}
 
-For an import job with the `DETACHED` mode enabled, you can use [`SHOW IMPORT`](/sql-statements/sql-statement-show-import-job.md) to view its current job progress.
+对于启用 `DETACHED` 模式的导入任务，你可以使用 [`SHOW IMPORT`](/sql-statements/sql-statement-show-import-job.md) 查看当前任务进度。
 
-After an import job is started, you can cancel it using [`CANCEL IMPORT JOB <job-id>`](/sql-statements/sql-statement-cancel-import-job.md).
+导入任务启动后，可以通过 [`CANCEL IMPORT JOB &#x3C;job-id>`](/sql-statements/sql-statement-cancel-import-job.md) 取消任务。
 
-### Examples
+### 示例 {#examples}
 
-#### Import a CSV file with headers
+#### 导入带表头的 CSV 文件 {#import-a-csv-file-with-headers}
 
 ```sql
 IMPORT INTO t FROM '/path/to/file.csv' WITH skip_rows=1;
 ```
 
-#### Import a file asynchronously in the `DETACHED` mode
+#### 以 <code>DETACHED</code> 模式异步导入文件 {#import-a-file-asynchronously-in-the-code-detached-code-mode}
 
 ```sql
 IMPORT INTO t FROM '/path/to/file.csv' WITH DETACHED;
 ```
 
-#### Skip importing a specific field in your data file
+#### 跳过数据文件中的某个字段导入 {#skip-importing-a-specific-field-in-your-data-file}
 
-Assume that your data file is in the CSV format and its content is as follows:
+假设你的数据文件为 CSV 格式，内容如下：
 
-```
-id,name,age
-1,Tom,23
-2,Jack,44
-```
+    id,name,age
+    1,Tom,23
+    2,Jack,44
 
-And assume that the target table schema for the import is `CREATE TABLE t(id int primary key, name varchar(100))`. To skip importing the `age` field in the data file to the table `t`, you can execute the following SQL statement:
+假设目标表结构为 `CREATE TABLE t(id int primary key, name varchar(100))`。若需跳过数据文件中的 `age` 字段导入到表 `t`，可执行如下 SQL 语句：
 
 ```sql
 IMPORT INTO t(id, name, @1) FROM '/path/to/file.csv' WITH skip_rows=1;
 ```
 
-#### Import multiple data files using wildcards
+#### 使用通配符导入多个数据文件 {#import-multiple-data-files-using-wildcards}
 
-Assume that there are three files named `file-01.csv`, `file-02.csv`, and `file-03.csv` in the `/path/to/` directory. To import these three files into a target table `t` using `IMPORT INTO`, you can execute the following SQL statement:
+假设 `/path/to/` 目录下有 `file-01.csv`、`file-02.csv` 和 `file-03.csv` 三个文件。要将这三个文件导入目标表 `t`，可执行如下 SQL 语句：
 
 ```sql
 IMPORT INTO t FROM '/path/to/file-*.csv';
 ```
 
-If you only need to import `file-01.csv` and `file-03.csv` into the target table, execute the following SQL statement:
+如果只需导入 `file-01.csv` 和 `file-03.csv`，可执行如下 SQL 语句：
 
 ```sql
 IMPORT INTO t FROM '/path/to/file-0[13].csv';
 ```
 
-#### Import data files from Amazon S3 or GCS
+#### 从 Amazon S3 或 GCS 导入数据文件 {#import-data-files-from-amazon-s3-or-gcs}
 
-- Import data files from Amazon S3:
+-   从 Amazon S3 导入数据文件：
 
     ```sql
     IMPORT INTO t FROM 's3://bucket-name/test.csv?access-key=XXX&secret-access-key=XXX';
     ```
 
-- Import data files from GCS:
+-   从 GCS 导入数据文件：
 
     ```sql
     IMPORT INTO t FROM 'gs://import/test.csv?credentials-file=${credentials-file-path}';
     ```
 
-For details about the URI path configuration for Amazon S3 or GCS, see [URI Formats of External Storage Services](/external-storage-uri.md).
+关于 Amazon S3 或 GCS 的 URI 路径配置，参见 [外部存储服务的 URI 格式](/external-storage-uri.md)。
 
-#### Calculate column values using SetClause
+#### 使用 SetClause 计算列值 {#calculate-column-values-using-setclause}
 
-Assume that your data file is in the CSV format and its content is as follows:
+假设你的数据文件为 CSV 格式，内容如下：
 
-```
-id,name,val
-1,phone,230
-2,book,440
-```
+    id,name,val
+    1,phone,230
+    2,book,440
 
-And assume that the target table schema for the import is `CREATE TABLE t(id int primary key, name varchar(100), val int)`. If you want to multiply the `val` column values by 100 during the import, you can execute the following SQL statement:
+假设目标表结构为 `CREATE TABLE t(id int primary key, name varchar(100), val int)`。若需在导入时将 `val` 列的值乘以 100，可执行如下 SQL 语句：
 
 ```sql
 IMPORT INTO t(id, name, @1) SET val=@1*100 FROM '/path/to/file.csv' WITH skip_rows=1;
 ```
 
-#### Import a data file in the SQL format
+#### 导入 SQL 格式的数据文件 {#import-a-data-file-in-the-sql-format}
 
 ```sql
 IMPORT INTO t FROM '/path/to/file.sql' FORMAT 'sql';
 ```
 
-#### Limit the write speed to TiKV
+#### 限制写入 TiKV 的速度 {#limit-the-write-speed-to-tikv}
 
-To limit the write speed to a TiKV node to 10 MiB/s, execute the following SQL statement:
+若需将写入 TiKV 节点的速度限制为 10 MiB/s，可执行如下 SQL 语句：
 
 ```sql
 IMPORT INTO t FROM 's3://bucket/path/to/file.parquet?access-key=XXX&secret-access-key=XXX' FORMAT 'parquet' WITH MAX_WRITE_SPEED='10MiB';
 ```
 
-## `IMPORT INTO ... FROM SELECT` usage
+## <code>IMPORT INTO ... FROM SELECT</code> 用法 {#code-import-into-from-select-code-usage}
 
-`IMPORT INTO ... FROM SELECT` lets you import the query result of a `SELECT` statement to an empty table in TiDB. You can also use it to import historical data queried with [`AS OF TIMESTAMP`](/as-of-timestamp.md).
+`IMPORT INTO ... FROM SELECT` 允许你将 `SELECT` 语句的查询结果导入到 TiDB 的空表中。你也可以用它导入通过 [`AS OF TIMESTAMP`](/as-of-timestamp.md) 查询的历史数据。
 
-### Import the query result of `SELECT`
+### 导入 <code>SELECT</code> 查询结果 {#import-the-query-result-of-code-select-code}
 
-To import the `UNION` result to the target table `t`, with the import concurrency specified as `8` and precheck of non-critical items configured as disabled, execute the following SQL statement:
+要将 `UNION` 结果导入目标表 `t`，并指定导入并发度为 `8`，禁用非关键项预检查，可执行如下 SQL 语句：
 
 ```sql
 IMPORT INTO t FROM SELECT * FROM src UNION SELECT * FROM src2 WITH THREAD = 8, DISABLE_PRECHECK;
 ```
 
-### Import historical data at a specified time point
+### 导入指定时间点的历史数据 {#import-historical-data-at-a-specified-time-point}
 
-To import historical data at a specified time point to the target table `t`, execute the following SQL statement:
+要将指定时间点的历史数据导入目标表 `t`，可执行如下 SQL 语句：
 
 ```sql
 IMPORT INTO t FROM SELECT * FROM src AS OF TIMESTAMP '2024-02-27 11:38:00';
 ```
 
-## MySQL compatibility
+## MySQL 兼容性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+该语句为 TiDB 对 MySQL 语法的扩展。
 
-## See also
+## 另请参阅 {#see-also}
 
-* [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
-* [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
-* [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md)
-* [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md)
+-   [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
+-   [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
+-   [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md)
+-   [TiDB 分布式执行框架（DXF）](/tidb-distributed-execution-framework.md)

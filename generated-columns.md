@@ -1,27 +1,25 @@
 ---
 title: Generated Columns
-summary: Learn how to use generated columns.
+summary: 学习如何使用 generated columns。
 ---
 
 # Generated Columns
 
-This document introduces the concept and usage of generated columns.
+本文介绍了 generated columns 的概念和用法。
 
 ## Basic concepts
 
-Unlike general columns, the value of the generated column is calculated by the expression in the column definition. When inserting or updating a generated column, you cannot assign a value, but only use `DEFAULT`.
+与普通列不同，generated column 的值由列定义中的表达式计算得出。在插入或更新 generated column 时，不能为其赋值，只能使用 `DEFAULT`。
 
-There are two kinds of generated columns: virtual and stored. A virtual generated column occupies no storage and is computed when it is read. A stored generated column is computed when it is written (inserted or updated) and occupies storage. Compared with the virtual generated columns, the stored generated columns have better read performance, but take up more disk space.
+有两种类型的 generated columns：virtual 和 stored。virtual generated column 不占用存储空间，读取时会计算得出。stored generated column 在写入（插入或更新）时计算，并占用存储空间。与 virtual generated columns 相比，stored generated columns 具有更好的读取性能，但占用更多磁盘空间。
 
-You can create an index on a generated column whether it is virtual or stored.
+无论是 virtual 还是 stored，都可以在 generated column 上创建索引。
 
 ## Usage
 
-One of the main usage of generated columns is to extract data from the JSON data type and indexing the data.
+generated columns 的主要用途之一是从 JSON 数据类型中提取数据并对其建立索引。
 
-In both MySQL 8.0 and TiDB, columns of type JSON cannot be indexed directly. That is, the following table schema is **not supported**:
-
-{{< copyable "sql" >}}
+在 MySQL 8.0 和 TiDB 中，JSON 类型的列不能直接建立索引。也就是说，以下表结构 **不支持**：
 
 ```sql
 CREATE TABLE person (
@@ -32,11 +30,9 @@ CREATE TABLE person (
 );
 ```
 
-To index a JSON column, you must extract it as a generated column first.
+为了对 JSON 列建立索引，必须先将其提取为 generated column。
 
-Using the `city` field in `address_info` as an example, you can create a virtual generated column and add an index for it:
-
-{{< copyable "sql" >}}
+以 `address_info` 中的 `city` 字段为例，可以创建一个 virtual generated column 并为其添加索引：
 
 ```sql
 CREATE TABLE person (
@@ -50,15 +46,11 @@ CREATE TABLE person (
 );
 ```
 
-In this table, the `city` column is a **virtual generated column** and has an index. The following query can use the index to speed up the execution:
-
-{{< copyable "sql" >}}
+在此表中，`city` 列为 **virtual generated column**，并且已建立索引。以下查询可以利用索引加快执行速度：
 
 ```sql
 SELECT name, id FROM person WHERE city = 'Beijing';
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN SELECT name, id FROM person WHERE city = 'Beijing';
@@ -75,11 +67,9 @@ EXPLAIN SELECT name, id FROM person WHERE city = 'Beijing';
 +---------------------------------+---------+-----------+--------------------------------+-------------------------------------------------------------+
 ```
 
-From the query execution plan, it can be seen that the `city` index is used to read the `HANDLE` of the row that meets the condition `city ='Beijing'`, and then it uses this `HANDLE` to read the data of the row.
+从执行计划可以看出，索引 `city` 被用来读取满足条件 `city ='Beijing'` 的行的 **HANDLE**，然后利用该 HANDLE 读取对应行的数据。
 
-If no data exists at path `$.city`, `JSON_EXTRACT` returns `NULL`. If you want to enforce a constraint that `city` must be `NOT NULL`, you can define the virtual generated column as follows:
-
-{{< copyable "sql" >}}
+如果路径 `$.city` 中没有数据，`JSON_EXTRACT` 会返回 `NULL`。如果你希望强制 `city` 不为 `NULL`，可以将 virtual generated column 定义为：
 
 ```sql
 CREATE TABLE person (
@@ -93,9 +83,7 @@ CREATE TABLE person (
 
 ## Validation of generated columns
 
-Both `INSERT` and `UPDATE` statements check virtual column definitions. Rows that do not pass validation return errors:
-
-{{< copyable "sql" >}}
+在 `INSERT` 和 `UPDATE` 语句中，都会检查 virtual column 的定义。未通过验证的行会返回错误：
 
 ```sql
 mysql> INSERT INTO person (name, address_info) VALUES ('Morgan', JSON_OBJECT('Country', 'Canada'));
@@ -104,9 +92,9 @@ ERROR 1048 (23000): Column 'city' cannot be null
 
 ## Generated columns index replacement rule
 
-When an expression in a query is strictly equivalent to a generated column with an index, TiDB replaces the expression with the corresponding generated column, so that the optimizer can take that index into account during execution plan construction.
+当查询中的表达式与带索引的 generated column 严格等价时，TiDB 会用对应的 generated column 替换该表达式，以便优化器在构建执行计划时考虑该索引。
 
-The following example creates a generated column for the expression `a+1` and adds an index. The column type of `a` is int and the column type of `a+1` is bigint. If the type of the generated column is set to int, the replacement will not occur. For type conversion rules, see [Type Conversion of Expression Evaluation](/functions-and-operators/type-conversion-in-expression-evaluation.md).
+以下示例为表达式 `a+1` 创建了 generated column 并添加了索引。`a` 的列类型为 int，`a+1` 的列类型为 bigint。如果将 generated column 的类型设置为 int，则不会进行替换。关于类型转换规则，详见 [Type Conversion of Expression Evaluation](/functions-and-operators/type-conversion-in-expression-evaluation.md)。
 
 ```sql
 create table t(a int);
@@ -122,7 +110,7 @@ desc select a+1 from t where a+1=3;
 |   └─Selection_6           | 8000.00  | cop[tikv] |               | eq(plus(test.t.a, 1), 3)       |
 |     └─TableFullScan_5     | 10000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo |
 +---------------------------+----------+-----------+---------------+--------------------------------+
-4 rows in set (0.00 sec)
+4 行，耗时 0.00 秒
 ```
 
 ```sql
@@ -138,25 +126,24 @@ desc select a+1 from t where a+1=3;
 | IndexReader_6          | 10.00   | root      |                         | index:IndexRangeScan_5                      |
 | └─IndexRangeScan_5     | 10.00   | cop[tikv] | table:t, index:idx_b(b) | range:[3,3], keep order:false, stats:pseudo |
 +------------------------+---------+-----------+-------------------------+---------------------------------------------+
-2 rows in set (0.01 sec)
+2 行，耗时 0.01 秒
 ```
 
 > **Note:**
 >
-> If the expression to be replaced and the generated column are both the string type but with different lengths, you can still replace the expression by setting the system variable [`tidb_enable_unsafe_substitute`](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630) to `ON`. When configuring this system variable, ensure that the value calculated by the generated column strictly satisfies the definition of the generated column. Otherwise, the data might be truncated due to the difference in length, resulting in an incorrect result. See GitHub issue [#35490](https://github.com/pingcap/tidb/issues/35490#issuecomment-1211658886).
+> 如果要替换的表达式和生成列都是字符串类型，但长度不同，仍可以通过将系统变量 [`tidb_enable_unsafe_substitute`](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630) 设置为 `ON` 来实现替换。在配置该变量时，确保生成列计算出的值严格满足生成列的定义，否则可能因长度差异导致数据被截断，从而产生错误结果。详见 GitHub issue [#35490](https://github.com/pingcap/tidb/issues/35490#issuecomment-1211658886)。
 
 ## Limitations
 
-The current limitations of JSON and generated columns are as follows:
+目前关于 JSON 和 generated columns 的限制如下：
 
-- You cannot add a stored generated column through `ALTER TABLE`.
-- You can neither convert a stored generated column to a normal column through the `ALTER TABLE` statement nor convert a normal column to a stored generated column.
-- You cannot modify the expression of a stored generated column through the `ALTER TABLE` statement.
-- Not all [JSON functions](/functions-and-operators/json-functions.md) are supported.
-- The [`NULLIF()` function](/functions-and-operators/control-flow-functions.md#nullif) is not supported. You can use the [`CASE` function](/functions-and-operators/control-flow-functions.md#case) instead.
-- Currently, the generated column index replacement rule is valid only when the generated column is a virtual generated column. It is not valid on the stored generated column, but the index can still be used by directly using the generated column itself.
-- The following functions and expressions are not allowed in generated column definitions, and TiDB returns errors if they are used:
-
-    - Non-deterministic functions and expressions, such as `RAND`, `UUID`, and `CURRENT_TIMESTAMP`.
-    - Functions that depend on session-specific or global state, such as `CONNECTION_ID` and `CURRENT_USER`.
-    - Functions that affect the system state or perform system interactions, such as `GET_LOCK`, `RELEASE_LOCK`, and `SLEEP`.
+- 不能通过 `ALTER TABLE` 添加 stored generated column。
+- 不能通过 `ALTER TABLE` 将 stored generated column 转换为普通列，也不能将普通列转换为 stored generated column。
+- 不能通过 `ALTER TABLE` 修改 stored generated column 的表达式。
+- 并非所有 [JSON 函数](/functions-and-operators/json-functions.md) 都被支持。
+- 不支持 [`NULLIF()` 函数](/functions-and-operators/control-flow-functions.md#nullif)，可以使用 [`CASE` 函数](/functions-and-operators/control-flow-functions.md#case) 替代。
+- 当前，生成列索引替换规则仅在生成列为 virtual 时有效，存储型生成列不适用，但索引仍可通过直接使用生成列本身来利用。
+- 以下函数和表达式在定义生成列时不允许使用，使用时会返回错误：
+    - 非确定性函数和表达式，如 `RAND`、`UUID` 和 `CURRENT_TIMESTAMP`。
+    - 依赖会话或全局状态的函数，如 `CONNECTION_ID` 和 `CURRENT_USER`。
+    - 影响系统状态或进行系统交互的函数，如 `GET_LOCK`、`RELEASE_LOCK` 和 `SLEEP`。

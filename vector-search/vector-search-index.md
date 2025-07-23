@@ -1,19 +1,19 @@
 ---
 title: Vector Search Index
-summary: Learn how to build and use the vector search index to accelerate K-Nearest neighbors (KNN) queries in TiDB.
+summary: 学习如何构建和使用向量搜索索引，以加速 TiDB 中的 K-Nearest neighbors (KNN) 查询。
 ---
 
 # Vector Search Index
 
-As described in the [Vector Search](/vector-search/vector-search-overview.md) document, vector search identifies the Top K-Nearest Neighbors (KNN) to a given vector by calculating the distance between the given vector and all vectors stored in the database. While this approach provides accurate results, it can be slow when the table contains a large number of vectors because it involves a full table scan. [^1]
+如 [Vector Search](/vector-search/vector-search-overview.md) 文档所述，向量搜索通过计算给定向量与数据库中存储的所有向量之间的距离，识别出前 K 个最近邻（KNN）。虽然这种方法可以提供准确的结果，但当表中包含大量向量时，速度可能较慢，因为涉及全表扫描。 [^1]
 
-To improve search efficiency, you can create vector search indexes in TiDB for approximate KNN (ANN) search. When using vector indexes for vector search, TiDB can greatly improve query performance with only a slight reduction in accuracy, generally maintaining a search recall rate above 90%.
+为了提高搜索效率，你可以在 TiDB 中创建向量搜索索引，用于近似 KNN（ANN）搜索。当使用向量索引进行向量搜索时，TiDB 可以大大提升查询性能，误差仅有微小的降低，通常能保持在 90% 以上的搜索召回率。
 
 <CustomContent platform="tidb">
 
 > **Warning:**
 >
-> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> 向量搜索功能处于实验阶段。不建议在生产环境中使用此功能。此功能可能在未提前通知的情况下进行更改。如果你发现了 bug，可以在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues)。
 
 </CustomContent>
 
@@ -21,35 +21,35 @@ To improve search efficiency, you can create vector search indexes in TiDB for a
 
 > **Note:**
 >
-> The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> 向量搜索功能处于测试版。可能会在未提前通知的情况下进行更改。如果你发现了 bug，可以在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues)。
 
 </CustomContent>
 
 > **Note:**
 >
-> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> 向量搜索功能在 TiDB Self-Managed、[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) 上均可使用。对于 TiDB Self-Managed 和 TiDB Cloud Dedicated，TiDB 版本必须为 v8.4.0 及以上（建议使用 v8.5.0 及以上）。
 
-Currently, TiDB supports the [HNSW (Hierarchical Navigable Small World)](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world) vector search index algorithm.
+目前，TiDB 支持 [HNSW (Hierarchical Navigable Small World)](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world) 向量搜索索引算法。
 
-## Restrictions
+## 限制
 
-- TiFlash nodes must be deployed in your cluster in advance.
-- Vector search indexes cannot be used as primary keys or unique indexes.
-- Vector search indexes can only be created on a single vector column and cannot be combined with other columns (such as integers or strings) to form composite indexes.
-- A distance function must be specified when creating and using vector search indexes. Currently, only cosine distance `VEC_COSINE_DISTANCE()` and L2 distance `VEC_L2_DISTANCE()` functions are supported.
-- For the same column, creating multiple vector search indexes using the same distance function is not supported.
-- Directly dropping columns with vector search indexes is not supported. You can drop such a column by first dropping the vector search index on that column and then dropping the column itself.
-- Modifying the type of a column with a vector index is not supported.
-- Setting vector search indexes as [invisible](/sql-statements/sql-statement-alter-index.md) is not supported.
-- Building vector search indexes on TiFlash nodes with [encryption at rest](https://docs.pingcap.com/tidb/stable/encryption-at-rest) enabled is not supported.
+- 必须提前在集群中部署 TiFlash 节点。
+- 向量搜索索引不能用作主键或唯一索引。
+- 向量搜索索引只能在单个向量列上创建，不能与其他列（如整数或字符串）组合形成复合索引。
+- 创建和使用向量搜索索引时，必须指定距离函数。目前仅支持余弦距离 `VEC_COSINE_DISTANCE()` 和 L2 距离 `VEC_L2_DISTANCE()`。
+- 对于同一列，不支持使用相同距离函数创建多个向量搜索索引。
+- 不支持直接删除带有向量搜索索引的列。可以先删除该列上的向量搜索索引，再删除列本身。
+- 不支持修改带有向量索引的列的类型。
+- 不支持将向量搜索索引设置为 [invisible](/sql-statements/sql-statement-alter-index.md)。
+- 在启用 [encryption at rest](https://docs.pingcap.com/tidb/stable/encryption-at-rest) 的 TiFlash 节点上构建向量搜索索引不被支持。
 
-## Create the HNSW vector index
+## 创建 HNSW 向量索引
 
-[HNSW](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world) is one of the most popular vector indexing algorithms. The HNSW index provides good performance with relatively high accuracy, up to 98% in specific cases.
+[HNSW](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world) 是最流行的向量索引算法之一。HNSW 索引在性能和准确率方面表现良好，在特定情况下最高可达 98%。
 
-In TiDB, you can create an HNSW index for a column with a [vector data type](/vector-search/vector-search-data-types.md) in either of the following ways:
+在 TiDB 中，你可以通过以下两种方式为具有 [vector data type](/vector-search/vector-search-data-types.md) 的列创建 HNSW 索引：
 
-- When creating a table, use the following syntax to specify the vector column for the HNSW index:
+- 在创建表时，使用以下语法指定向量列以建立 HNSW 索引：
 
     ```sql
     CREATE TABLE foo (
@@ -59,36 +59,36 @@ In TiDB, you can create an HNSW index for a column with a [vector data type](/ve
     );
     ```
 
-- For an existing table that already contains a vector column, use the following syntax to create an HNSW index for the vector column:
+- 对已包含向量列的现有表，使用以下语法为该列创建 HNSW 索引：
 
     ```sql
     CREATE VECTOR INDEX idx_embedding ON foo ((VEC_COSINE_DISTANCE(embedding)));
     ALTER TABLE foo ADD VECTOR INDEX idx_embedding ((VEC_COSINE_DISTANCE(embedding)));
 
-    -- You can also explicitly specify "USING HNSW" to build the vector search index.
+    -- 你也可以显式指定 "USING HNSW" 来构建向量搜索索引。
     CREATE VECTOR INDEX idx_embedding ON foo ((VEC_COSINE_DISTANCE(embedding))) USING HNSW;
     ALTER TABLE foo ADD VECTOR INDEX idx_embedding ((VEC_COSINE_DISTANCE(embedding))) USING HNSW;
     ```
 
 > **Note:**
 >
-> The vector search index feature relies on TiFlash replicas for tables.
+> 向量搜索索引功能依赖于表的 TiFlash 副本。
 >
-> - If a vector search index is defined when a table is created, TiDB automatically creates a TiFlash replica for the table.
-> - If no vector search index is defined when a table is created, and the table currently does not have a TiFlash replica, you need to manually create a TiFlash replica before adding a vector search index to the table. For example: `ALTER TABLE 'table_name' SET TIFLASH REPLICA 1;`.
+> - 如果在创建表时定义了向量搜索索引，TiDB 会自动为该表创建 TiFlash 副本。
+> - 如果在创建表时未定义向量搜索索引，且该表目前没有 TiFlash 副本，则需要手动创建 TiFlash 副本后，才能为表添加向量搜索索引。例如：`ALTER TABLE 'table_name' SET TIFLASH REPLICA 1;`。
 
-When creating an HNSW vector index, you need to specify the distance function for the vector:
+在创建 HNSW 向量索引时，需要指定向量的距离函数：
 
-- Cosine Distance: `((VEC_COSINE_DISTANCE(embedding)))`
-- L2 Distance: `((VEC_L2_DISTANCE(embedding)))`
+- 余弦距离：`((VEC_COSINE_DISTANCE(embedding)))`
+- L2 距离：`((VEC_L2_DISTANCE(embedding)))`
 
-The vector index can only be created for fixed-dimensional vector columns, such as a column defined as `VECTOR(3)`. It cannot be created for non-fixed-dimensional vector columns (such as a column defined as `VECTOR`) because vector distances can only be calculated between vectors with the same dimension.
+索引只能用于固定维度的向量列，例如定义为 `VECTOR(3)` 的列。不能用于非固定维度的向量列（如定义为 `VECTOR`），因为只能在相同维度的向量之间计算距离。
 
-For restrictions and limitations of vector search indexes, see [Restrictions](#restrictions).
+关于向量搜索索引的限制和注意事项，请参见 [Restrictions](#restrictions)。
 
-## Use the vector index
+## 使用向量索引
 
-The vector search index can be used in K-nearest neighbor search queries by using the `ORDER BY ... LIMIT` clause as follows:
+可以在 K 最近邻搜索查询中使用向量搜索索引，通过 `ORDER BY ... LIMIT` 子句实现，例如：
 
 ```sql
 SELECT *
@@ -97,14 +97,14 @@ ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3, 4, 5]')
 LIMIT 10
 ```
 
-To use an index in a vector search, make sure that the `ORDER BY ... LIMIT` clause uses the same distance function as the one specified when creating the vector index.
+使用索引进行向量搜索时，确保 `ORDER BY ... LIMIT` 子句使用的距离函数与创建索引时指定的相同。
 
-## Use the vector index with filters
+## 在过滤条件下使用向量索引
 
-Queries that contain a pre-filter (using the `WHERE` clause) cannot utilize the vector index because they are not querying for K-Nearest neighbors according to the SQL semantics. For example:
+包含预过滤（使用 `WHERE` 子句）的查询无法利用向量索引，因为它们不是按照 SQL 语义进行 KNN 查询。例如：
 
 ```sql
--- For the following query, the `WHERE` filter is performed before KNN, so the vector index cannot be used:
+-- 对于以下查询，`WHERE` 过滤在 KNN 之前执行，因此无法使用向量索引：
 
 SELECT * FROM vec_table
 WHERE category = "document"
@@ -112,10 +112,10 @@ ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 5;
 ```
 
-To use the vector index with filters, query for the K-Nearest neighbors first using vector search, and then filter out unwanted results:
+要在过滤条件下使用向量索引，可以先用向量搜索查询出 K 最近邻，然后再过滤掉不需要的结果：
 
 ```sql
--- For the following query, the `WHERE` filter is performed after KNN, so the vector index cannot be used:
+-- 对于以下查询，`WHERE` 过滤在 KNN 之后执行，因此无法使用向量索引：
 
 SELECT * FROM
 (
@@ -125,14 +125,14 @@ SELECT * FROM
 ) t
 WHERE category = "document";
 
--- Note that this query might return fewer than 5 results if some are filtered out.
+-- 注意：如果过滤掉一些结果，最终返回的结果可能少于 5 条。
 ```
 
-## View index build progress
+## 查看索引构建进度
 
-After you insert a large volume of data, some of it might not be instantly persisted to TiFlash. For vector data that has already been persisted, the vector search index is built synchronously. For data that has not yet been persisted, the index will be built once the data is persisted. This process does not affect the accuracy and consistency of the data. You can still perform vector searches at any time and get complete results. However, performance will be suboptimal until vector indexes are fully built.
+在插入大量数据后，部分数据可能不会立即持久化到 TiFlash。对于已持久化的向量数据，向量搜索索引会同步构建。对于尚未持久化的数据，索引会在数据持久化后进行构建。此过程不会影响数据的准确性和一致性，你仍然可以随时进行向量搜索并获得完整结果，但性能会在索引完全构建前不理想。
 
-To view the index build progress, you can query the `INFORMATION_SCHEMA.TIFLASH_INDEXES` table as follows:
+你可以通过查询 `INFORMATION_SCHEMA.TIFLASH_INDEXES` 表来查看索引构建进度，示例如下：
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.TIFLASH_INDEXES;
@@ -144,27 +144,27 @@ SELECT * FROM INFORMATION_SCHEMA.TIFLASH_INDEXES;
 +---------------+------------+----------+-------------+---------------+-----------+----------+------------+---------------------+-------------------------+--------------------+------------------------+---------------+------------------+
 ```
 
-- You can check the `ROWS_STABLE_INDEXED` and `ROWS_STABLE_NOT_INDEXED` columns for the index build progress. When `ROWS_STABLE_NOT_INDEXED` becomes 0, the index build is complete.
+- 你可以检查 `ROWS_STABLE_INDEXED` 和 `ROWS_STABLE_NOT_INDEXED` 列以了解索引构建进度。当 `ROWS_STABLE_NOT_INDEXED` 变为 0 时，索引构建完成。
 
-    As a reference, indexing a 500 MiB vector dataset with 768 dimensions might take up to 20 minutes. The indexer can run in parallel for multiple tables. Currently, adjusting the indexer priority or speed is not supported.
+    作为参考，索引一个 768 维、500 MiB 大小的向量数据集可能需要最多 20 分钟。索引器可以对多个表并行运行。目前不支持调整索引器的优先级或速度。
 
-- You can check the `ROWS_DELTA_NOT_INDEXED` column for the number of rows in the Delta layer. Data in the storage layer of TiFlash is stored in two layers: Delta layer and Stable layer. The Delta layer stores recently inserted or updated rows and is periodically merged into the Stable layer according to the write workload. This merge process is called Compaction.
+- 你可以检查 `ROWS_DELTA_NOT_INDEXED` 列，了解 Delta 层中的行数。TiFlash 的存储层数据分为 Delta 层和 Stable 层。Delta 层存储最近插入或更新的行，且会根据写入负载定期合并到 Stable 层，这一过程称为压缩（Compaction）。
 
-    The Delta layer is always not indexed. To achieve optimal performance, you can force the merge of the Delta layer into the Stable layer so that all data can be indexed:
+    Delta 层始终不被索引。为了获得最佳性能，可以强制将 Delta 层合并到 Stable 层，使所有数据都能被索引：
 
     ```sql
     ALTER TABLE <TABLE_NAME> COMPACT;
     ```
 
-    For more information, see [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md).
+    更多信息请参见 [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)。
 
-In addition, you can monitor the execution progress of the DDL job by executing `ADMIN SHOW DDL JOBS;` and checking the `row count`. However, this method is not fully accurate, because the `row count` value is obtained from the `rows_stable_indexed` field in `TIFLASH_INDEXES`. You can use this approach as a reference for tracking the progress of indexing.
+此外，你还可以通过执行 `ADMIN SHOW DDL JOBS;` 并检查 `row count` 来监控 DDL 任务的执行进度，但此方法不完全准确，因为 `row count` 值来自 `TIFLASH_INDEXES` 中的 `rows_stable_indexed` 字段。你可以用此方法作为索引进度的参考。
 
-## Check whether the vector index is used
+## 查看是否使用向量索引
 
-Use the [`EXPLAIN`](/sql-statements/sql-statement-explain.md) or [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) statement to check whether a query is using the vector index. When `annIndex:` is presented in the `operator info` column for the `TableFullScan` executor, it means this table scan is utilizing the vector index.
+使用 [`EXPLAIN`](/sql-statements/sql-statement-explain.md) 或 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) 语句检查查询是否使用了向量索引。当 `operator info` 列中的 `annIndex:` 出现，表示此表扫描利用了向量索引。
 
-**Example: the vector index is used**
+**示例：使用了向量索引**
 
 ```sql
 [tidb]> EXPLAIN SELECT * FROM vector_table_with_index
@@ -186,7 +186,7 @@ LIMIT 10;
 9 rows in set (0.01 sec)
 ```
 
-**Example: The vector index is not used because of not specifying a Top K**
+**示例：未使用向量索引（未指定前 K）**
 
 ```sql
 [tidb]> EXPLAIN SELECT * FROM vector_table_with_index
@@ -204,10 +204,10 @@ LIMIT 10;
 6 rows in set, 1 warning (0.01 sec)
 ```
 
-When the vector index cannot be used, a warning occurs in some cases to help you learn the cause:
+当无法使用向量索引时，某些情况下会出现警告，帮助你了解原因：
 
 ```sql
--- Using a wrong distance function:
+-- 使用了错误的距离函数：
 [tidb]> EXPLAIN SELECT * FROM vector_table_with_index
 ORDER BY VEC_L2_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 10;
@@ -215,7 +215,7 @@ LIMIT 10;
 [tidb]> SHOW WARNINGS;
 ANN index not used: not ordering by COSINE distance
 
--- Using a wrong order:
+-- 使用了错误的排序方式：
 [tidb]> EXPLAIN SELECT * FROM vector_table_with_index
 ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]') DESC
 LIMIT 10;
@@ -224,9 +224,9 @@ LIMIT 10;
 ANN index not used: index can be used only when ordering by vec_cosine_distance() in ASC order
 ```
 
-## Analyze vector search performance
+## 分析向量搜索性能
 
-To learn detailed information about how a vector index is used, you can execute the [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) statement and check the `execution info` column in the output:
+想了解向量索引的详细使用情况，可以执行 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) 并查看输出中的 `execution info` 列，例如：
 
 ```sql
 [tidb]> EXPLAIN ANALYZE SELECT * FROM vector_table_with_index
@@ -252,22 +252,22 @@ LIMIT 10;
 
 > **Note:**
 >
-> The execution information is internal. Fields and formats are subject to change without any notification. Do not rely on them.
+> 该执行信息为内部信息，字段和格式可能会在没有通知的情况下发生变化。请勿依赖。
 
-Explanation of some important fields:
+一些重要字段的说明：
 
-- `vector_index.load.total`: The total duration of loading index. This field might be larger than the actual query time because multiple vector indexes might be loaded in parallel.
-- `vector_index.load.from_s3`: Number of indexes loaded from S3.
-- `vector_index.load.from_disk`: Number of indexes loaded from disk. The index was already downloaded from S3 previously.
-- `vector_index.load.from_cache`: Number of indexes loaded from cache. The index was already downloaded from S3 previously.
-- `vector_index.search.total`: The total duration of searching in the index. Large latency usually means the index is cold (never accessed before, or accessed long ago) so that there are heavy I/O operations when searching through the index. This field might be larger than the actual query time because multiple vector indexes might be searched in parallel.
-- `vector_index.search.discarded_nodes`: Number of vector rows visited but discarded during the search. These discarded vectors are not considered in the search result. Large values usually indicate that there are many stale rows caused by `UPDATE` or `DELETE` statements.
+- `vector_index.load.total`：加载索引的总时长。此字段可能大于实际查询时间，因为多个向量索引可能同时加载。
+- `vector_index.load.from_s3`：从 S3 加载的索引数量。
+- `vector_index.load.from_disk`：从磁盘加载的索引数量，之前已从 S3 下载。
+- `vector_index.load.from_cache`：从缓存加载的索引数量，之前已从 S3 下载。
+- `vector_index.search.total`：在索引中搜索的总时长。较大的延迟通常意味着索引冷（未访问过或很久未访问），在搜索时会有较重的 I/O 操作。此字段可能大于实际查询时间，因为多个向量索引可能同时搜索。
+- `vector_index.search.discarded_nodes`：在搜索过程中访问但被丢弃的向量行数。这些被丢弃的向量不会计入搜索结果。数值较大通常表示存在大量陈旧行，可能由 `UPDATE` 或 `DELETE` 语句引起。
 
-See [`EXPLAIN`](/sql-statements/sql-statement-explain.md), [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md), and [EXPLAIN Walkthrough](/explain-walkthrough.md) for interpreting the output.
+请参见 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)、[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) 和 [EXPLAIN Walkthrough](/explain-walkthrough.md) 来理解输出内容。
 
-## See also
+## 相关链接
 
 - [Improve Vector Search Performance](/vector-search/vector-search-improve-performance.md)
 - [Vector Data Types](/vector-search/vector-search-data-types.md)
 
-[^1]: The explanation of KNN search is adapted from the [Approximate Nearest Neighbor Search Indexes](https://github.com/ClickHouse/ClickHouse/pull/50661/files#diff-7ebd9e71df96e74230c9a7e604fa7cb443be69ba5e23bf733fcecd4cc51b7576) document authored by [rschu1ze](https://github.com/rschu1ze) in ClickHouse documentation, licensed under the Apache License 2.0.
+[^1]: KNN 搜索的说明借鉴自由 [rschu1ze](https://github.com/rschu1ze) 在 ClickHouse 文档中撰写的 [Approximate Nearest Neighbor Search Indexes](https://github.com/ClickHouse/ClickHouse/pull/50661/files#diff-7ebd9e71df96e74230c9a7e604fa7cb443be69ba5e23bf733fcecd4cc51b7576) 文档，授权协议为 Apache License 2.0。

@@ -1,17 +1,17 @@
 ---
 title: CREATE RESOURCE GROUP
-summary: Learn the usage of CREATE RESOURCE GROUP in TiDB.
+summary: 了解 TiDB 中 CREATE RESOURCE GROUP 的用法。
 ---
 
 # CREATE RESOURCE GROUP
 
-You can use the `CREATE RESOURCE GROUP` statement to create a resource group.
+你可以使用 `CREATE RESOURCE GROUP` 语句来创建资源组。
 
 > **Note:**
 >
-> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
 
-## Synopsis
+## 概要
 
 ```ebnf+diagram
 CreateResourceGroupStmt ::=
@@ -73,26 +73,26 @@ ResourceGroupRunawayActionOption ::=
 | "SWITCH_GROUP" '(' ResourceGroupName ')'
 ```
 
-The resource group name parameter (`ResourceGroupName`) must be globally unique.
+资源组名称参数 (`ResourceGroupName`) 必须在全局唯一。
 
-TiDB supports the following `DirectResourceGroupOption`, where [Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) is a unified abstraction unit in TiDB for CPU, IO, and other system resources.
+TiDB 支持以下的 `DirectResourceGroupOption`，其中 [Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) 是 TiDB 中 CPU、IO 和其他系统资源的统一抽象单位。
 
-| Option     | Description                         | Example                |
-|---------------|-------------------------------------|------------------------|
-| `RU_PER_SEC`  | Rate of RU backfilling per second   | `RU_PER_SEC = 500` indicates that this resource group is backfilled with 500 RUs per second    |
-| `PRIORITY`    | The absolute priority of tasks to be processed on TiKV  | `PRIORITY = HIGH` indicates that the priority is high. If not specified, the default value is `MEDIUM`. |
-| `BURSTABLE`   | If the `BURSTABLE` attribute is set, TiDB allows the corresponding resource group to use the available system resources when the quota is exceeded. |
-| `QUERY_LIMIT` | When the query execution meets this condition, the query is identified as a runaway query and the corresponding action is executed. | `QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=EXACT DURATION='10m')` indicates that the query is identified as a runaway query when the execution time exceeds 60 seconds. The query is terminated. All SQL statements with the same SQL text will be terminated immediately in the coming 10 minutes. `QUERY_LIMIT=()` or `QUERY_LIMIT=NULL` means that runaway control is not enabled. See [Runaway Queries](/tidb-resource-control-runaway-queries.md). |
+| 选项             | 描述                                                         | 示例                                                         |
+|------------------|--------------------------------------------------------------|--------------------------------------------------------------|
+| `RU_PER_SEC`    | 每秒的 RU 回填速率                                              | `RU_PER_SEC = 500` 表示该资源组每秒回填 500 RUs                     |
+| `PRIORITY`      | TiKV 上待处理任务的绝对优先级                                    | `PRIORITY = HIGH` 表示优先级为高。若未指定，默认值为 `MEDIUM`。     |
+| `BURSTABLE`     | 若设置了 `BURSTABLE` 属性，TiDB 允许对应的资源组在超出配额时使用可用的系统资源。 |                                                                |
+| `QUERY_LIMIT`   | 当查询执行满足此条件时，查询被识别为失控查询，并执行相应操作。     | `QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=EXACT DURATION='10m')` 表示当查询执行时间超过 60 秒时，识别为失控查询，终止该查询。所有具有相同 SQL 文本的 SQL 语句将在接下来的 10 分钟内立即终止。`QUERY_LIMIT=()` 或 `QUERY_LIMIT=NULL` 表示未启用失控控制。详见 [Runaway Queries](/tidb-resource-control-runaway-queries.md)。 |
 
 > **Note:**
 >
-> - The `CREATE RESOURCE GROUP` statement can only be executed when the global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) is set to `ON`.
-> TiDB automatically creates a `default` resource group during cluster initialization. For this resource group, the default value of `RU_PER_SEC` is `UNLIMITED` (equivalent to the maximum value of the `INT` type, that is, `2147483647`) and it is in `BURSTABLE` mode. All requests that are not bound to any resource group are automatically bound to this `default` resource group. When you create a new configuration for another resource group, it is recommended to modify the `default` resource group configuration as needed.
-> - Currently, only the `default` resource group supports modifying the `BACKGROUND` configuration.
+> - 只有在全局变量 [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) 设置为 `ON` 时，才能执行 `CREATE RESOURCE GROUP` 语句。
+> TiDB 在集群初始化时会自动创建一个 `default` 资源组。对于该资源组，`RU_PER_SEC` 的默认值为 `UNLIMITED`（等同于 `INT` 类型的最大值，即 `2147483647`），且处于 `BURSTABLE` 模式。所有未绑定到任何资源组的请求会自动绑定到此 `default` 资源组。当你为其他资源组创建新配置时，建议根据需要修改 `default` 资源组的配置。
+> - 目前，只有 `default` 资源组支持修改 `BACKGROUND` 配置。
 
-## Examples
+## 示例
 
-Create two resource groups `rg1` and `rg2`.
+创建两个资源组 `rg1` 和 `rg2`。
 
 ```sql
 DROP RESOURCE GROUP IF EXISTS rg1;
@@ -126,7 +126,7 @@ Query OK, 0 rows affected (0.08 sec)
 SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1' or NAME = 'rg2';
 ```
 
-```sql
+```plaintext
 +------+------------+----------+-----------+---------------------------------+
 | NAME | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT                     |
 +------+------------+----------+-----------+---------------------------------+
@@ -136,11 +136,11 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1' or NAME = 'rg
 2 rows in set (1.30 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-MySQL also supports [CREATE RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/create-resource-group.html). However, the acceptable parameters are different from that of TiDB so that they are not compatible.
+MySQL 也支持 [CREATE RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/create-resource-group.html)。但接受的参数与 TiDB 不同，因此不兼容。
 
-## See also
+## 相关链接
 
 * [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
 * [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)

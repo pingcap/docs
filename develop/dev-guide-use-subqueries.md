@@ -1,39 +1,39 @@
 ---
 title: Subquery
-summary: Learn how to use subquery in TiDB.
+summary: 学习如何在 TiDB 中使用子查询。
 ---
 
 # Subquery
 
-This document introduces subquery statements and categories in TiDB.
+本文介绍 TiDB 中的子查询语句及其分类。
 
-## Overview
+## 概述
 
-A subquery is a query within another SQL query. With subquery, the query result can be used in another query.
+子查询是嵌套在另一个 SQL 查询中的查询。通过子查询，查询结果可以在另一个查询中使用。
 
-The following takes the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application as an example to introduce subquery.
+以下以 [Bookshop](/develop/dev-guide-bookshop-schema-design.md) 应用为例，介绍子查询。
 
-## Subquery statement
+## 子查询语句
 
-In most cases, there are five types of subqueries:
+在大多数情况下，子查询主要有五种类型：
 
-- Scalar Subquery, such as `SELECT (SELECT s1 FROM t2) FROM t1`.
-- Derived Tables, such as `SELECT t1.s1 FROM (SELECT s1 FROM t2) t1`.
-- Existential Test, such as `WHERE NOT EXISTS(SELECT ... FROM t2)`, `WHERE t1.a IN (SELECT ... FROM t2)`.
-- Quantified Comparison, such as `WHERE t1.a = ANY(SELECT ... FROM t2)`, `WHERE t1.a = ANY(SELECT ... FROM t2)`.
-- Subquery as a comparison operator operand, such as `WHERE t1.a > (SELECT ... FROM t2)`.
+- 标量子查询，例如 `SELECT (SELECT s1 FROM t2) FROM t1`。
+- 派生表，例如 `SELECT t1.s1 FROM (SELECT s1 FROM t2) t1`。
+- 存在性测试，例如 `WHERE NOT EXISTS(SELECT ... FROM t2)`，`WHERE t1.a IN (SELECT ... FROM t2)`。
+- 数量比较，例如 `WHERE t1.a = ANY(SELECT ... FROM t2)`，`WHERE t1.a = ALL(SELECT ... FROM t2)`。
+- 作为比较操作符操作数的子查询，例如 `WHERE t1.a > (SELECT ... FROM t2)`。
 
-## Category of subquery
+## 子查询的分类
 
-The subquery can be categorized as [Correlated Subquery](https://en.wikipedia.org/wiki/Correlated_subquery) and Self-contained Subquery. TiDB treats these two types differently.
+子查询可以分为 [Related Subquery](https://en.wikipedia.org/wiki/Correlated_subquery) 和 Self-contained Subquery。TiDB 对这两类子查询的处理方式不同。
 
-Whether a subquery is correlated or not depends on whether it refers to columns used in its outer query.
+子查询是否相关，取决于它是否引用了外层查询中的列。
 
-### Self-contained subquery
+### Self-contained 子查询
 
-For a self-contained subquery that uses subquery as operand of comparison operators (`>`, `>=`, `<` , `<=` , `=` , or `! =`), the inner subquery queries only once, and TiDB rewrites it as a constant during the execution plan phase.
+对于作为比较操作符（`>`, `>=`, `<`, `<=`, `=` 或 `!=`）操作数的自包含子查询，内部子查询只会执行一次，TiDB 会在执行计划阶段将其重写为常量。
 
-For example, to query authors in the `authors` table whose age is greater than the average age, you can use a subquery as a comparison operator operand.
+例如，查询 `authors` 表中年龄大于平均年龄的作者，可以使用子查询作为比较操作符的操作数。
 
 ```sql
 SELECT * FROM authors a1 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > (
@@ -44,20 +44,20 @@ SELECT * FROM authors a1 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_ye
 )
 ```
 
-The inner subquery is executed before TiDB executes the above query:
+在 TiDB 执行上述查询之前，先执行内部子查询：
 
 ```sql
 SELECT AVG(IFNULL(a2.death_year, YEAR(NOW())) - a2.birth_year) AS average_age FROM authors a2;
 ```
 
-Suppose the result of the query is 34, that is, the average age is 34, and 34 will be used as a constant to replace the original subquery.
+假设结果为 34，即平均年龄为 34，TiDB 会将其作为常量替换原始子查询。
 
 ```sql
 SELECT * FROM authors a1
 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > 34;
 ```
 
-The result is as follows:
+结果示例如下：
 
 ```
 +--------+-------------------+--------+------------+------------+
@@ -79,15 +79,15 @@ The result is as follows:
 ...
 ```
 
-For self-contained subqueries such as Existential Test and Quantified Comparison, TiDB rewrites and replaces them with equivalent queries for better performance. For more information, see [Subquery Related Optimizations](/subquery-optimization.md).
+对于存在性测试（Existential Test）和数量比较（Quantified Comparison）等自包含子查询，TiDB 会对其进行重写，转化为等价的查询以提升性能。更多信息请参见 [Subquery Related Optimizations](/subquery-optimization.md)。
 
-### Correlated subquery
+### Related 子查询
 
-For correlated subquery, because the inner subquery references the columns from the outer query, each subquery is executed once for each row of the outer query. That is, assuming that the outer query gets 10 million results, the subquery will also be executed 10 million times, which will consume more time and resources.
+对于 Related 子查询，由于内部子查询引用了外层查询的列，每次外层查询的每一行，子查询都需要执行一次。这意味着假设外层查询返回 1000 万条结果，子查询也会执行 1000 万次，消耗更多时间和资源。
 
-Therefore, in the process of processing, TiDB will try to [Decorrelate of Correlated Subquery](/correlated-subquery-optimization.md) to improve the query efficiency at the execution plan level.
+因此，在处理过程中，TiDB 会尝试进行 [Decorrelate of Correlated Subquery](/correlated-subquery-optimization.md)，在执行计划层面优化查询效率。
 
-The following statement is to query authors who are older than the average age of other authors of the same gender.
+以下语句用于查询年龄大于同一性别其他作者平均年龄的作者：
 
 ```sql
 SELECT * FROM authors a1 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > (
@@ -101,7 +101,7 @@ SELECT * FROM authors a1 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_ye
 );
 ```
 
-TiDB rewrites it to an equivalent `join` query:
+TiDB 会将其重写为等价的 `join` 查询：
 
 ```sql
 SELECT *
@@ -121,24 +121,24 @@ WHERE
     AND (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > a2.average_age;
 ```
 
-As a best practice, in actual development, it is recommended to avoid querying through a correlated subquery if you can write another equivalent query with better performance.
+作为最佳实践，在实际开发中，建议避免通过相关子查询进行查询，如果可以用性能更优的等价查询实现。
 
-## Read more
+## 阅读更多
 
 - [Subquery Related Optimizations](/subquery-optimization.md)
 - [Decorrelation of Correlated Subquery](/correlated-subquery-optimization.md)
 - [Subquery Optimization in TiDB](https://www.pingcap.com/blog/subquery-optimization-in-tidb/)
 
-## Need help?
+## 需要帮助？
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或 [提交支持工单](/support.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上向社区提问，或 [提交支持工单](https://tidb.support.pingcap.com/)。
 
 </CustomContent>

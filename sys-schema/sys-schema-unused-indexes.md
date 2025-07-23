@@ -1,22 +1,22 @@
 ---
 title: schema_unused_indexes
-summary: Learn about the `schema_unused_indexes` table in the `sys` schema.
+summary: 了解 `schema_unused_indexes` 表在 `sys` 模式中的作用。
 ---
 
 # `schema_unused_indexes`
 
-`schema_unused_indexes` records indexes that have not been used since the last start of TiDB. It includes the following columns:
+`schema_unused_indexes` 记录自上次启动 TiDB 以来未被使用的索引。它包含以下列：
 
-- `OBJECT_SCHEMA`: The name of the database to which the table containing the index belongs.
-- `OBJECT_NAME`: The name of the table containing the index.
-- `INDEX_NAME`: The name of the index.
+- `OBJECT_SCHEMA`：包含该索引的表所在的数据库名称。
+- `OBJECT_NAME`：包含索引的表的名称。
+- `INDEX_NAME`：索引的名称。
 
 ```sql
 USE SYS;
 DESC SCHEMA_UNUSED_INDEXES;
 ```
 
-The output is as follows:
+输出结果如下：
 
 ```sql
 +---------------+-------------+------+------+---------+-------+
@@ -29,9 +29,9 @@ The output is as follows:
 3 rows in set (0.00 sec)
 ```
 
-## Manually create the `schema_unused_indexes` view
+## 手动创建 `schema_unused_indexes` 视图
 
-For clusters upgraded from versions earlier than v8.0.0, the `sys` schema and the views in it are not created automatically. You can manually create them using the following SQL statements:
+对于从版本早于 v8.0.0 升级的集群，`sys` 模式及其视图不会自动创建。你可以使用以下 SQL 语句手动创建：
 
 ```sql
 CREATE DATABASE IF NOT EXISTS sys;
@@ -49,6 +49,6 @@ CREATE OR REPLACE VIEW sys.schema_unused_indexes AS
     sum(last_access_time) is null;
 ```
 
-## Read more
+## 了解更多
 
 - [`INFORMATION_SCHEMA.TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)

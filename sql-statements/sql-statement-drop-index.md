@@ -1,13 +1,13 @@
 ---
-title: DROP INDEX | TiDB SQL Statement Reference
-summary: An overview of the usage of DROP INDEX for the TiDB database.
+title: DROP INDEX | TiDB SQL 语句参考
+summary: 关于在 TiDB 数据库中使用 DROP INDEX 的概述。
 ---
 
 # DROP INDEX
 
-This statement removes an index from a specified table, marking space as free in TiKV.
+该语句用于从指定的表中删除索引，在 TiKV 中释放空间。
 
-## Synopsis
+## 概要
 
 ```ebnf+diagram
 DropIndexStmt ::=
@@ -20,7 +20,7 @@ IndexLockAndAlgorithmOpt ::=
     ( LockClause AlgorithmClause? | AlgorithmClause LockClause? )?
 ```
 
-## Examples
+## 示例
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -56,11 +56,11 @@ mysql> DROP INDEX c1 ON t1;
 Query OK, 0 rows affected (0.30 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-* Dropping the primary key of the `CLUSTERED` type is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
+* 不支持删除 `CLUSTERED` 类型的主键。关于 `CLUSTERED` 类型主键的更多细节，请参考 [clustered index](/clustered-indexes.md)。
 
-## See also
+## 相关链接
 
 * [SHOW INDEXES](/sql-statements/sql-statement-show-indexes.md)
 * [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
