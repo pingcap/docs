@@ -211,7 +211,7 @@ To import the CSV files to TiDB Cloud Starter, take the following steps:
     - **Source Files URI**:
         - When importing one file, enter the source file URI and name in the following format `[azure|https]://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `[azure|https]://sampledata/ingest/TableName.01.csv`.
         - When importing multiple files, enter the source file URI and name in the following format `[azure|https]://[bucket_name]/[data_source_folder]/`. For example, `[azure|https]://sampledata/ingest/`.
-    - **Credential**: you can use a shared access signature (SAS) token to access your bucket. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access)
+    - **Credential**: you can use a shared access signature (SAS) token to access your bucket. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
 
 4. Click **Next**.
 
