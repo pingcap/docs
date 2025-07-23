@@ -41,8 +41,6 @@ This document describes how to import the sample data into TiDB Cloud Serverless
 
 8. When the import progress shows **Completed**, check the imported tables.
 
-When the data import progress shows **Completed**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud Serverless.
-
 After connecting to the cluster, you can run some queries in your terminal to check the result, for example:
 
 1. Get the trip records starting at "12th & U St NW":
