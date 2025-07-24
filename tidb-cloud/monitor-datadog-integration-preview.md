@@ -13,7 +13,7 @@ TiDB Cloud supports Datadog integration (Preview). You can configure TiDB Cloud 
 
     If you do not have a Datadog account, sign up at [https://app.datadoghq.com/signup](https://app.datadoghq.com/signup).
 
-- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` access to your organization in TiDB Cloud, while other users have read-only access to the integration page and can access configured dashboards via the provided links.
+- To set up third-party metrics integration for TiDB Cloud, you must have the **Organization Owner** access to your organization in TiDB Cloud, while other users have read-only access to the integration page and can access configured dashboards via the provided links.
 
 ## Limitation
 
