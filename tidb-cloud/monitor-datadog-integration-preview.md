@@ -44,7 +44,7 @@ TiDB Cloud supports Datadog integration (Preview). You can configure TiDB Cloud 
 
 ## Pre-built dashboard
 
-Click the **Dashboard** link in the **Datadog** card of the integrations. You can see the pre-built dashboard of your TiDB clusters.
+Click the **Dashboard** link in the **Datadog** card on the **Integrations** page. You can see the pre-built dashboard of your TiDB clusters.
 
 ## Metrics available to Datadog
 
