@@ -28,7 +28,7 @@ TiDB Cloud supports Datadog integration (Preview). You can configure TiDB Cloud 
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the target cluster by clicking on it from the cluster list page.
 2. After entering the target cluster details page, in the left navigation pane, click **Settings** > **Integrations**.
 3. On the **Integrations** page, click **Integration to Datadog (Preview)**.
-4. Enter your API key of Datadog and choose the site of Datadog.
+4. Enter your Datadog API key and choose your Datadog site.
 5. Click **Test Integration**.
 
     - If the test successes, the **Confirm** button is displayed.
