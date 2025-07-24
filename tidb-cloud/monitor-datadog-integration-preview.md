@@ -31,7 +31,7 @@ TiDB Cloud supports Datadog integration (Preview). You can configure TiDB Cloud 
 4. Enter your Datadog API key and choose your Datadog site.
 5. Click **Test Integration**.
 
-    - If the test successes, the **Confirm** button is displayed.
+    - If the test succeeds, the **Confirm** button is displayed.
     - If the test fails, an error message is displayed. Follow the message for troubleshooting and retry the integration.
 
 6. Click **Confirm** to complete the integration.
