@@ -449,7 +449,7 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 ##### `disagg_blocklist_wn_store_id` <span class="version-mark">New in v9.0.0</span>
 
 - In the disaggregated storage and compute architecture, specifies the TiFlash Write Nodes that TiFlash Compute Nodes do not send requests to.
-- The value is a string consisting of `store_id`s separated by `,`. For example, setting it to `"140,141"` means that TiFlash Compute Nodes will not send requests to TiFlash Write Nodes with `store_id` `140` or `141`. You can use [pd-ctl](/pd-control.md#query-tiflash-nodes-in-the-disaggregated-storage-and-compute-architecture) to query the `store_id` of TiFlash Write Nodes in the cluster.
+- The value is a comma-separated string of `store_id` values. For example, setting it to `"140,141"` means that TiFlash Compute Nodes will not send requests to TiFlash Write Nodes with `store_id` `140` or `141`. You can use [pd-ctl](/pd-control.md#query-tiflash-nodes-in-the-disaggregated-storage-and-compute-architecture) to query the `store_id` of TiFlash Write Nodes in the cluster.
 - If the value is an empty string `""`, it means that TiFlash Compute Nodes send requests to all TiFlash Write Nodes.
 - Default value: `""`
 
