@@ -56,6 +56,10 @@ The upstream database (MySQL/MariaDB) user must have the following privileges:
 | `REPLICATION SLAVE` | Global |
 | `REPLICATION CLIENT` | Global |
 
+> **Note:**
+>
+> Privilege names can differ between MySQL and MariaDB versions (e.g., `REPLICATION CLIENT` vs. `BINLOG MONITOR`). If a privilege check fails, you can use the `ignore-checking-items` configuration option to skip it, but first review other potential errors reported by [DM precheck feature](/dm/dm-precheck.md).
+
 If you need to migrate the data from `db1` to TiDB, execute the following `GRANT` statement:
 
 ```sql
@@ -95,7 +99,3 @@ GRANT ALL ON dm_meta.* TO 'your_user'@'your_wildcard_of_host';
 | Dump | `SELECT`<br/>`RELOAD` (flushes tables with Read lock and unlocks tables）| NULL | Write local files |
 | Load | NULL | `SELECT` (Query the checkpoint history)<br/>`CREATE` (creates a database/table)<br/>`DELETE` (deletes checkpoint)<br/>`INSERT` (Inserts the Dump data) | Read/Write local files |
 | Binlog replication | `REPLICATION SLAVE` (reads the binlog)<br/>`REPLICATION CLIENT` (`show master status`, `show slave status`) | `SELECT` (shows the index and column)<br/>`INSERT` (DML)<br/>`UPDATE` (DML)<br/>`DELETE` (DML)<br/>`CREATE` (creates a database/table)<br/>`DROP` (drops databases/tables)<br/>`ALTER` (alters a table)<br/>`INDEX` (creates/drops an index)| Read/Write local files |
-
-> **Note:**
->
-> Privilege names can differ between MySQL and MariaDB versions (e.g., `REPLICATION SLAVE` vs. `REPLICATION CLIENT`). If a privilege check fails, you can use the `ignore-checking-items` configuration option to skip it, but first review the implications of doing so.
