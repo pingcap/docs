@@ -1,0 +1,8 @@
+{
+  "tidb": "TiDB",
+  "self-managed": "TiDB Self-Managed",
+  "starter": "TiDB Cloud Starter",
+  "essential": "TiDB Cloud Essential",
+  "dedicated": "TiDB Cloud Dedicated",
+  "console-url": "tidbcloud.com"
+}
