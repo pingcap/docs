@@ -157,8 +157,8 @@
 | function signature | 函数签名 |  |
 | functional abstraction | 功能抽象 |  |
 | fuzzy matching | 模糊匹配 |  |
-| Geo-distributed active-active | 异地双活 |  |
-| Geo-distributed multi-active | 异地多活 |  |
+| geo-distributed active-active | 异地双活 |  |
+| geo-distributed multi-active | 异地多活 |  |
 | global | 全局 |  |
 | global privileges | 全局权限 |  |
 | Global Transaction Identifier (GTID) | 全局事务标识符 |  |
@@ -212,7 +212,7 @@
 | Internet Data Center (IDC) | 互联网数据中心 |  |
 | Internet Service Provider (ISP) | 互联网服务提供商 |  |
 | intrusive | 有侵入性的 |  |
-| Isolated storage | 独立存储 |  |
+| isolated storage | 独立存储 |  |
 | isolation | 隔离 |  |
 | isolation level | 隔离级别 |  |
 | Java DataBase Connectivity (JDBC) | Java 数据库连接 |  |
@@ -417,7 +417,7 @@
 | subquery | 子查询 |  |
 | super class | 超类 |  |
 | synchronizing/syncing | 同步 |  |
-| Syntactic sugar | 语法糖 | In computer science, syntactic sugar is syntax within a programming language that is designed to make things easier to read or to express. It makes the language "sweeter" for human use: things can be expressed more clearly, more concisely, or in an alternative style that some may prefer. |
+| syntactic sugar | 语法糖 | In computer science, syntactic sugar is syntax within a programming language that is designed to make things easier to read or to express. It makes the language "sweeter" for human use: things can be expressed more clearly, more concisely, or in an alternative style that some may prefer. |
 | syntax | 语法 |  |
 | system variable | 系统变量 |  |
 | table schema | 表结构 |  |
