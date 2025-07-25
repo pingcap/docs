@@ -1,11 +1,18 @@
 ---
-title: Integrate TiDB Cloud with New Relic (Beta)
+title: Integrate TiDB Cloud with New Relic (Preview)
 summary: Learn how to monitor your TiDB cluster with the New Relic integration.
 ---
 
-# Integrate TiDB Cloud with New Relic (Beta)
+# Integrate TiDB Cloud with New Relic (Preview)
 
-TiDB Cloud supports New Relic integration (beta). You can configure TiDB Cloud to send metric data of your TiDB clusters to [New Relic](https://newrelic.com/). After that, you can directly view these metrics in your New Relic dashboards.
+TiDB Cloud supports New Relic integration (Preview). You can configure TiDB Cloud to send metrics of your TiDB clusters to [New Relic](https://newrelic.com/). After that, you can directly view these metrics in your New Relic dashboards.
+
+## New Relic integration version
+
+Based on your integration history, TiDB Cloud provides two versions of New Relic integration:
+
+- **New Relic integration (Preview)**: if none of clusters in your organization were integrated with New Relic before July 29, 2025, TiDB Cloud provides the preview version of New Relic integration for you to experience the latest enhancements.
+- **New Relic integration (Beta)**: if any clusters in your organization were integrated with New Relic before July 29, 2025, TiDB Cloud keeps both existing and new integrations at the beta version to avoid affecting current dashboards.
 
 ## Prerequisites
 
@@ -13,15 +20,36 @@ TiDB Cloud supports New Relic integration (beta). You can configure TiDB Cloud t
 
     If you do not have a New Relic account, sign up [here](https://newrelic.com/signup).
 
-- To edit third-party integration settings for TiDB Cloud, you must have the **Organization Owner** access to your organization or **Project Member** access to the target project in TiDB Cloud.
+- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` access to your organization in TiDB Cloud. To view the integration page or access configured dashboards via the provided links, users only need the `Organization Member` access to your organization in TiDB Cloud.
 
 ## Limitation
 
-You cannot use the New Relic integration in [TiDB Cloud Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless).
+- You cannot use the New Relic integration in [TiDB Cloud Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless).
+
+- New Relic integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
 
 ## Steps
 
 ### Step 1. Integrate with your New Relic API Key
+
+Depending on your [New Relic integration version](#new-relic-integration-version), the steps to access the integration page are different.
+
+<SimpleTab>
+<div label="New Relic integration (Preview)">
+
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
+2. In the left navigation pane, click **Settings** > **Integrations**.
+3. On the **Integrations** page, click **Integration to New Relic (Preview)**.
+4. Enter your API key of New Relic and choose the site of New Relic.
+5. Click **Test Integration**.
+
+    - If the test succeeds, the **Confirm** button is displayed.
+    - If the test fails, an error message is displayed. Follow the message for troubleshooting and retry the integration.
+
+6. Click **Confirm** to complete the integration.
+
+</div>
+<div label="New Relic integration (Beta)">
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Project Settings** > **Integrations**.
@@ -34,6 +62,9 @@ You cannot use the New Relic integration in [TiDB Cloud Serverless clusters](/ti
 
 6. Click **Confirm** to complete the integration.
 
+</div>
+</SimpleTab>
+
 ### Step 2. Add TiDB Cloud Dashboard in New Relic
 
 1. Log in to [New Relic](https://one.newrelic.com/).
@@ -42,11 +73,11 @@ You cannot use the New Relic integration in [TiDB Cloud Serverless clusters](/ti
 
 ## Pre-built dashboard
 
-Click the **Dashboard** link in the **New Relic** card of the integrations. You can see the pre-built dashboard of your TiDB clusters.
+Click the **Dashboard** link in the **New Relic** card on the **Integrations** page. You can see the pre-built dashboard of your TiDB clusters.
 
 ## Metrics available to New Relic
 
-New Relic tracks the following metric data for your TiDB clusters.
+New Relic tracks the following metrics for your TiDB clusters.
 
 | Metric name  | Metric type | Labels | Description                                   |
 | :------------| :---------- | :------| :----------------------------------------------------- |
@@ -66,3 +97,18 @@ New Relic tracks the following metric data for your TiDB clusters.
 | tidb_cloud.node_cpu_capacity_cores | gauge | cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…<br/><br/>component: tidb\|tikv\|tiflash | The limit on CPU cores of TiDB/TiKV/TiFlash nodes. |
 | tidb_cloud.node_memory_used_bytes | gauge | cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…<br/><br/>component: tidb\|tikv\|tiflash | The used memory of TiDB/TiKV/TiFlash nodes, in bytes. |
 | tidb_cloud.node_memory_capacity_bytes | gauge | cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…<br/><br/>component: tidb\|tikv\|tiflash | The memory capacity of TiDB/TiKV/TiFlash nodes, in bytes. |
+
+For New Relic integration (Preview), the following additional metrics are also available:
+
+| Metric name  | Metric type | Labels | Description                                   |
+| :------------| :---------- | :------| :----------------------------------------------------- |
+| tidbcloud.node_storage_available_bytes | gauge | instance: `tidb-0\|tidb-1\|...`<br/>component: `tikv\|tiflash`<br/>cluster_name: `<cluster name>` | The available disk space in bytes for TiKV/TiFlash nodes |
+| tidbcloud.disk_read_latency | histogram | instance: `tidb-0\|tidb-1\|...`<br/>component: `tikv\|tiflash`<br/>cluster_name: `<cluster name>`<br/>`device`: `nvme.*\|dm.*` | The read latency in seconds per storage device |
+| tidbcloud.disk_write_latency | histogram | instance: `tidb-0\|tidb-1\|...`<br/>component: `tikv\|tiflash`<br/>cluster_name: `<cluster name>`<br/>`device`: `nvme.*\|dm.*` | The write latency in seconds per storage device |
+| tidbcloud.kv_request_duration | histogram | instance: `tidb-0\|tidb-1\|...`<br/>component: `tikv`<br/>cluster_name: `<cluster name>`<br/>`type`: `BatchGet\|Commit\|Prewrite\|...` | The duration in seconds of TiKV requests by type |
+| tidbcloud.component_uptime | histogram | instance: `tidb-0\|tidb-1\|...`<br/>component: `tidb\|tikv\|tiflash`<br/>cluster_name: `<cluster name>` | The uptime in seconds of TiDB components |
+| tidbcloud.changefeed_checkpoint_ts | gauge | changefeed_id | The checkpoint timestamp of a changefeed, representing the largest TSO (Timestamp Oracle) successfully written to the downstream |
+| tidbcloud.ticdc_owner_resolved_ts_lag | gauge | changefeed_id: `<changefeed-id>`<br/>cluster_name: `<cluster name>` | The resolved timestamp lag in seconds for changefeed owner |
+| tidbcloud.changefeed_status | gauge | changefeed_id: `<changefeed-id>`<br/>cluster_name: `<cluster name>` | Changefeed status:<br/>`-1`: Unknown<br/>`0`: Normal<br/>`1`: Warning<br/>`2`: Failed<br/>`3`: Stopped<br/>`4`: Finished<br/>`6`: Warning<br/>`7`: Other |
+| tidbcloud.resource_manager_resource_unit_read_request_unit | gauge | cluster_name: `<cluster name>`<br/>resource_group: `<group-name>` | The read request units consumed by Resource Manager |
+| tidbcloud.resource_manager_resource_unit_write_request_unit | gauge | cluster_name: `<cluster name>`<br/>resource_group: `<group-name>` | The write request units consumed by Resource Manager |
