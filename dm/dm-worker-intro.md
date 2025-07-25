@@ -72,7 +72,7 @@ GRANT SELECT ON `db1`.* TO 'your_user'@'your_wildcard_of_host';
 Starting from [MariaDB 10.5](https://mariadb.com/docs/release-notes/community-server/old-releases/mariadb-10-5-series/what-is-mariadb-105), the `REPLICATION CLIENT` privilege was renamed and split into more granular privileges. The user must have the following privileges:
 
 | Privilege | Scope | Description |
-|:---|:---|
+|:---|:---|:---|
 | `SELECT` | Tables | Required for full data export. |
 | `RELOAD` | Global | Required for `FLUSH TABLES WITH READ LOCK`. |
 | `BINLOG MONITOR` | Global | Renamed from `REPLICATION CLIENT`; allows monitoring the binlog. |
