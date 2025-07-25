@@ -389,7 +389,7 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 
 ##### `cop_pool_size` <span class="version-mark">New in v5.0</span>
 
-- Specifies the maximum number of cop requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to `0` or not set, the default value is used, which is twice the number of physical cores.
+- Specifies the maximum number of cop requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value and is smaller than 10 times the specified value, the exceeded requests will queue. Moreover, if the number of requests exceeds 10 times the specified value, the exceeded requests will be rejected by the tiflash. If the configuration value is set to `0` or not set, the default value is used, which is twice the number of physical cores.
 - Default value: twice the number of physical cores
 
 ##### `cop_pool_handle_limit` <span class="version-mark">New in v5.0</span>
