@@ -430,6 +430,12 @@
 | thread pool | 线程池 |  |
 | throughput | 吞吐 |  |
 | TiDB | TiDB |  |
+| TiDB Cloud | TiDB Cloud |  |
+| TiDB Cloud Dedicated | TiDB Cloud Dedicated |  |
+| TiDB Cloud Essential | TiDB Cloud Essential |  |
+| TiDB Cloud on Kubernetes | TiDB Cloud on Kubernetes |  |
+| TiDB Cloud Serverless | TiDB Cloud Serverless |  |
+| TiDB Cloud Starter | TiDB Cloud Starter |  |
 | TiKV | TiKV |  |
 | time out | 超时 |  |
 | time series database | 时序数据库 |  |
