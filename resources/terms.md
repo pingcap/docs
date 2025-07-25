@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD041 -->
 | en | zh | comments |
 |:---|:---|:---|
 | 2-phase commit (2PC) | 2 阶段提交 |  |
