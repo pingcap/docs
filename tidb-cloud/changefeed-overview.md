@@ -1,17 +1,17 @@
 ---
-title: Changefeed
+title: Changefeed for TiDB Cloud Dedicated
 summary: TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services.
 ---
 
-# Changefeed
+# Changefeed for TiDB Cloud Dedicated
 
-TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, TiDB Cloud supports streaming data to Apache Kafka, MySQL, TiDB Cloud and cloud storage.
+TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. This document provides an overview of the changefeed feature for TiDB Cloud Dedicated. Currently, TiDB Cloud Dedicated supports streaming data to Apache Kafka, MySQL, TiDB Cloud and cloud storage.
 
 > **Note:**
 >
 > - Currently, TiDB Cloud only allows up to 100 changefeeds per cluster.
 > - Currently, TiDB Cloud only allows up to 100 table filter rules per changefeed.
-> - For [TiDB Cloud Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless), the changefeed feature is unavailable.
+> - For [TiDB Cloud Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless), see [Changefeed for TiDB Cloud Serverless](/tidb-cloud/serverless-changefeed-overview.md).
 
 ## View the Changefeed page
 
