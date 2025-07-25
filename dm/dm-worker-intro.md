@@ -10,10 +10,10 @@ DM-worker is a component of TiDB Data Migration (DM) that executes tasks to dump
 
 ## Key Concepts
 
-* A DM-worker can perform a full export of data from the MySQL source and then transition to reading the MySQL binlog for continuous, incremental replication.
-* The DM-worker is the execution engine for the tasks and subtasks received from the DM-master. It dumps data from one MySQL source instance, acts as a replication client reading the binlog events, performs data transformation and filtering, stores data in a local relay log, applies data to the downstream target TiDB, and reports the status back to the DM-master.
-* If a worker instance goes offline, DM-master can automatically reschedule its tasks to another available worker to resume the data replication. Note that this does not apply during a full export/import phase.
-* A single DM-worker process connects to **one** upstream source database at a time. To migrate from multiple sources, such as when merging sharded tables, you must run multiple DM-worker processes.
+- A DM-worker can perform a full export of data from the MySQL source and then transition to reading the MySQL binlog for continuous, incremental replication.
+- The DM-worker is the execution engine for tasks and subtasks received from the DM-master. It dumps data from one MySQL source instance, acts as a replication client reading the binlog events, performs data transformation and filtering, stores data in a local relay log, applies data to the downstream target TiDB, and reports the status back to the DM-master.
+- If a worker instance goes offline, DM-master can automatically reschedule its tasks to another available worker to resume the data replication. Note that this does not apply during a full export/import phase.
+- A single DM-worker process connects to **one** upstream source database at a time. To migrate from multiple sources, such as when merging sharded tables, you must run multiple DM-worker processes.
 
 > **Note:**
 >
@@ -77,20 +77,19 @@ Starting from [MariaDB 10.5](https://mariadb.com/docs/release-notes/community-se
 | `RELOAD` | Global | Required for `FLUSH TABLES WITH READ LOCK`. |
 | `BINLOG MONITOR` | Global | Renamed from `REPLICATION CLIENT`; allows monitoring the binlog. |
 | `REPLICATION SLAVE` | Global | Allows reading binlog events. |
-| `REPLICATION SLAVE ADMIN` | Global | Allows managing replication status (e.g., `SHOW SLAVE STATUS`). |
-| `REPLICATION MASTER ADMIN`| Global | Allows monitoring the master (e.g., `SHOW SLAVE HOSTS`). |
+| `REPLICATION SLAVE ADMIN` | Global | Allows managing replication status (for example, `SHOW SLAVE STATUS`). |
+| `REPLICATION MASTER ADMIN`| Global | Allows monitoring the master (for example, `SHOW SLAVE HOSTS`). |
 
 To grant these privileges, execute the following statement:
 
 ```sql
-CREATE USER 'tidb-dm'@'%' IDENTIFIED BY 'MyPassw0rd!';
-GRANT SELECT, RELOAD, BINLOG MONITOR, REPLICATION SLAVE, REPLICATION SLAVE ADMIN, REPLICATION MASTER ADMIN ON *.* TO 'tidb-dm'@'%';
-FLUSH PRIVILEGES;
+GRANT RELOAD, BINLOG MONITOR, REPLICATION SLAVE, REPLICATION SLAVE ADMIN, REPLICATION MASTER ADMIN ON *.* TO 'your_user'@'your_wildcard_of_host';
+GRANT SELECT ON db1.* TO 'your_user'@'your_wildcard_of_host';
 ```
 
 > **Note:**
 >
-> Due to changes in MariaDB 10.5+, DM's automated pre-check (`check-task`) might fail with privilege errors because it was designed for MySQL's privilege system.
+> Due to changes in MariaDB 10.5+, DM's automated pre-check (`check-task`) might fail with privilege errors because the checks were designed for MySQL's privilege system.
 >
 > If the pre-check fails even with the correct privileges granted, you can use the following workaround in your task configuration file to bypass the check:
 >
