@@ -4,5 +4,6 @@
   "self-managed": "TiDB Self-Managed",
   "starter": "TiDB Cloud Serverless",
   "essential": "TiDB Cloud Essential",
-  "dedicated": "TiDB Cloud Dedicated"
+  "dedicated": "TiDB Cloud Dedicated",
+  "console-url": "tidbcloud.com"
 }
