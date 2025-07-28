@@ -1,9 +1,9 @@
 ---
-title: TiDB Cloud Serverless Driver Drizzle Tutorial
+title: {{{ .starter }}} Driver Drizzle Tutorial
 summary: Learn how to use TiDB Cloud serverless driver with Drizzle.
 ---
 
-# TiDB Cloud Serverless Driver Drizzle Tutorial
+# {{{ .starter }}} Driver Drizzle Tutorial
 
 [Drizzle ORM](https://orm.drizzle.team/) is a lightweight and performant TypeScript ORM with developer experience in mind. Starting from `drizzle-orm@0.31.2`, it supports [drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless), enabling you to use Drizzle over HTTPS with [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md).
 
@@ -19,7 +19,7 @@ To complete this tutorial, you need the following:
 
 - [Node.js](https://nodejs.org/en) >= 18.0.0.
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
-- A TiDB Cloud Serverless cluster. If you don't have any, you can [create a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- A {{{ .starter }}} cluster. If you don't have any, you can [create a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 
 ### Step 1. Create a project
 
@@ -69,7 +69,7 @@ To complete this tutorial, you need the following:
 
 ### Step 2. Set the environment
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target TiDB Cloud Serverless cluster to go to its overview page.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target {{{ .starter }}} cluster to go to its overview page.
 
 2. On the overview page, click **Connect** in the upper-right corner, select `Serverless Driver` in the **Connect With** drop-down list, and then click **Generate Password** to create a random password.
 
@@ -91,7 +91,7 @@ To complete this tutorial, you need the following:
 
 ### Step 3. Use Drizzle to query data
 
-1. Create a table in your TiDB Cloud Serverless cluster.
+1. Create a table in your {{{ .starter }}} cluster.
 
    You can use [SQL Editor in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
 
@@ -155,7 +155,7 @@ To complete this tutorial, you need the following:
 
 - A [Vercel](https://vercel.com/docs) account that provides edge environment.
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
-- A TiDB Cloud Serverless cluster. If you don't have any, you can [create a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- A {{{ .starter }}} cluster. If you don't have any, you can [create a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 
 ### Step 1. Create a project
 
@@ -185,7 +185,7 @@ To complete this tutorial, you need the following:
 
 ### Step 2. Set the environment
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target TiDB Cloud Serverless cluster to go to its overview page.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target {{{ .starter }}} cluster to go to its overview page.
 
 2. On the overview page, click **Connect** in the upper-right corner, select `Serverless Driver` in the **Connect With** drop-down list, and then click **Generate Password** to create a random password.
 
@@ -201,7 +201,7 @@ To complete this tutorial, you need the following:
 
 ### Step 3. Create an edge function
 
-1. Create a table in your TiDB Cloud Serverless cluster.
+1. Create a table in your {{{ .starter }}} cluster.
 
    You can use [SQL Editor in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
 

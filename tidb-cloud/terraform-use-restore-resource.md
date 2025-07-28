@@ -14,7 +14,7 @@ The features of the `tidbcloud_restore` resource include the following:
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
-- The backup and restore feature is unavailable for TiDB Cloud Serverless clusters. To use restore resources, make sure that you have created a TiDB Cloud Dedicated cluster.
+- The backup and restore feature is unavailable for {{{ .starter }}} clusters. To use restore resources, make sure that you have created a TiDB Cloud Dedicated cluster.
 
 ## Create a restore task
 

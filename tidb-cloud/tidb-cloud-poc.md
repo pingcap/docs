@@ -13,7 +13,7 @@ This document describes the typical PoC procedures and aims to help you quickly 
 
 If you are interested in doing a PoC, feel free to contact <a href="mailto:tidbcloud-support@pingcap.com">PingCAP</a> before you get started. The support team can help you create a test plan and walk you through the PoC procedures smoothly.
 
-Alternatively, you can [create a TiDB Cloud Serverless](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) to get familiar with TiDB Cloud for a quick evaluation. Note that the TiDB Cloud Serverless has some [special terms and conditions](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless-special-terms-and-conditions).
+Alternatively, you can [create a {{{ .starter }}}](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) to get familiar with TiDB Cloud for a quick evaluation. Note that the {{{ .starter }}} has some [special terms and conditions](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless-special-terms-and-conditions).
 
 ## Overview of the PoC procedures
 
@@ -87,7 +87,7 @@ For a newly created cluster, note the following configurations:
 
 Next, you can load your database schemas to the TiDB cluster, including tables and indexes.
 
-Because the amount of PoC credits is limited, to maximize the value of credits, it is recommended that you create a [TiDB Cloud Serverless cluster](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) for compatibility tests and preliminary analysis on TiDB Cloud.
+Because the amount of PoC credits is limited, to maximize the value of credits, it is recommended that you create a [{{{ .starter }}} cluster](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) for compatibility tests and preliminary analysis on TiDB Cloud.
 
 TiDB Cloud is highly compatible with MySQL 8.0. You can directly import your data into TiDB if it is MySQL-compatible or can be adapted to be compatible with MySQL.
 
@@ -175,7 +175,7 @@ Now the workload testing is finished, you can explore more features, for example
 
 - Backup
 
-    To avoid vendor lock-in, you can use daily full backup to migrate data to a new cluster and use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data. For more information, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) and [Back Up and Restore TiDB Cloud Serverless Data](/tidb-cloud/backup-and-restore-serverless.md).
+    To avoid vendor lock-in, you can use daily full backup to migrate data to a new cluster and use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data. For more information, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) and [Back Up and Restore {{{ .starter }}} Data](/tidb-cloud/backup-and-restore-serverless.md).
 
 ## Step 8. Clean up the environment and finish the PoC
 

@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless audit-log describe`.
 
 # ticloud serverless audit-log describe
 
-Describe the database audit logging configuration for a TiDB Cloud Serverless cluster.
+Describe the database audit logging configuration for a {{{ .starter }}} cluster.
 
 ```shell
 ticloud serverless audit-log describe [flags]

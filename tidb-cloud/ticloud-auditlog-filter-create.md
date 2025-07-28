@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless audit-log filter-rule create`.
 
 # ticloud serverless audit-log filter-rule create
 
-Create an audit log filter rule for a TiDB Cloud Serverless cluster.
+Create an audit log filter rule for a {{{ .starter }}} cluster.
 
 ```shell
 ticloud serverless audit-log filter-rule create [flags]

@@ -1,32 +1,32 @@
 ---
-title: Use TiDB Cloud Serverless Export Resource
-summary: Learn how to use the TiDB Cloud Serverless export resource to create and modify a TiDB Cloud Serverless export task.
+title: Use {{{ .starter }}} Export Resource
+summary: Learn how to use the {{{ .starter }}} export resource to create and modify a {{{ .starter }}} export task.
 ---
 
-# Use TiDB Cloud Serverless Export Resource
+# Use {{{ .starter }}} Export Resource
 
-This document describes how to manage a [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) data export task using the `tidbcloud_serverless_export` resource.
+This document describes how to manage a [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) data export task using the `tidbcloud_serverless_export` resource.
 
 The features of the `tidbcloud_serverless_export` resource include the following:
 
-- Create TiDB Cloud Serverless data export tasks.
-- Import TiDB Cloud Serverless data export tasks.
-- Delete TiDB Cloud Serverless data export tasks.
+- Create {{{ .starter }}} data export tasks.
+- Import {{{ .starter }}} data export tasks.
+- Delete {{{ .starter }}} data export tasks.
 
 > **Note:**
 >
-> TiDB Cloud Serverless export resource cannot be modified. If you want to change the configuration of a TiDB Cloud Serverless export resource, you need to delete the existing one, and then create a new one.
+> {{{ .starter }}} export resource cannot be modified. If you want to change the configuration of a {{{ .starter }}} export resource, you need to delete the existing one, and then create a new one.
 
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
-- [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
+- [Create a {{{ .starter }}} cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
 
-## Create a TiDB Cloud Serverless data export task
+## Create a {{{ .starter }}} data export task
 
-You can create a TiDB Cloud Serverless data export task using the `tidbcloud_serverless_export` resource.
+You can create a {{{ .starter }}} data export task using the `tidbcloud_serverless_export` resource.
 
-The following example shows how to create a TiDB Cloud Serverless data export task.
+The following example shows how to create a {{{ .starter }}} data export task.
 
 1. Create a directory for the export and enter it.
 
@@ -142,13 +142,13 @@ The following example shows how to create a TiDB Cloud Serverless data export ta
     }
     ```
 
-## Import a TiDB Cloud Serverless data export task
+## Import a {{{ .starter }}} data export task
 
 For a TiDB Serverless data export task that is not managed by Terraform, you can use Terraform to manage it just by importing it.
 
-Import a TiDB Cloud Serverless data export task that is not created by Terraform as follows:
+Import a {{{ .starter }}} data export task that is not created by Terraform as follows:
 
-1. Add an import block for the new TiDB Cloud Serverless export resource.
+1. Add an import block for the new {{{ .starter }}} export resource.
 
     Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,export_id`:
 
@@ -184,9 +184,9 @@ Import a TiDB Cloud Serverless data export task that is not created by Terraform
 
 Now you can manage the imported export with Terraform.
 
-## Delete a TiDB Cloud Serverless data export task
+## Delete a {{{ .starter }}} data export task
 
-To delete a TiDB Cloud Serverless data export task, you can delete the configuration of the `tidbcloud_serverless_export` resource, then use the `terraform apply` command to destroy the resource:
+To delete a {{{ .starter }}} data export task, you can delete the configuration of the `tidbcloud_serverless_export` resource, then use the `terraform apply` command to destroy the resource:
 
 ```shell
 $ terraform apply
