@@ -78,7 +78,7 @@ Once a legacy support plan shuts down, TiDB Cloud will no longer support it. If 
 
 ### How do I check or make changes to my current support plan?
 
-In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), click **Support** in the lower-left corner. The **Support** page is displayed, with your current support plan highlighted with a **CURRENT** tag.
+In the [TiDB Cloud console](https://{{{.console-url}}}/signup?provider_source=alicloud), click **Support** in the lower-left corner. The **Support** page is displayed, with your current support plan highlighted with a **CURRENT** tag.
 
 You can transition to a new support plan on the **Support** page, except for the **Premium** support plan. To upgrade to the **Premium** plan, please [contact sales](https://www.pingcap.com/contact-us).
 

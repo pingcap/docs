@@ -347,6 +347,6 @@ In [the Grafana dashboard](/grafana-tidb-dashboard.md) on the TiDB page in the *
 
 <CustomContent platform="tidb-cloud">
 
-On the [**Monitoring**](/tidb-cloud/built-in-monitoring.md) page of the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), you can check the `Queries Using Plan Cache OPS` metric to get the number of queries using or missing plan cache per second in all TiDB instances.
+On the [**Monitoring**](/tidb-cloud/built-in-monitoring.md) page of the [TiDB Cloud console](https://{{{.console-url}}}/signup?provider_source=alicloud), you can check the `Queries Using Plan Cache OPS` metric to get the number of queries using or missing plan cache per second in all TiDB instances.
 
 </CustomContent>

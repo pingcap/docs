@@ -22,7 +22,7 @@ This document uses a TiDB Cloud Starter cluster as an example.
 
 To begin with, create a table `test.repository` in your TiDB cluster and insert some sample data into it. The following example inserts some open source projects developed by PingCAP as data for demonstration purposes.
 
-To execute the SQL statements, you can use [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) in the [TiDB Cloud console](https://console.tidb.io).
+To execute the SQL statements, you can use [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) in the [TiDB Cloud console](https://{{{.console-url}}}).
 
 ```sql
 -- Select the database
@@ -45,7 +45,7 @@ VALUES ('tidb', 'https://github.com/pingcap/tidb'),
 
 ## Step 2. Create a Data App
 
-After the data is inserted, navigate to the [**Data Service**](https://console.tidb.io/project/data-service) page in the [TiDB Cloud console](https://console.tidb.io). Create a Data App that links to your TiDB cluster, create an API key for the Data App, and then create a `GET /repositories` endpoint in the Data App. The corresponding SQL statement for this endpoint is as follows, which fetches all rows from the `test.repository` table:
+After the data is inserted, navigate to the [**Data Service**](https://{{{.console-url}}}/project/data-service) page in the [TiDB Cloud console](https://{{{.console-url}}}). Create a Data App that links to your TiDB cluster, create an API key for the Data App, and then create a `GET /repositories` endpoint in the Data App. The corresponding SQL statement for this endpoint is as follows, which fetches all rows from the `test.repository` table:
 
 ```sql
 SELECT * FROM test.repository;
@@ -83,7 +83,7 @@ The following uses Next.js as an example to demonstrate how to generate client c
 
 3. Download the OpenAPI Specification and save it as `oas/doc.json`.
 
-    1. On the TiDB Cloud [**Data Service**](https://console.tidb.io/project/data-service) page, click your Data App name in the left pane to view the App settings.
+    1. On the TiDB Cloud [**Data Service**](https://{{{.console-url}}}/project/data-service) page, click your Data App name in the left pane to view the App settings.
     2. In the **API Specification** area, click **Download**, select the JSON format, and then click **Authorize** if prompted.
     3. Save the downloaded file as `oas/doc.json` in the `hello-repos` project directory.
 

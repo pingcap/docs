@@ -5,7 +5,7 @@ summary: Learn about notifications in the TiDB Cloud console, including notifica
 
 # Notifications in the TiDB Cloud Console
 
-The [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud) provides notifications to keep you informed about important updates, system messages, product changes, billing reminders, and other relevant information. These notifications help you stay up-to-date and take necessary actions without leaving the console.
+The [TiDB Cloud console](https://{{{.console-url}}}/signup?provider_source=alicloud) provides notifications to keep you informed about important updates, system messages, product changes, billing reminders, and other relevant information. These notifications help you stay up-to-date and take necessary actions without leaving the console.
 
 ## Notification types
 
@@ -49,6 +49,6 @@ The following table lists the notifications available in TiDB Cloud, along with 
 
 ## View notifications
 
-To view notifications, click **Notification** in the lower-left corner of the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud).
+To view notifications, click **Notification** in the lower-left corner of the [TiDB Cloud console](https://{{{.console-url}}}/signup?provider_source=alicloud).
 
 When new notifications are available, a number is displayed next to **Notification** indicating how many notifications are unread.
