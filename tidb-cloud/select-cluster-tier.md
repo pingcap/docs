@@ -10,13 +10,13 @@ The cluster tier determines the throughput and performance of your cluster.
 
 TiDB Cloud provides the following two options of cluster tiers. Before creating a cluster, you need to consider which option suits your need better.
 
-- [{{{ .starter }}}](#tidb-cloud-serverless)
+- [TiDB Cloud Serverless](#tidb-cloud-serverless)
 - [TiDB Cloud Dedicated](#tidb-cloud-dedicated)
 
-## {{{ .starter }}}
+## TiDB Cloud Serverless
 
 <!--To be confirmed-->
-{{{ .starter }}} is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free tier and consumption based billing once free limits are exceeded.
+TiDB Cloud Serverless is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free tier and consumption based billing once free limits are exceeded.
 
 ### Cluster plans
 
