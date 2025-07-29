@@ -11,8 +11,8 @@ TiDB Cloud supports Datadog integration (Preview). You can configure TiDB Cloud 
 
 Based on your integration history, TiDB Cloud provides two versions of Datadog integration:
 
-- **Datadog integration (Preview)**: if none of clusters in your organization were integrated with Datadog before July 29, 2025, TiDB Cloud provides the preview version of Datadog integration for you to experience the latest enhancements.
-- **Datadog integration (Beta)**: if any clusters in your organization were integrated with Datadog before July 29, 2025, TiDB Cloud keeps both existing and new integrations at the beta version to avoid affecting current dashboards.
+- **Datadog integration (Preview)**: if none of clusters in your organization were integrated with Datadog before July 31, 2025, TiDB Cloud provides the preview version of Datadog integration for you to experience the latest enhancements.
+- **Datadog integration (Beta)**: if any clusters in your organization were integrated with Datadog before July 31, 2025, TiDB Cloud keeps both existing and new integrations at the beta version to avoid affecting current dashboards. Also please rest assured, we will contact you to discuss the appropriate migration plan and schedule.
 
 ## Prerequisites
 
@@ -20,13 +20,13 @@ Based on your integration history, TiDB Cloud provides two versions of Datadog i
 
     If you do not have a Datadog account, sign up at [https://app.datadoghq.com/signup](https://app.datadoghq.com/signup).
 
-- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` access to your organization in TiDB Cloud. To view the integration page or access configured dashboards via the provided links, users only need the `Organization Member` access to your organization in TiDB Cloud.
+- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` or `Project Owner` access in TiDB Cloud. To view the integration page or access configured dashboards via the provided links, users only need the `Organization Member` access to your organization in TiDB Cloud.
 
 ## Limitation
 
 - You cannot use the Datadog integration in [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
-- Datadog integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
+- Datadog integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**. For clusters that were previously configured with metrics integrations, the associated integration services will be discontinued once the cluster is deleted.
 
 ## Steps
 
@@ -67,11 +67,48 @@ Depending on your [Datadog integration version](#datadog-integration-version), t
 
 ### Step 2. Install TiDB Cloud Integration in Datadog
 
+Depending on your [Datadog integration version](#datadog-integration-version), the steps are different.
+
+<SimpleTab>
+<div label="Datadog integration (Preview)">
+
+A new dashboard will be available in Datadog once the pending PR is merged by Datadog.
+Before the [PR](https://github.com/DataDog/integrations-extras/pull/2751) of the new dashboard is merged, users can use the JSON file we provide to import the new dashboard. The steps are as follows.
+1. The address of the json file is here.
+2. Copy the contents of the json file and save it to a local json file.
+3. Click the Dashboards tab in the left navigation bar of Datadog, and click the New Dashboard button in the upper right corner of the dashboards page. 
+4. Click the New Dashboard button in the lower left of the pop-up window to create a new blank dashboard.
+5. On the newly created dashboard page, click Configure in the upper right corner, scroll down to the bottom of the pop-up window, and click Import dashboard JSON.
+6. In the pop-up window, select the json file saved in the second step and upload it to complete the dashboard replacement.
+
+</div>
+<div label="Datadog integration (Beta)">
+
 1. Log in to [Datadog](https://app.datadoghq.com).
 2. Go to the **TiDB Cloud Integration** page ([https://app.datadoghq.com/account/settings#integrations/tidb-cloud](https://app.datadoghq.com/account/settings#integrations/tidb-cloud)) in Datadog.
 3. In the **Configuration** tab, click **Install Integration**. The [**TiDB Cloud Cluster Overview**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview) dashboard is displayed in your [**Dashboard List**](https://app.datadoghq.com/dashboard/lists).
 
+</div>
+</SimpleTab>
+
+
 ## Pre-built dashboard
+
+Depending on your [Datadog integration version](#datadog-integration-version), the steps are different.
+
+<SimpleTab>
+<div label="Datadog integration (Preview)">
+
+Note that the **Dashboard** link in the **Datadog** card on the **Integrations** page redirects to the legacy dashboard, which still lacks new metrics.
+Before the PR is merged, you can access the latest dashboard with complete metrics by following these steps:
+1. Click the **Datadog** > **Dashboard** button in the left navigation bar.
+2. Go to the Dashboard List page.
+3. Select the "TiDB Cloud Dynamic Tracker" dashboard.
+
+Once the PR is merged, we will automatically update the **Dashboard** link in the **Datadog** card on the **Integrations** page redirect to the new version. Please stay tuned for the update!
+
+</div>
+<div label="Datadog integration (Beta)">
 
 Click the **Dashboard** link in the **Datadog** card on the **Integrations** page. You can see the pre-built dashboard of your TiDB clusters.
 
@@ -107,8 +144,12 @@ For Datadog integration (Preview), the following additional metrics are also ava
 | tidbcloud.disk_write_latency | histogram | instance: `tidb-0\|tidb-1\|...`<br/>component: `tikv\|tiflash`<br/>cluster_name: `<cluster name>`<br/>`device`: `nvme.*\|dm.*` | The write latency in seconds per storage device |
 | tidbcloud.kv_request_duration | histogram | instance: `tidb-0\|tidb-1\|...`<br/>component: `tikv`<br/>cluster_name: `<cluster name>`<br/>`type`: `BatchGet\|Commit\|Prewrite\|...` | The duration in seconds of TiKV requests by type |
 | tidbcloud.component_uptime | histogram | instance: `tidb-0\|tidb-1\|...`<br/>component: `tidb\|tikv\|tiflash`<br/>cluster_name: `<cluster name>` | The uptime in seconds of TiDB components |
-| tidbcloud.changefeed_checkpoint_ts | gauge | changefeed_id | The checkpoint timestamp of a changefeed, representing the largest TSO (Timestamp Oracle) successfully written to the downstream |
-| tidbcloud.ticdc_owner_resolved_ts_lag | gauge | changefeed_id: `<changefeed-id>`<br/>cluster_name: `<cluster name>` | The resolved timestamp lag in seconds for changefeed owner |
+| tidbcloud.ticdc_owner_checkpoint_ts_lag | gauge | changefeed_id: `<changefeed-id>`<br/>cluster_name: `<cluster name>`| The checkpoint timestamp lag in seconds for changefeed owner. |
+| tidbcloud.ticdc_owner_resolved_ts_lag | gauge | changefeed_id: `<changefeed-id>`<br/>cluster_name: `<cluster name>` | The resolved timestamp lag (in seconds) for the changefeed owner. |
 | tidbcloud.changefeed_status | gauge | changefeed_id: `<changefeed-id>`<br/>cluster_name: `<cluster name>` | Changefeed status:<br/>`-1`: Unknown<br/>`0`: Normal<br/>`1`: Warning<br/>`2`: Failed<br/>`3`: Stopped<br/>`4`: Finished<br/>`6`: Warning<br/>`7`: Other |
-| tidbcloud.resource_manager_resource_unit_read_request_unit | gauge | cluster_name: `<cluster name>`<br/>resource_group: `<group-name>` | The read request units consumed by Resource Manager |
-| tidbcloud.resource_manager_resource_unit_write_request_unit | gauge | cluster_name: `<cluster name>`<br/>resource_group: `<group-name>` | The write request units consumed by Resource Manager |
+| tidbcloud.resource_manager_resource_unit_read_request_unit | gauge | cluster_name: `<cluster name>`<br/>resource_group: `<group-name>` | The read request units (RUs) consumed by Resource Manager. |
+| tidbcloud.resource_manager_resource_unit_write_request_unit | gauge | cluster_name: `<cluster name>`<br/>resource_group: `<group-name>` | The write request units (RUs) consumed by Resource Manager. |
+| tidb_cloud.dm_task_state | gauge | instance: `instance`<br/>task: `task`<br/>cluster_name: `<cluster name>` | Task State of Data Migration:<br/>0: Invalid<br/>1: New<br/>2: Running<br/>3: Paused<br/>4: Stopped<br/>5: Finished<br/>15: Error |
+| tidb_cloud.dm_syncer_replication_lag_bucket | gauge | instance: `instance`<br/>cluster_name: `<cluster name>` | Replicate lag(bucket) of Data Migration |
+| tidb_cloud.dm_syncer_replication_lag_gauge | gauge | instance: `instance`<br/>task: `task`<br/>cluster_name: `<cluster name>` | Replicate lag(gauge) of Data Migration |
+| tidb_cloud.dm_relay_read_error_count | gauge | instance: `instance`<br/>cluster_name: `<cluster name>` | Fail to read binlog from master |
