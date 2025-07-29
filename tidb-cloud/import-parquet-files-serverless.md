@@ -35,7 +35,7 @@ You can import both uncompressed and Snappy compressed [Apache Parquet](https://
 
     > **Note:**
     >
-    > If you cannot update the Parquet filenames according to the preceding rules in some cases (for example, the Parquet file links are also used by your other programs), you can keep the filenames unchanged and use the **Mapping Settings** in [Step 4](#step-4-import-parquet-files-to-tidb-cloud-serverless) to import your source data to a single target table.
+    > If you cannot update the Parquet filenames according to the preceding rules in some cases (for example, the Parquet file links are also used by your other programs), you can keep the filenames unchanged and use the **Mapping Settings** in [Step 4](#step-4-import-parquet-files) to import your source data to a single target table.
 
 ## Step 2. Create the target table schemas
 
@@ -82,7 +82,7 @@ To allow {{{ .starter }}} to access the Parquet files in the Amazon S3, GCS, Azu
 
 - If your Parquet files are located in Amazon S3, [configure external storage access for {{{ .starter }}}](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
 
-    You can use either an AWS access key or a Role ARN to access your bucket. Once finished, make a note of the access key (including the access key ID and secret access key) or the Role ARN value as you will need it in [Step 4](#step-4-import-parquet-files-to-tidb-cloud-serverless).
+    You can use either an AWS access key or a Role ARN to access your bucket. Once finished, make a note of the access key (including the access key ID and secret access key) or the Role ARN value as you will need it in [Step 4](#step-4-import-parquet-files).
 
 - If your Parquet files are located in GCS, [configure external storage access for {{{ .starter }}}](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
 
@@ -90,7 +90,7 @@ To allow {{{ .starter }}} to access the Parquet files in the Amazon S3, GCS, Azu
 
 - If your Parquet files are located in Alibaba Cloud Object Storage Service (OSS), [configure external storage access for {{{ .starter }}}](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access).
 
-## Step 4. Import Parquet files to {{{ .starter }}}
+## Step 4. Import Parquet files
 
 To import the Parquet files to {{{ .starter }}}, take the following steps:
 

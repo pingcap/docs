@@ -27,7 +27,7 @@ Before the integration, make sure that you have the following:
 - A GitHub repository for your application
 - A [{{{ .starter }}} cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
 
-## Integrate {{{ .starter }}} branching with your GitHub repository
+## Integrate {{{ .starter }}} branching with your GitHub repository {#integrate-branching-with-your-github-repository}
 
 To integrate {{{ .starter }}} branching with your GitHub repository, take the following steps:
 
@@ -127,7 +127,7 @@ One of the best practices for using branches is to create a branching CI workflo
 
 Here are the main steps to create the workflow:
 
-1. [Integrate {{{ .starter }}} branching with your GitHub repository](#integrate-tidb-cloud-serverless-branching-with-your-github-repository).
+1. [Integrate {{{ .starter }}} branching with your GitHub repository](#integrate-branching-with-your-github-repository).
 
 2. Get the branch connection information.
 
