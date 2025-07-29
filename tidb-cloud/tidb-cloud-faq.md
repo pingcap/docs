@@ -23,21 +23,6 @@ TiDB is an open-source database and is the best option for organizations who wan
 
 TiDB Cloud is a fully managed cloud Database as a Service of TiDB. It has an easy-to-use web-based management console to let you manage TiDB clusters for mission-critical production environments.
 
-### What is the relationship between TiDB Cloud Starter and TiDB Cloud Serverless?
-
-TiDB Cloud Starter is the new name for TiDB Cloud Serverless, effective August 12, 2025.
-
-Before it was renamed to Starter, the Serverless tier of TiDB Cloud served as the entry point for thousands of developers, providing a production-ready database that scales automatically, starts in seconds, and costs nothing until you exceed a generous free quota.
-
-While "serverless" accurately describes how the service works behind the scenes, many first-time users told us this word felt abstract and overloaded with meanings.
-
-We renamed this entry tier to Starter so its purpose is crystal clear: it is the quickest way to begin building with TiDB Cloud. Everything you enjoy with Serverless remains unchanged:
-
-- A fully managed database with both row-based and columnar storage, ideal for hybrid OLTP and OLAP workloads.
-- Automatic and request-driven scaling, no capacity planning or manual tuning required.
-- Built-in vector search and full-text search to power GenAI retrieval, chatbots, and other AI applications.
-- Always-free monthly quota for up to five clusters per organization (5 GiB row data + 5 GiB columnar data + 50 million [RUs](/tidb-cloud/tidb-cloud-glossary.md#request-unit) per cluster).
-
 ### Is TiDB Cloud compatible with MySQL?
 
 Currently, TiDB Cloud supports the majority of MySQL 5.7 and MySQL 8.0 syntax with the exception of triggers, stored procedures, and user-defined functions. For more details, see [Compatibility with MySQL](/mysql-compatibility.md).
