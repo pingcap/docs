@@ -22,16 +22,16 @@ TiDB Cloud Starter is the new name for TiDB Cloud Serverless, effective August 1
 
 Before it was renamed to Starter, the Serverless tier of TiDB Cloud served as the entry point for thousands of developers, providing a production-ready database that scales automatically, starts in seconds, and costs nothing until you exceed a generous free quota.
 
-While "serverless" accurately describes how the service works behind the scenes, many first-time users told us this word felt abstract and overloaded with meanings.
+While "serverless" accurately reflects how the service works behind the scenes, many first-time users found the term abstract and overloaded with different meanings.
 
-We renamed this entry tier to Starter so its purpose is crystal clear: it is the quickest way to begin building with TiDB Cloud. Everything you enjoy with Serverless remains unchanged:
+To make the purpose of this entry tier clearer, we’ve renamed it to Starter, the fastest way to begin building with TiDB Cloud. Everything you know about the Serverless tier remains the same:
 
 - A fully managed database with both row-based and columnar storage, ideal for hybrid OLTP and OLAP workloads.
 - Automatic and request-driven scaling, no capacity planning or manual tuning required.
 - Built-in vector search and full-text search to power GenAI retrieval, chatbots, and other AI applications.
 - Always-free monthly quota for up to five clusters per organization (5 GiB row data + 5 GiB columnar data + 50 million [RUs](/tidb-cloud/tidb-cloud-glossary.md#request-unit) per cluster).
 
-### How do I get started with TiDB Cloud Serverless?
+### How do I get started with {{{ .starter }}}?
 
 Get started with the 5-minute [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md).
 
