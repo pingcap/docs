@@ -53,9 +53,9 @@ db = TiDBClient.connect(
 )
 ```
 
-You can get these connection parameters from the [TiDB Cloud console](https://console.tidb.io):
+You can get these connection parameters from the [TiDB Cloud console](https://{{{.console-url}}}):
 
-1. Navigate to the [**Clusters**](https://console.tidb.io/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**Clusters**](https://{{{.console-url}}}/project/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with connection parameters listed.
 

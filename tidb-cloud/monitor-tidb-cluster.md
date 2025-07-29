@@ -39,7 +39,7 @@ The **Overview** page provides general metrics of a cluster.
 
 To view metrics on the cluster overview page, take the following steps:
 
-1. On the [**Clusters**](https://console.tidb.io/project/clusters) page, click the name of your target cluster to go to its overview page.
+1. On the [**Clusters**](https://{{{.console-url}}}/project/clusters) page, click the name of your target cluster to go to its overview page.
 
     > **Tip:**
     >
@@ -53,7 +53,7 @@ The **Metrics** page provides a full set of metrics of a cluster. By viewing the
 
 To view metrics on the **Metrics** page, take the following steps:
 
-1. On the [**Clusters**](https://console.tidb.io/project/clusters) page, click the name of your target cluster to go to its overview page.
+1. On the [**Clusters**](https://{{{.console-url}}}/project/clusters) page, click the name of your target cluster to go to its overview page.
 
     > **Tip:**
     >

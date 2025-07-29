@@ -7,7 +7,7 @@ summary: Learn how to manage identity access in TiDB Cloud.
 
 This document describes how to manage access to organizations, projects, roles, and user profiles in TiDB Cloud.
 
-Before accessing TiDB Cloud, [create a TiDB Cloud account](https://console.tidb.io/free-trial?provider_source=alicloud). You can either sign up with email and password so that you can [manage your password using TiDB Cloud](/tidb-cloud/tidb-cloud-password-authentication.md), or choose your Google, GitHub, or Microsoft account for single sign-on (SSO) to TiDB Cloud.
+Before accessing TiDB Cloud, [create a TiDB Cloud account](https://{{{.console-url}}}/free-trial?provider_source=alicloud). You can either sign up with email and password so that you can [manage your password using TiDB Cloud](/tidb-cloud/tidb-cloud-password-authentication.md), or choose your Google, GitHub, or Microsoft account for single sign-on (SSO) to TiDB Cloud.
 
 ## Organizations and projects
 
@@ -114,7 +114,7 @@ At the project level, TiDB Cloud defines three roles, in which `Project Owner` c
 
 To view and switch between organizations, take the following steps:
 
-1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), click the combo box in the upper-left corner. The list of organizations and projects you belong to is displayed.
+1. In the [TiDB Cloud console](https://{{{.console-url}}}/signup?provider_source=alicloud), click the combo box in the upper-left corner. The list of organizations and projects you belong to is displayed.
 
     > **Tip:**
     >
@@ -129,7 +129,7 @@ If you are in the `Organization Owner` role, you can modify the system display t
 
 To change the local timezone setting, take the following steps:
 
-1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
+1. In the [TiDB Cloud console](https://{{{.console-url}}}/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
 
 2. In the left navigation pane, click **Organization Settings** > **General**.
 
@@ -147,7 +147,7 @@ If you are in the `Organization Owner` role, you can invite users to your organi
 
 To invite a member to an organization, take the following steps:
 
-1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
+1. In the [TiDB Cloud console](https://{{{.console-url}}}/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
 
 2. In the left navigation pane, click **Organization Settings** > **Users**.
 
@@ -178,7 +178,7 @@ If you are in the `Organization Owner` role, you can modify organization roles o
 
 To modify the organization role of a member, take the following steps:
 
-1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
+1. In the [TiDB Cloud console](https://{{{.console-url}}}/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
 
 2. In the left navigation pane, click **Organization Settings** > **Users**.
 
@@ -196,7 +196,7 @@ To remove a member from an organization, take the following steps:
 >
 > If a member is removed from an organization, the member is removed from the belonged projects either.
 
-1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
+1. In the [TiDB Cloud console](https://{{{.console-url}}}/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
 
 2. In the left navigation pane, click **Organization Settings** > **Users**.
 
@@ -210,7 +210,7 @@ To remove a member from an organization, take the following steps:
 
 To view and switch between projects, take the following steps:
 
-1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), click the combo box in the upper-left corner. The list of organizations and projects you belong to is displayed.
+1. In the [TiDB Cloud console](https://{{{.console-url}}}/signup?provider_source=alicloud), click the combo box in the upper-left corner. The list of organizations and projects you belong to is displayed.
 
     > **Tip:**
     >
@@ -229,7 +229,7 @@ If you are in the `Organization Owner` role, you can create projects in your org
 
 To create a new project, take the following steps:
 
-1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
+1. In the [TiDB Cloud console](https://{{{.console-url}}}/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
 
 2. In the left navigation pane, click **Projects**.
 
@@ -245,7 +245,7 @@ If you are in the `Organization Owner` role, you can rename any projects in your
 
 To rename a project, take the following steps:
 
-1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
+1. In the [TiDB Cloud console](https://{{{.console-url}}}/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
 
 2. In the left navigation pane, click **Projects**.
 
@@ -265,7 +265,7 @@ If you are in the `Organization Owner` or `Project Owner` role, you can invite m
 
 To invite a member to a project, take the following steps:
 
-1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
+1. In the [TiDB Cloud console](https://{{{.console-url}}}/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
 
 2. In the left navigation pane, click **Organization Settings** > **Users**.
 
@@ -295,7 +295,7 @@ If you are in the `Organization Owner` role, you can modify project roles of all
 
 To modify the project role of a member, take the following steps:
 
-1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
+1. In the [TiDB Cloud console](https://{{{.console-url}}}/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
 
 2. In the left navigation pane, click **Organization Settings** > **Users**.
 
@@ -309,7 +309,7 @@ If you are in the `Organization Owner` or `Project Owner` role, you can remove p
 
 To remove a member from a project, take the following steps:
 
-1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
+1. In the [TiDB Cloud console](https://{{{.console-url}}}/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
 
 2. In the left navigation pane, click **Organization Settings** > **Users**.
 
@@ -321,7 +321,7 @@ To remove a member from a project, take the following steps:
 
 In TiDB Cloud, you can easily manage your profile, including your first name, last name, and phone number.
 
-1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner.
+1. In the [TiDB Cloud console](https://{{{.console-url}}}/signup?provider_source=alicloud), click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner.
 
 2. Click **Account Settings**.
 

@@ -46,9 +46,9 @@ This section provides step-by-step instructions for integrating TiDB Vector Sear
 
 ### Step 1. Set the environment variables
 
-Get the TiDB connection information from the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud) and set the environment variables in your development environment as follows:
+Get the TiDB connection information from the [TiDB Cloud console](https://{{{.console-url}}}/signup?provider_source=alicloud) and set the environment variables in your development environment as follows:
 
-1. Navigate to the [**Clusters**](https://console.tidb.io/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**Clusters**](https://{{{.console-url}}}/project/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 

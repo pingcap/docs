@@ -23,11 +23,11 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 ## Step 1. Create a TiDB Cloud Starter cluster
 
-1. If you do not have a TiDB Cloud account, click [here](https://console.tidb.io/free-trial?provider_source=alicloud) to sign up for an account.
+1. If you do not have a TiDB Cloud account, click [here](https://{{{.console-url}}}/free-trial?provider_source=alicloud) to sign up for an account.
 
-2. [Log in](https://console.tidb.io/signup?provider_source=alicloud) to your TiDB Cloud account.
+2. [Log in](https://{{{.console-url}}}/signup?provider_source=alicloud) to your TiDB Cloud account.
 
-3. On the [**Clusters**](https://console.tidb.io/project/clusters) page, click **Create Cluster**.
+3. On the [**Clusters**](https://{{{.console-url}}}/project/clusters) page, click **Create Cluster**.
 
 4. On the **Create Cluster** page, **Starter** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
 

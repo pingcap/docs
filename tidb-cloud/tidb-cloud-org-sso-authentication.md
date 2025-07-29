@@ -9,7 +9,7 @@ Single Sign-On (SSO) is an authentication scheme that enables members in your Ti
 
 TiDB Cloud supports the following two types of SSO authentication:
 
-- [Standard SSO](/tidb-cloud/tidb-cloud-sso-authentication.md): members can log in to the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud) using their GitHub, Google, or Microsoft authentication methods. The standard SSO is enabled by default for all organizations in TiDB Cloud.
+- [Standard SSO](/tidb-cloud/tidb-cloud-sso-authentication.md): members can log in to the [TiDB Cloud console](https://{{{.console-url}}}/signup?provider_source=alicloud) using their GitHub, Google, or Microsoft authentication methods. The standard SSO is enabled by default for all organizations in TiDB Cloud.
 
 - Cloud Organization SSO: members can log in to a custom login page of TiDB Cloud using the authentication methods specified by your organization. The Cloud Organization SSO is disabled by default.
 
@@ -32,11 +32,11 @@ Before migrating to Cloud Organization SSO, check and confirm the items in this 
 
 ### Decide a custom URL for the TiDB Cloud login page of your organization
 
-When Cloud Organization SSO is enabled, your members must use your custom URL instead of the public login URL (`https://console.tidb.io`) to log in to TiDB Cloud.
+When Cloud Organization SSO is enabled, your members must use your custom URL instead of the public login URL (`https://{{{.console-url}}}`) to log in to TiDB Cloud.
 
 The custom URL cannot be changed after the enablement, so you need to decide which URL to be used in advance.
 
-The format of the custom URL is `https://console.tidb.io/enterprise/signin/your-company-name`, in which you can customize your company name.
+The format of the custom URL is `https://{{{.console-url}}}/enterprise/signin/your-company-name`, in which you can customize your company name.
 
 ### Decide authentication methods for your organization members
 
@@ -67,7 +67,7 @@ For security considerations, if you choose to enable auto-provision, it is recom
 Before enabling Cloud Organization SSO, make sure to inform your members about the following:
 
 - The custom login URL of TiDB Cloud
-- The time when to start using the custom login URL instead of `https://console.tidb.io` for login
+- The time when to start using the custom login URL instead of `https://{{{.console-url}}}` for login
 - The available authentication methods
 - Whether members need invitations to log in to the custom URL
 
@@ -75,7 +75,7 @@ Before enabling Cloud Organization SSO, make sure to inform your members about t
 
 To enable Cloud Organization SSO, take the following steps:
 
-1. Log in to the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud) as a user with the `Organization Owner` role, and then switch to your target organization using the combo box in the upper-left corner.
+1. Log in to the [TiDB Cloud console](https://{{{.console-url}}}/signup?provider_source=alicloud) as a user with the `Organization Owner` role, and then switch to your target organization using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Organization Settings** > **Authentication**.
 3. On the **Authentication** page, click **Enable**.
 4. In the dialog, enter the custom URL for your organization, which must be unique in TiDB Cloud.
@@ -231,7 +231,7 @@ In TiDB Cloud, the SAML authentication method is disabled by default. After enab
 
 3. In TiDB Cloud, view groups pushed from your identity provider.
 
-    1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
+    1. In the [TiDB Cloud console](https://{{{.console-url}}}/signup?provider_source=alicloud), switch to your target organization using the combo box in the upper-left corner.
     2. In the left navigation pane, click **Organization Settings** > **Authentication**.
     3. Click the **Groups** tab. The groups synchronized from your identity provider are displayed.
     4. To view users in a group, click **View**.

@@ -13,7 +13,7 @@ This document describes how to view the events for TiDB Cloud clusters using the
 
 To view the events on the **Events** page, take the following steps:
 
-1. On the [**Clusters**](https://console.tidb.io/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
+1. On the [**Clusters**](https://{{{.console-url}}}/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
 
     > **Tip:**
     >
