@@ -11,22 +11,22 @@ TiDB Cloud supports New Relic integration (Preview). You can configure TiDB Clou
 
 Based on your integration history, TiDB Cloud provides two versions of New Relic integration:
 
-- **New Relic integration (Preview)**: if none of clusters in your organization were integrated with New Relic before July 29, 2025, TiDB Cloud provides the preview version of New Relic integration for you to experience the latest enhancements.
-- **New Relic integration (Beta)**: if any clusters in your organization were integrated with New Relic before July 29, 2025, TiDB Cloud keeps both existing and new integrations at the beta version to avoid affecting current dashboards.
+- **New Relic integration (Preview)**: if none of clusters in your organization were integrated with New Relic before July 31, 2025, TiDB Cloud provides the preview version of New Relic integration for you to experience the latest enhancements.
+- **New Relic integration (Beta)**: if any clusters in your organization were integrated with New Relic before July 31, 2025, TiDB Cloud keeps both existing and new integrations at the beta version to avoid affecting current dashboards.
 
 ## Prerequisites
 
-- To integrate TiDB Cloud with New Relic, you must have a New Relic account and a [New Relic API key](https://one.newrelic.com/admin-portal/api-keys/home?). New Relic grants you an API key when you first create a New Relic account.
+- To integrate TiDB Cloud with New Relic, you must have a New Relic account and a [New Relic API key](https://one.newrelic.com/admin-portal/api-keys/home?), please make sure the API key type is 'Ingest - License'. Also New Relic grants you an API key when you first create a New Relic account.
 
     If you do not have a New Relic account, sign up [here](https://newrelic.com/signup).
 
-- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` access to your organization in TiDB Cloud. To view the integration page or access configured dashboards via the provided links, users only need the `Organization Member` access to your organization in TiDB Cloud.
+- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` or `Project Owner` access in TiDB Cloud. To view the integration page or access configured dashboards via the provided links, users only need the `Organization Member` access to your organization in TiDB Cloud.
 
 ## Limitation
 
 - You cannot use the New Relic integration in [TiDB Cloud Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless).
 
-- New Relic integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
+- New Relic integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**. For clusters that were previously configured with metrics integrations, the associated integration services will be discontinued once the cluster is deleted.
 
 ## Steps
 
@@ -67,13 +67,59 @@ Depending on your [New Relic integration version](#new-relic-integration-version
 
 ### Step 2. Add TiDB Cloud Dashboard in New Relic
 
+Depending on your [New Relic integration version](#new-relic-integration-version), the steps are different.
+
+<SimpleTab>
+<div label="New Relic integration (Preview)">
+
+A new dashboard will be available in New Relic once the pending PR is merged by New Relic.
+Before the [PR](https://github.com/newrelic/newrelic-quickstarts/pull/2681) of the new dashboard is merged, users can use the json file we provide to import the new dashboard. The steps are as follows.
+
+1. The address of the json file is http://xxx
+2. Copy the json file content and add the content in line 4: "permissions": "PUBLIC_READ_WRITE",
+{
+  "name": "TiDB Cloud Monitoring (new metric development)",
+  "description": null,
+  "permissions": "PUBLIC_READ_WRITE", 
+  ...
+}
+3.  Add your New Relic account ID to all `"accountIds": []` fields in the JSON file.
+- Important: Ensure your account ID is added to every `"accountIds": []`.
+- Example:
+"accountIds": [
+  1234567
+],
+4. Click the Dashboards tab in the left navigation bar of New Relic, and click the Import dashboard button in the upper right corner of the Dashboards page that appears. 
+5. Paste the json content prepared in the previous step into the pop-up window, and click the Import dashboard button in the lower right corner to complete the creation of the new dashboard.
+
+</div>
+<div label="New Relic integration (Beta)">
+
 1. Log in to [New Relic](https://one.newrelic.com/).
 2. Click **Add Data**, search for `TiDB Cloud`, and then go to the **TiDB Cloud Monitoring** page. Alternatively, you can click the [link](https://one.newrelic.com/marketplace?state=79bf274b-0c01-7960-c85c-3046ca96568e) to directly access the page.
 3. Choose your account ID and create the dashboard in New Relic.
 
+</div>
+</SimpleTab>
+
 ## Pre-built dashboard
 
+Depending on your [New Relic integration version](#new-relic-integration-version), the steps are different.
+
+<SimpleTab>
+<div label="New Relic integration (Preview)">
+
 Click the **Dashboard** link in the **New Relic** card on the **Integrations** page. You can see the pre-built dashboard of your TiDB clusters.
+Click  the **TiDB Cloud Dynamic Tracker** to view the new dashboard.
+
+</div>
+<div label="New Relic integration (Beta)">
+
+Click the **Dashboard** link in the **New Relic** card on the **Integrations** page. You can see the pre-built dashboard of your TiDB clusters.
+Click  the **TiDB Cloud Monitoring** to view the legacy dashboard.
+
+</div>
+</SimpleTab>
 
 ## Metrics available to New Relic
 
@@ -107,8 +153,12 @@ For New Relic integration (Preview), the following additional metrics are also a
 | tidbcloud.disk_write_latency | histogram | instance: `tidb-0\|tidb-1\|...`<br/>component: `tikv\|tiflash`<br/>cluster_name: `<cluster name>`<br/>`device`: `nvme.*\|dm.*` | The write latency (in seconds) per storage device. |
 | tidbcloud.kv_request_duration | histogram | instance: `tidb-0\|tidb-1\|...`<br/>component: `tikv`<br/>cluster_name: `<cluster name>`<br/>`type`: `BatchGet\|Commit\|Prewrite\|...` | The duration (in seconds) of TiKV requests by type |
 | tidbcloud.component_uptime | histogram | instance: `tidb-0\|tidb-1\|...`<br/>component: `tidb\|tikv\|tiflash`<br/>cluster_name: `<cluster name>` | The uptime (in seconds) of TiDB components |
-| tidbcloud.changefeed_checkpoint_ts | gauge | changefeed_id | The checkpoint timestamp of a changefeed, representing the latest TSO (Timestamp Oracle) successfully written to the downstream. |
+| tidbcloud.ticdc_owner_checkpoint_ts_lag | gauge | changefeed_id: `<changefeed-id>`<br/>cluster_name: `<cluster name>`| The checkpoint timestamp lag in seconds for changefeed owner. |
 | tidbcloud.ticdc_owner_resolved_ts_lag | gauge | changefeed_id: `<changefeed-id>`<br/>cluster_name: `<cluster name>` | The resolved timestamp lag (in seconds) for the changefeed owner. |
 | tidbcloud.changefeed_status | gauge | changefeed_id: `<changefeed-id>`<br/>cluster_name: `<cluster name>` | Changefeed status:<br/>`-1`: Unknown<br/>`0`: Normal<br/>`1`: Warning<br/>`2`: Failed<br/>`3`: Stopped<br/>`4`: Finished<br/>`6`: Warning<br/>`7`: Other |
 | tidbcloud.resource_manager_resource_unit_read_request_unit | gauge | cluster_name: `<cluster name>`<br/>resource_group: `<group-name>` | The read request units (RUs) consumed by Resource Manager. |
 | tidbcloud.resource_manager_resource_unit_write_request_unit | gauge | cluster_name: `<cluster name>`<br/>resource_group: `<group-name>` | The write request units (RUs) consumed by Resource Manager. |
+| tidb_cloud.dm_task_state | gauge | instance: `instance`<br/>task: `task`<br/>cluster_name: `<cluster name>` | Task State of Data Migration:<br/>0: Invalid<br/>1: New<br/>2: Running<br/>3: Paused<br/>4: Stopped<br/>5: Finished<br/>15: Error |
+| tidb_cloud.dm_syncer_replication_lag_bucket | gauge | instance: `instance`<br/>cluster_name: `<cluster name>` | Replicate lag(bucket) of Data Migration |
+| tidb_cloud.dm_syncer_replication_lag_gauge | gauge | instance: `instance`<br/>task: `task`<br/>cluster_name: `<cluster name>` | Replicate lag(gauge) of Data Migration |
+| tidb_cloud.dm_relay_read_error_count | gauge | instance: `instance`<br/>cluster_name: `<cluster name>` | Fail to read binlog from master |
