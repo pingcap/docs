@@ -6,7 +6,7 @@ category: intro
 
 # What is TiDB Cloud
 
-[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) is a fully-managed Database-as-a-Service (DBaaS) that brings [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source Hybrid Transactional and Analytical Processing (HTAP) database, to your cloud. TiDB Cloud offers an easy way to deploy and manage databases to let you focus on your applications, not the complexities of the databases. You can create TiDB Cloud clusters to quickly build mission-critical applications on [Amazon Web Services (AWS)](/tidb-cloud/create-tidb-cluster.md), [Google Cloud](/tidb-cloud/create-tidb-cluster.md), [Microsoft Azure](/tidb-cloud/create-tidb-cluster.md), and [Alibaba Cloud](https://docs.tidb.io/tidbcloud/create-tidb-cluster-serverless/).
+[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) is a fully-managed Database-as-a-Service (DBaaS) that brings [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source Hybrid Transactional and Analytical Processing (HTAP) database, to your cloud. TiDB Cloud offers an easy way to deploy and manage databases to let you focus on your applications, not the complexities of the databases. You can create TiDB Cloud clusters to quickly build mission-critical applications on Amazon Web Services (AWS), Google Cloud, Microsoft Azure, and Alibaba Cloud.
 
 ![TiDB Cloud Overview](/media/tidb-cloud/tidb-cloud-overview.png)
 
