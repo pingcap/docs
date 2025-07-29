@@ -19,8 +19,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + TiDB
 
-    - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-    - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
+    - Optimize the plan construction process for IndexScan by reducing `fmt.Sprintf()` calls [#56649](https://github.com/pingcap/tidb/issues/56649) @[crazycs520](https://github.com/crazycs520)
     - (dup): release-7.5.5.md > Improvements> TiDB - Adjust estimation results from 0 to 1 for equality conditions that do not hit TopN when statistics are entirely composed of TopN and the modified row count in the corresponding table statistics is non-zero [#47400](https://github.com/pingcap/tidb/issues/47400) @[terry1purcell](https://github.com/terry1purcell)
 
 + TiKV
