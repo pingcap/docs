@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless audit-log filter-rule delete`.
 
 # ticloud serverless audit-log filter-rule delete
 
-Delete an audit log filter rule for a TiDB Cloud Serverless cluster.
+Delete an audit log filter rule for a {{{ .starter }}} cluster.
 
 ```shell
 ticloud serverless audit-log filter-rule delete [flags]

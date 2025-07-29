@@ -66,13 +66,13 @@ TiDB Cloud provides the following two deployment options:
 
 - [TiDB Cloud Serverless](https://www.pingcap.com/tidb-cloud-serverless)
 
-    TiDB Cloud Serverless is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free tier and consumption based billing once free limits are exceeded.
+    {{{ .starter }}} is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free tier and consumption based billing once free limits are exceeded.
 
 - [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated)
 
     TiDB Cloud Dedicated is for production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing).
 
-For feature comparison between TiDB Cloud Serverless and TiDB Cloud Dedicated, see [TiDB: An advanced, open source, distributed SQL database](https://www.pingcap.com/get-started-tidb).
+For feature comparison between {{{ .starter }}} and TiDB Cloud Dedicated, see [TiDB: An advanced, open source, distributed SQL database](https://www.pingcap.com/get-started-tidb).
 
 ## Architecture
 

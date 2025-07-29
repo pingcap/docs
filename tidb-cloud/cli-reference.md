@@ -24,12 +24,12 @@ To use the `ticloud` CLI in your terminal, run `ticloud [command] [subcommand]`.
 | Command               | Subcommand                                                            | Description                                    |
 |-----------------------|-----------------------------------------------------------------------|------------------------------------------------|
 | auth                  | login, logout, whoami                                                 | Login and logout                               |
-| serverless (alias: s) | create, delete, describe, list, update, spending-limit, region, shell | Manage TiDB Cloud Serverless clusters          |
-| serverless branch     | create, delete, describe, list, shell                                 | Manage TiDB Cloud Serverless branches          |
-| serverless import     | cancel, describe, list, start                                         | Manage TiDB Cloud Serverless import tasks      |
-| serverless export     | create, describe, list, cancel, download                              | Manage TiDB Cloud Serverless export tasks      |
-| serverless sql-user   | create, list, delete, update                                          | Manage TiDB Cloud Serverless SQL users         |
-| serverless audit-log  | config, describe, filter-rule (alias: filter), download                                    | Manage TiDB Cloud Serverless database audit logging         |
+| serverless (alias: s) | create, delete, describe, list, update, spending-limit, region, shell | Manage {{{ .starter }}} clusters          |
+| serverless branch     | create, delete, describe, list, shell                                 | Manage {{{ .starter }}} branches          |
+| serverless import     | cancel, describe, list, start                                         | Manage {{{ .starter }}} import tasks      |
+| serverless export     | create, describe, list, cancel, download                              | Manage {{{ .starter }}} export tasks      |
+| serverless sql-user   | create, list, delete, update                                          | Manage {{{ .starter }}} SQL users         |
+| serverless audit-log  | config, describe, filter-rule (alias: filter), download                                    | Manage {{{ .starter }}} database audit logging         |
 | ai                    | -                                                                     | Chat with TiDB Bot                             |
 | completion            | bash, fish, powershell, zsh                                           | Generate completion script for specified shell |
 | config                | create, delete, describe, edit, list, set, use                        | Configure user profiles                        |

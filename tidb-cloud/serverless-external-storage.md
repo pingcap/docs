@@ -1,17 +1,17 @@
 ---
-title: Configure TiDB Cloud Serverless External Storage Access
+title: Configure {{{ .starter }}} External Storage Access
 summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access.
 ---
 
-# Configure External Storage Access for TiDB Cloud Serverless
+# Configure External Storage Access for {{{ .starter }}}
 
-If you want to import data from or export data to an external storage in a TiDB Cloud Serverless cluster, you need to configure cross-account access. This document describes how to configure access to an external storage for TiDB Cloud Serverless clusters.
+If you want to import data from or export data to an external storage in a {{{ .starter }}} cluster, you need to configure cross-account access. This document describes how to configure access to an external storage for {{{ .starter }}} clusters.
 
 If you need to configure these external storages for a TiDB Cloud Dedicated cluster, see [Configure External Storage Access for TiDB Cloud Dedicated](/tidb-cloud/dedicated-external-storage.md).
 
 ## Configure Amazon S3 access
 
-To allow a TiDB Cloud Serverless cluster to access the source data in your Amazon S3 bucket, configure the bucket access for the cluster using either of the following methods:
+To allow a {{{ .starter }}} cluster to access the source data in your Amazon S3 bucket, configure the bucket access for the cluster using either of the following methods:
 
 - [Use a Role ARN](#configure-amazon-s3-access-using-a-role-arn): use a Role ARN to access your Amazon S3 bucket.
 - [Use an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key): use the access key of an IAM user to access your Amazon S3 bucket.
@@ -79,10 +79,10 @@ If you have any trouble creating a role ARN with AWS CloudFormation, you can tak
 
     4. On the **Create policy** page, click the **JSON** tab.
 
-    5. Configure the policy in the policy text field according to your needs. The following is an example that you can use to export data from and import data into a TiDB Cloud Serverless cluster.
+    5. Configure the policy in the policy text field according to your needs. The following is an example that you can use to export data from and import data into a {{{ .starter }}} cluster.
 
-        - Exporting data from a TiDB Cloud Serverless cluster needs the **s3:PutObject** and **s3:ListBucket** permissions.
-        - Importing data into a TiDB Cloud Serverless cluster needs the **s3:GetObject**, **s3:GetObjectVersion**, and **s3:ListBucket** permissions.
+        - Exporting data from a {{{ .starter }}} cluster needs the **s3:PutObject** and **s3:ListBucket** permissions.
+        - Importing data into a {{{ .starter }}} cluster needs the **s3:GetObject**, **s3:GetObjectVersion**, and **s3:ListBucket** permissions.
 
         ```json
         {
@@ -180,7 +180,7 @@ Take the following steps to configure an access key:
 
 ## Configure GCS access
 
-To allow a TiDB Cloud Serverless cluster to access your GCS bucket, you need to configure the GCS access for the bucket. You can use a service account key to configure the bucket access:
+To allow a {{{ .starter }}} cluster to access your GCS bucket, you need to configure the GCS access for the bucket. You can use a service account key to configure the bucket access:
 
 Take the following steps to configure a service account key:
 
@@ -191,8 +191,8 @@ Take the following steps to configure a service account key:
     3. Click **CREATE AND CONTINUE** to create the service account.
     4. In the `Grant this service account access to project`, choose the [IAM roles](https://cloud.google.com/iam/docs/understanding-roles) with the needed permission.
 
-        - Exporting data from a TiDB Cloud Serverless cluster needs a role with `storage.objects.create` permission.
-        - Importing data into a TiDB Cloud Serverless cluster needs a role with `storage.buckets.get`, `storage.objects.get`, and `storage.objects.list` permissions.
+        - Exporting data from a {{{ .starter }}} cluster needs a role with `storage.objects.create` permission.
+        - Importing data into a {{{ .starter }}} cluster needs a role with `storage.buckets.get`, `storage.objects.get`, and `storage.objects.list` permissions.
 
     5. Click **Continue** to go to the next step.
     6. Optional: In the `Grant users access to this service account`, choose members that need to [attach the service account to other resources](https://cloud.google.com/iam/docs/attach-service-accounts).
@@ -204,11 +204,11 @@ Take the following steps to configure a service account key:
 
    ![service-account-key](/media/tidb-cloud/serverless-external-storage/gcs-service-account-key.png)
 
-3. Choose the default `JSON` key type, and then click **CREATE** to download the Google Cloud credentials file. The file contains the service account key that you need to use when configuring the GCS access for the TiDB Cloud Serverless cluster.
+3. Choose the default `JSON` key type, and then click **CREATE** to download the Google Cloud credentials file. The file contains the service account key that you need to use when configuring the GCS access for the {{{ .starter }}} cluster.
 
 ## Configure Azure Blob Storage access
 
-To allow TiDB Cloud Serverless to access your Azure Blob container, you need to create a service SAS token for the container.
+To allow {{{ .starter }}} to access your Azure Blob container, you need to create a service SAS token for the container.
 
 You can create a SAS token either using an [Azure ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview) (recommended) or manual configuration. 
 
@@ -257,8 +257,8 @@ If you have any trouble creating a SAS token with the Azure ARM template, take t
     2. In the **Allowed Resource types** section, choose **Container** and **Object**.
     3. In the **Allowed permissions** section, choose the permission as needed.
 
-        - Exporting data from a TiDB Cloud Serverless cluster needs the **Read** and **Write** permissions.
-        - Importing data into a TiDB Cloud Serverless cluster needs the **Read** and **List** permissions.
+        - Exporting data from a {{{ .starter }}} cluster needs the **Read** and **Write** permissions.
+        - Importing data into a {{{ .starter }}} cluster needs the **Read** and **List** permissions.
 
     4. Adjust **Start and expiry date/time** as needed.
     5. You can keep the default values for other settings.
@@ -271,7 +271,7 @@ If you have any trouble creating a SAS token with the Azure ARM template, take t
 
 ## Configure Alibaba Cloud Object Storage Service (OSS) access
 
-To allow TiDB Cloud Serverless to access your Alibaba Cloud OSS bucket, you need to create an AccessKey pair for the bucket.
+To allow {{{ .starter }}} to access your Alibaba Cloud OSS bucket, you need to create an AccessKey pair for the bucket.
 
 Take the following steps to configure an AccessKey pair:
 
@@ -285,9 +285,9 @@ Take the following steps to configure an AccessKey pair:
     - In the **Service** section, select **Object Storage Service**.
     - In the **Action** section, select the permissions as needed.
    
-        To import data into a TiDB Cloud Serverless cluster, grant **oss:GetObject**, **oss:GetBucketInfo**, and **oss:ListObjects** permissions.
+        To import data into a {{{ .starter }}} cluster, grant **oss:GetObject**, **oss:GetBucketInfo**, and **oss:ListObjects** permissions.
 
-        To export data from a TiDB Cloud Serverless cluster, grant **oss:PutObject**, **oss:GetBucketInfo**, and **oss:ListBuckets** permissions.
+        To export data from a {{{ .starter }}} cluster, grant **oss:PutObject**, **oss:GetBucketInfo**, and **oss:ListBuckets** permissions.
         
     - In the **Resource** section, select the bucket and the objects in the bucket.
 

@@ -10,7 +10,7 @@ This document describes how to back up and restore your TiDB Cloud Dedicated clu
 
 > **Tip**
 >
-> To learn how to back up and restore TiDB Cloud Serverless cluster data, see [Back Up and Restore TiDB Cloud Serverless Data](/tidb-cloud/backup-and-restore-serverless.md).
+> To learn how to back up and restore {{{ .starter }}} cluster data, see [Back Up and Restore {{{ .starter }}} Data](/tidb-cloud/backup-and-restore-serverless.md).
 
 ## Limitations
 
