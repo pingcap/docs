@@ -1,9 +1,9 @@
 ---
-title: TiDB Cloud Serverless Driver Kysely Tutorial
+title: {{{ .starter }}} Driver Kysely Tutorial
 summary: Learn how to use TiDB Cloud serverless driver with Kysely.
 ---
 
-# TiDB Cloud Serverless Driver Kysely Tutorial
+# {{{ .starter }}} Driver Kysely Tutorial
 
 [Kysely](https://kysely.dev/docs/intro) is a type-safe and autocompletion-friendly TypeScript SQL query builder. TiDB Cloud offers [@tidbcloud/kysely](https://github.com/tidbcloud/kysely), enabling you to use Kysely over HTTPS with [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md). Compared with the traditional TCP way, [@tidbcloud/kysely](https://github.com/tidbcloud/kysely) brings the following benefits:
 
@@ -22,7 +22,7 @@ To complete this tutorial, you need the following:
 
 - [Node.js](https://nodejs.org/en) >= 18.0.0.
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
-- A TiDB Cloud Serverless cluster. If you don't have any, you can [create a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- A {{{ .starter }}} cluster. If you don't have any, you can [create a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 
 ### Step 1. Create a project
 
@@ -73,7 +73,7 @@ To complete this tutorial, you need the following:
 
 ### Step 2. Set the environment
 
-1. On the overview page of your TiDB Cloud Serverless cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
+1. On the overview page of your {{{ .starter }}} cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
 
     ```
     mysql://[username]:[password]@[host]/[database]
@@ -87,7 +87,7 @@ To complete this tutorial, you need the following:
    
 ### Step 3. Use Kysely to query data
 
-1. Create a table in your TiDB Cloud Serverless cluster and insert some data. 
+1. Create a table in your {{{ .starter }}} cluster and insert some data. 
 
     You can use [SQL Editor in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
 
@@ -166,7 +166,7 @@ To complete this tutorial, you need the following:
 
 - A [Vercel](https://vercel.com/docs) account that provides edge environment.
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
-- A TiDB Cloud Serverless cluster. If you don't have any, you can [create a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- A {{{ .starter }}} cluster. If you don't have any, you can [create a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 
 ### Step 1. Create a project
 
@@ -191,7 +191,7 @@ To complete this tutorial, you need the following:
 
 ### Step 2. Set the environment
 
-On the overview page of your TiDB Cloud Serverless cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
+On the overview page of your {{{ .starter }}} cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
 
 ```
 mysql://[username]:[password]@[host]/[database]
@@ -199,7 +199,7 @@ mysql://[username]:[password]@[host]/[database]
 
 ### Step 3. Create an edge function
 
-1. Create a table in your TiDB Cloud Serverless cluster and insert some data.
+1. Create a table in your {{{ .starter }}} cluster and insert some data.
 
     You can use [SQL Editor in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
 

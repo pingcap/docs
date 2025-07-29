@@ -1,9 +1,9 @@
 ---
-title: TiDB Cloud Serverless Driver Prisma Tutorial
+title: {{{ .starter }}} Driver Prisma Tutorial
 summary: Learn how to use TiDB Cloud serverless driver with Prisma ORM.
 ---
 
-# TiDB Cloud Serverless Driver Prisma Tutorial
+# {{{ .starter }}} Driver Prisma Tutorial
 
 [Prisma](https://www.prisma.io/docs) is an open source next-generation ORM (Object-Relational Mapping) that helps developers interact with their database in an intuitive, efficient, and safe way. TiDB Cloud offers [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter), enabling you to use [Prisma Client](https://www.prisma.io/docs/concepts/components/prisma-client) over HTTPS with [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md). Compared with the traditional TCP way, [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter) brings the following benefits:
 
@@ -79,7 +79,7 @@ To complete this tutorial, you need the following:
 
 - [Node.js](https://nodejs.org/en) >= 18.0.0.
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
-- A TiDB Cloud Serverless cluster. If you don't have any, you can [create a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- A {{{ .starter }}} cluster. If you don't have any, you can [create a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 
 ### Step 1. Create a project
 
@@ -118,7 +118,7 @@ To complete this tutorial, you need the following:
 
 ### Step 2. Set the environment
 
-1. On the overview page of your TiDB Cloud Serverless cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
+1. On the overview page of your {{{ .starter }}} cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
 
     ```
     mysql://[username]:[password]@[host]:4000/[database]?sslaccept=strict
@@ -179,13 +179,13 @@ To complete this tutorial, you need the following:
    }
    ```
 
-3. Synchronize your database with the Prisma schema. You can either manually create the database tables in your TiDB Cloud Serverless cluster or use the Prisma CLI to create them automatically as follows:
+3. Synchronize your database with the Prisma schema. You can either manually create the database tables in your {{{ .starter }}} cluster or use the Prisma CLI to create them automatically as follows:
 
     ```
     npx prisma db push
     ```
 
-   This command will create the `user` table in your TiDB Cloud Serverless cluster through the traditional TCP connection, rather than through the HTTPS connection using `@tidbcloud/prisma-adapter`. This is because it uses the same engine as Prisma Migrate. For more information about this command, see [Prototype your schema](https://www.prisma.io/docs/concepts/components/prisma-migrate/db-push).
+   This command will create the `user` table in your {{{ .starter }}} cluster through the traditional TCP connection, rather than through the HTTPS connection using `@tidbcloud/prisma-adapter`. This is because it uses the same engine as Prisma Migrate. For more information about this command, see [Prototype your schema](https://www.prisma.io/docs/concepts/components/prisma-migrate/db-push).
 
 4. Generate Prisma Client:
 
