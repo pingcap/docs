@@ -14,7 +14,7 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
 
 ## Step 1: Create a TiDB cluster
 
-[TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) (now [{{{ .starter }}}](https://docs.tidb.io/tidbcloud/select-cluster-tier/#tidb-cloud-starter)) is the best way to get started with TiDB Cloud. To create a {{{ .starter }}} cluster, follow these steps:
+[TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) (now Starter) is the best way to get started with TiDB Cloud. To create a {{{ .starter }}} cluster, follow these steps:
 
 1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up.
 
