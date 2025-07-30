@@ -9,24 +9,26 @@ TiDB Cloud supports New Relic integration (Preview). You can configure TiDB Clou
 
 ## New Relic integration version
 
-Based on your integration history, TiDB Cloud provides two versions of New Relic integration:
+TiDB Cloud has supported New Relic integration (Beta) since April 11, 2023. Starting from July 31, 2025, TiDB Cloud introduces an enhanced preview version of the integration.
 
-- **New Relic integration (Preview)**: if none of clusters in your organization were integrated with New Relic before July 31, 2025, TiDB Cloud provides the preview version of New Relic integration for you to experience the latest enhancements.
-- **New Relic integration (Beta)**: if any clusters in your organization were integrated with New Relic before July 31, 2025, TiDB Cloud keeps both existing and new integrations at the beta version to avoid affecting current dashboards. Also please rest assured, we will contact you to discuss the appropriate migration plan and schedule.
+- **New Relic integration (Preview)**: if your organization has no active Datadog or New Relic integrations on July 31, 2025, TiDB Cloud provides the preview version of New Relic integration so you can experience the latest enhancements.
+- **New Relic integration (Beta)**: if your organization has Datadog or New Relic integrations on July 31, 2025, TiDB Cloud retains both existing and new integrations in the beta version to avoid affecting current dashboards. We will also proactively reach out to you to discuss a suitable migration plan and timeline.
 
 ## Prerequisites
 
-- To integrate TiDB Cloud with New Relic, you must have a New Relic account and a [New Relic API key](https://one.newrelic.com/admin-portal/api-keys/home?), please make sure the API key type is 'Ingest - License'. Also New Relic grants you an API key when you first create a New Relic account.
+- To integrate TiDB Cloud with New Relic, you must have a [New Relic](https://newrelic.com/) account and [create a New Relic API key](https://one.newrelic.com/admin-portal/api-keys/home?) of the `Ingest - License` type.
 
     If you do not have a New Relic account, sign up [here](https://newrelic.com/signup).
 
-- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` or `Project Owner` access in TiDB Cloud. To view the integration page or access configured dashboards via the provided links, users need at least the `Project Member` role to access the target clusters under the project in TiDB Cloud.
+- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` or `Project Owner` access in TiDB Cloud. To view the integration page or access configured dashboards via the provided links, users need at least the `Project Member` role to access the target clusters under your project in TiDB Cloud.
 
 ## Limitation
 
 - You cannot use the New Relic integration in [TiDB Cloud Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless).
 
-- New Relic integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**. For clusters that were previously configured with metrics integrations, the associated integration services will be discontinued once the cluster is deleted.
+- New Relic integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
+
+- When a cluster with New Relic integration is deleted, its associated integration services are also removed.
 
 ## Steps
 
@@ -65,37 +67,45 @@ Depending on your [New Relic integration version](#new-relic-integration-version
 </div>
 </SimpleTab>
 
-### Step 2. Add TiDB Cloud Dashboard in New Relic
+### Step 2. Add TiDB Cloud dashboard in New Relic
 
 Depending on your [New Relic integration version](#new-relic-integration-version), the steps are different.
 
 <SimpleTab>
 <div label="New Relic integration (Preview)">
 
-A new dashboard will be available in New Relic once the pending PR is merged by New Relic.
-Before the [PR](https://github.com/newrelic/newrelic-quickstarts/pull/2681) of the new dashboard is merged, users can use the json file we provide to import the new dashboard. The steps are as follows.
+A new TiDB Cloud dashboard will be available in New Relic after the pending [PR](https://github.com/newrelic/newrelic-quickstarts/pull/2681) is merged by New Relic. Before that, you can manually import the dashboard to New Relic by taking the following steps:
 
-1. The address of the json file is [here] (https://github.com/pingcap/diag/blob/integration/integration/dashboards/newrelic-dashboard.json).
-2. Copy the json file content and add the content in line 4: "permissions": "PUBLIC_READ_WRITE",
+1. Prepare the JSON file for the new dashboard.
 
-    ```json
-    {
-      "name": "TiDB Cloud Monitoring (new metric development)",
-      "description": null,
-      "permissions": "PUBLIC_READ_WRITE", 
-      ...
-    }
-    ```
-3.  Add your New Relic account ID to all `"accountIds": []` fields in the JSON file.
-- Important: Ensure your account ID is added to every `"accountIds": []`.
-- Example:
-    ```json
-    "accountIds": [
-      1234567
-    ],
-    ```
-4. Click the **Dashboards** tab in the left navigation bar of **New Relic**, and click the `Import dashboard` button in the upper right corner of the Dashboards page that appears. 
-5. Paste the json content prepared in the previous step into the pop-up window, and click the `Import dashboard` button in the lower right corner to complete the creation of the new dashboard.
+    1. Download the template JSON file [here](https://github.com/pingcap/diag/blob/integration/integration/dashboards/newrelic-dashboard.json).
+    2. In the JSON file, add `"permissions": "PUBLIC_READ_WRITE"` to line 4 as follows:
+
+        ```json
+        {
+          "name": "TiDB Cloud Monitoring (new metric development)",
+          "description": null,
+          "permissions": "PUBLIC_READ_WRITE",
+          ...
+        }
+        ```
+
+    3. Add your New Relic account ID to all `"accountIds": []` fields in the JSON file.
+
+        For example:
+
+        ```json
+        "accountIds": [
+          1234567
+        ],
+        ```
+
+        > **Note**:
+        >
+        > To avoid integration errors, make sure your account ID is added in all `"accountIds"` fields in the JSON file.
+
+2. Log in to [New Relic](https://one.newrelic.com/), click **Dashboards** in the left navigation bar, and then click **Import dashboard** in the upper-right corner.
+3. In the displayed dialog, paste all the content in the prepared JSON file to the text area, and then click **Import dashboard**.
 
 </div>
 <div label="New Relic integration (Beta)">
@@ -107,24 +117,16 @@ Before the [PR](https://github.com/newrelic/newrelic-quickstarts/pull/2681) of t
 </div>
 </SimpleTab>
 
-## Pre-built dashboard
+## View the pre-built dashboard
 
-Depending on your [New Relic integration version](#new-relic-integration-version), the steps are different.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the **Integrations** page.
 
-<SimpleTab>
-<div label="New Relic integration (Preview)">
+2. Click the **Dashboard** link in the **New Relic** section to view the pre-built dashboard of your TiDB clusters.
 
-Click the **Dashboard** link in the **New Relic** card on the **Integrations** page. You can see the pre-built dashboard of your TiDB clusters.
-Click  the **TiDB Cloud Dynamic Tracker** to view the new dashboard.
+3. Depending on your [New Relic integration version](#new-relic-integration-version), do one of the following:
 
-</div>
-<div label="New Relic integration (Beta)">
-
-Click the **Dashboard** link in the **New Relic** card on the **Integrations** page. You can see the pre-built dashboard of your TiDB clusters.
-Click  the **TiDB Cloud Monitoring** to view the legacy dashboard.
-
-</div>
-</SimpleTab>
+    - For New Relic integration (Preview), click **TiDB Cloud Dynamic Tracker** to view the new dashboard.
+    - For New Relic integration (Beta), click **TiDB Cloud Monitoring** to view the legacy dashboard.
 
 ## Metrics available to New Relic
 
