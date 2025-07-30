@@ -25,7 +25,7 @@ We are constantly filling in the feature gaps between {{{ .starter }}} and TiDB 
 
 ### Encryption
 
-- Data persisted in your {{{ .starter }}} cluster is encrypted using the encryption tool provided by the cloud provider that manages your cluster. For [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan), an optional second layer of encryption is available during the cluster creation process, providing an additional level of security beyond the default encryption at rest.
+- Data persisted in your {{{ .starter }}} or {{{ .essential }}} cluster is encrypted using the encryption tool provided by the cloud provider that manages your cluster. For {{{ .starter }}} (with spending limit > 0) and {{{ .essential }}} clusters, an optional second layer of encryption is available during the cluster creation process, providing an additional level of security beyond the default encryption at rest.
 - Using [customer-managed encryption keys (CMEK)](/tidb-cloud/tidb-cloud-encrypt-cmek.md) is currently unavailable.
 
 ### Maintenance window
@@ -59,9 +59,9 @@ We are constantly filling in the feature gaps between {{{ .starter }}} and TiDB 
 
 ## Usage quota
 
-For each organization in TiDB Cloud, you can create a maximum of five [free clusters](/tidb-cloud/select-cluster-tier.md#free-cluster-plan) by default. To create more {{{ .starter }}} clusters, you need to add a credit card and create [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan) for the usage.
+For each organization in TiDB Cloud, you can create a maximum of five [free {{{ .starter }}} clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) by default. To create more {{{ .starter }}} clusters, you need to add a credit card and [set a monthly spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for the usage.
 
-For the first five {{{ .starter }}} clusters in your organization, whether they are free or scalable, TiDB Cloud provides a free usage quota for each of them as follows:
+For the first five {{{ .starter }}} clusters in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
 
 - Row-based storage: 5 GiB
 - Columnar storage: 5 GiB
@@ -73,6 +73,6 @@ Once a cluster reaches its usage quota, it immediately denies any new connection
 
 To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
 
-If you want to create a {{{ .starter }}} cluster with an additional quota, you can select the scalable cluster plan and edit the spending limit on the cluster creation page. For more information, see [Create a {{{ .starter }}} cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
+If you want to create a {{{ .starter }}} cluster with an additional quota, you can set the monthly spending limit on the cluster creation page. For more information, see [Create a {{{ .starter }}} cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
 
 After creating a {{{ .starter }}} cluster, you can still check and edit the spending limit on your cluster overview page. For more information, see [Manage Spending Limit for {{{ .starter }}} Clusters](/tidb-cloud/manage-serverless-spend-limit.md).

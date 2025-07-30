@@ -30,7 +30,7 @@ The free cluster plan is ideal for those who are getting started with {{{ .start
 
 ### Usage quota
 
-For each organization in TiDB Cloud, you can create a maximum of five [free clusters](#free-cluster-plan) by default. To create more {{{ .starter }}} clusters, you need to add a credit card and specify a spending limit.
+For each organization in TiDB Cloud, you can create a maximum of five [free {{{ .starter }}} clusters](#tidb-cloud-serverless) by default. To create more {{{ .starter }}} clusters, you need to add a credit card and specify a spending limit.
 
 For the first five {{{ .starter }}} clusters in your organization, whether they are free or scalable, TiDB Cloud provides a free usage quota for each of them as follows:
 
