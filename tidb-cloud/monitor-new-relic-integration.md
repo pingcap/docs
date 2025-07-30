@@ -11,8 +11,8 @@ TiDB Cloud supports New Relic integration (Preview). You can configure TiDB Clou
 
 Based on your integration history, TiDB Cloud provides two versions of New Relic integration:
 
-- **New Relic integration (Preview)**: if none of clusters in your organization were integrated with New Relic before July 31, 2025, TiDB Cloud provides the preview version of New Relic integration for you to experience the latest enhancements.
-- **New Relic integration (Beta)**: if any clusters in your organization were integrated with New Relic before July 31, 2025, TiDB Cloud keeps both existing and new integrations at the beta version to avoid affecting current dashboards. Also please rest assured, we will contact you to discuss the appropriate migration plan and schedule.
+- **New Relic integration (Preview)**: if no undeleted push-mode metrics integrations (either Datadog or New Relic) exist in your org before July 31, 2025, TiDB Cloud provides the preview version of New Relic integration for you to experience the latest enhancements.
+- **New Relic integration (Beta)**: if any undeleted push-mode metrics integrations (either Datadog or New Relic) exist in your org before July 31, 2025, TiDB Cloud keeps both existing and new integrations at the beta version to avoid affecting current dashboards. Also please rest assured, we will contact you to discuss the appropriate migration plan and schedule.
 
 ## Prerequisites
 
