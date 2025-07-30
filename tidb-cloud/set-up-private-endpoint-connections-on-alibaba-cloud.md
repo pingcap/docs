@@ -1,23 +1,27 @@
 ---
-title: Connect to TiDB Cloud via Private Endpoint
-summary: Learn how to connect to your TiDB Cloud cluster via private endpoint.
+title: Connect to TiDB Cloud via Alibaba Cloud Private Endpoint
+summary: Learn how to connect to your TiDB Cloud cluster via Alibaba Cloud private endpoint.
 ---
 
-# Connect to TiDB Cloud via Private Endpoint
+# Connect to TiDB Cloud via Alibaba Cloud Private Endpoint
 
 This tutorial walks you through the steps to connect to your TiDB Cloud cluster via a private endpoint on Alibaba Cloud. Connecting through a private endpoint allows secure and private communication between your services and your TiDB Cloud cluster without using the public internet.
 
+> **Tip:**
+>
+> To learn how to connect to a TiDB Cloud cluster via AWS PrivateLink, see [Connect to TiDB Cloud via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-aws.md).
+
 ## Restrictions
 
-- Currently, TiDB Cloud Starter and TiDB Cloud Essential support private endpoint connections when the endpoint service is hosted on Alibaba Cloud. If the service is hosted on AWS, Google Cloud, or another cloud provider, the private endpoint is not applicable.
+- Currently, {{{ .starter }}} and TiDB Cloud Essential support private endpoint connections when the endpoint service is hosted on AWS or Alibaba Cloud. If the service is hosted on another cloud provider, the private endpoint is not applicable.
 - Private endpoint connection across regions is not supported.
 
 ## Set up a private endpoint with Alibaba Cloud
 
-To connect to your TiDB Cloud Starter cluster via a private endpoint, follow these steps:
+To connect to your {{{ .starter }}} or {{{ .essential }}} cluster via a private endpoint, follow these steps:
 
 1. [Choose a TiDB cluster](#step-1-choose-a-tidb-cluster)
-2. [Create a VOC endpoint on Alibaba Cloud](#step-2-create-a-voc-endpoint-on-alibaba-cloud)
+2. [Create a private endpoint on Alibaba Cloud](#step-2-create-a-private-endpoint-on-alibaba-cloud)
 3. [Connect to your TiDB cluster using the private endpoint](#step-3-connect-to-your-tidb-cluster-using-the-private-endpoint)
 
 ### Step 1. Choose a TiDB cluster
@@ -27,7 +31,7 @@ To connect to your TiDB Cloud Starter cluster via a private endpoint, follow the
 3. In the **Connection Type** drop-down list, select **Private Endpoint**.
 4. Take a note of **Service Name**, **Availability Zone ID**, and **Region ID**.
 
-### Step 2. Create a VOC endpoint on Alibaba Cloud
+### Step 2. Create a private endpoint on Alibaba Cloud
 
 To use the Alibaba Cloud Management Console to create a VPC interface endpoint, perform the following steps:
 

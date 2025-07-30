@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless create`.
 
 # ticloud serverless create
 
-Create a {{{ .starter }}} cluster:
+Create a TiDB Cloud cluster:
 
 ```shell
 ticloud serverless create [flags]
@@ -13,13 +13,13 @@ ticloud serverless create [flags]
 
 ## Examples
 
-Create a {{{ .starter }}} cluster in interactive mode:
+Create a TiDB Cloud cluster in interactive mode:
 
 ```shell
 ticloud serverless create
 ```
 
-Create a {{{ .starter }}} cluster in non-interactive mode:
+Create a TiDB Cloud cluster cluster in non-interactive mode:
 
 ```shell
 ticloud serverless create --display-name <display-name> --region <region>
@@ -29,7 +29,13 @@ Create a {{{ .starter }}} cluster with a spending limit in non-interactive mode:
 
 ```shell
 ticloud serverless create --display-name <display-name> --region <region> --spending-limit-monthly <spending-limit-monthly>
-``` 
+```
+
+Create a {{{ .essential }}} cluster in non-interactive mode:
+
+```shell
+ticloud serverless create --display-name <display-name> --region <region> --max-rcu <maximum-rcu> --min-rcu <minimum-rcu>
+```
 
 ## Flags
 
@@ -43,6 +49,11 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | -r, --region string          | Specifies the name of cloud region. You can use "ticloud serverless region" to see all regions.                          | Yes      | Only works in non-interactive mode.                 |
 | --disable-public-endpoint    | Disables the public endpoint.                                                                       | No       | Only works in non-interactive mode.                 |
 | --encryption                 | Enables enhanced encryption at rest.                                                                | No       | Only works in non-interactive mode.                 |
+| -r, --region string          | Specifies the name of the cloud region. You can view all available regions using the `ticloud serverless region` command.                | Yes      | Only works in non-interactive mode.                 |
+| --disable-public-endpoint    | Disables the public endpoint. Use this option if you want to prevent public access to the cluster.                                                                                 | No       | Only works in non-interactive mode.                 |
+| --encryption                 | Enables enhanced encryption at rest.                                                                           | No       | Only works in non-interactive mode.                 |
+| --max-rcu int32              | Sets the maximum Request Capacity Units (RCUs) for the {{{ .essential }}} cluster, up to 100000.                                                                  | No       | Only works in non-interactive mode.                 |
+| --min-rcu int32              | Sets the minimum Request Capacity Units (RCUs) for the {{{ .essential }}} cluster, at least 2000.                                                                    | No       | Only works in non-interactive mode.                 |
 | -h, --help                   | Shows help information for this command.                                                                       | No       | Works in both non-interactive and interactive modes |
 
 ## Inherited flags

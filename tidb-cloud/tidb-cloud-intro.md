@@ -6,7 +6,7 @@ category: intro
 
 # What is TiDB Cloud
 
-[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) is a fully-managed Database-as-a-Service (DBaaS) that brings [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source Hybrid Transactional and Analytical Processing (HTAP) database, to your cloud. TiDB Cloud offers an easy way to deploy and manage databases to let you focus on your applications, not the complexities of the databases. You can create TiDB Cloud clusters to quickly build mission-critical applications on Amazon Web Services (AWS), Google Cloud, and Microsoft Azure.
+[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) is a fully-managed Database-as-a-Service (DBaaS) that brings [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source Hybrid Transactional and Analytical Processing (HTAP) database, to your cloud. TiDB Cloud offers an easy way to deploy and manage databases to let you focus on your applications, not the complexities of the databases. You can create TiDB Cloud clusters to quickly build mission-critical applications on Amazon Web Services (AWS), Google Cloud, Microsoft Azure, and Alibaba Cloud.
 
 ![TiDB Cloud Overview](/media/tidb-cloud/tidb-cloud-overview.png)
 
@@ -50,7 +50,7 @@ With TiDB Cloud, you can get the following key features:
 
 - **Multi-Cloud Support**
 
-    Stay flexible without cloud vendor lock-in. TiDB Cloud is currently available on AWS, Azure, and Google Cloud.
+    Stay flexible without cloud vendor lock-in. TiDB Cloud is currently available on AWS, Azure, Google Cloud, and Alibaba Cloud.
 
 - **Simple Pricing Plans**
 
@@ -62,17 +62,25 @@ With TiDB Cloud, you can get the following key features:
 
 ## Deployment options
 
-TiDB Cloud provides the following two deployment options:
+TiDB Cloud provides the following deployment options:
 
-- [TiDB Cloud Serverless](https://www.pingcap.com/tidb-cloud-serverless)
+- {{{ .starter }}} (formerly TiDB Cloud Serverless)
 
     {{{ .starter }}} is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free tier and consumption based billing once free limits are exceeded.
 
-- [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated)
+    Currently, {{{ .starter }}} is generally available on AWS and in public preview on Alibaba Cloud.
 
-    TiDB Cloud Dedicated is for production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing).
+- {{{ .essential }}}
 
-For feature comparison between {{{ .starter }}} and TiDB Cloud Dedicated, see [TiDB: An advanced, open source, distributed SQL database](https://www.pingcap.com/get-started-tidb).
+    For applications experiencing growing workloads and needing scalability in real time, {{{ .essential }}} provides the flexibility and performance to keep pace with your business growth.
+
+    Currently, {{{ .essential }}} is in public preview on Alibaba Cloud. For feature comparison between {{{ .starter }}} and {{{ .essential }}}, see [TiDB on Alibaba Cloud](https://www.pingcap.com/partners/alibaba-cloud/).
+
+- TiDB Cloud Dedicated
+
+    TiDB Cloud Dedicated is designed for mission-critical businesses, offering high availability across multiple availability zones, horizontal scaling, and full [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) capabilities.
+
+    Currently, TiDB Cloud Dedicated is generally available on AWS and Google Cloud, and in public preview on Azure. For more information, see [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated).
 
 ## Architecture
 
