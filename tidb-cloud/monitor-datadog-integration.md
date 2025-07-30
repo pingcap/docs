@@ -9,10 +9,10 @@ TiDB Cloud supports Datadog integration (Preview). You can configure TiDB Cloud 
 
 ## Datadog integration version
 
-Based on your integration history, TiDB Cloud provides two versions of Datadog integration:
+TiDB Cloud has supported Datadog integration (Beta) since March 04, 2022. Starting from July 31, 2025, TiDB Cloud introduces an enhanced preview version of the integration.
 
-- **Datadog integration (Preview)**: if your organization has no Datadog or New Relic integrations on July 31, 2025, TiDB Cloud provides the preview version of Datadog integration for you to experience the latest enhancements.
-- **Datadog integration (Beta)**: if your organization has Datadog or New Relic integrations on July 31, 2025, TiDB Cloud keeps both existing and new integrations at the beta version to avoid affecting current dashboards. Also please rest assured, we will contact you to discuss the appropriate migration plan and schedule.
+- **Datadog integration (Preview)**: if Datadog and New Relic integrations do not exist in your organization on July 31, 2025, TiDB Cloud provides the preview version of Datadog integration for your organization to experience the latest enhancements.
+- **Datadog integration (Beta)**: if any Datadog or New Relic integrations exist in your organization on July 31, 2025, TiDB Cloud retains both existing and new integrations in the beta version to avoid affecting current dashboards. We will also proactively reach out to you to discuss a suitable migration plan and timeline.
 
 ## Prerequisites
 
@@ -27,6 +27,8 @@ Based on your integration history, TiDB Cloud provides two versions of Datadog i
 - You cannot use the Datadog integration in [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
 - Datadog integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**. For clusters that were previously configured with metrics integrations, the associated integration services will be discontinued once the cluster is deleted.
+
+- When a cluster with Datadog integration is deleted, its associated integration services are also removed.
 
 ## Steps
 
@@ -72,14 +74,13 @@ Depending on your [Datadog integration version](#datadog-integration-version), t
 <SimpleTab>
 <div label="Datadog integration (Preview)">
 
-A new dashboard will be available in Datadog once the pending PR is merged by Datadog.
-Before the [PR](https://github.com/DataDog/integrations-extras/pull/2751) of the new dashboard is merged, users can use the JSON file we provide to import the new dashboard. The steps are as follows.
-1. The address of the json file is [here](https://github.com/pingcap/diag/blob/integration/integration/dashboards/datadog-dashboard.json).
-2. Copy the contents of the json file and save it to a local json file.
-3. Click the **Dashboards** tab in the left navigation bar of **Datadog**, and click the `New Dashboard` button in the upper right corner of the dashboards page. 
-4. Click the `New Dashboard` button in the lower left of the pop-up window to create a new blank dashboard.
-5. On the newly created dashboard page, click `Configure` in the upper right corner, scroll down to the bottom of the pop-up window, and click **Import dashboard JSON**.
-6. In the pop-up window, select the json file saved in the second step and upload it to complete the dashboard replacement.
+A new TiDB Cloud dashboard will be available in Datadog after the pending [PR](https://github.com/DataDog/integrations-extras/pull/2751) is merged by Datadog. Before that, you can manually import the dashboard to Datadog by taking the following steps:
+
+1. Download the JSON file for the new dashboard [here](https://github.com/pingcap/diag/blob/integration/integration/dashboards/datadog-dashboard.json).
+2. Log in to [Datadog](https://app.datadoghq.com), click **Dashboards** in the left navigation pane, and then click **+ New Dashboard** in the upper-right corner.
+3. In the displayed dialog, click **New Dashboard** to create a new blank dashboard.
+4. On the newly created dashboard page, click **Configure** in the upper-right corner, scroll down to the bottom of the displayed pane, and then click **Import dashboard JSON...**.
+5. In the displayed dialog, upload the downloaded JSON file to complete the dashboard setup.
 
 </div>
 <div label="Datadog integration (Beta)">
@@ -91,26 +92,20 @@ Before the [PR](https://github.com/DataDog/integrations-extras/pull/2751) of the
 </div>
 </SimpleTab>
 
+## View the pre-built dashboard
 
-## Pre-built dashboard
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the **Integrations** page.
+2. Depending on your [Datadog integration version](#datadog-integration-version), do one of the following:
 
-Depending on your [Datadog integration version](#datadog-integration-version), the steps are different.
+    - For Datadog integration (Beta), click the **Dashboard** link in the **Datadog** section.
+    - For Datadog integration (Preview), click the **Dashboard** link in the **Datadog** section, and then click **TiDB Cloud Dynamic Tracker** to view the new dashboard with complete metrics.
 
-<SimpleTab>
-<div label="Datadog integration (Preview)">
-
-Note that the **Dashboard** link in the **Datadog** card on the **Integrations** page redirects to the legacy dashboard, which still lacks new metrics.
-Before the PR is merged, you can access the latest dashboard with complete metrics by following these steps:
-1. Click the **Datadog** > **Dashboard** button in the left navigation bar.
-2. Go to the Dashboard List page.
-3. Select the "TiDB Cloud Dynamic Tracker" dashboard.
-
-Once the PR is merged, we will automatically update the **Dashboard** link in the **Datadog** card on the **Integrations** page to redirect to the new version. Please stay tuned for the update!
-
-</div>
-<div label="Datadog integration (Beta)">
-
-Click the **Dashboard** link in the **Datadog** card on the **Integrations** page. You can see the pre-built dashboard of your TiDB clusters.
+   >**Note:**
+   >
+   > For Datadog integration (Preview), note the following:
+   >
+   > - Before the pending [PR](https://github.com/DataDog/integrations-extras/pull/2751) is merged by Datadog, the **Dashboard** link redirects to the legacy dashboard, which does not include the latest metrics introduced in the preview version.
+   > - Once the pending [PR](https://github.com/DataDog/integrations-extras/pull/2751) is merged , the **Dashboard** link in the **Datadog** section will redirect to the new dashboard.
 
 ## Metrics available to Datadog
 
