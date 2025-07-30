@@ -105,7 +105,7 @@ Before the PR is merged, you can access the latest dashboard with complete metri
 2. Go to the Dashboard List page.
 3. Select the "TiDB Cloud Dynamic Tracker" dashboard.
 
-Once the PR is merged, we will automatically update the **Dashboard** link in the **Datadog** card on the **Integrations** page redirect to the new version. Please stay tuned for the update!
+Once the PR is merged, we will automatically update the **Dashboard** link in the **Datadog** card on the **Integrations** page to redirect to the new version. Please stay tuned for the update!
 
 </div>
 <div label="Datadog integration (Beta)">
