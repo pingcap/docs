@@ -75,7 +75,7 @@ Depending on your [New Relic integration version](#new-relic-integration-version
 A new dashboard will be available in New Relic once the pending PR is merged by New Relic.
 Before the [PR](https://github.com/newrelic/newrelic-quickstarts/pull/2681) of the new dashboard is merged, users can use the json file we provide to import the new dashboard. The steps are as follows.
 
-1. The address of the json file is http://xxx
+1. The address of the json file is [here] (https://github.com/pingcap/diag/blob/integration/integration/dashboards/newrelic-dashboard.json).
 2. Copy the json file content and add the content in line 4: "permissions": "PUBLIC_READ_WRITE",
 {
   "name": "TiDB Cloud Monitoring (new metric development)",
