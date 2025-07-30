@@ -20,7 +20,7 @@ TiDB Cloud has supported New Relic integration (Beta) since April 11, 2023. Star
 
     If you do not have a New Relic account, sign up [here](https://newrelic.com/signup).
 
-- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` or `Project Owner` access in TiDB Cloud. To view the integration page or access configured dashboards via the provided links, users need at least the `Project Member` role to access the target clusters under your project in TiDB Cloud.
+- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` or `Project Owner` access in TiDB Cloud. To view the integration page or access configured dashboards via the provided links, users need at least the `Project Viewer` role to access the target clusters under your project in TiDB Cloud.
 
 ## Limitation
 
