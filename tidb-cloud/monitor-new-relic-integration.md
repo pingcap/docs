@@ -77,12 +77,15 @@ Before the [PR](https://github.com/newrelic/newrelic-quickstarts/pull/2681) of t
 
 1. The address of the json file is [here] (https://github.com/pingcap/diag/blob/integration/integration/dashboards/newrelic-dashboard.json).
 2. Copy the json file content and add the content in line 4: "permissions": "PUBLIC_READ_WRITE",
-{
-  "name": "TiDB Cloud Monitoring (new metric development)",
-  "description": null,
-  "permissions": "PUBLIC_READ_WRITE", 
-  ...
-}
+
+    ```json
+    {
+      "name": "TiDB Cloud Monitoring (new metric development)",
+      "description": null,
+      "permissions": "PUBLIC_READ_WRITE", 
+      ...
+    }
+    ```
 3.  Add your New Relic account ID to all `"accountIds": []` fields in the JSON file.
 - Important: Ensure your account ID is added to every `"accountIds": []`.
 - Example:
