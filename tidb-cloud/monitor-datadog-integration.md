@@ -11,8 +11,8 @@ TiDB Cloud supports Datadog integration (Preview). You can configure TiDB Cloud 
 
 Based on your integration history, TiDB Cloud provides two versions of Datadog integration:
 
-- **Datadog integration (Preview)**: if none of clusters in your organization were integrated with Datadog before July 31, 2025, TiDB Cloud provides the preview version of Datadog integration for you to experience the latest enhancements.
-- **Datadog integration (Beta)**: if any clusters in your organization were integrated with Datadog before July 31, 2025, TiDB Cloud keeps both existing and new integrations at the beta version to avoid affecting current dashboards. Also please rest assured, we will contact you to discuss the appropriate migration plan and schedule.
+- **Datadog integration (Preview)**: if none undeleted metrics integration exists in your organization using push-mode (either Datadog or New Relic) before July 31, 2025, TiDB Cloud provides the preview version of Datadog integration for you to experience the latest enhancements.
+- **Datadog integration (Beta)**: if any undeleted metrics integration exists in your organization using push-mode (either Datadog or New Relic) before July 31, 2025, TiDB Cloud keeps both existing and new integrations at the beta version to avoid affecting current dashboards. Also please rest assured, we will contact you to discuss the appropriate migration plan and schedule.
 
 ## Prerequisites
 
