@@ -104,6 +104,17 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - (dup): release-9.0.0.md > Bug fixes> TiDB - Fix the issue that enabling `tidb_enable_dist_task` causes TiDB upgrade to fail [#54061](https://github.com/pingcap/tidb/issues/54061) @[tangenta](https://github.com/tangenta)
     - (dup): release-7.5.6.md > Bug fixes> TiDB - Fix the issue that improper exception handling for statistics causes in-memory statistics to be mistakenly deleted when background tasks time out [#57901](https://github.com/pingcap/tidb/issues/57901) @[hawkingrei](https://github.com/hawkingrei)
     - (dup): release-9.0.0.md > Bug fixes> TiDB - Fix the issue that the row count is not updated correctly when adding indexes in the TiDB Distributed eXecution Framework (DXF) [#58573](https://github.com/pingcap/tidb/issues/58573) @[D3Hunter](https://github.com/D3Hunter)
+    - Fix the issue that the HashJoin operator causes Goroutine leaks due to memory overuse [#60926](https://github.com/pingcap/tidb/issues/60926) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    - Fix the issue that shared KV requests in IndexMerge and IndexLookUp operators cause data races when pushing down queries [#60175](https://github.com/pingcap/tidb/issues/60175) @[you06](https://github.com/you06)
+    - Fix the issue that SQL statements containing `_charset(xxx), _charset(xxx2), ...` generate different digests [#58447](https://github.com/pingcap/tidb/issues/58447) @[xhebox](https://github.com/xhebox)
+    - Fix the issue that TiDB might panic when handling invalid UTF-8 characters [#47521](https://github.com/pingcap/tidb/issues/47521) @[Defined2014](https://github.com/Defined2014)
+    - Fix the issue that inserting Daylight Saving Time values with invalid timestamps results in `0000-00-00` [#61334](https://github.com/pingcap/tidb/issues/61334) @[mjonss](https://github.com/mjonss)
+    - Fix the issue that `INSERT IGNORE` with invalid Daylight Saving Time values and strict `sql_mode` results in timestamps inconsistent with MySQL [#61439](https://github.com/pingcap/tidb/issues/61439) @[mjonss](https://github.com/mjonss)
+    - Fix the issue that frequent Region merges prevent TTL jobs from starting [#61512](https://github.com/pingcap/tidb/issues/61512) @[YangKeao](https://github.com/YangKeao)
+    - Fix the issue that the column length returned by TiDB in the network protocol might be `0`. If it is `0`, TiDB returns the default length of each field type [#60503](https://github.com/pingcap/tidb/issues/60503) @[xhebox](https://github.com/xhebox)
+    - Fix the issue that the returned type of `blob` in the network protocol is inconsistent with MySQL [#60195](https://github.com/pingcap/tidb/issues/60195) @[dveeden](https://github.com/dveeden)
+    - Fix the issue that the length returned by `CAST()` is incompatible with MySQL [#61350](https://github.com/pingcap/tidb/issues/61350) @[YangKeao](https://github.com/YangKeao)
+    - Fix the issue that the comparison behavior of `latin1_bin` with `utf8mb4_bin` and `utf8_bin` is inconsistent [#60701](https://github.com/pingcap/tidb/issues/60701) @[hawkingrei](https://github.com/hawkingrei)
 
 + TiKV <!--tw@Oreoxmt: 6 notes-->
 
@@ -124,9 +135,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + TiFlash
 
-    - note [#issue](https://github.com/pingcap/tiflash/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-    - note [#issue](https://github.com/pingcap/tiflash/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-    - Fix the issue that TiFlash panic when meets expression index with format `((NULL))` [#9891](https://github.com/pingcap/tiflash/issues/9891) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix the issue that creating an expression index in the form of `((NULL))` causes TiFlash to panic [#9891](https://github.com/pingcap/tiflash/issues/9891) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix the issue that misaligned mutex in the Join operator causes TiFlash to crash in certain environments [#10163](https://github.com/pingcap/tiflash/issues/10163) @[windtalker](https://github.com/windtalker)
+    - Fix the issue that missing resource control low token signals lead to query throttling [#10137](https://github.com/pingcap/tiflash/issues/10137) @[guo-shaoge](https://github.com/guo-shaoge)
 
 + Tools
 
