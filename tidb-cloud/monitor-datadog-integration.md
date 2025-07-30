@@ -74,7 +74,7 @@ Depending on your [Datadog integration version](#datadog-integration-version), t
 
 A new dashboard will be available in Datadog once the pending PR is merged by Datadog.
 Before the [PR](https://github.com/DataDog/integrations-extras/pull/2751) of the new dashboard is merged, users can use the JSON file we provide to import the new dashboard. The steps are as follows.
-1. The address of the json file is here.
+1. The address of the json file is [here](https://github.com/pingcap/diag/blob/integration/integration/dashboards/datadog-dashboard.json).
 2. Copy the contents of the json file and save it to a local json file.
 3. Click the Dashboards tab in the left navigation bar of Datadog, and click the New Dashboard button in the upper right corner of the dashboards page. 
 4. Click the New Dashboard button in the lower left of the pop-up window to create a new blank dashboard.
