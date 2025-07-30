@@ -33,11 +33,11 @@ For a TiDB Cloud Serverless free cluster, you can increase the usage quota by up
 
 To update the spending limit for a TiDB Cloud Serverless cluster, perform the following steps:
 
-1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click the name of your target cluster to go to its overview page.
+1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
 
     > **Tip:**
     >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
 2. In the **Usage This Month** area, click **Upgrade to Scalable Cluster**.
 
