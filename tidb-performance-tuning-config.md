@@ -108,6 +108,16 @@ scheduler-pending-write-threshold = "512MiB"
 [storage.flow-control]
 l0-files-threshold = 50
 soft-pending-compaction-bytes-limit = "512GiB"
+
+[rocksdb.writecf]
+level0-slowdown-writes-trigger = 20
+soft-pending-compaction-bytes-limit = "192GiB"
+[rocksdb.defaultcf]
+level0-slowdown-writes-trigger = 20
+soft-pending-compaction-bytes-limit = "192GiB"
+[rocksdb.lockcf]
+level0-slowdown-writes-trigger = 20
+soft-pending-compaction-bytes-limit = "192GiB"
 ```
 
 | Configuration item | Description | Note |
@@ -119,6 +129,7 @@ soft-pending-compaction-bytes-limit = "512GiB"
 | [`storage.scheduler-pending-write-threshold`](/tikv-configuration-file.md#scheduler-pending-write-threshold) | Set the maximum size of the write queue in TiKV's scheduler. When the total size of pending write tasks exceeds this threshold, TiKV returns a `Server Is Busy` error for new write requests. | The default value is `100MiB`. In scenarios with high write concurrency or temporary write spikes, increasing this threshold (for example, to `512MiB`) can help accommodate the load. However, if the write queue continues to accumulate and exceeds this threshold persistently, it might indicate underlying performance issues that require further investigation. |
 | [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold) | Control when write flow control is triggered based on the number of kvDB L0 files. Increasing the threshold reduces write stalls during high write workloads. | Higher thresholds might lead to more aggressive compactions when many L0 files exist. |
 | [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) | Define thresholds for pending compaction bytes to manage write flow control. The soft limit triggers partial write rejections. | The default soft limit is `192GiB`. In write-intensive scenarios, if compaction processes cannot keep up, pending compaction bytes accumulate, potentially triggering flow control. Adjusting the limit can provide more buffer space, but persistent accumulation indicates underlying issues that require further investigation. |
+| [`rocksdb.(defaultcf\|writecf\|lockcf).level0-slowdown-writes-trigger`](/tikv-configuration-file.md#level0-slowdown-writes-trigger) [`rocksdb.(defaultcf\|writecf\|lockcf).soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#level0-slowdown-writes-trigger) | Need to manually set Rocksdb's level0-slowdown-writes-trigger and soft-pending-compaction-bytes-limit back to their original default values. This way they won't be affected by flow control parameters. Need to additionally set the Rocksdb parameters to maintain the same compaction efficiency as the default parameters. | more details is documented in the issue https://github.com/tikv/tikv/issues/18708. |
 
 Note that the compaction and flow control configuration adjustments outlined in the preceding table are tailored for TiKV deployments on instances with the following specifications:
 
