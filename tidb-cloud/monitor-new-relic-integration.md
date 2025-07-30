@@ -86,9 +86,11 @@ Before the [PR](https://github.com/newrelic/newrelic-quickstarts/pull/2681) of t
 3.  Add your New Relic account ID to all `"accountIds": []` fields in the JSON file.
 - Important: Ensure your account ID is added to every `"accountIds": []`.
 - Example:
-"accountIds": [
-  1234567
-],
+    ```json
+    "accountIds": [
+      1234567
+    ],
+    ```
 4. Click the Dashboards tab in the left navigation bar of New Relic, and click the Import dashboard button in the upper right corner of the Dashboards page that appears. 
 5. Paste the json content prepared in the previous step into the pop-up window, and click the Import dashboard button in the lower right corner to complete the creation of the new dashboard.
 
