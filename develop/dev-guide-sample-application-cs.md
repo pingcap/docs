@@ -107,10 +107,10 @@ The code connects to the database, prints its version, then executes a SQL query
 $ dotnet run
 Connecting to TiDB...
 
-Connected to: 8.0.11-TiDB-v8.5.2
+Connected to: 8.0.11-TiDB-{{{ .tidb-version }}}
 
 Version details:
-Release Version: v8.5.2
+Release Version: {{{ .tidb-version }}}
 Edition: Community
 Git Commit Hash: f43a13324440f92209e2a9f04c0bbe9cf763978d
 Git Branch: HEAD

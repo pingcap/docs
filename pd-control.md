@@ -28,7 +28,7 @@ To obtain `pd-ctl` of the latest version, download the TiDB server installation 
 
 > **Note:**
 >
-> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v8.5.1` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-v8.5.1-linux-amd64.tar.gz`.
+> `{version}` in the link indicates the version number of TiDB. For example, the download link for `{{{ .tidb-version }}}` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-{{{ .tidb-version }}}-linux-amd64.tar.gz`.
 
 ### Compile from source code
 
@@ -557,6 +557,10 @@ Usage:
 ```
 
 ### `member [delete | leader_priority | leader [show | resign | transfer <member_name>]]`
+
+> **Note:**
+>
+> **DO NOT** use the `member delete` command to remove PD nodes in a production environment. To remove a PD node, see [Scale in a TiDB/PD/TiKV cluster](/scale-tidb-using-tiup.md#scale-in-a-tidbpdtikv-cluster) and [Manually Scale TiDB on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster/).
 
 Use this command to view the PD members, remove a specified member, or configure the priority of leader.
 

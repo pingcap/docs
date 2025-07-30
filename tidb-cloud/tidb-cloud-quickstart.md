@@ -8,7 +8,7 @@ category: quick start
 
 *Estimated completion time: 20 minutes*
 
-This tutorial guides you through an easy way to get started with TiDB Cloud. You can also follow the step-by-step tutorials on the [**Getting Started**](https://tidbcloud.com/getting-started) page in the TiDB Cloud console.
+This tutorial guides you through an easy way to get started with TiDB Cloud.
 
 Additionally, you can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start).
 
@@ -30,7 +30,7 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
     - To create a new {{{ .starter }}} cluster on your own, follow these steps:
 
         1. Click **Create Cluster**.
-        2. On the **Create Cluster** page, **Starter** is selected by default. Select the target region for your cluster, update the default cluster name if necessary, select your [cluster plan](/tidb-cloud/select-cluster-tier.md#cluster-plans), and then click **Create**. Your {{{ .starter }}} cluster will be created in approximately 30 seconds.
+        2. On the **Create Cluster** page, **Starter** is selected by default. Select the target region for your cluster, update the default cluster name if necessary, select your [cluster plan](/tidb-cloud/select-cluster-tier.md), and then click **Create**. Your {{{ .starter }}} cluster will be created in approximately 30 seconds.
 
 ## Step 2: Try AI-assisted SQL Editor
 

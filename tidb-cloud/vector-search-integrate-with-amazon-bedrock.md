@@ -7,9 +7,17 @@ summary: Learn how to integrate TiDB Vector Search with Amazon Bedrock to build 
 
 This tutorial demonstrates how to integrate the [vector search](/vector-search/vector-search-overview.md) feature of TiDB with [Amazon Bedrock](https://aws.amazon.com/bedrock/) to build a Retrieval-Augmented Generation (RAG) Q&A bot.
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+</CustomContent>
+
 > **Note**
 >
-> TiDB Vector Search is only available for TiDB Self-Managed (TiDB >= v8.4) and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless). It is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
+> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
 
 > **Tip**
 >
@@ -29,9 +37,9 @@ To complete this tutorial, you need:
     aws configure set region <your-region>
     ```
 
-- A TiDB Cloud Serverless cluster
+- A {{{ .starter }}} cluster
 
-    Follow [creating a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
+    Follow [creating a {{{ .starter }}} cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
 
 - An AWS account with the [required permissions for Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html) and access to the following models:
 
@@ -234,9 +242,9 @@ class Entity(Base):
 Base.metadata.create_all(engine)
 ```
 
-### Step 7. Save the vector data to TiDB Cloud Serverless
+### Step 7. Save the vector data to {{{ .starter }}}
 
-In `demo.py`, add the following code to save the vector data to your TiDB Cloud Serverless cluster:
+In `demo.py`, add the following code to save the vector data to your {{{ .starter }}} cluster:
 
 ```python
 # ---- Saving Vectors to TiDB ----

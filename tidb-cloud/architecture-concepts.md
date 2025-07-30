@@ -11,17 +11,17 @@ TiDB is MySQL-compatible, making it easy to migrate and work with existing appli
 
 TiDB Cloud provides two deployment options: **TiDB Cloud** **Serverless**, for auto-scaling, cost-efficient workloads, and **TiDB Cloud Dedicated**, for enterprise-grade applications with dedicated resources and advanced capabilities. TiDB Cloud makes it easy to scale your database, handle complex management tasks, and stay focused on developing reliable, high-performing applications.
 
-## TiDB Cloud Serverless
+## {{{ .starter }}}
 
-TiDB Cloud Serverless is a fully managed serverless solution that provides HTAP capabilities similar to traditional TiDB, while offering auto-scaling to alleviate users' burdens related to capacity planning and management complexities. It includes a free tier for basic usage, with consumption-based billing for any usage that exceeds the free limits. TiDB Cloud Serverless offers two types of high availability to address varying operational requirements.
+{{{ .starter }}} is a fully managed serverless solution that provides HTAP capabilities similar to traditional TiDB, while offering auto-scaling to alleviate users' burdens related to capacity planning and management complexities. It includes a free tier for basic usage, with consumption-based billing for any usage that exceeds the free limits. {{{ .starter }}} offers two types of high availability to address varying operational requirements.
 
 By default, clusters utilizing the Zonal High Availability option have all components located within the same availability zone, which results in lower network latency.
 
-![TiDB Cloud Serverless zonal high availability](/media/tidb-cloud/serverless-zonal-high-avaliability-aws.png)
+![{{{ .starter }}} zonal high availability](/media/tidb-cloud/serverless-zonal-high-avaliability-aws.png)
 
 For applications that require maximum infrastructure isolation and redundancy, the Regional High Availability option distributes nodes across multiple availability zones.
 
-![TiDB Cloud Serverless regional high availability](/media/tidb-cloud/serverless-regional-high-avaliability-aws.png)
+![{{{ .starter }}} regional high availability](/media/tidb-cloud/serverless-regional-high-avaliability-aws.png)
 
 ## TiDB Cloud Dedicated
 
@@ -33,11 +33,11 @@ Built on isolated cloud resources such as VPCs, VMs, managed Kubernetes services
 
 ## TiDB Cloud console
 
-The [TiDB Cloud console](https://tidbcloud.com/) is the web-based management interface for both TiDB Cloud Serverless and TiDB Cloud Dedicated. It provides tools to manage clusters, import or migrate data, monitor performance metrics, configure backups, set up security controls, and integrate with other cloud services, all from a single, user-friendly platform.
+The [TiDB Cloud console](https://tidbcloud.com/) is the web-based management interface for both {{{ .starter }}} and TiDB Cloud Dedicated. It provides tools to manage clusters, import or migrate data, monitor performance metrics, configure backups, set up security controls, and integrate with other cloud services, all from a single, user-friendly platform.
 
 ## TiDB Cloud CLI (Beta)
 
-The TiDB Cloud CLI, `ticloud`, allows you to manage TiDB Cloud Serverless and TiDB Cloud Dedicated directly from your terminal with simple commands. You can perform tasks such as:
+The TiDB Cloud CLI, `ticloud`, allows you to manage {{{ .starter }}} and TiDB Cloud Dedicated directly from your terminal with simple commands. You can perform tasks such as:
 
 - Creating, deleting, and listing clusters.
 - Importing data into clusters.
@@ -47,7 +47,7 @@ For more information, see [TiDB Cloud CLI Reference](/tidb-cloud/cli-reference.m
 
 ## TiDB Cloud API (Beta)
 
-The TiDB Cloud API is a REST-based interface that provides programmatic access to manage resources across TiDB Cloud Serverless and TiDB Cloud Dedicated. It enables automated and efficient handling of tasks such as managing projects, clusters, backups, restores, data imports, billing, and other resources in [TiDB Cloud Data Service](/tidb-cloud/data-service-overview.md).
+The TiDB Cloud API is a REST-based interface that provides programmatic access to manage resources across {{{ .starter }}} and TiDB Cloud Dedicated. It enables automated and efficient handling of tasks such as managing projects, clusters, backups, restores, data imports, billing, and other resources in [TiDB Cloud Data Service](/tidb-cloud/data-service-overview.md).
 
 For more information, see [TiDB Cloud API Overview](/tidb-cloud/api-overview.md).
 
@@ -56,7 +56,7 @@ For more information, see [TiDB Cloud API Overview](/tidb-cloud/api-overview.md)
 In TiDB Cloud, each cluster consists of TiDB, TiKV, and TiFlash nodes.
 
 - In a TiDB Cloud Dedicated cluster, you can fully manage the number and size of your dedicated TiDB, TiKV, and TiFlash nodes according to your performance requirements. For more information, see [Scalability](/tidb-cloud/scalability-concepts.md).
-- In a TiDB Cloud Serverless cluster, the number and size of TiDB, TiKV, and TiFlash nodes are automatically managed. This ensures seamless scaling, eliminating the need for users to handle node configuration or management tasks.
+- In a {{{ .starter }}} cluster, the number and size of TiDB, TiKV, and TiFlash nodes are automatically managed. This ensures seamless scaling, eliminating the need for users to handle node configuration or management tasks.
 
 ### TiDB node
 
