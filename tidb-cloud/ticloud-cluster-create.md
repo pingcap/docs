@@ -19,7 +19,7 @@ Create a TiDB Cloud cluster in interactive mode:
 ticloud serverless create
 ```
 
-Create a TiDB Cloud cluster cluster in non-interactive mode:
+Create a TiDB Cloud cluster in non-interactive mode:
 
 ```shell
 ticloud serverless create --display-name <display-name> --region <region>
