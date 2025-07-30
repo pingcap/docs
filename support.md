@@ -9,19 +9,18 @@ TiDB の使用中に問題が発生した場合は、次の方法で PingCAP ま
 
 -   PingCAPから[TiDB エンタープライズエディション](https://www.pingcap.com/tidb-enterprise/)のサポートを受ける:
 
-    -   [リクエストを送信](https://tidb.support.pingcap.com)
+    -   [リクエストを送信する](https://tidb.support.pingcap.com)
 
 -   PingCAP からTiDB Cloudのサポートを受けるには:
 
-    -   [TiDB Cloudコンソール](https://tidbcloud.com/)から直接問題を報告してください
-    -   [TiDB Cloudサポートに関するドキュメント](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)
+    -   [TiDB Cloudコンソール](https://tidbcloud.com/)から直接問題を報告
+    -   [TiDB Cloudサポートのドキュメント](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)
 
 -   TiDB コミュニティから支援を求めてください:
 
     -   [Discordチャンネル](https://discord.gg/DQZ2dy3cuc?utm_source=doc)
-    -   Slackチャンネル: [＃みんな](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=docs) (英語)、 [#tidb日本](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=tidb-japan&#x26;ref=docs) (日本語)
+    -   Slackチャンネル: [＃みんな](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=docs) (英語)、 [#tidb-japan](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=tidb-japan&#x26;ref=docs) (日本語)
     -   [スタックオーバーフロー](https://stackoverflow.com/questions/tagged/tidb) (#tidb タグの付いた質問)
-    -   [TiDBフォーラム](https://ask.pingcap.com/)
 
 -   バグを報告する
 
@@ -29,5 +28,5 @@ TiDB の使用中に問題が発生した場合は、次の方法で PingCAP ま
 
 -   TiDBの実装と設計を学ぶ
 
-    -   [TiDB 開発ガイド](https://pingcap.github.io/tidb-dev-guide/)
-    -   [GitHub でのディスカッション](https://github.com/orgs/pingcap/discussions)
+    -   [TiDB開発ガイド](https://pingcap.github.io/tidb-dev-guide/)
+    -   [GitHubでの議論](https://github.com/orgs/pingcap/discussions)
