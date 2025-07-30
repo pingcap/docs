@@ -4,7 +4,7 @@ summary: Learn how to back up and restore your {{{ .starter }}} or {{{ .essentia
 aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
-# Back Up and Restore Data on TiDB Cloud Data
+# Back Up and Restore TiDB Cloud Data
 
 This document describes how to back up and restore your data on {{{ .starter }}} or {{{ .essential }}} clusters.
 
