@@ -37,9 +37,8 @@ To enable TiProxy when creating a new cluster, click the TiProxy toggle and choo
 To enable TiProxy for an existing cluster, perform the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
-2. In the left navigation pane, click **Monitoring > Nodes**.
-3. Click **Modify** in the upper-right corner. The **Modify Cluster** page is displayed.
-4. On the **Modify Cluster** page, click the TiProxy toggle and choose the TiProxy size and number.
+2. Click **...** in the upper-right corner, and click **Modify** in the drop-down menu. The **Modify Cluster** page is displayed.
+3. On the **Modify Cluster** page, click the TiProxy toggle and choose the TiProxy size and number.
 
 ![Enable TiProxy](/media/tidb-cloud/tiproxy-enable-tiproxy.png)
 
@@ -59,8 +58,7 @@ To enable TiProxy for an existing cluster, perform the following steps:
 To disable TiProxy, perform the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
-2. In the left navigation pane, click **Monitoring > Nodes**.
-3. Click **Modify** in the upper-right corner. The **Modify Cluster** page is displayed.
+2. Click **...** in the upper-right corner, and click **Modify** in the drop-down menu. The **Modify Cluster** page is displayed.
 4. On the **Modify Cluster** page, click the TiProxy toggle to disable TiProxy.
 
 ![Disable TiProxy](/media/tidb-cloud/tiproxy-disable-tiproxy.png)
@@ -76,7 +74,7 @@ To disable TiProxy, perform the following steps:
 To view the TiProxy topology, perform the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
-2. In the left navigation pane, click **Monitoring > Nodes**.
+2. In the left navigation pane, click **Monitoring > Nodes**. The **Node Map** page is displayed.
 3. In the **Node Map** page, TiProxy topology is displayed in the **TiDB** panel.
 
 ![TiProxy Topology](/media/tidb-cloud/tiproxy-topology.png)
@@ -86,7 +84,7 @@ To view the TiProxy topology, perform the following steps:
 To view TiProxy metrics, perform the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
-2. In the left navigation pane, click **Monitoring > Metrics**.
+2. In the left navigation pane, click **Monitoring > Metrics**. The **Metrics** page is displayed.
 3. On the **Metrics** page, click **Server** tab and scroll down to TiProxy-related metrics. To view TiProxy metrics in one TiDB node group, click **TiDB Node Group View** tab, select your TiDB node group, and scroll down to TiProxy-related metrics.
 
 The metrics include:
@@ -111,9 +109,8 @@ To view TiProxy bills, perform the following steps:
 To scale-in or scale-out TiProxy, perform the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
-2. In the left navigation pane, click **Monitoring > Nodes**.
-3. Click **Modify** in the upper-right corner. The **Modify Cluster** page is displayed.
-4. On the **Modify Cluster** page, modify the TiProxy number.
+2. Click **...** in the upper-right corner, and click **Modify** in the drop-down menu. The **Modify Cluster** page is displayed.
+3. On the **Modify Cluster** page, modify the TiProxy number.
 
 ![Modify TiProxy](/media/tidb-cloud/tiproxy-enable-tiproxy.png)
 
