@@ -26,7 +26,7 @@ TiDB Cloud has supported Datadog integration (Beta) since March 04, 2022. Starti
 
 - You cannot use the Datadog integration in [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
-- Datadog integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**. For clusters that were previously configured with metrics integrations, the associated integration services will be discontinued once the cluster is deleted.
+- Datadog integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
 
 - When a cluster with Datadog integration is deleted, its associated integration services are also removed.
 
