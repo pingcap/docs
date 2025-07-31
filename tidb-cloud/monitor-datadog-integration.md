@@ -98,7 +98,7 @@ A new TiDB Cloud dashboard will be available in Datadog after the pending [PR](h
 2. Depending on your [Datadog integration version](#datadog-integration-version), do one of the following:
 
     - For Datadog integration (Beta), click the **Dashboard** link in the **Datadog** section.
-    - For Datadog integration (Preview), click the **Dashboard** link in the **Datadog** section, and then click **TiDB Cloud Dynamic Tracker** to view the new dashboard with complete metrics.
+    - For Datadog integration (Preview), click the **Dashboard** link in the **Datadog** section, and then click the **TiDB Cloud Dynamic Tracker** from **Dashboard** list page of **Datadog** to view the new dashboard with complete metrics.
 
    >**Note:**
    >
