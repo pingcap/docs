@@ -16,7 +16,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     Key enhancements:
 
-    - Improve stability and availability by rebuilding the integration backend with optimized isolation architecture to minimize metric gaps.
+    -  Rebuild the integration backend with the optimized isolation architecture to minimize metric gaps.
     - Add more monitoring metrics based on user needs.
     - Refine metric rules for better consistency.
 
