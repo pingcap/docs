@@ -81,7 +81,7 @@ The following sections illustrate the metrics on the **Metrics** page for TiDB C
 | TiProxy CPU Usage | node | The CPU usage statistics of each TiProxy node. The upper limit is 100%. |
 | TiProxy Connections | node | The connection number on each TiProxy node. |
 | TiProxy Throughput | node | The transferred bytes per second on each TiProxy node. |
-| TiProxy Sessions Migration Reasons | reason | The number of session migrations that happened every minute and the reason for them. |
+| TiProxy Sessions Migration Reasons | reason | The number of session migrations that happen every minute and the reason for them. |
 
 ## Metrics for TiDB Cloud Serverless clusters
 
