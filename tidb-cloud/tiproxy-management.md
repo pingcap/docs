@@ -20,7 +20,7 @@ The maximum QPS and network bandwidth of each TiProxy size are listed below.
 | small | 30K | 93 MiB/s |
 | large | 120K | 312 MiB/s |
 
-The optional TiProxy instance numbers are 2, 3, 6, 9, 12, 15, 18, 21, and 24. The default two small-sized TiProxy instances can provide 60K QPS and 186 MiB/s network bandwidth. It is recommended that you reserve 20% of the QPS to prevent high latency.
+The optional TiProxy sizes are `small` and `large`. The optional TiProxy instance numbers are 2, 3, 6, 9, 12, 15, 18, 21, and 24. The default two small-sized TiProxy instances can provide 60K QPS and 186 MiB/s network bandwidth. It is recommended that you reserve 20% of the QPS to prevent high latency.
 
 For example, if your cluster's maximum QPS is 100K and the maximum network bandwidth is 100 MiB/s, the size and number of TiProxy instances mainly depend on the QPS. In this case, you can select six small-sized TiProxy instances.
 
@@ -51,7 +51,8 @@ To enable TiProxy for an existing cluster, perform the following steps:
 
 - The TiDB instance number in a TiDB node group must be at least two
 - The TiDB instance size must be at least 4 vCPU
-- The default TiProxy instance number quota of an organization is 10
+- The default TiProxy instance number of an organization is 10
+- The TiDB cluster version should be v6.5.0 or higher
 
 ## Disable TiProxy
 
