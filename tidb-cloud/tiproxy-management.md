@@ -47,11 +47,11 @@ To enable TiProxy for an existing cluster, perform the following steps:
 >
 > Enabling TiProxy will cause a rolling restart of TiDB, which causes connections to disconnect. In addition, creating new connections might hang for up to 30 seconds. Make sure that you enable TiProxy in the maintenance window.
 
-### Limitations
+### Limitations and quotas
 
 - The TiDB instance number in the TiDB node group must be at least two
 - The TiDB instance size must be at least 4 vCPU
-- The TiProxy instance quota of a tenant is 10
+- The TiProxy instance number quota of an organization is 10
 
 ## Disable TiProxy
 
