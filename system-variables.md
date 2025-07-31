@@ -1012,6 +1012,16 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Unit: Bytes
 - This variable is used to control the threshold at which the TiDB server prefers to send read requests to a replica in the same availability zone as the TiDB server when [`tidb_replica_read`](#tidb_replica_read-new-in-v40) is set to `closest-adaptive`. If the estimated result is higher than or equal to this threshold, TiDB prefers to send read requests to a replica in the same availability zone. Otherwise, TiDB sends read requests to the leader replica.
 
+### tidb_advancer_check_point_lag_limit <span class="version-mark">New in v9.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Duration
+- Default value: `48h0m0s`
+- Range: `[1s, 8760h0m0s]`
+- This variable is used to control the lag time limit of the log backup task checkpoint. If the checkpoint lag of the log backup task exceeds this limit, the task will be paused by TiDB Advancer.
+
 ### tidb_allow_tiflash_cop <span class="version-mark">New in v7.3.0</span>
 
 - Scope: SESSION | GLOBAL
