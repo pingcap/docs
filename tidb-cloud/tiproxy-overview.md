@@ -23,7 +23,7 @@ For more scenarios, see [TiProxy User Scenarios](/tiproxy/tiproxy-overview.md#us
 
 TiProxy cannot preserve client connections in the following scenarios:
 
-- Upgrading Google Cloud GKE, AWS EKS, or Alibaba Cloud ACK.
+- Upgrading AWS EKS, Azure AKS, Google Cloud GKE, or Alibaba Cloud ACK.
 - Disabling, scaling in, upgrading, or restarting TiProxy.
 - A single statement or transaction that runs for more than 20 seconds. If your application needs a longer timeout, please contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 

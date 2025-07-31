@@ -7,7 +7,7 @@ summary: Learn about how to manage TiProxy.
 
 ## Enable TiProxy
 
-You can enable TiProxy for either a new cluster or an existing cluster.
+You can enable TiProxy for either a new cluster or an existing cluster in any TiDB node group.
 
 ### Decide TiProxy instance size and number
 
@@ -20,7 +20,7 @@ The maximum QPS and network bandwidth of each TiProxy size are listed below.
 | small | 30K | 93 MiB/s |
 | large | 120K | 312 MiB/s |
 
-The optional TiProxy instance numbers are 2, 3, 6, 9, 12, 15, 18, 21, and 24. The default two small-sized TiProxy instances can provide 60K QPS and 92 MiB/s network bandwidth. It is recommended that you reserve 20% of the QPS to prevent high latency.
+The optional TiProxy instance numbers are 2, 3, 6, 9, 12, 15, 18, 21, and 24. The default two small-sized TiProxy instances can provide 60K QPS and 186 MiB/s network bandwidth. It is recommended that you reserve 20% of the QPS to prevent high latency.
 
 For example, if your cluster's maximum QPS is 100K and the maximum network bandwidth is 100 MiB/s, the size and number of TiProxy instances mainly depend on the QPS. In this case, you can select six small-sized TiProxy instances.
 
@@ -45,13 +45,13 @@ To enable TiProxy for an existing cluster, perform the following steps:
 
 > **Note**
 >
-> Enabling TiProxy will cause a rolling restart of TiDB, which causes connections to disconnect. In addition, creating new connections might hang for up to 30 seconds. Make sure that you enable TiProxy in the maintenance window.
+> Enabling TiProxy will cause a rolling restart of TiDB in this TiDB node group, which causes connections to disconnect. In addition, creating new connections might hang for up to 30 seconds. Make sure that you enable TiProxy in the maintenance window.
 
 ### Limitations and quotas
 
-- The TiDB instance number in the TiDB node group must be at least two
+- The TiDB instance number in a TiDB node group must be at least two
 - The TiDB instance size must be at least 4 vCPU
-- The TiProxy instance number quota of an organization is 10
+- The default TiProxy instance number quota of an organization is 10
 
 ## Disable TiProxy
 
@@ -86,7 +86,7 @@ To view TiProxy metrics, perform the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
 2. In the left navigation pane, click **Monitoring > Metrics**.
-3. On the **Metrics** page, click **Server** tab and scroll down to TiProxy-related metrics.
+3. On the **Metrics** page, click **Server** tab and scroll down to TiProxy-related metrics. To view TiProxy metrics in one TiDB node group, click **TiDB Node Group View** tab, select your TiDB node group, and scroll down to TiProxy-related metrics.
 
 The metrics include:
 
@@ -107,7 +107,7 @@ To view TiProxy bills, perform the following steps:
 
 ## Modify TiProxy
 
-To scale TiProxy, perform the following steps:
+To scale-in or scale-out TiProxy, perform the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
 2. In the left navigation pane, click **Monitoring > Nodes**.
@@ -118,7 +118,7 @@ To scale TiProxy, perform the following steps:
 
 > **Note**
 >
-> - Modifying the TiProxy size is not supported. It is recommended that you modify the TiProxy number. If you must modify the TiProxy size, you need to disable TiProxy and then enable it again to choose a different size.
+> - Modifying the TiProxy size is not supported. It is recommended that you modify the TiProxy number. If you must modify the TiProxy size, you need to disable TiProxy in all the TiDB node groups and then enable it again to choose a different size.
 > - Scaling in TiProxy will cause connections to disconnect. Make sure you scale in TiProxy in the maintenance window.
 
 ## Manage TiProxy in TiDB node groups
