@@ -50,7 +50,7 @@ To enable TiProxy for an existing cluster, perform the following steps:
 
 - The TiDB instance number in a TiDB node group must be at least two
 - The TiDB instance size must be at least 4 vCPU
-- The default TiProxy instance number of an organization is 10
+- The default maximum TiProxy instance number of an organization is 10, see [Limitations and Quotas](/tidb-cloud/limitations-and-quotas.md)
 - The TiDB cluster version should be v6.5.0 or higher
 
 ## Disable TiProxy
