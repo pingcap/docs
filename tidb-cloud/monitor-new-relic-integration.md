@@ -83,7 +83,7 @@ A new TiDB Cloud dashboard will be available in New Relic after the pending [PR]
 
         ```json
         {
-          "name": "TiDB Cloud Monitoring (new metric development)",
+          "name": "TiDB Cloud Dynamic Tracker",
           "description": null,
           "permissions": "PUBLIC_READ_WRITE",
           ...
