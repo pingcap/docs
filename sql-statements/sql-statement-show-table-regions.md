@@ -9,7 +9,7 @@ summary: TiDB で SHOW TABLE REGIONS を使用する方法を学習します。
 
 > **注記：**
 >
-> この機能は[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
+> この機能は[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
 
 ## 構文 {#syntax}
 

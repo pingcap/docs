@@ -13,7 +13,7 @@ summary: TiDB データベースに対する SHOW [BACKUPS|RESTORES] の使用�
 
 > **注記：**
 >
-> この機能は[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
+> この機能は[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
 
 `br`コマンドライン ツールで開始されたバックアップと復元は表示されません。
 

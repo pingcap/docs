@@ -161,7 +161,7 @@ OptionItem ::=
 
 ## <code>IMPORT INTO ... FROM FILE</code>使用法 {#code-import-into-from-file-code-usage}
 
-TiDB Self-Managed の場合、 `IMPORT INTO ... FROM FILE` Amazon S3、GCS、および TiDB ローカルstorageに保存されているファイルからのデータのインポートをサポートします。3 [TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)場合、 `IMPORT INTO ... FROM FILE` Amazon S3 および GCS に保存されているファイルからのデータのインポートをサポートします。7 [{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合、 `IMPORT INTO ... FROM FILE` Amazon S3 および Alibaba Cloud OSS に保存されているファイルからのデータのインポートをサポートします。
+TiDB Self-Managed の場合、 `IMPORT INTO ... FROM FILE` Amazon S3、GCS、および TiDB ローカルstorageに保存されているファイルからのデータのインポートをサポートします。3 [TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)場合、 `IMPORT INTO ... FROM FILE` Amazon S3 および GCS に保存されているファイルからのデータのインポートをサポートします。7 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合、 `IMPORT INTO ... FROM FILE` Amazon S3 および Alibaba Cloud OSS に保存されているファイルからのデータのインポートをサポートします。
 
 -   Amazon S3 または GCS に保存されているデータ ファイルの場合、 `IMPORT INTO ... FROM FILE` [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)での実行をサポートします。
 
@@ -189,7 +189,7 @@ TiDB Self-Managed の場合、 `IMPORT INTO ... FROM FILE` Amazon S3、GCS、お
 
 > **注記：**
 >
-> グローバルソートは[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> グローバルソートは[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 `IMPORT INTO ... FROM FILE`ソースデータファイルのデータインポートジョブを複数のサブジョブに分割し、各サブジョブはインポート前に独立してデータのエンコードとソートを行います。これらのサブジョブのエンコードされたKV範囲に大きな重複がある場合（TiDBがデータをKVにエンコードする方法については、 [TiDBコンピューティング](/tidb-computing.md)参照）、TiKVはインポート中に圧縮を維持する必要があり、インポートのパフォーマンスと安定性が低下します。
 

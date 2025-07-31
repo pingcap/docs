@@ -58,7 +58,7 @@ ADMIN RELOAD opt_rule_blacklist;
 
 > **注記：**
 >
-> この機能は[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
+> この機能は[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
 
 ```sql
 ADMIN PLUGINS ENABLE plugin_name [, plugin_name] ...;
@@ -132,7 +132,7 @@ ADMIN SHOW t NEXT_ROW_ID;
 
 > **注記：**
 >
-> この機能は[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
+> この機能は[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
 
 ```sql
 ADMIN SHOW SLOW RECENT N;
@@ -152,35 +152,35 @@ ADMIN SHOW SLOW TOP [INTERNAL | ALL] N;
 
 ```ebnf+diagram
 AdminStmt ::=
-    'ADMIN' ( 
-        'SHOW' ( 
-            'DDL' ( 
-                'JOBS' Int64Num? WhereClauseOptional 
+    'ADMIN' (
+        'SHOW' (
+            'DDL' (
+                'JOBS' Int64Num? WhereClauseOptional
                 | 'JOB' 'QUERIES' (NumList | AdminStmtLimitOpt)
-            )? 
-            | TableName 'NEXT_ROW_ID' 
-            | 'SLOW' AdminShowSlow 
+            )?
+            | TableName 'NEXT_ROW_ID'
+            | 'SLOW' AdminShowSlow
             | 'BDR' 'ROLE'
-        ) 
-        | 'CHECK' ( 
-            'TABLE' TableNameList 
-            | 'INDEX' TableName Identifier ( HandleRange ( ',' HandleRange )* )? 
-        ) 
-        | 'RECOVER' 'INDEX' TableName Identifier 
-        | 'CLEANUP' ( 
-            'INDEX' TableName Identifier 
-            | 'TABLE' 'LOCK' TableNameList ) 
-        | 'CHECKSUM' 'TABLE' TableNameList | 'CANCEL' 'DDL' 'JOBS' NumList 
+        )
+        | 'CHECK' (
+            'TABLE' TableNameList
+            | 'INDEX' TableName Identifier ( HandleRange ( ',' HandleRange )* )?
+        )
+        | 'RECOVER' 'INDEX' TableName Identifier
+        | 'CLEANUP' (
+            'INDEX' TableName Identifier
+            | 'TABLE' 'LOCK' TableNameList )
+        | 'CHECKSUM' 'TABLE' TableNameList | 'CANCEL' 'DDL' 'JOBS' NumList
         | ( 'CANCEL' | 'PAUSE' | 'RESUME' ) 'DDL' 'JOBS' NumList
         | 'RELOAD' (
-            'EXPR_PUSHDOWN_BLACKLIST' 
-            | 'OPT_RULE_BLACKLIST' 
+            'EXPR_PUSHDOWN_BLACKLIST'
+            | 'OPT_RULE_BLACKLIST'
             | 'BINDINGS'
             | 'STATS_EXTENDED'
             | 'STATISTICS'
-        ) 
-        | 'PLUGINS' ( 'ENABLE' | 'DISABLE' ) PluginNameList 
-        | 'REPAIR' 'TABLE' TableName CreateTableStmt 
+        )
+        | 'PLUGINS' ( 'ENABLE' | 'DISABLE' ) PluginNameList
+        | 'REPAIR' 'TABLE' TableName CreateTableStmt
         | ( 'FLUSH' | 'CAPTURE' | 'EVOLVE' ) 'BINDINGS'
         | 'FLUSH' ('SESSION' | 'INSTANCE') 'PLAN_CACHE'
         | 'SET' 'BDR' 'ROLE' ( 'PRIMARY' | 'SECONDARY' )

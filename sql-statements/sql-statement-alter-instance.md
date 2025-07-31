@@ -9,7 +9,7 @@ summary: TiDB での ALTER INSTANCE` の使用法の概要を学習します。
 
 > **注記：**
 >
-> [{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) TLS 証明書を自動的に更新できるため、この機能は[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターには適用されません。
+> [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) TLS 証明書を自動的に更新できるため、この機能は[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターには適用されません。
 
 ## TLSをリロード {#reload-tls}
 

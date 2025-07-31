@@ -197,7 +197,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 -   [DBeaver](https://dbeaver.io/) v23.0.1 はデフォルトで TiDB をサポートします[＃17396](https://github.com/dbeaver/dbeaver/issues/17396) @ [アイスマップ](https://github.com/Icemap)
 
     -   独立した TiDB モジュール、アイコン、ロゴを提供します。
-    -   デフォルト構成では[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)サポートされているため、{{{ .starter }}} への接続が容易になります。
+    -   デフォルト構成では[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)サポートされているため、{{{ .starter }}} への接続が容易になります。
     -   外部キー タブを表示または非表示にするために TiDB のバージョンを識別することをサポートします。
     -   `EXPLAIN`結果で SQL 実行プランの視覚化をサポートします。
     -   `PESSIMISTIC` `REORGANIZE`の TiDB `AUTO_RANDOM` `PLACEMENT` `CLUSTERED`表示`OPTIMISTIC` `CACHE` `EXCHANGE` `NONCLUSTERED` `POLICY`

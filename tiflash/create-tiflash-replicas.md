@@ -21,7 +21,7 @@ ALTER TABLE table_name SET TIFLASH REPLICA count;
 
 > **注記：**
 >
-> [{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターの場合、 TiFlashレプリカの`count` `2`しか設定できません。7 `1`設定した場合、実行時に自動的に`2`に調整されます。2 より大きい数に設定した場合、レプリカ数に関するエラーが発生します。
+> [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターの場合、 TiFlashレプリカの`count` `2`しか設定できません。7 `1`設定した場合、実行時に自動的に`2`に調整されます。2 より大きい数に設定した場合、レプリカ数に関するエラーが発生します。
 
 同じテーブルに対して複数のDDL文を実行した場合、最後に実行された文のみが確実に有効になります。次の例では、テーブル`tpch50`に対して2つのDDL文が実行されていますが、2番目の文（レプリカを削除する文）のみが確実に有効になります。
 

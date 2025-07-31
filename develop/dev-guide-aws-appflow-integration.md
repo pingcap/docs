@@ -248,7 +248,7 @@ test> SELECT * FROM sf_account;
 
 -   何か問題が発生した場合は、AWS マネジメントコンソールの[クラウドウォッチ](https://console.aws.amazon.com/cloudwatch/home)ページに移動してログを取得できます。
 -   このドキュメントの手順は[Amazon AppFlow カスタムコネクタ SDK を使用してカスタムコネクタを構築する](https://aws.amazon.com/blogs/compute/building-custom-connectors-using-the-amazon-appflow-custom-connector-sdk/)に基づいています。
--   [{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)は本番環境では**ありません**。
+-   [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)は本番環境では**ありません**。
 -   長くなりすぎないように、このドキュメントの例では`Insert`戦略のみを示していますが、 `Update`と`Upsert`戦略もテストされており、使用できます。
 
 ## ヘルプが必要ですか? {#need-help}

@@ -19,7 +19,7 @@ summary: SLOW_QUERY` INFORMATION_SCHEMA テーブルについて学習します�
 
 > **注記：**
 >
-> このテーブルは[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> このテーブルは[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 <CustomContent platform="tidb">
 
@@ -127,7 +127,7 @@ DESC SLOW_QUERY;
 
 > **注記：**
 >
-> このテーブルは[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> このテーブルは[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 <CustomContent platform="tidb">
 

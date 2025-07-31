@@ -9,7 +9,7 @@ summary: PLACEMENT_POLICIES` information_schema テーブルについて学習�
 
 > **注記：**
 >
-> このテーブルは[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> このテーブルは[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 ```sql
 USE information_schema;
@@ -41,7 +41,7 @@ DESC placement_policies;
 `PLACEMENT_POLICIES`表には、すべての配置ポリシーのみが表示されます。配置ルールの標準バージョン（すべての配置ポリシーと配置ポリシーが適用されたオブジェクトを含む）を表示するには、代わりにステートメント`SHOW PLACEMENT`使用します。
 
 ```sql
-CREATE TABLE t1 (a INT); 
+CREATE TABLE t1 (a INT);
 CREATE PLACEMENT POLICY p1 primary_region="us-east-1" regions="us-east-1";
 CREATE TABLE t3 (a INT) PLACEMENT POLICY=p1;
 SHOW PLACEMENT; -- Shows all information, including table t3.
