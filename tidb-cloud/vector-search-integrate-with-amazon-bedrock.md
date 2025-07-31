@@ -37,9 +37,9 @@ To complete this tutorial, you need:
     aws configure set region <your-region>
     ```
 
-- A TiDB Cloud Serverless cluster
+- A {{{ .starter }}} cluster
 
-    Follow [creating a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
+    Follow [creating a {{{ .starter }}} cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
 
 - An AWS account with the [required permissions for Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html) and access to the following models:
 
@@ -242,9 +242,9 @@ class Entity(Base):
 Base.metadata.create_all(engine)
 ```
 
-### Step 7. Save the vector data to TiDB Cloud Serverless
+### Step 7. Save the vector data to {{{ .starter }}}
 
-In `demo.py`, add the following code to save the vector data to your TiDB Cloud Serverless cluster:
+In `demo.py`, add the following code to save the vector data to your {{{ .starter }}} cluster:
 
 ```python
 # ---- Saving Vectors to TiDB ----
