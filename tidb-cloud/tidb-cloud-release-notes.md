@@ -20,13 +20,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - Add more monitoring metrics based on user needs.
     - Refine metric rules for better consistency.
 
-    These enhancements deliver more accurate monitoring and strengthen the reliability of Datadog and New Relic integrations.
+  These enhancements deliver more accurate monitoring and strengthen the reliability of Datadog and New Relic integrations.
 
-    Rollout plan:
+  Rollout plan:
 
-    This preview version is now available to organizations without existing Datadog or New Relic integrations. For organizations with existing Datadog or New Relic integrations, we will proactively reach out to you to coordinate a suitable migration plan and timeline next month.
+  This preview version is now available to organizations without existing Datadog or New Relic integrations. For organizations with existing Datadog or New Relic integrations, we will proactively reach out to you to coordinate a suitable migration plan and timeline next month.
 
-    For more information, see [Integrate TiDB Cloud with Datadog (Preview)](/tidb-cloud/monitor-datadog-integration.md) and [Integrate TiDB Cloud with New Relic (Preview)](/tidb-cloud/monitor-new-relic-integration.md).
+  For more information, see [Integrate TiDB Cloud with Datadog (Preview)](/tidb-cloud/monitor-datadog-integration.md) and [Integrate TiDB Cloud with New Relic (Preview)](/tidb-cloud/monitor-new-relic-integration.md).
 
 ## July 22, 2025
 
