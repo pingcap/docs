@@ -1,19 +1,19 @@
 ---
-title: {{{ .starter }}} Branching (Beta) Overview
-summary: Learn the concept of {{{ .starter }}} branches.
+title: TiDB Cloud Branching (Beta) Overview
+summary: Learn the concept of TiDB Cloud branches.
 ---
 
-# {{{ .starter }}} Branching (Beta) Overview
+# TiDB Cloud Branching (Beta) Overview
 
-TiDB Cloud lets you create branches for {{{ .starter }}} clusters. A branch for a cluster is a separate instance that contains a diverged copy of data from the original cluster. It provides an isolated environment, allowing you to experiment freely without worrying about affecting the original cluster.
+TiDB Cloud lets you create branches for {{{ .starter }}} and {{{ .essential }}} clusters. A branch for a cluster is a separate instance that contains a diverged copy of data from the original cluster. It provides an isolated environment, allowing you to experiment freely without worrying about affecting the original cluster.
 
-With {{{ .starter }}} branches, developers can work in parallel, iterate rapidly on new features, troubleshoot issues without affecting the production database, and easily revert changes if needed. This feature streamlines the development and deployment process while ensuring a high level of stability and reliability for the production database.
+With branches, developers can work in parallel, iterate rapidly on new features, troubleshoot issues without affecting the production database, and easily revert changes if needed. This feature streamlines the development and deployment process while ensuring a high level of stability and reliability for the production database.
 
 ## Implementations
 
 When a branch for a cluster is created, the data in the branch diverges from the original cluster or its parent branch at a specific point in time. This means that subsequent changes made in either the parent or the branch will not be synchronized with each other.
 
-To ensure fast and seamless branch creation, {{{ .starter }}} uses a copy-on-write technique for sharing data between the original cluster and its branches. This process usually completes within a few minutes and is imperceptible to users, ensuring that it does not affect the performance of your original cluster.
+To ensure fast and seamless branch creation, TiDB Cloud uses a copy-on-write technique for sharing data between the original cluster and its branches. This process usually completes within a few minutes and is imperceptible to users, ensuring that it does not affect the performance of your original cluster.
 
 ## Scenarios
 
@@ -33,9 +33,9 @@ You can create branches easily and quickly to get isolated data environments. Br
 
 ## Limitations and quotas
 
-Currently, {{{ .starter }}} branches are in beta and free of charge.
+Currently, TiDB Cloud branches are in beta and free of charge.
 
-- For each organization in TiDB Cloud, you can create a maximum of five {{{ .starter }}} branches by default across all the clusters. The branches of a cluster will be created in the same region as the cluster, and you cannot create branches for a throttled cluster or a cluster larger than 100 GiB.
+- For each organization in TiDB Cloud, you can create a maximum of five branches by default across all the clusters. The branches of a cluster will be created in the same region as the cluster, and you cannot create branches for a throttled cluster or a cluster larger than 100 GiB.
 
 - For each branch of a free cluster, 10 GiB storage is allowed. For each branch of a cluster with spending limit > 0, 100 GiB storage is allowed. Once the storage is reached, the read and write operations on this branch will be throttled until you reduce the storage.
 

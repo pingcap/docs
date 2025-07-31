@@ -1,16 +1,16 @@
 ---
-title: {{{ .starter }}} Limitations and Quotas
+title: Limitations and Quotas of {{{ .starter }}} and Essential
 summary: Learn about the limitations of {{{ .starter }}}.
 aliases: ['/tidbcloud/serverless-tier-limitations']
 ---
 
-# {{{ .starter }}} Limitations and Quotas
+# Limitations and Quotas of {{{ .starter }}} and Essential
 
 <!-- markdownlint-disable MD026 -->
 
-{{{ .starter }}} works with almost all workloads that TiDB supports, but there are some feature differences between TiDB Self-Managed or TiDB Cloud Dedicated clusters and {{{ .starter }}} clusters. This document describes the limitations of {{{ .starter }}}.
+{{{ .starter }}} and Essential work with almost all workloads that TiDB supports, but there are some feature differences compared with TiDB Self-Managed or TiDB Cloud Dedicated clusters. This document describes the limitations of {{{ .starter }}} and {{{ .essential }}}.
 
-We are constantly filling in the feature gaps between {{{ .starter }}} and TiDB Cloud Dedicated. If you require these features or capabilities in the gap, use [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) or [contact us](https://www.pingcap.com/contact-us/?from=en) for a feature request.
+We are constantly filling in the feature gaps between {{{ .starter }}}/Essential and TiDB Cloud Dedicated. If you require these features or capabilities in the gap, use [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) or [contact us](https://www.pingcap.com/contact-us/?from=en) for a feature request.
 
 ## Limitations
 
@@ -20,7 +20,7 @@ We are constantly filling in the feature gaps between {{{ .starter }}} and TiDB 
 
 ### Connection
 
-- Only [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to {{{ .starter }}} clusters. 
+- Only [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to {{{ .starter }}} or {{{ .essential }}} clusters. 
 - No [IP Access list](/tidb-cloud/configure-ip-access-list.md) support.
 
 ### Encryption
@@ -41,16 +41,16 @@ We are constantly filling in the feature gaps between {{{ .starter }}} and TiDB 
 
 ### Self-service upgrades
 
-- {{{ .starter }}} is a fully managed deployment of TiDB. Major and minor version upgrades of {{{ .starter }}} are handled by TiDB Cloud and therefore cannot be initiated by users.
+- {{{ .starter }}} and {{{ .essential }}} are fully managed deployments of TiDB. Major and minor version upgrades of {{{ .starter }}} and {{{ .essential }}} are handled by TiDB Cloud and therefore cannot be initiated by users.
 
 ### Stream data
 
-- [Changefeed](/tidb-cloud/changefeed-overview.md) is not supported for {{{ .starter }}} currently.
-- [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) is not supported for {{{ .starter }}} currently.
+- [Changefeed](/tidb-cloud/changefeed-overview.md) is not supported for {{{ .starter }}} and {{{ .essential }}} currently.
+- [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) is not supported for {{{ .starter }}} and {{{ .essential }}} currently.
 
 ### Time to live (TTL)
 
-- In {{{ .starter }}}, the [`TTL_JOB_INTERVAL`](/time-to-live.md#ttl-job) attribute for a table is fixed at `15m` and cannot be modified. This means that {{{ .starter }}} schedules a background job every 15 minutes to clean up expired data.
+- In {{{ .starter }}} and {{{ .essential }}}, the [`TTL_JOB_INTERVAL`](/time-to-live.md#ttl-job) attribute for a table is fixed at `15m` and cannot be modified. This means that {{{ .starter }}} and {{{ .essential }}} schedule a background job every 15 minutes to clean up expired data.
 
 ### Others
 

@@ -1,9 +1,9 @@
 ---
-title: Create a TiDB Cloud Cluster
+title: Create a {{{ .starter }}} or Essential Cluster
 summary: Learn how to create a {{{ .starter }}} or {{{ .essential }}} cluster.
 ---
 
-# Create a TiDB Cloud Cluster
+# Create a {{{ .starter }}} or Essential Cluster
 
 This document describes how to create a {{{ .starter }}} or {{{ .essential }}} cluster in the [TiDB Cloud console](https://tidbcloud.com/).
 
