@@ -24,8 +24,6 @@ The optional TiProxy sizes are `small` and `large`. The optional TiProxy instanc
 
 For example, if your cluster's maximum QPS is 100K and the maximum network bandwidth is 100 MiB/s, the size and number of TiProxy instances mainly depend on the QPS. In this case, you can select six small-sized TiProxy instances.
 
-For more details on TiProxy performance, see [TiProxy Performance Test](/tiproxy/tiproxy-performance-test.md).
-
 ### Enable TiProxy for a new cluster
 
 To enable TiProxy when creating a new cluster, click the TiProxy toggle and choose the TiProxy size and number.
