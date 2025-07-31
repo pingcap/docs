@@ -477,7 +477,7 @@ mysql> SHOW ANALYZE STATUS [ShowLikeOrWhere];
 
 > **注記：**
 >
-> [{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは読み込み統計は利用できません。
+> [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは読み込み統計は利用できません。
 
 デフォルトでは、列統計のサイズに応じて、TiDB は次のように異なる方法で統計をロードします。
 

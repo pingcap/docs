@@ -15,7 +15,7 @@ SQLの配置ルールは、SQL文を使用してTiKVクラスター内のデー�
 
 > **注記：**
 >
-> この機能は[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
+> この機能は[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
 
 ## 概要 {#overview}
 

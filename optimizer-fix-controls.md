@@ -94,7 +94,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 > **注記：**
 >
-> これは[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)のみ利用可能です。
+> これは[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)のみ利用可能です。
 
 -   デフォルト値: `ON`
 -   可能`OFF`値: `ON`

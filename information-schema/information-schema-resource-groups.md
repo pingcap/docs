@@ -9,7 +9,7 @@ summary: RESOURCE_GROUPS` information_schema テーブルについて学習し�
 
 > **注記：**
 >
-> このテーブルは[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> このテーブルは[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 ```sql
 USE information_schema;

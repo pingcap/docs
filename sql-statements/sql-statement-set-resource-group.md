@@ -9,7 +9,7 @@ summary: TiDB データベースでの SET RESOURCE GROUP の使用法の概要�
 
 > **注記：**
 >
-> この機能は[{{{ .スターター }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
+> この機能は[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
 
 ## 概要 {#synopsis}
 
