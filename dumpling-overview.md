@@ -97,7 +97,7 @@ In the command above:
 + The `-t` option specifies the number of threads for the export. Increasing the number of threads improves the concurrency of Dumpling and the export speed, and also increases the database's memory consumption. Therefore, it is not recommended to set the number too large. Usually, it's less than 64.
 + The `-r` option enables in-table concurrency to speed up the export. It is disabled by default (value `0`). When enabled with a value greater than `0`, the behavior depends on the source database. 
 
-    - For TiDB, Dumpling uses region information for splitting, which also reduces memory usage; the specific `-r` value does not affect the split algorithm. 
+    - For TiDB, Dumpling uses region information for splitting, which also reduces memory usage. The specified `-r` value does not affect the split algorithm. 
     - For MySQL, this option is supported when the primary key (or the first column of a composite primary key) is of an `INT` or `STRING` type.
 
 + The `-F` option is used to specify the maximum size of a single file (the unit here is `MiB`; inputs like `5GiB` or `8KB` are also acceptable). It is recommended to keep its value to 256 MiB or less if you plan to use TiDB Lightning to load this file into a TiDB instance.
