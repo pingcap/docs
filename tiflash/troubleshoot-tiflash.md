@@ -165,7 +165,7 @@ After the TiDB cluster is deployed, if the TiFlash replicas consistently fail to
 
     > **Note:**
     >
-    > The default value of `count` is `3`. In production environments, the value is usually smaller than the number of TiKV nodes. In test environments, if it is acceptable to have only one Region replica, you can set the value `1`.
+    > The default value of `count` is `3`. In production environments, the value is usually smaller than the number of TiKV nodes. In test environments, if it is acceptable to have only one Region replica, you can set the value to `1`.
 
     ```shell
         curl -X POST -d '{
