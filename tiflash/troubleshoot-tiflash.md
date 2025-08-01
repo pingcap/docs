@@ -197,7 +197,7 @@ After the TiDB cluster is deployed, if the TiFlash replicas consistently fail to
 
         - Remove unnecessary files from the TiFlash node disk, such as the logging files, and the `space_placeholder_file` file in the `${data}/flash/` directory. If necessary, set `storage.reserve-space` in `tiflash-learner.toml` to `0MB` at the same time to temporarily resume TiFlash service.
 
-    - If the disk usage is less that the value of `low-space-ratio`, it indicates normal disk space availability. Proceed to the next step.
+If the disk usage is less than the value of `low-space-ratio`, it indicates normal disk space availability. Proceed to the next step.
 
 6. Check whether there is any `down peer`. 
 
