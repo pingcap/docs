@@ -64,14 +64,8 @@ The following are descriptions of sink URI parameters and parameter values that 
 | `3306`         | The port for the downstream data.                                 |
 | `worker-count` | The number of SQL statements that can be concurrently executed to the downstream (optional, `16` by default).       |
 | `cache-prep-stmts` | Controls whether to use prepared statements when executing SQL in the downstream and enable prepared statement cache on the client side (optional, `true` by default). |
-<<<<<<< HEAD
 | `max-txn-row`  | The size of a transaction batch that can be executed to the downstream (optional, `256` by default). |
-=======
 | `multi-stmt-enable` | Controls whether the SQL statements executed downstream support multiple SQL statements separated by semicolons (optional, the default value is `true`). If it is set to `false`, each SQL statement is executed as a separate transaction. If it is set to `true`, `cache-prep-stmts` does not take effect. |
-| `max-txn-row` | The batch size of SQL statements executed to the downstream (optional, the default value is `256`, and the maximum value is `2048`). |
-| `max-multi-update-row` | The batch size of `UPDATE ROWS` SQL statements executed to the downstream when batch write (`batch-dml-enable`) is enabled, always less than `max-txn-row` (optional, the default value is `40`, and the maximum value is `256`). |
-| `max-multi-update-row-size` | The size limit of `UPDATE ROWS` SQL statements executed to the downstream when batch write (`batch-dml-enable`) is enabled. If the size exceeds this limit, each row is executed as a separate SQL statement (optional, the default value is `1024`, and the maximum value is `8192`). |
->>>>>>> e754805dbd (ticdc: add param `multi-stmt-enable` description in mysql sink (#21484))
 | `ssl-ca` | The path of the CA certificate file needed to connect to the downstream MySQL instance (optional).  |
 | `ssl-cert` | The path of the certificate file needed to connect to the downstream MySQL instance (optional). |
 | `ssl-key` | The path of the certificate key file needed to connect to the downstream MySQL instance (optional). |
