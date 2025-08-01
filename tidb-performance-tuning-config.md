@@ -133,10 +133,10 @@ soft-pending-compaction-bytes-limit = "192GiB"
 
 Note that the compaction and flow control configuration adjustments outlined in the preceding table are tailored for TiKV deployments on instances with the following specifications:
 
-  - CPU: 32 cores
-  - Memory: 128 GiB
-  - Storage: 5 TiB EBS
-  - Disk Throughput: 1 GiB/s
+    - CPU: 32 cores
+    - Memory: 128 GiB
+    - Storage: 5 TiB EBS
+    - Disk Throughput: 1 GiB/s
 
 #### Recommended configuration adjustments for write-intensive workloads
 
