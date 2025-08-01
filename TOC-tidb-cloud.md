@@ -253,7 +253,7 @@
       - [Overview of TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md)
       - [Manage TiDB Node Groups](/tidb-cloud/tidb-node-group-management.md)
   - Manage Connections by TiProxy
-    - [Overview of TiProxy](/tidb-cloud/tiproxy-overview.md)
+    - [Overview of TiProxy](/tidb-cloud/tiproxy-overview-for-cloud.md)
     - [Manage TiProxy](/tidb-cloud/tiproxy-management.md)
   - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
