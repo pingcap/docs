@@ -14,7 +14,7 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
 
 ## Step 1: Create a TiDB cluster
 
-[TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) is the best way to get started with TiDB Cloud. To create a {{{ .starter }}} cluster, follow these steps:
+[TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) (now Starter) is the best way to get started with TiDB Cloud. To create a {{{ .starter }}} cluster, follow these steps:
 
 1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up.
 
@@ -30,7 +30,7 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
     - To create a new {{{ .starter }}} cluster on your own, follow these steps:
 
         1. Click **Create Cluster**.
-        2. On the **Create Cluster** page, **Serverless** is selected by default. Select the target region for your cluster, update the default cluster name if necessary, select your [cluster plan](/tidb-cloud/select-cluster-tier.md#cluster-plans), and then click **Create**. Your {{{ .starter }}} cluster will be created in approximately 30 seconds.
+        2. On the **Create Cluster** page, **Starter** is selected by default. Select the target region for your cluster, update the default cluster name if necessary, select your [cluster plan](/tidb-cloud/select-cluster-tier.md), and then click **Create**. Your {{{ .starter }}} cluster will be created in approximately 30 seconds.
 
 ## Step 2: Try AI-assisted SQL Editor
 
@@ -43,7 +43,7 @@ You can use the built-in AI-assisted SQL Editor in the TiDB Cloud console to max
 3. In SQL Editor, press <kbd>⌘</kbd> + <kbd>I</kbd> on macOS (or <kbd>Control</kbd> + <kbd>I</kbd> on Windows or Linux) to instruct [Chat2Query (beta)](/tidb-cloud/tidb-cloud-glossary.md#chat2query) to generate SQL queries automatically.
 
     For example, to create a new table `test.t` with two columns (column `id` and column `name`), you can type `use test;` to specify the database, press <kbd>⌘</kbd> + <kbd>I</kbd>, type `create a new table t with id and name` as the instruction, and then press **Enter** to let AI generate a SQL statement accordingly. 
-    
+
     For the generated statement, you can accept it by clicking **Accept** and then further edit it if needed, or reject it by clicking **Discard**.
 
     > **Note:**
