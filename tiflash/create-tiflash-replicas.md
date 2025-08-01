@@ -134,12 +134,12 @@ SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>
 
 </CustomContent>
 
-The TiDB cluster triggers the TiFlash replica replication process when either of the following operations is performed:
+The TiDB cluster triggers the TiFlash replica replication process when you perform any of the following operations:
 
-* TiFlash replicas for a table are added.
-* When a new TiFlash instance is added, PD moves the TiFlash replicas to the new TiFlash instance.
+* Add TiFlash replicas for a table.
+* Add a new TiFlash instance, causing PD to schedule the TiFlash replicas from original instances to the new TiFlash instance.
 
-The TiKV instance performs a table scan and sends the scanned data to TiFlash as a snapshot to create replicas. By default, TiFlash replicas are added slowly with fewer resources usage to minimize the impact on the online service. If there are spare CPU and disk IO resources in your TiKV and TiFlash nodes, you can accelerate TiFlash replication by performing the following steps.
+During this process, each TiKV instance performs a full table scan and sends a snapshot of the scanned data to TiFlash to create the replica. By default, to minimize the impact on TiKV and TiFlash production workloads, TiFlash adds replicas at a slower rate and uses fewer resources. If your TiKV and TiFlash nodes have sufficient CPU and disk I/O resources, you can accelerate TiFlash replication by performing the following steps.
 
 1. Temporarily increase the snapshot write speed limit for each TiKV and TiFlash instance by using the [Dynamic Config SQL statement](https://docs.pingcap.com/tidb/stable/dynamic-config):
 

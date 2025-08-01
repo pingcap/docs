@@ -14,7 +14,7 @@ TiFlash might fail to start properly due to various reasons. You can troubleshoo
 
 1. Check whether your system is CentOS 8.
 
-    CentOS 8 does not include the libnsl.so system library by default, which might cause TiFlash to fail to start. You can install it manually using the following command:
+    CentOS 8 does not include the `libnsl.so` system library by default, which might cause TiFlash to fail to start. You can install it manually using the following command:
 
     ```shell
     dnf install libnsl
@@ -136,7 +136,7 @@ In this example, the warning message shows that TiDB does not select the MPP mod
 
 After the TiDB cluster is deployed, if the TiFlash replicas consistently fail to be created, or if the TiFlash replicas are initially created normally but all or some tables fail to be created after a period of time, you can do the following to troubleshoot the issue:
 
-1. Check whether PD enables the `Placement Rules` feature. Starting from v5.0, this feature is enabled by default:
+1. Check whether the [Placement Rules](/configure-placement-rules.md) feature of PD is enabled. Starting from v5.0, this feature is enabled by default:
 
     ```shell
     echo 'config show replication' | /path/to/pd-ctl -u http://${pd-ip}:${pd-port}
@@ -145,7 +145,7 @@ After the TiDB cluster is deployed, if the TiFlash replicas consistently fail to
     - If `true` is returned, go to the next step.
     - If `false` is returned, [enable the Placement Rules feature](/configure-placement-rules.md#enable-placement-rules) and go to the next step.
 
-2. Check whether the TiFlash process is working normally by the **UpTime** on the **TiFlash-Summary** Grafana panel.
+2. Check whether the TiFlash process is working normally by checking the **UpTime** metric on the **TiFlash-Summary** Grafana panel.
 
 3. Check whether the connection between TiFlash and PD is normal.
 
@@ -223,13 +223,13 @@ After deploying a TiFlash node and starting replication by executing `ALTER TABL
 1. Check whether the replication is successful by running `ALTER TABLE ... SET TIFLASH REPLICA ...<num>` and check the output.
 
     - If the query is blocked, run the `SELECT * FROM information_schema.tiflash_replica` statement to check whether TiFlash replicas have been created.
-        - Check whether the DDL statement is executed as expected through [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md). Or there are any other DDL statement that block altering TiFlash replica statement being executed.
+        - Check whether the DDL statement is executed as expected through [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md). Check for other DDL statements (such as `ADD INDEX`) that might block altering TiFlash replica statement being executed.
         - Check whether any DML statement is executed on the same table through [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md) that blocks altering TiFlash replica statement being executed.
-    - You can wait until those queries or DDL finish or cancel them. If nothing is blocking the `ALTER TABLE ... SET TIFLASH REPLICA ...` being executed, go to the next step.
+    - Wait for the blocking statements to complete or be canceled, then try setting the TiFlash replica again. If no issues occur, proceed to the next step.
 
 2. Check whether TiFlash Region replication runs correctly.
 
-   Query the [`information_schema.tiflash_replica`](/information-schema/information-schema-tiflash-replica.md) table to check whether the `PROGRESS` field, which indicates the TiFlash replica synchronization progress, is changing. Alternatively, search for the keywords `Tiflash replica is not available` in the `tidb.log` to review related logs and the corresponding `progress` values.
+   Query the [`information_schema.tiflash_replica`](/information-schema/information-schema-tiflash-replica.md) table to check whether the `PROGRESS` field, which indicates the TiFlash replica replication progress, is changing. Alternatively, search for the keyword `Tiflash replica is not available` in the `tidb.log` file to review related logs and the corresponding `progress` values.
 
    - If the replication progress changes, it indicates TiFlash replication is functioning normally, but potentially at a slow pace. Refer to [Data replication is slow](#data-replication-is-slow) for optimization configurations.
    - If the replication progress does not change, TiFlash replication is abnormal. Go to the next step.
@@ -249,8 +249,8 @@ After deploying a TiFlash node and starting replication by executing `ALTER TABL
     Run the following command to view all TiFlash placement rules on the current PD.
     
     ```shell
-    `curl http://<pd-ip>:<pd-port>/pd/api/v1/config/rules/group/tiflash`
-    ````
+    curl http://<pd-ip>:<pd-port>/pd/api/v1/config/rules/group/tiflash
+    ```
 
     - If a rule with the ID format `table-<table_id>-r` exists, the PD has configured a placement rule successfully. Go to the next step.
     - If such a rule does not exist, collect logs of the corresponding component to [get support](/support.md).
