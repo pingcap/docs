@@ -31,7 +31,7 @@ To complete this tutorial, you need:
 
 You can import the S&P 500 dataset provided in the interactive tutorial of {{{ .starter }}}.
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and click **?** in the lower-right corner. A **Help** dialog is displayed.
+1. Navigate to the [**TiDBs**](https://tidbcloud.com/tidbs) page, and click **?** in the lower-right corner. A **Help** dialog is displayed.
 
 2. In the dialog, click **Interactive Tutorials**, and then click **S&P 500 Analysis**.
 
@@ -41,13 +41,13 @@ You can import the S&P 500 dataset provided in the interactive tutorial of {{{ .
 
 If you encounter any issues during import, you can cancel this import task as follows:
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page, click the name of your {{{ .starter }}} cluster to go to its overview page.
+1. On the [**TiDBs**](https://tidbcloud.com/tidbs) page, click the name of your {{{ .starter }}} cluster to go to its overview page.
 2. In the left navigation pane, click **Data** > **Import**.
 3. Find the import task named **sp500-insight**, click **...** in the **Action** column, and then click **Cancel**.
 
 ## Step 2. Get the connection information for your cluster
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**TiDBs**](https://tidbcloud.com/tidbs) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 

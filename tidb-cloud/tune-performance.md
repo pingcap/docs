@@ -21,7 +21,10 @@ TiDB Cloud provides [Slow Query](#slow-query), [Statement Analysis](#statement-a
 
 ## View the Diagnosis page
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
+1. Navigate to the **Overview** page of your target cluster:
+
+    - For {{{ .starter }}} or {{{ .essential }}} clusters, click the name of your target cluster on the [**TiDBs**](https://tidbcloud.com/tidbs) page.
+    - For TiDB Cloud Dedicated clusters, click the name of your target cluster on the [**Clusters**](https://tidbcloud.com/console/clusters) page.
 
     > **Tip:**
     >
