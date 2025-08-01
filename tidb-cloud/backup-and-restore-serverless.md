@@ -1,10 +1,10 @@
 ---
-title: Back Up and Restore Data on TiDB Cloud {{{ .starter }}} or Essential
+title: Back Up and Restore Data on {{{ .starter }}} or Essential
 summary: Learn how to back up and restore your {{{ .starter }}} or {{{ .essential }}} clusters.
 aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
-# Back Up and Restore Data on TiDB Cloud {{{ .starter }}} or Essential
+# Back Up and Restore Data on {{{ .starter }}} or Essential
 
 This document describes how to back up and restore your data on {{{ .starter }}} or {{{ .essential }}} clusters.
 
@@ -139,7 +139,7 @@ To restore your TiDB Cloud cluster, follow these steps:
     2. Enter a name for the new cluster.
     3. Choose the cluster plan for the new cluster.
 
-        - If you choose a {{{ .starter }}} cluster, set a monthly spending limit.
+        - If you choose a {{{ .starter }}} cluster and need more resources than the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota), set a monthly spending limit.
         - If you choose a {{{ .essential }}} cluster, set the minimum RCU and maximum RCU, and then configure advanced settings as needed.
 
     </div>

@@ -16,11 +16,11 @@ TiDB Cloud provides the following options of cluster plans. Whether you are just
 
 > **Note:**
 >
-> Some of TiDB Cloud features are partially supported or not supported on {{{ .starter }}} and {{{ .essential }}}. See [TiDB Cloud Starter and Essential Limitations](/tidb-cloud/serverless-limitations.md) for details.
+> Some of TiDB Cloud features are partially supported or not supported on {{{ .starter }}} and {{{ .essential }}}. See [{{{ .starter }}} and Essential Limitations](/tidb-cloud/serverless-limitations.md) for details.
 
 ## TiDB Cloud Serverless
 
-TiDB Cloud Serverless is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free plan and consumption based billing once free limits are exceeded.
+TiDB Cloud Serverless (Now {{{ .starter }}}) is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free plan and consumption based billing once free limits are exceeded.
 
 The free cluster plan is ideal for those who are getting started with {{{ .starter }}}. It provides developers and small teams with the following essential features:
 
@@ -30,7 +30,7 @@ The free cluster plan is ideal for those who are getting started with {{{ .start
 
 ### Usage quota
 
-For each organization in TiDB Cloud, you can create a maximum of five [free {{{ .starter }}} clusters](#tidb-cloud-serverless) by default. To create more {{{ .starter }}} clusters, you need to add a credit card and specify a spending limit.
+For each organization in TiDB Cloud, you can create a maximum of five free {{{ .starter }}} clusters by default. To create more {{{ .starter }}} clusters, you need to add a credit card and specify a spending limit.
 
 For the first five {{{ .starter }}} clusters in your organization, whether they are free or scalable, TiDB Cloud provides a free usage quota for each of them as follows:
 

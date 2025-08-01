@@ -9,7 +9,7 @@ This tutorial walks you through the steps to connect to your {{{ .starter }}} or
 
 > **Tip:**
 >
-> To learn how to connect to a TiDB Cloud cluster via AWS PrivateLink, see [Connect to TiDB Cloud via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
+> To learn how to connect to a {{{ .starter }}} or Essential cluster via AWS PrivateLink, see [Connect to TiDB Cloud via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
 
 ## Restrictions
 

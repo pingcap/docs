@@ -22,7 +22,7 @@ For {{{ .starter }}} and {{{ .essential }}}, the pricing model varies as follows
 
 A **Request Unit (RU)** is a unit of measure used to represent the amount of resources consumed by a single request to the database. The amount of RUs consumed by a request depends on various factors, such as the operation type or the amount of data being retrieved or modified.
 
-A **Request Capacity Unit (RCU)** is a unit of measure used to represent the provisioned compute capacity for your TiDB Cloud Essential cluster. One RCU provides a fixed amount of compute resources that can process a certain number of RUs per second. The number of RCUs you provision determines your cluster's baseline performance and throughput capacity.
+A **Request Capacity Unit (RCU)** is a unit of measure used to represent the provisioned compute capacity for your {{{ .essential }}} cluster. One RCU provides a fixed amount of compute resources that can process a certain number of RUs per second. The number of RCUs you provision determines your cluster's baseline performance and throughput capacity.
 
 Currently, the RU includes statistics for the following resources:
 
@@ -74,7 +74,7 @@ Currently, the RU includes statistics for the following resources:
 > - Write*: Each write operation is duplicated to multiple storage processes (3 for row-based storage without index), and each duplicate is considered a distinct write operation.
 > - Transaction**: This applies only to optimistic transactions or autocommit.
 
-### Pricing for TiDB Cloud Starter
+### Pricing for {{{ .starter }}} {#pricing-for-starter}
 
 See the detailed pricing for each available Alibaba Cloud region below.
 
@@ -86,19 +86,19 @@ See the detailed pricing for each available Alibaba Cloud region below.
 
 > **Tip:**
 >
-> TiDB Cloud Starter is currently available in the Alibaba Cloud Singapore region. For other regions on Alibaba Cloud, contact the Help center in the console.
+> {{{ .starter }}} is currently available in the Alibaba Cloud Singapore region. For other regions on Alibaba Cloud, contact the Help center in the console.
 
 #### Free quota
 
 TiDB Cloud offers a free quota up to the first 5 clusters created in each [organization](/tidb-cloud/manage-user-access.md#organizations). To create more clusters, you will be required to provide a credit card and set a [Monthly Spending Limit](#monthly-spending-limit). But if you delete some of your previous clusters before creating the 6th, the new cluster will still have a free quota. In other words, you can enjoy the free quota for up to 5 clusters.
 
-Free quota is issued monthly to TiDB Cloud Starter clusters that meet these qualifications. With the free quota, each TiDB Cloud Starter cluster can store 5 GiB of row-based data, 5 GiB of columnar data, and consume up to 50 million RUs per month.
+Free quota is issued monthly to {{{ .starter }}} clusters that meet these qualifications. With the free quota, each {{{ .starter }}} cluster can store 5 GiB of row-based data, 5 GiB of columnar data, and consume up to 50 million RUs per month.
 
 In total, each organization can get 25 GiB of row-based storage, 25 GiB of columnar storage, and 250 million Request Units (RUs) for free per month. Customers can take advantage of this offer and optimize their operations without worrying about initial costs.
 
 #### Monthly Spending Limit
 
-The Monthly Spending Limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that enables you to set a budget for your TiDB Cloud Starter clusters. The Monthly Spending Limit must be set to at least $0.01.
+The Monthly Spending Limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that enables you to set a budget for your {{{ .starter }}} clusters. The Monthly Spending Limit must be set to at least $0.01.
 
 > **Note:**
 >
@@ -112,7 +112,7 @@ If the free quota of a cluster is exhausted within the month, the cluster is aut
 
 In this way, customers can ensure basic business continuity without paying additional fees. At the same time, customers can adjust the spending limit according to their needs to control their usage and costs.
 
-### Pricing for TiDB Cloud Essential
+### Pricing for {{{ .essential }}} {#pricing-for-essential}
 
 See the detailed pricing for each available Alibaba Cloud region below.
 
@@ -126,11 +126,11 @@ See the detailed pricing for each available Alibaba Cloud region below.
 
 > **Tip:**
 >
-> TiDB Cloud Essential is currently available in the Alibaba Cloud Singapore region. For other regions on Alibaba Cloud, contact the Help center in the console.
+> {{{ .essential }}} is currently available in the Alibaba Cloud Singapore region. For other regions on Alibaba Cloud, contact the Help center in the console.
 
 #### Throttling
 
-For TiDB Cloud Essential clusters, the throttling policy is based on the provisioned Request Capacity Units (RCUs). When the workload exceeds the maximum RCU capacity, the cluster will automatically throttle incoming requests to maintain stability. Existing connections will experience throttling, but new connection attempts will be accepted as long as they don't exceed the maximum RCU limit. This ensures predictable performance while protecting the cluster from overload.
+For {{{ .essential }}} clusters, the throttling policy is based on the provisioned Request Capacity Units (RCUs). When the workload exceeds the maximum RCU capacity, the cluster will automatically throttle incoming requests to maintain stability. Existing connections will experience throttling, but new connection attempts will be accepted as long as they don't exceed the maximum RCU limit. This ensures predictable performance while protecting the cluster from overload.
 
 ### Billing cycle
 
