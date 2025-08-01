@@ -152,7 +152,7 @@ The supported options are described as follows:
 | `DISK_QUOTA='<string>'` | All file formats | Specifies the disk space threshold that can be used during data sorting. The default value is 80% of the disk space in the TiDB [temporary directory](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630). If the total disk size cannot be obtained, the default value is 50 GiB. When specifying `DISK_QUOTA` explicitly, make sure that the value does not exceed 80% of the disk space in the TiDB temporary directory. |
 | `DISABLE_TIKV_IMPORT_MODE` | All file formats | Specifies whether to disable switching TiKV to import mode during the import process. By default, switching TiKV to import mode is not disabled. If there are ongoing read-write operations in the cluster, you can enable this option to avoid impact from the import process. |
 | `THREAD=<number>` | All file formats and query results of `SELECT` | Specifies the concurrency for import. For `IMPORT INTO ... FROM FILE`, the default value of `THREAD` is 50% of the number of CPU cores on the TiDB node, the minimum value is `1`, and the maximum value is the number of CPU cores. For `IMPORT INTO ... FROM SELECT`, the default value of `THREAD` is `2`, the minimum value is `1`, and the maximum value is two times the number of CPU cores on the TiDB node. To import data into a new cluster without any data, it is recommended to increase this concurrency appropriately to improve import performance. If the target cluster is already used in a production environment, it is recommended to adjust this concurrency according to your application requirements. |
-| `MAX_WRITE_SPEED='<string>'` | All file formats | Controls the write speed to a TiKV node. By default, there is no speed limit. For example, you can specify this option as `1MiB` to limit the write speed to 1 MiB/s. |
+| `MAX_WRITE_SPEED='<string>'` | All file formats | Controls the write speed of each TiDB node to each TiKV node. By default, there is no speed limit. For example, if you have 10 TiDB nodes, specifying this option as `1MiB` limits the total write speed to each TiKV node to 10 MiB/s. |
 | `CHECKSUM_TABLE='<string>'` | All file formats | Configures whether to perform a checksum check on the target table after the import to validate the import integrity. The supported values include `"required"` (default), `"optional"`, and `"off"`. `"required"` means performing a checksum check after the import. If the checksum check fails, TiDB will return an error and the import will exit. `"optional"` means performing a checksum check after the import. If an error occurs, TiDB will return a warning and ignore the error. `"off"` means not performing a checksum check after the import. |
 | `DETACHED` | All file formats | Controls whether to execute `IMPORT INTO` asynchronously. When this option is enabled, executing `IMPORT INTO` immediately returns the information of the import job (such as the `Job_ID`), and the job is executed asynchronously in the backend. |
 | `CLOUD_STORAGE_URI` | All file formats | Specifies the target address where encoded KV data for [Global Sort](/tidb-global-sort.md) is stored. When `CLOUD_STORAGE_URI` is not specified, `IMPORT INTO` determines whether to use Global Sort based on the value of the system variable [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740). If this system variable specifies a target storage address, `IMPORT INTO` uses this address for Global Sort. When `CLOUD_STORAGE_URI` is specified with a non-empty value, `IMPORT INTO` uses that value as the target storage address. When `CLOUD_STORAGE_URI` is specified with an empty value, local sorting is enforced. Currently, the target storage address only supports S3. For details about the URI configuration, see [Amazon S3 URI format](/external-storage-uri.md#amazon-s3-uri-format). When this feature is used, all TiDB nodes must have read and write access for the target S3 bucket, including at least these permissions: `s3:ListBucket`, `s3:GetObject`, `s3:DeleteObject`, `s3:PutObject`, `s3: AbortMultipartUpload`. |
@@ -328,11 +328,20 @@ IMPORT INTO t FROM '/path/to/file.sql' FORMAT 'sql';
 
 #### Limit the write speed to TiKV
 
-To limit the write speed to a TiKV node to 10 MiB/s, execute the following SQL statement:
+Importing data might affect the performance of application workloads. In such cases, it is recommended to limit the write speed to TiKV with `MAX_WRITE_SPEED`.
+
+For example, the following SQL statement limits the write speed from each TiDB node to each TiKV node to 10 MiB/s:
 
 ```sql
 IMPORT INTO t FROM 's3://bucket/path/to/file.parquet?access-key=XXX&secret-access-key=XXX' FORMAT 'parquet' WITH MAX_WRITE_SPEED='10MiB';
 ```
+
+If you are importing data with DXF and  Global Sort enabled, you can configure `MAX_WRITE_SPEED` as follows to mitigate the impact:
+
+1. Import a small dataset with unlimited speed, and monitor the average import speed through Grafana: **TiDB** > **Import Into** > **Total encode/deliver/import-kv speed** > **Import KV**.
+2. Calculate the upper limit of `MAX_WRITE_SPEED` using the following formula:
+    - `MAX_WRITE_SPEED` = (Import speed) x (Number of Replicas) / (Number of TiDB nodes) / min(Number of TiKV nodes, THREAD)
+3. Set `MAX_WRITE_SPEED` to a value lower than the calculated result (for example, 4 to 8 times lower) to ensure workload performance.
 
 ## `IMPORT INTO ... FROM SELECT` usage
 
