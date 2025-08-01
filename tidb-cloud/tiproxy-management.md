@@ -57,7 +57,7 @@ To disable TiProxy, perform the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
 2. Click **...** in the upper-right corner, and click **Modify** in the drop-down menu. The **Modify Cluster** page is displayed.
-4. On the **Modify Cluster** page, click the TiProxy toggle to disable TiProxy.
+3. On the **Modify Cluster** page, click the TiProxy toggle to disable TiProxy.
 
 ![Disable TiProxy](/media/tidb-cloud/tiproxy-disable-tiproxy.png)
 
@@ -90,7 +90,7 @@ The metrics include:
 - TiProxy CPU Usage: The CPU usage statistics of each TiProxy node. The upper limit is 100%. If the maximum CPU usage exceeds 80%, it is recommended that you scale out TiProxy.
 - TiProxy Connections: The connection number on each TiProxy node.
 - TiProxy Throughput: The transferred bytes per second on each TiProxy node. If the maximum throughput reaches the maximum network bandwidth, it is recommended that you scale out TiProxy. To learn about the maximum network bandwidth, see [Decide TiProxy instance size and number](#decide-tiproxy-instance-size-and-number).
-- TiProxy Sessions Migration Reasons: The number of session migrations that happen every minute and the reason for them. For example, when TiDB scales in and TiProxy migrates sessions to other TiDB instances, the reason is `status`. For more migration reasons, see [TiProxy Monitoring Metrics](/tiproxy/tiproxy-grafana.md#balance).
+- TiProxy Sessions Migration Reasons: The number of session migrations that happen every minute and the reason for them. For example, when TiDB scales in and TiProxy migrates sessions to other TiDB instances, the reason is `status`. For more migration reasons, see [TiProxy Monitoring Metrics](https://docs.pingcap.com/tidb/stable/tiproxy-grafana#balance).
 
 ### View TiProxy bills
 

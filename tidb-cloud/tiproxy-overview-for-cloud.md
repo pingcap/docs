@@ -7,7 +7,7 @@ summary: Learn about the usage scenarios of TiProxy.
 
 TiProxy is the official proxy component of PingCAP. It is placed between the client and the TiDB server to provide load balancing, connection persistence, and other features for TiDB.
 
-For more details, see [TiProxy Overview](/tiproxy/tiproxy-overview.md).
+For more details, see [TiProxy Overview](https://docs.pingcap.com/tidb/stable/tiproxy-overview).
 
 ## Scenarios
 
@@ -15,9 +15,9 @@ TiProxy is suitable for the following scenarios:
 
 - Connection persistence: When a TiDB server performs scaling in, rolling upgrade, or rolling restart, the client connection breaks, resulting in an error. If the client does not have an idempotent error retry mechanism, you need to manually check and fix the error, which greatly increases the operational overhead. TiProxy can keep the client connection, so that the client does not report an error.
 - Frequent scaling in and scaling out: The workload of an application might change periodically. To save costs, you can deploy TiDB on the cloud and automatically scale in and scale out TiDB servers according to the workload. However, scaling in might cause the client to disconnect, and scaling out might result in an unbalanced load. TiProxy can keep the client connection and achieve load balancing.
-- CPU load imbalance: When background tasks consume a significant amount of CPU resources or workloads across connections vary significantly, leading to an imbalanced CPU load, TiProxy can migrate connections based on CPU usage to achieve load balancing. For more details, see [CPU-based load balancing](/tiproxy/tiproxy-load-balance.md#cpu-based-load-balancing).
+- CPU load imbalance: When background tasks consume a significant amount of CPU resources or workloads across connections vary significantly, leading to an imbalanced CPU load, TiProxy can migrate connections based on CPU usage to achieve load balancing. For more details, see [CPU-based load balancing](https://docs.pingcap.com/tidb/stable/tiproxy-load-balance#cpu-based-load-balancing).
 
-For more scenarios, see [TiProxy User Scenarios](/tiproxy/tiproxy-overview.md#user-scenarios).
+For more scenarios, see [TiProxy User Scenarios](https://docs.pingcap.com/tidb/stable/tiproxy-overview#user-scenarios).
 
 ## Limitations
 
@@ -25,9 +25,9 @@ TiProxy cannot preserve client connections in the following scenarios:
 
 - Upgrading AWS EKS, Azure AKS, Google Cloud GKE, or Alibaba Cloud ACK.
 - Disabling, scaling in, upgrading, or restarting TiProxy.
-- A single statement or transaction that runs for more than 20 seconds. If your application needs a longer timeout, please contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+- A single statement or transaction that runs for more than 20 seconds. If your application needs a longer timeout, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
-For more scenarios, see [TiProxy Limitations](/tiproxy/tiproxy-overview.md#limitations).
+For more scenarios, see [TiProxy Limitations](https://docs.pingcap.com/tidb/stable/tiproxy-overview#limitations).
 
 ## Billing
 
