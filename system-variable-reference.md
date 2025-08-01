@@ -1980,7 +1980,7 @@ Referenced in:
 
 Referenced in:
 
-- [System Variables](/system-variables.md#tidb_enable_telemetry-new-in-v402-and-deprecated-in-v810)
+- [System Variables](/system-variables.md#tidb_enable_telemetry-new-in-v402)
 - [TiDB 8.1.0 Release Notes](/releases/release-8.1.0.md)
 - [TiDB 6.6.0 Release Notes](/releases/release-6.6.0.md)
 - [TiDB 6.5.1 Release Notes](/releases/release-6.5.1.md)
