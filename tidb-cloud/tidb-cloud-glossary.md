@@ -147,7 +147,7 @@ A Request Unit (RU) is a unit of measure used to represent the amount of resourc
 
 ### Spending limit
 
-Spending limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that enables you to set a budget for your {{{ .starter }}} clusters. For [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan), the spending limit must be set to a minimum of $0.01. Also, the scalable cluster can have a free quota if it meets the qualifications. The scalable cluster with a free quota will consume the free quota first.
+[Spending limit](/tidb-cloud/manage-serverless-spend-limit.md) refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that enables you to set a budget for your {{{ .starter }}} clusters. To scale the capacity of your {{{ .starter }}} cluster automatically based on your workload, the spending limit must be set to a minimum of $0.01. Also, the {{{ .starter }}} cluster can have a [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota) if it meets the qualifications. The {{{ .starter }}} cluster with a free quota will consume the free quota first.
 
 ## T
 

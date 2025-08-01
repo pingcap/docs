@@ -9,7 +9,7 @@
   - [TiDB Cloud Introduction](/tidb-cloud/tidb-cloud-intro.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
 - Get Started with TiDB Cloud
-  - [Try Out {{{ .starter }}}](/tidb-cloud/tidb-cloud-quickstart.md)
+  - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Try Out TiDB + AI](/vector-search/vector-search-get-started-using-python.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
@@ -144,7 +144,8 @@
     - Connect to Your {{{ .starter }}} Cluster
       - [Connection Overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
       - [Connect via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
-      - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+      - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+      - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
     - Branch ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
       - [Overview](/tidb-cloud/branch-overview.md)
       - [Manage Branches](/tidb-cloud/branch-manage.md)
@@ -356,7 +357,8 @@
     - [OAuth 2.0](/tidb-cloud/oauth2.md)
   - Network Access Control
     - {{{ .starter }}}
-      - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+      - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+      - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
       - [Configure Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
       - [TLS Connections to {{{ .starter }}}](/tidb-cloud/secure-connections-to-serverless-clusters.md)
     - TiDB Cloud Dedicated

@@ -117,7 +117,7 @@ The detailed steps are as follows:
     DATABASE_URL
     ```
 
-    **{{{ .starter }}} Driver**
+    **TiDB Cloud Serverless Driver**
 
     ```
     DATABASE_URL
