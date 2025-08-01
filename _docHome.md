@@ -6,7 +6,7 @@ hide_leftNav: true
 summary: TiDB Documentation provides how-to guides and references for using TiDB Cloud and TiDB Self-Managed, including data migration and application building. TiDB Cloud is a fully-managed Database-as-a-Service, offering easy access to the power of a cloud-native, distributed SQL database. TiDB is an open-source distributed SQL database with MySQL compatibility, horizontal scalability, and high availability. Developers can access documentation for application development and explore additional resources such as TiDB Playground, PingCAP Education, and community engagement opportunities.
 ---
 
-<DocHomeContainer title="TiDB Documentation" subTitle="Explore how-to guides and references to help you use TiDB Cloud and TiDB Self-Managed, migrate data, and build your applications." ctaLabel="Start TiDB Cloud for Free" ctaLink="https://tidbcloud.com/free-trial">
+<DocHomeContainer title="TiDB Documentation" subTitle="Explore how-to guides and references to get started with TiDB Cloud and TiDB Self-Managed, migrate data smoothly, and build applications with ease." ctaLabel="Start TiDB Cloud for Free" ctaLink="https://tidbcloud.com/free-trial">
 
 <DocHomeSection label="TiDB Cloud" anchor="tidb-cloud" id="tidb-cloud">
 
