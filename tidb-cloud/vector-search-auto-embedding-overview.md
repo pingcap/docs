@@ -64,11 +64,11 @@ Results:
 +----+--------------------------------------------------------------+
 ```
 
-For other models, see [Available Text Embedding Models](#available-text-embeddings) below.
+For other models, see [Available Text Embedding Models](#available-text-embedding-models) below.
 
 ## Auto Embedding + Vector Index
 
-Auto embedding is compatible with [Vector Index](/vector-search/vector-search-index.md) for better query performance. Define a vector index over the generated vector column, and it will just work:
+Auto embedding is compatible with [Vector Index](/vector-search/vector-search-index.md) for better query performance. Define a vector index over the generated vector column, and it will be used automatically:
 
 ```sql
 -- Create a table with auto-embedding and vector index over the generated vector
@@ -100,7 +100,7 @@ LIMIT 3;
 
 > **Note:**
 >
-> You must using `VEC_COSINE_DISTANCE` or `VEC_L2_DISTANCE` when defining the vector index, while using `VEC_EMBED_COSINE_DISTANCE` or `VEC_EMBED_L2_DISTANCE` when performing vector search queries.
+> You must use `VEC_COSINE_DISTANCE` or `VEC_L2_DISTANCE` when defining the vector index, while using `VEC_EMBED_COSINE_DISTANCE` or `VEC_EMBED_L2_DISTANCE` when performing vector search queries.
 
 ## Available Text Embedding Models
 
@@ -114,7 +114,7 @@ TiDB Cloud supports various embedding models. Choose the one that best fits your
 | OpenAI          | [OpenAI Embeddings](/tidb-cloud/vector-search-auto-embedding-openai.md)             |                                                     | ✅                                |
 | Gemini          | [Gemini Embeddings](/tidb-cloud/vector-search-auto-embedding-gemini.md)             |                                                     | ✅                                |
 
-You can also use open-source embedding models via a 3rd party inference service:
+You can also use open-source embedding models via following inference services supported by TiDB Cloud:
 
 | Embedding Model       | Documentation                                                                     | Hosted by TiDB Cloud [<sup>1</sup>](#hosted-models) | BYOK [<sup>2</sup>](#byok-models) | Example Supported Models        |
 | --------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------- | --------------------------------- | ------------------------------- |

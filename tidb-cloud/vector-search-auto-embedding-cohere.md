@@ -19,8 +19,8 @@ TiDB Cloud provides the following [Cohere](https://cohere.com/) embedding models
 - Max input text tokens: 512 (1 token is about 4 characters)
 - Max input text characters: 2,048
 - Price: Free
-- Hosted by TiDB Cloud: ✅
-- Bring Your Own Key: ❌
+- Hosted by TiDB Cloud: ✅ `tidbcloud_free/cohere/embed-english-v3`
+- Bring Your Own Key: ✅ `cohere/embed-english-v3.0`
 
 **Cohere Multilingual Embed v3 model**
 
@@ -31,8 +31,8 @@ TiDB Cloud provides the following [Cohere](https://cohere.com/) embedding models
 - Max input text tokens: 512 (1 token is about 4 characters)
 - Max input text characters: 2,048
 - Price: Free
-- Hosted by TiDB Cloud: ✅
-- Bring Your Own Key: ❌
+- Hosted by TiDB Cloud: ✅ `tidbcloud_free/cohere/embed-multilingual-v3`
+- Bring Your Own Key: ✅ `cohere/embed-multilingual-v3.0`
 
 Alternatively, all Cohere models are available for use under the `cohere/` prefix when you bring your own Cohere API key. To name a few:
 
@@ -46,7 +46,7 @@ Alternatively, all Cohere models are available for use under the `cohere/` prefi
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
 
-For a full list of Cohere models, please refer to [Cohere's Documentations](https://docs.cohere.com/docs/cohere-embed).
+For a full list of Cohere models, please refer to [Cohere's Documentation](https://docs.cohere.com/docs/cohere-embed).
 
 ## SQL Usage Example (TiDB Cloud Hosted)
 
