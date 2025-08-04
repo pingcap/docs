@@ -9,7 +9,7 @@ This document describes how to determine the size of a TiDB Cloud Dedicated clus
 
 > **Note:**
 >
-> You cannot change the size of a [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster.
+> You cannot change the size of a [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster.
 
 ## Size TiDB
 
