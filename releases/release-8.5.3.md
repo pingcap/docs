@@ -60,7 +60,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
         - (dup): release-9.0.0.md > Improvements> Tools> Backup & Restore (BR) - Improve the index restore speed during PITR by repairing indexes concurrently [#59158](https://github.com/pingcap/tidb/issues/59158) @[Leavrth](https://github.com/Leavrth)
         - The Download API of TiKV supports filtering out data within a certain time range when downloading backup files, which avoids importing outdated or future data versions during restore [#18399](https://github.com/tikv/tikv/issues/18399) @[3pointer](https://github.com/3pointer)
-        - Support filtering log backup metadata files by timestamp to reduce the time spent on reading metadata during PITR restore [#61318](https://github.com/pingcap/tidb/issues/61318) @[3pointer](https://github.com/3pointer)
+        - Support filtering log backup metadata files by timestamp to reduce the time spent on reading metadata during PITR [#61318](https://github.com/pingcap/tidb/issues/61318) @[3pointer](https://github.com/3pointer)
 
     + TiCDC
 
@@ -144,8 +144,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     + Backup & Restore (BR) <!--tw@qiancai: 5 notes-->
 
         - (dup): release-9.0.0.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that available space on storage nodes is unnecessarily rechecked during breakpoint recovery [#54316](https://github.com/pingcap/tidb/issues/54316) @[Leavrth](https://github.com/Leavrth)
-        - Fix the issue that PITR cannot restore indexes larger than 3072 bytes [#58430](https://github.com/pingcap/tidb/issues/58430) @[YuJuncen](https://github.com/YuJuncen)
-        - Fix the issue that RangeTree structure consumes memory inefficiently during full backups of a large number of tables [#58587](https://github.com/pingcap/tidb/issues/58587) @[3pointer](https://github.com/3pointer)
         - Fix the issue that data imports from external storage do not automatically retry when the HTTP/2 GOAWAY error occurs [#60143](https://github.com/pingcap/tidb/issues/60143) @[joechenrh](https://github.com/joechenrh)
         - Fix the `keepalive watchdog timedout` error that occurs during restore due to import mode switching [#18541](https://github.com/tikv/tikv/issues/18541) @[Leavrth](https://github.com/Leavrth)
         - Fix the issue that log backup uploads to Azure Blob Storage are slow when transferring large volumes of data [#18410](https://github.com/tikv/tikv/issues/18410) @[YuJuncen](https://github.com/YuJuncen)
