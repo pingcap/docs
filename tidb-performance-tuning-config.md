@@ -3,7 +3,7 @@ title: Configure TiDB for Optimal Performance
 summary: Learn how to optimize TiDB performance by configuring key settings and addressing edge cases.
 ---
 
-## Configure TiDB for Optimal Performance
+# Configure TiDB for Optimal Performance
 
 This guide describes how to optimize the performance of TiDB, including:
 
