@@ -103,6 +103,8 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Configure Firewall Rules for Public Endpoints](https://docs.pingcap.com/tidbcloud/configure-serverless-firewall-rules-for-public-endpoints/)
 
+</LearningPath>
+
 <LearningPath label="Billing" icon="cloud2">
 
 [Pricing](https://www.pingcap.com/pricing/)
