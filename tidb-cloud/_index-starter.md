@@ -107,7 +107,7 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 <LearningPath label="Billing" icon="cloud2">
 
-[Pricing](https://www.pingcap.com/pricing/)
+[Pricing](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#pricing-for-starter)
 
 [Invoices](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#invoices)
 
