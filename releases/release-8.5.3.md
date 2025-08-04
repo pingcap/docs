@@ -14,7 +14,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 ## Compatibility changes
 
 - Add the following system variables for internal use by the [Cost Model](/cost-model.md). It is **NOT** recommended to modify these variables: `tidb_opt_hash_agg_cost_factor`, `tidb_opt_hash_join_cost_factor`, `tidb_opt_index_join_cost_factor`, `tidb_opt_index_lookup_cost_factor`, `tidb_opt_index_merge_cost_factor`, `tidb_opt_index_reader_cost_factor`, `tidb_opt_index_scan_cost_factor`, `tidb_opt_limit_cost_factor`, `tidb_opt_merge_join_cost_factor`, `tidb_opt_sort_cost_factor`, `tidb_opt_stream_agg_cost_factor`, `tidb_opt_table_full_scan_cost_factor`, `tidb_opt_table_range_scan_cost_factor`, `tidb_opt_table_reader_cost_factor`, `tidb_opt_table_rowid_cost_factor`, `tidb_opt_table_tiflash_scan_cost_factor`, and `tidb_opt_topn_cost_factor` [#60357](https://github.com/pingcap/tidb/issues/60357) @[terry1purcell](https://github.com/terry1purcell) <!--tw@Oreoxmt-->
-- Reintroduce the telemetry feature. However, it only logs telemetry-related information locally and no longer sends data to PingCAP over the network [#61766](https://github.com/pingcap/tidb/issues/61766) @[Defined2014](https://github.com/Defined2014) <!--tw@Oreoxmt-->
+- Reintroduce the [telemetry](https://docs.pingcap.com/tidb/v8.5/telemetry) feature. However, it only logs telemetry-related information locally and no longer sends data to PingCAP over the network [#61766](https://github.com/pingcap/tidb/issues/61766) @[Defined2014](https://github.com/Defined2014) <!--tw@Oreoxmt-->
 
 ## Improvements
 
@@ -36,9 +36,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - Support ingesting SST files without blocking foreground writes, reducing the impact of latency [#18081](https://github.com/tikv/tikv/issues/18081) @[hhwyt](https://github.com/hhwyt)
     - Reduce performance jitter caused by the flow controller [#18625](https://github.com/tikv/tikv/issues/18625) @[hhwyt](https://github.com/hhwyt)
     - Optimize tail latency during `ADD INDEX` operations in TiDB [#18081](https://github.com/tikv/tikv/issues/18081) @[overvenus](https://github.com/overvenus)
-    - Optimize the handling of `CompactedEvent` in Raftstore by moving it to the `split-check` worker [#18532](https://github.com/tikv/tikv/issues/18532) @[LykxSassinator](https://github.com/LykxSassinator)
-    - Remove the `sst ingest is too slow` log entry to prevent performance jitter [#18549](https://github.com/tikv/tikv/issues/18549) @[LykxSassinator](https://github.com/LykxSassinator)
-    - Optimize the detection mechanism of I/O jitter for KvDB disk when deployed with separate mount paths [#18463](https://github.com/tikv/tikv/issues/18463) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Optimize the handling of `CompactedEvent` in Raftstore by moving it to the `split-check` worker, reducing blocking on the main Raftstore thread [#18532](https://github.com/tikv/tikv/issues/18532) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Log only `SST ingest is experiencing slowdowns` when SST ingest is too slow, and skip calling `get_sst_key_ranges` to avoid performance jitter [#18549](https://github.com/tikv/tikv/issues/18549) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Optimize the detection mechanism for I/O jitter on KvDB disks when KvDB and RaftDB use separate mount paths [#18463](https://github.com/tikv/tikv/issues/18463) @[LykxSassinator](https://github.com/LykxSassinator)
     - Optimize the performance of `fetch_entries_to` in Raft Engine to reduce contention and improve performance under mixed workloads [#18605](https://github.com/tikv/tikv/issues/18605) @[LykxSassinator](https://github.com/LykxSassinator)
     - (dup): release-9.0.0.md > Improvements> TiKV - Optimize the cleanup mechanism of residual data to mitigate the impact on request latency [#18107](https://github.com/tikv/tikv/issues/18107) @[LykxSassinator](https://github.com/LykxSassinator)
 
@@ -121,7 +121,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - Fix the issue that TiKV fails to terminate ongoing manual compaction tasks during graceful shutdown [#18396](https://github.com/tikv/tikv/issues/18396) @[LykxSassinator](https://github.com/LykxSassinator)
     - Fix the issue that the default Region size is unexpectedly changed after a cluster upgrade [#18503](https://github.com/tikv/tikv/issues/18503) @[LykxSassinator](https://github.com/LykxSassinator)
     - Fix the issue that TiKV might use a compression algorithm that the client cannot decode [#18079](https://github.com/tikv/tikv/issues/18079) @[ekexium](https://github.com/ekexium)
-    - Fix the issue that blob indexes might cause apply snapshot failure after Titan is disabled [#18434](https://github.com/tikv/tikv/issues/18434) @[v01dstar](https://github.com/v01dstar)
+    - Fix the issue that blob indexes might cause apply snapshot failures after Titan is disabled [#18434](https://github.com/tikv/tikv/issues/18434) @[v01dstar](https://github.com/v01dstar)
     - Fix misleading descriptions in `StoreMsg` log entries in slow logs [#18561](https://github.com/tikv/tikv/issues/18561) @[LykxSassinator](https://github.com/LykxSassinator)
     - Fix the issue that TiKV allows excessive SST ingest requests under high concurrency [#18452](https://github.com/tikv/tikv/issues/18452) @[hbisheng](https://github.com/hbisheng)
     - Fix the issue that TiKV might panic due to duplicate results during lock scanning [#16818](https://github.com/tikv/tikv/issues/16818) @[cfzjywxk](https://github.com/cfzjywxk)
@@ -130,7 +130,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     - Fix the issue that `recovery-duration` does not take effect in the slow node detection mechanism [#9384](https://github.com/tikv/pd/issues/9384) @[rleungx](https://github.com/rleungx)
     - Fix the issue that the Evict Leader scheduler might be incorrectly paused after a cluster upgrade [#9416](https://github.com/tikv/pd/issues/9416) @[rleungx](https://github.com/rleungx)
-    - Fix the goroutine leak issue caused by TiDB Dashboard [#9402](https://github.com/tikv/pd/issues/9402) @[baurine](https://github.com/baurine)
+    - Fix the issue that improperly closing TiDB Dashboard TCP connections could lead to PD goroutine leaks [#9402](https://github.com/tikv/pd/issues/9402) @[baurine](https://github.com/baurine)
     - Fix the issue that newly added TiKV nodes might fail to be scheduled [#9145](https://github.com/tikv/pd/issues/9145) @[bufferflies](https://github.com/bufferflies)
 
 + TiFlash
