@@ -9,7 +9,7 @@ The `CLUSTER_INFO` cluster topology table provides the current topology informat
 
 > **Note:**
 >
-> This table is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> This table is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and {{{ .essential }}} clusters.
 
 {{< copyable "sql" >}}
 
