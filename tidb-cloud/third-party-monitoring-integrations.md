@@ -5,7 +5,7 @@ summary: Learn how to use third-party metrics integrations.
 
 # Third-Party Metrics Integrations
 
-You can integrate TiDB Cloud with third-party metrics services to receive TiDB Cloud alerts and view the performance metrics of your TiDB cluster using the metrics services.
+You can integrate TiDB Cloud with third-party metrics services to receive TiDB Cloud alerts and view the performance metrics of your TiDB cluster in those services.
 
 ## Available integrations
 
