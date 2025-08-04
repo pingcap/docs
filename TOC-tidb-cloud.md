@@ -32,7 +32,7 @@
 
 - Development Quick Start
   - [Developer Guide Overview](/develop/dev-guide-overview.md)
-  - [Build a TiDB Cloud Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
+  - [Build a TiDB Cloud Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
   - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
 - Connect to TiDB Cloud
   - GUI Database Tools
