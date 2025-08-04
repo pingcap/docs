@@ -20,13 +20,11 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 <LearningPath label="Try" icon="cloud5">
 
-[Try Out TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart)
+[Try Out TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart)
 
 [Try Out TiDB + AI](https://docs.pingcap.com/tidbcloud/vector-search-get-started-using-python)
 
 [Try Out HTAP](https://docs.pingcap.com/tidbcloud/tidb-cloud-htap-quickstart)
-
-[Try Out TiDB Cloud CLI](https://docs.pingcap.com/tidbcloud/get-started-with-cli)
 
 [Proof of Concept](https://docs.pingcap.com/tidbcloud/tidb-cloud-poc)
 
@@ -60,17 +58,13 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Use API (Beta)](https://docs.pingcap.com/tidbcloud/api-overview)
 
-[Use TiDB Cloud CLI](https://docs.pingcap.com/tidbcloud/get-started-with-cli)
-
 </LearningPath>
 
 <LearningPath label="Migrate" icon="cloud3">
 
 [Import Sample Data](https://docs.pingcap.com/tidbcloud/import-sample-data)
 
-[From MySQL](https://docs.pingcap.com/tidbcloud/migrate-data-into-tidb)
-
-[From Amazon Aurora MySQL](https://docs.pingcap.com/tidbcloud/migrate-from-aurora-bulk-import)
+[From MySQL](https://docs.pingcap.com/tidbcloud/migrate-from-mysql-using-data-migration/)
 
 [From Amazon RDS for Oracle](https://docs.pingcap.com/tidbcloud/migrate-from-oracle-using-aws-dms)
 
@@ -79,8 +73,6 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 [From CSV Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
 
 [From Apache Parquet Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
-
-[With MySQL CLI](https://docs.pingcap.com/tidbcloud/import-with-mysql-cli)
 
 </LearningPath>
 
