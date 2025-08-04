@@ -9,7 +9,7 @@ summary: Introduce how to integrate TiDB with Amazon AppFlow step by step.
 
 This document describes how to integrate TiDB with Amazon AppFlow and takes integrating a {{{ .starter }}} cluster as an example.
 
-If you do not have a TiDB cluster, you can create a [{{{ .starter }}}](https://tidbcloud.com/console/clusters) cluster, which is free and can be created in approximately 30 seconds.
+If you do not have a TiDB cluster, you can create a [{{{ .starter }}}](/tidb-cloud/tidb-cloud-quickstart.md) cluster, which is free and can be created in approximately 30 seconds.
 
 ## Prerequisites
 
