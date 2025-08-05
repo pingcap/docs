@@ -230,29 +230,29 @@
     - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
 - Vector Search ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-  - [Overview](/tidb-cloud/vector-search-overview.md)
+  - [Overview](/vector-search/vector-search-overview.md)
   - Get Started
-    - [Get Started with SQL](/tidb-cloud/vector-search-get-started-using-sql.md)
-    - [Get Started with Python](/tidb-cloud/vector-search-get-started-using-python.md)
+    - [Get Started with SQL](/vector-search/vector-search-get-started-using-sql.md)
+    - [Get Started with Python](/vector-search/vector-search-get-started-using-python.md)
   - Integrations
-    - [Overview](/tidb-cloud/vector-search-integration-overview.md)
+    - [Overview](/vector-search/vector-search-integration-overview.md)
     - AI Frameworks
-      - [LlamaIndex](/tidb-cloud/vector-search-integrate-with-llamaindex.md)
-      - [Langchain](/tidb-cloud/vector-search-integrate-with-langchain.md)
+      - [LlamaIndex](/vector-search/vector-search-integrate-with-llamaindex.md)
+      - [Langchain](/vector-search/vector-search-integrate-with-langchain.md)
     - AI Services
       - [Amazon Bedrock](/tidb-cloud/vector-search-integrate-with-amazon-bedrock.md)
     - Embedding Models/Services
-      - [Jina AI](/tidb-cloud/vector-search-integrate-with-jinaai-embedding.md)
+      - [Jina AI](/vector-search/vector-search-integrate-with-jinaai-embedding.md)
     - ORM Libraries
-      - [SQLAlchemy](/tidb-cloud/vector-search-integrate-with-sqlalchemy.md)
-      - [peewee](/tidb-cloud/vector-search-integrate-with-peewee.md)
-      - [Django ORM](/tidb-cloud/vector-search-integrate-with-django-orm.md)
+      - [SQLAlchemy](/vector-search/vector-search-integrate-with-sqlalchemy.md)
+      - [peewee](/vector-search/vector-search-integrate-with-peewee.md)
+      - [Django ORM](/vector-search/vector-search-integrate-with-django-orm.md)
   - Reference
-    - [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
-    - [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md)
-    - [Vector Index](/tidb-cloud/vector-search-index.md)
-  - [Improve Performance](/tidb-cloud/vector-search-improve-performance.md)
-  - [Limitations](/tidb-cloud/vector-search-limitations.md)
+    - [Vector Data Types](/vector-search/vector-search-data-types.md)
+    - [Vector Functions and Operators](/vector-search/vector-search-functions-and-operators.md)
+    - [Vector Index](/vector-search/vector-search-index.md)
+  - [Improve Performance](/vector-search/vector-search-improve-performance.md)
+  - [Limitations](/vector-search/vector-search-limitations.md)
 - Security
   - Identity Access Control
     - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
