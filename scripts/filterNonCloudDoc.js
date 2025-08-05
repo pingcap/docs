@@ -41,9 +41,8 @@ const extractFilefromList = (
 
 const main = () => {
   const filteredLinkList = getFileList(".");
-  console.log(filteredLinkList);
 
-  // extractFilefromList(filteredLinkList, ".", "./tmp");
+  extractFilefromList(filteredLinkList, ".", "./tmp");
 };
 
 main();
