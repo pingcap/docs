@@ -141,7 +141,6 @@
       - [Overview](/tidb-cloud/branch-overview.md)
       - [Manage Branches](/tidb-cloud/branch-manage.md)
       - [GitHub Integration](/tidb-cloud/branch-github-integration.md)
-    - [Manage Spending Limit](/tidb-cloud/manage-serverless-spend-limit.md)
     - [Back Up and Restore TiDB Cloud Data](/tidb-cloud/backup-and-restore-serverless.md)
     - [Export Data from TiDB Cloud](/tidb-cloud/serverless-export.md)
   - Use an HTAP Cluster with TiFlash
