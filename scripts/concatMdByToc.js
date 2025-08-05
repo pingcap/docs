@@ -126,7 +126,7 @@ const main = () => {
   let mergedStr = "";
 
   fileList.forEach((filePath) => {
-    mergedStr += `${handleSingleMd(`.${filePath}`)}\n\n`;
+    mergedStr += `${handleSingleMd(`./${filePath}`)}\n\n`;
   });
 
   const variables = JSON.parse(
