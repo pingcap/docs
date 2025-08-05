@@ -4948,7 +4948,7 @@ SHOW WARNINGS;
 >
 > This TiDB variable is not applicable to TiDB Cloud.
 
-- Scope: SESSION | GLOBAL
+- Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
