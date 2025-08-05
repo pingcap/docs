@@ -164,7 +164,7 @@
     - [Cluster Events](/tidb-cloud/tidb-cloud-events.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
-    - [Use the Diagnosis Tab to Analyze Performance](/tidb-cloud/tune-performance.md)
+    - [Analyze Performance](/tidb-cloud/tune-performance.md)
     - SQL Tuning
       - [Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
       - Understanding the Query Execution Plan

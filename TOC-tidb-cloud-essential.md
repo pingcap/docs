@@ -160,7 +160,7 @@
     - [Cluster Events](/tidb-cloud/tidb-cloud-events.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
-    - [Use the Diagnosis Page to Analyze Performance](/tidb-cloud/tune-performance.md)
+    - [Analyze Performance](/tidb-cloud/tune-performance.md)
       - [Use Index Insight](/tidb-cloud/index-insight.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
     - SQL Tuning
       - [Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
