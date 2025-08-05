@@ -178,7 +178,7 @@ CREATE TABLE sample (
 );
 ```
 
-**Example: Use alternative dimensions via `output_dimension`**
+**Example: Use alternative dimensions**
 
 ```sql
 CREATE TABLE sample (

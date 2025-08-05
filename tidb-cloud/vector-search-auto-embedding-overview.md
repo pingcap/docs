@@ -116,10 +116,10 @@ TiDB Cloud supports various embedding models. Choose the one that best fits your
 
 You can also use open-source embedding models via following inference services supported by TiDB Cloud:
 
-| Embedding Model       | Documentation                                                                     | Hosted by TiDB Cloud [<sup>1</sup>](#hosted-models) | BYOK [<sup>2</sup>](#byok-models) | Example Supported Models        |
-| --------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------- | --------------------------------- | ------------------------------- |
-| HuggingFace Inference | [HuggingFace Embeddings](/tidb-cloud/vector-search-auto-embedding-huggingface.md) |                                                     | ✅                                | Qwen3-8B, multilingual-e5-large |
-| NVIDIA NIM            | [NVIDIA NIM Embeddings](/tidb-cloud/vector-search-auto-embedding-nvidia-nim.md)   |                                                     | ✅                                | bge-m3, nv-embed-v1             |
+| Embedding Model       | Documentation                                                                     | Hosted by TiDB Cloud [<sup>1</sup>](#hosted-models) | BYOK [<sup>2</sup>](#byok-models) | Example Supported Models      |
+| --------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------- | --------------------------------- | ----------------------------- |
+| HuggingFace Inference | [HuggingFace Embeddings](/tidb-cloud/vector-search-auto-embedding-huggingface.md) |                                                     | ✅                                | bge-m3, multilingual-e5-large |
+| NVIDIA NIM            | [NVIDIA NIM Embeddings](/tidb-cloud/vector-search-auto-embedding-nvidia-nim.md)   |                                                     | ✅                                | bge-m3, nv-embed-v1           |
 
 <a name="hosted-models"></a> <sup>1</sup> Hosted models are hosted by TiDB Cloud and don't require any API keys. They are currently free to use.
 
