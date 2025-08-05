@@ -11,7 +11,7 @@ summary: Learn how to integrate the TiDB Cloud Branching feature with GitHub.
 
 If you use GitHub for application development, you can integrate TiDB Cloud Branching into your GitHub CI/CD pipeline, which lets you automatically test your pull requests with branches without affecting the production database.
 
-In the integration process, you will be prompted to install the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) GitHub App. The app can automatically manage branches of your {{{ .starter }}} or {{{ .essential }}} cluster according to pull requests in your GitHub repository. For example, when you create a pull request, the app will create a corresponding branch for your {{{ .starter }}} cluster, in which you can work on new features or bug fixes in isolation without affecting the production database.
+In the integration process, you will be prompted to install the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) GitHub App. The app can automatically manage branches of your {{{ .starter }}} or {{{ .essential }}} cluster according to pull requests in your GitHub repository. For example, when you create a pull request, the app will create a corresponding branch for your cluster, in which you can work on new features or bug fixes in isolation without affecting the production database.
 
 This document covers the following topics:
 
