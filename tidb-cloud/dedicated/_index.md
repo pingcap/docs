@@ -80,7 +80,7 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Status and Metrics](https://docs.pingcap.com/tidbcloud/monitor-tidb-cluster)
 
-[Built-in Monitoring](https://docs.pingcap.com/tidbcloud/built-in-monitoring) 
+[Built-in Monitoring](https://docs.pingcap.com/tidbcloud/built-in-monitoring)
 
 [Built-in Alerting](https://docs.pingcap.com/tidbcloud/monitor-built-in-alerting)
 
