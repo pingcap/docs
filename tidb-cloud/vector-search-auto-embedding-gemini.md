@@ -6,19 +6,19 @@ aliases: ["/tidb/stable/vector-search-auto-embedding-gemini"]
 
 # Gemini Embeddings
 
-All Gemini models are available for use under the `gemini/` prefix when you bring your own Gemini API key. To name a few:
+All Gemini models are available for use under the `gemini/` prefix when you bring your own Gemini API key.
 
 **gemini-embedding-001**
 
 - Name: `gemini/gemini-embedding-001`
-- Dimensions: 128 - 3072 (default: 3072)
+- Dimensions: 128–3072 (default: 3072)
 - Distance Metric: Cosine / L2
 - Max input text tokens: 2048
 - Price: Charged by Google
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
 
-For a full list of available models, please refer to [Gemini Documentation](https://ai.google.dev/gemini-api/docs/embeddings).
+For a full list of available models, please refer to [Gemini documentation](https://ai.google.dev/gemini-api/docs/embeddings).
 
 ## SQL Usage Example
 
@@ -100,7 +100,7 @@ CREATE TABLE sample (
 );
 ```
 
-For all available options, please refer to [Gemini Documentation](https://ai.google.dev/gemini-api/docs/embeddings).
+For all available options, please refer to [Gemini documentation](https://ai.google.dev/gemini-api/docs/embeddings).
 
 ## Python Usage Example
 

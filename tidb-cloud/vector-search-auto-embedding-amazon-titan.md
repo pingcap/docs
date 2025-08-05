@@ -23,7 +23,7 @@ TiDB Cloud provides the following [Amazon Titan embedding model](https://docs.aw
 - Hosted by TiDB Cloud: ✅
 - Bring Your Own Key: ❌
 
-You may learn more from [its official documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html).
+For more details, see [its official documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html).
 
 ## SQL Usage Example
 
@@ -70,7 +70,7 @@ Result:
 
 ## Options
 
-Additional options may be specified via the `additional_json_options` parameter of the `EMBED_TEXT()` function.
+You can specify additional options via the `additional_json_options` parameter of the `EMBED_TEXT()` function.
 
 - `normalize` – (optional) Flag indicating whether or not to normalize the output embedding. Defaults to true.
 - `dimensions` – (optional) The number of dimensions the output embedding should have. The following values are accepted: 1024 (default), 512, 256.
