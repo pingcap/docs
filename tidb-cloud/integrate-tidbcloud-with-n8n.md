@@ -11,7 +11,7 @@ This document introduces how to build an auto-workflow: create a {{{ .starter }}
 
 > **Note:**
 >
-> The steps in this document work with {{{ .essential }}} clusters too.
+> In addition to {{{ .starter }}} clusters, the steps in this document also work with {{{ .essential }}} clusters.
 
 ## Prerequisites: Get TiDB Cloud API key
 

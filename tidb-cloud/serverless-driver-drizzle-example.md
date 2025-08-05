@@ -11,7 +11,7 @@ This tutorial describes how to use TiDB Cloud serverless driver with Drizzle in 
 
 > **Tip:**
 >
-> The steps in this document work with {{{ .essential }}} clusters too.
+> In addition to {{{ .starter }}} clusters, the steps in this document also work with {{{ .essential }}} clusters.
 
 ## Use Drizzle and TiDB Cloud serverless driver in Node.js environments
 

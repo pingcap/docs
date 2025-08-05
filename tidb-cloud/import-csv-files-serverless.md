@@ -5,7 +5,7 @@ summary: Learn how to import CSV files from Amazon S3, GCS, Azure Blob Storage, 
 
 # Import CSV Files from Cloud Storage into {{{ .starter }}} or Essential
 
-This document describes how to import CSV files from Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS), Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into {{{ .starter }}} or Essential.
+This document describes how to import CSV files from Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS), Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into {{{ .starter }}} or {{{ .essential }}}.
 
 > **Note:**
 >

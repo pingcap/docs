@@ -18,7 +18,7 @@ You are expected to have an AWS account with enough access to manage DMS-related
 
 ### A TiDB Cloud account and a TiDB cluster
 
-You are expected to have a TiDB Cloud account and a {{{ .starter }}}, {{{ .essential }}} or TiDB Cloud Dedicated cluster. If not, refer to the following documents to create one:
+You are expected to have a TiDB Cloud account and a {{{ .starter }}}, {{{ .essential }}}, or TiDB Cloud Dedicated cluster. If not, refer to the following documents to create one:
 
 - [Create a {{{ .starter }}} or Essential cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
 - [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md)

@@ -9,7 +9,7 @@ This document describes a step-by-step example of how to migrate data from Amazo
 
 > **Tip:**
 >
-> The steps in this document work with {{{ .essential }}} clusters too.
+> In addition to {{{ .starter }}} clusters, the steps in this document also work with {{{ .essential }}} clusters.
 
 If you are interested in learning more about TiDB Cloud and AWS DMS, see the following:
 

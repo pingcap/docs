@@ -42,7 +42,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `SHOW BACKUPS` | Supported | Not supported [^3] |
 | `RESTORE` | Supported | Not supported [^3] |
 | `SHOW RESTORES` | Supported | Not supported [^3] |
-| `ADMIN RESET TELEMETRY_ID` | Supported | Telemetry is not supported on {{{ .starter }}} and {{{ .essential }}}. |
+| `ADMIN RESET TELEMETRY_ID` | Supported | Telemetry is not supported on {{{ .starter }}} or {{{ .essential }}}. |
 | `ADMIN SHOW TELEMETRY` | Not supported [^4] | Not supported [^4] |
 | `ADMIN SHOW SLOW` | Supported | Not supported [^5] |
 | `ADMIN PLUGINS ENABLE` | Supported | Not supported [^8] |

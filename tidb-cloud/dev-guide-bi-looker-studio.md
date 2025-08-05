@@ -5,13 +5,13 @@ summary: Learn how to connect to TiDB Cloud using Looker Studio.
 
 # Connect to TiDB Cloud with Looker Studio
 
-TiDB is a MySQL-compatible database, TiDB Cloud is a fully managed TiDB offering, and [Looker Studio](https://lookerstudio.google.com/) is a free web-based BI tool that can visualize data from various sources.
+TiDB is a MySQL-compatible database, TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings TiDB to your cloud, and [Looker Studio](https://lookerstudio.google.com/) is a free web-based BI tool that can visualize data from various sources.
 
 This tutorial takes a {{{ .starter }}} cluster as an example to show you how to connect to TiDB Cloud with Looker Studio.
 
 > **Note:**
 >
-> - All steps in this tutorial work with {{{ .essential }}} clusters too.
+> - In addition to {{{ .starter }}} clusters, the steps in this document also work with {{{ .essential }}} clusters.
 > - Most steps in this tutorial work with TiDB Cloud Dedicated as well. However, for TiDB Cloud Dedicated, you need to note the following:
 >     - Import your dataset following [Import data from files to TiDB Cloud](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud).
 >     - Get the connection information for your cluster following [Connect to TiDB Cloud Dedicated](/tidb-cloud/connect-via-standard-connection.md). When connecting to TiDB Cloud Dedicated, you need to allow access from `142.251.74.0/23`. For more information about connections from Looker Studio, see [Looker Studio documentation](https://support.google.com/looker-studio/answer/7088031#zippy=%2Cin-this-article).

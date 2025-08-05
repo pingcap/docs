@@ -157,7 +157,7 @@ The console audit logs record various user activities on the TiDB Cloud console 
 | DeferMaintenanceTask           | Defer a maintenance task                                                         |
 | CreateBranch                   | Create a branch for {{{ .starter }}} or {{{ .essential }}} cluster                                                  |
 | DeleteBranch                   | Delete a branch for {{{ .starter }}} or {{{ .essential }}} cluster                                                  |
-| SetBranchRootPassword          | Set root password for a branch for {{{ .starter }}} or {{{ .essential }}} cluster                                   |
+| SetBranchRootPassword          | Set root password for a branch of your {{{ .starter }}} or {{{ .essential }}} cluster                                   |
 | ConnectBranchGitHub            | Connect the cluster with a GitHub repository to enable branching integration     |
 | DisconnectBranchGitHub         | Disconnect the cluster from a GitHub repository to disable branching integration |
 

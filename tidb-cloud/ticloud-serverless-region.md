@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/ticloud-serverless-regions']
 
 # ticloud serverless region
 
-List all available regions for {{{ .starter }}} and {{{ .essential }}} clusters:
+List all available regions for {{{ .starter }}} and {{{ .essential }}}:
 
 ```shell
 ticloud serverless region [flags]
@@ -14,13 +14,13 @@ ticloud serverless region [flags]
 
 ## Examples
 
-List all available regions for {{{ .starter }}} and {{{ .essential }}} clusters:
+List all available regions for {{{ .starter }}} and {{{ .essential }}}:
 
 ```shell
 ticloud serverless region
 ```
 
-List all available regions for {{{ .starter }}} and {{{ .essential }}} clusters in the JSON format:
+List all available regions for {{{ .starter }}} and {{{ .essential }}} in the JSON format:
 
 ```shell
 ticloud serverless region -o json

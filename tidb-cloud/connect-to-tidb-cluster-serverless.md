@@ -21,7 +21,7 @@ After your {{{ .starter }}} or {{{ .essential }}} cluster is created on TiDB Clo
 
 - [Data Service (beta)](/tidb-cloud/data-service-overview.md)
 
-  TiDB Cloud provides a Data Service feature that enables you to connect to your {{{ .starter }}} or {{{ .essential }}} cluster via an HTTPS request using a custom API endpoint. Unlike direct connections, Data Service accesses your cluster data via a RESTful API rather than raw SQL.
+  TiDB Cloud provides a Data Service feature that enables you to connect to your {{{ .starter }}} cluster hosted on AWS via an HTTPS request using a custom API endpoint. Unlike direct connections, Data Service accesses your cluster data via a RESTful API rather than raw SQL.
 
 - [Serverless Driver (beta)](/tidb-cloud/serverless-driver.md)
 
@@ -54,7 +54,7 @@ The following table shows the network you can use in different connection method
 | Connection method          | Network                      | Description                                                                                                       |
 |----------------------------|------------------------------|-------------------------------------------------------------------------------------------------------------------|
 | Direct connections         | Public or private endpoint   | Direct connections can be made via both public and private endpoints.                                             |
-| Data Service (beta)        | /                            | Accessing {{{ .starter }}} or {{{ .essential }}} via Data Service (beta) does not need to specify the network type.                      |
+| Data Service (beta)        | /                            | Accessing {{{ .starter }}} hosted on AWS via Data Service (beta) does not need to specify the network type.                      |
 | Serverless Driver (beta)   | Public endpoint              | Serverless Driver only supports connections via public endpoint.                                                  |
 
 ## What's next

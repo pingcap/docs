@@ -57,7 +57,7 @@ For applications experiencing growing workloads and needing scalability in real 
 
 <!--Important: Do not update the section name "User name prefix" because this section is referenced by TiDB backend error messages.-->
 
-For each {{{ .starter }}} and {{{ .essential }}} cluster, TiDB Cloud generates a unique prefix to distinguish it from other clusters.
+For each {{{ .starter }}} or {{{ .essential }}} cluster, TiDB Cloud generates a unique prefix to distinguish it from other clusters.
 
 Whenever you use or set a database user name, you must include the prefix in the user name. For example, assume that the prefix of your cluster is `3pTAoNNegb47Uc8`.
 

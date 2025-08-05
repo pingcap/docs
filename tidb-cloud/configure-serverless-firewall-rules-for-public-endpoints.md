@@ -5,7 +5,7 @@ summary: Learn how to configure and manage firewall rules with public access to 
 
 # Configure {{{ .starter }}} or Essential Firewall Rules for Public Endpoints
 
-This document describes the public connectivity option for {{{ .starter }}} or {{{ .essential }}}. You will learn key concepts for securely managing a cluster accessible via the internet.
+This document describes the public connectivity option for {{{ .starter }}} and {{{ .essential }}} clusters. You will learn key concepts for securely managing a cluster accessible via the internet.
 
 > **Note:**
 >

@@ -14,7 +14,7 @@ This tutorial describes how to use [@tidbcloud/prisma-adapter](https://github.co
 
 > **Tip:**
 >
-> The steps in this document work with {{{ .essential }}} clusters too.
+> In addition to {{{ .starter }}} clusters, the steps in this document also work with {{{ .essential }}} clusters.
 
 ## Install
 
