@@ -145,7 +145,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
         - Fix the issue that evaluating event filter expressions on tables containing virtual columns might cause a panic [#12206](https://github.com/pingcap/tiflow/issues/12206) @[lidezhu](https://github.com/lidezhu)
         - Fix them issue that the resolved ts lag keeps increasing after scaling in or out TiKV nodes on the same IP address because of outdated store IDs [#12162](https://github.com/pingcap/tiflow/issues/12162) @[3AceShowHand](https://github.com/3AceShowHand)
-        - Fix the case sensitivity issue in column and index name matching in dispatcher configuration [#12103](https://github.com/pingcap/tiflow/issues/12103) @[wk989898](https://github.com/wk989898)
+        - Fix the issue of case-sensitive matching for column and index names in the dispatcher configuration [#12103](https://github.com/pingcap/tiflow/issues/12103) @[wk989898](https://github.com/wk989898)
         - Fix the issue that configuring `column-selector` with the Debezium protocol might cause a panic [#12208](https://github.com/pingcap/tiflow/issues/12208) @[wk989898](https://github.com/wk989898)
 
     + TiDB Data Migration (DM)
