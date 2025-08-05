@@ -1,5 +1,5 @@
 import {
-  getAllMdList,
+  getAllCloudMdList,
   copySingleFileSync,
   copyFileWithCustomContentSync,
   copyDirectoryWithCustomContentSync,
@@ -24,21 +24,10 @@ const extractFilefromList = (
   });
 };
 
-const CLOUD_TOC_LIST = [
-  "TOC-tidb-cloud.md",
-  "TOC-tidb-cloud-essential.md",
-  "TOC-tidb-cloud-starter.md",
-];
-
 const main = () => {
-  // Get all MD lists from each TOC file and deduplicate
-  const allFilteredLinkLists = CLOUD_TOC_LIST.map((tocFile) =>
-    getAllMdList(tocFile)
-  );
-  const flattenedList = allFilteredLinkLists.flat();
-  const filteredLinkList = [...new Set(flattenedList)]; // Deduplicate
+  const allFilePaths = getAllCloudMdList();
 
-  extractFilefromList(filteredLinkList, ".", "./tmp");
+  extractFilefromList(allFilePaths, ".", "./tmp");
   copySingleFileSync("TOC-tidb-cloud.md", "./tmp/TOC.md");
   copyDirectoryWithCustomContentSync(
     "./tidb-cloud/",

@@ -1,19 +1,8 @@
 import * as fs from "fs";
 import path from "path";
-import { getAllMdList } from "./utils.js";
+import { getAllCloudMdList } from "./utils.js";
 
-const CLOUD_TOC_LIST = [
-  "TOC-tidb-cloud.md",
-  "TOC-tidb-cloud-essential.md",
-  "TOC-tidb-cloud-starter.md",
-];
-
-// Get all MD files from multiple TOCs and deduplicate
-const allFilteredLinkLists = CLOUD_TOC_LIST.map((tocFile) =>
-  getAllMdList(tocFile)
-);
-const flattenedList = allFilteredLinkLists.flat();
-const allFilePaths = [...new Set(flattenedList)]; // Deduplicate
+const allFilePaths = getAllCloudMdList();
 
 // Set to store filtered file paths
 const filePaths = new Set();
