@@ -27,7 +27,7 @@ const extractFilefromList = (
 const main = () => {
   const allFilePaths = getAllCloudMdList();
 
-  extractFilefromList(allFilePaths, ".", "./tmp");
+  extractFilefromList(allFilePaths, "./", "./tmp");
   copySingleFileSync("TOC-tidb-cloud.md", "./tmp/TOC.md");
   copyDirectoryWithCustomContentSync(
     "./tidb-cloud/",
