@@ -8,7 +8,7 @@ summary: Learn how to use third-party metrics integrations.
 You can integrate TiDB Cloud with the following third-party metrics services to receive TiDB Cloud alerts and view the performance metrics of your TiDB cluster in these services:
 
 - [Datadog integration (Preview)](#datadog-integration-preview)
-- [Prometheus and Grafana integration (beta)](#prometheus-and-grafana-integration-beta)
+- [Prometheus and Grafana integration (Beta)](#prometheus-and-grafana-integration-beta)
 - [New Relic integration (Preview)](#new-relic-integration-preview)
 
 ## Datadog integration (Preview)
