@@ -9,7 +9,7 @@ TiDB is a MySQL-compatible database, and [JetBrains DataGrip](https://www.jetbra
 
 > **Note:**
 >
-> This tutorial is compatible with {{{ .starter }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> This tutorial is compatible with {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
 
 You can use DataGrip in two ways:
 

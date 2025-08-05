@@ -15,7 +15,7 @@ In this tutorial, you can learn how to use TiDB and SQLAlchemy to accomplish the
 
 > **Note:**
 >
-> This tutorial works with {{{ .starter }}}, TiDB Cloud Dedicated, and TiDB Self-Managed clusters.
+> This tutorial works with {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated, and TiDB Self-Managed clusters.
 
 ## Prerequisites
 

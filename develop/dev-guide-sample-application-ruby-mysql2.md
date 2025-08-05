@@ -15,7 +15,7 @@ In this tutorial, you can learn how to use TiDB and mysql2 to accomplish the fol
 
 > **Note:**
 >
-> This tutorial works with {{{ .starter }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> This tutorial works with {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
 
 ## Prerequisites
 
@@ -112,7 +112,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
    > **Note**
    >
-   > For {{{ .starter }}}, TLS connection **MUST** be enabled via `DATABASE_ENABLE_SSL` when using public endpoint.
+   > For {{{ .starter }}} and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), TLS connection **MUST** be enabled via `DATABASE_ENABLE_SSL` when using public endpoint.
 
 7. Save the `.env` file.
 
@@ -231,7 +231,7 @@ client = Mysql2::Client.new(options)
 
 > **Note**
 >
-> For {{{ .starter }}}, TLS connection **MUST** be enabled via `DATABASE_ENABLE_SSL` when using public endpoint, but you **don't** have to specify an SSL CA certificate via `DATABASE_SSL_CA`, because mysql2 gem will search for existing CA certificates in a particular order until a file is discovered.
+> For {{{ .starter }}} and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), TLS connection **MUST** be enabled via `DATABASE_ENABLE_SSL` when using public endpoint, but you **don't** have to specify an SSL CA certificate via `DATABASE_SSL_CA`, because mysql2 gem will search for existing CA certificates in a particular order until a file is discovered.
 
 ### Insert data
 

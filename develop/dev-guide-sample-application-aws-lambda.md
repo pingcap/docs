@@ -16,7 +16,7 @@ In this tutorial, you can learn how to use TiDB and mysql2 in AWS Lambda Functio
 
 > **Note**
 >
-> This tutorial works with {{{ .starter }}} and TiDB Self-Managed.
+> This tutorial works with {{{ .starter }}}, {{{ .essential }}}, and TiDB Self-Managed.
 
 ## Prerequisites
 

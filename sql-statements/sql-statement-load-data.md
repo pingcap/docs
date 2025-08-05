@@ -20,7 +20,7 @@ Starting from TiDB v7.0.0, the `LOAD DATA` SQL statement supports the following 
 
 > **Note:**
 >
-> For the `LOAD DATA INFILE` statement, TiDB Cloud Dedicated supports `LOAD DATA LOCAL INFILE`, and `LOAD DATA INFILE` from Amazon S3 or Google Cloud Storage, while {{{ .starter }}} only supports `LOAD DATA LOCAL INFILE`.
+> For the `LOAD DATA INFILE` statement, TiDB Cloud Dedicated supports `LOAD DATA LOCAL INFILE`, and `LOAD DATA INFILE` from Amazon S3 or Google Cloud Storage, while {{{ .starter }}} and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) only support `LOAD DATA LOCAL INFILE`.
 
 </CustomContent>
 
@@ -45,7 +45,7 @@ Fields ::=
 
 You can use `LOCAL` to specify data files on the client to be imported, where the file parameter must be the file system path on the client.
 
-If you are using TiDB Cloud, to use the `LOAD DATA` statement to load local data files, you need to add the `--local-infile` option to the connection string when you connect to TiDB Cloud. 
+If you are using TiDB Cloud, to use the `LOAD DATA` statement to load local data files, you need to add the `--local-infile` option to the connection string when you connect to TiDB Cloud.
 
 - The following is an example connection string for {{{ .starter }}}:
 

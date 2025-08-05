@@ -15,7 +15,7 @@ In this tutorial, you can learn how to use TiDB and mysql2 in Next.js to accompl
 
 > **Note**
 >
-> This tutorial works with {{{ .starter }}} and TiDB Self-Managed.
+> This tutorial works with {{{ .starter }}}, {{{ .essential }}}, and TiDB Self-Managed.
 
 ## Prerequisites
 
