@@ -1,9 +1,9 @@
 ---
-title: {{{ .starter }}} Driver Node.js Tutorial
+title: TiDB Cloud Serverless Driver Node.js Tutorial
 summary: Learn how to use TiDB Cloud serverless driver in a local Node.js project.
 ---
 
-# {{{ .starter }}} Driver Node.js Tutorial
+# TiDB Cloud Serverless Driver Node.js Tutorial
 
 This tutorial describes how to use TiDB Cloud serverless driver in a local Node.js project.
 
