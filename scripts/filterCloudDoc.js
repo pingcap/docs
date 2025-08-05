@@ -24,8 +24,19 @@ const extractFilefromList = (
   });
 };
 
+const CLOUD_TOC_LIST = [
+  "TOC-tidb-cloud.md",
+  "TOC-tidb-cloud-essential.md",
+  "TOC-tidb-cloud-starter.md",
+];
+
 const main = () => {
-  const filteredLinkList = getAllMdList("TOC-tidb-cloud.md");
+  // Get all MD lists from each TOC file and deduplicate
+  const allFilteredLinkLists = CLOUD_TOC_LIST.map((tocFile) =>
+    getAllMdList(tocFile)
+  );
+  const flattenedList = allFilteredLinkLists.flat();
+  const filteredLinkList = [...new Set(flattenedList)]; // Deduplicate
 
   extractFilefromList(filteredLinkList, ".", "./tmp");
   copySingleFileSync("TOC-tidb-cloud.md", "./tmp/TOC.md");
