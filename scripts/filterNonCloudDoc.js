@@ -5,6 +5,12 @@ import {
   removeCustomContent,
 } from "./utils.js";
 
+const CLOUD_TOC_LIST = [
+  "TOC-tidb-cloud.md",
+  "TOC-tidb-cloud-essential.md",
+  "TOC-tidb-cloud-starter.md",
+];
+
 const contentHandler = (content = "") => {
   return removeCustomContent("tidb", content);
 };
@@ -17,7 +23,7 @@ const extractFilefromList = (
   fileList.forEach((filePath = "") => {
     if (
       filePath.includes(`/tidb-cloud/`) ||
-      filePath.includes(`TOC-tidb-cloud.md`)
+      CLOUD_TOC_LIST.includes(filePath)
     ) {
       return;
     }
