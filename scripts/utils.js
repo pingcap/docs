@@ -67,7 +67,9 @@ export const getAllMdList = (tocFile) => {
   const tocFileContent = fs.readFileSync(tocFile);
   const mdAst = generateMdAstFromFile(tocFileContent);
   const linkList = extractLinkNodeFromAst(mdAst);
-  const filteredLinkList = filterLink(linkList);
+  const filteredLinkList = filterLink(linkList).map((link) =>
+    link.replace(/^\.?\//, "")
+  );
   return filteredLinkList;
 };
 
