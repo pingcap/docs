@@ -344,7 +344,7 @@
   - [Billing Profile](/tidb-cloud/tidb-cloud-billing.md#billing-profile)
   - [Credits](/tidb-cloud/tidb-cloud-billing.md#credits)
   - [Payment Method Setting](/tidb-cloud/tidb-cloud-billing.md#payment-method)
-  - [Billing from AWS, Azure, or Google Cloud Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-azure-marketplace-or-google-cloud-marketplace)
+  - [Billing from Cloud Provider Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace)
   - [Billing for Changefeed](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
   - [Billing for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md)
   - [Billing for Recovery Groups](/tidb-cloud/tidb-cloud-billing-recovery-group.md)
