@@ -1,15 +1,15 @@
 ---
-title: Export Data from {{{ .starter }}}
-summary: Learn how to export data from {{{ .starter }}} clusters.
+title: Export Data from {{{ .starter }}} or Essential
+summary: Learn how to export data from {{{ .starter }}} or {{{ .essential }}} clusters.
 ---
 
-# Export Data from {{{ .starter }}}
+# Export Data from {{{ .starter }}} or Essential
 
-{{{ .starter }}} Export (Beta) is a service that enables you to export data from a {{{ .starter }}} cluster to a local file or an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
+TiDB Cloud enables you to export data from a {{{ .starter }}} or Essential cluster to a local file or an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
 
-While you can also export data using tools such as [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) and TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview), {{{ .starter }}} Export offers a more convenient and efficient way to export data from a {{{ .starter }}} cluster. It brings the following benefits:
+While you can also export data using tools such as [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) and TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview), the export feature provided by TiDB Cloud offers a more convenient and efficient way to export data from a cluster. It brings the following benefits:
 
-- Convenience: the export service provides a simple and easy-to-use way to export data from a {{{ .starter }}} cluster, eliminating the need for additional tools or resources.
+- Convenience: the export service provides a simple and easy-to-use way to export data from a cluster, eliminating the need for additional tools or resources.
 - Isolation: the export service uses separate computing resources, ensuring isolation from the resources used by your online services.
 - Consistency: the export service ensures the consistency of the exported data without causing locks, which does not affect your online services.
 
@@ -35,7 +35,7 @@ You can export data to the following locations:
 
 ### A local file
 
-To export data from a {{{ .starter }}} cluster to a local file, you need to export data [using the TiDB Cloud console](#export-data-to-a-local-file) or [using the TiDB Cloud CLI](/tidb-cloud/ticloud-serverless-export-create.md), and then download the exported data using the TiDB Cloud CLI.
+To export data from a TiDB Cloud cluster to a local file, you need to export data [using the TiDB Cloud console](#export-data-to-a-local-file) or [using the TiDB Cloud CLI](/tidb-cloud/ticloud-serverless-export-create.md), and then download the exported data using the TiDB Cloud CLI.
 
 Exporting data to a local file has the following limitations:
 
@@ -126,9 +126,9 @@ You can compress the exported Parquet data using the following algorithms:
 
 ### Data conversion
 
-When exporting data to the Parquet format, the data conversion between {{{ .starter }}} and Parquet is as follows:
+When exporting data to the Parquet format, the data conversion between TiDB and Parquet is as follows:
 
-| {{{ .starter }}} Type | Parquest primitive type | Parquet logical type                         |
+| TiDB data type | Parquest primitive type | Parquet logical type                         |
 |----------------------------|-------------------------|----------------------------------------------|
 | VARCHAR                    | BYTE_ARRAY              | String(UTF8)                                 |
 | TIME                       | BYTE_ARRAY              | String(UTF8)                                 |
@@ -242,7 +242,7 @@ When exporting data to the Parquet format, the data conversion between {{{ .star
     - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
     - **Folder URI**: enter the URI of the Amazon S3 with the `s3://<bucket-name>/<folder-path>/` format.
     - **Bucket Access**: choose one of the following access credentials and then fill in the credential information:
-        - **AWS Role ARN**: enter the role ARN that has the permission to access the bucket. It is recommended to create the role ARN with AWS CloudFormation. For more information, see [Configure External Storage Access for {{{ .starter }}}](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+        - **AWS Role ARN**: enter the role ARN that has the permission to access the bucket. It is recommended to create the role ARN with AWS CloudFormation. For more information, see [Configure Amazon S3 access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
         - **AWS Access Key**: enter the access key ID and access key secret that have the permission to access the bucket.
 
 4. Click **Export**.
@@ -323,7 +323,7 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
     - **Data Format**: choose **SQL**, **CSV**, or **Parquet**.
     - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
     - **Folder URI**: enter the URI of Azure Blob Storage with the `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` format.
-    - **SAS Token**: enter the SAS token that has the permission to access the container. It is recommended to create a SAS token with the [Azure ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/). For more information, see [Configure External Storage Access for {{{ .starter }}}](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+    - **SAS Token**: enter the SAS token that has the permission to access the container. It is recommended to create a SAS token with the [Azure ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/). For more information, see [Configure Azure Blob Storage access](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
 
 4. Click **Export**.
 
@@ -416,12 +416,14 @@ ticloud serverless export cancel -c <cluster-id> -e <export-id>
 
 ## Export speed
 
-The export speed depends on your [cluster plan](/tidb-cloud/select-cluster-tier.md#cluster-plans). For details, see the following table:
+The export speed depends on your [cluster plan](/tidb-cloud/select-cluster-tier.md):
 
-| Plan               | Export speed       |
-|:-------------------|:-------------------|
-| Free cluster plan      | Up to 25 MiB/s      |
-| Scalable cluster plan  | Up to 100 MiB/s     |
+- **{{{ .starter }}}**:
+
+    - If the spending limit is set to 0, the export speed is up to 25 MiB/s.
+    - If the spending limit is greater than 0, the export speed is up to 100 MiB/s.
+
+- **{{{ .essential }}}**: up to 100 MiB/s.
 
 ## Pricing
 
