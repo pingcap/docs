@@ -107,7 +107,13 @@ const getCloudTOCFiles = () => {
   const tocFilesSet = new Set(tocFiles);
 
   // Use tmpTocFiles if not empty, otherwise use tocFiles
-  const finalTocFiles = tmpTocFilesSet.size > 0 ? tmpTocFilesSet : tocFilesSet;
+  const baseTocFiles = tmpTocFilesSet.size > 0 ? tmpTocFilesSet : tocFilesSet;
+
+  // Normalize each value in the Set by removing leading ./ or /
+  const finalTocFiles = new Set();
+  for (const link of baseTocFiles) {
+    finalTocFiles.add(link.replace(/^\.?\//, ""));
+  }
 
   if (finalTocFiles.size === 0) {
     console.log(
