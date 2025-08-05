@@ -2,7 +2,7 @@ import * as fs from "fs";
 import path from "path";
 import axios from "axios";
 import { Octokit } from "octokit";
-import { getAllCloudMdList } from "./utils.js";
+import { CLOUD_TOC_LIST, getAllCloudMdList } from "./utils.js";
 
 const GH_TOKEN = process.env.GH_TOKEN || "";
 
@@ -100,11 +100,7 @@ const getCloudTOCFiles = () => {
     "./tmp/TOC-tidb-cloud-starter.md",
     "./tmp/TOC-tidb-cloud-essential.md",
   ]);
-  const tocFiles = getAllCloudMdList([
-    "./tmp/TOC-tidb-cloud.md",
-    "./tmp/TOC-tidb-cloud-starter.md",
-    "./tmp/TOC-tidb-cloud-essential.md",
-  ]);
+  const tocFiles = getAllCloudMdList(CLOUD_TOC_LIST);
 
   // Convert to Set
   const tmpTocFilesSet = new Set(tmpTocFiles);

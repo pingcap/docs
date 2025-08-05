@@ -71,7 +71,7 @@ export const getAllMdList = (tocFile) => {
   return filteredLinkList;
 };
 
-const CLOUD_TOC_LIST = [
+export const CLOUD_TOC_LIST = [
   "TOC-tidb-cloud.md",
   "TOC-tidb-cloud-essential.md",
   "TOC-tidb-cloud-starter.md",
