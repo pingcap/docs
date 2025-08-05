@@ -60,14 +60,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
         - The Download API of TiKV supports filtering out data within a certain time range when downloading backup files, which avoids importing outdated or future data versions during restore [#18399](https://github.com/tikv/tikv/issues/18399) @[3pointer](https://github.com/3pointer)
         - Support filtering log backup metadata files by timestamp to reduce the time spent on reading metadata during PITR [#61318](https://github.com/pingcap/tidb/issues/61318) @[3pointer](https://github.com/3pointer)
 
-    + TiCDC
-
-        - Fix panic when evaluating event-filter expressions on tables with virtual columns. [#12206](https://github.com/pingcap/tiflow/issues/12206) @[lidezhu](https://github.com/lidezhu)
-        - Fix the continuously increasing resolved_ts lag caused by stale store IDs after scaling in/out TiKV instances on the same IP address. [#12162](https://github.com/pingcap/tiflow/issues/12162) @[3AceShowHand](https://github.com/3AceShowHand)
-        - Fix case sensitivity issue in dispatcher configuration's column/index name matching. [#12103](https://github.com/pingcap/tiflow/issues/12103) @[wk989898](https://github.com/wk989898)
-        - Fix panic when configuring column-selector in Debezium protocol.[#12208](https://github.com/pingcap/tiflow/issues/12208) @[wk989898](https://github.com/wk989898)
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-
     + TiDB Data Migration (DM)
 
         - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
@@ -149,10 +141,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
         - (dup): release-9.0.0.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that PITR fails to restore indexes larger than 3072 bytes [#58430](https://github.com/pingcap/tidb/issues/58430) @[YuJuncen](https://github.com/YuJuncen)
         - (dup): release-9.0.0.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that RangeTree results consume memory inefficiently during full backup [#58587](https://github.com/pingcap/tidb/issues/58587) @[3pointer](https://github.com/3pointer)
 
-    + TiCDC
+    + TiCDC <!--tw@lilin90: 4 notes-->
 
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
+        - Fix the issue that evaluating event filter expressions on tables containing virtual columns might cause a panic [#12206](https://github.com/pingcap/tiflow/issues/12206) @[lidezhu](https://github.com/lidezhu)
+        - Fix them issue that the resolved ts lag keeps increasing after scaling in or out TiKV nodes on the same IP address because of outdated store IDs [#12162](https://github.com/pingcap/tiflow/issues/12162) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix the case sensitivity issue in column and index name matching in dispatcher configuration [#12103](https://github.com/pingcap/tiflow/issues/12103) @[wk989898](https://github.com/wk989898)
+        - Fix the issue that configuring `column-selector` with the Debezium protocol might cause a panic [#12208](https://github.com/pingcap/tiflow/issues/12208) @[wk989898](https://github.com/wk989898)
 
     + TiDB Data Migration (DM)
 
