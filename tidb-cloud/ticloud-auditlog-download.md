@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless audit-log download`.
 
 # ticloud serverless audit-log download
 
-Download the database audit logs from a {{{ .starter }}} cluster.
+Download the database audit logs from a {{{ .starter }}} or {{{ .essential }}} cluster.
 
 ```shell
 ticloud serverless audit-log download [flags]

@@ -9,7 +9,7 @@ This tutorial describes how to use TiDB Cloud serverless driver in a local Node.
 
 > **Note:**
 >
-> - This tutorial is applicable to {{{ .starter }}} clusters only. 
+> - The steps in this document work with {{{ .essential }}} clusters too.
 > - To learn how to use TiDB Cloud serverless driver with Cloudflare Workers, Vercel Edge Functions, and Netlify Edge Functions, check out our [Insights into Automotive Sales](https://car-sales-insight.vercel.app/) and the [sample repository](https://github.com/tidbcloud/car-sales-insight).
 
 ## Before you begin

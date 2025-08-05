@@ -7,6 +7,10 @@ summary: Introduce how to integrate {{{ .starter }}} with Amazon Lambda and Clou
 
 This document provides a step-by-step guide on how to use [AWS CloudFormation](https://aws.amazon.com/cloudformation/) to integrate [{{{ .starter }}}](https://www.pingcap.com/tidb-cloud/), a cloud-native distributed SQL database, with [AWS Lambda](https://aws.amazon.com/lambda/), a serverless and event-driven compute service. By integrating {{{ .starter }}} with Amazon Lambda, you can leverage the scalability and cost-efficiency of microservices through {{{ .starter }}} and AWS Lambda. AWS CloudFormation automates the creation and management of AWS resources, including Lambda functions, API Gateway, and Secrets Manager.
 
+> **Note:**
+>
+> The steps in this document work with {{{ .essential }}} clusters too.
+
 ## Solution overview
 
 In this guide, you will create a fully functional online bookshop with the following components:

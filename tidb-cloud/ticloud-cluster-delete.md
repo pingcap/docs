@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless delete`.
 
 # ticloud serverless delete
 
-Delete a {{{ .starter }}} cluster from your project:
+Delete a {{{ .starter }}} or {{{ .essential }}} cluster from your project:
 
 ```shell
 ticloud serverless delete [flags]
@@ -19,13 +19,13 @@ ticloud serverless rm [flags]
 
 ## Examples
 
-Delete a {{{ .starter }}} cluster in interactive mode:
+Delete a {{{ .starter }}} or {{{ .essential }}} cluster in interactive mode:
 
 ```shell
 ticloud serverless delete
 ```
 
-Delete a {{{ .starter }}} cluster in non-interactive mode:
+Delete a {{{ .starter }}} or {{{ .essential }}} cluster in non-interactive mode:
 
 ```shell
 ticloud serverless delete --cluster-id <cluster-id>

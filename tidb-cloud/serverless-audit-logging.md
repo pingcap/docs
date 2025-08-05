@@ -1,15 +1,15 @@
 ---
-title: {{{ .starter }}} Database Audit Logging
-summary: Learn about how to audit a {{{ .starter }}} cluster in TiDB Cloud.
+title: Database Audit Logging for {{{ .starter }}} and Essential
+summary: Learn about how to audit a {{{ .starter }}} or {{{ .essential }}} cluster in TiDB Cloud.
 ---
 
-# {{{ .starter }}} Database Audit Logging (Beta)
+# Database Audit Logging (Beta) for {{{ .starter }}} and Essential
 
-{{{ .starter }}} provides you with a database audit logging feature to record a history of user access details (such as any SQL statements executed) in logs.
+{{{ .starter }}} and {{{ .essential }}} provide you with a database audit logging feature to record a history of user access details (such as any SQL statements executed) in logs.
 
 > **Note:**
 >
-> Currently, the database audit logging feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for {{{ .starter }}} database audit logging" in the **Description** field and click **Submit**.
+> Currently, the database audit logging feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for {{{ .starter }}} or {{{ .essential }}} database audit logging" in the **Description** field and click **Submit**.
 
 To assess the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to conduct a periodic analysis of the database audit logs.
 
@@ -17,13 +17,13 @@ The audit logging feature is disabled by default. To audit a cluster, you need t
 
 ## Enable audit logging
 
-To enable audit logging for a {{{ .starter }}} cluster, use the [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-config.md).
+To enable audit logging for a {{{ .starter }}} or {{{ .essential }}} cluster, use the [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-config.md).
 
 ```shell
 ticloud serverless audit-log config -c <cluster-id> --enabled
 ```
 
-To disable audit logging for a {{{ .starter }}} cluster, use the [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-config.md).
+To disable audit logging for a {{{ .starter }}} or {{{ .essential }}} cluster, use the [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-config.md).
 
 ```shell
 ticloud serverless audit-log config -c <cluster-id> --enabled=false
@@ -110,7 +110,7 @@ ticloud serverless audit-log filter delete --cluster-id <cluster-id> --name <rul
 
 ### Data redaction
 
-{{{ .starter }}} redacts sensitive data in the audit logs by default. Take the following SQL statement as an example:
+{{{ .starter }}} and {{{ .essential }}} redact sensitive data in the audit logs by default. Take the following SQL statement as an example:
 
 ```sql 
 INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES (1, 'Alice', '123456');
@@ -130,18 +130,18 @@ ticloud serverless audit-log config --cluster-id <cluster-id> --unredacted
 
 ### Log file rotation
 
-{{{ .starter }}} generates a new audit log file when either of the following conditions is met:
+{{{ .starter }}} and {{{ .essential }}} generate a new audit log file when either of the following conditions is met:
 
 - The size of the current log file reaches 100 MiB.
 - One hour has passed since the previous log generation. Depending on the internal scheduling mechanism, log generation might be delayed by a few minutes.
 
 > **Note:**
 >
-> Currently, Log file rotation settings are not configurable. {{{ .starter }}} automatically rotates the audit log files based on the preceding conditions.
+> Currently, Log file rotation settings are not configurable. {{{ .starter }}} and {{{ .essential }}} automatically rotate the audit log files based on the preceding conditions.
 
 ## Access audit logging
 
-{{{ .starter }}} audit logs are stored as readable text files named `YYYY-MM-DD-<index>.log`.
+{{{ .starter }}} and {{{ .essential }}} audit logs are stored as readable text files named `YYYY-MM-DD-<index>.log`.
 
 Currently, audit logs are stored within TiDB Cloud for 365 days. After this period, logs are automatically deleted.
 
@@ -160,7 +160,7 @@ ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <o
 
 > **Note:**
 >
-> {{{ .starter }}} does not guarantee sequential ordering of audit logs. The log file named `YYYY-MM-DD-<index>.log` might contain the audit logs in previous days.
+> {{{ .starter }}} and {{{ .essential }}} do not guarantee sequential ordering of audit logs. The log file named `YYYY-MM-DD-<index>.log` might contain the audit logs in previous days.
 > If you want to retrieve all logs from a specific date (for example, January 1, 2025), specifying `--start-date 2025-01-01` and `--end-date 2025-01-02` usually works. But under extreme conditions, you might need to download all log files and order them by the `TIME` field.
 
 ## Audit logging fields
@@ -227,4 +227,4 @@ When the event class is `AUDIT` or a subclass of `AUDIT`, the audit logs contain
 
 - Audit logging is only available via TiDB Cloud CLI at present.
 - Audit logs can only be stored in TiDB Cloud at present.
-- {{{ .starter }}} does not guarantee the sequential order of audit logs, which means you might have to review all log files to view the latest events. To sort the logs chronologically, you can use the `TIME` field in the audit logs.
+- {{{ .starter }}} and {{{ .essential }}} do not guarantee the sequential order of audit logs, which means you might have to review all log files to view the latest events. To sort the logs chronologically, you can use the `TIME` field in the audit logs.
