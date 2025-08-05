@@ -9,10 +9,9 @@
   - [TiDB Cloud Introduction](/tidb-cloud/tidb-cloud-intro.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
 - Get Started with TiDB Cloud
-  - [Try Out {{{ .starter }}}](/tidb-cloud/tidb-cloud-quickstart.md)
+  - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Try Out TiDB + AI](/vector-search/vector-search-get-started-using-python.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
-  - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
   - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
 - Key Concepts
   - [Overview](/tidb-cloud/key-concepts.md)
@@ -23,9 +22,7 @@
   - [AI Features](/tidb-cloud/ai-feature-concepts.md)
   - [Data Service](/tidb-cloud/data-service-concepts.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Scalability](/tidb-cloud/scalability-concepts.md)
-  - High Availability
-    - [High Availability in {{{ .starter }}}](/tidb-cloud/serverless-high-availability.md)
-    - [High Availability in TiDB Cloud Dedicated](/tidb-cloud/high-availability-with-multi-az.md)
+  - [High Availability](/tidb-cloud/high-availability-with-multi-az.md)
   - [Monitoring](/tidb-cloud/monitoring-concepts.md)
   - [Data Streaming](/tidb-cloud/data-streaming-concepts.md)
   - [Backup & Restore](/tidb-cloud/backup-and-restore-concepts.md)
@@ -35,7 +32,7 @@
 
 - Development Quick Start
   - [Developer Guide Overview](/develop/dev-guide-overview.md)
-  - [Build a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
+  - [Build a TiDB Cloud Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
   - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
 - Connect to TiDB Cloud
   - GUI Database Tools
@@ -69,20 +66,12 @@
     - [Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md)
     - [Sequelize](/develop/dev-guide-sample-application-nodejs-sequelize.md)
     - [TypeORM](/develop/dev-guide-sample-application-nodejs-typeorm.md)
-    - [Next.js](/develop/dev-guide-sample-application-nextjs.md)
-    - [AWS Lambda](/develop/dev-guide-sample-application-aws-lambda.md)
   - Ruby
     - [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
     - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
   - C#
     - [C#](/develop/dev-guide-sample-application-cs.md)
   - [WordPress](/tidb-cloud/dev-guide-wordpress.md)
-  - Serverless Driver ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-    - [{{{ .starter }}} Driver](/tidb-cloud/serverless-driver.md)
-    - [Node.js Example](/tidb-cloud/serverless-driver-node-example.md)
-    - [Prisma Example](/tidb-cloud/serverless-driver-prisma-example.md)
-    - [Kysely Example](/tidb-cloud/serverless-driver-kysely-example.md)
-    - [Drizzle Example](/tidb-cloud/serverless-driver-drizzle-example.md)
 - Development Reference
   - Design Database Schema
     - [Overview](/develop/dev-guide-schema-design-overview.md)
@@ -139,33 +128,19 @@
     - [Select Your Cluster Tier](/tidb-cloud/select-cluster-tier.md)
     - [Determine Your TiDB Size](/tidb-cloud/size-your-cluster.md)
     - [TiDB Cloud Performance Reference](/tidb-cloud/tidb-cloud-performance-reference.md)
-  - Manage {{{ .starter }}} Clusters
-    - [Create a {{{ .starter }}} Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
-    - Connect to Your {{{ .starter }}} Cluster
-      - [Connection Overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
-      - [Connect via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
-      - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-    - Branch ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-      - [Overview](/tidb-cloud/branch-overview.md)
-      - [Manage Branches](/tidb-cloud/branch-manage.md)
-      - [GitHub Integration](/tidb-cloud/branch-github-integration.md)
-    - [Manage Spending Limit](/tidb-cloud/manage-serverless-spend-limit.md)
-    - [Back Up and Restore {{{ .starter }}} Data](/tidb-cloud/backup-and-restore-serverless.md)
-    - [Export Data from {{{ .starter }}}](/tidb-cloud/serverless-export.md)
-  - Manage TiDB Cloud Dedicated Clusters
-    - [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)
-    - Connect to Your TiDB Cloud Dedicated Cluster
-      - [Connection Method Overview](/tidb-cloud/connect-to-tidb-cluster.md)
-      - [Connect via Public Connection](/tidb-cloud/connect-via-standard-connection.md)
-      - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md)
-      - [Connect via Private Endpoint with Azure](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
-      - [Connect via Private Endpoint with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
-      - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
-      - [Connect via SQL Shell](/tidb-cloud/connect-via-sql-shell.md)
-    - [Scale a TiDB Cloud Dedicated Cluster](/tidb-cloud/scale-tidb-cluster.md)
-    - [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md)
-    - [Pause or Resume a TiDB Cloud Dedicated Cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md)
-    - [Configure Maintenance Window](/tidb-cloud/configure-maintenance-window.md)
+  - [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)
+  - Connect to Your TiDB Cloud Dedicated Cluster
+    - [Connection Method Overview](/tidb-cloud/connect-to-tidb-cluster.md)
+    - [Connect via Public Connection](/tidb-cloud/connect-via-standard-connection.md)
+    - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md)
+    - [Connect via Private Endpoint with Azure](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
+    - [Connect via Private Endpoint with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
+    - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
+    - [Connect via SQL Shell](/tidb-cloud/connect-via-sql-shell.md)
+  - [Scale a TiDB Cloud Dedicated Cluster](/tidb-cloud/scale-tidb-cluster.md)
+  - [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md)
+  - [Pause or Resume a TiDB Cloud Dedicated Cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md)
+  - [Configure Maintenance Window](/tidb-cloud/configure-maintenance-window.md)
   - Use an HTAP Cluster with TiFlash
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
     - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
@@ -268,15 +243,8 @@
     - [Import CSV Files from Cloud Storage](/tidb-cloud/import-csv-files.md)
     - [Import Parquet Files from Cloud Storage](/tidb-cloud/import-parquet-files.md)
     - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli.md)
-  - Import Data into {{{ .starter }}}
-    - [Import Sample Data](/tidb-cloud/import-sample-data-serverless.md)
-    - [Import Local Files](/tidb-cloud/tidb-cloud-import-local-files.md)
-    - [Import CSV Files from Cloud Storage](/tidb-cloud/import-csv-files-serverless.md)
-    - [Import Parquet Files from Cloud Storage](/tidb-cloud/import-parquet-files-serverless.md)
-    - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli-serverless.md)
   - Reference
     - [Configure External Storage Access for TiDB Cloud Dedicated](/tidb-cloud/dedicated-external-storage.md)
-    - [Configure External Storage Access for {{{ .starter }}}](/tidb-cloud/serverless-external-storage.md)
     - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
     - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
@@ -355,17 +323,12 @@
     - [Identity Access Management](/tidb-cloud/manage-user-access.md)
     - [OAuth 2.0](/tidb-cloud/oauth2.md)
   - Network Access Control
-    - {{{ .starter }}}
-      - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-      - [Configure Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
-      - [TLS Connections to {{{ .starter }}}](/tidb-cloud/secure-connections-to-serverless-clusters.md)
-    - TiDB Cloud Dedicated
-      - [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md)
-      - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md)
-      - [Connect via Private Endpoint with Azure](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
-      - [Connect via Private Endpoint with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
-      - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
-      - [TLS Connections to TiDB Cloud Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
+    - [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md)
+    - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md)
+    - [Connect via Private Endpoint with Azure](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
+    - [Connect via Private Endpoint with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
+    - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
+    - [TLS Connections to TiDB Cloud Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
   - Data Access Control
       - [Encryption at Rest Using Customer-Managed Encryption Keys](/tidb-cloud/tidb-cloud-encrypt-cmek.md)
       - [User-Controlled Log Redaction](/tidb-cloud/tidb-cloud-log-redaction.md)
@@ -373,7 +336,6 @@
     - [Configure Cluster Password Settings](/tidb-cloud/configure-security-settings.md)
   - Audit Management
     - [TiDB Cloud Dedicated Database Audit Logging](/tidb-cloud/tidb-cloud-auditing.md)
-    - [{{{ .starter }}} Database Audit Logging](/tidb-cloud/serverless-audit-logging.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [Console Audit Logging](/tidb-cloud/tidb-cloud-console-auditing.md)
 - Billing
   - [Invoices](/tidb-cloud/tidb-cloud-billing.md#invoices)
@@ -382,7 +344,7 @@
   - [Billing Profile](/tidb-cloud/tidb-cloud-billing.md#billing-profile)
   - [Credits](/tidb-cloud/tidb-cloud-billing.md#credits)
   - [Payment Method Setting](/tidb-cloud/tidb-cloud-billing.md#payment-method)
-  - [Billing from AWS, Azure, or Google Cloud Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-azure-marketplace-or-google-cloud-marketplace)
+  - [Billing from Cloud Provider Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace)
   - [Billing for Changefeed](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
   - [Billing for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md)
   - [Billing for Recovery Groups](/tidb-cloud/tidb-cloud-billing-recovery-group.md)
@@ -407,9 +369,6 @@
     - [Use TiDB Cloud Dedicated Private Endpoint Connection Resource](/tidb-cloud/terraform-use-dedicated-private-endpoint-connection-resource.md)
     - [Use TiDB Cloud Dedicated VPC Peering Resource](/tidb-cloud/terraform-use-dedicated-vpc-peering-resource.md)
     - [Use TiDB Cloud Dedicated Network Container Resource](/tidb-cloud/terraform-use-dedicated-network-container-resource.md)
-    - [Use {{{ .starter }}} Cluster Resource](/tidb-cloud/terraform-use-serverless-cluster-resource.md)
-    - [Use {{{ .starter }}} Branch Resource](/tidb-cloud/terraform-use-serverless-branch-resource.md)
-    - [Use {{{ .starter }}} Export Resource](/tidb-cloud/terraform-use-serverless-export-resource.md)
     - [Use SQL User Resource](/tidb-cloud/terraform-use-sql-user-resource.md)
     - [Use Cluster Resource (Deprecated)](/tidb-cloud/terraform-use-cluster-resource.md)
     - [Use Backup Resource](/tidb-cloud/terraform-use-backup-resource.md)
@@ -726,73 +685,6 @@
     - [IAM](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam)
     - [MSP (Deprecated)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
   - [v1beta](https://docs.pingcap.com/tidbcloud/api/v1beta)
-- CLI Reference ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-  - [Overview](/tidb-cloud/cli-reference.md)
-  - auth
-    - [login](/tidb-cloud/ticloud-auth-login.md)
-    - [logout](/tidb-cloud/ticloud-auth-logout.md)
-    - [whoami](/tidb-cloud/ticloud-auth-whoami.md)
-  - serverless
-    - [create](/tidb-cloud/ticloud-cluster-create.md)
-    - [delete](/tidb-cloud/ticloud-cluster-delete.md)
-    - [describe](/tidb-cloud/ticloud-cluster-describe.md)
-    - [list](/tidb-cloud/ticloud-cluster-list.md)
-    - [update](/tidb-cloud/ticloud-serverless-update.md)
-    - [spending-limit](/tidb-cloud/ticloud-serverless-spending-limit.md)
-    - [region](/tidb-cloud/ticloud-serverless-region.md)
-    - [shell](/tidb-cloud/ticloud-serverless-shell.md)
-    - branch
-      - [create](/tidb-cloud/ticloud-branch-create.md)
-      - [delete](/tidb-cloud/ticloud-branch-delete.md)
-      - [describe](/tidb-cloud/ticloud-branch-describe.md)
-      - [list](/tidb-cloud/ticloud-branch-list.md)
-      - [shell](/tidb-cloud/ticloud-branch-shell.md)
-    - import
-      - [cancel](/tidb-cloud/ticloud-import-cancel.md)
-      - [describe](/tidb-cloud/ticloud-import-describe.md)
-      - [list](/tidb-cloud/ticloud-import-list.md)
-      - [start](/tidb-cloud/ticloud-import-start.md)
-    - export
-      - [create](/tidb-cloud/ticloud-serverless-export-create.md)
-      - [describe](/tidb-cloud/ticloud-serverless-export-describe.md)
-      - [list](/tidb-cloud/ticloud-serverless-export-list.md)
-      - [cancel](/tidb-cloud/ticloud-serverless-export-cancel.md)
-      - [download](/tidb-cloud/ticloud-serverless-export-download.md)
-    - sql-user
-      - [create](/tidb-cloud/ticloud-serverless-sql-user-create.md)
-      - [delete](/tidb-cloud/ticloud-serverless-sql-user-delete.md)
-      - [list](/tidb-cloud/ticloud-serverless-sql-user-list.md)
-      - [update](/tidb-cloud/ticloud-serverless-sql-user-update.md)
-    - audit-log
-      - [config](/tidb-cloud/ticloud-auditlog-config.md)
-      - [describe](/tidb-cloud/ticloud-auditlog-describe.md)
-      - [download](/tidb-cloud/ticloud-auditlog-download.md)
-      - filter-rule
-        - [create](/tidb-cloud/ticloud-auditlog-filter-create.md)
-        - [delete](/tidb-cloud/ticloud-auditlog-filter-delete.md)
-        - [describe](/tidb-cloud/ticloud-auditlog-filter-describe.md)
-        - [list](/tidb-cloud/ticloud-auditlog-filter-list.md)
-        - [template](/tidb-cloud/ticloud-auditlog-filter-template.md)
-        - [update](/tidb-cloud/ticloud-auditlog-filter-update.md)
-    - authorized-network
-      - [create](/tidb-cloud/ticloud-serverless-authorized-network-create.md)
-      - [delete](/tidb-cloud/ticloud-serverless-authorized-network-delete.md)
-      - [list](/tidb-cloud/ticloud-serverless-authorized-network-list.md)
-      - [update](/tidb-cloud/ticloud-serverless-authorized-network-update.md)
-  - [ai](/tidb-cloud/ticloud-ai.md)
-  - [completion](/tidb-cloud/ticloud-completion.md)
-  - config
-    - [create](/tidb-cloud/ticloud-config-create.md)
-    - [delete](/tidb-cloud/ticloud-config-delete.md)
-    - [describe](/tidb-cloud/ticloud-config-describe.md)
-    - [edit](/tidb-cloud/ticloud-config-edit.md)
-    - [list](/tidb-cloud/ticloud-config-list.md)
-    - [set](/tidb-cloud/ticloud-config-set.md)
-    - [use](/tidb-cloud/ticloud-config-use.md)
-  - project
-    - [list](/tidb-cloud/ticloud-project-list.md)
-  - [upgrade](/tidb-cloud/ticloud-upgrade.md)
-  - [help](/tidb-cloud/ticloud-help.md)
 - General Reference
   - TiDB Cluster Architecture
     - [Overview](/tidb-architecture.md)
@@ -815,7 +707,6 @@
     - [Introduction](/tidb-distributed-execution-framework.md)
     - [TiDB Global Sort](/tidb-global-sort.md)
   - [TiDB Cloud Dedicated Limitations and Quotas](/tidb-cloud/limitations-and-quotas.md)
-  - [{{{ .starter }}} Limitations](/tidb-cloud/serverless-limitations.md)
   - [Limited SQL Features on TiDB Cloud](/tidb-cloud/limited-sql-features.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - Benchmarks
@@ -862,7 +753,6 @@
   - [Get Support](/tidb-cloud/tidb-cloud-support.md)
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
-  - [{{{ .starter }}} FAQs](/tidb-cloud/serverless-faqs.md)
 
 ## RELEASES
 

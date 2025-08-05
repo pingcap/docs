@@ -1,47 +1,36 @@
 ---
-title: Select Your Cluster Tier
-summary: Learn how to select your cluster tier on TiDB Cloud.
+title: Select Your Cluster Plan
+summary: Learn how to select your cluster plan on TiDB Cloud.
 aliases: ['/tidbcloud/developer-tier-cluster']
 ---
 
-# Select Your Cluster Tier
+# Select Your Cluster Plan
 
-The cluster tier determines the throughput and performance of your cluster.
+The cluster plan determines the throughput and performance of your cluster.
 
-TiDB Cloud provides the following two options of cluster tiers. Before creating a cluster, you need to consider which option suits your need better.
+TiDB Cloud provides the following options of cluster plans. Whether you are just getting started or scaling to meet the increasing application demands, these service plans provide the flexibility and capability you need. Before creating a cluster, you need to consider which option suits your need better.
 
-- [TiDB Cloud Serverless](#tidb-cloud-serverless)
+- [TiDB Cloud Serverless](#tidb-cloud-serverless) (now Starter)
+- [{{{ .essential }}}](#essential)
 - [TiDB Cloud Dedicated](#tidb-cloud-dedicated)
+
+> **Note:**
+>
+> Some of TiDB Cloud features are partially supported or not supported on {{{ .starter }}} and {{{ .essential }}}. See [{{{ .starter }}} and Essential Limitations](/tidb-cloud/serverless-limitations.md) for details.
 
 ## TiDB Cloud Serverless
 
-<!--To be confirmed-->
-TiDB Cloud Serverless is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free tier and consumption based billing once free limits are exceeded.
-
-### Cluster plans
-
-{{{ .starter }}} offers two service plans to meet different user requirements. Whether you are just getting started or scaling to meet the increasing application demands, these service plans provide the flexibility and capability you need.
-
-#### Free cluster plan
+TiDB Cloud Serverless (now Starter) is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free plan and consumption based billing once free limits are exceeded.
 
 The free cluster plan is ideal for those who are getting started with {{{ .starter }}}. It provides developers and small teams with the following essential features:
 
 - **No cost**: This plan is completely free, with no credit card required to get started.
 - **Storage**: Provides an initial 5 GiB of row-based storage and 5 GiB of columnar storage.
 - **Request Units**: Includes 50 million [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) for database operations.
-- **Easy upgrade**: Offers a smooth transition to the [scalable cluster plan](#scalable-cluster-plan) as your needs grow.
-
-#### Scalable cluster plan
-
-For applications experiencing growing workloads and needing scalability in real time, the scalable cluster plan provides the flexibility and performance to keep pace with your business growth with the following features:
-
-- **Enhanced capabilities**: Includes all capabilities of the free cluster plan, along with the capacity to handle larger and more complex workloads, as well as advanced security features.
-- **Automatic scaling**: Automatically adjusts storage and computing resources to efficiently meet changing workload demands.
-- **Predictable pricing**: Although this plan requires a credit card, you are only charged for the resources you use, ensuring cost-effective scalability.
 
 ### Usage quota
 
-For each organization in TiDB Cloud, you can create a maximum of five [free clusters](#free-cluster-plan) by default. To create more {{{ .starter }}} clusters, you need to add a credit card and create [scalable clusters](#scalable-cluster-plan) for the usage.
+For each organization in TiDB Cloud, you can create a maximum of five free {{{ .starter }}} clusters by default. To create more {{{ .starter }}} clusters, you need to add a credit card and specify a spending limit.
 
 For the first five {{{ .starter }}} clusters in your organization, whether they are free or scalable, TiDB Cloud provides a free usage quota for each of them as follows:
 
@@ -85,9 +74,14 @@ To get the prefix for your cluster, take the following steps:
 2. Click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner. A connection dialog is displayed.
 3. In the dialog, get the prefix from the connection string.
 
-### {{{ .starter }}} special terms and conditions
+## {{{ .essential }}} {#essential}
 
-Some of TiDB Cloud features are partially supported or not supported on {{{ .starter }}}. See [{{{ .starter }}} Limitations](/tidb-cloud/serverless-limitations.md) for details.
+For applications experiencing growing workloads and needing scalability in real time, the Essential cluster plan provides the flexibility and performance to keep pace with your business growth with the following features:
+
+- **Enhanced capabilities**: includes all capabilities of the Starter plan, along with the capacity to handle larger and more complex workloads, as well as advanced security features.
+- **Automatic scaling**: automatically adjusts storage and computing resources to efficiently meet changing workload demands.
+- **High availability**: built-in fault tolerance and redundancy ensure your applications remain available and resilient, even during infrastructure failures.
+- **Predictable pricing**: billed based on storage and Request Capacity Units (RCUs) of the compute resources, offering transparent, usage-based pricing that scales with your needs, so you only pay for what you use without surprises.
 
 ## TiDB Cloud Dedicated
 
