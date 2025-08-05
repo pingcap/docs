@@ -3,13 +3,8 @@ import {
   copySingleFileSync,
   copyFileWithCustomContentSync,
   removeCustomContent,
+  CLOUD_TOC_LIST,
 } from "./utils.js";
-
-const CLOUD_TOC_LIST = [
-  "TOC-tidb-cloud.md",
-  "TOC-tidb-cloud-essential.md",
-  "TOC-tidb-cloud-starter.md",
-];
 
 const contentHandler = (content = "") => {
   return removeCustomContent("tidb", content);
