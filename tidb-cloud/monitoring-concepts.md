@@ -33,16 +33,12 @@ In TiDB Cloud, an event indicates a change in your TiDB Cloud cluster. TiDB Clou
 
 For more information, see [TiDB Cloud Cluster Event](/tidb-cloud/tidb-cloud-events.md).
 
-## Third-party metrics integrations (Beta)
+## Third-party metrics integrations
 
 TiDB Cloud lets you integrate any of the following third-party metrics services to receive TiDB Cloud alerts and view the performance metrics of your TiDB cluster.
 
-- Datadog integration
+- [Datadog integration (Preview)](/tidb-cloud/monitor-datadog-integration.md)
 
-- Prometheus and Grafana integration
+- [Prometheus and Grafana integration (Beta)](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
 
-- New Relic integration
-
-Currently, these third-party metrics integrations are in beta.
-
-For more information, see [Third-Party Metrics Integration (Beta)](/tidb-cloud/third-party-monitoring-integrations.md).
+- [New Relic integration (Preview)](/tidb-cloud/monitor-new-relic-integration.md)
