@@ -17,8 +17,8 @@ const extractFilefromList = (
 ) => {
   fileList.forEach((filePath) => {
     copyFileWithCustomContentSync(
-      `${inputPath}${filePath}`,
-      `${outputPath}${filePath}`,
+      `${inputPath}/${filePath}`,
+      `${outputPath}/${filePath}`,
       contentHandler
     );
   });

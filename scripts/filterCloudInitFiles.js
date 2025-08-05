@@ -19,9 +19,6 @@ for (const filePath of allFilePaths) {
     continue;
   }
 
-  // Remove leading slash if present
-  const cleanPath = filePath.startsWith("/") ? filePath.slice(1) : filePath;
-
   // Skip files in tidb-cloud folder
   if (cleanPath.startsWith("tidb-cloud/")) {
     continue;
