@@ -373,7 +373,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     To meet different user requirements, {{{ .starter }}} offers the free and scalable service plans. Whether you are just getting started or scaling to meet the increasing application demands, these plans provide the flexibility and capabilities you need.
 
-    For more information, see [Cluster plans](/tidb-cloud/select-cluster-tier.md#cluster-plans).
+    For more information, see [Cluster plans](/tidb-cloud/select-cluster-tier.md).
 
 - Modify the throttling behavior for {{{ .starter }}} clusters upon reaching their usage quota. Now, once a cluster reaches its usage quota, it immediately denies any new connection attempts, thereby ensuring uninterrupted service for existing operations.
 
