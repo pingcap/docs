@@ -3,6 +3,7 @@ import {
   copySingleFileSync,
   copyFileWithCustomContentSync,
   removeCustomContent,
+  CLOUD_TOC_LIST,
 } from "./utils.js";
 
 const contentHandler = (content = "") => {
@@ -17,7 +18,7 @@ const extractFilefromList = (
   fileList.forEach((filePath = "") => {
     if (
       filePath.includes(`/tidb-cloud/`) ||
-      filePath.includes(`TOC-tidb-cloud.md`)
+      CLOUD_TOC_LIST.some((tocFile) => filePath.includes(tocFile))
     ) {
       return;
     }

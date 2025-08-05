@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import path from "path";
+<<<<<<< HEAD
 
 // Read the TOC file
 const tocContent = fs.readFileSync("TOC-tidb-cloud.md", "utf8");
@@ -15,6 +16,17 @@ let match;
 while ((match = linkRegex.exec(tocContent)) !== null) {
   const filePath = match[2];
 
+=======
+import { getAllCloudMdList } from "./utils.js";
+
+const allFilePaths = getAllCloudMdList();
+
+// Set to store filtered file paths
+const filePaths = new Set();
+
+// Filter the file paths
+for (const filePath of allFilePaths) {
+>>>>>>> d6d6c513d8 (refactor: consolidate TOC file handling in cloud document scripts (#21512))
   // Skip external links (starting with http/https)
   if (filePath.startsWith("http")) {
     continue;
@@ -25,9 +37,12 @@ while ((match = linkRegex.exec(tocContent)) !== null) {
     continue;
   }
 
+<<<<<<< HEAD
   // Remove leading slash if present
   const cleanPath = filePath.startsWith("/") ? filePath.slice(1) : filePath;
 
+=======
+>>>>>>> d6d6c513d8 (refactor: consolidate TOC file handling in cloud document scripts (#21512))
   // Skip files in tidb-cloud folder
   if (cleanPath.startsWith("tidb-cloud/")) {
     continue;
