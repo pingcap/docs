@@ -3,7 +3,7 @@ title: Configure TiDB for Optimal Performance
 summary: Learn how to optimize TiDB performance by configuring key settings and addressing edge cases.
 ---
 
-## Configure TiDB for Optimal Performance
+# Configure TiDB for Optimal Performance
 
 This guide describes how to optimize the performance of TiDB, including:
 
@@ -498,7 +498,7 @@ SET GLOBAL tidb_opt_distinct_agg_push_down = ON;
 
 ### Mitigate MVCC version accumulation using in-memory engine
 
-Excessive MVCC versions can cause performance bottlenecks, particularly in high read/write areas or due to issues with garbage collection and compaction. You can use the in-memory engine introduced in v8.5.0 to mitigate this issue. To enable it, add the following configuration to your TiKV configuration file.
+Excessive MVCC versions can cause performance bottlenecks, particularly in high read/write areas or due to issues with garbage collection and compaction. You can use the [TiKV MVCC In-Memory Engine (IME)](/tikv-in-memory-engine.md) introduced in v8.5.0 to mitigate this issue. To enable it, add the following configuration to your TiKV configuration file.
 
 > **Note:**
 >
