@@ -65,7 +65,10 @@ The **Overview** page provides general metrics of a cluster.
 
 To view metrics on the cluster overview page, take the following steps:
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
+1. Navigate to the **Overview** page of your target cluster:
+
+    - For {{{ .starter }}} or {{{ .essential }}} clusters, click the name of your target cluster on the [**TiDBs**](https://tidbcloud.com/tidbs) page.
+    - For TiDB Cloud Dedicated clusters, click the name of your target cluster on the [**Clusters**](https://tidbcloud.com/console/clusters) page.
 
     > **Tip:**
     >
@@ -79,7 +82,10 @@ The **Metrics** page provides a full set of metrics of a cluster. By viewing the
 
 To view metrics on the **Metrics** page, take the following steps:
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
+1. Navigate to the **Overview** page of your target cluster:
+
+    - For {{{ .starter }}} or {{{ .essential }}} clusters, click the name of your target cluster on the [**TiDBs**](https://tidbcloud.com/tidbs) page.
+    - For TiDB Cloud Dedicated clusters, click the name of your target cluster on the [**Clusters**](https://tidbcloud.com/console/clusters) page.
 
     > **Tip:**
     >
