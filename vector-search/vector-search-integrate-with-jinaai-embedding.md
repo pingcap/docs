@@ -87,7 +87,7 @@ pip install -r requirements.txt
 Get the Jina AI API key from the [Jina AI Embeddings API](https://jina.ai/embeddings/) page, and then configure the environment variables depending on the TiDB deployment option you've selected.
 
 <SimpleTab>
-<div label="{{{ .starter }}}">
+<div label="{{{ .starter }}} or Essential">
 
 For a {{{ .starter }}} cluster, take the following steps to obtain the cluster connection string and configure environment variables:
 
