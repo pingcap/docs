@@ -237,7 +237,7 @@ If you have agreed with our sales on a contract and received an email to review 
 
 To learn more about contracts, feel free to [contact our sales](https://www.pingcap.com/contact-us/).
 
-## Billing from Cloud Provider Marketplace
+## Billing from cloud provider marketplace
 
 If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can link your TiDB Cloud account to the billing account of your cloud provider (AWS, Azure, Google Cloud, or Alibaba Cloud). Otherwise, skip this section.
 
