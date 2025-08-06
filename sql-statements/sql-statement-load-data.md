@@ -16,6 +16,17 @@ Starting from TiDB v7.0.0, the `LOAD DATA` SQL statement supports the following 
 >
 > The new parameter `FIELDS DEFINED NULL BY` and support for importing data from S3 and GCS are experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
+<<<<<<< HEAD
+=======
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> For the `LOAD DATA INFILE` statement, TiDB Cloud Dedicated supports `LOAD DATA LOCAL INFILE`, and `LOAD DATA INFILE` from Amazon S3 or Google Cloud Storage, while [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) only support `LOAD DATA LOCAL INFILE`.
+
+</CustomContent>
+
+>>>>>>> d7c28f7510 (*: clarify feature unavailability on Starter and Essential clusters (#21509))
 ## Synopsis
 
 ```ebnf+diagram
@@ -37,7 +48,7 @@ Fields ::=
 
 You can use `LOCAL` to specify data files on the client to be imported, where the file parameter must be the file system path on the client.
 
-If you are using TiDB Cloud, to use the `LOAD DATA` statement to load local data files, you need to add the `--local-infile` option to the connection string when you connect to TiDB Cloud. 
+If you are using TiDB Cloud, to use the `LOAD DATA` statement to load local data files, you need to add the `--local-infile` option to the connection string when you connect to TiDB Cloud.
 
 - The following is an example connection string for {{{ .starter }}}:
 

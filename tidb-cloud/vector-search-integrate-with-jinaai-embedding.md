@@ -9,7 +9,25 @@ This tutorial walks you through how to use [Jina AI](https://jina.ai/) to genera
 
 > **Note**
 >
+<<<<<<< HEAD:tidb-cloud/vector-search-integrate-with-jinaai-embedding.md
 > TiDB Vector Search is only available for TiDB Self-Managed (TiDB >= v8.4) and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless). It is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
+=======
+> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+</CustomContent>
+
+> **Note:**
+>
+> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+>>>>>>> d7c28f7510 (*: clarify feature unavailability on Starter and Essential clusters (#21509)):vector-search/vector-search-integrate-with-jinaai-embedding.md
 
 ## Prerequisites
 
@@ -51,7 +69,16 @@ pip install -r requirements.txt
 
 ### Step 4. Configure the environment variables
 
+<<<<<<< HEAD:tidb-cloud/vector-search-integrate-with-jinaai-embedding.md
 Get the Jina AI API key from the [Jina AI Embeddings API](https://jina.ai/embeddings/) page. Then, obtain the cluster connection string and configure environment variables as follows:
+=======
+Get the Jina AI API key from the [Jina AI Embeddings API](https://jina.ai/embeddings/) page, and then configure the environment variables depending on the TiDB deployment option you've selected.
+
+<SimpleTab>
+<div label="{{{ .starter }}} or Essential">
+
+For a {{{ .starter }}} cluster, take the following steps to obtain the cluster connection string and configure environment variables:
+>>>>>>> d7c28f7510 (*: clarify feature unavailability on Starter and Essential clusters (#21509)):vector-search/vector-search-integrate-with-jinaai-embedding.md
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 

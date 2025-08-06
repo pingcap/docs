@@ -15,7 +15,7 @@ In this tutorial, you can learn how to use TiDB and mysql2 in Next.js to accompl
 
 > **Note**
 >
-> This tutorial works with {{{ .starter }}} and TiDB Self-Managed.
+> This tutorial works with {{{ .starter }}}, {{{ .essential }}}, and TiDB Self-Managed.
 
 ## Prerequisites
 
@@ -73,7 +73,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 <SimpleTab>
 
-<div label="{{{ .starter }}}">
+<div label="{{{ .starter }}} or Essential">
 
 1. Navigate to the [**Clusters** page](https://tidbcloud.com/console/clusters), and then click the name of your target cluster to go to its overview page.
 
