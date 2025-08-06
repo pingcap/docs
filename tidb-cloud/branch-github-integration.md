@@ -131,7 +131,7 @@ Here are the main steps to create the workflow:
 
 2. Get the branch connection information.
 
-   You can use the [wait-for-tidbcloud-branch](https://github.com/tidbcloud/wait-for-tidbcloud-branch) action to wait for the readiness of the branch and get the connection information of the branch.
+    You can use the [wait-for-tidbcloud-branch](https://github.com/tidbcloud/wait-for-tidbcloud-branch) action to wait for the readiness of the branch and get the connection information of the branch.
 
     Taking the branch of a {{{ .starter }}} cluster as an example:
 
