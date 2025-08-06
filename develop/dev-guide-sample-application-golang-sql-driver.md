@@ -199,7 +199,7 @@ func openDB(driverName string, runnable func(db *sql.DB)) {
 }
 ```
 
-When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, and `${tidb_db_name}` with the actual values of your TiDB cluster. {{{ .starter }}} and {{{ .essential }}} requires a secure connection. Therefore, you need to set the value of `${use_ssl}` to `true`.
+When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, and `${tidb_db_name}` with the actual values of your TiDB cluster. {{{ .starter }}} and {{{ .essential }}} require a secure connection. Therefore, you need to set the value of `${use_ssl}` to `true`.
 
 ### Insert data
 
