@@ -126,7 +126,7 @@ See the detailed pricing for each available Alibaba Cloud region below.
 | Row-based storage (per GiB/month) | $0.24 |
 | Columnar storage (per GiB/month) | $0.06 |
 | Row-based storage with dual-layer encryption (per GiB/month) | $0.36 |
-| Columnar storage with enhanced encryption at rest (per GiB/month) | $0.09 |
+| Columnar storage with dual-layer encryption (per GiB/month) | $0.09 |
 
 > **Tip:**
 >
