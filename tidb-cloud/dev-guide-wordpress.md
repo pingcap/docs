@@ -1,108 +1,108 @@
 ---
 title: 使用 WordPress 连接 TiDB Cloud Serverless
-summary: 了解如何使用 TiDB Cloud Serverless 运行 WordPress。本教程提供分步指导，帮助你在几分钟内运行 WordPress + TiDB Cloud Serverless。
+summary: 学习如何使用 TiDB Cloud Serverless 运行 WordPress。本教程将为你提供分步指导，让你在几分钟内运行 WordPress + TiDB Cloud Serverless。
 ---
 
 # 使用 WordPress 连接 TiDB Cloud Serverless
 
-TiDB 是一个兼容 MySQL 的数据库，TiDB Cloud Serverless 是一个全托管的 TiDB 产品，而 [WordPress](https://github.com/WordPress) 是一个免费的开源内容管理系统（CMS），让用户可以创建和管理网站。WordPress 使用 PHP 编写，并使用 MySQL 数据库。
+TiDB 是一个兼容 MySQL 的数据库，TiDB Cloud Serverless 是一个全托管的 TiDB 云服务，[WordPress](https://github.com/WordPress) 是一个免费的开源内容管理系统（CMS），允许用户创建和管理网站。WordPress 使用 PHP 编写，并使用 MySQL 数据库。
 
 在本教程中，你可以学习如何免费使用 TiDB Cloud Serverless 运行 WordPress。
 
-> **注意：**
+> **Note:**
 >
-> 除了 TiDB Cloud Serverless 外，本教程也适用于 TiDB Cloud Dedicated 和 TiDB Self-Managed 集群。但是，为了成本效益，强烈建议使用 TiDB Cloud Serverless 运行 WordPress。
+> 除了 TiDB Cloud Serverless，本教程同样适用于 TiDB Cloud Dedicated 和 TiDB 自建集群。但强烈推荐使用 TiDB Cloud Serverless 来运行 WordPress，以获得更高的性价比。
 
-## 前提条件
+## 前置条件
 
-要完成本教程，你需要：
+完成本教程，你需要：
 
-- 一个 TiDB Cloud Serverless 集群。如果你还没有，请按照[创建 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md)创建你自己的 TiDB Cloud 集群。
+- 一个 TiDB Cloud Serverless 集群。如果你还没有集群，请按照[创建 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md)来创建属于你自己的 TiDB Cloud 集群。
 
 ## 使用 TiDB Cloud Serverless 运行 WordPress
 
-本节演示如何使用 TiDB Cloud Serverless 运行 WordPress。
+本节将演示如何使用 TiDB Cloud Serverless 运行 WordPress。
 
-### 步骤 1：克隆 WordPress 示例仓库
+### 第 1 步：克隆 WordPress 示例仓库
 
-在终端窗口中运行以下命令来克隆示例代码仓库：
+在终端窗口中运行以下命令，克隆示例代码仓库：
 
 ```shell
 git clone https://github.com/Icemap/wordpress-tidb-docker.git
 cd wordpress-tidb-docker
 ```
 
-### 步骤 2：安装依赖
+### 第 2 步：安装依赖
 
-1. 示例仓库需要 [Docker](https://www.docker.com/) 和 [Docker Compose](https://docs.docker.com/compose/) 来启动 WordPress。如果你已经安装了它们，可以跳过这一步。强烈建议在 Linux 环境（如 Ubuntu）中运行你的 WordPress。运行以下命令安装 Docker 和 Docker Compose：
+1. 示例仓库需要 [Docker](https://www.docker.com/) 和 [Docker Compose](https://docs.docker.com/compose/) 来启动 WordPress。如果你已经安装了它们，可以跳过此步骤。强烈建议在 Linux 环境（如 Ubuntu）下运行 WordPress。运行以下命令安装 Docker 和 Docker Compose：
 
     ```shell
     sudo sh install.sh
     ```
 
-2. 示例仓库包含 [TiDB 兼容性插件](https://github.com/pingcap/wordpress-tidb-plugin)作为子模块。运行以下命令更新子模块：
+2. 示例仓库包含了 [TiDB Compatibility Plugin](https://github.com/pingcap/wordpress-tidb-plugin) 作为子模块。运行以下命令更新子模块：
 
     ```shell
     git submodule update --init --recursive
     ```
 
-### 步骤 3：配置连接信息
+### 第 3 步：配置连接信息
 
-配置 WordPress 数据库与 TiDB Cloud Serverless 的连接。
+配置 WordPress 数据库连接到 TiDB Cloud Serverless。
 
-1. 导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称进入其概览页面。
+1. 进入 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，然后点击目标集群的名称，进入其概览页面。
 
-2. 点击右上角的**连接**。将显示连接对话框。
+2. 点击右上角的 **Connect**。此时会弹出连接对话框。
 
-3. 确保连接对话框中的配置与你的操作环境匹配。
+3. 确保连接对话框中的配置与你的操作环境一致。
 
-    - **连接类型**设置为 `Public`。
-    - **连接工具**设置为 `WordPress`。
-    - **操作系统**设置为 `Debian/Ubuntu/Arch`。
-    - **数据库**设置为你想要使用的数据库—例如 `test`。
+    - **Connection Type** 设置为 `Public`。
+    - **Connect With** 设置为 `WordPress`。
+    - **Operating System** 设置为 `Debian/Ubuntu/Arch`。
+    - **Database** 设置为你想要使用的数据库，例如 `test`。
 
-4. 点击**生成密码**创建随机密码。
+4. 点击 **Generate Password** 生成一个随机密码。
 
-    > **提示：**
+    > **Tip:**
     >
-    > 如果你之前已经创建了密码，你可以使用原始密码或点击**重置密码**生成新密码。
+    > 如果你之前已经创建过密码，可以继续使用原有密码，或者点击 **Reset Password** 生成新密码。
 
-5. 运行以下命令复制 `.env.example` 并将其重命名为 `.env`：
+5. 运行以下命令，将 `.env.example` 复制并重命名为 `.env`：
 
     ```shell
     cp .env.example .env
     ```
 
-6. 将相应的连接字符串复制并粘贴到 `.env` 文件中。示例结果如下：
+6. 将对应的连接字符串复制粘贴到 `.env` 文件中。示例结果如下：
 
     ```dotenv
-    TIDB_HOST='{HOST}'  # 例如 gateway01.ap-northeast-1.prod.aws.tidbcloud.com
+    TIDB_HOST='{HOST}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
     TIDB_PORT='4000'
-    TIDB_USER='{USERNAME}'  # 例如 xxxxxx.root
+    TIDB_USER='{USERNAME}'  # e.g. xxxxxx.root
     TIDB_PASSWORD='{PASSWORD}'
     TIDB_DB_NAME='test'
     ```
 
-    请确保将占位符 `{}` 替换为从连接对话框获得的连接参数。默认情况下，你的 TiDB Cloud Serverless 附带一个 `test` 数据库。如果你已经在 TiDB Cloud Serverless 集群中创建了另一个数据库，你可以将 `test` 替换为你的数据库名称。
+    请务必将 `{}` 占位符替换为你在连接对话框中获得的连接参数。默认情况下，你的 TiDB Cloud Serverless 集群自带一个 `test` 数据库。如果你已经在 TiDB Cloud Serverless 集群中创建了其他数据库，可以将 `test` 替换为你的数据库名。
 
 7. 保存 `.env` 文件。
 
-### 步骤 4：使用 TiDB Cloud Serverless 启动 WordPress
+### 第 4 步：使用 TiDB Cloud Serverless 启动 WordPress
 
-1. 执行以下命令将 WordPress 作为 Docker 容器运行：
+1. 执行以下命令，将 WordPress 作为 Docker 容器运行：
 
     ```shell
     docker compose up -d
     ```
 
-2. 如果你在本地机器上启动容器，请访问 [localhost](http://localhost/) 设置你的 WordPress 站点；如果 WordPress 在远程机器上运行，请访问 `http://<your_instance_ip>`。
+2. 通过访问 [localhost](http://localhost/)（如果你在本地机器上启动容器）或 `http://<your_instance_ip>`（如果 WordPress 运行在远程机器上）来设置你的 WordPress 站点。
 
-### 步骤 5：确认数据库连接
+### 第 5 步：确认数据库连接
 
-1. 在 TiDB Cloud 控制台上关闭集群的连接对话框，并打开 **SQL 编辑器**页面。
-2. 在左侧的**模式**标签下，点击你连接到 WordPress 的数据库。
-3. 确认你现在可以在该数据库的表列表中看到 WordPress 表（如 `wp_posts` 和 `wp_comments`）。
+1. 在 TiDB Cloud 控制台关闭集群的连接对话框，并打开 **SQL Editor** 页面。
+2. 在左侧的 **Schemas** 标签下，点击你连接到 WordPress 的数据库。
+3. 确认你现在可以在该数据库的表列表中看到 WordPress 的表（如 `wp_posts` 和 `wp_comments`）。
 
 ## 需要帮助？
 
-在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 上询问社区，或[提交支持工单](https://tidb.support.pingcap.com/)。
+欢迎在 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 或 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs) 社区提问，或[提交支持工单](https://tidb.support.pingcap.com/)。

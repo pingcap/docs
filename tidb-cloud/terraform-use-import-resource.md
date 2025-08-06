@@ -1,34 +1,34 @@
 ---
-title: 使用导入资源
-summary: 了解如何使用导入资源管理导入任务。
+title: 使用 Import 资源
+summary: 学习如何使用 import 资源管理导入任务。
 ---
 
-# 使用导入资源
+# 使用 Import 资源
 
-本文档介绍如何使用 `tidbcloud_import` 资源将数据导入到 TiDB Cloud 集群。
+你可以在本文档中学习如何使用 `tidbcloud_import` 资源将数据导入到 TiDB Cloud 集群。
 
-`tidbcloud_import` 资源的功能包括以下内容：
+`tidbcloud_import` 资源的功能包括：
 
 - 为 TiDB Cloud Serverless 和 TiDB Cloud Dedicated 集群创建导入任务。
-- 从本地磁盘或 Amazon S3 存储桶导入数据。
+- 支持从本地磁盘或 Amazon S3 存储桶导入数据。
 - 取消正在进行的导入任务。
 
-## 前提条件
+## 前置条件
 
 - [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)。
-- [创建 TiDB Cloud Serverless 集群](/tidb-cloud/create-tidb-cluster-serverless.md)或[创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)。
+- [创建 TiDB Cloud Serverless 集群](/tidb-cloud/create-tidb-cluster-serverless.md) 或 [创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)。
 
 ## 创建并运行导入任务
 
-你可以使用导入资源管理本地导入任务或 Amazon S3 导入任务。
+你可以使用 import 资源管理本地导入任务或 Amazon S3 导入任务。
 
 ### 创建并运行本地导入任务
 
-> **注意：**
+> **Note:**
 >
-> 导入本地文件仅支持 TiDB Cloud Serverless 集群，不支持 TiDB Cloud Dedicated 集群。
+> 本地文件导入仅支持 TiDB Cloud Serverless 集群，不支持 TiDB Cloud Dedicated 集群。
 
-1. 创建用于导入的 CSV 文件。例如：
+1. 创建一个用于导入的 CSV 文件。例如：
 
    ```
    id;name;age
@@ -36,7 +36,7 @@ summary: 了解如何使用导入资源管理导入任务。
    2;Bob;30
    ```
 
-2. 创建一个 `import` 目录，然后在其中创建一个 `main.tf`。例如：
+2. 创建一个 `import` 目录，并在其中创建 `main.tf` 文件。例如：
 
     ```
     terraform {
@@ -68,9 +68,9 @@ summary: 了解如何使用导入资源管理导入任务。
     }
     ```
 
-   用你自己的值替换文件中的资源值（如项目 ID、集群 ID 和 CSV 路径）。你可以在[配置页面](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format)上找到 `csv_format` 的详细信息。
+   将文件中的资源值（如 project ID、cluster ID 和 CSV 路径）替换为你自己的值。你可以在 [配置页面](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format) 查看 `csv_format` 的详细信息。
 
-3. 运行 `terraform apply` 命令创建导入任务，然后输入 `yes` 确认创建并开始导入：
+3. 运行 `terraform apply` 命令以创建导入任务，然后输入 `yes` 确认创建并开始导入：
 
    ```
    $ terraform apply
@@ -87,7 +87,7 @@ summary: 了解如何使用导入资源管理导入任务。
    tidbcloud_import.example_local: Creation complete after 6s [id=781074]
    ```
 
-4. 使用 `terraform state show tidbcloud_import.${resource-name}` 检查导入任务的状态：
+4. 使用 `terraform state show tidbcloud_import.${resource-name}` 查看导入任务的状态：
 
    ```
    $ terraform state show tidbcloud_import.example_local
@@ -128,7 +128,7 @@ summary: 了解如何使用导入资源管理导入任务。
    }
    ```
 
-5. 几分钟后使用 `terraform refresh` 更新状态：
+5. 过几分钟后，使用 `terraform refresh` 更新状态：
 
    ```
    $ terraform refresh && terraform state show tidbcloud_import.example_local
@@ -170,7 +170,7 @@ summary: 了解如何使用导入资源管理导入任务。
    }
    ```
 
-   当状态变为 `COMPLETED` 时，表示导入任务已完成。
+   当 status 变为 `COMPLETED` 时，表示导入任务已完成。
 
 6. 使用 MySQL CLI 检查导入的数据：
 
@@ -187,11 +187,11 @@ summary: 了解如何使用导入资源管理导入任务。
 
 ### 创建并运行 Amazon S3 导入任务
 
-> **注意：**
+> **Note:**
 >
-> 要允许 TiDB Cloud 访问你 Amazon S3 存储桶中的文件，你需要先[配置 Amazon S3 访问权限](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)。
+> 为了让 TiDB Cloud 访问你在 Amazon S3 存储桶中的文件，你需要先[配置 Amazon S3 访问权限](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)。
 
-1. 创建一个 `import` 目录，然后在其中创建一个 `main.tf`。例如：
+1. 创建一个 `import` 目录，并在其中创建 `main.tf` 文件。例如：
 
    ```
    terraform {
@@ -226,7 +226,7 @@ summary: 了解如何使用导入资源管理导入任务。
    }
    ```
 
-2. 运行 `terraform apply` 命令创建导入任务，然后输入 `yes` 确认创建并开始导入：
+2. 运行 `terraform apply` 命令以创建导入任务，然后输入 `yes` 确认创建并开始导入：
 
    ```
    $ terraform apply
@@ -245,17 +245,17 @@ summary: 了解如何使用导入资源管理导入任务。
    tidbcloud_import.example_s3_parquet: Creation complete after 4s [id=781076]
    ```
 
-3. 使用 `terraform refresh` 和 `terraform state show tidbcloud_import.${resource-name}` 更新和检查导入任务的状态。
+3. 使用 `terraform refresh` 和 `terraform state show tidbcloud_import.${resource-name}` 更新并检查导入任务的状态。
 
 ## 更新导入任务
 
-导入任务无法更新。
+导入任务无法被更新。
 
 ## 删除导入任务
 
-对于 Terraform，删除导入任务意味着取消相应的导入资源。
+对于 Terraform，删除导入任务意味着取消对应的 import 资源。
 
-你无法取消 `COMPLETED` 状态的导入任务。否则，你将收到如下示例中的 `Delete Error`：
+你无法取消状态为 `COMPLETED` 的导入任务。否则，你会收到如下所示的 `Delete Error`：
 
 ```
 $ terraform destroy
@@ -296,6 +296,6 @@ tidbcloud_import.example_local: Destruction complete after 0s
 Destroy complete! Resources: 1 destroyed.
 ```
 
-## 配置
+## 配置项
 
-请参阅[配置文档](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import)获取导入资源的所有可用配置。
+请参阅 [配置文档](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import) 获取 import 资源的所有可用配置项。

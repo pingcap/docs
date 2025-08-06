@@ -1,31 +1,31 @@
 ---
-title: 将 TiDB Cloud 与 Cloudflare 集成
-summary: 了解如何将 Cloudflare Workers 与 TiDB Cloud 一起部署。
+title: 集成 TiDB Cloud 与 Cloudflare
+summary: 了解如何将 Cloudflare Workers 与 TiDB Cloud 部署集成。
 ---
 
-# 将 TiDB Cloud 与 Cloudflare Workers 集成
+# 集成 TiDB Cloud 与 Cloudflare Workers
 
-[Cloudflare Workers](https://workers.cloudflare.com/) 是一个允许你响应特定事件（如 HTTP 请求或数据库更改）运行代码的平台。Cloudflare Workers 易于使用，可用于构建各种应用程序，包括自定义 API、无服务器函数和微服务。它特别适用于需要低延迟性能或需要快速扩展的应用程序。
+[Cloudflare Workers](https://workers.cloudflare.com/) 是一个平台，允许你在特定事件发生时运行代码，例如 HTTP 请求或数据库变更。Cloudflare Workers 易于使用，可用于构建各种应用，包括自定义 API、无服务器函数和微服务。它对于需要低延迟性能或需要快速扩展的应用尤其有用。
 
-由于 Cloudflare Workers 运行在 V8 引擎上，无法直接建立 TCP 连接，你可能会发现从 Cloudflare Workers 连接到 TiDB Cloud 比较困难。你可以使用 [TiDB Cloud 无服务器驱动](/tidb-cloud/serverless-driver.md)通过 HTTP 连接帮助你连接到 Cloudflare Workers。
+你可能会发现从 Cloudflare Workers 连接到 TiDB Cloud 有一定难度，因为 Cloudflare Workers 运行在 V8 引擎上，无法直接建立 TCP 连接。你可以使用 [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md) 通过 HTTP 连接帮助你连接到 Cloudflare Workers。
 
-本文档将逐步说明如何使用 TiDB Cloud 无服务器驱动连接到 Cloudflare Workers。
+本文档将逐步演示如何使用 TiDB Cloud serverless driver 连接到 Cloudflare Workers。
 
 > **注意：**
 >
-> TiDB Cloud 无服务器驱动只能在 TiDB Cloud Serverless 中使用。
+> TiDB Cloud serverless driver 只能用于 TiDB Cloud Serverless。
 
 ## 开始之前
 
-在尝试本文中的步骤之前，你需要准备以下内容：
+在尝试本文步骤之前，你需要准备以下内容：
 
-- TiDB Cloud 账号和 TiDB Cloud 上的 TiDB Cloud Serverless 集群。更多详情，请参阅 [TiDB Cloud 快速入门](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)。
-- [Cloudflare Workers 账号](https://dash.cloudflare.com/login)。
+- 一个 TiDB Cloud 账号，以及在 TiDB Cloud 上创建的 TiDB Cloud Serverless 集群。详情请参见 [TiDB Cloud 快速入门](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)。
+- 一个 [Cloudflare Workers 账号](https://dash.cloudflare.com/login)。
 - 已安装 [npm](https://docs.npmjs.com/about-npm)。
 
 ## 步骤 1：设置 Wrangler
 
-[Wrangler](https://developers.cloudflare.com/workers/wrangler/) 是官方的 Cloudflare Worker CLI。你可以使用它来生成、构建、预览和发布你的 Workers。
+[Wrangler](https://developers.cloudflare.com/workers/wrangler/) 是官方的 Cloudflare Worker CLI。你可以用它来生成、构建、预览和发布你的 Workers。
 
 1. 安装 Wrangler：
 
@@ -33,7 +33,7 @@ summary: 了解如何将 Cloudflare Workers 与 TiDB Cloud 一起部署。
    npm install wrangler
    ```
 
-2. 要验证 Wrangler，请运行 wrangler login：
+2. 认证 Wrangler，运行 wrangler login：
 
     ```
     wrangler login
@@ -45,9 +45,9 @@ summary: 了解如何将 Cloudflare Workers 与 TiDB Cloud 一起部署。
     wrangler init tidb-cloud-cloudflare
     ```
 
-4. 在终端中，你将被问到一系列与项目相关的问题。对所有问题选择默认值。
+4. 在终端中，你会被询问一系列与项目相关的问题。所有问题均选择默认值即可。
 
-## 步骤 2：安装无服务器驱动
+## 步骤 2：安装 serverless driver
 
 1. 进入你的项目目录：
 
@@ -55,19 +55,19 @@ summary: 了解如何将 Cloudflare Workers 与 TiDB Cloud 一起部署。
     cd tidb-cloud-cloudflare
     ```
 
-2. 使用 npm 安装无服务器驱动：
+2. 使用 npm 安装 serverless driver：
 
     ```
     npm install @tidbcloud/serverless
     ```
 
-   这会在 `package.json` 中添加无服务器驱动依赖。
+   这会在 `package.json` 中添加 serverless driver 依赖。
 
 ## 步骤 3：开发 Cloudflare Worker 函数
 
-你需要根据需要修改 `src/index.ts`。
+你需要根据需求修改 `src/index.ts`。
 
-例如，如果你想显示所有数据库，可以使用以下代码：
+例如，如果你想展示所有数据库，可以使用如下代码：
 
 ```ts
 import { connect } from '@tidbcloud/serverless'
@@ -94,24 +94,24 @@ export default {
 wrangler secret put <DATABASE_URL>
 ```
 
-你也可以通过 Cloudflare Workers 仪表板编辑 `DATABASE_URL` 密钥。
+你也可以通过 Cloudflare Workers 控制台编辑 `DATABASE_URL` secret。
 
 ## 步骤 5：发布到 Cloudflare Workers
 
-现在你已准备好部署到 Cloudflare Workers。
+现在你已经可以部署到 Cloudflare Workers 了。
 
-在你的项目目录中，运行以下命令：
+在你的项目目录下，运行以下命令：
 
 ```
 npx wrangler publish
 ```
 
-## 步骤 6：尝试你的 Cloudflare Workers
+## 步骤 6：测试你的 Cloudflare Workers
 
-1. 转到 [Cloudflare 仪表板](https://dash.cloudflare.com)找到你的 worker。你可以在概览页面上找到你的 worker 的 URL。
+1. 前往 [Cloudflare 控制台](https://dash.cloudflare.com) 查找你的 worker。你可以在概览页面找到 worker 的 URL。
 
 2. 访问该 URL，你将获得结果。
 
 ## 示例
 
-请参阅 [Cloudflare Workers 示例](https://github.com/tidbcloud/car-sales-insight/tree/main/examples/cloudflare-workers)。
+参见 [Cloudflare Workers 示例](https://github.com/tidbcloud/car-sales-insight/tree/main/examples/cloudflare-workers)。

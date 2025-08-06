@@ -1,17 +1,17 @@
 ---
-title: 将 TiDB Cloud 与 Airbyte 集成
+title: 集成 TiDB Cloud 与 Airbyte
 summary: 了解如何使用 Airbyte TiDB 连接器。
 ---
 
-# 将 TiDB Cloud 与 Airbyte 集成
+# 集成 TiDB Cloud 与 Airbyte
 
-[Airbyte](https://airbyte.com/) 是一个开源的数据集成引擎，用于构建提取、加载、转换（ELT）管道，并将你的数据整合到数据仓库、数据湖和数据库中。本文介绍如何将 Airbyte 作为源或目标连接到 TiDB Cloud。
+[Airbyte](https://airbyte.com/) 是一个开源的数据集成引擎，用于构建提取、加载、转换（ELT）流程，并将你的数据整合到数据仓库、数据湖和数据库中。本文档介绍了如何将 Airbyte 连接到 TiDB Cloud，作为数据源或目标端。
 
 ## 部署 Airbyte
 
-你只需几个步骤就可以在本地部署 Airbyte。
+你可以通过几个简单的步骤在本地部署 Airbyte。
 
-1. 在你的工作空间上安装 [Docker](https://www.docker.com/products/docker-desktop)。
+1. 在你的工作环境中安装 [Docker](https://www.docker.com/products/docker-desktop)。
 
 2. 克隆 Airbyte 源代码。
 
@@ -20,13 +20,13 @@ summary: 了解如何使用 Airbyte TiDB 连接器。
     cd airbyte
     ```
 
-3. 使用 docker-compose 运行 Docker 镜像。
+3. 通过 docker-compose 运行 Docker 镜像。
 
     ```shell
     docker-compose up
     ```
 
-当你看到 Airbyte 横幅时，你可以使用用户名（`airbyte`）和密码（`password`）访问 [http://localhost:8000](http://localhost:8000) 来访问用户界面。
+当你看到 Airbyte 的横幅时，可以使用用户名（`airbyte`）和密码（`password`）访问 [http://localhost:8000](http://localhost:8000) 的 UI。
 
 ```
 airbyte-server      |     ___    _      __          __
@@ -42,70 +42,70 @@ airbyte-server      | --------------------------------------
 
 ## 设置 TiDB 连接器
 
-无论将 TiDB 设置为源还是目标，步骤都是相同的。
+方便的是，将 TiDB 作为数据源和目标端的设置步骤是相同的。
 
-1. 在侧边栏中点击**源**或**目标**，然后选择 TiDB 类型以创建新的 TiDB 连接器。
+1. 在侧边栏点击 **Sources** 或 **Destinations**，选择 TiDB 类型以创建新的 TiDB 连接器。
 
 2. 填写以下参数。
 
-    - 主机：TiDB Cloud 集群的端点
-    - 端口：数据库的端口
-    - 数据库：你想要同步数据的数据库
-    - 用户名：访问数据库的用户名
-    - 密码：用户名的密码
+    - Host: 你的 TiDB Cloud 集群的 endpoint
+    - Port: 数据库的端口
+    - Database: 你想要同步数据的数据库
+    - Username: 访问数据库的用户名
+    - Password: 用户名对应的密码
 
-    你可以从集群的连接对话框中获取参数值。要打开对话框，请转到项目的[**集群**](https://tidbcloud.com/project/clusters)页面，点击目标集群的名称以进入其概览页面，然后点击右上角的**连接**。
+    你可以在集群的连接对话框中获取这些参数值。要打开该对话框，请进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群名称进入其概览页，然后点击右上角的 **Connect**。
 
-3. 启用 **SSL 连接**，并在 **JDBC URL 参数**中将 TLS 协议设置为 **TLSv1.2** 或 **TLSv1.3**。
+3. 启用 **SSL Connection**，并在 **JDBC URL Params** 中将 TLS 协议设置为 **TLSv1.2** 或 **TLSv1.3**。
 
     > 注意：
     >
     > - TiDB Cloud 支持 TLS 连接。你可以在 **TLSv1.2** 和 **TLSv1.3** 中选择 TLS 协议，例如，`enabledTLSProtocols=TLSv1.2`。
-    > - 如果你想通过 JDBC 禁用与 TiDB Cloud 的 TLS 连接，你需要在 JDBC URL 参数中特别将 useSSL 设置为 `false` 并关闭 SSL 连接，例如，`useSSL=false`。
+    > - 如果你希望通过 JDBC 禁用到 TiDB Cloud 的 TLS 连接，需要在 JDBC URL Params 中专门设置 useSSL 为 `false` 并关闭 SSL 连接，例如，`useSSL=false`。
     > - TiDB Cloud Serverless 仅支持 TLS 连接。
 
-4. 点击**设置源**或**目标**以完成创建连接器。以下截图显示了将 TiDB 设置为源的配置。
+4. 点击 **Set up source** 或 **destination** 完成连接器的创建。下图展示了将 TiDB 作为数据源的配置示例。
 
-![TiDB 源配置](/media/tidb-cloud/integration-airbyte-parameters.jpg)
+![TiDB source configuration](/media/tidb-cloud/integration-airbyte-parameters.jpg)
 
-你可以使用任何源和目标的组合，例如从 TiDB 到 Snowflake，或从 CSV 文件到 TiDB。
+你可以使用任意组合的数据源和目标端，例如 TiDB 到 Snowflake，或 CSV 文件到 TiDB。
 
-有关 TiDB 连接器的更多详细信息，请参见 [TiDB 源](https://docs.airbyte.com/integrations/sources/tidb)和 [TiDB 目标](https://docs.airbyte.com/integrations/destinations/tidb)。
+关于 TiDB 连接器的更多细节，请参阅 [TiDB Source](https://docs.airbyte.com/integrations/sources/tidb) 和 [TiDB Destination](https://docs.airbyte.com/integrations/destinations/tidb)。
 
 ## 设置连接
 
-设置好源和目标后，你可以构建和配置连接。
+在设置好数据源和目标端后，你可以构建并配置连接。
 
-以下步骤使用 TiDB 作为源和目标。其他连接器可能有不同的参数。
+以下步骤以 TiDB 同时作为数据源和目标端为例。其他连接器可能有不同的参数。
 
-1. 在侧边栏中点击**连接**，然后点击**新建连接**。
-2. 选择之前建立的源和目标。
-3. 转到**设置**连接面板，为连接创建一个名称，例如 `${source_name} - ${destination-name}`。
-4. 将**复制频率**设置为**每 24 小时**，这意味着连接每天复制一次数据。
-5. 将**目标命名空间**设置为**自定义格式**，并将**命名空间自定义格式**设置为 **test**，以将所有数据存储在 `test` 数据库中。
-6. 选择**同步模式**为**完全刷新 | 覆盖**。
+1. 在侧边栏点击 **Connections**，然后点击 **New Connection**。
+2. 选择之前建立的数据源和目标端。
+3. 进入 **Set up** 连接面板，并为连接创建一个名称，例如 `${source_name} - ${destination-name}`。
+4. 将 **Replication frequency** 设置为 **Every 24 hours**，表示该连接每天同步一次数据。
+5. 将 **Destination Namespace** 设置为 **Custom format**，并将 **Namespace Custom Format** 设置为 **test**，以将所有数据存储在 `test` 数据库中。
+6. 选择 **Sync mode** 为 **Full refresh | Overwrite**。
 
     > **提示：**
     >
-    > TiDB 连接器支持[增量和完全刷新同步](https://airbyte.com/blog/understanding-data-replication-modes)。
+    > TiDB 连接器支持 [增量同步和全量刷新同步](https://airbyte.com/blog/understanding-data-replication-modes)。
     >
-    > - 在增量模式下，Airbyte 只读取自上次同步任务以来添加到源的记录。使用增量模式的第一次同步相当于完全刷新模式。
-    > - 在完全刷新模式下，Airbyte 在每次同步任务中读取源中的所有记录并复制到目标。你可以在 Airbyte 中为每个名为**命名空间**的表单独设置同步模式。
+    > - 在增量模式下，Airbyte 只读取自上次同步作业以来新增的源端记录。首次使用增量模式同步等同于全量刷新模式。
+    > - 在全量刷新模式下，Airbyte 每次同步任务都会读取源端的所有记录并复制到目标端。你可以为 Airbyte 中每个名为 **Namespace** 的表单独设置同步模式。
 
-    ![设置连接](/media/tidb-cloud/integration-airbyte-connection.jpg)
+    ![Set up connection](/media/tidb-cloud/integration-airbyte-connection.jpg)
 
-7. 将**规范化和转换**设置为**规范化表格数据**以使用默认规范化模式，或者你可以为你的任务设置 dbt 文件。有关规范化的更多信息，请参见[转换和规范化](https://docs.airbyte.com/operator-guides/transformation-and-normalization/transformations-with-dbt)。
-8. 点击**设置连接**。
-9. 建立连接后，点击**启用**以激活同步任务。你也可以点击**立即同步**立即同步。
+7. 将 **Normalization & Transformation** 设置为 **Normalized tabular data** 以使用默认的标准化模式，或者你也可以为你的作业设置 dbt 文件。关于标准化的更多信息，请参考 [Transformations and Normalization](https://docs.airbyte.com/operator-guides/transformation-and-normalization/transformations-with-dbt)。
+8. 点击 **Set up connection**。
+9. 连接建立后，点击 **ENABLED** 激活同步任务。你也可以点击 **Sync now** 立即同步。
 
-![同步数据](/media/tidb-cloud/integration-airbyte-sync.jpg)
+![Sync data](/media/tidb-cloud/integration-airbyte-sync.jpg)
 
 ## 限制
 
-- TiDB 连接器无法使用 TiCDC 提供的变更数据捕获（CDC）功能。增量同步基于游标机制执行。
-- TiDB 目标在默认规范化模式下将 `timestamp` 类型转换为 `varchar` 类型。这是因为 Airbyte 在传输过程中将时间戳类型转换为字符串，而 TiDB 不支持 `cast ('2020-07-28 14:50:15+1:00' as timestamp)`。
-- 对于一些大型 ELT 任务，你需要增加 TiDB 中[事务限制](/develop/dev-guide-transaction-restraints.md#large-transaction-restrictions)的参数。
+- TiDB 连接器无法使用 TiCDC 提供的变更数据捕获（CDC）功能。增量同步是基于游标机制实现的。
+- 在默认标准化模式下，TiDB 目标端会将 `timestamp` 类型转换为 `varchar` 类型。这是因为 Airbyte 在传输过程中将 timestamp 类型转换为字符串，而 TiDB 不支持 `cast ('2020-07-28 14:50:15+1:00' as timestamp)`。
+- 对于某些大型 ELT 任务，你需要在 TiDB 中增加 [事务限制](/develop/dev-guide-transaction-restraints.md#large-transaction-restrictions) 的相关参数。
 
-## 另请参阅
+## 参见
 
 [使用 Airbyte 将数据从 TiDB Cloud 迁移到 Snowflake](https://www.pingcap.com/blog/using-airbyte-to-migrate-data-from-tidb-cloud-to-snowflake/)。
