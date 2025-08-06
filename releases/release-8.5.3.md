@@ -129,7 +129,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     - Fix the issue that `recovery-duration` does not take effect in the slow node detection mechanism [#9384](https://github.com/tikv/pd/issues/9384) @[rleungx](https://github.com/rleungx)
     - Fix the issue that the Evict Leader scheduler might be incorrectly paused after a cluster upgrade [#9416](https://github.com/tikv/pd/issues/9416) @[rleungx](https://github.com/rleungx)
-    - Fix the issue that improperly closing TiDB Dashboard TCP connections could lead to PD goroutine leaks [#9402](https://github.com/tikv/pd/issues/9402) @[baurine](https://github.com/baurine)
+    - Fix the issue that improperly closing TiDB Dashboard TCP connections could lead to PD goroutine leaks [#9402](https://github.com/tikv/pd/issues/9402) @[baurine](https://github.com/baurine) <!--tw@hfxsd: the following 1 note--> 
     - Fix the issue that newly added TiKV nodes might fail to be scheduled [#9145](https://github.com/tikv/pd/issues/9145) @[bufferflies](https://github.com/bufferflies)
 
 + TiFlash <!--tw@hfxsd: 3 notes-->
