@@ -24,7 +24,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - Improve the performance of adding unique indexes using global sort, and refine the error message when adding duplicate unique indexes [#61689](https://github.com/pingcap/tidb/issues/61689) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - Disable TiKV switching to import mode when `IMPORT INTO` enables global sort [#60361](https://github.com/pingcap/tidb/issues/60361) @[D3Hunter](https://github.com/D3Hunter)
     - Add a monitoring metric to observe the write speed to TiKV during index addition [#60925](https://github.com/pingcap/tidb/issues/60925) @[CbcWestwolf](https://github.com/CbcWestwolf)
-    - Add a retry mechanism for EOF exceptions to improve data read stability [#59754](https://github.com/pingcap/tidb/issues/59754) @[lance6716](https://github.com/lance6716)
     - Optimize the scheduling logic of `merge sort` sub-tasks to improve sorting performance [#60375](https://github.com/pingcap/tidb/issues/60375) @[tangenta](https://github.com/tangenta)
     - Accelerate table creation when creating a large number of tables with foreign keys, and optimize memory usage efficiency [#61126](https://github.com/pingcap/tidb/issues/61126) @[GMHDBJD](https://github.com/GMHDBJD)
     - Improve the read performance of the `information_schema.tables` table [#62020](https://github.com/pingcap/tidb/issues/62020) @[tangenta](https://github.com/tangenta)
