@@ -21,7 +21,7 @@ Before creating a Data App, make sure that you have created a [{{{ .starter }}}]
 
 > **Note:**
 >
-> Data Service is only available for [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md) clusters hosted on AWS. To use Data Service in TiDB Cloud Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> Data Service is available only for [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md) clusters hosted on AWS. To use Data Service in TiDB Cloud Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Get started with a sample Data App
 
