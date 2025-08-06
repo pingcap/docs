@@ -1,28 +1,30 @@
 ---
 title: Manage TiProxy
-summary: Learn about how to manage TiProxy.
+summary: Learn about how to enable, disable, view and modify TiProxy..
 ---
 
 # Manage TiProxy
+
+This document describes how to enable, disable, view and modify TiProxy.
 
 ## Enable TiProxy
 
 You can enable TiProxy for either a new cluster or an existing cluster in any TiDB node group.
 
-### Decide TiProxy instance size and number
+### Decide size and number of TiProxy instances
 
-TiProxy size and number depend on both the QPS and network bandwidth of your cluster. Network bandwidth is the sum of the client request and TiDB response bandwidth.
+The size and number of TiProxy instances depend on both the QPS and network bandwidth of your cluster. Network bandwidth is the sum of the client request and TiDB response bandwidth.
 
-The maximum QPS and network bandwidth of each TiProxy size are listed below.
+The following tables shows the maximum QPS and network bandwidth of each TiProxy size.
 
-| size | max QPS | max network bandwidth |
-| :-| :-|
-| small | 30K | 93 MiB/s |
-| large | 120K | 312 MiB/s |
+| Size | Maximum QPS | Maximum network bandwidth |
+| :--| :--|
+| Small | 30K  | 93 MiB/s  |
+| Large | 120K | 312 MiB/s |
 
 The optional TiProxy sizes are `small` and `large`. The optional TiProxy instance numbers are 2, 3, 6, 9, 12, 15, 18, 21, and 24. The default two small-sized TiProxy instances can provide 60K QPS and 186 MiB/s network bandwidth. It is recommended that you reserve 20% of the QPS to prevent high latency.
 
-For example, if your cluster's maximum QPS is 100K and the maximum network bandwidth is 100 MiB/s, the size and number of TiProxy instances mainly depend on the QPS. In this case, you can select six small-sized TiProxy instances.
+For example, if your cluster's maximum QPS is 100K and the maximum network bandwidth is 100 MiB/s, the size and number of TiProxy instances mainly depend on the QPS. In this case, you can select 6 small-sized TiProxy instances.
 
 ### Enable TiProxy for a new cluster
 
@@ -40,16 +42,16 @@ To enable TiProxy for an existing cluster, perform the following steps:
 
 ![Enable TiProxy](/media/tidb-cloud/tiproxy-enable-tiproxy.png)
 
-> **Note**
+> **Note:**
 >
 > Enabling TiProxy will cause a rolling restart of TiDB in this TiDB node group, which causes connections to disconnect. In addition, creating new connections might hang for up to 30 seconds. Make sure that you enable TiProxy in the maintenance window.
 
 ### Limitations and quotas
 
-- The TiDB instance number in a TiDB node group must be at least two
-- The TiDB instance size must be at least 4 vCPU
-- The default maximum TiProxy instance number of an organization is 10, see [Limitations and Quotas](/tidb-cloud/limitations-and-quotas.md)
-- The TiDB cluster version should be v6.5.0 or higher
+- There must be at least two TiDB instance number in a TiDB node group.
+- The TiDB instance size must be at least 4 vCPUs.
+- The default maximum TiProxy instance number of an organization is 10. For more information, see [Limitations and Quotas](/tidb-cloud/limitations-and-quotas.md).
+- The TiDB cluster version must be v6.5.0 or later.
 
 ## Disable TiProxy
 
@@ -61,7 +63,7 @@ To disable TiProxy, perform the following steps:
 
 ![Disable TiProxy](/media/tidb-cloud/tiproxy-disable-tiproxy.png)
 
-> **Note**
+> **Note:**
 >
 > Disabling TiProxy will cause connections to disconnect. In addition, creating new connections might hang for up to 10 seconds. Make sure that you disable TiProxy in the maintenance window.
 
@@ -87,10 +89,10 @@ To view TiProxy metrics, perform the following steps:
 
 The metrics include:
 
-- TiProxy CPU Usage: The CPU usage statistics of each TiProxy node. The upper limit is 100%. If the maximum CPU usage exceeds 80%, it is recommended that you scale out TiProxy.
-- TiProxy Connections: The connection number on each TiProxy node.
-- TiProxy Throughput: The transferred bytes per second on each TiProxy node. If the maximum throughput reaches the maximum network bandwidth, it is recommended that you scale out TiProxy. To learn about the maximum network bandwidth, see [Decide TiProxy instance size and number](#decide-tiproxy-instance-size-and-number).
-- TiProxy Sessions Migration Reasons: The number of session migrations that happen every minute and the reason for them. For example, when TiDB scales in and TiProxy migrates sessions to other TiDB instances, the reason is `status`. For more migration reasons, see [TiProxy Monitoring Metrics](https://docs.pingcap.com/tidb/stable/tiproxy-grafana#balance).
+- **TiProxy CPU Usage**: the CPU usage statistics of each TiProxy node. The upper limit is 100%. If the maximum CPU usage exceeds 80%, it is recommended that you scale out TiProxy.
+- **TiProxy Connections**: the connection number on each TiProxy node.
+- **TiProxy Throughput**: the transferred bytes per second on each TiProxy node. If the maximum throughput reaches the maximum network bandwidth, it is recommended that you scale out TiProxy. To learn about the maximum network bandwidth, see [Decide TiProxy instance size and number](#decide-tiproxy-instance-size-and-number).
+- **TiProxy Sessions Migration Reasons**: the number of session migrations that happen every minute and the reason for them. For example, when TiDB scales in and TiProxy migrates sessions to other TiDB instances, the reason is `status`. For more migration reasons, see [TiProxy Monitoring Metrics](https://docs.pingcap.com/tidb/stable/tiproxy-grafana#balance).
 
 ### View TiProxy bills
 
@@ -104,7 +106,7 @@ To view TiProxy bills, perform the following steps:
 
 ## Modify TiProxy
 
-To scale-in or scale-out TiProxy, perform the following steps:
+To scale in or scale out TiProxy, perform the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
 2. Click **...** in the upper-right corner, and click **Modify** in the drop-down menu. The **Modify Cluster** page is displayed.
@@ -114,9 +116,9 @@ To scale-in or scale-out TiProxy, perform the following steps:
 
 > **Note**
 >
-> - Modifying the TiProxy size is not supported. It is recommended that you modify the TiProxy number. If you must modify the TiProxy size, you need to disable TiProxy in all the TiDB node groups and then enable it again to choose a different size.
-> - Scaling in TiProxy will cause connections to disconnect. Make sure you scale in TiProxy in the maintenance window.
+> - Modifying the TiProxy size directly is not supported. It is recommended that you modify the number of TiProxy instances. If you have to modify the TiProxy size, you need to disable TiProxy in all the TiDB node groups and then enable it again to choose a different size.
+> - Scaling in TiProxy will cause connections to disconnect. Make sure that you scale in TiProxy in the maintenance window.
 
-## Manage TiProxy in TiDB node groups
+## Manage TiProxy in multiple TiDB node groups
 
-When you have multiple TiDB node groups, each TiDB node group has its dedicated TiProxy group. TiProxy will route traffic to the TiDB instances in the same TiDB node group to isolate computing resources. You can enable, disable, or modify TiProxy in each TiDB node group. However, the TiProxy size in all the TiDB node groups must be the same.
+When you have multiple TiDB node groups, each TiDB node group has its dedicated TiProxy group. TiProxy routes traffic to the TiDB instances in the same TiDB node group to isolate computing resources. You can enable, disable, or modify TiProxy in each TiDB node group. However, the TiProxy size in all the TiDB node groups must be the same.
