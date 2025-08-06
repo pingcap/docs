@@ -44,11 +44,20 @@ Once a cluster reaches its usage quota, it immediately denies any new connection
 
 To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
 
-### User name prefix
+## {{{ .essential }}} {#essential}
+
+For applications experiencing growing workloads and needing scalability in real time, the Essential cluster plan provides the flexibility and performance to keep pace with your business growth with the following features:
+
+- **Enhanced capabilities**: includes all capabilities of the Starter plan, along with the capacity to handle larger and more complex workloads, as well as advanced security features.
+- **Automatic scaling**: automatically adjusts storage and computing resources to efficiently meet changing workload demands.
+- **High availability**: built-in fault tolerance and redundancy ensure your applications remain available and resilient, even during infrastructure failures.
+- **Predictable pricing**: billed based on storage and Request Capacity Units (RCUs) of the compute resources, offering transparent, usage-based pricing that scales with your needs, so you only pay for what you use without surprises.
+
+## User name prefix
 
 <!--Important: Do not update the section name "User name prefix" because this section is referenced by TiDB backend error messages.-->
 
-For each {{{ .starter }}} cluster, TiDB Cloud generates a unique prefix to distinguish it from other clusters.
+For each {{{ .starter }}} or {{{ .essential }}} cluster, TiDB Cloud generates a unique prefix to distinguish it from other clusters.
 
 Whenever you use or set a database user name, you must include the prefix in the user name. For example, assume that the prefix of your cluster is `3pTAoNNegb47Uc8`.
 
@@ -60,7 +69,7 @@ Whenever you use or set a database user name, you must include the prefix in the
 
     > **Note:**
     >
-    > {{{ .starter }}} requires TLS connection. To find the CA root path on your system, see [Root certificate default path](/tidb-cloud/secure-connections-to-serverless-clusters.md#root-certificate-default-path).
+    > {{{ .starter }}} and {{{ .essential }}} require TLS connection. To find the CA root path on your system, see [Root certificate default path](/tidb-cloud/secure-connections-to-serverless-clusters.md#root-certificate-default-path).
 
 - To create a database user:
 
@@ -73,15 +82,6 @@ To get the prefix for your cluster, take the following steps:
 1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page.
 2. Click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner. A connection dialog is displayed.
 3. In the dialog, get the prefix from the connection string.
-
-## {{{ .essential }}} {#essential}
-
-For applications experiencing growing workloads and needing scalability in real time, the Essential cluster plan provides the flexibility and performance to keep pace with your business growth with the following features:
-
-- **Enhanced capabilities**: includes all capabilities of the Starter plan, along with the capacity to handle larger and more complex workloads, as well as advanced security features.
-- **Automatic scaling**: automatically adjusts storage and computing resources to efficiently meet changing workload demands.
-- **High availability**: built-in fault tolerance and redundancy ensure your applications remain available and resilient, even during infrastructure failures.
-- **Predictable pricing**: billed based on storage and Request Capacity Units (RCUs) of the compute resources, offering transparent, usage-based pricing that scales with your needs, so you only pay for what you use without surprises.
 
 ## TiDB Cloud Dedicated
 

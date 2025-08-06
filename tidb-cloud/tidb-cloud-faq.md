@@ -153,7 +153,7 @@ No. TiDB Cloud is Database-as-a-Service (DBaaS) and runs only in the TiDB Cloud 
 
 ### Is my TiDB cluster secure?
 
-In TiDB Cloud, you can use either a TiDB Cloud Dedicated cluster or a {{{ .starter }}} cluster according to your needs.
+In TiDB Cloud, you can use a TiDB Cloud Dedicated cluster, a {{{ .starter }}} cluster, or a {{{ .essential }}} cluster according to your needs.
 
 For TiDB Cloud Dedicated clusters, TiDB Cloud ensures cluster security with the following measures:
 

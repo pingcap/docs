@@ -9,6 +9,10 @@ TiDB Cloud lets you create branches for {{{ .starter }}} and {{{ .essential }}} 
 
 With branches, developers can work in parallel, iterate rapidly on new features, troubleshoot issues without affecting the production database, and easily revert changes if needed. This feature streamlines the development and deployment process while ensuring a high level of stability and reliability for the production database.
 
+> **Note:**
+>
+> Currently, TiDB Cloud Branching is in beta and is not available on TiDB Cloud Dedicated clusters.
+
 ## Implementations
 
 When a branch for a cluster is created, the data in the branch diverges from the original cluster or its parent branch at a specific point in time. This means that subsequent changes made in either the parent or the branch will not be synchronized with each other.

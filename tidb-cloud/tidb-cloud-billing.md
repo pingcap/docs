@@ -32,10 +32,10 @@ See the detailed pricing for each available Alibaba Cloud region below.
 | Resource | Singapore |
 |----------|-----------|
 | Compute (per RCU/month) | $0.24 |
-| Row storage (per GiB/month) | $0.24 |
-| Column storage (per GiB/month) | $0.06 |
-| Row storage with enhanced encryption at rest (per GiB/month) | $0.36 |
-| Column storage with enhanced encryption at rest (per GiB/month) | $0.09 |
+| Row-based storage (per GiB/month) | $0.24 |
+| Columnar storage (per GiB/month) | $0.06 |
+| Row-based storage with dual-layer encryption (per GiB/month) | $0.36 |
+| Columnar storage with dual-layer encryption (per GiB/month) | $0.09 |
 
 #### Throttling
 
@@ -237,7 +237,7 @@ If you have agreed with our sales on a contract and received an email to review 
 
 To learn more about contracts, feel free to [contact our sales](https://www.pingcap.com/contact-us/).
 
-## Billing from Cloud Provider Marketplace
+## Billing from cloud provider marketplace
 
 If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can link your TiDB Cloud account to the billing account of your cloud provider (AWS, Azure, Google Cloud, or Alibaba Cloud). Otherwise, skip this section.
 

@@ -11,7 +11,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 ### Placement and range management
 
-| Statement | TiDB Cloud Dedicated | {{{ .starter }}} |
+| Statement | TiDB Cloud Dedicated | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
 | `ALTER PLACEMENT POLICY` | Supported | Not supported [^1] |
 | `CREATE PLACEMENT POLICY` | Supported | Not supported [^1] |
@@ -25,7 +25,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 ### Resource groups
 
-| Statement | TiDB Cloud Dedicated | {{{ .starter }}} |
+| Statement | TiDB Cloud Dedicated | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
 | `ALTER RESOURCE GROUP` | Supported | Not supported [^2] |
 | `CALIBRATE RESOURCE` | Not supported | Not supported [^2] |
@@ -36,18 +36,18 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 ### Others
 
-| Statement | TiDB Cloud Dedicated | {{{ .starter }}} |
+| Statement | TiDB Cloud Dedicated | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
 | `BACKUP` | Supported | Not supported [^3] |
 | `SHOW BACKUPS` | Supported | Not supported [^3] |
 | `RESTORE` | Supported | Not supported [^3] |
 | `SHOW RESTORES` | Supported | Not supported [^3] |
-| `ADMIN RESET TELEMETRY_ID` | Supported | Telemetry is not supported on {{{ .starter }}}. |
+| `ADMIN RESET TELEMETRY_ID` | Supported | Telemetry is not supported on {{{ .starter }}} or {{{ .essential }}}. |
 | `ADMIN SHOW TELEMETRY` | Not supported [^4] | Not supported [^4] |
 | `ADMIN SHOW SLOW` | Supported | Not supported [^5] |
 | `ADMIN PLUGINS ENABLE` | Supported | Not supported [^8] |
 | `ADMIN PLUGINS DISABLE` | Supported | Not supported [^8] |
-| `ALTER INSTANCE RELOAD TLS` | Supported | {{{ .starter }}} automatically refreshes the TLS certificate. |
+| `ALTER INSTANCE RELOAD TLS` | Supported | {{{ .starter }}} and {{{ .essential }}} automatically refresh the TLS certificate. |
 | `LOAD DATA INFILE` | Supports `LOAD DATA LOCAL INFILE`, and `LOAD DATA INFILE` from Amazon S3 or Google Cloud Storage | Only supports `LOAD DATA LOCAL INFILE` |
 | `CHANGE DRAINER` | Not supported [^7] | Not supported [^7] |
 | `CHANGE PUMP` | Not supported [^7] | Not supported [^7] |
@@ -64,13 +64,13 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 ## Functions and operators
 
-| Function and operator | TiDB Cloud Dedicated | {{{ .starter }}} |
+| Function and operator | TiDB Cloud Dedicated | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
 | `SLEEP` | No Limitation | The [`SLEEP()` function](https://docs.pingcap.com/tidbcloud/miscellaneous-functions) has a limitation wherein it can only support a maximum sleep time of 300 seconds.|
 
 ## System tables
 
-| Database | Table | TiDB Cloud Dedicated | {{{ .starter }}} |
+| Database | Table | TiDB Cloud Dedicated | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|:-|
 | `information_schema` | `ATTRIBUTES` | Supported | Not supported [^1] |
 | `information_schema` | `CLUSTER_CONFIG` | Not supported [^4] | Not supported [^4] |
@@ -121,7 +121,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 ## System variables
 
-| Variable | TiDB Cloud Dedicated | {{{ .starter }}} |
+| Variable | TiDB Cloud Dedicated | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
 | `datadir` | No limitation | Not supported [^1] |
 | `interactive_timeout` | No limitation | Read-only [^10] |
@@ -217,26 +217,26 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `validate_password.special_char_count` | No limitation | At least `1` [^9] |
 | `wait_timeout` | No limitation | Read-only [^10] |
 
-[^1]: Configuring data placement is not supported on {{{ .starter }}}.
+[^1]: Configuring data placement is not supported on {{{ .starter }}} or {{{ .essential }}}.
 
-[^2]: Configuring resource groups is not supported on {{{ .starter }}}.
+[^2]: Configuring resource groups is not supported on {{{ .starter }}} or {{{ .essential }}}.
 
-[^3]: To perform [Back up and Restore](/tidb-cloud/backup-and-restore-serverless.md) operations on {{{ .starter }}}, you can use the TiDB Cloud console instead.
+[^3]: To perform [Back up and Restore](/tidb-cloud/backup-and-restore-serverless.md) operations on {{{ .starter }}} or {{{ .essential }}}, you can use the TiDB Cloud console instead.
 
 [^4]: The feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security).
 
-[^5]: To track [Slow Query](/tidb-cloud/tune-performance.md#slow-query) on {{{ .starter }}}, you can use the TiDB Cloud console instead.
+[^5]: To track [Slow Query](/tidb-cloud/tune-performance.md#slow-query) on {{{ .starter }}} or {{{ .essential }}}, you can use the TiDB Cloud console instead.
 
-[^6]: To perform [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) on {{{ .starter }}}, you can use the TiDB Cloud console instead.
+[^6]: To perform [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) on {{{ .starter }}} or {{{ .essential }}}, you can use the TiDB Cloud console instead.
 
 [^7]: Drainer and Pump are not supported on TiDB Cloud.
 
-[^8]: Plugin is not supported on {{{ .starter }}}.
+[^8]: Plugin is not supported on {{{ .starter }}} or {{{ .essential }}}.
 
-[^9]: {{{ .starter }}} enforces strong password policy.
+[^9]: {{{ .starter }}} and {{{ .essential }}} enforce strong password policy.
 
-[^10]: The variable is read-only on {{{ .starter }}}.
+[^10]: The variable is read-only on {{{ .starter }}} and {{{ .essential }}}.
 
-[^11]: {{{ .starter }}} does not support downloading the file exported by `PLAN REPLAYER` through `${tidb-server-status-port}` as in the [example](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#examples-of-exporting-cluster-information). Instead, {{{ .starter }}} generates a [presigned URL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) for you to download the file. Note that this URL remains valid for 10 hours after generation.
+[^11]: {{{ .starter }}} and {{{ .essential }}} do not support downloading the file exported by `PLAN REPLAYER` through `${tidb-server-status-port}` as in the [example](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#examples-of-exporting-cluster-information). Instead, {{{ .starter }}} and {{{ .essential }}} generate a [presigned URL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) for you to download the file. Note that this URL remains valid for 10 hours after generation.
 
 [^12]: Not supported. Enabling `require_secure_transport` for TiDB Cloud Dedicated clusters will result in SQL client connection failures.

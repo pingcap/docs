@@ -9,6 +9,10 @@ summary: Learn the use of TiDB Cloud node in n8n.
 
 This document introduces how to build an auto-workflow: create a {{{ .starter }}} cluster, gather Hacker News RSS, store it to TiDB and send a briefing email.
 
+> **Note:**
+>
+> In addition to {{{ .starter }}} clusters, the steps in this document also work with {{{ .essential }}} clusters.
+
 ## Prerequisites: Get TiDB Cloud API key
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.

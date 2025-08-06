@@ -204,7 +204,7 @@ TiDB Cloud safeguards static data with advanced encryption capabilities, ensurin
 
 - Encrypts static data and backups with CMEK keys when enabled.
 
-- For TiDB Cloud Dedicated clusters without CMEK, TiDB Cloud uses escrow keys; {{{ .starter }}} clusters rely exclusively on escrow keys.
+- For TiDB Cloud Dedicated clusters without CMEK, TiDB Cloud uses escrow keys; {{{ .starter }}} and {{{ .essential }}} clusters rely exclusively on escrow keys.
 
 **Best practices:**
 

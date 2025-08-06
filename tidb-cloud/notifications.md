@@ -39,6 +39,8 @@ The following table lists the notifications available in TiDB Cloud, along with 
 | --- | --- | --- |
 | {{{ .starter }}} cluster creation | A [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster is created. | All project members |
 | {{{ .starter }}} cluster deletion | A {{{ .starter }}} cluster is deleted. | All project members |
+| {{{ .essential }}} cluster creation | A [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) cluster is created. | All project members |
+| {{{ .essential }}} cluster deletion | A [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) cluster is deleted. | All project members |
 | TiDB Cloud Dedicated cluster creation | A [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster is created. | All project members |
 | TiDB Cloud Dedicated cluster deletion | A TiDB Cloud Dedicated cluster is deleted. | All project members |
 | Organization Budget threshold alert | The organization [budget threshold](/tidb-cloud/tidb-cloud-budget.md) is reached. | `Organization Owner`, `Organization Billing Manager`, and `Organization Billing Viewer` |
