@@ -24,7 +24,7 @@
   - [可扩展性](/tidb-cloud/scalability-concepts.md)
   - [高可用性](/tidb-cloud/high-availability-with-multi-az.md)
   - [监控](/tidb-cloud/monitoring-concepts.md)
-  - [数据流](/tidb-cloud/data-streaming-concepts.md)
+  - [数据同步](/tidb-cloud/data-streaming-concepts.md)
   - [备份 & 恢复](/tidb-cloud/backup-and-restore-concepts.md)
   - [安全性](/tidb-cloud/security-concepts.md)
 
