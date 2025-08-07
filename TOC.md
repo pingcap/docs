@@ -1,8 +1,6 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-<<<<<<< HEAD
-- [Docs Home](https://docs.pingcap.com/)
 - About TiDB
   - [TiDB Introduction](/overview.md)
   - [TiDB 5.4 Release Notes](/releases/release-5.4.0.md)
@@ -12,12 +10,6 @@
     - [v5.4 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v5.4.0-vs-v5.3.0.md)
     - [v5.4 TPC-C Performance Test Report](/benchmark/v5.4-performance-benchmarking-with-tpcc.md)
     - [v5.4 MPP mode TPC-H 100GB Performance Test](/benchmark/v5.4-performance-benchmarking-with-tpch.md)
-=======
-- About TiDB Self-Managed
-  - [What is TiDB Self-Managed](/overview.md)
-  - [TiDB 8.5 Release Notes](/releases/release-8.5.0.md)
-  - [Features](/basic-features.md)
->>>>>>> 248afc3fd4 (toc: remove docs home from left navigation (#21528))
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [Credits](/credits.md)
