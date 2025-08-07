@@ -43,7 +43,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - Optimize the performance of `fetch_entries_to` in Raft Engine to reduce contention and improve performance under mixed workloads [#18605](https://github.com/tikv/tikv/issues/18605) @[LykxSassinator](https://github.com/LykxSassinator)
     - (dup): release-9.0.0.md > Improvements> TiKV - Optimize the cleanup mechanism of residual data to mitigate the impact on request latency [#18107](https://github.com/tikv/tikv/issues/18107) @[LykxSassinator](https://github.com/LykxSassinator)
 
-+ PD
++ PD <!--tw@hfxsd: 2 notes-->
 
     - Add GO runtime-related monitoring metrics in Prometheus [#8931](https://github.com/tikv/pd/issues/8931) @[bufferflies](https://github.com/bufferflies)
     - Extend the recovery time after triggering slow node leader eviction from 600 seconds to 900 seconds (15 minutes) [#9329](https://github.com/tikv/pd/issues/9329) @[rleungx](https://github.com/rleungx)
@@ -104,16 +104,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - Fix the issue that a `nil` buffer in `basePartialResult4GroupConcat` causes a panic during disk spilling in the HashAgg operator [#61749](https://github.com/pingcap/tidb/issues/61749) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - Fix the issue that incorrect return values in the encoding logic of aggregate expressions cause a panic during query execution [#61735](https://github.com/pingcap/tidb/issues/61735) @[YangKeao](https://github.com/YangKeao) <!--tw@hfxsd: the following 12 notes-->    
     - Fix the issue that the HashJoin operator causes Goroutine leaks due to memory overuse [#60926](https://github.com/pingcap/tidb/issues/60926) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    - Fix the issue that shared KV requests in IndexMerge and IndexLookUp operators cause data races when pushing down queries [#60175](https://github.com/pingcap/tidb/issues/60175) @[you06](https://github.com/you06)
+    - Fix the issue that shared KV requests in `IndexMerge` and `IndexLookUp` operators cause data races when pushing down queries [#60175](https://github.com/pingcap/tidb/issues/60175) @[you06](https://github.com/you06)
     - Fix the issue that SQL statements containing `_charset(xxx), _charset(xxx2), ...` generate different digests [#58447](https://github.com/pingcap/tidb/issues/58447) @[xhebox](https://github.com/xhebox)
     - Fix the issue that TiDB might panic when handling invalid UTF-8 characters [#47521](https://github.com/pingcap/tidb/issues/47521) @[Defined2014](https://github.com/Defined2014)
-    - Fix the issue that inserting Daylight Saving Time values with invalid timestamps results in `0000-00-00` [#61334](https://github.com/pingcap/tidb/issues/61334) @[mjonss](https://github.com/mjonss)
-    - Fix the issue that `INSERT IGNORE` with invalid Daylight Saving Time values and strict `sql_mode` results in timestamps inconsistent with MySQL [#61439](https://github.com/pingcap/tidb/issues/61439) @[mjonss](https://github.com/mjonss)
+    - Fix the issue that inserting an invalid daylight saving time (DST) timestamp results in `0000-00-00` [#61334](https://github.com/pingcap/tidb/issues/61334) @[mjonss](https://github.com/mjonss)
+    - Fix the issue that using `INSERT IGNORE` to insert an invalid daylight saving time timestamp in strict SQL mode results in a timestamp inconsistent with MySQL [#61439](https://github.com/pingcap/tidb/issues/61439) @[mjonss](https://github.com/mjonss)
     - Fix the issue that frequent Region merges prevent TTL jobs from starting [#61512](https://github.com/pingcap/tidb/issues/61512) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that the column length returned by TiDB in the network protocol might be `0`. If it is `0`, TiDB returns the default length of each field type [#60503](https://github.com/pingcap/tidb/issues/60503) @[xhebox](https://github.com/xhebox)
     - Fix the issue that the returned type of `blob` in the network protocol is inconsistent with MySQL [#60195](https://github.com/pingcap/tidb/issues/60195) @[dveeden](https://github.com/dveeden)
     - Fix the issue that the length returned by `CAST()` is incompatible with MySQL [#61350](https://github.com/pingcap/tidb/issues/61350) @[YangKeao](https://github.com/YangKeao)
-    - Fix the issue that the comparison behavior of `latin1_bin` with `utf8mb4_bin` and `utf8_bin` is inconsistent [#60701](https://github.com/pingcap/tidb/issues/60701) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that the comparison behavior of `latin1_bin` differs from that of `utf8mb4_bin` and `utf8_bin` [#60701](https://github.com/pingcap/tidb/issues/60701) @[hawkingrei](https://github.com/hawkingrei)
 
 + TiKV <!--tw@Oreoxmt: 6 notes-->
 
