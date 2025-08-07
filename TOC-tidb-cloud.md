@@ -137,7 +137,7 @@
     - [通过 Google Cloud Private Service Connect 连接](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
     - [通过 VPC Peering 连接](/tidb-cloud/set-up-vpc-peering-connections.md)
     - [通过 SQL Shell 连接](/tidb-cloud/connect-via-sql-shell.md)
-  - [伸缩 TiDB Cloud Dedicated 集群](/tidb-cloud/scale-tidb-cluster.md)
+  - [扩缩容 TiDB Cloud Dedicated 集群](/tidb-cloud/scale-tidb-cluster.md)
   - [备份和恢复 TiDB Cloud Dedicated 数据](/tidb-cloud/backup-and-restore.md)
   - [暂停或恢复 TiDB Cloud Dedicated 集群](/tidb-cloud/pause-or-resume-tidb-cluster.md)
   - [配置维护窗口](/tidb-cloud/configure-maintenance-window.md)
