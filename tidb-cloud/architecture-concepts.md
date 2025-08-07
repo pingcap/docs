@@ -13,7 +13,7 @@ TiDB Cloud provides **TiDB Cloud Starter** for auto-scaling, cost-efficient work
 
 ## TiDB Cloud
 
-TiDB Cloud is a fully managed solution that provides HTAP capabilities similar to traditional TiDB, while offering auto-scaling to alleviate users' burdens related to capacity planning and management complexities. It includes a free tier for basic usage, with consumption-based billing for any usage that exceeds the free limits. TiDB Cloud Essential offers two types of high availability to address varying operational requirements.
+TiDB Cloud is a fully managed solution that provides HTAP capabilities similar to traditional TiDB, while offering auto-scaling to alleviate users' burdens related to capacity planning and management complexities. It includes a free plan for basic usage, with consumption-based billing for any usage that exceeds the free limits. TiDB Cloud Essential offers two types of high availability to address varying operational requirements.
 
 By default, clusters utilizing the Zonal High Availability option have all components located within the same availability zone, which results in lower network latency.
 
