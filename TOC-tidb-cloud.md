@@ -125,7 +125,7 @@
 
 - Manage Cluster
   - Plan Your Cluster
-    - [Select Your Cluster Tier](/tidb-cloud/select-cluster-tier.md)
+    - [Select Your Cluster Plan](/tidb-cloud/select-cluster-tier.md)
     - [Determine Your TiDB Size](/tidb-cloud/size-your-cluster.md)
     - [TiDB Cloud Performance Reference](/tidb-cloud/tidb-cloud-performance-reference.md)
   - [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)
