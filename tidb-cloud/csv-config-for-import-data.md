@@ -43,7 +43,7 @@ The following is the CSV Configuration window when you use the Import Data servi
 
 ## Backslash Escape
 
-- Definition: whether to parse backslash inside fields as escape characters. If **Backslash Escape** is enabled, the following sequences are recognized and converted:
+- Definition: controls whether to parse backslash inside fields as escape characters. If **Backslash Escape** is enabled, the following sequences are recognized and converted:
 
     | Sequence | Converted to             |
     |----------|--------------------------|
@@ -77,6 +77,6 @@ The following is the CSV Configuration window when you use the Import Data servi
 
 ## Skip Header
 
-- Definition: whether to skip the header row in the CSV file. If **Skip Header** is enabled, the first row of the CSV file will be skipped for import.
+- Definition: controls whether to skip the header row in the CSV file. If **Skip Header** is enabled, the first row of the CSV file will be skipped for import.
 
 - Default: Enabled
