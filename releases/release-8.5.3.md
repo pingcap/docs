@@ -83,7 +83,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ## Bug fixes
 
-+ TiDB
++ TiDB <!--tw@lilin90: the following 10 notes-->
 
     - Fix the issue of incorrect key range in `ALTER RANGE meta SET PLACEMENT POLICY` [#60888](https://github.com/pingcap/tidb/issues/60888) @[nolouch](https://github.com/nolouch)
     - (dup): release-9.0.0.md > Bug fixes> TiDB - Fix the issue that decreasing the number of workers during index creation might cause the task to hang [#59267](https://github.com/pingcap/tidb/issues/59267) @[D3Hunter](https://github.com/D3Hunter)
