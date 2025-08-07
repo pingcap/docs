@@ -241,8 +241,8 @@
     - [TiKV Follower Read](/follower-read.md)
     - [Coprocessor Cache](/coprocessor-cache.md)
     - Garbage Collection (GC)
-       - [Overview](/garbage-collection-overview.md)
-       - [Configuration](/garbage-collection-configuration.md)
+      - [Overview](/garbage-collection-overview.md)
+      - [Configuration](/garbage-collection-configuration.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
   - Optimize Resource Allocation
     - Resource Manager
@@ -290,6 +290,15 @@
   - Get Started
     - [Get Started with SQL](/vector-search/vector-search-get-started-using-sql.md)
     - [Get Started with Python](/vector-search/vector-search-get-started-using-python.md)
+  - Auto Embedding
+    - [Overview](/tidb-cloud/vector-search-auto-embedding-overview.md)
+    - [Amazon Titan Embeddings](/tidb-cloud/vector-search-auto-embedding-amazon-titan.md)
+    - [Cohere Embeddings](/tidb-cloud/vector-search-auto-embedding-cohere.md)
+    - [Jina AI Embeddings](/tidb-cloud/vector-search-auto-embedding-jina-ai.md)
+    - [OpenAI Embeddings](/tidb-cloud/vector-search-auto-embedding-openai.md)
+    - [Gemini Embeddings](/tidb-cloud/vector-search-auto-embedding-gemini.md)
+    - [HuggingFace Embeddings](/tidb-cloud/vector-search-auto-embedding-huggingface.md)
+    - [NVIDIA NIM Embeddings](/tidb-cloud/vector-search-auto-embedding-nvidia-nim.md)
   - Integrations
     - [Overview](/vector-search/vector-search-integration-overview.md)
     - AI Frameworks
@@ -367,8 +376,8 @@
       - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
       - [TLS Connections to TiDB Cloud Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
   - Data Access Control
-      - [Encryption at Rest Using Customer-Managed Encryption Keys](/tidb-cloud/tidb-cloud-encrypt-cmek.md)
-      - [User-Controlled Log Redaction](/tidb-cloud/tidb-cloud-log-redaction.md)
+    - [Encryption at Rest Using Customer-Managed Encryption Keys](/tidb-cloud/tidb-cloud-encrypt-cmek.md)
+    - [User-Controlled Log Redaction](/tidb-cloud/tidb-cloud-log-redaction.md)
   - Database Access Control
     - [Configure Cluster Password Settings](/tidb-cloud/configure-security-settings.md)
   - Audit Management
@@ -718,8 +727,8 @@
   - [Use UUIDs](/best-practices/uuid.md)
   - [TiDB Accelerated Table Creation](/accelerated-table-creation.md)
   - [Schema Cache](/schema-cache.md)
-- API Reference ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)   
-  - [Overview](/tidb-cloud/api-overview.md) 
+- API Reference ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [Overview](/tidb-cloud/api-overview.md)
   - v1beta1
     - [Billing](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
     - [Data Service](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)
@@ -802,8 +811,8 @@
     - [TSO](/tso.md)
   - Storage Engines
     - TiKV
-        - [TiKV Overview](/tikv-overview.md)
-        - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
+      - [TiKV Overview](/tikv-overview.md)
+      - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
     - TiFlash
       - [TiFlash Overview](/tiflash/tiflash-overview.md)
       - [Spill to Disk](/tiflash/tiflash-spill-disk.md)
