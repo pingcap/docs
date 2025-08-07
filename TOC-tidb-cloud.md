@@ -78,7 +78,7 @@
     - [C#](/develop/dev-guide-sample-application-cs.md)
   - [WordPress](/tidb-cloud/dev-guide-wordpress.md)
   - Serverless Driver ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-    - [{{{ .starter }}} Driver](/tidb-cloud/serverless-driver.md)
+    - [TiDB Cloud Serverless Driver](/tidb-cloud/serverless-driver.md)
     - [Node.js 示例](/tidb-cloud/serverless-driver-node-example.md)
     - [Prisma 示例](/tidb-cloud/serverless-driver-prisma-example.md)
     - [Kysely 示例](/tidb-cloud/serverless-driver-kysely-example.md)
@@ -187,7 +187,7 @@
       - [通过 Zoom 订阅](/tidb-cloud/monitor-alert-zoom.md)
     - [集群事件](/tidb-cloud/tidb-cloud-events.md)
     - [第三方指标集成](/tidb-cloud/third-party-monitoring-integrations.md)
-    - [Connected: Clinic 服务](/tidb-cloud/tidb-cloud-clinic.md)
+    - [Connected：Clinic 服务](/tidb-cloud/tidb-cloud-clinic.md)
   - 性能调优
     - [概览](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - 分析性能
@@ -382,7 +382,7 @@
   - [账单资料](/tidb-cloud/tidb-cloud-billing.md#billing-profile)
   - [抵扣金](/tidb-cloud/tidb-cloud-billing.md#credits)
   - [支付方式设置](/tidb-cloud/tidb-cloud-billing.md#payment-method)
-  - [来自 AWS、Azure 或 Google Cloud Marketplace 的账单](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-azure-marketplace-or-google-cloud-marketplace)
+  - [设置通过云提供商的 Marketplace 计费](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-azure-marketplace-or-google-cloud-marketplace)
   - [Changefeed 计费](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
   - [数据迁移计费](/tidb-cloud/tidb-cloud-billing-dm.md)
   - [恢复组计费](/tidb-cloud/tidb-cloud-billing-recovery-group.md)
@@ -848,8 +848,8 @@
   - [Connected Care 概述](/tidb-cloud/connected-care-overview.md)
   - [Connected Care 详情](/tidb-cloud/connected-care-detail.md)
   - Connected Care 支持服务
-    - [Connected: Clinic 服务](/tidb-cloud/tidb-cloud-clinic.md)
-    - [Connected: IM 中的 AI 聊天](/tidb-cloud/connected-ai-chat-in-im.md)
+    - [Connected：Clinic 服务](/tidb-cloud/tidb-cloud-clinic.md)
+    - [Connected：IM 中的 AI 聊天](/tidb-cloud/connected-ai-chat-in-im.md)
     - Connected：通过 IM 订阅 TiDB Cloud 告警
       - [通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md)
       - [通过 Zoom 订阅](/tidb-cloud/monitor-alert-zoom.md)

@@ -1,46 +1,46 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# Table of Contents
+# 目录
 
-## GET STARTED
+## 快速开始
 
-- Why TiDB Cloud
-  - [TiDB Cloud Introduction](/tidb-cloud/tidb-cloud-intro.md)
-  - [MySQL Compatibility](/mysql-compatibility.md)
-- Get Started with TiDB Cloud
-  - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
-  - [Try Out TiDB + AI](/vector-search/vector-search-get-started-using-python.md)
-  - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
-  - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
-- Key Concepts
-  - [Overview](/tidb-cloud/key-concepts.md)
-  - [Architecture](/tidb-cloud/architecture-concepts.md)
-  - [Database Schema](/tidb-cloud/database-schema-concepts.md)
-  - [Transactions](/tidb-cloud/transaction-concepts.md)
+- 为什么选择 TiDB Cloud
+  - [TiDB Cloud 介绍](/tidb-cloud/tidb-cloud-intro.md)
+  - [与 MySQL 的兼容性](/mysql-compatibility.md)
+- TiDB Cloud 快速上手
+  - [试用 TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
+  - [试用 TiDB + AI](/vector-search/vector-search-get-started-using-python.md)
+  - [试用 HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
+  - [试用 TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
+- 关键概念
+  - [概览](/tidb-cloud/key-concepts.md)
+  - [架构](/tidb-cloud/architecture-concepts.md)
+  - [数据库 Schema](/tidb-cloud/database-schema-concepts.md)
+  - [事务](/tidb-cloud/transaction-concepts.md)
   - [SQL](/tidb-cloud/sql-concepts.md)
-  - [AI Features](/tidb-cloud/ai-feature-concepts.md)
-  - [Scalability](/tidb-cloud/scalability-concepts.md)
-  - [High Availability](/tidb-cloud/serverless-high-availability.md)
-  - [Monitoring](/tidb-cloud/monitoring-concepts.md)
-  - [Data Streaming](/tidb-cloud/data-streaming-concepts.md)
-  - [Backup & Restore](/tidb-cloud/backup-and-restore-concepts.md)
-  - [Security](/tidb-cloud/security-concepts.md)
+  - [AI 功能](/tidb-cloud/ai-feature-concepts.md)
+  - [可扩展性](/tidb-cloud/scalability-concepts.md)
+  - [高可用性](/tidb-cloud/serverless-high-availability.md)
+  - [监控](/tidb-cloud/monitoring-concepts.md)
+  - [数据流](/tidb-cloud/data-streaming-concepts.md)
+  - [备份 & 恢复](/tidb-cloud/backup-and-restore-concepts.md)
+  - [安全性](/tidb-cloud/security-concepts.md)
 
-## DEVELOP
+## 应用开发
 
-- Development Quick Start
-  - [Developer Guide Overview](/develop/dev-guide-overview.md)
-  - [Build a TiDB Cloud Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
-  - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
-- Connect to TiDB Cloud
-  - GUI Database Tools
+- 开发快速入门
+  - [概览](/develop/dev-guide-overview.md)
+  - [构建 TiDB Cloud 集群](/develop/dev-guide-build-cluster-in-cloud.md)
+  - [使用 TiDB 的增删改查 SQL](/develop/dev-guide-tidb-crud-sql.md)
+- 连接到 TiDB Cloud
+  - GUI 数据库工具
     - [JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)
     - [DBeaver](/develop/dev-guide-gui-dbeaver.md)
     - [VS Code](/develop/dev-guide-gui-vscode-sqltools.md)
     - [MySQL Workbench](/develop/dev-guide-gui-mysql-workbench.md)
     - [Navicat](/develop/dev-guide-gui-navicat.md)
-  - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
+  - [选择驱动或 ORM 框架](/develop/dev-guide-choose-driver-or-orm.md)
   - BI
     - [Looker Studio](/tidb-cloud/dev-guide-bi-looker-studio.md)
   - Java
@@ -48,7 +48,7 @@
     - [MyBatis](/develop/dev-guide-sample-application-java-mybatis.md)
     - [Hibernate](/develop/dev-guide-sample-application-java-hibernate.md)
     - [Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md)
-    - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
+    - [连接池与连接参数](/develop/dev-guide-connection-parameters.md)
   - Go
     - [Go-MySQL-Driver](/develop/dev-guide-sample-application-golang-sql-driver.md)
     - [GORM](/develop/dev-guide-sample-application-golang-gorm.md)
@@ -74,207 +74,207 @@
   - [WordPress](/tidb-cloud/dev-guide-wordpress.md)
   - Serverless Driver ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png) <!--TBD, ToDo: Not sure if we need to update the driver name-->
     - [TiDB Cloud Serverless Driver](/tidb-cloud/serverless-driver.md)
-    - [Node.js Example](/tidb-cloud/serverless-driver-node-example.md)
-    - [Prisma Example](/tidb-cloud/serverless-driver-prisma-example.md)
-    - [Kysely Example](/tidb-cloud/serverless-driver-kysely-example.md)
-    - [Drizzle Example](/tidb-cloud/serverless-driver-drizzle-example.md)
-- Development Reference
-  - Design Database Schema
-    - [Overview](/develop/dev-guide-schema-design-overview.md)
-    - [Create a Database](/develop/dev-guide-create-database.md)
-    - [Create a Table](/develop/dev-guide-create-table.md)
-    - [Create a Secondary Index](/develop/dev-guide-create-secondary-indexes.md)
-  - Write Data
-    - [Insert Data](/develop/dev-guide-insert-data.md)
-    - [Update Data](/develop/dev-guide-update-data.md)
-    - [Delete Data](/develop/dev-guide-delete-data.md)
-    - [Periodically Delete Expired Data Using TTL (Time to Live)](/time-to-live.md)
-    - [Prepared Statements](/develop/dev-guide-prepared-statement.md)
-  - Read Data
-    - [Query Data from a Single Table](/develop/dev-guide-get-data-from-single-table.md)
-    - [Multi-table Join Queries](/develop/dev-guide-join-tables.md)
-    - [Subquery](/develop/dev-guide-use-subqueries.md)
-    - [Paginate Results](/develop/dev-guide-paginate-results.md)
-    - [Views](/develop/dev-guide-use-views.md)
-    - [Temporary Tables](/develop/dev-guide-use-temporary-tables.md)
-    - [Common Table Expression](/develop/dev-guide-use-common-table-expression.md)
-    - Read Replica Data
+    - [Node.js 示例](/tidb-cloud/serverless-driver-node-example.md)
+    - [Prisma 示例](/tidb-cloud/serverless-driver-prisma-example.md)
+    - [Kysely 示例](/tidb-cloud/serverless-driver-kysely-example.md)
+    - [Drizzle 示例](/tidb-cloud/serverless-driver-drizzle-example.md)
+- 开发参考
+  - 数据库模式设计
+    - [概览](/develop/dev-guide-schema-design-overview.md)
+    - [创建数据库](/develop/dev-guide-create-database.md)
+    - [创建表](/develop/dev-guide-create-table.md)
+    - [创建二级索引](/develop/dev-guide-create-secondary-indexes.md)
+  - 数据写入
+    - [插入数据](/develop/dev-guide-insert-data.md)
+    - [更新数据](/develop/dev-guide-update-data.md)
+    - [删除数据](/develop/dev-guide-delete-data.md)
+    - [使用 TTL (Time to Live) 定期删除过期数据](/time-to-live.md)
+    - [预处理语句](/develop/dev-guide-prepared-statement.md)
+  - 数据读取
+    - [单表读取](/develop/dev-guide-get-data-from-single-table.md)
+    - [多表连接查询](/develop/dev-guide-join-tables.md)
+    - [子查询](/develop/dev-guide-use-subqueries.md)
+    - [查询结果分页](/develop/dev-guide-paginate-results.md)
+    - [视图](/develop/dev-guide-use-views.md)
+    - [临时表](/develop/dev-guide-use-temporary-tables.md)
+    - [公共表表达式](/develop/dev-guide-use-common-table-expression.md)
+    - 读取副本数据
       - [Follower Read](/develop/dev-guide-use-follower-read.md)
       - [Stale Read](/develop/dev-guide-use-stale-read.md)
-    - [HTAP Queries](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
-  - Transaction
-    - [Overview](/develop/dev-guide-transaction-overview.md)
-    - [Optimistic and Pessimistic Transactions](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
-    - [Transaction Restraints](/develop/dev-guide-transaction-restraints.md)
-    - [Handle Transaction Errors](/develop/dev-guide-transaction-troubleshoot.md)
-  - Optimize
-    - [Overview](/develop/dev-guide-optimize-sql-overview.md)
-    - [SQL Performance Tuning](/develop/dev-guide-optimize-sql.md)
-    - [Best Practices for Performance Tuning](/develop/dev-guide-optimize-sql-best-practices.md)
-    - [Best Practices for Indexing](/develop/dev-guide-index-best-practice.md)
-    - Other Optimization Methods
-      - [Avoid Implicit Type Conversions](/develop/dev-guide-implicit-type-conversion.md)
-      - [Unique Serial Number Generation](/develop/dev-guide-unique-serial-number-generation.md)
-  - Troubleshoot
-    - [SQL or Transaction Issues](/develop/dev-guide-troubleshoot-overview.md)
-    - [Unstable Result Set](/develop/dev-guide-unstable-result-set.md)
-    - [Timeouts](/develop/dev-guide-timeouts-in-tidb.md)
-  - Development Guidelines
-    - [Object Naming Convention](/develop/dev-guide-object-naming-guidelines.md)
-    - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
-  - [Bookshop Example Application](/develop/dev-guide-bookshop-schema-design.md)
-  - Third-Party Support
-    - [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)
-    - [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)
+    - [HTAP 查询](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
+  - 事务
+    - [概览](/develop/dev-guide-transaction-overview.md)
+    - [乐观事务和悲观事务](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
+    - [事务限制](/develop/dev-guide-transaction-restraints.md)
+    - [事务错误处理](/develop/dev-guide-transaction-troubleshoot.md)
+  - 优化 SQL 性能
+    - [概览](/develop/dev-guide-optimize-sql-overview.md)
+    - [SQL 性能调优](/develop/dev-guide-optimize-sql.md)
+    - [性能调优最佳实践](/develop/dev-guide-optimize-sql-best-practices.md)
+    - [索引的最佳实践](/develop/dev-guide-index-best-practice.md)
+    - 其他优化
+      - [避免隐式类型转换](/develop/dev-guide-implicit-type-conversion.md)
+      - [唯一序列号生成方案](/develop/dev-guide-unique-serial-number-generation.md)
+  - 故障诊断
+    - [SQL 或事务问题](/develop/dev-guide-troubleshoot-overview.md)
+    - [结果集不稳定](/develop/dev-guide-unstable-result-set.md)
+    - [超时](/develop/dev-guide-timeouts-in-tidb.md)
+  - 引用文档
+    - [命名规范](/develop/dev-guide-object-naming-guidelines.md)
+    - [SQL 开发规范](/develop/dev-guide-sql-development-specification.md)
+  - [Bookshop 示例应用](/develop/dev-guide-bookshop-schema-design.md)
+  - 第三方工具支持
+    - [TiDB 支持的第三方工具](/develop/dev-guide-third-party-support.md)
+    - [已知的第三方工具兼容问题](/develop/dev-guide-third-party-tools-compatibility.md)
 
-## GUIDES
+## 指南
 
-- Manage Cluster
-  - [Select Your Cluster Tier](/tidb-cloud/select-cluster-tier.md)
-  - Manage TiDB Cloud Clusters
-    - [Create a TiDB Cloud Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
-    - Connect to Your TiDB Cloud Cluster
-      - [Connection Overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
-      - [Connect via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
-      - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
-    - Branch ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-      - [Overview](/tidb-cloud/branch-overview.md)
-      - [Manage Branches](/tidb-cloud/branch-manage.md)
-      - [GitHub Integration](/tidb-cloud/branch-github-integration.md)
-    - [Back Up and Restore TiDB Cloud Data](/tidb-cloud/backup-and-restore-serverless.md)
-    - [Export Data from TiDB Cloud](/tidb-cloud/serverless-export.md)
-  - Use an HTAP Cluster with TiFlash
-    - [TiFlash Overview](/tiflash/tiflash-overview.md)
-    - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
-    - [Read Data from TiFlash](/tiflash/use-tidb-to-read-tiflash.md)
-    - [Use MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
-    - [Use FastScan](/tiflash/use-fastscan.md)
-    - [Supported Push-down Calculations](/tiflash/tiflash-supported-pushdown-calculations.md)
-    - [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md)
-    - [TiFlash Late Materialization](/tiflash/tiflash-late-materialization.md)
-    - [Compatibility](/tiflash/tiflash-compatibility.md)
-    - [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md)
-  - Monitor and Alert
-    - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
-    - [Built-in Metrics](/tidb-cloud/built-in-monitoring.md)
-    - [Cluster Events](/tidb-cloud/tidb-cloud-events.md)
-  - Tune Performance
-    - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
-    - [Analyze Performance](/tidb-cloud/tune-performance.md)
-    - SQL Tuning
-      - [Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
-      - Understanding the Query Execution Plan
-        - [Overview](/explain-overview.md)
-        - [`EXPLAIN` Walkthrough](/explain-walkthrough.md)
-        - [Indexes](/explain-indexes.md)
-        - [Joins](/explain-joins.md)
-        - [MPP Queries](/explain-mpp.md)
-        - [Subqueries](/explain-subqueries.md)
-        - [Aggregation](/explain-aggregation.md)
-        - [Views](/explain-views.md)
-        - [Partitions](/explain-partitions.md)
-        - [Index Merge](/explain-index-merge.md)
-      - SQL Optimization Process
-        - [Overview](/sql-optimization-concepts.md)
-        - Logic Optimization
-          - [Overview](/sql-logical-optimization.md)
-          - [Subquery Related Optimizations](/subquery-optimization.md)
-          - [Column Pruning](/column-pruning.md)
-          - [Decorrelation of Correlated Subquery](/correlated-subquery-optimization.md)
-          - [Eliminate Max/Min](/max-min-eliminate.md)
-          - [Predicates Push Down](/predicate-push-down.md)
-          - [Partition Pruning](/partition-pruning.md)
-          - [TopN and Limit Push Down](/topn-limit-push-down.md)
+- 管理集群
+  - [选择集群套餐](/tidb-cloud/select-cluster-tier.md)
+  - 管理 TiDB Cloud 集群
+    - [创建 TiDB Cloud 集群](/tidb-cloud/create-tidb-cluster-serverless.md)
+    - 连接到 TiDB Cloud 集群
+      - [连接概览](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
+      - [通过 Public Endpoint 连接](/tidb-cloud/connect-via-standard-connection-serverless.md)
+      - [通过 Alibaba Cloud Private Endpoint 连接](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+    - 分支 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+      - [概览](/tidb-cloud/branch-overview.md)
+      - [管理分支](/tidb-cloud/branch-manage.md)
+      - [GitHub 集成](/tidb-cloud/branch-github-integration.md)
+    - [备份和恢复 TiDB Cloud 数据](/tidb-cloud/backup-and-restore-serverless.md)
+    - [从 TiDB Cloud 导出数据](/tidb-cloud/serverless-export.md)
+  - 使用带有 TiFlash 的 HTAP 集群
+    - [TiFlash 简介](/tiflash/tiflash-overview.md)
+    - [构建 TiFlash 副本](/tiflash/create-tiflash-replicas.md)
+    - [使用 TiDB 读取 TiFlash](/tiflash/use-tidb-to-read-tiflash.md)
+    - [使用 MPP 模式](/tiflash/use-tiflash-mpp-mode.md)
+    - [使用 FastScan 功能](/tiflash/use-fastscan.md)
+    - [TiFlash 支持的计算下推](/tiflash/tiflash-supported-pushdown-calculations.md)
+    - [TiFlash 查询结果物化](/tiflash/tiflash-results-materialization.md)
+    - [TiFlash 延迟物化](/tiflash/tiflash-late-materialization.md)
+    - [TiFlash 兼容性说明](/tiflash/tiflash-compatibility.md)
+    - [TiFlash Pipeline Model 执行模型](/tiflash/tiflash-pipeline-model.md)
+  - 监控和告警
+    - [概览](/tidb-cloud/monitor-tidb-cluster.md)
+    - [内置指标](/tidb-cloud/built-in-monitoring.md)
+    - [集群事件](/tidb-cloud/tidb-cloud-events.md)
+  - 性能调优
+    - [概览](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
+    - [分析性能](/tidb-cloud/tune-performance.md)
+    - SQL 调优
+      - [概览](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
+      - 理解 TiDB 执行计划
+        - [TiDB 执行计划概览](/explain-overview.md)
+        - [使用 `EXPLAIN` 解读执行计划](/explain-walkthrough.md)
+        - [索引查询的执行计划](/explain-indexes.md)
+        - [Join 查询的执行计划](/explain-joins.md)
+        - [MPP 模式查询的执行计划](/explain-mpp.md)
+        - [子查询的执行计划](/explain-subqueries.md)
+        - [聚合查询的执行计划](/explain-aggregation.md)
+        - [视图查询的执行计划](/explain-views.md)
+        - [分区查询的执行计划](/explain-partitions.md)
+        - [开启 IndexMerge 查询的执行计划](/explain-index-merge.md)
+      - SQL 优化过程
+        - [SQL 优化流程概览](/sql-optimization-concepts.md)
+        - 逻辑优化
+          - [逻辑优化概览](/sql-logical-optimization.md)
+          - [子查询相关的优化](/subquery-optimization.md)
+          - [列裁剪](/column-pruning.md)
+          - [关联子查询去关联](/correlated-subquery-optimization.md)
+          - [Max/Min 消除](/max-min-eliminate.md)
+          - [谓词下推](/predicate-push-down.md)
+          - [分区裁剪](/partition-pruning.md)
+          - [TopN 和 Limit 下推](/topn-limit-push-down.md)
           - [Join Reorder](/join-reorder.md)
-          - [Derive TopN or Limit from Window Functions](/derive-topn-from-window.md)
-        - Physical Optimization
-          - [Overview](/sql-physical-optimization.md)
-          - [Index Selection](/choose-index.md)
-          - [Statistics](/statistics.md)
-          - [Extended Statistics](/extended-statistics.md)
-          - [Wrong Index Solution](/wrong-index-solution.md)
-          - [Distinct Optimization](/agg-distinct-optimization.md)
-          - [Cost Model](/cost-model.md)
+          - [从窗口函数中推导 TopN 或 Limit](/derive-topn-from-window.md)
+        - 物理优化
+          - [物理优化概览](/sql-physical-optimization.md)
+          - [索引的选择](/choose-index.md)
+          - [常规统计信息](/statistics.md)
+          - [扩展统计信息](/extended-statistics.md)
+          - [错误索引的解决方案](/wrong-index-solution.md)
+          - [Distinct 优化](/agg-distinct-optimization.md)
+          - [代价模型](/cost-model.md)
           - [Runtime Filter](/runtime-filter.md)
-        - [Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
-        - [Non-Prepared Execution Plan Cache](/sql-non-prepared-plan-cache.md)
-      - Control Execution Plans
-        - [Overview](/control-execution-plan.md)
+        - [Prepare 语句执行计划缓存](/sql-prepared-plan-cache.md)
+        - [非 Prepare 语句执行计划缓存](/sql-non-prepared-plan-cache.md)
+      - 控制执行计划
+        - [控制执行计划概览](/control-execution-plan.md)
         - [Optimizer Hints](/optimizer-hints.md)
-        - [SQL Plan Management](/sql-plan-management.md)
-        - [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
+        - [执行计划管理](/sql-plan-management.md)
+        - [优化规则及表达式下推的黑名单](/blocklist-control-plan.md)
         - [Optimizer Fix Controls](/optimizer-fix-controls.md)
     - [TiKV Follower Read](/follower-read.md)
-    - [Coprocessor Cache](/coprocessor-cache.md)
-    - Garbage Collection (GC)
-       - [Overview](/garbage-collection-overview.md)
-       - [Configuration](/garbage-collection-configuration.md)
-    - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
-  - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
-  - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
-- Migrate or Import Data
-  - [Overview](/tidb-cloud/tidb-cloud-migration-overview.md)
-  - Migrate Data into TiDB Cloud
-    - [Migrate and Merge MySQL Shards of Large Datasets](/tidb-cloud/migrate-sql-shards.md)
-    - [Migrate from Amazon RDS for Oracle Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
-  - Import Data into TiDB Cloud
-    - [Import Sample Data](/tidb-cloud/import-sample-data-serverless.md)
-    - [Import Local Files](/tidb-cloud/tidb-cloud-import-local-files.md)
-    - [Import CSV Files from Cloud Storage](/tidb-cloud/import-csv-files-serverless.md)
-    - [Import Parquet Files from Cloud Storage](/tidb-cloud/import-parquet-files-serverless.md)
-    - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli-serverless.md)
-  - Reference
-    - [Configure External Storage Access for TiDB Cloud](/tidb-cloud/serverless-external-storage.md)
-    - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
-    - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
-    - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
-- Vector Search ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-  - [Overview](/vector-search/vector-search-overview.md)
-  - Get Started
-    - [Get Started with SQL](/vector-search/vector-search-get-started-using-sql.md)
-    - [Get Started with Python](/vector-search/vector-search-get-started-using-python.md)
-  - Integrations
-    - [Overview](/vector-search/vector-search-integration-overview.md)
-    - AI Frameworks
+    - [下推计算结果缓存](/coprocessor-cache.md)
+    - 垃圾回收 (GC)
+       - [GC 机制简介](/garbage-collection-overview.md)
+       - [GC 配置](/garbage-collection-configuration.md)
+    - [TiFlash 调优](/tiflash/tune-tiflash-performance.md)
+  - [升级 TiDB 集群](/tidb-cloud/upgrade-tidb-cluster.md)
+  - [删除 TiDB 集群](/tidb-cloud/delete-tidb-cluster.md)
+- 迁移或导入数据
+  - [概览](/tidb-cloud/tidb-cloud-migration-overview.md)
+  - 将数据迁移到 TiDB Cloud
+    - [迁移和合并大型数据集的 MySQL 分片](/tidb-cloud/migrate-sql-shards.md)
+    - [使用 AWS DMS 从 Amazon RDS for Oracle 迁移](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
+  - 将数据导入 TiDB Cloud
+    - [导入示例数据](/tidb-cloud/import-sample-data-serverless.md)
+    - [导入本地文件](/tidb-cloud/tidb-cloud-import-local-files.md)
+    - [从云存储导入 CSV 文件](/tidb-cloud/import-csv-files-serverless.md)
+    - [从云存储导入 Parquet 文件](/tidb-cloud/import-parquet-files-serverless.md)
+    - [使用 MySQL CLI 导入](/tidb-cloud/import-with-mysql-cli-serverless.md)
+  - 参考
+    - [为 TiDB Cloud 配置外部存储访问](/tidb-cloud/serverless-external-storage.md)
+    - [数据导入的命名约定](/tidb-cloud/naming-conventions-for-data-import.md)
+    - [导入数据的 CSV 配置](/tidb-cloud/csv-config-for-import-data.md)
+    - [排查从 Amazon S3 导入数据期间的访问被拒绝错误](/tidb-cloud/troubleshoot-import-access-denied-error.md)
+- 向量搜索 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [概述](/vector-search/vector-search-overview.md)
+  - 快速上手
+    - [使用 SQL 开始向量搜索](/vector-search/vector-search-get-started-using-sql.md)
+    - [使用 Python 开始向量搜索](/vector-search/vector-search-get-started-using-python.md)
+  - 集成
+    - [集成概览](/vector-search/vector-search-integration-overview.md)
+    - AI 框架
       - [LlamaIndex](/vector-search/vector-search-integrate-with-llamaindex.md)
       - [Langchain](/vector-search/vector-search-integrate-with-langchain.md)
-    - AI Services
+    - AI 服务
       - [Amazon Bedrock](/tidb-cloud/vector-search-integrate-with-amazon-bedrock.md)
-    - Embedding Models/Services
+    - 嵌入模型/服务
       - [Jina AI](/vector-search/vector-search-integrate-with-jinaai-embedding.md)
-    - ORM Libraries
+    - ORM 库
       - [SQLAlchemy](/vector-search/vector-search-integrate-with-sqlalchemy.md)
       - [peewee](/vector-search/vector-search-integrate-with-peewee.md)
-      - [Django ORM](/vector-search/vector-search-integrate-with-django-orm.md)
-  - Reference
-    - [Vector Data Types](/vector-search/vector-search-data-types.md)
-    - [Vector Functions and Operators](/vector-search/vector-search-functions-and-operators.md)
-    - [Vector Index](/vector-search/vector-search-index.md)
-  - [Improve Performance](/vector-search/vector-search-improve-performance.md)
-  - [Limitations](/vector-search/vector-search-limitations.md)
-- Security
-  - Identity Access Control
-    - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
-    - [Standard SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md)
-    - [Organization SSO Authentication](/tidb-cloud/tidb-cloud-org-sso-authentication.md)
-    - [Identity Access Management](/tidb-cloud/manage-user-access.md)
+      - [Django](/vector-search/vector-search-integrate-with-django-orm.md)
+  - 参考
+    - [向量数据类型](/vector-search/vector-search-data-types.md)
+    - [向量函数和操作符](/vector-search/vector-search-functions-and-operators.md)
+    - [向量索引](/vector-search/vector-search-index.md)
+  - [优化搜索性能](/vector-search/vector-search-improve-performance.md)
+  - [使用限制](/vector-search/vector-search-limitations.md)
+- 安全
+  - 身份访问控制
+    - [密码验证](/tidb-cloud/tidb-cloud-password-authentication.md)
+    - [标准 SSO 身份验证](/tidb-cloud/tidb-cloud-sso-authentication.md)
+    - [组织 SSO 身份验证](/tidb-cloud/tidb-cloud-org-sso-authentication.md)
+    - [身份访问管理](/tidb-cloud/manage-user-access.md)
     - [OAuth 2.0](/tidb-cloud/oauth2.md)
-  - Network Access Control
-    - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
-    - [Configure Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
-    - [TLS Connections to TiDB Cloud](/tidb-cloud/secure-connections-to-serverless-clusters.md)
-  - Audit Management
-    - [Console Audit Logging](/tidb-cloud/tidb-cloud-console-auditing.md)
-- Billing
-  - [Invoices](/tidb-cloud/tidb-cloud-billing.md#invoices)
-  - [Billing Details](/tidb-cloud/tidb-cloud-billing.md#billing-details)
-  - [Cost Explorer](/tidb-cloud/tidb-cloud-billing.md#cost-explorer)
-  - [Billing Profile](/tidb-cloud/tidb-cloud-billing.md#billing-profile)
-  - [Credits](/tidb-cloud/tidb-cloud-billing.md#credits)
-  - [Payment Method Setting](/tidb-cloud/tidb-cloud-billing.md#payment-method)
-  - [Billing from Cloud Provider Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace)
-  - [Manage Budgets](/tidb-cloud/tidb-cloud-budget.md)
-- Integrations
+  - 网络访问控制
+    - [通过 Alibaba Cloud Private Endpoint 连接](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+    - [为 Public Endpoint 配置防火墙规则](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
+    - [通过 TLS 连接](/tidb-cloud/secure-connections-to-serverless-clusters.md)
+  - 审计管理
+    - [控制台审计日志](/tidb-cloud/tidb-cloud-console-auditing.md)
+- 账单
+  - [发票](/tidb-cloud/tidb-cloud-billing.md#invoices)
+  - [账单详情](/tidb-cloud/tidb-cloud-billing.md#billing-details)
+  - [成本资源管理器](/tidb-cloud/tidb-cloud-billing.md#cost-explorer)
+  - [账单资料](/tidb-cloud/tidb-cloud-billing.md#billing-profile)
+  - [抵扣金](/tidb-cloud/tidb-cloud-billing.md#credits)
+  - [支付方式设置](/tidb-cloud/tidb-cloud-billing.md#payment-method)
+  - [设置通过云提供商的 Marketplace 计费](/tidb-cloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace)
+  - [管理预算](/tidb-cloud/tidb-cloud-budget.md)
+- 集成
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
   - [Cloudflare](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)
   - [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
@@ -283,30 +283,30 @@
   - [Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md)
   - [ProxySQL](/develop/dev-guide-proxysql-integration.md)
   - Terraform
-    - [Terraform Integration Overview](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
-    - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
-    - [Use Cluster Resource](/tidb-cloud/terraform-use-cluster-resource.md)
-    - [Use Import Resource](/tidb-cloud/terraform-use-import-resource.md)
+    - [Terraform 集成概览](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
+    - [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
+    - [使用 Cluster 资源](/tidb-cloud/terraform-use-cluster-resource.md)
+    - [使用导入资源](/tidb-cloud/terraform-use-import-resource.md)
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
   - [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
 
-## REFERENCE
+## 参考
 
-- SQL Reference
-  - [Explore SQL with TiDB](/basic-sql-operations.md)
-  - SQL Language Structure and Syntax
-    - Attributes
+- SQL 参考
+  - [SQL 基本操作](/basic-sql-operations.md)
+  - SQL 语言结构和语法
+    - 属性
       - [AUTO_INCREMENT](/auto-increment.md)
       - [AUTO_RANDOM](/auto-random.md)
       - [SHARD_ROW_ID_BITS](/shard-row-id-bits.md)
-    - [Literal Values](/literal-values.md)
-    - [Schema Object Names](/schema-object-names.md)
-    - [Keywords and Reserved Words](/keywords.md)
-    - [User-Defined Variables](/user-defined-variables.md)
-    - [Expression Syntax](/expression-syntax.md)
-    - [Comment Syntax](/comment-syntax.md)
-  - SQL Statements
-    - [Overview](/sql-statements/sql-statement-overview.md)
+    - [字面值](/literal-values.md)
+    - [Schema 对象名](/schema-object-names.md)
+    - [关键字](/keywords.md)
+    - [用户自定义变量](/user-defined-variables.md)
+    - [表达式语法](/expression-syntax.md)
+    - [注释语法](/comment-syntax.md)
+  - SQL 语句
+    - [概览](/sql-statements/sql-statement-overview.md)
     - [`ADMIN`](/sql-statements/sql-statement-admin.md)
     - [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
     - [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
@@ -320,7 +320,7 @@
     - [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
     - [`ALTER SEQUENCE`](/sql-statements/sql-statement-alter-sequence.md)
     - `ALTER TABLE`
-      - [Overview](/sql-statements/sql-statement-alter-table.md)
+      - [概述](/sql-statements/sql-statement-alter-table.md)
       - [`ADD COLUMN`](/sql-statements/sql-statement-add-column.md)
       - [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
       - [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
@@ -374,7 +374,7 @@
     - [`KILL [TIDB]`](/sql-statements/sql-statement-kill.md)
     - [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)
     - [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md)
-    - [`LOCK TABLES` and `UNLOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)
+    - [`LOCK TABLES` 和 `UNLOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)
     - [`PREPARE`](/sql-statements/sql-statement-prepare.md)
     - [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md)
     - [`RENAME TABLE`](/sql-statements/sql-statement-rename-table.md)
@@ -434,75 +434,75 @@
     - [`UPDATE`](/sql-statements/sql-statement-update.md)
     - [`USE`](/sql-statements/sql-statement-use.md)
     - [`WITH`](/sql-statements/sql-statement-with.md)
-  - Data Types
-    - [Overview](/data-type-overview.md)
-    - [Default Values](/data-type-default-values.md)
-    - [Numeric Types](/data-type-numeric.md)
-    - [Date and Time Types](/data-type-date-and-time.md)
-    - [String Types](/data-type-string.md)
-    - [JSON Type](/data-type-json.md)
-  - Functions and Operators
-    - [Overview](/functions-and-operators/functions-and-operators-overview.md)
-    - [Type Conversion in Expression Evaluation](/functions-and-operators/type-conversion-in-expression-evaluation.md)
-    - [Operators](/functions-and-operators/operators.md)
-    - [Control Flow Functions](/functions-and-operators/control-flow-functions.md)
-    - [String Functions](/functions-and-operators/string-functions.md)
-    - [Numeric Functions and Operators](/functions-and-operators/numeric-functions-and-operators.md)
-    - [Date and Time Functions](/functions-and-operators/date-and-time-functions.md)
-    - [Bit Functions and Operators](/functions-and-operators/bit-functions-and-operators.md)
-    - [Cast Functions and Operators](/functions-and-operators/cast-functions-and-operators.md)
-    - [Encryption and Compression Functions](/functions-and-operators/encryption-and-compression-functions.md)
-    - [Locking Functions](/functions-and-operators/locking-functions.md)
-    - [Information Functions](/functions-and-operators/information-functions.md)
-    - JSON Functions
-      - [Overview](/functions-and-operators/json-functions.md)
-      - [Functions That Create JSON](/functions-and-operators/json-functions/json-functions-create.md)
-      - [Functions That Search JSON](/functions-and-operators/json-functions/json-functions-search.md)
-      - [Functions That Modify JSON](/functions-and-operators/json-functions/json-functions-modify.md)
-      - [Functions That Return JSON](/functions-and-operators/json-functions/json-functions-return.md)
-      - [JSON Utility Functions](/functions-and-operators/json-functions/json-functions-utility.md)
-      - [Functions That Aggregate JSON](/functions-and-operators/json-functions/json-functions-aggregate.md)
-    - [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md)
-    - [GROUP BY Modifiers](/functions-and-operators/group-by-modifier.md)
-    - [Window Functions](/functions-and-operators/window-functions.md)
-    - [Miscellaneous Functions](/functions-and-operators/miscellaneous-functions.md)
-    - [Precision Math](/functions-and-operators/precision-math.md)
-    - [Set Operations](/functions-and-operators/set-operators.md)
-    - [Sequence Functions](/functions-and-operators/sequence-functions.md)
-    - [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md)
-    - [TiDB Specific Functions](/functions-and-operators/tidb-functions.md)
-  - [Clustered Indexes](/clustered-indexes.md)
-  - [Constraints](/constraints.md)
-  - [Generated Columns](/generated-columns.md)
-  - [SQL Mode](/sql-mode.md)
-  - [Table Attributes](/table-attributes.md)
-  - Transactions
-    - [Overview](/transaction-overview.md)
-    - [Isolation Levels](/transaction-isolation-levels.md)
-    - [Optimistic Transactions](/optimistic-transaction.md)
-    - [Pessimistic Transactions](/pessimistic-transaction.md)
-    - [Non-Transactional DML Statements](/non-transactional-dml.md)
-  - [Views](/views.md)
-  - [Partitioning](/partitioned-table.md)
-  - [Temporary Tables](/temporary-tables.md)
-  - [Cached Tables](/cached-tables.md)
-  - [FOREIGN KEY Constraints](/foreign-key.md)
-  - Character Set and Collation
-    - [Overview](/character-set-and-collation.md)
+  - 数据类型
+    - [数据类型概述](/data-type-overview.md)
+    - [数据类型默认值](/data-type-default-values.md)
+    - [数值类型](/data-type-numeric.md)
+    - [日期和时间类型](/data-type-date-and-time.md)
+    - [字符串类型](/data-type-string.md)
+    - [JSON 类型](/data-type-json.md)
+  - 函数与操作符
+    - [函数与操作符概述](/functions-and-operators/functions-and-operators-overview.md)
+    - [表达式求值的类型转换](/functions-and-operators/type-conversion-in-expression-evaluation.md)
+    - [操作符](/functions-and-operators/operators.md)
+    - [控制流程函数](/functions-and-operators/control-flow-functions.md)
+    - [字符串函数](/functions-and-operators/string-functions.md)
+    - [数值函数与操作符](/functions-and-operators/numeric-functions-and-operators.md)
+    - [日期和时间函数](/functions-and-operators/date-and-time-functions.md)
+    - [位函数和操作符](/functions-and-operators/bit-functions-and-operators.md)
+    - [Cast 函数和操作符](/functions-and-operators/cast-functions-and-operators.md)
+    - [加密和压缩函数](/functions-and-operators/encryption-and-compression-functions.md)
+    - [锁函数](/functions-and-operators/locking-functions.md)
+    - [信息函数](/functions-and-operators/information-functions.md)
+    - JSON 函数
+      - [概览](/functions-and-operators/json-functions.md)
+      - [创建 JSON 的函数](/functions-and-operators/json-functions/json-functions-create.md)
+      - [搜索 JSON 的函数](/functions-and-operators/json-functions/json-functions-search.md)
+      - [修改 JSON 的函数](/functions-and-operators/json-functions/json-functions-modify.md)
+      - [返回 JSON 的函数](/functions-and-operators/json-functions/json-functions-return.md)
+      - [JSON 效用函数](/functions-and-operators/json-functions/json-functions-utility.md)
+      - [聚合 JSON 的函数](/functions-and-operators/json-functions/json-functions-aggregate.md)
+    - [GROUP BY 聚合函数](/functions-and-operators/aggregate-group-by-functions.md)
+    - [GROUP BY 修饰符](/functions-and-operators/group-by-modifier.md)
+    - [窗口函数](/functions-and-operators/window-functions.md)
+    - [其它函数](/functions-and-operators/miscellaneous-functions.md)
+    - [精度数学](/functions-and-operators/precision-math.md)
+    - [集合运算](/functions-and-operators/set-operators.md)
+    - [序列函数](/functions-and-operators/sequence-functions.md)
+    - [下推到 TiKV 的表达式列表](/functions-and-operators/expressions-pushed-down.md)
+    - [TiDB 特有的函数](/functions-and-operators/tidb-functions.md)
+  - [聚簇索引](/clustered-indexes.md)
+  - [约束](/constraints.md)
+  - [生成列](/generated-columns.md)
+  - [SQL 模式](/sql-mode.md)
+  - [表属性](/table-attributes.md)
+  - 事务
+    - [事务概览](/transaction-overview.md)
+    - [隔离级别](/transaction-isolation-levels.md)
+    - [乐观事务](/optimistic-transaction.md)
+    - [悲观事务](/pessimistic-transaction.md)
+    - [非事务 DML 语句](/non-transactional-dml.md)
+  - [视图](/views.md)
+  - [分区表](/partitioned-table.md)
+  - [临时表](/temporary-tables.md)
+  - [缓存表](/cached-tables.md)
+  - [外键约束](/foreign-key.md)
+  - 字符集和排序规则
+    - [概述](/character-set-and-collation.md)
     - [GBK](/character-set-gbk.md)
-  - Read Historical Data
-    - Use Stale Read (Recommended)
-      - [Usage Scenarios of Stale Read](/stale-read.md)
-      - [Perform Stale Read Using `As OF TIMESTAMP`](/as-of-timestamp.md)
-      - [Perform Stale Read Using `tidb_read_staleness`](/tidb-read-staleness.md)
-      - [Perform Stale Read Using `tidb_external_ts`](/tidb-external-ts.md)
-    - [Use the `tidb_snapshot` System Variable](/read-historical-data.md)
-  - System Tables
+  - 读取历史数据
+    - 使用 Stale Read 功能读取历史数据（推荐）
+      - [Stale Read 使用场景介绍](/stale-read.md)
+      - [使用 `AS OF TIMESTAMP` 语法读取历史数据](/as-of-timestamp.md)
+      - [使用系统变量 `tidb_read_staleness` 读取历史数据](/tidb-read-staleness.md)
+      - [使用系统变量 `tidb_external_ts` 读取历史数据](/tidb-external-ts.md)
+    - [使用系统变量 `tidb_snapshot` 读取历史数据](/read-historical-data.md)
+  - 系统表
     - `mysql` Schema
-      - [Overview](/mysql-schema/mysql-schema.md)
+      - [概述](/mysql-schema/mysql-schema.md)
       - [`user`](/mysql-schema/mysql-schema-user.md)
     - INFORMATION_SCHEMA
-      - [Overview](/information-schema/information-schema.md)
+      - [概述](/information-schema/information-schema.md)
       - [`ANALYZE_STATUS`](/information-schema/information-schema-analyze-status.md)
       - [`CHECK_CONSTRAINTS`](/information-schema/information-schema-check-constraints.md)
       - [`CLIENT_ERRORS_SUMMARY_BY_HOST`](/information-schema/client-errors-summary-by-host.md)
@@ -542,23 +542,23 @@
       - [`VARIABLES_INFO`](/information-schema/information-schema-variables-info.md)
       - [`VIEWS`](/information-schema/information-schema-views.md)
     - PERFORMANCE_SCHEMA
-      - [Overview](/performance-schema/performance-schema.md)
+      - [概述](/performance-schema/performance-schema.md)
       - [`SESSION_CONNECT_ATTRS`](/performance-schema/performance-schema-session-connect-attrs.md)
     - SYS
-      - [Overview](/sys-schema/sys-schema.md)
+      - [概述](/sys-schema/sys-schema.md)
       - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
-  - [Metadata Lock](/metadata-lock.md)
-  - [Use UUIDs](/best-practices/uuid.md)
-  - [TiDB Accelerated Table Creation](/accelerated-table-creation.md)
-- API Reference ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-  - [Overview](/tidb-cloud/api-overview.md)
+  - [元数据锁](/metadata-lock.md)
+  - [使用 UUID](/best-practices/uuid.md)
+  - [TiDB 加速建表](/accelerated-table-creation.md)
+- API 参考 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [概述](/tidb-cloud/api-overview.md)
   - v1beta1
-    - [Billing](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
+    - [计费](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
     - [IAM](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam)
-    - [MSP (Deprecated)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
+    - [MSP (已弃用)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
   - [v1beta](https://docs.pingcap.com/tidbcloud/api/v1beta)
-- CLI Reference ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-  - [Overview](/tidb-cloud/cli-reference.md)
+- CLI 参考 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [概述](/tidb-cloud/cli-reference.md)
   - auth
     - [login](/tidb-cloud/ticloud-auth-login.md)
     - [logout](/tidb-cloud/ticloud-auth-logout.md)
@@ -614,51 +614,51 @@
     - [list](/tidb-cloud/ticloud-project-list.md)
   - [upgrade](/tidb-cloud/ticloud-upgrade.md)
   - [help](/tidb-cloud/ticloud-help.md)
-- General Reference
-  - TiDB Cluster Architecture
-    - [Overview](/tidb-architecture.md)
-    - [Storage](/tidb-storage.md)
-    - [Computing](/tidb-computing.md)
-    - [Scheduling](/tidb-scheduling.md)
+- 通用参考
+  - TiDB 集群架构
+    - [概述](/tidb-architecture.md)
+    - [存储](/tidb-storage.md)
+    - [计算](/tidb-computing.md)
+    - [调度](/tidb-scheduling.md)
     - [TSO](/tso.md)
-  - Storage Engines
+  - 存储引擎
     - TiKV
-        - [TiKV Overview](/tikv-overview.md)
-        - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
+        - [TiKV 简介](/tikv-overview.md)
+        - [RocksDB 简介](/storage-engine/rocksdb-overview.md)
     - TiFlash
-      - [TiFlash Overview](/tiflash/tiflash-overview.md)
-      - [Spill to Disk](/tiflash/tiflash-spill-disk.md)
-  - TiDB Cloud Partner Web Console
-    - [TiDB Cloud Partners](/tidb-cloud/tidb-cloud-partners.md)
-    - [MSP Customer](/tidb-cloud/managed-service-provider-customer.md)
-    - [Reseller's Customer](/tidb-cloud/cppo-customer.md)
-  - [{{{ .starter }}} and Essential Limitations](/tidb-cloud/serverless-limitations.md)
-  - [Limited SQL Features on TiDB Cloud](/tidb-cloud/limited-sql-features.md)
-  - [TiDB Limitations](/tidb-limitations.md)
-  - [System Variables](/system-variables.md)
-  - [Server Status Variables](/status-variables.md)
-  - [Table Filter](/table-filter.md)
-  - [URI Formats of External Storage Services](/external-storage-uri.md)
-  - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
-  - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
-  - [Notifications](/tidb-cloud/notifications.md)
-  - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
-- Support Plan
-  - [Connected Care Overview](/tidb-cloud/connected-care-overview.md)
-  - [Connected Care Details](/tidb-cloud/connected-care-detail.md)
-  - Connected Care Support Service Features
-    - [Connected: AI Chat in IM](/tidb-cloud/connected-ai-chat-in-im.md)
-    - Connected: IM Ticket Creation and Update Subscription
-      - [Create Tickets and Subscribe to Ticket Updates via Slack](/tidb-cloud/connected-slack-ticket-creation.md)
-      - [Create Tickets and Subscribe to Ticket Updates via Lark](/tidb-cloud/connected-lark-ticket-creation.md)
-    - Connected: IM Interaction for Support Tickets
-      - [Interact with Support Tickets via Slack](/tidb-cloud/connected-slack-ticket-interaction.md)
-      - [Interact with Support Tickets via Lark](/tidb-cloud/connected-lark-ticket-interaction.md)
-  - [Get Support](/tidb-cloud/tidb-cloud-support.md)
-- FAQs
-  - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
+      - [TiFlash 简介](/tiflash/tiflash-overview.md)
+      - [TiFlash 数据落盘](/tiflash/tiflash-spill-disk.md)
+  - TiDB Cloud 合作伙伴 Web 控制台
+    - [TiDB Cloud 合作伙伴](/tidb-cloud/tidb-cloud-partners.md)
+    - [MSP 客户](/tidb-cloud/managed-service-provider-customer.md)
+    - [经销商的客户](/tidb-cloud/cppo-customer.md)
+  - [{{{ .starter }}} 和 Essential 的使用限制](/tidb-cloud/serverless-limitations.md)
+  - [TiDB Cloud 上的 SQL 功能限制](/tidb-cloud/limited-sql-features.md)
+  - [TiDB 限制](/tidb-limitations.md)
+  - [系统变量](/system-variables.md)
+  - [服务器状态变量](/status-variables.md)
+  - [表库过滤](/table-filter.md)
+  - [外部存储服务的 URI 格式](/external-storage-uri.md)
+  - [DDL 最佳实践](/ddl-introduction.md)
+  - [数据索引不一致报错](/troubleshoot-data-inconsistency-errors.md)
+  - [通知](/tidb-cloud/notifications.md)
+  - [术语表](/tidb-cloud/tidb-cloud-glossary.md)
+- 支持计划
+  - [Connected Care 概述](/tidb-cloud/connected-care-overview.md)
+  - [Connected Care 详情](/tidb-cloud/connected-care-detail.md)
+  - Connected Care 支持服务
+    - [Connected：IM 中的 AI 聊天](/tidb-cloud/connected-ai-chat-in-im.md)
+    - Connected：通过 IM 创建工单并订阅更新
+      - [通过 Slack 创建工单并订阅工单更新](/tidb-cloud/connected-slack-ticket-creation.md)
+      - [通过 Lark 创建工单并订阅工单更新](/tidb-cloud/connected-lark-ticket-creation.md)
+    - Connected：通过 IM 与工单交互
+      - [通过 Slack 与工单交互](/tidb-cloud/connected-slack-ticket-interaction.md)
+      - [通过 Lark 与工单交互](/tidb-cloud/connected-lark-ticket-interaction.md)
+  - [获取支持](/tidb-cloud/tidb-cloud-support.md)
+- 常见问题
+  - [TiDB Cloud 常见问题](/tidb-cloud/tidb-cloud-faq.md)
 
-## RELEASES
+## 发布
 
 - Release Notes
   - [2025](/tidb-cloud/tidb-cloud-release-notes.md)
