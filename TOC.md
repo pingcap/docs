@@ -1,16 +1,9 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-<<<<<<< HEAD
-- [Docs Home](https://docs.pingcap.com/)
 - About TiDB
   - [TiDB Introduction](/overview.md)
   - [TiDB 7.1 Release Notes](/releases/release-7.1.0.md)
-=======
-- About TiDB Self-Managed
-  - [What is TiDB Self-Managed](/overview.md)
-  - [TiDB 8.5 Release Notes](/releases/release-8.5.0.md)
->>>>>>> 248afc3fd4 (toc: remove docs home from left navigation (#21528))
   - [Features](/basic-features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
