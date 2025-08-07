@@ -108,7 +108,7 @@ A Request Unit (RU) is a unit of measure used to represent the amount of resourc
 
 ### Spending limit
 
-Spending limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that enables you to set a budget for your [TiDB Cloud Starter clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter). If the spending limit is set to 0, the cluster remains in the free tier. If the spending limit is greater than 0, you need to add a credit card.
+Spending limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that enables you to set a budget for your [TiDB Cloud Starter clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter). If the spending limit is set to 0, the cluster remains free. If the spending limit is greater than 0, you need to add a credit card.
 
 ## T
 

@@ -16,7 +16,7 @@ TiDB Cloud provides the following two options of cluster plan. Before creating a
 ## TiDB Cloud Starter
 
 <!--To be confirmed-->
-TiDB Cloud Starter is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free plan and consumption based billing once free limits are exceeded.
+TiDB Cloud Starter is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free quota and consumption based billing once free limits are exceeded.
 
 ### Cluster plans
 

@@ -130,7 +130,7 @@
 ## GUIDES
 
 - Manage Cluster
-  - [Select Your Cluster Tier](/tidb-cloud/select-cluster-tier.md)
+  - [Select Your Cluster Plan](/tidb-cloud/select-cluster-tier.md)
   - Manage TiDB Cloud Clusters
     - [Create a TiDB Cloud Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
     - Connect to Your TiDB Cloud Cluster
