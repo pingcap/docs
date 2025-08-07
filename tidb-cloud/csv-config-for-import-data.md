@@ -39,8 +39,6 @@ The following is the CSV Configuration window when you use the Import Data servi
 
 - Default: `\N`
 
-- Custom null values are not supported in the console. You can use the [TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md) instead. For more information, see [`ticloud serverless import start`](/tidb-cloud/ticloud-import-start.md).
-
 ## Backslash Escape
 
 - Definition: controls whether to parse backslash inside fields as escape characters. If **Backslash Escape** is enabled, the following sequences are recognized and converted:
