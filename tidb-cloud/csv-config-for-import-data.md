@@ -33,7 +33,7 @@ The following is the CSV Configuration window when you use the Import Data servi
 
 - Default: `"`
 
-## NULL Value
+## Null Value
 
 - Definition: defines the string that represents a `NULL` value in the CSV file.
 
