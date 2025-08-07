@@ -461,7 +461,7 @@ You can control the execution mode of DML statements using the [`tidb_dml_type`]
 
 To use the bulk DML execution mode, set `tidb_dml_type` to `"bulk"`. This mode optimizes bulk data loading without conflicts and reduces memory usage during large write operations. Before using this mode, ensure that:
 
-- Enable [`autocommit`](/system-variables.md#autocommit).
+- [`autocommit`](/system-variables.md#autocommit) is enabled.
 - The [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600) configuration item is set to `false`.
 
 ```sql
