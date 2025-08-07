@@ -33,7 +33,7 @@ The following is the CSV Configuration window when you use the Import Data servi
 
 - Default: `"`
 
-## NULL value
+## NULL Value
 
 - Definition: defines the string that represents a `NULL` value in the CSV file.
 
@@ -41,9 +41,9 @@ The following is the CSV Configuration window when you use the Import Data servi
 
 - Custom null values are not supported in the console. You can use the [TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md) instead. For more information, see [`ticloud serverless import start`](/tidb-cloud/ticloud-import-start.md).
 
-## Backslash escape
+## Backslash Escape
 
-- Definition: whether to parse backslash inside fields as escape characters. If **Backslash escape** is `True`, the following sequences are recognized and converted:
+- Definition: whether to parse backslash inside fields as escape characters. If **Backslash Escape** is enabled, the following sequences are recognized and converted:
 
     | Sequence | Converted to             |
     |----------|--------------------------|
@@ -73,10 +73,10 @@ The following is the CSV Configuration window when you use the Import Data servi
 
     `"{\"key1\": \"val1\", \"key2\":\"val2\" }"`
 
-- Default: `True`
+- Default: Enabled
 
-## Skip header
+## Skip Header
 
-- Definition: whether to skip the header row in the CSV file. If **Skip header** is `True`, the first row of the CSV file will be skipped for import.
+- Definition: whether to skip the header row in the CSV file. If **Skip Header** is enabled, the first row of the CSV file will be skipped for import.
 
-- Default: `True`
+- Default: Enabled
