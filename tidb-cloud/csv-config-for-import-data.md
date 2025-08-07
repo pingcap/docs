@@ -75,6 +75,6 @@ The following is the CSV Configuration window when you use the Import Data servi
 
 ## Skip Header
 
-- Definition: controls whether to skip the header row in the CSV file. If **Skip Header** is enabled, the first row of the CSV file will be skipped for import.
+- Definition: controls whether to skip the header row in the CSV file. If **Skip Header** is enabled, the first row of the CSV file will be skipped during import.
 
 - Default: Disabled
