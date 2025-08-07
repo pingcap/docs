@@ -249,7 +249,7 @@ In `demo.py`, add the following code to save the vector data to your {{{ .starte
 ```python
 # ---- Saving Vectors to TiDB ----
 def save_entities_with_embedding(session, contents):
-    """Save multiple entities with their embeddings to the TiDB Serverless database."""
+    """Save multiple entities with their embeddings to the TiDB database."""
     for content in contents:
         entity = Entity(content=content, content_vec=embedding(content))
         session.add(entity)
