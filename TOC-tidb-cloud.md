@@ -9,11 +9,10 @@
   - [TiDB Cloud 介绍](/tidb-cloud/tidb-cloud-intro.md)
   - [与 MySQL 的兼容性](/mysql-compatibility.md)
 - TiDB Cloud 快速上手
-  - [试用 {{{ .starter }}}](/tidb-cloud/tidb-cloud-quickstart.md)
+  - [试用 TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
   - [试用 TiDB + AI](/vector-search/vector-search-get-started-using-python.md)
   - [试用 HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
-  - [试用 TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
-  - [执行 PoC](/tidb-cloud/tidb-cloud-poc.md)
+  - [进行 PoC](/tidb-cloud/tidb-cloud-poc.md)
 - 关键概念
   - [概览](/tidb-cloud/key-concepts.md)
   - [架构](/tidb-cloud/architecture-concepts.md)
@@ -23,9 +22,7 @@
   - [AI 功能](/tidb-cloud/ai-feature-concepts.md)
   - [数据服务](/tidb-cloud/data-service-concepts.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [可扩展性](/tidb-cloud/scalability-concepts.md)
-  - 高可用性
-    - [{{{ .starter }}} 中的高可用性](/tidb-cloud/serverless-high-availability.md)
-    - [TiDB Cloud Dedicated 中的高可用性](/tidb-cloud/high-availability-with-multi-az.md)
+  - [高可用性](/tidb-cloud/high-availability-with-multi-az.md)
   - [监控](/tidb-cloud/monitoring-concepts.md)
   - [数据流](/tidb-cloud/data-streaming-concepts.md)
   - [备份 & 恢复](/tidb-cloud/backup-and-restore-concepts.md)
@@ -35,7 +32,7 @@
 
 - 开发快速入门
   - [概览](/develop/dev-guide-overview.md)
-  - [使用 {{{ .starter }}} 构建 TiDB 集群](/develop/dev-guide-build-cluster-in-cloud.md)
+  - [构建 TiDB Cloud 集群](/develop/dev-guide-build-cluster-in-cloud.md)
   - [使用 TiDB 的增删改查 SQL](/develop/dev-guide-tidb-crud-sql.md)
 - 连接到 TiDB Cloud
   - GUI 数据库工具
@@ -69,20 +66,12 @@
     - [Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md)
     - [Sequelize](/develop/dev-guide-sample-application-nodejs-sequelize.md)
     - [TypeORM](/develop/dev-guide-sample-application-nodejs-typeorm.md)
-    - [Next.js](/develop/dev-guide-sample-application-nextjs.md)
-    - [AWS Lambda](/develop/dev-guide-sample-application-aws-lambda.md)
   - Ruby
     - [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
     - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
   - C#
     - [C#](/develop/dev-guide-sample-application-cs.md)
   - [WordPress](/tidb-cloud/dev-guide-wordpress.md)
-  - Serverless Driver ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-    - [TiDB Cloud Serverless Driver](/tidb-cloud/serverless-driver.md)
-    - [Node.js 示例](/tidb-cloud/serverless-driver-node-example.md)
-    - [Prisma 示例](/tidb-cloud/serverless-driver-prisma-example.md)
-    - [Kysely 示例](/tidb-cloud/serverless-driver-kysely-example.md)
-    - [Drizzle 示例](/tidb-cloud/serverless-driver-drizzle-example.md)
 - 开发参考
   - 数据库模式设计
     - [概览](/develop/dev-guide-schema-design-overview.md)
@@ -139,33 +128,19 @@
     - [选择集群套餐](/tidb-cloud/select-cluster-tier.md)
     - [确定 TiDB 的大小](/tidb-cloud/size-your-cluster.md)
     - [TiDB Cloud 性能参考](/tidb-cloud/tidb-cloud-performance-reference.md)
-  - 管理 {{{ .starter }}} 集群
-    - [创建 {{{ .starter }}} 集群](/tidb-cloud/create-tidb-cluster-serverless.md)
-    - 连接到 {{{ .starter }}} 集群
-      - [连接概览](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
-      - [通过 Public Endpoint 连接](/tidb-cloud/connect-via-standard-connection-serverless.md)
-      - [通过 Private Endpoint 连接](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-    - 分支 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-      - [概览](/tidb-cloud/branch-overview.md)
-      - [管理分支](/tidb-cloud/branch-manage.md)
-      - [GitHub 集成](/tidb-cloud/branch-github-integration.md)
-    - [管理消费限额](/tidb-cloud/manage-serverless-spend-limit.md)
-    - [备份和恢复 {{{ .starter }}} 数据](/tidb-cloud/backup-and-restore-serverless.md)
-    - [从 {{{ .starter }}} 导出数据](/tidb-cloud/serverless-export.md)
-  - 管理 TiDB Cloud Dedicated 集群
-    - [创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)
-    - 连接到 TiDB Cloud Dedicated 集群
-      - [连接方法概览](/tidb-cloud/connect-to-tidb-cluster.md)
-      - [通过 Public Endpoint 连接](/tidb-cloud/connect-via-standard-connection.md)
-      - [通过 AWS Private Link 连接到 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-private-endpoint-connections.md)
-      - [通过 Azure Private Link 连接到 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
-      - [通过 Google Cloud Private Service Connect 连接到 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
-      - [通过 VPC Peering 连接](/tidb-cloud/set-up-vpc-peering-connections.md)
-      - [通过 SQL Shell 连接](/tidb-cloud/connect-via-sql-shell.md)
-    - [伸缩 TiDB Cloud Dedicated 集群](/tidb-cloud/scale-tidb-cluster.md)
-    - [备份和恢复 TiDB Cloud Dedicated 数据](/tidb-cloud/backup-and-restore.md)
-    - [暂停或恢复 TiDB Cloud Dedicated 集群](/tidb-cloud/pause-or-resume-tidb-cluster.md)
-    - [配置维护窗口](/tidb-cloud/configure-maintenance-window.md)
+  - [创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)
+  - 连接到 TiDB Cloud Dedicated 集群
+    - [连接方法概览](/tidb-cloud/connect-to-tidb-cluster.md)
+    - [通过 Public Endpoint 连接](/tidb-cloud/connect-via-standard-connection.md)
+    - [通过 AWS Private Link 连接](/tidb-cloud/set-up-private-endpoint-connections.md)
+    - [通过 Azure Private Link 连接](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
+    - [通过 Google Cloud Private Service Connect 连接](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
+    - [通过 VPC Peering 连接](/tidb-cloud/set-up-vpc-peering-connections.md)
+    - [通过 SQL Shell 连接](/tidb-cloud/connect-via-sql-shell.md)
+  - [伸缩 TiDB Cloud Dedicated 集群](/tidb-cloud/scale-tidb-cluster.md)
+  - [备份和恢复 TiDB Cloud Dedicated 数据](/tidb-cloud/backup-and-restore.md)
+  - [暂停或恢复 TiDB Cloud Dedicated 集群](/tidb-cloud/pause-or-resume-tidb-cluster.md)
+  - [配置维护窗口](/tidb-cloud/configure-maintenance-window.md)
   - 使用带有 TiFlash 的 HTAP 集群
     - [TiFlash 简介](/tiflash/tiflash-overview.md)
     - [构建 TiFlash 副本](/tiflash/create-tiflash-replicas.md)
@@ -191,8 +166,8 @@
   - 性能调优
     - [概览](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - 分析性能
-      - [使用诊断选项卡](/tidb-cloud/tune-performance.md)
-      - [使用 Index Insight](/tidb-cloud/index-insight.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+      - [使用 Diagnosis 页面](/tidb-cloud/tune-performance.md)
+        - [使用 Index Insight](/tidb-cloud/index-insight.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
       - [通过 Statement Summary 表](/statement-summary-tables.md)
     - SQL 调优
       - [概览](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
@@ -268,15 +243,8 @@
     - [从云存储导入 CSV 文件](/tidb-cloud/import-csv-files.md)
     - [从云存储导入 Parquet 文件](/tidb-cloud/import-parquet-files.md)
     - [使用 MySQL CLI 导入](/tidb-cloud/import-with-mysql-cli.md)
-  - 将数据导入 {{{ .starter }}}
-    - [导入示例数据](/tidb-cloud/import-sample-data-serverless.md)
-    - [导入本地文件](/tidb-cloud/tidb-cloud-import-local-files.md)
-    - [从云存储导入 CSV 文件](/tidb-cloud/import-csv-files-serverless.md)
-    - [从云存储导入 Parquet 文件](/tidb-cloud/import-parquet-files-serverless.md)
-    - [使用 MySQL CLI 导入](/tidb-cloud/import-with-mysql-cli-serverless.md)
   - 参考
     - [为 TiDB Cloud Dedicated 配置外部存储访问](/tidb-cloud/dedicated-external-storage.md)
-    - [为 {{{ .starter }}} 配置外部存储访问](/tidb-cloud/serverless-external-storage.md)
     - [数据导入的命名约定](/tidb-cloud/naming-conventions-for-data-import.md)
     - [导入数据的 CSV 配置](/tidb-cloud/csv-config-for-import-data.md)
     - [排查从 Amazon S3 导入数据期间的访问被拒绝错误](/tidb-cloud/troubleshoot-import-access-denied-error.md)
@@ -355,17 +323,12 @@
     - [身份访问管理](/tidb-cloud/manage-user-access.md)
     - [OAuth 2.0](/tidb-cloud/oauth2.md)
   - 网络访问控制
-    - {{{ .starter }}}
-      - [通过 Private Endpoint 连接](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-      - [为 Public Endpoint 配置防火墙规则](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
-      - [到 {{{ .starter }}} 的 TLS 连接](/tidb-cloud/secure-connections-to-serverless-clusters.md)
-    - TiDB Cloud Dedicated
-      - [配置 IP 访问列表](/tidb-cloud/configure-ip-access-list.md)
-      - [通过 AWS Private Link 连接到 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-private-endpoint-connections.md)
-      - [通过 Azure Private Link 连接到 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
-      - [通过 Google Cloud Private Service Connect 连接到 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
-      - [通过 VPC Peering 连接](/tidb-cloud/set-up-vpc-peering-connections.md)
-      - [到 TiDB Cloud Dedicated 的 TLS 连接](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
+    - [配置 IP 访问列表](/tidb-cloud/configure-ip-access-list.md)
+    - [通过 AWS Private Link 连接](/tidb-cloud/set-up-private-endpoint-connections.md)
+    - [通过 Azure Private Link 连接](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
+    - [通过 Google Cloud Private Service Connect 连接](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
+    - [通过 VPC Peering 连接](/tidb-cloud/set-up-vpc-peering-connections.md)
+    - [通过 TLS 连接](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
   - 数据访问控制
       - [使用客户管理的加密密钥进行静态加密](/tidb-cloud/tidb-cloud-encrypt-cmek.md)
       - [用户可控的日志脱敏](/tidb-cloud/tidb-cloud-log-redaction.md)
@@ -373,7 +336,6 @@
     - [配置集群密码设置](/tidb-cloud/configure-security-settings.md)
   - 审计管理
     - [数据库审计日志](/tidb-cloud/tidb-cloud-auditing.md)
-    - [{{{ .starter }}} 数据库审计日志](/tidb-cloud/serverless-audit-logging.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [控制台审计日志](/tidb-cloud/tidb-cloud-console-auditing.md)
 - 账单
   - [发票](/tidb-cloud/tidb-cloud-billing.md#invoices)
@@ -382,7 +344,7 @@
   - [账单资料](/tidb-cloud/tidb-cloud-billing.md#billing-profile)
   - [抵扣金](/tidb-cloud/tidb-cloud-billing.md#credits)
   - [支付方式设置](/tidb-cloud/tidb-cloud-billing.md#payment-method)
-  - [设置通过云提供商的 Marketplace 计费](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-azure-marketplace-or-google-cloud-marketplace)
+  - [设置通过云提供商的 Marketplace 计费](/tidb-cloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace)
   - [Changefeed 计费](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
   - [数据迁移计费](/tidb-cloud/tidb-cloud-billing-dm.md)
   - [恢复组计费](/tidb-cloud/tidb-cloud-billing-recovery-group.md)
@@ -407,9 +369,6 @@
     - [使用 TiDB Cloud Dedicated Private Endpoint Connection 资源](/tidb-cloud/terraform-use-dedicated-private-endpoint-connection-resource.md)
     - [使用 TiDB Cloud Dedicated VPC Peering 资源](/tidb-cloud/terraform-use-dedicated-vpc-peering-resource.md)
     - [使用 TiDB Cloud Dedicated Network Container 资源](/tidb-cloud/terraform-use-dedicated-network-container-resource.md)
-    - [使用 {{{ .starter }}} Cluster 资源](/tidb-cloud/terraform-use-serverless-cluster-resource.md)
-    - [使用 {{{ .starter }}} Branch 资源](/tidb-cloud/terraform-use-serverless-branch-resource.md)
-    - [使用 {{{ .starter }}} Export 资源](/tidb-cloud/terraform-use-serverless-export-resource.md)
     - [使用 SQL User 资源](/tidb-cloud/terraform-use-sql-user-resource.md)
     - [使用集群资源](/tidb-cloud/terraform-use-cluster-resource.md)
     - [使用备份资源](/tidb-cloud/terraform-use-backup-resource.md)
@@ -726,73 +685,6 @@
     - [IAM](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam)
     - [MSP (已弃用)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
   - [v1beta](https://docs.pingcap.com/tidbcloud/api/v1beta)
-- CLI 参考 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-  - [概述](/tidb-cloud/cli-reference.md)
-  - auth
-    - [login](/tidb-cloud/ticloud-auth-login.md)
-    - [logout](/tidb-cloud/ticloud-auth-logout.md)
-    - [whoami](/tidb-cloud/ticloud-auth-whoami.md)
-  - serverless
-    - [create](/tidb-cloud/ticloud-cluster-create.md)
-    - [delete](/tidb-cloud/ticloud-cluster-delete.md)
-    - [describe](/tidb-cloud/ticloud-cluster-describe.md)
-    - [list](/tidb-cloud/ticloud-cluster-list.md)
-    - [update](/tidb-cloud/ticloud-serverless-update.md)
-    - [spending-limit](/tidb-cloud/ticloud-serverless-spending-limit.md)
-    - [region](/tidb-cloud/ticloud-serverless-region.md)
-    - [shell](/tidb-cloud/ticloud-serverless-shell.md)
-    - branch
-      - [create](/tidb-cloud/ticloud-branch-create.md)
-      - [delete](/tidb-cloud/ticloud-branch-delete.md)
-      - [describe](/tidb-cloud/ticloud-branch-describe.md)
-      - [list](/tidb-cloud/ticloud-branch-list.md)
-      - [shell](/tidb-cloud/ticloud-branch-shell.md)
-    - import
-      - [cancel](/tidb-cloud/ticloud-import-cancel.md)
-      - [describe](/tidb-cloud/ticloud-import-describe.md)
-      - [list](/tidb-cloud/ticloud-import-list.md)
-      - [start](/tidb-cloud/ticloud-import-start.md)
-    - export
-      - [create](/tidb-cloud/ticloud-serverless-export-create.md)
-      - [describe](/tidb-cloud/ticloud-serverless-export-describe.md)
-      - [list](/tidb-cloud/ticloud-serverless-export-list.md)
-      - [cancel](/tidb-cloud/ticloud-serverless-export-cancel.md)
-      - [download](/tidb-cloud/ticloud-serverless-export-download.md)
-    - sql-user
-      - [create](/tidb-cloud/ticloud-serverless-sql-user-create.md)
-      - [delete](/tidb-cloud/ticloud-serverless-sql-user-delete.md)
-      - [list](/tidb-cloud/ticloud-serverless-sql-user-list.md)
-      - [update](/tidb-cloud/ticloud-serverless-sql-user-update.md)
-    - audit-log
-      - [config](/tidb-cloud/ticloud-auditlog-config.md)
-      - [describe](/tidb-cloud/ticloud-auditlog-describe.md)
-      - [download](/tidb-cloud/ticloud-auditlog-download.md)
-      - filter-rule
-        - [create](/tidb-cloud/ticloud-auditlog-filter-create.md)
-        - [delete](/tidb-cloud/ticloud-auditlog-filter-delete.md)
-        - [describe](/tidb-cloud/ticloud-auditlog-filter-describe.md)
-        - [list](/tidb-cloud/ticloud-auditlog-filter-list.md)
-        - [template](/tidb-cloud/ticloud-auditlog-filter-template.md)
-        - [update](/tidb-cloud/ticloud-auditlog-filter-update.md)
-    - authorized-network
-      - [create](/tidb-cloud/ticloud-serverless-authorized-network-create.md)
-      - [delete](/tidb-cloud/ticloud-serverless-authorized-network-delete.md)
-      - [list](/tidb-cloud/ticloud-serverless-authorized-network-list.md)
-      - [update](/tidb-cloud/ticloud-serverless-authorized-network-update.md)
-  - [ai](/tidb-cloud/ticloud-ai.md)
-  - [completion](/tidb-cloud/ticloud-completion.md)
-  - config
-    - [create](/tidb-cloud/ticloud-config-create.md)
-    - [delete](/tidb-cloud/ticloud-config-delete.md)
-    - [describe](/tidb-cloud/ticloud-config-describe.md)
-    - [edit](/tidb-cloud/ticloud-config-edit.md)
-    - [list](/tidb-cloud/ticloud-config-list.md)
-    - [set](/tidb-cloud/ticloud-config-set.md)
-    - [use](/tidb-cloud/ticloud-config-use.md)
-  - project
-    - [list](/tidb-cloud/ticloud-project-list.md)
-  - [upgrade](/tidb-cloud/ticloud-upgrade.md)
-  - [help](/tidb-cloud/ticloud-help.md)
 - 通用参考
   - TiDB 集群架构
     - [概述](/tidb-architecture.md)
@@ -815,7 +707,6 @@
     - [介绍](/tidb-distributed-execution-framework.md)
     - [TiDB 全局排序](/tidb-global-sort.md)
   - [TiDB Cloud Dedicated 限制和配额](/tidb-cloud/limitations-and-quotas.md)
-  - [{{{ .starter }}} 限制](/tidb-cloud/serverless-limitations.md)
   - [TiDB Cloud 上的 SQL 功能限制](/tidb-cloud/limited-sql-features.md)
   - [TiDB 限制](/tidb-limitations.md)
   - 基准测试
@@ -862,7 +753,6 @@
   - [获取支持](/tidb-cloud/tidb-cloud-support.md)
 - 常见问题
   - [TiDB Cloud 常见问题](/tidb-cloud/tidb-cloud-faq.md)
-  - [{{{ .starter }}} 常见问题](/tidb-cloud/serverless-faqs.md)
 
 ## 发布
 
