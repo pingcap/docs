@@ -41,7 +41,7 @@ The following is the CSV Configuration window when you use the Import Data servi
 
 ## Backslash Escape
 
-- Definition: controls whether to parse backslash inside fields as escape characters. If **Backslash Escape** is enabled, the following sequences are recognized and converted:
+- Definition: controls whether to parse backslashes within fields as escape characters. If **Backslash Escape** is enabled, the following sequences are recognized and converted:
 
     | Sequence | Converted to             |
     |----------|--------------------------|
