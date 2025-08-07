@@ -272,8 +272,8 @@ The following table compares throughput (operations per second) between the base
 
 | Item | Baseline (OPS) | Optimized (OPS) | Improvement |
 | ---------| ---- | ----| ----|
-| load data | 2858.5 | 5074.3 | +77.59% |
-| workloada | 2243.0 | 12804.3 | +470.86% |
+| Load data | 2858.5 | 5074.3  | +77.59%  |
+| Workload  | 2243.0 | 12804.3 | +470.86% |
 
 #### Performance analysis
 
@@ -461,7 +461,7 @@ You can control the execution mode of DML statements using the [`tidb_dml_type`]
 
 To use the bulk DML execution mode, set `tidb_dml_type` to `"bulk"`. This mode optimizes bulk data loading without conflicts and reduces memory usage during large write operations. Before using this mode, ensure that:
 
-- Auto-commit is enabled.
+- Enable [`autocommit`](/system-variables.md#autocommit).
 - The [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600) configuration item is set to `false`.
 
 ```sql
