@@ -1,6 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
+<<<<<<< HEAD
 - [Docs Home](https://docs.pingcap.com/)
 - About TiDB
   - [TiDB Introduction](/overview.md)
@@ -11,6 +12,12 @@
     - [v6.1 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v6.1.0-vs-v6.0.0.md)
     - [v6.1 TPC-C Performance Test Report](/benchmark/v6.1-performance-benchmarking-with-tpcc.md)
     - [Performance Comparison between TiFlash and Greenplum/Spark](/benchmark/v6.1-performance-benchmarking-with-tpch.md)
+=======
+- About TiDB Self-Managed
+  - [What is TiDB Self-Managed](/overview.md)
+  - [TiDB 8.5 Release Notes](/releases/release-8.5.0.md)
+  - [Features](/basic-features.md)
+>>>>>>> 248afc3fd4 (toc: remove docs home from left navigation (#21528))
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [Credits](/credits.md)
