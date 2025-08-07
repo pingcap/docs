@@ -273,7 +273,7 @@ The following table compares throughput (operations per second) between the base
 | Item | Baseline (OPS) | Optimized (OPS) | Improvement |
 | ---------| ---- | ----| ----|
 | Load data | 2858.5 | 5074.3  | +77.59%  |
-| Workload  | 2243.0 | 12804.3 | +470.86% |
+| Workloada | 2243.0 | 12804.3 | +470.86% |
 
 #### Performance analysis
 
