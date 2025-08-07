@@ -51,8 +51,8 @@ When you create a cluster with regional high availability, critical OLTP (Online
 
 > **Note:**
 >
-> - Regional high availability is currently in beta and only available in the AWS Tokyo (`ap-northeast-1`) region.
-> - You can enable regional high availability only during cluster creation.
+> - Regional high availability is currently in beta.
+> - You can enable regional high availability when you create a {{{ .essential }}} cluster.
 
 ![TiDB Cloud regional high availability](/media/tidb-cloud/serverless-regional-high-avaliability-aws.png)
 
